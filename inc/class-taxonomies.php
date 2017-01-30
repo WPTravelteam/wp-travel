@@ -1,11 +1,11 @@
 <?php
 class Wp_Travel_Taxonomies {
-	public function init() {
+	public static function init() {
 		self::register_locations();
 		self::register_itinerary_types();
 	}
 
-	public function register_locations() {
+	public static function register_locations() {
 		// Add new taxonomy, make it hierarchical (like categories).
 		$labels = array(
 			'name'              => _x( 'Locations', 'taxonomy general name', 'textdomain' ),
@@ -33,9 +33,9 @@ class Wp_Travel_Taxonomies {
 		register_taxonomy( 'itinerary_locations', array( 'itineraries' ), $args );
 	}
 
-	public function register_itinerary_types() {
+	public static function register_itinerary_types() {
 		// Add new taxonomy, make it hierarchical (like categories).
-		$labels2 = array(
+		$labels = array(
 			'name'              => _x( 'Trip Types', 'taxonomy general name', 'textdomain' ),
 			'singular_name'     => _x( 'Trip Type', 'taxonomy singular name', 'textdomain' ),
 			'search_items'      => __( 'Search Trip Types', 'textdomain' ),
