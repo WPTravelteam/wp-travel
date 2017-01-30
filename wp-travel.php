@@ -124,6 +124,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/class-admin-uploader.php', WP_TRAVEL_ABSPATH );
