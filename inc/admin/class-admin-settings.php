@@ -58,16 +58,24 @@ class WP_Travel_Admin_Settings {
 		if ( 'general' !== $tab ) {
 			return;
 		}
+		$currency_list = wp_traval_get_currency_list();
 		$currency = isset( $args['settings']['currency'] ) ? $args['settings']['currency'] : '';
 		$google_map_api_key = isset( $args['settings']['google_map_api_key'] ) ? $args['settings']['google_map_api_key'] : '';
-
+		$currency_args = array(
+			'id'		=> 'currency',
+			'class'		=> 'currency',
+			'name'		=> 'currency',
+			'selected'	=> $currency,
+			'option'	=> __( 'Select Currency' ),
+			'options'	=> $currency_list,	
+		);
 		echo '<table class="form-table">';
 			echo '<tr>';
 				echo '<th>';
 					echo '<label for="currency">Currency</label>';
 				echo '</th>';
 				echo '<td>';
-					echo '<input type="text" value="' . $currency . '" name="currency" id="currency"/>';
+					echo wp_traval_get_dropdown_list( $currency_args );
 					echo '<p class="description">Heregoes some desc</p>';
 				echo '</td>';
 			echo '<tr>';
