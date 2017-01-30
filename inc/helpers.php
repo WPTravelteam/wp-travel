@@ -6,3 +6,9 @@ function wp_travel_get_gallery_ids( $post_id ) {
 	}
 	return $gallery_ids;
 }
+
+/** Return All Settings of WP Traval. */
+function wp_traval_get_settings() {
+	$settings = get_option( 'wp_travel_settings' );
+	return $settings;
+}
