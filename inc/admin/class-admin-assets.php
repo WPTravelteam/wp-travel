@@ -31,7 +31,7 @@ class WP_Travel_Admin_Assets {
 				$api_key = $settings['google_map_api_key'];
 			}
 			wp_enqueue_script( 'traval-door-script-2', $this->assets_path . 'assets/js/jquery.wptraveluploader.js', array( 'jquery' ), '1.0.0', true );
-			wp_register_script( 'traval-door-script', $this->assets_path . 'assets/js/wp-travel-back-end.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-gmaps' ), '', 1 );
+			wp_register_script( 'traval-door-script', $this->assets_path . 'assets/js/wp-travel-back-end.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-gmaps', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), '', 1 );
 			wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
 			wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
 			wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', array( 'jquery', 'google-map-api' ), '', 1 );
