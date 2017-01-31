@@ -26,6 +26,7 @@
                     	$( '#wp-traval-lat' ).val( lat );
                     	$( '#wp-traval-lng' ).val( lng );
                     	$( '#wp-traval-location' ).val( results[1].formatted_address );
+                    	$( '#search-input' ).val( results[1].formatted_address );
                     }
                 }
             });
@@ -59,6 +60,7 @@
                     $( '#wp-traval-lat' ).val( lat );
                 	$( '#wp-traval-lng' ).val( lng );
                 	$( '#wp-traval-location' ).val( results[1].formatted_address );
+                	$( '#search-input' ).val( results[1].formatted_address );
                 }
             }
         });
