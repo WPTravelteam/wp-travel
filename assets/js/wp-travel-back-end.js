@@ -8,7 +8,7 @@
         input = document.getElementById('search-input'),
         autocomplete = new google.maps.places.Autocomplete(input);
 
-    map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
+    map.setCenter( wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng );
     map.setZoom( 15 );
     map.addMarker({
         lat: wp_travel_drag_drop_uploader.lat,
@@ -18,6 +18,8 @@
         dragend: function (e) {
             var lat = e.latLng.lat();
 			var lng = e.latLng.lng();
+			map.setCenter( lat, lng);
+
 			var latlng = new google.maps.LatLng(lat, lng);
             var geocoder = geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
@@ -73,6 +75,7 @@
 			dragend: function (e) {
 				var lat = e.latLng.lat();
 				var lng = e.latLng.lng();
+				map.setCenter( lat, lng);
 
 				var latlng = new google.maps.LatLng(lat, lng);
 	            var geocoder = geocoder = new google.maps.Geocoder();
@@ -99,7 +102,7 @@
 							$(ui.newPanel).css({display: 'table'});
 							$('#wp-travel-settings-current-tab').val( $(ui.newPanel).attr('id') );
 							map.refresh();
-							map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
+							map.setCenter( wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng );
 						},
 						create: function (event, ui) {
 							$(ui.panel).css({display: 'table'});
