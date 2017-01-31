@@ -1,26 +1,93 @@
 (function ($) {
     // Create map.
     var map = new GMaps({
-        div: '#gmap',
-        lat: -12.043333,
-        lng: -77.028333
-    }),
+	        div: '#gmap',
+	        lat: wp_travel_drag_drop_uploader.lat,
+	        lng: wp_travel_drag_drop_uploader.lng
+	    }),
         input = document.getElementById('search-input'),
         autocomplete = new google.maps.places.Autocomplete(input);
-    map.setCenter(-12.043333, -77.028333);
+
+    map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
+    map.setZoom( 15 );
     map.addMarker({
-        lat: -12.043333,
-        lng: -77.028333,
-        title: 'Lima',
+        lat: wp_travel_drag_drop_uploader.lat,
+        lng: wp_travel_drag_drop_uploader.lng,
+        title: wp_travel_drag_drop_uploader.loc,
         draggable: true,
         dragend: function (e) {
-            console.log(e.latLng.lat());
-            console.log(e.latLng.lng());
+            var lat = e.latLng.lat();
+			var lng = e.latLng.lng();
+			var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                    	$( '#wp-traval-lat' ).val( lat );
+                    	$( '#wp-traval-lng' ).val( lng );
+                    	$( '#wp-traval-location' ).val( results[1].formatted_address );
+                    }
+                }
+            });
+
         }
     });
 
     autocomplete.bindTo('bounds', map);
+	autocomplete.addListener( 'place_changed', function() {
+		var place = autocomplete.getPlace();		
+		if ( ! place.geometry ) {
+			window.alert( "Autocomplete's returned place contains no geometry" );
+			return;
+		}
+		map.removeMarkers(); 
+		// If the place has a geometry, then present it on a map.
+		if ( place.geometry.viewport ) {
+			map.fitBounds( place.geometry.viewport );
+		} else {
+			map.setCenter( place.geometry.location );
+			map.setZoom(15);
+		}
+		var lat = place.geometry.location.lat();
+		var lng = place.geometry.location.lng();
 
+		var latlng = new google.maps.LatLng(lat, lng);
+        var geocoder = geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    $( '#wp-traval-lat' ).val( lat );
+                	$( '#wp-traval-lng' ).val( lng );
+                	$( '#wp-traval-location' ).val( results[1].formatted_address );
+                }
+            }
+        });
+
+		map.addMarker({
+			lat: lat,
+			lng: lng,
+			title: place.formatted_address,
+			draggable: true,
+			dragend: function (e) {
+				var lat = e.latLng.lat();
+				var lng = e.latLng.lng();
+
+				var latlng = new google.maps.LatLng(lat, lng);
+	            var geocoder = geocoder = new google.maps.Geocoder();
+	            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+	                if (status == google.maps.GeocoderStatus.OK) {
+	                    if (results[1]) {
+	                        $( '#wp-traval-lat' ).val( lat );
+	                    	$( '#wp-traval-lng' ).val( lng );
+	                    	$( '#wp-traval-location' ).val( results[1].formatted_address );
+	                    }
+	                }
+	            });
+
+			}
+		});
+
+	});
     /*
    		* Tab js.
    		*/
