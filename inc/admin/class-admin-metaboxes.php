@@ -157,6 +157,21 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, '_thumbnail_id', $wp_travel_thumbnail_id );
 		}
 
+		if ( isset( $_POST['wp_traval_location'] ) ) {
+			$wp_traval_location = $_POST['wp_traval_location'];
+			update_post_meta( $post_id, 'wp_traval_location', $wp_traval_location );
+		}
+
+		if ( isset( $_POST['wp_traval_lat'] ) ) {
+			$wp_traval_lat = $_POST['wp_traval_lat'];
+			update_post_meta( $post_id, 'wp_traval_lat', $wp_traval_lat );
+		}
+
+		if ( isset( $_POST['wp_traval_lng'] ) ) {
+			$wp_traval_lng = $_POST['wp_traval_lng'];
+			update_post_meta( $post_id, 'wp_traval_lng', $wp_traval_lng );
+		}
+
 		if ( ! empty( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
