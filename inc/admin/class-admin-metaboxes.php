@@ -12,6 +12,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'additional_info_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'gallery_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'location_tab_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'advance_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'call_back' ), 10, 2 );
 	}
 
@@ -92,6 +93,14 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 		WP_Travel()->tabs->content( 'itineraries/location-tab.php' );
+	}
+
+	function advance_tab_callback( $tab ) {
+		global $post;
+		if ( 'advanced' !== $tab ) {
+			return;
+		}
+		WP_Travel()->tabs->content( 'itineraries/advance-tab.php' );
 	}
 
 	function call_back( $tab ) {
