@@ -13,6 +13,19 @@ function wp_traval_get_settings() {
 	return $settings;
 }
 
+/** Return Trip Code */
+function wp_traval_get_trip_code( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+
+	if ( $post_id < 10 ) {
+		$post_id .= '0' . $post_id;
+	}
+
+	return apply_filters( 'wp_traval_trip_code', 'NTD-NTO '. $post_id, $post_id );
+}
+
 /**
  * Return dropdown.
  *
@@ -52,3 +65,50 @@ function wp_traval_get_dropdown_list( $args = array() ) {
 	return $dropdown;
 }
 
+/**
+ * Return Tree Form of post Object.
+ *
+ * @param Object $elements Post Object.
+ * @param Int    $parent_id Parent ID of post.
+ * @return Object Return Tree Form of post Object.
+ */
+function wp_traval_build_post_tree(array &$elements, $parent_id = 0) {
+	$branch = array();
+
+	foreach ( $elements as $element ) {
+		if ( $element->post_parent == $parent_id ) {
+			$children = wp_traval_build_post_tree( $elements, $element->ID );
+			if ( $children ) {
+				$element->children = $children;
+			}
+			$branch[ $element->ID ] = $element;
+			unset( $elements[ $element->ID ] );
+		}
+	}
+	return $branch;
+}
+
+function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level= 0, $echo = true ) {
+	$contents = '';
+	if ( $list_serialized ) :
+		
+		$space = '';
+		for ( $i=1; $i<= $nesting_level; $i ++ ) {
+			$space .= '&nbsp;&nbsp;&nbsp;';
+		}
+
+		foreach ( $list_serialized as $content ) {
+
+			$contents .= '<option value="' . $content->ID . '" ' . selected( $selected, $content->ID, false ) . ' >' . $space . $content->post_title . '</option>';
+			if ( isset( $content->children ) ) {
+				$contents .= wp_traval_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ) , false );
+			}
+		}
+	endif;
+	if ( ! $echo ) {
+		return $contents;
+	}
+
+	echo $contents;
+	return false;
+}
