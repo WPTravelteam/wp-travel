@@ -66,7 +66,8 @@ class WP_Travel_Admin_Metaboxes {
 		if ( 'detail' !== $tab ) {
 			return;
 		}
-		wp_editor( $post->post_content, 'wp_travel_editor' );
+		WP_Travel()->tabs->content( 'itineraries/detail-tab.php' );
+		
 	}
 
 	function additional_info_tab_callback( $tab ) {
@@ -180,6 +181,11 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_traval_lng = $_POST['wp_traval_lng'];
 			update_post_meta( $post_id, 'wp_traval_lng', $wp_traval_lng );
 		}
+		if ( isset( $_POST['wp_traval_location_id'] ) ) {
+			$wp_traval_location_id = $_POST['wp_traval_location_id'];
+			update_post_meta( $post_id, 'wp_traval_location_id', $wp_traval_location_id );
+		}
+		
 
 		if ( ! empty( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
