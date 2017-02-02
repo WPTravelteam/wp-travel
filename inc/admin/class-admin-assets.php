@@ -21,7 +21,7 @@ class WP_Travel_Admin_Assets {
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$screen = get_current_screen();
-		wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-gmaps' ), WP_TRAVEL_VERSION, 1 );
+		wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs.js', array( 'jquery', 'jquery-ui-tabs' ), WP_TRAVEL_VERSION, 1 );
 		wp_enqueue_script( 'wp-travel-tabs' );
 		if ( 'itineraries' === $screen->id ) {
 			$settings = wp_traval_get_settings();
