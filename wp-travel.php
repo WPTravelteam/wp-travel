@@ -90,6 +90,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
+			add_shortcode( 'WP_TRAVEL_BOOKING', array( 'Wp_Travel_Shortcodes', 'wp_travel_booking_form' ) );
+			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ) );
+
 			if ( $this->is_request( 'admin' ) ) {
 				$this->tabs = new WP_Travel_Admin_Tabs();
 				$this->uploader = new WP_Travel_Admin_Uploader();
@@ -124,6 +127,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
