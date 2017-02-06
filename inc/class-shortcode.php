@@ -24,34 +24,43 @@ class Wp_Travel_Shortcodes {
 	 */
 	function wp_travel_booking_form() {
 		ob_start(); ?>
-		<form action="" method="post">
-			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-			<div>
-				<label for="country"><?php esc_html_e( 'Country' ); ?></label>
-				<input type="text" id="country" name="country">
-			</div>
-			<div>
-				<label for="name"><?php esc_html_e( 'First Name' ); ?></label>
-				<input type="text" id="fname" name="firstname">
-			</div>
-			<div>
-				<label for="Address"><?php esc_html_e( 'Address' ); ?></label>
-				<input type="text" id="address" name="address">
-			</div>
-			<div>
-				<label for="Email"><?php esc_html_e( 'Email' ); ?></label>
-				<input type="email" id="email" name="email">
-			</div>
-			<div>
-				<label for="Phone"><?php esc_html_e( 'Phone' ); ?></label>
-				<input type="text" id="phone" name="phone">
-			</div>
-			<div>
-				<label for="some-text"><?php esc_html_e( 'Some Text' ); ?></label>
-				<textarea placeholder="<?php esc_html_e( 'Some text...' ); ?>"></textarea>
-			</div>
-			<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now">
-		</form>
+		<div class="booking-form">
+			<form action="" method="post">
+				<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
+				<div class="col-sm-12">
+					<label for="Trip Select"><?php esc_html_e( 'Trip Select' ); ?></label>
+					<select id="trip-select" name="Trip Select">
+				      <option value="australia">Australia</option>
+				      <option value="canada">Canada</option>
+				      <option value="usa">USA</option>
+				    </select>
+				</div>
+				<div class="col-sm-6">
+					<label for="name"><?php esc_html_e( 'Full Name' ); ?></label>
+					<input type="text" id="fname" name="fullname">
+				</div>
+				<div class="col-sm-6">
+					<label for="Address"><?php esc_html_e( 'Address' ); ?></label>
+					<input type="text" id="address" name="address">
+				</div>
+				<div class="col-sm-6">
+					<label for="Email"><?php esc_html_e( 'Email' ); ?></label>
+					<input type="email" id="email" name="email">
+				</div>
+				<div class="col-sm-6">
+					<label for="Phone"><?php esc_html_e( 'Phone' ); ?></label>
+					<input type="number" id="phone" name="phone">
+				</div>
+				<div class="col-sm-12">
+					<label for="message"><?php esc_html_e( 'Instructions' ); ?></label>
+					<textarea placeholder="<?php esc_html_e( 'Some text...' ); ?>" rows="6" cols="150"></textarea>
+				</div>
+				<div class="col-sm-12">
+					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now">
+				</div>
+			</form>
+		</div>
+		
 		<?php
 		$content = ob_get_contents();
 		ob_end_clean();
