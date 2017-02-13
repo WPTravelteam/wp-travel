@@ -116,7 +116,45 @@
 
     if ($.fn.datepicker) {
         $('#wp-travel-start-date, #wp-travel-end-date').datepicker({
-            language: 'en'
+            language: 'en',
+            minDate: new Date()
         });
     }
+
+
+	$( document ).on( 'click', '#publish', function() {
+
+		var start_date = $( '#wp-travel-start-date' ).val();
+		var end_date = $( '#wp-travel-end-date' ).val();
+
+		var error = '';
+		if ( '' != start_date || '' != end_date ) {				
+			if ( '' == start_date ) {
+				error += 'Start date can\'t be empty!' + "\n";
+			}
+			if ( '' == end_date ) {
+				error += 'End date can\'t be empty!' + "\n";
+			}
+
+			if ( '' != start_date && '' != end_date ) {					
+				start_date = new Date( start_date );
+				end_date = new Date( end_date );
+
+				if ( end_date <= start_date ) {
+					error += 'End date must greater than start date.' + "\n";						
+				} 
+			}
+
+		}
+
+		if ( '' == error ) {
+			$( document ).off( 'click', '#publish' );
+		} else {
+			alert( error );
+			return false;
+		}
+
+		
+	} );
+	
 }(jQuery));
