@@ -270,10 +270,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		// Gallery.
-		if ( isset( $_POST['wp_travel_gallery_ids'] ) ) {
+		$gallery_ids = array();
+		if ( isset( $_POST['wp_travel_gallery_ids'] ) && '' != $_POST['wp_travel_gallery_ids'] ) {
 			$gallery_ids = explode( ',', $_POST['wp_travel_gallery_ids'] );
-			update_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', $gallery_ids );
 		}
+		update_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', $gallery_ids );
 
 		if ( isset( $_POST['wp_travel_thumbnail_id'] ) ) {
 			$wp_travel_thumbnail_id = (int) $_POST['wp_travel_thumbnail_id'];
