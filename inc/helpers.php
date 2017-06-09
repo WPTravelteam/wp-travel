@@ -23,7 +23,7 @@ function wp_traval_get_trip_code( $post_id ) {
 		$post_id .= '0' . $post_id;
 	}
 
-	return apply_filters( 'wp_traval_trip_code', 'NTD-NTO '. $post_id, $post_id );
+	return apply_filters( 'wp_traval_trip_code', 'WT-CODE ' . $post_id, $post_id );
 }
 
 /**
