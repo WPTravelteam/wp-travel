@@ -20,7 +20,11 @@
       var unique = gallery_ids.filter(function(elem, index, self) {
           return index == self.indexOf(elem);
       });
-      console.log( unique);
+      if ( '' != gallery_ids ) {
+        $('.wp-travel-post-tab-content-section-title').show();
+      } else {
+        $('.wp-travel-post-tab-content-section-title').hide();
+      }
       $('#wp_travel_gallery_ids').val( unique.join( ',' ) );
     }
 
