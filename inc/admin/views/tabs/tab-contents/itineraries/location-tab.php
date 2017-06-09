@@ -34,7 +34,7 @@ if ( isset( $post_meta_loc ) && '' != $post_meta_loc ) {
 	$loc = $post_meta_loc;
 } ?>
 <div class="location-wrap">
-	<label id="wp-traval-locations"><?php esc_html_e( 'Locations' ); ?></label>
+	<label id="wp-traval-locations"><?php esc_html_e( 'Map' ); ?></label>
 	<?php if ( is_array( $hierarchical_post ) && count( $hierarchical_post ) > 0 ) : ?>
 	<select name="wp_traval_location_id">
 		<option value=""><?php esc_html_e( 'Select Locations' ); ?></option>
