@@ -236,7 +236,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
-		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) ) ) {
+		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
 		}
 
