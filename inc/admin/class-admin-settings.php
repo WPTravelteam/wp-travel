@@ -75,7 +75,7 @@ class WP_Travel_Admin_Settings {
 					echo '<label for="currency">Currency</label>';
 				echo '</th>';
 				echo '<td>';
-					echo wp_traval_get_dropdown_list( $currency_args );
+					echo wp_traval_get_dropdown_currency_list( $currency_args );
 					echo '<p class="description">Heregoes some desc</p>';
 				echo '</td>';
 			echo '<tr>';
