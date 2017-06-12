@@ -7,11 +7,20 @@
 	$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 	$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
 	$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
+
+	echo '<div class="trip-type-wrap itineraries-tax-wrap">';
+	post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'itinerary_types' ) ) );
+	printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=itinerary_types&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Trip Type' ) );
+	echo '</div>';
+
+	$settings = wp_traval_get_settings();
+	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] :'';
+	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
 ?>
 <table class="form-table">
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
-		<td><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
+		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
 	<tr>
 		<td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
