@@ -247,15 +247,15 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		if ( isset( $_POST['wp_travel_trip_include'] ) ) {
-			$wp_travel_trip_include = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_include'] ) );
+			$wp_travel_trip_include = $_POST['wp_travel_trip_include'];
 			update_post_meta( $post_id, 'wp_travel_trip_include', $wp_travel_trip_include );
 		}
 		if ( isset( $_POST['wp_travel_trip_exclude'] ) ) {
-			$wp_travel_trip_exclude = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_exclude'] ) );
+			$wp_travel_trip_exclude = $_POST['wp_travel_trip_exclude'];
 			update_post_meta( $post_id, 'wp_travel_trip_exclude', $wp_travel_trip_exclude );
 		}
 		if ( isset( $_POST['wp_travel_outline'] ) ) {
-			$wp_travel_outline = sanitize_text_field( wp_unslash( $_POST['wp_travel_outline'] ) );
+			$wp_travel_outline = $_POST['wp_travel_outline'];
 			update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 		}
 
@@ -301,7 +301,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
-			$new_content = sanitize_text_field( wp_unslash( $_POST['wp_travel_editor'] ) );
+			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
 			if ( ! wp_is_post_revision( $post_id ) && $old_content !== $new_content ) {
 				$args = array(
