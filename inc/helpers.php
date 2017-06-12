@@ -32,7 +32,7 @@ function wp_traval_get_trip_code( $post_id ) {
  * @param  array $args Arguments for dropdown list.
  * @return HTML  return dropdown list.
  */
-function wp_traval_get_dropdown_list( $args = array() ) {
+function wp_traval_get_dropdown_currency_list( $args = array() ) {
 
 	$currency_list = wp_traval_get_currency_list();
 
@@ -56,7 +56,7 @@ function wp_traval_get_dropdown_list( $args = array() ) {
 
 		foreach ( $currency_list as $key => $currency ) {
 
-			$dropdown .= '<option value="' . $key . '" ' . selected( $args['selected'], $key, false ) . '  >' . $currency . '</option>';
+			$dropdown .= '<option value="' . $key . '" ' . selected( $args['selected'], $key, false ) . '  >' . $currency . ' (' . wp_traval_get_currency_symbol( $key ) . ')</option>';
 		}
 		$dropdown .= '</select>';
 
@@ -111,4 +111,19 @@ function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 
 	echo $contents;
 	return false;
+}
+
+function get_wp_travel_map_data() {
+	global $post;
+	$data = array(
+		'lat' => 27.6727305,
+		'lng' => 85.3252943,
+		'loc' => __( 'Mangal Bazaar, Patan 44600, Nepal' ),
+		);
+	$map_meta = array(
+		'lat' => get_post_meta( $post->ID, 'wp_traval_lat', true ),
+		'lng' => get_post_meta( $post->ID, 'wp_traval_lng', true ),
+		'loc' => get_post_meta( $post->ID, 'wp_traval_location', true ),
+		);
+	return array_merge( $data, $map_meta );
 }
