@@ -30,5 +30,30 @@ class Wp_Travel_Taxonomies {
 		);
 
 		register_taxonomy( 'itinerary_types', array( 'itineraries' ), $args );
+
+		$labels = array(
+			'name'              => _x( 'Locations', 'general name', 'wp-travel' ),
+			'singular_name'     => _x( 'Location', 'singular name', 'wp-travel' ),
+			'search_items'      => __( 'Search Locations', 'wp-travel' ),
+			'all_items'         => __( 'All Locations', 'wp-travel' ),
+			'parent_item'       => __( 'Parent Location', 'wp-travel' ),
+			'parent_item_colon' => __( 'Parent Location:', 'wp-travel' ),
+			'edit_item'         => __( 'Edit Location', 'wp-travel' ),
+			'update_item'       => __( 'Update Location', 'wp-travel' ),
+			'add_new_item'      => __( 'Add New Location', 'wp-travel' ),
+			'new_item_name'     => __( 'New Location', 'wp-travel' ),
+			'menu_name'         => __( 'Location', 'wp-travel' ),
+		);
+
+		$args = array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'travel_locations' ),
+		);
+
+		register_taxonomy( 'travel_locations', array( 'itineraries' ), $args );
 	}
 }
