@@ -13,11 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php the_title(); ?>
+	<?php the_title('<h2>', '</h2>'); ?>
 	<div class="summary entry-summary">
 
 		<?php
-			the_content();
+			echo apply_filters( 'the_content', get_the_content() );
 		?>
 
 	</div><!-- .summary -->
