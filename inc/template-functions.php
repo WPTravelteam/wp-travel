@@ -32,65 +32,117 @@ function wp_travel_content_filter( $content ) {
 	}
 	global $post;
 
-	$trip_price 	= get_post_meta( $post->ID, 'wp_travel_price', true );
-	$trip_outline	= get_post_meta( $post->ID, 'wp_travel_outline', true );
-	$trip_include	= get_post_meta( $post->ID, 'wp_travel_trip_include', true );
-	$trip_exclude	= get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
-	$gallery_ids 	= get_post_meta( $post->ID, 'wp_travel_itinerary_gallery_ids', true );
-
 	$settings = wp_traval_get_settings();
 
-	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
-
-	ob_start(); ?>
+	ob_start(); 
+	do_action( 'wp_travel_before_trip_details', $post, $settings );
+	?>
 	<div class="wp-travel-trip-details">
-		<div class="wp-travel-trip-code"><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?> <span><?php esc_html_e( wp_traval_get_trip_code( $post->ID ), 'wp-travel' ); ?></span></div>
-
-		<div class="wp-travel-trip-detail"><?php esc_html_e( 'Trip Price : ', 'wp-travel' ); ?> <span><?php esc_html_e( $currency_symbol . $trip_price, 'wp-travel' ); ?></span></div>
-		<?php if ( count( $gallery_ids ) > 0 ) : ?>
-		<div class="wp-travel-gallery">
-			<ul>
-				<?php foreach ( $gallery_ids as $gallery_id ) : ?>
-				<li>
-				<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
-				<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
-				<img src="<?php echo ( $gallery_image[0] ); ?>" />
-				</a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-		<?php endif; ?>
-		<div class="wp-travel-trip-outline">
-			<h4><?php esc_html_e( 'Trip outline', 'wp-travel' ) ?></h4>
-			<p>
-				<?php esc_html_e( $trip_outline, 'wp-travel' ); ?>
-			</p>
-		</div>
-		<div class="wp-travel-trip-include">
-			<h4><?php esc_html_e( 'Trip include', 'wp-travel' ) ?></h4>
-			<p>
-				<?php esc_html_e( $trip_include, 'wp-travel' ); ?>
-			</p>
-		</div>
-		<div class="wp-travel-trip-exclude">
-			<h4><?php esc_html_e( 'Trip exclude', 'wp-travel' ) ?></h4>
-			<p>
-				<?php esc_html_e( $trip_exclude, 'wp-travel' ); ?>
-			</p>
-		</div>
-
-		<div class="wp-travel-map">
-			<h4><?php esc_html_e( 'Map', 'wp-travel' ) ?></h4>			
-			<div id="gmap" style="width:100%;height:300px"></div>
-		</div>
-
+		<?php do_action( 'wp_travel_trip_details', $post, $settings ); ?>
 	</div>
 	<?php
+	do_action( 'wp_travel_after_trip_details', $post, $settings );
 	$content .= ob_get_contents();
 	ob_end_clean();
 	return $content;
 }
 
 add_filter( 'the_content', 'wp_travel_content_filter' );
+
+
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_code', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_price', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_gallery', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_outline', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_include', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_exclude', 10, 2 );
+add_action ( 'wp_travel_trip_details', 'wp_travel_trip_map', 10, 2 );
+
+
+function wp_travel_trip_code( $post, $settings ) {
+?>
+	<div class="wp-travel-trip-code"><?php esc_html_e( 'Trip Code : ', 'wp-travel' ); ?> <span><?php esc_html_e( wp_traval_get_trip_code( $post->ID ), 'wp-travel' ); ?></span></div>
+<?php
+}
+
+function wp_travel_trip_price( $post, $settings ) {
+	$trip_price 	= get_post_meta( $post->ID, 'wp_travel_price', true );
+	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
+	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
+	<div class="wp-travel-trip-detail"><?php esc_html_e( 'Trip Price : ', 'wp-travel' ); ?> <span><?php echo apply_filters( 'wp_travel_itinerary_', $currency_symbol . $trip_price, $currency_symbol, $trip_price ) ; ?></span></div>
+	
+<?php
+} 
+
+
+function wp_travel_trip_gallery( $post, $settings ) {
+	$gallery_ids 	= get_post_meta( $post->ID, 'wp_travel_itinerary_gallery_ids', true ); ?>
+
+	<?php if ( count( $gallery_ids ) > 0 ) : ?>
+		<div class="wp-travel-gallery">
+		<h4><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></h4>
+		<ul>
+			<?php foreach ( $gallery_ids as $gallery_id ) : ?>
+			<li>
+			<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
+			<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
+			<img src="<?php echo ( $gallery_image[0] ); ?>" />
+			</a>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<?php endif; ?>
+	
+<?php
+}
+
+function wp_travel_trip_outline( $post, $settings ) {
+	$trip_outline	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
+	<?php if ( '' != $trip_outline ) : ?>
+	<div class="wp-travel-trip-outline">
+		<h4><?php esc_html_e( 'Trip outline', 'wp-travel' ) ?></h4>
+		<p>
+			<?php _e( $trip_outline, 'wp-travel' ); ?>
+		</p>
+	</div>
+	<?php endif; ?>
+	
+<?php
+}
+
+function wp_travel_trip_include( $post, $settings ) {
+	$trip_include	= get_post_meta( $post->ID, 'wp_travel_trip_include', true ); ?>
+	<?php if ( '' != $trip_include ) : ?>
+	<div class="wp-travel-trip-include">
+		<h4><?php esc_html_e( 'Trip include', 'wp-travel' ) ?></h4>
+		<p>
+			<?php _e( $trip_include, 'wp-travel' ); ?>
+		</p>
+	</div>
+	<?php endif; ?>
+<?php
+}
+
+function wp_travel_trip_exclude( $post, $settings ) {
+	$trip_exclude	= get_post_meta( $post->ID, 'wp_travel_trip_exclude', true ); ?>
+	<?php if ( $trip_exclude ) : ?>
+	<div class="wp-travel-trip-exclude">
+		<h4><?php esc_html_e( 'Trip exclude', 'wp-travel' ) ?></h4>
+		<p>
+			<?php_e( $trip_exclude, 'wp-travel' ); ?>
+		</p>
+	</div>
+	<?php endif; ?>
+	
+<?php
+}
+
+function wp_travel_trip_map( $post, $settings ) {
+?>
+	<div class="wp-travel-map">
+		<h4><?php esc_html_e( 'Map', 'wp-travel' ) ?></h4>
+		<div id="gmap" style="width:100%;height:300px"></div>
+	</div>
+<?php
+}
