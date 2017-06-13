@@ -1,0 +1,48 @@
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.wp-travel-trip-details{
+	margin:20px 0;
+	position:relative;
+	.wp-travel-trip-code,.wp-travel-trip-detail{
+		font-weight:700;
+		margin-bottom: 10px;
+	}
+}
+
+.wp-travel-gallery {
+    display: block;
+    position: relative;
+    margin:20px 0;
+    @include clearfix();
+    ul{
+    	margin: 0;
+    	padding: 0;
+    	li{
+    		list-style: none;
+    		float: left;
+    		margin:5px;
+    		padding:5px;
+    		background: #f8f8f8;
+    		&:last-child{
+    			margin:0;
+    		}
+    		&:first-child{
+    			margin-left: 0;
+    		}
+    	}
+    }
+}
+.wp-travel-trip-outline,.wp-travel-trip-include,.wp-travel-trip-exclude,.wp-travel-map{
+	margin-bottom:20px;
+	margin-top:0;
+}
