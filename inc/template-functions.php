@@ -69,7 +69,7 @@ function wp_travel_trip_price( $post, $settings ) {
 	$trip_price 	= get_post_meta( $post->ID, 'wp_travel_price', true );
 	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
-	<div class="wp-travel-trip-detail"><?php esc_html_e( 'Trip Price : ', 'wp-travel' ); ?> <span><?php echo apply_filters( 'wp_travel_itinerary_', $currency_symbol . $trip_price, $currency_symbol, $trip_price ) ; ?></span></div>
+	<div class="wp-travel-trip-detail"><?php esc_html_e( 'Trip Price : ', 'wp-travel' ); ?> <span><?php echo apply_filters( 'wp_travel_itinerary_price', $currency_symbol . $trip_price, $currency_symbol, $trip_price ) ; ?></span></div>
 	
 <?php
 } 
