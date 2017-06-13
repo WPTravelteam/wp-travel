@@ -13,7 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php the_title('<h2>', '</h2>'); ?>
+	<header class="entry-header">
+	<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+	</header>
 	<div class="content entry-content">
 
 		<?php
