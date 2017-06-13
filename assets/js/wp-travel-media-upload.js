@@ -39,6 +39,8 @@
       if( 'undefined' !== typeof( wp_travel_drag_drop_uploader.gallery_data ) ) {
         var gallery_data = wp_travel_drag_drop_uploader.gallery_data;
         wp_travel_update_gallery_listing( gallery_data );
+      } else {
+        $('.wp-travel-post-tab-content-section-title').hide();
       }
 
       // Set featured image.
@@ -50,7 +52,7 @@
       // Make gallery sortable.
       $( '.wp-travel-open-uploaded-images ul' ).sortable({
         update: function(){
-          console.log(3434);
+          // console.log(3434);
           wp_travel_update_gallery_ids([]);
         }
       });
@@ -86,7 +88,7 @@
     		},
     		onSelect : function( mediaUploader ){
     			attachments = mediaUploader.state().get('selection').toJSON();
-          console.log( attachments );
+          // console.log( attachments );
     			wp_travel_update_gallery_listing( attachments );
     		}
     	});
