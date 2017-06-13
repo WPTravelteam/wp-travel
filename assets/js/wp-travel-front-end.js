@@ -24,8 +24,11 @@ jQuery( document ).ready( function($){
 
     $('.wp-travel-gallery').magnificPopup({
 	  delegate: 'a', // child items selector, by clicking on it popup will open
-	  type: 'image'
+	  type: 'image',
 	  // other options
+	  gallery:{
+	    enabled:true
+	  }
 	});
 
 } );
