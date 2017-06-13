@@ -115,15 +115,14 @@ function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 
 function get_wp_travel_map_data() {
 	global $post;
-	$data = array(
-		'lat' => 27.6727305,
-		'lng' => 85.3252943,
-		'loc' => __( 'Mangal Bazaar, Patan 44600, Nepal' ),
-		);
+	$lat = ( '' != get_post_meta( $post->ID, 'wp_traval_lat', true ) ) ? get_post_meta( $post->ID, 'wp_traval_lat', true ) : 27.6727305;
+	$lng = ( '' != get_post_meta( $post->ID, 'wp_traval_lng', true ) ) ? get_post_meta( $post->ID, 'wp_traval_lng', true ) : 85.3252943;
+	$loc = ( '' != get_post_meta( $post->ID, 'wp_traval_location', true ) ) ? get_post_meta( $post->ID, 'wp_traval_location', true ) : 'Mangal Bazaar, Patan 44600, Nepal';
+
 	$map_meta = array(
-		'lat' => get_post_meta( $post->ID, 'wp_traval_lat', true ),
-		'lng' => get_post_meta( $post->ID, 'wp_traval_lng', true ),
-		'loc' => get_post_meta( $post->ID, 'wp_traval_location', true ),
+		'lat' => $lat,
+		'lng' => $lng,
+		'loc' => $loc,
 		);
-	return array_merge( $data, $map_meta );
+	return $map_meta;
 }
