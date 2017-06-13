@@ -23,7 +23,7 @@ class WP_Travel_Admin_Settings {
 		echo '<div class="wrap wp-trave-settings-warp">';
 				echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
 				echo '<div class="wp-trave-settings-form-warp">';
-				print_r( WP_Travel()->notices->get() );
+				// print_r( WP_Travel()->notices->get() );
 				echo '<form method="post" action="' . esc_url( $url ) . '">';
 					echo '<div class="wp-travel-setting-buttons">';
 					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
@@ -76,7 +76,7 @@ class WP_Travel_Admin_Settings {
 				echo '</th>';
 				echo '<td>';
 					echo wp_traval_get_dropdown_currency_list( $currency_args );
-					echo '<p class="description">Heregoes some desc</p>';
+					echo '<p class="description">' . esc_html( 'Choose your currency', 'wp-travel' ) . '</p>';
 				echo '</td>';
 			echo '<tr>';
 
@@ -86,7 +86,7 @@ class WP_Travel_Admin_Settings {
 				echo '</th>';
 				echo '<td>';
 					echo '<input type="text" value="' . $google_map_api_key . '" name="google_map_api_key" id="google_map_api_key"/>';
-					echo '<p class="description">Heregoes some desc</p>';
+					echo '<p class="description">' . esc_html( 'Your Google Map API key', 'wp-travel' ) . '</p>';
 				echo '</td>';
 			echo '<tr>';
 		echo '</table>';
