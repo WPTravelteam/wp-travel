@@ -87,6 +87,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
+			register_activation_hook( __FILE__, array( $this, 'wp_travel_flush_rewrites' ) );
+
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
@@ -158,6 +160,16 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				case 'frontend' :
 					return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 			}
+		}
+		/**
+		 * Flush Rewrite rule.
+		 */
+		function wp_travel_flush_rewrites() {
+			$post_type = new WP_Travel_Post_Types();
+			$post_type::init();
+			$taxonomy = new Wp_Travel_Taxonomies();
+			$taxonomy::init();
+			flush_rewrite_rules();
 		}
 
 	}
