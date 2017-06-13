@@ -34,7 +34,7 @@ function wp_travel_content_filter( $content ) {
 
 	$settings = wp_traval_get_settings();
 
-	ob_start(); 
+	ob_start();
 	do_action( 'wp_travel_before_trip_details', $post, $settings );
 	?>
 	<div class="wp-travel-trip-details">
@@ -103,7 +103,7 @@ function wp_travel_trip_outline( $post, $settings ) {
 	<div class="wp-travel-trip-outline">
 		<h4><?php esc_html_e( 'Trip outline', 'wp-travel' ) ?></h4>
 		<p>
-			<?php _e( $trip_outline, 'wp-travel' ); ?>
+			<?php _e( wpautop( $trip_outline ), 'wp-travel' ); ?>
 		</p>
 	</div>
 	<?php endif; ?>
@@ -117,7 +117,7 @@ function wp_travel_trip_include( $post, $settings ) {
 	<div class="wp-travel-trip-include">
 		<h4><?php esc_html_e( 'Trip include', 'wp-travel' ) ?></h4>
 		<p>
-			<?php _e( $trip_include, 'wp-travel' ); ?>
+			<?php _e( wpautop( $trip_include ), 'wp-travel' ); ?>
 		</p>
 	</div>
 	<?php endif; ?>
@@ -130,7 +130,7 @@ function wp_travel_trip_exclude( $post, $settings ) {
 	<div class="wp-travel-trip-exclude">
 		<h4><?php esc_html_e( 'Trip exclude', 'wp-travel' ) ?></h4>
 		<p>
-			<?php _e( $trip_exclude, 'wp-travel' ); ?>
+			<?php _e( wpautop( $trip_exclude ), 'wp-travel' ); ?>
 		</p>
 	</div>
 	<?php endif; ?>
@@ -145,4 +145,78 @@ function wp_travel_trip_map( $post, $settings ) {
 		<div id="gmap" style="width:100%;height:300px"></div>
 	</div>
 <?php
+}
+
+/**
+ * Wrapper Start
+ */
+add_action ( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
+
+function wp_travel_wrapper_start() {
+	if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+$template = get_option( 'template' );
+
+	switch( $template ) {
+		case 'twentyeleven' :
+			echo '<div id="primary"><div id="content" role="main" class="twentyeleven">';
+			break;
+		case 'twentytwelve' :
+			echo '<div id="primary" class="site-content"><div id="content" role="main" class="twentytwelve">';
+			break;
+		case 'twentythirteen' :
+			echo '<div id="primary" class="site-content"><div id="content" role="main" class="entry-content twentythirteen">';
+			break;
+		case 'twentyfourteen' :
+			echo '<div id="primary" class="content-area"><div id="content" role="main" class="site-content twentyfourteen"><div class="tfWSC">';
+			break;
+		case 'twentyfifteen' :
+			echo '<div id="primary" role="main" class="content-area twentyfifteen"><div id="main" class="site-main t15WSC">';
+			break;
+		case 'twentysixteen' :
+			echo '<div id="primary" class="content-area twentysixteen"><main id="main" class="site-main" role="main">';
+			break;
+		case 'twentyseventeen' :
+			echo '<div class="wrap"><div id="primary" class="content-area twentyseventeen"><div id="main" class="site-main">';
+			break;
+		default :
+			echo '<div id="container"><div id="content" class="classified-content" role="main">';
+			break;
+	}
+}
+
+add_action ( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
+
+function wp_travel_wrapper_end() {
+	$template = get_option( 'template' );
+
+	switch( $template ) {
+		case 'twentyeleven' :
+			echo '</div></div>';
+			break;
+		case 'twentytwelve' :
+			echo '</div></div>';
+			break;
+		case 'twentythirteen' :
+			echo '</div></div>';
+			break;
+		case 'twentyfourteen' :
+			echo '</div></div></div>';
+			get_sidebar( 'content' );
+			break;
+		case 'twentyfifteen' :
+			echo '</div></div>';
+			break;
+		case 'twentysixteen' :
+			echo '</div></main>';
+			break;
+		case 'twentyseventeen' :
+			echo '</div></div></div>';
+			break;
+		default :
+			echo '</div></div>';
+			break;
+	}
 }
