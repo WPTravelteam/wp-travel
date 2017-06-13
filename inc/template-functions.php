@@ -126,11 +126,11 @@ function wp_travel_trip_include( $post, $settings ) {
 
 function wp_travel_trip_exclude( $post, $settings ) {
 	$trip_exclude	= get_post_meta( $post->ID, 'wp_travel_trip_exclude', true ); ?>
-	<?php if ( $trip_exclude ) : ?>
+	<?php if ( '' != $trip_exclude ) : ?>
 	<div class="wp-travel-trip-exclude">
 		<h4><?php esc_html_e( 'Trip exclude', 'wp-travel' ) ?></h4>
 		<p>
-			<?php_e( $trip_exclude, 'wp-travel' ); ?>
+			<?php _e( $trip_exclude, 'wp-travel' ); ?>
 		</p>
 	</div>
 	<?php endif; ?>
