@@ -40,6 +40,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_meta_box( 'wp-travel-itinerary-detail', __( 'Itinerary Detail' ), array( $this, 'load_tab_template' ), 'itineraries', 'normal', 'default' );
 		remove_meta_box( 'itinerary_locationsdiv', 'itineraries', 'side' );
 		remove_meta_box( 'itinerary_typesdiv', 'itineraries', 'side' );
+		remove_meta_box( 'travel_locationsdiv', 'itineraries', 'side' );
 	}
 	/**
 	 * Clean Metabox Classes.
