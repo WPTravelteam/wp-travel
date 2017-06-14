@@ -93,7 +93,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
 			add_shortcode( 'WP_TRAVEL_BOOKING', array( 'Wp_Travel_Shortcodes', 'wp_travel_booking_form' ) );
-			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ) );
+			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ), 99 );
 
 			if ( $this->is_request( 'admin' ) ) {
 				$this->tabs = new WP_Travel_Admin_Tabs();
@@ -122,6 +122,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 */
 		function includes() {
 			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/booking_functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/helpers.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
@@ -131,7 +134,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/class-admin-uploader.php', WP_TRAVEL_ABSPATH );
