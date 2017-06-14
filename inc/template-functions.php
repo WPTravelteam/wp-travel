@@ -142,7 +142,13 @@ function wp_travel_trip_map( $post, $settings ) {
 ?>
 	<div class="wp-travel-map">
 		<h4><?php esc_html_e( 'Map', 'wp-travel' ) ?></h4>
+	<?php if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) : ?>
 		<div id="gmap" style="width:100%;height:300px"></div>
+	<?php else : ?>
+		<div class="map-wrap">
+		<p><?php echo sprintf( "Please add 'google map api key'" ) ?></p>
+		</div>
+	<?php endif; ?>
 	</div>
 <?php
 }
