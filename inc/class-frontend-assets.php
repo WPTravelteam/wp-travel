@@ -18,6 +18,7 @@ class WP_Travel_Frontend_Assets {
 
 		global $post;
 
+		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
 		if ( ! is_singular( 'itineraries' ) ) {
 			return;
