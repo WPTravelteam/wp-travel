@@ -86,7 +86,7 @@ class WP_Travel_Admin_Settings {
 				echo '</th>';
 				echo '<td>';
 					echo '<input type="text" value="' . $google_map_api_key . '" name="google_map_api_key" id="google_map_api_key"/>';
-					echo '<p class="description">' . esc_html( 'Your Google Map API key', 'wp-travel' ) . '</p>';
+					echo '<p class="description">' . sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) . '</p>';
 				echo '</td>';
 			echo '<tr>';
 		echo '</table>';
