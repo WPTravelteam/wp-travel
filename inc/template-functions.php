@@ -79,7 +79,7 @@ function wp_travel_trip_gallery( $post, $settings ) {
 	$gallery_ids 	= get_post_meta( $post->ID, 'wp_travel_itinerary_gallery_ids', true ); ?>
 
 	<?php if ( count( $gallery_ids ) > 0 ) : ?>
-		<div class="wp-travel-gallery">
+		<div class="wp-travel-gallery faint-border-bottom">
 		<h4><?php esc_html_e( 'Gallery', 'wp-travel' ); ?></h4>
 		<ul>
 			<?php foreach ( $gallery_ids as $gallery_id ) : ?>
@@ -100,7 +100,7 @@ function wp_travel_trip_gallery( $post, $settings ) {
 function wp_travel_trip_outline( $post, $settings ) {
 	$trip_outline	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 	<?php if ( '' != $trip_outline ) : ?>
-	<div class="wp-travel-trip-outline">
+	<div class="wp-travel-trip-outline faint-border-bottom">
 		<h4><?php esc_html_e( 'Trip outline', 'wp-travel' ) ?></h4>
 		<p>
 			<?php _e( wpautop( $trip_outline ), 'wp-travel' ); ?>
@@ -114,7 +114,7 @@ function wp_travel_trip_outline( $post, $settings ) {
 function wp_travel_trip_include( $post, $settings ) {
 	$trip_include	= get_post_meta( $post->ID, 'wp_travel_trip_include', true ); ?>
 	<?php if ( '' != $trip_include ) : ?>
-	<div class="wp-travel-trip-include">
+	<div class="wp-travel-trip-include faint-border-bottom">
 		<h4><?php esc_html_e( 'Trip include', 'wp-travel' ) ?></h4>
 		<p>
 			<?php _e( wpautop( $trip_include ), 'wp-travel' ); ?>
@@ -127,7 +127,7 @@ function wp_travel_trip_include( $post, $settings ) {
 function wp_travel_trip_exclude( $post, $settings ) {
 	$trip_exclude	= get_post_meta( $post->ID, 'wp_travel_trip_exclude', true ); ?>
 	<?php if ( '' != $trip_exclude ) : ?>
-	<div class="wp-travel-trip-exclude">
+	<div class="wp-travel-trip-exclude faint-border-bottom">
 		<h4><?php esc_html_e( 'Trip exclude', 'wp-travel' ) ?></h4>
 		<p>
 			<?php _e( wpautop( $trip_exclude ), 'wp-travel' ); ?>
@@ -225,4 +225,11 @@ function wp_travel_wrapper_end() {
 			echo '</div></div>';
 			break;
 	}
+}
+
+add_action ( 'wp_travel_before_trip_details', 'wp_travel_booking_form' );
+add_action ( 'wp_travel_after_trip_details', 'wp_travel_booking_form' );
+
+function wp_travel_booking_form() {
+	echo do_shortcode( '[WP_TRAVEL_BOOKING]' );
 }
