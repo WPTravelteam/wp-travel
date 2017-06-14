@@ -117,6 +117,10 @@ $alto: #ddd;
 			display: table;
 			clear: both;
 		}
+		a:focus{
+			outline: none;
+			box-shadow:none;
+		}
 		.wp-travel-tab-content {
 			// display: none;
 			border-radius: 0;
@@ -166,4 +170,20 @@ $alto: #ddd;
 			}
 		}
 	}
+}
+// Taxonomy Wrap
+.itineraries-tax-wrap{
+	border: 1px solid #f1f1f1;
+	margin: 0 0 40px 0;
+	padding: 10px 10px 10px 20px;
+}
+
+
+#side-sortables .add-menu-item-tabs a, .category-tabs a, .wp-tab-bar a {
+    color: #333;
+    font-weight: 600;
+}
+#itinerary_types-adder a, .tax-edit a{
+  color: #333;
+  font-weight: 600;
 }

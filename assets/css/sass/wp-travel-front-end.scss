@@ -38,11 +38,25 @@
     		}
     		&:first-child{
     			margin-left: 0;
+                padding-left:0;
     		}
     	}
     }
 }
-.wp-travel-trip-outline,.wp-travel-trip-include,.wp-travel-trip-exclude,.wp-travel-map{
-	margin-bottom:20px;
+.faint-border-bottom{
+	margin:15px 0;
+    padding:20px 0;
+    border-bottom: 1px solid #f8f8f8;
 	margin-top:0;
+}
+.wp-travel-gallery{
+    padding-top:20px;
+    border-top:1px solid #f8f8f8;
+}
+.wp-travel-map{
+    margin-top: 15px;
+    padding:20px 0;
+}
+.entry-content .wp-travel-trip-include ul,.entry-content .wp-travel-trip-exclude ul{
+   margin-left: 20px;
 }
