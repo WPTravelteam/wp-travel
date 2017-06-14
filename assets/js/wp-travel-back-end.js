@@ -1,5 +1,6 @@
-(function ($) {
-    // Create map.
+(function ($) {	
+
+if ( 'undefined' !=  typeof( GMaps ) ) {
     var map = new GMaps({
 	        div: '#gmap',
 	        lat: wp_travel_drag_drop_uploader.lat,
@@ -93,6 +94,7 @@
 		});
 
 	});
+}
     /*
    		* Tab js.
    		*/
