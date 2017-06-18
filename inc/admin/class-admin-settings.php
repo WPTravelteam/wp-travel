@@ -41,13 +41,13 @@ class WP_Travel_Admin_Settings {
 
 	function add_tabs( $tabs ) {
 		$settings_fields['general'] = array(
-			'tab_label' => __( 'General', 'sell_media' ),
-			'content_title' => __( 'General Settings', 'sell_media' )
+			'tab_label' => __( 'General', 'wp_travel' ),
+			'content_title' => __( 'General Settings', 'wp_travel' )
 		);
 
 		$settings_fields['currency'] = array(
-			'tab_label' => __( 'Additional Info', 'sell_media' ),
-			'content_title' => __( 'Additional Info', 'sell_media' ),
+			'tab_label' => __( 'Additional Info', 'wp_travel' ),
+			'content_title' => __( 'Additional Info', 'wp_travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -117,7 +117,7 @@ class WP_Travel_Admin_Settings {
 			$url_parameters['updated'] = 'true';
 			$redirect_url = admin_url( self::$parent_slug );
 			$redirect_url = add_query_arg( $url_parameters, $redirect_url ) . '#' . $current_tab;
-			do_action( 'sell_media_price_listing_save', $redirect_url );
+			// do_action( 'wp_travel_price_listing_save', $redirect_url );
 			wp_redirect( $redirect_url );
 			exit();
 		}
