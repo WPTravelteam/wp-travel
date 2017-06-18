@@ -28,9 +28,10 @@ class Wp_Travel_Shortcodes {
 		?>
 		
 		<div class="booking-form">
-			<div class="wp-travel-book-now"><button>Book Now</button></div>
+			<div class="wp-travel-book-now"><button type="submit" value="submit" class="wp-book-btn default-travel-btn">Book Now</button></div>
 			<form action="" method="post" style="display: none">
-				<input type="hidden" name="trip_id" value="<?php echo $post->ID; ?>">
+				<?php do_action( 'wp_travel_booking_before_form' ); ?>
+				<input type="hidden" name="wp_travel_post_id" value="<?php echo $post->ID; ?>">
 				<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 
 				<div class="col-sm-4">
@@ -69,25 +70,28 @@ class Wp_Travel_Shortcodes {
 					<label for="wp-travel-email"><?php esc_html_e( 'Email' ); ?></label>
 					<input type="email" id="wp-travel-email" name="wp_travel_email">
 				</div>
+                <?php echo apply_filters('wp_travel_booking_form_after_email_html_content',''); ?>
 				<div class="col-sm-6">
 					<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX' ); ?></label>
-					<input type="number" id="wp-travel-pax" name="wp_travel_pax">
+					<input type="number" max="<?php echo apply_filters( 'wp_travel_max_pax_number', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax">
 				</div>
 				<div class="col-sm-12">
 					<label for="wp-travel-note"><?php esc_html_e( 'Note' ); ?></label>
 					<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...' ); ?>" rows="6" cols="150"></textarea>
 				</div>
+				<?php do_action( 'wp_travel_booking_before_submit_button' ); ?>
 				<div class="col-sm-12">
 					<input type="hidden" name="wp_travel_post_id" value="<?php echo $post->ID; ?>" >
 					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now">
+					<input type="reset" value="Close" class="wp-travel-booking-reset" >
 				</div>
+				<?php do_action( 'wp_travel_booking_after_form' ); ?>
 			</form>
 		</div>
-		
 		<?php
 		$content = ob_get_contents();
 		ob_end_clean();
-		return $content;
+		// return $content;
 		return apply_filters( 'wp_travel_booking_form_contents', $content );
 	}
 
@@ -133,16 +137,43 @@ class Wp_Travel_Shortcodes {
 		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
-				'message' => __( 'Your Item Has Beed added but the email could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.' ),
+				'message' => __( 'Your Item Has Been added but the email could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.' ),
 			) );
 		}
 		$post_array = array(
 			'post_title' => $title,
 			'post_content' => $message,
-			'post_status' => 'draft',
+			'post_status' => 'publish',
+			'post_slug'=>uniqid(),
 			'post_type' => 'itinerary-booking'
 			);
-		wp_insert_post( $post_array );
+		$orderID = wp_insert_post( $post_array );
 
-	}
+		update_post_meta($orderID,'order_data',$_POST);
+
+		if(array_key_exists('wp_travel_date',$_POST)){
+
+            $pax_count_based_by_date = get_post_meta($_POST['wp_travel_post_id'],'total_pax_booked',true);
+
+            if(!array_key_exists($_POST['wp_travel_date'], $pax_count_based_by_date)){
+                $pax_count_based_by_date[$_POST['wp_travel_date']] = 'default';
+            }
+
+            $pax_count_based_by_date[$_POST['wp_travel_date']] += $_POST['wp_travel_pax'];
+
+            update_post_meta($_POST['wp_travel_post_id'],'total_pax_booked', $pax_count_based_by_date);
+
+            $order_ids = get_post_meta($_POST['wp_travel_post_id'],'order_ids',true);
+
+            if(!$order_ids){
+                $order_ids = [];
+            }
+
+            array_push($order_ids, ['order_id'=>$orderID,'count'=>$_POST['wp_travel_pax'], 'date'=>$_POST['wp_travel_date']]);
+
+            update_post_meta($_POST['wp_travel_post_id'],'order_ids',$order_ids);
+
+        }
+
+    }
 }
