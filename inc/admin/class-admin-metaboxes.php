@@ -60,36 +60,36 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	function add_tabs( $tabs ) {
 		$itineraries['detail'] = array(
-			'tab_label' => __( 'Details', 'sell_media' ),
-			'content_title' => __( 'Details', 'sell_media' ),
+			'tab_label' => __( 'Details', 'wp-travel' ),
+			'content_title' => __( 'Details', 'wp-travel' ),
 		);
 
 		$itineraries['additional_info'] = array(
-			'tab_label' => __( 'Additional Info', 'sell_media' ),
-			'content_title' => __( 'Additional Info', 'sell_media' ),
+			'tab_label' => __( 'Additional Info', 'wp-travel' ),
+			'content_title' => __( 'Additional Info', 'wp-travel' ),
 			'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$itineraries['images_gallery'] = array(
-			'tab_label' => __( 'Images/ Gallery', 'sell_media' ),
-			'content_title' => __( 'Images/ Gallery', 'sell_media' ),
+			'tab_label' => __( 'Images/ Gallery', 'wp-travel' ),
+			'content_title' => __( 'Images/ Gallery', 'wp-travel' ),
 			'content_callback' => array( $this, 'gallery_tab_callback' ),
 		);
 
 		$itineraries['locations'] = array(
-			'tab_label' => __( 'Locations', 'sell_media' ),
-			'content_title' => __( 'Locations', 'sell_media' ),
+			'tab_label' => __( 'Locations', 'wp-travel' ),
+			'content_title' => __( 'Locations', 'wp-travel' ),
 			'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$itineraries['advanced'] = array(
-			'tab_label' => __( 'Advanced', 'sell_media' ),
-			'content_title' => __( 'Advanced Options', 'sell_media' ),
+			'tab_label' => __( 'Advanced', 'wp-travel' ),
+			'content_title' => __( 'Advanced Options', 'wp-travel' ),
 			'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$tabs['itineraries'] = $itineraries;
-		return $tabs;
+		return apply_filters( 'wp_travel_tabs', $tabs );;
 	}
 
 	/**
