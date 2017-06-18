@@ -41,7 +41,7 @@ class WP_Travel_Post_Types {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title' ),
+			'supports'           => array( 'title', 'comments' ),
 			'menu_icon'          => 'dashicons-location',
 		);
 		/**
@@ -61,7 +61,7 @@ class WP_Travel_Post_Types {
 			'add_new'            => _x( 'Add New', 'wp-travel', 'wp-travel' ),
 			'add_new_item'       => __( 'Add New booking', 'wp-travel' ),
 			'new_item'           => __( 'New booking', 'wp-travel' ),
-			'edit_item'          => __( 'Edit booking', 'wp-travel' ),
+			'edit_item'          => __( 'View booking', 'wp-travel' ),
 			'view_item'          => __( 'View booking', 'wp-travel' ),
 			'all_items'          => __( 'Bookings', 'wp-travel' ),
 			'search_items'       => __( 'Search bookings', 'wp-travel' ),
@@ -73,17 +73,17 @@ class WP_Travel_Post_Types {
 		$args = array(
 			'labels'             => $labels,
 			'description'        => __( 'Description.', 'wp-travel' ),
-			'public'             => true,
-			'publicly_queryable' => true,
+			'public'             => false,
+			'publicly_queryable' => false,
 			'show_ui'            => true,
 			'show_in_menu'       => 'edit.php?post_type=itineraries',
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => 'itinerary-booking' ),
 			'capability_type'    => 'post',
-			'has_archive'        => true,
+			'has_archive'        => false,
 			'hierarchical'       => true,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'page-attributes', 'editor' ),
+			'supports'           => array( 'title' ),
 			'menu_icon'          => 'dashicons-location',
 		);
 		/**
