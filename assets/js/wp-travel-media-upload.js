@@ -1,4 +1,11 @@
 (function( $ ) {
+
+    function wp_travel_set_gallery_featured_image( id ){
+      $('.wp-travel-open-uploaded-images ul').children().removeClass('featured-image');
+      $('#wp_travel_thumbnail_id').val( id );
+      $('#wp-travel-gallery-image-list-'+id).addClass( 'featured-image' );
+    }
+
     function wp_travel_update_gallery_listing( data ) {
         var template = wp.template( 'my-template' );
         $( '.wp-travel-open-uploaded-images ul' ).append( template( data ) );
@@ -12,6 +19,8 @@
       });
       // var gallery_ids = $('#wp_travel_gallery_ids').val().split( ',' );
       if( data.length > 0 ){
+        var thumbnail_id = $( '.wp-travel-open-uploaded-images ul li:first' ).data('attachmentid');
+        wp_travel_set_gallery_featured_image( thumbnail_id );        
         $.each( data, function( index, val ){
           gallery_ids.push( parseInt( val.id ) );
         });
@@ -28,11 +37,7 @@
       $('#wp_travel_gallery_ids').val( unique.join( ',' ) );
     }
 
-    function wp_travel_set_gallery_featured_image( id ){
-      $('.wp-travel-open-uploaded-images ul').children().removeClass('featured-image');
-      $('#wp_travel_thumbnail_id').val( id );
-      $('#wp-travel-gallery-image-list-'+id).addClass( 'featured-image' );
-    }
+    
     $(function() {
 
       // List gallery images on load.
@@ -44,10 +49,10 @@
       }
 
       // Set featured image.
-      if( 'undefined' !== typeof( wp_travel_drag_drop_uploader._thumbnail_id ) ) {
-        var _thumbnail_id = wp_travel_drag_drop_uploader._thumbnail_id;
-        wp_travel_set_gallery_featured_image( _thumbnail_id );
-      }
+      // if( 'undefined' !== typeof( wp_travel_drag_drop_uploader._thumbnail_id ) ) {
+      //   var _thumbnail_id = wp_travel_drag_drop_uploader._thumbnail_id;
+      //   // wp_travel_set_gallery_featured_image( _thumbnail_id );
+      // }
 
       // Make gallery sortable.
       $( '.wp-travel-open-uploaded-images ul' ).sortable({
