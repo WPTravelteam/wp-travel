@@ -8,5 +8,9 @@ jQuery(document).ready( function( $ ) {
 	$('.wp-travel-booking-reset').click( function(){
 		$(this).closest('form').slideUp('slow').siblings('.wp-travel-book-now').slideToggle('slow');
 	} );
+
+	$(document).on( 'click', '.wp-travel-booknow-btn', function() {		
+		$( ".wp-travel-booking-form" ).trigger( "click" );
+	} );
 	
 } );
