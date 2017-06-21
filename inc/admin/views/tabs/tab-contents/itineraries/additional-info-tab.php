@@ -2,11 +2,14 @@
 	global $post;
 
 	$price 		= get_post_meta( $post->ID, 'wp_travel_price', true );
+	$sale_price = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
 	$outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true );
 	$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 	$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 	$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
 	$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
+
+	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
 
 	echo '<div class="trip-type-wrap itineraries-tax-wrap">';
 	post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'itinerary_types' ) ) );
@@ -22,6 +25,22 @@
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
+
+	<tr>
+		<td><label for="wp-travel-price"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
+		<td>
+			
+			<label>
+				<input type="checkbox" name="wp_travel_enable_sale" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" />
+				<span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
+			</label>
+		</td>
+	</tr>
+	<tr>
+		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
+		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
+	</tr>
+
 	<tr>
 		<td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
