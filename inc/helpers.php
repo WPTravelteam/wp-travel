@@ -125,3 +125,92 @@ function get_wp_travel_map_data() {
 		);
 	return $map_meta;
 }
+
+
+function wp_travel_get_related_post( $post_id ) {
+
+	if ( ! $post_id ) {
+		return;
+	}
+	$settings = wp_traval_get_settings();	
+	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
+	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+
+	//for use in the loop, list 5 post titles related to first tag on current post
+	 $terms = wp_get_object_terms( $post_id, 'itinerary_types' );
+	 if ( $terms ) {
+	 	if ( isset( $terms[0]->term_id ) ) {
+
+		 	$args = array(
+			'post_type' => 'itineraries',
+			'post__not_in' => array( $post_id ),
+			'posts_per_page' => 4,
+			'tax_query' => array(
+			    array(
+			    'taxonomy' => 'itinerary_types',
+			    'field' => 'id',
+			    'terms' => $terms[0]->term_id
+			     )
+			  )
+			);
+			$query = new WP_Query( $args );
+
+			if( $query->have_posts() ) { ?>
+				<div class="wp-travel-related-posts wp-travel-container-wrap">
+					<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Trips', 'wp-travel' ) ); ?></h2>
+				    <div class="wp-travel-row-wrap">
+						
+						<?php while ($query->have_posts()) : $query->the_post(); ?>
+							<?php 
+							$trip_price 	= get_post_meta( get_the_ID(), 'wp_travel_price', true );
+							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
+							$sale_price 	= get_post_meta( get_the_ID(), 'wp_travel_sale_price', true );
+							?>
+							<div class="related-post-item-wrapper">
+							    <div class="related-post-wrap-bg">
+									<div class="related-post-content">
+
+										<h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+										<span class="post-category">
+											<?php echo get_the_term_list( get_the_ID(), 'itinerary_types', '', ', ', '' ) ?>
+										</span>
+									</div>
+									<div class="related-post-thumbnail">
+									  <a href="<?php the_permalink() ?>">
+										<?php the_post_thumbnail(); ?>
+									   </a>
+									</div>
+									<div class="recent-post-bottom-meta">
+										<div class="wp-travel-trip-detail">
+											<div class="trip-price" >
+											<?php if ( $enable_sale ) : ?>
+											    <del>
+											<?php else: ?>
+												<ins>
+											<?php endif; ?>
+											      <span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+											<?php if ( $enable_sale ) : ?>
+											    </del>
+											    <ins>
+											      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
+											    </ins>
+											<?php else: ?>
+												</ins>
+											<?php endif; ?>
+											    <span class="person-count">/person</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						<?php endwhile; ?>
+					</div>
+				</div>
+			<?php
+			}
+			wp_reset_query();
+	 	}
+
+	 }
+}
