@@ -247,6 +247,21 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_price', $wp_travel_price );
 		}
 
+		$wp_travel_enable_sale = 0;
+		if ( isset( $_POST['wp_travel_enable_sale'] ) ) {
+			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_enable_sale', $wp_travel_enable_sale );
+		if ( isset( $_POST['wp_travel_sale_price'] ) ) {
+			$wp_travel_sale_price = sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) );
+			update_post_meta( $post_id, 'wp_travel_sale_price', $wp_travel_sale_price );
+		}
+
+		if ( isset( $_POST['wp_travel_group_size'] ) ) {
+			$wp_travel_group_size = sanitize_text_field( wp_unslash( $_POST['wp_travel_group_size'] ) );
+			update_post_meta( $post_id, 'wp_travel_group_size', $wp_travel_group_size );
+		}
+
 		if ( isset( $_POST['wp_travel_trip_include'] ) ) {
 			$wp_travel_trip_include = $_POST['wp_travel_trip_include'];
 			update_post_meta( $post_id, 'wp_travel_trip_include', $wp_travel_trip_include );
