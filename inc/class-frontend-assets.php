@@ -12,6 +12,8 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_style( 'wp-travel-style-front-end', $this->assets_path . 'assets/css/wp-travel-front-end.css' );
 		wp_enqueue_style( 'wp-travel-style-popup', $this->assets_path . 'assets/css/magnific-popup.css' );
 		wp_enqueue_style( 'dashicons' );
+		wp_enqueue_style( 'easy-responsive-tabs', $this->assets_path . 'assets/css/easy-responsive-tabs.css' );
+		wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Inconsolata' );
 	}
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -47,6 +49,8 @@ class WP_Travel_Frontend_Assets {
 
 		// Enqueued script with localized data.
 		wp_enqueue_script( 'traval-door-script' );
+
+		wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 	}
 }
 
