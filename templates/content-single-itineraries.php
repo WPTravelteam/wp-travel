@@ -17,14 +17,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="content entry-content">
 		<div class="wp-travel trip-headline-wrapper">
 	         <div class="wp-travel-feature-slide-content featured-side-image left-plot">
-	         	<?php the_post_thumbnail(); ?>
+	           <div class="banner-image-wrapper" style="background:url(<?php echo  get_the_post_thumbnail_url(); ?>)">
+	         	   <!--  <?php the_post_thumbnail(); ?> -->
+	         	</div>
 	         </div>
 	         <div class="wp-travel-feature-slide-content featured-detail-section right-plot">
-	         	<?php do_action( 'wp_tarvel_before_single_title', get_the_ID() ) ?>
-	         	<header class="entry-header">
-				<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-				</header>
-				<?php do_action( 'wp_tarvel_after_single_title', get_the_ID() ) ?>
+	           <div class="right-plot-inner-wrap">
+		         	<?php do_action( 'wp_tarvel_before_single_title', get_the_ID() ) ?>
+		         	<header class="entry-header">
+					<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+					</header>
+					<?php do_action( 'wp_tarvel_after_single_title', get_the_ID() ) ?>
+				</div>
 	        </div>
 	    </div>
 	    <?php do_action( 'wp_travel_after_single_itinerary_header', get_the_ID() ); ?>
