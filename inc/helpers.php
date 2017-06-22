@@ -1,4 +1,16 @@
 <?php
+/**
+ * Helper Functions.
+ *
+ * @package wp-travel/inc
+ */
+
+/**
+ * Return all Gallery ID of specific post.
+ *
+ * @param  int $post_id ID f the post.
+ * @return array Return gallery ids.
+ */
 function wp_travel_get_gallery_ids( $post_id ) {
 	$gallery_ids = get_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', true );
 	if ( false === $gallery_ids || empty( $gallery_ids ) ) {
@@ -13,7 +25,12 @@ function wp_traval_get_settings() {
 	return $settings;
 }
 
-/** Return Trip Code */
+/**
+ * Return Trip Code.
+ *
+ * @param  int $post_id Post ID of post.
+ * @return string Returns the trip code.
+ */
 function wp_traval_get_trip_code( $post_id ) {
 	if ( ! $post_id ) {
 		return;
@@ -71,7 +88,7 @@ function wp_traval_get_dropdown_currency_list( $args = array() ) {
  * @param Int    $parent_id Parent ID of post.
  * @return Object Return Tree Form of post Object.
  */
-function wp_traval_build_post_tree(array &$elements, $parent_id = 0) {
+function wp_traval_build_post_tree( array &$elements, $parent_id = 0 ) {
 	$branch = array();
 
 	foreach ( $elements as $element ) {
@@ -87,12 +104,21 @@ function wp_traval_build_post_tree(array &$elements, $parent_id = 0) {
 	return $branch;
 }
 
-function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level= 0, $echo = true ) {
+/**
+ * [wp_traval_get_post_hierarchy_dropdown description]
+ *
+ * @param  [type]  $list_serialized [description].
+ * @param  [type]  $selected        [description].
+ * @param  integer $nesting_level   [description].
+ * @param  boolean $echo            [description].
+ * @return [type]                   [description]
+ */
+function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level = 0, $echo = true ) {
 	$contents = '';
 	if ( $list_serialized ) :
-		
+
 		$space = '';
-		for ( $i=1; $i<= $nesting_level; $i ++ ) {
+		for ( $i = 1; $i <= $nesting_level; $i ++ ) {
 			$space .= '&nbsp;&nbsp;&nbsp;';
 		}
 
@@ -107,11 +133,13 @@ function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 	if ( ! $echo ) {
 		return $contents;
 	}
-
 	echo $contents;
 	return false;
 }
 
+/**
+ * Get Map Data.
+ */
 function get_wp_travel_map_data() {
 	global $post;
 	$lat = ( '' != get_post_meta( $post->ID, 'wp_traval_lat', true ) ) ? get_post_meta( $post->ID, 'wp_traval_lat', true ) : 27.6727305;
@@ -136,7 +164,7 @@ function wp_travel_get_related_post( $post_id ) {
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
 
-	//for use in the loop, list 5 post titles related to first tag on current post
+	// for use in the loop, list 5 post titles related to first tag on current post.
 	 $terms = wp_get_object_terms( $post_id, 'itinerary_types' );
 	 if ( $terms ) {
 	 	if ( isset( $terms[0]->term_id ) ) {
@@ -158,13 +186,13 @@ function wp_travel_get_related_post( $post_id ) {
 			if( $query->have_posts() ) { ?>
 				<div class="wp-travel-related-posts wp-travel-container-wrap">
 					<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Trips', 'wp-travel' ) ); ?></h2>
-				    <div class="wp-travel-row-wrap">
-						
+				    <div class="wp-travel-row-wrap">						
 						<?php while ($query->have_posts()) : $query->the_post(); ?>
 							<?php 
-							$trip_price 	= get_post_meta( get_the_ID(), 'wp_travel_price', true );
+							$trip_price 	= wp_travel_get_trip_price( get_the_ID() );
 							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-							$sale_price 	= get_post_meta( get_the_ID(), 'wp_travel_sale_price', true );
+							$sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() );
+							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 							?>
 							<div class="related-post-item-wrapper">
 							    <div class="related-post-wrap-bg">
@@ -176,9 +204,14 @@ function wp_travel_get_related_post( $post_id ) {
 										</span>
 									</div>
 									<div class="related-post-thumbnail">
-									  <a href="<?php the_permalink() ?>">
-										<?php the_post_thumbnail(); ?>
-									   </a>
+									 	<a href="<?php the_permalink() ?>">
+										<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
+									   	</a>
+									   	<?php if ( $enable_sale ) : ?>
+						      			<div class="wp-travel-offer">
+						      			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
+						      			</div>
+						      			<?php endif; ?>
 									</div>
 									<div class="recent-post-bottom-meta">
 										<div class="wp-travel-trip-detail">
@@ -197,7 +230,7 @@ function wp_travel_get_related_post( $post_id ) {
 											<?php else: ?>
 												</ins>
 											<?php endif; ?>
-											    <span class="person-count">/person</span>
+											    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel' ) ?></span>
 											</div>
 										</div>
 									</div>
@@ -211,6 +244,66 @@ function wp_travel_get_related_post( $post_id ) {
 			}
 			wp_reset_query();
 	 	}
-
+	 } else {
+	 	echo '<p>' . esc_html( 'Related Post Not found' ). '</p>';
 	 }
+}
+
+/**
+ * Return Trip Price.
+ *
+ * @param  int $post_id Post id of the post
+ * @return int Trip Price.
+ */
+function wp_travel_get_trip_price( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		return 0;
+	}
+	$trip_price 	= get_post_meta( $post_id, 'wp_travel_price', true );
+	if ( $trip_price ) {
+		return $trip_price;
+	}
+	return 0;
+}
+
+/**
+ * Return Trip Sale Price.
+ *
+ * @param  int $post_id Post id of the post.
+ * @return int Trip Price.
+ */
+function wp_travel_get_trip_sale_price( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		return 0;
+	}
+	$trip_sale_price 	= get_post_meta( $post_id, 'wp_travel_sale_price', true );
+	if ( $trip_sale_price ) {
+		return $trip_sale_price;
+	}
+	return 0;
+}
+
+function wp_travel_get_post_thumbnail( $post_id, $size = 'post-thumbnail' ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+	$thumbnail = get_the_post_thumbnail( $post_id, $size );
+
+	if ( ! $thumbnail ) {
+		$thumbnail = '<img width="100%" height="100%" src="' . plugins_url( '/wp-travel/images/wp-travel-placeholder.png' ) . '">';
+	}
+	return $thumbnail;
+}
+
+function wp_travel_get_post_thumbnail_url( $post_id, $size = 'post-thumbnail' ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	$thumbnail = get_the_post_thumbnail_url( $post_id, $size );
+
+	if ( ! $thumbnail ) {
+		$thumbnail = plugins_url( '/wp-travel/images/wp-travel-placeholder.png' );
+	}
+	return $thumbnail;
 }
