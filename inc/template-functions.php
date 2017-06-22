@@ -1,30 +1,61 @@
 <?php
+/**
+ * Template Functions.
+ *
+ * @package wp-travel/inc/
+ */
+
+/**
+ * Return template.
+ *
+ * @param  String $path Path of template.
+ * @param  array  $args arguments.
+ * @return Mixed
+ */
 function wp_travel_get_template( $path, $args = array() ) {
-	$file =  sprintf( '%s/templates/%s', untrailingslashit( plugin_dir_path( dirname( __FILE__ ) ) ), $path );
+	$file = sprintf( '%s/templates/%s', untrailingslashit( plugin_dir_path( dirname( __FILE__ ) ) ), $path );
 	if ( file_exists( $file ) ) {
 		return $file;
 	}
 	return false;
 }
 
+/**
+ * Get Template Part.
+ *
+ * @param  String $slug Name of slug.
+ * @param  string $name Name of file / template.
+ */
 function wp_travel_get_template_part( $slug, $name = '' ) {
 	$template = '';
 	$file_name = ( $name ) ? "{$slug}-{$name}.php" : "{$slug}.php";
-	if( $name ) {
+	if ( $name ) {
 		$template = wp_travel_get_template( $file_name );
 	}
 	if ( $template ) {
-    load_template( $template, false );
-  }
+		load_template( $template, false );
+	}
 }
 
+/**
+ * Load Template
+ *
+ * @param  String $path Path of template.
+ * @param  array  $args Template arguments.
+ */
 function wp_travel_load_template( $path, $args = array() ) {
 	$template = wp_travel_get_template( $path, $args );
-	if( $template ){
+	if ( $template ) {
 		include $template;
 	}
 }
 
+/**
+ * WP Travel Single Page Content.
+ *
+ * @param  String $content HTML content.
+ * @return String
+ */
 function wp_travel_content_filter( $content ) {
 
 	if ( ! is_singular( 'itineraries' ) ) {
@@ -47,21 +78,17 @@ function wp_travel_content_filter( $content ) {
 	return $content;
 }
 
-add_filter( 'the_content', 'wp_travel_content_filter' );
-
 /**
- * Wrapper Start
+ * Wrapper Start.
  */
-add_action ( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
-
 function wp_travel_wrapper_start() {
 	if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+		exit; // Exit if accessed directly.
+	}
 
-$template = get_option( 'template' );
+	$template = get_option( 'template' );
 
-	switch( $template ) {
+	switch ( $template ) {
 		case 'twentyeleven' :
 			echo '<div id="primary"><div id="content" role="main" class="twentyeleven">';
 			break;
@@ -84,17 +111,18 @@ $template = get_option( 'template' );
 			echo '<div class="wrap"><div id="primary" class="content-area twentyseventeen"><div id="main" class="site-main">';
 			break;
 		default :
-			echo '<div id="container"><div id="content" class="wp-travel-content" role="main">';
+			echo '<div class="container"><div id="wp-travel-content" class="wp-travel-content" role="main">';
 			break;
 	}
 }
 
-add_action ( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
-
+/**
+ * Wrapper Ends.
+ */
 function wp_travel_wrapper_end() {
 	$template = get_option( 'template' );
 
-	switch( $template ) {
+	switch ( $template ) {
 		case 'twentyeleven' :
 			echo '</div></div>';
 			break;
@@ -123,19 +151,6 @@ function wp_travel_wrapper_end() {
 	}
 }
 
-
-
-
-
-// Hooks.
-add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
-add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
-
-add_action ( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
-
-add_action ( 'wp_travel_after_single_itinerary_header', 'wp_travel_sintle_trip_map' );
-
-
 /**
  * Add html of trip price.
  *
@@ -143,17 +158,18 @@ add_action ( 'wp_travel_after_single_itinerary_header', 'wp_travel_sintle_trip_m
  */
 function wp_travel_trip_price( $post_id ) {
 	$settings = wp_traval_get_settings();
-	$trip_price 	= get_post_meta( $post_id, 'wp_travel_price', true );
+	$trip_price 	= wp_travel_get_trip_price( $post_id );
+
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
-	$sale_price 	= get_post_meta( $post_id, 'wp_travel_sale_price', true );
+	$sale_price 	= wp_travel_get_trip_sale_price();
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
-
+    <div class="wp-detail-review-wrap">
 	<div class="wp-travel-trip-detail">
 		<div class="trip-price" >
 		<?php if ( $enable_sale ) : ?>
 		    <del>
-		<?php else: ?>
+		<?php else : ?>
 			<ins>
 		<?php endif; ?>
 		      <span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
@@ -162,10 +178,10 @@ function wp_travel_trip_price( $post_id ) {
 		    <ins>
 		      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
 		    </ins>
-		<?php else: ?>
+		<?php else : ?>
 			</ins>
 		<?php endif; ?>
-		    <span class="person-count">/person</span>
+		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
 		</div>
 	</div>
 	<?php  $average_rating = wp_travel_get_average_rating(); ?>
@@ -176,6 +192,7 @@ function wp_travel_trip_price( $post_id ) {
 			</span>
 		</a>
 
+	</div>
 	</div>
 	
 <?php
@@ -191,13 +208,10 @@ function wp_travel_single_excerpt( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
-
-	?>
+	$group_size = get_post_meta( $post_id, 'wp_travel_group_size', true ); ?>
 	<div class="trip-short-desc">
-	   <?php the_excerpt(); ?>
+		<?php the_excerpt(); ?>
 	</div>
-
 	  <div class="wp-travel-trip-meta-info">
 	  	 <ul>
 	  	    <li>
@@ -228,6 +242,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="value"><?php printf( '%d pax', $group_size ) ?></span>
 				</div>
 	  	 	</li>
+			<?php if( comments_open() ) : ?>
 	  	 	<li>
 	  	 		<div class="travel-info">
 					<strong class="title"><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></strong>
@@ -238,18 +253,20 @@ function wp_travel_single_excerpt( $post_id ) {
 					$count = (int) get_comments_number();
 					echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
 					printf( _n( '%s review', '%s reviews', $count, 'wp-travel' ), $count );
-					echo '</a>';
-				?>
-				</span>
-					
+					echo '</a>'; ?>
+				</span>					
 				</div>
 	  	 	</li>
+			<?php endif; ?>
 	  	 </ul>
 	  </div>
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
+			<?php if( isset( $_POST['wp_travel_book_now'] ) ) : ?>
+				<p><?php  echo apply_filters( 'wp_travel_booked_message', 'Your Trip have been booked' ); ?></p>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php
@@ -261,7 +278,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_exclude	= get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 	$gallery_ids 	= get_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', true );
 	?>	
-	<?php if ( '' != $trip_outline ) : ?>
+	
 
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<ul class="wp-travel tab-list resp-tabs-list ">
@@ -269,8 +286,10 @@ function wp_travel_frontend_contents( $post_id ) {
 			<li class="content-li" data-tab="tab-1"><?php esc_html_e( 'Trip Outline', 'wp-travel' ); ?></li>
 			<li class="content-li" data-tab="tab-2"><?php esc_html_e( 'Trip Include', 'wp-travel' ) ?></li>
 			<li class="content-li" data-tab="tab-3"><?php esc_html_e( 'Trip Exclude', 'wp-travel' ) ?></li>
-			<li class="content-li" data-tab="tab-4"><?php esc_html_e( 'Gallery', 'wp-travel' ) ?></li>
+			<li class="content-li wp-travel-tab-gallery-contnet" data-tab="tab-4"><?php esc_html_e( 'Gallery', 'wp-travel' ) ?></li>
+			<?php if ( comments_open() ) : ?>
 			<li class="content-li wp-travel-review" data-tab="tab-6"><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></li>
+			<?php endif; ?>
 			<li class="content-li wp-travel-booking-form" data-tab="tab-7"><?php esc_html_e( 'Booking', 'wp-travel' ) ?></li>
 		</ul>
 		<div class="resp-tabs-container">
@@ -302,100 +321,24 @@ function wp_travel_frontend_contents( $post_id ) {
 						</ul>
 					</div>
 				</div>
+				<?php else : ?>
+					<?php esc_html_e( 'Empty gallery images', 'wp-travel' ); ?>
 				<?php endif; ?>
 			</div>
-			
-			<div id="tab-6" class="tab-list-content">
-				<?php
-				if ( ! comments_open() ) {
-					return;
-				}
-				?>
-
-			    <div class="review-main-wrapper">
-			    	<?php 
-			    	$args = array( 'post_id' => $post_id, 'comment_approved' => '1' );
-			    	$comments = get_comments( $args ); ?>
-			    	<div class="wp-travel-review-count">
-				    	<?php
-						$count = wp_travel_get_review_count();
-						printf( _n( '<h3>%s review for %s', '%s reviews for %s </h3>', $count, 'wp-travel' ), $count, get_the_title() );
-						?>
-					</div>
-					<?php foreach ( $comments as $comment ) : ?>
-						<?php $rating = get_comment_meta( $comment->comment_ID, '_wp_travel_rating', true ); ?>
-						<div class="wp-tab-review-inner-wrapper">
-							<div class="author-img-wrapper">
-
-								<img src="<?php _e( get_avatar_url( $comment->comment_author_email ) ); ?>">
-							</div>
-							<div class="review-content-wrapper">
-								<div class="wp-travel-star-rating">
-									<?php for( $i=1; $i <= 5; $i++ ) : ?>
-										<?php $class_name = ( $rating >= $i ) ? 'dashicons-star-filled' : 'dashicons-star-empty' ?>
-										<a class="dashicons <?php esc_html_e( $class_name ) ?>"></a>
-									<?php endfor; ?>								
-								</div>
-								<p class="meta-items">
-					                <strong class="author-name"><?php echo wpautop( $comment->comment_author ) ?></strong> 
-					                <time class="wp-travel-review-published-date" datetime="">
-					                <?php echo date( get_option('date_format'), strtotime( $comment->comment_date ) ) ?>				                	
-					                </time>
-				                </p>
-				                <div class="description-review">
-				                	<?php echo wpautop( $comment->comment_content ) ?>
-				                </div>
-							</div>
-						</div>
-					 <?php endforeach;  ?>
-
-					<div class="wp-travel-form-review">
-						<?php
-						$commenter = wp_get_current_commenter();
-
-						$comment_form = array(
-							'title_reply'          => $comments ? __( 'Add a review', 'wp_travel' ) : sprintf( __( 'Be the first to review &ldquo;%s&rdquo;', 'wp_travel' ), get_the_title() ),
-							'title_reply_to'       => __( 'Leave a Reply to %s', 'wp_travel' ),
-							'comment_notes_before' => '',
-							'comment_notes_after'  => '',
-							'fields'               => array(
-								'author' => '<p class="comment-form-author">' . '<label for="author">' . __( 'Name', 'wp_travel' ) . ' <span class="required">*</span></label> ' .
-								            '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" /></p>',
-								'email'  => '<p class="comment-form-email"><label for="email">' . __( 'Email', 'wp_travel' ) . ' <span class="required">*</span></label> ' .
-								            '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-required="true" /></p>',
-							),
-							'label_submit'  => __( 'Submit', 'wp_travel' ),
-							'logged_in_as'  => '',
-							'comment_field' => ''
-						);
-
-						$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp_travel' ) .'</label><div id="wp_travel_rate" class="clearfix">
-	                            <a href="#" class="rate_label dashicons dashicons-star-empty" data-id="1"></a>
-	                            <a href="#" class="rate_label dashicons dashicons-star-empty" data-id="2"></a>
-	                            <a href="#" class="rate_label dashicons dashicons-star-empty" data-id="3"></a>
-	                            <a href="#" class="rate_label dashicons dashicons-star-empty" data-id="4"></a>
-	                            <a href="#" class="rate_label dashicons dashicons-star-empty" data-id="5"></a>
-	                        </div>
-	                        <input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
-
-						$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'wp_travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
-
-						comment_form( apply_filters( 'wp_travel_product_review_comment_form_args', $comment_form ) ); ?>					
-					</div>
-				</div>
+			<?php if ( comments_open() ) : ?>
+			<div id="tab-6" class="tab-list-content ">
+			    <?php comments_template(); ?>
 			</div><!-- Tab 6 ends -->
+			<?php endif; ?>
 			<div id="tab-7" class="tab-list-content ">
 				<?php echo wp_travel_get_booking_form(); ?>
 			</div>
 		</div>
 	</div>
-		
-	<?php endif; ?>
-	
 <?php
 }
 
-function wp_travel_sintle_trip_map( $post_id ) {
+function wp_travel_trip_map( $post_id ) {
 	$settings = wp_traval_get_settings();
 	if ( ! isset( $settings['google_map_api_key'] ) || '' == $settings['google_map_api_key'] ) {
 		return;
@@ -404,8 +347,7 @@ function wp_travel_sintle_trip_map( $post_id ) {
 	<div class="wp-travel-map">
 		<div id="gmap" style="width:100%;height:300px"></div>	
 	</div>
-	<?php 
-	wp_travel_get_related_post( $post_id );	
+	<?php wp_travel_get_related_post( $post_id );
 }
 
 function wp_travel_add_comment_rating( $comment_id ) {
@@ -416,13 +358,6 @@ function wp_travel_add_comment_rating( $comment_id ) {
 		add_comment_meta( $comment_id, '_wp_travel_rating', (int) esc_attr( $_POST['wp_travel_rate_val'] ), true );
 	}
 }
-
-add_action( 'comment_post', 'wp_travel_add_comment_rating' );
-add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
-
-// Clear transients.
-add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
-
 
 function wp_travel_clear_transients( $post_id ) {
 	delete_post_meta( $post_id, '_wpt_average_rating' );
@@ -453,7 +388,7 @@ function wp_travel_verify_comment_meta_data( $commentdata ) {
 function wp_travel_get_review_count() {
 	global $wpdb, $post;
 
-	// No meta date? Do the calculation
+	// No meta date? Do the calculation.
 	if ( ! metadata_exists( 'post', $post->ID, '_wpt_review_count' ) ) {
 		$count = $wpdb->get_var( $wpdb->prepare("
 			SELECT COUNT(*) FROM $wpdb->comments
@@ -472,14 +407,15 @@ function wp_travel_get_review_count() {
 
 /**
  * Get the average rating of product. This is calculated once and stored in postmeta.
+ *
  * @return string
  */
 function wp_travel_get_average_rating() {
 	global $wpdb, $post;
 
-	// No meta data? Do the calculation
+	// No meta data? Do the calculation.
 	if ( ! metadata_exists( 'post', $post->ID, '_wpt_average_rating' ) ) {
-		
+
 		if ( $count = wp_travel_get_rating_count() ) {
 			$ratings = $wpdb->get_var( $wpdb->prepare("
 				SELECT SUM(meta_value) FROM $wpdb->commentmeta
@@ -495,7 +431,7 @@ function wp_travel_get_average_rating() {
 		}
 		update_post_meta( $post->ID, '_wpt_average_rating', $average );
 	} else {
-		
+
 		$average = get_post_meta( $post->ID, '_wpt_average_rating', true );
 	}
 
@@ -504,15 +440,16 @@ function wp_travel_get_average_rating() {
 
 /**
  * Get the total amount (COUNT) of ratings.
+ *
  * @param  int $value Optional. Rating value to get the count for. By default returns the count of all rating values.
  * @return int
  */
 function wp_travel_get_rating_count( $value = null ) {
 	global $wpdb, $post;
 
-	// No meta data? Do the calculation
-	if ( ! metadata_exists( 'post', $post->ID, '_wpt_rating_count' ) ) {	
-		
+	// No meta data? Do the calculation.
+	if ( ! metadata_exists( 'post', $post->ID, '_wpt_rating_count' ) ) {
+
 		$counts     = array();
 		$raw_counts = $wpdb->get_results( $wpdb->prepare("
 			SELECT meta_value, COUNT( * ) as meta_value_count FROM $wpdb->commentmeta
@@ -539,3 +476,41 @@ function wp_travel_get_rating_count( $value = null ) {
 		return isset( $counts[ $value ] ) ? $counts[ $value ] : 0;
 	}
 }
+
+
+
+function wp_travel_comments_template_loader( $template ) {
+	if ( get_post_type() !== 'itineraries' ) {
+		return $template;
+	}
+
+	$check_dirs = array(
+			trailingslashit( get_stylesheet_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
+			trailingslashit( get_template_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
+			trailingslashit( get_stylesheet_directory() ),
+			trailingslashit( get_template_directory() ),
+			trailingslashit( WP_TRAVEL_PLUGIN_PATH ) . 'templates/',
+		);
+	foreach ( $check_dirs as $dir ) {
+		if ( file_exists( trailingslashit( $dir ) . 'single-wp-travel-reviews.php' ) ) {
+			return trailingslashit( $dir ) . 'single-wp-travel-reviews.php';
+		}
+	}
+}
+
+// Hooks.
+add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
+add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
+add_filter( 'the_content', 'wp_travel_content_filter' );
+add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
+add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
+
+add_action( 'comment_post', 'wp_travel_add_comment_rating' );
+add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
+
+// Clear transients.
+add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
+
+add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
