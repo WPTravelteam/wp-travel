@@ -25,7 +25,7 @@ p {
 
 .resp-tabs-container {
   padding: 0px;
-  background-color: #fff;
+ /* background-color: #fff;*/
   clear: left;
 }
 
@@ -41,10 +41,10 @@ h2.resp-accordion {
 }
 
 .resp-tab-active {
-  border: 1px solid #c1c1c1;
+/*  border: 1px solid #c1c1c1;
   border-bottom: none;
   margin-bottom: -1px !important;
-  padding: 12px 14px 14px 14px !important;
+  padding: 12px 14px 14px 14px !important;*/
 }
 
 .resp-tab-active {
@@ -59,16 +59,17 @@ h2.resp-accordion {
 
 h2.resp-accordion {
   font-size: 13px;
-  border: 1px solid #c1c1c1;
-  border-top: 0px solid #c1c1c1;
+  border:1px solid rgba(222, 222, 222, 0.49);
+  /*border-top: 0px solid #c1c1c1;*/
   margin: 0px;
-  padding: 10px 15px;
+  padding: 14px 17px;
+  border-radius: 3px;
 }
 
 h2.resp-tab-active {
-  border-bottom: 0px solid #c1c1c1 !important;
+ /* border-bottom: 0px solid #c1c1c1 !important;
   margin-bottom: 0px !important;
-  padding: 10px 15px !important;
+  padding: 10px 15px !important;*/
 }
 
 h2.resp-tab-title:last-child {
@@ -133,11 +134,11 @@ h2.resp-tab-active span.resp-arrow {
 
 /*-----------Accordion styles-----------*/
 
-h2.resp-tab-active { background: #DBDBDB !important; }
+h2.resp-tab-active { background: #f9f9f9; }
 
 .resp-easy-accordion h2.resp-accordion { display: block; }
 
-.resp-easy-accordion .resp-tab-content { border: 1px solid #c1c1c1; }
+/*.resp-easy-accordion .resp-tab-content { border: 1px solid #c1c1c1; }*/
 
 .resp-easy-accordion .resp-tab-content:last-child { border-bottom: 1px solid #c1c1c1 !important; }
 
@@ -148,7 +149,7 @@ h2.resp-tab-active { background: #DBDBDB !important; }
 
 .resp-tab-content-active { display: block; }
 
-h2.resp-accordion:first-child { border-top: 1px solid #c1c1c1 !important; }
+h2.resp-accordion:first-child { /*border-top: 1px solid #c1c1c1 !important; */}
 /*Here your can change the breakpoint to set the accordion, when screen resolution changed*/
 @media only screen and (max-width: 768px) {
 

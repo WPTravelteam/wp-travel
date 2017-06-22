@@ -3,14 +3,18 @@ jQuery( document ).ready( function($){
 	function wp_travel_set_equal_height() {
 		var base_height = 0;
 		$('.wp-travel-feature-slide-content').css({'height':'auto'});
-		$( '.wp-travel-feature-slide-content' ).each( function(){
-			if ( $( this ).height() > base_height ) {
-				base_height = $( this ).height();
+		var winWidth = window.innerWidth;		
+		if ( winWidth > 992 ) {
+
+			$( '.wp-travel-feature-slide-content' ).each( function(){
+				if ( $( this ).height() > base_height ) {
+					base_height = $( this ).height();
+				}
+			} );
+			if( base_height > 0 ) {
+				$( '.trip-headline-wrapper .left-plot' ).height( base_height ); // Adding Padding of right plot.
+				$( '.trip-headline-wrapper .right-plot' ).height( base_height ); 
 			}
-		} );
-		if( base_height > 0 ) {
-			$( '.trip-headline-wrapper .left-plot' ).height( base_height ); // Adding Padding of right plot.
-			$( '.trip-headline-wrapper .right-plot' ).height( base_height ); 
 		}
 	}
 	wp_travel_set_equal_height();
@@ -44,16 +48,6 @@ jQuery( document ).ready( function($){
 	    enabled:true
 	  }
 	});
-	// $('ul.tab-list li').click(function(){
-	// 	var tab_id = $(this).attr('data-tab');
-
-	// 	$('ul.tab-list li').removeClass('current-content');
-	// 	$('.tab-list-content').removeClass('current-content');
-
-	// 	$(this).addClass('current-content');
-	// 	$("#"+tab_id).addClass('current-content');
-	// });
-
 	$('#wp-travel-tab-wrapper').easyResponsiveTabs({
 		type: 'default', //Types: default, vertical, accordion           
 		width: 'auto', //auto or any width like 600px
@@ -101,21 +95,29 @@ jQuery( document ).ready( function($){
 	});
 	// Rating script ends.
 	// 
-	// 
-	$(document).on( 'click', '.wp-travel-count-info', function() {		
+
+	$(document).on( 'click', '.wp-travel-count-info', function( e ) {
+		e.preventDefault();
 		$( ".wp-travel-review" ).trigger( "click" );
 	} );
 
-	// Scroll on click
-	$(document).on( 'click', '.wp-travel-count-info, .wp-travel-booknow-btn', function() {		
-		
-		var tabHeight = $('.wp-travel-tab-wrapper').offset().top; 
+	$(document).on( 'click', '.top-view-gallery', function( e ) {
+		e.preventDefault();
+		$( ".wp-travel-tab-gallery-contnet" ).trigger( "click" );
+	} );
+
+	$(document).on( 'click', '.wp-travel-count-info, .top-view-gallery', function( e ) {
+		e.preventDefault();
+		var winWidth = $(window).width();
+		var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
+		if ( winWidth < 767 ) {			
+			var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
+		}
 		$('html, body').animate({
 		      scrollTop: ( tabHeight )
 		    }, 1200 );
+
 	} );
-
-
 
 	// Scroll and resize event
 	$(window).on("scroll",function(e){
@@ -129,19 +131,16 @@ jQuery( document ).ready( function($){
 
 		var winScrollTop 	= $( window ).scrollTop();
 		if ( winScrollTop < ( tabWrapperTopOffset + tabWrapperHeight ) &&  winScrollTop >= tabWrapperTopOffset ) {
-			tabMenu.addClass( 'fixed' );
+			tabMenu.addClass( 'custom-container fixed' );
 			tabWrapper.css( {'padding-top': tabMenuHeight} );
 		} else {
-			tabMenu.removeClass( 'fixed' );
+			tabMenu.removeClass( 'custom-container fixed' );
 			tabWrapper.css( {'padding-top': 0} );
 		}
 		
 	});
 	$(window).on("resize",function(e){
 		wp_travel_set_equal_height();
-		console.log( 'resized' );
 	});
-
-
 
 } );

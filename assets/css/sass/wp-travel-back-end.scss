@@ -1,6 +1,36 @@
 // Define variables.
 $alabaster: #f7f7f1; // Red like color.
+@mixin large-screen{
+   @media(max-width: 1000px){
+      @content;
+    }
+}
 
+@mixin tab{
+  @media (max-width: 1024px){
+    @content;
+    }
+}
+@mixin sidr-view{
+  @media (max-width:992px){
+    @content;
+  }
+}
+@mixin mob{
+  @media (max-width: 767px){
+    @content;
+    }
+}
+@mixin sm{
+    @media (max-width: 640px){
+       @content;
+    }
+}
+@mixin xs{
+  @media (max-width: 500px){
+    @content;
+    }
+}
 // Remove wordpress metabox styles and hide buttons.
 .wp-travel-clean-metabox {
   background: $alabaster;
@@ -295,4 +325,36 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 	border: 1px solid #f1f1f1;
 	margin: 0 0 40px 0;
 	padding: 10px 10px 10px 20px;
+}
+
+//booking-form
+.wp-travel-form-field {
+    width: 45%;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 0 15px;
+    @include sidr-view{
+    	width: 95%;
+    }
+    label {
+		margin-bottom: 5px;
+		display: block;
+	}
+	input {
+	    width: 100%;
+	    color: #666;
+	    border: 1px solid rgba(221, 221, 221, 0.32);
+	    border-radius: 3px;
+	    padding: 5px 10px;
+	    height: 38px;
+	    font-weight: 300;
+	    box-shadow:none;
+	}
+	select{
+		@extend input;
+	}
+	textarea{
+		@extend input;
+		height: auto;
+	}
 }
