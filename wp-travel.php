@@ -77,6 +77,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
 			$this->define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 			$this->define( 'WP_TRAVEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+			$this->define( 'WP_TRAVEL_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			$this->define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 			$this->define( 'WP_TRAVEL_VERSION', $this->version );
 		}
 
@@ -87,7 +89,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-			register_activation_hook( __FILE__, array( $this, 'wp_travel_flush_rewrites' ) );
+			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
+			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
 
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
@@ -124,7 +127,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/booking_functions.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/booking-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/helpers.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
@@ -164,14 +167,42 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 		}
 		/**
-		 * Flush Rewrite rule.
+		 * WP Travel Activation.
 		 */
-		function wp_travel_flush_rewrites() {
+		function wp_travel_activation() {
+
+			// Flush Rewrite rule.
 			$post_type = new WP_Travel_Post_Types();
 			$post_type::init();
 			$taxonomy = new Wp_Travel_Taxonomies();
 			$taxonomy::init();
 			flush_rewrite_rules();
+
+			add_image_size( 'wp_travel_thumbnail', 255, 150, false );
+		}
+
+		function wp_travel_setup_environment () {
+			$this->add_thumbnail_support();
+			$this->add_image_sizes();
+		}
+
+		/**
+		 * Ensure post thumbnail support is turned on.
+		 */
+		private function add_thumbnail_support() {
+			if ( ! current_theme_supports( 'post-thumbnails' ) ) {
+				add_theme_support( 'post-thumbnails' );
+			}
+			add_post_type_support( 'itineraries', 'thumbnail' );
+		}
+
+		/**
+		 * Add Image site.
+		 *
+		 * @since 1.0.0
+		 */
+		private function add_image_sizes() {
+			add_image_size( 'wp_travel_thumbnail', 255, 150, true );
 		}
 
 	}
