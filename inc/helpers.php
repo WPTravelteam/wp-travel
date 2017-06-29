@@ -200,7 +200,35 @@ function wp_travel_get_related_post( $post_id ) {
 
 										<h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 										<span class="post-category">
-											<?php echo get_the_term_list( get_the_ID(), 'itinerary_types', '', ', ', '' ) ?>
+											
+										
+											<div class="entry-meta">
+												<div class="category-list-items">
+													<span class="post-category">
+													    <i class="fa fa-plane" aria-hidden="true"></i>
+													       	  <a href="" rel="tag">Hiking</a>
+													       	  <div class="caret">
+													       	     <i class="fa fa-caret-down"></i>
+														       	  <div class="sub-category-menu">
+														       	  	  	<a href="error"> Heritage tour</a>
+														       	  	  	<a href=""> Bungy Jumping</a>
+														       	  	  	<a href=""> Nature Trail Tour</a>
+														       	  	  	<a href=""> Wild Life</a>
+														       	  </div>
+													       	   </div>
+													</span>
+												</div>
+												<div class="wp-travel-average-review" title="Rated 4 out of 5">
+						<a>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+						</a>
+						<a href="">/18 Reviews</a>
+					</div>
+											</div>
 										</span>
 									</div>
 									<div class="related-post-thumbnail">
