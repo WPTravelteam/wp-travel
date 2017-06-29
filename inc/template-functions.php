@@ -165,6 +165,7 @@ function wp_travel_trip_price( $post_id ) {
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
     <div class="wp-detail-review-wrap">
+    <?php do_action( 'wp_travel_single_before_trip_price', $post_id ); ?>
 	<div class="wp-travel-trip-detail">
 		<div class="trip-price" >
 		<?php if ( $enable_sale ) : ?>
@@ -184,7 +185,26 @@ function wp_travel_trip_price( $post_id ) {
 		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
 		</div>
 	</div>
-	<?php  $average_rating = wp_travel_get_average_rating(); ?>
+	<?php do_action( 'wp_travel_single_after_trip_price', $post_id ); ?>
+	
+	</div>
+	
+<?php
+}
+
+/**
+ * Add html of Rating.
+ *
+ * @param int $post_id ID for current post.
+ */
+function wp_travel_single_trip_rating( $post_id ) {
+	if ( ! is_singular( 'itineraries' ) ) {
+		return;
+	}
+	if ( ! $post_id ) {
+		return;
+	}
+	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'classified' ), $average_rating ); ?>">
 		 <a>
 			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
@@ -192,11 +212,31 @@ function wp_travel_trip_price( $post_id ) {
 			</span>
 		</a>
 
-	</div>
-	</div>
-	
+	</div>	
 <?php
 }
+
+/**
+ * Add html of Rating.
+ *
+ * @param int $post_id ID for current post.
+ */
+function wp_travel_trip_rating( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	$average_rating = wp_travel_get_average_rating(); ?>
+	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'classified' ), $average_rating ); ?>">
+		 <a>
+			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
+				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'classified' ), '<span itemprop="bestRating">', '</span>' ); ?>
+			</span>
+		</a>
+
+	</div>	
+<?php
+}
+
 
 /**
  * Add html for excerpt and booking button.
@@ -498,9 +538,32 @@ function wp_travel_comments_template_loader( $template ) {
 	}
 }
 
+function wp_travel_template_loader( $template ) {
+
+	if ( get_post_type() !== 'itineraries' ) {
+		return $template;
+	}
+
+	$check_dirs = array(
+			trailingslashit( get_stylesheet_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
+			trailingslashit( get_template_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
+			trailingslashit( get_stylesheet_directory() ),
+			trailingslashit( get_template_directory() ),
+			trailingslashit( WP_TRAVEL_PLUGIN_PATH ) . 'templates/',
+		);
+	foreach ( $check_dirs as $dir ) {
+		if ( is_post_type_archive( 'itineraries' ) ) {			
+			if ( file_exists( trailingslashit( $dir ) . 'archive-itineraries.php' ) ) {
+				return trailingslashit( $dir ) . 'archive-itineraries.php';
+			}
+		}
+	}
+}
+
 // Hooks.
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating' );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
 add_filter( 'the_content', 'wp_travel_content_filter' );
@@ -514,3 +577,5 @@ add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
 add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
 
 add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
+
+add_filter( 'template_include', 'wp_travel_template_loader' );
