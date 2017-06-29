@@ -45,10 +45,10 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'General Settings', 'wp_travel' )
 		);
 
-		$settings_fields['currency'] = array(
-			'tab_label' => __( 'Additional Info', 'wp_travel' ),
-			'content_title' => __( 'Additional Info', 'wp_travel' ),
-		);
+		// $settings_fields['currency'] = array(
+		// 	'tab_label' => __( 'Additional Info', 'wp_travel' ),
+		// 	'content_title' => __( 'Additional Info', 'wp_travel' ),
+		// );
 
 		$tabs[ self::$collection ] = $settings_fields;
 		return $tabs;
