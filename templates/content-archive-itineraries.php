@@ -48,9 +48,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="entry-meta">
 						<div class="category-list-items">
 							<span class="post-category">
-							    <i class="fa fa-plane" aria-hidden="true"></i>
 								<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
-							    <?php if ( count( $terms ) > 0 ) : ?>
+							    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
+							    	<i class="fa fa-plane" aria-hidden="true"></i>
 							    	<?php 
 							    	$first_term = array_shift( $terms );
 							    	$term_name = $first_term->name;
