@@ -82,11 +82,11 @@ class WP_Travel_Admin_Metaboxes {
 			'content_callback' => array( $this, 'call_back' ),
 		);
 
-		$itineraries['advanced'] = array(
-			'tab_label' => __( 'Advanced', 'wp-travel' ),
-			'content_title' => __( 'Advanced Options', 'wp-travel' ),
-			'content_callback' => array( $this, 'call_back' ),
-		);
+		// $itineraries['advanced'] = array(
+		// 	'tab_label' => __( 'Advanced', 'wp-travel' ),
+		// 	'content_title' => __( 'Advanced Options', 'wp-travel' ),
+		// 	'content_callback' => array( $this, 'call_back' ),
+		// );
 
 		$tabs['itineraries'] = $itineraries;
 		return apply_filters( 'wp_travel_tabs', $tabs );;
