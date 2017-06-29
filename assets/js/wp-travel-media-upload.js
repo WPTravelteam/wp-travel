@@ -18,8 +18,11 @@
         gallery_ids.push( $(this).data('attachmentid') );
       });
       // var gallery_ids = $('#wp_travel_gallery_ids').val().split( ',' );
-      if( data.length > 0 ){
-        var thumbnail_id = $( '.wp-travel-open-uploaded-images ul li:first' ).data('attachmentid');
+      if( data.length > 0 ){        
+        var thumbnail_id = wp_travel_drag_drop_uploader._thumbnail_id;        
+        if ( 1 > thumbnail_id ) {
+          thumbnail_id = $( '.wp-travel-open-uploaded-images ul li:first' ).data('attachmentid');
+        }
         wp_travel_set_gallery_featured_image( thumbnail_id );        
         $.each( data, function( index, val ){
           gallery_ids.push( parseInt( val.id ) );
