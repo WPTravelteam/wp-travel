@@ -205,29 +205,39 @@ function wp_travel_get_related_post( $post_id ) {
 											<div class="entry-meta">
 												<div class="category-list-items">
 													<span class="post-category">
-													    <i class="fa fa-plane" aria-hidden="true"></i>
-													       	  <a href="" rel="tag">Hiking</a>
-													       	  <div class="caret">
-													       	     <i class="fa fa-caret-down"></i>
-														       	  <div class="sub-category-menu">
-														       	  	  	<a href="error"> Heritage tour</a>
-														       	  	  	<a href=""> Bungy Jumping</a>
-														       	  	  	<a href=""> Nature Trail Tour</a>
-														       	  	  	<a href=""> Wild Life</a>
-														       	  </div>
-													       	   </div>
+														<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
+													    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
+													    	<i class="fa fa-plane" aria-hidden="true"></i>
+													    	<?php 
+													    	$first_term = array_shift( $terms );
+													    	$term_name = $first_term->name;
+													    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?> 
+															<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">									
+																<?php esc_html_e( $term_name, 'wp-travel' ); ?>
+															</a>
+															<div class="caret">
+															<?php if ( count( $terms ) > 0 ) : ?>
+																<i class="fa fa-caret-down"></i>
+															       	 
+																<div class="sub-category-menu">
+																	<?php foreach( $terms as $term ) : ?>
+																		<?php
+																			$term_name = $term->name;
+													    					$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
+																		<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">									
+																			<?php esc_html_e( $term_name, 'wp-travel' ); ?>
+																		</a>
+																	<?php endforeach; ?>
+																</div>
+															<?php endif; ?>
+															</div>
+														<?php endif; ?>
 													</span>
 												</div>
-												<div class="wp-travel-average-review" title="Rated 4 out of 5">
-						<a>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</a>
-						<a href="">/18 Reviews</a>
-					</div>
+												<div>
+												<?php wp_travel_trip_rating( get_the_ID() ); ?>
+												<?php printf( '/%s reviews',wp_travel_get_rating_count() ); ?>
+												</div>
 											</div>
 										</span>
 									</div>
