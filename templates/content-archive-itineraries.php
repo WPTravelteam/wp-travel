@@ -59,6 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 									</a>
 									<div class="caret">
+									<?php if ( count( $terms ) > 0 ) : ?>
 										<i class="fa fa-caret-down"></i>
 									       	 
 										<div class="sub-category-menu">
@@ -71,6 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 												</a>
 											<?php endforeach; ?>
 										</div>
+									<?php endif; ?>
 									</div>
 								<?php endif; ?>
 							</span>
