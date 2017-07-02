@@ -544,6 +544,7 @@ function wp_travel_template_loader( $template ) {
 		return $template;
 	}
 
+
 	$check_dirs = array(
 			trailingslashit( get_stylesheet_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
 			trailingslashit( get_template_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
@@ -551,13 +552,16 @@ function wp_travel_template_loader( $template ) {
 			trailingslashit( get_template_directory() ),
 			trailingslashit( WP_TRAVEL_PLUGIN_PATH ) . 'templates/',
 		);
-	foreach ( $check_dirs as $dir ) {
-		if ( is_post_type_archive( 'itineraries' ) ) {			
+	// Load template for post archive / taxonomy archive.
+	if ( is_post_type_archive( 'itineraries' ) || is_tax( 'itinerary_types' ) ) {
+		foreach ( $check_dirs as $dir ) {
 			if ( file_exists( trailingslashit( $dir ) . 'archive-itineraries.php' ) ) {
 				return trailingslashit( $dir ) . 'archive-itineraries.php';
 			}
 		}
 	}
+
+	return $template;
 }
 
 // Hooks.
