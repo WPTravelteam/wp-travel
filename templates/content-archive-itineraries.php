@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">									
 										<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 									</a>
-									<div class="caret">
+									<div class="wp-travel-caret">
 									<?php if ( count( $terms ) > 0 ) : ?>
 										<i class="fa fa-caret-down"></i>
 									       	 
