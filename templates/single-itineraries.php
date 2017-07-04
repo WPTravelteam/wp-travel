@@ -5,5 +5,5 @@
 	<?php wp_travel_get_template_part( 'content', 'single-itineraries' ); ?>
 
 <?php endwhile; // end of the loop. ?>
-<?php do_action( 'wp_travel_before_main_content' ); ?>
+<?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php get_footer( 'itinerary' ); ?>
