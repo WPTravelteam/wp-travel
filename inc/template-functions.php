@@ -156,36 +156,30 @@ function wp_travel_wrapper_end() {
  *
  * @param int $post_id ID for current post.
  */
-function wp_travel_trip_price( $post_id ) {
+function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$settings = wp_traval_get_settings();
 	$trip_price 	= wp_travel_get_trip_price( $post_id );
 
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
-	$sale_price 	= wp_travel_get_trip_sale_price();
+	$sale_price 	= wp_travel_get_trip_sale_price( $post_id );
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
     <div class="wp-detail-review-wrap">
-    <?php do_action( 'wp_travel_single_before_trip_price', $post_id ); ?>
+    <?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 	<div class="wp-travel-trip-detail">
 		<div class="trip-price" >
 		<?php if ( $enable_sale ) : ?>
-		    <del>
-		<?php else : ?>
-			<ins>
-		<?php endif; ?>
-		      <span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-		<?php if ( $enable_sale ) : ?>
-		    </del>
-		    <ins>
+		    <del>		    
 		      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
-		    </ins>
-		<?php else : ?>
-			</ins>
+		    </del>		
 		<?php endif; ?>
+			<ins>
+				<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+			</ins>
 		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
 		</div>
 	</div>
-	<?php do_action( 'wp_travel_single_after_trip_price', $post_id ); ?>
+	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
 	
 	</div>
 	
@@ -197,11 +191,14 @@ function wp_travel_trip_price( $post_id ) {
  *
  * @param int $post_id ID for current post.
  */
-function wp_travel_single_trip_rating( $post_id ) {
+function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	if ( ! is_singular( 'itineraries' ) ) {
 		return;
 	}
 	if ( ! $post_id ) {
+		return;
+	}
+	if ( $hide_rating ) {
 		return;
 	}
 	$average_rating = wp_travel_get_average_rating(); ?>
@@ -564,10 +561,112 @@ function wp_travel_template_loader( $template ) {
 	return $template;
 }
 
+/**
+ * Return excerpt length for archive pages.
+ *
+ * @param  int $length word length of excerpt.
+ * @return int return word length
+ */
+function wp_travel_excerpt_length( $length ) {
+	if ( get_post_type() !== 'itineraries' ) {
+		return $length;
+	}
+
+	return 23;
+}
+
+/**
+ * Pagination for archive pages
+ *
+ * @param  String $pages Number of pages.
+ * @param  Int    $range range.
+ * @return HTML
+ */
+function wp_travel_pagination( $range = 2, $pages = '' ) {
+	if ( get_post_type() !== 'itineraries' ) {
+		return;
+	}
+
+	$showitems = ( $range * 2 ) + 1;
+
+	global $paged;
+	if ( empty( $paged ) ) {
+		$paged = 1;
+	}
+
+	if ( '' == $pages ) {
+		global $wp_query;
+		$pages = $wp_query->max_num_pages;
+		if ( ! $pages ) {
+			$pages = 1;
+		}
+	}
+	$pagination = '';
+	if ( 1 != $pages ) {
+		$pagination .= '<nav class="wp-travel-navigation navigation paging-navigation">';
+		$pagination .= '<ul class="page-numbers">';
+		// if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
+		// 	echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
+		// }
+		
+		if ( $paged > 1 && $showitems < $pages ) {
+			$pagination .= sprintf( '<li><a class="prev page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
+		}
+
+		for ( $i = 1; $i <= $pages; $i++ ) {
+			if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+				if ( $paged == $i ) {
+
+					$pagination .= sprintf( '<li><a class="page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
+				} else {
+					$pagination .= sprintf( '<li><a class="page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ), $i );
+				}
+			}
+		}
+
+		if ( $paged < $pages && $showitems < $pages ) {
+			$pagination .= sprintf( '<li><a class="next page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );			
+		}
+
+		// if ( $paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages ) {
+		// 	echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
+		// }
+		$pagination .= "</nav>\n";
+		echo $pagination;
+	}
+}
+
+function wp_travel_save_offer( $post_id ) {
+	if ( get_post_type() !== 'itineraries' ) {
+		return;
+	}
+
+	if ( ! $post_id ) {
+		return;
+	}
+	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+
+	if ( ! $enable_sale ) {
+		return;
+	}
+
+	$trip_price = wp_travel_get_trip_price( $post_id );
+	$sale_price = wp_travel_get_trip_sale_price( $post_id );
+
+	if ( $sale_price > $trip_price ) {
+		$save = (1 - ( $trip_price / $sale_price )) * 100;
+		$save = number_format( $save, 2, ".", "," );
+		?>
+		<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', $save ); ?></div>
+		<?php
+	}
+
+}
+
 // Hooks.
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
-add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating' );
+add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
 add_filter( 'the_content', 'wp_travel_content_filter' );
@@ -583,3 +682,5 @@ add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
 add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
 
 add_filter( 'template_include', 'wp_travel_template_loader' );
+
+add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
