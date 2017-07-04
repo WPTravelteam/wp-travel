@@ -189,11 +189,9 @@ function wp_travel_get_related_post( $post_id ) {
 				    <div class="wp-travel-row-wrap">						
 						<?php while ($query->have_posts()) : $query->the_post(); ?>
 							<?php 
+							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 							$trip_price 	= wp_travel_get_trip_price( get_the_ID() );
-							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-							$sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() );
-							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-							?>
+							$sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 							<div class="related-post-item-wrapper">
 							    <div class="related-post-wrap-bg">
 									<div class="related-post-content">
@@ -215,7 +213,7 @@ function wp_travel_get_related_post( $post_id ) {
 															<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">									
 																<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 															</a>
-															<div class="caret">
+															<div class="wp-travel-caret">
 															<?php if ( count( $terms ) > 0 ) : ?>
 																<i class="fa fa-caret-down"></i>
 															       	 
@@ -234,9 +232,8 @@ function wp_travel_get_related_post( $post_id ) {
 														<?php endif; ?>
 													</span>
 												</div>
-												<div>
-												<?php wp_travel_trip_rating( get_the_ID() ); ?>
-												<?php printf( '/%s reviews',wp_travel_get_rating_count() ); ?>
+												<div class="wp-travel-average-review">
+												    <span><?php printf( '%s reviews',wp_travel_get_rating_count() ); ?></span>
 												</div>
 											</div>
 										</span>
@@ -245,33 +242,17 @@ function wp_travel_get_related_post( $post_id ) {
 									 	<a href="<?php the_permalink() ?>">
 										<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
 									   	</a>
-									   	<?php if ( $enable_sale ) : ?>
+									   	<?php wp_travel_save_offer( get_the_ID() ); ?>
+									</div>
+									<div class="recent-post-bottom-meta">
+										<?php wp_travel_trip_price( get_the_ID(), true ); ?>
+									</div>
+									<?php if ( $enable_sale ) : ?>
 						      			<div class="wp-travel-offer">
 						      			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
 						      			</div>
 						      			<?php endif; ?>
-									</div>
-									<div class="recent-post-bottom-meta">
-										<div class="wp-travel-trip-detail">
-											<div class="trip-price" >
-											<?php if ( $enable_sale ) : ?>
-											    <del>
-											<?php else: ?>
-												<ins>
-											<?php endif; ?>
-											      <span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-											<?php if ( $enable_sale ) : ?>
-											    </del>
-											    <ins>
-											      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
-											    </ins>
-											<?php else: ?>
-												</ins>
-											<?php endif; ?>
-											    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel' ) ?></span>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 
