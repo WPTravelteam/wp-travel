@@ -11,6 +11,11 @@
 
 	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
 
+	$sale_price_attribute = 'disabled="disabled"';
+	if ( $enable_sale ) {
+		$sale_price_attribute = '';
+	}
+
 	echo '<div class="trip-type-wrap itineraries-tax-wrap">';
 	post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'itinerary_types' ) ) );
 	printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=itinerary_types&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Trip Type' ) );
@@ -38,7 +43,7 @@
 	</tr>
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
+		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="0" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
 
 	<tr>
