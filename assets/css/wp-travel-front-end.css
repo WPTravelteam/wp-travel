@@ -346,8 +346,7 @@
   font-size: 22px;
   box-shadow: none; }
 .wp-travel.trip-headline-wrapper p {
-  margin: 20px 0;
-  font-weight: 700; }
+  margin: 20px 0; }
 
 .trip-price del {
   opacity: 0.5;
@@ -450,6 +449,9 @@
     .wp-tab-review-inner-wrapper .comment-text time {
       font-size: 13px;
       display: inline-block; }
+  .wp-tab-review-inner-wrapper .wp-travel-noreviews,
+  .wp-tab-review-inner-wrapper .wp-travel-norgallery {
+    text-align: center; }
 
 .comment-respond {
   background: #f7f7f7;

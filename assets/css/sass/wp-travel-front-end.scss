@@ -484,7 +484,7 @@
         }
         p{
             margin: 20px 0;
-            font-weight: 700;
+            // font-weight: 700;
         }
 }
 .trip-price{
@@ -609,6 +609,10 @@
             font-size:13px;
             display: inline-block;
         }
+    }
+    .wp-travel-noreviews,
+    .wp-travel-norgallery{
+        text-align: center;
     }
 }
 

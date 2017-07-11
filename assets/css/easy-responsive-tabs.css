@@ -56,7 +56,7 @@ h2.resp-accordion {
   border:1px solid rgba(222, 222, 222, 0.49);
   /*border-top: 0px solid #c1c1c1;*/
   margin: 0px;
-  padding: 14px 17px;
+  padding: 14px 17px !important;
   border-radius: 3px;
 }
 
