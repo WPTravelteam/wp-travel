@@ -20,6 +20,7 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
+		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 );
 		add_filter( 'postbox_classes_itineraries_wp-travel-itinerary-detail', array( $this, 'add_clean_metabox_class' ) );
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
@@ -41,6 +42,13 @@ class WP_Travel_Admin_Metaboxes {
 		remove_meta_box( 'itinerary_locationsdiv', 'itineraries', 'side' );
 		remove_meta_box( 'itinerary_typesdiv', 'itineraries', 'side' );
 		remove_meta_box( 'travel_locationsdiv', 'itineraries', 'side' );
+	}
+
+	/**
+	 * Remove metabox.
+	 */
+	public function remove_metaboxs() {		
+		remove_meta_box( 'postimagediv','itineraries','side' );
 	}
 	/**
 	 * Clean Metabox Classes.
