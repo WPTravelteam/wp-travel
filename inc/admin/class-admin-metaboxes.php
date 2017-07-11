@@ -38,7 +38,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( 'wp-travel-itinerary-detail', __( 'Itinerary Detail' ), array( $this, 'load_tab_template' ), 'itineraries', 'normal', 'default' );
+		add_meta_box( 'wp-travel-itinerary-detail', __( 'Itinerary Detail' ), array( $this, 'load_tab_template' ), 'itineraries', 'normal', 'high' );
 		remove_meta_box( 'itinerary_locationsdiv', 'itineraries', 'side' );
 		remove_meta_box( 'itinerary_typesdiv', 'itineraries', 'side' );
 		remove_meta_box( 'travel_locationsdiv', 'itineraries', 'side' );
