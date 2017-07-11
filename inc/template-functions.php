@@ -668,7 +668,21 @@ function wp_travel_save_offer( $post_id ) {
 		<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', $save ); ?></div>
 		<?php
 	}
+}
 
+function wp_travel_body_class( $classes, $class ) {
+
+	if ( is_active_sidebar( 'sidebar-1' ) && is_singular( 'itineraries' ) ) {
+		// If the has-sidebar class is in the $classes array, do some stuff.
+		if ( in_array( 'has-sidebar', $classes ) ) {
+			// Remove the class.
+			unset( $classes[ array_search( 'has-sidebar', $classes ) ] );
+		}
+	}
+
+	// Give me my new, modified $classes.
+	return $classes;
+	
 }
 
 // Hooks.
@@ -692,3 +706,4 @@ add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
 add_filter( 'template_include', 'wp_travel_template_loader' );
 
 add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
+add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
