@@ -59,7 +59,7 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		$currency_list = wp_traval_get_currency_list();
-		$currency = isset( $args['settings']['currency'] ) ? $args['settings']['currency'] : '';
+		$currency = ( isset( $args['settings']['currency'] ) && '' != $args['settings']['currency'] ) ? $args['settings']['currency'] : 'USD';
 		$google_map_api_key = isset( $args['settings']['google_map_api_key'] ) ? $args['settings']['google_map_api_key'] : '';
 		$currency_args = array(
 			'id'		=> 'currency',
