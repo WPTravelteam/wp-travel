@@ -10,6 +10,12 @@
         var template = wp.template( 'my-template' );
         $( '.wp-travel-open-uploaded-images ul' ).append( template( data ) );
         wp_travel_update_gallery_ids( data );
+
+        var thumbnail_id = wp_travel_drag_drop_uploader._thumbnail_id;
+        if ( 1 > thumbnail_id || undefined == thumbnail_id ) {
+          thumbnail_id = $( '.wp-travel-open-uploaded-images ul li:first' ).data('attachmentid');
+        }
+        wp_travel_set_gallery_featured_image( thumbnail_id ); 
     }
 
     function wp_travel_update_gallery_ids( data ) {
