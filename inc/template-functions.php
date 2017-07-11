@@ -308,10 +308,7 @@ function wp_travel_single_excerpt( $post_id ) {
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
-			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
-			<?php if( isset( $_POST['wp_travel_book_now'] ) ) : ?>
-				<p><?php  echo apply_filters( 'wp_travel_booked_message', 'Your Trip have been booked' ); ?></p>
-			<?php endif; ?>
+			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>			
 		</div>
 	</div>
 	<?php
@@ -685,6 +682,15 @@ function wp_travel_body_class( $classes, $class ) {
 	
 }
 
+function wp_travel_booking_message() {
+	if ( ! is_singular( 'itineraries' ) ) {
+		return;
+	}
+	if( isset( $_POST['wp_travel_book_now'] ) ) : ?>
+		<p><?php  echo apply_filters( 'wp_travel_booked_message', "We've received your details. We'll contact you soon." ); ?></p>
+	<?php endif;
+}
+
 // Hooks.
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
@@ -707,3 +713,5 @@ add_filter( 'template_include', 'wp_travel_template_loader' );
 
 add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
 add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
+
+add_action ( 'wp_travel_before_main_content', 'wp_travel_booking_message' );
