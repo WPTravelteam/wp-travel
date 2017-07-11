@@ -155,8 +155,14 @@ if ( 'undefined' !=  typeof( GMaps ) ) {
 			alert( error );
 			return false;
 		}
-
-		
 	} );
 	
+	$( document ).on( 'click', '#wp-travel-enable-sale', function() {
+		if ( $( this ).is( ':checked' ) ) {
+			$( '#wp-travel-sale-price' ).removeAttr( 'disabled' );
+		} else {
+			$( '#wp-travel-sale-price' ).attr( 'disabled', 'disabled' );
+		}
+	} );
+
 }(jQuery));
