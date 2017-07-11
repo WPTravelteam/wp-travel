@@ -121,12 +121,16 @@ $alto: #ddd;
 			outline: none;
 			box-shadow:none;
 		}
+		#wp-travel-tab-content-booking{
+			input[type="text"]{
+					width: 100%;
+				}
+		}
 		.wp-travel-tab-content {
 			// display: none;
 			border-radius: 0;
 			border: none;
 			width: 100%;
-
 			.wp-travel-tab-content-title{
 				margin: 0 0 25px 0;
 				padding: 0 0 16px 0;
@@ -187,3 +191,4 @@ $alto: #ddd;
   color: #333;
   font-weight: 600;
 }
+

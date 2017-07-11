@@ -83,6 +83,8 @@
     .wp-travel-tabs-wrap .wp-travel-tabs-contents a:focus {
       outline: none;
       box-shadow: none; }
+    .wp-travel-tabs-wrap .wp-travel-tabs-contents #wp-travel-tab-content-booking input[type="text"] {
+      width: 100%; }
     .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content {
       border-radius: 0;
       border: none;

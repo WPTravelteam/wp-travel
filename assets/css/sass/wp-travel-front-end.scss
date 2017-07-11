@@ -6,21 +6,22 @@
     clear: both;
   }
 }
-@media (min-width: 768px){
-.custom-container {
-    width: 720px;
-}
-}
-@media (min-width: 992px){
-.custom-container {
-    width: 940px;
-}
-}
-@media (min-width: 1200px){
-.custom-container {
-    width: 1140px;
-}
-}
+// @media (min-width: 768px){
+// .custom-container {
+//     width: 720px;
+// }
+// }
+// @media (min-width: 992px){
+// .custom-container {
+//     width: 940px;
+// }
+// }
+// @media (min-width: 1200px){
+// .custom-container {
+//     max-width: 1110px;
+//     width: 90%;
+// }
+// }
 
 
 //media query for theme contents
@@ -126,6 +127,7 @@
 .wp-travel-tab-wrapper{
     padding: 0 0 25px;
     background: #fff;
+    position: relative;
     @include mob{
         padding: 20px 10px 10px !important;
     }
@@ -136,12 +138,19 @@
         border-top:1px solid rgba(222, 222, 222, 0.49);
         font-size:0;
         text-align:center;
-        background:#f8f8f8;
+        background:#f9f9f9;
+         
         @include clearfix;
         &.fixed {
             position: fixed;
             top: 0;
             z-index: 99;
+            width: inherit;
+            left: 0;
+            right: 0;
+            -moz-transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         } 
         li{
             background: none;
@@ -328,6 +337,7 @@
             border-top-left-radius:5px;
             border-bottom-left-radius:5px;
             text-shadow: 0 4px 2px #000;
+            box-shadow:none;
         }
     }
    }
@@ -339,7 +349,7 @@
    .right-plot-inner-wrap{
       padding:0 25px 30px;
       @include sidr-view{
-        padding: 25px 30px;
+        padding: 25px 10px;
       }
    }
    .banner-image-wrapper{
@@ -472,6 +482,10 @@
             font-size: 22px;
             box-shadow:none;
         }
+        p{
+            margin: 20px 0;
+            font-weight: 700;
+        }
 }
 .trip-price{
         del{
@@ -576,6 +590,9 @@
     .description{
         p{
             padding-left:40px;
+        }
+        img{
+            float: none;
         }
     }
     img{
@@ -885,6 +902,11 @@
                     margin:10px 0 0;
                     display: inline-block;
                 }
+                 .travel-info{
+                    @include mob{
+                        float: none;
+                    }
+                 }
             }
             .description-right{
                  width: 30%;
@@ -972,7 +994,8 @@
                               opacity: 0;
                               position: absolute;
                               top: 40px;
-                              left: 0px;
+                              right:0px;
+                              text-align: left;
                               background: #fff none repeat scroll 0 0;
                               box-shadow: 0 6px 12px rgba(0,0,0,.175);
                               min-width: 115px;
@@ -1031,7 +1054,7 @@
 }
 /* wp-travel pagination
 ----------------------------------------------- */
-.wp-travel-navigation.paging-navigation {
+.wp-travel-navigation.wp-paging-navigation {
     padding:30px 0;
     margin-bottom: 20px;
     text-align:center;
@@ -1046,11 +1069,11 @@
             @include xs{
               margin: 0;
             }
-            .page-numbers,
-            span.page-numbers {
+            .wp-page-numbers,
+            span.wp-page-numbers {
                 padding: .3em .7em;
                 position: relative;
-                &:hover.page-numbers {
+                &:hover.wp-page-numbers {
                 }
             }
         }
@@ -1058,20 +1081,15 @@
     .current {
         font-weight: bold;
         position: relative;
-        &:after {
-            content: "";
-            background: transparent;
+            background:#f2f2f2;
             height: 30px;
             width: 30px;
-            z-index: 3;
-            top: -3px;
-            border: 1px solid;
-            left: 0px;
-            transform: rotate(45deg);
-            -ms-transform: rotate(45deg); 
-            -webkit-transform: rotate(45deg);
-            position: absolute;
-        }
+            border: 1px solid #ccc;
+            // transform: rotate(45deg);
+            // -ms-transform: rotate(45deg); 
+            // -webkit-transform: rotate(45deg);
+            // position: absolute;
+        
     }
 }
 .wp-travel-gallery ul li:nth-child(6n+1), .wp-travel-gallery ul li:nth-child(3n+1) {
@@ -1089,4 +1107,8 @@
     content: "";
     display: block;
      }
+}
+.wp-travel-navigation.paging-navigation .current:after {
+    top: 3px;
+    left: 3px;
 }
