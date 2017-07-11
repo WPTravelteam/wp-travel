@@ -1,5 +1,4 @@
 <?php get_header( 'itinerary' ); ?>
-<div class="">
 <?php do_action( 'wp_travel_before_main_content' ); ?>
 <?php while ( have_posts() ) : the_post(); ?>
 
@@ -7,7 +6,6 @@
 
 <?php endwhile; // end of the loop. ?>	
 <?php do_action( 'wp_travel_after_main_content' ); ?>
-</div>
 <?php
 $pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
 $max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
