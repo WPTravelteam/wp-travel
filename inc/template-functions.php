@@ -367,7 +367,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					</div>
 				</div>
 				<?php else : ?>
-					<?php esc_html_e( 'Empty gallery images', 'wp-travel' ); ?>
+					<p class="wp-travel-norgallery"><?php esc_html_e( 'Empty gallery images', 'wp-travel' ); ?></p>
 				<?php endif; ?>
 			</div>
 			<?php if ( comments_open() ) : ?>
