@@ -111,7 +111,7 @@ function wp_travel_wrapper_start() {
 			echo '<div class="wrap"><div id="primary" class="content-area twentyseventeen"><div id="main" class="site-main">';
 			break;
 		default :
-			echo '<div class="container"><div id="wp-travel-content" class="wp-travel-content" role="main">';
+			echo '<div id="wp-travel-content" class="wp-travel-content container" role="main">';
 			break;
 	}
 }
@@ -146,7 +146,7 @@ function wp_travel_wrapper_end() {
 			echo '</div></div></div>';
 			break;
 		default :
-			echo '</div></div>';
+			echo '</div>';
 			break;
 	}
 }
@@ -603,29 +603,29 @@ function wp_travel_pagination( $range = 2, $pages = '' ) {
 	}
 	$pagination = '';
 	if ( 1 != $pages ) {
-		$pagination .= '<nav class="wp-travel-navigation navigation paging-navigation">';
-		$pagination .= '<ul class="page-numbers">';
+		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
+		$pagination .= '<ul class="wp-page-numbers">';
 		// if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
 		// 	echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
 		// }
 		
 		if ( $paged > 1 && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="prev page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
+			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
 		}
 
 		for ( $i = 1; $i <= $pages; $i++ ) {
 			if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
 				if ( $paged == $i ) {
 
-					$pagination .= sprintf( '<li><a class="page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
+					$pagination .= sprintf( '<li><a class="wp-page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
 				} else {
-					$pagination .= sprintf( '<li><a class="page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ), $i );
+					$pagination .= sprintf( '<li><a class="wp-page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ), $i );
 				}
 			}
 		}
 
 		if ( $paged < $pages && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="next page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );			
+			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );			
 		}
 
 		// if ( $paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages ) {
