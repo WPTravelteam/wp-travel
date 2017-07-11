@@ -169,13 +169,21 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	<div class="wp-travel-trip-detail">
 		<div class="trip-price" >
 		<?php if ( $enable_sale ) : ?>
-		    <del>		    
-		      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
-		    </del>		
-		<?php endif; ?>
+		    <del>		
+		<?php else : ?>
 			<ins>
-				<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+		<?php endif; ?>
+	    	<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+	    <?php if ( $enable_sale ) : ?>
+		    </del>
+		    <ins>
+
+		      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
+		   </ins>
+		<?php else : ?>
 			</ins>
+		<?php endif; ?>
+			
 		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
 		</div>
 	</div>
