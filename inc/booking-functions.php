@@ -80,7 +80,7 @@ function wp_travel_get_booking_form() {
 	        <?php echo apply_filters( 'wp_travel_booking_form_after_email_html_content', '' ); ?>
 			<div class="wp-travel-form-field">
 				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX' ); ?></label>
-				<input type="number" max="<?php echo apply_filters( 'wp_travel_max_pax_number', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax">
+				<input type="number" max="<?php echo apply_filters( 'wp_travel_pax', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax">
 			</div>
 			<div class="wp-travel-form-field textarea-field">
 				<label for="wp-travel-note"><?php esc_html_e( 'Note' ); ?></label>
@@ -128,7 +128,7 @@ function wp_travel_booking_info( $post ) {
 	$wp_travel_address = get_post_meta( $post->ID, 'wp_travel_address', true );
 	$wp_travel_phone = get_post_meta( $post->ID, 'wp_travel_phone', true );
 	$wp_travel_email = get_post_meta( $post->ID, 'wp_travel_email', true );
-	$wp_travel_max_pax_number = get_post_meta( $post->ID, 'wp_travel_max_pax_number', true );
+	$wp_travel_pax = get_post_meta( $post->ID, 'wp_travel_pax', true );
 	$wp_travel_note = get_post_meta( $post->ID, 'wp_travel_note', true );
 ?>
 	<div class="wp-travel-booking-form-wrapper">
