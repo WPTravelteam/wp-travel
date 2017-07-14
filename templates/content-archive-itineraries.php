@@ -11,12 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 	return;
 	 }
 	 $enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-	 $group_size 	= get_post_meta( get_the_ID(), 'wp_travel_group_size', true );	 
+	 $group_size 	= wp_travel_get_group_size( get_the_ID() );	 
 	 $start_date 	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
-	 $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
-?>
-
-
+	 $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); ?>
 
 		<article class="wp-travel-default-article">
 			<div class="wp-travel-article-image-wrap">
@@ -79,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 						<div class="travel-info">
 							<i class="fa fa-child" aria-hidden="true"></i>
-							<span class="value"><?php printf( '%d pax', $group_size ) ?></span>
+							<span class="value"><?php printf( '%s', $group_size ) ?></span>
 						</div>
 						<?php if ( $start_date && $end_date ) : ?>
 							<div class="travel-info">
