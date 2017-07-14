@@ -100,6 +100,11 @@ $alto: #ddd;
 					content: "\f108";
 				}
 			}
+			&#wp-travel-tab-booking a{
+				&:before{
+					content: "\f330";
+				}
+			}
 		}
 	}
 
@@ -122,8 +127,9 @@ $alto: #ddd;
 			box-shadow:none;
 		}
 		#wp-travel-tab-content-booking{
-			input[type="text"]{
+			input[type="text"],input[type="number"]{
 					width: 100%;
+					height: inherit;
 				}
 		}
 		.wp-travel-tab-content {

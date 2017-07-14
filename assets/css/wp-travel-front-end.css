@@ -338,8 +338,6 @@
       background: rgba(222, 222, 222, 0.32); }
     .wp-travel-trip-meta-info ul li .travel-info, .wp-travel-trip-meta-info ul li .entry-meta .category-list-items, .entry-meta .wp-travel-trip-meta-info ul li .category-list-items, .wp-travel-trip-meta-info ul li .entry-meta .wp-travel-average-review, .entry-meta .wp-travel-trip-meta-info ul li .wp-travel-average-review {
       margin-bottom: 5px; }
-    .wp-travel-trip-meta-info ul li .code-font {
-      font-family: 'Inconsolata', monospace; }
 
 .wp-travel.trip-headline-wrapper .wp-travel-booknow-btn {
   padding: 10px 50px;
@@ -356,9 +354,6 @@
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   text-decoration: none; }
-
-.code-font {
-  font-family: 'Inconsolata', monospace; }
 
 .wp-travel-review-count {
   margin-bottom: 15px; }

@@ -219,14 +219,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 		    .cross-out.button{
 				display: block;
 			    margin: 0 auto;
-			    background: #ff0000;
-			    border-color: #ea0101 #c10404 #b90505;
-			    -webkit-box-shadow: 0 1px 0 #bd0707;
-			    box-shadow: 0 1px 0 #bd0707;
+			    background: #e40808;
+			    border:none;
 			    color: #fff;
+			    width: 100%;
 			    &:hover{
-				background: #f96262;
-				border-color: #bd0707;
+				background: #b31919;
 			    }
 			}
 			tbody td{
@@ -235,11 +233,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 			}
 	    }
 	}
+	
 	.select2-container .select2-selection--multiple{
 		border-radius:0;
 		border:1px solid #ddd;
 		margin-top: 5px;
 	}
+	.addnewlabel.button{
+    	float: right;
+    }
 }
   .select2-results__option[aria-selected=true] {
         display: none;
