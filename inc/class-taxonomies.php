@@ -26,7 +26,7 @@ class Wp_Travel_Taxonomies {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'trip_type' ),
+			'rewrite'           => array( 'slug' => 'trip-type' ),
 		);
 
 		register_taxonomy( 'itinerary_types', array( 'itineraries' ), $args );
@@ -51,7 +51,7 @@ class Wp_Travel_Taxonomies {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'travel_locations' ),
+			'rewrite'           => array( 'slug' => 'travel-locations' ),
 		);
 
 		register_taxonomy( 'travel_locations', array( 'itineraries' ), $args );
