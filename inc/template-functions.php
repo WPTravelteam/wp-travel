@@ -772,3 +772,13 @@ add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
 add_action( 'wp_travel_before_main_content', 'wp_travel_booking_message' );
 
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
+
+
+function wp_travel_excerpt_more( $more ) {
+	global $post;
+	if ( empty( $post->post_type ) || 'itineraries' !== $post->post_type )
+		return $more;
+
+	return '...';
+}
+add_filter( 'excerpt_more', 'custom_excerpt_more' );
