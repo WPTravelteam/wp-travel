@@ -8,6 +8,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+global $wp_travel_itinerary;
 ?>
 
 <?php
@@ -16,7 +18,6 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
-$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 ?>
 
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -25,16 +26,18 @@ $enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 		<div class="wp-travel trip-headline-wrapper">
 	         <div class="wp-travel-feature-slide-content featured-side-image left-plot">
 	            <div class="banner-image-wrapper" style="background-image: url(<?php echo esc_url( wp_travel_get_post_thumbnail_url( get_the_ID() ) ) ?>)">
-						<?php echo wp_kses( wp_travel_get_post_thumbnail( get_the_ID() ) ); ?>
+						<?php echo wp_kses( wp_travel_get_post_thumbnail( get_the_ID() ), wp_travel_allowed_html( array( 'img' )  ) ); ?>
 	         	</div>
-	         	<?php if ( $enable_sale ) : ?>
+	         	<?php if ( $wp_travel_itinerary->is_sale_enabled() ) : ?>
 	      			<div class="wp-travel-offer">
 	      			    <span><?php esc_html_e( 'Offer', 'wp-travel' ) ?></span>
 	      			</div>
 	      			<?php endif; ?>
+						<?php if ( $wp_travel_itinerary->has_multiple_images() ) : ?>
 	      			<div class="wp-travel-view-gallery">
 	      				<a class="top-view-gallery" href=""><?php esc_html_e( 'View Gallery', 'wp-travel' ) ?></a>
 	      			</div>
+						<?php endif; ?>
 	         </div>
 	         <div class="wp-travel-feature-slide-content featured-detail-section right-plot">
 	           <div class="right-plot-inner-wrap">

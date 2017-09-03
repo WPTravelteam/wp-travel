@@ -360,3 +360,93 @@ function wp_travel_get_post_placeholder_image_url() {
 	$thumbnail_url = plugins_url( '/wp-travel/assets/images/wp-travel-placeholder.png' );
 	return $thumbnail_url;
 }
+
+/**
+ * Allowed tags.
+ *
+ * @param  array  $tags filter tags.
+ * @return array       allowed tags.
+ */
+function wp_travel_allowed_html( $tags = array() ) {
+
+	$allowed_tags = array(
+		'a' => array(
+			'class' => array(),
+			'href'  => array(),
+			'rel'   => array(),
+			'title' => array(),
+		),
+		'abbr' => array(
+			'title' => array(),
+		),
+		'b' => array(),
+		'blockquote' => array(
+			'cite'  => array(),
+		),
+		'cite' => array(
+			'title' => array(),
+		),
+		'code' => array(),
+		'del' => array(
+			'datetime' => array(),
+			'title' => array(),
+		),
+		'dd' => array(),
+		'div' => array(
+			'class' => array(),
+			'title' => array(),
+			'style' => array(),
+		),
+		'dl' => array(),
+		'dt' => array(),
+		'em' => array(),
+		'h1' => array(),
+		'h2' => array(),
+		'h3' => array(),
+		'h4' => array(),
+		'h5' => array(),
+		'h6' => array(),
+		'i' => array(),
+		'img' => array(
+			'alt'    => array(),
+			'class'  => array(),
+			'height' => array(),
+			'src'    => array(),
+			'width'  => array(),
+		),
+		'li' => array(
+			'class' => array(),
+		),
+		'ol' => array(
+			'class' => array(),
+		),
+		'p' => array(
+			'class' => array(),
+		),
+		'q' => array(
+			'cite' => array(),
+			'title' => array(),
+		),
+		'span' => array(
+			'class' => array(),
+			'title' => array(),
+			'style' => array(),
+		),
+		'strike' => array(),
+		'strong' => array(),
+		'ul' => array(
+			'class' => array(),
+		),
+	);
+
+	if ( ! empty( $tags ) ) {
+		$output = array();
+		foreach ( $tags as $key ) {
+			if ( array_key_exists( $key, $allowed_tags ) ) {
+				$output[ $key ] = $allowed_tags[ $key ];
+			}
+		}
+		return $output;
+	}
+	return $allowed_tags;
+}
