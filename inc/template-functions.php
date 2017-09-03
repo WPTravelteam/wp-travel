@@ -169,7 +169,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	<div class="wp-travel-trip-detail">
 		<div class="trip-price" >
 		<?php if ( $enable_sale ) : ?>
-		    <del>		
+		    <del>
 		<?php else : ?>
 			<ins>
 		<?php endif; ?>
@@ -183,14 +183,14 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 		<?php else : ?>
 			</ins>
 		<?php endif; ?>
-			
+
 		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
 		</div>
 	</div>
 	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
-	
+
 	</div>
-	
+
 <?php
 }
 
@@ -217,7 +217,7 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 			</span>
 		</a>
 
-	</div>	
+	</div>
 <?php
 }
 
@@ -238,7 +238,7 @@ function wp_travel_trip_rating( $post_id ) {
 			</span>
 		</a>
 
-	</div>	
+	</div>
 <?php
 }
 
@@ -299,7 +299,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
 					printf( _n( '%s review', '%s reviews', $count, 'wp-travel' ), $count );
 					echo '</a>'; ?>
-				</span>					
+				</span>
 				</div>
 	  	 	</li>
 			<?php endif; ?>
@@ -308,7 +308,7 @@ function wp_travel_single_excerpt( $post_id ) {
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
-			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>			
+			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
 		</div>
 	</div>
 	<?php
@@ -319,8 +319,8 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_include	= get_post_meta( $post_id, 'wp_travel_trip_include', true );
 	$trip_exclude	= get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
 	$gallery_ids 	= get_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', true );
-	?>	
-	
+	?>
+
 
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<ul class="wp-travel tab-list resp-tabs-list ">
@@ -387,7 +387,7 @@ function wp_travel_trip_map( $post_id ) {
 	} ?>
 
 	<div class="wp-travel-map">
-		<div id="gmap" style="width:100%;height:300px"></div>	
+		<div id="gmap" style="width:100%;height:300px"></div>
 	</div>
 	<?php wp_travel_get_related_post( $post_id );
 }
@@ -613,7 +613,7 @@ function wp_travel_pagination( $range = 2, $pages = '' ) {
 		// if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
 		// 	echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
 		// }
-		
+
 		if ( $paged > 1 && $showitems < $pages ) {
 			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
 		}
@@ -630,7 +630,7 @@ function wp_travel_pagination( $range = 2, $pages = '' ) {
 		}
 
 		if ( $paged < $pages && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );			
+			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );
 		}
 
 		// if ( $paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages ) {
@@ -725,6 +725,27 @@ function wp_travel_get_group_size( $post_id ) {
 	}
 }
 
+
+/**
+ * When the_post is called, put product data into a global.
+ *
+ * @param mixed $post
+ * @return WC_Product
+ */
+function wp_travel_setup_itinerary_data( $post ) {
+	unset( $GLOBALS['wp_travel_itinerary'] );
+
+	if ( is_int( $post ) )
+		$post = get_post( $post );
+
+	if ( empty( $post->post_type ) || 'itineraries' !== $post->post_type )
+		return;
+
+	$GLOBALS['wp_travel_itinerary'] = new WP_Travel_Itinerary( $post );
+
+	return $GLOBALS['wp_travel_itinerary'];
+}
+
 // Hooks.
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
@@ -749,3 +770,5 @@ add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
 add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
 
 add_action( 'wp_travel_before_main_content', 'wp_travel_booking_message' );
+
+add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
