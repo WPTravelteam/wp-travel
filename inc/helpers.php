@@ -160,7 +160,7 @@ function wp_travel_get_related_post( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$settings = wp_traval_get_settings();	
+	$settings = wp_traval_get_settings();
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
 
@@ -186,9 +186,9 @@ function wp_travel_get_related_post( $post_id ) {
 			if( $query->have_posts() ) { ?>
 				<div class="wp-travel-related-posts wp-travel-container-wrap">
 					<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Trips', 'wp-travel' ) ); ?></h2>
-				    <div class="wp-travel-row-wrap">						
+				    <div class="wp-travel-row-wrap">
 						<?php while ($query->have_posts()) : $query->the_post(); ?>
-							<?php 
+							<?php
 							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 							$trip_price 	= wp_travel_get_trip_price( get_the_ID() );
 							$sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
@@ -198,31 +198,31 @@ function wp_travel_get_related_post( $post_id ) {
 
 										<h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 										<span class="post-category">
-											
-										
+
+
 											<div class="entry-meta">
 												<div class="category-list-items">
 													<span class="post-category">
 														<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
 													    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
 													    	<i class="fa fa-plane" aria-hidden="true"></i>
-													    	<?php 
+													    	<?php
 													    	$first_term = array_shift( $terms );
 													    	$term_name = $first_term->name;
-													    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?> 
-															<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">									
+													    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
+															<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
 																<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 															</a>
 															<div class="wp-travel-caret">
 															<?php if ( count( $terms ) > 0 ) : ?>
 																<i class="fa fa-caret-down"></i>
-															       	 
+
 																<div class="sub-category-menu">
 																	<?php foreach( $terms as $term ) : ?>
 																		<?php
 																			$term_name = $term->name;
 													    					$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
-																		<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">									
+																		<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
 																			<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 																		</a>
 																	<?php endforeach; ?>
@@ -252,7 +252,7 @@ function wp_travel_get_related_post( $post_id ) {
 						      			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
 						      			</div>
 						      			<?php endif; ?>
-									
+
 								</div>
 							</div>
 
@@ -302,6 +302,13 @@ function wp_travel_get_trip_sale_price( $post_id = 0 ) {
 	return 0;
 }
 
+/**
+ * Get post thumbnail.
+ *
+ * @param  int    $post_id Post ID.
+ * @param  string $size    Image size.
+ * @return string          Image tag.
+ */
 function wp_travel_get_post_thumbnail( $post_id, $size = 'post-thumbnail' ) {
 	if ( ! $post_id ) {
 		global $post;
@@ -310,11 +317,19 @@ function wp_travel_get_post_thumbnail( $post_id, $size = 'post-thumbnail' ) {
 	$thumbnail = get_the_post_thumbnail( $post_id, $size );
 
 	if ( ! $thumbnail ) {
-		$thumbnail = '<img width="100%" height="100%" src="' . plugins_url( '/wp-travel/images/wp-travel-placeholder.png' ) . '">';
+		$placeholder_image_url = wp_travel_get_post_placeholder_image_url();
+		$thumbnail = '<img width="100%" height="100%" src="' . $placeholder_image_url . '">';
 	}
 	return $thumbnail;
 }
 
+/**
+ * Get post thumbnail URL.
+ *
+ * @param  int    $post_id Post ID.
+ * @param  string $size    Image size.
+ * @return string          Image URL.
+ */
 function wp_travel_get_post_thumbnail_url( $post_id, $size = 'post-thumbnail' ) {
 	if ( ! $post_id ) {
 		return;
@@ -322,7 +337,17 @@ function wp_travel_get_post_thumbnail_url( $post_id, $size = 'post-thumbnail' ) 
 	$thumbnail = get_the_post_thumbnail_url( $post_id, $size );
 
 	if ( ! $thumbnail ) {
-		$thumbnail = plugins_url( '/wp-travel/images/wp-travel-placeholder.png' );
+		$thumbnail = wp_travel_get_post_placeholder_image_url();
 	}
 	return $thumbnail;
+}
+
+/**
+ * Post palceholder image URL.
+ *
+ * @return string Placeholder image URL.
+ */
+function wp_travel_get_post_placeholder_image_url() {
+	$thumbnail_url = plugins_url( '/wp-travel/assets/images/wp-travel-placeholder.png' );
+	return $thumbnail_url;
 }
