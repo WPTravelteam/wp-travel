@@ -201,9 +201,9 @@ module.exports = function(grunt) {
 		    },
 		    my_target: {
 		      files: {
-		        
+
 		        'assets/js/booking.min.js': ['assets/js/booking.js'],
-		        'assets/js/jquery.wptraveluploader.min.js': ['assets/js/jquery.wptraveluploader.js'],		        
+		        'assets/js/jquery.wptraveluploader.min.js': ['assets/js/jquery.wptraveluploader.js'],
 		        'assets/js/wp-travel-back-end.min.js': ['assets/js/wp-travel-back-end.js'],
 		        'assets/js/wp-travel-front-end.min.js': ['assets/js/wp-travel-front-end.js'],
 		        'assets/js/wp-travel-media-upload.min.js': ['assets/js/wp-travel-media-upload.js'],
@@ -213,7 +213,7 @@ module.exports = function(grunt) {
 		},
 		sass: {
 		    dist: {
-		      files: {		
+		      files: {
 		        'assets/css/wp-travel-back-end.css': 'assets/css/sass/wp-travel-back-end.scss',
 		        'assets/css/wp-travel-front-end.css': 'assets/css/sass/wp-travel-front-end.scss',
 		        'assets/css/wp-travel-tabs.css': 'assets/css/sass/wp-travel-tabs.scss',
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
 
 		// Check JS.
 		jshint: {
-			options: grunt.file.readJSON( '.jshintrc' ),
+			// options: grunt.file.readJSON( '.jshintrc' ),
 			all: [
 				'Gruntfile.js',
 				'<%= dirs.js %>/*.js',
@@ -294,7 +294,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'textdomain', [
 		'addtextdomain',
 		'makepot'
-	]);	
+	]);
 	grunt.registerTask( 'minify', [
 		'uglify',
 		'cssmin',

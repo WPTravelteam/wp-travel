@@ -160,34 +160,40 @@ function wp_travel_get_related_post( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+
+	/* TODO: Add global Settings to show/hide related post. */
+
 	$settings = wp_traval_get_settings();
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
 
-	// for use in the loop, list 5 post titles related to first tag on current post.
-	 $terms = wp_get_object_terms( $post_id, 'itinerary_types' );
-	 if ( $terms ) {
-	 	if ( isset( $terms[0]->term_id ) ) {
+	// For use in the loop, list 5 post titles related to first tag on current post.
+	$terms = wp_get_object_terms( $post_id, 'itinerary_types' );
 
-		 	$args = array(
-			'post_type' => 'itineraries',
-			'post__not_in' => array( $post_id ),
-			'posts_per_page' => 4,
-			'tax_query' => array(
-			    array(
-			    'taxonomy' => 'itinerary_types',
-			    'field' => 'id',
-			    'terms' => $terms[0]->term_id
-			     )
-			  )
-			);
-			$query = new WP_Query( $args );
+	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html( 'Related itineraries not found.' ) . '</p>';
+	?>
+	 <div class="wp-travel-related-posts wp-travel-container-wrap">
+		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Itineraries', 'wp-travel' ) ); ?></h2>
+		 	<?php
+		 	if ( ! empty( $terms ) ) {
+				$term_ids = wp_list_pluck( $terms, 'term_id' );
 
-			if( $query->have_posts() ) { ?>
-				<div class="wp-travel-related-posts wp-travel-container-wrap">
-					<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Trips', 'wp-travel' ) ); ?></h2>
+				$args = array(
+					'post_type' => 'itineraries',
+					'post__not_in' => array( $post_id ),
+					'posts_per_page' => 4,
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'itinerary_types',
+							'field' => 'id',
+							'terms' => $term_ids,
+						),
+					),
+				);
+				$query = new WP_Query( $args );
+			if ( $query->have_posts() ) { ?>
 				    <div class="wp-travel-row-wrap">
-						<?php while ($query->have_posts()) : $query->the_post(); ?>
+						<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 							<?php
 							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 							$trip_price 	= wp_travel_get_trip_price( get_the_ID() );
@@ -196,7 +202,7 @@ function wp_travel_get_related_post( $post_id ) {
 							    <div class="related-post-wrap-bg">
 									<div class="related-post-content">
 
-										<h3><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+										<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 										<span class="post-category">
 
 
@@ -205,7 +211,7 @@ function wp_travel_get_related_post( $post_id ) {
 													<span class="post-category">
 														<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
 													    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-													    	<i class="fa fa-plane" aria-hidden="true"></i>
+													    	<i class="fa fa-folder-o" aria-hidden="true"></i>
 													    	<?php
 													    	$first_term = array_shift( $terms );
 													    	$term_name = $first_term->name;
@@ -258,14 +264,17 @@ function wp_travel_get_related_post( $post_id ) {
 
 						<?php endwhile; ?>
 					</div>
-				</div>
 			<?php
+			} else {
+				echo $no_related_post_message;
 			}
 			wp_reset_query();
-	 	}
 	 } else {
-	 	echo '<p>' . esc_html( 'Related Post Not found' ). '</p>';
+	 	echo $no_related_post_message;
 	 }
+	 ?>
+	 </div>
+	 <?php
 }
 
 /**
