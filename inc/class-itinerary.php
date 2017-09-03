@@ -10,11 +10,13 @@
  */
 class WP_Travel_Itinerary {
 	private $post;
+	private $post_meta;
 	/**
 	 * Constructor.
 	 */
 	function __construct( $post = null ) {
 		$this->post = is_null( $post ) ? get_post( get_the_ID() ) : $post;
+		$this->post_meta = get_post_meta( $this->post->ID );
 		return $this->post;
 	}
 
@@ -40,6 +42,23 @@ class WP_Travel_Itinerary {
 		if ( $gallery_ids && count( $gallery_ids ) > 1 ) {
 			return true;
 		}
+		return false;
+	}
+
+	function get_location() {
+		if (
+			isset( $this->post_meta['wp_traval_lat'] )
+			&& isset( $this->post_meta['wp_traval_lng'] )
+			&& '' !== $this->post_meta['wp_traval_lat']
+			&& '' !== $this->post_meta['wp_traval_lng']
+		) {
+			return array(
+				'lat' => $this->post_meta['wp_traval_lat'],
+				'lng' => $this->post_meta['wp_traval_lng'],
+				'address' => $this->post_meta['wp_traval_location'],
+			);
+		}
+
 		return false;
 	}
 }

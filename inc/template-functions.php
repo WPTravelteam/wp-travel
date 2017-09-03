@@ -381,10 +381,16 @@ function wp_travel_frontend_contents( $post_id ) {
 }
 
 function wp_travel_trip_map( $post_id ) {
-	$settings = wp_traval_get_settings();
-	if ( ! isset( $settings['google_map_api_key'] ) || '' == $settings['google_map_api_key'] ) {
+	global $wp_travel_itinerary;
+	if ( ! $wp_travel_itinerary->get_location() ) {
 		return;
-	} ?>
+	}
+	$settings = wp_traval_get_settings();
+	if ( ! isset( $settings['google_map_api_key'] ) || '' === $settings['google_map_api_key'] ) {
+		return;
+	}
+
+	?>
 
 	<div class="wp-travel-map">
 		<div id="gmap" style="width:100%;height:300px"></div>
