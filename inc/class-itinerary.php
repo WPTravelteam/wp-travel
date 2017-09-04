@@ -45,17 +45,20 @@ class WP_Travel_Itinerary {
 		return false;
 	}
 
+	/**
+	 * Get trip location.
+	 */
 	function get_location() {
 		if (
-			isset( $this->post_meta['wp_traval_lat'] )
-			&& isset( $this->post_meta['wp_traval_lng'] )
-			&& '' !== $this->post_meta['wp_traval_lat']
-			&& '' !== $this->post_meta['wp_traval_lng']
+			isset( $this->post_meta['wp_traval_lat'][0] )
+			&& isset( $this->post_meta['wp_traval_lng'][0] )
+			&& '' !== $this->post_meta['wp_traval_lat'][0]
+			&& '' !== $this->post_meta['wp_traval_lng'][0]
 		) {
 			return array(
-				'lat' => $this->post_meta['wp_traval_lat'],
-				'lng' => $this->post_meta['wp_traval_lng'],
-				'address' => $this->post_meta['wp_traval_location'],
+				'lat' => $this->post_meta['wp_traval_lat'][0],
+				'lng' => $this->post_meta['wp_traval_lng'][0],
+				'address' => $this->post_meta['wp_traval_location'][0],
 			);
 		}
 
