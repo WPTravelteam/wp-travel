@@ -37,7 +37,7 @@ if ( post_password_required() ) {
 	      			<div class="wp-travel-view-gallery">
 	      				<a class="top-view-gallery" href=""><?php esc_html_e( 'View Gallery', 'wp-travel' ) ?></a>
 	      			</div>
-						<?php endif; ?>
+					<?php endif; ?>
 	         </div>
 	         <div class="wp-travel-feature-slide-content featured-detail-section right-plot">
 	           <div class="right-plot-inner-wrap">

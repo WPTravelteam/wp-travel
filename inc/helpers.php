@@ -31,15 +31,15 @@ function wp_traval_get_settings() {
  * @param  int $post_id Post ID of post.
  * @return string Returns the trip code.
  */
-function wp_traval_get_trip_code( $post_id ) {
-	if ( ! $post_id ) {
-		return;
+function wp_traval_get_trip_code( $post_id = null ) {
+	if ( ! is_null( $post_id ) ) {
+		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $post_id ) );
+	} else {
+		global $post;
+		$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
 	}
 
-	if ( ( int ) $post_id < 10 ) {
-		$post_id = '0' . $post_id;
-	}
-	return apply_filters( 'wp_traval_trip_code', 'WT-CODE ' . $post_id, $post_id );
+	return $wp_travel_itinerary->get_trip_code();
 }
 
 /**

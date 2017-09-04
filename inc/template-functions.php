@@ -253,7 +253,8 @@ function wp_travel_single_excerpt( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$group_size = wp_travel_get_group_size( $post_id ); ?>
+	$wp_travel_itinerary = new WP_Travel_Itinerary();
+	?>
 	<div class="trip-short-desc">
 		<?php the_excerpt(); ?>
 	</div>
@@ -267,7 +268,13 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="value">
 
 					<?php
-						echo get_the_term_list( $post_id, 'itinerary_types', '', ', ', '' ); ?>
+					$trip_types_list = $wp_travel_itinerary->get_trip_types_list();
+					if ( $trip_types_list ) {
+						echo wp_kses( $trip_types_list, wp_travel_allowed_html( array( 'a' ) ) );
+					} else {
+						echo esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', __( 'No trip type', 'wp-travel' ) ) );
+					}
+					?>
 					</span>
 				</div>
 	  	 	</li>
@@ -276,7 +283,9 @@ function wp_travel_single_excerpt( $post_id ) {
 					<strong class="title"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></strong>
 				</div>
 				<div class="travel-info">
-					<span class="value code-font"><?php esc_html_e( wp_traval_get_trip_code( $post_id ), 'wp-travel' ); ?></span>
+					<span class="value code-font">
+						<?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?>
+					</span>
 				</div>
 	  	 	</li>
 	  	 	<li>
@@ -284,7 +293,15 @@ function wp_travel_single_excerpt( $post_id ) {
 					<strong class="title"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></strong>
 				</div>
 				<div class="travel-info">
-					<span class="value"><?php printf( '%s', $group_size ) ?></span>
+					<span class="value">
+						<?php
+						if ( $group_size = $wp_travel_itinerary->get_group_size() ) {
+								printf( '%d pax', esc_html( $group_size ) );
+						} else {
+							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No Size Limit', 'wp-travel' ) ) );
+						}
+						?>
+					</span>
 				</div>
 	  	 	</li>
 			<?php if( comments_open() ) : ?>
@@ -742,17 +759,21 @@ function wp_travel_booking_message() {
  * @param  int $post_id ID of current trip post.
  * @return String.
  */
-function wp_travel_get_group_size( $post_id ) {
-	if ( ! $post_id ) {
-		return;
-	}
-	$group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
-
-	if (  $group_size > 0 ) {
-		return sprintf( '%d pax', $group_size );
+function wp_travel_get_group_size( $post_id = null ) {
+	if ( ! is_null( $post_id ) ) {
+		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $post_id ) );
 	} else {
-		return apply_filters( 'wp_travel_default_group_size_text', esc_html( 'No Size Limit', 'wp-travel' ) );
+		global $post;
+		$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
 	}
+
+	$group_size = $wp_travel_itinerary->get_group_size();
+
+	if (  $group_size ) {
+		return sprintf( '%d pax', $group_size );
+	}
+
+	return apply_filters( 'wp_travel_default_group_size_text', esc_html( 'No Size Limit', 'wp-travel' ) );
 }
 
 

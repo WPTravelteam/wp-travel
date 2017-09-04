@@ -108,4 +108,41 @@ class WP_Travel_Itinerary {
 
 		return false;
 	}
+
+	function get_group_size() {
+		if (
+			isset( $this->post_meta['wp_travel_group_size'][0] )
+			&& '' !== $this->post_meta['wp_travel_group_size'][0]
+		) {
+			return (int) $this->post_meta['wp_travel_group_size'][0];
+		}
+		return false;
+	}
+
+	function get_trip_code() {
+		$post_id = $this->post->ID;
+		if ( (int) $post_id < 10 ) {
+			$post_id = '0' . $post_id;
+		}
+		return apply_filters( 'wp_traval_trip_code', 'WT-CODE ' . $post_id, $post_id );
+	}
+
+	function get_trip_types( $fields = null ) {
+		if ( is_null( $fields ) ) {
+			$fields = array( 'fields' => 'all' );
+		}
+		$tripe_types = wp_get_post_terms( $this->post->ID, 'itinerary_types', $fields );
+		if ( ! empty( $trip_types ) ) {
+			return $trip_types;
+		}
+		return false;
+	}
+
+	function get_trip_types_list( $before = '', $sep = ', ', $after = '' ) {
+		$lists = get_the_term_list( $this->post->ID, 'itinerary_types', $before, $sep, $after );
+		if ( '' !== $lists ) {
+			return $lists;
+		}
+		return false;
+	}
 }
