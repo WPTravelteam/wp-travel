@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 	return;
 	 }
 	 $enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-	 $group_size 	= wp_travel_get_group_size( get_the_ID() );	 
+	 $group_size 	= wp_travel_get_group_size( get_the_ID() );
 	 $start_date 	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
 	 $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); ?>
 
@@ -47,24 +47,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<span class="post-category">
 								<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
 							    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-							    	<i class="fa fa-plane" aria-hidden="true"></i>
-							    	<?php 
+							    	<i class="fa fa-folder-o" aria-hidden="true"></i>
+							    	<?php
 							    	$first_term = array_shift( $terms );
 							    	$term_name = $first_term->name;
-							    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?> 
-									<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">									
+							    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
+									<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
 										<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 									</a>
 									<div class="wp-travel-caret">
 									<?php if ( count( $terms ) > 0 ) : ?>
 										<i class="fa fa-caret-down"></i>
-									       	 
+
 										<div class="sub-category-menu">
 											<?php foreach( $terms as $term ) : ?>
 												<?php
 													$term_name = $term->name;
 							    					$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
-												<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">									
+												<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
 													<?php esc_html_e( $term_name, 'wp-travel' ); ?>
 												</a>
 											<?php endforeach; ?>
@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 					</div>
 			    </div>
-			    <div class="description-right">			    	
+			    <div class="description-right">
 				    <?php wp_travel_trip_price( get_the_ID() ); ?>
 				    <div class="wp-travel-explore">
 							<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
