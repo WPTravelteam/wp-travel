@@ -315,10 +315,13 @@ function wp_travel_single_excerpt( $post_id ) {
 }
 
 function wp_travel_frontend_contents( $post_id ) {
-	$trip_outline	= get_post_meta( $post_id, 'wp_travel_outline', true );
-	$trip_include	= get_post_meta( $post_id, 'wp_travel_trip_include', true );
-	$trip_exclude	= get_post_meta( $post_id, 'wp_travel_trip_exclude', true );
-	$gallery_ids 	= get_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', true );
+	global $wp_travel_itinerary;
+	$trip_content	= $wp_travel_itinerary->get_content();
+	$trip_outline	= $wp_travel_itinerary->get_outline();
+	$trip_include	= $wp_travel_itinerary->get_trip_include();
+	$trip_exclude	= $wp_travel_itinerary->get_trip_exclude();
+	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
+	$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
 	?>
 
 
@@ -336,35 +339,58 @@ function wp_travel_frontend_contents( $post_id ) {
 		</ul>
 		<div class="resp-tabs-container">
 			<div id="tab-5" class="tab-list-content">
-				<?php echo apply_filters( 'the_content', get_the_content() ); ?>
+				<?php
+				if ( false !== $trip_content ) {
+					echo wp_kses_post( $trip_content );
+				} else {
+					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
+				}
+				?>
 			</div>
 			<div id="tab-1" class="tab-list-content ">
-				<?php _e( wpautop( $trip_outline ), 'wp-travel' ); ?>
+				<?php
+				if ( false !== $trip_outline )
+					echo wp_kses_post( $trip_outline );
+				else
+					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
+				?>
 			</div>
 			<div id="tab-2" class="tab-list-content">
-				<?php _e( wpautop( $trip_include ), 'wp-travel' ); ?>
+				<?php
+				if ( false !== $trip_include ) {
+					echo wp_kses_post( $trip_include );
+				} else {
+					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
+				}
+				?>
 			</div>
 			<div id="tab-3" class="tab-list-content">
-				<?php _e( wpautop( $trip_exclude ), 'wp-travel' ); ?>
+				<?php
+				if ( false !== $trip_exclude ) {
+					echo wp_kses_post( $trip_exclude );
+				} else {
+					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
+				}
+				?>
 			</div>
 			<div id="tab-4" class="tab-list-content">
-				<?php if ( count( $gallery_ids ) > 0 ) : ?>
+				<?php if ( false !== $gallery_ids ) : ?>
 				<div class="wp-travel-gallery wp-travel-container-wrap">
 				    <div class="wp-travel-row-wrap">
 						<ul>
 							<?php foreach ( $gallery_ids as $gallery_id ) : ?>
 							<li>
-							<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
-							<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
-							<img src="<?php echo ( $gallery_image[0] ); ?>" />
-							</a>
+								<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
+								<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
+								<img src="<?php echo ( $gallery_image[0] ); ?>" />
+								</a>
 							</li>
 							<?php endforeach; ?>
 						</ul>
 					</div>
 				</div>
 				<?php else : ?>
-					<p class="wp-travel-norgallery"><?php esc_html_e( 'Empty gallery images', 'wp-travel' ); ?></p>
+					<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No gallery images found.', 'wp-travel' ); ?></p>
 				<?php endif; ?>
 			</div>
 			<?php if ( comments_open() ) : ?>
@@ -389,9 +415,7 @@ function wp_travel_trip_map( $post_id ) {
 	if ( ! isset( $settings['google_map_api_key'] ) || '' === $settings['google_map_api_key'] ) {
 		return;
 	}
-
 	?>
-
 	<div class="wp-travel-map">
 		<div id="gmap" style="width:100%;height:300px"></div>
 	</div>

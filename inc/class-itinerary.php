@@ -64,4 +64,48 @@ class WP_Travel_Itinerary {
 
 		return false;
 	}
+
+	function get_outline() {
+		if (
+			isset( $this->post_meta['wp_travel_outline'][0] )
+			&& '' !== $this->post_meta['wp_travel_outline'][0]
+		) {
+			return wpautop( $this->post_meta['wp_travel_outline'][0] );
+		}
+
+		return false;
+	}
+
+	function get_content() {
+		if (
+			isset( $this->post->post_content )
+			&& '' !== $this->post->post_content
+		) {
+			return apply_filters( 'the_content', $this->post->post_content );
+		}
+
+		return false;
+	}
+
+	function get_trip_include() {
+		if (
+			isset( $this->post_meta['wp_travel_trip_include'][0] )
+			&& '' !== $this->post_meta['wp_travel_trip_include'][0]
+		) {
+			return apply_filters( 'the_content', $this->post_meta['wp_travel_trip_include'][0] );
+		}
+
+		return false;
+	}
+
+	function get_trip_exclude() {
+		if (
+			isset( $this->post_meta['wp_travel_trip_exclude'][0] )
+			&& '' !== $this->post_meta['wp_travel_trip_exclude'][0]
+		) {
+			return apply_filters( 'the_content', $this->post_meta['wp_travel_trip_exclude'][0] );
+		}
+
+		return false;
+	}
 }
