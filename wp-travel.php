@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: WP Travel
- * Plugin URI: http://www.wensolutions.com/plugins/trip
- * Description: This plugin is used to add trip for any travel and tour site
+ * Plugin URI: http://www.wensolutions.com/plugins/wp-travel
+ * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
  * Version: 1.0.0
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
- * Tested up to: 4.7
+ * Tested up to: 4.8.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
