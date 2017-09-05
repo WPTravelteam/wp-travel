@@ -749,7 +749,7 @@ function wp_travel_booking_message() {
 		return;
 	}
 	if ( isset( $_POST['wp_travel_book_now'] ) ) : ?>
-		<p><?php echo apply_filters( 'wp_travel_booked_message', "We've received your details. We'll contact you soon." ); ?></p>
+		<p class="wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
 	<?php endif;
 }
 
