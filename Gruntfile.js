@@ -8,8 +8,8 @@ module.exports = function(grunt) {
 		'assets/**',
 		'inc/**',
 		'templates/**',
-		'<%= pkg.main_file %>',
 		'readme.txt',
+		'wp-travel.php',
 	];
 
 	/**

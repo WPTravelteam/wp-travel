@@ -82,7 +82,7 @@ class Wp_Travel_Shortcodes {
 		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
-				'message' => __( 'Your Item Has Been added but the email could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.' ),
+				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			) );
 		}
 		$post_array = array(

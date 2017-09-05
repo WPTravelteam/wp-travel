@@ -41,8 +41,8 @@ class WP_Travel_Admin_Settings {
 
 	function add_tabs( $tabs ) {
 		$settings_fields['general'] = array(
-			'tab_label' => __( 'General', 'wp_travel' ),
-			'content_title' => __( 'General Settings', 'wp_travel' )
+			'tab_label' => __( 'General', 'wp-travel' ),
+			'content_title' => __( 'General Settings', 'wp-travel' )
 		);
 
 		// $settings_fields['currency'] = array(
@@ -66,7 +66,7 @@ class WP_Travel_Admin_Settings {
 			'class'		=> 'currency',
 			'name'		=> 'currency',
 			'selected'	=> $currency,
-			'option'	=> __( 'Select Currency' ),
+			'option'	=> __( 'Select Currency', 'wp-travel' ),
 			'options'	=> $currency_list,	
 		);
 		echo '<table class="form-table">';

@@ -42,20 +42,20 @@ function wp_travel_get_booking_form() {
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-fname"><?php esc_html_e( 'First Name' ); ?></label>
+				<label for="wp-trevel-fname"><?php esc_html_e( 'First Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-fname" name="wp_travel_fname">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-mname"><?php esc_html_e( 'Middle Name' ); ?></label>
+				<label for="wp-trevel-mname"><?php esc_html_e( 'Middle Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-mname" name="wp_travel_mname">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-lname"><?php esc_html_e( 'Last Name' ); ?></label>
+				<label for="wp-trevel-lname"><?php esc_html_e( 'Last Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-lname" name="wp_travel_lname">
 			</div>
 
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-country"><?php esc_html_e( 'Country' ); ?></label>
+				<label for="wp-trevel-country"><?php esc_html_e( 'Country', 'wp-travel' ); ?></label>
 				<?php $countries = wp_travel_get_countries(); ?>
 				<?php if ( count( $countries ) > 0 ) : ?>
 				<select id="wp-trevel-country" name="wp_travel_country">
@@ -66,25 +66,25 @@ function wp_travel_get_booking_form() {
 			    <?php endif; ?>
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-address"><?php esc_html_e( 'Address' ); ?></label>
+				<label for="wp-travel-address"><?php esc_html_e( 'Address', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-travel-address" name="wp_travel_address">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-phone"><?php esc_html_e( 'Phone' ); ?></label>
+				<label for="wp-travel-phone"><?php esc_html_e( 'Phone', 'wp-travel' ); ?></label>
 				<input type="number" id="wp-travel-phone" name="wp_travel_phone">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-email"><?php esc_html_e( 'Email' ); ?></label>
+				<label for="wp-travel-email"><?php esc_html_e( 'Email', 'wp-travel' ); ?></label>
 				<input type="email" id="wp-travel-email" name="wp_travel_email">
 			</div>
 	        <?php echo apply_filters( 'wp_travel_booking_form_after_email_html_content', '' ); ?>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX' ); ?></label>
+				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX', 'wp-travel' ); ?></label>
 				<input type="number" max="<?php echo apply_filters( 'wp_travel_pax', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax">
 			</div>
 			<div class="wp-travel-form-field textarea-field">
-				<label for="wp-travel-note"><?php esc_html_e( 'Note' ); ?></label>
-				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...' ); ?>" rows="6" cols="150"></textarea>
+				<label for="wp-travel-note"><?php esc_html_e( 'Note', 'wp-travel' ); ?></label>
+				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"></textarea>
 			</div>
 			
 			<div class="wp-travel-form-field button-field">
@@ -109,7 +109,7 @@ add_action( 'add_meta_boxes', 'wp_travel_register_booking_metaboxes', 10, 2 );
  * This will add metabox in booking post type.
  */
 function wp_travel_register_booking_metaboxes() {
-	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
+	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail', 'wp-travel' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
 }
 
 /**
@@ -137,20 +137,20 @@ function wp_travel_booking_info( $post ) {
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-fname"><?php esc_html_e( 'First Name' ); ?></label>
+				<label for="wp-trevel-fname"><?php esc_html_e( 'First Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-fname" name="wp_travel_fname" value="<?php _e( $wp_travel_fname, 'wp-travel' ); ?>" >
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-mname"><?php esc_html_e( 'Middle Name' ); ?></label>
+				<label for="wp-trevel-mname"><?php esc_html_e( 'Middle Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-mname" name="wp_travel_mname"  value="<?php _e( $wp_travel_mname, 'wp-travel' ); ?>">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-lname"><?php esc_html_e( 'Last Name' ); ?></label>
+				<label for="wp-trevel-lname"><?php esc_html_e( 'Last Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-trevel-lname" name="wp_travel_lname"  value="<?php _e( $wp_travel_lname, 'wp-travel' ); ?>">
 			</div>
 
 			<div class="wp-travel-form-field">
-				<label for="wp-trevel-country"><?php esc_html_e( 'Country' ); ?></label>
+				<label for="wp-trevel-country"><?php esc_html_e( 'Country', 'wp-travel' ); ?></label>
 				<?php $countries = wp_travel_get_countries(); ?>
 				<?php if ( count( $countries ) > 0 ) : ?>
 				<select id="wp-trevel-country" name="wp_travel_country">
@@ -161,25 +161,25 @@ function wp_travel_booking_info( $post ) {
 			    <?php endif; ?>
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-address"><?php esc_html_e( 'Address' ); ?></label>
+				<label for="wp-travel-address"><?php esc_html_e( 'Address', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-travel-address" name="wp_travel_address"  value="<?php _e( $wp_travel_address, 'wp-travel' ); ?>">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-phone"><?php esc_html_e( 'Phone' ); ?></label>
+				<label for="wp-travel-phone"><?php esc_html_e( 'Phone', 'wp-travel' ); ?></label>
 				<input type="number" id="wp-travel-phone" name="wp_travel_phone"  value="<?php _e( $wp_travel_phone, 'wp-travel' ); ?>">
 			</div>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-email"><?php esc_html_e( 'Email' ); ?></label>
+				<label for="wp-travel-email"><?php esc_html_e( 'Email', 'wp-travel' ); ?></label>
 				<input type="email" id="wp-travel-email" name="wp_travel_email"  value="<?php _e( $wp_travel_email, 'wp-travel' ); ?>">
 			</div>
 	        <?php echo apply_filters('wp_travel_booking_form_after_email_html_content',''); ?>
 			<div class="wp-travel-form-field">
-				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX' ); ?></label>
+				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX', 'wp-travel' ); ?></label>
 				<input type="number" max="<?php echo apply_filters( 'wp_travel_max_pax_number', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax"  value="<?php _e( $wp_travel_pax, 'wp-travel' ); ?>">
 			</div>
 			<div class="wp-travel-form-field textarea-field">
-				<label for="wp-travel-note"><?php esc_html_e( 'Note' ); ?></label>
-				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...' ); ?>" rows="6" cols="150"><?php _e( $wp_travel_note, 'wp-travel' ); ?></textarea>
+				<label for="wp-travel-note"><?php esc_html_e( 'Note', 'wp-travel' ); ?></label>
+				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php _e( $wp_travel_note, 'wp-travel' ); ?></textarea>
 			</div>			
 			<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
 		</form>

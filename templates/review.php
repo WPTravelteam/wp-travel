@@ -63,7 +63,7 @@ $rating   = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating',
 				return;
 			}
 			global $user_ID;
-			$login_text = __( 'please login to review' );
+			$login_text = __( 'please login to review', 'wp-travel' );
 			$link = '';
 			if ( get_option('comment_registration') && ! $user_ID ) {
 				$link = '<a rel="nofollow" href="' . wp_login_url( get_permalink() ) . '">' . $login_text . '</a>';

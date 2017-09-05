@@ -210,10 +210,10 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 		return;
 	}
 	$average_rating = wp_travel_get_average_rating(); ?>
-	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'classified' ), $average_rating ); ?>">
+	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		 <a>
 			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
-				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'classified' ), '<span itemprop="bestRating">', '</span>' ); ?>
+				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
 		</a>
 
@@ -231,10 +231,10 @@ function wp_travel_trip_rating( $post_id ) {
 		return;
 	}
 	$average_rating = wp_travel_get_average_rating(); ?>
-	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'classified' ), $average_rating ); ?>">
+	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		 <a>
 			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
-				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'classified' ), '<span itemprop="bestRating">', '</span>' ); ?>
+				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
 		</a>
 
