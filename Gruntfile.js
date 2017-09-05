@@ -112,7 +112,9 @@ module.exports = function(grunt) {
 		},
 		push_svn:{
 			options: {
-				remove: true
+				remove: true,
+				username: 'WEN Solutions',
+				password: 'wensolutions@2016s'
 			},
 			main: {
 				src: 'build/<%= pkg.name %>',
