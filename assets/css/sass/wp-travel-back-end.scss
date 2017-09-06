@@ -203,19 +203,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 	    margin: 10px 0 15px 0;
 	    @include clearfix();
 	    table{
-	    	border: 1px solid #ddd;
-   			padding: 10px;
-   			width: 100%;
    			td.total_booked{
    				text-align:center;
    			}
-   			th {
-			    text-align: left;
-			    border: 1px solid #ddd;
-			    padding: 0 10px !important;
-			    font-weight: 400;
-			    background: #f1f1f1;
-			}
 		    .cross-out.button{
 				display: block;
 			    margin: 0 auto;
@@ -233,7 +223,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 			}
 	    }
 	}
-	
+
 	.select2-container .select2-selection--multiple{
 		border-radius:0;
 		border:1px solid #ddd;
@@ -246,8 +236,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
   .select2-results__option[aria-selected=true] {
         display: none;
     }
-    
-.table-booking-info{ 
+
+.table-booking-info{
 	table {
 	    width: 100%;
 	    padding:10px;
@@ -262,4 +252,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button{
 	    	text-align: left;
 	    }
 	}
+}
+
+
+.wp-travel-field-wrap{
+   label {
+      font-weight: bold;
+      a{
+         .dashicons.dashicons-editor-help{
+            color: #868484;
+            text-decoration:none;
+         }
+      }
+   }
 }

@@ -118,30 +118,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     content: "";
     display: table;
     clear: both; }
-  .wp-travel-tabs-wrap #date_pax table {
-    border: 1px solid #ddd;
-    padding: 10px;
+  .wp-travel-tabs-wrap #date_pax table td.total_booked {
+    text-align: center; }
+  .wp-travel-tabs-wrap #date_pax table .cross-out.button {
+    display: block;
+    margin: 0 auto;
+    background: #e40808;
+    border: none;
+    color: #fff;
     width: 100%; }
-    .wp-travel-tabs-wrap #date_pax table td.total_booked {
-      text-align: center; }
-    .wp-travel-tabs-wrap #date_pax table th {
-      text-align: left;
-      border: 1px solid #ddd;
-      padding: 0 10px !important;
-      font-weight: 400;
-      background: #f1f1f1; }
-    .wp-travel-tabs-wrap #date_pax table .cross-out.button {
-      display: block;
-      margin: 0 auto;
-      background: #e40808;
-      border: none;
-      color: #fff;
-      width: 100%; }
-      .wp-travel-tabs-wrap #date_pax table .cross-out.button:hover {
-        background: #b31919; }
-    .wp-travel-tabs-wrap #date_pax table tbody td {
-      border-bottom: 1px solid #f1f1f1;
-      padding: 7px 0; }
+    .wp-travel-tabs-wrap #date_pax table .cross-out.button:hover {
+      background: #b31919; }
+  .wp-travel-tabs-wrap #date_pax table tbody td {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 7px 0; }
 .wp-travel-tabs-wrap .select2-container .select2-selection--multiple {
   border-radius: 0;
   border: 1px solid #ddd;
@@ -163,5 +153,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .table-booking-info table td {
     padding: 5px 10px;
     text-align: left; }
+
+.wp-travel-field-wrap label {
+  font-weight: bold; }
+  .wp-travel-field-wrap label a .dashicons.dashicons-editor-help {
+    color: #868484;
+    text-decoration: none; }
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */
