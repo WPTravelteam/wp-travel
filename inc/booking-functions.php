@@ -34,7 +34,7 @@ function wp_travel_get_booking_form() {
 
 	global $post;
 	ob_start(); ?>
-	
+
 	<div class="wp-travel-booking-form-wrapper">
 		<form action="" method="post">
 			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
@@ -61,7 +61,7 @@ function wp_travel_get_booking_form() {
 				<select id="wp-trevel-country" name="wp_travel_country">
 					<?php foreach ( $countries as $short_name => $name ) : ?>
 						<option value="<?php echo esc_html( $short_name, 'wp-travel' ) ?>"><?php echo esc_html( $name, 'wp-travel' ) ?></option>
-					<?php endforeach; ?>			      
+					<?php endforeach; ?>
 			    </select>
 			    <?php endif; ?>
 			</div>
@@ -86,12 +86,12 @@ function wp_travel_get_booking_form() {
 				<label for="wp-travel-note"><?php esc_html_e( 'Note', 'wp-travel' ); ?></label>
 				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"></textarea>
 			</div>
-			
+
 			<div class="wp-travel-form-field button-field">
 				<?php do_action( 'wp_travel_booking_before_submit_button' ); ?>
 				<input type="hidden" name="wp_travel_post_id" value="<?php echo $post->ID; ?>" >
 				<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now">
-				
+
 				<?php do_action( 'wp_travel_booking_after_submit_button' ); ?>
 			</div>
 			<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
@@ -133,7 +133,7 @@ function wp_travel_booking_info( $post ) {
 ?>
 	<div class="wp-travel-booking-form-wrapper">
 		<form action="" method="post">
-			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>			
+			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 
 			<div class="wp-travel-form-field">
@@ -156,7 +156,7 @@ function wp_travel_booking_info( $post ) {
 				<select id="wp-trevel-country" name="wp_travel_country">
 					<?php foreach ( $countries as $short_name => $name ) : ?>
 						<option <?php selected( $wp_travel_country, $short_name ); ?> value="<?php esc_html_e( $short_name, 'wp-travel' ) ?>"><?php esc_html_e( $name, 'wp-travel' ) ?></option>
-					<?php endforeach; ?>			      
+					<?php endforeach; ?>
 			    </select>
 			    <?php endif; ?>
 			</div>
@@ -180,7 +180,7 @@ function wp_travel_booking_info( $post ) {
 			<div class="wp-travel-form-field textarea-field">
 				<label for="wp-travel-note"><?php esc_html_e( 'Note', 'wp-travel' ); ?></label>
 				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php _e( $wp_travel_note, 'wp-travel' ); ?></textarea>
-			</div>			
+			</div>
 			<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
 		</form>
 	</div>
