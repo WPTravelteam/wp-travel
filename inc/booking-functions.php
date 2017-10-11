@@ -31,7 +31,7 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_mname',
 				'id' => 'wp-trevel-mname',
 				'validations' => array(
-					'required' => '',
+					// 'required' => '',
 					'maxlength' => '50',
 					'type' => 'alphanum',
 				),
@@ -98,12 +98,40 @@ function wp_travel_booking_form_fields() {
 				'label' => 'Pax',
 				'name' => 'wp_travel_pax',
 				'id' => 'wp-travel-pax',
+				'default' => 1,
 				'validations' => array(
 					'required' => '',
 					'min' => '1',
 					'max' => '60', // Make it dynamic.
 				),
+				'attributes' => array( 'min' => 1 ),
 				'priority' => 8,
+			),
+			'arrival_date' => array(
+				'type' => 'date',
+				'label' => 'Arrival Date',
+				'name' => 'wp_travel_arrival_date',
+				'id' => 'wp-travel-arrival-date',
+				'class_name' => 'wp-travel-datepicker',
+				'validations' => array(
+					'required' => '',
+				),
+				'attributes' => array( 'readonly' => 'readonly' ),
+				'date_options' => array(),
+				'priority' => 9,
+			),
+			'departure_date' => array(
+				'type' => 'date',
+				'label' => 'Departure Date',
+				'name' => 'wp_travel_departure_date',
+				'id' => 'wp-travel-departure-date',
+				'class_name' => 'wp-travel-datepicker',
+				'validations' => array(
+					'required' => '',
+				),
+				'attributes' => array( 'readonly' => 'readonly' ),
+				'date_options' => array(),
+				'priority' => 10,
 			),
 			'note' => array(
 				'type' => 'textarea',
@@ -113,7 +141,7 @@ function wp_travel_booking_form_fields() {
 				'placeholder' => 'Enter some notes...',
 				'rows' => 6,
 				'cols' => 150,
-				'priority' => 9,
+				'priority' => 11,
 				'wrapper_class' => 'textarea-field',
 			),
 		)
