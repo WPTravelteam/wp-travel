@@ -159,7 +159,8 @@
     display: inline-block;
     padding-left: 15px;
     padding-right: 15px;
-    margin-bottom: 15px; }
+    margin-bottom: 15px;
+    position: relative; }
     @media (max-width: 767px) {
       .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field {
         width: 100%;
@@ -874,5 +875,11 @@
 
 .wp-travel-notice-danger {
   background: #f83531; }
+
+.parsley-errors-list {
+  list-style: none;
+  position: absolute;
+  right: 15px;
+  color: #f83531; }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
