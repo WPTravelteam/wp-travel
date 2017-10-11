@@ -23,6 +23,13 @@ class WP_Travel_Frontend_Assets {
 
 		global $post;
 
+		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), '2.2.3' );
+
+		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
+		wp_register_script( 'jquery-datepicker-lib-eng', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), '', 1 );
+		wp_enqueue_script('jquery-datepicker-lib');
+		wp_enqueue_script('jquery-datepicker-lib-eng');
+		
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
 		if ( ! is_singular( 'itineraries' ) ) {
@@ -36,7 +43,7 @@ class WP_Travel_Frontend_Assets {
 		}
 
 		wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
-		wp_register_script( 'traval-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery' ), '', true );
+		wp_register_script( 'traval-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), '', true );
 		if ( '' != $api_key ) {
 			wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
 			wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', array( 'jquery', 'google-map-api' ), '', 1 );
