@@ -16,6 +16,7 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.hidden.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.select.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.textarea.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.date.php';
 	}
 
 	private function field_types() {
@@ -25,6 +26,7 @@ class WP_Travel_FW_Field {
 		$field_types['hidden'] = 'WP_Travel_FW_Field_Hidden';
 		$field_types['select'] = 'WP_Travel_FW_Field_Select';
 		$field_types['textarea'] = 'WP_Travel_FW_Field_Textarea';
+		$field_types['date'] = 'WP_Travel_FW_Field_Date';
 		return $field_types;
 	}
 
@@ -52,10 +54,14 @@ class WP_Travel_FW_Field {
 	}
 
 	function template( $field, $content ) {
-		ob_start();
-		?>
+		ob_start(); ?>
 			<div class="wp-travel-form-field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
-				<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php echo esc_attr( $field['label'] ); ?></label>
+				<label for="<?php echo esc_attr( $field['id'] ); ?>">
+					<?php echo esc_attr( $field['label'] ); ?>
+					<?php if ( isset( $field['validations']['required'] ) ) { ?>
+						<span class="required-label">*</span>
+					<?php } ?>
+				</label>
 				<?php echo $content; ?>
 			</div>
 		<?php
