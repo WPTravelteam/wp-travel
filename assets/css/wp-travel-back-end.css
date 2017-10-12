@@ -94,6 +94,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   display: inline-block;
   margin-bottom: 15px;
   padding: 0 15px; }
+  .wp-travel-form-field.full-width {
+    width: calc(90% + 32px); }
   @media (max-width: 992px) {
     .wp-travel-form-field {
       width: 95%; } }
@@ -159,5 +161,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-field-wrap label a .dashicons.dashicons-editor-help {
     color: #868484;
     text-decoration: none; }
+
+.wp-travel-view-bookings {
+  float: right; }
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */
