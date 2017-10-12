@@ -450,3 +450,22 @@ function wp_travel_allowed_html( $tags = array() ) {
 	}
 	return $allowed_tags;
 }
+
+/**
+ * Return array list of itinerary.
+ *
+ * @return Array
+ */
+function wp_travel_get_itineraries_array() {
+	$args = array(
+	  'post_type'   => 'itineraries',
+	);
+
+	$itineraries = get_posts( $args );
+
+	$itineraries_array = array();
+	foreach ( $itineraries as $itinerary ) {
+		$itineraries_array[ $itinerary->ID ] = $itinerary->post_title;
+	}
+	return apply_filters( 'wp_travel_itineraries_array', $itineraries_array, $args );
+}
