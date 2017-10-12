@@ -380,29 +380,110 @@ function wp_travel_save_booking_data( $post_id ) {
 
 add_action( 'save_post', 'wp_travel_save_booking_data' );
 
-
 add_filter( 'parse_query', 'wp_travel_posts_filter' );
 
 /**
- * if submitted filter by post meta
- * 
- * make sure to change META_KEY to the actual meta key
- * and POST_TYPE to the name of your custom post type
- * @author Ohad Raz
- * @param  (wp_query object) $query
- * 
- * @return Void
+ * If submitted filter by post meta.
+ *
+ * @param  (wp_query object) $query object.
+ *
+ * @return void
  */
-function wp_travel_posts_filter( $query ){
-    global $pagenow;
-    $type = '';
-    if ( isset($_GET['post_type'] ) ) {
-        $type = $_GET['post_type'];
-    }
-    
-    if ( 'itinerary-booking' == $type && is_admin() && $pagenow=='edit.php' && isset($_GET['wp_travel_post_id']) && $_GET['wp_travel_post_id'] != '') {
+function wp_travel_posts_filter( $query ) {
+	global $pagenow;
+	$type = '';
+	if ( isset( $_GET['post_type'] ) ) {
+		$type = $_GET['post_type'];
+	}
 
-        $query->query_vars['meta_key'] = 'wp_travel_post_id';
-        $query->query_vars['meta_value'] = $_GET['wp_travel_post_id'];
-    }
+	if ( 'itinerary-booking' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
+
+		$query->query_vars['meta_key'] = 'wp_travel_post_id';
+		$query->query_vars['meta_value'] = $_GET['wp_travel_post_id'];
+	}
+}
+
+/*
+ * ADMIN COLUMN - HEADERS
+ */
+add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_columns' );
+
+/**
+ * Customize Admin column.
+ *
+ * @param  Array $booking_columns List of columns.
+ * @return Array                  [description]
+ */
+function wp_travel_booking_columns( $booking_columns ) {
+
+	$new_columns['cb'] 			 = '<input type="checkbox" />';
+	$new_columns['title'] 		 = _x( 'Title', 'column name' );
+	$new_columns['contact_name'] = __( 'Contact Name' );
+	$new_columns['date'] 		 = __( 'Booking Date' );
+	return $new_columns;
+}
+
+/*
+ * ADMIN COLUMN - CONTENT
+ */
+add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_manage_columns', 10, 2 );
+
+/**
+ * Add data to custom column.
+ *
+ * @param  String $column_name Custom column name.
+ * @param  int 	  $id          Post ID.
+ */
+function wp_travel_booking_manage_columns( $column_name, $id ) {
+	switch ( $column_name ) {
+		case 'contact_name':
+			$name = get_post_meta( $id , 'wp_travel_fname' , true );
+			$name .= ' ' . get_post_meta( $id , 'wp_travel_mname' , true );
+			$name .= ' ' . get_post_meta( $id , 'wp_travel_lname' , true );
+			echo esc_attr( $name, 'wp-travel' );
+			break;
+		default:
+			break;
+	} // end switch
+}
+
+/*
+ * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
+ * https://gist.github.com/906872
+ */
+add_filter( 'manage_edit-itinerary-booking_sortable_columns', 'wp_travel_booking_sort' );
+function wp_travel_booking_sort( $columns ) {
+
+	$custom = array(
+		'contact_name' 	=> 'contact_name',
+		// 'city' 		=> 'city'
+	);
+	return wp_parse_args( $custom, $columns );
+	/* or this way
+		$columns['concertdate'] = 'concertdate';
+		$columns['city'] = 'city';
+		return $columns;
+	*/
+}
+
+/*
+ * ADMIN COLUMN - SORTING - ORDERBY
+ * http://scribu.net/wordpress/custom-sortable-columns.html#comment-4732
+ */
+add_filter( 'request', 'wp_travel_booking_column_orderby' );
+
+/**
+ * Manage Order By custom column.
+ *
+ * @param  Array $vars Order By array.
+ * @return Array       Order By array.
+ */
+function wp_travel_booking_column_orderby( $vars ) {
+	if ( isset( $vars['orderby'] ) && 'contact_name' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'wp_travel_fname',
+			'orderby' => 'meta_value',
+		) );
+	}
+	return $vars;
 }
