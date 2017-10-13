@@ -23,20 +23,9 @@ function wp_travel_booking_form_fields() {
 					'maxlength' => '50',
 					'type' => 'alphanum',
 				),
-				'priority' => 1,
+				'priority' => 10,
 			),
-			'middle_name'	=> array(
-				'type' => 'text',
-				'label' => 'Middle Name',
-				'name' => 'wp_travel_mname',
-				'id' => 'wp-travel-mname',
-				'validations' => array(
-					// 'required' => '',
-					'maxlength' => '50',
-					'type' => 'alphanum',
-				),
-				'priority' => 2,
-			),
+
 			'last_name'		=> array(
 				'type' => 'text',
 				'label' => 'Last Name',
@@ -47,7 +36,7 @@ function wp_travel_booking_form_fields() {
 					'maxlength' => '50',
 					'type' => 'alphanum',
 				),
-				'priority' => 3,
+				'priority' => 20,
 			),
 			'country'		=> array(
 				'type' => 'select',
@@ -58,7 +47,7 @@ function wp_travel_booking_form_fields() {
 				'validations' => array(
 					'required' => '',
 				),
-				'priority' => 4,
+				'priority' => 30,
 			),
 			'address'		=> array(
 				'type' => 'text',
@@ -69,7 +58,7 @@ function wp_travel_booking_form_fields() {
 					'required' => '',
 					'maxlength' => '50',
 				),
-				'priority' => 5,
+				'priority' => 40,
 			),
 			'phone_number'	=> array(
 				'type' => 'text',
@@ -80,7 +69,7 @@ function wp_travel_booking_form_fields() {
 					'required' => '',
 					'maxlength' => '50',
 				),
-				'priority' => 6,
+				'priority' => 50,
 			),
 			'email' => array(
 				'type' => 'email',
@@ -91,47 +80,33 @@ function wp_travel_booking_form_fields() {
 					'required' => '',
 					'maxlength' => '60',
 				),
-				'priority' => 7,
-			),
-			'pax' => array(
-				'type' => 'number',
-				'label' => 'Pax',
-				'name' => 'wp_travel_pax',
-				'id' => 'wp-travel-pax',
-				'default' => 1,
-				'validations' => array(
-					'required' => '',
-					'min' => '1',
-					'max' => '60', // Make it dynamic.
-				),
-				'attributes' => array( 'min' => 1 ),
-				'priority' => 8,
+				'priority' => 60,
 			),
 			'arrival_date' => array(
 				'type' => 'date',
 				'label' => 'Arrival Date',
 				'name' => 'wp_travel_arrival_date',
 				'id' => 'wp-travel-arrival-date',
-				'class_name' => 'wp-travel-datepicker',
+				'class' => 'wp-travel-datepicker',
 				'validations' => array(
 					'required' => '',
 				),
 				'attributes' => array( 'readonly' => 'readonly' ),
 				'date_options' => array(),
-				'priority' => 9,
+				'priority' => 70,
 			),
 			'departure_date' => array(
 				'type' => 'date',
 				'label' => 'Departure Date',
 				'name' => 'wp_travel_departure_date',
 				'id' => 'wp-travel-departure-date',
-				'class_name' => 'wp-travel-datepicker',
+				'class' => 'wp-travel-datepicker',
 				'validations' => array(
 					'required' => '',
 				),
 				'attributes' => array( 'readonly' => 'readonly' ),
 				'date_options' => array(),
-				'priority' => 10,
+				'priority' => 80,
 			),
 			'note' => array(
 				'type' => 'textarea',
@@ -141,7 +116,7 @@ function wp_travel_booking_form_fields() {
 				'placeholder' => 'Enter some notes...',
 				'rows' => 6,
 				'cols' => 150,
-				'priority' => 11,
+				'priority' => 90,
 				'wrapper_class' => 'textarea-field',
 			),
 		)
@@ -190,9 +165,11 @@ add_action( 'add_meta_boxes', 'wp_travel_register_booking_metaboxes', 10, 2 );
  */
 function wp_travel_register_booking_metaboxes($a) {
 	global $post;
+	global $wp_travel_itinerary;
 
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
-	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View Bookings</a></span>', 'wp-travel' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
+	// $trip_code = $wp_travel_itinerary->get_trip_code( $wp_travel_post_id );
+	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
 }
 
 /**
@@ -487,3 +464,31 @@ function wp_travel_booking_column_orderby( $vars ) {
 	}
 	return $vars;
 }
+
+add_action('add_meta_boxes', function() {
+    add_action('admin_head', function() {
+    	global $post;
+    	if ( 'itinerary-booking' === $post->post_type ): ?>
+	        
+				<style type="text/css">
+					#visibility {
+					    display: none;
+					}
+					#misc-publishing-actions, #minor-publishing-actions{display:none}
+				</style>
+
+		<?php endif;
+    });
+});
+
+add_action('restrict_manage_posts', function() {
+	if ( 'itinerary-booking' === $post->post_type ) {
+		echo <<<EOS
+			<script type="text/javascript">
+			jQuery(document).ready(function($) {
+			    $("input[name='keep_private']").parents("div.inline-edit-group:first").hide();
+			});
+			</script>
+EOS;
+	}
+});

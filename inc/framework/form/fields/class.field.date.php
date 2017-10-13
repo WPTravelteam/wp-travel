@@ -20,7 +20,7 @@ class WP_Travel_FW_Field_Date {
 				$attributes .= sprintf( '%s="%s"', $attribute, $attribute_val );
 			}
 		}
-		$output = sprintf( '<input type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class_name'], $attributes );
+		$output = sprintf( '<input type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
 
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
