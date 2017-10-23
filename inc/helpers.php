@@ -469,3 +469,32 @@ function wp_travel_get_itineraries_array() {
 	}
 	return apply_filters( 'wp_travel_itineraries_array', $itineraries_array, $args );
 }
+
+/**
+ * Return WP Travel Featured post.
+ * @param  integer $no_of_post_to_show No of post to show
+ * @return array
+ */
+function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
+	$args = array(
+	'numberposts' => $no_of_post_to_show,
+	'offset'           => 0,
+	'category'         => '',
+	'category_name'    => '',
+	'orderby'          => 'date',
+	'order'            => 'DESC',
+	'include'          => '',
+	'exclude'          => '',
+	'meta_key'         => 'wp_travel_featured',
+	'meta_value'       => 'yes',
+	'post_type'        => 'itineraries',
+	'post_mime_type'   => '',
+	'post_parent'      => '',
+	'author'	   => '',
+	'author_name'	   => '',
+	'post_status'      => 'publish',
+	'suppress_filters' => true 
+);
+$posts_array = get_posts( $args );
+return $posts_array;
+}
