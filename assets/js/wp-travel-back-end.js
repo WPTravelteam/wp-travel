@@ -166,4 +166,28 @@
 		}
 	} );
 
+   $(document).on("click", ".wp-travel-featured-post", function(e){
+      e.preventDefault();           
+      var featuredIcon=$(this);
+      var post_id = $(this).attr("data-post-id");
+      var nonce = $(this).attr("data-nonce");
+      var data={ action:"wp_travel_featured_post",post_id:post_id,nonce:nonce };
+      $.ajax({
+         url:ajaxurl,
+         data:data,
+         type:"post",
+         dataType:"json",
+         success:function(data){
+            if( data != 'invalid' ){
+               featuredIcon.removeClass("dashicons-star-filled").removeClass("dashicons-star-empty");                
+               if(data.new_status=="yes"){
+                  featuredIcon.addClass("dashicons-star-filled");
+               }else{
+                  featuredIcon.addClass("dashicons-star-empty");
+               }
+            }
+         }
+      });
+   });
+
 }(jQuery));
