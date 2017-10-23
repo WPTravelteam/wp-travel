@@ -95,6 +95,12 @@ class Wp_Travel_Shortcodes {
 		$orderID = wp_insert_post( $post_array );
 		update_post_meta( $orderID, 'order_data', $_POST );
 
+		$trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
+		$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
+		$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
+		$new_booking_count = $booking_count + 1;
+		update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
+
 		$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now' );
 		foreach ( $_POST as $meta_name => $meta_val ) {
 			if ( in_array( $meta_name , $post_ignore ) ) {
