@@ -10,6 +10,7 @@ class WP_Travel_Admin_Assets {
 	function styles() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$screen = get_current_screen();
+
 		// if ( 'itineraries' !== $screen->id ) {
 		// 	return;
 		// }
@@ -30,7 +31,10 @@ class WP_Travel_Admin_Assets {
 
 		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
 		wp_register_script( 'jquery-datepicker-lib-eng', $this->assets_path . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), '', 1 );
-		if ( 'itineraries' === $screen->id ) {
+
+		$allowed_screen = array( 'itineraries', 'edit-itineraries' );
+
+		if ( in_array( $screen->id, $allowed_screen ) ) {
 			$settings = wp_traval_get_settings();
 			global $post;
 
