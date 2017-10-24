@@ -68,6 +68,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define_constants();
 			$this->includes();
 			$this->init_hooks();
+			$this->init_shortcodes();
 		}
 
 		/**
@@ -95,7 +96,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
-			add_shortcode( 'WP_TRAVEL_BOOKING', array( 'Wp_Travel_Shortcodes', 'wp_travel_booking_form' ) );
 			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ), 99 );
 
 			if ( $this->is_request( 'admin' ) ) {
@@ -112,6 +112,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param  string $value Value of constant.
 		 * @return void
 		 */
+		
+		/**
+		 * Init Shortcode for WP Travel.
+		 */
+		private function init_shortcodes(){
+			$plugin_shortcode = new Wp_Travel_Shortcodes();
+			$plugin_shortcode->init();
+		}
 		private function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
 				define( $name, $value );
