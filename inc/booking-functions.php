@@ -481,8 +481,13 @@ add_action('add_meta_boxes', function() {
     });
 });
 
-add_action('restrict_manage_posts', function() {
-	if ( 'itinerary-booking' === $post->post_type ) {
+add_action('restrict_manage_posts', 'wp_travel_restrict_manage_posts' );
+
+function wp_travel_restrict_manage_posts( $post_type ) {
+
+
+
+	if ( 'itinerary-booking' === $post_type ) {
 		echo <<<EOS
 			<script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -491,4 +496,6 @@ add_action('restrict_manage_posts', function() {
 			</script>
 EOS;
 	}
-});
+
+
+}
