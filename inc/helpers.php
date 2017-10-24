@@ -478,20 +478,12 @@ function wp_travel_get_itineraries_array() {
 function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 	$args = array(
 	'numberposts' => $no_of_post_to_show,
-	'offset'           => 0,
-	'category'         => '',
-	'category_name'    => '',
+	'offset'           => 0,	
 	'orderby'          => 'date',
-	'order'            => 'DESC',
-	'include'          => '',
-	'exclude'          => '',
+	'order'            => 'DESC',	
 	'meta_key'         => 'wp_travel_featured',
 	'meta_value'       => 'yes',
-	'post_type'        => 'itineraries',
-	'post_mime_type'   => '',
-	'post_parent'      => '',
-	'author'	   => '',
-	'author_name'	   => '',
+	'post_type'        => 'itineraries',	
 	'post_status'      => 'publish',
 	'suppress_filters' => true 
 );
