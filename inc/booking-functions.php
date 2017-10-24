@@ -170,6 +170,25 @@ function wp_travel_register_booking_metaboxes($a) {
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
 	// $trip_code = $wp_travel_itinerary->get_trip_code( $wp_travel_post_id );
 	add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), 'wp_travel_booking_info', 'itinerary-booking', 'normal', 'default' );
+
+	add_action('admin_head', 'wp_travel_admin_head_meta' );
+}
+
+/**
+ * Hide publish and visibility.
+ */
+function wp_travel_admin_head_meta() {
+	global $post;
+	if ( 'itinerary-booking' === $post->post_type ): ?>
+        
+			<style type="text/css">
+				#visibility {
+				    display: none;
+				}
+				#misc-publishing-actions, #minor-publishing-actions{display:none}
+			</style>
+
+	<?php endif;
 }
 
 /**
@@ -465,27 +484,14 @@ function wp_travel_booking_column_orderby( $vars ) {
 	return $vars;
 }
 
-add_action('add_meta_boxes', function() {
-    add_action('admin_head', function() {
-    	global $post;
-    	if ( 'itinerary-booking' === $post->post_type ): ?>
-	        
-				<style type="text/css">
-					#visibility {
-					    display: none;
-					}
-					#misc-publishing-actions, #minor-publishing-actions{display:none}
-				</style>
-
-		<?php endif;
-    });
-});
 
 add_action('restrict_manage_posts', 'wp_travel_restrict_manage_posts' );
 
+/**
+ * Restrict Manage Post.
+ * @param  String $post_type Post type name.
+ */
 function wp_travel_restrict_manage_posts( $post_type ) {
-
-
 
 	if ( 'itinerary-booking' === $post_type ) {
 		echo <<<EOS
@@ -496,6 +502,4 @@ function wp_travel_restrict_manage_posts( $post_type ) {
 			</script>
 EOS;
 	}
-
-
 }
