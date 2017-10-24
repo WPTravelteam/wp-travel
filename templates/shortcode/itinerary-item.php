@@ -13,9 +13,9 @@ $enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
 $trip_price 	= wp_travel_get_trip_price( get_the_ID() );
 $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 <li>
-<div class="post-item-wrapper">
-    <div class="post-wrap-bg">
-		<div class="post-content">
+<div class="wp-travel-post-item-wrapper">
+    <div class="wp-travel-post-wrap-bg">
+		<div class="wp-travel-post-content">
 
 			<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 			<span class="post-category">
@@ -59,7 +59,7 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 				</div>
 			</span>
 		</div>
-		<div class="related-post-thumbnail">
+		<div class="wp-travel-post-thumbnail">
 		 	<a href="<?php the_permalink() ?>">
 			<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
 		   	</a>
