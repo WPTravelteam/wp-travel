@@ -3,8 +3,8 @@ Contributors: WEN Solutions
 Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
-Tested up to: 4.8.1
-Stable tag: 1.0.0
+Tested up to: 4.8.2
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,7 +25,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 WP Travel plugin is very flexible and highly customizable. There are a number of hooks and filters which makes plugin really flexible from the developer's point of view. There are bulk of options which add further more flexibility in the plugin.
 
 = Supported Themes =
-“WP Travel” plugin is specially designed for our theme ["Travel Log"](http://wensolutions.com/travel-log-demo/), So, it is 100% compatible with our theme. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
+["Travel Log"](http://wensolutions.com/travel-log-demo/) theme is specially designed for “WP Travel” plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
 
 
 = Dedicated Support and Documentation =
@@ -74,10 +74,19 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 
 == Upgrade Notice ==
 
-= 1.0 =
-* Initial  release.
+= 1.0.1 =
+* Minor release.
+
+= 1.0.0 =
+* Initial release.
 
 == Changelog ==
+
+= 1.0.1 =
+* New: Added feature on booking.
+* New: Added featured itineraries. Featured itineraries can be fetched from "wp_travel_featured_itineraries" function.
+* New: Added shortcode "WP_TRAVEL_ITINERARIES" to list itineraries by type, location or featured.
+* Fixed: Minor issues and bugs.
 
 = 1.0.0 =
 * Initial  release.

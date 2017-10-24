@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.0.0\n"
+"Project-Id-Version: WP Travel 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 09:03:56+00:00\n"
+"POT-Creation-Date: 2017-10-24 11:57:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
 
-#: inc/admin/class-admin-assets.php:62
+#: inc/admin/admin-helper.php:19
+msgid "Booking Count"
+msgstr ""
+
+#: inc/admin/admin-helper.php:20
+msgid "Featured"
+msgstr ""
+
+#: inc/admin/admin-helper.php:21
+msgid "Date"
+msgstr ""
+
+#: inc/admin/class-admin-assets.php:66
 msgid "Select Files from Your Computer"
 msgstr ""
 
@@ -177,49 +189,64 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: inc/booking-functions.php:45 inc/booking-functions.php:140
+#: inc/booking-functions.php:226
+msgid "Itinerary"
+msgstr ""
+
+#: inc/booking-functions.php:236
 msgid "First Name"
 msgstr ""
 
-#: inc/booking-functions.php:49 inc/booking-functions.php:144
+#: inc/booking-functions.php:240
 msgid "Middle Name"
 msgstr ""
 
-#: inc/booking-functions.php:53 inc/booking-functions.php:148
+#: inc/booking-functions.php:244
 msgid "Last Name"
 msgstr ""
 
-#: inc/booking-functions.php:58 inc/booking-functions.php:153
+#: inc/booking-functions.php:249
 msgid "Country"
 msgstr ""
 
-#: inc/booking-functions.php:69 inc/booking-functions.php:164
+#: inc/booking-functions.php:260
 msgid "Address"
 msgstr ""
 
-#: inc/booking-functions.php:73 inc/booking-functions.php:168
+#: inc/booking-functions.php:264
 msgid "Phone"
 msgstr ""
 
-#: inc/booking-functions.php:77 inc/booking-functions.php:172
-#: templates/single-wp-travel-reviews.php:68
+#: inc/booking-functions.php:268 templates/single-wp-travel-reviews.php:68
 msgid "Email"
 msgstr ""
 
-#: inc/booking-functions.php:82 inc/booking-functions.php:177
+#: inc/booking-functions.php:273
 msgid "No of PAX"
 msgstr ""
 
-#: inc/booking-functions.php:86 inc/booking-functions.php:181
+#: inc/booking-functions.php:277
+msgid "Arrival Date"
+msgstr ""
+
+#: inc/booking-functions.php:281
+msgid "Departure Date"
+msgstr ""
+
+#: inc/booking-functions.php:285
 msgid "Note"
 msgstr ""
 
-#: inc/booking-functions.php:87 inc/booking-functions.php:182
+#: inc/booking-functions.php:286
 msgid "Some text..."
 msgstr ""
 
-#: inc/booking-functions.php:112
-msgid "Booking Detail"
+#: inc/booking-functions.php:417
+msgid "Contact Name"
+msgstr ""
+
+#: inc/booking-functions.php:418
+msgid "Booking Date"
 msgstr ""
 
 #: inc/class-post-types.php:20
@@ -294,11 +321,11 @@ msgstr ""
 msgid "No bookings found in Trash."
 msgstr ""
 
-#: inc/class-shortcode.php:85
+#: inc/class-shortcode.php:136
 msgid "Your Item Has Been added but the email could not be sent."
 msgstr ""
 
-#: inc/class-shortcode.php:85
+#: inc/class-shortcode.php:136
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
@@ -1372,6 +1399,7 @@ msgstr ""
 
 #: inc/helpers.php:258 templates/content-archive-itineraries.php:25
 #: templates/content-single-itineraries.php:33
+#: templates/shortcode/itinerary-item.php:73
 msgid "Offer"
 msgstr ""
 
@@ -1463,6 +1491,10 @@ msgstr ""
 msgid "please login to review"
 msgstr ""
 
+#: templates/shortcode/itinerary-item-none.php:14
+msgid "Itinerary Item not found!"
+msgstr ""
+
 #: templates/single-wp-travel-reviews.php:50
 msgid "There are no reviews yet."
 msgstr ""
@@ -1520,6 +1552,11 @@ msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "http://wensolutions.com"
+msgstr ""
+
+#: inc/booking-functions.php:416
+msgctxt "column name"
+msgid "Title"
 msgstr ""
 
 #: inc/class-post-types.php:15

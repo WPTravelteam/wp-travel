@@ -413,9 +413,9 @@ add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_columns'
 function wp_travel_booking_columns( $booking_columns ) {
 
 	$new_columns['cb'] 			 = '<input type="checkbox" />';
-	$new_columns['title'] 		 = _x( 'Title', 'column name' );
-	$new_columns['contact_name'] = __( 'Contact Name' );
-	$new_columns['date'] 		 = __( 'Booking Date' );
+	$new_columns['title'] 		 = _x( 'Title', 'column name', 'wp-travel' );
+	$new_columns['contact_name'] = __( 'Contact Name', 'wp-travel' );
+	$new_columns['date'] 		 = __( 'Booking Date', 'wp-travel' );
 	return $new_columns;
 }
 

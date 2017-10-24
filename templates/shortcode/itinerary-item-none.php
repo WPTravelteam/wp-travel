@@ -11,5 +11,5 @@ if ( ! defined( 'ABSPATH' ) ) {
  	return;
  } ?>
 
-<p class="itinerary-none"><?php esc_html_e( 'Itinerary Item not found!' ) ?></p>
+<p class="itinerary-none"><?php esc_html_e( 'Itinerary Item not found!', 'wp-travel' ) ?></p>
 

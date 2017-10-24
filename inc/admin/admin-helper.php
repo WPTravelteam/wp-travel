@@ -16,9 +16,9 @@ function wp_travel_itineraries_columns( $itinerary_columns ) {
 	$date = $itinerary_columns['date'];
 	unset( $itinerary_columns['date'] );
 
-	$itinerary_columns['booking_count'] = __( 'Booking Count' );
-	$itinerary_columns['featured'] = __( 'Featured' );
-	$itinerary_columns['date'] = __( 'Date' );
+	$itinerary_columns['booking_count'] = __( 'Booking Count', 'wp-travel' );
+	$itinerary_columns['featured'] = __( 'Featured', 'wp-travel' );
+	$itinerary_columns['date'] = __( 'Date', 'wp-travel' );
 	return $itinerary_columns;
 }
 
