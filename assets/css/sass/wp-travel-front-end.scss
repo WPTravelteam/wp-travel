@@ -743,7 +743,90 @@
         }
     }
 }
+//wp-travel-related-posts
+.wp-travel-posts{
+    position:relative;
+    display: block;
+    padding:55px 0 0;
+    .post-item-wrapper{
+        width: 25%;
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 30px;
+        @include sidr-view{
+            width: 50%;
+        }
+        @include mob{
+            width: 100%;
+        }
+        .post-content{
+            padding:10px;
+            .post-title{
+                margin-top: 0;
+                margin-bottom: 0;
+                a{
+                    color: #333;
+                }
+            }
+            .post-category{
+                a{
+                    font-weight:300;
+                    font-size: 13px;
+                    margin-right: 2px;
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+        .post-thumbnail{
+            // overflow: hidden;
+            position: relative;
+            img{
+                margin:0;
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    .post-wrap-bg{
+         background: #fff;
+         box-shadow: 0px 7px 12px 0px rgba(38,50,56,0.15);
+         /* border-radius: 4px; */
+         position: relative;
+        .recent-post-bottom-meta{
+            display: block;
+            position:relative;
+            padding:12px 10px;
+            @include clearfix;
+           .value.code-left{
+             float: left;
+            }
+            .code-right{
+                float: right;
+                .person-count{
+                    font-weight:300;
+                    font-style: italic;
+                }
+            }
+            .trip-price {
+       // font-family: 'Inconsolata', monospace;
+        span{
+             font-size: 18px;
+         }
+        .person-count{
+            font-weight: 400;
+            font-size:14px;
+        }
+    }
 
+        }
+    }
+}
 
 .wp-travel-row-wrap{
     margin-left: -15px;
@@ -1142,4 +1225,10 @@
     position: absolute;
     right: 15px;
     color: #f83531;
+}
+ul.wp-travel-itinerary-list li {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+    box-sizing: border-box;
 }
