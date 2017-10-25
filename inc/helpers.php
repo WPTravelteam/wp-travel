@@ -164,9 +164,9 @@ function wp_travel_get_related_post( $post_id ) {
 	/* TODO: Add global Settings to show/hide related post. */
 
 	$settings = wp_traval_get_settings();
-	$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : '0';
+	$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
 
-	if ( $hide_related_itinerary ) {
+	if ( 'yes' === $hide_related_itinerary ) {
 		return;
 	}
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
