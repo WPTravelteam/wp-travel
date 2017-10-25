@@ -1,4 +1,13 @@
 <?php
+/**
+ * Admin Settings.
+ *
+ * @package inc/admin
+ */
+
+/**
+ * Class for admin settings.
+ */
 class WP_Travel_Admin_Settings {
 	/**
 	 * Parent slug.
@@ -6,15 +15,26 @@ class WP_Travel_Admin_Settings {
 	 * @var string
 	 */
 	private static $parent_slug = 'edit.php?post_type=itineraries';
-
+	/**
+	 * Page.
+	 *
+	 * @var string
+	 */
 	static $collection = 'settings';
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'load-itineraries_page_settings', array( $this, 'save_settings' ) );
 	}
 
+	/**
+	 * Call back function for page.
+	 */
 	public static function setting_page_callback() {
 		$args['settings'] = get_option( 'wp_travel_settings' );
 		$url_parameters['page'] = self::$collection;
@@ -39,10 +59,15 @@ class WP_Travel_Admin_Settings {
 		echo '</div>';
 	}
 
+	/**
+	 * Add Tabs to settings page.
+	 *
+	 * @param array $tabs Tabs array list.
+	 */
 	function add_tabs( $tabs ) {
 		$settings_fields['general'] = array(
 			'tab_label' => __( 'General', 'wp-travel' ),
-			'content_title' => __( 'General Settings', 'wp-travel' )
+			'content_title' => __( 'General Settings', 'wp-travel' ),
 		);
 
 		$settings_fields['itinerary'] = array(
@@ -50,10 +75,21 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Itinerary Settings', 'wp_travel' ),
 		);
 
+		$settings_fields['bookings'] = array(
+			'tab_label' => __( 'Bookings', 'wp_travel' ),
+			'content_title' => __( 'Bookings Settings', 'wp_travel' ),
+		);
+
 		$tabs[ self::$collection ] = $settings_fields;
 		return $tabs;
 	}
 
+	/**
+	 * Callback for General tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
 	function call_back( $tab, $args ) {
 		if ( 'general' !== $tab ) {
 			return;
@@ -67,7 +103,7 @@ class WP_Travel_Admin_Settings {
 			'name'		=> 'currency',
 			'selected'	=> $currency,
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
-			'options'	=> $currency_list,	
+			'options'	=> $currency_list,
 		);
 		echo '<table class="form-table">';
 			echo '<tr>';
@@ -91,11 +127,18 @@ class WP_Travel_Admin_Settings {
 			echo '<tr>';
 		echo '</table>';
 	}
+
+	/**
+	 * Callback for Itinerary tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
 	function call_back_tab_itinerary( $tab, $args ) {
 		if ( 'itinerary' !== $tab ) {
 			return;
-		} 
-		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] ) ? $args['settings']['hide_related_itinerary'] : '0';
+		}
+		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] )  ? $args['settings']['hide_related_itinerary'] : 'no';
 		?>
 		<table class="form-table">
 			<tr>
@@ -103,8 +146,34 @@ class WP_Travel_Admin_Settings {
 					<label for="currency"><?php esc_html_e( 'Hide related itinerary', 'wp-travel' ); ?></label>
 				</th>
 				<td>
-					<input type="checkbox" <?php checked( $hide_related_itinerary , 1 ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
+					<input type="checkbox" <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
 					<p class="description"><?php esc_html_e( 'This will hide your related itineraries.' ) ?></p>
+				</td>
+			<tr>
+		</table>
+	<?php
+	}
+
+	/**
+	 * Callback for Bookings tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	function call_back_tab_booking( $tab, $args ) {
+		if ( 'bookings' !== $tab ) {
+			return;
+		}
+		$send_booking_email_to_admin = isset( $args['settings']['send_booking_email_to_admin'] ) ? $args['settings']['send_booking_email_to_admin'] : 'yes';
+		?>
+		<table class="form-table">
+			<tr>
+				<th>
+					<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<input type="checkbox" <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin"/>
+					
 				</td>
 			<tr>
 		</table>
@@ -123,12 +192,13 @@ class WP_Travel_Admin_Settings {
 
 			$currency 				= ( isset( $_POST['currency'] ) && '' !== $_POST['currency'] ) ? $_POST['currency'] : '';
 			$google_map_api_key 	= ( isset( $_POST['google_map_api_key'] ) && '' !== $_POST['google_map_api_key'] ) ? $_POST['google_map_api_key'] : '';
-			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? $_POST['hide_related_itinerary'] : '0';
-			
+
+			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
+			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
 			$settings['currency'] = $currency;
 			$settings['google_map_api_key'] = $google_map_api_key;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
-
+			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
 
 			update_option( 'wp_travel_settings', $settings );
 			WP_Travel()->notices->add( 'Aerror ' );
