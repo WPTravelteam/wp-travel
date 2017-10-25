@@ -106,42 +106,14 @@ class Wp_Travel_Shortcodes {
 		}
 
 		$trip_code = wp_traval_get_trip_code( $_POST['wp_travel_post_id'] );
-
-		$client_email = $_POST[ 'wp_travel_email' ];
-
-		$admin_email = get_option( 'admin_email' );
 		$title = 'Booking - ' . $trip_code;
 
-		$message = '<p>First name : ' . $_POST['wp_travel_fname'] . '</p>';
-		$message .= '<p>Middle name : ' . $_POST['wp_travel_mname'] . '</p>';
-		$message .= '<p>Last name : ' . $_POST['wp_travel_lname'] . '</p>';
-		$message .= '<p>Country : ' . $_POST['wp_travel_country'] . '</p>';
-		$message .= '<p>Address : ' . $_POST['wp_travel_address'] . '</p>';
-		$message .= '<p>Phone : ' . $_POST['wp_travel_phone'] . '</p>';
-		$message .= '<p>PAX : ' . $_POST['wp_travel_pax'] . '</p>';
-		$message .= '<p>Info : ' . $_POST['wp_travel_note'] . '</p>';
-
-		// To send HTML mail, the Content-type header must be set.
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-		// Create email headers.
-		$headers .= 'From: ' . $client_email . "\r\n" .
-		'Reply-To: ' . $client_email . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
-
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
-			wp_send_json( array(
-				'result'  => 0,
-				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			) );
-		}
 		$post_array = array(
 			'post_title' => $title,
-			'post_content' => $message,
+			'post_content' => '',
 			'post_status' => 'publish',
-			'post_slug'=>uniqid(),
-			'post_type' => 'itinerary-booking'
+			'post_slug' => uniqid(),
+			'post_type' => 'itinerary-booking',
 			);
 		$orderID = wp_insert_post( $post_array );
 		update_post_meta( $orderID, 'order_data', $_POST );
@@ -174,13 +146,147 @@ class Wp_Travel_Shortcodes {
 
 			$order_ids = get_post_meta($_POST['wp_travel_post_id'],'order_ids',true);
 
-			if(!$order_ids){
+			if ( ! $order_ids ) {
 				$order_ids = [];
 			}
 
 			array_push( $order_ids, [ 'order_id'=>$orderID,'count'=>$_POST['wp_travel_pax'], 'date'=>$_POST['wp_travel_date'] ] );
 
 			update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
+		}
+
+		$settings = wp_traval_get_settings();
+
+		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
+
+		if ( 'yes' !== $send_booking_email_to_admin ) {
+			return;
+		}
+
+		$client_email = $_POST[ 'wp_travel_email' ];
+
+		$admin_email = get_option( 'admin_email' );
+
+		// Email Variables.
+		if ( is_multisite() ) {
+			$sitename = get_network()->site_name;
+		} else {
+			/*
+			 * The blogname option is escaped with esc_html on the way into the database
+			 * in sanitize_option we want to reverse this for the plain text arena of emails.
+			 */
+			$sitename = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+		}
+		$booking_id 		  	= $orderID;
+		$itinerary_title 		= get_the_title( $_POST['wp_travel_post_id'] );
+
+		$booking_no_of_pax 		= 0;
+		$booking_scheduled_date = '';
+		$booking_arrival_date 	= $_POST['wp_travel_arrival_date'];
+		$booking_departure_date = $_POST['wp_travel_departure_date'];
+
+		$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
+		$customer_country 		= $_POST['wp_travel_country'];
+		$customer_address 		= $_POST['wp_travel_address'];
+		$customer_phone 		= $_POST['wp_travel_phone'];
+		$customer_email 		= $_POST['wp_travel_email'];
+		$customer_note 			= $_POST['wp_travel_note'];
+
+		$message = '
+		<div style="color: #5d5d5d; font-family: Roboto, sans-serif; margin: 0 auto; padding: 0; max-width:500px;"> <!-- Wrapper -->
+			<div style="background: #dd402e; box-sizing: border-box; margin: 0; padding: 20px 25px;  width:100%;"> <!-- Header -->
+				<h2 style="color: #fcfffd; font-size: 20px; margin: 0; padding: 0; text-align: center;">New Bookings</h2>
+			</div> <!-- /Header -->
+
+			<div style="background: #fff; box-sizing: border-box; margin: 0; padding: 20px 25px;  width:100%;"> <!-- Container -->
+				<p style="line-height: 1.55; font-size: 14px;">Hello ' . $sitename . ' Admin,</p>
+				<p style="line-height: 1.55; font-size: 14px;">You have received bookings from ' . $customer_name . ':</p>
+				<p style="line-height: 1.55; font-size: 14px; margin-bottom: 30px"><b>Booking ID: #' . $booking_id . ' (' . $booking_arrival_date . ')</b></p>
+				
+				<h3 style="font-size: 16px; line-height: 1; margin: 0"><b>Booking Details:</b></h3>
+				<div style="font-size: 14px; margin-bottom: 50px;"><!-- Booking Details -->
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Itinerary</b></span>
+						<span style="display: table-cell;">' . $itinerary_title . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Pax</b></span>
+						<span style="display: table-cell;">' . $booking_no_of_pax . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Scheduled Date</b></span>
+						<span style="display: table-cell;">' . $booking_scheduled_date . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Arrival Date</b></span>
+						<span style="display: table-cell;">' . $booking_arrival_date . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Departure Date</b></span>
+						<span style="display: table-cell;">' . $booking_departure_date . '</span>
+					</p>
+				</div><!-- /Booking Details -->
+
+				<h3 style="font-size: 16px; line-height: 1; margin: 0"><b>Customer Details:</b></h3>
+				<div style="font-size: 14px; margin-bottom: 30px"><!-- Customer Details -->
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Name</b></span>
+						<span style="display: table-cell;">' . $customer_name . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Country</b></span>
+						<span style="display: table-cell;">' . $customer_country . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Address</b></span>
+						<span style="display: table-cell;">' . $customer_address . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Phone</b></span>
+						<span style="display: table-cell;">' . $customer_phone . '</span>
+					</p>
+					<p>
+						<span style="display: table-cell;width: 130px"><b>Email</b></span>
+						<span style="display: table-cell;">' . $customer_email . '</span>
+					</p>
+					<p>
+						<span style="display: block; margin-bottom: 10px"><b>Note</b></span>
+						<span style="display: block">' . $customer_note . '</span>
+					</p>
+				</div><!-- /Booking Details -->
+				<div>
+					
+					<a href="#" style=" background: #dd402e; color: #fcfffd;display:block; font-size: 14px; margin: auto; padding: 10px 20px; text-align: center; text-decoration: none; width: 130px;" target="_blank" >View details on site</a>
+				</div>
+			</div> <!-- /Container -->
+
+			<div style="background: #eaebed; box-sizing: border-box; font-size: 14px; padding: 10px 25px;  width:100%;"> <!-- Footer -->
+				<p style="text-align: center;">' . $sitename . ' - Powered By: <a style="color: #5a418b;text-decoration: none;" href="http://wensolutions.com/" target="_blank">WEN Solutions.</a></p>
+			</div> <!-- /Footer -->
+		</div><!-- /Wrapper -->';
+		// $message = '<p>First name : ' . $_POST['wp_travel_fname'] . '</p>';
+		// $message .= '<p>Middle name : ' . $_POST['wp_travel_mname'] . '</p>';
+		// $message .= '<p>Last name : ' . $_POST['wp_travel_lname'] . '</p>';
+		// $message .= '<p>Country : ' . $_POST['wp_travel_country'] . '</p>';
+		// $message .= '<p>Address : ' . $_POST['wp_travel_address'] . '</p>';
+		// $message .= '<p>Phone : ' . $_POST['wp_travel_phone'] . '</p>';
+		// $message .= '<p>PAX : ' . $_POST['wp_travel_pax'] . '</p>';
+		// $message .= '<p>Info : ' . $_POST['wp_travel_note'] . '</p>';
+
+		// To send HTML mail, the Content-type header must be set.
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+		// Create email headers.
+		$headers .= 'From: ' . $client_email . "\r\n" .
+		'Reply-To: ' . $client_email . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+
+		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+			wp_send_json( array(
+				'result'  => 0,
+				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			) );
 		}
 
 	}
