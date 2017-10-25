@@ -4,7 +4,7 @@ Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itinerari
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
 Tested up to: 4.8.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -73,6 +73,9 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 12. Frontend: Itinerary details - 2
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+* Hide related itinerary option added in settings.
 
 = 1.0.1 =
 * Minor release.
