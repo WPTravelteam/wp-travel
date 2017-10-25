@@ -11,7 +11,7 @@ class WP_Travel_Admin_Settings {
 	public function __construct() {
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_3' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'load-itineraries_page_settings', array( $this, 'save_settings' ) );
 	}
 
@@ -45,10 +45,10 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'General Settings', 'wp-travel' )
 		);
 
-		// $settings_fields['currency'] = array(
-		// 	'tab_label' => __( 'Additional Info', 'wp_travel' ),
-		// 	'content_title' => __( 'Additional Info', 'wp_travel' ),
-		// );
+		$settings_fields['itinerary'] = array(
+			'tab_label' => __( 'Itinerary', 'wp_travel' ),
+			'content_title' => __( 'Itinerary Settings', 'wp_travel' ),
+		);
 
 		$tabs[ self::$collection ] = $settings_fields;
 		return $tabs;
@@ -91,8 +91,24 @@ class WP_Travel_Admin_Settings {
 			echo '<tr>';
 		echo '</table>';
 	}
-	function call_back_3( $tab ) {
-		// echo $tab . "<br>3333";
+	function call_back_tab_itinerary( $tab, $args ) {
+		if ( 'itinerary' !== $tab ) {
+			return;
+		} 
+		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] ) ? $args['settings']['hide_related_itinerary'] : '0';
+		?>
+		<table class="form-table">
+			<tr>
+				<th>
+					<label for="currency"><?php esc_html_e( 'Hide related itinerary', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<input type="checkbox" <?php checked( $hide_related_itinerary , 1 ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
+					<p class="description"><?php esc_html_e( 'This will hide your related itineraries.' ) ?></p>
+				</td>
+			<tr>
+		</table>
+	<?php
 	}
 
 	/**
@@ -105,11 +121,14 @@ class WP_Travel_Admin_Settings {
 			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 
-			$currency = ( isset( $_POST['currency'] ) && '' !== $_POST['currency'] ) ? $_POST['currency'] : '';
+			$currency 				= ( isset( $_POST['currency'] ) && '' !== $_POST['currency'] ) ? $_POST['currency'] : '';
+			$google_map_api_key 	= ( isset( $_POST['google_map_api_key'] ) && '' !== $_POST['google_map_api_key'] ) ? $_POST['google_map_api_key'] : '';
+			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? $_POST['hide_related_itinerary'] : '0';
+			
 			$settings['currency'] = $currency;
-
-			$google_map_api_key = ( isset( $_POST['google_map_api_key'] ) && '' !== $_POST['google_map_api_key'] ) ? $_POST['google_map_api_key'] : '';
 			$settings['google_map_api_key'] = $google_map_api_key;
+			$settings['hide_related_itinerary'] = $hide_related_itinerary;
+
 
 			update_option( 'wp_travel_settings', $settings );
 			WP_Travel()->notices->add( 'Aerror ' );
