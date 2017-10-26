@@ -748,7 +748,10 @@ function wp_travel_booking_message() {
 	if ( ! is_singular( 'itineraries' ) ) {
 		return;
 	}
-	if ( isset( $_POST['wp_travel_book_now'] ) ) : ?>
+	if ( isset( $_GET['booked'] ) ) : ?>
+		<script>
+			history.replaceState({}, null, '<?php echo $_SERVER['REDIRECT_URL']; ?>');
+		</script>
 		<p class="wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
 	<?php endif;
 }

@@ -372,6 +372,9 @@ function wp_travel_save_booking_data( $post_id ) {
 
 	$order_data = array_map( 'sanitize_text_field', wp_unslash( $order_data ) );
 	update_post_meta( $post_id, 'order_data', $order_data );
+	
+	header("Location: ". $_SERVER['REDIRECT_URL'].'?'.http_build_query(['booked'=>true]));
+	exit;
 }
 
 add_action( 'save_post', 'wp_travel_save_booking_data' );
