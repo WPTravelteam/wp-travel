@@ -76,6 +76,9 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 
 = 1.0.2 =
 * Hide related itinerary option added in settings.
+* Added booking notification email sent to customer.
+* Option added to send booking mail to admin.
+* Fixes: Minor design issues.
 
 = 1.0.1 =
 * Minor release.
