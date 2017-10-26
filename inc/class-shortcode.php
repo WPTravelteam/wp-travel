@@ -159,11 +159,9 @@ class Wp_Travel_Shortcodes {
 
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
-		if ( 'yes' !== $send_booking_email_to_admin ) {
-			return;
-		}
 
-		$client_email = $_POST[ 'wp_travel_email' ];
+		// Prepare variables to assign in email.
+		$client_email = $_POST['wp_travel_email'];
 
 		$admin_email = get_option( 'admin_email' );
 
@@ -178,10 +176,11 @@ class Wp_Travel_Shortcodes {
 			$sitename = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 		}
 		$booking_id 		  	= $orderID;
-		$itinerary_title 		= get_the_title( $_POST['wp_travel_post_id'] );
+		$itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
+		$itinerary_title 		= get_the_title( $itinerary_id );
 
-		$booking_no_of_pax 		= 0;
-		$booking_scheduled_date = '';
+		$booking_no_of_pax 		= 'N/A';
+		$booking_scheduled_date = 'N/A';
 		$booking_arrival_date 	= $_POST['wp_travel_arrival_date'];
 		$booking_departure_date = $_POST['wp_travel_departure_date'];
 
@@ -192,102 +191,67 @@ class Wp_Travel_Shortcodes {
 		$customer_email 		= $_POST['wp_travel_email'];
 		$customer_note 			= $_POST['wp_travel_note'];
 
-		$message = '
-		<div style="color: #5d5d5d; font-family: Roboto, sans-serif; margin: 0 auto; padding: 0; max-width:500px;"> <!-- Wrapper -->
-			<div style="background: #dd402e; box-sizing: border-box; margin: 0; padding: 20px 25px;  width:100%;"> <!-- Header -->
-				<h2 style="color: #fcfffd; font-size: 20px; margin: 0; padding: 0; text-align: center;">New Bookings</h2>
-			</div> <!-- /Header -->
+		$email_tags = array(
+			'{sitename}'				=> $sitename,
+			'{itinerary_link}'			=> get_permalink( $itinerary_id ),
+			'{itinerary_title}'			=> $itinerary_title,
+			'{booking_id}'				=> $booking_id,
+			'{booking_edit_link}'		=> get_edit_post_link( $booking_id ),
+			'{booking_no_of_pax}'		=> $booking_no_of_pax,
+			'{booking_scheduled_date}'	=> $booking_scheduled_date,
+			'{booking_arrival_date}'	=> $booking_arrival_date,
+			'{booking_departure_date}'	=> $booking_departure_date,
 
-			<div style="background: #fff; box-sizing: border-box; margin: 0; padding: 20px 25px;  width:100%;"> <!-- Container -->
-				<p style="line-height: 1.55; font-size: 14px;">Hello ' . $sitename . ' Admin,</p>
-				<p style="line-height: 1.55; font-size: 14px;">You have received bookings from ' . $customer_name . ':</p>
-				<p style="line-height: 1.55; font-size: 14px; margin-bottom: 30px"><b>Booking ID: #' . $booking_id . ' (' . $booking_arrival_date . ')</b></p>
-				
-				<h3 style="font-size: 16px; line-height: 1; margin: 0"><b>Booking Details:</b></h3>
-				<div style="font-size: 14px; margin-bottom: 50px;"><!-- Booking Details -->
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Itinerary</b></span>
-						<span style="display: table-cell;">' . $itinerary_title . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Pax</b></span>
-						<span style="display: table-cell;">' . $booking_no_of_pax . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Scheduled Date</b></span>
-						<span style="display: table-cell;">' . $booking_scheduled_date . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Arrival Date</b></span>
-						<span style="display: table-cell;">' . $booking_arrival_date . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Departure Date</b></span>
-						<span style="display: table-cell;">' . $booking_departure_date . '</span>
-					</p>
-				</div><!-- /Booking Details -->
+			'{customer_name}'			=> $customer_name,
+			'{customer_country}'		=> $customer_country,
+			'{customer_address}'		=> $customer_address,
+			'{customer_phone}'			=> $customer_phone,
+			'{customer_email}'			=> $customer_email,
+			'{customer_note}'			=> $customer_note,
+		);
+		apply_filters( 'wp_travel_admin_email_tags', $email_tags );
 
-				<h3 style="font-size: 16px; line-height: 1; margin: 0"><b>Customer Details:</b></h3>
-				<div style="font-size: 14px; margin-bottom: 30px"><!-- Customer Details -->
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Name</b></span>
-						<span style="display: table-cell;">' . $customer_name . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Country</b></span>
-						<span style="display: table-cell;">' . $customer_country . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Address</b></span>
-						<span style="display: table-cell;">' . $customer_address . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Phone</b></span>
-						<span style="display: table-cell;">' . $customer_phone . '</span>
-					</p>
-					<p>
-						<span style="display: table-cell;width: 130px"><b>Email</b></span>
-						<span style="display: table-cell;">' . $customer_email . '</span>
-					</p>
-					<p>
-						<span style="display: block; margin-bottom: 10px"><b>Note</b></span>
-						<span style="display: block">' . $customer_note . '</span>
-					</p>
-				</div><!-- /Booking Details -->
-				<div>
-					
-					<a href="#" style=" background: #dd402e; color: #fcfffd;display:block; font-size: 14px; margin: auto; padding: 10px 20px; text-align: center; text-decoration: none; width: 130px;" target="_blank" >View details on site</a>
-				</div>
-			</div> <!-- /Container -->
+		// Send mail to admin if booking email is set to yes.
+		if ( 'yes' == $send_booking_email_to_admin ) {
 
-			<div style="background: #eaebed; box-sizing: border-box; font-size: 14px; padding: 10px 25px;  width:100%;"> <!-- Footer -->
-				<p style="text-align: center;">' . $sitename . ' - Powered By: <a style="color: #5a418b;text-decoration: none;" href="http://wensolutions.com/" target="_blank">WEN Solutions.</a></p>
-			</div> <!-- /Footer -->
-		</div><!-- /Wrapper -->';
-		// $message = '<p>First name : ' . $_POST['wp_travel_fname'] . '</p>';
-		// $message .= '<p>Middle name : ' . $_POST['wp_travel_mname'] . '</p>';
-		// $message .= '<p>Last name : ' . $_POST['wp_travel_lname'] . '</p>';
-		// $message .= '<p>Country : ' . $_POST['wp_travel_country'] . '</p>';
-		// $message .= '<p>Address : ' . $_POST['wp_travel_address'] . '</p>';
-		// $message .= '<p>Phone : ' . $_POST['wp_travel_phone'] . '</p>';
-		// $message .= '<p>PAX : ' . $_POST['wp_travel_pax'] . '</p>';
-		// $message .= '<p>Info : ' . $_POST['wp_travel_note'] . '</p>';
+			$message = wp_travel_admin_email_template();
+			$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
+
+			// To send HTML mail, the Content-type header must be set.
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+			// Create email headers.
+			$headers .= 'From: ' . $client_email . "\r\n" .
+			'Reply-To: ' . $client_email . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+			if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+				wp_send_json( array(
+					'result'  => 0,
+					'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+				) );
+			}
+		}
+
+		// Send email to client.
+		$message = wp_travel_customer_email_template();
+		$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 		// Create email headers.
-		$headers .= 'From: ' . $client_email . "\r\n" .
-		'Reply-To: ' . $client_email . "\r\n" .
+		$headers .= 'From: ' . $admin_email . "\r\n" .
+		'Reply-To: ' . $admin_email . "\r\n" .
 		'X-Mailer: PHP/' . phpversion();
 
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+		if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
 				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			) );
 		}
-
 	}
 }
