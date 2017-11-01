@@ -141,9 +141,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-wrap .addnewlabel.button {
   float: right; }
 
-.select2-results__option[aria-selected=true] {
-  display: none; }
-
 .table-booking-info table {
   width: 100%;
   padding: 10px;
