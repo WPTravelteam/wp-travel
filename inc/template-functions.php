@@ -184,7 +184,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 			</ins>
 		<?php endif; ?>
 
-		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel') ?></span>
+		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel' ) ?></span>
 		</div>
 	</div>
 	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
@@ -212,7 +212,7 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		 <a>
-			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
+			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
 		</a>
@@ -233,7 +233,7 @@ function wp_travel_trip_rating( $post_id ) {
 	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		 <a>
-			<span style="width:<?php echo ( ( $average_rating / 5 ) * 100 ); ?>%">
+			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
 		</a>
@@ -329,8 +329,23 @@ function wp_travel_single_excerpt( $post_id ) {
 		</div>
 	</div>
 	<?php
+	$terms = get_the_terms( $post_id, 'travel_keywords' );
+	if ( sizeof( $terms ) > 0 ) : ?>
+		<div class="wp-travel-keywords">
+		<span class="label"><?php esc_html_e( 'Keywords : ' ) ?></span>
+		<?php foreach( $terms as $term ) : ?>
+			<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
+		<?php endforeach; ?>
+		</div>
+	<?php
+	endif;
 }
-
+/**
+ * Single Page Details
+ *
+ * @param Int $post_id
+ * @return void
+ */
 function wp_travel_frontend_contents( $post_id ) {
 	global $wp_travel_itinerary;
 	$trip_content	= $wp_travel_itinerary->get_content();
@@ -340,8 +355,6 @@ function wp_travel_frontend_contents( $post_id ) {
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 	$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
 	?>
-
-
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<ul class="wp-travel tab-list resp-tabs-list ">
 			<li class="tab-link" data-tab="tab-5"><?php esc_html_e( 'Overview', 'wp-travel' ) ?></li>
@@ -366,11 +379,12 @@ function wp_travel_frontend_contents( $post_id ) {
 			</div>
 			<div id="tab-1" class="tab-list-content ">
 				<?php
-				if ( false !== $trip_outline )
+				if ( false !== $trip_outline ) {
 					echo wp_kses_post( $trip_outline );
-				else
+				}
+				else {
 					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
-				?>
+				} ?>
 			</div>
 			<div id="tab-2" class="tab-list-content">
 				<?php
@@ -602,7 +616,7 @@ function wp_travel_template_loader( $template ) {
 			trailingslashit( WP_TRAVEL_PLUGIN_PATH ) . 'templates/',
 		);
 	// Load template for post archive / taxonomy archive.
-	if ( is_post_type_archive( 'itineraries' ) || is_tax( 'itinerary_types' ) ) {
+	if ( is_post_type_archive( 'itineraries' ) || is_tax( 'itinerary_types' ) || is_tax( 'travel_locations' ) || is_tax( 'travel_keywords' ) ) {
 		foreach ( $check_dirs as $dir ) {
 			if ( file_exists( trailingslashit( $dir ) . 'archive-itineraries.php' ) ) {
 				return trailingslashit( $dir ) . 'archive-itineraries.php';
