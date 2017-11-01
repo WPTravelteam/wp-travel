@@ -495,3 +495,65 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 $posts_array = get_posts( $args );
 return $posts_array;
 }
+
+
+/**
+ * Show WP Travel search form.
+ *
+ * @since  1.0.2
+ */
+function wp_travel_search_form() {
+	ob_start(); ?>
+	<div class="wp-travel-search">
+		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) );  ?>" > 
+			<input type="hidden" name="post_type" value="itineraries" />
+			<p>
+				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
+				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>">
+			</p>
+			<p>
+				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
+				<?php
+				$taxonomy = 'itinerary_types';
+				$args = array(
+					'show_option_all'    => __( 'All', 'wp-travel' ),
+					'hide_empty'         => 0,
+					'selected'           => 1,
+					'hierarchical'       => 1,
+					'name'               => $taxonomy,
+					'class'              => 'wp-travel-taxonomy',
+					'taxonomy'           => $taxonomy,
+					'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
+					'value_field'		 => 'slug',
+				);
+
+				wp_dropdown_categories( $args, $taxonomy );
+				?>
+			</p>
+			<p>
+				<label><?php esc_html_e( 'Location:', 'wp-travel' ) ?></label>
+				<?php
+				$taxonomy = 'travel_locations';
+				$args = array(
+					'show_option_all'    => __( 'All', 'wp-travel' ),
+					'hide_empty'         => 0,
+					'selected'           => 1,
+					'hierarchical'       => 1,
+					'name'               => $taxonomy,
+					'class'              => 'wp-travel-taxonomy',
+					'taxonomy'           => $taxonomy,
+					'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
+					'value_field'		 => 'slug',
+				);
+
+				wp_dropdown_categories( $args, $taxonomy );
+				?>
+			</p>
+			
+			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php esc_html_e( 'Search', 'wp-travel' ) ?>"  /></p>
+		</form>
+	</div>	
+	<?php
+	$content = apply_filters( 'wp-travel_search_form', ob_get_clean() );
+	echo $content;
+}
