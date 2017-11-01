@@ -77,7 +77,10 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 = 1.0.2 =
 * Hide related itinerary option added in settings.
 * Added booking notification email sent to customer.
+* Added Keyword Taxonomy.
+* Added Search Widgets
 * Option added to send booking mail to admin.
+* Fixes: Settings option not working in WooCommerce.
 * Fixes: Minor design issues.
 
 = 1.0.1 =
