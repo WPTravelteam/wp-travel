@@ -31,6 +31,8 @@ class Wp_Travel_Shortcodes {
 
 		$type = isset( $atts['type'] ) ? $atts['type'] : '';
 
+		$iti_id = isset( $atts['itinerary_id'] ) ? absint($atts['itinerary_id']) : '';
+
 		$id   = isset( $atts['id'] ) ? $atts['id'] : 0;
 		$id   = absint( $id );
 		$slug = isset( $atts['slug'] ) ? $atts['slug'] : '';
@@ -43,6 +45,12 @@ class Wp_Travel_Shortcodes {
 			'posts_per_page' 	=> $limit,
 			'status'       => 'published',
 		);
+
+	if( ! empty( $iti_id ) ) :
+
+		$args['p'] 	= $iti_id;
+		
+	else :
 
 		$taxonomies = array( 'itinerary_types', 'travel_locations' );
 		// if type is taxonomy.
@@ -75,6 +83,9 @@ class Wp_Travel_Shortcodes {
 								),
 							);
 		}
+
+	endif;
+		
 		$query = new WP_Query( $args ); ?>
 		<div class="wp-travel-itinerary-items">
 			<?php $col_per_row = apply_filters( 'wp_travel_itineraries_col_per_row' , '3' ); ?>
