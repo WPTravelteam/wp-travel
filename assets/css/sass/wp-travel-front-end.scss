@@ -478,7 +478,7 @@
     }
 .wp-travel.trip-headline-wrapper{
         .wp-travel-booknow-btn{
-            padding:10px 50px;
+            padding:5px 50px;
             font-size: 22px;
             box-shadow:none;
         }
@@ -486,6 +486,8 @@
             margin: 20px 0;
             // font-weight: 700;
         }
+        .wp-travel-keywords{padding: 15px 0 0}
+        .wp-travel-keyword{padding: 0 10px; text-transform: capitalize}
 }
 .trip-price{
         del{
