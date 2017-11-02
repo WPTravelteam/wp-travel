@@ -75,9 +75,9 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Itinerary Settings', 'wp_travel' ),
 		);
 
-		$settings_fields['bookings'] = array(
-			'tab_label' => __( 'Bookings', 'wp_travel' ),
-			'content_title' => __( 'Bookings Settings', 'wp_travel' ),
+		$settings_fields['email'] = array(
+			'tab_label' => __( 'Email', 'wp_travel' ),
+			'content_title' => __( 'Email Settings', 'wp_travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -155,13 +155,13 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
-	 * Callback for Bookings tab.
+	 * Callback for Email tab.
 	 *
 	 * @param  Array $tab  List of tabs.
 	 * @param  Array $args Settings arg list.
 	 */
 	function call_back_tab_booking( $tab, $args ) {
-		if ( 'bookings' !== $tab ) {
+		if ( 'email' !== $tab ) {
 			return;
 		}
 		$send_booking_email_to_admin = isset( $args['settings']['send_booking_email_to_admin'] ) ? $args['settings']['send_booking_email_to_admin'] : 'yes';
