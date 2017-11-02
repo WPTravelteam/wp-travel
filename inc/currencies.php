@@ -284,7 +284,7 @@ function wp_traval_get_currency_symbol( $currency_code = null ) {
 		'TTD' => '&#36;',
 		'TVD' => '&#36;',
 		'TWD' => '&#78;&#84;&#36;',
-		'TZS' => '',
+		'TZS' => 'TZS',
 		'UAH' => '&#8372;',
 		'UGX' => '&#85;&#83;&#104;',
 		'USD' => '&#36;',
@@ -305,6 +305,8 @@ function wp_traval_get_currency_symbol( $currency_code = null ) {
 		'ZWD' => 'Z&#36;',
 		'ZWL' => '&#90;&#36;',
 	);
+
+	$currency_symbols = apply_filters( 'wp_traval_currency_symbols', $currency_symbols );
 
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
 		return $currency_symbols[ $currency_code ];
