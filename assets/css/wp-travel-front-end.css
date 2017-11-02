@@ -559,11 +559,18 @@
   .wp-travel-itinerary-list li {
     float: left;
     list-style: none;
-    padding: 1%; }
+    padding: 1%;
+    box-sizing: border-box; }
+  .wp-travel-itinerary-list.col-1-per-row li {
+    width: 100%; }
+  .wp-travel-itinerary-list.col-2-per-row li {
+    width: 50%; }
   .wp-travel-itinerary-list.col-3-per-row li {
     width: 33.33%; }
-  .wp-travel-itinerary-list.col-5-per-row li {
+  .wp-travel-itinerary-list.col-4-per-row li {
     width: 25%; }
+  .wp-travel-itinerary-list.col-5-per-row li {
+    width: 20%; }
   .wp-travel-itinerary-list .wp-travel-post-item-wrapper {
     border: 1px solid #cecece;
     position: relative;

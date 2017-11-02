@@ -751,12 +751,22 @@
         float: left;
         list-style: none;
         padding:1%;
+        box-sizing: border-box;
+    }
+    &.col-1-per-row{
+        li{width:100%}
+    }
+    &.col-2-per-row{
+        li{width:50%}
     }
     &.col-3-per-row{
         li{width:33.33%}
     }
-    &.col-5-per-row{
+    &.col-4-per-row{
         li{width:25%}
+    }
+    &.col-5-per-row{
+        li{width:20%}
     }
     position:relative;
     display: block;
