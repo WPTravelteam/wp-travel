@@ -80,6 +80,7 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 * Added Keyword Taxonomy.
 * Added Search Widgets.
 * Option added to send booking mail to admin.
+* Currency Added: TZS.
 * Fixes: Settings option not working in WooCommerce.
 * Fixes: Minor design issues.
 
