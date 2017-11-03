@@ -8,14 +8,26 @@
 /**
  * Return template.
  *
- * @param  String $path Path of template.
+ * @param  String $template_name Path of template.
  * @param  array  $args arguments.
  * @return Mixed
  */
-function wp_travel_get_template( $path, $args = array() ) {
-	$file = sprintf( '%s/templates/%s', untrailingslashit( plugin_dir_path( dirname( __FILE__ ) ) ), $path );
-	if ( file_exists( $file ) ) {
-		return $file;
+function wp_travel_get_template( $template_name, $args = array() ) {
+	$template_path = apply_filters( 'wp_travel_template_path',  'wp-travel/' );
+	$default_path = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
+
+	// Look templates in theme first.
+	$template = locate_template(
+		array(
+			trailingslashit( $template_path ) . $template_name,
+			$template_name,
+		)
+	);
+	if ( ! $template ) {		
+		$template = $default_path . $template_name;
+	}
+	if ( file_exists( $template ) ) {
+		return $template;
 	}
 	return false;
 }
@@ -304,7 +316,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					</span>
 				</div>
 	  	 	</li>
-			<?php if( comments_open() ) : ?>
+			<?php if ( comments_open() ) : ?>
 	  	 	<li>
 	  	 		<div class="travel-info">
 					<strong class="title"><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></strong>
@@ -330,10 +342,10 @@ function wp_travel_single_excerpt( $post_id ) {
 	</div>
 	<?php
 	$terms = get_the_terms( $post_id, 'travel_keywords' );
-	if ( is_array( $terms ) && sizeof( $terms ) > 0 ) : ?>
+	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
 		<div class="wp-travel-keywords">
 		<span class="label"><?php esc_html_e( 'Keywords : ' ) ?></span>
-		<?php foreach( $terms as $term ) : ?>
+		<?php foreach ( $terms as $term ) : ?>
 			<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
 		<?php endforeach; ?>
 		</div>
