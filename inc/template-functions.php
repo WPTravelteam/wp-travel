@@ -369,18 +369,18 @@ function wp_travel_frontend_contents( $post_id ) {
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<ul class="wp-travel tab-list resp-tabs-list ">
-			<li class="tab-link" data-tab="tab-5"><?php esc_html_e( 'Overview', 'wp-travel' ) ?></li>
-			<li class="content-li" data-tab="tab-1"><?php esc_html_e( 'Trip Outline', 'wp-travel' ); ?></li>
-			<li class="content-li" data-tab="tab-2"><?php esc_html_e( 'Trip Include', 'wp-travel' ) ?></li>
-			<li class="content-li" data-tab="tab-3"><?php esc_html_e( 'Trip Exclude', 'wp-travel' ) ?></li>
-			<li class="content-li wp-travel-tab-gallery-contnet" data-tab="tab-4"><?php esc_html_e( 'Gallery', 'wp-travel' ) ?></li>
+			<li class="tab-link" data-tab="tab-1-cont"><a href="#tab-1" class="wp-travel-ert"><?php esc_html_e( 'Overview', 'wp-travel' ) ?></a></li>
+			<li class="content-li" data-tab="tab-2-cont"><a href="#tab-2" class="wp-travel-ert"><?php esc_html_e( 'Trip Outline', 'wp-travel' ); ?></a></li>
+			<li class="content-li" data-tab="tab-3-cont"><a href="#tab-3" class="wp-travel-ert"><?php esc_html_e( 'Trip Include', 'wp-travel' ) ?></a></li>
+			<li class="content-li" data-tab="tab-4-cont"><a href="#tab-4" class="wp-travel-ert"><?php esc_html_e( 'Trip Exclude', 'wp-travel' ) ?></a></li>
+			<li class="content-li wp-travel-tab-gallery-contnet" data-tab="tab-5-cont"><a href="#tab-5" class="wp-travel-ert"><?php esc_html_e( 'Gallery', 'wp-travel' ) ?></a></li>
 			<?php if ( comments_open() ) : ?>
-			<li class="content-li wp-travel-review" data-tab="tab-6"><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></li>
+			<li class="content-li wp-travel-review" data-tab="tab-6-cont"><a href="#tab-6" class="wp-travel-ert"><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></a></li>
 			<?php endif; ?>
-			<li class="content-li wp-travel-booking-form" data-tab="tab-7"><?php esc_html_e( 'Booking', 'wp-travel' ) ?></li>
+			<li class="content-li wp-travel-booking-form" data-tab="tab-7-cont"><a href="#tab-7" class="wp-travel-ert"><?php esc_html_e( 'Booking', 'wp-travel' ) ?></a></li>
 		</ul>
 		<div class="resp-tabs-container">
-			<div id="tab-5" class="tab-list-content">
+			<div id="tab-1-cont" class="tab-list-content">
 				<?php
 				if ( false !== $trip_content ) {
 					echo wp_kses_post( $trip_content );
@@ -389,7 +389,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				}
 				?>
 			</div>
-			<div id="tab-1" class="tab-list-content ">
+			<div id="tab-2-cont" class="tab-list-content ">
 				<?php
 				if ( false !== $trip_outline ) {
 					echo wp_kses_post( $trip_outline );
@@ -398,7 +398,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
 				} ?>
 			</div>
-			<div id="tab-2" class="tab-list-content">
+			<div id="tab-3-cont" class="tab-list-content">
 				<?php
 				if ( false !== $trip_include ) {
 					echo wp_kses_post( $trip_include );
@@ -407,7 +407,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				}
 				?>
 			</div>
-			<div id="tab-3" class="tab-list-content">
+			<div id="tab-4-cont" class="tab-list-content">
 				<?php
 				if ( false !== $trip_exclude ) {
 					echo wp_kses_post( $trip_exclude );
@@ -416,7 +416,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				}
 				?>
 			</div>
-			<div id="tab-4" class="tab-list-content">
+			<div id="tab-5-cont" class="tab-list-content">
 				<?php if ( false !== $gallery_ids ) : ?>
 				<div class="wp-travel-gallery wp-travel-container-wrap">
 				    <div class="wp-travel-row-wrap">
@@ -437,11 +437,11 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php endif; ?>
 			</div>
 			<?php if ( comments_open() ) : ?>
-			<div id="tab-6" class="tab-list-content ">
+			<div id="tab-6-cont" class="tab-list-content ">
 			    <?php comments_template(); ?>
 			</div><!-- Tab 6 ends -->
 			<?php endif; ?>
-			<div id="tab-7" class="tab-list-content ">
+			<div id="tab-7-cont" class="tab-list-content ">
 				<?php echo wp_travel_get_booking_form(); ?>
 			</div>
 		</div>
