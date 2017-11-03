@@ -330,7 +330,7 @@ function wp_travel_single_excerpt( $post_id ) {
 	</div>
 	<?php
 	$terms = get_the_terms( $post_id, 'travel_keywords' );
-	if ( sizeof( $terms ) > 0 ) : ?>
+	if ( is_array( $terms ) && sizeof( $terms ) > 0 ) : ?>
 		<div class="wp-travel-keywords">
 		<span class="label"><?php esc_html_e( 'Keywords : ' ) ?></span>
 		<?php foreach( $terms as $term ) : ?>
