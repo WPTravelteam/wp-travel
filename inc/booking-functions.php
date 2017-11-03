@@ -202,7 +202,7 @@ function wp_travel_booking_info( $post ) {
 	}
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
 	$wp_travel_fname = get_post_meta( $post->ID, 'wp_travel_fname', true );
-	$wp_travel_mname = get_post_meta( $post->ID, 'wp_travel_mname', true );
+	// $wp_travel_mname = get_post_meta( $post->ID, 'wp_travel_mname', true );
 	$wp_travel_lname = get_post_meta( $post->ID, 'wp_travel_lname', true );
 	$wp_travel_country = get_post_meta( $post->ID, 'wp_travel_country', true );
 	$wp_travel_address = get_post_meta( $post->ID, 'wp_travel_address', true );
@@ -236,10 +236,10 @@ function wp_travel_booking_info( $post ) {
 				<label for="wp-travel-fname"><?php esc_html_e( 'First Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-travel-fname" name="wp_travel_fname" value="<?php _e( $wp_travel_fname, 'wp-travel' ); ?>" >
 			</div>
-			<div class="wp-travel-form-field">
+			<!--<div class="wp-travel-form-field">
 				<label for="wp-travel-mname"><?php esc_html_e( 'Middle Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-travel-mname" name="wp_travel_mname"  value="<?php _e( $wp_travel_mname, 'wp-travel' ); ?>">
-			</div>
+			</div>-->
 			<div class="wp-travel-form-field">
 				<label for="wp-travel-lname"><?php esc_html_e( 'Last Name', 'wp-travel' ); ?></label>
 				<input type="text" id="wp-travel-lname" name="wp_travel_lname"  value="<?php _e( $wp_travel_lname, 'wp-travel' ); ?>">
@@ -269,7 +269,7 @@ function wp_travel_booking_info( $post ) {
 				<input type="email" id="wp-travel-email" name="wp_travel_email"  value="<?php _e( $wp_travel_email, 'wp-travel' ); ?>">
 			</div>
 	        <?php echo apply_filters('wp_travel_booking_form_after_email_html_content',''); ?>
-			<div class="wp-travel-form-field">
+			<div class="wp-travel-form-field full-width">
 				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX', 'wp-travel' ); ?></label>
 				<input type="number" min="1" max="<?php echo apply_filters( 'wp_travel_max_pax_number', 100000 ); ?> " id="wp-travel-pax" name="wp_travel_pax"  value="<?php _e( $wp_travel_pax, 'wp-travel' ); ?>">
 			</div>
@@ -332,7 +332,7 @@ function wp_travel_save_booking_data( $post_id ) {
 	}
 	$wp_travel_post_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
 	$wp_travel_fname = sanitize_text_field( $_POST['wp_travel_fname'] );
-	$wp_travel_mname = sanitize_text_field( $_POST['wp_travel_mname'] );
+	// $wp_travel_mname = sanitize_text_field( $_POST['wp_travel_mname'] );
 	$wp_travel_lname = sanitize_text_field( $_POST['wp_travel_lname'] );
 	$wp_travel_country = sanitize_text_field( $_POST['wp_travel_country'] );
 	$wp_travel_address = sanitize_text_field( $_POST['wp_travel_address'] );
@@ -345,7 +345,7 @@ function wp_travel_save_booking_data( $post_id ) {
 
 	update_post_meta( $post_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 	update_post_meta( $post_id, 'wp_travel_fname', sanitize_text_field( $wp_travel_fname ) );
-	update_post_meta( $post_id, 'wp_travel_mname', sanitize_text_field( $wp_travel_mname ) );
+	// update_post_meta( $post_id, 'wp_travel_mname', sanitize_text_field( $wp_travel_mname ) );
 	update_post_meta( $post_id, 'wp_travel_lname', sanitize_text_field( $wp_travel_lname ) );
 	update_post_meta( $post_id, 'wp_travel_country', sanitize_text_field( $wp_travel_country ) );
 	update_post_meta( $post_id, 'wp_travel_address', sanitize_text_field( $wp_travel_address ) );
@@ -359,7 +359,7 @@ function wp_travel_save_booking_data( $post_id ) {
 
 	$order_data['wp_travel_post_id'] = $wp_travel_post_id;
 	$order_data['wp_travel_fname'] = $wp_travel_fname;
-	$order_data['wp_travel_mname'] = $wp_travel_mname;
+	// $order_data['wp_travel_mname'] = $wp_travel_mname;
 	$order_data['wp_travel_lname'] = $wp_travel_lname;
 	$order_data['wp_travel_country'] = $wp_travel_country;
 	$order_data['wp_travel_address'] = $wp_travel_address;
