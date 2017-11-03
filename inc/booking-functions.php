@@ -19,9 +19,9 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_fname',
 				'id' => 'wp-travel-fname',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 					'maxlength' => '50',
-					'type' => 'alphanum',
+					// 'type' => 'alphanum',
 				),
 				'priority' => 10,
 			),
@@ -32,9 +32,9 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_lname',
 				'id' => 'wp-travel-lname',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 					'maxlength' => '50',
-					'type' => 'alphanum',
+					// 'type' => 'alphanum',
 				),
 				'priority' => 20,
 			),
@@ -45,7 +45,7 @@ function wp_travel_booking_form_fields() {
 				'id' => 'wp-travel-country',
 				'options' => wp_travel_get_countries(),
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 				),
 				'priority' => 30,
 			),
@@ -55,7 +55,7 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_address',
 				'id' => 'wp-travel-address',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 					'maxlength' => '50',
 				),
 				'priority' => 40,
@@ -66,8 +66,9 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_phone',
 				'id' => 'wp-travel-phone',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 					'maxlength' => '50',
+					'type' => 'number',
 				),
 				'priority' => 50,
 			),
@@ -77,7 +78,7 @@ function wp_travel_booking_form_fields() {
 				'name' => 'wp_travel_email',
 				'id' => 'wp-travel-email',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 					'maxlength' => '60',
 				),
 				'priority' => 60,
@@ -89,7 +90,7 @@ function wp_travel_booking_form_fields() {
 				'id' => 'wp-travel-arrival-date',
 				'class' => 'wp-travel-datepicker',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 				),
 				'attributes' => array( 'readonly' => 'readonly' ),
 				'date_options' => array(),
@@ -102,7 +103,7 @@ function wp_travel_booking_form_fields() {
 				'id' => 'wp-travel-departure-date',
 				'class' => 'wp-travel-datepicker',
 				'validations' => array(
-					'required' => '',
+					'required' => true,
 				),
 				'attributes' => array( 'readonly' => 'readonly' ),
 				'date_options' => array(),
