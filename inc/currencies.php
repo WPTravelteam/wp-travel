@@ -117,6 +117,7 @@ function wp_traval_get_currency_list() {
 		'TRY' => 'Turkey Lira',
 		// 'TRL' => 'Turkey Lira',
 		'TVD' => 'Tuvalu Dollar',
+		'TZS' => 'Tanzanian Shilling',
 		'UAH' => 'Ukraine Hryvna',
 		'GBP' => 'United Kingdom Pound',
 		'USD' => 'United States Dollar',
