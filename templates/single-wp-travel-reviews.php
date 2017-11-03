@@ -1,6 +1,6 @@
 <?php
 /**
- * Display single aditem reviews (comments)
+ * Display single wp travel reviews (comments)
  *
  * This template can be overridden by copying it to yourtheme/wp-travel/single-wp-travel-reviews.php.
  *
@@ -12,9 +12,8 @@
  * @see 	    http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
- * @since     2.0.0
+ * @since       1.0.0
  */
-global $aditem;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
