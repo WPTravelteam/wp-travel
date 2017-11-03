@@ -554,6 +554,6 @@ function wp_travel_search_form() {
 		</form>
 	</div>	
 	<?php
-	$content = apply_filters( 'wp-travel_search_form', ob_get_clean() );
+	$content = apply_filters( 'wp_travel_search_form', ob_get_clean() );
 	echo $content;
 }
