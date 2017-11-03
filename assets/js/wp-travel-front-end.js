@@ -27,19 +27,25 @@ jQuery( document ).ready( function($){
 	    enabled:true
 	  }
 	});
+	
 	$('#wp-travel-tab-wrapper').easyResponsiveTabs({
-		// type: 'default', //Types: default, vertical, accordion           
-		// width: 'auto', //auto or any width like 600px
-		// fit: true,   // 100% fit in a container
-		// closed: 'accordion', // Start closed if in accordion view
-		// activate: function(event) { // Callback function if tab is switched
-		// var $tab = $(this);
-		// var $info = $('#tabInfo');
-		// var $name = $('span', $info);
-		// $name.text($tab.text());
-		// $info.show();
-		// }
+
 	});
+	if ( window.location.hash ) {
+		var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+			
+
+		if ( $("a[href='#" + hash + "']").hasClass('wp-travel-ert') ) {
+			lis = $("ul.resp-tabs-list > li");
+			lis.removeClass("resp-tab-active");
+			$("a[href='#" + hash + "']").parent('li').addClass("resp-tab-active");
+			tab_cont = $( '.tab-list-content' );
+			tab_cont.removeClass( 'resp-tab-content-active' ).hide();
+			$( '#' + hash + '-cont.tab-list-content' ).addClass('resp-tab-content-active').show();
+		}
+		
+	}
+	
 	// Rating script starts.
 	$( '.rate_label' ).hover( function(){
 		var rateLabel = $( this ).attr('data-id');

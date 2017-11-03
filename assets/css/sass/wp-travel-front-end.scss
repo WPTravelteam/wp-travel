@@ -154,9 +154,10 @@
         }
         li{
             background: none;
-            color: #333;
+            
             display:inline-block;
-            padding: 22px 33px;
+            // padding: 22px 33px;
+            padding:0;
             cursor: pointer;
             font-weight: normal;
             border:none;
@@ -168,12 +169,20 @@
                 border-right:none;
             }
             &.resp-tab-active{
-                padding:22px 33px;
+                // padding:22px 33px;
                 background: #fff;
                 color: #f83531;
                 @include sidr-view{
                     padding:15px 14px;
                 }
+            }
+            a{
+                color: #333;
+                display: block;
+                padding: 22px 33px;
+            }
+            &.resp-tab-active a{
+                color: #f83531;
             }
             @include sidr-view{
               padding: 15px 14px;

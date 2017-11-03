@@ -82,9 +82,8 @@
       transition: all 0.3s ease-in-out; }
     .wp-travel-tab-wrapper .tab-list.resp-tabs-list li {
       background: none;
-      color: #333;
       display: inline-block;
-      padding: 22px 33px;
+      padding: 0;
       cursor: pointer;
       font-weight: normal;
       border: none;
@@ -95,12 +94,17 @@
       .wp-travel-tab-wrapper .tab-list.resp-tabs-list li:last-child {
         border-right: none; }
       .wp-travel-tab-wrapper .tab-list.resp-tabs-list li.resp-tab-active {
-        padding: 22px 33px;
         background: #fff;
         color: #f83531; }
         @media (max-width: 992px) {
           .wp-travel-tab-wrapper .tab-list.resp-tabs-list li.resp-tab-active {
             padding: 15px 14px; } }
+      .wp-travel-tab-wrapper .tab-list.resp-tabs-list li a {
+        color: #333;
+        display: block;
+        padding: 22px 33px; }
+      .wp-travel-tab-wrapper .tab-list.resp-tabs-list li.resp-tab-active a {
+        color: #f83531; }
       @media (max-width: 992px) {
         .wp-travel-tab-wrapper .tab-list.resp-tabs-list li {
           padding: 15px 14px; } }
