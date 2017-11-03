@@ -492,6 +492,16 @@
     vertical-align: top;
     width: 100%; }
 
+.wp-travel-search p label {
+  display: inline-block;
+  width: 24%; }
+.wp-travel-search p input[type="text"], .wp-travel-search p .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="text"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .wp-travel-search p select[type="text"], .wp-travel-search p select {
+  width: 74%;
+  padding: 3px;
+  border-radius: 3px; }
+.wp-travel-search p.wp-travel-search {
+  text-align: right; }
+
 .wp-travel-related-posts {
   position: relative;
   display: block;

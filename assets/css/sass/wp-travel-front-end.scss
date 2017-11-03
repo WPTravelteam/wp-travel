@@ -670,6 +670,24 @@
         }
     }
 }
+// Search form widget
+.wp-travel-search{
+    p {
+        label{
+            display: inline-block;
+            width: 24%;
+        }
+        input[type="text"], select {
+            width: 74%;
+            padding: 3px;
+            border-radius: 3px;
+        }
+    }
+    p.wp-travel-search{
+        text-align: right
+    }
+}
+
 //wp-travel-related-posts
 .wp-travel-related-posts{    
     position:relative;
