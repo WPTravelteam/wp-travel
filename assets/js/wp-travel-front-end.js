@@ -43,6 +43,17 @@ jQuery( document ).ready( function($){
 			tab_cont.removeClass( 'resp-tab-content-active' ).hide();
 			$( '#' + hash + '-cont.tab-list-content' ).addClass('resp-tab-content-active').show();
 		}
+
+		if ( hash === 'tab-7' ) {
+			var winWidth = $(window).width();
+			var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
+			if ( winWidth < 767 ) {			
+				var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
+			}
+			$('html, body').animate({
+				  scrollTop: ( tabHeight )
+				}, 1200 );
+		}
 		
 	}
 	
