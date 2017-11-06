@@ -196,7 +196,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 			</ins>
 		<?php endif; ?>
 
-		    <span class="person-count">/<?php esc_html_e( 'person', 'wp-travel' ) ?></span>
+		    <span class="person-count"></span>
 		</div>
 	</div>
 	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
@@ -223,7 +223,7 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	}
 	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
-		 <a>
+		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
