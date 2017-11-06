@@ -323,6 +323,18 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_traval_location_id = sanitize_text_field( wp_unslash( $_POST['wp_traval_location_id'] ) );
 			update_post_meta( $post_id, 'wp_traval_location_id', $wp_traval_location_id );
 		}
+	
+		$fixed_departure = 'no';
+		if ( isset( $_POST['wp_travel_fixed_departure'] ) ) {
+			$fixed_departure = sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
+
+		
+		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
+			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );
+			update_post_meta( $post_id, 'wp_travel_trip_duration', $trip_duration );
+		}
 
 		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
