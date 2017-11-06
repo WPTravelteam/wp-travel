@@ -10,6 +10,12 @@
 	$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
 
 	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
+	$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+
+	$trip_duration = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
+	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 
 	$sale_price_attribute = 'disabled="disabled"';
 	if ( $enable_sale ) {
@@ -59,10 +65,19 @@
 		<td><?php wp_editor( $trip_exclude, 'wp_travel_trip_exclude' ); ?></td>
 	</tr>
 	<tr>
-		<td><label for="wp_travel_outline"><?php esc_html_e( 'Starting date', 'wp-travel' ); ?></label></td>
+		<td><label for="wp-travel-fixed-departure"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></label></td>
+		<td><input type="checkbox" name="wp_travel_fixed_departure" id="wp-travel-fixed-departure" value="yes" <?php checked( 'yes', $fixed_departure ) ?> /></td>
+	</tr>
+	<tr class="wp-travel-trip-duration-row" style="display:<?php echo ( 'no' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp-travel-trip-duration"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></label></td>
+		<td><input type="number" min="0" step="1" name="wp_travel_trip_duration" id="wp-travel-trip-duration" value="<?php echo esc_attr( $trip_duration ); ?>" /> <?php esc_html_e( 'Days' ) ?></td>
+	</tr>
+	
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
 	</tr>
-	<tr>
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
 		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
