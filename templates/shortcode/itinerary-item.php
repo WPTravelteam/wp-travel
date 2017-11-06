@@ -31,64 +31,74 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 <li>
 <div class="wp-travel-post-item-wrapper">
     <div class="wp-travel-post-wrap-bg">
-		<div class="wp-travel-post-content">
-
-			<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
-			<span class="post-category">
-
-
-				<div class="entry-meta">
-					<div class="category-list-items">
-						<span class="post-category">
-							<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
-						    <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-						    	<i class="fa fa-folder-o" aria-hidden="true"></i>
-						    	<?php
-						    	$first_term = array_shift( $terms );
-						    	$term_name = $first_term->name;
-						    	$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
-								<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
-									<?php esc_html_e( $term_name, 'wp-travel' ); ?>
-								</a>
-								<div class="wp-travel-caret">
-								<?php if ( count( $terms ) > 0 ) : ?>
-									<i class="fa fa-caret-down"></i>
-
-									<div class="sub-category-menu">
-										<?php foreach( $terms as $term ) : ?>
-											<?php
-												$term_name = $term->name;
-						    					$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
-											<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
-												<?php esc_html_e( $term_name, 'wp-travel' ); ?>
-											</a>
-										<?php endforeach; ?>
-									</div>
-								<?php endif; ?>
-								</div>
-							<?php endif; ?>
-						</span>
-					</div>
-					<div class="wp-travel-average-review">
-					    <span><?php printf( '%s reviews',wp_travel_get_rating_count() ); ?></span>
-					</div>
-				</div>
-			</span>
-		</div>
+		
 		<div class="wp-travel-post-thumbnail">
 		 	<a href="<?php the_permalink() ?>">
 			<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
 		   	</a>
 		   	<?php wp_travel_save_offer( get_the_ID() ); ?>
 		</div>
-		<div class="recent-post-bottom-meta">
-			<?php wp_travel_trip_price( get_the_ID(), true ); ?>
+		<div class="wp-travel-post-info">
+			<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
+			<div class="recent-post-bottom-meta">
+				<?php wp_travel_trip_price( get_the_ID(), true ); ?>
+			</div>
 		</div>
+		<div class="wp-travel-post-content">
+			
+			<?php
+				$fixed_departure = get_post_meta( get_the_ID(), 'wp_travel_fixed_departure', true );
+				$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+				$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+			?>
+			<?php if ( 'yes' === $fixed_departure ) : ?>
+				<?php
+					$start_date	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
+					$end_date 	= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
+				?>
+				<?php if ( $start_date && $end_date ) : ?>
+					<div class="wp-travel-trip-time trip-fixed-departure">
+						<i class="fa fa-calendar"></i>
+						<span class="wp-travel-trip-duration">
+							<?php printf( '%s to %s', $start_date, $end_date ); ?> 
+						</span>
+						
+					</div>
+				<?php endif; ?>
+			<?php else : ?>
+				<?php
+				$trip_duration = get_post_meta( get_the_ID(), 'wp_travel_trip_duration', true );
+				$trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
+				<?php if ( ( int ) $trip_duration > 0 ) : ?>
+					<div class="wp-travel-trip-time trip-duration">
+						<i class="fa fa-clock-o"></i>
+											
+						<span class="wp-travel-trip-duration">
+							<?php echo esc_html( $trip_duration . ' Days' ); ?>
+						</span>
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
+			<span class="post-category">
+				<div class="entry-meta">
+					<?php //wp_travel_single_trip_rating( get_the_ID() ) ?>
+					<?php $average_rating = wp_travel_get_average_rating( ) ?>				
+					<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+						
+							<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
+								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
+							</span>
+						
+					</div> <span class="review-count">( <?php printf( '%s reviews', wp_travel_get_rating_count() ); ?> )</span>
+				</div>
+			</span>
+		</div>
+		
 		<?php if ( $enable_sale ) : ?>
   			<div class="wp-travel-offer">
   			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
   			</div>
-  			<?php endif; ?>
+  		<?php endif; ?>
 
 	</div>
 </div>
