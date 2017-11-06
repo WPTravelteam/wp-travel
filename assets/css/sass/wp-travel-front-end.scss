@@ -27,7 +27,7 @@
 //media query for theme contents
 
 @mixin large-screen{
-   @media(max-width: 1000px){
+    @media(max-width: 1000px){
       @content;
     }
 }
@@ -55,6 +55,18 @@
 @mixin xs{
   @media (max-width: 500px){
     @content;
+    }
+}
+
+@media(max-width: 1199px){
+    .wp-travel-itinerary-items .wp-travel-itinerary-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 480px){
+    .wp-travel-itinerary-items .wp-travel-itinerary-list {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
@@ -715,15 +727,16 @@
         @include mob{
             width: 100%;
         }
-        .wp-travel-post-content{
-            padding:10px;
-            .post-title{
-                margin-top: 0;
-                margin-bottom: 0;
-                a{
-                    color: #333;
-                }
+        .post-title{
+            margin-top: 0;
+            margin-bottom: 0;
+            a{
+                color: #333;
+                font-size: 14px;
             }
+        }
+        .wp-travel-post-content{
+            padding:10px;            
             .post-category{
                 a{
                     font-weight:300;
@@ -801,7 +814,9 @@
         li{width:50%}
     }
     &.col-3-per-row{
-        li{width:33.33%}
+        li{
+            // width:33.33%
+        }
     }
     &.col-4-per-row{
         li{width:25%}
@@ -809,10 +824,10 @@
     &.col-5-per-row{
         li{width:20%}
     }
-    position:relative;
-    display: flex;
-    flex-wrap: wrap;
-    padding:55px 0 0;    
+    position: relative;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(3, 1fr);   
     .wp-travel-post-item-wrapper{ 
         border:1px solid #cecece;       
         position: relative;
@@ -822,20 +837,22 @@
         // padding-right: 10px;
         // margin-bottom: 30px;
         @include sidr-view{
-            width: 50%;
+            // width: 50%;
         }
         @include mob{
             width: 100%;
         }
+        .post-title{
+            margin-top: 0;
+            margin-bottom: 0;
+            a{
+                color: #333;
+                font-size: 14px;
+            }
+        }
         .wp-travel-post-content{
             padding:10px;
-            .post-title{
-                margin-top: 0;
-                margin-bottom: 0;
-                a{
-                    color: #333;
-                }
-            }
+            
             .post-category{
                 a{
                     font-weight:300;
