@@ -164,6 +164,16 @@
 		} else {
 			$( '#wp-travel-sale-price' ).attr( 'disabled', 'disabled' );
 		}
+    } );
+    
+    $( document ).on( 'click', '#wp-travel-fixed-departure', function() {
+		if ( $( this ).is( ':checked' ) ) {
+            $( '.wp-travel-fixed-departure-row' ).css( {'display':'table-row'} );
+            $( '.wp-travel-trip-duration-row' ).css( {'display':'none'} );
+		} else {
+            $( '.wp-travel-fixed-departure-row' ).css( {'display':'none'} );
+            $( '.wp-travel-trip-duration-row' ).css( {'display':'table-row'} );
+		}
 	} );
 
    $(document).on("click", ".wp-travel-featured-post", function(e){
