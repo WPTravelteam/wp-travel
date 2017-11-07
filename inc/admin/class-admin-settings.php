@@ -71,13 +71,13 @@ class WP_Travel_Admin_Settings {
 		);
 
 		$settings_fields['itinerary'] = array(
-			'tab_label' => __( 'Itinerary', 'wp_travel' ),
-			'content_title' => __( 'Itinerary Settings', 'wp_travel' ),
+			'tab_label' => __( 'Itinerary', 'wp-travel' ),
+			'content_title' => __( 'Itinerary Settings', 'wp-travel' ),
 		);
 
 		$settings_fields['email'] = array(
-			'tab_label' => __( 'Email', 'wp_travel' ),
-			'content_title' => __( 'Email Settings', 'wp_travel' ),
+			'tab_label' => __( 'Email', 'wp-travel' ),
+			'content_title' => __( 'Email Settings', 'wp-travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -147,7 +147,7 @@ class WP_Travel_Admin_Settings {
 				</th>
 				<td>
 					<input type="checkbox" <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
-					<p class="description"><?php esc_html_e( 'This will hide your related itineraries.' ) ?></p>
+					<p class="description"><?php esc_html_e( 'This will hide your related itineraries.', 'wp-travel' ) ?></p>
 				</td>
 			<tr>
 		</table>

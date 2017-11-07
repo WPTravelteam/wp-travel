@@ -346,7 +346,7 @@ function wp_travel_single_excerpt( $post_id ) {
 	$terms = get_the_terms( $post_id, 'travel_keywords' );
 	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
 		<div class="wp-travel-keywords">
-		<span class="label"><?php esc_html_e( 'Keywords : ' ) ?></span>
+		<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ) ?></span>
 		<?php foreach ( $terms as $term ) : ?>
 			<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
 		<?php endforeach; ?>

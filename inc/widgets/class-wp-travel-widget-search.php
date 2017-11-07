@@ -23,7 +23,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	 */
 	function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Search', 'wp_travel' ) );
+		parent::__construct( false, __( 'WP Travel Search', 'wp-travel' ) );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 		} ?>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp_travel' ); ?>:</label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">
 		</p>
 			

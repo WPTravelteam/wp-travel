@@ -28,13 +28,13 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 WP Travel plugin is very flexible and highly customizable. There are a number of hooks and filters which makes plugin really flexible from the developer's point of view. There are bulk of options which add further more flexibility in the plugin.
 
 = Supported Themes =
-["Travel Log"](http://wensolutions.com/travel-log-demo/) theme is specially designed for “WP Travel” plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
+["Travel Log"](http://wensolutions.com/themes/travel-log/) theme is specially designed for “WP Travel” plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
 
 
 = Dedicated Support and Documentation =
-We have an entire team of happiness engineers ready to help you. Ask your questions in the support forum, or [contact us directly](http://wensolutions.com/contact/).
+We have an entire team of happiness engineers ready to help you. Ask your questions in the support forum, or [contact us directly](http://wensolutions.com/support/).
 
-Also you can checkout WP Travel [documentation](http://wensolutions.com/documentation/plugin/wp-travel/).
+Also you can checkout WP Travel [documentation](http://wensolutions.com/documentation/wp-travel/).
 
 == Installation ==
 = Using The WordPress Dashboard =
@@ -59,7 +59,7 @@ Also you can checkout WP Travel [documentation](http://wensolutions.com/document
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
-Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp-travel "WP Travel Support") and let us know. We are always looking for ways to improve our plugins.
+Nice, send us request on [Support page](http://wensolutions.com/support/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 == Screenshots ==
 1. Backend: New itinerary
@@ -76,6 +76,9 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 12. Frontend: Itinerary details - 2
 
 == Upgrade Notice ==
+Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
+
+== Changelog ==
 
 = 1.0.2 =
 * New Feature: Hide related itinerary option added in settings.
@@ -90,14 +93,6 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 * New Feature: Itinerary listing design updated.
 * Fixes: Settings option not working in WooCommerce.
 * Fixes: Minor design issues.
-
-= 1.0.1 =
-* Minor release.
-
-= 1.0.0 =
-* Initial release.
-
-== Changelog ==
 
 = 1.0.1 =
 * New: Added feature on booking.

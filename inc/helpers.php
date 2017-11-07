@@ -445,7 +445,7 @@ function wp_travel_search_form() {
 			<input type="hidden" name="post_type" value="itineraries" />
 			<p>
 				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
-				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_html_e( apply_filters( 'wp_travel_search_placeholder', 'Search' ), 'wp-travel' ) ?>">
+				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_html_e( apply_filters( 'wp_travel_search_placeholder', 'wp-travel' ), 'wp-travel' ) ?>">
 			</p>
 			<p>
 				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>

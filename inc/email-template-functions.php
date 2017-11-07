@@ -113,7 +113,7 @@ function wp_travel_admin_email_template() {
 		<table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
 			<tr class="wp-travel-header" style="background: #fff;">			
 				<td align="left" style="background: #dd402e;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
-					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'New Bookings' ) ?></h2>
+					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'New Bookings', 'wp-travel' ) ?></h2>
 				</td> <!-- /Header -->
 			</tr>
 			<tr class="wp-travel-content" style="background: #fff;">
@@ -420,7 +420,7 @@ function wp_travel_customer_email_template() {
 		<table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
 			<tr class="wp-travel-header" style="background: #fff;">			
 				<td align="left" style="background: #dd402e;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
-					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'Thank you for your booking.' );?></h2>
+					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'Thank you for your booking.', 'wp-travel' );?></h2>
 				</td> <!-- /Header -->
 			</tr>
 			<tr class="wp-travel-content" style="background: #fff;">
