@@ -776,6 +776,9 @@
         .category-list-items {
             float: right
         }
+        .wp-travel-review-text {
+            float: left
+        }
     }
     .wp-travel-post-wrap-bg {
         background: #fff;
@@ -824,6 +827,12 @@
             }
         }
     }
+}
+
+.wp-travel-review-text {
+    font-size: 13px;
+    line-height: 1;
+    margin-left: 5px;
 }
 
 .wp-travel-row-wrap {
@@ -1060,6 +1069,10 @@
     i {
         font-weight: 300;
         font-size: 13px;
+        color: #f83531;
+    }
+    i.fa-caret-down {
+        color: #555;
     }
     .review-count {
         font-size: 13px;
@@ -1107,6 +1120,16 @@
                 border-bottom: 1px solid #eee;
                 cursor: pointer;
                 display: block;
+            }
+        }
+    }
+}
+
+.status-publish {
+    .entry-content {
+        .category-list-items {
+            a {
+                color: #555
             }
         }
     }

@@ -548,6 +548,8 @@
       font-size: 13px; }
     .wp-travel-itinerary-list .wp-travel-post-item-wrapper .category-list-items {
       float: right; }
+    .wp-travel-itinerary-list .wp-travel-post-item-wrapper .wp-travel-review-text {
+      float: left; }
   .wp-travel-itinerary-list .wp-travel-post-wrap-bg {
     background: #fff;
     height: 100%;
@@ -585,6 +587,11 @@
         .wp-travel-itinerary-list .wp-travel-post-wrap-bg .recent-post-bottom-meta .trip-price .person-count {
           font-weight: 400;
           font-size: 14px; }
+
+.wp-travel-review-text {
+  font-size: 13px;
+  line-height: 1;
+  margin-left: 5px; }
 
 .wp-travel-row-wrap {
   margin-left: -15px;
@@ -785,7 +792,10 @@
   .entry-meta a,
   .entry-meta i {
     font-weight: 300;
-    font-size: 13px; }
+    font-size: 13px;
+    color: #f83531; }
+  .entry-meta i.fa-caret-down {
+    color: #555; }
   .entry-meta .review-count {
     font-size: 13px;
     margin-left: 5px;
@@ -826,6 +836,9 @@
         border-bottom: 1px solid #eee;
         cursor: pointer;
         display: block; }
+
+.status-publish .entry-content .category-list-items a {
+  color: #555; }
 
 .wp-travel-trip-time span {
   margin-left: 5px;
