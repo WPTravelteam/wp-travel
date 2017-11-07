@@ -7,7 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
- * Tested up to: 4.8.2
+ * Tested up to: 4.8.3
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -36,7 +36,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.0.1';
+		public $version = '1.0.2';
 		/**
 		 * The single instance of the class.
 		 *
