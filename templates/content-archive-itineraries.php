@@ -53,11 +53,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php the_excerpt(); ?>
 
 					</div>
-					<div class="wp-travel-average-review" title="Rated 4 out of 5">
+					<div class="wp-travel-average-review">
 					<?php wp_travel_trip_rating( get_the_ID() ); ?>
-						<?php $count = (int) wp_travel_get_review_count() ?>
-						<a href="">/<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?></a>
+						<?php $count = (int) wp_travel_get_review_count() ?>						
 					</div>
+					<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
 					<div class="entry-meta">
 						<div class="category-list-items">
 							<span class="post-category">
@@ -98,7 +98,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div class="travel-info">
 							<?php wp_travel_get_trip_duration( get_the_ID() ); ?>
 						</div>
-						
 					</div>
 			    </div>
 			    <div class="description-right">
