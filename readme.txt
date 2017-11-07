@@ -3,7 +3,7 @@ Contributors: WEN Solutions
 Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
-Tested up to: 4.8.2
+Tested up to: 4.8.3
 Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -12,6 +12,9 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 
 == Description ==
 "WP Travel" is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin.
+
+= Release Notes: =
+Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
 
 = Some important features of the plugin: =
 * The standard details needed such as trip code, group size, dynamic content editor, trip types, price, trip outline, trip includes and excludes, starting & ending date, etc, are specially researched and designed.
@@ -75,13 +78,16 @@ Nice, make a post on the [Support Forum](https://wordpress.org/support/plugin/wp
 == Upgrade Notice ==
 
 = 1.0.2 =
-* Hide related itinerary option added in settings.
-* Added option to send booking mail to admin.
-* Added booking notification email sent to customer.
-* Added Keyword Taxonomy.
-* Added Search Widgets.
-* Added Template override.
-* Currency Added: TZS.
+* New Feature: Hide related itinerary option added in settings.
+* New Feature: Option to send booking mail to admin.
+* New Feature: Booking notification email sent to customer.
+* New Feature: Keyword taxonomy.
+* New Feature: Search Widgets.
+* New Feature: Template override.
+* New Feature: Currency option for 'TZS'.
+* New Feature: [WP_TRAVEL_ITINERARIES] shortcode added.
+* New Feature: Fixed Departure, Trip Duration options in Additional info tab.
+* New Feature: Itinerary listing design updated.
 * Fixes: Settings option not working in WooCommerce.
 * Fixes: Minor design issues.
 
