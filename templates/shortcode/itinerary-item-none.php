@@ -27,5 +27,5 @@ if ( ! defined( 'ABSPATH' ) ) {
  	return;
  } ?>
 
-<p class="itinerary-none"><?php esc_html_e( 'Itinerary Item not found!', 'wp-travel' ) ?></p>
+<p class="itinerary-none wp-travel-no-detail-found-msg"><?php esc_html_e( 'Itinerary Item not found!', 'wp-travel' ) ?></p>
 

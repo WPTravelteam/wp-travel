@@ -94,12 +94,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<i class="fa fa-child" aria-hidden="true"></i>
 							<span class="value"><?php printf( '%s', $group_size ) ?></span>
 						</div>
-						<?php if ( $start_date && $end_date ) : ?>
-							<div class="travel-info">
-							    <i class="fa fa-clock-o"></i>
-								<span class="value"><?php printf( '%s to %s', $start_date, $end_date ); ?></span>
-							</div>
-						<?php endif; ?>
+						
+						<div class="travel-info">
+							<?php wp_travel_get_trip_duration( get_the_ID() ); ?>
+						</div>
+						
 					</div>
 			    </div>
 			    <div class="description-right">
