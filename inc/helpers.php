@@ -179,14 +179,15 @@ function wp_travel_get_related_post( $post_id ) {
 	?>
 	 <div class="wp-travel-related-posts wp-travel-container-wrap">
 		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html( 'Related Itineraries', 'wp-travel' ) ); ?></h2>
-		 	<?php
+		<div class="wp-travel-itinerary-items"> 
+			 <?php
 		 	if ( ! empty( $terms ) ) {
 				$term_ids = wp_list_pluck( $terms, 'term_id' );
-
+				$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row' , '3' );
 				$args = array(
 					'post_type' => 'itineraries',
 					'post__not_in' => array( $post_id ),
-					'posts_per_page' => 4,
+					'posts_per_page' => $col_per_row,
 					'tax_query' => array(
 						array(
 							'taxonomy' => 'itinerary_types',
@@ -197,94 +198,22 @@ function wp_travel_get_related_post( $post_id ) {
 				);
 				$query = new WP_Query( $args );
 			if ( $query->have_posts() ) { ?>
-				    <div class="wp-travel-row-wrap">
-						<?php while ( $query->have_posts() ) : $query->the_post(); ?>
-							<?php
-							$enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
-							$trip_price 	= wp_travel_get_trip_price( get_the_ID() );
-							$sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
-							<div class="related-post-item-wrapper">
-							    <div class="related-post-wrap-bg">
-								<div class="wp-travel-post-thumbnail">
-								<a href="<?php the_permalink() ?>">
-							   <?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
-								  </a>
-								  <?php wp_travel_save_offer( get_the_ID() ); ?>
-						   </div>
-						   <div class="wp-travel-post-info">
-							   <h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
-							   <div class="recent-post-bottom-meta">
-								   <?php wp_travel_trip_price( get_the_ID(), true ); ?>
-							   </div>
-						   </div>
-						   <div class="wp-travel-post-content">			
-							   <?php
-								   $fixed_departure = get_post_meta( get_the_ID(), 'wp_travel_fixed_departure', true );
-								   $fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-								   $fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-							   ?>
-							   <?php if ( 'yes' === $fixed_departure ) : ?>
-								   <?php
-									   $start_date	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
-									   $end_date 	= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
-								   ?>
-								   <?php if ( $start_date && $end_date ) : ?>
-									   <div class="wp-travel-trip-time trip-fixed-departure">
-										   <i class="fa fa-calendar"></i>
-										   <span class="wp-travel-trip-duration">
-											   <?php printf( '%s to %s', $start_date, $end_date ); ?> 
-										   </span>
-										   
-									   </div>
-								   <?php endif; ?>
-							   <?php else : ?>
-								   <?php
-								   $trip_duration = get_post_meta( get_the_ID(), 'wp_travel_trip_duration', true );
-								   $trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
-								   <?php if ( ( int ) $trip_duration > 0 ) : ?>
-									   <div class="wp-travel-trip-time trip-duration">
-										   <i class="fa fa-clock-o"></i>
-															   
-										   <span class="wp-travel-trip-duration">
-											   <?php echo esc_html( $trip_duration . ' Days' ); ?>
-										   </span>
-									   </div>
-								   <?php endif; ?>
-							   <?php endif; ?>
-							   <span class="post-category">
-								   <div class="entry-meta">
-									   <?php //wp_travel_single_trip_rating( get_the_ID() ) ?>
-									   <?php $average_rating = wp_travel_get_average_rating( ) ?>				
-									   <div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
-										   
-											   <span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
-												   <strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
-											   </span>
-										   
-									   </div> <span class="review-count">( <?php printf( '%s reviews', wp_travel_get_rating_count() ); ?> )</span>
-								   </div>
-							   </span>
-						   </div>
-									<?php if ( $enable_sale ) : ?>
-						      			<div class="wp-travel-offer">
-						      			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
-						      			</div>
-						      			<?php endif; ?>
-
-								</div>
-							</div>
-
-						<?php endwhile; ?>
-					</div>
+				
+				<ul style="grid-template-columns:repeat(<?php esc_attr_e( $col_per_row, 'wp-travel') ?>, 1fr)" class="wp-travel-itinerary-list">
+					<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+						<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); ?>
+					<?php endwhile; ?>
+				</ul>
 			<?php
 			} else {
-				echo $no_related_post_message;
+				wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
 			}
 			wp_reset_query();
 	 } else {
-	 	echo $no_related_post_message;
+		wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
 	 }
 	 ?>
+	 </div>
 	 </div>
 	 <?php
 }
@@ -563,4 +492,54 @@ function wp_travel_search_form() {
 	<?php
 	$content = apply_filters( 'wp_travel_search_form', ob_get_clean() );
 	echo $content;
+}
+
+/**
+ * This will optput Trip duration HTML
+ *
+ * @param int $post_id
+ * @return void
+ */
+function wp_travel_get_trip_duration( $post_id ) {
+		if ( ! $post_id ) {
+			return;
+		}
+
+		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
+		$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+		$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+	?>
+	<?php if ( 'yes' === $fixed_departure ) : ?>
+		<?php
+			$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
+			$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
+		?>
+			
+		<div class="wp-travel-trip-time trip-fixed-departure">
+			<i class="fa fa-calendar"></i>
+			<span class="wp-travel-trip-duration">
+				<?php if ( $start_date && $end_date ) : ?>						
+					<?php printf( '%s - %s', date( 'jS M, y', strtotime( $start_date ) ), date( 'jS M, y', strtotime( $end_date ) ) ); ?> 
+				<?php else : ?>
+					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
+				<?php endif; ?>
+			</span>
+		</div>
+		
+	<?php else : ?>
+		<?php
+		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
+		$trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
+		
+		<div class="wp-travel-trip-time trip-duration">
+			<i class="fa fa-clock-o"></i>
+			<span class="wp-travel-trip-duration">
+				<?php if ( ( int ) $trip_duration > 0 ) : ?>
+					<?php echo esc_html( $trip_duration . ' Days' ); ?>
+				<?php else : ?>
+					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
+				<?php endif; ?>
+			</span>
+		</div>
+	<?php endif; 
 }
