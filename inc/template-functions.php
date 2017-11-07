@@ -195,8 +195,10 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 		<?php else : ?>
 			</ins>
 		<?php endif; ?>
-
-		    <span class="person-count"></span>
+			<?php $show_per_person = apply_filters( 'wp_travel_show_per_person', false ); ?>
+			<?php if ( $show_per_person ) : ?>
+				<span class="person-count">/person</span>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
