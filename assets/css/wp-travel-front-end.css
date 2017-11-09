@@ -367,7 +367,7 @@
 .wp-travel.trip-headline-wrapper .wp-travel-keywords {
   padding: 15px 0 0; }
 .wp-travel.trip-headline-wrapper .wp-travel-keyword {
-  padding: 0 10px;
+  padding-left: 5px;
   text-transform: capitalize; }
 
 .trip-price del {
