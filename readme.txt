@@ -4,7 +4,7 @@ Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itinerari
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
 Tested up to: 4.8.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,10 @@ Nice, send us request on [Support page](http://wensolutions.com/support/ "WEN So
 Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixes: Placed language file.
+* Fixes: Label text updated for frontend itinerary tabs.
 
 = 1.0.2 =
 * New Feature: Hide related itinerary option added in settings.
