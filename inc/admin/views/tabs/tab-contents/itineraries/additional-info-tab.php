@@ -57,11 +57,11 @@
 		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
 	</tr>
 	<tr>
-		<td><label for="wp_travel_trip_include"><?php esc_html_e( 'Trip Include', 'wp-travel' ); ?></label></td>
+		<td><label for="wp_travel_trip_include"><?php esc_html_e( 'Trip Includes', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $trip_include, 'wp_travel_trip_include' ); ?></td>
 	</tr>
 	<tr>
-		<td><label for="wp_travel_trip_exclude"><?php esc_html_e( 'Trip Exclude', 'wp-travel' ); ?></label></td>
+		<td><label for="wp_travel_trip_exclude"><?php esc_html_e( 'Trip Excludes', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $trip_exclude, 'wp_travel_trip_exclude' ); ?></td>
 	</tr>
 	<tr>
