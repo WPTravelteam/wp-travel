@@ -347,9 +347,12 @@ function wp_travel_single_excerpt( $post_id ) {
 	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
 		<div class="wp-travel-keywords">
 		<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ) ?></span>
+		<?php $i = 0; ?>
 		<?php foreach ( $terms as $term ) : ?>
+			<?php if ( $i > 0 ) : ?>, 
+			<?php endif; ?>
 			<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
-		<?php endforeach; ?>
+		<?php $i++; endforeach; ?>
 		</div>
 	<?php
 	endif;
@@ -362,91 +365,85 @@ function wp_travel_single_excerpt( $post_id ) {
  */
 function wp_travel_frontend_contents( $post_id ) {
 	global $wp_travel_itinerary;
-	$trip_content	= $wp_travel_itinerary->get_content();
-	$trip_outline	= $wp_travel_itinerary->get_outline();
-	$trip_include	= $wp_travel_itinerary->get_trip_include();
-	$trip_exclude	= $wp_travel_itinerary->get_trip_exclude();
+	$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';	
+	$trip_content	= $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
+	$trip_outline	= $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
+	$trip_include	= $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
+	$trip_exclude	= $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
-	$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
+
+	$wp_travel_itinerary_tabs = array(
+		'overview' 		=> array( 'label' => 'Overview', 'label_class' => '', 'content' => $trip_content ),
+		'trip_outline' 	=> array( 'label' => 'Trip Outline', 'label_class' => '', 'content' => $trip_outline ),
+		'trip_includes' => array( 'label' => 'Trip Includes', 'label_class' => '', 'content' => $trip_include ),
+		'trip_excludes' => array( 'label' => 'Trip Excludes', 'label_class' => '', 'content' => $trip_exclude ),
+		'gallery' 		=> array( 'label' => 'Gallery', 'label_class' => 'wp-travel-tab-gallery-contnet', 'content' => $gallery_ids ),
+		'reviews' 		=> array( 'label' => 'Reviews', 'label_class' => 'wp-travel-review', 'content' => '' ),
+		'booking' 		=> array( 'label' => 'Booking', 'label_class' => 'wp-travel-booking-form', 'content' => '' ),
+	);
+	$wp_travel_itinerary_tabs = apply_filters( 'wp_travel_itinerary_tabs', $wp_travel_itinerary_tabs );
+
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
+		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 		<ul class="wp-travel tab-list resp-tabs-list ">
-			<li class="tab-link" data-tab="tab-1-cont"><a href="#tab-1" class="wp-travel-ert"><?php esc_html_e( 'Overview', 'wp-travel' ) ?></a></li>
-			<li class="content-li" data-tab="tab-2-cont"><a href="#tab-2" class="wp-travel-ert"><?php esc_html_e( 'Trip Outline', 'wp-travel' ); ?></a></li>
-			<li class="content-li" data-tab="tab-3-cont"><a href="#tab-3" class="wp-travel-ert"><?php esc_html_e( 'Trip Include', 'wp-travel' ) ?></a></li>
-			<li class="content-li" data-tab="tab-4-cont"><a href="#tab-4" class="wp-travel-ert"><?php esc_html_e( 'Trip Exclude', 'wp-travel' ) ?></a></li>
-			<li class="content-li wp-travel-tab-gallery-contnet" data-tab="tab-5-cont"><a href="#tab-5" class="wp-travel-ert"><?php esc_html_e( 'Gallery', 'wp-travel' ) ?></a></li>
-			<?php if ( comments_open() ) : ?>
-			<li class="content-li wp-travel-review" data-tab="tab-6-cont"><a href="#tab-6" class="wp-travel-ert"><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></a></li>
-			<?php endif; ?>
-			<li class="content-li wp-travel-booking-form" data-tab="tab-7-cont"><a href="#tab-7" class="wp-travel-ert"><?php esc_html_e( 'Booking', 'wp-travel' ) ?></a></li>
+			<?php $index = 1; ?>
+			<?php foreach( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
+					<?php continue; ?>
+				<?php endif; ?>				
+				<li class="<?php echo esc_attr( $tab_info['label_class'], 'wp-travel' ); ?>" data-tab="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont"><a href="#tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>" class="wp-travel-ert"><?php echo esc_html( $tab_info['label'], 'wp-travel' ) ?></a></li>
+			<?php $index++; endforeach; ?>
 		</ul>
 		<div class="resp-tabs-container">
-			<div id="tab-1-cont" class="tab-list-content">
-				<?php
-				if ( false !== $trip_content ) {
-					echo wp_kses_post( $trip_content );
-				} else {
-					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
-				}
-				?>
-			</div>
-			<div id="tab-2-cont" class="tab-list-content ">
-				<?php
-				if ( false !== $trip_outline ) {
-					echo wp_kses_post( $trip_outline );
-				}
-				else {
-					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
-				} ?>
-			</div>
-			<div id="tab-3-cont" class="tab-list-content">
-				<?php
-				if ( false !== $trip_include ) {
-					echo wp_kses_post( $trip_include );
-				} else {
-					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
-				}
-				?>
-			</div>
-			<div id="tab-4-cont" class="tab-list-content">
-				<?php
-				if ( false !== $trip_exclude ) {
-					echo wp_kses_post( $trip_exclude );
-				} else {
-					echo wp_kses( $no_details_found_message, wp_travel_allowed_html( array( 'p' ) ) );
-				}
-				?>
-			</div>
-			<div id="tab-5-cont" class="tab-list-content">
-				<?php if ( false !== $gallery_ids ) : ?>
-				<div class="wp-travel-gallery wp-travel-container-wrap">
-				    <div class="wp-travel-row-wrap">
-						<ul>
-							<?php foreach ( $gallery_ids as $gallery_id ) : ?>
-							<li>
-								<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
-								<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
-								<img src="<?php echo ( $gallery_image[0] ); ?>" />
-								</a>
-							</li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-				</div>
-				<?php else : ?>
-					<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No gallery images found.', 'wp-travel' ); ?></p>
+			<?php $index = 1; ?>
+			<?php foreach( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
+					<?php continue; ?>
 				<?php endif; ?>
-			</div>
-			<?php if ( comments_open() ) : ?>
-			<div id="tab-6-cont" class="tab-list-content ">
-			    <?php comments_template(); ?>
-			</div><!-- Tab 6 ends -->
-			<?php endif; ?>
-			<div id="tab-7-cont" class="tab-list-content ">
-				<?php echo wp_travel_get_booking_form(); ?>
-			</div>
+
+				<?php switch ( $tab_key ) {
+					case 'gallery' : ?>
+						<div id="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont" class="tab-list-content">
+							<?php if ( false !== $tab_info['content'] ) : ?>
+							<div class="wp-travel-gallery wp-travel-container-wrap">
+								<div class="wp-travel-row-wrap">
+									<ul>
+										<?php foreach ( $tab_info['content'] as $gallery_id ) : ?>
+										<li>
+											<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
+											<a href="<?php echo ( wp_get_attachment_url( $gallery_id ) ); ?>">
+											<img src="<?php echo ( $gallery_image[0] ); ?>" />
+											</a>
+										</li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+							</div>
+							<?php else : ?>
+								<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No gallery images found.', 'wp-travel' ); ?></p>
+							<?php endif; ?>
+						</div>
+					<?php break;
+					case 'reviews' : ?>
+						<div id="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont" class="tab-list-content">
+							<?php comments_template(); ?>
+						</div>					 	
+					<?php break;
+					case 'booking' : ?>
+						<div id="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont" class="tab-list-content">
+							<?php echo wp_travel_get_booking_form(); ?>
+						</div>					 	
+					<?php break;
+					 default : ?>					
+						<div id="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont" class="tab-list-content">
+							<?php echo wp_kses_post( $tab_info['content'] ); ?>
+						</div>
+					<?php break; ?>
+				<?php } ?>				
+			<?php $index++; endforeach; ?>
 		</div>
+		<?php endif; ?>
 	</div>
 <?php
 }
