@@ -83,6 +83,7 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 = 1.0.3 =
 * Fixes: Placed language file.
 * Fixes: Label text updated for frontend itinerary tabs.
+* Fixes: Fix translation issues.
 
 = 1.0.2 =
 * New Feature: Hide related itinerary option added in settings.
