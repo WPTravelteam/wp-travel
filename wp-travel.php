@@ -97,6 +97,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
 			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ), 99 );
+			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
 			if ( $this->is_request( 'admin' ) ) {
 				$this->tabs = new WP_Travel_Admin_Tabs();
@@ -104,6 +105,18 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
+		}
+
+		/**
+		 * Load localisation files.
+		 */
+		function load_textdomain() {
+			$locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
+			$locale = apply_filters( 'plugin_locale', $locale, 'wp-travel' );
+			unload_textdomain( 'wp-travel' );
+
+			load_textdomain( 'wp-travel', WP_LANG_DIR . '/wp-travel/wp-travel-' . $locale . '.mo' );
+			load_plugin_textdomain( 'wp-travel', false, dirname( plugin_basename( __FILE__ ) ) . '/i18n/languages' );
 		}
 		/**
 		 * Define constant if not already set.
