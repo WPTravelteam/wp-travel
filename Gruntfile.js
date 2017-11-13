@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 	 */
 	svn_files_list = [
 		'assets/**',
+		'i18n/**',
 		'inc/**',
 		'templates/**',
 		'readme.txt',
