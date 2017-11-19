@@ -46,7 +46,7 @@ if ( ! comments_open() ) {
 
 		<?php else : ?>
 
-			<p class="wp-travel-noreviews"><?php _e( 'There are no reviews yet.', 'wp-travel' ); ?></p>
+			<p class="wp-travel-noreviews"><?php esc_html_e( 'There are no reviews yet.', 'wp-travel' ); ?></p>
 
 		<?php endif; ?>
 	</div>
