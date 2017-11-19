@@ -49,14 +49,14 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 			<span class="post-category">
 				<div class="entry-meta">
 					<?php $average_rating = wp_travel_get_average_rating() ?>				
-					<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+					<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 						
 						<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
-							<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( __( 'out of %s5%s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
+							<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 						</span>						
 					</div>
 					<?php $count = (int) wp_travel_get_review_count() ?> 
-					<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+					<span class="wp-travel-review-text"> (<?php printf( esc_html( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ) ), $count ); ?>)</span>
 					<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
 					<div class="category-list-items">
 						<?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
@@ -66,7 +66,7 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 							$term_name = $first_term->name;
 							$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
 							<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
-								<?php esc_html_e( $term_name, 'wp-travel' ); ?>
+								<?php echo esc_html( $term_name, 'wp-travel' ); ?>
 							</a>
 							<?php if ( count( $terms ) > 0 ) : ?>
 							<div class="wp-travel-caret">
@@ -77,7 +77,7 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 											$term_name = $term->name;
 											$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
 										<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
-											<?php esc_html_e( $term_name, 'wp-travel' ); ?>
+											<?php echo esc_html( $term_name, 'wp-travel' ); ?>
 										</a>
 									<?php endforeach; ?>
 								</div>
