@@ -18,7 +18,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 global $comment;
 
@@ -34,7 +34,7 @@ $rating   = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating',
 		<div class="comment-text">
 			<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ) ?>">
 				<a>
-				 <span style="width:<?php echo ( $rating / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+				 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 			    </a>
 			</div>
 
@@ -42,7 +42,7 @@ $rating   = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating',
 
 			<?php if ( $comment->comment_approved == '0' ) : ?>
 
-				<p class="meta"><em><?php _e( 'Your comment is awaiting approval', 'wp-travel' ); ?></em></p>
+				<p class="meta"><em><?php esc_html_e( 'Your comment is awaiting approval', 'wp-travel' ); ?></em></p>
 
 			<?php else : ?>
 
@@ -65,7 +65,7 @@ $rating   = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating',
 			global $user_ID;
 			$login_text = __( 'please login to review', 'wp-travel' );
 			$link = '';
-			if ( get_option('comment_registration') && ! $user_ID ) {
+			if ( get_option( 'comment_registration' ) && ! $user_ID ) {
 				$link = '<a rel="nofollow" href="' . wp_login_url( get_permalink() ) . '">' . $login_text . '</a>';
 			} else {
 
