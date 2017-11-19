@@ -104,7 +104,7 @@ class Wp_Travel_Shortcodes {
 
 	/** Send Email after clicking Book Now. */
 	public static function wp_traval_book_now() {
-
+		
 		if ( ! isset( $_POST[ 'wp_travel_book_now' ] ) ) {
 			return;
 		}
@@ -115,10 +115,10 @@ class Wp_Travel_Shortcodes {
 		if ( ! isset( $_POST['wp_travel_post_id'] ) ) {
 			return;
 		}
-
+		
 		$trip_code = wp_traval_get_trip_code( $_POST['wp_travel_post_id'] );
 		$title = 'Booking - ' . $trip_code;
-
+		
 		$post_array = array(
 			'post_title' => $title,
 			'post_content' => '',
@@ -126,9 +126,9 @@ class Wp_Travel_Shortcodes {
 			'post_slug' => uniqid(),
 			'post_type' => 'itinerary-booking',
 			);
-		$orderID = wp_insert_post( $post_array );
+		$orderID = wp_insert_post( $post_array );		
 		update_post_meta( $orderID, 'order_data', $_POST );
-
+		
 		$trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
 		$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 		$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
@@ -169,7 +169,6 @@ class Wp_Travel_Shortcodes {
 		$settings = wp_traval_get_settings();
 
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
-
 
 		// Prepare variables to assign in email.
 		$client_email = $_POST['wp_travel_email'];
@@ -238,6 +237,7 @@ class Wp_Travel_Shortcodes {
 			'X-Mailer: PHP/' . phpversion();
 
 			if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+				error_log( "not sent to admin \n" );
 				wp_send_json( array(
 					'result'  => 0,
 					'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
@@ -259,10 +259,13 @@ class Wp_Travel_Shortcodes {
 		'X-Mailer: PHP/' . phpversion();
 
 		if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+			error_log( "not sent to client\n" );
 			wp_send_json( array(
 				'result'  => 0,
 				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			) );
 		}
+		header("Location: ". $_SERVER['REDIRECT_URL'].'?'.http_build_query(['booked'=>true]));
+		exit;
 	}
 }
