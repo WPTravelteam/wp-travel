@@ -4,7 +4,7 @@ Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itinerari
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
 Tested up to: 4.8.3
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,6 +79,14 @@ Nice, send us request on [Support page](http://wensolutions.com/support/ "WEN So
 Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.0.4 =
+* New Feature: Filter Itineraries by Price, Trip Type, Location.
+* New Feature: Archive Page View Mode. Default list [grid/list].
+* Fixes: Text translation updated with new strings.  
+* Fixes: Trip Duration/Fixed Departure issue on frontend.
+* Test: Tested upto 4.9.
+
 
 = 1.0.3 =
 * Fixes: Placed language file.
