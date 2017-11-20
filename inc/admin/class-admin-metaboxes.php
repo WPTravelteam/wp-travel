@@ -248,22 +248,25 @@ class WP_Travel_Admin_Metaboxes {
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
 		}
-
+		$wp_travel_trip_price = 0;
 		// Additional Info section.
 		if ( isset( $_POST['wp_travel_price'] ) ) {
 			$wp_travel_price = sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) );
 			update_post_meta( $post_id, 'wp_travel_price', $wp_travel_price );
+			$wp_travel_trip_price = $wp_travel_price;
 		}
 
 		$wp_travel_enable_sale = 0;
 		if ( isset( $_POST['wp_travel_enable_sale'] ) ) {
-			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );
+			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );	
 		}
 		update_post_meta( $post_id, 'wp_travel_enable_sale', $wp_travel_enable_sale );
 		if ( isset( $_POST['wp_travel_sale_price'] ) ) {
 			$wp_travel_sale_price = sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) );
 			update_post_meta( $post_id, 'wp_travel_sale_price', $wp_travel_sale_price );
+			$wp_travel_trip_price = $wp_travel_sale_price;
 		}
+		update_post_meta( $post_id, 'wp_travel_trip_price', $wp_travel_trip_price );
 
 		if ( isset( $_POST['wp_travel_group_size'] ) ) {
 			$wp_travel_group_size = sanitize_text_field( wp_unslash( $_POST['wp_travel_group_size'] ) );
