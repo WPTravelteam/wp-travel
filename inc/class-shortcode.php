@@ -90,7 +90,8 @@ class Wp_Travel_Shortcodes {
 		<div class="wp-travel-itinerary-items">
 			<?php $col_per_row = apply_filters( 'wp_travel_itineraries_col_per_row' , '2' ); ?>
 			<?php if ( $query->have_posts() ) : ?>
-				<ul style="grid-template-columns:repeat(<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>, 1fr)" class="wp-travel-itinerary-list">
+				<style>.wp-travel-itinerary-list{grid-template-columns:repeat(<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>, 1fr)}</style>
+				<ul style="" class="wp-travel-itinerary-list">
 				<?php while( $query->have_posts() ) : $query->the_post(); ?>
 					<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); ?>
 				<?php endwhile; ?>
