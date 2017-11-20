@@ -1266,6 +1266,7 @@
     margin-bottom: 20px;
     background: #fefefe;
     border-radius: 3px;
+    @include clearfix;
     .wp-toolbar-content {
         &.wp-toolbar-left {
             float: left;

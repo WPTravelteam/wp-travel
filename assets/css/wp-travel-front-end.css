@@ -939,6 +939,10 @@
   margin-bottom: 20px;
   background: #fefefe;
   border-radius: 3px; }
+  .wp-travel-toolbar:after, .wp-travel-toolbar:before {
+    content: "";
+    display: table;
+    clear: both; }
   .wp-travel-toolbar .wp-toolbar-content.wp-toolbar-left {
     float: left; }
   .wp-travel-toolbar .wp-travel-post-filter > h4 {
