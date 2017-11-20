@@ -274,6 +274,12 @@ function wp_travel_single_excerpt( $post_id ) {
 	</div>
 	  <div class="wp-travel-trip-meta-info">
 	  	 <ul>
+			<?php
+			/**
+			 * @since 1.0.4
+			 */
+			do_action( 'wp_travel_single_itinerary_before_trip_meta_list', $post_id );
+			?>
 	  	    <li>
 	  	 		<div class="travel-info">
 					<strong class="title"><?php esc_html_e( 'Trip Type', 'wp-travel' ); ?></strong>
@@ -334,6 +340,12 @@ function wp_travel_single_excerpt( $post_id ) {
 				</div>
 	  	 	</li>
 			<?php endif; ?>
+			<?php
+			/**
+			 * @since 1.0.4
+			 */
+			do_action( 'wp_travel_single_itinerary_after_trip_meta_list', $post_id );
+			?>
 	  	 </ul>
 	  </div>
 
@@ -343,6 +355,21 @@ function wp_travel_single_excerpt( $post_id ) {
 		</div>
 	</div>
 	<?php
+	/**
+	 * @since 1.0.4
+	 */
+	do_action( 'wp_travel_single_after_booknow', $post_id );
+}
+
+/**
+ * Add html for Keywords.
+ *
+ * @param int $post_id ID of current post.
+ */
+function wp_travel_single_keywords( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
 	$terms = get_the_terms( $post_id, 'travel_keywords' );
 	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
 		<div class="wp-travel-keywords">
@@ -357,6 +384,36 @@ function wp_travel_single_excerpt( $post_id ) {
 	<?php
 	endif;
 }
+/**
+ * Add html for Keywords.
+ *
+ * @param int $post_id ID of current post.
+ */
+function wp_travel_single_location( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	$terms = get_the_terms( $post_id, 'travel_locations' );
+	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
+		<li class="full-width">
+			<div class="travel-info">
+				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
+			</div>
+			<div class="travel-info">
+				<span class="value">
+				<?php $i = 0; ?>
+				<?php foreach ( $terms as $term ) : ?>
+					<?php if ( $i > 0 ) : ?>,
+					<?php endif; ?>
+					<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
+				<?php $i++; endforeach; ?>
+				</span>
+			</div>
+		</li>
+	<?php
+	endif;
+}
+
 /**
  * Single Page Details
  *
@@ -388,7 +445,7 @@ function wp_travel_frontend_contents( $post_id ) {
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 		<ul class="wp-travel tab-list resp-tabs-list ">
 			<?php $index = 1; ?>
-			<?php foreach( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+			<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
 				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
 					<?php continue; ?>
 				<?php endif; ?>
@@ -397,7 +454,7 @@ function wp_travel_frontend_contents( $post_id ) {
 		</ul>
 		<div class="resp-tabs-container">
 			<?php $index = 1; ?>
-			<?php foreach( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+			<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
 				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
 					<?php continue; ?>
 				<?php endif; ?>
@@ -612,6 +669,12 @@ function wp_travel_comments_template_loader( $template ) {
 	}
 }
 
+/**
+ * Load WP Travel Template file
+ *
+ * @param [type] $template Name of template.
+ * @return String
+ */
 function wp_travel_template_loader( $template ) {
 
 	// Load template for post archive / taxonomy archive.
@@ -804,18 +867,18 @@ function wp_travel_get_group_size( $post_id = null ) {
 /**
  * When the_post is called, put product data into a global.
  *
- * @param mixed $post
+ * @param mixed $post Post object or post id.
  * @return WC_Product
  */
 function wp_travel_setup_itinerary_data( $post ) {
 	unset( $GLOBALS['wp_travel_itinerary'] );
 
-	if ( is_int( $post ) )
+	if ( is_int( $post ) ) {
 		$post = get_post( $post );
-
-	if ( empty( $post->post_type ) || 'itineraries' !== $post->post_type )
+	}
+	if ( empty( $post->post_type ) || 'itineraries' !== $post->post_type ) {
 		return;
-
+	}
 	$GLOBALS['wp_travel_itinerary'] = new WP_Travel_Itinerary( $post );
 
 	return $GLOBALS['wp_travel_itinerary'];
@@ -880,17 +943,18 @@ function is_wp_travel_archive_page() {
 /**
  * Archive page toolbar.
  *
+ * @since 1.0.4
  * @return void
  */
 function wp_travel_archive_toolbar() {
-	if ( is_wp_travel_archive_page() && ! is_admin() ) : ?>
+	$view_mode = wp_travel_get_archive_view_mode();
+	if ( is_wp_travel_archive_page() && ! is_admin() ) :?>
 	<div class="wp-travel-toolbar clearfix">
 		<div class="wp-toolbar-content wp-toolbar-left">
 			<?php wp_travel_archive_filter_by(); ?>
 		</div>
 		<div class="wp-toolbar-content wp-toolbar-right">
 			<?php
-			$view_mode = wp_travel_get_archive_view_mode();			
 			$current_url = '//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
 			<ul class="wp-travel-view-mode-lists">
 				<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg('view_mode', 'grid', $current_url ) ); ?>"><i class="fa fa-th"></i></a></li>
@@ -901,7 +965,10 @@ function wp_travel_archive_toolbar() {
 	<?php endif; ?>
 	<div class="wp-travel-archive-content">
 		<?php if ( 'grid' === $view_mode ) : ?>
-			<ul class="wp-travel-itinerary-list">
+			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>
+			<style>.wp-travel-grid-mode .wp-travel-archive-content .wp-travel-itinerary-list{grid-template-columns:repeat(<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>, 1fr)}</style>
+			<div class="wp-travel-itinerary-items">
+				<ul class="wp-travel-itinerary-list">
 		<?php endif; ?>
 <?php
 }
@@ -909,12 +976,14 @@ function wp_travel_archive_toolbar() {
 /**
  * Archive page wrapper close.
  *
+ * @since 1.0.4
  * @return void
  */
 function wp_travel_archive_wrapper_close() {
 	$view_mode = wp_travel_get_archive_view_mode();	 ?>
 	<?php if ( 'grid' === $view_mode ) : ?>
-		</ul>
+			</ul>
+		</div>
 	<?php endif; ?>
 	</div>
 <?php }
@@ -1002,7 +1071,6 @@ function wp_travel_posts_filter( $query ) {
 						'terms' => $wt_filter_by_itinerary_types,
 					),
 				);
-				
 			} elseif ( $wt_filter_by_travel_locations > 0 ) {
 				$query->query_vars['tax_query'] = array(
 					'relation' => 'AND',
@@ -1030,6 +1098,8 @@ function wp_travel_get_archive_view_mode() {
 // Hooks.
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
+add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
