@@ -7,22 +7,10 @@
     }
 }
 
-// @media (min-width: 768px){
-// .custom-container {
-//     width: 720px;
-// }
-// }
-// @media (min-width: 992px){
-// .custom-container {
-//     width: 940px;
-// }
-// }
-// @media (min-width: 1200px){
-// .custom-container {
-//     max-width: 1110px;
-//     width: 90%;
-// }
-// }
+@mixin fullwidth {
+    width: 100%;
+}
+
 //media query for theme contents
 @mixin large-screen {
     @media(max-width: 1000px) {
@@ -55,20 +43,14 @@
 }
 
 @mixin xs {
-    @media (max-width: 500px) {
+    @media (max-width: 567px) {
         @content;
     }
 }
 
-@media(max-width: 1199px) {
-    .wp-travel-itinerary-items .wp-travel-itinerary-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media(max-width: 480px) {
-    .wp-travel-itinerary-items .wp-travel-itinerary-list {
-        grid-template-columns: repeat(1, 1fr);
+@mixin xxs {
+    @media (max-width: 500px) {
+        @content;
     }
 }
 
@@ -498,6 +480,9 @@
                 width: 100%;
                 display: block;
             }
+            &.full-width {
+                @include fullwidth;
+            }
             &:before {
                 content: '';
                 position: absolute;
@@ -718,7 +703,15 @@
     position: relative;
     display: grid;
     grid-gap: 15px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    @include sidr-view {
+        grid-template-columns: repeat(2, 1fr)!important;
+    }
+    @include xxs {
+        grid-template-columns: repeat(1, 1fr) !important;
+        margin-left: 0!important;
+        padding-left: 0!important;
+    }
     li {
         // float: left;
         list-style: none;
@@ -1336,65 +1329,18 @@
 
 // Grid Mode.
 .wp-travel-grid-mode {
-    // .wp-travel-archive-content {
-    //     display: grid;
-    //     grid-template-columns: repeat(3, 1fr);
-    //     grid-gap: 15px;
-    //     @include sidr-view {
-    //         grid-template-columns: repeat(2, 1fr);
-    //     }
-    //     @include mob {
-    //         grid-template-columns: repeat(1, 1fr);
-    //     }
-    //     .wp-travel-default-article {
-    //         padding: 0;
-    //         background: #fff;
-    //         .wp-travel-article-image-wrap {
-    //             float: none;
-    //             width: 100%;
-    //             margin-right: 0;
-    //         }
-    //         .wp-travel-entry-content-wrapper {
-    //             float: none;
-    //             width: 100%;
-    //             padding: 10px;
-    //             .description-left {
-    //                 padding-left: 0;
-    //             }
-    //             .trip-price {
-    //                 margin: 0 0 25px;
-    //                 font-size: 15px;
-    //                 text-align: right
-    //             }
-    //             .entry-title {
-    //                 font-size: 14px
-    //             }
-    //             .entry-content p {
-    //                 display: none
-    //             }
-    //             .category-list-items,
-    //             .travel-info {
-    //                 margin-bottom: 5px
-    //             }
-    //         }
-    //         .wp-travel-explore {
-    //             float: right;
-    //             @include xs {
-    //                 float: none;
-    //             }
-    //         }
-    //     }
-    // }
     .wp-travel-archive-content {
         .wp-travel-itinerary-list {
             margin: 0;
             grid-template-columns: repeat(3, 1fr);
             padding-left: 0;
             @include sidr-view {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr)!important;
             }
-            @include xs {
-                grid-template-columns: repeat(1, 1fr);
+            @include xxs {
+                grid-template-columns: repeat(1, 1fr) !important;
+                margin-left: 0!important;
+                padding-left: 0!important;
             }
         }
     }
