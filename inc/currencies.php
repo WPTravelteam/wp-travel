@@ -66,6 +66,7 @@ function wp_traval_get_currency_list() {
 		'JMD' => 'Jamaica Dollar',
 		'JPY' => 'Japan Yen',
 		'JEP' => 'Jersey Pound',
+		'KES' => 'Kenya shillings',
 		'KZT' => 'Kazakhstan Tenge',
 		'KPW' => 'Korea (North) Won',
 		'KRW' => 'Korea (South) Won',
