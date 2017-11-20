@@ -957,8 +957,8 @@ function wp_travel_archive_toolbar() {
 			<?php
 			$current_url = '//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
 			<ul class="wp-travel-view-mode-lists">
-				<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg('view_mode', 'grid', $current_url ) ); ?>"><i class="fa fa-th"></i></a></li>
-				<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg('view_mode', 'list', $current_url ) ); ?>"><i class="fa fa-th-list"></i></a></li>
+				<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg('view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
+				<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg('view_mode', 'list', $current_url ) ); ?>"><i class="dashicons dashicons-list-view"></i></a></li>
 			</ul>
 		</div>
 	</div>
