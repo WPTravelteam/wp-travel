@@ -934,7 +934,7 @@ function wp_travel_archive_filter_by() {
  * @return boolean
  */
 function is_wp_travel_archive_page() {
-	if ( is_post_type_archive( 'itineraries' ) || is_tax( 'itinerary_types' ) || is_tax( 'travel_locations' ) || is_tax( 'travel_keywords' ) ) {
+	if ( ( is_post_type_archive( 'itineraries' ) || is_tax( 'itinerary_types' ) || is_tax( 'travel_locations' ) || is_tax( 'travel_keywords' ) ) && ! is_search() ) {
 		return true;
 	}
 	return false;
@@ -1002,84 +1002,86 @@ function wp_travel_posts_filter( $query ) {
 		$type = $_GET['post_type'];
 	}
 
-	if ( 'itinerary-booking' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
+	if ( $query->is_main_query() ) {
 
-		$query->query_vars['meta_key'] = 'wp_travel_post_id';
-		$query->query_vars['meta_value'] = $_GET['wp_travel_post_id'];
-	}
+		if ( 'itinerary-booking' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
 
-	/**
-	 * Archive /Taxonomy page filters
-	 *
-	 * @since 1.0.4
-	 */
-	if ( is_wp_travel_archive_page() && ! is_admin() ) {
-
-		// // Filter By Price.
-		if ( isset( $_GET['wt_filter_by_price'] ) && '' != $_GET['wt_filter_by_price'] ) {
-			$filter_by = $_GET['wt_filter_by_price'];
-
-			$query->query_vars['meta_key'] = 'wp_travel_trip_price';
-			$query->query_vars['orderby'] = 'meta_value_num';
-
-			switch ( $filter_by ) {
-				case 'low_high' :
-					$query->query_vars['order'] = 'asc';
-					// $query->set( 'order', 'asc' );
-				break;
-				case 'high_low' :
-					$query->query_vars['order'] = 'desc';
-					// $query->set( 'order', 'desc' );
-				break;
-				default :
-				break;
-			}
+			$query->set( 'meta_key', 'wp_travel_post_id' );
+			$query->set( 'meta_value', $_GET['wp_travel_post_id'] );
 		}
 
-		// Filter by location and trip type.
-		if ( isset( $_GET['wt_filter_by_itinerary_types'] ) || isset( $_GET['wt_filter_by_travel_locations'] ) ) {
+		/**
+		 * Archive /Taxonomy page filters
+		 *
+		 * @since 1.0.4
+		 */
+		if ( is_wp_travel_archive_page() && ! is_admin() ) {
 
-			$wt_filter_by_itinerary_types = 0;
-			$wt_filter_by_travel_locations = 0;
-			if ( isset( $_GET['wt_filter_by_itinerary_types'] ) && '' != $_GET['wt_filter_by_itinerary_types'] ) {
-				$wt_filter_by_itinerary_types = $_GET['wt_filter_by_itinerary_types'];
-			}
-			if ( isset( $_GET['wt_filter_by_travel_locations'] ) && '' != $_GET['wt_filter_by_travel_locations'] ) {
-				$wt_filter_by_travel_locations = $_GET['wt_filter_by_travel_locations'];
+			// // Filter By Price.
+			if ( isset( $_GET['wt_filter_by_price'] ) && '' != $_GET['wt_filter_by_price'] ) {
+				$filter_by = $_GET['wt_filter_by_price'];
+
+				$query->set( 'meta_key', 'wp_travel_trip_price' );
+				$query->set( 'orderby', 'meta_value_num' );
+
+				switch ( $filter_by ) {
+					case 'low_high' :
+						$query->set( 'order', 'asc' );
+					break;
+					case 'high_low' :
+						$query->set( 'order', 'desc' );
+					break;
+					default :
+					break;
+				}
 			}
 
-			if ( $wt_filter_by_itinerary_types > 0 && $wt_filter_by_travel_locations > 0 ) {
-				$query->query_vars['tax_query'] = array(
-						'relation' => 'AND',
+			// Filter by location and trip type.
+			if ( isset( $_GET['wt_filter_by_itinerary_types'] ) || isset( $_GET['wt_filter_by_travel_locations'] ) ) {
+
+				$wt_filter_by_itinerary_types = 0;
+				$wt_filter_by_travel_locations = 0;
+				if ( isset( $_GET['wt_filter_by_itinerary_types'] ) && '' != $_GET['wt_filter_by_itinerary_types'] ) {
+					$wt_filter_by_itinerary_types = $_GET['wt_filter_by_itinerary_types'];
+				}
+				if ( isset( $_GET['wt_filter_by_travel_locations'] ) && '' != $_GET['wt_filter_by_travel_locations'] ) {
+					$wt_filter_by_travel_locations = $_GET['wt_filter_by_travel_locations'];
+				}
+
+				if ( $wt_filter_by_itinerary_types > 0 && $wt_filter_by_travel_locations > 0 ) {
+					$query->set( 'tax_query',  array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => 'itinerary_types',
+								'field' => 'id',
+								'terms' => $wt_filter_by_itinerary_types,
+							),
+							array(
+								'taxonomy' => 'travel_locations',
+								'field' => 'id',
+								'terms' => $wt_filter_by_travel_locations,
+							),
+						)
+					);
+
+				} elseif ( $wt_filter_by_itinerary_types > 0 ) {
+					$query->set( 'tax_query', array(	
 						array(
 							'taxonomy' => 'itinerary_types',
 							'field' => 'id',
 							'terms' => $wt_filter_by_itinerary_types,
 						),
+					) );
+				} elseif ( $wt_filter_by_travel_locations > 0 ) {
+					$query->set( 'tax_query', array(
+						'relation' => 'AND',
 						array(
 							'taxonomy' => 'travel_locations',
 							'field' => 'id',
 							'terms' => $wt_filter_by_travel_locations,
 						),
-					);
-
-			} elseif ( $wt_filter_by_itinerary_types > 0 ) {
-				$query->query_vars['tax_query'] = array(	
-					array(
-						'taxonomy' => 'itinerary_types',
-						'field' => 'id',
-						'terms' => $wt_filter_by_itinerary_types,
-					),
-				);
-			} elseif ( $wt_filter_by_travel_locations > 0 ) {
-				$query->query_vars['tax_query'] = array(
-					'relation' => 'AND',
-					array(
-						'taxonomy' => 'travel_locations',
-						'field' => 'id',
-						'terms' => $wt_filter_by_travel_locations,
-					),
-				);
+					) );
+				}
 			}
 		}
 	}
@@ -1125,8 +1127,8 @@ add_action( 'wp_travel_before_main_content', 'wp_travel_booking_message' );
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
 // Filters HTML.
 add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
-add_action( 'parse_query', 'wp_travel_posts_filter' );
-// add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
+// add_action( 'parse_query', 'wp_travel_posts_filter' );
+add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
 
 add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
