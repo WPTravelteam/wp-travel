@@ -34,6 +34,10 @@ jQuery(document).ready(function($) {
     if (window.location.hash) {
         var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
 
+        // var match = hash.match(/wp-travel-/);
+        // if (!match) {
+        //     hash = 'wp-travel-' + hash;
+        // }
 
         if ($("ul.resp-tabs-list > li." + hash).hasClass('wp-travel-ert')) {
             lis = $("ul.resp-tabs-list > li");
@@ -41,19 +45,19 @@ jQuery(document).ready(function($) {
             $("ul.resp-tabs-list > li." + hash).addClass("resp-tab-active");
             tab_cont = $('.tab-list-content');
             tab_cont.removeClass('resp-tab-content-active').hide();
-            $('#' + hash + '-cont.tab-list-content').addClass('resp-tab-content-active').show();
+            $('#' + hash + '.tab-list-content').addClass('resp-tab-content-active').show();
         }
 
-        if (hash === 'tab-7') {
-            var winWidth = $(window).width();
-            var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
-            if (winWidth < 767) {
-                var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
-            }
-            $('html, body').animate({
-                scrollTop: (tabHeight)
-            }, 1200);
+        // if (hash === 'tab-7') {
+        var winWidth = $(window).width();
+        var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
+        if (winWidth < 767) {
+            var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
         }
+        $('html, body').animate({
+            scrollTop: (tabHeight)
+        }, 1200);
+        // }
     }
 
     // $('ul.resp-tabs-list > li').on('click', function() {
