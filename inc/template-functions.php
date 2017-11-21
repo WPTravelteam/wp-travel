@@ -316,7 +316,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="value">
 						<?php
 						if ( $group_size = $wp_travel_itinerary->get_group_size() ) {
-								printf( '%d pax', esc_html( $group_size ) );
+								printf( __( '%d pax', 'wp-travel' ), esc_html( $group_size ) );
 						} else {
 							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No Size Limit', 'wp-travel' ) ) );
 						}
@@ -400,14 +400,7 @@ function wp_travel_single_location( $post_id ) {
 				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
 			</div>
 			<div class="travel-info">
-				<span class="value">
-				<?php $i = 0; ?>
-				<?php foreach ( $terms as $term ) : ?>
-					<?php if ( $i > 0 ) : ?>,
-					<?php endif; ?>
-					<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span>
-				<?php $i++; endforeach; ?>
-				</span>
+				<span class="value"><?php $i = 0; ?><?php foreach ( $terms as $term ) : ?><?php if ( $i > 0 ) : ?>, <?php endif; ?><span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span><?php $i++; endforeach; ?></span>
 			</div>
 		</li>
 	<?php
@@ -869,10 +862,10 @@ function wp_travel_get_group_size( $post_id = null ) {
 	$group_size = $wp_travel_itinerary->get_group_size();
 
 	if (  $group_size ) {
-		return sprintf( '%d pax', $group_size );
+		return sprintf( __( '%d pax', 'wp-travel' ), $group_size );
 	}
 
-	return apply_filters( 'wp_travel_default_group_size_text', esc_html( 'No Size Limit', 'wp-travel' ) );
+	return apply_filters( 'wp_travel_default_group_size_text', esc_html__( 'No Size Limit', 'wp-travel' ) );
 }
 
 
