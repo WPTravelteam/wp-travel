@@ -513,12 +513,24 @@ function wp_travel_trip_map( $post_id ) {
 	$settings = wp_traval_get_settings();
 	if ( ! isset( $settings['google_map_api_key'] ) || '' === $settings['google_map_api_key'] ) {
 		return;
-	}
-	?>
+	} ?>
 	<div class="wp-travel-map">
 		<div id="gmap" style="width:100%;height:300px"></div>
 	</div>
-	<?php wp_travel_get_related_post( $post_id );
+<?php
+}
+
+/**
+ * Display Related Product.
+ *
+ * @param Number $post_id Post ID.
+ * @return HTML
+ */
+function wp_travel_related_itineraries( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	wp_travel_get_related_post( $post_id );
 }
 
 function wp_travel_add_comment_rating( $comment_id ) {
@@ -1110,6 +1122,7 @@ add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries' );
 add_filter( 'the_content', 'wp_travel_content_filter' );
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
