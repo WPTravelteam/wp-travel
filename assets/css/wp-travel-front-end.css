@@ -935,61 +935,99 @@
 
 .wp-travel-toolbar {
   border: 1px solid #eee;
-  padding: 14px;
   margin-bottom: 20px;
   background: #fefefe;
-  border-radius: 3px; }
+  border-radius: 3px;
+  overflow: hidden; }
   .wp-travel-toolbar:after, .wp-travel-toolbar:before {
     content: "";
     display: table;
     clear: both; }
   .wp-travel-toolbar .wp-toolbar-content.wp-toolbar-left {
     float: left; }
-  .wp-travel-toolbar .wp-travel-post-filter > h4 {
-    margin: 0;
-    float: left;
-    vertical-align: middle;
-    display: table-cell;
-    font-size: 14px;
-    margin-top: 30px;
-    margin-right: 15px; }
     @media (max-width: 767px) {
-      .wp-travel-toolbar .wp-travel-post-filter > h4 {
-        display: block;
-        float: none;
-        margin-bottom: 10px;
-        margin-top: 0; } }
+      .wp-travel-toolbar .wp-toolbar-content.wp-toolbar-left {
+        float: none; } }
+  .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading {
+    background: #e0e0e0;
+    float: left;
+    height: 100%;
+    line-height: 1.55; }
+    @media (max-width: 992px) {
+      .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading {
+        float: none; } }
+    .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading h4 {
+      margin: 0;
+      vertical-align: middle;
+      display: inline-block;
+      font-size: 14px;
+      padding: 20px; }
+      @media (max-width: 767px) {
+        .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading h4 {
+          display: block;
+          float: none;
+          margin-bottom: 10px;
+          margin-top: 0; } }
   .wp-travel-toolbar .wp_travel_input_filters {
     padding: 5px;
-    width: 140px; }
+    width: 160px;
+    border-radius: 3px; }
+    @media (max-width: 1199px) {
+      .wp-travel-toolbar .wp_travel_input_filters {
+        width: 140px; } }
+    @media (max-width: 992px) {
+      .wp-travel-toolbar .wp_travel_input_filters {
+        width: 125px; } }
+    @media (max-width: 767px) {
+      .wp-travel-toolbar .wp_travel_input_filters {
+        width: calc(100% - 10px);
+        margin-left: 10px;
+        margin-right: 10px; } }
   .wp-travel-toolbar .wp-toolbar-right {
-    float: right; }
+    float: right;
+    margin-right: 10px; }
     @media (max-width: 640px) {
       .wp-travel-toolbar .wp-toolbar-right {
         margin-top: 18px; } }
-  .wp-travel-toolbar .wp-toolbar-filter-field {
+    @media (max-width: 992px) {
+      .wp-travel-toolbar .wp-toolbar-right {
+        float: none; } }
+  .wp-travel-toolbar .wp-toolbar-filter-field, .wp-travel-toolbar .wp-travel-filter-button {
     float: left;
     margin-right: 10px; }
-    .wp-travel-toolbar .wp-toolbar-filter-field p {
+    .wp-travel-toolbar .wp-toolbar-filter-field p, .wp-travel-toolbar .wp-travel-filter-button p {
+      display: inline-block;
       margin: 0;
-      margin-bottom: 5px; }
+      padding: 20px 10px; }
     @media (max-width: 640px) {
-      .wp-travel-toolbar .wp-toolbar-filter-field {
+      .wp-travel-toolbar .wp-toolbar-filter-field, .wp-travel-toolbar .wp-travel-filter-button {
         float: none;
         display: block; } }
+  .wp-travel-toolbar .wp-travel-filter-button {
+    padding: 9px; }
+    @media (max-width: 767px) {
+      .wp-travel-toolbar .wp-travel-filter-button {
+        padding-bottom: 0;
+        margin-top: 47px; } }
   .wp-travel-toolbar .wp-travel-view-mode-lists {
     list-style: none;
     margin: 0;
-    margin-top: 10px; }
+    padding: 15px 0;
+    text-align: center; }
     .wp-travel-toolbar .wp-travel-view-mode-lists li {
-      display: inline-block; }
+      display: inline-block;
+      line-height: 1.65; }
       .wp-travel-toolbar .wp-travel-view-mode-lists li.active-mode i {
         color: #f00; }
     .wp-travel-toolbar .wp-travel-view-mode-lists i {
       padding: 3px;
       font-size: 24px;
       color: #cecece;
-      cursor: pointer; }
+      cursor: pointer;
+      width: 30px;
+      height: 30px; }
+    .wp-travel-toolbar .wp-travel-view-mode-lists a {
+      display: block; }
 
 .wp-travel-grid-mode .wp-travel-archive-content .wp-travel-itinerary-list {
   margin: 0;
@@ -1003,5 +1041,9 @@
       grid-template-columns: repeat(1, 1fr) !important;
       margin-left: 0 !important;
       padding-left: 0 !important; } }
+
+@media (max-width: 690px) {
+  .wp-travel-toolbar .wp-travel-filter-button {
+    margin-top: 0; } }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
