@@ -89,6 +89,9 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 * Fixes: Trip Duration/Fixed Departure issue on frontend.
 * Fixes: Template override issue with post not found.
 * Fixes: Responsive issue on WP_TRAVEL_ITINERARIES.
+* Fixes: Shortcode issue on WP_TRAVEL_ITINERARIES.
+* Fixes: Related Itineraries issue with map.
+* Fixes: Hash link updated for single itinerary tabs.
 * Test: Tested upto 4.9.
 
 
