@@ -86,7 +86,9 @@ class Wp_Travel_Shortcodes {
 
 	endif;
 		
-		$query = new WP_Query( $args ); ?>
+		$query = new WP_Query( $args ); 
+		ob_start();
+		?>
 		<div class="wp-travel-itinerary-items">
 			<?php $col_per_row = apply_filters( 'wp_travel_itineraries_col_per_row' , '2' ); ?>
 			<?php if ( $query->have_posts() ) : ?>
@@ -101,6 +103,9 @@ class Wp_Travel_Shortcodes {
 			<?php endif; ?>
 		</div>
 		<?php wp_reset_query();
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
 	}
 
 	/** Send Email after clicking Book Now. */
