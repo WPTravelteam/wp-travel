@@ -1,9 +1,15 @@
 jQuery(document).ready(function($) {
-    $('.wp_travel_input_filters').on('change', function() {
+    $('.btn-wp-travel-filter').on('click', function() {
         var view_mode = $('.wp-travel-view-mode.active-mode').data('mode');
-
-        pathname = window.location.pathname;
+        pathname = $('#wp-travel-archive-url').val();
+        if (!pathname) {
+            pathname = window.location.pathname;
+        }
         query_string = '?';
+        var check_query_string = pathname.match(/\?/);
+        if (check_query_string) {
+            query_string = '&';
+        }
         $('.wp_travel_input_filters').each(function() {
             filterby = $(this).attr('name');
             filterby_val = $(this).val();
