@@ -894,34 +894,39 @@ function wp_travel_archive_filter_by() {
 		return;
 	} ?>
 	<div class="wp-travel-post-filter clearfix">
-		<h4><?php esc_html_e( 'Filter By' ) ?></h4>
+		<div class="wp-travel-filter-by-heading">
+			<h4><?php esc_html_e( 'Filter By' ) ?></h4>
+		</div>
 
 		<?php do_action( 'wp_travel_before_post_filter' );  ?>
-
+		<input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( 'itineraries' ) ) ?>" />
 		<?php
-			 $wt_filter_by_price = ( isset( $_GET['wt_filter_by_price'] ) ) ? $_GET['wt_filter_by_price'] : '';
-			 $wt_filter_by_itinerary_types = ( int ) ( isset( $_GET['wt_filter_by_itinerary_types'] ) && '' !== $_GET['wt_filter_by_itinerary_types'] ) ? $_GET['wt_filter_by_itinerary_types'] : 0;
-			 $wt_filter_by_travel_locations = ( int ) ( isset( $_GET['wt_filter_by_travel_locations'] ) && '' !== $_GET['wt_filter_by_travel_locations'] ) ? $_GET['wt_filter_by_travel_locations'] : 0;
+			 $price = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+			 $type = ( int ) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
+			 $location = ( int ) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
 		?>
 
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true );  ?>
 		<?php if ( $enable_filter_price ) : ?>
 			<div class="wp-toolbar-filter-field wt-filter-by-price">
 				<p><?php esc_html_e( 'Price', 'wp-travel' ); ?></p>
-				<select name="wt_filter_by_price" class="wp_travel_input_filters wt_filter_by_price">
+				<select name="price" class="wp_travel_input_filters price">
 					<option value="">--</option>
-					<option value="low_high" <?php selected( $wt_filter_by_price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high' ) ?></option>
-					<option value="high_low" <?php selected( $wt_filter_by_price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low' ) ?></option>
+					<option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high' ) ?></option>
+					<option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low' ) ?></option>
 				</select>
 			</div>
 		<?php endif; ?>
 		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
 			<p><?php esc_html_e( 'Trip Type', 'wp-travel' ); ?></p>
-			<?php wp_dropdown_categories( array( 'taxonomy' => 'itinerary_types', 'name' => 'wt_filter_by_itinerary_types', 'class' => 'wp_travel_input_filters wt_filter_by_itinerary_types', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $wt_filter_by_itinerary_types ) ); ?>
+			<?php wp_dropdown_categories( array( 'taxonomy' => 'itinerary_types', 'name' => 'type', 'class' => 'wp_travel_input_filters type', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $type ) ); ?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
 			<p><?php esc_html_e( 'Location', 'wp-travel' ); ?></p>	
-			<?php wp_dropdown_categories( array( 'taxonomy' => 'travel_locations', 'name' => 'wt_filter_by_travel_locations', 'class' => 'wp_travel_input_filters wt_filter_by_travel_locations', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $wt_filter_by_travel_locations ) ); ?>
+			<?php wp_dropdown_categories( array( 'taxonomy' => 'travel_locations', 'name' => 'location', 'class' => 'wp_travel_input_filters location', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $location ) ); ?>
+		</div>
+		<div class="wp-travel-filter-button">
+			<button class="btn-wp-travel-filter"><?php esc_html_e( 'Show', 'wp-travel' ); ?></button>
 		</div>
 		<?php do_action( 'wp_travel_after_post_filter' );  ?>
 	</div>	
@@ -1018,8 +1023,8 @@ function wp_travel_posts_filter( $query ) {
 		if ( is_wp_travel_archive_page() && ! is_admin() ) {
 
 			// // Filter By Price.
-			if ( isset( $_GET['wt_filter_by_price'] ) && '' != $_GET['wt_filter_by_price'] ) {
-				$filter_by = $_GET['wt_filter_by_price'];
+			if ( isset( $_GET['price'] ) && '' != $_GET['price'] ) {
+				$filter_by = $_GET['price'];
 
 				$query->set( 'meta_key', 'wp_travel_trip_price' );
 				$query->set( 'orderby', 'meta_value_num' );
@@ -1037,48 +1042,48 @@ function wp_travel_posts_filter( $query ) {
 			}
 
 			// Filter by location and trip type.
-			if ( isset( $_GET['wt_filter_by_itinerary_types'] ) || isset( $_GET['wt_filter_by_travel_locations'] ) ) {
+			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ) {
 
-				$wt_filter_by_itinerary_types = 0;
-				$wt_filter_by_travel_locations = 0;
-				if ( isset( $_GET['wt_filter_by_itinerary_types'] ) && '' != $_GET['wt_filter_by_itinerary_types'] ) {
-					$wt_filter_by_itinerary_types = $_GET['wt_filter_by_itinerary_types'];
+				$type = 0;
+				$location = 0;
+				if ( isset( $_GET['type'] ) && '' != $_GET['type'] ) {
+					$type = $_GET['type'];
 				}
-				if ( isset( $_GET['wt_filter_by_travel_locations'] ) && '' != $_GET['wt_filter_by_travel_locations'] ) {
-					$wt_filter_by_travel_locations = $_GET['wt_filter_by_travel_locations'];
+				if ( isset( $_GET['location'] ) && '' != $_GET['location'] ) {
+					$location = $_GET['location'];
 				}
 
-				if ( $wt_filter_by_itinerary_types > 0 && $wt_filter_by_travel_locations > 0 ) {
+				if ( $type > 0 && $location > 0 ) {
 					$query->set( 'tax_query',  array(
 							'relation' => 'AND',
 							array(
 								'taxonomy' => 'itinerary_types',
 								'field' => 'id',
-								'terms' => $wt_filter_by_itinerary_types,
+								'terms' => $type,
 							),
 							array(
 								'taxonomy' => 'travel_locations',
 								'field' => 'id',
-								'terms' => $wt_filter_by_travel_locations,
+								'terms' => $location,
 							),
 						)
 					);
 
-				} elseif ( $wt_filter_by_itinerary_types > 0 ) {
+				} elseif ( $type > 0 ) {
 					$query->set( 'tax_query', array(	
 						array(
 							'taxonomy' => 'itinerary_types',
 							'field' => 'id',
-							'terms' => $wt_filter_by_itinerary_types,
+							'terms' => $type,
 						),
 					) );
-				} elseif ( $wt_filter_by_travel_locations > 0 ) {
+				} elseif ( $location > 0 ) {
 					$query->set( 'tax_query', array(
 						'relation' => 'AND',
 						array(
 							'taxonomy' => 'travel_locations',
 							'field' => 'id',
-							'terms' => $wt_filter_by_travel_locations,
+							'terms' => $location,
 						),
 					) );
 				}
@@ -1132,7 +1137,12 @@ add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
 
 add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
-
+/**
+ * Excerpt.
+ *
+ * @param HTML $more Read more.
+ * @return HTML
+ */
 function wp_travel_excerpt_more( $more ) {
 	global $post;
 	if ( empty( $post->post_type ) || 'itineraries' !== $post->post_type )
