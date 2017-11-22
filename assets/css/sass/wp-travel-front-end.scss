@@ -771,12 +771,14 @@
         }
         .wp-travel-average-review {
             font-size: 13px;
+            margin-top: 5px;
         }
         .category-list-items {
             float: right
         }
         .wp-travel-review-text {
-            float: left
+            float: left;
+            margin-top: 5px;
         }
     }
     .wp-travel-post-wrap-bg {
@@ -1050,13 +1052,16 @@
     @include clearfix();
     .travel-info {
         float: left;
-        margin-right: 5px;
-        padding-right: 10px;
+        padding: 2px 0;
+        margin-right: 15px;
         // border-right:1px solid #eee;
         vertical-align: middle;
         vertical-align: -webkit-baseline-middle;
         &:last-child {
             border-right: none;
+        }
+        span {
+            font-size: 13px;
         }
     }
     .wp-travel-average-review {
@@ -1079,16 +1084,16 @@
         display: inline-block;
     }
     .category-list-items {
-        padding: 0;
+        padding: 2px 0;
         position: relative;
-        margin-right: 0;
+        // margin-right: 5px;
         @extend .travel-info;
         .post-category {
             position: relative;
             &:before {}
         }
         .wp-travel-caret {
-            padding: 2px 7px;
+            padding-left: 7px;
             display: inline-block;
             cursor: pointer;
         }
@@ -1120,6 +1125,15 @@
                 cursor: pointer;
                 display: block;
             }
+        }
+    }
+}
+
+.post-category {
+    .entry-meta {
+        .category-list-items {
+            margin-right: 0;
+            padding: 2px 0;
         }
     }
 }

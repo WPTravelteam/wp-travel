@@ -543,11 +543,13 @@
         width: 100%;
         height: auto; }
     .wp-travel-itinerary-list .wp-travel-post-item-wrapper .wp-travel-average-review {
-      font-size: 13px; }
+      font-size: 13px;
+      margin-top: 5px; }
     .wp-travel-itinerary-list .wp-travel-post-item-wrapper .category-list-items {
       float: right; }
     .wp-travel-itinerary-list .wp-travel-post-item-wrapper .wp-travel-review-text {
-      float: left; }
+      float: left;
+      margin-top: 5px; }
   .wp-travel-itinerary-list .wp-travel-post-wrap-bg {
     background: #fff;
     height: 100%;
@@ -770,12 +772,14 @@
     clear: both; }
   .entry-meta .travel-info, .entry-meta .wp-travel-average-review, .entry-meta .category-list-items {
     float: left;
-    margin-right: 5px;
-    padding-right: 10px;
+    padding: 2px 0;
+    margin-right: 15px;
     vertical-align: middle;
     vertical-align: -webkit-baseline-middle; }
     .entry-meta .travel-info:last-child, .entry-meta .wp-travel-average-review:last-child, .entry-meta .category-list-items:last-child {
       border-right: none; }
+    .entry-meta .travel-info span, .entry-meta .wp-travel-average-review span, .entry-meta .category-list-items span {
+      font-size: 13px; }
   .entry-meta .wp-travel-average-review {
     margin-right: 0;
     padding-right: 0; }
@@ -791,13 +795,12 @@
     margin-left: 5px;
     display: inline-block; }
   .entry-meta .category-list-items {
-    padding: 0;
-    position: relative;
-    margin-right: 0; }
+    padding: 2px 0;
+    position: relative; }
     .entry-meta .category-list-items .post-category {
       position: relative; }
     .entry-meta .category-list-items .wp-travel-caret {
-      padding: 2px 7px;
+      padding-left: 7px;
       display: inline-block;
       cursor: pointer; }
     .entry-meta .category-list-items .wp-travel-caret:hover .sub-category-menu {
@@ -826,6 +829,10 @@
         border-bottom: 1px solid #eee;
         cursor: pointer;
         display: block; }
+
+.post-category .entry-meta .category-list-items {
+  margin-right: 0;
+  padding: 2px 0; }
 
 .status-publish .entry-content .category-list-items a {
   color: #555; }
