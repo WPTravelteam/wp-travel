@@ -518,8 +518,12 @@ function wp_travel_get_trip_duration( $post_id ) {
 		<div class="wp-travel-trip-time trip-fixed-departure">
 			<i class="fa fa-calendar"></i>
 			<span class="wp-travel-trip-duration">
-				<?php if ( $start_date && $end_date ) : ?>						
-					<?php printf( '%s - %s', date( 'jS M, y', strtotime( $start_date ) ), date( 'jS M, y', strtotime( $end_date ) ) ); ?> 
+				<?php if ( $start_date && $end_date ) : ?>
+					<?php $date_format = get_option( 'date_format' ); ?>
+					<?php if ( ! $date_format ) : ?>
+						<?php $date_format = 'jS M, Y'; ?>
+					<?php endif; ?>
+					<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?> 
 				<?php else : ?>
 					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 				<?php endif; ?>
