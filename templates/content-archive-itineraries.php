@@ -72,8 +72,9 @@ if ( post_password_required() ) {
 									<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
 										<?php echo esc_html( $term_name ); ?>
 									</a>
-									<div class="wp-travel-caret">
+									
 									<?php if ( count( $terms ) > 0 ) : ?>
+									<div class="wp-travel-caret">
 										<i class="fa fa-caret-down"></i>
 
 										<div class="sub-category-menu">
@@ -86,8 +87,9 @@ if ( post_password_required() ) {
 												</a>
 											<?php endforeach; ?>
 										</div>
-									<?php endif; ?>
 									</div>
+									<?php endif; ?>
+									
 								<?php endif; ?>
 							</span>
 						</div>
