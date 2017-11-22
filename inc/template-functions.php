@@ -508,7 +508,7 @@ function wp_travel_trip_map( $post_id ) {
 		return;
 	} ?>
 	<div class="wp-travel-map">
-		<div id="gmap" style="width:100%;height:300px"></div>
+		<div id="wp-travel-map" style="width:100%;height:300px"></div>
 	</div>
 <?php
 }
