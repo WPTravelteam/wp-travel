@@ -63,6 +63,8 @@
     margin: 0px;
     padding: 0px;
     list-style: none;
+    border: 1px solid rgba(222, 222, 222, 0.49);
+    border-bottom: none;
     font-size: 0;
     background: #f9f9f9; }
     .wp-travel-tab-wrapper .tab-list.resp-tabs-list:after, .wp-travel-tab-wrapper .tab-list.resp-tabs-list:before {
@@ -76,9 +78,7 @@
       cursor: pointer;
       font-weight: normal;
       border: none;
-      border: 1px solid rgba(222, 222, 222, 0.49);
-      border-bottom: none;
-      border-right: none;
+      border-right: 1px solid rgba(222, 222, 222, 0.49);
       font-size: 15px;
       float: none;
       margin: 0; }
@@ -128,14 +128,12 @@
     transform: rotate(180deg); }
   .wp-travel-tab-wrapper .resp-tabs-container {
     background: #fff;
-    margin-bottom: 1px;
     border: 1px solid rgba(222, 222, 222, 0.49);
     margin-top: -1px; }
 
 .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form {
   font-size: 100%;
   font-size: 100%;
-  background: #f8f8f8;
   padding: 25px 10px;
   border-radius: 5px;
   width: 75%;
@@ -1001,7 +999,7 @@ ul.wp-travel-itinerary-list {
         width: 100%; } }
   .wp-travel-toolbar .wp-toolbar-right {
     float: right;
-    margin-right: 10px; }
+    margin-right: 20px; }
     @media (max-width: 992px) {
       .wp-travel-toolbar .wp-toolbar-right {
         float: none;
@@ -1039,16 +1037,20 @@ ul.wp-travel-itinerary-list {
     text-align: center; }
     .wp-travel-toolbar .wp-travel-view-mode-lists li {
       display: inline-block;
-      line-height: 1.65; }
+      line-height: 1.65;
+      margin-left: 3px; }
       .wp-travel-toolbar .wp-travel-view-mode-lists li.active-mode i {
         color: #f00; }
     .wp-travel-toolbar .wp-travel-view-mode-lists i {
-      padding: 3px;
+      padding: 3px 0;
       font-size: 24px;
-      color: #cecece;
+      color: #9a9a9a;
       cursor: pointer;
-      width: 30px;
-      height: 30px; }
+      width: 23px;
+      height: 23px; }
+      @media (max-width: 992px) {
+        .wp-travel-toolbar .wp-travel-view-mode-lists i {
+          color: #adadad; } }
     .wp-travel-toolbar .wp-travel-view-mode-lists a {
       display: block; }
 

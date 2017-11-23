@@ -140,7 +140,8 @@
         margin: 0px;
         padding: 0px;
         list-style: none;
-        // border-top: 1px solid rgba(222, 222, 222, 0.49);
+        border: 1px solid rgba(222, 222, 222, 0.49);
+        border-bottom: none;
         font-size: 0;
         // text-align: center;
         background: #f9f9f9;
@@ -164,9 +165,7 @@
             cursor: pointer;
             font-weight: normal;
             border: none;
-            border: 1px solid rgba(222, 222, 222, 0.49);
-            border-bottom: none;
-            border-right: none;
+            border-right: 1px solid rgba(222, 222, 222, 0.49);
             font-size: 15px;
             float: none;
             margin: 0;
@@ -238,7 +237,7 @@
     .resp-tabs-container {
         // background: none;
         background: #fff;
-        margin-bottom: 1px;
+        // margin-bottom: 1px;
         border: 1px solid rgba(222, 222, 222, 0.49);
         margin-top: -1px;
     }
@@ -249,7 +248,7 @@
         form {
             font-size: 100%;
             font-size: 100%;
-            background: #f8f8f8;
+            // background: #f8f8f8;
             padding: 25px 10px;
             border-radius: 5px;
             width: 75%;
@@ -1371,7 +1370,7 @@ ul.wp-travel-itinerary-list {
     }
     .wp-toolbar-right {
         float: right;
-        margin-right: 10px;
+        margin-right: 20px;
         @include sidr-view {
             float: none;
             position: absolute;
@@ -1422,17 +1421,21 @@ ul.wp-travel-itinerary-list {
         li {
             display: inline-block;
             line-height: 1.65;
+            margin-left: 3px;
             &.active-mode i {
                 color: #f00
             }
         }
         i {
-            padding: 3px;
+            padding: 3px 0;
             font-size: 24px;
-            color: #cecece;
+            color: #9a9a9a;
             cursor: pointer;
-            width: 30px;
-            height: 30px;
+            width: 23px;
+            height: 23px;
+            @include sidr-view {
+                color: #adadad;
+            }
         }
         a {
             display: block;
