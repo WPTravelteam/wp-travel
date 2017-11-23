@@ -1429,12 +1429,12 @@ ul.wp-travel-itinerary-list {
         i {
             padding: 3px 0;
             font-size: 24px;
-            color: #9a9a9a;
+            color: #cecece;
             cursor: pointer;
             width: 23px;
             height: 23px;
             @include sidr-view {
-                color: #adadad;
+                color: #9a9a9a;
             }
         }
         a {
