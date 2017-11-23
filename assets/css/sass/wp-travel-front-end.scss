@@ -131,8 +131,7 @@
 
 //tabs front end
 .wp-travel-tab-wrapper {
-    padding: 0 0 25px;
-    background: #fff;
+    padding: 0;
     position: relative;
     @include mob {
         padding: 20px 10px 10px !important;
@@ -141,36 +140,38 @@
         margin: 0px;
         padding: 0px;
         list-style: none;
-        border-top: 1px solid rgba(222, 222, 222, 0.49);
+        // border-top: 1px solid rgba(222, 222, 222, 0.49);
         font-size: 0;
-        text-align: center;
+        // text-align: center;
         background: #f9f9f9;
         @include clearfix;
-        &.fixed {
-            position: fixed;
-            top: 0;
-            z-index: 99;
-            width: inherit;
-            left: 0;
-            right: 0;
-            -moz-transition: all 0.3s ease-in-out;
-            -webkit-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-        }
+        // &.fixed {
+        //     position: fixed;
+        //     top: 0;
+        //     z-index: 99;
+        //     width: inherit;
+        //     left: 0;
+        //     right: 0;
+        //     -moz-transition: all 0.3s ease-in-out;
+        //     -webkit-transition: all 0.3s ease-in-out;
+        //     transition: all 0.3s ease-in-out;
+        // }
         li {
             background: none;
             display: inline-block;
-            padding: 22px 33px;
+            padding: 22px 30px;
             // padding: 0;
             cursor: pointer;
             font-weight: normal;
             border: none;
-            border-right: 1px solid rgba(222, 222, 222, 0.49);
+            border: 1px solid rgba(222, 222, 222, 0.49);
+            border-bottom: none;
+            border-right: none;
             font-size: 15px;
             float: none;
             margin: 0;
             &:last-child {
-                border-right: none;
+                border-right: 1px solid rgba(222, 222, 222, 0.49);
             }
             &.resp-tab-active {
                 // padding:22px 33px;
@@ -235,7 +236,11 @@
         }
     }
     .resp-tabs-container {
-        background: none;
+        // background: none;
+        background: #fff;
+        margin-bottom: 1px;
+        border: 1px solid rgba(222, 222, 222, 0.49);
+        margin-top: -1px;
     }
 }
 
@@ -497,6 +502,10 @@
                 bottom: 0;
                 height: 1px;
                 background: rgba(222, 222, 222, 0.32);
+            }
+            &.no-border:before {
+                height: 0px;
+                background: none;
             }
             .travel-info {
                 margin-bottom: 5px;

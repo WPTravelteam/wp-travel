@@ -124,25 +124,25 @@ jQuery(document).ready(function($) {
     });
 
     // Scroll and resize event
-    $(window).on("scroll", function(e) {
+    // $(window).on("scroll", function(e) {
 
-        var tabWrapper = $('.wp-travel-tab-wrapper');
-        var tabMenu = $('ul.wp-travel.tab-list');
+    //     var tabWrapper = $('.wp-travel-tab-wrapper');
+    //     var tabMenu = $('ul.wp-travel.tab-list');
 
-        var tabWrapperTopOffset = tabWrapper.offset().top;
-        var tabWrapperHeight = tabWrapper.height();
-        var tabMenuHeight = tabMenu.height();
+    //     var tabWrapperTopOffset = tabWrapper.offset().top;
+    //     var tabWrapperHeight = tabWrapper.height();
+    //     var tabMenuHeight = tabMenu.height();
 
-        var winScrollTop = $(window).scrollTop();
-        if (winScrollTop < (tabWrapperTopOffset + tabWrapperHeight) && winScrollTop >= tabWrapperTopOffset) {
-            tabMenu.addClass('custom-container fixed');
-            tabWrapper.css({ 'padding-top': tabMenuHeight });
-        } else {
-            tabMenu.removeClass('custom-container fixed');
-            tabWrapper.css({ 'padding-top': 0 });
-        }
+    //     var winScrollTop = $(window).scrollTop();
+    //     if (winScrollTop < (tabWrapperTopOffset + tabWrapperHeight) && winScrollTop >= tabWrapperTopOffset) {
+    //         tabMenu.addClass('custom-container fixed');
+    //         tabWrapper.css({ 'padding-top': tabMenuHeight });
+    //     } else {
+    //         tabMenu.removeClass('custom-container fixed');
+    //         tabWrapper.css({ 'padding-top': 0 });
+    //     }
 
-    });
+    // });
     $(window).on("resize", function(e) {
         wp_travel_set_equal_height();
     });
