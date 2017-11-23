@@ -93,7 +93,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   width: 45%;
   display: inline-block;
   margin-bottom: 15px;
-  padding: 0 15px; }
+  padding: 0 15px;
+  vertical-align: top; }
   .wp-travel-form-field.full-width {
     width: calc(90% + 32px); }
   @media (max-width: 992px) {
