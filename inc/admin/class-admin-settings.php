@@ -40,6 +40,7 @@ class WP_Travel_Admin_Settings {
 		$url_parameters['page'] = self::$collection;
 		$url = admin_url( self::$parent_slug );
 		$url = add_query_arg( $url_parameters, $url );
+		$sysinfo_url = add_query_arg( array( 'page' => 'wp-travel-status' ), $url );
 		echo '<div class="wrap wp-trave-settings-warp">';
 				echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
 				echo '<div class="wp-trave-settings-form-warp">';
@@ -50,6 +51,11 @@ class WP_Travel_Admin_Settings {
 					echo '</div>';
 					WP_Travel()->tabs->load( self::$collection, $args );
 					echo '<div class="wp-travel-setting-buttons">';
+					echo '<div class="wp-travel-setting-system-info">';
+						echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
+							esc_html_e( 'System Information', 'wp-travel' );
+						echo '</a>';
+					echo '</div>';
 					echo '<input type="hidden" name="current_tab" id="wp-travel-settings-current-tab">';
 					wp_nonce_field( 'wp_travel_settings_page_nonce' );
 					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
@@ -173,7 +179,7 @@ class WP_Travel_Admin_Settings {
 				</th>
 				<td>
 					<input type="checkbox" <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin"/>
-					
+
 				</td>
 			<tr>
 		</table>

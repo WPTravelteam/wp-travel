@@ -104,29 +104,16 @@ function wp_travel_featured_admin_ajax() {
     header('Content-Type: application/json');
     $post_id = intval( $_POST['post_id'] );
     $featuredStatus = esc_attr(get_post_meta( $post_id, 'wp_travel_featured', true ));
-    $newStatus = $featuredStatus == 'yes' ? 'no' : 'yes';        
+    $newStatus = $featuredStatus == 'yes' ? 'no' : 'yes';
     update_post_meta($post_id, 'wp_travel_featured', $newStatus);
     echo json_encode( array(
         'ID' => $post_id,
-        'new_status' => $newStatus, 
+        'new_status' => $newStatus,
     ) );
     die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
 
-function wp_get_system_info() {	
+function wp_get_system_info() {
 	require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
 }
-
-function wp_travel_system_info() {
-	add_submenu_page(
-		'edit.php?post_type=itineraries',
-		'System Status', /*page title*/
-		'Status', /*menu title*/
-		'manage_options', /*roles and capabiliyt needed*/
-		'wp-travel-status',
-		'wp_get_system_info' /*replace with your own function*/
-	);
-}
-
-add_action( 'admin_menu', 'wp_travel_system_info' );

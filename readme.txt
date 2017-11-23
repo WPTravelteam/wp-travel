@@ -86,7 +86,8 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 * New Feature: Booking form fields filter.
 * New Feature: Location displayed in single page.
 * New Feature: Currency option for 'KES'.
-* Fixes: Text translation updated with new strings.  
+* New Feature: Added system information.
+* Fixes: Text translation updated with new strings.
 * Fixes: Trip Duration/Fixed Departure issue on frontend.
 * Fixes: Template override issue with post not found.
 * Fixes: Responsive issue on WP_TRAVEL_ITINERARIES.
