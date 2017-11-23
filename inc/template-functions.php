@@ -395,7 +395,7 @@ function wp_travel_single_location( $post_id ) {
 	}
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-		<li class="full-width">
+		<li class="full-width no-border">
 			<div class="travel-info">
 				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
 			</div>
