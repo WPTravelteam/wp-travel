@@ -113,7 +113,3 @@ function wp_travel_featured_admin_ajax() {
     die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
-
-function wp_get_system_info() {
-	require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
-}

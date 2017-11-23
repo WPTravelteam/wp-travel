@@ -40,7 +40,7 @@ class WP_Travel_Admin_Settings {
 		$url_parameters['page'] = self::$collection;
 		$url = admin_url( self::$parent_slug );
 		$url = add_query_arg( $url_parameters, $url );
-		$sysinfo_url = add_query_arg( array( 'page' => 'wp-travel-status' ), $url );
+		$sysinfo_url = add_query_arg( array( 'page' => 'sysinfo' ), $url );
 		echo '<div class="wrap wp-trave-settings-warp">';
 				echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
 				echo '<div class="wp-trave-settings-form-warp">';
@@ -216,6 +216,10 @@ class WP_Travel_Admin_Settings {
 			wp_redirect( $redirect_url );
 			exit();
 		}
+	}
+
+	static function get_system_info() {
+		require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
 	}
 }
 
