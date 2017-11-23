@@ -3,7 +3,7 @@ Contributors: WEN Solutions
 Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
-Tested up to: 4.8.3
+Tested up to: 4.9
 Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html

@@ -114,7 +114,7 @@ class WP_Travel_Admin_Settings {
 		echo '<table class="form-table">';
 			echo '<tr>';
 				echo '<th>';
-					echo '<label for="currency">' . esc_html__( 'Currency' ) . '</label>';
+					echo '<label for="currency">' . esc_html__( 'Currency', 'wp-travel' ) . '</label>';
 				echo '</th>';
 				echo '<td>';
 					echo wp_traval_get_dropdown_currency_list( $currency_args );
@@ -124,7 +124,7 @@ class WP_Travel_Admin_Settings {
 
 			echo '<tr>';
 				echo '<th>';
-					echo '<label for="google_map_api_key">' . esc_html__( 'Google Map API Key' ) . '</label>';
+					echo '<label for="google_map_api_key">' . esc_html__( 'Google Map API Key', 'wp-travel' ) . '</label>';
 				echo '</th>';
 				echo '<td>';
 					echo '<input type="text" value="' . esc_attr( $google_map_api_key ) . '" name="google_map_api_key" id="google_map_api_key"/>';

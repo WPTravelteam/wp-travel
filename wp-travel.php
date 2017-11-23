@@ -7,7 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
- * Tested up to: 4.8.3
+ * Tested up to: 4.9
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -224,7 +224,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						$trip_price = wp_travel_get_trip_price( $post_id );
 					}
 					// echo $trip_price . "<br>";
-					update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );					
+					update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );
 				}
 			}
 		}

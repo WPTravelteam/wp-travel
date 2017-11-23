@@ -900,7 +900,7 @@ function wp_travel_archive_filter_by() {
 	} ?>
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
-			<h4><?php esc_html_e( 'Filter By' ) ?></h4>
+			<h4><?php esc_html_e( 'Filter By', 'wp-travel' ) ?></h4>
 		</div>
 
 		<?php do_action( 'wp_travel_before_post_filter' );  ?>
@@ -917,8 +917,8 @@ function wp_travel_archive_filter_by() {
 				<p><?php esc_html_e( 'Price', 'wp-travel' ); ?></p>
 				<select name="price" class="wp_travel_input_filters price">
 					<option value="">--</option>
-					<option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high' ) ?></option>
-					<option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low' ) ?></option>
+					<option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ) ?></option>
+					<option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ) ?></option>
 				</select>
 			</div>
 		<?php endif; ?>

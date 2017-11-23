@@ -111,7 +111,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'trip_duration' => array(
 				'type' => 'number',
-				'label' => __( 'Trip Duration' ),
+				'label' => __( 'Trip Duration', 'wp-travel' ),
 				'name' => 'wp_travel_trip_duration',
 				'id' => 'wp-travel-trip-duration',
 				'class' => 'wp-travel-trip-duration',

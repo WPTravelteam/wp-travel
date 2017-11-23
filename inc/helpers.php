@@ -175,7 +175,7 @@ function wp_travel_get_related_post( $post_id ) {
 	// For use in the loop, list 5 post titles related to first tag on current post.
 	$terms = wp_get_object_terms( $post_id, 'itinerary_types' );
 
-	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related itineraries not found.' ) . '</p>';
+	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related itineraries not found.', 'wp-travel' ) . '</p>';
 	?>
 	 <div class="wp-travel-related-posts wp-travel-container-wrap">
 		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Itineraries', 'wp-travel' ) ); ?></h2>
@@ -445,7 +445,7 @@ function wp_travel_search_form() {
 			<input type="hidden" name="post_type" value="itineraries" />
 			<p>
 				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
-				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_html_e( apply_filters( 'wp_travel_search_placeholder', 'Ex: Trekking' ), 'wp-travel' ) ?>">
+				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_html_e( apply_filters( 'wp_travel_search_placeholder', 'wp-travel' ), 'wp-travel' ) ?>">
 			</p>
 			<p>
 				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
