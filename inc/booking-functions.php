@@ -242,26 +242,12 @@ function wp_travel_booking_info( $post ) {
 			</div>
 
 			<?php
-			$fields = wp_travel_booking_form_fields();
-
-			// $fixed_departure = get_post_meta( $wp_travel_post_id, 'wp_travel_fixed_departure', true );
-
-			// $fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-			// $fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-
-			// if ( 'no' === $fixed_departure ) {
-			// 	unset( $fields['arrival_date'], $fields['departure_date'] );		
-			// } else {
-			// 	unset( $fields['trip_duration'] );
-			// }
+			$fields = wp_travel_booking_form_fields();			
 			$priority = array();
 			foreach ( $fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 			}
 			array_multisort( $priority, SORT_ASC, $fields );
-			// echo "<pre>";
-			// print_r($fields);
-			// echo "</pre>";
 			foreach ( $fields as $field ) : ?>
 				<?php
 				$input_val = get_post_meta( $post->ID, $field['name'], true );

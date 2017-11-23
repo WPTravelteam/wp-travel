@@ -113,3 +113,20 @@ function wp_travel_featured_admin_ajax() {
     die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
+
+function wp_get_system_info() {	
+	require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
+}
+
+function wp_travel_system_info() {
+	add_submenu_page(
+		'edit.php?post_type=itineraries',
+		'System Status', /*page title*/
+		'Status', /*menu title*/
+		'manage_options', /*roles and capabiliyt needed*/
+		'wp-travel-status',
+		'wp_get_system_info' /*replace with your own function*/
+	);
+}
+
+add_action( 'admin_menu', 'wp_travel_system_info' );
