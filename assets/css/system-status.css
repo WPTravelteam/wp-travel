@@ -1,43 +1,36 @@
-.bsi{
-    
-}
+.wp-travel-system {}
 
-.bsi table{
+.wp-travel-system table {
     width: 99%;
-    
     background-color: transparent;
- 
-     
     display: table;
     border-collapse: collapse !important;
     border-spacing: 2px;
     border-color: grey;
     margin-bottom: 15px;
-    
-    
 }
 
-.bsi   h2{
+.wp-travel-system h2 {
     text-align: center !important;
 }
 
-.bsi table td,
-.bsi table th {
+.wp-travel-system table td,
+.wp-travel-system table th {
     background-color: #fff !important;
     border: 1px solid #ddd !important;
-      vertical-align: top;
-      padding: 8px;
-  }
-
-.bsi table  > tbody > tr:hover {
-  background-color: #f5f5f5;
+    vertical-align: top;
+    padding: 8px;
 }
 
-.bsi .error {
+.wp-travel-system table>tbody>tr:hover {
+    background-color: #f5f5f5;
+}
+
+.wp-travel-system .error {
     color: RED;
 }
 
-.bsi .warning {
+.wp-travel-system .warning {
     background: #f3eec0;
     padding: 5px;
 }
