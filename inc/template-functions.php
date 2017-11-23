@@ -972,7 +972,6 @@ function wp_travel_archive_toolbar() {
 			</ul>
 		</div>
 	</div>
-	<?php endif; ?>
 	<div class="wp-travel-archive-content">
 		<?php if ( 'grid' === $view_mode ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>
@@ -980,6 +979,8 @@ function wp_travel_archive_toolbar() {
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list">
 		<?php endif; ?>
+	<?php endif; ?>
+	
 <?php
 }
 
@@ -990,13 +991,16 @@ function wp_travel_archive_toolbar() {
  * @return void
  */
 function wp_travel_archive_wrapper_close() {
-	$view_mode = wp_travel_get_archive_view_mode();	 ?>
-	<?php if ( 'grid' === $view_mode ) : ?>
-			</ul>
+	if ( is_wp_travel_archive_page() && ! is_admin() ) :
+		$view_mode = wp_travel_get_archive_view_mode();	 ?>
+		<?php if ( 'grid' === $view_mode ) : ?>
+				</ul>
+			</div>
+		<?php endif; ?>
 		</div>
-	<?php endif; ?>
-	</div>
-<?php }
+<?php
+	endif;
+}
 
 /**
  * If submitted filter by post meta.

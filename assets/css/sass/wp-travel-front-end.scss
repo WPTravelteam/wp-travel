@@ -287,6 +287,10 @@
                 select {
                     @extend input;
                 }
+                textarea {
+                    @extend input;
+                    height: auto;
+                }
             }
             .wp-travel-form-field.textarea-field {
                 width: 100%;
@@ -714,9 +718,16 @@
 }
 
 //wp-travel-itinerary-posts / shortcode
-.wp-travel-itinerary-list {
+.status-publish ul.wp-travel-itinerary-list {
+    margin: 0;
+    padding: 0;
+}
+
+ul.wp-travel-itinerary-list {
     position: relative;
     display: grid;
+    margin: 0;
+    padding: 0;
     grid-gap: 15px;
     grid-template-columns: repeat(2, 1fr);
     @include sidr-view {
@@ -854,8 +865,8 @@
 .wp-travel-container-wrap {
     margin-right: auto;
     margin-left: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    // padding-left: 15px;
+    // padding-right: 15px;
     @include clearfix;
     h2 {
         margin-top: 0;
@@ -1223,7 +1234,7 @@
         }
     }
     a.wp-page-numbers {
-        border: 1px solid #f2f2f2;
+        border: 1px solid #eee;
     }
     a.current {
         font-weight: bold;
