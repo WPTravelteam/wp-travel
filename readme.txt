@@ -83,6 +83,7 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 = 1.0.4 =
 * New Feature: Filter Itineraries by Price, Trip Type, Location.
 * New Feature: Archive Page View Mode. Default 'list' [grid/list].
+* New Feature: Booking form fields filter.
 * New Feature: Location displayed in single page.
 * New Feature: Currency option for 'KES'.
 * Fixes: Text translation updated with new strings.  
