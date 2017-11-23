@@ -109,6 +109,17 @@ function wp_travel_booking_form_fields() {
 				'date_options' => array(),
 				'priority' => 80,
 			),
+			'trip_duration' => array(
+				'type' => 'number',
+				'label' => __( 'Trip Duration' ),
+				'name' => 'wp_travel_trip_duration',
+				'id' => 'wp-travel-trip-duration',
+				'class' => 'wp-travel-trip-duration',
+				'validations' => array(
+					'required' => true,
+				),
+				'priority' => 70,
+			),
 			'note' => array(
 				'type' => 'textarea',
 				'label' => __( 'Note', 'wp-travel' ),
@@ -159,18 +170,9 @@ function wp_travel_get_booking_form() {
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
 	if ( 'no' === $fixed_departure ) {
-		unset( $fields['arrival_date'], $fields['departure_date'] );
-		$fields[] = array(
-			'type' => 'number',
-			'label' => __( 'Trip Duration' ),
-			'name' => 'wp_travel_trip_duration',
-			'id' => 'wp-travel-trip-duration',
-			'class' => 'wp-travel-trip-duration',
-			'validations' => array(
-				'required' => true,
-			),
-			'priority' => 70,
-		);
+		unset( $fields['arrival_date'], $fields['departure_date'] );		
+	} else {
+		unset( $fields['trip_duration'] );
 	}
 
 	$form->init( $form_options )->fields( $fields )->template();
@@ -220,20 +222,6 @@ function wp_travel_booking_info( $post ) {
 		return;
 	}
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
-	$wp_travel_fname = get_post_meta( $post->ID, 'wp_travel_fname', true );
-	// $wp_travel_mname = get_post_meta( $post->ID, 'wp_travel_mname', true );
-	$wp_travel_lname = get_post_meta( $post->ID, 'wp_travel_lname', true );
-	$wp_travel_country = get_post_meta( $post->ID, 'wp_travel_country', true );
-	$wp_travel_address = get_post_meta( $post->ID, 'wp_travel_address', true );
-	$wp_travel_phone = get_post_meta( $post->ID, 'wp_travel_phone', true );
-	$wp_travel_email = get_post_meta( $post->ID, 'wp_travel_email', true );
-	$wp_travel_pax = get_post_meta( $post->ID, 'wp_travel_pax', true );
-	$wp_travel_pax = $wp_travel_pax ? $wp_travel_pax : 1;
-	$wp_travel_arrival_date = get_post_meta( $post->ID, 'wp_travel_arrival_date', true );
-	$wp_travel_departure_date = get_post_meta( $post->ID, 'wp_travel_departure_date', true );
-	$wp_travel_trip_duration  = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
-	$wp_travel_note = get_post_meta( $post->ID, 'wp_travel_note', true );
-
 	$ordered_data = get_post_meta( $post->ID, 'order_data', true );
 
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array(); ?>
@@ -252,70 +240,79 @@ function wp_travel_booking_info( $post ) {
 				<?php endforeach; ?>
 				</select>
 			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-fname"><?php esc_html_e( 'First Name', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-fname" name="wp_travel_fname" value="<?php _e( $wp_travel_fname, 'wp-travel' ); ?>" >
-			</div>
-			<!--<div class="wp-travel-form-field">
-				<label for="wp-travel-mname"><?php esc_html_e( 'Middle Name', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-mname" name="wp_travel_mname"  value="<?php _e( $wp_travel_mname, 'wp-travel' ); ?>">
-			</div>-->
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-lname"><?php esc_html_e( 'Last Name', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-lname" name="wp_travel_lname"  value="<?php _e( $wp_travel_lname, 'wp-travel' ); ?>">
-			</div>
 
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-country"><?php esc_html_e( 'Country', 'wp-travel' ); ?></label>
-				<?php $countries = wp_travel_get_countries(); ?>
-				<?php if ( count( $countries ) > 0 ) : ?>
-				<select id="wp-travel-country" name="wp_travel_country">
-					<?php foreach ( $countries as $short_name => $name ) : ?>
-						<option <?php selected( $wp_travel_country, $short_name ); ?> value="<?php echo esc_attr( $short_name, 'wp-travel' ) ?>"><?php esc_html_e( $name, 'wp-travel' ) ?></option>
-					<?php endforeach; ?>
-			    </select>
-			    <?php endif; ?>
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-address"><?php esc_html_e( 'Address', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-address" name="wp_travel_address"  value="<?php echo esc_attr( $wp_travel_address, 'wp-travel' ); ?>">
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-phone"><?php esc_html_e( 'Phone', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-phone" name="wp_travel_phone"  value="<?php echo esc_attr( $wp_travel_phone, 'wp-travel' ); ?>">
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-email"><?php esc_html_e( 'Email', 'wp-travel' ); ?></label>
-				<input type="email" id="wp-travel-email" name="wp_travel_email"  value="<?php echo esc_attr( $wp_travel_email, 'wp-travel' ); ?>">
-			</div>
-	        <?php echo apply_filters( 'wp_travel_booking_form_after_email_html_content', '' ); ?>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-pax"><?php esc_html_e( 'No of PAX', 'wp-travel' ); ?></label>
-				<input type="number" min="1" max="<?php echo esc_attr( apply_filters( 'wp_travel_max_pax_number',  100000 ), 'wp-travel' ); ?>" id="wp-travel-pax" name="wp_travel_pax"  value="<?php _e( $wp_travel_pax, 'wp-travel' ); ?>">
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-trip-duration"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-trip-duration" name="wp_travel_trip_duration" value="<?php _e( $wp_travel_trip_duration, 'wp-travel' ); ?>" >
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-arrival-date"><?php esc_html_e( 'Arrival Date', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-arrival-date" name="wp_travel_arrival_date" value="<?php _e( $wp_travel_arrival_date, 'wp-travel' ); ?>" >
-			</div>
-			<div class="wp-travel-form-field">
-				<label for="wp-travel-departure-date"><?php esc_html_e( 'Departure Date', 'wp-travel' ); ?></label>
-				<input type="text" id="wp-travel-departure-date" name="wp_travel_departure_date" value="<?php _e( $wp_travel_departure_date, 'wp-travel' ); ?>" >
-			</div>			
-			<div class="wp-travel-form-field textarea-field">
-				<label for="wp-travel-note"><?php esc_html_e( 'Note', 'wp-travel' ); ?></label>
-				<textarea name="wp_travel_note" id="wp-travel-note" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php _e( $wp_travel_note, 'wp-travel' ); ?></textarea>
-			</div>
+			<?php
+			$fields = wp_travel_booking_form_fields();
+
+			// $fixed_departure = get_post_meta( $wp_travel_post_id, 'wp_travel_fixed_departure', true );
+
+			// $fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+			// $fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+
+			// if ( 'no' === $fixed_departure ) {
+			// 	unset( $fields['arrival_date'], $fields['departure_date'] );		
+			// } else {
+			// 	unset( $fields['trip_duration'] );
+			// }
+			$priority = array();
+			foreach ( $fields as $key => $row ) {
+				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
+			}
+			array_multisort( $priority, SORT_ASC, $fields );
+			// echo "<pre>";
+			// print_r($fields);
+			// echo "</pre>";
+			foreach ( $fields as $field ) : ?>
+				<?php
+				$input_val = get_post_meta( $post->ID, $field['name'], true );
+				$field_type = $field['type'];
+				switch ( $field_type ) {
+					case 'select': ?>
+						<div class="wp-travel-form-field">
+						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+							<?php $options = $field['options']; ?>
+							<?php if ( count( $options ) > 0 ) : ?>
+							<select id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>">
+								<?php foreach ( $options as $short_name => $name ) : ?>
+									<option <?php selected( $input_val, $short_name ); ?> value="<?php echo esc_attr( $short_name, 'wp-travel' ) ?>"><?php esc_html_e( $name, 'wp-travel' ) ?></option>
+								<?php endforeach; ?>
+							</select>
+							<?php endif; ?>
+						</div>
+					<?php break; ?>
+					<?php case 'radio' : ?>
+					<?php break; ?>
+					<?php case 'checkbox' : ?>
+					<?php break; ?>
+					<?php case 'textarea' : ?>
+						<div class="wp-travel-form-field textarea-field">
+						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+							<textarea name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val, 'wp-travel' ); ?></textarea>
+						</div>
+					<?php break; ?>
+					<?php case 'date' : ?>
+						<div class="wp-travel-form-field">
+							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+							<input class="wp-travel-date" type="text" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+						</div>
+					<?php break; ?>
+					<?php default : ?>
+						<div class="wp-travel-form-field">
+							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+							<input type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+						</div>
+					<?php break;
+				}
+				?>
+				
+			<?php endforeach; ?>
 			<?php 
 				wp_enqueue_script('jquery-datepicker-lib');
 				wp_enqueue_script('jquery-datepicker-lib-eng');
 			?>
 			<script>
 				jQuery(document).ready( function($){
-					$("#wp-travel-arrival-date, #wp-travel-departure-date").datepicker({
+					$(".wp-travel-date").datepicker({
 							language: "en",		
 							minDate: new Date()
 						});
@@ -354,48 +351,26 @@ function wp_travel_save_booking_data( $post_id ) {
 	if ( 'itinerary-booking' !== $post_type ) {
 		return;
 	}
-	$wp_travel_post_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
-	$wp_travel_fname = sanitize_text_field( $_POST['wp_travel_fname'] );
-	// $wp_travel_mname = sanitize_text_field( $_POST['wp_travel_mname'] );
-	$wp_travel_lname = sanitize_text_field( $_POST['wp_travel_lname'] );
-	$wp_travel_country = sanitize_text_field( $_POST['wp_travel_country'] );
-	$wp_travel_address = sanitize_text_field( $_POST['wp_travel_address'] );
-	$wp_travel_phone = sanitize_text_field( $_POST['wp_travel_phone'] );
-	$wp_travel_email = sanitize_text_field( $_POST['wp_travel_email'] );
-	$wp_travel_pax = isset( $_POST['wp_travel_arrival_date'] ) ? sanitize_text_field( $_POST['wp_travel_pax'] ) : '';
 
-	$wp_travel_arrival_date = isset( $_POST['wp_travel_arrival_date'] ) ? sanitize_text_field( $_POST['wp_travel_arrival_date'] ) : '';
-	$wp_travel_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? sanitize_text_field( $_POST['wp_travel_departure_date'] ) : '';
-	$wp_travel_trip_duration = isset( $_POST['wp_travel_trip_duration'] ) ? sanitize_text_field( $_POST['wp_travel_trip_duration'] ) : '';
-	$wp_travel_note = sanitize_text_field( $_POST['wp_travel_note'] );
-
+	if ( ! is_admin() ) {
+		return;
+	}
+	$order_data = array();
+	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
 	update_post_meta( $post_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
-	update_post_meta( $post_id, 'wp_travel_fname', sanitize_text_field( $wp_travel_fname ) );
-	// update_post_meta( $post_id, 'wp_travel_mname', sanitize_text_field( $wp_travel_mname ) );
-	update_post_meta( $post_id, 'wp_travel_lname', sanitize_text_field( $wp_travel_lname ) );
-	update_post_meta( $post_id, 'wp_travel_country', sanitize_text_field( $wp_travel_country ) );
-	update_post_meta( $post_id, 'wp_travel_address', sanitize_text_field( $wp_travel_address ) );
-	update_post_meta( $post_id, 'wp_travel_phone', sanitize_text_field( $wp_travel_phone ) );
-	update_post_meta( $post_id, 'wp_travel_email', sanitize_text_field( $wp_travel_email ) );
-	update_post_meta( $post_id, 'wp_travel_pax', sanitize_text_field( $wp_travel_pax ) );
-
-	update_post_meta( $post_id, 'wp_travel_arrival_date', sanitize_text_field( $wp_travel_arrival_date ) );
-	update_post_meta( $post_id, 'wp_travel_departure_date', sanitize_text_field( $wp_travel_departure_date ) );
-	update_post_meta( $post_id, 'wp_travel_trip_duration', sanitize_text_field( $wp_travel_trip_duration ) );
-	update_post_meta( $post_id, 'wp_travel_note', sanitize_text_field( $wp_travel_note ) );
-
 	$order_data['wp_travel_post_id'] = $wp_travel_post_id;
-	$order_data['wp_travel_fname'] = $wp_travel_fname;
-	// $order_data['wp_travel_mname'] = $wp_travel_mname;
-	$order_data['wp_travel_lname'] = $wp_travel_lname;
-	$order_data['wp_travel_country'] = $wp_travel_country;
-	$order_data['wp_travel_address'] = $wp_travel_address;
-	$order_data['wp_travel_phone'] = $wp_travel_phone;
-	$order_data['wp_travel_email'] = $wp_travel_email;
-	$order_data['wp_travel_pax'] = $wp_travel_pax;
-	$order_data['wp_travel_arrival_date'] = $wp_travel_arrival_date;
-	$order_data['wp_travel_departure_date'] = $wp_travel_departure_date;
-	$order_data['wp_travel_note'] = $wp_travel_note;
+
+	$fields = wp_travel_booking_form_fields();
+	$priority = array();
+	foreach ( $fields as $key => $row ) {
+		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
+	}
+	array_multisort( $priority, SORT_ASC, $fields );
+	foreach ( $fields as $field ) :
+		$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
+		update_post_meta( $post_id, $field['name'], sanitize_text_field( $meta_val ) );
+		$order_data[ $field['name'] ] = $meta_val;
+	endforeach;
 
 	$order_data = array_map( 'sanitize_text_field', wp_unslash( $order_data ) );
 	update_post_meta( $post_id, 'order_data', $order_data );
