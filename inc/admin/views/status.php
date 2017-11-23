@@ -5,18 +5,18 @@ $common = new WT_Admin_status();
 wp_enqueue_style( 'wp-travel-system-status', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/system-status.css' );
 wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/system-status.js' );
 ?>
-<div class="wp-travel-system"> 
+<div class="wp-travel-system">
     <h1 class="wp-heading-inline">System Information </h1>
 
 
 
     <table class="" cellspacing="0" id="data-d">
-        
+
             <tr>
                 <td colspan="2" ><h2><?php _e('WordPress Information', 'wp-travel'); ?></h2></td>
             </tr>
-        
-        
+
+
             <tr>
                 <td width="25%"><?php _e('Home URL', 'wp-travel'); ?>:</td>
 
@@ -73,7 +73,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
                 <td>
                     <?php if (defined('WP_DEBUG') && WP_DEBUG) : ?>
-                        <span class="dashicons dashicons-yes"></span> Yes 
+                        <span class="dashicons dashicons-yes"></span> Yes
                     <?php else : ?>
                         <span class="no"> <span class="dashicons dashicons-no"></span> No </span>
                     <?php endif; ?>
@@ -105,11 +105,11 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
                     echo $upload_dir['baseurl'];
                     ?></td>
             </tr>
-          
+
             <tr>
                 <td colspan="2"  ><h2><?php _e('Server Information', 'wp-travel'); ?></h2></td>
             </tr>
-        
+
             <tr>
                 <td width="25%" ><?php _e('Server Info', 'wp-travel'); ?>:</td>
 
@@ -315,18 +315,18 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
                 <?php
             }
             ?>
-         
+
             <tr>
                 <td colspan="2" ><h2><?php _e('Current Theme', 'wp-travel'); ?></h2></td>
             </tr>
-        
+
         <?php
         include_once( ABSPATH . 'wp-admin/includes/theme-install.php' );
 
         $active_theme = wp_get_theme();
         $theme_version = $active_theme->Version;
         ?>
-       
+
             <tr>
                 <td width="25%"><?php _e('Name', 'wp-travel'); ?>:</td>
 
@@ -378,11 +378,11 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
                 </tr>
 <?php endif ?>
 
-        
+
             <tr>
                 <td colspan="2"  ><h2><?php _e('Active Plugins', 'wp-travel'); ?> (<?php echo count((array) get_option('active_plugins')); ?>)</h2></td>
             </tr>
-         
+
 <?php
 $active_plugins = (array) get_option('active_plugins', array());
 
@@ -444,9 +444,8 @@ foreach ($active_plugins as $plugin) {
     }
 }
 ?>
-        
+
     </table>
-    
-    <a href="JavaScript:void(0)" class="export-wsi-data button button-primary button-large"> Export to CSV</a>
+
+    <a href="JavaScript:void(0)" class="export-wsi-data button button-primary button-large"> <?php _e( 'Export to CSV', 'wp-travel' ); ?></a>
 </div>
- 
