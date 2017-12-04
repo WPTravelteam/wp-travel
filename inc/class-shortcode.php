@@ -132,8 +132,8 @@ class Wp_Travel_Shortcodes {
 			'post_slug' => uniqid(),
 			'post_type' => 'itinerary-booking',
 			);
-		$orderID = wp_insert_post( $post_array );		
-		update_post_meta( $orderID, 'order_data', $_POST );
+		$order_id = wp_insert_post( $post_array );		
+		update_post_meta( $order_id, 'order_data', $_POST );
 		
 		$trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
 		$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
@@ -146,7 +146,7 @@ class Wp_Travel_Shortcodes {
 			if ( in_array( $meta_name , $post_ignore ) ) {
 				continue;
 			}
-			update_post_meta( $orderID, $meta_name, sanitize_text_field( $meta_val ) );
+			update_post_meta( $order_id, $meta_name, sanitize_text_field( $meta_val ) );
 		}
 
 		if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
@@ -159,19 +159,24 @@ class Wp_Travel_Shortcodes {
 
 			$pax_count_based_by_date[$_POST['wp_travel_date']] += $_POST['wp_travel_pax'];
 
-			update_post_meta($_POST['wp_travel_post_id'],'total_pax_booked', $pax_count_based_by_date);
+			update_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', $pax_count_based_by_date );
 
-			$order_ids = get_post_meta($_POST['wp_travel_post_id'],'order_ids',true);
+			$order_ids = get_post_meta( $_POST['wp_travel_post_id'], 'order_ids', true );
 
 			if ( ! $order_ids ) {
 				$order_ids = [];
 			}
 
-			array_push( $order_ids, [ 'order_id'=>$orderID,'count'=>$_POST['wp_travel_pax'], 'date'=>$_POST['wp_travel_date'] ] );
+			array_push( $order_ids, [ 'order_id'=>$order_id,'count'=>$_POST['wp_travel_pax'], 'date'=>$_POST['wp_travel_date'] ] );
 
 			update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
 		}
-
+		/**
+		 * Hook used to add payment and its info.
+		 *
+		 * @since 1.0.5 // For Payment.
+		 */
+		do_action( 'wp_travel_after_frontend_booking_save', $order_id );
 		$settings = wp_traval_get_settings();
 
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
@@ -191,7 +196,7 @@ class Wp_Travel_Shortcodes {
 			 */
 			$sitename = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 		}
-		$booking_id 		  	= $orderID;
+		$booking_id 		  	= $order_id;
 		$itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
 		$itinerary_title 		= get_the_title( $itinerary_id );
 
