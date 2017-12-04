@@ -57,8 +57,8 @@ if ( post_password_required() ) {
 		         	<header class="entry-header">
 							<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 						</header>
-					<?php endif; ?>
-					<?php do_action( 'wp_tarvel_after_single_title', get_the_ID() ) ?>
+					<?php endif; ?>					
+					<?php do_action( 'wp_travel_after_single_title', get_the_ID() ) ?>
 				</div>
 	        </div>
 	    </div>
