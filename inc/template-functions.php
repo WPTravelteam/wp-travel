@@ -175,44 +175,35 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	$sale_price 	= wp_travel_get_trip_sale_price( $post_id );
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-	$currency_symbol = wp_traval_get_currency_symbol( $currency_code ); ?>
+	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+	$per_person_text = wp_travel_get_price_per_text( $post_id );
+	?>
     <div class="wp-detail-review-wrap">
-    <?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
-	<div class="wp-travel-trip-detail">
-		<div class="trip-price" >
-		<?php if ( $enable_sale ) : ?>
-		    <del>
-		<?php else : ?>
-			<ins>
-		<?php endif; ?>
-	    	<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-	    <?php if ( $enable_sale ) : ?>
-		    </del>
-		    <ins>
+    	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
+		<div class="wp-travel-trip-detail">
+			<div class="trip-price" >
 
-		      <span><?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price ); ?></span>
-		   </ins>
-		<?php else : ?>
-			</ins>
-		<?php endif; ?>
-			<?php
-				$show_per_person = apply_filters( 'wp_travel_show_per_person', false );
-				$show_per_person_single = apply_filters( 'wp_travel_show_per_person_single', true );
-				$per_person_text = wp_travel_get_price_per_text( $post_id );
-			?>
-			<?php if ( $show_per_person_single && is_singular( 'itineraries' ) ) : ?>
-				<!-- Only for single itinerary -->
-				<span class="person-count">/<?php esc_html_e( $per_person_text, 'wp-travel' ) ?></span>
+			<?php if ( $enable_sale ) : ?>
+				<del>
+					<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+				</del>
 			<?php endif; ?>
-
-			<?php if ( $show_per_person && ! is_singular( 'itineraries' ) ) : ?>
-				<!-- Other than single itinerary -->			
-				<span class="person-count">/<?php esc_html_e( $per_person_text, 'wp-travel' ) ?></span>
-			<?php endif; ?>
+				<span class="person-count">
+					<ins>
+						<span>
+							<?php
+							if ( $enable_sale ) {
+								echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
+							} else {
+								echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
+							}
+							?>
+						</span>
+					</ins>/<?php echo esc_html( $per_person_text ); ?>
+				</span>
+			</div>
 		</div>
-	</div>
-	<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
-
+		<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
 	</div>
 
 <?php
@@ -938,14 +929,14 @@ function wp_travel_archive_filter_by() {
 			<?php wp_dropdown_categories( array( 'taxonomy' => 'itinerary_types', 'name' => 'type', 'class' => 'wp_travel_input_filters type', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $type ) ); ?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
-			<p><?php esc_html_e( 'Location', 'wp-travel' ); ?></p>	
+			<p><?php esc_html_e( 'Location', 'wp-travel' ); ?></p>
 			<?php wp_dropdown_categories( array( 'taxonomy' => 'travel_locations', 'name' => 'location', 'class' => 'wp_travel_input_filters location', 'show_option_none' => '--', 'option_none_value' => '', 'selected' => $location ) ); ?>
 		</div>
 		<div class="wp-travel-filter-button">
 			<button class="btn-wp-travel-filter"><?php esc_html_e( 'Show', 'wp-travel' ); ?></button>
 		</div>
 		<?php do_action( 'wp_travel_after_post_filter' );  ?>
-	</div>	
+	</div>
 <?php }
 
 /**
@@ -991,7 +982,7 @@ function wp_travel_archive_toolbar() {
 				<ul class="wp-travel-itinerary-list">
 		<?php endif; ?>
 	<?php endif; ?>
-	
+
 <?php
 }
 
@@ -1090,7 +1081,7 @@ function wp_travel_posts_filter( $query ) {
 					);
 
 				} elseif ( $type > 0 ) {
-					$query->set( 'tax_query', array(	
+					$query->set( 'tax_query', array(
 						array(
 							'taxonomy' => 'itinerary_types',
 							'field' => 'id',
