@@ -272,7 +272,10 @@
                 }
                 label {
                     margin-bottom: 5px;
-                    display: block
+                    display: block;
+                    &.radio-checkbox-label {
+                        line-height: 1.65;
+                    }
                 }
                 input {
                     width: 100%;
@@ -282,6 +285,14 @@
                     padding: 5px 10px;
                     height: 38px;
                     font-weight: 300
+                }
+                input[type="radio"] {
+                    width: auto;
+                    height: auto;
+                    margin-right: 5px;
+                }
+                input[type="checkbox"] {
+                    @extend input[type="radio"];
                 }
                 select {
                     @extend input;
