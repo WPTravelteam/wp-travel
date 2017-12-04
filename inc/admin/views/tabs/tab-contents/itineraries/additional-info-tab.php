@@ -30,8 +30,22 @@
 	$settings = wp_traval_get_settings();
 	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] :'';
 	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+
+	$price_per = get_post_meta( $post->ID, 'wp_travel_price_per', true );
+	if ( ! $price_per ) {
+		$price_per = 'person';
+	}
 ?>
 <table class="form-table">
+	<tr>
+		<td><label for="wp-travel-price-per"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label></td>
+		<td>
+			<select name="wp_travel_price_per">
+				<option value="person" <?php selected( 'person', $price_per ) ?> ><?php esc_html_e( 'Person' ) ?></option>
+				<option value="group" <?php selected( 'group', $price_per ) ?> ><?php esc_html_e( 'Group' ) ?></option>
+			</select>
+		</td>
+	</tr>
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
@@ -51,7 +65,13 @@
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="0" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
-
+	<?php
+	/**
+	 * Hook Added.
+	 *
+	 * @since 1.0.5
+	 */
+	do_action( 'wp_travel_itinerary_after_sale_price', $post->ID ); ?>
 	<tr>
 		<td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
