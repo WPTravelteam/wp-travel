@@ -117,8 +117,24 @@ function wp_travel_booking_form_fields() {
 				'class' => 'wp-travel-trip-duration',
 				'validations' => array(
 					'required' => true,
+					'min' => '1',
 				),
+				'attributes' => array( 'min' => 1 ),
 				'priority' => 70,
+			),
+			'pax' => array(
+				'type' => 'number',
+				'label' => __( 'Pax', 'wp-travel' ),
+				'name' => 'wp_travel_pax',
+				'id' => 'wp-travel-pax',
+				'default' => 1,
+				'validations' => array(
+					'required' => '',
+					'min' => '1',
+					'max' => '60', // Make it dynamic.
+				),
+				'attributes' => array( 'min' => 1 ),
+				'priority' => 81,
 			),
 			'note' => array(
 				'type' => 'textarea',
