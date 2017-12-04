@@ -206,6 +206,9 @@ class WP_Travel_Admin_Settings {
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
 
+			// @since 1.0.5 Used this filter below.
+			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
+
 			update_option( 'wp_travel_settings', $settings );
 			WP_Travel()->notices->add( 'error ' );
 			$url_parameters['page'] = self::$collection;
