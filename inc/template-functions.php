@@ -195,9 +195,19 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 		<?php else : ?>
 			</ins>
 		<?php endif; ?>
-			<?php $show_per_person = apply_filters( 'wp_travel_show_per_person', false ); ?>
-			<?php if ( $show_per_person ) : ?>
-				<span class="person-count">/<?php esc_html_e( 'person', 'wp-travel' ) ?></span>
+			<?php
+				$show_per_person = apply_filters( 'wp_travel_show_per_person', false );
+				$show_per_person_single = apply_filters( 'wp_travel_show_per_person_single', true );
+				$per_person_text = wp_travel_get_price_per_text( $post_id );
+			?>
+			<?php if ( $show_per_person_single && is_singular( 'itineraries' ) ) : ?>
+				<!-- Only for single itinerary -->
+				<span class="person-count">/<?php esc_html_e( $per_person_text, 'wp-travel' ) ?></span>
+			<?php endif; ?>
+
+			<?php if ( $show_per_person && ! is_singular( 'itineraries' ) ) : ?>
+				<!-- Other than single itinerary -->			
+				<span class="person-count">/<?php esc_html_e( $per_person_text, 'wp-travel' ) ?></span>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -211,7 +221,8 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 /**
  * Add html of Rating.
  *
- * @param int $post_id ID for current post.
+ * @param int  $post_id ID for current post.
+ * @param bool $hide_rating Flag to sho hide rating.
  */
 function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	if ( ! is_singular( 'itineraries' ) ) {
@@ -1112,8 +1123,8 @@ function wp_travel_get_archive_view_mode() {
 }
 
 // Hooks.
-add_action( 'wp_tarvel_after_single_title', 'wp_travel_trip_price', 1 );
-add_action( 'wp_tarvel_after_single_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'wp_travel_after_single_title', 'wp_travel_trip_price', 1 );
+add_action( 'wp_travel_after_single_title', 'wp_travel_single_excerpt', 1 );
 add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
