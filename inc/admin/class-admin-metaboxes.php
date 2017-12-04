@@ -256,6 +256,11 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_trip_price = $wp_travel_price;
 		}
 
+		if ( isset( $_POST['wp_travel_price_per'] ) ) {
+			$wp_travel_price_per = sanitize_text_field( wp_unslash( $_POST['wp_travel_price_per'] ) );
+			update_post_meta( $post_id, 'wp_travel_price_per', $wp_travel_price_per );
+		}
+
 		$wp_travel_enable_sale = 0;
 		if ( isset( $_POST['wp_travel_enable_sale'] ) ) {
 			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );	
