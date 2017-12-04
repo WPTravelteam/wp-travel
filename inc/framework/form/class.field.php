@@ -17,6 +17,8 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.select.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.textarea.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.date.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.radio.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.checkbox.php';
 	}
 
 	private function field_types() {
@@ -27,6 +29,8 @@ class WP_Travel_FW_Field {
 		$field_types['select'] = 'WP_Travel_FW_Field_Select';
 		$field_types['textarea'] = 'WP_Travel_FW_Field_Textarea';
 		$field_types['date'] = 'WP_Travel_FW_Field_Date';
+		$field_types['radio'] = 'WP_Travel_FW_Field_Radio';
+		$field_types['checkbox'] = 'WP_Travel_FW_Field_Checkbox';
 		return $field_types;
 	}
 
