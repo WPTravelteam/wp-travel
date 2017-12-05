@@ -104,6 +104,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   @media (max-width: 992px) {
     .wp-travel-form-field {
       width: 95%; } }
+  .wp-travel-form-field.hide-in-admin {
+    display: none; }
   .wp-travel-form-field label {
     margin-bottom: 5px;
     display: block; }
@@ -116,6 +118,10 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     height: 38px;
     font-weight: 300;
     box-shadow: none; }
+    .wp-travel-form-field input[type="radio"], .wp-travel-form-field select[type="radio"], .wp-travel-form-field textarea[type="radio"] {
+      width: 16px;
+      height: 16px;
+      border-color: inherit; }
   .wp-travel-form-field textarea {
     height: auto; }
 
