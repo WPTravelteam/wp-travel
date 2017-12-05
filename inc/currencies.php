@@ -135,8 +135,8 @@ function wp_traval_get_currency_list() {
 
 function wp_traval_get_currency_symbol( $currency_code = null ) {
 	if ( ! $currency_code ) {
-		// Set default currency to USD
-		$currency_code = 'USD';
+		$settings = wp_traval_get_settings();
+		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 	}
 
 	$currency_symbols = array(
