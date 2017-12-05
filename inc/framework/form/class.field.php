@@ -19,6 +19,7 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.date.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.radio.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.checkbox.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.text-info.php';
 	}
 
 	private function field_types() {
@@ -31,6 +32,7 @@ class WP_Travel_FW_Field {
 		$field_types['date'] = 'WP_Travel_FW_Field_Date';
 		$field_types['radio'] = 'WP_Travel_FW_Field_Radio';
 		$field_types['checkbox'] = 'WP_Travel_FW_Field_Checkbox';
+		$field_types['text_info'] = 'WP_Travel_FW_Field_Text_Info';
 		return $field_types;
 	}
 
@@ -46,6 +48,7 @@ class WP_Travel_FW_Field {
 					$field['class'] = isset( $field['class'] ) ? $field['class'] : '';
 					$field['placeholder'] = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
 					$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+					$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
 					$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
 
 					$field_init = new $this->field_types[ $field['type'] ];
