@@ -221,7 +221,7 @@ function wp_travel_get_related_post( $post_id ) {
 /**
  * Return Trip Price.
  *
- * @param  int $post_id Post id of the post
+ * @param  int $post_id Post id of the post.
  * @return int Trip Price.
  */
 function wp_travel_get_trip_price( $post_id = 0 ) {
@@ -256,7 +256,7 @@ function wp_travel_get_trip_sale_price( $post_id = 0 ) {
  * Return Trip Price.
  *
  * @param  int $post_id Post id of the post.
- * 
+ *
  * @since 1.0.5
  * @return int Trip Price.
  */
@@ -275,7 +275,7 @@ function wp_travel_get_actual_trip_price( $post_id = 0 ) {
 			$trip_price = wp_travel_get_trip_price( $post_id );
 		}
 	}
-	return $trip_price;	
+	return $trip_price;
 }
 
 /**
@@ -290,6 +290,7 @@ function wp_travel_get_post_thumbnail( $post_id, $size = 'post-thumbnail' ) {
 		global $post;
 		$post_id = $post->ID;
 	}
+	$size = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
 	$thumbnail = get_the_post_thumbnail( $post_id, $size );
 
 	if ( ! $thumbnail ) {
@@ -331,8 +332,8 @@ function wp_travel_get_post_placeholder_image_url() {
 /**
  * Allowed tags.
  *
- * @param  array  $tags filter tags.
- * @return array       allowed tags.
+ * @param array $tags filter tags.
+ * @return array allowed tags.
  */
 function wp_travel_allowed_html( $tags = array() ) {
 
@@ -439,23 +440,24 @@ function wp_travel_get_itineraries_array() {
 
 /**
  * Return WP Travel Featured post.
- * @param  integer $no_of_post_to_show No of post to show
+ *
+ * @param integer $no_of_post_to_show No of post to show.
  * @return array
  */
 function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 	$args = array(
-	'numberposts' => $no_of_post_to_show,
-	'offset'           => 0,	
-	'orderby'          => 'date',
-	'order'            => 'DESC',	
-	'meta_key'         => 'wp_travel_featured',
-	'meta_value'       => 'yes',
-	'post_type'        => 'itineraries',	
-	'post_status'      => 'publish',
-	'suppress_filters' => true 
-);
-$posts_array = get_posts( $args );
-return $posts_array;
+		'numberposts' => $no_of_post_to_show,
+		'offset'           => 0,
+		'orderby'          => 'date',
+		'order'            => 'DESC',
+		'meta_key'         => 'wp_travel_featured',
+		'meta_value'       => 'yes',
+		'post_type'        => 'itineraries',
+		'post_status'      => 'publish',
+		'suppress_filters' => true,
+	);
+	$posts_array = get_posts( $args );
+	return $posts_array;
 }
 
 
@@ -523,7 +525,7 @@ function wp_travel_search_form() {
 /**
  * This will optput Trip duration HTML
  *
- * @param int $post_id
+ * @param int $post_id Post ID.
  * @return void
  */
 function wp_travel_get_trip_duration( $post_id ) {
@@ -571,12 +573,13 @@ function wp_travel_get_trip_duration( $post_id ) {
 				<?php endif; ?>
 			</span>
 		</div>
-	<?php endif; 
+	<?php endif;
 }
 
 /**
  * Get Price Per text.
- * 
+ *
+ * @param Number $post_id Current post id.
  * @since 1.0.5
  */
 function wp_travel_get_price_per_text( $post_id ) {
@@ -588,4 +591,22 @@ function wp_travel_get_price_per_text( $post_id ) {
 		$per_person_text = 'person';
 	}
 	return $per_person_text;
+}
+
+/**
+ * Check sale price enable or not.
+ *
+ * @param Number $post_id Current post id.
+ * @since 1.0.5
+ */
+function wp_travel_is_enable_sale( $post_id ) {
+	if ( ! $post_id ) {
+		return false;
+	}
+	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+
+	if ( $enable_sale  ) {
+		return true;
+	}
+	return false;
 }
