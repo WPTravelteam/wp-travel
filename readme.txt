@@ -81,9 +81,12 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 == Changelog ==
 
 = 1.0.5 =
+* New Feature: Featured itinerary widget.
 * New Feature: Compatibility with WP Travel Paypal addons.
 * New Feature: Added Form field for radio and checkbox input.
 * New Feature: Added PAX field in Booking form.
+* Fixes: Layout issue [itinerary list per row on grid view ].
+* Fixes: Minor fixes.
 
 = 1.0.4 =
 * New Feature: Filter Itineraries by Price, Trip Type, Location.
