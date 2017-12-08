@@ -96,7 +96,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
-			add_action( 'init', array( 'Wp_Travel_Shortcodes', 'wp_traval_book_now' ), 99 );
+			add_action( 'init', 'wp_traval_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
 			if ( $this->is_request( 'admin' ) ) {
