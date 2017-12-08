@@ -85,6 +85,7 @@ class WP_Travel_Post_Types {
 			'menu_position'      => null,
 			'supports'           => array( 'title' ),
 			'menu_icon'          => 'dashicons-location',
+			'with_front'		 => true,
 		);
 		/**
 		 * Register a travaldoor_trip post type.
