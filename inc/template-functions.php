@@ -976,7 +976,7 @@ function wp_travel_archive_toolbar() {
 	</div>
 	<div class="wp-travel-archive-content">
 		<?php if ( 'grid' === $view_mode ) : ?>
-			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '4' ); ?>			
+			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>			
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>-per-row">
 		<?php endif; ?>
