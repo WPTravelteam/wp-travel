@@ -86,6 +86,7 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 * New Feature: Added Form field for radio and checkbox input.
 * New Feature: Added PAX field in Booking form.
 * Fixes: Layout issue [itinerary list per row on grid view ].
+* Fixes: Backend Map issue.
 * Fixes: Minor fixes.
 
 = 1.0.4 =
