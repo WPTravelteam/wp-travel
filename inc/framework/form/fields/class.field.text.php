@@ -20,7 +20,14 @@ class WP_Travel_FW_Field_Text {
 				$attributes .= sprintf( '%s="%s"', $attribute, $attribute_val );
 			}
 		}
-		$output = sprintf( '<input type="%s" id="%s" name="%s" value="%s" %s, %s>', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $attributes );
+
+		$before_field = '';
+		if ( isset( $this->field['before_field'] ) ) {
+			$before_field_class = isset( $this->field['before_field_class'] ) ? $this->field['before_field_class'] : '';
+			$before_field = sprintf( '<span class="wp-travel-field-before %s">%s</span>', $before_field_class, $this->field['before_field'] );
+		}
+
+		$output = sprintf( '%s<input type="%s" id="%s" name="%s" value="%s" %s %s>', $before_field, $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $attributes );
 
 		if ( ! $display ) {
 			return $output;
