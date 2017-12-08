@@ -178,6 +178,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     margin-bottom: 15px;
     padding: 0 15px;
     vertical-align: top;
+    position: relative;
     @include sidr-view {
         width: 95%;
     }
@@ -209,6 +210,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     textarea {
         @extend input;
         height: auto;
+    }
+    .wp-travel-field-before.wp-travel-currency-symbol {
+        position: absolute;
+        top: 33px;
+        left: 5px;
     }
 }
 
