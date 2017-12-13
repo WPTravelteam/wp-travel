@@ -610,3 +610,153 @@ function wp_travel_is_enable_sale( $post_id ) {
 	}
 	return false;
 }
+
+//
+function wp_travel_get_booking_data() {
+	global $wpdb;
+	// Default Query.
+
+	// $results = get_site_transient( '_site_transient_wt_booking_stat_data' );
+
+	// Set transient if there in not set previously.
+	// if (  $results ) {
+		
+	// }
+	$query_limit = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
+	$limit = "limit {$query_limit}";
+	$where = '';
+	$top_country_where = '';
+	$top_itinerary_where = '';
+	$groupby = '';
+
+	$from_date = '';
+	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
+		$from_date = $_REQUEST['booking_stat_from'];
+	}
+	$to_date = '';
+	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
+		$to_date = $_REQUEST['booking_stat_to'];
+	}
+	$country = '';
+	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
+		$country = $_REQUEST['booking_country'];
+	}
+
+	$itinerary = '';
+	if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
+		$itinerary = $_REQUEST['booking_itinerary'];
+	}
+
+	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
+
+		if ( '' !== $itinerary ) {
+			$where 	 .= " and itinerary_id={$itinerary} ";
+			$top_country_where .= $where;
+			$groupby .= ' itinerary_id,';
+		}
+		if ( '' !== $country ) {
+			$where   .= " and country='{$country}'";
+			$top_itinerary_where .= " and country='{$country}'";
+			$groupby .= ' country,';
+		}
+
+		if ( '' !== $from_date && '' !== $to_date ) {
+
+			$date_format = 'Y-m-d H:i:s';
+
+			$booking_from = date( $date_format, strtotime( $from_date ) );
+			$booking_to   = date( $date_format, strtotime( $to_date ) );
+
+			$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+		}
+		$limit = '';
+	}
+
+	$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
+	from (
+		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
+		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+		join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
+		group by P.ID
+	) Booking 
+	where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
+
+	$results =  $wpdb->get_results( $query );
+
+	// Set Transient for stat data.
+	// set_site_transient( '_site_transient_wt_booking_stat_data', $results );
+
+	$stat_data = array();
+	$date_format = 'jS M, Y';
+
+	$max_bookings = 0;
+	$max_pax = 0;
+	if ( is_array( $results ) && count( $results ) > 0 ) {
+		foreach ( $results as $result ) {
+			$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
+			$label_date = date( $date_format, strtotime( $label_date ) );
+
+			$stat_data['data'][] = $result->no_of_booking;
+			$stat_data['labels'][] = $label_date;
+
+			if ( $result->no_of_booking > $max_bookings ) {
+				$max_bookings = $result->no_of_booking;
+			}
+
+			if ( $result->no_of_pax > $max_pax ) {
+				$max_pax = $result->no_of_pax;
+			}
+		}
+	}
+
+	// query for top country.
+	$top_country_query = "SELECT count(ID) as no_of_booking, country
+	from (
+		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
+		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+        group by P.ID
+	) Booking 
+	where post_type='itinerary-booking' AND post_status='publish' {$top_country_where}  group by country order by no_of_booking desc";
+
+	$top_countries = array();
+	$results =  $wpdb->get_results( $top_country_query );
+
+
+	if ( is_array( $results ) && count( $results ) > 0 ) {
+		foreach ( $results as $result ) {
+			$top_countries[] = $result->country;
+		}
+	}
+
+	// query for top Itinerary.
+	$top_itinerary_query = "SELECT count(ID) as no_of_booking, itinerary_id
+	from (
+		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
+		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+        group by P.ID
+	) Booking 
+	where post_type='itinerary-booking' AND post_status='publish' {$top_itinerary_where}  group by itinerary_id order by no_of_booking desc";
+
+	$top_itinerary = array( 'name' => esc_html__( 'N/A', 'wp-travel' ), 'url' => '' );
+	$results =  $wpdb->get_results( $top_itinerary_query );
+	if ( is_array( $results ) && count( $results ) > 0 ) {
+		$itinerary_id = $results['0']->itinerary_id;
+
+		if ( $itinerary_id ) {
+			$top_itinerary['name'] = get_the_title( $itinerary_id );
+			$top_itinerary['id'] = $itinerary_id;
+		}
+	}
+
+	$stat_data['max_bookings']  = $max_bookings;
+	$stat_data['max_pax']       = $max_pax;
+	$stat_data['top_countries'] = $top_countries;
+	$stat_data['top_itinerary'] = $top_itinerary;
+
+	return $stat_data;
+}
