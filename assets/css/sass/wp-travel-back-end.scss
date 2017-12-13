@@ -288,3 +288,96 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-view-bookings {
     float: right;
 }
+
+.left-block,
+.right-block {
+    position: relative;
+    float: left;
+    min-height: 1px;
+    box-sizing: border-box;
+    margin-right: 15px;
+}
+
+.left-block {
+    width: calc( 75% - 15px);
+}
+
+.right-block {
+    width: calc( 25% - 15px);
+    text-align: center;
+    border: 1px solid #E0E0E0;
+    background: #fff;
+    div {
+        border-bottom: 1px solid #E0E0E0;
+        padding: 20px 50px 0;
+        big {
+            font-size: 38px;
+        }
+        p {
+            color: #888;
+        }
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.stat-toolbar-form {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc( 100% + 20px);
+    margin-left: -10px;
+    margin-right: -10px;
+    .field-group {
+        padding: 0 10px;
+        width: calc( 25% - 25px);
+        box-sizing: border-box;
+        select {
+            width: 100%;
+        }
+        input {
+            @extend select;
+        }
+    }
+    .show-all {
+        padding-left: 20px;
+    }
+    .btn.btn-show-all {
+        background: #0073aa;
+        padding: 6px 8px;
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        top: 18px;
+        float: right;
+        border: none;
+    }
+}
+
+#wp-travel-booking-canvas {
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    margin-bottom: 35px;
+}
+
+@include tab {
+    .left-block,
+    .right-block {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@include mob {
+    .stat-toolbar-form {
+        .field-group {
+            width: 100%;
+        }
+        .show-all {
+            padding-left: 10px;
+        }
+        .btn.btn-show-all {
+            top: -15px;
+        }
+    }
+}

@@ -110,7 +110,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-form-field label {
     margin-bottom: 5px;
     display: block; }
-  .wp-travel-form-field input, .wp-travel-form-field select, .wp-travel-form-field textarea {
+  .wp-travel-form-field input, .wp-travel-form-field select, .wp-travel-form-field .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field input, .wp-travel-form-field textarea {
     width: 100%;
     color: #666;
     border: 1px solid rgba(221, 221, 221, 0.32);
@@ -177,5 +177,73 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 .wp-travel-view-bookings {
   float: right; }
+
+.left-block,
+.right-block {
+  position: relative;
+  float: left;
+  min-height: 1px;
+  box-sizing: border-box;
+  margin-right: 15px; }
+
+.left-block {
+  width: calc( 75% - 15px); }
+
+.right-block {
+  width: calc( 25% - 15px);
+  text-align: center;
+  border: 1px solid #E0E0E0;
+  background: #fff; }
+  .right-block div {
+    border-bottom: 1px solid #E0E0E0;
+    padding: 20px 50px 0; }
+    .right-block div big {
+      font-size: 38px; }
+    .right-block div p {
+      color: #888; }
+    .right-block div a {
+      text-decoration: none; }
+
+.stat-toolbar-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc( 100% + 20px);
+  margin-left: -10px;
+  margin-right: -10px; }
+  .stat-toolbar-form .field-group {
+    padding: 0 10px;
+    width: calc( 25% - 25px);
+    box-sizing: border-box; }
+    .stat-toolbar-form .field-group select, .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field textarea, .wp-travel-form-field .stat-toolbar-form .field-group textarea {
+      width: 100%; }
+  .stat-toolbar-form .show-all {
+    padding-left: 20px; }
+  .stat-toolbar-form .btn.btn-show-all {
+    background: #0073aa;
+    padding: 6px 8px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    top: 18px;
+    float: right;
+    border: none; }
+
+#wp-travel-booking-canvas {
+  background: #fff;
+  border: 1px solid #E0E0E0;
+  margin-bottom: 35px; }
+
+@media (max-width: 1024px) {
+  .left-block,
+  .right-block {
+    width: 100%;
+    margin-right: 0; } }
+@media (max-width: 767px) {
+  .stat-toolbar-form .field-group {
+    width: 100%; }
+  .stat-toolbar-form .show-all {
+    padding-left: 10px; }
+  .stat-toolbar-form .btn.btn-show-all {
+    top: -15px; } }
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */
