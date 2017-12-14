@@ -577,6 +577,21 @@ function wp_travel_get_trip_duration( $post_id ) {
 }
 
 /**
+ * Return price per fields.
+ *
+ * @since 1.0.5
+ * @return array
+ */
+function wp_travel_get_price_per_fields() {
+	$price_per = array(
+		'person' => __( 'Person', 'wp-travel' ),
+		'group'	 => __( 'Group', 'wp-travel' ),
+	);
+
+	return apply_filters( 'wp_travel_price_per_fields', $price_per );
+}
+
+/**
  * Get Price Per text.
  *
  * @param Number $post_id Current post id.
@@ -611,17 +626,18 @@ function wp_travel_is_enable_sale( $post_id ) {
 	return false;
 }
 
-//
+/**
+ * Get All Data Needed for booking stat.
+ *
+ * @since 1.0.5
+ * @return Array
+ */
 function wp_travel_get_booking_data() {
 	global $wpdb;
-	// Default Query.
 
-	// $results = get_site_transient( '_site_transient_wt_booking_stat_data' );
+	$initial_load = true;
 
-	// Set transient if there in not set previously.
-	// if (  $results ) {
-		
-	// }
+	// Default variables.
 	$query_limit = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
 	$limit = "limit {$query_limit}";
 	$where = '';
@@ -647,7 +663,10 @@ function wp_travel_get_booking_data() {
 		$itinerary = $_REQUEST['booking_itinerary'];
 	}
 
+	// Setting conditions.
 	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
+		// Set initial load to false if there is extra get variables.
+		$initial_load = false;
 
 		if ( '' !== $itinerary ) {
 			$where 	 .= " and itinerary_id={$itinerary} ";
@@ -674,20 +693,26 @@ function wp_travel_get_booking_data() {
 		$limit = '';
 	}
 
-	$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
-	from (
-		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
-		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
-		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-		join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
-		group by P.ID
-	) Booking 
-	where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
+	// Booking Data Default Query.
+	$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
+	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+		$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
+		from (
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+			join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
+			group by P.ID
+		) Booking 
+		where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
 
-	$results =  $wpdb->get_results( $query );
+		$results =  $wpdb->get_results( $query );
 
-	// Set Transient for stat data.
-	// set_site_transient( '_site_transient_wt_booking_stat_data', $results );
+		// set initial load transient for stat data.
+		if ( $initial_load && ! $initial_transient ) {
+			set_site_transient( '_transient_wt_booking_stat_data', $results );
+		}
+	}
 
 	$stat_data = array();
 	$date_format = 'jS M, Y';
@@ -711,39 +736,52 @@ function wp_travel_get_booking_data() {
 			}
 		}
 	}
+	// End of Booking Data Default Query.
+	// Query for top country.
+	$initial_transient = $results = get_site_transient( '_transient_wt_booking_top_country' );
+	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+		$top_country_query = "SELECT count(ID) as no_of_booking, country
+		from (
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
+			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+			group by P.ID
+		) Booking 
+		where post_type='itinerary-booking' AND post_status='publish' {$top_country_where}  group by country order by no_of_booking desc";
 
-	// query for top country.
-	$top_country_query = "SELECT count(ID) as no_of_booking, country
-	from (
-		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
-		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
-		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-        group by P.ID
-	) Booking 
-	where post_type='itinerary-booking' AND post_status='publish' {$top_country_where}  group by country order by no_of_booking desc";
-
-	$top_countries = array();
-	$results =  $wpdb->get_results( $top_country_query );
-
+		$top_countries = array();
+		$results =  $wpdb->get_results( $top_country_query );
+		// set initial load transient for stat data.
+		if ( $initial_load && ! $initial_transient ) {
+			set_site_transient( '_transient_wt_booking_top_country', $results );
+		}
+	}
 
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		foreach ( $results as $result ) {
 			$top_countries[] = $result->country;
 		}
 	}
+	// End of query for top country.
+	// Query for top Itinerary.
+	$initial_transient = $results = get_site_transient( '_transient_wt_booking_top_itinerary' );
+	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+		$top_itinerary_query = "SELECT count(ID) as no_of_booking, itinerary_id
+		from (
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
+			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+			group by P.ID
+		) Booking 
+		where post_type='itinerary-booking' AND post_status='publish' {$top_itinerary_where}  group by itinerary_id order by no_of_booking desc";
 
-	// query for top Itinerary.
-	$top_itinerary_query = "SELECT count(ID) as no_of_booking, itinerary_id
-	from (
-		Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
-		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
-		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-        group by P.ID
-	) Booking 
-	where post_type='itinerary-booking' AND post_status='publish' {$top_itinerary_where}  group by itinerary_id order by no_of_booking desc";
-
+		$results =  $wpdb->get_results( $top_itinerary_query );
+		// set initial load transient for stat data.
+		if ( $initial_load && ! $initial_transient ) {
+			set_site_transient( '_transient_wt_booking_top_itinerary', $results );
+		}
+	}
 	$top_itinerary = array( 'name' => esc_html__( 'N/A', 'wp-travel' ), 'url' => '' );
-	$results =  $wpdb->get_results( $top_itinerary_query );
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		$itinerary_id = $results['0']->itinerary_id;
 
@@ -752,7 +790,7 @@ function wp_travel_get_booking_data() {
 			$top_itinerary['id'] = $itinerary_id;
 		}
 	}
-
+	// End of query for top Itinerary.
 	$stat_data['max_bookings']  = $max_bookings;
 	$stat_data['max_pax']       = $max_pax;
 	$stat_data['top_countries'] = $top_countries;
