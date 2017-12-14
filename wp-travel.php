@@ -163,6 +163,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-search.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-featured.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/widgets/class-wp-travel-widget-location.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/widgets/class-wp-travel-widget-trip-type.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
