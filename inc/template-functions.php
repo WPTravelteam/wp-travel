@@ -1112,6 +1112,27 @@ function wp_travel_get_archive_view_mode() {
 	return $view_mode;
 }
 
+/**
+ * Clear Booking Stat Transient.
+ *
+ * @return void
+ */
+function wp_travel_clear_booking_stat_transient( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	$post_type = get_post_type($post_id);
+	echo 'save 1';
+	// If this isn't a 'book' post, don't update it.
+	if ( 'itinerary-booking' != $post_type ) {
+		return;
+	}
+	
+	delete_site_transient( '_transient_wt_booking_stat_data' );
+	delete_site_transient( '_transient_wt_booking_top_country' );
+	delete_site_transient( '_transient_wt_booking_top_itinerary' );
+}
+
 // Hooks.
 add_action( 'wp_travel_after_single_title', 'wp_travel_trip_price', 1 );
 add_action( 'wp_travel_after_single_title', 'wp_travel_single_excerpt', 1 );
@@ -1148,6 +1169,8 @@ add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
 
 add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
+
+add_action( 'save_post', 'wp_travel_clear_booking_stat_transient' );
 /**
  * Excerpt.
  *
