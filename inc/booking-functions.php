@@ -531,7 +531,7 @@ function wp_traval_book_now() {
 		return;
 	}
 
-	$trip_code = wp_traval_get_trip_code( $_POST['wp_travel_post_id'] );
+	$trip_code = wp_travel_get_trip_code( $_POST['wp_travel_post_id'] );
 	$title = 'Booking - ' . $trip_code;
 
 	$post_array = array(

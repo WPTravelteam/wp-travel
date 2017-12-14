@@ -124,7 +124,7 @@ class WP_Travel_Itinerary {
 		if ( (int) $post_id < 10 ) {
 			$post_id = '0' . $post_id;
 		}
-		return apply_filters( 'wp_traval_trip_code', 'WT-CODE ' . $post_id, $post_id );
+		return apply_filters( 'wp_travel_trip_code', 'WT-CODE ' . $post_id, $post_id );
 	}
 
 	function get_trip_types( $fields = null ) {

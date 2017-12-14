@@ -6,7 +6,7 @@
  */
 
 global $post;
-$trip_code = wp_traval_get_trip_code( $post->ID );
+$trip_code = wp_travel_get_trip_code( $post->ID );
 $group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
 ?>
 <table class="form-table">

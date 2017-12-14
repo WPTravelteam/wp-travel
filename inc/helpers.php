@@ -31,7 +31,7 @@ function wp_traval_get_settings() {
  * @param  int $post_id Post ID of post.
  * @return string Returns the trip code.
  */
-function wp_traval_get_trip_code( $post_id = null ) {
+function wp_travel_get_trip_code( $post_id = null ) {
 	if ( ! is_null( $post_id ) ) {
 		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $post_id ) );
 	} else {
