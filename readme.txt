@@ -82,6 +82,8 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 
 = 1.0.5 =
 * New Feature: Featured itinerary widget.
+* New Feature: Trip Location widget.
+* New Feature: Trip Type widget.
 * New Feature: Booking Stat.
 * New Feature: Compatibility with WP Travel Paypal addons.
 * New Feature: Added Form field for radio and checkbox input.
