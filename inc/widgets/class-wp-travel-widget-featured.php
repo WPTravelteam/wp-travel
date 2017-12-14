@@ -2,7 +2,7 @@
 /**
  * Exit if accessed directly.
  *
- * @package wp-travel\incldues
+ * @package wp-travel\incldues\widgets
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,10 +51,10 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 
-		$featured = wp_travel_featured_itineraries( $no_of_trip_show ); ?>
-		<?php if ( count( $featured ) > 0 ) : ?>
-			<ul class="wp-travel-featured-widget">
-			<?php foreach ( $featured as $itinerary ) : ?>				
+		$itineraries = wp_travel_featured_itineraries( $no_of_trip_show ); ?>
+		<?php if ( count( $itineraries ) > 0 ) : ?>
+			<ul class="wp-travel-itinerary-widget featured-widget">
+			<?php foreach ( $itineraries as $itinerary ) : ?>				
 				<li class="col-<?php echo esc_attr( $this->trip_per_row, 'wp-travel' )?>-per-row clearfix">
 					<?php echo wp_travel_get_post_thumbnail( $itinerary->ID, 'wp_travel_thumbnail' ) ?>
 					
@@ -86,7 +86,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
-		$instance['hide_title'] = sanitize_text_field( $new_instance['hide_title'] );
+		isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 		// $instance['trip_per_row'] = sanitize_text_field( $new_instance['trip_per_row'] );
 		$instance['no_of_trip_show'] = sanitize_text_field( $new_instance['no_of_trip_show'] );
 
@@ -104,16 +104,16 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$hide_title = '';
 		$no_of_trip_show = $this->no_of_trip_show;
 		$trip_per_row = $this->trip_per_row;
-		if ( $instance['title'] ) {
+		if ( isset( $instance['title'] ) ) {
 			$title = esc_attr( $instance['title'] );
 		}
-		if ( $instance['hide_title'] ) {
+		if ( isset( $instance['hide_title'] ) ) {
 			$hide_title = esc_attr( $instance['hide_title'] );
 		}
 		// if ( $instance['trip_per_row'] ) {
 		// 	$trip_per_row = esc_attr( $instance['trip_per_row'] );
 		// }
-		if ( $instance['no_of_trip_show'] ) {
+		if ( isset( $instance['no_of_trip_show'] ) ) {
 			$no_of_trip_show = esc_attr( $instance['no_of_trip_show'] );
 		} ?>
 		<p>
