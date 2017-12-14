@@ -40,10 +40,14 @@
 	<tr>
 		<td><label for="wp-travel-price-per"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label></td>
 		<td>
-			<select name="wp_travel_price_per">
-				<option value="person" <?php selected( 'person', $price_per ) ?> ><?php esc_html_e( 'Person' ) ?></option>
-				<option value="group" <?php selected( 'group', $price_per ) ?> ><?php esc_html_e( 'Group' ) ?></option>
-			</select>
+			<?php $price_per_fields = wp_travel_get_price_per_fields(); ?>
+			<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
+				<select name="wp_travel_price_per">
+					<?php foreach ( $price_per_fields as $val => $label ) : ?>
+						<option value="<?php echo esc_attr( $val, 'wp-travel' ) ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ) ?></option>
+					<?php endforeach; ?>
+				</select>
+			<?php endif; ?>
 		</td>
 	</tr>
 	<tr>
