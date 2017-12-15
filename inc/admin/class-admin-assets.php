@@ -69,6 +69,10 @@ class WP_Travel_Admin_Assets {
 				'max_pax' => $max_pax,
 				'top_countries' => implode( ', ', $top_countries ),
 				'top_itinerary' => $top_itinerary,
+				// Show more / less top countries.
+				'show_more_text' => __( 'More', 'wp-travel' ),
+				'show_less_text' => __( 'Less', 'wp-travel' ),
+				'show_char' => 18,
 			);
 			$wp_travel_chart_data = apply_filters( 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
