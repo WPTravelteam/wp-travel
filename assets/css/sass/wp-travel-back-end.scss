@@ -198,7 +198,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         height: 38px;
         font-weight: 300;
         box-shadow: none;
-        font-family:arial;
+        font-family: arial;
         &[type="radio"] {
             width: 16px;
             height: 16px;
@@ -207,7 +207,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
     select {
         @extend input;
-        cursor:pointer;
+        cursor: pointer;
     }
     textarea {
         @extend input;
@@ -334,19 +334,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         padding: 0 10px;
         width: calc( 25% - 25px);
         box-sizing: border-box;
-        position:relative;
+        position: relative;
         select {
             width: 100%;
         }
         input {
             @extend select;
         }
-        .input-group-addon{
-            position:absolute;
+        .input-group-addon {
+            position: absolute;
             right: 10px;
             top: 25px;
-            .dashicons{
-                font-size:16px;
+            .dashicons {
+                font-size: 16px;
             }
         }
     }
@@ -362,11 +362,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         top: 18px;
         float: right;
         border: none;
-        cursor:pointer;
-        transition: all 0.4s  ease-in-out;
-        -webkit-transition: all 0.4s  ease-in-out;
-        -moz-transition: all 0.4s  ease-in-out;
-        &:hover{
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        &:hover {
             background: #006799;
             box-shadow: 0px 0px 20px 0px #0067994a;
         }
@@ -377,6 +377,18 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     background: #fff;
     border: 1px solid #E0E0E0;
     margin-bottom: 35px;
+}
+
+.wp-travel-more {
+    a.morelink {
+        text-decoration: none;
+        outline: none;
+    }
+    .morecontent {
+        span {
+            display: none;
+        }
+    }
 }
 
 @include tab {
