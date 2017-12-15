@@ -769,7 +769,7 @@ function get_booking_chart() {
 				<p><?php esc_html_e( 'Pax', 'wp-travel' ) ?></p>
 			</div>
 			<div>
-				<strong class="wp-travel-top-countries"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
+				<strong class="wp-travel-top-countries wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
 				<p><?php esc_html_e( 'Countries', 'wp-travel' ) ?></p>
 			</div>
 			<div>
@@ -777,7 +777,6 @@ function get_booking_chart() {
 				<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ) ?></p>
 			</div>
 		</div>
-
 	</div>	
 	<?php
 }
