@@ -2,7 +2,7 @@
 global $post;
 
 $map_data = get_wp_travel_map_data();
-$settings = wp_traval_get_settings();
+$settings = wp_travel_get_settings();
 
 ?>
 <div class="location-wrap itineraries-tax-wrap">
@@ -17,9 +17,9 @@ $settings = wp_traval_get_settings();
   <?php if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) : ?>
   <input id="search-input" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
   <div id="gmap" style="width:100%;height:300px"></div>
-  <input type="hidden" name="wp_traval_location" id="wp-traval-location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
-  <input type="hidden" name="wp_traval_lat" id="wp-traval-lat" value="<?php echo esc_html( $map_data['lat'] ); ?>" >
-  <input type="hidden" name="wp_traval_lng" id="wp-traval-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
+  <input type="hidden" name="wp_travel_location" id="wp-travel-location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
+  <input type="hidden" name="wp_travel_lat" id="wp-travel-lat" value="<?php echo esc_html( $map_data['lat'] ); ?>" >
+  <input type="hidden" name="wp_travel_lng" id="wp-travel-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
 <?php else : ?>
   <div class="map-wrap">
   <p><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=itineraries&page=settings\">settings</a>" ) ?></p>

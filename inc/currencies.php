@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /** Return All Available Currencies. */
-function wp_traval_get_currency_list() {
+function wp_travel_get_currency_list() {
 	$currency = array(
 		'ALL' => 'Albania Lek',
 		'AFN' => 'Afghanistan Afghani',
@@ -130,12 +130,12 @@ function wp_traval_get_currency_list() {
 		'ZWD' => 'Zimbabwe Dollar',
 	);
 
-	return apply_filters( 'wp_traval_currencies', $currency );
+	return apply_filters( 'wp_travel_currencies', $currency );
 }
 
-function wp_traval_get_currency_symbol( $currency_code = null ) {
+function wp_travel_get_currency_symbol( $currency_code = null ) {
 	if ( ! $currency_code ) {
-		$settings = wp_traval_get_settings();
+		$settings = wp_travel_get_settings();
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 	}
 
@@ -308,7 +308,7 @@ function wp_traval_get_currency_symbol( $currency_code = null ) {
 		'ZWL' => '&#90;&#36;',
 	);
 
-	$currency_symbols = apply_filters( 'wp_traval_currency_symbols', $currency_symbols );
+	$currency_symbols = apply_filters( 'wp_travel_currency_symbols', $currency_symbols );
 
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
 		return $currency_symbols[ $currency_code ];

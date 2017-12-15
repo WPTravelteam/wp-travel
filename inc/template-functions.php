@@ -75,7 +75,7 @@ function wp_travel_content_filter( $content ) {
 	}
 	global $post;
 
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 
 	ob_start();
 	do_action( 'wp_travel_before_trip_details', $post, $settings );
@@ -169,13 +169,13 @@ function wp_travel_wrapper_end() {
  * @param int $post_id ID for current post.
  */
 function wp_travel_trip_price( $post_id, $hide_rating = false ) {
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 	$trip_price 	= wp_travel_get_trip_price( $post_id );
 
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	$sale_price 	= wp_travel_get_trip_sale_price( $post_id );
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text = wp_travel_get_price_per_text( $post_id );
 	?>
     <div class="wp-detail-review-wrap">
@@ -505,7 +505,7 @@ function wp_travel_trip_map( $post_id ) {
 	if ( ! $wp_travel_itinerary->get_location() ) {
 		return;
 	}
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 	if ( ! isset( $settings['google_map_api_key'] ) || '' === $settings['google_map_api_key'] ) {
 		return;
 	} ?>

@@ -25,9 +25,9 @@
                 geocoder.geocode({ 'latLng': latlng }, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[1]) {
-                            $('#wp-traval-lat').val(lat);
-                            $('#wp-traval-lng').val(lng);
-                            $('#wp-traval-location').val(results[1].formatted_address);
+                            $('#wp-travel-lat').val(lat);
+                            $('#wp-travel-lng').val(lng);
+                            $('#wp-travel-location').val(results[1].formatted_address);
                             $('#search-input').val(results[1].formatted_address);
                         }
                     }
@@ -59,9 +59,9 @@
             geocoder.geocode({ 'latLng': latlng }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[1]) {
-                        $('#wp-traval-lat').val(lat);
-                        $('#wp-traval-lng').val(lng);
-                        $('#wp-traval-location').val(results[1].formatted_address);
+                        $('#wp-travel-lat').val(lat);
+                        $('#wp-travel-lng').val(lng);
+                        $('#wp-travel-location').val(results[1].formatted_address);
                         $('#search-input').val(results[1].formatted_address);
                     }
                 }
@@ -82,9 +82,9 @@
                     geocoder.geocode({ 'latLng': latlng }, function(results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
                             if (results[1]) {
-                                $('#wp-traval-lat').val(lat);
-                                $('#wp-traval-lng').val(lng);
-                                $('#wp-traval-location').val(results[1].formatted_address);
+                                $('#wp-travel-lat').val(lat);
+                                $('#wp-travel-lng').val(lng);
+                                $('#wp-travel-location').val(results[1].formatted_address);
                                 $('#search-input').val(results[1].formatted_address);
                             }
                         }

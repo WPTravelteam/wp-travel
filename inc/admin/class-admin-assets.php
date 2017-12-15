@@ -77,7 +77,7 @@ class WP_Travel_Admin_Assets {
 		$allowed_screen = array( 'itineraries', 'edit-itineraries' );
 
 		if ( in_array( $screen->id, $allowed_screen ) ) {
-			$settings = wp_traval_get_settings();
+			$settings = wp_travel_get_settings();
 			global $post;
 
 			$map_data = get_wp_travel_map_data();
@@ -90,8 +90,8 @@ class WP_Travel_Admin_Assets {
 			if ( '' != $api_key ) {
 				$depencency[] = 'jquery-gmaps';
 			}
-			wp_enqueue_script( 'traval-door-script-2', $this->assets_path . 'assets/js/jquery.wptraveluploader' . $suffix . '.js', array( 'jquery' ), '1.0.0', true );
-			wp_register_script( 'traval-door-script', $this->assets_path . 'assets/js/wp-travel-back-end' . $suffix . '.js', $depencency, '', 1 );
+			wp_enqueue_script( 'travel-door-script-2', $this->assets_path . 'assets/js/jquery.wptraveluploader' . $suffix . '.js', array( 'jquery' ), '1.0.0', true );
+			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-back-end' . $suffix . '.js', $depencency, '', 1 );
 			if ( '' != $api_key ) {
 				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
 				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps' . $suffix . '.js', array( 'jquery', 'google-map-api' ), '', 1 );
@@ -113,7 +113,7 @@ class WP_Travel_Admin_Assets {
 			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_gallery_data );
 
 			// Enqueued script with localized data.
-			wp_enqueue_script( 'traval-door-script' );
+			wp_enqueue_script( 'travel-door-script' );
 			wp_enqueue_script( 'wp-travel-media-upload' );
 		}
 	}

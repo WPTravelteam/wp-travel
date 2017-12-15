@@ -83,10 +83,10 @@ class WP_Travel_Widget_Location extends WP_Widget {
 						</a>
 						<?php if ( wp_travel_is_enable_sale( $itinerary->ID ) ) : ?>
 							<del>
-								<span class="wp-travel-del-price"><?php printf( '%s %s', esc_html( wp_traval_get_currency_symbol() ), esc_html( wp_travel_get_trip_price( $itinerary->ID ) ) ) ?></span>
+								<span class="wp-travel-del-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_trip_price( $itinerary->ID ) ) ) ?></span>
 							</del>
 						<?php endif; ?>
-						<span class="wp-travel-trip-price"><?php printf( '%s %s', esc_html( wp_traval_get_currency_symbol() ), esc_html( wp_travel_get_actual_trip_price( $itinerary->ID ) ) ) ?></span>
+						<span class="wp-travel-trip-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_actual_trip_price( $itinerary->ID ) ) ) ?></span>
 					</div>
 				</li>
 			<?php endforeach; ?>

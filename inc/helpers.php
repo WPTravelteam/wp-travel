@@ -19,8 +19,8 @@ function wp_travel_get_gallery_ids( $post_id ) {
 	return $gallery_ids;
 }
 
-/** Return All Settings of WP Traval. */
-function wp_traval_get_settings() {
+/** Return All Settings of WP travel. */
+function wp_travel_get_settings() {
 	$settings = get_option( 'wp_travel_settings' );
 	return $settings;
 }
@@ -48,9 +48,9 @@ function wp_travel_get_trip_code( $post_id = null ) {
  * @param  array $args Arguments for dropdown list.
  * @return HTML  return dropdown list.
  */
-function wp_traval_get_dropdown_currency_list( $args = array() ) {
+function wp_travel_get_dropdown_currency_list( $args = array() ) {
 
-	$currency_list = wp_traval_get_currency_list();
+	$currency_list = wp_travel_get_currency_list();
 
 	$default = array(
 		'id'		=> '',
@@ -72,7 +72,7 @@ function wp_traval_get_dropdown_currency_list( $args = array() ) {
 
 		foreach ( $currency_list as $key => $currency ) {
 
-			$dropdown .= '<option value="' . $key . '" ' . selected( $args['selected'], $key, false ) . '  >' . $currency . ' (' . wp_traval_get_currency_symbol( $key ) . ')</option>';
+			$dropdown .= '<option value="' . $key . '" ' . selected( $args['selected'], $key, false ) . '  >' . $currency . ' (' . wp_travel_get_currency_symbol( $key ) . ')</option>';
 		}
 		$dropdown .= '</select>';
 
@@ -88,12 +88,12 @@ function wp_traval_get_dropdown_currency_list( $args = array() ) {
  * @param Int    $parent_id Parent ID of post.
  * @return Object Return Tree Form of post Object.
  */
-function wp_traval_build_post_tree( array &$elements, $parent_id = 0 ) {
+function wp_travel_build_post_tree( array &$elements, $parent_id = 0 ) {
 	$branch = array();
 
 	foreach ( $elements as $element ) {
 		if ( $element->post_parent == $parent_id ) {
-			$children = wp_traval_build_post_tree( $elements, $element->ID );
+			$children = wp_travel_build_post_tree( $elements, $element->ID );
 			if ( $children ) {
 				$element->children = $children;
 			}
@@ -105,7 +105,7 @@ function wp_traval_build_post_tree( array &$elements, $parent_id = 0 ) {
 }
 
 /**
- * [wp_traval_get_post_hierarchy_dropdown description]
+ * [wp_travel_get_post_hierarchy_dropdown description]
  *
  * @param  [type]  $list_serialized [description].
  * @param  [type]  $selected        [description].
@@ -113,7 +113,7 @@ function wp_traval_build_post_tree( array &$elements, $parent_id = 0 ) {
  * @param  boolean $echo            [description].
  * @return [type]                   [description]
  */
-function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level = 0, $echo = true ) {
+function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level = 0, $echo = true ) {
 	$contents = '';
 	if ( $list_serialized ) :
 
@@ -126,7 +126,7 @@ function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 
 			$contents .= '<option value="' . $content->ID . '" ' . selected( $selected, $content->ID, false ) . ' >' . $space . $content->post_title . '</option>';
 			if ( isset( $content->children ) ) {
-				$contents .= wp_traval_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ) , false );
+				$contents .= wp_travel_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ) , false );
 			}
 		}
 	endif;
@@ -142,9 +142,21 @@ function wp_traval_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
  */
 function get_wp_travel_map_data() {
 	global $post;
-	$lat = ( '' != get_post_meta( $post->ID, 'wp_traval_lat', true ) ) ? get_post_meta( $post->ID, 'wp_traval_lat', true ) :'';
-	$lng = ( '' != get_post_meta( $post->ID, 'wp_traval_lng', true ) ) ? get_post_meta( $post->ID, 'wp_traval_lng', true ) : '';
-	$loc = ( '' != get_post_meta( $post->ID, 'wp_traval_location', true ) ) ? get_post_meta( $post->ID, 'wp_traval_location', true ) : '';
+	// For legacy version upto 1.0.4.
+	$lat = get_post_meta( $post->ID, 'wp_traval_lat', true );
+	$lng = get_post_meta( $post->ID, 'wp_traval_lng', true );
+	$loc = get_post_meta( $post->ID, 'wp_traval_location', true );
+
+	// For version greater than 1.0.4.
+	if ( ! $lat ) {
+		$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) :'';
+	}
+	if ( ! $lng ) {
+		$lng = ( '' != get_post_meta( $post->ID, 'wp_travel_lng', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lng', true ) : '';
+	}
+	if ( ! $loc ) {
+		$loc = ( '' != get_post_meta( $post->ID, 'wp_travel_location', true ) ) ? get_post_meta( $post->ID, 'wp_travel_location', true ) : '';
+	}
 
 	$map_meta = array(
 		'lat' => $lat,
@@ -154,7 +166,12 @@ function get_wp_travel_map_data() {
 	return $map_meta;
 }
 
-
+/**
+ * Return Related post HTML.
+ *
+ * @param Number $post_id Post ID of current post.
+ * @return void
+ */
 function wp_travel_get_related_post( $post_id ) {
 
 	if ( ! $post_id ) {
@@ -163,14 +180,14 @@ function wp_travel_get_related_post( $post_id ) {
 
 	/* TODO: Add global Settings to show/hide related post. */
 
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 	$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
 
 	if ( 'yes' === $hide_related_itinerary ) {
 		return;
 	}
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
 	// For use in the loop, list 5 post titles related to first tag on current post.
 	$terms = wp_get_object_terms( $post_id, 'itinerary_types' );
@@ -649,9 +666,9 @@ function wp_travel_get_booking_data() {
 	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
 		$from_date = $_REQUEST['booking_stat_from'];
 	}
-	$to_date = '';
+	$to_date = date( 'Y-m-d H:i:s' );
 	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
-		$to_date = $_REQUEST['booking_stat_to'];
+		$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
 	}
 	$country = '';
 	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {

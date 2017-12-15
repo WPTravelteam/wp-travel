@@ -27,9 +27,9 @@
 	printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=itinerary_types&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Trip Type', 'wp-travel' ) );
 	echo '</div>';
 
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] :'';
-	$currency_symbol = wp_traval_get_currency_symbol( $currency_code );
+	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
 	$price_per = get_post_meta( $post->ID, 'wp_travel_price_per', true );
 	if ( ! $price_per ) {

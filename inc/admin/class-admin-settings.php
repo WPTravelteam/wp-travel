@@ -100,7 +100,7 @@ class WP_Travel_Admin_Settings {
 		if ( 'general' !== $tab ) {
 			return;
 		}
-		$currency_list = wp_traval_get_currency_list();
+		$currency_list = wp_travel_get_currency_list();
 		$currency = ( isset( $args['settings']['currency'] ) && '' != $args['settings']['currency'] ) ? $args['settings']['currency'] : 'USD';
 		$google_map_api_key = isset( $args['settings']['google_map_api_key'] ) ? $args['settings']['google_map_api_key'] : '';
 		$currency_args = array(
@@ -117,7 +117,7 @@ class WP_Travel_Admin_Settings {
 					echo '<label for="currency">' . esc_html__( 'Currency', 'wp-travel' ) . '</label>';
 				echo '</th>';
 				echo '<td>';
-					echo wp_traval_get_dropdown_currency_list( $currency_args );
+					echo wp_travel_get_dropdown_currency_list( $currency_args );
 					echo '<p class="description">' . esc_html__( 'Choose your currency', 'wp-travel' ) . '</p>';
 				echo '</td>';
 			echo '<tr>';

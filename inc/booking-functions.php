@@ -519,7 +519,7 @@ EOS;
 }
 
 /** Send Email after clicking Book Now. */
-function wp_traval_book_now() {
+function wp_travel_book_now() {
 	if ( ! isset( $_POST[ 'wp_travel_book_now' ] ) ) {
 		return;
 	}
@@ -586,7 +586,7 @@ function wp_traval_book_now() {
 	 * @since 1.0.5 // For Payment.
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
-	$settings = wp_traval_get_settings();
+	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
@@ -713,14 +713,14 @@ function get_booking_chart() {
 						<span><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
 						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date, 'wp-travel' ) ?>">
 						<label class="input-group-addon btn" for="testdate">
-						<span class="fa fa-calendar"></span>
+						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>        
 					</p>
 					<p class="field-group">
 						<span><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
 						<input type="text" name="booking_stat_to" id="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date, 'wp-travel' ) ?>"/>
 						<label class="input-group-addon btn" for="testdate">
-						<span class="fa fa-calendar"></span>
+						<span class="dashicons dashicons-calendar-alt"></span>
 						</label> 
 					</p>
 					<p class="field-group">

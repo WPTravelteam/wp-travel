@@ -313,23 +313,23 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, '_thumbnail_id', $wp_travel_thumbnail_id );
 		}
 
-		if ( isset( $_POST['wp_traval_location'] ) ) {
-			$wp_traval_location = sanitize_text_field( wp_unslash( $_POST['wp_traval_location'] ) );
-			update_post_meta( $post_id, 'wp_traval_location', $wp_traval_location );
+		if ( isset( $_POST['wp_travel_location'] ) ) {
+			$wp_travel_location = sanitize_text_field( wp_unslash( $_POST['wp_travel_location'] ) );
+			update_post_meta( $post_id, 'wp_travel_location', $wp_travel_location );
 		}
 
-		if ( isset( $_POST['wp_traval_lat'] ) ) {
-			$wp_traval_lat = sanitize_text_field( wp_unslash( $_POST['wp_traval_lat'] ) );
-			update_post_meta( $post_id, 'wp_traval_lat', $wp_traval_lat );
+		if ( isset( $_POST['wp_travel_lat'] ) ) {
+			$wp_travel_lat = sanitize_text_field( wp_unslash( $_POST['wp_travel_lat'] ) );
+			update_post_meta( $post_id, 'wp_travel_lat', $wp_travel_lat );
 		}
 
-		if ( isset( $_POST['wp_traval_lng'] ) ) {
-			$wp_traval_lng = sanitize_text_field( wp_unslash( $_POST['wp_traval_lng'] ) );
-			update_post_meta( $post_id, 'wp_traval_lng', $wp_traval_lng );
+		if ( isset( $_POST['wp_travel_lng'] ) ) {
+			$wp_travel_lng = sanitize_text_field( wp_unslash( $_POST['wp_travel_lng'] ) );
+			update_post_meta( $post_id, 'wp_travel_lng', $wp_travel_lng );
 		}
-		if ( isset( $_POST['wp_traval_location_id'] ) ) {
-			$wp_traval_location_id = sanitize_text_field( wp_unslash( $_POST['wp_traval_location_id'] ) );
-			update_post_meta( $post_id, 'wp_traval_location_id', $wp_traval_location_id );
+		if ( isset( $_POST['wp_travel_location_id'] ) ) {
+			$wp_travel_location_id = sanitize_text_field( wp_unslash( $_POST['wp_travel_location_id'] ) );
+			update_post_meta( $post_id, 'wp_travel_location_id', $wp_travel_location_id );
 		}
 	
 		$fixed_departure = 'no';

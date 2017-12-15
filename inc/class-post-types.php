@@ -45,7 +45,7 @@ class WP_Travel_Post_Types {
 			'menu_icon'          => 'dashicons-location',
 		);
 		/**
-		 * Register a travaldoor_trip post type.
+		 * Register a itineraries post type.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
@@ -88,7 +88,7 @@ class WP_Travel_Post_Types {
 			'with_front'		 => true,
 		);
 		/**
-		 * Register a travaldoor_trip post type.
+		 * Register a itinerary-booking post type.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */

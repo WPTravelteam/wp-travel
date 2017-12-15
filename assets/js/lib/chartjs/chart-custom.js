@@ -61,7 +61,9 @@ jQuery(document).ready(function($) {
         onSelect: function(dateStr) {
             newMinDate = null;
             newMaxDate = new Date();
+            $('#datepicker-to').removeAttr('required');
             if ('' !== dateStr) {
+                $('#datepicker-to').attr('required', 'required');
                 new_date_min = new Date(dateStr);
                 new_date_max = new Date(dateStr);
 
@@ -85,7 +87,9 @@ jQuery(document).ready(function($) {
         onSelect: function(dateStr) {
             newMinDate = new Date();
             newMaxDate = null;
+            $('#datepicker-from').removeAttr('required');
             if ('' !== dateStr) {
+                $('#datepicker-from').attr('required', 'required');
                 new_date_min = new Date(dateStr);
                 new_date_max = new Date(dateStr);
 

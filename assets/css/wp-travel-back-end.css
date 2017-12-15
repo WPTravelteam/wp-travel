@@ -112,17 +112,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     display: block; }
   .wp-travel-form-field input, .wp-travel-form-field select, .wp-travel-form-field .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field input, .wp-travel-form-field textarea {
     width: 100%;
-    color: #666;
-    border: 1px solid rgba(221, 221, 221, 0.32);
+    color: #32373c;
+    border: 1px solid #ddd;
     border-radius: 3px;
     padding: 5px 10px;
     height: 38px;
     font-weight: 300;
-    box-shadow: none; }
+    box-shadow: none;
+    font-family: arial; }
     .wp-travel-form-field input[type="radio"], .wp-travel-form-field select[type="radio"], .wp-travel-form-field textarea[type="radio"] {
       width: 16px;
       height: 16px;
       border-color: inherit; }
+  .wp-travel-form-field select, .wp-travel-form-field .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field input, .stat-toolbar-form .field-group .wp-travel-form-field select, .wp-travel-form-field .stat-toolbar-form .field-group select, .stat-toolbar-form .field-group .wp-travel-form-field textarea, .wp-travel-form-field .stat-toolbar-form .field-group textarea {
+    cursor: pointer; }
   .wp-travel-form-field textarea {
     height: auto; }
   .wp-travel-form-field .wp-travel-field-before.wp-travel-currency-symbol {
@@ -213,9 +216,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .stat-toolbar-form .field-group {
     padding: 0 10px;
     width: calc( 25% - 25px);
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    position: relative; }
     .stat-toolbar-form .field-group select, .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field textarea, .wp-travel-form-field .stat-toolbar-form .field-group textarea {
       width: 100%; }
+    .stat-toolbar-form .field-group .input-group-addon {
+      position: absolute;
+      right: 10px;
+      top: 25px; }
+      .stat-toolbar-form .field-group .input-group-addon .dashicons {
+        font-size: 16px; }
   .stat-toolbar-form .show-all {
     padding-left: 20px; }
   .stat-toolbar-form .btn.btn-show-all {
@@ -226,7 +236,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     position: relative;
     top: 18px;
     float: right;
-    border: none; }
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s  ease-in-out;
+    -webkit-transition: all 0.4s  ease-in-out;
+    -moz-transition: all 0.4s  ease-in-out; }
+    .stat-toolbar-form .btn.btn-show-all:hover {
+      background: #006799;
+      box-shadow: 0px 0px 20px 0px #0067994a; }
 
 #wp-travel-booking-canvas {
   background: #fff;
