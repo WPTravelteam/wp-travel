@@ -256,3 +256,28 @@ function wp_travel_get_countries() {
 
 	return apply_filters( 'wp_travel_country_list', $countries );
 }
+
+/**
+ * Return Country by country code
+ *
+ * @param Mixed $country_code Array or string.
+ * @since 1.0.5
+ * @return void
+ */
+function wp_travel_get_country_by_code( $country_code ) {
+	if ( ! $country_code ) {
+		return;
+	}
+
+	$all_countries = wp_travel_get_countries();
+	if ( ! is_array( $country_code ) ) {
+		return $all_countries[ $country_code ];
+	} else {
+		$countries = array();
+		foreach ( $country_code as $code ) {
+			$countries[] = $all_countries[ $code ];
+		}
+		return $countries;
+	}
+
+}
