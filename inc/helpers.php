@@ -743,14 +743,10 @@ function wp_travel_get_booking_data() {
 
 			$stat_data['data'][] = $result->no_of_booking;
 			$stat_data['labels'][] = $label_date;
-
-			if ( $result->no_of_booking > $max_bookings ) {
-				$max_bookings = $result->no_of_booking;
-			}
-
-			if ( $result->no_of_pax > $max_pax ) {
-				$max_pax = $result->no_of_pax;
-			}
+			
+			$max_bookings += ( int ) $result->no_of_booking;
+			$max_pax += ( int ) $result->no_of_pax;
+			
 		}
 	}
 	// End of Booking Data Default Query.
@@ -810,7 +806,7 @@ function wp_travel_get_booking_data() {
 	// End of query for top Itinerary.
 	$stat_data['max_bookings']  = $max_bookings;
 	$stat_data['max_pax']       = $max_pax;
-	$stat_data['top_countries'] = $top_countries;
+	$stat_data['top_countries'] = wp_travel_get_country_by_code( $top_countries );
 	$stat_data['top_itinerary'] = $top_itinerary;
 
 	return $stat_data;
