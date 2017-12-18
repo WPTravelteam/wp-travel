@@ -550,7 +550,7 @@ function wp_travel_book_now() {
 	$new_booking_count = $booking_count + 1;
 	update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
 
-	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now' );
+	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
 	foreach ( $_POST as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name , $post_ignore ) ) {
 			continue;
@@ -573,10 +573,10 @@ function wp_travel_book_now() {
 		$order_ids = get_post_meta( $_POST['wp_travel_post_id'], 'order_ids', true );
 
 		if ( ! $order_ids ) {
-			$order_ids = [];
+			$order_ids = array();
 		}
 
-		array_push( $order_ids, [ 'order_id' => $order_id, 'count' => $_POST['wp_travel_pax'], 'date' => $_POST['wp_travel_date'] ] );
+		array_push( $order_ids, array( 'order_id' => $order_id, 'count' => $_POST['wp_travel_pax'], 'date' => $_POST['wp_travel_date'] ) );
 
 		update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
 	}
@@ -683,7 +683,7 @@ function wp_travel_book_now() {
 			'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 		) );
 	}
-	header( 'Location: ' . $_SERVER['REDIRECT_URL'] . '?' . http_build_query( [ 'booked' => true ] ) );
+	header( 'Location: ' . $_SERVER['REDIRECT_URL'] . '?' . http_build_query( array( 'booked' => true ) ) );
 	exit;
 }
 
