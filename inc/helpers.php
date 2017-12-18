@@ -142,21 +142,9 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
  */
 function get_wp_travel_map_data() {
 	global $post;
-	// For legacy version upto 1.0.4.
-	$lat = get_post_meta( $post->ID, 'wp_traval_lat', true );
-	$lng = get_post_meta( $post->ID, 'wp_traval_lng', true );
-	$loc = get_post_meta( $post->ID, 'wp_traval_location', true );
-
-	// For version greater than 1.0.4.
-	if ( ! $lat ) {
-		$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) :'';
-	}
-	if ( ! $lng ) {
-		$lng = ( '' != get_post_meta( $post->ID, 'wp_travel_lng', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lng', true ) : '';
-	}
-	if ( ! $loc ) {
-		$loc = ( '' != get_post_meta( $post->ID, 'wp_travel_location', true ) ) ? get_post_meta( $post->ID, 'wp_travel_location', true ) : '';
-	}
+	$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) :'';
+	$lng = ( '' != get_post_meta( $post->ID, 'wp_travel_lng', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lng', true ) : '';
+	$loc = ( '' != get_post_meta( $post->ID, 'wp_travel_location', true ) ) ? get_post_meta( $post->ID, 'wp_travel_location', true ) : '';
 
 	$map_meta = array(
 		'lat' => $lat,
