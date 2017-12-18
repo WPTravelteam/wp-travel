@@ -799,3 +799,35 @@ function wp_travel_get_booking_data() {
 
 	return $stat_data;
 }
+
+/**
+ * Get Booking Status List.
+ *
+ * @since 1.0.5
+ */
+function wp_travel_get_booking_status() {
+	$status = array(
+		'booked' => array( 'color' => '#FF9F33', 'text' => __( 'Booked', 'wp-travel' ) ),
+		'pending' => array( 'color' => '#FF8A33', 'text' => __( 'Pending', 'wp-travel' ) ),
+		'paid' => array( 'color' => '#1DFE0E', 'text' => __( 'Paid', 'wp-travel' ) ),
+		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
+		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+	);
+
+	return apply_filters( 'wp_travel_booking_status_list', $status );
+}
+
+/**
+ * Get Payment Mode List.
+ *
+ * @since 1.0.5
+ */
+function wp_travel_get_payment_mode() {
+	$mode = array(
+		'partial' => array( 'color' => '#FF9F33', 'text' => __( 'Partial', 'wp-travel' ) ),
+		'full' => array( 'color' => '#FF8A33', 'text' => __( 'Full', 'wp-travel' ) ),
+		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+	);
+
+	return apply_filters( 'wp_travel_payment_mode_list', $mode );
+}
