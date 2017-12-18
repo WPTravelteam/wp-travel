@@ -225,11 +225,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						$trip_price = wp_travel_get_trip_sale_price( $post_id );
 					} else {
 						$trip_price = wp_travel_get_trip_price( $post_id );
-					}
-					// echo $trip_price . "<br>";
+					}					
 					update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );
 				}
 			}
+			include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
 		}
 
 		function wp_travel_setup_environment () {
