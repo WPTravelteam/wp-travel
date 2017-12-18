@@ -88,6 +88,7 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 * New Feature: Compatibility with WP Travel Paypal addons.
 * New Feature: Added Form field for radio and checkbox input.
 * New Feature: Added PAX field in Booking form.
+* Fixes: PHP error on lower PHP version.
 * Fixes: Layout issue [itinerary list per row on grid view ].
 * Fixes: Backend Map issue.
 * Fixes: Minor fixes.
