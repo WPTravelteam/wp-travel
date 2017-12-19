@@ -26,7 +26,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 	 */
 	function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Trips By Type', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Trips by Type', 'wp-travel' ) );
 		$this->no_of_trip_show = 2;
 		$this->trip_per_row = 1;
 	}

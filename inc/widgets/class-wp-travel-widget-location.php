@@ -26,7 +26,7 @@ class WP_Travel_Widget_Location extends WP_Widget {
 	 */
 	function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Trips By Location', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Trips by Location', 'wp-travel' ) );
 		$this->no_of_trip_show = 2;
 		$this->trip_per_row = 1;
 	}
