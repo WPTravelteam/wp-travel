@@ -703,30 +703,30 @@ function get_booking_chart() {
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
 	?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Statististics' ); ?></h2>
+		<h2><?php esc_html_e( 'Statistics' ); ?></h2>
 		<div class="left-block">
 			<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
 					<input type="hidden" name="post_type" value="itineraries" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group">
-						<span><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
 						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date, 'wp-travel' ) ?>">
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>        
 					</p>
 					<p class="field-group">
-						<span><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
 						<input type="text" name="booking_stat_to" id="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date, 'wp-travel' ) ?>"/>
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label> 
 					</p>
 					<p class="field-group">
-						<span><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
 
-						<select class="selectpicker" name="booking_country">
+						<select class="selectpicker form-control" name="booking_country">
 						
 							<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
 							
@@ -739,8 +739,8 @@ function get_booking_chart() {
 
 					</p>
 					<p class="field-group">
-						<span><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
-						<select class="selectpicker" name="booking_itinerary">
+						<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
+						<select class="selectpicker form-control" name="booking_itinerary">
 							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
 							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 								<option value="<?php echo esc_html( $itinerary_id, 'wp-travel' ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
