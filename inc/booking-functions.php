@@ -703,7 +703,7 @@ function get_booking_chart() {
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
 	?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Statistics' ); ?></h2>
+		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
 		<div class="left-block">
 			<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
