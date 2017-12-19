@@ -1181,7 +1181,6 @@
     .widget .wp-travel-itinerary-widget li .wp-travel-itinerary-info {
       width: calc( 65% - 10px);
       margin-left: 10px;
-      margin-top: 14px;
       float: left;
       display: inline-block; }
       .widget .wp-travel-itinerary-widget li .wp-travel-itinerary-info .wp-travel-title {
