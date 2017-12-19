@@ -335,11 +335,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         width: calc( 25% - 25px);
         box-sizing: border-box;
         position: relative;
+        .field-label {
+            cursor: pointer;
+        }
         select {
             width: 100%;
         }
         input {
             @extend select;
+            &[readonly] {
+                background: #fff;
+            }
         }
         .input-group-addon {
             position: absolute;
