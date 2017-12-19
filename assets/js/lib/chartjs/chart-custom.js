@@ -49,6 +49,9 @@ jQuery(document).ready(function($) {
     $('.wp-travel-max-pax').html(wp_travel_chart_data.max_pax);
     $('.wp-travel-top-countries').html(wp_travel_chart_data.top_countries);
 
+    $('#datepicker-from').val(wp_travel_chart_data.booking_stat_from);
+    $('#datepicker-to').val(wp_travel_chart_data.booking_stat_to);
+
     var edit_url = 'javascript:void(0)';
     if (wp_travel_chart_data.top_itinerary.id) {
         edit_url = 'post.php?post=' + wp_travel_chart_data.top_itinerary.id + '&action=edit';
