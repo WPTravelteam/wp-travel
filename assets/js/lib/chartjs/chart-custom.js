@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
                 maxDate: newMaxDate,
             });
         }
-    });
+    }).attr('readonly', 'readonly');
 
     $('#datepicker-to').datepicker({
         language: 'en',
@@ -106,6 +106,10 @@ jQuery(document).ready(function($) {
             });
         }
 
+    }).attr('readonly', 'readonly');
+
+    $('.stat-toolbar-form .dashicons-calendar-alt, .stat-toolbar-form .field-label').on('click', function() {
+        $(this).closest('.field-group').children('.form-control').focus();
     });
 
     // Show more link on top country
