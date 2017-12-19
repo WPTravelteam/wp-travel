@@ -1122,7 +1122,6 @@ function wp_travel_clear_booking_stat_transient( $post_id ) {
 		return;
 	}
 	$post_type = get_post_type($post_id);
-	echo 'save 1';
 	// If this isn't a 'book' post, don't update it.
 	if ( 'itinerary-booking' != $post_type ) {
 		return;
