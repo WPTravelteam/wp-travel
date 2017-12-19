@@ -32,7 +32,7 @@ WP Travel plugin is very flexible and highly customizable. There are a number of
 
 
 = Dedicated Support and Documentation =
-We have an entire team of happiness engineers ready to help you. Ask your questions in the support forum, or [contact us directly](http://wensolutions.com/support/).
+We have an entire team of happiness engineers ready to help you. Ask your questions in the support forum, or [contact us directly](http://wptravel.io/support-forum/forum/wp-travel/).
 
 Also you can checkout WP Travel [documentation](http://wensolutions.com/documentation/wp-travel/).
 
@@ -59,7 +59,7 @@ Also you can checkout WP Travel [documentation](http://wensolutions.com/document
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
-Nice, send us request on [Support page](http://wensolutions.com/support/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
+Nice, send us request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 == Screenshots ==
 1. Backend: New itinerary
