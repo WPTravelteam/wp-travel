@@ -48,6 +48,8 @@ class WP_Travel_Admin_Assets {
 			$top_countries = ( isset( $booking_data['top_countries'] ) && count( $booking_data['top_countries'] )  > 0 ) ? $booking_data['top_countries'] : array( 'N/A' );
 			$top_itinerary = ( isset( $booking_data['top_itinerary'] ) && count( $booking_data['top_itinerary'] )  > 0 ) ? $booking_data['top_itinerary'] : array( 'name' => esc_html__( 'N/A', 'wp-travel' ), 'url' => '' );
 
+			$booking_stat_from = isset( $booking_data['booking_stat_from'] ) ? $booking_data['booking_stat_from'] : '';
+			$booking_stat_to = isset( $booking_data['booking_stat_to'] ) ? $booking_data['booking_stat_to'] : '';
 			// $data = array(5,10,3,6,9,8,2,11,13,9,7,15,16,16,13,18,20,21,26,15,13,16,18,7,15,16,16,6,9,8);
 			// $labels = array('Dec 01, 2017','Dec 02, 2017','Dec 03, 2017','Dec 04, 2017','Dec 05, 2017','Dec 06, 2017','Dec 07, 2017','Dec 08, 2017','Dec 09, 2017','Dec 10, 2017','Dec 11, 2017','Dec 12, 2017','Dec 13, 2017','Dec 14, 2017','Dec 15, 2017','Dec 16, 2017','Dec 17, 2017','Dec 18, 2017','Dec 19, 2017','Dec 20, 2017','Dec 21, 2017','Dec 22, 2017','Dec 23, 2017','Dec 24, 2017','Dec 25, 2017','Dec 26, 2017','Dec 27, 2017','Dec 28, 2017','Dec 29, 2017','Dec 30, 2017');
 			$wp_travel_chart_data = array(
@@ -73,6 +75,9 @@ class WP_Travel_Admin_Assets {
 				'show_more_text' => __( 'More', 'wp-travel' ),
 				'show_less_text' => __( 'Less', 'wp-travel' ),
 				'show_char' => 18,
+
+				'booking_stat_from' => $booking_stat_from,
+				'booking_stat_to' => $booking_stat_to,
 			);
 			$wp_travel_chart_data = apply_filters( 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
