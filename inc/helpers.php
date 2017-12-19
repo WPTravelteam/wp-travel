@@ -478,7 +478,7 @@ function wp_travel_search_form() {
 			<input type="hidden" name="post_type" value="itineraries" />
 			<p>
 				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
-				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_html_e( apply_filters( 'wp_travel_search_placeholder', 'wp-travel' ), 'wp-travel' ) ?>">
+				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php esc_attr_e( apply_filters( 'wp_travel_search_placeholder', 'Eg : Trekking' ), 'wp-travel' ) ?>">
 			</p>
 			<p>
 				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
@@ -654,7 +654,7 @@ function wp_travel_get_booking_data() {
 	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
 		$from_date = $_REQUEST['booking_stat_from'];
 	}
-	$to_date = date( 'Y-m-d H:i:s' );
+	$to_date = '';
 	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
 		$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
 	}
@@ -724,6 +724,7 @@ function wp_travel_get_booking_data() {
 
 	$max_bookings = 0;
 	$max_pax = 0;
+	$booking_stat_from = $booking_stat_to = date( 'm/d/Y' );
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		foreach ( $results as $result ) {
 			$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
@@ -731,12 +732,29 @@ function wp_travel_get_booking_data() {
 
 			$stat_data['data'][] = $result->no_of_booking;
 			$stat_data['labels'][] = $label_date;
-			
+
 			$max_bookings += ( int ) $result->no_of_booking;
 			$max_pax += ( int ) $result->no_of_pax;
-			
+
+			if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
+
+				$booking_stat_from = date( 'm/d/Y', strtotime( $label_date ) );
+			}
+
+			if ( strtotime( $booking_stat_to ) < strtotime( $label_date ) ) {
+				$booking_stat_to = date( 'm/d/Y', strtotime( $label_date ) );
+			}
 		}
 	}
+	// echo $booking_stat_from;die;
+	if ( '' !== $from_date ) {
+		$booking_stat_from = date( 'm/d/Y', strtotime( $from_date ) );
+	}
+
+	if ( '' !== $to_date ) {
+		$booking_stat_to = date( 'm/d/Y', strtotime( $to_date ) );
+	}
+
 	// End of Booking Data Default Query.
 	// Query for top country.
 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_top_country' );
@@ -796,6 +814,9 @@ function wp_travel_get_booking_data() {
 	$stat_data['max_pax']       = $max_pax;
 	$stat_data['top_countries'] = wp_travel_get_country_by_code( $top_countries );
 	$stat_data['top_itinerary'] = $top_itinerary;
+
+	$stat_data['booking_stat_from'] = $booking_stat_from;
+	$stat_data['booking_stat_to'] = $booking_stat_to;
 
 	return $stat_data;
 }
