@@ -703,7 +703,7 @@ function get_booking_chart() {
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
 	?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Booking Stat' ); ?></h2>
+		<h2><?php esc_html_e( 'Statististics' ); ?></h2>
 		<div class="left-block">
 			<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
@@ -750,7 +750,7 @@ function get_booking_chart() {
 						</select>
 					</p>
 					<p class="show-all">
-						<input type="submit" class="btn btn-show-all" value="<?php esc_attr_e( 'Show All', 'wp-travel' ) ?>" >						
+						<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
 					</p>
 				</form>
 			</div>			
