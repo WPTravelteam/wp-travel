@@ -3,8 +3,8 @@ Contributors: WEN Solutions
 Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
-Tested up to: 4.9
-Stable tag: 1.0.4
+Tested up to: 4.9.1
+Stable tag: 1.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -32,7 +32,7 @@ WP Travel plugin is very flexible and highly customizable. There are a number of
 
 
 = Dedicated Support and Documentation =
-We have an entire team of happiness engineers ready to help you. Ask your questions in the support forum, or [contact us directly](http://wptravel.io/support-forum/forum/wp-travel/).
+We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/).
 
 Also you can checkout WP Travel [documentation](http://wensolutions.com/documentation/wp-travel/).
 
