@@ -152,6 +152,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/booking-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/helpers.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/deprecated-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
