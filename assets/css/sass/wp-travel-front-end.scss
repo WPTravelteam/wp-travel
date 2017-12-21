@@ -134,7 +134,7 @@
     padding: 0;
     position: relative;
     @include mob {
-        padding: 20px 10px 10px !important;
+        padding: 20px 0px 10px !important;
     }
     .tab-list.resp-tabs-list {
         margin: 0px;
@@ -282,6 +282,7 @@
                         font-weight: inherit;
                     }
                 }
+
                 &.full-width {
                     width: calc(100% - 5px);
                 }
@@ -399,8 +400,9 @@
     .right-plot-inner-wrap {
         padding: 0 25px 30px;
         @include sidr-view {
-            padding: 25px 10px;
+            padding: 25px 0px;
         }
+
     }
     .banner-image-wrapper {
         height: 100%;
@@ -760,9 +762,10 @@
         -webkit-flex-flow: row wrap;
         -ms-flex-flow: row wrap;
         -moz-flex-flow: row wrap;
+        margin: 0 -10px;
         @include sidr-view {}
         @include mob {
-            margin-left: 0!important;
+            margin: 0!important;
             padding-left: 0!important;
         }
         &.itinerary-1-per-row li {
@@ -1517,9 +1520,10 @@
             -moz-flex-flow: row wrap;
             justify-content: left;
             padding-left: 0;
+            margin: 0 -10px;
             @include sidr-view {}
             @include mob {
-                margin-left: 0!important;
+                margin: 0!important;
                 padding-left: 0!important;
             }
         }
