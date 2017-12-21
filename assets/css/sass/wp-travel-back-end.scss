@@ -397,6 +397,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
+.form-table {
+    th {
+        font-weight: normal
+    }
+}
+
 @include tab {
     .left-block,
     .right-block {

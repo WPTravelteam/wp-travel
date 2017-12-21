@@ -260,6 +260,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-more .morecontent span {
   display: none; }
 
+.form-table th {
+  font-weight: normal; }
+
 @media (max-width: 1024px) {
   .left-block,
   .right-block {
