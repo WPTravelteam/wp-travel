@@ -1158,7 +1158,7 @@ add_filter( 'template_include', 'wp_travel_template_loader' );
 add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
 add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
 
-add_action( 'wp_travel_before_main_content', 'wp_travel_booking_message' );
+add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
 
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
 // Filters HTML.

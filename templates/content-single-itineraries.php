@@ -28,6 +28,8 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
+
+do_action( 'wp_travel_before_content_start');
 ?>
 
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
