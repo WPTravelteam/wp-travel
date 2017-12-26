@@ -80,6 +80,10 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixes: Booking Stat issue with query.
+* Fixes: Minor layout issue.
+
 = 1.0.5 =
 * New Feature: Booking Stat.
 * New Feature: Featured itinerary widget.
