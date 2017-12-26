@@ -119,7 +119,7 @@ function wp_travel_booking_form_fields() {
 			'class' => 'wp-travel-trip-duration',
 			'validations' => array(
 				'required' => true,
-				'min' => '1',
+				'min' => 1,
 			),
 			'attributes' => array( 'min' => 1 ),
 			'priority' => 70,
@@ -132,7 +132,7 @@ function wp_travel_booking_form_fields() {
 			'default' => 1,
 			'validations' => array(
 				'required' => '',
-				'min' => '1',				
+				'min' => 1,				
 			),
 			'attributes' => array( 'min' => 1 ),
 			'priority' => 81,
@@ -283,13 +283,19 @@ function wp_travel_booking_info( $post ) {
 					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
 
 				}
+				$attributes = '';				
+				if ( isset( $field['attributes'] ) ) {					
+					foreach ( $field['attributes'] as $attribute => $attribute_val ) {
+						$attributes .= sprintf( '%s=%s ', $attribute, $attribute_val );
+					}
+				}
 				switch ( $field_type ) {
 					case 'select': ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
 						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
 							<?php $options = $field['options']; ?>
 							<?php if ( count( $options ) > 0 ) : ?>
-							<select id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>">
+							<select <?php echo esc_attr( $attributes ) ?> id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>">
 								<?php foreach ( $options as $short_name => $name ) : ?>
 									<option <?php selected( $input_val, $short_name ); ?> value="<?php echo esc_attr( $short_name, 'wp-travel' ) ?>"><?php esc_html_e( $name, 'wp-travel' ) ?></option>
 								<?php endforeach; ?>
@@ -316,25 +322,25 @@ function wp_travel_booking_info( $post ) {
 					<?php case 'textarea' : ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
 						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
-							<textarea name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val, 'wp-travel' ); ?></textarea>
+							<textarea <?php echo esc_attr( $attributes ) ?> name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val, 'wp-travel' ); ?></textarea>
 						</div>
 					<?php break; ?>
 					<?php case 'date' : ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
 							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
-							<input class="wp-travel-date" type="text" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+							<input <?php echo esc_attr( $attributes ) ?> class="wp-travel-date" type="text" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
 						</div>
 					<?php break; ?>
 					<?php case 'hidden' : ?>
 						
-						<input type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+						<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
 						
 					<?php break; ?>
 					<?php default : ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
 							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
 							<?php echo $before_field; ?>
-							<input type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+							<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
 						</div>
 					<?php break;
 				}
