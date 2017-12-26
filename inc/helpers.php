@@ -708,12 +708,10 @@ function wp_travel_get_booking_data() {
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
-			group by P.ID
+			group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
 		) Booking 
 		where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
-
 		$results =  $wpdb->get_results( $query );
-
 		// set initial load transient for stat data.
 		if ( $initial_load && ! $initial_transient ) {
 			set_site_transient( '_transient_wt_booking_stat_data', $results );
@@ -747,7 +745,6 @@ function wp_travel_get_booking_data() {
 			}
 		}
 	}
-	// echo $booking_stat_from;die;
 	if ( '' !== $from_date ) {
 		$booking_stat_from = date( 'm/d/Y', strtotime( $from_date ) );
 	}
@@ -765,7 +762,7 @@ function wp_travel_get_booking_data() {
 			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-			group by P.ID
+			group by P.ID, C.country, I.itinerary_id
 		) Booking 
 		where post_type='itinerary-booking' AND post_status='publish' {$top_country_where}  group by country order by no_of_booking desc";
 
@@ -791,7 +788,7 @@ function wp_travel_get_booking_data() {
 			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-			group by P.ID
+			group by P.ID, C.country, I.itinerary_id
 		) Booking 
 		where post_type='itinerary-booking' AND post_status='publish' {$top_itinerary_where}  group by itinerary_id order by no_of_booking desc";
 
