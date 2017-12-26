@@ -1130,6 +1130,9 @@ function wp_travel_clear_booking_stat_transient( $post_id ) {
 	delete_site_transient( '_transient_wt_booking_stat_data' );
 	delete_site_transient( '_transient_wt_booking_top_country' );
 	delete_site_transient( '_transient_wt_booking_top_itinerary' );
+
+	// @since 1.0.6
+	do_action( 'wp_travel_after_deleting_booking_transient' );
 }
 
 // Hooks.
