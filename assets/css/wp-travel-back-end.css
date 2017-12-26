@@ -131,7 +131,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-form-field .wp-travel-field-before.wp-travel-currency-symbol {
     position: absolute;
     top: 33px;
-    left: 5px; }
+    left: 0px; }
 
 .wp-travel-tabs-wrap #date_pax {
   margin: 10px 0 15px; }
@@ -259,6 +259,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   outline: none; }
 .wp-travel-more .morecontent span {
   display: none; }
+
+.form-table th {
+  font-weight: normal; }
 
 @media (max-width: 1024px) {
   .left-block,
