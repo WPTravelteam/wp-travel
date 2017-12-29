@@ -764,7 +764,7 @@ function wp_travel_get_booking_data() {
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
 		) Booking 
-		where post_type='itinerary-booking' AND post_status='publish' {$top_country_where}  group by country order by no_of_booking desc";
+		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by country order by no_of_booking desc";
 
 		$top_countries = array();
 		$results =  $wpdb->get_results( $top_country_query );
@@ -790,7 +790,7 @@ function wp_travel_get_booking_data() {
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
 		) Booking 
-		where post_type='itinerary-booking' AND post_status='publish' {$top_itinerary_where}  group by itinerary_id order by no_of_booking desc";
+		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by itinerary_id order by no_of_booking desc";
 
 		$results =  $wpdb->get_results( $top_itinerary_query );
 		// set initial load transient for stat data.
@@ -826,14 +826,29 @@ function wp_travel_get_booking_data() {
  */
 function wp_travel_get_booking_status() {
 	$status = array(
-		'booked' => array( 'color' => '#FF9F33', 'text' => __( 'Booked', 'wp-travel' ) ),
+		'booked' => array( 'color' => '#008600', 'text' => __( 'Booked', 'wp-travel' ) ),
+		'pending' => array( 'color' => '#FF9800', 'text' => __( 'Pending', 'wp-travel' ) ),
+		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
+		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+	);
+
+	return apply_filters( 'wp_travel_booking_status_list', $status );
+}
+
+/**
+ * Get Payment Status List.
+ *
+ * @since 1.0.6
+ */
+function wp_travel_get_payment_status() {
+	$status = array(
 		'pending' => array( 'color' => '#FF8A33', 'text' => __( 'Pending', 'wp-travel' ) ),
 		'paid' => array( 'color' => '#1DFE0E', 'text' => __( 'Paid', 'wp-travel' ) ),
 		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
 		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
 	);
 
-	return apply_filters( 'wp_travel_booking_status_list', $status );
+	return apply_filters( 'wp_travel_payment_status_list', $status );
 }
 
 /**
