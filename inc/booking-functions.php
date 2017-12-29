@@ -12,9 +12,17 @@
  */
 function wp_travel_booking_form_fields() {
 	global $post;
-	
-	if ( $post ) {
-		$max_pax = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+
+	$post_id = 0;
+	if ( isset( $post->ID ) ) {
+		$post_id = $post->ID;
+	}
+	if ( isset( $_POST['wp_travel_post_id'] ) ) {
+		$post_id = $_POST['wp_travel_post_id'];
+	}
+
+	if ( $post_id > 0 ) {
+		$max_pax = get_post_meta( $post_id, 'wp_travel_group_size', true );
 	}
 
 	$booking_fileds = array(
@@ -152,7 +160,7 @@ function wp_travel_booking_form_fields() {
 			'wrapper_class' => 'full-width textarea-field',
 		),
 	);
-	if ( $max_pax ) {
+	if ( isset( $max_pax ) && '' != $max_pax ) {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
 		$booking_fileds['pax']['attributes']['max'] = $max_pax;
 	}
