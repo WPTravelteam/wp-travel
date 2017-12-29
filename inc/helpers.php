@@ -826,8 +826,8 @@ function wp_travel_get_booking_data() {
  */
 function wp_travel_get_booking_status() {
 	$status = array(
-		'booked' => array( 'color' => '#008600', 'text' => __( 'Booked', 'wp-travel' ) ),
 		'pending' => array( 'color' => '#FF9800', 'text' => __( 'Pending', 'wp-travel' ) ),
+		'booked' => array( 'color' => '#008600', 'text' => __( 'Booked', 'wp-travel' ) ),
 		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
 		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
 	);
