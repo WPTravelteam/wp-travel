@@ -12,7 +12,10 @@
  */
 function wp_travel_booking_form_fields() {
 	global $post;
-	$max_pax = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+	
+	if ( $post ) {
+		$max_pax = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+	}
 
 	$booking_fileds = array(
 		'first_name'	=> array(
@@ -640,10 +643,10 @@ function wp_travel_book_now() {
 	$itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
 	$itinerary_title 		= get_the_title( $itinerary_id );
 
-	$booking_no_of_pax 		= $_POST['wp_travel_pax'];
+	$booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
-	$booking_arrival_date 	= $_POST['wp_travel_arrival_date'];
-	$booking_departure_date = $_POST['wp_travel_departure_date'];
+	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? $_POST['wp_travel_arrival_date'] : '';
+	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? $_POST['wp_travel_departure_date'] : '';
 
 	$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
 	$customer_country 		= $_POST['wp_travel_country'];
