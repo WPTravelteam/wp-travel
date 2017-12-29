@@ -113,3 +113,30 @@ function wp_travel_featured_admin_ajax() {
     die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
+
+
+add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
+// add_action( 'save_post', 'save_article_or_box' );
+function wp_travel_publish_metabox() {
+	global $post;
+	if ( get_post_type( $post ) === 'itinerary-booking' ) {
+	?>
+		<div class="misc-pub-section misc-pub-booking-status">
+			<?php
+			$status = wp_travel_get_booking_status();
+			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
+			?>
+			
+			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
+			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
+			<?php foreach ( $status as $value => $st ) : ?>
+				<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ) ?>>
+					<?php echo esc_html( $status[ $value ]['text'] ); ?>
+				</option>
+			<?php endforeach; ?>
+			</select>
+		</div>
+        
+	<?php
+    }
+}
