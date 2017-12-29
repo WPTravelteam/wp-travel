@@ -159,6 +159,25 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             text-decoration: none;
         }
     }
+    .form-table {
+        td {
+            p {
+                &.description {
+                    font-size: 13px;
+                }
+            }
+            input {
+                // display: block;
+                width: 300px;
+                &[type='range'] {
+                    display: block;
+                }
+                &[type='checkbox'] {
+                    width: inherit
+                }
+            }
+        }
+    }
 }
 
 // Taxonomy Wrap
@@ -199,6 +218,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         font-weight: 300;
         box-shadow: none;
         font-family: arial;
+        &[readonly="readonly"] {
+            background: #fff;
+        }
         &[type="radio"] {
             width: 16px;
             height: 16px;
@@ -401,6 +423,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     th {
         font-weight: normal
     }
+}
+
+.wp-travel-status {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 3px 5px;
+    color: #fff;
 }
 
 @include tab {

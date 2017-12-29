@@ -87,6 +87,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   float: left; }
   .wp-trave-settings-warp .wp-travel-setting-system-info a {
     text-decoration: none; }
+.wp-trave-settings-warp .form-table td p.description {
+  font-size: 13px; }
+.wp-trave-settings-warp .form-table td input, .wp-trave-settings-warp .form-table td .wp-travel-form-field select, .wp-travel-form-field .wp-trave-settings-warp .form-table td select, .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea, .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea {
+  width: 300px; }
+  .wp-trave-settings-warp .form-table td input[type='range'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='range'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='range'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='range'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='range'] {
+    display: block; }
+  .wp-trave-settings-warp .form-table td input[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='checkbox'] {
+    width: inherit; }
 
 .itineraries-tax-wrap {
   border: 1px solid #f1f1f1;
@@ -120,6 +128,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     font-weight: 300;
     box-shadow: none;
     font-family: arial; }
+    .wp-travel-form-field input[readonly="readonly"], .wp-travel-form-field select[readonly="readonly"], .wp-travel-form-field textarea[readonly="readonly"] {
+      background: #fff; }
     .wp-travel-form-field input[type="radio"], .wp-travel-form-field select[type="radio"], .wp-travel-form-field textarea[type="radio"] {
       width: 16px;
       height: 16px;
@@ -262,6 +272,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 .form-table th {
   font-weight: normal; }
+
+.wp-travel-status {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: #fff; }
 
 @media (max-width: 1024px) {
   .left-block,
