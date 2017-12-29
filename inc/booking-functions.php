@@ -221,13 +221,15 @@ function wp_travel_register_booking_metaboxes($a) {
  */
 function wp_travel_admin_head_meta() {
 	global $post;
-	if ( 'itinerary-booking' === $post->post_type ): ?>
+	if ( 'itinerary-booking' === $post->post_type ) : ?>
         
 			<style type="text/css">
 				#visibility {
 				    display: none;
 				}
-				#misc-publishing-actions, #minor-publishing-actions{display:none}
+				#minor-publishing-actions,
+				#misc-publishing-actions .misc-pub-section.misc-pub-post-status,
+				#misc-publishing-actions .misc-pub-section.misc-pub-curtime{display:none}
 			</style>
 
 	<?php endif;
@@ -263,15 +265,22 @@ function wp_travel_booking_info( $post ) {
 			</div>
 
 			<?php
-			$fields = wp_travel_booking_form_fields();			
+			$fields = wp_travel_booking_form_fields();
+			// echo '<pre>';
+			// print_r( $fields );
 			$priority = array();
 			foreach ( $fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 			}
 			array_multisort( $priority, SORT_ASC, $fields );
-			foreach ( $fields as $field ) : ?>
+			foreach ( $fields as $key => $field ) : ?>
 				<?php
 				$input_val = get_post_meta( $post->ID, $field['name'], true );
+				/**
+				 * Hook Since  
+				 * @since 1.0.6.
+				 * */
+				$input_val = apply_filters( 'wp_travel_booking_field_value', $input_val, $post->ID, $key, $field['name'] );
 				$field_type = $field['type'];
 				$before_field = '';
 				if ( isset( $field['before_field'] ) ) {
@@ -401,20 +410,26 @@ function wp_travel_save_booking_data( $post_id ) {
 	update_post_meta( $post_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 	$order_data['wp_travel_post_id'] = $wp_travel_post_id;
 
+	// Updating booking status.
+	$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? $_POST['wp_travel_booking_status'] : 'pending';
+	update_post_meta( $post_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
+
 	$fields = wp_travel_booking_form_fields();
 	$priority = array();
 	foreach ( $fields as $key => $row ) {
 		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 	}
 	array_multisort( $priority, SORT_ASC, $fields );
-	foreach ( $fields as $field ) :
+	foreach ( $fields as $key => $field ) :
 		$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
-		update_post_meta( $post_id, $field['name'], sanitize_text_field( $meta_val ) );
+		$post_id_to_update = apply_filters( 'wp_travel_booking_post_id_to_update', $post_id, $key, $field['name'] );
+		update_post_meta( $post_id_to_update, $field['name'], sanitize_text_field( $meta_val ) );
 		$order_data[ $field['name'] ] = $meta_val;
 	endforeach;
 
 	$order_data = array_map( 'sanitize_text_field', wp_unslash( $order_data ) );
 	update_post_meta( $post_id, 'order_data', $order_data );
+	do_action( 'wp_travel_after_booking_data_save', $post_id );
 }
 
 add_action( 'save_post', 'wp_travel_save_booking_data' );
@@ -435,6 +450,7 @@ function wp_travel_booking_columns( $booking_columns ) {
 	$new_columns['cb'] 			 = '<input type="checkbox" />';
 	$new_columns['title'] 		 = _x( 'Title', 'column name', 'wp-travel' );
 	$new_columns['contact_name'] = __( 'Contact Name', 'wp-travel' );
+	$new_columns['booking_status'] = __( 'Booking Status', 'wp-travel' );
 	$new_columns['date'] 		 = __( 'Booking Date', 'wp-travel' );
 	return $new_columns;
 }
@@ -458,6 +474,15 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 			$name .= ' ' . get_post_meta( $id , 'wp_travel_lname' , true );
 			echo esc_attr( $name, 'wp-travel' );
 			break;
+		case 'booking_status':
+			$status = wp_travel_get_booking_status();
+			$label_key = get_post_meta( $id , 'wp_travel_booking_status' , true );
+			if ( '' === $label_key ) {
+				$label_key = 'pending';
+				update_post_meta( $id, 'wp_travel_booking_status' , $label_key );
+			}
+			echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			break;
 		default:
 			break;
 	} // end switch
@@ -471,8 +496,8 @@ add_filter( 'manage_edit-itinerary-booking_sortable_columns', 'wp_travel_booking
 function wp_travel_booking_sort( $columns ) {
 
 	$custom = array(
-		'contact_name' 	=> 'contact_name',
-		// 'city' 		=> 'city'
+		'contact_name' 	 => 'contact_name',
+		'booking_status' => 'booking_status',
 	);
 	return wp_parse_args( $custom, $columns );
 	/* or this way
@@ -505,7 +530,7 @@ function wp_travel_booking_column_orderby( $vars ) {
 }
 
 
-add_action( 'restrict_manage_posts', 'wp_travel_restrict_manage_posts' );
+// add_action( 'restrict_manage_posts', 'wp_travel_restrict_manage_posts' );
 
 /**
  * Restrict Manage Post.
