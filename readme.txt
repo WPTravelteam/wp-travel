@@ -81,6 +81,8 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 == Changelog ==
 
 = 1.0.6 =
+* New Feature: Booking Status added.
+* Fixes: Depricated Functions issue.
 * Fixes: Booking Stat issue with query.
 * Fixes: Minor layout issue.
 
