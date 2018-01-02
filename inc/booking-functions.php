@@ -751,6 +751,9 @@ function get_booking_chart() {
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
 					<input type="hidden" name="post_type" value="itineraries" >
 					<input type="hidden" name="page" value="booking_chart">
+					<?php
+					// @since 1.0.6 // Hook since
+					do_action( 'wp_travel_before_stat_toolbar_fields' ); ?>
 					<p class="field-group">
 						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
 						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date, 'wp-travel' ) ?>">
@@ -791,6 +794,9 @@ function get_booking_chart() {
 							<?php endforeach; ?>
 						</select>
 					</p>
+					<?php
+					// @since 1.0.6 // Hook since
+					do_action( 'wp_travel_after_stat_toolbar_fields' ); ?>
 					<p class="show-all">
 						<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
 					</p>
@@ -801,6 +807,9 @@ function get_booking_chart() {
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
 		<div class="right-block">
+			<?php
+			// @since 1.0.6 // Hook since
+			do_action( 'wp_travel_before_stat_info_box' ); ?>
 			<div>
 				<strong><big class="wp-travel-max-bookings">0</big></strong><br />
 				<p><?php esc_html_e( 'Bookings', 'wp-travel' ) ?></p>
@@ -818,6 +827,9 @@ function get_booking_chart() {
 				<strong><a href="#" class="wp-travel-top-itineraries" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
 				<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ) ?></p>
 			</div>
+			<?php
+			// @since 1.0.6 // Hook since
+			do_action( 'wp_travel_after_stat_info_box' ); ?>
 		</div>
 	</div>	
 	<?php
