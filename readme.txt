@@ -1,6 +1,6 @@
 === WP Travel ===
 Contributors: WEN Solutions
-Tags: tour, tours, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map
+Tags: travel, tour, tours, itinerary, tour itinerary, tour operator, tour operators, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
 Donate link: http://wensolutions.com
 Requires at least: 4.4.0
 Tested up to: 4.9.1
