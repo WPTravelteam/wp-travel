@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 		'inc/**',
 		'templates/**',
 		'readme.txt',
+		'upgrade/**',
 		'wp-travel.php',
 	];
 
