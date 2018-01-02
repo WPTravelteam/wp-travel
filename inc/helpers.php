@@ -723,7 +723,7 @@ function wp_travel_get_booking_data() {
 
 	$max_bookings = 0;
 	$max_pax = 0;
-	$booking_stat_from = $booking_stat_to = date( 'm/d/Y' );
+	$booking_stat_from = $booking_stat_to = date( $date_format );
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		foreach ( $results as $result ) {
 			$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
