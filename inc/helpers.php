@@ -842,8 +842,8 @@ function wp_travel_get_booking_status() {
  */
 function wp_travel_get_payment_status() {
 	$status = array(
-		'pending' => array( 'color' => '#FF8A33', 'text' => __( 'Pending', 'wp-travel' ) ),
-		'paid' => array( 'color' => '#1DFE0E', 'text' => __( 'Paid', 'wp-travel' ) ),
+		'pending' => array( 'color' => '#FF9800', 'text' => __( 'Pending', 'wp-travel' ) ),
+		'paid' => array( 'color' => '#008600', 'text' => __( 'Paid', 'wp-travel' ) ),
 		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
 		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
 	);
