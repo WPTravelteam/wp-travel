@@ -746,7 +746,7 @@ function get_booking_chart() {
 	?>
 	<div class="wrap">
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
-		<div class="left-block">
+		<div class="left-block stat-toolbar-wrap">
 			<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
 					<input type="hidden" name="post_type" value="itineraries" >
