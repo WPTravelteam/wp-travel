@@ -80,6 +80,9 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.0.7 =
+* New Feature: "Loco Translate" support.
+
 = 1.0.6 =
 * New Feature: Booking Status added.
 * Fixes: Default view mode [grid] style issue.

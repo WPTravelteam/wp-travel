@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 				options: {
 					type: 'wp-plugin',
 					domainPath: 'i18n/languages',
-					exclude: ['deploy/.*','node_modules/.*'],
+					exclude: ['deploy/.*','node_modules/.*', 'build/.*'],
 					updateTimestamp: false,
 					potHeaders: {
 						'report-msgid-bugs-to': '',
