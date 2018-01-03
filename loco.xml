@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle>
+  <domain name="wp-travel">
+    <project>
+      <target>
+        <directory>i18n/languages/</directory>
+      </target>
+      <template>
+        <file>i18n/languages/wp-travel.pot</file>
+      </template>
+    </project>
+  </domain>
+  <exclude>
+    <directory>node_modules</directory>
+    <directory>build</directory>
+	 <directory>old</directory>
+    <directory>lib</directory>
+    <directory>pub</directory>
+    <directory>test</directory>
+	 <file>i18n/languages/README.md</file>
+  </exclude>
+</bundle>
