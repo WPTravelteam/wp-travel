@@ -14,7 +14,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 "WP Travel" is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin.
 
 = Release Notes: =
-Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
+Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 = Some important features of the plugin: =
 * The standard details needed such as trip code, group size, dynamic content editor, trip types, price, trip outline, trip includes and excludes, starting & ending date, etc, are specially researched and designed.
@@ -34,7 +34,7 @@ WP Travel plugin is very flexible and highly customizable. There are a number of
 = Dedicated Support and Documentation =
 We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/).
 
-Also you can checkout WP Travel [documentation](http://wensolutions.com/documentation/wp-travel/).
+Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/).
 
 == Installation ==
 = Using The WordPress Dashboard =
@@ -76,14 +76,14 @@ Nice, send us request on [Support page](http://wptravel.io/support-forum/forum/w
 12. Frontend: Itinerary details - 2
 
 == Upgrade Notice ==
-Before updating plugin please check ["our latest release notes"](http://wensolutions.com/category/wp-travel-release/).
+Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
 
 = 1.0.6 =
 * New Feature: Booking Status added.
-* Fixes: Default view mode [grid] style issue. 
-* Fixes: Depricated Functions issue.
+* Fixes: Default view mode [grid] style issue.
+* Fixes: Deprecated Functions issue.
 * Fixes: Booking Stat issue with query.
 * Fixes: Minor layout issue.
 
@@ -92,7 +92,7 @@ Before updating plugin please check ["our latest release notes"](http://wensolut
 * New Feature: Featured itinerary widget.
 * New Feature: Trip Location widget.
 * New Feature: Trip Type widget.
-* New Feature: Compatibility with WP Travel Paypal addons.
+* New Feature: Compatibility with WP Travel PayPal add-ons.
 * New Feature: Added Form field for radio and checkbox input.
 * New Feature: Added PAX field in Booking form.
 * Fixes: PHP error on lower PHP version.
