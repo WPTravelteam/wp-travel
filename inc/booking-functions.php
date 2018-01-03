@@ -725,7 +725,9 @@ function wp_travel_book_now() {
 			'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 		) );
 	}
-	header( 'Location: ' . $_SERVER['REDIRECT_URL'] . '?' . http_build_query( array( 'booked' => true ) ) );
+	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
+	header( 'Location: ' . $thankyou_page_url );
 	exit;
 }
 
