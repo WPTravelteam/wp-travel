@@ -32,6 +32,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'location_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'advance_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'call_back' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'price_tab_call_back' ), 10, 2 );
 	}
 
 	/**
@@ -78,6 +79,12 @@ class WP_Travel_Admin_Metaboxes {
 			'content_callback' => array( $this, 'call_back' ),
 		);
 
+		$itineraries['price'] = array(
+			'tab_label' => __( 'Price', 'wp-travel' ),
+			'content_title' => __( 'Price', 'wp-travel' ),
+			'content_callback' => array( $this, 'price_tab_call_back' ),
+		);
+
 		$itineraries['images_gallery'] = array(
 			'tab_label' => __( 'Images/ Gallery', 'wp-travel' ),
 			'content_title' => __( 'Images/ Gallery', 'wp-travel' ),
@@ -97,7 +104,7 @@ class WP_Travel_Admin_Metaboxes {
 		// );
 
 		$tabs['itineraries'] = $itineraries;
-		return apply_filters( 'wp_travel_tabs', $tabs );;
+		return apply_filters( 'wp_travel_tabs', $tabs );
 	}
 
 	/**
@@ -112,6 +119,21 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 		WP_Travel()->tabs->content( 'itineraries/detail-tab.php' );
+	}
+
+	/**
+	 * Callback Function for Price Tabs.
+	 *
+	 * @param  string $tab tab name 'price'.
+	 * @since 1.0.7
+	 * @return Mixed
+	 */
+	function price_tab_call_back( $tab ) {		
+		global $post;
+		if ( 'price' !== $tab ) {
+			return;
+		}
+		WP_Travel()->tabs->content( 'itineraries/price-tab.php' );
 	}
 	/**
 	 * Callback Function for additional_info Tabs.
