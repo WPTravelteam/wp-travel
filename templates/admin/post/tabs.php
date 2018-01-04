@@ -18,7 +18,7 @@ if ( empty( $tabs ) ) {
 		foreach ( $tabs as $key => $tab ) :
 			$class = ( 0 === $i ) ? 'wp-travel-post-tab-active' : '';
 		?>
-		<li id="wp-travel-post-tab-<?php echo esc_attr( $key ); ?>"><a href="#wp-travel-post-tab-content-<?php echo esc_attr( $key ); ?>" class="<?php echo esc_attr( $class ); ?>"><?php echo esc_attr( $tab['tab_label'] ); ?></a></li>
+		<li id="wp-travel-post-tab-<?php echo  $key ); ?>"><a href="#wp-travel-post-tab-content-<?php echo  $key ); ?>" class="<?php echo esc_attr( $class ); ?>"><?php echo esc_attr( $tab['tab_label'] ); ?></a></li>
 		<?php endforeach; ?>
 	</ul>
 	<div class="wp-travel-post-tabs-contents">

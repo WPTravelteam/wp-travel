@@ -611,7 +611,8 @@ function wp_travel_get_price_per_text( $post_id ) {
 	if ( ! $per_person_text ) {
 		$per_person_text = 'person';
 	}
-	return $per_person_text;
+	$price_per_fields = wp_travel_get_price_per_fields();
+	return $price_per_fields[ $per_person_text ];
 }
 
 /**

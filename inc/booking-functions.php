@@ -143,7 +143,7 @@ function wp_travel_booking_form_fields() {
 			'default' => 1,
 			'validations' => array(
 				'required' => '',
-				'min' => 1,				
+				'min' => 1,
 			),
 			'attributes' => array( 'min' => 1 ),
 			'priority' => 81,
@@ -153,7 +153,7 @@ function wp_travel_booking_form_fields() {
 			'label' => __( 'Note', 'wp-travel' ),
 			'name' => 'wp_travel_note',
 			'id' => 'wp-travel-note',
-			'placeholder' => 'Enter some notes...',
+			'placeholder' => __( 'Enter some notes...', 'wp-travel' ),
 			'rows' => 6,
 			'cols' => 150,
 			'priority' => 90,
@@ -268,8 +268,8 @@ function wp_travel_booking_info( $post ) {
 				<label for="wp-travel-post-id"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></label>
 				<select id="wp-travel-post-id" name="wp_travel_post_id" >
 				<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-					<option value="<?php echo esc_html( $itinerary_id, 'wp-travel' ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
-						<?php echo esc_html( $itinerary_name, 'wp-travel' ); ?>
+					<option value="<?php echo esc_attr( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
+						<?php echo esc_html( $itinerary_name ); ?>
 					</option>
 				<?php endforeach; ?>
 				</select>
@@ -311,26 +311,26 @@ function wp_travel_booking_info( $post ) {
 				}
 				switch ( $field_type ) {
 					case 'select': ?>
-						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
-						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+						<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 							<?php $options = $field['options']; ?>
 							<?php if ( count( $options ) > 0 ) : ?>
-							<select <?php echo esc_attr( $attributes ) ?> id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>">
+							<select <?php echo esc_attr( $attributes ) ?> id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>">
 								<?php foreach ( $options as $short_name => $name ) : ?>
-									<option <?php selected( $input_val, $short_name ); ?> value="<?php echo esc_attr( $short_name, 'wp-travel' ) ?>"><?php esc_html_e( $name, 'wp-travel' ) ?></option>
+									<option <?php selected( $input_val, $short_name ); ?> value="<?php echo esc_attr( $short_name ) ?>"><?php echo esc_html( $name ) ?></option>
 								<?php endforeach; ?>
 							</select>
 							<?php endif; ?>
 						</div>
 					<?php break; ?>
 					<?php case 'radio' : ?>
-						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
-							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>							
+						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>							
 							<?php
 							if ( ! empty( $field['options'] ) ) {
 								foreach ( $field['options'] as $key => $value ) { ?>
-									<label class="radio-checkbox-label"><input type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $key, 'wp-travel' ); ?>" <?php checked( $input_val, $key ); ?> ><?php echo esc_html( $value, 'wp-travel' ) ?></label>
-								<?php 
+									<label class="radio-checkbox-label"><input type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $input_val, $key ); ?> ><?php echo esc_html( $value ) ?></label>
+								<?php
 								}
 							}
 							?>
@@ -340,27 +340,27 @@ function wp_travel_booking_info( $post ) {
 					<?php case 'checkbox' : ?>
 					<?php break; ?>
 					<?php case 'textarea' : ?>
-						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
-						<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
-							<textarea <?php echo esc_attr( $attributes ) ?> name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val, 'wp-travel' ); ?></textarea>
+						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+						<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
+							<textarea <?php echo esc_attr( $attributes ) ?> name="<?php echo esc_attr( $field['name'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val ); ?></textarea>
 						</div>
 					<?php break; ?>
 					<?php case 'date' : ?>
-						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
-							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
-							<input <?php echo esc_attr( $attributes ) ?> class="wp-travel-date" type="text" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
+							<input <?php echo esc_attr( $attributes ) ?> class="wp-travel-date" type="text" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
 						</div>
 					<?php break; ?>
 					<?php case 'hidden' : ?>
 						
-						<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+						<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
 						
 					<?php break; ?>
 					<?php default : ?>
-						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class,  'wp-travel' ) ?>">
-							<label for="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>"><?php echo esc_attr__( $field['label'],  'wp-travel' ) ?></label>
+						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 							<?php echo $before_field; ?>
-							<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'],  'wp-travel' ) ?>" id="<?php echo esc_attr( $field['id'],  'wp-travel' ) ?>" name="<?php echo esc_attr( $field['name'],  'wp-travel' ) ?>" value="<?php echo esc_attr( $input_val, 'wp-travel' ); ?>" >
+							<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
 						</div>
 					<?php break;
 				}
@@ -483,7 +483,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 			$name = get_post_meta( $id , 'wp_travel_fname' , true );
 			$name .= ' ' . get_post_meta( $id , 'wp_travel_mname' , true );
 			$name .= ' ' . get_post_meta( $id , 'wp_travel_lname' , true );
-			echo esc_attr( $name, 'wp-travel' );
+			echo esc_attr( $name );
 			break;
 		case 'booking_status':
 			$status = wp_travel_get_booking_status();
@@ -492,7 +492,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 				$label_key = 'pending';
 				update_post_meta( $id, 'wp_travel_booking_status' , $label_key );
 			}
-			echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>';
 			break;
 		default:
 			break;
@@ -758,14 +758,14 @@ function get_booking_chart() {
 					do_action( 'wp_travel_before_stat_toolbar_fields' ); ?>
 					<p class="field-group">
 						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date, 'wp-travel' ) ?>">
+						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>        
 					</p>
 					<p class="field-group">
 						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_to" id="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date, 'wp-travel' ) ?>"/>
+						<input type="text" name="booking_stat_to" id="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label> 
@@ -778,8 +778,8 @@ function get_booking_chart() {
 							<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
 							
 							<?php foreach ( $country_list as $key => $value ) : ?>
-								<option value="<?php echo esc_html( $key, 'wp-travel' ); ?>" <?php selected( $key, $selected_country ) ?>>
-									<?php echo esc_html( $value, 'wp-travel' ); ?>
+								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
+									<?php echo esc_html( $value ); ?>
 								</option>
 							<?php endforeach; ?>
 						</select>
@@ -790,8 +790,8 @@ function get_booking_chart() {
 						<select class="selectpicker form-control" name="booking_itinerary">
 							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
 							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-								<option value="<?php echo esc_html( $itinerary_id, 'wp-travel' ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
-									<?php echo esc_html( $itinerary_name, 'wp-travel' ); ?>
+								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
+									<?php echo esc_html( $itinerary_name ); ?>
 								</option>
 							<?php endforeach; ?>
 						</select>

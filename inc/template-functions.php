@@ -444,7 +444,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
 					<?php continue; ?>
 				<?php endif; ?>
-				<li class="wp-travel-ert <?php echo esc_attr( $tab_key, 'wp-travel' ); ?> <?php echo esc_attr( $tab_info['label_class'], 'wp-travel' ); ?> tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>" data-tab="tab-<?php echo esc_attr( $index, 'wp-travel' ); ?>-cont"><?php echo esc_attr( $tab_info['label'] ); ?></li>
+				<li class="wp-travel-ert <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_info['label'] ); ?></li>
 			<?php $index++; endforeach; ?>
 		</ul>
 		<div class="resp-tabs-container">
@@ -456,7 +456,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 				<?php switch ( $tab_key ) {
 					case 'gallery' : ?>
-						<div id="<?php echo esc_attr( $tab_key, 'wp-travel' ); ?>" class="tab-list-content">
+						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php if ( false !== $tab_info['content'] ) : ?>
 							<div class="wp-travel-gallery wp-travel-container-wrap">
 								<div class="wp-travel-row-wrap">
@@ -478,17 +478,17 @@ function wp_travel_frontend_contents( $post_id ) {
 						</div>
 					<?php break;
 					case 'reviews' : ?>
-						<div id="<?php echo esc_attr( $tab_key, 'wp-travel' ); ?>" class="tab-list-content">
+						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php comments_template(); ?>
 						</div>
 					<?php break;
 					case 'booking' : ?>
-						<div id="<?php echo esc_attr( $tab_key, 'wp-travel' ); ?>" class="tab-list-content">
+						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php echo wp_travel_get_booking_form(); ?>
 						</div>
 					<?php break;
 					 default : ?>
-						<div id="<?php echo esc_attr( $tab_key, 'wp-travel' ); ?>" class="tab-list-content">
+						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php echo wp_kses_post( $tab_info['content'] ); ?>
 						</div>
 					<?php break; ?>

@@ -86,7 +86,7 @@ class WP_Travel_FW_Form {
 						<?php do_action( $this->form_options['hook_prefix'] . '_before_submit_button' ); ?>
 						<?php wp_nonce_field( $this->form_options['nonce']['action'], $this->form_options['nonce']['field'] ); ?>
 						<?php
-						printf( '<input type="submit" name="%s" id="%s" value="%s">', esc_attr( $this->form_options['submit_button']['name'], 'wp-travel' ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ) );
+						printf( '<input type="submit" name="%s" id="%s" value="%s">', esc_attr( $this->form_options['submit_button']['name'] ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ) );
 						?>
 						<?php do_action( $this->form_options['hook_prefix'] . '_after_submit_button' ); ?>
 					</div>

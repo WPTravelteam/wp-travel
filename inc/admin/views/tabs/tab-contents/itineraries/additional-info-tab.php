@@ -44,7 +44,7 @@
 			<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
 				<select name="wp_travel_price_per">
 					<?php foreach ( $price_per_fields as $val => $label ) : ?>
-						<option value="<?php echo esc_attr( $val, 'wp-travel' ) ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ) ?></option>
+						<option value="<?php echo esc_attr( $val ) ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ) ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
