@@ -82,6 +82,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.0.7 =
 * New Feature: "Loco Translate" support.
+* New Feature: "WPML Translate" support.
+* Changes: Price fields moved to price tab in itineraries section.
 
 = 1.0.6 =
 * New Feature: Booking Status added.
