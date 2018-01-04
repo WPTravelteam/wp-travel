@@ -74,6 +74,8 @@
         content: "\f108"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-booking a:before {
         content: "\f330"; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-price a:before {
+        content: "\f323"; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;

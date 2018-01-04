@@ -104,6 +104,11 @@ $alto: #ddd;
                     content: "\f330";
                 }
             }
+            &#wp-travel-tab-price a {
+                &:before {
+                    content: "\f323";
+                }
+            }
         }
     }
     .wp-travel-tabs-contents {
