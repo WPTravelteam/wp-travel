@@ -1,0 +1,15 @@
+<wpml-config>
+    
+    <custom-types>
+        <custom-type translate="1">itineraries</custom-type>
+        <custom-type translate="1">itinerary-booking</custom-type>
+    </custom-types>  
+    <taxonomies>
+        <taxonomy translate="1">itinerary_types</taxonomy>
+        <taxonomy translate="1">travel_locations</taxonomy>
+        <taxonomy translate="1">travel_keywords</taxonomy>
+    </taxonomies>  
+      
+</wpml-config>
+
+
