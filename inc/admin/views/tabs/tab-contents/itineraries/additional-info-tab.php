@@ -1,15 +1,12 @@
 <?php
 	global $post;
 
-	$price 		= get_post_meta( $post->ID, 'wp_travel_price', true );
-	$sale_price = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
 	$outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true );
 	$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 	$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 	$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
 	$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
-
-	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
+	
 	$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
@@ -17,65 +14,13 @@
 	$trip_duration = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
 	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 
-	$sale_price_attribute = 'disabled="disabled"';
-	if ( $enable_sale ) {
-		$sale_price_attribute = '';
-	}
-
 	echo '<div class="trip-type-wrap itineraries-tax-wrap">';
 	post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'itinerary_types' ) ) );
 	printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=itinerary_types&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Trip Type', 'wp-travel' ) );
-	echo '</div>';
-
-	$settings = wp_travel_get_settings();
-	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] :'';
-	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-
-	$price_per = get_post_meta( $post->ID, 'wp_travel_price_per', true );
-	if ( ! $price_per ) {
-		$price_per = 'person';
-	}
+	echo '</div>';	
 ?>
 <table class="form-table">
-	<tr>
-		<td><label for="wp-travel-price-per"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label></td>
-		<td>
-			<?php $price_per_fields = wp_travel_get_price_per_fields(); ?>
-			<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
-				<select name="wp_travel_price_per">
-					<?php foreach ( $price_per_fields as $val => $label ) : ?>
-						<option value="<?php echo esc_attr( $val ) ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ) ?></option>
-					<?php endforeach; ?>
-				</select>
-			<?php endif; ?>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
-	</tr>
-
-	<tr>
-		<td><label for="wp-travel-price"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
-		<td>
-			
-			<label>
-				<input type="checkbox" name="wp_travel_enable_sale" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" />
-				<span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
-			</label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="0" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
-	</tr>
-	<?php
-	/**
-	 * Hook Added.
-	 *
-	 * @since 1.0.5
-	 */
-	do_action( 'wp_travel_itinerary_after_sale_price', $post->ID ); ?>
+	
 	<tr>
 		<td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
