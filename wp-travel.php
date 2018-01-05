@@ -98,7 +98,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wp_travel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-
+			// To delete transient.
+			add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
 			if ( $this->is_request( 'admin' ) ) {
 				$this->tabs = new WP_Travel_Admin_Tabs();
 				$this->uploader = new WP_Travel_Admin_Uploader();
