@@ -209,8 +209,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$taxonomy::init();
 			flush_rewrite_rules();
 
-			add_image_size( 'wp_travel_thumbnail', 255, 150, false );
-
 			$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
 			if ( count( $itineraries ) > 0 ) {
 				foreach( $itineraries as $itinerary ) {
@@ -249,12 +247,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * Add Image site.
+		 * Add Image size.
 		 *
 		 * @since 1.0.0
 		 */
 		private function add_image_sizes() {
-			add_image_size( 'wp_travel_thumbnail', 255, 150, true );
+			add_image_size( 'wp_travel_thumbnail', 365, 215, true );
 		}
 
 	}
