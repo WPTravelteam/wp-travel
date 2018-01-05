@@ -1,4 +1,55 @@
 <?php
+/**
+ * Admin Helper
+ *
+ * @package inc/admin/
+ */
+
+/**
+ * All Admin Init hooks listed here.
+ *
+ * @since 1.0.7
+ */
+function wp_travel_admin_init() {
+	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
+}
+
+function wp_travel_clear_booking_count_transient( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	global $post_type;
+	if ( 'itinerary-booking' !== $post_type ) {
+		return;
+	}
+	$itinerary_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
+	delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+}
+
+function wp_travel_get_booking_count( $itinerary_id ) {
+	if ( ! $itinerary_id ) {
+		return 0;
+	}
+	global $wpdb;
+	// delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	error_log( 'booking  count ' . $booking_count . ' itinerary id ' . $itinerary_id );
+	if ( ! $booking_count ) {
+		error_log( 'no count ' . $itinerary_id );
+		$booking_count = 0;
+		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P 
+		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";
+		$results = $wpdb->get_row( $query );
+		if ( $results ) {
+			$booking_count = $results->booking_count;
+		}
+		set_site_transient( "_transient_wt_booking_count_{$itinerary_id}", $booking_count );
+
+		// Post meta only for sorting.
+		update_post_meta( $itinerary_id, 'wp_travel_booking_count', $booking_count );
+	}
+	return $booking_count;
+}
 
 /*
  * ADMIN COLUMN - HEADERS
@@ -36,15 +87,15 @@ add_action( 'manage_itineraries_posts_custom_column', 'wp_travel_itineraries_man
 function wp_travel_itineraries_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'booking_count':
-			$booking_count = get_post_meta( $id, 'wp_travel_booking_count', true );
-			echo ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
+			$booking_count = wp_travel_get_booking_count( $id );
+			echo esc_html( $booking_count );
 			break;
 		case 'featured':
 			$featured = get_post_meta( $id, 'wp_travel_featured', true );
 			$featured = ( isset( $featured ) && '' != $featured ) ? $featured : 'no';
 
 			$icon_class = ' dashicons-star-empty ';
-			if ( ! empty( $featured ) && 'yes' === $featured ){
+			if ( ! empty( $featured ) && 'yes' === $featured ) {
 				$icon_class = ' dashicons-star-filled ';
 			}
 			$nonce = wp_create_nonce( 'wp_travel_featured_nounce' );
@@ -94,23 +145,22 @@ function wp_travel_itineraries_column_orderby( $vars ) {
 
 /**
  * Ajax for adding feature aditem.
- *
  */
 function wp_travel_featured_admin_ajax() {
 	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_featured_nounce' ) ) {
-	  exit( 'invalid' );
+		exit( 'invalid' );
 	}
 
-    header('Content-Type: application/json');
-    $post_id = intval( $_POST['post_id'] );
-    $featuredStatus = esc_attr(get_post_meta( $post_id, 'wp_travel_featured', true ));
-    $newStatus = $featuredStatus == 'yes' ? 'no' : 'yes';
-    update_post_meta($post_id, 'wp_travel_featured', $newStatus);
-    echo json_encode( array(
-        'ID' => $post_id,
-        'new_status' => $newStatus,
-    ) );
-    die();
+	header( 'Content-Type: application/json' );
+	$post_id = intval( $_POST['post_id'] );
+	$featured_status = esc_attr( get_post_meta( $post_id, 'wp_travel_featured', true ) );
+	$new_status = $featured_status == 'yes' ? 'no' : 'yes';
+	update_post_meta( $post_id, 'wp_travel_featured', $new_status );
+	echo json_encode( array(
+		'ID' => $post_id,
+		'new_status' => $new_status,
+	) );
+	die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
 
@@ -138,5 +188,5 @@ function wp_travel_publish_metabox() {
 		</div>
         
 	<?php
-    }
+	}
 }
