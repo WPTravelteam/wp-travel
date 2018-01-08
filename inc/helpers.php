@@ -897,3 +897,13 @@ function wp_travel_get_image_sizes() {
 
 	return $sizes;
 }
+
+/**
+ * Return all Payment Methods.
+ *
+ * @since 1.0.7
+ * @return void
+ */
+function wp_travel_payment_gateway_lists() {
+	return apply_filters( 'wp_travel_payment_gateway_lists', array() );
+}
