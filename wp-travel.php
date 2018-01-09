@@ -16,12 +16,10 @@
  * @category Core
  * @author WenSolutions
  */
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 if ( ! class_exists( 'WP_Travel' ) ) :
 
 	/**
@@ -91,6 +89,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 */
 		private function init_hooks() {
 			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
+			add_action( 'activated_plugin', array( $this, 'wp_travel_plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
 
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
@@ -146,7 +145,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
-			include sprintf( '%s/inc/payments/wp-travel-payments.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
@@ -255,6 +254,17 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 */
 		private function add_image_sizes() {
 			add_image_size( 'wp_travel_thumbnail', 365, 215, true );
+		}
+
+		function wp_travel_plugin_load_first_order() {
+			$path = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
+			if ( $plugins = get_option( 'active_plugins' ) ) {
+				if ( $key = array_search( $path, $plugins ) ) {
+					array_splice( $plugins, $key, 1 );
+					array_unshift( $plugins, $path );
+					update_option( 'active_plugins', $plugins );
+				}
+			}
 		}
 
 	}
