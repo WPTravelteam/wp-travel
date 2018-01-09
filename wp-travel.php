@@ -146,6 +146,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
+			include sprintf( '%s/inc/payments/wp-travel-payments.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
