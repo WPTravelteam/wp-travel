@@ -5,21 +5,10 @@
  * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
  */
 
-global $post;
-$trip_code = wp_travel_get_trip_code( $post->ID );
-$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
-?>
-<table class="form-table">
+global $post; ?>
+<table class="form-table">	
 	<tr>
-		<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-		<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
-	</tr>
-	<tr>
-		<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
-		<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
-	</tr>
-	<tr>
-		<td colspan="2"><label for="wp-travel-detail"><?php esc_html_e( 'Detail', 'wp-travel' ); ?></label><?php wp_editor( $post->post_content, 'wp_travel_editor' ); ?></td>
+		<td colspan="2"><?php wp_editor( $post->post_content, 'wp_travel_editor' ); ?></td>
 	</tr>	
 </table>
 <?php
