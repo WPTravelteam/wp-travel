@@ -230,12 +230,16 @@ add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itiner
  * @return Array                  [description]
  */
 function wp_travel_itineraries_columns( $itinerary_columns ) {
-
+	$comment = isset( $itinerary_columns['comments'] ) ?  $itinerary_columns['comments'] : '';
 	$date = $itinerary_columns['date'];
 	unset( $itinerary_columns['date'] );
+	unset( $itinerary_columns['comments'] );
 
-	$itinerary_columns['booking_count'] = __( 'Booking Count', 'wp-travel' );
+	$itinerary_columns['booking_count'] = __( 'Booking', 'wp-travel' );
 	$itinerary_columns['featured'] = __( 'Featured', 'wp-travel' );
+	if ( $comment ) {
+		$itinerary_columns['comments'] = $comment;
+	}
 	$itinerary_columns['date'] = __( 'Date', 'wp-travel' );
 	return $itinerary_columns;
 }
