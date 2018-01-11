@@ -13,6 +13,11 @@
 function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 }
+function wp_travel_marketplace_page() {
+	?>
+		<h2>Marketplage page</h2>
+	<?php
+}
 
 function wp_travel_clear_booking_count_transient( $post_id ) {
 	if ( ! $post_id ) {
@@ -33,9 +38,9 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 	global $wpdb;
 	// delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
 	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
-	error_log( 'booking  count ' . $booking_count . ' itinerary id ' . $itinerary_id );
+	// error_log( 'booking  count ' . $booking_count . ' itinerary id ' . $itinerary_id );
 	if ( ! $booking_count ) {
-		error_log( 'no count ' . $itinerary_id );
+		// error_log( 'no count ' . $itinerary_id );
 		$booking_count = 0;
 		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P 
 		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";

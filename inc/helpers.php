@@ -901,15 +901,44 @@ function wp_travel_get_image_sizes() {
 /**
  * Return all Payment Methods.
  *
- * @since 1.0.7
+ * @since 1.1.0
  * @return void
  */
 function wp_travel_payment_gateway_lists() {
 	return apply_filters( 'wp_travel_payment_gateway_lists', array() );
 }
+
 /**
  * Determine if post type is itinerary
  */
 function is_itinerary() {
-	return get_post_type() === 'itineraries';
+	return get_post_type() === WP_TRAVEL_POST_TYPE;
 }
+
+/**
+ * Get permalink settings for WP Travel independent of the user locale.
+ *
+ * @since  1.1.0
+ * @return array
+ */
+function wp_travel_get_permalink_structure() {
+
+	$permalinks = wp_parse_args( (array) get_option( 'wp_travel_permalinks', array() ), array(
+		'wp_travel_trip_base' => '',
+		'use_verbose_page_rules' => false,
+	) );
+
+	// $db_version = get_option( 'wp_travel_version' );
+	// $current_version = WP_TRAVEL_VERSION;
+
+	// // Fallback slug
+	// if ( ( ! $db_version ) && '' === $permalinks['wp_travel_trip_base'] ) {
+	// 	$permalinks['wp_travel_trip_base'] = 'itinerary';
+	// }
+
+	// Ensure rewrite slugs are set.
+	$permalinks['wp_travel_trip_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? _x( 'itinerary', 'slug', 'wp-travel' ) : $permalinks['wp_travel_trip_base'] );
+
+	return $permalinks;
+}
+
