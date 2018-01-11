@@ -198,5 +198,49 @@
             }
         });
     });
+    // Add itineraries Data Row.
+    $('#add_itinerary_row').click(function() {
+        var wp_travel_rand_integer = Math.floor(Math.random() * 100000) + 1;
+        var wp_travel_itinerary_id = 'wp_travel_itinerary_data_' + wp_travel_rand_integer;
+        var wp_travel_editor_settings = tinyMCEPreInit.mceInit.content;
+        $.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: {
+                'action': 'wp_travel_add_itinerary_content_data',
+                'default_text': 'Add Itinerary Description',
+                'itinerary_id': wp_travel_itinerary_id
+            },
+            success: function(response) {
+                $('.itinerary_block').append(response);
+                // tinymce.init(wp_travel_editor_settings);
+                tinyMCE.execCommand('mceAddEditor', true, wp_travel_itinerary_id);
+                quicktags({ id: wp_travel_itinerary_id });
+                return false;
+            }
+        });
+
+        function get_tinymce_content(id) {
+            var content;
+            var inputid = id;
+            var editor = tinyMCE.get(inputid);
+            var textArea = $('textarea#' + inputid);
+            if (textArea.length > 0 && textArea.is(':visible')) {
+                content = textArea.val();
+            } else {
+                content = editor.getContent();
+            }
+            return content;
+        }
+
+    });
+    //Remove Itinerary Data Row.
+
+    $(document).on('click', '.remove_itinery', function(e) {
+        e.preventDefault();
+        $(this).closest('.itinerary_wrap').remove();
+        return false;
+    });
+
 
 }(jQuery));

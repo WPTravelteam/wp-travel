@@ -190,3 +190,48 @@ function wp_travel_publish_metabox() {
 	<?php
 	}
 }
+
+add_action('wp_ajax_wp_travel_add_itinerary_content_data', 'wp_travel_add_itinerary_content_data');
+add_action('wp_ajax_nopriv_wp_travel_add_itinerary_content_data', 'wp_travel_add_itinerary_content_data'); 
+if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
+	/**
+	 * Admin Itineraries Data Content Tabs Load.
+	 * @since 1.1.0
+	 * @return Null 
+ 	*/
+	function wp_travel_add_itinerary_content_data() {
+
+		$uid = $_POST['itinerary_id'];
+
+		$itinerary_settings = array(
+			'quicktags' 	=> array('buttons' => 'em,strong,link'),
+			'quicktags' 	=> true,
+			'tinymce' 		=> true,
+			'textarea_rows'	=> 10,
+			'textarea_name' => 'wp_travel_trip_itinerary_data['.$uid.'][desc]',
+		);
+
+		echo '<div class="itinerary_wrap">
+					<div class="itinerary_row">
+						<div class="itinerary_col"> <label>'.__('Label', 'wp-travel').'</label> <input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][label]" value="">
+						</div>
+						<div class="itinerary_col"><label>'.__('Title', 'wp-travel').'</label><input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][title]" value="">
+						</div>
+					</div>';
+
+		echo '<div class="itinerary_row">
+						<label>'.__('Description', 'wp-travel').'</label>
+						<div class="itinerary-editor">';
+
+		wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings);
+
+		echo '</div>
+			</div>';
+		echo '<div class="itinerary_row"> 
+						<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a> 
+			
+					</div>';
+		echo '</div>';			
+		exit;				
+	}
+}

@@ -31,6 +31,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'gallery_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'location_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'advance_tab_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'itineraries_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_itineraries', array( $this, 'price_tab_call_back' ), 10, 2 );
 	}
@@ -77,6 +78,12 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label' => __( 'Additional Info', 'wp-travel' ),
 			'content_title' => __( 'Additional Info', 'wp-travel' ),
 			'content_callback' => array( $this, 'call_back' ),
+		);
+
+		$itineraries['itineraries_content'] = array(
+			'tab_label' => __( 'Itinerary', 'wp-travel' ),
+			'content_title' => __( 'Itinerary Data', 'wp-travel' ),
+			'content_callback' => array( $this, 'itineraries_content_call_back' ),
 		);
 
 		$itineraries['price'] = array(
@@ -203,6 +210,23 @@ class WP_Travel_Admin_Metaboxes {
 		$thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
 		// echo _wp_post_thumbnail_html( $thumbnail_id, $post->ID );
 	}
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 * 	
+	 * @param string $tab tab name 'itineraries_content'
+	 * @return Mixed
+	 */
+	function itineraries_content_call_back( $tab ) {
+		
+		global $post;
+
+		if( 'itineraries_content' !== $tab ) {
+			return;
+		}
+
+		WP_Travel()->tabs->content( 'itineraries/itineraries-content.php' );
+
+	 }
 
 	/**
 	 * HTML template for gallery list item.
@@ -321,6 +345,15 @@ class WP_Travel_Admin_Metaboxes {
 		if ( isset( $_POST['wp_travel_end_date'] ) ) {
 			$wp_travel_end_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_end_date'] ) );
 			update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
+		}
+
+		// Itinerary Details Data.
+
+		if( isset( $_POST['wp_travel_trip_itinerary_data'] ) ) {
+
+			$wp_travel_trip_itinerary_data =  wp_unslash( $_POST['wp_travel_trip_itinerary_data'] );
+			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $wp_travel_trip_itinerary_data );
+
 		}
 
 		// Gallery.
