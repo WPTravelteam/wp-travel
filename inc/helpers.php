@@ -180,17 +180,17 @@ function wp_travel_get_related_post( $post_id ) {
 	// For use in the loop, list 5 post titles related to first tag on current post.
 	$terms = wp_get_object_terms( $post_id, 'itinerary_types' );
 
-	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related itineraries not found.', 'wp-travel' ) . '</p>';
+	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related trip not found.', 'wp-travel' ) . '</p>';
 	?>
 	 <div class="wp-travel-related-posts wp-travel-container-wrap">
-		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Itineraries', 'wp-travel' ) ); ?></h2>
+		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h2>
 		<div class="wp-travel-itinerary-items"> 
 			 <?php
 		 	if ( ! empty( $terms ) ) {
 				$term_ids = wp_list_pluck( $terms, 'term_id' );
 				$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row' , '3' );
 				$args = array(
-					'post_type' => 'itineraries',
+					'post_type' => WP_TRAVEL_POST_TYPE,
 					'post__not_in' => array( $post_id ),
 					'posts_per_page' => $col_per_row,
 					'tax_query' => array(
@@ -432,7 +432,7 @@ function wp_travel_allowed_html( $tags = array() ) {
  */
 function wp_travel_get_itineraries_array() {
 	$args = array(
-	  'post_type'   => 'itineraries',
+	  'post_type'   => WP_TRAVEL_POST_TYPE,
 	);
 
 	$itineraries = get_posts( $args );
@@ -458,7 +458,7 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 		'order'            => 'DESC',
 		'meta_key'         => 'wp_travel_featured',
 		'meta_value'       => 'yes',
-		'post_type'        => 'itineraries',
+		'post_type'        => WP_TRAVEL_POST_TYPE,
 		'post_status'      => 'publish',
 		'suppress_filters' => true,
 	);
@@ -476,7 +476,7 @@ function wp_travel_search_form() {
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) );  ?>" > 
-			<input type="hidden" name="post_type" value="itineraries" />
+			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ) ?>" />
 			<p>
 				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
