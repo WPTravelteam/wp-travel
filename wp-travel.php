@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 1.0.6
+ * Version: 1.1.0
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
@@ -34,7 +34,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.0.6';
+		public $version = '1.1.0';
 		/**
 		 * The single instance of the class.
 		 *
@@ -73,6 +73,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * Define WC Constants.
 		 */
 		private function define_constants() {
+			$this->define( 'WP_TRAVEL_POST_TYPE', 'trip' );
 			$this->define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
 			$this->define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 			$this->define( 'WP_TRAVEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
@@ -97,11 +98,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wp_travel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			// To delete transient.
-			add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
 			if ( $this->is_request( 'admin' ) ) {
+				// To delete transient.
+				add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
+				// add_action( 'admin_menu', 'wp_travel_marketplace_menu');
 				$this->tabs = new WP_Travel_Admin_Tabs();
 				$this->uploader = new WP_Travel_Admin_Uploader();
+
+				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
 			}
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
@@ -181,6 +185,21 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
+		 * Include admin files conditionally.
+		 */
+		public function conditional_includes() {
+			if ( ! $screen = get_current_screen() ) {
+				return;
+			}
+
+			switch ( $screen->id ) {
+				case 'options-permalink' :
+					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
+				break;
+			}
+		}
+
+		/**
 		 * What type of request is this?
 		 *
 		 * @param  string $type admin, ajax, cron or frontend.
@@ -230,6 +249,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				}
 			}
 			include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+			$current_db_version = get_option( 'wp_travel_version' );
+			if ( $current_db_version !== WP_TRAVEL_VERSION ) {
+				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
+			}
 		}
 
 		function wp_travel_setup_environment () {
