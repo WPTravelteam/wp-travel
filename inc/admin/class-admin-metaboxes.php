@@ -26,7 +26,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'detail_tab_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'description_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'additional_info_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'itineraries_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
@@ -40,10 +40,12 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( 'wp-travel-itinerary-detail', __( 'Itinerary Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
+		add_meta_box( 'wp-travel-trip-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
+		add_meta_box( 'wp-travel-trip-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'itinerary_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		// remove_meta_box( 'tagsdiv-travel_keywords', WP_TRAVEL_POST_TYPE, 'side' );
 	}
 
 	/**
@@ -69,9 +71,9 @@ class WP_Travel_Admin_Metaboxes {
 	 * @return array
 	 */
 	function add_tabs( $tabs ) {
-		$trips['detail'] = array(
-			'tab_label' => __( 'Details', 'wp-travel' ),
-			'content_title' => __( 'Details', 'wp-travel' ),
+		$trips['description'] = array(
+			'tab_label' => __( 'Description', 'wp-travel' ),
+			'content_title' => __( 'Description', 'wp-travel' ),
 		);
 
 		$trips['additional_info'] = array(
@@ -113,14 +115,14 @@ class WP_Travel_Admin_Metaboxes {
 	}
 
 	/**
-	 * Callback Function for Detail Tabs.
+	 * Callback Function for Description Tabs.
 	 *
-	 * @param  string $tab tab name 'detail'.
+	 * @param  string $tab tab name 'Description'.
 	 * @return Mixed
 	 */
-	function detail_tab_callback( $tab ) {
+	function description_tab_callback( $tab ) {
 		global $post;
-		if ( 'detail' !== $tab ) {
+		if ( 'description' !== $tab ) {
 			return;
 		}
 		WP_Travel()->tabs->content( 'itineraries/detail-tab.php' );
@@ -259,6 +261,26 @@ class WP_Travel_Admin_Metaboxes {
 	function load_tab_template( $post ) {
 		$args['post'] = $post;
 		WP_Travel()->tabs->load( self::$post_type, $args );
+	}
+
+	/**
+	 * Trip Info metabox.
+	 *
+	 * @param  Object $post Post object.
+	 */
+	function wp_travel_trip_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$trip_code = wp_travel_get_trip_code( $post->ID );
+		?>
+		<table class="form-table">
+			<tr>
+				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+			</tr>
+		</table>
+		<?php
 	}
 
 	/**
