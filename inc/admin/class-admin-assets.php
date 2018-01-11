@@ -28,12 +28,12 @@ class WP_Travel_Admin_Assets {
 
 		$screen = get_current_screen();
 		// Tab for settings page.
-		if ( 'itineraries_page_settings' == $screen->id ) {
+		if ( WP_TRAVEL_POST_TYPE . '_page_settings' == $screen->id ) {
 			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs' ), WP_TRAVEL_VERSION, 1 );
 			wp_enqueue_script( 'wp-travel-tabs' );
 		}
 		// @since 1.0.5 // booking stat
-		if ( 'itineraries_page_booking_chart' === $screen->id ) {
+		if ( WP_TRAVEL_POST_TYPE . '_page_booking_chart' === $screen->id ) {
 			wp_register_script( 'jquery-chart', $this->assets_path . 'assets/js/lib/chartjs/Chart.bundle' . $suffix . '.js', array( 'jquery' ) );
 			wp_register_script( 'jquery-chart-util', $this->assets_path . 'assets/js/lib/chartjs/chart-utils.js', array( 'jquery' ) );
 
@@ -84,7 +84,7 @@ class WP_Travel_Admin_Assets {
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_enqueue_script( 'jquery-chart-custom' );
 		}
-		$allowed_screen = array( 'itineraries', 'edit-itineraries' );
+		$allowed_screen = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE );
 
 		if ( in_array( $screen->id, $allowed_screen ) ) {
 			$settings = wp_travel_get_settings();
