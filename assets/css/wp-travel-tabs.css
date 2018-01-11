@@ -1,6 +1,14 @@
 #poststuff #wp-travel-itinerary-detail .inside {
   margin-top: 0; }
 
+.clearfix:before, .clearfix:after {
+  clear: both;
+  content: '';
+  display: table; }
+
+.clearfix::after {
+  clear: both; }
+
 .wp-travel-tabs-wrap {
   background: none;
   border: 0;
@@ -76,6 +84,8 @@
         content: "\f330"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-price a:before {
         content: "\f323"; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-itineraries_content a:before {
+        content: "\f231"; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;
