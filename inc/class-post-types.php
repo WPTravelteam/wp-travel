@@ -6,26 +6,26 @@ class WP_Travel_Post_Types {
 	}
 
 	public static function init() {
-		self::register_itineraries();
+		self::register_trip();
 		self::register_bookings();
 	}
 
-	public static function register_itineraries() {
+	public static function register_trip() {
 		$labels = array(
-			'name'               => _x( 'Itineraries', 'post type general name', 'wp-travel' ),
-			'singular_name'      => _x( 'Itinerary', 'post type singular name', 'wp-travel' ),
-			'menu_name'          => _x( 'Itineraries', 'admin menu', 'wp-travel' ),
-			'name_admin_bar'     => _x( 'Itinerary', 'add new on admin bar', 'wp-travel' ),
+			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
+			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),
+			'menu_name'          => _x( 'Trips', 'admin menu', 'wp-travel' ),
+			'name_admin_bar'     => _x( 'Trip', 'add new on admin bar', 'wp-travel' ),
 			'add_new'            => _x( 'Add New', 'wp-travel', 'wp-travel' ),
-			'add_new_item'       => __( 'Add New itinerary', 'wp-travel' ),
-			'new_item'           => __( 'New itinerary', 'wp-travel' ),
-			'edit_item'          => __( 'Edit itinerary', 'wp-travel' ),
-			'view_item'          => __( 'View itinerary', 'wp-travel' ),
-			'all_items'          => __( 'All Itineraries', 'wp-travel' ),
-			'search_items'       => __( 'Search Itineraries', 'wp-travel' ),
-			'parent_item_colon'  => __( 'Parent Itineraries:', 'wp-travel' ),
-			'not_found'          => __( 'No Itineraries found.', 'wp-travel' ),
-			'not_found_in_trash' => __( 'No Itineraries found in Trash.', 'wp-travel' ),
+			'add_new_item'       => __( 'Add New Trip', 'wp-travel' ),
+			'new_item'           => __( 'New Trip', 'wp-travel' ),
+			'edit_item'          => __( 'Edit Trip', 'wp-travel' ),
+			'view_item'          => __( 'View Trip', 'wp-travel' ),
+			'all_items'          => __( 'All Trips', 'wp-travel' ),
+			'search_items'       => __( 'Search Trips', 'wp-travel' ),
+			'parent_item_colon'  => __( 'Parent Trips:', 'wp-travel' ),
+			'not_found'          => __( 'No Trips found.', 'wp-travel' ),
+			'not_found_in_trash' => __( 'No Trips found in Trash.', 'wp-travel' ),
 		);
 
 		$args = array(
