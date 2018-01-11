@@ -118,7 +118,7 @@ $alto: #ddd;
             }
             &#wp-travel-tab-itineraries_content a{
                 &:before{
-                    content:"\f231";
+                    content:"\f157";
                 }
 
             }
@@ -194,6 +194,19 @@ $alto: #ddd;
             }
         }
     }
+
+    .itinerary_wrap {
+        .remove_itinery{
+            margin-top:20px;
+            margin-bottom:20px;
+            background: #ca4a1f;
+            color: #fff;
+            border: #ca4a1f;
+            padding: 5px 10px;
+            text-align: center;
+            line-height: 1;
+        }
+    } 
 }
 
 // Taxonomy Wrap
