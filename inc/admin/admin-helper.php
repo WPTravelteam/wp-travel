@@ -15,7 +15,169 @@ function wp_travel_admin_init() {
 }
 function wp_travel_marketplace_page() {
 	?>
-		<h2>Marketplage page</h2>
+		<div class="wrap">
+	<div id="poststuff">
+
+	<h1 class="wp-heading-inline">Marketplace</h1>
+
+	<div id="post-body">
+
+
+
+
+	<div class="wp-travel-marketplace-tab-wrap">
+		<ul>
+	    <li class=""><a href="#tabs-1">Addons</a></li>
+	    <li class=""><a href="#tabs-2">Themes</a></li>
+	    
+	  </ul>
+	  <div id="tabs-1" class="tab-pannel">
+	    <div class="marketplace-module clearfix">
+			<div class="single-module">
+	            <div class="single-module-image">
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                </a>
+	            </div>
+	            <div class="single-module-content clearfix">
+	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="#">View Detail</a>
+	                <a class="btn-default pull-right" href="#">Download</a>
+	            </div>
+	        </div>
+	        <div class="single-module">
+	            <div class="single-module-image">
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                </a>
+	            </div>
+	            <div class="single-module-content clearfix">
+	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="#">View Detail</a>
+	                <a class="btn-default pull-right" href="#">Download</a>
+	            </div>
+	        </div>
+	        <div class="single-module">
+	            <div class="single-module-image">
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                </a>
+	            </div>
+	            <div class="single-module-content clearfix">
+	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="#">View Detail</a>
+	                <a class="btn-default pull-right" href="#">Download</a>
+	            </div>
+	        </div>
+	        <div class="single-module">
+	            <div class="single-module-image">
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                </a>
+	            </div>
+	            <div class="single-module-content clearfix">
+	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="#">View Detail</a>
+	                <a class="btn-default pull-right" href="#">Download</a>
+	            </div>
+	        </div>
+	    </div>
+	  </div>
+	  <div id="tabs-2" class="tab-pannel">
+	    <div class="marketplace-module clearfix">
+			<div class="single-module">
+	            <div class="single-module-image">
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                </a>
+	            </div>
+	            <div class="single-module-content clearfix">
+	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="#">View Detail</a>
+	                <a class="btn-default pull-right" href="#">Download</a>
+	            </div>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+
+
+		<div id="aside-wrap" class="single-module-side">
+		
+		<div id="wp_travel_support_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text">Toggle panel: Support</span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span>Support</span>
+			</h2>
+			<div class="inside">
+
+		       <div class="thumbnail">
+		            <img src="http://skynet.wensolutions.com/co-workers/sushil/travel-log/wp-content/plugins/wen-logo-slider/admin/images/docico.png">
+		             <p class="text-justify">Click Below for support. </p>
+		             <p class="text-center"><a href="#" target="_blank" class="button button-primary">Get Support Here</a></p>
+		       </div>             
+
+			</div>
+		</div>
+	
+		<div id="wp_travel_doc_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text">Toggle panel: Documentation</span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span>Documentation</span>
+			</h2>
+			<div class="inside">
+
+		       <div class="thumbnail">
+		            <img src="http://skynet.wensolutions.com/co-workers/sushil/travel-log/wp-content/plugins/wen-logo-slider/admin/images/docico.png">
+		             <p class="text-justify">Click Below for our full Documentation about logo slider. </p>
+		             <p class="text-center"><a href="#" target="_blank" class="button button-primary">Get Documentation Here</a></p>
+		       </div>             
+
+			</div>
+		</div>
+
+		<div id="wp_travel_review_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text">Toggle panel: Reviews</span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span>Reviews</span>
+			</h2>
+			<div class="inside">
+				
+				<div class="thumbnail">
+					<p class="text-center">  
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>					
+					</p>
+					<h5>"After testing a lot of plugin. I was hopeless o get a free logo slider but luckily I found this one and it saved the day :D "</h5>
+					<span class="by"><strong> <a href="https://wordpress.org/support/view/plugin-reviews/wen-logo-slider" target="_blank">Suleman Muqeed</a></strong></span>
+
+				</div>				
+				<div class="thumbnail last">
+					<h5>"Please fill free to leave us a review, if you found this plugin helpful."</h5>
+					<p class="text-center"><a href="https://wordpress.org/support/view/plugin-reviews/wen-logo-slider" target="_blank" class="button button-primary">Leave a Review</a></p>
+				</div>     
+			</div>
+		</div>
+
+
+	</div>
+
+
+</div>
+</div>
+</div>
 	<?php
 }
 
@@ -59,7 +221,7 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 /*
  * ADMIN COLUMN - HEADERS
  */
-add_filter( 'manage_edit-itineraries_columns', 'wp_travel_itineraries_columns' );
+add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itineraries_columns' );
 
 /**
  * Customize Admin column.
@@ -81,7 +243,7 @@ function wp_travel_itineraries_columns( $itinerary_columns ) {
 /*
  * ADMIN COLUMN - CONTENT
  */
-add_action( 'manage_itineraries_posts_custom_column', 'wp_travel_itineraries_manage_columns', 10, 2 );
+add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wp_travel_itineraries_manage_columns', 10, 2 );
 
 /**
  * Add data to custom column.
@@ -115,7 +277,7 @@ function wp_travel_itineraries_manage_columns( $column_name, $id ) {
  * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
  * https://gist.github.com/906872
  */
-add_filter( 'manage_edit-itineraries_sortable_columns', 'wp_travel_itineraries_sort' );
+add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_sortable_columns', 'wp_travel_itineraries_sort' );
 function wp_travel_itineraries_sort( $columns ) {
 
 	$custom = array(

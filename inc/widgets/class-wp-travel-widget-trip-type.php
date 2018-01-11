@@ -54,8 +54,8 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 			'numberposts' 	   => $no_of_trip_show,
 			'offset'           => 0,
 			'orderby'          => 'date',
-			'order'            => 'DESC',			
-			'post_type'        => 'itineraries',
+			'order'            => 'DESC',
+			'post_type'        => WP_TRAVEL_POST_TYPE,
 			'post_status'      => 'publish',
 			'suppress_filters' => true,
 		);

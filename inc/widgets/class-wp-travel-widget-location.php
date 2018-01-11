@@ -55,7 +55,7 @@ class WP_Travel_Widget_Location extends WP_Widget {
 			'offset'           => 0,
 			'orderby'          => 'date',
 			'order'            => 'DESC',			
-			'post_type'        => 'itineraries',
+			'post_type'        => WP_TRAVEL_POST_TYPE,
 			'post_status'      => 'publish',
 			'suppress_filters' => true,
 		);
