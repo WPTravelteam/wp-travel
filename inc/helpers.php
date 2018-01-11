@@ -907,11 +907,12 @@ function wp_travel_get_image_sizes() {
 function wp_travel_payment_gateway_lists() {
 	return apply_filters( 'wp_travel_payment_gateway_lists', array() );
 }
+
 /**
  * Determine if post type is itinerary
  */
 function is_itinerary() {
-	return get_post_type() === 'itineraries';
+	return get_post_type() === WP_TRAVEL_POST_TYPE;
 }
 
 /**
@@ -940,3 +941,4 @@ function wp_travel_get_permalink_structure() {
 
 	return $permalinks;
 }
+
