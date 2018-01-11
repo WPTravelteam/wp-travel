@@ -74,7 +74,7 @@ class Wp_Travel_Taxonomies {
 			'hierarchical'      => false,
 			'labels'            => $labels,
 			'show_ui'           => true,
-			'show_admin_column' => true,
+			'show_admin_column' => false,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'travel-keywords' ),
 		);
