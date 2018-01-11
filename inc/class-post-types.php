@@ -11,6 +11,7 @@ class WP_Travel_Post_Types {
 	}
 
 	public static function register_trip() {
+		$permalink = wp_travel_get_permalink_structure();
 		$labels = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
 			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),
@@ -36,7 +37,7 @@ class WP_Travel_Post_Types {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'itinerary' ),
+			'rewrite'            => array( 'slug' => $permalink['wp_travel_trip_base'] ),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
@@ -49,7 +50,7 @@ class WP_Travel_Post_Types {
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
-		register_post_type( 'itineraries', $args );
+		register_post_type( WP_TRAVEL_POST_TYPE, $args );
 	}
 
 	public static function register_bookings() {
@@ -76,7 +77,7 @@ class WP_Travel_Post_Types {
 			'public'             => false,
 			'publicly_queryable' => false,
 			'show_ui'            => true,
-			'show_in_menu'       => 'edit.php?post_type=itineraries',
+			'show_in_menu'       => 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE,
 			'query_var'          => true,
 			// 'rewrite'            => array( 'slug' => 'itinerary-booking' ),
 			'capability_type'    => 'post',
