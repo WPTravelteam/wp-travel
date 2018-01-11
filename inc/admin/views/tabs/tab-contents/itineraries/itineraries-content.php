@@ -9,7 +9,7 @@ $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_d
 <div id="itinerary">
     <div class="itinerary_block">
         <?php
-        if( $trip_itinerary_data_arr['0'] ) {
+        if( isset( $trip_itinerary_data_arr['0'] ) && ! empty( $trip_itinerary_data_arr['0'] ) ) {
         $cnt = 0;
 
             foreach($trip_itinerary_data_arr['0'] as $key => $itinerary){
