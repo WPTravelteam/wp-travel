@@ -13,6 +13,11 @@
 function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 }
+function wp_travel_marketplace_page() {
+	?>
+		<h2>Marketplage page</h2>
+	<?php
+}
 
 function wp_travel_clear_booking_count_transient( $post_id ) {
 	if ( ! $post_id ) {
