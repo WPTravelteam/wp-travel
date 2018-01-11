@@ -28,7 +28,8 @@ class WP_Travel_Admin_Assets {
 
 		$screen = get_current_screen();
 		// Tab for settings page.
-		if ( WP_TRAVEL_POST_TYPE . '_page_settings' == $screen->id ) {
+		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
+		if ( in_array( $screen->id, $setting_allowed ) ) {
 			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs' ), WP_TRAVEL_VERSION, 1 );
 			wp_enqueue_script( 'wp-travel-tabs' );
 		}
