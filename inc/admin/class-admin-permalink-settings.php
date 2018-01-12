@@ -77,7 +77,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function trip_slug_input() {
 		
 		?>
-		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'woocommerce' ) ?>" />
+		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'wp-travel' ) ?>" />
 		<?php
 	}
 
@@ -87,7 +87,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function trip_type_slug_input() {
 		
 		?>
-		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'woocommerce' ) ?>" />
+		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'wp-travel' ) ?>" />
 		<?php
 	}
 
@@ -97,7 +97,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function destination_slug_input() {
 		
 		?>
-		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'woocommerce' ) ?>" />
+		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
 		<?php
 	}
 
@@ -107,7 +107,7 @@ class WP_Travel_Admin_Permalink_Settings {
 	public function activity_slug_input() {
 		
 		?>
-		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'woocommerce' ) ?>" />
+		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
 		<?php
 	}
 

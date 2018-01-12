@@ -9,9 +9,11 @@ module.exports = function(grunt) {
 		'i18n/**',
 		'inc/**',
 		'templates/**',
-		'readme.txt',
 		'upgrade/**',
+		'loco.xml',
+		'readme.txt',
 		'wp-travel.php',
+		'wpml-config.xml',
 	];
 
 	/**

@@ -1,10 +1,10 @@
 === WP Travel ===
 Contributors: WEN Solutions
 Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
-Donate link: http://wensolutions.com
+Donate link: http://wptravel.io/
 Requires at least: 4.4.0
 Tested up to: 4.9.1
-Stable tag: 1.0.6
+Stable tag: 1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -80,12 +80,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1 =
 * New Feature: "Loco Translate" support.
 * New Feature: "WPML Translate" support.
 * New Feature: Payment fields added globally.
 * New Feature: Activities Taxonomy added.
-* New Feature: Slug override for trip, location, trip type, activities.  
+* New Feature: Slug override for trip, location, trip type, activities.
 * Changes: Itineraries post type changed to trip.
 * Changes: Price fields moved to price tab in itineraries section.
 * Fixes: Thumbnail blur issue.

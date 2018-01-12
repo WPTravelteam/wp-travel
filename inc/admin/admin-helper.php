@@ -14,16 +14,25 @@ function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	wp_travel_upgrade_to_110();
 }
-function wp_travel_marketplace_page() {
+
+function wp_travel_admin_footer_styles() {
 	global $_wp_admin_css_colors;
 	$current_color_scheme = get_user_option( 'admin_color' );
-	
-	$active_color_code = $_wp_admin_css_colors[$current_color_scheme]->colors[2]; ?>
+	$active_color_code = $_wp_admin_css_colors[$current_color_scheme]->colors[3];
+	?>
 	<style>
 		#menu-posts-<?php echo WP_TRAVEL_POST_TYPE; ?> ul li:last-child a{
-			color: <?php echo $active_color_code; ?>;
+			color: <?php echo $active_color_code; ?>!important;
 		}
 	</style>
+	<?php
+}
+
+add_action( 'admin_footer', 'wp_travel_admin_footer_styles' );
+
+function wp_travel_marketplace_page() {
+
+	?>
 	<div class="wrap">
 		<div id="poststuff">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ) ?></h1>
@@ -38,7 +47,7 @@ function wp_travel_marketplace_page() {
 							<div class="single-module">
 								<div class="single-module-image">
 									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">                            
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
 									</a>
 								</div>
 								<div class="single-module-content clearfix">
@@ -53,7 +62,7 @@ function wp_travel_marketplace_page() {
 							<div class="single-module">
 								<div class="single-module-image">
 									<a href="http://wensolutions.com/themes/travel-log/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >                            
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >
 									</a>
 								</div>
 								<div class="single-module-content clearfix">
@@ -68,7 +77,7 @@ function wp_travel_marketplace_page() {
 
 
 				<div id="aside-wrap" class="single-module-side">
-		
+
 		<div id="wp_travel_support_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
 				<span class="screen-reader-text">Toggle panel: Support</span>
@@ -83,11 +92,11 @@ function wp_travel_marketplace_page() {
 		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ) ?>">
 		             <p class="text-justify">Click Below for support. </p>
 		             <p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary">Get Support Here</a></p>
-		       </div>             
+		       </div>
 
 			</div>
 		</div>
-	
+
 		<div id="wp_travel_doc_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
 				<span class="screen-reader-text">Toggle panel: Documentation</span>
@@ -102,7 +111,7 @@ function wp_travel_marketplace_page() {
 		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ) ?>">
 		             <p class="text-justify">Click Below for our full Documentation about logo slider. </p>
 		             <p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary">Get Documentation Here</a></p>
-		       </div>             
+		       </div>
 
 			</div>
 		</div>
@@ -116,25 +125,25 @@ function wp_travel_marketplace_page() {
 				<span>Reviews</span>
 			</h2>
 			<div class="inside">
-				
+
 				<div class="thumbnail">
-					<p class="text-center">  
+					<p class="text-center">
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>					
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 					</p>
 					<h5>"The plugin is very intuitive and fresh.
 The layout fits well into theme with flexibility to different shortcodes.
 Its great plugin for travel or tour agent websites."</h5>
 					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank">muzdat</a></strong></span>
 
-				</div>				
+				</div>
 				<div class="thumbnail last">
 					<h5>"Please fill free to leave us a review, if you found this plugin helpful."</h5>
 					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary">Leave a Review</a></p>
-				</div>     
+				</div>
 			</div>
 		</div>
 
@@ -171,7 +180,7 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 	if ( ! $booking_count ) {
 		// error_log( 'no count ' . $itinerary_id );
 		$booking_count = 0;
-		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P 
+		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P
 		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";
 		$results = $wpdb->get_row( $query );
 		if ( $results ) {
@@ -314,7 +323,7 @@ function wp_travel_publish_metabox() {
 			$status = wp_travel_get_booking_status();
 			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
 			?>
-			
+
 			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
 			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
 			<?php foreach ( $status as $value => $st ) : ?>
@@ -324,18 +333,18 @@ function wp_travel_publish_metabox() {
 			<?php endforeach; ?>
 			</select>
 		</div>
-        
+
 	<?php
 	}
 }
 
 add_action('wp_ajax_wp_travel_add_itinerary_content_data', 'wp_travel_add_itinerary_content_data');
-add_action('wp_ajax_nopriv_wp_travel_add_itinerary_content_data', 'wp_travel_add_itinerary_content_data'); 
+add_action('wp_ajax_nopriv_wp_travel_add_itinerary_content_data', 'wp_travel_add_itinerary_content_data');
 if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 	/**
 	 * Admin Itineraries Data Content Tabs Load.
 	 * @since 1.1.0
-	 * @return Null 
+	 * @return Null
  	*/
 	function wp_travel_add_itinerary_content_data() {
 
@@ -365,12 +374,12 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 
 		echo '</div>
 			</div>';
-		echo '<div class="itinerary_row"> 
-						<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a> 
-			
+		echo '<div class="itinerary_row">
+						<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a>
+
 					</div>';
-		echo '</div>';			
-		exit;				
+		echo '</div>';
+		exit;
 	}
 }
 

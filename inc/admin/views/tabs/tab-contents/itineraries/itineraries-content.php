@@ -20,7 +20,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 			if ( array_key_exists ( 'label', $itinerary ) && $itinerary['label'] != '' ) {
 				$itinerary_txt = stripslashes( $itinerary['label'] );
 			} else {
-				$itinerary_txt = __( 'Day', 'wp_travel' ) . $cnt;
+				$itinerary_txt = __( 'Day', 'wp-travel' ) . $cnt;
 			}
 			$itinerary_label = @$itinerary['label'];
 			$itinerary_title = @$itinerary['title']; ?>
@@ -30,7 +30,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
                     <tbody>
                         <tr>
                             <td>
-                                <label><?php _e('Label','wp_travel');?></label>
+                                <label><?php _e('Label','wp-travel');?></label>
                             </td>
                             <td>
                                 <input type="text" name="wp_travel_trip_itinerary_data[<?php echo $cnt; ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
@@ -38,7 +38,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
                         </tr>
                         <tr>
                             <td>
-                                <label><?php _e('Title','wp_travel');?></label>
+                                <label><?php _e('Title','wp-travel');?></label>
                             </td>
                             <td>
                                 <input type="text" name="wp_travel_trip_itinerary_data[<?php echo $cnt; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
@@ -46,7 +46,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <label><?php _e('Description','wp_travel');?></label>
+                                <label><?php _e('Description','wp-travel');?></label>
                                 <?php
                                     $itinerary_settings = array(
                                     'quicktags' 	=> array('buttons' => 'em,strong,link'),
@@ -63,7 +63,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: right;">
-                                <a href="javascript:void(null);" class="button button-small remove_itinery"><?php _e('Remove', 'wp_travel'); ?></a>
+                                <a href="javascript:void(null);" class="button button-small remove_itinery"><?php _e('Remove', 'wp-travel'); ?></a>
                             </td>
                         </tr>
                     </tbody>
@@ -77,6 +77,6 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 <?php endif; ?>
 <!-- <h4> 
     <a href="javascript:void(null);" id="add_itinerary_row" class="button button-primary button-small" >
-        <?php _e('Add Day', 'wp_travel'); ?> 
+        <?php _e('Add Day', 'wp-travel'); ?> 
     </a> 
 </h4> -->
