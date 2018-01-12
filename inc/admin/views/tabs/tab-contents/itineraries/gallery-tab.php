@@ -9,7 +9,6 @@ global $post;
 ?>
 
 <div class="wp-travel-post-tab-content-section">
-	<h3 class="wp-travel-post-tab-content-section-title"><?php esc_html_e( 'Upload Gallery images', 'wp-travel' ); ?></h3>
 	<?php
 	WP_Travel()->uploader->load(); ?>
 	<script type="text/javascript">

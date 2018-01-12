@@ -100,8 +100,8 @@ class WP_Travel_Admin_Metaboxes {
 		);
 
 		$trips['images_gallery'] = array(
-			'tab_label' => __( 'Images/ Gallery', 'wp-travel' ),
-			'content_title' => __( 'Images/ Gallery', 'wp-travel' ),
+			'tab_label' => __( 'Gallery', 'wp-travel' ),
+			'content_title' => __( 'Gallery', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'gallery_tab_callback' ),
 		);
 
@@ -451,6 +451,10 @@ class WP_Travel_Admin_Metaboxes {
 		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
 			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );
 			update_post_meta( $post_id, 'wp_travel_trip_duration', $trip_duration );
+		}
+		if ( isset( $_POST['wp_travel_trip_duration_night'] ) ) {
+			$trip_duration_night = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration_night'] ) );
+			update_post_meta( $post_id, 'wp_travel_trip_duration_night', $trip_duration_night );
 		}
 
 		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
