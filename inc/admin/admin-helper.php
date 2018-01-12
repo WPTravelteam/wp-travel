@@ -12,6 +12,7 @@
  */
 function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
+	wp_travel_upgrade_to_110();
 }
 function wp_travel_marketplace_page() {
 	?>
@@ -369,5 +370,16 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					</div>';
 		echo '</div>';			
 		exit;				
+	}
+}
+
+function wp_travel_upgrade_to_110() {
+	$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
+	$current_db_version = get_option( 'wp_travel_version' );
+	if ( ! $current_db_version ) {
+		include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+	}
+	if ( count( $itineraries ) > 0 ) {
+		include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 	}
 }
