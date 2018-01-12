@@ -122,6 +122,19 @@ $alto: #ddd;
                 }
 
             }
+            &#wp-travel-tab-trip_includes a{
+                &:before{
+                    content: "\f316";
+                    transform: rotate(270deg);
+                }
+            }
+            &#wp-travel-tab-trip_excludes a{
+                &:before{
+                    content: "\f316";
+                    transform: rotate(90deg);
+                }
+            }
+            
         }
     }
     .wp-travel-tabs-contents {
@@ -168,6 +181,7 @@ $alto: #ddd;
                     position: relative;
                     margin-right: 10px;
                     margin-bottom: 10px;
+                    width: calc( 25% - 10px );
                     &.featured-image:before {
                         content: "\f155";
                         color: #f1d375;
@@ -330,12 +344,14 @@ $alto: #ddd;
         background-color: #fbfbfb;
     }
     .single-module-image{
+        border-bottom:none;
         a{
             display:block;
         }
         img{
             width:100%;
             height: auto;
+            border-bottom:1px solid #ddd;
         }
     }
     .single-module-content{
@@ -347,7 +363,6 @@ $alto: #ddd;
         }
         a{
             text-decoration:none;
-            
         }
         .pull-left{
             float:left;
@@ -469,3 +484,5 @@ $alto: #ddd;
 
 
 }
+
+

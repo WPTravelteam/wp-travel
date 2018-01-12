@@ -35,50 +35,13 @@ function wp_travel_marketplace_page() {
 	    <div class="marketplace-module clearfix">
 			<div class="single-module">
 	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                <a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
+	                   <img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">                            
 	                </a>
 	            </div>
 	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="#">View Detail</a>
-	                <a class="btn-default pull-right" href="#">Download</a>
-	            </div>
-	        </div>
-	        <div class="single-module">
-	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
-	                </a>
-	            </div>
-	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="#">View Detail</a>
-	                <a class="btn-default pull-right" href="#">Download</a>
-	            </div>
-	        </div>
-	        <div class="single-module">
-	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
-	                </a>
-	            </div>
-	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="#">View Detail</a>
-	                <a class="btn-default pull-right" href="#">Download</a>
-	            </div>
-	        </div>
-	        <div class="single-module">
-	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
-	                </a>
-	            </div>
-	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="#">View Detail</a>
-	                <a class="btn-default pull-right" href="#">Download</a>
+	                <h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
+	                <a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
 	            </div>
 	        </div>
 	    </div>
@@ -87,14 +50,14 @@ function wp_travel_marketplace_page() {
 	    <div class="marketplace-module clearfix">
 			<div class="single-module">
 	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="">                            
+	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/" target="_blank">
+	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="" >                            
 	                </a>
 	            </div>
 	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="#"><span class="dashicons dashicons-wordpress"></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="#">View Detail</a>
-	                <a class="btn-default pull-right" href="#">Download</a>
+	                <h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> Travel Log</a></h4>
+	                <a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank">View Detail</a>
+	                <a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.1.1.0.zip" target="_blank">Download</a>
 	            </div>
 	        </div>
 	    </div>
@@ -115,9 +78,9 @@ function wp_travel_marketplace_page() {
 			<div class="inside">
 
 		       <div class="thumbnail">
-		            <img src="http://skynet.wensolutions.com/co-workers/sushil/travel-log/wp-content/plugins/wen-logo-slider/admin/images/docico.png">
+		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ) ?>">
 		             <p class="text-justify">Click Below for support. </p>
-		             <p class="text-center"><a href="#" target="_blank" class="button button-primary">Get Support Here</a></p>
+		             <p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary">Get Support Here</a></p>
 		       </div>             
 
 			</div>
@@ -134,9 +97,9 @@ function wp_travel_marketplace_page() {
 			<div class="inside">
 
 		       <div class="thumbnail">
-		            <img src="http://skynet.wensolutions.com/co-workers/sushil/travel-log/wp-content/plugins/wen-logo-slider/admin/images/docico.png">
+		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ) ?>">
 		             <p class="text-justify">Click Below for our full Documentation about logo slider. </p>
-		             <p class="text-center"><a href="#" target="_blank" class="button button-primary">Get Documentation Here</a></p>
+		             <p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary">Get Documentation Here</a></p>
 		       </div>             
 
 			</div>
@@ -160,13 +123,15 @@ function wp_travel_marketplace_page() {
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>					
 					</p>
-					<h5>"After testing a lot of plugin. I was hopeless o get a free logo slider but luckily I found this one and it saved the day :D "</h5>
-					<span class="by"><strong> <a href="https://wordpress.org/support/view/plugin-reviews/wen-logo-slider" target="_blank">Suleman Muqeed</a></strong></span>
+					<h5>"The plugin is very intuitive and fresh.
+The layout fits well into theme with flexibility to different shortcodes.
+Its great plugin for travel or tour agent websites."</h5>
+					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank">muzdat</a></strong></span>
 
 				</div>				
 				<div class="thumbnail last">
 					<h5>"Please fill free to leave us a review, if you found this plugin helpful."</h5>
-					<p class="text-center"><a href="https://wordpress.org/support/view/plugin-reviews/wen-logo-slider" target="_blank" class="button button-primary">Leave a Review</a></p>
+					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary">Leave a Review</a></p>
 				</div>     
 			</div>
 		</div>
@@ -230,12 +195,16 @@ add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itiner
  * @return Array                  [description]
  */
 function wp_travel_itineraries_columns( $itinerary_columns ) {
-
+	$comment = isset( $itinerary_columns['comments'] ) ?  $itinerary_columns['comments'] : '';
 	$date = $itinerary_columns['date'];
 	unset( $itinerary_columns['date'] );
+	unset( $itinerary_columns['comments'] );
 
-	$itinerary_columns['booking_count'] = __( 'Booking Count', 'wp-travel' );
+	$itinerary_columns['booking_count'] = __( 'Booking', 'wp-travel' );
 	$itinerary_columns['featured'] = __( 'Featured', 'wp-travel' );
+	if ( $comment ) {
+		$itinerary_columns['comments'] = $comment;
+	}
 	$itinerary_columns['date'] = __( 'Date', 'wp-travel' );
 	return $itinerary_columns;
 }

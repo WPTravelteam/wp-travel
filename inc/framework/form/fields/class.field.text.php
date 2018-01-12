@@ -11,13 +11,13 @@ class WP_Travel_FW_Field_Text {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
-				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );
+				$validations .= sprintf( ' data-parsley-%s="%s"', $key, $attr );
 			}
 		}
 		$attributes = '';
 		if ( isset( $this->field['attributes'] ) ) {
 			foreach ( $this->field['attributes'] as $attribute => $attribute_val ) {
-				$attributes .= sprintf( '%s="%s"', $attribute, $attribute_val );
+				$attributes .= sprintf( ' %s="%s "', $attribute, $attribute_val );
 			}
 		}
 
