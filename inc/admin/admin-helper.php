@@ -50,8 +50,8 @@ function wp_travel_marketplace_page() {
 	    <div class="marketplace-module clearfix">
 			<div class="single-module">
 	            <div class="single-module-image">
-	                <a href="http://skynet.wensolutions.com/wensolutions-site/plugins/wp-classified/" target="_blank">
-	                   <img width="423" height="237" src="http://wensolutions.com/wp-content/uploads/2017/11/devices_web.png" class="" alt="" >                            
+	                <a href="http://wensolutions.com/themes/travel-log/" target="_blank">
+	                   <img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >                            
 	                </a>
 	            </div>
 	            <div class="single-module-content clearfix">
