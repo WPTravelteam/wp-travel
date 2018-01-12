@@ -6,8 +6,10 @@
     font-weight: 700;
     margin-bottom: 10px; }
 
-.wp-travel-trip-code span {
-  margin-right: 10px; }
+.wp-travel-trip-code {
+  margin-top: 5px; }
+  .wp-travel-trip-code span {
+    margin-right: 10px; }
 
 .wp-travel-gallery {
   display: block;
