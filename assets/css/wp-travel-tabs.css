@@ -149,6 +149,11 @@
           text-align: center;
           padding: 2px 0px;
           cursor: pointer; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content input#wp-travel-trip-duration {
+        width: 50px; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content input#wp-travel-trip-duration-night {
+        width: 50px;
+        margin-left: 10px; }
   .wp-travel-tabs-wrap .itinerary_wrap .remove_itinery {
     margin-top: 20px;
     margin-bottom: 20px;
