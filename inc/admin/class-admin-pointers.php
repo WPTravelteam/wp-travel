@@ -159,7 +159,7 @@ function load_pointers( $hook_suffix ) {
     function add_dashboard_screen_pointers( $q ) {
 
         $pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
-        <li>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>.</li>';
+        View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>';
         
         $q['wp_travel_post_type_chges'] = array(
             'target' => '#menu-settings',
