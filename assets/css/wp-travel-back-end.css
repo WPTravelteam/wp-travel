@@ -315,6 +315,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   padding: 3px 5px;
   color: #fff; }
 
+.wp-pointer-content .update-notice {
+  background: #ca4a1f;
+  border: 1px solid #ca4a1f; }
+  .wp-pointer-content .update-notice:before {
+    color: #ca4a1f; }
+
 @media (max-width: 1024px) {
   .left-block,
   .right-block {

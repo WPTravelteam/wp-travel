@@ -477,6 +477,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     color: #fff;
 }
 
+//notice tootip after updating plugin
+.wp-pointer-content{
+
+    .update-notice{
+        background: #ca4a1f;
+        border: 1px solid #ca4a1f;
+
+        &:before{
+            color: #ca4a1f;
+        }
+    }
+} 
+
 @include tab {
     .left-block,
     .right-block {

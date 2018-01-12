@@ -84,9 +84,9 @@ function load_pointers( $hook_suffix ) {
         $q['wp_travel_cng_info'] = array(
             'target' => '#menu-posts-trip',
             'options' => array(
-                'content' => sprintf( '<h3> %s </h3> <p> %s </p>',
+                'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>',
                 __( 'WP Travel Options' ,'wp-travel'),
-                __( 'Configure new settings from custom menu page for WP Travel here','wp-travel')
+                __( 'Previous plugin version Itinerary has been changed to Trips','wp-travel')
             ),
                 'position' => array( 'edge' => 'left', 'align' => 'center' )
             )
