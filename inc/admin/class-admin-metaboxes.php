@@ -81,22 +81,22 @@ class WP_Travel_Admin_Metaboxes {
 		$trips['additional_info'] = array(
 			'tab_label' => __( 'Additional Info', 'wp-travel' ),
 			'content_title' => __( 'Additional Info', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'call_back' ),
 		);
 		$trips['itineraries_content'] = array(
 			'tab_label' => __( 'Itinerary', 'wp-travel' ),
 			'content_title' => __( 'Itinerary Data', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'itineraries_content_call_back' ),
+		);
+		$trips['price'] = array(
+			'tab_label' => __( 'Price', 'wp-travel' ),
+			'content_title' => __( 'Price', 'wp-travel' ),
 		);
 		$trips['trip_includes'] = array(
 			'tab_label' => __( 'Trip Includes', 'wp-travel' ),
 			'content_title' => __( 'Trip Includes', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'itineraries_content_call_back' ),
 		);
 		$trips['trip_excludes'] = array(
 			'tab_label' => __( 'Trip Excludes', 'wp-travel' ),
 			'content_title' => __( 'Trip Excludes', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'price_tab_call_back' ),
 		);
 
 		$trips['images_gallery'] = array(

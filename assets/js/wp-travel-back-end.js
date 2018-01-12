@@ -159,9 +159,9 @@
 
     $(document).on('click', '#wp-travel-enable-sale', function() {
         if ($(this).is(':checked')) {
-            $('#wp-travel-sale-price').removeAttr('disabled');
+            $('#wp-travel-sale-price').removeAttr('disabled').closest('tr').show();
         } else {
-            $('#wp-travel-sale-price').attr('disabled', 'disabled');
+            $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('tr').hide();
         }
     });
 
