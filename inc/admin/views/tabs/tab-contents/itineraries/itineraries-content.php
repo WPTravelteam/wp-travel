@@ -4,44 +4,53 @@
  */
 global $post;
 $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data' );
+$outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true );
+
 ?>
 
-                    <div class="itinerary_wrap" id="itinerary_wrap_">
+    <table class="form-table">
+        <tr>
+            <td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
+            <td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
+        </tr>
+    </table>
 
-                    <table class="form-table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                     <label>Label</label>
-                                </td>
-                                <td>
-                                    <input type="text" name="wp_travel_trip_itinerary_data[wp_travel_itinerary_data_89179][label]" value="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                     <label>Title</label>
-                                </td>
-                                <td>
-                                    <input type="text" name="wp_travel_trip_itinerary_data[wp_travel_itinerary_data_89179][title]" value="">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label for="wp-travel-detail">Description</label>
-                                    <?php // add editor ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: right;">
-                                    <a href="javascript:void(null);" class="button button-small remove_itinery"> Remove</a>
-                                </td>
-                            </tr>
-                        </tbody>
+    <div class="itinerary_wrap" id="itinerary_wrap_">
 
-                    </table>
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <td>
+                            <label>Label</label>
+                    </td>
+                    <td>
+                        <input type="text" name="wp_travel_trip_itinerary_data[wp_travel_itinerary_data_89179][label]" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                            <label>Title</label>
+                    </td>
+                    <td>
+                        <input type="text" name="wp_travel_trip_itinerary_data[wp_travel_itinerary_data_89179][title]" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="wp-travel-detail">Description</label>
+                        <?php // add editor ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;">
+                        <a href="javascript:void(null);" class="button button-small remove_itinery"> Remove</a>
+                    </td>
+                </tr>
+            </tbody>
 
-                    </div>
+        </table>
+
+    </div>
                     
     <div id="itinerary">
         <div class="itinerary_block">
