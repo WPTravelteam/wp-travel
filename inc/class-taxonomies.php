@@ -1,10 +1,12 @@
 <?php
 class Wp_Travel_Taxonomies {
+
 	public static function init() {
 		self::register_itinerary_types();
 	}
 
 	public static function register_itinerary_types() {
+		$permalink = wp_travel_get_permalink_structure();
 		// Add new taxonomy, make it hierarchical (like categories).
 		$labels = array(
 			'name'              => _x( 'Trip Types', 'taxonomy general name', 'wp-travel' ),
@@ -17,7 +19,7 @@ class Wp_Travel_Taxonomies {
 			'update_item'       => __( 'Update Trip Type', 'wp-travel' ),
 			'add_new_item'      => __( 'Add New Trip Type', 'wp-travel' ),
 			'new_item_name'     => __( 'New Tour Trip Name', 'wp-travel' ),
-			'menu_name'         => __( 'Trip Type', 'wp-travel' ),
+			'menu_name'         => __( 'Trip Types', 'wp-travel' ),
 		);
 
 		$args = array(
@@ -26,23 +28,23 @@ class Wp_Travel_Taxonomies {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'trip-type' ),
+			'rewrite'           => array( 'slug' => $permalink['wp_travel_trip_type_base'] ),
 		);
 
 		register_taxonomy( 'itinerary_types', array( WP_TRAVEL_POST_TYPE ), $args );
 
 		$labels = array(
-			'name'              => _x( 'Locations', 'general name', 'wp-travel' ),
-			'singular_name'     => _x( 'Location', 'singular name', 'wp-travel' ),
-			'search_items'      => __( 'Search Locations', 'wp-travel' ),
-			'all_items'         => __( 'All Locations', 'wp-travel' ),
-			'parent_item'       => __( 'Parent Location', 'wp-travel' ),
-			'parent_item_colon' => __( 'Parent Location:', 'wp-travel' ),
-			'edit_item'         => __( 'Edit Location', 'wp-travel' ),
-			'update_item'       => __( 'Update Location', 'wp-travel' ),
-			'add_new_item'      => __( 'Add New Location', 'wp-travel' ),
-			'new_item_name'     => __( 'New Location', 'wp-travel' ),
-			'menu_name'         => __( 'Location', 'wp-travel' ),
+			'name'              => _x( 'Destinations', 'general name', 'wp-travel' ),
+			'singular_name'     => _x( 'Destination', 'singular name', 'wp-travel' ),
+			'search_items'      => __( 'Search Destinations', 'wp-travel' ),
+			'all_items'         => __( 'All Destinations', 'wp-travel' ),
+			'parent_item'       => __( 'Parent Destination', 'wp-travel' ),
+			'parent_item_colon' => __( 'Parent Destination:', 'wp-travel' ),
+			'edit_item'         => __( 'Edit Destination', 'wp-travel' ),
+			'update_item'       => __( 'Update Destination', 'wp-travel' ),
+			'add_new_item'      => __( 'Add New Destination', 'wp-travel' ),
+			'new_item_name'     => __( 'New Destination', 'wp-travel' ),
+			'menu_name'         => __( 'Destinations', 'wp-travel' ),
 		);
 
 		$args = array(
@@ -51,7 +53,7 @@ class Wp_Travel_Taxonomies {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'travel-locations' ),
+			'rewrite'           => array( 'slug' => $permalink['wp_travel_destination_base'] ),
 		);
 
 		register_taxonomy( 'travel_locations', array( WP_TRAVEL_POST_TYPE ), $args );
