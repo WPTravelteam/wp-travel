@@ -8,14 +8,18 @@ $alto: #ddd;
         }
     }
 }
-.clearfix:before, .clearfix:after {
+
+.clearfix:before,
+.clearfix:after {
     clear: both;
     content: '';
     display: table;
 }
+
 .clearfix::after {
     clear: both;
 }
+
 .wp-travel-tabs-wrap {
     background: none;
     border: 0;
@@ -43,7 +47,7 @@ $alto: #ddd;
                 float: left;
                 width: 161px;
                 margin: 0px 0 0 0;
-                padding: 20px 10px 20px 10px;
+                padding: 15px 0px 15px 8px;
                 text-decoration: none;
                 color: #999;
                 border-bottom: 1px solid #ddd;
@@ -57,9 +61,9 @@ $alto: #ddd;
                 border-left: 4px solid #f1f1f1;
                 &:before {
                     font-family: 'Dashicons';
-                    width: 20px;
-                    height: 20px;
-                    font-size: 20px;
+                    width: 16px;
+                    height: 16px;
+                    font-size: 16px;
                     margin: 0 10px 5px 0;
                     display: inline-block;
                     vertical-align: middle;
@@ -116,25 +120,17 @@ $alto: #ddd;
                     content: "\f323";
                 }
             }
-            &#wp-travel-tab-itineraries_content a{
-                &:before{
-                    content:"\f157";
+            &#wp-travel-tab-itineraries_content a {
+                &:before {
+                    content: "\f157";
                 }
-
             }
-            &#wp-travel-tab-trip_includes a{
-                &:before{
-                    content: "\f316";
+            &#wp-travel-tab-trip_includes a {
+                &:before {
+                    content: "\f108";
                     transform: rotate(270deg);
                 }
             }
-            &#wp-travel-tab-trip_excludes a{
-                &:before{
-                    content: "\f316";
-                    transform: rotate(90deg);
-                }
-            }
-            
         }
     }
     .wp-travel-tabs-contents {
@@ -181,7 +177,7 @@ $alto: #ddd;
                     position: relative;
                     margin-right: 10px;
                     margin-bottom: 10px;
-                    width: calc( 25% - 10px );
+                    width: calc( 25% - 10px);
                     &.featured-image:before {
                         content: "\f155";
                         color: #f1d375;
@@ -208,11 +204,10 @@ $alto: #ddd;
             }
         }
     }
-
     .itinerary_wrap {
-        .remove_itinery{
-            margin-top:20px;
-            margin-bottom:20px;
+        .remove_itinery {
+            margin-top: 20px;
+            margin-bottom: 20px;
             background: #ca4a1f;
             color: #fff;
             border: #ca4a1f;
@@ -220,7 +215,7 @@ $alto: #ddd;
             text-align: center;
             line-height: 1;
         }
-    } 
+    }
 }
 
 // Taxonomy Wrap
@@ -247,38 +242,39 @@ $alto: #ddd;
 #poststuff {
     padding-top: 10px;
     min-width: 763px;
-
-    .inside{
+    .inside {
         img {
             width: 100%;
         }
-    } 
+    }
 }
+
 #aside-wrap {
     float: right;
     margin-right: -300px;
     width: 280px;
 }
-#post-body{
+
+#post-body {
     margin-right: 300px;
 }
-.wp-travel-marketplace-tab-wrap{
-        width: 100%;
-        margin-top: 50px;
-        float:left;
 
+.wp-travel-marketplace-tab-wrap {
+    width: 100%;
+    margin-top: 50px;
+    float: left;
     ul {
         display: inline-block;
-        margin:0;
+        margin: 0;
     }
     li {
         text-align: center;
         margin: 0 5px 0 0;
-        float:left;
+        float: left;
         cursor: pointer;
         position: relative;
         z-index: 2;
-        a{
+        a {
             display: block;
             padding: 15px 25px;
             background: #f7f7f1;
@@ -287,11 +283,11 @@ $alto: #ddd;
             font-size: 16px;
             font-weight: 600;
             color: #555;
-            position:relative;
+            position: relative;
             border-radius: 2px 20px 0 0;
             overflow: hidden;
-            &:focus{
-                box-shadow:none;
+            &:focus {
+                box-shadow: none;
             }
             &:before {
                 position: absolute;
@@ -302,33 +298,28 @@ $alto: #ddd;
                 left: 0;
                 top: 0;
             }
-
         }
     }
-    li.ui-state-active{
+    li.ui-state-active {
         a {
             border-bottom-color: transparent;
             &:before {
-                background-color:#0073aa;
+                background-color: #0073aa;
             }
-
         }
-    } 
+    }
     .tab-pannel {
         margin: -5px 0 0 0;
-        padding:50px 20px 20px;
+        padding: 50px 20px 20px;
         background-color: #f7f7f1;
         border: 1px solid #ddd;
     }
-} 
+}
 
-
-.marketplace-module{
-
+.marketplace-module {
     display: inline-block;
     position: relative;
     width: 100%;
-
     .single-module {
         width: 50%;
         float: left;
@@ -339,42 +330,42 @@ $alto: #ddd;
         margin-bottom: 30px;
         box-sizing: border-box;
     }
-    .single-module-image,.single-module-content{
+    .single-module-image,
+    .single-module-content {
         border: 1px solid #ddd;
         background-color: #fbfbfb;
     }
-    .single-module-image{
-        border-bottom:none;
-        a{
-            display:block;
+    .single-module-image {
+        border-bottom: none;
+        a {
+            display: block;
         }
-        img{
-            width:100%;
+        img {
+            width: 100%;
             height: auto;
-            border-bottom:1px solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
     }
-    .single-module-content{
+    .single-module-content {
         border-top-color: transparent;
-        padding:15px 15px 25px;
-        h4{
+        padding: 15px 15px 25px;
+        h4 {
             font-size: 18px;
             margin: 5px 0 20px;
         }
-        a{
-            text-decoration:none;
+        a {
+            text-decoration: none;
         }
-        .pull-left{
-            float:left;
+        .pull-left {
+            float: left;
         }
-        .pull-right{
-            float:right;
+        .pull-right {
+            float: right;
         }
         .btn-default {
             border: 1px solid #ddd;
             padding: 5px 15px;
-            background-color:#fff;
-
+            background-color: #fff;
             &:hover {
                 background: #0073aa;
                 color: #fff;
@@ -382,20 +373,18 @@ $alto: #ddd;
             }
         }
     }
-
-
-} 
+}
 
 #aside-wrap {
-    margin-top:50px;
+    margin-top: 50px;
 }
-#wp_travel_review_block_id{
 
+#wp_travel_review_block_id {
     .dashicons {
         color: #FBBC05;
         font-size: 15px;
     }
-    h5{
+    h5 {
         font-size: 13px;
         color: #555;
         font-weight: normal;
@@ -407,8 +396,7 @@ $alto: #ddd;
         display: block;
         margin-top: 5px;
         text-align: center;
-
-        a{
+        a {
             text-decoration: none;
             text-transform: capitalize;
         }
@@ -424,7 +412,6 @@ $alto: #ddd;
         border-bottom: 1px solid #ddd;
         margin: 0;
         padding: 20px 4px;
-
         &.last {
             border-bottom: none;
             padding-bottom: 0;
@@ -432,20 +419,15 @@ $alto: #ddd;
     }
 }
 
-.text-center{
-    text-align:center;
+.text-center {
+    text-align: center;
 }
 
-@media (max-width:1075px){
-
-    .marketplace-module{
-
-         .single-module-content{
-
-            padding:15px;
-
+@media (max-width:1075px) {
+    .marketplace-module {
+        .single-module-content {
+            padding: 15px;
             .btn-default {
-
                 display: block;
                 width: 100%;
                 float: left;
@@ -453,26 +435,23 @@ $alto: #ddd;
                 margin-bottom: 15px;
                 text-align: center;
             }
-        } 
+        }
     }
 }
 
-
-@media (max-width:850px){
+@media (max-width:850px) {
     #aside-wrap {
         float: left;
         margin-right: 0;
         width: 100%;
     }
-    .marketplace-module{
-        
-        .single-module{
-            width:100%;
+    .marketplace-module {
+        .single-module {
+            width: 100%;
         }
-    } 
+    }
     #poststuff {
-        min-width:0;
-
+        min-width: 0;
         #post-body {
             margin: 0
         }
@@ -481,8 +460,4 @@ $alto: #ddd;
         margin-right: 12px;
         margin-left: 0;
     }
-
-
 }
-
-
