@@ -87,9 +87,11 @@
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-itineraries_content a:before {
         content: "\f157"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-trip_includes a:before {
-        content: "\f210"; }
+        content: "\f316";
+        transform: rotate(270deg); }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-trip_excludes a:before {
-        content: "\f117"; }
+        content: "\f316";
+        transform: rotate(90deg); }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;

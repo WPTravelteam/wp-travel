@@ -124,12 +124,14 @@ $alto: #ddd;
             }
             &#wp-travel-tab-trip_includes a{
                 &:before{
-                    content: "\f210";
+                    content: "\f316";
+                    transform: rotate(270deg);
                 }
             }
             &#wp-travel-tab-trip_excludes a{
                 &:before{
-                    content: "\f117";
+                    content: "\f316";
+                    transform: rotate(90deg);
                 }
             }
             
