@@ -13,9 +13,16 @@ class WP_Travel_Admin_Info_Pointers {
 
 function __construct() {
 
-    add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_pointers' ) );
+    add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
+
+    add_filter( 'wp_travel_admin_pointers-'.WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
+
+    add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
+
 
     add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
+
+    add_action( 'admin_notices', array( $this, 'paypal_addon_admin_notice' ) );
     
 
 }
@@ -79,14 +86,22 @@ function load_pointers( $hook_suffix ) {
     *
     * @since    1.1.0
     */
-    function add_pointers( $q ) {
+    function add_plugin_pointers( $q ) {
+
+        $pointer_1_content = '<ul class="changes-list">
+            <li>Itineraries menu changed to Trips.</li>
+            <li>Locations menu changed to Destinations.</li>
+            <li>Trips can be group by activities.</li>
+            <li>Marketplace: Check WP travel addons &amp; Themes.</li>
+            <li>View other changes <a href="">here</a>.</li>
+        </ul>';
         
-        $q['wp_travel_cng_info'] = array(
-            'target' => '#menu-posts-trip',
+        $q['wp_travel_post_type_chges'] = array(
+            'target' => '#menu-posts-'.WP_TRAVEL_POST_TYPE,
             'options' => array(
                 'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>',
-                __( 'WP Travel Options' ,'wp-travel'),
-                __( 'Previous plugin version Itinerary has been changed to Trips','wp-travel')
+                __( 'New in WP Travel v.1.1.0' ,'wp-travel'),
+                $pointer_1_content
             ),
                 'position' => array( 'edge' => 'left', 'align' => 'center' )
             )
@@ -94,6 +109,93 @@ function load_pointers( $hook_suffix ) {
 
         return $q;
     }
+
+    /**
+    * Pointer for Appearance on plugin activation.
+    *
+    * @since    1.1.0
+    */
+    function add_single_post_edit_screen_pointers( $q ) {
+        
+        $q['wp_travel_post_edit_page_cngs'] = array(
+            'target' => '#wp-travel-trip-info',
+            'options' => array(
+                'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>',
+                __( 'New in WP Travel v.1.1.0' ,'wp-travel'),
+                __('"Trip Code" has been moved to sidebar "Trip Info" metabox. ', 'wp-travel' )
+            ),
+                'position' => array( 'edge' => 'right', 'align' => 'center' )
+            )
+        );
+
+        $content = '<ul class="changes-list">
+        <li><strong>"Group Size"</strong> has been moved "Additional info" tab.</li>
+        <li><strong>"Outline"</strong> has been moved "Itinerary" tab.</li>
+        <li>"Trip Includes" & "Trip Excludes" has been moved "Includes and Excludes" tab.</li>
+        <li>"Outline" has been moved "Itinerary" tab.</li>
+        <li>Number of Nights added in "Trip Duration"</li>
+        <li>View other changes <a href="">here</a>.</li>
+    </ul>';
+
+        $q['wp_travel_post_edit_page_cngs_2'] = array(
+            'target' => '#wp-travel-tab-additional_info',
+            'options' => array(
+                'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>',
+                __( 'New in WP Travel v.1.1.0' ,'wp-travel'),
+                $content
+            ),
+                'position' => array( 'edge' => 'left', 'align' => 'center' )
+            )
+        );
+
+
+        return $q;
+    }
+
+    /**
+    * Pointer for Appearance on plugin activation.
+    *
+    * @since    1.1.0
+    */
+    function add_dashboard_screen_pointers( $q ) {
+
+        $pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
+        <li>View other changes <a href="">here</a>.</li>';
+        
+        $q['wp_travel_post_type_chges'] = array(
+            'target' => '#menu-settings',
+            'options' => array(
+                'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>',
+                __( 'WP Travel permalink options' ,'wp-travel'),
+                $pointer_content
+            ),
+                'position' => array( 'edge' => 'left', 'align' => 'center' )
+            )
+        );
+
+        return $q;
+    }
+
+    function paypal_addon_admin_notice(){
+
+        if ( ! is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
+           
+            $class = 'notice notice-info is-dismissible';
+
+        ?>
+
+            <div class="<?php echo esc_attr( $class ) ?>">
+                <p>
+                    <strong><?php printf( __( 'Want to add payment gateway in WP Travel booking? %1sDownload "Standard PayPal"%2s addon for free!!', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
+                </p>
+            </div>
+        
+        <?php 
+        
+        } 
+
+    }
+
 }
 
 new WP_Travel_Admin_Info_Pointers();
