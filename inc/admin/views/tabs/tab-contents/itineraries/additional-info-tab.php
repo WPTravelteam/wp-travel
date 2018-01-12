@@ -1,7 +1,6 @@
 <?php
 	global $post;
 	$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
-	$outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true );
 	$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 	$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );
 	$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
@@ -14,10 +13,6 @@
 	$trip_duration = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
 	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 
-	echo '<div class="trip-type-wrap itineraries-tax-wrap">';
-	post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'itinerary_types' ) ) );
-	printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=itinerary_types&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Trip Type', 'wp-travel' ) );
-	echo '</div>';	
 ?>
 <table class="form-table">
 	
@@ -25,10 +20,7 @@
 		<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
 		<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
 	</tr>
-	<tr>
-		<td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
-		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
-	</tr>
+	
 	<tr>
 		<td><label for="wp_travel_trip_include"><?php esc_html_e( 'Trip Includes', 'wp-travel' ); ?></label></td>
 		<td><?php wp_editor( $trip_include, 'wp_travel_trip_include' ); ?></td>
