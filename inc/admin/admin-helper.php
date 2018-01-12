@@ -15,7 +15,15 @@ function wp_travel_admin_init() {
 	wp_travel_upgrade_to_110();
 }
 function wp_travel_marketplace_page() {
-	?>
+	global $_wp_admin_css_colors;
+	$current_color_scheme = get_user_option( 'admin_color' );
+	
+	$active_color_code = $_wp_admin_css_colors[$current_color_scheme]->colors[2]; ?>
+	<style>
+		#menu-posts-<?php echo WP_TRAVEL_POST_TYPE; ?> ul li:last-child a{
+			color: <?php echo $active_color_code; ?>;
+		}
+	</style>
 	<div class="wrap">
 		<div id="poststuff">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ) ?></h1>
