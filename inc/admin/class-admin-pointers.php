@@ -31,7 +31,6 @@ function load_pointers( $hook_suffix ) {
     return;
 
     $screen = get_current_screen();
-    
 
     $screen_id = $screen->id;
 
@@ -82,8 +81,8 @@ function load_pointers( $hook_suffix ) {
     */
     function add_pointers( $q ) {
         
-        $q['wp_travel_slug_info'] = array(
-            'target' => '#menu-posts-itineraries',
+        $q['wp_travel_cng_info'] = array(
+            'target' => '#menu-posts-trip',
             'options' => array(
                 'content' => sprintf( '<h3> %s </h3> <p> %s </p>',
                 __( 'WP Travel Options' ,'wp-travel'),
