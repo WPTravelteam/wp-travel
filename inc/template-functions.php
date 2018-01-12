@@ -178,11 +178,9 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text = wp_travel_get_price_per_text( $post_id );
 
-	$wp_travel_itinerary = new WP_Travel_Itinerary();
+	// $wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
-	<?php if ( is_singular( WP_TRAVEL_POST_TYPE ) ) : ?>
-		<div class="wp-travel-trip-code"><span><strong><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?></strong></span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
-	<?php endif; ?>
+	
 	<div class="wp-detail-review-wrap">
     	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 		<div class="wp-travel-trip-detail">
@@ -398,6 +396,11 @@ function wp_travel_single_keywords( $post_id ) {
 		</div>
 	<?php
 	endif;
+	global $wp_travel_itinerary;
+	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) : ?>
+		<div class="wp-travel-trip-code"><span><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?> :</span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
+	<?php endif; 
+
 }
 /**
  * Add html for Keywords.
