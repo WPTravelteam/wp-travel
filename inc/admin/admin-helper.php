@@ -16,57 +16,50 @@ function wp_travel_admin_init() {
 }
 function wp_travel_marketplace_page() {
 	?>
-		<div class="wrap">
-	<div id="poststuff">
-
-	<h1 class="wp-heading-inline">Marketplace</h1>
-
-	<div id="post-body">
-
-
-
-
-	<div class="wp-travel-marketplace-tab-wrap">
-		<ul>
-	    <li class=""><a href="#tabs-1">Addons</a></li>
-	    <li class=""><a href="#tabs-2">Themes</a></li>
-	    
-	  </ul>
-	  <div id="tabs-1" class="tab-pannel">
-	    <div class="marketplace-module clearfix">
-			<div class="single-module">
-	            <div class="single-module-image">
-	                <a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
-	                   <img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">                            
-	                </a>
-	            </div>
-	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
-	                <a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
-	            </div>
-	        </div>
-	    </div>
-	  </div>
-	  <div id="tabs-2" class="tab-pannel">
-	    <div class="marketplace-module clearfix">
-			<div class="single-module">
-	            <div class="single-module-image">
-	                <a href="http://wensolutions.com/themes/travel-log/" target="_blank">
-	                   <img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >                            
-	                </a>
-	            </div>
-	            <div class="single-module-content clearfix">
-	                <h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> Travel Log</a></h4>
-	                <a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank">View Detail</a>
-	                <a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.1.1.0.zip" target="_blank">Download</a>
-	            </div>
-	        </div>
-	    </div>
-	  </div>
-	</div>
+	<div class="wrap">
+		<div id="poststuff">
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ) ?></h1>
+			<div id="post-body">
+				<div class="wp-travel-marketplace-tab-wrap">
+					<ul>
+						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
+					</ul>
+					<div id="tabs-1" class="tab-pannel">
+						<div class="marketplace-module clearfix">
+							<div class="single-module">
+								<div class="single-module-image">
+									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">                            
+									</a>
+								</div>
+								<div class="single-module-content clearfix">
+									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
+									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tabs-2" class="tab-pannel">
+						<div class="marketplace-module clearfix">
+							<div class="single-module">
+								<div class="single-module-image">
+									<a href="http://wensolutions.com/themes/travel-log/" target="_blank">
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >                            
+									</a>
+								</div>
+								<div class="single-module-content clearfix">
+									<h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> Travel Log</a></h4>
+									<a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank">View Detail</a>
+									<a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.zip" target="_blank">Download</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
-		<div id="aside-wrap" class="single-module-side">
+				<div id="aside-wrap" class="single-module-side">
 		
 		<div id="wp_travel_support_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">

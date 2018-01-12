@@ -80,10 +80,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 1.0.7 =
+= 1.1.0 =
 * New Feature: "Loco Translate" support.
 * New Feature: "WPML Translate" support.
+* New Feature: Payment fields added globally.
+* New Feature: Activities Taxonomy added.
+* New Feature: Slug override for trip, location, trip type, activities.  
+* Changes: Itineraries post type changed to trip.
 * Changes: Price fields moved to price tab in itineraries section.
+* Fixes: Thumbnail blur issue.
+* Fixes: Booking Count on post delete.
 
 = 1.0.6 =
 * New Feature: Booking Status added.

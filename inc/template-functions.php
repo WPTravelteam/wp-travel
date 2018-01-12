@@ -444,7 +444,7 @@ function wp_travel_single_location( $post_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( '%s Days %s Nights', $trip_duration, $trip_duration_night ); ?>
+						<?php printf( '%s Day(s) %s Night(s)', $trip_duration, $trip_duration_night ); ?>
 					</span>
 				</div>
 

@@ -73,7 +73,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * Define WP Travel Constants.
 		 */
 		private function define_constants() {
-			$this->define( 'WP_TRAVEL_POST_TYPE', 'trip' );
+			$this->define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
 			$this->define( 'WP_TRAVEL_PLUGIN_FILE', __FILE__ );
 			$this->define( 'WP_TRAVEL_ABSPATH', dirname( __FILE__ ) . '/' );
 			$this->define( 'WP_TRAVEL_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
