@@ -8,7 +8,6 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 
     <table class="form-table">
         <tr>
-            <td><label for="wp_travel_outline"><?php esc_html_e( 'Outline', 'wp-travel' ); ?></label></td>
             <td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
         </tr>        
     </table>
