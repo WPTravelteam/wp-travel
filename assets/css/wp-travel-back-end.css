@@ -110,7 +110,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   box-shadow: none; }
 
 .trip-info-sidebar td {
-  padding: 15px 5px; }
+  padding: 15px 5px;
+  width: 50%; }
 
 .wp-trave-settings-warp .wp-trave-settings-form-warp .wp-travel-tabs-wrap {
   border: 1px solid #e5e5e5;
