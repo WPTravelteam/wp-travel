@@ -79,7 +79,7 @@ class WP_Travel_Admin_Metaboxes {
 		);
 		$trips['itineraries_content'] = array(
 			'tab_label' => __( 'Itinerary', 'wp-travel' ),
-			'content_title' => __( 'Itinerary', 'wp-travel' ),
+			'content_title' => __( 'Outline', 'wp-travel' ),
 		);
 		$trips['price'] = array(
 			'tab_label' => __( 'Price', 'wp-travel' ),

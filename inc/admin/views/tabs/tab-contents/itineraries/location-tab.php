@@ -5,6 +5,7 @@ $map_data = get_wp_travel_map_data();
 $settings = wp_travel_get_settings();
 
 ?>
+<h4><?php _e( 'Destination', 'wp-travel'); ?></h4>
 <div class="location-wrap itineraries-tax-wrap">
   <?php
   post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'travel_locations' ) ) );
