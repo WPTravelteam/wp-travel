@@ -243,11 +243,14 @@
   .marketplace-module .single-module-image, .marketplace-module .single-module-content {
     border: 1px solid #ddd;
     background-color: #fbfbfb; }
-  .marketplace-module .single-module-image a {
-    display: block; }
-  .marketplace-module .single-module-image img {
-    width: 100%;
-    height: auto; }
+  .marketplace-module .single-module-image {
+    border-bottom: none; }
+    .marketplace-module .single-module-image a {
+      display: block; }
+    .marketplace-module .single-module-image img {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd; }
   .marketplace-module .single-module-content {
     border-top-color: transparent;
     padding: 15px 15px 25px; }
