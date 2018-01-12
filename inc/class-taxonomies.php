@@ -85,15 +85,15 @@ class Wp_Travel_Taxonomies {
 
 		$labels = array(
 			'name'              => _x( 'Activities', 'general name', 'wp-travel' ),
-			'singular_name'     => _x( 'Keyword', 'singular name', 'wp-travel' ),
+			'singular_name'     => _x( 'Activity', 'singular name', 'wp-travel' ),
 			'search_items'      => __( 'Search Activities', 'wp-travel' ),
 			'all_items'         => __( 'All Activities', 'wp-travel' ),
-			'parent_item'       => __( 'Parent Keyword', 'wp-travel' ),
-			'parent_item_colon' => __( 'Parent Keyword:', 'wp-travel' ),
-			'edit_item'         => __( 'Edit Keyword', 'wp-travel' ),
-			'update_item'       => __( 'Update Keyword', 'wp-travel' ),
-			'add_new_item'      => __( 'Add New Keyword', 'wp-travel' ),
-			'new_item_name'     => __( 'New Keyword', 'wp-travel' ),
+			'parent_item'       => __( 'Parent Activity', 'wp-travel' ),
+			'parent_item_colon' => __( 'Parent Activity:', 'wp-travel' ),
+			'edit_item'         => __( 'Edit Activity', 'wp-travel' ),
+			'update_item'       => __( 'Update Activity', 'wp-travel' ),
+			'add_new_item'      => __( 'Add New Activity', 'wp-travel' ),
+			'new_item_name'     => __( 'New Activity', 'wp-travel' ),
 			'menu_name'         => __( 'Activities', 'wp-travel' ),
 		);
 
