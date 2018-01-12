@@ -37,7 +37,7 @@
   .wp-travel-clean-metabox .hndle {
     display: none; }
   .wp-travel-clean-metabox .inside {
-    margin: 0 !important !important;
+    margin: 0 !important;
     padding: 0; }
 
 .wp-travel-open-upload-area #plupload-upload-ui.drag-drop #drag-drop-area {

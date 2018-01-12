@@ -122,6 +122,17 @@ $alto: #ddd;
                 }
 
             }
+            &#wp-travel-tab-trip_includes a{
+                &:before{
+                    content: "\f210";
+                }
+            }
+            &#wp-travel-tab-trip_excludes a{
+                &:before{
+                    content: "\f117";
+                }
+            }
+            
         }
     }
     .wp-travel-tabs-contents {
