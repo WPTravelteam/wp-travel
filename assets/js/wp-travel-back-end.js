@@ -102,14 +102,14 @@
     if ($.fn.tabs) {
         $('.wp-travel-tabs-wrap').tabs({
             activate: function(event, ui) {
-                $(ui.newPanel).css({ display: 'block' });
+                $(ui.newPanel).css({ display: 'inline-block' });
                 $('#wp-travel-settings-current-tab').val($(ui.newPanel).attr('id'));
                 map.refresh();
                 map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
                 // wp_travel_backend_map_holder();
             },
             create: function(event, ui) {
-                $(ui.panel).css({ display: 'block' });
+                $(ui.panel).css({ display: 'inline-block' });
                 $('#wp-travel-settings-current-tab').val($(ui.panel).attr('id'));
             },
             load: function(event, ui) {}
