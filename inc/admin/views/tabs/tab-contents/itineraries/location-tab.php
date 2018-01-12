@@ -22,7 +22,7 @@ $settings = wp_travel_get_settings();
   <input type="hidden" name="wp_travel_lng" id="wp-travel-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
 <?php else : ?>
   <div class="map-wrap">
-  <p><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=itineraries&page=settings\">settings</a>" ) ?></p>
+  <p><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=" . WP_TRAVEL_POST_TYPE . "&page=settings\">settings</a>" ) ?></p>
   </div>
 <?php endif; ?>
 </div>

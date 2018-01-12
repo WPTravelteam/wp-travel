@@ -77,28 +77,22 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label' => __( 'Description', 'wp-travel' ),
 			'content_title' => __( 'Description', 'wp-travel' ),
 		);
-
-		$trips['additional_info'] = array(
-			'tab_label' => __( 'Additional Info', 'wp-travel' ),
-			'content_title' => __( 'Additional Info', 'wp-travel' ),
-		);
 		$trips['itineraries_content'] = array(
 			'tab_label' => __( 'Itinerary', 'wp-travel' ),
-			'content_title' => __( 'Itinerary Data', 'wp-travel' ),
+			'content_title' => __( 'Itinerary', 'wp-travel' ),
 		);
 		$trips['price'] = array(
 			'tab_label' => __( 'Price', 'wp-travel' ),
 			'content_title' => __( 'Price', 'wp-travel' ),
 		);
 		$trips['trip_includes'] = array(
-			'tab_label' => __( 'Trip Includes', 'wp-travel' ),
-			'content_title' => __( 'Trip Includes', 'wp-travel' ),
+			'tab_label' => __( 'Includes / Excludes', 'wp-travel' ),
+			'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
 		);
-		$trips['trip_excludes'] = array(
-			'tab_label' => __( 'Trip Excludes', 'wp-travel' ),
-			'content_title' => __( 'Trip Excludes', 'wp-travel' ),
+		$trips['additional_info'] = array(
+			'tab_label' => __( 'Additional Info', 'wp-travel' ),
+			'content_title' => __( 'Additional Info', 'wp-travel' ),
 		);
-
 		$trips['images_gallery'] = array(
 			'tab_label' => __( 'Gallery', 'wp-travel' ),
 			'content_title' => __( 'Gallery', 'wp-travel' ),

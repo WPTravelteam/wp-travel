@@ -14,7 +14,7 @@ class WP_Travel_Admin_Settings {
 	 *
 	 * @var string
 	 */
-	private static $parent_slug = 'edit.php?post_type=itineraries';
+	private static $parent_slug = 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE;
 	/**
 	 * Page.
 	 *
@@ -29,7 +29,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
-		add_action( 'load-itineraries_page_settings', array( $this, 'save_settings' ) );
+		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
 
 	/**

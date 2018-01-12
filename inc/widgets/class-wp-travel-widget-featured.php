@@ -86,7 +86,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
-		isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
+		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 		// $instance['trip_per_row'] = sanitize_text_field( $new_instance['trip_per_row'] );
 		$instance['no_of_trip_show'] = sanitize_text_field( $new_instance['no_of_trip_show'] );
 

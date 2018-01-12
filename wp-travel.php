@@ -70,7 +70,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * Define WC Constants.
+		 * Define WP Travel Constants.
 		 */
 		private function define_constants() {
 			$this->define( 'WP_TRAVEL_POST_TYPE', 'trip' );
