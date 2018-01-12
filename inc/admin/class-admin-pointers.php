@@ -93,7 +93,7 @@ function load_pointers( $hook_suffix ) {
             <li>Locations menu changed to Destinations.</li>
             <li>Trips can be group by activities.</li>
             <li>Marketplace: Check WP travel addons &amp; Themes.</li>
-            <li>View other changes <a href="">here</a>.</li>
+            <li>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>.</li>
         </ul>';
         
         $q['wp_travel_post_type_chges'] = array(
@@ -129,12 +129,11 @@ function load_pointers( $hook_suffix ) {
         );
 
         $content = '<ul class="changes-list">
-        <li><strong>"Group Size"</strong> has been moved "Additional info" tab.</li>
-        <li><strong>"Outline"</strong> has been moved "Itinerary" tab.</li>
-        <li>"Trip Includes" & "Trip Excludes" has been moved "Includes and Excludes" tab.</li>
-        <li>"Outline" has been moved "Itinerary" tab.</li>
-        <li>Number of Nights added in "Trip Duration"</li>
-        <li>View other changes <a href="">here</a>.</li>
+        <li><strong>"Group Size"</strong> has been moved <strong>"Additional info"</strong> tab.</li>
+        <li><strong>"Outline"</strong> has been moved <strong>"Itinerary"</strong> tab.</li>
+        <li><strong>"Trip Includes" & "Trip Excludes" </strong> has been moved <strong>"Includes / Excludes"</strong> tab.</li>
+        <li>Number of Nights added in <strong>"Trip Duration"</strong></li>
+        <li>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>.</li>
     </ul>';
 
         $q['wp_travel_post_edit_page_cngs_2'] = array(
@@ -160,7 +159,7 @@ function load_pointers( $hook_suffix ) {
     function add_dashboard_screen_pointers( $q ) {
 
         $pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
-        <li>View other changes <a href="">here</a>.</li>';
+        <li>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>.</li>';
         
         $q['wp_travel_post_type_chges'] = array(
             'target' => '#menu-settings',
