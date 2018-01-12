@@ -34,6 +34,8 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'advance_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'price_tab_call_back' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_includes_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
 	}
 
 	/**
@@ -42,8 +44,8 @@ class WP_Travel_Admin_Metaboxes {
 	public function register_metaboxes() {
 		add_meta_box( 'wp-travel-trip-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
 		add_meta_box( 'wp-travel-trip-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
-		remove_meta_box( 'itinerary_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
-		remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		// remove_meta_box( 'itinerary_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		// remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		// remove_meta_box( 'tagsdiv-travel_keywords', WP_TRAVEL_POST_TYPE, 'side' );
 	}
@@ -71,7 +73,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @return array
 	 */
 	function add_tabs( $tabs ) {
-		$trips['description'] = array(
+		$trips['detail'] = array(
 			'tab_label' => __( 'Description', 'wp-travel' ),
 			'content_title' => __( 'Description', 'wp-travel' ),
 		);
@@ -79,29 +81,34 @@ class WP_Travel_Admin_Metaboxes {
 		$trips['additional_info'] = array(
 			'tab_label' => __( 'Additional Info', 'wp-travel' ),
 			'content_title' => __( 'Additional Info', 'wp-travel' ),
-			'content_callback' => array( $this, 'call_back' ),
+			// 'content_callback' => array( $this, 'call_back' ),
 		);
 		$trips['itineraries_content'] = array(
 			'tab_label' => __( 'Itinerary', 'wp-travel' ),
 			'content_title' => __( 'Itinerary Data', 'wp-travel' ),
-			'content_callback' => array( $this, 'itineraries_content_call_back' ),
+			// 'content_callback' => array( $this, 'itineraries_content_call_back' ),
 		);
-		$trips['price'] = array(
-			'tab_label' => __( 'Price', 'wp-travel' ),
-			'content_title' => __( 'Price', 'wp-travel' ),
-			'content_callback' => array( $this, 'price_tab_call_back' ),
+		$trips['trip_includes'] = array(
+			'tab_label' => __( 'Trip Includes', 'wp-travel' ),
+			'content_title' => __( 'Trip Includes', 'wp-travel' ),
+			// 'content_callback' => array( $this, 'itineraries_content_call_back' ),
+		);
+		$trips['trip_excludes'] = array(
+			'tab_label' => __( 'Trip Excludes', 'wp-travel' ),
+			'content_title' => __( 'Trip Excludes', 'wp-travel' ),
+			// 'content_callback' => array( $this, 'price_tab_call_back' ),
 		);
 
 		$trips['images_gallery'] = array(
 			'tab_label' => __( 'Images/ Gallery', 'wp-travel' ),
 			'content_title' => __( 'Images/ Gallery', 'wp-travel' ),
-			'content_callback' => array( $this, 'gallery_tab_callback' ),
+			// 'content_callback' => array( $this, 'gallery_tab_callback' ),
 		);
 
 		$trips['locations'] = array(
 			'tab_label' => __( 'Locations', 'wp-travel' ),
 			'content_title' => __( 'Locations', 'wp-travel' ),
-			'content_callback' => array( $this, 'call_back' ),
+			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
 		// $trips['advanced'] = array(
@@ -122,7 +129,7 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	function description_tab_callback( $tab ) {
 		global $post;
-		if ( 'description' !== $tab ) {
+		if ( 'detail' !== $tab ) {
 			return;
 		}
 		WP_Travel()->tabs->content( 'itineraries/detail-tab.php' );
@@ -196,6 +203,33 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		WP_Travel()->tabs->content( 'itineraries/advance-tab.php' );
 	}
+	/**
+	 * Callback Function for Trip includes Tabs.
+	 *
+	 * @param  string $tab tab name 'advanced'.
+	 * @return Mixed
+	 */
+	function trip_includes_callback( $tab ) {
+		global $post;
+		if ( 'trip_includes' !== $tab ) {
+			return;
+		}
+		WP_Travel()->tabs->content( 'itineraries/trip-includes.php' );
+	}
+	/**
+	 * Callback Function for Trip excludes Tabs.
+	 *
+	 * @param  string $tab tab name 'advanced'.
+	 * @return Mixed
+	 */
+	function trip_excludes_callback( $tab ) {
+		global $post;
+		if ( 'trip_excludes' !== $tab ) {
+			return;
+		}
+		WP_Travel()->tabs->content( 'itineraries/trip-excludes.php' );
+	}
+
 	/**
 	 * Callback Function for advanced Tabs.
 	 *
