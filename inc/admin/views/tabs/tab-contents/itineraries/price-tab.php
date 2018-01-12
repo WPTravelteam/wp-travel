@@ -7,8 +7,10 @@
 	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
 	
 	$sale_price_attribute = 'disabled="disabled"';
+	$sale_price_style = 'display:none';
 	if ( $enable_sale ) {
 		$sale_price_attribute = '';
+		$sale_price_style = '';
 	}
 
 	$settings = wp_travel_get_settings();
@@ -49,7 +51,7 @@
 			</label>
 		</td>
 	</tr>
-	<tr>
+	<tr style="<?php echo esc_attr( $sale_price_style ); ?>">
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
