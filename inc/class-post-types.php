@@ -40,6 +40,7 @@ class WP_Travel_Post_Types {
 			'rewrite'            => array( 'slug' => $permalink['wp_travel_trip_base'] ),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
+			'with_front'		 => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'comments' ),
