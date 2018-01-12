@@ -396,14 +396,48 @@ function wp_travel_single_location( $post_id ) {
 		return;
 	}
 	$terms = get_the_terms( $post_id, 'travel_locations' );
+
+	$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
+	$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
+	
+	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
+	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+
+	$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
+	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+	$trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night', true );
+	$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 	if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-		<li class="full-width no-border">
+		<li class="no-border">
 			<div class="travel-info">
 				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
 			</div>
 			<div class="travel-info">
 				<span class="value"><?php $i = 0; ?><?php foreach ( $terms as $term ) : ?><?php if ( $i > 0 ) : ?>, <?php endif; ?><span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span><?php $i++; endforeach; ?></span>
 			</div>
+		</li>
+		<li>
+			<?php if ( 'yes' === $fixed_departure ) : ?>
+				<div class="travel-info">
+					<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
+				</div>
+				<div class="travel-info">
+					<span class="value">
+						<?php printf( '%s - %s', $start_date, $end_date ); ?>
+					</span>
+				</div>
+			<?php else : ?>
+				<div class="travel-info">
+					<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
+				</div>
+				<div class="travel-info">
+					<span class="value">
+						<?php printf( '%s Days %s Nights', $trip_duration, $trip_duration_night ); ?>
+					</span>
+				</div>
+
+			<?php endif; ?>
 		</li>
 	<?php
 	endif;
