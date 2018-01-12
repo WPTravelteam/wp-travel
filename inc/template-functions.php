@@ -180,8 +180,10 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
-	<div><span><strong><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?></strong></span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
-    <div class="wp-detail-review-wrap">
+	<?php if ( is_singular( WP_TRAVEL_POST_TYPE ) ) : ?>
+		<div class="wp-travel-trip-code"><span><strong><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?></strong></span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
+	<?php endif; ?>
+	<div class="wp-detail-review-wrap">
     	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 		<div class="wp-travel-trip-detail">
 			<div class="trip-price" >
@@ -730,7 +732,7 @@ function wp_travel_comments_template_loader( $template ) {
 function wp_travel_template_loader( $template ) {
 
 	// Load template for post archive / taxonomy archive.
-	if ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( 'itinerary_types' ) || is_tax( 'travel_locations' ) || is_tax( 'travel_keywords' ) ) {
+	if ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) {
 		$check_dirs = array(
 			trailingslashit( get_stylesheet_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
 			trailingslashit( get_template_directory() ) . WP_TRAVEL_TEMPLATE_PATH,
@@ -991,7 +993,8 @@ function wp_travel_archive_filter_by() {
  * @return boolean
  */
 function is_wp_travel_archive_page() {
-	if ( ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( 'itinerary_types' ) || is_tax( 'travel_locations' ) || is_tax( 'travel_keywords' ) ) && ! is_search() ) {
+
+	if ( ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search() ) {
 		return true;
 	}
 	return false;
