@@ -1,7 +1,8 @@
 #poststuff #wp-travel-itinerary-detail .inside {
   margin-top: 0; }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   clear: both;
   content: '';
   display: table; }
@@ -36,7 +37,7 @@
         float: left;
         width: 161px;
         margin: 0px 0 0 0;
-        padding: 20px 10px 20px 10px;
+        padding: 15px 0px 15px 8px;
         text-decoration: none;
         color: #999;
         border-bottom: 1px solid #ddd;
@@ -50,9 +51,9 @@
         border-left: 4px solid #f1f1f1; }
         .wp-travel-tabs-wrap .wp-travel-tabs-nav li a:before {
           font-family: 'Dashicons';
-          width: 20px;
-          height: 20px;
-          font-size: 20px;
+          width: 16px;
+          height: 16px;
+          font-size: 16px;
           margin: 0 10px 5px 0;
           display: inline-block;
           vertical-align: middle;
@@ -127,7 +128,7 @@
         position: relative;
         margin-right: 10px;
         margin-bottom: 10px;
-        width: calc( 25% - 10px ); }
+        width: calc( 25% - 10px); }
         .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .wp-travel-open-uploaded-images li.featured-image:before {
           content: "\f155";
           color: #f1d375;
@@ -247,7 +248,8 @@
     overflow: hidden;
     margin-bottom: 30px;
     box-sizing: border-box; }
-  .marketplace-module .single-module-image, .marketplace-module .single-module-content {
+  .marketplace-module .single-module-image,
+  .marketplace-module .single-module-content {
     border: 1px solid #ddd;
     background-color: #fbfbfb; }
   .marketplace-module .single-module-image {
