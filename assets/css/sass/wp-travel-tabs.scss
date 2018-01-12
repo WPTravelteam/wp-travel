@@ -330,12 +330,14 @@ $alto: #ddd;
         background-color: #fbfbfb;
     }
     .single-module-image{
+        border-bottom:none;
         a{
             display:block;
         }
         img{
             width:100%;
             height: auto;
+            border-bottom:1px solid #ddd;
         }
     }
     .single-module-content{
@@ -347,7 +349,6 @@ $alto: #ddd;
         }
         a{
             text-decoration:none;
-            
         }
         .pull-left{
             float:left;
@@ -469,3 +470,5 @@ $alto: #ddd;
 
 
 }
+
+
