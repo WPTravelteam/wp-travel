@@ -126,7 +126,8 @@
         cursor: move;
         position: relative;
         margin-right: 10px;
-        margin-bottom: 10px; }
+        margin-bottom: 10px;
+        width: calc( 25% - 10px ); }
         .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .wp-travel-open-uploaded-images li.featured-image:before {
           content: "\f155";
           color: #f1d375;

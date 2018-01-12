@@ -308,7 +308,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$trip_code = wp_travel_get_trip_code( $post->ID );
 		?>
-		<table class="form-table">
+		<table class="form-table trip-info-sidebar">
 			<tr>
 				<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
