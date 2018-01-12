@@ -186,7 +186,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     td{
         padding:15px 5px;
         width: 50%;
-        min-width: 60px;
+        min-width: 65px;
+
+        input{
+            width:100%;
+        }
     }
 }
 .postbox{

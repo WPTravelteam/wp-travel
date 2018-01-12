@@ -112,7 +112,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .trip-info-sidebar td {
   padding: 15px 5px;
   width: 50%;
-  min-width: 60px; }
+  min-width: 65px; }
+  .trip-info-sidebar td input, .trip-info-sidebar td .wp-travel-form-field select, .wp-travel-form-field .trip-info-sidebar td select, .trip-info-sidebar td .wp-travel-form-field .stat-toolbar-form .field-group input, .wp-travel-form-field .stat-toolbar-form .field-group .trip-info-sidebar td input, .trip-info-sidebar td .stat-toolbar-form .field-group .wp-travel-form-field input, .stat-toolbar-form .field-group .wp-travel-form-field .trip-info-sidebar td input, .trip-info-sidebar td .wp-travel-form-field textarea, .wp-travel-form-field .trip-info-sidebar td textarea {
+    width: 100%; }
 
 .postbox table.form-table h4 {
   margin: 0 0 20px; }
