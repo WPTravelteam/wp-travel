@@ -61,6 +61,13 @@ class WP_Travel_Admin_Permalink_Settings {
 			'permalink',                        // settings page
 			'optional'                          // settings section
 		);
+		add_settings_field(
+			'wp_travel_activity_slug',            // id
+			__( 'Trip Activity base', 'wp-travel' ),   // setting title
+			array( $this, 'activity_slug_input' ),  // display callback
+			'permalink',                        // settings page
+			'optional'                          // settings section
+		);
 		$this->permalinks = wp_travel_get_permalink_structure();
 	}
 
@@ -95,6 +102,16 @@ class WP_Travel_Admin_Permalink_Settings {
 	}
 
 	/**
+	 * Show a slug input box.
+	 */
+	public function activity_slug_input() {
+		
+		?>
+		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'woocommerce' ) ?>" />
+		<?php
+	}
+
+	/**
 	 * Save the settings.
 	 */
 	public function settings_save() {
@@ -109,7 +126,8 @@ class WP_Travel_Admin_Permalink_Settings {
 			$permalinks['wp_travel_trip_base']  =  trim( $_POST['wp_travel_trip_base'] );
 			$permalinks['wp_travel_trip_type_base']  =  trim( $_POST['wp_travel_trip_type_base'] );
 			$permalinks['wp_travel_destination_base']  =  trim( $_POST['wp_travel_destination_base'] );
-
+			$permalinks['wp_travel_activity_base']  =  trim( $_POST['wp_travel_activity_base'] );
+			
 			update_option( 'wp_travel_permalinks', $permalinks );
 			// wc_restore_locale();
 		}

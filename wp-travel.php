@@ -252,7 +252,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				}
 			}
 			include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( $current_db_version !== WP_TRAVEL_VERSION ) {
 				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );

@@ -13,6 +13,6 @@ function wp_travel_post_type_change() {
 
 	$query1 = "UPDATE {$wpdb->posts}  SET post_type = replace(post_type, 'itineraries', 'trip')";
 	$wpdb->get_results( $query1 );
-	
+	flush_rewrite_rules();
 }
 wp_travel_post_type_change();

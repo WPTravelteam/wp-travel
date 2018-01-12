@@ -377,9 +377,9 @@ function wp_travel_upgrade_to_110() {
 	$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
 	$current_db_version = get_option( 'wp_travel_version' );
 	if ( ! $current_db_version ) {
-		include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 	}
 	if ( count( $itineraries ) > 0 ) {
-		include sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 	}
 }

@@ -82,5 +82,30 @@ class Wp_Travel_Taxonomies {
 		);
 
 		register_taxonomy( 'travel_keywords', array( WP_TRAVEL_POST_TYPE ), $args );
+
+		$labels = array(
+			'name'              => _x( 'Activities', 'general name', 'wp-travel' ),
+			'singular_name'     => _x( 'Keyword', 'singular name', 'wp-travel' ),
+			'search_items'      => __( 'Search Activities', 'wp-travel' ),
+			'all_items'         => __( 'All Activities', 'wp-travel' ),
+			'parent_item'       => __( 'Parent Keyword', 'wp-travel' ),
+			'parent_item_colon' => __( 'Parent Keyword:', 'wp-travel' ),
+			'edit_item'         => __( 'Edit Keyword', 'wp-travel' ),
+			'update_item'       => __( 'Update Keyword', 'wp-travel' ),
+			'add_new_item'      => __( 'Add New Keyword', 'wp-travel' ),
+			'new_item_name'     => __( 'New Keyword', 'wp-travel' ),
+			'menu_name'         => __( 'Activities', 'wp-travel' ),
+		);
+
+		$args = array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => false,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => $permalink['wp_travel_activity_base'] ),
+		);
+
+		register_taxonomy( 'activity', array( WP_TRAVEL_POST_TYPE ), $args );
 	}
 }

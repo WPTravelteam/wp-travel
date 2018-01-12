@@ -177,7 +177,10 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text = wp_travel_get_price_per_text( $post_id );
+
+	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
+	<div><span><strong><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?></strong></span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
     <div class="wp-detail-review-wrap">
     	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 		<div class="wp-travel-trip-detail">
@@ -301,14 +304,22 @@ function wp_travel_single_excerpt( $post_id ) {
 				</div>
 	  	 	</li>
 	  	 	<li>
-	  	 		<div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></strong>
+			    <div class="travel-info">
+					<strong class="title"><?php esc_html_e( 'Activities', 'wp-travel' ); ?></strong>
 				</div>
-				<div class="travel-info">
-					<span class="value code-font">
-						<?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?>
+			   <div class="travel-info">
+					<span class="value">
+
+					<?php
+					$activity_list = $wp_travel_itinerary->get_activities_list();
+					if ( $activity_list ) {
+						echo wp_kses( $activity_list, wp_travel_allowed_html( array( 'a' ) ) );
+					} else {
+						echo esc_html( apply_filters( 'wp_travel_default_no_activity_text', __( 'No Activities', 'wp-travel' ) ) );
+					}
+					?>
 					</span>
-				</div>
+				</div>	  	 		
 	  	 	</li>
 	  	 	<li>
 	  	 		<div class="travel-info">

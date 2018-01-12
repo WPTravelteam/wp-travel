@@ -145,4 +145,12 @@ class WP_Travel_Itinerary {
 		}
 		return false;
 	}
+
+	function get_activities_list( $before = '', $sep = ', ', $after = '' ) {
+		$lists = get_the_term_list( $this->post->ID, 'activity', $before, $sep, $after );
+		if ( '' !== $lists ) {
+			return $lists;
+		}
+		return false;
+	}
 }
