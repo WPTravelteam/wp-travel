@@ -142,6 +142,9 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
  */
 function get_wp_travel_map_data() {
 	global $post;
+	if ( ! $post ) {
+		return;
+	}
 	$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) :'';
 	$lng = ( '' != get_post_meta( $post->ID, 'wp_travel_lng', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lng', true ) : '';
 	$loc = ( '' != get_post_meta( $post->ID, 'wp_travel_location', true ) ) ? get_post_meta( $post->ID, 'wp_travel_location', true ) : '';
