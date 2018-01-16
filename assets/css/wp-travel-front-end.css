@@ -977,8 +977,22 @@
   color: #555;
   margin: 10px 0;
   border: 1px solid #ddd; }
+#faq .info {
+  background: #fff;
+  color: #222;
+  width: 100%;
+  height: 0;
+  line-height: 2;
+  padding: 0 15px;
+  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: .3s ease-out; }
+  #faq .info p {
+    margin: 15px 0; }
 #faq .acc-block input[type='radio']:checked ~ .info, #faq .acc-block .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type='radio']:checked ~ .info, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #faq .acc-block select[type='radio']:checked ~ .info, #faq .acc-block .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type='radio']:checked ~ .info, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #faq .acc-block textarea[type='radio']:checked ~ .info {
   height: auto;
+  border-top: 1px solid #ddd;
   transition: .3s ease-in; }
 #faq input[type='radio'], #faq .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type='radio'], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #faq select[type='radio'], #faq .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type='radio'], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #faq textarea[type='radio'] {
   width: 100%;
@@ -994,17 +1008,6 @@
   padding: 10px 12px 12px 15px;
   margin: 0;
   cursor: pointer; }
-#faq .info {
-  background: #fff;
-  color: #222;
-  width: 100%;
-  height: 0;
-  line-height: 2;
-  padding-left: 15px;
-  display: block;
-  overflow: hidden;
-  box-sizing: border-box;
-  transition: .3s ease-out; }
 #faq h4 {
   color: #111;
   text-align: right;
