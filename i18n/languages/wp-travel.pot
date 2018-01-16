@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.1\n"
+"Project-Id-Version: WP Travel 1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-12 14:59:12+00:00\n"
+"POT-Creation-Date: 2018-01-16 14:51:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Stat"
 msgstr ""
 
-#: inc/admin/class-admin-menu.php:9 inc/admin/class-admin-settings.php:45
+#: inc/admin/class-admin-menu.php:9 inc/admin/class-admin-settings.php:46
 msgid "WP Travel Settings"
 msgstr ""
 
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Trip Info"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:81 inc/admin/class-admin-settings.php:80
+#: inc/admin/class-admin-metaboxes.php:81 inc/admin/class-admin-settings.php:81
 #: inc/booking-functions.php:268 inc/booking-functions.php:789
 #: inc/email-template-functions.php:135 inc/email-template-functions.php:442
 msgid "Itinerary"
@@ -219,65 +219,65 @@ msgid ""
 "PayPal\"%2s addon for free!!"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:50 inc/admin/class-admin-settings.php:61
+#: inc/admin/class-admin-settings.php:51 inc/admin/class-admin-settings.php:62
 msgid "Save Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:55
+#: inc/admin/class-admin-settings.php:56
 msgid "View system information"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:56
+#: inc/admin/class-admin-settings.php:57
 msgid "System Information"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:75
+#: inc/admin/class-admin-settings.php:76
 msgid "General"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:76
+#: inc/admin/class-admin-settings.php:77
 msgid "General Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:81
+#: inc/admin/class-admin-settings.php:82
 msgid "Itinerary Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:85 inc/booking-functions.php:90
+#: inc/admin/class-admin-settings.php:86 inc/booking-functions.php:90
 #: inc/email-template-functions.php:269 inc/email-template-functions.php:576
 #: templates/single-wp-travel-reviews.php:67
 msgid "Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:86
+#: inc/admin/class-admin-settings.php:87
 msgid "Email Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:111
+#: inc/admin/class-admin-settings.php:112
 msgid "Select Currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:117
+#: inc/admin/class-admin-settings.php:118
 msgid "Currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:121
+#: inc/admin/class-admin-settings.php:122
 msgid "Choose your currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:127
+#: inc/admin/class-admin-settings.php:128
 msgid "Google Map API Key"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:152
+#: inc/admin/class-admin-settings.php:153
 msgid "Hide related itinerary"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:156
+#: inc/admin/class-admin-settings.php:157
 msgid "This will hide your related itineraries."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:178
+#: inc/admin/class-admin-settings.php:179
 msgid "Send Booking mail to admin"
 msgstr ""
 
