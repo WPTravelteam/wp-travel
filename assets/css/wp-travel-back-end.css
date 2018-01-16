@@ -330,6 +330,96 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     margin-left: 20px;
     margin-bottom: 10px; }
 
+.wp-collapse-open span {
+  float: right;
+  padding: 5px 15px;
+  position: relative;
+  cursor: pointer; }
+  .wp-collapse-open span:before {
+    font-family: dashicons;
+    position: absolute;
+    right: -5px;
+    font-size: 18px; }
+.wp-collapse-open .open-all:before {
+  content: "\f134"; }
+.wp-collapse-open .close-all:before {
+  content: "\f333"; }
+
+.tab-accordion .heading-accordion {
+  border: 1px solid #ddd;
+  padding: 10px 15px 10px 70px;
+  background-color: #f7f7f1;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 5px; }
+  .tab-accordion .heading-accordion:after {
+    content: "\f139";
+    font-family: dashicons;
+    font-size: 16px;
+    position: absolute;
+    left: 50px;
+    top: 14px; }
+  .tab-accordion .heading-accordion .sort-faq-section {
+    background: #ddd;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 100%;
+    z-index: 1;
+    cursor: move; }
+  .tab-accordion .heading-accordion:before {
+    content: "\f156";
+    font-size: 24px;
+    font-family: dashicons;
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    z-index: 2;
+    color: #666;
+    cursor: move; }
+  .tab-accordion .heading-accordion .faq-title {
+    padding: 3px 0;
+    display: inline-block; }
+  .tab-accordion .heading-accordion.ui-state-active {
+    background-color: #fff; }
+    .tab-accordion .heading-accordion.ui-state-active:after {
+      content: "\f140"; }
+  .tab-accordion .heading-accordion .hover-icon {
+    opacity: 0;
+    position: absolute;
+    right: 15px;
+    top: 11px;
+    color: #ca4a1f; }
+  .tab-accordion .heading-accordion input, .tab-accordion .heading-accordion .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .heading-accordion select, .tab-accordion .heading-accordion .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .heading-accordion textarea {
+    display: none; }
+.tab-accordion .ui-state-hover .hover-icon {
+  opacity: 1; }
+.tab-accordion .ui-state-hover input, .tab-accordion .ui-state-hover .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .ui-state-hover select, .tab-accordion .ui-state-hover .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .ui-state-hover textarea {
+  display: block;
+  line-height: 16px;
+  font-size: 14px;
+  margin: 0;
+  min-width: 50%; }
+.tab-accordion .ui-state-hover .faq-title {
+  display: none; }
+.tab-accordion .ui-accordion-content {
+  padding: 0;
+  position: relative;
+  clear: both;
+  border: 1px solid #ddd;
+  height: auto !important;
+  background: #fff; }
+.tab-accordion textarea {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: -4px; }
+
+.wp-travel-faq-quest-button {
+  float: right;
+  margin: 20px 0; }
+
 @media (max-width: 1024px) {
   .left-block,
   .right-block {

@@ -15,5 +15,7 @@
         });
 
         $(".wp-travel-marketplace-tab-wrap").tabs();
+
+        
     }
 }(jQuery));
