@@ -480,6 +480,9 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	function localize_gallery_data( $data ) {
 		global $post;
+		if ( ! $post ) {
+			return;
+		}
 		$gallery_ids = get_post_meta( $post->ID, 'wp_travel_itinerary_gallery_ids', true );
 		if ( false !== $gallery_ids && ! empty( $gallery_ids ) ) {
 			$gallery_data = array();

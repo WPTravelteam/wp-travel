@@ -1335,6 +1335,74 @@
     }
 }
 
+/* faq accordion */
+#faq{
+
+.acc-block{
+        background:#f9f9f9;
+        color: #555;
+        margin: 10px 0;
+        border:1px solid #ddd;
+    }
+    .acc-block input[type='radio']:checked ~ .info{
+      height: auto;
+      transition: .3s ease-in;
+    }
+
+    input[type='radio']{
+      width: 100%;
+      display: none;
+    }
+
+    label{
+      width: 450px;
+      max-width: 100%;
+      cursor: pointer;
+    }
+
+    span{
+      font-family: 'Arial';
+      font-weight: bold;
+      display: block;
+      padding: 10px 12px 12px 15px;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .info{
+      background: #fff;
+      color: #222;
+      width: 100%;
+      height: 0;
+      line-height: 2;
+      padding-left: 15px;
+      display: block;
+      overflow: hidden;
+      box-sizing: border-box;
+      transition: .3s ease-out;
+    } 
+
+    h4{
+      color: #111;
+      text-align: right;
+      text-shadow: 2px 2px 3px #fff;
+      position: absolute;
+      bottom: 20px;
+      right: 15px;
+    }
+
+    h4 a{
+      color: #111;
+      text-decoration: none;
+    }
+
+    ::selection{
+      background: #222;
+      color: #fff;
+    }
+}
+    
+
 
 /* wp-travel pagination
 ----------------------------------------------- */
