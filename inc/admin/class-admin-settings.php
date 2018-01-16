@@ -14,7 +14,7 @@ class WP_Travel_Admin_Settings {
 	 *
 	 * @var string
 	 */
-	private static $parent_slug = 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE;
+	public static $parent_slug;
 	/**
 	 * Page.
 	 *
@@ -25,6 +25,7 @@ class WP_Travel_Admin_Settings {
 	 * Constructor.
 	 */
 	public function __construct() {
+		self::$parent_slug = 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE;
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
