@@ -242,5 +242,6 @@
         return false;
     });
 
+    $('.wp-travel-frontend-tabs').sortable();
 
 }(jQuery));

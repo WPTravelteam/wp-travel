@@ -97,7 +97,8 @@ class WP_Travel_Admin_Assets {
 			if ( isset( $settings['google_map_api_key'] ) ) {
 				$api_key = $settings['google_map_api_key'];
 			}
-			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-accordion' );
+			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion' );
+
 			if ( '' != $api_key ) {
 				$depencency[] = 'jquery-gmaps';
 			}

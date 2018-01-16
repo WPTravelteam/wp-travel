@@ -950,3 +950,46 @@ function wp_travel_get_permalink_structure() {
 	return $permalinks;
 }
 
+function wp_travel_get_frontend_tabs() {
+	if ( is_admin() ) {
+		$trip_content = '';
+		$trip_outline = '';
+		$trip_include = '';
+		$trip_exclude = '';
+		$gallery_ids  = '';
+	} else {
+		global $wp_travel_itinerary;
+		$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
+		$trip_content	= $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
+		$trip_outline	= $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
+		$trip_include	= $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
+		$trip_exclude	= $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
+		$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
+	}
+	$return_tabs = $wp_travel_itinerary_tabs = array(
+		'overview' 		=> array( 'global_label' => __( 'Overview', 'wp-travel' ), 'label' => __( 'Overview', 'wp-travel' ), 'label_class' => '', 'content' => $trip_content, 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'trip_outline' 	=> array( 'global_label' => __( 'Trip Outline', 'wp-travel' ), 'label' => __( 'Trip Outline', 'wp-travel' ), 'label_class' => '', 'content' => $trip_outline, 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'trip_includes' => array( 'global_label' => __( 'Trip Includes', 'wp-travel' ), 'label' => __( 'Trip Includes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_include, 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'trip_excludes' => array( 'global_label' => __( 'Trip Excludes', 'wp-travel' ), 'label' => __( 'Trip Excludes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_exclude, 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'gallery' 		=> array( 'global_label' => __( 'Gallery', 'wp-travel' ), 'label' => __( 'Gallery', 'wp-travel' ), 'label_class' => 'wp-travel-tab-gallery-contnet', 'content' => $gallery_ids, 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'reviews' 		=> array( 'global_label' => __( 'Reviews', 'wp-travel' ), 'label' => __( 'Reviews', 'wp-travel' ), 'label_class' => 'wp-travel-review', 'content' => '', 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+		'booking' 		=> array( 'global_label' => __( 'Booking', 'wp-travel' ), 'label' => __( 'Booking', 'wp-travel' ), 'label_class' => 'wp-travel-booking-form', 'content' => '', 'use_global_label' => 'yes', 'show_in_menu' => 'yes' ),
+	);
+
+	global $post;
+	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
+
+	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
+		foreach ( $wp_travel_tabs as $key => $tab ) {
+			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
+			$new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
+			$new_tabs[ $key ]['label_class'] = $wp_travel_itinerary_tabs[ $key ]['label_class'];
+			$new_tabs[ $key ]['content'] = $wp_travel_itinerary_tabs[ $key ]['content'];
+			$new_tabs[ $key ]['use_global_label'] = isset( $tab['use_global_label'] ) ? $tab['use_global_label'] : 'yes';
+			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
+		}
+		$return_tabs = $new_tabs;
+	}
+	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
+
+}

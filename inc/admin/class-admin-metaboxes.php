@@ -36,6 +36,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'price_tab_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_includes_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
 	}
 
 	/**
@@ -102,6 +103,12 @@ class WP_Travel_Admin_Metaboxes {
 		$trips['locations'] = array(
 			'tab_label' => __( 'Locations', 'wp-travel' ),
 			'content_title' => __( 'Locations', 'wp-travel' ),
+			// 'content_callback' => array( $this, 'call_back' ),
+		);
+
+		$trips['frontend_tabs'] = array(
+			'tab_label' => __( 'Tabs', 'wp-travel' ),
+			'content_title' => __( 'Tabs', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
@@ -254,6 +261,37 @@ class WP_Travel_Admin_Metaboxes {
 
 		WP_Travel()->tabs->content( 'itineraries/itineraries-content.php' );
 
+	 }
+
+	 /**
+	 * Callback Function For Itineraries Content Tabs
+	 * 	
+	 * @param string $tab tab name 'itineraries_content'
+	 * @return Mixed
+	 */
+	function frontend_tabs_content_call_back( $tab, $args ) {
+		if( 'frontend_tabs' !== $tab ) {
+			return;
+		}
+		$post_id = $args['post']->ID;
+		$tabs = wp_travel_get_frontend_tabs();
+		
+		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+			echo '<ul class="wp-travel-frontend-tabs">';
+			foreach ( $tabs as $key => $tab ) : ?>
+				<li>
+					<?php echo esc_html( $tab['label'] ); ?>
+					<input type="text" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" >
+					
+					<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" value="no" >
+					<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" >
+					<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> >Use global Label</label></span>
+					<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> >Show in tab</label></span>
+				</li>
+			<?php
+			endforeach;
+			echo '</ul>';
+		}
 	 }
 
 	/**
@@ -451,6 +489,13 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_trip_duration_night', $trip_duration_night );
 		}
 
+		// Saving Tabs Settings
+		
+		if ( isset( $_POST['wp_travel_tabs'] ) ) {
+			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
+			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
+			update_post_meta( $post_id, 'wp_travel_tabs', $wp_travel_tabs );
+		}
 		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
