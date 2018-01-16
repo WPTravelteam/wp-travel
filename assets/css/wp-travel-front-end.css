@@ -100,7 +100,7 @@
           padding: 15px 14px; } }
   .wp-travel-tab-wrapper .tab-list-content {
     display: none;
-    padding: 40px 20px 0;
+    padding: 40px 20px;
     border: none; }
     .wp-travel-tab-wrapper .tab-list-content.current-content {
       display: inherit; }
@@ -986,6 +986,7 @@
   padding: 0 15px;
   display: block;
   overflow: hidden;
+  border-top: 1px solid #ddd;
   box-sizing: border-box;
   transition: .3s ease-out; }
   #faq .info p {
@@ -1002,25 +1003,11 @@
   max-width: 100%;
   cursor: pointer; }
 #faq span {
-  font-family: 'Arial';
   font-weight: bold;
   display: block;
   padding: 10px 12px 12px 15px;
   margin: 0;
   cursor: pointer; }
-#faq h4 {
-  color: #111;
-  text-align: right;
-  text-shadow: 2px 2px 3px #fff;
-  position: absolute;
-  bottom: 20px;
-  right: 15px; }
-#faq h4 a {
-  color: #111;
-  text-decoration: none; }
-#faq ::selection {
-  background: #222;
-  color: #fff; }
 
 /* wp-travel pagination
 ----------------------------------------------- */
