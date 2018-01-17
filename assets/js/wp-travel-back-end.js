@@ -294,6 +294,16 @@
     $(document).on('click', '.close-faq', function(e) {
         if (confirm("Press OK to Continue!!") == true) {
             $(this).closest('li').remove();
+
+            var faqs = $('#tab-accordion li').length;
+            // alert(faqs);
+            if (faqs > 0) {
+                $('.while-empty').hide();
+                $('.wp-collapse-open').show();
+            } else {
+                $('.wp-collapse-open').hide();
+                $('.while-empty').show();
+            }
         }
         return;
     })
@@ -304,6 +314,9 @@
         var template = wp.template('wp-travel-faq');
         var faqs = $('#tab-accordion li').length;
         $('#tab-accordion').append(template({}));
+
+        $('.while-empty').hide();
+        $('.wp-collapse-open').show();
         $('#tab-accordion').accordion('destroy').accordion({ active: faqs });
     });
 

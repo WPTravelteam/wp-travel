@@ -309,21 +309,31 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		} ?>
 
-		<div class="wp-travel-tab-content-faq-header clearfix">
-			<div class="while-empty">
-				<p>
-					Click on add new question to add FAQ.
-				</p>
-			</div>
-			<div class="wp-collapse-open" >
-				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
-				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
-			</div>
-		</div>
 		<?php
 		$post_id = $args['post']->ID;
 			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 		?>
+		<div class="wp-travel-tab-content-faq-header clearfix">
+			<?php
+			if ( is_array( $faq_questions ) && count( $faq_questions ) != 0  ) :
+				$empty_item_style = 'display:none';
+				$collapse_link_style = 'display:block';
+			else :
+				$empty_item_style = 'display:block';
+				$collapse_link_style = 'display:none';
+			endif;
+			?>
+			
+			<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ) ?>">
+				<p>
+					<?php esc_html_e( 'Click on add new question to add FAQ.', 'wp-travel' ); ?>
+				</p>
+			</div>
+			<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ) ?>" >
+				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
+				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
+			</div>
+		</div>
 		<ul id="tab-accordion" class="tab-accordion">
 			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
 				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
