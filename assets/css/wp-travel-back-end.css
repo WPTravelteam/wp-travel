@@ -450,7 +450,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
       display: inline;
       max-width: calc( 33.333% - 15px );
       float: left;
-      width: 130px;
+      width: 100%;
       height: 26px; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .wp-travel-tab-label, .wp-travel-tabs-contents .wp-travel-sorting-tabs li .use-global-tab, .wp-travel-tabs-contents .wp-travel-sorting-tabs li .show-in-frontend {
     max-width: 25%;
