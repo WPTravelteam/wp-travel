@@ -1377,14 +1377,29 @@
         width: 450px;
         max-width: 100%;
         cursor: pointer;
+        margin-bottom:0;
     }
 
     span{
         font-weight: bold;
         display: block;
-        padding: 10px 12px 12px 15px;
+        padding: 10px 12px 10px 15px;
         margin: 0;
         cursor: pointer;
+        position: relative;
+        font-weight: 400;
+        font-size: 14px;
+
+        &:before{
+            content: "\f132";
+            position:absolute;
+            right:15px;
+            top:12px;
+            font-family:dashicons;
+        }
+    }
+    input[type='radio']:checked ~ label span:before {
+        content: "\f460";
     }
 }
     
