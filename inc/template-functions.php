@@ -489,7 +489,6 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php $tab_label = ( 'yes' === $tab_info['use_global_label'] ) ? $tab_info['global_label'] : $tab_info['label'] ;?>
 				<li class="wp-travel-ert <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_label ); ?></li>
 			<?php $index++; endforeach; ?>
-			<li class="wp-travel-ert faq wp-travel-faq tab-8 resp-tab-item" data-tab="tab-8-cont" aria-controls="tab_item-7" role="tab">FAQ</li>
 		</ul>
 		<div class="resp-tabs-container">
 			<?php $index = 1; ?>
@@ -533,6 +532,27 @@ function wp_travel_frontend_contents( $post_id ) {
 							<?php echo wp_travel_get_booking_form(); ?>
 						</div>
 					<?php break;
+					case 'faq' : ?>
+					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+						<?php
+						$faqs = wp_travel_get_faqs( $post_id );
+						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+							foreach ( $faqs as $k => $faq ) : ?>
+								<div class="acc-block">
+									<input type="radio" name="acc-block" id="acc-block-<?php echo esc_attr( $k +1 ) ?>" />   
+									<label for="acc-block-<?php echo esc_attr( $k + 1 ) ?>"><span><?php echo esc_html( $faq['question'] ) ?></span></label>
+									<div class="info">
+									<p>
+									<?php echo esc_html( $faq['answer'] ) ?>
+									</p>
+									</div>
+								</div>
+							<?php endforeach;
+						}
+						?>
+						
+					</div>
+					<?php break;
 					 default : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php echo wp_kses_post( $tab_info['content'] ); ?>
@@ -541,35 +561,10 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php } ?>
 			<?php $index++; endforeach; ?>
 
+						<!-- <div id="faq" class="tab-list-content resp-tab-content clearfix">
 
-
-
-						<div id="faq" class="tab-list-content resp-tab-content clearfix">
-
-							<div class="acc-block">
-							  <input type="radio" name="acc-block" id="acc-block-01" checked />   
-							  <label for="acc-block-01"><span>How to sort menu item?</span></label>
-							  <div class="info">
-							    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							    </p>
-							  </div>
-							</div>
-							<div class="acc-block">
-							  <input type="radio" name="acc-block" id="acc-block-02"/>
-							  <label for="acc-block-02"><span>Tashkent</span></label>
-							  <div class="info">
-							    <p>Tashkent is the capital of Uzbekistan and of the Tashkent Province. The officially registered population of the city in 2008 was about 2.2 million. Unofficial sources estimate the actual population may be as much as 4.45 million.</p>
-							  </div>
-							</div>
-							<div class="acc-block">
-							  <input type="radio" name="acc-block" id="acc-block-03" />
-							  <label for="acc-block-03"><span>Bukhara</span></label>
-							  <div class="info">
-							    <p>Bukhara, from the Soghdian βuxārak, is the capital of the Bukhara Province of Uzbekistan. The nation's fifth-largest city, it has a population of 263,400. 
-							    </p>  
-							  </div>
-							</div>
-						</div>
+							
+						</div> -->
 
 
 		</div>
