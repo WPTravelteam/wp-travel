@@ -26,6 +26,30 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 			$itinerary_title = @$itinerary['title']; ?>
 
             <div class="itinerary_wrap" id="itinerary_wrap_<?php echo $cnt; ?>">
+
+                <div id="itinerary-accordion">
+                  <h3>Day 1</h3>
+                  <div>
+                    <p>
+                    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                    ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                    amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                    odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                    </p>
+                  </div>
+                  <h3>Day 2</h3>
+                  <div>
+                    <p>
+                    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                    suscipit faucibus urna.
+                    </p>
+                  </div>
+                  
+                
+                </div>
+
                 <table class="form-table">
                     <tbody>
                         <tr>

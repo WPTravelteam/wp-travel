@@ -592,7 +592,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             
         }
         .hover-icon {
-            opacity: 0;
             position: absolute;
             right: 15px;
             top: 11px;
@@ -625,9 +624,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     }
     .ui-state-hover {
-        .hover-icon {
-            opacity: 1;
-        }
         input {
             display: block;
         }

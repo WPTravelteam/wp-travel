@@ -309,7 +309,7 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		} ?>
 
-		<div class="wp-travel-tab-content-faq-header">
+		<div class="wp-travel-tab-content-faq-header clearfix">
 			<div class="wp-collapse-open">
 				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
@@ -319,7 +319,7 @@ class WP_Travel_Admin_Metaboxes {
 		$post_id = $args['post']->ID;
 			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 		?>
-		<ul id="tab-accordion" class="tab-accordion" style="margin-top:80px">
+		<ul id="tab-accordion" class="tab-accordion">
 			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
 				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
 				<?php foreach( $faq_questions as $key => $question ) : ?>
@@ -351,14 +351,12 @@ class WP_Travel_Admin_Metaboxes {
 				<h3 class="heading-accordion">
 				<div class="wp-travel-sorting-handle">
 				</div>
+				<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>" value="">
 				<span class="wp-travel-accordion-title">
 					<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>
 				</span>
-
-					<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>" value="">
-					
-					<span class="dashicons dashicons-no-alt hover-icon"></span>
-					<span class="toggle-indicator"></span>
+				<span class="dashicons dashicons-no-alt hover-icon"></span>
+				<span class="toggle-indicator"></span>
 				</h3>
 				<div>
 					<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="<?php esc_html_e( 'Answer.', 'wp-travel' ) ?>"></textarea>

@@ -380,7 +380,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .tab-accordion .heading-accordion.ui-state-active .toggle-indicator:before {
       content: "\f140"; }
   .tab-accordion .heading-accordion .hover-icon {
-    opacity: 0;
     position: absolute;
     right: 15px;
     top: 11px;
@@ -399,8 +398,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     display: block; }
   .tab-accordion .heading-accordion:focus .wp-travel-accordion-title {
     display: none; }
-.tab-accordion .ui-state-hover .hover-icon {
-  opacity: 1; }
 .tab-accordion .ui-state-hover input, .tab-accordion .ui-state-hover .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .ui-state-hover select, .tab-accordion .ui-state-hover .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .ui-state-hover textarea {
   display: block; }
 .tab-accordion .ui-state-hover .wp-travel-accordion-title {
