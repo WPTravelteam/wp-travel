@@ -310,7 +310,12 @@ class WP_Travel_Admin_Metaboxes {
 		} ?>
 
 		<div class="wp-travel-tab-content-faq-header clearfix">
-			<div class="wp-collapse-open">
+			<div class="while-empty">
+				<p>
+					Click on add new question to add FAQ.
+				</p>
+			</div>
+			<div class="wp-collapse-open" >
 				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 			</div>
