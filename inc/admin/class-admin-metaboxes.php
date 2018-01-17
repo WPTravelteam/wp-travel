@@ -349,7 +349,7 @@ class WP_Travel_Admin_Metaboxes {
 
 						
 						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
-						<span class="toggle-indicator"></span>
+						<span class="toggle-indicator-acc"></span>
 					</h3>
 					<div>
 						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Answer."><?php echo esc_attr( $faq_answers[ $key ] ) ?></textarea>

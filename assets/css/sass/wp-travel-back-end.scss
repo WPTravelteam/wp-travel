@@ -548,13 +548,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         outline: none;
         margin-bottom: 5px;
 
-        .toggle-indicator{
+        .toggle-indicator-acc{
             position: absolute;
             right: 50px;
             top: 10px;
 
             &:before {
-                content: "\f139";
+                content: "\f140";
                 font-family: dashicons;
                 font-size: 16px;
                 position: relative;
@@ -583,10 +583,10 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &.ui-state-active {
             background-color: #fff;
 
-            .toggle-indicator{
+            .toggle-indicator-acc{
 
                 &:before {
-                    content: "\f140";
+                    content: "\f142";
                 }
             }
             

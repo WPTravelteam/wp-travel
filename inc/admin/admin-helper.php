@@ -81,7 +81,7 @@ function wp_travel_marketplace_page() {
 		<div id="wp_travel_support_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
 				<span class="screen-reader-text">Toggle panel: Support</span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
+				<span class="toggle-indicator-acc" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
 				<span>Support</span>
