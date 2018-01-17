@@ -699,8 +699,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     max-width: 25%;
                     width: 100%;
                     display: block;
-                    float: left;
                     line-height: 2;
+                }
+                .wp-travel-tab-label{
+                    float:left;
+                }
+                .use-global-tab,.show-in-frontend{
+                    float:right;
                 }
                 .wp_travel_tabs_input-field {
                     margin-right: 15px;
