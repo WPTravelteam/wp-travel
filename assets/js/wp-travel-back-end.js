@@ -244,4 +244,13 @@
 
     $('.wp-travel-frontend-tabs').sortable();
 
+    $('#tab-accordion').accordion({
+        collapsible: true,
+        animate: 100,
+    }).sortable({
+            handle: '.wp-travel-sorting-handle'
+        }
+
+    ).disableSelection();
+
 }(jQuery));

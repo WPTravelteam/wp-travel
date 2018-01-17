@@ -27,14 +27,3 @@
 
 	</div>
 </div>
-
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-	    jQuery('#tab-accordion').accordion({
-		  collapsible: true,
-		  animate: 100,
-		});
-	    jQuery( "#tab-accordion" ).sortable();
-    	jQuery( "#tab-accordion" ).disableSelection();
-	});  
-</script>

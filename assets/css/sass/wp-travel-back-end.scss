@@ -513,64 +513,59 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 
 //faq section
-.wp-collapse-open{
-
-    span{
-        float:right;
+.wp-collapse-open {
+    span {
+        float: right;
         padding: 5px 15px;
-        position:relative;
-        cursor:pointer;
-
-        &:before{
-            font-family:dashicons;
+        position: relative;
+        cursor: pointer;
+        &:before {
+            font-family: dashicons;
             position: absolute;
             right: -5px;
             font-size: 18px;
         }
     }
-    .open-all{
-        
-        &:before{
+    .open-all {
+        &:before {
             content: "\f134";
-            
         }
     }
-    .close-all{
-        
-        &:before{
+    .close-all {
+        &:before {
             content: "\f333";
-            
         }
     }
 }
-.tab-accordion{
+
+.tab-accordion {
     .heading-accordion {
         border: 1px solid #ddd;
-        padding:10px 15px 10px 70px ;
+        padding: 10px 15px 10px 70px;
         background-color: #f7f7f1;
-        position:relative;
-        cursor:pointer;
-        outline:none;
+        position: relative;
+        cursor: pointer;
+        outline: none;
         margin-bottom: 5px;
-        &:after{
+        &:after {
             content: "\f139";
-            font-family:dashicons;
-            font-size:16px;
-            position:absolute;
-            left:50px;
-            top:14px;
+            font-family: dashicons;
+            font-size: 16px;
+            position: absolute;
+            left: 50px;
+            top: 14px;
         }
-        .sort-faq-section {
+        .wp-travel-sorting-handle {
             background: #ddd;
             position: absolute;
             top: 0;
             left: 0;
             width: 45px;
             height: 100%;
-            z-index:1;
+            z-index: 1;
             cursor: move;
         }
-        &:before{
+        &:before {
             content: "\f156";
             font-size: 24px;
             font-family: dashicons;
@@ -581,67 +576,61 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             color: #666;
             cursor: move;
         }
-
-        .faq-title{
+        .wp-travel-accordion-title {
             padding: 3px 0;
             display: inline-block;
         }
-
-        &.ui-state-active{
+        &.ui-state-active {
             background-color: #fff;
-            &:after{
+            &:after {
                 content: "\f140";
             }
         }
-        .hover-icon{
-            opacity:0;
+        .hover-icon {
+            opacity: 0;
             position: absolute;
             right: 15px;
             top: 11px;
             color: #ca4a1f;
         }
-        input{
-            display:none;
+        input {
+            display: none;
         }
     }
-    .ui-state-hover{
-        
-        .hover-icon{
-            opacity:1;
+    .ui-state-hover {
+        .hover-icon {
+            opacity: 1;
         }
-        input{
-            display:block;
+        input {
+            display: block;
             line-height: 16px;
             font-size: 14px;
             margin: 0;
-            min-width:50%;
+            min-width: 50%;
         }
-        .faq-title{
-            display:none;
+        .wp-travel-accordion-title {
+            display: none;
         }
     }
     .ui-accordion-content {
-        padding:0;
+        padding: 0;
         position: relative;
         clear: both;
         border: 1px solid #ddd;
         height: auto !important;
         background: #fff;
     }
-    textarea{
-        width:100%;
+    textarea {
+        width: 100%;
         padding: 10px 15px;
         margin-bottom: -4px;
     }
-   
-} 
+}
+
 .wp-travel-faq-quest-button {
     float: right;
     margin: 20px 0;
 }
-
-
-
 
 @include tab {
     .left-block,
