@@ -737,7 +737,7 @@ function wp_travel_get_rating_count( $value = null ) {
 
 
 function wp_travel_comments_template_loader( $template ) {
-	if ( WP_TRAVEL_POST_TYPE === get_post_type() ) {
+	if ( WP_TRAVEL_POST_TYPE !== get_post_type() ) {
 		return $template;
 	}
 
