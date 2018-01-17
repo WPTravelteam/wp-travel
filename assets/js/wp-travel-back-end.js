@@ -282,8 +282,8 @@
     });
     $('#tab-accordion').accordion({
         collapsible: true,
-        animate: 100,
-        handle: '.toggle-indicator',
+        animate: 0,
+        handle: '.toggle-indicator-acc',
         // start: 1
     }).sortable({
             handle: '.wp-travel-sorting-handle'

@@ -353,17 +353,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   cursor: pointer;
   outline: none;
   margin-bottom: 5px; }
-  .tab-accordion .heading-accordion .toggle-indicator {
+  .tab-accordion .heading-accordion .toggle-indicator-acc {
     position: absolute;
     right: 50px;
     top: 10px; }
-    .tab-accordion .heading-accordion .toggle-indicator:before {
-      content: "\f139";
+    .tab-accordion .heading-accordion .toggle-indicator-acc:before {
+      content: "\f140";
       font-family: dashicons;
       font-size: 16px;
       position: relative;
       left: -1px; }
-    .tab-accordion .heading-accordion .toggle-indicator:focus {
+    .tab-accordion .heading-accordion .toggle-indicator-acc:focus {
       border-radius: 50%;
       box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
       width: 20px;
@@ -377,8 +377,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     font-weight: 700; }
   .tab-accordion .heading-accordion.ui-state-active {
     background-color: #fff; }
-    .tab-accordion .heading-accordion.ui-state-active .toggle-indicator:before {
-      content: "\f140"; }
+    .tab-accordion .heading-accordion.ui-state-active .toggle-indicator-acc:before {
+      content: "\f142"; }
   .tab-accordion .heading-accordion .hover-icon {
     position: absolute;
     right: 15px;
