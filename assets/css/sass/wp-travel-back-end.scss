@@ -541,50 +541,53 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .tab-accordion {
     .heading-accordion {
         border: 1px solid #ddd;
-        padding: 10px 15px 10px 70px;
+        padding: 10px 15px 10px 45px;
         background-color: #f7f7f1;
         position: relative;
         cursor: pointer;
         outline: none;
         margin-bottom: 5px;
-        &:after {
-            content: "\f139";
-            font-family: dashicons;
-            font-size: 16px;
+
+        .toggle-indicator{
             position: absolute;
-            left: 50px;
-            top: 14px;
+            right: 50px;
+            top: 10px;
+
+            &:before {
+                content: "\f139";
+                font-family: dashicons;
+                font-size: 16px;
+                position: relative;
+                left: -1px;
+                
+            }
+
+            &:focus {
+                border-radius: 50%;
+                box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                outline: none;
+            }
         }
-        .wp-travel-sorting-handle {
-            background: #ddd;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 45px;
-            height: 100%;
-            z-index: 1;
-            cursor: move;
-        }
-        &:before {
-            content: "\f156";
-            font-size: 24px;
-            font-family: dashicons;
-            position: absolute;
-            left: 10px;
-            top: 13px;
-            z-index: 2;
-            color: #666;
-            cursor: move;
-        }
+        
+
+
         .wp-travel-accordion-title {
             padding: 3px 0;
             display: inline-block;
         }
         &.ui-state-active {
             background-color: #fff;
-            &:after {
-                content: "\f140";
+
+            .toggle-indicator{
+
+                &:before {
+                    content: "\f140";
+                }
             }
+            
         }
         .hover-icon {
             opacity: 0;
@@ -626,6 +629,88 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         margin-bottom: -4px;
     }
 }
+
+
+.wp-travel-tabs-contents{
+    .wp-travel-sorting-handle {
+            background: #ddd;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 35px;
+            height: 100%;
+            z-index: 1;
+            cursor: move;
+
+            &:before {
+                content: "\f545";
+                font-size: 16px;
+                font-family: dashicons;
+                position: absolute;
+                left: 8px;
+                top: 13px;
+                z-index: 2;
+                color: #666;
+                cursor: move;
+            }
+        }
+
+        .wp-travel-sorting-tabs {
+            
+            li{
+                position: relative;
+                border: 1px solid #ddd;
+                padding: 5px 15px 5px 35px;
+                background-color: #f7f7f1;
+                cursor: pointer;
+                outline: none;
+                margin-bottom: 5px;
+
+                .wp-travel-sorting-handle{
+                    width: 35px;
+
+                    &:before{
+                        left: 8px;
+                        top: 10px;
+                        font-size:16px;
+                    }
+                }
+                .wp-travel-sorting-tabs-wrap{
+                    padding-left:10px;
+
+                    .wp_travel_tabs_input-field{
+                        display:none;
+                    }
+
+                    &:hover{
+                        .wp-travel-tab-label{
+                            display:none;
+                        }
+                        .wp_travel_tabs_input-field{
+                            display: inline;
+                            max-width: calc( 33.333% - 15px );
+                            float: left;
+                            width: 130px;
+                            height: 26px;
+                        }
+                    }
+                }
+                .wp-travel-tab-label,.use-global-tab,.show-in-frontend{
+                    max-width: 25%;
+                    width: 100%;
+                    display: block;
+                    float: left;
+                    line-height: 2;
+                }
+                .wp_travel_tabs_input-field {
+                    margin-right: 15px;
+                }
+            }
+
+        }
+}
+
+
 
 .wp-travel-faq-quest-button {
     float: right;

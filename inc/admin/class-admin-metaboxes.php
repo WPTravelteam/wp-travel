@@ -284,16 +284,20 @@ class WP_Travel_Admin_Metaboxes {
 		$tabs = wp_travel_get_frontend_tabs();
 		
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
-			echo '<ul class="wp-travel-frontend-tabs">';
+			echo '<ul class="wp-travel-sorting-tabs">';
 			foreach ( $tabs as $key => $tab ) : ?>
-				<li>
-					<span class="wp-travel-tab-label"><?php echo esc_html( $tab['label'] ); ?></label>
-					<input type="text" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['global_label'] ); ?>" >
-					
-					<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" value="no" >
-					<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" >
-					<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> >Use global Label</label></span>
-					<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> >Show in tab</label></span>
+				<li class="clearfix">
+					<div class="wp-travel-sorting-handle">
+					</div>
+					<div class="wp-travel-sorting-tabs-wrap">
+						<span class="wp-travel-tab-label"><?php echo esc_html( $tab['label'] ); ?></span>
+						<input type="text" class="wp_travel_tabs_input-field" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['global_label'] ); ?>" />
+						
+						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" value="no" />
+						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
+						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> />Use global Label</label></span>
+						<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> />Show in tab</label></span>
+					</div>
 				</li>
 			<?php
 			endforeach;
@@ -327,6 +331,7 @@ class WP_Travel_Admin_Metaboxes {
 					<input class="section_title" id="title-1"  type="text" name="faq-question[1]" placeholder="(add question)" value="How to sort menu item?">
 					
 					<span class="dashicons dashicons-no-alt hover-icon"></span>
+					<span class="toggle-indicator"></span>
 				</h3>
 				<div>
 					<textarea rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
@@ -343,6 +348,7 @@ class WP_Travel_Admin_Metaboxes {
 					<input class="section_title" id="title-1"  type="text" name="faq-question[1]" placeholder="(add question)" value="How to sort menu item?">
 					
 					<span class="dashicons dashicons-no-alt hover-icon"></span>
+					<span class="toggle-indicator"></span>
 				</h3>
 				<div>
 					<textarea rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
