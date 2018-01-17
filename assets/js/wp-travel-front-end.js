@@ -86,7 +86,6 @@ jQuery(document).ready(function($) {
 
     function rate(rateLabel) {
         for (var i = 0; i < rateLabel; i++) {
-            //console.log(i);
             $('.rate_label:eq( ' + i + ' )').addClass('dashicons-star-filled').removeClass('dashicons-star-empty ');
         }
 

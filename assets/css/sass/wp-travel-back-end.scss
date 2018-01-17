@@ -546,7 +546,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         position: relative;
         cursor: pointer;
         outline: none;
-        margin-bottom: 5px;
+        margin-bottom: 0;
 
         .toggle-indicator-acc{
             position: absolute;
@@ -575,14 +575,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 
         .wp-travel-accordion-title {
-            padding: 3px 0;
+            padding: 3px 5px;
             display: inline-block;
             font-size: 14px;
-            font-weight: 700;
+            border:1px solid transparent;
         }
         &.ui-state-active {
             background-color: #fff;
-
+            border-bottom: none;
             .toggle-indicator-acc{
 
                 &:before {
@@ -603,6 +603,10 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             font-size: 14px;
             margin: 0;
             min-width: 50%;
+            height:26px;
+            border-color: #ddd;
+            box-shadow: none;
+            padding:2px 5px 4px;
 
             &:focus{
                 display:block;
@@ -630,6 +634,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         .wp-travel-accordion-title {
             display: none;
         }
+
     }
     .ui-accordion-content {
         padding: 0;
@@ -708,6 +713,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                             float: left;
                             width: 100%;
                             height: 26px;
+                            box-shadow:none;
                         }
                     }
                 }
@@ -720,6 +726,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 .wp-travel-tab-label{
                     float:left;
                     font-size: 14px;
+                    padding-left: 7px;
                 }
                 .use-global-tab,.show-in-frontend{
                     float:right;
