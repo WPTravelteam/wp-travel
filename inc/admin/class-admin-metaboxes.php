@@ -292,9 +292,9 @@ class WP_Travel_Admin_Metaboxes {
 					<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['global_label'] ); ?>" />
-						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" value="no" />
+						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global]" value="no" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> /><?php esc_html_e( 'Use Global', 'wp-travel' ); ?></label></span>
+						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global'] ) ?> /><?php esc_html_e( 'Use Global', 'wp-travel' ); ?></label></span>
 						<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php esc_html_e( 'Display', 'wp-travel' ); ?></label></span>
 					</div>
 				</li>
@@ -333,7 +333,7 @@ class WP_Travel_Admin_Metaboxes {
 						</span>
 
 						
-						<span class="dashicons dashicons-no-alt hover-icon"></span>
+						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
 						<span class="toggle-indicator"></span>
 					</h3>
 					<div>
@@ -355,7 +355,7 @@ class WP_Travel_Admin_Metaboxes {
 				<span class="wp-travel-accordion-title">
 					<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>
 				</span>
-				<span class="dashicons dashicons-no-alt hover-icon"></span>
+				<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
 				<span class="toggle-indicator"></span>
 				</h3>
 				<div>

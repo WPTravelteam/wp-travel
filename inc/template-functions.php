@@ -474,7 +474,11 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_exclude	= $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 
-	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs(); ?>
+	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+	
+	// echo '<pre>';
+	// print_r( $wp_travel_itinerary_tabs );
+	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 		<ul class="wp-travel tab-list resp-tabs-list ">

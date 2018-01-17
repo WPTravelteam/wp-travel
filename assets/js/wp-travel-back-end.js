@@ -258,14 +258,16 @@
         this._originalKeyDown(event);
     };
     // Open All And Close All accordion.
-    $('.open-all-link').click(function() {
+    $('.open-all-link').click(function(e) {
+        e.preventDefault();
         $('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr({ 'aria-selected': 'true', 'tabindex': '0' });
         $('.ui-accordion-header .ui-icon').removeClass('ui-icon-triangle-1-e').addClass('ui-icon-triangle-1-s');
         $('.ui-accordion-content').addClass('ui-accordion-content-active').attr({ 'aria-expanded': 'true', 'aria-hidden': 'false' }).show();
         $(this).hide();
         $('.close-all-link').show();
     });
-    $('.close-all-link').click(function() {
+    $('.close-all-link').click(function(e) {
+        e.preventDefault();
         $('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr({ 'aria-selected': 'false', 'tabindex': '-1' });
         $('.ui-accordion-header .ui-icon').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
         $('.ui-accordion-content').removeClass('ui-accordion-content-active').attr({ 'aria-expanded': 'false', 'aria-hidden': 'true' }).hide();
@@ -288,6 +290,13 @@
         }
 
     ).disableSelection();
+
+    $(document).on('click', '.close-faq', function(e) {
+        if (confirm("Press OK to Continue!!") == true) {
+            $(this).closest('li').remove();
+        }
+        return;
+    })
 
     // function faq_acc
 
