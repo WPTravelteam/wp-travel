@@ -372,7 +372,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
       outline: none; }
   .tab-accordion .heading-accordion .wp-travel-accordion-title {
     padding: 3px 0;
-    display: inline-block; }
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700; }
   .tab-accordion .heading-accordion.ui-state-active {
     background-color: #fff; }
     .tab-accordion .heading-accordion.ui-state-active .toggle-indicator:before {
@@ -384,15 +386,23 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     top: 11px;
     color: #ca4a1f; }
   .tab-accordion .heading-accordion input, .tab-accordion .heading-accordion .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .heading-accordion select, .tab-accordion .heading-accordion .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .heading-accordion textarea {
+    display: none;
+    line-height: 16px;
+    font-size: 14px;
+    margin: 0;
+    min-width: 50%; }
+    .tab-accordion .heading-accordion input:focus, .tab-accordion .heading-accordion .wp-travel-form-field select:focus, .wp-travel-form-field .tab-accordion .heading-accordion select:focus, .tab-accordion .heading-accordion .wp-travel-form-field textarea:focus, .wp-travel-form-field .tab-accordion .heading-accordion textarea:focus {
+      display: block; }
+      .tab-accordion .heading-accordion input:focus + .wp-travel-accordion-title, .tab-accordion .heading-accordion .wp-travel-form-field select:focus + .wp-travel-accordion-title, .wp-travel-form-field .tab-accordion .heading-accordion select:focus + .wp-travel-accordion-title, .tab-accordion .heading-accordion .wp-travel-form-field .stat-toolbar-form .field-group input:focus + .wp-travel-accordion-title, .tab-accordion .heading-accordion .stat-toolbar-form .field-group .wp-travel-form-field input:focus + .wp-travel-accordion-title, .tab-accordion .heading-accordion .wp-travel-form-field textarea:focus + .wp-travel-accordion-title, .wp-travel-form-field .tab-accordion .heading-accordion textarea:focus + .wp-travel-accordion-title {
+        display: none; }
+  .tab-accordion .heading-accordion:focus input, .tab-accordion .heading-accordion:focus .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .heading-accordion:focus select, .tab-accordion .heading-accordion:focus .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .heading-accordion:focus textarea {
+    display: block; }
+  .tab-accordion .heading-accordion:focus .wp-travel-accordion-title {
     display: none; }
 .tab-accordion .ui-state-hover .hover-icon {
   opacity: 1; }
 .tab-accordion .ui-state-hover input, .tab-accordion .ui-state-hover .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .ui-state-hover select, .tab-accordion .ui-state-hover .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .ui-state-hover textarea {
-  display: block;
-  line-height: 16px;
-  font-size: 14px;
-  margin: 0;
-  min-width: 50%; }
+  display: block; }
 .tab-accordion .ui-state-hover .wp-travel-accordion-title {
   display: none; }
 .tab-accordion .ui-accordion-content {
@@ -458,7 +468,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     display: block;
     line-height: 2; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .wp-travel-tab-label {
-    float: left; }
+    float: left;
+    font-size: 14px; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .use-global-tab, .wp-travel-tabs-contents .wp-travel-sorting-tabs li .show-in-frontend {
     float: right; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .wp_travel_tabs_input-field {
