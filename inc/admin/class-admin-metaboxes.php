@@ -282,7 +282,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$post_id = $args['post']->ID;
 		$tabs = wp_travel_get_frontend_tabs();
-		
+
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 			echo '<ul class="wp-travel-sorting-tabs">';
 			foreach ( $tabs as $key => $tab ) : ?>
@@ -290,13 +290,12 @@ class WP_Travel_Admin_Metaboxes {
 					<div class="wp-travel-sorting-handle">
 					</div>
 					<div class="wp-travel-sorting-tabs-wrap">
-						<span class="wp-travel-tab-label"><?php echo esc_html( $tab['label'] ); ?></span>
-						<input type="text" class="wp_travel_tabs_input-field" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['global_label'] ); ?>" />
-						
+						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['global_label'] ); ?>" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" value="no" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> />Use global Label</label></span>
-						<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> />Show in tab</label></span>
+						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global_label]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global_label'] ) ?> /><?php esc_html_e( 'Use Global', 'wp-travel' ); ?></label></span>
+						<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php esc_html_e( 'Display', 'wp-travel' ); ?></label></span>
 					</div>
 				</li>
 			<?php
@@ -308,56 +307,64 @@ class WP_Travel_Admin_Metaboxes {
 	function wp_travel_faq_callback( $tab, $args ) {
 		if ( 'faq' !== $tab ) {
 			return;
-		}  ?>
+		} ?>
 
 		<div class="wp-travel-tab-content-faq-header">
 			<div class="wp-collapse-open">
-				<a href="#"><span class="open-all" id="open-all">Open All</span></a>
-				<a href="#"><span class="close-all" id="close-all">Close All</span></a>
+				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
+				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 			</div>
 		</div>
-
-
-
+		<?php
+		$post_id = $args['post']->ID;
+			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
+		?>
 		<ul id="tab-accordion" class="tab-accordion" style="margin-top:80px">
-			<li>
-				<h3 class="heading-accordion">
-				<div class="wp-travel-sorting-handle">
-				</div>
-				<span class="wp-travel-accordion-title">
-					How to sort menu item?
-				</span>
+			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
+				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
+				<?php foreach( $faq_questions as $key => $question ) : ?>
+				<li>
+					<h3 class="heading-accordion">
+						<div class="wp-travel-sorting-handle">
+						</div>
+						<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="FAQ?" value="<?php echo esc_html( $question ); ?>">
+						<span class="wp-travel-accordion-title">
+							<?php echo esc_html( $question ); ?>
+						</span>
 
-					<input class="section_title" id="title-1"  type="text" name="faq-question[1]" placeholder="(add question)" value="How to sort menu item?">
-					
-					<span class="dashicons dashicons-no-alt hover-icon"></span>
-					<span class="toggle-indicator"></span>
-				</h3>
-				<div>
-					<textarea rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-				</div>
-			</li>
-			<li>
-				<h3 class="heading-accordion">
-				<div class="wp-travel-sorting-handle">
-				</div>
-				<span class="wp-travel-accordion-title">
-					How to sort menu item?
-				</span>
-
-					<input class="section_title" id="title-1"  type="text" name="faq-question[1]" placeholder="(add question)" value="How to sort menu item?">
-					
-					<span class="dashicons dashicons-no-alt hover-icon"></span>
-					<span class="toggle-indicator"></span>
-				</h3>
-				<div>
-					<textarea rows="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
-				</div>
-			</li>
+						
+						<span class="dashicons dashicons-no-alt hover-icon"></span>
+						<span class="toggle-indicator"></span>
+					</h3>
+					<div>
+						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Answer."><?php echo esc_attr( $faq_answers[ $key ] ) ?></textarea>
+					</div>
+				</li>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		</ul>
 		<div class="wp-travel-faq-quest-button clearfix">		
 			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">		
 		</div>
+		<script type="text/html" id="tmpl-wp-travel-faq">
+			<li>
+				<h3 class="heading-accordion">
+				<div class="wp-travel-sorting-handle">
+				</div>
+				<span class="wp-travel-accordion-title">
+					<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>
+				</span>
+
+					<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>" value="">
+					
+					<span class="dashicons dashicons-no-alt hover-icon"></span>
+					<span class="toggle-indicator"></span>
+				</h3>
+				<div>
+					<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="<?php esc_html_e( 'Answer.', 'wp-travel' ) ?>"></textarea>
+				</div>
+			</li>
+		</script>
 		<?php
 	} 
 
@@ -562,6 +569,16 @@ class WP_Travel_Admin_Metaboxes {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
 			update_post_meta( $post_id, 'wp_travel_tabs', $wp_travel_tabs );
+		}
+		if ( isset( $_POST['wp_travel_faq_question'] ) ) {
+			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
+			$wp_travel_faq_question = ( wp_unslash( $_POST['wp_travel_faq_question'] ) );
+			update_post_meta( $post_id, 'wp_travel_faq_question', $wp_travel_faq_question );
+		}
+		if ( isset( $_POST['wp_travel_faq_answer'] ) ) {
+			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
+			$wp_travel_faq_answer = ( wp_unslash( $_POST['wp_travel_faq_answer'] ) );
+			update_post_meta( $post_id, 'wp_travel_faq_answer', $wp_travel_faq_answer );
 		}
 		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
