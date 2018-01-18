@@ -32,6 +32,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
 
@@ -87,6 +88,11 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['email'] = array(
 			'tab_label' => __( 'Email', 'wp-travel' ),
 			'content_title' => __( 'Email Settings', 'wp-travel' ),
+		);
+
+		$settings_fields['tabs_global'] = array(
+			'tab_label' => __( 'Tabs', 'wp-travel' ),
+			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -190,6 +196,43 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Callback for Global tabs settings.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	function call_back_tab_global_settings( $tab, $args ) {
+		if ( 'tabs_global' !== $tab ) {
+			return;
+		}
+		$global_tabs = isset ( $args['settings']['global_tab_settings'] ) ? $args['settings']['global_tab_settings'] : '';
+
+		if( empty( $global_tabs ) ) {
+
+			//Fallback to default Tabs.
+			$global_tabs = wp_travel_get_default_frontend_tabs();
+
+		}
+		
+		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 ) {
+			echo '<ul class="wp-travel-sorting-tabs">';
+			foreach ( $global_tabs as $key => $tab ) : ?>
+				<li class="clearfix">
+					<div class="wp-travel-sorting-handle"></div>
+					<div class="wp-travel-sorting-tabs-wrap">
+						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
+						<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
+						<span class="show-in-frontend"><label><input name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php esc_html_e( 'Display', 'wp-travel' ); ?></label></span>
+					</div>
+				</li>
+			<?php
+			endforeach;
+			echo'</ul>'; 
+		}
+	}
+
+	/**
 	 * Save settings.
 	 *
 	 * @return void
@@ -208,6 +251,9 @@ class WP_Travel_Admin_Settings {
 			$settings['google_map_api_key'] = $google_map_api_key;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
+
+			// @since 1.1.1 Global tabs settings.
+			$settings['global_tab_settings'] = ( isset( $_POST['wp_travel_global_tabs_settings'] ) && '' !== $_POST['wp_travel_global_tabs_settings'] ) ? $_POST['wp_travel_global_tabs_settings'] : '';
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
