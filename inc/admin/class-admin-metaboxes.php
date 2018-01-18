@@ -38,7 +38,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
-		
+
 	}
 
 	/**
@@ -56,7 +56,7 @@ class WP_Travel_Admin_Metaboxes {
 	/**
 	 * Remove metabox.
 	 */
-	public function remove_metaboxs() {		
+	public function remove_metaboxs() {
 		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE,'side' );
 	}
 	/**
@@ -107,7 +107,7 @@ class WP_Travel_Admin_Metaboxes {
 			'content_title' => __( 'Locations', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
 		);
-		
+
 		$trips['faq'] = array(
 			'tab_label' => __( 'FAQs', 'wp-travel' ),
 			'content_title' => __( 'FAQs', 'wp-travel' ),
@@ -150,7 +150,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @since 1.0.7
 	 * @return Mixed
 	 */
-	function price_tab_call_back( $tab ) {		
+	function price_tab_call_back( $tab ) {
 		global $post;
 		if ( 'price' !== $tab ) {
 			return;
@@ -254,12 +254,12 @@ class WP_Travel_Admin_Metaboxes {
 	}
 	/**
 	 * Callback Function For Itineraries Content Tabs
-	 * 	
+	 *
 	 * @param string $tab tab name 'itineraries_content'
 	 * @return Mixed
 	 */
 	function itineraries_content_call_back( $tab ) {
-		
+
 		global $post;
 
 		if( 'itineraries_content' !== $tab ) {
@@ -272,7 +272,7 @@ class WP_Travel_Admin_Metaboxes {
 
 	 /**
 	 * Callback Function For Itineraries Content Tabs
-	 * 	
+	 *
 	 * @param string $tab tab name 'itineraries_content'
 	 * @return Mixed
 	 */
@@ -292,6 +292,7 @@ class WP_Travel_Admin_Metaboxes {
 						<td><input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> /></td>
 					</tr>
 				</table>
+				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
 			<?php
 			echo '<ul class="wp-travel-sorting-tabs">';
 			foreach ( $tabs as $key => $tab ) : ?>
@@ -330,7 +331,7 @@ class WP_Travel_Admin_Metaboxes {
 				$collapse_link_style = 'display:none';
 			endif;
 			?>
-			
+
 			<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ) ?>">
 				<p>
 					<?php esc_html_e( 'Click on add new question to add FAQ.', 'wp-travel' ); ?>
@@ -344,17 +345,17 @@ class WP_Travel_Admin_Metaboxes {
 		<div id="tab-accordion" class="tab-accordion">
 			<div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
 				<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
-					
+
 					<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
-					
+
 					<?php foreach( $faq_questions as $key => $question ) : ?>
-					
+
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="heading-"<?php echo esc_attr($key); ?>>
 								<h4 class="panel-title">
 									<div class="wp-travel-sorting-handle"></div>
 									<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
-									
+
 										<span bind="faq_question_<?php echo esc_attr($key); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 
 									<span class="collapse-icon"></span>
@@ -375,8 +376,8 @@ class WP_Travel_Admin_Metaboxes {
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</div>
-		</div>	
-		<div class="wp-travel-faq-quest-button clearfix">		
+		</div>
+		<div class="wp-travel-faq-quest-button clearfix">
 			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">
 		</div>
 		<script type="text/html" id="tmpl-wp-travel-faq">
@@ -386,9 +387,9 @@ class WP_Travel_Admin_Metaboxes {
 					<h4 class="panel-title">
 						<div class="wp-travel-sorting-handle"></div>
 						<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
-						
+
 							<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
-			
+
 						<span class="collapse-icon"></span>
 						</a>
 						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
@@ -406,7 +407,7 @@ class WP_Travel_Admin_Metaboxes {
 			</div>
 		</script>
 		<?php
-	} 
+	}
 
 	/**
 	 * HTML template for gallery list item.
@@ -509,7 +510,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		$wp_travel_enable_sale = 0;
 		if ( isset( $_POST['wp_travel_enable_sale'] ) ) {
-			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );	
+			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_enable_sale', $wp_travel_enable_sale );
 		if ( isset( $_POST['wp_travel_sale_price'] ) ) {
@@ -586,14 +587,14 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_location_id = sanitize_text_field( wp_unslash( $_POST['wp_travel_location_id'] ) );
 			update_post_meta( $post_id, 'wp_travel_location_id', $wp_travel_location_id );
 		}
-	
+
 		$fixed_departure = 'no';
 		if ( isset( $_POST['wp_travel_fixed_departure'] ) ) {
 			$fixed_departure = sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
 
-		
+
 		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
 			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );
 			update_post_meta( $post_id, 'wp_travel_trip_duration', $trip_duration );
@@ -609,7 +610,7 @@ class WP_Travel_Admin_Metaboxes {
 			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
 		}
 			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
-		
+
 		if ( isset( $_POST['wp_travel_tabs'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
