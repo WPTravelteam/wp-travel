@@ -282,8 +282,17 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$post_id = $args['post']->ID;
 		$tabs = wp_travel_get_frontend_tabs();
+		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+			?>
+				<table class="form-table">
+					<tr>
+						<td><label for="wp-travel-use-global-tabs"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label></td>
+						<td><input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> /></td>
+					</tr>
+				</table>
+			<?php
 			echo '<ul class="wp-travel-sorting-tabs">';
 			foreach ( $tabs as $key => $tab ) : ?>
 				<li class="clearfix">
@@ -292,9 +301,7 @@ class WP_Travel_Admin_Metaboxes {
 					<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
-						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global]" value="no" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-						<span class="use-global-tab"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][use_global]" type="checkbox" value="yes" <?php checked( 'yes', $tab['use_global'] ) ?> /><?php esc_html_e( 'Use Global', 'wp-travel' ); ?></label></span>
 						<span class="show-in-frontend"><label><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php esc_html_e( 'Display', 'wp-travel' ); ?></label></span>
 					</div>
 				</li>
@@ -335,78 +342,68 @@ class WP_Travel_Admin_Metaboxes {
 			</div>
 		</div>
 		<div id="tab-accordion" class="tab-accordion">
-			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
-				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
-				<?php foreach( $faq_questions as $key => $question ) : ?>
-				
-				<?php endforeach; ?>
-			<?php endif; ?>
-			<div class="panel-group wp-travel-sorting-tabs" id="accordion" role="tablist" aria-multiselectable="true">
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingOne">
-				      <h4 class="panel-title">
-				      	<div class="wp-travel-sorting-handle"></div>
-				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				          How to change the top header styling?
+			<div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
+				<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
+					
+					<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
+					
+					<?php foreach( $faq_questions as $key => $question ) : ?>
+					
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="heading-"<?php echo esc_attr($key); ?>>
+								<h4 class="panel-title">
+									<div class="wp-travel-sorting-handle"></div>
+									<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
+									
+										<span bind="faq_question_<?php echo esc_attr($key); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 
-				          <span class="collapse-icon"></span>
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-				      <div class="panel-body">
-				      	<div class="panel-faq-question">
-					      	<label>Enter Your Question</label>
-					      	<input type="text" name="Question" placeholder="FAQ" />
-					     </div>
-				        <textarea row="6">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</textarea>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingTwo">
-				      <h4 class="panel-title">
-				      	<div class="wp-travel-sorting-handle"></div>
-				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				          How to import dummy content?
-				          <span class="collapse-icon"></span>
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				      <div class="panel-body">
-				      	<div class="panel-faq-question">
-					      	<label>Enter Your Question</label>
-					      	<input type="text" name="Question" placeholder="FAQ" />
-					     </div>
-				        <textarea row="6">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</textarea>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-		</div>
+									<span class="collapse-icon"></span>
+									</a>
+									<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
+								</h4>
+							</div>
+							<div id="collapse-<?php echo esc_attr($key); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-"<?php echo esc_attr($key); ?>>
+							<div class="panel-body">
+								<div class="panel-faq-question">
+									<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
+									<input bind="faq_question_<?php echo esc_attr($key); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
+								</div>
+								<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."><?php echo esc_attr( $faq_answers[ $key ] ) ?></textarea>
+							</div>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+		</div>	
 		<div class="wp-travel-faq-quest-button clearfix">		
-			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">		
+			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">
 		</div>
 		<script type="text/html" id="tmpl-wp-travel-faq">
-		
-			<li>
-					<h3 class="heading-accordion">
-						<div class="wp-travel-sorting-handle">
-						</div>
-						<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="FAQ?" value="">
-						<span class="wp-travel-accordion-title">
-							<?php esc_html_e( 'FAQ?', 'wp-travel' ) ?>
-						</span>
 
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+					<h4 class="panel-title">
+						<div class="wp-travel-sorting-handle"></div>
+						<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
 						
+							<span bind="faq_question_{{data.random}}" <?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
+			
+						<span class="collapse-icon"></span>
+						</a>
 						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
-						<span class="toggle-indicator-acc"></span>
-					</h3>
-					<div>
-						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Answer."></textarea>
+					</h4>
+				</div>
+				<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
+					<div class="panel-body">
+						<div class="panel-faq-question">
+							<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
+							<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="">
+						</div>
+						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."></textarea>
 					</div>
-				</li>
+				</div>
+			</div>
 		</script>
 		<?php
 	} 
@@ -607,6 +604,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		// Saving Tabs Settings
+		$use_global_tabs = 'no';
+		if ( isset( $_POST['wp_travel_use_global_tabs'] ) ) {
+			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
+		}
+			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
 		
 		if ( isset( $_POST['wp_travel_tabs'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );

@@ -228,7 +228,7 @@ class WP_Travel_Admin_Settings {
 				</li>
 			<?php
 			endforeach;
-			echo'</ul>'; 
+			echo'</ul>';
 		}
 	}
 

@@ -1,6 +1,3 @@
-
-
-
 (function($) {
     if ($.fn.tabs) {
         $('.wp-travel-tabs-wrap').tabs({
@@ -18,8 +15,13 @@
         });
 
         $(".wp-travel-marketplace-tab-wrap").tabs();
-        
-        
-    }
-}(jQuery));
 
+
+    }
+
+    // Sortable for Global tabs.
+    $('.wp-travel-sorting-tabs').sortable({
+        handle: '.wp-travel-sorting-handle'
+    });
+
+}(jQuery));

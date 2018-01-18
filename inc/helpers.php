@@ -961,7 +961,18 @@ function wp_travel_get_frontend_tabs() {
 
 	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs();
 	global $post;
+
+	$settings = wp_travel_get_settings();
+
+	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
+
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
+	
+	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
+
+		$wp_travel_tabs = $settings['global_tab_settings'];	
+
+	}
 
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
@@ -973,12 +984,12 @@ function wp_travel_get_frontend_tabs() {
 			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 
 			// override if is global.
-			if ( ! is_admin() ) {
-				if ( 'yes' === $new_tabs[ $key ]['use_global'] ) {
-					$new_tabs[ $key ]['label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
-					$new_tabs[ $key ]['show_in_menu'] = $wp_travel_itinerary_tabs[ $key ]['show_in_menu'];
-				}
-			}
+			// if ( ! is_admin() ) {
+			// 	if ( 'yes' === $new_tabs[ $key ]['use_global'] ) {
+			// 		$new_tabs[ $key ]['label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
+			// 		$new_tabs[ $key ]['show_in_menu'] = $wp_travel_itinerary_tabs[ $key ]['show_in_menu'];
+			// 	}
+			// }
 		}
 
 		foreach ( $wp_travel_itinerary_tabs as $k => $val ) {

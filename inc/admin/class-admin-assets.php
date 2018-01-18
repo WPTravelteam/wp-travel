@@ -30,7 +30,7 @@ class WP_Travel_Admin_Assets {
 		// Tab for settings page.
 		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
 		if ( in_array( $screen->id, $setting_allowed ) ) {
-			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs'), WP_TRAVEL_VERSION, 1 );
+			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable'), WP_TRAVEL_VERSION, 1 );
 			wp_enqueue_script( 'wp-travel-tabs' );
 		}
 		// @since 1.0.5 // booking stat
