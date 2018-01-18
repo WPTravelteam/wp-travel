@@ -623,8 +623,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         a{
             color:#999;
             text-decoration:none;
-
-            
+        }
+        .close-faq {
+            position: absolute;
+            right: 10px;
+            color: #ca4a1f;
+            font-size: 16px;
         }
     }
     .panel-collapse{

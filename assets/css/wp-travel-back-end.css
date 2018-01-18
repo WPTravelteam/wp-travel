@@ -408,6 +408,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .tab-accordion h4 a {
     color: #999;
     text-decoration: none; }
+  .tab-accordion h4 .close-faq {
+    position: absolute;
+    right: 10px;
+    color: #ca4a1f;
+    font-size: 16px; }
 .tab-accordion .panel-collapse {
   padding: 0;
   border: 1px solid #ddd;
