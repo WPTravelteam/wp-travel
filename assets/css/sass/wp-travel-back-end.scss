@@ -580,7 +580,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         [data-toggle="collapse"]{
             color:#444;
 
-            & span:after{
+            & span.collapse-icon:after{
                 font-family: 'dashicons';
                 content: "\f142";
                 font-size: 18px;
@@ -589,7 +589,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         [data-toggle="collapse"].collapsed{
             color:#999;
 
-            & span:after{
+            & span.collapse-icon:after{
                content: "\f140";
             }
             &:hover{
@@ -612,14 +612,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             background-color:#fff;
         }
 
-        &:before{
-            content: "\f335";
-            font-family:dashicons;
-            position:absolute;
-            right:15px;
-            top:10px;
-            color: #ca4a1f;
-        }
         a{
             color:#999;
             text-decoration:none;
