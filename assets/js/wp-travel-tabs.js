@@ -1,3 +1,6 @@
+
+
+
 (function($) {
     if ($.fn.tabs) {
         $('.wp-travel-tabs-wrap').tabs({
@@ -15,7 +18,8 @@
         });
 
         $(".wp-travel-marketplace-tab-wrap").tabs();
-
+        
         
     }
 }(jQuery));
+

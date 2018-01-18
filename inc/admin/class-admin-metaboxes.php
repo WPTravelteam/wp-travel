@@ -334,30 +334,57 @@ class WP_Travel_Admin_Metaboxes {
 				<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 			</div>
 		</div>
-		<ul id="tab-accordion" class="tab-accordion">
+		<div id="tab-accordion" class="tab-accordion">
 			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
 				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
 				<?php foreach( $faq_questions as $key => $question ) : ?>
-				<li>
-					<h3 class="heading-accordion">
-						<div class="wp-travel-sorting-handle">
-						</div>
-						<input class="section_title "  type="text" name="wp_travel_faq_question[]" placeholder="FAQ?" value="<?php echo esc_html( $question ); ?>">
-						<span class="wp-travel-accordion-title">
-							<?php echo esc_html( $question ); ?>
-						</span>
-
-						
-						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
-						<span class="toggle-indicator-acc"></span>
-					</h3>
-					<div>
-						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Answer."><?php echo esc_attr( $faq_answers[ $key ] ) ?></textarea>
-					</div>
-				</li>
+				
 				<?php endforeach; ?>
 			<?php endif; ?>
-		</ul>
+			<div class="panel-group wp-travel-sorting-tabs" id="accordion" role="tablist" aria-multiselectable="true">
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingOne">
+				      <h4 class="panel-title">
+				      	<div class="wp-travel-sorting-handle"></div>
+				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				          How to change the top header styling?
+
+				          <span class="collapse-icon"></span>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				      <div class="panel-body">
+				      	<div class="panel-faq-question">
+					      	<label>Enter Your Question</label>
+					      	<input type="text" name="Question" placeholder="FAQ" />
+					     </div>
+				        <textarea row="6">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</textarea>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingTwo">
+				      <h4 class="panel-title">
+				      	<div class="wp-travel-sorting-handle"></div>
+				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				          How to import dummy content?
+				          <span class="collapse-icon"></span>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				      <div class="panel-body">
+				      	<div class="panel-faq-question">
+					      	<label>Enter Your Question</label>
+					      	<input type="text" name="Question" placeholder="FAQ" />
+					     </div>
+				        <textarea row="6">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</textarea>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+		</div>
 		<div class="wp-travel-faq-quest-button clearfix">		
 			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">		
 		</div>
