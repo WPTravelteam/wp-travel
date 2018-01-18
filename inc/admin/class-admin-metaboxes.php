@@ -387,7 +387,7 @@ class WP_Travel_Admin_Metaboxes {
 						<div class="wp-travel-sorting-handle"></div>
 						<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
 						
-							<span bind="faq_question_{{data.random}}" <?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
+							<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
 			
 						<span class="collapse-icon"></span>
 						</a>

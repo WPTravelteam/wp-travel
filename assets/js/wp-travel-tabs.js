@@ -24,4 +24,11 @@
         handle: '.wp-travel-sorting-handle'
     });
 
+    $(document).on('keyup change', '.section_title', function() {
+        var title = $(this).val();
+        // alert(title);
+        $(this).siblings('.wp-travel-accordion-title').html(title);
+    });
+
+
 }(jQuery));
