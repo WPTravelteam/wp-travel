@@ -371,7 +371,6 @@ class WP_Travel_Admin_Metaboxes {
 				          How to import dummy content?
 				          <span class="collapse-icon"></span>
 				        </a>
-				        <span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
 				      </h4>
 				    </div>
 				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
