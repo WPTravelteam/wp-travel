@@ -349,9 +349,9 @@ class WP_Travel_Admin_Metaboxes {
 					<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
 
 					<?php foreach( $faq_questions as $key => $question ) : ?>
-
+						<?php $question = ( '' !== $question ) ? $question : __( 'Untitled', 'wp-travel' ) ?>
 						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="heading-"<?php echo esc_attr($key); ?>>
+							<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr($key); ?>">
 								<h4 class="panel-title">
 									<div class="wp-travel-sorting-handle"></div>
 									<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
@@ -360,12 +360,12 @@ class WP_Travel_Admin_Metaboxes {
 
 									<span class="collapse-icon"></span>
 									</a>
-									<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
+									<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 								</h4>
 							</div>
 							<div id="collapse-<?php echo esc_attr($key); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-"<?php echo esc_attr($key); ?>>
 							<div class="panel-body">
-								<div class="panel-faq-question">
+								<div class="panel-wrap">
 									<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
 									<input bind="faq_question_<?php echo esc_attr($key); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
 								</div>
@@ -392,12 +392,12 @@ class WP_Travel_Admin_Metaboxes {
 
 						<span class="collapse-icon"></span>
 						</a>
-						<span class="dashicons dashicons-no-alt hover-icon close-faq"></span>
+						<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 					</h4>
 				</div>
 				<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
 					<div class="panel-body">
-						<div class="panel-faq-question">
+						<div class="panel-wrap">
 							<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
 							<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="">
 						</div>

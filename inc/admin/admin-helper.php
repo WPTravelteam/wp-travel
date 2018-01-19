@@ -349,36 +349,67 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 	function wp_travel_add_itinerary_content_data() {
 
 		$uid = $_POST['itinerary_id'];
-
+		$itinerary_label = __( 'Day X', 'wp-travel' );
+		$itinerary_title = __( 'Your Plan', 'wp-travel' );
 		$itinerary_settings = array(
 			'quicktags' 	=> array('buttons' => 'em,strong,link'),
 			'quicktags' 	=> true,
 			'tinymce' 		=> true,
 			'textarea_rows'	=> 10,
 			'textarea_name' => 'wp_travel_trip_itinerary_data['.$uid.'][desc]',
-		);
+		); ?>
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $uid ) ?>">
+				<h4 class="panel-title">
+					<div class="wp-travel-sorting-handle"></div>
+					<a role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-<?php echo esc_attr( $uid ) ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $uid ) ?>">
 
-		echo '<div class="itinerary_wrap">
-					<div class="itinerary_row">
-						<div class="itinerary_col"> <label>'.__('Label', 'wp-travel').'</label> <input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][label]" value="">
-						</div>
-						<div class="itinerary_col"><label>'.__('Title', 'wp-travel').'</label><input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][title]" value="">
-						</div>
-					</div>';
+					<span bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
+					<span bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
+					<span class="collapse-icon"></span>
+					</a>
+					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+				</h4>
+			</div>
+			<div id="collapse-<?php echo esc_attr( $uid ) ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $uid ) ?>">
+			<div class="panel-body">
+				<div class="panel-wrap">
+					<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
+					<input type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
+				</div>
+				<div class="panel-wrap">
+					<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
+					<input type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
+				</div>
+				<div class="wp-travel-itinerary" style="padding:10px">
+					<?php wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings); ?>
+				</div>
+			</div>
+			</div>
+		</div>
+		<?php
 
-		echo '<div class="itinerary_row">
-						<label>'.__('Description', 'wp-travel').'</label>
-						<div class="itinerary-editor">';
+		// echo '<div class="itinerary_wrap">
+		// 			<div class="itinerary_row">
+		// 				<div class="itinerary_col"> <label>'.__('Label', 'wp-travel').'</label> <input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][label]" value="">
+		// 				</div>
+		// 				<div class="itinerary_col"><label>'.__('Title', 'wp-travel').'</label><input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][title]" value="">
+		// 				</div>
+		// 			</div>';
 
-		wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings);
+		// echo '<div class="itinerary_row">
+		// 				<label>'.__('Description', 'wp-travel').'</label>
+		// 				<div class="itinerary-editor">';
 
-		echo '</div>
-			</div>';
-		echo '<div class="itinerary_row">
-						<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a>
+		// wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings);
 
-					</div>';
-		echo '</div>';
+		// echo '</div>
+		// 	</div>';
+		// echo '<div class="itinerary_row">
+		// 				<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a>
+
+		// 			</div>';
+		// echo '</div>';
 		exit;
 	}
 }

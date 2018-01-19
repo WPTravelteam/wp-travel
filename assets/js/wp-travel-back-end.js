@@ -495,18 +495,18 @@ function($) {
             }
         });
 
-        function get_tinymce_content(id) {
-            var content;
-            var inputid = id;
-            var editor = tinyMCE.get(inputid);
-            var textArea = $('textarea#' + inputid);
-            if (textArea.length > 0 && textArea.is(':visible')) {
-                content = textArea.val();
-            } else {
-                content = editor.getContent();
-            }
-            return content;
-        }
+        // function get_tinymce_content(id) {
+        //     var content;
+        //     var inputid = id;
+        //     var editor = tinyMCE.get(inputid);
+        //     var textArea = $('textarea#' + inputid);
+        //     if (textArea.length > 0 && textArea.is(':visible')) {
+        //         content = textArea.val();
+        //     } else {
+        //         content = editor.getContent();
+        //     }
+        //     return content;
+        // }
 
     });
     //Remove Itinerary Data Row.
@@ -562,7 +562,7 @@ function($) {
 
     // ).disableSelection();
 
-    $(document).on('click', '.close-faq', function(e) {
+    $(document).on('click', '.wt-accordion-close', function(e) {
         if (confirm("Sure to Dele FAQ ?") == true) {
             $(this).closest('div.panel-default').remove();
 
@@ -592,16 +592,11 @@ function($) {
         // $('#tab-accordion').accordion('destroy').accordion({ active: faqs });
     });
 
-    $(document).on('keyup change', '.section_title', function() {
-        var title = $(this).val();
-        // alert(title);
-        $(this).siblings('.wp-travel-accordion-title').html(title);
-    });
-
     //faq-label
-    $("*[bind]").on('change keyup', function(e) {
+    $(document).on('change keyup', "*[bind]", function(e) {
         var to_bind = $(this).attr('bind');
-        $("*[bind='" + to_bind + "']").html($(this).val());
+        var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
+        $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
 
