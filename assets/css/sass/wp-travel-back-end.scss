@@ -764,14 +764,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         position: relative;
         z-index: 1;
         display: block;
-        width: 62px;
-        height: 26px;
+        width: 55px;
+        height: 24px;
+        top: 3px;
+        vertical-align: middle;
         font-weight: bold;
         border-radius: 20px;
         background-clip: padding-box;
         text-align: center;
         background-color: #dadada;
-        box-shadow: inset 0 0 6px 1px rgba(00, 00, 00, .2);
+        box-shadow: inset 0 0 6px 1px rgba(0, 0, 0, 0.2);
+
         &:before,
         &:after {
             position: relative;
@@ -782,12 +785,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             content: attr(data-on);
             color: #0085ba;
             float: left;
-            padding: 3px 0 0 8px;
+            padding: 1px 0 0 8px;
         }
         &:after {
             content: attr(data-off);
             float: right;
-            padding: 3px 6px 0 0;
+            padding: 1px 6px 0 0;
         }
     }
     input {
@@ -797,8 +800,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .switch {
         position: absolute;
         margin: 0;
-        height: 24px;
-        width: 32px;
+        height: 21px;
+        width: 24px;
         border-radius: 20px;
         background-clip: padding-box;
         background: #ffffff;
@@ -807,10 +810,39 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         left: 0;
         border: 1px solid #cccccc;
         transition: 0.18s all ease-out;
+        top: 0px;
     }
     input:checked~.switch {
         left: 28px;
     }
+}
+
+.form-table{
+
+    .checkbox-default-design{
+        
+        label{
+
+            margin-right: -15px;
+
+            &:before{
+                padding-top:5px;
+            }
+            &:after{
+                padding-top:5px;
+            }
+
+        }
+    } 
+}
+
+.check-handeller {
+
+    float: right;
+    position: relative;
+    top: 4px;
+    margin-right: 15px;
+
 }
 
 .wp-travel-faq-quest-button {

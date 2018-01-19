@@ -289,7 +289,18 @@ class WP_Travel_Admin_Metaboxes {
 				<table class="form-table">
 					<tr>
 						<td><label for="wp-travel-use-global-tabs"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label></td>
-						<td><input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> /></td>
+						<td>
+
+						<span class="show-in-frontend checkbox-default-design">
+							<label data-on="ON" data-off="OFF">
+							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
+								<span class="switch">
+								 </span>
+							</label>
+						</span>
+
+							
+						</td>
 					</tr>
 				</table>
 				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
@@ -303,9 +314,14 @@ class WP_Travel_Admin_Metaboxes {
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
+
 						<span class="show-in-frontend checkbox-default-design"><label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?><span class="switch">
 						  </span>
-						</label></span>
+						</label>
+
+						
+				</span>
+				<span class="check-handeller"><?php esc_html_e( 'Display', 'wp-travel' ); ?></span>
 					</div>
 				</li>
 			<?php
