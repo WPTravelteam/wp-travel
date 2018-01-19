@@ -127,6 +127,8 @@ class WP_Travel_Admin_Assets {
 			// Enqueued script with localized data.
 			wp_enqueue_script( 'travel-door-script' );
 			wp_enqueue_script( 'wp-travel-media-upload' );
+
+			wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 		}
 	}
 }

@@ -138,7 +138,8 @@ $alto: #ddd;
             }
             &#wp-travel-tab-setting a{
                 &:before{
-                    content: "\f232";
+                    font-family: icomoon;
+                    content: '\e900';
                 }
             }
         }

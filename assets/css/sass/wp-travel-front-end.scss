@@ -1338,69 +1338,143 @@
 /* faq accordion */
 #faq{
 
-.acc-block{
-        background:#f9f9f9;
-        color: #555;
-        margin: 10px 0;
-        border:1px solid #ddd;
-    }
-    
-    .info{
-        background: #fff;
-        color: #222;
-        width: 100%;
-        height: 0;
-        line-height: 2;
-        padding: 0 15px;
-        display: block;
-        overflow: hidden;
-        border-top:1px solid #ddd;
-        box-sizing: border-box;
-        transition: .3s ease-out;
+    .wp-collapse-open{
+        
+        margin-bottom:30px;
 
-        p{
-            margin:15px 0;
+        a {
+            float: right;
+            padding: 5px 10px;
+            margin-left: 15px;
+            border: 1px solid #8b8b8b;
+            font-size: 12px;
+            color: #555;
+
+            &:hover{
+                background: #f83531;
+                color: #fff;
+                border-color: #f83531;
+            }
         }
+
     } 
-    .acc-block input[type='radio']:checked ~ .info{
-        height: auto;
-        border-top:1px solid #ddd;
-        transition: .3s ease-in;
-    }
+    .collapse{
 
-    input[type='radio']{
-        width: 100%;
-        display: none;
-    }
+        display:none;
 
-    label{
-        width: 450px;
-        max-width: 100%;
-        cursor: pointer;
-        margin-bottom:0;
     }
+    .collapse.in{
 
-    span{
-        font-weight: bold;
-        display: block;
-        padding: 10px 12px 10px 15px;
-        margin: 0;
-        cursor: pointer;
+        display:block;
+
+    }
+    .collapsing {
+
         position: relative;
-        font-weight: 400;
-        font-size: 14px;
+        height: 0;
+        overflow: hidden;
+        -webkit-transition-timing-function: ease;
+        -o-transition-timing-function: ease;
+        transition-timing-function: ease;
+        -webkit-transition-duration: .35s;
+        -o-transition-duration: .35s;
+        transition-duration: .35s;
+        -webkit-transition-property: height,visibility;
+        -o-transition-property: height,visibility;
+        transition-property: height,visibility;
 
-        &:before{
-            content: "\f132";
-            position:absolute;
-            right:15px;
-            top:12px;
-            font-family:dashicons;
+    }
+    .panel-heading{
+
+        position:relative;
+
+        .collapse-icon {
+
+            position: relative;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            float: right;
+            text-align: center;
+            top: -4px;
+
+        }
+
+        [data-toggle="collapse"]{
+
+            color:#444;
+
+            & span.collapse-icon:after{
+
+                font-family: 'dashicons';
+                content: "\f142";
+                font-size: 18px;
+
+            }
+
+        }
+        [data-toggle="collapse"].collapsed{
+
+            color:#999;
+
+            & span.collapse-icon:after{
+
+               content: "\f140";
+
+            }
+            &:hover{
+
+                color:#444;
+
+            }
+        }
+        .collapse-icon:focus{
+
+            box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
+            outline:none;
         }
     }
-    input[type='radio']:checked ~ label span:before {
-        content: "\f460";
+    h4 {
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        margin: 0;
+        background-color: #f7f7f1;
+        position:relative;
+        font-size: 14px;
+        font-weight: 500;
+
+        &:hover{
+            background-color:#fff;
+        }
+
+        a{
+            color:#999;
+            text-decoration:none;
+        }
+        .close-faq {
+            position: absolute;
+            right: 10px;
+            color: #ca4a1f;
+            font-size: 16px;
+        }
     }
+    .panel-collapse{
+        padding: 0;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+    .panel-body{
+       padding:10px 15px;
+    }
+    .panel-default{
+        margin-bottom:15px;
+        background-color: #fff;
+    }
+    .panel-faq-question {
+        padding: 10px 15px;
+    }
+  
 }
     
 
