@@ -93,7 +93,8 @@
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-faq a:before {
         content: "\f223"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-setting a:before {
-        content: "\f232"; }
+        font-family: icomoon;
+        content: '\e900'; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;

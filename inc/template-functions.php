@@ -538,23 +538,34 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'faq' : ?>
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+						<div class="panel-group" id="accordion">
+							<div class="wp-collapse-open clearfix">
+								<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
+								<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
+							</div>
 						<?php
 						$faqs = wp_travel_get_faqs( $post_id );
 						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 							foreach ( $faqs as $k => $faq ) : ?>
-								<div class="acc-block">
-									<input type="radio" name="acc-block" id="acc-block-<?php echo esc_attr( $k +1 ) ?>" />   
-									<label for="acc-block-<?php echo esc_attr( $k + 1 ) ?>"><span><?php echo esc_html( $faq['question'] ) ?></span></label>
-									<div class="info">
-									<p>
-									<?php echo esc_html( $faq['answer'] ) ?>
-									</p>
-									</div>
-								</div>
+							<div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k +1 ) ?>">
+						          <?php echo esc_html( $faq['question'] ) ?>
+						          <span class="collapse-icon"></span>
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapse<?php echo esc_attr( $k +1 ) ?>" class="panel-collapse collapse">
+						      <div class="panel-body">
+						        <?php echo esc_html( $faq['answer'] ) ?>
+						      </div>
+						    </div>
+						  </div>
 							<?php endforeach;
-						}
-						?>
-						
+								}
+							?>
+						</div>
 					</div>
 					<?php break;
 					 default : ?>

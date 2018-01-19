@@ -1,11 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?iwok1p");
-  src: url("../fonts/icomoon.eot?iwok1p#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?iwok1p") format("truetype"), url("../fonts/icomoon.woff?iwok1p") format("woff"), url("../fonts/icomoon.svg?iwok1p#icomoon") format("svg");
+  src: url("../fonts/icomoon.eot?scxfre");
+  src: url("../fonts/icomoon.eot?scxfre#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?scxfre") format("truetype"), url("../fonts/icomoon.woff?scxfre") format("woff"), url("../fonts/icomoon.svg?scxfre#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
-[class^="icon-"],
-[class*=" icon-"] {
+[class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -19,16 +18,21 @@
   -moz-osx-font-smoothing: grayscale; }
 
 .icon-logo .path1:before {
-  content: "\e900";
-  color: #d42727; }
-.icon-logo .path2:before {
   content: "\e901";
-  margin-left: -1.0341796875em;
-  color: white; }
-.icon-logo .path3:before {
+  color: #d42727; }
+
+.icon-logo .path2:before {
   content: "\e902";
   margin-left: -1.0341796875em;
+  color: white; }
+
+.icon-logo .path3:before {
+  content: "\e903";
+  margin-left: -1.0341796875em;
   color: #d42727; }
+
+.icon-tabs:before {
+  content: "\e900"; }
 
 .wp-travel-clean-metabox {
   background: #f7f7f1;
@@ -492,6 +496,50 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     float: right; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .wp_travel_tabs_input-field {
     margin-right: 15px; }
+
+.checkbox-default-design label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 62px;
+  height: 26px;
+  font-weight: bold;
+  border-radius: 20px;
+  background-clip: padding-box;
+  text-align: center;
+  background-color: #dadada;
+  box-shadow: inset 0 0 6px 1px rgba(0, 0, 0, 0.2); }
+  .checkbox-default-design label:before, .checkbox-default-design label:after {
+    position: relative;
+    z-index: 2;
+    font-size: 10px; }
+  .checkbox-default-design label:before {
+    content: attr(data-on);
+    color: #0085ba;
+    float: left;
+    padding: 3px 0 0 8px; }
+  .checkbox-default-design label:after {
+    content: attr(data-off);
+    float: right;
+    padding: 3px 6px 0 0; }
+.checkbox-default-design input, .checkbox-default-design .wp-travel-form-field select, .wp-travel-form-field .checkbox-default-design select, .checkbox-default-design .wp-travel-form-field .stat-toolbar-form .field-group input, .wp-travel-form-field .stat-toolbar-form .field-group .checkbox-default-design input, .checkbox-default-design .stat-toolbar-form .field-group .wp-travel-form-field input, .stat-toolbar-form .field-group .wp-travel-form-field .checkbox-default-design input, .checkbox-default-design .wp-travel-form-field textarea, .wp-travel-form-field .checkbox-default-design textarea {
+  position: absolute;
+  opacity: 0; }
+.checkbox-default-design .switch {
+  position: absolute;
+  margin: 0;
+  height: 24px;
+  width: 32px;
+  border-radius: 20px;
+  background-clip: padding-box;
+  background: #ffffff;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  border: 1px solid #cccccc;
+  transition: 0.18s all ease-out; }
+.checkbox-default-design input:checked ~ .switch, .checkbox-default-design .wp-travel-form-field select:checked ~ .switch, .wp-travel-form-field .checkbox-default-design select:checked ~ .switch, .checkbox-default-design .wp-travel-form-field .stat-toolbar-form .field-group input:checked ~ .switch, .checkbox-default-design .stat-toolbar-form .field-group .wp-travel-form-field input:checked ~ .switch, .checkbox-default-design .wp-travel-form-field textarea:checked ~ .switch, .wp-travel-form-field .checkbox-default-design textarea:checked ~ .switch {
+  left: 28px; }
 
 .wp-travel-faq-quest-button {
   float: right;

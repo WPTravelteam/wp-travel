@@ -223,11 +223,14 @@ class WP_Travel_Admin_Settings {
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-						<span class="show-in-frontend"><label><input name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php esc_html_e( 'Display', 'wp-travel' ); ?></label></span>
+						<span class="show-in-frontend checkbox-default-design"><label><input name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?>
+						<span class="switch">
+						  </span>
+						</label></span>
 					</div>
 				</li>
 			<?php
-			endforeach;
+				endforeach;
 			echo'</ul>';
 		}
 	}

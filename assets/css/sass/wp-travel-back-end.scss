@@ -46,43 +46,44 @@ $alabaster: #f7f7f1; // Red like color.
 }
 
 @font-face {
-    font-family: 'icomoon';
-    src: url('../fonts/icomoon.eot?iwok1p');
-    src: url('../fonts/icomoon.eot?iwok1p#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?iwok1p') format('truetype'), url('../fonts/icomoon.woff?iwok1p') format('woff'), url('../fonts/icomoon.svg?iwok1p#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?scxfre');
+  src:  url('../fonts/icomoon.eot?scxfre#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?scxfre') format('truetype'),
+    url('../fonts/icomoon.woff?scxfre') format('woff'),
+    url('../fonts/icomoon.svg?scxfre#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
-
-[class^="icon-"],
-[class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-.icon-logo {
-    .path1:before {
-        content: "\e900";
-        color: rgb(212, 39, 39);
-    }
-    .path2:before {
-        content: "\e901";
-        margin-left: -1.0341796875em;
-        color: rgb(255, 255, 255);
-    }
-    .path3:before {
-        content: "\e902";
-        margin-left: -1.0341796875em;
-        color: rgb(212, 39, 39);
-    }
+.icon-logo .path1:before {
+  content: "\e901";
+  color: rgb(212, 39, 39);
+}
+.icon-logo .path2:before {
+  content: "\e902";
+  margin-left: -1.0341796875em;
+  color: rgb(255, 255, 255);
+}
+.icon-logo .path3:before {
+  content: "\e903";
+  margin-left: -1.0341796875em;
+  color: rgb(212, 39, 39);
+}
+.icon-tabs:before {
+  content: "\e900";
 }
 
 // Remove wordpress metabox styles and hide buttons.
@@ -538,11 +539,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
-
-
-
-
-
 .collapse{
     display:none;
 }
@@ -665,121 +661,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 
 
-
-// .tab-accordion {
-//     .heading-accordion {
-//         border: 1px solid #ddd;
-//         padding: 10px 15px 10px 45px;
-//         background-color: #f7f7f1;
-//         position: relative;
-//         cursor: pointer;
-//         outline: none;
-//         margin-bottom: 0;
-
-//         .toggle-indicator-acc{
-//             position: absolute;
-//             right: 50px;
-//             top: 10px;
-
-//             &:before {
-//                 content: "\f140";
-//                 font-family: dashicons;
-//                 font-size: 16px;
-//                 position: relative;
-//                 left: -1px;
-                
-//             }
-
-//             &:focus {
-//                 border-radius: 50%;
-//                 box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
-//                 width: 20px;
-//                 height: 20px;
-//                 text-align: center;
-//                 outline: none;
-//             }
-//         }
-        
-
-
-//         .wp-travel-accordion-title {
-//             padding: 3px 5px;
-//             display: inline-block;
-//             font-size: 14px;
-//             border:1px solid transparent;
-//         }
-//         &.ui-state-active {
-//             background-color: #fff;
-//             border-bottom: none;
-//             .toggle-indicator-acc{
-
-//                 &:before {
-//                     content: "\f142";
-//                 }
-//             }
-            
-//         }
-//         .hover-icon {
-//             position: absolute;
-//             right: 15px;
-//             top: 11px;
-//             color: #ca4a1f;
-//         }
-//         input {
-//             display: none;
-//             line-height: 16px;
-//             font-size: 14px;
-//             margin: 0;
-//             min-width: 50%;
-//             height:26px;
-//             border-color: #ddd;
-//             box-shadow: none;
-//             padding:2px 5px 4px;
-
-//             &:focus{
-//                 display:block;
-
-//                 & + .wp-travel-accordion-title{
-//                     display:none;
-//                 }
-//             }
-            
-//         }
-
-//         &:focus{
-//             input {
-//                 display: block;
-//             }
-//             .wp-travel-accordion-title {
-//                 display: none;
-//             }
-//         }
-//     }
-//     .ui-state-hover {
-//         input {
-//             display: block;
-//         }
-//         .wp-travel-accordion-title {
-//             display: none;
-//         }
-
-//     }
-//     .ui-accordion-content {
-//         padding: 0;
-//         position: relative;
-//         clear: both;
-//         border: 1px solid #ddd;
-//         height: auto !important;
-//         background: #fff;
-//     }
-//     textarea {
-//         width: 100%;
-//         padding: 10px 15px;
-//         margin-bottom: -4px;
-//     }
-// }
-
-
 .wp-travel-tabs-contents{
     .wp-travel-sorting-handle {
             background: #ddd;
@@ -862,12 +743,66 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 .wp_travel_tabs_input-field {
                     margin-right: 15px;
                 }
+                
             }
 
         }
 }
 
+.checkbox-default-design{
+    label{
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 62px;
+        height: 26px;
+        font-weight: bold;
+        border-radius: 20px;
+        background-clip: padding-box;
+        text-align: center;
+        background-color: #dadada;
+        box-shadow: inset 0 0 6px 1px rgba(00,00,00,.2);
 
+        &:before,
+        &:after{
+            position: relative;
+            z-index: 2;
+            font-size: 10px;
+        }
+        &:before {
+            content: attr(data-on);
+            color: #0085ba;
+            float: left;
+            padding: 3px 0 0 8px;
+        }
+        &:after {
+            content: attr(data-off);
+            float: right;
+            padding: 3px 6px 0 0;
+        }
+    }
+    input{
+        position: absolute;
+        opacity: 0;
+    }
+    .switch {
+        position: absolute;
+        margin: 0;
+        height: 24px;
+        width: 32px;
+        border-radius: 20px;
+        background-clip: padding-box;
+        background: #ffffff;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        border: 1px solid #cccccc;
+        transition: 0.18s all ease-out;
+    }
+    input:checked ~ .switch {
+        left: 28px;
+    }
+}
 
 .wp-travel-faq-quest-button {
     float: right;

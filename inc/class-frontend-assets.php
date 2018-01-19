@@ -69,6 +69,7 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'travel-door-script' );
 
 		wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
+		wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 	}
 }
 
