@@ -475,9 +475,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 
 	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-	
-	// echo '<pre>';
-	// print_r( $wp_travel_itinerary_tabs );
+
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
@@ -566,6 +564,73 @@ function wp_travel_frontend_contents( $post_id ) {
 								}
 							?>
 						</div>
+					</div>
+					<?php break;
+					case 'trip_outline' : ?>
+					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+						<?php echo wp_kses_post( $tab_info['content'] ); ?>
+
+						<div class="itenary clearfix">
+							<div class="timeline-contents clearfix">
+								<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h2>
+								<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
+								<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
+									<?php $index = 1; ?>
+									<?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
+										<?php if ( $index % 2 === 0 ) : ?>
+											<?php
+												$first_class  = 'right';
+												$second_class = 'left'; 
+											?>
+										<?php else : ?>
+											<?php
+												$first_class  = 'left';
+												$second_class = 'right'; 
+											?>
+										<?php endif; ?>
+										<?php
+										$itinerary_label = '';
+										$itinerary_title = '';
+										$itinerary_desc  = '';
+										if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
+											$itinerary_label = stripslashes( $itinerary['label'] );
+										}
+										if ( isset( $itinerary['title'] ) && '' !== $itinerary['title'] ) {
+											$itinerary_title = stripslashes( $itinerary['title'] );
+										}
+										if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
+											$itinerary_desc = stripslashes( $itinerary['desc'] );
+										}
+										?>
+										<div class="col clearfix">
+											<div class="tc-heading <?php echo esc_attr( $first_class ) ?> clearfix">
+												<?php if ( '' !== $itinerary_label ) : ?>
+												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
+												<?php endif; ?>
+												<h3 class="arrival">date : 03-01-2018</h3>
+												<h3>time : 7:00 AM</h3>
+											</div><!-- tc-content -->
+											<div class="tc-content <?php echo esc_attr( $second_class ) ?> clearfix" >
+												<?php if ( '' !== $itinerary_title ) : ?>
+												<h3><?php echo esc_html( $itinerary_title ); ?></h3>
+												<?php endif; ?>
+												<?php echo wp_kses_post( $itinerary_desc ); ?>
+												<a href="#" class="btn">view map</a>
+												<div class="image"></div>
+											</div><!-- tc-content -->
+										</div><!-- first-content -->
+										<?php $index++ ?>
+									<?php endforeach; ?>
+								<?php else : ?>
+									<div class="while-empty">
+										<p>
+											<?php esc_html_e( 'Itinerary not found.', 'wp-travel' ); ?>
+										</p>
+									</div>
+								<?php endif; ?>
+								
+							</div><!-- timeline-contents -->
+						</div><!-- itenary -->
 					</div>
 					<?php break;
 					 default : ?>

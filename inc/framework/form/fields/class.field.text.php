@@ -17,7 +17,7 @@ class WP_Travel_FW_Field_Text {
 		$attributes = '';
 		if ( isset( $this->field['attributes'] ) ) {
 			foreach ( $this->field['attributes'] as $attribute => $attribute_val ) {
-				$attributes .= sprintf( ' %s="%s "', $attribute, $attribute_val );
+				$attributes .= sprintf( ' %s="%s" ', $attribute, $attribute_val );
 			}
 		}
 

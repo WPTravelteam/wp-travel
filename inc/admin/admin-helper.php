@@ -371,7 +371,7 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 				</h4>
 			</div>
-			<div id="collapse-<?php echo esc_attr( $uid ) ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $uid ) ?>">
+			<div id="collapse-<?php echo esc_attr( $uid ) ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $uid ) ?>">
 			<div class="panel-body">
 				<div class="panel-wrap">
 					<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
@@ -381,9 +381,15 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 					<input type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 				</div>
-				<div class="wp-travel-itinerary" style="padding:10px">
-					<?php wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings); ?>
+				<div class="panel-wrap">
+					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
+					<div class="wp-travel-itinerary">
+						<textarea name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][desc]" ></textarea>
+					</div>
 				</div>
+				<!-- <div class="wp-travel-itinerary" style="padding:10px"> -->
+					<?php //wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings); ?>
+				<!-- </div> -->
 			</div>
 			</div>
 		</div>

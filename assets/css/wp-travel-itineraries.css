@@ -1,0 +1,199 @@
+.clearfix:after {
+    clear: both;
+    content: ' ';
+    display: block;
+}
+
+.itenary {
+    padding: 70px 0;
+}
+
+.left {
+    float: left;
+    width: 50%;
+    padding: 0 50px 15px 50px;
+    text-align: right;
+}
+
+.right {
+    float: right;
+    width: 50%;
+    padding: 0px 50px 15px 50px;
+}
+
+.tc-content {
+    position: relative;
+}
+
+.tc-content.left {
+    border-right: 2px solid;
+}
+
+.tc-content.right {
+    border-left: 2px solid;
+}
+
+.tc-heading .image {
+    background: #fff;
+    z-index: 111;
+}
+
+.tc-heading h1,
+h3 {
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.image i {
+    color: #f83531;
+    font-size: 20px;
+    border-radius: 56px;
+    padding-top: 4px;
+}
+
+.btn {
+    text-transform: uppercase;
+    border: 1px solid #f83531;
+    padding: 7px 40px;
+    display: inline-block;
+    position: relative;
+    display: none;
+}
+
+.tc-heading h4 {
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.tc-heading {
+    position: relative;
+}
+
+.col h3 {
+    margin-top: 0;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.itenary .image {
+    height: 25px;
+    width: 25px;
+    left: -13px;
+    background: #8b8b8b;
+    top: 0;
+    border-radius: 50%;
+    border: 2px solid;
+    position: absolute;
+}
+
+.itenary .left .image {
+    left: inherit;
+    right: -14px;
+}
+
+.timeline-contents .col:last-of-type .tc-content {
+    padding-bottom: 0;
+}
+
+.tc-heading h3:last-of-type {
+    font-style: italic;
+    font-weight: 100;
+}
+
+.timeline-contents .col:last-of-type .tc-content p {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .tc-heading.left {
+        padding: 0 35px;
+    }
+    .ite-03 .col {
+        position: relative;
+        border-left: 2px solid;
+        margin-bottom: 0;
+        margin-left: 23px;
+    }
+    .tc-content {
+        position: initial;
+    }
+    .tc-heading.right {
+        margin-top: 0px;
+        left: 0px;
+        padding: 0 35px;
+    }
+    .tc-content.left {
+        border-right: none;
+        padding: 0 0 10px 35px;
+    }
+    .right {
+        float: none;
+        width: 100%;
+    }
+    .left {
+        float: none;
+        width: 100%;
+        text-align: left;
+        border-left: none;
+    }
+    .tc-heading h4 {
+        margin-bottom: 0px;
+    }
+    .col h3 {
+        float: none;
+        margin-top: 0px;
+        margin-right: 0px;
+        display: block;
+    }
+    .btn {
+        padding: 7px 25px;
+    }
+    .tc-content.right {
+        border-left: none;
+        margin-top: 0;
+        padding: 0 0 10px 35px;
+    }
+    .itenary .col {
+        position: relative;
+        border-left: 2px solid;
+        margin-bottom: 0;
+        margin-left: 11px;
+    }
+    .tc-heading h3:last-of-type {
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .itenary .tc-content {
+        border-left: none;
+        margin-top: 0;
+        padding: 0 0 10px 20px;
+    }
+    .itenary .image {
+        height: 15px;
+        width: 15px;
+        left: -8.5px;
+    }
+    .itenary .tc-heading {
+        border-left: none;
+        margin-top: 0;
+        padding: 0 0 10px 20px;
+    }
+    .itenary .col {
+        margin-left: 6px;
+    }
+    .tc-heading h3:last-of-type {
+        margin-bottom: 0;
+    }
+    .ite-03 .col {
+        margin-left: 16px;
+    }
+}
+
+
+}

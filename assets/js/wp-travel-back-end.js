@@ -201,7 +201,8 @@
         });
     });
     // Add itineraries Data Row.
-    $('#add_itinerary_row').click(function() {
+    $('#add_itinerary_row').click(function(e) {
+        e.preventDefault();
         var wp_travel_rand_integer = Math.floor(Math.random() * 100000) + 1;
         var wp_travel_itinerary_id = 'wp_travel_itinerary_data_' + wp_travel_rand_integer;
         var wp_travel_editor_settings = tinyMCEPreInit.mceInit.content;
@@ -243,9 +244,17 @@
         $(this).closest('.itinerary_wrap').remove();
         return false;
     });
-
+    var textareaID;
     $('.wp-travel-sorting-tabs').sortable({
-        handle: '.wp-travel-sorting-handle'
+        handle: '.wp-travel-sorting-handle',
+        // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
+        //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
+        //     try { tinyMCE.execCommand('mceRemoveEditor', false, textareaID); } catch (e) {}
+        // },
+        // stop: function(event, ui) { // re-initialize TinyMCE when sort is completed
+        //     try { tinyMCE.execCommand('mceAddEditor', false, textareaID); } catch (e) {}
+        //     $(this).find('.update-warning').show();
+        // }
     });
 
     // return on clicking space button.
@@ -278,22 +287,15 @@
         $('.open-all-link').show();
         $('.close-all-link').show();
     });
-    // $('#tab-accordion').accordion({
-    //     collapsible: true,
-    //     animate: 0,
-    //     handle: '.toggle-indicator-acc',
-    //     // start: 1
-    // }).sortable({
-    //         handle: '.wp-travel-sorting-handle'
-    //     }
-
-    // ).disableSelection();
 
     $(document).on('click', '.wt-accordion-close', function(e) {
-        if (confirm("Sure to Dele FAQ ?") == true) {
+        var acc_id = $(this).closest('.tab-accordion').attr('id');
+        if (confirm("Are you sure to Delete ?") == true) {
             $(this).closest('div.panel-default').remove();
 
-            var faqs = $('#tab-accordion .panel-default').length;
+            console.log(acc_id);
+            var faqs = $('#' + acc_id + ' .panel-default').length;
+
             // alert(faqs);
             if (faqs > 0) {
                 $('.while-empty').hide();
@@ -304,9 +306,7 @@
             }
         }
         return;
-    })
-
-    // // function faq_acc
+    });
 
     $('.wp-travel-faq-add-new').on('click', function() {
         var template = wp.template('wp-travel-faq');
@@ -319,7 +319,7 @@
         // $('#tab-accordion').accordion('destroy').accordion({ active: faqs });
     });
 
-    //faq-label
+    //value bind to label.
     $(document).on('change keyup', "*[bind]", function(e) {
         var to_bind = $(this).attr('bind');
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
