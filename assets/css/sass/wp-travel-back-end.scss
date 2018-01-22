@@ -758,6 +758,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     }
 }
+.form-table{
+
+    .show-in-frontend {
+
+        display: inline-block;
+
+    }
+    .show-in-frontend-label{
+        padding-right: 30px;
+        vertical-align: bottom;
+    }
+
+} 
 
 .checkbox-default-design {
     label {

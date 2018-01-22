@@ -517,6 +517,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-tabs-contents .wp-travel-sorting-tabs li .wp_travel_tabs_input-field {
     margin-right: 15px; }
 
+.form-table .show-in-frontend {
+  display: inline-block; }
+.form-table .show-in-frontend-label {
+  padding-right: 30px;
+  vertical-align: bottom; }
+
 .checkbox-default-design label {
   position: relative;
   z-index: 1;

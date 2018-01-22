@@ -288,9 +288,7 @@ class WP_Travel_Admin_Metaboxes {
 			?>
 				<table class="form-table">
 					<tr>
-						<td><label for="wp-travel-use-global-tabs"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label></td>
-						<td>
-
+						<td><label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF">
 							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
@@ -298,9 +296,7 @@ class WP_Travel_Admin_Metaboxes {
 								 </span>
 							</label>
 						</span>
-
-							
-						</td>
+					</td>
 					</tr>
 				</table>
 				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
