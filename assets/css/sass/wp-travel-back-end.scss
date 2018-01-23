@@ -758,15 +758,28 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     }
 }
+.form-table{
+
+    .show-in-frontend {
+
+        display: inline-block;
+
+    }
+    .show-in-frontend-label{
+        padding-right: 30px;
+        vertical-align: bottom;
+    }
+
+} 
 
 .checkbox-default-design {
     label {
         position: relative;
         z-index: 1;
         display: block;
-        width: 55px;
-        height: 24px;
-        top: 3px;
+        width: 44px;
+        height: 20px;
+        top: 4px;
         vertical-align: middle;
         font-weight: bold;
         border-radius: 20px;
@@ -779,18 +792,18 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &:after {
             position: relative;
             z-index: 2;
-            font-size: 10px;
+            font-size: 8px;
         }
         &:before {
             content: attr(data-on);
             color: #0085ba;
             float: left;
-            padding: 1px 0 0 8px;
+            padding: 2px 0 0 8px;
         }
         &:after {
             content: attr(data-off);
             float: right;
-            padding: 1px 6px 0 0;
+            padding: 2px 6px 0 0;
         }
     }
     input {
@@ -800,20 +813,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .switch {
         position: absolute;
         margin: 0;
-        height: 21px;
-        width: 24px;
+        height: 16px;
+        width: 16px;
         border-radius: 20px;
         background-clip: padding-box;
         background: #ffffff;
         z-index: 5;
-        top: 0;
-        left: 0;
+        top: 1px;
+        left: 2px;
         border: 1px solid #cccccc;
         transition: 0.18s all ease-out;
-        top: 0px;
     }
     input:checked~.switch {
-        left: 28px;
+        left: 23px;
     }
 }
 
@@ -842,6 +854,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     position: relative;
     top: 4px;
     margin-right: 15px;
+    color: #757575;
+    font-size: 12px;
 
 }
 
