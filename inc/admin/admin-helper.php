@@ -373,23 +373,23 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 			</div>
 			<div id="collapse-<?php echo esc_attr( $uid ) ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $uid ) ?>">
 			<div class="panel-body">
-				<div class="panel-wrap">
+				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
 					<input bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
 				</div>
-				<div class="panel-wrap">
+				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 					<input bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 				</div>
-				<div class="panel-wrap">
+				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
 					<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][date]" value="">
 				</div>
-				<div class="panel-wrap">
+				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
 					<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][time]" value="">
 				</div>
-				<div class="panel-wrap">
+				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 					<div class="wp-travel-itinerary">
 						<textarea name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][desc]" ></textarea>
