@@ -216,7 +216,7 @@
         e.preventDefault();
         var wp_travel_rand_integer = Math.floor(Math.random() * 100000) + 1;
         var wp_travel_itinerary_id = 'wp_travel_itinerary_data_' + wp_travel_rand_integer;
-        var wp_travel_editor_settings = tinyMCEPreInit.mceInit.content;
+        // var wp_travel_editor_settings = tinyMCEPreInit.mceInit.content;
         $.ajax({
             type: "POST",
             url: ajaxurl,
