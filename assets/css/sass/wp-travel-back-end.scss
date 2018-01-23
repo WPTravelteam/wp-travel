@@ -634,6 +634,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         padding: 10px 15px;
         border-top: 1px solid #ddd;
     }
+    .panel-wrap{
+        textarea {
+            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07 );
+            width: 100%;
+            display: block;
+            border: 1px solid #ddd;
+        }
+    } 
     .panel-default {
         margin-bottom: 15px;
         background-color: #fff;
@@ -641,13 +649,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .panel-wrap {
         padding: 10px 15px;
         label {
-            width: 30%;
+            width: 100%;
             margin-right: 10%;
             vertical-align: baseline;
+            max-width: 100px;
+            float: left;
         }
         input {
             width: 60%;
         }
+    }
+    .wp-travel-itinerary {
+        display: inline-block;
+        width: 60%;
     }
     .wp-travel-sorting-tabs {
         .wp-travel-sorting-handle:before {

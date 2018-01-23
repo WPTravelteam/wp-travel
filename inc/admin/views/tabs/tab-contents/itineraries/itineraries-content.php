@@ -19,7 +19,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h3> 
 		
 		<?php
-		if ( is_array( $trip_itinerary_data_arr[0] ) && count( $trip_itinerary_data_arr[0] ) != 0  ) :
+		if ( isset( $trip_itinerary_data_arr[0] ) && is_array( $trip_itinerary_data_arr[0] ) && count( $trip_itinerary_data_arr[0] ) != 0  ) :
 			$empty_item_style = 'display:none';
 			$collapse_link_style = 'display:block';
 		else :
