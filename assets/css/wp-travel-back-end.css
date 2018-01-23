@@ -423,23 +423,25 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border: none;
   padding: 10px 15px;
   border-top: 1px solid #ddd; }
-.tab-accordion .panel-wrap textarea {
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
-  width: 100%;
-  display: block;
-  border: 1px solid #ddd; }
+.tab-accordion .panel-wrap {
+  padding: 10px 15px; }
+  .tab-accordion .panel-wrap textarea {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+    width: 100%;
+    display: block;
+    border: 1px solid #ddd; }
 .tab-accordion .panel-default {
   margin-bottom: 15px;
   background-color: #fff; }
-.tab-accordion .panel-wrap {
+.tab-accordion .panel-wrap-itinerary {
   padding: 10px 15px; }
-  .tab-accordion .panel-wrap label {
+  .tab-accordion .panel-wrap-itinerary label {
     width: 100%;
     margin-right: 10%;
     vertical-align: baseline;
     max-width: 100px;
     float: left; }
-  .tab-accordion .panel-wrap input, .tab-accordion .panel-wrap .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .panel-wrap select, .tab-accordion .panel-wrap .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .panel-wrap textarea {
+  .tab-accordion .panel-wrap-itinerary input, .tab-accordion .panel-wrap-itinerary .wp-travel-form-field select, .wp-travel-form-field .tab-accordion .panel-wrap-itinerary select, .tab-accordion .panel-wrap-itinerary .wp-travel-form-field textarea, .wp-travel-form-field .tab-accordion .panel-wrap-itinerary textarea {
     width: 60%; }
 .tab-accordion .wp-travel-itinerary {
   display: inline-block;

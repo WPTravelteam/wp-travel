@@ -74,19 +74,19 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 					</div>
 					<div id="collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-itinerary-<?php echo esc_attr( $cnt ) ?>">
 					<div class="panel-body">
-						<div class="panel-wrap">
+						<div class="panel-wrap panel-wrap-itineary">
 							<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
 							<input bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
 						</div>
-						<div class="panel-wrap">
+						<div class="panel-wrap panel-wrap-itineary">
 							<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 							<input bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 						</div>
-						<div class="panel-wrap">
+						<div class="panel-wrap panel-wrap-itineary">
 							<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
 							<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][date]" value="<?php echo esc_html( $itinerary_date ); ?>">
 						</div>
-						<div class="panel-wrap">
+						<div class="panel-wrap panel-wrap-itineary">
 							<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
 							<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][time]" value="<?php echo esc_html( $itinerary_time ); ?>">
 						</div>
@@ -104,7 +104,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 								// wp_editor( $itinerary_desc, 'itinerary_desc' . $cnt, $itinerary_settings );
 								?>
 						</div>
-						<div class="panel-wrap">
+						<div class="panel-wrap panel-wrap-itineary">
 							<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 							<div class="wp-travel-itinerary">
 								<textarea name="wp_travel_trip_itinerary_data[<?php echo $cnt; ?>][desc]" ><?php echo wp_kses_post( $itinerary_desc ); ?></textarea>
