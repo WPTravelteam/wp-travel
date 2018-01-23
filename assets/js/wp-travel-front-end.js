@@ -149,4 +149,20 @@ jQuery(document).ready(function($) {
         wp_travel_set_equal_height();
     });
 
+    // Open All And Close All accordion.
+    $('.open-all-link').click(function(e) {
+        e.preventDefault();
+        $('.panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
+        $('.panel-collapse').addClass('in');
+        // $(this).hide();
+        $('.close-all-link').show();
+    });
+    $('.close-all-link').click(function(e) {
+        e.preventDefault();
+        $('.panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
+        $('.panel-collapse').removeClass('in');
+        // $(this).hide();
+        $('.open-all-link').show();
+    });
+
 });
