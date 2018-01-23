@@ -589,9 +589,15 @@ function wp_travel_frontend_contents( $post_id ) {
 											?>
 										<?php endif; ?>
 										<?php
+
+										$date_format = get_option('date_format');
+										$time_format = get_option('time_format');
+
 										$itinerary_label = '';
 										$itinerary_title = '';
 										$itinerary_desc  = '';
+										$itinerary_date  = '';
+										$itinerary_time  = '';
 										if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
 											$itinerary_label = stripslashes( $itinerary['label'] );
 										}
@@ -601,14 +607,27 @@ function wp_travel_frontend_contents( $post_id ) {
 										if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
 											$itinerary_desc = stripslashes( $itinerary['desc'] );
 										}
+										if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
+											$itinerary_date = stripslashes( $itinerary['date'] );
+											$itinerary_date = date( $date_format, strtotime( $itinerary_date ) );
+											
+										}
+										if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
+											$itinerary_time = stripslashes( $itinerary['time'] );
+											$itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
+										}
 										?>
 										<div class="col clearfix">
 											<div class="tc-heading <?php echo esc_attr( $first_class ) ?> clearfix">
 												<?php if ( '' !== $itinerary_label ) : ?>
 												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
 												<?php endif; ?>
-												<h3 class="arrival">date : 03-01-2018</h3>
-												<h3>time : 7:00 AM</h3>
+												<?php if ( $itinerary_date ) : ?>												
+													<h3 class="arrival"><?php esc_html_e( 'date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3>
+												<?php endif; ?>
+												<?php if ( $itinerary_time ) : ?>
+													<h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3>
+												<?php endif; ?>
 											</div><!-- tc-content -->
 											<div class="tc-content <?php echo esc_attr( $second_class ) ?> clearfix" >
 												<?php if ( '' !== $itinerary_title ) : ?>
