@@ -30,7 +30,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 
 		<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ) ?>">
 			<p>
-				<?php esc_html_e( 'Click on Add Day to add Itineraries.', 'wp-travel' ); ?>
+				<?php esc_html_e( 'Click on \'Add Itinerary\' to add Itineraries.', 'wp-travel' ); ?>
 			</p>
 		</div>
 		<?php if ( isset( $trip_itinerary_data_arr[0] ) && ! empty( $trip_itinerary_data_arr[0] ) ) : ?>
@@ -41,6 +41,8 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				$itinerary_label = __( 'Untitled', 'wp-travel' );
 				$itinerary_title = __( 'Untitled', 'wp-travel' );
 				$itinerary_desc  = '';
+				$itinerary_date  = '';
+				$itinerary_time  = '';
 				if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
 					$itinerary_label = stripslashes( $itinerary['label'] );
 				}
@@ -49,6 +51,12 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				}
 				if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
 					$itinerary_desc = stripslashes( $itinerary['desc'] );
+				}
+				if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
+					$itinerary_date = stripslashes( $itinerary['date'] );
+				}
+				if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
+					$itinerary_time = stripslashes( $itinerary['time'] );
 				}
 				?>
 				<div class="panel panel-default">
@@ -73,6 +81,14 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 						<div class="panel-wrap">
 							<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 							<input bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
+						</div>
+						<div class="panel-wrap">
+							<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
+							<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][date]" value="<?php echo esc_html( $itinerary_date ); ?>">
+						</div>
+						<div class="panel-wrap">
+							<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
+							<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][time]" value="<?php echo esc_html( $itinerary_time ); ?>">
 						</div>
 						<div class="wp-travel-itinerary" style="padding:10px">
 							<?php
@@ -104,6 +120,6 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 </div>
 <div class="wp-travel-faq-quest-button">
 	<button id="add_itinerary_row" class="button button-primary" >
-		<?php _e('Add Day', 'wp-travel'); ?> 
+		<?php _e('Add Itinerary', 'wp-travel'); ?> 
 	</button> 
 </div>
