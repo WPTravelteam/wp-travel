@@ -119,9 +119,16 @@
     }
 
     if ($.fn.datepicker) {
-        $('#wp-travel-start-date, #wp-travel-end-date').datepicker({
+        $('#wp-travel-start-date, #wp-travel-end-date, .wp-travel-datepicker').datepicker({
             language: 'en',
             minDate: new Date()
+        });
+
+        $('.wp-travel-timepicker').datepicker({
+            // language: 'en',
+            timepicker: true,
+            onlyTimepicker: true,
+
         });
     }
 
