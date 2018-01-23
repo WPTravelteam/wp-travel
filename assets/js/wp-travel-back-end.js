@@ -118,19 +118,23 @@
         });
     }
 
-    if ($.fn.datepicker) {
-        $('#wp-travel-start-date, #wp-travel-end-date, .wp-travel-datepicker').datepicker({
-            language: 'en',
-            minDate: new Date()
-        });
+    function dateTimePicker() {
 
-        $('.wp-travel-timepicker').datepicker({
-            // language: 'en',
-            timepicker: true,
-            onlyTimepicker: true,
+        if ($.fn.datepicker) {
+            $('#wp-travel-start-date, #wp-travel-end-date, .wp-travel-datepicker').datepicker({
+                language: 'en',
+                minDate: new Date()
+            });
 
-        });
+            $('.wp-travel-timepicker').datepicker({
+                // language: 'en',
+                timepicker: true,
+                onlyTimepicker: true,
+
+            });
+        }
     }
+    dateTimePicker();
 
 
     $(document).on('click', '#publish', function() {
@@ -223,9 +227,9 @@
             },
             success: function(response) {
                 $('.itinerary_block').append(response);
-                // tinymce.init(wp_travel_editor_settings);
-                tinyMCE.execCommand('mceAddEditor', true, wp_travel_itinerary_id);
-                quicktags({ id: wp_travel_itinerary_id });
+                // tinyMCE.execCommand('mceAddEditor', true, wp_travel_itinerary_id);
+                // quicktags({ id: wp_travel_itinerary_id });
+                dateTimePicker();
                 return false;
             }
         });
