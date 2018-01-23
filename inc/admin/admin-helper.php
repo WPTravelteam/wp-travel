@@ -351,13 +351,13 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 		$uid = $_POST['itinerary_id'];
 		$itinerary_label = __( 'Day X', 'wp-travel' );
 		$itinerary_title = __( 'Your Plan', 'wp-travel' );
-		$itinerary_settings = array(
-			'quicktags' 	=> array('buttons' => 'em,strong,link'),
-			'quicktags' 	=> true,
-			'tinymce' 		=> true,
-			'textarea_rows'	=> 10,
-			'textarea_name' => 'wp_travel_trip_itinerary_data['.$uid.'][desc]',
-		); ?>
+		// $itinerary_settings = array(
+		// 	'quicktags' 	=> array('buttons' => 'em,strong,link'),
+		// 	'quicktags' 	=> true,
+		// 	'tinymce' 		=> true,
+		// 	'textarea_rows'	=> 10,
+		// 	'textarea_name' => 'wp_travel_trip_itinerary_data['.$uid.'][desc]',
+		// ); ?>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $uid ) ?>">
 				<h4 class="panel-title">
@@ -396,34 +396,12 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					</div>
 				</div>
 				<!-- <div class="wp-travel-itinerary" style="padding:10px"> -->
-					<?php //wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings); ?>
+					<?php // wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings); ?>
 				<!-- </div> -->
 			</div>
 			</div>
 		</div>
 		<?php
-
-		// echo '<div class="itinerary_wrap">
-		// 			<div class="itinerary_row">
-		// 				<div class="itinerary_col"> <label>'.__('Label', 'wp-travel').'</label> <input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][label]" value="">
-		// 				</div>
-		// 				<div class="itinerary_col"><label>'.__('Title', 'wp-travel').'</label><input type="text" name="wp_travel_trip_itinerary_data['.$uid.'][title]" value="">
-		// 				</div>
-		// 			</div>';
-
-		// echo '<div class="itinerary_row">
-		// 				<label>'.__('Description', 'wp-travel').'</label>
-		// 				<div class="itinerary-editor">';
-
-		// wp_editor( $_POST['default_text'], $_POST['itinerary_id'], $itinerary_settings);
-
-		// echo '</div>
-		// 	</div>';
-		// echo '<div class="itinerary_row">
-		// 				<a href="javascript:void(null);" class="button button-small remove_itinery"> '.__('Remove', 'wp-travel').'</a>
-
-		// 			</div>';
-		// echo '</div>';
 		exit;
 	}
 }
