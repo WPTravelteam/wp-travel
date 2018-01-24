@@ -631,10 +631,10 @@ function wp_travel_frontend_contents( $post_id ) {
 												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
 												<?php endif; ?>
 												<?php if ( $itinerary_date ) : ?>												
-													<h3 class="arrival"><?php esc_html_e( 'Date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3>
+													<!-- <h3 class="arrival"><?php esc_html_e( 'Date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3> -->
 												<?php endif; ?>
 												<?php if ( $itinerary_time ) : ?>
-													<h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3>
+													<!-- <h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3> -->
 												<?php endif; ?>
 											</div><!-- tc-content -->
 											<div class="tc-content <?php echo esc_attr( $second_class ) ?> clearfix" >
