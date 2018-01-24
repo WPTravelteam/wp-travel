@@ -1335,13 +1335,12 @@
     }
 }
 
+
 /* faq accordion */
-#faq{
 
-    .wp-collapse-open{
-        
-        margin-bottom:30px;
-
+#faq {
+    .wp-collapse-open {
+        margin-bottom: 30px;
         a {
             float: right;
             padding: 5px 10px;
@@ -1349,27 +1348,20 @@
             border: 1px solid #8b8b8b;
             font-size: 12px;
             color: #555;
-
-            &:hover{
+            &:hover {
                 background: #f83531;
                 color: #fff;
                 border-color: #f83531;
             }
         }
-
-    } 
-    .collapse{
-
-        display:none;
-
     }
-    .collapse.in{
-
-        display:block;
-
+    .collapse {
+        display: none;
+    }
+    .collapse.in {
+        display: block;
     }
     .collapsing {
-
         position: relative;
         height: 0;
         overflow: hidden;
@@ -1379,17 +1371,13 @@
         -webkit-transition-duration: .35s;
         -o-transition-duration: .35s;
         transition-duration: .35s;
-        -webkit-transition-property: height,visibility;
-        -o-transition-property: height,visibility;
-        transition-property: height,visibility;
-
+        -webkit-transition-property: height, visibility;
+        -o-transition-property: height, visibility;
+        transition-property: height, visibility;
     }
-    .panel-heading{
-
-        position:relative;
-
+    .panel-heading {
+        position: relative;
         .collapse-icon {
-
             position: relative;
             right: 15px;
             width: 20px;
@@ -1398,41 +1386,27 @@
             float: right;
             text-align: center;
             top: -4px;
-
         }
-
-        [data-toggle="collapse"]{
-
-            color:#444;
-
-            & span.collapse-icon:after{
-
+        [data-toggle="collapse"] {
+            color: #444;
+            & span.collapse-icon:after {
                 font-family: 'dashicons';
                 content: "\f142";
                 font-size: 18px;
-
-            }
-
-        }
-        [data-toggle="collapse"].collapsed{
-
-            color:#999;
-
-            & span.collapse-icon:after{
-
-               content: "\f140";
-
-            }
-            &:hover{
-
-                color:#444;
-
             }
         }
-        .collapse-icon:focus{
-
+        [data-toggle="collapse"].collapsed {
+            color: #999;
+            & span.collapse-icon:after {
+                content: "\f140";
+            }
+            &:hover {
+                color: #444;
+            }
+        }
+        .collapse-icon:focus {
             box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
-            outline:none;
+            outline: none;
         }
     }
     h4 {
@@ -1440,17 +1414,15 @@
         padding: 10px 15px;
         margin: 0;
         background-color: #f7f7f1;
-        position:relative;
+        position: relative;
         font-size: 14px;
         font-weight: 500;
-
-        &:hover{
-            background-color:#fff;
+        &:hover {
+            background-color: #fff;
         }
-
-        a{
-            color:#999;
-            text-decoration:none;
+        a {
+            color: #999;
+            text-decoration: none;
         }
         .close-faq {
             position: absolute;
@@ -1459,24 +1431,22 @@
             font-size: 16px;
         }
     }
-    .panel-collapse{
+    .panel-collapse {
         padding: 0;
         border: 1px solid #ddd;
         border-top: none;
     }
-    .panel-body{
-       padding:10px 15px;
+    .panel-body {
+        padding: 10px 15px;
     }
-    .panel-default{
-        margin-bottom:15px;
+    .panel-default {
+        margin-bottom: 15px;
         background-color: #fff;
     }
     .panel-faq-question {
         padding: 10px 15px;
     }
-  
 }
-    
 
 
 /* wp-travel pagination

@@ -1,32 +1,28 @@
-.clearfix:after {
-    clear: both;
-    content: ' ';
-    display: block;
-}
-
 .itenary {
     padding: 70px 0;
 }
 
-.left {
-    float: left;
-    width: 50%;
-    padding: 0 50px 15px 50px;
-    text-align: right;
+.row-reverse {
+    flex-direction: row-reverse;
 }
 
-.right {
-    float: right;
-    width: 50%;
-    padding: 0px 50px 15px 50px;
+.row-reverse .tc-heading {
+    text-align: left;
+}
+
+.col {
+    display: flex;
 }
 
 .tc-content {
     position: relative;
+    width: calc( 50% - 1px);
+    padding: 0 50px 15px 50px;
 }
 
 .tc-content.left {
     border-right: 2px solid;
+    text-align: right;
 }
 
 .tc-content.right {
@@ -39,16 +35,9 @@
 }
 
 .tc-heading h1,
-h3 {
-    text-transform: uppercase;
+.tc-heading h3 {
+    /* text-transform: uppercase; */
     margin-bottom: 12px;
-}
-
-.image i {
-    color: #f83531;
-    font-size: 20px;
-    border-radius: 56px;
-    padding-top: 4px;
 }
 
 .btn {
@@ -64,17 +53,20 @@ h3 {
     font-size: 22px;
     text-transform: uppercase;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .tc-heading {
     position: relative;
+    width: calc( 50% - 1px);
+    padding: 0px 50px 15px 50px;
+    text-align: right;
 }
 
 .col h3 {
     margin-top: 0;
     font-size: 15px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     font-weight: bold;
     margin-bottom: 3px;
 }
@@ -90,9 +82,9 @@ h3 {
     position: absolute;
 }
 
-.itenary .left .image {
-    left: inherit;
-    right: -14px;
+.itenary .row-reverse .image {
+    left: initial;
+    right: -13px;
 }
 
 .timeline-contents .col:last-of-type .tc-content {
@@ -106,6 +98,10 @@ h3 {
 
 .timeline-contents .col:last-of-type .tc-content p {
     margin-bottom: 0;
+}
+
+.timeline-contents h2 {
+    text-align: center;
 }
 
 @media screen and (max-width: 767px) {
@@ -129,6 +125,7 @@ h3 {
     .tc-content.left {
         border-right: none;
         padding: 0 0 10px 35px;
+        text-align: left;
     }
     .right {
         float: none;
@@ -162,9 +159,14 @@ h3 {
         border-left: 2px solid;
         margin-bottom: 0;
         margin-left: 11px;
+        display: block;
     }
     .tc-heading h3:last-of-type {
         margin-bottom: 1em;
+    }
+    .itenary .row-reverse .image {
+        left: -13px;
+        right: initial;
     }
 }
 
