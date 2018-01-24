@@ -999,9 +999,9 @@
   -webkit-transition-duration: .35s;
   -o-transition-duration: .35s;
   transition-duration: .35s;
-  -webkit-transition-property: height,visibility;
-  -o-transition-property: height,visibility;
-  transition-property: height,visibility; }
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+  transition-property: height, visibility; }
 #faq .panel-heading {
   position: relative; }
   #faq .panel-heading .collapse-icon {

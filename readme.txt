@@ -13,15 +13,42 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 == Description ==
 "WP Travel" is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin.
 
-= Release Notes: =
-Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
+* Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solution.
+* Checkout ["Demo"](http://wptravel.io/demo).
+
+= "WP TRAVEL" COMPATIBLE THEMES: =
+* ["Travel Log"](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
 
 = Some important features of the plugin: =
-* The standard details needed such as trip code, group size, dynamic content editor, trip types, price, trip outline, trip includes and excludes, starting & ending date, etc, are specially researched and designed.
-* Special preference for presentation of pictures and multiple images can be added to the itinerary gallery to attract visitors of your site.
-* Reference maps can be used for addition of new tour places and location can be assigned to each itinerary. You can also add multiple locations and a map can be displayed for an itinerary.
-* Users can view the reviews of each Itinerary from other users and also rate each Itinerary for others to view.
-* Booking is very convenient with the least number of details needed from the user.
+* Tour packages with no limit: Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily.
+* Tour filters: User can find their required Itineraries by filtering or using easy search form.
+* Painless Booking System: WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
+* Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
+* Payment System: Currently we have Standard PayPal as a free addon (which later will be included in WP Travel). It can be download from ["here"](http://wptravel.io/downloads/standard-paypal/). If you want to more payment system please ["let us know"](http://wptravel.io/support-forum/).
+* Email Notification: You as an admin will be notified of all booking made by users and also users will also get email notification about their booking details. All email templates are customizable.
+* Customizable tabs: All trip details page tabs in front end can be customized from backend. You can change their labels and sort by your requirements or hide them.
+* Rating & Reviews: You can allow users to add rating or reviews for each trips. You can also hide them if you want for each trips.
+* Map: For each trips you can show Google map. In front end user can see where is the location of trip.
+
+= Other features: =
+* Featured trips
+* FAQs
+* Image Gallery
+* Group size
+* Set Currency
+* Pricing per person & group
+* Sale price
+* Set fix departures
+* Trip Types
+* Trip Locations
+* Keywords
+* Itineraries filters
+* Translation Ready
+* Complete documentation
+* Customizable
+* Fluid Layout, Responsive
+* Compatible Themes
+* And more ...
 
 
 = Customization and Flexibility =
@@ -35,6 +62,9 @@ WP Travel plugin is very flexible and highly customizable. There are a number of
 We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/).
 
 Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/).
+
+= Release Notes: =
+Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Installation ==
 = Using The WordPress Dashboard =
