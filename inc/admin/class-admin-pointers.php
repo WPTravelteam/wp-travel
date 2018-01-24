@@ -13,14 +13,14 @@ class WP_Travel_Admin_Info_Pointers {
 
 function __construct() {
 
-    add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
+    // add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
 
-    add_filter( 'wp_travel_admin_pointers-'.WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
+    // add_filter( 'wp_travel_admin_pointers-'.WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
 
-    add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
+    // add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
 
 
-    add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
+    // add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
     add_action( 'admin_notices', array( $this, 'paypal_addon_admin_notice' ) );
     
@@ -191,7 +191,31 @@ function load_pointers( $hook_suffix ) {
         
         <?php 
         
-        } 
+        }
+
+        elseif( is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php') ){
+
+            $plugin_data = get_plugin_data( WP_TRAVEL_PAYPAL_PLUGIN_FILE );
+
+            if ( isset ( $plugin_data['Version'] ) ) {
+
+                if( version_compare($plugin_data['Version'], '1.0.1', '<') ) {
+                
+                ?>
+                    <div class="notice notice-warning">
+                        <p>
+                            <strong><?php printf( __( 'You are using older version of WP Travel Standard paypal. Please %1sDownload version 1.0.1 Now %3s.', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
+                        </p>
+                    </div>
+                
+                <?php 
+                
+                }
+
+            } 
+            
+
+        }
 
     }
 
