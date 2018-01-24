@@ -537,14 +537,14 @@ function wp_travel_frontend_contents( $post_id ) {
 					case 'faq' : ?>
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 						<div class="panel-group" id="accordion">
-							<div class="wp-collapse-open clearfix">
-								<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
-								<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
-							</div>
-						<?php
+					<?php
 						$faqs = wp_travel_get_faqs( $post_id );
-						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-							foreach ( $faqs as $k => $faq ) : ?>
+						if ( is_array( $faqs ) && count( $faqs ) > 0 ) { ?>
+							<div class="wp-collapse-open clearfix">
+								<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e('Open All', 'wp-travel'); ?></span></a>
+								<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e('Close All', 'wp-travel'); ?></span></a>
+							</div>
+						<?php foreach ( $faqs as $k => $faq ) : ?>
 							<div class="panel panel-default">
 						    <div class="panel-heading">
 						      <h4 class="panel-title">
@@ -561,8 +561,14 @@ function wp_travel_frontend_contents( $post_id ) {
 						    </div>
 						  </div>
 							<?php endforeach;
-								}
-							?>
+						}
+						else { ?>
+							<div class="while-empty">
+								<p class="wp-travel-no-detail-found-msg" >
+									<?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
+								</p>
+							</div>
+						<?php } ?>
 						</div>
 					</div>
 					<?php break;
