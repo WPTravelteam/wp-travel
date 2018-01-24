@@ -586,12 +586,14 @@ function wp_travel_frontend_contents( $post_id ) {
 										<?php if ( $index % 2 === 0 ) : ?>
 											<?php
 												$first_class  = 'right';
-												$second_class = 'left'; 
+												$second_class = 'left';
+												$row_reverse = 'row-reverse';
 											?>
 										<?php else : ?>
 											<?php
 												$first_class  = 'left';
-												$second_class = 'right'; 
+												$second_class = 'right';
+												$row_reverse = '';
 											?>
 										<?php endif; ?>
 										<?php
@@ -623,16 +625,16 @@ function wp_travel_frontend_contents( $post_id ) {
 											$itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
 										}
 										?>
-										<div class="col clearfix">
+										<div class="col clearfix <?php echo esc_attr( $row_reverse ) ?>">
 											<div class="tc-heading <?php echo esc_attr( $first_class ) ?> clearfix">
 												<?php if ( '' !== $itinerary_label ) : ?>
 												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
 												<?php endif; ?>
 												<?php if ( $itinerary_date ) : ?>												
-													<h3 class="arrival"><?php esc_html_e( 'date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3>
+													<!-- <h3 class="arrival"><?php esc_html_e( 'Date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3> -->
 												<?php endif; ?>
 												<?php if ( $itinerary_time ) : ?>
-													<h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3>
+													<!-- <h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3> -->
 												<?php endif; ?>
 											</div><!-- tc-content -->
 											<div class="tc-content <?php echo esc_attr( $second_class ) ?> clearfix" >
