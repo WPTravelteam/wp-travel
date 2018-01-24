@@ -368,7 +368,7 @@ class WP_Travel_Admin_Metaboxes {
 							<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr($key); ?>">
 								<h4 class="panel-title">
 									<div class="wp-travel-sorting-handle"></div>
-									<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
 
 										<span bind="faq_question_<?php echo esc_attr($key); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 
