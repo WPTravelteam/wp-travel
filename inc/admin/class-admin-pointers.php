@@ -206,6 +206,9 @@ function load_pointers( $hook_suffix ) {
                         <p>
                             <strong><?php printf( __( 'You are using older version of WP Travel Standard paypal. Please %1sDownload version 1.0.1 Now %3s.', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads/standard-paypal/">', '</a>' ); ?></strong>
                         </p>
+                        <p>
+                            <strong><?php printf( __( 'Need help With the update ? %1sClick here%2s for detailed instructions on updating the plugin.', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/documentations/standard-paypal/updating-wp-travel-standard-paypal/">', '</a>' ); ?></strong>
+                        </p>
                     </div>
                 
                 <?php 
