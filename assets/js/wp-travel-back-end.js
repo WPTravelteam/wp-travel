@@ -276,7 +276,7 @@
         // }
     });
 
-     $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs tbody').sortable({
+    $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs tbody').sortable({
         handle: '.wp-travel-sorting-handle',
         // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
         //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
@@ -356,6 +356,11 @@
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
+    });
+
+    $(document).on('keyup change', '.section_title', function() {
+        var title = $(this).val();
+        $(this).siblings('.wp-travel-accordion-title').html(title);
     });
 
     if ($(this).is(':checked')) {
