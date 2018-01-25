@@ -617,6 +617,7 @@
         padding: 5px 50px;
         font-size: 22px;
         box-shadow: none;
+        margin-right:15px;
     }
     p {
         margin: 20px 0;
@@ -628,6 +629,18 @@
     .wp-travel-keyword {
         padding-left: 5px;
         text-transform: capitalize
+    }
+    .wp-travel-booking-enquiry {
+        display: inline-block;
+        color: #505050;
+        font-weight: 600;
+        cursor: pointer;
+        transition:all 0.4s ease-in-out;
+
+        &:hover{
+            color: #df1814;
+            transition:all 0.4s ease-in-out;
+        }
     }
 }
 

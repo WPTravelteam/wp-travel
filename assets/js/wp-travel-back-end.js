@@ -345,6 +345,7 @@
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
+
     if ($(this).is(':checked')) {
         $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
     } else {
