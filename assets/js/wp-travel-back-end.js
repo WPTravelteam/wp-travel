@@ -338,4 +338,12 @@
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
 
+    $('#wp-travel-use-global-tabs').change(function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
+        } else {
+            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "cursor" });
+        }
+    });
+
 }(jQuery));
