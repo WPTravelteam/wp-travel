@@ -676,7 +676,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-contents {
     .wp-travel-sorting-handle {
         background: #ddd;
-        position:relative;
+        position:absolute;
+        top:0;
+        left:0;
         width: 35px;
         height: 100%;
         z-index: 1;
@@ -685,6 +687,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             content: "\f545";
             font-size: 16px;
             font-family: dashicons;
+            position:absolute;
             z-index: 2;
             color: #666;
             cursor: move;
@@ -707,7 +710,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     font-size: 16px;
                 }
             }
-            .wp-travel-sorting-tabs-wrap {
+           
+        }
+         .wp-travel-sorting-tabs-wrap {
                 padding-left: 10px;
                 .wp_travel_tabs_input-field {
                     display: none;
@@ -766,7 +771,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             .wp_travel_tabs_input-field {
                 margin-right: 15px;
             }
-        }
     }
 }
 .form-table{
@@ -860,31 +864,78 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     } 
 }
+.wp-travel-tabs-contents{
 
-table.wp-travel-sorting-tabs{
-    thead{
-        th {
-            vertical-align: bottom;
-            border-bottom: 2px solid #dee2e6;
+    table.wp-travel-sorting-tabs{
+
+        .wp-travel-sorting-handle {
+            background-color:transparent;
+            line-height: 39px;
+            width: 100%;
+            text-align: center;
+            &:before {
+                position:relative;
+            }
         }
-    }
-    th{
-        padding: .75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-    tbody{
-        tr:nth-of-type(odd) {
-            background-color: rgba(0,0,0,.05);
+        border: 1px solid #ddd;
+        thead{
+            th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #ddd;
+                font-weight:600;
+                padding:10px;
+                border-right:1px solid #ddd;
+                &:last-of-type {
+                    text-align: center;
+                    border-right:none;
+                }
+                &:first-of-type{
+                    width:60px;
+                }
+            }
         }
+        th{
+            border-top: 1px solid #ddd;
+        }
+        tbody{
+            tr:nth-of-type(odd) {
+                background-color:#f7f7f1;
+            }
+            td:first-of-type {
+                padding: 0;
+                position:relative;
+                background-color: #f1f1f1;
+                border-right: 1px solid #ddd;
+            }
+        }
+        td{
+            padding:5px 10px;
+            border-top: 1px solid #ddd;
+
+            &:last-of-type {
+                text-align: center;
+            }
+            &:nth-of-type(2){
+                line-height:30px;
+                border-right: 1px solid #ddd
+            }
+        }
+        .show-in-frontend {
+            display: inline-block;
+            float: none;
+        }
+        .checkbox-default-design{
+            label:before,label:after{
+                padding-top:2px;
+            }
+        }
+        .wp-travel-sorting-tabs-wrap{
+             input {
+                float: right;
+            }
+        }
+        
     }
-    td{
-        padding: .75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-    
-    
 } 
 
 .check-handeller {

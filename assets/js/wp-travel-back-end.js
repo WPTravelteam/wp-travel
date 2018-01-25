@@ -264,7 +264,19 @@
         return false;
     });
     var textareaID;
-    $('.wp-travel-sorting-tabs').sortable({
+    $('#tab-accordion .wp-travel-sorting-tabs').sortable({
+        handle: '.wp-travel-sorting-handle',
+        // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
+        //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
+        //     try { tinyMCE.execCommand('mceRemoveEditor', false, textareaID); } catch (e) {}
+        // },
+        // stop: function(event, ui) { // re-initialize TinyMCE when sort is completed
+        //     try { tinyMCE.execCommand('mceAddEditor', false, textareaID); } catch (e) {}
+        //     $(this).find('.update-warning').show();
+        // }
+    });
+
+     $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs tbody').sortable({
         handle: '.wp-travel-sorting-handle',
         // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
         //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
