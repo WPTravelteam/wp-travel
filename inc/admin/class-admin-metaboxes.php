@@ -296,15 +296,17 @@ class WP_Travel_Admin_Metaboxes {
 								 </span>
 							</label>
 						</span>
-					</td>
+						</td>
+						<td>
+							<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
+						</td>
 					</tr>
 				</table>
-				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
 			<?php
 			echo '<table class="wp-travel-sorting-tabs form-table">'; ?>
 				<thead>
-					<th width="50px">Sorting</th>
-					<th width="70%">Tittle</th>
+					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
+					<th width="70%"><?php esc_html_e( 'Trip Tittle', 'wp-travel' ); ?></th>
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
