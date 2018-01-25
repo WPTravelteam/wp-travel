@@ -372,6 +372,7 @@ function wp_travel_single_excerpt( $post_id ) {
 				<span>
 					<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
 				</span>
+				
 			</span>
 		</div>
 	</div>
