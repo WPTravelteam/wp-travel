@@ -184,6 +184,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	<div class="wp-detail-review-wrap">
     	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 		<div class="wp-travel-trip-detail">
+		<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
 			<div class="trip-price" >
 
 			<?php if ( $enable_sale ) : ?>
@@ -205,6 +206,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 					</ins>/<?php echo esc_html( $per_person_text ); ?>
 				</span>
 			</div>
+		<?php endif; ?>
 		</div>
 		<?php do_action( 'wp_travel_single_after_trip_price', $post_id, $hide_rating ); ?>
 	</div>
