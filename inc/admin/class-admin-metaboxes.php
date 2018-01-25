@@ -301,28 +301,40 @@ class WP_Travel_Admin_Metaboxes {
 				</table>
 				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
 			<?php
-			echo '<ul class="wp-travel-sorting-tabs">';
-			foreach ( $tabs as $key => $tab ) : ?>
-				<li class="clearfix">
-					<div class="wp-travel-sorting-handle">
-					</div>
+			echo '<table class="wp-travel-sorting-tabs form-table">'; ?>
+				<thead>
+					<th colspan="1">sort</th>
+					<th colspan="4">sort</th>
+					<th colspan="1"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
+				</thead>
+				<tbody>
+			<?php foreach ( $tabs as $key => $tab ) : ?>
+				<tr>
+					<td colspan="1">
+						<div class="wp-travel-sorting-handle">
+						</div>
+					</td>
+					<td colspan="4">
 					<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-
-						<span class="show-in-frontend checkbox-default-design"><label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?><span class="switch">
-						  </span>
-						</label>
-
-						
-				</span>
-				<span class="check-handeller"><?php esc_html_e( 'Display', 'wp-travel' ); ?></span>
 					</div>
-				</li>
+					<td colspan="1">
+						<span class="show-in-frontend checkbox-default-design">
+							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?>
+							<span class="switch">
+							  </span>
+							</label>
+						</span>
+						<span class="check-handeller"></span>
+					</td>
+				</td>
+				</tr>
 			<?php
-			endforeach;
-			echo '</ul>';
+			endforeach; 
+		
+			echo '</tbody></table>';
 		}
 	 }
 

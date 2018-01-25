@@ -452,9 +452,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 .wp-travel-tabs-contents .wp-travel-sorting-handle {
   background: #ddd;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 35px;
   height: 100%;
   z-index: 1;
@@ -463,9 +461,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     content: "\f545";
     font-size: 16px;
     font-family: dashicons;
-    position: absolute;
-    left: 8px;
-    top: 13px;
     z-index: 2;
     color: #666;
     cursor: move; }
@@ -579,7 +574,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border: 1px solid #cccccc;
   transition: 0.18s all ease-out; }
 .checkbox-default-design input:checked ~ .switch, .checkbox-default-design .wp-travel-form-field select:checked ~ .switch, .wp-travel-form-field .checkbox-default-design select:checked ~ .switch, .checkbox-default-design .wp-travel-form-field .stat-toolbar-form .field-group input:checked ~ .switch, .checkbox-default-design .stat-toolbar-form .field-group .wp-travel-form-field input:checked ~ .switch, .checkbox-default-design .wp-travel-form-field textarea:checked ~ .switch, .wp-travel-form-field .checkbox-default-design textarea:checked ~ .switch {
-  left: 23px; }
+  left: 24px;
+  background-color: #0085ba;
+  border-color: #0085ba; }
 
 .form-table .checkbox-default-design label {
   margin-right: -15px; }
@@ -587,6 +584,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     padding-top: 5px; }
   .form-table .checkbox-default-design label:after {
     padding-top: 5px; }
+
+table.wp-travel-sorting-tabs thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6; }
+table.wp-travel-sorting-tabs th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6; }
+table.wp-travel-sorting-tabs tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05); }
+table.wp-travel-sorting-tabs td {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6; }
 
 .check-handeller {
   float: right;

@@ -409,7 +409,8 @@
 .wp-travel.trip-headline-wrapper .wp-travel-booknow-btn {
   padding: 5px 50px;
   font-size: 22px;
-  box-shadow: none; }
+  box-shadow: none;
+  margin-right: 15px; }
 .wp-travel.trip-headline-wrapper p {
   margin: 20px 0; }
 .wp-travel.trip-headline-wrapper .wp-travel-keywords {
@@ -417,6 +418,15 @@
 .wp-travel.trip-headline-wrapper .wp-travel-keyword {
   padding-left: 5px;
   text-transform: capitalize; }
+.wp-travel.trip-headline-wrapper .wp-travel-booking-enquiry {
+  display: inline-block;
+  color: #505050;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out; }
+  .wp-travel.trip-headline-wrapper .wp-travel-booking-enquiry:hover {
+    color: #df1814;
+    transition: all 0.4s ease-in-out; }
 
 .trip-price del {
   opacity: 0.5;

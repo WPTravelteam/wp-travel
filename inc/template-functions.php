@@ -367,6 +367,12 @@ function wp_travel_single_excerpt( $post_id ) {
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
+			<span class="wp-travel-booking-enquiry">
+				<span class="dashicons dashicons-editor-help"></span>
+				<span>
+					<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+				</span>
+			</span>
 		</div>
 	</div>
 	<?php

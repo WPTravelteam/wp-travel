@@ -676,9 +676,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-contents {
     .wp-travel-sorting-handle {
         background: #ddd;
-        position: absolute;
-        top: 0;
-        left: 0;
+        position:relative;
         width: 35px;
         height: 100%;
         z-index: 1;
@@ -687,9 +685,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             content: "\f545";
             font-size: 16px;
             font-family: dashicons;
-            position: absolute;
-            left: 8px;
-            top: 13px;
             z-index: 2;
             color: #666;
             cursor: move;
@@ -841,7 +836,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         transition: 0.18s all ease-out;
     }
     input:checked~.switch {
-        left: 23px;
+        left: 24px;
+        background-color: #0085ba;
+        border-color: #0085ba;
     }
 }
 
@@ -863,6 +860,32 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     } 
 }
+
+table.wp-travel-sorting-tabs{
+    thead{
+        th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+    }
+    th{
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    tbody{
+        tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,.05);
+        }
+    }
+    td{
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    
+} 
 
 .check-handeller {
 
