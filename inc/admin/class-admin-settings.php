@@ -219,7 +219,8 @@ class WP_Travel_Admin_Settings {
 		?>
 				<thead>
 					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
-					<th width="70%"><?php esc_html_e( 'Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Global Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Custom Trip Tittle', 'wp-travel' ); ?></th>
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
@@ -230,9 +231,13 @@ class WP_Travel_Admin_Settings {
 						<div class="wp-travel-sorting-handle">
 						</div>
 					</td>
-					<td width="70%">
+					<td width="35%">
 						<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+					</div>
+					</td>
+					<td width="35%">
+						<div class="wp-travel-sorting-tabs-wrap">
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
 						

@@ -720,6 +720,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     max-width: calc( 33.333% - 15px);
                     float: left;
                     width: 100%;
+                    min-width: 200px;
                     height: 26px;
                     box-shadow: none;
                 }
@@ -735,6 +736,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     float: left;
                     font-size: 14px;
                     padding-left: 7px;
+                    max-width: 100%;
                 }
                 .use-global-tab,
                 .show-in-frontend {
@@ -905,7 +907,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             &:last-of-type {
                 text-align: center;
             }
-            &:nth-of-type(2){
+            &:nth-of-type(2),
+            &:nth-of-type(3){
                 line-height:30px;
                 border-right: 1px solid #ddd
             }

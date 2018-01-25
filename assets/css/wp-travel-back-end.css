@@ -488,6 +488,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     max-width: calc( 33.333% - 15px);
     float: left;
     width: 100%;
+    min-width: 200px;
     height: 26px;
     box-shadow: none; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-tab-label,
@@ -500,7 +501,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-tab-label {
     float: left;
     font-size: 14px;
-    padding-left: 7px; }
+    padding-left: 7px;
+    max-width: 100%; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .use-global-tab,
   .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .show-in-frontend {
     float: right; }
@@ -615,7 +617,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     border-top: 1px solid #ddd; }
     .wp-travel-tabs-contents table.wp-travel-sorting-tabs td:last-of-type {
       text-align: center; }
-    .wp-travel-tabs-contents table.wp-travel-sorting-tabs td:nth-of-type(2) {
+    .wp-travel-tabs-contents table.wp-travel-sorting-tabs td:nth-of-type(2), .wp-travel-tabs-contents table.wp-travel-sorting-tabs td:nth-of-type(3) {
       line-height: 30px;
       border-right: 1px solid #ddd; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs .show-in-frontend {
