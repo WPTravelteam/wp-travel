@@ -297,6 +297,9 @@ class WP_Travel_Admin_Metaboxes {
 							</label>
 						</span>
 						</td>
+						
+					</tr>
+					<tr>
 						<td>
 							<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
 						</td>
@@ -306,7 +309,8 @@ class WP_Travel_Admin_Metaboxes {
 			echo '<table class="wp-travel-sorting-tabs form-table">'; ?>
 				<thead>
 					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
-					<th width="70%"><?php esc_html_e( 'Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Global Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Custom Trip Tittle', 'wp-travel' ); ?></th>
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
@@ -316,12 +320,17 @@ class WP_Travel_Admin_Metaboxes {
 						<div class="wp-travel-sorting-handle">
 						</div>
 					</td>
-					<td width="70%">
+					<td width="35%">
 					<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+					</div>
+					</td>
+					<td>
+						<div class="wp-travel-sorting-tabs-wrap">
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
 					</div>
+					</td>
 					<td width="20%">
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?>
@@ -331,7 +340,6 @@ class WP_Travel_Admin_Metaboxes {
 						</span>
 						<span class="check-handeller"></span>
 					</td>
-				</td>
 				</tr>
 			<?php
 			endforeach; 
