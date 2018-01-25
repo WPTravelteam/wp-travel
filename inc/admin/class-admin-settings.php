@@ -218,8 +218,8 @@ class WP_Travel_Admin_Settings {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
 		?>
 				<thead>
-					<th width="50px">Sorting</th>
-					<th width="70%">Tittle</th>
+					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
+					<th width="70%"><?php esc_html_e( 'Trip Tittle', 'wp-travel' ); ?></th>
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>

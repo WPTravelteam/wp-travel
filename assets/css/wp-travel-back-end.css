@@ -484,10 +484,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap {
   padding-left: 10px; }
   .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp_travel_tabs_input-field {
-    display: none; }
-  .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap:hover .wp-travel-tab-label {
-    display: none; }
-  .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap:hover .wp_travel_tabs_input-field {
     display: inline;
     max-width: calc( 33.333% - 15px);
     float: left;
@@ -513,10 +509,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-tab-label,
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .use-global-tab,
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .show-in-frontend {
-  max-width: 25%;
-  width: 100%;
-  display: block;
-  line-height: 2; }
+  max-width: 25%; }
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-tab-label {
   float: left;
   font-size: 14px;
@@ -628,8 +621,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs .show-in-frontend {
     display: inline-block;
     float: none; }
-  .wp-travel-tabs-contents table.wp-travel-sorting-tabs .checkbox-default-design label:before, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .checkbox-default-design label:after {
-    padding-top: 2px; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap input, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field select, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap select, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field textarea, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap textarea {
     float: right; }
 
