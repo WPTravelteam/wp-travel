@@ -136,7 +136,6 @@
     }
     dateTimePicker();
 
-
     $(document).on('click', '#publish', function() {
 
         var start_date = $('#wp-travel-start-date').val();
