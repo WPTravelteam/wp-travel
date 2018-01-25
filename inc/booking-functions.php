@@ -174,7 +174,7 @@ function wp_travel_booking_form_fields() {
  */
 function wp_travel_get_booking_form() {
 	global $post;
-	include WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
 		'id' => 'wp-travel-booking',
 		'wrapper_class' => 'wp-travel-booking-form-wrapper',
