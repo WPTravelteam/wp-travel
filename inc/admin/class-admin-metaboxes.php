@@ -429,7 +429,6 @@ class WP_Travel_Admin_Metaboxes {
 	function gallery_images_listing() {
 		?>
 		<script type="text/html" id="tmpl-my-template">
-			<# console.log( data ); #>
 			<#
 			if ( data.length > 0 ) {
 				_.each( data, function( val ){
