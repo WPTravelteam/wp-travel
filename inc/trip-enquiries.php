@@ -22,45 +22,21 @@ function wp_travel_enquiries_form_fields() {
 	}
 
 	$enquiry_fields = array(
-		'first_name'	=> array(
+		'full_name'	=> array(
 			'type' => 'text',
-			'label' => __( 'First Name', 'wp-travel' ),
+			'label' => __( 'Full Name', 'wp-travel' ),
 			'name' => 'wp_travel_fname',
 			'id' => 'wp-travel-fname',
 			'validations' => array(
 				'required' => true,
-				'maxlength' => '50',
+				'maxlength' => '80',
 				// 'type' => 'alphanum',
 			),
 			'priority' => 10,
 		),
-
-		'last_name'		=> array(
-			'type' => 'text',
-			'label' => __( 'Last Name', 'wp-travel' ),
-			'name' => 'wp_travel_lname',
-			'id' => 'wp-travel-lname',
-			'validations' => array(
-				'required' => true,
-				'maxlength' => '50',
-				// 'type' => 'alphanum',
-			),
-			'priority' => 20,
-		),
-		'subject'		=> array(
-			'type' => 'text',
-			'label' => __( 'Address', 'wp-travel' ),
-			'name' => 'wp_travel_address',
-			'id' => 'wp-travel-address',
-			'validations' => array(
-				'required' => true,
-				'maxlength' => '50',
-			),
-			'priority' => 40,
-		),
 		'email' => array(
 			'type' => 'email',
-			'label' => __( 'Email', 'wp-travel' ),
+			'label' => __( 'Your Email', 'wp-travel' ),
 			'name' => 'wp_travel_email',
 			'id' => 'wp-travel-email',
 			'validations' => array(
@@ -71,10 +47,10 @@ function wp_travel_enquiries_form_fields() {
 		),
 		'note' => array(
 			'type' => 'textarea',
-			'label' => __( 'Note', 'wp-travel' ),
+			'label' => __( 'Your Enquiry', 'wp-travel' ),
 			'name' => 'wp_travel_note',
 			'id' => 'wp-travel-note',
-			'placeholder' => __( 'Enter some notes...', 'wp-travel' ),
+			'placeholder' => __( 'Enter your enqiury...', 'wp-travel' ),
 			'rows' => 6,
 			'cols' => 150,
 			'priority' => 90,
@@ -99,7 +75,7 @@ function wp_travel_get_enquiries_form() {
 		'submit_button' => array(
 			'name' => 'wp_travel_enquiry',
 			'id' => 'wp-travel-enquiry',
-			'value' => __( 'Send Message', 'wp-travel' ),
+			'value' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
 		),
 		'nonce' => array(
 			'action' => 'wp_travel_security_action',

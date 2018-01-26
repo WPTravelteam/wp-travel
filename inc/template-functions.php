@@ -367,16 +367,17 @@ function wp_travel_single_excerpt( $post_id ) {
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
-			<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries"><span class="wp-travel-booking-enquiry">
-				<span class="dashicons dashicons-editor-help"></span>
-				<span>
-					<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+			<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries">
+				<span class="wp-travel-booking-enquiry">
+					<span class="dashicons dashicons-editor-help"></span>
+					<span>
+						<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+					</span>
 				</span>
-				
-			</span></a>
+			</a>
 		</div>
 	</div>
-	<?php wp_travel_get_enquiries_form(); ?>
+		<?php wp_travel_get_enquiries_form(); ?>
 	<?php
 	/**
 	 * @since 1.0.4
