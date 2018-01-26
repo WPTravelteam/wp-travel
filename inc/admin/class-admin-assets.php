@@ -41,9 +41,13 @@ class WP_Travel_Admin_Assets {
 			wp_register_script( 'jquery-chart-custom', $this->assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
 			$booking_data = wp_travel_get_booking_data();
 
-			$data = isset( $booking_data['data'] ) ? $booking_data['data'] : array();
-			$labels = isset( $booking_data['labels'] ) ? $booking_data['labels'] : array();
-
+			$stat_data = isset( $booking_data['stat_data'] ) ? $booking_data['stat_data'] : array();
+			$labels = isset( $stat_data['stat_label'] ) ? $stat_data['stat_label'] : array();
+			$datas = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
+			$data_label = isset( $stat_data['data_label'] ) ? $stat_data['data_label'] : array();
+			$data_bg_color = isset( $stat_data['data_bg_color'] ) ? $stat_data['data_bg_color'] : array();
+			$data_border_color = isset( $stat_data['data_border_color'] ) ? $stat_data['data_border_color'] : array();
+			
 			$max_bookings = isset( $booking_data['max_bookings'] ) ? $booking_data['max_bookings'] : 0;
 			$max_pax = isset( $booking_data['max_pax'] ) ? $booking_data['max_pax'] : 0;
 			$top_countries = ( isset( $booking_data['top_countries'] ) && count( $booking_data['top_countries'] )  > 0 ) ? $booking_data['top_countries'] : array( 'N/A' );
@@ -51,19 +55,19 @@ class WP_Travel_Admin_Assets {
 
 			$booking_stat_from = isset( $booking_data['booking_stat_from'] ) ? $booking_data['booking_stat_from'] : '';
 			$booking_stat_to = isset( $booking_data['booking_stat_to'] ) ? $booking_data['booking_stat_to'] : '';
-			// $data2 = array(5,10,3,6,9,8,2,11,13,9,7,15,16,16,13,18,20,21,26,15,13,16,18,7,15,16,16,6,9,8);
-			// $labels = array('Dec 01, 2017','Dec 02, 2017','Dec 03, 2017','Dec 04, 2017','Dec 05, 2017','Dec 06, 2017','Dec 07, 2017','Dec 08, 2017','Dec 09, 2017','Dec 10, 2017','Dec 11, 2017','Dec 12, 2017','Dec 13, 2017','Dec 14, 2017','Dec 15, 2017','Dec 16, 2017','Dec 17, 2017','Dec 18, 2017','Dec 19, 2017','Dec 20, 2017','Dec 21, 2017','Dec 22, 2017','Dec 23, 2017','Dec 24, 2017','Dec 25, 2017','Dec 26, 2017','Dec 27, 2017','Dec 28, 2017','Dec 29, 2017','Dec 30, 2017');
-
-			$wp_travel_stat_data = array(
-				array(
-					'label' => esc_html__( 'Bookings', 'wp-travel' ),
-					'backgroundColor' => '#00f',
-					'borderColor' => '#00f',
+			
+			$wp_travel_stat_data = array();
+			foreach ( $datas as $key => $data ) {
+				$wp_travel_stat_data[] = array(
+					'label' => $data_label[ $key ],
+					'backgroundColor' => $data_bg_color[ $key ],
+					'borderColor' => $data_border_color[ $key ],
 					'data' => $data,
 					'fill' => false,
-				),
-			);
-			$wp_travel_stat_data = apply_filters( 'wp_travel_stat_data', $wp_travel_stat_data );
+				);
+			}
+			
+			// $wp_travel_stat_data = apply_filters( 'wp_travel_stat_data', $wp_travel_stat_data );
 			$wp_travel_chart_data = array(
 				'ajax_url' => 'admin-ajax.php',
 				'chart_title' => esc_html__( 'Chart Stat', 'wp-travel' ),
