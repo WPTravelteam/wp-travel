@@ -63,7 +63,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 					<div class="panel-heading" role="tab" id="heading-itinerary-<?php echo esc_attr( $cnt ) ?>">
 						<h4 class="panel-title">
 							<div class="wp-travel-sorting-handle"></div>
-							<a role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" aria-expanded="true" aria-controls="collapse-itinerary<?php echo esc_attr( $cnt ) ?>">
+							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" aria-expanded="true" aria-controls="collapse-itinerary<?php echo esc_attr( $cnt ) ?>">
 
 							<span bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
 							<span bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>

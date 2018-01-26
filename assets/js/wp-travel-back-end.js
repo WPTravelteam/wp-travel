@@ -136,7 +136,6 @@
     }
     dateTimePicker();
 
-
     $(document).on('click', '#publish', function() {
 
         var start_date = $('#wp-travel-start-date').val();
@@ -265,7 +264,19 @@
         return false;
     });
     var textareaID;
-    $('.wp-travel-sorting-tabs').sortable({
+    $('#tab-accordion .wp-travel-sorting-tabs').sortable({
+        handle: '.wp-travel-sorting-handle',
+        // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
+        //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
+        //     try { tinyMCE.execCommand('mceRemoveEditor', false, textareaID); } catch (e) {}
+        // },
+        // stop: function(event, ui) { // re-initialize TinyMCE when sort is completed
+        //     try { tinyMCE.execCommand('mceAddEditor', false, textareaID); } catch (e) {}
+        //     $(this).find('.update-warning').show();
+        // }
+    });
+
+    $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs tbody').sortable({
         handle: '.wp-travel-sorting-handle',
         // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
         //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
@@ -346,6 +357,12 @@
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
+
+    $(document).on('keyup change', '.section_title', function() {
+        var title = $(this).val();
+        $(this).siblings('.wp-travel-accordion-title').html(title);
+    });
+
     if ($(this).is(':checked')) {
         $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
     } else {

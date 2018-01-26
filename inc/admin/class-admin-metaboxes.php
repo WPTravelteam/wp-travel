@@ -296,33 +296,55 @@ class WP_Travel_Admin_Metaboxes {
 								 </span>
 							</label>
 						</span>
-					</td>
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
+						</td>
 					</tr>
 				</table>
-				<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
 			<?php
-			echo '<ul class="wp-travel-sorting-tabs">';
-			foreach ( $tabs as $key => $tab ) : ?>
-				<li class="clearfix">
-					<div class="wp-travel-sorting-handle">
-					</div>
+			echo '<table class="wp-travel-sorting-tabs form-table">'; ?>
+				<thead>
+					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Global Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Custom Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
+				</thead>
+				<tbody>
+			<?php foreach ( $tabs as $key => $tab ) : ?>
+				<tr>
+					<td width="50px">
+						<div class="wp-travel-sorting-handle">
+						</div>
+					</td>
+					<td width="35%">
 					<div class="wp-travel-sorting-tabs-wrap">
 						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+					</div>
+					</td>
+					<td>
+						<div class="wp-travel-sorting-tabs-wrap">
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-
-						<span class="show-in-frontend checkbox-default-design"><label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?><span class="switch">
-						  </span>
-						</label>
-
-						
-				</span>
-				<span class="check-handeller"><?php esc_html_e( 'Display', 'wp-travel' ); ?></span>
 					</div>
-				</li>
+					</td>
+					<td width="20%">
+						<span class="show-in-frontend checkbox-default-design">
+							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?>
+							<span class="switch">
+							  </span>
+							</label>
+						</span>
+						<span class="check-handeller"></span>
+					</td>
+				</tr>
 			<?php
-			endforeach;
-			echo '</ul>';
+			endforeach; 
+		
+			echo '</tbody></table>';
 		}
 	 }
 
@@ -429,7 +451,6 @@ class WP_Travel_Admin_Metaboxes {
 	function gallery_images_listing() {
 		?>
 		<script type="text/html" id="tmpl-my-template">
-			<# console.log( data ); #>
 			<#
 			if ( data.length > 0 ) {
 				_.each( data, function( val ){

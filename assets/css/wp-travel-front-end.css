@@ -409,7 +409,8 @@
 .wp-travel.trip-headline-wrapper .wp-travel-booknow-btn {
   padding: 5px 50px;
   font-size: 22px;
-  box-shadow: none; }
+  box-shadow: none;
+  margin-right: 15px; }
 .wp-travel.trip-headline-wrapper p {
   margin: 20px 0; }
 .wp-travel.trip-headline-wrapper .wp-travel-keywords {
@@ -417,6 +418,15 @@
 .wp-travel.trip-headline-wrapper .wp-travel-keyword {
   padding-left: 5px;
   text-transform: capitalize; }
+.wp-travel.trip-headline-wrapper .wp-travel-booking-enquiry {
+  display: inline-block;
+  color: #505050;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out; }
+  .wp-travel.trip-headline-wrapper .wp-travel-booking-enquiry:hover {
+    color: #df1814;
+    transition: all 0.4s ease-in-out; }
 
 .trip-price del {
   opacity: 0.5;
@@ -1325,5 +1335,40 @@
       .widget .wp-travel-itinerary-widget li .wp-travel-itinerary-info del {
         margin-right: 10px;
         opacity: 0.5; }
+
+/* enquiry form single trips */
+#wp-travel-enquiries {
+  max-width: 300px;
+  margin: 0 auto;
+  top: 0;
+  background: #ddd;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  display: block;
+  border-radius: 5px; }
+  #wp-travel-enquiries:after, #wp-travel-enquiries:before {
+    content: "";
+    display: table;
+    clear: both; }
+  #wp-travel-enquiries .wp-travel-form-field label {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px; }
+  #wp-travel-enquiries .wp-travel-form-field input, #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field select, #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: .6em 1em .6em; }
+  #wp-travel-enquiries .wp-travel-form-field.textarea-field {
+    margin-bottom: 15px; }
+
+.mfp-wrap #wp-travel-enquiries button.mfp-close {
+  right: -3px;
+  top: -2px;
+  background-color: transparent;
+  box-shadow: none; }
+  .mfp-wrap #wp-travel-enquiries button.mfp-close:hover {
+    color: #f83531; }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
