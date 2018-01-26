@@ -57,19 +57,24 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
                 'meta_query' => array( 
                     'key' => 'wp_travel_enable_sale',
                     'value' => 1,
-                    'compare' => '=' 
+                    'compare' => '='
                 )) 
             );
         ?>
-		<?php if ( count( $itineraries ) > 0 ) : 
-		
-			while( $itineraries->have_posts() ) : $itineraries->the_post();
+		<?php if ( count( $itineraries ) > 0 ) : ?>
 
-            ?>
-				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
+		<div class="wp-travel-itinerary-items">
+			<ul class="wp-travel-itinerary-list">
+
+				<?php while( $itineraries->have_posts() ) : $itineraries->the_post(); ?>
+				
+					<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); ?>
+
+				<?php endwhile; wp_reset_postdata(); ?>
 			
-			endwhile; wp_reset_postdata();
-			?>
+			</ul>
+		</div>
+		
 		<?php else : ?>
 			<p class="itinerary-none"><?php esc_html_e( 'Featured itinerary not found.', 'wp-travel' ) ?></p>
 		<?php endif;

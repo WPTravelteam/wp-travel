@@ -304,6 +304,7 @@
         $('.panel-collapse').addClass('in');
         $(this).hide();
         $('.close-all-link').show();
+        $('#tab-accordion .panel-collapse').css('height','auto');
     });
     $('.close-all-link').click(function(e) {
         e.preventDefault();

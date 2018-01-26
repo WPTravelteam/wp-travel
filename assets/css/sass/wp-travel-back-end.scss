@@ -617,10 +617,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .panel-heading {
         position: relative;
         .collapse-icon {
-            position: relative;
+            position: absolute;
             right: 50px;
             width: 20px;
             height: 20px;
+            top: calc( 50% - 10px );
             border-radius: 50%;
             float: right;
             text-align: center;
@@ -659,12 +660,18 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         a {
             color: #999;
             text-decoration: none;
+
+            .faq-label {
+                padding-right: 50px;
+                display: block;
+            }
         }
         .wt-accordion-close {
             position: absolute;
             right: 10px;
             color: #ca4a1f;
             font-size: 16px;
+            top: calc( 50% - 10px );
         }
     }
     .panel-collapse {
@@ -690,6 +697,10 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             display: block;
             border: 1px solid #ddd;
         }
+        .faq-question-text {
+            width: 100%;
+            margin-top: 5px;
+        }
     } 
     .panel-default {
         margin-bottom: 15px;
@@ -713,12 +724,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         display: inline-block;
         width: 60%;
     }
-    .wp-travel-sorting-tabs {
-        .wp-travel-sorting-handle:before {
-            left: 9px;
-            top: 10px;
-        }
-    }
+    
 }
 
 .wp-travel-tabs-contents {
@@ -735,10 +741,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             content: "\f545";
             font-size: 16px;
             font-family: dashicons;
-            position:absolute;
+            position: absolute;
             z-index: 2;
             color: #666;
             cursor: move;
+            width: 20px;
+            height: 20px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
         }
     }
     .wp-travel-sorting-tabs {
@@ -858,7 +871,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &:after {
             content: attr(data-off);
             float: right;
-            padding: 2px 6px 0 0;
+            padding: 2px 5px 0 0;
         }
     }
     input {
