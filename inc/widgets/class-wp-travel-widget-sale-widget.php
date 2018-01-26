@@ -56,7 +56,7 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
             'posts_per_page' => $no_of_trip_show, 
                 'meta_query' => array( 
                     'key' => 'wp_travel_enable_sale',
-                    'value' => 1,
+                    'value' => true,
                     'compare' => '='
                 )) 
             );
