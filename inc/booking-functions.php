@@ -751,72 +751,80 @@ function get_booking_chart() {
 	?>
 	<div class="wrap">
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
-		<div class="left-block stat-toolbar-wrap">
-			<div class="stat-toolbar">
+		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
 					<input type="hidden" name="post_type" value="itineraries" >
 					<input type="hidden" name="page" value="booking_chart">
 					<?php
 					// @since 1.0.6 // Hook since
 					do_action( 'wp_travel_before_stat_toolbar_fields' ); ?>
-					<p class="field-group compare" style="display:block; width:85%">
-						<span class="field-label"><?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>:</span>
-						<label>
-						<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ) ?> />
-							<?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>
-						</label>
-					</p>
-					
-					<!-- Field groups -->
-					<p class="field-group field-group-stat">
-						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
-						<label class="input-group-addon btn" for="testdate">
-						<span class="dashicons dashicons-calendar-alt"></span>
-						</label>        
-					</p>
-					<p class="field-group field-group-stat">
-						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
-						<label class="input-group-addon btn" for="testdate">
-						<span class="dashicons dashicons-calendar-alt"></span>
-						</label> 
-					</p>
-					<p class="field-group field-group-stat">
-						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+					<div class="show-all compare">
+						<p class="show-compare-stat">
+						<span class="checkbox-default-design">
+							<span class="field-label"><?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>:</span>
+							<label data-on="ON" data-off="OFF">
+								<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ) ?>>						
+								<span class="switch">
+							  </span>
+							</label>
+						</span>
 
-						<select class="selectpicker form-control" name="booking_country">
-						
-							<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
+						</p>
+					</div>
+					<div class="form-compare-stat clearfix">
+						<!-- Field groups -->
+						<p class="field-group field-group-stat">
+							<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
+							<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
+							<label class="input-group-addon btn" for="testdate">
+							<span class="dashicons dashicons-calendar-alt"></span>
+							</label>        
+						</p>
+						<p class="field-group field-group-stat">
+							<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
+							<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
+							<label class="input-group-addon btn" for="testdate">
+							<span class="dashicons dashicons-calendar-alt"></span>
+							</label> 
+						</p>
+						<p class="field-group field-group-stat">
+							<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+
+							<select class="selectpicker form-control" name="booking_country">
 							
-							<?php foreach ( $country_list as $key => $value ) : ?>
-								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
-									<?php echo esc_html( $value ); ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
+								<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
+								
+								<?php foreach ( $country_list as $key => $value ) : ?>
+									<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
+										<?php echo esc_html( $value ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 
-					</p>
-					<p class="field-group field-group-stat">
-						<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
-						<select class="selectpicker form-control" name="booking_itinerary">
-							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
-							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
-									<?php echo esc_html( $itinerary_name ); ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-					</p>
+						</p>
+						<p class="field-group field-group-stat">
+							<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
+							<select class="selectpicker form-control" name="booking_itinerary">
+								<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
+								<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
+									<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
+										<?php echo esc_html( $itinerary_name ); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</p>
 
-					<?php
-					// @since 1.0.6 // Hook since
-					do_action( 'wp_travel_after_stat_toolbar_fields' ); ?>
-					<div class="show-all" style="display:<?php echo esc_attr ( 'yes' === $compare_stat ) ? 'none' : 'block' ?>">
-						<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
+						<?php
+						// @since 1.0.6 // Hook since
+						do_action( 'wp_travel_after_stat_toolbar_fields' ); ?>
+						<div class="show-all">
+							<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
+						</div>
+						
 					</div>
 
 					<?php $field_group_display = ( 'yes' === $compare_stat ) ? 'block' : 'none';  ?>
+					<div class="additional-compare-stat clearfix">
 					<!-- Field groups to compare -->
 					<p class="field-group field-group-compare" style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
@@ -858,11 +866,16 @@ function get_booking_chart() {
 							<?php endforeach; ?>
 						</select>
 					</p>
-					<div class="compare-all" style="display:<?php echo esc_attr( $field_group_display ) ?>">
+					<div class="compare-all field-group-compare" style="display:<?php echo esc_attr( $field_group_display ) ?>">
 						<?php submit_button( esc_attr__( 'Compare', 'wp-travel' ), 'primary', 'submit' ) ?>
 					</div>
+					</div>
+
+
 				</form>
-			</div>			
+			</div>	
+		<div class="left-block stat-toolbar-wrap">
+					
 		</div>
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
