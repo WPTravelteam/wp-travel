@@ -656,117 +656,113 @@ function wp_travel_get_booking_data() {
 	$top_country_where = '';
 	$top_itinerary_where = '';
 	$groupby = '';
+	$max_bookings = 0;
+	$max_pax = 0;
+
+	$from_date = '';
+	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
+		$from_date = $_REQUEST['booking_stat_from'];
+	}
+	$to_date = '';
+	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
+		$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
+	}
+	$country = '';
+	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
+		$country = $_REQUEST['booking_country'];
+	}
+
+	$itinerary = '';
+	if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
+		$itinerary = $_REQUEST['booking_itinerary'];
+	}
 
 	// Stat Data Array
+	
+	// Setting conditions.
+	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
+		// Set initial load to false if there is extra get variables.
+		$initial_load = false;
+
+		if ( '' !== $itinerary ) {
+			$where 	 .= " and itinerary_id={$itinerary} ";
+			$top_country_where .= $where;
+			$groupby .= ' itinerary_id,';
+		}
+		if ( '' !== $country ) {
+			$where   .= " and country='{$country}'";
+			$top_itinerary_where .= " and country='{$country}'";
+			$groupby .= ' country,';
+		}
+
+		if ( '' !== $from_date && '' !== $to_date ) {
+
+			$date_format = 'Y-m-d H:i:s';
+
+			$booking_from = date( $date_format, strtotime( $from_date ) );
+			$booking_to   = date( $date_format, strtotime( $to_date ) );
+
+			$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+		}
+		$limit = '';
+	}
+
+	// Booking Data Default Query.
+	$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
+	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+		$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
+		from (
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+			join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
+			group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
+		) Booking 
+		where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
+		$results =  $wpdb->get_results( $query );
+		// set initial load transient for stat data.
+		if ( $initial_load && ! $initial_transient ) {
+			set_site_transient( '_transient_wt_booking_stat_data', $results );
+		}
+	}
+
+	$stat_data = array();
+	$date_format = 'm/d/Y';
+	$booking_stat_from = $booking_stat_to = date( $date_format );
+
+	$temp_stat_data = array();
+	$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
+	if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
+	}
+	$temp_stat_data['data_bg_color'] = __( '#00f' );
+	$temp_stat_data['data_border_color'] = __( '#00f' );
+
+	if ( is_array( $results ) && count( $results ) > 0 ) {
+		foreach ( $results as $result ) {
+			$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
+			$label_date = date( $date_format, strtotime( $label_date ) );
+
+			$temp_stat_data['data'][$label_date] = $result->no_of_booking;
+
+			$max_bookings += ( int ) $result->no_of_booking;
+			$max_pax += ( int ) $result->no_of_pax;
+
+			if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
+
+				$booking_stat_from = date( 'm/d/Y', strtotime( $label_date ) );
+			}
+
+			if ( strtotime( $booking_stat_to ) < strtotime( $label_date ) ) {
+				$booking_stat_to = date( 'm/d/Y', strtotime( $label_date ) );
+			}
+		}
+	}
 	if ( 
 		! isset( $_REQUEST['chart_type'] ) ||
 		( isset( $_REQUEST['chart_type'] ) && ( $_REQUEST['chart_type'] == 'booking' || $_REQUEST['chart_type'] == 'both' ) ) ) {
-
-		
-		$from_date = '';
-		if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
-			$from_date = $_REQUEST['booking_stat_from'];
-		}
-		$to_date = '';
-		if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
-			$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
-		}
-		$country = '';
-		if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
-			$country = $_REQUEST['booking_country'];
-		}
-
-		$itinerary = '';
-		if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
-			$itinerary = $_REQUEST['booking_itinerary'];
-		}
-
-		// Setting conditions.
-		if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
-			// Set initial load to false if there is extra get variables.
-			$initial_load = false;
-
-			if ( '' !== $itinerary ) {
-				$where 	 .= " and itinerary_id={$itinerary} ";
-				$top_country_where .= $where;
-				$groupby .= ' itinerary_id,';
-			}
-			if ( '' !== $country ) {
-				$where   .= " and country='{$country}'";
-				$top_itinerary_where .= " and country='{$country}'";
-				$groupby .= ' country,';
-			}
-
-			if ( '' !== $from_date && '' !== $to_date ) {
-
-				$date_format = 'Y-m-d H:i:s';
-
-				$booking_from = date( $date_format, strtotime( $from_date ) );
-				$booking_to   = date( $date_format, strtotime( $to_date ) );
-
-				$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-				$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-				$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-			}
-			$limit = '';
-		}
-
-		// Booking Data Default Query.
-		$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
-		if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
-			$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
-			from (
-				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
-				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
-				join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
-				join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
-				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
-			) Booking 
-			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
-			$results =  $wpdb->get_results( $query );
-			// set initial load transient for stat data.
-			if ( $initial_load && ! $initial_transient ) {
-				set_site_transient( '_transient_wt_booking_stat_data', $results );
-			}
-		}
-
-		$stat_data = array();
-		$date_format = 'm/d/Y';
-
-		$max_bookings = 0;
-		$max_pax = 0;
-		$booking_stat_from = $booking_stat_to = date( $date_format );
-
-		$temp_stat_data = array();
-		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
-		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
-		}
-		$temp_stat_data['data_bg_color'] = __( '#00f' );
-		$temp_stat_data['data_border_color'] = __( '#00f' );
-
-		if ( is_array( $results ) && count( $results ) > 0 ) {
-			foreach ( $results as $result ) {
-				$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
-				$label_date = date( $date_format, strtotime( $label_date ) );
-
-				$temp_stat_data['data'][$label_date] = $result->no_of_booking;
-				// $temp_stat_data['name'] = 'test';
-				// $temp_stat_data['labels'][] = $label_date;
-
-				$max_bookings += ( int ) $result->no_of_booking;
-				$max_pax += ( int ) $result->no_of_pax;
-
-				if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
-
-					$booking_stat_from = date( 'm/d/Y', strtotime( $label_date ) );
-				}
-
-				if ( strtotime( $booking_stat_to ) < strtotime( $label_date ) ) {
-					$booking_stat_to = date( 'm/d/Y', strtotime( $label_date ) );
-				}
-			}
-		}
 		$data[] = $temp_stat_data;
 	}
 
