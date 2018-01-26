@@ -587,7 +587,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .checkbox-default-design label:after {
     content: attr(data-off);
     float: right;
-    padding: 2px 6px 0 0; }
+    padding: 2px 5px 0 0; }
 .checkbox-default-design input, .checkbox-default-design .wp-travel-form-field select, .wp-travel-form-field .checkbox-default-design select, .checkbox-default-design .wp-travel-form-field .stat-toolbar-form .field-group input, .wp-travel-form-field .stat-toolbar-form .field-group .checkbox-default-design input, .checkbox-default-design .stat-toolbar-form .field-group .wp-travel-form-field input, .stat-toolbar-form .field-group .wp-travel-form-field .checkbox-default-design input, .checkbox-default-design .wp-travel-form-field textarea, .wp-travel-form-field .checkbox-default-design textarea {
   position: absolute;
   opacity: 0; }
