@@ -31,11 +31,11 @@
 	</tr>        
 	
 	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
-		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting date', 'wp-travel' ); ?></label></td>
+		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
 	</tr>
 	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
-		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending date', 'wp-travel' ); ?></label></td>
+		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
 </table>

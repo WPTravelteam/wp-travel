@@ -8,11 +8,11 @@
 		<td><?php wp_editor( '', 'wp_travel_outline' ); ?></td>
 	</tr>
 	<tr>
-		<td><label for="wp_travel_outline"><?php esc_html_e( 'Starting date', 'wp-travel' ); ?></label></td>
+		<td><label for="wp_travel_outline"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" /></td>
 	</tr>
 	<tr>
-		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending date', 'wp-travel' ); ?></label></td>
+		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" /></td>
 	</tr>
 </table>
