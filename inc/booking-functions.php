@@ -745,6 +745,9 @@ function get_booking_chart() {
 
 	$from_date = ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) ? rawurldecode( $_REQUEST['booking_stat_from'] ) : '';
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
+	
+	$compare_stat = ( isset( $_REQUEST['compare_stat'] ) && '' !== $_REQUEST['compare_stat'] ) ? rawurldecode( $_REQUEST['compare_stat'] ) : '';
+	
 	?>
 	<div class="wrap">
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
@@ -756,21 +759,30 @@ function get_booking_chart() {
 					<?php
 					// @since 1.0.6 // Hook since
 					do_action( 'wp_travel_before_stat_toolbar_fields' ); ?>
-					<p class="field-group">
+					<p class="field-group compare" style="display:block; width:85%">
+						<span class="field-label"><?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>:</span>
+						<label>
+						<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ) ?> />
+							<?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>
+						</label>
+					</p>
+					
+					<!-- Field groups -->
+					<p class="field-group field-group-stat">
 						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_from" id="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
+						<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>        
 					</p>
-					<p class="field-group">
+					<p class="field-group field-group-stat">
 						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
-						<input type="text" name="booking_stat_to" id="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
+						<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
 						<label class="input-group-addon btn" for="testdate">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label> 
 					</p>
-					<p class="field-group">
+					<p class="field-group field-group-stat">
 						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
 
 						<select class="selectpicker form-control" name="booking_country">
@@ -785,7 +797,7 @@ function get_booking_chart() {
 						</select>
 
 					</p>
-					<p class="field-group">
+					<p class="field-group field-group-stat">
 						<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
 						<select class="selectpicker form-control" name="booking_itinerary">
 							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
@@ -796,12 +808,59 @@ function get_booking_chart() {
 							<?php endforeach; ?>
 						</select>
 					</p>
+
 					<?php
 					// @since 1.0.6 // Hook since
 					do_action( 'wp_travel_after_stat_toolbar_fields' ); ?>
-					<p class="show-all">
+					<div class="show-all" style="display:<?php echo esc_attr ( 'yes' === $compare_stat ) ? 'none' : 'block' ?>">
 						<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
+					</div>
+
+					<?php $field_group_display = ( 'yes' === $compare_stat ) ? 'block' : 'none';  ?>
+					<!-- Field groups to compare -->
+					<p class="field-group field-group-compare" style="display:<?php echo esc_attr( $field_group_display ) ?>" >
+						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
+						<input type="text" name="compare_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
+						<label class="input-group-addon btn" for="testdate">
+						<span class="dashicons dashicons-calendar-alt"></span>
+						</label>        
 					</p>
+					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
+						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
+						<input type="text" name="compare_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
+						<label class="input-group-addon btn" for="testdate">
+						<span class="dashicons dashicons-calendar-alt"></span>
+						</label> 
+					</p>
+					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
+						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
+
+						<select class="selectpicker form-control" name="compare_country">
+						
+							<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
+							
+							<?php foreach ( $country_list as $key => $value ) : ?>
+								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
+									<?php echo esc_html( $value ); ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+
+					</p>
+					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
+						<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
+						<select class="selectpicker form-control" name="compare_itinerary">
+							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
+							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
+								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
+									<?php echo esc_html( $itinerary_name ); ?>
+								</option>
+							<?php endforeach; ?>
+						</select>
+					</p>
+					<div class="compare-all" style="display:<?php echo esc_attr( $field_group_display ) ?>">
+						<?php submit_button( esc_attr__( 'Compare', 'wp-travel' ), 'primary', 'submit' ) ?>
+					</div>
 				</form>
 			</div>			
 		</div>
