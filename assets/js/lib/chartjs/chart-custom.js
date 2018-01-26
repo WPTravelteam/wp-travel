@@ -49,8 +49,8 @@ jQuery(document).ready(function($) {
     $('.wp-travel-max-pax').html(wp_travel_chart_data.max_pax);
     $('.wp-travel-top-countries').html(wp_travel_chart_data.top_countries);
 
-    $('#datepicker-from').val(wp_travel_chart_data.booking_stat_from);
-    $('#datepicker-to').val(wp_travel_chart_data.booking_stat_to);
+    $('.datepicker-from').val(wp_travel_chart_data.booking_stat_from);
+    $('.datepicker-to').val(wp_travel_chart_data.booking_stat_to);
 
     var edit_url = 'javascript:void(0)';
     if (wp_travel_chart_data.top_itinerary.id) {
@@ -58,15 +58,15 @@ jQuery(document).ready(function($) {
     }
     $('.wp-travel-top-itineraries').attr('href', edit_url).html(wp_travel_chart_data.top_itinerary.name);
 
-    $('#datepicker-from').datepicker({
+    $('.datepicker-from').datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
             newMinDate = null;
             newMaxDate = new Date();
-            $('#datepicker-to').removeAttr('required');
+            $('.datepicker-to').removeAttr('required');
             if ('' !== dateStr) {
-                $('#datepicker-to').attr('required', 'required');
+                $('.datepicker-to').attr('required', 'required');
                 new_date_min = new Date(dateStr);
                 new_date_max = new Date(dateStr);
 
@@ -77,22 +77,22 @@ jQuery(document).ready(function($) {
                     newMaxDate = maxDate;
                 }
             }
-            $('#datepicker-to').datepicker({
+            $('.datepicker-to').datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });
         }
     }).attr('readonly', 'readonly');
 
-    $('#datepicker-to').datepicker({
+    $('.datepicker-to').datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
             newMinDate = new Date();
             newMaxDate = null;
-            $('#datepicker-from').removeAttr('required');
+            $('.datepicker-from').removeAttr('required');
             if ('' !== dateStr) {
-                $('#datepicker-from').attr('required', 'required');
+                $('.datepicker-from').attr('required', 'required');
                 new_date_min = new Date(dateStr);
                 new_date_max = new Date(dateStr);
 
@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
                 newMaxDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate() - 1)));
 
             }
-            $('#datepicker-from').datepicker({
+            $('.datepicker-from').datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });
@@ -144,5 +144,20 @@ jQuery(document).ready(function($) {
         $(this).prev().toggle();
         return false;
     });
+
+
+    $(document).on('click', '#compare-stat', function() {
+        var fgc = $('.field-group-compare');
+        var btn_show_all = $('.show-all');
+        var btn_compare_all = $('.compare-all');
+        fgc.hide();
+        btn_show_all.show()
+        btn_compare_all.hide()
+        if ($(this).is(':checked')) {
+            fgc.show();
+            btn_show_all.hide()
+            btn_compare_all.show()
+        }
+    })
 
 })
