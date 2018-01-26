@@ -1178,7 +1178,7 @@ function wp_travel_get_faqs( $post_id ) {
 	return $faq;
 }
 
-function wp_travel_make_stat_data( $stat_datas ) {
+function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 	if ( ! $stat_datas ) {
 		return;
 	}
@@ -1196,7 +1196,6 @@ function wp_travel_make_stat_data( $stat_datas ) {
 		}
 	}
 
-	
 	if ( is_array( $data ) ) {
 		if ( count( $data ) == 1  ) {
 			$default_array_key = array_keys( $data[0] );
@@ -1214,14 +1213,16 @@ function wp_travel_make_stat_data( $stat_datas ) {
 						return strtotime( $a ) > strtotime( $b );
 					});
 				}
-				// print_r($array_with_all_keys);
 				$default_array_key = array_keys( $array_with_all_keys );
-				$array_key_default_val = array_fill_keys( $default_array_key, 0 );
+				$default_stat_val = null;
+				if ( $show_empty ) {
+					$default_stat_val = 0;
+				}
+				$array_key_default_val = array_fill_keys( $default_array_key, $default_stat_val );
 
 				$new_data = array();
 				for( $i=0; $i< count( $data ); $i++ ) {
 					$new_array = array_merge( $array_key_default_val, $data[$i] );
-					// print_r($new_array);
 					uksort($new_array,function($a, $b){
 						return strtotime( $a ) > strtotime( $b );
 					});
@@ -1235,10 +1236,7 @@ function wp_travel_make_stat_data( $stat_datas ) {
 		$new_return_data['data_label'] = $data_label;
 		$new_return_data['data_bg_color'] = $data_bg_color;
 		$new_return_data['data_border_color'] = $data_border_color;
-		
-		// echo '<pre>';
-		// print_r($new_return_data);
-		// die;
+
 		return $new_return_data;
 	}
 }
