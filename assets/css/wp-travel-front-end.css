@@ -622,7 +622,10 @@
     background: #fff;
     width: calc( 33.333% - 20px);
     height: auto;
-    margin: 10px; }
+    margin: 10px;
+    padding-left: 0; }
+    .wp-travel-itinerary-items ul.wp-travel-itinerary-list li:before {
+      content: none; }
     @media (max-width: 992px) {
       .wp-travel-itinerary-items ul.wp-travel-itinerary-list li {
         width: calc( 50% - 20px); } }
