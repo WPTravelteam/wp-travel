@@ -44,11 +44,16 @@
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
 		<td>
+			<span class="show-in-frontend checkbox-default-design">
+				<label data-on="ON" data-off="OFF">
+					<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" " />							
+					<span class="switch">
+				  </span>
+				 
+				</label>
+			</span>
+			 <span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
 			
-			<label>
-				<input type="checkbox" name="wp_travel_enable_sale" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" />
-				<span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
-			</label>
 		</td>
 	</tr>
 	<tr style="<?php echo esc_attr( $sale_price_style ); ?>">

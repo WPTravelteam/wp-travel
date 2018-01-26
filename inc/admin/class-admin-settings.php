@@ -161,7 +161,13 @@ class WP_Travel_Admin_Settings {
 					<label for="currency"><?php esc_html_e( 'Hide related ', 'wp-travel' ); echo esc_attr( WP_TRAVEL_POST_TITLE ); ?></label>
 				</th>
 				<td>
-					<input type="checkbox" <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary" type="checkbox" />						
+							<span class="switch">
+						  </span>
+						</label>
+					</span>
 					<p class="description"><?php esc_html_e( sprintf( 'This will hide your related %s.', WP_TRAVEL_POST_TITLE ), 'wp-travel' );  ?></p>
 				</td>
 			<tr>
@@ -187,8 +193,13 @@ class WP_Travel_Admin_Settings {
 					<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
 				</th>
 				<td>
-					<input type="checkbox" <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin"/>
-
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />						
+							<span class="switch">
+						  </span>
+						</label>
+					</span>
 				</td>
 			<tr>
 		</table>

@@ -173,6 +173,9 @@ $alabaster: #f7f7f1; // Red like color.
     }
 }
 
+.wp-travel-enable-sale {
+    margin-left: 15px;
+}
 body.post-type-itineraries .wp-travel-open-upload-area .button {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -181,6 +184,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     padding: 0 16px 1px;
     height: 33px;
     line-height: 30px;
+    text-transform: capitalize;
     text-decoration: none;
     text-shadow: none;
     font-weight: 600;
