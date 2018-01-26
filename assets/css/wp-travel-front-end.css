@@ -1362,6 +1362,13 @@
     padding: .6em 1em .6em; }
   #wp-travel-enquiries .wp-travel-form-field.textarea-field {
     margin-bottom: 15px; }
+  #wp-travel-enquiries .parsley-errors-list {
+    position: relative;
+    margin-left: 0;
+    padding-left: 15px;
+    margin-bottom: 0;
+    margin-top: -15px;
+    font-size: 12px; }
 
 .mfp-wrap #wp-travel-enquiries button.mfp-close {
   right: -3px;

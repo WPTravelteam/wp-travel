@@ -1,5 +1,5 @@
 .itenary {
-    padding: 70px 0;
+    padding: 20px 0;
 }
 
 .row-reverse {
@@ -176,7 +176,7 @@
         margin-top: 0;
         padding: 0 0 10px 20px;
     }
-    .itenary .image {
+    .itenary .image,.itenary .row-reverse .image {
         height: 15px;
         width: 15px;
         left: -8.5px;
