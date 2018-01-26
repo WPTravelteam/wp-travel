@@ -427,6 +427,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         position: relative;
         .field-label {
             cursor: pointer;
+            text-transform: capitalize;
         }
         select {
             width: 100%;

@@ -281,7 +281,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     box-sizing: border-box;
     position: relative; }
     .stat-toolbar-form .field-group .field-label {
-      cursor: pointer; }
+      cursor: pointer;
+      text-transform: capitalize; }
     .stat-toolbar-form .field-group select, .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field textarea, .wp-travel-form-field .stat-toolbar-form .field-group textarea {
       width: 100%; }
     .stat-toolbar-form .field-group input[readonly], .stat-toolbar-form .field-group .wp-travel-form-field select[readonly], .wp-travel-form-field .stat-toolbar-form .field-group select[readonly], .stat-toolbar-form .field-group .wp-travel-form-field textarea[readonly], .wp-travel-form-field .stat-toolbar-form .field-group textarea[readonly] {
