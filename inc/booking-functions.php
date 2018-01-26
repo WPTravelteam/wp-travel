@@ -797,7 +797,7 @@ function get_booking_chart() {
 
 							<select class="selectpicker form-control" name="booking_country">
 							
-								<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
+								<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ) ?></option>
 								
 								<?php foreach ( $country_list as $key => $value ) : ?>
 									<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
@@ -810,7 +810,7 @@ function get_booking_chart() {
 						<p class="field-group field-group-stat">
 							<span class="field-label"><?php echo esc_html( WP_TRAVEL_POST_TITLE ); ?>:</span>
 							<select class="selectpicker form-control" name="booking_itinerary">
-								<option value=""><?php esc_html_e( 'Select ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );  ?></option>
+								<option value=""><?php esc_html_e( 'All ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );  ?></option>
 								<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 									<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
 										<?php echo esc_html( $itinerary_name ); ?>
@@ -850,7 +850,7 @@ function get_booking_chart() {
 
 						<select class="selectpicker form-control" name="compare_country">
 						
-							<option value=""><?php esc_html_e( 'Select Country', 'wp-travel' ) ?></option>
+							<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ) ?></option>
 							
 							<?php foreach ( $country_list as $key => $value ) : ?>
 								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $compare_selected_country ) ?>>
@@ -863,7 +863,7 @@ function get_booking_chart() {
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php echo esc_html( WP_TRAVEL_POST_TITLE ); ?>:</span>
 						<select class="selectpicker form-control" name="compare_itinerary">
-							<option value=""><?php esc_html_e( 'Select ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR ); ?></option>
+							<option value=""><?php esc_html_e( 'All ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR ); ?></option>
 							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $compare_itinerary_post_id, $itinerary_id ) ?>>
 									<?php echo esc_html( $itinerary_name ); ?>
