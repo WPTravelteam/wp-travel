@@ -249,7 +249,6 @@ class WP_Travel_Admin_Settings {
 						  </span>
 						</label></span>
 					</td>
-					
 				</tr>
 			<?php
 				endforeach;
