@@ -160,6 +160,7 @@ jQuery(document).ready(function($) {
         $('.panel-collapse').addClass('in');
         // $(this).hide();
         $('.close-all-link').show();
+        $('.panel-collapse').css('height','auto');
     });
     $('.close-all-link').click(function(e) {
         e.preventDefault();
