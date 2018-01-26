@@ -31,6 +31,7 @@ jQuery(document).ready(function($) {
     $('#wp-travel-send-enquiries').magnificPopup({
         type: 'inline',
         preloader: false,
+        focus: '#wp-travel-fname',
     });
 
     $('#wp-travel-tab-wrapper').easyResponsiveTabs({
