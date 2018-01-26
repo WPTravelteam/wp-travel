@@ -975,7 +975,7 @@
   bottom: 0;
   background: #00921d;
   color: #fff;
-  right: -12px;
+  right: -8px;
   padding: 5px 8px;
   text-align: center;
   z-index: 2; }
@@ -986,7 +986,7 @@
     top: 100%;
     z-index: 1;
     border-left: 4px solid #005d12;
-    border-right: 8px solid transparent;
+    border-right: 4px solid transparent;
     border-bottom: 2px solid transparent;
     border-top: 3px solid #005d12; }
   .wp-travel-savings span {
@@ -1026,14 +1026,14 @@
 #faq .panel-heading {
   position: relative; }
   #faq .panel-heading .collapse-icon {
-    position: relative;
+    position: absolute;
     right: 15px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     float: right;
     text-align: center;
-    top: -4px; }
+    top: calc( 50% - 13px ); }
   #faq .panel-heading [data-toggle="collapse"] {
     color: #444; }
     #faq .panel-heading [data-toggle="collapse"] span.collapse-icon:after {
@@ -1051,7 +1051,7 @@
     outline: none; }
 #faq h4 {
   border: 1px solid #ddd;
-  padding: 10px 15px;
+  padding: 10px 40px 10px 15px;
   margin: 0;
   background-color: #f7f7f1;
   position: relative;

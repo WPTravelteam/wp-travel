@@ -81,8 +81,8 @@ class WP_Travel_Admin_Settings {
 		);
 
 		$settings_fields['itinerary'] = array(
-			'tab_label' => __( 'Itinerary', 'wp-travel' ),
-			'content_title' => __( 'Itinerary Settings', 'wp-travel' ),
+			'tab_label' => __( WP_TRAVEL_POST_TITLE_SINGULAR ),
+			'content_title' => __( WP_TRAVEL_POST_TITLE_SINGULAR . ' Settings', 'wp-travel' ),
 		);
 
 		$settings_fields['email'] = array(
@@ -158,11 +158,11 @@ class WP_Travel_Admin_Settings {
 		<table class="form-table">
 			<tr>
 				<th>
-					<label for="currency"><?php esc_html_e( 'Hide related itinerary', 'wp-travel' ); ?></label>
+					<label for="currency"><?php esc_html_e( 'Hide related ', 'wp-travel' ); echo esc_attr( WP_TRAVEL_POST_TITLE ); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary"/>
-					<p class="description"><?php esc_html_e( 'This will hide your related itineraries.', 'wp-travel' ) ?></p>
+					<p class="description"><?php esc_html_e( sprintf( 'This will hide your related %s.', WP_TRAVEL_POST_TITLE ), 'wp-travel' );  ?></p>
 				</td>
 			<tr>
 		</table>

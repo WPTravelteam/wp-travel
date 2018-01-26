@@ -265,7 +265,7 @@ function wp_travel_booking_info( $post ) {
 			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 			<div class="wp-travel-form-field full-width">
-				<label for="wp-travel-post-id"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></label>
+				<label for="wp-travel-post-id"><?php echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR ); ?></label>
 				<select id="wp-travel-post-id" name="wp_travel_post_id" >
 				<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 					<option value="<?php echo esc_attr( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
@@ -808,9 +808,9 @@ function get_booking_chart() {
 
 						</p>
 						<p class="field-group field-group-stat">
-							<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
+							<span class="field-label"><?php echo esc_html( WP_TRAVEL_POST_TITLE ); ?>:</span>
 							<select class="selectpicker form-control" name="booking_itinerary">
-								<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
+								<option value=""><?php esc_html_e( 'Select ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );  ?></option>
 								<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 									<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>
 										<?php echo esc_html( $itinerary_name ); ?>
@@ -861,9 +861,9 @@ function get_booking_chart() {
 
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
-						<span class="field-label"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?>:</span>
+						<span class="field-label"><?php echo esc_html( WP_TRAVEL_POST_TITLE ); ?>:</span>
 						<select class="selectpicker form-control" name="compare_itinerary">
-							<option value=""><?php esc_html_e( 'Select Itinerary', 'wp-travel' ) ?></option>
+							<option value=""><?php esc_html_e( 'Select ', 'wp-travel' ); echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR ); ?></option>
 							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $compare_itinerary_post_id, $itinerary_id ) ?>>
 									<?php echo esc_html( $itinerary_name ); ?>
