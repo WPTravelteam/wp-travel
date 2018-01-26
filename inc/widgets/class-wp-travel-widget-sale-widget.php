@@ -65,11 +65,15 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 		
 			while( $itineraries->have_posts() ) : $itineraries->the_post();
 
-            ?>
-				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
+        ?>
+			<div class="wp-travel-itinerary-items">
+				<ul class="wp-travel-itinerary-list">
+					<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); ?>
+				</ul>
+			</div>
 			
-			endwhile; wp_reset_postdata();
-			?>
+		<?php endwhile; wp_reset_postdata(); ?>
+		
 		<?php else : ?>
 			<p class="itinerary-none"><?php esc_html_e( 'Featured itinerary not found.', 'wp-travel' ) ?></p>
 		<?php endif;
