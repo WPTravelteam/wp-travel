@@ -645,6 +645,7 @@ function wp_travel_is_enable_sale( $post_id ) {
  */
 function wp_travel_get_booking_data() {
 	global $wpdb;
+	$data = array();
 
 	$initial_load = true;
 
@@ -656,57 +657,186 @@ function wp_travel_get_booking_data() {
 	$top_itinerary_where = '';
 	$groupby = '';
 
-	$from_date = '';
-	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
-		$from_date = $_REQUEST['booking_stat_from'];
-	}
-	$to_date = '';
-	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
-		$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
-	}
-	$country = '';
-	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
-		$country = $_REQUEST['booking_country'];
-	}
+	// Stat Data Array
+	if ( 
+		! isset( $_REQUEST['chart_type'] ) ||
+		( isset( $_REQUEST['chart_type'] ) && ( $_REQUEST['chart_type'] == 'booking' || $_REQUEST['chart_type'] == 'both' ) ) ) {
 
-	$itinerary = '';
-	if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
-		$itinerary = $_REQUEST['booking_itinerary'];
-	}
-
-	// Setting conditions.
-	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
-		// Set initial load to false if there is extra get variables.
-		$initial_load = false;
-
-		if ( '' !== $itinerary ) {
-			$where 	 .= " and itinerary_id={$itinerary} ";
-			$top_country_where .= $where;
-			$groupby .= ' itinerary_id,';
+		
+		$from_date = '';
+		if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
+			$from_date = $_REQUEST['booking_stat_from'];
 		}
-		if ( '' !== $country ) {
-			$where   .= " and country='{$country}'";
-			$top_itinerary_where .= " and country='{$country}'";
-			$groupby .= ' country,';
+		$to_date = '';
+		if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
+			$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
+		}
+		$country = '';
+		if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
+			$country = $_REQUEST['booking_country'];
 		}
 
-		if ( '' !== $from_date && '' !== $to_date ) {
-
-			$date_format = 'Y-m-d H:i:s';
-
-			$booking_from = date( $date_format, strtotime( $from_date ) );
-			$booking_to   = date( $date_format, strtotime( $to_date ) );
-
-			$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-			$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-			$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+		$itinerary = '';
+		if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
+			$itinerary = $_REQUEST['booking_itinerary'];
 		}
-		$limit = '';
+
+		// Setting conditions.
+		if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
+			// Set initial load to false if there is extra get variables.
+			$initial_load = false;
+
+			if ( '' !== $itinerary ) {
+				$where 	 .= " and itinerary_id={$itinerary} ";
+				$top_country_where .= $where;
+				$groupby .= ' itinerary_id,';
+			}
+			if ( '' !== $country ) {
+				$where   .= " and country='{$country}'";
+				$top_itinerary_where .= " and country='{$country}'";
+				$groupby .= ' country,';
+			}
+
+			if ( '' !== $from_date && '' !== $to_date ) {
+
+				$date_format = 'Y-m-d H:i:s';
+
+				$booking_from = date( $date_format, strtotime( $from_date ) );
+				$booking_to   = date( $date_format, strtotime( $to_date ) );
+
+				$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			}
+			$limit = '';
+		}
+
+		// Booking Data Default Query.
+		$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
+		if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+			$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
+			from (
+				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
+				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+				join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
+				join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
+				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
+			) Booking 
+			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
+			$results =  $wpdb->get_results( $query );
+			// set initial load transient for stat data.
+			if ( $initial_load && ! $initial_transient ) {
+				set_site_transient( '_transient_wt_booking_stat_data', $results );
+			}
+		}
+
+		$stat_data = array();
+		$date_format = 'm/d/Y';
+
+		$max_bookings = 0;
+		$max_pax = 0;
+		$booking_stat_from = $booking_stat_to = date( $date_format );
+
+		$temp_stat_data = array();
+		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
+		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
+		}
+		$temp_stat_data['data_bg_color'] = __( '#00f' );
+		$temp_stat_data['data_border_color'] = __( '#00f' );
+
+		if ( is_array( $results ) && count( $results ) > 0 ) {
+			foreach ( $results as $result ) {
+				$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
+				$label_date = date( $date_format, strtotime( $label_date ) );
+
+				$temp_stat_data['data'][$label_date] = $result->no_of_booking;
+				// $temp_stat_data['name'] = 'test';
+				// $temp_stat_data['labels'][] = $label_date;
+
+				$max_bookings += ( int ) $result->no_of_booking;
+				$max_pax += ( int ) $result->no_of_pax;
+
+				if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
+
+					$booking_stat_from = date( 'm/d/Y', strtotime( $label_date ) );
+				}
+
+				if ( strtotime( $booking_stat_to ) < strtotime( $label_date ) ) {
+					$booking_stat_to = date( 'm/d/Y', strtotime( $label_date ) );
+				}
+			}
+		}
+		$data[] = $temp_stat_data;
 	}
 
-	// Booking Data Default Query.
-	$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
-	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+	// Booking Calculation ends here.
+	if ( '' !== $from_date ) {
+		$booking_stat_from = date( 'm/d/Y', strtotime( $from_date ) );
+	}
+
+	if ( '' !== $to_date ) {
+		$booking_stat_to = date( 'm/d/Y', strtotime( $to_date ) );
+	}
+
+	// End of Booking Data Default Query.
+
+
+	$where = '';
+	$top_country_where = '';
+	$top_itinerary_where = '';
+	$groupby = '';
+	if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+
+		$compare_from_date = '';
+		if ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) {
+			$compare_from_date = $_REQUEST['compare_stat_from'];
+		}
+		$compare_to_date = '';
+		if ( isset( $_REQUEST['compare_stat_to'] ) && '' !== $_REQUEST['compare_stat_to'] ) {
+			$compare_to_date = $_REQUEST['compare_stat_to'] . ' 23:59:59';
+		}
+		$compare_country = '';
+		if ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) {
+			$compare_country = $_REQUEST['compare_country'];
+		}
+
+		$compare_itinerary = '';
+		if ( isset( $_REQUEST['compare_itinerary'] ) && '' !== $_REQUEST['compare_itinerary'] ) {
+			$compare_itinerary = $_REQUEST['compare_itinerary'];
+		}
+
+		// Setting conditions.
+		if ( '' !== $compare_from_date || '' !== $compare_to_date || '' !== $compare_country || '' !== $compare_itinerary ) {
+			// Set initial load to false if there is extra get variables.
+			$initial_load = false;
+
+			if ( '' !== $compare_itinerary ) {
+				$where 	 .= " and itinerary_id={$compare_itinerary} ";
+				$top_country_where .= $where;
+				$groupby .= ' itinerary_id,';
+			}
+			if ( '' !== $compare_country ) {
+				$where   .= " and country='{$compare_country}'";
+				$top_itinerary_where .= " and country='{$compare_country}'";
+				$groupby .= ' country,';
+			}
+
+			if ( '' !== $compare_from_date && '' !== $compare_to_date ) {
+
+				$date_format = 'Y-m-d H:i:s';
+
+				$booking_from = date( $date_format, strtotime( $compare_from_date ) );
+				$booking_to   = date( $date_format, strtotime( $compare_to_date ) );
+
+				$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			}
+			$limit = '';
+		}
+
+		// Compare Data Default Query.
 		$query = "SELECT count(ID) as no_of_booking, YEAR(post_date) as booked_year, MONTH(post_date) as booked_month, DAY(post_date) as booked_day, sum(no_of_pax) as no_of_pax
 		from (
 			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
@@ -717,48 +847,28 @@ function wp_travel_get_booking_data() {
 		) Booking 
 		where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
 		$results =  $wpdb->get_results( $query );
-		// set initial load transient for stat data.
-		if ( $initial_load && ! $initial_transient ) {
-			set_site_transient( '_transient_wt_booking_stat_data', $results );
-		}
-	}
 
-	$stat_data = array();
-	$date_format = 'jS M, Y';
+		$temp_compare_data = array();
+		$temp_compare_data['data_label'] = __( 'Booking 2', 'wp-travel' );
+		$temp_compare_data['data_bg_color'] = __( '#3c0' );
+		$temp_compare_data['data_border_color'] = __( '#3c0' );
+		$date_format = 'm/d/Y';
+		if ( is_array( $results ) && count( $results ) > 0 ) {
+			foreach ( $results as $result ) {
+				$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
+				$label_date = date( $date_format, strtotime( $label_date ) );
 
-	$max_bookings = 0;
-	$max_pax = 0;
-	$booking_stat_from = $booking_stat_to = date( $date_format );
-	if ( is_array( $results ) && count( $results ) > 0 ) {
-		foreach ( $results as $result ) {
-			$label_date = $result->booked_year . '-' . $result->booked_month . '-' . $result->booked_day;
-			$label_date = date( $date_format, strtotime( $label_date ) );
+				$temp_compare_data['data'][$label_date] = $result->no_of_booking;
 
-			$stat_data['data'][] = $result->no_of_booking;
-			$stat_data['labels'][] = $label_date;
-
-			$max_bookings += ( int ) $result->no_of_booking;
-			$max_pax += ( int ) $result->no_of_pax;
-
-			if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
-
-				$booking_stat_from = date( 'm/d/Y', strtotime( $label_date ) );
-			}
-
-			if ( strtotime( $booking_stat_to ) < strtotime( $label_date ) ) {
-				$booking_stat_to = date( 'm/d/Y', strtotime( $label_date ) );
+				// $temp_compare_data['labels'][] = $label_date;			
 			}
 		}
+		// Compare Calculation ends here.
+		$data[] = $temp_compare_data;
 	}
-	if ( '' !== $from_date ) {
-		$booking_stat_from = date( 'm/d/Y', strtotime( $from_date ) );
-	}
+	$data = apply_filters( 'wp_travel_stat_data', $data, $_REQUEST );
+	$new_stat_data = wp_travel_make_stat_data( $data );
 
-	if ( '' !== $to_date ) {
-		$booking_stat_to = date( 'm/d/Y', strtotime( $to_date ) );
-	}
-
-	// End of Booking Data Default Query.
 	// Query for top country.
 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_top_country' );
 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
@@ -813,13 +923,14 @@ function wp_travel_get_booking_data() {
 		}
 	}
 	// End of query for top Itinerary.
+	$stat_data['stat_data']  	= $new_stat_data;
 	$stat_data['max_bookings']  = $max_bookings;
 	$stat_data['max_pax']       = $max_pax;
 	$stat_data['top_countries'] = wp_travel_get_country_by_code( $top_countries );
 	$stat_data['top_itinerary'] = $top_itinerary;
 
 	$stat_data['booking_stat_from'] = $booking_stat_from;
-	$stat_data['booking_stat_to'] = $booking_stat_to;
+	$stat_data['booking_stat_to']   = $booking_stat_to;
 
 	return $stat_data;
 }
@@ -1065,4 +1176,68 @@ function wp_travel_get_faqs( $post_id ) {
 		endforeach;
 	endif;
 	return $faq;
+}
+
+function wp_travel_make_stat_data( $stat_datas ) {
+	if ( ! $stat_datas ) {
+		return;
+	}
+	// Split stat data.
+	if ( is_array( $stat_datas ) && count( $stat_datas ) > 0 ) {
+		$data = array();
+		$data_label = array();
+		$data_bg_color = array();
+		$data_border_color = array();
+		foreach ( $stat_datas as $stat_data ) {
+			$data[] = $stat_data['data'];
+			$data_label[] = $stat_data['data_label'];
+			$data_bg_color[] = $stat_data['data_bg_color'];
+			$data_border_color[] = $stat_data['data_border_color'];
+		}
+	}
+
+	if ( is_array( $data ) ) {
+		if ( count( $data ) == 1  ) {
+			$default_array_key = array_keys( $data[0] );
+			$new_data[] = array_values( $data[0] );
+
+		} else if ( count( $data ) > 1 ) {
+			if ( count( $data ) > 1 ) {
+				$array_with_all_keys = $data[0];
+				for( $i=0; $i< count( $data ) - 1; $i++ ) {
+					$next_array_key = array_keys( $data[ $i+1 ] );
+					$next_array_default_val = array_fill_keys( $next_array_key, 0 );
+
+					$array_with_all_keys = array_merge( $next_array_default_val, $array_with_all_keys );
+					uksort($array_with_all_keys,function($a, $b){
+						return strtotime( $a ) > strtotime( $b );
+					});
+				}
+				// print_r($array_with_all_keys);
+				$default_array_key = array_keys( $array_with_all_keys );
+				$array_key_default_val = array_fill_keys( $default_array_key, 0 );
+
+				$new_data = array();
+				for( $i=0; $i< count( $data ); $i++ ) {
+					$new_array = array_merge( $array_key_default_val, $data[$i] );
+					// print_r($new_array);
+					uksort($new_array,function($a, $b){
+						return strtotime( $a ) > strtotime( $b );
+					});
+					$new_data[] = array_values($new_array);
+				}
+
+			}			
+		}
+		$new_return_data['stat_label'] = $default_array_key;
+		$new_return_data['data'] = $new_data;
+		$new_return_data['data_label'] = $data_label;
+		$new_return_data['data_bg_color'] = $data_bg_color;
+		$new_return_data['data_border_color'] = $data_border_color;
+		
+		// echo '<pre>';
+		// print_r($new_return_data);
+		// die;
+		return $new_return_data;
+	}
 }
