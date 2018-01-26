@@ -101,6 +101,9 @@
     margin: 12px 0 0;
     text-align: right; }
 
+.wp-travel-enable-sale {
+  margin-left: 15px; }
+
 body.post-type-itineraries .wp-travel-open-upload-area .button {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -109,6 +112,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   padding: 0 16px 1px;
   height: 33px;
   line-height: 30px;
+  text-transform: capitalize;
   text-decoration: none;
   text-shadow: none;
   font-weight: 600;
@@ -277,7 +281,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     box-sizing: border-box;
     position: relative; }
     .stat-toolbar-form .field-group .field-label {
-      cursor: pointer; }
+      cursor: pointer;
+      text-transform: capitalize; }
     .stat-toolbar-form .field-group select, .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-form-field textarea, .wp-travel-form-field .stat-toolbar-form .field-group textarea {
       width: 100%; }
     .stat-toolbar-form .field-group input[readonly], .stat-toolbar-form .field-group .wp-travel-form-field select[readonly], .wp-travel-form-field .stat-toolbar-form .field-group select[readonly], .stat-toolbar-form .field-group .wp-travel-form-field textarea[readonly], .wp-travel-form-field .stat-toolbar-form .field-group textarea[readonly] {
@@ -463,6 +468,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border-top: 1px solid #ddd; }
 .tab-accordion .panel-wrap {
   padding: 10px 15px; }
+  .tab-accordion .panel-wrap label {
+    font-weight: 600; }
   .tab-accordion .panel-wrap textarea {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
     width: 100%;
@@ -511,7 +518,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     right: 0;
     top: 0;
     bottom: 0;
-    margin: auto; }
+    margin: auto;
+    text-align: center; }
 .wp-travel-tabs-contents .wp-travel-sorting-tabs li {
   position: relative;
   border: 1px solid #ddd;
