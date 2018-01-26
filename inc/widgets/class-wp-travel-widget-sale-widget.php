@@ -61,28 +61,15 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
                 )) 
             );
         ?>
-        <?php if ( count( $itineraries ) > 0 ) : 
+		<?php if ( count( $itineraries ) > 0 ) : 
+		
+			while( $itineraries->have_posts() ) : $itineraries->the_post();
 
             ?>
-			<ul class="wp-travel-itinerary-widget featured-widget">
-                <?php while( $itineraries->have_posts() ) : $itineraries->the_post(); ?>				
-                    <li class="col-<?php echo esc_attr( $this->trip_per_row, 'wp-travel' )?>-per-row clearfix">
-                        <?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ) ?>
-                        
-                        <div class="wp-travel-itinerary-info">
-                            <a href="<?php the_permalink( get_the_ID() ); ?>" class="wp-travel-title">
-                                <?php the_title(); ?>
-                            </a>
-                            <?php if ( wp_travel_is_enable_sale( get_the_ID() ) ) : ?>
-                                <del>
-                                    <span class="wp-travel-del-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_trip_price( get_the_ID() ) ) ) ?></span>
-                                </del>
-                            <?php endif; ?>
-                            <span class="wp-travel-trip-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_actual_trip_price( get_the_ID() ) ) ) ?></span>
-                        </div>
-                    </li>
-                <?php endwhile; wp_reset_postdata(); ?>
-			</ul>
+				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
+			
+			endwhile; wp_reset_postdata();
+			?>
 		<?php else : ?>
 			<p class="itinerary-none"><?php esc_html_e( 'Featured itinerary not found.', 'wp-travel' ) ?></p>
 		<?php endif;

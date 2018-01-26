@@ -25,8 +25,8 @@ function wp_travel_enquiries_form_fields() {
 		'full_name'	=> array(
 			'type' => 'text',
 			'label' => __( 'Full Name', 'wp-travel' ),
-			'name' => 'wp_travel_fname',
-			'id' => 'wp-travel-fname',
+			'name' => 'wp_travel_enquiry_name',
+			'id' => 'wp-travel-enquiry-name',
 			'validations' => array(
 				'required' => true,
 				'maxlength' => '80',
@@ -37,8 +37,8 @@ function wp_travel_enquiries_form_fields() {
 		'email' => array(
 			'type' => 'email',
 			'label' => __( 'Your Email', 'wp-travel' ),
-			'name' => 'wp_travel_email',
-			'id' => 'wp-travel-email',
+			'name' => 'wp_travel_enquiry_email',
+			'id' => 'wp-travel-enquiry-email',
 			'validations' => array(
 				'required' => true,
 				'maxlength' => '60',
@@ -48,8 +48,8 @@ function wp_travel_enquiries_form_fields() {
 		'note' => array(
 			'type' => 'textarea',
 			'label' => __( 'Your Enquiry', 'wp-travel' ),
-			'name' => 'wp_travel_note',
-			'id' => 'wp-travel-note',
+			'name' => 'wp_travel_enquiry_query',
+			'id' => 'wp-travel-enquiry-query',
 			'placeholder' => __( 'Enter your enqiury...', 'wp-travel' ),
 			'rows' => 6,
 			'cols' => 150,
@@ -73,8 +73,8 @@ function wp_travel_get_enquiries_form() {
         'class' => 'mfp-hide',
 		'wrapper_class' => 'wp-travel-enquiries-form-wrapper',
 		'submit_button' => array(
-			'name' => 'wp_travel_enquiry',
-			'id' => 'wp-travel-enquiry',
+			'name' => 'wp_travel_enquiry_submit',
+			'id' => 'wp-travel-enquiry-submit',
 			'value' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
 		),
 		'nonce' => array(
@@ -85,10 +85,10 @@ function wp_travel_get_enquiries_form() {
 
 	$fields = wp_travel_enquiries_form_fields();
 	$form = new WP_Travel_FW_Form();
-	$fields['post_id'] = array(
+	$fields['wp_travel_enquiry_post_id'] = array(
 		'type' => 'hidden',
-		'name' => 'wp_travel_post_id',
-		'id' => 'wp-travel-post-id',
+		'name' => 'wp_travel_enquiry_post_id',
+		'id' => 'wp-travel-enquiry-post-id',
 		'default' => $post->ID,
 	);
 
