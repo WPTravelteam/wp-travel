@@ -148,16 +148,20 @@ jQuery(document).ready(function($) {
 
     $(document).on('click', '#compare-stat', function() {
         var fgc = $('.field-group-compare');
-        var btn_show_all = $('.show-all');
-        var btn_compare_all = $('.compare-all');
-        fgc.hide();
-        btn_show_all.show()
-        btn_compare_all.hide()
+        var btn_show_all = $('.show-all.compare');
+        //var btn_compare_all = $('.compare-all');
+        fgc.slideDown();
+        //btn_show_all.hide();
+        //btn_compare_all.hide();
+
         if ($(this).is(':checked')) {
-            fgc.show();
-            btn_show_all.hide()
-            btn_compare_all.show()
+            // fgc.show();
+            // btn_show_all.hide()
+            // btn_compare_all.show()
+        }else{
+            fgc.slideUp();
         }
+
     })
 
 })

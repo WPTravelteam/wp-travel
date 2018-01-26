@@ -1189,13 +1189,14 @@ function wp_travel_make_stat_data( $stat_datas ) {
 		$data_bg_color = array();
 		$data_border_color = array();
 		foreach ( $stat_datas as $stat_data ) {
-			$data[] = $stat_data['data'];
-			$data_label[] = $stat_data['data_label'];
-			$data_bg_color[] = $stat_data['data_bg_color'];
-			$data_border_color[] = $stat_data['data_border_color'];
+			$data[] = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
+			$data_label[] = isset( $stat_data['data_label'] ) ? $stat_data['data_label'] : array();
+			$data_bg_color[] = isset( $stat_data['data_bg_color'] ) ? $stat_data['data_bg_color'] : array();
+			$data_border_color[] = isset( $stat_data['data_border_color'] ) ? $stat_data['data_border_color'] : array();
 		}
 	}
 
+	
 	if ( is_array( $data ) ) {
 		if ( count( $data ) == 1  ) {
 			$default_array_key = array_keys( $data[0] );
