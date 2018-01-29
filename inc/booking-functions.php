@@ -886,7 +886,14 @@ function get_booking_chart() {
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
 		<div class="right-block <?php echo esc_attr( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ? 'has-compare' : '' ) ?>">
+
 			<div class="wp-travel-stat-info">
+				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+				<div class="right-block-single for-compare">
+					<h3>Compare 1</h3>
+				</div>
+				<?php endif; ?>
+
 				<?php
 				// @since 1.0.6 // Hook since
 				// do_action( 'wp_travel_before_stat_info_box' );
@@ -915,7 +922,11 @@ function get_booking_chart() {
 				</div>
 			</div>
 			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+
 				<div class="wp-travel-stat-info">
+					<div class="right-block-single for-compare">
+						<h3>Compare 2</h3>
+					</div>
 					<?php
 					if ( class_exists( 'WP_travel_paypal' ) ) : ?>
 						<div class="right-block-single">
