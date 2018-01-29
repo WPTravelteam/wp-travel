@@ -175,18 +175,22 @@ jQuery(document).ready(function($) {
     $('#wp-travel-enquiries').submit(function(e) {
 
         e.preventDefault();
-        var EnquiryForm = jQuery('#wp-travel-enquiries').serializeArray();
-        console.log(EnquiryForm);
+        var formData = {
+            'wp_travel_enquiry_name': $('#wp-travel-enquiry-name').val(),
+            'wp_travel_enquiry_email': $('#wp-travel-enquiry-email').val(),
+            'wp_travel_enquiry_query': $('#wp-travel-enquiry-query').val(),
+            'action': 'wp_travel_save_user_enquiry',
+            'nonce': wp_travel_frontend_vars.nonce,
+            'post_id': $('#wp-travel-enquiry-post-id').val(),
+        };
         $.ajax({
             type: "POST",
             url: wp_travel_frontend_vars.ajaxUrl,
-            data: {
-                'action': 'wp_travel_save_user_enquiry',
-                'nonce': wp_travel_frontend_vars.nonce,
-                'formdata': EnquiryForm,
-            },
+            data: formData,
             success: function(data) {
+
                 console.log(data);
+
                 return false;
             }
         });

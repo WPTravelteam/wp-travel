@@ -95,15 +95,107 @@ function wp_travel_get_enquiries_form() {
 	$form->init( $form_options )->fields( $fields )->template();
 
 }
+
+add_action( 'add_meta_boxes', 'wp_travel_add_enquiries_data_metaboxes', 10, 2 );
+
+/**
+ * Add Enquiries Metaboxes.
+ */
+function wp_travel_add_enquiries_data_metaboxes(){
+
+	global $post;
+	global $wp_travel_itinerary;
+
+	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
+	
+	add_meta_box( 'wp-travel-enquiries-info', __( 'Enquiry Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wp_travel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
+
+}
+
+/**
+ * WP Travel Enquiries Info
+ *
+ */
+function wp_travel_enquiries_info(){
+
+	global $post_id;
+
+	$enquiry_data = get_post_meta(  $post_id, 'wp_travel_trip_enquiry_data', true );
+
+	$form_fields = wp_travel_enquiries_form_fields();
+
+	print_r( $form_fields );
+
+
+}
+
 /**
  * Save Front End Trip Enqueries data.
  */
 function wp_travel_save_user_enquiry(){
 
-	$data = $_POST;
+	$formdata = $_POST;
 
+	if ( ! wp_verify_nonce( $_POST['nonce'],  'wp_travel_frontend_enqueries' ) ) {
 
-	wp_send_json_success( $data );
+		$errors[] = __('Nonce Verification Failed !!', 'wp-travel' );
+		
+		wp_send_json_error($errors);
+
+		return;
+
+	}
+
+	$post_id = $formdata['post_id'];
+
+	$post_type = get_post_type( $post_id );
+
+	// If this isn't a 'itineraries' post, don't update it.
+	if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
+		
+		$errors[] = __( 'Invalid Post Type', 'wp-travel' );
+		
+		wp_send_json_error( $errors );
+
+		return;
+	
+	}
+
+	$enquiry_data = array();
+
+	$enquiry_data['name'] = isset( $formdata['wp_travel_enquiry_name'] ) ? $formdata['wp_travel_enquiry_name'] : '' ;
+
+	$enquiry_data['email'] = isset( $formdata['wp_travel_enquiry_email'] ) ? $formdata['wp_travel_enquiry_email'] : '';
+
+	$enquiry_data['enquery_message'] = isset( $formdata['wp_travel_enquiry_query'] ) ? $formdata['wp_travel_enquiry_query'] : '' ;
+
+	$trip_code = wp_travel_get_trip_code( $post_id );
+	
+	$title = 'Enquiry - ' . $trip_code;
+
+	$post_array = array(
+		'post_title' => $title,
+		'post_content' => '',
+		'post_status' => 'publish',
+		'post_slug' => uniqid(),
+		'post_type' => 'itinerary-enquiries',
+		);
+	
+	$new_enquiry = wp_insert_post( $post_array );
+
+	//Update Data.
+	if ( ! empty( $enquiry_data ) ) {
+
+		//Sanitize Values.
+		$enquiry_data = stripslashes_deep( $enquiry_data );
+
+		// Finally Update enquiry data.
+		update_post_meta( $new_enquiry, 'wp_travel_trip_enquiry_data', $enquiry_data );
+
+	}
+
+	// Send Success Message.
+	wp_send_json_success( $post_id );
 
 	die();
 }
