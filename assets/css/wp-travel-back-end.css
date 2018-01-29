@@ -259,15 +259,32 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   text-align: center;
   border: 1px solid #E0E0E0;
   background: #fff; }
-  .right-block div {
+  .right-block .right-block-single {
     border-bottom: 1px solid #E0E0E0;
     padding: 20px 50px 0; }
-    .right-block div big {
+    .right-block .right-block-single big {
       font-size: 38px; }
-    .right-block div p {
+    .right-block .right-block-single p {
       color: #888; }
-    .right-block div a {
+    .right-block .right-block-single a {
       text-decoration: none; }
+
+.right-block.has-compare .wp-travel-stat-info {
+  width: 50%;
+  float: left; }
+  .right-block.has-compare .wp-travel-stat-info:first-of-type {
+    border-right: 1px solid #ddd;
+    box-sizing: border-box; }
+  .right-block.has-compare .wp-travel-stat-info .right-block-single {
+    padding: 20px 15px 0; }
+    .right-block.has-compare .wp-travel-stat-info .right-block-single big {
+      font-size: 18px;
+      white-space: pre-line;
+      word-wrap: break-word; }
+    .right-block.has-compare .wp-travel-stat-info .right-block-single:last-of-type {
+      border-bottom: none; }
+  .right-block.has-compare .wp-travel-stat-info .for-compare {
+    padding-top: 0px; }
 
 .stat-toolbar-form {
   display: flex;
