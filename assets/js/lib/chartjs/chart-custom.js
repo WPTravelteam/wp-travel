@@ -58,6 +58,18 @@ jQuery(document).ready(function($) {
     }
     $('.wp-travel-top-itineraries').attr('href', edit_url).html(wp_travel_chart_data.top_itinerary.name);
 
+    if (wp_travel_chart_data.compare_stat) {
+        $('.wp-travel-max-bookings-compare').html(wp_travel_chart_data.compare_max_bookings);
+        $('.wp-travel-max-pax-compare').html(wp_travel_chart_data.compare_max_pax);
+        $('.wp-travel-top-countries-compare').html(wp_travel_chart_data.compare_top_countries);
+
+        var compare_edit_url = 'javascript:void(0)';
+        if (wp_travel_chart_data.compare_top_itinerary.id) {
+            compare_edit_url = 'post.php?post=' + wp_travel_chart_data.compare_top_itinerary.id + '&action=edit';
+        }
+        $('.wp-travel-top-itineraries-compare').attr('href', compare_edit_url).html(wp_travel_chart_data.compare_top_itinerary.name);
+    }
+
     $('.form-compare-stat .datepicker-from').datepicker({
         language: 'en',
         maxDate: new Date(),
