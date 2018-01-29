@@ -52,6 +52,17 @@ jQuery(document).ready(function($) {
     $('.form-compare-stat .datepicker-from').val(wp_travel_chart_data.booking_stat_from);
     $('.form-compare-stat .datepicker-to').val(wp_travel_chart_data.booking_stat_to);
 
+    if (!wp_travel_chart_data.compare_stat_from) {
+        $('.additional-compare-stat .datepicker-from').val(wp_travel_chart_data.booking_stat_from);
+    }
+    if (!wp_travel_chart_data.compare_stat_to) {
+        $('.additional-compare-stat .datepicker-to').val(wp_travel_chart_data.booking_stat_to);
+    }
+
+    if (wp_travel_chart_data.total_sales_compare) {
+        $('.wp-travel-total-sales-compare').html(wp_travel_chart_data.total_sales_compare);
+    }
+
     var edit_url = 'javascript:void(0)';
     if (wp_travel_chart_data.top_itinerary.id) {
         edit_url = 'post.php?post=' + wp_travel_chart_data.top_itinerary.id + '&action=edit';
