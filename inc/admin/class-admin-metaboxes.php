@@ -38,6 +38,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
 
 	}
 
@@ -117,6 +118,11 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label' => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Tabs', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
+		);
+
+		$trips['misc_options'] = array(
+			'tab_label' => __( 'Options', 'wp-travel' ),
+			'content_title' => __( 'Misc. Options', 'wp-travel' ),
 		);
 
 		// $trips['advanced'] = array(
@@ -348,6 +354,16 @@ class WP_Travel_Admin_Metaboxes {
 			echo '</tbody></table>';
 		}
 	 }
+
+	function wp_travel_misc_options_callback( $tab, $args ) {
+
+		if( 'misc_options' !== $tab ) {
+			return;
+		}
+
+		WP_Travel()->tabs->content( 'itineraries/misc-tab.php' );
+
+	}
 
 	function wp_travel_faq_callback( $tab, $args ) {
 		if ( 'faq' !== $tab ) {
@@ -646,6 +662,20 @@ class WP_Travel_Admin_Metaboxes {
 			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
 		}
 			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
+
+		//Trip enquiry Global
+		$use_global_trip_enquiry_option = 'no';
+		if ( isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) {
+			$use_global_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) );
+		}
+			update_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', $use_global_trip_enquiry_option );
+
+		//Trip Specific Enquiry Option
+		$enable_trip_enquiry_option = 'no';
+		if ( isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) {
+			$enable_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) );
+		}
+			update_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', $enable_trip_enquiry_option );
 
 		if ( isset( $_POST['wp_travel_tabs'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );

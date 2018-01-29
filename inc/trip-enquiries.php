@@ -93,6 +93,19 @@ function wp_travel_get_enquiries_form() {
 	);
 
 	$form->init( $form_options )->fields( $fields )->template();
-	// return apply_filters( 'wp_travel_booking_form_contents', $content );
-}
 
+}
+/**
+ * Save Front End Trip Enqueries data.
+ */
+function wp_travel_save_user_enquiry(){
+
+	$data = $_POST;
+
+
+	wp_send_json_success( $data );
+
+	die();
+}
+add_action('wp_ajax_wp_travel_save_user_enquiry','wp_travel_save_user_enquiry');
+add_action('wp_ajax_nopriv_wp_travel_save_user_enquiry','wp_travel_save_user_enquiry');

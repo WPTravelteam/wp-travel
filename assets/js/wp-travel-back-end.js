@@ -405,4 +405,18 @@
         }
     });
 
+    if ($('#wp-travel-use-global-trip-enquiry').is(':checked')) {
+        $('#wp-travel-enable-trip-enquiry-option-row').hide();
+    } else {
+        $('#wp-travel-enable-trip-enquiry-option-row').show();
+    }
+
+    $('#wp-travel-use-global-trip-enquiry').change(function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-enable-trip-enquiry-option-row').hide();
+        } else {
+            $('#wp-travel-enable-trip-enquiry-option-row').show();
+        }
+    });
+
 }(jQuery));
