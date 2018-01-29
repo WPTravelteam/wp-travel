@@ -1031,7 +1031,7 @@
     } 
 
     .wp-travel-default-article{
-        
+        padding:0;
         .wp-travel-article-image-wrap{
 
             width:100%;
@@ -1046,6 +1046,7 @@
             .description-right{
                 text-align:left;
                 border-left:none;
+                padding:0 10px;
             }
 
         } 
