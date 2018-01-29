@@ -21,6 +21,7 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 
 	private $no_of_trip_show;
 	private $trip_per_row;
+	private $view_mode;
 	/**
 	 * Constructor.
 	 */
