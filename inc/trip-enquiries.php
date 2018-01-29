@@ -158,6 +158,11 @@ function wp_travel_enquiries_info(){
 						$attributes .= sprintf( '%s=%s ', $attribute, $attribute_val );
 					}
 				}
+				$wrapper_class = '';
+				if ( isset( $field['wrapper_class'] ) ) {
+					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+
+				}
 
 				$before_field = '';
 				if ( isset( $field['before_field'] ) ) {
@@ -336,9 +341,9 @@ function wp_travel_save_user_enquiry(){
 	$itinerary_id 			= sanitize_text_field( $formdata['post_id'] );
 	$itinerary_title 		= get_the_title( $itinerary_id );
 
-	$customer_name 		  	= $enquiry_data['name'];
-	$customer_email 		= $enquiry_data['email'];
-	$customer_note 			= $enquiry_data['enquery_message'];
+	$customer_name 		  	= $enquiry_data['wp_travel_enquiry_name'];
+	$customer_email 		= $enquiry_data['wp_travel_enquiry_email'];
+	$customer_note 			= $enquiry_data['wp_travel_enquiry_query'];
 
 	$email_tags = array(
 		'{sitename}'				=> $sitename,
@@ -353,7 +358,7 @@ function wp_travel_save_user_enquiry(){
 	);
 	apply_filters( 'wp_travel_admin_enquery_email_tags', $email_tags );
 
-	$admin_message = wp_travel_admin_email_template();
+	$admin_message = wp_travel_enqueries_admin_email_template();
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
 
 		// To send HTML mail, the Content-type header must be set.
