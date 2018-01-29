@@ -194,10 +194,16 @@
     $(document).on('click', '#wp-travel-enable-sale', function() {
         if ($(this).is(':checked')) {
             $('#wp-travel-sale-price').removeAttr('disabled').closest('tr').show();
+            $('#wp-travel-price').attr('required', 'required');
         } else {
             $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('tr').hide();
+            $('#wp-travel-price').removeAttr('required');
         }
     });
+
+    if ($('#wp-travel-enable-sale').is(':checked')) {
+        $('#wp-travel-price').attr('required', 'required');
+    }
 
     $(document).on('click', '#wp-travel-fixed-departure', function() {
         if ($(this).is(':checked')) {
