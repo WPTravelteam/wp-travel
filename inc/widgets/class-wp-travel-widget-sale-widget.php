@@ -53,15 +53,15 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 
         $itineraries = new WP_Query( 
             array( 'post_type' => WP_TRAVEL_POST_TYPE, 
-            'posts_per_page' => $no_of_trip_show, 
+			'posts_per_page' => $no_of_trip_show,
+				'meta_key'=> 'wp_travel_enable_sale',
                 'meta_query' => array( 
                     'key' => 'wp_travel_enable_sale',
-                    'value' => true,
-                    'compare' => '='
-                )) 
+                    'value' => 1,
+                ))
             );
         ?>
-		<?php if ( count( $itineraries ) > 0 ) : ?>
+		<?php if ( $itineraries->have_posts() ) : ?>
 
 		<div class="wp-travel-itinerary-items">
 			<ul class="wp-travel-itinerary-list">
@@ -76,7 +76,7 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 		</div>
 		
 		<?php else : ?>
-			<p class="itinerary-none"><?php esc_html_e( 'Featured itinerary not found.', 'wp-travel' ) ?></p>
+			<p class="itinerary-none"><?php esc_html_e( 'Trips not found.', 'wp-travel' ) ?></p>
 		<?php endif;
 		echo $after_widget;
 	}
