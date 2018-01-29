@@ -970,7 +970,7 @@ function wp_travel_get_booking_data() {
 				$top_itinerary['id'] = $itinerary_id;
 			}
 		}
-		// Booking Calculation ends here.
+		// Compare Calculation ends here.
 		if ( '' !== $compare_from_date ) {
 			$compare_from_date = date( 'm/d/Y', strtotime( $compare_from_date ) );
 		}
@@ -978,6 +978,10 @@ function wp_travel_get_booking_data() {
 		if ( '' !== $compare_to_date ) {
 			$compare_to_date = date( 'm/d/Y', strtotime( $compare_to_date ) );
 		}
+
+
+
+
 		$compare_additional_data = array(
 			'from' => $compare_from_date,
 			'to' => $compare_to_date,
@@ -1003,12 +1007,38 @@ function wp_travel_get_booking_data() {
 	$stat_data['top_itinerary'] = $booking_additional_data['top_itinerary'];
 
 	if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-		$stat_data['compare_booking_stat_from'] = $compare_additional_data['from'];
-		$stat_data['compare_booking_stat_to']   = $compare_additional_data['to'];
+		$stat_data['compare_stat_from'] = $compare_additional_data['from'];
+		$stat_data['compare_stat_to']   = $compare_additional_data['to'];
 		$stat_data['compare_max_bookings']  = $compare_additional_data['max_bookings'];
 		$stat_data['compare_max_pax']       = $compare_additional_data['max_pax'];
 		$stat_data['compare_top_countries'] = wp_travel_get_country_by_code( $compare_additional_data['top_countries'] );
 		$stat_data['compare_top_itinerary'] = $compare_additional_data['top_itinerary'];
+		
+		// Query for total 2 in compare stat.
+		if ( class_exists( 'WP_travel_paypal' ) ) :
+			$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
+			join ( 
+				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost 
+				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID    
+				WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
+			) PMT on BOOKING.ID = PMT.post_id
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id 
+			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
+			join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
+			join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
+		end as payment_amount from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_amount'  ) AMT on PMT.payment_id = AMT.post_id
+			where post_status='publish' and post_type = 'itinerary-booking' {$where}
+			group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
+			$results = $wpdb->get_results( $query );
+
+			$total_sales_compare = 0;
+			if ( $results ) {
+				foreach ( $results as $result ) {				
+					$total_sales_compare += $result->payment_amount;
+				}
+			}
+			$stat_data['total_sales_compare'] = number_format( $total_sales_compare, 2, '.', '' );
+		endif;
 	}
 
 	return $stat_data;

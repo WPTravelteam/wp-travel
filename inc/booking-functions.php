@@ -890,7 +890,7 @@ function get_booking_chart() {
 			<div class="wp-travel-stat-info">
 				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
-					<h3>Compare 1</h3>
+					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ) ?></h3>
 				</div>
 				<?php endif; ?>
 
@@ -925,7 +925,7 @@ function get_booking_chart() {
 
 				<div class="wp-travel-stat-info">
 					<div class="right-block-single for-compare">
-						<h3>Compare 2</h3>
+						<h3><?php esc_html_e( 'Compare 2', 'wp-travel' ) ?></h3>
 					</div>
 					<?php
 					if ( class_exists( 'WP_travel_paypal' ) ) : ?>
