@@ -841,11 +841,15 @@
     @media (max-width: 767px) {
       .wp-travel-default-article .wp-travel-entry-content-wrapper {
         width: 100%;
-        float: none; } }
+        float: none;
+        display: block; } }
     .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left {
       width: 70%;
       float: left;
       padding: 0 10px 0px 10px; }
+      @media (max-width: 767px) {
+        .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left {
+          width: 100%; } }
       .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .entry-title {
         margin-top: 0;
         margin-bottom: 15px; }
@@ -865,8 +869,10 @@
         .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right {
           width: 100%;
           float: none;
-          padding: 15px;
-          border-left: none; } }
+          padding: 0 15px 15px;
+          border-left: none;
+          text-align: left;
+          clear: both; } }
       .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right .trip-price {
         margin: 35px 0 25px; }
         @media (max-width: 767px) {
@@ -875,7 +881,8 @@
         .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right .trip-price del {
           opacity: 0.3;
           margin-right: 0px;
-          display: block; }
+          display: inline;
+          padding-right: 10px; }
   .wp-travel-default-article .wp-travel-explore {
     margin-bottom: 25px;
     display: inline-block; }
