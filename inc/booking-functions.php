@@ -885,30 +885,67 @@ function get_booking_chart() {
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
-		<div class="right-block">
-			<?php
-			// @since 1.0.6 // Hook since
-			do_action( 'wp_travel_before_stat_info_box' ); ?>
-			<div>
-				<strong><big class="wp-travel-max-bookings">0</big></strong><br />
-				<p><?php esc_html_e( 'Bookings', 'wp-travel' ) ?></p>
+		<div class="right-block <?php echo esc_attr( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ? 'has-compare' : '' ) ?>">
+			<div class="wp-travel-stat-info">
+				<?php
+				// @since 1.0.6 // Hook since
+				// do_action( 'wp_travel_before_stat_info_box' );
+				if ( class_exists( 'WP_travel_paypal' ) ) : ?>
+					<div class="right-block-single">
+						<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales">0</big></strong><br />
+						<p><?php esc_html_e( 'Total Sales', 'wp-travel' ) ?></p>
+					</div>
+				<?php endif; ?>
+				<div class="right-block-single">
+					<strong><big class="wp-travel-max-bookings">0</big></strong><br />
+					<p><?php esc_html_e( 'Bookings', 'wp-travel' ) ?></p>
 
+				</div>
+				<div class="right-block-single">
+					<strong><big  class="wp-travel-max-pax">0</big></strong><br />
+					<p><?php esc_html_e( 'Pax', 'wp-travel' ) ?></p>
+				</div>
+				<div class="right-block-single">
+					<strong class="wp-travel-top-countries wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
+					<p><?php esc_html_e( 'Countries', 'wp-travel' ) ?></p>
+				</div>
+				<div class="right-block-single">
+					<strong><a href="#" class="wp-travel-top-itineraries" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
+					<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ) ?></p>
+				</div>
 			</div>
-			<div>
-				<strong><big  class="wp-travel-max-pax">0</big></strong><br />
-				<p><?php esc_html_e( 'Pax', 'wp-travel' ) ?></p>
-			</div>
-			<div>
-				<strong class="wp-travel-top-countries wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
-				<p><?php esc_html_e( 'Countries', 'wp-travel' ) ?></p>
-			</div>
-			<div>
-				<strong><a href="#" class="wp-travel-top-itineraries" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
-				<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ) ?></p>
-			</div>
+			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+				<div class="wp-travel-stat-info">
+					<?php
+					if ( class_exists( 'WP_travel_paypal' ) ) : ?>
+						<div class="right-block-single">
+							<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
+							<p><?php esc_html_e( 'Total Sales', 'wp-travel' ) ?></p>
+
+						</div>
+					<?php endif; ?>
+					<div class="right-block-single">
+						<strong><big class="wp-travel-max-bookings-compare">0</big></strong><br />
+						<p><?php esc_html_e( 'Bookings', 'wp-travel' ) ?></p>
+
+					</div>
+					<div class="right-block-single">
+						<strong><big  class="wp-travel-max-pax-compare">0</big></strong><br />
+						<p><?php esc_html_e( 'Pax', 'wp-travel' ) ?></p>
+					</div>
+					<div class="right-block-single">
+						<strong class="wp-travel-top-countries-compare wp-travel-more"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></strong>
+						<p><?php esc_html_e( 'Countries', 'wp-travel' ) ?></p>
+					</div>
+					<div class="right-block-single">
+						<strong><a href="#" class="wp-travel-top-itineraries-compare" target="_blank"><?php esc_html_e( 'N/A', 'wp-travel' ); ?></a></strong>
+						<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ) ?></p>
+					</div>
+				</div>
+			<?php endif; ?>
 			<?php
 			// @since 1.0.6 // Hook since
-			do_action( 'wp_travel_after_stat_info_box' ); ?>
+			// do_action( 'wp_travel_after_stat_info_box' ); ?>
 		</div>
 	</div>	
 	<?php
