@@ -399,7 +399,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     text-align: center;
     border: 1px solid #E0E0E0;
     background: #fff;
-    div {
+
+    .right-block-single {
+
         border-bottom: 1px solid #E0E0E0;
         padding: 20px 50px 0;
         big {
@@ -410,6 +412,22 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
         a {
             text-decoration: none;
+        }
+    }
+}
+
+.right-block.has-compare{
+
+    .wp-travel-stat-info {
+
+        width: 50%;
+        float: left;
+
+        .right-block-single {
+            
+            big {
+                font-size: 24px;
+            }
         }
     }
 }
