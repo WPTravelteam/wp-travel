@@ -189,7 +189,17 @@ jQuery(document).ready(function($) {
             data: formData,
             success: function(data) {
 
-                console.log(data);
+                if (false == data.success) {
+                    var message = '<span class="enquiry-error-msg">' + data.data.message + '</span>';
+                    $('.mfp-content').html(message);
+                } else {
+                    if (true == data.success) {
+
+                        var message = '<span class="enquiry-success-msg">' + data.data.message + '</span>';
+                        $('.mfp-content').html(message);
+
+                    }
+                }
 
                 return false;
             }
