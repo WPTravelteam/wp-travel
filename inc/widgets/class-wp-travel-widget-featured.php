@@ -55,7 +55,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		}
 
 		$featured_args = array(
-			'numberposts' => $no_of_trip_show,
+			'posts_per_page'   => $no_of_trip_show,
 			'offset'           => 0,
 			'orderby'          => 'date',
 			'order'            => 'DESC',
