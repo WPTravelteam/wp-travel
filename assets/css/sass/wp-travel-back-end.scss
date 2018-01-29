@@ -67,7 +67,9 @@ $alabaster: #f7f7f1; // Red like color.
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-indent-dots-option-button:before {
+  content: "\e904";
+}
 .icon-logo .path1:before {
     content: "\e901";
     color: rgb(212, 39, 39);
@@ -173,7 +175,7 @@ $alabaster: #f7f7f1; // Red like color.
     }
 }
 
-.wp-travel-enable-sale {
+.wp-travel-enable-sale,.checkbox-with-label {
     margin-left: 15px;
 }
 body.post-type-itineraries .wp-travel-open-upload-area .button {

@@ -96,6 +96,9 @@
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-setting a:before {
         font-family: icomoon;
         content: '\e900'; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-misc_options a:before {
+        font-family: icomoon;
+        content: '\e904'; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;
