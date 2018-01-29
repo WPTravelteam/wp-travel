@@ -392,7 +392,7 @@
         $('#wp-travel-sale-price').attr('max', priceVal);
     });
 
-    if ($(this).is(':checked')) {
+    if ($('#wp-travel-use-global-tabs').is(':checked')) {
         $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
     } else {
         $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
