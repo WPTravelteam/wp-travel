@@ -288,7 +288,8 @@ class WP_Travel_Admin_Metaboxes {
 			?>
 				<table class="form-table">
 					<tr>
-						<td><label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
+						<td>
+							<label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF">
 							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
@@ -435,7 +436,7 @@ class WP_Travel_Admin_Metaboxes {
 					<div class="panel-body">
 						<div class="panel-wrap">
 							<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-							<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="">
+							<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" class="faq-question-text" value="">
 						</div>
 						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."></textarea>
 					</div>
