@@ -18,6 +18,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.icon-indent-dots-option-button:before {
+  content: "\e904"; }
+
 .icon-logo .path1:before {
   content: "\e901";
   color: #d42727; }
@@ -101,7 +104,7 @@
     margin: 12px 0 0;
     text-align: right; }
 
-.wp-travel-enable-sale {
+.wp-travel-enable-sale, .checkbox-with-label {
   margin-left: 15px; }
 
 body.post-type-itineraries .wp-travel-open-upload-area .button {
