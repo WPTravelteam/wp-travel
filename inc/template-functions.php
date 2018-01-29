@@ -274,6 +274,23 @@ function wp_travel_single_excerpt( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+	//Get Settings
+	$settings = wp_travel_get_settings();
+
+	$global_enquiry_option = get_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', true );
+
+	if( 1 == $global_enquiry_option ) {
+
+		$enable_enquiry = $settings['enable_trip_enquiry_option'];
+		
+	}
+	else {
+		$enable_enquiry = get_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', true );
+		if ( 1 == $enable_enquiry ) {
+			'yes' == $enable_enquiry;
+		}
+	}
+	
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
 	<div class="trip-short-desc">
@@ -367,17 +384,26 @@ function wp_travel_single_excerpt( $post_id ) {
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
-			<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries">
-				<span class="wp-travel-booking-enquiry">
-					<span class="dashicons dashicons-editor-help"></span>
-					<span>
-						<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+
+			<?php if ( 'yes' == $enable_enquiry ) : ?>
+			
+				<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries">
+					<span class="wp-travel-booking-enquiry">
+						<span class="dashicons dashicons-editor-help"></span>
+						<span>
+							<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+						</span>
 					</span>
-				</span>
-			</a>
+				</a>
+			<?php endif; ?>
+		
 		</div>
 	</div>
-		<?php wp_travel_get_enquiries_form(); ?>
+		<?php
+			if ( 'yes' == $enable_enquiry ) :  
+				wp_travel_get_enquiries_form(); 
+			endif;	
+			?>
 	<?php
 	/**
 	 * @since 1.0.4

@@ -33,6 +33,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );		
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
 
@@ -93,6 +94,10 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['tabs_global'] = array(
 			'tab_label' => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
+		);
+		$settings_fields['misc_options'] = array(
+			'tab_label' => __( 'Options', 'wp-travel' ),
+			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -268,6 +273,36 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Callback for Options Tab
+	 *
+	 */
+	function misc_options_tab_callback( $tab, $args ){
+
+		if ( 'misc_options' !== $tab ) {
+			return;
+		}
+		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'yes';
+		?>
+		<table class="form-table">
+			<tr>
+				<th>
+					<label for="currency"><?php esc_html_e( 'Enable Trip Enquiry', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $enable_trip_enquiry_option , 'yes' ); ?> value="1" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />						
+							<span class="switch">
+						  </span>
+						</label>
+					</span>
+				</td>
+			<tr>
+		</table>
+	<?php 
+	}
+
+	/**
 	 * Save settings.
 	 *
 	 * @return void
@@ -282,6 +317,9 @@ class WP_Travel_Admin_Settings {
 
 			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
+
+			$enable_trip_enquiry_option = ( isset( $_POST['enable_trip_enquiry_option'] ) && '' !== $_POST['enable_trip_enquiry_option'] ) ? 'yes' : 'no';
+
 			$settings['currency'] = $currency;
 			$settings['google_map_api_key'] = $google_map_api_key;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
@@ -289,6 +327,9 @@ class WP_Travel_Admin_Settings {
 
 			// @since 1.1.1 Global tabs settings.
 			$settings['global_tab_settings'] = ( isset( $_POST['wp_travel_global_tabs_settings'] ) && '' !== $_POST['wp_travel_global_tabs_settings'] ) ? $_POST['wp_travel_global_tabs_settings'] : '';
+
+			// @since 1.2 Misc. Options
+			$settings['enable_trip_enquiry_option'] = $enable_trip_enquiry_option;
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );

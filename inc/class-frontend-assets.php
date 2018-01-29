@@ -63,7 +63,13 @@ class WP_Travel_Frontend_Assets {
 			// Enqueued script with localized data.
 			wp_enqueue_script( 'wp-travel-maps' );
 		}
+		//add vars.
+		$frontend_vars = array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'nonce' => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+		);
 
+		wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
 
 		// Enqueued script.
 		wp_enqueue_script( 'travel-door-script' );
