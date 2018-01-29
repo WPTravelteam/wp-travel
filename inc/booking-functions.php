@@ -81,7 +81,7 @@ function wp_travel_booking_form_fields() {
 			'validations' => array(
 				'required' => true,
 				'maxlength' => '50',
-				'type' => 'number',
+				'pattern' => '^[\d\+\-\.\(\)\/\s]*$',
 			),
 			'priority' => 50,
 		),

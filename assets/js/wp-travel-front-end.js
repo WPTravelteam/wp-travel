@@ -190,13 +190,14 @@ jQuery(document).ready(function($) {
             success: function(data) {
 
                 if (false == data.success) {
-                    var message = '<span class="enquiry-error-msg">' + data.data.message + '</span>';
+                    var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
                     $('.mfp-content').html(message);
                 } else {
                     if (true == data.success) {
 
-                        var message = '<span class="enquiry-success-msg">' + data.data.message + '</span>';
+                        var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
                         $('.mfp-content').html(message);
+
 
                     }
                 }
