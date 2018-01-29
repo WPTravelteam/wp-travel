@@ -39,17 +39,14 @@ class WP_Travel_Admin_Assets {
 			wp_register_script( 'jquery-chart-util', $this->assets_path . 'assets/js/lib/chartjs/chart-utils.js', array( 'jquery' ) );
 
 			wp_register_script( 'jquery-chart-custom', $this->assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
-			$booking_data = wp_travel_get_booking_data();
-			echo '<pre>';
-			print_r($booking_data);
-			echo '</pre>';
+			$booking_data = wp_travel_get_booking_data();			
 			$stat_data = isset( $booking_data['stat_data'] ) ? $booking_data['stat_data'] : array();
 			$labels = isset( $stat_data['stat_label'] ) ? $stat_data['stat_label'] : array();
 			$datas = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
 			$data_label = isset( $stat_data['data_label'] ) ? $stat_data['data_label'] : array();
 			$data_bg_color = isset( $stat_data['data_bg_color'] ) ? $stat_data['data_bg_color'] : array();
 			$data_border_color = isset( $stat_data['data_border_color'] ) ? $stat_data['data_border_color'] : array();
-			
+
 			$max_bookings = isset( $booking_data['max_bookings'] ) ? $booking_data['max_bookings'] : 0;
 			$max_pax = isset( $booking_data['max_pax'] ) ? $booking_data['max_pax'] : 0;
 			$top_countries = ( isset( $booking_data['top_countries'] ) && count( $booking_data['top_countries'] )  > 0 ) ? $booking_data['top_countries'] : array( 'N/A' );
@@ -57,7 +54,7 @@ class WP_Travel_Admin_Assets {
 
 			$booking_stat_from = isset( $booking_data['booking_stat_from'] ) ? $booking_data['booking_stat_from'] : '';
 			$booking_stat_to = isset( $booking_data['booking_stat_to'] ) ? $booking_data['booking_stat_to'] : '';
-			
+
 			$wp_travel_stat_data = array();
 			foreach ( $datas as $key => $data ) {
 				$wp_travel_stat_data[] = array(
@@ -68,7 +65,6 @@ class WP_Travel_Admin_Assets {
 					'fill' => false,
 				);
 			}
-			
 			// $wp_travel_stat_data = apply_filters( 'wp_travel_stat_data', $wp_travel_stat_data );
 			$wp_travel_chart_data = array(
 				'ajax_url' => 'admin-ajax.php',
