@@ -54,7 +54,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 		$args = array(
-			'numberposts' 	   => $no_of_trip_show,
+			'posts_per_page'   => $no_of_trip_show,
 			'offset'           => 0,
 			'orderby'          => 'date',
 			'order'            => 'DESC',
