@@ -160,7 +160,7 @@ jQuery(document).ready(function($) {
         $('.panel-collapse').addClass('in');
         // $(this).hide();
         $('.close-all-link').show();
-        $('.panel-collapse').css('height','auto');
+        $('.panel-collapse').css('height', 'auto');
     });
     $('.close-all-link').click(function(e) {
         e.preventDefault();
@@ -168,6 +168,29 @@ jQuery(document).ready(function($) {
         $('.panel-collapse').removeClass('in');
         // $(this).hide();
         $('.open-all-link').show();
+    });
+
+    // Enquiry Submission.
+
+    $('#wp-travel-enquiries').submit(function(e) {
+
+        e.preventDefault();
+        var EnquiryForm = jQuery('#wp-travel-enquiries').serializeArray();
+        console.log(EnquiryForm);
+        $.ajax({
+            type: "POST",
+            url: wp_travel_frontend_vars.ajaxUrl,
+            data: {
+                'action': 'wp_travel_save_user_enquiry',
+                'nonce': wp_travel_frontend_vars.nonce,
+                'formdata': EnquiryForm,
+            },
+            success: function(data) {
+                console.log(data);
+                return false;
+            }
+        });
+
     });
 
 });

@@ -47,7 +47,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 		$no_of_trip_show = ( $instance['no_of_trip_show'] ) ? $instance['no_of_trip_show'] : $this->no_of_trip_show;
 		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
-		$view_mode = ( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
+		$view_mode = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 		$trip_type = ( $instance['trip_type'] ) ? $instance['trip_type'] : '';
 		echo $before_widget;
 		if ( ! $hide_title ) {
