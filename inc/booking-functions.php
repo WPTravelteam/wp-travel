@@ -780,15 +780,15 @@ function get_booking_chart() {
 						<!-- Field groups -->
 						<p class="field-group field-group-stat">
 							<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
-							<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>">
-							<label class="input-group-addon btn" for="testdate">
+							<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>" id="fromdate1" />
+							<label class="input-group-addon btn" for="fromdate1">
 							<span class="dashicons dashicons-calendar-alt"></span>
 							</label>        
 						</p>
 						<p class="field-group field-group-stat">
 							<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
-							<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>"/>
-							<label class="input-group-addon btn" for="testdate">
+							<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>" id="fromdate2" />
+							<label class="input-group-addon btn" for="fromdate2">
 							<span class="dashicons dashicons-calendar-alt"></span>
 							</label> 
 						</p>
@@ -833,15 +833,15 @@ function get_booking_chart() {
 					<!-- Field groups to compare -->
 					<p class="field-group field-group-compare" style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php esc_html_e( 'From', 'wp-travel' ); ?>:</span>
-						<input type="text" name="compare_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $compare_from_date ) ?>">
-						<label class="input-group-addon btn" for="testdate">
+						<input type="text" name="compare_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $compare_from_date ) ?>" id="fromdate3" />
+						<label class="input-group-addon btn" for="fromdate3">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label>        
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
-						<input type="text" name="compare_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $compare_to_date ) ?>"/>
-						<label class="input-group-addon btn" for="testdate">
+						<input type="text" name="compare_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $compare_to_date ) ?>" id="fromdate4" />
+						<label class="input-group-addon btn" for="fromdate4">
 						<span class="dashicons dashicons-calendar-alt"></span>
 						</label> 
 					</p>

@@ -910,7 +910,7 @@
         .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right .trip-price del {
           opacity: 0.3;
           margin-right: 0px;
-          display: inline;
+          display: block;
           padding-right: 10px; }
   .wp-travel-default-article .wp-travel-explore {
     margin-bottom: 25px;
