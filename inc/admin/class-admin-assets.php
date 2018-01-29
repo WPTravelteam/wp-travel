@@ -97,7 +97,7 @@ class WP_Travel_Admin_Assets {
 				$wp_travel_chart_data['compare_stat_to'] = $compare_stat_to;
 				$wp_travel_chart_data['compare_max_bookings'] = $compare_max_bookings;
 				$wp_travel_chart_data['compare_max_pax'] = $compare_max_pax;
-				$wp_travel_chart_data['compare_top_countries'] = $compare_top_countries;
+				$wp_travel_chart_data['compare_top_countries'] = implode( ', ', $compare_top_countries );
 				$wp_travel_chart_data['compare_top_itinerary'] = $compare_top_itinerary;
 				$wp_travel_chart_data['compare_stat'] = true;
 
