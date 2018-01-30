@@ -1435,7 +1435,8 @@
 
 .enquiry-success-msg {
   padding: 5px;
-  border: 2px solid #4FC650; }
+  border: 2px solid #4FC650;
+  display: block; }
 
 .enquiry-error-msg {
   padding: 5px;
