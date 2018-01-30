@@ -695,7 +695,7 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_faq_answer = ( wp_unslash( $_POST['wp_travel_faq_answer'] ) );
 			update_post_meta( $post_id, 'wp_travel_faq_answer', $wp_travel_faq_answer );
 		}
-		if ( isset( $_POST['wp_travel_editor'] ) && ! empty( $_POST['wp_travel_editor'] ) ) {
+		if ( isset( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
 			if ( ! wp_is_post_revision( $post_id ) && $old_content !== $new_content ) {
