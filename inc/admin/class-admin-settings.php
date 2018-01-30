@@ -281,7 +281,7 @@ class WP_Travel_Admin_Settings {
 		if ( 'misc_options' !== $tab ) {
 			return;
 		}
-		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'yes';
+		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'no';
 		?>
 		<table class="form-table">
 			<tr>
