@@ -1242,6 +1242,12 @@ function wp_travel_posts_filter( $query ) {
 			$query->set( 'meta_value', $_GET['wp_travel_post_id'] );
 		}
 
+		if ( 'itinerary-enquiries' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
+
+			$query->set( 'meta_key', 'wp_travel_post_id' );
+			$query->set( 'meta_value', $_GET['wp_travel_post_id'] );
+		}
+
 		/**
 		 * Archive /Taxonomy page filters
 		 *
