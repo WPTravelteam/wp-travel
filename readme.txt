@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/
 Requires at least: 4.4.0
 Tested up to: 4.9.1
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -109,6 +109,14 @@ Nice, send us request on [Support page](http://wptravel.io/support-forum/forum/w
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.2.0 =
+* New Feature: Sale widget added.
+* New Feature: Inquiry Form aded.
+* New Feature: Date and time added in itinerary timeling.
+* New Feature: Compare Price on Stat.
+* Fixes: Tabs Sortable issue.
+* Fixes: Minor issues.
 
 = 1.1.3 =
 * New Feature: Itinerary Timeline added.

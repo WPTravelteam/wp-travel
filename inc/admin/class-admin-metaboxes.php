@@ -664,7 +664,7 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
 
 		//Trip enquiry Global
-		$use_global_trip_enquiry_option = 'no';
+		$use_global_trip_enquiry_option = 'yes';
 		if ( isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) {
 			$use_global_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) );
 		}
