@@ -1927,6 +1927,10 @@
         }
         &.textarea-field{
             margin-bottom:15px;
+
+            textarea{
+                padding: .6em 1em .6em;
+            }
         }
     } 
     .parsley-errors-list {
