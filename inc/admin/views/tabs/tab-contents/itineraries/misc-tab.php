@@ -5,11 +5,14 @@
 
 		$use_global_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_use_global_trip_enquiry_option', true );
 
+		echo $use_global_trip_enquiry_option;
+
 ?>
 <table class="form-table">
     <tr>
 		<td width="40%"><label for="wp-travel-use-global-trip-enquiry"><?php esc_html_e( 'Use Global Trip Enquiry Option', 'wp-travel' ); ?></label></td>
 		<td width="60%">
+			<input name="wp_travel_use_global_trip_enquiry_option" type="hidden"  value="no">
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
 					<input name="wp_travel_use_global_trip_enquiry_option" type="checkbox" id="wp-travel-use-global-trip-enquiry" <?php checked( $use_global_trip_enquiry_option, 'yes' ); ?> value="yes" />							
