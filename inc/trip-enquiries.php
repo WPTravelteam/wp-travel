@@ -27,10 +27,14 @@ function wp_travel_enquiries_form_fields() {
 			'label' => __( 'Full Name', 'wp-travel' ),
 			'name' => 'wp_travel_enquiry_name',
 			'id' => 'wp-travel-enquiry-name',
+			'placeholder' => __( 'Enter your name', 'wp-travel' ),
 			'validations' => array(
 				'required' => true,
 				'maxlength' => '80',
 				// 'type' => 'alphanum',
+			),
+			'attributes' => array(
+				'placeholder' => __( 'Enter your full name', 'wp-travel' ),
 			),
 			'priority' => 10,
 		),
@@ -42,6 +46,9 @@ function wp_travel_enquiries_form_fields() {
 			'validations' => array(
 				'required' => true,
 				'maxlength' => '60',
+			),
+			'attributes' => array(
+				'placeholder' => __( 'Enter your email', 'wp-travel' ),
 			),
 			'priority' => 60,
 		),
