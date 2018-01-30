@@ -243,7 +243,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     color: #868484;
     text-decoration: none; }
 
-.wp-travel-view-bookings {
+.wp-travel-view-bookings,
+.wp-travel-view-enquiries {
   float: right; }
 
 .left-block,

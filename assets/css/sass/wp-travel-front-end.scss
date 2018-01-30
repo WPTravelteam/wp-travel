@@ -1052,7 +1052,11 @@
             .description-right{
                 text-align:left;
                 border-left:none;
-                padding:0 10px;
+                padding:0 10px 15px;
+
+                .wp-travel-average-review{
+                    display:none;
+                }
             }
 
         } 
