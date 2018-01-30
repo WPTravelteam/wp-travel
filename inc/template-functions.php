@@ -277,6 +277,8 @@ function wp_travel_single_excerpt( $post_id ) {
 	//Get Settings
 	$settings = wp_travel_get_settings();
 
+	$enquery_global_setting = isset( $settings['enable_trip_enquiry_option'] ) ? $settings['enable_trip_enquiry_option'] : 'yes';
+
 	$global_enquiry_option = get_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', true );
 
 	if ( '' === $global_enquiry_option  ) {
@@ -284,7 +286,7 @@ function wp_travel_single_excerpt( $post_id ) {
 	}
 	if( 'yes' == $global_enquiry_option ) {
 
-		$enable_enquiry = $settings['enable_trip_enquiry_option'];
+		$enable_enquiry = $enquery_global_setting;
 		
 	}
 	else {

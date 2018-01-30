@@ -112,8 +112,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.2.0 =
 * New Feature: Sale widget added.
-* New Feature: Inquiry Form aded.
-* New Feature: Date and time added in itinerary timeling.
+* New Feature: Inquiry Form added.
+* New Feature: Date and time added in itinerary timeline.
 * New Feature: Compare Price on Stat.
 * Fixes: Tabs Sortable issue.
 * Fixes: Embeded frame allowed in frontend overview.
