@@ -267,12 +267,18 @@
                 width: 100%;
             }
             .wp-travel-form-field {
-                width: calc(50% - 5px);
-                display: inline-block;
+                width: calc(50% - 10px);
+                display: block;
                 padding-left: 15px;
                 padding-right: 15px;
                 margin-bottom: 15px;
                 position: relative;
+                float: left;
+
+                &:nth-of-type(2n+1) {
+                    clear: left;
+                }
+
                 &.textarea-field {
                     display: block;
                 }
@@ -1627,9 +1633,10 @@
 
 .parsley-errors-list {
     list-style: none;
-    position: absolute;
+    position: relative;
     right: 15px;
     color: #f83531;
+    font-size: 12px;
 }
 
 // Filter by Toolbar
@@ -1947,4 +1954,9 @@
 .enquiry-success-msg {
     padding: 5px;
     border: 2px solid #4FC650;
+}
+.enquiry-error-msg {
+   padding: 5px;
+   display: block;
+   border: 2px solid #f00;
 }
