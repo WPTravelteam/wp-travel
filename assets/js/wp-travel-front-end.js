@@ -175,6 +175,10 @@ jQuery(document).ready(function($) {
     $('#wp-travel-enquiries').submit(function(e) {
 
         e.preventDefault();
+
+        //Remove any previous errors.
+        $('.enquiry-response').remove();
+
         var formData = {
             'wp_travel_enquiry_name': $('#wp-travel-enquiry-name').val(),
             'wp_travel_enquiry_email': $('#wp-travel-enquiry-email').val(),
@@ -187,6 +191,9 @@ jQuery(document).ready(function($) {
             type: "POST",
             url: wp_travel_frontend_vars.ajaxUrl,
             data: formData,
+            beforeSend: function() {
+                $('#wp-travel-enquiry-submit').text('Loading').attr('disabled', 'disabled');
+            },
             success: function(data) {
 
                 if (false == data.success) {
@@ -201,6 +208,12 @@ jQuery(document).ready(function($) {
 
                     }
                 }
+
+                $('#wp-travel-enquiry-submit').text('SUBMIT ENQUIRY').removeAttr('disabled', 'disabled');
+                //Reset Form Fields.
+                $('#wp-travel-enquiry-name').val('');
+                $('#wp-travel-enquiry-email').val('');
+                $('#wp-travel-enquiry-query').val('');
 
                 return false;
             }
