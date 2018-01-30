@@ -4,7 +4,9 @@
     $enable_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_enable_trip_enquiry_option', true );
 
 		$use_global_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_use_global_trip_enquiry_option', true );
-
+		if ( '' ===  $use_global_trip_enquiry_option ) {
+			$use_global_trip_enquiry_option = 'yes';
+		}
 ?>
 <table class="form-table">
     <tr>

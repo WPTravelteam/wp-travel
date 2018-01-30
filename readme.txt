@@ -116,6 +116,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * New Feature: Date and time added in itinerary timeling.
 * New Feature: Compare Price on Stat.
 * Fixes: Tabs Sortable issue.
+* Fixes: Embeded frame allowed in frontend overview.
 * Fixes: Minor issues.
 
 = 1.1.3 =
