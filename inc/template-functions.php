@@ -279,16 +279,13 @@ function wp_travel_single_excerpt( $post_id ) {
 
 	$global_enquiry_option = get_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', true );
 
-	if( 1 == $global_enquiry_option ) {
+	if( 'yes' == $global_enquiry_option ) {
 
 		$enable_enquiry = $settings['enable_trip_enquiry_option'];
 		
 	}
 	else {
 		$enable_enquiry = get_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', true );
-		if ( 1 == $enable_enquiry ) {
-			'yes' == $enable_enquiry;
-		}
 	}
 	
 	$wp_travel_itinerary = new WP_Travel_Itinerary();

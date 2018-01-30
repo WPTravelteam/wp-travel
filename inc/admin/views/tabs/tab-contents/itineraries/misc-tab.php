@@ -3,7 +3,7 @@
 	
     $enable_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_enable_trip_enquiry_option', true );
 
-    $use_global_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_use_global_trip_enquiry_option', true );
+		$use_global_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_use_global_trip_enquiry_option', true );
 
 ?>
 <table class="form-table">
@@ -12,7 +12,7 @@
 		<td width="60%">
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_use_global_trip_enquiry_option" type="checkbox" id="wp-travel-use-global-trip-enquiry" <?php checked( $use_global_trip_enquiry_option, 1 ); ?> value="1" />							
+					<input name="wp_travel_use_global_trip_enquiry_option" type="checkbox" id="wp-travel-use-global-trip-enquiry" <?php checked( $use_global_trip_enquiry_option, 'yes' ); ?> value="yes" />							
 					<span class="switch">
 				  </span>
 				 
@@ -25,7 +25,7 @@
 		<td width="60%">
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_enable_trip_enquiry_option" type="checkbox" id="wp-travel-enable-trip-enquiry-option" <?php checked( $enable_trip_enquiry_option, 1 ); ?> value="1" />							
+					<input name="wp_travel_enable_trip_enquiry_option" type="checkbox" id="wp-travel-enable-trip-enquiry-option" <?php checked( $enable_trip_enquiry_option, 'yes' ); ?> value="yes" />			
 					<span class="switch">
 				  </span>
 				 
