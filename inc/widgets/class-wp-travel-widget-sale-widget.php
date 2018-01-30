@@ -66,7 +66,16 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 		<?php if ( $itineraries->have_posts() ) : ?>
 
 		<div class="wp-travel-itinerary-items">
-			<ul class="wp-travel-itinerary-list">
+			
+			<?php if ( 'grid' == $view_mode ) : ?> 
+						
+				<ul class="wp-travel-itinerary-list">
+
+			<?php else : ?>
+
+				<div class="wp-travel-itinerary-list">
+
+			<?php endif; ?>
 
 				<?php while( $itineraries->have_posts() ) : $itineraries->the_post();
 
@@ -82,8 +91,16 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 					endif;
 					
 				endwhile; wp_reset_postdata(); ?>
-			
-			</ul>
+
+			<?php if ( 'grid' == $view_mode ) : ?> 
+							
+				</ul>
+
+			<?php else : ?>
+
+				</div>
+
+			<?php endif; ?>
 		</div>
 		
 		<?php else : ?>

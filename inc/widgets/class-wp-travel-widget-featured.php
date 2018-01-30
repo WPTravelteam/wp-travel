@@ -71,24 +71,42 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		if ( $itineraries->have_posts() ) : ?>
 
 			<div class="wp-travel-itinerary-items">
+			
+			<?php if ( 'grid' == $view_mode ) : ?> 
+				
 				<ul class="wp-travel-itinerary-list">
 
-					<?php while( $itineraries->have_posts() ) : $itineraries->the_post();
+			<?php else : ?>
 
-						if ( 'grid' == $view_mode ) : 
+				<div class="wp-travel-itinerary-list">
+
+			<?php endif; ?>
+
+				<?php while( $itineraries->have_posts() ) : $itineraries->the_post();
+
+					if ( 'grid' == $view_mode ) : 
+						
+						//Load Grid View Mode.
+						wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); 
+
+					else :
+						wp_travel_get_template_part( 'shortcode/itinerary-item', 'list' );
+						//Load list View Mode.
+					
+					endif;
+					
+				endwhile; wp_reset_postdata(); ?>
+
+			<?php if ( 'grid' == $view_mode ) : ?> 
 							
-							//Load Grid View Mode.
-							wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); 
-
-						else :
-							wp_travel_get_template_part( 'shortcode/itinerary-item', 'list' );
-							//Load list View Mode.
-						
-						endif;
-						
-					endwhile; wp_reset_postdata(); ?>
-				
 				</ul>
+
+			<?php else : ?>
+
+				</div>
+
+			<?php endif; ?>
+			
 			</div>
 		
 		<?php else : ?>
