@@ -1426,4 +1426,8 @@
   .mfp-wrap #wp-travel-enquiries button.mfp-close:hover {
     color: #f83531; }
 
+.enquiry-success-msg {
+  padding: 5px;
+  border: 2px solid #4FC650; }
+
 /*# sourceMappingURL=wp-travel-front-end.css.map */

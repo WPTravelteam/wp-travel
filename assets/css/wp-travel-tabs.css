@@ -95,10 +95,14 @@
         content: "\f223"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-setting a:before {
         font-family: icomoon;
-        content: '\e900'; }
+        content: '\e900';
+        font-size: 12px;
+        line-height: 20px; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-misc_options a:before {
         font-family: icomoon;
-        content: '\e904'; }
+        content: '\e904';
+        font-size: 12px;
+        line-height: 20px; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;

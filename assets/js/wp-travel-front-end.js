@@ -191,12 +191,12 @@ jQuery(document).ready(function($) {
 
                 if (false == data.success) {
                     var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
-                    $('.mfp-content').html(message);
+                    $('#wp-travel-enquiries').append(message);
                 } else {
                     if (true == data.success) {
 
                         var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
-                        $('.mfp-content').html(message);
+                        $('#wp-travel-enquiries').append(message);
 
 
                     }
