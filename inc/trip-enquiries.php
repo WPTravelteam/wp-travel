@@ -317,6 +317,9 @@ function wp_travel_save_user_enquiry(){
 		//Sanitize Values.
 		$enquiry_data = stripslashes_deep( $enquiry_data );
 
+		$wp_travel_post_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : 0;
+		update_post_meta( $new_enquiry, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
+
 		// Finally Update enquiry data.
 		update_post_meta( $new_enquiry, 'wp_travel_trip_enquiry_data', $enquiry_data );
 
