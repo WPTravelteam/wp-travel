@@ -95,7 +95,7 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 		);
-		$settings_fields['misc_options'] = array(
+		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 		);
@@ -278,7 +278,7 @@ class WP_Travel_Admin_Settings {
 	 */
 	function misc_options_tab_callback( $tab, $args ){
 
-		if ( 'misc_options' !== $tab ) {
+		if ( 'misc_options_global' !== $tab ) {
 			return;
 		}
 		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'no';
