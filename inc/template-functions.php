@@ -695,7 +695,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					 default : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-							<?php echo wp_kses_post( $tab_info['content'] ); ?>
+						<?php echo wp_kses_post( $tab_info['content'], wp_travel_allowed_html( array( 'a', 'iframe' ) )  ); ?>
 						</div>
 					<?php break; ?>
 				<?php } ?>
@@ -1414,3 +1414,17 @@ function wp_travel_excerpt_more( $more ) {
 	return '...';
 }
 add_filter( 'excerpt_more', 'wp_travel_excerpt_more' );
+
+function wp_travel_wpkses_post_iframe( $tags, $context ) {
+	if ( 'post' === $context ) {
+		$tags['iframe'] = array(
+			'src'             => true,
+			'height'          => true,
+			'width'           => true,
+			'frameborder'     => true,
+			'allowfullscreen' => true,
+		);
+	}
+	return $tags;
+}
+add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
