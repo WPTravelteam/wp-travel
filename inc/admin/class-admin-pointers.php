@@ -23,6 +23,10 @@ function __construct() {
     // add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
     add_action( 'admin_notices', array( $this, 'paypal_addon_admin_notice' ) );
+
+    add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
+
+    add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
     
 
 }
@@ -221,6 +225,48 @@ function load_pointers( $hook_suffix ) {
         }
 
     }
+
+    /**
+     * wp_travel_paypal_merge_notice
+     * 
+     * WP Travel Standard paypal merge info.
+     * @since 1.2
+     */
+    function wp_travel_paypal_merge_notice(){
+
+        if ( is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
+
+            $user_id = get_current_user_id();
+            
+            if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) {
+
+                ?>
+                    <div class="notice notice-info is-dismissible">
+                        <p>
+                            <strong><?php printf( __( 'WP Travel Standard Paypal plugin will be merged to WP Travel in the next update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the WP Travel Standard Paypal plugin before updating to next WP Travel Release.  %1sDismiss this Message%2s', 'wp-travel' ), '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
+                        </p>
+
+                    </div>
+
+                <?php
+            }
+
+        }
+
+    }
+
+    /**
+     * Dismiss info nag message.
+     */
+    function wp_travel_get_dismissied_nag_messages() {
+        
+        $user_id = get_current_user_id();
+        
+        if ( isset( $_GET['wp-travel-dismissed-nag'] ) )
+           
+            add_user_meta( $user_id, 'wp_travel_dismissied_nag_messages', 'true', true );
+        
+        }
 
 }
 
