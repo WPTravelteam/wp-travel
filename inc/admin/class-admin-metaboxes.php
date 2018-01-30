@@ -122,7 +122,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		$trips['misc_options'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
-			'content_title' => __( 'Misc. Options', 'wp-travel' ),
+			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 		);
 
 		// $trips['advanced'] = array(
