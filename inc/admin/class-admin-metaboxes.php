@@ -585,10 +585,11 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_trip_exclude = $_POST['wp_travel_trip_exclude'];
 			update_post_meta( $post_id, 'wp_travel_trip_exclude', $wp_travel_trip_exclude );
 		}
+		$wp_travel_outline = '';
 		if ( isset( $_POST['wp_travel_outline'] ) ) {
 			$wp_travel_outline = $_POST['wp_travel_outline'];
-			update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 		}
+		update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 
 		if ( isset( $_POST['wp_travel_start_date'] ) ) {
 			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
@@ -683,11 +684,12 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
 			update_post_meta( $post_id, 'wp_travel_tabs', $wp_travel_tabs );
 		}
+		$wp_travel_faq_question = '';
 		if ( isset( $_POST['wp_travel_faq_question'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_faq_question = ( wp_unslash( $_POST['wp_travel_faq_question'] ) );
-			update_post_meta( $post_id, 'wp_travel_faq_question', $wp_travel_faq_question );
 		}
+		update_post_meta( $post_id, 'wp_travel_faq_question', $wp_travel_faq_question );
 		if ( isset( $_POST['wp_travel_faq_answer'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_faq_answer = ( wp_unslash( $_POST['wp_travel_faq_answer'] ) );
