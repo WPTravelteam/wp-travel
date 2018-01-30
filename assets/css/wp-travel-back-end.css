@@ -348,9 +348,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         padding-left: 6px; }
       .stat-toolbar-form .checkbox-default-design label .switch {
         height: 18px;
-        width: 18px; }
+        width: 19px; }
     .stat-toolbar-form .checkbox-default-design input:checked ~ .switch, .stat-toolbar-form .checkbox-default-design .wp-travel-form-field select:checked ~ .switch, .wp-travel-form-field .stat-toolbar-form .checkbox-default-design select:checked ~ .switch, .wp-travel-form-field .stat-toolbar-form .checkbox-default-design .field-group input:checked ~ .switch, .stat-toolbar-form .checkbox-default-design .field-group .wp-travel-form-field input:checked ~ .switch, .stat-toolbar-form .checkbox-default-design .wp-travel-form-field textarea:checked ~ .switch, .wp-travel-form-field .stat-toolbar-form .checkbox-default-design textarea:checked ~ .switch {
-      left: 30px; }
+      left: 29px; }
   .stat-toolbar-form .show-compare-stat {
     margin-top: 25px;
     display: inline-block;
