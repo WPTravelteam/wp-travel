@@ -5,8 +5,6 @@
 
 		$use_global_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_use_global_trip_enquiry_option', true );
 
-		echo $use_global_trip_enquiry_option;
-
 ?>
 <table class="form-table">
     <tr>
