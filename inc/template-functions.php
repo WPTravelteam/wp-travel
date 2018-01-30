@@ -279,6 +279,9 @@ function wp_travel_single_excerpt( $post_id ) {
 
 	$global_enquiry_option = get_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', true );
 
+	if ( '' === $global_enquiry_option  ) {
+		$global_enquiry_option = 'yes';
+	}
 	if( 'yes' == $global_enquiry_option ) {
 
 		$enable_enquiry = $settings['enable_trip_enquiry_option'];
