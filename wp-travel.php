@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 1.1.3
+ * Version: 1.2.0
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
@@ -34,7 +34,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.1.3';
+		public $version = '1.2.0';
 		/**
 		 * The single instance of the class.
 		 *
@@ -175,9 +175,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-location.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-trip-type.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-sale-widget.php', WP_TRAVEL_ABSPATH );
-			
 
-			// Pointers Class Includes
+			// Pointers Class Includes.
 			include sprintf( '%s/inc/admin/class-admin-pointers.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
