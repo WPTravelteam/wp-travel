@@ -1196,7 +1196,16 @@ function wp_travel_archive_toolbar() {
 		</div>
 	</div>
 	<?php endif; ?>
-	<div class="wp-travel-archive-content">
+	<?php 
+		
+		$archive_sidebar_class = '';
+		
+		if( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
+			$archive_sidebar_class = 'wp-travel-trips-has-sidebar';
+		} 
+		
+	?>
+	<div class="wp-travel-archive-content <?php echo esc_attr ( $archive_sidebar_class ); ?>">
 		<?php if ( 'grid' === $view_mode ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>			
 			<div class="wp-travel-itinerary-items">
@@ -1223,6 +1232,27 @@ function wp_travel_archive_wrapper_close() {
 		</div>
 <?php
 	endif;
+}
+
+/**
+ * Archive page sidebar 
+ * 
+ * @since 1.2.1
+ * @return void
+ */
+
+function wp_travel_archive_listing_sidebar(){
+
+	if ( is_wp_travel_archive_page() && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) : ?>
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<?php dynamic_sidebar('wp-travel-archive-sidebar'); ?>
+		</div>
+
+	<?php 
+	
+	endif;
+
 }
 
 /**
@@ -1403,6 +1433,8 @@ add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
 
 add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
+
+add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
 
 add_action( 'save_post', 'wp_travel_clear_booking_transient' );
 /**
