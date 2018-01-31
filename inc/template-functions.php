@@ -1362,7 +1362,7 @@ function wp_travel_clear_booking_transient( $post_id ) {
 	// Booking Count Transient
 	$itinerary_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
 	delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
-	// error_log( 'site transient ' . $itinerary_id );
+	delete_site_transient( '_transient_wt_booking_payment_stat_data' );
 	// @since 1.0.6
 	do_action( 'wp_travel_after_deleting_booking_transient' );
 }

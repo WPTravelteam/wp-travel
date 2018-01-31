@@ -82,6 +82,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define( 'WP_TRAVEL_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 			$this->define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 			$this->define( 'WP_TRAVEL_VERSION', $this->version );
+			$this->define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', 10 ); // In percent.
 		}
 
 		/**
@@ -108,6 +109,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				$this->uploader = new WP_Travel_Admin_Uploader();
 
 				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
+				// add_filter( 'wp_travel_stat_data', 'wp_travel_payment_stat_data', 10, 2 );
 			}
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
@@ -164,6 +166,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
+
+			include sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
+
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-ajax.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
