@@ -1245,7 +1245,7 @@ function wp_travel_archive_listing_sidebar(){
 
 	if ( is_wp_travel_archive_page() && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) : ?>
 
-		<div id="secondary" class="widget-area" role="complementary">
+		<div id="wp-travel-secondary" class="wp-trave-widget-area widget-area" role="complementary">
 			<?php dynamic_sidebar('wp-travel-archive-sidebar'); ?>
 		</div>
 

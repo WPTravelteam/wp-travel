@@ -743,6 +743,48 @@
       .widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right .wp-travel-average-review,
       .footer-inner-wrapper .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right .wp-travel-average-review {
         display: none; }
+@media (min-width: 768px) and (max-width: 991px) {
+  .widget-area.wp-trave-widget-area .wp-travel-default-article,
+  .footer-inner-wrapper.wp-trave-widget-area .wp-travel-default-article {
+    padding: 15px; }
+    .widget-area.wp-trave-widget-area .wp-travel-default-article .wp-travel-article-image-wrap,
+    .footer-inner-wrapper.wp-trave-widget-area .wp-travel-default-article .wp-travel-article-image-wrap {
+      width: 28%; }
+    .widget-area.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper,
+    .footer-inner-wrapper.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper {
+      width: 69%; }
+      .widget-area.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left,
+      .footer-inner-wrapper.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left {
+        width: 70%; }
+      .widget-area.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right,
+      .footer-inner-wrapper.wp-trave-widget-area .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right {
+        width: 30%;
+        float: left;
+        text-align: center;
+        border-left: 1px solid #eee; } }
+
+.wp-travel-trips-has-sidebar {
+  width: 66.666667%;
+  padding-right: 15px;
+  float: left; }
+  .wp-travel-trips-has-sidebar + .wp-trave-widget-area {
+    width: 33.3333%;
+    float: right;
+    padding: 0px 15px; }
+  @media (max-width: 992px) {
+    .wp-travel-trips-has-sidebar {
+      width: 100%;
+      padding-right: 0; }
+      .wp-travel-trips-has-sidebar + .wp-trave-widget-area {
+        width: 100%;
+        padding-left: 0; } }
+  .wp-travel-trips-has-sidebar .wp-travel-default-article .wp-travel-article-image-wrap {
+    margin-right: 0; }
+
+@media (max-width: 992px) {
+  .post-type-archive-itineraries .wp-travel-trips-has-sidebar + .wp-trave-widget-area {
+    padding: 0;
+    float: left; } }
 
 #footer .footer-inner-wrapper .wp-travel-default-article {
   border-color: #505050; }

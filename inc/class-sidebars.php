@@ -31,9 +31,9 @@ class Wp_Travel_Sidebars {
             'name' => __( 'WP Travel : Archive Sidebar', 'wp-travel' ),
             'id' => 'wp-travel-archive-sidebar',
             'description' => __( 'Widgets in this area will be shown on WP Travel Trip Archives', 'wp-travel' ),
-            'before_widget' => '<li id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</li>',
-            'before_title'  => '<h2 class="widgettitle">',
+            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</section>',
+            'before_title'  => '<h2 class="widget-title">',
             'after_title'   => '</h2>',
         ) );
 		
