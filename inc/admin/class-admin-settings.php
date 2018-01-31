@@ -219,6 +219,26 @@ class WP_Travel_Admin_Settings {
 					</span>
 				</td>
 			<tr>
+			<tr>
+				<th>
+					<label><?php esc_html_e( 'Admin Email Template', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<?php 
+						
+						$template_content = '';
+
+						if(empty( $template_content )) {
+
+							$template_content = wp_travel_admin_email_template();
+
+						}
+						
+						wp_editor( $template_content, 'wp_travel_admin_booking_email_template' );
+						
+					?>
+				</td>
+			<tr>
 		</table>
 	<?php
 	}

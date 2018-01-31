@@ -67,6 +67,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->includes();
 			$this->init_hooks();
 			$this->init_shortcodes();
+			$this->init_sidebars();
 		}
 
 		/**
@@ -146,6 +147,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				define( $name, $value );
 			}
 		}
+		/**
+		 * Init Sidebars for WP Travel.
+		 */
+		private function init_sidebars(){
+			$plugin_sidebars = new Wp_Travel_Sidebars();
+			$plugin_sidebars->init();
+		}
 
 		/**
 		 * Include required core files used in admin and on the frontend.
@@ -184,6 +192,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			// Pointers Class Includes.
 			include sprintf( '%s/inc/admin/class-admin-pointers.php', WP_TRAVEL_ABSPATH );
+
+			//Include Sidebars Class.
+			include sprintf( '%s/inc/class-sidebars.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );

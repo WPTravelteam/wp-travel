@@ -1196,7 +1196,16 @@ function wp_travel_archive_toolbar() {
 		</div>
 	</div>
 	<?php endif; ?>
-	<div class="wp-travel-archive-content">
+	<?php 
+		
+		$archive_sidebar_class = '';
+		
+		if( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
+			$archive_sidebar_class = 'wp-travel-trips-has-sidebar';
+		} 
+		
+	?>
+	<div class="wp-travel-archive-content <?php echo esc_attr ( $archive_sidebar_class ); ?>">
 		<?php if ( 'grid' === $view_mode ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>			
 			<div class="wp-travel-itinerary-items">
@@ -1223,6 +1232,122 @@ function wp_travel_archive_wrapper_close() {
 		</div>
 <?php
 	endif;
+}
+
+/**
+ * Archive page sidebar 
+ * 
+ * @since 1.2.1
+ * @return void
+ */
+
+function wp_travel_archive_listing_sidebar(){
+
+	if ( is_wp_travel_archive_page() && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) : ?>
+
+		<div id="wp-travel-secondary" class="wp-travel-widget-area widget-area" role="complementary">
+
+
+
+			<section id="wp_travel_search_itineraries" class="widget widget_wp_travel_search_itineraries">
+				<h2 class="widget-title">Find your Dream holiday</h2>		
+				<div class="wp-travel-itinerary-items">
+					
+					
+						<form>
+							<div class="wp-travel-form-field ">
+								<label>Keyword</label>
+  								<input type="text" id="" name="">
+							</div>
+							<div class="wp-travel-form-field ">
+								<label for="trip_types">
+									Trip Type
+								</label>
+								<select name="itinerary_types" id="trip_types" class="wp-travel-taxonomy">
+									<option value="0" selected="selected">All</option>
+									<option class="level-0" value="casual-tours">Casual Tours</option>
+								</select>			
+							</div>
+							<div class="wp-travel-form-field ">
+								<label for="trip_locations">
+									Location
+								</label>
+								<select name="travel_locations" id="trip_locations" class="wp-travel-taxonomy">
+									<option value="0" selected="selected">All</option>
+									<option class="level-0" value="bhutan">Bhutan</option>
+									<option class="level-0" value="nepal">Nepal</option>
+									<option class="level-0" value="thailand">Thailand</option>
+								</select>		
+							</div>
+							<div class="wp-travel-form-field ">
+								<label for="trip_price">
+									Price
+								</label>
+								<select id="trip_price" name="price" class="wp_travel_input_filters price">
+									<option value="low_high" data-type="meta">Price low to high</option>
+									<option value="high_low" data-type="meta">Price high to low</option>
+								</select>		
+							</div>
+							<div class="wp-travel-form-field wp-trave-price-range">
+								<label for="amount">Price range</label>
+  								<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  								<div id="slider-range"></div>
+							</div>
+
+
+							<div class="wp-travel-form-field wp-travel-trip-duration">
+								<label>Trip Duration</label>
+								<span class="trip-duration-calender">
+									<small>From</small>
+									<input type="text" id="datepicker1" name="">
+									<span class="calender-icon"></span>
+								</span>
+  								<span class="trip-duration-calender">
+  									<small>To</small>
+  									<input type="text" id="datepicker2" name="">
+  									<span class="calender-icon"></span>
+  								</span>
+  								
+							</div>
+
+							<div class="wp-travel-search">
+								<input type="submit" name="wp-trip_search" id="wp-trip-search" class="button button-primary" value="Search">
+							</div>
+
+
+
+							<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+
+							<script type="text/javascript">
+								jQuery(document).ready(function($) {
+								    $( "#slider-range" ).slider({
+								      range: true,
+								      min: 0,
+								      max: 500,
+								      values: [ 75, 300 ],
+								      slide: function( event, ui ) {
+								        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+								      }
+								    });
+								    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+								      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+								    $( ".trip-duration-calender input" ).datepicker();
+
+								    });
+							</script>
+						</form>
+
+				</div>
+		
+		</section>
+			<?php dynamic_sidebar('wp-travel-archive-sidebar'); ?>
+		</div>
+
+	<?php 
+	
+	endif;
+
 }
 
 /**
@@ -1403,6 +1528,8 @@ add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
 
 add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
+
+add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
 
 add_action( 'save_post', 'wp_travel_clear_booking_transient' );
 /**

@@ -36,6 +36,18 @@
     }
 }
 
+@mixin sidr-view-and-mob{
+    @media (min-width:768px) and (max-width:991px){
+        @content;
+    }
+}
+
+@mixin above-sidr-view{
+    @media (min-width:993px){
+        @content;
+    }
+}
+
 @mixin mob {
     @media (max-width: 767px) {
         @content;
@@ -1063,7 +1075,82 @@
     } 
 
 
+    @include sidr-view-and-mob{
+        &.wp-travel-widget-area{
+
+            .wp-travel-default-article{
+                padding:15px;
+
+                .wp-travel-article-image-wrap{
+                    width:28%;
+                }
+                .wp-travel-entry-content-wrapper{
+                    width:69%;
+                
+                    .description-left{
+                        width:70%;
+                    }
+                    .description-right{
+                        width: 30%;
+                        float: left;
+                        text-align: center;
+                        border-left: 1px solid #eee;
+                    }
+                  
+                }
+            } 
+        }
+    }
 } 
+
+.wp-travel-trips-has-sidebar {
+    width: 66.666667%;
+    padding-right: 15px;
+    float: left;
+
+    & + .wp-travel-widget-area{
+        width:33.3333%;
+        float:right;
+        padding: 0px 15px;
+    }
+
+    @include sidr-view{
+        width:100%;
+        padding-right:0;
+
+        & + .wp-travel-widget-area {
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+
+    .wp-travel-default-article{
+        
+        .wp-travel-article-image-wrap{
+            margin-right:0;
+        }
+    } 
+}
+
+.post-type-archive-itineraries{
+
+    .wp-travel-trips-has-sidebar {
+
+        & + .wp-travel-widget-area{
+            @include sidr-view{
+                padding:0;
+                float: left;
+             }
+             @include above-sidr-view{
+                padding-right:0;
+            }
+
+        }
+        
+    }
+
+    
+}
 
 #footer{
     .footer-inner-wrapper{
@@ -1077,6 +1164,134 @@
         }
     } 
 }
+
+
+//advance search 
+.widget_wp_travel_search_itineraries{
+
+    .wp-travel-itinerary-items{
+        padding:15px;
+        border: 1px solid #ddd;
+    }
+    .wp-travel-form-field {
+        margin-bottom:15px;
+    }
+    label {
+        display: block;
+        font-weight: 500;
+    }
+    select,
+    input{
+        width: 100%;
+    }
+    #amount{
+        background-color: transparent;
+        color: #f83531 !important;
+    }
+    .wp-trave-price-range{
+
+        label,
+        input{
+            display:inline-block;
+        }
+        input{
+            color: #f83531;
+        }
+    }
+    input[type="submit"]{
+        padding:.6em 1em .6em;
+        line-height: 1.333;
+    }
+    .trip-duration-calender {
+        width: 50%;
+        display: block;
+        float: left;
+        margin-bottom: 20px;
+        position:relative;
+
+        input{
+
+            max-width: 120px;
+            display: block;
+            padding-left: 24px;
+        }
+        .calender-icon{
+
+            position: absolute;
+            top: 22px;
+            left: 1px;
+            width: 28px;
+            text-align: center;
+            line-height: 26px;
+            background: #ddd;
+
+            &:before{
+                content: "\f508";
+                font-family:dashicons;
+            }
+        }
+    }
+} 
+
+//jquery ui range slider styling
+.ui-widget.ui-widget-content {
+    border: 1px solid #c5c5c5;
+    border-radius: 10px;
+}
+
+.ui-slider {
+    position: relative;
+    text-align: left;
+
+    .ui-slider-range {
+        position: absolute;
+        z-index: 1;
+        font-size: .7em;
+        display: block;
+        border: 0;
+        background-position: 0 0;
+    }
+
+    .ui-widget-header {
+        background: #e9e9e9;
+    }
+    .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 1.2em;
+        height: 1.2em;
+        cursor: default;
+        -ms-touch-action: none;
+        touch-action: none;
+    }
+
+}
+.ui-slider-horizontal {
+    height: .8em;
+
+    .ui-slider-range {
+        top: 0;
+        height: 100%;
+    }
+    .ui-slider-handle {
+        top: -.3em;
+        margin-left: -.6em;
+        border-radius: 50%;
+        outline: none;
+    }
+}
+
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default, 
+.ui-button, html .ui-button.ui-state-disabled:hover, 
+html .ui-button.ui-state-disabled:active {
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+}
+
 
 
 .wp-travel-review-text {
