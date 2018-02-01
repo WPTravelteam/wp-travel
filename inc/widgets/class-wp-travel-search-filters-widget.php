@@ -41,75 +41,97 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		echo $before_widget;
         echo ( $title ) ? $before_title . $title . $after_title : '';
         ?>
-				<div class="wp-travel-itinerary-items">
-					
-					
-						<form>
-							<div class="wp-travel-form-field ">
-								<label>Keyword</label>
-  								<input type="text" id="" name="">
-							</div>
-							<div class="wp-travel-form-field ">
-								<label for="trip_types">
-									Trip Type
-								</label>
-								<select name="itinerary_types" id="trip_types" class="wp-travel-taxonomy">
-									<option value="0" selected="selected">All</option>
-									<option class="level-0" value="casual-tours">Casual Tours</option>
-								</select>			
-							</div>
-							<div class="wp-travel-form-field ">
-								<label for="trip_locations">
-									Location
-								</label>
-								<select name="travel_locations" id="trip_locations" class="wp-travel-taxonomy">
-									<option value="0" selected="selected">All</option>
-									<option class="level-0" value="bhutan">Bhutan</option>
-									<option class="level-0" value="nepal">Nepal</option>
-									<option class="level-0" value="thailand">Thailand</option>
-								</select>		
-							</div>
-							<div class="wp-travel-form-field ">
-								<label for="trip_price">
-									Price
-								</label>
-								<select id="trip_price" name="price" class="wp_travel_input_filters price">
-									<option value="low_high" data-type="meta">Price low to high</option>
-									<option value="high_low" data-type="meta">Price high to low</option>
-								</select>		
-							</div>
-							<div class="wp-travel-form-field wp-trave-price-range">
-								<label for="amount">Price range</label>
-  								<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-  								<div id="slider-range"></div>
-							</div>
+            <div class="wp-travel-itinerary-items">
+                <form>
+                    <div class="wp-travel-form-field ">
+                        <label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
+                            <?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
+                            <input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+                    </div>
+                    <div class="wp-travel-form-field ">
+                        <label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
+                        <?php
+                            $taxonomy = 'itinerary_types';
+                            $args = array(
+                                'show_option_all'    => __( 'All', 'wp-travel' ),
+                                'hide_empty'         => 0,
+                                'selected'           => 1,
+                                'hierarchical'       => 1,
+                                'name'               => $taxonomy,
+                                'class'              => 'wp-travel-taxonomy',
+                                'taxonomy'           => $taxonomy,
+                                'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
+                                'value_field'		 => 'slug',
+                            );
+
+                        wp_dropdown_categories( $args, $taxonomy );
+                        ?>			
+                    </div>
+                    <div class="wp-travel-form-field ">
+                        <label><?php esc_html_e( 'Location:', 'wp-travel' ) ?></label>
+                            <?php
+                            $taxonomy = 'travel_locations';
+                            $args = array(
+                                'show_option_all'    => __( 'All', 'wp-travel' ),
+                                'hide_empty'         => 0,
+                                'selected'           => 1,
+                                'hierarchical'       => 1,
+                                'name'               => $taxonomy,
+                                'class'              => 'wp-travel-taxonomy',
+                                'taxonomy'           => $taxonomy,
+                                'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
+                                'value_field'		 => 'slug',
+                            );
+
+                            wp_dropdown_categories( $args, $taxonomy );
+                            ?>
+                    </div>
+                    <div class="wp-travel-form-field ">
+                        <input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ) ?>" />
+                            <?php
+                                $price = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+                                $type = ( int ) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
+                                $location = ( int ) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
+                            ?>
+                        <label for="trip_price">
+                            <?php esc_html_e( 'Price', 'wp-travel' ); ?>
+                        </label>
+                        <select name="price" class="wp_travel_input_filters price">
+                            <option value="">--</option>
+                            <option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ) ?></option>
+                            <option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ) ?></option>
+                        </select>	
+                    </div>
+                    <div class="wp-travel-form-field wp-trave-price-range">
+                        <label for="amount">Price range</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <div id="slider-range"></div>
+                    </div>
 
 
-							<div class="wp-travel-form-field wp-travel-trip-duration">
-								<label>Trip Duration</label>
-								<span class="trip-duration-calender">
-									<small>From</small>
-									<input type="text" id="datepicker1" name="">
-									<span class="calender-icon"></span>
-								</span>
-  								<span class="trip-duration-calender">
-  									<small>To</small>
-  									<input type="text" id="datepicker2" name="">
-  									<span class="calender-icon"></span>
-  								</span>
-  								
-							</div>
+                    <div class="wp-travel-form-field wp-travel-trip-duration">
+                        <label>Trip Duration</label>
+                        <span class="trip-duration-calender">
+                            <small>From</small>
+                            <input type="text" id="datepicker1" name="">
+                            <span class="calender-icon"></span>
+                        </span>
+                        <span class="trip-duration-calender">
+                            <small>To</small>
+                            <input type="text" id="datepicker2" name="">
+                            <span class="calender-icon"></span>
+                        </span>
+                        
+                    </div>
 
-							<div class="wp-travel-search">
-								<input type="submit" name="wp-trip_search" id="wp-trip-search" class="button button-primary" value="Search">
-							</div>
+                    <div class="wp-travel-search">
+                        <input type="submit" name="wp-trip_search" id="wp-trip-search" class="button button-primary" value="Search">
+                    </div>
+                    
+                </form>
 
-							<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-
-						</form>
-
-				</div>
-            <?php
+            </div>
+        <?php
 	
 		echo $after_widget;
 	}
