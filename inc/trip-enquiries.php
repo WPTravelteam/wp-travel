@@ -207,6 +207,57 @@ function wp_travel_enquiries_info(){
 
 }
 
+/*
+ * ADMIN COLUMN - HEADERS
+ */
+add_filter( 'manage_edit-itinerary-enquiries_columns', 'wp_travel_enquiries_list_columns' );
+
+/**
+ * Customize Admin column.
+ *
+ * @param  Array $enquiries_column List of columns.
+ * @return Array                  [description]
+ */
+function wp_travel_enquiries_list_columns( $enquiries_column ) {
+
+	$new_columns['cb'] 			 = '<input type="checkbox" />';
+	$new_columns['title'] 		 = _x( 'Title', 'column name', 'wp-travel' );
+	$new_columns['contact_name'] = __( 'Contact Name', 'wp-travel' );
+	$new_columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
+	$new_columns['date'] 		 = __( 'Booking Date', 'wp-travel' );
+	return $new_columns;
+}
+
+/*
+ * ADMIN COLUMN - CONTENT
+ */
+add_action( 'manage_itinerary-enquiries_posts_custom_column', 'wp_travel_enquiries_content_manage_columns', 10, 2 );
+
+/**
+ * Add data to custom column.
+ *
+ * @param  String $column_name Custom column name.
+ * @param  int 	  $id          Post ID.
+ */
+function wp_travel_enquiries_content_manage_columns( $column_name, $id ) {
+
+	$column_data = get_post_meta ( $id, 'wp_travel_trip_enquiry_data', true );
+
+	switch ( $column_name ) {
+		case 'contact_name':
+			$name = isset( $column_data['wp_travel_enquiry_name'] ) ? $column_data['wp_travel_enquiry_name'] : ''  ;
+			echo esc_attr( $name );
+			break;
+		case 'contact_email':
+			$email = isset( $column_data['wp_travel_enquiry_email'] ) ? $column_data['wp_travel_enquiry_email'] : ''  ; ?>
+				<a href="mailto:<?php echo esc_attr( $email ) ?>"><?php echo esc_attr( $email ) ?></a>
+			<?php 
+			break;
+		default:
+			break;
+	} // end switch
+}
+
 /**
  * Save Post meta data.
  *
