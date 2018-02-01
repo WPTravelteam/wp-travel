@@ -46,7 +46,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
                     <div class="wp-travel-form-field ">
                         <label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
                             <?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
-                            <input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+                            <input class="wp_travel_search_widget_filters_input" type="text" name="keyword" id="wp-travel-filter-keyword" value="<?php echo ( isset( $_GET['keyword'] ) ) ? esc_textarea( $_GET['keyword'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
                     </div>
                     <div class="wp-travel-form-field ">
                         <label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>

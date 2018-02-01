@@ -1373,6 +1373,19 @@ function wp_travel_posts_filter( $query ) {
 
 			}
 
+			// Keywords Search.
+
+			if ( isset( $_GET['keyword'] ) ) {
+
+				$keyword = $_GET['keyword'];
+
+				if ( '' !== $keyword ) {
+					$query->set( 's', $keyword );
+				}
+
+
+			}
+
 			// Filter by location and trip type.
 			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ) {
 
