@@ -192,6 +192,15 @@ class WP_Travel_Admin_Settings {
 		}
 		$send_booking_email_to_admin = isset( $args['settings']['send_booking_email_to_admin'] ) ? $args['settings']['send_booking_email_to_admin'] : 'yes';
 		?>
+
+		<div class="wp-travel-tab-email-setting clearfix">
+			<div class="wp-collapse-open">
+				<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
+				<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
+			</div>
+		</div>
+
+		
 		<table class="form-table">
 			<tr>
 				<th>
@@ -206,7 +215,7 @@ class WP_Travel_Admin_Settings {
 						</label>
 					</span>
 				</td>
-			<tr>
+			</tr>
 			<tr>
 				<th>
 					<label><?php esc_html_e( 'Admin Email Template', 'wp-travel' ); ?></label>
@@ -226,8 +235,13 @@ class WP_Travel_Admin_Settings {
 						
 					?>
 				</td>
-			<tr>
+			</tr>
 		</table>
+
+
+		
+
+
 	<?php
 	}
 
