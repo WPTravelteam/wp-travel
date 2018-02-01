@@ -33,7 +33,11 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
-		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
+		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
+		
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
 
@@ -95,9 +99,17 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 		);
+		$settings_fields['payment'] = array(
+			'tab_label' => __( 'Payment', 'wp-travel' ),
+			'content_title' => __( 'Payment Settings', 'wp-travel' ),
+		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+		);
+		$settings_fields['debug'] = array(
+			'tab_label' => __( 'Debug', 'wp-travel' ),
+			'content_title' => __( 'Debug Options', 'wp-travel' ),
 		);
 
 		$tabs[ self::$collection ] = $settings_fields;
@@ -337,6 +349,114 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Callback for Payment tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	function wp_travel_payment_tab_call_back( $tab, $args ) {
+		if ( 'payment' !== $tab ) {
+			return;
+		}
+		$partial_payment = isset( $args['settings']['partial_payment'] ) ? $args['settings']['partial_payment'] : '';
+		$minimum_partial_payout = isset( $args['settings']['minimum_partial_payout'] ) ? $args['settings']['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+		$paypal_email = ( isset( $args['settings']['paypal_email'] ) ) ? $args['settings']['paypal_email'] : '';
+		$payment_option_paypal = ( isset( $args['settings']['payment_option_paypal'] ) ) ? $args['settings']['payment_option_paypal'] : ''; ?>
+		
+		<table class="form-table">
+			<tr>
+				<th><label for="partial_payment"><?php esc_html_e( 'Partial Payment', 'wp-travel' ) ?></label></th>
+				<td>
+				<span class="show-in-frontend checkbox-default-design">
+					<label data-on="ON" data-off="OFF">
+						<input type="checkbox" value="yes" <?php checked( 'yes', $partial_payment ) ?> name="partial_payment" id="partial_payment"/>		
+						<span class="switch">
+					</span>
+					
+					</label>
+				</span>
+					<p class="description"><?php esc_html_e( 'Enable partial payment while booking.', 'wp-travel' ) ?>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="minimum_partial_payout"><?php esc_html_e( 'Minimum Payout (%)', 'wp-travel' ) ?></label></th>
+				<td>
+					<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ) ?>" name="minimum_partial_payout" id="minimum_partial_payout" class="wt-slider" />
+					<label><input type="number" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ) ?>" name="minimum_partial_payout" id="minimum_partial_payout_output" />%</label>
+					<p class="description"><?php esc_html_e( 'Minimum percent of amount to pay while booking.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+		</table>
+		<?php do_action( 'wp_travel_payment_gateway_fields', $args ); ?>
+		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Standard Paypal', 'wp-travel' )?></h3>
+		<table class="form-table">
+			<tr>
+				<th><label for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ) ?></label></th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+					<label data-on="ON" data-off="OFF">
+						<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ) ?> name="payment_option_paypal" id="payment_option_paypal"/>
+						<span class="switch">
+					</span>
+					
+					</label>
+				</span>
+					<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ) ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $paypal_email ) ?>" name="paypal_email" id="paypal_email"/>
+					<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+		</table>
+	<?php
+	}
+
+	/**
+	 * Callback for Debug tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	function wp_travel_debug_tab_call_back( $tab, $args ) {
+		if ( 'debug' !== $tab ) {
+			return;
+		}
+
+		$wt_test_mode = ( isset( $args['settings']['wt_test_mode'] ) ) ? $args['settings']['wt_test_mode'] : 'yes';
+		$wt_test_email = ( isset( $args['settings']['wt_test_email'] ) ) ? $args['settings']['wt_test_email'] : '';
+		?>
+		<h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'Test Payment', 'wp-travel' ) ?></h4>
+		<table class="form-table">
+			<tr>
+				<th><label for="wt_test_mode"><?php esc_html_e( 'Test Mode', 'wp-travel' ) ?></label></th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input type="checkbox" value="yes" <?php checked( 'yes', $wt_test_mode ) ?> name="wt_test_mode" id="wt_test_mode"/>					
+							<span class="switch">
+						</span>
+						</label>
+					</span>
+					<p class="description"><?php esc_html_e( 'Enable test mode to make test payment.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="wt_test_email"><?php esc_html_e( 'Test Email', 'wp-travel' ) ?></label></th>
+				<td><input type="text" value="<?php echo esc_attr( $wt_test_email ) ?>" name="wt_test_email" id="wt_test_email"/>
+				<p class="description"><?php esc_html_e( 'Test email address will get test mode payment emails.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+		</table>
+		<?php do_action( 'wp_travel_below_debug_tab_fields' ); ?>
+	<?php
+	}
+
+	/**
 	 * Save settings.
 	 *
 	 * @return void
@@ -364,6 +484,25 @@ class WP_Travel_Admin_Settings {
 
 			// @since 1.2 Misc. Options
 			$settings['enable_trip_enquiry_option'] = $enable_trip_enquiry_option;
+
+			// Merged Standard paypal Addons @since 1.2.1
+			$wt_test_mode = ( isset( $_POST['wt_test_mode'] ) && '' !== $_POST['wt_test_mode'] ) ? $_POST['wt_test_mode'] : '';
+			$wt_test_email = ( isset( $_POST['wt_test_email'] ) && '' !== $_POST['wt_test_email'] ) ? $_POST['wt_test_email'] : '';
+
+			$partial_payment = ( isset( $_POST['partial_payment'] ) && '' !== $_POST['partial_payment'] ) ? $_POST['partial_payment'] : '';
+			$minimum_partial_payout = ( isset( $_POST['minimum_partial_payout'] ) && '' !== $_POST['minimum_partial_payout'] ) ? $_POST['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+
+			$paypal_email = ( isset( $_POST['paypal_email'] ) && '' !== $_POST['paypal_email'] ) ? $_POST['paypal_email'] : '';
+			$payment_option_paypal = ( isset( $_POST['payment_option_paypal'] ) && '' !== $_POST['payment_option_paypal'] ) ? $_POST['payment_option_paypal'] : '';
+
+			$settings['wt_test_mode'] = $wt_test_mode;
+			$settings['wt_test_email'] = $wt_test_email;
+			$settings['partial_payment'] = $partial_payment;
+			$settings['minimum_partial_payout'] = $minimum_partial_payout;
+
+			$settings['paypal_email'] = $paypal_email;
+			$settings['payment_option_paypal'] = $payment_option_paypal;
+			// Merged Standard paypal Addons ends @since 1.2.1
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );

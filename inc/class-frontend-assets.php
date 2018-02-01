@@ -76,6 +76,28 @@ class WP_Travel_Frontend_Assets {
 
 		wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 		wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
+
+		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
+		$trip_price = $payment_amount = wp_travel_get_actual_trip_price( $post->ID );
+		$minimum_partial_payout = wp_travel_get_minimum_partial_payout( $post->ID );
+		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
+			$payment_amount = $minimum_partial_payout;
+		}
+		$wt_payment = array(
+			'book_now' 	 => __( 'Book Now' ),
+			'book_n_pay' => __( 'Book and Pay' ),
+			'currency_code' => $currency_code,
+			'currency_symbol' => wp_travel_get_currency_symbol(),
+			'price_per'		=> wp_travel_get_price_per_text( $post->ID ),
+			'trip_price'	=> $trip_price,
+			'payment_amount' => $payment_amount,
+		);
+
+		$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
+		wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ) );
+
+		wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
+		wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 	}
 }
 

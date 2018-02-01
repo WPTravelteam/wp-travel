@@ -52,6 +52,107 @@ class WP_Travel_Admin_Metaboxes {
 		// remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		// remove_meta_box( 'tagsdiv-travel_keywords', WP_TRAVEL_POST_TYPE, 'side' );
+
+		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
+		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+	}
+
+	/**
+	 * Payment Info Metabox info
+	 *
+	 * @param Object $post Current Post Object.
+	 * @return void
+	 */
+	public function wp_travel_payment_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$booking_id = $post->ID;
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
+		echo '<pre>';
+		print_r( $paypal_args );
+		echo '</pre>';
+	}
+
+	/**
+	 * Payment Info Metabox info
+	 *
+	 * @param Object $post Current Post Object.
+	 * @return void
+	 */
+	public function wp_travel_single_payment_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		$booking_id = $post->ID;
+
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		if ( ! $payment_id ) {
+			$title = 'Payment - #' . $booking_id;
+			$post_array = array(
+				'post_title' => $title,
+				'post_content' => '',
+				'post_status' => 'publish',
+				'post_slug' => uniqid(),
+				'post_type' => 'wp-travel-payment',
+				);
+			$payment_id = wp_insert_post( $post_array );
+			update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
+		}
+		$status = wp_travel_get_payment_status();
+
+		$label_key = get_post_meta( $payment_id, 'wp_travel_payment_status', true ) ? get_post_meta( $payment_id, 'wp_travel_payment_status', true ) : 'N/A';
+
+		?>
+		<table>
+			<tr>
+				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ) ?></strong</td>
+				<td>
+				<select id="wp_travel_payment_status" name="wp_travel_payment_status" >
+				<?php foreach ( $status as $value => $st ) : ?>
+					<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ) ?>>
+						<?php echo esc_html( $status[ $value ]['text'] ); ?>
+					</option>
+				<?php endforeach; ?>
+				</select>
+				</td>
+
+			</tr>
+			<?php if ( 'paid' === $label_key ) : ?>
+				<?php
+				$mode = wp_travel_get_payment_mode();
+				$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+
+				$trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
+				$trip_price  = number_format( $trip_price, 2, '.', '' );
+
+				$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+				$paid_amount = number_format( $paid_amount, 2, '.', '' );
+
+				$due_amount  = number_format( $trip_price - $paid_amount, 2, '.', '' );
+				if ( $due_amount < 0 ) {
+					$due_amount = 0;
+				} ?>
+				<tr>
+					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ) ?></strong</td>
+					<td><?php echo esc_html( $mode[ $label_key ]['text'] ) ?></td>
+				</tr>
+				<tr>
+					<td><strong><?php esc_html_e( 'Trip Price', 'wp-travel' ) ?></strong</td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $trip_price ) ?></td>
+				</tr>
+				<tr>
+					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ) ?></strong</td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $paid_amount ) ?></td>
+				</tr>
+				<tr>
+					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ) ?></strong</td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $due_amount ) ?></td>
+				</tr>
+			<?php endif; ?>
+		</table>
+		<?php
 	}
 
 	/**
@@ -712,6 +813,26 @@ class WP_Travel_Admin_Metaboxes {
 				add_action( 'save_post', array( $this, 'save_meta_data' ) );
 			}
 		}
+		// WP Travel Standard Paypal Merged. @since 1.2.1
+		if ( isset( $_POST['wp_travel_minimum_partial_payout'] ) ) {
+			$minimum_partial_payout = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) );
+			if ( $minimum_partial_payout > 0 ) {
+				update_post_meta( $post_id, 'wp_travel_minimum_partial_payout', $minimum_partial_payout );
+			}
+		}
+		if ( isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) {
+			$minimum_partial_payout_percent = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) );
+			if ( $minimum_partial_payout_percent > 0 ) {
+				
+				update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', $minimum_partial_payout_percent );
+			}
+		}
+		$use_global = '';
+		if ( isset( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ) {
+			$use_global = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', $use_global );
+		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 
 		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );
 	}

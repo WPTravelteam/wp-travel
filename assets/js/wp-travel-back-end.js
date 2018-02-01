@@ -417,4 +417,30 @@
         }
     });
 
+    // WP Travel Standard Paypal Merged. @since 1.2.1
+    // Change max partial payment amount on check / uncheck enable sale.
+    $(document).on('click', '#wp-travel-enable-sale', function() {
+        var max_payment = $('#wp-travel-price').val();
+        if ($(this).is(':checked')) {
+            max_payment = $('#wp-travel-sale-price').val();
+        }
+        // $('#wp-travel-minimum-partial-payout').attr('max', max_payment);
+    });
+
+    // Change max partial payment amount on changing sale price.
+    $(document).on('change', '#wp-travel-sale-price', function() {
+        var max_payment = $(this).val();
+        // $('#wp-travel-minimum-partial-payout').attr('max', max_payment);
+    });
+
+    $(document).on('click', '#wp-travel-minimum-partial-payout-percent-use-global', function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-minimum-partial-payout-percent').attr('disabled', 'disabled').closest('tr').hide();
+        } else {
+            $('#wp-travel-minimum-partial-payout-percent').removeAttr('disabled', 'disabled').closest('tr').show();
+        }
+    });
+    // Ends WP Travel Standard Paypal Merged. @since 1.2.1
+
+
 }(jQuery));

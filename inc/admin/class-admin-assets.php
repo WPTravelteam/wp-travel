@@ -101,9 +101,9 @@ class WP_Travel_Admin_Assets {
 				$wp_travel_chart_data['compare_top_itinerary'] = $compare_top_itinerary;
 				$wp_travel_chart_data['compare_stat'] = true;
 
-				if ( class_exists( 'WP_travel_paypal' ) && isset( $booking_data['total_sales_compare'] ) ) :
+				// if ( class_exists( 'WP_travel_paypal' ) && isset( $booking_data['total_sales_compare'] ) ) :
 					$wp_travel_chart_data['total_sales_compare'] = $booking_data['total_sales_compare'];
-				endif;
+				// endif;
 			}
 			$wp_travel_chart_data = apply_filters( 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );

@@ -5,12 +5,22 @@ class WP_Travel_Post_Types {
 
 	}
 
+	/**
+	 * Init.
+	 *
+	 * @return void
+	 */
 	public static function init() {
 		self::register_trip();
 		self::register_bookings();
 		self::register_enquiries();
+		self::register_payment();
 	}
-
+	/**
+	 * Register Post Type Trip.
+	 *
+	 * @return void
+	 */
 	public static function register_trip() {
 		$permalink = wp_travel_get_permalink_structure();
 		$labels = array(
@@ -54,6 +64,11 @@ class WP_Travel_Post_Types {
 		register_post_type( WP_TRAVEL_POST_TYPE, $args );
 	}
 
+	/**
+	 * Register Post Type Bookings.
+	 *
+	 * @return void
+	 */
 	public static function register_bookings() {
 		$labels = array(
 			'name'               => _x( 'Bookings', 'post type general name', 'wp-travel' ),
@@ -97,6 +112,11 @@ class WP_Travel_Post_Types {
 		register_post_type( 'itinerary-booking', $args );
 	}
 
+	/**
+	 * Register Post Type Enquiries.
+	 *
+	 * @return void
+	 */
 	public static function register_enquiries() {
 		$labels = array(
 			'name'               => _x( 'Enquiries', 'post type general name', 'wp-travel' ),
@@ -138,5 +158,52 @@ class WP_Travel_Post_Types {
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( 'itinerary-enquiries', $args );
+	}
+
+	/**
+	 * Register Post Type Payment.
+	 *
+	 * @return void
+	 */
+	public static function register_payment() {
+		$labels = array(
+			'name'               => _x( 'Payments', 'post type general name', 'wp-travel' ),
+			'singular_name'      => _x( 'Payment', 'post type singular name', 'wp-travel' ),
+			'menu_name'          => _x( 'Payments', 'admin menu', 'wp-travel' ),
+			'name_admin_bar'     => _x( 'Payment', 'add new on admin bar', 'wp-travel' ),
+			'add_new'            => _x( 'Add New', 'wp-travel', 'wp-travel' ),
+			'add_new_item'       => __( 'Add New Payment', 'wp-travel' ),
+			'new_item'           => __( 'New Payment', 'wp-travel' ),
+			'edit_item'          => __( 'Edit Payment', 'wp-travel' ),
+			'view_item'          => __( 'View Payment', 'wp-travel' ),
+			'all_items'          => __( 'All Payments', 'wp-travel' ),
+			'search_items'       => __( 'Search Payments', 'wp-travel' ),
+			'parent_item_colon'  => __( 'Parent Payments:', 'wp-travel' ),
+			'not_found'          => __( 'No Payments found.', 'wp-travel' ),
+			'not_found_in_trash' => __( 'No Payments found in Trash.', 'wp-travel' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Description.', 'wp-travel' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => false,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'itinerary-payment' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'supports'           => array( 'title', 'comments' ),
+			'menu_icon'          => 'dashicons-cart',
+		);
+		/**
+		 * Register a Payments post type.
+		 *
+		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
+		 */
+		register_post_type( 'wp-travel-payment', $args );
 	}
 }
