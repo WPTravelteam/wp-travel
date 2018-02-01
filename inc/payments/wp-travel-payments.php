@@ -161,17 +161,19 @@ function wp_travel_is_enable_payment() {
 }
 
 /** Return true if Payment checked */
-function wp_travel_is_enable_partial_payment() {
-	$settings = wp_travel_get_settings();
+if ( ! function_exists( 'wp_travel_is_partial_payment_enabled' ) ) {
+	function wp_travel_is_partial_payment_enabled() {
+		$settings = wp_travel_get_settings();
 
-	if ( isset( $settings['partial_payment'] ) && '' !== $settings['partial_payment'] ) {
-		return true;
+		if ( isset( $settings['partial_payment'] ) && '' !== $settings['partial_payment'] ) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
 
-function wp_travel_update_payment_status( $post_id ) {
+function wp_travel_update_payment_status_admin( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
@@ -310,14 +312,14 @@ function wp_travel_send_payment_email( $booking_id ) {
 	$admin_message = wp_travel_admin_email_template();
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
 
-	$admin_payment_message = wp_travel_payment_admin_email_template();
+	$admin_payment_message = wp_travel_payment_email_template_admin();
 	$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_message );
 
 	// Client message.
 	$message = wp_travel_customer_email_template();
 	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
 
-	$payment_message = wp_travel_payment_customer_email_template();
+	$payment_message = wp_travel_payment_email_template_customer();
 	$payment_message = str_replace( array_keys( $email_tags ), $email_tags, $payment_message );
 
 	// Send mail to admin if booking email is set to yes.
@@ -393,7 +395,7 @@ function wp_travel_paypal_booking_message( $message ) {
 	return $message;
 }
 
-add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status' );
+add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status_admin' );
 add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process' );
 add_action( 'wp_travel_after_successful_payment', 'wp_travel_send_payment_email' );
 add_filter( 'wp_travel_booked_message', 'wp_travel_paypal_booking_message' );

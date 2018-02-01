@@ -6,7 +6,7 @@
  *
  * @return PayPal URI
  */
-function wp_travel_get_paypal_redirect( $ssl_check=false ) {
+function wp_travel_get_paypal_redirect_url( $ssl_check=false ) {
 
     if ( is_ssl() || ! $ssl_check ) {
         $protocol = 'https://';
@@ -28,7 +28,7 @@ function wp_travel_get_paypal_redirect( $ssl_check=false ) {
  * Listen for a $_GET request from our PayPal IPN.
  * This would also do the "set-up" for an "alternate purchase verification"
  */
-function wp_travel_listen_for_paypal_ipn() {
+function wp_travel_listen_paypal_ipn() {
     if ( isset( $_GET['wp_travel_listener'] )
         && $_GET['wp_travel_listener'] == 'IPN'
         || isset( $_GET['test'] )
@@ -37,7 +37,7 @@ function wp_travel_listen_for_paypal_ipn() {
     }
     // echo WP_CONTENT_DIR;die;
 }
-add_action( 'init', 'wp_travel_listen_for_paypal_ipn' );
+add_action( 'init', 'wp_travel_listen_paypal_ipn' );
 
 
 /**
@@ -46,7 +46,7 @@ add_action( 'init', 'wp_travel_listen_for_paypal_ipn' );
  * the ones PayPal is sending back to us.
  * This is the Pink Lilly of the whole operation.
  */
-function wp_travel_process_paypal_ipn() {
+function wp_travel_paypal_ipn_process() {
     /**
      * Instantiate the IPNListener class
      */
@@ -165,4 +165,4 @@ function wp_travel_process_paypal_ipn() {
 
     }
 }
-add_action( 'wp_travel_verify_paypal_ipn', 'wp_travel_process_paypal_ipn' );
+add_action( 'wp_travel_verify_paypal_ipn', 'wp_travel_paypal_ipn_process' );

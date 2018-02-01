@@ -826,7 +826,7 @@ function wp_travel_enqueries_admin_email_template() {
  *
  * @return HTML
  */
-function wp_travel_payment_admin_email_template() {
+function wp_travel_payment_email_template_admin() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>
@@ -1109,7 +1109,7 @@ function wp_travel_payment_admin_email_template() {
  *
  * @return HTML
  */
-function wp_travel_payment_customer_email_template() {
+function wp_travel_payment_email_template_customer() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>

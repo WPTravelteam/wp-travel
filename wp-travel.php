@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: WEN Solutions
  * Author URI: http://wensolutions.com
  * Requires at least: 4.4
@@ -34,7 +34,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.2.0';
+		public $version = '1.2.1';
 		/**
 		 * The single instance of the class.
 		 *
@@ -110,7 +110,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				$this->uploader = new WP_Travel_Admin_Uploader();
 
 				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
-				// add_filter( 'wp_travel_stat_data', 'wp_travel_payment_stat_data', 10, 2 );
 			}
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
@@ -175,8 +174,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
 
-			include sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
 
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-ajax.php', WP_TRAVEL_ABSPATH );
@@ -273,10 +272,17 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );
 				}
 			}
-			include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
-			include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+			if ( version_compare( $this->version, '1.0.4', '>' ) ) {
+				include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
+			}
+			if ( version_compare( $this->version, '1.0.6', '>' ) ) {
+				include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
+			}
+			if ( version_compare( $this->version, '1.2.0', '>' ) ) {
+				include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
+			}
 			$current_db_version = get_option( 'wp_travel_version' );
-			if ( $current_db_version !== WP_TRAVEL_VERSION ) {
+			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
 			}
 		}

@@ -244,7 +244,7 @@ function wp_travel_booking_form_fields() {
 			'priority' => 102,
 		);
 		$payment_amount = $actual_trip_price;
-		if ( wp_travel_is_enable_partial_payment() ) {
+		if ( wp_travel_is_partial_payment_enabled() ) {
 			$payment_amount = $minimum_partial_payout;
 			$payment_fields['payment_mode'] = array(
 				'type' => 'radio',

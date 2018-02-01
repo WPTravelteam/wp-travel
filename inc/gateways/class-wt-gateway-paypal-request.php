@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Paypal payment request.
  */
-class WT_Gateway_Paypal_Request {
+class WP_Travel_Gateway_Paypal_Request {
 	/**
 	 * Constructor.
 	 */
@@ -66,7 +66,7 @@ class WT_Gateway_Paypal_Request {
 
 		if ( $args ) {
 			$paypal_args = http_build_query( $args, '', '&' );
-			$redirect_uri = esc_url( wp_travel_get_paypal_redirect() ) . '?' . $paypal_args;
+			$redirect_uri = esc_url( wp_travel_get_paypal_redirect_url() ) . '?' . $paypal_args;
 		}
 		wp_redirect( $redirect_uri );
 
@@ -155,4 +155,4 @@ class WT_Gateway_Paypal_Request {
 	}
 }
 
-new WT_Gateway_Paypal_Request();
+new WP_Travel_Gateway_Paypal_Request();
