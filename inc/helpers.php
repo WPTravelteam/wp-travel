@@ -448,6 +448,30 @@ function wp_travel_get_itineraries_array() {
 }
 
 /**
+ * Return JSON Encoded Itinerary price oblect
+ * 
+ */
+function wp_reavel_get_itinereries_prices_array(){
+
+	$itineraries = wp_travel_get_itineraries_array();
+
+	$prices = array();
+
+	if ( $itineraries ) {
+
+		foreach ( $itineraries as $key => $itinerary ) { 
+
+			$prices[] = wp_travel_get_actual_trip_price( $key );
+		
+		}
+		if ( is_array( $prices ) && '' !== $prices ) :
+		 return $prices;
+		endif;
+	}
+return false;
+}
+
+/**
  * Return WP Travel Featured post.
  *
  * @param integer $no_of_post_to_show No of post to show.

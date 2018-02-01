@@ -32,7 +32,13 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script('jquery-datepicker-lib-eng');
 		wp_enqueue_script('wp-travel-view-mode');
 
-		wp_enqueue_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider' ), '', 1 );
+		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider' ), '', 1 );
+
+		$trip_prices_data = wp_reavel_get_itinereries_prices_array();
+
+		wp_localize_script( 'wp-travel-widget-scripts', 'trip_prices_data', $trip_prices_data );
+
+		wp_enqueue_script( 'wp-travel-widget-scripts');
 		
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.

@@ -1309,6 +1309,27 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 
+			// Trip Cost Range Filter.
+			if ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) {
+
+				$max_price = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
+
+				$min_price = ! empty( $_GET['min_price'] ) ? $_GET['min_price'] : 0;
+
+				$query->set('meta_query', array(
+					array(
+						'key'     => 'wp_travel_trip_price',
+						'value'   => array( $min_price, $max_price ),
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN',
+					),
+				)
+				);
+
+			}
+
+			// Filter By Dates.
+
 			// Filter by location and trip type.
 			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ) {
 
