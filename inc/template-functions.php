@@ -1339,12 +1339,12 @@ function wp_travel_posts_filter( $query ) {
 
 				if ( $trip_start || $trip_end ) {
 
+					//Convert to timestamp.
 					$trip_start = strtotime($trip_start);
-
 					$trip_start = date('Y-m-d',$trip_start);
 
+					//Make date in required format.
 					$trip_end = strtotime($trip_end);
-
 					$trip_end = date('Y-m-d',$trip_end);
 
 					$query->set('meta_query', array(
