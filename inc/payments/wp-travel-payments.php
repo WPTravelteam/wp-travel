@@ -35,7 +35,7 @@ if ( ! function_exists( 'wp_travel_register_payments' ) ) {
  *
  * @return array
  */
-function wp_travel_get_payment_field_list() {
+function wp_travel_payment_field_list() {
 	return array(
 		'is_partial_payment',
 		'payment_gateway',
@@ -68,7 +68,7 @@ function wp_travel_payment_gateway_lists() {
  * @param Number $post_id Post ID.
  * @return Number
  */
-function wp_travel_get_minimum_partial_payout( $post_id ) {
+function wp_travel_minimum_partial_payout( $post_id ) {
 	if ( ! $post_id ) {
 		return 0;
 	}
@@ -132,7 +132,7 @@ function wp_travel_use_global_payout_percent( $post_id ) {
 }
 
 /** Return true if test mode checked */
-function wp_travel_payment_test_mode() {
+function wp_travel_test_mode() {
 	$settings = wp_travel_get_settings();
 	// Default true.
 	if ( ! isset( $settings['wt_test_mode'] ) ) {
@@ -145,7 +145,7 @@ function wp_travel_payment_test_mode() {
 }
 
 /** Return true if Payment checked */
-function wp_travel_is_enable_payment() {
+function wp_travel_is_payment_enabled() {
 	$settings = wp_travel_get_settings();
 
 	$payment_gatway_list = wp_travel_payment_gateway_lists();
@@ -161,17 +161,19 @@ function wp_travel_is_enable_payment() {
 }
 
 /** Return true if Payment checked */
-function wp_travel_is_enable_partial_payment() {
-	$settings = wp_travel_get_settings();
+if ( ! function_exists( 'wp_travel_is_partial_payment_enabled' ) ) {
+	function wp_travel_is_partial_payment_enabled() {
+		$settings = wp_travel_get_settings();
 
-	if ( isset( $settings['partial_payment'] ) && '' !== $settings['partial_payment'] ) {
-		return true;
+		if ( isset( $settings['partial_payment'] ) && '' !== $settings['partial_payment'] ) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
 
-function wp_travel_update_payment_status( $post_id ) {
+function wp_travel_update_payment_status_admin( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
@@ -183,7 +185,7 @@ function wp_travel_update_payment_status( $post_id ) {
 	}
 }
 
-function wp_travel_update_payment_status_booking_process( $booking_id ) {
+function wp_travel_update_payment_status_booking_process_frontend( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
@@ -201,7 +203,7 @@ function wp_travel_update_payment_status_booking_process( $booking_id ) {
 		update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
 	}
 	$booking_field_list = wp_travel_booking_form_fields();
-	$payment_field_list = wp_travel_get_payment_field_list();
+	$payment_field_list = wp_travel_payment_field_list();
 
 	foreach ( $payment_field_list as $field_list ) {
 		if(isset($booking_field_list[ $field_list ]['name'])){
@@ -233,7 +235,7 @@ function wp_travel_update_payment_status_booking_process( $booking_id ) {
  * @param Number $booking_id Booking ID.
  * @return void
  */
-function wp_travel_send_payment_email( $booking_id ) {
+function wp_travel_send_email_payment( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
@@ -310,14 +312,14 @@ function wp_travel_send_payment_email( $booking_id ) {
 	$admin_message = wp_travel_admin_email_template();
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
 
-	$admin_payment_message = wp_travel_payment_admin_email_template();
+	$admin_payment_message = wp_travel_payment_email_template_admin();
 	$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_message );
 
 	// Client message.
 	$message = wp_travel_customer_email_template();
 	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
 
-	$payment_message = wp_travel_payment_customer_email_template();
+	$payment_message = wp_travel_payment_email_template_customer();
 	$payment_message = str_replace( array_keys( $email_tags ), $email_tags, $payment_message );
 
 	// Send mail to admin if booking email is set to yes.
@@ -377,7 +379,7 @@ function wp_travel_send_payment_email( $booking_id ) {
  * @param String $message Booking message
  * @return void
  */
-function wp_travel_paypal_booking_message( $message ) {
+function wp_travel_payment_booking_message( $message ) {
 	if ( ! isset( $_GET['booking_id'] ) ) {
 		return $message;
 	}
@@ -393,9 +395,9 @@ function wp_travel_paypal_booking_message( $message ) {
 	return $message;
 }
 
-add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status' );
-add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process' );
-add_action( 'wp_travel_after_successful_payment', 'wp_travel_send_payment_email' );
-add_filter( 'wp_travel_booked_message', 'wp_travel_paypal_booking_message' );
+add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status_admin' );
+add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process_frontend' );
+add_action( 'wp_travel_after_successful_payment', 'wp_travel_send_email_payment' );
+add_filter( 'wp_travel_booked_message', 'wp_travel_payment_booking_message' );
 
 

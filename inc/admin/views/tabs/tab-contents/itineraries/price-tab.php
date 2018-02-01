@@ -69,7 +69,7 @@
 	do_action( 'wp_travel_itinerary_after_sale_price', $post->ID ); ?>
 	<?php
 	// WP Travel Standard Paypal merged. since 1.2.1	
-	$wp_travel_minimum_partial_payout = wp_travel_get_minimum_partial_payout( $post->ID );
+	$wp_travel_minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
 	if ( $wp_travel_minimum_partial_payout < 1 ) {
 		$wp_travel_minimum_partial_payout = '';
 	}
