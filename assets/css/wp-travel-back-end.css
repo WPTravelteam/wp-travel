@@ -516,6 +516,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   display: inline-block;
   width: 60%; }
 
+.email-global-accordion.tab-accordion .panel-title {
+  padding: 0; }
+  .email-global-accordion.tab-accordion .panel-title a {
+    display: block;
+    padding: 10px 15px 10px 15px; }
+
 .wp-travel-tabs-contents .wp-travel-sorting-handle {
   background: #ddd;
   position: absolute;
