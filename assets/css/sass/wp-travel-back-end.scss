@@ -39,6 +39,7 @@ $alabaster: #f7f7f1; // Red like color.
     }
 }
 
+
 @mixin xs {
     @media (max-width: 500px) {
         @content;
