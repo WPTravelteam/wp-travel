@@ -151,6 +151,11 @@ class WP_Travel_Admin_Assets {
 			// Enqueued script with localized data.
 			wp_enqueue_script( 'travel-door-script' );
 			wp_enqueue_script( 'wp-travel-media-upload' );
+		}
+
+		$allowed_itinerary_general_screens = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE , WP_TRAVEL_POST_TYPE . '_page_settings' );
+
+		if ( in_array( $screen->id, $allowed_itinerary_general_screens ) ) {
 
 			wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 		}

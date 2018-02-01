@@ -794,47 +794,47 @@
   #footer .footer-inner-wrapper .wp-travel-default-article .wp-travel-explore a {
     border: 1px solid #505050; }
 
-.widget_wp_travel_search_itineraries .wp-travel-itinerary-items {
+.widget_wp_travel_filter_search_widget .wp-travel-itinerary-items {
   padding: 15px;
   border: 1px solid #ddd; }
-.widget_wp_travel_search_itineraries .wp-travel-form-field {
+.widget_wp_travel_filter_search_widget .wp-travel-form-field {
   margin-bottom: 15px; }
-.widget_wp_travel_search_itineraries label {
+.widget_wp_travel_filter_search_widget label {
   display: block;
   font-weight: 500; }
-.widget_wp_travel_search_itineraries select,
-.widget_wp_travel_search_itineraries input,
-.widget_wp_travel_search_itineraries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
-.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries select,
-.widget_wp_travel_search_itineraries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
-.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries textarea {
+.widget_wp_travel_filter_search_widget select,
+.widget_wp_travel_filter_search_widget input,
+.widget_wp_travel_filter_search_widget .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
+.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget select,
+.widget_wp_travel_filter_search_widget .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
+.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget textarea {
   width: 100%; }
-.widget_wp_travel_search_itineraries #amount {
+.widget_wp_travel_filter_search_widget #amount {
   background-color: transparent;
   color: #f83531 !important; }
-.widget_wp_travel_search_itineraries .wp-trave-price-range label,
-.widget_wp_travel_search_itineraries .wp-trave-price-range input,
-.widget_wp_travel_search_itineraries .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
-.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .wp-trave-price-range select,
-.widget_wp_travel_search_itineraries .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
-.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .wp-trave-price-range textarea {
+.widget_wp_travel_filter_search_widget .wp-trave-price-range label,
+.widget_wp_travel_filter_search_widget .wp-trave-price-range input,
+.widget_wp_travel_filter_search_widget .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
+.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .wp-trave-price-range select,
+.widget_wp_travel_filter_search_widget .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
+.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .wp-trave-price-range textarea {
   display: inline-block; }
-.widget_wp_travel_search_itineraries .wp-trave-price-range input, .widget_wp_travel_search_itineraries .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .wp-trave-price-range select, .widget_wp_travel_search_itineraries .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .wp-trave-price-range textarea {
+.widget_wp_travel_filter_search_widget .wp-trave-price-range input, .widget_wp_travel_filter_search_widget .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .wp-trave-price-range select, .widget_wp_travel_filter_search_widget .wp-trave-price-range .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .wp-trave-price-range textarea {
   color: #f83531; }
-.widget_wp_travel_search_itineraries input[type="submit"], .widget_wp_travel_search_itineraries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries select[type="submit"], .widget_wp_travel_search_itineraries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries textarea[type="submit"] {
+.widget_wp_travel_filter_search_widget input[type="submit"], .widget_wp_travel_filter_search_widget .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget select[type="submit"], .widget_wp_travel_filter_search_widget .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget textarea[type="submit"] {
   padding: .6em 1em .6em;
   line-height: 1.333; }
-.widget_wp_travel_search_itineraries .trip-duration-calender {
+.widget_wp_travel_filter_search_widget .trip-duration-calender {
   width: 50%;
   display: block;
   float: left;
   margin-bottom: 20px;
   position: relative; }
-  .widget_wp_travel_search_itineraries .trip-duration-calender input, .widget_wp_travel_search_itineraries .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .trip-duration-calender select, .widget_wp_travel_search_itineraries .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_search_itineraries .trip-duration-calender textarea {
+  .widget_wp_travel_filter_search_widget .trip-duration-calender input, .widget_wp_travel_filter_search_widget .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .trip-duration-calender select, .widget_wp_travel_filter_search_widget .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .trip-duration-calender textarea {
     max-width: 120px;
     display: block;
     padding-left: 24px; }
-  .widget_wp_travel_search_itineraries .trip-duration-calender .calender-icon {
+  .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon {
     position: absolute;
     top: 22px;
     left: 1px;
@@ -842,7 +842,7 @@
     text-align: center;
     line-height: 26px;
     background: #ddd; }
-    .widget_wp_travel_search_itineraries .trip-duration-calender .calender-icon:before {
+    .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon:before {
       content: "\f508";
       font-family: dashicons; }
 

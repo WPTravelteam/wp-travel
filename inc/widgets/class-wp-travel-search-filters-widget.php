@@ -104,33 +104,12 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 								<input type="submit" name="wp-trip_search" id="wp-trip-search" class="button button-primary" value="Search">
 							</div>
 
-
-
 							<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 
-							<script type="text/javascript">
-								jQuery(document).ready(function($) {
-								    $( "#slider-range" ).slider({
-								      range: true,
-								      min: 0,
-								      max: 500,
-								      values: [ 75, 300 ],
-								      slide: function( event, ui ) {
-								        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-								      }
-								    });
-								    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-								      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-								    $( ".trip-duration-calender input" ).datepicker();
-
-								    });
-							</script>
 						</form>
 
 				</div>
-            <?php 
-
+            <?php
 	
 		echo $after_widget;
 	}
