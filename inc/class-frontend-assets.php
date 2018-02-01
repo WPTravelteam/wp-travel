@@ -79,7 +79,7 @@ class WP_Travel_Frontend_Assets {
 
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 		$trip_price = $payment_amount = wp_travel_get_actual_trip_price( $post->ID );
-		$minimum_partial_payout = wp_travel_get_minimum_partial_payout( $post->ID );
+		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
 		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
 			$payment_amount = $minimum_partial_payout;
 		}

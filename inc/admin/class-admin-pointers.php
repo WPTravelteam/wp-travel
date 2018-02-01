@@ -259,7 +259,7 @@ class WP_Travel_Admin_Info_Pointers {
 	
 		if ( in_array( $screen_id, $notice_pages ) ) {
 			$notices = array();
-			if ( wp_travel_payment_test_mode() ) {
+			if ( wp_travel_test_mode() ) {
 				$notices[] = array(
 					'slug' => 'test-mode',
 					'message' => sprintf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-debug' ) ) ),

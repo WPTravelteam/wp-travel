@@ -14,7 +14,7 @@ function wp_travel_get_paypal_redirect_url( $ssl_check=false ) {
         $protocol = 'http://';
     }
 
-    if ( wp_travel_payment_test_mode() ) {
+    if ( wp_travel_test_mode() ) {
         $paypal_uri = $protocol . 'www.sandbox.paypal.com/cgi-bin/webscr';
     } else {
         $paypal_uri = $protocol . 'www.paypal.com/cgi-bin/webscr';
