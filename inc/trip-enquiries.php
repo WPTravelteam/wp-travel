@@ -224,7 +224,7 @@ function wp_travel_enquiries_list_columns( $enquiries_column ) {
 	$new_columns['title'] 		 = _x( 'Title', 'column name', 'wp-travel' );
 	$new_columns['contact_name'] = __( 'Contact Name', 'wp-travel' );
 	$new_columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
-	$new_columns['date'] 		 = __( 'Booking Date', 'wp-travel' );
+	$new_columns['date'] 		 = __( 'Enquiry Date', 'wp-travel' );
 	return $new_columns;
 }
 
