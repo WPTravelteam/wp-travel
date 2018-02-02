@@ -862,7 +862,8 @@
 .ui-widget.ui-widget-content {
   border: none;
   border-radius: 10px;
-  background-color: #555; }
+  background-color: #555;
+  cursor: pointer; }
 
 .ui-slider {
   position: relative;
