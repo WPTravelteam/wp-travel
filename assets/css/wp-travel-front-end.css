@@ -210,7 +210,8 @@
 .travel-log-front-page-full-width-widget .widget_wp_travel_location,
 .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type,
 .travel-log-front-page-full-width-widget .widget_wp_travel_search,
-.travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries {
+.travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries,
+.travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget {
   margin-right: auto;
   margin-left: auto;
   padding-left: 20px;
@@ -219,7 +220,8 @@
   .travel-log-front-page-full-width-widget .widget_wp_travel_location .wp-travel-itinerary-info,
   .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type .wp-travel-itinerary-info,
   .travel-log-front-page-full-width-widget .widget_wp_travel_search .wp-travel-itinerary-info,
-  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries .wp-travel-itinerary-info {
+  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries .wp-travel-itinerary-info,
+  .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget .wp-travel-itinerary-info {
     font-size: 20px;
     margin-top: 0;
     margin-bottom: 15px; }
@@ -227,7 +229,8 @@
     .travel-log-front-page-full-width-widget .widget_wp_travel_location .wp-travel-itinerary-info span,
     .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type .wp-travel-itinerary-info span,
     .travel-log-front-page-full-width-widget .widget_wp_travel_search .wp-travel-itinerary-info span,
-    .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries .wp-travel-itinerary-info span {
+    .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries .wp-travel-itinerary-info span,
+    .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget .wp-travel-itinerary-info span {
       font-size: 18px; }
 
 @media (min-width: 768px) {
@@ -235,7 +238,8 @@
   .travel-log-front-page-full-width-widget .widget_wp_travel_location,
   .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type,
   .travel-log-front-page-full-width-widget .widget_wp_travel_search,
-  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries {
+  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries,
+  .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget {
     width: 750px; }
   .travel-log-front-page-full-width-widget .widget .wp-travel-itinerary-widget li.col-1-per-row {
     width: 50%; } }
@@ -244,14 +248,16 @@
   .travel-log-front-page-full-width-widget .widget_wp_travel_location,
   .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type,
   .travel-log-front-page-full-width-widget .widget_wp_travel_search,
-  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries {
+  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries,
+  .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget {
     width: 970px; } }
 @media (min-width: 1200px) {
   .travel-log-front-page-full-width-widget .widget_wp_travel_featured,
   .travel-log-front-page-full-width-widget .widget_wp_travel_location,
   .travel-log-front-page-full-width-widget .widget_wp_travel_trip_type,
   .travel-log-front-page-full-width-widget .widget_wp_travel_search,
-  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries {
+  .travel-log-front-page-full-width-widget .widget_wp_travel_sale_itineraries,
+  .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget {
     width: 1170px; } }
 .wp-travel.trip-headline-wrapper:after,
 .wp-travel.trip-headline-wrapper:before {
@@ -847,8 +853,9 @@
       font-family: dashicons; }
 
 .ui-widget.ui-widget-content {
-  border: 1px solid #c5c5c5;
-  border-radius: 10px; }
+  border: none;
+  border-radius: 10px;
+  background-color: #555; }
 
 .ui-slider {
   position: relative;
@@ -861,23 +868,23 @@
     border: 0;
     background-position: 0 0; }
   .ui-slider .ui-widget-header {
-    background: #e9e9e9; }
+    background: #f83531; }
   .ui-slider .ui-slider-handle {
     position: absolute;
     z-index: 2;
-    width: 1.2em;
-    height: 1.2em;
+    width: 14px;
+    height: 14px;
     cursor: default;
     -ms-touch-action: none;
     touch-action: none; }
 
 .ui-slider-horizontal {
-  height: .8em; }
+  height: 5px; }
   .ui-slider-horizontal .ui-slider-range {
     top: 0;
     height: 100%; }
   .ui-slider-horizontal .ui-slider-handle {
-    top: -.3em;
+    top: -5px;
     margin-left: -.6em;
     border-radius: 50%;
     outline: none; }
@@ -887,10 +894,11 @@
 .ui-widget-header .ui-state-default,
 .ui-button, html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
-  border: 1px solid #c5c5c5;
-  background: #f6f6f6;
+  border: 1px solid #f83531;
+  background: #f83531;
   font-weight: normal;
-  color: #454545; }
+  color: #505050;
+  cursor: e-resize; }
 
 .wp-travel-review-text {
   font-size: 12px;

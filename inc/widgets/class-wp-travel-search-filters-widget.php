@@ -119,12 +119,16 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
                         <span class="trip-duration-calender">
                             <small><?php esc_html_e( 'From', 'wp-travel' ); ?></small>
                             <input value="<?php echo esc_attr( $trip_start ); ?>" class="wp_travel_search_widget_filters_input" type="text" id="datepicker1" name="trip_start">
-                            <span class="calender-icon"></span>
+                            <label for="datepicker1">
+                                <span class="calender-icon"></span>
+                            </label>
                         </span>
                         <span class="trip-duration-calender">
                             <small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
                             <input value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input" type="text" id="datepicker2" name="trip_end">
-                            <span class="calender-icon"></span>
+                            <label for="datepicker2">
+                                <span class="calender-icon"></span>
+                            </label>
                         </span>
                         
                     </div>
