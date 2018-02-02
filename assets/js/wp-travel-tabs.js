@@ -30,5 +30,48 @@
         $(this).siblings('.wp-travel-accordion-title').html(title);
     });
 
+    // if (!jQuery().slider)
+    //     return;
+
+    // Payment Slider JS.
+
+    var slider = document.getElementById("minimum_partial_payout");
+    var output = document.getElementById("minimum_partial_payout_output");
+
+    output.innerHTML = slider.value; // Display the default slider value
+    // Update the current slider value (each time you drag the slider handle)
+    const wp_travel_range_func = function() {
+        var value = this.value;
+
+        if (this.value >= 100) {
+            value = 100;
+        }
+        if (this.value <= 1) {
+            value = 1;
+        }
+        value = Math.max(value, 1);
+        slider.value = value;
+        output.value = value;
+
+    }
+
+    output.onkeyup = wp_travel_range_func;
+
+    output.oninput = wp_travel_range_func;
+
+    slider.oninput = function() {
+        var value = this.value;
+
+        if (this.value >= 100) {
+            value = 100;
+        }
+        if (this.value <= 1) {
+            value = 1;
+        }
+        value = Math.max(value, 1);
+        output.value = value;
+        slider.value = value;
+    }
+
 
 }(jQuery));
