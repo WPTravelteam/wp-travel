@@ -61,7 +61,6 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
                                 'class'              => 'wp_travel_search_widget_filters_input',
                                 'taxonomy'           => $taxonomy,
                                 'selected'           => ( isset( $_GET['type'] ) ) ? esc_textarea( $_GET['type'] ) : 0,
-                                // 'value_field'		 => 'slug',
                             );
 
                         wp_dropdown_categories( $args, $taxonomy );
@@ -80,7 +79,6 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
                                 'class'              => 'wp_travel_search_widget_filters_input',
                                 'taxonomy'           => $taxonomy,
                                 'selected'           => ( isset( $_GET['location'] ) ) ? esc_textarea( $_GET['location'] ) : 0,
-                                // 'value_field'		 => 'slug',
                             );
 
                             wp_dropdown_categories( $args, $taxonomy );
