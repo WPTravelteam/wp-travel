@@ -5,6 +5,133 @@
  * @package wp-travel/inc/
  */
 
+function wp_travel_email_template_header( $type, $sentTo ) {
+
+?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><?php sprintf( 'TO %s', $sentTo ); ?></title>
+		<style type="text/css">
+			body{
+				 background: #fcfcfc ;
+				 color: #5d5d5d;
+				 margin: 0;
+				 padding: 0;
+			}
+			a{
+				color: #5a418b;text-decoration: none;
+			}
+			.wp-travel-wrapper{
+				color: #5d5d5d;
+				font-family: Roboto, sans-serif;
+				margin: auto;
+			}
+			.wp-travel-wrapper tr{background: #fff}
+			.wp-travel-header td{
+				background: #dd402e;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 20px 25px;
+			}
+			.wp-travel-header h2 {
+				color: #fcfffd;
+				font-size: 20px;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+
+			.wp-travel-content-top{
+				background: #fff;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 20px 25px;
+			}
+			.wp-travel-content-top p{
+				line-height: 1.55;
+				font-size: 14px;
+			}
+			.wp-travel-content-title{
+				background: #fff;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0px 0px 8px 25px;
+			}
+			.wp-travel-content-title h3{font-size: 16px; line-height: 1; margin:0;margin-top: 30px}
+
+			.wp-travel-content-head{width: 24%}
+			.wp-travel-content-info{width: 76%}
+			.wp-travel-content-head td,
+			.wp-travel-content-info td{
+				font-size: 14px;
+				background: #fff;
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0px 0px 8px 25px;
+			}
+			.full-width{width: 100%!important}
+
+			.wp-travel-veiw-more{
+				background: #dd402e;
+				border-radius: 3px;
+				color: #fcfffd;
+				display:block;
+				font-size: 14px;
+				margin: 20px auto;			
+				padding: 10px 20px;
+				text-align: center;
+				text-decoration: none;
+				width: 130px;
+			}
+
+			.wp-travel-footer td{
+				background: #eaebed;
+				box-sizing: border-box;
+				font-size: 14px;
+				padding: 10px 25px;
+			}
+
+			@media screen and ( max-width:600px ){
+				table[class="wp-travel-wrapper"] {width: 100%!important}
+			}
+			@media screen and ( max-width:480px ){
+				table[class="wp-travel-content-head"],
+				table[class="wp-travel-content-info"] {width: 100%!important;}
+				table[class="wp-travel-content-info"]{margin-bottom: 10px}
+
+			}
+		</style>
+	</head>
+	<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
+		<!-- Wrapper -->
+		<table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
+			<tr class="wp-travel-header" style="background: #fff;">			
+				<td align="left" style="background: #dd402e;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
+					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'New Bookings', 'wp-travel' ) ?></h2>
+				</td> <!-- /Header -->
+			</tr>
+<?php
+
+}
+
+function wp_travel_email_template_footer() {
+
+?>
+	<tr class="wp-travel-footer" style="background: #fff;">
+				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ) ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ) ?>.</a></p>
+					
+				</td>
+			</tr>
+		</table><!-- /Wrapper -->
+	</body>
+	</html>
+<?php 
+
+}
+
 /**
  * Will return admin email template.
  *

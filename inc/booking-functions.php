@@ -516,6 +516,25 @@ function wp_travel_booking_info( $post ) {
 						
 					<?php break; ?>
 					<?php default : ?>
+					<?php if ( 'wp_travel_trip_price_info' == $field['name'] ) : ?>
+
+					<?php $payment_id = get_post_meta( $post->ID, 'wp_travel_payment_id', true ); 
+
+						if ( $payment_id ) :
+
+							$input_val = get_post_meta ( $payment_id, $field['name'], true );
+						
+						?>
+
+							<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
+								<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
+								<?php echo $before_field; ?>
+								<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
+							</div>
+						
+						<?php 
+						endif;
+					endif; ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
 							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 							<?php echo $before_field; ?>
