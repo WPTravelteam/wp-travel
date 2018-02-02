@@ -424,7 +424,7 @@ function wp_travel_booking_info( $post ) {
 			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 			<div class="wp-travel-form-field full-width">
-				<label for="wp-travel-post-id"><?php echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR ); ?></label>
+				<label for="wp-travel-post-id"><?php echo esc_html( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) ); ?></label>
 				<select id="wp-travel-post-id" name="wp_travel_post_id" >
 				<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
 					<option value="<?php echo esc_attr( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ) ?>>

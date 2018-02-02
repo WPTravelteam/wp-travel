@@ -293,7 +293,7 @@ function wp_travel_admin_email_template() {
 
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="center">				
-					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details on siteNote', 'wp-travel' ) ?></a>
+					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
 				</td>
 			</tr>
 			<tr class="wp-travel-footer" style="background: #fff;">
@@ -1085,7 +1085,7 @@ function wp_travel_payment_email_template_admin() {
 
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="center">				
-					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details on siteNote', 'wp-travel' ) ?></a>
+					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details ', 'wp-travel' ) ?></a>
 				</td>
 			</tr>
 			<tr class="wp-travel-footer" style="background: #fff;">
