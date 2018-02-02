@@ -347,14 +347,6 @@ class WP_Travel_Admin_Settings {
 			</div>
 		</div>
 
-
-		
-		
-
-
-		
-
-
 	<?php
 	}
 
