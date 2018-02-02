@@ -246,6 +246,37 @@ class WP_Travel_Admin_Settings {
 											</span>
 										</td>
 									</tr>
+
+									<tr>
+									<th>
+										<label for="email-header-header-text"><?php esc_html_e( 'Header Text Area', 'wp-travel' ); ?></label>
+									</th>
+										<td>
+											<input name="email-header-header-text" id="email-header-header-text" type="text" />	
+										</td>
+									</tr>
+
+									<tr>
+									<th>
+										<label for="email-header-background-color"><?php esc_html_e( 'Header Background Color', 'wp-travel' ); ?></label>
+									</th>
+										<td>
+											<input name="email-header-background-color" id="email-header-background-color" type="text" />	
+										</td>
+									</tr>
+
+									<tr>
+									<th>
+										<label for="email-header-text-color"><?php esc_html_e( 'Header Text Color', 'wp-travel' ); ?></label>
+									</th>
+										<td>
+											<input name="email-header-text-color" id="email-header-text-color" type="text" />	
+										</td>
+									</tr>
+									
+	
+									
+
 									<tr>
 										<th>
 											<label><?php esc_html_e( 'Admin Email Template', 'wp-travel' ); ?></label>
@@ -260,6 +291,7 @@ class WP_Travel_Admin_Settings {
 											?>
 										</td>
 									</tr>
+									<hr>
 								</table>
 							</div>
 						</div>
