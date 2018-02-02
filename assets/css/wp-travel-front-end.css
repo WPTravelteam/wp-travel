@@ -833,14 +833,14 @@
   .widget_wp_travel_filter_search_widget .trip-duration-calender input, .widget_wp_travel_filter_search_widget .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .trip-duration-calender select, .widget_wp_travel_filter_search_widget .trip-duration-calender .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .widget_wp_travel_filter_search_widget .trip-duration-calender textarea {
     max-width: 120px;
     display: block;
-    padding-left: 24px; }
+    padding-left: 35px; }
   .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon {
     position: absolute;
     top: 22px;
     left: 1px;
     width: 28px;
     text-align: center;
-    line-height: 26px;
+    line-height: 25px;
     background: #ddd; }
     .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon:before {
       content: "\f508";

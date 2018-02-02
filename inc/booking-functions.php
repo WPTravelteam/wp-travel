@@ -167,8 +167,8 @@ function wp_travel_booking_form_fields() {
 
 	// Standard paypal Merge.
 
-	if ( wp_travel_is_enable_payment() ) {
-		$minimum_partial_payout = wp_travel_get_minimum_partial_payout( $post_id );
+	if ( wp_travel_is_payment_enabled() ) {
+		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
 		$actual_trip_price = wp_travel_get_actual_trip_price( $post_id );
 		$per_person_text = wp_travel_get_price_per_text( $post_id );
 		$settings = wp_travel_get_settings();
@@ -244,7 +244,7 @@ function wp_travel_booking_form_fields() {
 			'priority' => 102,
 		);
 		$payment_amount = $actual_trip_price;
-		if ( wp_travel_is_enable_partial_payment() ) {
+		if ( wp_travel_is_partial_payment_enabled() ) {
 			$payment_amount = $minimum_partial_payout;
 			$payment_fields['payment_mode'] = array(
 				'type' => 'radio',
@@ -308,7 +308,7 @@ function wp_travel_booking_form_fields() {
 		);
 
 		
-		$payment_field_list = wp_travel_get_payment_field_list();
+		$payment_field_list = wp_travel_payment_field_list();
 
 		foreach ( $payment_field_list as $field_list ) {
 			if ( isset( $payment_fields[ $field_list ] ) && is_array( $payment_fields[ $field_list ] ) ) {

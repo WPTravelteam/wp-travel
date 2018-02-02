@@ -1309,6 +1309,83 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 
+			// Trip Cost Range Filter.
+			if ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) {
+
+				$max_price = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
+
+				$min_price = ! empty( $_GET['min_price'] ) ? $_GET['min_price'] : 0;
+
+				if ( $min_price || $max_price ) {
+
+					$query->set('meta_query', array(
+						array(
+							'key'     => 'wp_travel_trip_price',
+							'value'   => array( $min_price, $max_price ),
+							'type'    => 'numeric',
+							'compare' => 'BETWEEN',
+						),
+					)
+					);
+				}
+			}
+
+			// // Filter By Dates.
+			if ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) {
+
+				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
+
+				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
+
+				if ( $trip_start || $trip_end ) {
+
+					//Convert to timestamp.
+					$trip_start = strtotime($trip_start);
+					$trip_start = date('Y-m-d',$trip_start);
+
+					//Make date in required format.
+					$trip_end = strtotime($trip_end);
+					$trip_end = date('Y-m-d',$trip_end);
+
+					$query->set('meta_query', array(
+						array(
+							'key'     => 'wp_travel_start_date',
+							'value'   => array( $trip_start, $trip_end ),
+							'type'    => 'DATE',
+							'compare' => 'BETWEEN',
+						)
+					)
+					);
+
+					$query->set( 'meta_query', array(
+
+						array(
+							'key'     => 'wp_travel_end_date',
+							'value'   => array( $trip_start, $trip_end ),
+							'type'    => 'DATE',
+							'compare' => 'BETWEEN',
+						),
+
+					) 
+					);
+
+				}
+
+			}
+
+			// Keywords Search.
+
+			if ( isset( $_GET['keyword'] ) ) {
+
+				$keyword = $_GET['keyword'];
+
+				if ( '' !== $keyword ) {
+					$query->set( 's', $keyword );
+				}
+
+
+			}
+
 			// Filter by location and trip type.
 			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ) {
 
