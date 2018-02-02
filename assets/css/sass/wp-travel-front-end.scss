@@ -1228,6 +1228,9 @@
             text-align: center;
             line-height: 25px;
             background: #ddd;
+            @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+                line-height: 21px;
+            }
 
             &:before{
                 content: "\f508";
@@ -1258,6 +1261,7 @@
     border: none;
     border-radius: 10px;
     background-color: #555;
+    cursor: pointer;
 }
 
 .ui-slider {

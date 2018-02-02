@@ -848,6 +848,9 @@
     text-align: center;
     line-height: 25px;
     background: #ddd; }
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon {
+        line-height: 21px; } }
     .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon:before {
       content: "\f508";
       font-family: dashicons; }
@@ -862,7 +865,8 @@
 .ui-widget.ui-widget-content {
   border: none;
   border-radius: 10px;
-  background-color: #555; }
+  background-color: #555;
+  cursor: pointer; }
 
 .ui-slider {
   position: relative;
