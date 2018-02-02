@@ -852,6 +852,13 @@
       content: "\f508";
       font-family: dashicons; }
 
+.datepickers-container .datepicker--cell.-current- {
+  color: #f83531; }
+.datepickers-container .datepicker--cell.-selected- {
+  background-color: #f83531; }
+  .datepickers-container .datepicker--cell.-selected-.-focus- {
+    background-color: #df1814; }
+
 .ui-widget.ui-widget-content {
   border: none;
   border-radius: 10px;

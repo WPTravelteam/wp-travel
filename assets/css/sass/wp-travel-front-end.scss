@@ -1236,6 +1236,22 @@
         }
     }
 } 
+//air datepicker
+.datepickers-container{
+    .datepicker--cell.-current- {
+        color: #f83531;
+    }
+    .datepicker--cell.-selected- {
+        background-color: #f83531;
+
+        &.-focus-{
+            background-color:#df1814;
+        }
+    }
+
+}
+
+
 
 //jquery ui range slider styling
 .ui-widget.ui-widget-content {
