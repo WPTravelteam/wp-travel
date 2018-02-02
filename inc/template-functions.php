@@ -1290,6 +1290,45 @@ function wp_travel_posts_filter( $query ) {
 		 */
 		if ( is_wp_travel_archive_page() && ! is_admin() ) {
 
+			// // Filter By Dates.
+			if ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) {
+
+				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
+
+				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
+
+				if ( $trip_start || $trip_end ) {
+
+					//Convert to timestamp.
+					$trip_start = strtotime($trip_start);
+					$trip_start = date('Y-m-d',$trip_start);
+
+					//Make date in required format.
+					$trip_end = strtotime($trip_end);
+					$trip_end = date('Y-m-d',$trip_end);
+
+					$query->set('meta_query', array(
+						'relation' => 'AND',
+						array(
+							'key'     => 'wp_travel_start_date',
+							'value'   => array( $trip_start, $trip_end ),
+							'type'    => 'DATE',
+							'compare' => 'BETWEEN',
+						),
+
+						array(
+							'key'     => 'wp_travel_end_date',
+							'value'   => array( $trip_start, $trip_end ),
+							'type'    => 'DATE',
+							'compare' => 'BETWEEN',
+						),
+					)
+					);
+
+				}
+
+			}
+
 			// // Filter By Price.
 			if ( isset( $_GET['price'] ) && '' != $_GET['price'] ) {
 				$filter_by = $_GET['price'];
@@ -1328,49 +1367,6 @@ function wp_travel_posts_filter( $query ) {
 					)
 					);
 				}
-			}
-
-			// // Filter By Dates.
-			if ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) {
-
-				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
-
-				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
-
-				if ( $trip_start || $trip_end ) {
-
-					//Convert to timestamp.
-					$trip_start = strtotime($trip_start);
-					$trip_start = date('Y-m-d',$trip_start);
-
-					//Make date in required format.
-					$trip_end = strtotime($trip_end);
-					$trip_end = date('Y-m-d',$trip_end);
-
-					$query->set('meta_query', array(
-						array(
-							'key'     => 'wp_travel_start_date',
-							'value'   => array( $trip_start, $trip_end ),
-							'type'    => 'DATE',
-							'compare' => 'BETWEEN',
-						)
-					)
-					);
-
-					$query->set( 'meta_query', array(
-
-						array(
-							'key'     => 'wp_travel_end_date',
-							'value'   => array( $trip_start, $trip_end ),
-							'type'    => 'DATE',
-							'compare' => 'BETWEEN',
-						),
-
-					) 
-					);
-
-				}
-
 			}
 
 			// Keywords Search.
