@@ -150,6 +150,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     display: block; }
   .wp-trave-settings-warp .form-table td input[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='checkbox'] {
     width: inherit; }
+.wp-trave-settings-warp .form-table td .quicktags-toolbar input, .wp-trave-settings-warp .form-table td .quicktags-toolbar .wp-travel-form-field select, .wp-travel-form-field .wp-trave-settings-warp .form-table td .quicktags-toolbar select, .wp-trave-settings-warp .form-table td .quicktags-toolbar .wp-travel-form-field textarea, .wp-travel-form-field .wp-trave-settings-warp .form-table td .quicktags-toolbar textarea {
+  width: auto; }
 
 .itineraries-tax-wrap {
   border: 1px solid #f1f1f1;

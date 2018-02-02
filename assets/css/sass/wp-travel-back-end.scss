@@ -247,6 +247,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     width: inherit
                 }
             }
+            .quicktags-toolbar{
+                input {
+                    width: auto;
+                }
+            } 
         }
     }
 }
