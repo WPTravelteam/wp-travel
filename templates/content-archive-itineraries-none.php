@@ -26,6 +26,6 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 } ?>
-<p><?php esc_html_e( 'Itineraries not found.', 'wp-travel' ); ?></p>
+<p><strong><?php esc_html_e( 'Trips not found.', 'wp-travel' ); ?></strong></p>
 
 <?php do_action( 'wp_travel_after_archive_itinerary', get_the_ID() ); ?>

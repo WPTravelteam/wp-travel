@@ -106,6 +106,8 @@ class Wp_Travel_Shortcodes {
 
 public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 
+	
+
 	$keyword_search = true;
 	$trip_type_filter = true;
 	$trip_location_filter = true;
@@ -135,6 +137,8 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 		$max_price = ( int ) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price'] : '';
 		$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
 		$trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+	
+	ob_start();
 
     ?>
     <div class="widget_wp_travel_filter_search_widget">
@@ -249,6 +253,11 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
             </div>
 
 <?php
+
+	$data = ob_get_clean();
+
+	return $data;
+
 }
 
 }
