@@ -162,6 +162,165 @@ Its great plugin for travel or tour agent websites."</h5>
 	<?php
 }
 
+
+function docs_support_page_callback(){ 
+	?>
+
+	<div class="wrap">
+		<div id="poststuff">
+			<div id="docs-and-support-page">
+				<div class="about-header">
+	                <div class="about-text WP-Travel-about-text">
+		                <div class="left-side-section">
+		                	<strong>Welcome to WP Travel.</strong>
+		                		<p>Thanks for installing and we hope you will enjoy using WP Travel. </p>
+		                		<p>We hardly recomend you to install <a class="link-simple" href="" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
+		                        <p class="WP-Travel-actions">
+		                        <a class="button button-primary button-large" href="#add_new_trips_links" target="_blank">Add New Trips For You Site</a>
+		                        <span>OR</span>
+		                        <a href="wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
+		                    </p>
+	                    </div>
+	                    <div class="WP-Travel-badge">
+		                	<span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+		                	<p>
+		                  		 Version: 1.2.1                
+		                	</p>
+		                </div>
+	                </div>
+	                
+	                <div class="wrap-footer">
+	                    <table class="form-table">
+			                 <tbody>
+			                 <tr>
+			                    <th scope="row">Get add-ons and tips...</th>
+				                    <td>
+				                        <form name="klawoo_subscribe" action="#" method="POST" accept-charset="utf-8">
+				                            <input class="regular-text ltr" type="text" name="email" id="email" placeholder="Email">
+				                            <input type="hidden" name="list" value="7I763v6Ldrs3YhJeee5EOgFA">
+				                            <input type="submit" name="submit" id="submit" class="button button-primary" value="Subscribe">
+				                            <br>
+				                            <div id="klawoo_response"></div>
+				                        </form>
+				                    </td>
+				                 </tr>
+				            </tbody>
+			            </table>
+			            <div class="WP-Travel-support">
+		                    Questions? Need Help?                    
+			                <div id="WP-Travel-contact-us" class="WP-Travel-contact-us">
+			                	<a class="thickbox" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
+			                </div>
+		                </div>
+			        </div>
+	        	</div>
+
+				<div class="feature-section col two-col">
+		<div class="col">
+			<h3>Description</h3>
+			<p class="wp-travel-summary">
+				WP Travel is an easy to use and awesome plugin that you can use with any travel site. With WP travel you can simply add the post type to display the packages and WP Travel comes with booking feature as well.  Beside this  plugin provides various kind of feature, setting which makes this plugin more attractive.
+
+				The compatibility of the plugin is also one of the features. It can also be modified very easily through custom templates.
+			</p>
+			<h3>Feature Overview</h3>
+			<ul class="wp-travel-feature_list">
+				<li class="wp-travel-feature">
+					Get your travel site ready just on few clicks. With our user-friendly system &amp; complete documentation, you won't have any trouble while using the system.				</li>
+				<li class="wp-travel-feature">
+					WP Travel includes in-build booking system for your travel site. Users can easily book itineraries from your site and you can track all bookings from the backend.				</li>
+				<li class="wp-travel-feature">
+					Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.				</li>
+				<li class="wp-travel-feature">
+					With our payment processing features, you can get partial or full payment for each booking. All that payment will be tracked in the backend and also you can view stat of payments.			</li>
+				<li class="wp-travel-feature">
+					WP travel plugin is translation ready in order to fulfill customer's needs from all around the world. You can translate WP Travel to any language with the help of WPML Translation Plugin and for the translation of the string, you can use Loco Translate.			</li>
+				<li class="wp-travel-feature">
+					FAQs provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.			</li>
+				<li class="wp-travel-feature">
+					Our team is dedicated to continuous development of the plugin. We will be continuously adding new features to the plugin.				</li>
+				<li class="wp-travel-feature">
+					If you found any issues in the plugin, you can directly contact us or add your issues or problems on support forum.			</li>
+			</ul>
+		</div>
+
+		<div class="col last-feature">
+			<div class="es-form-setup">
+				<h3>Add Trip</h3>
+				<p class="wp-travel-faq">
+					<a href="http://wptravel.io/documentations/user-documentation/how-to-create-your-very-first-trip/" target="_blank">How to Add Trip to the website?</a>				</p>
+				<p>
+					After the activation of the required plugin, you will find the Trips menu on the dashboard.
+					Now  to create the trip of your choice go to Admin Panel > Trips > Add New and begin entering the required content as per your wish.
+					Furthermore, to help you and make you clear we have explained each and every field below in the Overview section.
+				</p>
+				<h2> Additional Trip settings</h2>
+				<ul class="wp-travel-faq_list">
+					<li class="wp-travel-faq">
+						<a href="#" target="_blank">How to Globally Set the Tabs Format Shown on Single Trip Page?</a>
+					</li>
+					<li class="wp-travel-faq">
+						<a href="#" target="_blank">How to change the label of tabs shown on Single Trip Page?</a>
+					</li>
+					<li class="wp-travel-faq">
+						See all the Frequently Asked Question Solution For WP Travel Plugin
+						<a href="http://wptravel.io/faq/" target="_blank">Frequently Asked Question</a>
+					</li>
+					<li class="wp-travel-faq">
+					You can find your solution about the problem of WP Travel from our Support page or you can create a support for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore.
+						<a href="http://wptravel.io/support-forum/" target="_blank">Support Forum</a>
+					</li>
+				</ul>
+			</div>
+			<br>
+			<div class="es-setting">
+				<h2>General Plugin Configuration</h2>
+				<ul class="wp-travel-faq_list">
+					<li class="wp-travel-faq">
+						 <a href="http://wptravel.io/documentations/user-documentation/" target="_blank">
+						 	See User Documentation to know the plugin and how it works
+						 </a>
+				
+						</li>
+
+						<li class="wp-travel-faq">
+						 <a href="http://wptravel.io/documentations/developer-documentation/" target="_blank">
+						 	See Developer Documentation to know the plugin in depth.
+						 </a>
+				
+						</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<div id="wpfooter" role="contentinfo">
+		<p id="footer-left" class="alignleft">
+		If you like <strong>WP Travel</strong>, please consider leaving us a <a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a> rating. A huge thank you from WEN Solutions in advance!	</p>
+		<p id="footer-upgrade" class="alignright">
+			WP Travel version: <strong>1.2.1</strong>	
+			</p>
+	</div>
+
+
+<?php
+
+}
+
+
+
 function wp_travel_clear_booking_count_transient( $post_id ) {
 	if ( ! $post_id ) {
 		return;
