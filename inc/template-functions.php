@@ -1336,7 +1336,7 @@ function wp_travel_posts_filter( $query ) {
 
 			}
 
-			// // Filter By Price.
+			// Filter By Price.
 			if ( isset( $_GET['price'] ) && '' != $_GET['price'] ) {
 				$filter_by = $_GET['price'];
 
@@ -1377,41 +1377,25 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 
-			// Keywords Search.
-
-			if ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) {
-
-				$keyword = $_GET['keyword'];
-
-				$keywords = explode( ' ', $keyword );
-
-				if ( is_array( $keywords ) && '' !== $keywords ) {
-					$query->set( 'tax_query',  array(
-							array(
-								'taxonomy' => 'travel_keywords',
-								'field' => 'name',
-								'terms' => $keywords,
-							),
-						)
-					);
-
-				}
-
-			}
-
-			// Filter by location and trip type.
-			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ) {
+			// Filter by location,trip type and Keywords.
+			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) ||  isset( $_GET['keyword'] ) ) {
 
 				$type = 0;
 				$location = 0;
+				$keyword = '';
 				if ( isset( $_GET['type'] ) && '' != $_GET['type'] ) {
 					$type = $_GET['type'];
 				}
 				if ( isset( $_GET['location'] ) && '' != $_GET['location'] ) {
 					$location = $_GET['location'];
 				}
+				if ( isset( $_GET['keyword'] ) && '' != $_GET['keyword'] ) {
+					$keyword = $_GET['keyword'];
+					$keywords = explode( ' ', $keyword );
+				}
 
-				if ( $type > 0 && $location > 0 ) {
+				if ( $type > 0 && $location > 0 && '' !== $keywords ) {
+
 					$query->set( 'tax_query',  array(
 							'relation' => 'AND',
 							array(
@@ -1424,6 +1408,63 @@ function wp_travel_posts_filter( $query ) {
 								'field' => 'id',
 								'terms' => $location,
 							),
+							array(
+								'taxonomy' => 'travel_keywords',
+								'field' => 'name',
+								'terms' => $keywords,
+							),
+							
+						)
+					);
+
+				} elseif ( $type && '' !== $keywords ) {
+					$query->set( 'tax_query',  array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => 'itinerary_types',
+								'field' => 'id',
+								'terms' => $type,
+							),
+							array(
+								'taxonomy' => 'travel_keywords',
+								'field' => 'name',
+								'terms' => $keywords,
+							),
+							
+						)
+					);
+
+				} elseif ( $location > 0 && '' !== $keywords ) {
+					$query->set( 'tax_query',  array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => 'travel_locations',
+								'field' => 'id',
+								'terms' => $location,
+							),
+							array(
+								'taxonomy' => 'travel_keywords',
+								'field' => 'name',
+								'terms' => $keywords,
+							),
+							
+						)
+					);
+
+				} elseif ( $type > 0 && $location > 0 ) {
+					$query->set( 'tax_query',  array(
+							'relation' => 'AND',
+							array(
+								'taxonomy' => 'itinerary_types',
+								'field' => 'id',
+								'terms' => $type,
+							),
+							array(
+								'taxonomy' => 'travel_locations',
+								'field' => 'id',
+								'terms' => $location,
+							),
+							
 						)
 					);
 
@@ -1444,6 +1485,17 @@ function wp_travel_posts_filter( $query ) {
 							'terms' => $location,
 						),
 					) );
+				} elseif ( '' !== $keywords ) {
+
+					$query->set( 'tax_query', array(
+						'relation' => 'AND',
+						array(
+							'taxonomy' => 'travel_keywords',
+							'field' => 'name',
+							'terms' => $keywords,
+						),
+					) );
+
 				}
 			}
 		}
