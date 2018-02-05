@@ -1347,7 +1347,6 @@ function wp_travel_posts_filter( $query ) {
 					break;
 				}
 			}
-
 			// Trip Cost Range Filter.
 			if ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) {
 
@@ -1378,7 +1377,6 @@ function wp_travel_posts_filter( $query ) {
 				if ( '' !== $keyword ) {
 					$query->set( 's', $keyword );
 				}
-
 
 			}
 
