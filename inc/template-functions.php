@@ -1374,8 +1374,18 @@ function wp_travel_posts_filter( $query ) {
 
 				$keyword = $_GET['keyword'];
 
-				if ( '' !== $keyword ) {
-					$query->set( 's', $keyword );
+				$keywords = explode( ' ', $keyword );
+
+				if ( is_array( $keywords ) && '' !== $keywords ) {
+					$query->set( 'tax_query',  array(
+							array(
+								'taxonomy' => 'travel_keywords',
+								'field' => 'slug',
+								'terms' => $keywords,
+							),
+						)
+					);
+
 				}
 
 			}

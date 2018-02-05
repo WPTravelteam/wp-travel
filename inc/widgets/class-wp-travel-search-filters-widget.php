@@ -52,6 +52,16 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
         ?>
+        <?php
+            $price = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+            $type = ( int ) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
+            $location = ( int ) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
+            $min_price = ( int ) ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? $_GET['min_price'] : '';
+            $max_price = ( int ) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price'] : '';
+            $trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
+            $trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+
+        ?>
             <div class="wp-travel-itinerary-items">
                 <div>
                 <?php if ( $keyword_search ) : ?>
@@ -103,16 +113,6 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
                 <?php endif; ?>
                 <?php if ( $price_orderby ) :  ?>
                     <div class="wp-travel-form-field ">
-                            <?php
-                                $price = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
-                                $type = ( int ) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
-                                $location = ( int ) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
-                                $min_price = ( int ) ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? $_GET['min_price'] : '';
-                                $max_price = ( int ) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price'] : '';
-                                $trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
-                                $trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
-
-                            ?>
                         <label for="price">
                             <?php esc_html_e( 'Price', 'wp-travel' ); ?>
                         </label>
