@@ -845,6 +845,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   float: right;
   margin: 20px 0; }
 
+.wp-travel-widget-filter label {
+  margin: 10px 0; }
+
 @media (max-width: 1024px) {
   .left-block,
   .right-block {

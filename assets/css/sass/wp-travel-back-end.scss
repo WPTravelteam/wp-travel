@@ -1243,6 +1243,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     margin: 20px 0;
 }
 
+//widget filter styline
+.wp-travel-widget-filter{
+     label {
+        margin: 10px 0;
+    }
+}
+
+//end
+
 @include tab {
     .left-block,
     .right-block {

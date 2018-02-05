@@ -235,36 +235,38 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			$trip_dates = esc_attr( $instance['trip_dates'] );
 		}
         ?>
-
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
-			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">
-		</p>
-        <p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>"><?php esc_html_e( 'Hide title', 'wp-travel' ); ?>:</label>
-			<label style="display: block;"><input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'hide_title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>" class="widefat" <?php checked( 1, $hide_title ); ?>><?php esc_html_e( 'Check to Hide', 'wp-travel' ); ?></label>
-		</p>
-        <p>
-			<label><strong><?php esc_html_e( 'Enable Filters', 'wp-travel' ); ?>:</strong></label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'keyword_search' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'keyword_search' ) ); ?>" class="widefat" <?php checked( 1, $keyword_search ); ?>><?php esc_html_e( 'KeyWord Search', 'wp-travel' ); ?>
-                </label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_type_filter' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_type_filter' ) ); ?>" class="widefat" <?php checked( 1, $trip_type_filter ); ?>><?php esc_html_e( 'Trip Type Filter', 'wp-travel' ); ?>
-                </label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_location_filter' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_location_filter' ) ); ?>" class="widefat" <?php checked( 1, $trip_location_filter ); ?>><?php esc_html_e( 'Trip Location Filter', 'wp-travel' ); ?>
-                </label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'price_orderby' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'price_orderby' ) ); ?>" class="widefat" <?php checked( 1, $price_orderby ); ?>><?php esc_html_e( 'Price Orderby Filter', 'wp-travel' ); ?>
-                </label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'price_range' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'price_range' ) ); ?>" class="widefat" <?php checked( 1, $price_range ); ?>><?php esc_html_e( 'Price Range Filter', 'wp-travel' ); ?>
-                </label>
-                <label style="display: block;">
-                    <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_dates' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_dates' ) ); ?>" class="widefat" <?php checked( 1, $trip_dates ); ?>><?php esc_html_e( 'Trip Dates Filter', 'wp-travel' ); ?>
-                </label>
-		</p>
+        
+    		<p>
+    			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
+    			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">
+    		</p>
+            <p>
+    			<label for="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>"><?php esc_html_e( 'Hide title', 'wp-travel' ); ?>:</label>
+    			<label style="display: block;"><input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'hide_title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>" class="widefat" <?php checked( 1, $hide_title ); ?>><?php esc_html_e( 'Check to Hide', 'wp-travel' ); ?></label>
+    		</p>
+            <div class="wp-travel-widget-filter">
+            <p>
+    			<label><strong><?php esc_html_e( 'Enable Filters', 'wp-travel' ); ?>:</strong></label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'keyword_search' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'keyword_search' ) ); ?>" class="widefat" <?php checked( 1, $keyword_search ); ?>><?php esc_html_e( 'KeyWord Search', 'wp-travel' ); ?>
+                    </label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_type_filter' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_type_filter' ) ); ?>" class="widefat" <?php checked( 1, $trip_type_filter ); ?>><?php esc_html_e( 'Trip Type Filter', 'wp-travel' ); ?>
+                    </label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_location_filter' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_location_filter' ) ); ?>" class="widefat" <?php checked( 1, $trip_location_filter ); ?>><?php esc_html_e( 'Trip Location Filter', 'wp-travel' ); ?>
+                    </label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'price_orderby' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'price_orderby' ) ); ?>" class="widefat" <?php checked( 1, $price_orderby ); ?>><?php esc_html_e( 'Price Orderby Filter', 'wp-travel' ); ?>
+                    </label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'price_range' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'price_range' ) ); ?>" class="widefat" <?php checked( 1, $price_range ); ?>><?php esc_html_e( 'Price Range Filter', 'wp-travel' ); ?>
+                    </label>
+                    <label style="display: block;">
+                        <input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_dates' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_dates' ) ); ?>" class="widefat" <?php checked( 1, $trip_dates ); ?>><?php esc_html_e( 'Trip Dates Filter', 'wp-travel' ); ?>
+                    </label>
+    		</p>
+        </div>
 			
 	<?php
 	}
