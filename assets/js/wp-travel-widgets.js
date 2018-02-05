@@ -32,19 +32,19 @@ jQuery(function($) {
         }
 
         // Filter Range Slider Widget.
-        $("#slider-range").slider({
+        $(".wp-travel-range-slider").slider({
             range: true,
             min: min,
             max: max,
             values: [filteredMin, filteredMax],
             slide: function(event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                $('#wp-travel-filter-price-min').val(ui.values[0]);
-                $('#wp-travel-filter-price-max').val(ui.values[1]);
+                $(".price-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-min').val(ui.values[0]);
+                $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-max').val(ui.values[1]);
             }
         });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
+        $(".price-amount").val("$" + $(".wp-travel-range-slider").slider("values", 0) +
+            " - $" + $(".wp-travel-range-slider").slider("values", 1));
 
         $(".trip-duration-calender input").datepicker({
             language: 'en',
@@ -52,9 +52,9 @@ jQuery(function($) {
 
     });
 
-    $('#wp-travel-filter-search-submit').on('click', function() {
-        var view_mode = $('#wp-travel-widget-filter-view-mode').data('mode');
-        pathname = $('#wp-travel-widget-filter-archive-url').val();
+    $('.wp-travel-filter-search-submit').on('click', function() {
+        var view_mode = $(this).siblings('.wp-travel-widget-filter-view-mode').data('mode');
+        pathname = $(this).siblings('.wp-travel-widget-filter-archive-url').val();
         if (!pathname) {
             pathname = window.location.pathname;
         }
@@ -63,7 +63,8 @@ jQuery(function($) {
         if (check_query_string) {
             query_string = '&';
         }
-        $('.wp_travel_search_widget_filters_input').each(function() {
+        var data_index = $(this).siblings('.filter-data-index').data('index');
+        $('.wp_travel_search_widget_filters_input' + data_index).each(function() {
             filterby = $(this).attr('name');
             filterby_val = $(this).val();
             query_string += filterby + '=' + filterby_val + '&';

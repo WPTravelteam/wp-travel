@@ -1307,6 +1307,8 @@ function wp_travel_posts_filter( $query ) {
 					$trip_end = strtotime($trip_end);
 					$trip_end = date('Y-m-d',$trip_end);
 
+					$query->set( 'meta_key', 'wp_travel_start_date' );
+
 					$query->set('meta_query', array(
 						'relation' => 'AND',
 						array(
@@ -1356,6 +1358,8 @@ function wp_travel_posts_filter( $query ) {
 
 				if ( $min_price || $max_price ) {
 
+					$query->set( 'meta_key', 'wp_travel_trip_price' );
+
 					$query->set('meta_query', array(
 						array(
 							'key'     => 'wp_travel_trip_price',
@@ -1370,7 +1374,7 @@ function wp_travel_posts_filter( $query ) {
 
 			// Keywords Search.
 
-			if ( isset( $_GET['keyword'] ) ) {
+			if ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) {
 
 				$keyword = $_GET['keyword'];
 
@@ -1380,7 +1384,7 @@ function wp_travel_posts_filter( $query ) {
 					$query->set( 'tax_query',  array(
 							array(
 								'taxonomy' => 'travel_keywords',
-								'field' => 'slug',
+								'field' => 'name',
 								'terms' => $keywords,
 							),
 						)
