@@ -125,6 +125,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	}
 
 	?>
+    <div class="widget_wp_travel_filter_search_widget">
 	<div class="wp-travel-itinerary-items">
                 <div>
                 <?php if ( $keyword_search ) : ?>
@@ -238,6 +239,8 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
                     </div>
                     
                 </div>
+
+            </div>
 
             </div>
 
