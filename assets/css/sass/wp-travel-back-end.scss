@@ -222,6 +222,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     background-color: #FFF;
     padding: 1em 1em .5em;
     position:relative;
+    border: 1px solid #ddd;
     .about-header .about-text {
         margin: 0 0 1.5em 0;
     }
@@ -1188,6 +1189,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         tbody{
             tr:nth-of-type(odd) {
                 background-color:#f7f7f1;
+            }
+            tr:nth-of-type(even) {
+                background-color:#fff;
             }
             td:first-of-type {
                 padding: 0;
