@@ -1207,7 +1207,12 @@ function wp_travel_archive_toolbar() {
 	?>
 	<div class="wp-travel-archive-content <?php echo esc_attr ( $archive_sidebar_class ); ?>">
 		<?php if ( 'grid' === $view_mode ) : ?>
-			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>			
+			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>
+			<?php 
+			if( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
+				$col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '2' );
+			}  
+			?>			
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>-per-row">
 		<?php endif; ?>
