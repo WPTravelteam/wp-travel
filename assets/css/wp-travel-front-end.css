@@ -776,7 +776,8 @@
   .wp-travel-trips-has-sidebar + .wp-travel-widget-area {
     width: 33.3333%;
     float: right;
-    padding: 0px 15px; }
+    padding: 0px 15px;
+    display: block; }
   @media (max-width: 992px) {
     .wp-travel-trips-has-sidebar {
       width: 100%;
