@@ -44,24 +44,10 @@ function wp_travel_marketplace_page() {
 			<div id="post-body">
 				<div class="wp-travel-marketplace-tab-wrap">
 					<ul>
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
+						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
 					</ul>
-					<div id="tabs-1" class="tab-pannel">
-						<div class="marketplace-module clearfix">
-							<div class="single-module">
-								<div class="single-module-image">
-									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
-									</a>
-								</div>
-								<div class="single-module-content clearfix">
-									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
-									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
 							<div class="single-module">
@@ -78,6 +64,22 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>
+					<div id="tabs-1" class="tab-pannel">
+						<div class="marketplace-module clearfix">
+							<div class="single-module">
+								<div class="single-module-image">
+									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
+									</a>
+								</div>
+								<div class="single-module-content clearfix">
+									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
+									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 
 

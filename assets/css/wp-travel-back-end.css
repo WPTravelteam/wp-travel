@@ -138,7 +138,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .about-header {
   background-color: #FFF;
   padding: 1em 1em .5em;
-  position: relative; }
+  position: relative;
+  border: 1px solid #ddd; }
   .about-header .about-header .about-text {
     margin: 0 0 1.5em 0; }
   .about-header input#submit, .about-header .wp-travel-form-field select#submit, .wp-travel-form-field .about-header select#submit, .about-header .wp-travel-form-field textarea#submit, .wp-travel-form-field .about-header textarea#submit {
@@ -811,6 +812,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     border-top: 1px solid #ddd; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs tbody tr:nth-of-type(odd) {
     background-color: #f7f7f1; }
+  .wp-travel-tabs-contents table.wp-travel-sorting-tabs tbody tr:nth-of-type(even) {
+    background-color: #fff; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs tbody td:first-of-type {
     padding: 0;
     position: relative;
