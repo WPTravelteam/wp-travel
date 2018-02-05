@@ -284,7 +284,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         text-shadow: none;
         font-weight: 500;
 
-        &:hover{
+        &:hover,&:focus{
             background: #ca4a1f;
             border-color: #ca4a1f;
         }

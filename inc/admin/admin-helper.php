@@ -174,9 +174,9 @@ function docs_support_page_callback(){
 		                <div class="left-side-section">
 		                	<strong>Welcome to WP Travel.</strong>
 		                		<p>Thanks for installing and we hope you will enjoy using WP Travel. </p>
-		                		<p>We hardly recomend you to install <a class="link-simple" href="" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
+		                		<p>We hardly recommend you to install <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
 		                        <p class="WP-Travel-actions">
-		                        <a class="button button-primary button-large" href="#add_new_trips_links" target="_blank">Add New Trips For You Site</a>
+		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=itineraries" target="_blank">Add New Trips For You Site</a>
 		                        <span>OR</span>
 		                        <a href="wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
 		                    </p>

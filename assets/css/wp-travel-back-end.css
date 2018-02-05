@@ -189,7 +189,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   box-shadow: 0 1px 0 #d42727;
   text-shadow: none;
   font-weight: 500; }
-  .WP-Travel-actions .button-primary:hover {
+  .WP-Travel-actions .button-primary:hover, .WP-Travel-actions .button-primary:focus {
     background: #ca4a1f;
     border-color: #ca4a1f; }
 .WP-Travel-actions span {
