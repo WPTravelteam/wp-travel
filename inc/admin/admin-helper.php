@@ -46,7 +46,7 @@ function wp_travel_marketplace_page() {
 					<ul>
 						
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						<!--<li class=""><a href="#tabs-1"><?php // esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>-->
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
@@ -64,7 +64,7 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>
-					<div id="tabs-1" class="tab-pannel">
+					<!--<div id="tabs-1" class="tab-pannel">
 						<div class="marketplace-module clearfix">
 							<div class="single-module">
 								<div class="single-module-image">
@@ -78,7 +78,7 @@ function wp_travel_marketplace_page() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					
 				</div>
 
@@ -295,33 +295,43 @@ function docs_support_page_callback(){
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
-
-
-
-			</div>
-		</div>
+</div>
+</div>
 	</div>
-	<div id="wpfooter" role="contentinfo">
-		<p id="footer-left" class="alignleft">
-		If you like <strong>WP Travel</strong>, please consider leaving us a <a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a> rating. A huge thank you from WEN Solutions in advance!	</p>
-		<p id="footer-upgrade" class="alignright">
-			WP Travel version: <strong>1.2.1</strong>	
-			</p>
-	</div>
-
-
 <?php
 
 }
+/**
+ * Modify Admin Footer Message.
+ */
+function wp_travel_modify_admin_footer_admin_settings_page(){
 
+	printf(__('If you like %1s, please consider leaving us a %2s rating. A huge thank you from WEN Solutions in advance!', 'wp-travel' ), '<strong>WP Travel</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>' );
 
+}
+/**
+ * Modify Admin Footer Message.
+ */
+function wp_travel_modify_admin_footer_version(){
+
+	printf(__('WP Travel version: %s', 'wp-travel' ), '<strong>' . WP_TRAVEL_VERSION . '</strong>' );
+
+}
+/**
+ * Add Footer Custom Text Hook.
+ */
+function wp_travel_doc_support_footer_custom_text(){
+
+	$screen = get_current_screen();
+
+	if ( WP_TRAVEL_POST_TYPE === $screen->post_type ) {
+
+		add_filter('admin_footer_text', 'wp_travel_modify_admin_footer_admin_settings_page');
+		add_filter( 'update_footer', 'wp_travel_modify_admin_footer_version', 11 );
+	}
+}
+
+add_action( 'current_screen', 'wp_travel_doc_support_footer_custom_text' );
 
 function wp_travel_clear_booking_count_transient( $post_id ) {
 	if ( ! $post_id ) {
