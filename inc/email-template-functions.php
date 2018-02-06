@@ -5,6 +5,12 @@
  * @package wp-travel/inc/
  */
 
+/**
+ * WP Travel Email Template Header
+ * @param string $type Email Bookings | Payments | Enquiries
+ * @param string $sentTo Admin | Client
+ * @return HTML
+ */
 function wp_travel_email_template_header( $type, $sentTo ) {
 
 ?>
@@ -115,7 +121,9 @@ function wp_travel_email_template_header( $type, $sentTo ) {
 <?php
 
 }
-
+/**
+ * WP Travel Email Template Footer.
+ */
 function wp_travel_email_template_footer() {
 
 ?>
@@ -129,6 +137,15 @@ function wp_travel_email_template_footer() {
 	</body>
 	</html>
 <?php 
+
+}
+
+/**
+ * Email Template Body
+ */
+function wp_travel_email_template_body_content( $type , $sentTo ){
+
+
 
 }
 

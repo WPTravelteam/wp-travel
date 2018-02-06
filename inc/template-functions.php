@@ -1383,6 +1383,7 @@ function wp_travel_posts_filter( $query ) {
 				$type = 0;
 				$location = 0;
 				$keyword = '';
+				$keywords = '';
 				if ( isset( $_GET['type'] ) && '' != $_GET['type'] ) {
 					$type = $_GET['type'];
 				}
