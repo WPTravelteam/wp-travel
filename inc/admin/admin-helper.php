@@ -186,7 +186,7 @@ function docs_support_page_callback(){
 	                    <div class="WP-Travel-badge">
 		                	<span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
 		                	<p>
-		                  		 Version: 1.2.1                
+		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>              
 		                	</p>
 		                </div>
 	                </div>
