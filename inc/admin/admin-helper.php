@@ -180,7 +180,7 @@ function docs_support_page_callback(){
 		                        <p class="WP-Travel-actions">
 		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=itineraries" target="_blank">Add New Trips For You Site</a>
 		                        <span>OR</span>
-		                        <a href="wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
+		                        <a href="http://wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
 		                    </p>
 	                    </div>
 	                    <div class="WP-Travel-badge">
@@ -211,7 +211,7 @@ function docs_support_page_callback(){
 			            <div class="WP-Travel-support">
 		                    Questions? Need Help?                    
 			                <div id="WP-Travel-contact-us" class="WP-Travel-contact-us">
-			                	<a class="thickbox" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
+			                	<a class="thickbox-contact-us" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
 			                </div>
 		                </div>
 			        </div>
@@ -238,11 +238,11 @@ function docs_support_page_callback(){
 				<li class="wp-travel-feature">
 					WP travel plugin is translation ready in order to fulfill customer's needs from all around the world. You can translate WP Travel to any language with the help of WPML Translation Plugin and for the translation of the string, you can use Loco Translate.			</li>
 				<li class="wp-travel-feature">
-					FAQs provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.			</li>
+					<a href="http://wptravel.io/faq/"  class="link-simple" target="_blank">FAQs </a> provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.			</li>
 				<li class="wp-travel-feature">
 					Our team is dedicated to continuous development of the plugin. We will be continuously adding new features to the plugin.				</li>
 				<li class="wp-travel-feature">
-					If you found any issues in the plugin, you can directly contact us or add your issues or problems on support forum.			</li>
+					If you found any issues in the plugin, you can directly <a href="http://wptravel.io/contact/" class="link-simple" target="_blank"> Contact Us</a> or add your issues or problems on <a href="http://wptravel.io/support-forum/" class="link-simple" target="_blank">Support Forum</a>.			</li>
 			</ul>
 		</div>
 
@@ -259,18 +259,18 @@ function docs_support_page_callback(){
 				<h2> Additional Trip settings</h2>
 				<ul class="wp-travel-faq_list">
 					<li class="wp-travel-faq">
-						<a href="#" target="_blank">How to Globally Set the Tabs Format Shown on Single Trip Page?</a>
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-globally-set-the-tabs-format/" target="_blank">How to Globally Set the Tabs Format Shown on Single Trip Page?</a>
 					</li>
 					<li class="wp-travel-faq">
-						<a href="#" target="_blank">How to change the label of tabs shown on Single Trip Page?</a>
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-arrange-and-change-tabs-in-single-trip/" target="_blank">How to change the label of tabs shown on Single Trip Page?</a>
 					</li>
 					<li class="wp-travel-faq">
 						See all the Frequently Asked Question Solution For WP Travel Plugin
 						<a href="http://wptravel.io/faq/" target="_blank">Frequently Asked Question</a>
 					</li>
 					<li class="wp-travel-faq">
-					You can find your solution about the problem of WP Travel from our Support page or you can create a support for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore.
-						<a href="http://wptravel.io/support-forum/" target="_blank">Support Forum</a>
+					You can find your solution about the problem of WP Travel from our <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support Page</a> or you can create a <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support</a> for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore
+						<a href="http://wptravel.io/support-forum/" target="_blank">Support Forum</a>.
 					</li>
 				</ul>
 			</div>
