@@ -18,7 +18,7 @@ function wp_travel_delete_paypal_notice() {
 		?>
 		<div class="notice notice-warning">
 			<p>
-			<strong><?php printf( __( 'WP Travel Standard Paypal is already in WP Travel. Please Delete your WP Travel Standard paypal.', 'wp-travel' ) ); ?></strong>
+			<strong><?php printf( __( 'We have merge WP Travel Standard Paypal in WP Travel due to user request. Please  Delete your WP Travel Standard Paypal addons from Plugin Directory.', 'wp-travel' ) ); ?></strong>
 			</p>
 		</div>
 		<?php
