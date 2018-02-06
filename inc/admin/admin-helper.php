@@ -197,12 +197,12 @@ function docs_support_page_callback(){
 			                 <tr>
 			                    <th scope="row">Get add-ons and tips...</th>
 				                    <td>
-				                        <form name="klawoo_subscribe" action="#" method="POST" accept-charset="utf-8">
-				                            <input class="regular-text ltr" type="text" name="email" id="email" placeholder="Email">
-				                            <input type="hidden" name="list" value="7I763v6Ldrs3YhJeee5EOgFA">
-				                            <input type="submit" name="submit" id="submit" class="button button-primary" value="Subscribe">
-				                            <br>
-				                            <div id="klawoo_response"></div>
+				                        <form action="https://wensolutions.us13.list-manage.com/subscribe/post?u=5924e7bef96519e3827fa3024&amp;id=a40eebcccf" method="POST" class="validate" target="_blank" name="mc-embedded-subscribe-form">
+				                            <input class="regular-text ltr" type="email" name="EMAIL" id="mce-EMAIL" placeholder="Email address" required>
+				                            
+				                            <input type="submit"  name="subscribe" id="mc-embedded-subscribe" class="button button-primary" value="Subscribe">
+				                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+											<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5924e7bef96519e3827fa3024_a40eebcccf" tabindex="-1" value=""></div>
 				                        </form>
 				                    </td>
 				                 </tr>

@@ -276,8 +276,8 @@ class WP_Travel_Admin_Settings {
 		?>
 				<thead>
 					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
-					<th width="35%"><?php esc_html_e( 'Global Trip Tittle', 'wp-travel' ); ?></th>
-					<th width="35%"><?php esc_html_e( 'Custom Trip Tittle', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Global Trip Title', 'wp-travel' ); ?></th>
+					<th width="35%"><?php esc_html_e( 'Custom Trip Title', 'wp-travel' ); ?></th>
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
