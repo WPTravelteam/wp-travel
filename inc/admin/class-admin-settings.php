@@ -262,7 +262,7 @@ class WP_Travel_Admin_Settings {
 		if ( 'tabs_global' !== $tab ) {
 			return;
 		}
-		$global_tabs = isset ( $args['settings']['global_tab_settings'] ) ? $args['settings']['global_tab_settings'] : 'yes';
+		$global_tabs = isset ( $args['settings']['global_tab_settings'] ) ? $args['settings']['global_tab_settings'] : '';
 
 		if( empty( $global_tabs ) ) {
 
