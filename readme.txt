@@ -1,7 +1,7 @@
 === WP Travel ===
 Contributors: WEN Solutions
 Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
-Donate link: http://wptravel.io/
+Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.3
 Stable tag: 1.2.1
@@ -111,7 +111,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.2.1 =
-* New Feature: WP Travel Standard Paypal addon merged to core.
+* New Feature: WP Travel Standard PayPal addon merged to core.
 * New Feature: Archive page widget area added.
 * New Feature: New WP Travel Filters Widget added for trips search.
 * New Feature: New WP Travel Filters Widget shortcode added.
