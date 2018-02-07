@@ -206,12 +206,12 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
         $hide_title = '';
 
         // Filters.
-        $keyword_search = '';
-        $trip_type_filter = '';
-        $trip_location_filter = '';
-        $price_orderby = '';
-        $price_range = '';
-        $trip_dates = '';
+        $keyword_search = 1;
+        $trip_type_filter = 1;
+        $trip_location_filter = 1;
+        $price_orderby = 1;
+        $price_range = 1;
+        $trip_dates = 1;
 
 		if ( $instance ) {
             $title = esc_attr( $instance['title'] );
