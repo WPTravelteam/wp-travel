@@ -44,7 +44,7 @@ function wp_travel_marketplace_page() {
 			<div id="post-body">
 				<div class="wp-travel-marketplace-tab-wrap">
 					<ul>
-						
+
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
 						<!--<li class=""><a href="#tabs-1"><?php // esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>-->
 					</ul>
@@ -79,7 +79,7 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>-->
-					
+
 				</div>
 
 
@@ -165,7 +165,7 @@ Its great plugin for travel or tour agent websites."</h5>
 }
 
 
-function docs_support_page_callback(){ 
+function docs_support_page_callback(){
 	?>
 
 	<div class="wrap">
@@ -176,7 +176,7 @@ function docs_support_page_callback(){
 		                <div class="left-side-section">
 		                	<strong>Welcome to WP Travel.</strong>
 		                		<p>Thanks for installing and we hope you will enjoy using WP Travel. </p>
-		                		<p>We hardly recommend you to install <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
+		                		<p>We strongly recommend you to install <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
 		                        <p class="WP-Travel-actions">
 		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=itineraries" target="_blank">Add New Trips For You Site</a>
 		                        <span>OR</span>
@@ -186,11 +186,11 @@ function docs_support_page_callback(){
 	                    <div class="WP-Travel-badge">
 		                	<span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
 		                	<p>
-		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>              
+		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>
 		                	</p>
 		                </div>
 	                </div>
-	                
+
 	                <div class="wrap-footer">
 	                    <table class="form-table">
 			                 <tbody>
@@ -199,7 +199,7 @@ function docs_support_page_callback(){
 				                    <td>
 				                        <form action="https://wensolutions.us13.list-manage.com/subscribe/post?u=5924e7bef96519e3827fa3024&amp;id=a40eebcccf" method="POST" class="validate" target="_blank" name="mc-embedded-subscribe-form">
 				                            <input class="regular-text ltr" type="email" name="EMAIL" id="mce-EMAIL" placeholder="Email address" required>
-				                            
+
 				                            <input type="submit"  name="subscribe" id="mc-embedded-subscribe" class="button button-primary" value="Subscribe">
 				                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 											<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5924e7bef96519e3827fa3024_a40eebcccf" tabindex="-1" value=""></div>
@@ -209,7 +209,7 @@ function docs_support_page_callback(){
 				            </tbody>
 			            </table>
 			            <div class="WP-Travel-support">
-		                    Questions? Need Help?                    
+		                    Questions? Need Help?
 			                <div id="WP-Travel-contact-us" class="WP-Travel-contact-us">
 			                	<a class="thickbox-contact-us" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
 			                </div>
@@ -282,14 +282,14 @@ function docs_support_page_callback(){
 						 <a href="http://wptravel.io/documentations/user-documentation/" target="_blank">
 						 	See User Documentation to know the plugin and how it works
 						 </a>
-				
+
 						</li>
 
 						<li class="wp-travel-faq">
 						 <a href="http://wptravel.io/documentations/developer-documentation/" target="_blank">
 						 	See Developer Documentation to know the plugin in depth.
 						 </a>
-				
+
 						</li>
 				</ul>
 			</div>
@@ -540,7 +540,7 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					<div class="wp-travel-sorting-handle"></div>
 					<a role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-<?php echo esc_attr( $uid ) ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $uid ) ?>">
 
-					<span bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
+					<span bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>,
 					<span bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
 					<span class="collapse-icon"></span>
 					</a>
@@ -603,7 +603,7 @@ function wp_travel_upgrade_to_110() {
 // 	if ( ! $stat_data ) {
 // 		return;
 // 	}
-	
+
 // 	global $wpdb;
 
 // 	// Default variables.
@@ -656,13 +656,13 @@ function wp_travel_upgrade_to_110() {
 // 	// Payment Data Default Query.
 // 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_payment_stat_data' );
 // 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
-// 		$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
-// 		join ( 
-// 			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost 
-// 			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID    
+// 		$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+// 		join (
+// 			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+// 			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
 // 			WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
 // 		) PMT on BOOKING.ID = PMT.post_id
-// 		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id 
+// 		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
 // 		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
 // 		join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
 // 		join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
@@ -825,4 +825,3 @@ function wp_travel_booking_payment_column_orderby( $vars ) {
 	}
 	return $vars;
 }
-

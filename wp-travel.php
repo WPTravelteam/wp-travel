@@ -5,7 +5,7 @@
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
  * Version: 1.2.1
  * Author: WEN Solutions
- * Author URI: http://wensolutions.com
+ * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
  * Tested up to: 4.9.3
  *
@@ -16,6 +16,7 @@
  * @category Core
  * @author WenSolutions
  */
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -284,14 +285,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					$wp_travel_end_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
 				if ( '' !== $wp_travel_start_date ) {
-					
+
 					$wp_travel_start_date = strtotime( $wp_travel_start_date );
 					$wp_travel_start_date = date( 'Y-m-d', $wp_travel_start_date );
 					update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
 				}
 
 				if ( '' !== $wp_travel_end_date ) {
-					
+
 					$wp_travel_end_date = strtotime( $wp_travel_end_date );
 					$wp_travel_end_date = date( 'Y-m-d', $wp_travel_end_date );
 					update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );

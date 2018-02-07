@@ -142,13 +142,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border: 1px solid #ddd; }
   .about-header .about-header .about-text {
     margin: 0 0 1.5em 0; }
-  .about-header input#submit, .about-header .wp-travel-form-field select#submit, .wp-travel-form-field .about-header select#submit, .about-header .wp-travel-form-field textarea#submit, .wp-travel-form-field .about-header textarea#submit {
+  .about-header input#mc-embedded-subscribe, .about-header .wp-travel-form-field select#mc-embedded-subscribe, .wp-travel-form-field .about-header select#mc-embedded-subscribe, .about-header .wp-travel-form-field textarea#mc-embedded-subscribe, .wp-travel-form-field .about-header textarea#mc-embedded-subscribe {
     background: #d42727;
     border-color: #d42727;
     box-shadow: 0 1px 0 #d42727;
     text-shadow: none;
     font-weight: 500; }
-    .about-header input#submit:hover, .about-header .wp-travel-form-field select#submit:hover, .wp-travel-form-field .about-header select#submit:hover, .about-header .wp-travel-form-field textarea#submit:hover, .wp-travel-form-field .about-header textarea#submit:hover {
+    .about-header input#mc-embedded-subscribe:hover, .about-header .wp-travel-form-field select#mc-embedded-subscribe:hover, .wp-travel-form-field .about-header select#mc-embedded-subscribe:hover, .about-header .wp-travel-form-field textarea#mc-embedded-subscribe:hover, .wp-travel-form-field .about-header textarea#mc-embedded-subscribe:hover {
       background: #ca4a1f;
       border-color: #ca4a1f;
       box-shadow: 0 1px 0 #ca4a1f; }
