@@ -769,7 +769,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		// Saving Tabs Settings
-		$use_global_tabs = 'no';
+		$use_global_tabs = 'yes';
 		if ( isset( $_POST['wp_travel_use_global_tabs'] ) ) {
 			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
 		}
