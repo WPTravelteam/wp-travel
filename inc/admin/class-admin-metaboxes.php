@@ -397,6 +397,7 @@ class WP_Travel_Admin_Metaboxes {
 					<tr>
 						<td>
 							<label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
+							<input name="wp_travel_use_global_tabs" type="hidden"  value="no">
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF">
 							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
