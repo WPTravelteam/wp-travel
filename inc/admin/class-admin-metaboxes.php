@@ -692,7 +692,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 
-		if ( isset( $_POST['wp_travel_start_date'] ) ) {
+		if ( isset( $_POST['wp_travel_start_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
 			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
 
 			$wp_travel_start_date = strtotime( $wp_travel_start_date );
@@ -702,7 +702,7 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
 		}
 
-		if ( isset( $_POST['wp_travel_end_date'] ) ) {
+		if ( isset( $_POST['wp_travel_end_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
 			$wp_travel_end_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_end_date'] ) );
 
 			$wp_travel_end_date = strtotime( $wp_travel_end_date );
