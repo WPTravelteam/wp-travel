@@ -225,7 +225,7 @@ function wp_travel_booking_form_fields() {
 			'validations' => array(
 				'required' => true,
 			),
-			'options' => array( 'booking_with_payment' => esc_html__( 'Booking with payment' ), 'booking_only' => esc_html__( 'Booking only' ) ),
+			'options' => array( 'booking_with_payment' => esc_html__( 'Booking with payment', 'wp-travel' ), 'booking_only' => esc_html__( 'Booking only', 'wp-travel' ) ),
 			'default' => 'booking_with_payment',
 			'priority' => 100,
 		);
@@ -255,7 +255,7 @@ function wp_travel_booking_form_fields() {
 				'validations' => array(
 					'required' => true,
 				),
-				'options' => array( 'partial' => esc_html__( 'Partial Payment' ), 'full' => esc_html__( 'Full Payment' ) ),
+				'options' => array( 'partial' => esc_html__( 'Partial Payment', 'wp-travel' ), 'full' => esc_html__( 'Full Payment', 'wp-travel' ) ),
 				'default' => 'full',
 				'priority' => 101,
 			);

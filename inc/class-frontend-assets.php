@@ -92,8 +92,8 @@ class WP_Travel_Frontend_Assets {
 			$payment_amount = $minimum_partial_payout;
 		}
 		$wt_payment = array(
-			'book_now' 	 => __( 'Book Now' ),
-			'book_n_pay' => __( 'Book and Pay' ),
+			'book_now' 	 => __( 'Book Now', 'wp-travel' ),
+			'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
 			'currency_code' => $currency_code,
 			'currency_symbol' => wp_travel_get_currency_symbol(),
 			'price_per'		=> wp_travel_get_price_per_text( $post->ID ),

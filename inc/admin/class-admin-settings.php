@@ -86,7 +86,7 @@ class WP_Travel_Admin_Settings {
 		);
 
 		$settings_fields['itinerary'] = array(
-			'tab_label' => __( WP_TRAVEL_POST_TITLE_SINGULAR ),
+			'tab_label' => __( WP_TRAVEL_POST_TITLE_SINGULAR, 'wp-travel' ),
 			'content_title' => __( WP_TRAVEL_POST_TITLE_SINGULAR . ' Settings', 'wp-travel' ),
 		);
 

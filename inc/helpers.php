@@ -763,8 +763,8 @@ function wp_travel_get_booking_data() {
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#00f' );
-		$temp_stat_data['data_border_color'] = __( '#00f' );
+		$temp_stat_data['data_bg_color'] = __( '#00f', 'wp-travel' );
+		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
 	} else { 
 		// Payment Data Default Query.		
 		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
@@ -787,8 +787,8 @@ function wp_travel_get_booking_data() {
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#1DFE0E' );
-		$temp_stat_data['data_border_color'] = __( '#1DFE0E' );
+		$temp_stat_data['data_bg_color'] = __( '#1DFE0E', 'wp-travel' );
+		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'wp-travel' );
 	}
 	
 	if ( is_array( $results ) && count( $results ) > 0 ) {
@@ -957,8 +957,8 @@ function wp_travel_get_booking_data() {
 			$results =  $wpdb->get_results( $query );
 	
 			$temp_compare_data['data_label'] = __( 'Booking 2', 'wp-travel' );
-			$temp_compare_data['data_bg_color'] = __( '#3c0' );
-			$temp_compare_data['data_border_color'] = __( '#3c0' );
+			$temp_compare_data['data_bg_color'] = __( '#3c0', 'wp-travel' );
+			$temp_compare_data['data_border_color'] = __( '#3c0', 'wp-travel' );
 		} else {
 			// Payment Data Default Query.		
 			$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
@@ -981,8 +981,8 @@ function wp_travel_get_booking_data() {
 			if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 				$temp_compare_data['data_label'] = __( 'Payment 2', 'wp-travel' );
 			}
-			$temp_compare_data['data_bg_color'] = __( '#000' );
-			$temp_compare_data['data_border_color'] = __( '#000' );
+			$temp_compare_data['data_bg_color'] = __( '#000', 'wp-travel' );
+			$temp_compare_data['data_border_color'] = __( '#000', 'wp-travel' );
 		}
 
 		$date_format = 'm/d/Y';
