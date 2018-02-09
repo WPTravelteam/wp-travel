@@ -374,7 +374,7 @@ class WP_Travel_Admin_Settings {
 					</p>
 				</td>
 			</tr>
-			<tr>
+			<tr id="wp-travel-minimum-partial-payout">
 				<th><label for="minimum_partial_payout"><?php esc_html_e( 'Minimum Payout (%)', 'wp-travel' ) ?></label></th>
 				<td>
 					<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ) ?>" name="minimum_partial_payout" id="minimum_partial_payout" class="wt-slider" />
@@ -400,7 +400,7 @@ class WP_Travel_Admin_Settings {
 					<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ) ?></p>
 				</td>
 			</tr>
-			<tr>
+			<tr id="wp-travel-paypal-email" >
 				<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ) ?></label></th>
 				<td>
 					<input type="text" value="<?php echo esc_attr( $paypal_email ) ?>" name="paypal_email" id="paypal_email"/>

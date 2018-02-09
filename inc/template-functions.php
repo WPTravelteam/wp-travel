@@ -615,11 +615,12 @@ function wp_travel_frontend_contents( $post_id ) {
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 						<?php echo wp_kses_post( $tab_info['content'] ); ?>
 
+					<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
+						<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
+					
 						<div class="itenary clearfix">
 							<div class="timeline-contents clearfix">
 								<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h2>
-								<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
-								<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
 									<?php $index = 1; ?>
 									<?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
 										<?php if ( $index % 2 === 0 ) : ?>
@@ -686,16 +687,12 @@ function wp_travel_frontend_contents( $post_id ) {
 										</div><!-- first-content -->
 										<?php $index++ ?>
 									<?php endforeach; ?>
-								<?php else : ?>
-									<div class="while-empty">
-										<p>
-											<?php esc_html_e( 'Itinerary not found.', 'wp-travel' ); ?>
-										</p>
-									</div>
-								<?php endif; ?>
 								
 							</div><!-- timeline-contents -->
 						</div><!-- itenary -->
+
+					<?php endif; ?>
+					
 					</div>
 					<?php break;
 					 default : ?>
