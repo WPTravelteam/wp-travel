@@ -13,12 +13,47 @@
  */
 function wp_travel_email_template_header( $type, $sentTo ) {
 
+	if ( '' === $type || '' === $sentTo ){
+		return;
+	}
+	
+	$settings = wp_travel_get_settings();
+	
+	switch( $type ){
+		
+		case 'bookings' :
+		
+		if ( $sentTo == 'admin' ) {
+			
+			$defaults = array(
+
+				'admin_subject' => __( '', 'wp-travel' ),
+				'admin_title' => __( 'New Booking', 'wp-travel' ),
+				'admin_header_color' => '#dd402e',
+				'email_content' => '',
+				
+			);
+
+			$booking_admin_email_content = isset( $settings['booking_admin_template_settings'] ) ? $settings['booking_admin_template_settings'] : $defaults;
+			
+			print_r( $settings['booking_admin_template_settings'] ); die();
+
+
+			}
+			elseif ( $sentTo == 'client' ){
+
+
+			}
+		break;
+
+	}
+
 ?>
 	<!DOCTYPE html>
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title><?php sprintf( 'TO %s', $sentTo ); ?></title>
+		<title><?php sprintf( 'TO %s', strtoupper( $sentTo ) ); ?></title>
 		<style type="text/css">
 			body{
 				 background: #fcfcfc ;
@@ -114,8 +149,8 @@ function wp_travel_email_template_header( $type, $sentTo ) {
 		<!-- Wrapper -->
 		<table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
 			<tr class="wp-travel-header" style="background: #fff;">			
-				<td align="left" style="background: #dd402e;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
-					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'New Bookings', 'wp-travel' ) ?></h2>
+				<td align="left" style="background: <?php echo esc_attr( $booking_admin_email_content['admin_header_color'] ); ?>;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
+					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php echo esc_html( $booking_admin_email_content['admin_title'] ); ?></h2>
 				</td> <!-- /Header -->
 			</tr>
 <?php

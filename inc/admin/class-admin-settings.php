@@ -203,33 +203,52 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		$send_booking_email_to_admin = isset( $args['settings']['send_booking_email_to_admin'] ) ? $args['settings']['send_booking_email_to_admin'] : 'yes';
+
+		//Booking Defaults.
+		$booking_admin_email_defaults = array(
+
+			'admin_subject' => '',
+			'admin_title'  => '',
+			'admin_header_color' => '',
+			'email_content' => '',
+
+		);
+
+		$booking_admin_email_settings = isset( $args['settings']['booking_admin_template_settings'] ) ? $args['settings']['booking_admin_template_settings'] : $booking_admin_email_defaults;
+
 		?>
 
-			<!--	<div class="wp-travel-tab-content-email-header clearfix">
+		<div class="wp-travel-tab-content-email-header clearfix">
 			<div class="wp-collapse-open">
 				<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
 				<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
 			</div>
-		</div> -->
+		</div> 
 
 		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+				
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								<?php esc_html_e( 'Email Settings', 'wp-travel' ); ?>
+								<?php esc_html_e( 'Booking Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 						<div class="panel-body">
 							<div class="panel-wrap">
+
+							<div class="wp-travel-email-template-options">
+
+							<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
+
 								<table class="form-table">
 									<tr>
 										<th>
-											<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
+											<label for="send_booking_email_to_admin"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
 										</th>
 										<td>
 											<span class="show-in-frontend checkbox-default-design">
@@ -241,11 +260,103 @@ class WP_Travel_Admin_Settings {
 											</span>
 										</td>
 									</tr>
+									<tr>
+										<th>
+											<label for="booking-admin-email-sub"><?php esc_html_e( 'Booking Email Subject', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input value="<?php echo $booking_admin_email_settings['admin_subject'] ?>" type="text" name="booking_admin_template[admin_subject]" id="booking-admin-email-sub">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-admin-email-title"><?php esc_html_e( 'Booking Email Title', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input type="text" value="<?php echo $booking_admin_email_settings['admin_title'] ?>" name="booking_admin_template[admin_title]" id="booking-admin-email-title">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-admin-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input class="wp-travel-color-field" value = <?php echo $booking_admin_email_settings['admin_header_color'] ?> type="text" name="booking_admin_template[admin_header_color]" id="booking-admin-email-header-color">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<?php 
+											$content = $booking_admin_email_settings['email_content'];
+											wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
+										</td>
+									</tr>
+
+								</table>
+							
+							</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingTwo">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+								<?php esc_html_e( 'Payment Email Templates', 'wp-travel' ); ?>
+								<span class="collapse-icon"></span>
+							</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+						<div class="panel-body">
+							<div class="panel-wrap">
+								<table class="form-table">
+									<tr>
+										<th>
+											<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											
+										</td>
+									</tr>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingThree">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+								<?php esc_html_e( 'Enquiry Email Templates', 'wp-travel' ); ?>
+								<span class="collapse-icon"></span>
+							</a>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						<div class="panel-body">
+							<div class="panel-wrap">
+								<table class="form-table">
+									<tr>
+										<th>
+											<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			
 			</div>
 		</div>
 
@@ -467,12 +578,16 @@ class WP_Travel_Admin_Settings {
 			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
 
+			//Email Templates
+			$booking_admin_email_template_settings = ( isset( $_POST['booking_admin_template'] ) && '' !== $_POST['booking_admin_template'] ) ? stripslashes_deep( $_POST['booking_admin_template'] ) : '';
+
 			$enable_trip_enquiry_option = ( isset( $_POST['enable_trip_enquiry_option'] ) && '' !== $_POST['enable_trip_enquiry_option'] ) ? 'yes' : 'no';
 
 			$settings['currency'] = $currency;
 			$settings['google_map_api_key'] = $google_map_api_key;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
+			$settings['booking_admin_template_settings'] = $booking_admin_email_template_settings;
 
 			// @since 1.1.1 Global tabs settings.
 			$settings['global_tab_settings'] = ( isset( $_POST['wp_travel_global_tabs_settings'] ) && '' !== $_POST['wp_travel_global_tabs_settings'] ) ? $_POST['wp_travel_global_tabs_settings'] : '';
