@@ -176,7 +176,7 @@ class WP_Travel_Emails {
 
                      //Set Headings.
                     $header_details = array(
-                        'header_title' => isset( $settings['booking_client_template_settings']['client_title'] ) ? $settings['booking_client_template_settings']['client_title'] :  __( 'Booking Confirmed', 'wp-travel' ),
+                        'header_title' => isset( $settings['booking_client_template_settings']['client_title'] ) && '' !== $settings['booking_client_template_settings']['client_title'] ? $settings['booking_client_template_settings']['client_title'] :  __( 'Booking Confirmed', 'wp-travel' ),
                         'header_color' => isset( $settings['booking_client_template_settings']['client_header_color'] ) ? $settings['booking_client_template_settings']['client_header_color'] : '#dd402e',
                         
                     );

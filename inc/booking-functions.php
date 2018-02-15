@@ -872,6 +872,7 @@ function wp_travel_book_now() {
 
 	// Client Template.
 	$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+	
 	//Client message.
 	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
 	
