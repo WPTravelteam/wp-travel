@@ -122,6 +122,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   -webkit-box-shadow: none;
   box-shadow: none; }
 
+.wp-travel-express-checkout-settings-form {
+  margin-bottom: 30px; }
+
+.wp-travel-express-checkout th,
+.wp-travel-express-checkout td {
+  padding: 10px;
+  vertical-align: middle;
+  width: 33.3333%; }
+
 .trip-info-sidebar td {
   padding: 15px 5px;
   width: 50%;
@@ -832,6 +841,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     float: none; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap input, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field select, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap select, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field textarea, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap textarea {
     float: right; }
+
+.wp-travel-express-checkout select, .wp-travel-express-checkout .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-express-checkout input, .wp-travel-express-checkout .stat-toolbar-form .field-group .wp-travel-form-field select, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-express-checkout select, .wp-travel-express-checkout .wp-travel-form-field .stat-toolbar-form .field-group select, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-express-checkout select, .wp-travel-express-checkout .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-express-checkout textarea, .wp-travel-express-checkout .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-express-checkout textarea {
+  width: 190px; }
 
 .check-handeller {
   float: right;

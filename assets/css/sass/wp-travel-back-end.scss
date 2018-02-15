@@ -194,6 +194,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+.wp-travel-express-checkout-settings-form {
+    margin-bottom: 30px;
+}
+.wp-travel-express-checkout{
+    th,
+    td {
+        padding: 10px;
+        vertical-align: middle;
+        width:33.3333%;
+    }
+} 
 
 .trip-info-sidebar {
     td {
@@ -1227,6 +1238,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 } 
 
+//express checkout
+.wp-travel-express-checkout{
+    select {
+        width: 190px;
+    }
+} 
+
+
+
+//end
 .check-handeller {
 
     float: right;
