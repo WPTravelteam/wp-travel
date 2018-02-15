@@ -173,6 +173,18 @@ class WP_Travel_Emails {
 
                 }
                 elseif ( $sentTo == 'client' ){
+
+                     //Set Headings.
+                    $header_details = array(
+                        'header_title' => isset( $settings['booking_client_template_settings']['client_title'] ) ? $settings['booking_client_template_settings']['client_title'] :  __( 'Booking Confirmed', 'wp-travel' ),
+                        'header_color' => isset( $settings['booking_client_template_settings']['client_header_color'] ) ? $settings['booking_client_template_settings']['client_header_color'] : '#dd402e',
+                        
+                    );
+                
+                    $email_template['subject'] = isset( $settings['booking_client_template_settings']['client_subject'] ) ? $settings['booking_client_template_settings']['client_subject'] : __('Thank you for your booking.', 'wp-travel');
+                    
+                    //Set Contents.
+                    $email_content = isset( $settings['booking_client_template_settings']['email_content'] ) && '' !== $settings['booking_client_template_settings']['email_content'] ? $settings['booking_client_template_settings']['email_content'] : wp_travel_booking_client_default_email_content();
     
     
                 }

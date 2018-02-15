@@ -870,7 +870,7 @@ function wp_travel_book_now() {
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
 	
 	//Admin Subject.
-	$admin_subject = $admin_template['admin_subject'];
+	$admin_subject = $admin_template['subject'];
 
 	// Client message.
 	$message = wp_travel_customer_email_template();

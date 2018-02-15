@@ -384,7 +384,7 @@ class WP_Travel_Admin_Settings {
 										</th>
 										<td>
 											<?php 
-											$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+											$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
 											wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
