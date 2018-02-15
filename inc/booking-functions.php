@@ -436,8 +436,8 @@ function wp_travel_booking_info( $post ) {
 
 			<?php
 			$fields = wp_travel_booking_form_fields();
-			// echo '<pre>';
-			// print_r( $fields );
+			//echo '<pre>';
+			//print_r( $fields );
 			$priority = array();
 			foreach ( $fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
@@ -484,7 +484,7 @@ function wp_travel_booking_info( $post ) {
 					<?php break; ?>
 					<?php case 'radio' : ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
-							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>							
+							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>						
 							<?php
 							if ( ! empty( $field['options'] ) ) {
 								foreach ( $field['options'] as $key => $value ) { ?>
@@ -522,7 +522,7 @@ function wp_travel_booking_info( $post ) {
 
 						if ( $payment_id ) :
 
-							$payment_amount = get_post_meta ( $payment_id, 'wp_travel_trip_price', true );
+							$payment_amount = get_post_meta( $payment_id, 'wp_travel_payment_amount' , true )
 						
 						?>
 
