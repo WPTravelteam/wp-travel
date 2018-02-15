@@ -864,26 +864,25 @@ function wp_travel_book_now() {
 		
 	$email = new WP_Travel_Emails();
 
-	$admin_message = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
 
-	//$admin_message = wp_travel_admin_email_template();
-	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
+	//Admin message.
+	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
+	
+	//Admin Subject.
+	$admin_subject = $admin_template['admin_subject'];
+
 	// Client message.
 	$message = wp_travel_customer_email_template();
 	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
+		
 		// To send HTML mail, the Content-type header must be set.
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers = $email->email_headers( $client_email, $client_email );
 
-		// Create email headers.
-		$headers .= 'From: ' . $client_email . "\r\n" .
-		'Reply-To: ' . $client_email . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
-
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $admin_message, $headers ) ) {
+		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
 				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
@@ -893,13 +892,7 @@ function wp_travel_book_now() {
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-	$headers  = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-	// Create email headers.
-	$headers .= 'From: ' . $admin_email . "\r\n" .
-	'Reply-To: ' . $admin_email . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
+	$headers = $email->email_headers( $admin_email, $admin_email );
 
 	// if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
 

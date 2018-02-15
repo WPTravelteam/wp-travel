@@ -148,6 +148,8 @@ class WP_Travel_Emails {
         if ( '' === $type || '' === $sentTo ){
             return;
         }
+
+        $email_template = array();
         
         $settings = wp_travel_get_settings();
         
@@ -163,6 +165,9 @@ class WP_Travel_Emails {
                     'header_color' => isset( $settings['booking_admin_template_settings']['admin_header_color'] ) ? $settings['booking_admin_template_settings']['admin_header_color'] : '#dd402e',
                     
                 );
+                
+                $email_template['subject'] = isset( $settings['booking_admin_template_settings']['admin_subject'] ) ? $settings['booking_admin_template_settings']['admin_subject'] : __('New Booking', 'wp-travel');
+                
                 //Set Contents.
                 $email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] : wp_travel_booking_admin_default_email_content();
 
@@ -175,11 +180,11 @@ class WP_Travel_Emails {
     
         }
 
-        $email_template = $this->wp_travel_email_heading( $sentTo , $header_details );
+        $email_template['mail_content'] = $this->wp_travel_email_heading( $sentTo , $header_details );
 
-        $email_template .= $email_content; 
+        $email_template['mail_content'] .= $email_content;
 
-        $email_template .= $this->wp_travel_email_footer();
+        $email_template['mail_content'] .= $this->wp_travel_email_footer();
 
         return $email_template;
 

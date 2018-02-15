@@ -204,7 +204,7 @@ class WP_Travel_Admin_Settings {
 		}
 		$send_booking_email_to_admin = isset( $args['settings']['send_booking_email_to_admin'] ) ? $args['settings']['send_booking_email_to_admin'] : 'yes';
 
-		//Booking Defaults.
+		//Booking Admin Defaults.
 		$booking_admin_email_defaults = array(
 
 			'admin_subject' => '',
@@ -214,7 +214,61 @@ class WP_Travel_Admin_Settings {
 
 		);
 
+		//Booking client Defaults.
+		$booking_client_email_defaults = array(
+
+			'client_subject' => '',
+			'client_title'  => '',
+			'client_header_color' => '',
+			'email_content' => '',
+
+		);
+
+
+		//Payment Admin Defaults.
+		$payment_admin_email_defaults = array(
+
+			'admin_subject' => '',
+			'admin_title'  => '',
+			'admin_header_color' => '',
+			'email_content' => '',
+
+		);
+
+		//Payment client Defaults.
+		$payment_client_email_defaults = array(
+
+			'client_subject' => '',
+			'client_title'  => '',
+			'client_header_color' => '',
+			'email_content' => '',
+
+		);
+
+
+		//emquiry Admin Defaults.
+		$enquiry_admin_email_defaults = array(
+
+			'admin_subject' => '',
+			'admin_title'  => '',
+			'admin_header_color' => '',
+			'email_content' => '',
+
+		);
+		//Booking Admin Email.
 		$booking_admin_email_settings = isset( $args['settings']['booking_admin_template_settings'] ) ? $args['settings']['booking_admin_template_settings'] : $booking_admin_email_defaults;
+
+		//Booking Client Email.
+		$booking_client_email_settings = isset( $args['settings']['booking_client_template_settings'] ) ? $args['settings']['booking_client_template_settings'] : $booking_client_email_defaults;
+
+		//Payment Admin Email.
+		$payment_admin_email_settings = isset( $args['settings']['payment_admin_template_settings'] ) ? $args['settings']['payment_admin_template_settings'] : $payment_admin_email_defaults;
+
+		//Payment Client Email.
+		$payment_client_email_settings = isset( $args['settings']['payment_client_template_settings'] ) ? $args['settings']['payment_client_template_settings'] : $payment_client_email_defaults;
+
+		//Enquiry Admin Email.
+		$enquiry_admin_email_settings = isset( $args['settings']['enquiry_admin_template_settings'] ) ? $args['settings']['enquiry_admin_template_settings'] : $enquiry_admin_email_defaults;
 
 		?>
 
@@ -290,8 +344,48 @@ class WP_Travel_Admin_Settings {
 										</th>
 										<td>
 											<?php 
-											$content = isset( $booking_admin_email_settings['email_content'] ) ?  $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+											$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content']  ?  $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
 											wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
+										</td>
+									</tr>
+
+								</table>
+
+							<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
+
+								<table class="form-table">
+									<tr>
+										<th>
+											<label for="booking-client-email-sub"><?php esc_html_e( 'Booking Client Email Subject', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input value="<?php echo $booking_client_email_settings['client_subject'] ?>" type="text" name="booking_client_template[client_subject]" id="booking-client-email-sub">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-client-email-title"><?php esc_html_e( 'Booking Email Title', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input type="text" value="<?php echo $booking_client_email_settings['client_title'] ?>" name="booking_client_template[client_title]" id="booking-client-email-title">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-client-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input class="wp-travel-color-field" value = <?php echo $booking_client_email_settings['client_header_color'] ?> type="text" name="booking_client_template[client_header_color]" id="booking-client-email-header-color">
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label for="booking-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<?php 
+											$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+											wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
 
@@ -315,16 +409,89 @@ class WP_Travel_Admin_Settings {
 					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 						<div class="panel-body">
 							<div class="panel-wrap">
-								<table class="form-table">
-									<tr>
-										<th>
-											<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
-										</th>
-										<td>
-											
-										</td>
-									</tr>
-								</table>
+								<div class="wp-travel-email-template-options">
+
+								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
+
+									<table class="form-table">
+										<tr>
+											<th>
+												<label for="payment-admin-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo $payment_admin_email_settings['admin_subject'] ?>" type="text" name="payment_admin_template[admin_subject]" id="payment-admin-email-sub">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-admin-email-title"><?php esc_html_e( 'Payment Email Title', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input type="text" value="<?php echo $payment_admin_email_settings['admin_title'] ?>" name="payment_admin_template[admin_title]" id="payment-admin-email-title">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-admin-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input class="wp-travel-color-field" value = <?php echo $payment_admin_email_settings['admin_header_color'] ?> type="text" name="payment_admin_template[admin_header_color]" id="payment-admin-email-header-color">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<?php 
+												$content = isset( $payment_admin_email_settings['email_content'] ) ?  $payment_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template[email_content]'  ) ); ?>
+											</td>
+										</tr>
+
+									</table>
+
+									<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
+
+									<table class="form-table">
+										<tr>
+											<th>
+												<label for="payment-client-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo $payment_client_email_settings['client_subject'] ?>" type="text" name="payment_client_template[client_subject]" id="payment-client-email-sub">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-client-email-title"><?php esc_html_e( 'Payment Email Title', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input type="text" value="<?php echo $payment_client_email_settings['client_title'] ?>" name="payment_client_template[client_title]" id="payment-client-email-title">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-client-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input class="wp-travel-color-field" value = <?php echo $payment_client_email_settings['client_header_color'] ?> type="text" name="payment_client_template[client_header_color]" id="payment-client-email-header-color">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="payment-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<?php 
+												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content']  ?  $payment_client_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template[email_content]'  ) ); ?>
+											</td>
+										</tr>
+
+									</table>
+
+								</div>
 							</div>
 						</div>
 					</div>
@@ -341,16 +508,50 @@ class WP_Travel_Admin_Settings {
 					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 						<div class="panel-body">
 							<div class="panel-wrap">
-								<table class="form-table">
-									<tr>
-										<th>
-											<label for="currency"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
-										</th>
-										<td>
-											
-										</td>
-									</tr>
-								</table>
+								<div class="wp-travel-email-template-options">
+
+								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
+
+									<table class="form-table">
+										<tr>
+											<th>
+												<label for="enquiry-admin-email-sub"><?php esc_html_e( 'Enquiry Email Subject', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo $enquiry_admin_email_settings['admin_subject'] ?>" type="text" name="enquiry_admin_template[admin_subject]" id="enquiry-admin-email-sub">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="enquiry-admin-email-title"><?php esc_html_e( 'Enquiry Email Title', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input type="text" value="<?php echo $enquiry_admin_email_settings['admin_title'] ?>" name="enquiry_admin_template[admin_title]" id="enquiry-admin-email-title">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="enquiry-admin-email-header-color"><?php esc_html_e( 'Enquiry Email Header Color', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input class="wp-travel-color-field" value = <?php echo $enquiry_admin_email_settings['admin_header_color'] ?> type="text" name="enquiry_admin_template[admin_header_color]" id="enquiry-admin-email-header-color">
+											</td>
+										</tr>
+										<tr>
+											<th>
+												<label for="enquiry-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<?php 
+												$content = isset( $enquiry_admin_email_settings['email_content'] ) ?  $enquiry_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template[email_content]'  ) ); ?>
+											</td>
+										</tr>
+
+									</table>
+
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -579,7 +780,21 @@ class WP_Travel_Admin_Settings {
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
 
 			//Email Templates
+			//Booking Admin Email Settings.
 			$booking_admin_email_template_settings = ( isset( $_POST['booking_admin_template'] ) && '' !== $_POST['booking_admin_template'] ) ? stripslashes_deep( $_POST['booking_admin_template'] ) : '';
+
+			//Booking Client Email Settings.
+			$booking_client_email_template_settings = ( isset( $_POST['booking_client_template'] ) && '' !== $_POST['booking_client_template'] ) ? stripslashes_deep( $_POST['booking_client_template'] ) : '';
+
+			//Payment Admin Email Settings.
+			$payment_admin_email_template_settings = ( isset( $_POST['payment_admin_template'] ) && '' !== $_POST['payment_admin_template'] ) ? stripslashes_deep( $_POST['payment_admin_template'] ) : '';
+
+			//Payment Client Email Settings.
+			$payment_client_email_template_settings = ( isset( $_POST['payment_client_template'] ) && '' !== $_POST['payment_client_template'] ) ? stripslashes_deep( $_POST['payment_client_template'] ) : '';
+
+
+			//Enquiry Admin Email Settings.
+			$enquiry_admin_email_template_settings = ( isset( $_POST['enquiry_admin_template'] ) && '' !== $_POST['enquiry_admin_template'] ) ? stripslashes_deep( $_POST['enquiry_admin_template'] ) : '';
 
 			$enable_trip_enquiry_option = ( isset( $_POST['enable_trip_enquiry_option'] ) && '' !== $_POST['enable_trip_enquiry_option'] ) ? 'yes' : 'no';
 
@@ -587,7 +802,15 @@ class WP_Travel_Admin_Settings {
 			$settings['google_map_api_key'] = $google_map_api_key;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
+			
+			// Save Admin Email Options.
 			$settings['booking_admin_template_settings'] = $booking_admin_email_template_settings;
+			$settings['payment_admin_template_settings'] = $payment_admin_email_template_settings;
+			$settings['enquiry_admin_template_settings'] = $enquiry_admin_email_template_settings;
+
+			//Save Client Email Options.
+			$settings['booking_client_template_settings'] = $booking_client_email_template_settings;
+			$settings['payment_client_template_settings'] = $payment_client_email_template_settings;
 
 			// @since 1.1.1 Global tabs settings.
 			$settings['global_tab_settings'] = ( isset( $_POST['wp_travel_global_tabs_settings'] ) && '' !== $_POST['wp_travel_global_tabs_settings'] ) ? $_POST['wp_travel_global_tabs_settings'] : '';
