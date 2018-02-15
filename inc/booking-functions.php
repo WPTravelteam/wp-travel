@@ -866,7 +866,7 @@ function wp_travel_book_now() {
 
 	$admin_message = $email->wp_travel_get_email_template( 'bookings', 'admin' );
 
-	// $admin_message = wp_travel_admin_email_template();
+	//$admin_message = wp_travel_admin_email_template();
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
 	// Client message.
 	$message = wp_travel_customer_email_template();

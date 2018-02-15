@@ -43,7 +43,7 @@ class WP_Travel_Emails {
      */
     public function wp_travel_email_styles(){
 
-        echo '<style type="text/css">
+        $styles = '<style type="text/css">
         body{
              background: #fcfcfc ;
              color: #5d5d5d;
@@ -134,23 +134,7 @@ class WP_Travel_Emails {
         }
     </style>';
 
-    }
-    /**
-     * get default email content.
-     * @param string $type Email type 
-     * @param string $sentTo Sent To 
-     * @return HTML
-     */
-    public function wp_travel_get_default_email_content( $type, $sentTo ){
-
-        ob_start();
-
-            wp_travel_get_template_part('email-templates/' . $type . '-email', $sentTo );
-
-        $template = ob_get_clean();
-
-        return $template;
-
+    return $styles;
 
     }
     /**
@@ -180,8 +164,8 @@ class WP_Travel_Emails {
                     
                 );
                 //Set Contents.
-                $email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) ? $settings['booking_admin_template_settings']['email_content'] : $this->wp_travel_get_default_email_content( 'booking', 'admin' );
-    
+                $email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] : wp_travel_booking_admin_default_email_content();
+
                 }
                 elseif ( $sentTo == 'client' ){
     
@@ -216,7 +200,7 @@ class WP_Travel_Emails {
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title><?php sprintf( 'TO %s', strtoupper( $sentTo ) ); ?></title>
-            <?php $this->wp_travel_email_styles(); ?>
+            <?php echo $this->wp_travel_email_styles(); ?>
         </head>
         <body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
             <!-- Wrapper -->
