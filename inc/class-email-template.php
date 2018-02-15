@@ -189,6 +189,24 @@ class WP_Travel_Emails {
     
                 }
             break;
+            case 'enquiry' :
+            
+            if ( $sentTo == 'admin' ) {
+                
+                //Set Headings.
+                $header_details = array(
+                    'header_title' => isset( $settings['enquiry_admin_template_settings']['admin_title'] ) ? $settings['enquiry_admin_template_settings']['admin_title'] :  __( 'New Enquiry', 'wp-travel' ),
+                    'header_color' => isset( $settings['enquiry_admin_template_settings']['admin_header_color'] ) ? $settings['enquiry_admin_template_settings']['admin_header_color'] : '#dd402e',
+                    
+                );
+                
+                $email_template['subject'] = isset( $settings['enquiry_admin_template_settings']['admin_subject'] ) ? $settings['enquiry_admin_template_settings']['admin_subject'] : __('New Enquiry', 'wp-travel');
+                
+                //Set Contents.
+                $email_content = isset( $settings['enquiry_admin_template_settings']['email_content'] ) && '' !== $settings['enquiry_admin_template_settings']['email_content'] ? $settings['enquiry_admin_template_settings']['email_content'] : wp_travel_enquiries_admin_default_email_content();
+
+                }
+            break;
     
         }
 

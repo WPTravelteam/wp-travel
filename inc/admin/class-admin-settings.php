@@ -543,7 +543,7 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<?php 
-												$content = isset( $enquiry_admin_email_settings['email_content'] ) ?  $enquiry_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												$content = isset( $enquiry_admin_email_settings['email_content'] ) ?  $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
 												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template[email_content]'  ) ); ?>
 											</td>
 										</tr>

@@ -395,6 +395,104 @@ return $content;
 }
 
 /**
+ * Enqueries Admin Default Email.
+ */
+function wp_travel_enquiries_admin_default_email_content(){
+
+?>
+	<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
+					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ) ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ) ?>,</p>
+					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received trip enquiry from', 'wp-travel' ) ?> {customer_name}:</p>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left" class="wp-travel-content-title" style="background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">				
+					<h3 style="font-size: 16px;line-height: 1;margin: 0;margin-top: 30px;"><b><?php esc_html_e( 'Booking Details', 'wp-travel' ) ?>:</b></h3>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left">
+					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Itinerary', 'wp-travel' ) ?></b></td>
+						</tr>
+					</table>
+					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
+								<a href="{itinerary_link}" target="_blank" style="color: #5a418b;text-decoration: none;">{itinerary_title}</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left" class="wp-travel-content-title" style="background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">				
+					<h3 style="font-size: 16px;line-height: 1;margin: 0;margin-top: 30px;"><b><?php esc_html_e( 'Customer Details', 'wp-travel' ) ?>:</b></h3>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left">
+					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Name', 'wp-travel' ) ?></b></td>
+						</tr>
+					</table>
+					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">{customer_name}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left">
+					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Email', 'wp-travel' ) ?></b></td>
+						</tr>
+					</table>
+					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">{customer_email}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="left">
+					<table class="wp-travel-content-head full-width" align="left" cellspacing="0" cellpadding="0" style="width: 100%!important;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Enquiry Message', 'wp-travel' ) ?></b></td>
+						</tr>
+					</table>
+					<table class="wp-travel-content-info full-width" align="left" cellspacing="0" cellpadding="0" style="width: 100%!important;">
+						<tr style="background: #fff;">
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">{customer_note}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td align="center">				
+					<a href="{enquery_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
+				</td>
+			</tr>
+
+
+<?php
+
+$content = ob_get_contents();
+
+ob_end_clean();
+
+return $content;
+
+}
+
+/**
  * Will return admin email template.
  *
  * @return HTML
