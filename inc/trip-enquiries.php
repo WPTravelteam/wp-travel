@@ -384,7 +384,7 @@ function wp_travel_save_user_enquiry(){
 	}
 
 	// Prepare variables to assign in email.
-	$client_email = $enquiry_data['email'];
+	// $client_email = $enquiry_data['email'];
 
 	$admin_email = get_option( 'admin_email' );
 
