@@ -75,44 +75,44 @@
 
     // TAX Slider JS.
 
-    var slider = document.getElementById("trip_tax_percentage");
-    var output = document.getElementById("trip_tax_percentage_output");
+    // var slider = document.getElementById("trip_tax_percentage");
+    // var output = document.getElementById("trip_tax_percentage_output");
 
-    output.innerHTML = slider.value; // Display the default slider value
-    // Update the current slider value (each time you drag the slider handle)
-    const wp_travel_tax_percentage_range_func = function() {
-        var value = this.value;
+    // output.innerHTML = slider.value; // Display the default slider value
+    // // Update the current slider value (each time you drag the slider handle)
+    // const wp_travel_tax_percentage_range_func = function() {
+    //     var value = this.value;
 
-        if (this.value >= 100) {
-            value = 100;
-        }
-        if (this.value <= 1) {
-            value = 1;
-        }
-        value = Math.max(value, 1);
-        slider.value = value;
-        output.value = value;
+    //     if (this.value >= 100) {
+    //         value = 100;
+    //     }
+    //     if (this.value <= 1) {
+    //         value = 1;
+    //     }
+    //     value = Math.max(value, 1);
+    //     slider.value = value;
+    //     output.value = value;
 
-    }
+    // }
 
-    output.onkeyup = wp_travel_tax_percentage_range_func;
+    // output.onkeyup = wp_travel_tax_percentage_range_func;
 
-    output.oninput = wp_travel_tax_percentage_range_func;
+    // output.oninput = wp_travel_tax_percentage_range_func;
 
-    slider.oninput = function() {
-            var value = this.value;
+    // slider.oninput = function() {
+    //         var value = this.value;
 
-            if (this.value >= 100) {
-                value = 100;
-            }
-            if (this.value <= 1) {
-                value = 1;
-            }
-            value = Math.max(value, 1);
-            output.value = value;
-            slider.value = value;
-        }
-        //Partial Payout Options.
+    //         if (this.value >= 100) {
+    //             value = 100;
+    //         }
+    //         if (this.value <= 1) {
+    //             value = 1;
+    //         }
+    //         value = Math.max(value, 1);
+    //         output.value = value;
+    //         slider.value = value;
+    //     }
+    //Partial Payout Options.
     if ($('#partial_payment').is(':checked')) {
         $('#wp-travel-minimum-partial-payout').show();
     } else {

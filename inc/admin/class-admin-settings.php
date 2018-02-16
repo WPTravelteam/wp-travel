@@ -743,14 +743,11 @@ class WP_Travel_Admin_Settings {
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Prices entered with tax', 'wp-travel' ) ?></label></th>
 				<td>
-					<li>
 						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio"> 
 						<?php esc_html_e( 'Yes, I will enter prices inclusive of tax', 'wp-travel' ); ?></label>
-					</li>
-					<li>
+
 						<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
 						<?php esc_html_e( 'No, I will enter prices exclusive of tax', 'wp-travel' ); ?></label>
-					</li>
 					
 				</td>
 			</tr>
@@ -758,8 +755,7 @@ class WP_Travel_Admin_Settings {
 				<th><label for="trip_tax_percentage_output"><?php esc_html_e( 'Tax Percentage', 'wp-travel' ) ?></label></th>
 				<td>
 
-				<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage" class="wt-slider" />
-					<label><input type="number" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage_output" />%</label>
+					<label><input type="number" min="0" max="100" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage_output" />%</label>
 					<p class="description"><?php esc_html_e( 'Trip Tax percentage added to trip price.', 'wp-travel' ) ?></p>
 					
 				</td>
