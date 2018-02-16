@@ -1055,11 +1055,24 @@ function wp_travel_booking_message() {
 	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
 		return;
 	}
-	if ( isset( $_GET['booked'] ) ) : ?>
+	if ( isset( $_GET['booked'] ) && 1 == $_GET['booked'] ) : ?>
 		<script>
 			history.replaceState({}, null, '<?php echo $_SERVER['REDIRECT_URL']; ?>');
 		</script>
 		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
+	
+	<?php elseif( isset( $_GET['booked'] ) && 'false' == $_GET['booked']) : ?>
+		<script>
+			history.replaceState({}, null, '<?php echo $_SERVER['REDIRECT_URL']; ?>');
+		</script>
+
+		<?php 
+
+			$err_msg = __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' )
+
+		?>
+		
+		<p class="col-xs-12 wp-travel-notice-warning wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
 	<?php endif;
 }
 
