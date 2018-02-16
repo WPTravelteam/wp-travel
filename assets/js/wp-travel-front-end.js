@@ -192,7 +192,7 @@ jQuery(document).ready(function($) {
             url: wp_travel_frontend_vars.ajaxUrl,
             data: formData,
             beforeSend: function() {
-                $('#wp-travel-enquiry-submit').text('Loading').attr('disabled', 'disabled');
+                $('#wp-travel-enquiry-submit').val('PROCESSING...').attr('disabled', 'disabled');
             },
             success: function(data) {
 
@@ -209,7 +209,7 @@ jQuery(document).ready(function($) {
                     }
                 }
 
-                $('#wp-travel-enquiry-submit').text('SUBMIT ENQUIRY').removeAttr('disabled', 'disabled');
+                $('#wp-travel-enquiry-submit').val('SUBMIT ENQUIRY').removeAttr('disabled', 'disabled');
                 //Reset Form Fields.
                 $('#wp-travel-enquiry-name').val('');
                 $('#wp-travel-enquiry-email').val('');
