@@ -358,7 +358,10 @@ function wp_travel_single_excerpt( $post_id ) {
 					</span>
 				</div>
 	  	 	</li>
-			<?php if ( comments_open() ) : ?>
+			<?php 
+			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+			
+			if ( is_array( $wp_travel_itinerary_tabs ) && 'no' !== $wp_travel_itinerary_tabs['reviews']['show_in_menu'] && comments_open() ) : ?>
 	  	 	<li>
 	  	 		<div class="travel-info">
 					<strong class="title"><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></strong>
