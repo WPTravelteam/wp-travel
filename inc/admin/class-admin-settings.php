@@ -741,13 +741,15 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 			<tr id="wp-travel-tax-price-options" >
-				<th><label><?php esc_html_e( 'Prices entered with tax', 'wp-travel' ) ?></label></th>
+				<th><label><?php esc_html_e( 'Trip prices entered with tax', 'wp-travel' ) ?></label></th>
 				<td>
 						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio"> 
-						<?php esc_html_e( 'Yes, I will enter prices inclusive of tax', 'wp-travel' ); ?></label>
+						<?php esc_html_e( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ); ?></label>
 
 						<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
-						<?php esc_html_e( 'No, I will enter prices exclusive of tax', 'wp-travel' ); ?></label>
+						<?php esc_html_e( 'No, I will enter trip prices exclusive of tax', 'wp-travel' ); ?></label>
+
+						<p class="description"><?php esc_html_e('This option will affect how you enter trip prices.', 'wp-travel' ); ?></p>
 					
 				</td>
 			</tr>
