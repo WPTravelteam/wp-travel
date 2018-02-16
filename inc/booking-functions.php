@@ -445,8 +445,23 @@ function wp_travel_booking_info( $post ) {
 
 			<?php
 			$fields = wp_travel_booking_form_fields();
-			//echo '<pre>';
-			//print_r( $fields );
+				
+				$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+
+				if ( '' == $trip_price || '0' == $trip_price ) {
+
+					unset( $fields['is_partial_payment'], $fields['payment_gateway'] , $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
+
+				}
+
+				$payment_id = get_post_meta( $post->ID , 'wp_travel_payment_id' , true );
+				$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
+
+				if ( 'booking_only' == $booking_option ) {
+
+					unset( $fields['is_partial_payment'], $fields['payment_gateway'], $fields['payment_mode'], $fields['payment_amount'], $fields['payment_amount_info'] );
+				}
+
 			$priority = array();
 			foreach ( $fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
