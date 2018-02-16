@@ -400,6 +400,8 @@ return $content;
  */
 function wp_travel_enquiries_admin_default_email_content(){
 
+ob_start();
+
 ?>
 	<tr class="wp-travel-content" style="background: #fff;">
 				<td align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
