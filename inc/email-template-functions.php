@@ -11,10 +11,11 @@
  * @return HTML
  */
 function wp_travel_booking_admin_default_email_content(){
+	
 	ob_start();
 
 	?>
-		<tr class="wp-travel-content" style="background: #fff;">
+			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ) ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ) ?>,</p>
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received bookings from', 'wp-travel' ) ?> {customer_name}:</p>
@@ -873,6 +874,7 @@ function wp_travel_admin_email_template() {
 					<h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php esc_html_e( 'New Bookings', 'wp-travel' ) ?></h2>
 				</td> <!-- /Header -->
 			</tr>
+			
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ) ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ) ?>,</p>
@@ -1053,6 +1055,7 @@ function wp_travel_admin_email_template() {
 					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;width: 130px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
 				</td>
 			</tr>
+			
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
 					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ) ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ) ?>.</a></p>
