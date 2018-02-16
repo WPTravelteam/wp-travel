@@ -668,7 +668,11 @@ class WP_Travel_Admin_Settings {
 		$partial_payment = isset( $args['settings']['partial_payment'] ) ? $args['settings']['partial_payment'] : '';
 		$minimum_partial_payout = isset( $args['settings']['minimum_partial_payout'] ) ? $args['settings']['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		$paypal_email = ( isset( $args['settings']['paypal_email'] ) ) ? $args['settings']['paypal_email'] : '';
-		$payment_option_paypal = ( isset( $args['settings']['payment_option_paypal'] ) ) ? $args['settings']['payment_option_paypal'] : ''; ?>
+		$payment_option_paypal = ( isset( $args['settings']['payment_option_paypal'] ) ) ? $args['settings']['payment_option_paypal'] : ''; 
+		$trip_tax_enable = ( isset( $args['settings']['trip_tax_enable'] ) ) ? $args['settings']['trip_tax_enable'] : '';
+		$trip_tax_percentage = isset( $args['settings']['trip_tax_percentage'] ) ? $args['settings']['trip_tax_percentage'] : '';
+		$trip_tax_price_inclusive = isset( $args['settings']['trip_tax_price_inclusive'] ) ? $args['settings']['trip_tax_price_inclusive'] : 'yes';
+		?>
 		
 		<table class="form-table">
 			<tr>
@@ -717,6 +721,47 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<input type="text" value="<?php echo esc_attr( $paypal_email ) ?>" name="paypal_email" id="paypal_email"/>
 					<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+		</table>
+		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
+		<table class="form-table">
+			<tr>
+				<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax for Trip Price', 'wp-travel' ) ?></label></th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+					<label data-on="ON" data-off="OFF">
+						<input type="checkbox" value="yes" <?php checked( 'yes', $trip_tax_enable ) ?> name="trip_tax_enable" id="trip_tax_enable"/>
+						<span class="switch">
+					</span>
+					
+					</label>
+				</span>
+					<p class="description"><?php esc_html_e( 'Check to enable Tax options for trips.', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+			<tr id="wp-travel-tax-price-options" >
+				<th><label><?php esc_html_e( 'Prices entered with tax', 'wp-travel' ) ?></label></th>
+				<td>
+					<li>
+						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio"> 
+						<?php esc_html_e( 'Yes, I will enter prices inclusive of tax', 'wp-travel' ); ?></label>
+					</li>
+					<li>
+						<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
+						<?php esc_html_e( 'No, I will enter prices exclusive of tax', 'wp-travel' ); ?></label>
+					</li>
+					
+				</td>
+			</tr>
+			<tr id="wp-travel-tax-percentage" >
+				<th><label for="trip_tax_percentage_output"><?php esc_html_e( 'Tax Percentage', 'wp-travel' ) ?></label></th>
+				<td>
+
+				<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage" class="wt-slider" />
+					<label><input type="number" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage_output" />%</label>
+					<p class="description"><?php esc_html_e( 'Trip Tax percentage added to trip price.', 'wp-travel' ) ?></p>
+					
 				</td>
 			</tr>
 		</table>
@@ -825,6 +870,11 @@ class WP_Travel_Admin_Settings {
 			$partial_payment = ( isset( $_POST['partial_payment'] ) && '' !== $_POST['partial_payment'] ) ? $_POST['partial_payment'] : '';
 			$minimum_partial_payout = ( isset( $_POST['minimum_partial_payout'] ) && '' !== $_POST['minimum_partial_payout'] ) ? $_POST['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 
+			// Trip TAX Options
+			$trip_tax_enable = ( isset( $_POST['trip_tax_enable'] ) && '' !== $_POST['trip_tax_enable'] ) ? $_POST['trip_tax_enable'] : '';
+			$trip_tax_percentage = ( isset( $_POST['trip_tax_percentage'] ) && '' !== $_POST['trip_tax_percentage'] ) ? $_POST['trip_tax_percentage'] : '';
+			$trip_tax_price_inclusive = ( isset( $_POST['trip_tax_price_inclusive'] ) ) && '' !== $_POST['trip_tax_price_inclusive'] ? $_POST['trip_tax_price_inclusive'] : 'yes';
+
 			$paypal_email = ( isset( $_POST['paypal_email'] ) && '' !== $_POST['paypal_email'] ) ? $_POST['paypal_email'] : '';
 			$payment_option_paypal = ( isset( $_POST['payment_option_paypal'] ) && '' !== $_POST['payment_option_paypal'] ) ? $_POST['payment_option_paypal'] : '';
 
@@ -832,6 +882,11 @@ class WP_Travel_Admin_Settings {
 			$settings['wt_test_email'] = $wt_test_email;
 			$settings['partial_payment'] = $partial_payment;
 			$settings['minimum_partial_payout'] = $minimum_partial_payout;
+
+			//Trip Tax Values.
+			$settings['trip_tax_enable'] = $trip_tax_enable;
+			$settings['trip_tax_percentage'] = $trip_tax_percentage;
+			$settings['trip_tax_price_inclusive'] = $trip_tax_price_inclusive;
 
 			$settings['paypal_email'] = $paypal_email;
 			$settings['payment_option_paypal'] = $payment_option_paypal;
