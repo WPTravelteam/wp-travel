@@ -1409,3 +1409,26 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 		return $new_return_data;
 	}
 }
+
+/**
+ * Price after tax
+ *
+ * @param Number $post_id Post ID.
+ * @return Number
+ */
+function wp_travel_actual_price_with_tax( $post_id ) {
+	if ( ! $post_id ) {
+		return 0;
+	}
+	$settings = wp_travel_get_settings();
+	
+	$trip_price = wp_travel_get_actual_trip_price( $post_id );
+	
+	if ( isset( $settings['trip_tax_percentage'] ) && '0' !== $settings['trip_tax_percentage'] ){
+		$trip_price = $trip_price + ( $trip_price * $settings['trip_tax_percentage'] / 100 );
+
+	}
+	
+	return number_format( $trip_price, 2, '.', '' );
+
+}

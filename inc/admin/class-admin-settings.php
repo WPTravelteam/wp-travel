@@ -272,12 +272,12 @@ class WP_Travel_Admin_Settings {
 
 		?>
 
-		<div class="wp-travel-tab-content-email-header clearfix">
+		<!-- <div class="wp-travel-tab-content-email-header clearfix">
 			<div class="wp-collapse-open">
 				<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
 				<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
 			</div>
-		</div> 
+		</div>  -->
 
 		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -335,7 +335,7 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-admin-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<input class="wp-travel-color-field" value = <?php echo $booking_admin_email_settings['admin_header_color'] ?> type="text" name="booking_admin_template[admin_header_color]" id="booking-admin-email-header-color">
+											<input class="wp-travel-color-field" value = "<?php echo $booking_admin_email_settings['admin_header_color'] ?>" type="text" name="booking_admin_template[admin_header_color]" id="booking-admin-email-header-color">
 										</td>
 									</tr>
 									<tr>
@@ -375,7 +375,7 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-client-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<input class="wp-travel-color-field" value = <?php echo $booking_client_email_settings['client_header_color'] ?> type="text" name="booking_client_template[client_header_color]" id="booking-client-email-header-color">
+											<input class="wp-travel-color-field" value = "<?php echo $booking_client_email_settings['client_header_color'] ?>" type="text" name="booking_client_template[client_header_color]" id="booking-client-email-header-color">
 										</td>
 									</tr>
 									<tr>
@@ -435,7 +435,7 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-admin-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = <?php echo $payment_admin_email_settings['admin_header_color'] ?> type="text" name="payment_admin_template[admin_header_color]" id="payment-admin-email-header-color">
+												<input class="wp-travel-color-field" value = "<?php echo $payment_admin_email_settings['admin_header_color'] ?>" type="text" name="payment_admin_template[admin_header_color]" id="payment-admin-email-header-color">
 											</td>
 										</tr>
 										<tr>
@@ -475,7 +475,7 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-client-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = <?php echo $payment_client_email_settings['client_header_color'] ?> type="text" name="payment_client_template[client_header_color]" id="payment-client-email-header-color">
+												<input class="wp-travel-color-field" value = "<?php echo $payment_client_email_settings['client_header_color'] ?>" type="text" name="payment_client_template[client_header_color]" id="payment-client-email-header-color">
 											</td>
 										</tr>
 										<tr>
@@ -534,7 +534,7 @@ class WP_Travel_Admin_Settings {
 												<label for="enquiry-admin-email-header-color"><?php esc_html_e( 'Enquiry Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = <?php echo $enquiry_admin_email_settings['admin_header_color'] ?> type="text" name="enquiry_admin_template[admin_header_color]" id="enquiry-admin-email-header-color">
+												<input class="wp-travel-color-field" value = "<?php echo $enquiry_admin_email_settings['admin_header_color'] ?>" type="text" name="enquiry_admin_template[admin_header_color]" id="enquiry-admin-email-header-color">
 											</td>
 										</tr>
 										<tr>
@@ -724,7 +724,7 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
+		<!-- <h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
 		<table class="form-table">
 			<tr>
 				<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax for Trip Price', 'wp-travel' ) ?></label></th>
@@ -762,7 +762,7 @@ class WP_Travel_Admin_Settings {
 					
 				</td>
 			</tr>
-		</table>
+		</table> -->
 	<?php
 	}
 
