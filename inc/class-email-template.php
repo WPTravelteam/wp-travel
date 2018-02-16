@@ -161,12 +161,12 @@ class WP_Travel_Emails {
                 
                 //Set Headings.
                 $header_details = array(
-                    'header_title' => isset( $settings['booking_admin_template_settings']['admin_title'] ) ? $settings['booking_admin_template_settings']['admin_title'] :  __( 'New Booking', 'wp-travel' ),
-                    'header_color' => isset( $settings['booking_admin_template_settings']['admin_header_color'] ) ? $settings['booking_admin_template_settings']['admin_header_color'] : '#dd402e',
+                    'header_title' => isset( $settings['booking_admin_template_settings']['admin_title'] ) && '' !== $settings['booking_admin_template_settings']['admin_title']  ? $settings['booking_admin_template_settings']['admin_title'] :  __( 'New Booking', 'wp-travel' ),
+                    'header_color' => isset( $settings['booking_admin_template_settings']['admin_header_color'] ) && '' !== $settings['booking_admin_template_settings']['admin_header_color']  ? $settings['booking_admin_template_settings']['admin_header_color'] : '#dd402e',
                     
                 );
                 
-                $email_template['subject'] = isset( $settings['booking_admin_template_settings']['admin_subject'] ) ? $settings['booking_admin_template_settings']['admin_subject'] : __('New Booking', 'wp-travel');
+                $email_template['subject'] = isset( $settings['booking_admin_template_settings']['admin_subject'] ) && '' !== $settings['booking_admin_template_settings']['admin_subject']  ? $settings['booking_admin_template_settings']['admin_subject'] : __('New Booking', 'wp-travel');
                 
                 //Set Contents.
                 $email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] : wp_travel_booking_admin_default_email_content();
@@ -177,11 +177,11 @@ class WP_Travel_Emails {
                     //Set Headings.
                     $header_details = array(
                         'header_title' => isset( $settings['booking_client_template_settings']['client_title'] ) && '' !== $settings['booking_client_template_settings']['client_title'] ? $settings['booking_client_template_settings']['client_title'] :  __( 'Booking Confirmed', 'wp-travel' ),
-                        'header_color' => isset( $settings['booking_client_template_settings']['client_header_color'] ) ? $settings['booking_client_template_settings']['client_header_color'] : '#dd402e',
+                        'header_color' => isset( $settings['booking_client_template_settings']['client_header_color'] ) && '' !== $settings['booking_client_template_settings']['client_header_color'] ? $settings['booking_client_template_settings']['client_header_color'] : '#dd402e',
                         
                     );
                 
-                    $email_template['subject'] = isset( $settings['booking_client_template_settings']['client_subject'] ) ? $settings['booking_client_template_settings']['client_subject'] : __('Thank you for your booking.', 'wp-travel');
+                    $email_template['subject'] = isset( $settings['booking_client_template_settings']['client_subject'] ) && '' !== $settings['booking_client_template_settings']['client_subject'] ? $settings['booking_client_template_settings']['client_subject'] : __('Thank you for your booking.', 'wp-travel');
                     
                     //Set Contents.
                     $email_content = isset( $settings['booking_client_template_settings']['email_content'] ) && '' !== $settings['booking_client_template_settings']['email_content'] ? $settings['booking_client_template_settings']['email_content'] : wp_travel_booking_client_default_email_content();
@@ -196,12 +196,12 @@ class WP_Travel_Emails {
                 
                 //Set Headings.
                 $header_details = array(
-                    'header_title' => isset( $settings['payment_admin_template_settings']['admin_title'] ) ? $settings['payment_admin_template_settings']['admin_title'] :  __( 'New Booking', 'wp-travel' ),
-                    'header_color' => isset( $settings['payment_admin_template_settings']['admin_header_color'] ) ? $settings['payment_admin_template_settings']['admin_header_color'] : '#dd402e',
+                    'header_title' => isset( $settings['payment_admin_template_settings']['admin_title'] ) && '' !== $settings['payment_admin_template_settings']['admin_title'] ? $settings['payment_admin_template_settings']['admin_title'] :  __( 'New Booking', 'wp-travel' ),
+                    'header_color' => isset( $settings['payment_admin_template_settings']['admin_header_color'] ) && '' !== $settings['payment_admin_template_settings']['admin_header_color'] ? $settings['payment_admin_template_settings']['admin_header_color'] : '#dd402e',
                     
                 );
                 
-                $email_template['subject'] = isset( $settings['payment_admin_template_settings']['admin_subject'] ) ? $settings['payment_admin_template_settings']['admin_subject'] : __('New Booking', 'wp-travel');
+                $email_template['subject'] = isset( $settings['payment_admin_template_settings']['admin_subject'] ) && '' !== $settings['payment_admin_template_settings']['admin_subject']  ? $settings['payment_admin_template_settings']['admin_subject'] : __('New Booking', 'wp-travel');
                 
                 //Set Contents.
                 $email_content = isset( $settings['payment_admin_template_settings']['email_content'] ) && '' !== $settings['payment_admin_template_settings']['email_content'] ? $settings['payment_admin_template_settings']['email_content'] : wp_travel_payment_admin_default_email_content();
@@ -212,11 +212,11 @@ class WP_Travel_Emails {
                     //Set Headings.
                     $header_details = array(
                         'header_title' => isset( $settings['payment_client_template_settings']['client_title'] ) && '' !== $settings['payment_client_template_settings']['client_title'] ? $settings['payment_client_template_settings']['client_title'] :  __( 'Booking Confirmed', 'wp-travel' ),
-                        'header_color' => isset( $settings['payment_client_template_settings']['client_header_color'] ) ? $settings['payment_client_template_settings']['client_header_color'] : '#dd402e',
+                        'header_color' => isset( $settings['payment_client_template_settings']['client_header_color'] ) && '' !== $settings['payment_client_template_settings']['client_header_color']  ? $settings['payment_client_template_settings']['client_header_color'] : '#dd402e',
                         
                     );
                 
-                    $email_template['subject'] = isset( $settings['payment_client_template_settings']['client_subject'] ) ? $settings['payment_client_template_settings']['client_subject'] : __('Thank you for your booking.', 'wp-travel');
+                    $email_template['subject'] = isset( $settings['payment_client_template_settings']['client_subject'] ) && '' !== $settings['payment_client_template_settings']['client_subject'] ? $settings['payment_client_template_settings']['client_subject'] : __('Thank you for your booking.', 'wp-travel');
                     
                     //Set Contents.
                     $email_content = isset( $settings['payment_client_template_settings']['email_content'] ) && '' !== $settings['payment_client_template_settings']['email_content'] ? $settings['payment_client_template_settings']['email_content'] : wp_travel_payment_client_default_email_content();
@@ -231,12 +231,12 @@ class WP_Travel_Emails {
                 
                 //Set Headings.
                 $header_details = array(
-                    'header_title' => isset( $settings['enquiry_admin_template_settings']['admin_title'] ) ? $settings['enquiry_admin_template_settings']['admin_title'] :  __( 'New Enquiry', 'wp-travel' ),
-                    'header_color' => isset( $settings['enquiry_admin_template_settings']['admin_header_color'] ) ? $settings['enquiry_admin_template_settings']['admin_header_color'] : '#dd402e',
+                    'header_title' => isset( $settings['enquiry_admin_template_settings']['admin_title'] ) && '' !==  $settings['enquiry_admin_template_settings']['admin_title']  ? $settings['enquiry_admin_template_settings']['admin_title'] :  __( 'New Enquiry', 'wp-travel' ),
+                    'header_color' => isset( $settings['enquiry_admin_template_settings']['admin_header_color'] ) && '' !== $settings['enquiry_admin_template_settings']['admin_header_color'] ? $settings['enquiry_admin_template_settings']['admin_header_color'] : '#dd402e',
                     
                 );
                 
-                $email_template['subject'] = isset( $settings['enquiry_admin_template_settings']['admin_subject'] ) ? $settings['enquiry_admin_template_settings']['admin_subject'] : __('New Enquiry', 'wp-travel');
+                $email_template['subject'] = isset( $settings['enquiry_admin_template_settings']['admin_subject'] ) && '' !== $settings['enquiry_admin_template_settings']['admin_subject'] ? $settings['enquiry_admin_template_settings']['admin_subject'] : __('New Enquiry', 'wp-travel');
                 
                 //Set Contents.
                 $email_content = isset( $settings['enquiry_admin_template_settings']['email_content'] ) && '' !== $settings['enquiry_admin_template_settings']['email_content'] ? $settings['enquiry_admin_template_settings']['email_content'] : wp_travel_enquiries_admin_default_email_content();
