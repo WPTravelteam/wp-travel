@@ -427,6 +427,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 &[type='checkbox'] {
                     width: inherit
                 }
+                &[type='radio'] {
+                    width: inherit
+                }
             }
             .quicktags-toolbar{
                 input {
@@ -436,6 +439,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
     }
 }
+
+
 
 // Taxonomy Wrap
 .itineraries-tax-wrap {
@@ -1248,6 +1253,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 
 //end
+#wp-travel-tax-price-options{
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+} 
 .check-handeller {
 
     float: right;
