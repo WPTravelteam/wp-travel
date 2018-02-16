@@ -349,6 +349,7 @@ function wp_travel_get_booking_form() {
 	);
 
 	$fields = wp_travel_booking_form_fields();
+
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
 		'type' => 'hidden',
@@ -364,6 +365,14 @@ function wp_travel_get_booking_form() {
 		unset( $fields['arrival_date'], $fields['departure_date'] );		
 	} else {
 		unset( $fields['trip_duration'] );
+	}
+
+	$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+
+	if ( '' == $trip_price || '0' == $trip_price ) {
+
+		unset( $fields['is_partial_payment'], $fields['payment_gateway'] , $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
+
 	}
 
 	$form->init( $form_options )->fields( $fields )->template();

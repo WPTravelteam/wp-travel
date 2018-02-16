@@ -479,7 +479,11 @@ function wp_travel_single_location( $post_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( '%s - %s', $start_date, $end_date ); ?>
+						<?php $date_format = get_option( 'date_format' ); ?>
+						<?php if ( ! $date_format ) : ?>
+							<?php $date_format = 'jS M, Y'; ?>
+						<?php endif; ?>
+						<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?> 
 					</span>
 				</div>
 			<?php else : ?>

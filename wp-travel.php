@@ -161,6 +161,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
+			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
@@ -174,8 +175,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
-
-			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
 
 			include_once sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
