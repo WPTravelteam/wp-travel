@@ -1848,12 +1848,18 @@ html .ui-button.ui-state-disabled:active {
         display: block;
     }
 }
+#wp-travel-enquiry-submit {
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
 .wp-travel-form-field{
     position:relative;
     .fa-spin {
         position: absolute;
         font-size: 16px;
-        color: #fff;
+        color: #f83531;
         top: 10px;
         left: 7px;
     }
