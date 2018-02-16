@@ -865,16 +865,19 @@ function wp_travel_book_now() {
 	$email = new WP_Travel_Emails();
 
 	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
-
 	//Admin message.
 	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
-	
 	//Admin Subject.
 	$admin_subject = $admin_template['subject'];
 
-	// Client message.
-	$message = wp_travel_customer_email_template();
-	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
+	// Client Template.
+	$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+	
+	//Client message.
+	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
+	
+	//Client Subject.
+	$client_subject = $client_template['subject'];
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
@@ -883,24 +886,32 @@ function wp_travel_book_now() {
 		$headers = $email->email_headers( $client_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-			wp_send_json( array(
-				'result'  => 0,
-				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			) );
+			// wp_send_json( array(
+			// 	'result'  => 0,
+			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			// ) );
+
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
 		}
 	}
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-	$headers = $email->email_headers( $admin_email, $admin_email );
+		$headers = $email->email_headers( $admin_email, $admin_email );
 
-	// if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
-
-	// 	wp_send_json( array(
-	// 		'result'  => 0,
-	// 		'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-	// 	) );
-	// }
+		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
+			// wp_send_json( array(
+			// 	'result'  => 0,
+			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			// ) );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
+		}
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
