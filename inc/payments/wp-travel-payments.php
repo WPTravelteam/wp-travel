@@ -311,12 +311,12 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	$email = new WP_Travel_Emails();
 
-	// Admin Booking Email Vars.
-	$admin_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
-	//Admin message.
-	$admin_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_booking_template['mail_content'] );
-	//Admin Subject.
-	$admin_booking_subject = $admin_booking_template['subject'];
+	// // Admin Booking Email Vars.
+	// $admin_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	// //Admin message.
+	// $admin_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_booking_template['mail_content'] );
+	// //Admin Subject.
+	// $admin_booking_subject = $admin_booking_template['subject'];
 
 	// Admin Payment Email Vars.
 	$admin_payment_template = $email->wp_travel_get_email_template( 'payments', 'admin' );
@@ -325,12 +325,12 @@ function wp_travel_send_email_payment( $booking_id ) {
 	//Admin Subject.
 	$admin_payment_subject = $admin_payment_template['subject'];
 
-	// Client Booking Email Vars.
-	$client_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
-	//Client Booking message.
-	$client_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $client_booking_template['mail_content'] );
-	//Client Booking Subject.
-	$client_booking_subject = $client_booking_template['subject'];
+	// // Client Booking Email Vars.
+	// $client_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	// //Client Booking message.
+	// $client_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $client_booking_template['mail_content'] );
+	// //Client Booking Subject.
+	// $client_booking_subject = $client_booking_template['subject'];
 
 	// Client Payment Email Vars.
 	$client_payment_template = $email->wp_travel_get_email_template( 'payments', 'client' );
@@ -347,12 +347,12 @@ function wp_travel_send_email_payment( $booking_id ) {
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $client_email, $client_email );
 
-		if ( ! wp_mail( $admin_email, $admin_booking_subject, $admin_booking_message, $headers ) ) {
-			wp_send_json( array(
-				'result'  => 0,
-				'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			) );
-		}
+		// if ( ! wp_mail( $admin_email, $admin_booking_subject, $admin_booking_message, $headers ) ) {
+		// 	wp_send_json( array(
+		// 		'result'  => 0,
+		// 		'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+		// 	) );
+		// }
 
 		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
 			wp_send_json( array(
@@ -366,13 +366,13 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// To send HTML mail, the Content-type header must be set.
 	$headers = $email->email_headers( $admin_email, $admin_email );
 
-	if ( ! wp_mail( $client_email, $client_booking_subject, $client_booking_message, $headers ) ) {
+	// if ( ! wp_mail( $client_email, $client_booking_subject, $client_booking_message, $headers ) ) {
 
-		wp_send_json( array(
-			'result'  => 0,
-			'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-		) );
-	}
+	// 	wp_send_json( array(
+	// 		'result'  => 0,
+	// 		'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+	// 	) );
+	// }
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
 		wp_send_json( array(
 			'result'  => 0,

@@ -1076,7 +1076,7 @@ function wp_travel_booking_message() {
 
 		?>
 		
-		<p class="col-xs-12 wp-travel-notice-warning wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
+		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
 	<?php endif;
 }
 
