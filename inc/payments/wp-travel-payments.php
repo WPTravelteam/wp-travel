@@ -309,38 +309,52 @@ function wp_travel_send_email_payment( $booking_id ) {
 		'{currency_symbol}'			=> wp_travel_get_currency_symbol(),
 	);
 
-	$admin_message = wp_travel_admin_email_template();
-	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
+	$email = new WP_Travel_Emails();
 
-	$admin_payment_message = wp_travel_payment_email_template_admin();
-	$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_message );
+	// Admin Booking Email Vars.
+	$admin_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	//Admin message.
+	$admin_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_booking_template['mail_content'] );
+	//Admin Subject.
+	$admin_booking_subject = $admin_booking_template['subject'];
 
-	// Client message.
-	$message = wp_travel_customer_email_template();
-	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );
+	// Admin Payment Email Vars.
+	$admin_payment_template = $email->wp_travel_get_email_template( 'payments', 'admin' );
+	//Admin message.
+	$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_template['mail_content'] );
+	//Admin Subject.
+	$admin_payment_subject = $admin_payment_template['subject'];
 
-	$payment_message = wp_travel_payment_email_template_customer();
-	$payment_message = str_replace( array_keys( $email_tags ), $email_tags, $payment_message );
+	// Client Booking Email Vars.
+	$client_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	//Client Booking message.
+	$client_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $client_booking_template['mail_content'] );
+	//Client Booking Subject.
+	$client_booking_subject = $client_booking_template['subject'];
+
+	// Client Payment Email Vars.
+	$client_payment_template = $email->wp_travel_get_email_template( 'payments', 'client' );
+	//Client Payment message.
+	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_payment_template['mail_content'] );
+	//Client Payment Subject.
+	$client_payment_subject = $client_payment_template['subject'];
+
+	
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
+
 		// To send HTML mail, the Content-type header must be set.
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers = $email->email_headers( $client_email, $client_email );
 
-		// Create email headers.
-		$headers .= 'From: ' . $client_email . "\r\n" .
-		'Reply-To: ' . $client_email . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
-
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $admin_message, $headers ) ) {
+		if ( ! wp_mail( $admin_email, $admin_booking_subject, $admin_booking_message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
 				'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			) );
 		}
 
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title . ' - Payment' ), $admin_payment_message, $headers ) ) {
+		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
 			wp_send_json( array(
 				'result'  => 0,
 				'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
@@ -350,22 +364,16 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-	$headers  = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers = $email->email_headers( $admin_email, $admin_email );
 
-	// Create email headers.
-	$headers .= 'From: ' . $admin_email . "\r\n" .
-	'Reply-To: ' . $admin_email . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-
-	if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+	if ( ! wp_mail( $client_email, $client_booking_subject, $client_booking_message, $headers ) ) {
 
 		wp_send_json( array(
 			'result'  => 0,
 			'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 		) );
 	}
-	if ( ! wp_mail( $client_email, wp_specialchars_decode( $title . ' - Payment' ), $payment_message, $headers ) ) {
+	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
 		wp_send_json( array(
 			'result'  => 0,
 			'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
