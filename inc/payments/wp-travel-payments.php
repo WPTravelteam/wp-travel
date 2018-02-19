@@ -330,7 +330,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$admin_payment_subject = $admin_payment_template['subject'];
 
 	// Client Booking Email Vars.
-	$client_booking_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	$client_booking_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
 	//Client Booking message.
 	$client_booking_message = str_replace( array_keys( $email_tags ), $email_tags, $client_booking_template['mail_content'] );
 	//Client Booking Subject.
