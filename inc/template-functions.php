@@ -392,7 +392,7 @@ function wp_travel_single_excerpt( $post_id ) {
 
 			<?php if ( 'yes' == $enable_enquiry ) : ?>
 			
-				<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries">
+				<a id="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 					<span class="wp-travel-booking-enquiry">
 						<span class="dashicons dashicons-editor-help"></span>
 						<span>

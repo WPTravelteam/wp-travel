@@ -1411,24 +1411,56 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 }
 
 /**
- * Price after tax
- *
- * @param Number $post_id Post ID.
- * @return Number
+ * Wp Tarvel Process Trip Price Tax.
+ * @param int $post_id post id.
+ * @return mixed $trip_price | $tax_details.
  */
-function wp_travel_actual_price_with_tax( $post_id ) {
-	if ( ! $post_id ) {
+function wp_travel_process_trip_price_tax( $post_id ){
+
+	if( ! $post_id ) {
 		return 0;
 	}
 	$settings = wp_travel_get_settings();
-	
+
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
-	
-	if ( isset( $settings['trip_tax_percentage'] ) && '0' !== $settings['trip_tax_percentage'] ){
-		$trip_price = $trip_price + ( $trip_price * $settings['trip_tax_percentage'] / 100 );
+
+	if ( 'yes' == $settings['trip_tax_enable'] ) {
+
+		$tax_details = array();
+		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
+		$trip_price = wp_travel_get_actual_trip_price( $post_id );
+		$tax_percentage = @$settings['trip_tax_percentage'];
+		
+		if ( 0 == $trip_price || '' == $tax_percentage ) {
+
+			return $trip_price;
+		}
+
+		if ( 'yes' == $tax_inclusive_price ) {
+
+			$tax_details['tax_type'] = 'inclusive';
+			$tax_details['trip_price'] = $trip_price;
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$actual_trip_price = ( $trip_price - ( ( $trip_price * $tax_percentage ) / 100 ) );
+
+			$tax_details['actual_trip_price'] = number_format( $actual_trip_price , 2 , '.', '' );
+
+			return $tax_details;
+
+		}
+		else{
+
+			$tax_details['tax_type'] = 'excluxive';
+			$tax_details['trip_price'] = $trip_price;
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+
+			return $tax_details;
+
+		}
 
 	}
-	
-	return number_format( $trip_price, 2, '.', '' );
+
+	return $trip_price;
 
 }

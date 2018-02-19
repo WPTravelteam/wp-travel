@@ -724,7 +724,7 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		<!-- <h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
+		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
 		<table class="form-table">
 			<tr>
 				<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax for Trip Price', 'wp-travel' ) ?></label></th>
@@ -762,7 +762,7 @@ class WP_Travel_Admin_Settings {
 					
 				</td>
 			</tr>
-		</table> -->
+		</table>
 	<?php
 	}
 

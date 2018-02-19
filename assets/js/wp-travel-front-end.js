@@ -32,6 +32,7 @@ jQuery(document).ready(function($) {
         type: 'inline',
         preloader: false,
         focus: '#wp-travel-enquiry-name',
+        midClick: true
     });
 
     $('#wp-travel-tab-wrapper').easyResponsiveTabs({
@@ -205,6 +206,9 @@ jQuery(document).ready(function($) {
                         var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
                         $('#wp-travel-enquiries').append(message);
 
+                        setTimeout(function() {
+                            jQuery('#wp-travel-send-enquiries').magnificPopup('close')
+                        }, '3000');
 
                     }
                 }
