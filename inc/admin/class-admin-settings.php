@@ -272,7 +272,7 @@ class WP_Travel_Admin_Settings {
 
 		?>
 
-		<div class="wp-collapse-open">
+		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 		</div>
@@ -398,7 +398,7 @@ class WP_Travel_Admin_Settings {
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingTwo">
 						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="true" aria-controls="collapseTwo">
 								<?php esc_html_e( 'Payment Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
@@ -497,7 +497,7 @@ class WP_Travel_Admin_Settings {
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingThree">
 						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="true" aria-controls="collapseThree">
 								<?php esc_html_e( 'Enquiry Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
