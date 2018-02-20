@@ -875,12 +875,7 @@ function wp_travel_book_now() {
 
 		update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
 	}
-	/**
-	 * Hook used to add payment and its info.
-	 *
-	 * @since 1.0.5 // For Payment.
-	 */
-	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
+	
 	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
@@ -986,6 +981,12 @@ function wp_travel_book_now() {
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
 		}
+	/**
+	 * Hook used to add payment and its info.
+	 *
+	 * @since 1.0.5 // For Payment.
+	 */
+	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
