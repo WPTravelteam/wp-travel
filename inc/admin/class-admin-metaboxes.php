@@ -139,7 +139,7 @@ class WP_Travel_Admin_Metaboxes {
 					<td><?php echo esc_html( $mode[ $label_key ]['text'] ) ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Trip Price', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong</td>
 					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $trip_price ) ?></td>
 				</tr>
 				<tr>
