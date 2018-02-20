@@ -207,8 +207,8 @@ class WP_Travel_Admin_Settings {
 		//Booking Admin Defaults.
 		$booking_admin_email_defaults = array(
 
-			'admin_subject' => '',
-			'admin_title'  => '',
+			'admin_subject' => __( 'New Booking', 'wp-travel' ),
+			'admin_title'  => __( 'New Booking', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
 
@@ -217,8 +217,8 @@ class WP_Travel_Admin_Settings {
 		//Booking client Defaults.
 		$booking_client_email_defaults = array(
 
-			'client_subject' => '',
-			'client_title'  => '',
+			'client_subject' => __( 'Booking Recieved', 'wp-travel' ),
+			'client_title'  => __( 'Booking Recieved', 'wp-travel' ),
 			'client_header_color' => '',
 			'email_content' => '',
 
@@ -228,8 +228,8 @@ class WP_Travel_Admin_Settings {
 		//Payment Admin Defaults.
 		$payment_admin_email_defaults = array(
 
-			'admin_subject' => '',
-			'admin_title'  => '',
+			'admin_subject' => __( 'New Booking', 'wp-travel' ),
+			'admin_title'  => __( 'New Booking', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
 
@@ -238,8 +238,8 @@ class WP_Travel_Admin_Settings {
 		//Payment client Defaults.
 		$payment_client_email_defaults = array(
 
-			'client_subject' => '',
-			'client_title'  => '',
+			'client_subject' => __( 'Payment Recieved', 'wp-travel' ),
+			'client_title'  => __( 'Payment Recieved', 'wp-travel' ),
 			'client_header_color' => '',
 			'email_content' => '',
 
@@ -249,8 +249,8 @@ class WP_Travel_Admin_Settings {
 		//emquiry Admin Defaults.
 		$enquiry_admin_email_defaults = array(
 
-			'admin_subject' => '',
-			'admin_title'  => '',
+			'admin_subject' => __( 'New Enquiry', 'wp-travel' ),
+			'admin_title'  => __( 'New Enquiry', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
 
