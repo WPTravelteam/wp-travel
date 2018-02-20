@@ -1480,3 +1480,11 @@ function wp_travel_process_trip_price_tax( $post_id ){
 	return $trip_price;
 
 }
+
+
+function taxed_amount($amount, $tax_percent, $inclusive =  true){
+	if($inclusive){
+		return number_format( ( $amount - ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
+	}
+	return number_format( ( $amount + ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
+}

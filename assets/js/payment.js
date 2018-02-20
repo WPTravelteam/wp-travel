@@ -14,6 +14,9 @@ const display_booking_option = {
         jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
         jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
 
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').hide();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').hide();
+
         var payment_mode = jQuery("input[name='wp_travel_payment_mode']");
         var trip_price_info = jQuery('#wp-travel-trip-price_info');
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
@@ -32,6 +35,9 @@ const display_booking_option = {
 
         jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
         jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
+
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
 
         var elem = jQuery('[name=wp_travel_book_now]');
 
@@ -58,10 +64,14 @@ const display_payment_mode_option = {
     partial: function() {
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
         payment_amount_info.closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
     },
     full: function() {
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
         payment_amount_info.closest('.wp-travel-form-field ').hide();
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
     }
 }
 
