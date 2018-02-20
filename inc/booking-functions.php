@@ -169,11 +169,11 @@ function wp_travel_booking_form_fields() {
 
 	if ( wp_travel_is_payment_enabled() ) {
 		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
-		$actual_trip_price = wp_travel_process_trip_price_tax($post_id);
+		$trip_tax_details = wp_travel_process_trip_price_tax($post_id);
 		
-		if ( is_array( $actual_trip_price ) ) {
+		if ( is_array( $trip_tax_details ) ) {
 
-			$actual_trip_price = number_format( $actual_trip_price['actual_trip_price'], 2 , '.', '' );
+			$actual_trip_price = number_format( $trip_tax_details['actual_trip_price'], 2 , '.', '' );
 
 		}
 		
@@ -314,7 +314,6 @@ function wp_travel_booking_form_fields() {
 			'priority' => 115,
 		);
 
-		
 		$payment_field_list = wp_travel_payment_field_list();
 
 		foreach ( $payment_field_list as $field_list ) {
@@ -328,6 +327,26 @@ function wp_travel_booking_form_fields() {
 				$booking_fileds[ $field_list ] = $payment_fields[ $field_list ];
 			}
 		}
+
+		if ( wp_travel_is_trip_price_tax_enabled() ) {
+
+			$booking_fileds['payment_tax_percentage_info'] = array(
+				'type' => 'text_info',
+				'label' => __( 'Tax Percentage', 'wp-travel' ),
+				'name' => 'wp_travel_payment_tax_percentage',
+				'id' => 'wp-travel-payment-tax-percentage-info',
+				'validations' => array(
+					'required' => true,
+				),
+				'before_field' => '',
+				'default' => number_format( $trip_tax_details['tax_percentage'], 2 ),
+				'wrapper_class' => 'full-width hide-in-admin',
+				'priority' => 109,
+			);
+
+		}
+
+
 	}
 
 	return apply_filters( 'wp_travel_booking_form_fields', $booking_fileds );

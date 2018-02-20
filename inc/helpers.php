@@ -1411,6 +1411,23 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 }
 
 /**
+ * WP Travel Trip is trip type enable.
+ * @return bool
+ */
+function wp_travel_is_trip_price_tax_enabled(){
+
+	$settings = wp_travel_get_settings();
+
+	if ( isset( $settings['trip_tax_enable'] ) && 'yes' == $settings['trip_tax_enable'] ) {
+
+		return true;
+	}
+
+	return false;
+
+}
+
+/**
  * Wp Tarvel Process Trip Price Tax.
  * @param int $post_id post id.
  * @return mixed $trip_price | $tax_details.
@@ -1431,7 +1448,7 @@ function wp_travel_process_trip_price_tax( $post_id ){
 		$trip_price = wp_travel_get_actual_trip_price( $post_id );
 		$tax_percentage = @$settings['trip_tax_percentage'];
 		
-		if ( 0 == $trip_price || '' == $tax_percentage ) {
+		if ( 0 == $trip_price || '' == $tax_percentage || '' == $tax_percentage ) {
 
 			return $trip_price;
 		}
