@@ -330,7 +330,7 @@ function wp_travel_booking_form_fields() {
 			}
 		}
 
-		if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_type_details['tax_percentage'] ) && '' !== $trip_type_details['tax_percentage']  ) {
+		if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage']  ) {
 
 			$booking_fileds['payment_trip_price_initial'] = array(
 				'type' => 'text_info',
