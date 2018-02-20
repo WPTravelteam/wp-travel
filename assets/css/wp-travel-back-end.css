@@ -104,6 +104,9 @@
     margin: 12px 0 0;
     text-align: right; }
 
+.wp-trave-settings-form-warp .tab-accordion .panel-heading .collapse-icon {
+  right: 15px; }
+
 .wp-travel-enable-sale, .checkbox-with-label {
   margin-left: 15px; }
 

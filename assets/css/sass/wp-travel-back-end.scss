@@ -175,7 +175,15 @@ $alabaster: #f7f7f1; // Red like color.
         }
     }
 }
-
+.wp-trave-settings-form-warp{
+    .tab-accordion{
+        .panel-heading{
+            .collapse-icon {
+                right: 15px;
+            }
+        } 
+    } 
+} 
 .wp-travel-enable-sale,.checkbox-with-label {
     margin-left: 15px;
 }
