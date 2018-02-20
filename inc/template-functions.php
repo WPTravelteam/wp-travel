@@ -1251,6 +1251,11 @@ function wp_travel_archive_wrapper_close() {
 				</ul>
 			</div>
 		<?php endif; ?>
+		<?php
+$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
+$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
+?>
+<?php wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
 		</div>
 <?php
 	endif;

@@ -26,9 +26,4 @@ get_header( 'itinerary' ); ?>
 <?php endif; ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
-<?php
-$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
-$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
-?>
-<?php wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
 <?php get_footer( 'itinerary' ); ?>
