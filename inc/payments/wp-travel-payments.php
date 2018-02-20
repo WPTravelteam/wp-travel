@@ -74,7 +74,7 @@ function wp_travel_minimum_partial_payout( $post_id ) {
 	}
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 	$tax_details = wp_travel_process_trip_price_tax( $post_id );
-	if ( is_array( $tax_details ) && 'exclusive' == $tax_details['tax_type'] ) {
+	if ( is_array( $tax_details ) && 'excluxive' === $tax_details['tax_type'] ) {
 		$trip_price = $tax_details['actual_trip_price'];
 	}
 	$payout_percent = wp_travel_get_actual_payout_percent( $post_id );
