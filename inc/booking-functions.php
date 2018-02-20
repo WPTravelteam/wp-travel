@@ -170,8 +170,10 @@ function wp_travel_booking_form_fields() {
 	if ( wp_travel_is_payment_enabled() ) {
 		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
 		$trip_tax_details = wp_travel_process_trip_price_tax($post_id);
+
+		$actual_trip_price = wp_travel_get_actual_trip_price( $post_id );
 		
-		if ( is_array( $trip_tax_details ) ) {
+		if ( is_array( $trip_tax_details ) && 'exclusive' == $trip_tax_details['tax_type'] ) {
 
 			$actual_trip_price = number_format( $trip_tax_details['actual_trip_price'], 2 , '.', '' );
 
@@ -288,7 +290,7 @@ function wp_travel_booking_form_fields() {
 
 		$payment_fields['trip_price_info'] = array(
 			'type' => 'text_info',
-			'label' => __( 'Trip Price', 'wp-travel' ),
+			'label' => __( 'Total Trip Price', 'wp-travel' ),
 			'name' => 'wp_travel_trip_price_info',
 			'id' => 'wp-travel-trip-price_info',
 			'before_field' => wp_travel_get_currency_symbol(),
@@ -298,7 +300,7 @@ function wp_travel_booking_form_fields() {
 		);
 		$payment_fields['payment_amount_info'] = array(
 			'type' => 'text_info',
-			'label' => __( 'Payment Amount', 'wp-travel' ),
+			'label' => __( 'Payment Amount', 'wp-travel' ).' ( '.wp_travel_get_actual_payout_percent($post_id). ' %) ',
 			'name' => 'wp_travel_payment_amount_info',
 			'id' => 'wp-travel-payment-amount-info',
 			'validations' => array(
@@ -330,16 +332,38 @@ function wp_travel_booking_form_fields() {
 
 		if ( wp_travel_is_trip_price_tax_enabled() ) {
 
+			$booking_fileds['payment_trip_price_initial'] = array(
+				'type' => 'text_info',
+				'label' => __( 'Trip Price', 'wp-travel' ),
+				'name' => 'wp_travel_trip_price_initial',
+				'id' => 'wp-travel-payment-trip-price-initial',
+				'validations' => array(
+					'required' => true,
+				),
+				'before_field' => wp_travel_get_currency_symbol(),
+				'default' => number_format( $trip_tax_details['trip_price'], 2 ),
+				'wrapper_class' => 'full-width hide-in-admin',
+				'priority' => 108,
+			);
+
+			$inclusive_text = '';
+
+			if ( 'inclusive' == $trip_tax_details['tax_type'] ) {
+				
+				$inclusive_text = __( '( Inclusive )', 'wp-travel' );
+
+			}
+
 			$booking_fileds['payment_tax_percentage_info'] = array(
 				'type' => 'text_info',
-				'label' => __( 'Tax Percentage', 'wp-travel' ),
+				'label' => __( 'Tax', 'wp-travel' ).$inclusive_text,
 				'name' => 'wp_travel_payment_tax_percentage',
 				'id' => 'wp-travel-payment-tax-percentage-info',
 				'validations' => array(
 					'required' => true,
 				),
 				'before_field' => '',
-				'default' => number_format( $trip_tax_details['tax_percentage'], 2 ),
+				'default' => number_format( $trip_tax_details['tax_percentage'], 2 ).' %',
 				'wrapper_class' => 'full-width hide-in-admin',
 				'priority' => 109,
 			);

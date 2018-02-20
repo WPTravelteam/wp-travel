@@ -1459,7 +1459,6 @@ function wp_travel_process_trip_price_tax( $post_id ){
 			$tax_details['trip_price'] = $trip_price;
 			$tax_details['tax_percentage'] = $tax_percentage;
 			$actual_trip_price = ( $trip_price - ( ( $trip_price * $tax_percentage ) / 100 ) );
-
 			$tax_details['actual_trip_price'] = number_format( $actual_trip_price , 2 , '.', '' );
 
 			return $tax_details;
