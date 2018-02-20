@@ -86,7 +86,16 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
-		$trip_price = $payment_amount = wp_travel_get_actual_trip_price( $post->ID );
+
+		$trip_price_tax = wp_travel_process_trip_price_tax( $post->ID );
+		if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+
+			$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
+		}
+		else {
+			$trip_price = $payment_amount = $trip_price_tax['trip_price'];
+		}
+
 		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
 		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
 			$payment_amount = $minimum_partial_payout;
