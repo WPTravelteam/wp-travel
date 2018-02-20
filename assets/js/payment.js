@@ -76,12 +76,12 @@ const display_payment_mode_option = {
 }
 
 jQuery(document).ready(function($) {
-    $('#wp-travel-pax').on('change click keyup', function() {
+    $('#wp-travel-pax').on('change', function() {
         var no_of_pax = $(this).val();
 
         if (no_of_pax < 1) {
             no_of_pax = 1;
-            $(this).val(1).trigger('change click keyup')
+            $(this).val(1).trigger('change')
         }
 
         var price_per = $('#wp-travel-trip-price').attr('price_per');
