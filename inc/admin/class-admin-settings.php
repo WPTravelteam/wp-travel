@@ -272,7 +272,7 @@ class WP_Travel_Admin_Settings {
 
 		?>
 
-		<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ) ?>" >
+		<div class="wp-collapse-open">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 		</div>
