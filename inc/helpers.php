@@ -1448,7 +1448,7 @@ function wp_travel_process_trip_price_tax( $post_id ){
 		$trip_price = wp_travel_get_actual_trip_price( $post_id );
 		$tax_percentage = @$settings['trip_tax_percentage'];
 		
-		if ( 0 == $trip_price || '' == $tax_percentage || '' == $tax_percentage ) {
+		if ( 0 == $trip_price || '' == $tax_percentage ) {
 
 			return $trip_price;
 		}
