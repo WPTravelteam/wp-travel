@@ -272,12 +272,10 @@ class WP_Travel_Admin_Settings {
 
 		?>
 
-		<!-- <div class="wp-travel-tab-content-email-header clearfix">
-			<div class="wp-collapse-open">
-				<a href="#" class="open-all-link"><span class="open-all" id="open-all">Open All</span></a>
-				<a href="#" class="close-all-link"><span class="close-all" id="close-all">Close All</span></a>
-			</div>
-		</div>  -->
+		<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ) ?>" >
+			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
+			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
+		</div>
 
 		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -291,7 +289,7 @@ class WP_Travel_Admin_Settings {
 							</a>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 						<div class="panel-body">
 							<div class="panel-wrap">
 
