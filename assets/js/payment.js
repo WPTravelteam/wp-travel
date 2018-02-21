@@ -134,3 +134,30 @@ jQuery(document).ready(function($) {
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
 
 });
+
+// Get Payable Amount.
+function get_payable_price(payment_mode, no_of_pax) {
+    if (!payment_mode) {
+        payment_mode = 'full';
+    }
+    if (!no_of_pax) {
+        no_of_pax = 1;
+    }
+    var trip_price = wt_payment.trip_price; // Trip Price of single Trip
+    var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
+    var price_per = wt_payment.price_per;
+
+    var payment_amount = trip_price;
+    if (payment_mode == 'partial') {
+        payment_amount = min_partial_payment;
+    }
+
+    if (price_per.toLowerCase().slice(0, 6) === 'person') {
+        payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
+        trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
+    }
+    var amount = new Array();
+    amount['payment_amount'] = payment_amount;
+    amount['trip_price'] = trip_price;
+    return amount;
+}
