@@ -173,7 +173,7 @@ function wp_travel_booking_form_fields() {
 
 		$actual_trip_price = wp_travel_get_actual_trip_price( $post_id );
 		
-		if ( is_array( $trip_tax_details ) ) {
+		if ( is_array( $trip_tax_details ) && isset( $trip_tax_details['actual_trip_price'] ) ) {
 
 			$actual_trip_price = number_format( $trip_tax_details['actual_trip_price'], 2 , '.', '' );
 
