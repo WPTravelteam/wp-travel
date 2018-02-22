@@ -21,6 +21,69 @@ class Wp_Travel_Shortcodes {
 	    add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
+
+		/**
+		 * Checkout Shortcodes.
+		 * @since 2.2.3
+		 * Shortcodes for new checkout process.
+		 */
+		$shortcodes = array(
+			'wp_travel_cart'           => __CLASS__ . '::cart',
+			'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
+		);
+
+		foreach ( $shortcodes as $shortcode => $function ) {
+			add_shortcode( apply_filters( "{$shortcode}_shortcode_tag", $shortcode ), $function );
+		}
+
+	}
+
+	/**
+	 * Cart page shortcode.
+	 *
+	 * @return string
+	 */
+	public static function cart() {
+		return self::shortcode_wrapper( array( 'WP_Travel_Cart', 'output' ) );
+	}
+
+	/**
+	 * Checkout page shortcode.
+	 *
+	 * @param array $atts Attributes.
+	 * @return string
+	 */
+	public static function checkout( $atts ) {
+		return self::shortcode_wrapper( array( 'WP_Travel_Checkout', 'output' ), $atts );
+	}
+
+	/**
+	 * Shortcode Wrapper.
+	 *
+	 * @param string[] $function Callback function.
+	 * @param array    $atts     Attributes. Default to empty array.
+	 * @param array    $wrapper  Customer wrapper data.
+	 *
+	 * @return string
+	 */
+	public static function shortcode_wrapper(
+		$function,
+		$atts = array(),
+		$wrapper = array(
+			'class'  => 'wp-travel',
+			'before' => null,
+			'after'  => null,
+		)
+	) {
+		ob_start();
+
+		// @codingStandardsIgnoreStart
+		echo empty( $wrapper['before'] ) ? '<div class="' . esc_attr( $wrapper['class'] ) . '">' : $wrapper['before'];
+		call_user_func( $function, $atts );
+		echo empty( $wrapper['after'] ) ? '</div>' : $wrapper['after'];
+		// @codingStandardsIgnoreEnd
+
+		return ob_get_clean();
 	}
 
 	/**

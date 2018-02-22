@@ -350,7 +350,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="value">
 						<?php
 						if ( $group_size = $wp_travel_itinerary->get_group_size() ) {
-								printf( __( '%d pax', 'wp-travel' ), esc_html( $group_size ) );
+								printf( apply_filters( 'wp_travel_template_group_size_text' ,__( '%d pax', 'wp-travel' ) ), esc_html( $group_size ) );
 						} else {
 							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No Size Limit', 'wp-travel' ) ) );
 						}
@@ -388,7 +388,7 @@ function wp_travel_single_excerpt( $post_id ) {
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
-			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
+			<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
 
 			<?php if ( 'yes' == $enable_enquiry ) : ?>
 			
@@ -1100,7 +1100,7 @@ function wp_travel_get_group_size( $post_id = null ) {
 	$group_size = $wp_travel_itinerary->get_group_size();
 
 	if (  $group_size ) {
-		return sprintf( __( '%d pax', 'wp-travel' ), $group_size );
+		return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ) , $group_size );
 	}
 
 	return apply_filters( 'wp_travel_default_group_size_text', esc_html__( 'No Size Limit', 'wp-travel' ) );
@@ -1252,11 +1252,10 @@ function wp_travel_archive_wrapper_close() {
 			</div>
 		<?php endif; ?>
 		<?php
-$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
-$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
-?>
-<?php wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
-		</div>
+		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
+		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
+		wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
+	</div>
 <?php
 	endif;
 }
