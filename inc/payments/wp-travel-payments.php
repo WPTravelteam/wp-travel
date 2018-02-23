@@ -365,10 +365,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 		// }
 
 		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
-			wp_send_json( array(
-				'result'  => 0,
-				'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			) );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
 		}
 	}
 
@@ -384,10 +384,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// 	) );
 	// }
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
-		wp_send_json( array(
-			'result'  => 0,
-			'message' => __( 'Your Itinerary Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-		) );
+		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
 	}
 }
 
