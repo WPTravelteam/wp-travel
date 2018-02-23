@@ -69,10 +69,30 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$booking_id = $post->ID;
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-		$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
-		echo '<pre>';
-		print_r( $paypal_args );
-		echo '</pre>';
+
+		
+		$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
+		
+		switch($payment_method) {
+			
+			case 'stripe':
+		
+			$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true );
+
+			print_r( $stripe_args );
+
+			break;
+
+			default :
+
+			$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
+			echo '<pre>';
+			print_r( $paypal_args );
+			echo '</pre>';
+			
+			break;
+		}
+
 	}
 
 	/**
