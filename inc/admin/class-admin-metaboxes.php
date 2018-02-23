@@ -77,9 +77,29 @@ class WP_Travel_Admin_Metaboxes {
 			
 			case 'stripe':
 		
-			$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true );
+				$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true ); ?>
 
-			print_r( $stripe_args );
+				<?php if ( $stripe_args && is_object( $stripe_args ) ) : ?>
+					<table>
+						
+						<?php foreach ( $stripe_args as $title => $description ) : ?>
+							<tr>
+								<td><?php echo esc_html( $title ) ?></td>
+								<td>
+									<?php
+									if ( is_array( $description ) ) {
+										if ( count( $description ) > 0 ) {
+											print_r( $description );
+										}
+									} else {
+										echo esc_html( $description );
+									} ?>
+								</td>
+							</tr>
+
+						<?php endforeach; ?>
+					</table>
+				<?php endif;
 
 			break;
 
