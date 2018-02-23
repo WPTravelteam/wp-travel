@@ -73,15 +73,11 @@ class WP_Travel_Admin_Metaboxes {
 		
 		$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
 		
-		switch($payment_method) {
-			
+		switch( $payment_method ) {
 			case 'stripe':
-		
 				$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true ); ?>
-
 				<?php if ( $stripe_args && is_object( $stripe_args ) ) : ?>
-					<table>
-						
+					<table>						
 						<?php foreach ( $stripe_args as $title => $description ) : ?>
 							<tr>
 								<td><?php echo esc_html( $title ) ?></td>
@@ -96,20 +92,16 @@ class WP_Travel_Admin_Metaboxes {
 									} ?>
 								</td>
 							</tr>
-
 						<?php endforeach; ?>
 					</table>
 				<?php endif;
 
 			break;
-
 			default :
-
-			$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
-			echo '<pre>';
-			print_r( $paypal_args );
-			echo '</pre>';
-			
+				$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
+				echo '<pre>';
+				print_r( $paypal_args );
+				echo '</pre>';			
 			break;
 		}
 
