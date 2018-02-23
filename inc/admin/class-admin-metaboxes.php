@@ -84,9 +84,9 @@ class WP_Travel_Admin_Metaboxes {
 								<td>
 									<?php
 									if ( is_array( $description ) || is_object( $description ) ) {
-										if ( count( $description ) > 0 ) {
-											print_r( $description );
-										}
+										echo '<pre>';
+										print_r( $description );
+										echo '</pre>';
 									} else {
 										echo esc_html( $description );
 									} ?>
