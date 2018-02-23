@@ -57,6 +57,8 @@ const display_booking_option = {
             payment_amount_info.closest('.wp-travel-form-field ').show();
         }
         elem.val(wt_payment.book_n_pay);
+
+        jQuery('[name=wp_travel_payment_gateway]').trigger('change');
     }
 }
 
@@ -96,8 +98,7 @@ jQuery(document).ready(function($) {
             trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
             payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
         }
-        // $('#wp-travel-trip-price').val(parseFloat(trip_price));
-        // $('#wp-travel-payment-amount').val(payment_amount);
+
         if (trip_price.toFixed)
             trip_price = trip_price.toFixed(2);
         if (payment_amount.toFixed)
