@@ -112,6 +112,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.2.2 =
 * New Feature: Email Template options for booking,payments and enquiries.
+* New Feature: TAX Options for Trip Prices.
 * Fixes: Payment issue fix while null or empty trip price.
 * Fixes: Date format issue fixes for fixed departure date.
 * Fixes: Reviews meta disabled when reviews tab is disabled in trip details.

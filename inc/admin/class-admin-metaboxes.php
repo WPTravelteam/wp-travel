@@ -69,10 +69,44 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$booking_id = $post->ID;
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-		$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
-		echo '<pre>';
-		print_r( $paypal_args );
-		echo '</pre>';
+
+		
+		$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
+		
+		switch( $payment_method ) {
+			case 'stripe':
+				$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true ); ?>
+				<?php if ( $stripe_args && is_object( $stripe_args ) ) : ?>
+					<table>						
+						<?php foreach ( $stripe_args as $title => $description ) : ?>
+							<tr>
+								<td><?php echo esc_html( $title ) ?></td>
+								<td>
+									<?php
+									if ( is_array( $description ) || is_object( $description ) ) {
+										if ( count( $description ) > 0 ) {
+											echo '<pre>';
+											print_r( $description );
+											echo '</pre>';
+										}
+									} else {
+										echo esc_html( $description );
+									} ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</table>
+				<?php endif;
+
+			break;
+			default :
+				$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
+				echo '<pre>';
+				print_r( $paypal_args );
+				echo '</pre>';			
+			break;
+		}
+
 	}
 
 	/**
@@ -139,7 +173,7 @@ class WP_Travel_Admin_Metaboxes {
 					<td><?php echo esc_html( $mode[ $label_key ]['text'] ) ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Trip Price', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong</td>
 					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $trip_price ) ?></td>
 				</tr>
 				<tr>

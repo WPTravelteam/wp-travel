@@ -1441,7 +1441,9 @@ function wp_travel_process_trip_price_tax( $post_id ){
 
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
-	if ( 'yes' == $settings['trip_tax_enable'] ) {
+	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+
+	if ( 'yes' == $trip_tax_enable ) {
 
 		$tax_details = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];

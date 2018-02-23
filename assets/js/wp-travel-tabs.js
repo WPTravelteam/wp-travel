@@ -131,18 +131,23 @@
     if ($('#trip_tax_enable').is(':checked')) {
         $('#wp-travel-tax-percentage').show();
         $('#wp-travel-tax-price-options').show();
+        $('#trip_tax_percentage_output').attr('required', true)
+
     } else {
         $('#wp-travel-tax-percentage').hide();
         $('#wp-travel-tax-price-options').hide();
+        $('#trip_tax_percentage_output').attr('required', false)
     }
 
     $('#trip_tax_enable').change(function() {
         if ($(this).is(':checked')) {
             $('#wp-travel-tax-percentage').show();
             $('#wp-travel-tax-price-options').show();
+            $('#trip_tax_percentage_output').attr('required', true)
         } else {
             $('#wp-travel-tax-percentage').hide();
             $('#wp-travel-tax-price-options').hide();
+            $('#trip_tax_percentage_output').attr('required', false)
         }
     });
 
