@@ -391,16 +391,22 @@ function wp_travel_send_email_payment( $booking_id ) {
 	}
 }
 
-function wp_travel_update_payment_status($booking_id, $amount, $status, $args, $key = '_paypal_args' ){
+/**
+ * Update Payment After payment Success.
+ *
+ * @param Number $booking_id Booking ID.
+ * @param Number $amount Payment Amount.
+ * @param String $status Payment Status.
+ * @param Arrays $args Payment Args.
+ * @param string $key Payment args Key.
+ * @return void
+ */
+function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, $key = '_paypal_args' ) {
 
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-		
 		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
-
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
-
 		update_post_meta( $payment_id, $key, $args );
-
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
 }
 
