@@ -901,7 +901,8 @@
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default,
-.ui-button, html .ui-button.ui-state-disabled:hover,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
   border: 1px solid #f83531;
   background: #f83531;
@@ -1236,7 +1237,7 @@ html .ui-button.ui-state-disabled:active {
     border-radius: 50%;
     float: right;
     text-align: center;
-    top: calc( 50% - 13px ); }
+    top: calc( 50% - 13px); }
   #faq .panel-heading [data-toggle="collapse"] {
     color: #444; }
     #faq .panel-heading [data-toggle="collapse"] span.collapse-icon:after {
@@ -1388,7 +1389,6 @@ html .ui-button.ui-state-disabled:active {
 .wp-travel-notice {
   color: #fff;
   padding: 10px 15px;
-  width: 1170px;
   margin-left: auto;
   margin-right: auto; }
 
