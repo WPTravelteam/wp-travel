@@ -6,7 +6,7 @@
   font-style: normal; }
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'icomoon';
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -20,6 +20,28 @@
 .icon-spinner:before {
   content: "\f110"; }
 
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear; }
+
+.icon-pulse {
+  -webkit-animation: icon-spin 1s infinite steps(8);
+  animation: icon-spin 1s infinite steps(8); }
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
 .wp-travel-trip-details {
   margin: 20px 0;
   position: relative; }
@@ -1678,6 +1700,9 @@ ul.availabily-list {
     padding: 8px 12px;
     border: 2px solid #f83531;
     border-radius: 4px; }
+    @media (max-width: 1199px) {
+      ul.availabily-list .availabily-content .action .btn {
+        margin-right: -4px; } }
     ul.availabily-list .availabily-content .action .btn:hover {
       background-color: #f83531;
       color: #fff; }
@@ -1696,6 +1721,9 @@ ul.availabily-list {
 
 .detail-content-wrapper {
   padding-right: 15px; }
+  @media (max-width: 1199px) {
+    .detail-content-wrapper .detail-content-wrapper {
+      padding-right: 0; } }
 
 .detail-content .map-route {
   width: 50%;
@@ -1703,12 +1731,6 @@ ul.availabily-list {
   margin: 5px 0;
   margin-left: 15px; }
 
-@media only screen and (max-width: 1199px) {
-  ul.availabily-list li > div.action .btn {
-    margin-right: -4px; }
-
-  .detail-content-wrapper {
-    padding-right: 0; } }
 @media only screen and (max-width: 991px) {
   ul.availabily-list li {
     font-size: 13px; }
@@ -1726,11 +1748,12 @@ ul.availabily-list {
 
   ul.availabily-list li > div {
     display: block;
-    width: 100% !important;
+    width: 100%;
     position: relative;
-    padding-left: 95px !important;
-    text-align: left !important;
-    margin-bottom: 15px; }
+    padding-left: 95px;
+    text-align: left;
+    margin-bottom: 15px;
+    text-transform: capitalize; }
 
   ul.availabily-list li > div span.availabily-heading-label {
     display: block;
