@@ -27,4 +27,22 @@ class WP_Travel_Notices {
 			WP_Travel()->session->set( 'wp_travel_errors', $this->errors );
 		}
 	}
+
+	function print_notices( $type, $destroy = true ){
+
+		$notices = $this->get( 'error', $destroy );
+		if ( $notices ) {
+
+			foreach ( $notices as $key => $notice ) {
+
+				echo '<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice">' . $notice . '</p>';
+
+			}
+			return;
+
+		}
+
+		return false;
+
+	}
 }

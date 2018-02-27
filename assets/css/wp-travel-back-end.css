@@ -104,6 +104,9 @@
     margin: 12px 0 0;
     text-align: right; }
 
+.wp-trave-settings-form-warp .tab-accordion .panel-heading .collapse-icon {
+  right: 15px; }
+
 .wp-travel-enable-sale, .checkbox-with-label {
   margin-left: 15px; }
 
@@ -121,6 +124,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   font-weight: 600;
   -webkit-box-shadow: none;
   box-shadow: none; }
+
+.wp-travel-express-checkout-settings-form {
+  margin-bottom: 30px; }
+
+.wp-travel-express-checkout th,
+.wp-travel-express-checkout td {
+  padding: 10px;
+  vertical-align: middle;
+  width: 33.3333%; }
 
 .trip-info-sidebar td {
   padding: 15px 5px;
@@ -272,6 +284,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .wp-trave-settings-warp .form-table td input[type='range'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='range'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='range'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='range'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='range'] {
     display: block; }
   .wp-trave-settings-warp .form-table td input[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='checkbox'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='checkbox'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='checkbox'] {
+    width: inherit; }
+  .wp-trave-settings-warp .form-table td input[type='radio'], .wp-trave-settings-warp .form-table td .wp-travel-form-field select[type='radio'], .wp-travel-form-field .wp-trave-settings-warp .form-table td select[type='radio'], .wp-trave-settings-warp .form-table td .wp-travel-form-field textarea[type='radio'], .wp-travel-form-field .wp-trave-settings-warp .form-table td textarea[type='radio'] {
     width: inherit; }
 .wp-trave-settings-warp .form-table td .quicktags-toolbar input, .wp-trave-settings-warp .form-table td .quicktags-toolbar .wp-travel-form-field select, .wp-travel-form-field .wp-trave-settings-warp .form-table td .quicktags-toolbar select, .wp-trave-settings-warp .form-table td .quicktags-toolbar .wp-travel-form-field textarea, .wp-travel-form-field .wp-trave-settings-warp .form-table td .quicktags-toolbar textarea {
   width: auto; }
@@ -614,8 +628,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border-top: 1px solid #ddd; }
 .tab-accordion .panel-wrap {
   padding: 10px 15px; }
-  .tab-accordion .panel-wrap label {
-    font-weight: 600; }
   .tab-accordion .panel-wrap textarea {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
     width: 100%;
@@ -832,6 +844,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     float: none; }
   .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap input, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field select, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap select, .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp-travel-form-field textarea, .wp-travel-form-field .wp-travel-tabs-contents table.wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap textarea {
     float: right; }
+
+.wp-travel-express-checkout select, .wp-travel-express-checkout .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-express-checkout input, .wp-travel-express-checkout .stat-toolbar-form .field-group .wp-travel-form-field select, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-express-checkout select, .wp-travel-express-checkout .wp-travel-form-field .stat-toolbar-form .field-group select, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-express-checkout select, .wp-travel-express-checkout .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-express-checkout textarea, .wp-travel-express-checkout .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-express-checkout textarea {
+  width: 190px; }
+
+#wp-travel-tax-price-options label {
+  display: block;
+  margin-bottom: 10px; }
 
 .check-handeller {
   float: right;

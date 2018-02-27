@@ -763,8 +763,8 @@ function wp_travel_get_booking_data() {
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#00f' );
-		$temp_stat_data['data_border_color'] = __( '#00f' );
+		$temp_stat_data['data_bg_color'] = __( '#00f', 'wp-travel' );
+		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
 	} else { 
 		// Payment Data Default Query.		
 		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
@@ -787,8 +787,8 @@ function wp_travel_get_booking_data() {
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#1DFE0E' );
-		$temp_stat_data['data_border_color'] = __( '#1DFE0E' );
+		$temp_stat_data['data_bg_color'] = __( '#1DFE0E', 'wp-travel' );
+		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'wp-travel' );
 	}
 	
 	if ( is_array( $results ) && count( $results ) > 0 ) {
@@ -957,8 +957,8 @@ function wp_travel_get_booking_data() {
 			$results =  $wpdb->get_results( $query );
 	
 			$temp_compare_data['data_label'] = __( 'Booking 2', 'wp-travel' );
-			$temp_compare_data['data_bg_color'] = __( '#3c0' );
-			$temp_compare_data['data_border_color'] = __( '#3c0' );
+			$temp_compare_data['data_bg_color'] = __( '#3c0', 'wp-travel' );
+			$temp_compare_data['data_border_color'] = __( '#3c0', 'wp-travel' );
 		} else {
 			// Payment Data Default Query.		
 			$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
@@ -981,8 +981,8 @@ function wp_travel_get_booking_data() {
 			if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 				$temp_compare_data['data_label'] = __( 'Payment 2', 'wp-travel' );
 			}
-			$temp_compare_data['data_bg_color'] = __( '#000' );
-			$temp_compare_data['data_border_color'] = __( '#000' );
+			$temp_compare_data['data_bg_color'] = __( '#000', 'wp-travel' );
+			$temp_compare_data['data_border_color'] = __( '#000', 'wp-travel' );
 		}
 
 		$date_format = 'm/d/Y';
@@ -1408,4 +1408,85 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 
 		return $new_return_data;
 	}
+}
+
+/**
+ * WP Travel Trip is trip type enable.
+ * @return bool
+ */
+function wp_travel_is_trip_price_tax_enabled(){
+
+	$settings = wp_travel_get_settings();
+
+	if ( isset( $settings['trip_tax_enable'] ) && 'yes' == $settings['trip_tax_enable'] ) {
+
+		return true;
+	}
+
+	return false;
+
+}
+
+/**
+ * Wp Tarvel Process Trip Price Tax.
+ * @param int $post_id post id.
+ * @return mixed $trip_price | $tax_details.
+ */
+function wp_travel_process_trip_price_tax( $post_id ){
+
+	if( ! $post_id ) {
+		return 0;
+	}
+	$settings = wp_travel_get_settings();
+
+	$trip_price = wp_travel_get_actual_trip_price( $post_id );
+
+	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+
+	if ( 'yes' == $trip_tax_enable ) {
+
+		$tax_details = array();
+		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
+		$trip_price = wp_travel_get_actual_trip_price( $post_id );
+		$tax_percentage = @$settings['trip_tax_percentage'];
+		
+		if ( 0 == $trip_price || '' == $tax_percentage ) {
+
+			return array( 'trip_price' => $trip_price );
+		}
+
+		if ( 'yes' == $tax_inclusive_price ) {
+
+			$tax_details['tax_type'] = 'inclusive';
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$actual_trip_price = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
+			$tax_details['trip_price'] = $actual_trip_price;
+			$tax_details['actual_trip_price'] = $trip_price;
+
+			return $tax_details;
+
+		}
+		else{
+
+			$tax_details['tax_type'] = 'excluxive';
+			$tax_details['trip_price'] = $trip_price;
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+
+			return $tax_details;
+
+		}
+
+	}
+
+	return array( 'trip_price' => $trip_price );
+
+}
+
+
+function taxed_amount($amount, $tax_percent, $inclusive =  true){
+	if($inclusive){
+		return number_format( ( $amount - ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
+	}
+	return number_format( ( $amount + ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
 }

@@ -139,9 +139,9 @@ class WP_Travel_Gateway_Paypal_Request {
 		$args['quantity_1']   = $item_qty;
 		$args['amount_1']   = $item_amount;
 		$args['item_number_1']   = $itinery_id;
-		$args['on0_1'] = __( 'Trip Code' );
-		$args['on1_1'] = __( 'Payment Mode' );
-		$args['on2_1'] = __( 'Trip Price' );
+		$args['on0_1'] = __( 'Trip Code', 'wp-travel' );
+		$args['on1_1'] = __( 'Payment Mode', 'wp-travel' );
+		$args['on2_1'] = __( 'Trip Price', 'wp-travel' );
 
 		$agrs_index = 3;
 

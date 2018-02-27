@@ -747,15 +747,7 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
 			$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
 
-			$payment_status = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
-			if ( 'booking_only' === $booking_option || '' === $booking_option ) {
-				$label_key = 'pending';
-				if ( '' === $payment_status ) {
-					update_post_meta( $payment_id , 'wp_travel_payment_status' , $label_key );
-				}
-			} else {
-				$label_key = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
-			}
+			$label_key = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
 			if ( ! $label_key ) {
 				$label_key = 'N/A';
 				update_post_meta( $payment_id , 'wp_travel_payment_status' , $label_key );
@@ -766,9 +758,14 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 		case 'payment_mode':
 			$mode = wp_travel_get_payment_mode();
 			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
-			$label_key = get_post_meta( $payment_id , 'wp_travel_payment_mode' , true );
+			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+	
 			if ( ! $label_key ) {
 				$label_key = 'N/A';
+				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
+				if ( ! $is_partial_enabled ) {
+					$label_key = 'full';
+				}				
 				update_post_meta( $payment_id , 'wp_travel_payment_mode' , $label_key );
 			}
 			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';

@@ -169,7 +169,16 @@ function wp_travel_booking_form_fields() {
 
 	if ( wp_travel_is_payment_enabled() ) {
 		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
+		$trip_tax_details = wp_travel_process_trip_price_tax($post_id);
+
 		$actual_trip_price = wp_travel_get_actual_trip_price( $post_id );
+		
+		if ( is_array( $trip_tax_details ) && isset( $trip_tax_details['actual_trip_price'] ) ) {
+
+			$actual_trip_price = number_format( $trip_tax_details['actual_trip_price'], 2 , '.', '' );
+
+		}
+		
 		$per_person_text = wp_travel_get_price_per_text( $post_id );
 		$settings = wp_travel_get_settings();
 
@@ -225,7 +234,7 @@ function wp_travel_booking_form_fields() {
 			'validations' => array(
 				'required' => true,
 			),
-			'options' => array( 'booking_with_payment' => esc_html__( 'Booking with payment' ), 'booking_only' => esc_html__( 'Booking only' ) ),
+			'options' => array( 'booking_with_payment' => esc_html__( 'Booking with payment', 'wp-travel' ), 'booking_only' => esc_html__( 'Booking only', 'wp-travel' ) ),
 			'default' => 'booking_with_payment',
 			'priority' => 100,
 		);
@@ -255,7 +264,7 @@ function wp_travel_booking_form_fields() {
 				'validations' => array(
 					'required' => true,
 				),
-				'options' => array( 'partial' => esc_html__( 'Partial Payment' ), 'full' => esc_html__( 'Full Payment' ) ),
+				'options' => array( 'partial' => esc_html__( 'Partial Payment', 'wp-travel' ), 'full' => esc_html__( 'Full Payment', 'wp-travel' ) ),
 				'default' => 'full',
 				'priority' => 101,
 			);
@@ -281,7 +290,7 @@ function wp_travel_booking_form_fields() {
 
 		$payment_fields['trip_price_info'] = array(
 			'type' => 'text_info',
-			'label' => __( 'Trip Price', 'wp-travel' ),
+			'label' => __( 'Total Trip Price', 'wp-travel' ),
 			'name' => 'wp_travel_trip_price_info',
 			'id' => 'wp-travel-trip-price_info',
 			'before_field' => wp_travel_get_currency_symbol(),
@@ -291,7 +300,7 @@ function wp_travel_booking_form_fields() {
 		);
 		$payment_fields['payment_amount_info'] = array(
 			'type' => 'text_info',
-			'label' => __( 'Payment Amount', 'wp-travel' ),
+			'label' => __( 'Payment Amount', 'wp-travel' ).' ( '.wp_travel_get_actual_payout_percent($post_id). ' %) ',
 			'name' => 'wp_travel_payment_amount_info',
 			'id' => 'wp-travel-payment-amount-info',
 			'validations' => array(
@@ -307,7 +316,6 @@ function wp_travel_booking_form_fields() {
 			'priority' => 115,
 		);
 
-		
 		$payment_field_list = wp_travel_payment_field_list();
 
 		foreach ( $payment_field_list as $field_list ) {
@@ -321,6 +329,48 @@ function wp_travel_booking_form_fields() {
 				$booking_fileds[ $field_list ] = $payment_fields[ $field_list ];
 			}
 		}
+
+		if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage']  ) {
+
+			$booking_fileds['payment_trip_price_initial'] = array(
+				'type' => 'text_info',
+				'label' => __( 'Trip Price', 'wp-travel' ),
+				'name' => 'wp_travel_trip_price_initial',
+				'id' => 'wp-travel-payment-trip-price-initial',
+				'validations' => array(
+					'required' => true,
+				),
+				'before_field' => wp_travel_get_currency_symbol(),
+				'default' => number_format( $trip_tax_details['trip_price'], 2 ),
+				'wrapper_class' => 'full-width hide-in-admin',
+				'priority' => 108,
+			);
+
+			$inclusive_text = '';
+
+			if ( 'inclusive' == $trip_tax_details['tax_type'] ) {
+				
+				$inclusive_text = __( '( Inclusive )', 'wp-travel' );
+
+			}
+
+			$booking_fileds['payment_tax_percentage_info'] = array(
+				'type' => 'text_info',
+				'label' => __( 'Tax', 'wp-travel' ).$inclusive_text,
+				'name' => 'wp_travel_payment_tax_percentage',
+				'id' => 'wp-travel-payment-tax-percentage-info',
+				'validations' => array(
+					'required' => true,
+				),
+				'before_field' => '',
+				'default' => number_format( $trip_tax_details['tax_percentage'], 2 ).' %',
+				'wrapper_class' => 'full-width hide-in-admin',
+				'priority' => 109,
+			);
+
+		}
+
+
 	}
 
 	return apply_filters( 'wp_travel_booking_form_fields', $booking_fileds );
@@ -349,6 +399,7 @@ function wp_travel_get_booking_form() {
 	);
 
 	$fields = wp_travel_booking_form_fields();
+
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
 		'type' => 'hidden',
@@ -364,6 +415,14 @@ function wp_travel_get_booking_form() {
 		unset( $fields['arrival_date'], $fields['departure_date'] );		
 	} else {
 		unset( $fields['trip_duration'] );
+	}
+
+	$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+
+	if ( '' == $trip_price || '0' == $trip_price ) {
+
+		unset( $fields['is_partial_payment'], $fields['payment_gateway'] , $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
+
 	}
 
 	$form->init( $form_options )->fields( $fields )->template();
@@ -436,8 +495,23 @@ function wp_travel_booking_info( $post ) {
 
 			<?php
 			$fields = wp_travel_booking_form_fields();
-			// echo '<pre>';
-			// print_r( $fields );
+				
+				$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+
+				if ( '' == $trip_price || '0' == $trip_price ) {
+
+					unset( $fields['is_partial_payment'], $fields['payment_gateway'] , $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
+
+				}
+
+				$payment_id = get_post_meta( $post->ID , 'wp_travel_payment_id' , true );
+				$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
+
+				if ( 'booking_only' == $booking_option ) {
+
+					unset( $fields['is_partial_payment'], $fields['payment_gateway'], $fields['payment_mode'], $fields['payment_amount'], $fields['payment_amount_info'] );
+				}
+
 			$priority = array();
 			foreach ( $fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
@@ -484,7 +558,7 @@ function wp_travel_booking_info( $post ) {
 					<?php break; ?>
 					<?php case 'radio' : ?>
 						<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
-							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>							
+							<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>						
 							<?php
 							if ( ! empty( $field['options'] ) ) {
 								foreach ( $field['options'] as $key => $value ) { ?>
@@ -522,7 +596,7 @@ function wp_travel_booking_info( $post ) {
 
 						if ( $payment_id ) :
 
-							$payment_amount = get_post_meta ( $payment_id, 'wp_travel_trip_price', true );
+							$payment_amount = get_post_meta( $payment_id, 'wp_travel_payment_amount' , true )
 						
 						?>
 
@@ -801,12 +875,7 @@ function wp_travel_book_now() {
 
 		update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
 	}
-	/**
-	 * Hook used to add payment and its info.
-	 *
-	 * @since 1.0.5 // For Payment.
-	 */
-	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
+	
 	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
@@ -861,49 +930,63 @@ function wp_travel_book_now() {
 		'{customer_note}'			=> $customer_note,
 	);
 	apply_filters( 'wp_travel_admin_email_tags', $email_tags );
+		
+	$email = new WP_Travel_Emails();
 
-	$admin_message = wp_travel_admin_email_template();
-	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message );
-	// Client message.
-	$message = wp_travel_customer_email_template();
-	$message = str_replace( array_keys( $email_tags ), $email_tags, $message );		
+	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	//Admin message.
+	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
+	//Admin Subject.
+	$admin_subject = $admin_template['subject'];
+
+	// Client Template.
+	$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+	
+	//Client message.
+	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
+	
+	//Client Subject.
+	$client_subject = $client_template['subject'];
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
+		
 		// To send HTML mail, the Content-type header must be set.
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers = $email->email_headers( $client_email, $client_email );
 
-		// Create email headers.
-		$headers .= 'From: ' . $client_email . "\r\n" .
-		'Reply-To: ' . $client_email . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
+		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
+			// wp_send_json( array(
+			// 	'result'  => 0,
+			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			// ) );
 
-		if ( ! wp_mail( $admin_email, wp_specialchars_decode( $title ), $admin_message, $headers ) ) {
-			wp_send_json( array(
-				'result'  => 0,
-				'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			) );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
 		}
 	}
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-	$headers  = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers = $email->email_headers( $admin_email, $admin_email );
 
-	// Create email headers.
-	$headers .= 'From: ' . $admin_email . "\r\n" .
-	'Reply-To: ' . $admin_email . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-
-	if ( ! wp_mail( $client_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
-
-		wp_send_json( array(
-			'result'  => 0,
-			'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-		) );
-	}
+		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
+			// wp_send_json( array(
+			// 	'result'  => 0,
+			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			// ) );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			header( 'Location: ' . $thankyou_page_url );
+			exit;
+		}
+	/**
+	 * Hook used to add payment and its info.
+	 *
+	 * @since 1.0.5 // For Payment.
+	 */
+	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );

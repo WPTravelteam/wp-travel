@@ -14,6 +14,9 @@ const display_booking_option = {
         jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
         jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
 
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').hide();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').hide();
+
         var payment_mode = jQuery("input[name='wp_travel_payment_mode']");
         var trip_price_info = jQuery('#wp-travel-trip-price_info');
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
@@ -33,6 +36,9 @@ const display_booking_option = {
         jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
         jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
 
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
+
         var elem = jQuery('[name=wp_travel_book_now]');
 
         var payment_mode = jQuery("input[name='wp_travel_payment_mode']");
@@ -51,6 +57,8 @@ const display_booking_option = {
             payment_amount_info.closest('.wp-travel-form-field ').show();
         }
         elem.val(wt_payment.book_n_pay);
+
+        jQuery('[name=wp_travel_payment_gateway]').trigger('change');
     }
 }
 
@@ -58,10 +66,14 @@ const display_payment_mode_option = {
     partial: function() {
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
         payment_amount_info.closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
     },
     full: function() {
         var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
         payment_amount_info.closest('.wp-travel-form-field ').hide();
+        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
+        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
     }
 }
 
@@ -86,8 +98,7 @@ jQuery(document).ready(function($) {
             trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
             payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
         }
-        // $('#wp-travel-trip-price').val(parseFloat(trip_price));
-        // $('#wp-travel-payment-amount').val(payment_amount);
+
         if (trip_price.toFixed)
             trip_price = trip_price.toFixed(2);
         if (payment_amount.toFixed)
@@ -124,3 +135,30 @@ jQuery(document).ready(function($) {
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
 
 });
+
+// Get Payable Amount.
+function get_payable_price(payment_mode, no_of_pax) {
+    if (!payment_mode) {
+        payment_mode = 'full';
+    }
+    if (!no_of_pax) {
+        no_of_pax = 1;
+    }
+    var trip_price = wt_payment.trip_price; // Trip Price of single Trip
+    var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
+    var price_per = wt_payment.price_per;
+
+    var payment_amount = trip_price;
+    if (payment_mode == 'partial') {
+        payment_amount = min_partial_payment;
+    }
+
+    if (price_per.toLowerCase().slice(0, 6) === 'person') {
+        payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
+        trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
+    }
+    var amount = new Array();
+    amount['payment_amount'] = payment_amount;
+    amount['trip_price'] = trip_price;
+    return amount;
+}

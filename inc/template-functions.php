@@ -350,7 +350,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="value">
 						<?php
 						if ( $group_size = $wp_travel_itinerary->get_group_size() ) {
-								printf( __( '%d pax', 'wp-travel' ), esc_html( $group_size ) );
+								printf( apply_filters( 'wp_travel_template_group_size_text' ,__( '%d pax', 'wp-travel' ) ), esc_html( $group_size ) );
 						} else {
 							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No Size Limit', 'wp-travel' ) ) );
 						}
@@ -358,7 +358,10 @@ function wp_travel_single_excerpt( $post_id ) {
 					</span>
 				</div>
 	  	 	</li>
-			<?php if ( comments_open() ) : ?>
+			<?php 
+			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+			
+			if ( is_array( $wp_travel_itinerary_tabs ) && 'no' !== $wp_travel_itinerary_tabs['reviews']['show_in_menu'] && comments_open() ) : ?>
 	  	 	<li>
 	  	 		<div class="travel-info">
 					<strong class="title"><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></strong>
@@ -385,11 +388,11 @@ function wp_travel_single_excerpt( $post_id ) {
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
-			<button class="wp-travel-booknow-btn"><?php esc_html_e( 'Book Now', 'wp-travel' ); ?></button>
+			<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
 
 			<?php if ( 'yes' == $enable_enquiry ) : ?>
 			
-				<a id="wp-travel-send-enquiries" href="#wp-travel-enquiries">
+				<a id="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 					<span class="wp-travel-booking-enquiry">
 						<span class="dashicons dashicons-editor-help"></span>
 						<span>
@@ -479,7 +482,11 @@ function wp_travel_single_location( $post_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( '%s - %s', $start_date, $end_date ); ?>
+						<?php $date_format = get_option( 'date_format' ); ?>
+						<?php if ( ! $date_format ) : ?>
+							<?php $date_format = 'jS M, Y'; ?>
+						<?php endif; ?>
+						<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?> 
 					</span>
 				</div>
 			<?php else : ?>
@@ -615,11 +622,12 @@ function wp_travel_frontend_contents( $post_id ) {
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 						<?php echo wp_kses_post( $tab_info['content'] ); ?>
 
+					<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
+						<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
+					
 						<div class="itenary clearfix">
 							<div class="timeline-contents clearfix">
 								<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h2>
-								<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
-								<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
 									<?php $index = 1; ?>
 									<?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
 										<?php if ( $index % 2 === 0 ) : ?>
@@ -686,16 +694,12 @@ function wp_travel_frontend_contents( $post_id ) {
 										</div><!-- first-content -->
 										<?php $index++ ?>
 									<?php endforeach; ?>
-								<?php else : ?>
-									<div class="while-empty">
-										<p>
-											<?php esc_html_e( 'Itinerary not found.', 'wp-travel' ); ?>
-										</p>
-									</div>
-								<?php endif; ?>
 								
 							</div><!-- timeline-contents -->
 						</div><!-- itenary -->
+
+					<?php endif; ?>
+					
 					</div>
 					<?php break;
 					 default : ?>
@@ -1058,11 +1062,24 @@ function wp_travel_booking_message() {
 	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
 		return;
 	}
-	if ( isset( $_GET['booked'] ) ) : ?>
+	if ( isset( $_GET['booked'] ) && 1 == $_GET['booked'] ) : ?>
 		<script>
 			history.replaceState({}, null, '<?php echo $_SERVER['REDIRECT_URL']; ?>');
 		</script>
 		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
+	
+	<?php elseif( isset( $_GET['booked'] ) && 'false' == $_GET['booked']) : ?>
+		<script>
+			history.replaceState({}, null, '<?php echo $_SERVER['REDIRECT_URL']; ?>');
+		</script>
+
+		<?php 
+
+			$err_msg = __( 'Your Item has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' )
+
+		?>
+		
+		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
 	<?php endif;
 }
 
@@ -1083,7 +1100,7 @@ function wp_travel_get_group_size( $post_id = null ) {
 	$group_size = $wp_travel_itinerary->get_group_size();
 
 	if (  $group_size ) {
-		return sprintf( __( '%d pax', 'wp-travel' ), $group_size );
+		return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ) , $group_size );
 	}
 
 	return apply_filters( 'wp_travel_default_group_size_text', esc_html__( 'No Size Limit', 'wp-travel' ) );
@@ -1234,7 +1251,11 @@ function wp_travel_archive_wrapper_close() {
 				</ul>
 			</div>
 		<?php endif; ?>
-		</div>
+		<?php
+		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
+		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
+		wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
+	</div>
 <?php
 	endif;
 }

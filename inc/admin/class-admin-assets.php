@@ -17,7 +17,7 @@ class WP_Travel_Admin_Assets {
 		wp_enqueue_media();
 		wp_enqueue_style( 'jquery-datepicker', $this->assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css', array(), '2.2.3' );
 
-		wp_enqueue_style( 'wp-travel-tabs', $this->assets_path . 'assets/css/wp-travel-tabs' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+		wp_enqueue_style( 'wp-travel-tabs', $this->assets_path . 'assets/css/wp-travel-tabs' . $suffix . '.css', array('wp-color-picker'), WP_TRAVEL_VERSION );
 		wp_enqueue_style( 'wp-travel-back-end', $this->assets_path . 'assets/css/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 	}
 	function scripts() {
@@ -30,7 +30,7 @@ class WP_Travel_Admin_Assets {
 		// Tab for settings page.
 		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
 		if ( in_array( $screen->id, $setting_allowed ) ) {
-			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable'), WP_TRAVEL_VERSION, 1 );
+			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable','wp-color-picker'), WP_TRAVEL_VERSION, 1 );
 			wp_enqueue_script( 'wp-travel-tabs' );
 		}
 		// @since 1.0.5 // booking stat
