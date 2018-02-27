@@ -40,7 +40,7 @@
     margin-bottom: 12px;
 }
 
-.btn {
+.itenary .btn {
     text-transform: uppercase;
     border: 1px solid #f83531;
     padding: 7px 40px;
@@ -127,11 +127,11 @@
         padding: 0 0 10px 35px;
         text-align: left;
     }
-    .right {
+    .itenary .right {
         float: none;
         width: 100%;
     }
-    .left {
+    .itenary .left {
         float: none;
         width: 100%;
         text-align: left;
@@ -146,7 +146,7 @@
         margin-right: 0px;
         display: block;
     }
-    .btn {
+    .itenary .btn {
         padding: 7px 25px;
     }
     .tc-content.right {
