@@ -201,8 +201,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 * Include Cart and Checkout Classes.
 			 * @since 2.2.3
 			 */
-			// include sprintf( '%s/inc/class-cart.php', WP_TRAVEL_ABSPATH );
-			// include sprintf( '%s/inc/class-checkout.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-cart.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-checkout.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );

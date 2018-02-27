@@ -26,12 +26,12 @@ class WP_Travel_Cart {
      */
     public static function output(){
 
-        echo self::trip_details( $trip_id='55489' );
+       // echo self::trip_details( $trip_id='55489' );
 
-        WP_Travel()->notices->print_notices( $type= 'error' );
+       // WP_Travel()->notices->print_notices( $type= 'error' );
 
 
-        
+
         
     }
 
