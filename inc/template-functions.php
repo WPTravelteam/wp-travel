@@ -524,6 +524,19 @@ function wp_travel_frontend_contents( $post_id ) {
 
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 
+	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
+	$trip_end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
+	$trip_price 	= wp_travel_get_trip_price( $post_id );
+	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+
+	$settings = wp_travel_get_settings();
+	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
+
+	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
+	$per_person_text = wp_travel_get_price_per_text( $post_id );
+	$sale_price 	= wp_travel_get_trip_sale_price( $post_id );
+	
+
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
@@ -579,7 +592,6 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'booking' : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-
 						<?php if ( 'yes' == $fixed_departure ) : ?>
 							<div id="wp-travel-date-price" class="detail-content">
 								<div class="availabily-wrapper">
@@ -603,26 +615,50 @@ function wp_travel_frontend_contents( $post_id ) {
 										</li>
 										<li class="availabily-content clearfix">
 											<div class="date-from">
-												<span class="availabily-heading-label">start:</span>
-												Monday
-												<span>March 7, 2016</span>
+												<span class="availabily-heading-label"><?php echo esc_html( 'start:', 'wp-travel' ); ?></span>
+												<?php echo esc_html( date( 'l', strtotime( $trip_start_date ) ) );  ?>
+												<?php $date_format = get_option( 'date_format' ); ?>
+												<?php if ( ! $date_format ) : ?>
+													<?php $date_format = 'jS M, Y'; ?>
+												<?php endif; ?>
+												<span><?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
 											</div>
 											<div class="date-to">
-												<span class="availabily-heading-label">end:</span>
-												Thursday
-												<span>March 10, 2016</span>
+												<span class="availabily-heading-label"><?php echo esc_html( 'end:', 'wp-travel' ); ?></span>
+												<?php echo esc_html( date( 'l', strtotime( $trip_end_date ) ) );  ?>
+												<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
 											</div>
 											<div class="status">
-												<span class="availabily-heading-label">status:</span>
+												<span class="availabily-heading-label"><?php echo esc_html( 'status:', 'wp-travel' ); ?></span>
 												seats left
 												<span>15</span>
 											</div>
 											<div class="price">
-												<span class="availabily-heading-label">price:</span>
-												<span>$1458</span>
+												<span class="availabily-heading-label"><?php echo esc_html( 'price:', 'wp-travel' ); ?></span>
+												<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
+
+													<?php if ( $enable_sale ) : ?>
+														<del>
+															<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+														</del>
+													<?php endif; ?>
+														<span class="person-count">
+															<ins>
+																<span>
+																	<?php
+																	if ( $enable_sale ) {
+																		echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
+																	} else {
+																		echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
+																	}
+																	?>
+																</span>
+															</ins>/<?php echo esc_html( $per_person_text ); ?>
+														</span>
+												<?php endif; ?>
 											</div>
 											<div class="action">
-												<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
+												<a href="#" class="btn btn-primary btn-sm btn-inverse"><?php echo esc_html('Book now', 'wp-travel'); ?></a>
 											</div>
 										</li>
 										<!--<li class="availabily-content clearfix">
