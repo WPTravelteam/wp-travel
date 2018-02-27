@@ -604,7 +604,7 @@ function wp_travel_frontend_contents( $post_id ) {
 												<?php echo esc_html( 'End', 'wp-travel' ); ?>
 											</div>
 											<div class="status">
-												<?php echo esc_html( 'Status', 'wp-travel' ); ?>
+												<?php echo esc_html( 'Group Size', 'wp-travel' ); ?>
 											</div>
 											<div class="price">
 												<?php echo esc_html( 'Price', 'wp-travel' ); ?>
@@ -629,9 +629,8 @@ function wp_travel_frontend_contents( $post_id ) {
 												<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
 											</div>
 											<div class="status">
-												<span class="availabily-heading-label"><?php echo esc_html( 'status:', 'wp-travel' ); ?></span>
-												seats left
-												<span>15</span>
+												<span class="availabily-heading-label"><?php echo esc_html( 'Group Size:', 'wp-travel' ); ?></span>
+												<span><?php echo esc_html( wp_travel_get_group_size() ); ?></span>
 											</div>
 											<div class="price">
 												<span class="availabily-heading-label"><?php echo esc_html( 'price:', 'wp-travel' ); ?></span>
