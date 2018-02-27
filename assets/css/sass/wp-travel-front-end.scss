@@ -81,7 +81,7 @@
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'icomoon';
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -91,6 +91,9 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
 }
 .icon-spinner:before {
   content: "\f110";
@@ -98,6 +101,35 @@
 // .slider-book-now:visited{
 //     background-color:transparent;
 // }
+
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
+.icon-pulse {
+  -webkit-animation: icon-spin 1s infinite steps(8);
+  animation: icon-spin 1s infinite steps(8);
+}
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
 
 .wp-travel-trip-details {
     margin: 20px 0;
@@ -2271,6 +2303,10 @@ ul.availabily-list{
                 border:2px solid #f83531;
                 border-radius:4px;
 
+                @include extra-large-screen {
+                    margin-right: -4px;
+                }
+
                 &:hover{
                     background-color:#f83531;
                     color:#fff;
@@ -2300,6 +2336,12 @@ ul.availabily-list{
 
 .detail-content-wrapper {
     padding-right: 15px;
+
+    @include extra-large-screen {
+        .detail-content-wrapper {
+            padding-right: 0;
+        }
+    }
 }
 
 .detail-content {
@@ -2312,14 +2354,7 @@ ul.availabily-list{
 }
 
 
-@media only screen and (max-width: 1199px) {
-    ul.availabily-list li > div.action .btn {
-        margin-right: -4px;
-    }
-    .detail-content-wrapper {
-        padding-right: 0;
-    }
-}
+
 
 @media only screen and (max-width: 991px) {
     ul.availabily-list li {
@@ -2341,11 +2376,12 @@ ul.availabily-list{
     }
     ul.availabily-list li > div {
         display: block;
-        width: 100% !important;
+        width: 100%;
         position: relative;
-        padding-left: 95px !important;
-        text-align: left !important;
+        padding-left: 95px;
+        text-align: left;
         margin-bottom: 15px;
+        text-transform: capitalize;
     }
     ul.availabily-list li > div span.availabily-heading-label {
         display: block;
