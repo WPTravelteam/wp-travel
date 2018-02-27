@@ -15,7 +15,10 @@
   line-height: 1;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  font-size: inherit;
+  text-rendering: auto; }
 
 .icon-spinner:before {
   content: "\f110"; }
