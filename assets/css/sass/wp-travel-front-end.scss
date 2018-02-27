@@ -648,8 +648,6 @@
     }
 }
 
-.wp-travel-book-now {}
-
 //right plot trip info meta
 .wp-travel-trip-meta-info {
     ul {
@@ -2236,6 +2234,10 @@ ul.availabily-list{
             &.date-to,
             &.date-from {
                 width: 23%;
+
+                @include mob{
+                    width:100%;
+                }
             }
             &.date-from {
                 padding-right: 10px;
@@ -2263,6 +2265,9 @@ ul.availabily-list{
                         font-weight:400;
                         font-size:12px;
                     }
+                }
+                ins{
+                    background-color:rgba(255, 255, 255, 0);
                 }
             }
             &.price,
@@ -2300,6 +2305,10 @@ ul.availabily-list{
         padding-bottom: 5px;
         font-weight: 600;
         text-transform: capitalize;
+
+        @include mob{
+            display: none;
+        }
 
         .date-from{
 
@@ -2384,38 +2393,85 @@ ul.availabily-list{
 }
 
 @media only screen and (max-width: 767px) {
-    ul.availabily-list li.availabily-heading {
-        display: none;
-    }
-    ul.availabily-list li > div {
-        display: block;
-        width: 100%;
-        position: relative;
-        padding-left: 95px;
-        text-align: left;
-        margin-bottom: 15px;
-        text-transform: capitalize;
-    }
-    ul.availabily-list li > div span.availabily-heading-label {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-align: right;
-        width: 80px;
-    }
-    ul.availabily-list li.availabily-content > div.date-from:after {
-        top: 0;
-        right: auto;
-        left: 0;
-        margin-top: 0;
-    }
-    .page-title.detail-page-title {
-        padding: 100px 0 30px;
-    }
+    ul.availabily-list{
+        
+
+        li > div {
+            display: block;
+            width: 100% !important;
+            position: relative;
+            padding-left: 95px !important;
+            text-align: left !important;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+
+            span.availabily-heading-label {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                text-align: right;
+                width: 80px;
+            }
+        }
+        li.availabily-content > div.date-from:after {
+            top: 0;
+            right: auto;
+            left: 0;
+            margin-top: 0;
+        }
+    } 
+
 }
 
 
+
+//end
+
+//cart page
+
+
+
+.wp-travel-ecommerse{
+
+    table.cart td.actions .coupon,
+    #content table.cart td.actions .coupon{
+        float: left;
+    }
+    .cart .button, 
+    .wp-travel-ecommerse .cart input.button {
+        float: right;
+    }
+    .actions .button,
+    .actions .button.alt{
+        background-color: #2a2a2a;
+        color: #fffefe;
+        text-transform: uppercase;
+        border-radius: 0;
+        padding: 13px 25px;
+        display: inline-block;
+    }
+    .cart-collaterals{
+        margin-top: 30px;
+        width:100%;
+
+        .cart_totals {
+            float: right;
+            width: 48%;
+        }
+
+        a.checkout-button.button {
+                background-color: #2a2a2a;
+                color: #fffefe;
+                text-transform: uppercase;
+                border-radius: 0;
+                display: block;
+                text-align: center;
+                padding: 10px;
+        }
+    }
+    
+} 
 
 //end
 
