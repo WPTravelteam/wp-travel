@@ -29,6 +29,8 @@ class WP_Travel_Checkout {
         echo 'Checkout Page Details';
 
 
+
+
     }
 	
 }

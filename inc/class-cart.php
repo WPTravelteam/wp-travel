@@ -29,6 +29,9 @@ class WP_Travel_Cart {
         echo self::trip_details( $trip_id='55489' );
 
         WP_Travel()->notices->print_notices( $type= 'error' );
+
+
+        
         
     }
 

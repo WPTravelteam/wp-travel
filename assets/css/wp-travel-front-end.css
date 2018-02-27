@@ -1598,6 +1598,132 @@ html .ui-button.ui-state-disabled:active {
         margin-right: 10px;
         opacity: 0.5; }
 
+ul.availabily-list {
+  list-style: none; }
+  ul.availabily-list li {
+    border-bottom: 1px solid #E3E3E3;
+    line-height: 1.2;
+    padding: 10px 0;
+    margin: 10px 0;
+    position: relative; }
+    ul.availabily-list li > div {
+      display: inline-block;
+      width: 19.5%;
+      vertical-align: middle;
+      padding: 0;
+      margin: 0; }
+      ul.availabily-list li > div.date-to, ul.availabily-list li > div.date-from {
+        width: 23%; }
+      ul.availabily-list li > div.date-from {
+        padding-right: 10px;
+        position: relative; }
+        ul.availabily-list li > div.date-from:after {
+          font-family: 'FontAwesome';
+          content: "\f058";
+          position: absolute;
+          top: 50%;
+          right: 0;
+          margin-top: -4px;
+          display: block;
+          color: #f83531; }
+      ul.availabily-list li > div.date-to {
+        padding-left: 10px; }
+      ul.availabily-list li > div.price {
+        width: 12.5%; }
+      ul.availabily-list li > div.price, ul.availabily-list li > div.status {
+        text-align: center; }
+      ul.availabily-list li > div.action {
+        text-align: right; }
+        ul.availabily-list li > div.action.btn {
+          margin-right: -8px; }
+      ul.availabily-list li > div span {
+        display: block;
+        font-size: 14px;
+        font-weight: 600; }
+        ul.availabily-list li > div span.availabily-heading-label {
+          display: none;
+          font-size: 12px;
+          color: #999; }
+  ul.availabily-list .availabily-heading {
+    font-size: 12px;
+    color: #999;
+    padding-bottom: 5px; }
+    ul.availabily-list .availabily-heading .date-from:after {
+      content: none; }
+  ul.availabily-list .availabily-content .action .btn {
+    padding: 8px 12px;
+    border: 2px solid #f83531;
+    border-radius: 4px; }
+    ul.availabily-list .availabily-content .action .btn:hover {
+      background-color: #f83531;
+      color: #fff; }
+  ul.availabily-list .availabily-content.sold-out:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    display: block; }
+  ul.availabily-list .availabily-content.sold-out > div.date-from:after {
+    display: none; }
+
+.detail-content-wrapper {
+  padding-right: 15px; }
+
+.detail-content .map-route {
+  width: 50%;
+  float: right;
+  margin: 5px 0;
+  margin-left: 15px; }
+
+@media only screen and (max-width: 1199px) {
+  ul.availabily-list li > div.action .btn {
+    margin-right: -4px; }
+
+  .detail-content-wrapper {
+    padding-right: 0; } }
+@media only screen and (max-width: 991px) {
+  ul.availabily-list li {
+    font-size: 13px; }
+
+  ul.availabily-list li > div span {
+    display: block;
+    font-size: 14px; }
+
+  ul.availabily-list li > div.action .btn {
+    font-size: 10px;
+    margin-right: 0px; } }
+@media only screen and (max-width: 767px) {
+  ul.availabily-list li.availabily-heading {
+    display: none; }
+
+  ul.availabily-list li > div {
+    display: block;
+    width: 100% !important;
+    position: relative;
+    padding-left: 95px !important;
+    text-align: left !important;
+    margin-bottom: 15px; }
+
+  ul.availabily-list li > div span.availabily-heading-label {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: right;
+    width: 80px; }
+
+  ul.availabily-list li.availabily-content > div.date-from:after {
+    top: 0;
+    right: auto;
+    left: 0;
+    margin-top: 0; }
+
+  .page-title.detail-page-title {
+    padding: 100px 0 30px; } }
 /* enquiry form single trips */
 #wp-travel-enquiries {
   max-width: 300px;
