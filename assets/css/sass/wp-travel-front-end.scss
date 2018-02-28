@@ -2465,6 +2465,14 @@ ul.availabily-list{
         border-radius: 50%;
         text-align: center;
     }
+    thead {
+        tr{
+            background-color: #f1f1f1;
+        }
+        th {
+            padding: 10px;
+        }
+    }
     table.cart td.actions .coupon,
     #content table.cart td.actions .coupon{
         float: left;
@@ -2500,6 +2508,11 @@ ul.availabily-list{
         display: inline-block;
         font-size: 14px;
         margin-left: 10px;
+
+
+        &:hover{
+            background-color:#f83531;
+        }
     }
     .cart-collaterals{
         margin-top: 30px;
@@ -2511,13 +2524,17 @@ ul.availabily-list{
         }
 
         a.checkout-button.button {
-                background-color: #2a2a2a;
-                color: #fffefe;
-                text-transform: uppercase;
-                border-radius: 0;
-                display: block;
-                text-align: center;
-                padding: 10px;
+            background-color: #2a2a2a;
+            color: #fffefe;
+            text-transform: uppercase;
+            border-radius: 0;
+            display: block;
+            text-align: center;
+            padding: 10px;
+
+            &:hover{
+                background-color:#f83531;
+            }
         }
     }
 
@@ -2526,6 +2543,176 @@ ul.availabily-list{
 } 
 
 //end
+//checkout page
+
+.wp-travel-billing{
+
+    .wp-travel-info {
+        text-align: center;
+        font-weight: 600;
+        padding: 5px 0 5px 0;
+        margin-bottom: 20px;
+    }
+    h3{
+        font-size: 22px;
+        font-weight: 400;
+        color:#555;
+    }
+    .form-row-first, 
+    .form-row-last{
+        float: left;
+        width: 47%;
+        overflow: visible;
+    }
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+    input.input-text, 
+    .form-row textarea {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        outline: 0;
+        line-height: 1;
+        height:40px;
+    }
+    .form-row {
+        padding: 3px;
+        margin: 0 0 6px;
+    }
+    .form-row-last {
+        float: right;
+    }
+    .form-row-wide {
+        clear: both;
+    }
+    select {
+        height: 40px;
+        width: 100%;
+    }
+    .required {
+        color: red;
+        font-weight: 700;
+        border: 0;
+    }
+    .order-wrapper {
+        background: rgba(84,84,84,.05);
+        margin-left: 30px;
+        padding: 20px 20px 1px;
+    }
+    ul.payment_methods {
+        text-align: left;
+        padding: 1em;
+        border-bottom: 1px solid #d3ced2;
+        margin: 0;
+        list-style: none outside;
+
+        li {
+            img {
+                vertical-align: middle;
+                margin: -2px 0 0 .5em;
+                padding: 0;
+                position: relative;
+                box-shadow: none;
+                    max-height: 52px;
+            }
+            input {
+                margin: 0 1em 0 0;
+            }
+        }
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .payment_box {
+            position: relative;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 1em;
+            margin: 1em 0;
+            font-size: .92em;
+            border-radius: 2px;
+            line-height: 1.5;
+            background-color: #dfdcde;
+            color: #515151;
+            p{
+                font-size:12px;
+            }
+            p:last-child {
+                margin-bottom: 0;
+            }
+            &:before {
+                content: '';
+                display: block;
+                border: 1em solid #dfdcde;
+                border-right-color: transparent;
+                border-left-color: transparent;
+                border-top-color: transparent;
+                position: absolute;
+                top: -.75em;
+                left: 0;
+                margin: -1em 0 0 2em;
+            }
+        }
+    }
+    input#place_order {
+        width: 100%;
+        background-color: #2a2a2a;
+        padding: 16px 24px;
+        &:hover{
+            background-color:#f83531;
+        }
+    }
+
+    @include sidr-view{
+        .order-wrapper {
+            margin-left: 0;
+            margin-top: 50px;
+            display: inline-block;
+            width: 100%;
+        }
+    }
+
+    .wp-travel-billing-error{
+        padding: 1em 2em 1em 3.5em;
+        margin: 0 0 2em;
+        position: relative;
+        background-color: #f7f6f7;
+        color: #515151;
+        border-top: 3px solid #b81c23;
+        list-style: none outside;
+        width: auto;
+        word-wrap: break-word;
+
+        li{
+            position:relative;
+            margin: 5px 0;
+            &:before {
+                content: '!';
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: -20px;
+                color: #fff;
+                width: 16px;
+                height: 16px;
+                background: #b81c23;
+                border-radius: 50%;
+                text-align: center;
+                font-size: 12px;
+                font-weight: 900;
+                
+            }
+        }
+    }
+}
+
+
+//end
+
 
 
 /* enquiry form single trips */
