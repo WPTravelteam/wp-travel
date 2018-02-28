@@ -71,6 +71,27 @@
         @content;
     }
 }
+
+
+.col-md-5, .col-md-7 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 992px){
+    .col-md-5, .col-md-7{
+        float: left;
+    }
+    .col-md-5 {
+        width: 41.66667%;
+    }
+    .col-md-7 {
+        width: 58.33333%;
+    }
+}
+
 @font-face {
     font-family: 'icomoon';
     src: url('../fonts/icomoon.eot?scxfre');
@@ -2704,7 +2725,7 @@ ul.availabily-list{
                 text-align: center;
                 font-size: 12px;
                 font-weight: 900;
-                
+
             }
         }
     }
