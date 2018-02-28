@@ -2431,7 +2431,6 @@ ul.availabily-list{
 //cart page
 
 
-
 .wp-travel-ecommerse{
 
     table.cart td.actions .coupon,
@@ -2442,14 +2441,30 @@ ul.availabily-list{
     .wp-travel-ecommerse .cart input.button {
         float: right;
     }
+    table.cart td.actions .coupon label,
+    #content table.cart td.actions .coupon label{
+        display:none;
+    }
+    table.cart td.actions .coupon .input-text{
+        float: left;
+        box-sizing: border-box;
+        border: 1px solid #d3ced2;
+        padding: 6px 6px 5px;
+        margin: 0 4px 0 0;
+        outline: 0;
+        line-height: 1;
+        height: 41px;
+    }
     .actions .button,
     .actions .button.alt{
         background-color: #2a2a2a;
         color: #fffefe;
         text-transform: uppercase;
         border-radius: 0;
-        padding: 13px 25px;
+        padding: 10px 20px;
         display: inline-block;
+        font-size: 14px;
+        margin-left: 10px;
     }
     .cart-collaterals{
         margin-top: 30px;
