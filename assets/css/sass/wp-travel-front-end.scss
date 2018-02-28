@@ -2433,6 +2433,38 @@ ul.availabily-list{
 
 .wp-travel-ecommerse{
 
+    .wp-travel-ecommerse-message {
+        padding: 1em 2em 1em 3.5em;
+        margin: 0 0 2em;
+        position: relative;
+        background-color: #f7f6f7;
+        color: #515151;
+        border-top: 3px solid #8fae1b;
+        list-style: none outside;
+        width: auto;
+        word-wrap: break-word;
+
+        &:before {
+            font-family: dashicons;
+            display: inline-block;
+            position: absolute;
+            top: 1em;
+            left: 1.5em;
+
+            content: '\f147';
+            color: #8fae1b;
+        }
+    }
+    .remove {
+        width: 18px;
+        height: 18px;
+        display: block;
+        margin: 0 auto;
+        line-height: 17px;
+        border: 1px solid #f83531;
+        border-radius: 50%;
+        text-align: center;
+    }
     table.cart td.actions .coupon,
     #content table.cart td.actions .coupon{
         float: left;
@@ -2454,6 +2486,9 @@ ul.availabily-list{
         outline: 0;
         line-height: 1;
         height: 41px;
+    }
+    .product-thumbnail {
+        width: 150px;
     }
     .actions .button,
     .actions .button.alt{
@@ -2485,6 +2520,8 @@ ul.availabily-list{
                 padding: 10px;
         }
     }
+
+
     
 } 
 
