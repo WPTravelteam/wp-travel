@@ -129,6 +129,11 @@ class WP_Travel_Admin_Settings {
 		$currency_list = wp_travel_get_currency_list();
 		$currency = ( isset( $args['settings']['currency'] ) && '' != $args['settings']['currency'] ) ? $args['settings']['currency'] : 'USD';
 		$google_map_api_key = isset( $args['settings']['google_map_api_key'] ) ? $args['settings']['google_map_api_key'] : '';
+
+		$selected_cart_page = isset( $args['settings']['cart_page_id'] ) ? $args['settings']['cart_page_id'] : wp_travel_get_page_id('wp-travel-cart');
+
+		$selected_checkout_page = isset( $args['settings']['checkout_page_id'] ) ? $args['settings']['checkout_page_id'] : wp_travel_get_page_id('wp-travel-checkout');
+
 		$currency_args = array(
 			'id'		=> 'currency',
 			'class'		=> 'currency',
@@ -157,6 +162,54 @@ class WP_Travel_Admin_Settings {
 					echo '<p class="description">' . sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) . '</p>';
 				echo '</td>';
 			echo '<tr>';
+		echo '</table>';
+
+		echo '<h3 class="wp-travel-tab-content-title">Checkout Process</h3>';
+
+		echo '<table class="form-table">';
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="cart-page-id">' . esc_html__( 'Cart Page', 'wp-travel' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					wp_dropdown_pages(array(
+						'depth'                 => 0,
+						'child_of'              => 0,
+						'selected'              => $selected_cart_page,
+						'echo'                  => 1,
+						'name'                  => 'cart_page_id',
+						'id'                    => 'cart-page-id', // string
+						'class'                 => null, // string
+						'show_option_none'      => null, // string
+						'show_option_no_change' => null, // string
+						'option_none_value'     => null, // string
+					));
+					echo '<p class="description">' . esc_html__( 'Choose the page to use as cart page for trip bookings', 'wp-travel' ) . '</p>';
+				echo '</td>';
+			echo '<tr>';
+
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="checkout-page-id">' . esc_html__( 'Checkout Page', 'wp-travel' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					wp_dropdown_pages(array(
+						'depth'                 => 0,
+						'child_of'              => 0,
+						'selected'              => $selected_checkout_page,
+						'echo'                  => 1,
+						'name'                  => 'checkout_page_id',
+						'id'                    => 'checkout-page-id', // string
+						'class'                 => null, // string
+						'show_option_none'      => null, // string
+						'show_option_no_change' => null, // string
+						'option_none_value'     => null, // string
+					));
+					echo '<p class="description">' . esc_html__( 'Choose the page to use as checkout page for booking', 'wp-travel' ) . '</p>';
+				echo '</td>';
+			echo '<tr>';
+
+
 		echo '</table>';
 	}
 
@@ -874,6 +927,10 @@ class WP_Travel_Admin_Settings {
 			$paypal_email = ( isset( $_POST['paypal_email'] ) && '' !== $_POST['paypal_email'] ) ? $_POST['paypal_email'] : '';
 			$payment_option_paypal = ( isset( $_POST['payment_option_paypal'] ) && '' !== $_POST['payment_option_paypal'] ) ? $_POST['payment_option_paypal'] : '';
 
+			$cart_page_id = ( isset( $_POST['cart_page_id'] ) && '' !== $_POST['cart_page_id'] ) ? $_POST['cart_page_id'] : '';
+
+			$checkout_page_id = ( isset( $_POST['checkout_page_id'] ) && '' !== $_POST['checkout_page_id'] ) ? $_POST['checkout_page_id'] : '';
+
 			$settings['wt_test_mode'] = $wt_test_mode;
 			$settings['wt_test_email'] = $wt_test_email;
 			$settings['partial_payment'] = $partial_payment;
@@ -887,6 +944,10 @@ class WP_Travel_Admin_Settings {
 			$settings['paypal_email'] = $paypal_email;
 			$settings['payment_option_paypal'] = $payment_option_paypal;
 			// Merged Standard paypal Addons ends @since 1.2.1
+
+			//Cart and Checkout pages options
+			$settings['cart_page_id'] = $cart_page_id;
+			$settings['checkout_page_id'] = $checkout_page_id;
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
