@@ -37,6 +37,7 @@ class WP_Travel_Admin_Settings {
 		
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );		
 		
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
@@ -111,6 +112,12 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
 		);
+		if ( wp_travel_premium_addons() > 0 ) {
+			$settings_fields['license'] = array(
+				'tab_label' => __( 'License', 'wp-travel' ),
+				'content_title' => __( 'License Details', 'wp-travel' ),
+			);
+		}
 
 		$tabs[ self::$collection ] = $settings_fields;
 		return $tabs;
@@ -855,6 +862,19 @@ class WP_Travel_Admin_Settings {
 		</table>
 		<?php do_action( 'wp_travel_below_debug_tab_fields' ); ?>
 	<?php
+	}
+
+		/**
+	 * Callback for License tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	function wp_travel_license_tab_call_back( $tab, $args ) {
+		if ( 'license' !== $tab ) {
+			return;
+		}
+		do_action( 'wp_travel_license_tab_fields', $args );
 	}
 
 	/**
