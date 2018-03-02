@@ -899,16 +899,3 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 
 	return $page_id;
 }
-
-/**
- * Retrieve page ids - cart, checkout. returns -1 if no page is found.
- *
- * @param string $page Page slug.
- * @return int
- */
-function wp_travel_get_page_id( $page ) {
-
-	$page = apply_filters( 'wp_travel_get_' . $page . '_page_id', get_option( 'wp_travel_' . $page . '_page_id' ) );
-
-	return $page ? absint( $page ) : -1;
-}

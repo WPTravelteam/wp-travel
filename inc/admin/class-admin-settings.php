@@ -929,7 +929,14 @@ class WP_Travel_Admin_Settings {
 
 			$cart_page_id = ( isset( $_POST['cart_page_id'] ) && '' !== $_POST['cart_page_id'] ) ? $_POST['cart_page_id'] : '';
 
+			if ( '' !== $cart_page_id ) {
+				update_option( 'wp_travel_wp-travel-cart_page_id', $cart_page_id );
+			}
+
 			$checkout_page_id = ( isset( $_POST['checkout_page_id'] ) && '' !== $_POST['checkout_page_id'] ) ? $_POST['checkout_page_id'] : '';
+			if ( '' !== $checkout_page_id ) {
+				update_option( 'wp_travel_wp-travel-checkout_page_id', $checkout_page_id );
+			}
 
 			$settings['wt_test_mode'] = $wt_test_mode;
 			$settings['wt_test_email'] = $wt_test_email;

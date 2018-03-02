@@ -1490,3 +1490,39 @@ function taxed_amount($amount, $tax_percent, $inclusive =  true){
 	}
 	return number_format( ( $amount + ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
 }
+
+/**
+ * Retrieve page ids - cart, checkout. returns -1 if no page is found.
+ *
+ * @param string $page Page slug.
+ * @return int
+ */
+function wp_travel_get_page_id( $page ) {
+
+	$page = apply_filters( 'wp_travel_get_' . $page . '_page_id', get_option( 'wp_travel_' . $page . '_page_id' ) );
+
+	return $page ? absint( $page ) : -1;
+}
+
+/**
+ * Retrieve page permalink.
+ *
+ * @param string $page page slug.
+ * @return string
+ */
+function wp_travel_get_page_permalink( $page ) {
+	$page_id   = wp_travel_get_page_id( $page );
+	$permalink = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
+	return apply_filters( 'wp_travel_get_' . $page . '_page_permalink', $permalink );
+}
+
+/**
+ * Gets the url to the Cart page.
+ *
+ * @since  2.2.3
+ *
+ * @return string Url to cart page
+ */
+function wp_travel_get_cart_url() {
+	return apply_filters( 'wp_travel_get_cart_url', wp_travel_get_page_permalink( 'wp-travel-cart' ) );
+}

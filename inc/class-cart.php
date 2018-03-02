@@ -26,15 +26,15 @@ class WP_Travel_Cart {
      */
     public static function output(){
 
-        // echo self::trip_details( $trip_id='55489' );
+        $trip_id = ( isset( $_GET['trip-id'] ) && '' !== $_GET['trip-id'] ) ? $_GET['trip-id'] : ''; 
 
-       // WP_Travel()->notices->print_notices( $type= 'error' );
+        if ( '' == $trip_id ) {
+
+            return;
+        }
+        
         ?>
-
-               
-
         <div class="wp-travel-ecommerse">
-            <div class="wp-travel-ecommerse-message">Cart updated.</div>
         <form action="#" method="post">
         <table class="shop_table shop_table_responsive cart" cellspacing="0">
         <thead>
@@ -45,7 +45,6 @@ class WP_Travel_Cart {
                 <th class="product-price">Price</th>
                 <th class="product-quantity">Number ticket</th>
                 <th class="product-subtotal">Total</th>
-                <th class="product-remove">Delete</th>
             </tr>
         </thead>
             <tbody>
@@ -57,7 +56,7 @@ class WP_Travel_Cart {
                         </a> 
                     </td>
                     <td class="product-name" data-title="Tour">
-                        <div><a href="#">Compact Shelter</a></div> 
+                        <div><a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a></div> 
                     </td>
                     <td class="product-price" data-title="Price">
                         <span class="woocommerce-Price-amount amount">
@@ -70,22 +69,7 @@ class WP_Travel_Cart {
                         </div>
                     </td>
                     <td class="product-subtotal" data-title="Total">
-                        $80.00 
-                    </td>
-                    <td class="product-remove">
-                        <a href="#" class="remove" title="Remove this item" data-product_id="159" data-product_sku="">×</a> 
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="actions">
-                        <div class="coupon">
-                            <label for="coupon_code">Coupon:</label> 
-                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code">
-                                <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
-                        </div>
-                        <input type="submit" class="button" name="update_cart" value="Update Cart">
-                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="ca0a7cd07a">
-                        <input type="hidden" name="_wp_http_referer" value="/cart/"> 
+                    <?php echo wp_travel_get_actual_trip_price( $trip_id ); ?> 
                     </td>
                 </tr>
             </tbody>
