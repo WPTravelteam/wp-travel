@@ -26,11 +26,100 @@ class WP_Travel_Cart {
      */
     public static function output(){
 
-       // echo self::trip_details( $trip_id='55489' );
+        // echo self::trip_details( $trip_id='55489' );
 
        // WP_Travel()->notices->print_notices( $type= 'error' );
+        ?>
 
+               
 
+        <div class="wp-travel-ecommerse">
+            <div class="wp-travel-ecommerse-message">Cart updated.</div>
+        <form action="#" method="post">
+        <table class="shop_table shop_table_responsive cart" cellspacing="0">
+        <thead>
+            <tr>
+
+                <th class="product-thumbnail">Image</th>
+                <th class="product-name">Tour</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Number ticket</th>
+                <th class="product-subtotal">Total</th>
+                <th class="product-remove">Delete</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr class="cart_item">
+
+                    <td class="product-thumbnail">
+                        <a href="#">
+                            <img width="150" height="100" src="//travelwp.physcode.com/wp-content/uploads/2013/06/123596-150x100.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
+                        </a> 
+                    </td>
+                    <td class="product-name" data-title="Tour">
+                        <div><a href="#">Compact Shelter</a></div> 
+                    </td>
+                    <td class="product-price" data-title="Price">
+                        <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>40.00
+                        </span> 
+                    </td>
+                    <td class="product-quantity" data-title="Number ticket">
+                        <div class="quantity">
+                            <input type="number" class="input-text qty text" step="1" min="0" max="" name="cart[140f6969d5213fd0ece03148e62e461e][qty]" value="2" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+                        </div>
+                    </td>
+                    <td class="product-subtotal" data-title="Total">
+                        $80.00 
+                    </td>
+                    <td class="product-remove">
+                        <a href="#" class="remove" title="Remove this item" data-product_id="159" data-product_sku="">×</a> 
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="actions">
+                        <div class="coupon">
+                            <label for="coupon_code">Coupon:</label> 
+                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code">
+                                <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
+                        </div>
+                        <input type="submit" class="button" name="update_cart" value="Update Cart">
+                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="ca0a7cd07a">
+                        <input type="hidden" name="_wp_http_referer" value="/cart/"> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+            <div class="cart-collaterals">
+                <div class="cart_totals ">
+                    <h2>Cart totals</h2>
+                    <table cellspacing="0" class="shop_table shop_table_responsive">
+                        <tbody>
+                            <tr class="cart-subtotal">
+                                <th>10% Tax</th>
+                                <td data-title="tax"><span class="Price-tax tax"><span class="Price-currencySymbol">$</span>80.00</span></td>
+                            </tr>
+                            <tr class="cart-subtotal">
+                                <th>Subtotal</th>
+                                <td data-title="Subtotal"><span class="Price-amount amount"><span class="Price-currencySymbol">$</span>80.00</span></td>
+                            </tr>
+
+                            <tr class="order-total">
+                                <th>Total</th>
+                                <td data-title="Total"><strong><span class="Price-amount amount"><span class="Price-currencySymbol">$</span>80.00</span></strong> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="wc-proceed-to-checkout">
+                    <a href="#" class="checkout-button button alt wc-forward">
+                    Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<?php 
 
         
     }

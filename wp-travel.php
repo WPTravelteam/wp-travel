@@ -308,6 +308,32 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 				}
 			}
+			
+			/**
+			 * Insert cart and checkout pages
+			 * @since 1.2.3
+			 */
+
+			include_once sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
+
+				$pages = apply_filters(
+					'wp_travel_create_pages', array(
+						'wp-travel-cart'      => array(
+							'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
+							'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),
+							'content' => '[' . apply_filters( 'wp_travel_cart_shortcode_tag', 'wp_travel_cart' ) . ']',
+						),
+						'wp-travel-checkout'  => array(
+							'name'    => _x( 'wp-travel-checkout', 'Page slug', 'wp-travel' ),
+							'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
+							'content' => '[' . apply_filters( 'wp_travel_checkout_shortcode_tag', 'wp_travel_checkout' ) . ']',
+						),
+					)
+				);
+
+				foreach ( $pages as $key => $page ) {
+					wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wp_travel_get_page_id( $page['parent'] ) : '' );
+				}
 
 			if ( version_compare( $this->version, '1.0.4', '>' ) ) {
 				include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
