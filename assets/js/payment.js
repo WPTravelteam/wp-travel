@@ -158,7 +158,7 @@ function get_payable_price(payment_mode, no_of_pax) {
         trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
     }
     var amount = new Array();
-    amount['payment_amount'] = payment_amount;
-    amount['trip_price'] = trip_price;
+    amount['payment_amount'] = payment_amount.toFixed(2);
+    amount['trip_price'] = trip_price.toFixed(2);
     return amount;
 }

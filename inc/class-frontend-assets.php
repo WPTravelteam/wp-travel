@@ -22,6 +22,10 @@ class WP_Travel_Frontend_Assets {
 		$settings = wp_travel_get_settings();
 
 		global $post;
+		$trip_id = $post->ID;
+		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) && isset( $_GET['trip-id'] ) ) {
+			$trip_id = $_GET['trip-id'];
+		}
 
 		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), '2.2.3' );
 
@@ -42,9 +46,9 @@ class WP_Travel_Frontend_Assets {
 		
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
-		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
-			return;
-		}
+		// if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
+		// 	return;
+		// }
 		$map_data = get_wp_travel_map_data();
 
 		$api_key = '';
@@ -87,7 +91,7 @@ class WP_Travel_Frontend_Assets {
 
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 
-		$trip_price_tax = wp_travel_process_trip_price_tax( $post->ID );
+		$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
 		if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
 
 			$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
@@ -96,7 +100,7 @@ class WP_Travel_Frontend_Assets {
 			$trip_price = $payment_amount = $trip_price_tax['trip_price'];
 		}
 
-		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
+		$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
 		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
 			$payment_amount = $minimum_partial_payout;
 		}
@@ -105,7 +109,7 @@ class WP_Travel_Frontend_Assets {
 			'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
 			'currency_code' => $currency_code,
 			'currency_symbol' => wp_travel_get_currency_symbol(),
-			'price_per'		=> wp_travel_get_price_per_text( $post->ID ),
+			'price_per'		=> wp_travel_get_price_per_text( $trip_id ),
 			'trip_price'	=> $trip_price,
 			'payment_amount' => $payment_amount,
 		);
