@@ -34,20 +34,28 @@ class WP_Travel_Cart {
 		if ( '' == $trip_id ) {
 			return;
 		}
-		$settings = wp_travel_get_settings();
-		$trip_tax_details = wp_travel_process_trip_price_tax($post_id);
+		$settings = wp_travel_get_settings();		
+		$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
+		if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
 
-		$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
-		if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+			$trip_price = $trip_tax_details['actual_trip_price'];
+		} else {
+			$trip_price = $trip_tax_details['trip_price'];
+		}
+		$checkout_page_id = '';
+		$checkout_page_url = get_home_url();
 
-			$trip_price = $trip_price_tax['actual_trip_price'];
-		}
-		else {
-			$trip_price = $trip_price_tax['trip_price'];
-		}
-		?>		
-        <div class="wp-travel-ecommerse">
-        <form action="#" method="post">
+		if ( isset( $settings['checkout_page_id'] ) ) {
+			$checkout_page_id = $settings['checkout_page_id'];
+			$checkout_page_url = get_permalink( $checkout_page_id );
+			// $checkout_page_url = add_query_arg( array(
+			// 	'trip-id' => $trip_id,
+			// 	$pax
+			// ), $checkout_page_url );
+		} ?>
+        <div class="wp-travel-ecommerse wp-travel-cart-items">
+        <form action="<?php echo esc_url( $checkout_page_url ) ?>" method="post">
+		<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" ?>
         <table class="shop_table shop_table_responsive cart" cellspacing="0">
         <thead>
             <tr>
@@ -72,7 +80,7 @@ class WP_Travel_Cart {
                     </td>
                     <td class="product-price" data-title="Price">
                         <span class="woocommerce-Price-amount amount">
-                            <span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo $trip_price; ?> 
+                            <span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-price" payment_price="<?php echo $trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price; ?>" ><?php echo $trip_price ?></span>
                         </span> 
                     </td>
                     <td class="product-quantity" data-title="Number ticket">
@@ -81,48 +89,97 @@ class WP_Travel_Cart {
                         </div>
                     </td>
                     <td class="product-subtotal" data-title="Total">
-						<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-product-subtotal">0</div>
+						<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total">0</span>
                     </td>
                 </tr>
             </tbody>
         </table>
-        </form>
+        
             <div class="cart-collaterals">
                 <div class="cart_totals ">
-                    <h2>Cart totals</h2>
+                    <h2><?php esc_html_e( 'Cart totals', 'wp-travel' ); ?></h2>
                     <table cellspacing="0" class="shop_table shop_table_responsive">
                         <tbody>
-							<?php if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage']  ) { ?>
+							<?php if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage'] && 'inclusive' !== $trip_tax_details['tax_type'] ) { ?>
                             <tr class="cart-subtotal">
-                                <th>Subtotal</th>
-                                <td data-title="Subtotal"><span class="Price-amount amount"><span class="Price-currencySymbol">$</span>80.00</span></td>
+                                <th><?php esc_html_e( 'Subtotal', 'wp-travel' )?></th>
+                                <td data-title="Subtotal"><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-sub-total">0</span></td>
                             </tr>
 
                             <tr class="cart-subtotal">
-                                <th>10% Tax</th>
-                                <td data-title="tax"><span class="Price-tax tax"><span class="Price-currencySymbol">$</span>80.00</span></td>
+                                <th>
+									<?php
+									if ( isset( $trip_tax_details['tax_percentage'] ) ) {
+										echo esc_html( $trip_tax_details['tax_percentage'] );
+										esc_html_e( '% Tax ', 'wp-travel' );
+									} ?>
+                                </th>
+                                <td data-title="tax"><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-tax">0</span></td>
                             </tr>
 							<?php } ?>
 
                             <tr class="order-total">
-                                <th>Total</th>
-                                <td data-title="Total"><strong><span class="Price-amount amount"><span class="Price-currencySymbol">$</span>80.00</span></strong> </td>
+                                <th><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
+                                <td data-title="Total"><strong><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-total">0</span></strong> </td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="wc-proceed-to-checkout">
-                    <a href="#" class="checkout-button button alt wc-forward">
-                    Proceed to checkout</a>
+					
+                    <input type="submit" class="button alt" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
+                    </button>
                     </div>
                 </div>
             </div>
+		</form>
         </div>
 		<script>
 			function calculate_price() {
-				var no_of_pax = jQuery( '.wp-travel-pax' ).val();
-				var price = get_payable_price( 'full', no_of_pax );
-				
-				jQuery('.wp-travel-product-subtotal').html( price.trip_price );
+                var sub_total_including_tax = 0;
+                var sub_total = 0;
+                var price_per = wt_payment.price_per;
+
+                jQuery( '.wp-travel-cart-items tbody tr.cart_item' ).each( function(){
+                    no_of_pax = jQuery(this).find( '.wp-travel-pax' ).val();
+
+                    var payment_price = jQuery(this).find('.wp-travel-trip-price').attr('payment_price'); // price including tax
+                    var trip_price = jQuery(this).find('.wp-travel-trip-price').attr('trip_price'); // price excluding tax
+                                        
+                    if (price_per.toLowerCase().slice(0, 6) === 'person') {                        
+                        payment_price = parseFloat(payment_price) * parseFloat(no_of_pax);
+                        trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
+                        trip_price = trip_price.toFixed(2);
+                    }
+                    // Individual Price total.
+                    jQuery(this).find('.wp-travel-trip-total').html( trip_price );
+                    
+                    sub_total += parseFloat( trip_price );
+                    total += sub_total;
+
+                    var tax_fields = jQuery('.wp-travel-sub-total').length;
+                    if ( tax_fields > 0 ) {
+                        sub_total_including_tax += parseFloat( payment_price );                        
+                    }
+                   
+                } );
+                
+                // Sub Total
+                if (sub_total.toFixed)
+                    sub_total = parseFloat( sub_total ).toFixed(2);
+
+                var total = sub_total;
+                    
+                if ( sub_total_including_tax.toFixed ) {
+                    sub_total_including_tax = parseFloat( sub_total_including_tax ).toFixed(2);
+                    if ( sub_total_including_tax > total ) {
+                        tax = parseFloat( sub_total_including_tax - total ).toFixed(2);
+                        total = sub_total_including_tax;
+                        jQuery('.wp-travel-tax').html( tax );
+                    }
+                }          
+                
+                jQuery('.wp-travel-sub-total').html( sub_total );                    
+                jQuery('.wp-travel-total').html( total );
 			}	
 
 			jQuery(document).ready( function($){
@@ -130,7 +187,6 @@ class WP_Travel_Cart {
 				$(document).on( 'change', '.wp-travel-pax', function() {
 					calculate_price();
 				} );
-
 			});
 		</script>
 	<?php

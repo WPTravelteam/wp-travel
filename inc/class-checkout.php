@@ -4,10 +4,12 @@
  *
  * @package WP Travel
  */
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 /**
  * WP Travel Checkout Shortcode Class.
  */
@@ -17,21 +19,33 @@ class WP_Travel_Checkout {
 	 * Constructor.
 	 */
 	function __construct() {
-    
-    }
+	}
 
-    /**
-     * Output of checkout shotcode.
-     * @since 2.2.3
-     */
-    public static function output(){
+	/**
+	 * Output of checkout shotcode.
+	 *
+	 * @since 2.2.3
+	 */
+	public static function output() {
+		if ( ! isset( $_POST['trip_id'] ) ) {
+			esc_html_e( 'Your Cart is empty', 'wp-travel' );
+			return;
+		}
 
-        //echo 'Checkout Page Details';
-        ?>
+		$settings = wp_travel_get_settings();		
+		$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
+		if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
+
+			$trip_price = $trip_tax_details['actual_trip_price'];
+		} else {
+			$trip_price = $trip_tax_details['trip_price'];
+		}
+		
+		?>
 
 <div class="wp-travel-billing">
 
-    <ul class="wp-travel-billing-error">
+    <!-- <ul class="wp-travel-billing-error">
     <li><strong>Billing First name</strong> is a required field.</li>
     <li><strong>Billing Last name</strong> is a required field.</li>
     <li><strong>Billing Street address</strong> is a required field.</li>
@@ -39,16 +53,16 @@ class WP_Travel_Checkout {
     <li><strong>Billing State / Zone</strong> is a required field.</li>
     <li><strong>Billing Phone</strong> is a required field.</li>
     <li><strong>Billing Email address</strong> is a required field.</li>
-    </ul>
+    </ul> -->
 
-   <div class="wp-travel-info-coupon-message">
+   <!-- <div class="wp-travel-info-coupon-message">
       <div class="wp-travel-info">Have a coupon? <a href="#" class="showcoupon">Click here to enter your code</a></div>
       <form class="checkout_coupon" method="post" style="display:none">
          <input type="text" name="coupon_code" class="input-text" placeholder="Coupon code" id="coupon_code" value="">
          <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
          <div class="clear"></div>
       </form>
-   </div>
+   </div> -->
    <form name="checkout" method="post" class="checkout wp-travel-checkout" action="http://travelwp.physcode.com/checkout/" enctype="multipart/form-data">
       <div class="row">
          <div class="col-md-7 columns">
