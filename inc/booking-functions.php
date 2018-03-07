@@ -27,7 +27,7 @@ function wp_travel_booking_form_fields() {
 	}
 
 	$pax_size = 1;
-	if ( isset( $_REQUEST['pax'] ) && ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ){
+	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ){
 		$pax_size = $_REQUEST['pax'];
 	}
 
