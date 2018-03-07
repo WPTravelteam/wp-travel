@@ -664,77 +664,7 @@ function wp_travel_frontend_contents( $post_id ) {
 											?>
 											</div>
 										</li>
-										<!--<li class="availabily-content clearfix">
-											<div class="date-from">
-												<span class="availabily-heading-label">start:</span>
-												Saturday
-												<span>March 26, 2016</span>
-											</div>
-											<div class="date-to">
-												<span class="availabily-heading-label">end:</span>
-												Tuesday
-												<span>March 29, 2016</span>
-											</div>
-											<div class="status">
-												<span class="availabily-heading-label">status:</span>
-												seats left
-												<span>20</span>
-											</div>
-											<div class="price">
-												<span class="availabily-heading-label">price:</span>
-												<span>$1400</span>
-											</div>
-											<div class="action">
-												<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-											</div>
-										</li>
-										<li class="availabily-content sold-out clearfix">
-											<div class="date-from">
-												<span class="availabily-heading-label">start:</span>
-												Sunday
-												<span>April 10, 2016</span>
-											</div>
-											<div class="date-to">
-												<span class="availabily-heading-label">end:</span>
-												Wednesday
-												<span>April 13, 2016</span>
-											</div>
-											<div class="status">
-												<span class="availabily-heading-label">status:</span>
-												<span class="text-success">sold-out</span>
-											</div>
-											<div class="price">
-												<span class="availabily-heading-label">price:</span>
-												<span>$1300</span>
-											</div>
-											<div class="action">
-												<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-											</div>
-										</li>
-										<li class="availabily-content clearfix">
-											<div class="date-from">
-												<span class="availabily-heading-label">start:</span>
-												Friday
-												<span>April 18, 2016</span>
-											</div>
-											<div class="date-to">
-												<span class="availabily-heading-label">end:</span>
-												Monday
-												<span>April 21, 2016</span>
-											</div>
-											<div class="status">
-												<span class="availabily-heading-label">status:</span>
-												seats left
-												<span>4</span>
-											</div>
-											<div class="price">
-												<span class="availabily-heading-label">price:</span>
-												<span>$1458</span>
-											</div>
-											<div class="action">
-												<a href="#" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-											</div>
-										</li> -->
+										
 									</ul>
 								</div>
 							</div>

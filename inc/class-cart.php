@@ -48,13 +48,9 @@ class WP_Travel_Cart {
 		if ( isset( $settings['checkout_page_id'] ) ) {
 			$checkout_page_id = $settings['checkout_page_id'];
 			$checkout_page_url = get_permalink( $checkout_page_id );
-			// $checkout_page_url = add_query_arg( array(
-			// 	'trip-id' => $trip_id,
-			// 	$pax
-			// ), $checkout_page_url );
 		} ?>
         <div class="wp-travel-ecommerse wp-travel-cart-items">
-        <form action="<?php echo esc_url( $checkout_page_url ) ?>" method="post">
+        <form action="<?php echo esc_url( $checkout_page_url ) ?>" method="get">
 		<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" ?>
         <table class="shop_table shop_table_responsive cart" cellspacing="0">
         <thead>
@@ -80,7 +76,7 @@ class WP_Travel_Cart {
                     </td>
                     <td class="product-price" data-title="Price">
                         <span class="woocommerce-Price-amount amount">
-                            <span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-price" payment_price="<?php echo $trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price; ?>" ><?php echo $trip_price ?></span>
+                            <span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-price" payment_price="<?php echo @$trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price; ?>" ><?php echo $trip_price ?></span>
                         </span> 
                     </td>
                     <td class="product-quantity" data-title="Number ticket">

@@ -14,15 +14,21 @@ function wp_travel_booking_form_fields() {
 	global $post;
 
 	$post_id = 0;
-	if ( isset( $post->ID ) ) {
-		$post_id = $post->ID;
-	}
-	if ( isset( $_POST['wp_travel_post_id'] ) ) {
+	if ( isset( $_REQUEST['trip_id'] ) ) {
+		$post_id = $_REQUEST['trip_id'];
+	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
 		$post_id = $_POST['wp_travel_post_id'];
-	}
+	} elseif ( isset( $post->ID ) ) {
+		$post_id = $post->ID;
+	} 
 
 	if ( $post_id > 0 ) {
 		$max_pax = get_post_meta( $post_id, 'wp_travel_group_size', true );
+	}
+
+	$pax_size = 1;
+	if ( isset( $_REQUEST['pax'] ) && ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ){
+		$pax_size = $_REQUEST['pax'];
 	}
 
 	$booking_fileds = array(
@@ -140,7 +146,7 @@ function wp_travel_booking_form_fields() {
 			'label' => __( 'Pax', 'wp-travel' ),
 			'name' => 'wp_travel_pax',
 			'id' => 'wp-travel-pax',
-			'default' => 1,
+			'default' => $pax_size,
 			'validations' => array(
 				'required' => '',
 				'min' => 1,
@@ -383,6 +389,15 @@ function wp_travel_booking_form_fields() {
  */
 function wp_travel_get_booking_form() {
 	global $post;
+
+	$post_id = 0;
+	if ( isset( $_REQUEST['trip_id'] ) ) {
+		$post_id = $_REQUEST['trip_id'];
+	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
+		$post_id = $_POST['wp_travel_post_id'];
+	} elseif ( isset( $post->ID ) ) {
+		$post_id = $post->ID;
+	} 
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
 		'id' => 'wp-travel-booking',
@@ -399,15 +414,15 @@ function wp_travel_get_booking_form() {
 	);
 
 	$fields = wp_travel_booking_form_fields();
-
+	
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
 		'type' => 'hidden',
 		'name' => 'wp_travel_post_id',
 		'id' => 'wp-travel-post-id',
-		'default' => $post->ID,
+		'default' => $post_id,
 	);
-	$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
@@ -417,7 +432,7 @@ function wp_travel_get_booking_form() {
 		unset( $fields['trip_duration'] );
 	}
 
-	$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
 	if ( '' == $trip_price || '0' == $trip_price ) {
 
