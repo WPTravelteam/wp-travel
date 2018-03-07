@@ -111,18 +111,7 @@ class WP_Travel_Checkout {
                     </div>
                     </div>
                 </div>
-            </div>
-            <!-- <ul class="wp-travel-billing-error">
-            <li><strong>Billing First name</strong> is a required field.</li>
-            <li><strong>Billing Last name</strong> is a required field.</li>
-            <li><strong>Billing Street address</strong> is a required field.</li>
-            <li><strong>Billing Town / City</strong> is a required field.</li>
-            <li><strong>Billing State / Zone</strong> is a required field.</li>
-            <li><strong>Billing Phone</strong> is a required field.</li>
-            <li><strong>Billing Email address</strong> is a required field.</li>
-            </ul> -->
-
-        
+            </div>        
         </div>
 		<style>
 		.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form{width:100%; padding-left:0; padding-right:0}
