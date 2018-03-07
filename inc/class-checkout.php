@@ -52,17 +52,17 @@ class WP_Travel_Checkout {
         <div class="wp-travel-billing">            
             <div class="wp-travel-tab-wrapper">
                 <div class="col-md-7 columns" >
+					<h3><?php esc_html_e( 'Billing info' ) ?></h3>
                     <?php wp_travel_get_booking_form() ?>
                 </div>
                 <?php
-                    $trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
-                    if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
+				$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
+				if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
 
-                        $trip_price = $trip_tax_details['actual_trip_price'];
-                    } else {
-                        $trip_price = $trip_tax_details['trip_price'];
-                    }
-                ?>
+					$trip_price = $trip_tax_details['actual_trip_price'];
+				} else {
+					$trip_price = $trip_tax_details['trip_price'];
+				} ?>
                 <div class="col-md-5 columns">
                     <div class="order-wrapper">
                     <h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'wp-travel' ) ?></h3>
@@ -125,7 +125,7 @@ class WP_Travel_Checkout {
         
         </div>
 		<style>
-		.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form{width:100%}
+		.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form{width:100%; padding-left:0; padding-right:0}
 		</style>
     <?php
 	}
