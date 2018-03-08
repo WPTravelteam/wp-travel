@@ -534,10 +534,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text = wp_travel_get_price_per_text( $post_id );
-	$sale_price 	= wp_travel_get_trip_sale_price( $post_id );
-	
-
-	?>
+	$sale_price 	= wp_travel_get_trip_sale_price( $post_id ); ?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 		<ul class="wp-travel tab-list resp-tabs-list ">
@@ -1615,6 +1612,23 @@ function wp_travel_posts_filter( $query ) {
 			}
 		}
 	}
+}
+
+function wp_travel_tab_show_in_menu( $tab_name ) {
+	if ( ! $tab_name ) {
+		return false;
+	}
+
+	$tabs = wp_travel_get_frontend_tabs();
+
+	if ( ! isset( $tabs[ $tab_name ]['show_in_menu'] ) ) {
+		return false;
+	}
+
+	if ( 'yes' === $tabs[ $tab_name ]['show_in_menu'] ) {
+		return true;
+	}
+	return false;
 }
 
 function wp_travel_get_archive_view_mode() {
