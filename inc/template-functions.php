@@ -230,6 +230,9 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	if ( $hide_rating ) {
 		return;
 	}
+	if ( ! wp_travel_tab_show_in_menu( 'reviews' ) ) {
+		return;
+	}
 	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		<a>
