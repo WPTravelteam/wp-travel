@@ -89,6 +89,10 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 		wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 
+		// Return if payment is not enabled.
+		if ( ! wp_travel_is_payment_enabled() ) {
+			return;
+		}
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 
 		$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
