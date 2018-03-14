@@ -29,7 +29,7 @@ class WP_Travel_Cart {
 	 */
 	public static function output() {
 
-		$trip_id = ( isset( $_GET['trip-id'] ) && '' !== $_GET['trip-id'] ) ? $_GET['trip-id'] : '';
+		$trip_id = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? $_GET['trip_id'] : '';
 
 		if ( '' == $trip_id ) {
 			return;

@@ -660,7 +660,7 @@ function wp_travel_frontend_contents( $post_id ) {
 												<?php 
 													$button = '<a href="%s" class="btn btn-primary btn-sm btn-inverse">%s</a>';
 													
-													printf( $button, esc_url( add_query_arg( 'trip-id', get_the_ID(), wp_travel_get_cart_url() ) ), esc_html__( 'Book now', 'wp-travel' ) );
+													printf( $button, esc_url( add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() ) ), esc_html__( 'Book now', 'wp-travel' ) );
 												?>
 												</div>
 											</li>

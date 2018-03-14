@@ -400,6 +400,60 @@ function wp_travel_payment_booking_message( $message ) {
 	return $message;
 }
 
+// Calculate Total Cart amount.
+function wp_travel_get_total_amount() {
+	$response = array( 'status' => 'fail', 'message' => __( 'Invalid' ),  'total_amount' => 0, 'payment_amount' => 0 );
+	if ( ! isset( $_GET['wt_query_amount'] ) ) {
+		return;
+	}
+	// if ( ! wp_travel_is_checkout_page() ) {
+	// 	$response['message'] = __( 'Invalid Page' );
+	// 	// return;
+	// }
+	$settings = wp_travel_get_settings();
+
+	$pax 		= isset( $_GET['pax'] ) && $_GET['pax'] > 0 ? $_GET['pax'] : 1;
+	$trip_id	= isset( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+	$price_per 	= wp_travel_get_price_per_text( $trip_id );
+
+	if ( $trip_id < 1 ) {
+		$response['message'] = __( 'Trip not selected' );
+	}
+
+	if ( ! wp_travel_is_itinerary( $trip_id ) ) {
+		$response['message'] = __( 'Invalid post type' );
+	}
+
+	$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
+	if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+		$response['total_amount'] = $payment_amount = $trip_price_tax['actual_trip_price'];
+	}
+	else {
+		$response['total_amount'] = $payment_amount = $trip_price_tax['trip_price'];
+	}
+
+	$response['payment_amount'] = $response['total_amount'];
+
+	$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
+	if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
+		$response['payment_amount'] = $minimum_partial_payout;
+	}
+
+	// Success.
+	if ( $response['payment_amount'] > 0 && $response['total_amount'] > 0 ) {
+		$response['status'] = 'success';
+		$response['message'] = __( 'Success' );
+
+		if ( strtolower( $price_per ) === 'person' ) {
+			$response['total_amount'] *= $pax;
+			$response['payment_amount'] *= $pax;
+		}
+	}
+
+	echo wp_json_encode( $response );
+	die;
+}
+add_action( 'wp', 'wp_travel_get_total_amount' );
 add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status_admin' );
 add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process_frontend' );
 add_action( 'wp_travel_after_successful_payment', 'wp_travel_send_email_payment' );

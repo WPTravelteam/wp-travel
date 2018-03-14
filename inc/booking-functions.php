@@ -170,7 +170,18 @@ function wp_travel_booking_form_fields() {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
 		$booking_fileds['pax']['attributes']['max'] = $max_pax;
 	}
+	if ( wp_travel_is_checkout_page() ) {		
+		$booking_arrival_date 	= get_post_meta( $post_id, 'wp_travel_start_date', true );
+		$booking_departure_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
+		
+		$booking_fileds['pax']['type'] = 'hidden';
 
+		$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+		$booking_fileds['arrival_date']['type'] = 'hidden';
+		
+		$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
+		$booking_fileds['departure_date']['type'] = 'hidden';
+	}
 	// Standard paypal Merge.
 
 	if ( wp_travel_is_payment_enabled() ) {

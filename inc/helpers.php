@@ -1526,3 +1526,58 @@ function wp_travel_get_page_permalink( $page ) {
 function wp_travel_get_cart_url() {
 	return apply_filters( 'wp_travel_get_cart_url', wp_travel_get_page_permalink( 'wp-travel-cart' ) );
 }
+
+/**
+ * Check whether page is checkout page or not.
+ *
+ * @return Boolean
+ */
+function wp_travel_is_checkout_page() {
+	
+	if ( is_admin() ) {
+		return false;
+	}
+	global $post;
+	$page_id = get_the_ID();
+	$settings = wp_travel_get_settings();
+	if ( isset( $settings['checkout_page_id'] ) && (int) $settings['checkout_page_id'] === $page_id ) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Check whether page is cart page or not.
+ *
+ * @return Boolean
+ */
+function wp_travel_is_cart_page() {
+	if ( is_admin() ) {
+		return false;
+	}
+	$page_id = get_the_ID();
+	$settings = wp_travel_get_settings();
+	if ( isset( $settings['cart_page_id'] ) && (int) $settings['cart_page_id'] === $page_id ) {
+		return true;
+	}
+	return false;
+}
+
+function wp_travel_is_itinerary( $post_id ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	if ( ! $post_id ) {
+		return;
+	}
+
+	$post_type = get_post_type( $post_id );
+
+	// If this isn't a 'itineraries' post, don't update it.
+	if ( WP_TRAVEL_POST_TYPE === $post_type ) {
+		return true;
+	}
+	return false;
+}
