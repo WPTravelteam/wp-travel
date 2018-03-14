@@ -853,6 +853,7 @@ function wp_travel_book_now() {
 	}
 
 	$trip_code = wp_travel_get_trip_code( $_POST['wp_travel_post_id'] );
+	$thankyou_page_url = get_permalink( $_POST['wp_travel_post_id'] );
 	$title = 'Booking - ' . $trip_code;
 
 	$post_array = array(
@@ -986,7 +987,7 @@ function wp_travel_book_now() {
 			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			// ) );
 
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
@@ -1002,7 +1003,7 @@ function wp_travel_book_now() {
 			// 	'result'  => 0,
 			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			// ) );
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
@@ -1013,7 +1014,7 @@ function wp_travel_book_now() {
 	 * @since 1.0.5 // For Payment.
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
-	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
 	exit;

@@ -414,6 +414,10 @@ function wp_travel_get_total_amount() {
 
 	$pax 		= isset( $_GET['pax'] ) && $_GET['pax'] > 0 ? $_GET['pax'] : 1;
 	$trip_id	= isset( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) {
+		$trip_id = get_the_ID();
+	}
+
 	$price_per 	= wp_travel_get_price_per_text( $trip_id );
 
 	if ( $trip_id < 1 ) {
@@ -434,9 +438,8 @@ function wp_travel_get_total_amount() {
 
 	$response['payment_amount'] = $response['total_amount'];
 
-	$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
 	if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-		$response['payment_amount'] = $minimum_partial_payout;
+		$response['payment_amount'] = wp_travel_minimum_partial_payout( $trip_id );
 	}
 
 	// Success.
