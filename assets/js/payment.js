@@ -176,10 +176,15 @@ function get_payable_price(payment_mode, no_of_pax) {
 
     if (price_per.toLowerCase().slice(0, 6) === 'person') {
         payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
+        if (payment_amount.toFixed)
+            payment_amount = payment_amount.toFixed(2);
         trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
+        if (trip_price.toFixed) {
+            trip_price = trip_price.toFixed(2);
+        }
     }
     var amount = new Array();
-    amount['payment_amount'] = payment_amount.toFixed(2);
-    amount['trip_price'] = trip_price.toFixed(2);
+    amount['payment_amount'] = payment_amount;
+    amount['trip_price'] = trip_price;
     return amount;
 }
