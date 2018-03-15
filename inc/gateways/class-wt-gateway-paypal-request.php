@@ -98,23 +98,6 @@ class WP_Travel_Gateway_Paypal_Request {
 		$current_url = get_permalink( $itinery_id );
 		$current_url = apply_filters( 'wp_travel_thankyou_page_url', $current_url );	
 
-		$args['cmd']			= '_cart';
-		$args['upload']			= '1';
-		$args['currency_code']	= sanitize_text_field( $settings['currency'] );
-		$args['business']		= sanitize_email( $paypal_email );
-		$args['bn']				= '';
-		$args['rm']				= '2';
-		$args['tax_cart']		= 0;
-		$args['charset']		= get_bloginfo( 'charset' );
-		$args['cbt']  			= get_bloginfo( 'name' );
-		$args['return'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'success' ), $current_url );
-		$args['cancel'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'cancel' ), $current_url );
-		$args['custom'] 		= $booking_id;
-		$args['handling']		= 0;
-		$args['handling_cart']	= 0;
-		$args['no_shipping']	= 0;
-		$args['notify_url']		= esc_url( add_query_arg( 'wp_travel_listener', 'IPN', home_url( 'index.php' ) ) );
-
 		$price_per_text = wp_travel_get_price_per_text( $itinery_id );
 
 		$item_name      = html_entity_decode( get_the_title( $itinery_id ) );
@@ -134,6 +117,32 @@ class WP_Travel_Gateway_Paypal_Request {
 			$item_amount *= $_POST['wp_travel_pax'];
 		}
 
+		$tax = 0;
+		if ( wp_travel_is_trip_price_tax_enabled() && isset( $settings['trip_tax_price_inclusive'] ) && 'no' === $settings['trip_tax_price_inclusive'] ) {
+			$taxable_price = $item_qty * $item_amount;
+			$tax_rate = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : 0;
+			$tax = ( $taxable_price * $tax_rate ) / 100;
+			$tax = number_format( $tax, 2, '.', '' );			
+		}
+
+		$args['cmd']			= '_cart';
+		$args['upload']			= '1';
+		$args['currency_code']	= sanitize_text_field( $settings['currency'] );
+		$args['business']		= sanitize_email( $paypal_email );
+		$args['bn']				= '';
+		$args['rm']				= '2';
+		$args['tax_cart']		= $tax;
+		$args['charset']		= get_bloginfo( 'charset' );
+		$args['cbt']  			= get_bloginfo( 'name' );
+		$args['return'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'success' ), $current_url );
+		$args['cancel'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'cancel' ), $current_url );
+		$args['custom'] 		= $booking_id;
+		$args['handling']		= 0;
+		$args['handling_cart']	= 0;
+		$args['no_shipping']	= 0;
+		$args['notify_url']		= esc_url( add_query_arg( 'wp_travel_listener', 'IPN', home_url( 'index.php' ) ) );
+
+		
 		// Cart Item.
 		$args['item_name_1']   = $item_name;
 		$args['quantity_1']   = $item_qty;
