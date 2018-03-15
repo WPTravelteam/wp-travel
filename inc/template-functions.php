@@ -478,6 +478,7 @@ function wp_travel_single_location( $post_id ) {
 				<span class="value"><?php $i = 0; ?><?php foreach ( $terms as $term ) : ?><?php if ( $i > 0 ) : ?>, <?php endif; ?><span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ) ?>"><?php echo esc_html( $term->name ); ?></a></span><?php $i++; endforeach; ?></span>
 			</div>
 		</li>
+	<?php endif; ?>
 		<li>
 			<?php if ( 'yes' === $fixed_departure ) : ?>
 				<div class="travel-info">
@@ -498,14 +499,14 @@ function wp_travel_single_location( $post_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( '%s Day(s) %s Night(s)', $trip_duration, $trip_duration_night ); ?>
+						<?php printf( __( '%s Day(s) %s Night(s)', 'wp-travel' ), $trip_duration, $trip_duration_night ); ?>
 					</span>
 				</div>
 
 			<?php endif; ?>
 		</li>
 	<?php
-	endif;
+	
 }
 
 /**
