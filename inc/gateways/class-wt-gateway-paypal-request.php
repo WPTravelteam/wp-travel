@@ -118,7 +118,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		}
 
 		$tax = 0;
-		if ( wp_travel_is_trip_price_tax_enabled() && isset( $settings['trip_tax_price_inclusive'] ) && 'no' === $settings['trip_tax_price_inclusive'] ) {
+		if ( 'partial' !== $payment_mode && wp_travel_is_trip_price_tax_enabled() && isset( $settings['trip_tax_price_inclusive'] ) && 'no' === $settings['trip_tax_price_inclusive'] ) {
 			$taxable_price = $item_qty * $item_amount;
 			$tax_rate = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : 0;
 			$tax = ( $taxable_price * $tax_rate ) / 100;
