@@ -2007,6 +2007,8 @@ ul.availabily-list {
       text-align: center;
       font-size: 12px;
       font-weight: 900; }
+.wp-travel-billing .wp-travel-checkout-review-order-table tr td:last-of-type {
+  text-align: right; }
 
 /* enquiry form single trips */
 #wp-travel-enquiries {

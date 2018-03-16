@@ -2729,6 +2729,13 @@ ul.availabily-list{
             }
         }
     }
+    .wp-travel-checkout-review-order-table{
+        tr{
+            td:last-of-type {
+                text-align: right;
+            }
+        } 
+    } 
 }
 
 
