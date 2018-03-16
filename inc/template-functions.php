@@ -525,13 +525,18 @@ function wp_travel_frontend_contents( $post_id ) {
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 
 	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-
+	
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$trip_end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
 	$trip_price 	= wp_travel_get_trip_price( $post_id );
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+
+	$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
+	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+	$trip_duration_night = get_post_meta( $post_id, 'trip_duration_night', true );
+	$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
 	$settings = wp_travel_get_settings();
 	$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
@@ -593,17 +598,27 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'booking' : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-							<?php if ( 'yes' == $fixed_departure && wp_travel_is_payment_enabled() ) : ?>
+
+							<?php 
+							$enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
+							if ( $enable_checkout ) : ?>
 								<div id="wp-travel-date-price" class="detail-content">
 									<div class="availabily-wrapper">
 										<ul class="availabily-list">
 											<li class="availabily-heading clearfix">
-												<div class="date-from">
-													<?php echo esc_html( 'Start', 'wp-travel' ); ?>
-												</div>
-												<div class="date-to">
-													<?php echo esc_html( 'End', 'wp-travel' ); ?>
-												</div>
+												<?php if ( 'yes' == $fixed_departure ) : ?>
+													<div class="date-from">
+														<?php echo esc_html( 'Start', 'wp-travel' ); ?>
+													</div>
+													<div class="date-to">
+														<?php echo esc_html( 'End', 'wp-travel' ); ?>
+													</div>
+												<?php else :?>
+													<div class="date-from">
+														<?php echo esc_html( 'Trip Duration', 'wp-travel' ); ?>
+													</div>
+												<?php endif; ?>
+
 												<div class="status">
 													<?php echo esc_html( 'Group Size', 'wp-travel' ); ?>
 												</div>
@@ -615,20 +630,28 @@ function wp_travel_frontend_contents( $post_id ) {
 												</div>
 											</li>
 											<li class="availabily-content clearfix">
-												<div class="date-from">
-													<span class="availabily-heading-label"><?php echo esc_html( 'start:', 'wp-travel' ); ?></span>
-													<?php echo esc_html( date( 'l', strtotime( $trip_start_date ) ) );  ?>
-													<?php $date_format = get_option( 'date_format' ); ?>
-													<?php if ( ! $date_format ) : ?>
-														<?php $date_format = 'jS M, Y'; ?>
-													<?php endif; ?>
-													<span><?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
-												</div>
-												<div class="date-to">
-													<span class="availabily-heading-label"><?php echo esc_html( 'end:', 'wp-travel' ); ?></span>
-													<?php echo esc_html( date( 'l', strtotime( $trip_end_date ) ) );  ?>
-													<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
-												</div>
+												<?php if ( 'yes' == $fixed_departure ) : ?>
+													<div class="date-from">
+														<span class="availabily-heading-label"><?php echo esc_html( 'start:', 'wp-travel' ); ?></span>
+														<?php echo esc_html( date( 'l', strtotime( $trip_start_date ) ) );  ?>
+														<?php $date_format = get_option( 'date_format' ); ?>
+														<?php if ( ! $date_format ) : ?>
+															<?php $date_format = 'jS M, Y'; ?>
+														<?php endif; ?>
+														<span><?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
+													</div>
+													<div class="date-to">
+														<span class="availabily-heading-label"><?php echo esc_html( 'end:', 'wp-travel' ); ?></span>
+														<?php echo esc_html( date( 'l', strtotime( $trip_end_date ) ) );  ?>
+														<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
+													</div>
+												<?php else : ?>
+													<div class="date-from">																										
+														<span><?php echo esc_html( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
+
+														<span><?php echo esc_html( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
+													</div>
+												<?php endif; ?>
 												<div class="status">
 													<span class="availabily-heading-label"><?php echo esc_html( 'Group Size:', 'wp-travel' ); ?></span>
 													<span><?php echo esc_html( wp_travel_get_group_size() ); ?></span>
@@ -660,8 +683,11 @@ function wp_travel_frontend_contents( $post_id ) {
 												<div class="action">	
 												<?php 
 													$button = '<a href="%s" class="btn btn-primary btn-sm btn-inverse">%s</a>';
-													
-													printf( $button, esc_url( add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() ) ), esc_html__( 'Book now', 'wp-travel' ) );
+													$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+													if ( 'yes' !== $fixed_departure ) :
+														$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
+													endif;
+													printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
 												?>
 												</div>
 											</li>

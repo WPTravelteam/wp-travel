@@ -30,7 +30,8 @@ class WP_Travel_Cart {
 	public static function output() {
 
 		$trip_id = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? $_GET['trip_id'] : '';
-
+		$trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? $_GET['trip_duration'] : 1;
+        
 		if ( '' == $trip_id ) {
 			return;
 		}
@@ -51,7 +52,8 @@ class WP_Travel_Cart {
 		} ?>
         <div class="wp-travel-ecommerse wp-travel-cart-items">
         <form action="<?php echo esc_url( $checkout_page_url ) ?>" method="get">
-		<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" ?>
+		<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" >
+		<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ) ?>" >
         <table class="shop_table shop_table_responsive cart" cellspacing="0">
         <thead>
             <tr>
@@ -121,7 +123,6 @@ class WP_Travel_Cart {
                         </tbody>
                     </table>
                     <div class="wc-proceed-to-checkout">
-					
                     <input type="submit" class="button alt" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
                     </button>
                     </div>

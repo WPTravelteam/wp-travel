@@ -30,6 +30,10 @@ function wp_travel_booking_form_fields() {
 	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ){
 		$pax_size = $_REQUEST['pax'];
 	}
+	$trip_duration = 1;
+	if ( isset( $_REQUEST['trip_duration'] ) ) {
+		$trip_duration = $_REQUEST['trip_duration'];
+	}
 
 	$booking_fileds = array(
 		'first_name'	=> array(
@@ -138,6 +142,7 @@ function wp_travel_booking_form_fields() {
 				'required' => true,
 				'min' => 1,
 			),
+			'default' => $trip_duration,
 			'attributes' => array( 'min' => 1 ),
 			'priority' => 70,
 		),
