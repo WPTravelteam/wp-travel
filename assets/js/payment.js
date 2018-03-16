@@ -104,6 +104,7 @@ jQuery(document).ready(function($) {
 
             trip_price_excluding_tax = parseFloat(trip_price_excluding_tax) * parseFloat(no_of_pax);
         }
+        trip_price_excluding_tax = parseFloat(trip_price_excluding_tax);
 
         if (trip_price.toFixed)
             trip_price = trip_price.toFixed(2);
