@@ -391,8 +391,13 @@ function wp_travel_single_excerpt( $post_id ) {
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
+			<?php
+			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+			$booking_tab = $wp_travel_itinerary_tabs['booking'];
+		
+			if ( isset( $booking_tab['show_in_menu'] ) && 'yes' === $booking_tab['show_in_menu'] ) :	?>
 			<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
-
+			<?php endif; ?>
 			<?php if ( 'yes' == $enable_enquiry ) : ?>
 			
 				<a id="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
@@ -535,7 +540,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 	$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
-	$trip_duration_night = get_post_meta( $post_id, 'trip_duration_night', true );
+	$trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night', true );
 	$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
 	$settings = wp_travel_get_settings();
