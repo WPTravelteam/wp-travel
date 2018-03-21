@@ -83,7 +83,7 @@ class WP_Travel_Cart {
                     </td>
                     <td class="product-quantity" data-title="Number ticket">
                         <div class="quantity">
-                            <input type="number" class="input-text wp-travel-pax text" step="1" min="1" max="" name="pax" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+    <input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php if($max_available = get_post_meta($trip_id,'wp_travel_group_size', true)): ?>max="<?php echo $max_available ?>" <?php endif; ?> name="pax" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
                         </div>
                     </td>
                     <td class="product-subtotal" data-title="Total">
