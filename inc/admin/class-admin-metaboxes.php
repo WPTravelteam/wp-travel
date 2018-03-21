@@ -754,6 +754,8 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_trip_itinerary_data =  wp_unslash( $_POST['wp_travel_trip_itinerary_data'] );
 			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $wp_travel_trip_itinerary_data );
 
+		} else {
+			delete_post_meta($post_id, 'wp_travel_trip_itinerary_data');
 		}
 
 		// Gallery.
