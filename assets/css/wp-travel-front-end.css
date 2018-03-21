@@ -1682,15 +1682,6 @@ ul.availabily-list {
       ul.availabily-list li > div.date-from {
         padding-right: 10px;
         position: relative; }
-        ul.availabily-list li > div.date-from:after {
-          font-family: 'FontAwesome';
-          content: "\f058";
-          position: absolute;
-          top: 50%;
-          right: 0;
-          margin-top: -4px;
-          display: block;
-          color: #f83531; }
       ul.availabily-list li > div.date-to {
         padding-left: 10px; }
       ul.availabily-list li > div.price {
