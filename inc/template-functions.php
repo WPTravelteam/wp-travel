@@ -606,7 +606,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 							<?php 
 							$enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
-							if ( $enable_checkout ) : ?>
+							if ( $enable_checkout && wp_travel_is_payment_enabled()) : ?>
 								<div id="wp-travel-date-price" class="detail-content">
 									<div class="availabily-wrapper">
 										<ul class="availabily-list">
