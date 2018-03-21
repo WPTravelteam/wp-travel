@@ -111,6 +111,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.2.3 =
+* New Feature: Cart and Checkout process for trip booking.
 * Fixes: Compatibility for payment gateways.
 * Fixes: Minor issues and bugs fixings.
 
