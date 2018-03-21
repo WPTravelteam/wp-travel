@@ -43,17 +43,15 @@ class WP_Travel_Checkout {
 		}
 		$price_per = wp_travel_get_price_per_text( $trip_id );
 		$settings = wp_travel_get_settings();		
-		$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
+        $trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
 		if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
-
-			$trip_price = $trip_tax_details['actual_trip_price'];
+            $trip_price = $trip_tax_details['actual_trip_price'];
 		} else {
-			$trip_price = $trip_tax_details['trip_price'];
+            $trip_price = $trip_tax_details['trip_price'];
         }
-
+        $trip_price_original = $trip_price;
         if ( strtolower( $price_per ) === 'person' ) {
-			$trip_price *= $pax_size;
-			$trip_price *= $pax_size;
+            $trip_price *= $pax_size;
 		}
         
         ?>
@@ -81,7 +79,7 @@ class WP_Travel_Checkout {
                                     <?php echo esc_html( get_the_title( $trip_id ) ); ?> &nbsp; <strong class="product-quantity">× <span class="wp-travel-cart-pax"><?php echo esc_html( $pax_size ); ?></span><?php printf( ' pax' ); ?> </strong> 
                                 </td>
                                 <td class="product-total">
-                                <span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" payment_price="<?php echo @$trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price; ?>" >0</span>
+                                <span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" payment_price="<?php echo @$trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price_original; ?>" >0</span>
                                 </td>
                                 </tr>
                             </tbody>

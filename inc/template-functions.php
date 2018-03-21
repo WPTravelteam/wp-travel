@@ -1189,13 +1189,13 @@ function wp_travel_booking_message() {
 	}
 	if ( isset( $_GET['booked'] ) && 1 == $_GET['booked'] ) : ?>
 		<script>
-			history.replaceState({}, null, window.location.href);
+			history.replaceState({},null,window.location.pathname);
 		</script>
 		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
 	
 	<?php elseif( isset( $_GET['booked'] ) && 'false' == $_GET['booked']) : ?>
 		<script>
-			history.replaceState({}, null, window.location.href);
+			history.replaceState({},null,window.location.pathname);
 		</script>
 
 		<?php 
