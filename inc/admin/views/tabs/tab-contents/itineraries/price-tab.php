@@ -42,7 +42,31 @@
 	</tr>
 
 	<tr>
-		<td><label for="wp-travel-price"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
+		<td><label for="wp-travel-pricing-options"><?php esc_html_e( 'Pricing Options', 'wp-travel' ); ?></label></td>
+		<td id="wp-travel-pricing-options">
+			<td>
+				<select>
+					<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
+					<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
+				</seclect>
+			</td>
+
+			<div class="wp-travel-add-pricing-option clearfix">
+				<input type="button" value="Add New Pricing Option" class="button button-primary wp-travel-pricing-add-new">
+			</div>
+			<script type="text/html" id="tmpl-wp-travel-pricing-options">
+				<td>
+					<select name="pricing_options[{{data.random}}]">
+						<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
+						<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
+					</seclect>
+				</td>
+			</script>
+		</td>
+	</tr>
+
+	<tr>
+		<td><label for="wp-travel-enable-sale"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">

@@ -371,6 +371,15 @@
         // $('#tab-accordion').accordion('destroy').accordion({ active: faqs });
     });
 
+    // Pricing options template.
+    $('.wp-travel-pricing-add-new').on('click', function() {
+        var template = wp.template('wp-travel-pricing-options');
+        var rand = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
+        $('#wp-travel-pricing-options').append(template({ random: rand }));
+
+
+    });
+
     //value bind to label.
     $(document).on('change keyup', "*[bind]", function(e) {
         var to_bind = $(this).attr('bind');

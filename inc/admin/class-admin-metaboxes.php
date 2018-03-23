@@ -221,8 +221,8 @@ class WP_Travel_Admin_Metaboxes {
 			'content_title' => __( 'Outline', 'wp-travel' ),
 		);
 		$trips['price'] = array(
-			'tab_label' => __( 'Price', 'wp-travel' ),
-			'content_title' => __( 'Price', 'wp-travel' ),
+			'tab_label' => __( 'Dates and Prices', 'wp-travel' ),
+			'content_title' => __( 'Dates and Prices', 'wp-travel' ),
 		);
 		$trips['trip_includes'] = array(
 			'tab_label' => __( 'Includes/ Excludes', 'wp-travel' ),
