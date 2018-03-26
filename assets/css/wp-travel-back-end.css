@@ -766,19 +766,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .form-table .pricing-repeater {
   vertical-align: top; }
 
-#wp-travel-pricing-options .repeat-row {
+.repeat-row {
   margin-top: 0;
   position: relative;
   border-bottom: 1px solid #ddd;
   padding: 10px 0px;
   width: 100%;
   box-sizing: border-box; }
-  #wp-travel-pricing-options .repeat-row:first-of-type {
-    margin-top: 0; }
-  #wp-travel-pricing-options .repeat-row .wp-travel-currency-symbol {
-    top: 3px;
-    left: 5px;
-    z-index: 1; }
+
+#wp-travel-pricing-options .repeat-row:first-of-type {
+  margin-top: 0; }
+#wp-travel-pricing-options .repeat-row .wp-travel-currency-symbol {
+  top: 3px;
+  left: 5px;
+  z-index: 1; }
 #wp-travel-pricing-options select, #wp-travel-pricing-options .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group #wp-travel-pricing-options input, #wp-travel-pricing-options .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field #wp-travel-pricing-options textarea, #wp-travel-pricing-options .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group #wp-travel-pricing-options textarea {
   display: inline-block;
   min-width: 25%; }
@@ -821,8 +822,12 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     line-height: 0; }
 .pricing-repeater .wp-travel-pricing-add-new {
   float: right;
-  margin-top: 10px;
-  margin-bottom: 20px; }
+  margin-top: 10px; }
+
+.wp-travel-row:after, .wp-travel-row:before {
+  content: "";
+  display: table;
+  clear: both; }
 
 .checkbox-default-design label {
   position: relative;

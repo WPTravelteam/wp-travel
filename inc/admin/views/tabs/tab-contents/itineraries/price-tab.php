@@ -88,6 +88,41 @@
 		
 	</tr>
 	<tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<td colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 				<p class="description">Select different pricing category with its different sale price</p>
@@ -133,6 +168,48 @@
 			</script>
 		</td>
 	</tr>
+
+	<tr>
+		<td class="pricing-repeater"><label for="wp-travel-multiple-date-options"><?php esc_html_e( 'Dates', 'wp-travel' ); ?></label>
+		</td>
+		<td>
+			<span class="show-in-frontend checkbox-default-design">
+				<label data-on="ON" data-off="OFF">
+					<input name="wp_travel_enable_pricing-options" type="checkbox" id="wp-travel-multiple-date-options" checked="checked" value="1" "="">							
+					<span class="switch">
+				  </span>
+				 
+				</label>
+			</span>
+			 <span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different date options.</span>
+			
+		</td>
+	</tr>
+
+
+	<tr>
+		<td colspan="2" class="pricing-repeater">
+			<p class="description">You can select different dates for each category.</p>
+			<div class="wp-travel-row repeat-row">
+				<label>Adult:</label>
+				<input type="text" data-range="true" data-multiple-dates-separator=" - "
+    data-language="en" class="datepicker-here" placeholder="Date Range" />
+			</div>
+			<div class="wp-travel-row repeat-row">
+				<label>Group of four:</label>
+				<input type="text" data-range="true" data-multiple-dates-separator=" - "
+    data-language="en" class="datepicker-here" placeholder="Date Range" />
+			</div>
+			<div class="wp-travel-row repeat-row">
+				<label>Custom:</label>
+				<input type="text" data-range="true" data-multiple-dates-separator=" - "
+    data-language="en" class="datepicker-here" placeholder="Date Range" />
+			</div>
+		</td>
+	</tr>
+
+
+
 
 	<?php
 	/**

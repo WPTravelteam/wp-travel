@@ -46,6 +46,7 @@ $alabaster: #f7f7f1; // Red like color.
     }
 }
 
+
 @font-face {
     font-family: 'icomoon';
     src: url('../fonts/icomoon.eot?scxfre');
@@ -1124,16 +1125,18 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .pricing-repeater{
         vertical-align:top;
     }
-}    
+}   
+.repeat-row{
+    margin-top: 0;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0px;
+    width: 100%;
+    box-sizing: border-box;
+} 
 #wp-travel-pricing-options{
 
     .repeat-row{
-        margin-top: 0;
-        position: relative;
-        border-bottom: 1px solid #ddd;
-        padding: 10px 0px;
-        width: 100%;
-        box-sizing: border-box;
         &:first-of-type{
             margin-top:0;
         }
@@ -1200,11 +1203,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .wp-travel-pricing-add-new{
         float: right;
         margin-top: 10px;
-        margin-bottom: 20px;
     }
-    
 }
-
+.wp-travel-row{
+    @include clearfix;
+}
 
 .checkbox-default-design {
     label {
