@@ -5,7 +5,7 @@ interface Wp_Travel_Payment_Interface {
 	public function render_settings();
 }
 
-$GLOBALS['wp_travel_payments'] = [];
+$GLOBALS['wp_travel_payments'] = array();
 
 if ( ! function_exists( 'wp_travel_register_payments' ) ) {
 
