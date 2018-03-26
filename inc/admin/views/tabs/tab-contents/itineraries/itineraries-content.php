@@ -63,7 +63,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 					<div class="panel-heading" role="tab" id="heading-itinerary-<?php echo esc_attr( $cnt ) ?>">
 						<h4 class="panel-title">
 							<div class="wp-travel-sorting-handle"></div>
-							<a role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" aria-expanded="true" aria-controls="collapse-itinerary<?php echo esc_attr( $cnt ) ?>">
+							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" aria-expanded="true" aria-controls="collapse-itinerary<?php echo esc_attr( $cnt ) ?>">
 
 							<span bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
 							<span bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
@@ -82,14 +82,14 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 							<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 							<input bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 						</div>
-						<!--<div class="panel-wrap panel-wrap-itinerary">
-							<label><?php // esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
-							<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php // echo esc_attr( $cnt ) ?>][date]" value="<?php // echo esc_html( $itinerary_date ); ?>">
+						<div class="panel-wrap panel-wrap-itinerary">
+							<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
+							<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][date]" value="<?php echo esc_html( $itinerary_date ); ?>">
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
-							<label><?php // esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
-							<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php // echo esc_attr( $cnt ) ?>][time]" value="<?php // echo esc_html( $itinerary_time ); ?>">
-						</div> !-->
+							<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
+							<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][time]" value="<?php echo esc_html( $itinerary_time ); ?>">
+						</div>
 						<div class="wp-travel-itinerary" style="padding:10px">
 							<?php
 								// $itinerary_settings = array(

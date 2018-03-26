@@ -121,7 +121,29 @@
     function dateTimePicker() {
 
         if ($.fn.datepicker) {
-            $('#wp-travel-start-date, #wp-travel-end-date, .wp-travel-datepicker').datepicker({
+            $('#wp-travel-start-date').datepicker({
+                language: 'en',
+                minDate: new Date(),
+                onSelect: function(dateStr) {
+                    newMinDate = null;
+                    newMaxDate = new Date();
+                    if ('' !== dateStr) {
+                        new_date_min = new Date(dateStr);
+
+                        newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+                    }
+                    $('#wp-travel-end-date').datepicker({
+                        minDate: newMinDate,
+                    });
+                }
+            });
+
+            $('#wp-travel-end-date').datepicker({
+                language: 'en',
+                minDate: new Date()
+            });
+
+            $('.wp-travel-datepicker').datepicker({
                 language: 'en',
                 minDate: new Date()
             });
@@ -135,7 +157,6 @@
         }
     }
     dateTimePicker();
-
 
     $(document).on('click', '#publish', function() {
 
@@ -173,10 +194,16 @@
     $(document).on('click', '#wp-travel-enable-sale', function() {
         if ($(this).is(':checked')) {
             $('#wp-travel-sale-price').removeAttr('disabled').closest('tr').show();
+            $('#wp-travel-price').attr('required', 'required');
         } else {
             $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('tr').hide();
+            $('#wp-travel-price').removeAttr('required');
         }
     });
+
+    if ($('#wp-travel-enable-sale').is(':checked')) {
+        $('#wp-travel-price').attr('required', 'required');
+    }
 
     $(document).on('click', '#wp-travel-fixed-departure', function() {
         if ($(this).is(':checked')) {
@@ -229,7 +256,16 @@
                 $('.itinerary_block').append(response);
                 // tinyMCE.execCommand('mceAddEditor', true, wp_travel_itinerary_id);
                 // quicktags({ id: wp_travel_itinerary_id });
-                dateTimePicker();
+                $('.itinerary_block .panel:last .wp-travel-datepicker').datepicker({
+                    language: 'en',
+                    minDate: new Date()
+                });
+                $('.itinerary_block .panel:last .wp-travel-timepicker').datepicker({
+                    language: 'en',
+                    timepicker: true,
+                    onlyTimepicker: true,
+
+                });
                 return false;
             }
         });
@@ -256,7 +292,7 @@
         return false;
     });
     var textareaID;
-    $('.wp-travel-sorting-tabs').sortable({
+    $('#tab-accordion .wp-travel-sorting-tabs,#tab-accordion-itineraries #accordion-itinerary-data').sortable({
         handle: '.wp-travel-sorting-handle',
         // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
         //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
@@ -266,6 +302,10 @@
         //     try { tinyMCE.execCommand('mceAddEditor', false, textareaID); } catch (e) {}
         //     $(this).find('.update-warning').show();
         // }
+    });
+
+    $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs tbody').sortable({
+        handle: '.wp-travel-sorting-handle',
     });
 
     // return on clicking space button.
@@ -284,6 +324,7 @@
         $('.panel-collapse').addClass('in');
         $(this).hide();
         $('.close-all-link').show();
+        $('#tab-accordion .panel-collapse').css('height', 'auto');
     });
     $('.close-all-link').click(function(e) {
         e.preventDefault();
@@ -337,5 +378,69 @@
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
+
+    $(document).on('keyup change', '.section_title', function() {
+        var title = $(this).val();
+        $(this).siblings('.wp-travel-accordion-title').html(title);
+    });
+
+    // Sale Price  max value update on price change
+    $(document).on('keyup change', '#wp-travel-price', function() {
+        var priceVal = $(this).val();
+        $('#wp-travel-sale-price').attr('max', priceVal);
+    });
+
+    if ($('#wp-travel-use-global-tabs').is(':checked')) {
+        $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
+    } else {
+        $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
+    }
+    $('#wp-travel-use-global-tabs').change(function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
+        } else {
+            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
+        }
+    });
+
+    if ($('#wp-travel-use-global-trip-enquiry').is(':checked')) {
+        $('#wp-travel-enable-trip-enquiry-option-row').hide();
+    } else {
+        $('#wp-travel-enable-trip-enquiry-option-row').show();
+    }
+
+    $('#wp-travel-use-global-trip-enquiry').change(function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-enable-trip-enquiry-option-row').hide();
+        } else {
+            $('#wp-travel-enable-trip-enquiry-option-row').show();
+        }
+    });
+
+    // WP Travel Standard Paypal Merged. @since 1.2.1
+    // Change max partial payment amount on check / uncheck enable sale.
+    $(document).on('click', '#wp-travel-enable-sale', function() {
+        var max_payment = $('#wp-travel-price').val();
+        if ($(this).is(':checked')) {
+            max_payment = $('#wp-travel-sale-price').val();
+        }
+        // $('#wp-travel-minimum-partial-payout').attr('max', max_payment);
+    });
+
+    // Change max partial payment amount on changing sale price.
+    $(document).on('change', '#wp-travel-sale-price', function() {
+        var max_payment = $(this).val();
+        // $('#wp-travel-minimum-partial-payout').attr('max', max_payment);
+    });
+
+    $(document).on('click', '#wp-travel-minimum-partial-payout-percent-use-global', function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-minimum-partial-payout-percent').attr('disabled', 'disabled').closest('tr').hide();
+        } else {
+            $('#wp-travel-minimum-partial-payout-percent').removeAttr('disabled', 'disabled').closest('tr').show();
+        }
+    });
+    // Ends WP Travel Standard Paypal Merged. @since 1.2.1
+
 
 }(jQuery));

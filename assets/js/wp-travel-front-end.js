@@ -28,12 +28,17 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $('#wp-travel-send-enquiries').magnificPopup({
+        type: 'inline',
+        preloader: false,
+        focus: '#wp-travel-enquiry-name',
+        midClick: true
+    });
+
     $('#wp-travel-tab-wrapper').easyResponsiveTabs({
 
     });
 
-
- 
     if (window.location.hash) {
         var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
 
@@ -156,6 +161,7 @@ jQuery(document).ready(function($) {
         $('.panel-collapse').addClass('in');
         // $(this).hide();
         $('.close-all-link').show();
+        $('.panel-collapse').css('height', 'auto');
     });
     $('.close-all-link').click(function(e) {
         e.preventDefault();
@@ -163,6 +169,60 @@ jQuery(document).ready(function($) {
         $('.panel-collapse').removeClass('in');
         // $(this).hide();
         $('.open-all-link').show();
+    });
+
+    // Enquiry Submission.
+
+    $('#wp-travel-enquiries').submit(function(e) {
+
+        e.preventDefault();
+
+        //Remove any previous errors.
+        $('.enquiry-response').remove();
+
+        var formData = {
+            'wp_travel_enquiry_name': $('#wp-travel-enquiry-name').val(),
+            'wp_travel_enquiry_email': $('#wp-travel-enquiry-email').val(),
+            'wp_travel_enquiry_query': $('#wp-travel-enquiry-query').val(),
+            'action': 'wp_travel_save_user_enquiry',
+            'nonce': wp_travel_frontend_vars.nonce,
+            'post_id': $('#wp-travel-enquiry-post-id').val(),
+        };
+        $.ajax({
+            type: "POST",
+            url: wp_travel_frontend_vars.ajaxUrl,
+            data: formData,
+            beforeSend: function() {
+                $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val('PROCESSING...').attr('disabled', 'disabled');
+            },
+            success: function(data) {
+
+                if (false == data.success) {
+                    var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
+                    $('#wp-travel-enquiries').append(message);
+                } else {
+                    if (true == data.success) {
+
+                        var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
+                        $('#wp-travel-enquiries').append(message);
+
+                        setTimeout(function() {
+                            jQuery('#wp-travel-send-enquiries').magnificPopup('close')
+                        }, '3000');
+
+                    }
+                }
+
+                $('#wp-travel-enquiry-submit').removeClass('loading-bar loading-bar-striped active').val('SUBMIT ENQUIRY').removeAttr('disabled', 'disabled');
+                //Reset Form Fields.
+                $('#wp-travel-enquiry-name').val('');
+                $('#wp-travel-enquiry-email').val('');
+                $('#wp-travel-enquiry-query').val('');
+
+                return false;
+            }
+        });
+
     });
 
 });

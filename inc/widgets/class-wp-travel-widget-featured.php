@@ -21,6 +21,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 
 	private $no_of_trip_show;
 	private $trip_per_row;
+	private $view_mode;
 	/**
 	 * Constructor.
 	 */
@@ -29,6 +30,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		parent::__construct( false, __( 'WP Travel Featured Trip', 'wp-travel' ) );
 		$this->no_of_trip_show = 2;
 		$this->trip_per_row = 1;
+		$this->view_mode = 'grid';
 	}
 
 	/**
@@ -45,35 +47,70 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 		$no_of_trip_show = ( $instance['no_of_trip_show'] ) ? $instance['no_of_trip_show'] : $this->no_of_trip_show;
 		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
+		$view_mode = ( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 
 		echo $before_widget;
 		if ( ! $hide_title ) {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 
-		$itineraries = wp_travel_featured_itineraries( $no_of_trip_show ); ?>
-		<?php if ( count( $itineraries ) > 0 ) : ?>
-			<ul class="wp-travel-itinerary-widget featured-widget">
-			<?php foreach ( $itineraries as $itinerary ) : ?>				
-				<li class="col-<?php echo esc_attr( $this->trip_per_row, 'wp-travel' )?>-per-row clearfix">
-					<?php echo wp_travel_get_post_thumbnail( $itinerary->ID, 'wp_travel_thumbnail' ) ?>
+		$featured_args = array(
+			'posts_per_page'   => $no_of_trip_show,
+			'offset'           => 0,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'meta_key'         => 'wp_travel_featured',
+			'meta_value'       => 'yes',
+			'post_type'        => WP_TRAVEL_POST_TYPE,
+			'post_status'      => 'publish',
+			'suppress_filters' => true,
+		);
+
+		$itineraries = new WP_Query( $featured_args );
+
+		if ( $itineraries->have_posts() ) : ?>
+
+			<div class="wp-travel-itinerary-items">
+			
+			<?php if ( 'grid' == $view_mode ) : ?> 
+				
+				<ul class="wp-travel-itinerary-list">
+
+			<?php else : ?>
+
+				<div class="wp-travel-itinerary-list">
+
+			<?php endif; ?>
+
+				<?php while( $itineraries->have_posts() ) : $itineraries->the_post();
+
+					if ( 'grid' == $view_mode ) : 
+						
+						//Load Grid View Mode.
+						wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); 
+
+					else :
+						wp_travel_get_template_part( 'shortcode/itinerary-item', 'list' );
+						//Load list View Mode.
 					
-					<div class="wp-travel-itinerary-info">
-						<a href="<?php the_permalink( $itinerary->ID ); ?>" class="wp-travel-title">
-							<?php echo esc_html( $itinerary->post_title, 'wp-travel' ) ?>
-						</a>
-						<?php if ( wp_travel_is_enable_sale( $itinerary->ID ) ) : ?>
-							<del>
-								<span class="wp-travel-del-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_trip_price( $itinerary->ID ) ) ) ?></span>
-							</del>
-						<?php endif; ?>
-						<span class="wp-travel-trip-price"><?php printf( '%s %s', esc_html( wp_travel_get_currency_symbol() ), esc_html( wp_travel_get_actual_trip_price( $itinerary->ID ) ) ) ?></span>
-					</div>
-				</li>
-			<?php endforeach; ?>
-			</ul>
+					endif;
+					
+				endwhile; wp_reset_postdata(); ?>
+
+			<?php if ( 'grid' == $view_mode ) : ?> 
+							
+				</ul>
+
+			<?php else : ?>
+
+				</div>
+
+			<?php endif; ?>
+			
+			</div>
+		
 		<?php else : ?>
-			<p class="itinerary-none"><?php esc_html_e( 'Featured itinerary not found.', 'wp-travel' ) ?></p>
+			<p class="itinerary-none"><?php esc_html_e( 'Featured Trips not found.', 'wp-travel' ) ?></p>
 		<?php endif;
 		echo $after_widget;
 	}
@@ -88,6 +125,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 		// $instance['trip_per_row'] = sanitize_text_field( $new_instance['trip_per_row'] );
+		$instance['view_mode']   = sanitize_key( $new_instance['view_mode'] );
 		$instance['no_of_trip_show'] = sanitize_text_field( $new_instance['no_of_trip_show'] );
 
 		return $instance;
@@ -104,6 +142,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$hide_title = '';
 		$no_of_trip_show = $this->no_of_trip_show;
 		$trip_per_row = $this->trip_per_row;
+		$view_mode = $this->view_mode;
 		if ( isset( $instance['title'] ) ) {
 			$title = esc_attr( $instance['title'] );
 		}
@@ -113,6 +152,9 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		// if ( $instance['trip_per_row'] ) {
 		// 	$trip_per_row = esc_attr( $instance['trip_per_row'] );
 		// }
+		if ( isset( $instance['view_mode'] ) ) {
+			$view_mode = esc_attr( $instance['view_mode'] );
+		}
 		if ( isset( $instance['no_of_trip_show'] ) ) {
 			$no_of_trip_show = esc_attr( $instance['no_of_trip_show'] );
 		} ?>
@@ -128,6 +170,21 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 			<label for="<?php echo esc_attr( $this->get_field_id( 'trip_per_row' ) ); ?>"><?php esc_html_e( 'Trip per row', 'wp-travel' ); ?>:</label>
 			<input type="number" value="<?php echo esc_attr( $trip_per_row ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'trip_per_row' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_per_row' ) ); ?>" min="1" max="9" class="widefat">
 		</p> -->
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'view_mode' ) ); ?>"><?php esc_html_e( 'View Mode', 'wp-travel' ); ?>:</label>
+			<select id="<?php echo esc_attr( $this->get_field_id( 'view_mode' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'view_mode' ) ); ?>" class="widefat">
+				<?php
+					$view_mode_options = array(
+						'grid'   => __( 'Grid View', 'wp-travel' ),
+						'list' => __( 'List View', 'wp-travel' ),
+					);
+
+				foreach ( $view_mode_options as $key => $value ) {
+					echo '<option value="' . esc_attr( $key ) . '" ' . selected( $key, $view_mode, false ) . '>' . esc_html( $value ) . '</option>';
+				}
+				?>
+			</select>
+		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>"><?php esc_html_e( 'Hide title', 'wp-travel' ); ?>:</label>
 			<label style="display: block;"><input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'hide_title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'hide_title' ) ); ?>" class="widefat" <?php checked( 1, $hide_title ); ?>><?php esc_html_e( 'Check to Hide', 'wp-travel' ); ?></label>

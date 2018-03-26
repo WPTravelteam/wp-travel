@@ -12,7 +12,12 @@
  */
 function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
-	wp_travel_upgrade_to_110();
+	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
+		wp_travel_upgrade_to_110();
+	}
+	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' )) {
+		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
+	}
 }
 
 function wp_travel_admin_footer_styles() {
@@ -39,24 +44,10 @@ function wp_travel_marketplace_page() {
 			<div id="post-body">
 				<div class="wp-travel-marketplace-tab-wrap">
 					<ul>
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
+						<!--<li class=""><a href="#tabs-1"><?php // esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>-->
 					</ul>
-					<div id="tabs-1" class="tab-pannel">
-						<div class="marketplace-module clearfix">
-							<div class="single-module">
-								<div class="single-module-image">
-									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
-									</a>
-								</div>
-								<div class="single-module-content clearfix">
-									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
-									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
 							<div class="single-module">
@@ -73,6 +64,22 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>
+					<!--<div id="tabs-1" class="tab-pannel">
+						<div class="marketplace-module clearfix">
+							<div class="single-module">
+								<div class="single-module-image">
+									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
+									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
+									</a>
+								</div>
+								<div class="single-module-content clearfix">
+									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
+									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
+								</div>
+							</div>
+						</div>
+					</div>-->
+
 				</div>
 
 
@@ -156,6 +163,175 @@ Its great plugin for travel or tour agent websites."</h5>
 </div>
 	<?php
 }
+
+
+function docs_support_page_callback(){
+	?>
+
+	<div class="wrap">
+		<div id="poststuff">
+			<div id="docs-and-support-page">
+				<div class="about-header">
+	                <div class="about-text WP-Travel-about-text">
+		                <div class="left-side-section">
+		                	<strong>Welcome to WP Travel.</strong>
+		                		<p>Thanks for installing and we hope you will enjoy using WP Travel. </p>
+		                		<p>We strongly recommend you to install <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
+		                        <p class="WP-Travel-actions">
+		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=itineraries" target="_blank">Add New Trips For You Site</a>
+		                        <span>OR</span>
+		                        <a href="http://wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
+		                    </p>
+	                    </div>
+	                    <div class="WP-Travel-badge">
+		                	<span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+		                	<p>
+		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>
+		                	</p>
+		                </div>
+	                </div>
+
+	                <div class="wrap-footer">
+	                    <table class="form-table">
+			                 <tbody>
+			                 <tr>
+			                    <th scope="row">Get add-ons and tips...</th>
+				                    <td>
+				                        <form action="https://wensolutions.us13.list-manage.com/subscribe/post?u=5924e7bef96519e3827fa3024&amp;id=a40eebcccf" method="POST" class="validate" target="_blank" name="mc-embedded-subscribe-form">
+				                            <input class="regular-text ltr" type="email" name="EMAIL" id="mce-EMAIL" placeholder="Email address" required>
+
+				                            <input type="submit"  name="subscribe" id="mc-embedded-subscribe" class="button button-primary" value="Subscribe">
+				                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+											<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5924e7bef96519e3827fa3024_a40eebcccf" tabindex="-1" value=""></div>
+				                        </form>
+				                    </td>
+				                 </tr>
+				            </tbody>
+			            </table>
+			            <div class="WP-Travel-support">
+		                    Questions? Need Help?
+			                <div id="WP-Travel-contact-us" class="WP-Travel-contact-us">
+			                	<a class="thickbox-contact-us" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
+			                </div>
+		                </div>
+			        </div>
+	        	</div>
+
+				<div class="feature-section col two-col">
+		<div class="col">
+			<h3>Description</h3>
+			<p class="wp-travel-summary">
+				WP Travel is an easy to use and awesome plugin that you can use with any travel site. With WP travel you can simply add the post type to display the packages and WP Travel comes with booking feature as well.  Beside this  plugin provides various kind of feature, setting which makes this plugin more attractive.
+
+				The compatibility of the plugin is also one of the features. It can also be modified very easily through custom templates.
+			</p>
+			<h3>Feature Overview</h3>
+			<ul class="wp-travel-feature_list">
+				<li class="wp-travel-feature">
+					Get your travel site ready just on few clicks. With our user-friendly system &amp; complete documentation, you won't have any trouble while using the system.				</li>
+				<li class="wp-travel-feature">
+					WP Travel includes in-build booking system for your travel site. Users can easily book itineraries from your site and you can track all bookings from the backend.				</li>
+				<li class="wp-travel-feature">
+					Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.				</li>
+				<li class="wp-travel-feature">
+					With our payment processing features, you can get partial or full payment for each booking. All that payment will be tracked in the backend and also you can view stat of payments.			</li>
+				<li class="wp-travel-feature">
+					WP travel plugin is translation ready in order to fulfill customer's needs from all around the world. You can translate WP Travel to any language with the help of WPML Translation Plugin and for the translation of the string, you can use Loco Translate.			</li>
+				<li class="wp-travel-feature">
+					<a href="http://wptravel.io/faq/"  class="link-simple" target="_blank">FAQs </a> provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.			</li>
+				<li class="wp-travel-feature">
+					Our team is dedicated to continuous development of the plugin. We will be continuously adding new features to the plugin.				</li>
+				<li class="wp-travel-feature">
+					If you found any issues in the plugin, you can directly <a href="http://wptravel.io/contact/" class="link-simple" target="_blank"> Contact Us</a> or add your issues or problems on <a href="http://wptravel.io/support-forum/" class="link-simple" target="_blank">Support Forum</a>.			</li>
+			</ul>
+		</div>
+
+		<div class="col last-feature">
+			<div class="es-form-setup">
+				<h3>Add Trip</h3>
+				<p class="wp-travel-faq">
+					<a href="http://wptravel.io/documentations/user-documentation/how-to-create-your-very-first-trip/" target="_blank">How to Add Trip to the website?</a>				</p>
+				<p>
+					After the activation of the required plugin, you will find the Trips menu on the dashboard.
+					Now  to create the trip of your choice go to Admin Panel > Trips > Add New and begin entering the required content as per your wish.
+					Furthermore, to help you and make you clear we have explained each and every field below in the Overview section.
+				</p>
+				<h2> Additional Trip settings</h2>
+				<ul class="wp-travel-faq_list">
+					<li class="wp-travel-faq">
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-globally-set-the-tabs-format/" target="_blank">How to Globally Set the Tabs Format Shown on Single Trip Page?</a>
+					</li>
+					<li class="wp-travel-faq">
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-arrange-and-change-tabs-in-single-trip/" target="_blank">How to change the label of tabs shown on Single Trip Page?</a>
+					</li>
+					<li class="wp-travel-faq">
+						See all the Frequently Asked Question Solution For WP Travel Plugin
+						<a href="http://wptravel.io/faq/" target="_blank">Frequently Asked Question</a>
+					</li>
+					<li class="wp-travel-faq">
+					You can find your solution about the problem of WP Travel from our <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support Page</a> or you can create a <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support</a> for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore
+						<a href="http://wptravel.io/support-forum/" target="_blank">Support Forum</a>.
+					</li>
+				</ul>
+			</div>
+			<br>
+			<div class="es-setting">
+				<h2>General Plugin Configuration</h2>
+				<ul class="wp-travel-faq_list">
+					<li class="wp-travel-faq">
+						 <a href="http://wptravel.io/documentations/user-documentation/" target="_blank">
+						 	See User Documentation to know the plugin and how it works
+						 </a>
+
+						</li>
+
+						<li class="wp-travel-faq">
+						 <a href="http://wptravel.io/documentations/developer-documentation/" target="_blank">
+						 	See Developer Documentation to know the plugin in depth.
+						 </a>
+
+						</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+	</div>
+<?php
+
+}
+/**
+ * Modify Admin Footer Message.
+ */
+function wp_travel_modify_admin_footer_admin_settings_page(){
+
+	printf(__('If you like %1s, please consider leaving us a %2s rating. A huge thank you from WEN Solutions in advance!', 'wp-travel' ), '<strong>WP Travel</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>' );
+
+}
+/**
+ * Modify Admin Footer Message.
+ */
+function wp_travel_modify_admin_footer_version(){
+
+	printf(__('WP Travel version: %s', 'wp-travel' ), '<strong>' . WP_TRAVEL_VERSION . '</strong>' );
+
+}
+/**
+ * Add Footer Custom Text Hook.
+ */
+function wp_travel_doc_support_footer_custom_text(){
+
+	$screen = get_current_screen();
+
+	if ( WP_TRAVEL_POST_TYPE === $screen->post_type ) {
+
+		add_filter('admin_footer_text', 'wp_travel_modify_admin_footer_admin_settings_page');
+		add_filter( 'update_footer', 'wp_travel_modify_admin_footer_version', 11 );
+	}
+}
+
+add_action( 'current_screen', 'wp_travel_doc_support_footer_custom_text' );
 
 function wp_travel_clear_booking_count_transient( $post_id ) {
 	if ( ! $post_id ) {
@@ -364,7 +540,7 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					<div class="wp-travel-sorting-handle"></div>
 					<a role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-<?php echo esc_attr( $uid ) ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $uid ) ?>">
 
-					<span bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
+					<span bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>,
 					<span bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
 					<span class="collapse-icon"></span>
 					</a>
@@ -381,14 +557,14 @@ if ( ! function_exists( 'wp_travel_add_itinerary_content_data' ) ) {
 					<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
 					<input bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 				</div>
-				<!--<div class="panel-wrap panel-wrap-itinerary">
-					<label><?php // esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
-					<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php // echo esc_attr( $uid ) ?>][date]" value="">
+				<div class="panel-wrap panel-wrap-itinerary">
+					<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
+					<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][date]" value="">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
-					<label><?php // esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
-					<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php // echo esc_attr( $uid ) ?>][time]" value="">
-				</div> !-->
+					<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
+					<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][time]" value="">
+				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 					<div class="wp-travel-itinerary">
@@ -415,4 +591,309 @@ function wp_travel_upgrade_to_110() {
 	if ( count( $itineraries ) > 0 ) {
 		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 	}
+}
+
+/**
+ * Stat Data for Payment.
+ *
+ * @param Array $stat_data
+ * @return void
+ */
+// function wp_travel_payment_stat_data( $stat_data, $request ) {
+// 	if ( ! $stat_data ) {
+// 		return;
+// 	}
+
+// 	global $wpdb;
+
+// 	// Default variables.
+// 	$query_limit = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
+// 	$limit = "limit {$query_limit}";
+// 	$where = '';
+// 	$groupby = '';
+
+// 	$from_date = '';
+// 	if ( isset( $request['booking_stat_from'] ) && '' !== $request['booking_stat_from'] ) {
+// 		$from_date = $request['booking_stat_from'];
+// 	}
+// 	$to_date = '';
+// 	if ( isset( $request['booking_stat_to'] ) && '' !== $request['booking_stat_to'] ) {
+// 		$to_date = $request['booking_stat_to'] . ' 23:59:59';
+// 	}
+// 	$country = '';
+// 	if ( isset( $request['booking_country'] ) && '' !== $request['booking_country'] ) {
+// 		$country = $request['booking_country'];
+// 	}
+
+// 	$itinerary = '';
+// 	if ( isset( $request['booking_itinerary'] ) && '' !== $request['booking_itinerary'] ) {
+// 		$itinerary = $request['booking_itinerary'];
+// 	}
+
+// 	// Setting conditions.
+// 	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
+// 		// Set initial load to false if there is extra get variables.
+// 		$initial_load = false;
+// 		if ( '' !== $itinerary ) {
+// 			$where 	 .= " and I.itinerary_id={$itinerary} ";
+// 		}
+// 		if ( '' !== $country ) {
+// 			$where   .= " and country='{$country}'";
+// 		}
+
+// 		if ( '' !== $from_date && '' !== $to_date ) {
+
+// 			$date_format = 'Y-m-d H:i:s';
+
+// 			$booking_from = date( $date_format, strtotime( $from_date ) );
+// 			$booking_to   = date( $date_format, strtotime( $to_date ) );
+
+// 			$where 	 .= " and payment_date >= '{$booking_from}' and payment_date <= '{$booking_to}' ";
+// 		}
+// 		$limit = '';
+// 	}
+
+// 	// Payment Data Default Query.
+// 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_payment_stat_data' );
+// 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
+// 		$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+// 		join (
+// 			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+// 			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
+// 			WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
+// 		) PMT on BOOKING.ID = PMT.post_id
+// 		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
+// 		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
+// 		join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
+// 		join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
+//        end as payment_amount from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_amount'  ) AMT on PMT.payment_id = AMT.post_id
+// 		where post_status='publish' and post_type = 'itinerary-booking' {$where}
+// 		group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
+// 		$results = $wpdb->get_results( $query );
+// 		// set initial load transient for stat data.
+// 		if ( $initial_load && ! $initial_transient ) {
+// 			set_site_transient( '_transient_wt_booking_payment_stat_data', $results );
+// 		}
+// 	}
+// 	// End of Payment Data Default Query.
+// 	$payment_data = array();
+// 	$payment_label = array();
+// 	$date_format = 'jS M, Y';
+// 	$payment_stat_from = $payment_stat_to = date( $date_format );
+// 	$total_sales = 0;
+
+// 	if ( $results ) {
+// 		foreach ( $results as $result ) {
+// 			$label_date = $result->payment_year . '-' . $result->payment_month . '-' . $result->payment_day;
+// 			$label_date = date( $date_format, strtotime( $label_date ) );
+// 			$payment_data[] = $result->no_of_payment;
+// 			$payment_label[] = $label_date;
+// 			$total_sales += $result->payment_amount;
+// 		}
+// 	}
+
+// 	if ( isset( $request['chart_type'] ) &&  'payment' == $request['chart_type'] ) {
+// 		$payment_data2[] = array(
+// 			'label' => esc_html__( 'Payment', 'wp-travel' ),
+// 			'backgroundColor' => '#1DFE0E',
+// 			'borderColor' => '#1DFE0E',
+// 			'data' => $payment_data,
+// 			'fill' => false,
+// 		);
+// 		// $stat_data['labels'] = json_encode( $payment_label );
+// 		// $stat_data['datasets'] = json_encode( $payment_data2 );
+// 	}
+
+// 	// $stat_data['total_sales'] = number_format( $total_sales, 2, '.', '' );
+// 	return $stat_data;
+// }
+
+/*
+ * ADMIN COLUMN - HEADERS
+ */
+add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_payment_columns', 20 );
+
+/**
+ * Customize Admin column.
+ *
+ * @param  Array $booking_columns List of columns.
+ * @return Array                  [description]
+ */
+function wp_travel_booking_payment_columns( $booking_columns ) {
+
+	$date = $booking_columns['date'];
+	unset( $booking_columns['date'] );
+
+	$booking_columns['payment_mode'] = __( 'Payment Mode', 'wp-travel' );
+	$booking_columns['payment_status'] = __( 'Payment Status', 'wp-travel' );
+	$booking_columns['date'] = $date;
+	return $booking_columns;
+}
+
+/*
+ * ADMIN COLUMN - CONTENT
+ */
+add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_payment_manage_columns', 10, 2 );
+
+/**
+ * Add data to custom column.
+ *
+ * @param  String $column_name Custom column name.
+ * @param  int 	  $id          Post ID.
+ */
+function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
+	switch ( $column_name ) {
+		case 'payment_status':
+			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
+			$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
+
+			$label_key = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
+			if ( ! $label_key ) {
+				$label_key = 'N/A';
+				update_post_meta( $payment_id , 'wp_travel_payment_status' , $label_key );
+			}
+			$status = wp_travel_get_payment_status();
+			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			break;
+		case 'payment_mode':
+			$mode = wp_travel_get_payment_mode();
+			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
+			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+	
+			if ( ! $label_key ) {
+				$label_key = 'N/A';
+				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
+				if ( ! $is_partial_enabled ) {
+					$label_key = 'full';
+				}				
+				update_post_meta( $payment_id , 'wp_travel_payment_mode' , $label_key );
+			}
+			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			break;
+		default:
+			break;
+	} // end switch
+}
+
+/*
+ * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
+ * https://gist.github.com/906872
+ */
+// add_filter( 'manage_edit-itinerary-booking_sortable_columns', 'wp_travel_booking_payment_sort' );
+// function wp_travel_booking_payment_sort( $columns ) {
+
+// 	$custom = array(
+// 		'payment_status' => 'payment_status',
+// 		'payment_mode' 	 => 'payment_mode',
+// 	);
+// 	return wp_parse_args( $custom, $columns );
+// 	/* or this way
+// 		$columns['concertdate'] = 'concertdate';
+// 		$columns['city'] = 'city';
+// 		return $columns;
+// 	*/
+// }
+
+/*
+ * ADMIN COLUMN - SORTING - ORDERBY
+ * http://scribu.net/wordpress/custom-sortable-columns.html#comment-4732
+ */
+add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
+
+/**
+ * Manage Order By custom column.
+ *
+ * @param  Array $vars Order By array.
+ * @since 1.0.0
+ * @return Array       Order By array.
+ */
+function wp_travel_booking_payment_column_orderby( $vars ) {
+	if ( isset( $vars['orderby'] ) && 'payment_status' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'wp_travel_payment_status',
+			'orderby' => 'meta_value',
+		) );
+	}
+	if ( isset( $vars['orderby'] ) && 'payment_mode' == $vars['orderby'] ) {
+		$vars = array_merge( $vars, array(
+			'meta_key' => 'wp_travel_payment_mode',
+			'orderby' => 'meta_value',
+		) );
+	}
+	return $vars;
+}
+
+
+/**
+ * Create a page and store the ID in an option.
+ *
+ * @param mixed $slug Slug for the new page
+ * @param string $option Option name to store the page's ID
+ * @param string $page_title (default: '') Title for the new page
+ * @param string $page_content (default: '') Content for the new page
+ * @param int $post_parent (default: 0) Parent for the new page
+ * @return int page ID
+ */
+function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
+	global $wpdb;
+
+	$option_value     = get_option( $option );
+
+	if ( $option_value > 0 && ( $page_object = get_post( $option_value ) ) ) {
+		if ( 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
+			// Valid page is already in place
+			if ( strlen( $page_content ) > 0 ) {
+				// Search for an existing page with the specified page content (typically a shortcode)
+				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+			} else {
+				// Search for an existing page with the specified page slug
+				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
+			}
+		
+			$valid_page_found = apply_filters( 'wp_travel_create_page_id', $valid_page_found, $slug, $page_content );
+		
+			if ( $valid_page_found ) {
+				if ( $option ) {
+					update_option( $option, $valid_page_found );
+				}
+				return $valid_page_found;
+			}
+		}
+	}	
+
+	// Search for a matching valid trashed page
+	if ( strlen( $page_content ) > 0 ) {
+		// Search for an existing page with the specified page content (typically a shortcode)
+		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
+	} else {
+		// Search for an existing page with the specified page slug
+		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_name = %s LIMIT 1;", $slug ) );
+	}
+
+	if ( $trashed_page_found ) {
+		$page_id   = $trashed_page_found;
+		$page_data = array(
+			'ID'             => $page_id,
+			'post_status'    => 'publish',
+		);
+	 	wp_update_post( $page_data );
+	} else {
+		$page_data = array(
+			'post_status'    => 'publish',
+			'post_type'      => 'page',
+			'post_author'    => 1,
+			'post_name'      => $slug,
+			'post_title'     => $page_title,
+			'post_content'   => $page_content,
+			'post_parent'    => $post_parent,
+			'comment_status' => 'closed',
+		);
+		$page_id = wp_insert_post( $page_data );
+	}
+
+	if ( $option ) {
+		update_option( $option, $page_id );
+	}
+
+	return $page_id;
 }

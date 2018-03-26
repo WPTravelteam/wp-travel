@@ -50,6 +50,7 @@ $alto: #ddd;
                 padding: 10px 0px 10px 8px;
                 text-decoration: none;
                 color: #999;
+                text-transform: capitalize;
                 border-bottom: 1px solid #ddd;
                 background-position: left center;
                 background-repeat: no-repeat;
@@ -140,6 +141,16 @@ $alto: #ddd;
                 &:before{
                     font-family: icomoon;
                     content: '\e900';
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+            &#wp-travel-tab-misc_options a{
+                &:before{
+                    font-family: icomoon;
+                    content: '\e904';
+                    font-size: 12px;
+                    line-height: 20px;
                 }
             }
         }
@@ -260,25 +271,22 @@ $alto: #ddd;
 
 //marketplace page
 #poststuff {
-    padding-top: 10px;
-    min-width: 763px;
-    .inside {
-        img {
-            width: 100%;
+    .single-module-side{
+        .inside {
+            img {
+                width: 100%;
+            }
         }
     }
 }
-
 #aside-wrap {
     float: right;
     margin-right: -300px;
     width: 280px;
 }
-
-#post-body {
+.itineraries_page_wp-travel-marketplace #post-body {
     margin-right: 300px;
 }
-
 .wp-travel-marketplace-tab-wrap {
     width: 100%;
     margin-top: 50px;
@@ -335,7 +343,6 @@ $alto: #ddd;
         border: 1px solid #ddd;
     }
 }
-
 .marketplace-module {
     display: inline-block;
     position: relative;

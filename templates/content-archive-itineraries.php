@@ -54,11 +54,13 @@ if ( post_password_required() ) {
 						<?php the_excerpt(); ?>
 
 					</div>
-					<div class="wp-travel-average-review">
-					<?php wp_travel_trip_rating( get_the_ID() ); ?>
-						<?php $count = (int) wp_travel_get_review_count() ?>						
-					</div>
-					<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+					<?php if ( wp_travel_tab_show_in_menu( 'reviews' ) ) : ?>
+						<div class="wp-travel-average-review">
+							<?php wp_travel_trip_rating( get_the_ID() ); ?>
+							<?php $count = (int) wp_travel_get_review_count() ?>						
+						</div>
+						<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+					<?php endif; ?>
 					<div class="entry-meta">
 						<div class="category-list-items">
 							<span class="post-category">
