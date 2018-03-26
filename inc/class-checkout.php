@@ -57,12 +57,12 @@ class WP_Travel_Checkout {
         ?>
         <div class="wp-travel-billing">            
             <div class="wp-travel-tab-wrapper">
-                <div class="col-md-7 columns" >
+                <div class="col-md-7 clearfix columns" >
 					<h3><?php esc_html_e( 'Billing info', 'wp-travel' ) ?></h3>
                     <?php wp_travel_get_booking_form() ?>
                 </div>
                 
-                <div class="col-md-5 clearfix columns">
+                <div class="col-md-5 columns">
                     <div class="order-wrapper">
                     <h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'wp-travel' ) ?></h3>
                     <div id="order_review" class="wp-travel-checkout-review-order">
