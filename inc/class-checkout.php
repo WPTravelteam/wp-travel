@@ -62,7 +62,7 @@ class WP_Travel_Checkout {
                     <?php wp_travel_get_booking_form() ?>
                 </div>
                 
-                <div class="col-md-5 columns">
+                <div class="col-md-5 clearfix columns">
                     <div class="order-wrapper">
                     <h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'wp-travel' ) ?></h3>
                     <div id="order_review" class="wp-travel-checkout-review-order">
