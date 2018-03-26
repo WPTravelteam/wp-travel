@@ -72,16 +72,17 @@
     }
 }
 
-
-.col-md-5, .col-md-7 {
+.col-md-5,
+.col-md-7 {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-@media (min-width: 992px){
-    .col-md-5, .col-md-7{
+@media (min-width: 992px) {
+    .col-md-5,
+    .col-md-7 {
         float: left;
     }
     .col-md-5 {
@@ -100,56 +101,61 @@
     font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     display: inline-block;
     font-size: inherit;
     text-rendering: auto;
 }
+
 .icon-spinner:before {
-  content: "\f110";
+    content: "\f110";
 }
+
 // .slider-book-now:visited{
 //     background-color:transparent;
 // }
-
 .icon-spin {
-  -webkit-animation: icon-spin 2s infinite linear;
-  animation: icon-spin 2s infinite linear;
+    -webkit-animation: icon-spin 2s infinite linear;
+    animation: icon-spin 2s infinite linear;
 }
+
 .icon-pulse {
-  -webkit-animation: icon-spin 1s infinite steps(8);
-  animation: icon-spin 1s infinite steps(8);
+    -webkit-animation: icon-spin 1s infinite steps(8);
+    animation: icon-spin 1s infinite steps(8);
 }
+
 @-webkit-keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }
+
 @keyframes icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }
 
 .wp-travel-trip-details {
@@ -396,7 +402,6 @@
                     .wp-travel-text-info {
                         display: inline-block;
                         width: 100px;
-                        text-align: right;
                     }
                 }
                 @include mob {
@@ -2234,36 +2239,30 @@ html .ui-button.ui-state-disabled:active {
 }
 
 //date and pice tabs multiple booking section styling
-
-ul.availabily-list{
-    list-style:none;
-
+ul.availabily-list {
+    list-style: none;
     li {
         border-bottom: 1px solid #E3E3E3;
         line-height: 1.2;
         padding: 10px 0;
         margin: 10px 0;
         position: relative;
-
-        & > div {
+        &>div {
             display: inline-block;
             width: 19.5%;
             vertical-align: middle;
             padding: 0;
             margin: 0;
-
             &.date-to,
             &.date-from {
                 width: 23%;
-
-                @include mob{
-                    width:100%;
+                @include mob {
+                    width: 100%;
                 }
             }
             &.date-from {
                 padding-right: 10px;
-                position:relative;
-
+                position: relative;
                 // &:after {
                 //     font-family: 'FontAwesome';
                 //     content: "\f058";
@@ -2280,24 +2279,22 @@ ul.availabily-list{
             }
             &.price {
                 width: 12.5%;
-
-                del{
-                    span{
-                        font-weight:400;
-                        font-size:12px;
+                del {
+                    span {
+                        font-weight: 400;
+                        font-size: 12px;
                     }
                 }
-                ins{
-                    background-color:rgba(255, 255, 255, 0);
+                ins {
+                    background-color: rgba(255, 255, 255, 0);
                 }
             }
             &.price,
-            &.status{
+            &.status {
                 text-align: center;
             }
             &.action {
                 text-align: right;
-
                 &.btn {
                     margin-right: -8px;
                 }
@@ -2305,17 +2302,16 @@ ul.availabily-list{
             span {
                 display: block;
                 font-size: 14px;
-                font-weight:600;
+                font-weight: 600;
                 &.availabily-heading-label {
                     display: none;
                     font-size: 12px;
                     color: #999;
                 }
-
             }
-            .person-count{
-                span{
-                    display:inline-block;
+            .person-count {
+                span {
+                    display: inline-block;
                 }
             }
         }
@@ -2326,39 +2322,32 @@ ul.availabily-list{
         padding-bottom: 5px;
         font-weight: 600;
         text-transform: capitalize;
-
-        @include mob{
+        @include mob {
             display: none;
         }
-
-        .date-from{
-
-            &:after{
-                content:none;
+        .date-from {
+            &:after {
+                content: none;
             }
         }
     }
-    .availabily-content{
-
-        .action{
-            .btn{
-                padding:8px 12px;
-                border:2px solid #f83531;
-                border-radius:4px;
-
+    .availabily-content {
+        .action {
+            .btn {
+                padding: 8px 12px;
+                border: 2px solid #f83531;
+                border-radius: 4px;
                 @include extra-large-screen {
                     margin-right: -4px;
                 }
-
-                &:hover{
-                    background-color:#f83531;
-                    color:#fff;
+                &:hover {
+                    background-color: #f83531;
+                    color: #fff;
                 }
             }
         }
     }
-    .availabily-content.sold-out{
-
+    .availabily-content.sold-out {
         &:after {
             content: "";
             position: absolute;
@@ -2370,16 +2359,14 @@ ul.availabily-list{
             background: rgba(255, 255, 255, 0.6);
             display: block;
         }
-
-        & > div.date-from:after {
+        &>div.date-from:after {
             display: none;
         }
     }
-} 
+}
 
 .detail-content-wrapper {
     padding-right: 15px;
-
     @include extra-large-screen {
         .detail-content-wrapper {
             padding-right: 0;
@@ -2396,28 +2383,23 @@ ul.availabily-list{
     }
 }
 
-
-
-
 @media only screen and (max-width: 991px) {
     ul.availabily-list li {
         font-size: 13px;
     }
-    ul.availabily-list li > div span {
+    ul.availabily-list li>div span {
         display: block;
         font-size: 14px;
     }
-    ul.availabily-list li > div.action .btn {
+    ul.availabily-list li>div.action .btn {
         font-size: 10px;
         margin-right: 0px;
     }
 }
 
 @media only screen and (max-width: 767px) {
-    ul.availabily-list{
-        
-
-        li > div {
+    ul.availabily-list {
+        li>div {
             display: block;
             width: 100% !important;
             position: relative;
@@ -2425,7 +2407,6 @@ ul.availabily-list{
             text-align: left !important;
             margin-bottom: 15px;
             text-transform: capitalize;
-
             span.availabily-heading-label {
                 display: block;
                 position: absolute;
@@ -2435,25 +2416,18 @@ ul.availabily-list{
                 width: 80px;
             }
         }
-        li.availabily-content > div.date-from:after {
+        li.availabily-content>div.date-from:after {
             top: 0;
             right: auto;
             left: 0;
             margin-top: 0;
         }
-    } 
-
+    }
 }
 
-
-
 //end
-
 //cart page
-
-
-.wp-travel-ecommerse{
-
+.wp-travel-ecommerse {
     .wp-travel-ecommerse-message {
         padding: 1em 2em 1em 3.5em;
         margin: 0 0 2em;
@@ -2464,14 +2438,12 @@ ul.availabily-list{
         list-style: none outside;
         width: auto;
         word-wrap: break-word;
-
         &:before {
             font-family: dashicons;
             display: inline-block;
             position: absolute;
             top: 1em;
             left: 1.5em;
-
             content: '\f147';
             color: #8fae1b;
         }
@@ -2487,7 +2459,7 @@ ul.availabily-list{
         text-align: center;
     }
     thead {
-        tr{
+        tr {
             background-color: #f1f1f1;
         }
         th {
@@ -2495,18 +2467,18 @@ ul.availabily-list{
         }
     }
     table.cart td.actions .coupon,
-    #content table.cart td.actions .coupon{
+    #content table.cart td.actions .coupon {
         float: left;
     }
-    .cart .button, 
+    .cart .button,
     .wp-travel-ecommerse .cart input.button {
         float: right;
     }
     table.cart td.actions .coupon label,
-    #content table.cart td.actions .coupon label{
-        display:none;
+    #content table.cart td.actions .coupon label {
+        display: none;
     }
-    table.cart td.actions .coupon .input-text{
+    table.cart td.actions .coupon .input-text {
         float: left;
         box-sizing: border-box;
         border: 1px solid #d3ced2;
@@ -2520,7 +2492,7 @@ ul.availabily-list{
         width: 150px;
     }
     .actions .button,
-    .actions .button.alt{
+    .actions .button.alt {
         background-color: #2a2a2a;
         color: #fffefe;
         text-transform: uppercase;
@@ -2529,21 +2501,17 @@ ul.availabily-list{
         display: inline-block;
         font-size: 14px;
         margin-left: 10px;
-
-
-        &:hover{
-            background-color:#f83531;
+        &:hover {
+            background-color: #f83531;
         }
     }
-    .cart-collaterals{
+    .cart-collaterals {
         margin-top: 30px;
-        width:100%;
-
+        width: 100%;
         .cart_totals {
             float: right;
             width: 48%;
         }
-
         a.checkout-button.button {
             background-color: #2a2a2a;
             color: #fffefe;
@@ -2552,35 +2520,29 @@ ul.availabily-list{
             display: block;
             text-align: center;
             padding: 10px;
-
-            &:hover{
-                background-color:#f83531;
+            &:hover {
+                background-color: #f83531;
             }
         }
     }
-
-
-    
-} 
+}
 
 //end
 //checkout page
-
-.wp-travel-billing{
-
+.wp-travel-billing {
     .wp-travel-info {
         text-align: center;
         font-weight: 600;
         padding: 5px 0 5px 0;
         margin-bottom: 20px;
     }
-    h3{
+    h3 {
         font-size: 22px;
         font-weight: 400;
-        color:#555;
+        color: #555;
     }
-    .form-row-first, 
-    .form-row-last{
+    .form-row-first,
+    .form-row-last {
         float: left;
         width: 47%;
         overflow: visible;
@@ -2589,14 +2551,14 @@ ul.availabily-list{
         display: block;
         margin-bottom: 8px;
     }
-    input.input-text, 
+    input.input-text,
     .form-row textarea {
         box-sizing: border-box;
         width: 100%;
         margin: 0;
         outline: 0;
         line-height: 1;
-        height:40px;
+        height: 40px;
     }
     .form-row {
         padding: 3px;
@@ -2618,7 +2580,7 @@ ul.availabily-list{
         border: 0;
     }
     .order-wrapper {
-        background: rgba(84,84,84,.05);
+        background: rgba(84, 84, 84, .05);
         margin-left: 30px;
         padding: 20px 20px 1px;
     }
@@ -2628,7 +2590,6 @@ ul.availabily-list{
         border-bottom: 1px solid #d3ced2;
         margin: 0;
         list-style: none outside;
-
         li {
             img {
                 vertical-align: middle;
@@ -2636,7 +2597,7 @@ ul.availabily-list{
                 padding: 0;
                 position: relative;
                 box-shadow: none;
-                    max-height: 52px;
+                max-height: 52px;
             }
             input {
                 margin: 0 1em 0 0;
@@ -2659,8 +2620,8 @@ ul.availabily-list{
             line-height: 1.5;
             background-color: #dfdcde;
             color: #515151;
-            p{
-                font-size:12px;
+            p {
+                font-size: 12px;
             }
             p:last-child {
                 margin-bottom: 0;
@@ -2683,12 +2644,11 @@ ul.availabily-list{
         width: 100%;
         background-color: #2a2a2a;
         padding: 16px 24px;
-        &:hover{
-            background-color:#f83531;
+        &:hover {
+            background-color: #f83531;
         }
     }
-
-    @include sidr-view{
+    @include sidr-view {
         .order-wrapper {
             margin-left: 0;
             margin-top: 50px;
@@ -2696,8 +2656,7 @@ ul.availabily-list{
             width: 100%;
         }
     }
-
-    .wp-travel-billing-error{
+    .wp-travel-billing-error {
         padding: 1em 2em 1em 3.5em;
         margin: 0 0 2em;
         position: relative;
@@ -2707,9 +2666,8 @@ ul.availabily-list{
         list-style: none outside;
         width: auto;
         word-wrap: break-word;
-
-        li{
-            position:relative;
+        li {
+            position: relative;
             margin: 5px 0;
             &:before {
                 content: '!';
@@ -2725,23 +2683,19 @@ ul.availabily-list{
                 text-align: center;
                 font-size: 12px;
                 font-weight: 900;
-
             }
         }
     }
-    .wp-travel-checkout-review-order-table{
-        tr{
+    .wp-travel-checkout-review-order-table {
+        tr {
             td:last-of-type {
                 text-align: right;
             }
-        } 
-    } 
+        }
+    }
 }
 
-
 //end
-
-
 
 /* enquiry form single trips */
 
@@ -2810,5 +2764,3 @@ ul.availabily-list{
     display: block;
     border: 2px solid #f00;
 }
-
-

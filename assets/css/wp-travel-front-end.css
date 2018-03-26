@@ -1,11 +1,13 @@
-.col-md-5, .col-md-7 {
+.col-md-5,
+.col-md-7 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px; }
 
 @media (min-width: 992px) {
-  .col-md-5, .col-md-7 {
+  .col-md-5,
+  .col-md-7 {
     float: left; }
 
   .col-md-5 {
@@ -19,7 +21,8 @@
   src: url("../fonts/icomoon.eot?scxfre#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?scxfre") format("truetype"), url("../fonts/icomoon.woff?scxfre") format("woff"), url("../fonts/icomoon.svg?scxfre#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon';
   speak: none;
@@ -239,8 +242,7 @@
       margin-bottom: 0; }
     .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field.wp-travel-text-info .wp-travel-text-info {
       display: inline-block;
-      width: 100px;
-      text-align: right; }
+      width: 100px; }
     @media (max-width: 767px) {
       .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field {
         width: 100%;
