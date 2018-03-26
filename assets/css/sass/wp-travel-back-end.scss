@@ -1097,6 +1097,114 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 
 } 
+//label with price styling
+.wp-travel-currency-symbol {
+    background: #eee;
+    width: 25px;
+    display: inline-block;
+    height: 26px;
+    position: relative;
+    top: 1px;
+    left: 1px;
+    text-align: center;
+    line-height: 28px;
+    border:1px solid #ddd;
+}
+//pricing tab css
+.table-inside-heading{
+    th{
+        padding:0;
+    }
+    h3{
+        margin-top:0;
+        margin-bottom:15px;
+    }
+}
+.form-table {
+    .pricing-repeater{
+        vertical-align:top;
+    }
+}    
+#wp-travel-pricing-options{
+
+    .repeat-row{
+        margin-top: 0;
+        position: relative;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0px;
+        width: 100%;
+        box-sizing: border-box;
+        &:first-of-type{
+            margin-top:0;
+        }
+
+        .wp-travel-currency-symbol{
+            top: 3px;
+            left: 5px;
+            z-index: 1;
+        }
+    }
+
+    select{
+        display:inline-block;
+        min-width: 25%;
+    }
+    
+    input {
+        display: inline;
+        position: relative;
+        line-height: 1;
+        height:28px;
+        top: 2px;
+        max-width: 100px;
+        min-width: 25%;
+    }
+}
+.pricing-repeater{
+    
+    .wp-travel-pricing-remove{
+        box-shadow:none;
+        border-radius:0;
+        text-shadow:none;
+        text-align:center;
+        border: none;
+    }
+    .wp-travel-add-pricing-option{
+        display: block;
+        position: relative;
+    }
+    .wp-travel-remove-pricing-option{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 32px;
+        height: 100%;
+        
+        .wp-travel-pricing-remove{
+            background-color: #f56961;
+            width: 32px;
+            height: 100%;
+            position: relative;
+            display: block;
+        }
+        .remove-item{
+            font-style: normal;
+            position: absolute;
+            top: 50%;
+            left: calc( 50% - 3px );
+            height: 5px;
+            line-height: 0;
+        }
+
+    }
+    .wp-travel-pricing-add-new{
+        float: right;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    
+}
+
 
 .checkbox-default-design {
     label {
