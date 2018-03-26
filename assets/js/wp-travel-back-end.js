@@ -375,7 +375,7 @@
     $('.wp-travel-pricing-add-new').on('click', function() {
         var template = wp.template('wp-travel-pricing-options');
         var rand = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
-        $('#wp-travel-pricing-options').append(template({ random: rand }));
+        $('#pricing-options-data').append(template({ random: rand }));
 
 
     });

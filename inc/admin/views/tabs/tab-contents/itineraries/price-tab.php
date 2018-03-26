@@ -126,7 +126,7 @@
 		<td colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 				<p class="description">Select different pricing category with its different sale price</p>
-				<div class="repeat-row">
+				<!-- <div class="repeat-row">
 					<select>
 						<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
 						<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
@@ -147,25 +147,43 @@
 						<a href="#" class="button button-primary wp-travel-pricing-remove" title="remove this field"><i class="remove-item">x</i></a>
 					</div>
 
-				</div>
+				</div> -->
+				<div id="tab-accordion" class="tab-accordion">
+			<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
+
+			</div>
+		</div>
 			</div>
 			<div class="wp-travel-add-pricing-option clearfix">
 				<input type="button" value="Add New Question" class="button button-primary wp-travel-pricing-add-new" title="Add New Pricing Option" />
 			</div>
 			<script type="text/html" id="tmpl-wp-travel-pricing-options">
-				<div class="repeat-row">
-					<select name="pricing_options[{{data.random}}]">
-						<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
-						<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
-					</select>
-					<span class="wp-travel-currency-symbol">$</span>
-					<input type="number" name="" min="1" step="any" placeholder="Sale Price" />
-					<div class="wp-travel-remove-pricing-option">
-						<a href="#" class="button button-primary wp-travel-pricing-remove" title="remove this field"><i class="remove-item">x</i></a>
-					</div>
+
+				<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+				<h4 class="panel-title">
+				<div class="wp-travel-sorting-handle"></div>
+				<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
+
+					<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
+
+				<span class="collapse-icon"></span>
+				</a>
+				<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+				</h4>
 				</div>
-				
+				<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
+				<div class="panel-body">
+				<div class="panel-wrap">
+					<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
+					<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" class="faq-question-text" value="">
+				</div>
+				<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."></textarea>
+				</div>
+				</div>
+				</div>
 			</script>
+
 		</td>
 	</tr>
 
