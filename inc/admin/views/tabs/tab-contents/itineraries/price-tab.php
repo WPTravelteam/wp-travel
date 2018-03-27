@@ -1,31 +1,37 @@
 <?php
-	global $post;
+/**
+ * Pricing Tab meta Contents.
+ *
+ * @package WP_Travel
+ */
 
-	$price 		= get_post_meta( $post->ID, 'wp_travel_price', true );
-	$sale_price = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
-	
-	$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
-	
-	$sale_price_attribute = 'disabled="disabled"';
-	$sale_price_style = 'display:none';
-	if ( $enable_sale ) {
-		$sale_price_attribute = '';
-		$sale_price_style = '';
-	}
+global $post;
 
-	$settings = wp_travel_get_settings();
-	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] :'';
+$price       = get_post_meta( $post->ID, 'wp_travel_price', true );
+$sale_price  = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
+$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
+
+$sale_price_attribute = 'disabled="disabled"';
+$sale_price_style     = 'display:none';
+
+if ( $enable_sale ) {
+	$sale_price_attribute = '';
+	$sale_price_style     = '';
+}
+
+	$settings        = wp_travel_get_settings();
+	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
 	$price_per = get_post_meta( $post->ID, 'wp_travel_price_per', true );
-	if ( ! $price_per ) {
-		$price_per = 'person';
-	}
+if ( ! $price_per ) {
+	$price_per = 'person';
+}
 ?>
 <table class="form-table pricing-tab">
 	<tr class="table-inside-heading">
 		<th colspan="2">
-			<h3>Pricing</h3>
+			<h3><?php echo esc_html( 'Pricing', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
 	<tr>
@@ -54,20 +60,16 @@
 				<label data-on="ON" data-off="OFF">
 					<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" " />							
 					<span class="switch">
-				  </span>
-				 
+				</span>
 				</label>
 			</span>
-			 <span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
-			
+			<span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
 		</td>
 	</tr>
 	<tr style="<?php echo esc_attr( $sale_price_style ); ?>">
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
-
-
 
 	<tr class="table-inside-heading">
 		<td class="pricing-repeater"><label for="wp-travel-enable-pricing-options"><?php esc_html_e( 'Pricing Options', 'wp-travel' ); ?></label>
@@ -76,16 +78,11 @@
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
 					<input name="wp_travel_enable_pricing-options" type="checkbox" id="wp-travel-enable-pricing-options" checked="checked" value="1" "="">							
-					<span class="switch">
-				  </span>
-				 
+					<span class="switch"></span>
 				</label>
 			</span>
-			 <span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different pricing options.</span>
-			
+			<span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different pricing options.</span>
 		</td>
-
-		
 	</tr>
 	<tr>
 
@@ -93,39 +90,16 @@
 		<td colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 				<p class="description">Select different pricing category with its different sale price</p>
-				<!-- <div class="repeat-row">
-					<select>
-						<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
-						<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
-					</select>
-					<span class="wp-travel-currency-symbol">$</span>
-					<input type="number" name="" min="1" step="any" placeholder="Sale Price" />
-				</div>
-				<div class="repeat-row">
-					<select>
-						<option value="everyone"><?php esc_html_e( 'Everyone', 'wp-travel' ); ?></option>
-						<option value="group-of-four"><?php esc_html_e( 'Custom', 'wp-travel' ); ?></option>
-					</select>
-					
-					<span class="wp-travel-currency-symbol">$</span>
-					<input type="number" name="" min="1" step="any" placeholder="Sale Price" />
-					<input type="text" name="label" placeholder="Label" />
-					<div class="wp-travel-remove-pricing-option">
-						<a href="#" class="button button-primary wp-travel-pricing-remove" title="remove this field"><i class="remove-item">x</i></a>
-					</div>
-
-				</div> -->
 				<div id="price-accordion" class="tab-accordion price-accordion">
 					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
-						
 					</div>
 				</div>
 			</div>
 			<div class="wp-travel-add-pricing-option clearfix">
 				<input type="button" value="Add New Pricing Option" class="button button-primary wp-travel-pricing-add-new" title="Add New Pricing Option" />
 			</div>
+			<!-- Template Script for Pricing Options -->
 			<script type="text/html" id="tmpl-wp-travel-pricing-options">
-
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading-{{data.random}}">
 						<h4 class="panel-title">
@@ -172,10 +146,8 @@
 									<div class="two-third">
 										<span class="show-in-frontend checkbox-default-design">
 											<label data-on="ON" data-off="OFF">
-												<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" checked="checked" value="1" "="">							
-												<span class="switch">
-											  </span>
-											 
+												<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" checked="checked" value="1" "="">			
+												<span class="switch"></span>
 											</label>
 										</span>
 										<span class="wp-travel-enable-sale">Check to enable sale.</span>
@@ -214,13 +186,10 @@
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
 					<input name="wp_travel_enable_pricing-options" type="checkbox" id="wp-travel-multiple-date-options" checked="checked" value="1" "="">							
-					<span class="switch">
-				  </span>
-				 
+					<span class="switch"></span>
 				</label>
 			</span>
-			 <span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different date options.</span>
-			
+			<span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different date options.</span>	
 		</td>
 	</tr>
 
