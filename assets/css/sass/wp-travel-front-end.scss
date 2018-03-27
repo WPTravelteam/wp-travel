@@ -396,7 +396,6 @@
                     .wp-travel-text-info {
                         display: inline-block;
                         width: 100px;
-                        text-align: right;
                     }
                 }
                 @include mob {
@@ -2565,7 +2564,6 @@ ul.availabily-list{
 
 //end
 //checkout page
-
 .wp-travel-billing{
 
     .wp-travel-info {
@@ -2578,6 +2576,7 @@ ul.availabily-list{
         font-size: 22px;
         font-weight: 400;
         color:#555;
+        margin-top:0;
     }
     .form-row-first, 
     .form-row-last{

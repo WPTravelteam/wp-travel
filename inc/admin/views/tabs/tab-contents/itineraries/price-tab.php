@@ -90,39 +90,6 @@
 	<tr>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<td colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 				<p class="description">Select different pricing category with its different sale price</p>
@@ -148,39 +115,92 @@
 					</div>
 
 				</div> -->
-				<div id="tab-accordion" class="tab-accordion">
-			<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
-
-			</div>
-		</div>
+				<div id="price-accordion" class="tab-accordion price-accordion">
+					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
+						
+					</div>
+				</div>
 			</div>
 			<div class="wp-travel-add-pricing-option clearfix">
-				<input type="button" value="Add New Question" class="button button-primary wp-travel-pricing-add-new" title="Add New Pricing Option" />
+				<input type="button" value="Add New Pricing Option" class="button button-primary wp-travel-pricing-add-new" title="Add New Pricing Option" />
 			</div>
 			<script type="text/html" id="tmpl-wp-travel-pricing-options">
 
 				<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="heading-{{data.random}}">
-				<h4 class="panel-title">
-				<div class="wp-travel-sorting-handle"></div>
-				<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
+					<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+						<h4 class="panel-title">
+							<div class="wp-travel-sorting-handle"></div>
+								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
 
-					<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
+									<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'Pricing Option 1', 'wp-travel' ); ?></span>
 
-				<span class="collapse-icon"></span>
-				</a>
-				<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
-				</h4>
-				</div>
-				<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
-				<div class="panel-body">
-				<div class="panel-wrap">
-					<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-					<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" class="faq-question-text" value="">
-				</div>
-				<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."></textarea>
-				</div>
-				</div>
+									<span class="collapse-icon"></span>
+								</a>
+							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+						</h4>
+					</div>
+					<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
+						<div class="panel-body">
+							<div class="panel-wrap">
+								<div class="repeat-row">
+									<label class="one-third"><?php esc_html_e( 'Select a category', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<select>
+											<option value="everyone"><?php esc_html_e( 'Custom', 'wp-travel' ); ?></option>
+											<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label class="one-third"><?php esc_html_e( 'Custom pricing name', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<input type="text" name="" placeholder="name" />
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label class="one-third"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<span class="wp-travel-currency-symbol">$</span>
+										<input type="number" min="1" name="" id="" value="300">
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label class="one-third">Enable Sale</label>
+									<div class="two-third">
+										<span class="show-in-frontend checkbox-default-design">
+											<label data-on="ON" data-off="OFF">
+												<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" checked="checked" value="1" "="">							
+												<span class="switch">
+											  </span>
+											 
+											</label>
+										</span>
+										<span class="wp-travel-enable-sale">Check to enable sale.</span>
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<span class="wp-travel-currency-symbol">$</span>
+										<input type="number" min="1" name="" id="" value="300">
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label class="one-third"><?php esc_html_e( 'Number of PAX', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<input type="number" name="" placeholder="Min PAX"  min="1" />
+
+										<input type="number" name="" placeholder="Max PAX"  min="1" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</script>
 
@@ -188,7 +208,7 @@
 	</tr>
 
 	<tr>
-		<td class="pricing-repeater"><label for="wp-travel-multiple-date-options"><?php esc_html_e( 'Dates', 'wp-travel' ); ?></label>
+		<td class="pricing-repeater"><label for="wp-travel-multiple-date-options"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></label>
 		</td>
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
@@ -208,25 +228,135 @@
 	<tr>
 		<td colspan="2" class="pricing-repeater">
 			<p class="description">You can select different dates for each category.</p>
-			<div class="wp-travel-row repeat-row">
-				<label>Adult:</label>
-				<input type="text" data-range="true" data-multiple-dates-separator=" - "
-    data-language="en" class="datepicker-here" placeholder="Date Range" />
+
+
+
+
+
+			<div id="date-accordion" class="tab-accordion date-accordion">
+					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
+						
+					
+
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="heading-594">
+						<h4 class="panel-title">
+							<div class="wp-travel-sorting-handle"></div>
+								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-594" aria-expanded="false" aria-controls="collapse-594" class="collapsed">
+
+									<span bind="faq_question_594">Multiple Date 1</span>
+
+									<span class="collapse-icon"></span>
+								</a>
+							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+						</h4>
+					</div>
+					<div id="collapse-594" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-594" aria-expanded="true">
+						<div class="panel-body">
+							<div class="panel-wrap">
+								<div class="repeat-row">
+									<label class="one-third">Add a Label</label>
+									<div class="two-third">
+										<input type="text" placeholder="Your Text here" />
+									</div>
+								</div>
+								<div class="repeat-row">
+									<label class="one-third">Select a Date</label>
+									<div class="two-third">
+										<input type="text" data-language="en" class="datepicker-here" placeholder="Start Date" />
+										<input type="text" data-language="en" class="datepicker-here" placeholder="End Date" />
+									</div>
+								</div>
+								<div class="repeat-row">
+									<label class="one-third">Select a Category</label>
+									<div class="two-third">
+										<div class="custom-multi-select">
+											<span class="select-main">
+												<span class="selected-item">Select multiple</span> 
+												<span class="carret"></span> 
+												<span class="close"></span>
+												<ul>
+													<li>
+														<a tabindex="0" class="multiselect-all">
+															<label class="checkbox">
+																<input type="checkbox" value="multiselect-all">  Select all
+															</label>
+														</a>
+													</li>
+													<li>
+														<a tabindex="0" class="multiselect">
+															<label class="checkbox">
+																<input type="checkbox" value="multiselect">  Adult
+															</label>
+														</a>
+													</li>
+													<li>
+														<a tabindex="0" class="multiselect">
+															<label class="checkbox">
+																<input type="checkbox" value="multiselect">  Children
+															</label>
+														</a>
+													</li>
+													<li>
+														<a tabindex="0" class="multiselect">
+															<label class="checkbox">
+																<input type="checkbox" value="multiselect">  Group of four
+															</label>
+														</a>
+													</li>
+												</ul>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="wp-travel-row repeat-row">
-				<label>Group of four:</label>
-				<input type="text" data-range="true" data-multiple-dates-separator=" - "
-    data-language="en" class="datepicker-here" placeholder="Date Range" />
-			</div>
-			<div class="wp-travel-row repeat-row">
-				<label>Custom:</label>
-				<input type="text" data-range="true" data-multiple-dates-separator=" - "
-    data-language="en" class="datepicker-here" placeholder="Date Range" />
-			</div>
+				</div>
+		
 		</td>
 	</tr>
 
+<script type="text/javascript">
+	
+	jQuery('.select-main .close').hide();
+	jQuery(document).on('click','.select-main .close', function(){
+		$(this).siblings('.active').removeClass('active');
+		$(this).siblings('.carret').show();
+		$(this).hide();
+		var countSelected = jQuery('.select-main li.selected').length
+		jQuery('.select-main .selected-item').html(countSelected + ' item selected');
+	});
+	jQuery('.select-main').click(function(){
+		if($(this).find('ul.active').length == 0){
+			$(this).children('ul').addClass('active');
+			$(this).children('.close').show();
+			$(this).children('.carret').hide();
+		} else{
+			// $(this).children('.carret').show();
+			// $(this).children('.close').hide();
+			// $(this).children('ul').removeClass('active');
+		}
+	});
+	// $("body").click(function(e){
+	//     if(e.target.className !== "select-main")
+	//     {
+	//       jQuery('.select-main').children('.carret').show();
+	// 		jQuery('.select-main').children('.close').hide();
+	// 		jQuery('.select-main').children('ul').removeClass('active');
+	//     }
+	//   }
+	// );
+	jQuery('.select-main li input').change(function($) { //on change do stuff
+		jQuery(this).parent().parent().parent('li').toggleClass('selected');
+	});
+	// jQuery(document).on('click', '.select-main li a', function(event) {
+	// 	jQuery(this).parent('li').toggleClass('selected');
+	// });
 
+</script>
 
 
 	<?php

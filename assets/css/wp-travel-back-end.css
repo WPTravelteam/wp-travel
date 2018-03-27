@@ -597,7 +597,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .tab-accordion h4 {
   border: 1px solid #ddd;
   padding: 10px 15px 10px 45px;
-  margin: 0;
+  margin: 0 !important;
   background-color: #f7f7f1;
   position: relative; }
   .tab-accordion h4:hover {
@@ -613,7 +613,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     right: 10px;
     color: #ca4a1f;
     font-size: 16px;
-    top: calc( 50% - 10px ); }
+    top: calc( 50% - 8px );
+    cursor: pointer; }
 .tab-accordion .panel-collapse {
   padding: 0;
   border: 1px solid #ddd;
@@ -652,6 +653,135 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .tab-accordion .wp-travel-itinerary {
   display: inline-block;
   width: 60%; }
+
+.price-accordion,
+.date-accordion {
+  margin-top: 20px; }
+  .price-accordion .panel-wrap,
+  .date-accordion .panel-wrap {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box; }
+    .price-accordion .panel-wrap label,
+    .date-accordion .panel-wrap label {
+      line-height: 29px; }
+  .price-accordion .repeat-row,
+  .date-accordion .repeat-row {
+    display: inline-block; }
+    .price-accordion .repeat-row:last-of-type,
+    .date-accordion .repeat-row:last-of-type {
+      border-bottom: none; }
+  .price-accordion .one-third,
+  .price-accordion .two-third,
+  .date-accordion .one-third,
+  .date-accordion .two-third {
+    float: left;
+    min-height: 1px;
+    position: relative;
+    box-sizing: border-box; }
+  .price-accordion .one-third,
+  .date-accordion .one-third {
+    width: 33.3333%; }
+  .price-accordion .two-third,
+  .date-accordion .two-third {
+    width: 66.6666%; }
+    .price-accordion .two-third select, .price-accordion .two-third .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .price-accordion .two-third input, .price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third textarea, .price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third textarea,
+    .price-accordion .two-third input,
+    .price-accordion .two-third .wp-travel-form-field select,
+    .wp-travel-form-field .price-accordion .two-third select,
+    .price-accordion .two-third .wp-travel-form-field textarea,
+    .wp-travel-form-field .price-accordion .two-third textarea,
+    .date-accordion .two-third select,
+    .date-accordion .two-third .stat-toolbar-form .field-group input,
+    .stat-toolbar-form .field-group .date-accordion .two-third input,
+    .date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field textarea,
+    .stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third textarea,
+    .date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group textarea,
+    .wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third textarea,
+    .date-accordion .two-third input,
+    .date-accordion .two-third .wp-travel-form-field select,
+    .wp-travel-form-field .date-accordion .two-third select,
+    .date-accordion .two-third .wp-travel-form-field textarea,
+    .wp-travel-form-field .date-accordion .two-third textarea {
+      width: 30%; }
+    .price-accordion .two-third .show-in-frontend,
+    .date-accordion .two-third .show-in-frontend {
+      float: left !important;
+      max-width: 100% !important; }
+    .price-accordion .two-third label,
+    .date-accordion .two-third label {
+      line-height: 10px; }
+      .price-accordion .two-third label input, .price-accordion .two-third label .wp-travel-form-field select, .wp-travel-form-field .price-accordion .two-third label select, .price-accordion .two-third label .wp-travel-form-field textarea, .wp-travel-form-field .price-accordion .two-third label textarea,
+      .date-accordion .two-third label input,
+      .date-accordion .two-third label .wp-travel-form-field select,
+      .wp-travel-form-field .date-accordion .two-third label select,
+      .date-accordion .two-third label .wp-travel-form-field textarea,
+      .wp-travel-form-field .date-accordion .two-third label textarea {
+        position: absolute !important; }
+    .price-accordion .two-third .wp-travel-enable-sale,
+    .date-accordion .two-third .wp-travel-enable-sale {
+      position: relative;
+      top: 5px;
+      left: 5px; }
+    .price-accordion .two-third .wp-travel-currency-symbol + input, .price-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + select, .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + select, .price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + input, .price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + input, .price-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + textarea, .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + textarea,
+    .date-accordion .two-third .wp-travel-currency-symbol + input,
+    .date-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + select,
+    .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + select,
+    .date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + input,
+    .date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + input,
+    .date-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + textarea,
+    .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + textarea {
+      left: -3px; }
+
+.custom-multi-select .select-main {
+  padding: 5px 25px 5px 5px;
+  border: 1px solid #999;
+  position: relative;
+  display: inline-block;
+  cursor: pointer; }
+  .custom-multi-select .select-main ul {
+    visibility: hidden;
+    opacity: 0;
+    height: 1px;
+    margin: 0;
+    position: absolute;
+    display: inline-block;
+    box-sizing: border-box;
+    top: 100%;
+    width: 100%;
+    left: 0; }
+    .custom-multi-select .select-main ul li {
+      margin: 0;
+      background: #fff;
+      padding: 5px;
+      box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.14);
+      font-size: 12px; }
+      .custom-multi-select .select-main ul li input, .custom-multi-select .select-main ul li .wp-travel-form-field select, .wp-travel-form-field .custom-multi-select .select-main ul li select, .custom-multi-select .select-main ul li .wp-travel-form-field textarea, .wp-travel-form-field .custom-multi-select .select-main ul li textarea {
+        position: relative !important;
+        width: auto; }
+    .custom-multi-select .select-main ul.active {
+      visibility: visible;
+      opacity: 1;
+      z-index: 9; }
+.custom-multi-select .carret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid #555;
+  position: absolute;
+  top: 45%;
+  right: 8px; }
+.custom-multi-select .close {
+  position: absolute;
+  top: 45%;
+  right: 8px; }
+  .custom-multi-select .close:before {
+    position: absolute;
+    top: -8px;
+    right: 1px;
+    content: 'x'; }
 
 .email-global-accordion.tab-accordion .panel-title {
   padding: 0; }
@@ -777,8 +907,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 #wp-travel-pricing-options .repeat-row:first-of-type {
   margin-top: 0; }
 #wp-travel-pricing-options .repeat-row .wp-travel-currency-symbol {
-  top: 3px;
-  left: 5px;
   z-index: 1; }
 #wp-travel-pricing-options select, #wp-travel-pricing-options .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group #wp-travel-pricing-options input, #wp-travel-pricing-options .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field #wp-travel-pricing-options textarea, #wp-travel-pricing-options .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group #wp-travel-pricing-options textarea {
   display: inline-block;
@@ -788,41 +916,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   position: relative;
   line-height: 1;
   height: 28px;
-  top: 2px;
   max-width: 100px;
   min-width: 25%; }
-
-.pricing-repeater .wp-travel-pricing-remove {
-  box-shadow: none;
-  border-radius: 0;
-  text-shadow: none;
-  text-align: center;
-  border: none; }
-.pricing-repeater .wp-travel-add-pricing-option {
-  display: block;
-  position: relative; }
-.pricing-repeater .wp-travel-remove-pricing-option {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 32px;
-  height: 100%; }
-  .pricing-repeater .wp-travel-remove-pricing-option .wp-travel-pricing-remove {
-    background-color: #f56961;
-    width: 32px;
-    height: 100%;
-    position: relative;
-    display: block; }
-  .pricing-repeater .wp-travel-remove-pricing-option .remove-item {
-    font-style: normal;
-    position: absolute;
-    top: 50%;
-    left: calc( 50% - 3px );
-    height: 5px;
-    line-height: 0; }
-.pricing-repeater .wp-travel-pricing-add-new {
-  float: right;
-  margin-top: 10px; }
 
 .wp-travel-row:after, .wp-travel-row:before {
   content: "";

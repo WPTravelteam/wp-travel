@@ -239,8 +239,7 @@
       margin-bottom: 0; }
     .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field.wp-travel-text-info .wp-travel-text-info {
       display: inline-block;
-      width: 100px;
-      text-align: right; }
+      width: 100px; }
     @media (max-width: 767px) {
       .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field {
         width: 100%;
@@ -1878,7 +1877,8 @@ ul.availabily-list {
 .wp-travel-billing h3 {
   font-size: 22px;
   font-weight: 400;
-  color: #555; }
+  color: #555;
+  margin-top: 0; }
 .wp-travel-billing .form-row-first,
 .wp-travel-billing .form-row-last {
   float: left;
