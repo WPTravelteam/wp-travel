@@ -1,11 +1,14 @@
-.col-md-5, .col-md-7 {
+.no-padding {
+  padding: 0 !important; }
+
+.col-md-5, .col-md-7, .col-sm-3 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px; }
 
 @media (min-width: 992px) {
-  .col-md-5, .col-md-7 {
+  .col-md-5, .col-md-7, .col-sm-3 {
     float: left; }
 
   .col-md-5 {
@@ -13,6 +16,9 @@
 
   .col-md-7 {
     width: 58.33333%; } }
+@media (min-width: 768px) {
+  .col-sm-3 {
+    width: 25%; } }
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon.eot?scxfre");
@@ -1660,7 +1666,9 @@ html .ui-button.ui-state-disabled:active {
         opacity: 0.5; }
 
 ul.availabily-list {
-  list-style: none; }
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important; }
   ul.availabily-list li {
     border-bottom: 1px solid #E3E3E3;
     line-height: 1.2;
@@ -1684,7 +1692,7 @@ ul.availabily-list {
       ul.availabily-list li > div.date-to {
         padding-left: 10px; }
       ul.availabily-list li > div.price {
-        width: 12.5%; }
+        width: 13.5%; }
         ul.availabily-list li > div.price del span {
           font-weight: 400;
           font-size: 12px; }
@@ -1706,6 +1714,22 @@ ul.availabily-list {
           color: #999; }
       ul.availabily-list li > div .person-count span {
         display: inline-block; }
+      ul.availabily-list li > div.wp-travel-booking-row {
+        width: 100%;
+        padding-top: 20px;
+        margin-top: 10px;
+        padding-bottom: 20px;
+        border-top: 1px solid #eee;
+        margin-bottom: -10px;
+        height: 0; }
+        ul.availabily-list li > div.wp-travel-booking-row.animate {
+          height: auto; }
+        ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
+          margin: 5px 0; }
+        ul.availabily-list li > div.wp-travel-booking-row .add-to-cart {
+          display: inline-block;
+          width: 100%;
+          margin-top: 30px; }
   ul.availabily-list .availabily-heading {
     font-size: 12px;
     color: #555;
@@ -1717,16 +1741,18 @@ ul.availabily-list {
         display: none; } }
     ul.availabily-list .availabily-heading .date-from:after {
       content: none; }
-  ul.availabily-list .availabily-content .action .btn {
+  ul.availabily-list .availabily-content .btn {
     padding: 8px 12px;
     border: 2px solid #f83531;
     border-radius: 4px; }
     @media (max-width: 1199px) {
-      ul.availabily-list .availabily-content .action .btn {
+      ul.availabily-list .availabily-content .btn {
         margin-right: -4px; } }
-    ul.availabily-list .availabily-content .action .btn:hover {
+    ul.availabily-list .availabily-content .btn:hover {
       background-color: #f83531;
       color: #fff; }
+  ul.availabily-list .availabily-content .action .btn {
+    padding: 2px 5px; }
   ul.availabily-list .availabily-content.sold-out:after {
     content: "";
     position: absolute;

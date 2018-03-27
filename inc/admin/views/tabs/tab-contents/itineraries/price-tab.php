@@ -318,7 +318,6 @@
 		$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
 		$(this).siblings('.carret').show();
 		$(this).hide();
-		
 	});
 	jQuery('.select-main').click(function(e){
 		if($(this).find('ul.wp-travel-active').length == 0){
@@ -335,6 +334,8 @@
        var $trigger = $(".select-main");
        if($trigger !== event.target && !$trigger.has(event.target).length){
            $("ul.wp-travel-active").removeClass("wp-travel-active");
+           $("ul.wp-travel-active").find('.carret').show();
+			$("ul.wp-travel-active").find('.close').hide();
        }            
    });
 	jQuery('.select-main li input').change(function($) { //on change do stuff
@@ -342,7 +343,6 @@
 	});
 
 	jQuery('.multiselect-all').change(function($){
-		console.log('clicked')
 		jQuery(this).parents('li').siblings().children('label').trigger('click'); 
 	})
 	var updateTable = function(event){

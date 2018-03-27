@@ -696,6 +696,88 @@ function wp_travel_frontend_contents( $post_id ) {
 												?>
 												</div>
 											</li>
+											<li class="availabily-content clearfix">
+											    <div class="date-from">
+											        <span class="availabily-heading-label">start:</span> Thursday <span>March 8, 2018</span>
+											    </div>
+											    <div class="date-to">
+											        <span class="availabily-heading-label">end:</span> Thursday <span>April 26, 2018</span>
+											    </div>
+											    <div class="status">
+											        <span class="availabily-heading-label">Group Size:</span>
+											        <span>20 pax</span>
+											    </div>
+											    <div class="price">
+											        <span class="availabily-heading-label">price:</span>
+											        <del>
+											        	<span> $ 400 </span>
+											        </del>
+											        <span class="person-count">
+												        <ins><span>$ 300</span>
+												        </ins>/Person 
+											        </span>
+											    </div>
+											    <div class="action">
+											        <a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row">Select</a> 
+											    </div>
+
+											    <div class="wp-travel-booking-row">
+											    	<div class="col-sm-3">
+														<label for="">Select a Date:</label>
+											    	</div>
+											    	<div class="col-sm-3">
+														<input type="text" id="few-dates-enable" name="" placeholder="pick a date">
+											    	</div>
+											    	<div class="col-sm-3">
+														<label for="">Adult:</label>
+											    	</div>
+											    	<div class="col-sm-3">
+														<input type="number" name="" placeholder="Size">
+											    	</div>
+											    	<div class="col-sm-3">
+														<label for="">Infant:</label>
+											    	</div>
+											    	<div class="col-sm-3">
+														<input type="number" name="" placeholder="Size">
+											    	</div>
+											    	<div class="col-sm-3">
+														<label for="">Group Size:</label>
+											    	</div>
+											    	<div class="col-sm-3">
+														<input type="number" name="" placeholder="Size">
+											    	</div>
+											    	<div class="add-to-cart">
+											    		<a href="http://skynet.wensolutions.com/travel-log/wp-travel-cart/?trip_id=777" class="btn btn-primary btn-sm btn-inverse">Book now</a>
+											    	</div>
+											    </div>
+											</li>
+											<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
+											<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+											<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js"></script>
+
+											<script type="text/javascript">
+												jQuery('.wp-travel-booking-row').hide();
+												jQuery('.show-booking-row').click(function(){
+													jQuery(this).parent('.action').siblings('.wp-travel-booking-row').show('slow').addClass('animate');
+												});
+
+												var disabledDays = [0, 6];
+
+												jQuery('#few-dates-enable').datepicker({
+												    language: 'en',
+												    onRenderCell: function (date, cellType) {
+												        if (cellType == 'day') {
+												            var day = date.getDay(),
+												                isDisabled = disabledDays.indexOf(day) != -1;
+
+												            return {
+												                disabled: isDisabled
+												            }
+												        }
+												    }
+												})
+
+											</script>
 											
 										</ul>
 									</div>
