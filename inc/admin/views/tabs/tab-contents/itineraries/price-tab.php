@@ -275,34 +275,26 @@
 												<span class="selected-item">Select multiple</span> 
 												<span class="carret"></span> 
 												<span class="close"></span>
-												<ul>
-													<li>
-														<a tabindex="0" class="multiselect-all">
-															<label class="checkbox">
-																<input type="checkbox" value="multiselect-all">  Select all
-															</label>
-														</a>
+												<ul class="wp-travel-multi-inner">
+													<li class="wp-travel-multi-inner">
+														<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-1">
+															<input type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all">  Select all
+														</label>
 													</li>
-													<li>
-														<a tabindex="0" class="multiselect">
-															<label class="checkbox">
-																<input type="checkbox" value="multiselect">  Adult
-															</label>
-														</a>
+													<li class="wp-travel-multi-inner">
+														<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-2">
+															<input type="checkbox" id="wp-travel-multi-input-2" class="wp-travel-multi-inner" value="multiselect">  Adult
+														</label>
 													</li>
-													<li>
-														<a tabindex="0" class="multiselect">
-															<label class="checkbox">
-																<input type="checkbox" value="multiselect">  Children
-															</label>
-														</a>
+													<li class="wp-travel-multi-inner">
+														<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-3">
+															<input type="checkbox" id="wp-travel-multi-input-3" class="wp-travel-multi-inner" value="multiselect">  Children
+														</label>
 													</li>
-													<li>
-														<a tabindex="0" class="multiselect">
-															<label class="checkbox">
-																<input type="checkbox" value="multiselect">  Group of four
-															</label>
-														</a>
+													<li class="wp-travel-multi-inner">
+														<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-4">
+															<input type="checkbox" id="wp-travel-multi-input-4" class="wp-travel-multi-inner" value="multiselect">  Group of four
+														</label>
 													</li>
 												</ul>
 											</span>
@@ -323,39 +315,41 @@
 	
 	jQuery('.select-main .close').hide();
 	jQuery(document).on('click','.select-main .close', function(){
-		$(this).siblings('.active').removeClass('active');
+		$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
 		$(this).siblings('.carret').show();
 		$(this).hide();
-		var countSelected = jQuery('.select-main li.selected').length
-		jQuery('.select-main .selected-item').html(countSelected + ' item selected');
+		
 	});
-	jQuery('.select-main').click(function(){
-		if($(this).find('ul.active').length == 0){
-			$(this).children('ul').addClass('active');
+	jQuery('.select-main').click(function(e){
+		if($(this).find('ul.wp-travel-active').length == 0){
+			$(this).children('ul').addClass('wp-travel-active');
 			$(this).children('.close').show();
 			$(this).children('.carret').hide();
 		} else{
-			// $(this).children('.carret').show();
-			// $(this).children('.close').hide();
-			// $(this).children('ul').removeClass('active');
+			$(this).children('.carret').show();
+			$(this).children('.close').hide();
+			$(this).children('ul').removeClass('wp-travel-active');
 		}
 	});
-	// $("body").click(function(e){
-	//     if(e.target.className !== "select-main")
-	//     {
-	//       jQuery('.select-main').children('.carret').show();
-	// 		jQuery('.select-main').children('.close').hide();
-	// 		jQuery('.select-main').children('ul').removeClass('active');
-	//     }
-	//   }
-	// );
+	$(document).on("click", function(event){
+       var $trigger = $(".select-main");
+       if($trigger !== event.target && !$trigger.has(event.target).length){
+           $("ul.wp-travel-active").removeClass("wp-travel-active");
+       }            
+   });
 	jQuery('.select-main li input').change(function($) { //on change do stuff
-		jQuery(this).parent().parent().parent('li').toggleClass('selected');
+		jQuery(this).parents('li').toggleClass('selected');
 	});
-	// jQuery(document).on('click', '.select-main li a', function(event) {
-	// 	jQuery(this).parent('li').toggleClass('selected');
-	// });
 
+	jQuery('.multiselect-all').change(function($){
+		console.log('clicked')
+		jQuery(this).parents('li').siblings().children('label').trigger('click'); 
+	})
+	var updateTable = function(event){
+		var countSelected = jQuery('.select-main li.selected').length
+		jQuery(this).parents('ul').siblings('.selected-item').html(countSelected + ' item selected');
+	}
+	jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
 </script>
 
 

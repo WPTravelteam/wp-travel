@@ -1046,38 +1046,51 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         position:relative;
         display: inline-block;
         cursor:pointer;
-
         ul{
             visibility: hidden;
             opacity: 0;
-            height: 1px;
             margin: 0;
             position: absolute;
             display: inline-block;
             box-sizing: border-box;
-            top: 100%;
+            top:calc( 100% + 1px );
             width: 100%;
             left: 0;
-
             li{
                 margin: 0;
                 background: #fff;
-                padding: 5px;
+                padding: 0;
                 box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.14);
                 font-size: 12px;
+                border:none;
                 input{
                     position: relative !important;
                     width: auto;
                 }
+                label{
+                    display: block;
+                    line-height: 18px;
+                    padding: 5px;
+                    border-bottom: 1px solid #ddd;
+                }
+                &.selected{
+                    background-color: #0073aa;
+                    label{
+                        color:#fff;
+                    }
+                }
             }
-
-            &.active{
-                visibility:visible;
-                opacity:1;
+            &.wp-travel-active{
+                visibility: visible;
+                opacity: 1;
                 z-index: 9;
+                max-height: 150px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                display: inline-block;
+                box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.33);
             }
         }
-
     }
     .carret{
         width: 0;
