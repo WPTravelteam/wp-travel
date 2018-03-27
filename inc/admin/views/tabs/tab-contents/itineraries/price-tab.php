@@ -268,7 +268,7 @@
 									</div>
 								</div>
 								<div class="repeat-row">
-									<label class="one-third">Select a Category</label>
+									<label class="one-third">Select pricing options</label>
 									<div class="two-third">
 										<div class="custom-multi-select">
 											<span class="select-main">
