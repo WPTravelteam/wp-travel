@@ -271,7 +271,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						continue;
 					}
 
-					$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+					$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 
 					if ( $enable_sale ) {
 						$trip_price = wp_travel_get_trip_sale_price( $post_id );
@@ -284,33 +284,33 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Added Date Formatting for filter.
 			if ( count( $itineraries ) > 0 ) {
 				foreach( $itineraries as $itinerary ) {
-					$post_id = $itinerary->ID;
+					$post_id         = $itinerary->ID;
 					$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 					if ( 'no' == $fixed_departure ) {
 						continue;
 					}
 					$wp_travel_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
-					$wp_travel_end_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
+					$wp_travel_end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-				if ( '' !== $wp_travel_start_date ) {
+					if ( '' !== $wp_travel_start_date ) {
 
-					$wp_travel_start_date = strtotime( $wp_travel_start_date );
-					$wp_travel_start_date = date( 'Y-m-d', $wp_travel_start_date );
-					update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
-				}
+						$wp_travel_start_date = strtotime( $wp_travel_start_date );
+						$wp_travel_start_date = date( 'Y-m-d', $wp_travel_start_date );
+						update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
+					}
 
-				if ( '' !== $wp_travel_end_date ) {
+					if ( '' !== $wp_travel_end_date ) {
 
-					$wp_travel_end_date = strtotime( $wp_travel_end_date );
-					$wp_travel_end_date = date( 'Y-m-d', $wp_travel_end_date );
-					update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
-				}
-
+						$wp_travel_end_date = strtotime( $wp_travel_end_date );
+						$wp_travel_end_date = date( 'Y-m-d', $wp_travel_end_date );
+						update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
+					}
 				}
 			}
-			
+
 			/**
 			 * Insert cart and checkout pages
+			 *
 			 * @since 1.2.3
 			 */
 
@@ -331,9 +331,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					)
 				);
 
-				foreach ( $pages as $key => $page ) {
-					wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wp_travel_get_page_id( $page['parent'] ) : '' );
-				}
+			foreach ( $pages as $key => $page ) {
+				wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wp_travel_get_page_id( $page['parent'] ) : '' );
+			}
 
 			if ( version_compare( $this->version, '1.0.4', '>' ) ) {
 				include sprintf( '%s/upgrade/104-105.php', WP_TRAVEL_ABSPATH );
@@ -350,7 +350,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 		}
 
-		function wp_travel_setup_environment () {
+		function wp_travel_setup_environment() {
 			$this->add_thumbnail_support();
 			$this->add_image_sizes();
 		}
