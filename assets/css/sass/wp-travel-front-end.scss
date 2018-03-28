@@ -2274,7 +2274,7 @@ ul.availabily-list{
                 padding-left: 10px;
             }
             &.price {
-                width: 13.5%;
+                width: 12.5%;
 
                 del{
                     span{
@@ -2321,29 +2321,58 @@ ul.availabily-list{
                 border-top: 1px solid #eee;
                 margin-bottom: -10px;
                 height:0;
+                @include mob{
+                    padding-left:0 !important;
+                }
                 &.animate{
                     height:auto;
                 }
-
                 [class*=col] {
                     margin: 5px 0;
                     float: left;
-                    
-                    @include xs{
-                        padding: 0 15px 0 0 !important;
-                    }
-                    
 
+                    @include xs{
+                        width: 100%;
+                        padding-right:0;
+                    }
                 }
                 label{
                     display:block;
                     margin-bottom: 5px;
+                    font-weight: 600;
                 }
-
+                input{
+                    height:35px;
+                    margin-bottom:15px;
+                    width:100%;
+                    padding:3px 8px;
+                }
                 .add-to-cart{
                     display:inline-block;
                     width:100%;
+                    padding: 0 15px;
                     margin-top: 30px;
+                    margin-bottom: 30px;
+                    @include xs{
+                        padding-left:0;
+                    }
+                }
+            }
+        }
+        .wp-travel-calender-column{
+            width:260px;
+            float:left;
+            position:relative;
+            margin-bottom: 15px !important;
+        }
+        .wp-travel-calender-aside{
+            width: calc( 100% - 260px);
+            float:left;
+            position:relative;
+              @include xs{
+                width:100%;
+                [class*=col] {
+                    padding-left:0;
                 }
             }
         }
@@ -2354,6 +2383,7 @@ ul.availabily-list{
         padding-bottom: 5px;
         font-weight: 600;
         text-transform: capitalize;
+
 
         @include mob{
             display: none;

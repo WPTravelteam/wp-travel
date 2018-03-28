@@ -721,25 +721,29 @@ function wp_travel_frontend_contents( $post_id ) {
 											        <a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row">Select</a> 
 											    </div>
 											    <div class="wp-travel-booking-row">
-											    	<div class="col-sm-3 no-padding">
+											    	<div class="wp-travel-calender-column no-padding ">
 											    		<label for="">Select a Date:</label>
-														<input type="text" id="few-dates-enable" readonly name="" placeholder="pick a date">
+														<span id="few-dates-enable">
+														</span>
 											    	</div>
-											    	<div class="col-sm-3 no-padding">
-											    		<label for="">Adult:</label>
-														<input type="number" name="" placeholder="Size">
+											    	<div class="wp-travel-calender-aside">
+											    		<div class="col-sm-6">
+												    		<label for="">Adult:</label>
+															<input type="number" name="" placeholder="Size">
+														</div>
+														<div class="col-sm-6">
+												    		<label for="">Infant:</label>
+															<input type="number" name="" placeholder="Size">
+												    	</div>
+												    	<div class="col-sm-6">
+												    		<label for="">Group Size:</label>
+															<input type="number" name="" placeholder="Size">
+												    	</div>
+												    	<div class="add-to-cart">
+												    		<a href="http://skynet.wensolutions.com/travel-log/wp-travel-cart/?trip_id=777" class="btn btn-primary btn-sm btn-inverse">Book now</a>
+												    	</div>
 											    	</div>
-											    	<div class="col-sm-3 no-padding">
-											    		<label for="">Infant:</label>
-														<input type="number" name="" placeholder="Size">
-											    	</div>
-											    	<div class="col-sm-3 no-padding">
-											    		<label for="">Group Size:</label>
-														<input type="number" name="" placeholder="Size">
-											    	</div>
-											    	<div class="add-to-cart">
-											    		<a href="http://skynet.wensolutions.com/travel-log/wp-travel-cart/?trip_id=777" class="btn btn-primary btn-sm btn-inverse">Book now</a>
-											    	</div>
+											    	
 											    </div>
 											</li>
 											<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
