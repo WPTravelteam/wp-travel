@@ -1725,7 +1725,14 @@ ul.availabily-list {
         ul.availabily-list li > div.wp-travel-booking-row.animate {
           height: auto; }
         ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
-          margin: 5px 0; }
+          margin: 5px 0;
+          float: left; }
+          @media (max-width: 567px) {
+            ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
+              padding: 0 15px 0 0 !important; } }
+        ul.availabily-list li > div.wp-travel-booking-row label {
+          display: block;
+          margin-bottom: 5px; }
         ul.availabily-list li > div.wp-travel-booking-row .add-to-cart {
           display: inline-block;
           width: 100%;

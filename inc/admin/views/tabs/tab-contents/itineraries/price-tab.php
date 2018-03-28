@@ -232,8 +232,8 @@ if ( ! $price_per ) {
 								<div class="repeat-row">
 									<label class="one-third">Select a Date</label>
 									<div class="two-third">
-										<input type="text" data-language="en" class="datepicker-here" placeholder="Start Date" />
-										<input type="text" data-language="en" class="datepicker-here" placeholder="End Date" />
+										<input type="text" data-language="en" class="datepicker-here" readonly placeholder="Start Date" />
+										<input type="text" data-language="en" class="datepicker-here" readonly placeholder="End Date" />
 									</div>
 								</div>
 								<div class="repeat-row">
@@ -303,8 +303,8 @@ if ( ! $price_per ) {
        var $trigger = $(".select-main");
        if($trigger !== event.target && !$trigger.has(event.target).length){
            $("ul.wp-travel-active").removeClass("wp-travel-active");
-           $("ul.wp-travel-active").find('.carret').show();
-			$("ul.wp-travel-active").find('.close').hide();
+           $(".select-main").find('.carret').show();
+			$(".select-main").find('.close').hide();
        }            
    });
 	jQuery('.select-main li input').change(function($) { //on change do stuff

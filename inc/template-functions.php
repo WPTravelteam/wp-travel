@@ -720,30 +720,21 @@ function wp_travel_frontend_contents( $post_id ) {
 											    <div class="action">
 											        <a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row">Select</a> 
 											    </div>
-
 											    <div class="wp-travel-booking-row">
-											    	<div class="col-sm-3">
-														<label for="">Select a Date:</label>
+											    	<div class="col-sm-3 no-padding">
+											    		<label for="">Select a Date:</label>
+														<input type="text" id="few-dates-enable" readonly name="" placeholder="pick a date">
 											    	</div>
-											    	<div class="col-sm-3">
-														<input type="text" id="few-dates-enable" name="" placeholder="pick a date">
-											    	</div>
-											    	<div class="col-sm-3">
-														<label for="">Adult:</label>
-											    	</div>
-											    	<div class="col-sm-3">
+											    	<div class="col-sm-3 no-padding">
+											    		<label for="">Adult:</label>
 														<input type="number" name="" placeholder="Size">
 											    	</div>
-											    	<div class="col-sm-3">
-														<label for="">Infant:</label>
-											    	</div>
-											    	<div class="col-sm-3">
+											    	<div class="col-sm-3 no-padding">
+											    		<label for="">Infant:</label>
 														<input type="number" name="" placeholder="Size">
 											    	</div>
-											    	<div class="col-sm-3">
-														<label for="">Group Size:</label>
-											    	</div>
-											    	<div class="col-sm-3">
+											    	<div class="col-sm-3 no-padding">
+											    		<label for="">Group Size:</label>
 														<input type="number" name="" placeholder="Size">
 											    	</div>
 											    	<div class="add-to-cart">
@@ -758,7 +749,10 @@ function wp_travel_frontend_contents( $post_id ) {
 											<script type="text/javascript">
 												jQuery('.wp-travel-booking-row').hide();
 												jQuery('.show-booking-row').click(function(){
-													jQuery(this).parent('.action').siblings('.wp-travel-booking-row').show('slow').addClass('animate');
+													jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
+													 jQuery(this).text(function(i, text){
+												          return text === "Select" ? "Close" : "Select";
+												      })
 												});
 
 												var disabledDays = [0, 6];

@@ -2327,6 +2327,17 @@ ul.availabily-list{
 
                 [class*=col] {
                     margin: 5px 0;
+                    float: left;
+                    
+                    @include xs{
+                        padding: 0 15px 0 0 !important;
+                    }
+                    
+
+                }
+                label{
+                    display:block;
+                    margin-bottom: 5px;
                 }
 
                 .add-to-cart{
