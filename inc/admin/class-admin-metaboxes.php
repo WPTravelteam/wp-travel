@@ -877,6 +877,15 @@ class WP_Travel_Admin_Metaboxes {
 			$use_global = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', $use_global );
+		
+		// Update Pricing Options Metas.
+		$wp_travel_pricing_options = '';
+		if ( isset( $_POST['wp_travel_pricing_options'] ) ) {
+			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
+			$wp_travel_pricing_options = ( wp_unslash( $_POST['wp_travel_pricing_options'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
+		
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 
 		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );

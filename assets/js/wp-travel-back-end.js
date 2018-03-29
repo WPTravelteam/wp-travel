@@ -218,7 +218,6 @@
 
     // Pricing options change function.
     $(document).on('change', '.wp-travel-pricing-options-list', function() {
-        console.log($(this).val());
         if ($(this).val() === 'custom') {
             $(this).parents('.repeat-row').next('.repeat-row').show();
         } else {
@@ -420,7 +419,7 @@
     // Pricing options template.
     $('.wp-travel-pricing-add-new').on('click', function() {
         var template = wp.template('wp-travel-pricing-options');
-        var rand = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
+        var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $('#pricing-options-data').append(template({ random: rand }));
 
 
@@ -432,6 +431,14 @@
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
+    });
+
+    //value selectbind to label.
+    $(document).on('change keyup', "*[selectbind]", function(e) {
+        var to_selectbind = $(this).attr('selectbind');
+        var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
+        $("*[selectbind-label='" + to_selectbind + "']").html(value);
+        // $("*[selectbind='" + to_selectbind + "']").val($(this).val());
     });
 
     $(document).on('keyup change', '.section_title', function() {
