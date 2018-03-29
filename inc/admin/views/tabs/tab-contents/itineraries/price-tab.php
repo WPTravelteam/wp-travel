@@ -68,7 +68,7 @@ if ( ! $price_per ) {
 	</tr>
 	<tr style="<?php echo esc_attr( $sale_price_style ); ?>">
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input <?php echo $sale_price_attribute; ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
+		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input <?php echo esc_attr( $sale_price_attribute ); ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
 
 	<tr class="table-inside-heading">
@@ -77,26 +77,24 @@ if ( ! $price_per ) {
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_enable_pricing-options" type="checkbox" id="wp-travel-enable-pricing-options" checked="checked" value="1" "="">							
+					<input name="wp_travel_enable_pricing_options" type="checkbox" id="wp-travel-enable-pricing-options" checked="checked" value="1" "="">	
 					<span class="switch"></span>
 				</label>
 			</span>
-			<span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different pricing options.</span>
+			<span class="wp-travel-enable-pricing-options checkbox-with-label"><?php echo esc_html__( 'Check to enable different pricing options.', 'wp-travel' ); ?></span>
 		</td>
 	</tr>
 	<tr>
-
-
-		<td colspan="2" class="pricing-repeater">
+		<td id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
-				<p class="description">Select different pricing category with its different sale price</p>
+				<p class="description"><?php echo esc_html__( 'Select different pricing category with its different sale price', 'wp-travel' ); ?></p>
 				<div id="price-accordion" class="tab-accordion price-accordion">
 					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
 					</div>
 				</div>
 			</div>
 			<div class="wp-travel-add-pricing-option clearfix">
-				<input type="button" value="Add New Pricing Option" class="button button-primary wp-travel-pricing-add-new" title="Add New Pricing Option" />
+				<input type="button" value="<?php esc_html_e( 'Add New Pricing Option', 'wp-travel' ); ?>" class="button button-primary wp-travel-pricing-add-new" title="<?php esc_html_e( 'Add New Pricing Option', 'wp-travel' ); ?>" />
 			</div>
 			<!-- Template Script for Pricing Options -->
 			<script type="text/html" id="tmpl-wp-travel-pricing-options">
@@ -119,15 +117,25 @@ if ( ! $price_per ) {
 								<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Select a category', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<select>
-											<option value="everyone"><?php esc_html_e( 'Custom', 'wp-travel' ); ?></option>
-											<option value="group-of-four"><?php esc_html_e( 'Group of Four', 'wp-travel' ); ?></option>
+									<?php
+									$pricing_variation_options = wp_travel_get_pricing_variation_options();
+									if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
+									?>
+										<select class="wp-travel-pricing-options-list">
+											<?php 
+												foreach( $pricing_variation_options as $key => $value ) {
+											?>
+													<option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_html( $value ); ?></option>
+											<?php
+												}
+											?>
 										</select>
+									<?php endif; ?>
 									</div>
 								</div>
 
 								<div class="repeat-row">
-									<label class="one-third"><?php esc_html_e( 'Custom pricing name', 'wp-travel' ); ?></label>
+									<label class="one-third"><?php esc_html_e( 'Custom pricing Label', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<input type="text" name="" placeholder="name" />
 									</div>
@@ -142,15 +150,15 @@ if ( ! $price_per ) {
 								</div>
 
 								<div class="repeat-row">
-									<label class="one-third">Enable Sale</label>
+									<label class="one-third"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<span class="show-in-frontend checkbox-default-design">
 											<label data-on="ON" data-off="OFF">
-												<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" checked="checked" value="1" "="">			
+												<input name="wp_travel_enable_sale" type="checkbox" class="wp-travel-enable-variation-price-sale" checked="checked" value="1" "="">			
 												<span class="switch"></span>
 											</label>
 										</span>
-										<span class="wp-travel-enable-sale">Check to enable sale.</span>
+										<span class="wp-travel-enable-variation-price-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
 									</div>
 								</div>
 
@@ -175,7 +183,7 @@ if ( ! $price_per ) {
 					</div>
 				</div>
 			</script>
-
+			<!-- Pricing Template End -->
 		</td>
 	</tr>
 
@@ -198,14 +206,8 @@ if ( ! $price_per ) {
 		<td colspan="2" class="pricing-repeater">
 			<p class="description">You can select different dates for each category.</p>
 
-
-
-
-
 			<div id="date-accordion" class="tab-accordion date-accordion">
 					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
-						
-					
 
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="heading-594">
@@ -275,13 +277,12 @@ if ( ! $price_per ) {
 					</div>
 				</div>
 			</div>
-				</div>
-		
+		</div>
 		</td>
 	</tr>
 
 <script type="text/javascript">
-	
+
 	jQuery('.select-main .close').hide();
 	jQuery(document).on('click','.select-main .close', function(){
 		$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');

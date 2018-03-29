@@ -201,6 +201,52 @@
         }
     });
 
+    // Pricing options enable disable. v 1.2.5
+    $(document).on('click', '#wp-travel-enable-pricing-options', function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-multiple-pricing-options').show();
+        } else {
+            $('#wp-travel-multiple-pricing-options').hide();
+        }
+    });
+
+    if ($('#wp-travel-enable-pricing-options').is(':checked')) {
+        $('#wp-travel-multiple-pricing-options').show();
+    } else {
+        $('#wp-travel-multiple-pricing-options').hide();
+    }
+
+    // Pricing options change function.
+    $(document).on('change', '.wp-travel-pricing-options-list', function() {
+        console.log($(this).val());
+        if ($(this).val() === 'custom') {
+            $(this).parents('.repeat-row').next('.repeat-row').show();
+        } else {
+            $(this).parents('.repeat-row').next('.repeat-row').hide();
+        }
+    });
+
+    if ($('.wp-travel-pricing-options-list').val() === 'custom') {
+        $(this).parents('.repeat-row').next('.repeat-row').show();
+    } else {
+        $(this).parents('.repeat-row').next('.repeat-row').hide();
+    }
+
+    //Pricing options Enable Sale.
+    $(document).on('change', '.wp-travel-enable-variation-price-sale', function() {
+        if ($(this).is(':checked')) {
+            $(this).parents('.repeat-row').next('.repeat-row').show();
+        } else {
+            $(this).parents('.repeat-row').next('.repeat-row').hide();
+        }
+    });
+
+    if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
+        $(this).parents('.repeat-row').next('.repeat-row').show();
+    } else {
+        $(this).parents('.repeat-row').next('.repeat-row').hide();
+    }
+
     if ($('#wp-travel-enable-sale').is(':checked')) {
         $('#wp-travel-price').attr('required', 'required');
     }

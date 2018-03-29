@@ -1581,3 +1581,24 @@ function wp_travel_is_itinerary( $post_id ) {
 	}
 	return false;
 }
+
+// WP Travel Pricing Varition options.
+
+/**
+ * Get default pricing variation options.
+ *
+ * @return array $variation_options Variation Options.
+ */
+function wp_travel_get_pricing_variation_options(){
+
+	$variation_options = array(
+		'adult'         => __( 'Adult', 'wp-travel' ),
+		'children'      => __( 'Children', 'wp-travel' ),
+		'infant'        => __( 'Infant', 'wp-travel' ),
+		'couple'        => __( 'Couple', 'wp-travel' ),
+		'group'         => __( 'Group', 'wp-travel' ),
+		'custom'        => __( 'Custom', 'wp-travel' ),
+	);
+	
+	return apply_filters( 'wp_travel_variation_pricing_options', $variation_options );
+}
