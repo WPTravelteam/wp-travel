@@ -7,6 +7,18 @@
 
 global $post;
 
+$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
+$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
+
+$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+
+$trip_duration = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
+$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+$trip_duration_night = get_post_meta( $post->ID, 'wp_travel_trip_duration_night', true );
+$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
+
 $price       = get_post_meta( $post->ID, 'wp_travel_price', true );
 $sale_price  = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
 $enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
@@ -91,17 +103,51 @@ if ( ! $price_per ) {
 				<p class="description"><?php echo esc_html__( 'Select different pricing category with its different sale price', 'wp-travel' ); ?></p>
 				<div id="price-accordion" class="tab-accordion price-accordion">
 						<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
-						<?php if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : 
-							foreach( $trip_pricing_options_data as $key => $pricing ) { 
+						<?php 
+						if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : 
+						?>
+						<div class="wp-collapse-open">
+							<a href="#" data-parent="wp-travel-multiple-pricing-options" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
+							<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
+						</div>
+						<?php
+							foreach ( $trip_pricing_options_data as $key => $pricing ) {
+							// Set Vars.
+								$pricing_name         = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
+								$pricing_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+								$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
+								$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
+								$pricing_option_price = isset( $pricing['price'] ) ? $pricing['price'] : '';
+								$pricing_sale_enabled = isset( $pricing['enable_sale'] ) ? $princing['enable_sale'] : '';
+								$pricing_sale_price   = isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : '';
+								$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
+								$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
-								print_r( $pricing );
+								// Pricing Label.
+								$custom_pricing_label_attribute = 'disabled="disabled"';
+								$custom_pricing_label_style     = 'display:none';
+
+								// Pricing Sale.
+								$custom_pricing_sale_price_attribute = 'disabled="disabled"';
+								$custom_pricing_sale_price_style     = 'display:none';
+
+								// Check for label.
+								if ( 'custom' === $pricing_type ) {
+									$custom_pricing_label_attribute = '';
+									$custom_pricing_label_style     = '';
+								}
+								// Check for sale.
+								if ( 'yes' === $pricing_sale_enabled ) {
+									$custom_pricing_sale_price_attribute = '';
+									$custom_pricing_sale_price_style     = '';
+								}
 						?>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
 									<h4 class="panel-title">
 										<div class="wp-travel-sorting-handle"></div>
 											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
-												<span selectbind-label="pricing_option_<?php echo esc_attr( $key ); ?>"><?php echo esc_html($pricing['pricing_name']); ?></span>
+												<span bind="pricing_option_<?php echo esc_attr( $key ); ?>"><?php echo esc_html($pricing_name); ?></span>
 												<span class="collapse-icon"></span>
 											</a>
 										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
@@ -113,7 +159,8 @@ if ( ! $price_per ) {
 										<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Pricing Name', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][pricing_name]" value="">
+													<input required bind="pricing_option_<?php echo esc_attr( $key ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][pricing_name]" value="<?php echo esc_attr( $pricing_name ); ?>">
+													<input type="hidden" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price_key]" value="<?php echo esc_attr( $pricing_key ); ?>">
 												</div>
 											</div>
 											<div class="repeat-row">
@@ -123,11 +170,11 @@ if ( ! $price_per ) {
 												$pricing_variation_options = wp_travel_get_pricing_variation_options();
 												if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
 												?>
-													<select  name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][type] selectbind="pricing_option_<?php echo esc_attr( $key ); ?>" class="wp-travel-pricing-options-list">
+													<select name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][type]" class="wp-travel-pricing-options-list">
 														<?php 
-															foreach( $pricing_variation_options as $key => $value ) {
+														foreach ( $pricing_variation_options as $option => $value ) {
 														?>
-															<option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_html( $value ); ?></option>
+															<option selected( $pricing_type, $key ) value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $value ); ?></option>
 														<?php
 															}
 														?>
@@ -136,18 +183,18 @@ if ( ! $price_per ) {
 												</div>
 											</div>
 
-											<div class="repeat-row">
+											<div style="<?php echo esc_attr( $custom_pricing_label_style ); ?>" <?php echo esc_attr( $custom_pricing_label_attribute ); ?> class="repeat-row custom-pricing-label-wrap">
 												<label class="one-third"><?php esc_html_e( 'Custom pricing Label', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][custom_label]" placeholder="name" />
+													<input value="<?php echo esc_attr( $pricing_custom_label ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][custom_label]" placeholder="name" />
 												</div>
 											</div>
 
 											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<span class="wp-travel-currency-symbol">$</span>
-													<input type="number" min="1" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price]" id="" value="300">
+													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
+													<input required value="<?php echo esc_attr( $pricing_option_price ); ?>" type="number" min="1" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price]">
 												</div>
 											</div>
 
@@ -156,7 +203,7 @@ if ( ! $price_per ) {
 												<div class="two-third">
 													<span class="show-in-frontend checkbox-default-design">
 														<label data-on="ON" data-off="OFF">
-															<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][emable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" checked="checked" value="1" "="">			
+															<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][emable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" <?php checked( $pricing_sale_enabled, "yes" ) ?> value="yes" "="">
 															<span class="switch"></span>
 														</label>
 													</span>
@@ -164,20 +211,20 @@ if ( ! $price_per ) {
 												</div>
 											</div>
 
-											<div class="repeat-row">
+											<div style="<?php echo esc_attr( $custom_pricing_sale_price_style ); ?>" <?php echo esc_attr( $custom_pricing_sale_price_attribute ); ?> class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<span class="wp-travel-currency-symbol">$</span>
-													<input type="number" min="1" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="300">
+													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
+													<input type="number" min="1" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>">
 												</div>
 											</div>
 
 											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Number of PAX', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
+													<input value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
 
-													<input type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="1" />
+													<input value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="1" />
 												</div>
 											</div>
 										</div>
@@ -201,7 +248,7 @@ if ( ! $price_per ) {
 						<h4 class="panel-title">
 							<div class="wp-travel-sorting-handle"></div>
 								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
-									<span selectbind-label="pricing_option_{{data.random}}"><?php echo esc_html( 'Pricing Option', 'wp-travel' ); ?></span>
+									<span bind="pricing_option_{{data.random}}"><?php echo esc_html( 'Pricing Option', 'wp-travel' ); ?></span>
 									<span class="collapse-icon"></span>
 								</a>
 							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
@@ -213,7 +260,8 @@ if ( ! $price_per ) {
 							<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Pricing Name', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<input type="text" name="wp_travel_pricing_options[{{data.random}}][pricing_name]" value="">
+										<input bind="pricing_option_{{data.random}}" type="text" name="wp_travel_pricing_options[{{data.random}}][pricing_name]" value="">
+										<input type="hidden" name="wp_travel_pricing_options[{{data.random}}][price_key]" value="">
 									</div>
 								</div>
 								<div class="repeat-row">
@@ -223,11 +271,11 @@ if ( ! $price_per ) {
 									$pricing_variation_options = wp_travel_get_pricing_variation_options();
 									if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
 									?>
-										<select  name="wp_travel_pricing_options[{{data.random}}][type] selectbind="pricing_option_{{data.random}}" class="wp-travel-pricing-options-list">
-											<?php 
-												foreach( $pricing_variation_options as $key => $value ) {
+										<select  name="wp_travel_pricing_options[{{data.random}}][type]" class="wp-travel-pricing-options-list">
+											<?php
+											foreach ( $pricing_variation_options as $key => $value ) {
 											?>
-												<option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_html( $value ); ?></option>
+												<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></option>
 											<?php
 												}
 											?>
@@ -236,7 +284,7 @@ if ( ! $price_per ) {
 									</div>
 								</div>
 
-								<div class="repeat-row">
+								<div style="display:none" class="repeat-row custom-pricing-label-wrap">
 									<label class="one-third"><?php esc_html_e( 'Custom pricing Label', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<input type="text" name="wp_travel_pricing_options[{{data.random}}][custom_label]" placeholder="name" />
@@ -246,8 +294,8 @@ if ( ! $price_per ) {
 								<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<span class="wp-travel-currency-symbol">$</span>
-										<input type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][price]" id="" value="300">
+										<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
+										<input type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][price]">
 									</div>
 								</div>
 
@@ -256,7 +304,7 @@ if ( ! $price_per ) {
 									<div class="two-third">
 										<span class="show-in-frontend checkbox-default-design">
 											<label data-on="ON" data-off="OFF">
-												<input name="wp_travel_pricing_options[{{data.random}}][emable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" checked="checked" value="1" "="">			
+												<input name="wp_travel_pricing_options[{{data.random}}][emable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" value="yes" "="">			
 												<span class="switch"></span>
 											</label>
 										</span>
@@ -264,11 +312,11 @@ if ( ! $price_per ) {
 									</div>
 								</div>
 
-								<div class="repeat-row">
+								<div class="repeat-row" style="display:none">
 									<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<span class="wp-travel-currency-symbol">$</span>
-										<input type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][sale_price]" id="" value="300">
+										<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
+										<input type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][sale_price]">
 									</div>
 								</div>
 
@@ -290,19 +338,42 @@ if ( ! $price_per ) {
 	</tr>
 
 	<tr>
-		<td class="pricing-repeater"><label for="wp-travel-multiple-date-options"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></label>
-		</td>
+		<td><label for="wp-travel-fixed-departure"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_enable_pricing-options" type="checkbox" id="wp-travel-multiple-date-options" checked="checked" value="1" "="">							
+					<input type="checkbox" name="wp_travel_fixed_departure" id="wp-travel-fixed-departure" value="yes" <?php checked( 'yes', $fixed_departure ) ?> />							
 					<span class="switch"></span>
 				</label>
 			</span>
-			<span class="wp-travel-enable-pricing-options checkbox-with-label">Check to enable different date options.</span>	
 		</td>
 	</tr>
+	<tr class="wp-travel-trip-duration-row" style="display:<?php echo ( 'no' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp-travel-trip-duration"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></label></td>
+		<td>
+			<input type="number" min="0" step="1" name="wp_travel_trip_duration" id="wp-travel-trip-duration" value="<?php echo esc_attr( $trip_duration ); ?>" /> <?php esc_html_e( 'Day(s)', 'wp-travel' ) ?>
+			<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ) ?>                
+		</td>
+	</tr>        
 
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp-travel-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
+		<td><span class="show-in-frontend checkbox-default-design">
+				<label data-on="ON" data-off="OFF">
+					<input type="checkbox" name="wp_travel_enable_multiple_fixed_departue" id="wp-travel-multiple-fixed-departure" value="yes" <?php // checked( 'yes', $fixed_departure ) ?> />							
+					<span class="switch"></span>
+				</label>
+			</span>
+		</td>
+	</tr>
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
+		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
+	</tr>
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
+		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
+	</tr>
 
 	<tr>
 		<td colspan="2" class="pricing-repeater">

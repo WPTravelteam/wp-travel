@@ -210,26 +210,14 @@
         }
     });
 
-    if ($('#wp-travel-enable-pricing-options').is(':checked')) {
-        $('#wp-travel-multiple-pricing-options').show();
-    } else {
-        $('#wp-travel-multiple-pricing-options').hide();
-    }
-
     // Pricing options change function.
     $(document).on('change', '.wp-travel-pricing-options-list', function() {
         if ($(this).val() === 'custom') {
-            $(this).parents('.repeat-row').next('.repeat-row').show();
+            $(this).parents('.repeat-row').next('.custom-pricing-label-wrap').show();
         } else {
-            $(this).parents('.repeat-row').next('.repeat-row').hide();
+            $(this).parents('.repeat-row').next('.custom-pricing-label-wrap').hide();
         }
     });
-
-    if ($('.wp-travel-pricing-options-list').val() === 'custom') {
-        $(this).parents('.repeat-row').next('.repeat-row').show();
-    } else {
-        $(this).parents('.repeat-row').next('.repeat-row').hide();
-    }
 
     //Pricing options Enable Sale.
     $(document).on('change', '.wp-travel-enable-variation-price-sale', function() {
@@ -365,18 +353,20 @@
     // Open All And Close All accordion.
     $('.open-all-link').click(function(e) {
         e.preventDefault();
-        $('.panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-        $('.panel-collapse').addClass('in');
+        var parent = '#' + $(this).data('parent');
+        $(parent + ' .panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
+        $(parent + ' .panel-collapse').addClass('in');
         $(this).hide();
-        $('.close-all-link').show();
-        $('#tab-accordion .panel-collapse').css('height', 'auto');
+        $(parent + ' .close-all-link').show();
+        $(parent + ' #tab-accordion .panel-collapse').css('height', 'auto');
     });
     $('.close-all-link').click(function(e) {
+        var parent = '#' + $(this).data('parent');
         e.preventDefault();
-        $('.panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
-        $('.panel-collapse').removeClass('in');
+        $(parent + ' .panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
+        $(parent + ' .panel-collapse').removeClass('in');
         $(this).hide();
-        $('.open-all-link').show();
+        $(parent + ' .open-all-link').show();
     });
 
 
@@ -431,14 +421,6 @@
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
-    });
-
-    //value selectbind to label.
-    $(document).on('change keyup', "*[selectbind]", function(e) {
-        var to_selectbind = $(this).attr('selectbind');
-        var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
-        $("*[selectbind-label='" + to_selectbind + "']").html(value);
-        // $("*[selectbind='" + to_selectbind + "']").val($(this).val());
     });
 
     $(document).on('keyup change', '.section_title', function() {

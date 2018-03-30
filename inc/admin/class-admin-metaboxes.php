@@ -527,8 +527,8 @@ class WP_Travel_Admin_Metaboxes {
 				</p>
 			</div>
 			<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ) ?>" >
-				<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
-				<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
+				<a href="#" data-parent="wp-travel-tab-content-faq" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
+				<a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
 			</div>
 		</div>
 		<div id="tab-accordion" class="tab-accordion">
@@ -884,6 +884,7 @@ class WP_Travel_Admin_Metaboxes {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_pricing_options = ( wp_unslash( $_POST['wp_travel_pricing_options'] ) );
 		}
+
 		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
 		
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
