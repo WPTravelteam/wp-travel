@@ -201,6 +201,16 @@
         }
     });
 
+    // Slugify the text string.
+    function wp_travel_slugify_string(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-') // Replace spaces with -
+            .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+            .replace(/\-\-+/g, '-') // Replace multiple - with single -
+            .replace(/^-+/, '') // Trim - from start of text
+            .replace(/-+$/, ''); // Trim - from end of text
+    }
+
     // Pricing options enable disable. v 1.2.5
     $(document).on('click', '#wp-travel-enable-pricing-options', function() {
         if ($(this).is(':checked')) {
@@ -208,6 +218,15 @@
         } else {
             $('#wp-travel-multiple-pricing-options').hide();
         }
+    });
+
+    //Pricing Key slugify.
+    $(document).on('change', '.wp-travel-variation-pricing-name', function() {
+
+        var price_key = wp_travel_slugify_string($(this).val());
+
+        $(this).siblings('.wp-travel-variation-pricing-uniquekey').val(price_key)
+
     });
 
     // Pricing options change function.
@@ -380,7 +399,6 @@
         if (confirm("Are you sure to Delete ?") == true) {
             $(this).closest('div.panel-default').remove();
 
-            console.log(acc_id);
             var faqs = $('#' + acc_id + ' .panel-default').length;
 
             // alert(faqs);
@@ -421,6 +439,13 @@
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
+    });
+
+    //Sale price binding
+    $(document).on('change keyup', "*[bindPrice]", function(e) {
+        var bound_sale = $(this).attr('bindPrice');
+        var value = ('' != $(this).val()) ? $(this).val() : 1;
+        $("*[bindSale='" + bound_sale + "']").attr('max', value);
     });
 
     $(document).on('keyup change', '.section_title', function() {
