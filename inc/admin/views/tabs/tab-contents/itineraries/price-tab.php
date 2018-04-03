@@ -382,7 +382,7 @@ if ( ! $price_per ) {
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
 
-	<tr>
+	<tr id="wp-variations-multiple-dates" style="display:none">
 		<td colspan="2" class="pricing-repeater">
 			<p class="description">You can select different dates for each category.</p>
 

@@ -247,6 +247,16 @@
         }
     });
 
+    // $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
+    //     if ($(this).is(':checked')) {
+    //         $('.wp-travel-fixed-departure-row').hide();
+    //         $('#wp-variations-multiple-dates').show();
+    //     } else {
+    //         $('.wp-travel-fixed-departure-row').show();
+    //         $('#wp-variations-multiple-dates').hide();
+    //     }
+    // });
+
     if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
         $(this).parents('.repeat-row').next('.repeat-row').show();
     } else {
@@ -441,7 +451,7 @@
         $("*[bind='" + to_bind + "']").val($(this).val());
     });
 
-    //Sale price binding
+    //Sale price binding on pricing options.
     $(document).on('change keyup', "*[bindPrice]", function(e) {
         var bound_sale = $(this).attr('bindPrice');
         var value = ('' != $(this).val()) ? $(this).val() : 1;
