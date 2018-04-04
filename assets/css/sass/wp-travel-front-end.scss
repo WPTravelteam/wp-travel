@@ -6,82 +6,71 @@
         clear: both;
     }
 }
-
 @mixin fullwidth {
     width: 100%;
 }
-
 //media query for theme contents
 @mixin extra-large-screen {
     @media(max-width: 1199px) {
         @content;
     }
 }
-
 @mixin large-screen {
     @media(max-width: 1000px) {
         @content;
     }
 }
-
 @mixin tab {
     @media (max-width: 1024px) {
         @content;
     }
 }
-
 @mixin sidr-view {
     @media (max-width: 992px) {
         @content;
     }
 }
-
 @mixin sidr-view-and-mob {
     @media (min-width: 768px) and (max-width: 991px) {
         @content;
     }
 }
-
 @mixin above-sidr-view {
     @media (min-width: 993px) {
         @content;
     }
 }
-
 @mixin mob {
     @media (max-width: 767px) {
         @content;
     }
 }
-
 @mixin sm {
     @media (max-width: 640px) {
         @content;
     }
 }
-
 @mixin xs {
     @media (max-width: 567px) {
         @content;
     }
 }
-
 @mixin xxs {
     @media (max-width: 500px) {
         @content;
     }
 }
-
-
-.col-md-5, .col-md-7 {
+.no-padding{
+    padding:0 !important;
+}
+.col-md-5, .col-md-7,.col-sm-3  {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
 }
-
 @media (min-width: 992px){
-    .col-md-5, .col-md-7{
+    .col-md-5, .col-md-7,.col-sm-3{
         float: left;
     }
     .col-md-5 {
@@ -89,6 +78,11 @@
     }
     .col-md-7 {
         width: 58.33333%;
+    }
+}
+@media (min-width:768px){
+    .col-sm-3{
+        width:25%;
     }
 }
 
@@ -396,7 +390,6 @@
                     .wp-travel-text-info {
                         display: inline-block;
                         width: 100px;
-                        text-align: right;
                     }
                 }
                 @include mob {
@@ -2237,6 +2230,8 @@ html .ui-button.ui-state-disabled:active {
 
 ul.availabily-list{
     list-style:none;
+    padding: 0 !important;
+    margin: 0 !important;
 
     li {
         border-bottom: 1px solid #E3E3E3;
@@ -2264,16 +2259,16 @@ ul.availabily-list{
                 padding-right: 10px;
                 position:relative;
 
-                &:after {
-                    font-family: 'FontAwesome';
-                    content: "\f058";
-                    position: absolute;
-                    top: 50%;
-                    right: 0;
-                    margin-top: -4px;
-                    display: block;
-                    color: #f83531;
-                }
+                // &:after {
+                //     font-family: 'FontAwesome';
+                //     content: "\f058";
+                //     position: absolute;
+                //     top: 50%;
+                //     right: 0;
+                //     margin-top: -4px;
+                //     display: block;
+                //     color: #f83531;
+                // }
             }
             &.date-to {
                 padding-left: 10px;
@@ -2318,6 +2313,68 @@ ul.availabily-list{
                     display:inline-block;
                 }
             }
+            &.wp-travel-booking-row {
+                width: 100%;
+                padding-top: 20px;
+                margin-top: 10px;
+                padding-bottom: 20px;
+                border-top: 1px solid #eee;
+                margin-bottom: -10px;
+                height:0;
+                @include mob{
+                    padding-left:0 !important;
+                }
+                &.animate{
+                    height:auto;
+                }
+                [class*=col] {
+                    margin: 5px 0;
+                    float: left;
+
+                    @include xs{
+                        width: 100%;
+                        padding-right:0;
+                    }
+                }
+                label{
+                    display:block;
+                    margin-bottom: 5px;
+                    font-weight: 600;
+                }
+                input{
+                    height:35px;
+                    margin-bottom:15px;
+                    width:100%;
+                    padding:3px 8px;
+                }
+                .add-to-cart{
+                    display:inline-block;
+                    width:100%;
+                    padding: 0 15px;
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                    @include xs{
+                        padding-left:0;
+                    }
+                }
+            }
+        }
+        .wp-travel-calender-column{
+            width:260px;
+            float:left;
+            position:relative;
+            margin-bottom: 15px !important;
+        }
+        .wp-travel-calender-aside{
+            width: calc( 100% - 260px);
+            float:left;
+            position:relative;
+              @include xs{
+                width:100%;
+                [class*=col] {
+                    padding-left:0;
+                }
+            }
         }
     }
     .availabily-heading {
@@ -2326,6 +2383,7 @@ ul.availabily-list{
         padding-bottom: 5px;
         font-weight: 600;
         text-transform: capitalize;
+
 
         @include mob{
             display: none;
@@ -2339,21 +2397,21 @@ ul.availabily-list{
         }
     }
     .availabily-content{
-
-        .action{
+        .btn{
+            padding:8px 12px;
+            border:2px solid #f83531;
+            border-radius:4px;
+            @include extra-large-screen {
+                margin-right: -4px;
+            }
+            &:hover{
+                background-color:#f83531;
+                color:#fff;
+            }
+        }
+        .action {
             .btn{
-                padding:8px 12px;
-                border:2px solid #f83531;
-                border-radius:4px;
-
-                @include extra-large-screen {
-                    margin-right: -4px;
-                }
-
-                &:hover{
-                    background-color:#f83531;
-                    color:#fff;
-                }
+                padding: 2px 5px;
             }
         }
     }
@@ -2565,7 +2623,6 @@ ul.availabily-list{
 
 //end
 //checkout page
-
 .wp-travel-billing{
 
     .wp-travel-info {
@@ -2578,6 +2635,7 @@ ul.availabily-list{
         font-size: 22px;
         font-weight: 400;
         color:#555;
+        margin-top:0;
     }
     .form-row-first, 
     .form-row-last{
