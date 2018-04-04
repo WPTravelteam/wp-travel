@@ -793,6 +793,13 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
 
+		// Multiple departure dates.
+		$multiple_departure_enabled = 'no';
+		if ( isset( $_POST['wp_travel_enable_multiple_fixed_departue'] ) ) {
+			$multiple_departure_enabled = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_multiple_fixed_departue'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_enable_multiple_fixed_departue', $multiple_departure_enabled );
+
 
 		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
 			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );

@@ -7,15 +7,17 @@
 
 global $post;
 
-$start_date	= get_post_meta( $post->ID, 'wp_travel_start_date', true );
-$end_date 	= get_post_meta( $post->ID, 'wp_travel_end_date', true );
+$start_date = get_post_meta( $post->ID, 'wp_travel_start_date', true );
+$end_date   = get_post_meta( $post->ID, 'wp_travel_end_date', true );
 
-$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
-$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+$fixed_departure           = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+$fixed_departure           = ( $fixed_departure ) ? $fixed_departure : 'yes';
+$fixed_departure           = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+$multiple_fixed_departures = get_post_meta( $post->ID, 'wp_travel_enable_multiple_fixed_departue', true );
+$multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures', $multiple_fixed_departures );
 
-$trip_duration = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
-$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+$trip_duration       = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
+$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
 $trip_duration_night = get_post_meta( $post->ID, 'wp_travel_trip_duration_night', true );
 $trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
@@ -55,7 +57,7 @@ if ( ! $price_per ) {
 			<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
 				<select name="wp_travel_price_per">
 					<?php foreach ( $price_per_fields as $val => $label ) : ?>
-						<option value="<?php echo esc_attr( $val ) ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ) ?></option>
+						<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
@@ -63,7 +65,7 @@ if ( ! $price_per ) {
 	</tr>
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
+		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
 
 
@@ -367,42 +369,54 @@ if ( ! $price_per ) {
 		<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 		<td><span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input type="checkbox" name="wp_travel_enable_multiple_fixed_departue" id="wp-travel-enable-multiple-fixed-departure" value="yes" <?php // checked( 'yes', $fixed_departure ) ?> />							
+					<input type="checkbox" name="wp_travel_enable_multiple_fixed_departue" id="wp-travel-enable-multiple-fixed-departure" value="yes" <?php checked( 'yes', $multiple_fixed_departures ); ?> />						
 					<span class="switch"></span>
 				</label>
 			</span>
 		</td>
 	</tr>
-	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-fixed-departure-row hide-if-multidates" style="display:<?php echo ( 'yes' === $fixed_departure && 'yes' !== $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
 		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
 	</tr>
-	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-fixed-departure-row hide-if-multidates" style="display:<?php echo ( 'yes' === $fixed_departure && 'yes' !== $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
 		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
 
-	<tr id="wp-variations-multiple-dates" style="display:none">
+	<tr id="wp-variations-multiple-dates" style="display:<?php echo ( 'yes' === $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
 		<td colspan="2" class="pricing-repeater">
-			<p class="description">You can select different dates for each category.</p>
+			
+			<div class="wp-collapse-open" style="<?php echo esc_attr( $sollapse_style ); ?>">
+				<a href="#" data-parent="wp-variations-multiple-dates" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+				<a data-parent="wp-variations-multiple-dates" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
+			</div>
+			<p class="description"><?php echo esc_html( 'You can select different dates for each category.', 'wp-travel' ); ?></p>
 
-			<div id="date-accordion" class="tab-accordion date-accordion">
-					<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
+			<div class="tab-accordion date-accordion">	
+				<div id="date-options-data" class="panel-group wp-travel-sorting-tabs" role="tablist" aria-multiselectable="true">
 
+				
+				</div>
+				<div class="wp-travel-add-date-option clearfix">
+					<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
+				</div>
+			<!-- Template Script for dates -->
+			<script type="text/html" id="tmpl-wp-travel-multiple-dates">
 				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading-594">
+					<div class="panel-heading" role="tab" id="heading-{{data.random}}">
 						<h4 class="panel-title">
 							<div class="wp-travel-sorting-handle"></div>
-								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-594" aria-expanded="false" aria-controls="collapse-594" class="collapsed">
+								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="false" aria-controls="collapse-{{data.random}}" class="collapsed">
 
-									<span bind="faq_question_594">Multiple Date 1</span>
+									<span bind="faq_question_{{data.random}}">Multiple Date 1</span>
 
 									<span class="collapse-icon"></span>
 								</a>
 							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 						</h4>
 					</div>
-					<div id="collapse-594" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-594" aria-expanded="true">
+					<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}" aria-expanded="true">
 						<div class="panel-body">
 							<div class="panel-wrap">
 								<div class="repeat-row">
@@ -456,50 +470,50 @@ if ( ! $price_per ) {
 						</div>
 					</div>
 				</div>
-			</div>
+			</script>
 		</div>
 		</td>
 	</tr>
 
 <script type="text/javascript">
 
-	jQuery('.select-main .close').hide();
-	jQuery(document).on('click','.select-main .close', function(){
-		$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
-		$(this).siblings('.carret').show();
-		$(this).hide();
-	});
-	jQuery('.select-main').click(function(e){
-		if($(this).find('ul.wp-travel-active').length == 0){
-			$(this).children('ul').addClass('wp-travel-active');
-			$(this).children('.close').show();
-			$(this).children('.carret').hide();
-		} else{
-			$(this).children('.carret').show();
-			$(this).children('.close').hide();
-			$(this).children('ul').removeClass('wp-travel-active');
-		}
-	});
-	$(document).on("click", function(event){
-		var $trigger = $(".select-main");
-		if($trigger !== event.target && !$trigger.has(event.target).length){
-			$("ul.wp-travel-active").removeClass("wp-travel-active");
-			$(".select-main").find('.carret').show();
-			$(".select-main").find('.close').hide();
-		}            
-	});
-	jQuery('.select-main li input').change(function($) { //on change do stuff
-		jQuery(this).parents('li').toggleClass('selected');
-	});
+	// jQuery('.select-main .close').hide();
+	// jQuery(document).on('click','.select-main .close', function($){
+	// 	$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
+	// 	$(this).siblings('.carret').show();
+	// 	$(this).hide();
+	// });
+	// jQuery('.select-main').click(function($, e){
+	// 	if($(this).find('ul.wp-travel-active').length == 0){
+	// 		$(this).children('ul').addClass('wp-travel-active');
+	// 		$(this).children('.close').show();
+	// 		$(this).children('.carret').hide();
+	// 	} else{
+	// 		$(this).children('.carret').show();
+	// 		$(this).children('.close').hide();
+	// 		$(this).children('ul').removeClass('wp-travel-active');
+	// 	}
+	// });
+	// jQuery(document).on("click", function($,event){
+	// 	var $trigger = $(".select-main");
+	// 	if($trigger !== event.target && !$trigger.has(event.target).length){
+	// 		$("ul.wp-travel-active").removeClass("wp-travel-active");
+	// 		$(".select-main").find('.carret').show();
+	// 		$(".select-main").find('.close').hide();
+	// 	}            
+	// });
+	// jQuery('.select-main li input').change(function($) { //on change do stuff
+	// 	jQuery(this).parents('li').toggleClass('selected');
+	// });
 
-	jQuery('.multiselect-all').change(function($){
-		jQuery(this).parents('li').siblings().children('label').trigger('click'); 
-	})
-	var updateTable = function(event){
-		var countSelected = jQuery('.select-main li.selected').length
-		jQuery(this).parents('ul').siblings('.selected-item').html(countSelected + ' item selected');
-	}
-	jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
+	// jQuery('.multiselect-all').change(function($){
+	// 	jQuery(this).parents('li').siblings().children('label').trigger('click'); 
+	// })
+	// var updateTable = function(event){
+	// 	var countSelected = jQuery('.select-main li.selected').length
+	// 	jQuery(this).parents('ul').siblings('.selected-item').html(countSelected + ' item selected');
+	// }
+	// jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
 </script>
 
 

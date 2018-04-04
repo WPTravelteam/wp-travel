@@ -247,15 +247,15 @@
         }
     });
 
-    // $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
-    //     if ($(this).is(':checked')) {
-    //         $('.wp-travel-fixed-departure-row').hide();
-    //         $('#wp-variations-multiple-dates').show();
-    //     } else {
-    //         $('.wp-travel-fixed-departure-row').show();
-    //         $('#wp-variations-multiple-dates').hide();
-    //     }
-    // });
+    $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
+        if ($(this).is(':checked')) {
+            $('.hide-if-multidates').hide();
+            $('#wp-variations-multiple-dates').show();
+        } else {
+            $('.hide-if-multidates').show();
+            $('#wp-variations-multiple-dates').hide();
+        }
+    });
 
     if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
         $(this).parents('.repeat-row').next('.repeat-row').show();
@@ -439,6 +439,15 @@
         var template = wp.template('wp-travel-pricing-options');
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $('#pricing-options-data').append(template({ random: rand }));
+
+
+    });
+
+    // Dates options template.
+    $('.wp-travel-multiple-dates-add-new').on('click', function() {
+        var template = wp.template('wp-travel-multiple-dates');
+        var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        $('#date-options-data').append(template({ random: rand }));
 
 
     });
