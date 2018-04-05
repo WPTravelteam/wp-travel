@@ -192,7 +192,7 @@ if ( ! $price_per ) {
 														<?php 
 														foreach ( $pricing_variation_options as $option => $value ) {
 														?>
-															<option selected( $pricing_type, $key ) value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $value ); ?></option>
+															<option <?php selected( $pricing_type, $option ); ?> value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $value ); ?></option>
 														<?php
 															}
 														?>

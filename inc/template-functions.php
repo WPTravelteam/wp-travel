@@ -530,8 +530,6 @@ function wp_travel_frontend_contents( $post_id ) {
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 
 	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-
-	$wp_travel_enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
 	
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 
