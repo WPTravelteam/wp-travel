@@ -893,6 +893,15 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
+
+		//Update multiple trip dates options.
+		$wp_travel_multiple_trip_dates = '';
+		if ( isset( $_POST['wp_travel_multiple_trip_dates'] ) ) {
+			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
+			$wp_travel_multiple_trip_dates = ( wp_unslash( $_POST['wp_travel_multiple_trip_dates'] ) );
+		}
+
+		update_post_meta( $post_id, 'wp_travel_multiple_trip_dates', $wp_travel_multiple_trip_dates );
 		
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 

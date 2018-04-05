@@ -408,7 +408,7 @@ if ( ! $price_per ) {
 							<div class="wp-travel-sorting-handle"></div>
 								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="false" aria-controls="collapse-{{data.random}}" class="collapsed">
 
-									<span bind="faq_question_{{data.random}}">Multiple Date 1</span>
+									<span bind="wp_travel_multiple_dates_{{data.random}}"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
 
 									<span class="collapse-icon"></span>
 								</a>
@@ -421,37 +421,31 @@ if ( ! $price_per ) {
 								<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<input name="wp_travel_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
+										<input  bind="wp_travel_multiple_dates_{{data.random}}" name="wp_travel_multiple_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
 									</div>
 								</div>
 								<div class="repeat-row">
 									<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<input name="wp_travel_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class="datepicker-here" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-										<input name="wp_travel_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class="datepicker-here" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+										<input name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+										<input name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 									</div>
 								</div>
 								<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
 									<div class="two-third">
+
 										<div class="custom-multi-select">
-											<span class="select-main">
-												<span class="selected-item">Select multiple</span> 
-												<span class="carret"></span> 
-												<span class="close"></span>
-												<ul class="wp-travel-multi-inner">
+											<select name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
 												<?php
 												foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
 												?>
-													<li class="wp-travel-multi-inner">
-														<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>">
-															<input type="checkbox"  id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-all" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?>
-														</label>
-													</li>
+													<option value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
 												<?php } ?>
-												</ul>
-											</span>
+											</select>
+
 										</div>
+
 									</div>
 								</div>
 							</div>
@@ -462,49 +456,6 @@ if ( ! $price_per ) {
 		</div>
 		</td>
 	</tr>
-
-<script type="text/javascript">
-
-	// jQuery('.select-main .close').hide();
-	// jQuery(document).on('click','.select-main .close', function($){
-	// 	$(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
-	// 	$(this).siblings('.carret').show();
-	// 	$(this).hide();
-	// });
-	// jQuery('.select-main').click(function($, e){
-	// 	if($(this).find('ul.wp-travel-active').length == 0){
-	// 		$(this).children('ul').addClass('wp-travel-active');
-	// 		$(this).children('.close').show();
-	// 		$(this).children('.carret').hide();
-	// 	} else{
-	// 		$(this).children('.carret').show();
-	// 		$(this).children('.close').hide();
-	// 		$(this).children('ul').removeClass('wp-travel-active');
-	// 	}
-	// });
-	// jQuery(document).on("click", function($,event){
-	// 	var $trigger = $(".select-main");
-	// 	if($trigger !== event.target && !$trigger.has(event.target).length){
-	// 		$("ul.wp-travel-active").removeClass("wp-travel-active");
-	// 		$(".select-main").find('.carret').show();
-	// 		$(".select-main").find('.close').hide();
-	// 	}            
-	// });
-	// jQuery('.select-main li input').change(function($) { //on change do stuff
-	// 	jQuery(this).parents('li').toggleClass('selected');
-	// });
-
-	// jQuery('.multiselect-all').change(function($){
-	// 	jQuery(this).parents('li').siblings().children('label').trigger('click'); 
-	// })
-	// var updateTable = function(event){
-	// 	var countSelected = jQuery('.select-main li.selected').length
-	// 	jQuery(this).parents('ul').siblings('.selected-item').html(countSelected + ' item selected');
-	// }
-	// jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
-</script>
-
-
 	<?php
 	/**
 	 * Hook Added.

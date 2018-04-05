@@ -220,6 +220,11 @@
         }
     });
 
+    //Pricing options multiselect.
+    $('.wp-travel-multiple-date-pricings').multipleSelect({
+        filter: true
+    });
+
     //Pricing Key slugify.
     $(document).on('change', '.wp-travel-variation-pricing-name', function() {
 
@@ -449,6 +454,32 @@
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $('#date-options-data').append(template({ random: rand }));
 
+        $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
+            language: 'en',
+            minDate: new Date(),
+            onSelect: function(dateStr) {
+                newMinDate = null;
+                newMaxDate = new Date();
+                if ('' !== dateStr) {
+                    new_date_min = new Date(dateStr);
+
+                    newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+                }
+                $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                    minDate: newMinDate,
+                });
+            }
+        });
+
+        $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
+            language: 'en',
+            minDate: new Date()
+        });
+
+        // Pricing options multiselect.
+        $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
+            filter: false,
+        });
 
     });
 
