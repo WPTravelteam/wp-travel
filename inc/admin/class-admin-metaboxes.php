@@ -27,7 +27,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'description_tab_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'additional_info_tab_callback' ), 10, 2 );
+		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'additional_info_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'itineraries_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'location_tab_callback' ), 10, 2 );
@@ -228,10 +228,10 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label' => __( 'Includes/ Excludes', 'wp-travel' ),
 			'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
 		);
-		$trips['additional_info'] = array(
-			'tab_label' => __( 'Additional Info', 'wp-travel' ),
-			'content_title' => __( 'Additional Info', 'wp-travel' ),
-		);
+		// $trips['additional_info'] = array(
+		// 	'tab_label' => __( 'Additional Info', 'wp-travel' ),
+		// 	'content_title' => __( 'Additional Info', 'wp-travel' ),
+		// );
 		$trips['images_gallery'] = array(
 			'tab_label' => __( 'Gallery', 'wp-travel' ),
 			'content_title' => __( 'Gallery', 'wp-travel' ),
@@ -792,6 +792,13 @@ class WP_Travel_Admin_Metaboxes {
 			$fixed_departure = sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
+		
+		// Multiple departure dates.
+		$wp_travel_enable_pricing_options = 'no';
+		if ( isset( $_POST['wp_travel_enable_pricing_options'] ) ) {
+			$wp_travel_enable_pricing_options = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_pricing_options'] ) );
+		}
+		update_post_meta( $post_id, 'wp_travel_enable_pricing_options', $wp_travel_enable_pricing_options );
 
 		// Multiple departure dates.
 		$multiple_departure_enabled = 'no';

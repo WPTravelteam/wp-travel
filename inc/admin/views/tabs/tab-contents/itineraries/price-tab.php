@@ -10,11 +10,15 @@ global $post;
 $start_date = get_post_meta( $post->ID, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post->ID, 'wp_travel_end_date', true );
 
+$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+
 $fixed_departure           = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
 $fixed_departure           = ( $fixed_departure ) ? $fixed_departure : 'yes';
 $fixed_departure           = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 $multiple_fixed_departures = get_post_meta( $post->ID, 'wp_travel_enable_multiple_fixed_departue', true );
 $multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures', $multiple_fixed_departures );
+
+$enable_pricing_options = get_post_meta( $post->ID, 'wp_travel_enable_pricing_options', true );
 
 $trip_duration       = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
 $trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -25,7 +29,9 @@ $price       = get_post_meta( $post->ID, 'wp_travel_price', true );
 $sale_price  = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
 $enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
 
-$trip_pricing_options_data = get_post_meta( $post->ID , 'wp_travel_pricing_options', true );
+$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
+
+$trip_multiple_date_options = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
 
 $sale_price_attribute = 'disabled="disabled"';
 $sale_price_style     = 'display:none';
@@ -64,6 +70,10 @@ if ( ! $price_per ) {
 		</td>
 	</tr>
 	<tr>
+		<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
+		<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
+	</tr>
+	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
@@ -92,7 +102,7 @@ if ( ! $price_per ) {
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_enable_pricing_options" type="checkbox" id="wp-travel-enable-pricing-options" checked="checked" value="1" "="">	
+					<input name="wp_travel_enable_pricing_options" type="checkbox" id="wp-travel-enable-pricing-options" <?php checked( 'yes', $enable_pricing_options ); ?> value="yes">	
 					<span class="switch"></span>
 				</label>
 			</span>
@@ -100,7 +110,7 @@ if ( ! $price_per ) {
 		</td>
 	</tr>
 	<tr>
-		<td id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
+		<td style="display:<?php echo ( 'yes' === $enable_pricing_options ) ? 'block' : 'none'; ?>" id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 			<?php
 			if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) != 0 ) :
@@ -365,7 +375,7 @@ if ( ! $price_per ) {
 		</td>
 	</tr>        
 
-	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $enable_pricing_options && 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
 		<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 		<td><span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
@@ -385,76 +395,159 @@ if ( ! $price_per ) {
 	</tr>
 
 	<tr id="wp-variations-multiple-dates" style="display:<?php echo ( 'yes' === $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
+
+	<?php if ( 'yes' === $enable_pricing_options && is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : ?>
+
 		<td colspan="2" class="pricing-repeater">
 
-			<div class="wp-collapse-open" style="<?php echo esc_attr( $sollapse_style ); ?>">
-				<a href="#" data-parent="wp-variations-multiple-dates" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-				<a data-parent="wp-variations-multiple-dates" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-			</div>
-			<p class="description"><?php echo esc_html( 'You can select different dates for each category.', 'wp-travel' ); ?></p>
+			<?php
+				if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) != 0 ) :
+					$sollapse_style = 'display:block';
+				else :
+					$sollapse_style = 'display:none';
+				endif;
+			?>
 
-			<div class="tab-accordion date-accordion">	
-				<div id="date-options-data" class="panel-group wp-travel-sorting-tabs" role="tablist" aria-multiselectable="true">
-
+				<div class="wp-collapse-open" style="<?php echo esc_attr( $sollapse_style ); ?>">
+					<a href="#" data-parent="wp-variations-multiple-dates" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+					<a data-parent="wp-variations-multiple-dates" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 				</div>
-				<div class="wp-travel-add-date-option clearfix">
-					<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
-				</div>
-			<!-- Template Script for dates -->
-			<script type="text/html" id="tmpl-wp-travel-multiple-dates">
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="heading-{{data.random}}">
-						<h4 class="panel-title">
-							<div class="wp-travel-sorting-handle"></div>
-								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="false" aria-controls="collapse-{{data.random}}" class="collapsed">
+				<p class="description"><?php echo esc_html( 'You can select different dates for each category.', 'wp-travel' ); ?></p>
 
-									<span bind="wp_travel_multiple_dates_{{data.random}}"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
+				<div class="tab-accordion date-accordion">	
+					<div id="date-options-data" class="panel-group wp-travel-sorting-tabs" role="tablist" aria-multiselectable="true">
 
-									<span class="collapse-icon"></span>
-								</a>
-							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
-						</h4>
+						<?php
+						if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) !== 0 ) :
+
+							foreach ( $trip_multiple_date_options as $date_key => $date_option ) {
+
+								// Set Vars.
+								$date_label       = isset( $date_option['date_label'] ) ? $date_option['date_label'] : '';
+								$start_date       = isset( $date_option['start_date'] ) ? $date_option['start_date'] : '';
+								$end_date         = isset( $date_option['end_date'] ) ? $date_option['end_date'] : '';
+								$pricing_options = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
+						?>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $date_key ); ?>">
+									<h4 class="panel-title">
+										<div class="wp-travel-sorting-handle"></div>
+											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $date_key ); ?>" aria-expanded="false" aria-controls="collapse-<?php echo esc_attr( $date_key ); ?>" class="collapsed">
+
+												<span bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
+
+												<span class="collapse-icon"></span>
+											</a>
+										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+									</h4>
+								</div>
+								<div id="collapse-<?php echo esc_attr( $date_key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $date_key ); ?>" aria-expanded="true">
+									<div class="panel-body">
+										<div class="panel-wrap">
+											<div class="repeat-row">
+												<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
+												<div class="two-third">
+													<input value="<?php echo esc_attr( $date_label ); ?>"  bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
+												</div>
+											</div>
+											<div class="repeat-row">
+												<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
+												<div class="two-third">
+													<input value="<?php echo esc_attr( $start_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+													<input value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+												</div>
+											</div>
+											<div class="repeat-row">
+												<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
+												<div class="two-third">
+
+													<div class="custom-multi-select">
+														<select name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
+															<?php
+															foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
+
+																$selected = in_array($pricing_option['price_key'], $pricing_options ) ? 'selected' : '';
+															?>
+																<option <?php echo esc_attr( $selected ); ?> value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
+															<?php } ?>
+														</select>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 					</div>
-					<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}" aria-expanded="true">
-						<div class="panel-body">
-							<div class="panel-wrap">
-								<div class="repeat-row">
-									<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
-									<div class="two-third">
-										<input  bind="wp_travel_multiple_dates_{{data.random}}" name="wp_travel_multiple_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
-									</div>
-								</div>
-								<div class="repeat-row">
-									<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
-									<div class="two-third">
-										<input name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-										<input name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
-									</div>
-								</div>
-								<div class="repeat-row">
-									<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
-									<div class="two-third">
+						<?php
+					}
+				endif;
+				?>	
 
-										<div class="custom-multi-select">
-											<select name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
-												<?php
-												foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
-												?>
-													<option value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
-												<?php } ?>
-											</select>
+					<div class="wp-travel-add-date-option clearfix">
+						<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
+					</div>
+
+				<!-- Template Script for dates -->
+				<script type="text/html" id="tmpl-wp-travel-multiple-dates">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+							<h4 class="panel-title">
+								<div class="wp-travel-sorting-handle"></div>
+									<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="false" aria-controls="collapse-{{data.random}}" class="collapsed">
+
+										<span bind="wp_travel_multiple_dates_{{data.random}}"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
+
+										<span class="collapse-icon"></span>
+									</a>
+								<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+							</h4>
+						</div>
+						<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}" aria-expanded="true">
+							<div class="panel-body">
+								<div class="panel-wrap">
+									<div class="repeat-row">
+										<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
+										<div class="two-third">
+											<input  bind="wp_travel_multiple_dates_{{data.random}}" name="wp_travel_multiple_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
+										</div>
+									</div>
+									<div class="repeat-row">
+										<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
+										<div class="two-third">
+											<input name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+											<input name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+										</div>
+									</div>
+									<div class="repeat-row">
+										<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
+										<div class="two-third">
+
+											<div class="custom-multi-select">
+												<select name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
+													<?php
+													foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
+													?>
+														<option value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
+													<?php } ?>
+												</select>
+
+											</div>
 
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</script>
-		</div>
+				</script>
+			</div>
 		</td>
+	<?php else : ?>
+		<td colspan="2"><p><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>	
+	<?php endif; ?>
 	</tr>
 	<?php
 	/**

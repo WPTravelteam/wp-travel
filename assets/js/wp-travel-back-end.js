@@ -220,10 +220,10 @@
         }
     });
 
-    //Pricing options multiselect.
-    $('.wp-travel-multiple-date-pricings').multipleSelect({
-        filter: true
-    });
+    // //Pricing options multiselect.
+    // $('.wp-travel-multiple-date-pricings').multipleSelect({
+    //     filter: true
+    // });
 
     //Pricing Key slugify.
     $(document).on('change', '.wp-travel-variation-pricing-name', function() {
@@ -476,10 +476,10 @@
             minDate: new Date()
         });
 
-        // Pricing options multiselect.
-        $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
-            filter: false,
-        });
+        // // Pricing options multiselect.
+        // $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
+        //     filter: false,
+        // });
 
     });
 
