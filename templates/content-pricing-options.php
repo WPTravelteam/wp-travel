@@ -159,6 +159,33 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							</div>
 						</div>
 					</li>
+					<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
+					<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+					<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js"></script>
+
+					<script type="text/javascript">
+						jQuery('.wp-travel-booking-row').hide();
+						jQuery('.show-booking-row').click(function(){
+							jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
+							jQuery(this).text(function(i, text){
+								return text === "Select" ? "Close" : "Select";
+							})
+						});
+						jQuery('#few-dates-enable').datepicker({
+	                        language: 'en',
+	                            inline: true,
+	                                onRenderCell: function (date, cellType) {
+	                                if (cellType == 'day') {
+	                                isDisabled = !['4/4/2018','4/5/2018','4/6/2018'].includes(date.toLocaleDateString("en-US"));
+	                                return {
+	                                disabled: isDisabled
+	                                }
+	                            }
+	                        }
+	                    })
+
+						
+					</script>
 				<?php endforeach; ?>
 				</ul>
 			</div>

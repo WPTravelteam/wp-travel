@@ -61,124 +61,122 @@ class WP_Travel_Cart {
 		?>
 
 		<!-- CART HTML START -->
-		<div class="col-sm-12">
-			<div class="ws-theme-cart-page">
-				<table class="ws-theme-cart-list">
-					<thead>
-						<tr>
-							<th></th>
-							<th></th>
-							<th colspan="2"><?php esc_html_e( 'Tour', 'wp-travel' ); ?></th>
-							<th><?php esc_html_e( 'Price', 'wp-travel' ); ?></th>
-							<th><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
-							<th class="text-right"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="responsive-cart">
-							<td class="product-remove" >
-								<a href="#0" class="remove tooltip-area" title="Remove this Tour">×</a> 
-							</td>
-							<td class="product-thumbnail" >
-								<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>">
-								<?php echo wp_kses( wp_travel_get_post_thumbnail( $trip_id ), wp_travel_allowed_html( array( 'img' ) ) ); ?>
-								</a> 
-							</td>
-							<td class="product-name" colspan="2" data-title="Tour">
-								<div class="item_cart">
-									<h4>
-										<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
-									</h4>
-									<?php 
-										$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
-										$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-									if ( 'yes' === $fixed_departure ) :
-									?>
-										<span class="variation">
-											<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
-											<span>
-											<?php $date_format = get_option( 'date_format' ); ?>
-												<?php if ( ! $date_format ) : ?>
-													<?php $date_format = 'jS M, Y'; ?>
-												<?php endif; ?>
-												<?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) ); ?>
-											</span>
+		<div class="ws-theme-cart-page">
+			<table class="ws-theme-cart-list">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+						<th colspan="2"><?php esc_html_e( 'Tour', 'wp-travel' ); ?></th>
+						<th><?php esc_html_e( 'Price', 'wp-travel' ); ?></th>
+						<th><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
+						<th class="text-right"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="responsive-cart">
+						<td class="product-remove" >
+							<a href="#0" class="remove tooltip-area" title="Remove this Tour">×</a> 
+						</td>
+						<td class="product-thumbnail" >
+							<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>">
+							<?php echo wp_kses( wp_travel_get_post_thumbnail( $trip_id ), wp_travel_allowed_html( array( 'img' ) ) ); ?>
+							</a> 
+						</td>
+						<td class="product-name" colspan="2" data-title="Tour">
+							<div class="item_cart">
+								<h4>
+									<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
+								</h4>
+								<?php 
+									$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+									$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+								if ( 'yes' === $fixed_departure ) :
+								?>
+									<span class="variation">
+										<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
+										<span>
+										<?php $date_format = get_option( 'date_format' ); ?>
+											<?php if ( ! $date_format ) : ?>
+												<?php $date_format = 'jS M, Y'; ?>
+											<?php endif; ?>
+											<?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) ); ?>
 										</span>
-									<?php endif; ?>
-								</div>
-							</td>
-							<td class="product-price" data-title="Price">
-							<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
-
-								<?php if ( $enable_sale ) : ?>
-									<del>
-										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-									</del>
-								<?php endif; ?>
-									<span class="person-count">
-										<ins>
-											<span>
-												<?php
-												if ( $enable_sale ) {
-													echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
-												} else {
-													echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
-												}
-												?>
-											</span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
 									</span>
 								<?php endif; ?>
+							</div>
+						</td>
+						<td class="product-price" data-title="Price">
+						<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
+
+							<?php if ( $enable_sale ) : ?>
+								<del>
+									<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+								</del>
+							<?php endif; ?>
+								<span class="person-count">
+									<ins>
+										<span>
+											<?php
+											if ( $enable_sale ) {
+												echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
+											} else {
+												echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
+											}
+											?>
+										</span>
+									</ins>/<?php echo esc_html( $per_person_text ); ?>
+								</span>
+							<?php endif; ?>
+						</td>
+						<!-- <td class="product-quantity" data-title="PAX">
+							<div class="st_adults">
+								<span class="label">Adults</span>
+								<input name="" type="number" value="1" min="1">
+							</div>
+							<div class="st_children">
+								<span class="label">Children</span>
+								<input name="" type="number" value="0" min="0">
+							</div> 
+						</td>
+						<td class="product-subtotal text-right" data-title="Total">
+							<div class="item_cart">
+								<p>
+									<strong><span class="ws-theme-currencySymbol">$</span>220</strong>
+								</p>
+							</div>
+						</td> -->
+					</tr>
+					</tbody>
+					</table>
+					<table class="ws-theme-cart-list table-total-info">
+						<tr>
+							<th >
+								<p><strong>Subtotal</strong></p>
+								<p><strong>Tax <span class="tax-percent">10%</span></strong></p>
+							</th>
+							<td  class="text-right">
+								<p><strong><span class="ws-theme-currencySymbol">$</span>220</strong></p>
+								<p><span><span class="ws-theme-currencySymbol">$</span>22</span></p>
 							</td>
-							<!-- <td class="product-quantity" data-title="PAX">
-								<div class="st_adults">
-									<span class="label">Adults</span>
-									<input name="" type="number" value="1" min="1">
-								</div>
-								<div class="st_children">
-									<span class="label">Children</span>
-									<input name="" type="number" value="0" min="0">
-								</div> 
-							</td>
-							<td class="product-subtotal text-right" data-title="Total">
-								<div class="item_cart">
-									<p>
-										<strong><span class="ws-theme-currencySymbol">$</span>220</strong>
-									</p>
-								</div>
-							</td> -->
 						</tr>
-						</tbody>
-						</table>
-						<table class="ws-theme-cart-list table-total-info">
-							<tr>
-								<th >
-									<p><strong>Subtotal</strong></p>
-									<p><strong>Tax <span class="tax-percent">10%</span></strong></p>
-								</th>
-								<td  class="text-right">
-									<p><strong><span class="ws-theme-currencySymbol">$</span>220</strong></p>
-									<p><span><span class="ws-theme-currencySymbol">$</span>22</span></p>
-								</td>
-							</tr>
-							<tr>
-								<th >
-									<strong>Total</strong>
-								</th>
-								<td  class="text-right">
-									<p class="total">
-										<strong><span class="ws-theme-currencySymbol">$</span>242</strong>
-									</p>
-								</td>
-							</tr>
-						</table>
-					<div>
-						<div class="actions">
-							<a class="btn_full update-cart-btn" href="#">Update Cart</a>
-							<a class="btn_full book-now-btn" href="#">Process To Checkout</a>
-						</div>
+						<tr>
+							<th >
+								<strong>Total</strong>
+							</th>
+							<td  class="text-right">
+								<p class="total">
+									<strong><span class="ws-theme-currencySymbol">$</span>242</strong>
+								</p>
+							</td>
+						</tr>
+					</table>
+				<div>
+					<div class="actions">
+						<a class="btn_full update-cart-btn" href="#">Update Cart</a>
+						<a class="btn_full book-now-btn" href="#">Process To Checkout</a>
 					</div>
-			</div>
+				</div>
 		</div>
 		
 		<!-- CART HTML END -->
