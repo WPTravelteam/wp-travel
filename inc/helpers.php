@@ -1240,6 +1240,7 @@ function wp_travel_get_permalink_structure() {
 function wp_travel_get_frontend_tabs() {
 
 	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs();
+	
 	global $post;
 
 	$settings = wp_travel_get_settings();
@@ -1316,6 +1317,7 @@ function wp_travel_get_default_frontend_tabs() {
 		'trip_includes' => array( 'label' => __( 'Trip Includes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_include, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'trip_excludes' => array( 'label' => __( 'Trip Excludes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_exclude, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'gallery' 		=> array( 'label' => __( 'Gallery', 'wp-travel' ), 'label_class' => 'wp-travel-tab-gallery-contnet', 'content' => $gallery_ids, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
+		'facts' 		=> array( 'label' => __( 'Facts', 'wp-travel' ), 'label_class' => 'wp-travel-facts', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'reviews' 		=> array( 'label' => __( 'Reviews', 'wp-travel' ), 'label_class' => 'wp-travel-review', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'booking' 		=> array( 'label' => __( 'Booking', 'wp-travel' ), 'label_class' => 'wp-travel-booking-form', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'faq' 			=> array( 'label' => __( 'FAQ', 'wp-travel' ), 'label_class' => '', 'content' => $faqs, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
