@@ -389,7 +389,7 @@
         e.preventDefault();
         var parent = '#' + $(this).data('parent');
         $(parent + ' .panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-        $(parent + ' .panel-collapse').addClass('in');
+        $(parent + ' .panel-collapse').addClass('in').css('height', 'auto');
         $(this).hide();
         $(parent + ' .close-all-link').show();
         $(parent + ' #tab-accordion .panel-collapse').css('height', 'auto');
