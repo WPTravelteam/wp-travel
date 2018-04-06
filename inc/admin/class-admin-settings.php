@@ -34,12 +34,21 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
-		
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );		
-		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_trip_fact_tab_call_back' ), 12, 2 );		
+		add_filter( 'wp_travel_global_tabs', array($this,'add_facts_to_tabs'),12,2);
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
+	}
+
+	public function add_facts_to_tabs($tabs){
+		if(!array_key_exists('facts',$tabs))
+			$tabs['facts'] = [
+				'label'=>__('Facts','wp-travel'),
+				'show_in_menu'=>'no',
+			];
+		return $tabs;
 	}
 
 	/**
@@ -218,6 +227,13 @@ class WP_Travel_Admin_Settings {
 
 
 		echo '</table>';
+	}
+
+	function wp_travel_trip_fact_tab_call_back($tab, $args){
+		if ( 'trip_fact' !== $tab ) {
+			return;
+		}
+		die('works up to here');
 	}
 
 	/**
@@ -639,7 +655,9 @@ class WP_Travel_Admin_Settings {
 			//Fallback to default Tabs.
 			$global_tabs = wp_travel_get_default_frontend_tabs();
 
-		}
+		} 
+		
+		$global_tabs = apply_filters('wp_travel_global_tabs',$global_tabs);
 		
 		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 ) {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
