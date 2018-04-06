@@ -165,7 +165,6 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							</div>
 						</div>
 					</li>
-<<<<<<< HEAD
 					<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
 					<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
 					<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.min.js"></script>
@@ -193,9 +192,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 
 						
 					</script>
-=======
 				<?php endforeach; ?>
->>>>>>> 315b099f17f8afbcb7198e8de13ee4a3a73a5ab8
 				</ul>
 			</div>
 		</div>
