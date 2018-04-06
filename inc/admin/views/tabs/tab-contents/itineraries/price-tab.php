@@ -357,7 +357,7 @@ if ( ! $price_per ) {
 	</tr>
 	<tr>
 		<th colspan="2">
-			<h3>Dates</h3>
+			<h3><?php esc_html_e( 'Dates', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
 
