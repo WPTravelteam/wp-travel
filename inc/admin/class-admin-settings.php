@@ -171,7 +171,7 @@ class WP_Travel_Admin_Settings {
 			echo '<tr>';
 		echo '</table>';
 
-		echo '<h3 class="wp-travel-tab-content-title">Checkout Process</h3>';
+		echo '<h3 class="wp-travel-tab-content-title">' . esc_html__( 'Checkout Process', 'wp-travel' ) . '</h3>';
 
 		echo '<table class="form-table">';
 			echo '<tr>';
