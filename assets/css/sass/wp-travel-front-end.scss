@@ -2497,9 +2497,6 @@ ul.availabily-list{
     } 
 
 }
-
-
-
 //end
 
 //cart page
@@ -2600,7 +2597,7 @@ ul.availabily-list{
                 font-weight: 600;
 
                 &:hover{
-                    background: #dc8051;
+                    background: #df1814;
                     color: #fff;
                 }
             }
@@ -2660,7 +2657,6 @@ ul.availabily-list{
             background: #383838;
             display: inline-block;
             line-height: 45px;
-            color: #fff;
             font-size: 14px;
 
             font-weight: 700;
@@ -2759,7 +2755,9 @@ ul.availabily-list{
         }
     }
 } 
-
+.text-right{
+    text-align:right;
+}
 //end
 //checkout page
 .wp-travel-billing{

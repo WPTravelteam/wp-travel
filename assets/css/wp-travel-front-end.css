@@ -1909,7 +1909,7 @@ ul.availabily-list {
         color: #df1814;
         font-weight: 600; }
         .ws-theme-cart-page .ws-theme-cart-list .product-remove a:hover {
-          background: #dc8051;
+          background: #df1814;
           color: #fff; }
     @media (max-width: 767.99px) {
       .ws-theme-cart-page .ws-theme-cart-list .responsive-cart td {
@@ -1944,7 +1944,6 @@ ul.availabily-list {
       background: #383838;
       display: inline-block;
       line-height: 45px;
-      color: #fff;
       font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
@@ -2025,6 +2024,9 @@ ul.availabily-list {
   border-radius: 0; }
   .coupon-row input[type="submit"]:hover, .coupon-row .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"]:hover, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .coupon-row select[type="submit"]:hover, .coupon-row .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"]:hover, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .coupon-row textarea[type="submit"]:hover {
     background-color: #dc8051; }
+
+.text-right {
+  text-align: right; }
 
 .wp-travel-billing .wp-travel-info {
   text-align: center;
