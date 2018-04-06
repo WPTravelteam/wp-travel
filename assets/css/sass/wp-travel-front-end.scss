@@ -2500,15 +2500,21 @@ ul.availabily-list{
 //end
 
 //cart page
+.ws-theme-cart-page {
+    .product-thumbnail{
+        img{
+            max-width: 60px;
+            margin-bottom:0;
+        }
+    }    
+}
 .ws-theme-cart-page{
     background-color: #fff;
-
     .ws-theme-cart-list{
         margin-bottom:0;
         .item_cart{
             h4{
                 margin:0;
-
                 @media (max-width:767.99px){
                     width: calc( 100% - 100px );
                     text-align: right;
@@ -2577,6 +2583,12 @@ ul.availabily-list{
                     padding-left: 5px;
                 }
             } 
+            .product-price{
+                font-weight:600;
+                ins{
+                    background-color:transparent;
+                }
+            }
         }
         .product-thumbnail {
             width: 100px;
@@ -2602,10 +2614,8 @@ ul.availabily-list{
                 }
             }
         } 
-
         .responsive-cart{
             td{
-
                 @media (max-width:767.99px){
                     width:100%;
                     display:block;
@@ -2620,7 +2630,6 @@ ul.availabily-list{
                         top: 10px;
                     }
                 }
-
                 &.product-thumbnail{
                     @media (max-width:767.99px){
                         display:none;
@@ -2632,16 +2641,13 @@ ul.availabily-list{
                         content:none;
                     }
                 }
-                
             }
-
             &:nth-of-type(even){
                 td, th {
                     background-color: #eee;
                 }
             } 
         }
-
         &.table-total-info{
             margin-bottom:30px;
         }
@@ -2678,12 +2684,10 @@ ul.availabily-list{
             -ms-transition: all 0.3s ease 0s;
             -o-transition: all 0.3s ease 0s;
             transition: all 0.3s ease 0s;
-
-
         }
         a {
             background: #383838;
-            color: #fff;
+            color: #fff !important;
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
@@ -2692,6 +2696,7 @@ ul.availabily-list{
             min-width: 160px;
             text-align: center;
             padding: 0;
+
             @media (max-width:991.99px){
                 font-size:12px;
             }
@@ -2710,10 +2715,6 @@ ul.availabily-list{
                 background-color:#dc8051;
             }
         } 
-
-
-
-        
     } 
     .st_adults,
     .st_children {
@@ -3006,12 +3007,4 @@ ul.availabily-list{
     border: 2px solid #f00;
 }
 
-// Cart Page
-.ws-theme-cart-page {
-    .product-thumbnail{
-        img{
-            max-width: 60px;
-        }
-    }    
-}
 

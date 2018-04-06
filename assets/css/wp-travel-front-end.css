@@ -1841,6 +1841,10 @@ ul.availabily-list {
     right: auto;
     left: 0;
     margin-top: 0; } }
+.ws-theme-cart-page .product-thumbnail img {
+  max-width: 60px;
+  margin-bottom: 0; }
+
 .ws-theme-cart-page {
   background-color: #fff; }
   .ws-theme-cart-page .ws-theme-cart-list {
@@ -1892,6 +1896,10 @@ ul.availabily-list {
         color: #333; }
       .ws-theme-cart-page .ws-theme-cart-list tbody td .ws-theme-currencySymbol, .ws-theme-cart-page .ws-theme-cart-list tbody th .ws-theme-currencySymbol {
         padding-left: 5px; }
+    .ws-theme-cart-page .ws-theme-cart-list tbody .product-price {
+      font-weight: 600; }
+      .ws-theme-cart-page .ws-theme-cart-list tbody .product-price ins {
+        background-color: transparent; }
     .ws-theme-cart-page .ws-theme-cart-list .product-thumbnail {
       width: 100px; }
     .ws-theme-cart-page .ws-theme-cart-list .product-remove {
@@ -1965,7 +1973,7 @@ ul.availabily-list {
           margin-left: 0; } }
     .ws-theme-cart-page .actions a {
       background: #383838;
-      color: #fff;
+      color: #fff !important;
       font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
@@ -2213,8 +2221,5 @@ ul.availabily-list {
   padding: 5px;
   display: block;
   border: 2px solid #f00; }
-
-.ws-theme-cart-page .product-thumbnail img {
-  max-width: 60px; }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
