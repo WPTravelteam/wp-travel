@@ -66,7 +66,10 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 								<?php echo esc_html( 'Pricing Name', 'wp-travel' ); ?>
 							</div>
 						<div class="status">
-							<?php echo esc_html( 'Group Size ( min-max )', 'wp-travel' ); ?>
+							<?php echo esc_html( 'Min Group Size', 'wp-travel' ); ?>
+						</div>
+						<div class="status">
+							<?php echo esc_html( 'Max Group Size', 'wp-travel' ); ?>
 						</div>
 						<div class="price">
 							<?php echo esc_html( 'Price', 'wp-travel' ); ?>
@@ -80,7 +83,11 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							<span class="availabily-heading-label"><?php echo esc_html( 'Pricing Name:', 'wp-travel' ); ?></span> <span>Christmas Special</span>
 						</div>
 						<div class="status">
-							<span class="availabily-heading-label"><?php echo esc_html( 'Group Size( min-max ):', 'wp-travel' ); ?></span>
+							<span class="availabily-heading-label"><?php echo esc_html( 'Min Group Size:', 'wp-travel' ); ?></span>
+							<span>2 pax</span>
+						</div>
+						<div class="status">
+							<span class="availabily-heading-label"><?php echo esc_html( 'Max Group Size:', 'wp-travel' ); ?></span>
 							<span>20 pax</span>
 						</div>
 						<div class="price">
@@ -134,22 +141,74 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							})
 						});
 
-						var disabledDays = [0, 6];
+						var disabledDays = [0,1,2,3,4,5,6];
 
-						jQuery('#few-dates-enable').datepicker({
-							language: 'en',
-							onRenderCell: function (date, cellType) {
-								if (cellType == 'day') {
-									var day = date.getDay(),
-										isDisabled = disabledDays.indexOf(day) != -1;
+						var enableDays = [3];
 
-									return {
-										disabled: isDisabled
-									}
-								}
+
+						var eventDates = [1, 10, 12, 22],
+					    $picker = jQuery('#few-dates-enable'),
+					    sold = [2018-04-5, 2018-04-10, 2018-04-15, 2018-04-20],
+						avalible = [2018-04-12, 2018-04-18, 2018-04-25, 2018-04-30],
+						notenough = new Array();
+
+						 $picker.datepicker({
+						 	language: 'en',
+						 	todayButton:true,
+							onRenderCell: function (d, type) {
+								if (type == 'day') {
+									var cellYear = d.getFullYear(),
+				                    cellMonth = d.getMonth(),
+				                    cellDate = d.getDate(),
+				                    disabled = true,
+				                    classes = false,
+				                    html = false,
+				                    year, month, date;
+					                if (cellDate == date) {
+					                    disabled= true;
+					                }
+					                avalible.forEach(function (avalible) {
+					                    avalible = avalible.split('-');
+					                    year = avalible[0];
+					                    month = parseInt(avalible[1]) - 1;
+					                    date = parseInt(avalible[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "avalible";
+					                        disabled= false;
+					                 
+					                    }
+					                });
+					                notenough.forEach(function (notenough) {
+					                    notenough = notenough.split('-');
+					                    year = notenough[0];
+					                    month = parseInt(notenough[1]) - 1;
+					                    date = parseInt(notenough[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "notenough",
+					                            disabled= true;
+					                    }
+					                });
+					                sold.forEach(function (sold) {
+					                    sold = sold.split('-');
+					                    year = sold[0];
+					                    month = parseInt(sold[1]) - 1;
+					                    date = parseInt(sold[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "sold";
+					                        disabled= true;
+					                    }
+					                });
+					                return {
+					                    classes: classes,
+					                    disabled: disabled,
+					       
+					                }
+					            }    
 							}
-						})
-
+						 });
 					</script>
 				</ul>
 			</div>
