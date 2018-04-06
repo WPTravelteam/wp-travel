@@ -537,7 +537,10 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
 	$trip_price 	= wp_travel_get_trip_price( $post_id );
 	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
-
+	$trip_facts 	= get_post_meta( $post_id, 'wp_travel_trip_facts', true );
+	if(is_string($trip_facts)){
+		$trip_facts = json_decode($trip_facts, true);
+	}
 	$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 	$trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night', true );
@@ -574,6 +577,27 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php continue; ?>
 				<?php endif; ?>
 				<?php switch ( $tab_key ) {
+					case 'facts' : ?>
+					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+						<?php if ( false !== $tab_info['content'] || count($trip_facts)  == 0 ) : ?>
+						<div class="wp-travel-gallery wp-travel-container-wrap">
+							<div class="wp-travel-row-wrap">
+								<ul>
+									<?php foreach($trip_facts as $facts): ?>
+									<li>
+										<?php echo isset($facts['label']) && $facts['label'] !='custom' ? $facts['label'] : '' ?>
+										<?php echo isset($facts['custom_label']) && isset($facts['label']) && $facts['label'] == 'custom' ? $facts['custom_label'] : '' ?>
+										<?php echo isset($facts['description']) ? $facts['description'] : ''; ?>
+									</li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
+						</div>
+						<?php else : ?>
+							<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No facts found.', 'wp-travel' ); ?></p>
+						<?php endif; ?>
+					</div>
+				<?php break;
 					case 'gallery' : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php if ( false !== $tab_info['content'] ) : ?>
@@ -602,10 +626,7 @@ function wp_travel_frontend_contents( $post_id ) {
 						</div>
 					<?php break;
 					case 'booking' :
-
-
 						wp_travel_get_template_part( 'content', 'pricing-options' );
-					
 					break;
 					case 'faq' : ?>
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
@@ -736,13 +757,6 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break; ?>
 				<?php } ?>
 			<?php $index++; endforeach; ?>
-
-						<!-- <div id="faq" class="tab-list-content resp-tab-content clearfix">
-
-							
-						</div> -->
-
-
 		</div>
 		<?php endif; ?>
 	
