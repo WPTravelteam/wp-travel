@@ -601,7 +601,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 			<i class="fa fa-clock-o"></i>
 			<span class="wp-travel-trip-duration">
 				<?php if ( ( int ) $trip_duration > 0 ) : ?>
-					<?php echo esc_html( $trip_duration . ' Days' ); ?>
+					<?php echo esc_html( $trip_duration . __( ' Days', 'wp-travel' ) ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 				<?php endif; ?>
@@ -1222,10 +1222,10 @@ function wp_travel_get_permalink_structure() {
 	// }
 
 	// Ensure rewrite slugs are set.
-	$permalinks['wp_travel_trip_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? _x( 'itinerary', 'slug', 'wp-travel' ) : $permalinks['wp_travel_trip_base'] );
-	$permalinks['wp_travel_trip_type_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_type_base'] ) ? _x( 'trip-type', 'slug', 'wp-travel' ) : $permalinks['wp_travel_trip_type_base'] );
-	$permalinks['wp_travel_destination_base']   = untrailingslashit( empty( $permalinks['wp_travel_destination_base'] ) ? _x( 'travel-locations', 'slug', 'wp-travel' ) : $permalinks['wp_travel_destination_base'] );
-	$permalinks['wp_travel_activity_base']   = untrailingslashit( empty( $permalinks['wp_travel_activity_base'] ) ? _x( 'activity', 'slug', 'wp-travel' ) : $permalinks['wp_travel_activity_base'] );
+	$permalinks['wp_travel_trip_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? 'itinerary' : $permalinks['wp_travel_trip_base'] );
+	$permalinks['wp_travel_trip_type_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_type_base'] ) ? 'trip-type' : $permalinks['wp_travel_trip_type_base'] );
+	$permalinks['wp_travel_destination_base']   = untrailingslashit( empty( $permalinks['wp_travel_destination_base'] ) ? 'travel-locations' : $permalinks['wp_travel_destination_base'] );
+	$permalinks['wp_travel_activity_base']   = untrailingslashit( empty( $permalinks['wp_travel_activity_base'] ) ? 'activity' : $permalinks['wp_travel_activity_base'] );
 
 	return $permalinks;
 }

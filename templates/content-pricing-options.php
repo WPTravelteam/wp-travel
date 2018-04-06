@@ -103,9 +103,9 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							</div>
 						<?php else : ?>
 							<div class="date-from">
-								<span><?php echo esc_html( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
+								<span><?php esc_html_e( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
 
-								<span><?php echo esc_html( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
+								<span><?php esc_html_e( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
 							</div>
 						<?php endif; ?>
 						<div class="status">
@@ -277,9 +277,9 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							</div>
 						<?php else : ?>
 							<div class="date-from">
-								<span><?php echo esc_html( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
+								<span><?php esc_html_e( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
 
-								<span><?php echo esc_html( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
+								<span><?php esc_html_e( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
 							</div>
 						<?php endif; ?>
 						<div class="status">

@@ -2117,4 +2117,7 @@ ul.availabily-list {
   display: block;
   border: 2px solid #f00; }
 
+.ws-theme-cart-page .product-thumbnail img {
+  max-width: 60px; }
+
 /*# sourceMappingURL=wp-travel-front-end.css.map */

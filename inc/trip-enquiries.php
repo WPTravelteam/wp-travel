@@ -63,6 +63,18 @@ function wp_travel_enquiries_form_fields() {
 			'priority' => 90,
 			'wrapper_class' => 'full-width textarea-field',
 		),
+		'label_submit_enquiry' => array(
+			'type' => 'hidden',
+			'name' => 'wp_travel_label_submit_enquiry',
+			'id' => 'wp_travel_label_submit_enquiry',
+			'default' => __( 'SUBMIT ENQUIRY' ),			
+		),
+		'label_processing' => array(
+			'type' => 'hidden',
+			'name' => 'wp_travel_label_processing',
+			'id' => 'wp_travel_label_processing',
+			'default' => __( 'PROCESSING...' ),			
+		),
 	);
 	return apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
 }
