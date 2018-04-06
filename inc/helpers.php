@@ -1490,3 +1490,115 @@ function taxed_amount($amount, $tax_percent, $inclusive =  true){
 	}
 	return number_format( ( $amount + ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
 }
+
+/**
+ * Retrieve page ids - cart, checkout. returns -1 if no page is found.
+ *
+ * @param string $page Page slug.
+ * @return int
+ */
+function wp_travel_get_page_id( $page ) {
+
+	$page = apply_filters( 'wp_travel_get_' . $page . '_page_id', get_option( 'wp_travel_' . $page . '_page_id' ) );
+
+	return $page ? absint( $page ) : -1;
+}
+
+/**
+ * Retrieve page permalink.
+ *
+ * @param string $page page slug.
+ * @return string
+ */
+function wp_travel_get_page_permalink( $page ) {
+	$page_id   = wp_travel_get_page_id( $page );
+	$permalink = 0 < $page_id ? get_permalink( $page_id ) : get_home_url();
+	return apply_filters( 'wp_travel_get_' . $page . '_page_permalink', $permalink );
+}
+
+/**
+ * Gets the url to the Cart page.
+ *
+ * @since  2.2.3
+ *
+ * @return string Url to cart page
+ */
+function wp_travel_get_cart_url() {
+	return apply_filters( 'wp_travel_get_cart_url', wp_travel_get_page_permalink( 'wp-travel-cart' ) );
+}
+
+/**
+ * Check whether page is checkout page or not.
+ *
+ * @return Boolean
+ */
+function wp_travel_is_checkout_page() {
+	
+	if ( is_admin() ) {
+		return false;
+	}
+	global $post;
+	$page_id = get_the_ID();
+	$settings = wp_travel_get_settings();
+	if ( isset( $settings['checkout_page_id'] ) && (int) $settings['checkout_page_id'] === $page_id ) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Check whether page is cart page or not.
+ *
+ * @return Boolean
+ */
+function wp_travel_is_cart_page() {
+	if ( is_admin() ) {
+		return false;
+	}
+	$page_id = get_the_ID();
+	$settings = wp_travel_get_settings();
+	if ( isset( $settings['cart_page_id'] ) && (int) $settings['cart_page_id'] === $page_id ) {
+		return true;
+	}
+	return false;
+}
+
+function wp_travel_is_itinerary( $post_id ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	if ( ! $post_id ) {
+		return;
+	}
+
+	$post_type = get_post_type( $post_id );
+
+	// If this isn't a 'itineraries' post, don't update it.
+	if ( WP_TRAVEL_POST_TYPE === $post_type ) {
+		return true;
+	}
+	return false;
+}
+
+// WP Travel Pricing Varition options.
+
+/**
+ * Get default pricing variation options.
+ *
+ * @return array $variation_options Variation Options.
+ */
+function wp_travel_get_pricing_variation_options(){
+
+	$variation_options = array(
+		'adult'         => __( 'Adult', 'wp-travel' ),
+		'children'      => __( 'Children', 'wp-travel' ),
+		'infant'        => __( 'Infant', 'wp-travel' ),
+		'couple'        => __( 'Couple', 'wp-travel' ),
+		'group'         => __( 'Group', 'wp-travel' ),
+		'custom'        => __( 'Custom', 'wp-travel' ),
+	);
+	
+	return apply_filters( 'wp_travel_variation_pricing_options', $variation_options );
+}

@@ -11,7 +11,7 @@ class WP_Travel_FW_Field_Text {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
-				$validations .= sprintf( ' data-parsley-%s="%s"', $key, $attr );
+				$validations .= sprintf( ' %s="%s" data-parsley-%s="%s"', $key, $attr, $key, $attr );
 			}
 		}
 		$attributes = '';

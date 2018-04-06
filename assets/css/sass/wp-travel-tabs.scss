@@ -271,25 +271,22 @@ $alto: #ddd;
 
 //marketplace page
 #poststuff {
-    padding-top: 10px;
-    min-width: 763px;
-    .inside {
-        img {
-            width: 100%;
+    .single-module-side{
+        .inside {
+            img {
+                width: 100%;
+            }
         }
     }
 }
-
 #aside-wrap {
     float: right;
     margin-right: -300px;
     width: 280px;
 }
-
 .itineraries_page_wp-travel-marketplace #post-body {
     margin-right: 300px;
 }
-
 .wp-travel-marketplace-tab-wrap {
     width: 100%;
     margin-top: 50px;
@@ -346,7 +343,6 @@ $alto: #ddd;
         border: 1px solid #ddd;
     }
 }
-
 .marketplace-module {
     display: inline-block;
     position: relative;

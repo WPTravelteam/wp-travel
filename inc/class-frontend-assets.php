@@ -22,6 +22,10 @@ class WP_Travel_Frontend_Assets {
 		$settings = wp_travel_get_settings();
 
 		global $post;
+		$trip_id = $post->ID;
+		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) && isset( $_GET['trip_id'] ) ) {
+			$trip_id = $_GET['trip_id'];
+		}
 
 		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), '2.2.3' );
 
@@ -42,79 +46,82 @@ class WP_Travel_Frontend_Assets {
 		
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
-		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
-			return;
-		}
-		$map_data = get_wp_travel_map_data();
+		if (  is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() ) {
+			$map_data = get_wp_travel_map_data();
 
-		$api_key = '';
-		if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
-			$api_key = $settings['google_map_api_key'];
-		}
+			$api_key = '';
+			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
+				$api_key = $settings['google_map_api_key'];
+			}
 
-		wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
-		wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery','jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), '', true );
-		if ( '' != $api_key ) {
-			wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
-			wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', array( 'jquery', 'google-map-api' ), '', 1 );
+			wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
+			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery','jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), '', true );
+			if ( '' != $api_key ) {
+				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
+				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', array( 'jquery', 'google-map-api' ), '', 1 );
 
-			wp_register_script( 'wp-travel-maps', $this->assets_path . 'assets/js/wp-travel-front-end-map.js', array( 'jquery', 'jquery-gmaps' ), '', 1 );
+				wp_register_script( 'wp-travel-maps', $this->assets_path . 'assets/js/wp-travel-front-end-map.js', array( 'jquery', 'jquery-gmaps' ), '', 1 );
 
-			$wp_travel = array(
-				'lat' => $map_data['lat'],
-				'lng' => $map_data['lng'],
-				'loc' => $map_data['loc'],
+				$wp_travel = array(
+					'lat' => $map_data['lat'],
+					'lng' => $map_data['lng'],
+					'loc' => $map_data['loc'],
+				);
+
+				$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel );
+				wp_localize_script( 'wp-travel-maps', 'wp_travel', $wp_travel );
+				// Enqueued script with localized data.
+				wp_enqueue_script( 'wp-travel-maps' );
+			}
+			//add vars.
+			$frontend_vars = array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
 			);
 
-			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel );
-			wp_localize_script( 'wp-travel-maps', 'wp_travel', $wp_travel );
-			// Enqueued script with localized data.
-			wp_enqueue_script( 'wp-travel-maps' );
+			wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
+
+			// Enqueued script.
+			wp_enqueue_script( 'travel-door-script' );
+
+			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
+			wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
+
+			// Return if payment is not enabled.
+			if ( ! wp_travel_is_payment_enabled() ) {
+				return;
+			}
+			$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
+
+			$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
+			if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+
+				$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
+			}
+			else {
+				$trip_price = $payment_amount = $trip_price_tax['trip_price'];
+			}
+
+			$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
+			if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
+				$payment_amount = $minimum_partial_payout;
+			}
+			$wt_payment = array(
+				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
+				'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
+				'currency_code' => $currency_code,
+				'currency_symbol' => wp_travel_get_currency_symbol(),
+				'price_per'		=> wp_travel_get_price_per_text( $trip_id ),
+				'trip_price'	=> $trip_price,
+				'payment_amount' => $payment_amount,
+			);
+
+			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
+			wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ) );
+
+			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
+			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 		}
-		//add vars.
-		$frontend_vars = array(
-			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
-		);
-
-		wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
-
-		// Enqueued script.
-		wp_enqueue_script( 'travel-door-script' );
-
-		wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
-		wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
-
-		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
-
-		$trip_price_tax = wp_travel_process_trip_price_tax( $post->ID );
-		if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
-
-			$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
-		}
-		else {
-			$trip_price = $payment_amount = $trip_price_tax['trip_price'];
-		}
-
-		$minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
-		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-			$payment_amount = $minimum_partial_payout;
-		}
-		$wt_payment = array(
-			'book_now' 	 => __( 'Book Now', 'wp-travel' ),
-			'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
-			'currency_code' => $currency_code,
-			'currency_symbol' => wp_travel_get_currency_symbol(),
-			'price_per'		=> wp_travel_get_price_per_text( $post->ID ),
-			'trip_price'	=> $trip_price,
-			'payment_amount' => $payment_amount,
-		);
-
-		$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
-		wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ) );
-
-		wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
-		wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 	}
 }
 

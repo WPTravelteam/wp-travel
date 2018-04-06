@@ -14,15 +14,25 @@ function wp_travel_booking_form_fields() {
 	global $post;
 
 	$post_id = 0;
-	if ( isset( $post->ID ) ) {
-		$post_id = $post->ID;
-	}
-	if ( isset( $_POST['wp_travel_post_id'] ) ) {
+	if ( isset( $_REQUEST['trip_id'] ) ) {
+		$post_id = $_REQUEST['trip_id'];
+	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
 		$post_id = $_POST['wp_travel_post_id'];
-	}
+	} elseif ( isset( $post->ID ) ) {
+		$post_id = $post->ID;
+	} 
 
 	if ( $post_id > 0 ) {
 		$max_pax = get_post_meta( $post_id, 'wp_travel_group_size', true );
+	}
+
+	$pax_size = 1;
+	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ){
+		$pax_size = $_REQUEST['pax'];
+	}
+	$trip_duration = 1;
+	if ( isset( $_REQUEST['trip_duration'] ) ) {
+		$trip_duration = $_REQUEST['trip_duration'];
 	}
 
 	$booking_fileds = array(
@@ -132,6 +142,7 @@ function wp_travel_booking_form_fields() {
 				'required' => true,
 				'min' => 1,
 			),
+			'default' => $trip_duration,
 			'attributes' => array( 'min' => 1 ),
 			'priority' => 70,
 		),
@@ -140,7 +151,7 @@ function wp_travel_booking_form_fields() {
 			'label' => __( 'Pax', 'wp-travel' ),
 			'name' => 'wp_travel_pax',
 			'id' => 'wp-travel-pax',
-			'default' => 1,
+			'default' => $pax_size,
 			'validations' => array(
 				'required' => '',
 				'min' => 1,
@@ -164,7 +175,18 @@ function wp_travel_booking_form_fields() {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
 		$booking_fileds['pax']['attributes']['max'] = $max_pax;
 	}
+	if ( wp_travel_is_checkout_page() ) {		
+		$booking_arrival_date 	= get_post_meta( $post_id, 'wp_travel_start_date', true );
+		$booking_departure_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
+		
+		$booking_fileds['pax']['type'] = 'hidden';
 
+		$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+		$booking_fileds['arrival_date']['type'] = 'hidden';
+		
+		$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
+		$booking_fileds['departure_date']['type'] = 'hidden';
+	}
 	// Standard paypal Merge.
 
 	if ( wp_travel_is_payment_enabled() ) {
@@ -383,6 +405,15 @@ function wp_travel_booking_form_fields() {
  */
 function wp_travel_get_booking_form() {
 	global $post;
+
+	$post_id = 0;
+	if ( isset( $_REQUEST['trip_id'] ) ) {
+		$post_id = $_REQUEST['trip_id'];
+	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
+		$post_id = $_POST['wp_travel_post_id'];
+	} elseif ( isset( $post->ID ) ) {
+		$post_id = $post->ID;
+	} 
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
 		'id' => 'wp-travel-booking',
@@ -399,15 +430,15 @@ function wp_travel_get_booking_form() {
 	);
 
 	$fields = wp_travel_booking_form_fields();
-
+	
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
 		'type' => 'hidden',
 		'name' => 'wp_travel_post_id',
 		'id' => 'wp-travel-post-id',
-		'default' => $post->ID,
+		'default' => $post_id,
 	);
-	$fixed_departure = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
@@ -417,7 +448,7 @@ function wp_travel_get_booking_form() {
 		unset( $fields['trip_duration'] );
 	}
 
-	$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
 	if ( '' == $trip_price || '0' == $trip_price ) {
 
@@ -827,6 +858,7 @@ function wp_travel_book_now() {
 	}
 
 	$trip_code = wp_travel_get_trip_code( $_POST['wp_travel_post_id'] );
+	$thankyou_page_url = get_permalink( $_POST['wp_travel_post_id'] );
 	$title = 'Booking - ' . $trip_code;
 
 	$post_array = array(
@@ -960,7 +992,7 @@ function wp_travel_book_now() {
 			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			// ) );
 
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
@@ -976,7 +1008,7 @@ function wp_travel_book_now() {
 			// 	'result'  => 0,
 			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 			// ) );
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
@@ -987,7 +1019,7 @@ function wp_travel_book_now() {
 	 * @since 1.0.5 // For Payment.
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
-	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
 	exit;

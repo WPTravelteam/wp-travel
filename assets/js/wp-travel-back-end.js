@@ -201,6 +201,73 @@
         }
     });
 
+    // Slugify the text string.
+    function wp_travel_slugify_string(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-') // Replace spaces with -
+            .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+            .replace(/\-\-+/g, '-') // Replace multiple - with single -
+            .replace(/^-+/, '') // Trim - from start of text
+            .replace(/-+$/, ''); // Trim - from end of text
+    }
+
+    // Pricing options enable disable. v 1.2.5
+    $(document).on('click', '#wp-travel-enable-pricing-options', function() {
+        if ($(this).is(':checked')) {
+            $('#wp-travel-multiple-pricing-options').show();
+        } else {
+            $('#wp-travel-multiple-pricing-options').hide();
+        }
+    });
+
+    // //Pricing options multiselect.
+    // $('.wp-travel-multiple-date-pricings').multipleSelect({
+    //     filter: true
+    // });
+
+    //Pricing Key slugify.
+    $(document).on('change', '.wp-travel-variation-pricing-name', function() {
+
+        var price_key = wp_travel_slugify_string($(this).val());
+
+        $(this).siblings('.wp-travel-variation-pricing-uniquekey').val(price_key)
+
+    });
+
+    // Pricing options change function.
+    $(document).on('change', '.wp-travel-pricing-options-list', function() {
+        if ($(this).val() === 'custom') {
+            $(this).parents('.repeat-row').next('.custom-pricing-label-wrap').show();
+        } else {
+            $(this).parents('.repeat-row').next('.custom-pricing-label-wrap').hide();
+        }
+    });
+
+    //Pricing options Enable Sale.
+    $(document).on('change', '.wp-travel-enable-variation-price-sale', function() {
+        if ($(this).is(':checked')) {
+            $(this).parents('.repeat-row').next('.repeat-row').show();
+        } else {
+            $(this).parents('.repeat-row').next('.repeat-row').hide();
+        }
+    });
+
+    $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
+        if ($(this).is(':checked')) {
+            $('.hide-if-multidates').hide();
+            $('#wp-variations-multiple-dates').show();
+        } else {
+            $('.hide-if-multidates').show();
+            $('#wp-variations-multiple-dates').hide();
+        }
+    });
+
+    if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
+        $(this).parents('.repeat-row').next('.repeat-row').show();
+    } else {
+        $(this).parents('.repeat-row').next('.repeat-row').hide();
+    }
+
     if ($('#wp-travel-enable-sale').is(':checked')) {
         $('#wp-travel-price').attr('required', 'required');
     }
@@ -320,18 +387,20 @@
     // Open All And Close All accordion.
     $('.open-all-link').click(function(e) {
         e.preventDefault();
-        $('.panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-        $('.panel-collapse').addClass('in');
+        var parent = '#' + $(this).data('parent');
+        $(parent + ' .panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
+        $(parent + ' .panel-collapse').addClass('in');
         $(this).hide();
-        $('.close-all-link').show();
-        $('#tab-accordion .panel-collapse').css('height', 'auto');
+        $(parent + ' .close-all-link').show();
+        $(parent + ' #tab-accordion .panel-collapse').css('height', 'auto');
     });
     $('.close-all-link').click(function(e) {
+        var parent = '#' + $(this).data('parent');
         e.preventDefault();
-        $('.panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
-        $('.panel-collapse').removeClass('in');
+        $(parent + ' .panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
+        $(parent + ' .panel-collapse').removeClass('in');
         $(this).hide();
-        $('.open-all-link').show();
+        $(parent + ' .open-all-link').show();
     });
 
 
@@ -345,7 +414,6 @@
         if (confirm("Are you sure to Delete ?") == true) {
             $(this).closest('div.panel-default').remove();
 
-            console.log(acc_id);
             var faqs = $('#' + acc_id + ' .panel-default').length;
 
             // alert(faqs);
@@ -371,12 +439,63 @@
         // $('#tab-accordion').accordion('destroy').accordion({ active: faqs });
     });
 
+    // Pricing options template.
+    $('.wp-travel-pricing-add-new').on('click', function() {
+        var template = wp.template('wp-travel-pricing-options');
+        var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        $('#pricing-options-data').append(template({ random: rand }));
+
+
+    });
+
+    // Dates options template.
+    $('.wp-travel-multiple-dates-add-new').on('click', function() {
+        var template = wp.template('wp-travel-multiple-dates');
+        var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        $('#date-options-data').append(template({ random: rand }));
+
+        $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
+            language: 'en',
+            minDate: new Date(),
+            onSelect: function(dateStr) {
+                newMinDate = null;
+                newMaxDate = new Date();
+                if ('' !== dateStr) {
+                    new_date_min = new Date(dateStr);
+
+                    newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+                }
+                $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                    minDate: newMinDate,
+                });
+            }
+        });
+
+        $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
+            language: 'en',
+            minDate: new Date()
+        });
+
+        // // Pricing options multiselect.
+        // $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
+        //     filter: false,
+        // });
+
+    });
+
     //value bind to label.
     $(document).on('change keyup', "*[bind]", function(e) {
         var to_bind = $(this).attr('bind');
         var value = ('' != $(this).val()) ? $(this).val() : 'Untitled';
         $("*[bind='" + to_bind + "']").html(value);
         $("*[bind='" + to_bind + "']").val($(this).val());
+    });
+
+    //Sale price binding on pricing options.
+    $(document).on('change keyup', "*[bindPrice]", function(e) {
+        var bound_sale = $(this).attr('bindPrice');
+        var value = ('' != $(this).val()) ? $(this).val() : 1;
+        $("*[bindSale='" + bound_sale + "']").attr('max', value);
     });
 
     $(document).on('keyup change', '.section_title', function() {

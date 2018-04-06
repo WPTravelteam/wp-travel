@@ -70,18 +70,18 @@ function wp_travel_enquiries_form_fields() {
 /**
  * Return HTM of Enquiry Form
  *
- * @return [type] [description]
+ * @return void [description]
  */
 function wp_travel_get_enquiries_form() {
 	global $post;
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
-        'id' => 'wp-travel-enquiries',
-        'class' => 'mfp-hide',
+		'id'            => 'wp-travel-enquiries',
+		'class'         => 'mfp-hide',
 		'wrapper_class' => 'wp-travel-enquiries-form-wrapper',
 		'submit_button' => array(
-			'name' => 'wp_travel_enquiry_submit',
-			'id' => 'wp-travel-enquiry-submit',
+			'name'  => 'wp_travel_enquiry_submit',
+			'id'    => 'wp-travel-enquiry-submit',
 			'value' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
 		),
 		'nonce' => array(
@@ -108,13 +108,13 @@ add_action( 'add_meta_boxes', 'wp_travel_add_enquiries_data_metaboxes', 10, 2 );
 /**
  * Add Enquiries Metaboxes.
  */
-function wp_travel_add_enquiries_data_metaboxes(){
+function wp_travel_add_enquiries_data_metaboxes() {
 
 	global $post;
 	global $wp_travel_itinerary;
 
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
-	
+
 	add_meta_box( 'wp-travel-enquiries-info', __( 'Enquiry Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wp_travel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
 
 }
@@ -188,17 +188,16 @@ function wp_travel_enquiries_info(){
 				<?php break; ?>
 				
 				<?php default : ?>
-					
+	
 				<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
 					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 					<?php echo $before_field; ?>
 					<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
-				</div>
-				
-				<?php break; ?>
-			
-			<?php  }
-			
+				</div>	
+				<?php
+					break;
+				}
+
 			endforeach; ?>
 
 		</form>
@@ -220,11 +219,11 @@ add_filter( 'manage_edit-itinerary-enquiries_columns', 'wp_travel_enquiries_list
  */
 function wp_travel_enquiries_list_columns( $enquiries_column ) {
 
-	$new_columns['cb'] 			 = '<input type="checkbox" />';
-	$new_columns['title'] 		 = _x( 'Title', 'column name', 'wp-travel' );
-	$new_columns['contact_name'] = __( 'Contact Name', 'wp-travel' );
+	$new_columns['cb']            = '<input type="checkbox" />';
+	$new_columns['title']         = _x( 'Title', 'column name', 'wp-travel' );
+	$new_columns['contact_name']  = __( 'Contact Name', 'wp-travel' );
 	$new_columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
-	$new_columns['date'] 		 = __( 'Enquiry Date', 'wp-travel' );
+	$new_columns['date']          = __( 'Enquiry Date', 'wp-travel' );
 	return $new_columns;
 }
 
@@ -237,11 +236,11 @@ add_action( 'manage_itinerary-enquiries_posts_custom_column', 'wp_travel_enquiri
  * Add data to custom column.
  *
  * @param  String $column_name Custom column name.
- * @param  int 	  $id          Post ID.
+ * @param  int    $id          Post ID.
  */
 function wp_travel_enquiries_content_manage_columns( $column_name, $id ) {
 
-	$column_data = get_post_meta ( $id, 'wp_travel_trip_enquiry_data', true );
+	$column_data = get_post_meta( $id, 'wp_travel_trip_enquiry_data', true );
 
 	switch ( $column_name ) {
 		case 'contact_name':
@@ -250,8 +249,8 @@ function wp_travel_enquiries_content_manage_columns( $column_name, $id ) {
 			break;
 		case 'contact_email':
 			$email = isset( $column_data['wp_travel_enquiry_email'] ) ? $column_data['wp_travel_enquiry_email'] : ''  ; ?>
-				<a href="mailto:<?php echo esc_attr( $email ) ?>"><?php echo esc_attr( $email ) ?></a>
-			<?php 
+				<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_attr( $email ); ?></a>
+			<?php
 			break;
 		default:
 			break;
@@ -287,27 +286,27 @@ function wp_travel_save_backend_enqueries_data( $post_id ) {
 	if ( ! is_admin() ) {
 		return;
 	}
-	$enqueries_data = array();
+	$enqueries_data    = array();
 	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
 	update_post_meta( $post_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 	$enquery_data['post_id'] = $wp_travel_post_id;
 
 
-	$fields = wp_travel_enquiries_form_fields();
+	$fields   = wp_travel_enquiries_form_fields();
 	$priority = array();
 	foreach ( $fields as $key => $row ) {
 		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 	}
 	array_multisort( $priority, SORT_ASC, $fields );
 	foreach ( $fields as $key => $field ) :
-		$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
+		$meta_val          = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
 		$post_id_to_update = apply_filters( 'wp_travel_booking_post_id_to_update', $post_id, $key, $field['name'] );
 		update_post_meta( $post_id_to_update, $field['name'], sanitize_text_field( $meta_val ) );
 		$enquery_data[ $field['name'] ] = $meta_val;
 	endforeach;
 
 	$enquery_data = array_map( 'sanitize_text_field', wp_unslash( $enquery_data ) );
-	
+
 	update_post_meta( $post_id, 'wp_travel_trip_enquiry_data', $enquery_data );
 }
 
@@ -316,15 +315,15 @@ add_action( 'save_post', 'wp_travel_save_backend_enqueries_data' );
 /**
  * Save Front End Trip Enqueries data.
  */
-function wp_travel_save_user_enquiry(){
+function wp_travel_save_user_enquiry() {
 
 	$formdata = $_POST;
 
-	if ( ! wp_verify_nonce( $_POST['nonce'],  'wp_travel_frontend_enqueries' ) ) {
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_frontend_enqueries' ) ) {
 
-		$errors['message'] = __('Nonce Verification Failed !!', 'wp-travel' );
-		
-		wp_send_json_error($errors);
+		$errors['message'] = __( 'Nonce Verification Failed !!', 'wp-travel' );
+
+		wp_send_json_error( $errors );
 
 		return;
 
@@ -336,43 +335,42 @@ function wp_travel_save_user_enquiry(){
 
 	// If this isn't a 'itineraries' post, don't update it.
 	if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
-		
+
 		$errors['message'] = __( 'Invalid Post Type', 'wp-travel' );
-		
+
 		wp_send_json_error( $errors );
 
 		return;
-	
 	}
 
 	$enquiry_data = array();
 
 	$enquiry_data['post_id'] = isset( $formdata['post_id'] ) ? $formdata['post_id'] : '' ;
 
-	$enquiry_data['wp_travel_enquiry_name'] = isset( $formdata['wp_travel_enquiry_name'] ) ? $formdata['wp_travel_enquiry_name'] : '' ;
+	$enquiry_data['wp_travel_enquiry_name']  = isset( $formdata['wp_travel_enquiry_name'] ) ? $formdata['wp_travel_enquiry_name'] : '';
 
 	$enquiry_data['wp_travel_enquiry_email'] = isset( $formdata['wp_travel_enquiry_email'] ) ? $formdata['wp_travel_enquiry_email'] : '';
 
-	$enquiry_data['wp_travel_enquiry_query'] = isset( $formdata['wp_travel_enquiry_query'] ) ? $formdata['wp_travel_enquiry_query'] : '' ;
+	$enquiry_data['wp_travel_enquiry_query'] = isset( $formdata['wp_travel_enquiry_query'] ) ? $formdata['wp_travel_enquiry_query'] : '';
 
 	$trip_code = wp_travel_get_trip_code( $post_id );
-	
+
 	$title = 'Enquiry - ' . $trip_code;
 
 	$post_array = array(
-		'post_title' => $title,
+		'post_title'   => $title,
 		'post_content' => '',
-		'post_status' => 'publish',
-		'post_slug' => uniqid(),
-		'post_type' => 'itinerary-enquiries',
-		);
-	
+		'post_status'  => 'publish',
+		'post_slug'    => uniqid(),
+		'post_type'    => 'itinerary-enquiries',
+	);
+
 	$new_enquiry = wp_insert_post( $post_array );
 
-	//Update Data.
+	// Update Data.
 	if ( ! empty( $enquiry_data ) ) {
 
-		//Sanitize Values.
+		// Sanitize Values.
 		$enquiry_data = stripslashes_deep( $enquiry_data );
 
 		$wp_travel_post_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : 0;
@@ -382,9 +380,6 @@ function wp_travel_save_user_enquiry(){
 		update_post_meta( $new_enquiry, 'wp_travel_trip_enquiry_data', $enquiry_data );
 
 	}
-
-	// Prepare variables to assign in email.
-	// $client_email = $enquiry_data['email'];
 
 	$admin_email = get_option( 'admin_email' );
 
@@ -398,33 +393,31 @@ function wp_travel_save_user_enquiry(){
 			*/
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
-	$enquiry_id 		  	= $new_enquiry;
-	$itinerary_id 			= sanitize_text_field( $formdata['post_id'] );
-	$itinerary_title 		= get_the_title( $itinerary_id );
-
-	$customer_name 		  	= $enquiry_data['wp_travel_enquiry_name'];
-	$customer_email 		= $enquiry_data['wp_travel_enquiry_email'];
-	$customer_note 			= $enquiry_data['wp_travel_enquiry_query'];
+	$enquiry_id      = $new_enquiry;
+	$itinerary_id    = sanitize_text_field( $formdata['post_id'] );
+	$itinerary_title = get_the_title( $itinerary_id );
+	$customer_name   = $enquiry_data['wp_travel_enquiry_name'];
+	$customer_email  = $enquiry_data['wp_travel_enquiry_email'];
+	$customer_note   = $enquiry_data['wp_travel_enquiry_query'];
 
 	$email_tags = array(
-		'{sitename}'				=> $sitename,
-		'{itinerary_link}'			=> get_permalink( $itinerary_id ),
-		'{itinerary_title}'			=> $itinerary_title,
-		'{enquery_id}'				=> $enquiry_id,
-		'{enquery_edit_link}'		=> get_edit_post_link( $enquiry_id ),
-
-		'{customer_name}'			=> $customer_name,
-		'{customer_email}'			=> $customer_email,
-		'{customer_note}'			=> $customer_note,
+		'{sitename}'          => $sitename,
+		'{itinerary_link}'    => get_permalink( $itinerary_id ),
+		'{itinerary_title}'   => $itinerary_title,
+		'{enquery_id}'        => $enquiry_id,
+		'{enquery_edit_link}' => get_edit_post_link( $enquiry_id ),
+		'{customer_name}'     => $customer_name,
+		'{customer_email}'    => $customer_email,
+		'{customer_note}'     => $customer_note,
 	);
 	apply_filters( 'wp_travel_admin_enquery_email_tags', $email_tags );
 
 	$email = new WP_Travel_Emails();
 
 	$enquiry_template = $email->wp_travel_get_email_template( 'enquiry', 'admin' );
-	//Admin message.
+	// Admin message.
 	$enquiry_message = str_replace( array_keys( $email_tags ), $email_tags, $enquiry_template['mail_content'] );
-	//Admin Subject.
+	// Admin Subject.
 	$enquiry_subject = $enquiry_template['subject'];
 
 		// To send HTML mail, the Content-type header must be set.
@@ -442,8 +435,7 @@ function wp_travel_save_user_enquiry(){
 		}
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
-	
-	$success = array(
+	$success   = array(
 		'message' => __( 'Enquiry sent succesfully !!', 'wp-travel' ),
 	);
 
@@ -452,5 +444,5 @@ function wp_travel_save_user_enquiry(){
 
 	die();
 }
-add_action('wp_ajax_wp_travel_save_user_enquiry','wp_travel_save_user_enquiry');
-add_action('wp_ajax_nopriv_wp_travel_save_user_enquiry','wp_travel_save_user_enquiry');
+add_action( 'wp_ajax_wp_travel_save_user_enquiry', 'wp_travel_save_user_enquiry' );
+add_action( 'wp_ajax_nopriv_wp_travel_save_user_enquiry', 'wp_travel_save_user_enquiry' );

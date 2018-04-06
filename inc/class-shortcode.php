@@ -22,19 +22,19 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
 
-		// /**
-		//  * Checkout Shortcodes.
-		//  * @since 2.2.3
-		//  * Shortcodes for new checkout process.
-		//  */
-		// $shortcodes = array(
-		// 	'wp_travel_cart'           => __CLASS__ . '::cart',
-		// 	'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
-		// );
+		/**
+		 * Checkout Shortcodes.
+		 * @since 2.2.3
+		 * Shortcodes for new checkout process.
+		 */
+		$shortcodes = array(
+			'wp_travel_cart'           => __CLASS__ . '::cart',
+			'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
+		);
 
-		// foreach ( $shortcodes as $shortcode => $function ) {
-		// 	add_shortcode( apply_filters( "{$shortcode}_shortcode_tag", $shortcode ), $function );
-		// }
+		foreach ( $shortcodes as $shortcode => $function ) {
+			add_shortcode( apply_filters( "{$shortcode}_shortcode_tag", $shortcode ), $function );
+		}
 
 	}
 
