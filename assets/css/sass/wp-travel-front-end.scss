@@ -2236,21 +2236,20 @@ ul.availabily-list{
     li {
         border-bottom: 1px solid #E3E3E3;
         line-height: 1.2;
-        padding: 10px 0;
+        padding: 10px 0 20px;
         margin: 10px 0;
         position: relative;
 
         & > div {
             display: inline-block;
-            width: 19.5%;
+            width: 20%;
             vertical-align: middle;
             padding: 0;
             margin: 0;
+            float:left;
 
             &.date-to,
             &.date-from {
-                width: 23%;
-
                 @include mob{
                     width:100%;
                 }
@@ -2274,8 +2273,6 @@ ul.availabily-list{
                 padding-left: 10px;
             }
             &.price {
-                width: 12.5%;
-
                 del{
                     span{
                         font-weight:400;
@@ -2314,13 +2311,11 @@ ul.availabily-list{
                 }
             }
             &.wp-travel-booking-row {
-                width: 100%;
+                width: 100% !important;
                 padding-top: 20px;
                 margin-top: 10px;
                 padding-bottom: 20px;
-                border-top: 1px solid #eee;
                 margin-bottom: -10px;
-                height:0;
                 @include mob{
                     padding-left:0 !important;
                 }
