@@ -140,16 +140,9 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 								<input type="hidden" readonly class="wp-travel-pricing-dates">
 							</div>
 							<div class="wp-travel-calender-aside">
+							<?php $pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type; ?>
 								<div class="col-sm-6">
-									<label for="">Adult:</label>
-									<input type="number" name="" placeholder="Size">
-								</div>
-								<div class="col-sm-6">
-									<label for="">Infant:</label>
-									<input type="number" name="" placeholder="Size">
-								</div>
-								<div class="col-sm-6">
-									<label for="">Group Size:</label>
+									<label for=""><?php echo esc_html( $pricing_type_label ); ?></label>
 									<input type="number" name="" placeholder="Size">
 								</div>
 								<div class="add-to-cart">
@@ -159,6 +152,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 									if ( 'yes' !== $fixed_departure ) :
 										$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
 									endif;
+										$cart_url = add_query_arg( 'price_key', $pricing_key, $cart_url );
 									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
 								?>
 								</div>
