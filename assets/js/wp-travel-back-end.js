@@ -473,7 +473,7 @@
 
         $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
             language: 'en',
-            minDate: new Date()
+            minDate: new Date(),
         });
 
         // // Pricing options multiselect.
