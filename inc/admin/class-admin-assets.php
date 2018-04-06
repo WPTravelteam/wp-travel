@@ -19,6 +19,8 @@ class WP_Travel_Admin_Assets {
 
 		wp_enqueue_style( 'wp-travel-tabs', $this->assets_path . 'assets/css/wp-travel-tabs' . $suffix . '.css', array('wp-color-picker'), WP_TRAVEL_VERSION );
 		wp_enqueue_style( 'wp-travel-back-end', $this->assets_path . 'assets/css/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+
+		wp_enqueue_style( 'jquery-multiple-select', $this->assets_path . 'assets/css/lib/multiple-select/multiple-select' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 	}
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -127,6 +129,9 @@ class WP_Travel_Admin_Assets {
 				$depencency[] = 'jquery-gmaps';
 			}
 			wp_enqueue_script( 'travel-door-script-2', $this->assets_path . 'assets/js/jquery.wptraveluploader' . $suffix . '.js', array( 'jquery' ), '1.0.0', true );
+
+			wp_enqueue_script( 'multiple-select-js', $this->assets_path . 'assets/js/lib/multiple-select/multiple-select' . $suffix . '.js', array( 'jquery' ), '', 1 );
+
 			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-back-end' . $suffix . '.js', $depencency, '', 1 );
 			if ( '' != $api_key ) {
 				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
