@@ -110,7 +110,7 @@ if ( ! $price_per ) {
 		</td>
 	</tr>
 	<tr>
-		<td style="display:<?php echo ( 'yes' === $enable_pricing_options ) ? 'block' : 'none'; ?>" id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
+		<td style="display:<?php echo ( 'yes' === $enable_pricing_options ) ? '' : 'none'; ?>" id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
 			<div id="wp-travel-pricing-options">
 			<?php
 			if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) != 0 ) :
@@ -355,6 +355,11 @@ if ( ! $price_per ) {
 			<!-- Pricing Template End -->
 		</td>
 	</tr>
+	<tr>
+		<th colspan="2">
+			<h3>Dates</h3>
+		</th>
+	</tr>
 
 	<tr>
 		<td><label for="wp-travel-fixed-departure"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></label></td>
@@ -441,6 +446,7 @@ if ( ! $price_per ) {
 										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 									</h4>
 								</div>
+								
 								<div id="collapse-<?php echo esc_attr( $date_key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $date_key ); ?>" aria-expanded="true">
 									<div class="panel-body">
 										<div class="panel-wrap">
@@ -480,15 +486,12 @@ if ( ! $price_per ) {
 									</div>
 								</div>
 							</div>
-					</div>
 						<?php
 					}
 				endif;
 				?>	
 
-					<div class="wp-travel-add-date-option clearfix">
-						<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
-					</div>
+					
 
 				<!-- Template Script for dates -->
 				<script type="text/html" id="tmpl-wp-travel-multiple-dates">
@@ -544,9 +547,12 @@ if ( ! $price_per ) {
 					</div>
 				</script>
 			</div>
+			<div class="wp-travel-add-date-option clearfix">
+				<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
+			</div>
 		</td>
 	<?php else : ?>
-		<td colspan="2"><p><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>	
+		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>	
 	<?php endif; ?>
 	</tr>
 	<?php
