@@ -62,21 +62,14 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 			<div class="availabily-wrapper">
 				<ul class="availabily-list">
 					<li class="availabily-heading clearfix">
-						<?php if ( 'yes' == $fixed_departure ) : ?>
 							<div class="date-from">
-								<?php echo esc_html( 'Start', 'wp-travel' ); ?>
+								<?php echo esc_html( 'Pricing Name', 'wp-travel' ); ?>
 							</div>
-							<div class="date-to">
-								<?php echo esc_html( 'End', 'wp-travel' ); ?>
-							</div>
-						<?php else :?>
-							<div class="date-from">
-								<?php echo esc_html( 'Trip Duration', 'wp-travel' ); ?>
-							</div>
-						<?php endif; ?>
-
 						<div class="status">
-							<?php echo esc_html( 'Group Size', 'wp-travel' ); ?>
+							<?php echo esc_html( 'Min Group Size', 'wp-travel' ); ?>
+						</div>
+						<div class="status">
+							<?php echo esc_html( 'Max Group Size', 'wp-travel' ); ?>
 						</div>
 						<div class="price">
 							<?php echo esc_html( 'Price', 'wp-travel' ); ?>
@@ -86,80 +79,19 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 						</div>
 					</li>
 					<li class="availabily-content clearfix">
-						<?php if ( 'yes' == $fixed_departure ) : ?>
-							<div class="date-from">
-								<span class="availabily-heading-label"><?php echo esc_html( 'start:', 'wp-travel' ); ?></span>
-								<?php echo esc_html( date( 'l', strtotime( $trip_start_date ) ) );  ?>
-								<?php $date_format = get_option( 'date_format' ); ?>
-								<?php if ( ! $date_format ) : ?>
-									<?php $date_format = 'jS M, Y'; ?>
-								<?php endif; ?>
-								<span><?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
-							</div>
-							<div class="date-to">
-								<span class="availabily-heading-label"><?php echo esc_html( 'end:', 'wp-travel' ); ?></span>
-								<?php echo esc_html( date( 'l', strtotime( $trip_end_date ) ) );  ?>
-								<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
-							</div>
-						<?php else : ?>
-							<div class="date-from">
-								<span><?php echo esc_html( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
-
-								<span><?php echo esc_html( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
-							</div>
-						<?php endif; ?>
-						<div class="status">
-							<span class="availabily-heading-label"><?php echo esc_html( 'Group Size:', 'wp-travel' ); ?></span>
-							<span><?php echo esc_html( wp_travel_get_group_size() ); ?></span>
-						</div>
-						<div class="price">
-							<span class="availabily-heading-label"><?php echo esc_html( 'price:', 'wp-travel' ); ?></span>
-							<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
-
-								<?php if ( $enable_sale ) : ?>
-									<del>
-										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-									</del>
-								<?php endif; ?>
-									<span class="person-count">
-										<ins>
-											<span>
-												<?php
-												if ( $enable_sale ) {
-													echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
-												} else {
-													echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
-												}
-												?>
-											</span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
-									</span>
-							<?php endif; ?>
-						</div>
-						<div class="action">	
-						<?php 
-							$button = '<a href="%s" class="btn btn-primary btn-sm btn-inverse">%s</a>';
-							$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
-							if ( 'yes' !== $fixed_departure ) :
-								$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
-							endif;
-							printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
-						?>
-						</div>
-					</li>
-					<li class="availabily-content clearfix">
 						<div class="date-from">
-							<span class="availabily-heading-label">start:</span> Thursday <span>March 8, 2018</span>
-						</div>
-						<div class="date-to">
-							<span class="availabily-heading-label">end:</span> Thursday <span>April 26, 2018</span>
+							<span class="availabily-heading-label"><?php echo esc_html( 'Pricing Name:', 'wp-travel' ); ?></span> <span>Christmas Special</span>
 						</div>
 						<div class="status">
-							<span class="availabily-heading-label">Group Size:</span>
+							<span class="availabily-heading-label"><?php echo esc_html( 'Min Group Size:', 'wp-travel' ); ?></span>
+							<span>2 pax</span>
+						</div>
+						<div class="status">
+							<span class="availabily-heading-label"><?php echo esc_html( 'Max Group Size:', 'wp-travel' ); ?></span>
 							<span>20 pax</span>
 						</div>
 						<div class="price">
-							<span class="availabily-heading-label">price:</span>
+							<span class="availabily-heading-label"><?php echo esc_html( 'Price:', 'wp-travel' ); ?></span>
 							<del>
 								<span> $ 400 </span>
 							</del>
@@ -194,7 +126,6 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 									<a href="http://skynet.wensolutions.com/travel-log/wp-travel-cart/?trip_id=777" class="btn btn-primary btn-sm btn-inverse">Book now</a>
 								</div>
 							</div>
-							
 						</div>
 					</li>
 					<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css">
@@ -210,24 +141,75 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							})
 						});
 
-						var disabledDays = [0, 6];
+						var disabledDays = [0,1,2,3,4,5,6];
 
-						jQuery('#few-dates-enable').datepicker({
-							language: 'en',
-							onRenderCell: function (date, cellType) {
-								if (cellType == 'day') {
-									var day = date.getDay(),
-										isDisabled = disabledDays.indexOf(day) != -1;
+						var enableDays = [3];
 
-									return {
-										disabled: isDisabled
-									}
-								}
+
+						var eventDates = [1, 10, 12, 22],
+					    $picker = jQuery('#few-dates-enable'),
+					    sold = [2018-04-5, 2018-04-10, 2018-04-15, 2018-04-20],
+						avalible = [2018-04-12, 2018-04-18, 2018-04-25, 2018-04-30],
+						notenough = new Array();
+
+						 $picker.datepicker({
+						 	language: 'en',
+						 	todayButton:true,
+							onRenderCell: function (d, type) {
+								if (type == 'day') {
+									var cellYear = d.getFullYear(),
+				                    cellMonth = d.getMonth(),
+				                    cellDate = d.getDate(),
+				                    disabled = true,
+				                    classes = false,
+				                    html = false,
+				                    year, month, date;
+					                if (cellDate == date) {
+					                    disabled= true;
+					                }
+					                avalible.forEach(function (avalible) {
+					                    avalible = avalible.split('-');
+					                    year = avalible[0];
+					                    month = parseInt(avalible[1]) - 1;
+					                    date = parseInt(avalible[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "avalible";
+					                        disabled= false;
+					                 
+					                    }
+					                });
+					                notenough.forEach(function (notenough) {
+					                    notenough = notenough.split('-');
+					                    year = notenough[0];
+					                    month = parseInt(notenough[1]) - 1;
+					                    date = parseInt(notenough[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "notenough",
+					                            disabled= true;
+					                    }
+					                });
+					                sold.forEach(function (sold) {
+					                    sold = sold.split('-');
+					                    year = sold[0];
+					                    month = parseInt(sold[1]) - 1;
+					                    date = parseInt(sold[2]);
+
+					                    if (cellYear == year && cellMonth == month && cellDate == date) {
+					                        classes = "sold";
+					                        disabled= true;
+					                    }
+					                });
+					                return {
+					                    classes: classes,
+					                    disabled: disabled,
+					       
+					                }
+					            }    
 							}
-						})
-
+						 });
 					</script>
-					
 				</ul>
 			</div>
 		</div>
@@ -277,9 +259,9 @@ if ( $enable_checkout && wp_travel_is_payment_enabled()) :
 							</div>
 						<?php else : ?>
 							<div class="date-from">
-								<span><?php echo esc_html( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
+								<span><?php esc_html_e( 'Day(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration ); ?> </span>
 
-								<span><?php echo esc_html( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
+								<span><?php esc_html_e( 'Night(s):', 'wp-travel' ); ?> <?php echo esc_html( $trip_duration_night ); ?> </span>
 							</div>
 						<?php endif; ?>
 						<div class="status">

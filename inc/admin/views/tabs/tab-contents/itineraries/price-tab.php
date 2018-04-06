@@ -114,12 +114,12 @@ if ( ! $price_per ) {
 			<div id="wp-travel-pricing-options">
 			<?php
 			if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) != 0 ) :
-				$sollapse_style = 'display:block';
+				$collapse_style = 'display:block';
 			else :
-				$sollapse_style = 'display:none';
+				$collapse_style = 'display:none';
 			endif;
 			?>
-				<div class="wp-collapse-open" style="<?php echo esc_attr( $sollapse_style ); ?>">
+				<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
 					<a href="#" data-parent="wp-travel-multiple-pricing-options" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 					<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 				</div>
@@ -164,7 +164,7 @@ if ( ! $price_per ) {
 									<h4 class="panel-title">
 										<div class="wp-travel-sorting-handle"></div>
 											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
-												<span bind="pricing_option_<?php echo esc_attr( $key ); ?>"><?php echo esc_html($pricing_name); ?></span>
+												<span bind="pricing_option_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $pricing_name ); ?></span>
 												<span class="collapse-icon"></span>
 											</a>
 										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
@@ -357,7 +357,7 @@ if ( ! $price_per ) {
 	</tr>
 	<tr>
 		<th colspan="2">
-			<h3>Dates</h3>
+			<h3><?php esc_html_e( 'Dates', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
 
@@ -407,13 +407,13 @@ if ( ! $price_per ) {
 
 			<?php
 				if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) != 0 ) :
-					$sollapse_style = 'display:block';
+					$collapse_style = 'display:block';
 				else :
-					$sollapse_style = 'display:none';
+					$collapse_style = 'display:none';
 				endif;
 			?>
 
-				<div class="wp-collapse-open" style="<?php echo esc_attr( $sollapse_style ); ?>">
+				<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
 					<a href="#" data-parent="wp-variations-multiple-dates" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 					<a data-parent="wp-variations-multiple-dates" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 				</div>
@@ -491,8 +491,6 @@ if ( ! $price_per ) {
 				endif;
 				?>	
 
-					
-
 				<!-- Template Script for dates -->
 				<script type="text/html" id="tmpl-wp-travel-multiple-dates">
 					<div class="panel panel-default">
@@ -554,6 +552,11 @@ if ( ! $price_per ) {
 	<?php else : ?>
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>	
 	<?php endif; ?>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<h3><?php echo esc_html( 'Payout', 'wp-travel' ); ?></h3>
+		</th>
 	</tr>
 	<?php
 	/**
