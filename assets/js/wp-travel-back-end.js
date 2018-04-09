@@ -245,10 +245,14 @@
 
     //Pricing options Enable Sale.
     $(document).on('change', '.wp-travel-enable-variation-price-sale', function() {
+        var siblings = $(this).parents('.repeat-row').next('.repeat-row');
         if ($(this).is(':checked')) {
-            $(this).parents('.repeat-row').next('.repeat-row').show();
+            siblings.show();
+            siblings.find('input[type="number"]').attr( 'required', 'required' );
         } else {
-            $(this).parents('.repeat-row').next('.repeat-row').hide();
+            siblings.hide();
+            siblings.find('input[type="number"]').removeAttr( 'required' );
+            
         }
     });
 
