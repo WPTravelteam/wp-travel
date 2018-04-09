@@ -228,28 +228,53 @@ jQuery(document).ready(function($) {
     });
 
     jQuery('.wp-travel-booking-row').hide();
-    jQuery('.show-booking-row').click(function() {
+    jQuery('.show-booking-row').click(function(event) {
+        event.preventDefault();
         jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
         jQuery(this).text(function(i, text) {
             return text === "Select" ? "Close" : "Select";
         })
     });
 
-    jQuery('.wp-travel-pricing-dates').each(function(){
+    jQuery('.wp-travel-pricing-dates').each(function() {
         var availabledate = jQuery(this).data('available-dates');
-        jQuery(this).datepicker({
-            language: 'en',
-            inline: true,
-            onRenderCell: function(date, cellType) {
-                if (cellType == 'day') {
-                    availabledate= availabledate.map((d)=>(new Date(d)).toLocaleDateString("en-US"));
-                    isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
-                    return {
-                        disabled: isDisabled
+        if (availabledate) {
+            jQuery(this).datepicker({
+                language: 'en',
+                inline: true,
+                onRenderCell: function(date, cellType) {
+                    if (cellType == 'day') {
+                        availabledate = availabledate.map((d) => (new Date(d)).toLocaleDateString("en-US"));
+                        isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
+                        return {
+                            disabled: isDisabled
+                        }
                     }
                 }
+            });
+
+        }
+
+    })
+
+    $(document).ready(function($) {
+
+        $('input').parsley();
+
+        $('.add-to-cart-btn').click(function(event) {
+            event.preventDefault();
+            // Validate all input fields.
+            var isValid = true;
+            var parent = '#' + $(this).data('parent-id');
+            console.log(parent);
+            $(parent + ' input').each(function() {
+                if ($(this).parsley().validate() !== true) isValid = false;
+            });
+            if (isValid) {
+                location.href = $(this).attr('href');
             }
         });
-    }) 
+
+    });
 
 });
