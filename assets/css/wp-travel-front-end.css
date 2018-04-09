@@ -2115,6 +2115,8 @@ ul.availabily-list {
     float: left;
     min-height: 1px;
     position: relative; }
+.checkout-page-wrap .wp-travel-form-field, .checkout-page-wrap .checkbox-block {
+  padding: 0 15px; }
 
 .float-left {
   float: left; }
