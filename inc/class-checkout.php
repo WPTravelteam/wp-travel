@@ -119,100 +119,88 @@ class WP_Travel_Checkout {
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4 col-sm-push-8">
-                        <div class="sticky-sidebar">
-                            <div class="checkout-block checkout-right">
-                                <div class="price-summary-wrapper">
-                                    <h4 class="heading mt-0 text-primary uppercase">My Trip</h4>
-                                    <ul class="price-summary-list">
-                                        <li>
-                                            <h6 class="heading mt-0 mb-0">Annapurna base camp</h6>
-                                            <p>8 days 7 nights city tour</p>
-                                        </li>
-                                        <li>
-                                            <h6 class="heading mt-0 mb-0">Starts in Kathmandu, Nepal</h6>
-                                            <p>Monday, july 7, 2018</p>
-                                        </li>
-                                        <li>
-                                            <h6 class="heading mt-0 mb-0">Ends in Kathmandu, Nepal</h6>
-                                            <p>Thursday, july 10, 2018</p>
-                                        </li>
-                                        <li>
-                                            <h6 class="heading mt-0 mb-0">What's included</h6>
-                                            <p>Accommodation, Guide, Meals, Bus</p>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <h6 class="heading mt-20 mb-5 text-primary uppercase">Price per person</h6>
-                                            <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
+                        <div class="checkout-block checkout-right">
+                            <div class="price-summary-wrapper">
+                                <h4 class="heading text-primary uppercase">My Trip</h4>
+                                <ul class="price-summary-list">
+                                    <li>
+                                        <h6 class="heading">Annapurna base camp</h6>
+                                        <p>8 days 7 nights city tour</p>
+                                    </li>
+                                    <li>
+                                        <h6 class="heading">Starts in Kathmandu, Nepal</h6>
+                                        <p>Monday, july 7, 2018</p>
+                                    </li>
+                                    <li>
+                                        <h6 class="heading">Ends in Kathmandu, Nepal</h6>
+                                        <p>Thursday, july 10, 2018</p>
+                                    </li>
+                                    <li>
+                                        <h6 class="heading">What's included</h6>
+                                        <p>Accommodation, Guide, Meals, Bus</p>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class="price-checkout-info">
+                                        <h6 class="heading">Price per person</h6>
+                                        <div class="clearfix">
+                                            <div class="float-left">
                                                 Price
                                             </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
+                                            <div class="float-right text-right">
                                                 $1458
                                             </div>
-                                            </div>
-                                            <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
+                                        </div>
+                                        <div class="clearfix">
+                                            <div class="float-left">
                                                 Tax 10%
-                                            </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
+                                             </div>   
+                                            <div class="float-right text-right">
                                                 $145.8
                                             </div>
-                                            </div>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li class=" font600 font14 clearfix">
-                                        <div class="row gap-10 mt-10">
-                                            <div class="col-xs-7 col-sm-7">
-                                                <strong >Total:</strong>
-                                            </div>
-                                            <div class="col-xs-5 col-sm-5 text-right">
-                                                <strong>$1623.5</strong>
-                                            </div>
-                                        </div>    
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <div class="row gap-10 font600 font14">
-                                            <div class="col-xs-9 col-sm-9">
-                                                Number of Travellers
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 text-right">
-                                                1
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li class="total-price">
-                                            <div class="row gap-10">
-                                            <div class="col-xs-6 col-sm-6">
-                                                <h5 class="heading mt-0 mb-0 text-white">Amount due</h5>
-                                                <p class="text-white">before departure</p>
-                                            </div>
-                                            <div class="col-xs-6 col-sm-6 text-right">
-                                                <span class="block font20 font600 mb-5">$1458</span>
-                                                <span class="font10 line10 block">**Best Price Guarantee </span>
-                                            </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class=" font600 font14 clearfix">
+                                        <div class="float-left">
+                                            <strong >Total:</strong>
+                                        </div>
+                                        <div class="float-right text-right">
+                                            <strong>$1623.5</strong>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="float-left">
+                                            Number of Travellers
+                                        </div>
+                                        <div class="float-right text-right">
+                                            1
+                                        </div>
+                                    </li>
+                                    <br />
+                                    <li class="total-price clearfix">
+                                        <div class="float-left">
+                                            <h5>Amount due</h5>
+                                            <p>before departure</p>
+                                        </div>
+                                        <div class="float-right">
+                                            <span><strong>$1458</strong></span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        
                             
                         </div>
                     <div class="col-sm-8 col-sm-pull-4">
                         <div class="checkout-block checkout-left">
-                            <div class="section-title text-left">
+                            <div class="section-title">
                                 <h3>Annapurna Base Camp<small> / 8 days 7 nights</small></h3>
                             </div>
                             
                             <div class="panel-group number-accordion">
                                 <div class="panel ws-theme-timeline-block">
                                     <div class="panel-heading">
-                                    <div class="ws-theme-timeline-img">
-                                        1
-                                    </div> 
                                     <h4 class="panel-title">Your selected departure date </h4>
                                     </div>
                                     <div id="number-accordion1" class="panel-collapse collapse in">
@@ -224,23 +212,20 @@ class WP_Travel_Checkout {
                                 </div>
                                 <div class="panel ws-theme-timeline-block">
                                     <div class="panel-heading">
-                                    <div class="ws-theme-timeline-img">
-                                        2
-                                    </div> 
                                     <h4 class="panel-title">Traveller Details</h4>
                                     </div>
                                     <div id="number-accordion2" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                         <div class="payment-content">
                                             <div class="payment-traveller">
-                                                <div class="row gap-0">
-                                                    <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-9">
-                                                        <h6 class="heading mt-0 mb-15">Traveller 1</h6>
+                                                <div class="clearfix">
+                                                    <div class="travel-info-wrap">
+                                                        <h6 class="heading col-sm-pull-4">Traveller 1</h6>
                                                     </div>
 
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">First Name:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="text" class="form-control" value="">
@@ -248,7 +233,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Last Name:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="text" class="form-control" value="">
@@ -256,7 +241,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20 select2-input-hide">
+                                                    <div class="form-wrapper select2-input-hide">
                                                         <label class="col-sm-4 col-md-3 control-label">Gender:</label>
                                                         <div class="col-sm-4 col-md-3">
                                                             <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Gender" tabindex="-1" aria-hidden="true">
@@ -268,52 +253,50 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20 select2-input-hide">
+                                                    <div class="form-wrapper select2-input-hide">
                                                         <label class="col-sm-4 col-md-3 control-label">DOB:</label>
                                                         <div class="col-sm-8 col-md-6">
-                                                            <div class="row gap-15">
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Date</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                        <option value="03">03</option>
-                                                                        <option value="04">04</option>
-                                                                        <option value="05">05</option>
-                                                                        <option value="06">06</option>
-                                                                        <option value="07">07</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Month</option>
-                                                                        <option value="jan">Jan</option>
-                                                                        <option value="feb">Feb</option>
-                                                                        <option value="mar">Mar</option>
-                                                                        <option value="apr">Apr</option>
-                                                                        <option value="may">May</option>
-                                                                        <option value="jun">Jun</option>
-                                                                        <option value="jul">Jul</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Year</option>
-                                                                        <option value="1985">1985</option>
-                                                                        <option value="1986">1986</option>
-                                                                        <option value="1987">1987</option>
-                                                                        <option value="1988">1988</option>
-                                                                        <option value="1900">1900</option>
-                                                                        <option value="1901">1901</option>
-                                                                        <option value="1902">1902</option>
-                                                                    </select>
-                                                                </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Date</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Month</option>
+                                                                    <option value="jan">Jan</option>
+                                                                    <option value="feb">Feb</option>
+                                                                    <option value="mar">Mar</option>
+                                                                    <option value="apr">Apr</option>
+                                                                    <option value="may">May</option>
+                                                                    <option value="jun">Jun</option>
+                                                                    <option value="jul">Jul</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Year</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1900">1900</option>
+                                                                    <option value="1901">1901</option>
+                                                                    <option value="1902">1902</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Email:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="email" class="form-control" value="">
@@ -321,7 +304,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Phone Number:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="email" class="form-control" value="">
@@ -329,7 +312,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Nationality:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <select class="select2-single form-control select2-hidden-accessible" data-placeholder="Nationality" tabindex="-1" aria-hidden="true">
@@ -348,13 +331,13 @@ class WP_Travel_Checkout {
                                             </div>
                                             <div class="payment-traveller">
                                                 <a href="#" class="pull-right font12 traveller-remove"><i class="fa fa-times-circle"></i></a>
-                                                <div class="row gap-0 gap-15">
-                                                    <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-9">
-                                                        <h6 class="heading mt-0 mb-15">Traveller 2</h6>
+                                                <div class="clearfix">
+                                                    <div class="travel-info-wrap">
+                                                        <h6 class="heading">Traveller 2</h6>
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">First Name:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="text" class="form-control" value="">
@@ -362,7 +345,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Last Name:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <input type="text" class="form-control" value="">
@@ -370,7 +353,7 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20 select2-input-hide">
+                                                    <div class="form-wrapper select2-input-hide">
                                                         <label class="col-sm-4 col-md-3 control-label">Gender:</label>
                                                         <div class="col-sm-4 col-md-3">
                                                             <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Gender" tabindex="-1" aria-hidden="true">
@@ -382,52 +365,50 @@ class WP_Travel_Checkout {
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20 select2-input-hide">
+                                                    <div class="form-wrapper select2-input-hide">
                                                         <label class="col-sm-4 col-md-3 control-label">DOB:</label>
                                                         <div class="col-sm-8 col-md-6">
-                                                            <div class="row gap-15">
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Date</option>
-                                                                        <option value="01">01</option>
-                                                                        <option value="02">02</option>
-                                                                        <option value="03">03</option>
-                                                                        <option value="04">04</option>
-                                                                        <option value="05">05</option>
-                                                                        <option value="06">06</option>
-                                                                        <option value="07">07</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Month</option>
-                                                                        <option value="jan">Jan</option>
-                                                                        <option value="feb">Feb</option>
-                                                                        <option value="mar">Mar</option>
-                                                                        <option value="apr">Apr</option>
-                                                                        <option value="may">May</option>
-                                                                        <option value="jun">Jun</option>
-                                                                        <option value="jul">Jul</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-xs-4 col-sm-4">
-                                                                    <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true">
-                                                                        <option value="">Year</option>
-                                                                        <option value="1985">1985</option>
-                                                                        <option value="1986">1986</option>
-                                                                        <option value="1987">1987</option>
-                                                                        <option value="1988">1988</option>
-                                                                        <option value="1900">1900</option>
-                                                                        <option value="1901">1901</option>
-                                                                        <option value="1902">1902</option>
-                                                                    </select>
-                                                                </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Date</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Month</option>
+                                                                    <option value="jan">Jan</option>
+                                                                    <option value="feb">Feb</option>
+                                                                    <option value="mar">Mar</option>
+                                                                    <option value="apr">Apr</option>
+                                                                    <option value="may">May</option>
+                                                                    <option value="jun">Jun</option>
+                                                                    <option value="jul">Jul</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="float-left">
+                                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true">
+                                                                    <option value="">Year</option>
+                                                                    <option value="1985">1985</option>
+                                                                    <option value="1986">1986</option>
+                                                                    <option value="1987">1987</option>
+                                                                    <option value="1988">1988</option>
+                                                                    <option value="1900">1900</option>
+                                                                    <option value="1901">1901</option>
+                                                                    <option value="1902">1902</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-horizontal">
-                                                    <div class="form-group gap-20">
+                                                    <div class="form-wrapper">
                                                         <label class="col-sm-4 col-md-3 control-label">Nationality:</label>
                                                         <div class="col-sm-8 col-md-9">
                                                             <select class="select2-single form-control select2-hidden-accessible" data-placeholder="Nationality" tabindex="-1" aria-hidden="true">
@@ -453,16 +434,13 @@ class WP_Travel_Checkout {
                                 </div>
                                 <div class="panel ws-theme-timeline-block">
                                     <div class="panel-heading">
-                                    <div class="ws-theme-timeline-img">
-                                        3
-                                    </div> 
                                     <h4 class="panel-title">Billing Address</h4>
                                     </div>
                                     <div id="number-accordion3" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                         <div class="payment-content">
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Address:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <input type="text" class="form-control" value="">
@@ -470,7 +448,7 @@ class WP_Travel_Checkout {
                                                 </div>
                                             </div>
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">City:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <input type="text" class="form-control" value="">
@@ -478,7 +456,7 @@ class WP_Travel_Checkout {
                                                 </div>
                                             </div>
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Postal:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <input type="text" class="form-control" value="">
@@ -486,7 +464,7 @@ class WP_Travel_Checkout {
                                                 </div>
                                             </div>
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Province:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <input type="text" class="form-control" value="">
@@ -494,7 +472,7 @@ class WP_Travel_Checkout {
                                                 </div>
                                             </div>
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Conntry:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
@@ -516,9 +494,6 @@ class WP_Travel_Checkout {
                                 </div>
                                 <div class="panel ws-theme-timeline-block">
                                     <div class="panel-heading">
-                                    <div class="ws-theme-timeline-img">
-                                        4
-                                    </div> 
                                     <h4 class="panel-title">Finish Payment /  secure</h4>
                                     </div>
                                     <div id="number-accordion4" class="panel-collapse collapse in">
@@ -526,7 +501,7 @@ class WP_Travel_Checkout {
 
                                         <div class="payment-content">
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Booking Options:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
@@ -538,7 +513,7 @@ class WP_Travel_Checkout {
                                             </div>
 
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Payment Gateway:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
@@ -551,7 +526,7 @@ class WP_Travel_Checkout {
                                             </div>
 
                                             <div class="form-horizontal">
-                                                <div class="form-group gap-20">
+                                                <div class="form-wrapper">
                                                     <label class="col-sm-4 col-md-3 control-label">Payment Mode:</label>
                                                     <div class="col-sm-8 col-md-9">
                                                         <select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
