@@ -233,7 +233,7 @@ if ( ! $price_per ) {
 												<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-													<input bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>">
+													<input bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>" <?php echo esc_attr( $pricing_sale_enabled == "yes" ? 'required="required"': '' ) ?>  >
 												</div>
 											</div>
 
@@ -242,7 +242,7 @@ if ( ! $price_per ) {
 												<div class="two-third">
 													<input value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
 
-													<input value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="1" />
+													<input value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
 												</div>
 											</div>
 										</div>
