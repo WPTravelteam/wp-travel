@@ -271,7 +271,20 @@ jQuery(document).ready(function($) {
                 if ($(this).parsley().validate() !== true) isValid = false;
             });
             if (isValid) {
-                location.href = $(this).attr('href');
+                pathname = $(this).attr('href');
+                query_string = '?';
+                var check_query_string = pathname.match(/\?/);
+                if (check_query_string) {
+                    query_string = '&';
+                }
+                $(parent + ' input').each(function() {
+                    filterby = $(this).attr('name');
+                    filterby_val = $(this).val();
+                    query_string += filterby + '=' + filterby_val + '&';
+                })
+                redirect_url = pathname + query_string;
+                redirect_url = redirect_url.replace(/&+$/, '');
+                location.href = redirect_url;
             }
         });
 

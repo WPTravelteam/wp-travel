@@ -140,7 +140,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							<div class="wp-travel-calender-column no-padding ">
 							<?php if ( $available_dates ) : ?>
 								<label for=""><?php echo esc_html( 'Select a Date:', 'wp-travel' ); ?></label>
-								<input type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">
+								<input name="trip_date" type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">
 							<?php 
 							else :
 								echo esc_html( 'No Dates Available !!', 'wp-travel' );
@@ -159,7 +159,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							?>
 								<div class="col-sm-6">
 									<label for=""><?php echo esc_html( $pricing_type_label ); ?></label>
-									<input type="number" min="1" <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+									<input name="pax" type="number" min="1" <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
 								</div>
 								<div class="add-to-cart">
 								<?php 
