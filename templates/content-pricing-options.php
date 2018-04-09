@@ -94,6 +94,8 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 						$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
+						$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $pricing_key );
+
 					?>
 					<li class="availabily-content clearfix">
 						<div class="date-from">
@@ -137,7 +139,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 						<div class="wp-travel-booking-row">
 							<div class="wp-travel-calender-column no-padding ">
 								<label for=""><?php echo esc_html( 'Select a Date:', 'wp-travel' ); ?></label>
-								<input type="hidden" readonly class="wp-travel-pricing-dates">
+								<input type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates">
 							</div>
 							<div class="wp-travel-calender-aside">
 							<?php $pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type; ?>

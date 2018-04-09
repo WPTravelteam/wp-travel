@@ -239,8 +239,11 @@ jQuery(document).ready(function($) {
         language: 'en',
         inline: true,
         onRenderCell: function(date, cellType) {
+            var availabledate = jQuery('.wp-travel-pricing-dates').data('available-dates');
             if (cellType == 'day') {
-                isDisabled = !['4/4/2018', '4/5/2018', '4/6/2018'].includes(date.toLocaleDateString("en-US"));
+                console.log(availabledate);
+
+                isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
                 return {
                     disabled: isDisabled
                 }

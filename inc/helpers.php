@@ -1602,3 +1602,67 @@ function wp_travel_get_pricing_variation_options(){
 	
 	return apply_filters( 'wp_travel_variation_pricing_options', $variation_options );
 }
+
+/**
+ * Get pricing variation dates.
+ *
+ * @return array $available_dates Variation Options.
+ */
+function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
+
+	if ( '' === $post_id || '' === $pricing_key ) {
+		
+		return false;
+	
+	}
+
+	//Get Dates.
+	$available_trip_dates = get_post_meta( $post_id, 'wp_travel_multiple_trip_dates', true );
+
+	if ( is_array( $available_trip_dates ) && '' !== $available_trip_dates ) {
+
+		$result = array_filter($available_trip_dates, function($single) use($pricing_key){
+			return in_array($pricing_key, $single['pricing_options'] );
+		});
+
+		return $result;
+
+	}
+
+	return false;
+	
+}
+
+/**
+ * Get pricing variation dates.
+ *
+ * @return array $available_dates Variation Options.
+ */
+function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
+
+	if ( '' === $post_id || '' === $pricing_key ) {
+		
+		return false;
+	
+	}
+
+	//Get Dates.
+	$trip_dates = wp_travel_get_pricing_variation_dates( $post_id, $pricing_key );
+
+	$result = array();
+
+	if ( is_array( $trip_dates ) && '' !== $trip_dates ) {
+
+		foreach ( $trip_dates as $d_k => $d_v ){
+
+			$result[] = $d_v['start_date'];
+
+		}
+
+		return $result;
+
+	}
+
+	return false;
+	
+}

@@ -83,7 +83,7 @@ function wp_travel_get_currency_list() {
 		'MNT' => 'Mongolia Tughrik',
 		'MZN' => 'Mozambique Metical',
 		'NAD' => 'Namibia Dollar',
-		'NPR' => 'Nepal Rupee',
+		'NPR' => 'Nepalese Rupee',
 		'ANG' => 'Netherlands Antilles Guilder',
 		'NZD' => 'New Zealand Dollar',
 		'NIO' => 'Nicaragua Cordoba',
