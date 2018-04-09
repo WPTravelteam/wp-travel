@@ -235,20 +235,21 @@ jQuery(document).ready(function($) {
         })
     });
 
-    jQuery('.wp-travel-pricing-dates').datepicker({
-        language: 'en',
-        inline: true,
-        onRenderCell: function(date, cellType) {
-            var availabledate = jQuery('.wp-travel-pricing-dates').data('available-dates');
-            if (cellType == 'day') {
-                console.log(availabledate);
-
-                isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
-                return {
-                    disabled: isDisabled
+    jQuery('.wp-travel-pricing-dates').each(function(){
+        var availabledate = jQuery(this).data('available-dates');
+        jQuery(this).datepicker({
+            language: 'en',
+            inline: true,
+            onRenderCell: function(date, cellType) {
+                if (cellType == 'day') {
+                    availabledate= availabledate.map((d)=>(new Date(d)).toLocaleDateString("en-US"));
+                    isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
+                    return {
+                        disabled: isDisabled
+                    }
                 }
             }
-        }
-    });
+        });
+    }) 
 
 });
