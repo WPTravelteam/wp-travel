@@ -561,5 +561,11 @@
     });
     // Ends WP Travel Standard Paypal Merged. @since 1.2.1
 
+    $('input[type="number"]').on( 'change', function() {
+        if ( $(this).attr('placeholder') == 'Min PAX' ) {
+            var minPax = $(this).val();
+            $(this).siblings( 'input[type="number' ).attr( 'min', minPax );
+        }
+    } );
 
 }(jQuery));
