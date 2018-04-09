@@ -97,8 +97,7 @@ jQuery(document).ready(function($) {
         var payment_amount = $('#wp-travel-payment-amount').attr('payment_amount');
 
         var payment_mode = $("input[name='wp_travel_payment_mode']:checked").val();
-
-        if (price_per.toLowerCase().slice(0, 6) === 'person') {
+        if (price_per &&  price_per.toLowerCase().slice(0, 6) === 'person') {
             trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
             payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
 
@@ -106,9 +105,9 @@ jQuery(document).ready(function($) {
         }
         trip_price_excluding_tax = parseFloat(trip_price_excluding_tax);
 
-        if (trip_price.toFixed)
+        if ( trip_price && trip_price.toFixed)
             trip_price = trip_price.toFixed(2);
-        if (payment_amount.toFixed)
+        if ( payment_amount && payment_amount.toFixed)
             payment_amount = payment_amount.toFixed(2);
         if (trip_price_excluding_tax.toFixed)
             trip_price_excluding_tax = trip_price_excluding_tax.toFixed(2)
