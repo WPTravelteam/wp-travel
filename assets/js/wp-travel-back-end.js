@@ -453,6 +453,38 @@
     });
 
     // Dates options template.
+    $('#date-options-data .panel .wp-travel-multiple-start-date').each( function() {
+        var th = $(this);
+
+        var savedMeanDate = $(this).val();
+        newMinDate = new Date();
+        if ( savedMeanDate ) {
+            new_date_min =  new Date(savedMeanDate);
+            newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));            
+        }        
+        $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+            minDate: newMinDate,
+        });
+
+        $(this).datepicker({
+            language: 'en',
+            minDate: new Date(),
+            onSelect: function(dateStr ) {
+                newMinDate = null;
+                newMaxDate = new Date();
+                if ('' !== dateStr) {
+                    new_date_min = new Date(dateStr);
+    
+                    newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+                }
+                th.siblings('.wp-travel-multiple-end-date').datepicker({
+                    minDate: newMinDate,
+                });
+            }
+        });
+        
+    } );
+
     $('.wp-travel-multiple-dates-add-new').on('click', function() {
         var template = wp.template('wp-travel-multiple-dates');
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -461,30 +493,19 @@
         $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
             language: 'en',
             minDate: new Date(),
-            onSelect: function(dateStr) {
+            onSelect: function(dateStr ) {
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
                     new_date_min = new Date(dateStr);
-
+    
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
-                $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
                     minDate: newMinDate,
                 });
             }
         });
-
-        $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
-            language: 'en',
-            minDate: new Date(),
-        });
-
-        // // Pricing options multiselect.
-        // $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
-        //     filter: false,
-        // });
-
     });
 
     //value bind to label.
