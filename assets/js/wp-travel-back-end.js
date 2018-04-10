@@ -611,6 +611,7 @@
             $(this).children('ul').removeClass('wp-travel-active');
         }
     });
+
     $(document).on("click", function(event){
         var $trigger = $(".select-main");
         if($trigger !== event.target && !$trigger.has(event.target).length){
@@ -618,30 +619,33 @@
             $('.select-main').children('.carret').show();
             $('.select-main').children('.close').hide();
         }            
-   });
+    });
 
     jQuery('.select-main li input.multiselect-value').change(function($) { //on change do stuff
-        var total_inputs_length = jQuery('.select-main li input.multiselect-value').length;
-        var total_checked_length = jQuery('.select-main li input.multiselect-value:checked').length;
+        var total_inputs_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value' ).length;
+        var total_checked_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value:checked' ).length;
+        // alert( total_inputs_length + ' - ' + total_checked_length );
+
         if ( total_checked_length == total_inputs_length ) {
-            jQuery('.multiselect-all').prop('checked', true);;
+            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', true);
         } else {
-            jQuery('.multiselect-all').prop('checked', false);;
+            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', false);            
         }        
-        jQuery(this).parents('li').toggleClass('selected');
+        jQuery(this).closest('li').toggleClass('selected');
 
     });
     jQuery('.multiselect-all').change(function($){
         if ( ! jQuery(this).is(':checked') ) {
-            jQuery(this).parents('li').siblings().removeClass('selected').find('input.multiselect-value').prop('checked', false);
+            jQuery(this).closest('li').siblings().removeClass('selected').find('input.multiselect-value').prop('checked', false);
         } else {
-            jQuery(this).parents('li').siblings().addClass('selected').find('input.multiselect-value').prop('checked', true);
+            jQuery(this).closest('li').siblings().addClass('selected').find('input.multiselect-value').prop('checked', true);
             
         }
     })
     var updateTable = function(event){
-        var countSelected = jQuery('.select-main li.selected').length
-        jQuery(this).parents('ul').siblings('.selected-item').html(countSelected + ' item selected');
+        var currentID = jQuery(this).attr('id');
+        var countSelected = jQuery(this ).closest('.select-main').find('li.selected').length
+        jQuery( this ).closest('.select-main').find('ul').siblings('.selected-item').html(countSelected + ' item selected');
     }
     jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
 

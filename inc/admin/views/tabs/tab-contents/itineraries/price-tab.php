@@ -469,35 +469,41 @@ if ( ! $price_per ) {
 
 													<div class="custom-multi-select">
 														<?php 
+														$count_options_data = count( $trip_pricing_options_data );
+														$count_pricing_options = count( $pricing_options );
 														$multiple_checked_all = '';
-														if ( $trip_pricing_options_data == $pricing_options ) {
-															$multiple_checked_all = 'checke="checked"';
+														if ( $count_options_data == $count_pricing_options ) {
+															$multiple_checked_all = 'checked=checked';
 														}
-														
-														?>
+
+														$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
+														if ( $count_pricing_options > 0 ) {
+															$multiple_checked_text = $count_pricing_options . __( ' item selected', 'wp-travel' );
+														} ?>
 														<span class="select-main">
-															<span class="selected-item">Select multiple</span> 
+															<span class="selected-item"><?php echo esc_html( $multiple_checked_text ) ?></span> 
 															<span class="carret"></span> 
 															<span class="close"></span>
 															<ul class="wp-travel-multi-inner">
 																<li class="wp-travel-multi-inner">
-																	<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>1">
+																	<label class="checkbox wp-travel-multi-inner">
 																		<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all">  Select all
 																	</label>
 																</li>
 																<?php
 																foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
-																	$checked = in_array($pricing_option['price_key'], $pricing_options ) ? 'checked="checked"' : ''; ?>
-
-																	<li class="wp-travel-multi-inner">
-																		<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>">
+																	$checked = '';
+																	$selecte_list_class = '';
+																	if ( in_array($pricing_option['price_key'], $pricing_options ) ) {
+																		$checked = 'checked=checked';
+																		$selecte_list_class = 'selected';
+																	} ?>
+																	<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ) ?>">
+																		<label class="checkbox wp-travel-multi-inner ">
 																			<input <?php echo esc_attr( $checked ); ?> name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][pricing_options][]" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
 																		</label>
 																	</li>
 																<?php } ?>
-
-																
-																
 															</ul>
 														</span>
 													</div>
