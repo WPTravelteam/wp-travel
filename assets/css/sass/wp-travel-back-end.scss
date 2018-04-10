@@ -1041,11 +1041,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 .custom-multi-select{
     .select-main{
-        padding:5px 25px 5px 5px;
+        padding:0px 25px 0px 0px;
         border:1px solid #999;
         position:relative;
         display: inline-block;
-        cursor:pointer;
+        .selected-item{
+            line-height: 30px;
+            padding-left: 5px;
+            display: block;
+            cursor:pointer;
+        }
         ul{
             visibility: hidden;
             opacity: 0;
@@ -1066,6 +1071,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 input{
                     position: relative !important;
                     width: auto;
+                    pointer-events: none;
                 }
                 label{
                     display: block;
@@ -1102,11 +1108,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         position: absolute;
         top:45%;
         right:8px;
+        cursor: pointer;
     }
     .close{
         position: absolute;
         top: 45%;
         right: 8px;
+        cursor: pointer;
 
         &:before{
             position: absolute;

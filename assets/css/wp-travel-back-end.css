@@ -734,11 +734,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
       left: -3px; }
 
 .custom-multi-select .select-main {
-  padding: 5px 25px 5px 5px;
+  padding: 0px 25px 0px 0px;
   border: 1px solid #999;
   position: relative;
-  display: inline-block;
-  cursor: pointer; }
+  display: inline-block; }
+  .custom-multi-select .select-main .selected-item {
+    line-height: 30px;
+    padding-left: 5px;
+    display: block;
+    cursor: pointer; }
   .custom-multi-select .select-main ul {
     visibility: hidden;
     opacity: 0;
@@ -758,7 +762,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
       border: none; }
       .custom-multi-select .select-main ul li input, .custom-multi-select .select-main ul li .wp-travel-form-field select, .wp-travel-form-field .custom-multi-select .select-main ul li select, .custom-multi-select .select-main ul li .wp-travel-form-field textarea, .wp-travel-form-field .custom-multi-select .select-main ul li textarea {
         position: relative !important;
-        width: auto; }
+        width: auto;
+        pointer-events: none; }
       .custom-multi-select .select-main ul li label {
         display: block;
         line-height: 18px;
@@ -786,11 +791,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border-top: 5px solid #555;
   position: absolute;
   top: 45%;
-  right: 8px; }
+  right: 8px;
+  cursor: pointer; }
 .custom-multi-select .close {
   position: absolute;
   top: 45%;
-  right: 8px; }
+  right: 8px;
+  cursor: pointer; }
   .custom-multi-select .close:before {
     position: absolute;
     top: -8px;
