@@ -461,10 +461,11 @@
         if ( savedMeanDate ) {
             new_date_min =  new Date(savedMeanDate);
             newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));            
+            
+            $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                minDate: newMinDate,
+            });
         }        
-        $(this).siblings('.wp-travel-multiple-end-date').datepicker({
-            minDate: newMinDate,
-        });
 
         $(this).datepicker({
             language: 'en',
