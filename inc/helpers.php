@@ -1483,6 +1483,62 @@ function wp_travel_process_trip_price_tax( $post_id ){
 
 }
 
+/**
+ * Wp Tarvel Process Trip Price Tax.
+ * @param int $post_id post id.
+ * @return mixed $trip_price | $tax_details.
+ */
+function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
+
+	if( ! $post_id || ! $price ) {
+		return 0;
+	}
+	$settings = wp_travel_get_settings();
+
+	$trip_price = $price;
+
+	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+
+	if ( 'yes' == $trip_tax_enable ) {
+
+		$tax_details = array();
+		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
+		$trip_price = $price;
+		$tax_percentage = @$settings['trip_tax_percentage'];
+		
+		if ( 0 == $trip_price || '' == $tax_percentage ) {
+
+			return array( 'trip_price' => $trip_price );
+		}
+
+		if ( 'yes' == $tax_inclusive_price ) {
+
+			$tax_details['tax_type'] = 'inclusive';
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$actual_trip_price = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
+			$tax_details['trip_price'] = $actual_trip_price;
+			$tax_details['actual_trip_price'] = $trip_price;
+
+			return $tax_details;
+
+		}
+		else{
+
+			$tax_details['tax_type'] = 'excluxive';
+			$tax_details['trip_price'] = $trip_price;
+			$tax_details['tax_percentage'] = $tax_percentage;
+			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+
+			return $tax_details;
+
+		}
+
+	}
+
+	return array( 'trip_price' => $trip_price );
+
+}
+
 
 function taxed_amount($amount, $tax_percent, $inclusive =  true){
 	if($inclusive){
@@ -1604,6 +1660,35 @@ function wp_travel_get_pricing_variation_options(){
 }
 
 /**
+ * Get single pricing variation by key.
+ * 
+ * @return array $pricing Pricing variations data.
+ */
+function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
+
+	if ( '' === $post_id || '' === $pricing_key ) {
+		
+		return false;
+	
+	}
+
+	//Get Pricing variations.
+	$pricing_variations = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
+
+	if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
+
+		$result = array_filter($pricing_variations, function($single) use($pricing_key){
+			if ( isset( $single['price_key'] ) ){
+				return $single['price_key'] === $pricing_key;
+			}
+		});
+		return $result;
+	}
+	return false;
+
+}
+
+/**
  * Get pricing variation dates.
  *
  * @return array $available_dates Variation Options.
@@ -1634,7 +1719,7 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 }
 
 /**
- * Get pricing variation dates.
+ * Get pricing variation start dates.
  *
  * @return array $available_dates Variation Options.
  */

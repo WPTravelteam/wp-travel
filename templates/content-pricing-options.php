@@ -49,8 +49,7 @@ $post_id = $post->ID;
 
 	$wp_travel_enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
 ?>
-<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-
+<div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : ''; ?>" class="tab-list-content">
 <?php
 $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 
@@ -151,15 +150,19 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							<?php $pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type; 
 
 							$max_attr = '';
+							$min_attr = 'min=1';
 							if ( '' !== $pricing_max_pax ) {
 
 								$max_attr = 'max=' . $pricing_max_pax;
+							}
+							if ( '' !== $pricing_min_pax ) {
+								$min_attr = 'min=' . $pricing_min_pax;
 							}
 
 							?>
 								<div class="col-sm-6">
 									<label for=""><?php echo esc_html( $pricing_type_label ); ?></label>
-									<input name="pax" type="number" min="1" <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+									<input name="pax" type="number" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
 								</div>
 								<div class="add-to-cart">
 								<?php 

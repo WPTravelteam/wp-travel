@@ -31,8 +31,9 @@ class WP_Travel_Cart {
 
 		$trip_id = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? $_GET['trip_id'] : '';
 		$trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? $_GET['trip_duration'] : 1;
-		
+
 		if ( '' === $trip_id ) {
+			esc_html_e( 'Your cart is empty', 'wp-travel' );
 			return;
 		}
 		$settings = wp_travel_get_settings();
@@ -46,26 +47,94 @@ class WP_Travel_Cart {
 		$checkout_page_id = '';
 		$checkout_page_url = get_home_url();
 
+		$pax_label = __( 'Pax', 'wp-travel' );
+		$max_attr = '';
+
 		if ( isset( $settings['checkout_page_id'] ) ) {
 			$checkout_page_id = $settings['checkout_page_id'];
 			$checkout_page_url = get_permalink( $checkout_page_id );
-		} 
+		}
 
-		// Product Metas.
-		$enable_sale 	 = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+		$enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
+
+		$pricing_key = ( isset( $_GET['price_key'] ) && '' !== $_GET['price_key'] ) ? $_GET['price_key'] : '';
+
+		$pax_val = ( isset( $_GET['pax'] ) && '' !== $_GET['pax'] ) ? $_GET['pax'] : '1';
+
+		$valid_pricing_key  = false;
+
+		if ( isset( $_GET['price_key'] ) && '' !== $_GET['price_key'] ) {
+
+			$valid_pricing_key = self::is_pricing_key_valid( $trip_id, $pricing_key );
+
+			if ( ! $valid_pricing_key ) {
+
+				esc_html_e( 'Invalid Pricing key', 'wp-travel' );
+
+			}
+		}
+
+		if ( $valid_pricing_key && '' !== $pricing_key && 'yes' === $enable_pricing_options ) {
+
+			$pricing_data = wp_travel_get_pricing_variation( $trip_id, $pricing_key );
+
+			if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
+
+				foreach ( $pricing_data as $p_ky => $pricing ) :
+
+					$trip_price  = $pricing['price'];
+					$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
+
+					$taxable_price = $pricing['price'];
+
+						if ( $enable_sale && isset( $pricing['sale_price'] ) && '' !== $pricing['sale_price'] ) {
+							$sale_price    = $pricing['sale_price'];
+							$taxable_price = $sale_price;
+						}
+
+						$trip_tax_details = wp_travel_process_trip_price_tax_by_price( $trip_id, $taxable_price );
+						if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
+							$trip_price = $trip_tax_details['actual_trip_price'];
+						} else {
+								$trip_price = $trip_tax_details['trip_price'];
+							}
+							// Product Metas.
+							$trip_start_date = isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ? $_GET['trip_date'] : '';
+							$pax_label       = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing['type'];
+							$max_available   = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;
+
+							if ( $max_available ) {
+								$max_attr = 'max=' . $pricing['max_pax'];
+							}
+				endforeach;
+			}
+		}
+		else {
+			// Product Metas.
+			$enable_sale     = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+			$sale_price      = wp_travel_get_trip_sale_price( $trip_id );
+			$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+			$max_available   = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+			if ( $max_available ) {
+				$max_attr = 'max=' . $max_available;
+			}
+		}
+
+		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 		$settings        = wp_travel_get_settings();
 		$currency_code 	 = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 		$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 		$per_person_text = wp_travel_get_price_per_text( $trip_id );
-		$sale_price      = wp_travel_get_trip_sale_price( $trip_id );
-		?>
 
+		?>
 		<!-- CART HTML START -->
 		<div class="ws-theme-cart-page">
+		<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="get">
+			<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
+			<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" >
 			<table class="ws-theme-cart-list">
 				<thead>
 					<tr>
-						<th></th>
 						<th></th>
 						<th colspan="2"><?php esc_html_e( 'Tour', 'wp-travel' ); ?></th>
 						<th><?php esc_html_e( 'Price', 'wp-travel' ); ?></th>
@@ -75,9 +144,9 @@ class WP_Travel_Cart {
 				</thead>
 				<tbody>
 					<tr class="responsive-cart">
-						<td class="product-remove" >
+						<!-- <td class="product-remove" >
 							<a href="#0" class="remove tooltip-area" title="Remove this Tour">×</a> 
-						</td>
+						</td> -->
 						<td class="product-thumbnail" >
 							<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>">
 							<?php echo wp_kses( wp_travel_get_post_thumbnail( $trip_id ), wp_travel_allowed_html( array( 'img' ) ) ); ?>
@@ -89,9 +158,7 @@ class WP_Travel_Cart {
 									<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
 								</h4>
 								<?php 
-									$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
-									$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-								if ( 'yes' === $fixed_departure ) :
+								if ( 'yes' === $fixed_departure && '' !== $trip_start_date ) :
 								?>
 									<span class="variation">
 										<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
@@ -107,16 +174,10 @@ class WP_Travel_Cart {
 							</div>
 						</td>
 						<td class="product-price" data-title="Price">
-						<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
-
-							<?php if ( $enable_sale ) : ?>
-								<del>
-									<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-								</del>
-							<?php endif; ?>
+						<?php if ( '' !== $trip_price || '0' !== $trip_price ) : ?>
 								<span class="person-count">
 									<ins>
-										<span>
+										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( @$trip_tax_details['actual_trip_price'] ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
 											<?php
 											if ( $enable_sale ) {
 												echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
@@ -129,150 +190,75 @@ class WP_Travel_Cart {
 								</span>
 							<?php endif; ?>
 						</td>
-						<!-- <td class="product-quantity" data-title="PAX">
+						<td class="product-quantity" data-title="PAX">
 							<div class="st_adults">
-								<span class="label">Adults</span>
-								<input name="" type="number" value="1" min="1">
+								<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>
+								<input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax_val ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
 							</div>
-							<div class="st_children">
-								<span class="label">Children</span>
-								<input name="" type="number" value="0" min="0">
-							</div> 
 						</td>
 						<td class="product-subtotal text-right" data-title="Total">
 							<div class="item_cart">
 								<p>
-									<strong><span class="ws-theme-currencySymbol">$</span>220</strong>
+									<strong><span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> 0 </span></strong>
 								</p>
 							</div>
-						</td> -->
+						</td> 
 					</tr>
 					</tbody>
 					</table>
 					<table class="ws-theme-cart-list table-total-info">
+					<?php if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage'] && 'inclusive' !== $trip_tax_details['tax_type'] ) {
+						?>
 						<tr>
-							<th >
-								<p><strong>Subtotal</strong></p>
-								<p><strong>Tax <span class="tax-percent">10%</span></strong></p>
+							<th>
+								<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
+								<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?> 
+								<span class="tax-percent">
+									<?php
+									if ( isset( $trip_tax_details['tax_percentage'] ) ) {
+										echo esc_html( $trip_tax_details['tax_percentage'] );
+										esc_html_e( '%', 'wp-travel' );
+									} 
+								?>
+								</span></strong></p>
 							</th>
 							<td  class="text-right">
-								<p><strong><span class="ws-theme-currencySymbol">$</span>220</strong></p>
-								<p><span><span class="ws-theme-currencySymbol">$</span>22</span></p>
+								<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>0</strong></p>
+								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>0</strong></p>
 							</td>
 						</tr>
+					<?php } ?>
 						<tr>
-							<th >
-								<strong>Total</strong>
+							<th>
+								<strong><?php echo esc_html( 'Total', 'wp-travel' ); ?></strong>
 							</th>
 							<td  class="text-right">
 								<p class="total">
-									<strong><span class="ws-theme-currencySymbol">$</span>242</strong>
+									<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol">0</span></strong>
 								</p>
 							</td>
 						</tr>
 					</table>
 				<div>
 					<div class="actions">
-						<a class="btn_full update-cart-btn" href="#">Update Cart</a>
-						<a class="btn_full book-now-btn" href="#">Process To Checkout</a>
+					<input type="submit" class="btn_full book-now-btn" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
 					</div>
 				</div>
+			</form>
 		</div>
-		
 		<!-- CART HTML END -->
-		
-		<!-- <div class="wp-travel-ecommerse wp-travel-cart-items">
-		<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="get">
-		<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
-		<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" >
-		<table class="shop_table shop_table_responsive cart" cellspacing="0">
-		<thead>
-			<tr>
-
-				<th class="product-thumbnail"><?php esc_html_e( 'Image', 'wp-travel' ); ?></th>
-				<th class="product-name"><?php esc_html_e( 'Tour', 'wp-travel' ); ?></th>
-				<th class="product-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></th>
-				<th class="product-quantity"><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
-				<th class="product-subtotal"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
-			</tr>
-		</thead>
-			<tbody>
-				<tr class="cart_item">
-
-					<td class="product-thumbnail">
-						<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>">
-							<?php echo wp_kses( wp_travel_get_post_thumbnail( $trip_id ), wp_travel_allowed_html( array( 'img' ) ) ); ?>
-						</a> 
-					</td>
-					<td class="product-name" data-title="Tour">
-						<div><a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a></div> 
-					</td>
-					<td class="product-price" data-title="Price">
-						<span class="woocommerce-Price-amount amount">
-							<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-price" payment_price="<?php echo @$trip_tax_details['actual_trip_price'] ?>" trip_price="<?php echo $trip_price; ?>" ><?php echo $trip_price ?></span>
-						</span> 
-					</td>
-					<td class="product-quantity" data-title="Number ticket">
-						<div class="quantity">
-							<input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php if($max_available = get_post_meta($trip_id,'wp_travel_group_size', true)): ?>max="<?php echo $max_available ?>" <?php endif; ?> name="pax" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
-						</div>
-					</td>
-					<td class="product-subtotal" data-title="Total">
-						<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total">0</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
-			<div class="cart-collaterals">
-				<div class="cart_totals ">
-					<h2><?php esc_html_e( 'Cart totals', 'wp-travel' ); ?></h2>
-					<table cellspacing="0" class="shop_table shop_table_responsive">
-						<tbody>
-							<?php if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage'] && 'inclusive' !== $trip_tax_details['tax_type'] ) { ?>
-							<tr class="cart-subtotal">
-								<th><?php esc_html_e( 'Subtotal', 'wp-travel' )?></th>
-								<td data-title="Subtotal"><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-sub-total">0</span></td>
-							</tr>
-
-							<tr class="cart-subtotal">
-								<th>
-									<?php
-									if ( isset( $trip_tax_details['tax_percentage'] ) ) {
-										echo esc_html( $trip_tax_details['tax_percentage'] );
-										esc_html_e( '% Tax ', 'wp-travel' );
-									} ?>
-								</th>
-								<td data-title="tax"><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-tax">0</span></td>
-							</tr>
-							<?php } ?>
-
-							<tr class="order-total">
-								<th><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
-								<td data-title="Total"><strong><span class="Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-total">0</span></strong> </td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="wc-proceed-to-checkout">
-					<input type="submit" class="button alt" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
-					</button>
-					</div>
-				</div>
-			</div>
-		</form>
-		</div>
 		<script>
 			function calculate_price() {
 				var sub_total_including_tax = 0;
 				var sub_total = 0;
 				var price_per = wt_payment.price_per;
 
-				jQuery( '.wp-travel-cart-items tbody tr.cart_item' ).each( function(){
+				jQuery( '.ws-theme-cart-list tbody tr.responsive-cart' ).each( function(){
 					no_of_pax = jQuery(this).find( '.wp-travel-pax' ).val();
 
 					var payment_price = jQuery(this).find('.wp-travel-trip-price').attr('payment_price'); // price including tax
 					var trip_price = jQuery(this).find('.wp-travel-trip-price').attr('trip_price'); // price excluding tax
-										
+
 					if (price_per.toLowerCase().slice(0, 6) === 'person') {                        
 						payment_price = parseFloat(payment_price) * parseFloat(no_of_pax);
 						trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
@@ -280,7 +266,7 @@ class WP_Travel_Cart {
 					}
 					// Individual Price total.
 					jQuery(this).find('.wp-travel-trip-total').html( trip_price );
-					
+
 					sub_total += parseFloat( trip_price );
 					total += sub_total;
 
@@ -290,13 +276,13 @@ class WP_Travel_Cart {
 					}
 				   
 				} );
-				
+
 				// Sub Total
 				if (sub_total.toFixed)
 					sub_total = parseFloat( sub_total ).toFixed(2);
 
 				var total = sub_total;
-					
+
 				if ( sub_total_including_tax.toFixed ) {
 					sub_total_including_tax = parseFloat( sub_total_including_tax ).toFixed(2);
 					if ( sub_total_including_tax > total ) {
@@ -305,7 +291,7 @@ class WP_Travel_Cart {
 						jQuery('.wp-travel-tax').html( tax );
 					}
 				}          
-				
+
 				jQuery('.wp-travel-sub-total').html( sub_total );                    
 				jQuery('.wp-travel-total').html( total );
 			}	
@@ -316,72 +302,36 @@ class WP_Travel_Cart {
 					calculate_price();
 				} );
 			});
-		</script> -->
+		</script>
 	<?php
 	}
 
 	/**
-	 * Trip Details.
+	 * Validate pricing Key
 	 *
-	 * @param Number $trip_id Trip ID.
-	 * @since 2.2.3
+	 * @return bool true | false.
 	 */
-	public static function trip_details( $trip_id ) {
+	public static function is_pricing_key_valid( $trip_id, $pricing_key ) {
 
-		if ( '' == $trip_id ) {
-			WP_Travel()->notices->add( __( 'Trip ID not found', 'wp-travel' ), $type = 'error' );
-			return;
+		if ( '' === $trip_id || '' === $pricing_key ) {
+
+			return false;
 		}
-		ob_start(); ?>
-		<h3><?php esc_html_e( 'Trip Overview', 'wp-travel' ); ?></h3>
-		<table class="shop_table woocommerce-checkout-review-order-table">
-			<thead>
-				<tr>
-					<th class="product-name"><?php esc_html_e( 'Trip Details', 'wp-travel' ); ?></th>
-					<th class="product-total"><?php esc_html_e( 'Trip Price', 'wp-travel' ); ?></th>
-				</tr>
-			</thead>
-		<tbody>
-			<tr class="cart_item">
-				<td class="product-name">
-					<strong><?php echo get_the_title( $trip_id ); ?></strong>
-				</td>
-				<td class="product-total">
-					<strong><?php echo wp_travel_get_actual_trip_price( $trip_id ); ?></strong>
-				</td>
-			</tr>
-			<tr class="cart_item">
-				<td class="product-name">
-			   		<strong><?php echo esc_html( wp_travel_get_actual_trip_price( $trip_id ) ); ?></strong>
-				</td>
-				<td class="product-total">
-			   	
-				</td>
-			</tr>
-		</tbody>
-			<tfoot>
 
-			<tr class="cart-subtotal">
-			<th>Subtotal</th>
-				<td>
-					
-				</td>
-			</tr>
-			<tr class="order-total">
-				<th>Total</th>
-				<td>
-				
-				</td>
-			</tr>
-			</tfoot>
-		</table>
-		
+		//Get Pricing variations.
+		$pricing_variations = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
-		<?php
-		$details = ob_get_clean();
-		return $details;
+		if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
+
+			$result = array_filter($pricing_variations, function( $single ) use ( $pricing_key ) {
+				return in_array( $pricing_key, $single, true );
+			});
+			return ( '' !== $result && count( $result ) > 0 ) ? true : false;
+		}
+		return false;
 
 	}
+
 }
 
 new WP_Travel_Cart();
