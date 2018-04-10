@@ -461,10 +461,11 @@
         if ( savedMeanDate ) {
             new_date_min =  new Date(savedMeanDate);
             newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));            
+            
+            $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                minDate: newMinDate,
+            });
         }        
-        $(this).siblings('.wp-travel-multiple-end-date').datepicker({
-            minDate: newMinDate,
-        });
 
         $(this).datepicker({
             language: 'en',
@@ -600,7 +601,7 @@
         $(this).hide();
         
     });
-    jQuery('.select-main, .select-main .caret').click(function(e){
+    jQuery(document).on( 'click', '.select-main, .select-main .caret', function(e){
         if($(this).find('ul.wp-travel-active').length == 0){
             $(this).children('ul').addClass('wp-travel-active');
             $(this).children('.close').show();
@@ -621,7 +622,7 @@
         }            
     });
 
-    jQuery('.select-main li input.multiselect-value').change(function($) { //on change do stuff
+    jQuery(document).on( 'change', '.select-main li input.multiselect-value', function($) { //on change do stuff
         var total_inputs_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value' ).length;
         var total_checked_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value:checked' ).length;
         // alert( total_inputs_length + ' - ' + total_checked_length );
