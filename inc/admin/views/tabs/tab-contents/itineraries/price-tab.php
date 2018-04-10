@@ -459,8 +459,8 @@ if ( ! $price_per ) {
 											<div class="repeat-row">
 												<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input value="<?php echo esc_attr( $start_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-													<input value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+													<input value="<?php echo esc_attr( $start_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+													<input value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 												</div>
 											</div>
 											<div class="repeat-row">
@@ -468,16 +468,38 @@ if ( ! $price_per ) {
 												<div class="two-third">
 
 													<div class="custom-multi-select">
-														<select name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
-															<?php
-															foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
+														<?php 
+														$multiple_checked_all = '';
+														if ( $trip_pricing_options_data == $pricing_options ) {
+															$multiple_checked_all = 'checke="checked"';
+														}
+														
+														?>
+														<span class="select-main">
+															<span class="selected-item">Select multiple</span> 
+															<span class="carret"></span> 
+															<span class="close"></span>
+															<ul class="wp-travel-multi-inner">
+																<li class="wp-travel-multi-inner">
+																	<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>1">
+																		<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all">  Select all
+																	</label>
+																</li>
+																<?php
+																foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
+																	$checked = in_array($pricing_option['price_key'], $pricing_options ) ? 'checked="checked"' : ''; ?>
 
-																$selected = in_array($pricing_option['price_key'], $pricing_options ) ? 'selected' : '';
-															?>
-																<option <?php echo esc_attr( $selected ); ?> value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
-															<?php } ?>
-														</select>
+																	<li class="wp-travel-multi-inner">
+																		<label class="checkbox wp-travel-multi-inner" for="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>">
+																			<input <?php echo esc_attr( $checked ); ?> name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][pricing_options][]" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
+																		</label>
+																	</li>
+																<?php } ?>
 
+																
+																
+															</ul>
+														</span>
 													</div>
 
 												</div>
@@ -518,8 +540,8 @@ if ( ! $price_per ) {
 									<div class="repeat-row">
 										<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
 										<div class="two-third">
-											<input name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-											<input name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class="datepicker-here wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+											<input name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+											<input name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 										</div>
 									</div>
 									<div class="repeat-row">
