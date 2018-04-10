@@ -113,7 +113,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 							<span class="availabily-heading-label"><?php echo esc_html( 'price:', 'wp-travel' ); ?></span>
 							<?php if ( '' !== $pricing_option_price || '0' !== $pricing_option_price ) : ?>
 
-								<?php if ( $enable_sale ) : ?>
+								<?php if ( 'yes' === $pricing_sale_enabled ) : ?>
 									<del>
 										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price ); ?></span>
 									</del>
@@ -122,7 +122,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 										<ins>
 											<span>
 												<?php
-												if ( $enable_sale ) {
+												if ( 'yes' === $pricing_sale_enabled ) {
 													echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $pricing_sale_price ), $currency_symbol, $pricing_sale_price );
 												} else {
 													echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price );
