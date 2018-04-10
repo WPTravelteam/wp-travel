@@ -553,15 +553,28 @@ if ( ! $price_per ) {
 									<div class="repeat-row">
 										<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
 										<div class="two-third">
-
+										
 											<div class="custom-multi-select">
-												<select name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" multiple="multiple" class="wp-travel-multiple-date-pricings" >
-													<?php
-													foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
-													?>
-														<option value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>"><?php echo esc_html( $pricing_option['pricing_name'] ); ?></option>
-													<?php } ?>
-												</select>
+												<span class="select-main">
+													<span class="selected-item"><?php  esc_html_e( 'Select multiple', 'wp-travel' ); ?></span> 
+													<span class="carret"></span> 
+													<span class="close"></span>
+													<ul class="wp-travel-multi-inner">
+														<li class="wp-travel-multi-inner">
+															<label class="checkbox wp-travel-multi-inner">
+																<input type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all">  Select all
+															</label>
+														</li>
+														<?php
+														foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) { ?>
+															<li class="wp-travel-multi-inner">
+																<label class="checkbox wp-travel-multi-inner ">
+																	<input name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
+																</label>
+															</li>
+														<?php } ?>
+													</ul>
+												</span>
 
 											</div>
 
