@@ -33,6 +33,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
@@ -40,6 +41,13 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_trip_fact_tab_call_back' ), 12, 2 );		
 		add_filter( 'wp_travel_global_tabs', array($this,'add_facts_to_tabs'),12,2);
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
+	}
+
+	public function call_back_tab_facts($tab){
+		if ( 'facts' !== $tab ) {
+			return;
+		}
+		require_once "views/tabs/tab-contents/itineraries/fact-setting-tab.php";
 	}
 
 	public function add_facts_to_tabs($tabs){
@@ -112,6 +120,10 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['payment'] = array(
 			'tab_label' => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
+		);
+		$settings_fields['facts'] = array(
+			'tab_label' => __( 'Facts', 'wp-travel' ),
+			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
@@ -993,7 +1005,11 @@ class WP_Travel_Admin_Settings {
 			//Cart and Checkout pages options
 			$settings['cart_page_id'] = $cart_page_id;
 			$settings['checkout_page_id'] = $checkout_page_id;
-
+			$indexed = $_POST['wp_travel_trip_facts_settings'];
+			if(array_key_exists('$index', $indexed)){
+				unset($indexed['$index']) ;
+			}
+			$settings['wp_travel_trip_facts_settings'] = $indexed;
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 

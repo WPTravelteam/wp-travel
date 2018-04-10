@@ -1,7 +1,7 @@
 <?php
-	global $post;
-	$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
-	?>
+global $post;
+$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+?>
 <table class="form-table">
 	
 	<tr>
