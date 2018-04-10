@@ -453,6 +453,39 @@
     });
 
     // Dates options template.
+    $('#date-options-data .panel .wp-travel-multiple-start-date').each( function() {
+        var th = $(this);
+
+        var savedMeanDate = $(this).val();
+        newMinDate = new Date();
+        if ( savedMeanDate ) {
+            new_date_min =  new Date(savedMeanDate);
+            newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));            
+            
+            $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                minDate: newMinDate,
+            });
+        }        
+
+        $(this).datepicker({
+            language: 'en',
+            minDate: new Date(),
+            onSelect: function(dateStr ) {
+                newMinDate = null;
+                newMaxDate = new Date();
+                if ('' !== dateStr) {
+                    new_date_min = new Date(dateStr);
+    
+                    newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+                }
+                th.siblings('.wp-travel-multiple-end-date').datepicker({
+                    minDate: newMinDate,
+                });
+            }
+        });
+        
+    } );
+
     $('.wp-travel-multiple-dates-add-new').on('click', function() {
         var template = wp.template('wp-travel-multiple-dates');
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -461,30 +494,19 @@
         $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
             language: 'en',
             minDate: new Date(),
-            onSelect: function(dateStr) {
+            onSelect: function(dateStr ) {
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
                     new_date_min = new Date(dateStr);
-
+    
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
-                $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+                $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
                     minDate: newMinDate,
                 });
             }
         });
-
-        $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
-            language: 'en',
-            minDate: new Date(),
-        });
-
-        // // Pricing options multiselect.
-        // $('#date-options-data .panel:last .wp-travel-multiple-date-pricings').multipleSelect({
-        //     filter: false,
-        // });
-
     });
 
     //value bind to label.
@@ -571,5 +593,61 @@
             $(this).siblings( 'input[type="number' ).attr( 'min', minPax );
         }
     } );
+
+    jQuery('.select-main .close').hide();
+    jQuery(document).on('click','.select-main .close', function(){
+        $(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
+        $(this).siblings('.carret').show();
+        $(this).hide();
+        
+    });
+    jQuery(document).on( 'click', '.select-main, .select-main .caret', function(e){
+        if($(this).find('ul.wp-travel-active').length == 0){
+            $(this).children('ul').addClass('wp-travel-active');
+            $(this).children('.close').show();
+            $(this).children('.carret').hide();
+        } else{
+            $(this).children('.carret').show();
+            $(this).children('.close').hide();
+            $(this).children('ul').removeClass('wp-travel-active');
+        }
+    });
+
+    $(document).on("click", function(event){
+        var $trigger = $(".select-main");
+        if($trigger !== event.target && !$trigger.has(event.target).length){
+            $("ul.wp-travel-active").removeClass("wp-travel-active");
+            $('.select-main').children('.carret').show();
+            $('.select-main').children('.close').hide();
+        }            
+    });
+
+    jQuery(document).on( 'change', '.select-main li input.multiselect-value', function($) { //on change do stuff
+        var total_inputs_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value' ).length;
+        var total_checked_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value:checked' ).length;
+        // alert( total_inputs_length + ' - ' + total_checked_length );
+
+        if ( total_checked_length == total_inputs_length ) {
+            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', true);
+        } else {
+            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', false);            
+        }        
+        jQuery(this).closest('li').toggleClass('selected');
+
+    });
+    jQuery('.multiselect-all').change(function($){
+        if ( ! jQuery(this).is(':checked') ) {
+            jQuery(this).closest('li').siblings().removeClass('selected').find('input.multiselect-value').prop('checked', false);
+        } else {
+            jQuery(this).closest('li').siblings().addClass('selected').find('input.multiselect-value').prop('checked', true);
+            
+        }
+    })
+    var updateTable = function(event){
+        var currentID = jQuery(this).attr('id');
+        var countSelected = jQuery(this ).closest('.select-main').find('li.selected').length
+        jQuery( this ).closest('.select-main').find('ul').siblings('.selected-item').html(countSelected + ' item selected');
+    }
+    jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
 
 }(jQuery));
