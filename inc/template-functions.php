@@ -499,14 +499,16 @@ function wp_travel_single_location( $post_id ) {
 					</span>
 				</div>
 			<?php else : ?>
-				<div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
-				</div>
-				<div class="travel-info">
-					<span class="value">
-						<?php printf( __( '%s Day(s) %s Night(s)', 'wp-travel' ), $trip_duration, $trip_duration_night ); ?>
-					</span>
-				</div>
+				<?php if ( $trip_duration || $trip_duration_night ) : ?>
+					<div class="travel-info">
+						<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
+					</div>
+					<div class="travel-info">
+						<span class="value">
+							<?php printf( __( '%s Day(s) %s Night(s)', 'wp-travel' ), $trip_duration, $trip_duration_night ); ?>
+						</span>
+					</div>
+				<?php endif; ?>
 
 			<?php endif; ?>
 		</li>
