@@ -511,7 +511,7 @@ function wp_travel_single_location( $post_id ) {
 			<?php endif; ?>
 		</li>
 	<?php
-	
+
 }
 
 /**

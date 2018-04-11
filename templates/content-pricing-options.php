@@ -53,7 +53,7 @@ $post_id = $post->ID;
 <?php
 $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 
-if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
+if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 	if ( 'yes' === $wp_travel_enable_pricing_options ) :
 
@@ -142,7 +142,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 								<input name="trip_date" type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">
 							<?php 
 							else : ?>
-								<input name="trip_date" type="hidden" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">;
+								<input name="trip_date" type="hidden" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">
 							<?php endif;
 							?>
 							</div>

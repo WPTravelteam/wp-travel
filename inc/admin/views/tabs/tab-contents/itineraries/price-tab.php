@@ -75,7 +75,7 @@ if ( ! $price_per ) {
 	</tr>
 	<tr>
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
-		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
+		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="1" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
 
 
@@ -590,8 +590,10 @@ if ( ! $price_per ) {
 				<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
 			</div>
 		</td>
+	<?php elseif ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : ?>
+		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Enable Multiple Pricing Options and update add/edit multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php else : ?>
-		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>	
+		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
 	<tr>
