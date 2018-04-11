@@ -75,6 +75,7 @@ class WP_Travel_Cart {
 
 			}
 		}
+		$trip_requested_date = isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ? $_GET['trip_date'] : '';
 		// Validate Request date.
 		if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date']  ) {
 
@@ -147,6 +148,10 @@ class WP_Travel_Cart {
 		<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="get">
 			<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
 			<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" >
+			<?php if ( $valid_pricing_key && '' !== $pricing_key && 'yes' === $enable_pricing_options ) { ?>
+				<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing_key ); ?>" >
+				<input type="hidden" name="trip_date" value="<?php echo esc_attr( $trip_requested_date ); ?>" >
+			<?php } ?>
 			<table class="ws-theme-cart-list">
 				<thead>
 					<tr>

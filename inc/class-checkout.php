@@ -42,16 +42,93 @@ class WP_Travel_Checkout {
 			$pax_size = $_REQUEST['pax'];
 		}
 		$price_per = wp_travel_get_price_per_text( $trip_id );
-		$settings = wp_travel_get_settings();		
-		$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
-		if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
-			$trip_price = $trip_tax_details['actual_trip_price'];
-		} else {
-			$trip_price = $trip_tax_details['trip_price'];
+		$settings = wp_travel_get_settings();
+
+		//Pricing Options Merge.
+		$enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
+
+		$pricing_key = ( isset( $_GET['price_key'] ) && '' !== $_GET['price_key'] ) ? $_GET['price_key'] : '';
+
+		$valid_pricing_key  = false;
+
+		if ( isset( $_GET['price_key'] ) && '' !== $_GET['price_key'] ) {
+
+			$valid_pricing_key = self::is_pricing_key_valid( $trip_id, $pricing_key );
+
+			if ( ! $valid_pricing_key ) {
+
+				esc_html_e( 'Invalid Pricing key', 'wp-travel' );
+
+				return;
+
+			}
 		}
-		$trip_price_original = $trip_price;
-		if ( strtolower( $price_per ) === 'person' ) {
-			$trip_price *= $pax_size;
+		$trip_requested_date = isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ? $_GET['trip_date'] : '';
+		// Validate Request date.
+		if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date']  ) {
+
+			$valid_pricing_date = self::is_request_date_valid( $trip_id, $pricing_key, urldecode( $_GET['trip_date'] ) );
+
+			if ( ! $valid_pricing_date ) {
+
+				esc_html_e( 'Invalid pricing option date', 'wp-travel' );
+
+				return;
+
+			}
+		}
+
+		if ( $valid_pricing_key && '' !== $pricing_key && 'yes' === $enable_pricing_options ) {
+
+			$pricing_data = wp_travel_get_pricing_variation( $trip_id, $pricing_key );
+
+			if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
+
+				foreach ( $pricing_data as $p_ky => $pricing ) :
+
+					$trip_price  = $pricing['price'];
+					$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
+
+					$taxable_price = $pricing['price'];
+
+						if ( $enable_sale && isset( $pricing['sale_price'] ) && '' !== $pricing['sale_price'] ) {
+							$sale_price    = $pricing['sale_price'];
+							$taxable_price = $sale_price;
+						}
+
+						$trip_tax_details = wp_travel_process_trip_price_tax_by_price( $trip_id, $taxable_price );
+						if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
+							$trip_price = $trip_tax_details['actual_trip_price'];
+						} else {
+								$trip_price = $trip_tax_details['trip_price'];
+							}
+							// Product Metas.
+							$trip_start_date = isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ? $_GET['trip_date'] : '';
+							$pax_label       = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing['type'];
+							$max_available   = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;
+
+							if ( $max_available ) {
+								$max_attr = 'max=' . $pricing['max_pax'];
+							}
+
+							$trip_price_original = $trip_price;
+								if ( strtolower( $price_per ) === 'person' ) {
+								$trip_price *= $pax_size;
+							}
+				endforeach;
+			}
+		}
+		else {
+			$trip_tax_details = wp_travel_process_trip_price_tax( $trip_id );
+			if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
+				$trip_price = $trip_tax_details['actual_trip_price'];
+			} else {
+				$trip_price = $trip_tax_details['trip_price'];
+			}
+			$trip_price_original = $trip_price;
+			if ( strtolower( $price_per ) === 'person' ) {
+				$trip_price *= $pax_size;
+			}
 		}
 
 		?>
@@ -116,6 +193,67 @@ class WP_Travel_Checkout {
 		.wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form{width:100%; padding-left:0; padding-right:0}
 		</style>
 	<?php
+	}
+
+	/**
+	 * Validate pricing Key
+	 *
+	 * @return bool true | false.
+	 */
+	public static function is_pricing_key_valid( $trip_id, $pricing_key ) {
+
+		if ( '' === $trip_id || '' === $pricing_key ) {
+
+			return false;
+		}
+
+		//Get Pricing variations.
+		$pricing_variations = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+
+		if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
+
+			$result = array_filter($pricing_variations, function( $single ) use ( $pricing_key ) {
+				return in_array( $pricing_key, $single, true );
+			});
+			return ( '' !== $result && count( $result ) > 0 ) ? true : false;
+		}
+		return false;
+
+	}
+
+	/**
+	 * Validate date
+	 *
+	 * @return bool true | false.
+	 */
+	public static function is_request_date_valid( $trip_id, $pricing_key, $test_date ) {
+
+		if ( '' === $trip_id || '' === $pricing_key || '' === $test_date ) {
+
+			return false;
+		}
+
+		$trip_multiple_date_options = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+
+		$available_dates = wp_travel_get_pricing_variation_start_dates( $trip_id, $pricing_key );
+
+		if ( 'yes' === $trip_multiple_date_options && is_array( $available_dates ) && ! empty( $available_dates ) ) {
+
+			return in_array( $test_date, $available_dates, true );
+		}
+		else {
+
+			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
+			$test_date = ( new DateTime( $test_date ) )->format( 'Y-m-d' );
+
+			if ( strtotime( $date_now ) <= strtotime( $test_date ) ) {
+
+				return true;
+			}
+
+			return false;
+
+		}
 	}
 }
 
