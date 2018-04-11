@@ -284,6 +284,7 @@
             $('.wp-travel-fixed-departure-row').css({ 'display': 'none' });
             $('.wp-travel-trip-duration-row').css({ 'display': 'table-row' });
         }
+        $( '#wp-travel-enable-multiple-fixed-departure' ).trigger('click');
     });
 
     $(document).on("click", ".wp-travel-featured-post", function(e) {
