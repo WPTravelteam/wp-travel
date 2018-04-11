@@ -7,7 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
- * Tested up to: 4.9.4
+ * Tested up to: 4.9.5
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
