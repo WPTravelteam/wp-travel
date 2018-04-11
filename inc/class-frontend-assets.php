@@ -93,19 +93,61 @@ class WP_Travel_Frontend_Assets {
 			}
 			$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 
-			$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
-			if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+			if ( ( wp_travel_is_checkout_page() ) && isset( $_GET['price_key'] ) && ! empty( $_GET['price_key'] )  ) {
 
-				$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
+				$pricing_key = $_GET['price_key'];
+	
+				$pricing_data = wp_travel_get_pricing_variation( $trip_id, $pricing_key );
+	
+				if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
+	
+					foreach ( $pricing_data as $p_ky => $pricing ) :
+	
+						$trip_price  = $pricing['price'];
+						$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
+	
+						$taxable_price = $pricing['price'];
+	
+							if ( $enable_sale && isset( $pricing['sale_price'] ) && '' !== $pricing['sale_price'] ) {
+								$sale_price    = $pricing['sale_price'];
+								$taxable_price = $sale_price;
+							}
+
+							$trip_price_tax = wp_travel_process_trip_price_tax_by_price( $trip_id, $taxable_price );
+
+							if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+
+								$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
+							}
+							else {
+								$trip_price = $payment_amount = $trip_price_tax['trip_price'];
+							}
+
+							$minimum_partial_payout = wp_travel_variable_pricing_minimum_partial_payout( $trip_id, $trip_price, $trip_price_tax );
+
+					endforeach;
+				}
 			}
+	
 			else {
-				$trip_price = $payment_amount = $trip_price_tax['trip_price'];
+	
+					$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
+				if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
+
+					$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
+				}
+				else {
+					$trip_price = $payment_amount = $trip_price_tax['trip_price'];
+				}
+
+				$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
 			}
 
-			$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
 			if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
 				$payment_amount = $minimum_partial_payout;
 			}
+
+
 			$wt_payment = array(
 				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
 				'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),

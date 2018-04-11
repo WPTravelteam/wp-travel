@@ -226,6 +226,9 @@ function wp_travel_booking_form_fields() {
 						}
 
 						$trip_tax_details = wp_travel_process_trip_price_tax_by_price( $post_id, $taxable_price );
+
+						$minimum_partial_payout = wp_travel_variable_pricing_minimum_partial_payout( $post_id, $trip_price, $trip_tax_details );
+
 						if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
 								$actual_trip_price = $trip_tax_details['actual_trip_price'];
 						} else {
@@ -240,14 +243,13 @@ function wp_travel_booking_form_fields() {
 			$trip_tax_details = wp_travel_process_trip_price_tax($post_id);
 			$actual_trip_price = wp_travel_get_actual_trip_price( $post_id );
 		}
-
 		
 		if ( is_array( $trip_tax_details ) && isset( $trip_tax_details['actual_trip_price'] ) ) {
 
 			$actual_trip_price = number_format( $trip_tax_details['actual_trip_price'], 2 , '.', '' );
 
 		}
-		
+
 		$per_person_text = wp_travel_get_price_per_text( $post_id );
 		$settings = wp_travel_get_settings();
 

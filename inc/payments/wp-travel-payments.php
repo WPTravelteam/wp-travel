@@ -105,6 +105,42 @@ function wp_travel_minimum_partial_payout( $post_id ) {
  * @param Number $post_id Post ID.
  * @return Number
  */
+function wp_travel_variable_pricing_minimum_partial_payout( $post_id, $price, $tax_details ) {
+	if ( ! $post_id ) {
+		return 0;
+	}
+	$trip_price = $price;
+	$tax_details = $tax_details;
+	
+	if ( is_array( $tax_details ) && isset( $tax_details['tax_type'] ) ) {
+
+		if ( 'excluxive' === $tax_details['tax_type'] ) {
+
+			$trip_price = $tax_details['actual_trip_price'];
+
+		}
+	}
+	$payout_percent = wp_travel_get_actual_payout_percent( $post_id );
+	$minimum_payout = ( $trip_price * $payout_percent ) / 100;	
+	return number_format( $minimum_payout, 2, '.', '' );
+	// $minimum_payout = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout', true );
+
+	// if ( ! $minimum_payout ) {
+
+	// 	$settings = wp_travel_get_settings();
+	// 	$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 )? $settings['minimum_partial_payout']  : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+
+	// 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
+	// 	$minimum_payout = ( $trip_price * $payout_percent ) / 100;
+	// }
+}
+
+/**
+ * Get Minimum payout amount
+ *
+ * @param Number $post_id Post ID.
+ * @return Number
+ */
 function wp_travel_get_payout_percent( $post_id ) {
 	if ( ! $post_id ) {
 		return 0;
