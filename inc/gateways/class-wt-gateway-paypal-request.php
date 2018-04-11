@@ -182,7 +182,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		// Cart Item.
 		$args['item_name_1']   = $item_name;
 		$args['quantity_1']   = $item_qty;
-		$args['amount_1']   = $item_amount;
+		$args['amount_1']   = $item_amount - $tax;
 		$args['item_number_1']   = $itinery_id;
 		$args['on0_1'] = __( 'Trip Code', 'wp-travel' );
 		$args['on1_1'] = __( 'Payment Mode', 'wp-travel' );
