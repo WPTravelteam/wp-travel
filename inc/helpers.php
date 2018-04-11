@@ -1707,7 +1707,8 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 	if ( is_array( $available_trip_dates ) && '' !== $available_trip_dates ) {
 
 		$result = array_filter($available_trip_dates, function($single) use($pricing_key){
-			return in_array($pricing_key, $single['pricing_options'] );
+			$pricing_options = isset( $single['pricing_options'] ) ? $single['pricing_options'] : array();
+			return in_array($pricing_key, $pricing_options );
 		});
 
 		return $result;

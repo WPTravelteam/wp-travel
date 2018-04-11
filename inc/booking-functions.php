@@ -227,7 +227,7 @@ function wp_travel_booking_form_fields() {
 
 						$trip_tax_details = wp_travel_process_trip_price_tax_by_price( $post_id, $taxable_price );
 
-						$minimum_partial_payout = wp_travel_variable_pricing_minimum_partial_payout( $post_id, $trip_price, $trip_tax_details );
+						$minimum_partial_payout = wp_travel_variable_pricing_minimum_partial_payout( $post_id, $taxable_price, $trip_tax_details );
 
 						if ( isset( $trip_tax_details['tax_type'] ) && 'inclusive' === $trip_tax_details['tax_type'] ) {
 								$actual_trip_price = $trip_tax_details['actual_trip_price'];
