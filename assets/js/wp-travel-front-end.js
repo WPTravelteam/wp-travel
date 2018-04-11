@@ -253,6 +253,12 @@ jQuery(document).ready(function($) {
                 }
             });
 
+        } else {
+            jQuery(this).datepicker({
+                language: 'en',
+                inline: true,
+                minDate: new Date(),
+            });
         }
 
     })

@@ -141,9 +141,9 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() ) :
 								<label for=""><?php echo esc_html( 'Select a Date:', 'wp-travel' ); ?></label>
 								<input name="trip_date" type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">
 							<?php 
-							else :
-								echo esc_html( 'No Dates Available !!', 'wp-travel' );
-							endif;
+							else : ?>
+								<input name="trip_date" type="hidden" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr( 'Please Select a Date', 'wp-travel' ); ?>">;
+							<?php endif;
 							?>
 							</div>
 							<div class="wp-travel-calender-aside">

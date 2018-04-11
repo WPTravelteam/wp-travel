@@ -71,6 +71,21 @@ class WP_Travel_Cart {
 
 				esc_html_e( 'Invalid Pricing key', 'wp-travel' );
 
+				return;
+
+			}
+		}
+		// Validate Request date.
+		if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date']  ) {
+
+			$valid_pricing_date = self::is_request_date_valid( $trip_id, $pricing_key, $_GET['trip_date'] );
+
+			if ( ! $valid_pricing_date ) {
+
+				esc_html_e( 'Invalid pricing option date', 'wp-travel' );
+
+				return;
+
 			}
 		}
 
@@ -330,6 +345,41 @@ class WP_Travel_Cart {
 		}
 		return false;
 
+	}
+
+	/**
+	 * Validate date
+	 *
+	 * @return bool true | false.
+	 */
+	public static function is_request_date_valid( $trip_id, $pricing_key, $test_date ) {
+
+		if ( '' === $trip_id || '' === $pricing_key || '' === $test_date ) {
+
+			return false;
+		}
+
+		$trip_multiple_date_options = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+
+		$available_dates = wp_travel_get_pricing_variation_start_dates( $trip_id, $pricing_key );
+
+		if ( 'yes' === $trip_multiple_date_options && is_array( $available_dates ) && ! empty( $available_dates ) ) {
+
+			return in_array( $test_date, $available_dates, true );
+		}
+		else {
+
+			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
+			$test_date = ( new DateTime( $test_date ) )->format( 'Y-m-d' );
+
+			if ( strtotime( $date_now ) <= strtotime( $test_date ) ) {
+
+				return true;
+			}
+
+			return false;
+
+		}
 	}
 
 }
