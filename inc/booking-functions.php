@@ -35,6 +35,8 @@ function wp_travel_booking_form_fields() {
 		$trip_duration = $_REQUEST['trip_duration'];
 	}
 
+	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key']  ? $_GET['price_key'] : '';
+
 	$booking_fileds = array(
 		'first_name'	=> array(
 			'type' => 'text',
@@ -169,6 +171,13 @@ function wp_travel_booking_form_fields() {
 			'cols' => 150,
 			'priority' => 90,
 			'wrapper_class' => 'full-width textarea-field',
+		),
+		'trip_price_key' => array(
+			'type' => 'hidden',
+			'name' => 'price_key',
+			'id' => 'wp-travel-price-key',
+			'default' => $price_key,
+			'priority' => 98,
 		),
 	);
 	if ( isset( $max_pax ) && '' != $max_pax ) {
