@@ -438,7 +438,7 @@ function wp_travel_payment_booking_message( $message ) {
 
 // Calculate Total Cart amount.
 function wp_travel_get_total_amount() {
-	$response = array( 'status' => 'fail', 'message' => __( 'Invalid' ),  'total_amount' => 0, 'payment_amount' => 0 );
+	$response = array( 'status' => 'fail', 'message' => __( 'Invalid', 'wp-travel' ),  'total_amount' => 0, 'payment_amount' => 0 );
 	if ( ! isset( $_GET['wt_query_amount'] ) ) {
 		return;
 	}
@@ -457,11 +457,11 @@ function wp_travel_get_total_amount() {
 	$price_per 	= wp_travel_get_price_per_text( $trip_id );
 
 	if ( $trip_id < 1 ) {
-		$response['message'] = __( 'Trip not selected' );
+		$response['message'] = __( 'Trip not selected', 'wp-travel' );
 	}
 
 	if ( ! wp_travel_is_itinerary( $trip_id ) ) {
-		$response['message'] = __( 'Invalid post type' );
+		$response['message'] = __( 'Invalid post type', 'wp-travel' );
 	}
 
 	$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
@@ -481,7 +481,7 @@ function wp_travel_get_total_amount() {
 	// Success.
 	if ( $response['payment_amount'] > 0 && $response['total_amount'] > 0 ) {
 		$response['status'] = 'success';
-		$response['message'] = __( 'Success' );
+		$response['message'] = __( 'Success', 'wp-travel' );
 
 		if ( strtolower( $price_per ) === 'person' ) {
 			$response['total_amount'] *= $pax;

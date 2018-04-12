@@ -105,7 +105,7 @@ jQuery(document).ready(function($) {
         $('#wp_travel_rate_val').val($(this).attr('data-id'));
     });
     // Rating script ends.
-    // 
+    //
 
     $(document).on('click', '.wp-travel-count-info', function(e) {
         e.preventDefault();
@@ -244,7 +244,10 @@ jQuery(document).ready(function($) {
                 inline: true,
                 onRenderCell: function(date, cellType) {
                     if (cellType == 'day') {
-                        availabledate = availabledate.map((d) => (new Date(d)).toLocaleDateString("en-US"));
+                        availabledate = availabledate.map( function(d){
+                          return (new Date(d)).toLocaleDateString("en-US");
+                        });
+                        // availabledate = availabledate.map((d) => (new Date(d)).toLocaleDateString("en-US"));
                         isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
                         return {
                             disabled: isDisabled

@@ -135,7 +135,7 @@ class WP_Travel_Checkout {
 		<div class="wp-travel-billing">            
 			<div class="wp-travel-tab-wrapper">
 				<div class="col-md-7 clearfix columns" >
-					<h3><?php esc_html_e( 'Billing info' ) ?></h3>
+					<h3><?php esc_html_e( 'Billing info', 'wp-travel' ) ?></h3>
 					<?php wp_travel_get_booking_form() ?>
 				</div>
 
@@ -179,7 +179,7 @@ class WP_Travel_Checkout {
 									</tr>
 								<?php } ?>               
 								<tr class="order-total">
-								<th><?php esc_html_e( 'Total' ) ?></th>
+								<th><?php esc_html_e( 'Total', 'wp-travel' ) ?></th>
 								<td><strong><span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol() ?></span><span class="wp-travel-total-price-amount amount">0</span></strong> </td>
 								</tr>
 							</tfoot>
