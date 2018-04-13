@@ -508,8 +508,13 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
     .wp-travel-field-before.wp-travel-currency-symbol {
         position: absolute;
-        top: 33px;
-        left: 0px;
+        position: absolute;
+        top: 24px;
+        left: -11px;
+        height: 36px;
+        line-height: 38px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
     }
 }
 
