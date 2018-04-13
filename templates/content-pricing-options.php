@@ -49,7 +49,7 @@ $post_id = $post->ID;
 
 	$wp_travel_enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
 ?>
-<div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : ''; ?>" class="tab-list-content">
+<div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
 <?php
 $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 
