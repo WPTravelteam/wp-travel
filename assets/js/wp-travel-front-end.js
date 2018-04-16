@@ -244,8 +244,8 @@ jQuery(document).ready(function($) {
                 inline: true,
                 onRenderCell: function(date, cellType) {
                     if (cellType == 'day') {
-                        availabledate = availabledate.map( function(d){
-                          return (new Date(d)).toLocaleDateString("en-US");
+                        availabledate = availabledate.map(function(d) {
+                            return (new Date(d)).toLocaleDateString("en-US");
                         });
                         // availabledate = availabledate.map((d) => (new Date(d)).toLocaleDateString("en-US"));
                         isDisabled = !availabledate.includes(date.toLocaleDateString("en-US"));
@@ -268,7 +268,11 @@ jQuery(document).ready(function($) {
 
     $(document).ready(function($) {
 
-        $('input').parsley();
+        if (typeof parsley == "function") {
+
+            $('input').parsley();
+
+        }
 
         $('.add-to-cart-btn').click(function(event) {
             event.preventDefault();
