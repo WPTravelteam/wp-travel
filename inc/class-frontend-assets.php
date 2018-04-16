@@ -153,7 +153,7 @@ class WP_Travel_Frontend_Assets {
 				'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
 				'currency_code' => $currency_code,
 				'currency_symbol' => wp_travel_get_currency_symbol(),
-				'price_per'		=> wp_travel_get_price_per_text( $trip_id ),
+				'price_per'		=> wp_travel_get_price_per_text( $trip_id, true ),
 				'trip_price'	=> $trip_price,
 				'payment_amount' => $payment_amount,
 			);

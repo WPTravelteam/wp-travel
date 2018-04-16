@@ -631,7 +631,7 @@ function wp_travel_get_price_per_fields() {
  * @param Number $post_id Current post id.
  * @since 1.0.5
  */
-function wp_travel_get_price_per_text( $post_id ) {
+function wp_travel_get_price_per_text( $post_id, $key = false ) {
 	if ( ! $post_id ) {
 		return;
 	}
@@ -640,6 +640,11 @@ function wp_travel_get_price_per_text( $post_id ) {
 		$per_person_text = 'person';
 	}
 	$price_per_fields = wp_travel_get_price_per_fields();
+
+	if ( true === $key ) {
+		return $per_person_text;
+	}
+
 	return $price_per_fields[ $per_person_text ];
 }
 
