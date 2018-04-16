@@ -116,7 +116,9 @@ class WP_Travel_Cart {
 							}
 							// Product Metas.
 							$trip_start_date = isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ? $_GET['trip_date'] : '';
-							$pax_label       = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing['type'];
+							$pricing_default_types = wp_travel_get_pricing_variation_options();
+							$pax_label       = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
+
 							$max_available   = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;
 
 							if ( $max_available ) {
