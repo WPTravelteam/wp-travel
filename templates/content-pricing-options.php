@@ -147,7 +147,10 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 							?>
 							</div>
 							<div class="wp-travel-calender-aside">
-							<?php $pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type; 
+							<?php 
+							$pricing_default_types = wp_travel_get_pricing_variation_options();
+
+							$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
 
 							$max_attr = '';
 							$min_attr = 'min=1';
