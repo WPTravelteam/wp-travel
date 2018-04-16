@@ -35,7 +35,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.3.0';
+		public $version = '1.3.1';
 		/**
 		 * The single instance of the class.
 		 *
