@@ -1276,7 +1276,7 @@ function wp_travel_archive_toolbar() {
  * @return void
  */
 function wp_travel_archive_wrapper_close() {
-	if ( is_wp_travel_archive_page() && ! is_admin() ) :
+	if ( ( is_wp_travel_archive_page() || is_search() ) && ! is_admin() ) :
 		$view_mode = wp_travel_get_archive_view_mode();	 ?>
 		<?php if ( 'grid' === $view_mode ) : ?>
 				</ul>
