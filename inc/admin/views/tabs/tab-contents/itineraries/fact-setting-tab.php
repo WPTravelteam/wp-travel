@@ -1,25 +1,25 @@
 <?php 
-if(!function_exists('wp_travel_trip_facts_setting_sample'))
-{
-  function wp_travel_trip_facts_setting_sample($fact = false) {
+if (!function_exists('wp_travel_trip_facts_setting_sample')) {
+  function wp_travel_trip_facts_setting_sample($fact = false)
+  {
     ob_start();
-    $str = random_int(1,1000000);
+    $str = random_int(1, 1000000);
     ?>
      <div class="sample">
         <select name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][type]" class="fact-type-changer">
           <option>Select a type</option>
-          <option value="single" <?php if(isset($fact['type']) && $fact['type'] == 'single') echo 'selected'; ?>>single</option>
-          <option value="multiple" <?php if(isset($fact['type']) && $fact['type'] == 'multiple') echo 'selected'; ?>>multiple</option>
-          <option value="text" <?php if(isset($fact['type']) && $fact['type'] == 'text') echo 'selected'; ?>>text</option>
+          <option value="single" <?php if (isset($fact['type']) && $fact['type'] == 'single') echo 'selected'; ?>>single</option>
+          <option value="multiple" <?php if (isset($fact['type']) && $fact['type'] == 'multiple') echo 'selected'; ?>>multiple</option>
+          <option value="text" <?php if (isset($fact['type']) && $fact['type'] == 'text') echo 'selected'; ?>>text</option>
         </select>
         <div>
         <input value="<?php echo isset($fact['name']) ? $fact['name'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][name]" placeholder="Enter field name" />
         </div>
-        <div class="fact-options" <?php if(!$fact || (isset($fact['type']) && !in_array($fact['type'],['single','multiple']))) : ?> style="display:none" <?php endif; ?>>
+        <div class="fact-options" <?php if (!$fact || (isset($fact['type']) && !in_array($fact['type'], ['single', 'multiple']))) : ?> style="display:none" <?php endif; ?>>
           <input value=""  name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][options]" class="fact-options-list"  placeholder="Enter values separeted by commas"/>
           <div class="options-holder">
-            <?php if(isset($fact['options']) && is_array($fact['options'])) : ?>
-              <?php foreach($fact['options'] as $option): ?>
+            <?php if (isset($fact['options']) && is_array($fact['options'])) : ?>
+              <?php foreach ($fact['options'] as $option) : ?>
               <span><?php echo $option; ?><input type="hidden" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][options][]" value="<?php echo $option; ?>"/><span class="option-deleter">X</span></span>
               <?php endforeach; ?>
             <?php endif; ?>
@@ -43,9 +43,9 @@ $settings = get_option('wp_travel_settings');
      <?php echo wp_travel_trip_facts_setting_sample(); ?>
   </div>
   <div id="fact-sample-collector">
-    <?php if(array_key_exists('wp_travel_trip_facts_settings',$settings)):?>
-      <?php foreach($settings['wp_travel_trip_facts_settings'] as $fact): ?>
-        <?php echo wp_travel_trip_facts_setting_sample($fact);?>
+    <?php if (array_key_exists('wp_travel_trip_facts_settings', $settings)) : ?>
+      <?php foreach ($settings['wp_travel_trip_facts_settings'] as $fact) : ?>
+        <?php echo wp_travel_trip_facts_setting_sample($fact); ?>
       <?php endforeach; ?>
     <?php endif; ?>
   </div>

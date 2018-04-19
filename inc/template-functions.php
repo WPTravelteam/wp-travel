@@ -584,7 +584,7 @@ function wp_travel_frontend_contents( $post_id ) {
 							<div class="wp-travel-row-wrap">
 								<ul>
 									<?php foreach($trip_facts as $fact): ?>
-									<li><span class="fact-label"><?php echo $fact['type']; ?></span>:<span class="fact-value"><?php echo is_array($fact['value']) ? implode(', ',$fact['value']) : $fact['value']; ?></span></li>
+										<li><?php if(isset($fact['icon'] )) : ?><i class="<?php echo $fact['icon'] ?>"></i><?php endif; ?><span class="fact-label"><?php echo $fact['type']; ?></span>:<span class="fact-value"><?php echo is_array($fact['value']) ? implode(', ',$fact['value']) : $fact['value']; ?></span></li>
 									<?php endforeach; ?>
 								</ul>
 							</div>
