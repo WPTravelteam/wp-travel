@@ -1369,6 +1369,79 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
+#fact-sample-collector{
+    
+    .form-table{
+        position: relative;
+        border-top: 1px solid #eee;
+        padding: 25px 0 10px;
+        display: block;
+
+        &:first-of-type{
+            border-top:none;
+        }
+
+        .open-close-row, 
+        .delete-row {
+            position: absolute;
+            top: 0;
+            button{
+                background-color:transparent;
+                border-color: #014966;
+                cursor:pointer;
+            }
+        }
+        .delete-row{
+            right:0;
+        }
+        .open-close-row{
+            right:50px;
+        }
+        .fact-open{
+            .dashicons{
+                transition:all 0.4s ease-in-out;
+            }
+        }
+        .toggle-row{
+            transition:height 0.4s ease-in-out;
+        }
+        &.open-table{
+            .toggle-row{
+                position:absolute;
+                opacity:0;
+                height:0;
+                transition:height 0.4s ease-in-out;
+            }
+            .fact-open{
+                .dashicons{
+                    transform:rotate(180deg);
+                    transition:all 0.4s ease-in-out;
+                }
+            }
+        }
+    }
+    .options-holder {
+        width: 300px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        padding: 5px 10px;
+        box-sizing: border-box;
+
+         p {
+            padding: 0px 0 4px !important;
+            border-bottom: 1px solid #dadada;
+
+            &:last-of-type{
+                border-bottom:none;
+            }
+        }
+    }
+    .option-deleter {
+        float: right;
+    }
+
+}
+
 .form-table{
 
     .checkbox-default-design{
