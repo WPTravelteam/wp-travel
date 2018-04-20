@@ -3,11 +3,11 @@
 
 
 <?php 
-if(!function_exists('wp_travel_trip_facts_setting_sample'))
-{
-  function wp_travel_trip_facts_setting_sample($fact = false) {
+if (!function_exists('wp_travel_trip_facts_setting_sample')) {
+  function wp_travel_trip_facts_setting_sample($fact = false)
+  {
     ob_start();
-    $str = random_int(1,1000000);
+    $str = random_int(1, 1000000);
     ?>
 
   <table class="form-table">
@@ -89,9 +89,9 @@ $settings = get_option('wp_travel_settings');
      <?php echo wp_travel_trip_facts_setting_sample(); ?>
   </div>
   <div id="fact-sample-collector">
-    <?php if(array_key_exists('wp_travel_trip_facts_settings',$settings)):?>
-      <?php foreach($settings['wp_travel_trip_facts_settings'] as $fact): ?>
-        <?php echo wp_travel_trip_facts_setting_sample($fact);?>
+    <?php if (array_key_exists('wp_travel_trip_facts_settings', $settings)) : ?>
+      <?php foreach ($settings['wp_travel_trip_facts_settings'] as $fact) : ?>
+        <?php echo wp_travel_trip_facts_setting_sample($fact); ?>
       <?php endforeach; ?>
     <?php endif; ?>
   </div>
