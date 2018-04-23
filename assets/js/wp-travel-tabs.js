@@ -190,5 +190,42 @@
         $('.open-all-link').show();
     });
 
+    //Facts Tab.
+    jQuery(document).on('click', '.fact-open', function() {
+        jQuery(this).parents('table').toggleClass('open-table');
+        jQuery(this).toggleClass('hide');
+    })
+
+
+    jQuery(document).on('click', '.new-fact-setting-adder', function() {
+        jQuery('#fact-sample-collector').append(jQuery('#sampler').html().split('$index').join(Math.random().toString(36).substring(2, 15)));
+    });
+
+    jQuery(document).on('click', '.fact-remover', function() {
+        confirm('Are you sure ?') && jQuery(this).parent().parent().parent().parent().remove();
+    });
+
+    jQuery(document).on('change', '.fact-type-changer', function() {
+        const val = jQuery(this).find(':selected').val();
+        const multiple = jQuery('.multiple-val');
+        ['single', 'multiple'].includes(val) ? multiple.fadeIn() : multiple.fadeOut();
+    })
+
+    jQuery(document).on('click', '.option-deleter', function() {
+        jQuery(this).parent().remove();
+    })
+
+    jQuery(document).on('keypress', '.fact-options-list', function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            if (jQuery(this).val() == '') {
+                return;
+            }
+            const val = jQuery(this).val();
+            jQuery(this).val('')
+            jQuery(this).siblings('.options-holder').append('<p>' + val + '<input type="hidden" name="' + jQuery(this).attr('name') + '[]" value="' + val + '"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>')
+        }
+    });
+
 
 }(jQuery));
