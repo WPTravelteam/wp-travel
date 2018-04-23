@@ -130,7 +130,7 @@ $content = fact_html();
       $settings = isset($settings['wp_travel_trip_facts_settings']) ? array_values($settings['wp_travel_trip_facts_settings']) : [];
    ?>
     <?php if(count($settings) > 0) : ?>
-        <input onclick="addFact()" type="button" value="Add New Question" class="button button-primary">
+        <input onclick="addFact()" type="button" value="Add New Fact" class="button button-primary">
     <?php else: ?>
     There are no labels currently. Click <a href="<?php echo site_url('wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts'); ?>">here</a> to add one.
     <?php endif; ?>
