@@ -1478,6 +1478,18 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
         }
     } 
+    &.fact-table{
+
+        .panel-wrap{
+            label{
+                display:block;
+            }
+            select{
+                min-width:150px;
+            }
+        }
+
+    }
 }
 .wp-travel-tabs-contents{
 

@@ -64,18 +64,33 @@ function fact_html($fact = [], $index = false){
             <div id="collapse-<?php echo $index ? $index: '$index'; ?>" class="panel-collapse collapse <?php $index ? '' : 'in' ?>" role="tabpanel" aria-labelledby="heading-<?php echo $index ?$index: '$index'; ?>">
                 <div class="panel-body">
                     <div class="panel-wrap">
-                        <label>Select type</label>
-                        <select class="fact-type-selecter" name="<?php $index && print_r('wp_travel_trip_facts['.$index.'][type]') ?>">
-                        <?php if(!isset($type)): ?>
-                            <option value="">Select a label</option>
-                        <?php endif; ?>    
-                        <?php foreach($settings as $key => $setting): ?>
-                                <option <?php if(isset($type) && $type == $setting['name']):$settingss = $setting; $selected = $setting['type']; ?> selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="fact-holder">
-                            <?php isset($selected) && call_user_func('wp_travel_fact_'.$selected, $fact, $index, $settingss)?>
-                        </div>
+                        <table class="form-table">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                         <label>Select type</label>
+                                    </th>
+                                    <td>
+                                        <select class="fact-type-selecter" name="<?php $index && print_r('wp_travel_trip_facts['.$index.'][type]') ?>">
+                                        <?php if(!isset($type)): ?>
+                                            <option value="">Select a label</option>
+                                        <?php endif; ?>    
+                                        <?php foreach($settings as $key => $setting): ?>
+                                                <option <?php if(isset($type) && $type == $setting['name']):$settingss = $setting; $selected = $setting['type']; ?> selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name']); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="fact-holder faq-question-text">
+                                    <th>
+                                         <label>Choose a value</label>
+                                    </th>
+                                    <td>
+                                         <?php isset($selected) && call_user_func('wp_travel_fact_'.$selected, $fact, $index, $settingss)?>
+                                    </td>
+                                </tr >
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
