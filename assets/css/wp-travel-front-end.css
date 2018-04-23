@@ -1841,6 +1841,43 @@ ul.availabily-list {
     right: auto;
     left: 0;
     margin-top: 0; } }
+.tour-info {
+  margin: 0 0 30px; }
+  .tour-info .tour-info-box {
+    border: 1px solid #e0e0e0;
+    background: #f1f1f1;
+    padding: 20px 25px; }
+  .tour-info .tour-info-column {
+    width: 100%;
+    float: left;
+    display: -webkit-flex;
+    display: -mox-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    justify-content: left; }
+    .tour-info .tour-info-column .tour-info-item {
+      display: inline-flex;
+      font-style: italic;
+      color: #595959;
+      width: 33.3333%;
+      float: left;
+      margin: 2px 0;
+      padding: 0 5px; }
+      @media (max-width: 992px) {
+        .tour-info .tour-info-column .tour-info-item {
+          width: 50%; } }
+      @media (max-width: 767px) {
+        .tour-info .tour-info-column .tour-info-item {
+          width: 100%; } }
+      .tour-info .tour-info-column .tour-info-item i {
+        font-size: 16px;
+        padding-right: 10px;
+        line-height: 25px; }
+      .tour-info .tour-info-column .tour-info-item .tooltip-area i {
+        padding-left: 10px; }
+
 .wp-travel-ecommerse .wp-travel-ecommerse-message {
   padding: 1em 2em 1em 3.5em;
   margin: 0 0 2em;

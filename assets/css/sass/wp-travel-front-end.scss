@@ -2502,6 +2502,56 @@ ul.availabily-list{
 
 //end
 
+
+//trips facts
+.tour-info {
+    margin: 0 0 30px;
+    .tour-info-box {
+        border:1px solid #e0e0e0;
+        background: #f1f1f1;
+        padding: 20px 25px;
+    }
+    .tour-info-column {
+        width: 100%;
+        float: left;
+        display: -webkit-flex;
+        display: -mox-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+        -moz-flex-flow: row wrap;
+        justify-content: left;
+        .tour-info-item {
+            display: inline-flex;
+            font-style: italic;
+            color: #595959;
+            width: 33.3333%;
+            float: left;
+            margin: 2px 0;
+            padding:0 5px;
+            @include sidr-view{
+                width:50%;
+            }
+            @include mob{
+                width:100%;
+            }
+            i {
+                font-size: 16px;
+                padding-right: 10px;
+                line-height: 25px;
+            }
+            .tooltip-area{
+                i{
+                    padding-left:10px;
+                }
+            }
+        }
+    }
+}
+
+//end
+
+
 //cart page
 
 

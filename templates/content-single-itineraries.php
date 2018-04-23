@@ -54,6 +54,7 @@ do_action( 'wp_travel_before_content_start');
 	         <div class="wp-travel-feature-slide-content featured-detail-section right-plot">
 	           <div class="right-plot-inner-wrap">
 		         	<?php do_action( 'wp_tarvel_before_single_title', get_the_ID() ) ?>
+
 		         	<?php $show_title = apply_filters( 'wp_travel_show_single_page_title', true ); ?>
 		         	<?php if ( $show_title ) : ?>
 		         	<header class="entry-header">
@@ -64,6 +65,70 @@ do_action( 'wp_travel_before_content_start');
 				</div>
 	        </div>
 	    </div>
+
+
+	    <div class="tour-info">
+			<div class="tour-info-box clearfix">
+                <div class="tour-info-column clearfix">
+                    <span class="tour-info-item tour-info-type">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        Tour Type: Special Tour                                                  
+                    </span>
+                    <span class="tour-info-item tour-info-address">
+                         <i class="fa fa-map-marker" aria-hidden="true"></i>
+                         Location: Nha Trang, Vietnam                                                    
+                    </span>
+                    <span class="tour-info-item tour-info-duration">
+                         <i class="fa fa-clock-o" aria-hidden="true"></i>
+                         Trip duration: 4 day 3 night                                              
+                    </span>
+                    <span class="tour-info-item tour-info-destination">
+                         <i class="fa fa-globe" aria-hidden="true"></i>
+                         Continent: Asia                                                    
+                    </span>
+                    
+                    
+                    <span class="tour-info-item tour-info-date">
+                         <i class="fa fa-calendar" aria-hidden="true"></i>
+                         Availability: 2018-10-31
+                         <span class="tooltip-area" title="Click here to see othere's available dates.">
+                           <a href="#availabily-wrapper"> <i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        </span>
+                    </span>
+                    
+                    <span class="tour-info-item tour-info-age-limit">
+                        <i class="fa fa-user"></i>
+                        Min Age : 10+
+                    </span>
+                    <span class="tour-info-item tour-info-age-limit">
+                        <i class="fa fa-users"></i>
+                        Group Size : 1-20
+                    </span>
+                    <span class="tour-info-item tour-grade">
+                        <i class="fa fa-signal"></i>
+                        Grade: Moderate
+                    </span>
+                    <span class="tour-info-item tour-altitude">
+                        <i class="fa fa-area-chart"></i>
+                        Max Altitude: 1350m
+                    </span>
+                    
+                    <span class="tour-info-item tour-best-time">
+                        <i class="fa fa-cloud"></i>
+                        Best Season: Sept - Nov &amp; Mar - May
+                    </span>
+                    <span class="tour-info-item tour-accomodation">
+                        <i class="fa fa-bed"></i>
+                        Accomodation: Hotel
+                    </span>
+                    <span class="tour-info-item tour-transportation">
+                        <i class="fa fa-car"></i>
+                        Transportation: Via car /Bus/fly
+                    </span>
+                </div>
+            </div>
+		</div>
+
 	    <?php do_action( 'wp_travel_after_single_itinerary_header', get_the_ID() ); ?>
 	</div><!-- .summary -->
 
