@@ -23,7 +23,7 @@ function wp_travel_fact_single($fact, $index, $setting = []){
 function wp_travel_fact_multiple($fact, $index, $setting = []){
     foreach($setting['options'] as $option):
     ?>
-    <input type="checkbox" <?php if(in_array($option, $fact['value'])) echo 'checked'; ?> name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id=""><?php echo $option; ?></input>
+    <input type="checkbox" <?php if(isset($fact['value']) && is_array($fact['value']) && in_array($option, $fact['value'])) echo 'checked'; ?> name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id=""><?php echo $option; ?></input>
     <?php
     endforeach;
 }

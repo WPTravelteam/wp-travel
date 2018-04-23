@@ -92,6 +92,10 @@ $alabaster: #f7f7f1; // Red like color.
 .icon-tabs:before {
     content: "\e900";
 }
+.icon-fact:before{
+    coontent: "\e908";
+}
+
 
 // Remove wordpress metabox styles and hide buttons.
 .wp-travel-clean-metabox {
@@ -1369,6 +1373,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
+
+#fact-app{
+    .new-fact-setting-adder {
+        background-color: #0085ba;
+        color: #fff;
+        border: 1px solid #0085ba;
+        padding: 5px 15px;
+        line-height: 1.5;
+        cursor: pointer;
+        margin-top: 25px;
+    }
+}
+
 #fact-sample-collector{
     
     .form-table{
@@ -1384,7 +1401,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         .open-close-row, 
         .delete-row {
             position: absolute;
-            top: 0;
+            top: 25px;
             button{
                 background-color:transparent;
                 border-color: #014966;
@@ -1420,6 +1437,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             }
         }
     }
+
+    
     .options-holder {
         width: 300px;
         border: 1px solid #ddd;

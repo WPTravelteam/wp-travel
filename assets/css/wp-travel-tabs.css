@@ -103,6 +103,11 @@
         content: '\e904';
         font-size: 12px;
         line-height: 20px; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-trip_facts a:before {
+        font-family: icomoon;
+        content: '\e908';
+        font-size: 20px;
+        line-height: 20px; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;

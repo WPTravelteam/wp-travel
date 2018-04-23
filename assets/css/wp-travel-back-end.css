@@ -38,6 +38,9 @@
 .icon-tabs:before {
   content: "\e900"; }
 
+.icon-fact:before {
+  coontent: "\e908"; }
+
 .wp-travel-clean-metabox {
   background: #f7f7f1;
   overflow: hidden; }
@@ -986,6 +989,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   background-color: #0085ba;
   border-color: #0085ba; }
 
+#fact-app .new-fact-setting-adder {
+  background-color: #0085ba;
+  color: #fff;
+  border: 1px solid #0085ba;
+  padding: 5px 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  margin-top: 25px; }
+
 #fact-sample-collector .form-table {
   position: relative;
   border-top: 1px solid #eee;
@@ -996,7 +1008,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   #fact-sample-collector .form-table .open-close-row,
   #fact-sample-collector .form-table .delete-row {
     position: absolute;
-    top: 0; }
+    top: 25px; }
     #fact-sample-collector .form-table .open-close-row button,
     #fact-sample-collector .form-table .delete-row button {
       background-color: transparent;

@@ -153,6 +153,14 @@ $alto: #ddd;
                     line-height: 20px;
                 }
             }
+            &#wp-travel-tab-trip_facts a{
+                &:before{
+                    font-family: icomoon;
+                    content: '\e908';
+                    font-size: 20px;
+                    line-height: 20px;
+                }
+            }
         }
     }
     .wp-travel-tabs-contents {

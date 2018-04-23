@@ -10,9 +10,18 @@ if (!function_exists('wp_travel_trip_facts_setting_sample')) {
     $str = random_int(1, 1000000);
     ?>
 
-  <table class="form-table">
+  <table class="form-table open-table">
   <tbody>
-    <tr>
+      <tr >
+      <th>
+        <?php echo esc_html( 'Enter field name','wp-travel' ); ?>
+      </th>
+      <td>
+         <input value="<?php echo isset($fact['name']) ? $fact['name'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][name]" placeholder="Enter field name" />
+
+      </td>
+      </tr>
+    <tr class="toggle-row">
       <th>
         <?php echo esc_html( 'Select a type','wp-travel' ); ?>
       </th>
@@ -26,15 +35,7 @@ if (!function_exists('wp_travel_trip_facts_setting_sample')) {
       </td>
     </tr>
 
-    <tr class="toggle-row">
-      <th>
-        <?php echo esc_html( 'Enter field name','wp-travel' ); ?>
-      </th>
-      <td>
-         <input value="<?php echo isset($fact['name']) ? $fact['name'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][name]" placeholder="Enter field name" />
 
-      </td>
-      </tr>
       <tr class="toggle-row">
         <th>
           <?php echo esc_html( 'Enter value separeted','wp-travel' ); ?>
@@ -115,7 +116,7 @@ jQuery(document).ready(function () {
   });
 
   jQuery(document).on('click','.fact-remover', function(){
-    confirm('Are you sure ?')&&jQuery(this).parent().parent().parent().remove();
+    confirm('Are you sure ?')&&jQuery(this).parent().parent().parent().parent().remove();
   });
 
   jQuery(document).on('change','.fact-type-changer', function(){
