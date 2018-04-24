@@ -29,7 +29,7 @@ function wp_travel_fact_multiple($fact, $index, $setting = []){
 
 function wp_travel_fact_text($fact, $index, $setings = []){
 	?>
-		<textarea name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="" cols="30" rows="10"><?php echo $fact['value']; ?></textarea>
+		<input type="text" name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="" value="<?php echo $fact['value']; ?>">
 	<?php
 }
 
@@ -46,6 +46,7 @@ function fact_html($fact = [], $index = false){
 	if(isset($fact['type']) && !in_array($fact['type'], $name)){
 		return '';
 	}
+
 	ob_start();
 	is_array($fact) && extract($fact);
 ?>
@@ -70,7 +71,7 @@ function fact_html($fact = [], $index = false){
 										 <label>Select type</label>
 									</th>
 									<td>
-										<select class="fact-type-selecter" data-index="<?php echo esc_attr($index);?>" name="<?php $index && print_r('wp_travel_trip_facts['.$index.'][type]') ?>">
+										<select class="fact-type-selecter" data-index="<?php echo $index ? $index : '$index'; ?>" name="<?php $index && print_r('wp_travel_trip_facts['.$index.'][type]') ?>">
 										<?php if(!isset($type)): ?>
 											<option value="">Select a label</option>
 										<?php endif; ?>    
@@ -82,9 +83,9 @@ function fact_html($fact = [], $index = false){
 								</tr>
 								<tr class="fact-holder faq-question-text">
 									<th>
-										 <label>Choose a value</label>
+										<label><?php echo esc_html( 'Value', 'wp-admin' ); ?></label>
 									</th>
-									<td class="fact-<?php echo esc_attr( $index ); ?>">
+									<td class="fact-<?php echo $index ? $index : '$index'; ?>">
 										 <?php isset($selected) && call_user_func('wp_travel_fact_'.$selected, $fact, $index, $settingss)?>
 									</td>
 								</tr >
@@ -171,7 +172,7 @@ $content = fact_html();
 		text: function(obj, unique){
 			val = this.val();
 			index = this.data('index');
-			jQuery('.fact-'+index).html(jQuery('<textarea>').attr('name','wp_travel_trip_facts['+unique+'][value]'));
+			jQuery('.fact-'+index).html(jQuery('<input type="text">').attr('name','wp_travel_trip_facts['+unique+'][value]'));
 		}
 	}
 
