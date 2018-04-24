@@ -1255,7 +1255,7 @@ function wp_travel_get_frontend_tabs() {
 	
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
 
-		$wp_travel_tabs = $settings['global_tab_settings'];	
+		$wp_travel_tabs = $settings['global_tab_settings'];
 
 	}
 
