@@ -239,17 +239,7 @@
         // text-align: center;
         background: #f9f9f9;
         @include clearfix;
-        // &.fixed {
-        //     position: fixed;
-        //     top: 0;
-        //     z-index: 99;
-        //     width: inherit;
-        //     left: 0;
-        //     right: 0;
-        //     -moz-transition: all 0.3s ease-in-out;
-        //     -webkit-transition: all 0.3s ease-in-out;
-        //     transition: all 0.3s ease-in-out;
-        // }
+ 
         li {
             background: none;
             display: inline-block;
@@ -2685,7 +2675,7 @@ ul.availabily-list{
             -o-transition: all 0.3s ease 0s;
             transition: all 0.3s ease 0s;
         }
-        a {
+        a,input {
             background: #383838;
             color: #fff !important;
             font-size: 14px;
