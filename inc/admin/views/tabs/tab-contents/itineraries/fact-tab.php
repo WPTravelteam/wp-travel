@@ -85,7 +85,7 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 				<h4 class="panel-title">
 					<div class="wp-travel-sorting-handle"></div>
 					<a class="<?php $index && print_r('collapsed') ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
-						<span bind="fact_question_<?php echo $index ? $index : '$index'; ?>"><?php echo esc_html( $fact['label'] ); ?> <span>
+						<span><?php echo esc_html( $fact['label'] ); ?> <span>
 						<span class="collapse-icon"></span>
 					</a>
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
