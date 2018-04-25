@@ -127,6 +127,16 @@
         }
     });
 
+    $('#wp_travel_trip_facts_enable').change(function() {
+        if ($(this).is(':checked')) {
+            $('#fact-app').show();
+        } else {
+            $('#fact-app').hide();
+        }
+    });
+
+
+
     // Tax options change function.
     if ($('#trip_tax_enable').is(':checked')) {
         $('#wp-travel-tax-percentage').show();

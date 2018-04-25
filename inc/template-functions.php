@@ -519,11 +519,11 @@ function wp_travel_single_location( $post_id ) {
 }
 
 /**
- * wp_travel_frontend_trp_facts Frontend facts content.
+ * wp_travel_frontend_trip_facts Frontend facts content.
  *
  * @since 1.3.2
  */
-function wp_travel_frontend_trp_facts(  $post_id ) {
+function wp_travel_frontend_trip_facts(  $post_id ) {
 
 	if ( ! $post_id ) {
 		return;
@@ -533,12 +533,46 @@ function wp_travel_frontend_trp_facts(  $post_id ) {
 	if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
 
 		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
-
-		print_r( $wp_travel_trip_facts );
+	} else {
+		return '';
 	}
+	 
+	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) { 
+	?>
+		<!-- TRIP FACTS -->
+		<div class="tour-info">
+			<div class="tour-info-box clearfix">
+				<div class="tour-info-column clearfix">
+					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+						<span class="tour-info-item tour-info-type">
+							<i class="fa <?php echo esc_attr( $trip_fact['icon'] ); ?>" aria-hidden="true"></i>
+							<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
+							<?php 
+							if ( $trip_fact['type'] === 'multiple' ) {
+								$count = count( $trip_fact['value'] );
+								$i = 1;
+								foreach ( $trip_fact['value'] as $key => $val ) {
+									echo esc_html( $val );
+									if ( $count > 1 && $i !== $count ) {
+										echo esc_html( ',', 'wp-travel' );
+									}
+								$i++;
+								}
 
-	return;
+							}
+							else {
+								echo esc_html( $trip_fact['value'] );
+							}
 
+							?>  
+						</span>
+					<?php endforeach; ?>
+                </div>
+            </div>
+		</div>
+		<!-- TRIP FACTS END -->
+	<?php 
+	} 
 }
 
 /**
@@ -1638,7 +1672,7 @@ add_action( 'wp_travel_after_single_title', 'wp_travel_single_excerpt', 1 );
 add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trp_facts');
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trip_facts');
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 20);
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map', 20 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 20 );

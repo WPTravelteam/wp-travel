@@ -84,9 +84,27 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 	}
 }
 $settings = get_option('wp_travel_settings');
-?>
 
-<div id="fact-app">
+$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
+
+?>
+<table class="form-table">
+	<tr>
+		<th><label for="wp_travel_trip_facts_enable"><?php esc_html_e( 'Trip Facts', 'wp-travel' ) ?></label></th>
+		<td>
+			<span class="show-in-frontend checkbox-default-design">
+				<label data-on="ON" data-off="OFF">
+					<input type="checkbox" value="yes" <?php checked( 'yes', $wp_travel_trip_facts_enable ) ?> name="wp_travel_trip_facts_enable" id="wp_travel_trip_facts_enable"/>		
+					<span class="switch">
+				</span>
+				</label>
+			</span>
+			<p class="description"><?php esc_html_e( 'Enable Trip Facts display on trip single page.', 'wp-travel' ) ?>
+			</p>
+		</td>
+	</tr>
+</table>
+<div <?php  echo 'yes' !== $wp_travel_trip_facts_enable ? 'style="display:none"' : ''; ?> id="fact-app">
 	<div id="sampler" style="display:none">
 		<?php echo wp_travel_trip_facts_setting_sample(); ?>
 	</div>

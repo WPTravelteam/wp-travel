@@ -983,6 +983,10 @@ class WP_Travel_Admin_Settings {
 			$settings['payment_option_paypal'] = $payment_option_paypal;
 			// Merged Standard paypal Addons ends @since 1.2.1
 
+			$wp_travel_trip_facts_enable = ( isset( $_POST['wp_travel_trip_facts_enable'] ) && '' !== $_POST['wp_travel_trip_facts_enable'] ) ? 'yes' : 'no';
+
+			$settings['wp_travel_trip_facts_enable'] = $wp_travel_trip_facts_enable;
+
 			$indexed = $_POST['wp_travel_trip_facts_settings'];
 			if ( array_key_exists( '$index', $indexed ) ){
 				unset ($indexed['$index'] );
