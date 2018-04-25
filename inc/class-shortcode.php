@@ -21,6 +21,7 @@ class Wp_Travel_Shortcodes {
 	    add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wp_travel_trip_facts_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -322,5 +323,91 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	return $data;
 
 }
+	/**
+	 * Trip facts Shortcode callback.
+	 */
+	public function wp_travel_trip_facts_shortcode( $atts, $content = '' ) {
+
+		$trip_id = ( isset( $atts['id'] ) && '' != $atts['id'] ) ? $atts['id'] : false;
+
+		if ( ! $trip_id ) {
+
+			return;
+		}
+
+		$settings = wp_travel_get_settings();
+
+		if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) && ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
+			return '';
+		}
+
+		$wp_travel_trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
+
+		if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
+
+			$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
+
+		} else {
+		return '';
+		}
+
+		if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
+
+				ob_start();
+			?>
+
+			<!-- TRIP FACTS -->
+			<div class="tour-info">
+				<div class="tour-info-box clearfix">
+					<div class="tour-info-column clearfix">
+						<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+							<?php
+
+								$icon = array_filter( $settings['wp_travel_trip_facts_settings'], function( $setting ) use ( $trip_fact ) {
+
+									return $setting['name'] === $trip_fact['label'];
+								} );
+
+							foreach ( $icon as $key => $ico ) {
+
+								$icon = $ico['icon'];
+							}
+							?>
+							<span class="tour-info-item tour-info-type">
+								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
+								<?php 
+								if ( $trip_fact['type'] === 'multiple' ) {
+									$count = count( $trip_fact['value'] );
+									$i = 1;
+									foreach ( $trip_fact['value'] as $key => $val ) {
+										echo esc_html( $val );
+										if ( $count > 1 && $i !== $count ) {
+											echo esc_html( ',', 'wp-travel' );
+										}
+									$i++;
+									}
+
+								}
+								else {
+									echo esc_html( $trip_fact['value'] );
+								}
+
+								?>  
+							</span>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+			<!-- TRIP FACTS END -->
+			<?php
+				
+				$content = ob_get_clean();
+			
+
+			return $content;
+
+		}
+	}
 
 }
