@@ -528,6 +528,14 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+	$settings = wp_travel_get_settings();
+
+	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
+
+	if ( 'no' === $wp_travel_trip_facts_enable ) {
+		return;
+	}
+
 	$wp_travel_trip_facts = get_post_meta( $post_id, 'wp_travel_trip_facts', true );
 
 	if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
