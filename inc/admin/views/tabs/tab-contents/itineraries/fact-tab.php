@@ -137,7 +137,14 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 	return $content;
 }
 
-if ( count( $settings ) > 0 ) :
+if ( isset( $settings['wp_travel_trip_facts_settings'] ) && count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
+
+	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
+
+	if ( 'no' === $wp_travel_trip_facts_enable ) {
+		$settings_url = site_url( 'wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts' );
+		printf( __( 'Trip facts are disabled insettings currently. Click %1$1shere%2$2s to enable', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
+	}
 
 	if ( '' !== $wp_travel_trip_facts ) {
 	?>
@@ -215,7 +222,7 @@ $fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_val
 	</div>
 </script>
 <?php 
-else :
+} else {
 	$settings_url = site_url( 'wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts' );
-	sprintf( __( 'There are no labels currently. Click %1$1shere%2$2s to add one.', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
-endif;
+	printf( __( 'There are no labels set currently. Click %1$1shere%2$2s to add one.', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
+}
