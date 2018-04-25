@@ -450,7 +450,7 @@ function wp_travel_get_total_amount() {
 
 	$total = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
 
-	if ( $enable_partial && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
+	if ( wp_travel_is_partial_payment_enabled() && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
 		$total = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : 0;
 	}
 	
