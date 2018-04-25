@@ -548,7 +548,7 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 	} else {
 		return '';
 	}
-	 
+
 	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) { 
 	?>
 		<!-- TRIP FACTS -->
@@ -556,8 +556,20 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 			<div class="tour-info-box clearfix">
 				<div class="tour-info-column clearfix">
 					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+						<?php
+
+							$icon = array_filter( $settings['wp_travel_trip_facts_settings'], function( $setting ) use ( $trip_fact ) {
+
+								return $setting['name'] === $trip_fact['label'];
+							} );
+
+						foreach ( $icon as $key => $ico ) {
+
+							$icon = $ico['icon'];
+						}
+						?>
 						<span class="tour-info-item tour-info-type">
-							<i class="fa <?php echo esc_attr( $trip_fact['icon'] ); ?>" aria-hidden="true"></i>
+							<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
 							<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
 							<?php 
 							if ( $trip_fact['type'] === 'multiple' ) {
