@@ -265,6 +265,58 @@ class WP_Travel_Cart {
 		unset( $this->attributes[ $id ] );
 		$this->write();
 	}
+
+	function get_total() {
+
+		$trips = $this->items;
+
+		$sub_total = 0;
+		$tax_amount = 0;
+
+		$sub_total_partial = 0;
+		$tax_amount_partial = 0;
+
+		// Total amount without tax.
+		foreach ( $trips as $cart_id => $trip ) :
+
+			$trip_price		= $trip['trip_price'];
+			$trip_price_partial = $trip['trip_price_partial'];			
+			$pax			= $trip['pax'];			
+			
+			$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
+			$sub_total += $single_trip_total;
+
+			$single_trip_total_partial =  wp_travel_get_formated_price( $trip_price_partial * $pax );
+			$sub_total_partial += $single_trip_total_partial;
+
+		endforeach;
+
+		$sub_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $sub_total ) );
+
+		// Adding tax to sub total;
+		if ( $tax_rate = wp_travel_is_taxable() ) : 
+			$tax_amount = wp_travel_get_formated_price( ( $sub_total * $tax_rate ) / 100 );
+			$tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
+		endif;
+
+		$total_trip_price = $sub_total + $tax_amount;
+		$total_trip_price_partial = $sub_total_partial + $tax_amount_partial;
+
+		$get_total = array(
+			'sub_total' => $sub_total,
+			'tax'		=> $tax_amount,
+			'total'		=> $total_trip_price,
+
+			// Total payble amount // Same as above price if partial payment not enabled.
+			'sub_total_partial' => $sub_total_partial,
+			'tax_partial'		=> $tax_amount_partial,
+			'total_partial'		=> $total_trip_price_partial,
+		);
+
+		$get_total = apply_filters( 'wp_travel_cart_get_total_fields', $get_total );
+		return $get_total;		
+
+	}
 }
 
 new WP_Travel_Cart();
