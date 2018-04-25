@@ -135,20 +135,19 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		'pax_label' 		=> $pax_label,
 		'max_available' 	=> $max_available,
 		'trip_start_date' 	=> $trip_start_date,
-		// 'price' 			=> $price
 	);
 	
 	$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
-	$payable_price = $trip_price;
+	$trip_price_partial = $trip_price;
 	
 	if ( $attrs['enable_partial'] ) {
 		$payout_percent = wp_travel_get_payout_percent( $trip_id );
 		if ( $payout_percent > 0 ) {
-			$payable_price = ( $trip_price * $payout_percent ) / 100;
-			$payable_price = wp_travel_get_formated_price( $payable_price );
+			$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
+			$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
 		}
 	}
-	$attrs['payable_price'] = $payable_price;
+	$attrs['trip_price_partial'] = $trip_price_partial;
 	
 	return $attrs;
 }

@@ -43,7 +43,6 @@ class WP_Travel_Ajax {
 		$price_key 	= isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
 
 		$trip_price = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, true );
-		$payable_price = $trip_price;
 		
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 

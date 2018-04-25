@@ -52,8 +52,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					<th class="text-right"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
 				</tr>
 			</thead>
-			<tbody>
-				<?php $total_trip_price = 0; ?>
+			<tbody>				
 				<?php foreach ( $trips as $cart_id => $trip ) : ?>
 					<?php
 					$trip_id 		= $trip['trip_id'];
@@ -64,7 +63,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$pax			= $trip['pax'];
 					$price_key		= isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$enable_partial	= $trip['enable_partial'];
-					$payable_price	= $trip['payable_price'];
+					$trip_price_partial	= $trip['trip_price_partial'];
 					
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available	= isset( $trip['max_available'] ) ? $trip['max_available'] : '';
@@ -73,13 +72,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					if ( $max_available ) {
 						$max_attr = 'max="' . $max_available . '"';
 					}
-
-					$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
-
-
-					$total_trip_price += $single_trip_total;
-					
-					?>
+					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );?>
 
 					<tr class="responsive-cart">
 						<td class="product-remove" >
@@ -141,35 +134,30 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				<?php endforeach; ?>						
 			</tbody>
 		</table>
-		
+		<?php $cart_amounts = $wt_cart->get_total(); ?>
 		<table class="ws-theme-cart-list table-total-info">
-			<?php if ( wp_travel_is_trip_price_tax_enabled() && isset( $trip_tax_details['tax_percentage'] ) && '' !== $trip_tax_details['tax_percentage'] && 'inclusive' !== $trip_tax_details['tax_type'] ) : ?>
+			<?php if ( $tax_rate = wp_travel_is_taxable() ) : ?>
 				<tr>
 					<th>
 						<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
 						<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?> 
 						<span class="tax-percent">
-							<?php
-							if ( isset( $trip_tax_details['tax_percentage'] ) ) {
-								echo esc_html( $trip_tax_details['tax_percentage'] );
-								esc_html_e( '%', 'wp-travel' );
-							} 
-						?>
+							<?php echo esc_html( $tax_rate ); esc_html_e( '%', 'wp-travel' ); ?>
 						</span></strong></p>
 					</th>
 					<td  class="text-right">
-						<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>0</strong></p>
-						<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>0</strong></p>
+						<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['sub_total'] ) ); ?></strong></p>
+						<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax'] ) ); ?></strong></p>
 					</td>
 				</tr>
-			<?php endif; ?>
+			<?php endif; ?>			
 			<tr>
 				<th>
 					<strong><?php echo esc_html( 'Total', 'wp-travel' ); ?></strong>
 				</th>
 				<td  class="text-right">
 					<p class="total">
-						<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol"><?php echo esc_html( wp_travel_get_formated_price( $total_trip_price ) ); ?></span></strong>
+						<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong>
 					</p>
 				</td>
 			</tr>
