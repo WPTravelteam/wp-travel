@@ -445,33 +445,19 @@ function wp_travel_get_total_amount() {
 	
 	$settings = wp_travel_get_settings();
 	global $wt_cart;
-	$trips = $wt_cart->getItems();
-	
-	$trip_price = 0;
-	$payable_price = 0;
-	$payable_tax   = 0;
-	if ( count( $trips ) > 0 ) {
-		foreach ( $trips as $cart_id => $trip ) :
-			$trip_price 	+= $trip['trip_price'] * $trip['pax'];
-			$payable_price	+= $trip['payable_price'] * $trip['pax'];
-			
-			// if ( $tax && $tax_exclusive ) {
-			// 	$payable_tax += 9;
-			// }
-		endforeach;
-	}
-	$return_price = $trip_price;
-	if ( $enable_partial = false && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
-		$return_price = $payable_price;
-	}
-	$return_price = apply_filters( 'wp_travel_cart_total', $return_price );
 
-	$return_price += $payable_tax;
+	$cart_amounts = $wt_cart->get_total();
+
+	$total = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
+
+	if ( $enable_partial && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
+		$total = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : 0;
+	}
 	
-	if ( $return_price > 0 ) {
+	if ( $total > 0 ) {
 		$response['status'] 	= 'success';
 		$response['message'] 	= __( 'Success', 'wp-travel' );
-		$response['total'] 		= $return_price;
+		$response['total'] 		= $total;
 	}
 	wp_send_json($response);
 }
