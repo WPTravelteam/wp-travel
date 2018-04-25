@@ -110,9 +110,10 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 1.3.1 =
+= 1.3.2 =
 * New Feature: Multiple Trip Facts options for trips.
-* New Feature: Multiple trip Facts Shortcode. 
+* New Feature: Multiple trip Facts Shortcode.
+* Fixes: Multiple Pricing and date issue fixings. 
 * Fixes: Minor issues and bugs fixings.
 
 = 1.3.1 =
