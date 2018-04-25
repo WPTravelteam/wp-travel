@@ -32,6 +32,8 @@ class Wp_Travel_Shortcodes {
 			'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
 		);
 
+		$shortcode = apply_filters( 'wp_travel_shortcodes', $shortcodes );
+
 		foreach ( $shortcodes as $shortcode => $function ) {
 			add_shortcode( apply_filters( "{$shortcode}_shortcode_tag", $shortcode ), $function );
 		}

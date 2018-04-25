@@ -78,56 +78,6 @@ const display_payment_mode_option = {
 }
 
 jQuery(document).ready(function($) {
-    $('#wp-travel-pax').on('change', function() {
-        var no_of_pax = $(this).val();
-
-        if (no_of_pax < 1) {
-            no_of_pax = 1;
-            $(this).val(1).trigger('change')
-        }
-        $('.wp-travel-cart-pax').html(no_of_pax);
-
-        var price_per = $('#wp-travel-trip-price').attr('price_per');
-        var trip_price = $('#wp-travel-trip-price').attr('trip_price');
-
-        // Trip Price excluding tax
-        var trip_price_excluding_tax = $('.product-total-price').attr('trip_price');
-
-        // Need value from attr
-        var payment_amount = $('#wp-travel-payment-amount').attr('payment_amount');
-
-        var payment_mode = $("input[name='wp_travel_payment_mode']:checked").val();
-        if (price_per &&  price_per.toLowerCase().slice(0, 6) === 'person') {
-            trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
-            payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
-
-            trip_price_excluding_tax = parseFloat(trip_price_excluding_tax) * parseFloat(no_of_pax);
-        }
-        trip_price_excluding_tax = parseFloat(trip_price_excluding_tax);
-
-        if ( trip_price && trip_price.toFixed)
-            trip_price = trip_price.toFixed(2);
-        if ( payment_amount && payment_amount.toFixed)
-            payment_amount = payment_amount.toFixed(2);
-        if (trip_price_excluding_tax.toFixed)
-            trip_price_excluding_tax = trip_price_excluding_tax.toFixed(2)
-        var trip_price_info = $('#wp-travel-trip-price_info');
-        var payment_amount_info = $('#wp-travel-payment-amount-info');
-        trip_price_info.text(trip_price);
-        payment_amount_info.text(payment_amount);
-
-        $('.product-total-price').html(trip_price_excluding_tax);
-        $('.wp-travel-total-price-amount').html(trip_price);
-        var tax_fields = jQuery('.wp-travel-sub-total').length;
-        if (tax_fields > 0) {
-            $('.wp-travel-sub-total').html(trip_price_excluding_tax);
-            var tax = trip_price - trip_price_excluding_tax;
-            if (tax.toFixed) {
-                tax = tax.toFixed(2);
-            }
-            $('.wp-travel-tax').html(tax);
-        }
-    });
 
     // Functions
     var gateway_change = function() {
@@ -148,7 +98,6 @@ jQuery(document).ready(function($) {
     // Initial Load.
     gateway_change();
     booking_option_change();
-    $('#wp-travel-pax').trigger('change');
 
     // On Change Events.
     $('[name=wp_travel_payment_gateway]').change(gateway_change);

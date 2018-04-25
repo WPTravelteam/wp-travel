@@ -87,6 +87,7 @@ class WP_Travel_Frontend_Assets {
 			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 			wp_enqueue_script( 'collapse-js',  $this->assets_path . 'assets/js/collapse.js', array('jquery'));
 
+			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			// Return if payment is not enabled.
 			if ( ! wp_travel_is_payment_enabled() ) {
 				return;
@@ -163,6 +164,8 @@ class WP_Travel_Frontend_Assets {
 
 			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
+
+			wp_enqueue_script( 'wp-travel-cart',$this->assets_path . 'assets/js/cart.js', array( 'jquery' )  );
 		}
 	}
 }

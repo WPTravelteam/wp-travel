@@ -84,7 +84,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 					<?php foreach ( $trip_pricing_options_data as $price_key => $pricing ) :
 						// Set Vars.
 						$pricing_name         = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
-						$pricing_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+						$price_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 						$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
 						$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
 						$pricing_option_price = isset( $pricing['price'] ) ? $pricing['price'] : '';
@@ -93,7 +93,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 						$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
-						$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $pricing_key );
+						$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $price_key );
 
 					?>
 					<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
@@ -168,13 +168,18 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 									<input name="pax" type="number" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
 								</div>
 								<div class="add-to-cart">
+										<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ) ?>" />
+										<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ) ?>" />
 								<?php 
 									$button = '<a href="%s" data-parent-id="pricing-'.esc_attr( $price_key ).'" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 									if ( 'yes' !== $fixed_departure ) :
-										$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
+										$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url ); ?>
+										<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ) ?>" />
+									<?php										
 									endif;
-										$cart_url = add_query_arg( 'price_key', $pricing_key, $cart_url );
+									
+									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
 									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
 								?>
 								</div>

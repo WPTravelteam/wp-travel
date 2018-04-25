@@ -161,6 +161,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
+			// Pro Functionality.
+			if ( file_exists( WP_TRAVEL_ABSPATH . 'pro/wp-travel-pro-init.php' ) ) {
+				include sprintf( '%s/pro/wp-travel-pro-init.php', WP_TRAVEL_ABSPATH );				
+			}
+
 			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
 			include sprintf( '%s/inc/license/wp-travel-license.php',  dirname( __FILE__ ) );
@@ -172,6 +177,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/trip-enquiries.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/helpers.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/prices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
@@ -202,8 +208,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 * Include Cart and Checkout Classes.
 			 * @since 2.2.3
 			 */
-			include sprintf( '%s/inc/class-cart.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/class-checkout.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );			
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
