@@ -1,3 +1,11 @@
+<?php
+$date_array = wp_travel_get_date_array();
+
+$days = $date_array['days'];
+$months = $date_array['months'];
+$years = $date_array['years'];
+?>
+
 <form method="post" >
     <?php foreach( $trips as $cart_id => $trip ) : ?>
         <div class="wp-travel-trip-details">
@@ -19,7 +27,7 @@
                 </div>
                 <div class="panel ws-theme-timeline-block">
                     <div class="panel-heading">										
-                        <h4 class="panel-title">Traveller Details</h4>
+                        <h4 class="panel-title"><?php esc_html_e( 'Traveller Details', 'wp-travel' ) ?></h4>
                     </div>
                     <div id="number-accordion2" class="panel-collapse collapse in">
                         <div class="panel-body">
@@ -34,7 +42,7 @@
                                         <div class="form-group gap-20">
                                             <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'First Name', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-8 col-md-9">
-                                                <input name="wp_travel_fname[<?php echo esc_attr( $cart_id ) ?>][]" type="text" class="form-control" value="">
+                                                <input name="traveller_info_fname[<?php echo esc_attr( $cart_id ) ?>][]" type="text" class="form-control" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -42,7 +50,7 @@
                                         <div class="form-group gap-20">
                                             <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Last Name', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-8 col-md-9">
-                                                <input name="wp_travel_lname[<?php echo esc_attr( $cart_id ) ?>][]" type="text" class="form-control" value="">
+                                                <input name="traveller_info_lname[<?php echo esc_attr( $cart_id ) ?>][]" type="text" class="form-control" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -50,7 +58,7 @@
                                         <div class="form-group gap-20 select2-input-hide">
                                             <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Gender', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-4 col-md-3">
-                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Gender" tabindex="-1" aria-hidden="true" name="wp_travel_gender[<?php echo esc_attr( $cart_id ) ?>][]" >
+                                                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Gender" tabindex="-1" aria-hidden="true" name="traveller_info_gender[<?php echo esc_attr( $cart_id ) ?>][]" >
                                                     <option value=""><?php esc_html_e( 'Gender', 'wp-travel' ) ?></option>
                                                     <option value="male"><?php esc_html_e( 'Male', 'wp-travel' ) ?>.</option>
                                                     <option value="female"><?php esc_html_e( 'Female', 'wp-travel' ) ?>.</option>
@@ -64,39 +72,27 @@
                                             <div class="col-sm-8 col-md-6">
                                                 <div class="row gap-15">
                                                     <div class="col-xs-4 col-sm-4">
-                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true" name="wp_travel_dob_day[<?php echo esc_attr( $cart_id ) ?>][]">
+                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Date" tabindex="-1" aria-hidden="true" name="traveller_info_dob_day[<?php echo esc_attr( $cart_id ) ?>][]">
                                                             <option value=""><?php esc_html_e( 'Day', 'wp-travel' ) ?></option>
-                                                            <option value="01">01</option>
-                                                            <option value="02">02</option>
-                                                            <option value="03">03</option>
-                                                            <option value="04">04</option>
-                                                            <option value="05">05</option>
-                                                            <option value="06">06</option>
-                                                            <option value="07">07</option>
+                                                            <?php foreach( $days as $key => $day ) : ?>
+                                                                <option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_attr( $day ) ?></option>
+                                                            <?php endforeach; ?>                                                       
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-4 col-sm-4">
-                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true" name="wp_travel_dob_month[<?php echo esc_attr( $cart_id ) ?>][]">
+                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Month" tabindex="-1" aria-hidden="true" name="traveller_info_dob_month[<?php echo esc_attr( $cart_id ) ?>][]">
                                                             <option value=""><?php esc_html_e( 'Month', 'wp-travel' ) ?></option>
-                                                            <option value="jan">Jan</option>
-                                                            <option value="feb">Feb</option>
-                                                            <option value="mar">Mar</option>
-                                                            <option value="apr">Apr</option>
-                                                            <option value="may">May</option>
-                                                            <option value="jun">Jun</option>
-                                                            <option value="jul">Jul</option>
+                                                            <?php foreach( $months as $key => $month ) : ?>
+                                                                <option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_attr( $month ) ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-4 col-sm-4">
-                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true" name="wp_travel_dpb_year[<?php echo esc_attr( $cart_id ) ?>][]" >
+                                                        <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Year" tabindex="-1" aria-hidden="true" name="traveller_info_dpb_year[<?php echo esc_attr( $cart_id ) ?>][]" >
                                                             <option value=""><?php esc_html_e( 'Year', 'wp-travel' ) ?></option>
-                                                            <option value="1985">1985</option>
-                                                            <option value="1986">1986</option>
-                                                            <option value="1987">1987</option>
-                                                            <option value="1988">1988</option>
-                                                            <option value="1900">1900</option>
-                                                            <option value="1901">1901</option>
-                                                            <option value="1902">1902</option>
+                                                            <?php foreach( $years as $key => $year ) : ?>
+                                                                <option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_attr( $year ) ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -105,41 +101,37 @@
                                     </div>
                                     <div class="form-horizontal">
                                         <div class="form-group gap-20">
-                                            <label class="col-sm-4 col-md-3 control-label">Email:</label>
+                                            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Email', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-8 col-md-9">
-                                                <input name="wp_travel_email[<?php echo esc_attr( $cart_id ) ?>][]" type="email" class="form-control" value="">
+                                                <input name="traveller_info_email[<?php echo esc_attr( $cart_id ) ?>][]" type="email" class="form-control" value="">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-horizontal">
                                         <div class="form-group gap-20">
-                                            <label class="col-sm-4 col-md-3 control-label">Phone Number:</label>
+                                            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Phone Number', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-8 col-md-9">
-                                                <input name="wp_travel_phone[<?php echo esc_attr( $cart_id ) ?>][]" type="text" pattern="^[\d\+\-\.\(\)\/\s]*$" class="form-control" value="">
+                                                <input name="traveller_info_phone[<?php echo esc_attr( $cart_id ) ?>][]" type="text" pattern="^[\d\+\-\.\(\)\/\s]*$" class="form-control" value="">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-horizontal">
                                         <div class="form-group gap-20">
-                                            <label class="col-sm-4 col-md-3 control-label">Nationality:</label>
+                                            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Country', 'wp-travel' ) ?>:</label>
                                             <div class="col-sm-8 col-md-9">
-                                                <select class="select2-single form-control select2-hidden-accessible" data-placeholder="Nationality" tabindex="-1" aria-hidden="true" name="wp_travel_country[<?php echo esc_attr( $cart_id ) ?>][]" >
-                                                    <option value="">Nationality</option>
-                                                    <option value="Thai">Thai</option>
-                                                    <option value="Malaysian">Malaysian</option>
-                                                    <option value="Indonesian">Indonesian</option>
-                                                    <option value="American">American</option>
-                                                    <option value="England">England</option>
-                                                    <option value="German">German</option>
-                                                    <option value="Polish">Polish</option>
+                                                <select class="select2-single form-control select2-hidden-accessible" data-placeholder="Nationality" tabindex="-1" aria-hidden="true" name="traveller_info_country[<?php echo esc_attr( $cart_id ) ?>][]" >
+                                                    <option value=""><?php esc_html_e( 'Country', 'wp-travel' ) ?></option>
+                                                    <?php foreach ( wp_travel_get_countries() as $key => $country ) : ?>
+                                                        <option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_attr( $country ) ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>														
-                                <div class="text-center">
-                                    <button class="btn btn-block simple center-div">Add another traveller</button>
-                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-block simple center-div wp-travel-add-traveller" data-cart-id="<?php echo esc_attr( $cart_id ) ?>"><?php esc_html_e( 'Add another traveller', 'wp-travel' ) ?></button>
                             </div>
                         </div>
                     </div>
@@ -281,7 +273,7 @@
                     <label class="" for="accept_booking">By submitting a booking request, you accept our <a href="#">terms and conditions</a> as well as the <a href="#">cancellation policy</a> and  <a href="#">House Rules</a> .</label>
                 </div>
                 <div class="wp-travel-form-field button-field">
-                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book and Pay"> 
+                    <input type="submit" name="traveller_info_book_now" id="wp-travel-book-now" value="Book and Pay"> 
                 </div>
 
 
@@ -295,13 +287,13 @@
 
 <?php
 
-function wp_travel_get_years(){
-    $day = array();
+function wp_travel_get_date_array() {
+    $days = array();
     for( $i = 1; $i<=31; $i++ ) {
-        $day[] = $i;
+        $days[] = $i;
     }
 
-    $month = array(
+    $months = array(
         'jan' => __( 'Jan', 'wp-travel' ),
         'feb' => __( 'Feb', 'wp-travel' ),
         'mar' => __( 'Mar', 'wp-travel' ),
@@ -312,7 +304,7 @@ function wp_travel_get_years(){
         'aug' => __( 'Aug', 'wp-travel' ),
         'sep' => __( 'Sep', 'wp-travel' ),
         'oct' => __( 'Oct', 'wp-travel' ),
-        'jan' => __( 'Nov', 'wp-travel' ),
+        'nov' => __( 'Nov', 'wp-travel' ),
         'dec' => __( 'Dec', 'wp-travel' ),
     );
 
@@ -320,10 +312,64 @@ function wp_travel_get_years(){
 
     $year_upto = $year_from - 100;
 
-    $year = array();
+    $years = array();
     for ( $i = $year_from; $i >= $year_upto; $i-- ) {
-        $year[$i] = $i;
+        $years[$i] = $i;
     }
 
-    return array( 'year' => $year, 'month' => $month, 'day' => $day );
+    return array( 'years' => $years, 'months' => $months, 'days' => $days );
 }
+
+?>
+
+<script type="text/html" id="tmpl-traveller-info">
+<div class="payment-traveller added">
+    <a href="#" class="pull-right font12 traveller-remove"><i class="fa fa-times-circle"></i></a>
+    <div class="row gap-0">
+        <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-9">
+            <h6 class="heading mt-0 mb-15"><?php esc_html_e( 'Traveller ' ) ?><span class="traveller-index">{{data.index}}</span></h6>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group gap-20">
+            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'First Name', 'wp-travel' ) ?>:</label>
+            <div class="col-sm-8 col-md-9">
+                <input name="traveller_info_fname[{{{data.cart_id}}}][]" type="text" class="form-control" value="">
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group gap-20">
+            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Last Name', 'wp-travel' ) ?>:</label>
+            <div class="col-sm-8 col-md-9">
+                <input name="traveller_info_lname[{{{data.cart_id}}}][]" type="text" class="form-control" value="">
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group gap-20 select2-input-hide">
+            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Gender', 'wp-travel' ) ?>:</label>
+            <div class="col-sm-4 col-md-3">
+                <select class="select2-no-search form-control select2-hidden-accessible" data-placeholder="Gender" tabindex="-1" aria-hidden="true" name="traveller_info_gender[{{{data.cart_id}}}][]" >
+                    <option value=""><?php esc_html_e( 'Gender', 'wp-travel' ) ?></option>
+                    <option value="male"><?php esc_html_e( 'Male', 'wp-travel' ) ?>.</option>
+                    <option value="female"><?php esc_html_e( 'Female', 'wp-travel' ) ?>.</option>
+                </select>
+            </div>
+        </div>
+    </div>   
+    <div class="form-horizontal">
+        <div class="form-group gap-20">
+            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Country', 'wp-travel' ) ?>:</label>
+            <div class="col-sm-8 col-md-9">
+                <select class="select2-single form-control select2-hidden-accessible" data-placeholder="Nationality" tabindex="-1" aria-hidden="true" name="traveller_info_country[{{{data.cart_id}}}][]" >
+                    <option value=""><?php esc_html_e( 'Country', 'wp-travel' ) ?></option>
+                    <?php foreach ( wp_travel_get_countries() as $key => $country ) : ?>
+                        <option value="<?php echo esc_attr( $key ) ?>"><?php echo esc_attr( $country ) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

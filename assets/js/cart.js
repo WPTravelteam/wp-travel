@@ -86,6 +86,29 @@ jQuery(document).ready(function($) {
 
     $( '.wp-travel-pax' ).on( 'change', function() {
         $('.book-now-btn').attr( 'disabled', 'disabled' );
-    } )
+    } );
+
+
+    // Checkout
+    // add Traveller.
+    $('.wp-travel-add-traveller').on( 'click', function(e) {
+        e.preventDefault();
+        var index = $( '.payment-content .payment-traveller ' ).length;
+        var cart_id = $(this).data('cart-id');
+        var template = wp.template('traveller-info');
+        // console.log( template({'traveller': '1'}) );
+        $(this ).closest( '.text-center' ).siblings( '.payment-content' ).append( template({index:index, cart_id:cart_id}) );
+    } );
+
+    // Remove Traveller.
+    $(document).on( 'click', '.traveller-remove', function(e) {
+        e.preventDefault();        
+        if ( confirm( 'Are you sure to remove traveller' ) ) {
+            $(this).closest('.payment-traveller').remove();
+            $( '.payment-traveller.added' ).each( function(i) {
+                $(this).find('.traveller-index').html(i+1);
+            } );
+        }
+    } );
 
 });
