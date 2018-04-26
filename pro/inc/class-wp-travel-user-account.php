@@ -29,7 +29,32 @@ class Wp_Travel_User_Account {
 	public static function output() {
 		global $wt_cart;
 
-		print_r( $wt_cart );
+		// Check cart class is loaded or abort
+		if ( is_null( $wt_cart ) ) {
+			return;
+		}
+
+		if ( ! is_user_logged_in() ) {
+
+			// After password reset, add confirmation message.
+			if ( ! empty( $_GET['password-reset'] ) ) {
+
+			}
+
+			if ( isset( $wp->query_vars['lost-password'] ) ) {
+				self::lost_password();
+			} else {
+				// Get user login.
+				wp_travel_get_template( 'account/form-login.php' );
+			}
+		}
+	}
+	/**
+	 * Lost Password Form.
+	 */
+	public static function lost_password() {
+
+
 	}
 
 }

@@ -72,7 +72,7 @@ class Wp_Travel_Pro_Init {
 	 */
 	private function init_hooks() {
 
-		
+		add_filter( 'wp_travel_template_path', array( $this, 'wp_travel_template_path_override' ) );
 
 	}
 	/**
@@ -97,6 +97,14 @@ class Wp_Travel_Pro_Init {
 		include sprintf( '%s/inc/class-wp-travel-pro-shortcodes.php', WP_TRAVEL_PRO_ABSPATH );
 
 	}
+	/**
+	 * Override template path.
+	 */
+	public function wp_travel_template_path_override() {
+
+		return WP_TRAVEL_PRO_ABSPATH . '/templates';
+
+	}
 }
 /**
  * Main instance of WP Travel Pro Init.
@@ -111,4 +119,4 @@ function Wp_Travel_Pro_Init() {
 }
 
 // Start WP Travel Pro Init.
-//Wp_Travel_Pro_Init();
+Wp_Travel_Pro_Init();
