@@ -82,7 +82,10 @@ jQuery(document).ready(function($) {
                 }
             }
         });
-
     } );
+
+    $( '.wp-travel-pax' ).on( 'change', function() {
+        $('.book-now-btn').attr( 'disabled', 'disabled' );
+    } )
 
 });
