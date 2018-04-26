@@ -34,7 +34,7 @@ function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
 	foreach ( $setting['options'] as $option ):
 	?>
 		<label style="display:block; margin-top:5px; margin-bottom:5px;">
-			<input type="checkbox" <?php if(isset($fact['value']) && is_array($fact['value']) && in_array($option, $fact['value'])) echo 'checked'; ?> name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id=""><?php echo $option; ?></input>
+			<input type="checkbox" <?php if(isset($fact['value']) && is_array($fact['value']) && in_array($option, $fact['value'])) echo 'checked'; ?> name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id="" /><?php echo $option; ?>
 		</label>
 		<?php
 	endforeach;

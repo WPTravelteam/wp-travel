@@ -678,7 +678,7 @@
             val = this.val();
             index = this.data('index');
             jQuery('.fact-' + index).html((obj.options || []).map(function(option) {
-                return jQuery('<input type="checkbox">' + option + '</input>').attr('name', 'wp_travel_trip_facts[' + unique + '][value][]').attr('value', option);
+                return jQuery('<label><input type="checkbox" name="wp_travel_trip_facts[' + unique + '][value][]" value="'+ option +'"  >' + option + '</label>');
             }));
         },
         single: function(obj, unique) {
