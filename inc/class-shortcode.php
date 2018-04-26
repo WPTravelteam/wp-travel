@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * WP travel Shortcode class.
  *
- * @class WP_Pattern
+ * @class Wp_Travel_Shortcodes
  * @version	1.0.0
  */
 class Wp_Travel_Shortcodes {

@@ -161,10 +161,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
-			// Pro Functionality.
-			if ( file_exists( WP_TRAVEL_ABSPATH . 'pro/wp-travel-pro-init.php' ) ) {
-				include sprintf( '%s/pro/wp-travel-pro-init.php', WP_TRAVEL_ABSPATH );				
-			}
 
 			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
@@ -220,6 +216,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/class-admin-settings.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );
+			}
+
+			// Pro Functionality.
+			if ( file_exists( WP_TRAVEL_ABSPATH . 'pro/wp-travel-pro-init.php' ) ) {
+				include sprintf( '%s/pro/wp-travel-pro-init.php', WP_TRAVEL_ABSPATH );				
 			}
 		}
 
