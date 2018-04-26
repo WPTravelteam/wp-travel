@@ -1,0 +1,82 @@
+.login-page {
+  max-width: 480px;
+  margin: auto; }
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  margin: 0 auto;
+  padding: 45px 30px;
+  text-align: center;
+  border: 1px solid #ddd; }
+  .form input {
+    outline: 0;
+    background: #fff;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 5px 15px 5px 50px !important;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px; }
+  .form button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #df1814;
+    width: 100%;
+    border: 0;
+    padding: 10px 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer; }
+    .form button:hover, .form button:focus, .form button:active {
+      background: #f83531; }
+  .form .message,
+  .form .info {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px; }
+    .form .message a,
+    .form .info a {
+      color: #4CAF50;
+      text-decoration: none; }
+  .form .register-form,
+  .form .forgot-form {
+    display: none; }
+  .form .login-form span,
+  .form .register-form span,
+  .form .forgot-form span {
+    position: relative;
+    display: block; }
+    .form .login-form span:before,
+    .form .register-form span:before,
+    .form .forgot-form span:before {
+      font-family: fontawesome;
+      left: 1px;
+      top: 1px;
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      line-height: 40px;
+      background-color: #fff;
+      border-right: 1px solid #ddd; }
+    .form .login-form span.user-username:before, .form .login-form span.user-name:before,
+    .form .register-form span.user-username:before,
+    .form .register-form span.user-name:before,
+    .form .forgot-form span.user-username:before,
+    .form .forgot-form span.user-name:before {
+      content: '\f007'; }
+    .form .login-form span.user-password:before,
+    .form .register-form span.user-password:before,
+    .form .forgot-form span.user-password:before {
+      content: '\f023'; }
+    .form .login-form span.user-email:before,
+    .form .register-form span.user-email:before,
+    .form .forgot-form span.user-email:before {
+      content: '\f0e0'; }
+
+/*# sourceMappingURL=wp-travel-frontend-pro.css.map */

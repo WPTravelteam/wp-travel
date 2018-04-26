@@ -1,0 +1,93 @@
+
+.login-page {
+  max-width: 480px;
+  margin: auto;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    margin: 0 auto;
+    padding: 45px 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+  input {
+    outline: 0;
+    background: #fff;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding:5px 15px 5px 50px !important;
+    box-sizing: border-box;
+    font-size: 14px;
+    height:40px;
+    line-height:40px;
+
+  }
+  button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #df1814;
+    width: 100%;
+    border: 0;
+    padding:10px 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active{
+      background: #f83531;
+    }
+  }
+  .message,
+  .info {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  }
+  .register-form,
+  .forgot-form {
+    display: none;
+  }
+  .login-form,
+  .register-form,
+  .forgot-form{
+      span {
+          position: relative;
+          display: block;
+
+          &:before{
+            font-family: fontawesome;
+            left: 1px;
+            top: 1px;
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            line-height: 40px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+          }
+
+          &.user-username:before,
+          &.user-name:before {
+            content: '\f007';
+          }
+          &.user-password:before{
+            content:'\f023';
+          }
+          &.user-email:before{
+            content:'\f0e0';
+          }
+      }
+    } 
+}
+
