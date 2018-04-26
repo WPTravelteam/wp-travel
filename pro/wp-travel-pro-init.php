@@ -72,7 +72,7 @@ class Wp_Travel_Pro_Init {
 	 */
 	private function init_hooks() {
 
-		add_filter( 'wp_travel_template_path', array( $this, 'wp_travel_template_path_override' ) );
+		// add_filter( 'wp_travel_template_path', array( $this, 'wp_travel_template_path_override' ) );
 
 	}
 	/**

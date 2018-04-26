@@ -45,7 +45,8 @@ class Wp_Travel_User_Account {
 				self::lost_password();
 			} else {
 				// Get user login.
-				wp_travel_get_template( 'account/form-login.php' );
+
+				include sprintf( '%s/templates/account/form-login.php', WP_TRAVEL_PRO_ABSPATH );
 			}
 		}
 	}
