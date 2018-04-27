@@ -1,3 +1,17 @@
+const display_booking_option = {
+    booking_only: function() {
+        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
+        jQuery( '.f-booking-only-field' ).show().find('input, select').removeAttr( 'disabled' );
+    },
+    booking_with_payment: function() {        
+        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
+        jQuery( '.f-booking-with-payment' ).show().find('input, select').removeAttr( 'disabled' );
+
+        // Trigger Payment mode.
+        var payment_mode = jQuery("select[name='wp_travel_payment_mode']").val();
+        display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();        
+    }
+}
 const payments = {
     paypal: function() {
         jQuery('#wp-travel-book-now').show();
@@ -6,102 +20,45 @@ const payments = {
     }
 };
 
-const display_booking_option = {
-    booking_only: function() {
-        jQuery('.payment-gateway-wrapper').hide();
-        jQuery('.payment-gateway-wrapper').find('[value=paypal]').attr('checked', 'checked');
-
-        jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
-        jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
-
-        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').hide();
-        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').hide();
-
-        var payment_mode = jQuery("input[name='wp_travel_payment_mode']");
-        var trip_price_info = jQuery('#wp-travel-trip-price_info');
-        var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
-
-        payment_mode.attr('disabled', 'disabled').closest('.wp-travel-form-field ').hide();
-        trip_price_info.closest('.wp-travel-form-field ').hide();
-        payment_amount_info.closest('.wp-travel-form-field ').hide();
-
-        var elem = jQuery('[name=wp_travel_book_now]');
-        elem.siblings().hide();
-        elem.show().val(wt_payment.book_now);
-    },
-    booking_with_payment: function() {
-        jQuery('.payment-gateway-wrapper').show();
-        jQuery('.payment-gateway-wrapper').find('[value=paypal]').attr('checked', 'checked');
-
-        jQuery('#wp-travel-trip-price').closest('.wp-travel-form-field ').hide();
-        jQuery('#wp-travel-payment-amount').closest('.wp-travel-form-field ').hide();
-
-        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
-        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
-
-        var elem = jQuery('[name=wp_travel_book_now]');
-
-        var payment_mode = jQuery("input[name='wp_travel_payment_mode']");
-        var trip_price_info = jQuery('#wp-travel-trip-price_info');
-        var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
-
-        payment_mode.removeAttr('disabled').closest('.wp-travel-form-field ').show();
-        trip_price_info.closest('.wp-travel-form-field ').show();
-
-        var payment_mode = jQuery("input[name='wp_travel_payment_mode']:checked").val();
-        if (!payment_mode) {
-            payment_mode = 'full';
-        }
-        payment_amount_info.closest('.wp-travel-form-field ').hide();
-        if ('partial' === payment_mode) {
-            payment_amount_info.closest('.wp-travel-form-field ').show();
-        }
-        elem.val(wt_payment.book_n_pay);
-
-        jQuery('[name=wp_travel_payment_gateway]').trigger('change');
-    }
-}
 
 const display_payment_mode_option = {
     partial: function() {
-        var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
-        payment_amount_info.closest('.wp-travel-form-field ').show();
-        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
-        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
+        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
+        jQuery( '.f-partial-payment' ).show().find('input, select').removeAttr( 'disabled' );
     },
     full: function() {
-        var payment_amount_info = jQuery('#wp-travel-payment-amount-info');
-        payment_amount_info.closest('.wp-travel-form-field ').hide();
-        jQuery('#wp-travel-payment-trip-price-initial').closest('.wp-travel-form-field ').show();
-        jQuery('#wp-travel-payment-tax-percentage-info').closest('.wp-travel-form-field ').show();
+        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
+        jQuery( '.f-full-payment' ).show().find('input, select').removeAttr( 'disabled' );
     }
 }
 
 jQuery(document).ready(function($) {
 
     // Functions
-    var gateway_change = function() {
-        const func = $('[name=wp_travel_payment_gateway]:checked').val();
-        const executor = payments[func];
-        executor && executor();
-    };
     var booking_option_change = function() {
-        const trigger = $('[name=wp_travel_booking_option]:checked').val();
+        const trigger = $('[name=wp_travel_booking_option]').val();
         display_booking_option[trigger] && display_booking_option[trigger]();
     };
 
+    var gateway_change = function() {
+        const func = $('[name=wp_travel_payment_gateway]').val();
+        const executor = payments[func];
+        executor && executor();
+    };
+
     var payment_mode_change = function() {
-        const trigger = $('[name=wp_travel_payment_mode]:checked').val();
+        const trigger = $('[name=wp_travel_payment_mode]').val();
         display_payment_mode_option[trigger] && display_payment_mode_option[trigger]();
     };
 
     // Initial Load.
-    gateway_change();
     booking_option_change();
+    gateway_change();
+    payment_mode_change();
 
     // On Change Events.
-    $('[name=wp_travel_payment_gateway]').change(gateway_change);
     $('[name=wp_travel_booking_option]').change(booking_option_change);
+    $('[name=wp_travel_payment_gateway]').change(gateway_change);
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
 
 });

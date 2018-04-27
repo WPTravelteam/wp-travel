@@ -91,13 +91,18 @@ jQuery(document).ready(function($) {
 
     // Checkout
     // add Traveller.
-    $('.wp-travel-add-traveller').on( 'click', function(e) {
+    $(document).on( 'click', '.wp-travel-add-traveller', function(e) {
         e.preventDefault();
-        var index = $( '.payment-content .payment-traveller ' ).length;
+        var index = $( '.payment-content .payment-traveller' ).length;
+        var unique_index = $( '.payment-content .payment-traveller:last' ).data('unique-index');
+        if ( ! unique_index ) {
+            unique_index = index;
+        } else {
+            unique_index += 1;
+        }
         var cart_id = $(this).data('cart-id');
         var template = wp.template('traveller-info');
-        // console.log( template({'traveller': '1'}) );
-        $(this ).closest( '.text-center' ).siblings( '.payment-content' ).append( template({index:index, cart_id:cart_id}) );
+        $(this ).closest( '.text-center' ).siblings( '.payment-content' ).append( JSON.parse( template({index:index, cart_id:cart_id, unique_index:unique_index}) ) );
     } );
 
     // Remove Traveller.

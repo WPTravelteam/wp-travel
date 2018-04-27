@@ -461,6 +461,30 @@ function wp_travel_get_total_amount() {
 	}
 	wp_send_json($response);
 }
+
+/**
+ * Return Active Payment gateway list.
+ */
+function wp_travel_get_active_gateways() {
+	$payment_gatway_list = wp_travel_payment_gateway_lists();
+	$active_gateway_list = array();
+	$selected_gateway = '';
+	$settings = wp_travel_get_settings();
+	$gateway_list = array();
+	if ( is_array( $payment_gatway_list ) && count( $payment_gatway_list ) > 0 ) {
+		foreach ( $payment_gatway_list as $gateway => $label ) {
+			if ( isset( $settings["payment_option_{$gateway}"] ) && 'yes' === $settings["payment_option_{$gateway}"] ) {
+				if ( '' === $selected_gateway ) {
+					$gateway_list['selected'] = $gateway;
+				}
+				$active_gateway_list[ $gateway ] = $label;
+			}
+		}
+		$gateway_list['active'] = $active_gateway_list;		
+	}
+	return $gateway_list;
+}
+
 add_action( 'wp', 'wp_travel_get_total_amount' );
 add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status_admin' );
 add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process_frontend' );

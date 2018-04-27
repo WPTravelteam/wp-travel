@@ -28,6 +28,10 @@ if ( isset( $settings['checkout_page_id'] ) ) {
 $pax_label = __( 'Pax', 'wp-travel' );
 $max_attr = '';
 
+// For old form
+$trip_id = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? $_GET['trip_id'] : '';
+$trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? $_GET['trip_duration'] : 1;
+
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 $settings        = wp_travel_get_settings();
 $currency_code 	 = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';

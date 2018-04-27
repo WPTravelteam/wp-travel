@@ -51,7 +51,7 @@ class WP_Travel_FW_Field {
 
 	function template( $field, $content ) {
 		ob_start(); ?>
-			<div class="wp-travel-form-field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+			<div class="wp-travel-form-field <?php echo esc_attr( (isset($field['wrapper_class']))? $field['wrapper_class'] : '' ); ?>">
 				<label for="<?php echo esc_attr( $field['id'] ); ?>">
 					<?php echo esc_attr( $field['label'] ); ?>
 					<?php if ( isset( $field['validations']['required'] ) ) { ?>
