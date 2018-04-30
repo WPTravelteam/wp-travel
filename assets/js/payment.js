@@ -29,6 +29,9 @@ const display_payment_mode_option = {
     full: function() {
         jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
         jQuery( '.f-full-payment' ).show().find('input, select').removeAttr( 'disabled' );
+
+        // cart fields override
+        jQuery( 'td.f-partial-payment, th.f-partial-payment' ).hide();
     }
 }
 

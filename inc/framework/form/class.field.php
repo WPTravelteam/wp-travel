@@ -70,7 +70,7 @@ class WP_Travel_FW_Field {
 		echo $this->process();
 	}
 
-	function render_single( $field ) {
+	function render_input( $field ) {
 		if ( ! $field  ) {
 			return;
 		}

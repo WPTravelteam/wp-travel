@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
     // add Traveller.
     $(document).on( 'click', '.wp-travel-add-traveller', function(e) {
         e.preventDefault();
-        var index = $( '.payment-content .payment-traveller' ).length;
+        var index = $(this).parent('.text-center').siblings( '.payment-content' ).find('.payment-traveller').length;
         var unique_index = $( '.payment-content .payment-traveller:last' ).data('unique-index');
         if ( ! unique_index ) {
             unique_index = index;

@@ -216,11 +216,12 @@ class WP_Travel_Cart {
 		}
 
 		// Update quantity.
-		$this->items[ $cart_item_id ]['pax'] = ($pax > $this->quantity_limit) ? $this->quantity_limit : $pax;
-
-		$this->write();
-
-		return true;
+		if ( isset( $this->items[ $cart_item_id ] ) ) {
+			$this->items[ $cart_item_id ]['pax'] = ($pax > $this->quantity_limit) ? $this->quantity_limit : $pax;
+			$this->write();
+			return true;
+		}
+		return false;
 	}
 
 	
@@ -277,19 +278,21 @@ class WP_Travel_Cart {
 		$tax_amount_partial = 0;
 
 		// Total amount without tax.
-		foreach ( $trips as $cart_id => $trip ) :
+		if ( is_array( $trips ) && count( $trips ) > 0 ) {
+			foreach ( $trips as $cart_id => $trip ) :
 
-			$trip_price		= $trip['trip_price'];
-			$trip_price_partial = $trip['trip_price_partial'];			
-			$pax			= $trip['pax'];			
-			
-			$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
-			$sub_total += $single_trip_total;
+				$trip_price		= $trip['trip_price'];
+				$trip_price_partial = $trip['trip_price_partial'];			
+				$pax			= $trip['pax'];			
+				
+				$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
+				$sub_total += $single_trip_total;
 
-			$single_trip_total_partial =  wp_travel_get_formated_price( $trip_price_partial * $pax );
-			$sub_total_partial += $single_trip_total_partial;
+				$single_trip_total_partial =  wp_travel_get_formated_price( $trip_price_partial * $pax );
+				$sub_total_partial += $single_trip_total_partial;
 
-		endforeach;
+			endforeach;
+		}
 
 		$sub_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $sub_total ) );
 

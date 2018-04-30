@@ -218,7 +218,7 @@ function wp_travel_booking_form_fields() {
  * @return [type] [description]
  */
 function wp_travel_get_checkout_form_fields() {
-
+	
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 
 	// All Fields
@@ -268,7 +268,14 @@ function wp_travel_get_checkout_form_fields() {
     
     // Standard paypal Merge.
     $payment_fields = array();
-	if ( wp_travel_is_payment_enabled() ) {        
+	if ( wp_travel_is_payment_enabled() ) {
+		
+		global $wt_cart;
+		$cart_amounts = $wt_cart->get_total();
+
+		$total_amount = $cart_amounts['total'];
+		$total_partial_amount = $cart_amounts['total_partial'];
+
 		$settings = wp_travel_get_settings();
 		$partial_payment = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : '';
 		$payment_fields['is_partial_payment'] = array(
@@ -338,43 +345,36 @@ function wp_travel_get_checkout_form_fields() {
 			'id' => 'wp-travel-trip-price_info',
 			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
 			'before_field' => wp_travel_get_currency_symbol(),
-			// 'default' => number_format( $actual_trip_price, 2, '.', '' ),
+			'default' => wp_travel_get_formated_price( $total_amount ),
 			'priority' => 110,
 		);
 		$payment_fields['payment_amount_info'] = array(
 			'type' => 'text_info',
-			'label' => __( 'Payment Amount', 'wp-travel' ).' ( '.wp_travel_get_actual_payout_percent($trip_id). ' %) ',
+			'label' => __( 'Payment Amount', 'wp-travel' ),
 			'name' => 'wp_travel_payment_amount_info',
 			'id' => 'wp-travel-payment-amount-info',
-			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
-			'validations' => array(
-				'required' => true,
-			),
-			'attributes' => array(
-				// 'min' => $minimum_partial_payout,
-				// 'max' => $actual_trip_price,
-			),
+			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',					
 			'before_field' => wp_travel_get_currency_symbol(),
-			// 'default' => number_format( $payment_amount, 2, '.', '' ),
+			'default' => wp_travel_get_formated_price( $total_partial_amount ),
 			'priority' => 115,
 		);
 
-		if ( $tax_rate = wp_travel_is_taxable() ) {
+		// if ( $tax_rate = wp_travel_is_taxable() ) {
 
-			$payment_fields['payment_tax_percentage_info'] = array(
-				'type' => 'text_info',
-				'label' => __( 'Tax', 'wp-travel' ).$inclusive_text,
-				'name' => 'wp_travel_payment_tax_percentage',
-				'id' => 'wp-travel-payment-tax-percentage-info',
-				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
-				'validations' => array(
-					'required' => true,
-				),
-				'before_field' => '',
-				'default' => $tax_rate .' %',
-				'priority' => 109,
-			);
-		}
+		// 	$payment_fields['payment_tax_percentage_info'] = array(
+		// 		'type' => 'text_info',
+		// 		'label' => __( 'Tax', 'wp-travel' ).$inclusive_text,
+		// 		'name' => 'wp_travel_payment_tax_percentage',
+		// 		'id' => 'wp-travel-payment-tax-percentage-info',
+		// 		'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
+		// 		'validations' => array(
+		// 			'required' => true,
+		// 		),
+		// 		'before_field' => '',
+		// 		'default' => $tax_rate .' %',
+		// 		'priority' => 109,
+		// 	);
+		// }
 	}
     
     // unset other uncecessary fields form $fields. For Billing info
