@@ -184,6 +184,8 @@ class WP_Travel_Cart {
 			$items[ $id ] = $item;
 		}
 		$cart_items = WP_Travel()->session->set( $this->cart_id, $items );
+		// Cookie data to enable data info in js.
+		setcookie( 'wp_travel_cart', wp_json_encode( $cart_items ), time() + 604800, '/' );
 	}
 	/**
 	 * Read items from cart session.

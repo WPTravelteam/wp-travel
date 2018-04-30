@@ -460,13 +460,22 @@ function wp_travel_book_now() {
 	if ( ! wp_verify_nonce( $_POST['wp_travel_security'],  'wp_travel_security_action' ) ) {
 		return;
 	}
-	if ( ! isset( $_POST['wp_travel_post_id'] ) ) {
+	global $wt_cart;
+
+	$items = $wt_cart->getItems();
+	if ( ! count( $items ) ) {
 		return;
 	}
 
+	$date_format = get_option('date_format') ? get_option('date_format') : 'Y m d';
+	$current_date = date( $date_format  );
+	// if ( ! isset( $_POST['wp_travel_post_id'] ) ) {
+	// 	return;
+	// }
+
 	$trip_code = wp_travel_get_trip_code( $_POST['wp_travel_post_id'] );
 	$thankyou_page_url = get_permalink( $_POST['wp_travel_post_id'] );
-	$title = 'Booking - ' . $trip_code;
+	$title = 'Booking - ' . $current_date;
 
 	$post_array = array(
 		'post_title' => $title,
@@ -474,152 +483,152 @@ function wp_travel_book_now() {
 		'post_status' => 'publish',
 		'post_slug' => uniqid(),
 		'post_type' => 'itinerary-booking',
-		);
+	);
 	$order_id = wp_insert_post( $post_array );
 	update_post_meta( $order_id, 'order_data', $_POST );
 
-	$trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
-	$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
-	$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
-	$new_booking_count = $booking_count + 1;
-	update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
+	// $trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
+	// $booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
+	// $booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
+	// $new_booking_count = $booking_count + 1;
+	// update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
 
-	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
-	foreach ( $_POST as $meta_name => $meta_val ) {
-		if ( in_array( $meta_name , $post_ignore ) ) {
-			continue;
-		}
-		update_post_meta( $order_id, $meta_name, sanitize_text_field( $meta_val ) );
-	}
+	// $post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
+	// foreach ( $_POST as $meta_name => $meta_val ) {
+	// 	if ( in_array( $meta_name , $post_ignore ) ) {
+	// 		continue;
+	// 	}
+	// 	update_post_meta( $order_id, $meta_name, sanitize_text_field( $meta_val ) );
+	// }
 
-	if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
+	// if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
 
-		$pax_count_based_by_date = get_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', true );
+	// 	$pax_count_based_by_date = get_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', true );
 
-		if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
-			$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
-		}
+	// 	if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
+	// 		$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
+	// 	}
 
-		$pax_count_based_by_date[$_POST['wp_travel_date']] += $_POST['wp_travel_pax'];
+	// 	$pax_count_based_by_date[$_POST['wp_travel_date']] += $_POST['wp_travel_pax'];
 
-		update_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', $pax_count_based_by_date );
+	// 	update_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', $pax_count_based_by_date );
 
-		$order_ids = get_post_meta( $_POST['wp_travel_post_id'], 'order_ids', true );
+	// 	$order_ids = get_post_meta( $_POST['wp_travel_post_id'], 'order_ids', true );
 
-		if ( ! $order_ids ) {
-			$order_ids = array();
-		}
+	// 	if ( ! $order_ids ) {
+	// 		$order_ids = array();
+	// 	}
 
-		array_push( $order_ids, array( 'order_id' => $order_id, 'count' => $_POST['wp_travel_pax'], 'date' => $_POST['wp_travel_date'] ) );
+	// 	array_push( $order_ids, array( 'order_id' => $order_id, 'count' => $_POST['wp_travel_pax'], 'date' => $_POST['wp_travel_date'] ) );
 
-		update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
-	}
+	// 	update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
+	// }
 	
-	$settings = wp_travel_get_settings();
+	// $settings = wp_travel_get_settings();
 
-	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
+	// $send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
-	// Prepare variables to assign in email.
-	$client_email = $_POST['wp_travel_email'];
+	// // Prepare variables to assign in email.
+	// $client_email = $_POST['wp_travel_email'];
 
-	$admin_email = get_option( 'admin_email' );
+	// $admin_email = get_option( 'admin_email' );
 
-	// Email Variables.
-	if ( is_multisite() ) {
-		$sitename = get_network()->site_name;
-	} else {
-		/*
-			* The blogname option is escaped with esc_html on the way into the database
-			* in sanitize_option we want to reverse this for the plain text arena of emails.
-			*/
-		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-	}
-	$booking_id 		  	= $order_id;
-	$itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
-	$itinerary_title 		= get_the_title( $itinerary_id );
+	// // Email Variables.
+	// if ( is_multisite() ) {
+	// 	$sitename = get_network()->site_name;
+	// } else {
+	// 	/*
+	// 		* The blogname option is escaped with esc_html on the way into the database
+	// 		* in sanitize_option we want to reverse this for the plain text arena of emails.
+	// 		*/
+	// 	$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+	// }
+	// $booking_id 		  	= $order_id;
+	// $itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
+	// $itinerary_title 		= get_the_title( $itinerary_id );
 
-	$booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;
-	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
-	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? $_POST['wp_travel_arrival_date'] : '';
-	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? $_POST['wp_travel_departure_date'] : '';
+	// $booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;
+	// $booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
+	// $booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? $_POST['wp_travel_arrival_date'] : '';
+	// $booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? $_POST['wp_travel_departure_date'] : '';
 
-	$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
-	$customer_country 		= $_POST['wp_travel_country'];
-	$customer_address 		= $_POST['wp_travel_address'];
-	$customer_phone 		= $_POST['wp_travel_phone'];
-	$customer_email 		= $_POST['wp_travel_email'];
-	$customer_note 			= $_POST['wp_travel_note'];
+	// $customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
+	// $customer_country 		= $_POST['wp_travel_country'];
+	// $customer_address 		= $_POST['wp_travel_address'];
+	// $customer_phone 		= $_POST['wp_travel_phone'];
+	// $customer_email 		= $_POST['wp_travel_email'];
+	// $customer_note 			= $_POST['wp_travel_note'];
 
-	$email_tags = array(
-		'{sitename}'				=> $sitename,
-		'{itinerary_link}'			=> get_permalink( $itinerary_id ),
-		'{itinerary_title}'			=> $itinerary_title,
-		'{booking_id}'				=> $booking_id,
-		'{booking_edit_link}'		=> get_edit_post_link( $booking_id ),
-		'{booking_no_of_pax}'		=> $booking_no_of_pax,
-		'{booking_scheduled_date}'	=> $booking_scheduled_date,
-		'{booking_arrival_date}'	=> $booking_arrival_date,
-		'{booking_departure_date}'	=> $booking_departure_date,
+	// $email_tags = array(
+	// 	'{sitename}'				=> $sitename,
+	// 	'{itinerary_link}'			=> get_permalink( $itinerary_id ),
+	// 	'{itinerary_title}'			=> $itinerary_title,
+	// 	'{booking_id}'				=> $booking_id,
+	// 	'{booking_edit_link}'		=> get_edit_post_link( $booking_id ),
+	// 	'{booking_no_of_pax}'		=> $booking_no_of_pax,
+	// 	'{booking_scheduled_date}'	=> $booking_scheduled_date,
+	// 	'{booking_arrival_date}'	=> $booking_arrival_date,
+	// 	'{booking_departure_date}'	=> $booking_departure_date,
 
-		'{customer_name}'			=> $customer_name,
-		'{customer_country}'		=> $customer_country,
-		'{customer_address}'		=> $customer_address,
-		'{customer_phone}'			=> $customer_phone,
-		'{customer_email}'			=> $customer_email,
-		'{customer_note}'			=> $customer_note,
-	);
-	apply_filters( 'wp_travel_admin_email_tags', $email_tags );
+	// 	'{customer_name}'			=> $customer_name,
+	// 	'{customer_country}'		=> $customer_country,
+	// 	'{customer_address}'		=> $customer_address,
+	// 	'{customer_phone}'			=> $customer_phone,
+	// 	'{customer_email}'			=> $customer_email,
+	// 	'{customer_note}'			=> $customer_note,
+	// );
+	// apply_filters( 'wp_travel_admin_email_tags', $email_tags );
 		
-	$email = new WP_Travel_Emails();
+	// $email = new WP_Travel_Emails();
 
-	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
-	//Admin message.
-	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
-	//Admin Subject.
-	$admin_subject = $admin_template['subject'];
+	// $admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+	// //Admin message.
+	// $admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
+	// //Admin Subject.
+	// $admin_subject = $admin_template['subject'];
 
-	// Client Template.
-	$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+	// // Client Template.
+	// $client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
 	
-	//Client message.
-	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
+	// //Client message.
+	// $client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
 	
-	//Client Subject.
-	$client_subject = $client_template['subject'];
+	// //Client Subject.
+	// $client_subject = $client_template['subject'];
 
-	// Send mail to admin if booking email is set to yes.
-	if ( 'yes' == $send_booking_email_to_admin ) {
+	// // Send mail to admin if booking email is set to yes.
+	// if ( 'yes' == $send_booking_email_to_admin ) {
 		
-		// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $client_email, $client_email );
+	// 	// To send HTML mail, the Content-type header must be set.
+	// 	$headers = $email->email_headers( $client_email, $client_email );
 
-		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-			// wp_send_json( array(
-			// 	'result'  => 0,
-			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			// ) );
+	// 	if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
+	// 		// wp_send_json( array(
+	// 		// 	'result'  => 0,
+	// 		// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+	// 		// ) );
 
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
-			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
-			header( 'Location: ' . $thankyou_page_url );
-			exit;
-		}
-	}
+	// 		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
+	// 		$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+	// 		header( 'Location: ' . $thankyou_page_url );
+	// 		exit;
+	// 	}
+	// }
 
-	// Send email to client.
-	// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $admin_email, $admin_email );
+	// // Send email to client.
+	// // To send HTML mail, the Content-type header must be set.
+	// 	$headers = $email->email_headers( $admin_email, $admin_email );
 
-		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
-			// wp_send_json( array(
-			// 	'result'  => 0,
-			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			// ) );
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
-			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
-			header( 'Location: ' . $thankyou_page_url );
-			exit;
-		}
+	// 	if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
+	// 		// wp_send_json( array(
+	// 		// 	'result'  => 0,
+	// 		// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+	// 		// ) );
+	// 		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
+	// 		$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+	// 		header( 'Location: ' . $thankyou_page_url );
+	// 		exit;
+	// 	}
 	/**
 	 * Hook used to add payment and its info.
 	 *

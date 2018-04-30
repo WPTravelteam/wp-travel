@@ -166,6 +166,7 @@ class WP_Travel_Frontend_Assets {
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 
 			wp_enqueue_script( 'wp-travel-cart',$this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' )  );
+			// wp_enqueue_script( 'wp-travel-cookie',$this->assets_path . 'assets/js/lib/js-cookie-master/js.cookie.js', array( 'jquery' )  );
 		}
 	}
 }

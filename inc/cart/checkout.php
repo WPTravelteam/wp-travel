@@ -7,7 +7,7 @@ $billing_fields     = $checkout_fields['billing_fields'];
 $payment_fields     = $checkout_fields['payment_fields'];
 
 $form_field = new WP_Travel_FW_Field(); ?>
-<form method="POST" action="">
+<form method="POST" action="" id="wp-travel-booking">
     <!-- Travellers info -->  
     <?php foreach( $trips as $cart_id => $trip ) : ?>
         <div class="wp-travel-trip-details">
@@ -42,7 +42,9 @@ $form_field = new WP_Travel_FW_Field(); ?>
                                         </div>
                                     </div>
                                     <?php foreach( $traveller_fields as $field_group => $field ) : ?>
-                                        <?php                                        
+                                        <?php
+                                        $field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
+                                        $field['name'] = $field_name;                               
                                         if ( 'hidden' === $field['type'] ) {
                                             echo $form_field->init()->render_input( $field );
                                             continue;
@@ -123,7 +125,8 @@ $form_field = new WP_Travel_FW_Field(); ?>
                     </div>
                 <?php endforeach; ?>                 
                 <div class="wp-travel-form-field button-field">
-                    <input type="submit" name="traveller_info_book_now" id="wp-travel-book-now" value="Book and Pay"> 
+                    <?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
+                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book and Pay"> 
                 </div>
             </div>        
         </div>
