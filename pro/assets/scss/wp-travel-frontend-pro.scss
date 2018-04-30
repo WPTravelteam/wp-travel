@@ -91,3 +91,39 @@
     } 
 }
 
+.dashboard-tab{
+  ul.resp-tabs-list{
+      width: 90px;
+      margin: 0;
+      padding: 0;
+      background: #f8f7ee;
+      -webkit-box-shadow: inset 0 -2px 3px rgba(203,196,130,.06);
+      box-shadow: inset 0 -2px 3px rgba(203,196,130,.06);
+
+    li{
+      text-align:center;
+      color: #848484;
+      padding:30px 15px !important;
+
+      &:hover{
+        color: #29324e;
+      }
+      &.resp-tab-active{
+        -webkit-box-shadow: inset 2px 0px 0 #f05451;
+        box-shadow: inset 2px 0px 0 #f05451;
+        color: #29324e;
+        border:none;
+      }
+      i{
+        display:block;
+      }
+    }
+  }
+  .resp-tabs-container{
+    width:calc( 100% - 110px );
+    border-radius:0;
+    border:none;
+    min-height: 447px;
+        padding: 30px;
+  }
+}

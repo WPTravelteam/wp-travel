@@ -79,4 +79,31 @@
     .form .forgot-form span.user-email:before {
       content: '\f0e0'; }
 
+.dashboard-tab ul.resp-tabs-list {
+  width: 90px;
+  margin: 0;
+  padding: 0;
+  background: #f8f7ee;
+  -webkit-box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06);
+  box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06); }
+  .dashboard-tab ul.resp-tabs-list li {
+    text-align: center;
+    color: #848484;
+    padding: 30px 15px !important; }
+    .dashboard-tab ul.resp-tabs-list li:hover {
+      color: #29324e; }
+    .dashboard-tab ul.resp-tabs-list li.resp-tab-active {
+      -webkit-box-shadow: inset 2px 0px 0 #f05451;
+      box-shadow: inset 2px 0px 0 #f05451;
+      color: #29324e;
+      border: none; }
+    .dashboard-tab ul.resp-tabs-list li i {
+      display: block; }
+.dashboard-tab .resp-tabs-container {
+  width: calc( 100% - 110px );
+  border-radius: 0;
+  border: none;
+  min-height: 447px;
+  padding: 30px; }
+
 /*# sourceMappingURL=wp-travel-frontend-pro.css.map */

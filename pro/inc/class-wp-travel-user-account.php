@@ -29,6 +29,7 @@ class Wp_Travel_User_Account {
 	public static function output() {
 		global $wt_cart;
 
+
 		// Check cart class is loaded or abort
 		if ( is_null( $wt_cart ) ) {
 			return;
