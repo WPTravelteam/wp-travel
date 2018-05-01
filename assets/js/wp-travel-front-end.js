@@ -242,6 +242,7 @@ jQuery(document).ready(function($) {
             jQuery(this).datepicker({
                 language: 'en',
                 inline: true,
+                minDate: new Date(),
                 onRenderCell: function(date, cellType) {
                     if (cellType == 'day') {
                         availabledate = availabledate.map(function(d) {

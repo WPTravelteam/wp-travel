@@ -195,9 +195,11 @@
         if ($(this).is(':checked')) {
             $('#wp-travel-sale-price').removeAttr('disabled').closest('tr').show();
             $('#wp-travel-price').attr('required', 'required');
+            $('#wp-travel-sale-price').attr('required', 'required');
         } else {
             $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('tr').hide();
             $('#wp-travel-price').removeAttr('required');
+            $('#wp-travel-sale-price').removeAttr('required');
         }
     });
 
@@ -248,11 +250,11 @@
         var siblings = $(this).parents('.repeat-row').next('.repeat-row');
         if ($(this).is(':checked')) {
             siblings.show();
-            siblings.find('input[type="number"]').attr( 'required', 'required' );
+            siblings.find('input[type="number"]').attr('required', 'required');
         } else {
             siblings.hide();
-            siblings.find('input[type="number"]').removeAttr( 'required' );
-            
+            siblings.find('input[type="number"]').removeAttr('required');
+
         }
     });
 
@@ -274,6 +276,7 @@
 
     if ($('#wp-travel-enable-sale').is(':checked')) {
         $('#wp-travel-price').attr('required', 'required');
+        $('#wp-travel-sale-price').attr('required', 'required');
     }
 
     $(document).on('click', '#wp-travel-fixed-departure', function() {
@@ -284,7 +287,7 @@
             $('.wp-travel-fixed-departure-row').css({ 'display': 'none' });
             $('.wp-travel-trip-duration-row').css({ 'display': 'table-row' });
         }
-        $( '#wp-travel-enable-multiple-fixed-departure' ).trigger('click');
+        $('#wp-travel-enable-multiple-fixed-departure').trigger('click');
     });
 
     $(document).on("click", ".wp-travel-featured-post", function(e) {
@@ -449,34 +452,41 @@
         var template = wp.template('wp-travel-pricing-options');
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $('#pricing-options-data').append(template({ random: rand }));
+    });
+
+    // Trips Facts template.
+    $('.wp-travel-trip-facts-add-new').on('click', function() {
+        var template = wp.template('wp-travel-trip-facts-options');
+        var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        $('#accordion-fact-data').append(template({ random: rand }));
 
 
     });
 
     // Dates options template.
-    $('#date-options-data .panel .wp-travel-multiple-start-date').each( function() {
+    $('#date-options-data .panel .wp-travel-multiple-start-date').each(function() {
         var th = $(this);
 
         var savedMeanDate = $(this).val();
         newMinDate = new Date();
-        if ( savedMeanDate ) {
-            new_date_min =  new Date(savedMeanDate);
-            newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));            
-            
+        if (savedMeanDate) {
+            new_date_min = new Date(savedMeanDate);
+            newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
+
             $(this).siblings('.wp-travel-multiple-end-date').datepicker({
                 minDate: newMinDate,
             });
-        }        
+        }
 
         $(this).datepicker({
             language: 'en',
             minDate: new Date(),
-            onSelect: function(dateStr ) {
+            onSelect: function(dateStr) {
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
                     new_date_min = new Date(dateStr);
-    
+
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
                 th.siblings('.wp-travel-multiple-end-date').datepicker({
@@ -484,8 +494,8 @@
                 });
             }
         });
-        
-    } );
+
+    });
 
     $('.wp-travel-multiple-dates-add-new').on('click', function() {
         var template = wp.template('wp-travel-multiple-dates');
@@ -495,12 +505,12 @@
         $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
             language: 'en',
             minDate: new Date(),
-            onSelect: function(dateStr ) {
+            onSelect: function(dateStr) {
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
                     new_date_min = new Date(dateStr);
-    
+
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
                 $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
@@ -534,6 +544,12 @@
     $(document).on('keyup change', '#wp-travel-price', function() {
         var priceVal = $(this).val();
         $('#wp-travel-sale-price').attr('max', priceVal);
+    });
+
+    // Sale Price  max value update on price change
+    $(document).on('keyup change', '.pricing-opt-min-pax', function() {
+        var priceVal = $(this).val();
+        $(this).siblings('.pricing-opt-max-pax').attr('min', priceVal);
     });
 
     if ($('#wp-travel-use-global-tabs').is(':checked')) {
@@ -588,67 +604,123 @@
     });
     // Ends WP Travel Standard Paypal Merged. @since 1.2.1
 
-    $('input[type="number"]').on( 'change', function() {
-        if ( $(this).attr('placeholder') == 'Min PAX' ) {
+    $('input[type="number"]').on('change', function() {
+        if ($(this).attr('placeholder') == 'Min PAX') {
             var minPax = $(this).val();
-            $(this).siblings( 'input[type="number' ).attr( 'min', minPax );
+            $(this).siblings('input[type="number').attr('min', minPax);
         }
-    } );
+    });
 
     jQuery('.select-main .close').hide();
-    jQuery(document).on('click','.select-main .close', function(){
+    jQuery(document).on('click', '.select-main .close', function() {
         $(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
         $(this).siblings('.carret').show();
         $(this).hide();
-        
+
     });
-    jQuery(document).on( 'click', '.select-main, .select-main .caret', function(e){
-        if($(this).find('ul.wp-travel-active').length == 0){
+    jQuery(document).on('click', '.select-main, .select-main .caret', function(e) {
+        if ($(this).find('ul.wp-travel-active').length == 0) {
             $(this).children('ul').addClass('wp-travel-active');
             $(this).children('.close').show();
             $(this).children('.carret').hide();
-        } else{
+        } else {
             $(this).children('.carret').show();
             $(this).children('.close').hide();
             $(this).children('ul').removeClass('wp-travel-active');
         }
     });
 
-    $(document).on("click", function(event){
+    $(document).on("click", function(event) {
         var $trigger = $(".select-main");
-        if($trigger !== event.target && !$trigger.has(event.target).length){
+        if ($trigger !== event.target && !$trigger.has(event.target).length) {
             $("ul.wp-travel-active").removeClass("wp-travel-active");
             $('.select-main').children('.carret').show();
             $('.select-main').children('.close').hide();
-        }            
+        }
     });
 
-    jQuery(document).on( 'change', '.select-main li input.multiselect-value', function($) { //on change do stuff
-        var total_inputs_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value' ).length;
-        var total_checked_length = jQuery(this).closest( '.select-main' ).find( 'li input.multiselect-value:checked' ).length;
+    jQuery(document).on('change', '.select-main li input.multiselect-value', function($) { //on change do stuff
+        var total_inputs_length = jQuery(this).closest('.select-main').find('li input.multiselect-value').length;
+        var total_checked_length = jQuery(this).closest('.select-main').find('li input.multiselect-value:checked').length;
         // alert( total_inputs_length + ' - ' + total_checked_length );
 
-        if ( total_checked_length == total_inputs_length ) {
-            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', true);
+        if (total_checked_length == total_inputs_length) {
+            jQuery(this).closest('.select-main').find('.multiselect-all').prop('checked', true);
         } else {
-            jQuery(this).closest( '.select-main' ).find( '.multiselect-all' ).prop('checked', false);            
-        }        
+            jQuery(this).closest('.select-main').find('.multiselect-all').prop('checked', false);
+        }
         jQuery(this).closest('li').toggleClass('selected');
 
     });
-    jQuery('.multiselect-all').change(function($){
-        if ( ! jQuery(this).is(':checked') ) {
+    jQuery('.multiselect-all').change(function($) {
+        if (!jQuery(this).is(':checked')) {
             jQuery(this).closest('li').siblings().removeClass('selected').find('input.multiselect-value').prop('checked', false);
         } else {
             jQuery(this).closest('li').siblings().addClass('selected').find('input.multiselect-value').prop('checked', true);
-            
+
         }
     })
-    var updateTable = function(event){
+    var updateTable = function(event) {
         var currentID = jQuery(this).attr('id');
-        var countSelected = jQuery(this ).closest('.select-main').find('li.selected').length
-        jQuery( this ).closest('.select-main').find('ul').siblings('.selected-item').html(countSelected + ' item selected');
+        var countSelected = jQuery(this).closest('.select-main').find('li.selected').length
+        jQuery(this).closest('.select-main').find('ul').siblings('.selected-item').html(countSelected + ' item selected');
     }
-    jQuery(document).on('input click change','input.wp-travel-multi-inner', updateTable)
+    jQuery(document).on('input click change', 'input.wp-travel-multi-inner', updateTable)
+
+
+    //Facts.
+    jQuery(document).on('click', '.fact-deleter', function() {
+        jQuery(this).parent().parent().parent().remove();
+    })
+
+    const types = {
+        multiple: function(obj, unique) {
+            val = this.val();
+            index = this.data('index');
+            jQuery('.fact-' + index).html((obj.options || []).map(function(option) {
+                return jQuery('<input type="checkbox">' + option + '</input>').attr('name', 'wp_travel_trip_facts[' + unique + '][value][]').attr('value', option);
+            }));
+        },
+        single: function(obj, unique) {
+            val = this.val();
+            index = this.data('index');
+            jQuery('.fact-' + index).html(jQuery('<select>').attr('name', 'wp_travel_trip_facts[' + unique + '][value]').html((obj.options || []).map(function(option) {
+                return jQuery('<option>').attr('value', option).html(option);
+            })));
+        },
+        text: function(obj, unique) {
+            val = this.val();
+            index = this.data('index');
+            jQuery('.fact-' + index).html(jQuery('<input type="text">').attr('name', 'wp_travel_trip_facts[' + unique + '][value]'));
+        },
+        default: function(obj, unique) {
+
+            val = this.val();
+            index = this.data('index');
+            jQuery('.icon-' + index).attr('name', 'wp_travel_trip_facts[' + unique + '][icon]').val(obj.icon);
+            jQuery('.type-' + index).attr('name', 'wp_travel_trip_facts[' + unique + '][type]').val(obj.type);
+
+        }
+    }
+
+    jQuery(document).on('change', '.fact-type-selecter', function() {
+        const unique = Math.random().toString(36).substr(2, 9);
+        jQuery(this).attr('name', 'wp_travel_trip_facts[' + unique + '][label]');
+        const val = jQuery(this).val();
+        var settings = jQuery('#accordion-fact-data').data('factssettings');
+        const setting = settings.filter(function(setting) {
+            return val == setting['name']
+        })[0];
+        const type = settings.filter(function(setting) {
+            return val == setting['type']
+        })[0];
+        if (setting) {
+            types[setting.type].call(jQuery(this), setting, unique);
+            types['default'].call(jQuery(this), setting, unique);
+        } else {
+
+        }
+    });
+
 
 }(jQuery));

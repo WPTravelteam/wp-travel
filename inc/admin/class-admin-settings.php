@@ -34,12 +34,19 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
-		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );		
 		
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
+	}
+
+	public function call_back_tab_facts($tab){
+		if ( 'facts' !== $tab ) {
+			return;
+		}
+		require_once "views/tabs/tab-contents/itineraries/fact-setting-tab.php";
 	}
 
 	/**
@@ -103,6 +110,10 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['payment'] = array(
 			'tab_label' => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
+		);
+		$settings_fields['facts'] = array(
+			'tab_label' => __( 'Facts', 'wp-travel' ),
+			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
@@ -971,6 +982,16 @@ class WP_Travel_Admin_Settings {
 			$settings['paypal_email'] = $paypal_email;
 			$settings['payment_option_paypal'] = $payment_option_paypal;
 			// Merged Standard paypal Addons ends @since 1.2.1
+
+			$wp_travel_trip_facts_enable = ( isset( $_POST['wp_travel_trip_facts_enable'] ) && '' !== $_POST['wp_travel_trip_facts_enable'] ) ? 'yes' : 'no';
+
+			$settings['wp_travel_trip_facts_enable'] = $wp_travel_trip_facts_enable;
+
+			$indexed = $_POST['wp_travel_trip_facts_settings'];
+			if ( array_key_exists( '$index', $indexed ) ){
+				unset ($indexed['$index'] );
+			}
+			$settings['wp_travel_trip_facts_settings'] = $indexed;
 
 			//Cart and Checkout pages options
 			$settings['cart_page_id'] = $cart_page_id;

@@ -107,7 +107,8 @@
 .wp-trave-settings-form-warp .tab-accordion .panel-heading .collapse-icon {
   right: 15px; }
 
-.wp-travel-enable-sale, .checkbox-with-label {
+.wp-travel-enable-sale,
+.checkbox-with-label {
   margin-left: 15px; }
 
 body.post-type-itineraries .wp-travel-open-upload-area .button {
@@ -180,7 +181,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   position: relative; }
 
 .left-side-section {
-  width: calc( 100% - 100px ); }
+  width: calc( 100% - 100px); }
 
 .WP-Travel-actions {
   margin: 30px 0 20px; }
@@ -224,7 +225,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   font-size: 20px;
   width: 210px; }
 .about-header .form-table {
-  width: calc( 100% - 210px ); }
+  width: calc( 100% - 210px); }
 
 #poststuff .feature-section h2 {
   font-size: 24px;
@@ -502,11 +503,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     font-weight: 600;
     font-size: 14px; }
 
-.additional-compare-stat, .form-compare-stat {
+.additional-compare-stat,
+.form-compare-stat {
   width: 100%; }
-  .additional-compare-stat .field-group, .form-compare-stat .field-group {
+  .additional-compare-stat .field-group,
+  .form-compare-stat .field-group {
     float: left; }
-  .additional-compare-stat .compare-all, .form-compare-stat .compare-all {
+  .additional-compare-stat .compare-all,
+  .form-compare-stat .compare-all {
     padding-left: 20px;
     float: left; }
 
@@ -580,7 +584,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     right: 50px;
     width: 20px;
     height: 20px;
-    top: calc( 50% - 10px );
+    top: calc( 50% - 10px);
     border-radius: 50%;
     float: right;
     text-align: center; }
@@ -618,7 +622,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     right: 10px;
     color: #ca4a1f;
     font-size: 16px;
-    top: calc( 50% - 8px );
+    top: calc( 50% - 8px);
     cursor: pointer; }
 .tab-accordion .panel-collapse {
   padding: 0;
@@ -755,7 +759,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     position: absolute;
     display: inline-block;
     box-sizing: border-box;
-    top: calc( 100% + 1px );
+    top: calc( 100% + 1px);
     width: 100%;
     left: 0; }
     .custom-multi-select .select-main ul li {
@@ -997,6 +1001,62 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   left: 24px;
   background-color: #0085ba;
   border-color: #0085ba; }
+
+#fact-app .new-fact-setting-adder {
+  background-color: #0085ba;
+  color: #fff;
+  border: 1px solid #0085ba;
+  padding: 5px 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  margin-top: 25px; }
+
+#fact-sample-collector .form-table {
+  position: relative;
+  border-top: 1px solid #eee;
+  padding: 25px 0 10px;
+  display: block; }
+  #fact-sample-collector .form-table:first-of-type {
+    border-top: none; }
+  #fact-sample-collector .form-table .open-close-row,
+  #fact-sample-collector .form-table .delete-row {
+    position: absolute;
+    top: 25px; }
+    #fact-sample-collector .form-table .open-close-row button,
+    #fact-sample-collector .form-table .delete-row button {
+      background-color: transparent;
+      border-color: #014966;
+      cursor: pointer; }
+  #fact-sample-collector .form-table .delete-row {
+    right: 0; }
+  #fact-sample-collector .form-table .open-close-row {
+    right: 50px; }
+  #fact-sample-collector .form-table .fact-open .dashicons {
+    transition: all 0.4s ease-in-out; }
+  #fact-sample-collector .form-table .toggle-row {
+    transition: height 0.4s ease-in-out; }
+  #fact-sample-collector .form-table.open-table .toggle-row {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+    transition: height 0.4s ease-in-out; }
+  #fact-sample-collector .form-table.open-table .fact-open .dashicons {
+    transform: rotate(180deg);
+    transition: all 0.4s ease-in-out; }
+#fact-sample-collector .options-holder {
+  width: 300px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding: 5px 10px;
+  box-sizing: border-box; }
+  #fact-sample-collector .options-holder p {
+    padding: 0px 0 4px !important;
+    border-bottom: 1px solid #dadada; }
+    #fact-sample-collector .options-holder p:last-of-type {
+      border-bottom: none; }
+#fact-sample-collector .option-deleter {
+  float: right; }
 
 .form-table .checkbox-default-design label {
   margin-right: -15px; }

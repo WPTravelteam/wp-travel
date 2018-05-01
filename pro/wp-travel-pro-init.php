@@ -97,6 +97,7 @@ class Wp_Travel_Pro_Init {
 
 		include sprintf( '%s/inc/class-wp-travel-user-account.php', WP_TRAVEL_PRO_ABSPATH );
 		include sprintf( '%s/inc/class-wp-travel-pro-shortcodes.php', WP_TRAVEL_PRO_ABSPATH );
+		include sprintf( '%s/inc/class-wp-travel-form-handler.php', WP_TRAVEL_PRO_ABSPATH );		
 
 	}
 	/**

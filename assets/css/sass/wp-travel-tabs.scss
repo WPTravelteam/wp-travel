@@ -132,21 +132,29 @@ $alto: #ddd;
                     transform: rotate(270deg);
                 }
             }
-            &#wp-travel-tab-faq a{
-                &:before{
+            &#wp-travel-tab-faq a {
+                &:before {
                     content: "\f223";
                 }
             }
-            &#wp-travel-tab-setting a{
-                &:before{
+            &#wp-travel-tab-setting a {
+                &:before {
                     font-family: icomoon;
                     content: '\e900';
                     font-size: 12px;
                     line-height: 20px;
                 }
             }
-            &#wp-travel-tab-misc_options a{
-                &:before{
+            &#wp-travel-tab-misc_options a {
+                &:before {
+                    font-family: icomoon;
+                    content: '\e904';
+                    font-size: 12px;
+                    line-height: 20px;
+                }
+            }
+            &#wp-travel-tab-trip_facts a {
+                &:before {
                     font-family: icomoon;
                     content: '\e904';
                     font-size: 12px;
@@ -271,7 +279,7 @@ $alto: #ddd;
 
 //marketplace page
 #poststuff {
-    .single-module-side{
+    .single-module-side {
         .inside {
             img {
                 width: 100%;
@@ -279,14 +287,17 @@ $alto: #ddd;
         }
     }
 }
+
 #aside-wrap {
     float: right;
     margin-right: -300px;
     width: 280px;
 }
+
 .itineraries_page_wp-travel-marketplace #post-body {
     margin-right: 300px;
 }
+
 .wp-travel-marketplace-tab-wrap {
     width: 100%;
     margin-top: 50px;
@@ -343,6 +354,7 @@ $alto: #ddd;
         border: 1px solid #ddd;
     }
 }
+
 .marketplace-module {
     display: inline-block;
     position: relative;

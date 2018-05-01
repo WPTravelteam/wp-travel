@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.5
-Stable tag: 1.3.1
+Stable tag: 1.3.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,28 +25,45 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Painless Booking System: WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
 * Payment System: Currently we have Standard PayPal as a free addon (which later will be included in WP Travel). It can be download from ["here"](http://wptravel.io/downloads/standard-paypal/). If you want to more payment system please ["let us know"](http://wptravel.io/support-forum/).
+* Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip. 
+* Tax Options: With this feature you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
+* Trip Facts: You can add the trips facts to your trips. 
 * Email Notification: You as an admin will be notified of all booking made by users and also users will also get email notification about their booking details. All email templates are customizable.
 * Customizable tabs: All trip details page tabs in front end can be customized from backend. You can change their labels and sort by your requirements or hide them.
 * Rating & Reviews: You can allow users to add rating or reviews for each trips. You can also hide them if you want for each trips.
 * Map: For each trips you can show Google map. In front end user can see where is the location of trip.
 
 = Other features: =
-* Featured trips
-* FAQs
-* Image Gallery
-* Group size
-* Set Currency
+* Trip Search / Filter Shortcode
+* Trip Search / Filter Widget
+* Sale widget added.
 * Pricing per person & group
-* Sale price
+* New cart/checkout page
+* Itineraries filters
+* Enquiry Form added
+* Frontend tab level and sorting
+* Payment field added globally
+* Image Gallery
+* Sale Price
+* Trip details & outlines
+* Trips includes and excludes
 * Set fix departures
 * Trip Types
 * Trip Locations
 * Keywords
-* Itineraries filters
+* Search
+* Related Itineraries
+* Group size
+* Additional Widgets
+* Trip Code
+* Compare Price on Stat
+* Fluid Layout, Responsive
+* Featured trips
+* FAQs
+* Set Currency
 * Translation Ready
 * Complete documentation
 * Customizable
-* Fluid Layout, Responsive
 * Compatible Themes
 * And more ...
 
@@ -109,6 +126,15 @@ Nice, send us request on [Support page](http://wptravel.io/support-forum/forum/w
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+= 1.3.2 =
+* Fixes: Font Awesome icon issue fixing for Trip Facts.
+* Fixes: Minor issues and bugs fixings.
+
+= 1.3.2 =
+* New Feature: Multiple Trip Facts options for trips.
+* New Feature: Multiple trip Facts Shortcode.
+* Fixes: Multiple Pricing and date issue fixings. 
+* Fixes: Minor issues and bugs fixings.
 
 = 1.3.1 =
 * Fixes: Travel Log front page layout conflict issue fixes.

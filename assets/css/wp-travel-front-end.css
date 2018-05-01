@@ -1,14 +1,18 @@
 .no-padding {
   padding: 0 !important; }
 
-.col-md-5, .col-md-7, .col-sm-3 {
+.col-md-5,
+.col-md-7,
+.col-sm-3 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px; }
 
 @media (min-width: 992px) {
-  .col-md-5, .col-md-7, .col-sm-3 {
+  .col-md-5,
+  .col-md-7,
+  .col-sm-3 {
     float: left; }
 
   .col-md-5 {
@@ -25,7 +29,8 @@
   src: url("../fonts/icomoon.eot?scxfre#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?scxfre") format("truetype"), url("../fonts/icomoon.woff?scxfre") format("woff"), url("../fonts/icomoon.svg?scxfre#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon';
   speak: none;
@@ -1841,6 +1846,43 @@ ul.availabily-list {
     right: auto;
     left: 0;
     margin-top: 0; } }
+.tour-info {
+  margin: 0 0 30px; }
+  .tour-info .tour-info-box {
+    border: 1px solid #e0e0e0;
+    background: #f1f1f1;
+    padding: 20px 25px; }
+  .tour-info .tour-info-column {
+    width: 100%;
+    float: left;
+    display: -webkit-flex;
+    display: -mox-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    justify-content: left; }
+    .tour-info .tour-info-column .tour-info-item {
+      display: inline-flex;
+      font-style: italic;
+      color: #595959;
+      width: 33.3333%;
+      float: left;
+      margin: 2px 0;
+      padding: 0 5px; }
+      @media (max-width: 992px) {
+        .tour-info .tour-info-column .tour-info-item {
+          width: 50%; } }
+      @media (max-width: 767px) {
+        .tour-info .tour-info-column .tour-info-item {
+          width: 100%; } }
+      .tour-info .tour-info-column .tour-info-item i {
+        font-size: 16px;
+        padding-right: 10px;
+        line-height: 25px; }
+      .tour-info .tour-info-column .tour-info-item .tooltip-area i {
+        padding-left: 10px; }
+
 .ws-theme-cart-page .product-thumbnail img {
   max-width: 60px;
   margin-bottom: 0; }
@@ -1853,7 +1895,7 @@ ul.availabily-list {
       margin: 0; }
       @media (max-width: 767.99px) {
         .ws-theme-cart-page .ws-theme-cart-list .item_cart h4 {
-          width: calc( 100% - 100px );
+          width: calc( 100% - 100px);
           text-align: right;
           margin-left: 100px; } }
     @media (max-width: 767.99px) {
@@ -1882,19 +1924,23 @@ ul.availabily-list {
       font-weight: 700; }
     .ws-theme-cart-page .ws-theme-cart-list tr p.total strong {
       color: #dc8051; }
-    .ws-theme-cart-page .ws-theme-cart-list tbody td, .ws-theme-cart-page .ws-theme-cart-list tbody th {
+    .ws-theme-cart-page .ws-theme-cart-list tbody td,
+    .ws-theme-cart-page .ws-theme-cart-list tbody th {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       padding: 24px 10px;
       border-top: 0;
       border-left: 0;
       border-right: 0; }
       @media (max-width: 767.999px) {
-        .ws-theme-cart-page .ws-theme-cart-list tbody td, .ws-theme-cart-page .ws-theme-cart-list tbody th {
+        .ws-theme-cart-page .ws-theme-cart-list tbody td,
+        .ws-theme-cart-page .ws-theme-cart-list tbody th {
           padding: 10px; } }
-      .ws-theme-cart-page .ws-theme-cart-list tbody td .label, .ws-theme-cart-page .ws-theme-cart-list tbody th .label {
+      .ws-theme-cart-page .ws-theme-cart-list tbody td .label,
+      .ws-theme-cart-page .ws-theme-cart-list tbody th .label {
         font-weight: 600;
         color: #333; }
-      .ws-theme-cart-page .ws-theme-cart-list tbody td .ws-theme-currencySymbol, .ws-theme-cart-page .ws-theme-cart-list tbody th .ws-theme-currencySymbol {
+      .ws-theme-cart-page .ws-theme-cart-list tbody td .ws-theme-currencySymbol,
+      .ws-theme-cart-page .ws-theme-cart-list tbody th .ws-theme-currencySymbol {
         padding-left: 5px; }
     .ws-theme-cart-page .ws-theme-cart-list tbody .product-price {
       font-weight: 600; }
@@ -1937,7 +1983,8 @@ ul.availabily-list {
         display: none; } }
     .ws-theme-cart-page .ws-theme-cart-list .responsive-cart td.product-remove:before {
       content: none; }
-    .ws-theme-cart-page .ws-theme-cart-list .responsive-cart:nth-of-type(even) td, .ws-theme-cart-page .ws-theme-cart-list .responsive-cart:nth-of-type(even) th {
+    .ws-theme-cart-page .ws-theme-cart-list .responsive-cart:nth-of-type(even) td,
+    .ws-theme-cart-page .ws-theme-cart-list .responsive-cart:nth-of-type(even) th {
       background-color: #eee; }
     .ws-theme-cart-page .ws-theme-cart-list.table-total-info {
       margin-bottom: 30px; }
@@ -1971,7 +2018,12 @@ ul.availabily-list {
           width: 100%;
           display: block;
           margin-left: 0; } }
-    .ws-theme-cart-page .actions a {
+    .ws-theme-cart-page .actions a,
+    .ws-theme-cart-page .actions input,
+    .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
+    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select,
+    .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
+    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea {
       background: #383838;
       color: #fff !important;
       font-size: 14px;
@@ -1988,14 +2040,29 @@ ul.availabily-list {
       -o-transition: all 0.3s ease 0s;
       transition: all 0.3s ease 0s; }
       @media (max-width: 991.99px) {
-        .ws-theme-cart-page .actions a {
+        .ws-theme-cart-page .actions a,
+        .ws-theme-cart-page .actions input,
+        .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
+        .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select,
+        .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
+        .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea {
           font-size: 12px; } }
       @media (max-width: 574.99px) {
-        .ws-theme-cart-page .actions a {
+        .ws-theme-cart-page .actions a,
+        .ws-theme-cart-page .actions input,
+        .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select,
+        .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select,
+        .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
+        .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea {
           width: 100%;
           display: block;
           margin-bottom: 15px; } }
-      .ws-theme-cart-page .actions a:hover {
+      .ws-theme-cart-page .actions a:hover,
+      .ws-theme-cart-page .actions input:hover,
+      .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:hover,
+      .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select:hover,
+      .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:hover,
+      .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea:hover {
         background-color: #dc8051; }
   .ws-theme-cart-page .st_adults,
   .ws-theme-cart-page .st_children {
@@ -2115,7 +2182,8 @@ ul.availabily-list {
     float: left;
     min-height: 1px;
     position: relative; }
-.checkout-page-wrap .wp-travel-form-field, .checkout-page-wrap .checkbox-block {
+.checkout-page-wrap .wp-travel-form-field,
+.checkout-page-wrap .checkbox-block {
   padding: 0 15px; }
 
 .float-left {
@@ -2139,20 +2207,37 @@ ul.availabily-list {
     right: 33.3333333333%;
     padding-right: 15px; } }
 @media (max-width: 767.99px) {
-  .col-sm-8, .col-sm-4 {
+  .col-sm-8,
+  .col-sm-4 {
     display: block;
     width: 100%; } }
-.col-sm-1, .col-sm-10, .col-sm-11,
-.col-sm-12, .col-sm-2, .col-sm-3,
-.col-sm-4, .col-sm-5, .col-sm-6,
-.col-sm-7, .col-sm-8, .col-sm-9 {
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9 {
   position: relative;
   min-height: 1px; }
   @media (min-width: 768px) {
-    .col-sm-1, .col-sm-10, .col-sm-11,
-    .col-sm-12, .col-sm-2, .col-sm-3,
-    .col-sm-4, .col-sm-5, .col-sm-6,
-    .col-sm-7, .col-sm-8, .col-sm-9 {
+    .col-sm-1,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9 {
       float: left; } }
 
 .price-summary-wrapper h4 {

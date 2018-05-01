@@ -22,15 +22,14 @@ class Wp_Travel_User_Account {
 	}
 
 	/**
-	 * Output of checkout shotcode.
+	 * Output of account shortcode.
 	 *
 	 * @since 2.2.3
 	 */
 	public static function output() {
 		global $wt_cart;
 
-
-		// Check cart class is loaded or abort
+		// Check cart class is loaded or abort.
 		if ( is_null( $wt_cart ) ) {
 			return;
 		}
@@ -46,9 +45,11 @@ class Wp_Travel_User_Account {
 				self::lost_password();
 			} else {
 				// Get user login.
-
 				include sprintf( '%s/templates/account/form-login.php', WP_TRAVEL_PRO_ABSPATH );
 			}
+		} else {
+			// Get user Dashboard.
+			include sprintf( '%s/templates/account/dashboard.php', WP_TRAVEL_PRO_ABSPATH );
 		}
 	}
 	/**
