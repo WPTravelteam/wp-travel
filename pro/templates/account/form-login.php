@@ -11,17 +11,18 @@ WP_Travel()->notices->print_notices( 'error', true );
 <div class="login-page">
 	<div class="form">
 		<!-- Registration form -->
-		<form class="register-form">
+		<form method="post" class="register-form">
 			<span class="user-name">
-				<input type="text" placeholder="name"/>
-			</span>
-			<span class="user-password">
-				<input type="password" placeholder="password"/>
+				<input name="username" type="text" placeholder="Username"/>
 			</span>
 			<span class="user-email">
-				<input type="text" placeholder="email address"/>
+				<input name="email" type="text" placeholder="Email Address"/>
 			</span>
-			<button>create</button>
+			<span class="user-password">
+				<input name="password" type="password" placeholder="Password"/>
+			</span>
+			<?php wp_nonce_field( 'wp-travel-register', 'wp-travel-register-nonce' ); ?>
+			<button  type="submit" name="register" value="<?php esc_attr_e( 'Register', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Register', 'wp-travel' ); ?></button>
 			<p class="message">Already registered? <a href="#">Sign In</a></p>
 		</form>
 		<!-- Login Form -->
@@ -35,7 +36,7 @@ WP_Travel()->notices->print_notices( 'error', true );
 			<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'ep-travel' ); ?></span>
 			<?php wp_nonce_field( 'wp-travel-login', 'wp-travel-login-nonce' ); ?>
 
-		<button  type="submit" name="process_login" >login</button>
+		<button  type="submit" name="login" value="<?php esc_attr_e( 'Login', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Login', 'wp-travel' ); ?></button>
 			<p class="message">Not registered? <a href="#">Create an account</a></p>
 			<p class="info">
 				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>">Forgot Password?</a>

@@ -17,6 +17,7 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function init() {
 		add_action( 'wp_loaded', array( __CLASS__, 'process_login' ), 20 );
+		add_action( 'wp_loaded', array( __CLASS__, 'process_registration' ), 20 );
 	}
 
 	/**
@@ -27,7 +28,7 @@ class Wp_Travel_Form_Handler {
 		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
 		$nonce_value = isset( $_POST['wp-travel-login-nonce'] ) ? $_POST['wp-travel-login-nonce'] : $nonce_value;
 
-		if ( ! empty( $_POST['username'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
+		if ( ! empty( $_POST['login'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
 			try {
 				$creds = array(
@@ -87,6 +88,53 @@ class Wp_Travel_Form_Handler {
 
 			WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'wp-travel' ) ), 'error' );
 
+		}
+	}
+
+	/**
+	 * Process the registration form.
+	 */
+	public static function process_registration() {
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
+		$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;
+
+		if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-register' ) ) {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$email    = $_POST['email'];
+
+			try {
+				$validation_error = new WP_Error();
+				$validation_error = apply_filters( 'wp_travel_process_registration_errors', $validation_error, $username, $password, $email );
+
+				if ( $validation_error->get_error_code() ) {
+					throw new Exception( $validation_error->get_error_message() );
+				}
+
+				$new_customer = wp_travel_create_new_customer( sanitize_email( $email ), wc_clean( $username ), $password );
+
+				if ( is_wp_error( $new_customer ) ) {
+					throw new Exception( $new_customer->get_error_message() );
+				}
+
+				if ( apply_filters( 'woocommerce_registration_auth_new_customer', true, $new_customer ) ) {
+					wc_set_customer_auth_cookie( $new_customer );
+				}
+
+				if ( ! empty( $_POST['redirect'] ) ) {
+					$redirect = wp_sanitize_redirect( $_POST['redirect'] );
+				} elseif ( wc_get_raw_referer() ) {
+					$redirect = wc_get_raw_referer();
+				} else {
+					$redirect = wc_get_page_permalink( 'myaccount' );
+				}
+
+				wp_redirect( wp_validate_redirect( apply_filters( 'woocommerce_registration_redirect', $redirect ), wc_get_page_permalink( 'myaccount' ) ) );
+				exit;
+
+			} catch ( Exception $e ) {
+				wc_add_notice( '<strong>' . __( 'Error:', 'woocommerce' ) . '</strong> ' . $e->getMessage(), 'error' );
+			}
 		}
 	}
 }
