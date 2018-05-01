@@ -28,6 +28,10 @@
 		<div>
 			<div class="payment-content">
 				<div class="form-horizontal">
+					<h1>
+						Billing Address
+					</h1>
+
 					<div class="form-group gap-20">
 						<label class="col-sm-4 col-md-3 control-label">Address:</label>
 						<div class="col-sm-8 col-md-9">
