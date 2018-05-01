@@ -36,6 +36,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'price_tab_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_includes_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_facts_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
@@ -228,6 +229,10 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label' => __( 'Includes/ Excludes', 'wp-travel' ),
 			'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
 		);
+		$trips['trip_facts'] = array(
+			'tab_label' => __( 'Facts', 'wp-travel' ),
+			'content_title' => __( 'Trip Facts', 'wp-travel' ),
+		);
 		// $trips['additional_info'] = array(
 		// 	'tab_label' => __( 'Additional Info', 'wp-travel' ),
 		// 	'content_title' => __( 'Additional Info', 'wp-travel' ),
@@ -410,6 +415,13 @@ class WP_Travel_Admin_Metaboxes {
 		WP_Travel()->tabs->content( 'itineraries/itineraries-content.php' );
 
 	 }
+
+	public function trip_facts_callback($tab, $args){
+	if( 'trip_facts' !== $tab ) {
+		return;
+	}
+	WP_Travel()->tabs->content( 'itineraries/fact-tab.php' );
+	}
 
 	 /**
 	 * Callback Function For Itineraries Content Tabs
@@ -909,6 +921,14 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		update_post_meta( $post_id, 'wp_travel_multiple_trip_dates', $wp_travel_multiple_trip_dates );
+
+		$wp_travel_trip_facts = array();
+
+		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
+			$wp_travel_trip_facts = json_encode(array_filter(array_filter(array_values($_POST['wp_travel_trip_facts']),'array_filter'),'count'));
+		}
+
+		update_post_meta( $post_id, 'wp_travel_trip_facts', $wp_travel_trip_facts );
 		
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 

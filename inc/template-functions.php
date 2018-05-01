@@ -519,6 +519,71 @@ function wp_travel_single_location( $post_id ) {
 }
 
 /**
+ * wp_travel_frontend_trip_facts Frontend facts content.
+ *
+ * @since 1.3.2
+ */
+function wp_travel_frontend_trip_facts(  $post_id ) {
+
+	if ( ! $post_id ) {
+		return;
+	}
+	$settings = wp_travel_get_settings();
+
+	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
+
+	if ( 'no' === $wp_travel_trip_facts_enable ) {
+		return;
+	}
+
+	$wp_travel_trip_facts = get_post_meta( $post_id, 'wp_travel_trip_facts', true );
+
+	if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
+
+		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
+	} else {
+		return '';
+	}
+	 
+	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) { 
+	?>
+		<!-- TRIP FACTS -->
+		<div class="tour-info">
+			<div class="tour-info-box clearfix">
+				<div class="tour-info-column clearfix">
+					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+						<span class="tour-info-item tour-info-type">
+							<i class="fa <?php echo esc_attr( $trip_fact['icon'] ); ?>" aria-hidden="true"></i>
+							<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
+							<?php 
+							if ( $trip_fact['type'] === 'multiple' ) {
+								$count = count( $trip_fact['value'] );
+								$i = 1;
+								foreach ( $trip_fact['value'] as $key => $val ) {
+									echo esc_html( $val );
+									if ( $count > 1 && $i !== $count ) {
+										echo esc_html( ',', 'wp-travel' );
+									}
+								$i++;
+								}
+
+							}
+							else {
+								echo esc_html( $trip_fact['value'] );
+							}
+
+							?>  
+						</span>
+					<?php endforeach; ?>
+                </div>
+            </div>
+		</div>
+		<!-- TRIP FACTS END -->
+	<?php 
+	} 
+}
+
+/**
  * Single Page Details
  *
  * @param Int $post_id
@@ -1276,7 +1341,7 @@ function wp_travel_archive_toolbar() {
  * @return void
  */
 function wp_travel_archive_wrapper_close() {
-	if ( is_wp_travel_archive_page() && ! is_admin() ) :
+	if ( ( is_wp_travel_archive_page() || is_search() ) && ! is_admin() ) :
 		$view_mode = wp_travel_get_archive_view_mode();	 ?>
 		<?php if ( 'grid' === $view_mode ) : ?>
 				</ul>
@@ -1615,9 +1680,10 @@ add_action( 'wp_travel_after_single_title', 'wp_travel_single_excerpt', 1 );
 add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents' );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map' );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries' );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trip_facts');
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 20);
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map', 20 );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 20 );
 add_filter( 'the_content', 'wp_travel_content_filter' );
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
