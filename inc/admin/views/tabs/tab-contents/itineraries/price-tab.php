@@ -240,9 +240,9 @@ if ( ! $price_per ) {
 											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Number of PAX', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
+													<input class="pricing-opt-min-pax" value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
 
-													<input value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
+													<input class="pricing-opt-max-pax" value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
 												</div>
 											</div>
 										</div>
@@ -342,9 +342,9 @@ if ( ! $price_per ) {
 								<div class="repeat-row">
 									<label class="one-third"><?php esc_html_e( 'Number of PAX', 'wp-travel' ); ?></label>
 									<div class="two-third">
-										<input type="number" name="wp_travel_pricing_options[{{data.random}}][min_pax]" placeholder="Min PAX"  min="1" />
+										<input class="pricing-opt-min-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][min_pax]" placeholder="Min PAX"  min="1" />
 
-										<input type="number" name="wp_travel_pricing_options[{{data.random}}][max_pax]" placeholder="Max PAX"  min="1" />
+										<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][max_pax]" placeholder="Max PAX"  min="1" />
 									</div>
 								</div>
 							</div>

@@ -109,9 +109,9 @@ $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] )
 		<?php echo wp_travel_trip_facts_setting_sample(); ?>
 	</div>
 	<div id="fact-sample-collector">
-		<?php if (array_key_exists('wp_travel_trip_facts_settings', $settings)) : ?>
-			<?php foreach ($settings['wp_travel_trip_facts_settings'] as $fact) : ?>
-				<?php echo wp_travel_trip_facts_setting_sample($fact); ?>
+		<?php if ( is_array( $settings ) && array_key_exists( 'wp_travel_trip_facts_settings', $settings ) ) : ?>
+			<?php foreach ( $settings['wp_travel_trip_facts_settings'] as $fact ) : ?>
+				<?php echo wp_travel_trip_facts_setting_sample( $fact ); ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
 	</div>
