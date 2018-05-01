@@ -83,7 +83,7 @@ class Wp_Travel_Form_Handler {
 				WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Invalid Username or Password', 'wp-travel' ) ), 'error' );
 
 			}
-		} else {
+		} elseif ( isset( $_POST['username'] ) && empty( $_POST['username'] ) ) {
 
 			WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'wp-travel' ) ), 'error' );
 
