@@ -66,17 +66,16 @@ class Wp_Travel_Form_Handler {
 					throw new Exception( $message );
 				} else {
 
-					// if ( ! empty( $_POST['redirect'] ) ) {
-					// 	$redirect = $_POST['redirect'];
-					// } elseif ( wc_get_raw_referer() ) {
-					// 	$redirect = wc_get_raw_referer();
-					// } else {
-					// 	$redirect = wc_get_page_permalink( 'myaccount' );
-					// }
+					if ( ! empty( $_POST['redirect'] ) ) {
+						$redirect = $_POST['redirect'];
+					} elseif ( wp_travel_get_raw_referer() ) {
+						$redirect = wp_travel_get_raw_referer();
+					} else {
+						$redirect = wc_get_page_permalink( 'wp-travel-dashboard' );
+					}
 
-					// wp_redirect( wp_validate_redirect( apply_filters( 'woocommerce_login_redirect', remove_query_arg( 'wc_error', $redirect ), $user ), wc_get_page_permalink( 'myaccount' ) ) );
+					wp_redirect( wp_validate_redirect( apply_filters( 'woocommerce_login_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 
-					wp_redirect( 'http://localhost/testsite/dashboard-2/' );
 					exit;
 				}
 			} catch ( Exception $e ) {
@@ -111,29 +110,29 @@ class Wp_Travel_Form_Handler {
 					throw new Exception( $validation_error->get_error_message() );
 				}
 
-				$new_customer = wp_travel_create_new_customer( sanitize_email( $email ), wc_clean( $username ), $password );
+				$new_customer = wp_travel_create_new_customer( sanitize_email( $email ), $username, $password );
 
 				if ( is_wp_error( $new_customer ) ) {
 					throw new Exception( $new_customer->get_error_message() );
 				}
 
-				if ( apply_filters( 'woocommerce_registration_auth_new_customer', true, $new_customer ) ) {
-					wc_set_customer_auth_cookie( $new_customer );
+				if ( apply_filters( 'wp_travel_registration_auth_new_customer', true, $new_customer ) ) {
+					wp_travel_set_customer_auth_cookie( $new_customer );
 				}
 
-				if ( ! empty( $_POST['redirect'] ) ) {
-					$redirect = wp_sanitize_redirect( $_POST['redirect'] );
-				} elseif ( wc_get_raw_referer() ) {
-					$redirect = wc_get_raw_referer();
-				} else {
-					$redirect = wc_get_page_permalink( 'myaccount' );
-				}
+				// if ( ! empty( $_POST['redirect'] ) ) {
+				// 	$redirect = wp_sanitize_redirect( $_POST['redirect'] );
+				// } elseif ( wc_get_raw_referer() ) {
+				// 	$redirect = wc_get_raw_referer();
+				// } else {
+				// 	$redirect = wc_get_page_permalink( 'myaccount' );
+				// }
 
-				wp_redirect( wp_validate_redirect( apply_filters( 'woocommerce_registration_redirect', $redirect ), wc_get_page_permalink( 'myaccount' ) ) );
+				wp_redirect( 'http://localhost/testsite/dashboard-2/' );
 				exit;
 
 			} catch ( Exception $e ) {
-				wc_add_notice( '<strong>' . __( 'Error:', 'woocommerce' ) . '</strong> ' . $e->getMessage(), 'error' );
+				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $e->getMessage(), 'error' );
 			}
 		}
 	}

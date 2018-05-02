@@ -62,7 +62,7 @@ if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
 		// Use WP_Error to handle registration errors.
 		$errors = new WP_Error();
 
-		do_action( 'wp_travel_register_post', $username, $email, $errors );
+		// do_action( 'wp_travel_register_post', $username, $email, $errors );
 
 		$errors = apply_filters( 'wp_travel_registration_errors', $errors, $username, $email );
 
@@ -87,4 +87,17 @@ if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
 
 		return $customer_id;
 	}
+}
+
+/**
+ * Login a member (set auth cookie and set global user object).
+ *
+ * @param int $customer_id
+ */
+function wp_travel_set_customer_auth_cookie( $customer_id ) {
+	global $current_user;
+
+	$current_user = get_user_by( 'id', $customer_id );
+
+	wp_set_auth_cookie( $customer_id, true );
 }

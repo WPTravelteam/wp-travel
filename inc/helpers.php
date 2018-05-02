@@ -1697,3 +1697,25 @@ function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
 	return false;
 	
 }
+
+/**
+ * Retrieves unvalidated referer from '_wp_http_referer' or HTTP referer.
+ *
+ * Do not use for redirects, use {@see wp_get_referer()} instead.
+ *
+ * @since 1.3.3
+ * @return string|false Referer URL on success, false on failure.
+ */
+function wp_travel_get_raw_referer() {
+	if ( function_exists( 'wp_get_raw_referer' ) ) {
+		return wp_get_raw_referer();
+	}
+
+	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
+		return wp_unslash( $_REQUEST['_wp_http_referer'] );
+	} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+		return wp_unslash( $_SERVER['HTTP_REFERER'] );
+	}
+
+	return false;
+}
