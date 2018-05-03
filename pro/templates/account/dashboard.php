@@ -9,53 +9,218 @@
 	<ul class="resp-tabs-list ver_1">
 		<li><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
 		<li><i class="fa fa-th-list" aria-hidden="true"></i>My Order</li>
-		<li><i class="fa fa-address-card-o" aria-hidden="true"></i></i>Address</li>
+		<li><i class="fa fa-address-book-o" aria-hidden="true"></i>Address</li>
 		<li><i class="fa fa-user" aria-hidden="true"></i>Account</li>
+		<li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Payment Option</li>
+		<li><i class="fa fa-comments-o" aria-hidden="true"></i>Review & Ratings</li>
 		<li><i class="fa fa-power-off" aria-hidden="true"></i>Logout</li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
 		<div>
-			<p>Hello <strong>sus.hill</strong> (not <strong>sus.hill</strong>? <a href="http://w-travel.com/my-account/customer-logout/?_wpnonce=3496707296">Log out</a>)</p>
+			<p>Hello, <strong>sus.hill</strong></p>
 
-			<p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
+			<p>From your account dashboard you can view your recent orders, manage your shipping and billing an addresses and edit your password and account details.</p>
+			<div class="lists clearfix">
+				<div class="list-item">
+					<div class="list-item-wrapper">
+						<div class="item">
+							<a href="#"><strong>My orders</strong></a>
+							<div class="box-content">
+								<p>
+									You haven't order anything yet.
+                    			</p>
+                    			<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now</a>
+							</div>
+							<div class="box-actions">
+					            <a class="action edit" href="#">
+					            	<!-- <i class="fa fa-pencil" aria-hidden="true"></i>
+					                <span>Edit</span> -->
+					            </a>
+					        </div>
+						</div>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="list-item-wrapper">
+						<div class="item">
+							<a href="#"><strong>Address</strong></a>
+							<div class="box-content">
+								<p>
+									Kathmandu<br>
+									Nepal<br>
+                    				9812345678<br>
+                    			</p>
+							</div>
+							<div class="box-actions">
+					            <a class="action edit" href="#">
+					            	<i class="fa fa-pencil" aria-hidden="true"></i>
+					                <span>Edit</span>
+					            </a>
+					        </div>
+						</div>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="list-item-wrapper">
+						<div class="item">
+							<a href="#"><strong>Account Info</strong></a>
+							<div class="box-content">
+								<p>
+									sunil regmi<br>
+                    				regmi.sunil@wensolutions.com<br>
+                    			</p>
+							</div>
+							<div class="box-actions">
+					            <a class="action edit" href="#">
+					            	<i class="fa fa-pencil" aria-hidden="true"></i>
+					                <span>Edit</span>
+					            </a>
+					            <a href="#" class="action change-password">
+					                Change Password</a>
+					        </div>
+						</div>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="list-item-wrapper">
+						<div class="item">
+							<a href="#"><strong>Payment Option</strong></a>
+							<div class="box-content">
+								<p>
+									Kathmandu<br>
+									Nepal<br>
+                    				9812345678<br>
+                    			</p>
+							</div>
+							<div class="box-actions">
+					            <a class="action edit" href="#">
+					            	<i class="fa fa-pencil" aria-hidden="true"></i>
+					                <span>Edit</span>
+					            </a>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div>
-			<p>No Orders Have been made yet</p>
-		<p>
-	<a href="http://skynet.wensolutions.com/travel-log/?post_type=itineraries&s=&itinerary_types=0&travel_locations=0&wp-travel_search=Search">Book Your Trip Now</a>
-			</p>
+		<div class="my-order">
+			<div class="no-order">
+				<p>
+					You havnt order anything yet 
+					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
+				</p>
+			</div>
+			<div class="no-recent-order">
+				<p>
+					You have no-recent orders 
+					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
+					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">view recent orders</a>
+				</p>
+			</div>
+			<div class="view-order">
+				<div class="order-list">			
+					<div class="order-wrapper">
+						<h3>Your order</h3>
+						<div class="table-wrp">
+							<table class="order-list-table">
+								<thead>
+									<tr>
+									<th class="name">Trip</th>
+									<th class="total">Total</th>
+									<th class="pax">pax</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="cart-item">
+										<td class="name">
+											Family Ski Vacations
+										</td>
+											<td class="pax">
+											2
+										</td>
+										<td class="total">
+											<span>$</span>
+											<span>1800.00</span>
+										</td>
+									</tr>
+								</tbody>
+								<tbody>
+									<tr class="cart-item">
+										<td class="name">
+											Family Ski Vacations
+										</td>
+										<td class="pax">
+											2
+										</td>
+										<td class="total">
+											<span>$</span>
+											<span>1800.00</span>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr class="total">
+										<th>
+											Total
+										</th>
+										<td>
+											
+										</td>
+										<td>
+											<strong>
+												<span>$</span>
+												<span>5800.00</span>
+											</strong> 
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>					
+				</div> 
+				<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
+				<a href="http://skynet.wensolutions.com/travel-log/itinerary/">view recent orders</a>
+			</div>
 		</div>
+
 		<div>
 			<div class="payment-content">
-				<div class="form-horizontal">
-					<h1>
-						Billing Address
-					</h1>
-
+				<div class="title">
+					<h3>Billing Address</h3>
+				</div>
+				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Address:</label>
+						<label class="col-sm-4 col-md-3 control-label required">Address:</label>
 						<div class="col-sm-8 col-md-9">
 							<input type="text" class="form-control" value="">
 						</div>
 					</div>
 				</div>
-				<div class="form-horizontal">
+				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">City:</label>
+						<label class="col-sm-4 col-md-3 control-label required">City:</label>
 						<div class="col-sm-8 col-md-9">
 							<input type="text" class="form-control" value="">
 						</div>
 					</div>
 				</div>
-				<div class="form-horizontal">
+				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Postal:</label>
+						<label class="col-sm-4 col-md-3 control-label">Company:</label>
 						<div class="col-sm-8 col-md-9">
 							<input type="text" class="form-control" value="">
 						</div>
 					</div>
 				</div>
-				<div class="form-horizontal">
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label required">Zip/Postal code:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="text" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
 						<label class="col-sm-4 col-md-3 control-label">Province:</label>
 						<div class="col-sm-8 col-md-9">
@@ -63,9 +228,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-horizontal">
+				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Conntry:</label>
+						<label class="col-sm-4 col-md-3 control-label required">Conntry:</label>
 						<div class="col-sm-8 col-md-9">
 							<select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
 								<option value="">Conntry</option>   
@@ -80,18 +245,117 @@
 						</div>
 					</div>
 				</div>
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label">Mobile no.:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="text" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label">Land Line:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="text" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+				<p><strong>*</strong>marked fields are required</p>
+				<input type="submit" name="submit" value="Save">
 			</div>
 		</div> 
-		<div>
-			<p>Trash Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque a iure nostrum animi praesentium, numquam quidem, nemo, voluptatem, aspernatur incidunt. Fugiat aspernatur excepturi fugit aut, dicta reprehenderit temporibus, nobis harum consequuntur quo sed, illum.</p>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima doloremque optio tenetur, natus voluptatum error vel dolorem atque perspiciatis aliquam nemo id libero dicta est saepe laudantium provident tempore ipsa, accusamus similique laborum, consequatur quia, aut non maiores. Consectetur minus ipsum aliquam pariatur dolorem rerum laudantium minima perferendis in vero voluptatem suscipit cum labore nemo explicabo, itaque nobis debitis molestias officiis? Impedit corporis voluptates reiciendis deleniti, magnam, fuga eveniet! Velit ipsa quo labore molestias mollitia, quidem, alias nisi architecto dolor aliquid qui commodi tempore deleniti animi repellat delectus hic. Alias obcaecati fuga assumenda nihil aliquid sed vero, modi, voluptatem? Vitae voluptas aperiam nostrum quo harum numquam earum facilis sequi. Labore maxime laboriosam omnis delectus odit harum recusandae sint incidunt, totam iure commodi ducimus similique doloremque! Odio quaerat dolorum, alias nihil quam iure delectus repellendus modi cupiditate dolore atque quasi obcaecati quis magni excepturi vel, non nemo consequatur, mollitia rerum amet in. Nesciunt placeat magni, provident tempora possimus ut doloribus ullam!</p>
-		</div>
-		<div>
-			<p>Trash Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque a iure nostrum animi praesentium, numquam quidem, nemo, voluptatem, aspernatur incidunt. Fugiat aspernatur excepturi fugit aut, dicta reprehenderit temporibus, nobis harum consequuntur quo sed, illum.</p>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima doloremque optio tenetur, natus voluptatum error vel dolorem atque perspiciatis aliquam nemo id libero dicta est saepe laudantium provident tempore ipsa, accusamus similique laborum, consequatur quia, aut non maiores. Consectetur minus ipsum aliquam pariatur dolorem rerum laudantium minima perferendis in vero voluptatem suscipit cum labore nemo explicabo, itaque nobis debitis molestias officiis? Impedit corporis voluptates reiciendis deleniti, magnam, fuga eveniet! Velit ipsa quo labore molestias mollitia, quidem, alias nisi architecto dolor aliquid qui commodi tempore deleniti animi repellat delectus hic. Alias obcaecati fuga assumenda nihil aliquid sed vero, modi, voluptatem? Vitae voluptas aperiam nostrum quo harum numquam earum facilis sequi. Labore maxime laboriosam omnis delectus odit harum recusandae sint incidunt, totam iure commodi ducimus similique doloremque! Odio quaerat dolorum, alias nihil quam iure delectus repellendus modi cupiditate dolore atque quasi obcaecati quis magni excepturi vel, non nemo consequatur, mollitia rerum amet in. Nesciunt placeat magni, provident tempora possimus ut doloribus ullam!</p>
+		<div class="account-setting">
+			<div class="title">
+				<h3>My Account</h3>
+			</div>
+			<div class="form-horizontal clearfix">
+				<div class="form-group gap-20">
+					<label class="col-sm-4 col-md-3 control-label">First Name:</label>
+					<div class="col-sm-8 col-md-9">
+						<input type="text" class="form-control" value="">
+					</div>
+				</div>
+			</div>
+			<div class="form-horizontal clearfix">
+				<div class="form-group gap-20">
+					<label class="col-sm-4 col-md-3 control-label">Last Name:</label>
+					<div class="col-sm-8 col-md-9">
+						<input type="text" class="form-control" value="">
+					</div>
+				</div>
+			</div>
+			<div class="form-horizontal clearfix">
+				<div class="form-group gap-20">
+					<label class="col-sm-4 col-md-3 control-label">E-mail:</label>
+					<div class="col-sm-8 col-md-9">
+						<input type="text" class="form-control" value="">
+					</div>
+				</div>
+			</div>
+			<div class="form-horizontal clearfix">
+				<div class="form-group gap-20">
+					<label class="col-sm-4 col-md-3 control-label">Change Password</label>
+					<div class="col-sm-8 col-md-9">
+						<div class="onoffswitch">
+						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+						    <label class="onoffswitch-label" for="myonoffswitch">
+						      <span class="onoffswitch-inner"></span>
+						      <span class="onoffswitch-switch"></span>
+						    </label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ch-password clearfix">
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label">Current Password:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="password" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label">New Password:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="password" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+				<div class="form-horizontal clearfix">
+					<div class="form-group gap-20">
+						<label class="col-sm-4 col-md-3 control-label">Conform New Password:</label>
+						<div class="col-sm-8 col-md-9">
+							<input type="password" class="form-control" value="">
+						</div>
+					</div>
+				</div>
+			<input type="submit" name="submit" value="Save Change">
+
+			</div>
 		</div>
+		<div class="dsdsd">
+			1
+		</div>
+		<div class="dsdsd">
+			2
+		</div>
+		<div class="log-out">
+			<div class="title">
+				<h3>Log Out?</h3>
+				<span>
+					<input type="button" name="" value="logout">
+				</span>
+			</div>
+
+		</div>
+		
+
+
 	</div>
 </div>
 <script type="text/javascript" src="http://skynet.wensolutions.com/travel-log/wp-content/plugins/wp-travel/assets/js/easy-responsive-tabs.js"></script>
