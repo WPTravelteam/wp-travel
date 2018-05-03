@@ -130,7 +130,7 @@ class WP_Travel_Admin_Settings {
 			);
 		}
 
-		$tabs[ self::$collection ] = $settings_fields;
+		$tabs[ self::$collection ] = apply_filters( 'wp_travel_settings_tabs', $settings_fields );
 		return $tabs;
 	}
 
@@ -625,8 +625,7 @@ class WP_Travel_Admin_Settings {
 						</div>
 					</div>
 				</div>
-			
-			
+
 			</div>
 		</div>
 

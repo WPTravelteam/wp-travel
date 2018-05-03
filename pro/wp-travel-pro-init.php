@@ -95,9 +95,11 @@ class Wp_Travel_Pro_Init {
 	 */
 	public function includes() {
 
+		include sprintf( '%s/inc/wp-travel-user-functions.php', WP_TRAVEL_PRO_ABSPATH );
 		include sprintf( '%s/inc/class-wp-travel-user-account.php', WP_TRAVEL_PRO_ABSPATH );
 		include sprintf( '%s/inc/class-wp-travel-pro-shortcodes.php', WP_TRAVEL_PRO_ABSPATH );
-		include sprintf( '%s/inc/class-wp-travel-form-handler.php', WP_TRAVEL_PRO_ABSPATH );		
+		include sprintf( '%s/inc/class-wp-travel-form-handler.php', WP_TRAVEL_PRO_ABSPATH );
+		include sprintf( '%s/inc/admin/wp-travel-additional-admin-settings.php', WP_TRAVEL_PRO_ABSPATH );
 
 	}
 	/**
@@ -109,11 +111,11 @@ class Wp_Travel_Pro_Init {
 
 	}
 	/**
-	 * Frontend scripts 
+	 * Frontend scripts.
 	*/
 	public function frontend_scripts() {
 
-		wp_enqueue_style( 'wp-travel-pro-frontend-css', plugin_dir_url( __FILE__ ) . 'assets/css/wp-travel-frontend-pro.css');
+		wp_enqueue_style( 'wp-travel-pro-frontend-css', plugin_dir_url( __FILE__ ) . 'assets/css/wp-travel-frontend-pro.css' );
 	}
 }
 /**
@@ -128,5 +130,5 @@ function Wp_Travel_Pro_Init() {
 	return Wp_Travel_Pro_Init::instance();
 }
 
-// Start WP Travel Pro Init.
+// Start WP Travel Pro.
 Wp_Travel_Pro_Init();
