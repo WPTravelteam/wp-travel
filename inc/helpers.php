@@ -1719,3 +1719,27 @@ function wp_travel_get_raw_referer() {
 
 	return false;
 }
+
+if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
+
+	/**
+	 * wp_travel_Is_account_page - Returns true when viewing an account page.
+	 *
+	 * @return bool
+	 */
+	function wp_travel_is_account_page() {
+		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'woocommerce_is_account_page', false );
+	}
+}
+
+/**
+ * Checks whether the content passed contains a specific short code.
+ *
+ * @param  string $tag Shortcode tag to check.
+ * @return bool
+ */
+function wp_travel_post_content_has_shortcode( $tag = '' ) {
+	global $post;
+
+	return is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $tag );
+}

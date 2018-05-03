@@ -74,7 +74,7 @@ if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
 			'user_login' => $username,
 			'user_pass'  => $password,
 			'user_email' => $email,
-			'role'       => 'customer',
+			'role'       => 'wp-travel-customer',
 		) );
 
 		$customer_id = wp_insert_user( $new_customer_data );
