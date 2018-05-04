@@ -24,7 +24,12 @@ class WP_Travel_Frontend_Assets {
 		$settings = wp_travel_get_settings();
 
 		global $post;
-		$trip_id = $post->ID;
+
+		$trip_id = '';
+
+		if ( ! is_null( $post ) ) {
+			$trip_id = $post->ID;
+		}
 		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) && isset( $_GET['trip_id'] ) ) {
 			$trip_id = $_GET['trip_id'];
 		}
@@ -55,7 +60,8 @@ class WP_Travel_Frontend_Assets {
 			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 				$api_key = $settings['google_map_api_key'];
 			}
-
+			// Parsley For Frontend Single Trips.
+			wp_enqueue_script( 'jquery-parsley-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
 			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery','jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), '', true );
 			if ( '' != $api_key ) {
