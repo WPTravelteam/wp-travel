@@ -60,8 +60,12 @@ class WP_Travel_Frontend_Assets {
 			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 				$api_key = $settings['google_map_api_key'];
 			}
-			// Parsley For Frontend Single Trips.
-			wp_enqueue_script( 'jquery-parsley-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+
+			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
+				// Parsley For Frontend Single Trips.
+				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+			}
+
 			wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
 			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery','jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), '', true );
 			if ( '' != $api_key ) {
