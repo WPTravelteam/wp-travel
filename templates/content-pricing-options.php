@@ -128,7 +128,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 												}
 												?>
 											</span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
+										</ins>/<?php echo esc_html( $pricing_name ); ?>
 									</span>
 							<?php endif; ?>
 						</div>
