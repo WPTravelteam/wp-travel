@@ -47,14 +47,20 @@
   .form .register-form,
   .form .forgot-form {
     display: none; }
-  .form .login-form span,
-  .form .register-form span,
-  .form .forgot-form span {
+  .form .login-form span.user-username,
+  .form .login-form span.user-password,
+  .form .register-form span.user-username,
+  .form .register-form span.user-password,
+  .form .forgot-form span.user-username,
+  .form .forgot-form span.user-password {
     position: relative;
     display: block; }
-    .form .login-form span:before,
-    .form .register-form span:before,
-    .form .forgot-form span:before {
+    .form .login-form span.user-username:before,
+    .form .login-form span.user-password:before,
+    .form .register-form span.user-username:before,
+    .form .register-form span.user-password:before,
+    .form .forgot-form span.user-username:before,
+    .form .forgot-form span.user-password:before {
       font-family: fontawesome;
       left: 1px;
       top: 1px;
@@ -64,19 +70,31 @@
       line-height: 40px;
       background-color: #fff;
       border-right: 1px solid #ddd; }
-    .form .login-form span.user-username:before, .form .login-form span.user-name:before,
-    .form .register-form span.user-username:before,
-    .form .register-form span.user-name:before,
-    .form .forgot-form span.user-username:before,
-    .form .forgot-form span.user-name:before {
+    .form .login-form span.user-username.user-username:before, .form .login-form span.user-username.user-name:before,
+    .form .login-form span.user-password.user-username:before,
+    .form .login-form span.user-password.user-name:before,
+    .form .register-form span.user-username.user-username:before,
+    .form .register-form span.user-username.user-name:before,
+    .form .register-form span.user-password.user-username:before,
+    .form .register-form span.user-password.user-name:before,
+    .form .forgot-form span.user-username.user-username:before,
+    .form .forgot-form span.user-username.user-name:before,
+    .form .forgot-form span.user-password.user-username:before,
+    .form .forgot-form span.user-password.user-name:before {
       content: '\f007'; }
-    .form .login-form span.user-password:before,
-    .form .register-form span.user-password:before,
-    .form .forgot-form span.user-password:before {
+    .form .login-form span.user-username.user-password:before,
+    .form .login-form span.user-password.user-password:before,
+    .form .register-form span.user-username.user-password:before,
+    .form .register-form span.user-password.user-password:before,
+    .form .forgot-form span.user-username.user-password:before,
+    .form .forgot-form span.user-password.user-password:before {
       content: '\f023'; }
-    .form .login-form span.user-email:before,
-    .form .register-form span.user-email:before,
-    .form .forgot-form span.user-email:before {
+    .form .login-form span.user-username.user-email:before,
+    .form .login-form span.user-password.user-email:before,
+    .form .register-form span.user-username.user-email:before,
+    .form .register-form span.user-password.user-email:before,
+    .form .forgot-form span.user-username.user-email:before,
+    .form .forgot-form span.user-password.user-email:before {
       content: '\f0e0'; }
 
 .dashboard-tab ul.resp-tabs-list {
@@ -104,11 +122,12 @@
     .dashboard-tab ul.resp-tabs-list li i {
       display: block; }
 .dashboard-tab .resp-tabs-container {
-  width: calc( 100% - 110px );
+  width: calc( 100% - 100px );
   border-radius: 0;
   border: none;
-  min-height: 682px;
-  padding: 30px; }
+  min-height: 465px;
+  padding: 30px;
+  border: 1px solid #eae9de; }
 
 .title {
   margin: 0 0 20px 0; }
@@ -131,7 +150,6 @@ input, select {
   border-radius: 3px; }
 
 .log-out input[type="button"] {
-  display: block;
   margin-top: 20px;
   border-radius: 3px; }
 
@@ -154,12 +172,89 @@ input.form-control {
   -webkit-appearance: button !important;
   padding: 5px; }
 
+table.order-list-table th,
+table.order-list-table td {
+  border: 0px; }
+
+.tbody-content:nth-of-type(even) td,
+.tbody-content:nth-of-type(even) th {
+  background-color: #f5f5f5; }
+
+td.product-thumbnail {
+  width: 110px; }
+
+.order-list-table thead {
+  border-bottom: 2px solid #dcdcdc; }
+
+.product-thumbnail img {
+  margin-bottom: 0 !important; }
+
+.order-list-table tbody td,
+.order-list-table tbody th {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+
+.order-list-table td {
+  padding: 10px 5px !important; }
+
+.log-out span {
+  display: block; }
+
+.book-more a {
+  display: block; }
+
 @media (max-width: 767.99px) {
   .resp-accordion .fa {
     margin-right: 10px; }
 
   .list-item {
-    width: 100% !important; } }
+    width: 100% !important; }
+
+  .order-list-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; }
+
+  .order-list-table tr {
+    border-bottom: 3px solid #ddd;
+    /*display: block;*/
+    margin-bottom: .625em; }
+
+  .order-list-table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right; }
+
+  .order-list-table td:before {
+    content: attr(data-title);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase; }
+
+  .order-list-table td:last-child {
+    border-bottom: 0; }
+
+  .item-image-wrap {
+    display: none; }
+
+  .order-item-title {
+    width: 100% !important;
+    text-align: left; }
+
+  .name-title h4 {
+    margin: 0;
+    display: inline-block; }
+
+  .dashboard-tab .resp-tabs-container {
+    width: 100%; }
+
+  .product-thumbnail {
+    border: 0 !important; } }
 .lists {
   margin: 0 -20px 0 0; }
 
@@ -192,9 +287,9 @@ input.form-control {
 .single-page-article {
   border: 1px solid #eee; }
 
-.dashboard-tab li:first-child {
-  border-top: none !important; }
-
+/*.dashboard-tab li:first-child{
+  border-top: none!important;
+}*/
 .form-horizontal label.required:before {
   content: "*";
   color: #f05451; }
@@ -299,7 +394,7 @@ input:disabled {
   text-align: right; }
 
 .onoffswitch-switch {
-  display: block;
+  display: block !important;
   width: 12px;
   margin: 5px;
   background: #FFFFFF;
@@ -329,5 +424,30 @@ input:disabled {
 .my-order .no-order p a,
 .my-order .no-recent-order p a {
   display: block; }
+
+.resp-arrow {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #000; }
+
+h2.resp-tab-active span.resp-arrow {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #000;
+  border-bottom: none; }
+
+.order-item-title {
+  width: 50%;
+  float: left;
+  padding-left: 10px; }
+
+.item-image-wrap {
+  float: left;
+  width: 50%; }
+
+.order-wrapper h3 {
+  display: inline-block;
+  margin: 0 0 20px 0;
+  border-bottom: 2px solid #f05451; }
 
 /*# sourceMappingURL=wp-travel-frontend-pro.css.map */

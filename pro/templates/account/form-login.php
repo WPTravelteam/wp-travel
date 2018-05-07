@@ -33,7 +33,17 @@ WP_Travel()->notices->print_notices( 'error', true );
 			<span class="user-password">
 				<input name="password" type="password" placeholder="password"/>
 			</span>
-			<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'ep-travel' ); ?></span>
+			<!-- <input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" />  -->
+			
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			      <span class="onoffswitch-inner"></span>
+			      <span class="onoffswitch-switch"></span>
+			    </label>
+			</div>
+
+			<span><?php esc_html_e( 'Remember me', 'ep-travel' ); ?></span>
 			<?php wp_nonce_field( 'wp-travel-login', 'wp-travel-login-nonce' ); ?>
 
 		<button  type="submit" name="login" value="<?php esc_attr_e( 'Login', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Login', 'wp-travel' ); ?></button>
