@@ -53,11 +53,37 @@ class Wp_Travel_User_Account {
 		}
 	}
 	/**
-	 * Lost Password Form.
+	 * Lost password page handling.
 	 */
 	public static function lost_password() {
+		/**
+		 * After sending the reset link, don't show the form again.
+		 */
+		if ( ! empty( $_GET['reset-link-sent'] ) ) {
+			return wc_get_template( 'myaccount/lost-password-confirmation.php' );
 
+			/**
+			 * Process reset key / login from email confirmation link
+			 */
+		} elseif ( ! empty( $_GET['show-reset-form'] ) ) {
+			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ], ':' ) ) {
+				list( $rp_login, $rp_key ) = array_map( 'wc_clean', explode( ':', wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ), 2 ) );
+				$user = self::check_password_reset_key( $rp_key, $rp_login );
 
+				// reset key / login is correct, display reset password form with hidden key / login values
+				if ( is_object( $user ) ) {
+					return wc_get_template( 'myaccount/form-reset-password.php', array(
+						'key'   => $rp_key,
+						'login' => $rp_login,
+					) );
+				}
+			}
+		}
+
+		// Show lost password form by default
+		wc_get_template( 'myaccount/form-lost-password.php', array(
+			'form' => 'lost_password',
+		) );
 	}
 
 }
