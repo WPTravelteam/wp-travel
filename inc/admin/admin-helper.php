@@ -834,7 +834,7 @@ function wp_travel_booking_payment_column_orderby( $vars ) {
  * @param int $post_parent (default: 0) Parent for the new page
  * @return int page ID
  */
-function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
+function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 , $template = '' ) {
 	global $wpdb;
 
 	$option_value     = get_option( $option );
@@ -887,6 +887,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 			'post_content'   => $page_content,
 			'post_parent'    => $post_parent,
 			'comment_status' => 'closed',
+			'page_template'  => $template,
 		);
 		$page_id = wp_insert_post( $page_data );
 	}

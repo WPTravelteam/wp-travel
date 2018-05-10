@@ -76,6 +76,8 @@ class Wp_Travel_Pro_Init {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 
+		add_action( 'template_redirect', array( $this, 'my_page_template_redirect' ) );
+
 	}
 	/**
 	 * Define.
@@ -117,6 +119,16 @@ class Wp_Travel_Pro_Init {
 
 		wp_enqueue_style( 'wp-travel-pro-frontend-css', plugin_dir_url( __FILE__ ) . 'assets/css/wp-travel-frontend-pro.css' );
 	}
+
+		function my_page_template_redirect()
+	{
+		if( is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) && ! is_user_logged_in() )
+		{
+			wp_safe_redirect( sprintf( '%s/templates/account/form-login.php', WP_TRAVEL_PRO_ABSPATH ) );
+			die;
+		}
+	}
+
 }
 /**
  * Main instance of WP Travel Pro Init.
