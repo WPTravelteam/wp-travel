@@ -25,6 +25,8 @@ WP_Travel()->notices->print_notices( 'error', true );
 			<button  type="submit" name="register" value="<?php esc_attr_e( 'Register', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Register', 'wp-travel' ); ?></button>
 			<p class="message"><?php echo esc_attr( 'Already registered?', 'wp-travel' ); ?> <a href="#"><?php echo esc_attr( 'Sign In', 'wp-travel' ); ?></a></p>
 		</form>
+
+
 		<!-- Login Form -->
 		<form method="post" class="login-form">
 			<span class="user-username">
@@ -33,15 +35,30 @@ WP_Travel()->notices->print_notices( 'error', true );
 			<span class="user-password">
 				<input name="password" type="password" placeholder="<?php echo esc_attr( 'Password', 'wp-travel' ); ?>"/>
 			</span>
-			<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'wp-travel' ); ?></span>
-			<?php wp_nonce_field( 'wp-travel-login', 'wp-travel-login-nonce' ); ?>
+
+			<div class="wrapper">
+
+				<div class="float-left">
+					<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" /> 
+					<?php wp_nonce_field( 'wp-travel-login', 'wp-travel-login-nonce' ); ?>
+					<label for="rememberme"><?php esc_html_e( 'Remember me', 'wp-travel' ); ?></label>
+				</div>
+				<div class="float-right">
+					<p class="info">
+						<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php echo esc_html( 'Forgot Password ?', 'wp-travel' ); ?></a>
+					</p>
+				</div>
+			</div>
+
+			
 
 		<button  type="submit" name="login" value="<?php esc_attr_e( 'Login', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Login', 'wp-travel' ); ?></button>
 			<p class="message"><?php echo esc_html( 'Not registered?', 'wp-travel' ); ?> <a href="#"><?php echo esc_html( 'Create an account', 'wp-travel' ); ?></a></p>
-			<p class="info">
-				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php echo esc_html( 'Forgot Password ?', 'wp-travel' ); ?></a>
-			</p>
-		</form>
+					</form>
+
+
+
+
 		<!-- Password Reset -->
 		<form class="forgot-form">
 				<span class="user-username">

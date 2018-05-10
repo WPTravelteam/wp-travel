@@ -11,8 +11,8 @@
 		<li><i class="fa fa-th-list" aria-hidden="true"></i>My Order</li>
 		<li><i class="fa fa-address-book-o" aria-hidden="true"></i>Address</li>
 		<li><i class="fa fa-user" aria-hidden="true"></i>Account</li>
-		<li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Payment Option</li>
-		<li><i class="fa fa-comments-o" aria-hidden="true"></i>Review & Ratings</li>
+		<!-- <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Payment Option</li> -->
+		<!-- <li><i class="fa fa-comments-o" aria-hidden="true"></i>Review & Ratings</li> -->
 		<li><i class="fa fa-power-off" aria-hidden="true"></i>Logout</li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
@@ -125,65 +125,175 @@
 							<table class="order-list-table">
 								<thead>
 									<tr>
-									<th class="name">Trip</th>
-									<th class="total">Total</th>
-									<th class="pax">pax</th>
+										<th></th>
+										<th>Tour</th>
+										<th>Price</th>
+										<th>PAX</th>
+										<th class="text-right">Total</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="cart-item">
-										<td class="name">
-											Family Ski Vacations
+								<tbody>				
+									<tr class="tbody-content">
+										<td class="product-thumbnail">
+											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
+											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">
+										</a> 
 										</td>
-											<td class="pax">
-											2
+										<td class="name" data-title="name">
+											<div class="name-title">
+													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
+											</div>
 										</td>
-										<td class="total">
-											<span>$</span>
-											<span>1800.00</span>
+										<td class="price" data-title="Price">
+											<span class="price-per-pack">
+												<ins>
+													<span>
+														 $ 500.00 
+													</span>
+												</ins>/pax						
+											</span>
 										</td>
+										<td class="product-quantity" data-title="PAX">
+											<div class="st_adults">
+												<span>
+													3
+												</span>
+											</div>
+										</td>
+										<td class="product-subtotal text-right" data-title="Total">
+											<div class="order-list-table">
+												<p>
+													<strong>
+														<span class="woocommerce-Price-currencySymbol">$</span>
+														<span class="wp-travel-trip-total"> 1500.00 </span>
+													</strong>
+												</p>
+											</div>
+										</td> 
 									</tr>
-								</tbody>
-								<tbody>
-									<tr class="cart-item">
-										<td class="name">
-											Family Ski Vacations
+									<tr class="tbody-content">
+
+										<td class="product-thumbnail">
+											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
+											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">	
+										</a> 
 										</td>
-										<td class="pax">
-											2
+										<td class="name" data-title="name">
+											<div class="name-title">
+													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
+											</div>
 										</td>
-										<td class="total">
-											<span>$</span>
-											<span>1800.00</span>
+										<td class="price" data-title="Price">
+											<span class="price-per-pack">
+												<ins>
+													<span>
+														 $ 500.00 
+													</span>
+												</ins>/pax							
+											</span>
 										</td>
+										<td class="product-quantity" data-title="PAX">
+											<div class="st_adults">
+												<span>
+													3
+												</span>
+											</div>
+										</td>
+										<td class="product-subtotal text-right" data-title="Total">
+											<div class="order-list-table">
+												<p>
+													<strong>
+														<span class="woocommerce-Price-currencySymbol">$</span>
+														<span class="wp-travel-trip-total"> 1500.00 </span>
+													</strong>
+												</p>
+											</div>
+										</td> 
+									</tr>
+									<tr class="tbody-content">
+
+										<td class="product-thumbnail">
+											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
+											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">	
+										</a> 
+										</td>
+										<td class="name" data-title="name">
+											<div class="name-title">
+												
+													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
+												
+											</div>
+										</td>
+										<td class="price" data-title="Price">
+											<span class="price-per-pack">
+												<ins>
+													<span>
+														 $ 500.00 
+													</span>
+												</ins>/pax							
+											</span>
+										</td>
+										<td class="product-quantity" data-title="PAX">
+											<div class="st_adults">
+												<span>
+													3
+												</span>
+											</div>
+										</td>
+										<td class="product-subtotal text-right" data-title="Total">
+											<div class="order-list-table">
+												<p>
+													<strong>
+														<span class="woocommerce-Price-currencySymbol">$</span>
+														<span class="wp-travel-trip-total"> 1500.00 </span>
+													</strong>
+												</p>
+											</div>
+										</td> 
 									</tr>
 								</tbody>
 								<tfoot>
-									<tr class="total">
+									
+								</tfoot>
+							</table>
+							<table class="order-list-table total-table">
+								<tbody>
+									<tr>
 										<th>
-											Total
+											<p><strong>Subtotal</strong></p>
+											<p><strong>Tax:  
+											<span class="tax-percent">10%</span></strong></p>
 										</th>
-										<td>
-											
-										</td>
-										<td>
-											<strong>
-												<span>$</span>
-												<span>5800.00</span>
-											</strong> 
+										<td class="text-right">
+											<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol">$</span>1800.00</strong></p>
+											<p><strong><span class="wp-travel-tax ws-theme-currencySymbol">$</span>180.00</strong></p>
 										</td>
 									</tr>
-								</tfoot>
+						
+									<tr>
+										<th>
+											<strong>Total</strong>
+										</th>
+										<td class="text-right">
+											<p class="total">
+												<strong>$<span class="wp-travel-total ws-theme-currencySymbol">1980.00</span></strong>
+											</p>
+										</td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 					</div>					
 				</div> 
-				<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
-				<a href="http://skynet.wensolutions.com/travel-log/itinerary/">view recent orders</a>
+				<div class="book-more">
+					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book more?</a>
+					<a href="#">View recent orders</a>
+				</div>
+				
 			</div>
 		</div>
 
-		<div>
+		<div class="clearfix">
 			<div class="payment-content">
 				<div class="title">
 					<h3>Billing Address</h3>
@@ -338,16 +448,11 @@
 
 			</div>
 		</div>
-		<div class="dsdsd">
-			1
-		</div>
-		<div class="dsdsd">
-			2
-		</div>
 		<div class="log-out">
 			<div class="title">
 				<h3>Log Out?</h3>
 				<span>
+					Are you sure want to log out?
 					<input type="button" name="" value="logout">
 				</span>
 			</div>
