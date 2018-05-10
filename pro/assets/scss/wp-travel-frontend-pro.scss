@@ -11,11 +11,12 @@
     padding: 45px 30px;
     text-align: center;
     border: 1px solid #ddd;
-  input {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
     outline: 0;
     background: #fff;
     width: 100%;
-    border: 0;
     margin: 0 0 15px;
     padding:5px 15px 5px 50px !important;
     box-sizing: border-box;
@@ -28,14 +29,15 @@
     text-transform: uppercase;
     outline: 0;
     background: #df1814;
-    width: 100%;
     border: 0;
-    padding:10px 15px;
+    padding: 10px 30px;
     color: #FFFFFF;
     font-size: 14px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     cursor: pointer;
+    letter-spacing: 3px;
+    border-radius: 0;
 
     &:hover,
     &:focus,
@@ -43,9 +45,8 @@
       background: #f83531;
     }
   }
-  .message,
-  .info {
-    margin: 15px 0 0;
+  .message {
+    margin: 40px 0 0;
     color: #b3b3b3;
     font-size: 12px;
 
@@ -62,7 +63,9 @@
   .register-form,
   .forgot-form{
       span.user-username,
-      span.user-password {
+      span.user-password,
+      .user-name,
+      .user-email {
           position: relative;
           display: block;
           &:before{
@@ -76,21 +79,40 @@
             background-color: #fff;
             border-right: 1px solid #ddd;
           }
-
-          &.user-username:before,
-          &.user-name:before {
-            content: '\f007';
-          }
-          &.user-password:before{
-            content:'\f023';
-          }
-          &.user-email:before{
-            content:'\f0e0';
-          }
+      }
+      .user-username:before,
+      .user-name:before {
+        content: '\f007';
+      }
+      .user-password:before{
+        content:'\f023';
+      }
+      .user-email:before{
+        content:'\f0e0';
       }
     } 
+    .register-form{
+      .user-password{
+        margin-bottom:30px;
+      }
+    }
 }
 
+
+
+.login-form{
+
+  .wrapper{
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 20px;
+
+    .info,label{
+      font-size:12px;
+    }
+  }
+
+}
 
 
 .dashboard-tab{
@@ -153,6 +175,62 @@
 input , select{
   outline-color: #f05451;
 }
+
+
+
+
+.onoffswitch {
+    position: relative; width: 56px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #FFFFFF; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+
+    &:before,
+    &:after{
+      display: block; float: left; width: 50%; height: 22px; padding: 0; line-height: 22px;
+      font-size: 12px; color: black; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+      box-sizing: border-box;
+    }
+
+    &:before {
+      content: "ON";
+      padding-left: 6px;
+      background-color: #3AC5C9; color: #FFFFFF;
+    }
+    &:after {
+      content: "OFF";
+      padding-right: 6px;
+      background-color: #E85764; color: #FFFFFF;
+      text-align: right;
+    }
+}
+
+.onoffswitch-switch {
+    display: block; width: 12px; margin: 5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 30px;
+    border: 2px solid #FFFFFF; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+
+
 .payment-content input[type="submit"],
 .account-setting input[type="submit"],{
   float: right;
@@ -339,6 +417,8 @@ input {
 input[type="checkbox"] {
     height: 20px;
     width: 20px;
+    line-height:18px;
+    text-align: center;
     vertical-align: middle;
     margin: 0 0.4em 0.4em 0;
     background: rgba(255, 255, 255, 1);
@@ -366,8 +446,8 @@ input[type="checkbox"]:checked:before {
     font-weight: bold;
     color: white;
     content: '\2713';
-    margin-left: 2px;
-    font-size: 14px;
+    margin-left: 0px;
+    font-size: 12px;
 }
 input:disabled {
     background: rgba(0, 0, 0, 0.3);
@@ -375,53 +455,7 @@ input:disabled {
         border: 1px solid rgba(0, 0, 0, 0.3);
     }
 }
-.onoffswitch {
-    position: relative; width: 56px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox {
-    display: none!important;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #FFFFFF; border-radius: 20px;
-}
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 22px; padding: 0; line-height: 22px;
-    font-size: 10px; color: black; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "ON";
-    padding-left: 6px;
-    background-color: #13aff0; 
-    color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-    content: "OFF";
-    padding-right: 6px;
-    background-color: #848484; 
-    color: #FFFFFF;
-    text-align: right;
-}
-.onoffswitch-switch {
-    display: block!important; width: 12px; margin: 5px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 30px;
-    border: 2px solid #FFFFFF; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
-}
+
 .my-order ul li{
   list-style: none;
   float: left;
