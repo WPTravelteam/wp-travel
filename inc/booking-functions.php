@@ -207,7 +207,7 @@ function wp_travel_booking_form_fields() {
 
 				$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
 				$booking_fileds['arrival_date']['type'] = 'hidden';
-				
+
 				$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
 				$booking_fileds['departure_date']['type'] = 'hidden';
 			}
