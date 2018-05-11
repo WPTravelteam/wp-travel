@@ -200,12 +200,17 @@ function wp_travel_booking_form_fields() {
 			unset ( $booking_fileds['departure_date'] );
 		}
 		else {
+			$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
+			$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
-			$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
-			$booking_fileds['arrival_date']['type'] = 'hidden';
-			
-			$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
-			$booking_fileds['departure_date']['type'] = 'hidden';
+			if ( 'yes' === $fixed_departure ) {
+
+				$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+				$booking_fileds['arrival_date']['type'] = 'hidden';
+				
+				$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
+				$booking_fileds['departure_date']['type'] = 'hidden';
+			}
 		}
 	
 	}
