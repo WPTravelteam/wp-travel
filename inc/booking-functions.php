@@ -500,9 +500,8 @@ function wp_travel_get_booking_form() {
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
-	if ( 'no' === $fixed_departure ) {
-		unset( $fields['arrival_date'], $fields['departure_date'] );		
-	} else {
+	if ( 'yes' === $fixed_departure ) {
+		// unset( $fields['arrival_date'], $fields['departure_date'] );		
 		unset( $fields['trip_duration'] );
 	}
 
