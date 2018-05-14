@@ -43,10 +43,10 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget {
 
 		extract( $args );
 		// These are the widget options.
-		$title = $instance['title'];
+		$title = isset( $instance['title'] ) ? $instance['title'] : '';
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
-		$no_of_trip_show = ( $instance['no_of_trip_show'] ) ? $instance['no_of_trip_show'] : $this->no_of_trip_show;
-		$view_mode = ( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
+		$no_of_trip_show = isset( $instance['no_of_trip_show'] ) ? $instance['no_of_trip_show'] : $this->no_of_trip_show;
+		$view_mode = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 
 		echo $before_widget;
 		if ( ! $hide_title ) {

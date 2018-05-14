@@ -95,6 +95,10 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 						$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $pricing_key );
 
+						$pricing_default_types = wp_travel_get_pricing_variation_options();
+
+						$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
+
 					?>
 					<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
 						<div class="date-from">
@@ -128,7 +132,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 												}
 												?>
 											</span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
+										</ins>/<?php echo esc_html( $pricing_type_label ); ?>
 									</span>
 							<?php endif; ?>
 						</div>
@@ -147,11 +151,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 							?>
 							</div>
 							<div class="wp-travel-calender-aside">
-							<?php 
-							$pricing_default_types = wp_travel_get_pricing_variation_options();
-
-							$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
-
+							<?php
 							$max_attr = '';
 							$min_attr = 'min=1';
 							if ( '' !== $pricing_max_pax ) {

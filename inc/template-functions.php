@@ -530,8 +530,16 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 	}
 	$settings = wp_travel_get_settings();
 
-	if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) && ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
+	if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) ) {
 		return '';
+	}
+	if ( isset( $settings['wp_travel_trip_facts_settings'] ) ) {
+
+		if ( ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
+
+			return '';
+		}
+
 	}
 
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
@@ -567,29 +575,31 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 
 							$icon = $ico['icon'];
 						}
+						if ( isset( $trip_fact['value'] ) ) :
 						?>
-						<span class="tour-info-item tour-info-type">
-							<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-							<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
-							<?php 
-							if ( $trip_fact['type'] === 'multiple' ) {
-								$count = count( $trip_fact['value'] );
-								$i = 1;
-								foreach ( $trip_fact['value'] as $key => $val ) {
-									echo esc_html( $val );
-									if ( $count > 1 && $i !== $count ) {
-										echo esc_html( ',', 'wp-travel' );
+							<span class="tour-info-item tour-info-type">
+								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
+								<?php 
+								if ( $trip_fact['type'] === 'multiple' ) {
+									$count = count( $trip_fact['value'] );
+									$i = 1;
+									foreach ( $trip_fact['value'] as $key => $val ) {
+										echo esc_html( $val );
+										if ( $count > 1 && $i !== $count ) {
+											echo esc_html( ',', 'wp-travel' );
+										}
+									$i++;
 									}
-								$i++;
+
+								}
+								else {
+									echo esc_html( $trip_fact['value'] );
 								}
 
-							}
-							else {
-								echo esc_html( $trip_fact['value'] );
-							}
-
-							?>  
-						</span>
+								?>  
+							</span>
+						<?php endif; ?>
 					<?php endforeach; ?>
                 </div>
             </div>

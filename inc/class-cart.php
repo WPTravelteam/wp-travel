@@ -373,11 +373,13 @@ class WP_Travel_Cart {
 		if ( 'yes' === $trip_multiple_date_options && is_array( $available_dates ) && ! empty( $available_dates ) ) {
 
 			return in_array( $test_date, $available_dates, true );
-		}
-		else {
 
-			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
-			$test_date = ( new DateTime( $test_date ) )->format( 'Y-m-d' );
+		} else {
+			$datetime_now  = new DateTime();
+			$datetime_test = new DateTime( $test_date );
+
+			$date_now  = $datetime_now->format( 'Y-m-d' );
+			$test_date = $datetime_test->format( 'Y-m-d' );
 
 			if ( strtotime( $date_now ) <= strtotime( $test_date ) ) {
 

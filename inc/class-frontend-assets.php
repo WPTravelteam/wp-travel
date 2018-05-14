@@ -17,14 +17,19 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Play' );
 		wp_enqueue_style( 'wp-travel-itineraries', $this->assets_path . 'assets/css/wp-travel-itineraries.css' );
 		// fontawesome.
-		wp_enqueue_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/font-awesome' . $suffix . '.css' );
+		wp_enqueue_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/css/font-awesome' . $suffix . '.css' );
 	}
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$settings = wp_travel_get_settings();
 
 		global $post;
-		$trip_id = $post->ID;
+
+		$trip_id = '';
+
+		if ( ! is_null( $post ) ) {
+			$trip_id = $post->ID;
+		}
 		if ( ! is_singular( WP_TRAVEL_POST_TYPE ) && isset( $_GET['trip_id'] ) ) {
 			$trip_id = $_GET['trip_id'];
 		}
@@ -54,6 +59,11 @@ class WP_Travel_Frontend_Assets {
 			$api_key = '';
 			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 				$api_key = $settings['google_map_api_key'];
+			}
+
+			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
+				// Parsley For Frontend Single Trips.
+				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			}
 
 			wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
