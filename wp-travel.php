@@ -219,9 +219,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 
 			// Pro Functionality.
-			if ( file_exists( WP_TRAVEL_ABSPATH . 'pro/wp-travel-pro-init.php' ) ) {
-				include sprintf( '%s/pro/wp-travel-pro-init.php', WP_TRAVEL_ABSPATH );				
-			}
+			// if ( file_exists( WP_TRAVEL_ABSPATH . 'pro/wp-travel-pro-init.php' ) ) {
+			// 	include sprintf( '%s/pro/wp-travel-pro-init.php', WP_TRAVEL_ABSPATH );				
+			// }
 		}
 
 		/**
