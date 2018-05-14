@@ -46,7 +46,7 @@ function wp_travel_marketplace_page() {
 					<ul>
 
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
-						<!--<li class=""><a href="#tabs-1"><?php // esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>-->
+						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
@@ -64,7 +64,7 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>
-					<!--<div id="tabs-1" class="tab-pannel">
+					<div id="tabs-1" class="tab-pannel">
 						<div class="marketplace-module clearfix">
 							<div class="single-module">
 								<div class="single-module-image">
@@ -78,7 +78,7 @@ function wp_travel_marketplace_page() {
 								</div>
 							</div>
 						</div>
-					</div>-->
+					</div>
 
 				</div>
 
