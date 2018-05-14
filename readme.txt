@@ -24,7 +24,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Tour filters: User can find their required Itineraries by filtering or using easy search form.
 * Painless Booking System: WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* Payment System: Currently we have Standard PayPal as a free addon (which later will be included in WP Travel). It can be download from ["here"](http://wptravel.io/downloads/standard-paypal/). If you want to more payment system please ["let us know"](http://wptravel.io/support-forum/).
+* Payment System: Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io 
 * Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip. 
 * Tax Options: With this feature you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
 * Trip Facts: You can add the trips facts to your trips. 
@@ -67,12 +67,19 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Compatible Themes
 * And more ...
 
+= Our Addons: =
+
+* WP Travel Express Checkout
+* WP Travel Stripe Chekout 
+* WP Travel Instamojo Checkout
+* WP Travel Razorpay Checkout
+[View all addons](http://wptravel.io/downloads/)
 
 = Customization and Flexibility =
 WP Travel plugin is very flexible and highly customizable. There are a number of hooks and filters which makes plugin really flexible from the developer's point of view. There are bulk of options which add further more flexibility in the plugin.
 
 = Supported Themes =
-["Travel Log"](http://wensolutions.com/themes/travel-log/) theme is specially designed for “WP Travel” plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
+["Travel Log"](http://wensolutions.com/themes/travel-log/) theme is specially designed for ìWP Travelî plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
 
 
 = Dedicated Support and Documentation =

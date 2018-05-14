@@ -21,12 +21,16 @@ module.exports = function(grunt) {
 	 * @type {Array}
 	 */
 	git_files_list = svn_files_list.concat([
+		'bash',
 		'\.editorconfig',
 		'\.gitattributes',
 		'\.gitignore',
+		'\.gitlab-ci.yml',
 		'\.jshintrc',
 		'Gruntfile.js',
+		'package-lock.json',
 		'package.json',
+		'push_dot_org.sh',
 	]);
 
 	grunt.initConfig({

@@ -1,0 +1,1 @@
+# We don't want these files in our "plugins.zip", so tell GitHub to ignore them when the user click on Download ZIP
