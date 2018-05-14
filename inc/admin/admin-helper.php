@@ -37,6 +37,22 @@ add_action( 'admin_footer', 'wp_travel_admin_footer_styles' );
 
 function wp_travel_marketplace_page() {
 
+	$addons_data = get_transient( 'wp_travel_marketplace_addons_list' );
+
+	if ( ! $addons_data ) {
+
+		$addons_data = file_get_contents( 'https://themepalace.com/edd-api/v2/products/?s=trave&category=wordpress-plugins' );
+
+		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
+
+	}
+
+	if ( ! empty( $addons_data ) ) :
+
+		$addons_data = json_decode( $addons_data );
+		$addons_data = $addons_data->products;
+
+	endif;
 	?>
 	<div class="wrap">
 		<div id="poststuff">
@@ -46,7 +62,9 @@ function wp_travel_marketplace_page() {
 					<ul>
 
 						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						<?php if ( $addons_data ) : ?>
+							<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						<?php endif; ?>
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
@@ -64,21 +82,42 @@ function wp_travel_marketplace_page() {
 							</div>
 						</div>
 					</div>
-					<div id="tabs-1" class="tab-pannel">
-						<div class="marketplace-module clearfix">
-							<div class="single-module">
-								<div class="single-module-image">
-									<a href="http://wptravel.io/downloads/standard-paypal/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/paypal-addons.png' ) ?>" class="" alt="">
-									</a>
+					<?php if ( $addons_data ) : ?>
+						<div id="tabs-1" class="tab-pannel">
+							<div class="marketplace-module clearfix">
+
+							<?php foreach( $addons_data as $key => $product ) : 
+
+								$prod_info = $product->info;
+
+							?>
+								
+								<div class="single-module">
+									<div class="single-module-image">
+										<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
+										<img width="423" height="237" src="<?php echo esc_url( $prod_info->thumbnail ); ?>" class="" alt="">
+										</a>
+									</div>
+									<div class="single-module-content clearfix">
+										<h4 class="text-title">
+											<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
+												<span class="icon-logo">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+												</span>
+												<?php echo esc_html( $prod_info->title ); ?>
+											</a>
+										</h4>
+										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">View Detail</a>
+									</div>
 								</div>
-								<div class="single-module-content clearfix">
-									<h4 class="text-title"><a href="http://wptravel.io/downloads/standard-paypal/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> WP Travel Standard PayPal</a></h4>
-									<a class="btn-default pull-left" href="http://wptravel.io/downloads/standard-paypal/" target="_blank">View Detail</a>
-								</div>
+							
+							<?php endforeach; ?>
+
 							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 
 				</div>
 
