@@ -135,6 +135,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.3.5 =
+* Fixes: Gallery Caption display for trip gallery.
 * Fixes: Trip Booking dates selection issue for non fixed departure trips.
 * Fixes: Trip Booking arrival date missing in email issue fixed.
 * Fixes: Minor issues and bugs fixes.
