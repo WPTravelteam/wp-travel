@@ -26,12 +26,12 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
 * Payment System: Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io 
 * Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip. 
-* Tax Options: With this feature you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
+* Tax Options: With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
 * Trip Facts: You can add the trips facts to your trips. 
 * Email Notification: You as an admin will be notified of all booking made by users and also users will also get email notification about their booking details. All email templates are customizable.
-* Customizable tabs: All trip details page tabs in front end can be customized from backend. You can change their labels and sort by your requirements or hide them.
+* Customizable tabs: All trip details page tabs in front-end can be customized from backend. You can change their labels and sort by your requirements or hide them.
 * Rating & Reviews: You can allow users to add rating or reviews for each trips. You can also hide them if you want for each trips.
-* Map: For each trips you can show Google map. In front end user can see where is the location of trip.
+* Map: For each trip, you can show Google map. In front-end user can see where is the location of trip.
 
 = Other features: =
 * Trip Search / Filter Shortcode
@@ -67,7 +67,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Compatible Themes
 * And more ...
 
-= Our Addons: =
+== Our Addons: ==
 
 * WP Travel Express Checkout
 * WP Travel Stripe Chekout 
@@ -113,21 +113,20 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
-Nice, send us request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
+Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 == Screenshots ==
-1. Backend: New itinerary
-2. Backend: New itinerary, Additional info
-3. Backend: New itinerary, Images/ gallery
-4. Backend: New itinerary, Location
-5. Backend: Itinerary listing
-6. Backend: Trip types
-7. Backend: Locations
-8. Backend: Booking listing
-9. Backend: Booking details
-10. Frontend: Itinerary listing
-11. Frontend: Itinerary details - 1
-12. Frontend: Itinerary details - 2
+1. Backend: Settings
+2. Backend: New trip, Description
+3. Backend: New trip, Itinerary
+4. Backend: New trip, Dates and prices
+5. Backend: New trip, Locations
+6. Backend: New trip, Tabs
+7. Frontend: WP Travel Cart
+8. Frontend: WP Travel Checkout
+9. Frontend: Trip detail
+10. Frontend: Trip listing
+
 
 == Upgrade Notice ==
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
@@ -135,7 +134,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.3.5 =
-* Fixes: Gallery Caption display for trip gallery.
+* Fixes: Trip Galler Caption Image.
 * Fixes: Trip Booking dates selection issue for non fixed departure trips.
 * Fixes: Trip Booking arrival date missing in email issue fixed.
 * Fixes: Minor issues and bugs fixes.
