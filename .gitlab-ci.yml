@@ -1,0 +1,11 @@
+stages:
+  - deploy_dot_org
+
+deploy_to_dot_org:
+  stage: deploy_dot_org
+  image: softeu/ubuntu-subversion-apache
+  script:
+    - bash push_dot_org.sh
+  only:
+    - master
+  when: on_success
