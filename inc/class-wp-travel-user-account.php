@@ -45,11 +45,11 @@ class Wp_Travel_User_Account {
 				self::lost_password();
 			} else {
 				// Get user login.
-				wp_travel_get_template( 'form-login.php' );
+				wp_travel_get_template_part( 'account/form', 'login' );
 			}
 		} else {
 			// Get user Dashboard.
-			wp_travel_get_template( 'dashboard.php' );
+			wp_travel_get_template_part( 'account/content', 'dashboard' );
 		}
 	}
 	/**
