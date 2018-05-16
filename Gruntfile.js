@@ -317,7 +317,8 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'pre_vcs', [ 'assets', 'textdomain' ] );
 
 	grunt.registerTask( 'do_svn', [ 'svn_export', 'copy:svn_trunk', 'copy:svn_tag' ] );
-	grunt.registerTask( 'pre_release', [ 'pre_vcs', 'do_svn' ] );
+	// grunt.registerTask( 'pre_release', [ 'pre_vcs', 'do_svn' ] );
+  grunt.registerTask( 'pre_release', [ 'pre_vcs' ] );
 	grunt.registerTask( 'release', [ 'push_svn' ] );
 	grunt.registerTask( 'post_release', [ 'clean:post_build' ] );
 
