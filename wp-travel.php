@@ -193,6 +193,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-sale-widget.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-search-filters-widget.php', WP_TRAVEL_ABSPATH );
 
+			// User Modules.
+			include sprintf( '%s/inc/wp-travel-user-functions.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-wp-travel-user-account.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-wp-travel-form-handler.php', WP_TRAVEL_ABSPATH );
+
 			// Pointers Class Includes.
 			include sprintf( '%s/inc/admin/class-admin-pointers.php', WP_TRAVEL_ABSPATH );
 
@@ -327,6 +332,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 							'name'    => _x( 'wp-travel-checkout', 'Page slug', 'wp-travel' ),
 							'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
 							'content' => '[' . apply_filters( 'wp_travel_checkout_shortcode_tag', 'wp_travel_checkout' ) . ']',
+						),
+						'wp-travel-dashboard' => array(
+							'name'    => _x( 'wp-travel-dashboard', 'Page slug', 'wp-travel' ),
+							'title'   => _x( 'WP Travel Dashboard', 'Page title', 'wp-travel' ),
+							'content' => '[' . apply_filters( 'wp_travel_account_shortcode_tag', 'wp_travel_user_account' ) . ']',
 						),
 					)
 				);

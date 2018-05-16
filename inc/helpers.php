@@ -1725,6 +1725,40 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 }
 
 /**
+ * Retrieves unvalidated referer from '_wp_http_referer' or HTTP referer.
+ *
+ * Do not use for redirects, use {@see wp_get_referer()} instead.
+ *
+ * @since 1.3.3
+ * @return string|false Referer URL on success, false on failure.
+ */
+function wp_travel_get_raw_referer() {
+	if ( function_exists( 'wp_get_raw_referer' ) ) {
+		return wp_get_raw_referer();
+	}
+
+	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
+		return wp_unslash( $_REQUEST['_wp_http_referer'] );
+	} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+		return wp_unslash( $_SERVER['HTTP_REFERER'] );
+	}
+
+	return false;
+}
+
+if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
+
+	/**
+	 * wp_travel_Is_account_page - Returns true when viewing an account page.
+	 *
+	 * @return bool
+	 */
+	function wp_travel_is_account_page() {
+		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'woocommerce_is_account_page', false );
+	}
+}
+
+/**
  * Get pricing variation start dates.
  *
  * @return array $available_dates Variation Options.
@@ -1756,4 +1790,16 @@ function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
 
 	return false;
 	
+}
+
+/**
+ * Checks whether the content passed contains a specific short code.
+ *
+ * @param  string $tag Shortcode tag to check.
+ * @return bool
+ */
+function wp_travel_post_content_has_shortcode( $tag = '' ) {
+	global $post;
+
+	return is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $tag );
 }

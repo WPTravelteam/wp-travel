@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Wp_Travel_Shortcodes {
 
 	public function init() {
-	    add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
+		add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wp_travel_trip_facts_shortcode' ) );
@@ -31,6 +31,7 @@ class Wp_Travel_Shortcodes {
 		$shortcodes = array(
 			'wp_travel_cart'           => __CLASS__ . '::cart',
 			'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
+			'wp_travel_user_account'   => __CLASS__ . '::user_account',
 		);
 
 		foreach ( $shortcodes as $shortcode => $function ) {
@@ -56,6 +57,14 @@ class Wp_Travel_Shortcodes {
 	 */
 	public static function checkout( $atts ) {
 		return self::shortcode_wrapper( array( 'WP_Travel_Checkout', 'output' ), $atts );
+	}
+	/**
+	 * Add user Account shortcode.
+	 *
+	 * @return string
+	 */
+	public static function user_account() {
+		return self::shortcode_wrapper( array( 'Wp_Travel_User_Account', 'output' ) );
 	}
 
 	/**
@@ -204,70 +213,70 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	
 	ob_start();
 
-    ?>
-    <div class="widget_wp_travel_filter_search_widget">
+	?>
+	<div class="widget_wp_travel_filter_search_widget">
 	<div class="wp-travel-itinerary-items">
-                <div>
-                <?php if ( $keyword_search ) : ?>
-                    <div class="wp-travel-form-field ">
-                        <label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
-                            <?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
-                            <input class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" name="keyword" id="wp-travel-filter-keyword" value="<?php echo ( isset( $_GET['keyword'] ) ) ? esc_textarea( $_GET['keyword'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
-                    </div>
-                <?php endif; ?>
-                <?php if ( $trip_type_filter ) : ?>
-                    <div class="wp-travel-form-field ">
-                        <label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
-                        <?php
-                            $taxonomy = 'itinerary_types';
-                            $args = array(
-                                'show_option_all'    => __( 'All', 'wp-travel' ),
-                                'hide_empty'         => 1,
-                                'selected'           => 1,
-                                'hierarchical'       => 1,
-                                'name'               => 'type',
-                                'class'              => 'wp_travel_search_widget_filters_input'.$index,
-                                'taxonomy'           => $taxonomy,
-                                'selected'           => ( isset( $_GET['type'] ) ) ? esc_textarea( $_GET['type'] ) : 0,
-                            );
+				<div>
+				<?php if ( $keyword_search ) : ?>
+					<div class="wp-travel-form-field ">
+						<label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
+							<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
+							<input class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" name="keyword" id="wp-travel-filter-keyword" value="<?php echo ( isset( $_GET['keyword'] ) ) ? esc_textarea( $_GET['keyword'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+					</div>
+				<?php endif; ?>
+				<?php if ( $trip_type_filter ) : ?>
+					<div class="wp-travel-form-field ">
+						<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
+						<?php
+							$taxonomy = 'itinerary_types';
+							$args = array(
+								'show_option_all'    => __( 'All', 'wp-travel' ),
+								'hide_empty'         => 1,
+								'selected'           => 1,
+								'hierarchical'       => 1,
+								'name'               => 'type',
+								'class'              => 'wp_travel_search_widget_filters_input'.$index,
+								'taxonomy'           => $taxonomy,
+								'selected'           => ( isset( $_GET['type'] ) ) ? esc_textarea( $_GET['type'] ) : 0,
+							);
 
-                        wp_dropdown_categories( $args, $taxonomy );
-                        ?>			
-                    </div>
-                <?php endif; ?>
-                <?php if ( $trip_location_filter ) : ?>
-                    <div class="wp-travel-form-field ">
-                        <label><?php esc_html_e( 'Location:', 'wp-travel' ) ?></label>
-                            <?php
-                            $taxonomy = 'travel_locations';
-                            $args = array(
-                                'show_option_all'    => __( 'All', 'wp-travel' ),
-                                'hide_empty'         => 1,
-                                'selected'           => 1,
-                                'hierarchical'       => 1,
-                                'name'               => 'location',
-                                'class'              => 'wp_travel_search_widget_filters_input'.$index,
-                                'taxonomy'           => $taxonomy,
-                                'selected'           => ( isset( $_GET['location'] ) ) ? esc_textarea( $_GET['location'] ) : 0,
-                            );
+						wp_dropdown_categories( $args, $taxonomy );
+						?>			
+					</div>
+				<?php endif; ?>
+				<?php if ( $trip_location_filter ) : ?>
+					<div class="wp-travel-form-field ">
+						<label><?php esc_html_e( 'Location:', 'wp-travel' ) ?></label>
+							<?php
+							$taxonomy = 'travel_locations';
+							$args = array(
+								'show_option_all'    => __( 'All', 'wp-travel' ),
+								'hide_empty'         => 1,
+								'selected'           => 1,
+								'hierarchical'       => 1,
+								'name'               => 'location',
+								'class'              => 'wp_travel_search_widget_filters_input'.$index,
+								'taxonomy'           => $taxonomy,
+								'selected'           => ( isset( $_GET['location'] ) ) ? esc_textarea( $_GET['location'] ) : 0,
+							);
 
-                            wp_dropdown_categories( $args, $taxonomy );
-                            ?>
-                    </div>
-                <?php endif; ?>
-                <?php if ( $price_orderby ) :  ?>
-                    <div class="wp-travel-form-field ">
-                        <label for="price">
-                            <?php esc_html_e( 'Price', 'wp-travel' ); ?>
-                        </label>
-                        <select name="price" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?> price">
-                            <option value="">--</option>
-                            <option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ) ?></option>
-                            <option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ) ?></option>
-                        </select>	
-                    </div>
-                <?php endif; ?>
-                <?php if ( $price_range ) : ?>
+							wp_dropdown_categories( $args, $taxonomy );
+							?>
+					</div>
+				<?php endif; ?>
+				<?php if ( $price_orderby ) :  ?>
+					<div class="wp-travel-form-field ">
+						<label for="price">
+							<?php esc_html_e( 'Price', 'wp-travel' ); ?>
+						</label>
+						<select name="price" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?> price">
+							<option value="">--</option>
+							<option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ) ?></option>
+							<option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ) ?></option>
+						</select>	
+					</div>
+				<?php endif; ?>
+				<?php if ( $price_range ) : ?>
 						<div class="wp-travel-form-field wp-trave-price-range">
 							<label for="amount"><?php esc_html_e( 'Price Range', 'wp-travel' ); ?></label>
 							<input type="text" id="amount" class="price-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -275,30 +284,30 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 							<input type="hidden" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?> wp-travel-filter-price-max" name="max_price" value="<?php echo $max_price; ?>">
 							<div class="wp-travel-range-slider"></div>
 						</div>
-                <?php endif; ?>
-                <?php if ( $trip_dates ) : ?>
-                    <div class="wp-travel-form-field wp-travel-trip-duration">
-                        <label><?php esc_html_e('Trip Duration', 'wp-travel'); ?></label>
-                        <span class="trip-duration-calender">
-                            <small><?php esc_html_e( 'From', 'wp-travel' ); ?></small>
-                            <input value="<?php echo esc_attr( $trip_start ); ?>" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" id="datepicker1" name="trip_start">
-                            <label for="datepicker1">
-                                <span class="calender-icon"></span>
-                            </label>
-                        </span>
-                        <span class="trip-duration-calender">
-                            <small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
-                            <input value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
-                            <label for="datepicker2">
-                                <span class="calender-icon"></span>
-                            </label>
-                        </span>
-                        
-                    </div>
+				<?php endif; ?>
+				<?php if ( $trip_dates ) : ?>
+					<div class="wp-travel-form-field wp-travel-trip-duration">
+						<label><?php esc_html_e('Trip Duration', 'wp-travel'); ?></label>
+						<span class="trip-duration-calender">
+							<small><?php esc_html_e( 'From', 'wp-travel' ); ?></small>
+							<input value="<?php echo esc_attr( $trip_start ); ?>" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" id="datepicker1" name="trip_start">
+							<label for="datepicker1">
+								<span class="calender-icon"></span>
+							</label>
+						</span>
+						<span class="trip-duration-calender">
+							<small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
+							<input value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
+							<label for="datepicker2">
+								<span class="calender-icon"></span>
+							</label>
+						</span>
+						
+					</div>
 
-                <?php endif; ?>
+				<?php endif; ?>
 
-                    <?php $view_mode = wp_travel_get_archive_view_mode(); ?>
+					<?php $view_mode = wp_travel_get_archive_view_mode(); ?>
 
 					<div class="wp-travel-search">
 
@@ -309,12 +318,12 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 						<input type="hidden" class="wp-travel-widget-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ) ?>" />
 					<input type="submit" id="wp-travel-filter-search-submit" class="button button-primary wp-travel-filter-search-submit" value="Search">
 				</div>
-                    
-                </div>
+					
+				</div>
 
-            </div>
+			</div>
 
-            </div>
+			</div>
 
 <?php
 

@@ -32,6 +32,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_account_settings_tab_callback' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
@@ -101,6 +102,11 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['email'] = array(
 			'tab_label' => __( 'Email', 'wp-travel' ),
 			'content_title' => __( 'Email Settings', 'wp-travel' ),
+		);
+
+		$settings_fields['account_options_global'] = array(
+			'tab_label' => __( 'Account Settings', 'wp-travel' ),
+			'content_title' => __( 'Account Settings', 'wp-travel' ),
 		);
 
 		$settings_fields['tabs_global'] = array(
@@ -875,7 +881,7 @@ class WP_Travel_Admin_Settings {
 	<?php
 	}
 
-		/**
+	/**
 	 * Callback for License tab.
 	 *
 	 * @param  Array $tab  List of tabs.
@@ -886,6 +892,105 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		do_action( 'wp_travel_license_tab_fields', $args );
+	}
+
+	/**
+	 * Callback for the User Accounts Tab.
+	 *
+	 * @param Array $tab List of tabs.
+	 * @param Array $args Settings arg List.
+	 */
+	function wp_travel_account_settings_tab_callback( $tab, $args ) {
+
+		if ( 'account_options_global' !== $tab ) {
+			return;
+		}
+	
+		$selected_account_page = isset( $args['settings']['myaccount_page_id'] ) ? $args['settings']['myaccount_page_id'] : wp_travel_get_page_id( 'wp-travel-dashboard' );
+		
+		$enable_checkout_customer_registration =  isset( $args['settings']['enable_checkout_customer_registration'] ) ? $args['settings']['enable_checkout_customer_registration'] : 'yes';
+	
+		$enable_my_account_customer_registration =  isset( $args['settings']['enable_my_account_customer_registration'] ) ? $args['settings']['enable_my_account_customer_registration'] : 'yes';
+	
+		$generate_username_from_email =  isset( $args['settings']['generate_username_from_email'] ) ? $args['settings']['generate_username_from_email'] : 'yes';
+	
+		$generate_user_password =  isset( $args['settings']['generate_user_password'] ) ? $args['settings']['generate_user_password'] : 'yes';
+	
+			echo '<table class="form-table">';
+				echo '<tr>';
+					echo '<th>';
+						echo '<label for="cart-page-id">' . esc_html__( 'My Account Page', 'wp-travel' ) . '</label>';
+					echo '</th>';
+					echo '<td>';
+						wp_dropdown_pages(array(
+							'depth'                 => 0,
+							'child_of'              => 0,
+							'selected'              => $selected_account_page,
+							'echo'                  => 1,
+							'name'                  => 'myaccount_page_id',
+							'id'                    => 'my-account-page-id', // string
+							'class'                 => null, // string
+							'show_option_none'      => null, // string
+							'show_option_no_change' => null, // string
+							'option_none_value'     => null, // string
+						));
+						echo '<p class="description">' . esc_html__( 'Choose the page to use as account dashboard for registered users', 'wp-travel' ) . '</p>';
+					echo '</td>';
+				echo '<tr>';
+	
+				echo '<tr>';
+					echo '<th>';
+						echo '<label for="currency">' . esc_html_e( 'Customer Registration', 'wp-travel' ) .  '</label>';
+					echo '</th>';
+					echo '<td>';
+						echo '<span class="show-in-frontend checkbox-default-design">';
+							echo '<label data-on="ON" data-off="OFF">';
+								echo '<input' . checked( $enable_checkout_customer_registration, 'yes', false ) . ' value="1" name="enable_checkout_customer_registration" id="enable_checkout_customer_registration" type="checkbox" />';						
+								echo '<span class="switch">';
+								echo '</span>';
+							echo '</label>';
+						echo '</span>';
+						echo '<p class="description"><label for="enable_checkout_customer_registration">' . esc_html__( 'Enable customer registration on the "Checkout" page.', 'wp-travel' ) . '</label></p>';
+					echo '</td>';
+					echo '<td>';
+						echo '<span class="show-in-frontend checkbox-default-design">';
+							echo '<label data-on="ON" data-off="OFF">';
+								echo '<input' . checked( $enable_my_account_customer_registration, 'yes', false ) . ' value="1" name="enable_my_account_customer_registration" id="enable_my_account_customer_registration" type="checkbox" />';						
+								echo '<span class="switch">';
+								echo '</span>';
+							echo '</label>';
+						echo '</span>';
+						echo '<p class="description"><label for="enable_my_account_customer_registration">' . esc_html__( 'Enable customer registration on the "My Account" page.', 'wp-travel' ) . '</label></p>';
+					echo '</td>';
+				echo '<tr>';
+				echo '<tr>';
+					echo '<th>';
+						echo '<label for="currency">' . esc_html_e( 'Account Creation', 'wp-travel' ) .  '</label>';
+					echo '</th>';
+					echo '<td>';
+						echo '<span class="show-in-frontend checkbox-default-design">';
+							echo '<label data-on="ON" data-off="OFF">';
+								echo '<input' . checked( $generate_username_from_email, 'yes', false ) . ' value="1" name="generate_username_from_email" id="generate_username_from_email" type="checkbox" />';						
+								echo '<span class="switch">';
+								echo '</span>';
+							echo '</label>';
+						echo '</span>';
+						echo '<p class="description"><label for="generate_username_from_email">' . esc_html__( ' Automatically generate username from customer email.', 'wp-travel' ) . '</label></p>';
+					echo '</td>';
+					echo '<td>';
+						echo '<span class="show-in-frontend checkbox-default-design">';
+							echo '<label data-on="ON" data-off="OFF">';
+								echo '<input' . checked( $generate_user_password, 'yes', false ) . ' value="1" name="generate_user_password" id="generate_user_password" type="checkbox" />';						
+								echo '<span class="switch">';
+								echo '</span>';
+							echo '</label>';
+						echo '</span>';
+						echo '<p class="description"><label for="generate_user_password">' . esc_html__( ' Automatically generate customer password', 'wp-travel' ) . '</label></p>';
+					echo '</td>';
+				echo '</tr>';
+	
+			echo '</table>';
+	
 	}
 
 	/**
@@ -922,6 +1027,26 @@ class WP_Travel_Admin_Settings {
 			$enquiry_admin_email_template_settings = ( isset( $_POST['enquiry_admin_template'] ) && '' !== $_POST['enquiry_admin_template'] ) ? stripslashes_deep( $_POST['enquiry_admin_template'] ) : '';
 
 			$enable_trip_enquiry_option = ( isset( $_POST['enable_trip_enquiry_option'] ) && '' !== $_POST['enable_trip_enquiry_option'] ) ? 'yes' : 'no';
+
+			// Account Page.
+			$myaccount_page_id = isset( $_POST['myaccount_page_id'] ) ? $_POST['myaccount_page_id'] : '';
+			$settings['myaccount_page_id'] = $myaccount_page_id;
+
+			// Checkout Page customer registration.
+			$enable_checkout_customer_registration = ( isset( $_POST['enable_checkout_customer_registration'] ) && '' !== $_POST['enable_checkout_customer_registration'] ) ? 'yes' : 'no';
+			$settings['enable_checkout_customer_registration'] = $enable_checkout_customer_registration;
+
+			// My Account Page customer registration.
+			$enable_my_account_customer_registration = ( isset( $_POST['enable_my_account_customer_registration'] ) && '' !== $_POST['enable_my_account_customer_registration'] ) ? 'yes' : 'no';
+			$settings['enable_my_account_customer_registration'] = $enable_my_account_customer_registration;
+
+			// Generate Username from email.
+			$generate_username_from_email = ( isset( $_POST['generate_username_from_email'] ) && '' !== $_POST['generate_username_from_email'] ) ? 'yes' : 'no';
+			$settings['generate_username_from_email'] = $generate_username_from_email;
+
+			// Generate User Password.
+			$generate_user_password = ( isset( $_POST['generate_user_password'] ) && '' !== $_POST['generate_user_password'] ) ? 'yes' : 'no';
+			$settings['generate_user_password'] = $generate_user_password;
 
 			$settings['currency'] = $currency;
 			$settings['google_map_api_key'] = $google_map_api_key;
