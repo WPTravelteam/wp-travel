@@ -425,13 +425,11 @@
                     height: 38px;
                     font-weight: 300
                 }
-                input[type="radio"] {
+                input[type="radio"],
+                input[type="checkbox"] {
                     width: auto;
                     height: auto;
                     margin-right: 5px;
-                }
-                input[type="checkbox"] {
-                    @extend input[type="radio"];
                 }
                 select {
                     @extend input;
@@ -567,7 +565,12 @@
         }
     }
     .featured-detail-section.right-plot {
-        @extend .featured-side-image.left-plot;
+        float: left;
+        width: 50%;
+        background: #cecece;
+        vertical-align: middle;
+        position: relative;
+        line-height: inherit;
         background: none;
         overflow: hidden;
     }
@@ -876,8 +879,14 @@
         }
     }
     p.comment-form-email {
-        @extend p.comment-form-author;
+        width: calc(50% - 5px);
+        float: left;
+        display: inline-block;
         margin-right: 0;
+        @include mob {
+            width: 100%;
+            float: none;
+        }
     }
     input[type="text"],
     input[type="email"] {
@@ -1589,9 +1598,19 @@ html .ui-button.ui-state-disabled:active {
         }
     }
     .wp-travel-average-review {
-        @extend .travel-info;
+        float: left;
+        padding: 2px 0;
+        margin-right: 15px;
+        vertical-align: middle;
+        vertical-align: -webkit-baseline-middle;
         margin-right: 0;
         padding-right: 0;
+        &:last-child {
+            border-right: none;
+        }
+        span {
+            font-size: 12px;
+        }
     }
     a,
     i {
@@ -1852,7 +1871,8 @@ html .ui-button.ui-state-disabled:active {
     a.wp-page-numbers {
         border: 1px solid #eee;
     }
-    a.current {
+    a.current,
+    a:hover {
         font-weight: bold;
         position: relative;
         // background: #f2f2f2;
@@ -1864,9 +1884,6 @@ html .ui-button.ui-state-disabled:active {
         // -ms-transform: rotate(45deg);
         // -webkit-transform: rotate(45deg);
         // position: absolute;
-    }
-    a:hover {
-        @extend a.current;
     }
 }
 
