@@ -304,4 +304,11 @@ jQuery(document).ready(function($) {
 
     });
 
+    jQuery(document).ready(function($) {
+        $('.login-page .message a').click(function(e) {
+            e.preventDefault();
+            $('.login-page form.login-form,.login-page form.register-form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+        });
+    });
+
 });

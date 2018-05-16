@@ -121,13 +121,13 @@ class Wp_Travel_Form_Handler {
 					wp_travel_set_customer_auth_cookie( $new_customer );
 				}
 
-				// if ( ! empty( $_POST['redirect'] ) ) {
-				// 	$redirect = wp_sanitize_redirect( $_POST['redirect'] );
-				// } elseif ( wc_get_raw_referer() ) {
-				// 	$redirect = wc_get_raw_referer();
-				// } else {
-				// 	$redirect = wc_get_page_permalink( 'myaccount' );
-				// }
+				if ( ! empty( $_POST['redirect'] ) ) {
+					$redirect = wp_sanitize_redirect( $_POST['redirect'] );
+				} elseif ( wp_travel_get_raw_referer() ) {
+					$redirect = wp_travel_get_raw_referer();
+				} else {
+					$redirect = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
+				}
 
 				wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_register_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 				exit;

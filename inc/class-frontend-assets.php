@@ -54,7 +54,7 @@ class WP_Travel_Frontend_Assets {
 		
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
-		if (  is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() ) {
+		if (  is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
 			$map_data = get_wp_travel_map_data();
 
 			$api_key = '';
