@@ -4,6 +4,24 @@
  *
  * @package Wp_Travel
  */
+/**
+ * Prevent any user who cannot 'edit_posts' (subscribers, customers etc) from seeing the admin bar.
+ *
+ * Note: get_option( 'wp_travel_lock_down_admin', true ) is a deprecated option here for backwards compatibility. Defaults to true.
+ *
+ * @access public
+ * @param bool $show_admin_bar
+ * @return bool
+ */
+function wp_travel_disable_admin_bar( $show_admin_bar ) {
+	if ( apply_filters( 'wp_travel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
+		$show_admin_bar = false;
+	}
+
+	return $show_admin_bar;
+}
+add_filter( 'show_admin_bar', 'wp_travel_disable_admin_bar', 10, 1 );
+
 if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
 
 	/**
