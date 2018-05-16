@@ -11,7 +11,7 @@ grunt pre_release
 echo "*********************************"
 
 echo "State files"
-git add .
+git add --all
 echo "*********************************"
 
 echo "Commit files"
