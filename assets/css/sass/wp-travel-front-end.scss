@@ -573,6 +573,10 @@
         line-height: inherit;
         background: none;
         overflow: hidden;
+
+        @include sidr-view{
+            width:100%;
+        }
     }
     .right-plot-inner-wrap {
         padding: 0 25px 30px;
