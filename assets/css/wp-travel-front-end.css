@@ -387,6 +387,9 @@
     line-height: inherit;
     background: none;
     overflow: hidden; }
+    @media (max-width: 992px) {
+      .wp-travel.trip-headline-wrapper .featured-detail-section.right-plot {
+        width: 100%; } }
   .wp-travel.trip-headline-wrapper .right-plot-inner-wrap {
     padding: 0 25px 30px; }
     @media (max-width: 992px) {
