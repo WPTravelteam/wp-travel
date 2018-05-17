@@ -298,14 +298,18 @@ class WP_Travel_Emails {
     public function wp_travel_email_footer(){
     
     ob_start();
+    
+    $disable_powerby = apply_filters( 'wp_travel_disable_email_template_poweredby', false );
 
+    if ( ! $disable_powerby ) {
     ?>
-        <tr class="wp-travel-footer" style="background: #fff;">
+                <tr class="wp-travel-footer" style="background: #fff;">
                     <td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-                        <p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ) ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ) ?>.</a></p>
+                        <p>{sitename} - <?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel.%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); ?>.</a></p>
                         
                     </td>
                 </tr>
+    <?php } ?>
             </table><!-- /Wrapper -->
         </body>
         </html>
