@@ -45,22 +45,6 @@ module.exports = function(grunt) {
 			]
 		},
 		copy: {
-			svn_trunk: {
-				options: {
-					mode: true
-				},
-				expand: true,
-				src: svn_files_list,
-				dest: 'build/<%= pkg.name %>/trunk/'
-			},
-			svn_tag: {
-				options: {
-					mode: true
-				},
-				expand: true,
-				src: svn_files_list,
-				dest: 'build/<%= pkg.name %>/tags/<%= pkg.version %>/'
-			},
 			build_it:{
 				options: {
 					mode: true
@@ -109,24 +93,6 @@ module.exports = function(grunt) {
 		        	});
 		    	}
 		    }
-		},
-		svn_export: {
-			dev: {
-				options:{
-					repository: 'https://plugins.svn.wordpress.org/<%= pkg.name %>',
-					output: 'build/<%= pkg.name %>'
-				}
-			}
-		},
-		push_svn:{
-			options: {
-				remove: true
-			},
-			main: {
-				src: 'build/<%= pkg.name %>',
-				dest: 'https://plugins.svn.wordpress.org/<%= pkg.name %>',
-				tmp: 'build/make_svn',
-			}
 		},
 		// Other options.
 		options: {
@@ -315,9 +281,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask( 'pre_vcs', [ 'assets', 'textdomain' ] );
-
-	grunt.registerTask( 'do_svn', [ 'svn_export', 'copy:svn_trunk', 'copy:svn_tag' ] );
-	// grunt.registerTask( 'pre_release', [ 'pre_vcs', 'do_svn' ] );
   grunt.registerTask( 'pre_release', [ 'pre_vcs' ] );
 	grunt.registerTask( 'release', [ 'push_svn' ] );
 	grunt.registerTask( 'post_release', [ 'clean:post_build' ] );
