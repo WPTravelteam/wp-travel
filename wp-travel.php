@@ -333,11 +333,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 							'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
 							'content' => '[' . apply_filters( 'wp_travel_checkout_shortcode_tag', 'wp_travel_checkout' ) . ']',
 						),
-						'wp-travel-dashboard' => array(
-							'name'    => _x( 'wp-travel-dashboard', 'Page slug', 'wp-travel' ),
-							'title'   => _x( 'WP Travel Dashboard', 'Page title', 'wp-travel' ),
-							'content' => '[' . apply_filters( 'wp_travel_account_shortcode_tag', 'wp_travel_user_account' ) . ']',
-						),
+						// 'wp-travel-dashboard' => array(
+						// 	'name'    => _x( 'wp-travel-dashboard', 'Page slug', 'wp-travel' ),
+						// 	'title'   => _x( 'WP Travel Dashboard', 'Page title', 'wp-travel' ),
+						// 	'content' => '[' . apply_filters( 'wp_travel_account_shortcode_tag', 'wp_travel_user_account' ) . ']',
+						// ),
 					)
 				);
 
