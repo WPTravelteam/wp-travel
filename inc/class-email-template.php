@@ -308,7 +308,6 @@ class WP_Travel_Emails {
                 <tr class="wp-travel-footer" style="background: #fff;">
                     <td colspan="2" align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 20px 25px;">
                         <p>{sitename} - <?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel.%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); ?>.</p>
-                        
                     </td>
                 </tr>
     <?php } ?>
