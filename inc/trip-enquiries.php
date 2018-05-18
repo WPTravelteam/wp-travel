@@ -395,7 +395,7 @@ function wp_travel_save_user_enquiry() {
 
 	}
 
-	$admin_email = get_option( 'admin_email' );
+	$admin_email = apply_filters( 'wp_travel_enquiries_admin_emails', get_option( 'admin_email' ) );
 
 	// Email Variables.
 	if ( is_multisite() ) {

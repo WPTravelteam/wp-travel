@@ -293,7 +293,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// Prepare variables to assign in email.
 	$client_email = get_post_meta( $booking_id, 'wp_travel_email', true );
 
-	$admin_email = get_option( 'admin_email' );
+	$admin_email = apply_filters( 'wp_travel_payments_admin_emails', get_option( 'admin_email' ) );
 
 	// Email Variables.
 	if ( is_multisite() ) {

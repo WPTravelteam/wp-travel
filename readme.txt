@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.5
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -133,8 +133,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.3.6 =
+* Compatibility: WP Travel Utilities Addon support added.
+* Fixes: Email template responsive issue fixings.
+* Fixes: Minor issues and bugs fixes.
+
 = 1.3.5 =
-* Fixes: Trip Galler Caption Image.
+* Fixes: Trip Gallery Caption Image.
 * Fixes: Trip Booking dates selection issue for non fixed departure trips.
 * Fixes: Trip Booking arrival date missing in email issue fixed.
 * Fixes: Minor issues and bugs fixes.

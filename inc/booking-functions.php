@@ -977,7 +977,7 @@ function wp_travel_book_now() {
 	// Prepare variables to assign in email.
 	$client_email = $_POST['wp_travel_email'];
 
-	$admin_email = get_option( 'admin_email' );
+	$admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
 
 	// Email Variables.
 	if ( is_multisite() ) {
