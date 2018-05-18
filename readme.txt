@@ -135,6 +135,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.3.6 =
 * Compatibility: WP Travel Utilities Addon support added.
+* Enhancements: New WP Travel Dashboard Menu Icon.
 * Fixes: Email template responsive issue fixings.
 * Fixes: Minor issues and bugs fixes.
 
