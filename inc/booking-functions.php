@@ -1065,7 +1065,7 @@ function wp_travel_book_now() {
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $admin_email, $admin_email );
+		$headers = $email->email_headers( $site_admin_email, $site_admin_email );
 
 		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
 			// wp_send_json( array(

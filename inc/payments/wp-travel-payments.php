@@ -388,7 +388,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$client_payment_subject = $client_payment_template['subject'];
 
 	// To send HTML mail, the Content-type header must be set.
-	$headers = $email->email_headers( $admin_email, $admin_email );
+	$headers = $email->email_headers( $site_admin_email, $site_admin_email );
 
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
 		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
