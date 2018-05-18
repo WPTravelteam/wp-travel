@@ -38,6 +38,18 @@
 .icon-tabs:before {
   content: "\e900"; }
 
+.icon-wp-travel:before {
+  content: "\e905";
+  color: #d42727;
+  font-size: 20px;
+  line-height: 34px; }
+
+.icon-spinner:before {
+  content: "\f110"; }
+
+.icon-fact:before {
+  content: "\e908"; }
+
 .wp-travel-clean-metabox {
   background: #f7f7f1;
   overflow: hidden; }
@@ -1011,51 +1023,66 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   cursor: pointer;
   margin-top: 25px; }
 
-#fact-sample-collector .form-table {
+#fact-sample-collector .form-table,
+.booking-emails .form-table {
   position: relative;
   border-top: 1px solid #eee;
   padding: 25px 0 10px;
   display: block; }
-  #fact-sample-collector .form-table:first-of-type {
+  #fact-sample-collector .form-table:first-of-type,
+  .booking-emails .form-table:first-of-type {
     border-top: none; }
   #fact-sample-collector .form-table .open-close-row,
-  #fact-sample-collector .form-table .delete-row {
+  #fact-sample-collector .form-table .delete-row,
+  .booking-emails .form-table .open-close-row,
+  .booking-emails .form-table .delete-row {
     position: absolute;
     top: 25px; }
     #fact-sample-collector .form-table .open-close-row button,
-    #fact-sample-collector .form-table .delete-row button {
+    #fact-sample-collector .form-table .delete-row button,
+    .booking-emails .form-table .open-close-row button,
+    .booking-emails .form-table .delete-row button {
       background-color: transparent;
       border-color: #014966;
       cursor: pointer; }
-  #fact-sample-collector .form-table .delete-row {
+  #fact-sample-collector .form-table .delete-row,
+  .booking-emails .form-table .delete-row {
     right: 0; }
-  #fact-sample-collector .form-table .open-close-row {
+  #fact-sample-collector .form-table .open-close-row,
+  .booking-emails .form-table .open-close-row {
     right: 50px; }
-  #fact-sample-collector .form-table .fact-open .dashicons {
+  #fact-sample-collector .form-table .fact-open .dashicons,
+  .booking-emails .form-table .fact-open .dashicons {
     transition: all 0.4s ease-in-out; }
-  #fact-sample-collector .form-table .toggle-row {
+  #fact-sample-collector .form-table .toggle-row,
+  .booking-emails .form-table .toggle-row {
     transition: height 0.4s ease-in-out; }
-  #fact-sample-collector .form-table.open-table .toggle-row {
+  #fact-sample-collector .form-table.open-table .toggle-row,
+  .booking-emails .form-table.open-table .toggle-row {
     position: absolute;
     opacity: 0;
     height: 0;
     visibility: hidden;
     transition: height 0.4s ease-in-out; }
-  #fact-sample-collector .form-table.open-table .fact-open .dashicons {
+  #fact-sample-collector .form-table.open-table .fact-open .dashicons,
+  .booking-emails .form-table.open-table .fact-open .dashicons {
     transform: rotate(180deg);
     transition: all 0.4s ease-in-out; }
-#fact-sample-collector .options-holder {
+#fact-sample-collector .options-holder,
+.booking-emails .options-holder {
   width: 300px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
-  padding: 5px 10px;
   box-sizing: border-box; }
-  #fact-sample-collector .options-holder p {
-    padding: 0px 0 4px !important;
+  #fact-sample-collector .options-holder p,
+  .booking-emails .options-holder p {
+    padding: 5px 10px !important;
     border-bottom: 1px solid #dadada; }
-    #fact-sample-collector .options-holder p:last-of-type {
+    #fact-sample-collector .options-holder p:last-of-type,
+    .booking-emails .options-holder p:last-of-type {
       border-bottom: none; }
-#fact-sample-collector .option-deleter {
+#fact-sample-collector .option-deleter,
+.booking-emails .option-deleter {
   float: right; }
 
 .form-table .checkbox-default-design label {
