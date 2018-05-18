@@ -274,8 +274,8 @@ ob_start();
 			</tr>
 
 			<tr class="wp-travel-content" style="background: #fff;">
-				<td colspan="2" align="center">				
-					<a href="{booking_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;height: 30px;line-height: 30px;width: 200px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
+				<td colspan="2" align="center">			
+					<a href="{enquery_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;height: 30px;line-height: 30px;width: 200px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
 				</td>
 			</tr>
 		</table>
