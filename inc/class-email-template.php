@@ -275,12 +275,13 @@ class WP_Travel_Emails {
         </head>
         <body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
             <!-- Wrapper -->
-            <table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
-                <tr class="wp-travel-header" style="background: #fff;">			
-                    <td align="left" style="background: <?php echo esc_attr( $details['header_color'] ); ?>;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
+            <table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
+                <tr class="wp-travel-header">			
+                    <td colspan="2" align="left" style="background: <?php echo esc_attr( $details['header_color'] ); ?>;box-sizing: border-box;margin: 0;padding: 20px 25px;"> <!-- Header -->
                         <h2 style="color: #fcfffd;font-size: 20px;margin: 0;padding: 0;text-align: center;"><?php echo esc_html( $details['header_title'] ); ?></h2>
                     </td> <!-- /Header -->
                 </tr>
+            </table>    
             
     <?php 
 
@@ -303,9 +304,10 @@ class WP_Travel_Emails {
 
     if ( ! $disable_powerby ) {
     ?>
+            <table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;">
                 <tr class="wp-travel-footer" style="background: #fff;">
-                    <td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-                        <p>{sitename} - <?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel.%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); ?>.</a></p>
+                    <td colspan="2" align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 20px 25px;">
+                        <p>{sitename} - <?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel.%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); ?>.</p>
                         
                     </td>
                 </tr>
