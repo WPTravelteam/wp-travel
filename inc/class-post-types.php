@@ -54,7 +54,7 @@ class WP_Travel_Post_Types {
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'comments' ),
-			'menu_icon'          => 'dashicons-wp-travelcle',
+			'menu_icon'          => 'dashicons-wp-travel',
 		);
 		/**
 		 * Register a itineraries post type.
