@@ -143,6 +143,7 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function redirect_reset_password_link() {
 		if ( wp_travel_is_account_page() && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
+
 			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
 			// WC_Shortcode_My_Account::set_reset_password_cookie( $value );
 

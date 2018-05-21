@@ -119,3 +119,70 @@ function wp_travel_set_customer_auth_cookie( $customer_id ) {
 
 	wp_set_auth_cookie( $customer_id, true );
 }
+
+/**
+ * Get endpoint URL.
+ *
+ * Gets the URL for an endpoint, which varies depending on permalink settings.
+ *
+ * @param  string $endpoint  Endpoint slug.
+ * @param  string $value     Query param value.
+ * @param  string $permalink Permalink.
+ *
+ * @return string
+ */
+function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
+	if ( ! $permalink ) {
+		$permalink = get_permalink();
+	}
+
+	if ( get_option( 'permalink_structure' ) ) {
+		if ( strstr( $permalink, '?' ) ) {
+			$query_string = '?' . wp_parse_url( $permalink, PHP_URL_QUERY );
+			$permalink    = current( explode( '?', $permalink ) );
+		} else {
+			$query_string = '';
+		}
+		$url = trailingslashit( $permalink ) . trailingslashit( $endpoint );
+
+		if ( $value ) {
+			$url .= trailingslashit( $value );
+		}
+
+		$url .= $query_string;
+	} else {
+		$url = add_query_arg( $endpoint, $value, $permalink );
+	}
+
+	return apply_filters( 'wp_travel_get_endpoint_url', $url, $endpoint, $value, $permalink );
+}
+
+/**
+ * Returns the url to the lost password endpoint url.
+ *
+ * @param  string $default_url Default lost password URL.
+ * @return string
+ */
+function wp_travel_lostpassword_url( $default_url = '' ) {
+	// Avoid loading too early.
+	if ( ! did_action( 'init' ) ) {
+		return $default_url;
+	}
+
+	// Don't redirect to the WP Travel endpoint on global network admin lost passwords.
+	if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
+		return $default_url;
+	}
+
+	$wp_travel_account_page_url    = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
+	$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
+
+	if ( $wp_travel_account_page_exists ) {
+		return wp_travel_get_endpoint_url( 'lp', '', $wp_travel_account_page_url );
+	} else {
+		return $default_url;
+	}
+}
+
+add_filter( 'lostpassword_url', 'wp_travel_lostpassword_url', 10, 1 );
+

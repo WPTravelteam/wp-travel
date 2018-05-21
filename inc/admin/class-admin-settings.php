@@ -32,7 +32,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_booking' ), 11, 2 );
-		// add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_account_settings_tab_callback' ), 12, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_account_settings_tab_callback' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_global_settings' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
@@ -104,10 +104,10 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Email Settings', 'wp-travel' ),
 		);
 
-		// $settings_fields['account_options_global'] = array(
-		// 	'tab_label' => __( 'Account Settings', 'wp-travel' ),
-		// 	'content_title' => __( 'Account Settings', 'wp-travel' ),
-		// );
+		$settings_fields['account_options_global'] = array(
+			'tab_label' => __( 'Account Settings', 'wp-travel' ),
+			'content_title' => __( 'Account Settings', 'wp-travel' ),
+		);
 
 		$settings_fields['tabs_global'] = array(
 			'tab_label' => __( 'Tabs', 'wp-travel' ),
