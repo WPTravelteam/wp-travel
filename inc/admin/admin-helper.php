@@ -75,7 +75,9 @@ function wp_travel_marketplace_page() {
 									</a>
 								</div>
 								<div class="single-module-content clearfix">
-									<h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank"><span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span> Travel Log</a></h4>
+									<h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank">
+									<span class="dashicons-wp-travel">
+									</span> Travel Log</a></h4>
 									<a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank">View Detail</a>
 									<a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.zip" target="_blank">Download</a>
 								</div>
@@ -101,10 +103,7 @@ function wp_travel_marketplace_page() {
 									<div class="single-module-content clearfix">
 										<h4 class="text-title">
 											<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
-												<span class="icon-logo">
-													<span class="path1"></span>
-													<span class="path2"></span>
-													<span class="path3"></span>
+												<span class="dashicons-wp-travel">
 												</span>
 												<?php echo esc_html( $prod_info->title ); ?>
 											</a>
@@ -223,7 +222,9 @@ function docs_support_page_callback(){
 		                    </p>
 	                    </div>
 	                    <div class="WP-Travel-badge">
-		                	<span class="icon-logo"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+		                	<span class="dashicons-wp-travel">
+							
+							</span>
 		                	<p>
 		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>
 		                	</p>
