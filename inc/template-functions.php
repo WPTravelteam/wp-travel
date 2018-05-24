@@ -33,6 +33,25 @@ function wp_travel_get_template( $template_name, $args = array() ) {
 }
 
 /**
+ * Like wp_travel_get_template, but returns the HTML instead of outputting.
+ *
+ * @see wp_travel_get_template
+ * @since 1.3.7
+ * @param string $template_name Template name.
+ * @param array  $args          Arguments. (default: array).
+ *
+ * @return string
+ */
+function wp_travel_get_template_html( $template_name, $args = array() ) {
+	ob_start();
+	if ( ! empty( $args ) && is_array( $args ) ) {
+		extract( $args ); // @codingStandardsIgnoreLine
+	}
+	include wp_travel_get_template( $template_name );
+	return ob_get_clean();
+}
+
+/**
  * Get Template Part.
  *
  * @param  String $slug Name of slug.
@@ -1769,3 +1788,49 @@ function wp_travel_wpkses_post_iframe( $tags, $context ) {
 	return $tags;
 }
 add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
+
+if ( ! function_exists( 'is_wp_travel_endpoint_url' ) ) :
+	/**
+	 * Is_wp_travel_endpoint_url - Check if an endpoint is showing.
+	 *
+	 * @param string $endpoint Whether endpoint.
+	 * @return bool
+	 */
+	function is_wp_travel_endpoint_url( $endpoint = false ) {
+		global $wp;
+		$query_class = new WP_Travel_Query();
+		$wp_travel_endpoints = $query_class->get_query_vars();
+
+		if ( false !== $endpoint ) {
+			if ( ! isset( $wp_travel_endpoints[ $endpoint ] ) ) {
+				return false;
+			} else {
+				$endpoint_var = $wp_travel_endpoints[ $endpoint ];
+			}
+
+			return isset( $wp->query_vars[ $endpoint_var ] );
+		} else {
+			foreach ( $wp_travel_endpoints as $key => $value ) {
+				if ( isset( $wp->query_vars[ $key ] ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+endif;
+
+
+/**
+ * No index our endpoints.
+ * Prevent indexing pages like order-received.
+ *
+ * @since 2.5.3
+ */
+function wp_travel_prevent_endpoint_indexing() {
+	if ( is_wp_travel_endpoint_url() ) { // WPCS: input var ok, CSRF ok.
+		@header( 'X-Robots-Tag: noindex' ); // @codingStandardsIgnoreLine
+	}
+}
+add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );

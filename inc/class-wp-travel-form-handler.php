@@ -19,6 +19,7 @@ class Wp_Travel_Form_Handler {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_reset_password_link' ) );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_login' ), 20 );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_registration' ), 20 );
+		add_action( 'wp_loaded', array( __CLASS__, 'process_lost_password' ), 20 );
 	}
 
 	/**
@@ -139,15 +140,32 @@ class Wp_Travel_Form_Handler {
 	}
 
 	/**
+	 * Handle lost password form.
+	 */
+	public static function process_lost_password() { 
+		if ( isset( $_POST['wp_travel_reset_password'] ) && isset( $_POST['user_login'] ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_lost_password' ) ) {
+			$success = Wp_Travel_User_Account::retrieve_password();
+
+			// If successful, redirect to my account with query arg set.
+			if ( $success ) {
+				wp_redirect( add_query_arg( 'reset-link-sent', 'true', wp_lostpassword_url() ) );
+				exit;
+			}
+		}
+	}
+
+	/**
 	 * Remove key and login from query string, set cookie, and redirect to account page to show the form.
 	 */
 	public static function redirect_reset_password_link() {
+
 		if ( wp_travel_is_account_page() && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
 
 			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
-			// WC_Shortcode_My_Account::set_reset_password_cookie( $value );
 
-			wp_safe_redirect( add_query_arg( 'show-reset-form', 'true', wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+			Wp_Travel_User_Account::set_reset_password_cookie( $value );
+
+			wp_safe_redirect( add_query_arg( 'show-reset-form', 'true', wp_travel_lostpassword_url() ) );
 			exit;
 		}
 	}

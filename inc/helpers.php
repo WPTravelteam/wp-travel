@@ -1803,3 +1803,18 @@ function wp_travel_post_content_has_shortcode( $tag = '' ) {
 
 	return is_singular() && is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $tag );
 }
+
+/**
+ * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+ * Non-scalar values are ignored.
+ *
+ * @param string|array $var Data to sanitize.
+ * @return string|array
+ */
+function wp_travel_clean_vars( $var ) {
+	if ( is_array( $var ) ) {
+		return array_map( 'wp_travel_clean_vars', $var );
+	} else {
+		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
+	}
+}

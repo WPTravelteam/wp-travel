@@ -136,6 +136,11 @@ function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 		$permalink = get_permalink();
 	}
 
+	// Map endpoint to options.
+	$query_class = new WP_Travel_Query();
+	$query_vars  = $query_class->get_query_vars();
+	$endpoint    = ! empty( $query_vars[ $endpoint ] ) ? $query_vars[ $endpoint ] : $endpoint;
+
 	if ( get_option( 'permalink_structure' ) ) {
 		if ( strstr( $permalink, '?' ) ) {
 			$query_string = '?' . wp_parse_url( $permalink, PHP_URL_QUERY );
@@ -178,7 +183,7 @@ function wp_travel_lostpassword_url( $default_url = '' ) {
 	$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
 
 	if ( $wp_travel_account_page_exists ) {
-		return wp_travel_get_endpoint_url( 'wp-travel-lost-pass', '', $wp_travel_account_page_url );
+		return $wp_travel_account_page_url . '?action=lost-pass';
 	} else {
 		return $default_url;
 	}

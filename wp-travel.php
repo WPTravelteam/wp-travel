@@ -193,6 +193,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-sale-widget.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-search-filters-widget.php', WP_TRAVEL_ABSPATH );
 
+			/**
+			 * Include Query Classes.
+			 * @since 2.2.6
+			 */
+			include sprintf( '%s/inc/class-wp-travel-query.php', WP_TRAVEL_ABSPATH );
+
 			// User Modules.
 			include sprintf( '%s/inc/wp-travel-user-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-user-account.php', WP_TRAVEL_ABSPATH );
