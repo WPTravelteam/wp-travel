@@ -358,6 +358,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
 			}
+			// Update marketplace data transient.
+			delete_transient( 'wp_travel_marketplace_addons_list' );
 		}
 
 		function wp_travel_setup_environment() {

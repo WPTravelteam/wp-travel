@@ -178,7 +178,7 @@ function wp_travel_lostpassword_url( $default_url = '' ) {
 	$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
 
 	if ( $wp_travel_account_page_exists ) {
-		return wp_travel_get_endpoint_url( 'lp', '', $wp_travel_account_page_url );
+		return wp_travel_get_endpoint_url( 'wp-travel-lost-pass', '', $wp_travel_account_page_url );
 	} else {
 		return $default_url;
 	}
