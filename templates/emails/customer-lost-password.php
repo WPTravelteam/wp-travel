@@ -33,5 +33,5 @@ $reset_key  = $args['reset_key'];
 	<a class="link" href="<?php echo esc_url( add_query_arg( array( 'key' => $reset_key, 'login' => rawurlencode( $user_login ) ), wp_lostpassword_url() ) ); ?>">
 			<?php _e( 'Click here to reset your password', 'wp-travel' ); ?></a>
 </p>
-<p><?php _e( 'Powered by', 'wp-travel' ); ?><a href="" target="_blank"> <?php _e( 'WP Travel', 'wp-travel' ); ?></a></p>
+<p><?php _e( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php _e( 'WP Travel', 'wp-travel' ); ?></a></p>
 <p></p>
