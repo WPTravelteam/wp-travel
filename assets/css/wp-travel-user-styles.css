@@ -282,6 +282,8 @@
   .dashboard-tab table.order-list-table th,
   .dashboard-tab table.order-list-table td {
     border: 0px; }
+  .dashboard-tab .order-list-table ins {
+    background-color: transparent; }
   .dashboard-tab .tbody-content:nth-of-type(even) td,
   .dashboard-tab .tbody-content:nth-of-type(even) th {
     background-color: #f5f5f5; }

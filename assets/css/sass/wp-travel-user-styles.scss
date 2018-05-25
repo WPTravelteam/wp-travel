@@ -310,6 +310,11 @@
   {
     border: 0px;
   }
+  .order-list-table{
+    ins{
+      background-color:transparent;
+    }
+  }
    .tbody-content:nth-of-type(even) td, 
    .tbody-content:nth-of-type(even) th{
       background-color: #f5f5f5;
