@@ -45,8 +45,9 @@ class Wp_Travel_User_Account {
 				wp_travel_get_template_part( 'account/form', 'login' );
 			}
 		} else {
+			$current_user = wp_get_current_user();
 			// Get user Dashboard.
-			wp_travel_get_template_part( 'account/content', 'dashboard' );
+			echo wp_travel_get_template_html( 'account/content-dashboard.php', $current_user );
 		}
 	}
 	/**

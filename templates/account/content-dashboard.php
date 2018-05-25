@@ -4,27 +4,29 @@
  *
  * @package WP_Travel
  */
+
+ // Set User.
+$current_user = $args;
+
 ?>
 <div class="dashboard-tab">
 	<ul class="resp-tabs-list ver_1">
-		<li><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</li>
-		<li><i class="fa fa-th-list" aria-hidden="true"></i>My Order</li>
-		<li><i class="fa fa-address-book-o" aria-hidden="true"></i>Address</li>
-		<li><i class="fa fa-user" aria-hidden="true"></i>Account</li>
-		<!-- <li><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Payment Option</li> -->
-		<!-- <li><i class="fa fa-comments-o" aria-hidden="true"></i>Review & Ratings</li> -->
-		<li><i class="fa fa-power-off" aria-hidden="true"></i>Logout</li>
+		<li><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
+		<li><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
+		<li><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
+		<li><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
+		<li><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
 		<div>
-			<p>Hello, <strong>sus.hill</strong></p>
+			<p><?php esc_html_e( 'Hello, ', 'wp-travel' ); ?><strong><?php echo esc_html( $current_user->display_name ); ?></strong></p>
 
-			<p>From your account dashboard you can view your recent orders, manage your shipping and billing an addresses and edit your password and account details.</p>
+			<p><?php esc_html_e( 'From your account dashboard you can view your recent Bookings, manage your billing address and edit your password and account details.', 'wp-travel' ); ?></p>
 			<div class="lists clearfix">
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#"><strong>My orders</strong></a>
+							<a href="#"><strong><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
 								<p>
 									You haven't order anything yet.
@@ -461,20 +463,4 @@
 
 	</div>
 </div>
-<script type="text/javascript" src="http://skynet.wensolutions.com/travel-log/wp-content/plugins/wp-travel/assets/js/easy-responsive-tabs.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$('.dashboard-tab').easyResponsiveTabs({
-			type: 'vertical',
-			width: 'auto',
-			fit: true,
-			tabidentify: 'ver_1', // The tab groups identifier
-			activetab_bg: '#fff', // background color for active tabs in this group
-			inactive_bg: '#F5F5F5', // background color for inactive tabs in this group
-			active_border_color: '#c1c1c1', // border color for active tabs heads in this group
-			active_content_border_color: '#5AB1D0' // border color for active tabs contect in this group so that it matches the tab head border
-		});
-	});
-	
-</script>
 

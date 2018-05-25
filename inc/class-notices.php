@@ -16,7 +16,9 @@ class WP_Travel_Notices {
 	function get( $type = 'error', $destroy = true ) {
 		if ( 'error' === $type ) {
 			$errors = WP_Travel()->session->get( 'wp_travel_errors' );
-			$this->destroy( $type );
+			if ( $destroy ) {
+				$this->destroy( $type );
+			}
 			return $errors;
 		}
 	}
