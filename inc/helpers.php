@@ -1818,3 +1818,41 @@ function wp_travel_clean_vars( $var ) {
 		return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
 	}
 }
+
+/**
+ * Add notices for WP Errors.
+ *
+ * @param WP_Error $errors Errors.
+ */
+function wp_travel_add_wp_error_notices( $errors ) {
+	if ( is_wp_error( $errors ) && $errors->get_error_messages() ) {
+		foreach ( $errors->get_error_messages() as $error ) {
+			WP_Travel()->notices->add( $error, 'error' );
+		}
+	}
+}
+/**
+ * Get the count of notices added, either for all notices (default) or for one.
+ * particular notice type specified by $notice_type.
+ *
+ * @param  string $notice_type Optional. The name of the notice type - either error, success or notice.
+ * @return int
+ */
+function wp_travel_get_notice_count( $notice_type = '' ) {
+
+	$notice_count = 0;
+	$all_notices  = WP_Travel()->notices->get( $notice_type, false );
+
+	if ( isset( $all_notices[ $notice_type ] ) ) {
+
+		$notice_count = count( $all_notices[ $notice_type ] );
+
+	} elseif ( empty( $notice_type ) ) {
+
+		foreach ( $all_notices as $notices ) {
+			$notice_count += count( $notices );
+		}
+	}
+
+	return $notice_count;
+}

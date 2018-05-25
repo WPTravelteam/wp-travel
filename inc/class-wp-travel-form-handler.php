@@ -20,6 +20,7 @@ class Wp_Travel_Form_Handler {
 		add_action( 'wp_loaded', array( __CLASS__, 'process_login' ), 20 );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_registration' ), 20 );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_lost_password' ), 20 );
+		add_action( 'wp_loaded', array( __CLASS__, 'process_reset_password' ), 20 );
 	}
 
 	/**
@@ -40,7 +41,7 @@ class Wp_Travel_Form_Handler {
 				);
 
 				$validation_error = new WP_Error();
-				$validation_error = apply_filters( 'woocommerce_process_login_errors', $validation_error, $_POST['username'], $_POST['password'] );
+				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $_POST['username'], $_POST['password'] );
 
 				if ( $validation_error->get_error_code() ) {
 					throw new Exception( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $validation_error->get_error_message() );
@@ -60,7 +61,7 @@ class Wp_Travel_Form_Handler {
 				}
 
 				// Perform the login.
-				$user = wp_signon( apply_filters( 'woocommerce_login_credentials', $creds ), is_ssl() );
+				$user = wp_signon( apply_filters( 'wp_travel_login_credentials', $creds ), is_ssl() );
 
 				if ( is_wp_error( $user ) ) {
 					$message = $user->get_error_message();
@@ -130,7 +131,7 @@ class Wp_Travel_Form_Handler {
 					$redirect = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
 				}
 
-				wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_register_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+				wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_register_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $username ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 				exit;
 
 			} catch ( Exception $e ) {
@@ -149,6 +150,51 @@ class Wp_Travel_Form_Handler {
 			// If successful, redirect to my account with query arg set.
 			if ( $success ) {
 				wp_redirect( add_query_arg( 'reset-link-sent', 'true', wp_lostpassword_url() ) );
+				exit;
+			}
+		}
+	}
+
+	/**
+	 * Handle reset password form.
+	 */
+	public static function process_reset_password() {
+		$posted_fields = array( 'wp_travel_reset_password', 'password_1', 'password_2', 'reset_key', 'reset_login', '_wpnonce' );
+
+		foreach ( $posted_fields as $field ) {
+			if ( ! isset( $_POST[ $field ] ) ) {
+				return;
+			}
+			$posted_fields[ $field ] = $_POST[ $field ];
+		}
+
+		if ( ! wp_verify_nonce( $posted_fields['_wpnonce'], 'wp_travel_reset_password_nonce' ) ) {
+			return;
+		}
+
+		$user = Wp_Travel_User_Account::check_password_reset_key( $posted_fields['reset_key'], $posted_fields['reset_login'] );
+
+		if ( $user instanceof WP_User ) {
+			if ( empty( $posted_fields['password_1'] ) ) {
+				WP_Travel()->notices->add( __( '<strong>Error :</strong>Please enter your password.', 'wp-travel' ), 'error' );
+			}
+
+			if ( $posted_fields['password_1'] !== $posted_fields['password_2'] ) {
+				WP_Travel()->notices->add( __( '<strong>Error :</strong>Passwords do not match', 'wp-travel' ), 'error' );
+			}
+
+			$errors = new WP_Error();
+
+			do_action( 'validate_password_reset', $errors, $user );
+
+			wp_travel_add_wp_error_notices( $errors );
+
+			if ( 0 === wp_travel_get_notice_count( 'error' ) ) {
+				Wp_Travel_User_Account::reset_password( $user, $posted_fields['password_1'] );
+
+				do_action( 'wp_travel_customer_reset_password', $user );
+
+				wp_redirect( add_query_arg( 'password-reset', 'true', wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 				exit;
 			}
 		}
