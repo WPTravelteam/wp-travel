@@ -69,10 +69,13 @@ class Wp_Travel_User_Account {
 
 				// reset key / login is correct, display reset password form with hidden key / login values
 				if ( is_object( $user ) ) {
-					return wp_travel_get_template_html( 'account/form-reset-password.php', array(
+
+					echo wp_travel_get_template_html( 'account/form-reset-password.php', array(
 						'key'   => $rp_key,
 						'login' => $rp_login,
 					) );
+
+					return;
 				}
 			}
 		}
