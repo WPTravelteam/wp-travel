@@ -18,7 +18,7 @@ print_r( $bookings );
 		<li><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
 		<li id="wp-tab-mybookings"><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
 		<li id="wp-tab-myaddress"><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
-		<li id="wp-tab-account"><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
+		<li id="wp-tab-myaccount"><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
 		<li><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
@@ -94,11 +94,11 @@ print_r( $bookings );
                     			</p>
 							</div>
 							<div class="box-actions">
-					            <a class="action edit" href="#">
+					            <a data-tabtitle="wp-tab-myaccount" class="action edit dashtab-nav" href="#">
 					            	<i class="fa fa-pencil" aria-hidden="true"></i>
 					                <span>Edit</span>
 					            </a>
-					            <a href="#" class="action change-password">
+					            <a href="#" data-tabtitle="wp-tab-myaccount" class="action dashtab-nav action change-password">
 					                Change Password</a>
 					        </div>
 						</div>
