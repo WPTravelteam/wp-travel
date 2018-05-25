@@ -77,7 +77,7 @@ class Wp_Travel_Form_Handler {
 						$redirect = wc_get_page_permalink( 'wp-travel-dashboard' );
 					}
 
-					wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_login_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+					wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_login_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $username ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 
 					exit;
 				}

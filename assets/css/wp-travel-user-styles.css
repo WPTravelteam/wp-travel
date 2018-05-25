@@ -115,28 +115,44 @@
   .form .login-form span.user-password,
   .form .login-form .user-name,
   .form .login-form .user-email,
+  .form .login-form .user-password-key,
   .form .register-form span.user-username,
   .form .register-form span.user-password,
   .form .register-form .user-name,
   .form .register-form .user-email,
+  .form .register-form .user-password-key,
   .form .forgot-form span.user-username,
   .form .forgot-form span.user-password,
   .form .forgot-form .user-name,
-  .form .forgot-form .user-email {
+  .form .forgot-form .user-email,
+  .form .forgot-form .user-password-key,
+  .form .wp-travel-ResetPassword span.user-username,
+  .form .wp-travel-ResetPassword span.user-password,
+  .form .wp-travel-ResetPassword .user-name,
+  .form .wp-travel-ResetPassword .user-email,
+  .form .wp-travel-ResetPassword .user-password-key {
     position: relative;
     display: block; }
     .form .login-form span.user-username:before,
     .form .login-form span.user-password:before,
     .form .login-form .user-name:before,
     .form .login-form .user-email:before,
+    .form .login-form .user-password-key:before,
     .form .register-form span.user-username:before,
     .form .register-form span.user-password:before,
     .form .register-form .user-name:before,
     .form .register-form .user-email:before,
+    .form .register-form .user-password-key:before,
     .form .forgot-form span.user-username:before,
     .form .forgot-form span.user-password:before,
     .form .forgot-form .user-name:before,
-    .form .forgot-form .user-email:before {
+    .form .forgot-form .user-email:before,
+    .form .forgot-form .user-password-key:before,
+    .form .wp-travel-ResetPassword span.user-username:before,
+    .form .wp-travel-ResetPassword span.user-password:before,
+    .form .wp-travel-ResetPassword .user-name:before,
+    .form .wp-travel-ResetPassword .user-email:before,
+    .form .wp-travel-ResetPassword .user-password-key:before {
       font-family: fontawesome;
       left: 1px;
       top: 1px;
@@ -151,16 +167,25 @@
   .form .register-form .user-username:before,
   .form .register-form .user-name:before,
   .form .forgot-form .user-username:before,
-  .form .forgot-form .user-name:before {
+  .form .forgot-form .user-name:before,
+  .form .wp-travel-ResetPassword .user-username:before,
+  .form .wp-travel-ResetPassword .user-name:before {
     content: '\f007'; }
   .form .login-form .user-password:before,
   .form .register-form .user-password:before,
-  .form .forgot-form .user-password:before {
+  .form .forgot-form .user-password:before,
+  .form .wp-travel-ResetPassword .user-password:before {
     content: '\f023'; }
   .form .login-form .user-email:before,
   .form .register-form .user-email:before,
-  .form .forgot-form .user-email:before {
+  .form .forgot-form .user-email:before,
+  .form .wp-travel-ResetPassword .user-email:before {
     content: '\f0e0'; }
+  .form .login-form .user-password-key:before,
+  .form .register-form .user-password-key:before,
+  .form .forgot-form .user-password-key:before,
+  .form .wp-travel-ResetPassword .user-password-key:before {
+    content: '\f084'; }
 
 .login-form .wrapper,
 .register-form .wrapper {
@@ -172,6 +197,13 @@
   .register-form .wrapper .info,
   .register-form .wrapper label {
     font-size: 12px; }
+
+.wp-travel-ResetPassword {
+  text-align: left; }
+  .wp-travel-ResetPassword .user-username,
+  .wp-travel-ResetPassword .user-password,
+  .wp-travel-ResetPassword .user-password-key {
+    text-align: center; }
 
 .dashboard-tab {
   /*.dashboard-tab li:first-child{
