@@ -140,11 +140,13 @@
   }
   .login-form,
   .register-form,
-  .forgot-form{
+  .forgot-form,
+  .wp-travel-ResetPassword{
       span.user-username,
       span.user-password,
       .user-name,
-      .user-email {
+      .user-email,
+      .user-password-key {
           position: relative;
           display: block;
           &:before{
@@ -169,6 +171,9 @@
       .user-email:before{
         content:'\f0e0';
       }
+      .user-password-key:before{
+        content:'\f084';
+      }
     } 
 }
 
@@ -189,6 +194,17 @@
   }
 
 }
+
+.wp-travel-ResetPassword{
+  text-align:left;
+
+  .user-username,
+  .user-password,
+  .user-password-key{
+    text-align:center;
+  }
+}
+
 
 
 .dashboard-tab{
@@ -516,6 +532,7 @@
 
 
 }
+
 
 
 
