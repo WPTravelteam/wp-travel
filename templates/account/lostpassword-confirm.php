@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Print Errors / Notices.
 WP_Travel()->notices->print_notices( 'error', true );
 
-echo esc_html__( 'Password reset email has been sent.', 'wp-travel' );
+//echo esc_html__( 'Password reset email has been sent.', 'wp-travel' );
 ?>
 
-<p><?php echo apply_filters( 'wp_travel_lost_password_message', __( 'A password reset email has been sent to the email address on file for your account, but may take several minutes to show up in your inbox. Please wait at least 10 minutes before attempting another reset.', 'wp-travel' ) ); ?></p>
+<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_lost_password_message', __( 'A password reset email has been sent to the email address on file for your account, but may take several minutes to show up in your inbox. Please wait at least 10 minutes before attempting another reset.', 'wp-travel' ) ); ?></p>
