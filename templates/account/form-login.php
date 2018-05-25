@@ -7,6 +7,20 @@
 
 // Print Errors / Notices.
 WP_Travel()->notices->print_notices( 'error', true );
+
+$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
+$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;
+
+$login_form_toogle = '';
+$reg_form_toogle   = '';
+
+if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-register' ) ) {
+
+	$login_form_toogle = 'style="display:none"';
+	$reg_form_toogle   = 'style="display:block"';
+
+}
+
 ?>
 <div class="wp-travel-dashboard-form">
 	<div class="login-page">
@@ -17,7 +31,7 @@ WP_Travel()->notices->print_notices( 'error', true );
 		<?php endif; ?>
 		<div class="form">
 			<!-- Registration form -->
-			<form method="post" class="register-form">
+			<form method="post" class="register-form" <?php echo $reg_form_toogle; ?> >
 				<h3><?php esc_html_e( 'Register', 'wp-travel' );  ?></h3>
 				<span class="user-name">
 					<input name="username" type="text" placeholder="<?php echo esc_attr( 'Username', 'wp-travel' ); ?>"/>
@@ -40,7 +54,7 @@ WP_Travel()->notices->print_notices( 'error', true );
 				<p class="message"><?php echo esc_attr( 'Already registered?', 'wp-travel' ); ?> <a href="#"><?php echo esc_attr( 'Sign In', 'wp-travel' ); ?></a></p>
 			</form>
 			<!-- Login Form -->
-			<form method="post" class="login-form">
+			<form method="post" class="login-form" <?php echo $login_form_toogle; ?> >
 					<h3><?php esc_html_e( 'Login', 'wp-travel' ); ?></h3>
 					<span class="user-username">
 						<input name="username" type="text" placeholder="<?php echo esc_attr( 'Username', 'wp-travel' ); ?>"/>
