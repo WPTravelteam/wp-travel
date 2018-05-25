@@ -453,7 +453,7 @@
 				<h3>Log Out?</h3>
 				<span>
 					Are you sure want to log out?
-					<a href="<?php wp_logout_url( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ); ?>"><?php esc_html_e( 'Log Out', 'wp-travel' ); ?></a>
+					<a href="<?php echo wp_logout_url( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ); ?>"><?php esc_html_e( 'Log Out', 'wp-travel' ); ?></a>
 				</span>
 			</div>
 
