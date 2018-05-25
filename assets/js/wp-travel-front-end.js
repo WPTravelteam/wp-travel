@@ -322,4 +322,13 @@ jQuery(document).ready(function($) {
         active_content_border_color: '#5AB1D0' // border color for active tabs contect in this group so that it matches the tab head border
     });
 
+    $('.dashtab-nav').click(function(e) {
+
+        e.preventDefault();
+        var tab = $(this).data('tabtitle');
+
+        $('#' + tab).click();
+
+    });
+
 });

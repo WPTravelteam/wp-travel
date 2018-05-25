@@ -8,13 +8,17 @@
  // Set User.
 $current_user = $args;
 
+$bookings = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
+
+print_r( $bookings );
+
 ?>
 <div class="dashboard-tab">
 	<ul class="resp-tabs-list ver_1">
 		<li><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
+		<li id="wp-tab-mybookings"><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
+		<li id="wp-tab-myaddress"><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
+		<li id="wp-tab-account"><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
 		<li><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
@@ -26,18 +30,35 @@ $current_user = $args;
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#"><strong><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></strong></a>
+							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-mybookings"><strong><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
-								<p>
-									You haven't order anything yet.
-                    			</p>
-                    			<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now</a>
+							<?php if ( ! empty( $bookings ) && is_array( $bookings ) ) : ?>
+								<ul>
+									<?php
+										foreach ( $bookings as $key => $bk_id ) :
+
+											$trip_id = get_post_meta( $bk_id, 'wp_travel_post_id', true );
+
+											if( ! $trip_id ) {
+												continue;
+											}
+											?>
+											<li>
+												<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
+											</li>
+
+										<?php
+										endforeach;
+									?>
+								</ul>
+								<?php else : ?>
+									<p>
+										You haven't order anything yet.
+									</p>
+									<a href="http://skynet.wensolutions.com/travel-log/itinerary/"><?php esc_html_e( 'Book some trips now', 'wp-travel' ); ?></a>
+								<?php endif; ?>
 							</div>
 							<div class="box-actions">
-					            <a class="action edit" href="#">
-					            	<!-- <i class="fa fa-pencil" aria-hidden="true"></i>
-					                <span>Edit</span> -->
-					            </a>
 					        </div>
 						</div>
 					</div>
@@ -45,7 +66,7 @@ $current_user = $args;
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#"><strong>Address</strong></a>
+							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaddress"><strong>Address</strong></a>
 							<div class="box-content">
 								<p>
 									Kathmandu<br>
@@ -54,7 +75,7 @@ $current_user = $args;
                     			</p>
 							</div>
 							<div class="box-actions">
-					            <a class="action edit" href="#">
+					            <a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
 					            	<i class="fa fa-pencil" aria-hidden="true"></i>
 					                <span>Edit</span>
 					            </a>
@@ -65,7 +86,7 @@ $current_user = $args;
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#"><strong>Account Info</strong></a>
+							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaccount"><strong>Account Info</strong></a>
 							<div class="box-content">
 								<p>
 									sunil regmi<br>
@@ -83,7 +104,7 @@ $current_user = $args;
 						</div>
 					</div>
 				</div>
-				<div class="list-item">
+				<!-- <div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
 							<a href="#"><strong>Payment Option</strong></a>
@@ -102,7 +123,7 @@ $current_user = $args;
 					        </div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div class="my-order">

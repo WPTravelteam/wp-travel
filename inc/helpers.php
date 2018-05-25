@@ -1843,7 +1843,7 @@ function wp_travel_get_notice_count( $notice_type = '' ) {
 	$notice_count = 0;
 	$all_notices  = WP_Travel()->notices->get( $notice_type, false );
 
-	if ( ! empty( $all_notices ) ) {
+	if ( ! empty( $all_notices ) && is_array( $all_notices ) ) {
 
 		foreach ( $all_notices as $key => $notices ) {
 			$notice_count++;
