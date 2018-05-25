@@ -35,6 +35,8 @@ class Wp_Travel_User_Account {
 			// After password reset, add confirmation message.
 			if ( ! empty( $_GET['password-reset'] ) ) {
 
+				esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' );
+
 			}
 			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) {
 				self::lost_password();
