@@ -11,11 +11,11 @@ $current_user = $args;
 ?>
 <div class="dashboard-tab">
 	<ul class="resp-tabs-list ver_1">
-		<li><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
+		<li class="tab1"><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
+		<li class="tab1"><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
+		<li class="tab1"><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
+		<li class="tab1"><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
+		<li class="tab1"><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
 		<div>
