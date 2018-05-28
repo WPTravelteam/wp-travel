@@ -908,7 +908,7 @@ class WP_Travel_Admin_Settings {
 	
 		$selected_account_page = isset( $args['settings']['myaccount_page_id'] ) ? $args['settings']['myaccount_page_id'] : wp_travel_get_page_id( 'wp-travel-dashboard' );
 		
-		$enable_checkout_customer_registration =  isset( $args['settings']['enable_checkout_customer_registration'] ) ? $args['settings']['enable_checkout_customer_registration'] : 'yes';
+		$enable_checkout_customer_registration =  isset( $args['settings']['enable_checkout_customer_registration'] ) ? $args['settings']['enable_checkout_customer_registration'] : 'no';
 	
 		$enable_my_account_customer_registration =  isset( $args['settings']['enable_my_account_customer_registration'] ) ? $args['settings']['enable_my_account_customer_registration'] : 'yes';
 	
@@ -950,7 +950,7 @@ class WP_Travel_Admin_Settings {
 								echo '</span>';
 							echo '</label>';
 						echo '</span>';
-						echo '<p class="description"><label for="enable_checkout_customer_registration">' . esc_html__( 'Enable customer registration on the "Checkout" page.', 'wp-travel' ) . '</label></p>';
+						echo '<p class="description"><label for="enable_checkout_customer_registration">' . esc_html__( 'Require Customer login before booking.', 'wp-travel' ) . '</label></p>';
 					echo '</td>';
 					echo '<td>';
 						echo '<span class="show-in-frontend checkbox-default-design">';

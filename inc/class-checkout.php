@@ -44,6 +44,14 @@ class WP_Travel_Checkout {
 		$price_per = wp_travel_get_price_per_text( $trip_id );
 		$settings = wp_travel_get_settings();
 
+		$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
+
+		if ( 'yes' === $settings['enable_checkout_customer_registration'] && ! is_user_logged_in() ) {
+
+			return wp_travel_get_template_part( 'account/form', 'login' );
+
+		}
+
 		//Pricing Options Merge.
 		$enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
 

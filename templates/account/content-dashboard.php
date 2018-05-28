@@ -6,8 +6,14 @@
  */
 
 // Set User.
-$current_user = $args;
-$bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
+$current_user    = $args;
+$bookings        = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
+$bookings_glance = false;
+// Resverse Chronological Order For Bookings.
+if ( ! empty( $bookings ) && is_array( $bookings ) ) {
+	$bookings        = array_reverse( $bookings );
+	$bookings_glance = array_slice( $bookings, 0, 5 );
+}
 
 ?>
 <div class="dashboard-tab">
@@ -29,25 +35,26 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 						<div class="item">
 							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-mybookings"><strong><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
-							<?php if ( ! empty( $bookings ) && is_array( $bookings ) ) : ?>
+							<?php if ( ! empty( $bookings_glance ) && is_array( $bookings_glance ) ) : ?>
 								<ul>
 									<?php
-										foreach ( $bookings as $key => $bk_id ) :
+									foreach ( $bookings_glance as $key => $bk_id ) :
 
-											$trip_id = get_post_meta( $bk_id, 'wp_travel_post_id', true );
+										$trip_id = get_post_meta( $bk_id, 'wp_travel_post_id', true );
 
 										if ( ! $trip_id ) {
 											continue;
 										}
-											?>
-											<li>
-												<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
-											</li>
+										?>
+										<li>
+											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
+										</li>
 
-										<?php
-										endforeach;
+									<?php
+									endforeach;
 									?>
 								</ul>
+								<a href="#" data-tabtitle="wp-tab-mybookings" class="dashtab-nav"><strong><?php esc_html_e( 'View All', 'wp-travel' ); ?></strong></a>
 								<?php else : ?>
 									<p>
 										<?php esc_html_e( 'You haven&lsquo;t order anything yet.', 'wp-travel' ); ?>
@@ -133,24 +140,36 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 								<table class="order-list-table">
 									<thead>
 										<tr>
-											<th>Tour</th>
-											<th>Contact Name</th>
-											<th>Booking Status</th>
-											<th>Payment Status</th>
-											<th>Payment Mode</th>
-											<th class="text-right">Total Price</th>
+											<th><?php esc_html_e( 'Trip', 'wp-travel' ); ?></th>
+											<th><?php esc_html_e( 'Contact Name', 'wp-travel' ); ?></th>
+											<th><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></th>
+											<th><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></th>
+											<th><?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?></th>
+											<th class="text-right"><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></th>
 										</tr>
 									</thead>
 									<tbody>
 									<?php 
 									foreach ( $bookings as $key => $b_id ) :
+
 										$bkd_trip_id = get_post_meta( $b_id, 'wp_travel_post_id', true );
-										$ordered_data = get_post_meta( $b_id, 'order_data', true );
 
 										if ( ! $bkd_trip_id ) {
 											continue;
 										}
-										echo '<pre>'; print_r( $ordered_data ); echo '</pre>';
+
+										$ordered_data = get_post_meta( $b_id, 'order_data', true );
+										$booking_status = get_post_meta( $b_id, 'wp_travel_booking_status', true );
+
+										$payment_id = get_post_meta( $b_id, 'wp_travel_payment_id', true );
+										$payment_status = 'N/A';
+										$payment_mode = 'N/A';
+										if ( $payment_id ) {
+											$payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
+											$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+										}
+
+										$trip_price = $ordered_data['wp_travel_trip_price'];
 									?>			
 										<tr class="tbody-content">
 
@@ -162,34 +181,34 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 
 											<td class="c-name" data-title="Contact Name">
 												<div class="contact-title">
-														Abishek Riajl Fataha
+														<?php echo esc_html( $ordered_data['wp_travel_fname'] . ' ' . $ordered_data['wp_travel_lname'] ); ?>
 												</div>
 											</td>
 
 											<td class="booking-status" data-title="Booking Status">
 												<div class="contact-title">
-														pending
+														<?php echo esc_html( $booking_status ); ?>
 												</div>
 											</td>
 
 											<td class="payment-status" data-title="Payment Status">
 												<div class="contact-title">
-														Paypal
+												<?php echo esc_html( $payment_status ); ?>
 												</div>
 											</td>
 
 											<td class="payment-mode" data-title="Payment Mode">
 												<div class="contact-title">
-														Paypal
+														<?php echo esc_html( $payment_mode ); ?>
 												</div>
 											</td>
-											
+
 											<td class="product-subtotal text-right" data-title="Total">
 												<div class="order-list-table">
 													<p>
 														<strong>
-															<span class="woocommerce-Price-currencySymbol">$</span>
-															<span class="wp-travel-trip-total"> 1500.00 </span>
+															<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>
+															<span class="wp-travel-trip-total"> <?php echo esc_html( $trip_price ); ?> </span>
 														</strong>
 													</p>
 												</div>
@@ -222,7 +241,7 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 		<div class="clearfix">
 			<div class="payment-content">
 				<div class="title">
-					<h3>Billing Address</h3>
+					<h3><?php esc_html_e( 'Billing Address', 'wp-travel' ); ?></h3>
 				</div>
 				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
@@ -251,14 +270,6 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 				<div class="form-horizontal clearfix">
 					<div class="form-group gap-20">
 						<label class="col-sm-4 col-md-3 control-label required">Zip/Postal code:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Province:</label>
 						<div class="col-sm-8 col-md-9">
 							<input type="text" class="form-control" value="">
 						</div>
