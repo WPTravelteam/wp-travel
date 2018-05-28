@@ -1879,7 +1879,7 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 	if ( $new_customer_data['user_login'] ) {
 
 	$user_object     = get_user_by( 'login', $new_customer_data['user_login'] );
-	$user_user_login = $user_login;
+	$user_user_login = $new_customer_data['user_login'];
 	$user_user_email = stripslashes( $user_object->user_email );
 	$user_recipient  = $user_user_email;
 	$user_subject    = __( 'New Account Created', 'wp-travel' );
