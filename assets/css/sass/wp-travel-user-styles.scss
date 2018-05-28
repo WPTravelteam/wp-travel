@@ -463,11 +463,14 @@
 
           li{
             position:relative;
-
+            padding-left: 20px;
             &:before{
-              font-family:fontawesome;
-              content:'\f178';
-              padding-right:5px;
+              font-family: fontawesome;
+              content: '\f178';
+              padding-right: 5px;
+              position: absolute;
+              left: 0;
+              top: 4px;
             }
           }
         }
