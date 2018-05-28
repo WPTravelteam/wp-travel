@@ -56,16 +56,16 @@ jQuery(document).ready(function($) {
             $('#' + hash + '.tab-list-content').addClass('resp-tab-content-active').show();
         }
 
-        // if (hash === 'tab-7') {
-        var winWidth = $(window).width();
-        var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
-        if (winWidth < 767) {
-            var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
+        if ($('.wp-travel-tab-wrapper').length) {
+            var winWidth = $(window).width();
+            var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
+            if (winWidth < 767) {
+                var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
+            }
+            $('html, body').animate({
+                scrollTop: (tabHeight)
+            }, 1200);
         }
-        $('html, body').animate({
-            scrollTop: (tabHeight)
-        }, 1200);
-        // }
     }
 
     // $('ul.resp-tabs-list > li').on('click', function() {

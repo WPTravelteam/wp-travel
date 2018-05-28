@@ -108,26 +108,6 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 						</div>
 					</div>
 				</div>
-				<!-- <div class="list-item">
-					<div class="list-item-wrapper">
-						<div class="item">
-							<a href="#"><strong>Payment Option</strong></a>
-							<div class="box-content">
-								<p>
-									Kathmandu<br>
-									Nepal<br>
-									9812345678<br>
-								</p>
-							</div>
-							<div class="box-actions">
-								<a class="action edit" href="#">
-									<i class="fa fa-pencil" aria-hidden="true"></i>
-									<span>Edit</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 		<div class="my-order">
@@ -317,72 +297,6 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 			<div class="title">
 				<h3><?php esc_html_e( 'My Account', 'wp-travel' ); ?></h3>
 			</div>
-		<!-- <form>
-			<div class="form-horizontal clearfix">
-				<div class="form-group gap-20">
-					<label class="col-sm-4 col-md-3 control-label">First Name:</label>
-					<div class="col-sm-8 col-md-9">
-						<input type="text" class="form-control" value="">
-					</div>
-				</div>
-			</div>
-			<div class="form-horizontal clearfix">
-				<div class="form-group gap-20">
-					<label class="col-sm-4 col-md-3 control-label">Last Name:</label>
-					<div class="col-sm-8 col-md-9">
-						<input type="text" class="form-control" value="">
-					</div>
-				</div>
-			</div>
-			<div class="form-horizontal clearfix">
-				<div class="form-group gap-20">
-					<label class="col-sm-4 col-md-3 control-label">E-mail:</label>
-					<div class="col-sm-8 col-md-9">
-						<input type="text" class="form-control" value="">
-					</div>
-				</div>
-			</div>
-			<div class="form-horizontal clearfix">
-				<div class="form-group gap-20">
-					<label class="col-sm-4 col-md-3 control-label">Change Password</label>
-					<div class="col-sm-8 col-md-9">
-						<div class="onoffswitch">
-							<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-							<label class="onoffswitch-label" for="myonoffswitch">
-							  <span class="onoffswitch-inner"></span>
-							  <span class="onoffswitch-switch"></span>
-							</label>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="ch-password clearfix">
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Current Password:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="password" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">New Password:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="password" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Conform New Password:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="password" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-			<input type="submit" name="submit" value="Save Change">
-			</form>-->
 			<?php 
 				echo wp_travel_get_template_html( 'account/form-edit-account.php', 
 				array(
