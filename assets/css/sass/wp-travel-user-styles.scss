@@ -177,6 +177,36 @@
     } 
 }
 
+.payment-status,
+.booking-status{
+
+  .paid,
+  .booked{
+    background-color:#008600;
+    color: #fff;
+    padding-left: 5px;
+  }
+
+  .pending{
+    background-color:#FF9800;
+    color: #fff;
+    padding-left: 5px;
+  }
+  .cancled{
+    background-color:#FE450E;
+    color: #fff;
+    padding-left: 5px;
+  }
+  .not-available{
+    background-color:#892E2C;
+    color: #fff;
+    padding-left: 5px;
+  }
+
+} 
+
+
+
 
 
 .login-form,
