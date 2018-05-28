@@ -47,9 +47,7 @@ class WP_Travel_Checkout {
 		$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
 
 		if ( 'yes' === $settings['enable_checkout_customer_registration'] && ! is_user_logged_in() ) {
-
 			return wp_travel_get_template_part( 'account/form', 'login' );
-
 		}
 
 		//Pricing Options Merge.
