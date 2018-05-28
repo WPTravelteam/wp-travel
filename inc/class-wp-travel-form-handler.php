@@ -18,6 +18,7 @@ class Wp_Travel_Form_Handler {
 	public static function init() {
 		add_action( 'template_redirect', array( __CLASS__, 'redirect_reset_password_link' ) );
 		add_action( 'template_redirect', array( __CLASS__, 'save_account_details' ) );
+		add_action( 'template_redirect', array( __CLASS__, 'update_user_billing_data' ) );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_login' ), 20 );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_registration' ), 20 );
 		add_action( 'wp_loaded', array( __CLASS__, 'process_lost_password' ), 20 );
@@ -215,6 +216,76 @@ class Wp_Travel_Form_Handler {
 			wp_safe_redirect( add_query_arg( 'show-reset-form', 'true', wp_travel_lostpassword_url() ) );
 			exit;
 		}
+	}
+	/**
+	 * Update User Billing Data.
+	 */
+	public static function update_user_billing_data() {
+
+		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+			return;
+		}
+
+		if ( empty( $_POST['action'] ) || 'wp_travel_save_user_meta_billing_address' !== $_POST['action'] || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_save_user_meta_billing_address' ) ) {
+			return;
+		}
+
+		nocache_headers();
+
+		$user_id = get_current_user_id();
+
+		if ( $user_id <= 0 ) {
+			return;
+		}
+
+		$current_user = get_user_by( 'id', $user_id );
+
+		if ( ! in_array( 'wp-travel-customer', (array) $current_user->roles ) ) {
+			return;
+		}
+
+		// Get Billing Data.
+		$billing_address = ! empty( $_POST['customer_billing_address'] ) ? wp_travel_clean_vars( $_POST['customer_billing_address'] ): '';
+		$billing_city    = ! empty( $_POST['customer_billing_city'] ) ? wp_travel_clean_vars( $_POST['customer_billing_city'] ): '';
+		$billing_company    = ! empty( $_POST['customer_billing_company'] ) ? wp_travel_clean_vars( $_POST['customer_billing_company'] ): '';
+		$billing_zip_code    = ! empty( $_POST['customer_zip_code'] ) ? wp_travel_clean_vars( $_POST['customer_zip_code'] ): '';
+		$billing_country    = ! empty( $_POST['customer_country'] ) ? wp_travel_clean_vars( $_POST['customer_country'] ): '';
+		$billing_phone    = ! empty( $_POST['customer_phone'] ) ? wp_travel_clean_vars( $_POST['customer_phone'] ): '';
+
+		// Handle required fields.
+		$required_fields = apply_filters( 'wp_travel_save_customer_billing_details_required_fields', array(
+			'customer_billing_address' => __( 'Billing Address', 'wp-travel' ),
+			'customer_billing_city'  => __( 'Billing City', 'wp-travel' ),
+			'customer_zip_code'      => __( 'ZIP Code', 'wp-travel' ),
+		) );
+
+		foreach ( $required_fields as $field_key => $field_name ) {
+			if ( empty( $_POST[ $field_key ] ) ) {
+				WP_Travel()->notices->add( __( sprintf( '<strong>Error :</strong>%s is a required field.', '<strong>' . esc_html( $field_name ) . '</strong>' ), 'wp-travel' ), 'error' );
+			}
+		}
+
+		if ( wp_travel_get_notice_count( 'error' ) === 0 ) {
+
+			$data_array = array(
+				'billing_address'  => $billing_address,
+				'billing_city'     => $billing_city,
+				'billing_company'  => $billing_company,
+				'billing_zip_code' => $billing_zip_code,
+				'billing_country'  => $billing_country,
+				'billing_phone'    => $billing_phone,
+			);
+
+			update_user_meta( $user_id, 'wp_travel_customer_billing_details', $data_array );
+
+			WP_Travel()->notices->add( __( 'Billing Details Updated Successfully', 'wp-travel' ), 'success' );
+
+			do_action( 'wp_travel_save_billing_details', $user_id );
+
+			wp_safe_redirect( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) );
+			exit;
+		}
+
 	}
 
 	/**

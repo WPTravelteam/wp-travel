@@ -5,6 +5,10 @@
  * @package WP_Travel
  */
 
+// Print Errors / Notices.
+WP_Travel()->notices->print_notices( 'error', true );
+WP_Travel()->notices->print_notices( 'success', true );
+
 // Set User.
 $current_user    = $args;
 $bookings        = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
@@ -14,6 +18,8 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 	$bookings        = array_reverse( $bookings );
 	$bookings_glance = array_slice( $bookings, 0, 5 );
 }
+
+$biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_billing_details', true );
 
 ?>
 <div class="dashboard-tab">
@@ -57,7 +63,7 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 								<a href="#" data-tabtitle="wp-tab-mybookings" class="dashtab-nav"><strong><?php esc_html_e( 'View All', 'wp-travel' ); ?></strong></a>
 								<?php else : ?>
 									<p>
-										<?php esc_html_e( 'You haven&lsquo;t order anything yet.', 'wp-travel' ); ?>
+										<?php esc_html_e( 'You haven&lsquo;t booked any trips yet.', 'wp-travel' ); ?>
 									</p>
 									<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book some trips now', 'wp-travel' ); ?></a>
 								<?php endif; ?>
@@ -72,11 +78,14 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 						<div class="item">
 							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaddress"><strong><?php esc_html_e( 'Address', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
-								<p>
-									Kathmandu<br>
-									Nepal<br>
-									9812345678<br>
-								</p>
+								<?php if ( is_array( $biling_glance_data ) && ! empty( $biling_glance_data ) ) : ?>
+									<p>
+										<?php echo esc_html( $biling_glance_data['billing_address'] ); ?><br>
+										<?php echo esc_html( $biling_glance_data['billing_city'] ); ?><br>
+										<?php echo esc_html( $biling_glance_data['billing_zip_code'] ); ?><br>
+										<?php echo esc_html( $biling_glance_data['billing_country'] ); ?><br>
+									</p>
+								<?php endif; ?>
 							</div>
 							<div class="box-actions">
 								<a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
@@ -223,73 +232,12 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 				<div class="title">
 					<h3><?php esc_html_e( 'Billing Address', 'wp-travel' ); ?></h3>
 				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label required">Address:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label required">City:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Company:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label required">Zip/Postal code:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label required">Conntry:</label>
-						<div class="col-sm-8 col-md-9">
-							<select class="form-control " data-placeholder="Conntry" tabindex="-1" aria-hidden="true">
-								<option value="">Conntry</option>   
-								<option value="Thai">Thai</option>
-								<option value="Malaysian">Malaysian</option>
-								<option value="Indonesian">Indonesian</option>
-								<option value="American">American</option>
-								<option value="England">England</option>
-								<option value="German">German</option>
-								<option value="Polish">Polish</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Mobile no.:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<div class="form-horizontal clearfix">
-					<div class="form-group gap-20">
-						<label class="col-sm-4 col-md-3 control-label">Land Line:</label>
-						<div class="col-sm-8 col-md-9">
-							<input type="text" class="form-control" value="">
-						</div>
-					</div>
-				</div>
-				<p><strong>*</strong>marked fields are required</p>
-				<input type="submit" name="submit" value="Save">
+				<?php 
+				echo wp_travel_get_template_html( 'account/form-edit-billing.php', 
+				array(
+				'user'   => $current_user,
+				) );
+			?>
 			</div>
 		</div> 
 
