@@ -2,6 +2,7 @@
 
 class WP_Travel_Notices {
 	private $errors = array();
+	private $success = array();
 	function __construct() {
 
 	}
@@ -10,6 +11,9 @@ class WP_Travel_Notices {
 		if ( 'error' === $type ) {
 			$this->errors = wp_parse_args( array( $value ), $this->errors );
 			WP_Travel()->session->set( 'wp_travel_errors', $this->errors );
+		} elseif ( 'success' === $type ) {
+			$this->success = wp_parse_args( array( $value ), $this->success );
+			WP_Travel()->session->set( 'wp_travel_success', $this->success );
 		}
 	}
 
@@ -20,6 +24,12 @@ class WP_Travel_Notices {
 				$this->destroy( $type );
 			}
 			return $errors;
+		} elseif ( 'success' === $type ) {
+			$success = WP_Travel()->session->get( 'wp_travel_success' );
+			if ( $destroy ) {
+				$this->destroy( $type );
+			}
+			return $success;
 		}
 	}
 
@@ -27,17 +37,29 @@ class WP_Travel_Notices {
 		if ( 'error' === $type ) {
 			$this->errors = array();
 			WP_Travel()->session->set( 'wp_travel_errors', $this->errors );
+		} elseif ( 'success' === $type ) {
+			$this->success = array();
+			WP_Travel()->session->set( 'wp_travel_success', $this->success );
 		}
 	}
 
 	function print_notices( $type, $destroy = true ){
 
-		$notices = $this->get( 'error', $destroy );
-		if ( $notices ) {
+		$notices = $this->get( $type, $destroy );
+		if ( $notices && 'error' === $type ) {
 
 			foreach ( $notices as $key => $notice ) {
 
 				echo '<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice">' . $notice . '</p>';
+
+			}
+			return;
+
+		} elseif ( $notices && 'success' === $type ) {
+
+			foreach ( $notices as $key => $notice ) {
+
+				echo '<p class="col-xs-12 wp-travel-notice-success wp-travel-notice">' . $notice . '</p>';
 
 			}
 			return;

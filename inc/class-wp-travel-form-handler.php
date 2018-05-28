@@ -315,7 +315,7 @@ class Wp_Travel_Form_Handler {
 		if ( wp_travel_get_notice_count( 'error' ) === 0 ) {
 			wp_update_user( $user );
 
-			// wc_add_notice( __( 'Account details changed successfully.', 'wp-travel' ) );
+			WP_Travel()->notices->add( __( 'Account Details Updated Successfully', 'wp-travel' ), 'success' );
 
 			do_action( 'wp_travel__save_account_details', $user->ID );
 

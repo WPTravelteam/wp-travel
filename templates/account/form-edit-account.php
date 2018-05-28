@@ -23,6 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Print Errors / Notices.
 WP_Travel()->notices->print_notices( 'error', true );
 
+WP_Travel()->notices->print_notices( 'success', true );
+
 do_action( 'wp_travel_before_edit_account_form' ); ?>
 
 <form class="wp-travel-EditAccountForm edit-account" action="" method="post">
