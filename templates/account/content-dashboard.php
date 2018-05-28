@@ -133,7 +133,6 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 								<table class="order-list-table">
 									<thead>
 										<tr>
-											<th></th>
 											<th>Tour</th>
 											<th>Contact Name</th>
 											<th>Booking Status</th>
@@ -154,32 +153,37 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 										echo '<pre>'; print_r( $ordered_data ); echo '</pre>';
 									?>			
 										<tr class="tbody-content">
-											<td class="product-thumbnail">
-												<a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>">
-												<img src="<?php echo esc_url( wp_travel_get_post_thumbnail_url( get_the_ID(), 'thumbnail' ) ); ?>">
-											</a> 
-											</td>
+
 											<td class="name" data-title="name">
 												<div class="name-title">
 														<a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>"><?php echo esc_html( get_the_title( $bkd_trip_id ) ); ?></a>
 												</div>
 											</td>
-											<td class="price" data-title="Price">
-												<span class="price-per-pack">
-													<ins>
-														<span>
-															$ 500.00 
-														</span>
-													</ins>/pax						
-												</span>
-											</td>
-											<td class="product-quantity" data-title="PAX">
-												<div class="st_adults">
-													<span>
-														3
-													</span>
+
+											<td class="c-name" data-title="Contact Name">
+												<div class="contact-title">
+														Abishek Riajl Fataha
 												</div>
 											</td>
+
+											<td class="booking-status" data-title="Booking Status">
+												<div class="contact-title">
+														pending
+												</div>
+											</td>
+
+											<td class="payment-status" data-title="Payment Status">
+												<div class="contact-title">
+														Paypal
+												</div>
+											</td>
+
+											<td class="payment-mode" data-title="Payment Mode">
+												<div class="contact-title">
+														Paypal
+												</div>
+											</td>
+											
 											<td class="product-subtotal text-right" data-title="Total">
 												<div class="order-list-table">
 													<p>
