@@ -912,31 +912,31 @@ class WP_Travel_Admin_Settings {
 	
 		$enable_my_account_customer_registration =  isset( $args['settings']['enable_my_account_customer_registration'] ) ? $args['settings']['enable_my_account_customer_registration'] : 'yes';
 	
-		$generate_username_from_email =  isset( $args['settings']['generate_username_from_email'] ) ? $args['settings']['generate_username_from_email'] : 'yes';
+		$generate_username_from_email =  isset( $args['settings']['generate_username_from_email'] ) ? $args['settings']['generate_username_from_email'] : 'no';
 	
-		$generate_user_password =  isset( $args['settings']['generate_user_password'] ) ? $args['settings']['generate_user_password'] : 'yes';
+		$generate_user_password =  isset( $args['settings']['generate_user_password'] ) ? $args['settings']['generate_user_password'] : 'no';
 	
 			echo '<table class="form-table">';
-				echo '<tr>';
-					echo '<th>';
-						echo '<label for="cart-page-id">' . esc_html__( 'My Account Page', 'wp-travel' ) . '</label>';
-					echo '</th>';
-					echo '<td>';
-						wp_dropdown_pages(array(
-							'depth'                 => 0,
-							'child_of'              => 0,
-							'selected'              => $selected_account_page,
-							'echo'                  => 1,
-							'name'                  => 'myaccount_page_id',
-							'id'                    => 'my-account-page-id', // string
-							'class'                 => null, // string
-							'show_option_none'      => null, // string
-							'show_option_no_change' => null, // string
-							'option_none_value'     => null, // string
-						));
-						echo '<p class="description">' . esc_html__( 'Choose the page to use as account dashboard for registered users', 'wp-travel' ) . '</p>';
-					echo '</td>';
-				echo '<tr>';
+				// echo '<tr>';
+				// 	echo '<th>';
+				// 		echo '<label for="cart-page-id">' . esc_html__( 'My Account Page', 'wp-travel' ) . '</label>';
+				// 	echo '</th>';
+				// 	echo '<td>';
+				// 		wp_dropdown_pages(array(
+				// 			'depth'                 => 0,
+				// 			'child_of'              => 0,
+				// 			'selected'              => $selected_account_page,
+				// 			'echo'                  => 1,
+				// 			'name'                  => 'myaccount_page_id',
+				// 			'id'                    => 'my-account-page-id', // string
+				// 			'class'                 => null, // string
+				// 			'show_option_none'      => null, // string
+				// 			'show_option_no_change' => null, // string
+				// 			'option_none_value'     => null, // string
+				// 		));
+				// 		echo '<p class="description">' . esc_html__( 'Choose the page to use as account dashboard for registered users', 'wp-travel' ) . '</p>';
+				// 	echo '</td>';
+				// echo '<tr>';
 	
 				echo '<tr>';
 					echo '<th>';

@@ -221,7 +221,7 @@ class WP_Travel_Cart {
 						<td class="product-subtotal text-right" data-title="Total">
 							<div class="item_cart">
 								<p>
-									<strong><span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> 0 </span></strong>
+									<strong><span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> 0 </span></strong>
 								</p>
 							</div>
 						</td> 

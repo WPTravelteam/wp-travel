@@ -1252,7 +1252,7 @@ function wp_travel_get_group_size( $post_id = null ) {
  * When the_post is called, put product data into a global.
  *
  * @param mixed $post Post object or post id.
- * @return WC_Product
+ * @return WP_Travel_Itinerary
  */
 function wp_travel_setup_itinerary_data( $post ) {
 	unset( $GLOBALS['wp_travel_itinerary'] );

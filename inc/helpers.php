@@ -1754,7 +1754,7 @@ if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
 	 * @return bool
 	 */
 	function wp_travel_is_account_page() {
-		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'woocommerce_is_account_page', false );
+		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
 	}
 }
 
@@ -1852,3 +1852,45 @@ function wp_travel_get_notice_count( $notice_type = '' ) {
 
 	return $notice_count;
 }
+
+/**
+ * Send new account notification to users.
+ */
+function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $password_generated ) {
+
+	// Send email notification.
+	$email_content = wp_travel_get_template_html( 'emails/customer-new-account.php', array(
+		'user_login'         => $new_customer_data['user_login'],
+		'user_pass'          => $new_customer_data['user_pass'],
+		'blogname'           => get_bloginfo('name'),
+		'password_generated' => $password_generated,
+	) );
+
+	// To send HTML mail, the Content-type header must be set.
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+	$from = get_option( 'admin_email' );
+	// Create email headers.
+	$headers .= 'From: ' . $from . "\r\n";
+	$headers .= 'Reply-To: ' . $from . "\r\n" .
+	'X-Mailer: PHP/' . phpversion();
+
+	if ( $new_customer_data['user_login'] ) {
+
+	$user_object     = get_user_by( 'login', $new_customer_data['user_login'] );
+	$user_user_login = $user_login;
+	$user_user_email = stripslashes( $user_object->user_email );
+	$user_recipient  = $user_user_email;
+	$user_subject    = __( 'New Account Created', 'wp-travel' );
+
+		if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
+
+			return false;
+
+		}
+
+	}
+}	
+
+add_action( 'wp_travel_created_customer', 'wp_travel_user_new_account_created', 20, 3 );

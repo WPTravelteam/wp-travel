@@ -196,7 +196,7 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 												<div class="order-list-table">
 													<p>
 														<strong>
-															<span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>
+															<span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>
 															<span class="wp-travel-trip-total"> <?php echo esc_html( $trip_price ); ?> </span>
 														</strong>
 													</p>
