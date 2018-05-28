@@ -58,37 +58,48 @@ do_action( 'wp_travel_before_edit_account_form' ); ?>
 		</div>
 	</div>
 
-	<fieldset>
-		<legend><?php esc_html_e( 'Password change', 'wp-travel' ); ?></legend>
+	<div class="form-horizontal clearfix">
+		<div class="form-group gap-20">
+			<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Change password', 'wp-travel' ); ?></label>
+			<div class="col-sm-8 col-md-9">
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="wp-travel-dsh-change-pass-switch">
+					<label class="onoffswitch-label" for="wp-travel-dsh-change-pass-switch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<div id="wp-travel-dsh-change-pass" style="display:none;" class="ch-password clearfix">
 		<div class="form-horizontal clearfix">
 			<div class="form-group gap-20">
-				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Current password (leave blank to leave unchanged)', 'wp-travel' ); ?></label>
+				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Current Password (leave blank to leave unchanged):', 'wp-travel' ); ?></label>
 				<div class="col-sm-8 col-md-9">
 					<input type="password" class="wp-travel-Input form-control wp-travel-Input--password input-text" name="password_current" id="password_current" />
 				</div>
 			</div>
 		</div>
-
-
 		<div class="form-horizontal clearfix">
 			<div class="form-group gap-20">
-				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'New password (leave blank to leave unchanged)', 'wp-travel' ); ?></label>
+				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'New Password (leave blank to leave unchanged):', 'wp-travel' ); ?></label>
 				<div class="col-sm-8 col-md-9">
 					<input type="password" class="wp-travel-Input form-control wp-travel-Input--password input-text" name="password_1" id="password_1" />
 				</div>
 			</div>
 		</div>
-
 		<div class="form-horizontal clearfix">
 			<div class="form-group gap-20">
-				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Confirm new password', 'wp-travel' ); ?></label>
+				<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Confirm New Password (leave blank to leave unchanged)', 'wp-travel' ); ?></label>
 				<div class="col-sm-8 col-md-9">
 					<input type="password" class="wp-travel-Input form-control wp-travel-Input--password input-text" name="password_2" id="password_2" />
 				</div>
 			</div>
 		</div>
-	</fieldset>
+	</div>
+
 	<div class="clear"></div>
 
 	<?php do_action( 'wp_travel_edit_account_form' ); ?>

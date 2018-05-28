@@ -331,4 +331,10 @@ jQuery(document).ready(function($) {
 
     });
 
+    $('#wp-travel-dsh-change-pass-switch').change(function(e) {
+
+        $('#wp-travel-dsh-change-pass').slideToggle();
+
+    });
+
 });
