@@ -277,7 +277,7 @@
     width:calc( 100% - 100px );
     border-radius:0;
     border:none;
-    min-height: 466px;
+    min-height: 485px;
     padding: 30px;
     border: 1px solid #eae9de;
 
@@ -441,6 +441,9 @@
     display: inline-block;
     width: 50%;
     float: left;
+      &:nth-of-type(2n +1) {
+          clear: left;
+      }
     .item{
       margin: 0 20px 40px 0;
       border: 1px solid #d6d6d6;
@@ -449,9 +452,26 @@
       strong{
         display: block;
       }
-      .box-content p{
-        margin: 0;
-      }
+      .box-content{
+        p{
+          margin: 0;
+        }
+        ul {
+          margin: 0 0 0 0;
+          padding: 0;
+          list-style: none;
+
+          li{
+            position:relative;
+
+            &:before{
+              font-family:fontawesome;
+              content:'\f178';
+              padding-right:5px;
+            }
+          }
+        }
+      } 
     } 
   } 
 
