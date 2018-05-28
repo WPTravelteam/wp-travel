@@ -266,7 +266,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( __( sprintf( '<strong>Error :</strong>%s is a required field.', '<strong>' . esc_html( $field_name ) . '</strong>' ), 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( sprintf( '<strong>Error :</strong>%s is a required field.', 'wp-travel' . esc_html( $field_name ) . 'wp-travel' ), 'wp-travel' ), 'error' );
 			}
 		}
 
@@ -343,7 +343,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( __( sprintf( '<strong>Error :</strong>%s is a required field.', '<strong>' . esc_html( $field_name ) . '</strong>' ), 'wp-travel' ), 'error' );
+				WP_Travel()->notices->add( __( sprintf( '<strong>Error :</strong>%s is a required field.', 'wp-travel' . esc_html( $field_name ) . 'wp-travel' ), 'wp-travel' ), 'error' );
 			}
 		}
 
