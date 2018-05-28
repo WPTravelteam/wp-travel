@@ -313,11 +313,11 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 			</div>
 		</div> 
 
-
 		<div class="account-setting">
 			<div class="title">
-				<h3>My Account</h3>
+				<h3><?php esc_html_e( 'My Account', 'wp-travel' ); ?></h3>
 			</div>
+		<!-- <form>
 			<div class="form-horizontal clearfix">
 				<div class="form-group gap-20">
 					<label class="col-sm-4 col-md-3 control-label">First Name:</label>
@@ -382,14 +382,20 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 					</div>
 				</div>
 			<input type="submit" name="submit" value="Save Change">
-
-			</div>
+			</form>-->
+			<?php 
+				echo wp_travel_get_template_html( 'account/form-edit-account.php', 
+				array(
+				'user'   => $current_user,
+				) );
+			?>
+		</div> 
 		</div>
 		<div class="log-out">
 			<div class="title">
-				<h3>Log Out?</h3>
+				<h3><?php esc_html_e( 'Log Out?', 'wp-travel' ); ?></h3>
 				<span>
-					Are you sure want to log out?
+					<?php esc_html_e( 'Are you sure want to log out?', 'wp-travel' ); ?>
 					<a href="<?php echo wp_logout_url( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ); ?>"><?php esc_html_e( 'Log Out', 'wp-travel' ); ?></a>
 				</span>
 			</div>
