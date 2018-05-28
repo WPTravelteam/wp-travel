@@ -262,6 +262,29 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 		}
 		/**
+		 * Create roles and capabilities.
+		 */
+		public static function create_roles() {
+			global $wp_roles;
+
+			if ( ! class_exists( 'WP_Roles' ) ) {
+				return;
+			}
+
+			if ( ! isset( $wp_roles ) ) {
+				$wp_roles = new WP_Roles(); // @codingStandardsIgnoreLine
+			}
+
+			// Customer role.
+			add_role(
+				'wp-travel-customer',
+				__( 'WP Travel Customer', 'wp-travel' ),
+				array(
+					'read' => true,
+				)
+			);
+		}
+		/**
 		 * WP Travel Activation.
 		 */
 		function wp_travel_activation() {
@@ -366,6 +389,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			// Update marketplace data transient.
 			delete_transient( 'wp_travel_marketplace_addons_list' );
+
+			/**
+			 * Define Roles.
+			 * @since 1.3.7
+			 */
+			self::create_roles();
 		}
 
 		function wp_travel_setup_environment() {
