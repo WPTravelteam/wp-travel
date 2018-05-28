@@ -149,16 +149,20 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 
 										$ordered_data = get_post_meta( $b_id, 'order_data', true );
 										$booking_status = get_post_meta( $b_id, 'wp_travel_booking_status', true );
+										$booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
 										$payment_id = get_post_meta( $b_id, 'wp_travel_payment_id', true );
 										$payment_status = 'N/A';
 										$payment_mode = 'N/A';
+										$trip_price = $ordered_data['wp_travel_trip_price'];
 										if ( $payment_id ) {
 											$payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 											$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
-										}
 
-										$trip_price = $ordered_data['wp_travel_trip_price'];
+											if ( 'paid' === $payment_status ) {
+												$trip_price = ( get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) : 0;
+											}	
+										}
 									?>			
 										<tr class="tbody-content">
 
