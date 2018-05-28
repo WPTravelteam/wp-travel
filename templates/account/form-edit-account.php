@@ -29,32 +29,32 @@ do_action( 'wp_travel_before_edit_account_form' ); ?>
 
 	<?php do_action( 'wp_travel_edit_account_form_start' ); ?>
 
-    <div class="form-horizontal clearfix">
-        <div class="form-group gap-20">
-            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'First name:', 'wp-travel' ); ?></label>
-            <div class="col-sm-8 col-md-9">
-            <input type="text" class="wp-travel-Input wp-travel-Input--text input-text" name="account_first_name" id="account_first_name" value="<?php echo esc_attr( $user->first_name ); ?>" />
-            </div>
-        </div>
-    </div>
+	<div class="form-horizontal clearfix">
+		<div class="form-group gap-20">
+			<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'First name:', 'wp-travel' ); ?></label>
+			<div class="col-sm-8 col-md-9">
+			<input type="text" class="wp-travel-Input wp-travel-Input--text input-text" name="account_first_name" id="account_first_name" value="<?php echo esc_attr( $user->first_name ); ?>" />
+			</div>
+		</div>
+	</div>
 
-    <div class="form-horizontal clearfix">
-        <div class="form-group gap-20">
-            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Last name:', 'wp-travel' ); ?></label>
-            <div class="col-sm-8 col-md-9">
-            <input type="text" class="wp-travel-Input wp-travel-Input--text input-text" name="account_last_name" id="account_last_name" value="<?php echo esc_attr( $user->last_name ); ?>" />
-            </div>
-        </div>
-    </div>
+	<div class="form-horizontal clearfix">
+		<div class="form-group gap-20">
+			<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Last name:', 'wp-travel' ); ?></label>
+			<div class="col-sm-8 col-md-9">
+			<input type="text" class="wp-travel-Input wp-travel-Input--text input-text" name="account_last_name" id="account_last_name" value="<?php echo esc_attr( $user->last_name ); ?>" />
+			</div>
+		</div>
+	</div>
 
-     <div class="form-horizontal clearfix">
-        <div class="form-group gap-20">
-            <label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Email Address:', 'wp-travel' ); ?></label>
-            <div class="col-sm-8 col-md-9">
-            <input type="email" class="wp-travel-Input wp-travel-Input--email input-text" name="account_email" id="account_email" value="<?php echo esc_attr( $user->user_email ); ?>" />
-            </div>
-        </div>
-    </div>
+	<div class="form-horizontal clearfix">
+		<div class="form-group gap-20">
+			<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Email Address:', 'wp-travel' ); ?></label>
+			<div class="col-sm-8 col-md-9">
+			<input type="email" class="wp-travel-Input wp-travel-Input--email input-text" name="account_email" id="account_email" value="<?php echo esc_attr( $user->user_email ); ?>" />
+			</div>
+		</div>
+	</div>
 
 	<fieldset>
 		<legend><?php esc_html_e( 'Password change', 'wp-travel' ); ?></legend>

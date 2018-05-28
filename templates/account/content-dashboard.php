@@ -93,8 +93,8 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaccount"><strong><?php esc_html_e( 'Account Info', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
 								<p>
-									sunil regmi<br>
-									regmi.sunil@wensolutions.com<br>
+									<?php echo esc_html( $current_user->first_name . ' ' . $current_user->last_name ); ?><br>
+									<?php echo esc_html( $current_user->user_email ); ?><br>
 								</p>
 							</div>
 							<div class="box-actions">
