@@ -389,11 +389,15 @@
         padding: 0;
         list-style: none; }
         .dashboard-tab .list-item .item .box-content ul li {
-          position: relative; }
+          position: relative;
+          padding-left: 20px; }
           .dashboard-tab .list-item .item .box-content ul li:before {
             font-family: fontawesome;
             content: '\f178';
-            padding-right: 5px; }
+            padding-right: 5px;
+            position: absolute;
+            left: 0;
+            top: 4px; }
   .dashboard-tab .password-opt {
     margin-bottom: 10px; }
   .dashboard-tab .box-actions a.action {
