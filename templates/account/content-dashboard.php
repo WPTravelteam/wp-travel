@@ -389,7 +389,6 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 				'user'   => $current_user,
 				) );
 			?>
-		</div> 
 		</div>
 		<div class="log-out">
 			<div class="title">
