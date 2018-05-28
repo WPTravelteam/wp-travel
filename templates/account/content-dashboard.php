@@ -5,12 +5,9 @@
  * @package WP_Travel
  */
 
- // Set User.
+// Set User.
 $current_user = $args;
-
-$bookings = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
-
-print_r( $bookings );
+$bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
 
 ?>
 <div class="dashboard-tab">
@@ -39,9 +36,9 @@ print_r( $bookings );
 
 											$trip_id = get_post_meta( $bk_id, 'wp_travel_post_id', true );
 
-											if( ! $trip_id ) {
-												continue;
-											}
+										if ( ! $trip_id ) {
+											continue;
+										}
 											?>
 											<li>
 												<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
@@ -53,54 +50,54 @@ print_r( $bookings );
 								</ul>
 								<?php else : ?>
 									<p>
-										You haven't order anything yet.
+										<?php esc_html_e( 'You haven&lsquo;t order anything yet.', 'wp-travel' ); ?>
 									</p>
-									<a href="http://skynet.wensolutions.com/travel-log/itinerary/"><?php esc_html_e( 'Book some trips now', 'wp-travel' ); ?></a>
+									<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book some trips now', 'wp-travel' ); ?></a>
 								<?php endif; ?>
 							</div>
 							<div class="box-actions">
-					        </div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaddress"><strong>Address</strong></a>
+							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaddress"><strong><?php esc_html_e( 'Address', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
 								<p>
 									Kathmandu<br>
 									Nepal<br>
-                    				9812345678<br>
-                    			</p>
+									9812345678<br>
+								</p>
 							</div>
 							<div class="box-actions">
-					            <a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
-					            	<i class="fa fa-pencil" aria-hidden="true"></i>
-					                <span>Edit</span>
-					            </a>
-					        </div>
+								<a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+									<span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="list-item">
 					<div class="list-item-wrapper">
 						<div class="item">
-							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaccount"><strong>Account Info</strong></a>
+							<a href="#" class="dashtab-nav" data-tabtitle="wp-tab-myaccount"><strong><?php esc_html_e( 'Account Info', 'wp-travel' ); ?></strong></a>
 							<div class="box-content">
 								<p>
 									sunil regmi<br>
-                    				regmi.sunil@wensolutions.com<br>
-                    			</p>
+									regmi.sunil@wensolutions.com<br>
+								</p>
 							</div>
 							<div class="box-actions">
-					            <a data-tabtitle="wp-tab-myaccount" class="action edit dashtab-nav" href="#">
-					            	<i class="fa fa-pencil" aria-hidden="true"></i>
-					                <span>Edit</span>
-					            </a>
-					            <a href="#" data-tabtitle="wp-tab-myaccount" class="action dashtab-nav action change-password">
-					                Change Password</a>
-					        </div>
+								<a data-tabtitle="wp-tab-myaccount" class="action edit dashtab-nav" href="#">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+									<span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
+								</a>
+								<a href="#" data-tabtitle="wp-tab-myaccount" class="action dashtab-nav action change-password">
+									<?php esc_html_e( 'Change Password', 'wp-travel' ); ?></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -112,208 +109,110 @@ print_r( $bookings );
 								<p>
 									Kathmandu<br>
 									Nepal<br>
-                    				9812345678<br>
-                    			</p>
+									9812345678<br>
+								</p>
 							</div>
 							<div class="box-actions">
-					            <a class="action edit" href="#">
-					            	<i class="fa fa-pencil" aria-hidden="true"></i>
-					                <span>Edit</span>
-					            </a>
-					        </div>
+								<a class="action edit" href="#">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+									<span>Edit</span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div> -->
 			</div>
 		</div>
 		<div class="my-order">
-			<div class="no-order">
-				<p>
-					You havnt order anything yet 
-					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
-				</p>
-			</div>
-			<div class="no-recent-order">
-				<p>
-					You have no-recent orders 
-					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book now?</a>
-					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">view recent orders</a>
-				</p>
-			</div>
-			<div class="view-order">
-				<div class="order-list">			
-					<div class="order-wrapper">
-						<h3>Your order</h3>
-						<div class="table-wrp">
-							<table class="order-list-table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>Tour</th>
-										<th>Price</th>
-										<th>PAX</th>
-										<th class="text-right">Total</th>
-									</tr>
-								</thead>
-								<tbody>				
-									<tr class="tbody-content">
-										<td class="product-thumbnail">
-											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
-											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">
-										</a> 
-										</td>
-										<td class="name" data-title="name">
-											<div class="name-title">
-													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
-											</div>
-										</td>
-										<td class="price" data-title="Price">
-											<span class="price-per-pack">
-												<ins>
-													<span>
-														 $ 500.00 
-													</span>
-												</ins>/pax						
-											</span>
-										</td>
-										<td class="product-quantity" data-title="PAX">
-											<div class="st_adults">
-												<span>
-													3
-												</span>
-											</div>
-										</td>
-										<td class="product-subtotal text-right" data-title="Total">
-											<div class="order-list-table">
-												<p>
-													<strong>
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														<span class="wp-travel-trip-total"> 1500.00 </span>
-													</strong>
-												</p>
-											</div>
-										</td> 
-									</tr>
-									<tr class="tbody-content">
+			<?php if ( ! empty( $bookings ) && is_array( $bookings ) ) : ?>
+				<div class="view-order">
+					<div class="order-list">			
+						<div class="order-wrapper">
+							<h3><?php esc_html_e( 'Your Bookings', 'wp-travel' ); ?></h3>
+							<div class="table-wrp">
+								<table class="order-list-table">
+									<thead>
+										<tr>
+											<th></th>
+											<th>Tour</th>
+											<th>Contact Name</th>
+											<th>Booking Status</th>
+											<th>Payment Status</th>
+											<th>Payment Mode</th>
+											<th class="text-right">Total Price</th>
+										</tr>
+									</thead>
+									<tbody>
+									<?php 
+									foreach ( $bookings as $key => $b_id ) :
+										$bkd_trip_id = get_post_meta( $b_id, 'wp_travel_post_id', true );
+										$ordered_data = get_post_meta( $b_id, 'order_data', true );
 
-										<td class="product-thumbnail">
-											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
-											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">	
-										</a> 
-										</td>
-										<td class="name" data-title="name">
-											<div class="name-title">
-													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
-											</div>
-										</td>
-										<td class="price" data-title="Price">
-											<span class="price-per-pack">
-												<ins>
-													<span>
-														 $ 500.00 
-													</span>
-												</ins>/pax							
-											</span>
-										</td>
-										<td class="product-quantity" data-title="PAX">
-											<div class="st_adults">
-												<span>
-													3
+										if ( ! $bkd_trip_id ) {
+											continue;
+										}
+										echo '<pre>'; print_r( $ordered_data ); echo '</pre>';
+									?>			
+										<tr class="tbody-content">
+											<td class="product-thumbnail">
+												<a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>">
+												<img src="<?php echo esc_url( wp_travel_get_post_thumbnail_url( get_the_ID(), 'thumbnail' ) ); ?>">
+											</a> 
+											</td>
+											<td class="name" data-title="name">
+												<div class="name-title">
+														<a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>"><?php echo esc_html( get_the_title( $bkd_trip_id ) ); ?></a>
+												</div>
+											</td>
+											<td class="price" data-title="Price">
+												<span class="price-per-pack">
+													<ins>
+														<span>
+															$ 500.00 
+														</span>
+													</ins>/pax						
 												</span>
-											</div>
-										</td>
-										<td class="product-subtotal text-right" data-title="Total">
-											<div class="order-list-table">
-												<p>
-													<strong>
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														<span class="wp-travel-trip-total"> 1500.00 </span>
-													</strong>
-												</p>
-											</div>
-										</td> 
-									</tr>
-									<tr class="tbody-content">
-
-										<td class="product-thumbnail">
-											<a href="http://skynet.wensolutions.com/travel-log/itinerary/">
-											<img src="http://skynet.wensolutions.com/travel-log/wp-content/uploads/2018/03/maldives-1532175_1920-2-2-365x215.jpg" alt="">	
-										</a> 
-										</td>
-										<td class="name" data-title="name">
-											<div class="name-title">
-												
-													<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Family ski Vacation</a>
-												
-											</div>
-										</td>
-										<td class="price" data-title="Price">
-											<span class="price-per-pack">
-												<ins>
+											</td>
+											<td class="product-quantity" data-title="PAX">
+												<div class="st_adults">
 													<span>
-														 $ 500.00 
+														3
 													</span>
-												</ins>/pax							
-											</span>
-										</td>
-										<td class="product-quantity" data-title="PAX">
-											<div class="st_adults">
-												<span>
-													3
-												</span>
-											</div>
-										</td>
-										<td class="product-subtotal text-right" data-title="Total">
-											<div class="order-list-table">
-												<p>
-													<strong>
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														<span class="wp-travel-trip-total"> 1500.00 </span>
-													</strong>
-												</p>
-											</div>
-										</td> 
-									</tr>
-								</tbody>
-								<tfoot>
-									
-								</tfoot>
-							</table>
-							<table class="order-list-table total-table">
-								<tbody>
-									<tr>
-										<th>
-											<p><strong>Subtotal</strong></p>
-											<p><strong>Tax:  
-											<span class="tax-percent">10%</span></strong></p>
-										</th>
-										<td class="text-right">
-											<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol">$</span>1800.00</strong></p>
-											<p><strong><span class="wp-travel-tax ws-theme-currencySymbol">$</span>180.00</strong></p>
-										</td>
-									</tr>
-						
-									<tr>
-										<th>
-											<strong>Total</strong>
-										</th>
-										<td class="text-right">
-											<p class="total">
-												<strong>$<span class="wp-travel-total ws-theme-currencySymbol">1980.00</span></strong>
-											</p>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>					
-				</div> 
-				<div class="book-more">
-					<a href="http://skynet.wensolutions.com/travel-log/itinerary/">Book more?</a>
-					<a href="#">View recent orders</a>
+												</div>
+											</td>
+											<td class="product-subtotal text-right" data-title="Total">
+												<div class="order-list-table">
+													<p>
+														<strong>
+															<span class="woocommerce-Price-currencySymbol">$</span>
+															<span class="wp-travel-trip-total"> 1500.00 </span>
+														</strong>
+													</p>
+												</div>
+											</td> 
+										</tr>
+									<?php 
+									endforeach;
+									?>
+									</tbody>
+									<tfoot>
+									</tfoot>
+								</table>
+							</div>
+						</div>					
+					</div> 
+					<div class="book-more">
+						<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book more?', 'wp-travel' ); ?></a>
+					</div>
 				</div>
-				
-			</div>
+			<?php else : ?>
+				<div class="no-order">
+					<p>
+						<?php esc_html_e( 'You have not booked any trips', 'wp-travel' ); ?> 
+						<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book one now?', 'wp-travel' ); ?></a>
+					</p>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="clearfix">
@@ -433,11 +332,11 @@ print_r( $bookings );
 					<label class="col-sm-4 col-md-3 control-label">Change Password</label>
 					<div class="col-sm-8 col-md-9">
 						<div class="onoffswitch">
-						    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-						    <label class="onoffswitch-label" for="myonoffswitch">
-						      <span class="onoffswitch-inner"></span>
-						      <span class="onoffswitch-switch"></span>
-						    </label>
+							<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+							<label class="onoffswitch-label" for="myonoffswitch">
+							  <span class="onoffswitch-inner"></span>
+							  <span class="onoffswitch-switch"></span>
+							</label>
 						</div>
 					</div>
 				</div>
