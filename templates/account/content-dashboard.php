@@ -167,14 +167,32 @@ $bookings     = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', tru
 											</td>
 
 											<td class="booking-status" data-title="Booking Status">
-												<div class="contact-title">
+												<div class="pending">
 														pending
+												</div>
+												<div class="booked">
+														Booked
+												</div>
+												<div class="cancled">
+														Cancled
+												</div>
+												<div class="not-available">
+														N/A
 												</div>
 											</td>
 
 											<td class="payment-status" data-title="Payment Status">
-												<div class="contact-title">
-														Paypal
+												<div class="pending">
+														pending
+												</div>
+												<div class="paid">
+														paid
+												</div>
+												<div class="cancled">
+														Cancled
+												</div>
+												<div class="not-available">
+														N/A
 												</div>
 											</td>
 
