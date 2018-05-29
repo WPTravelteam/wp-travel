@@ -3,7 +3,7 @@ Contributors: WEN Solutions
 Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
-Tested up to: 4.9.5
+Tested up to: 4.9.6
 Stable tag: 1.3.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -26,7 +26,8 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
 * Payment System: Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io 
 * Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip. 
-* Tax Options: With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
+* Tax Options: With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
+* WP Travel Customer Dashboard and Bookings Views.
 * Trip Facts: You can add the trips facts to your trips. 
 * Email Notification: You as an admin will be notified of all booking made by users and also users will also get email notification about their booking details. All email templates are customizable.
 * Customizable tabs: All trip details page tabs in front-end can be customized from backend. You can change their labels and sort by your requirements or hide them.
@@ -73,6 +74,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * WP Travel Stripe Chekout 
 * WP Travel Instamojo Checkout
 * WP Travel Razorpay Checkout
+* WP Travel Utilities
 [View all addons](http://wptravel.io/downloads/)
 
 = Customization and Flexibility =
