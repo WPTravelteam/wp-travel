@@ -18,6 +18,9 @@ function wp_travel_admin_init() {
 	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' )) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
 	}
+	if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' )) {
+		include_once sprintf( '%s/upgrade/update-137.php', WP_TRAVEL_ABSPATH );
+	}
 }
 
 function wp_travel_admin_footer_styles() {
