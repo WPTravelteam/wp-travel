@@ -272,6 +272,8 @@
         width: 100%; }
         .dashboard-tab .resp-tabs-container .resp-tab-content {
           border: none; } }
+    .dashboard-tab .resp-tabs-container .resp-tab-content {
+      padding: 0; }
   .dashboard-tab select, .dashboard-tab input.form-control {
     width: 100%; }
   .dashboard-tab .title {
@@ -475,10 +477,9 @@
   .dashboard-tab .item-image-wrap {
     float: left;
     width: 50%; }
-  .dashboard-tab .order-wrapper h3 {
+  .dashboard-tab .resp-tab-content h3 {
     display: inline-block;
-    margin: 0 0 20px 0;
-    border-bottom: 2px solid #f05451; }
+    margin: 0 0 20px 0; }
 
 .onoffswitch {
   position: relative;
