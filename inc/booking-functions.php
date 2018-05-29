@@ -57,7 +57,7 @@ function wp_travel_booking_form_fields() {
 		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
 
 			$user_fname = isset( $user->first_name ) ? $user->first_name : '' ;
-			$user_lname = isset( $user->first_name ) ? $user->first_name : '' ;
+			$user_lname = isset( $user->last_name ) ? $user->last_name : '' ;
 			$user_email = isset( $user->user_email ) ? $user->user_email : '' ;
 
 			$biling_data = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
