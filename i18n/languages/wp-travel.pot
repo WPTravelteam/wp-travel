@@ -17,7 +17,7 @@ msgstr ""
 "Language: en_US\n"
 "X-Poedit-SearchPath-0: ../../wp-travel\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: grunt-wp-i18n1.0.0\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
 
 #: inc/admin/admin-helper.php:62 inc/admin/class-admin-menu.php:11
 msgid "Marketplace"
