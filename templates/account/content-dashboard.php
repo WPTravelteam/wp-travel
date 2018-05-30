@@ -153,8 +153,8 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 
 										$payment_id = get_post_meta( $b_id, 'wp_travel_payment_id', true );
 										$payment_status = 'N/A';
-										$payment_mode = 'N/A';
-										$trip_price = $ordered_data['wp_travel_trip_price'];
+										$payment_mode   = 'N/A';
+										$trip_price     = isset( $ordered_data['wp_travel_trip_price'] ) ? $ordered_data['wp_travel_trip_price'] : 0;
 										if ( $payment_id ) {
 											$payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 											$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
