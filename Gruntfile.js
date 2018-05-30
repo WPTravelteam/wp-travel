@@ -286,6 +286,13 @@ module.exports = function(grunt) {
     grunt.registerTask('release', ['push_svn']);
     grunt.registerTask('post_release', ['clean:post_build']);
 
+    grunt.registerTask('build', [
+
+        'pre_release',
+        'copy:build_it'
+
+    ]);
+
 };
 
 /**
