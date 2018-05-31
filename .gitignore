@@ -24,3 +24,4 @@ test.php
 # map files
 *.map
 /../*.map
+.vscode
