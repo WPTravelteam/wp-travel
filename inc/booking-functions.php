@@ -34,6 +34,9 @@ function wp_travel_booking_form_fields() {
 	if ( isset( $_REQUEST['trip_duration'] ) ) {
 		$trip_duration = $_REQUEST['trip_duration'];
 	}
+	else {
+		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
+	}
 
 	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key']  ? $_GET['price_key'] : '';
 
@@ -224,35 +227,35 @@ function wp_travel_booking_form_fields() {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
 		$booking_fileds['pax']['attributes']['max'] = $max_pax;
 	}
-	if ( wp_travel_is_checkout_page() ) {		
-		$booking_arrival_date 	= get_post_meta( $post_id, 'wp_travel_start_date', true );
-		$booking_departure_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
+	if ( wp_travel_is_checkout_page() ) {
 
 		$booking_fileds['pax']['type'] = 'hidden';
 
-		if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ) {
+	}
+	$booking_arrival_date 	= get_post_meta( $post_id, 'wp_travel_start_date', true );
+	$booking_departure_date = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-			$booking_arrival_date = urldecode( $_GET['trip_date'] );
+	if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ) {
+
+		$booking_arrival_date = urldecode( $_GET['trip_date'] );
+
+		$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+		$booking_fileds['arrival_date']['type'] = 'hidden';
+
+		unset ( $booking_fileds['departure_date'] );
+	}
+	else {
+		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
+		$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+
+		if ( 'yes' === $fixed_departure ) {
 
 			$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
 			$booking_fileds['arrival_date']['type'] = 'hidden';
 
-			unset ( $booking_fileds['departure_date'] );
+			$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
+			$booking_fileds['departure_date']['type'] = 'hidden';
 		}
-		else {
-			$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
-			$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-
-			if ( 'yes' === $fixed_departure ) {
-
-				$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
-				$booking_fileds['arrival_date']['type'] = 'hidden';
-
-				$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
-				$booking_fileds['departure_date']['type'] = 'hidden';
-			}
-		}
-	
 	}
 	// Standard paypal Merge.
 
