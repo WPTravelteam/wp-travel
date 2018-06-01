@@ -2570,6 +2570,7 @@ ul.availabily-list {
 
 .ws-theme-cart-page {
     background-color: #fff;
+    border: 1px solid #dd7f51;
     .ws-theme-cart-list {
         margin-bottom: 0;
         .item_cart {
@@ -2706,9 +2707,6 @@ ul.availabily-list {
                 }
             }
         }
-        &.table-total-info {
-            margin-bottom: 30px;
-        }
     }
     .actions {
         float: right;
@@ -2790,16 +2788,48 @@ ul.availabily-list {
             text-align: center;
         }
     }
+    .coupon {
+        input[type="text"] {
+            height: 42px;
+            border-radius: 0;
+            padding: 5px 10px;
+        }
+        input[type="submit"]{
+            background: #dc8051;
+            padding: 11px 15px;
+            border-radius: 0;
+            font-size: 12px;
+            line-height: 1.5;
+            border:1px solid #dc8051;
+
+            &:hover{
+                background: transparent;
+                color:#dc8051;
+            }
+        }
+    }
+
+    button[disabled]{
+        opacity:0.5;
+        cursor: not-allowed;
+    }
+
+    .update-cart {
+        background-color: transparent;
+        font-size: 14px;
+        padding: 12px 30px;
+        border: 1px solid #dc8051;
+        color: #dc8051;
+
+        &:hover{
+            background: #dc8051;
+            color:#fff;
+        }
+    }
 }
 
 .coupon-row {
-    .coupon {
-        input {
-            height: 40px;
-            padding: 0 8px;
-            line-height: 40px;
-        }
-    }
+
     input[type="submit"] {
         height: 40px;
         line-height: 18px;
@@ -2816,7 +2846,65 @@ ul.availabily-list {
     text-align: right;
 }
 
+
+.wp-travel-error, .wp-travel-info, .wp-travel-message {
+    padding: 1em 2em 1em 4.5em !important;
+    margin: 0 0 2em !important;
+    position: relative;
+    background-color: #e0e0e0;
+    color: #1b1b1b;
+    border-top: 3px solid #dc8051;
+    list-style: none outside;
+    width: auto;
+    word-wrap: break-word;
+}
+.wp-travel-error::after, .wp-travel-info::after, .wp-travel-message::after {
+    clear: both;
+}
+
+.wp-travel-error::after, .wp-travel-error::before, .wp-travel-info::after, .wp-travel-info::before, 
+.wp-travel-message::after, .wp-travel-message::before {
+    content: ' ';
+    display: table;
+}
+.wp-travel-error::before,
+.wp-travel-info::before,
+.wp-travel-message::before{
+    font-family:fontawesome;
+    font-size: 18px;
+    display: inline-block;
+    position: absolute;
+    top: 13px;
+    left: 1.5em;
+}
+.wp-travel-message {
+    border-top-color: #0aa525;
+}
+.wp-travel-message::before {
+    content: '\f05d';
+    color: #0aa525;
+
+}
+.wp-travel-error::before {
+    content: '\f071';
+    color: #b81c23;
+}
+.wp-travel-info{
+    border-top-color:#1e85be;
+}
+.wp-travel-info:before{
+    content: '\f05a';
+    color: #1e85be;
+
+}
+ul.wp-travel-error {
+    border-top-color: #b81c24;
+}
+
 //end
+
+
+
 //checkout page
 .checkout-page-wrap {
     .checkout-block {
