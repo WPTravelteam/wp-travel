@@ -1815,7 +1815,7 @@ ul.availabily-list {
         margin-right: -4px; } }
     ul.availabily-list .availabily-content .btn:hover {
       background-color: #f83531;
-      color: #fff; }
+      color: #fff !important; }
   ul.availabily-list .availabily-content .action .btn {
     padding: 2px 5px; }
   ul.availabily-list .availabily-content.sold-out:after {
