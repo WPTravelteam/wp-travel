@@ -569,7 +569,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 /* tooltip styling */
 .tooltipster-sidetip .tooltipster-content {
-  width: 320px !important;
+  max-width: 200px !important;
   border-radius: 0 !important;
   height: auto !important;
   background-color: #151515; }
@@ -785,7 +785,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   padding: 0px 25px 0px 0px;
   border: 1px solid #999;
   position: relative;
-  display: inline-block; }
+  display: inline-block;
+  min-width: 200px; }
   .custom-multi-select .select-main .selected-item {
     line-height: 30px;
     padding-left: 5px;
