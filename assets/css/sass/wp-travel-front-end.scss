@@ -2623,6 +2623,12 @@ ul.availabily-list {
                     color: #dc8051;
                 }
             }
+            td{
+                @media (max-width:767.99px){
+                    display:block;
+                    width:100%;
+                }
+            }
         }
         tbody {
             td,
@@ -2709,10 +2715,13 @@ ul.availabily-list {
         }
     }
     .actions {
-        float: right;
+        @media (min-width:768px){
+            float: right;
+        }
         @media (max-width: 574.99px) {
-            width: 100%;
-            float: left;
+            .update-cart{
+                margin-bottom:15px;
+            }
         }
         .book-now-btn {
             float: right;
@@ -2722,7 +2731,7 @@ ul.availabily-list {
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
-            padding: 0 100px;
+            padding: 0 40px;
             margin-left: 15px;
             @media (max-width: 991.99px) {
                 font-size: 12px;
@@ -2824,6 +2833,17 @@ ul.availabily-list {
         &:hover{
             background: #dc8051;
             color:#fff;
+        }
+    }
+}
+
+.table-total-info{
+    th{
+        .total{
+            text-align:right;
+            float:right;
+            display:inline;
+            margin-bottom: 0;
         }
     }
 }

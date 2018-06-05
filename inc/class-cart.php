@@ -256,14 +256,13 @@ class WP_Travel_Cart {
 					</tr>
 				<?php } ?>
 					<tr>
-						<th>
+						<th colspan="2">
 							<strong><?php echo esc_html( 'Total', 'wp-travel' ); ?></strong>
-						</th>
-						<td  class="text-right">
 							<p class="total">
 								<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol">0</span></strong>
 							</p>
-						</td>
+						</th>
+						
 					</tr>
 					<tr>
 						<td>
