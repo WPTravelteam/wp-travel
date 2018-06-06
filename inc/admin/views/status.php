@@ -6,9 +6,7 @@ wp_enqueue_style( 'wp-travel-system-status', plugin_dir_url( WP_TRAVEL_PLUGIN_FI
 wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/system-status.js' );
 ?>
 <div class="wp-travel-system">
-    <h1 class="wp-heading-inline">System Information </h1>
-
-
+    <h1 class="wp-heading-inline"><?php esc_html_e( 'System Information', 'wp-travel' ); ?> </h1>
 
     <table class="" cellspacing="0" id="data-d">
 

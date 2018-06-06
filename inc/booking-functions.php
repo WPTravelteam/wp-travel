@@ -1060,8 +1060,9 @@ function wp_travel_book_now() {
 
 	$booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
-	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? $_POST['wp_travel_arrival_date'] : '';
-	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? $_POST['wp_travel_departure_date'] : '';
+	$date_format            = get_option('date_format');
+	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? date( $date_format, strtotime( stripslashes( $_POST['wp_travel_arrival_date'] ) ) ) : '';
+	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? date( $date_format, strtotime( stripslashes( $_POST['wp_travel_departure_date'] ) ) ) : '';
 
 	$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
 	$customer_country 		= $_POST['wp_travel_country'];
