@@ -828,14 +828,25 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
+.wp-travel-tabs-contents{
+    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], 
+    input[type="email"], 
+    input[type="month"], input[type="number"], input[type="search"], input[type="tel"], 
+    input[type="time"], input[type="url"], input[type="week"], select, textarea {
+        max-width: 215px !important;
+        width: 100%;
+    }
+}
+
 
 /* tooltip styling */
 .tooltipster-sidetip .tooltipster-content{
     max-width: 200px !important;
-    border-radius: 0 !important;
+    border-radius: 5px !important;
     height: auto !important;
     background-color: #151515;
     font-size: 12px;
+    line-height:14px !important;
 }
 .tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border {
     border-top-color: #151515;
