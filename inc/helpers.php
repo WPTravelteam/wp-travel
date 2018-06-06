@@ -1894,3 +1894,14 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 }	
 
 add_action( 'wp_travel_created_customer', 'wp_travel_user_new_account_created', 20, 3 );
+
+/**
+ * Filters the from name in e-mails 
+ */
+function wp_travel_emails_from_name_filter( $from_name ) {
+
+	return $from_name = apply_filters( 'wp_travel_email_from_name', get_bloginfo( 'name' ) );
+
+}
+
+add_filter( 'wp_mail_from_name', 'wp_travel_emails_from_name_filter', 30 );

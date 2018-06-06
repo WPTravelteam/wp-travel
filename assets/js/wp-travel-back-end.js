@@ -172,14 +172,14 @@
                 error += 'End date can\'t be empty!' + "\n";
             }
 
-            if ('' != start_date && '' != end_date) {
-                start_date = new Date(start_date);
-                end_date = new Date(end_date);
+            // if ('' != start_date && '' != end_date) {
+            //     start_date = new Date(start_date);
+            //     end_date = new Date(end_date);
 
-                if (end_date <= start_date) {
-                    error += 'End date must greater than start date.' + "\n";
-                }
-            }
+            //     if (end_date <= start_date) {
+            //         error += 'End date must greater than start date.' + "\n";
+            //     }
+            // }
 
         }
 
@@ -678,7 +678,7 @@
             val = this.val();
             index = this.data('index');
             jQuery('.fact-' + index).html((obj.options || []).map(function(option) {
-                return jQuery('<label><input type="checkbox" name="wp_travel_trip_facts[' + unique + '][value][]" value="'+ option +'"  >' + option + '</label>');
+                return jQuery('<label><input type="checkbox" name="wp_travel_trip_facts[' + unique + '][value][]" value="' + option + '"  >' + option + '</label>');
             }));
         },
         single: function(obj, unique) {

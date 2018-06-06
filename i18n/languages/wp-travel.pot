@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.3.8\n"
+"Project-Id-Version: WP Travel 1.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-31 10:42:37+00:00\n"
+"POT-Creation-Date: 2018-06-06 08:35:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "WP Travel version: %s"
 msgstr ""
 
-#: inc/admin/admin-helper.php:433 inc/booking-functions.php:1187
+#: inc/admin/admin-helper.php:433 inc/booking-functions.php:1188
 #: inc/helpers.php:1325
 msgid "Booking"
 msgstr ""
@@ -116,10 +116,10 @@ msgid "Payment Status"
 msgstr ""
 
 #: inc/admin/class-admin-assets.php:55 inc/admin/class-admin-assets.php:96
-#: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:160
-#: inc/booking-functions.php:1062 inc/booking-functions.php:1344
-#: inc/booking-functions.php:1348 inc/booking-functions.php:1376
-#: inc/booking-functions.php:1380 inc/helpers.php:590 inc/helpers.php:606
+#: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:158
+#: inc/booking-functions.php:1062 inc/booking-functions.php:1345
+#: inc/booking-functions.php:1349 inc/booking-functions.php:1377
+#: inc/booking-functions.php:1381 inc/helpers.php:590 inc/helpers.php:606
 #: inc/helpers.php:873 inc/helpers.php:1042 inc/helpers.php:1132
 #: inc/helpers.php:1148 inc/helpers.php:1163
 msgid "N/A"
@@ -404,7 +404,7 @@ msgstr ""
 msgid "View system information"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:74
+#: inc/admin/class-admin-settings.php:74 inc/admin/views/status.php:9
 msgid "System Information"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Global Tabs Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:1188
+#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:1189
 #: inc/helpers.php:791 inc/helpers.php:985
 msgid "Payment"
 msgstr ""
@@ -733,113 +733,113 @@ msgstr ""
 msgid " Automatically generate customer password"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:64
+#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:62
 msgid ""
 "%s - For better performance, we recommend setting memory to at least 64MB. "
 "See: %s"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:64
+#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:62
 msgid "Increasing memory allocated to PHP"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:127
+#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:125
 msgid "%s - Recommend  PHP version of 5.6. See: %s"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:127
+#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:125
 msgid "How to update your PHP version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:83 inc/admin/views/status.php:132
+#: inc/admin/class-admin-status.php:83 inc/admin/views/status.php:130
 msgid "Couldn't determine PHP version because phpversion() doesn't exist."
 msgstr ""
 
-#: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:188
+#: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:186
 msgid "%s - We recommend a minimum MySQL version of 5.6. See: %s"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:188
+#: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:186
 msgid "WordPress Requirements"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:141 inc/admin/views/status.php:21
+#: inc/admin/class-admin-status.php:141 inc/admin/views/status.php:19
 msgid "Home URL"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:142 inc/admin/views/status.php:27
+#: inc/admin/class-admin-status.php:142 inc/admin/views/status.php:25
 msgid "Site URL"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:143 inc/admin/views/status.php:35
+#: inc/admin/class-admin-status.php:143 inc/admin/views/status.php:33
 msgid "WP Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:144 inc/admin/views/status.php:40
+#: inc/admin/class-admin-status.php:144 inc/admin/views/status.php:38
 msgid "WP Multisite"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:145 inc/admin/views/status.php:50
+#: inc/admin/class-admin-status.php:145 inc/admin/views/status.php:48
 msgid "WP Memory Limit"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:146 inc/admin/views/status.php:72
+#: inc/admin/class-admin-status.php:146 inc/admin/views/status.php:70
 msgid "WP Debug Mode"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:147 inc/admin/views/status.php:83
+#: inc/admin/class-admin-status.php:147 inc/admin/views/status.php:81
 msgid "WP Cron"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:148 inc/admin/views/status.php:95
+#: inc/admin/class-admin-status.php:148 inc/admin/views/status.php:93
 msgid "Language"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:149 inc/admin/views/status.php:101
+#: inc/admin/class-admin-status.php:149 inc/admin/views/status.php:99
 msgid "Upload Directory  Location"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:160 inc/admin/views/status.php:114
+#: inc/admin/class-admin-status.php:160 inc/admin/views/status.php:112
 msgid "Server Info"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:161 inc/admin/views/status.php:119
+#: inc/admin/class-admin-status.php:161 inc/admin/views/status.php:117
 msgid "PHP Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:167 inc/admin/views/status.php:138
+#: inc/admin/class-admin-status.php:167 inc/admin/views/status.php:136
 msgid "PHP Post Max Size"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:168 inc/admin/views/status.php:143
+#: inc/admin/class-admin-status.php:168 inc/admin/views/status.php:141
 msgid "PHP Time Limit"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:169 inc/admin/views/status.php:148
+#: inc/admin/class-admin-status.php:169 inc/admin/views/status.php:146
 msgid "PHP Max Input Vars"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:170 inc/admin/views/status.php:153
+#: inc/admin/class-admin-status.php:170 inc/admin/views/status.php:151
 msgid "cURL Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:171 inc/admin/views/status.php:165
+#: inc/admin/class-admin-status.php:171 inc/admin/views/status.php:163
 msgid "SUHOSIN Installed"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:172 inc/admin/views/status.php:181
+#: inc/admin/class-admin-status.php:172 inc/admin/views/status.php:179
 msgid "MySQL Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:173 inc/admin/views/status.php:197
+#: inc/admin/class-admin-status.php:173 inc/admin/views/status.php:195
 msgid "Max Upload Size"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:174 inc/admin/views/status.php:202
+#: inc/admin/class-admin-status.php:174 inc/admin/views/status.php:200
 msgid "Default Timezone is UTC"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:175 inc/admin/views/status.php:215
+#: inc/admin/class-admin-status.php:175 inc/admin/views/status.php:213
 msgid "PHP Error Log File Location"
 msgstr ""
 
@@ -887,47 +887,47 @@ msgstr ""
 msgid "All images uploaded."
 msgstr ""
 
-#: inc/admin/views/status.php:16
+#: inc/admin/views/status.php:14
 msgid "WordPress Information"
 msgstr ""
 
-#: inc/admin/views/status.php:110
+#: inc/admin/views/status.php:108
 msgid "Server Information"
 msgstr ""
 
-#: inc/admin/views/status.php:207
+#: inc/admin/views/status.php:205
 msgid "Default timezone is %s - it should be UTC"
 msgstr ""
 
-#: inc/admin/views/status.php:244
+#: inc/admin/views/status.php:242
 msgid ""
 "Your server does not have the %s class enabled - some gateway plugins which "
 "use SOAP may not work as expected."
 msgstr ""
 
-#: inc/admin/views/status.php:255
+#: inc/admin/views/status.php:253
 msgid ""
 "Your server does not have the %s class enabled - HTML/Multipart emails, and "
 "also some extensions, will not work without DOMDocument."
 msgstr ""
 
-#: inc/admin/views/status.php:266
+#: inc/admin/views/status.php:264
 msgid ""
 "Your server does not support the %s function - this is required to use the "
 "GeoIP database from MaxMind."
 msgstr ""
 
-#: inc/admin/views/status.php:277
+#: inc/admin/views/status.php:275
 msgid ""
 "Your server does not support the %s functions - this is required for better "
 "character encoding. Some fallbacks will be used instead for it."
 msgstr ""
 
-#: inc/admin/views/status.php:320
+#: inc/admin/views/status.php:318
 msgid "Current Theme"
 msgstr ""
 
-#: inc/admin/views/status.php:331 inc/email-template-functions.php:72
+#: inc/admin/views/status.php:329 inc/email-template-functions.php:72
 #: inc/email-template-functions.php:177 inc/email-template-functions.php:248
 #: inc/email-template-functions.php:355 inc/email-template-functions.php:688
 #: inc/email-template-functions.php:996 inc/email-template-functions.php:1239
@@ -935,53 +935,49 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: inc/admin/views/status.php:336
+#: inc/admin/views/status.php:334
 msgid "Version"
 msgstr ""
 
-#: inc/admin/views/status.php:343
+#: inc/admin/views/status.php:341
 msgid "Author URL"
 msgstr ""
 
-#: inc/admin/views/status.php:348
+#: inc/admin/views/status.php:346
 msgid "Child Theme"
 msgstr ""
 
-#: inc/admin/views/status.php:351
+#: inc/admin/views/status.php:349
 msgid ""
 "If you're want to modifying a theme, it safe to create a child theme.  See: "
 "<a href=\"%s\" target=\"_blank\">How to create a child theme</a>"
 msgstr ""
 
-#: inc/admin/views/status.php:359
+#: inc/admin/views/status.php:357
 msgid "Parent Theme Name"
 msgstr ""
 
-#: inc/admin/views/status.php:364
+#: inc/admin/views/status.php:362
 msgid "Parent Theme Version"
 msgstr ""
 
-#: inc/admin/views/status.php:370
-msgid "%s is available"
-msgstr ""
-
-#: inc/admin/views/status.php:375
+#: inc/admin/views/status.php:373
 msgid "Parent Theme Author URL"
 msgstr ""
 
-#: inc/admin/views/status.php:383
+#: inc/admin/views/status.php:381
 msgid "Active Plugins"
 msgstr ""
 
-#: inc/admin/views/status.php:407
+#: inc/admin/views/status.php:405
 msgid "Visit plugin homepage"
 msgstr ""
 
-#: inc/admin/views/status.php:434
+#: inc/admin/views/status.php:432
 msgid "Network enabled"
 msgstr ""
 
-#: inc/admin/views/status.php:450
+#: inc/admin/views/status.php:448
 msgid "Export to CSV"
 msgstr ""
 
@@ -1072,7 +1068,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:77
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:212
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:314
-#: inc/class-cart.php:162 inc/class-shortcode.php:270
+#: inc/class-cart.php:167 inc/class-shortcode.php:270
 #: inc/template-functions.php:1296
 #: inc/widgets/class-wp-travel-search-filters-widget.php:119
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
@@ -1250,8 +1246,8 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: inc/booking-functions.php:107 inc/booking-functions.php:1224
-#: inc/booking-functions.php:1277 inc/email-template-functions.php:77
+#: inc/booking-functions.php:107 inc/booking-functions.php:1225
+#: inc/booking-functions.php:1278 inc/email-template-functions.php:77
 #: inc/email-template-functions.php:182 inc/email-template-functions.php:360
 #: inc/email-template-functions.php:702 inc/email-template-functions.php:1010
 msgid "Country"
@@ -1283,8 +1279,8 @@ msgstr ""
 msgid "Departure Date"
 msgstr ""
 
-#: inc/booking-functions.php:196 inc/booking-functions.php:1341
-#: inc/booking-functions.php:1373 inc/class-cart.php:50
+#: inc/booking-functions.php:196 inc/booking-functions.php:1342
+#: inc/booking-functions.php:1374 inc/class-cart.php:50
 #: inc/email-template-functions.php:43 inc/email-template-functions.php:148
 #: inc/email-template-functions.php:326 inc/email-template-functions.php:626
 #: inc/email-template-functions.php:934 inc/email-template-functions.php:1443
@@ -1364,68 +1360,68 @@ msgstr ""
 msgid "Booking Date"
 msgstr ""
 
-#: inc/booking-functions.php:1179
+#: inc/booking-functions.php:1180
 msgid "Statistics"
 msgstr ""
 
-#: inc/booking-functions.php:1185
+#: inc/booking-functions.php:1186
 msgid "Display Chart"
 msgstr ""
 
-#: inc/booking-functions.php:1197
+#: inc/booking-functions.php:1198
 msgid "Compare Stat"
 msgstr ""
 
-#: inc/booking-functions.php:1210 inc/booking-functions.php:1263
+#: inc/booking-functions.php:1211 inc/booking-functions.php:1264
 #: inc/class-shortcode.php:292
 #: inc/widgets/class-wp-travel-search-filters-widget.php:141
 msgid "From"
 msgstr ""
 
-#: inc/booking-functions.php:1217 inc/booking-functions.php:1270
+#: inc/booking-functions.php:1218 inc/booking-functions.php:1271
 #: inc/class-shortcode.php:299
 #: inc/widgets/class-wp-travel-search-filters-widget.php:148
 msgid "To"
 msgstr ""
 
-#: inc/booking-functions.php:1228 inc/booking-functions.php:1281
+#: inc/booking-functions.php:1229 inc/booking-functions.php:1282
 msgid "All Country"
 msgstr ""
 
-#: inc/booking-functions.php:1241 inc/booking-functions.php:1294
+#: inc/booking-functions.php:1242 inc/booking-functions.php:1295
 msgid "All "
 msgstr ""
 
-#: inc/booking-functions.php:1254
+#: inc/booking-functions.php:1255
 msgid "Show All"
 msgstr ""
 
-#: inc/booking-functions.php:1303
+#: inc/booking-functions.php:1304
 msgid "Compare"
 msgstr ""
 
-#: inc/booking-functions.php:1321
+#: inc/booking-functions.php:1322
 msgid "Compare 1"
 msgstr ""
 
-#: inc/booking-functions.php:1331 inc/booking-functions.php:1362
+#: inc/booking-functions.php:1332 inc/booking-functions.php:1363
 msgid "Total Sales"
 msgstr ""
 
-#: inc/booking-functions.php:1336 inc/booking-functions.php:1368
+#: inc/booking-functions.php:1337 inc/booking-functions.php:1369
 #: inc/class-post-types.php:83 inc/helpers.php:767
 msgid "Bookings"
 msgstr ""
 
-#: inc/booking-functions.php:1345 inc/booking-functions.php:1377
+#: inc/booking-functions.php:1346 inc/booking-functions.php:1378
 msgid "Countries"
 msgstr ""
 
-#: inc/booking-functions.php:1349 inc/booking-functions.php:1381
+#: inc/booking-functions.php:1350 inc/booking-functions.php:1382
 msgid "Top itinerary"
 msgstr ""
 
-#: inc/booking-functions.php:1356
+#: inc/booking-functions.php:1357
 msgid "Compare 2"
 msgstr ""
 
@@ -1441,35 +1437,35 @@ msgstr ""
 msgid "Invalid pricing option date"
 msgstr ""
 
-#: inc/class-cart.php:161
+#: inc/class-cart.php:166
 msgid "Tour"
 msgstr ""
 
-#: inc/class-cart.php:163
+#: inc/class-cart.php:168
 msgid "PAX"
 msgstr ""
 
-#: inc/class-cart.php:164 inc/class-checkout.php:156 inc/class-checkout.php:188
+#: inc/class-cart.php:169 inc/class-checkout.php:156 inc/class-checkout.php:188
 msgid "Total"
 msgstr ""
 
-#: inc/class-cart.php:186
+#: inc/class-cart.php:191
 msgid "Booking Date:"
 msgstr ""
 
-#: inc/class-cart.php:236 inc/class-checkout.php:172
+#: inc/class-cart.php:241 inc/class-checkout.php:172
 msgid "Subtotal"
 msgstr ""
 
-#: inc/class-cart.php:237
+#: inc/class-cart.php:242
 msgid "Tax: "
 msgstr ""
 
-#: inc/class-cart.php:242
+#: inc/class-cart.php:247
 msgid "%"
 msgstr ""
 
-#: inc/class-cart.php:266
+#: inc/class-cart.php:277
 msgid "Proceed to checkout"
 msgstr ""
 
@@ -3894,12 +3890,12 @@ msgctxt "slug"
 msgid "travel-locations"
 msgstr ""
 
-#: inc/admin/views/status.php:430
+#: inc/admin/views/status.php:428
 msgctxt "Version info"
 msgid "%s is available"
 msgstr ""
 
-#: inc/admin/views/status.php:441
+#: inc/admin/views/status.php:439
 msgctxt "by author"
 msgid "by %s"
 msgstr ""

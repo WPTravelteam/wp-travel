@@ -364,9 +364,9 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
                     <td><?php
             echo esc_html($parent_theme->Version);
 
-            if (version_compare($parent_theme->Version, $update_theme_version, '<')) {
-                echo ' &ndash; <strong style="color:red;">' . sprintf(__('%s is available', 'wp-travel'), esc_html($update_theme_version)) . '</strong>';
-            }
+            // if (version_compare($parent_theme->Version, $update_theme_version, '<')) {
+            //     echo ' &ndash; <strong style="color:red;">' . sprintf(__('%s is available', 'wp-travel'), esc_html($update_theme_version)) . '</strong>';
+            // }
                         ?></td>
                 </tr>
                 <tr>
