@@ -146,11 +146,11 @@ class WP_Travel_Cart {
 
 		?>
 		<!-- CART HTML START -->
-		<ul class="wp-travel-error" role="alert">
+		<!-- <ul class="wp-travel-error" role="alert">
 				<li>Please enter a coupon code.</li>
 		</ul>
 		<div class="wp-travel-message" role="alert">Cart updated.</div>
-		<div class="wp-travel-info" role="alert">Out of Stock</div>
+		<div class="wp-travel-info" role="alert">Out of Stock</div> -->
 		<div class="ws-theme-cart-page">
 			<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="get">
 				<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
@@ -265,15 +265,15 @@ class WP_Travel_Cart {
 						
 					</tr>
 					<tr>
-						<td>
+						<!--<td>
 							<div class="coupon">
 								<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code"> 
 								<input type="submit" class="button" name="apply_coupon" value="Apply coupon">
 							</div>
-						</td>
+						</td> -->
 						<td>
 							<div class="actions">
-								<button type="submit" class="button update-cart" name="update_cart" value="Update cart" disabled="">Update cart</button>
+								<!-- <button type="submit" class="button update-cart" name="update_cart" value="Update cart" disabled="">Update cart</button> -->
 								<input type="submit" class="btn_full book-now-btn" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
 							</div>
 						</td>
