@@ -279,21 +279,11 @@
                 border-right: 1px solid rgba(222, 222, 222, 0.49);
             }
             &.resp-tab-active {
-                // padding:22px 33px;
                 background: #fff;
-                color: #f83531;
                 @include sidr-view {
                     padding: 15px 14px;
                 }
             }
-            // a {
-            //     color: #333;
-            //     display: block;
-            //     padding: 22px 33px;
-            // }
-            // &.resp-tab-active a {
-            //     color: #f83531;
-            // }
             @include sidr-view {
                 padding: 15px 14px;
             }
@@ -745,12 +735,10 @@
     }
     .wp-travel-booking-enquiry {
         display: inline-block;
-        color: #505050;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.4s ease-in-out;
         &:hover {
-            color: #df1814;
             transition: all 0.4s ease-in-out;
         }
     }
@@ -1022,109 +1010,109 @@
                 margin: 10px 0;
             }
         }
-        .wp-travel-post-item-wrapper {
-            position: relative;
-            min-height: 1px;
-            @include mob {
-                width: 100%;
-            }
-            .post-title {
-                margin-top: 0;
-                margin-bottom: 0;
-                line-height: 1;
-                a {
-                    color: #333;
-                    font-size: 14px;
-                }
-            }
-            .wp-travel-post-content {
-                padding: 10px;
-                .post-category {
-                    a {
-                        font-weight: 300;
-                        font-size: 12px;
-                        margin-right: 2px;
-                        &:last-child {
-                            margin-right: 0;
-                        }
-                    }
-                }
-            }
-            .wp-travel-post-thumbnail {
-                // overflow: hidden;
-                position: relative;
-                a {
-                    display: block;
-                    width: 100%;
-                    background: #f1f1f1;
-                    position: relative;
-                }
-                img {
-                    margin: 0;
-                    display: block;
-                    width: 100%;
-                }
-            }
-            .wp-travel-average-review {
-                font-size: 12px;
-                margin-top: 5px;
-            }
-            .category-list-items {
-                float: right
-            }
-            .wp-travel-review-text {
-                float: left;
-                margin-top: 5px;
+    }
+    .wp-travel-post-item-wrapper {
+        position: relative;
+        min-height: 1px;
+        @include mob {
+            width: 100%;
+        }
+        .post-title {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 1;
+            a {
+                font-size: 14px;
             }
         }
-        .wp-travel-post-wrap-bg {
-            background: #fff;
-            //  box-shadow: 0px 7px 12px 0px rgba(38,50,56,0.15);
-            height: 100%;
-            /* border-radius: 4px; */
+        .wp-travel-post-content {
+            padding: 10px;
+            .post-category {
+                a {
+                    font-weight: 300;
+                    font-size: 12px;
+                    margin-right: 2px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+        .wp-travel-post-thumbnail {
+            // overflow: hidden;
             position: relative;
-            .recent-post-bottom-meta {
-                display: inline-block;
+            a {
+                display: block;
+                width: 100%;
+                background: #f1f1f1;
                 position: relative;
-                // padding:12px 10px;
-                width: 36%;
-                box-sizing: border-box;
-                float: right;
-                @include clearfix;
-                .value.code-left {
-                    float: left;
-                }
-                .code-right {
-                    float: right;
-                    .person-count {
-                        text-transform: capitalize;
-                        font-weight: 300;
-                        font-style: italic;
-                    }
-                }
-                .trip-price {
-                    del,
-                    ins {
-                        // display: block;
-                        margin: 0;
-                        line-height: 1.2
-                    }
-                    ins {
-                        color: #df1814
-                    }
-                    font-size:15px;
-                    text-align: right;
-                    // font-family: 'Inconsolata', monospace;
-                    span {
-                        font-size: 15px;
-                    }
-                    .person-count {
-                        font-weight: 400;
-                        font-size: 14px;
-                        display: block;
-                        text-transform: capitalize;
-                    }
-                }
+            }
+            img {
+                margin: 0;
+                display: block;
+                width: 100%;
+            }
+        }
+        .wp-travel-average-review {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .category-list-items {
+            float: right
+        }
+        .wp-travel-review-text {
+            float: left;
+            margin-top: 5px;
+        }
+    }
+    .wp-travel-post-wrap-bg {
+        background: #fff;
+        //  box-shadow: 0px 7px 12px 0px rgba(38,50,56,0.15);
+        height: 100%;
+        /* border-radius: 4px; */
+        position: relative;
+        .recent-post-bottom-meta {
+            display: inline-block;
+            position: relative;
+            // padding:12px 10px;
+            width: 36%;
+            box-sizing: border-box;
+            float: right;
+            @include clearfix;
+            
+        }
+        .value.code-left {
+            float: left;
+        }
+        .code-right {
+            float: right;
+            .person-count {
+                text-transform: capitalize;
+                font-weight: 300;
+                font-style: italic;
+            }
+        }
+        .trip-price {
+            del,
+            ins {
+                // display: block;
+                margin: 0;
+                line-height: 1.2
+            }
+            ins {
+                color: #555
+            }
+            font-size:15px;
+            text-align: right;
+            // font-family: 'Inconsolata', monospace;
+            span {
+                font-size: 15px;
+            }
+            .person-count {
+                font-weight: 400;
+                font-size: 14px;
+                display: block;
+                text-transform: capitalize;
             }
         }
     }
@@ -1254,7 +1242,6 @@
     }
     #amount {
         background-color: transparent;
-        color: #f83531 !important;
     }
     .wp-trave-price-range {
         label,
@@ -1299,18 +1286,7 @@
     }
 }
 
-//air datepicker
-.datepickers-container {
-    .datepicker--cell.-current- {
-        color: #f83531;
-    }
-    .datepicker--cell.-selected- {
-        background-color: #f83531;
-        &.-focus- {
-            background-color: #df1814;
-        }
-    }
-}
+
 
 //jquery ui range slider styling
 .ui-widget.ui-widget-content {
@@ -1330,9 +1306,6 @@
         display: block;
         border: 0;
         background-position: 0 0;
-    }
-    .ui-widget-header {
-        background: #f83531;
     }
     .ui-slider-handle {
         position: absolute;
@@ -1365,8 +1338,8 @@
 .ui-button,
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
-    border: 1px solid #f83531;
-    background: #f83531;
+    border: 1px solid #555555;
+    background: #555555;
     font-weight: normal;
     color: #505050;
     cursor: e-resize;
@@ -1620,7 +1593,6 @@ html .ui-button.ui-state-disabled:active {
     i {
         font-weight: 300;
         font-size: 12px;
-        color: #f83531;
     }
     i.fa-caret-down {
         color: #555;
@@ -1700,10 +1672,6 @@ html .ui-button.ui-state-disabled:active {
         display: inline-block;
         font-size: 12px;
     }
-    i {
-        font-size: 12px;
-        color: #df1814;
-    }
 }
 
 //saving stylings
@@ -1744,12 +1712,6 @@ html .ui-button.ui-state-disabled:active {
             margin-left: 15px;
             border: 1px solid #8b8b8b;
             font-size: 12px;
-            color: #555;
-            &:hover {
-                background: #f83531;
-                color: #fff;
-                border-color: #f83531;
-            }
         }
     }
     .collapse {
@@ -1879,15 +1841,8 @@ html .ui-button.ui-state-disabled:active {
     a:hover {
         font-weight: bold;
         position: relative;
-        // background: #f2f2f2;
         height: 30px;
         width: 30px;
-        border: 1px solid #f83531;
-        color: #f83531;
-        // transform: rotate(45deg);
-        // -ms-transform: rotate(45deg);
-        // -webkit-transform: rotate(45deg);
-        // position: absolute;
     }
 }
 
@@ -2122,23 +2077,20 @@ html .ui-button.ui-state-disabled:active {
             display: inline-block;
             line-height: 1.65;
             margin-left: 3px;
-            &.active-mode i {
-                color: #f00
+            &.active-mode a{
+                opacity: 1;
             }
         }
         i {
             padding: 3px 0;
             font-size: 24px;
-            color: #cecece;
             cursor: pointer;
             width: 23px;
             height: 23px;
-            @include sidr-view {
-                color: #9a9a9a;
-            }
         }
         a {
             display: block;
+            opacity:0.5;
         }
     }
 }
@@ -2415,20 +2367,12 @@ ul.availabily-list {
     }
     .availabily-content {
         .btn {
-            padding: 8px 12px;
-            border: 2px solid #f83531;
-            border-radius: 4px;
+            padding: 8px 15px;
+            border: 1px solid #8b8b8b;
+            font-size: 14px;
+            display: inline-block;
             @include extra-large-screen {
                 margin-right: -4px;
-            }
-            &:hover {
-                background-color: #f83531;
-                color: #fff !important;
-            }
-        }
-        .action {
-            .btn {
-                padding: 2px 5px;
             }
         }
     }
@@ -3198,7 +3142,7 @@ ul.wp-travel-error {
     max-width: 300px;
     margin: 0 auto;
     top: 0;
-    background: #ddd;
+    background: #fff;
     padding: 20px;
     width: 100%;
     position: relative;
