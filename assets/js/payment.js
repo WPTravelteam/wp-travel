@@ -1,15 +1,15 @@
 const display_booking_option = {
     booking_only: function() {
-        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
-        jQuery( '.f-booking-only-field' ).show().find('input, select').removeAttr( 'disabled' );
+        jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
+        jQuery('.f-booking-only-field').show().find('input, select').removeAttr('disabled');
     },
-    booking_with_payment: function() {        
-        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
-        jQuery( '.f-booking-with-payment' ).show().find('input, select').removeAttr( 'disabled' );
+    booking_with_payment: function() {
+        jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
+        jQuery('.f-booking-with-payment').show().find('input, select').removeAttr('disabled');
 
         // Trigger Payment mode.
         var payment_mode = jQuery("select[name='wp_travel_payment_mode']").val();
-        display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();        
+        display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();
     }
 }
 const payments = {
@@ -23,15 +23,15 @@ const payments = {
 
 const display_payment_mode_option = {
     partial: function() {
-        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
-        jQuery( '.f-partial-payment' ).show().find('input, select').removeAttr( 'disabled' );
+        jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
+        jQuery('.f-partial-payment').show().find('input, select').removeAttr('disabled');
     },
     full: function() {
-        jQuery( '.wp-travel-payment-field' ).hide().find('input, select').attr( 'disabled', 'disabled' );
-        jQuery( '.f-full-payment' ).show().find('input, select').removeAttr( 'disabled' );
+        jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
+        jQuery('.f-full-payment').show().find('input, select').removeAttr('disabled');
 
         // cart fields override
-        jQuery( 'td.f-partial-payment, th.f-partial-payment' ).hide();
+        jQuery('td.f-partial-payment, th.f-partial-payment').hide();
     }
 }
 
@@ -75,7 +75,7 @@ function get_payable_price(payment_mode, no_of_pax) {
         no_of_pax = 1;
     }
     var wp_travel_cart = $.parseJSON($.cookie('wp_travel_cart'));
-    console.log( wp_travel_cart );
+    console.log(wp_travel_cart);
     // var trip_price = wt_payment.trip_price; // Trip Price of single Trip
     // var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
     // var price_per = wt_payment.price_per;
@@ -95,12 +95,11 @@ function get_payable_price(payment_mode, no_of_pax) {
     //     }
     // }
     // payment_amount
-    var data = jQuery.getJSON('http://wpmultisite.com/wp-travel/?wt_query_amount=1', function(data) {        
-    });
-    
-    console.log( 'status' );
-    console.log( data.status );
-    
+    var data = jQuery.getJSON('http://wpmultisite.com/wp-travel/?wt_query_amount=1', function(data) {});
+
+    console.log('status');
+    console.log(data.status);
+
     var amount = new Array();
     // if ( r.status == 'success' ) {
     //     amount['payment_amount'] = response.total;

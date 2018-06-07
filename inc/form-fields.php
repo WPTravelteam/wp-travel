@@ -37,6 +37,40 @@ function wp_travel_booking_form_fields() {
 
 	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key']  ? $_GET['price_key'] : '';
 
+	// Set Defaults for booking form.
+	$user_fname      = '';
+	$user_lname      = '';
+	$user_email      = '';
+	// Billings.
+	$billing_address = '';
+	$billing_city    = '';
+	$billing_company = '';
+	$billing_zip     = '';
+	$billing_country = '';
+	$billing_phone   = '';
+
+	// User Details Merged.
+	if ( is_user_logged_in() ) {
+
+		$user = wp_get_current_user();
+
+		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+
+			$user_fname = isset( $user->first_name ) ? $user->first_name : '' ;
+			$user_lname = isset( $user->last_name ) ? $user->last_name : '' ;
+			$user_email = isset( $user->user_email ) ? $user->user_email : '' ;
+
+			$biling_data = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
+
+			$billing_address = isset( $biling_data['billing_address'] ) ? $biling_data['billing_address'] : '';
+			$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
+			$billing_company = isset( $biling_data['billing_company'] ) ? $biling_data['billing_company'] : '';
+			$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
+			$billing_country = isset( $biling_data['billing_country'] ) ? $biling_data['billing_country'] : '';
+			$billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billing_phone'] : '';
+		}
+	}
+
 	$booking_fileds = array(
 		'first_name'	=> array(
 			'type' => 'text',
@@ -48,6 +82,7 @@ function wp_travel_booking_form_fields() {
 				'maxlength' => '50',
 				// 'type' => 'alphanum',
 			),
+			'default' => $user_fname,
 			'priority' => 10,
 		),
 
@@ -61,6 +96,7 @@ function wp_travel_booking_form_fields() {
 				'maxlength' => '50',
 				// 'type' => 'alphanum',
 			),
+			'default' => $user_lname,
 			'priority' => 20,
 		),
 		'country'		=> array(
@@ -72,6 +108,7 @@ function wp_travel_booking_form_fields() {
 			'validations' => array(
 				'required' => true,
 			),
+			'default' => $billing_country,
 			'priority' => 30,
 		),
 		'address'		=> array(
@@ -83,6 +120,7 @@ function wp_travel_booking_form_fields() {
 				'required' => true,
 				'maxlength' => '50',
 			),
+			'default' => $billing_address,
 			'priority' => 40,
 		),
 		'phone_number'	=> array(
@@ -95,6 +133,7 @@ function wp_travel_booking_form_fields() {
 				'maxlength' => '50',
 				'pattern' => '^[\d\+\-\.\(\)\/\s]*$',
 			),
+			'default' => $billing_phone,
 			'priority' => 50,
 		),
 		'email' => array(
@@ -106,6 +145,7 @@ function wp_travel_booking_form_fields() {
 				'required' => true,
 				'maxlength' => '60',
 			),
+			'default' => $user_email,
 			'priority' => 60,
 		),
 		'arrival_date' => array(

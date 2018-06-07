@@ -47,7 +47,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				<tr>
 					<th class="product-name"><?php esc_html_e( 'Trip', 'wp-travel' ) ?></th>
 					<th class="product-total text-right"><?php esc_html_e( 'Total', 'wp-travel' ) ?></th>
-					<th class="product-total text-right f-partial-payment"><?php esc_html_e( 'Partial', 'wp-travel' ) ?></th>
+					<th style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="product-total text-right f-partial-payment"><?php esc_html_e( 'Partial', 'wp-travel' ) ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -70,7 +70,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 					<tr class="cart_item">
 						<td class="product-name">
-							<?php echo esc_html( get_the_title( $trip_id ) ); ?> &nbsp; <strong class="product-quantity">× <span class="wp-travel-cart-pax"><?php echo esc_html( $pax ); ?></span><?php printf( $pax_label ); ?> </strong> 
+							<?php echo esc_html( get_the_title( $trip_id ) ); ?> &nbsp; <strong class="product-quantity">× <span class="wp-travel-cart-pax"><?php echo esc_html( $pax ); ?></span> <?php printf( $pax_label ); ?> </strong> 
 						</td>
 						<td class="product-total text-right">
 							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_total ) ?></span>
