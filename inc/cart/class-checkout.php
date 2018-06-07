@@ -33,7 +33,16 @@ class WP_Travel_Checkout {
 		if ( ! $trips ) {
 			$wt_cart->cart_empty_message();
 			return;
-		} ?>
+		}
+		// Check if login is required for checkout.
+		$settings = wp_travel_get_settings();
+
+        $require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
+
+        if ( 'yes' === $settings['enable_checkout_customer_registration'] && ! is_user_logged_in() ) {
+            return wp_travel_get_template_part( 'account/form', 'login' );
+        }
+		?>
 		<div class="checkout-page-wrap">
 			<div class="container">
 				<div class="row">
