@@ -41,18 +41,7 @@ class WP_Travel_FW_Field {
 		if ( ! empty( $this->fields ) ) {
 			foreach ( $this->fields as $field ) {
 				if ( array_key_exists( $field['type'], $this->field_types ) ) {
-
-					$field['label'] = isset( $field['label'] ) ? $field['label'] : '';
-					$field['name'] = isset( $field['name'] ) ? $field['name'] : '';
-					$field['id'] = isset( $field['id'] ) ? $field['id'] : $field['name'];
-					$field['class'] = isset( $field['class'] ) ? $field['class'] : '';
-					$field['placeholder'] = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
-					$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
-					$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
-					$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
-
-					$field_init = new $this->field_types[ $field['type'] ];
-					$content = $field_init->init( $field )->render( false );
+					$content = $this->process_single( $field );					
 					$output .= ( 'hidden' === $field['type'] ) ? $content : $this->template( $field, $content );
 				}
 			}
@@ -62,7 +51,7 @@ class WP_Travel_FW_Field {
 
 	function template( $field, $content ) {
 		ob_start(); ?>
-			<div class="wp-travel-form-field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+			<div class="wp-travel-form-field <?php echo esc_attr( (isset($field['wrapper_class']))? $field['wrapper_class'] : '' ); ?>">
 				<label for="<?php echo esc_attr( $field['id'] ); ?>">
 					<?php echo esc_attr( $field['label'] ); ?>
 					<?php if ( isset( $field['validations']['required'] ) ) { ?>
@@ -79,5 +68,32 @@ class WP_Travel_FW_Field {
 
 	function render() {
 		echo $this->process();
+	}
+
+	function render_input( $field ) {
+		if ( ! $field  ) {
+			return;
+		}
+		echo $this->process_single( $field );
+	}
+
+	private function process_single( $field ) {
+		if ( ! $field  ) {
+			return;
+		}
+		if ( array_key_exists( $field['type'], $this->field_types ) ) {
+			$field['label'] = isset( $field['label'] ) ? $field['label'] : '';
+			$field['name'] = isset( $field['name'] ) ? $field['name'] : '';
+			$field['id'] = isset( $field['id'] ) ? $field['id'] : $field['name'];
+			$field['class'] = isset( $field['class'] ) ? $field['class'] : '';
+			$field['placeholder'] = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
+			$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+			$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
+			$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
+
+			$field_init = new $this->field_types[ $field['type'] ];
+			return $field_init->init( $field )->render( false );
+		}
+		return;
 	}
 }

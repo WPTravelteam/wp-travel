@@ -90,6 +90,7 @@ class WP_Travel_Frontend_Assets {
 			$frontend_vars = array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+				'cartUrl' => wp_travel_get_cart_url(),
 			);
 
 			wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
@@ -100,6 +101,7 @@ class WP_Travel_Frontend_Assets {
 			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 			wp_enqueue_script( 'collapse-js', $this->assets_path . 'assets/js/collapse.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
+			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			// Return if payment is not enabled.
 			if ( ! wp_travel_is_payment_enabled() ) {
 				return;
@@ -176,6 +178,9 @@ class WP_Travel_Frontend_Assets {
 
 			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
+
+			wp_enqueue_script( 'wp-travel-cart',$this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' )  );
+			// wp_enqueue_script( 'wp-travel-cookie',$this->assets_path . 'assets/js/lib/js-cookie-master/js.cookie.js', array( 'jquery' )  );
 		}
 	}
 }

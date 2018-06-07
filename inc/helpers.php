@@ -227,66 +227,6 @@ function wp_travel_get_related_post( $post_id ) {
 }
 
 /**
- * Return Trip Price.
- *
- * @param  int $post_id Post id of the post.
- * @return int Trip Price.
- */
-function wp_travel_get_trip_price( $post_id = 0 ) {
-	if ( ! $post_id ) {
-		return 0;
-	}
-	$trip_price 	= get_post_meta( $post_id, 'wp_travel_price', true );
-	if ( $trip_price ) {
-		return $trip_price;
-	}
-	return 0;
-}
-
-/**
- * Return Trip Sale Price.
- *
- * @param  int $post_id Post id of the post.
- * @return int Trip Price.
- */
-function wp_travel_get_trip_sale_price( $post_id = 0 ) {
-	if ( ! $post_id ) {
-		return 0;
-	}
-	$trip_sale_price 	= get_post_meta( $post_id, 'wp_travel_sale_price', true );
-	if ( $trip_sale_price ) {
-		return $trip_sale_price;
-	}
-	return 0;
-}
-
-/**
- * Return Trip Price.
- *
- * @param  int $post_id Post id of the post.
- *
- * @since 1.0.5
- * @return int Trip Price.
- */
-function wp_travel_get_actual_trip_price( $post_id = 0 ) {
-	if ( ! $post_id ) {
-		return 0;
-	}
-
-	$trip_price = get_post_meta( $post_id, 'wp_travel_trip_price', true );
-	if ( ! $trip_price ) {
-		$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
-
-		if ( $enable_sale ) {
-			$trip_price = wp_travel_get_trip_sale_price( $post_id );
-		} else {
-			$trip_price = wp_travel_get_trip_price( $post_id );
-		}
-	}
-	return $trip_price;
-}
-
-/**
  * Get post thumbnail.
  *
  * @param  int    $post_id Post ID.

@@ -440,60 +440,53 @@ function wp_travel_payment_booking_message( $message ) {
 
 // Calculate Total Cart amount.
 function wp_travel_get_total_amount() {
-	$response = array( 'status' => 'fail', 'message' => __( 'Invalid', 'wp-travel' ),  'total_amount' => 0, 'payment_amount' => 0 );
+	$response = array( 'status' => 'fail', 'message' => __( 'Invalid', 'wp-travel' ) );
 	if ( ! isset( $_GET['wt_query_amount'] ) ) {
 		return;
 	}
-	// if ( ! wp_travel_is_checkout_page() ) {
-	// 	$response['message'] = __( 'Invalid Page' );
-	// 	// return;
-	// }
+	
 	$settings = wp_travel_get_settings();
+	global $wt_cart;
 
-	$pax 		= isset( $_GET['pax'] ) && $_GET['pax'] > 0 ? $_GET['pax'] : 1;
-	$trip_id	= isset( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
-	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) {
-		$trip_id = get_the_ID();
+	$cart_amounts = $wt_cart->get_total();
+
+	$total = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
+
+	if ( wp_travel_is_partial_payment_enabled() && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
+		$total = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : 0;
 	}
-
-	$price_per 	= wp_travel_get_price_per_text( $trip_id );
-
-	if ( $trip_id < 1 ) {
-		$response['message'] = __( 'Trip not selected', 'wp-travel' );
+	
+	if ( $total > 0 ) {
+		$response['status'] 	= 'success';
+		$response['message'] 	= __( 'Success', 'wp-travel' );
+		$response['total'] 		= $total;
 	}
-
-	if ( ! wp_travel_is_itinerary( $trip_id ) ) {
-		$response['message'] = __( 'Invalid post type', 'wp-travel' );
-	}
-
-	$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
-	if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
-		$response['total_amount'] = $payment_amount = $trip_price_tax['actual_trip_price'];
-	}
-	else {
-		$response['total_amount'] = $payment_amount = $trip_price_tax['trip_price'];
-	}
-
-	$response['payment_amount'] = $response['total_amount'];
-
-	if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-		$response['payment_amount'] = wp_travel_minimum_partial_payout( $trip_id );
-	}
-
-	// Success.
-	if ( $response['payment_amount'] > 0 && $response['total_amount'] > 0 ) {
-		$response['status'] = 'success';
-		$response['message'] = __( 'Success', 'wp-travel' );
-
-		if ( strtolower( $price_per ) === 'person' ) {
-			$response['total_amount'] *= $pax;
-			$response['payment_amount'] *= $pax;
-		}
-	}
-
-	echo wp_json_encode( $response );
-	die;
+	wp_send_json($response);
 }
+
+/**
+ * Return Active Payment gateway list.
+ */
+function wp_travel_get_active_gateways() {
+	$payment_gatway_list = wp_travel_payment_gateway_lists();
+	$active_gateway_list = array();
+	$selected_gateway = '';
+	$settings = wp_travel_get_settings();
+	$gateway_list = array();
+	if ( is_array( $payment_gatway_list ) && count( $payment_gatway_list ) > 0 ) {
+		foreach ( $payment_gatway_list as $gateway => $label ) {
+			if ( isset( $settings["payment_option_{$gateway}"] ) && 'yes' === $settings["payment_option_{$gateway}"] ) {
+				if ( '' === $selected_gateway ) {
+					$gateway_list['selected'] = $gateway;
+				}
+				$active_gateway_list[ $gateway ] = $label;
+			}
+		}
+		$gateway_list['active'] = $active_gateway_list;		
+	}
+	return $gateway_list;
+}
+
 add_action( 'wp', 'wp_travel_get_total_amount' );
 add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_status_admin' );
 add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process_frontend' );
