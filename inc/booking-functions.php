@@ -471,17 +471,21 @@ function wp_travel_book_now() {
 	$current_date = date( $date_format  );
 
 	$trip_ids = array();
+	$pax_array = array();
 	foreach( $items as $key => $item ) {
 
 		$trip_ids[] = $item['trip_id'];
+		$pax_array[] = $item['pax'];
 
 	}
 	$trip_id = '';
+	$pax = 0;
 	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		
 		if ( ! $allow_multiple_cart_items ) {
 
 		$trip_id = $trip_ids['0'];
+		$pax = $pax_array['0'];
 
 	}
 	
@@ -583,7 +587,7 @@ function wp_travel_book_now() {
 	$itinerary_id 			= sanitize_text_field( $trip_id );
 	$itinerary_title 		= get_the_title( $itinerary_id );
 
-	$booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;
+	$booking_no_of_pax 		= $pax;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 	$date_format            = get_option('date_format');
 	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? date( $date_format, strtotime( stripslashes( $_POST['wp_travel_arrival_date'] ) ) ) : '';
