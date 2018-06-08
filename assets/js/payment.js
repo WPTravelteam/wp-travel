@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
     };
 
     var gateway_change = function() {
-        const func = $('[name=wp_travel_payment_gateway]').val();
+        const func = $('[name=wp_travel_payment_gateway]:checked').val();
         const executor = payments[func];
         executor && executor();
     };
@@ -81,8 +81,8 @@ function get_payable_price(payment_mode, no_of_pax) {
     if (!no_of_pax) {
         no_of_pax = 1;
     }
-    var wp_travel_cart = $.parseJSON($.cookie('wp_travel_cart'));
-    console.log(wp_travel_cart);
+    // var wp_travel_cart = $.parseJSON($.cookie('wp_travel_cart'));
+    // console.log(wp_travel_cart);
     // var trip_price = wt_payment.trip_price; // Trip Price of single Trip
     // var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
     // var price_per = wt_payment.price_per;
@@ -102,15 +102,13 @@ function get_payable_price(payment_mode, no_of_pax) {
     //     }
     // }
     // payment_amount
-    var data = jQuery.getJSON('http://wpmultisite.com/wp-travel/?wt_query_amount=1', function(data) {});
-
-    console.log('status');
-    console.log(data.status);
-
     var amount = new Array();
-    // if ( r.status == 'success' ) {
-    //     amount['payment_amount'] = response.total;
-    //     amount['trip_price'] = response.total;
-    // }
+    data = jQuery.getJSON('http://wp.test/?wt_query_amount=1', function(data) {
+        if (data.status === 'success') {
+            amount['payment_amount'] = data.total.toFixed(2);
+            amount['trip_price'] = data.total.toFixed(2);
+        }
+    });
+
     return amount;
 }

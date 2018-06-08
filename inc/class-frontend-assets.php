@@ -158,16 +158,13 @@ class WP_Travel_Frontend_Assets {
 				$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
 			}
 
-			
-			global $wt_cart;
-			
-			$total_price = $wt_cart->get_total();
-			
-			$payment_amount = $total_price['total'];
-			
 			if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-				$payment_amount = $total_price['total_partial'];
+				$payment_amount = $minimum_partial_payout;
 			}
+
+			global $wt_cart;
+
+			$total_price = $wt_cart->get_total();
 
 			$wt_payment = array(
 				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
@@ -176,7 +173,7 @@ class WP_Travel_Frontend_Assets {
 				'currency_symbol' => wp_travel_get_currency_symbol(),
 				'price_per'		=> wp_travel_get_price_per_text( $trip_id, true ),
 				'trip_price'	=> $trip_price,
-				'payment_amount' => $payment_amount,
+				'payment_amount' => $total_price['total'],
 			);
 
 			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
