@@ -2251,6 +2251,18 @@ ul.wp-travel-error {
 .checkout-page-wrap .checkbox-block {
   padding: 0 15px; }
 
+.wp-travel-checkout-review-order-table td, .wp-travel-checkout-review-order-table th {
+  border-top: none;
+  border-left: none;
+  border-right: none; }
+
+@media (max-width: 768px) {
+  .sticky-sidebar.is_stuck {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important; }
+    .sticky-sidebar.is_stuck .sticky-sidebar.is_stuck ~ div {
+      display: none !important; } }
 .float-left {
   float: left; }
 

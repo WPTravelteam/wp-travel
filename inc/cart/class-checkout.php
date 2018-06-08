@@ -44,22 +44,18 @@ class WP_Travel_Checkout {
         }
 		?>
 		<div class="checkout-page-wrap">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4 col-sm-push-8">
-						<div class="sticky-sidebar">
-							<div class="checkout-block checkout-right">								
-								<?php include sprintf( '%s/inc/cart/cart-mini.php', WP_TRAVEL_ABSPATH ); ?>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-8 col-sm-pull-4">
-						<div class="checkout-block checkout-left">							
-							<?php include sprintf( '%s/inc/cart/checkout.php', WP_TRAVEL_ABSPATH ); ?>
-						</div>							
+			<div class="col-sm-4 col-sm-push-8">
+				<div class="sticky-sidebar">
+					<div class="checkout-block checkout-right">								
+						<?php include sprintf( '%s/inc/cart/cart-mini.php', WP_TRAVEL_ABSPATH ); ?>
 					</div>
 				</div>
-			</div><!--container -->
+			</div>
+			<div class="col-sm-8 col-sm-pull-4">
+				<div class="checkout-block checkout-left">							
+					<?php include sprintf( '%s/inc/cart/checkout.php', WP_TRAVEL_ABSPATH ); ?>
+				</div>							
+			</div>
 		</div>
 	<?php
 	}
