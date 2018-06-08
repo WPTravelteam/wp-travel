@@ -330,7 +330,7 @@ function wp_travel_get_checkout_form_fields() {
 			'default' => $partial_payment,
         );
         
-        $payment_fields['booking_option'] = array(
+		$payment_fields['booking_option'] = array(
 			'type' => 'select',
 			'label' => __( 'Booking Options', 'wp-travel' ),
 			'name' => 'wp_travel_booking_option',
@@ -351,7 +351,7 @@ function wp_travel_get_checkout_form_fields() {
 			$selected_gateway = apply_filters( 'wp_travel_checkout_default_gateway', $selected_gateway );
 
             $payment_fields['payment_gateway'] = array(
-				'type' => 'select',
+				'type' => 'radio',
 				'label' => __( 'Payment Gateway', 'wp-travel' ),
 				'name' => 'wp_travel_payment_gateway',
 				'id' => 'wp-travel-payment-gateway',
