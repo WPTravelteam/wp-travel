@@ -156,14 +156,12 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				</tr>
 			<?php endif; ?>			
 			<tr>
-				<th>
+				<th colspan="2">
 					<strong><?php echo esc_html( 'Total', 'wp-travel' ); ?></strong>
-				</th>
-				<td  class="text-right">
 					<p class="total">
 						<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong>
 					</p>
-				</td>
+				</th>
 			</tr>
 			<tr>
 				<td>
