@@ -37,7 +37,13 @@ class WP_Travel_Ajax {
 		}
 		global $wt_cart;
 
-		// $wt_cart->clear();
+		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		
+		if ( ! $allow_multiple_cart_items ) {
+
+			$wt_cart->clear();
+		}
+
 		$trip_id 	= $_POST['trip_id'];
 		$pax 		= isset( $_POST['pax'] ) ? $_POST['pax'] : 0;
 		$price_key 	= isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';

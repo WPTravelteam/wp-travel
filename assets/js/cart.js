@@ -85,6 +85,7 @@ jQuery(document).ready(function($) {
     });
 
     $('.wp-travel-pax').on('change', function() {
+        $('.wp-travel-update-cart-btn').removeClass('disabled');
         $('.book-now-btn').attr('disabled', 'disabled');
     });
 

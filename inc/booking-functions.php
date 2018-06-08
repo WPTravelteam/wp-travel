@@ -451,6 +451,7 @@ EOS;
 
 /** Send Email after clicking Book Now. */
 function wp_travel_book_now() {
+
 	if ( ! isset( $_POST[ 'wp_travel_book_now' ] ) ) {
 		return;
 	}
@@ -458,6 +459,7 @@ function wp_travel_book_now() {
 	if ( ! wp_verify_nonce( $_POST['wp_travel_security'],  'wp_travel_security_action' ) ) {
 		return;
 	}
+
 	global $wt_cart;
 
 	$items = $wt_cart->getItems();
@@ -467,13 +469,28 @@ function wp_travel_book_now() {
 
 	$date_format = get_option('date_format') ? get_option('date_format') : 'Y m d';
 	$current_date = date( $date_format  );
+
+	$trip_ids = array();
+	foreach( $items as $key => $item ) {
+
+		$trip_ids[] = $item['trip_id'];
+
+	}
+	$trip_id = '';
+	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		
+		if ( ! $allow_multiple_cart_items ) {
+
+		$trip_id = $trip_ids['0'];
+
+	}
 	
-	// if ( ! isset( $_POST['wp_travel_post_id'] ) ) {
+	// if ( empty( $trip_id ) ) {
 	// 	return;
 	// }
 
-	$trip_code = wp_travel_get_trip_code( $_POST['wp_travel_post_id'] );
-	$thankyou_page_url = get_permalink( $_POST['wp_travel_post_id'] );
+	$trip_code = wp_travel_get_trip_code( $trip_id );
+	$thankyou_page_url = get_permalink( $trip_id );
 	$title = 'Booking - ' . $current_date;
 
 	$post_array = array(
@@ -486,7 +503,7 @@ function wp_travel_book_now() {
 	$order_id = wp_insert_post( $post_array );
 	update_post_meta( $order_id, 'order_data', $_POST );
 
-	$trip_id = sanitize_text_field( $_POST['wp_travel_post_id'] );
+	$trip_id = sanitize_text_field( $trip_id );
 	$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 	$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
 	$new_booking_count = $booking_count + 1;
@@ -502,7 +519,7 @@ function wp_travel_book_now() {
 
 	if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
 
-		$pax_count_based_by_date = get_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', true );
+		$pax_count_based_by_date = get_post_meta( $trip_id, 'total_pax_booked', true );
 
 		if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
 			$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
@@ -510,15 +527,15 @@ function wp_travel_book_now() {
 
 		$pax_count_based_by_date[$_POST['wp_travel_date']] += $_POST['wp_travel_pax'];
 
-		update_post_meta( $_POST['wp_travel_post_id'], 'total_pax_booked', $pax_count_based_by_date );
+		update_post_meta( $trip_id, 'total_pax_booked', $pax_count_based_by_date );
 
-		$order_ids = get_post_meta( $_POST['wp_travel_post_id'], 'order_ids', true );
+		$order_ids = get_post_meta( $trip_id, 'order_ids', true );
 
 		if ( ! $order_ids ) {
 			$order_ids = array();
 		}
 
-		update_post_meta( $_POST['wp_travel_post_id'], 'order_ids', $order_ids );
+		update_post_meta( $trip_id, 'order_ids', $order_ids );
 	}
 
 	if ( is_user_logged_in() ) {
@@ -557,13 +574,13 @@ function wp_travel_book_now() {
 		$sitename = get_network()->site_name;
 	} else {
 		/*
-			* The blogname option is escaped with esc_html on the way into the database
-			* in sanitize_option we want to reverse this for the plain text arena of emails.
-			*/
+		* The blogname option is escaped with esc_html on the way into the database
+		* in sanitize_option we want to reverse this for the plain text arena of emails.
+		*/
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 	$booking_id 		  	= $order_id;
-	$itinerary_id 			= sanitize_text_field( $_POST['wp_travel_post_id'] );
+	$itinerary_id 			= sanitize_text_field( $trip_id );
 	$itinerary_title 		= get_the_title( $itinerary_id );
 
 	$booking_no_of_pax 		= isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 0 ;

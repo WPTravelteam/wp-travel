@@ -2,6 +2,9 @@ const display_booking_option = {
     booking_only: function() {
         jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
         jQuery('.f-booking-only-field').show().find('input, select').removeAttr('disabled');
+        var elem = jQuery('[name=wp_travel_book_now]');
+        // elem.siblings().hide();
+        elem.show().val(wt_payment.book_now);
     },
     booking_with_payment: function() {
         jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
@@ -10,6 +13,10 @@ const display_booking_option = {
         // Trigger Payment mode.
         var payment_mode = jQuery("select[name='wp_travel_payment_mode']").val();
         display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();
+
+        var elem = jQuery('[name=wp_travel_book_now]');
+        // elem.siblings().hide();
+        elem.show().val(wt_payment.book_n_pay);
     }
 }
 const payments = {

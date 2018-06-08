@@ -27,9 +27,16 @@ $form_field = new WP_Travel_FW_Field(); ?>
                             <div class="payment-content">
                                 <div class="payment-traveller">
                                     <?php foreach( $traveller_fields as $field_group => $field ) : 
+
+                                        $wp_travel_get_multi_traveller_info = apply_filters( 'wp_travel_get_multi_traveller_info', false );
                                         
-                                        $field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
-                                        $field['name'] = $field_name;                               
+                                        if ( $wp_travel_get_multi_traveller_info ) {
+
+                                            $field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
+                                            $field['name'] = $field_name;
+
+                                        }
+                                        
                                         if ( 'hidden' === $field['type'] ) {
                                             echo $form_field->init()->render_input( $field );
                                             continue;
