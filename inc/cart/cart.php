@@ -171,7 +171,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				</td>
 				<td>
 					<div class="actions">
-						<a href="javascript:void(0)" class="disabled btn_full wp-travel-update-cart-btn" ><?php esc_html_e( 'Update Cart', 'wp-travel' ) ?></a>					
+						<button disabled  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ) ?></button>					
 						<input type="submit" class="btn_full book-now-btn" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
 					</div>
 				</td>	

@@ -84,6 +84,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_fname,
 			'priority' => 10,
+			'attributes' => array( 'placeholder' => 'John' ),
 		),
 
 		'last_name'		=> array(
@@ -98,6 +99,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_lname,
 			'priority' => 20,
+			'attributes' => array( 'placeholder' => 'Doe' ),
 		),
 		'country'		=> array(
 			'type' => 'select',
@@ -122,6 +124,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $billing_address,
 			'priority' => 40,
+			'attributes' => array( 'placeholder' => 'Tafalo Marga' ),
 		),
 		'phone_number'	=> array(
 			'type' => 'text',
@@ -135,6 +138,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $billing_phone,
 			'priority' => 50,
+			'attributes' => array( 'placeholder' => '+977 9841234567' ),
 		),
 		'email' => array(
 			'type' => 'email',
@@ -147,6 +151,7 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_email,
 			'priority' => 60,
+			'attributes' => array( 'placeholder' => 'example@mail.com' ),
 		),
 		'arrival_date' => array(
 			'type' => 'date',
@@ -299,7 +304,7 @@ function wp_travel_get_checkout_form_fields() {
         'validations' => array(
             'required' => true,
         ),
-        'attributes' => array( 'readonly' => 'readonly' ),
+        'attributes' => array( 'readonly' => 'readonly', 'placeholder' => '06/15/1990' ),
         'date_options' => array(),
         'priority' => 26,
     );
@@ -436,6 +441,7 @@ function wp_travel_get_checkout_form_fields() {
             'required' => true,
         ),
         'priority' => 20,
+        'attributes' => array( 'placeholder' => 'Patan' ),
     );
 
     $fields['billing_postal'] = array(
@@ -447,6 +453,7 @@ function wp_travel_get_checkout_form_fields() {
             'required' => true,
         ),
         'priority' => 30,
+        'attributes' => array( 'placeholder' => '44600' ),
     );
     $fields['billing_province'] = array(
         'type' => 'text',
@@ -457,6 +464,7 @@ function wp_travel_get_checkout_form_fields() {
             'required' => true,
         ),
         'priority' => 40,
+        'attributes' => array( 'placeholder' => 'Province 3' ),
     );
     $fields['country']['priority'] = 50;
 
