@@ -81,34 +81,27 @@ function get_payable_price(payment_mode, no_of_pax) {
     if (!no_of_pax) {
         no_of_pax = 1;
     }
-    // var wp_travel_cart = $.parseJSON($.cookie('wp_travel_cart'));
-    // console.log(wp_travel_cart);
-    // var trip_price = wt_payment.trip_price; // Trip Price of single Trip
-    // var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
-    // var price_per = wt_payment.price_per;
+    var trip_price = wt_payment.trip_price; // Trip Price of single Trip
+    console.log(wt_payment);
+    var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
+    var price_per = wt_payment.price_per;
 
-    // var payment_amount = trip_price;
-    // if (payment_mode == 'partial') {
-    //     payment_amount = min_partial_payment;
-    // }
+    var payment_amount = trip_price;
+    if (payment_mode == 'partial') {
+        payment_amount = min_partial_payment;
+    }
 
-    // if (price_per.toLowerCase().slice(0, 6) === 'person') {
-    //     payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
-    //     if (payment_amount.toFixed)
-    //         payment_amount = payment_amount.toFixed(2);
-    //     trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
-    //     if (trip_price.toFixed) {
-    //         trip_price = trip_price.toFixed(2);
-    //     }
-    // }
-    // payment_amount
-    var amount = new Array();
-    data = jQuery.getJSON('http://wp.test/?wt_query_amount=1', function(data) {
-        if (data.status === 'success') {
-            amount['payment_amount'] = data.total.toFixed(2);
-            amount['trip_price'] = data.total.toFixed(2);
+    if (price_per.toLowerCase().slice(0, 6) === 'person') {
+        payment_amount = parseFloat(payment_amount) * parseFloat(no_of_pax);
+        if (payment_amount.toFixed)
+            payment_amount = payment_amount.toFixed(2);
+        trip_price = parseFloat(trip_price) * parseFloat(no_of_pax);
+        if (trip_price.toFixed) {
+            trip_price = trip_price.toFixed(2);
         }
-    });
-
+    }
+    var amount = new Array();
+    amount['payment_amount'] = payment_amount;
+    amount['trip_price'] = trip_price;
     return amount;
 }

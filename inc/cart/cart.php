@@ -122,7 +122,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						<td class="product-quantity" data-title="PAX">
 							<div class="st_adults">
 								<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>
-								<input type="number" class="input-text wp-travel-pax text" step="1" min="0" <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+								<input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ) ?>" >
 							</div>
 						</td>
@@ -169,7 +169,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				</td>
 				<td>
 					<div class="actions">
-						<button disabled onclick="window.location.href='http://skynet.wensolutions.com/travel-log/';"  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ) ?></button>					
+						<button disabled onclick="javascript:void(0)"  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ) ?></button>					
 						<input type="submit" class="btn_full book-now-btn" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ) ?>">
 					</div>
 				</td>	

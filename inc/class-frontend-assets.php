@@ -108,63 +108,21 @@ class WP_Travel_Frontend_Assets {
 			}
 			$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 
-			if ( ( wp_travel_is_checkout_page() ) && isset( $_GET['price_key'] ) && ! empty( $_GET['price_key'] )  ) {
-
-				$pricing_key = $_GET['price_key'];
-	
-				$pricing_data = wp_travel_get_pricing_variation( $trip_id, $pricing_key );
-	
-				if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
-	
-					foreach ( $pricing_data as $p_ky => $pricing ) :
-	
-						$trip_price  = $pricing['price'];
-						$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
-	
-						$taxable_price = $pricing['price'];
-	
-							if ( $enable_sale && isset( $pricing['sale_price'] ) && '' !== $pricing['sale_price'] ) {
-								$sale_price    = $pricing['sale_price'];
-								$taxable_price = $sale_price;
-							}
-
-							$trip_price_tax = wp_travel_process_trip_price_tax_by_price( $trip_id, $taxable_price );
-
-							if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
-
-								$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
-							}
-							else {
-								$trip_price = $payment_amount = $trip_price_tax['trip_price'];
-							}
-
-							$minimum_partial_payout = wp_travel_variable_pricing_minimum_partial_payout( $trip_id, $trip_price, $trip_price_tax );
-
-					endforeach;
-				}
-			}
-	
-			else {
-	
-					$trip_price_tax = wp_travel_process_trip_price_tax( $trip_id );
-				if ( isset( $trip_price_tax['actual_trip_price'] ) ) {
-
-					$trip_price = $payment_amount = $trip_price_tax['actual_trip_price'];
-				}
-				else {
-					$trip_price = $payment_amount = $trip_price_tax['trip_price'];
-				}
-
-				$minimum_partial_payout = wp_travel_minimum_partial_payout( $trip_id );
-			}
-
-			if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-				$payment_amount = $minimum_partial_payout;
-			}
-
 			global $wt_cart;
 
-			$total_price = $wt_cart->get_total();
+			$cart_items = $wt_cart->getItems();
+
+			$trip_price = 0;
+			$payment_amount = 0;
+
+			if ( ! empty( $cart_items ) && is_array( $cart_items ) ) {
+				
+				foreach ( $cart_items as $key => $item ) {
+
+					$trip_price = $item['trip_price'];
+					$payment_amount = $item['trip_price'];
+				} 
+			}
 
 			$wt_payment = array(
 				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
@@ -173,7 +131,7 @@ class WP_Travel_Frontend_Assets {
 				'currency_symbol' => wp_travel_get_currency_symbol(),
 				'price_per'		=> wp_travel_get_price_per_text( $trip_id, true ),
 				'trip_price'	=> $trip_price,
-				'payment_amount' => $total_price['total'],
+				'payment_amount' => $payment_amount,
 			);
 
 			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
