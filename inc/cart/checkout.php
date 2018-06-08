@@ -11,7 +11,7 @@ $form_field = new WP_Travel_FW_Field(); ?>
 <form method="POST" action="" id="wp-travel-booking">
     <!-- Travellers info -->  
     <?php foreach( $trips as $cart_id => $trip ) : ?>
-        <div class="wp-travel-trip-details">
+        <div class="panel wp-travel-trip-details">
             <div class="section-title text-left">
                 <h3><?php echo esc_html( 'Booking Details', 'wp-travel' ); ?></h3>
             </div>

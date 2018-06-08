@@ -1372,6 +1372,15 @@ html .ui-button.ui-state-disabled:active {
     margin: 18px 0 0;
 }
 
+#wp-travel-booking {
+
+    .form-group{
+        input,select{
+            width:100%;
+        }
+    }
+}
+
 //twentysixteen
 .twentysixteen {
     ins {
@@ -2669,7 +2678,6 @@ ul.availabily-list {
         }
         .book-now-btn {
             float: right;
-            background: #383838;
             display: inline-block;
             line-height: 45px;
             font-size: 14px;
@@ -2694,8 +2702,6 @@ ul.availabily-list {
         }
         a,
         input {
-            background: #383838;
-            color: #fff !important;
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
@@ -2717,9 +2723,6 @@ ul.availabily-list {
             -ms-transition: all 0.3s ease 0s;
             -o-transition: all 0.3s ease 0s;
             transition: all 0.3s ease 0s;
-            &:hover {
-                background-color: #dc8051;
-            }
         }
     }
     .st_adults,
@@ -2748,17 +2751,10 @@ ul.availabily-list {
             padding: 5px 10px;
         }
         input[type="submit"]{
-            background: #dc8051;
             padding: 11px 15px;
             border-radius: 0;
             font-size: 12px;
             line-height: 1.5;
-            border:1px solid #dc8051;
-
-            &:hover{
-                background: transparent;
-                color:#dc8051;
-            }
         }
     }
 
@@ -2876,7 +2872,6 @@ ul.wp-travel-error {
         padding: 20px 15px;
         border: 1px solid #eee;
         h3 {
-            color: #f83632;
             font-size: 18px;
             font-weight: 700;
             line-height: 24px;

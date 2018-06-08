@@ -1013,6 +1013,9 @@ html .ui-button.ui-state-disabled:active {
 .wp-travel-booking-wrapper {
   margin: 18px 0 0; }
 
+#wp-travel-booking .form-group input, #wp-travel-booking .form-group .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #wp-travel-booking .form-group select, #wp-travel-booking .form-group .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #wp-travel-booking .form-group textarea, #wp-travel-booking .form-group select {
+  width: 100%; }
+
 .twentysixteen ins {
   background: #007acc; }
 
@@ -1996,7 +1999,6 @@ ul.availabily-list {
       margin-bottom: 15px; } }
   .ws-theme-cart-page .actions .book-now-btn {
     float: right;
-    background: #383838;
     display: inline-block;
     line-height: 45px;
     font-size: 14px;
@@ -2024,8 +2026,6 @@ ul.availabily-list {
   .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select,
   .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea,
   .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea {
-    background: #383838;
-    color: #fff !important;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -2057,13 +2057,6 @@ ul.availabily-list {
         width: 100%;
         display: block;
         margin-bottom: 15px; } }
-    .ws-theme-cart-page .actions a:hover,
-    .ws-theme-cart-page .actions input:hover,
-    .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:hover,
-    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions select:hover,
-    .ws-theme-cart-page .actions .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:hover,
-    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .actions textarea:hover {
-      background-color: #dc8051; }
   .ws-theme-cart-page .st_adults,
   .ws-theme-cart-page .st_children {
     margin-bottom: 10px; }
@@ -2091,15 +2084,10 @@ ul.availabily-list {
     border-radius: 0;
     padding: 5px 10px; }
   .ws-theme-cart-page .coupon input[type="submit"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon select[type="submit"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon textarea[type="submit"] {
-    background: #dc8051;
     padding: 11px 15px;
     border-radius: 0;
     font-size: 12px;
-    line-height: 1.5;
-    border: 1px solid #dc8051; }
-    .ws-theme-cart-page .coupon input[type="submit"]:hover, .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"]:hover, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon select[type="submit"]:hover, .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"]:hover, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon textarea[type="submit"]:hover {
-      background: transparent;
-      color: #dc8051; }
+    line-height: 1.5; }
   .ws-theme-cart-page button[disabled] {
     opacity: 0.5;
     cursor: not-allowed; }
@@ -2186,7 +2174,6 @@ ul.wp-travel-error {
   padding: 20px 15px;
   border: 1px solid #eee; }
   .checkout-page-wrap .checkout-block h3 {
-    color: #f83632;
     font-size: 18px;
     font-weight: 700;
     line-height: 24px;
