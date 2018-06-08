@@ -485,9 +485,9 @@ function wp_travel_book_now() {
 
 	}
 	
-	// if ( empty( $trip_id ) ) {
-	// 	return;
-	// }
+	if ( empty( $trip_id ) ) {
+		return;
+	}
 
 	$trip_code = wp_travel_get_trip_code( $trip_id );
 	$thankyou_page_url = get_permalink( $trip_id );
