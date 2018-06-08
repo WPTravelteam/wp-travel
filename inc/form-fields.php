@@ -284,30 +284,30 @@ function wp_travel_get_checkout_form_fields() {
 		}
     }
     
-    $traveller_fields['gender'] = array(
-        'type' => 'select',
-        'label' => __( 'Gender', 'wp-travel' ),
-        'name' => 'wp_travel_gender',
-        'id' => 'wp-travel-gender',
-        'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ), 'other' => __( 'Other', 'wp-travel' ) ),
-        'validations' => array(
-            'required' => true,
-        ),
-        'priority' => 25,
-    );
-    $traveller_fields['date_of_birth'] = array(
-        'type' => 'date',
-        'label' => __( 'Date of Birth', 'wp-travel' ),
-        'name' => 'wp_travel_dob',
-        'id' => 'wp-travel-dob',
-        'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ), 'other' => __( 'Other', 'wp-travel' ) ),
-        'validations' => array(
-            'required' => true,
-        ),
-        'attributes' => array( 'readonly' => 'readonly', 'placeholder' => '06/15/1990' ),
-        'date_options' => array(),
-        'priority' => 26,
-    );
+    // $traveller_fields['gender'] = array(
+    //     'type' => 'select',
+    //     'label' => __( 'Gender', 'wp-travel' ),
+    //     'name' => 'wp_travel_gender',
+    //     'id' => 'wp-travel-gender',
+    //     'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ), 'other' => __( 'Other', 'wp-travel' ) ),
+    //     'validations' => array(
+    //         'required' => true,
+    //     ),
+    //     'priority' => 25,
+    // );
+    // $traveller_fields['date_of_birth'] = array(
+    //     'type' => 'date',
+    //     'label' => __( 'Date of Birth', 'wp-travel' ),
+    //     'name' => 'wp_travel_dob',
+    //     'id' => 'wp-travel-dob',
+    //     'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ), 'other' => __( 'Other', 'wp-travel' ) ),
+    //     'validations' => array(
+    //         'required' => true,
+    //     ),
+    //     'attributes' => array( 'readonly' => 'readonly', 'placeholder' => '06/15/1990' ),
+    //     'date_options' => array(),
+    //     'priority' => 26,
+    // );
 
 	// Payment Info Fields
     
@@ -424,7 +424,7 @@ function wp_travel_get_checkout_form_fields() {
     
     // unset other uncecessary fields form $fields. For Billing info
     unset(
-        $fields['pax'],
+        // $fields['pax'],
         $fields['wp_travel_arrival_date'],
         $fields['departure_date'],
         $fields['trip_price_key'],

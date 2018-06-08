@@ -119,6 +119,8 @@ class WP_Travel_Frontend_Assets {
 				
 				foreach ( $cart_items as $key => $item ) {
 
+					var_dump( $item );
+
 					$trip_price = $item['trip_price'];
 					$payment_amount = $item['trip_price'];
 				} 
