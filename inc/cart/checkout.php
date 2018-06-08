@@ -122,3 +122,25 @@ $form_field = new WP_Travel_FW_Field(); ?>
         </div>
     </div>
 </form>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js"></script>
+<script type="text/javascript">
+    
+    function sidebarSticky(){
+        var interval = setInterval(function(){
+            if (Modernizr.mq('(min-width: 768px)')) {
+               jQuery(".container .sticky-sidebar").stick_in_parent({
+                container: jQuery(".container"),
+                parent: ".container",
+                offset_top:120
+              });
+            }else{
+                $(".container .sticky-sidebar").trigger("sticky_kit:detach");
+            }
+        },1000)
+    }
+    jQuery(document).ready(sidebarSticky);
+    jQuery(window).resize(sidebarSticky);
+</script>
