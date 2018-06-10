@@ -288,11 +288,18 @@ class WP_Travel_Cart {
 				$pax			= $trip['pax'];			
 				
 				$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
-				$sub_total += $single_trip_total;
-
 				$single_trip_total_partial =  wp_travel_get_formated_price( $trip_price_partial * $pax );
-				$sub_total_partial += $single_trip_total_partial;
+				
+				// Moderate price for groups 
+				$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
+				if ( 'group' === $price_per ) {
+					
+					$single_trip_total = wp_travel_get_formated_price( $trip_price );
+					$single_trip_total_partial =  wp_travel_get_formated_price( $trip_price_partial );
 
+				}
+				$sub_total += $single_trip_total;
+				$sub_total_partial += $single_trip_total_partial;
 			endforeach;
 		}
 

@@ -76,7 +76,15 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					if ( $max_available ) {
 						$max_attr = 'max="' . $max_available . '"';
 					}
-					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );?>
+					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
+
+					$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
+					
+					if ( 'group' === $price_per ) {
+						$single_trip_total = wp_travel_get_formated_price( $trip_price );
+					}
+					
+					?>
 
 					<tr class="responsive-cart">
 						<td class="product-remove" >

@@ -110,21 +110,12 @@ class WP_Travel_Frontend_Assets {
 
 			global $wt_cart;
 
-			$cart_items = $wt_cart->getItems();
+			$trip_price = '';
+			$payment_amount = '';
 
-			$trip_price = 0;
-			$payment_amount = 0;
+			$cart_amounts = $wt_cart->get_total();
 
-			if ( ! empty( $cart_items ) && is_array( $cart_items ) ) {
-				
-				foreach ( $cart_items as $key => $item ) {
-
-					var_dump( $item );
-
-					$trip_price = $item['trip_price'];
-					$payment_amount = $item['trip_price'];
-				} 
-			}
+			print_r( $cart_amounts );
 
 			$wt_payment = array(
 				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
