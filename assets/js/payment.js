@@ -3,7 +3,7 @@ const display_booking_option = {
         jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
         jQuery('.f-booking-only-field').show().find('input, select').removeAttr('disabled');
         var elem = jQuery('[name=wp_travel_book_now]');
-        // elem.siblings().hide();
+        elem.siblings().hide();
         elem.show().val(wt_payment.book_now);
     },
     booking_with_payment: function() {
