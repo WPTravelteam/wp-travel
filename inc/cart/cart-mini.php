@@ -57,16 +57,25 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$trip_id 		= $trip['trip_id'];
 					$trip_price		= $trip['trip_price']; 
 					$trip_duration	= isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
-					
+
 					$pax			= $trip['pax'];
 					$price_key		= isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$enable_partial	= $trip['enable_partial'];
 					$trip_price_partial	= $trip['trip_price_partial'];
-					
+
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
-					
-					$single_trip_total =  wp_travel_get_formated_price( $trip_price * $pax );
-					$single_trip_partial_total =  wp_travel_get_formated_price( $trip_price_partial * $pax ); ?>
+
+					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
+					$single_trip_partial_total = wp_travel_get_formated_price( $trip_price_partial * $pax );
+
+					$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
+
+					if ( 'group' === $price_per ) {
+						$single_trip_total         = wp_travel_get_formated_price( $trip_price );
+						$single_trip_partial_total = wp_travel_get_formated_price( $trip_price_partial );
+					}
+
+					?>
 
 					<tr class="cart_item">
 						<td class="product-name">
@@ -103,8 +112,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax_partial'] ) ); ?></strong></p>
 						</td>
 					</tr>
-				<?php endif; ?>	
-				             
+				<?php endif; ?>
 				<tr class="order-total ">
 				<th><?php esc_html_e( 'Total', 'wp-travel' ) ?></th>
 				<td class="text-right"><strong><span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol() ?></span><span class="wp-travel-total-price-amount amount"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong> </td>

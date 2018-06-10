@@ -40,9 +40,9 @@ class WP_Travel_Frontend_Assets {
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
 		wp_register_script( 'jquery-datepicker-lib-eng', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), '', 1 );
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
-		wp_enqueue_script('jquery-datepicker-lib');
-		wp_enqueue_script('jquery-datepicker-lib-eng');
-		wp_enqueue_script('wp-travel-view-mode');
+		wp_enqueue_script( 'jquery-datepicker-lib' );
+		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+		wp_enqueue_script( 'wp-travel-view-mode' );
 
 		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider' ), WP_TRAVEL_VERSION, 1 );
 
@@ -50,11 +50,11 @@ class WP_Travel_Frontend_Assets {
 
 		wp_localize_script( 'wp-travel-widget-scripts', 'trip_prices_data', $trip_prices_data );
 
-		wp_enqueue_script( 'wp-travel-widget-scripts');
-		
+		wp_enqueue_script( 'wp-travel-widget-scripts' );
+
 		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
-		if (  is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
+		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
 			$map_data = get_wp_travel_map_data();
 
 			$api_key = '';
@@ -86,10 +86,10 @@ class WP_Travel_Frontend_Assets {
 				// Enqueued script with localized data.
 				wp_enqueue_script( 'wp-travel-maps' );
 			}
-			//add vars.
+			// Add vars.
 			$frontend_vars = array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce' => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+				'nonce'   => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
 				'cartUrl' => wp_travel_get_cart_url(),
 			);
 
@@ -110,21 +110,18 @@ class WP_Travel_Frontend_Assets {
 
 			global $wt_cart;
 
-			$trip_price = '';
-			$payment_amount = '';
-
-			$cart_amounts = $wt_cart->get_total();
-
-			print_r( $cart_amounts );
+			$cart_amounts   = $wt_cart->get_total();			
+			$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
+			$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
 
 			$wt_payment = array(
-				'book_now' 	 => __( 'Book Now', 'wp-travel' ),
-				'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
-				'currency_code' => $currency_code,
+				'book_now' 	      => __( 'Book Now', 'wp-travel' ),
+				'book_n_pay'      => __( 'Book and Pay', 'wp-travel' ),
+				'currency_code'   => $currency_code,
 				'currency_symbol' => wp_travel_get_currency_symbol(),
-				'price_per'		=> wp_travel_get_price_per_text( $trip_id, true ),
-				'trip_price'	=> $trip_price,
-				'payment_amount' => $payment_amount,
+				'price_per'       => wp_travel_get_price_per_text( $trip_id, true ),
+				'trip_price'      => $trip_price,
+				'payment_amount'  => $payment_amount,
 			);
 
 			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
@@ -133,8 +130,8 @@ class WP_Travel_Frontend_Assets {
 			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 
-			wp_enqueue_script( 'wp-travel-cart',$this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' )  );
-			// wp_enqueue_script( 'wp-travel-cookie',$this->assets_path . 'assets/js/lib/js-cookie-master/js.cookie.js', array( 'jquery' )  );
+			wp_enqueue_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
+
 		}
 	}
 }
