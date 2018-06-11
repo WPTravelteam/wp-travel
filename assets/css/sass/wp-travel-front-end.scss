@@ -2817,7 +2817,8 @@ ul.availabily-list {
         }
     }
 
-    button[disabled]{
+    button[disabled],
+    input[disabled]{
         opacity:0.5;
         cursor: not-allowed;
     }

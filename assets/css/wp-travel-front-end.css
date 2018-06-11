@@ -2133,7 +2133,12 @@ ul.availabily-list {
     border-radius: 0;
     font-size: 12px;
     line-height: 1.5; }
-  .ws-theme-cart-page button[disabled] {
+  .ws-theme-cart-page button[disabled],
+  .ws-theme-cart-page input[disabled],
+  .ws-theme-cart-page .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[disabled],
+  .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page select[disabled],
+  .ws-theme-cart-page .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[disabled],
+  .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page textarea[disabled] {
     opacity: 0.5;
     cursor: not-allowed; }
   .ws-theme-cart-page .update-cart {
