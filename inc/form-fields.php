@@ -13,14 +13,23 @@
 function wp_travel_booking_form_fields() {
 	global $post;
 
-	$trip_id = 0;
-	if ( isset( $_REQUEST['trip_id'] ) ) {
-		$trip_id = $_REQUEST['trip_id'];
-	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
-		$trip_id = $_POST['wp_travel_post_id'];
-	} elseif ( isset( $post->ID ) ) {
-		$trip_id = $post->ID;
-	} 
+	global $wt_cart;
+
+	$cart_items = $wt_cart->getItems();
+
+	$cart_trip = '';
+
+	if ( ! empty( $cart_items ) && is_array( $cart_items ) ) {
+
+		$cart_trip = array_slice( $cart_items, 0, 1 );
+		$cart_trip = array_shift( $cart_trip );
+
+	}
+		
+	$trip_id = isset( $cart_trip['trip_id'] ) ? $cart_trip['trip_id'] : '';
+	$trip_price = isset( $cart_trip['trip_price'] ) ? $cart_trip['trip_price'] : '';
+	$trip_start_date = isset( $cart_trip['trip_start_date'] ) ? $cart_trip['trip_start_date'] : '';
+	$price_key = isset( $cart_trip['price_key'] ) ? $cart_trip['price_key'] : '';
 
 	if ( $trip_id > 0 ) {
 		$max_pax = get_post_meta( $trip_id, 'wp_travel_group_size', true );
@@ -235,29 +244,29 @@ function wp_travel_booking_form_fields() {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
 		$booking_fileds['pax']['attributes']['max'] = $max_pax;
 	}
-	if ( wp_travel_is_checkout_page() ) {		
-		$booking_arrival_date 	= get_post_meta( $trip_id, 'wp_travel_start_date', true );
-		$booking_departure_date = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+	if ( wp_travel_is_checkout_page() ) {
 
 		$booking_fileds['pax']['type'] = 'hidden';
 
-		if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ) {
+		$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $trip_start_date ) );
 
-			$booking_arrival_date = urldecode( $_GET['trip_date'] );
+		// if ( isset( $_GET['trip_date'] ) && '' !== $_GET['trip_date'] ) {
 
-			$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
-			$booking_fileds['arrival_date']['type'] = 'hidden';
+		// 	$booking_arrival_date = urldecode( $_GET['trip_date'] );
 
-			unset ( $booking_fileds['departure_date'] );
-		}
-		else {
+		// 	$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+		// 	$booking_fileds['arrival_date']['type'] = 'hidden';
 
-			$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
-			$booking_fileds['arrival_date']['type'] = 'hidden';
+		// 	unset ( $booking_fileds['departure_date'] );
+		// }
+		// else {
+
+		// 	$booking_fileds['arrival_date']['default'] = date('m/d/Y', strtotime( $booking_arrival_date ) );
+		// 	$booking_fileds['arrival_date']['type'] = 'hidden';
 			
-			$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
-			$booking_fileds['departure_date']['type'] = 'hidden';
-		}
+		// 	$booking_fileds['departure_date']['default'] = date('m/d/Y', strtotime( $booking_departure_date ) );
+		// 	$booking_fileds['departure_date']['type'] = 'hidden';
+		// }
 	
 	}
 	return apply_filters( 'wp_travel_booking_form_fields', $booking_fileds );

@@ -337,20 +337,4 @@ jQuery(document).ready(function($) {
 
     });
 
-
-    $(document).ready(sidebarSticky);
-    $(window).resize(sidebarSticky);
-    function sidebarSticky(){
-        var interval = setInterval(function(){
-            if (Modernizr.mq('(min-width: 768px)')) {
-               $(".container .sticky-sidebar").stick_in_parent({
-                container: $(".container"),
-                parent: ".container",
-                offset_top:120
-              });
-            }
-        },1000)
-    }
-
-
 });

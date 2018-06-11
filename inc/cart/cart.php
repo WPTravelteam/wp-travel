@@ -57,10 +57,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				</tr>
 			</thead>
 			<tbody>				
-				<?php 
-				
-				print_r( $trips );
-				
+				<?php
 				foreach ( $trips as $cart_id => $trip ) : ?>
 					<?php
 					$trip_id 		= $trip['trip_id'];
