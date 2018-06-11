@@ -224,6 +224,12 @@ function wp_travel_booking_form_fields() {
 			'default' => $price_key,
 			'priority' => 98,
 		),
+		'post_id' => array(
+			'type' => 'hidden',
+			'name' => 'wp_travel_post_id',
+			'id' => 'wp-travel-post-id',
+			'default' => $trip_id,
+		),
 	);
 	if ( isset( $max_pax ) && '' != $max_pax ) {
 		$booking_fileds['pax']['validations']['max'] = $max_pax;
@@ -318,6 +324,22 @@ function wp_travel_get_checkout_form_fields() {
 		global $wt_cart;
 		$cart_amounts = $wt_cart->get_total();
 
+		$cart_items = $wt_cart->getItems();
+
+		$cart_trip = '';
+
+		if ( ! empty( $cart_items ) && is_array( $cart_items ) ) {
+
+			$cart_trip = array_slice( $cart_items, 0, 1 );
+			$cart_trip = array_shift( $cart_trip );
+
+		}
+		
+		$trip_id = isset( $cart_trip['trip_id'] ) ? $cart_trip['trip_id'] : '';
+		$trip_price = isset( $cart_trip['trip_price'] ) ? $cart_trip['trip_price'] : '';
+		$trip_start_date = isset( $cart_trip['trip_start_date'] ) ? $cart_trip['trip_start_date'] : '';
+		$price_key = isset( $cart_trip['price_key'] ) ? $cart_trip['price_key'] : '';
+
 		$total_amount = $cart_amounts['total'];
 		$total_partial_amount = $cart_amounts['total_partial'];
 
@@ -355,7 +377,7 @@ function wp_travel_get_checkout_form_fields() {
 				'label' => __( 'Payment Gateway', 'wp-travel' ),
 				'name' => 'wp_travel_payment_gateway',
 				'id' => 'wp-travel-payment-gateway',
-				'wrapper_class'=>'wp-travel-payment-field f-booking-with-payment f-partial-payment f-full-payment',				
+				'wrapper_class'=>'wp-travel-radio-group wp-travel-payment-field f-booking-with-payment f-partial-payment f-full-payment',				
 				'validations' => array(
 					'required' => true,
 				),
@@ -403,6 +425,14 @@ function wp_travel_get_checkout_form_fields() {
 			'default' => wp_travel_get_formated_price( $total_partial_amount ),
 			'priority' => 115,
 		);
+		$payment_fields['trip_price'] = array(
+			'type' => 'hidden',
+			'label' => __( 'Trip Price', 'wp-travel' ),
+			'name' => 'wp_travel_trip_price',
+			'id' => 'wp-travel-trip-price',
+			'default' => number_format( $trip_price, 2, '.', '' ),
+			'priority' => 102,
+		);
 
 		// if ( $tax_rate = wp_travel_is_taxable() ) {
 
@@ -425,12 +455,16 @@ function wp_travel_get_checkout_form_fields() {
     // unset other uncecessary fields form $fields. For Billing info
     unset(
         // $fields['pax'],
-		$fields['trip_price_key'],
+		// $fields['trip_price_key'],
         $fields['wp_travel_arrival_date'],
-        $fields['departure_date'],
-        $fields['arrival_date'],
-        $fields['trip_duration']        
-    );
+        // $fields['departure_date'],
+        // $fields['arrival_date'],
+        $fields['trip_duration']       
+	);
+	
+	// Set Arrival and departure date.
+	 
+
     $fields['address']['priority'] = 10;
     $fields['billing_city'] = array(
         'type' => 'text',

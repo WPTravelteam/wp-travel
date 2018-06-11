@@ -41,7 +41,6 @@ function wp_travel_payment_field_list() {
 		'payment_gateway',
 		'booking_option',
 		'trip_price',
-
 		'payment_mode',
 		'payment_amount',
 		'trip_price_info',
@@ -248,7 +247,7 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 		$payment_id = wp_insert_post( $post_array );
 		update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
 	}
-	$booking_field_list = wp_travel_booking_form_fields();
+	$booking_field_list = wp_travel_get_checkout_form_fields();
 	$payment_field_list = wp_travel_payment_field_list();
 
 	foreach ( $payment_field_list as $field_list ) {
@@ -311,23 +310,24 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$itinerary_id 			= get_post_meta( $booking_id, 'wp_travel_post_id', true );
 	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
+	
 	$trip_code = wp_travel_get_trip_code( $itinerary_id );
 	$title = 'Booking - ' . $trip_code;
-
+	
 	$itinerary_title 		= get_the_title( $itinerary_id );
-
+	
 	$booking_no_of_pax 		= get_post_meta( $booking_id, 'wp_travel_pax', true );
 	$booking_scheduled_date = 'N/A';
 	$booking_arrival_date 	= get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
 	$booking_departure_date = get_post_meta( $booking_id, 'wp_travel_departure_date', true );
-
+	
 	$customer_name 		  	= get_post_meta( $booking_id, 'wp_travel_fname', true ) . ' ' . get_post_meta( $booking_id, 'wp_travel_lname', true );
 	$customer_country 		= get_post_meta( $booking_id, 'wp_travel_country', true );
 	$customer_address 		= get_post_meta( $booking_id, 'wp_travel_address', true );
 	$customer_phone 		= get_post_meta( $booking_id, 'wp_travel_phone', true );
 	$customer_email 		= get_post_meta( $booking_id, 'wp_travel_email', true );
 	$customer_note 			= get_post_meta( $booking_id, 'wp_travel_note', true );
-
+	
 	$wp_travel_payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 	$wp_travel_payment_mode   = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
 	$trip_price = get_post_meta( $payment_id, 'wp_travel_trip_price', true );
