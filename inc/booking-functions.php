@@ -561,6 +561,9 @@ function wp_travel_book_now() {
 		}
 
 	}
+
+	// Clear Cart Before Sending Email.
+	$wt_cart->clear();
 	
 	$settings = wp_travel_get_settings();
 
