@@ -23,6 +23,7 @@ class WP_Travel_Admin_Info_Pointers {
 		// add_action( 'admin_notices', array( $this, 'paypal_addon_admin_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_test_mode_notices' ) );
+		add_action( 'admin_notices', array( $this, 'wp_travel_update_payment_gateways_notice' ) );
 		add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
 	}
 
@@ -225,6 +226,36 @@ class WP_Travel_Admin_Info_Pointers {
 					</p>
 				</div>
 			<?php
+			}
+		}
+	}
+
+	/**
+	* wp_travel_update_payment_gateways_notice
+	* 
+	* WP Travel Standard paypal merge info.
+	* @since 1.4.0
+	*/
+	function wp_travel_update_payment_gateways_notice() {
+
+		$addons = array( 'wp-travel-instamojo/wp-travel-instamojo-checkout.php', 'wp-travel-paypal-express-checkout/wp-travel-paypal-express-checkout.php', 'wp-travel-razor-pay/wp-travel-razorpay-checkout.php', 'wp-travel-stripe/wp-travel-stripe.php' );
+
+		foreach ( $addons as $addon ) {
+
+			if ( is_plugin_active( $addon ) ) {
+
+				$addon_data = @get_plugin_data( WP_PLUGIN_DIR . '/' . $addon );
+
+				if ( version_compare( $addon_data['Version'], '1.0.1', '<' ) ) {
+
+					?>
+						<div class="notice notice-warning">
+							<p>
+							<strong><?php printf( __( 'With the update to WP Travel version 1.4.0 <strong>%1s addon </strong> needs to be updated to work, for more information, %2sClick Here%3s', 'wp-travel' ), $addon_data['Name'], '<a target="_blank" href="http://wptravel.io">', '</a>' ); ?></strong>
+							</p>
+						</div>
+					<?php
+				}
 			}
 		}
 	}
