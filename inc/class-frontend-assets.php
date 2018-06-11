@@ -37,6 +37,12 @@ class WP_Travel_Frontend_Assets {
 
 		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), '2.2.3' );
 
+		if ( wp_travel_is_checkout_page() ) {
+
+			wp_enqueue_script( 'wp-travel-modernizer', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/modernizer/modernizr.min.js', array('jquery'), '', true );
+			wp_enqueue_script( 'wp-travel-sticky-kit', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/sticky-kit/sticky-kit.min.js', array('jquery'), '', true );
+		}
+
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
 		wp_register_script( 'jquery-datepicker-lib-eng', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), '', 1 );
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
