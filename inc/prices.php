@@ -83,7 +83,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	
 	$enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
 
-	$pax_label = __( 'Pax', 'wp-travel' );
+	$pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
 
 	if ( '' != $price_key && 'yes' === $enable_pricing_options ) {
 		$valid_price_key = wp_travel_is_price_key_valid( $trip_id, $price_key );

@@ -57,7 +57,11 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				</tr>
 			</thead>
 			<tbody>				
-				<?php foreach ( $trips as $cart_id => $trip ) : ?>
+				<?php 
+				
+				print_r( $trips );
+				
+				foreach ( $trips as $cart_id => $trip ) : ?>
 					<?php
 					$trip_id 		= $trip['trip_id'];
 					// $price			= $trip['price']; // Price of single qty.
@@ -129,7 +133,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						</td>
 						<td class="product-quantity" data-title="PAX">
 							<div class="st_adults">
-								<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>
+								<!--<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>-->
 								<input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ) ?>" >
 							</div>
