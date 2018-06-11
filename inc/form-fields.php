@@ -433,6 +433,24 @@ function wp_travel_get_checkout_form_fields() {
 
 	// Set Arrival and departure date.
 	$fields['address']['priority'] = 10;
+
+	$billing_city = '';
+	$billing_zip = '';
+
+	// User Details Merged.
+	if ( is_user_logged_in() ) {
+
+		$user = wp_get_current_user();
+
+		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+
+			$biling_data     = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
+			$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
+			$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
+		}
+	}
+
+
 	$fields['billing_city'] = array(
 		'type' => 'text',
 		'label' => __( 'City', 'wp-travel' ),
@@ -441,6 +459,7 @@ function wp_travel_get_checkout_form_fields() {
 		'validations' => array(
 			'required' => true,
 		),
+		'default' => $billing_city,
 		'priority' => 20,
 	);
 
@@ -452,6 +471,7 @@ function wp_travel_get_checkout_form_fields() {
 		'validations' => array(
 			'required' => true,
 		),
+		'default' => $billing_zip,
 		'priority' => 30,
 	);
 	$fields['country']['priority'] = 50;
