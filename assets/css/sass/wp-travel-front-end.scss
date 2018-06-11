@@ -1385,8 +1385,61 @@ html .ui-button.ui-state-disabled:active {
             right: 0;
         }
     }
-}
 
+    .wp-travel-radio-group{
+        margin-bottom: 15px;
+        input{
+            border: 1px solid #b4b9be;
+            background: #ddd;
+            cursor: pointer;
+            display: inline-block;
+            height: 20px;
+            margin: -4px 4px 0 0;
+            vertical-align: middle;
+            width: 20px;
+            outline:0;
+            -webkit-appearance: none;
+            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.1 );
+            transition: .05s border-color ease-in-out;
+            border-radius: 50%;
+            margin-right: 10px;
+
+            &[type="radio"]:checked:before {
+                content: "\2022";
+                text-indent: -9999px;
+                border-radius: 50px;
+                width: 10px;
+                height: 10px;
+                margin: 4px;
+                background-color: #1e8cbe;
+                float: left;
+            }
+        }
+        .col-sm-8{
+            label{
+                width:100%;
+                display: block;
+                position: relative;
+                margin-bottom: 5px;
+                cursor:pointer;
+
+
+            }
+        }
+    }
+}
+.f-partial-payment{
+    .wp-travel-text-info {
+        font-size: 16px;
+        color: #000000;
+    }
+} 
+.f-full-payment{
+    .wp-travel-text-info {
+        font-weight: 700;
+        font-size: 20px;
+    }
+} 
 //twentysixteen
 .twentysixteen {
     ins {
