@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.6
-Stable tag: 1.3.9
+Stable tag: 1.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -134,6 +134,13 @@ Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.4.0 =
+* New Feature : New Checkout page.
+* Enhancement : Better Trips cart / Checkout flow.
+* Fixes: Booking Emails mail tags issue resolved.
+* Fixes: Payment gateway Addons Better support.
+* Fixes: Minor issues and bugs fixes.
 
 = 1.3.9 =
 * Fixes: Booking Date Formating Issue fixing.

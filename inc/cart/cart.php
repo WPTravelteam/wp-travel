@@ -42,9 +42,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 <!-- CART HTML START -->
 <div class="ws-theme-cart-page">
 	<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="post">
-		<!-- <input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" > -->
-			<!-- <input type="hidden" name="trip_date" value="<?php echo esc_attr( $trip_requested_date ); ?>" > -->
-		
+
 		<table class="ws-theme-cart-list">
 			<thead>
 				<tr>
