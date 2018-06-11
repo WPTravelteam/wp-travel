@@ -93,7 +93,6 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_fname,
 			'priority' => 10,
-			'attributes' => array( 'placeholder' => 'John' ),
 		),
 
 		'last_name'		=> array(
@@ -108,7 +107,6 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_lname,
 			'priority' => 20,
-			'attributes' => array( 'placeholder' => 'Doe' ),
 		),
 		'country'		=> array(
 			'type' => 'select',
@@ -133,7 +131,6 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $billing_address,
 			'priority' => 40,
-			'attributes' => array( 'placeholder' => 'Tafalo Marga' ),
 		),
 		'phone_number'	=> array(
 			'type' => 'text',
@@ -147,7 +144,6 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $billing_phone,
 			'priority' => 50,
-			'attributes' => array( 'placeholder' => '+977 9841234567' ),
 		),
 		'email' => array(
 			'type' => 'email',
@@ -160,7 +156,6 @@ function wp_travel_booking_form_fields() {
 			),
 			'default' => $user_email,
 			'priority' => 60,
-			'attributes' => array( 'placeholder' => 'example@mail.com' ),
 		),
 		'arrival_date' => array(
 			'type' => 'date',
@@ -251,8 +246,6 @@ function wp_travel_booking_form_fields() {
 		$booking_fileds['arrival_date']['default'] = date( 'm/d/Y', strtotime( $trip_start_date ) );
 
 		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
-
-		var_dump( $fixed_departure );
 
 		if ( 'yes' === $fixed_departure ) {
 
@@ -449,7 +442,6 @@ function wp_travel_get_checkout_form_fields() {
 			'required' => true,
 		),
 		'priority' => 20,
-		'attributes' => array( 'placeholder' => 'Patan' ),
 	);
 
 	$fields['billing_postal'] = array(
@@ -461,18 +453,6 @@ function wp_travel_get_checkout_form_fields() {
 			'required' => true,
 		),
 		'priority' => 30,
-		'attributes' => array( 'placeholder' => '44600' ),
-	);
-	$fields['billing_province'] = array(
-		'type' => 'text',
-		'label' => __( 'Province', 'wp-travel' ),
-		'name' => 'billing_province',
-		'id' => 'wp-travel-billing-province',
-		'validations' => array(
-			'required' => true,
-		),
-		'priority' => 40,
-		'attributes' => array( 'placeholder' => 'Province 3' ),
 	);
 	$fields['country']['priority'] = 50;
 
