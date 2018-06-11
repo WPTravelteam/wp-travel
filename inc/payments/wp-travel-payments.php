@@ -251,8 +251,8 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 	$payment_field_list = wp_travel_payment_field_list();
 
 	foreach ( $payment_field_list as $field_list ) {
-		if ( isset( $booking_field_list[ $field_list ]['name'] ) ) {
-			$meta_field = $booking_field_list[ $field_list ]['name'];
+		if ( isset( $booking_field_list['payment_fields'][ $field_list ]['name'] ) ) {
+			$meta_field = $booking_field_list['payment_fields'][ $field_list ]['name'];
 			if ( isset( $_POST[ $meta_field ] ) ) {
 				$meta_value = $_POST[ $meta_field ];
 				if ( 'wp_travel_payment_amount' === $meta_field ) {

@@ -31,7 +31,7 @@ jQuery(document).ready(function($) {
                 data: cart_fields,
                 beforeSend: function() {},
                 success: function(data) {
-                    // location.href = wp_travel_frontend_vars.cartUrl;
+                    location.href = wp_travel_frontend_vars.cartUrl;
                 }
             });
         }
