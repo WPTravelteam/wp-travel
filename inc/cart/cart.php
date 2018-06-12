@@ -122,7 +122,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( @$trip_tax_details['actual_trip_price'] ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
 											<?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?>
 										</span>
-									</ins>/<?php echo esc_html( ucfirst( $pax_label ) ); ?>
+									</ins>/<?php echo esc_html( ucfirst( $price_per ) ); ?>
 								</span>
 							<?php // endif; ?>
 						</td>

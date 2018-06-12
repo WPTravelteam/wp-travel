@@ -101,8 +101,8 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		$payment_mode 	= isset( $_POST['wp_travel_payment_mode'] ) ? $_POST['wp_travel_payment_mode'] : 'partial';
 		
-		// $current_url = get_permalink( $itinery_id );
-		// $current_url = apply_filters( 'wp_travel_thankyou_page_url', $current_url );	
+		$current_url = get_permalink( $itinery_id );
+		$current_url = apply_filters( 'wp_travel_thankyou_page_url', $current_url );
 				
 		$cart_amounts = $wt_cart->get_total();
 		
@@ -142,13 +142,21 @@ class WP_Travel_Gateway_Paypal_Request {
 			$item_name      = html_entity_decode( get_the_title( $trip_id ) );
 			$trip_code 		= wp_travel_get_trip_code( $trip_id );
 
+			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
+
 			$payment_amount =  wp_travel_get_formated_price( $trip_price );
 			if ( 'partial' === $payment_mode ) {
 				$payment_amount =  wp_travel_get_formated_price( $trip_price_partial );
 			}
+			// Group Multiply disable.
+			if ( 'group' === $price_per ) {
+				$pax = 1;
+			}
 
 			$args['item_name_' . $agrs_index ]   = $item_name;
+
 			$args['quantity_' . $agrs_index ]   = $pax;
+			
 			$args['amount_' . $agrs_index ]   = $payment_amount;
 			$args['item_number_' . $agrs_index ]   = $trip_id;
 
