@@ -120,7 +120,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		$args['business']		= sanitize_email( $paypal_email );
 		$args['bn']				= '';
 		$args['rm']				= '2';
-		$args['tax_cart']		= 0;
+		$args['tax_cart']		= $tax;
 		$args['charset']		= get_bloginfo( 'charset' );
 		$args['cbt']  			= get_bloginfo( 'name' );
 		$args['return'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'success' ), $current_url );
