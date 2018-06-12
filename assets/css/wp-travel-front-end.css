@@ -2284,6 +2284,8 @@ ul.wp-travel-error {
   .checkout-page-wrap .form-horizontal .form-group {
     margin-right: -15px;
     margin-left: -15px; }
+  .checkout-page-wrap .form-horizontal.f-partial-payment {
+    display: block; }
 .checkout-page-wrap .wp-travel-form-field {
   margin: 10px 0;
   display: inline-block;
@@ -2469,7 +2471,8 @@ ul.wp-travel-error {
   #wp-travel-enquiries .wp-travel-form-field.textarea-field {
     margin-bottom: 15px; }
     #wp-travel-enquiries .wp-travel-form-field.textarea-field textarea {
-      padding: .6em 1em .6em; }
+      padding: .6em 1em .6em;
+      resize: verticle; }
   #wp-travel-enquiries .parsley-errors-list {
     position: relative;
     margin-left: 0;
