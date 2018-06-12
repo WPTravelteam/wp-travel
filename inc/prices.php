@@ -109,10 +109,14 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
 					$pax_label       = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
 					$max_available   = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;
+					$min_available = isset( $pricing['min_pax'] ) && '' !== $pricing['min_pax'] ? true : false;
 
 					if ( $max_available ) {
 						$max_available = $pricing['max_pax'];
 						// $max_attr = 'max=' . $pricing['max_pax'];
+					}
+					if ( $min_available ) {
+						$min_available = $pricing['min_pax'];
 					}
 				endforeach;
 			}
@@ -120,7 +124,8 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	} else {
 		// Product Metas.
 		$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-		$max_available   = get_post_meta( $trip_id, 'wp_travel_group_size', true );		
+		$max_available   = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+		$min_available   = 1;
 	}
 
 	
@@ -134,6 +139,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	$attrs = array(
 		'pax_label' 		=> $pax_label,
 		'max_available' 	=> $max_available,
+		'min_available'     => $min_available,
 		'trip_start_date' 	=> $trip_start_date,
 	);
 	

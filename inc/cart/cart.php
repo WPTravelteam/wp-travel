@@ -70,10 +70,15 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available	= isset( $trip['max_available'] ) ? $trip['max_available'] : '';
+					$min_available  = isset( $trip['min_available'] ) ? $trip['min_available'] : '';
 					
 					$max_attr = '';
+					$min_attr = '';
 					if ( $max_available ) {
 						$max_attr = 'max="' . $max_available . '"';
+					}
+					if ( $min_available ) {
+						$min_attr = 'min="' . $min_available . '"';
 					}
 					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 
@@ -129,7 +134,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						<td class="product-quantity" data-title="PAX">
 							<div class="st_adults">
 								<!--<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>-->
-								<input type="number" class="input-text wp-travel-pax text" step="1" min="1" <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+								<input type="number" class="input-text wp-travel-pax text" step="1" <?php echo $min_attr; ?> <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ) ?>" >
 							</div>
 						</td>
