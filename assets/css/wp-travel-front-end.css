@@ -2284,6 +2284,8 @@ ul.wp-travel-error {
   .checkout-page-wrap .form-horizontal .form-group {
     margin-right: -15px;
     margin-left: -15px; }
+  .checkout-page-wrap .form-horizontal.f-partial-payment {
+    display: block; }
 .checkout-page-wrap .wp-travel-form-field {
   margin: 10px 0;
   display: inline-block;
