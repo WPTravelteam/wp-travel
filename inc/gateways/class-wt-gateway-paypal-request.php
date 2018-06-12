@@ -120,7 +120,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		$args['business']		= sanitize_email( $paypal_email );
 		$args['bn']				= '';
 		$args['rm']				= '2';
-		$args['tax_cart']		= $tax;
+		$args['tax_cart']		= 0;
 		$args['charset']		= get_bloginfo( 'charset' );
 		$args['cbt']  			= get_bloginfo( 'name' );
 		$args['return'] 		= add_query_arg( array( 'booking_id' => $booking_id, 'booked' => true, 'status' => 'success' ), $current_url );
@@ -142,7 +142,7 @@ class WP_Travel_Gateway_Paypal_Request {
 			$item_name      = html_entity_decode( get_the_title( $trip_id ) );
 			$trip_code 		= wp_travel_get_trip_code( $trip_id );
 
-			$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
+			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
 
 			$payment_amount =  wp_travel_get_formated_price( $trip_price );
 			if ( 'partial' === $payment_mode ) {
