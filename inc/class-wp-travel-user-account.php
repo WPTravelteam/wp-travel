@@ -33,9 +33,11 @@ class Wp_Travel_User_Account {
 		if ( ! is_user_logged_in() ) {
 
 			// After password reset, add confirmation message.
-			if ( ! empty( $_GET['password-reset'] ) ) {
+			if ( ! empty( $_GET['password-reset'] ) ) { ?>
 
-				esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' );
+				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
+
+			<?php 
 
 			}
 			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) {
