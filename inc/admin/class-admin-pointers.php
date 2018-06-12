@@ -251,7 +251,7 @@ class WP_Travel_Admin_Info_Pointers {
 					?>
 						<div class="notice notice-warning">
 							<p>
-							<strong><?php printf( __( 'With the update to WP Travel version 1.4.0 <strong>%1s addon </strong> needs to be updated to work, for more information, %2sClick Here%3s', 'wp-travel' ), $addon_data['Name'], '<a target="_blank" href="http://wptravel.io">', '</a>' ); ?></strong>
+							<strong><?php printf( __( 'With the update to WP Travel version 1.4.0 <strong>%1s addon </strong> needs to be updated to work, for more information, %2sClick Here%3s', 'wp-travel' ), $addon_data['Name'], '<a target="_blank" href="http://wptravel.io/category/release-notes/">', '</a>' ); ?></strong>
 							</p>
 						</div>
 					<?php
