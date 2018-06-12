@@ -569,7 +569,7 @@ if ( ! $price_per ) {
 														foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) { ?>
 															<li class="wp-travel-multi-inner">
 																<label class="checkbox wp-travel-multi-inner ">
-																	<input name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
+																	<input name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" type="checkbox" id="wp-travel-multi-input-{{data.random}}" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
 																</label>
 															</li>
 														<?php } ?>
