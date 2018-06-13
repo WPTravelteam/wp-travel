@@ -717,7 +717,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'booking' :
 
-						$booking_template = apply_filters( 'wp_travel_booking_cart_process_template_path', wp_travel_get_template( 'contentpricing-options.php' ) );
+						$booking_template = apply_filters( 'wp_travel_booking_cart_process_template_path', wp_travel_get_template( 'content-pricing-options.php' ) );
 
 						load_template( $booking_template );
 					
