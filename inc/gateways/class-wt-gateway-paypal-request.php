@@ -60,7 +60,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		// // Updating Status for booking.
 		// update_post_meta( $payment_id, 'wp_travel_payment_status', esc_html( 'pending' ) );
 
-		$args = $this->get_args();
+		$args = $this->get_args( $booking_id );
 
 		$redirect_uri = esc_url( home_url( '/' ) );
 
@@ -78,7 +78,7 @@ class WP_Travel_Gateway_Paypal_Request {
 	 * @param number $booking_id Booking ID.
 	 * @return Array
 	 */
-	private function get_args() {
+	private function get_args( $booking_id ) {
 		
 		global $wt_cart;
 		$items = $wt_cart->getItems();
