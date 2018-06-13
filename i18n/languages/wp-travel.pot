@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 11:29:47+00:00\n"
+"POT-Creation-Date: 2018-06-13 08:16:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: inc/admin/admin-helper.php:438 inc/template-functions.php:822
+#: inc/admin/admin-helper.php:438 inc/template-functions.php:823
 msgid "Date"
 msgstr ""
 
@@ -295,7 +295,7 @@ msgstr ""
 #: inc/admin/class-admin-settings.php:353
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:123
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:417
-#: inc/template-functions.php:731
+#: inc/template-functions.php:732
 msgid "Open All"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 #: inc/admin/class-admin-settings.php:354
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:124
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:418
-#: inc/template-functions.php:732
+#: inc/template-functions.php:733
 msgid "Close All"
 msgstr ""
 
@@ -1028,7 +1028,7 @@ msgid "Gallery images"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:19
-#: inc/template-functions.php:771
+#: inc/template-functions.php:772
 msgid "Itineraries"
 msgstr ""
 
@@ -1073,7 +1073,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:212
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:314
 #: inc/cart/cart.php:52 inc/class-shortcode.php:272
-#: inc/template-functions.php:1296
+#: inc/template-functions.php:1297
 #: inc/widgets/class-wp-travel-search-filters-widget.php:119
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 msgid "Price"
@@ -1588,12 +1588,12 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: inc/class-shortcode.php:276 inc/template-functions.php:1299
+#: inc/class-shortcode.php:276 inc/template-functions.php:1300
 #: inc/widgets/class-wp-travel-search-filters-widget.php:123
 msgid "Price low to high"
 msgstr ""
 
-#: inc/class-shortcode.php:277 inc/template-functions.php:1300
+#: inc/class-shortcode.php:277 inc/template-functions.php:1301
 #: inc/widgets/class-wp-travel-search-filters-widget.php:124
 msgid "Price high to low"
 msgstr ""
@@ -3236,7 +3236,7 @@ msgstr ""
 msgid "out of %1$s5%2$s"
 msgstr ""
 
-#: inc/template-functions.php:333 inc/template-functions.php:1305
+#: inc/template-functions.php:333 inc/template-functions.php:1306
 msgid "Trip Type"
 msgstr ""
 
@@ -3248,11 +3248,11 @@ msgstr ""
 msgid "No Activities"
 msgstr ""
 
-#: inc/template-functions.php:375 inc/template-functions.php:1244
+#: inc/template-functions.php:375 inc/template-functions.php:1245
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:377 inc/template-functions.php:1247
+#: inc/template-functions.php:377 inc/template-functions.php:1248
 msgid "No Size Limit"
 msgstr ""
 
@@ -3274,31 +3274,31 @@ msgstr ""
 msgid "No gallery images found."
 msgstr ""
 
-#: inc/template-functions.php:755
+#: inc/template-functions.php:756
 msgid "No Details Found"
 msgstr ""
 
-#: inc/template-functions.php:825
+#: inc/template-functions.php:826
 msgid "Time"
 msgstr ""
 
-#: inc/template-functions.php:1219
+#: inc/template-functions.php:1220
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1219 inc/trip-enquiries.php:446
+#: inc/template-functions.php:1220 inc/trip-enquiries.php:446
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1282
+#: inc/template-functions.php:1283
 msgid "Filter By"
 msgstr ""
 
-#: inc/template-functions.php:1309
+#: inc/template-functions.php:1310
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:1313
+#: inc/template-functions.php:1314
 msgid "Show"
 msgstr ""
 
