@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.4.0\n"
+"Project-Id-Version: WP Travel 1.4.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 10:26:03+00:00\n"
+"POT-Creation-Date: 2018-06-15 11:23:51+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "WP Travel version: %s"
 msgstr ""
 
-#: inc/admin/admin-helper.php:433 inc/booking-functions.php:721
+#: inc/admin/admin-helper.php:433 inc/booking-functions.php:736
 #: inc/helpers.php:1265
 msgid "Booking"
 msgstr ""
@@ -115,9 +115,9 @@ msgstr ""
 
 #: inc/admin/class-admin-assets.php:55 inc/admin/class-admin-assets.php:96
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:158
-#: inc/booking-functions.php:591 inc/booking-functions.php:878
-#: inc/booking-functions.php:882 inc/booking-functions.php:910
-#: inc/booking-functions.php:914 inc/helpers.php:530 inc/helpers.php:546
+#: inc/booking-functions.php:604 inc/booking-functions.php:893
+#: inc/booking-functions.php:897 inc/booking-functions.php:925
+#: inc/booking-functions.php:929 inc/helpers.php:530 inc/helpers.php:546
 #: inc/helpers.php:813 inc/helpers.php:982 inc/helpers.php:1072
 #: inc/helpers.php:1088 inc/helpers.php:1103
 msgid "N/A"
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Global Tabs Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:722
+#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:737
 #: inc/helpers.php:731 inc/helpers.php:925
 msgid "Payment"
 msgstr ""
@@ -1260,67 +1260,67 @@ msgstr ""
 msgid "Booking Date"
 msgstr ""
 
-#: inc/booking-functions.php:713
+#: inc/booking-functions.php:728
 msgid "Statistics"
 msgstr ""
 
-#: inc/booking-functions.php:719
+#: inc/booking-functions.php:734
 msgid "Display Chart"
 msgstr ""
 
-#: inc/booking-functions.php:731
+#: inc/booking-functions.php:746
 msgid "Compare Stat"
 msgstr ""
 
-#: inc/booking-functions.php:744 inc/booking-functions.php:797
+#: inc/booking-functions.php:759 inc/booking-functions.php:812
 #: inc/class-shortcode.php:294
 #: inc/widgets/class-wp-travel-search-filters-widget.php:141
 msgid "From"
 msgstr ""
 
-#: inc/booking-functions.php:751 inc/booking-functions.php:804
+#: inc/booking-functions.php:766 inc/booking-functions.php:819
 #: inc/class-shortcode.php:301
 #: inc/widgets/class-wp-travel-search-filters-widget.php:148
 msgid "To"
 msgstr ""
 
-#: inc/booking-functions.php:758 inc/booking-functions.php:811
+#: inc/booking-functions.php:773 inc/booking-functions.php:826
 #: inc/email-template-functions.php:77 inc/email-template-functions.php:182
 #: inc/email-template-functions.php:360 inc/email-template-functions.php:702
 #: inc/email-template-functions.php:1010 inc/form-fields.php:113
 msgid "Country"
 msgstr ""
 
-#: inc/booking-functions.php:762 inc/booking-functions.php:815
+#: inc/booking-functions.php:777 inc/booking-functions.php:830
 msgid "All Country"
 msgstr ""
 
-#: inc/booking-functions.php:775 inc/booking-functions.php:828
+#: inc/booking-functions.php:790 inc/booking-functions.php:843
 msgid "All "
 msgstr ""
 
-#: inc/booking-functions.php:788
+#: inc/booking-functions.php:803
 msgid "Show All"
 msgstr ""
 
-#: inc/booking-functions.php:837
+#: inc/booking-functions.php:852
 msgid "Compare"
 msgstr ""
 
-#: inc/booking-functions.php:855
+#: inc/booking-functions.php:870
 msgid "Compare 1"
 msgstr ""
 
-#: inc/booking-functions.php:865 inc/booking-functions.php:896
+#: inc/booking-functions.php:880 inc/booking-functions.php:911
 msgid "Total Sales"
 msgstr ""
 
-#: inc/booking-functions.php:870 inc/booking-functions.php:902
+#: inc/booking-functions.php:885 inc/booking-functions.php:917
 #: inc/class-post-types.php:83 inc/helpers.php:707
 msgid "Bookings"
 msgstr ""
 
-#: inc/booking-functions.php:875 inc/booking-functions.php:907
+#: inc/booking-functions.php:890 inc/booking-functions.php:922
 #: inc/cart/cart-mini.php:29 inc/cart/cart.php:28
 #: inc/email-template-functions.php:43 inc/email-template-functions.php:148
 #: inc/email-template-functions.php:326 inc/email-template-functions.php:626
@@ -1329,15 +1329,15 @@ msgstr ""
 msgid "Pax"
 msgstr ""
 
-#: inc/booking-functions.php:879 inc/booking-functions.php:911
+#: inc/booking-functions.php:894 inc/booking-functions.php:926
 msgid "Countries"
 msgstr ""
 
-#: inc/booking-functions.php:883 inc/booking-functions.php:915
+#: inc/booking-functions.php:898 inc/booking-functions.php:930
 msgid "Top itinerary"
 msgstr ""
 
-#: inc/booking-functions.php:890
+#: inc/booking-functions.php:905
 msgid "Compare 2"
 msgstr ""
 
