@@ -459,35 +459,48 @@ function wp_travel_book_now() {
 	if ( ! wp_verify_nonce( $_POST['wp_travel_security'],  'wp_travel_security_action' ) ) {
 		return;
 	}
-
-	global $wt_cart;
-
-	$items = $wt_cart->getItems();
-	if ( ! count( $items ) ) {
-		return;
-	}
-
+	
 	$date_format = get_option('date_format') ? get_option('date_format') : 'Y m d';
 	$current_date = date( $date_format  );
 
-	$trip_ids = array();
-	$pax_array = array();
-	foreach( $items as $key => $item ) {
+	$trip_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : '';
 
-		$trip_ids[] = $item['trip_id'];
-		$pax_array[] = $item['pax'];
+	$trip_price      = wp_travel_get_trip_price( $trip_id );
 
-	}
-	$trip_id = '';
-	$pax = 0;
-	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
-		
-		if ( ! $allow_multiple_cart_items ) {
+	$enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 
-		$trip_id = $trip_ids['0'];
-		$pax = $pax_array['0'];
+	$pax = isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 1;
 
-	}
+	if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
+	
+		global $wt_cart;
+
+		$items = $wt_cart->getItems();
+		if ( ! count( $items ) ) {
+			return;
+		}
+
+
+		$trip_ids = array();
+		$pax_array = array();
+		foreach( $items as $key => $item ) {
+
+			$trip_ids[] = $item['trip_id'];
+			$pax_array[] = $item['pax'];
+
+		}
+		$trip_id = '';
+		$pax = 0;
+		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+			
+			if ( ! $allow_multiple_cart_items ) {
+
+			$trip_id = $trip_ids['0'];
+			$pax = $pax_array['0'];
+
+		}
+
+	endif;
 	
 	if ( empty( $trip_id ) ) {
 		return;
@@ -677,8 +690,10 @@ function wp_travel_book_now() {
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
 
-	// Clear Cart After process is complete.
-	$wt_cart->clear();
+	if ( isset( $wt_cart ) ) {
+		// Clear Cart After process is complete.
+		$wt_cart->clear();
+	}
 
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
