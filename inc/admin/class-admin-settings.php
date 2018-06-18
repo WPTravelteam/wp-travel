@@ -838,7 +838,6 @@ class WP_Travel_Admin_Settings {
 					
 				</td>
 			</tr>
-			<?php var_dump( $trip_tax_price_inclusive ); ?>
 			<tr id="wp-travel-tax-percentage" <?php echo 'yes' == $trip_tax_price_inclusive ? 'style="display:none;"' : 'style="display:table-row;"'; ?> >
 				<th><label for="trip_tax_percentage_output"><?php esc_html_e( 'Tax Percentage', 'wp-travel' ) ?></label></th>
 				<td>
