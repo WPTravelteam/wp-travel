@@ -138,16 +138,16 @@
 
 
     // Tax options change function.
-    if ($('#trip_tax_enable').is(':checked')) {
-        $('#wp-travel-tax-percentage').show();
-        $('#wp-travel-tax-price-options').show();
-        $('#trip_tax_percentage_output').attr('required', true)
+    // if ($('#trip_tax_enable').is(':checked')) {
+    //     $('#wp-travel-tax-percentage').show();
+    //     $('#wp-travel-tax-price-options').show();
+    //     $('#trip_tax_percentage_output').attr('required', true)
 
-    } else {
-        $('#wp-travel-tax-percentage').hide();
-        $('#wp-travel-tax-price-options').hide();
-        $('#trip_tax_percentage_output').attr('required', false)
-    }
+    // } else {
+    //     $('#wp-travel-tax-percentage').hide();
+    //     $('#wp-travel-tax-price-options').hide();
+    //     $('#trip_tax_percentage_output').attr('required', false)
+    // }
 
     $('#trip_tax_enable').change(function() {
         if ($(this).is(':checked')) {
@@ -236,6 +236,18 @@
             jQuery(this).val('')
             jQuery(this).siblings('.options-holder').append('<p>' + val + '<input type="hidden" name="' + jQuery(this).attr('name') + '[]" value="' + val + '"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>')
         }
+    });
+
+    $('[name="trip_tax_price_inclusive"]').change(function() {
+
+        if ('yes' === $(this).val()) {
+            $('#wp-travel-tax-percentage').hide();
+            $('#trip_tax_percentage_output').attr('required', false);
+        } else {
+            $('#wp-travel-tax-percentage').show();
+            $('#trip_tax_percentage_output').attr('required', true);
+        }
+
     });
 
 

@@ -316,47 +316,23 @@
     // Add itineraries Data Row.
     $('#add_itinerary_row').click(function(e) {
         e.preventDefault();
-        var wp_travel_rand_integer = Math.floor(Math.random() * 100000) + 1;
-        var wp_travel_itinerary_id = 'wp_travel_itinerary_data_' + wp_travel_rand_integer;
-        // var wp_travel_editor_settings = tinyMCEPreInit.mceInit.content;
-        $.ajax({
-            type: "POST",
-            url: ajaxurl,
-            data: {
-                'action': 'wp_travel_add_itinerary_content_data',
-                'default_text': 'Add Itinerary Description',
-                'itinerary_id': wp_travel_itinerary_id
-            },
-            success: function(response) {
-                $('.itinerary_block').append(response);
-                // tinyMCE.execCommand('mceAddEditor', true, wp_travel_itinerary_id);
-                // quicktags({ id: wp_travel_itinerary_id });
-                $('.itinerary_block .panel:last .wp-travel-datepicker').datepicker({
-                    language: 'en',
-                    minDate: new Date()
-                });
-                $('.itinerary_block .panel:last .wp-travel-timepicker').datepicker({
-                    language: 'en',
-                    timepicker: true,
-                    onlyTimepicker: true,
+        var template = wp.template('wp-travel-itinerary-items');
+        var rand = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
+        $('.itinerary_block').append(template({ random: rand }));
 
-                });
-                return false;
-            }
+        $('.itinerary_block .panel:last .wp-travel-datepicker').datepicker({
+            language: 'en',
+            minDate: new Date()
+        });
+        $('.itinerary_block .panel:last .wp-travel-timepicker').datepicker({
+            language: 'en',
+            timepicker: true,
+            onlyTimepicker: true,
+
         });
 
-        // function get_tinymce_content(id) {
-        //     var content;
-        //     var inputid = id;
-        //     var editor = tinyMCE.get(inputid);
-        //     var textArea = $('textarea#' + inputid);
-        //     if (textArea.length > 0 && textArea.is(':visible')) {
-        //         content = textArea.val();
-        //     } else {
-        //         content = editor.getContent();
-        //     }
-        //     return content;
-        // }
+        $('.while-empty').hide();
+        $('.wp-collapse-open').show();
 
     });
     //Remove Itinerary Data Row.
@@ -721,6 +697,5 @@
 
         }
     });
-
 
 }(jQuery));

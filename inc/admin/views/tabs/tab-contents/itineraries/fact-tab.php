@@ -226,5 +226,5 @@ $fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_val
 <?php 
 } else {
 	$settings_url = site_url( 'wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts' );
-	printf( __( 'There are no labels set currently. Click %1$1shere%2$2s to add one.', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
+	printf( __( 'There are no labels set currently. Click %1$1shere%2$2s to add one.', 'wp-travel' ), '<a href="' . $settings_url . '">', '</a>' );
 }

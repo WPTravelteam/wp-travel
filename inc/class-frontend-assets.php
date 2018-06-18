@@ -39,8 +39,8 @@ class WP_Travel_Frontend_Assets {
 
 		if ( wp_travel_is_checkout_page() ) {
 
-			wp_enqueue_script( 'wp-travel-modernizer', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/modernizer/modernizr.min.js', array('jquery'), '', true );
-			wp_enqueue_script( 'wp-travel-sticky-kit', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/sticky-kit/sticky-kit.min.js', array('jquery'), '', true );
+			wp_enqueue_script( 'wp-travel-modernizer', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/modernizer/modernizr.min.js', array('jquery'), WP_TRAVEL_VERSION, true );
+			wp_enqueue_script( 'wp-travel-sticky-kit', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/sticky-kit/sticky-kit.min.js', array('jquery'), WP_TRAVEL_VERSION, true );
 		}
 
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
