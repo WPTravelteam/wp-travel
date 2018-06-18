@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
 
 == Description ==
-"WP Travel" is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin.
+"WP Travel" is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin. WP Travel is scalable, powerful and probably, the easiest plugin available in WordPress to manage packages and booking
 
 * Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solution.
 * Checkout ["Demo"](http://wptravel.io/demo).
@@ -112,6 +112,21 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Upload the wp-travel directory to the /wp-content/plugins/ directory
 * Activate the plugin in the Plugin dashboard
 
+== WP Travel documentation and user guide ==
+For setting up your site using the WP travel plugin please refer to below given link:
+
+[Documentation page](http://wptravel.io/documentations/) 
+
+== Where can i get support? ==
+
+ If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/) 
+ 
+
+== Is WP Travel plugin free? ==
+
+Yes, WP Travel plugin is and will always be free. 
+
+
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
@@ -136,7 +151,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.4.2 =
-* New Feature: Frontend Google Maps set zoom level. 
+* New Feature: Frontend Google Maps set zoom level.
 * Fixes: Booking Only form issue fixing.
 * Fixes: Backend link in gallery drop area issue fixed.
 * Fixes: Fixed departure dates selection issue fixed.
