@@ -48,11 +48,15 @@ function wp_travel_get_booking_form() {
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 	$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+	$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 
 	if ( 'yes' === $fixed_departure ) {
-		$booking_fileds['arrival_date']['default'] = date( 'm/d/Y', strtotime( $trip_start_date ) );
+		$fields['arrival_date']['class'] = '';
+		$fields['arrival_date']['default'] = date( 'm/d/Y', strtotime( $trip_start_date ) );
 		$fields['arrival_date']['type'] = 'hidden';
-		unset( $fields['departure_date'] );
+		$fields['departure_date']['class'] = '';
+		$fields['departure_date']['default'] = date( 'm/d/Y', strtotime( $trip_end_date ) );
+		$fields['departure_date']['type'] = 'hidden';
 		unset( $fields['trip_duration'] );
 	}
 

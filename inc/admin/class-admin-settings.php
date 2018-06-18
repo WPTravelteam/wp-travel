@@ -1016,6 +1016,8 @@ class WP_Travel_Admin_Settings {
 			$currency 				= ( isset( $_POST['currency'] ) && '' !== $_POST['currency'] ) ? $_POST['currency'] : '';
 			$google_map_api_key 	= ( isset( $_POST['google_map_api_key'] ) && '' !== $_POST['google_map_api_key'] ) ? $_POST['google_map_api_key'] : '';
 
+			$google_map_zoom_level 	= ( isset( $_POST['google_map_zoom_level'] ) && '' !== $_POST['google_map_zoom_level'] ) ? $_POST['google_map_zoom_level'] : '';
+
 			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
 
@@ -1060,6 +1062,7 @@ class WP_Travel_Admin_Settings {
 
 			$settings['currency'] = $currency;
 			$settings['google_map_api_key'] = $google_map_api_key;
+			$settings['google_map_zoom_level'] = $google_map_zoom_level;
 			$settings['hide_related_itinerary'] = $hide_related_itinerary;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
 			
