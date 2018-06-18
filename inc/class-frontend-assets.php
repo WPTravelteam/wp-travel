@@ -63,6 +63,8 @@ class WP_Travel_Frontend_Assets {
 		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
 			$map_data = get_wp_travel_map_data();
 
+			$map_zoom_level = isset( $settings['google_map_zoom_level'] ) && '' != $settings['google_map_zoom_level'] ? $settings['google_map_zoom_level'] : 15;
+
 			$api_key = '';
 			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 				$api_key = $settings['google_map_api_key'];
@@ -82,9 +84,10 @@ class WP_Travel_Frontend_Assets {
 				wp_register_script( 'wp-travel-maps', $this->assets_path . 'assets/js/wp-travel-front-end-map.js', array( 'jquery', 'jquery-gmaps' ), WP_TRAVEL_VERSION, 1 );
 
 				$wp_travel = array(
-					'lat' => $map_data['lat'],
-					'lng' => $map_data['lng'],
-					'loc' => $map_data['loc'],
+					'lat'  => $map_data['lat'],
+					'lng'  => $map_data['lng'],
+					'loc'  => $map_data['loc'],
+					'zoom' => $map_zoom_level,
 				);
 
 				$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel );

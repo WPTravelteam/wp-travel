@@ -154,6 +154,8 @@ class WP_Travel_Admin_Settings {
 		$currency = ( isset( $args['settings']['currency'] ) && '' != $args['settings']['currency'] ) ? $args['settings']['currency'] : 'USD';
 		$google_map_api_key = isset( $args['settings']['google_map_api_key'] ) ? $args['settings']['google_map_api_key'] : '';
 
+		$google_map_zoom_level = isset( $args['settings']['google_map_zoom_level'] ) ? $args['settings']['google_map_zoom_level'] : 15;
+
 		$selected_cart_page = isset( $args['settings']['cart_page_id'] ) ? $args['settings']['cart_page_id'] : wp_travel_get_page_id('wp-travel-cart');
 
 		$selected_checkout_page = isset( $args['settings']['checkout_page_id'] ) ? $args['settings']['checkout_page_id'] : wp_travel_get_page_id('wp-travel-checkout');
@@ -184,6 +186,14 @@ class WP_Travel_Admin_Settings {
 				echo '<td>';
 					echo '<input type="text" value="' . esc_attr( $google_map_api_key ) . '" name="google_map_api_key" id="google_map_api_key"/>';
 					echo '<p class="description">' . sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) . '</p>';
+				echo '</td>';
+			echo '<tr>';
+			echo '<tr>';
+				echo '<th>';
+					echo '<label for="google_map_zoom_level">' . esc_html__( 'Map Zoom Level', 'wp-travel' ) . '</label>';
+				echo '</th>';
+				echo '<td>';
+					echo '<input type="number" value="' . esc_attr( $google_map_zoom_level ) . '" name="google_map_zoom_level" id="google_map_zoom_level"/>';
 				echo '</td>';
 			echo '<tr>';
 		echo '</table>';
