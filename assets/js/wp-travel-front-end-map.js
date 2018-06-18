@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
         });
 
         map.setCenter(wp_travel.lat, wp_travel.lng);
-        map.setZoom(wp_travel.zoom);
+        map.setZoom(parseInt(wp_travel.zoom));
         map.addMarker({
             lat: wp_travel.lat,
             lng: wp_travel.lng,

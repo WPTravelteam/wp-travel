@@ -193,7 +193,7 @@ class WP_Travel_Admin_Settings {
 					echo '<label for="google_map_zoom_level">' . esc_html__( 'Map Zoom Level', 'wp-travel' ) . '</label>';
 				echo '</th>';
 				echo '<td>';
-					echo '<input type="number" value="' . esc_attr( $google_map_zoom_level ) . '" name="google_map_zoom_level" id="google_map_zoom_level"/>';
+					echo '<input step="1" min="1" type="number" value="' . esc_attr( $google_map_zoom_level ) . '" name="google_map_zoom_level" id="google_map_zoom_level"/>';
 				echo '</td>';
 			echo '<tr>';
 		echo '</table>';
