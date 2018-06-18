@@ -112,25 +112,25 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Upload the wp-travel directory to the /wp-content/plugins/ directory
 * Activate the plugin in the Plugin dashboard
 
-== WP Travel documentation and user guide ==
-For setting up your site using the WP travel plugin please refer to below given link:
-
-[Documentation page](http://wptravel.io/documentations/) 
-
-== Where can i get support? ==
-
- If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/) 
- 
-
-== Is WP Travel plugin free? ==
-
-Yes, WP Travel plugin is and will always be free. 
-
 
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
 Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
+
+= WP Travel documentation and user guide =
+ For setting up your site using the WP travel plugin please refer to below given link:
+
+[Documentation page](http://wptravel.io/documentations/) 
+
+= Where can I get support? =
+
+ If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/) 
+ 
+
+= Will WP Travel work with other theme? =
+
+WP Travel plugin has been tested with the default WordPress theme. It specially works best with the Travel Log theme. [Travel Log](http://wensolutions.com/themes/travel-log/)
 
 == Screenshots ==
 1. Backend: Settings
@@ -151,7 +151,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.4.2 =
-* New Feature: Frontend Google Maps set zoom level.
+* New Feature: Frontend Google Maps set zoom level. 
 * Fixes: Booking Only form issue fixing.
 * Fixes: Backend link in gallery drop area issue fixed.
 * Fixes: Fixed departure dates selection issue fixed.
