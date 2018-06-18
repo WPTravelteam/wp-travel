@@ -136,6 +136,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.4.2 =
+* New Feature: Frontend Google Maps set zoom level. 
 * Fixes: Booking Only form issue fixing.
 * Fixes: Backend link in gallery drop area issue fixed.
 * Fixes: Fixed departure dates selection issue fixed.
