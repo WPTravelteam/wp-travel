@@ -102,6 +102,8 @@ class WP_Travel_Frontend_Assets {
 				'cartUrl' => wp_travel_get_cart_url(),
 			);
 
+			$frontend_vars = apply_filters( 'wp_travel_js_frontend_vars', $frontend_vars );
+
 			wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
 
 			// Enqueued script.

@@ -536,6 +536,14 @@ function wp_travel_book_now() {
 	$order_id = wp_insert_post( $post_array );
 	update_post_meta( $order_id, 'order_data', $_POST );
 
+	// Update Booking Title.
+	$update_data_array = array(
+		'ID'           => $order_id,
+		'post_title' => 'Booking - # ' . $order_id,
+	);
+
+	$order_id = wp_update_post( $update_data_array );
+
 	$trip_id = sanitize_text_field( $trip_id );
 	$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 	$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
