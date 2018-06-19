@@ -2926,7 +2926,21 @@ ul.wp-travel-error {
 
 
 //checkout page
+
 .checkout-page-wrap {
+
+    @media (min-width:768px){
+        .wp-travel-minicart{
+            float:right;
+            position:static;
+
+            .is_stuck{
+                & ~ div {
+                    display:none;
+                }
+            }
+        }
+    }
     .checkout-block {
         background-color: #fff;
         padding: 20px 15px;
