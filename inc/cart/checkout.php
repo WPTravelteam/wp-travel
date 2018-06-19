@@ -133,8 +133,6 @@ $form_field = new WP_Travel_FW_Field(); ?>
 				parent: ".container",
 				offset_top:120
 			  });
-			}else{
-				$(".container .sticky-sidebar").trigger("sticky_kit:detach");
 			}
 		},1000)
 	}
