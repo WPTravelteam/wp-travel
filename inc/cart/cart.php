@@ -37,6 +37,11 @@ $settings        = wp_travel_get_settings();
 $currency_code 	 = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 $per_person_text = wp_travel_get_price_per_text( $trip_id );
+
+// Print Errors / Notices.
+WP_Travel()->notices->print_notices( 'error', true );
+WP_Travel()->notices->print_notices( 'success', true );
+
 ?>
 
 <!-- CART HTML START -->
@@ -136,6 +141,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 								<!--<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>-->
 								<input type="number" class="input-text wp-travel-pax text" step="1" <?php echo $min_attr; ?> <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ) ?>" >
+								<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" >
 							</div>
 						</td>
 						<td class="product-subtotal text-right" data-title="Total">
@@ -181,8 +187,12 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				<?php endif; ?>
 				<tr>
 					<td>
-					
+						<div class="coupon">
+							<input type="text" name="wp_travel_coupon_code_input" class="input-text" id="coupon_code" value="" placeholder="Coupon code"> 
+							<input type="submit" class="button wp-travel-apply-coupon-btn" name="apply_coupon" value="Apply coupon">
+						</div>
 					</td>
+
 					<td>
 						<div class="actions">
 							<button disabled onclick="javascript:void(0)"  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ) ?></button>					

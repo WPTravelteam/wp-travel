@@ -13,6 +13,10 @@ class WP_Travel_Ajax {
 		add_action( 'wp_ajax_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
 
+		//Apply Coupon
+		add_action( 'wp_ajax_wt_cart_apply_coupon', array( $this, 'wt_cart_apply_coupon' ) );
+		add_action( 'wp_ajax_nopriv_wt_cart_apply_coupon', array( $this, 'wt_cart_apply_coupon' ) );
+
 		// Delete cart item
 		add_action( 'wp_ajax_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
@@ -70,6 +74,64 @@ class WP_Travel_Ajax {
 		foreach( $_POST['update_cart_fields'] as $cart_field ) {
 			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'] );
 		}
+
+		echo true;
+		die;
+	}
+
+	function wt_cart_apply_coupon() {		
+		if ( ! isset( $_POST['CouponCode'] ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['trip_ids'] ) ) {
+			return;
+		}
+
+		if ( empty( $_POST['CouponCode'] ) ) {
+
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
+
+			return;
+		}
+
+		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $_POST['CouponCode'] );
+
+		if ( ! $coupon_id ) {
+
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>Invalid Coupon Code', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		$date_validity = WP_Travel()->coupon->is_coupon_valid( $coupon_id );
+
+		if ( ! $date_validity ) {
+
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		$trip_ids = $_POST['trip_ids'];
+
+		$trips_validity = WP_Travel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
+
+		if ( ! $trips_validity ) {
+
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		return;
+
+		global $wt_cart;
+
+		
 
 		echo true;
 		die;

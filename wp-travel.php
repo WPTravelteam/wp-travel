@@ -114,6 +114,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
+			$this->coupon  = new WP_Travel_Coupon();
 		}
 
 		/**
@@ -178,6 +179,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
+
+			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
 
 			include_once sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );

@@ -84,6 +84,30 @@ jQuery(document).ready(function($) {
         });
     });
 
+    // Apply Coupon
+    $('.wp-travel-apply-coupon-btn').click(function(e) {
+        e.preventDefault();
+        var trip_ids = {};
+        $('.ws-theme-cart-page tr.responsive-cart').each(function(i) {
+            trip_id = $(this).find('input[name="trip_id"]').val();
+            trip_ids[i] = trip_id;
+        });
+
+        var CouponCode = $('input[name="wp_travel_coupon_code_input"]').val();
+
+        $.ajax({
+            type: "POST",
+            url: wp_travel_frontend_vars.ajaxUrl,
+            data: { trip_ids, CouponCode, 'action': 'wt_cart_apply_coupon' },
+            beforeSend: function() {},
+            success: function(data) {
+                if (data) {
+                    location.reload();
+                }
+            }
+        });
+    });
+
     $('.wp-travel-pax').on('change', function() {
         $('.wp-travel-update-cart-btn').removeAttr('disabled', 'disabled');
         $('.book-now-btn').attr('disabled', 'disabled');

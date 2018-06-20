@@ -50,7 +50,7 @@ class WP_Travel_Notices {
 
 			foreach ( $notices as $key => $notice ) {
 
-				echo '<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice">' . $notice . '</p>';
+				echo '<div class="wp-travel-error">' . $notice . '</div>';
 
 			}
 			return;
@@ -59,7 +59,7 @@ class WP_Travel_Notices {
 
 			foreach ( $notices as $key => $notice ) {
 
-				echo '<p class="col-xs-12 wp-travel-notice-success wp-travel-notice">' . $notice . '</p>';
+				echo '<div class="wp-travel-message">' . $notice . '</div>';
 
 			}
 			return;
