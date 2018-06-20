@@ -166,13 +166,13 @@ WP_Travel()->notices->print_notices( 'success', true );
 					
 					<tr>
 						<th>
-							<p><strong><?php esc_html_e( 'Discount', 'wp-travel' ); ?></strong></p>
-							<p><strong><?php esc_html_e( 'Coupon Discount: ', 'wp-travel' ); ?></strong>
-							
+							<p><strong><?php esc_html_e( 'Coupon Discount: ', 'wp-travel' ); ?><span class="tax-percent">
+								<?php echo esc_html( $discounts['value'] ); echo 'percentage' === $discounts['type'] ? ' %' : wp_travel_get_currency_symbol(); ?>
+							</span></strong>
 							</p>
 						</th>
 						<td  class="text-right">
-							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong></p>
+							<p><strong> - <span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong></p>
 						</td>
 					</tr>
 
@@ -180,7 +180,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 				<?php if ( $tax_rate = wp_travel_is_taxable() ) : ?>
 					<tr>
 						<th>
-							<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
+							<p><strong><?php esc_html_e( 'Subtotal:', 'wp-travel' ); ?></strong></p>
 							<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?> 
 							<span class="tax-percent">
 								<?php echo esc_html( $tax_rate ); esc_html_e( '%', 'wp-travel' ); ?>
