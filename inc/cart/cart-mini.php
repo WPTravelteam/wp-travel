@@ -100,14 +100,13 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 					<tr>
 						<th>
-							<p><strong><?php esc_html_e( 'Discount', 'wp-travel' ); ?></strong></p>
-							<p><strong><?php esc_html_e( 'Coupon Discount ', 'wp-travel' ); ?> 
+							<span><strong><?php esc_html_e( 'Coupon Discount ', 'wp-travel' ); ?> </strong></span>
 						</th>
 						<td  class="text-right">
-							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong></p>
+							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong>
 						</td>
 						<td  class="text-right f-partial-payment">
-							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong></p>
+							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong>
 						</td>
 					</tr>
 

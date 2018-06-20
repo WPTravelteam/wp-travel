@@ -370,7 +370,7 @@ class WP_Travel_Cart {
 		$total_trip_price = $total_trip_price_after_dis + $tax_amount;
 
 		$total_trip_price_partial_after_dis = $sub_total_partial - $discount_amount_partial;
-		$total_trip_price_partial = $total_trip_price_partial_after_dis - $tax_amount_partial;
+		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial;
 
 		$get_total = array(
 			'sub_total' => $total_trip_price_after_dis,
