@@ -39,7 +39,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( self::$post_type . '-detail', __( 'Coupon Options', 'wp-travel-coupon-pro' ), array( $this, 'load_coupons_tab_template' ), self::$post_type, 'normal', 'high' );
+		add_meta_box( self::$post_type . '-detail', __( 'Coupon Options', 'wp-travel' ), array( $this, 'load_coupons_tab_template' ), self::$post_type, 'normal', 'high' );
 
 	}
 	/**
@@ -59,13 +59,13 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 */
 	public function add_tabs( $tabs ) {
 		$coupons['coupons_general'] = array(
-			'tab_label'     => __( 'General', 'wp-travel-coupon-pro' ),
-			'content_title' => __( 'General Settings', 'wp-travel-coupon-pro' ),
+			'tab_label'     => __( 'General', 'wp-travel' ),
+			'content_title' => __( 'General Settings', 'wp-travel' ),
 		);
 
 		$coupons['coupons_restrictions'] = array(
-			'tab_label'     => __( 'Restrictions', 'wp-travel-coupon-pro' ),
-			'content_title' => __( 'Coupon Restrictions', 'wp-travel-coupon-pro' ),
+			'tab_label'     => __( 'Restrictions', 'wp-travel' ),
+			'content_title' => __( 'Coupon Restrictions', 'wp-travel' ),
 		);
 
 		// $coupons['coupons_usage_limits'] = array(

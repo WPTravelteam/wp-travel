@@ -18,7 +18,7 @@
 		<tr>
 			<td>
 				<label for=""><?php echo esc_html( 'Restrict Coupon to Trips', 'wp-travel-coupon-pro' ); ?></label>
-					<span class="tooltip-area" title="<?php esc_html_e( 'Choose to apply coupons to certain trips only. Deselect all to apply to all trips', 'wp-travel-coupon-pro' ); ?>">
+					<span class="tooltip-area" title="<?php esc_html_e( 'Choose to apply coupons to certain trips only. Deselect all to apply to all trips', 'wp-travel' ); ?>">
                			<i class="fa fa-question-circle" aria-hidden="true"></i>
            			</span>
 			</td>
@@ -35,9 +35,9 @@
 						$multiple_checked_all = 'checked=checked';
 					}
 
-					$multiple_checked_text = __( 'Select multiple', 'wp-travel-coupon-pro' );
+					$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
 					if ( $count_itineraries > 0 ) {
-						$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel-coupon-pro' );
+						$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
 					}
 
 				?>
@@ -48,7 +48,7 @@
 						<ul class="wp-travel-multi-inner">
 							<li class="wp-travel-multi-inner">
 								<label class="checkbox wp-travel-multi-inner">
-									<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel-coupon-pro' ); ?>
+									<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel' ); ?>
 								</label>
 							</li>
 							<?php
@@ -80,8 +80,8 @@
 
 		<tr>
 			<td>
-				<label for="coupon-limit"><?php esc_html_e( 'Coupon Usage Limit', 'wp-travel-coupon-pro' ); ?></label>
-				<span class="tooltip-area" title="<?php esc_html_e( 'No. of times coupon can be used before being obsolute.', 'wp-travel-coupon-pro' ); ?>">
+				<label for="coupon-limit"><?php esc_html_e( 'Coupon Usage Limit', 'wp-travel' ); ?></label>
+				<span class="tooltip-area" title="<?php esc_html_e( 'No. of times coupon can be used before being obsolute.', 'wp-travel' ); ?>">
                		<i class="fa fa-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>

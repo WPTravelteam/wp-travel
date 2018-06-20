@@ -29,7 +29,7 @@
 	<tbody>
 		<tr>
 			<td>
-				<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel-coupon-pro' ); ?></label>
+				<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel' ); ?></label>
 			</td>
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
@@ -50,36 +50,36 @@
 		<tr>
 		<tr>
 			<td>
-				<label for="coupon-code"><?php esc_html_e( 'Coupon Code', 'wp-travel-coupon-pro' ); ?></label>
-				<span class="tooltip-area" title="<?php esc_html_e( 'Unique Identifier for the coupon.', 'wp-travel-coupon-pro' ); ?>">
+				<label for="coupon-code"><?php esc_html_e( 'Coupon Code', 'wp-travel' ); ?></label>
+				<span class="tooltip-area" title="<?php esc_html_e( 'Unique Identifier for the coupon.', 'wp-travel' ); ?>">
                		<i class="fa fa-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
 			<td>
-				<input type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel-coupon-pro' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
+				<input type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
 			</td>
 		</tr>
 		<tr>
-			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel-coupon-pro' ); ?></label>
-				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart total price ).', 'wp-travel-coupon-pro' ); ?>">
+			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel' ); ?></label>
+				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart total price ).', 'wp-travel' ); ?>">
                		<i class="fa fa-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
 			<td>
 				<select id="coupon-type" name="wp_travel_coupon[general][coupon_type]">
-					<option value="fixed" <?php selected( $coupon_type, 'fixed' ); ?>><?php esc_html_e( 'Fixed Discount', 'wp-travel-coupon-pro' ); ?></option>
-					<option value="percentage" <?php selected( $coupon_type, 'percentage' ); ?>><?php esc_html_e( 'Percentage Discount', 'wp-travel-coupon-pro' ); ?></option>
+					<option value="fixed" <?php selected( $coupon_type, 'fixed' ); ?>><?php esc_html_e( 'Fixed Discount', 'wp-travel' ); ?></option>
+					<option value="percentage" <?php selected( $coupon_type, 'percentage' ); ?>><?php esc_html_e( 'Percentage Discount', 'wp-travel' ); ?></option>
 				</select>
 			</td>
 		</tr>
 		<tr>
-			<td><label for="coupon-value"><?php esc_html_e( 'Coupon Value', 'wp-travel-coupon-pro' ); ?></label>
-				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon value amount/percentage', 'wp-travel-coupon-pro' ); ?>">
+			<td><label for="coupon-value"><?php esc_html_e( 'Coupon Value', 'wp-travel' ); ?></label>
+				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon value amount/percentage', 'wp-travel' ); ?>">
 					<i class="fa fa-question-circle" aria-hidden="true"></i>
 				</span>
 			</td>
 			<td>
-				<input type="number" min="1" <?php echo 'percentage' === $coupon_type ? 'max="100"' : ''; ?> step="0.01" id="coupon-value" name="wp_travel_coupon[general][coupon_value]" placeholder="<?php echo esc_attr__( 'Coupon Value', 'wp-travel-coupon-pro' ); ?>" value="<?php echo esc_attr( $coupon_value ); ?>">
+				<input type="number" min="1" <?php echo 'percentage' === $coupon_type ? 'max="100"' : ''; ?> step="0.01" id="coupon-value" name="wp_travel_coupon[general][coupon_value]" placeholder="<?php echo esc_attr__( 'Coupon Value', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_value ); ?>">
 				<span <?php echo 'percentage' === $coupon_type ? 'style="display:none;"' : ''; ?> id="coupon-currency-symbol" class="wp-travel-currency-symbol">
 						<?php echo wp_travel_get_currency_symbol(); ?>
 				</span>
@@ -90,8 +90,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td><label for="coupon-expiry-date"><?php esc_html_e( 'Coupon Expiry Date', 'wp-travel-coupon-pro' ); ?>
-			<span class="tooltip-area" title="<?php esc_html_e( 'Coupon expiration date. Leave blank to disable expiration.', 'wp-travel-coupon-pro' ); ?>">
+			<td><label for="coupon-expiry-date"><?php esc_html_e( 'Coupon Expiry Date', 'wp-travel' ); ?>
+			<span class="tooltip-area" title="<?php esc_html_e( 'Coupon expiration date. Leave blank to disable expiration.', 'wp-travel' ); ?>">
                		<i class="fa fa-question-circle" aria-hidden="true"></i>
            		</span>
 			</label>

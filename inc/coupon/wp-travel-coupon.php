@@ -86,7 +86,7 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_VERSION', $this->version );
-			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_NAME', __( 'WP Travel Coupon Pro', 'wp-travel-coupon-pro' ) );
+			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_NAME', __( 'WP Travel Coupon Pro', 'wp-travel' ) );
 		}
 
 		/**
