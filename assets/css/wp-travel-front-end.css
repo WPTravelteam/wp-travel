@@ -1929,7 +1929,6 @@ ul.availabily-list {
         padding-left: 10px; }
 
 .ws-theme-cart-page .product-thumbnail img {
-  max-width: 60px;
   margin-bottom: 0; }
 
 .ws-theme-cart-page {
@@ -2125,9 +2124,10 @@ ul.availabily-list {
       padding: 5px;
       text-align: center; }
   .ws-theme-cart-page .coupon input[type="text"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="text"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon select[type="text"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="text"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon textarea[type="text"] {
-    height: 42px;
+    height: 40px;
     border-radius: 0;
-    padding: 5px 10px; }
+    padding: 5px 10px;
+    margin-top: -1px; }
   .ws-theme-cart-page .coupon input[type="submit"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon select[type="submit"], .ws-theme-cart-page .coupon .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="submit"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .ws-theme-cart-page .coupon textarea[type="submit"] {
     padding: 11px 15px;
     border-radius: 0;

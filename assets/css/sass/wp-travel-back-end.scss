@@ -1613,6 +1613,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
+/* coupon tab */
+.wp-travel-info-msg {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.wp-travel-error-msg {
+    background-color: #F44336;
+    color: #fff;
+    padding: 5px 15px;
+}
+
 //end
 @include tab {
     .left-block,

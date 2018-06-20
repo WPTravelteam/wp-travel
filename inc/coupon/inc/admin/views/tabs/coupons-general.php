@@ -29,7 +29,7 @@
 	<tbody>
 		<tr>
 			<td>
-				<label for="currency"><?php esc_html_e( 'Active ', 'wp-travel-coupon-pro' ); ?></label>
+				<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel-coupon-pro' ); ?></label>
 			</td>
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
@@ -39,7 +39,13 @@
 						</span>
 					</label>
 				</span>
-				<p class="description"><?php esc_html_e( 'Activate Coupon', 'wp-travel-coupon-pro' ); ?></p>
+
+				<span class="wp-travel-info-msg">
+					Active
+				</span>
+				<span class="wp-travel-error-msg">
+					Expired
+				</span>
 			</td>
 		<tr>
 		<tr>

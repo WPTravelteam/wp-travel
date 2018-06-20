@@ -2574,7 +2574,6 @@ ul.availabily-list {
 .ws-theme-cart-page {
     .product-thumbnail {
         img {
-            max-width: 60px;
             margin-bottom: 0;
         }
     }
@@ -2805,9 +2804,10 @@ ul.availabily-list {
     }
     .coupon {
         input[type="text"] {
-            height: 42px;
+            height: 40px;
             border-radius: 0;
             padding: 5px 10px;
+            margin-top: -1px;
         }
         input[type="submit"]{
             padding: 11px 15px;
