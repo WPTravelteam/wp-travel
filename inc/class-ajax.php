@@ -127,11 +127,37 @@ class WP_Travel_Ajax {
 
 		}
 
-		return;
+		$coupon_metas = get_post_meta( $post->ID, 'wp_travel_coupon_metas', true );
+		$restrictions_tab  = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
+		$coupon_limit_number  = isset( $restrictions_tab['coupon_limit_number'] ) ? $restrictions_tab['coupon_limit_number'] : '';
 
+		if ( ! empty( $coupon_limit_number ) ) {
+
+			$usage_count = WP_Travel()->coupon->get_usage_count( $coupon_id );
+
+			if ( '' === $usage_count ){
+				$usage_count = 0;
+			}
+
+			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
+
+				WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
+
+				return;
+
+			}
+
+		}
+
+		// Prepare Coupon Application.
 		global $wt_cart;
 
-		
+		$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
+		$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
+
+		$wt_cart->add_discount_values( $discount_type, $discount_amount );
+
+		print_r( $wt_cart );
 
 		echo true;
 		die;

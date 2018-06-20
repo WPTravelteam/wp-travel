@@ -44,6 +44,13 @@ class WP_Travel_Cart {
 	private $items = array();
 
 	/**
+	 * Cart Discounts.
+	 *
+	 * @var array
+	 */
+	private $discounts = array();
+
+	/**
 	 * Cart item attributes.
 	 *
 	 * @var array
@@ -176,22 +183,28 @@ class WP_Travel_Cart {
 	private function write() {
 		$cart_attributes_session_name = $this->cart_id . '_attributes';
 		$items = array();
-
+		
 		foreach ( $this->items as $id => $item ) {
 			if ( ! $id ) {
 				continue;
 			}
 			$items[ $id ] = $item;
 		}
-		$cart_items = WP_Travel()->session->set( $this->cart_id, $items );
+
+		$cart['cart_items'] = $items;
+		$cart['discounts'] = $this->discounts;
+ 
+		$cart_items = WP_Travel()->session->set( $this->cart_id, $cart );
 		// Cookie data to enable data info in js.
-		setcookie( 'wp_travel_cart', wp_json_encode( $cart_items ), time() + 604800, '/' );
+		setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
 	}
 	/**
 	 * Read items from cart session.
 	 */
 	private function read() {
-		$cart_items = WP_Travel()->session->get( $this->cart_id );
+		$cart = WP_Travel()->session->get( $this->cart_id );
+		$cart_items = $cart['cart_items'];
+		$this->discounts = $cart['discounts'];
 		
 		if ( ! empty( $cart_items ) ) {
 			foreach ( $cart_items as $id => $item ) {
@@ -226,6 +239,26 @@ class WP_Travel_Cart {
 		return false;
 	}
 
+	/**
+	 * Add Discount Values
+	 */
+	public function add_discount_values( $discount_type, $discount_value ) {
+
+		$this->discounts['type']  = $discount_type;
+		$this->discounts['value'] = $discount_value;
+
+		$this->write();
+
+		return true;
+
+	}
+	/**
+	 * Get discounts
+	 */
+	public function get_discounts() {
+
+		return $this->discounts;
+	}
 	
 	/**
 	 * Get list of items in cart.
@@ -246,6 +279,7 @@ class WP_Travel_Cart {
 	public function clear() {
 		$this->items = array();
 		$this->attributes = array();
+		$this->discounts = array();
 		$this->write();
 	}
 
@@ -273,11 +307,15 @@ class WP_Travel_Cart {
 
 		$trips = $this->items;
 
+		$discounts = $this->discounts;
+
 		$sub_total = 0;
 		$tax_amount = 0;
+		$discount_amount = 0;
 
 		$sub_total_partial = 0;
 		$tax_amount_partial = 0;
+		$discount_amount_partial = 0;
 
 		// Total amount without tax.
 		if ( is_array( $trips ) && count( $trips ) > 0 ) {
@@ -311,17 +349,39 @@ class WP_Travel_Cart {
 			$tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
 		endif;
 
-		$total_trip_price = $sub_total + $tax_amount;
-		$total_trip_price_partial = $sub_total_partial + $tax_amount_partial;
+		// Discounts Calculation.
+		if ( ! empty( $discounts ) ) {
+
+			$d_typ = $discounts['type'];
+			$d_val = $discounts['value'];
+
+			if ( 'fixed' === $d_typ ) {
+				$discount_amount = wp_travel_get_formated_price( $d_val );
+				$discount_amount_partial = wp_travel_get_formated_price( $d_val );
+			}
+			elseif( 'percentage' === $d_typ ) {
+				$discount_amount = wp_travel_get_formated_price( ( $sub_total * $d_val ) / 100 );
+				$discount_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $d_val ) / 100 );
+			}
+
+		}
+
+		$total_trip_price_after_dis = $sub_total - $discount_amount;
+		$total_trip_price = $total_trip_price_after_dis + $tax_amount;
+
+		$total_trip_price_partial_after_dis = $sub_total_partial - $discount_amount_partial;
+		$total_trip_price_partial = $total_trip_price_partial_after_dis - $tax_amount_partial;
 
 		$get_total = array(
-			'sub_total' => $sub_total,
+			'sub_total' => $total_trip_price_after_dis,
 			'tax'		=> $tax_amount,
+			'discount'  => $discount_amount,
 			'total'		=> $total_trip_price,
 
 			// Total payble amount // Same as above price if partial payment not enabled.
-			'sub_total_partial' => $sub_total_partial,
+			'sub_total_partial' => $total_trip_price_partial_after_dis,
 			'tax_partial'		=> $tax_amount_partial,
+			'discount_partial'  => $discount_amount_partial,
 			'total_partial'		=> $total_trip_price_partial,
 		);
 

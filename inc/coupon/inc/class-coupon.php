@@ -82,6 +82,32 @@ class WP_Travel_Coupon {
 		return false;
 
 	}
+	/**
+	 * get discount type
+	 */
+	public function get_discount_type ( $coupon_id ) {
+
+		// General Tab Data.
+		$coupon_metas       = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
+		$general_tab        = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
+		$coupon_type        = isset( $general_tab['coupon_type'] ) ? $general_tab['coupon_type'] : 'fixed';
+
+		return $coupon_type;
+
+	}
+	/**
+	 * get discount type
+	 */
+	public function get_discount_amount ( $coupon_id ) {
+
+		// General Tab Data.
+		$coupon_metas       = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
+		$general_tab        = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
+		$coupon_value       = isset( $general_tab['coupon_value'] ) ? $general_tab['coupon_value'] : '';
+		
+		return $coupon_value;
+
+	}
 
 	/**
 	 * get usage count
@@ -121,7 +147,7 @@ class WP_Travel_Coupon {
 
 		if ( empty( $restricted_trips ) ) {
 
-			return false;
+			return true;
 		}
 
 		foreach ( $trip_ids as $key => $trip_id ){

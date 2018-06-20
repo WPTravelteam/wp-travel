@@ -94,6 +94,24 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 			</tbody>
 			<tfoot>
 				<?php $cart_amounts = $wt_cart->get_total(); ?>
+				<?php 
+				$discounts = $wt_cart->get_discounts();
+				if ( is_array( $discounts ) && ! empty( $discounts ) ) : ?>
+
+					<tr>
+						<th>
+							<p><strong><?php esc_html_e( 'Discount', 'wp-travel' ); ?></strong></p>
+							<p><strong><?php esc_html_e( 'Coupon Discount ', 'wp-travel' ); ?> 
+						</th>
+						<td  class="text-right">
+							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong></p>
+						</td>
+						<td  class="text-right f-partial-payment">
+							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong></p>
+						</td>
+					</tr>
+
+				<?php endif; ?>
 				<?php if ( $tax_rate = wp_travel_is_taxable() ) : ?>
 					<tr>
 						<th>
