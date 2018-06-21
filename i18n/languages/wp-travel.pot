@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 06:48:55+00:00\n"
+"POT-Creation-Date: 2018-06-21 08:29:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1364,7 +1364,7 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:134 inc/cart/cart.php:59
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:153 inc/cart/cart.php:59
 msgid "Total"
 msgstr ""
 
@@ -1376,15 +1376,15 @@ msgstr ""
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:117
+#: inc/cart/cart-mini.php:127
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:118 inc/cart/cart.php:182
+#: inc/cart/cart-mini.php:128 inc/cart/cart.php:182
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:120 inc/cart/cart.php:184
+#: inc/cart/cart-mini.php:130 inc/cart/cart.php:184
 msgid "%"
 msgstr ""
 
@@ -1455,13 +1455,13 @@ msgstr ""
 msgid "<strong>Error :</strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:144
+#: inc/class-ajax.php:140
 msgid ""
 "<strong>Error :</strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:160
+#: inc/class-ajax.php:156
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -2939,16 +2939,6 @@ msgstr ""
 
 #: inc/coupon/inc/admin/class-admin-metaboxes.php:72
 msgid "Coupon Restrictions"
-msgstr ""
-
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:163
-msgid ""
-"<strong>Error :</strong>Coupon Code already exists. Please choose a Unique "
-"Coupon Code."
-msgstr ""
-
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:165
-msgid "<strong>Error :</strong>Coupon could not be saved"
 msgstr ""
 
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:29
