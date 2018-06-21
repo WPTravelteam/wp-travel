@@ -127,7 +127,7 @@ class WP_Travel_Ajax {
 
 		}
 
-		$coupon_metas = get_post_meta( $post->ID, 'wp_travel_coupon_metas', true );
+		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 		$restrictions_tab  = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
 		$coupon_limit_number  = isset( $restrictions_tab['coupon_limit_number'] ) ? $restrictions_tab['coupon_limit_number'] : '';
 

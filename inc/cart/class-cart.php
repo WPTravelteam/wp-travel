@@ -347,7 +347,7 @@ class WP_Travel_Cart {
 		// Adding tax to sub total;
 		if ( $tax_rate = wp_travel_is_taxable() ) : 
 			$tax_amount = wp_travel_get_formated_price( ( $sub_total * $tax_rate ) / 100 );
-			$tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
+			// $tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
 		endif;
 
 		// Discounts Calculation.
@@ -358,11 +358,11 @@ class WP_Travel_Cart {
 
 			if ( 'fixed' === $d_typ ) {
 				$discount_amount = wp_travel_get_formated_price( $d_val );
-				$discount_amount_partial = wp_travel_get_formated_price( $d_val );
+				// $discount_amount_partial = wp_travel_get_formated_price( $d_val );
 			}
 			elseif( 'percentage' === $d_typ ) {
 				$discount_amount = wp_travel_get_formated_price( ( $sub_total * $d_val ) / 100 );
-				$discount_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $d_val ) / 100 );
+				// $discount_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $d_val ) / 100 );
 			}
 
 		}

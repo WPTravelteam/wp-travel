@@ -106,7 +106,17 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong>
 						</td>
 						<td  class="text-right f-partial-payment">
-							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong>
+
+							<?php if ( 0 === $cart_amounts['discount_partial'] ) : ?>
+
+								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol">--</strong></p>
+
+							<?php else : ?>
+
+								<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong>
+							
+							<?php endif; ?>
+
 						</td>
 					</tr>
 
@@ -126,7 +136,16 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						</td>
 						<td  class="text-right f-partial-payment">
 							<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['sub_total_partial'] ) ); ?></strong></p>
-							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax_partial'] ) ); ?></strong></p>
+
+							<?php if ( 0 === $cart_amounts['tax_partial'] ) : ?>
+
+								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol">--</strong></p>
+
+							<?php else : ?>
+
+								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax_partial'] ) ); ?></strong></p>
+
+							<?php endif; ?>
 						</td>
 					</tr>
 				<?php endif; ?>
