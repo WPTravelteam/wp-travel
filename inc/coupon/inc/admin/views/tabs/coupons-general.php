@@ -67,7 +67,7 @@
            		</span>
 			</td>
 			<td>
-				<input type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
+				<input required="required" type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
 			</td>
 		</tr>
 		<tr>
@@ -90,7 +90,7 @@
 				</span>
 			</td>
 			<td>
-				<input type="number" min="1" <?php echo 'percentage' === $coupon_type ? 'max="100"' : ''; ?> step="0.01" id="coupon-value" name="wp_travel_coupon[general][coupon_value]" placeholder="<?php echo esc_attr__( 'Coupon Value', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_value ); ?>">
+				<input required="required" type="number" min="1" <?php echo 'percentage' === $coupon_type ? 'max="100"' : ''; ?> step="0.01" id="coupon-value" name="wp_travel_coupon[general][coupon_value]" placeholder="<?php echo esc_attr__( 'Coupon Value', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_value ); ?>">
 				<span <?php echo 'percentage' === $coupon_type ? 'style="display:none;"' : ''; ?> id="coupon-currency-symbol" class="wp-travel-currency-symbol">
 						<?php echo wp_travel_get_currency_symbol(); ?>
 				</span>

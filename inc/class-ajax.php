@@ -157,6 +157,8 @@ class WP_Travel_Ajax {
 
 		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount );
 
+			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
+
 		echo true;
 		die;
 	}
