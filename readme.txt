@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.6
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -150,12 +150,20 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.4.3 =
+* New Feature: Discount Coupon creation and usage for payments. 
+* Fixes: Booking code display issue fixing.
+* Fixes: Checkout issue fixings.
+* Fixes: Cart upadtes and functionality improvements. 
+* Fixes: Add new Itinerary freeze issue fixings.
+* Fixes: Minor issues and bugs fixes.
+
 = 1.4.2 =
 * New Feature: Frontend Google Maps set zoom level. 
 * Fixes: Booking Only form issue fixing.
 * Fixes: Backend link in gallery drop area issue fixed.
 * Fixes: Fixed departure dates selection issue fixed.
-* Fixes: Add new Itinerary freexe issue fixings.
+* Fixes: Add new Itinerary freeze issue fixings.
 
 = 1.4.1 =
 * Fixes: Minor issues and bugs fixes.
