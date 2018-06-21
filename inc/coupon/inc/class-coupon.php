@@ -227,7 +227,7 @@ class WP_Travel_Coupon {
 
 		if ( ! empty( $limit ) ) {
 
-			return ( $limit > $usage_count ) ? 'active' : 'inactive';
+			return ( $limit <= $usage_count ) ? 'inactive' : 'active';
 		}
 
 		return 'active';

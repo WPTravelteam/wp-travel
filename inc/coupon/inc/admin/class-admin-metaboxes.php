@@ -154,19 +154,6 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 		}
 
 		if ( isset( $_POST['wp_travel_coupon_code'] ) && ! empty( $_POST['wp_travel_coupon_code'] ) ) {
-			$coupon = WP_Travel()->coupon;
-
-			$coupon_id = $coupon->get_coupon_id_by_code( $_POST['wp_travel_coupon_code'] );
-
-			if ( $coupon_id ) {
-
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_coupon_creation_errors', __( '<strong>Error :</strong>Coupon Code already exists. Please choose a Unique Coupon Code.', 'wp-travel' ) ), 'error' );
-
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_coupon_creation_errors', __( '<strong>Error :</strong>Coupon could not be saved', 'wp-travel' ) ), 'error' );
-
-				return;
-
-			}
 
 			$coupon_code = $_POST['wp_travel_coupon_code'];
 

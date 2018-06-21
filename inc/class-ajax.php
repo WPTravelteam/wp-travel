@@ -135,10 +135,6 @@ class WP_Travel_Ajax {
 
 			$usage_count = WP_Travel()->coupon->get_usage_count( $coupon_id );
 
-			if ( '' === $usage_count ){
-				$usage_count = 0;
-			}
-
 			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
 
 				WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error :</strong>Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
