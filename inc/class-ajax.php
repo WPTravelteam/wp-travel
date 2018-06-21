@@ -155,9 +155,7 @@ class WP_Travel_Ajax {
 		$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
 		$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
 
-		$wt_cart->add_discount_values( $discount_type, $discount_amount );
-
-		print_r( $wt_cart );
+		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount );
 
 		echo true;
 		die;

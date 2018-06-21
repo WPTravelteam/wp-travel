@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-20 12:31:50+00:00\n"
+"POT-Creation-Date: 2018-06-21 06:19:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "WP Travel version: %s"
 msgstr ""
 
-#: inc/admin/admin-helper.php:433 inc/booking-functions.php:760
+#: inc/admin/admin-helper.php:433 inc/booking-functions.php:766
 #: inc/helpers.php:1265
 msgid "Booking"
 msgstr ""
@@ -122,9 +122,9 @@ msgstr ""
 
 #: inc/admin/class-admin-assets.php:55 inc/admin/class-admin-assets.php:96
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:158
-#: inc/booking-functions.php:628 inc/booking-functions.php:917
-#: inc/booking-functions.php:921 inc/booking-functions.php:949
-#: inc/booking-functions.php:953 inc/helpers.php:530 inc/helpers.php:546
+#: inc/booking-functions.php:628 inc/booking-functions.php:923
+#: inc/booking-functions.php:927 inc/booking-functions.php:955
+#: inc/booking-functions.php:959 inc/helpers.php:530 inc/helpers.php:546
 #: inc/helpers.php:813 inc/helpers.php:982 inc/helpers.php:1072
 #: inc/helpers.php:1088 inc/helpers.php:1103
 msgid "N/A"
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Global Tabs Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:761
+#: inc/admin/class-admin-settings.php:117 inc/booking-functions.php:767
 #: inc/helpers.php:731 inc/helpers.php:925
 msgid "Payment"
 msgstr ""
@@ -1275,67 +1275,67 @@ msgstr ""
 msgid "Booking Date"
 msgstr ""
 
-#: inc/booking-functions.php:752
+#: inc/booking-functions.php:758
 msgid "Statistics"
 msgstr ""
 
-#: inc/booking-functions.php:758
+#: inc/booking-functions.php:764
 msgid "Display Chart"
 msgstr ""
 
-#: inc/booking-functions.php:770
+#: inc/booking-functions.php:776
 msgid "Compare Stat"
 msgstr ""
 
-#: inc/booking-functions.php:783 inc/booking-functions.php:836
+#: inc/booking-functions.php:789 inc/booking-functions.php:842
 #: inc/class-shortcode.php:294
 #: inc/widgets/class-wp-travel-search-filters-widget.php:141
 msgid "From"
 msgstr ""
 
-#: inc/booking-functions.php:790 inc/booking-functions.php:843
+#: inc/booking-functions.php:796 inc/booking-functions.php:849
 #: inc/class-shortcode.php:301
 #: inc/widgets/class-wp-travel-search-filters-widget.php:148
 msgid "To"
 msgstr ""
 
-#: inc/booking-functions.php:797 inc/booking-functions.php:850
+#: inc/booking-functions.php:803 inc/booking-functions.php:856
 #: inc/email-template-functions.php:77 inc/email-template-functions.php:182
 #: inc/email-template-functions.php:360 inc/email-template-functions.php:702
 #: inc/email-template-functions.php:1010 inc/form-fields.php:113
 msgid "Country"
 msgstr ""
 
-#: inc/booking-functions.php:801 inc/booking-functions.php:854
+#: inc/booking-functions.php:807 inc/booking-functions.php:860
 msgid "All Country"
 msgstr ""
 
-#: inc/booking-functions.php:814 inc/booking-functions.php:867
+#: inc/booking-functions.php:820 inc/booking-functions.php:873
 msgid "All "
 msgstr ""
 
-#: inc/booking-functions.php:827
+#: inc/booking-functions.php:833
 msgid "Show All"
 msgstr ""
 
-#: inc/booking-functions.php:876
+#: inc/booking-functions.php:882
 msgid "Compare"
 msgstr ""
 
-#: inc/booking-functions.php:894
+#: inc/booking-functions.php:900
 msgid "Compare 1"
 msgstr ""
 
-#: inc/booking-functions.php:904 inc/booking-functions.php:935
+#: inc/booking-functions.php:910 inc/booking-functions.php:941
 msgid "Total Sales"
 msgstr ""
 
-#: inc/booking-functions.php:909 inc/booking-functions.php:941
+#: inc/booking-functions.php:915 inc/booking-functions.php:947
 #: inc/class-post-types.php:83 inc/helpers.php:707
 msgid "Bookings"
 msgstr ""
 
-#: inc/booking-functions.php:914 inc/booking-functions.php:946
+#: inc/booking-functions.php:920 inc/booking-functions.php:952
 #: inc/cart/cart-mini.php:29 inc/cart/cart.php:28
 #: inc/email-template-functions.php:43 inc/email-template-functions.php:148
 #: inc/email-template-functions.php:326 inc/email-template-functions.php:626
@@ -1344,15 +1344,15 @@ msgstr ""
 msgid "Pax"
 msgstr ""
 
-#: inc/booking-functions.php:918 inc/booking-functions.php:950
+#: inc/booking-functions.php:924 inc/booking-functions.php:956
 msgid "Countries"
 msgstr ""
 
-#: inc/booking-functions.php:922 inc/booking-functions.php:954
+#: inc/booking-functions.php:928 inc/booking-functions.php:960
 msgid "Top itinerary"
 msgstr ""
 
-#: inc/booking-functions.php:929
+#: inc/booking-functions.php:935
 msgid "Compare 2"
 msgstr ""
 
@@ -2937,54 +2937,54 @@ msgstr ""
 msgid "Coupon Restrictions"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:32
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:29
 msgid "Coupon Status "
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:53
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:64
 msgid "Coupon Code"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:54
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:65
 msgid "Unique Identifier for the coupon."
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:59
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:70
 msgid "WP-TRAVEL-350"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:63
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:74
 msgid "Coupon Type"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:64
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:75
 msgid ""
 "Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart "
 "total price )."
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:70
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:81
 msgid "Fixed Discount"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:71
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:82
 msgid "Percentage Discount"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:76
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:82
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:87
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:93
 msgid "Coupon Value"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:77
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:88
 msgid "Coupon value amount/percentage"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:93
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:104
 msgid "Coupon Expiry Date"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:94
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:105
 msgid "Coupon expiration date. Leave blank to disable expiration."
 msgstr ""
 
@@ -3036,6 +3036,14 @@ msgstr ""
 
 #: inc/coupon/inc/class-install.php:50
 msgid "No Coupons found in Trash."
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:112
+msgid "Coupon Status"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:113
+msgid "Coupon Created Date"
 msgstr ""
 
 #: inc/coupon/wp-travel-coupon.php:89
@@ -4069,6 +4077,36 @@ msgstr ""
 #: inc/booking-functions.php:367 inc/trip-enquiries.php:237
 msgctxt "column name"
 msgid "Title"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:106
+msgctxt "column name"
+msgid "Coupon Name"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:107
+msgctxt "column name"
+msgid "Coupon Code"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:108
+msgctxt "column name"
+msgid "Discount Value"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:109
+msgctxt "column name"
+msgid "Max Uses"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:110
+msgctxt "column name"
+msgid "Usage Count"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:111
+msgctxt "column name"
+msgid "Expitration Date"
 msgstr ""
 
 #: inc/class-post-types.php:27

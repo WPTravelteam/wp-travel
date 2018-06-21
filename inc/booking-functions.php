@@ -715,6 +715,12 @@ function wp_travel_book_now() {
 	do_action( 'wp_travel_after_frontend_booking_save', $order_id );
 
 	if ( isset( $wt_cart ) ) {
+		$discounts = $wt_cart->get_discounts();
+		if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+
+			WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+
+		endif;
 		// Clear Cart After process is complete.
 		$wt_cart->clear();
 	}

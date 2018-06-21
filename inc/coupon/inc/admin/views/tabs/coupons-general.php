@@ -18,10 +18,7 @@
  $coupon_expiry_date = isset( $general_tab['coupon_expiry_date'] ) ? $general_tab['coupon_expiry_date'] : '';
 
  $coupon = new WP_Travel_Coupon();
-
  $coupon_id =  $coupon->get_coupon_id_by_code( $coupon_code  );
-
- var_dump( $coupon_id );
 
 ?>
 
@@ -32,20 +29,34 @@
 				<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel' ); ?></label>
 			</td>
 			<td>
-				<span class="show-in-frontend checkbox-default-design">
-					<label data-on="ON" data-off="OFF">
-						<input <?php checked( $coupon_active , 'yes' ); ?> value="1" name="wp_travel_coupon[general][coupon_active]" id="coupon_active" type="checkbox" />						
-						<span class="switch">
-						</span>
-					</label>
-				</span>
+			<?php 
+			
+				$coupon_status = $coupon->get_coupon_status( $coupon_id  );
 
-				<span class="wp-travel-info-msg">
-					Active
-				</span>
-				<span class="wp-travel-error-msg">
-					Expired
-				</span>
+				if ( 'active' === $coupon_status ) {
+					?>
+
+						<span class="wp-travel-info-msg">
+							<?php echo esc_html( 'Active', 'wp-travel' ); ?>
+						</span>
+
+					<?php 
+
+				}
+				else {
+
+					?>
+
+						<span class="wp-travel-error-msg">
+							<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
+						</span>
+
+					<?php 
+
+
+				}
+
+			?>
 			</td>
 		<tr>
 		<tr>

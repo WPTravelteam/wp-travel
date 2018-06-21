@@ -61,18 +61,15 @@ class WP_Travel_Coupon {
 	public function get_coupon_meta( $coupon_id, $tab, $key ) {
 
 		if ( empty( $coupon_id ) || empty( $key ) || empty( $tab ) ) {
-
 			return false;
 		}
 
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 
 		if ( ! $coupon_metas ) {
-
 			return false;
-
 		}
-
+		
 		if ( is_array( $coupon_metas ) && ! empty( $coupon_metas ) ) {
 
 			return isset( $coupon_metas[ $tab ][ $key ] ) ? $coupon_metas[ $tab ][ $key ] : false;
@@ -114,12 +111,20 @@ class WP_Travel_Coupon {
 	 */
 	public function get_usage_count( $coupon_id ) {
 
-		return get_post_meta( $coupon_id, 'wp_travel_coupon_uasge_count', true );
+		$usage_count = get_post_meta( $coupon_id, 'wp_travel_coupon_uasge_count', true );
+
+		return ! empty( $usage_count ) ? $usage_count : 0 ;
 	}
 	/**
 	 * Update usage count.
 	 */
-	public function update_usage_count( $coupon_id, $value ) {
+	public function update_usage_count( $coupon_id ) {
+
+		$old_value = $this->get_usage_count( $coupon_id );
+
+		$value = $old_value + 1;
+
+		$value = absint( $value );
 
 		return update_post_meta( $coupon_id, 'wp_travel_coupon_uasge_count', $value );
 
@@ -186,7 +191,7 @@ class WP_Travel_Coupon {
 
 			// Check Expiry Date.
 			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
-			$test_date = ( new DateTime( $expiry_date ) )->format( 'Y-m-d' );
+			$test_date = ( new DateTime( $coupon_expiry_date ) )->format( 'Y-m-d' );
 
 			if ( strtotime( $date_now ) > strtotime( $test_date ) ) {
 
@@ -197,6 +202,35 @@ class WP_Travel_Coupon {
 		}
 
 		return true;
+
+	}
+
+	/**
+	 * Get Coupon Status.
+	 */
+	public function get_coupon_status( $coupon_id ) {
+
+		if ( ! $coupon_id || empty( $coupon_id ) ) {
+
+			return false;
+		}
+
+		if ( ! $this->is_coupon_valid( $coupon_id ) ) {
+
+			return 'inactive';
+
+		}
+
+		// Activity by usage count.
+		$usage_count = $this->get_usage_count( $coupon_id );
+		$limit = $this->get_coupon_meta( $coupon_id, 'restriction', 'coupon_limit_number' );
+
+		if ( ! empty( $limit ) ) {
+
+			return ( $limit > $usage_count ) ? 'active' : 'inactive';
+		}
+
+		return 'active';
 
 	}
 

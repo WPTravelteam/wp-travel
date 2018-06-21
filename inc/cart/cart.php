@@ -166,7 +166,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 					<tr>
 						<th>
 							<strong><?php esc_html_e( 'Coupon Discount: ', 'wp-travel' ); ?><span class="tax-percent">
-								<?php echo esc_html( $discounts['value'] ); echo 'percentage' === $discounts['type'] ? ' %' : wp_travel_get_currency_symbol(); ?>
+								<?php echo esc_html( $discounts['value'] ); ?> ( <?php echo 'percentage' === $discounts['type'] ? ' %' : wp_travel_get_currency_symbol(); ?> )
 							</span></strong>
 						</th>
 						<td  class="text-right">
