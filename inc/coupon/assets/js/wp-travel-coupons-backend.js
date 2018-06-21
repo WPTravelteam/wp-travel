@@ -108,4 +108,46 @@
     // Multipleselect JS End 
 
 
+    //setup before functions
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 5000; //time in ms, 5 second for example
+    var $input = $('#coupon-code');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown 
+    $input.on('keydown', function() {
+        clearTimeout(typingTimer);
+    });
+    //user is "finished typing," do something
+    function doneTyping() {
+
+        var value = $input.val();
+        coupon_fields = {}
+
+        coupon_fields['coupon_code'] = value;
+        coupon_fields['action'] = 'wp_travel_check_coupon_code';
+
+        jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            data: coupon_fields,
+            beforeSend: function() {},
+            success: function(data) {
+                console.log(data);
+                if (!data.success) {
+                    jQuery('#wp-travel-coupon_code-error').show();
+                } else {
+                    jQuery('#wp-travel-coupon_code-error').hide();
+                }
+            }
+        });
+    }
+
+
+
 }(jQuery));

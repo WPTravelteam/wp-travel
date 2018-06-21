@@ -21,8 +21,30 @@ class WP_Travel_Ajax {
 		add_action( 'wp_ajax_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
 
+		//Check Coupon Code
+		add_action( 'wp_ajax_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
+		add_action( 'wp_ajax_nopriv_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
+
 		
 	}
+
+	function wp_travel_check_coupon_code() {
+
+		if ( ! isset( $_POST['coupon_code'] ) ) {
+			return;
+		}
+
+		$coupon = WP_Travel()->coupon->get_coupon_id_by_code( $_POST['coupon_code'] );
+
+		if ( ! $coupon ) {
+
+			wp_send_json_success( $_POST['coupon_code'] );
+		}
+
+		wp_send_json_error( $_POST['coupon_code'] );
+
+	}
+
 	function post_gallery_ajax_load_image() {
 		// Run a security check first.
 		check_ajax_referer( 'wp-travel-drag-drop-nonce', 'nonce' );

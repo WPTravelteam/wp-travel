@@ -24,41 +24,43 @@
 
 <table class="form-table">
 	<tbody>
-		<tr>
-			<td>
-				<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel' ); ?></label>
-			</td>
-			<td>
-			<?php 
-			
-				$coupon_status = $coupon->get_coupon_status( $coupon_id  );
+	<?php if ( $coupon_id ) : ?>
+			<tr>
+				<td>
+					<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel' ); ?></label>
+				</td>
+				<td>
+				<?php 
+				
+					$coupon_status = $coupon->get_coupon_status( $coupon_id  );
 
-				if ( 'active' === $coupon_status ) {
-					?>
+					if ( 'active' === $coupon_status ) {
+						?>
 
-						<span class="wp-travel-info-msg">
-							<?php echo esc_html( 'Active', 'wp-travel' ); ?>
-						</span>
+							<span class="wp-travel-info-msg">
+								<?php echo esc_html( 'Active', 'wp-travel' ); ?>
+							</span>
 
-					<?php 
+						<?php 
 
-				}
-				else {
+					}
+					else {
 
-					?>
+						?>
 
-						<span class="wp-travel-error-msg">
-							<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
-						</span>
+							<span class="wp-travel-error-msg">
+								<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
+							</span>
 
-					<?php 
+						<?php 
 
 
-				}
+					}
 
-			?>
-			</td>
-		<tr>
+				?>
+				</td>
+			<tr>
+		<?php endif; ?>
 		<tr>
 			<td>
 				<label for="coupon-code"><?php esc_html_e( 'Coupon Code', 'wp-travel' ); ?></label>
@@ -69,6 +71,9 @@
 			<td>
 				<input required="required" type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
 			</td>
+		</tr>
+		<tr id="wp-travel-coupon_code-error" style="display:none;">
+			<td><div class="wp-travel-error"><strong><?php echo esc_html( 'Error :', 'wp-travel' ); ?></strong><?php esc_html_e( 'Coupon Code already used. Please choose a unique coupon code', 'wp-travel' ); ?></div></td>
 		</tr>
 		<tr>
 			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel' ); ?></label>
