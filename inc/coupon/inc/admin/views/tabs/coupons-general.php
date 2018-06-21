@@ -73,7 +73,7 @@
 			</td>
 		</tr>
 		<tr id="wp-travel-coupon_code-error" style="display:none;">
-			<td><div class="wp-travel-error"><strong><?php echo esc_html( 'Error :', 'wp-travel' ); ?></strong><?php esc_html_e( 'Coupon Code already used. Please choose a unique coupon code', 'wp-travel' ); ?></div></td>
+			<td colspan="2"><span class="wp-travel-error"><strong><?php echo esc_html( 'Error :', 'wp-travel' ); ?></strong><?php esc_html_e( 'Coupon Code already used. Please choose a unique coupon code', 'wp-travel' ); ?></span></td>
 		</tr>
 		<tr>
 			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel' ); ?></label>
