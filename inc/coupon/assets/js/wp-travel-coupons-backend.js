@@ -127,9 +127,11 @@
     function doneTyping() {
 
         var value = $input.val();
+        var couponId = jQuery('#wp-travel-coupon-id').val();
         coupon_fields = {}
 
         coupon_fields['coupon_code'] = value;
+        coupon_fields['coupon_id'] = couponId;
         coupon_fields['action'] = 'wp_travel_check_coupon_code';
 
         jQuery.ajax({

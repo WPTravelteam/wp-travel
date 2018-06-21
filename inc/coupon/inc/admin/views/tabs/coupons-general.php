@@ -70,6 +70,7 @@
 			</td>
 			<td>
 				<input required="required" type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
+				<input id="wp-travel-coupon-id" type="hidden" value="<?php echo esc_attr( $coupon_id ); ?>">
 			</td>
 		</tr>
 		<tr id="wp-travel-coupon_code-error" style="display:none;">

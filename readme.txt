@@ -119,7 +119,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 = WP Travel documentation and user guide =
- For setting up your site using the WP travel plugin please refer to below given link:
+ For setting up your site using the WP Travel plugin please refer to below given link:
 
 [Documentation page](http://wptravel.io/documentations/) 
 

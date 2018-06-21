@@ -34,9 +34,11 @@ class WP_Travel_Ajax {
 			return;
 		}
 
+		$post_id = $_POST['coupon_id'];
+
 		$coupon = WP_Travel()->coupon->get_coupon_id_by_code( $_POST['coupon_code'] );
 
-		if ( ! $coupon ) {
+		if ( ! $coupon || $post_id === $coupon ) {
 
 			wp_send_json_success( $_POST['coupon_code'] );
 		}
