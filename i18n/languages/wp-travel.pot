@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 08:29:06+00:00\n"
+"POT-Creation-Date: 2018-06-21 10:46:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1437,31 +1437,31 @@ msgstr ""
 msgid "Booking / Payments"
 msgstr ""
 
-#: inc/class-ajax.php:93
+#: inc/class-ajax.php:117
 msgid "<strong>Error :</strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:102
+#: inc/class-ajax.php:126
 msgid "<strong>Error :</strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:112
+#: inc/class-ajax.php:136
 msgid ""
 "<strong>Error :</strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:124
+#: inc/class-ajax.php:148
 msgid "<strong>Error :</strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:140
+#: inc/class-ajax.php:164
 msgid ""
 "<strong>Error :</strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:156
+#: inc/class-ajax.php:180
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -2941,54 +2941,58 @@ msgstr ""
 msgid "Coupon Restrictions"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:29
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:30
 msgid "Coupon Status "
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:64
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:66
 msgid "Coupon Code"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:65
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:67
 msgid "Unique Identifier for the coupon."
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:70
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:72
 msgid "WP-TRAVEL-350"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:74
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:77
+msgid "Coupon Code already used. Please choose a unique coupon code"
+msgstr ""
+
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:80
 msgid "Coupon Type"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:75
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:81
 msgid ""
 "Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart "
 "total price )."
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:81
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:87
 msgid "Fixed Discount"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:82
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:88
 msgid "Percentage Discount"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:87
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:93
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:99
 msgid "Coupon Value"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:88
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:94
 msgid "Coupon value amount/percentage"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:104
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:110
 msgid "Coupon Expiry Date"
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:105
+#: inc/coupon/inc/admin/views/tabs/coupons-general.php:111
 msgid "Coupon expiration date. Leave blank to disable expiration."
 msgstr ""
 
