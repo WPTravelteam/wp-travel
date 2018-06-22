@@ -376,6 +376,7 @@ function wp_travel_allowed_html( $tags = array() ) {
 function wp_travel_get_itineraries_array() {
 	$args = array(
 	  'post_type'   => WP_TRAVEL_POST_TYPE,
+	  'numberposts' => -1,
 	);
 
 	$itineraries = get_posts( $args );
