@@ -8,7 +8,7 @@
 global $post; ?>
 <table class="form-table">	
 	<tr>
-		<td colspan="2"><?php wp_editor( $post->post_content, 'wp_travel_editor' ); ?></td>
+		<td colspan="2"><?php wp_editor( $post->post_content, 'content' ); ?></td>
 	</tr>	
 </table>
 <?php
