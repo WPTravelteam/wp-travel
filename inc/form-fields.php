@@ -15,6 +15,12 @@ function wp_travel_booking_form_fields() {
 
 	global $wt_cart;
 
+	if ( isset( $post->ID ) ) {
+
+		$trip_id = $post->ID;
+
+	}
+
 	$cart_items = $wt_cart->getItems();
 
 	$cart_trip = '';
@@ -26,7 +32,7 @@ function wp_travel_booking_form_fields() {
 
 	}
 		
-	$trip_id = isset( $cart_trip['trip_id'] ) ? $cart_trip['trip_id'] : '';
+	$trip_id = isset( $cart_trip['trip_id'] ) ? $cart_trip['trip_id'] : $trip_id;
 	$trip_price = isset( $cart_trip['trip_price'] ) ? $cart_trip['trip_price'] : '';
 	$trip_start_date = isset( $cart_trip['trip_start_date'] ) ? $cart_trip['trip_start_date'] : '';
 	$price_key = isset( $cart_trip['price_key'] ) ? $cart_trip['price_key'] : '';

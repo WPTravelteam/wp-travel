@@ -300,6 +300,6 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 		</div>
 	<?php endif; ?>
 <?php else : ?>
-	<?php echo wp_travel_get_booking_form(); ?>
+	<?php  echo wp_travel_get_booking_form(); ?>
 <?php endif; ?>
 </div>

@@ -67,7 +67,11 @@ function wp_travel_get_booking_form() {
 
 	$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
-	$fields['pax']['validations']['max'] = $group_size;
+	if ( isset( $group_size ) && '' != $group_size ) {
+
+		$fields['pax']['validations']['max'] = $group_size;
+
+	}
 
 	$trip_price = wp_travel_get_actual_trip_price( $trip_id );
 
