@@ -212,7 +212,7 @@ if ( ! $price_per ) {
 												<label class="one-third"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-													<input bindPrice="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-main-price" required value="<?php echo esc_attr( $pricing_option_price ); ?>" type="number" min="1" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price]">
+													<input bindPrice="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-main-price" required value="<?php echo esc_attr( $pricing_option_price ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price]">
 												</div>
 											</div>
 
@@ -233,7 +233,7 @@ if ( ! $price_per ) {
 												<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-													<input bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>" <?php echo esc_attr( $pricing_sale_enabled == "yes" ? 'required="required"': '' ) ?>  >
+													<input bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>" <?php echo esc_attr( $pricing_sale_enabled == "yes" ? 'required="required"': '' ) ?>  >
 												</div>
 											</div>
 
@@ -314,7 +314,7 @@ if ( ! $price_per ) {
 									<label class="one-third"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-										<input  bindPrice="pricing_variation_{{data.random}}" required="required" type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][price]">
+										<input  bindPrice="pricing_variation_{{data.random}}" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][price]">
 									</div>
 								</div>
 
@@ -335,7 +335,7 @@ if ( ! $price_per ) {
 									<label class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-										<input bindSale="pricing_variation_{{data.random}}" type="number" min="1" name="wp_travel_pricing_options[{{data.random}}][sale_price]">
+										<input bindSale="pricing_variation_{{data.random}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][sale_price]">
 									</div>
 								</div>
 
