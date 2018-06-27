@@ -151,6 +151,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.4.5 = 
+* Enhancements / Feature : GDPR Compatibility Support for Enquiry, Bookings and Payment Forms.
 * Fixes: Translation of strings issue fixes.
 * Fixes: Minor issues and bug fixes.
 
