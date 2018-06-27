@@ -736,6 +736,15 @@ class WP_Travel_Admin_Settings {
 					</span>
 				</td>
 			<tr>
+			<tr>
+			<th>
+			<label for="wp_travel_gdpr_message"><?php _e('GDPR Message : ','wp-travel');?></label> </th>
+			<td>
+				<textarea rows="4" cols="30" id="wp_travel_gdpr_message" name="wp_travel_gdpr_message"><?php echo isset( $args['settings']['wp_travel_gdpr_message'] ) ? esc_attr( $args['settings']['wp_travel_gdpr_message'] ): 'By contacting us, you agree to our ';?></textarea>
+
+			</td>
+
+			</tr>
 		</table>
 	<?php 
 	}
@@ -1098,6 +1107,8 @@ class WP_Travel_Admin_Settings {
 
 			$cart_page_id = ( isset( $_POST['cart_page_id'] ) && '' !== $_POST['cart_page_id'] ) ? $_POST['cart_page_id'] : '';
 
+			$gdpr_message = ( isset( $_POST['wp_travel_gdpr_message'] ) && '' !== $_POST['wp_travel_gdpr_message'] ) ? $_POST['wp_travel_gdpr_message'] : ''; 
+
 			if ( '' !== $cart_page_id ) {
 				update_option( 'wp_travel_wp-travel-cart_page_id', $cart_page_id );
 			}
@@ -1134,6 +1145,9 @@ class WP_Travel_Admin_Settings {
 			//Cart and Checkout pages options
 			$settings['cart_page_id'] = $cart_page_id;
 			$settings['checkout_page_id'] = $checkout_page_id;
+
+			//GDPR Message
+			$settings['wp_travel_gdpr_message'] = $gdpr_message;
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );

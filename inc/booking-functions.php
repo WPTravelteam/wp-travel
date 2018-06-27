@@ -36,6 +36,39 @@ function wp_travel_get_booking_form() {
 	);
 
 	$fields = wp_travel_booking_form_fields();
+
+		// GDPR Support
+		$settings = wp_travel_get_settings();
+
+		$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): '';
+
+		$privacy_policy_url = false;
+
+		if ( function_exists( 'get_privacy_policy_url' ) ) {
+
+			$privacy_policy_url = get_privacy_policy_url();
+
+		}
+
+		if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
+
+			// GDPR Compatibility for enquiry.
+			$fields['wp_travel_booking_gdpr'] = array(
+				'type' => 'checkbox',
+				'label' => __('Privacy Policy', 'wp-travel'),
+				'options' => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
+				'name' => 'wp_travel_booking_gdpr_msg',
+				'id' => 'wp-travel-enquiry-gdpr-msg',
+				'validations' => array(
+					'required' => true,
+				),
+				'option_attributes' => array(
+					'required' => true,
+				),
+				'priority' => 100,
+			);
+
+		}
 	
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
