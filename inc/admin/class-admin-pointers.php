@@ -20,7 +20,7 @@ class WP_Travel_Admin_Info_Pointers {
 		// add_filter( 'wp_travel_admin_pointers-'.WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
 		// add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
 		// add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
-		// add_action( 'admin_notices', array( $this, 'paypal_addon_admin_notice' ) );
+		add_action( 'admin_notices', array( $this, 'wp_travel_gdpr_compatible_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_test_mode_notices' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_update_payment_gateways_notice' ) );
@@ -227,6 +227,33 @@ class WP_Travel_Admin_Info_Pointers {
 				</div>
 			<?php
 			}
+		}
+	}
+
+	/**
+	* wp_travel_gdpr_compatible_notice
+	* 
+	* WP Travel GDPR Compatible info.
+	* @since 1.2
+	*/
+	function wp_travel_gdpr_compatible_notice() {
+
+		global $wp_version;
+		if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
+			
+			return;
+		
+		}
+
+		$user_id = get_current_user_id();
+
+		if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) { ?>
+			<div class="notice notice-info is-dismissible">
+				<p>
+				<strong><?php printf( __( 'WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s', 'wp-travel' ), '<b>', '</b>', '<a href="'. admin_url('privacy.php') .'">', '</a>', '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
+				</p>
+			</div>
+		<?php
 		}
 	}
 
