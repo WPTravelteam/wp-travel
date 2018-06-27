@@ -66,6 +66,7 @@ function wp_travel_get_booking_form() {
 					'required' => true,
 				),
 				'priority' => 100,
+				'wrapper_class' => 'full-width',
 			);
 
 		}
