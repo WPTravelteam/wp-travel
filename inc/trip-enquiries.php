@@ -91,7 +91,7 @@ function wp_travel_get_enquiries_form() {
 
 	$settings = wp_travel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): '';
+	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$privacy_policy_url = false;
 
