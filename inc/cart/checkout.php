@@ -9,7 +9,7 @@ $payment_fields     = $checkout_fields['payment_fields'];
 // GDPR Support
 $settings = wp_travel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): '';
+	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$privacy_policy_url = false;
 
@@ -18,8 +18,6 @@ $settings = wp_travel_get_settings();
 		$privacy_policy_url = get_privacy_policy_url();
 
 	}
-
-	var_dump( $privacy_policy_url );
 
 if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
 
