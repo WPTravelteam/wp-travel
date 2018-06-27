@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.6
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -149,6 +149,10 @@ WP Travel plugin has been tested with the default WordPress theme. It specially 
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.4.5 = 
+* Fixes: Translation of strings issue fixes.
+* Fixes: Minor issues and bug fixes.
 
 = 1.4.4 =
 * Enhancements: Yoast SEO Content Analysis support. 

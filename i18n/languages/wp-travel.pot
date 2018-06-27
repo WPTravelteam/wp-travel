@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.4.4\n"
+"Project-Id-Version: WP Travel 1.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-27 07:02:44+00:00\n"
+"POT-Creation-Date: 2018-06-27 07:43:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1369,6 +1369,7 @@ msgid "Trip"
 msgstr ""
 
 #: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:153 inc/cart/cart.php:59
+#: inc/cart/cart.php:196
 msgid "Total"
 msgstr ""
 
@@ -1414,6 +1415,14 @@ msgstr ""
 
 #: inc/cart/cart.php:181
 msgid "Subtotal:"
+msgstr ""
+
+#: inc/cart/cart.php:206 inc/coupon/inc/admin/views/tabs/coupons-general.php:66
+msgid "Coupon Code"
+msgstr ""
+
+#: inc/cart/cart.php:207
+msgid "Apply Coupon"
 msgstr ""
 
 #: inc/cart/cart.php:213
@@ -2964,10 +2973,6 @@ msgstr ""
 msgid "Coupon Status "
 msgstr ""
 
-#: inc/coupon/inc/admin/views/tabs/coupons-general.php:66
-msgid "Coupon Code"
-msgstr ""
-
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:67
 msgid "Unique Identifier for the coupon."
 msgstr ""
@@ -3480,6 +3485,10 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
+#: inc/template-functions.php:1211
+msgid "We've received your booking details. We'll contact you soon."
+msgstr ""
+
 #: inc/template-functions.php:1220
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
@@ -3848,12 +3857,48 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+#: templates/account/form-login.php:46 templates/account/form-login.php:73
+msgid "Username"
+msgstr ""
+
+#: templates/account/form-login.php:50
+msgid "Email Address"
+msgstr ""
+
+#: templates/account/form-login.php:54 templates/account/form-login.php:76
+msgid "Password"
+msgstr ""
+
+#: templates/account/form-login.php:66
+msgid "Already registered?"
+msgstr ""
+
+#: templates/account/form-login.php:66
+msgid "Sign In"
+msgstr ""
+
 #: templates/account/form-login.php:71 templates/account/form-login.php:91
 msgid "Login"
 msgstr ""
 
 #: templates/account/form-login.php:83
 msgid "Remember me"
+msgstr ""
+
+#: templates/account/form-login.php:87
+msgid "Forgot Password ?"
+msgstr ""
+
+#: templates/account/form-login.php:93
+msgid "Not registered?"
+msgstr ""
+
+#: templates/account/form-login.php:93
+msgid "Create an account"
+msgstr ""
+
+#: templates/account/form-lostpassword.php:28
+msgid "Reset Password"
 msgstr ""
 
 #: templates/account/form-lostpassword.php:29
@@ -3864,6 +3909,10 @@ msgstr ""
 
 #: templates/account/form-lostpassword.php:33
 msgid "Username or email"
+msgstr ""
+
+#: templates/account/form-lostpassword.php:34
+msgid "email or username"
 msgstr ""
 
 #: templates/account/form-lostpassword.php:44
