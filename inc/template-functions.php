@@ -1208,7 +1208,7 @@ function wp_travel_booking_message() {
 		<script>
 			history.replaceState({},null,window.location.pathname);
 		</script>
-		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', "We've received your booking details. We'll contact you soon." ); ?></p>
+		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', __("We've received your booking details. We'll contact you soon.", "wp-travel" ) ); ?></p>
 	
 	<?php elseif( isset( $_GET['booked'] ) && 'false' == $_GET['booked']) : ?>
 		<script>

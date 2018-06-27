@@ -193,7 +193,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 				<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>	
 				<tr>
 					<th colspan="2">
-						<strong><?php echo esc_html( 'Total', 'wp-travel' ); ?></strong>
+						<strong><?php echo esc_html__( 'Total', 'wp-travel' ); ?></strong>
 						<p class="total">
 							<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong>
 						</p>
@@ -203,8 +203,8 @@ WP_Travel()->notices->print_notices( 'success', true );
 				<tr>
 					<td>
 						<div class="coupon">
-							<input type="text" name="wp_travel_coupon_code_input" class="input-text" id="coupon_code" value="" placeholder="Coupon code"> 
-							<input type="submit" class="button wp-travel-apply-coupon-btn" name="apply_coupon" value="Apply coupon">
+							<input type="text" name="wp_travel_coupon_code_input" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr__( 'Coupon Code', 'wp-travel' ); ?>"> 
+							<input type="submit" class="button wp-travel-apply-coupon-btn" name="apply_coupon" value="<?php echo esc_attr__( 'Apply Coupon', 'wp-travel' ); ?>">
 						</div>
 					</td>
 

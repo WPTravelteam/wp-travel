@@ -25,13 +25,13 @@ WP_Travel()->notices->print_notices( 'error', true );
 		<?php endif; ?>
 		<div class="form">
 			<form method="post" class="wp-travel-ResetPassword lost_reset_password">
-				<h3>Reset Password</h3>
+				<h3><?php esc_html_e( 'Reset Password', 'wp-travel' ); ?></h3>
 				<p><?php echo apply_filters( 'wp_travel_lost_password_message', esc_html__( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'wp-travel' ) ); ?></p><?php // @codingStandardsIgnoreLine ?>
 
 				<p class="wp-travel-form-row wp-travel-form-row--first form-row form-row-first">
 				<span class="user-username">
 					<!-- <label for="user_login"><?php esc_html_e( 'Username or email', 'wp-travel' ); ?></label> -->
-					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="email or username" />
+					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="<?php echo esc_attr__('email or username', 'wp-travel'); ?>" />
 				</span>	
 				</p>
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-27 04:20:35+00:00\n"
+"POT-Creation-Date: 2018-06-27 07:02:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1089,6 +1089,7 @@ msgstr ""
 #: inc/template-functions.php:1297
 #: inc/widgets/class-wp-travel-search-filters-widget.php:119
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
+#: templates/content-pricing-options.php:77
 #: templates/content-pricing-options.php:215
 msgid "Price"
 msgstr ""
@@ -1125,6 +1126,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:177
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:279
+#: templates/content-pricing-options.php:68
 msgid "Pricing Name"
 msgstr ""
 
@@ -3915,6 +3917,14 @@ msgstr[1] ""
 #: templates/content-archive-itineraries.php:111
 #: templates/shortcode/itinerary-item-list.php:109
 msgid "Explore"
+msgstr ""
+
+#: templates/content-pricing-options.php:71
+msgid "Min Group Size"
+msgstr ""
+
+#: templates/content-pricing-options.php:74
+msgid "Max Group Size"
 msgstr ""
 
 #: templates/content-pricing-options.php:100

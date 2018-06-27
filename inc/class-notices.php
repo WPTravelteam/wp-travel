@@ -46,6 +46,13 @@ class WP_Travel_Notices {
 	function print_notices( $type, $destroy = true ){
 
 		$notices = $this->get( $type, $destroy );
+
+		if ( empty( $notices ) ) {
+
+			return;
+
+		}
+
 		if ( $notices && 'error' === $type ) {
 
 			foreach ( $notices as $key => $notice ) {
