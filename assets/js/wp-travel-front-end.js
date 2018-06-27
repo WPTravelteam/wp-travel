@@ -232,7 +232,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
         jQuery(this).text(function(i, text) {
-            return text === "Select" ? "Close" : "Select";
+            return text === wp_travel_frontend_vars.text_array.pricing_select ? wp_travel_frontend_vars.text_array.pricing_close : wp_travel_frontend_vars.text_array.pricing_select;
         })
     });
 

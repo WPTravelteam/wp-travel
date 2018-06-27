@@ -115,7 +115,7 @@ $form_field = new WP_Travel_FW_Field(); ?>
 				<?php endforeach; ?>  
 				<div class="wp-travel-form-field button-field">
 					<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book and Pay"> 
+					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book and Pay', 'wp-travel' ); ?>"> 
 				</div>
 			</div>        
 		</div>

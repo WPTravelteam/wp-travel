@@ -100,6 +100,10 @@ class WP_Travel_Frontend_Assets {
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
 				'cartUrl' => wp_travel_get_cart_url(),
+				'text_array' => array(
+					'pricing_select' => __( 'Select', 'wp-travel' ),
+					'pricing_close'  => __( 'Close', 'wp-travel' ),
+				),
 			);
 
 			$frontend_vars = apply_filters( 'wp_travel_js_frontend_vars', $frontend_vars );
