@@ -227,7 +227,6 @@
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 15px;
-    position: relative;
     float: left; }
     .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field:nth-of-type(2n+1) {
       clear: left; }
@@ -241,6 +240,9 @@
       border: none;
       box-shadow: none;
       font-weight: inherit; }
+    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field
+    .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field:last-of-type {
+      width: 100%; }
     .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field.full-width {
       width: calc(100% - 5px); }
     .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field.wp-travel-text-info label {
@@ -1463,6 +1465,39 @@ html .ui-button.ui-state-disabled:active {
 
 .wp-travel-form-field {
   position: relative; }
+  .wp-travel-form-field:last-of-type {
+    margin-top: 30px; }
+
+.radio-checkbox-label input[type="checkbox"], .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="checkbox"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label select[type="checkbox"], .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="checkbox"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label textarea[type="checkbox"] {
+  border: 1px solid #b4b9be !important;
+  background: #ddd;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px !important;
+  margin: -4px 4px 0 0;
+  vertical-align: middle;
+  width: 20px !important;
+  outline: 0;
+  -webkit-appearance: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: .05s border-color ease-in-out;
+  margin-right: 10px !important;
+  position: relative; }
+  .radio-checkbox-label input[type="checkbox"]:checked:before, .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="checkbox"]:checked:before, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label select[type="checkbox"]:checked:before, .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="checkbox"]:checked:before, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label textarea[type="checkbox"]:checked:before {
+    content: "\f00c";
+    font-family: fontawesome;
+    border-radius: 0;
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    color: #1e8cbe;
+    float: left;
+    font-size: 20px;
+    line-height: 20px;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: absolute; }
 
 .loading-bar.active {
   -webkit-animation: loading-bar-stripes 2s linear infinite;
@@ -2452,7 +2487,7 @@ ul.wp-travel-error {
 
 /* enquiry form single trips */
 #wp-travel-enquiries {
-  max-width: 300px;
+  max-width: 450px;
   margin: 0 auto;
   top: 0;
   background: #fff;
@@ -2469,7 +2504,7 @@ ul.wp-travel-error {
     width: 100%;
     display: block;
     margin-bottom: 5px; }
-  #wp-travel-enquiries .wp-travel-form-field input, #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field select, #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field textarea {
+  #wp-travel-enquiries .wp-travel-form-field input:not([type="checkbox"]), #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:not([type="checkbox"]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field select:not([type="checkbox"]), #wp-travel-enquiries .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:not([type="checkbox"]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form #wp-travel-enquiries .wp-travel-form-field textarea:not([type="checkbox"]) {
     width: 100%;
     margin-bottom: 15px;
     font-size: 14px;
