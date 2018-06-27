@@ -65,16 +65,16 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 					<ul class="availabily-list">
 						<li class="availabily-heading clearfix">
 								<div class="date-from">
-									<?php echo esc_html( 'Pricing Name', 'wp-travel' ); ?>
+									<?php echo esc_html__( 'Pricing Name', 'wp-travel' ); ?>
 								</div>
 							<div class="status">
-								<?php echo esc_html( 'Min Group Size', 'wp-travel' ); ?>
+								<?php echo esc_html__( 'Min Group Size', 'wp-travel' ); ?>
 							</div>
 							<div class="status">
-								<?php echo esc_html( 'Max Group Size', 'wp-travel' ); ?>
+								<?php echo esc_html__( 'Max Group Size', 'wp-travel' ); ?>
 							</div>
 							<div class="price">
-								<?php echo esc_html( 'Price', 'wp-travel' ); ?>
+								<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
 							</div>
 							<div class="action">
 								&nbsp;
