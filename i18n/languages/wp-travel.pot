@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-27 12:08:12+00:00\n"
+"POT-Creation-Date: 2018-06-28 05:51:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -634,129 +634,129 @@ msgstr ""
 msgid "Enquiry Email Header Color"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:727
+#: inc/admin/class-admin-settings.php:731
 msgid "Enable Trip Enquiry"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:741
+#: inc/admin/class-admin-settings.php:745
 msgid "GDPR Message : "
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:773 inc/form-fields.php:377
+#: inc/admin/class-admin-settings.php:777 inc/form-fields.php:377
 msgid "Partial Payment"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:783
+#: inc/admin/class-admin-settings.php:787
 msgid "Enable partial payment while booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:788
+#: inc/admin/class-admin-settings.php:792
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:641
 msgid "Minimum Payout (%)"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:792
+#: inc/admin/class-admin-settings.php:796
 msgid "Minimum percent of amount to pay while booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:797
+#: inc/admin/class-admin-settings.php:801
 #: inc/payments/wp-travel-payments.php:59
 msgid "Standard Paypal"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:800
+#: inc/admin/class-admin-settings.php:804
 msgid "Enable Paypal"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:810
+#: inc/admin/class-admin-settings.php:814
 msgid "Check to enable standard PayPal payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:814
+#: inc/admin/class-admin-settings.php:818
 msgid "Paypal Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:817
+#: inc/admin/class-admin-settings.php:821
 msgid "PayPal email address that receive payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:821
+#: inc/admin/class-admin-settings.php:825
 msgid "TAX Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:824
+#: inc/admin/class-admin-settings.php:828
 msgid "Enable Tax for Trip Price"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:834
+#: inc/admin/class-admin-settings.php:838
 msgid "Check to enable Tax options for trips."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:838
+#: inc/admin/class-admin-settings.php:842
 msgid "Trip prices entered with tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:841
+#: inc/admin/class-admin-settings.php:845
 msgid "Yes, I will enter trip prices inclusive of tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:844
+#: inc/admin/class-admin-settings.php:848
 msgid "No, I will enter trip prices exclusive of tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:846
+#: inc/admin/class-admin-settings.php:850
 msgid "This option will affect how you enter trip prices."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:851
+#: inc/admin/class-admin-settings.php:855
 msgid "Tax Percentage"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:855
+#: inc/admin/class-admin-settings.php:859
 msgid "Trip Tax percentage added to trip price."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:877
+#: inc/admin/class-admin-settings.php:881
 msgid "Test Payment"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:880
+#: inc/admin/class-admin-settings.php:884
 msgid "Test Mode"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:889
+#: inc/admin/class-admin-settings.php:893
 msgid "Enable test mode to make test payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:893
+#: inc/admin/class-admin-settings.php:897
 msgid "Test Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:895
+#: inc/admin/class-admin-settings.php:899
 msgid "Test email address will get test mode payment emails."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:962
+#: inc/admin/class-admin-settings.php:966
 msgid "Customer Registration"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:972
+#: inc/admin/class-admin-settings.php:976
 msgid "Require Customer login before booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:982
+#: inc/admin/class-admin-settings.php:986
 msgid "Enable customer registration on the \"My Account\" page."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:987
+#: inc/admin/class-admin-settings.php:991
 msgid "Account Creation"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:997
+#: inc/admin/class-admin-settings.php:1001
 msgid " Automatically generate username from customer email."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1007
+#: inc/admin/class-admin-settings.php:1011
 msgid " Automatically generate customer password"
 msgstr ""
 
@@ -1481,31 +1481,35 @@ msgstr ""
 msgid "Book and Pay"
 msgstr ""
 
-#: inc/class-ajax.php:117
+#: inc/class-ajax.php:102
+msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
+msgstr ""
+
+#: inc/class-ajax.php:119
 msgid "<strong>Error :</strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:126
+#: inc/class-ajax.php:128
 msgid "<strong>Error :</strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:136
+#: inc/class-ajax.php:138
 msgid ""
 "<strong>Error :</strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:148
+#: inc/class-ajax.php:150
 msgid "<strong>Error :</strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:164
+#: inc/class-ajax.php:166
 msgid ""
 "<strong>Error :</strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:180
+#: inc/class-ajax.php:182
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
