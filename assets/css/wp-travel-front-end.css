@@ -1467,6 +1467,8 @@ html .ui-button.ui-state-disabled:active {
   position: relative; }
   .wp-travel-form-field:last-of-type {
     margin-top: 30px; }
+  .wp-travel-form-field .radio-checkbox-label {
+    margin-bottom: 15px !important; }
 
 .radio-checkbox-label input[type="checkbox"], .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="checkbox"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label select[type="checkbox"], .radio-checkbox-label .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="checkbox"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .radio-checkbox-label textarea[type="checkbox"] {
   border: 1px solid #b4b9be !important;
@@ -2326,6 +2328,10 @@ ul.wp-travel-error {
     margin-right: -15px;
     margin-left: -15px; }
   .checkout-page-wrap .form-horizontal.f-partial-payment {
+    display: block; }
+  .checkout-page-wrap .form-horizontal .radio-checkbox-label {
+    position: relative;
+    margin-bottom: 15px;
     display: block; }
 .checkout-page-wrap .wp-travel-form-field {
   margin: 10px 0;

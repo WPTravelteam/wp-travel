@@ -1948,6 +1948,9 @@ html .ui-button.ui-state-disabled:active {
     &:last-of-type {
         margin-top: 30px;
     }    
+    .radio-checkbox-label{
+        margin-bottom:15px !important;
+    }
 }
 
 .radio-checkbox-label{
@@ -3076,6 +3079,11 @@ ul.wp-travel-error {
 
         &.f-partial-payment{
             display:block;
+        }
+        .radio-checkbox-label{
+            position:relative;
+            margin-bottom:15px;
+            display: block;
         }
     }
     .wp-travel-form-field {
