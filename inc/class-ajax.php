@@ -99,6 +99,8 @@ class WP_Travel_Ajax {
 			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'] );
 		}
 
+		WP_Travel()->notices->add( apply_filters( 'wp_travel_cart_success', __( '<strong> </strong>Cart updated succesfully.Please Proceed to Checkout', 'wp-travel' ) ), 'success' );
+
 		echo true;
 		die;
 	}

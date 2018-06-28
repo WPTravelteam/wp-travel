@@ -706,6 +706,10 @@ class WP_Travel_Admin_Settings {
 				</tr>
 			<?php
 				endforeach;
+
+			// Add custom Tabs Support.
+			do_action( 'wp_travel_custom_global_tabs' );
+
 			echo'<tbody></table>';
 		}
 	}
