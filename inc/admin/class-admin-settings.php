@@ -702,6 +702,21 @@ class WP_Travel_Admin_Settings {
 						<span class="switch">
 						  </span>
 						</label></span>
+
+						<?php 
+
+							if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
+
+							?>
+
+								<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ); ?>][custom]" value="yes">
+
+							<?php
+
+							}
+						
+						?>
+
 					</td>
 				</tr>
 			<?php
