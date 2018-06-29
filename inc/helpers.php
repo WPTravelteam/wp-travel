@@ -1204,8 +1204,8 @@ function wp_travel_get_frontend_tabs() {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
 			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			// $new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
-			$new_tabs[ $key ]['label_class'] = $wp_travel_itinerary_tabs[ $key ]['label_class'];
-			$new_tabs[ $key ]['content'] = $wp_travel_itinerary_tabs[ $key ]['content'];
+			$new_tabs[ $key ]['label_class'] = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
+			$new_tabs[ $key ]['content'] = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 			$new_tabs[ $key ]['use_global'] = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
 			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 

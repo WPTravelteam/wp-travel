@@ -851,13 +851,6 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break; ?>
 				<?php } ?>
 			<?php $index++; endforeach; ?>
-
-						<!-- <div id="faq" class="tab-list-content resp-tab-content clearfix">
-
-							
-						</div> -->
-
-
 		</div>
 		<?php endif; ?>
 	
