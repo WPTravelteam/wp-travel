@@ -1192,23 +1192,37 @@ function wp_travel_get_frontend_tabs() {
 
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
+	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+
+	// print_r( $custom_global_tabs ); die;
+
+	
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
 	
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
-
+		
 		$wp_travel_tabs = $settings['global_tab_settings'];
-
+		
 	}
 
+	print_r( $wp_travel_tabs ); die;
+	
+	
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
+			
+			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 
+				if ( isset( $tab['custom'] ) ) {
 
+					$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
+
+				}
 
 			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			// $new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
 			$new_tabs[ $key ]['label_class'] = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
-			$new_tabs[ $key ]['content'] = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
+			$new_tabs[ $key ]['content'] = $tab_content;
 			$new_tabs[ $key ]['use_global'] = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
 			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 
@@ -1270,21 +1284,21 @@ function wp_travel_get_default_frontend_tabs() {
 		'faq' 			=> array( 'label' => __( 'FAQ', 'wp-travel' ), 'label_class' => '', 'content' => $faqs, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 	);
 
-	$settings = wp_travel_get_settings();
+	// $settings = wp_travel_get_settings();
 
-	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+	// $custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 
-	$cust_tabs = array();
+	// $cust_tabs = array();
 
-	if ( ! empty( $custom_global_tabs ) ) {
+	// if ( ! empty( $custom_global_tabs ) ) {
 
-		foreach( $custom_global_tabs as $key => $tb ) {
+	// 	foreach( $custom_global_tabs as $key => $tb ) {
 
-			$cust_tabs[$key] = array( 'label' => $tb['label'], 'label_class' => '', 'content' => $tb['content'], 'use_global' => 'yes', 'show_in_menu' => 'yes' );
+	// 		$cust_tabs[$key] = array( 'label' => $tb['label'], 'label_class' => '', 'content' => $tb['content'], 'use_global' => 'yes', 'show_in_menu' => 'yes' );
 
-		}
+	// 	}
 
-	}
+	// }
 
 	// $return_tabs = array_merge( $return_tabs, $cust_tabs );
 

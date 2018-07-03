@@ -13,7 +13,7 @@ jQuery(function($) {
 
     $(document).ready(function() {
 
-        var prices = trip_prices_data.map(function(x) {
+        var prices = trip_prices_data.prices.map(function(x) {
             return parseInt(x, 10);
         });
 
@@ -38,13 +38,13 @@ jQuery(function($) {
             max: max,
             values: [filteredMin, filteredMax],
             slide: function(event, ui) {
-                $(".price-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $(".price-amount").val(trip_prices_data.currency_symbol + ui.values[0] + " - " + trip_prices_data.currency_symbol + ui.values[1]);
                 $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-min').val(ui.values[0]);
                 $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-max').val(ui.values[1]);
             }
         });
-        $(".price-amount").val("$" + $(".wp-travel-range-slider").slider("values", 0) +
-            " - $" + $(".wp-travel-range-slider").slider("values", 1));
+        $(".price-amount").val(trip_prices_data.currency_symbol + $(".wp-travel-range-slider").slider("values", 0) +
+            " - " + trip_prices_data.currency_symbol + $(".wp-travel-range-slider").slider("values", 1));
 
         $(".trip-duration-calender input").datepicker({
             language: 'en',

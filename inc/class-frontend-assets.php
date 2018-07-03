@@ -52,7 +52,10 @@ class WP_Travel_Frontend_Assets {
 
 		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider' ), WP_TRAVEL_VERSION, 1 );
 
-		$trip_prices_data = wp_reavel_get_itinereries_prices_array();
+		$trip_prices_data = array( 
+			'currency_symbol' => wp_travel_get_currency_symbol(),
+			'prices' => wp_reavel_get_itinereries_prices_array(),
+		);
 
 		wp_localize_script( 'wp-travel-widget-scripts', 'trip_prices_data', $trip_prices_data );
 
