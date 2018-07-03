@@ -59,6 +59,9 @@ jQuery(document).ready(function($) {
     var payment_mode_change = function() {
         const trigger = $('[name=wp_travel_payment_mode]').val();
         display_payment_mode_option[trigger] && display_payment_mode_option[trigger]();
+        const func = $('[name=wp_travel_payment_gateway]:checked').val();
+        const executor = payments[func];
+        executor && executor();
     };
 
     // Initial Load.

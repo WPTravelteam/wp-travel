@@ -8,6 +8,13 @@ class WP_Travel_Notices {
 	}
 
 	function add( $value, $type = 'error' ) {
+
+		if ( empty( $value ) ) {
+
+			return;
+
+		}
+
 		if ( 'error' === $type ) {
 			$this->errors = wp_parse_args( array( $value ), $this->errors );
 			WP_Travel()->session->set( 'wp_travel_errors', $this->errors );
