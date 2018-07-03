@@ -1210,7 +1210,7 @@ function wp_travel_get_frontend_tabs() {
 
 				if ( isset( $tab['custom'] ) ) {
 
-					$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
+					$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
 
 				}
 

@@ -87,10 +87,12 @@ WP_Travel()->notices->print_notices( 'success', true );
 					}
 					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 
-					$price_per = wp_travel_get_price_per_text( $trip['trip_id'] );
+					$price_per = wp_travel_get_price_per_text( $trip['trip_id'], true );
 					
 					if ( 'group' === $price_per ) {
+						
 						$single_trip_total = wp_travel_get_formated_price( $trip_price );
+					
 					}
 					
 					?>
