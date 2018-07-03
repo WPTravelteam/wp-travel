@@ -1194,8 +1194,6 @@ function wp_travel_get_frontend_tabs() {
 
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 
-	// print_r( $custom_global_tabs ); die;
-
 	
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
 	
@@ -1204,9 +1202,6 @@ function wp_travel_get_frontend_tabs() {
 		$wp_travel_tabs = $settings['global_tab_settings'];
 		
 	}
-
-	print_r( $wp_travel_tabs ); die;
-	
 	
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
