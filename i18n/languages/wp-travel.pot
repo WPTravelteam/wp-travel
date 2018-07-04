@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.4.5\n"
+"Project-Id-Version: WP Travel 1.4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-03 08:26:21+00:00\n"
+"POT-Creation-Date: 2018-07-04 06:30:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,7 +42,7 @@ msgid "WP Travel version: %s"
 msgstr ""
 
 #: inc/admin/admin-helper.php:433 inc/booking-functions.php:804
-#: inc/helpers.php:1278
+#: inc/helpers.php:1271
 msgid "Booking"
 msgstr ""
 
@@ -196,7 +196,7 @@ msgid "Trip Facts"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:241
-#: inc/admin/class-admin-metaboxes.php:242 inc/helpers.php:1276
+#: inc/admin/class-admin-metaboxes.php:242 inc/helpers.php:1269
 msgid "Gallery"
 msgstr ""
 
@@ -1256,16 +1256,16 @@ msgid "Custom Min. Payout (%)"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-includes.php:8
-#: inc/helpers.php:1274
+#: inc/helpers.php:1267
 msgid "Trip Includes"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-includes.php:11
-#: inc/helpers.php:1275
+#: inc/helpers.php:1268
 msgid "Trip Excludes"
 msgstr ""
 
-#: inc/booking-functions.php:30 inc/class-frontend-assets.php:136
+#: inc/booking-functions.php:30 inc/class-frontend-assets.php:140
 #: inc/template-functions.php:418
 msgid "Book Now"
 msgstr ""
@@ -1471,7 +1471,7 @@ msgstr ""
 msgid "Booking / Payments"
 msgstr ""
 
-#: inc/cart/checkout.php:151 inc/class-frontend-assets.php:137
+#: inc/cart/checkout.php:151 inc/class-frontend-assets.php:141
 msgid "Book and Pay"
 msgstr ""
 
@@ -1520,11 +1520,11 @@ msgstr ""
 msgid "Powered By: %1$1sWP Travel.%2$2s"
 msgstr ""
 
-#: inc/class-frontend-assets.php:107 templates/content-pricing-options.php:135
+#: inc/class-frontend-assets.php:110 templates/content-pricing-options.php:135
 msgid "Select"
 msgstr ""
 
-#: inc/class-frontend-assets.php:108
+#: inc/class-frontend-assets.php:111
 msgid "Close"
 msgstr ""
 
@@ -3330,7 +3330,7 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: inc/helpers.php:563 inc/helpers.php:1632
+#: inc/helpers.php:563 inc/helpers.php:1607
 msgid "Group"
 msgstr ""
 
@@ -3386,48 +3386,48 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:1259 inc/template-functions.php:639
+#: inc/helpers.php:1252 inc/template-functions.php:639
 #: templates/content-pricing-options.php:22
 msgid "No details found."
 msgstr ""
 
-#: inc/helpers.php:1272
+#: inc/helpers.php:1265
 msgid "Overview"
 msgstr ""
 
-#: inc/helpers.php:1273
+#: inc/helpers.php:1266
 msgid "Trip Outline"
 msgstr ""
 
-#: inc/helpers.php:1277 inc/template-functions.php:389
+#: inc/helpers.php:1270 inc/template-functions.php:389
 msgid "Reviews"
 msgstr ""
 
-#: inc/helpers.php:1279
+#: inc/helpers.php:1272
 msgid "FAQ"
 msgstr ""
 
-#: inc/helpers.php:1628
+#: inc/helpers.php:1603
 msgid "Adult"
 msgstr ""
 
-#: inc/helpers.php:1629
+#: inc/helpers.php:1604
 msgid "Children"
 msgstr ""
 
-#: inc/helpers.php:1630
+#: inc/helpers.php:1605
 msgid "Infant"
 msgstr ""
 
-#: inc/helpers.php:1631
+#: inc/helpers.php:1606
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1633
+#: inc/helpers.php:1608
 msgid "Custom"
 msgstr ""
 
-#: inc/helpers.php:1857
+#: inc/helpers.php:1832
 msgid "New Account Created"
 msgstr ""
 
