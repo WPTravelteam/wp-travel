@@ -110,7 +110,7 @@ class WP_Travel_Frontend_Assets {
 					'pricing_select' => __( 'Select', 'wp-travel' ),
 					'pricing_close'  => __( 'Close', 'wp-travel' ),
 				),
-				'locale' => $locale ,
+				'locale' => $locale,
 			);
 
 			$frontend_vars = apply_filters( 'wp_travel_js_frontend_vars', $frontend_vars );

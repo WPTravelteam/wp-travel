@@ -22,10 +22,13 @@ class WP_Travel_FW_Field_Date {
 		}
 		$output = sprintf( '<input type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
 
+		$lang_code = explode( '-', get_bloginfo('language') );
+		$locale = $lang_code[0];
+
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
 		$output .= 		'$("#' . $this->field['id'] . '").datepicker({
-							language: "en",		
+							language: ' . $locale . ',		
 							minDate: new Date()
 						});';
 		$output .= '} )';
