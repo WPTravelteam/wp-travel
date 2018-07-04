@@ -567,7 +567,27 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     margin-left: 20px;
     margin-bottom: 10px; }
 
-.wp-travel-tabs-contents input[type="text"], .wp-travel-tabs-contents .wp-travel-form-field select[type="text"], .wp-travel-form-field .wp-travel-tabs-contents select[type="text"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="text"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="text"], .wp-travel-tabs-contents input[type="password"], .wp-travel-tabs-contents .wp-travel-form-field select[type="password"], .wp-travel-form-field .wp-travel-tabs-contents select[type="password"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="password"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="password"], .wp-travel-tabs-contents input[type="date"], .wp-travel-tabs-contents .wp-travel-form-field select[type="date"], .wp-travel-form-field .wp-travel-tabs-contents select[type="date"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="date"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="date"], .wp-travel-tabs-contents input[type="datetime"], .wp-travel-tabs-contents .wp-travel-form-field select[type="datetime"], .wp-travel-form-field .wp-travel-tabs-contents select[type="datetime"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="datetime"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="datetime"], .wp-travel-tabs-contents input[type="datetime-local"], .wp-travel-tabs-contents .wp-travel-form-field select[type="datetime-local"], .wp-travel-form-field .wp-travel-tabs-contents select[type="datetime-local"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="datetime-local"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="datetime-local"],
+.wp-travel-tabs-contents input[type="text"], .wp-travel-tabs-contents .wp-travel-form-field select[type="text"], .wp-travel-form-field .wp-travel-tabs-contents select[type="text"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="text"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="text"],
+.wp-travel-tabs-contents input[type="password"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="password"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="password"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="password"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="password"],
+.wp-travel-tabs-contents input[type="date"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="date"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="date"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="date"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="date"],
+.wp-travel-tabs-contents input[type="datetime"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="datetime"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="datetime"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="datetime"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="datetime"],
+.wp-travel-tabs-contents input[type="datetime-local"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="datetime-local"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="datetime-local"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="datetime-local"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="datetime-local"],
 .wp-travel-tabs-contents input[type="email"],
 .wp-travel-tabs-contents .wp-travel-form-field select[type="email"],
 .wp-travel-form-field .wp-travel-tabs-contents select[type="email"],
@@ -577,12 +597,48 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wp-travel-tabs-contents .wp-travel-form-field select[type="month"],
 .wp-travel-form-field .wp-travel-tabs-contents select[type="month"],
 .wp-travel-tabs-contents .wp-travel-form-field textarea[type="month"],
-.wp-travel-form-field .wp-travel-tabs-contents textarea[type="month"], .wp-travel-tabs-contents input[type="number"], .wp-travel-tabs-contents .wp-travel-form-field select[type="number"], .wp-travel-form-field .wp-travel-tabs-contents select[type="number"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="number"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="number"], .wp-travel-tabs-contents input[type="search"], .wp-travel-tabs-contents .wp-travel-form-field select[type="search"], .wp-travel-form-field .wp-travel-tabs-contents select[type="search"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="search"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="search"], .wp-travel-tabs-contents input[type="tel"], .wp-travel-tabs-contents .wp-travel-form-field select[type="tel"], .wp-travel-form-field .wp-travel-tabs-contents select[type="tel"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="tel"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="tel"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="month"],
+.wp-travel-tabs-contents input[type="number"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="number"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="number"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="number"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="number"],
+.wp-travel-tabs-contents input[type="search"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="search"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="search"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="search"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="search"],
+.wp-travel-tabs-contents input[type="tel"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="tel"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="tel"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="tel"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="tel"],
 .wp-travel-tabs-contents input[type="time"],
 .wp-travel-tabs-contents .wp-travel-form-field select[type="time"],
 .wp-travel-form-field .wp-travel-tabs-contents select[type="time"],
 .wp-travel-tabs-contents .wp-travel-form-field textarea[type="time"],
-.wp-travel-form-field .wp-travel-tabs-contents textarea[type="time"], .wp-travel-tabs-contents input[type="url"], .wp-travel-tabs-contents .wp-travel-form-field select[type="url"], .wp-travel-form-field .wp-travel-tabs-contents select[type="url"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="url"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="url"], .wp-travel-tabs-contents input[type="week"], .wp-travel-tabs-contents .wp-travel-form-field select[type="week"], .wp-travel-form-field .wp-travel-tabs-contents select[type="week"], .wp-travel-tabs-contents .wp-travel-form-field textarea[type="week"], .wp-travel-form-field .wp-travel-tabs-contents textarea[type="week"], .wp-travel-tabs-contents select, .wp-travel-tabs-contents .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .wp-travel-tabs-contents input, .wp-travel-tabs-contents .stat-toolbar-form .field-group .wp-travel-form-field select, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-tabs-contents select, .wp-travel-tabs-contents .wp-travel-form-field .stat-toolbar-form .field-group select, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-tabs-contents select, .wp-travel-tabs-contents .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-tabs-contents textarea, .wp-travel-tabs-contents .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-tabs-contents textarea {
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="time"],
+.wp-travel-tabs-contents input[type="url"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="url"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="url"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="url"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="url"],
+.wp-travel-tabs-contents input[type="week"],
+.wp-travel-tabs-contents .wp-travel-form-field select[type="week"],
+.wp-travel-form-field .wp-travel-tabs-contents select[type="week"],
+.wp-travel-tabs-contents .wp-travel-form-field textarea[type="week"],
+.wp-travel-form-field .wp-travel-tabs-contents textarea[type="week"],
+.wp-travel-tabs-contents select,
+.wp-travel-tabs-contents .stat-toolbar-form .field-group input,
+.stat-toolbar-form .field-group .wp-travel-tabs-contents input,
+.wp-travel-tabs-contents .stat-toolbar-form .field-group .wp-travel-form-field select,
+.stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-tabs-contents select,
+.wp-travel-tabs-contents .wp-travel-form-field .stat-toolbar-form .field-group select,
+.wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-tabs-contents select,
+.wp-travel-tabs-contents .stat-toolbar-form .field-group .wp-travel-form-field textarea,
+.stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-tabs-contents textarea,
+.wp-travel-tabs-contents .wp-travel-form-field .stat-toolbar-form .field-group textarea,
+.wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-tabs-contents textarea {
   max-width: 215px !important;
   width: 100%; }
 
@@ -677,7 +733,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .tab-accordion h4 a .faq-label {
       padding-right: 50px;
       display: block; }
-  .tab-accordion h4 .wt-accordion-close {
+  .tab-accordion h4 .wt-accordion-close,
+  .tab-accordion h4 .wt-utils-accordion-close {
     position: absolute;
     right: 10px;
     color: #ca4a1f;
@@ -1198,10 +1255,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   display: block;
   margin-bottom: 10px; }
 
-span.wp-travel-error, span.wp-travel-info, span.wp-travel-message {
+span.wp-travel-error,
+span.wp-travel-info,
+span.wp-travel-message {
   display: inline-block; }
 
-.wp-travel-error, .wp-travel-info, .wp-travel-message {
+.wp-travel-error,
+.wp-travel-info,
+.wp-travel-message {
   padding: 1em 2em 1em 4.5em !important;
   margin: 0 0 2em !important;
   position: relative;
@@ -1212,11 +1273,17 @@ span.wp-travel-error, span.wp-travel-info, span.wp-travel-message {
   width: auto;
   word-wrap: break-word; }
 
-.wp-travel-error::after, .wp-travel-info::after, .wp-travel-message::after {
+.wp-travel-error::after,
+.wp-travel-info::after,
+.wp-travel-message::after {
   clear: both; }
 
-.wp-travel-error::after, .wp-travel-error::before, .wp-travel-info::after, .wp-travel-info::before,
-.wp-travel-message::after, .wp-travel-message::before {
+.wp-travel-error::after,
+.wp-travel-error::before,
+.wp-travel-info::after,
+.wp-travel-info::before,
+.wp-travel-message::after,
+.wp-travel-message::before {
   content: ' ';
   display: table; }
 

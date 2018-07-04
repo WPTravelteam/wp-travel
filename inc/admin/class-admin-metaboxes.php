@@ -437,7 +437,9 @@ class WP_Travel_Admin_Metaboxes {
 		$tabs = wp_travel_get_frontend_tabs();
 		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 
-		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
+
+		if ( is_array( $tabs ) && count( $tabs ) > 0 && ! $enable_custom_itinerary_tabs ) {
 			?>
 				<table class="form-table">
 					<tr>
@@ -501,6 +503,10 @@ class WP_Travel_Admin_Metaboxes {
 		
 			echo '</tbody></table>';
 		}
+
+		// Custom itinerary tabs support.
+		do_action( 'wp_travel_itinerary_custom_tabs' );
+
 	 }
 
 	function wp_travel_misc_options_callback( $tab, $args ) {

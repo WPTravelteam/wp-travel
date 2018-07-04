@@ -667,8 +667,10 @@ class WP_Travel_Admin_Settings {
 			$global_tabs = wp_travel_get_default_frontend_tabs();
 
 		}
+
+		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 		
-		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 ) {
+		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 && ! $custom_tab_enabled ) {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
 		?>
 				<thead>
@@ -702,31 +704,16 @@ class WP_Travel_Admin_Settings {
 						<span class="switch">
 						  </span>
 						</label></span>
-
-						<?php 
-
-							if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
-
-							?>
-
-								<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ); ?>][custom]" value="yes">
-
-							<?php
-
-							}
-						
-						?>
-
 					</td>
 				</tr>
 			<?php
 				endforeach;
 
-			// Add custom Tabs Support.
-			do_action( 'wp_travel_custom_global_tabs' );
-
 			echo'<tbody></table>';
 		}
+
+		// Add custom Tabs Support.
+		do_action( 'wp_travel_custom_global_tabs' );
 	}
 
 	/**
