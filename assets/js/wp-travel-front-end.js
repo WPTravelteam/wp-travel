@@ -240,7 +240,7 @@ jQuery(document).ready(function($) {
         var availabledate = jQuery(this).data('available-dates');
         if (availabledate) {
             jQuery(this).datepicker({
-                language: 'en',
+                language: wp_travel_frontend_vars.locale,
                 inline: true,
                 minDate: new Date(),
                 onRenderCell: function(date, cellType) {
@@ -259,7 +259,7 @@ jQuery(document).ready(function($) {
 
         } else {
             jQuery(this).datepicker({
-                language: 'en',
+                language: wp_travel_frontend_vars.locale,
                 inline: true,
                 minDate: new Date(),
             });

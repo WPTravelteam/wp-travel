@@ -1194,7 +1194,6 @@ function wp_travel_get_frontend_tabs() {
 
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 
-	
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
 	
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
@@ -1207,12 +1206,6 @@ function wp_travel_get_frontend_tabs() {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
 			
 			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
-
-				if ( isset( $tab['custom'] ) ) {
-
-					$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
-
-				}
 
 			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			// $new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
@@ -1278,24 +1271,6 @@ function wp_travel_get_default_frontend_tabs() {
 		'booking' 		=> array( 'label' => __( 'Booking', 'wp-travel' ), 'label_class' => 'wp-travel-booking-form', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 		'faq' 			=> array( 'label' => __( 'FAQ', 'wp-travel' ), 'label_class' => '', 'content' => $faqs, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
 	);
-
-	// $settings = wp_travel_get_settings();
-
-	// $custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
-
-	// $cust_tabs = array();
-
-	// if ( ! empty( $custom_global_tabs ) ) {
-
-	// 	foreach( $custom_global_tabs as $key => $tb ) {
-
-	// 		$cust_tabs[$key] = array( 'label' => $tb['label'], 'label_class' => '', 'content' => $tb['content'], 'use_global' => 'yes', 'show_in_menu' => 'yes' );
-
-	// 	}
-
-	// }
-
-	// $return_tabs = array_merge( $return_tabs, $cust_tabs );
 
 	return $return_tabs;
 }
