@@ -28,7 +28,7 @@ class WP_Travel_FW_Field_Date {
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
 		$output .= 		'$("#' . $this->field['id'] . '").datepicker({
-							language: ' . $locale . ',		
+							language: "' . $locale . '",		
 							minDate: new Date()
 						});';
 		$output .= '} )';
