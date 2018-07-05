@@ -1192,9 +1192,21 @@ function wp_travel_get_frontend_tabs() {
 
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ?  $settings['wp_travel_custom_global_tabs'] : array();
 
+	$custom_itinerary_tabs = get_post_meta( $post->ID, 'wp_travel_itinerary_custom_tab_cnt_', true );
+
+	$custom_itinerary_tabs = is_array( $custom_itinerary_tabs ) && count( $custom_itinerary_tabs ) != 0 ? $custom_itinerary_tabs : array(); 
+
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
+
+	$custom_itinerary_tabs_sorting = get_post_meta( $post->ID, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
+
+	if ( is_array( $custom_itinerary_tabs_sorting ) && ! empty( $custom_itinerary_tabs_sorting ) ) {
+
+		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
+
+	}
 	
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
 
@@ -1218,7 +1230,17 @@ function wp_travel_get_frontend_tabs() {
 
 			if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
 
-				$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
+				if ( isset( $tab['global'] ) && 'yes' === $tab['global'] ) {
+
+					$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
+				
+				}
+				else {
+
+					$tab_content = isset( $custom_itinerary_tabs[$key]['content'] ) ? $custom_itinerary_tabs[$key]['content'] : '';
+
+				}
+				
 
 			}
 
@@ -1228,6 +1250,10 @@ function wp_travel_get_frontend_tabs() {
 			$new_tabs[ $key ]['content'] = $tab_content;
 			$new_tabs[ $key ]['use_global'] = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
 			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
+
+			$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
+
+			$new_tabs[ $key ]['global'] = isset( $tab['global'] ) ? $tab['global'] : 'no';
 
 			// override if is global.
 			// if ( ! is_admin() ) {
