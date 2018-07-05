@@ -155,7 +155,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Fixes: Minor issues and bug fixes.
 
 = 1.4.6 = 
-* Enhancements / Feature : Booking datepicker milti-lingual support.
+* Enhancements / Feature : Booking datepicker multi-lingual support.
 * Fixes: Cart page "Group" price total issue fixes.
 * Fixes: WP Travel Filter widget currency symbol issue fixed in range filter.
 * Fixes: Minor issues and bug fixes.
