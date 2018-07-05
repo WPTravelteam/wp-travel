@@ -64,6 +64,11 @@ class WP_Travel_Notices {
 
 			foreach ( $notices as $key => $notice ) {
 
+				if ( 'error ' === $notice ) {
+
+					return;
+				}
+
 				echo '<div class="wp-travel-error">' . $notice . '</div>';
 
 			}
