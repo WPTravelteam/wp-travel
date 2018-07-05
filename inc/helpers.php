@@ -1190,6 +1190,8 @@ function wp_travel_get_frontend_tabs() {
 
 	$settings = wp_travel_get_settings();
 
+	$custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
+
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ?  $settings['wp_travel_custom_global_tabs'] : array();
 
 	$custom_itinerary_tabs = get_post_meta( $post->ID, 'wp_travel_itinerary_custom_tab_cnt_', true );
@@ -1202,7 +1204,7 @@ function wp_travel_get_frontend_tabs() {
 
 	$custom_itinerary_tabs_sorting = get_post_meta( $post->ID, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
 
-	if ( is_array( $custom_itinerary_tabs_sorting ) && ! empty( $custom_itinerary_tabs_sorting ) ) {
+	if ( $custom_tabs_enable && is_array( $custom_itinerary_tabs_sorting ) && ! empty( $custom_itinerary_tabs_sorting ) ) {
 
 		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
 
@@ -1213,7 +1215,7 @@ function wp_travel_get_frontend_tabs() {
 		
 		$wp_travel_tabs = $settings['global_tab_settings'];
 		
-		if ( isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
+		if ( $custom_tabs_enable && isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
 			
 			$wp_travel_tabs = $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'];
 			
