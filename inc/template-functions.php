@@ -1655,6 +1655,20 @@ function wp_travel_posts_filter( $query ) {
 
 				}
 			}
+			if ( isset( $_GET['fact'] ) ) {
+
+				$fact = $_GET['fact'];
+
+				$query->set('meta_key', 'wp_travel_trip_facts');
+				$query->set('meta_query', array(
+					array(
+						'key' => 'wp_travel_trip_facts',
+						'value' => $fact,
+						'compare' => 'LIKE',
+					),
+				));
+	
+			}
 		}
 	}
 }

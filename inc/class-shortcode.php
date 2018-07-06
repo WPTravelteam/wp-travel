@@ -194,6 +194,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 		$filters = explode( ',',$atts['filters'] );
 		
 		$keyword_search = in_array( 'keyword', $filters ) ? true : false;
+		$fact = in_array( 'fact', $filters ) ? true : false;
 		$trip_type_filter = in_array( 'trip_type', $filters ) ? true : false;
 		$trip_location_filter = in_array( 'trip_location', $filters ) ? true : false;
 		$price_orderby = in_array( 'price_orderby', $filters ) ? true : false;
@@ -224,6 +225,13 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 						<label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
 							<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 							<input class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" name="keyword" id="wp-travel-filter-keyword" value="<?php echo ( isset( $_GET['keyword'] ) ) ? esc_textarea( $_GET['keyword'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+					</div>
+				<?php endif; ?>
+				<?php if ( $fact ) : ?>
+					<div class="wp-travel-form-field ">
+						<label><?php esc_html_e( 'Trip Fact:', 'wp-travel' ) ?></label>
+							<?php $placeholder = __( 'Ex: guide', 'wp-travel' ); ?>
+							<input class="wp_travel_search_widget_filters_input<?php echo esc_attr($index); ?>" type="text" name="fact" id="wp-travel-filter-fact" value="<?php echo ( isset( $_GET['fact'] ) ) ? esc_textarea( $_GET['fact'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 					</div>
 				<?php endif; ?>
 				<?php if ( $trip_type_filter ) : ?>

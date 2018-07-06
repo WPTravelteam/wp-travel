@@ -41,6 +41,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 
 		// Filters
 		$keyword_search = isset( $instance['keyword_search'] ) ? $instance['keyword_search'] : '';
+		$fact = isset( $instance['fact'] ) ? $instance['fact'] : true;
 		$trip_type_filter = isset( $instance['trip_type_filter'] ) ? $instance['trip_type_filter'] : '';
 		$trip_location_filter = isset( $instance['trip_location_filter'] ) ? $instance['trip_location_filter'] : '';
 		$price_orderby = isset( $instance['price_orderby'] ) ? $instance['price_orderby'] : '';
@@ -71,6 +72,13 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 						<label><?php esc_html_e( 'Keyword:', 'wp-travel' ) ?></label>
 							<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 							<input class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" name="keyword" id="wp-travel-filter-keyword" value="<?php echo ( isset( $_GET['keyword'] ) ) ? esc_textarea( $_GET['keyword'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+					</div>
+				<?php endif; ?>
+				<?php if ( $fact ) : ?>
+					<div class="wp-travel-form-field ">
+						<label><?php esc_html_e( 'Fact:', 'wp-travel' ) ?></label>
+							<?php $placeholder = __( 'Ex: guide', 'wp-travel' ); ?>
+							<input class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" name="fact" id="wp-travel-filter-fact" value="<?php echo ( isset( $_GET['fact'] ) ) ? esc_textarea( $_GET['fact'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 					</div>
 				<?php endif; ?>
 				<?php if ( $trip_type_filter ) : ?>
@@ -186,6 +194,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 		$instance['keyword_search'] = isset( $new_instance['keyword_search'] ) ? sanitize_text_field( $new_instance['keyword_search'] ) : '';
+		$instance['fact'] = isset( $new_instance['fact'] ) ? sanitize_text_field( $new_instance['fact'] ) : '';
 		$instance['trip_type_filter'] = isset( $new_instance['trip_type_filter'] ) ? sanitize_text_field( $new_instance['trip_type_filter'] ) : '';
 		$instance['trip_location_filter'] = isset( $new_instance['trip_location_filter'] ) ? sanitize_text_field( $new_instance['trip_location_filter'] ) : '';
 		$instance['price_orderby'] = isset( $new_instance['price_orderby'] ) ? sanitize_text_field( $new_instance['price_orderby'] ) : '';
@@ -207,6 +216,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 
 		// Filters.
 		$keyword_search = 1;
+		$fact = 1;
 		$trip_type_filter = 1;
 		$trip_location_filter = 1;
 		$price_orderby = 1;
@@ -222,6 +232,9 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		//Filters.
 		if ( isset( $instance['keyword_search'] ) ) {
 			$keyword_search = esc_attr( $instance['keyword_search'] );
+		}
+		if ( isset( $instance['fact'] ) ) {
+			$fact = esc_attr( $instance['fact'] );
 		}
 		if ( isset( $instance['trip_type_filter'] ) ) {
 			$trip_type_filter = esc_attr( $instance['trip_type_filter'] );
@@ -253,6 +266,9 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 				<label><strong><?php esc_html_e( 'Enable Filters', 'wp-travel' ); ?>:</strong></label>
 					<label style="display: block;">
 						<input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'keyword_search' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'keyword_search' ) ); ?>" class="widefat" <?php checked( 1, $keyword_search ); ?>><?php esc_html_e( 'KeyWord Search', 'wp-travel' ); ?>
+					</label>
+					<label style="display: block;">
+						<input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'fact' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'fact' ) ); ?>" class="widefat" <?php checked( 1, $fact ); ?>><?php esc_html_e( 'Trip Fact', 'wp-travel' ); ?>
 					</label>
 					<label style="display: block;">
 						<input type="checkbox" value="1" name="<?php echo esc_attr( $this->get_field_name( 'trip_type_filter' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_type_filter' ) ); ?>" class="widefat" <?php checked( 1, $trip_type_filter ); ?>><?php esc_html_e( 'Trip Type Filter', 'wp-travel' ); ?>
