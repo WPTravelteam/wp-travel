@@ -393,7 +393,7 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 		return 0;
 	}
 	global $wpdb;
-	// delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	//delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
 	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
 	// error_log( 'booking  count ' . $booking_count . ' itinerary id ' . $itinerary_id );
 	if ( ! $booking_count ) {

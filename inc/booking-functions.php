@@ -763,6 +763,9 @@ function wp_travel_book_now() {
 		$wt_cart->clear();
 	}
 
+	// Clear Transient To update booking Count.
+	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
