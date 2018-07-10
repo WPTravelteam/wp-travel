@@ -20,6 +20,8 @@ $multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures
 
 $enable_pricing_options = get_post_meta( $post->ID, 'wp_travel_enable_pricing_options', true );
 
+$enable_inventory_for_trip = get_post_meta( $post->ID, 'enable_trip_inventory', true );
+
 $trip_duration       = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
 $trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
 $trip_duration_night = get_post_meta( $post->ID, 'wp_travel_trip_duration_night', true );
@@ -139,6 +141,7 @@ if ( ! $price_per ) {
 								$pricing_sale_price   = isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : '';
 								$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
 								$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
+								$enable_inventory     = isset( $pricing['enable_inventory'] ) ? $pricing['enable_inventory'] : 'no';
 
 								// Pricing Label.
 								$custom_pricing_label_attribute = 'disabled="disabled"';
@@ -245,6 +248,23 @@ if ( ! $price_per ) {
 													<input class="pricing-opt-max-pax" value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
 												</div>
 											</div>
+											
+											<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
+												
+												<div class="repeat-row">
+													<label class="one-third"><?php esc_html_e( 'Enable Inventory', 'wp-travel' ); ?></label>
+													<div class="two-third">
+														<span class="show-in-frontend checkbox-default-design">
+															<label data-on="ON" data-off="OFF">
+																<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][enable_inventory]" type="checkbox" class="" <?php checked( $enable_inventory, "yes" ); ?> value="yes">
+																<span class="switch"></span>
+															</label>
+														</span>
+														<span class=""><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></span>
+													</div>
+												</div>
+
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -347,6 +367,24 @@ if ( ! $price_per ) {
 										<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][max_pax]" placeholder="Max PAX"  min="1" />
 									</div>
 								</div>
+								
+								<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
+												
+									<div class="repeat-row">
+										<label class="one-third"><?php esc_html_e( 'Enable Inventory', 'wp-travel' ); ?></label>
+										<div class="two-third">
+											<span class="show-in-frontend checkbox-default-design">
+												<label data-on="ON" data-off="OFF">
+													<input name="wp_travel_pricing_options[{{data.random}}][enable_inventory]" type="checkbox" class="" value="yes">
+													<span class="switch"></span>
+												</label>
+											</span>
+											<span class=""><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></span>
+										</div>
+									</div>
+
+								<?php endif; ?>
+
 							</div>
 						</div>
 					</div>
