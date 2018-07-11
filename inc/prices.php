@@ -128,6 +128,28 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		$min_available   = 1;
 	}
 
+	if ( class_exists( 'WP_Travel_Util_Inventory' ) ){
+
+		$inventory = new WP_Travel_Util_Inventory();
+
+		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
+		$available_pax = $inventory->get_available_pax( $trip_id, false );
+
+		if ( isset( $price_key ) && '' !== $price_key  ) {
+
+			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
+			$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
+
+		}
+
+		if ( $inventory_enabled && $available_pax ) {
+
+			$max_available = $available_pax;
+
+		}
+
+	}
+
 	
 	$trip_price = wp_travel_get_formated_price( $trip_price );
 	// $price = wp_travel_get_formated_price( $price );

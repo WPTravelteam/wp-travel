@@ -55,6 +55,16 @@ $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 
 if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
+	if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+
+		$inventory = new WP_Travel_Util_Inventory();
+	
+		// var_dump( $price_key );
+	
+		var_dump( $inventory->get_available_pax( $trip_id ) );
+	
+	}
+
 	if ( 'yes' === $wp_travel_enable_pricing_options ) :
 
 		$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
@@ -94,15 +104,15 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 							$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $price_key );
 
-							// if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+							if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
-							// 	$inventory = new WP_Travel_Util_Inventory();
+								$inventory = new WP_Travel_Util_Inventory();
 							
-							// 	var_dump( $price_key );
+								// var_dump( $price_key );
 							
-							// 	var_dump( $inventory->get_available_pax( $trip_id ) );
+								var_dump( $inventory->get_available_pax( $trip_id , $price_key ) );
 							
-							// }
+							}
 
 						?>
 						<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">

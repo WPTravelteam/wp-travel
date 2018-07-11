@@ -160,6 +160,36 @@ class WP_Travel_Cart {
 
 		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
 
+		if ( class_exists( 'WP_Travel_Util_Inventory' ) ){
+
+			$inventory = new WP_Travel_Util_Inventory();
+
+			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
+			$available_pax = $inventory->get_available_pax( $trip_id, false );
+
+			if ( isset( $price_key ) && '' !== $price_key  ) {
+
+				$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
+				$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
+
+			}
+
+			if ( $inventory_enabled && $available_pax ) {
+
+				if ( $pax > $available_pax ) {
+
+					WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+					
+					$pax = $available_pax;
+
+					$this->quantity_limit = $pax;
+
+				}
+
+			}
+
+		}
+
 		// Add product id.
 		$this->items[ $cart_item_id ]['trip_id'] 	= $trip_id;
 		$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
@@ -232,7 +262,17 @@ class WP_Travel_Cart {
 
 		// Update quantity.
 		if ( isset( $this->items[ $cart_item_id ] ) ) {
-			$this->items[ $cart_item_id ]['pax'] = ($pax > $this->quantity_limit) ? $this->quantity_limit : $pax;
+
+			$max_available = $this->items[ $cart_item_id ]['max_available'];
+
+			$this->items[ $cart_item_id ]['pax'] = ($pax > $max_available) ? $max_available : $pax;
+
+			if ( $pax > $max_available ) {
+
+				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+
+			}
+
 			$this->write();
 			return true;
 		}
