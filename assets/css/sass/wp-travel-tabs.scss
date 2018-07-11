@@ -161,6 +161,14 @@ $alto: #ddd;
                     line-height: 20px;
                 }
             }
+            &#wp-travel-tab-inventory a {
+              &:before {
+                font-family: icomoon;
+                content: '\e908';
+                font-size: 12px;
+                line-height: 20px;
+              }
+            }
         }
     }
     .wp-travel-tabs-contents {
