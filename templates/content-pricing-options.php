@@ -93,10 +93,10 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
 	}
+	
+	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
 
-	if ( 'yes' === $wp_travel_enable_pricing_options ) :
-
-		$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
+	if ( 'yes' === $wp_travel_enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 
 		if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) : ?>
 			<div id="wp-travel-date-price" class="detail-content">
@@ -157,6 +157,14 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 								//Admin message.
 								$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
 
+								$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
+
+								if ( ! $inventory_enabled_for_option ) {
+
+									$pricing_status_msg = __( 'N/A', 'wp-travel-utilities' );
+
+								}
+
 								$pricing_sold_out = $available_pax === 0 ? true : false;
 								
 							}
@@ -168,11 +176,11 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<?php if( $status_col ) : ?>
 

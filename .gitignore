@@ -15,6 +15,7 @@ project.properties
 # Sass
 assets/css/.sass-cache/
 .sass-cache/
+/../*.config
 # OS X metadata
 .DS_Store
 # Windows junk
