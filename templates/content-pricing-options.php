@@ -91,7 +91,14 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 		$general_sold_out = $available_pax === 0 ? true : false;
 
+		$wp_travel_inventory_sold_out_action = get_post_meta( $post_id, 'wp_travel_inventory_sold_out_action', true );
+
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
+		
+		if ( 'allow_trip_enquiry' === $wp_travel_inventory_sold_out_action ) {
+			$sold_out_btn_rep_msg = wp_travel_utilities__get_inquiry_link();
+		}
+
 	}
 	
 	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );

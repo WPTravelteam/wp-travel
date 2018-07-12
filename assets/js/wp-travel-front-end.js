@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $('#wp-travel-send-enquiries').magnificPopup({
+    $('.wp-travel-send-enquiries').magnificPopup({
         type: 'inline',
         preloader: false,
         focus: '#wp-travel-enquiry-name',
