@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-12 11:01:06+00:00\n"
+"POT-Creation-Date: 2018-07-12 11:40:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -81,7 +81,7 @@ msgstr ""
 #: inc/helpers.php:814 inc/helpers.php:983 inc/helpers.php:1073
 #: inc/helpers.php:1089 inc/helpers.php:1104
 #: templates/content-pricing-options.php:87
-#: templates/content-pricing-options.php:179
+#: templates/content-pricing-options.php:181
 msgid "N/A"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgstr ""
 
 #: inc/admin/class-admin-menu.php:12 inc/admin/class-admin-metaboxes.php:145
 #: templates/content-pricing-options.php:133
-#: templates/content-pricing-options.php:322
+#: templates/content-pricing-options.php:324
 msgid "Status"
 msgstr ""
 
@@ -974,7 +974,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/additional-info-tab.php:8
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:75
-#: inc/template-functions.php:372 templates/content-pricing-options.php:317
+#: inc/template-functions.php:372 templates/content-pricing-options.php:319
 msgid "Group Size"
 msgstr ""
 
@@ -1098,7 +1098,7 @@ msgstr ""
 #: inc/widgets/class-wp-travel-search-filters-widget.php:127
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 #: templates/content-pricing-options.php:138
-#: templates/content-pricing-options.php:327
+#: templates/content-pricing-options.php:329
 msgid "Price"
 msgstr ""
 
@@ -1187,7 +1187,7 @@ msgstr ""
 #: inc/class-shortcode.php:301 inc/form-fields.php:194
 #: inc/template-functions.php:528
 #: inc/widgets/class-wp-travel-search-filters-widget.php:147
-#: templates/content-pricing-options.php:312
+#: templates/content-pricing-options.php:314
 msgid "Trip Duration"
 msgstr ""
 
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "Powered By: %1$1sWP Travel.%2$2s"
 msgstr ""
 
-#: inc/class-frontend-assets.php:110 templates/content-pricing-options.php:239
+#: inc/class-frontend-assets.php:110 templates/content-pricing-options.php:241
 msgid "Select"
 msgstr ""
 
@@ -4038,76 +4038,76 @@ msgstr ""
 msgid "Max Group Size"
 msgstr ""
 
-#: templates/content-pricing-options.php:190
+#: templates/content-pricing-options.php:192
 msgid "Pricing Name:"
 msgstr ""
 
-#: templates/content-pricing-options.php:193
+#: templates/content-pricing-options.php:195
 msgid "Min Group Size:"
 msgstr ""
 
-#: templates/content-pricing-options.php:194
-#: templates/content-pricing-options.php:198
+#: templates/content-pricing-options.php:196
+#: templates/content-pricing-options.php:200
 msgid "No size limit"
 msgstr ""
 
-#: templates/content-pricing-options.php:197
+#: templates/content-pricing-options.php:199
 msgid "Max Group Size:"
 msgstr ""
 
-#: templates/content-pricing-options.php:203
-#: templates/content-pricing-options.php:363
+#: templates/content-pricing-options.php:205
+#: templates/content-pricing-options.php:365
 msgid "Status:"
 msgstr ""
 
-#: templates/content-pricing-options.php:209
-#: templates/content-pricing-options.php:369
+#: templates/content-pricing-options.php:211
+#: templates/content-pricing-options.php:371
 msgid "price:"
 msgstr ""
 
-#: templates/content-pricing-options.php:245
+#: templates/content-pricing-options.php:247
 msgid "Select a Date:"
 msgstr ""
 
-#: templates/content-pricing-options.php:246
-#: templates/content-pricing-options.php:249
+#: templates/content-pricing-options.php:248
+#: templates/content-pricing-options.php:251
 msgid "Please Select a Date"
 msgstr ""
 
-#: templates/content-pricing-options.php:272
+#: templates/content-pricing-options.php:274
 msgid "size"
 msgstr ""
 
-#: templates/content-pricing-options.php:287
-#: templates/content-pricing-options.php:419
+#: templates/content-pricing-options.php:289
+#: templates/content-pricing-options.php:421
 msgid "Book now"
 msgstr ""
 
-#: templates/content-pricing-options.php:305
+#: templates/content-pricing-options.php:307
 msgid "Start"
 msgstr ""
 
-#: templates/content-pricing-options.php:308
+#: templates/content-pricing-options.php:310
 msgid "End"
 msgstr ""
 
-#: templates/content-pricing-options.php:336
+#: templates/content-pricing-options.php:338
 msgid "start:"
 msgstr ""
 
-#: templates/content-pricing-options.php:345
+#: templates/content-pricing-options.php:347
 msgid "end:"
 msgstr ""
 
-#: templates/content-pricing-options.php:351
+#: templates/content-pricing-options.php:353
 msgid "Day(s):"
 msgstr ""
 
-#: templates/content-pricing-options.php:353
+#: templates/content-pricing-options.php:355
 msgid "Night(s):"
 msgstr ""
 
-#: templates/content-pricing-options.php:357
+#: templates/content-pricing-options.php:359
 msgid "Group Size:"
 msgstr ""
 
