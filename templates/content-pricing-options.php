@@ -75,10 +75,17 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 		
 		$status_msg = get_post_meta( $trip_id, 'wp_travel_inventory_status_message_format', true );
 
+		$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id );
+		
 		if ( ! $status_msg ) {
 			$status_msg = __('Pax Available: {available_pax} / {pax_limit}', 'wp-travel');
 		}
+		
+		if ( ! $inventory_enabled_for_option || 0 === $pax_limit ) {
 
+			$status_msg = __( 'N/A', 'wp-travel' );
+
+		}
 		$general_status_tags = array(
 
 			'{available_pax}' => $available_pax,
