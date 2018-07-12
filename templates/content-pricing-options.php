@@ -155,6 +155,8 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 							$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $price_key );
 
+							$pricing_sold_out = false;
+
 							if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
 								$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
