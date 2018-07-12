@@ -319,11 +319,7 @@
   .travel-log-front-page-full-width-widget .widget_wp_travel_filter_search_widget {
     width: 750px; }
   .travel-log-front-page-full-width-widget .widget .wp-travel-itinerary-widget li.col-1-per-row {
-    width: 50%; }
-  ul.availabily-list li {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex; } }
+    width: 50%; } }
 
 @media (min-width: 992px) {
   .travel-log-front-page-full-width-widget .widget_wp_travel_featured,
@@ -1881,30 +1877,12 @@ ul.availabily-list {
         text-align: right; }
         ul.availabily-list li > div.action.btn {
           margin-right: -8px; }
-        ul.availabily-list li > div.action .wp-travel-sold-out {
+        ul.availabily-list li > div.action p.wp-travel-sold-out {
           border: 1px solid;
           color: #ff4d4d;
           font-weight: 500;
           margin-bottom: 0;
           text-align: center; }
-          ul.availabily-list li > div.action .wp-travel-sold-out .wp-travel-booking-enquiry {
-            background-color: #ff4d4f;
-            color: #fff;
-            padding: 5px 0;
-            display: flex;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center; }
-            ul.availabily-list li > div.action .wp-travel-sold-out .wp-travel-booking-enquiry:hover {
-              opacity: 0.9; }
-            ul.availabily-list li > div.action .wp-travel-sold-out .wp-travel-booking-enquiry > .dashicons {
-              height: 14px; }
-            ul.availabily-list li > div.action .wp-travel-sold-out .wp-travel-booking-enquiry > * {
-              -ms-flex-item-align: center;
-              align-self: center; }
       ul.availabily-list li > div span {
         display: block;
         font-size: 14px;

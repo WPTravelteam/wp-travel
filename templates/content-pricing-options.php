@@ -59,6 +59,7 @@ $pax_limit = false;
 if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 	$status_column = false;
+	$status_col = false;
 
 	if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
@@ -232,7 +233,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 							
 								<?php if ( $pricing_sold_out ) : ?>
 									
-									<?php echo $sold_out_btn_rep_msg; ?>
+									<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 									
 								<?php else : ?>
 									<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
@@ -391,7 +392,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 						<div class="action">
 							<?php if ( $general_sold_out ) : ?>
 										
-								<?php echo $sold_out_btn_rep_msg; ?>
+								<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 										
 							<?php else : ?>
 								<?php
