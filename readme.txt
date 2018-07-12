@@ -21,6 +21,9 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 = "WP TRAVEL" COMPATIBLE THEMES: =
 * ["Travel Log"](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
 
+= "WP TRAVEL" v.1.4.8 RELEASE NOTE =
+* With v.1.4.8 update, template file( content-pricing-options.php ) [ dir : /wp-travel/templates ] has updated codes. If you are using the template in your theme, the template needs to be updated to accomodate new changes. For more info see ["Release Notes"](http://wptravel.io/category/release-notes/).
+
 = Some important features of the plugin: =
 * Tour packages with no limit: Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily.
 * Tour filters: User can find their required Itineraries by filtering or using easy search form.
@@ -155,6 +158,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.4.8 = 
 * New Feature : WP Travel Filters widget trip facts search / Filters. 
 * Enhancements / Feature : WP Travel Utilities Compatibility support.
+* Template Modification : /template/content-pricing-options.php file updated.
 * Fixes: Minor issues and bug fixes.
 
 = 1.4.7 = 
