@@ -91,7 +91,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 		$general_sold_out = $available_pax === 0 ? true : false;
 
-		$wp_travel_inventory_sold_out_action = get_post_meta( $post_id, 'wp_travel_inventory_sold_out_action', true );
+		$wp_travel_inventory_sold_out_action = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_action', true );
 
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
 		
