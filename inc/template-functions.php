@@ -222,7 +222,10 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 							}
 							?>
 						</span>
-					</ins>/<?php echo esc_html( $per_person_text ); ?>
+					</ins>
+					<?php if ( ! empty( $per_person_text ) ) : ?>
+						/<?php echo esc_html( $per_person_text ); ?>
+					<?php endif; ?>
 				</span>
 			</div>
 		<?php endif; ?>
