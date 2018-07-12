@@ -184,6 +184,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	
 
 	$keyword_search = true;
+	$fact = true;
 	$trip_type_filter = true;
 	$trip_location_filter = true;
 	$price_orderby = true;
