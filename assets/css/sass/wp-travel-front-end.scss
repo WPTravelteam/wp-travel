@@ -379,9 +379,8 @@
                         font-weight: inherit;
                     }
                 }
-                &
-                &:last-of-type{
-                    width:100%;
+                & &:last-of-type {
+                    width: 100%;
                 }
                 &.full-width {
                     width: calc(100% - 5px);
@@ -481,6 +480,11 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
         }
     }
 }
@@ -573,9 +577,8 @@
         line-height: inherit;
         background: none;
         overflow: hidden;
-
-        @include sidr-view{
-            width:100%;
+        @include sidr-view {
+            width: 100%;
         }
     }
     .right-plot-inner-wrap {
@@ -1089,7 +1092,6 @@
             box-sizing: border-box;
             float: right;
             @include clearfix;
-            
         }
         .value.code-left {
             float: left;
@@ -1296,8 +1298,6 @@
     }
 }
 
-
-
 //jquery ui range slider styling
 .ui-widget.ui-widget-content {
     border: none;
@@ -1383,11 +1383,11 @@ html .ui-button.ui-state-disabled:active {
 }
 
 #wp-travel-booking {
-
-    .form-group{
-        input:not([type="radio"]):not([type="checkbox"]),select{
-            width:100%;
-            margin-bottom:15px;
+    .form-group {
+        input:not([type="radio"]):not([type="checkbox"]),
+        select {
+            width: 100%;
+            margin-bottom: 15px;
         }
         .parsley-errors-list {
             padding: 0;
@@ -1395,10 +1395,9 @@ html .ui-button.ui-state-disabled:active {
             right: 0;
         }
     }
-
-    .wp-travel-radio-group{
+    .wp-travel-radio-group {
         margin-bottom: 15px;
-        input{
+        input {
             border: 1px solid #b4b9be;
             background: #ddd;
             cursor: pointer;
@@ -1407,13 +1406,12 @@ html .ui-button.ui-state-disabled:active {
             margin: -4px 4px 0 0;
             vertical-align: middle;
             width: 20px;
-            outline:0;
+            outline: 0;
             -webkit-appearance: none;
-            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.1 );
+            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.1);
             transition: .05s border-color ease-in-out;
             border-radius: 50%;
             margin-right: 10px;
-
             &[type="radio"]:checked:before {
                 content: "\2022";
                 text-indent: -9999px;
@@ -1425,31 +1423,32 @@ html .ui-button.ui-state-disabled:active {
                 float: left;
             }
         }
-        .col-sm-8{
-            label{
-                width:100%;
+        .col-sm-8 {
+            label {
+                width: 100%;
                 display: block;
                 position: relative;
                 margin-bottom: 5px;
-                cursor:pointer;
-
-
+                cursor: pointer;
             }
         }
     }
 }
-.f-partial-payment{
+
+.f-partial-payment {
     .wp-travel-text-info {
         font-size: 16px;
         color: #000000;
     }
-} 
-.f-full-payment{
+}
+
+.f-full-payment {
     .wp-travel-text-info {
         font-weight: 700;
         font-size: 20px;
     }
-} 
+}
+
 //twentysixteen
 .twentysixteen {
     ins {
@@ -1954,15 +1953,14 @@ html .ui-button.ui-state-disabled:active {
     position: relative;
     &:last-of-type {
         margin-top: 30px;
-    }    
-    .radio-checkbox-label{
-        margin-bottom:15px !important;
+    }
+    .radio-checkbox-label {
+        margin-bottom: 15px !important;
     }
 }
 
-.radio-checkbox-label{
-
-    input[type="checkbox"]{
+.radio-checkbox-label {
+    input[type="checkbox"] {
         border: 1px solid #b4b9be !important;
         background: #ddd;
         cursor: pointer;
@@ -1976,9 +1974,8 @@ html .ui-button.ui-state-disabled:active {
         box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
         transition: .05s border-color ease-in-out;
         margin-right: 10px !important;
-        position:relative;
-
-        &:checked:before{
+        position: relative;
+        &:checked:before {
             content: "\f00c";
             font-family: fontawesome;
             border-radius: 0;
@@ -2198,7 +2195,7 @@ html .ui-button.ui-state-disabled:active {
             display: inline-block;
             line-height: 1.65;
             margin-left: 3px;
-            &.active-mode a{
+            &.active-mode a {
                 opacity: 1;
             }
         }
@@ -2211,7 +2208,7 @@ html .ui-button.ui-state-disabled:active {
         }
         a {
             display: block;
-            opacity:0.5;
+            opacity: 0.5;
         }
     }
 }
@@ -2346,7 +2343,7 @@ ul.availabily-list {
         position: relative;
         &>div {
             display: inline-block;
-            width: 20%;
+            width: 16%;
             vertical-align: middle;
             padding: 0;
             margin: 0;
@@ -2404,23 +2401,22 @@ ul.availabily-list {
                         background-color: #ff4d4f;
                         color: #fff;
                         padding: 5px 0;
-
                         display: flex;
                         display: -webkit-box;
                         display: -ms-flexbox;
                         display: flex;
-                          -webkit-box-pack: center;
-                             -ms-flex-pack: center;
-                           justify-content: center;
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
                         &:hover {
                             opacity: 0.9;
                         }
-                        > .dashicons {
+                        >.dashicons {
                             height: 14px;
                         }
-                        > * {
+                        >* {
                             -ms-flex-item-align: center;
-                                     align-self: center;
+                            align-self: center;
                         }
                     }
                 }
@@ -2717,10 +2713,10 @@ ul.availabily-list {
                     color: #dc8051;
                 }
             }
-            td{
-                @media (max-width:767.99px){
-                    display:block;
-                    width:100%;
+            td {
+                @media (max-width: 767.99px) {
+                    display: block;
+                    width: 100%;
                 }
             }
         }
@@ -2809,12 +2805,12 @@ ul.availabily-list {
         }
     }
     .actions {
-        @media (min-width:768px){
+        @media (min-width: 768px) {
             float: right;
         }
         @media (max-width: 574.99px) {
-            .update-cart{
-                margin-bottom:15px;
+            .update-cart {
+                margin-bottom: 15px;
             }
         }
         .book-now-btn {
@@ -2892,47 +2888,43 @@ ul.availabily-list {
             padding: 5px 10px;
             margin-top: -1px;
         }
-        input[type="submit"]{
+        input[type="submit"] {
             padding: 11px 15px;
             border-radius: 0;
             font-size: 12px;
             line-height: 1.5;
         }
     }
-
     button[disabled],
-    input[disabled]{
-        opacity:0.5;
+    input[disabled] {
+        opacity: 0.5;
         cursor: not-allowed;
     }
-
     .update-cart {
         background-color: transparent;
         font-size: 14px;
         padding: 12px 30px;
         border: 1px solid #dc8051;
         color: #dc8051;
-
-        &:hover{
+        &:hover {
             background: #dc8051;
-            color:#fff;
+            color: #fff;
         }
     }
 }
 
-.table-total-info{
-    th{
-        .total{
-            text-align:right;
-            float:right;
-            display:inline;
+.table-total-info {
+    th {
+        .total {
+            text-align: right;
+            float: right;
+            display: inline;
             margin-bottom: 0;
         }
     }
 }
 
 .coupon-row {
-
     input[type="submit"] {
         height: 40px;
         line-height: 18px;
@@ -2949,8 +2941,9 @@ ul.availabily-list {
     text-align: right;
 }
 
-
-.wp-travel-error, .wp-travel-info, .wp-travel-message {
+.wp-travel-error,
+.wp-travel-info,
+.wp-travel-message {
     padding: 1em 2em 1em 4.5em !important;
     margin: 0 0 2em !important;
     position: relative;
@@ -2961,65 +2954,71 @@ ul.availabily-list {
     width: auto;
     word-wrap: break-word;
 }
-.wp-travel-error::after, .wp-travel-info::after, .wp-travel-message::after {
+
+.wp-travel-error::after,
+.wp-travel-info::after,
+.wp-travel-message::after {
     clear: both;
 }
 
-.wp-travel-error::after, .wp-travel-error::before, .wp-travel-info::after, .wp-travel-info::before, 
-.wp-travel-message::after, .wp-travel-message::before {
+.wp-travel-error::after,
+.wp-travel-error::before,
+.wp-travel-info::after,
+.wp-travel-info::before,
+.wp-travel-message::after,
+.wp-travel-message::before {
     content: ' ';
     display: table;
 }
+
 .wp-travel-error::before,
 .wp-travel-info::before,
-.wp-travel-message::before{
-    font-family:fontawesome;
+.wp-travel-message::before {
+    font-family: fontawesome;
     font-size: 18px;
     display: inline-block;
     position: absolute;
     top: 13px;
     left: 1.5em;
 }
+
 .wp-travel-message {
     border-top-color: #0aa525;
 }
+
 .wp-travel-message::before {
     content: '\f05d';
     color: #0aa525;
-
 }
+
 .wp-travel-error::before {
     content: '\f071';
     color: #b81c23;
 }
-.wp-travel-info{
-    border-top-color:#1e85be;
+
+.wp-travel-info {
+    border-top-color: #1e85be;
 }
-.wp-travel-info:before{
+
+.wp-travel-info:before {
     content: '\f05a';
     color: #1e85be;
-
 }
+
 ul.wp-travel-error {
     border-top-color: #b81c24;
 }
 
 //end
-
-
-
 //checkout page
-
 .checkout-page-wrap {
-
-    @media (min-width:768px){
-        .wp-travel-minicart{
-            float:right;
-            position:static;
-
-            .is_stuck{
-                & ~ div {
-                    display:none;
+    @media (min-width: 768px) {
+        .wp-travel-minicart {
+            float: right;
+            position: static;
+            .is_stuck {
+                &~div {
+                    display: none;
                 }
             }
         }
@@ -3113,13 +3112,12 @@ ul.wp-travel-error {
             margin-right: -15px;
             margin-left: -15px;
         }
-
-        &.f-partial-payment{
-            display:block;
+        &.f-partial-payment {
+            display: block;
         }
-        .radio-checkbox-label{
-            position:relative;
-            margin-bottom:15px;
+        .radio-checkbox-label {
+            position: relative;
+            margin-bottom: 15px;
             display: block;
         }
     }
@@ -3139,21 +3137,22 @@ ul.wp-travel-error {
         padding: 0 15px;
     }
 }
-.wp-travel-checkout-review-order-table{
-    td,th{
-        border-top:none;
-        border-left:none;
-        border-right:none;
+
+.wp-travel-checkout-review-order-table {
+    td,
+    th {
+        border-top: none;
+        border-left: none;
+        border-right: none;
     }
 }
 
-@media (max-width:768px){
+@media (max-width:768px) {
     .sticky-sidebar.is_stuck {
         position: relative !important;
         top: 0 !important;
         width: 100% !important;
-
-        & .sticky-sidebar.is_stuck ~ div {
+        & .sticky-sidebar.is_stuck~div {
             display: none !important;
         }
     }
@@ -3335,7 +3334,7 @@ ul.wp-travel-error {
             margin-bottom: 5px;
         }
         input {
-            &:not([type="checkbox"]){
+            &:not([type="checkbox"]) {
                 width: 100%;
                 margin-bottom: 15px;
                 font-size: 14px;
@@ -3346,8 +3345,8 @@ ul.wp-travel-error {
             margin-bottom: 15px;
             textarea {
                 padding: .6em 1em .6em;
-                resize:vertical;
-                width:100%;
+                resize: vertical;
+                width: 100%;
             }
         }
     }
