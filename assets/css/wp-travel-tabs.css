@@ -47,7 +47,6 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        -o-transition: none;
         transition: none;
         -webkit-transition: none;
         border-left: 4px solid #f1f1f1; }
@@ -71,7 +70,6 @@
         border-right: 1px solid #ffffff;
         background-color: #ffffff;
         background-position: 20px center;
-        -webkit-box-shadow: none;
         box-shadow: none;
         border-left: 4px solid #0073aa; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-detail a:before {
@@ -92,8 +90,6 @@
         content: "\f157"; }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-trip_includes a:before {
         content: "\f108";
-        -webkit-transform: rotate(270deg);
-        -ms-transform: rotate(270deg);
         transform: rotate(270deg); }
       .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-faq a:before {
         content: "\f223"; }
@@ -131,7 +127,6 @@
       clear: both; }
     .wp-travel-tabs-wrap .wp-travel-tabs-contents a:focus {
       outline: none;
-      -webkit-box-shadow: none;
       box-shadow: none; }
     .wp-travel-tabs-wrap .wp-travel-tabs-contents #wp-travel-tab-content-booking input[type="text"],
     .wp-travel-tabs-wrap .wp-travel-tabs-contents #wp-travel-tab-content-booking input[type="number"] {
@@ -243,7 +238,6 @@
       border-radius: 2px 20px 0 0;
       overflow: hidden; }
       .wp-travel-marketplace-tab-wrap li a:focus {
-        -webkit-box-shadow: none;
         box-shadow: none; }
       .wp-travel-marketplace-tab-wrap li a:before {
         position: absolute;
@@ -275,7 +269,6 @@
     min-height: 1px;
     overflow: hidden;
     margin-bottom: 30px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box; }
   .marketplace-module .single-module-image,
   .marketplace-module .single-module-content {
@@ -316,7 +309,6 @@
 #wp_travel_review_block_id .dashicons {
   color: #FBBC05;
   font-size: 15px; }
-
 #wp_travel_review_block_id h5 {
   font-size: 13px;
   color: #555;
@@ -324,7 +316,6 @@
   line-height: 1.6;
   margin-top: 0;
   text-align: center; }
-
 #wp_travel_review_block_id span.by {
   display: block;
   margin-top: 5px;
@@ -332,7 +323,6 @@
   #wp_travel_review_block_id span.by a {
     text-decoration: none;
     text-transform: capitalize; }
-
 #wp_travel_review_block_id .thumbnail {
   background-color: #fff;
   border-radius: 0;
@@ -340,8 +330,6 @@
   line-height: 1.42857;
   padding: 4px;
   border-bottom: 1px solid #ddd;
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
   border-bottom: 1px solid #ddd;
   margin: 0;
@@ -360,22 +348,25 @@
       display: block;
       width: 100%;
       float: left;
-      -webkit-box-sizing: border-box;
       box-sizing: border-box;
       margin-bottom: 15px;
       text-align: center; } }
-
 @media (max-width: 850px) {
   #aside-wrap {
     float: left;
     margin-right: 0;
     width: 100%; }
+
   .marketplace-module .single-module {
     width: 100%; }
+
   #poststuff {
     min-width: 0; }
     #poststuff #post-body {
       margin: 0; }
+
   .wrap {
     margin-right: 12px;
     margin-left: 0; } }
+
+/*# sourceMappingURL=wp-travel-tabs.css.map */

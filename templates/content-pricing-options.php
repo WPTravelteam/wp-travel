@@ -161,7 +161,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
 								if ( ! $inventory_enabled_for_option ) {
 
-									$pricing_status_msg = __( 'N/A', 'wp-travel-utilities' );
+									$pricing_status_msg = __( 'N/A', 'wp-travel' );
 
 								}
 
