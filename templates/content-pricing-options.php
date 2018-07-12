@@ -116,7 +116,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 		if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) : ?>
 			<div id="wp-travel-date-price" class="detail-content">
 				<div class="availabily-wrapper">
-					<ul class="availabily-list">
+					<ul class="availabily-list pricing-toggle">
 						<li class="availabily-heading clearfix">
 								<div class="date-from">
 									<?php echo esc_html__( 'Pricing Name', 'wp-travel' ); ?>
