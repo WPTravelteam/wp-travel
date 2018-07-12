@@ -637,6 +637,11 @@ function wp_travel_book_now() {
 
 	}
 
+	/**
+	 * Add Support for invertory addon options.
+	 */
+	do_action( 'wp_travel_update_trip_inventory_values' );
+
 	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
