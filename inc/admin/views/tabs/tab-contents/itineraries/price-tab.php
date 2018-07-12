@@ -260,7 +260,7 @@ if ( ! $price_per ) {
 																<span class="switch"></span>
 															</label>
 														</span>
-														<span class=""><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></span>
+														<span class="wp-travel-enable-inventory"><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></span>
 													</div>
 												</div>
 

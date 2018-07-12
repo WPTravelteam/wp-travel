@@ -1067,6 +1067,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         width: 33.3333%;
     }
     .two-third {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
         width: 66.6666%;
         select,
         input {
@@ -1089,6 +1094,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
         .wp-travel-currency-symbol+input {
             left: -3px;
+        }
+    }
+}
+
+.price-accordion {
+    .two-third {
+        > .wp-travel-enable-inventory {
+            margin-top: 10px;
         }
     }
 }
