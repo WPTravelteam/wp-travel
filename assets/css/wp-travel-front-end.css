@@ -1883,7 +1883,7 @@ ul.availabily-list {
           width: 100%; }
           ul.availabily-list li .wp-travel-calender-aside [class*=col] {
             padding-left: 0; } }
-  ul.availabily-list.pricing-toggle li > div {
+  ul.availabily-list.additional-col li > div {
     width: 16%; }
   ul.availabily-list .availabily-heading {
     font-size: 12px;
