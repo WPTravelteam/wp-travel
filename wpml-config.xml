@@ -8,8 +8,35 @@
         <taxonomy translate="1">itinerary_types</taxonomy>
         <taxonomy translate="1">travel_locations</taxonomy>
         <taxonomy translate="1">travel_keywords</taxonomy>
-    </taxonomies>  
-      
+    </taxonomies> 
+    <admin-texts>
+		<key name="wp_travel_settings">
+			<key name="global_tab_settings">
+				<key name="overview">
+					<key name="label"/>
+				</key>
+				<key name="trip_outline">
+					<key name="label"/>
+				</key>
+				<key name="trip_includes">
+					<key name="label"/>
+				</key>
+				<key name="trip_excludes">
+					<key name="label"/>
+				</key>
+				<key name="gallery">
+					<key name="label"/>
+				</key>
+				<key name="reviews">
+					<key name="label"/>
+				</key>
+				<key name="booking">
+					<key name="label"/>
+				</key>
+				<key name="faq">
+					<key name="label"/>
+				</key>
+			</key>
+		</key>
+	</admin-texts>      
 </wpml-config>
-
-

@@ -670,8 +670,8 @@ function wp_travel_book_now() {
 	$booking_no_of_pax 		= $pax;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 	$date_format            = get_option('date_format');
-	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? date( $date_format, strtotime( stripslashes( $_POST['wp_travel_arrival_date'] ) ) ) : '';
-	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? date( $date_format, strtotime( stripslashes( $_POST['wp_travel_departure_date'] ) ) ) : '';
+	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? date_i18n( $date_format, strtotime( stripslashes( $_POST['wp_travel_arrival_date'] ) ) ) : '';
+	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? date_i18n( $date_format, strtotime( stripslashes( $_POST['wp_travel_departure_date'] ) ) ) : '';
 
 	$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
 	$customer_country 		= $_POST['wp_travel_country'];

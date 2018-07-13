@@ -336,17 +336,17 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 						<?php if ( 'yes' == $fixed_departure ) : ?>
 							<div class="date-from">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'start:', 'wp-travel' ); ?></span>
-								<?php echo esc_html( date( 'l', strtotime( $trip_start_date ) ) );  ?>
+								<?php echo esc_html( date_i18n( 'l', strtotime( $trip_start_date ) ) );  ?>
 								<?php $date_format = get_option( 'date_format' ); ?>
 								<?php if ( ! $date_format ) : ?>
 									<?php $date_format = 'jS M, Y'; ?>
 								<?php endif; ?>
-								<span><?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
+								<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
 							</div>
 							<div class="date-to">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'end:', 'wp-travel' ); ?></span>
-								<?php echo esc_html( date( 'l', strtotime( $trip_end_date ) ) );  ?>
-								<span><?php echo esc_html( date( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
+								<?php echo esc_html( date_i18n( 'l', strtotime( $trip_end_date ) ) );  ?>
+								<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
 							</div>
 						<?php else : ?>
 							<div class="date-from">
