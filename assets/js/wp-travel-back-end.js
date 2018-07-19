@@ -191,6 +191,57 @@
         }
     });
 
+    var createAllErrors = function() {
+        var form = $(this);
+        // errorList = $( "ul.errorMessages", form );
+
+        var showAllErrorMessages = function() {
+            //errorList.empty();
+
+            // Find all invalid fields within the form.
+            var invalidFields = form.find(":invalid").each(function(index, node) {
+
+                // Find the field's corresponding label
+                var label = $("label[for=" + node.id + "] "),
+                    // Opera incorrectly does not fill the validationMessage property.
+                    message = node.validationMessage || 'Invalid value.';
+
+                //errorList
+                //  .show()
+                alert('Error in "' + label.html() + '": ' + message);
+
+                var cur_tab = $(this).closest('.wp-travel-tab-content');
+                var tab_nav = cur_tab.attr('id');
+                cur_tab.siblings().hide();
+                cur_tab.show();
+
+                $("a[href = #" + tab_nav + "]").trigger('click');
+
+            });
+        };
+
+        // Support Safari
+        form.on("submit", function(event) {
+            if (this.checkValidity && !this.checkValidity()) {
+                $(this).find(":invalid").first().focus();
+                event.preventDefault();
+            }
+        });
+
+        $("#publish", form)
+            .on("click", showAllErrorMessages);
+
+        $("input", form).on("keypress", function(event) {
+            var type = $(this).attr("type");
+            if (/date|email|month|number|search|tel|text|time|url|week/.test(type) &&
+                event.keyCode == 13) {
+                showAllErrorMessages();
+            }
+        });
+    };
+
+    $("form").each(createAllErrors);
+
     $(document).on('click', '#wp-travel-enable-sale', function() {
         if ($(this).is(':checked')) {
             $('#wp-travel-sale-price').removeAttr('disabled').closest('tr').show();

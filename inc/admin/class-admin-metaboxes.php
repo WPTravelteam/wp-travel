@@ -931,7 +931,7 @@ class WP_Travel_Admin_Metaboxes {
 		$wp_travel_trip_facts = array();
 
 		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
-			$wp_travel_trip_facts = json_encode(array_filter(array_filter(array_values($_POST['wp_travel_trip_facts']),'array_filter'),'count'));
+			$wp_travel_trip_facts = array_filter(array_filter(array_values($_POST['wp_travel_trip_facts']),'array_filter'),'count');
 		}
 
 		update_post_meta( $post_id, 'wp_travel_trip_facts', $wp_travel_trip_facts );
