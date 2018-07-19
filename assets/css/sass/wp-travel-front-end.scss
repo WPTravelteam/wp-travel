@@ -2466,9 +2466,9 @@ ul.availabily-list {
                 }
                 .add-to-cart {
                     display: inline-block;
-                    width: 100%;
+                    width: auto;
                     padding: 0 15px;
-                    margin-top: 30px;
+                    margin-top: 27px;
                     margin-bottom: 30px;
                     @include xs {
                         padding-left: 0;
@@ -2483,6 +2483,11 @@ ul.availabily-list {
             margin-bottom: 15px !important;
         }
         .wp-travel-calender-aside {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
             width: calc( 100% - 260px);
             float: left;
             position: relative;
