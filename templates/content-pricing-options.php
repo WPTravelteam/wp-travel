@@ -245,10 +245,10 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 								<div class="wp-travel-calender-column no-padding ">
 								<?php if ( $available_dates ) : ?>
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input name="trip_date" type="hidden" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+									<input name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 								<?php 
 								else : ?>
-									<input name="trip_date" type="hidden" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+									<input name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 								<?php endif;
 								?>
 								</div>

@@ -241,7 +241,8 @@ jQuery(document).ready(function($) {
         if (availabledate) {
             jQuery(this).datepicker({
                 language: wp_travel_frontend_vars.locale,
-                inline: true,
+                // inline: true,
+                autoClose: true,
                 minDate: new Date(),
                 onRenderCell: function(date, cellType) {
                     if (cellType == 'day') {
@@ -254,14 +255,15 @@ jQuery(document).ready(function($) {
                             disabled: isDisabled
                         }
                     }
-                }
+                },
             });
 
         } else {
             jQuery(this).datepicker({
                 language: wp_travel_frontend_vars.locale,
-                inline: true,
+                // inline: true,
                 minDate: new Date(),
+                autoClose: true,
             });
         }
 
