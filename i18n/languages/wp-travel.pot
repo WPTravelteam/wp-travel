@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-19 10:12:23+00:00\n"
+"POT-Creation-Date: 2018-07-19 10:52:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: inc/admin/admin-helper.php:438 inc/template-functions.php:826
+#: inc/admin/admin-helper.php:438 inc/template-functions.php:824
 msgid "Date"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 #: inc/admin/class-admin-settings.php:363
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:125
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:455
-#: inc/template-functions.php:735
+#: inc/template-functions.php:733
 msgid "Open All"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgstr ""
 #: inc/admin/class-admin-settings.php:364
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:126
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:456
-#: inc/template-functions.php:736
+#: inc/template-functions.php:734
 msgid "Close All"
 msgstr ""
 
@@ -1015,7 +1015,7 @@ msgid "Gallery images"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:19
-#: inc/template-functions.php:775
+#: inc/template-functions.php:773
 msgid "Itineraries"
 msgstr ""
 
@@ -1094,7 +1094,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:215
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:334
 #: inc/cart/cart.php:57 inc/class-shortcode.php:281
-#: inc/template-functions.php:1293
+#: inc/template-functions.php:1291
 #: inc/widgets/class-wp-travel-search-filters-widget.php:127
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 #: templates/content-pricing-options.php:138
@@ -1736,12 +1736,12 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: inc/class-shortcode.php:285 inc/template-functions.php:1296
+#: inc/class-shortcode.php:285 inc/template-functions.php:1294
 #: inc/widgets/class-wp-travel-search-filters-widget.php:131
 msgid "Price low to high"
 msgstr ""
 
-#: inc/class-shortcode.php:286 inc/template-functions.php:1297
+#: inc/class-shortcode.php:286 inc/template-functions.php:1295
 #: inc/widgets/class-wp-travel-search-filters-widget.php:132
 msgid "Price high to low"
 msgstr ""
@@ -3418,7 +3418,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:1296 inc/template-functions.php:642
+#: inc/helpers.php:1296 inc/template-functions.php:640
 #: templates/content-pricing-options.php:22
 msgid "No details found."
 msgstr ""
@@ -3489,7 +3489,7 @@ msgstr ""
 msgid "out of %1$s5%2$s"
 msgstr ""
 
-#: inc/template-functions.php:336 inc/template-functions.php:1302
+#: inc/template-functions.php:336 inc/template-functions.php:1300
 msgid "Trip Type"
 msgstr ""
 
@@ -3501,11 +3501,11 @@ msgstr ""
 msgid "No Activities"
 msgstr ""
 
-#: inc/template-functions.php:378 inc/template-functions.php:1241
+#: inc/template-functions.php:378 inc/template-functions.php:1239
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:380 inc/template-functions.php:1244
+#: inc/template-functions.php:380 inc/template-functions.php:1242
 msgid "No Size Limit"
 msgstr ""
 
@@ -3523,39 +3523,39 @@ msgstr ""
 msgid "%s Day(s) %s Night(s)"
 msgstr ""
 
-#: inc/template-functions.php:712
+#: inc/template-functions.php:710
 msgid "No gallery images found."
 msgstr ""
 
-#: inc/template-functions.php:759
+#: inc/template-functions.php:757
 msgid "No Details Found"
 msgstr ""
 
-#: inc/template-functions.php:829
+#: inc/template-functions.php:827
 msgid "Time"
 msgstr ""
 
-#: inc/template-functions.php:1207
+#: inc/template-functions.php:1205
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1216
+#: inc/template-functions.php:1214
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1216 inc/trip-enquiries.php:480
+#: inc/template-functions.php:1214 inc/trip-enquiries.php:480
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1279
+#: inc/template-functions.php:1277
 msgid "Filter By"
 msgstr ""
 
-#: inc/template-functions.php:1306
+#: inc/template-functions.php:1304
 msgid "Location"
 msgstr ""
 
-#: inc/template-functions.php:1310
+#: inc/template-functions.php:1308
 msgid "Show"
 msgstr ""
 
