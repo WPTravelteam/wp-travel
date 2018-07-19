@@ -194,10 +194,10 @@ $fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_val
 						<tbody>
 							<tr>
 								<th>
-									<label><?php esc_html_e( 'Select Type', 'wp-travel' ); ?></label>
+									<label for="fact_type_{{data.random}}" ><?php esc_html_e( 'Select Type', 'wp-travel' ); ?></label>
 								</th>
 								<td>
-									<select class="fact-type-selecter" data-index="{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][label]">
+									<select id="fact_type_{{data.random}}" required class="fact-type-selecter" data-index="{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][label]">
 										<option value=""><?php esc_html_e( 'Select a Label', 'wp-travel' ); ?></option>  
 									<?php foreach ( $fact_settings as $key => $setting ): ?>
 											<option <?php if ( isset( $type ) && $type == $setting['name'] ):

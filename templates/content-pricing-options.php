@@ -55,6 +55,7 @@ $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 $available_pax = false;
 $booked_pax = false;
 $pax_limit = false;
+$general_sold_out = false;
 
 if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 
