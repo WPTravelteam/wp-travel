@@ -2443,6 +2443,8 @@ ul.availabily-list {
                     padding-left: 0 !important;
                 }
                 &.animate {
+                    background-color: #f9f9f9;
+                    padding: 15px;
                     height: auto;
                 }
                 [class*=col] {
