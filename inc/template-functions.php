@@ -575,8 +575,6 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 	if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
 
 		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
-	} else {
-		return '';
 	}
 
 	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) { 

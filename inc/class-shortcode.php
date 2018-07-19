@@ -367,8 +367,6 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 
 			$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
 
-		} else {
-		return '';
 		}
 
 		if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
