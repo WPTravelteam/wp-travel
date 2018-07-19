@@ -1843,6 +1843,8 @@ ul.availabily-list {
           ul.availabily-list li > div.wp-travel-booking-row {
             padding-left: 0 !important; } }
         ul.availabily-list li > div.wp-travel-booking-row.animate {
+          background-color: #f9f9f9;
+          padding: 15px;
           height: auto; }
         ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
           margin: 5px 0;
@@ -1862,9 +1864,9 @@ ul.availabily-list {
           padding: 3px 8px; }
         ul.availabily-list li > div.wp-travel-booking-row .add-to-cart {
           display: inline-block;
-          width: 100%;
+          width: auto;
           padding: 0 15px;
-          margin-top: 30px;
+          margin-top: 27px;
           margin-bottom: 30px; }
           @media (max-width: 567px) {
             ul.availabily-list li > div.wp-travel-booking-row .add-to-cart {
@@ -1875,6 +1877,11 @@ ul.availabily-list {
       position: relative;
       margin-bottom: 15px !important; }
     ul.availabily-list li .wp-travel-calender-aside {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       width: calc( 100% - 260px);
       float: left;
       position: relative; }
