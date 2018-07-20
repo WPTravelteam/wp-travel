@@ -32,7 +32,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 				<?php echo esc_html( 'Field Type','wp-travel' ); ?>
 			</th>
 			<td>
-				<select required data-index="<?php echo $fact ? $str : '$index' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][type]" class="fact-type-changer">
+				<select data-index="<?php echo $fact ? $str : '$index' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][type]" class="fact-type-changer">
 						<option value=""><?php echo esc_html( 'Select a type', 'wp-travel' ); ?></option>
 						<option value="single" <?php if ( isset( $fact['type'] ) && $fact['type'] == 'single') echo 'selected'; ?>><?php echo esc_html( 'Single Select', 'wp-travel' ); ?></option>
 						<option value="multiple" <?php if( isset( $fact['type']) && $fact['type'] == 'multiple' ) echo 'selected'; ?>><?php echo esc_html( 'Multiple Select', 'wp-travel' ); ?></option>

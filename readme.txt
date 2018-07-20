@@ -156,6 +156,9 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.4.9 = 
+* Enhancement: Backend Trips Error handling enhancements.
+* Trip facts: multilingual support.
+* Fixes: Booking front-end calender design enhancement.
 * Fixes: Minor issues and bug fixes.
 
 = 1.4.8 = 
