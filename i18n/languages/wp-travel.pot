@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.4.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-20 05:46:58+00:00\n"
+"POT-Creation-Date: 2018-07-20 06:33:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3463,19 +3463,19 @@ msgstr ""
 msgid "New Account Created"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:433
+#: inc/payments/wp-travel-payments.php:438
 msgid "Your booking has been canceled"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:437
+#: inc/payments/wp-travel-payments.php:442
 msgid "We've received your booking and payment details. We'll contact you soon."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:444
+#: inc/payments/wp-travel-payments.php:449
 msgid "Invalid"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:462
+#: inc/payments/wp-travel-payments.php:467
 msgid "Success"
 msgstr ""
 
