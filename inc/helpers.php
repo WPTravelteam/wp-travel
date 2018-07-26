@@ -1333,9 +1333,13 @@ function wp_travel_get_faqs( $post_id ) {
 	}
 
 	$faq = array();
+
 	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
+	$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions );
+
 	if ( is_array( $questions ) && count( $questions ) > 0 ) :
 		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
+		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers );
 		foreach ( $questions as $key => $question ) :
 			$faq[] = array( 'question' => $question, 'answer' => $answers[ $key ] );
 		endforeach;

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-26 08:58:04+00:00\n"
+"POT-Creation-Date: 2018-07-26 11:38:58+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -258,11 +258,11 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:544
+#: inc/admin/class-admin-metaboxes.php:545
 msgid "Click on add new question to add FAQ."
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:548
+#: inc/admin/class-admin-metaboxes.php:549
 #: inc/admin/class-admin-settings.php:363
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:125
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:455
@@ -270,7 +270,7 @@ msgstr ""
 msgid "Open All"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:549
+#: inc/admin/class-admin-metaboxes.php:550
 #: inc/admin/class-admin-settings.php:364
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:126
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:456
@@ -278,26 +278,26 @@ msgstr ""
 msgid "Close All"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:559
+#: inc/admin/class-admin-metaboxes.php:560
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:41
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:42
 msgid "Untitled"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:576
-#: inc/admin/class-admin-metaboxes.php:608
+#: inc/admin/class-admin-metaboxes.php:577
+#: inc/admin/class-admin-metaboxes.php:609
 msgid "Enter Your Question"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:631
+#: inc/admin/class-admin-metaboxes.php:632
 msgid "Click to make featured image."
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:632
+#: inc/admin/class-admin-metaboxes.php:633
 msgid "Delete"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:666
+#: inc/admin/class-admin-metaboxes.php:667
 #: inc/gateways/class-wt-gateway-paypal-request.php:163
 #: inc/template-functions.php:473
 msgid "Trip Code"
@@ -3362,7 +3362,7 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: inc/helpers.php:563 inc/helpers.php:1651
+#: inc/helpers.php:563 inc/helpers.php:1655
 msgid "Group"
 msgstr ""
 
@@ -3439,27 +3439,27 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: inc/helpers.php:1647
+#: inc/helpers.php:1651
 msgid "Adult"
 msgstr ""
 
-#: inc/helpers.php:1648
+#: inc/helpers.php:1652
 msgid "Children"
 msgstr ""
 
-#: inc/helpers.php:1649
+#: inc/helpers.php:1653
 msgid "Infant"
 msgstr ""
 
-#: inc/helpers.php:1650
+#: inc/helpers.php:1654
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1652
+#: inc/helpers.php:1656
 msgid "Custom"
 msgstr ""
 
-#: inc/helpers.php:1876
+#: inc/helpers.php:1880
 msgid "New Account Created"
 msgstr ""
 
