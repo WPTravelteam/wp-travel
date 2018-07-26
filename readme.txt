@@ -38,7 +38,7 @@ The best choice for a Travel Agency, Tour Operator or Destination Management Com
 * Customizable tabs: All trip details page tabs in front-end can be customized from backend. You can change their labels and sort by your requirements or hide them.
 * Rating & Reviews: You can allow users to add rating or reviews for each trips. You can also hide them if you want for each trips.
 * Map: For each trip, you can show Google map. In front-end user can see where is the location of trip.
-*Coupon: With WP Travel coupon, percentage or fixed amount of coupons are applied to the trips.
+* Coupon: With WP Travel coupon, percentage or fixed amount of coupons are applied to the trips.
 
 = Other features: =
 * Trip Search / Filter Shortcode
