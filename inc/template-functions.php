@@ -745,7 +745,7 @@ function wp_travel_frontend_contents( $post_id ) {
 						    </div>
 						    <div id="collapse<?php echo esc_attr( $k +1 ) ?>" class="panel-collapse collapse">
 						      <div class="panel-body">
-						        <?php echo esc_html( $faq['answer'] ) ?>
+						        <?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
 						      </div>
 						    </div>
 						  </div>
