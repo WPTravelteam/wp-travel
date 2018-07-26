@@ -1777,7 +1777,8 @@ html .ui-button.ui-state-disabled:active {
 
 /* faq accordion */
 
-#faq {
+#faq,
+.global-faq-shortcode {
     .wp-collapse-open {
         margin-bottom: 30px;
         a {
