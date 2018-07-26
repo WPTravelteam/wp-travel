@@ -522,9 +522,10 @@ class WP_Travel_Admin_Metaboxes {
 	function wp_travel_faq_callback( $tab, $args ) {
 		if ( 'faq' !== $tab ) {
 			return;
-		} ?>
+		}
 
-		<?php
+		do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
+
 		$post_id = $args['post']->ID;
 			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 		?>
