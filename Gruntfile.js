@@ -233,6 +233,10 @@ module.exports = function(grunt) {
                 src: ['**/*'],
                 dest: '<%= pkg.name %>/'
             }
+        },
+
+        zip: {
+            'build/<%= pkg.name %>_<%= pkg.version %>.zip': ['build/<%= pkg.name %>_<%= pkg.version %>/']
         }
 
     });
@@ -249,6 +253,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-file-creator');
     grunt.loadNpmTasks('grunt-svn-export');
     grunt.loadNpmTasks('grunt-push-svn');
+
+    // Load in `grunt-zip`
+    grunt.loadNpmTasks('grunt-zip');
 
     // Register tasks.
     grunt.registerTask('default', []);
@@ -289,7 +296,8 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
 
         'pre_release',
-        'copy:build_it'
+        'copy:build_it',
+        'zip',
 
     ]);
 

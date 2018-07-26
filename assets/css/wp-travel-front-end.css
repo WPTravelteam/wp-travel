@@ -1336,24 +1336,20 @@ html .ui-button.ui-state-disabled:active {
 /* faq accordion */
 #faq .wp-collapse-open,
 .global-faq-shortcode .wp-collapse-open {
-  margin-bottom: 30px;
-}
-#faq .wp-collapse-open a,
-.global-faq-shortcode .wp-collapse-open a {
-  float: right;
-  padding: 5px 10px;
-  margin-left: 15px;
-  border: 1px solid #8b8b8b;
-  font-size: 12px;
-}
+  margin-bottom: 30px; }
+  #faq .wp-collapse-open a,
+  .global-faq-shortcode .wp-collapse-open a {
+    float: right;
+    padding: 5px 10px;
+    margin-left: 15px;
+    border: 1px solid #8b8b8b;
+    font-size: 12px; }
 #faq .collapse,
 .global-faq-shortcode .collapse {
-  display: none;
-}
+  display: none; }
 #faq .collapse.in,
 .global-faq-shortcode .collapse.in {
-  display: block;
-}
+  display: block; }
 #faq .collapsing,
 .global-faq-shortcode .collapsing {
   position: relative;
@@ -1367,50 +1363,41 @@ html .ui-button.ui-state-disabled:active {
   transition-duration: .35s;
   -webkit-transition-property: height, visibility;
   -o-transition-property: height, visibility;
-  transition-property: height, visibility;
-}
+  transition-property: height, visibility; }
 #faq .panel-heading,
 .global-faq-shortcode .panel-heading {
-  position: relative;
-}
-#faq .panel-heading .collapse-icon,
-.global-faq-shortcode .panel-heading .collapse-icon {
-  position: absolute;
-  right: 15px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  float: right;
-  text-align: center;
-  top: calc( 50% - 13px);
-}
-#faq .panel-heading [data-toggle=collapse],
-.global-faq-shortcode .panel-heading [data-toggle=collapse] {
-  color: #444;
-}
-#faq .panel-heading [data-toggle=collapse] span.collapse-icon:after,
-.global-faq-shortcode .panel-heading [data-toggle=collapse] span.collapse-icon:after {
-  font-family: "dashicons";
-  content: "";
-  font-size: 18px;
-}
-#faq .panel-heading [data-toggle=collapse].collapsed,
-.global-faq-shortcode .panel-heading [data-toggle=collapse].collapsed {
-  color: #999;
-}
-#faq .panel-heading [data-toggle=collapse].collapsed span.collapse-icon:after,
-.global-faq-shortcode .panel-heading [data-toggle=collapse].collapsed span.collapse-icon:after {
-  content: "";
-}
-#faq .panel-heading [data-toggle=collapse].collapsed:hover,
-.global-faq-shortcode .panel-heading [data-toggle=collapse].collapsed:hover {
-  color: #444;
-}
-#faq .panel-heading .collapse-icon:focus,
-.global-faq-shortcode .panel-heading .collapse-icon:focus {
-  box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
-  outline: none;
-}
+  position: relative; }
+  #faq .panel-heading .collapse-icon,
+  .global-faq-shortcode .panel-heading .collapse-icon {
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    float: right;
+    text-align: center;
+    top: calc( 50% - 13px); }
+  #faq .panel-heading [data-toggle="collapse"],
+  .global-faq-shortcode .panel-heading [data-toggle="collapse"] {
+    color: #444; }
+    #faq .panel-heading [data-toggle="collapse"] span.collapse-icon:after,
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"] span.collapse-icon:after {
+      font-family: 'dashicons';
+      content: "\f142";
+      font-size: 18px; }
+  #faq .panel-heading [data-toggle="collapse"].collapsed,
+  .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed {
+    color: #999; }
+    #faq .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after,
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after {
+      content: "\f140"; }
+    #faq .panel-heading [data-toggle="collapse"].collapsed:hover,
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed:hover {
+      color: #444; }
+  #faq .panel-heading .collapse-icon:focus,
+  .global-faq-shortcode .panel-heading .collapse-icon:focus {
+    box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
+    outline: none; }
 #faq h4,
 .global-faq-shortcode h4 {
   border: 1px solid #ddd;
@@ -1419,43 +1406,35 @@ html .ui-button.ui-state-disabled:active {
   background-color: #f7f7f1;
   position: relative;
   font-size: 14px;
-  font-weight: 500;
-}
-#faq h4:hover,
-.global-faq-shortcode h4:hover {
-  background-color: #fff;
-}
-#faq h4 a,
-.global-faq-shortcode h4 a {
-  color: #999;
-  text-decoration: none;
-}
-#faq h4 .close-faq,
-.global-faq-shortcode h4 .close-faq {
-  position: absolute;
-  right: 10px;
-  color: #ca4a1f;
-  font-size: 16px;
-}
+  font-weight: 500; }
+  #faq h4:hover,
+  .global-faq-shortcode h4:hover {
+    background-color: #fff; }
+  #faq h4 a,
+  .global-faq-shortcode h4 a {
+    color: #999;
+    text-decoration: none; }
+  #faq h4 .close-faq,
+  .global-faq-shortcode h4 .close-faq {
+    position: absolute;
+    right: 10px;
+    color: #ca4a1f;
+    font-size: 16px; }
 #faq .panel-collapse,
 .global-faq-shortcode .panel-collapse {
   padding: 0;
   border: 1px solid #ddd;
-  border-top: none;
-}
+  border-top: none; }
 #faq .panel-body,
 .global-faq-shortcode .panel-body {
-  padding: 10px 15px;
-}
+  padding: 10px 15px; }
 #faq .panel-default,
 .global-faq-shortcode .panel-default {
   margin-bottom: 15px;
-  background-color: #fff;
-}
+  background-color: #fff; }
 #faq .panel-faq-question,
 .global-faq-shortcode .panel-faq-question {
-  padding: 10px 15px;
-}
+  padding: 10px 15px; }
 
 /* wp-travel pagination
 ----------------------------------------------- */

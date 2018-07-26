@@ -38,5 +38,9 @@
         "grunt-push-svn": "^0.2.2",
         "grunt-svn-export": "^0.1.7",
         "grunt-wp-i18n": "^1.0.0"
+    },
+    "dependencies": {
+        "grunt-zip": "^0.18.1",
+        "node-native-zip": "^1.1.0"
     }
 }
