@@ -134,7 +134,12 @@
 .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-inventory a:before {
   font-family: icomoon;
   content: "";
-  font-size: 12px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-cart_checkout a:before {
+  content: "";
+  font-size: 15px;
   line-height: 20px;
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents {
@@ -450,4 +455,4 @@
   }
 }
 
-/*# sourceMappingURL=assets/css/wp-travel-tabs.css.map */
+/*# sourceMappingURL=wp-travel-tabs.css.map */
