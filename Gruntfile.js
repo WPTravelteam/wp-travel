@@ -236,7 +236,7 @@ module.exports = function(grunt) {
         },
 
         zip: {
-            'build/<%= pkg.name %>_<%= pkg.version %>.zip': ['build/<%= pkg.name %>_<%= pkg.version %>/']
+            'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
         }
 
     });
@@ -296,7 +296,6 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
 
         'pre_release',
-        'copy:build_it',
         'zip',
 
     ]);
