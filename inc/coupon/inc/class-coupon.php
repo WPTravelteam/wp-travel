@@ -146,7 +146,7 @@ class WP_Travel_Coupon {
 		}
 
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
- 		$restrictions_tab  = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
+		$restrictions_tab  = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
 		// Field Values.
 		$restricted_trips     = isset( $restrictions_tab['restricted_trips'] ) ? $restrictions_tab['restricted_trips'] : array();
 

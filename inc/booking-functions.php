@@ -534,12 +534,11 @@ function wp_travel_book_now() {
 			return;
 		}
 
-
 		$trip_ids = array();
 		$pax_array = array();
 		foreach( $items as $key => $item ) {
 
-			$trip_ids[] = $item['trip_id'];
+			$trip_ids[]  = $item['trip_id'];
 			$pax_array[] = $item['pax'];
 
 		}
@@ -565,11 +564,11 @@ function wp_travel_book_now() {
 	$title = 'Booking - ' . $current_date;
 
 	$post_array = array(
-		'post_title' => $title,
+		'post_title'   => $title,
 		'post_content' => '',
-		'post_status' => 'publish',
-		'post_slug' => uniqid(),
-		'post_type' => 'itinerary-booking',
+		'post_status'  => 'publish',
+		'post_slug'    => uniqid(),
+		'post_type'    => 'itinerary-booking',
 	);
 	$order_id = wp_insert_post( $post_array );
 	update_post_meta( $order_id, 'order_data', $_POST );
@@ -577,7 +576,7 @@ function wp_travel_book_now() {
 	// Update Booking Title.
 	$update_data_array = array(
 		'ID'           => $order_id,
-		'post_title' => 'Booking - # ' . $order_id,
+		'post_title'   => 'Booking - # ' . $order_id,
 	);
 
 	$order_id = wp_update_post( $update_data_array );
@@ -717,7 +716,7 @@ function wp_travel_book_now() {
 	//Client Subject.
 	$client_subject = $client_template['subject'];
 
-	 // Send mail to admin if booking email is set to yes.
+	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
 		
 		// To send HTML mail, the Content-type header must be set.

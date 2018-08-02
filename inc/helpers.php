@@ -1341,7 +1341,8 @@ function wp_travel_get_faqs( $post_id ) {
 		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
 		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers );
 		foreach ( $questions as $key => $question ) :
-			$faq[] = array( 'question' => $question, 'answer' => $answers[ $key ] );
+			$answer = isset( $answers[ $key ] ) ? $answers[ $key ] : '';
+			$faq[]  = array( 'question' => $question, 'answer' => $answer );
 		endforeach;
 	endif;
 	return $faq;
