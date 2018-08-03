@@ -699,7 +699,7 @@ function wp_travel_frontend_contents( $post_id ) {
 										<li>
 											<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' );  ?>
 											<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-											<img src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
+											<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
 											</a>
 										</li>
 										<?php endforeach; ?>

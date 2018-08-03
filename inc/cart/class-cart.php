@@ -265,9 +265,9 @@ class WP_Travel_Cart {
 
 			$max_available = $this->items[ $cart_item_id ]['max_available'];
 
-			$this->items[ $cart_item_id ]['pax'] = ($pax > $max_available) ? $max_available : $pax;
+			$this->items[ $cart_item_id ]['pax'] = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
 
-			if ( $pax > $max_available ) {
+			if ( $max_available && $pax > $max_available ) {
 
 				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
 
