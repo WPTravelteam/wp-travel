@@ -3,7 +3,7 @@ Contributors: WEN Solutions
 Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
-Tested up to: 4.9.7
+Tested up to: 4.9.8
 Stable tag: 1.5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -160,6 +160,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Fixes: Empty FAQ answer errors fixing.
 * Fixes: Max pax empty pricing option cart update issue fixes.
 * Fixes: W3C validator issues fixings.
+* Enhancement: WordPress 4.9.8 Compatibility testing.
 * Fixes: Minor issues and bug fixes.
 
 = 1.5.0 = 
