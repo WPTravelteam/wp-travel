@@ -70,7 +70,7 @@ class WP_Travel_Itinerary {
 			isset( $this->post_meta['wp_travel_outline'][0] )
 			&& '' !== $this->post_meta['wp_travel_outline'][0]
 		) {
-			return wpautop( $this->post_meta['wp_travel_outline'][0] );
+			return wpautop( do_shortcode( $this->post_meta['wp_travel_outline'][0] ) );
 		}
 
 		return false;
