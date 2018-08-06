@@ -58,6 +58,7 @@ class WP_Travel_Frontend_Assets {
 		$trip_prices_data = array( 
 			'currency_symbol' => wp_travel_get_currency_symbol(),
 			'prices' => wp_reavel_get_itinereries_prices_array(),
+			'locale' => $locale,
 		);
 
 		wp_localize_script( 'wp-travel-widget-scripts', 'trip_prices_data', $trip_prices_data );

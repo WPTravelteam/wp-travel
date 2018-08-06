@@ -47,7 +47,7 @@ jQuery(function($) {
             " - " + trip_prices_data.currency_symbol + $(".wp-travel-range-slider").slider("values", 1));
 
         $(".trip-duration-calender input").datepicker({
-            language: 'en',
+            language: trip_prices_data.locale,
         });
 
     });

@@ -546,12 +546,18 @@ function wp_travel_book_now() {
 		$pax = 0;
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 			
-			if ( ! $allow_multiple_cart_items ) {
+			if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 
-			$trip_id = $trip_ids['0'];
-			$pax = $pax_array['0'];
+				$trip_id = $trip_ids['0'];
+				$pax = $pax_array['0'];
 
-		}
+			}else{
+
+				// Support for multiple cart items.
+				do_action( 'wp_travel_multiple_trip_booking' );
+				exit;
+
+			}
 
 	endif;
 	

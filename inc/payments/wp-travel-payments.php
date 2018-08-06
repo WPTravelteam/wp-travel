@@ -307,7 +307,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 
-	$itinerary_id 			= get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
 	
