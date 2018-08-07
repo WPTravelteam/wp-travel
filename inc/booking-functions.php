@@ -166,6 +166,16 @@ function wp_travel_booking_info( $post ) {
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
 	$ordered_data = get_post_meta( $post->ID, 'order_data', true );
 
+	$multiple_trips_booking_data = get_post_meta( $post->ID, 'order_items_data', true );
+
+	// Support new layout for multiple trips booking.
+	if ( ! empty( $multiple_trips_booking_data ) ) {
+
+		do_action( 'wp_travel_bookings_backend_multiple_trip_details' );
+		exit;
+
+	}
+
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array(); ?>
 
 	<div class="wp-travel-booking-form-wrapper">
