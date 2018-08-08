@@ -15,6 +15,7 @@ project.properties
 # Sass
 assets/css/.sass-cache/
 .sass-cache/
+.vs/
 /../*.config
 # OS X metadata
 .DS_Store
