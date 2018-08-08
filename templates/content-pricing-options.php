@@ -394,7 +394,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 							<?php endif; ?>
 						</div>
 						<div class="action">
-							<?php if ( $general_sold_out ) : ?>
+							<?php if ( $inventory_enabled_for_option && $general_sold_out ) : ?>
 										
 								<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 										
