@@ -463,6 +463,7 @@
 @media (max-width: 992px) {
   .wp-travel.trip-headline-wrapper .featured-side-image.left-plot .banner-image-wrapper img {
     display: block;
+    visibility: hidden;
   }
 }
 @media (max-width: 992px) {
@@ -523,8 +524,8 @@
 }
 @media (max-width: 992px) {
   .wp-travel.trip-headline-wrapper .banner-image-wrapper {
-    background-image: none !important;
-    height: auto;
+    /* background-image: none !important;
+    height: auto; */
   }
 }
 .wp-travel.trip-headline-wrapper .wp-detail-review-wrap:after, .wp-travel.trip-headline-wrapper .wp-detail-review-wrap:before {
@@ -3308,4 +3309,4 @@ ul.wp-travel-error {
   border: 2px solid #f00;
 }
 
-/*# sourceMappingURL=assets/css/wp-travel-front-end.css.map */
+/*# sourceMappingURL=wp-travel-front-end.css.map */

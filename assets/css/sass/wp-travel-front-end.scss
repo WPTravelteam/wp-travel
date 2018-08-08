@@ -540,6 +540,7 @@
             display: none;
             @include sidr-view {
                 display: block;
+                visibility: hidden;
             }
         }
         @include sidr-view {
@@ -592,8 +593,8 @@
         background-repeat: no-repeat !important;
         background-size: cover !important;
         @include sidr-view {
-            background-image: none !important;
-            height: auto;
+            /* background-image: none !important;
+            height: auto; */
         }
     }
     .wp-detail-review-wrap {
