@@ -1679,7 +1679,7 @@ function wp_travel_tab_show_in_menu( $tab_name ) {
 		return false;
 	}
 
-	$tabs = wp_travel_get_frontend_tabs();
+	$tabs = wp_travel_get_frontend_tabs( $show_in_menu_query = true ); // fixes the content filter in page builder.
 
 	if ( ! isset( $tabs[ $tab_name ]['show_in_menu'] ) ) {
 		return false;
