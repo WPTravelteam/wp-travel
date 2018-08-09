@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 if ( post_password_required() ) {
- 	echo get_the_password_form();
- 	return;
+	echo get_the_password_form();
+	return;
 }
 
 $enable_sale 	= get_post_meta( get_the_ID(), 'wp_travel_enable_sale', true );
@@ -33,13 +33,13 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
     <div class="wp-travel-post-wrap-bg">
 		
 		<div class="wp-travel-post-thumbnail">
-		 	<a href="<?php the_permalink() ?>">
-			<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
-		   	</a>
-		   	<?php wp_travel_save_offer( get_the_ID() ); ?>
+			<a href="<?php the_permalink() ?>">
+				<?php echo wp_travel_get_post_thumbnail( get_the_ID(), 'wp_travel_thumbnail' ); ?>
+			</a>
+			<?php wp_travel_save_offer( get_the_ID() ); ?>
 		</div>
 		<div class="wp-travel-post-info clearfix">
-			<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
+			<h4 class="post-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo esc_attr__('Permanent Link to ', 'wp-travel') . the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 			<div class="recent-post-bottom-meta">
 				<?php wp_travel_trip_price( get_the_ID(), true ); ?>
 			</div>
@@ -67,8 +67,8 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 							$first_term = array_shift( $terms );
 							$term_name = $first_term->name;
 							$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
-							<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
-								<?php echo esc_html( $term_name, 'wp-travel' ); ?>
+							<a href="<?php echo esc_url( $term_link ); ?>" rel="tag">
+								<?php echo esc_html( $term_name ); ?>
 							</a>
 							<?php if ( count( $terms ) > 0 ) : ?>
 							<div class="wp-travel-caret">
@@ -78,8 +78,8 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 										<?php
 											$term_name = $term->name;
 											$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
-										<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
-											<?php echo esc_html( $term_name, 'wp-travel' ); ?>
+										<a href="<?php echo esc_url( $term_link ); ?>">
+											<?php echo esc_html( $term_name ); ?>
 										</a>
 									<?php endforeach; ?>
 								</div>
@@ -94,11 +94,11 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 			</span>
 		</div>
 		
-		<?php if ( $enable_sale ) : ?>
-  			<div class="wp-travel-offer">
-  			    <span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
-  			</div>
-  		<?php endif; ?>
+	<?php if ( $enable_sale ) : ?>
+		<div class="wp-travel-offer">
+			<span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
+		</div>
+	<?php endif; ?>
 
 	</div>
 </div>

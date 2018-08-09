@@ -107,19 +107,19 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 		}
 		include sprintf( '%s/coupons-restrictions.php', $this->views_path );
 	}
-	/**
-	 * Callback Function for Coupons Usage Limits Tabs.
-	 *
-	 * @param  string $tab tab name 'Usage Limits'.
-	 * @return Mixed
-	 */
-	public function coupons_usage_limits_tab_callback( $tab ) {
-		global $post;
-		if ( 'coupons_usage_limits' !== $tab ) {
-			return;
-		}
-		include sprintf( '%s/coupons-usage-limits.php', $this->views_path );
-	}
+	// /**
+	//  * Callback Function for Coupons Usage Limits Tabs.
+	//  *
+	//  * @param  string $tab tab name 'Usage Limits'.
+	//  * @return Mixed
+	//  */
+	// public function coupons_usage_limits_tab_callback( $tab ) {
+	// 	global $post;
+	// 	if ( 'coupons_usage_limits' !== $tab ) {
+	// 		return;
+	// 	}
+	// 	include sprintf( '%s/coupons-usage-limits.php', $this->views_path );
+	// }
 	/**
 	 * Clean Metabox Classes.
 	 *

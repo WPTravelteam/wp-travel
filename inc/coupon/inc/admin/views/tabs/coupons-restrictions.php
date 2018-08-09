@@ -81,7 +81,7 @@
 		<tr>
 			<td>
 				<label for="coupon-limit"><?php esc_html_e( 'Coupon Usage Limit', 'wp-travel' ); ?></label>
-				<span class="tooltip-area" title="<?php esc_html_e( 'No. of times coupon can be used before being obsolute.', 'wp-travel' ); ?>">
+				<span class="tooltip-area" title="<?php echo esc_attr( 'No. of times coupon can be used before being obsolute.', 'wp-travel' ); ?>">
                		<i class="fa fa-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
