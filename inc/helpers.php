@@ -1183,9 +1183,9 @@ function wp_travel_get_permalink_structure() {
  *
  * @return void
  */
-function wp_travel_get_frontend_tabs() {
+function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
-	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs();
+	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs( $show_in_menu_query );
 	global $post;
 
 	$settings = wp_travel_get_settings();
@@ -1283,7 +1283,8 @@ function wp_travel_get_frontend_tabs() {
  *
  * @return void
  */
-function wp_travel_get_default_frontend_tabs() {
+function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) { // fixes the content filter in page builder.
+	// return $is_show_in_menu_query;
 	$trip_content = '';
 	$trip_outline = '';
 	$trip_include = '';
@@ -1291,7 +1292,7 @@ function wp_travel_get_default_frontend_tabs() {
 	$gallery_ids  = '';
 	$faqs		  = array();
 
-	if ( ! is_admin() ) {
+	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder.
 		global $wp_travel_itinerary;
 		$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
 		$trip_content	= $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
