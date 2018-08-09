@@ -724,16 +724,25 @@ function wp_travel_book_now() {
 	$email = new WP_Travel_Emails();
 
 	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+
+	$admin_message_data = $admin_template['mail_header'];
+	$admin_message_data .= $admin_template['mail_content'];
+	$admin_message_data .= $admin_template['mail_footer'];
+
 	//Admin message.
-	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['mail_content'] );
+	$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 	//Admin Subject.
 	$admin_subject = $admin_template['subject'];
 
 	// Client Template.
 	$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+
+	$client_message_data = $client_template['mail_header'];
+	$client_message_data .= $client_template['mail_content'];
+	$client_message_data .= $client_template['mail_footer'];
 	
 	//Client message.
-	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_template['mail_content'] );
+	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	
 	//Client Subject.
 	$client_subject = $client_template['subject'];

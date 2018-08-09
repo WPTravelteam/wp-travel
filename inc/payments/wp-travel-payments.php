@@ -284,6 +284,14 @@ function wp_travel_send_email_payment( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	
+	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		
+		// Handle Multiple payment Emails.
+		if ( $allow_multiple_cart_items  ) {
+			do_action( 'wp_travel_multiple_payment_emails', $booking_id );
+			exit;
+		}
 
 	$settings = wp_travel_get_settings();
 
@@ -369,8 +377,13 @@ function wp_travel_send_email_payment( $booking_id ) {
 	if ( 'yes' == $send_booking_email_to_admin ) {
 		// Admin Payment Email Vars.
 		$admin_payment_template = $email->wp_travel_get_email_template( 'payments', 'admin' );
+
+		$admin_message_data = $admin_payment_template['mail_header'];
+		$admin_message_data .= $admin_payment_template['mail_content'];
+		$admin_message_data .= $admin_payment_template['mail_footer'];
+
 		//Admin message.
-		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_template['mail_content'] );
+		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		//Admin Subject.
 		$admin_payment_subject = $admin_payment_template['subject'];
 
@@ -388,8 +401,14 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// Send email to client.
 	// Client Payment Email Vars.
 	$client_payment_template = $email->wp_travel_get_email_template( 'payments', 'client' );
+
+	$client_message_data = $client_payment_template['mail_header'];
+	$client_message_data .= $client_payment_template['mail_content'];
+	$client_message_data .= $client_payment_template['mail_footer'];
+
+
 	// Client Payment message.
-	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_payment_template['mail_content'] );
+	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	// Client Payment Subject.
 	$client_payment_subject = $client_payment_template['subject'];
 

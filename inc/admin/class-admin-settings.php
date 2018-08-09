@@ -393,8 +393,7 @@ class WP_Travel_Admin_Settings {
 											<span class="show-in-frontend checkbox-default-design">
 												<label data-on="ON" data-off="OFF">
 													<input <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />						
-													<span class="switch">
-												  </span>
+													<span class="switch"></span>
 												</label>
 											</span>
 										</td>
@@ -433,6 +432,13 @@ class WP_Travel_Admin_Settings {
 											wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
+
+									<?php 
+										/**
+										 * Add Support Multiple Booking admin Template.
+										 */
+										do_action( 'wp_travel_multiple_booking_admin_template', $booking_admin_email_settings ); 
+									?>
 
 								</table>
 
@@ -473,6 +479,13 @@ class WP_Travel_Admin_Settings {
 											wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
+
+									<?php 
+										/**
+										 * Add Support Multiple Booking client Template.
+										 */
+										do_action( 'wp_travel_multiple_booking_client_template', $booking_client_email_settings ); 
+									?>
 
 								</table>
 							
@@ -534,6 +547,13 @@ class WP_Travel_Admin_Settings {
 											</td>
 										</tr>
 
+										<?php 
+										/**
+										 * Add Support Multiple payment admin Template.
+										 */
+										do_action( 'wp_travel_multiple_payment_admin_template', $payment_admin_email_settings );
+										?>
+
 									</table>
 
 									<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
@@ -573,6 +593,13 @@ class WP_Travel_Admin_Settings {
 												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template[email_content]'  ) ); ?>
 											</td>
 										</tr>
+
+										<?php 
+										/**
+										 * Add Support Multiple Payment client Template.
+										 */
+										do_action( 'wp_travel_multiple_payment_client_template', $payment_client_email_settings );
+										?>
 
 									</table>
 

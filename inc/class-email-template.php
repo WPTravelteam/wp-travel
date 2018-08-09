@@ -259,11 +259,9 @@ class WP_Travel_Emails {
 	
 		}
 
-		$email_template['mail_content'] = $this->wp_travel_email_heading( $sentTo , $header_details );
-
-		$email_template['mail_content'] .= $email_content;
-
-		$email_template['mail_content'] .= $this->wp_travel_email_footer();
+		$email_template['mail_header']  = $this->wp_travel_email_heading( $sentTo , $header_details );
+		$email_template['mail_content'] = $email_content;
+		$email_template['mail_footer']  = $this->wp_travel_email_footer();
 
 		return $email_template;
 
