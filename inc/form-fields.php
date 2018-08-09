@@ -432,8 +432,8 @@ function wp_travel_get_checkout_form_fields() {
 		// $fields['pax'],
 		// $fields['trip_price_key'],
 		$fields['wp_travel_arrival_date'],
-		// $fields['departure_date'],
-		// $fields['arrival_date'],
+		$fields['departure_date'],
+		$fields['arrival_date'],
 		$fields['trip_duration']
 	);
 

@@ -546,10 +546,14 @@ function wp_travel_book_now() {
 
 		$trip_ids = array();
 		$pax_array = array();
+		$booking_arrival_date = array();
+		$booking_departure_date = array();
 		foreach( $items as $key => $item ) {
 
 			$trip_ids[]  = $item['trip_id'];
 			$pax_array[] = $item['pax'];
+			$booking_arrival_date[] = $item['arrival_date'];
+			$booking_departure_date[] = $item['departure_date'];
 
 		}
 		$trip_id = '';
@@ -560,6 +564,8 @@ function wp_travel_book_now() {
 
 				$trip_id = $trip_ids['0'];
 				$pax = $pax_array['0'];
+				$booking_arrival_date = $booking_arrival_date[0];
+				$booking_departure_date = $booking_departure_date[0];
 
 			}else{
 
@@ -685,8 +691,8 @@ function wp_travel_book_now() {
 	$booking_no_of_pax 		= $pax;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 	$date_format            = get_option('date_format');
-	$booking_arrival_date 	= isset( $_POST['wp_travel_arrival_date'] ) ? date_i18n( $date_format, strtotime( stripslashes( $_POST['wp_travel_arrival_date'] ) ) ) : '';
-	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? date_i18n( $date_format, strtotime( stripslashes( $_POST['wp_travel_departure_date'] ) ) ) : '';
+	$booking_arrival_date 	= $booking_arrival_date;
+	$booking_departure_date = $booking_departure_date;
 
 	$customer_name 		  	= $_POST['wp_travel_fname'] . ' ' . $_POST['wp_travel_lname'];
 	$customer_country 		= $_POST['wp_travel_country'];
