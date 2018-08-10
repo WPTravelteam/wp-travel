@@ -43,7 +43,7 @@ global $wt_cart;
 $form_field = new WP_Travel_FW_Field(); ?>
 <form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
 	<!-- Travellers info -->  
-	<?php foreach( $trips as $cart_id => $trip ) : ?>
+	<?php // foreach( $trips as $cart_id => $trip ) : ?>
 		<div class="panel wp-travel-trip-details">
 			<div class="section-title text-left">
 				<h3><?php echo esc_html__( 'Booking Details', 'wp-travel' ); ?></h3>
@@ -91,7 +91,7 @@ $form_field = new WP_Travel_FW_Field(); ?>
 				</div>                                        
 			</div>
 		</div>
-	<?php endforeach; ?>
+	<?php // endforeach; ?>
 
 	<!-- Billing info -->
 	<div class="panel ws-theme-timeline-block">
