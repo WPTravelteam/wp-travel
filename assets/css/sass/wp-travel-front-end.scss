@@ -2342,11 +2342,25 @@ ul.availabily-list {
         position: relative;
         &>div {
             display: inline-block;
-            width: 20%;
+            width: 16%;
             vertical-align: middle;
             padding: 0;
             margin: 0;
             float: left;
+            input[type="text"] {
+                border-radius: 0;
+                font-size: 13px;
+                height: 35px;
+                padding-left: 10px;
+            }
+            .parsley-errors-list.filled {
+                padding-left: 0;
+            }
+            .parsley-required {
+                border-bottom: 0;
+                margin-top: 5px;
+                padding: 0;
+            }
             &.date-to,
             &.date-from {
                 @include mob {
