@@ -1902,3 +1902,26 @@ function wp_travel_emails_from_name_filter( $from_name ) {
 }
 
 add_filter( 'wp_mail_from_name', 'wp_travel_emails_from_name_filter', 30 );
+
+
+if ( ! function_exists( 'wp_travel_format_date' ) ) :
+
+	/**
+	 * Format Date.
+	 */
+	function wp_travel_format_date( $date ) {
+
+		$date_format = get_option( 'date_format' );
+
+		if ( ! $date_format ) :
+			$date_format = 'jS M, Y';
+		endif;
+		
+		$formated_date = esc_html( date_i18n( $date_format, strtotime( $date ) ) );
+
+		return $formated_date;
+
+	}
+
+
+endif;

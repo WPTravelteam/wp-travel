@@ -171,7 +171,7 @@ function wp_travel_booking_info( $post ) {
 	// Support new layout for multiple trips booking.
 	if ( ! empty( $multiple_trips_booking_data ) ) {
 
-		do_action( 'wp_travel_bookings_backend_multiple_trip_details' );
+		do_action( 'wp_travel_bookings_backend_multiple_trip_details', $post );
 		exit;
 
 	}

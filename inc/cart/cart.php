@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $wt_cart;
 $trips = $wt_cart->getItems();
-				
+
 if ( ! $trips ) {
 	$wt_cart->cart_empty_message();
 	return;
