@@ -56,6 +56,7 @@ $available_pax = false;
 $booked_pax = false;
 $pax_limit = false;
 $general_sold_out = false;
+$inventory_enabled_for_option = false;
 
 if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 

@@ -847,7 +847,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					 default : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-						<?php echo do_shortcode( wpautop( wp_kses_post( $tab_info['content'], wp_travel_allowed_html( array( 'a', 'iframe' ) ) ) ) ) ; ?>
+						<?php echo apply_filters( 'the_content', $tab_info['content'] ) ; ?>
 						</div>
 					<?php break; ?>
 				<?php } ?>

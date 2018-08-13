@@ -535,6 +535,10 @@ function wp_travel_book_now() {
 
 	$pax = isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 1;
 
+	$booking_arrival_date = isset( $_POST['wp_travel_arrival_date'] ) ? wp_travel_format_date( $_POST['wp_travel_arrival_date'] ) : '';
+
+	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
+
 	if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 	
 		global $wt_cart;
@@ -608,6 +612,12 @@ function wp_travel_book_now() {
 	$booking_count = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
 	$new_booking_count = $booking_count + 1;
 	update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
+
+	/**
+	 * Update Arrival and Departure dates metas.
+	 */
+	update_post_meta( $order_id, 'wp_travel_arrival_date', $booking_arrival_date );
+	update_post_meta( $order_id, 'wp_travel_departure_date', $booking_departure_date );
 
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
 	foreach ( $_POST as $meta_name => $meta_val ) {
