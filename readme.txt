@@ -161,6 +161,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Datepicker language translation issue fixes.
 * Fixes: Shortcode render issue fixes with Brizy Page Builder.
 * Enhancement: WP Travel Utilities Compatibility Fixes.
+* Enhancements: Template options and hooks added.
 * Fixes: Minor issues and bug fixes.
 
 = 1.5.1 = 
