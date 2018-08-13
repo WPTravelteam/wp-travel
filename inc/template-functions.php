@@ -847,7 +847,17 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					 default : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-						<?php echo apply_filters( 'the_content', $tab_info['content'] ) ; ?>
+							<?php 
+								if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false ) ) {
+									
+									echo do_shortcode( $tab_info['content'] );
+
+								}else {
+
+									echo apply_filters( 'the_content', $tab_info['content'] ) ; 
+								}
+								
+							?>
 						</div>
 					<?php break; ?>
 				<?php } ?>
