@@ -564,7 +564,7 @@ function wp_travel_book_now() {
 		$pax = 0;
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 			
-			if ( ! $allow_multiple_cart_items && ( 1 === count( $items ) ) ) {
+			if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 
 				$trip_id = $trip_ids['0'];
 				$pax = $pax_array['0'];
@@ -764,10 +764,17 @@ function wp_travel_book_now() {
 		$headers = $email->email_headers( $client_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-			// wp_send_json( array(
-			// 	'result'  => 0,
-			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			// ) );
+				
+				if ( isset( $wt_cart ) ) {
+					$discounts = $wt_cart->get_discounts();
+					if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+			
+						WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+			
+					endif;
+					// Clear Cart After process is complete.
+					$wt_cart->clear();
+				}
 
 			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
@@ -781,10 +788,18 @@ function wp_travel_book_now() {
 		$headers = $email->email_headers( $site_admin_email, $site_admin_email );
 
 		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
-			// wp_send_json( array(
-			// 	'result'  => 0,
-			// 	'message' => __( 'Your Item Has Been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-			// ) );
+				
+				if ( isset( $wt_cart ) ) {
+					$discounts = $wt_cart->get_discounts();
+					if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+			
+						WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+			
+					endif;
+					// Clear Cart After process is complete.
+					$wt_cart->clear();
+				}
+			
 			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			header( 'Location: ' . $thankyou_page_url );

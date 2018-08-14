@@ -284,11 +284,13 @@ function wp_travel_send_email_payment( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	$order_items = get_post_meta( $booking_id, 'order_items_data', true );
+	$order_items = ( $order_items && is_array( $order_items ) ) ? count( $order_items ) : 1 ;
 	
 	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		
 		// Handle Multiple payment Emails.
-		if ( $allow_multiple_cart_items  ) {
+		if ( $allow_multiple_cart_items && 1 !== $order_items ) {
 			do_action( 'wp_travel_multiple_payment_emails', $booking_id );
 			exit;
 		}
