@@ -1371,6 +1371,10 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         height: 28px;
         max-width: 100px;
         min-width: 25%;
+        width: 100%;
+        &.wp-travel-variation-pricing-name {
+            min-width: 100%;
+        }
     }
 }
 
@@ -1765,6 +1769,22 @@ span.wp-travel-message {
         }
         .btn.btn-show-all {
             top: -15px;
+        }
+    }
+}
+
+#wp-variations-multiple-dates {
+    .two-third {
+        input {
+            max-width: 100% !important;
+            width: 100%;
+        }
+    }
+    .custom-multi-select {
+        width: 100%;
+        .select-main {
+            box-sizing: border-box;
+            min-width: 100%;
         }
     }
 }
