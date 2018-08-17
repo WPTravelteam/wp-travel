@@ -31,7 +31,7 @@ class Wp_Travel_Taxonomies {
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_trip_type_base'] ),
 		);
 
-		register_taxonomy( 'itinerary_types', array( WP_TRAVEL_POST_TYPE ), $args );
+		register_taxonomy( 'itinerary_types', apply_filters( 'wp_travel_trip_type_post_types', array( WP_TRAVEL_POST_TYPE ) ), $args );
 
 		$labels = array(
 			'name'              => _x( 'Destinations', 'general name', 'wp-travel' ),
@@ -56,7 +56,7 @@ class Wp_Travel_Taxonomies {
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_destination_base'] ),
 		);
 
-		register_taxonomy( 'travel_locations', array( WP_TRAVEL_POST_TYPE ), $args );
+		register_taxonomy( 'travel_locations', apply_filters( 'wp_travel_destinations_post_types', array( WP_TRAVEL_POST_TYPE ) ), $args );
 
 		$labels = array(
 			'name'              => _x( 'Keywords', 'general name', 'wp-travel' ),
@@ -81,7 +81,7 @@ class Wp_Travel_Taxonomies {
 			'rewrite'           => array( 'slug' => 'travel-keywords' ),
 		);
 
-		register_taxonomy( 'travel_keywords', array( WP_TRAVEL_POST_TYPE ), $args );
+		register_taxonomy( 'travel_keywords', apply_filters( 'wp_travel_kewords_post_types', array( WP_TRAVEL_POST_TYPE ) ), $args );
 
 		$labels = array(
 			'name'              => _x( 'Activities', 'general name', 'wp-travel' ),
@@ -106,6 +106,6 @@ class Wp_Travel_Taxonomies {
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_activity_base'] ),
 		);
 
-		register_taxonomy( 'activity', array( WP_TRAVEL_POST_TYPE ), $args );
+		register_taxonomy( 'activity', apply_filters( 'wp_travel_activity_post_types', array( WP_TRAVEL_POST_TYPE ) ), $args );
 	}
 }
