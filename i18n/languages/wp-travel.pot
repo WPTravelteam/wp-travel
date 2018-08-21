@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.5.3\n"
+"Project-Id-Version: WP Travel 1.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 12:32:35+00:00\n"
+"POT-Creation-Date: 2018-08-21 10:13:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,8 +54,8 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: inc/admin/admin-helper.php:546 inc/booking-functions.php:417
-#: templates/account/content-dashboard.php:134
+#: inc/admin/admin-helper.php:546 inc/admin/class-dashboard-widgets.php:51
+#: inc/booking-functions.php:417 templates/account/content-dashboard.php:134
 msgid "Booking Status"
 msgstr ""
 
@@ -66,9 +66,9 @@ msgstr ""
 msgid "Payment Mode"
 msgstr ""
 
-#: inc/admin/admin-helper.php:703 inc/email-template-functions.php:391
-#: inc/email-template-functions.php:450 inc/email-template-functions.php:1500
-#: inc/email-template-functions.php:1706
+#: inc/admin/admin-helper.php:703 inc/admin/class-dashboard-widgets.php:52
+#: inc/email-template-functions.php:391 inc/email-template-functions.php:450
+#: inc/email-template-functions.php:1500 inc/email-template-functions.php:1706
 #: templates/account/content-dashboard.php:135
 msgid "Payment Status"
 msgstr ""
@@ -878,6 +878,31 @@ msgstr ""
 msgid "All images uploaded."
 msgstr ""
 
+#: inc/admin/class-dashboard-widgets.php:25
+msgid "WP Travel: Bookings"
+msgstr ""
+
+#: inc/admin/class-dashboard-widgets.php:49 inc/email-template-functions.php:23
+#: inc/email-template-functions.php:128 inc/email-template-functions.php:306
+#: inc/email-template-functions.php:440 inc/email-template-functions.php:598
+#: inc/email-template-functions.php:906 inc/email-template-functions.php:1415
+#: inc/email-template-functions.php:1698
+msgid "Booking ID"
+msgstr ""
+
+#: inc/admin/class-dashboard-widgets.php:50 inc/booking-functions.php:416
+#: inc/trip-enquiries.php:272 templates/account/content-dashboard.php:133
+msgid "Contact Name"
+msgstr ""
+
+#: inc/admin/class-dashboard-widgets.php:53 inc/booking-functions.php:418
+msgid "Booking Date"
+msgstr ""
+
+#: inc/admin/class-dashboard-widgets.php:101
+msgid "View All Bookings"
+msgstr ""
+
 #: inc/admin/views/status.php:14
 msgid "WordPress Information"
 msgstr ""
@@ -1297,15 +1322,6 @@ msgstr ""
 
 #: inc/booking-functions.php:278 inc/trip-enquiries.php:234
 msgid "Some text..."
-msgstr ""
-
-#: inc/booking-functions.php:416 inc/trip-enquiries.php:272
-#: templates/account/content-dashboard.php:133
-msgid "Contact Name"
-msgstr ""
-
-#: inc/booking-functions.php:418
-msgid "Booking Date"
 msgstr ""
 
 #: inc/booking-functions.php:859
@@ -3145,13 +3161,6 @@ msgstr ""
 msgid "You have received bookings from"
 msgstr ""
 
-#: inc/email-template-functions.php:23 inc/email-template-functions.php:128
-#: inc/email-template-functions.php:306 inc/email-template-functions.php:440
-#: inc/email-template-functions.php:598 inc/email-template-functions.php:906
-#: inc/email-template-functions.php:1415 inc/email-template-functions.php:1698
-msgid "Booking ID"
-msgstr ""
-
 #: inc/email-template-functions.php:51 inc/email-template-functions.php:156
 #: inc/email-template-functions.php:334 inc/email-template-functions.php:640
 #: inc/email-template-functions.php:948 inc/email-template-functions.php:1457
@@ -4219,7 +4228,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:286
+#: upgrade/update-137.php:25 wp-travel.php:287
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -4458,32 +4467,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:361
+#: upgrade/update-137.php:48 wp-travel.php:362
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:366
+#: upgrade/update-137.php:53 wp-travel.php:367
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:371
+#: upgrade/update-137.php:58 wp-travel.php:372
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:362
+#: upgrade/update-137.php:49 wp-travel.php:363
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:367
+#: upgrade/update-137.php:54 wp-travel.php:368
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:372
+#: upgrade/update-137.php:59 wp-travel.php:373
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""

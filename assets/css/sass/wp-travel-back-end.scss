@@ -1071,7 +1071,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         display: -ms-flexbox;
         display: flex;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+        flex-wrap: wrap;
         width: 66.6666%;
         select,
         input {
@@ -1100,7 +1100,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 
 .price-accordion {
     .two-third {
-        > .wp-travel-enable-inventory {
+        >.wp-travel-enable-inventory {
             margin-top: 10px;
         }
     }

@@ -53,7 +53,7 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
 		wp_enqueue_script( 'wp-travel-view-mode' );
 
-		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider' ), WP_TRAVEL_VERSION, 1 );
+		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider', 'wp-util' ), WP_TRAVEL_VERSION, 1 );
 
 		$trip_prices_data = array( 
 			'currency_symbol' => wp_travel_get_currency_symbol(),

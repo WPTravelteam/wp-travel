@@ -156,6 +156,10 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.5.4 = 
+* New Feature: WP Travel Dashboard Bookings Widget.
+* Fixes: Minor issues and bug fixes.
+
 = 1.5.3 = 
 * Enhancement: WP Travel Utilities Compatibility Fixes.
 * Fixes: Minor issues and bug fixes.
