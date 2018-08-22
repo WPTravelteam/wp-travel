@@ -179,7 +179,7 @@ if ( ! $price_per ) {
 										<div class="repeat-row">
 												<label for="pricing_name_<?php echo esc_attr( $key ); ?>" class="one-third"><?php esc_html_e( 'Pricing Name', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input id="pricing_name_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-name" required bind="pricing_option_<?php echo esc_attr( $key ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][pricing_name]" value="<?php echo esc_attr( $pricing_name ); ?>">
+													<input class="wp-travel-variation-pricing-name" id="pricing_name_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-name" required bind="pricing_option_<?php echo esc_attr( $key ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][pricing_name]" value="<?php echo esc_attr( $pricing_name ); ?>">
 													<input class="wp-travel-variation-pricing-uniquekey" type="hidden" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price_key]" value="<?php echo esc_attr( $pricing_key ); ?>">
 													<p class="description"><?php echo esc_html__( 'Create a unique name for your pricing option', 'wp-travel' ); ?></p>
 												</div>
@@ -477,7 +477,7 @@ if ( ! $price_per ) {
 										<div class="wp-travel-sorting-handle"></div>
 											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $date_key ); ?>" aria-expanded="false" aria-controls="collapse-<?php echo esc_attr( $date_key ); ?>" class="collapsed">
 
-												<span bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
+												<span bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>"><?php echo esc_attr( $date_label ); ?></span>
 
 												<span class="collapse-icon"></span>
 											</a>
@@ -491,7 +491,7 @@ if ( ! $price_per ) {
 											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input value="<?php echo esc_attr( $date_label ); ?>"  bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
+													<input class="wp-travel-variation-date-label" value="<?php echo esc_attr( $date_label ); ?>"  bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
 												</div>
 											</div>
 											<div class="repeat-row">
@@ -578,7 +578,7 @@ if ( ! $price_per ) {
 									<div class="repeat-row">
 										<label class="one-third"><?php esc_html_e( 'Add a Label', 'wp-travel' ); ?></label>
 										<div class="two-third">
-											<input  bind="wp_travel_multiple_dates_{{data.random}}" name="wp_travel_multiple_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
+											<input class="wp-travel-variation-date-label" bind="wp_travel_multiple_dates_{{data.random}}" name="wp_travel_multiple_trip_dates[{{data.random}}][date_label]" type="text" placeholder="<?php esc_html_e( 'Your Text Here', 'wp-travel' ); ?>" />
 										</div>
 									</div>
 									<div class="repeat-row">

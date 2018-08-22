@@ -45,7 +45,6 @@ function wp_travel_marketplace_page() {
 	if ( ! $addons_data ) {
 
 		$addons_data = file_get_contents( 'https://themepalace.com/edd-api/v2/products/?s=trave&category=wordpress-plugins' );
-
 		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
 
 	}
@@ -64,9 +63,9 @@ function wp_travel_marketplace_page() {
 				<div class="wp-travel-marketplace-tab-wrap">
 					<ul>
 
-						<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
+						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
 						<?php if ( $addons_data ) : ?>
-							<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+							<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
 						<?php endif; ?>
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
@@ -80,9 +79,9 @@ function wp_travel_marketplace_page() {
 								<div class="single-module-content clearfix">
 									<h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank">
 									<span class="dashicons-wp-travel">
-									</span> Travel Log</a></h4>
-									<a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank">View Detail</a>
-									<a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.zip" target="_blank">Download</a>
+									</span><?php esc_html_e( 'Travel Log', 'wp-travel' ); ?></a></h4>
+									<a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ); ?></a>
+									<a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.zip" target="_blank"><?php esc_html_e( 'Download', 'wp-travel' ); ?></a>
 								</div>
 							</div>
 						</div>
@@ -90,11 +89,8 @@ function wp_travel_marketplace_page() {
 					<?php if ( $addons_data ) : ?>
 						<div id="tabs-1" class="tab-pannel">
 							<div class="marketplace-module clearfix">
-
 							<?php foreach( $addons_data as $key => $product ) : 
-
 								$prod_info = $product->info;
-
 							?>
 								
 								<div class="single-module">
@@ -111,7 +107,7 @@ function wp_travel_marketplace_page() {
 												<?php echo esc_html( $prod_info->title ); ?>
 											</a>
 										</h4>
-										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">View Detail</a>
+										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ) ?></a>
 									</div>
 								</div>
 							
@@ -128,52 +124,51 @@ function wp_travel_marketplace_page() {
 
 		<div id="wp_travel_support_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text">Toggle panel: Support</span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ) ?></span>
 				<span class="toggle-indicator-acc" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span>Support</span>
+				<span><?php esc_html_e( 'Support', 'wp-travel' ) ?></span>
 			</h2>
 			<div class="inside">
 
-		       <div class="thumbnail">
-		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ) ?>">
-		             <p class="text-justify">Click Below for support. </p>
-		             <p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary">Get Support Here</a></p>
-		       </div>
+			<div class="thumbnail">
+				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ) ?>">
+					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ) ?> </p>
+					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ) ?></a></p>
+			</div>
 
 			</div>
 		</div>
 
 		<div id="wp_travel_doc_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text">Toggle panel: Documentation</span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ) ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span>Documentation</span>
+				<span><?php esc_html_e( 'Documentation', 'wp-travel' ) ?></span>
 			</h2>
 			<div class="inside">
 
-		       <div class="thumbnail">
-		            <img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ) ?>">
-		             <p class="text-justify">Click Below for our full Documentation about logo slider. </p>
-		             <p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary">Get Documentation Here</a></p>
-		       </div>
+				<div class="thumbnail">
+					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ) ?>">
+						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ) ?> </p>
+						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ) ?></a></p>
+				</div>
 
 			</div>
 		</div>
 
 		<div id="wp_travel_review_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text">Toggle panel: Reviews</span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ) ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span>Reviews</span>
+				<span><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></span>
 			</h2>
 			<div class="inside">
-
 				<div class="thumbnail">
 					<p class="text-center">
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
@@ -182,29 +177,24 @@ function wp_travel_marketplace_page() {
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 					</p>
-					<h5>"The plugin is very intuitive and fresh.
+					<h5><?php esc_html_e( '"The plugin is very intuitive and fresh.
 The layout fits well into theme with flexibility to different shortcodes.
-Its great plugin for travel or tour agent websites."</h5>
-					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank">muzdat</a></strong></span>
+Its great plugin for travel or tour agent websites."', 'wp-travel' ) ?></h5>
+					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ) ?></a></strong></span>
 
 				</div>
 				<div class="thumbnail last">
-					<h5>"Please fill free to leave us a review, if you found this plugin helpful."</h5>
-					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary">Leave a Review</a></p>
+					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ) ?></h5>
+					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ) ?></a></p>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
-
-
 </div>
 </div>
 </div>
-	<?php
+<?php
 }
-
 
 function docs_support_page_callback(){
 	?>

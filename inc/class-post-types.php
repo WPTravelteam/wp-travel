@@ -53,7 +53,7 @@ class WP_Travel_Post_Types {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'comments' ),
+			'supports'           => array( 'title', 'comments', 'excerpt' ),
 			'menu_icon'          => 'dashicons-wp-travel',
 		);
 		/**

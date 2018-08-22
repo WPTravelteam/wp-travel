@@ -46,11 +46,11 @@ class WP_Travel_Admin_Dashboard_Widgets {
             <table class="wp_travel_booking_dashboard_widget">
                 <thead>
                     <tr>
-                        <th><?php esc_html_e( 'Booking ID', 'wp-travel' ); ?></th>
+                        <th><?php esc_html_e( 'ID', 'wp-travel' ); ?></th>
                         <th><?php esc_html_e( 'Contact Name', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></th>
-                        <th><?php esc_html_e( 'Booking Date', 'wp-travel' ); ?></th>
+                        <th><?php esc_html_e( 'Status', 'wp-travel' ); ?></th>
+                        <th><?php esc_html_e( 'Payment', 'wp-travel' ); ?></th>
+                        <th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
                     </tr>
             </thead>
             <tbody>
@@ -98,7 +98,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="btn"><?php esc_html_e( 'View All Bookings', 'wp-travel' ); ?></a></td>
+                    <td colspan="5"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View All Bookings', 'wp-travel' ); ?></a></td>
                 </tr>
             <tfoot>
             </table>

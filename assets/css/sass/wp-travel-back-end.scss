@@ -1371,7 +1371,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         height: 28px;
         max-width: 100px;
         min-width: 25%;
-        width: 100%;
         &.wp-travel-variation-pricing-name {
             min-width: 100%;
         }
@@ -1775,7 +1774,7 @@ span.wp-travel-message {
 
 #wp-variations-multiple-dates {
     .two-third {
-        input {
+        input.wp-travel-variation-date-label {
             max-width: 100% !important;
             width: 100%;
         }
