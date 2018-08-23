@@ -1173,6 +1173,11 @@ class WP_Travel_Admin_Settings {
 			if ( array_key_exists( '$index', $indexed ) ){
 				unset ($indexed['$index'] );
 			}
+			foreach( $indexed as $key => $index ) {
+				if( empty( $index['name'] ) )
+					unset( $indexed[$key] );
+			}
+
 			$settings['wp_travel_trip_facts_settings'] = $indexed;
 
 			//Cart and Checkout pages options
