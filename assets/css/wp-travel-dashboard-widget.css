@@ -4,6 +4,7 @@ Dashboard Widget CSS
 
 .wp_travel_booking_dashboard_widget {
     border-spacing: 0;
+    width: 100%;
 }
 
 .wp_travel_booking_dashboard_widget th {
