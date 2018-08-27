@@ -1297,14 +1297,14 @@
 }
 
 //jquery ui range slider styling
-.ui-widget.ui-widget-content {
+.wp-trave-price-range .ui-widget.ui-widget-content {
     border: none;
     border-radius: 10px;
     background-color: #555;
     cursor: pointer;
 }
 
-.ui-slider {
+.wp-trave-price-range .ui-slider {
     position: relative;
     text-align: left;
     .ui-slider-range {
@@ -1326,7 +1326,7 @@
     }
 }
 
-.ui-slider-horizontal {
+.wp-trave-price-range .ui-slider-horizontal {
     height: 5px;
     .ui-slider-range {
         top: 0;
@@ -1340,12 +1340,12 @@
     }
 }
 
-.ui-state-default,
-.ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default,
-.ui-button,
-html .ui-button.ui-state-disabled:hover,
-html .ui-button.ui-state-disabled:active {
+.wp-trave-price-range .ui-state-default,
+.wp-trave-price-range .ui-widget-content .ui-state-default,
+.wp-trave-price-range .ui-widget-header .ui-state-default,
+.wp-trave-price-range .ui-button,
+html .wp-trave-price-range .ui-button.ui-state-disabled:hover,
+html .wp-trave-price-range .ui-button.ui-state-disabled:active {
     border: 1px solid #555555;
     background: #555555;
     font-weight: normal;
@@ -2352,6 +2352,7 @@ ul.availabily-list {
                 font-size: 13px;
                 height: 35px;
                 padding-left: 10px;
+                width: 100%;
             }
             .parsley-errors-list.filled {
                 padding-left: 0;
