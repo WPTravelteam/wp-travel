@@ -297,6 +297,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 						</li>
 					<?php endforeach; ?>
 					</ul>
+					<?php do_action('wp_travel_trip_extras'); ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -425,6 +426,7 @@ if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
 						</div>
 					</li>
 				</ul>
+				<?php do_action('wp_travel_trip_extras'); ?>
 			</div>
 		</div>
 	<?php endif; ?>
