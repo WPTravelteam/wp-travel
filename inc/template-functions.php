@@ -2083,7 +2083,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
                 <th>Trip Dates</th>
                 <th>Price(PP)</th>
                 <th>Spaces Left</th>
-                <th></th>
+                <th>Booking</th>
             </tr>
             </thead>
             <tbody>
