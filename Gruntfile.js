@@ -296,7 +296,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
 
         'pre_release',
-        'deploy',
+        'zip',
 
     ]);
 
