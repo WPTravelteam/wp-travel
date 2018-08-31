@@ -679,7 +679,7 @@
         jQuery(this).closest('li').toggleClass('selected');
 
     });
-    jQuery('.multiselect-all').change(function($) {
+    jQuery(document).on('change', '.multiselect-all', function($) {
         if (!jQuery(this).is(':checked')) {
             jQuery(this).closest('li').siblings().removeClass('selected').find('input.multiselect-value').prop('checked', false);
         } else {

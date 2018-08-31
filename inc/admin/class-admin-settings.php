@@ -96,7 +96,7 @@ class WP_Travel_Admin_Settings {
 
 		$settings_fields['itinerary'] = array(
 			'tab_label' => __( WP_TRAVEL_POST_TITLE_SINGULAR, 'wp-travel' ),
-			'content_title' => __( WP_TRAVEL_POST_TITLE_SINGULAR . ' Settings', 'wp-travel' ),
+			'content_title' => __( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) . ' Settings', 'wp-travel' ),
 		);
 
 		$settings_fields['email'] = array(
@@ -258,6 +258,7 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] )  ? $args['settings']['hide_related_itinerary'] : 'no';
+		$trip_pricing_options_layout = isset( $args['settings']['trip_pricing_options_layout'] )  ? $args['settings']['trip_pricing_options_layout'] : 'by-pricing-option';
 		?>
 		<table class="form-table">
 			<tr>
@@ -268,13 +269,25 @@ class WP_Travel_Admin_Settings {
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
 							<input <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary" type="checkbox" />						
-							<span class="switch">
-						  </span>
+							<span class="switch"></span>
 						</label>
 					</span>
 					<p class="description"><?php esc_html_e( sprintf( 'This will hide your related %s.', WP_TRAVEL_POST_TITLE ), 'wp-travel' );  ?></p>
 				</td>
 			<tr>
+			<tr id="wp-travel-tax-price-options" >
+				<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ) ?></label></th>
+				<td>
+					<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio"> 
+					<?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>
+
+					<label> <input <?php checked( 'by-date', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-date" type="radio">
+					<?php esc_html_e( 'List by fixed departure dates', 'wp-travel' ); ?></label>
+
+					<p class="description"><?php esc_html_e('This options will control how you display trip dates and prices.', 'wp-travel' ); ?></p>
+					
+				</td>
+			</tr>
 		</table>
 	<?php
 	}
@@ -1061,6 +1074,9 @@ class WP_Travel_Admin_Settings {
 			$google_map_zoom_level 	= ( isset( $_POST['google_map_zoom_level'] ) && '' !== $_POST['google_map_zoom_level'] ) ? $_POST['google_map_zoom_level'] : '';
 
 			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
+
+			$trip_pricing_options_layout = ( isset( $_POST['trip_pricing_options_layout'] ) && '' !== $_POST['trip_pricing_options_layout'] ) ? $_POST['trip_pricing_options_layout'] : 'by-pricing-option';
+
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
 
 			//Email Templates
@@ -1102,10 +1118,11 @@ class WP_Travel_Admin_Settings {
 			$generate_user_password = ( isset( $_POST['generate_user_password'] ) && '' !== $_POST['generate_user_password'] ) ? 'yes' : 'no';
 			$settings['generate_user_password'] = $generate_user_password;
 
-			$settings['currency'] = $currency;
-			$settings['google_map_api_key'] = $google_map_api_key;
-			$settings['google_map_zoom_level'] = $google_map_zoom_level;
-			$settings['hide_related_itinerary'] = $hide_related_itinerary;
+			$settings['currency']                    = $currency;
+			$settings['google_map_api_key']          = $google_map_api_key;
+			$settings['google_map_zoom_level']       = $google_map_zoom_level;
+			$settings['hide_related_itinerary']      = $hide_related_itinerary;
+			$settings['trip_pricing_options_layout'] = $trip_pricing_options_layout;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
 			
 			// Save Admin Email Options.
@@ -1151,13 +1168,13 @@ class WP_Travel_Admin_Settings {
 				update_option( 'wp_travel_wp-travel-checkout_page_id', $checkout_page_id );
 			}
 
-			$settings['wt_test_mode'] = $wt_test_mode;
-			$settings['wt_test_email'] = $wt_test_email;
-			$settings['partial_payment'] = $partial_payment;
+			$settings['wt_test_mode']           = $wt_test_mode;
+			$settings['wt_test_email']          = $wt_test_email;
+			$settings['partial_payment']        = $partial_payment;
 			$settings['minimum_partial_payout'] = $minimum_partial_payout;
 
 			//Trip Tax Values.
-			$settings['trip_tax_enable'] = $trip_tax_enable;
+			$settings['trip_tax_enable']     = $trip_tax_enable;
 			$settings['trip_tax_percentage'] = $trip_tax_percentage;
 			$settings['trip_tax_price_inclusive'] = $trip_tax_price_inclusive;
 
