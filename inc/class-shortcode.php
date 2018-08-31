@@ -216,12 +216,12 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	?>
 	<?php
 		$price      = ( isset( $_GET['price'] ) ) ? $_GET['price']   :  '';
-		$type       = ( int ) ( isset( $_GET['type'] ) && '' !       == $_GET['type'] ) ? $_GET['type']            : 0;
-		$location   = ( int ) ( isset( $_GET['location'] ) && '' !   == $_GET['location'] ) ? $_GET['location']    : 0;
-		$min_price  = ( int ) ( isset( $_GET['min_price'] ) && '' !  == $_GET['min_price'] ) ? $_GET['min_price']  : '';
-		$max_price  = ( int ) ( isset( $_GET['max_price'] ) && '' !  == $_GET['max_price'] ) ? $_GET['max_price']  : '';
-		$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' ! == $_GET['trip_start'] ) ? $_GET['trip_start']: '';
-		$trip_end   = ( int ) ( isset( $_GET['trip_end'] ) && '' !   == $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+		$type       = (int) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type']  : 0;
+		$location   = (int) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location']    : 0;
+		$min_price  = (int) ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? $_GET['min_price']  : '';
+		$max_price  = (int) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price']  : '';
+		$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start']: '';
+		$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
 	
 	ob_start();
 
