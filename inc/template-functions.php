@@ -2075,6 +2075,58 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 					</ul>
 				</div>
 			</div>
+			
+			<div class="trip_fixed_starting_dates">
+        <table>
+            <thead>
+            <tr>
+                <th>Trip Dates</th>
+                <th>Price(PP)</th>
+                <th>Spaces Left</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Spaces Left</td>
+                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Spaces Left</td>
+                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Spaces Left</td>
+                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Spaces Left</td>
+                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Sold Out</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
+                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
+                    <td><i class="fa fa-user"></i>Sold Out</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
 	<?php endif;
 
 }

@@ -92,8 +92,8 @@ if ( $enable_checkout && 0 !== $trip_price ) :
 		$general_status_tags = array(
 
 			'{available_pax}' => $available_pax,
-			'{booked_pax}' => $booked_pax,
-			'{pax_limit}' => $pax_limit,
+			'{booked_pax}'    => $booked_pax,
+			'{pax_limit}'     => $pax_limit,
 			
 		);
 
