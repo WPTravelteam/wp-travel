@@ -2114,13 +2114,13 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
                 <tr>
                     <td><i class="fa fa-calendar"></i> January 10, 2018</td>
                     <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Sold Out</td>
+                    <td class="sold_out">Sold Out</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td><i class="fa fa-calendar"></i> January 10, 2018</td>
                     <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Sold Out</td>
+                    <td class="sold_out"></i>Sold Out</td>
                     <td></td>
                 </tr>
             </tbody>
