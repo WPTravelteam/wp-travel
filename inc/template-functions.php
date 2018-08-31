@@ -2125,7 +2125,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
                 </tr>
             </tbody>
         </table>
-        </div>
+      </div>
 
 	<?php endif;
 
