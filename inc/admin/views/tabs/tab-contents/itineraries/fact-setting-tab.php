@@ -17,7 +17,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 		$str = random_int( 1, 1000000 );
 		?>
 
-	<table class="form-table open-table">
+	<table class="form-table <?php echo ( ! $fact ) ? '' : 'open-table'; ?>">
 	<tbody>
 		<tr>
 			<th>
@@ -67,7 +67,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 		</tr>
 		<tr class="open-close-row">
 			<td colspan="2">
-				<button type="button" class="fact-open" title="Toggle Table"><span class="dashicons dashicons-arrow-down"></span></button>
+				<button type="button" class="fact-open" title="Toggle Table"><span class="dashicons <?php echo ( $fact ) ? 'dashicons-arrow-up' : 'dashicons-arrow-down'; ?>"></span></button>
 			</td>
 		</tr>
 		<tr class="delete-row">

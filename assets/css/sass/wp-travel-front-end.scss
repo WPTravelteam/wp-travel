@@ -3419,3 +3419,56 @@ ul.wp-travel-error {
     display: block;
     border: 2px solid #f00;
 }
+
+.trip_fixed_starting_dates {
+    overflow-x: auto;
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    thead tr {
+        background-color: #f2f2f2;
+    }
+    tr {
+        border: 1px solid #f2f2f2;
+        border-top: 0;
+    }
+    th {
+        line-height: 1.4;
+        font-size: 16px;
+        padding: 21px 0;  
+    }
+    td {
+        font-size: 15px;
+        line-height: 1.4;
+        padding: 16px 0;
+    }
+    th, td {
+        border: 0;
+        padding-left: 15px;
+        white-space: nowrap; 
+    }
+    i[class*="fa"] {
+        color: #333;
+        margin-right: 10px;
+        font-size: 13px; 
+    }
+    i.fa-tag {
+        color: #34BA7D;
+        margin-right: 10px;
+    }
+    .sold_out {
+        text-transform: uppercase;
+        color: #f83531;
+        font-weight: 500;
+    }
+    .btn {
+        display: inline-block;
+        border: 1px solid #8b8b8b;
+        padding: 7px 10px 8px;
+        font-size: 14px;
+        &:hover {
+            border-color: #f83531;
+        }
+    }
+}

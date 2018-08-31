@@ -202,26 +202,26 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	if ( isset( $atts['filters'] ) && 'all' !== $atts['filters'] ) {
 		$filters = explode( ',',$atts['filters'] );
 		
-		$keyword_search = in_array( 'keyword', $filters ) ? true : false;
-		$fact = in_array( 'fact', $filters ) ? true : false;
-		$trip_type_filter = in_array( 'trip_type', $filters ) ? true : false;
-		$trip_location_filter = in_array( 'trip_location', $filters ) ? true : false;
-		$price_orderby = in_array( 'price_orderby', $filters ) ? true : false;
-		$price_range = in_array( 'price_range', $filters ) ? true : false;
-		$trip_dates = in_array( 'trip_dates', $filters ) ? true : false;
+		$keyword_search       = in_array( 'keyword', $filters ) ? true      : false;
+		$fact                 = in_array( 'fact', $filters ) ? true         : false;
+		$trip_type_filter     = in_array( 'trip_type', $filters ) ? true    : false;
+		$trip_location_filter = in_array( 'trip_location', $filters ) ? true: false;
+		$price_orderby        = in_array( 'price_orderby', $filters ) ? true: false;
+		$price_range          = in_array( 'price_range', $filters ) ? true  : false;
+		$trip_dates           = in_array( 'trip_dates', $filters ) ? true   : false;
 	}
 
 	$index = uniqid();
 
 	?>
 	<?php
-		$price = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
-		$type = ( int ) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
-		$location = ( int ) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
-		$min_price = ( int ) ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? $_GET['min_price'] : '';
-		$max_price = ( int ) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price'] : '';
-		$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
-		$trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+		$price      = ( isset( $_GET['price'] ) ) ? $_GET['price']   :  '';
+		$type       = ( int ) ( isset( $_GET['type'] ) && '' !       == $_GET['type'] ) ? $_GET['type']            : 0;
+		$location   = ( int ) ( isset( $_GET['location'] ) && '' !   == $_GET['location'] ) ? $_GET['location']    : 0;
+		$min_price  = ( int ) ( isset( $_GET['min_price'] ) && '' !  == $_GET['min_price'] ) ? $_GET['min_price']  : '';
+		$max_price  = ( int ) ( isset( $_GET['max_price'] ) && '' !  == $_GET['max_price'] ) ? $_GET['max_price']  : '';
+		$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' ! == $_GET['trip_start'] ) ? $_GET['trip_start']: '';
+		$trip_end   = ( int ) ( isset( $_GET['trip_end'] ) && '' !   == $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
 	
 	ob_start();
 
