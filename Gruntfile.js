@@ -227,10 +227,10 @@ module.exports = function(grunt) {
             deploy: {
                 expand: true,
                 options: {
-                    archive: 'deploy/<%= pkg.name %>.zip'
+                    archive: 'deploy/<%= pkg.name %>-<%= pkg.version %>.zip'
                 },
                 cwd: 'deploy/<%= pkg.name %>/',
-                src: ['**/*'],
+                src: ['**/*','!build/**'],
                 dest: '<%= pkg.name %>/'
             }
         },
