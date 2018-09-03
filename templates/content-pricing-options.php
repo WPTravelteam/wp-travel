@@ -119,10 +119,11 @@ if ( $enable_checkout && 0 !== $trip_price ) :
 		$list_type = isset( $settings['trip_pricing_options_layout'] )  ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
 
 		if ( $list_type === 'by-pricing-option' ) {
-
+			// Default pricing options template.
 			do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
 
 		} elseif( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) {
+			// Date listing template.
 			do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data );
 
 		} else {
