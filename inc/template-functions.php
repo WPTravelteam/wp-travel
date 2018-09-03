@@ -2150,6 +2150,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 				?>
 				<tr class="is_parent_of_below">
 					<td><i class="fa fa-calendar"></i> <?php echo esc_html( wp_travel_format_date( $start_date ) ); ?></td>
+					<input type="hidden" name="trip_date" value="<?php echo esc_attr( $start_date ); ?>">
 					<td></td>
 					<td></td>
 					<?php if( $status_col ) : ?>
@@ -2165,7 +2166,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 						if ( ! $variation )
 							continue;
 
-						foreach ( $variation as $k => $var ) :
+						foreach ( $variation as $k => $var ) : 
 						
 							$pricing_name = isset( $var['pricing_name'] ) ? $var['pricing_name'] : '';
 							$min_pax = isset( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp_travel' ), $var['min_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
@@ -2184,7 +2185,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 							if ( 'No Size Limit' !== $min_pax ) {
 								$min_attr = 'min=' . $min_pax;
 							}
-
 							$pricing_sold_out = false;
 
 								if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
@@ -2215,10 +2215,10 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 						
 						?>
-							<tr class="is_child_of_above">
+							<tr id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $ky ); ?>" class="is_child_of_above">
 								<td style="border-left: 1px solid #f83531; padding-left: 45px;"><i class="fa fa-level-down"></i> <?php echo esc_html( $pricing_name ); ?></td>
 								<td>
-									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" type="number">
+									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" required type="number">
 								</td>
 								<?php if( $status_col ) : ?>
 									<td><i class="fa fa-user"></i> <?php echo esc_html( $pricing_status_msg ); ?></td>
@@ -2255,7 +2255,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 										<?php echo $sold_out_btn_rep_msg; ?>
 									</p>
 								<?php else : 
-									$button = '<a href="%s" data-parent-id="pricing-'.esc_attr( $price_key ).'" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+									$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $ky ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 									
 									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
@@ -2263,7 +2263,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 								endif;
 								?>
 							</tr>
-
 					<?php endforeach;
 					endforeach; ?>
 				<?php endif; ?>
