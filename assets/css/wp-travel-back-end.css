@@ -627,7 +627,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 .stat-toolbar-form .btn.btn-show-all:hover {
   background: #006799;
-  box-shadow: 0px 0px 20px 0px #006799 4a;
+  box-shadow: 0px 0px 20px 0px #0067994a;
 }
 .stat-toolbar-form .checkbox-default-design {
   float: left;
@@ -1646,4 +1646,4 @@ span.wp-travel-message {
   min-width: 100%;
 }
 
-/*# sourceMappingURL=assets/css/wp-travel-back-end.css.map */
+/*# sourceMappingURL=wp-travel-back-end.css.map */

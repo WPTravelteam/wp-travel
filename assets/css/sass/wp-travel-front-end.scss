@@ -3432,16 +3432,41 @@ ul.wp-travel-error {
     tr {
         border: 1px solid #f2f2f2;
         border-top: 0;
+        &.is_parent_of_below {
+            border-bottom: 0;
+        }
+        &.is_child_of_above {
+            background-color: #fcfcfc;
+        }
     }
     th {
         line-height: 1.4;
-        font-size: 16px;
-        padding: 21px 0;  
+        font-size: 12px;
+        padding: 15px 0;
+        // &.width_trip_dates {
+        //     width: 100px;
+        // }
+        // &.width_min_pax,
+        // &.width_max_pax {
+        //     width: 20px;
+        // }
+        // &.width_space_status {
+        //     width: 50px;
+        // }
+        // &.width_price {
+        //     width: 80px;
+        // }
+        // &.width_booking{
+        //     width: 100px;
+        // }
     }
     td {
-        font-size: 15px;
+        font-size: 13px;
         line-height: 1.4;
-        padding: 16px 0;
+        padding: 10px 0;
+        .has_sale {
+            padding-left: 15px;
+        }
     }
     th, td {
         border: 0;
@@ -3453,20 +3478,27 @@ ul.wp-travel-error {
         margin-right: 10px;
         font-size: 13px; 
     }
+    i.fa-level-down {
+        transform: rotate(90deg) scale(1, -1);
+    }
     i.fa-tag {
         color: #34BA7D;
-        margin-right: 10px;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) scale(-1, 1);
     }
     .sold_out {
         text-transform: uppercase;
         color: #f83531;
+        font-size: 11px;
         font-weight: 500;
     }
     .btn {
         display: inline-block;
         border: 1px solid #8b8b8b;
-        padding: 7px 10px 8px;
-        font-size: 14px;
+        padding: 5px 10px 6px;
+        font-size: 13px;
         &:hover {
             border-color: #f83531;
         }
