@@ -126,7 +126,7 @@ if ( $enable_checkout && 0 !== $trip_price ) :
 			do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data );
 
 		} else {
-			esc_html_e( 'No foxed departure dates found.', 'wp-travel' );
+			esc_html_e( 'No fixed departure dates found.', 'wp-travel' );
 		}
 	else : ?>
 		<div id="wp-travel-date-price" class="detail-content">
