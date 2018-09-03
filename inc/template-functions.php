@@ -2078,52 +2078,53 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 			
 			<div class="trip_fixed_starting_dates">
         <table>
-            <thead>
-            <tr>
-                <th>Trip Dates</th>
-                <th>Price(PP)</th>
-                <th>Spaces Left</th>
-                <th>Booking</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Spaces Left</td>
-                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
-                </tr>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Spaces Left</td>
-                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
-                </tr>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Spaces Left</td>
-                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
-                </tr>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td><i class="fa fa-user"></i>Spaces Left</td>
-                    <td><a class="btn btn-primary" href="#">Book Now</a></td>
-                </tr>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td class="sold_out">Sold Out</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><i class="fa fa-calendar"></i> January 10, 2018</td>
-                    <td><i class="fa fa-tag"></i> US$ 1,680</td>
-                    <td class="sold_out"></i>Sold Out</td>
-                    <td></td>
-                </tr>
-            </tbody>
+					<thead>
+						<tr>
+							<th class="width_trip_dates">Trip Date</th>
+							<th class="width_min_pax">Min Pax</th>
+							<th class="width_max_pax">Max Pax</th>
+							<th class="width_space_status">Status</th>
+							<th class="width_price">Price</th>
+							<th class="width_booking">Booking</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="is_parent_of_below">
+							<td><i class="fa fa-calendar"></i> January 10, 2018</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="is_child_of_above">
+							<td style="border-left: 1px solid #f83531; padding-left: 45px;"><i class="fa fa-level-down"></i> Adult</td>
+							<td>2 pax</td>
+							<td>6 pax</td>
+							<td><i class="fa fa-user"></i> N/A</td>
+							<td style="position: relative">
+								<i class="fa fa-tag"></i>
+								<div style="padding-left: 10px;">
+									<del style="display: block; width: 100%;">$ 11</del>
+									<strong>$10 / Group</strong>
+								</div>
+							</td>
+							<td><a class="btn btn-primary" href="#">Book Now</a></td>
+						</tr>
+						<tr class="is_child_of_above">
+							<td style="border-left: 1px solid #f83531; padding-left: 45px;"><i class="fa fa-level-down"></i> Adult</td>
+							<td>2 pax</td>
+							<td>6 pax</td>
+							<td><i class="fa fa-user"></i> N/A</td>
+							<td style="position: relative">
+								<i class="fa fa-tag"></i>
+								<div style="padding-left: 10px;">
+									<strong>$10 / Group</strong>
+								</div>
+							</td>
+							<td><a class="btn btn-primary" href="#">Book Now</a></td>
+						</tr>
+					</tbody>
         </table>
       </div>
 
