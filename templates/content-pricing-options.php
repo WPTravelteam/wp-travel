@@ -112,11 +112,22 @@ if ( $enable_checkout && 0 !== $trip_price ) :
 	}
 	
 	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
+	$trip_multiple_dates_data = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
 
 	if ( 'yes' === $wp_travel_enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 
-		do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
-		
+		$list_type = isset( $settings['trip_pricing_options_layout'] )  ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
+
+		if ( $list_type === 'by-pricing-option' ) {
+
+			do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
+
+		} elseif( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) {
+			do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data );
+
+		} else {
+			esc_html_e( 'No foxed departure dates found.', 'wp-travel' );
+		}
 	else : ?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
