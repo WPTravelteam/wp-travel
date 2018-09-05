@@ -174,6 +174,14 @@ class WP_Travel_Cart {
 
 			}
 
+			/**
+			 * Customization Starts.
+			 */
+			$available_pax = apply_filters( 'wp_travel_available_pax', $available_pax, $trip_id, $price_key );
+			/**
+			 * Customization Ends.
+			 */
+
 			if ( $inventory_enabled && $available_pax ) {
 
 				if ( $pax > $available_pax ) {
@@ -263,7 +271,17 @@ class WP_Travel_Cart {
 		// Update quantity.
 		if ( isset( $this->items[ $cart_item_id ] ) ) {
 
+			/**
+			 * Customization Starts.
+			 */
 			$max_available = $this->items[ $cart_item_id ]['max_available'];
+			$trip_id = $this->items[ $cart_item_id ]['trip_id'];
+			$price_key = $this->items[ $cart_item_id ]['price_key'];
+		
+			$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
+			/**
+			 * Customization Ends.
+			 */
 
 			$this->items[ $cart_item_id ]['pax'] = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
 

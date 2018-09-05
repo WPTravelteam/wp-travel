@@ -1925,3 +1925,48 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 
 
 endif;
+
+if ( ! function_exists( 'wp_travel_get_total_booked_pax' ) ) :
+/**
+ * Get Total booked Count.
+ */
+function wp_travel_get_total_booked_pax( $trip_id, $including_cart=true ) {
+
+	if ( ! $trip_id ) {
+		return;
+	}
+	$trip_pricing_options_data = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+
+	if ( empty( $trip_pricing_options_data ) || ! is_array( $trip_pricing_options_data ) )
+		return;
+	
+	$total_booked_pax = 0;
+	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+		$inventory  = new WP_Travel_Util_Inventory();
+		foreach ( $trip_pricing_options_data as $pricing ) :
+			$price_key            = isset( $pricing['price_key'] ) ? $pricing['price_key']      : '';
+			
+			$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
+			$booked_pax = ( $booked_pax ) ? $booked_pax : 0;
+			$total_booked_pax += $booked_pax; 
+		endforeach;
+	}
+	if ( $including_cart ) {
+		global $wt_cart;
+		$total_pax_on_cart = 0;
+		$items = $wt_cart->getItems();
+		if ( is_array( $items ) && count( $items ) > 0 ) {
+			foreach( $items as $item ) {
+				$cart_trip_id = $item['trip_id'];
+				if ( $trip_id != $cart_trip_id ) {
+					continue;
+				}
+				$pax_on_cart = $item['pax'];
+				$total_pax_on_cart += $pax_on_cart;
+			}
+		}
+		$total_booked_pax += $total_pax_on_cart;
+	}
+	return $total_booked_pax;
+}
+endif;

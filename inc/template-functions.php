@@ -2146,10 +2146,11 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 			<?php foreach(  $trip_multiple_dates_data as $ky => $date_option ) : 
 
 				$start_date = isset( $date_option['start_date'] ) && ! empty( $date_option['start_date'] ) ? $date_option['start_date'] : '';
+				$end_date = isset( $date_option['end_date'] ) && ! empty( $date_option['end_date'] ) ? $date_option['end_date'] : '';
 				$pricing_options = isset( $date_option['pricing_options'] ) && ! empty( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
 				?>
 				<tr class="is_parent_of_below">
-					<td><i class="fa fa-calendar"></i> <?php echo esc_html( wp_travel_format_date( $start_date ) ); ?></td>
+					<td><i class="fa fa-calendar"></i> <?php echo esc_html( wp_travel_format_date( $start_date ) ); ?>  - <?php echo esc_html( wp_travel_format_date( $end_date ) ); ?> </td>
 					<input type="hidden" name="trip_date" value="<?php echo esc_attr( $start_date ); ?>">
 					<td></td>
 					<td></td>

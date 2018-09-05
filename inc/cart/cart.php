@@ -75,6 +75,24 @@ WP_Travel()->notices->print_notices( 'success', true );
 					
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available	= isset( $trip['max_available'] ) ? $trip['max_available'] : '';
+					/**
+					 * Customization Starts.
+					 */
+					if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+						$inventory  = new WP_Travel_Util_Inventory();
+						$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
+					}
+					$data_max_pax = $max_available;
+					$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
+					$min_available  = isset( $trip['min_available'] ) ? $trip['min_available'] : '';
+					$max_attr = '';
+					$min_attr = '';
+					if ( $max_available ) {
+						$max_attr = 'max="' . $max_available . '" data-max="' . $data_max_pax . '"';
+					}
+					/**
+					 * Customization Ends.
+					 */
 					$min_available  = isset( $trip['min_available'] ) ? $trip['min_available'] : '';
 					
 					$max_attr = '';
@@ -141,7 +159,16 @@ WP_Travel()->notices->print_notices( 'success', true );
 						<td class="product-quantity" data-title="PAX">
 							<div class="st_adults">
 								<!--<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>-->
-								<input type="number" class="input-text wp-travel-pax text" step="1" <?php echo $min_attr; ?> <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+								<!-- Customization Starts. -->
+								<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax wp-travel-trip-<?php echo esc_attr( $trip_id ) ?>" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ) ?>" data-trip-id="<?php echo esc_attr( $trip_id ) ?>" step="1" <?php echo $min_attr; ?> <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+								<?php
+								$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+								$total_booked_pax = wp_travel_get_total_booked_pax( $trip_id, false );
+								?>
+								<input type="hidden" class="wp-travel-customize-group-size" value="<?php echo esc_attr( $group_size ) ?>" >
+								<input type="hidden" class="wp-travel-customize-booked-group-size" value="<?php echo esc_attr( $total_booked_pax ) ?>" >
+								
+								<!-- Customization Ends. -->								
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ) ?>" >
 								<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ) ?>" >
 							</div>
