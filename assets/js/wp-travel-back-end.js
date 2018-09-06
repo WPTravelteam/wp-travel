@@ -508,7 +508,6 @@
         $(this).datepicker({
             language: 'en',
             minDate: new Date(),
-            startDate: new Date($(this).val()),
             onSelect: function(dateStr) {
                 newMinDate = null;
                 newMaxDate = new Date();
@@ -518,7 +517,6 @@
                 }
                 th.siblings('.wp-travel-multiple-end-date').datepicker({
                     minDate: newMinDate,
-                    startDate: new Date($(this).val()),
                 });
             }
         });
