@@ -2170,8 +2170,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 						foreach ( $variation as $k => $var ) : 
 						
 							$pricing_name = isset( $var['pricing_name'] ) ? $var['pricing_name'] : '';
-							$min_pax = isset( $var['min_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp_travel' ), $var['min_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
-							$max_pax = isset( $var['max_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp_travel' ), $var['max_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
+							$min_pax = isset( $var['min_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['min_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
+							$max_pax = isset( $var['max_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['max_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
 							$pricing_sale_enabled = isset( $var['enable_sale'] ) ? $var['enable_sale'] : 'no';
 							$pricing_sale_price = isset( $var['sale_price'] ) ? $var['sale_price'] : '';
 							$pricing_option_price = isset( $var['price'] ) ? $var['price'] : '';
