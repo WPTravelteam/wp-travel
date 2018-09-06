@@ -47,7 +47,7 @@ $alto: #ddd;
                 float: left;
                 width: 161px;
                 margin: 0px 0 0 0;
-                padding: 10px 0px 10px 8px;
+                padding: 10px 0px 10px 8px!important;
                 text-decoration: none;
                 color: #999;
                 text-transform: capitalize;
@@ -206,6 +206,7 @@ $alto: #ddd;
             // display: none;
             border-radius: 0;
             border: none;
+            box-sizing: border-box;
             width: 100%;
             .wp-travel-tab-content-title {
                 margin: 0 0 25px 0;

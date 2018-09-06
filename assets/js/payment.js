@@ -1,3 +1,8 @@
+var gateway_change = function() {
+    const func = jQuery('[name=wp_travel_payment_gateway]:checked').val();
+    const executor = payments[func];
+    executor && executor();
+};
 const display_booking_option = {
     booking_only: function() {
         jQuery('.wp-travel-payment-field').hide().find('input, select').attr('disabled', 'disabled');
@@ -17,6 +22,7 @@ const display_booking_option = {
         var elem = jQuery('[name=wp_travel_book_now]');
         // elem.siblings().hide();
         elem.show().val(wt_payment.book_n_pay);
+        gateway_change();
     }
 }
 const payments = {
@@ -48,12 +54,7 @@ jQuery(document).ready(function($) {
     var booking_option_change = function() {
         const trigger = $('[name=wp_travel_booking_option]').val();
         display_booking_option[trigger] && display_booking_option[trigger]();
-    };
 
-    var gateway_change = function() {
-        const func = $('[name=wp_travel_payment_gateway]:checked').val();
-        const executor = payments[func];
-        executor && executor();
     };
 
     var payment_mode_change = function() {
@@ -73,6 +74,11 @@ jQuery(document).ready(function($) {
     $('[name=wp_travel_booking_option]').change(booking_option_change);
     $('[name=wp_travel_payment_gateway]').change(gateway_change);
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
+
+    // Trigger change For Gateway.
+    if ('booking_with_payment' == $('[name=wp_travel_booking_option]').val()) {
+        $('[name=wp_travel_payment_gateway]').trigger('change');
+    }
 
 });
 
