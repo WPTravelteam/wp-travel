@@ -508,16 +508,17 @@
         $(this).datepicker({
             language: 'en',
             minDate: new Date(),
+            startDate: new Date($(this).val()),
             onSelect: function(dateStr) {
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
                     new_date_min = new Date(dateStr);
-
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
                 th.siblings('.wp-travel-multiple-end-date').datepicker({
                     minDate: newMinDate,
+                    startDate: new Date($(this).val()),
                 });
             }
         });
