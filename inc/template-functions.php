@@ -2210,7 +2210,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 									}
 
-									$pricing_sold_out = $available_pax === 0 ? true : false;
+									$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
 									
 								}
 
