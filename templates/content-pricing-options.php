@@ -152,9 +152,11 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 								</div>
 
 							<?php endif; ?>
-						<div class="price">
-							<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
-						</div>
+						<?php if( 0 !== $trip_price ) : ?>
+							<div class="price">
+								<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
+							</div>
+						<?php endif; ?>
 						<div class="action">
 							&nbsp;
 						</div>
@@ -198,30 +200,32 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 							</div>
 
 							<?php endif; ?>
-						<div class="price">
-							<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
-							<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
+						<?php if( 0 !== $trip_price ) : ?>
+							<div class="price">
+								<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
+								<?php if ( '' != $trip_price || '0' != $trip_price ) : ?>
 
-								<?php if ( $enable_sale ) : ?>
-									<del>
-										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
-									</del>
+									<?php if ( $enable_sale ) : ?>
+										<del>
+											<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+										</del>
+									<?php endif; ?>
+										<span class="person-count">
+											<ins>
+												<span>
+													<?php
+													if ( $enable_sale ) {
+														echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
+													} else {
+														echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
+													}
+													?>
+												</span>
+											</ins>/<?php echo esc_html( $per_person_text ); ?>
+										</span>
 								<?php endif; ?>
-									<span class="person-count">
-										<ins>
-											<span>
-												<?php
-												if ( $enable_sale ) {
-													echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $sale_price ), $currency_symbol, $sale_price );
-												} else {
-													echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
-												}
-												?>
-											</span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
-									</span>
-							<?php endif; ?>
-						</div>
+							</div>
+						<?php endif; ?>
 						<div class="action">
 							<?php if ( $inventory_enabled_for_option && $general_sold_out ) : ?>
 										
