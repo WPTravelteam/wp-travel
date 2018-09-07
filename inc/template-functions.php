@@ -1952,6 +1952,8 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
 									$pax_limit = $inventory->get_pricing_option_pax_limit( $trip_id, $price_key );
 
+									$pricing_status_msg = __( 'N/A', 'wp-travel' );
+
 									$pricing_status_tags = array(
 
 										'{available_pax}' => $available_pax,
@@ -1960,15 +1962,15 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										
 									);
 
-									$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
+									$global_enabled = $inventory->is_inventory_enabled( $trip_id );
 									$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
-									if ( ! $inventory_enabled_for_option ) {
-
-										$pricing_status_msg = __( 'N/A', 'wp-travel' );
-
+									
+									if ( $global_enabled && $inventory_enabled_for_option ) {
+										$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
+										$inventory_enabled = true;
+										$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
 									}
 
-									$pricing_sold_out = $available_pax === 0 || $available_pax < $pricing_min_pax ? true : false;
 									
 								}
 
@@ -2133,10 +2135,11 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 		}
 	}
 
-	$settings        = wp_travel_get_settings();
-	$currency_code 	 = ( isset( $settings['currency'] ) ) ? $settings['currency']: '';
-	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $trip_id );
+	$settings          = wp_travel_get_settings();
+	$currency_code 	   = ( isset( $settings['currency'] ) ) ? $settings['currency']: '';
+	$currency_symbol   = wp_travel_get_currency_symbol( $currency_code );
+	$per_person_text   = wp_travel_get_price_per_text( $trip_id );
+	$inventory_enabled = false;
 	
 	?>
 	<div class="trip_fixed_starting_dates">
@@ -2205,6 +2208,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
 									$pax_limit = $inventory->get_pricing_option_pax_limit( $trip_id, $price_key );
 
+									$pricing_status_msg = __( 'N/A', 'wp-travel' );
+
 									$pricing_status_tags = array(
 
 										'{available_pax}' => $available_pax,
@@ -2213,15 +2218,15 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 										
 									);
 
-									$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
+									$global_enabled = $inventory->is_inventory_enabled( $trip_id );
 									$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
-									if ( ! $inventory_enabled_for_option ) {
-
-										$pricing_status_msg = __( 'N/A', 'wp-travel' );
-
+									
+									if ( $global_enabled && $inventory_enabled_for_option ) {
+										$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
+										$inventory_enabled = true;
+										$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
 									}
 
-									$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
 									
 								}
 
