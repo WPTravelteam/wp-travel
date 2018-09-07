@@ -718,8 +718,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'booking' :
 
-						$booking_template = apply_filters( 'wp_travel_booking_cart_process_template_path', wp_travel_get_template( 'content-pricing-options.php' ) );
-
+						$booking_template = wp_travel_get_template( 'content-pricing-options.php' );
 						load_template( $booking_template );
 					
 					break;
@@ -2229,7 +2228,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 									
 								}
-
 						
 						?>
 							<tr id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $ky ); ?>" class="is_child_of_above">

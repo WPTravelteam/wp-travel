@@ -58,7 +58,9 @@ $pax_limit = false;
 $general_sold_out = false;
 $inventory_enabled_for_option = false;
 
-if ( $enable_checkout && 0 !== $trip_price ) :
+$force_checkout = apply_filters( 'wp_travel_is_force_checkout_enabled', false );
+
+if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 
 	$status_column = false;
 	$status_col = false;
