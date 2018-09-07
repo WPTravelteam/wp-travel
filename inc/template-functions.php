@@ -1968,7 +1968,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 
 									}
 
-									$pricing_sold_out = $available_pax === 0 ? true : false;
+									$pricing_sold_out = $available_pax === 0 || $available_pax < $pricing_min_pax ? true : false;
 									
 								}
 
@@ -1985,14 +1985,25 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
 									<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 								</div>
-								<?php if( $status_col ) : ?>
+								<?php if( $status_col ) : 
 
-								<div class="status">
-									<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
-									<span><?php echo esc_html( $pricing_status_msg ); ?></span>
-								</div>
+									if ( $pricing_sold_out ) : ?>
+									
+										<div class="status">
+											<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+											<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
+										</div>
 
-								<?php endif; ?>
+								<?php else : ?>
+
+									<div class="status">
+										<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+										<span><?php echo esc_html( $pricing_status_msg ); ?></span>
+									</div>
+
+								<?php 
+									endif;
+								endif; ?>
 								<div class="price">
 									<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
 									<?php if ( '' !== $pricing_option_price || '0' !== $pricing_option_price ) : ?>

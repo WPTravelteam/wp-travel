@@ -1,5 +1,13 @@
 jQuery(document).ready(function($) {
 
+    if ($('.wp-travel-error').length > 0) {
+
+        $('html, body').animate({
+            scrollTop: ($('.wp-travel-error').offset().top - 200)
+        }, 1000);
+
+    }
+
     function wp_travel_set_equal_height() {
         var base_height = 0;
         $('.wp-travel-feature-slide-content').css({ 'height': 'auto' });
