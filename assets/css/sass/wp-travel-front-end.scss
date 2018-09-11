@@ -2462,6 +2462,7 @@ ul.availabily-list {
                 &.animate {
                     background-color: #f9f9f9;
                     padding: 15px;
+                    padding-left: 15px !important;
                     height: auto;
                 }
                 [class*=col] {
