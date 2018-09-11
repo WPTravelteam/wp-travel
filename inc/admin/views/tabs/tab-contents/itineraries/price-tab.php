@@ -248,7 +248,9 @@ if ( ! $price_per ) {
 													<input class="pricing-opt-max-pax" value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
 												</div>
 											</div>
-											
+											<div class="repeat-row">
+												<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = 'pricing_options', $key ); ?>
+											</div>
 											<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 												
 												<div class="repeat-row">
@@ -367,6 +369,8 @@ if ( ! $price_per ) {
 										<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][max_pax]" placeholder="Max PAX"  min="1" />
 									</div>
 								</div>
+
+								<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
 								
 								<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 												
