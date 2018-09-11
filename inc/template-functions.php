@@ -2040,6 +2040,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<?php endif; ?>
 								</div>
 								<div class="wp-travel-booking-row">
+									<?php do_action('wp_travel_trip_extras'); ?>
 									<div class="wp-travel-calender-column no-padding ">
 									<?php if ( $available_dates ) : ?>
 										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
@@ -2088,7 +2089,6 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 												printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
 											?>
 										</div>
-										<?php do_action('wp_travel_trip_extras'); ?>
 									</div>
 								</div>
 							</li>
@@ -2285,6 +2285,10 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 			</tbody>
 		</table>
+	</div>
+
+	<div class="trip_list_by_fixed_departure_dates">
+		<!-- New Codes Here -->
 	</div>
 
 	<?php

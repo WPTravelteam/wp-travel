@@ -115,7 +115,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 					
 					?>
 
-					<tr class="responsive-cart">
+					<tr class="responsive-cart has_options_selected">
 						<td class="product-remove" >
 							<a href="" class="wp-travel-cart-remove tooltip-area" data-cart-id="<?php echo esc_attr( $cart_id ) ?>" title="<?php esc_attr_e( 'Remove this tour', 'wp-travel' ) ?>">×</a> 
 						</td>
@@ -183,7 +183,11 @@ WP_Travel()->notices->print_notices( 'success', true );
 							<?php endif; ?>
 						</td>
 					</tr>
-
+					<tr class="child_products">
+						<td colspan="8">
+							<?php do_action('wp_travel_tour_extras_cart_block'); ?>
+						</td>
+					</tr>
 				<?php endforeach; ?>						
 			</tbody>
 		</table>
