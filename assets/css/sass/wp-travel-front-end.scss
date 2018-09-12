@@ -3543,7 +3543,33 @@ ul.wp-travel-error {
                     input {
                         border-color: #f3f3f3;
                     }
-                    input::-moz-placeholder {
+                    input {
+                        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                            color: #c7d0d9;
+                        }
+                        &::-moz-placeholder { /* Firefox 19+ */
+                            color: #c7d0d9;
+                        }
+                        &:-ms-input-placeholder { /* IE 10+ */
+                            color: #c7d0d9;
+                        }
+                        &:-moz-placeholder { /* Firefox 18- */
+                        color: #c7d0d9;
+                        }
+                    }
+                }
+                .trip_list_by_fixed_departure_dates_price {
+                    .del_price {
+                        &::before {
+                            background-color: #c7d0d9;
+                        }
+                    }
+                    .minus_ribbon {
+                        border-color: transparent #c7d0d9 transparent transparent;
+                    }
+                }
+                .trip_list_by_fixed_departure_dates_booking {
+                    .wp-travel-sold-out {
                         color: #c7d0d9;
                     }
                 }
@@ -3555,9 +3581,6 @@ ul.wp-travel-error {
                 .trip_list_by_fixed_departure_dates_booking {
                     .btn {
                         border-color: #f83531;
-                    }
-                    .wp-travel-sold-out {
-                        margin-bottom: 0;
                     }
                 }
             }
@@ -3575,6 +3598,9 @@ ul.wp-travel-error {
                 &:hover {
                     border-color: #f83531;
                 }
+            }
+            .wp-travel-sold-out {
+                margin-bottom: 0;
             }
         }
         .trip_list_by_fixed_departure_dates_start,
