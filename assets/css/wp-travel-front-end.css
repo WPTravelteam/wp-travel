@@ -3532,7 +3532,7 @@ ul.wp-travel-error {
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_price .minus_ribbon {
   border-style: solid;
-  border-width: 0 45px 45px 0;
+  border-width: 0 35px 35px 0;
   border-color: transparent #f83531 transparent transparent;
   cursor: pointer;
   height: 0;
@@ -3543,12 +3543,12 @@ ul.wp-travel-error {
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_price .minus_ribbon p {
   color: #fff;
-  font-size: 11px;
-  left: 8px;
+  font-size: 10px;
+  left: 2px;
   margin-bottom: 0;
   position: relative;
   text-align: center;
-  top: 7px;
+  top: 4px;
   transform: rotate(45deg);
   width: 45px;
 }
