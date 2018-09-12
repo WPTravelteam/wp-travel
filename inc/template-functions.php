@@ -2287,8 +2287,97 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 		</table>
 	</div>
 
+	<!-- <div class="trip_list_by_fixed_departure_dates">
+		<ul class="trip_list_by_fixed_departure_dates_list">
+			<li class="trip_list_by_fixed_departure_dates_header">
+				<div class="trip_list_by_fixed_departure_dates_trip_date">Trip Date</div>
+				<div class="trip_list_by_fixed_departure_dates_pax">Pax</div>
+				<div class="trip_list_by_fixed_departure_dates_status">Status</div>
+				<div class="trip_list_by_fixed_departure_dates_price">Price</div>
+				<div class="trip_list_by_fixed_departure_dates_booking">Booking</div>
+			</li>
+			<li class="trip_list_by_fixed_departure_dates_content has_children">
+				<div class="trip_list_by_fixed_departure_dates_trip_date">
+					<span><i class="fa fa-calendar"></i> September 12, 2018 - September 21, 2018</span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_title">
+					<span class="trip_list_by_fixed_departure_dates_trip_label">Trip Title:</span>
+					<span><i class="fa fa-level-down"></i> Spiderman</span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_pax">
+					<span class="trip_list_by_fixed_departure_dates_trip_label">Pax:</span>
+					<span><input type="number"></span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_status">
+					<span class="trip_list_by_fixed_departure_dates_trip_label">Status:</span>
+					<span><i class="fa fa-user"></i> N/A</span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_price">
+					<span class="trip_list_by_fixed_departure_dates_trip_label">Price:</span>
+					<span>
+						<i class="fa fa-tag"></i>
+						<span style="padding-left: 10px;">
+							<span class="del"><del>$ 11</del></span>
+							<span class="person-count"><ins>$ 10</span> /Group</span>
+						</span>
+					</span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_booking">
+					<a class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" href="#">Book Now</a>
+				</div>
+			</li>
+		</ul>
+	</div> -->
+
 	<div class="trip_list_by_fixed_departure_dates">
-		<!-- New Codes Here -->
+		<div class="trip_list_by_fixed_departure_dates_header">
+			<span class="trip_list_by_fixed_departure_dates_wrap">
+				<span class="trip_list_by_fixed_departure_dates_start_label">START</span>
+				<span class="trip_list_by_fixed_departure_dates_end_label">END</span>
+				<span class="trip_list_by_fixed_departure_dates_seats_label">SEATS LEFT</span>
+				<span class="trip_list_by_fixed_departure_dates_pax_label">PAX</span>
+				<span class="trip_list_by_fixed_departure_dates_price_label">PRICE</span>
+			</span>
+		</div>
+		<ul class="trip_list_by_fixed_departure_dates_list">
+			<li>
+				<div class="trip_list_by_fixed_departure_dates_wrap">
+					<span class="trip_list_by_fixed_departure_dates_start">
+						<div class="trip_list_by_fixed_departure_dates_day">Friday</div>
+						<div class="trip_list_by_fixed_departure_dates_date">Sep 14, 2018</div>
+						<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>
+						<div class="trip_list_by_fixed_departure_dates_length">
+							<div>9 Days</div>
+						</div>
+					</span>
+					<span class="trip_list_by_fixed_departure_dates_end">
+						<div class="trip_list_by_fixed_departure_dates_day">Saturday</div>
+						<div class="trip_list_by_fixed_departure_dates_date">Sep 22, 2018</div>
+						<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>
+					</span>
+					<span class="trip_list_by_fixed_departure_dates_seats">
+						<span class="seat_qty">5</span>
+						seats left
+					</span>
+					<span class="trip_list_by_fixed_departure_dates_pax">
+						<input type="number">
+					</span>
+					<span class="trip_list_by_fixed_departure_dates_price">
+						<div class="del_price">$999</div>
+						<div class="minus_ribbon">
+							<p>-20%</p>
+						</div>
+						<div class="real_price">
+							$799
+							<i class="fa fa-rocket"></i>
+						</div>
+					</span>
+				</div>
+				<div class="trip_list_by_fixed_departure_dates_booking">
+					<a class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" href="#">Book Now</a>
+				</div>
+			</li>
+		</ul>
 	</div>
 
 	<?php
