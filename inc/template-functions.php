@@ -2365,6 +2365,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 								
 							}
+
+						$unavailable_class = '';
 					
 					?>
 						<li id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
