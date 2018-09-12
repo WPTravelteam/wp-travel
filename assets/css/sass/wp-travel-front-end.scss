@@ -3542,6 +3542,8 @@ ul.wp-travel-error {
                 .trip_list_by_fixed_departure_dates_pax {
                     input {
                         border-color: #f3f3f3;
+                        -webkit-appearance: none;
+                        -moz-appearance: textfield;
                     }
                     input {
                         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
