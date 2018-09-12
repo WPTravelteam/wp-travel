@@ -27,7 +27,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Admin_Assets' ) ) :
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			$allowed_screen = array( 'wp-travel-coupons', 'edit-wp-travel-coupons' );
+			$allowed_screen = array( 'wp-travel-coupons', 'edit-wp-travel-coupons', 'tour-extras', 'edit-tour-extras' );
 
 			if ( in_array( $screen->id, $allowed_screen, true ) ) {
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Admin_Assets' ) ) :
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			$allowed_screen = array( 'wp-travel-coupons', 'edit-wp-travel-coupons' );
+			$allowed_screen = array( 'wp-travel-coupons', 'edit-wp-travel-coupons', 'tour-extras', 'edit-tour-extras' );
 
 			if ( in_array( $screen->id, $allowed_screen, true ) ) {
 

@@ -389,6 +389,26 @@ function wp_travel_get_itineraries_array() {
 }
 
 /**
+ * Return array list of itinerary.
+ *
+ * @return Array
+ */
+function wp_travel_get_tour_extras_array() {
+	$args = array(
+	  'post_type'   => 'tour-extras',
+	  'numberposts' => -1,
+	);
+
+	$itineraries = get_posts( $args );
+
+	$itineraries_array = array();
+	foreach ( $itineraries as $itinerary ) {
+		$itineraries_array[ $itinerary->ID ] = $itinerary->post_title;
+	}
+	return apply_filters( 'wp_travel_tour_extras_array', $itineraries_array, $args );
+}
+
+/**
  * Return JSON Encoded Itinerary price oblect
  * 
  */

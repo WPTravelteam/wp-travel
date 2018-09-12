@@ -936,6 +936,13 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		update_post_meta( $post_id, 'wp_travel_trip_facts', $wp_travel_trip_facts );
+
+		$wp_travel_tour_extras = array();
+
+		if ( isset( $_POST['wp_travel_tour_extras'] ) ) {
+			$wp_travel_tour_extras = stripslashes_deep( $_POST['wp_travel_tour_extras'] );
+		}
+		update_post_meta( $post_id, 'wp_travel_tour_extras', $wp_travel_tour_extras );
 		
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 

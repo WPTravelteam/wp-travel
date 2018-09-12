@@ -73,8 +73,9 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 
 		$status_col = ( $status_col && 'no' === $status_col ) ? false : true;
 
-		
+
 		$available_pax = $inventory->get_available_pax( $trip_id );
+		$available_pax = apply_filters( 'wp_travel_available_pax', $available_pax, $trip_id, '' );
 		$booked_pax = $inventory->get_booking_pax_count( $trip_id );
 		$pax_limit = $inventory->get_pax_limit( $trip_id );
 		

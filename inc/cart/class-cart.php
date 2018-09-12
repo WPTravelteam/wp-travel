@@ -82,7 +82,7 @@ class WP_Travel_Cart {
 	 * @since 2.2.3
 	 */
 	public static function output() {
-		include sprintf( '%s/inc/cart/cart.php', WP_TRAVEL_ABSPATH );	
+		wp_travel_get_template_part( 'content', 'cart' );	
 	}
 
 	/**
@@ -158,7 +158,7 @@ class WP_Travel_Cart {
 	 */
 	public function add( $trip_id, $trip_price = 0, $pax, $price_key = '', $attrs = array() ) {
 
-		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
+		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key );
 
 		if ( class_exists( 'WP_Travel_Util_Inventory' ) ){
 
@@ -445,8 +445,22 @@ class WP_Travel_Cart {
 		);
 
 		$get_total = apply_filters( 'wp_travel_cart_get_total_fields', $get_total );
-		return $get_total;		
+		return $get_total;
+	}
+	/**
+	 * Return cart item id as per $trip_id and $price_key.
+	 * 
+	 * @param	$trip_id	Number	Trip / Post id of the trip
+	 * @param	$price_key	String	Pricing Key.
+	 * 
+	 * @return	String	cart item id.
+	 * 
+	 * @since	1.5.8
+	 */
+	public function wp_travel_get_cart_item_id( $trip_id, $price_key = '' ) {
 
+		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
+		return apply_filters( 'wp_travel_filter_cart_item_id', $cart_item_id, $trip_id, $price_key );
 	}
 }
 

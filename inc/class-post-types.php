@@ -15,6 +15,7 @@ class WP_Travel_Post_Types {
 		self::register_bookings();
 		self::register_enquiries();
 		self::register_payment();
+		self::register_tour_extras();
 	}
 	/**
 	 * Register Post Type Trip.
@@ -205,5 +206,52 @@ class WP_Travel_Post_Types {
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( 'wp-travel-payment', $args );
+	}
+
+	/**
+	 * Register Post Type WP Travel Tour Extras.
+	 *
+	 * @return void
+	 */
+	public static function register_tour_extras() {
+		$labels = array(
+			'name'               => _x( 'Trip Extras', 'post type general name', 'wp-travel' ),
+			'singular_name'      => _x( 'Trip Extra', 'post type singular name', 'wp-travel' ),
+			'menu_name'          => _x( 'Trip Extras', 'admin menu', 'wp-travel' ),
+			'name_admin_bar'     => _x( 'Trip Extra', 'add new on admin bar', 'wp-travel' ),
+			'add_new'            => _x( 'Add New', 'wp-travel', 'wp-travel' ),
+			'add_new_item'       => __( 'Add New Trip Extra', 'wp-travel' ),
+			'new_item'           => __( 'New Trip Extra', 'wp-travel' ),
+			'edit_item'          => __( 'Edit Trip Extra', 'wp-travel' ),
+			'view_item'          => __( 'View Trip Extra', 'wp-travel' ),
+			'all_items'          => __( 'Trip Extras', 'wp-travel' ),
+			'search_items'       => __( 'Search Trip Extras', 'wp-travel' ),
+			'parent_item_colon'  => __( 'Parent Trip Extras:', 'wp-travel' ),
+			'not_found'          => __( 'No Trip Extras found.', 'wp-travel' ),
+			'not_found_in_trash' => __( 'No Trip Extras found in Trash.', 'wp-travel' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'description'        => __( 'Description.', 'wp-travel' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'tour-extras' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'supports'           => array( 'title', 'thumbnail' ),
+			'menu_icon'          => 'dashicons-wp-travel',
+		);
+		/**
+		 * Register a WP Travel Tour Extras post type.
+		 *
+		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
+		 */
+		register_post_type( 'tour-extras', apply_filters( 'wp_travel_tour_extras_post_type_args', $args ) );
 	}
 }
