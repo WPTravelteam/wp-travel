@@ -2287,48 +2287,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 		</table>
 	</div>
 
-	<!-- <div class="trip_list_by_fixed_departure_dates">
-		<ul class="trip_list_by_fixed_departure_dates_list">
-			<li class="trip_list_by_fixed_departure_dates_header">
-				<div class="trip_list_by_fixed_departure_dates_trip_date">Trip Date</div>
-				<div class="trip_list_by_fixed_departure_dates_pax">Pax</div>
-				<div class="trip_list_by_fixed_departure_dates_status">Status</div>
-				<div class="trip_list_by_fixed_departure_dates_price">Price</div>
-				<div class="trip_list_by_fixed_departure_dates_booking">Booking</div>
-			</li>
-			<li class="trip_list_by_fixed_departure_dates_content has_children">
-				<div class="trip_list_by_fixed_departure_dates_trip_date">
-					<span><i class="fa fa-calendar"></i> September 12, 2018 - September 21, 2018</span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_title">
-					<span class="trip_list_by_fixed_departure_dates_trip_label">Trip Title:</span>
-					<span><i class="fa fa-level-down"></i> Spiderman</span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_pax">
-					<span class="trip_list_by_fixed_departure_dates_trip_label">Pax:</span>
-					<span><input type="number"></span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_status">
-					<span class="trip_list_by_fixed_departure_dates_trip_label">Status:</span>
-					<span><i class="fa fa-user"></i> N/A</span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_price">
-					<span class="trip_list_by_fixed_departure_dates_trip_label">Price:</span>
-					<span>
-						<i class="fa fa-tag"></i>
-						<span style="padding-left: 10px;">
-							<span class="del"><del>$ 11</del></span>
-							<span class="person-count"><ins>$ 10</span> /Group</span>
-						</span>
-					</span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_booking">
-					<a class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" href="#">Book Now</a>
-				</div>
-			</li>
-		</ul>
-	</div> -->
-
 	<div class="trip_list_by_fixed_departure_dates">
 		<div class="trip_list_by_fixed_departure_dates_header">
 			<span class="trip_list_by_fixed_departure_dates_wrap">
