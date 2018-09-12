@@ -3435,11 +3435,28 @@ ul.wp-travel-error {
   flex-wrap: wrap;
   list-style-type: none;
 }
-.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover {
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable {
+  color: #c7d0d9;
+  pointer-events: none;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking .btn {
+  border-color: #c7d0d9;
+  color: #c7d0d9;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax input, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax select, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax textarea {
+  border-color: #f3f3f3;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax input::-moz-placeholder, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select::-moz-placeholder, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax select::-moz-placeholder, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea::-moz-placeholder, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_pax textarea::-moz-placeholder {
+  color: #c7d0d9;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover:not(.pricing_unavailable) {
   background-color: #fcfcfc;
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover .trip_list_by_fixed_departure_dates_booking .btn {
   border-color: #f83531;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover .trip_list_by_fixed_departure_dates_booking .wp-travel-sold-out {
+  margin-bottom: 0;
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_booking {
   align-self: center;
@@ -3514,9 +3531,10 @@ ul.wp-travel-error {
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax input, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax select, .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax textarea {
   border-radius: 0;
-  font-size: 12px;
+  font-size: 11px;
   width: 65px;
   min-height: 35px;
+  text-align: center;
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_pax .parsley-errors-list {
   font-size: 11px;
