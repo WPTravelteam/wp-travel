@@ -2367,9 +2367,11 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 							}
 
 						$unavailable_class = '';
+						if ( strtotime( $start_date ) < strtotime( date() ) )
+							$unavailable_class = 'pricing_unavailable';
 					
 					?>
-						<li id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
+						<li class="<?php echo esc_attr( $unavailable_class ); ?>" id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
 							<div class="trip_list_by_fixed_departure_dates_wrap">
 								<span class="trip_list_by_fixed_departure_dates_start">
 									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($start_date) ) ); ?></div>
