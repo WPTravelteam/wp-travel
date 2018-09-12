@@ -15,6 +15,7 @@ jQuery(document).ready(function($) {
         $(parent + ' input').each(function() {
             if ($(this).parsley().validate() !== true) isValid = false;
         });
+        console.log(isValid);
         if (isValid) {
             var cart_fields = {};
             $(parent + ' input').each(function() {

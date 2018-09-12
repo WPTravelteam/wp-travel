@@ -61,12 +61,12 @@ WP_Travel()->notices->print_notices( 'success', true );
 			</thead>
 			<tbody>				
 				<?php
-				foreach ( $trips as $cart_id => $trip ) : ?>
-					<?php
-					$trip_id 		= $trip['trip_id'];
+				foreach ( $trips as $cart_id => $trip ) :
+					$trip_id 		 = $trip['trip_id'];
 					// $price			= $trip['price']; // Price of single qty.
-					$trip_price		= $trip['trip_price']; 
-					$trip_duration	= isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
+					$trip_price		 = $trip['trip_price']; 
+					$trip_duration	 = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
+					$trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'] ) : false;
 					
 					$pax			= $trip['pax'];
 					$price_key		= isset( $trip['price_key'] ) ? $trip['price_key'] : '';
@@ -130,7 +130,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 									<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
 								</h4>
 								<?php 
-								if ( 'yes' === $fixed_departure && '' !== $trip_start_date ) :
+								if ( $trip_start_date ) :
 								?>
 									<span class="variation">
 										<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
@@ -152,7 +152,7 @@ WP_Travel()->notices->print_notices( 'success', true );
 										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( @$trip_tax_details['actual_trip_price'] ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
 											<?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?>
 										</span>
-									</ins>/<?php echo esc_html( ucfirst( $price_per ) ); ?>
+									</ins>/<?php echo esc_html( ucfirst( $pax_label ) ); ?>
 								</span>
 							<?php endif; ?>
 						</td>

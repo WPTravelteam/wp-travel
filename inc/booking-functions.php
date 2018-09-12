@@ -729,7 +729,7 @@ function wp_travel_book_now() {
 		'{customer_email}'			=> $customer_email,
 		'{customer_note}'			=> $customer_note,
 	);
-	apply_filters( 'wp_travel_admin_email_tags', $email_tags );
+	$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags );
 		
 	$email = new WP_Travel_Emails();
 

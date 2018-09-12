@@ -1671,7 +1671,7 @@ function wp_travel_get_pricing_variation_options(){
 
 	$variation_options = array(
 		'adult'         => __( 'Adult', 'wp-travel' ),
-		'children'      => __( 'Children', 'wp-travel' ),
+		'children'      => __( 'Child', 'wp-travel' ),
 		'infant'        => __( 'Infant', 'wp-travel' ),
 		'couple'        => __( 'Couple', 'wp-travel' ),
 		'group'         => __( 'Group', 'wp-travel' ),
@@ -1990,3 +1990,16 @@ function wp_travel_get_total_booked_pax( $trip_id, $including_cart=true ) {
 	return $total_booked_pax;
 }
 endif;
+/**
+ * Get no. of days.
+ */
+function wp_travel_get_date_diff( $start_date, $end_date ){
+
+	$date11       = strtotime($start_date);
+	$date22       = strtotime($end_date);
+	$diff         = $date22 - $date11;
+	$diff_in_days = floor($diff/(60*60*24)) + 1;
+
+	return sprintf( __('%s days', 'wp-tarvel'), $diff_in_days );
+
+}

@@ -373,6 +373,8 @@ function wp_travel_send_email_payment( $booking_id ) {
 		'{currency_symbol}'			=> wp_travel_get_currency_symbol(),
 	);
 
+	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
+
 	$email = new WP_Travel_Emails();
 	
 	// Send mail to admin if booking email is set to yes.

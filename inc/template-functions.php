@@ -2141,7 +2141,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 	$inventory_enabled = false;
 	
 	?>
-	<div class="trip_fixed_starting_dates">
+	<!--<div class="trip_fixed_starting_dates">
 		<table>
 			<thead>
 				<tr>
@@ -2285,56 +2285,155 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 			</tbody>
 		</table>
-	</div>
+	</div>-->
 
 	<div class="trip_list_by_fixed_departure_dates">
 		<div class="trip_list_by_fixed_departure_dates_header">
 			<span class="trip_list_by_fixed_departure_dates_wrap">
-				<span class="trip_list_by_fixed_departure_dates_start_label">START</span>
-				<span class="trip_list_by_fixed_departure_dates_end_label">END</span>
-				<span class="trip_list_by_fixed_departure_dates_seats_label">SEATS LEFT</span>
-				<span class="trip_list_by_fixed_departure_dates_pax_label">PAX</span>
-				<span class="trip_list_by_fixed_departure_dates_price_label">PRICE</span>
+				<span class="trip_list_by_fixed_departure_dates_start_label"><?php esc_html_e( 'START', 'wp-travel' ); ?></span>
+				<span class="trip_list_by_fixed_departure_dates_end_label"><?php esc_html_e( 'END', 'wp-travel' ); ?></span>
+				<?php if( $status_col ) : ?>
+					<span class="trip_list_by_fixed_departure_dates_seats_label"><?php esc_html_e( 'SEATS LEFT', 'wp-travel' ); ?></span>
+				<?php endif; ?>
+				<span class="trip_list_by_fixed_departure_dates_pax_label"><?php esc_html_e( 'PAX', 'wp-travel' ); ?></span>
+				<span class="trip_list_by_fixed_departure_dates_price_label"><?php esc_html_e( 'PRICE', 'wp-travel' ); ?></span>
 			</span>
 		</div>
 		<ul class="trip_list_by_fixed_departure_dates_list">
-			<li>
-				<div class="trip_list_by_fixed_departure_dates_wrap">
-					<span class="trip_list_by_fixed_departure_dates_start">
-						<div class="trip_list_by_fixed_departure_dates_day">Friday</div>
-						<div class="trip_list_by_fixed_departure_dates_date">Sep 14, 2018</div>
-						<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>
-						<div class="trip_list_by_fixed_departure_dates_length">
-							<div>9 Days</div>
-						</div>
-					</span>
-					<span class="trip_list_by_fixed_departure_dates_end">
-						<div class="trip_list_by_fixed_departure_dates_day">Saturday</div>
-						<div class="trip_list_by_fixed_departure_dates_date">Sep 22, 2018</div>
-						<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>
-					</span>
-					<span class="trip_list_by_fixed_departure_dates_seats">
-						<span class="seat_qty">5</span>
-						seats left
-					</span>
-					<span class="trip_list_by_fixed_departure_dates_pax">
-						<input type="number">
-					</span>
-					<span class="trip_list_by_fixed_departure_dates_price">
-						<div class="del_price">$999</div>
-						<div class="minus_ribbon">
-							<p>-20%</p>
-						</div>
-						<div class="real_price">
-							$799
-							<i class="fa fa-rocket"></i>
-						</div>
-					</span>
-				</div>
-				<div class="trip_list_by_fixed_departure_dates_booking">
-					<a class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" href="#">Book Now</a>
-				</div>
-			</li>
+			<?php foreach(  $trip_multiple_dates_data as $ky => $date_option ) : 
+
+				$start_date = isset( $date_option['start_date'] ) && ! empty( $date_option['start_date'] ) ? $date_option['start_date'] : '';
+				$end_date = isset( $date_option['end_date'] ) && ! empty( $date_option['end_date'] ) ? $date_option['end_date'] : '';
+				$pricing_options = isset( $date_option['pricing_options'] ) && ! empty( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
+			?>
+			<?php if ( ! empty( $pricing_options ) && is_array( $pricing_options ) ) : ?>
+				<?php foreach( $pricing_options as $indx => $price_key ) : 
+					$variation = wp_travel_get_pricing_variation( $trip_id, $price_key );
+
+					if ( ! $variation )
+						continue;
+
+					foreach ( $variation as $k => $var ) : 
+
+						$rand = rand();
+					
+						$pricing_name = isset( $var['pricing_name'] ) ? $var['pricing_name'] : '';
+						$min_pax = isset( $var['min_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['min_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
+						$max_pax = isset( $var['max_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['max_pax'] ) : esc_html__('No Size Limit', 'wp-travel');
+						$pricing_sale_enabled = isset( $var['enable_sale'] ) ? $var['enable_sale'] : 'no';
+						$pricing_sale_price = isset( $var['sale_price'] ) ? $var['sale_price'] : '';
+						$pricing_option_price = isset( $var['price'] ) ? $var['price'] : '';
+						$price_key = isset( $var['price_key'] ) ? $var['price_key'] : '';
+
+						$per_label = isset( $var['type'] ) && 'custom' !== $var['type'] ? ucfirst( $var['type'] ) : ucfirst( $var['custom_label'] );
+
+						$max_attr = '';
+						$min_attr = 'min=1';
+						if ( 'No Size Limit' !== $max_pax ) {
+
+							$max_attr = 'max=' . $max_pax;
+						}
+						if ( 'No Size Limit' !== $min_pax ) {
+							$min_attr = 'min=' . $min_pax;
+						}
+						$pricing_sold_out = false;
+
+							if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+
+								$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
+								$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
+								$pax_limit = $inventory->get_pricing_option_pax_limit( $trip_id, $price_key );
+
+								$pricing_status_msg = __( 'N/A', 'wp-travel' );
+
+								$pricing_status_tags = array(
+
+									'{available_pax}' => $available_pax,
+									'{booked_pax}' => $booked_pax,
+									'{pax_limit}' => $pax_limit,
+									
+								);
+
+								$global_enabled = $inventory->is_inventory_enabled( $trip_id );
+								$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
+								
+								if ( $global_enabled && $inventory_enabled_for_option ) {
+									$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
+									$inventory_enabled = true;
+									$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
+								}
+
+								
+							}
+					
+					?>
+						<li id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
+							<div class="trip_list_by_fixed_departure_dates_wrap">
+								<span class="trip_list_by_fixed_departure_dates_start">
+									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($start_date) ) ); ?></div>
+									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $start_date ) ); ?>
+									<input type="hidden" name="trip_date" value="<?php echo esc_attr( $start_date ); ?>">
+									</div>
+									<!--<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>-->
+									<div class="trip_list_by_fixed_departure_dates_length">
+										<div><?php echo esc_html( wp_travel_get_date_diff( $start_date, $end_date ) ); ?></div>
+									</div>
+								</span>
+								<span class="trip_list_by_fixed_departure_dates_end">
+									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($end_date) ) ); ?></div>
+									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $end_date ) ); ?></div>
+									<!--<div class="trip_list_by_fixed_departure_dates_from">from San Jose</div>-->
+								</span>
+								<?php if ( $status_col ) : ?>
+									<span class="trip_list_by_fixed_departure_dates_seats">
+										<span class="seat_qty"><?php echo esc_html( $available_pax ); ?></span>
+										<?php echo esc_html( $pricing_status_msg ); ?>
+									</span>
+								<?php endif; ?>
+								<span class="trip_list_by_fixed_departure_dates_pax">
+									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" placeholder="<?php echo esc_attr__( 'PAX', 'wp-travel' ); ?>" required type="number">
+								</span>
+								<span class="trip_list_by_fixed_departure_dates_price">
+								<?php 
+									$display_price = $pricing_option_price;
+									if ( 'yes' === $pricing_sale_enabled ) {
+										$display_price = $pricing_sale_price;
+									}
+								?>
+								<?php if ( 'yes' === $pricing_sale_enabled ) { ?>
+									<div class="del_price"><?php echo wp_travel_get_currency_symbol(); ?> <?php echo( esc_html( $pricing_option_price ) ); ?></div>
+									<div class="minus_ribbon">
+										<p><?php esc_html_e( 'sale', 'wp-travel' ); ?></p>
+									</div>
+								<?php } ?>
+									<div class="real_price">
+									<?php echo wp_travel_get_currency_symbol(); ?> <?php echo( esc_html( $display_price ) ); ?>
+										<!--<i class="fa fa-rocket"></i>-->
+									</div>
+									<?php echo __( 'Per ', 'wp-travel' ).esc_html( $per_label ); ?>
+								</span>
+							</div>
+							<div class="trip_list_by_fixed_departure_dates_booking">
+							<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ) ?>" />
+								<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ) ?>" />
+								<?php if ( $pricing_sold_out ) : ?>
+									<p class="wp-travel-sold-out">
+										<?php echo $sold_out_btn_rep_msg; ?>
+									</p>
+								<?php else : 
+									$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+									
+									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+								endif; 
+								?>
+							</div>
+						</li>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<?php endforeach; ?>
 		</ul>
 	</div>
 
