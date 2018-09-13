@@ -241,6 +241,17 @@ if ( ! $price_per ) {
 											</div>
 
 											<div class="repeat-row">
+												<label for="price_per_<?php echo esc_attr( $key ); ?>" class="one-third"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
+												<div class="two-third">
+													<select id="price_per_<?php echo esc_attr( $key ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price_per]">
+														<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
+														<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
+														<option value="group"><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
+													</select>
+												</div>
+											</div>
+
+											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Number of PAX', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<input class="pricing-opt-min-pax" value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
@@ -358,6 +369,17 @@ if ( ! $price_per ) {
 									<div class="two-third">
 										<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
 										<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][sale_price]">
+									</div>
+								</div>
+
+								<div class="repeat-row">
+									<label for="price_per_{{data.random}}" class="one-third"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
+									<div class="two-third">
+										<select id="price_per_{{data.random}}" name="wp_travel_pricing_options[{{data.random}}][price_per]">
+												<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
+												<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
+												<option value="group"><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
+										</select>
 									</div>
 								</div>
 

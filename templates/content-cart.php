@@ -41,6 +41,9 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 // Print Errors / Notices.
 wp_travel_print_notices();
 
+
+print_r( $wt_cart );
+
 ?>
 
 <!-- CART HTML START -->
@@ -104,7 +107,14 @@ wp_travel_print_notices();
 					}
 					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 
-					$price_per = wp_travel_get_price_per_text( $trip['trip_id'], true );
+					$price_per = 'trip-default';
+
+					if( isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ) {
+						$price_per = wp_travel_get_pricing_variation_price_per( $trip['trip_id'], $trip['price_key'] );
+					}
+
+					if( 'trip-default' === $price_per )
+						$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
 					
 					if ( 'group' === $price_per ) {
 						

@@ -145,7 +145,14 @@ class WP_Travel_Gateway_Paypal_Request {
 			$item_name      = html_entity_decode( get_the_title( $trip_id ) );
 			$trip_code 		= wp_travel_get_trip_code( $trip_id );
 
-			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
+			$price_per = 'trip-default';
+
+			if( isset( $item['price_key'] ) && ! empty( $item['price_key'] ) ) {
+				$price_per = wp_travel_get_pricing_variation_price_per( $item['trip_id'], $item['price_key'] );
+			}
+
+			if( 'trip-default' === $price_per )
+				$price_per = get_post_meta( $item['trip_id'], 'wp_travel_price_per', true );
 
 			$payment_amount =  wp_travel_get_formated_price( $trip_price );
 			if ( 'partial' === $payment_mode ) {

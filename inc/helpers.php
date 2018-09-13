@@ -1742,6 +1742,40 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 }
 
 /**
+ * Get pricing variation price_per_value
+ *
+ * @return string pricing variation price_per value.
+ */
+function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ){
+
+	if ( '' === $post_id || '' === $pricing_key ) {
+		
+		return false;
+	
+	}
+
+	//Get Pricing variations.
+	$pricing_variations = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
+
+	if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
+
+		foreach( $pricing_variations as $ky => $variation ) {
+
+			if ( $pricing_variations[$ky]['price_key'] === $pricing_key ) {
+
+				return isset( $pricing_variations[$ky]['price_per'] ) ? $pricing_variations[$ky]['price_per'] : 'trip-default';
+
+			}
+
+		}
+
+	}
+
+	return 'trip-default';
+	
+}
+
+/**
  * Retrieves unvalidated referer from '_wp_http_referer' or HTTP referer.
  *
  * Do not use for redirects, use {@see wp_get_referer()} instead.
