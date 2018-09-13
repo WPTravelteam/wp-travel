@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Notices.
-WP_Travel()->notices->print_notices( 'error', true );
+wp_travel_print_notices();
 ?>
 
 

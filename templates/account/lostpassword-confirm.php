@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Print Errors / Notices.
-WP_Travel()->notices->print_notices( 'error', true );
+wp_travel_print_notices();
 
 //echo esc_html__( 'Password reset email has been sent.', 'wp-travel' );
 ?>

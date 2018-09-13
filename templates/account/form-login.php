@@ -6,7 +6,7 @@
  */
 
 // Print Errors / Notices.
-WP_Travel()->notices->print_notices( 'error', true );
+wp_travel_print_notices();
 
 $nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
 $nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;

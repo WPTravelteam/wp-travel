@@ -6,8 +6,7 @@
  */
 
 // Print Errors / Notices.
-WP_Travel()->notices->print_notices( 'error', true );
-WP_Travel()->notices->print_notices( 'success', true );
+wp_travel_print_notices();
 
 // Set User.
 $current_user    = $args;

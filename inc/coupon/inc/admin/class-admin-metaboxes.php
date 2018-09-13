@@ -48,8 +48,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	public function load_coupons_tab_template( $post ) {
 
 		// Print Errors / Notices.
-		WP_Travel()->notices->print_notices( 'error', true );
-		WP_Travel()->notices->print_notices( 'success', true );
+		wp_travel_print_notices();
 
 		$args['post'] = $post;
 		WP_Travel()->tabs->load( self::$post_type, $args );

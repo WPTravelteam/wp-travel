@@ -2003,3 +2003,12 @@ function wp_travel_get_date_diff( $start_date, $end_date ){
 	return sprintf( __('%s days', 'wp-tarvel'), $diff_in_days );
 
 }
+
+/**
+ * Print success and error notices set by WP Travel Plugin.
+ */
+function wp_travel_print_notices() {
+	// Print Errors / Notices.
+	WP_Travel()->notices->print_notices( 'error', true );
+	WP_Travel()->notices->print_notices( 'success', true );
+}

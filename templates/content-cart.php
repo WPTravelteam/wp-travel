@@ -39,8 +39,7 @@ $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 // Print Errors / Notices.
-WP_Travel()->notices->print_notices( 'error', true );
-WP_Travel()->notices->print_notices( 'success', true );
+wp_travel_print_notices();
 
 ?>
 
