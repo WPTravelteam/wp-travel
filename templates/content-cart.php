@@ -40,10 +40,6 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 // Print Errors / Notices.
 wp_travel_print_notices();
-
-
-print_r( $wt_cart );
-
 ?>
 
 <!-- CART HTML START -->

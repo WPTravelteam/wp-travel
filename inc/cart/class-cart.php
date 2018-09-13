@@ -393,8 +393,6 @@ class WP_Travel_Cart {
 					$price_per = wp_travel_get_pricing_variation_price_per( $trip['trip_id'], $trip['price_key'] );
 				}
 
-				error_log($price_per);
-
 				if( 'trip-default' === $price_per )
 					$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
 
