@@ -234,8 +234,8 @@ class WP_Travel_Post_Types {
 		$args = array(
 			'labels'             => $labels,
 			'description'        => __( 'Description.', 'wp-travel' ),
-			'public'             => true,
-			'publicly_queryable' => true,
+			'public'             => false,
+			'publicly_queryable' => false,
 			'show_ui'            => true,
 			'show_in_menu'       => 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE,
 			'query_var'          => true,
@@ -247,11 +247,13 @@ class WP_Travel_Post_Types {
 			'supports'           => array( 'title', 'thumbnail' ),
 			'menu_icon'          => 'dashicons-wp-travel',
 		);
+
+		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args );
 		/**
 		 * Register a WP Travel Tour Extras post type.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
-		register_post_type( 'tour-extras', apply_filters( 'wp_travel_tour_extras_post_type_args', $args ) );
+		register_post_type( 'tour-extras', $args );
 	}
 }

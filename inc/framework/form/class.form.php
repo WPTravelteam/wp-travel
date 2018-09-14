@@ -95,7 +95,10 @@ class WP_Travel_FW_Form {
 			</div>
 			<script>
 			jQuery( function( $ ) {
-				$('#<?php echo esc_attr( $this->form_options['id'] ); ?>').parsley();
+
+				if (typeof parsley == "object") {
+					$('#<?php echo esc_attr( $this->form_options['id'] ); ?>').parsley();
+				}
 
 			} );
 			</script>
@@ -130,7 +133,9 @@ class WP_Travel_FW_Form {
 			</div>
 			<script>
 			jQuery( function( $ ) {
-				$('#<?php echo esc_attr( $this->form_options['id'] ); ?>').parsley();
+				if (typeof parsley == "object") {
+					$('#<?php echo esc_attr( $this->form_options['id'] ); ?>').parsley();
+				}
 
 			} );
 			</script>
