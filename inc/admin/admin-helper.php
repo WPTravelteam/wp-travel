@@ -868,6 +868,11 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
  */
 function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key  ) {
 
+$tour_extras = wp_count_posts( 'tour-extras' );
+// Check Tour Extras Count.
+if( 0 == $tour_extras->publish )
+	return;
+
 if( empty( $post_id ) || empty( $fetch_key ) )
 	return;
 $name = 'wp_travel_tour_extras[]';

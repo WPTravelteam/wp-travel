@@ -22,15 +22,39 @@ class Wp_Travel_Extras_Frontend {
         
     }
     /**
+     * Is Extras Pro
+     *
+     * @return boolean
+     */
+    public function is_extras_pro() {
+
+        return class_exists( 'WP_Travel_Tour_Extras' );
+
+    }
+    /**
      * has_trip_extras Check if the privided trips has extras added.
      * 
      * @param int trip id.
      * @return bool true | false
      */
-    public function has_trip_extras( $trip_id ) {
+    public function has_trip_extras( $trip_id, $price_key = false ) {
 
         if ( empty( $trip_id ) )
             return false;
+
+        if ( $price_key ) {
+            $pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+            $pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
+
+            if ( $pricing_option ) {
+                $trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
+            }
+        } else {
+
+            $trip_extras = get_post_meta( $trip_id, 'wp_travel_tour_extras', true );
+        }
+
+        return ( is_array( $trip_extras ) && ( count( $trip_extras ) > 0 ) ) ? true : false; 
 
     }
     /**
@@ -39,18 +63,25 @@ class Wp_Travel_Extras_Frontend {
      * @param int trip id.
      * @return array Trip Extras array for the trip.
      */
-    public function get_trip_extras( $trip_id ) {
+    public function get_trip_extras( $trip_id, $price_key = false ) {
         if ( empty( $trip_id ) )
             return;
 
         $trip_extras = array();
 
-        if ( $this->has_trip_extras( $trip_id ) ) {
-
-            $trip_extras = '';
-
+        if ( $this->has_trip_extras( $trip_id, $price_key ) ) {
+            if ( $price_key ) {
+                $pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+                $pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
+    
+                if ( $pricing_option )
+                    $trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
+            
+            } else {
+    
+                $trip_extras = get_post_meta( $trip_id, 'wp_travel_tour_extras', true );
+            }
         }
-        
         
         return $trip_extras;
 
@@ -61,7 +92,7 @@ class Wp_Travel_Extras_Frontend {
      * @param int $trip_id
      * @return void
      */
-    public function tour_extras_frontend( $trip_id = NULL ) {
+    public function tour_extras_frontend( $price_key = false ) {
 
         global $post;
 
@@ -70,47 +101,46 @@ class Wp_Travel_Extras_Frontend {
 
         $trip_id = $post->ID;
 
-        /**
-         * Tour Extras Front End extras HTML
-         */
-        ?>
-        <div class="wp_travel_tour_extras">
-            <h3>Add Extra Options:</h3>
-            <div class="wp_travel_tour_extras_content">
-                <div class="wp_travel_tour_extras_option_single"><!-- Loop This -->
-                    <div class="wp_travel_tour_extras_option_single_content">
-                        <div class="wp_travel_tour_extras_option_top">
-                            <input id="test_id1" type="checkbox">
-                            <label for="test_id1" class="check_icon"></label>
-                            <div class="wp_travel_tour_extras_option_label">
-                                <div class="wp_travel_tour_extras_title">
-                                    <h5>Additional Night</h5>
-                                </div>
-                                <div class="wp_travel_tour_extras_price">
-                                    <del>$10</del><ins>$5</ins>
-                                </div>
-                                <i class="fa fa-angle-down wp_travel_tour_extras_toggler"></i>
-                            </div>
-                        </div>
-                        <div class="wp_travel_tour_extras_option_bottom">
-                            <div class="d-flex">
-                                <figure class="wp_travel_tour_extras_image"><a href="http://localhost/travel-log/wp-content/uploads/2018/01/snow-3090067_1920-365x215.jpg"><img src="http://localhost/travel-log/wp-content/uploads/2018/01/snow-3090067_1920-365x215.jpg" alt=""></a></figure>
-                                <div class="wp_travel_tour_extras_option_bottom_right">
-                                    <div class="wp_travel_tour_extras_description">
-                                        <p>Sit et aperiam dolore consectetur culpa error ipsa ullam qui dolor Nam labore nulla consectetur dolorum ut facere reprehenderit illum</p>
+        $trip_extras = $this->get_trip_extras( $trip_id );
+
+        if ( $price_key )
+            $trip_extras = $this->get_trip_extras( $trip_id, $price_key );
+
+        if ( is_array( $trip_extras ) && ! empty ( $trip_extras ) ) :
+
+            print_r( $trip_extras );
+
+            if ( $this->is_extras_pro() ) {
+                do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras );
+            } else {
+                ?>
+                <div class="wp_travel_tour_extras">
+                    <h3><?php 
+                        $trip_extras_heading = apply_filters( 'wp_travel_trip_extras_heading', __( 'Trip Includes:', 'wp-travel' ) );    
+                        echo esc_html( $trip_extras_heading ); 
+                    ?></h3>
+                    <div class="wp_travel_tour_extras_content">
+                        <?php foreach( $trip_extras as $key => $extra ) : ?>
+                            <div class="wp_travel_tour_extras_option_single">
+                            <div class="wp_travel_tour_extras_option_single_content">
+                                <div class="wp_travel_tour_extras_option_top">
+                                    <input checked id="trip_extra_<?php echo esc_attr( $key ) ?>" type="checkbox">
+                                    <label for="trip_extra_<?php echo esc_attr( $key ) ?>" class="check_icon"></label>
+                                    <div class="wp_travel_tour_extras_option_label">
+                                        <div class="wp_travel_tour_extras_title">
+                                            <h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>
+                                        </div>
                                     </div>
-                                    <div class="wp_travel_tour_extras_quantity">
-                                        <input type="number">
-                                    </div>
-                                    <a href="#" class="btn btn-primary">Learn More</a>
                                 </div>
                             </div>
                         </div>
+                    <?php endforeach; ?>
                     </div>
                 </div>
-            </div>
-        </div>
-        <?php
+            <?php
+            }
+        
+        endif;
 
     }
     /**

@@ -2048,7 +2048,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										 * 
 										 * @since 1.5.8
 										 */
-										do_action('wp_travel_trip_extras');
+										do_action('wp_travel_trip_extras', $price_key );
 									?>
 									<div class="wp-travel-calender-column no-padding ">
 									<?php if ( $available_dates ) : ?>

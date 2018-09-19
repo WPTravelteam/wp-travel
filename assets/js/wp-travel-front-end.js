@@ -347,4 +347,8 @@ jQuery(document).ready(function($) {
 
     });
 
+    $('.wp_travel_tour_extras_toggler').click(function() {
+        $('.wp_travel_tour_extras_option_bottom').slideToggle();
+    });
+
 });
