@@ -2034,7 +2034,7 @@ function wp_travel_get_date_diff( $start_date, $end_date ){
 	$diff         = $date22 - $date11;
 	$diff_in_days = floor($diff/(60*60*24)) + 1;
 
-	return sprintf( __('%s days', 'wp-tarvel'), $diff_in_days );
+	return sprintf( __('%s days', 'wp-travel'), $diff_in_days );
 
 }
 
