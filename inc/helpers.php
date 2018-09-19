@@ -1597,12 +1597,23 @@ function wp_travel_get_page_permalink( $page ) {
 /**
  * Gets the url to the Cart page.
  *
- * @since  2.2.3
+ * @since  1.5.7
  *
  * @return string Url to cart page
  */
 function wp_travel_get_cart_url() {
 	return apply_filters( 'wp_travel_get_cart_url', wp_travel_get_page_permalink( 'wp-travel-cart' ) );
+}
+
+/**
+ * Gets the URL of checkout page.
+ * 
+ * @since 1.5.7
+ * 
+ * @return string Url to checkout page
+ */
+function wp_travel_get_checkout_url() {
+	return apply_filters( 'wp_travel_get_checkout_url', wp_travel_get_page_permalink( 'wp-travel-checkout' ) );
 }
 
 /**

@@ -20,7 +20,7 @@ if ( ! $trips ) {
 
 $settings = wp_travel_get_settings();
 
-$checkout_page_url = get_home_url();		
+$checkout_page_url = wp_travel_get_checkout_url();		
 if ( isset( $settings['checkout_page_id'] ) ) {
 	$checkout_page_id = $settings['checkout_page_id'];
 	$checkout_page_url = get_permalink( $checkout_page_id );

@@ -140,7 +140,6 @@
             data: coupon_fields,
             beforeSend: function() {},
             success: function(data) {
-                console.log(data);
                 if (!data.success) {
                     jQuery('#wp-travel-coupon_code-error').show();
                 } else {

@@ -91,7 +91,6 @@ function get_payable_price(payment_mode, no_of_pax) {
         no_of_pax = 1;
     }
     var trip_price = wt_payment.trip_price; // Trip Price of single Trip
-    console.log(wt_payment);
     var min_partial_payment = wt_payment.payment_amount; // Min partial payement amount of single trip. 
     var price_per = wt_payment.price_per;
 

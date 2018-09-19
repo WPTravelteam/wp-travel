@@ -278,7 +278,7 @@ function wp_travel_trip_rating( $post_id ) {
 	}
 	$average_rating = wp_travel_get_average_rating(); ?>
 	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
-		 <a>
+		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
@@ -323,8 +323,8 @@ function wp_travel_single_excerpt( $post_id ) {
 	<div class="trip-short-desc">
 		<?php the_excerpt(); ?>
 	</div>
-	  <div class="wp-travel-trip-meta-info">
-	  	 <ul>
+	<div class="wp-travel-trip-meta-info">
+	  	<ul>
 			<?php
 			/**
 			 * @since 1.0.4
@@ -408,8 +408,8 @@ function wp_travel_single_excerpt( $post_id ) {
 			 */
 			do_action( 'wp_travel_single_itinerary_after_trip_meta_list', $post_id );
 			?>
-	  	 </ul>
-	  </div>
+	  	</ul>
+	</div>
 
   	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
@@ -2042,7 +2042,14 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<?php endif; ?>
 								</div>
 								<div class="wp-travel-booking-row">
-									<?php do_action('wp_travel_trip_extras'); ?>
+									<?php 
+										/**
+										 * Support For WP Travel Tour Extras Plugin.
+										 * 
+										 * @since 1.5.8
+										 */
+										do_action('wp_travel_trip_extras');
+									?>
 									<div class="wp-travel-calender-column no-padding ">
 									<?php if ( $available_dates ) : ?>
 										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
