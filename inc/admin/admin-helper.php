@@ -952,3 +952,60 @@ $data = ob_get_clean();
 return $data;
 
 }
+
+add_action( 'wp_travel_extras_pro_options', 'wp_travel_extras_pro_option_fields' );
+
+/**
+ * WP Travel Tour Extras Pro fields.
+ *
+ * @return void
+ */
+function wp_travel_extras_pro_option_fields() {
+
+	$is_pro_enabled = apply_filters( 'wp_travel_extras_is_pro_enabled', false );
+
+	if ( $is_pro_enabled ) {
+		do_action( 'wp_travel_extras_pro_single_options' );
+		return;
+	}
+	?>
+	<tr class="pro-options-note"><td colspan="10">Pro options</td></tr>
+	<tr class="wp-travel-pro-mockup-option">
+		<td><label for="coupon-value"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
+			<span class="tooltip-area" title="<?php esc_html_e( 'Item Price', 'wp-travel' ); ?>">
+				<i class="fa fa-question-circle" aria-hidden="true"></i>
+			</span>
+		</td>
+		<td>
+			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
+					<?php echo wp_travel_get_currency_symbol(); ?>
+			</span>
+			<input disabled="disabled" type="number" min="1" step="0.01" id="coupon-value" placeholder="<?php echo esc_attr__( 'Price', 'wp-travel' ); ?>" >
+		</td>
+	</tr>
+	<tr class="wp-travel-pro-mockup-option">
+		<td><label for="coupon-value"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
+			<span class="tooltip-area" title="<?php esc_html_e( 'Sale Price(Leave Blank to disable sale)', 'wp-travel' ); ?>">
+				<i class="fa fa-question-circle" aria-hidden="true"></i>
+			</span>
+		</td>
+		<td>
+			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
+				<?php echo wp_travel_get_currency_symbol(); ?>
+			</span>
+			<input type="number" min="1" step="0.01" id="coupon-value" placeholder="<?php echo esc_attr__( 'Sale Price', 'wp-travel' ); ?>" disabled="disabled" >
+		</td>
+	</tr>
+	<tr class="wp-travel-pro-mockup-option">
+		<td><label for="coupon-value"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
+		</td>
+		<td>
+			<select disabled="disabled">
+				<option value="unit"><?php esc_html_e( 'Unit', 'wp-travel' ); ?></option>
+				<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
+			</select>
+		</td>
+	</tr>
+	
+	<?php
+}

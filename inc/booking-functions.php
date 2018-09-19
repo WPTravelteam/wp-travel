@@ -539,7 +539,7 @@ function wp_travel_book_now() {
 
 	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
 
-	if ( $enable_checkout && wp_travel_is_payment_enabled() && 0 !== $trip_price ) :
+	if ( $enable_checkout && 0 !== $trip_price ) :
 	
 		global $wt_cart;
 

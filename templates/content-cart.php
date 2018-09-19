@@ -61,6 +61,7 @@ wp_travel_print_notices();
 			<tbody>				
 				<?php
 				foreach ( $trips as $cart_id => $trip ) :
+					$pricing_label   = false;
 					$trip_id 		 = $trip['trip_id'];
 					// $price			= $trip['price']; // Price of single qty.
 					$trip_price		 = $trip['trip_price']; 
@@ -74,6 +75,14 @@ wp_travel_print_notices();
 					
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available	= isset( $trip['max_available'] ) ? $trip['max_available'] : '';
+
+					if ( ! empty( $price_key ) ) :
+						$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+						$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
+
+						if ( $pricing_option )
+							$pricing_label = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : false;
+					endif;
 					/**
 					 * Customization Starts.
 					 */
@@ -133,7 +142,11 @@ wp_travel_print_notices();
 						<td class="product-name" colspan="2" data-title="Tour">
 							<div class="item_cart">
 								<h4>
-									<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); ?></a>
+									<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>"><?php echo esc_html( get_the_title( $trip_id ) ); 
+									if ( $pricing_label ) {
+										printf( __( ' (%s)', 'wp-travel' ), $pricing_label );
+									}
+									?></a>
 								</h4>
 								<?php 
 								if ( $trip_start_date ) :

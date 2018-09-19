@@ -18,7 +18,6 @@ class Wp_Travel_Extras_Frontend {
     public function init() {
 
         add_action( 'wp_travel_trip_extras', array( $this, 'tour_extras_frontend' ) );
-        add_action( 'wp_travel_tour_extras_cart_block', array( $this, 'wp_travel_tour_extras_cart_block' ) );
         
     }
     /**
@@ -108,28 +107,50 @@ class Wp_Travel_Extras_Frontend {
 
         if ( is_array( $trip_extras ) && ! empty ( $trip_extras ) ) :
 
-            print_r( $trip_extras );
-
             if ( $this->is_extras_pro() ) {
                 do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras );
             } else {
                 ?>
                 <div class="wp_travel_tour_extras">
                     <h3><?php 
-                        $trip_extras_heading = apply_filters( 'wp_travel_trip_extras_heading', __( 'Trip Includes:', 'wp-travel' ) );    
+                        $trip_extras_heading = apply_filters( 'wp_travel_trip_extras_heading', __( 'Trip Extras:', 'wp-travel' ) );    
                         echo esc_html( $trip_extras_heading ); 
                     ?></h3>
                     <div class="wp_travel_tour_extras_content">
-                        <?php foreach( $trip_extras as $key => $extra ) : ?>
+                        <?php foreach( $trip_extras as $key => $extra ) : 
+                            
+                            $trip_extras_data = get_post_meta( $extra, 'wp_travel_tour_extras_metas', true );
+
+                            $description = isset( $trip_extras_data['extras_item_description'] ) && ! empty( $trip_extras_data['extras_item_description'] ) ? $trip_extras_data['extras_item_description']  : false;
+                            $image       = has_post_thumbnail( $extra ) ? get_the_post_thumbnail_url( $extra, 'thumbnail' ) : false;
+                            
+                        ?>
                             <div class="wp_travel_tour_extras_option_single">
                             <div class="wp_travel_tour_extras_option_single_content">
                                 <div class="wp_travel_tour_extras_option_top">
-                                    <input checked id="trip_extra_<?php echo esc_attr( $key ) ?>" type="checkbox">
+                                    <input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) ?>" type="checkbox">
                                     <label for="trip_extra_<?php echo esc_attr( $key ) ?>" class="check_icon"></label>
                                     <div class="wp_travel_tour_extras_option_label">
                                         <div class="wp_travel_tour_extras_title">
                                             <h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>
                                         </div>
+                                        <?php if( $description ) : ?>
+                                            <i class="fa fa-angle-down wp_travel_tour_extras_toggler"></i>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="wp_travel_tour_extras_option_bottom">
+                                    <div class="d-flex">
+                                        <?php if( $image ) : ?>
+                                            <figure class="wp_travel_tour_extras_image"><img src="<?php echo esc_url( $image ); ?>"></figure>
+                                        <?php endif; ?>
+                                        <?php if( $description ) : ?>
+                                            <div class="wp_travel_tour_extras_option_bottom_right">
+                                                <div class="wp_travel_tour_extras_description">
+                                                    <p><?php echo esc_html( $description ) ?></p>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -155,14 +176,14 @@ class Wp_Travel_Extras_Frontend {
          * Tour Extras Front End extras HTML
          */
         ?>
-        <div class="wp_travel_tour_extras">
+        <!-- <div class="wp_travel_tour_extras">
             <h3>Extras:</h3>
             <div class="wp_travel_tour_extras_content">
-                <div class="wp_travel_tour_extras_option_single"><!-- Loop This -->
+                <div class="wp_travel_tour_extras_option_single">
                     <div class="wp_travel_tour_extras_option_single_content">
                         <div class="wp_travel_tour_extras_option_top">
-                            <!-- <input id="test_id1" type="checkbox">
-                            <label for="test_id1" class="check_icon"></label> -->
+                            <input id="test_id1" type="checkbox">
+                            <label for="test_id1" class="check_icon"></label>
                             <a href="#" class="check_icon"></a>
                             <div class="wp_travel_tour_extras_option_label">
                                 <div class="wp_travel_tour_extras_title">
@@ -185,7 +206,7 @@ class Wp_Travel_Extras_Frontend {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <?php
 
     }
