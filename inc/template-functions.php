@@ -2442,6 +2442,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 								endif; 
 								?>
 							</div>
+							<?php //do_action('wp_travel_trip_extras', $price_key); ?>
 						</li>
 					<?php endforeach; ?>
 				<?php endforeach; ?>

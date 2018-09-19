@@ -662,6 +662,16 @@ if ( ! $price_per ) {
 	</tr>
 	<tr>
 		<th colspan="2">
+			<h3><?php echo esc_html( 'Trip Extras', 'wp-travel' ); ?></h3>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = false, $key = 'wp_travel_tour_extras' ); ?>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">
 			<h3><?php echo esc_html( 'Payout', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
