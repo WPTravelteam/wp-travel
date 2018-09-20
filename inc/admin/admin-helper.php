@@ -969,7 +969,7 @@ function wp_travel_extras_pro_option_fields() {
 		return;
 	}
 	?>
-	<tr class="pro-options-note"><td colspan="10">Pro options</td></tr>
+	<tr class="pro-options-note"><td colspan="10"><?php esc_html_e( 'Pro options', 'wp-travel' ); ?></td></tr>
 	<tr class="wp-travel-pro-mockup-option">
 		<td><label for="coupon-value"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 			<span class="tooltip-area" title="<?php esc_html_e( 'Item Price', 'wp-travel' ); ?>">
