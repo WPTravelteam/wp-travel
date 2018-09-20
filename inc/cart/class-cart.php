@@ -404,6 +404,30 @@ class WP_Travel_Cart {
 				}
 				$sub_total += $single_trip_total;
 				$sub_total_partial += $single_trip_total_partial;
+
+				$trip_extras_total = 0;
+
+				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) ) {
+					
+					foreach( $trip['trip_extras']['id'] as $k => $e_id ) {
+						
+						$trip_extras_data = get_post_meta( $e_id, 'wp_travel_tour_extras_metas', true );
+
+						$price = isset( $trip_extras_data['extras_item_price'] ) && ! empty( $trip_extras_data['extras_item_price'] ) ? $trip_extras_data['extras_item_price'] : false;
+						$sale_price = isset( $trip_extras_data['extras_item_sale_price'] ) && ! empty( $trip_extras_data['extras_item_sale_price'] ) ? $trip_extras_data['extras_item_sale_price'] : false;
+						$unit = isset( $trip_extras_data['extras_item_unit'] ) && ! empty( $trip_extras_data['extras_item_unit'] ) ? $trip_extras_data['extras_item_unit'] : false;
+
+						if( $sale_price )
+							$price = $sale_price;
+
+						$qty = isset( $trip['trip_extras']['qty'][$k] ) ? $trip['trip_extras']['qty'][$k] : 1;
+						$trip_extras_total += wp_travel_get_formated_price( $price * $qty );
+					}
+
+				}
+
+				$sub_total += $trip_extras_total;
+				$sub_total_partial += $trip_extras_total;
 			endforeach;
 		}
 

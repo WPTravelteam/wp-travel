@@ -4002,6 +4002,7 @@ ul.wp-travel-error {
         input {
           margin-bottom: 0;
           min-height: 30px;
+          text-align: center;
           width: 100%;
         }
       }
@@ -4111,7 +4112,7 @@ ul.wp-travel-error {
           }
         }
         .wp_travel_tour_extras_quantity {
-          width: 60px;
+          width: 90px;
           display: flex;
           @media screen and (min-width: 768px) and (max-width: 992px) {
             display: block;

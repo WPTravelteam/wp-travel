@@ -17,10 +17,29 @@ jQuery(document).ready(function($) {
         });
         if (isValid) {
             var cart_fields = {};
-            $(parent + ' input').each(function() {
+            $(parent + ' input').each(function(index) {
                 filterby = $(this).attr('name');
                 filterby_val = $(this).val();
-                cart_fields[filterby] = filterby_val;
+
+                    if( $(this).data('multiple') == true){
+                        if( 'undefined' == typeof( cart_fields[filterby] ) ) {
+                            cart_fields[filterby] = [];
+                        }
+                        if ( $(this).attr('type') == 'checkbox' ) {
+                            if( $(this).is(':checked') ){
+                                cart_fields[filterby].push(filterby_val);
+                            }
+                        }
+                        if ( $(this).data('dependent') == true ) {
+                            var pare = $(this).data('parent');
+                            if( $('#'+pare).is(':checked') ){
+                                cart_fields[filterby].push(filterby_val);
+                            }
+                        }
+                    }
+                else {
+                    cart_fields[filterby] = filterby_val;
+                }
             });
             cart_fields['action'] = 'wt_add_to_cart';
             // cart_fields['nonce'] =  'wt_add_to_cart_nonce';

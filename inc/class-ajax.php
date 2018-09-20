@@ -77,6 +77,7 @@ class WP_Travel_Ajax {
 		$price_key 	    = isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
 		$arrival_date   = isset( $_POST['trip_date'] ) ? $_POST['trip_date'] : '';
 		$departure_date = isset( $_POST['trip_departure_date'] ) ? $_POST['trip_departure_date'] : '';
+		$trip_extras    = isset( $_POST['wp_travel_trip_extras'] ) ? $_POST['wp_travel_trip_extras'] : array();
 
 		$trip_price = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, true );
 		
@@ -84,6 +85,7 @@ class WP_Travel_Ajax {
 
 		$attrs['arrival_date']   = $arrival_date;
 		$attrs['departure_date'] = $departure_date;
+		$attrs['trip_extras']    = $trip_extras;
 
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key );
 

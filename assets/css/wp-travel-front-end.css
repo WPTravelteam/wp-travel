@@ -3070,6 +3070,7 @@ ul.wp-travel-error {
       .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity input, .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity select, .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity textarea {
         margin-bottom: 0;
         min-height: 30px;
+        text-align: center;
         width: 100%; }
     .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content a.btn {
       display: inline-block;
@@ -3145,7 +3146,7 @@ ul.wp-travel-error {
     font-size: 14px;
     font-weight: 600; }
 .ws-theme-cart-page .child_products .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity {
-  width: 60px;
+  width: 90px;
   display: flex; }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     .ws-theme-cart-page .child_products .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_quantity {

@@ -76,6 +76,8 @@ wp_travel_print_notices();
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available	= isset( $trip['max_available'] ) ? $trip['max_available'] : '';
 
+					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
+
 					if ( ! empty( $price_key ) ) :
 						$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
 						$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
@@ -204,7 +206,7 @@ wp_travel_print_notices();
 					</tr>
 					<tr class="child_products">
 						<td colspan="8">
-							<?php do_action('wp_travel_tour_extras_cart_block'); ?>
+							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras ); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>						
