@@ -206,10 +206,10 @@ wp_travel_print_notices();
 					</tr>
 					<tr class="child_products">
 						<td colspan="8">
-							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras ); ?>
+							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras, $cart_id ); ?>
 						</td>
 					</tr>
-				<?php endforeach; ?>						
+				<?php endforeach; ?>					
 			</tbody>
 		</table>
 		<?php $cart_amounts = $wt_cart->get_total(); ?>

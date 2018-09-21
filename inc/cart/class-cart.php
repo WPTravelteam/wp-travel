@@ -361,6 +361,10 @@ class WP_Travel_Cart {
 		unset( $this->attributes[ $id ] );
 		$this->write();
 	}
+	// /**
+	//  * Remove cart trip extras.
+	//  */
+	// public function remove_trip_extras
 
 	function get_total() {
 
@@ -420,7 +424,7 @@ class WP_Travel_Cart {
 						if( $sale_price )
 							$price = $sale_price;
 
-						$qty = isset( $trip['trip_extras']['qty'][$k] ) ? $trip['trip_extras']['qty'][$k] : 1;
+						$qty = isset( $trip['trip_extras']['qty'][$k] ) && ! empty( $trip['trip_extras']['qty'][$k] ) ? $trip['trip_extras']['qty'][$k] : 1;
 						$trip_extras_total += wp_travel_get_formated_price( $price * $qty );
 					}
 
