@@ -118,6 +118,8 @@ class WP_Travel_Ajax {
 
 		global $wt_cart;
 
+		print_r( $_POST['update_cart_fields'] ); die;
+
 		foreach( $_POST['update_cart_fields'] as $cart_field ) {
 			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'] );
 		}
