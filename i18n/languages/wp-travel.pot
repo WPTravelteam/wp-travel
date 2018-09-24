@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.5.8\n"
+"Project-Id-Version: WP Travel 1.5.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-19 12:15:23+00:00\n"
+"POT-Creation-Date: 2018-09-24 08:58:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -162,6 +162,10 @@ msgstr ""
 #: inc/admin/admin-helper.php:921
 #: inc/coupon/inc/admin/views/tabs/coupons-restrictions.php:51
 msgid "Select all"
+msgstr ""
+
+#: inc/admin/admin-helper.php:972
+msgid "Pro options"
 msgstr ""
 
 #: inc/admin/admin-helper.php:974 inc/admin/admin-helper.php:983
@@ -771,7 +775,7 @@ msgid "Enable partial payment while booking."
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:834
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:705
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:715
 msgid "Minimum Payout (%)"
 msgstr ""
 
@@ -1418,19 +1422,19 @@ msgstr ""
 msgid "Please Add Multiple Pricing Options and update to add multiple dates "
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:696
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:706
 msgid "Minimum Payout"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:700
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:710
 msgid "Default : "
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:718
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:728
 msgid "Use Global"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:728
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:738
 msgid "Custom Min. Payout (%)"
 msgstr ""
 
@@ -1468,7 +1472,7 @@ msgid "Booking Date"
 msgstr ""
 
 #: inc/booking-functions.php:783 inc/booking-functions.php:808
-#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:290
+#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:300
 #: inc/class-wp-travel-form-handler.php:49
 #: inc/class-wp-travel-form-handler.php:53
 #: inc/class-wp-travel-form-handler.php:145
@@ -1578,8 +1582,8 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:162
-#: templates/content-cart.php:58 templates/content-cart.php:248
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:166
+#: templates/content-cart.php:58 templates/content-cart.php:250
 msgid "Total"
 msgstr ""
 
@@ -1587,19 +1591,19 @@ msgstr ""
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:112
+#: inc/cart/cart-mini.php:116
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:136
+#: inc/cart/cart-mini.php:140
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:137 templates/content-cart.php:234
+#: inc/cart/cart-mini.php:141 templates/content-cart.php:236
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:139 templates/content-cart.php:236
+#: inc/cart/cart-mini.php:143 templates/content-cart.php:238
 msgid "%"
 msgstr ""
 
@@ -1627,41 +1631,41 @@ msgstr ""
 msgid "Booking / Payments"
 msgstr ""
 
-#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:290
+#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:300
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: inc/class-ajax.php:123
+#: inc/class-ajax.php:132
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:140
+#: inc/class-ajax.php:149
 msgid "<strong>Error : </strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:149
+#: inc/class-ajax.php:158
 msgid "<strong>Error : </strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:159
+#: inc/class-ajax.php:168
 msgid ""
 "<strong>Error : </strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:171
+#: inc/class-ajax.php:180
 msgid "<strong>Error : </strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:187
+#: inc/class-ajax.php:196
 msgid ""
 "<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:203
+#: inc/class-ajax.php:212
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -3185,7 +3189,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:66
-#: templates/content-cart.php:258
+#: templates/content-cart.php:260
 msgid "Coupon Code"
 msgstr ""
 
@@ -4276,35 +4280,35 @@ msgstr ""
 msgid "Tour"
 msgstr ""
 
-#: templates/content-cart.php:135
+#: templates/content-cart.php:137
 msgid "Remove this tour"
 msgstr ""
 
-#: templates/content-cart.php:147
+#: templates/content-cart.php:149
 msgid " (%s)"
 msgstr ""
 
-#: templates/content-cart.php:155
+#: templates/content-cart.php:157
 msgid "Booking Date:"
 msgstr ""
 
-#: templates/content-cart.php:220
+#: templates/content-cart.php:222
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:233
+#: templates/content-cart.php:235
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:259
+#: templates/content-cart.php:261
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:265
+#: templates/content-cart.php:267
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:266
+#: templates/content-cart.php:268
 msgid "Proceed to checkout"
 msgstr ""
 
