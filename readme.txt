@@ -158,6 +158,9 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.5.9 =
 * WP Travel Extras Compatibility Support added.
+* Cart JS String translation issue fixes.
+* Google Maps API conflicts issue resolved.
+* Multiple Cart Item update functionality support added.
 * Fixes: Minor issues and bug fixes.
 
 = 1.5.8 =
