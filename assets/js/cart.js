@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
     $('.wp-travel-cart-remove').click(function(e) {
         e.preventDefault();
 
-        if (confirm('Are you sure to remove?')) {
+        if (confirm(cart_texts.confirm)) {
             var cart_id = $(this).data('cart-id');
 
             $.ajax({

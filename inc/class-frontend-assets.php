@@ -137,7 +137,15 @@ class WP_Travel_Frontend_Assets {
 
 			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			
-			wp_enqueue_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
+			wp_register_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
+
+			$cart_localize_strings = array(
+				'confirm' => __( 'Are you sure to remove?', 'wp-travel' ),
+			);
+
+			wp_localize_script( 'wp-travel-cart', 'cart_texts', $cart_localize_strings );
+
+			wp_enqueue_script( 'wp-travel-cart' );
 			
 			// Return if payment is not enabled.
 			if ( ! wp_travel_is_payment_enabled() ) {
