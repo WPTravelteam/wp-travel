@@ -118,10 +118,15 @@ class WP_Travel_Ajax {
 
 		global $wt_cart;
 
-		print_r( $_POST['update_cart_fields'] ); die;
-
 		foreach( $_POST['update_cart_fields'] as $cart_field ) {
-			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'] );
+
+			$trip_extras = false;
+
+			if( isset( $cart_field['extras']['id'] ) && ! empty( $cart_field['extras']['id'] ) ) {
+				$trip_extras = $cart_field['extras'];
+			}
+
+			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'], $trip_extras );
 		}
 
 		WP_Travel()->notices->add( apply_filters( 'wp_travel_cart_success', __( '<strong> </strong>Cart updated succesfully.Please Proceed to Checkout', 'wp-travel' ) ), 'success' );

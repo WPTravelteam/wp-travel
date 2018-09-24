@@ -85,26 +85,40 @@ jQuery(document).ready(function($) {
             extra_id = false;
             extra_qty = false;
 
-            if ( $(this).next('.child_products').find('input[name="extra_id"]').length > 0 ) {
-                extra_id = $(this).next('.child_products').find('input[name="extra_id"]').val();
-            }
-            if ( $(this).next('.child_products').find('input[name="extra_qty"]').length > 0 ) {
-                extra_qty = $(this).next('.child_products').find('input[name="extra_qty"]').val();
-            }
-
-            console.log(extra_id);
+            // console.log(extra_id);
 
             var update_cart_field = {};
+            update_cart_field['extras'] = {};
+            update_cart_field['extras']['id'] = {};
+            update_cart_field['extras']['qty'] = {};
             update_cart_field['pax'] = pax;
             update_cart_field['cart_id'] = cart_id;
-            update_cart_field['extras'] = {};
-            update_cart_field['extras'][i] = {};
+            // update_cart_field['extras'] = {};
+            // update_cart_field['extras'][i] = {};
         
-            if( extra_id ) {
-                update_cart_field['extras'][i]['id'] = extra_id;
+            // if( extra_id ) {
+            //     update_cart_field['extras'][i]['id'] = extra_id;
+            // }
+            // if( extra_qty ) {
+            //     update_cart_field['extras'][i]['qty'] = extra_qty;
+            // }
+
+            if ( $(this).next('.child_products').find('input[name="extra_id"]').length > 0 ) {
+
+                
+                $(this).next('.child_products').find('input[name="extra_id"]').each(function(j){
+                    extra_id = $(this).val();
+                    update_cart_field['extras']['id'][j] = extra_id;
+                });
+
             }
-            if( extra_qty ) {
-                update_cart_field['extras'][i]['qty'] = extra_qty;
+            if ( $(this).next('.child_products').find('input[name="extra_qty"]').length > 0 ) {
+                
+                $(this).next('.child_products').find('input[name="extra_qty"]').each(function(j){
+                    extra_qty = $(this).val();
+                    update_cart_field['extras']['qty'][j] = extra_qty;
+                });
+                
             }
 
             update_cart_fields[i] = update_cart_field;
@@ -117,7 +131,7 @@ jQuery(document).ready(function($) {
             beforeSend: function() {},
             success: function(data) {
                 if (data) {
-                    // location.reload();
+                    location.reload();
                 }
             }
         });
@@ -147,7 +161,7 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $('.wp-travel-pax').on('change', function() {
+    $('.wp-travel-pax, .wp-travel-tour-extras-qty').on('change', function() {
         $('.wp-travel-update-cart-btn').removeAttr('disabled', 'disabled');
         $('.book-now-btn').attr('disabled', 'disabled');
     });
