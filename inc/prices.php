@@ -163,6 +163,9 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		'max_available' 	=> $max_available,
 		'min_available'     => $min_available,
 		'trip_start_date' 	=> $trip_start_date,
+		'arrival_date'      => '',
+		'departure_date'    => '',
+		'trip_extras'       => '',
 	);
 	
 	$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();

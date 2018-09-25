@@ -262,7 +262,7 @@ class WP_Travel_Cart {
 	 * @param  array $attr         Attributes of item.
 	 * @return boolean
 	 */
-	public function update( $cart_item_id, $pax, $attr = array() ) {
+	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
 
 		if ( $pax < 1 ) {
 			return $this->remove( $cart_item_id );
@@ -284,6 +284,16 @@ class WP_Travel_Cart {
 			 */
 
 			$this->items[ $cart_item_id ]['pax'] = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
+
+			if ( $trip_extras ) {
+
+				if( is_array( $trip_extras ) && ! empty( $trip_extras ) ) {
+
+					$this->items[ $cart_item_id ]['trip_extras'] = $trip_extras;
+
+				}
+
+			}
 
 			if ( $max_available && $pax > $max_available ) {
 
@@ -361,6 +371,10 @@ class WP_Travel_Cart {
 		unset( $this->attributes[ $id ] );
 		$this->write();
 	}
+	// /**
+	//  * Remove cart trip extras.
+	//  */
+	// public function remove_trip_extras
 
 	function get_total() {
 
@@ -420,7 +434,7 @@ class WP_Travel_Cart {
 						if( $sale_price )
 							$price = $sale_price;
 
-						$qty = isset( $trip['trip_extras']['qty'][$k] ) ? $trip['trip_extras']['qty'][$k] : 1;
+						$qty = isset( $trip['trip_extras']['qty'][$k] ) && ! empty( $trip['trip_extras']['qty'][$k] ) ? $trip['trip_extras']['qty'][$k] : 1;
 						$trip_extras_total += wp_travel_get_formated_price( $price * $qty );
 					}
 
@@ -432,12 +446,6 @@ class WP_Travel_Cart {
 		}
 
 		$sub_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $sub_total ) );
-
-		// Adding tax to sub total;
-		if ( $tax_rate = wp_travel_is_taxable() ) : 
-			$tax_amount = wp_travel_get_formated_price( ( $sub_total * $tax_rate ) / 100 );
-			// $tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
-		endif;
 
 		// Discounts Calculation.
 		if ( ! empty( $discounts ) ) {
@@ -456,10 +464,18 @@ class WP_Travel_Cart {
 
 		}
 
+		// Totals after discount.
 		$total_trip_price_after_dis = $sub_total - $discount_amount;
-		$total_trip_price = $total_trip_price_after_dis + $tax_amount;
-
 		$total_trip_price_partial_after_dis = $sub_total_partial - $discount_amount_partial;
+
+		// Adding tax to sub total;
+		if ( $tax_rate = wp_travel_is_taxable() ) : 
+			$tax_amount = wp_travel_get_formated_price( ( $total_trip_price_after_dis * $tax_rate ) / 100 );
+			// $tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
+		endif;
+		
+		// Totals after tax.
+		$total_trip_price = $total_trip_price_after_dis + $tax_amount;
 		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial;
 
 		$get_total = array(

@@ -68,6 +68,8 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 					$single_trip_partial_total = wp_travel_get_formated_price( $trip_price_partial * $pax );
 
+					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
+
 					$price_per = 'trip-default';
 
 					if( isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ) {
@@ -97,6 +99,8 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_partial_total ) ?></span>
 						</td>
 					</tr>
+					
+					<?php do_action( 'wp_travel_tour_extras_mini_cart_block', $trip_extras, $cart_id ); ?>
 
 				<?php endforeach; ?>
 
