@@ -7,6 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
+ * PHP Version: 5.5 or higher
  * Tested up to: 4.9.8
  *
  * Text Domain: wp-travel
@@ -232,6 +233,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-dashboard-widgets.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/admin/class-wp-travel-csv-exporter.php', WP_TRAVEL_ABSPATH );
 			}
 
 			if ( $this->is_request( 'frontend' ) ) {
@@ -300,6 +302,20 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * WP Travel Activation.
 		 */
 		function wp_travel_activation() {
+			// Check for PHP Compatibility
+			global $wp_version;
+			
+			if ( version_compare( PHP_VERSION, '5.5', '<' ) ) {
+				
+				$flag 	 = __( 'PHP', 'wp-travel' );
+				$version = __( '5.5 or Higher', 'wp-travel' );
+			
+				deactivate_plugins( basename( __FILE__ ) );
+
+				$message = sprintf( __( 'WP Travel plugin requires %1$s version %2$s or greater to work.', 'wp-travel' ), $flag, $version );
+				
+				wp_die( $message,__('Plugin Activation Error', 'wp-travel' ),  array( 'response'=>200, 'back_link'=>TRUE ) );
+			}
 
 			// Flush Rewrite rule.
 			$post_type = new WP_Travel_Post_Types();
