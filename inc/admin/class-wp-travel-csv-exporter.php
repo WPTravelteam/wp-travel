@@ -30,12 +30,24 @@ class WP_Travel_CSV_Exporter {
                 <a href="<?php echo admin_url( 'export.php' );?>" class="page-title-action"><?php esc_html_e( 'Export to CSV', 'wp-travel' ); ?></a>
             </div>
 
+			<div class="wrap import-csv">
+                <a href="<?php echo admin_url( 'export.php' );?>" class="page-title-action"><?php esc_html_e( 'Import CSV', 'wp-travel' ); ?></a>
+            </div>
+
             <style scoped>
                 .wrap.export-to-csv {
                     float: none;
                     display: inline;
                     position: absolute;
                     left: 14em;
+                    top: 1.44em;
+                }
+
+				.wrap.import-csv {
+                    float: none;
+                    display: inline;
+                    position: absolute;
+                    left: 24em;
                     top: 1.44em;
                 }
             </style>
@@ -53,7 +65,7 @@ class WP_Travel_CSV_Exporter {
         // Check for current user privileges 
         if( !current_user_can( 'manage_options' ) ){ return false; }
         // Check if we are in WP-Admin
-        if( !is_admin() ){ return false; }
+		if( !is_admin() ){ return false; }
 
         global $wpdb;
         $post_type = $args['content'];
@@ -90,7 +102,7 @@ class WP_Travel_CSV_Exporter {
 
 			$args = wp_parse_args( $args, $merge_args );
 
-			$wpt_data_posts = get_posts( array( 'post_type' => $args['content'], 'post_status' => 'publish' ) );
+			$wpt_data_posts = get_posts( array( 'post_type' => $args['content'], 'post_status' => 'publish', 'posts_per_page' => -1 ) );
 
 			if ( ! $wpt_data_posts ) {
 				$referer = add_query_arg( 'error', 'empty', wp_get_referer() );
