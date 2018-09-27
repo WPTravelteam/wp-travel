@@ -135,7 +135,7 @@ function wp_travel_paypal_ipn_process() {
 		 * If this is the test mode we email the IPN text report.
 		 * note about and box http://stackoverflow.com/questions/4298117/paypal-ipn-always-return-payment-status-pending-on-sandbox
 		 */
-		if ( $settings['test_mode'] == true ) {
+		if ( $settings['wt_test_mode'] == true ) {
 
 			$message .= "\nTest Mode\n";
 			$email = array(
