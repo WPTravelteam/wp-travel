@@ -38,9 +38,12 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
-		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_import_export_tab_callback' ), 12, 2 );		
 		
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
+
+		add_action( 'admin_init', array( $this, 'get_files' ) );
 	}
 
 	public function call_back_tab_facts($tab){
@@ -135,6 +138,10 @@ class WP_Travel_Admin_Settings {
 				'content_title' => __( 'License Details', 'wp-travel' ),
 			);
 		}
+		$settings_fields['import_export'] = array(
+			'tab_label' => __( 'Import / Export', 'wp-travel' ),
+			'content_title' => __( 'Import / Export', 'wp-travel' ),
+		);
 
 		$tabs[ self::$collection ] = apply_filters( 'wp_travel_settings_tabs', $settings_fields );
 		return $tabs;
@@ -960,6 +967,47 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Callback for Import / Export Tab
+	 * 
+	 * @param Array $tab List of tabs.
+	 * @param Array $args Settings args list.
+	 */
+	public function wp_travel_import_export_tab_callback( $tab, $args ) {
+
+		if ( 'import_export' !== $tab ) {
+			return;
+		}
+
+		?>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/basic.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+
+		<style>
+		.wp-travel-import-uploader.dz-clickable {
+    height: 200px;
+    width: 200px;
+}
+		</style>
+		<div class="wp-travel-import-uploader">
+			<input type="file" name="csv">
+		</div>
+
+		<script>
+
+		jQuery(document).ready( function($) {
+
+			var Drop = new Dropzone('.wp-travel-import-uploader',{ url: "<?php echo $_SERVER['PHP_SELF'] ?>" } );
+
+		});
+
+
+		</script>
+
+		<?php
+		
+	}
+
+	/**
 	 * Callback for the User Accounts Tab.
 	 *
 	 * @param Array $tab List of tabs.
@@ -1221,6 +1269,16 @@ class WP_Travel_Admin_Settings {
 
 	static function get_system_info() {
 		require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
+	}
+
+	public function get_files() {
+
+		if ( $_FILES ) {
+
+			print_r( $_FILES );
+
+		}
+
 	}
 }
 

@@ -4,6 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
+PHP Version: 5.5 or higher
 Stable tag: 1.5.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -15,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 * Minimum SERVER PHP version requirements : PHP v.5.5+
 
-* Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solution.
+* Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solutions.
 * Checkout ["Demo"](http://wptravel.io/demo).
 
 = "WP TRAVEL" COMPATIBLE THEMES: =

@@ -160,7 +160,7 @@ wp_travel_print_notices();
 											<?php if ( ! $date_format ) : ?>
 												<?php $date_format = 'jS M, Y'; ?>
 											<?php endif; ?>
-											<?php echo esc_html( date( $date_format, strtotime( $trip_start_date ) ) ); ?>
+											<?php echo esc_html( $trip_start_date ) ; ?>
 										</span>
 									</span>
 								<?php endif; ?>
