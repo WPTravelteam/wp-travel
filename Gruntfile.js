@@ -191,6 +191,8 @@ module.exports = function(grunt) {
                     'assets/css/wp-travel-back-end.css': 'assets/css/sass/wp-travel-back-end.scss',
                     'assets/css/wp-travel-front-end.css': 'assets/css/sass/wp-travel-front-end.scss',
                     'assets/css/wp-travel-tabs.css': 'assets/css/sass/wp-travel-tabs.scss',
+                    'assets/css/wp-travel-rtl-front-end.css': 'assets/css/sass/wp-travel-rtl-front-end.scss',
+                    'assets/css/wp-travel-rtl-back-end.css': 'assets/css/sass/wp-travel-rtl-back-end.scss',
                 }
             }
         },
@@ -202,6 +204,8 @@ module.exports = function(grunt) {
                     'assets/css/wp-travel-back-end.min.css': ['assets/css/wp-travel-back-end.css'],
                     'assets/css/wp-travel-front-end.min.css': ['assets/css/wp-travel-front-end.css'],
                     'assets/css/wp-travel-tabs.min.css': ['assets/css/wp-travel-tabs.css'],
+                    'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
+                    'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],
                     'assets/css/wp-travel-user-styles.min.css': ['assets/css/wp-travel-user-styles.css'],
                 }
             }
