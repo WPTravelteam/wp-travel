@@ -19,6 +19,8 @@ class WP_Travel_Frontend_Assets {
 		// fontawesome.
 		wp_enqueue_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/css/font-awesome' . $suffix . '.css' );
 		wp_enqueue_style( 'wp-travel-user-css', $this->assets_path . 'assets/css/wp-travel-user-styles' . $suffix . '.css' );
+
+		wp_enqueue_style( 'wp-travel-rtl-frontend', $this->assets_path . 'assets/css/wp-travel-rtl-front-end' . $suffix . '.css' );
 	}
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
