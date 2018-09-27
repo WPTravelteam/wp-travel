@@ -30,6 +30,6 @@ $item_desc       = isset( $trip_extras_data['extras_item_description'] ) && ! em
 				<textarea name="wp_travel_extras[extras_item_description]" id="" cols="50" rows="5"><?php echo esc_html( $item_desc ); ?></textarea>
 			</td>
 		</tr>
-		<?php do_action( 'wp_travel_extras_pro_options' ); ?>
+		<?php //do_action( 'wp_travel_extras_pro_options' ); ?>
 	</tbody>
 </table>
