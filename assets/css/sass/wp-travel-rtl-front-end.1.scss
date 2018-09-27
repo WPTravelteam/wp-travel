@@ -1,0 +1,144 @@
+.wp-travel-trip-code {
+  span {
+      margin-left: 10px;
+      margin-right: 0;
+  }
+}
+.wp-travel-gallery {
+  ul {
+    li {
+      float: right;
+    }
+  }
+}
+.entry-content .wp-travel-trip-include ul,
+.entry-content .wp-travel-trip-exclude ul {
+    margin-left: 0;
+    margin-right: 20px;
+}
+.wp-travel-tab-wrapper {
+  .tab-list.resp-tabs-list {
+    li {
+      border-left: 1px solid rgba(222, 222, 222, 0.49);
+      border-right: 0;
+      &:last-child {
+        border-left: 1px solid rgba(222, 222, 222, 0.49);
+        border-right: 0;
+      }
+    }
+  }
+  h2.resp-accordion {
+    &:after {
+      float: left;
+    }
+  }
+  .resp-tab-active {
+    &:after {
+      -ms-transform: rotate(-180deg);
+      -webkit-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+    }
+  }
+  .wp-travel-booking-form-wrapper {
+    form {
+      .wp-travel-form-field {
+        float: right;
+        &:nth-of-type(2n+1) {
+          clear: both;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-left: 5px;
+            margin-right: 0;
+        }
+      }
+    }
+  }
+}
+.wp-travel.trip-headline-wrapper {
+  .featured-side-image.left-plot {
+    float: right;
+    .wp-travel-view-gallery {
+      left: 0;
+      right: auto;
+      a {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+  .featured-detail-section.right-plot {
+    float: right;
+  }
+  .wp-detail-review-wrap {
+    .wp-travel-trip-detail {
+      float: right;
+    }
+    .wp-travel-average-review {
+      float: left;
+    }
+  }
+}
+.wp-travel-average-review {
+  &:before {
+    float: right;
+    left: auto;
+    right: 0;
+  }
+  span {
+    float: right;
+    left: auto;
+    right: 0;
+    &::before {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+.wp-travel-trip-meta-info {
+  ul {
+    li {
+      padding: 0 15px 10px 10px;
+      margin-right: 0;
+      margin-left: -.25em;
+      text-align: right;
+    }
+  }
+}
+.wp-travel.trip-headline-wrapper {
+  .wp-travel-booknow-btn {
+    margin-left: 15px;
+    margin-right: auto;
+  }
+  .wp-travel-keyword {
+    padding-left: 0;
+    padding-right: 5px;
+  }
+}
+.trip-price {
+  del {
+    margin-left: 10px;
+    margin-right: auto;
+  }
+}
+.wp-tab-review-inner-wrapper {
+  .wp-travel-average-review {
+    float: left;
+  }
+  .description {
+    p {
+      padding-left: auto;
+      padding-right: 40px;
+    }
+  }
+  img {
+    float: right;
+    margin-left: 4.0909090909%;
+    margin-right: 0;
+  }
+}
+.comment-respond {
+  
+}

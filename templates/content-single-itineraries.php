@@ -34,7 +34,7 @@ do_action( 'wp_travel_before_content_start');
 
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="content entry-content">
-		<div class="wp-travel trip-headline-wrapper">
+		<div class="wp-travel trip-headline-wrapper clearfix">
 	        <div class="wp-travel-feature-slide-content featured-side-image left-plot">
 	            <div class="banner-image-wrapper" style="background-image: url(<?php echo esc_url( wp_travel_get_post_thumbnail_url( get_the_ID(), 'large' ) ) ?>)">
 						<?php echo wp_kses( wp_travel_get_post_thumbnail( get_the_ID() ), wp_travel_allowed_html( array( 'img' )  ) ); ?>
