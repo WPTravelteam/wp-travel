@@ -182,6 +182,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		}
 		
 		$args['option_index_0'] = $agrs_index;
+		$args['custom'] = $booking_id;
 		return apply_filters( 'wp_travel_paypal_args', $args );
 	}
 }

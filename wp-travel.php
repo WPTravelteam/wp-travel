@@ -233,7 +233,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-dashboard-widgets.php', WP_TRAVEL_ABSPATH );
-				include sprintf( '%s/inc/admin/class-wp-travel-csv-exporter.php', WP_TRAVEL_ABSPATH );
 			}
 
 			if ( $this->is_request( 'frontend' ) ) {
