@@ -2384,6 +2384,7 @@ ul.availabily-list li > div.wp-travel-booking-row.animate {
   padding: 15px;
   padding-right: 15px !important;
   height: auto;
+  opacity: 1;
 }
 ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
   margin: 5px 0;
