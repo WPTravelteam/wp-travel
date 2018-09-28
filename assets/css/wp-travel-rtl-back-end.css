@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 @font-face {
   font-family: "icomoon";
@@ -1833,6 +1834,11 @@ span.wp-travel-message {
   padding: 5px 15px;
   text-transform: uppercase;
 }
+=======
+body {
+  direction: rtl;
+  unicode-bidi: embed; }
+>>>>>>> 2261b2febd6907a694dfad6ce3c45138e0a402c1
 
 .wp-travel-pro-mockup-option {
   opacity: 0.6;
