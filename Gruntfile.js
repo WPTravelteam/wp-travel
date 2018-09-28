@@ -241,7 +241,29 @@ module.exports = function(grunt) {
 
         zip: {
             'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
-        }
+        },
+
+        rtlcss: {
+            myTask:{
+              // task options
+              options: {
+                // generate source maps
+                map: {inline: false},
+                // rtlcss options
+                opts: {
+                  clean:false
+                },
+                // rtlcss plugins
+                plugins:[],
+                // save unmodified files
+                saveUnmodified: true,
+              },
+              expand : true,
+              cwd    : 'assets/css',
+              dest   : 'assets/css/rtl/',
+              src    : ['assets/css/*.css']
+            }
+          }
 
     });
 
@@ -260,6 +282,8 @@ module.exports = function(grunt) {
 
     // Load in `grunt-zip`
     grunt.loadNpmTasks('grunt-zip');
+
+    grunt.loadNpmTasks('grunt-rtlcss');
 
     // Register tasks.
     grunt.registerTask('default', []);
@@ -284,6 +308,10 @@ module.exports = function(grunt) {
     grunt.registerTask('minify', [
         'uglify',
         'cssmin',
+    ]);
+
+    grunt.registerTask('rtlcss', [
+        'rtlcss',
     ]);
 
     grunt.registerTask('deploy', [
