@@ -4,7 +4,7 @@ Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itiner
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
-PHP Version: 5.5 or higher
+Requires PHP: 5.5 or Higher
 Stable tag: 1.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
