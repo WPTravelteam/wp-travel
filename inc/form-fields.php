@@ -11,6 +11,7 @@
  * @return array Returns form fields.
  */
 function wp_travel_booking_form_fields() {
+	$trip_id = 0;
 	global $post;
 
 	global $wt_cart;
