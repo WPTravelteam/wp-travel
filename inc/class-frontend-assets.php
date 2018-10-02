@@ -67,7 +67,7 @@ class WP_Travel_Frontend_Assets {
 
 		wp_enqueue_script( 'wp-travel-widget-scripts' );
 
-		wp_enqueue_script( 'travel-door-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
+		wp_enqueue_script( 'wp-travel-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
 		// Script only for single itineraries.
 		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
 			$map_data = get_wp_travel_map_data();
@@ -84,8 +84,8 @@ class WP_Travel_Frontend_Assets {
 				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 			}
 
-			wp_enqueue_script( 'travel-door-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
-			wp_register_script( 'travel-door-script', $this->assets_path . 'assets/js/wp-travel-front-end.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, true );
+			wp_enqueue_script( 'wp-travel-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
+			wp_register_script( 'wp-travel-script', $this->assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, true );
 			if ( '' != $api_key ) {
 				
 				$wp_travel_google_map_api = apply_filters( 'wp_travel_load_google_maps_api', true );
@@ -128,10 +128,10 @@ class WP_Travel_Frontend_Assets {
 
 			$frontend_vars = apply_filters( 'wp_travel_js_frontend_vars', $frontend_vars );
 
-			wp_localize_script( 'travel-door-script', 'wp_travel_frontend_vars', $frontend_vars );
+			wp_localize_script( 'wp-travel-script', 'wp_travel_frontend_vars', $frontend_vars );
 
 			// Enqueued script.
-			wp_enqueue_script( 'travel-door-script' );
+			wp_enqueue_script( 'wp-travel-script' );
 
 			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
 			
