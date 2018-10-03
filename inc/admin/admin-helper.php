@@ -1006,6 +1006,13 @@ function wp_travel_extras_pro_option_fields() {
 			</select>
 		</td>
 	</tr>
+	<tr class="wp-travel-pro-mockup-option">
+		<td colspan="2">
+			<div class="wp-travel-pro-feature-notice">
+				<?php esc_html_e( 'Do you want to use above pro features with gallery, detail extras page in front end and other features? Then checkout our' ); ?> <a href="http://themepalace.com"><?php esc_html_e( 'Tour Extras plugin.' ); ?></a>
+			</div>
+		</td>
+	</tr>
 	
 	<?php
 }
