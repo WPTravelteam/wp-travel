@@ -1009,9 +1009,9 @@ function wp_travel_extras_pro_option_fields() {
 	<tr class="wp-travel-upsell-message">
 		<td colspan="2">
 			<div class="wp-travel-pro-feature-notice">
-				<h4>Want to use above pro features?</h4>
+				<h4><?php esc_html_e( 'Want to use above pro features?' ); ?></h4>
 				<p><?php esc_html_e( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ); ?></p>
-				<a target="_blank" href="http://themepalace.com"><?php esc_html_e( 'Tour Extras plugin', 'wp-travel' ); ?></a>
+				<a target="_blank" href="http://themepalace.com/downloads/wp-travel-tour-extras"><?php esc_html_e( 'Get Tour Extras Addon', 'wp-travel' ); ?></a>
 			</div>
 		</td>
 	</tr>

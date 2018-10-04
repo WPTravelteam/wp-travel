@@ -371,6 +371,15 @@ class WP_Travel_Admin_Settings {
 		$enquiry_admin_email_settings = isset( $args['settings']['enquiry_admin_template_settings'] ) ? $args['settings']['enquiry_admin_template_settings'] : $enquiry_admin_email_defaults;
 
 		?>
+		<tr class="wp-travel-upsell-message">
+			<td colspan="2">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Want to use above pro features?' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="http://themepalace.com/downloads/wp-travel-tour-extras"><?php esc_html_e( 'Get Tour Extras Addon', 'wp-travel' ); ?></a>
+				</div>
+			</td>
+		</tr>
 
 		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
