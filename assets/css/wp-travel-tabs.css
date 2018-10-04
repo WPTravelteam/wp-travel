@@ -372,6 +372,7 @@
 
   .wrap {
     margin-right: 12px;
+<<<<<<< HEAD
     margin-left: 0; } }
 .wp-travel-upsell-message .wp-travel-pro-feature-notice {
   background-color: #fbfbe1;
@@ -389,5 +390,10 @@
     margin-top: 15px;
     text-decoration: none;
     padding: 7px 15px; }
+=======
+    margin-left: 0;
+  }
+}
+>>>>>>> d2f2d29582551cfec4fd38d6c0ae9aa9ccd5e36c
 
 /*# sourceMappingURL=wp-travel-tabs.css.map */
