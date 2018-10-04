@@ -49,7 +49,15 @@ class WP_Travel_Frontend_Assets {
 		$locale = $lang_code[0];
 
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
-		wp_register_script( 'jquery-datepicker-lib-eng', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.' . $locale . '.js', array( 'jquery' ), '', 1 );
+		
+		$locale_path = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.' . $locale . '.js';
+
+		$datepicker_i18n_file = file_exists( $locale_path ) ? $locale_path : plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.en.js';
+
+		$locale = file_exists( $locale_path ) ? $locale : 'en';
+		
+		wp_register_script( 'jquery-datepicker-lib-eng', $datepicker_i18n_file, array( 'jquery' ), '', 1 );
+		
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 		wp_enqueue_script( 'jquery-datepicker-lib' );
 		wp_enqueue_script( 'jquery-datepicker-lib-eng' );

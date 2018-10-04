@@ -25,6 +25,9 @@ class WP_Travel_FW_Field_Date {
 		$lang_code = explode( '-', get_bloginfo('language') );
 		$locale = $lang_code[0];
 
+		$locale_path = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.' . $locale . '.js';
+		$locale = file_exists( $locale_path ) ? $locale : 'en';
+
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
 		$output .= 		'$("#' . $this->field['id'] . '").datepicker({

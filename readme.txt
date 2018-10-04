@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5 or Higher
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -156,6 +156,12 @@ WP Travel plugin has been tested with the default WordPress theme. It specially 
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.6.1 =
+* Enhancements: WP Travel Extras addon support added.
+* Fixes: Min. Pax cart page input field issue when min pax not set fixed.
+* Fixes: Datepicker default to Russian issue fixed.
+* Fixes: Minor issues and bug fixes.
 
 = 1.6.0 =
 * PHP version checks and fallback message added.
