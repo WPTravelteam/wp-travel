@@ -441,6 +441,15 @@ class WP_Travel_Admin_Metaboxes {
 
 		if ( is_array( $tabs ) && count( $tabs ) > 0 && ! $enable_custom_itinerary_tabs ) {
 			?>
+			<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+				<div class="wp-travel-upsell-message">
+					<div class="wp-travel-pro-feature-notice">
+						<h4><?php esc_html_e( 'Need Additional Tabs ?' ); ?></h4>
+						<p><?php esc_html_e( 'By upgrading to Pro, you can trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ); ?></p>
+						<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+					</div>
+				</div>
+			<?php endif; ?>
 				<table class="form-table">
 					<tr>
 						<td>
@@ -450,7 +459,7 @@ class WP_Travel_Admin_Metaboxes {
 							<label data-on="ON" data-off="OFF">
 							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
 								<span class="switch">
-								 </span>
+								</span>
 							</label>
 						</span>
 						</td>
@@ -529,6 +538,15 @@ class WP_Travel_Admin_Metaboxes {
 		$post_id = $args['post']->ID;
 			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 		?>
+		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Tired of updating repitative FAQs ?' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+				</div>
+			</div>
+		<?php endif; ?>
 		<div class="wp-travel-tab-content-faq-header clearfix">
 			<?php
 			if ( is_array( $faq_questions ) && count( $faq_questions ) != 0  ) :
