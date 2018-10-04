@@ -1838,19 +1838,25 @@ span.wp-travel-message {
   opacity: 0.6;
   pointer-events: none;
 }
-.wp-travel-pro-mockup-option:last-of-type {
-  opacity: 1;
-  pointer-events: all;
+
+.wp-travel-upsell-message .wp-travel-pro-feature-notice {
+  background-color: #fbfbe1;
+  border: 1px solid #faeec9;
+  padding: 20px 15px;
 }
-.wp-travel-pro-mockup-option .wp-travel-pro-feature-notice {
-  background-color: #409cd1;
-  color: #fff;
-  text-align: center;
-  padding: 15px 0;
+.wp-travel-upsell-message .wp-travel-pro-feature-notice h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
 }
-.wp-travel-pro-mockup-option .wp-travel-pro-feature-notice a {
+.wp-travel-upsell-message .wp-travel-pro-feature-notice a {
+  border-radius: 3px;
   color: #fff;
+  display: inline-block;
   font-weight: 600;
+  background-color: #409cd1;
+  margin-top: 15px;
+  text-decoration: none;
+  padding: 7px 15px;
 }
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */
