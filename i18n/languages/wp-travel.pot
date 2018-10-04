@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 06:15:42+00:00\n"
+"POT-Creation-Date: 2018-10-04 06:51:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: inc/admin/admin-helper.php:82
+#: inc/admin/admin-helper.php:82 inc/admin/admin-helper.php:210
 msgid "Travel Log"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Toggle panel: Support"
 msgstr ""
 
-#: inc/admin/admin-helper.php:131
+#: inc/admin/admin-helper.php:131 inc/admin/admin-helper.php:306
 msgid "Support"
 msgstr ""
 
@@ -101,6 +101,209 @@ msgstr ""
 
 #: inc/admin/admin-helper.php:188
 msgid "Leave a Review"
+msgstr ""
+
+#: inc/admin/admin-helper.php:208
+msgid "Welcome to WP Travel."
+msgstr ""
+
+#: inc/admin/admin-helper.php:209
+msgid "Thanks for installing and we hope you will enjoy using WP Travel."
+msgstr ""
+
+#: inc/admin/admin-helper.php:210
+msgid "We strongly recommend you to install"
+msgstr ""
+
+#: inc/admin/admin-helper.php:210
+msgid "theme for best Front End experiences."
+msgstr ""
+
+#: inc/admin/admin-helper.php:212
+msgid "Add New Trips For You Site"
+msgstr ""
+
+#: inc/admin/admin-helper.php:213
+msgid "OR"
+msgstr ""
+
+#: inc/admin/admin-helper.php:214
+msgid "Visit Demo"
+msgstr ""
+
+#: inc/admin/admin-helper.php:222
+msgid "Version:"
+msgstr ""
+
+#: inc/admin/admin-helper.php:231
+msgid "Get add-ons and tips..."
+msgstr ""
+
+#: inc/admin/admin-helper.php:245
+msgid "Questions? Need Help?"
+msgstr ""
+
+#: inc/admin/admin-helper.php:247 inc/admin/admin-helper.php:279
+msgid "Contact Us"
+msgstr ""
+
+#: inc/admin/admin-helper.php:255 inc/admin/class-admin-metaboxes.php:217
+#: inc/admin/class-admin-metaboxes.php:218
+#: inc/admin/extras/views/tabs/tour-extras-general.php:24
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:108
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:165
+msgid "Description"
+msgstr ""
+
+#: inc/admin/admin-helper.php:257
+msgid ""
+"WP Travel is an easy to use and awesome plugin that you can use with any "
+"travel site. With WP travel you can simply add the post type to display the "
+"packages and WP Travel comes with booking feature as well.  Beside this  "
+"plugin provides various kind of feature, setting which makes this plugin "
+"more attractive.\n"
+"\n"
+"\t\t\t\tThe compatibility of the plugin is also one of the features. It can "
+"also be modified very easily through custom templates."
+msgstr ""
+
+#: inc/admin/admin-helper.php:261
+msgid "Feature Overview"
+msgstr ""
+
+#: inc/admin/admin-helper.php:264
+msgid ""
+"Get your travel site ready just on few clicks. With our user-friendly "
+"system &amp; complete documentation, you wont have any trouble while using "
+"the system."
+msgstr ""
+
+#: inc/admin/admin-helper.php:266
+msgid ""
+"WP Travel includes in-build booking system for your travel site. Users can "
+"easily book itineraries from your site and you can track all bookings from "
+"the backend."
+msgstr ""
+
+#: inc/admin/admin-helper.php:268
+msgid ""
+"Data are very important for all business. WP Travel has in-build booking "
+"stat that helps you to generate the report from different date range, types "
+"and locations."
+msgstr ""
+
+#: inc/admin/admin-helper.php:270
+msgid ""
+"With our payment processing features, you can get partial or full payment "
+"for each booking. All that payment will be tracked in the backend and also "
+"you can view stat of payments."
+msgstr ""
+
+#: inc/admin/admin-helper.php:272
+msgid ""
+"WP travel plugin is translation ready in order to fulfill customer needs "
+"from all around the world. You can translate WP Travel to any language with "
+"the help of WPML Translation Plugin and for the translation of the string, "
+"you can use Loco Translate."
+msgstr ""
+
+#: inc/admin/admin-helper.php:274 inc/admin/class-admin-metaboxes.php:253
+#: inc/admin/class-admin-metaboxes.php:254
+msgid "FAQs"
+msgstr ""
+
+#: inc/admin/admin-helper.php:274
+msgid ""
+" provide the opportunity to group all those questions that customers ask "
+"over and over again related to trips. Also, the itinerary timeline is the "
+"new feature added to WP travel plugin which will display the timeline of "
+"the trips in tree-like structure."
+msgstr ""
+
+#: inc/admin/admin-helper.php:276
+msgid ""
+"Our team is dedicated to continuous development of the plugin. We will be "
+"continuously adding new features to the plugin."
+msgstr ""
+
+#: inc/admin/admin-helper.php:279
+msgid "If you found any issues in the plugin, you can directly"
+msgstr ""
+
+#: inc/admin/admin-helper.php:279
+msgid "or add your issues or problems on"
+msgstr ""
+
+#: inc/admin/admin-helper.php:279 inc/admin/admin-helper.php:307
+msgid "Support Forum"
+msgstr ""
+
+#: inc/admin/admin-helper.php:285
+msgid "Add Trip"
+msgstr ""
+
+#: inc/admin/admin-helper.php:287
+msgid "How to Add Trip to the website?"
+msgstr ""
+
+#: inc/admin/admin-helper.php:289
+msgid ""
+"After the activation of the required plugin, you will find the Trips menu "
+"on the dashboard.\n"
+"\t\t\t\t\tNow  to create the trip of your choice go to Admin Panel > Trips "
+"> Add New and begin entering the required content as per your wish.\n"
+"\t\t\t\t\tFurthermore, to help you and make you clear we have explained "
+"each and every field below in the Overview section."
+msgstr ""
+
+#: inc/admin/admin-helper.php:293
+msgid "Additional Trip settings"
+msgstr ""
+
+#: inc/admin/admin-helper.php:296
+msgid "How to Globally Set the Tabs Format Shown on Single Trip Page?"
+msgstr ""
+
+#: inc/admin/admin-helper.php:299
+msgid "How to change the label of tabs shown on Single Trip Page?"
+msgstr ""
+
+#: inc/admin/admin-helper.php:302
+msgid "See all the Frequently Asked Question Solution For WP Travel Plugin"
+msgstr ""
+
+#: inc/admin/admin-helper.php:303
+msgid "Frequently Asked Question"
+msgstr ""
+
+#: inc/admin/admin-helper.php:306
+msgid "You can find your solution about the problem of WP Travel from our"
+msgstr ""
+
+#: inc/admin/admin-helper.php:306
+msgid "Support Page"
+msgstr ""
+
+#: inc/admin/admin-helper.php:306
+msgid "or you can create a"
+msgstr ""
+
+#: inc/admin/admin-helper.php:306
+msgid ""
+"for free. Feel free to ask a question about the problem, this will "
+"eventually help the growth of the plugin furthermore"
+msgstr ""
+
+#: inc/admin/admin-helper.php:313
+msgid "General Plugin Configuration"
+msgstr ""
+
+#: inc/admin/admin-helper.php:317
+msgid "See User Documentation to know the plugin and how it works"
+msgstr ""
+
+#: inc/admin/admin-helper.php:324
+msgid "See Developer Documentation to know the plugin in depth."
 msgstr ""
 
 #: inc/admin/admin-helper.php:342
@@ -213,6 +416,16 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
+#: inc/admin/admin-helper.php:1012
+msgid ""
+"Do you want to use above pro features with gallery, detail extras page in "
+"front end and other features? Then checkout our new"
+msgstr ""
+
+#: inc/admin/admin-helper.php:1012
+msgid "Tour Extras plugin."
+msgstr ""
+
 #: inc/admin/class-admin-assets.php:55 inc/admin/class-admin-assets.php:96
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:158
 #: inc/booking-functions.php:702 inc/booking-functions.php:1026
@@ -296,14 +509,6 @@ msgstr ""
 msgid "Due Amount"
 msgstr ""
 
-#: inc/admin/class-admin-metaboxes.php:217
-#: inc/admin/class-admin-metaboxes.php:218
-#: inc/admin/extras/views/tabs/tour-extras-general.php:24
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:108
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:165
-msgid "Description"
-msgstr ""
-
 #: inc/admin/class-admin-metaboxes.php:221 inc/email-template-functions.php:33
 #: inc/email-template-functions.php:138 inc/email-template-functions.php:238
 #: inc/email-template-functions.php:316 inc/email-template-functions.php:610
@@ -348,11 +553,6 @@ msgstr ""
 #: inc/admin/class-admin-metaboxes.php:247
 #: inc/admin/class-admin-metaboxes.php:248 inc/template-functions.php:502
 msgid "Locations"
-msgstr ""
-
-#: inc/admin/class-admin-metaboxes.php:253
-#: inc/admin/class-admin-metaboxes.php:254
-msgid "FAQs"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:258
