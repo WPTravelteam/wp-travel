@@ -269,7 +269,6 @@ jQuery(document).ready(function($) {
         } else {
             jQuery(this).datepicker({
                 language: wp_travel_frontend_vars.locale,
-                // inline: true,
                 minDate: new Date(),
                 autoClose: true,
             });

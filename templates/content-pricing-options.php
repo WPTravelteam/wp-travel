@@ -183,10 +183,10 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 						<?php else : ?>
 							<div class="date-from">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'start:', 'wp-travel' ); ?></span>
-								<input placeholder="<?php esc_html_e( 'Arrival date', 'wp-travel' ); ?>" name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+								<input placeholder="<?php esc_html_e( 'Arrival date', 'wp-travel' ); ?>" name="trip_date" type="text" class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 							</div>
 							<div class="date-to">
-								<input placeholder="<?php esc_html_e( 'Departure date', 'wp-travel' ); ?>" name="trip_departure_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+								<input placeholder="<?php esc_html_e( 'Departure date', 'wp-travel' ); ?>" name="trip_departure_date" type="text" class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 							</div>
 						<?php endif; ?>
 						<div class="status">

@@ -1,0 +1,547 @@
+.wp-travel-dashboard-form input {
+  outline: none; }
+.wp-travel-dashboard-form input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  line-height: 18px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 0 0.4em 0.4em;
+  background: white;
+  border: 1px solid #AAAAAA;
+  -webkit-appearance: none; }
+.wp-travel-dashboard-form input[type="checkbox"] {
+  border-radius: 2px;
+  position: relative; }
+.wp-travel-dashboard-form input[type="checkbox"]:not(:disabled):hover {
+  border: 1px solid #3ac5c9; }
+.wp-travel-dashboard-form input[type="radio"]:active:not(:disabled),
+.wp-travel-dashboard-form input[type="checkbox"]:active:not(:disabled) {
+  border: 1px solid #3ac5c9; }
+.wp-travel-dashboard-form input[type="checkbox"]:checked {
+  border: 1px solid #3ac5c9; }
+.wp-travel-dashboard-form input[type="checkbox"]:checked:not(:disabled) {
+  background: #3ac5c9; }
+.wp-travel-dashboard-form input[type="checkbox"]:checked:before {
+  font-weight: bold;
+  color: white;
+  content: '\2713';
+  margin-right: 0px;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 4px; }
+
+.login-logo {
+  background: rgba(208, 208, 208, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 25px;
+  box-sizing: border-box;
+  width: 142px;
+  transition: 0.5s cubic-bezier(1, 0, 0, 1); }
+  @media (max-width: 767.99px) {
+    .login-logo {
+      width: 100%; }
+      .login-logo img {
+        margin-bottom: 0 !important; } }
+
+.login-page {
+  margin: auto;
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.3s ease;
+  min-width: 290px;
+  max-width: 492px;
+  border: 1px solid #ddd; }
+  @media (max-width: 767.99px) {
+    .login-page {
+      flex-direction: column; } }
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: rgba(210, 210, 210, 0.7);
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+  width: 100%; }
+  .form input[type="text"],
+  .form input[type="email"],
+  .form input[type="password"] {
+    outline: 0;
+    background: #fff;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 5px 50px 5px 15px !important;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px; }
+  .form h3 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #333; }
+  .form button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #df1814;
+    border: 0;
+    padding: 10px 30px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 3px;
+    border-radius: 0; }
+    .form button:hover, .form button:focus, .form button:active {
+      background: #f83531; }
+  .form .message {
+    margin: 40px 0 0;
+    color: #464646;
+    font-size: 12px; }
+    .form .message a {
+      color: #4CAF50;
+      text-decoration: none; }
+  .form .register-form,
+  .form .forgot-form {
+    display: none; }
+  .form .login-form span.user-username,
+  .form .login-form span.user-password,
+  .form .login-form .user-name,
+  .form .login-form .user-email,
+  .form .login-form .user-password-key,
+  .form .register-form span.user-username,
+  .form .register-form span.user-password,
+  .form .register-form .user-name,
+  .form .register-form .user-email,
+  .form .register-form .user-password-key,
+  .form .forgot-form span.user-username,
+  .form .forgot-form span.user-password,
+  .form .forgot-form .user-name,
+  .form .forgot-form .user-email,
+  .form .forgot-form .user-password-key,
+  .form .wp-travel-ResetPassword span.user-username,
+  .form .wp-travel-ResetPassword span.user-password,
+  .form .wp-travel-ResetPassword .user-name,
+  .form .wp-travel-ResetPassword .user-email,
+  .form .wp-travel-ResetPassword .user-password-key {
+    position: relative;
+    display: block; }
+    .form .login-form span.user-username:before,
+    .form .login-form span.user-password:before,
+    .form .login-form .user-name:before,
+    .form .login-form .user-email:before,
+    .form .login-form .user-password-key:before,
+    .form .register-form span.user-username:before,
+    .form .register-form span.user-password:before,
+    .form .register-form .user-name:before,
+    .form .register-form .user-email:before,
+    .form .register-form .user-password-key:before,
+    .form .forgot-form span.user-username:before,
+    .form .forgot-form span.user-password:before,
+    .form .forgot-form .user-name:before,
+    .form .forgot-form .user-email:before,
+    .form .forgot-form .user-password-key:before,
+    .form .wp-travel-ResetPassword span.user-username:before,
+    .form .wp-travel-ResetPassword span.user-password:before,
+    .form .wp-travel-ResetPassword .user-name:before,
+    .form .wp-travel-ResetPassword .user-email:before,
+    .form .wp-travel-ResetPassword .user-password-key:before {
+      font-family: fontawesome;
+      right: 1px;
+      top: 1px;
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      line-height: 40px;
+      background-color: #fff;
+      border-left: 1px solid #ddd; }
+  .form .login-form .user-username:before,
+  .form .login-form .user-name:before,
+  .form .register-form .user-username:before,
+  .form .register-form .user-name:before,
+  .form .forgot-form .user-username:before,
+  .form .forgot-form .user-name:before,
+  .form .wp-travel-ResetPassword .user-username:before,
+  .form .wp-travel-ResetPassword .user-name:before {
+    content: '\f007'; }
+  .form .login-form .user-password:before,
+  .form .register-form .user-password:before,
+  .form .forgot-form .user-password:before,
+  .form .wp-travel-ResetPassword .user-password:before {
+    content: '\f023'; }
+  .form .login-form .user-email:before,
+  .form .register-form .user-email:before,
+  .form .forgot-form .user-email:before,
+  .form .wp-travel-ResetPassword .user-email:before {
+    content: '\f0e0'; }
+  .form .login-form .user-password-key:before,
+  .form .register-form .user-password-key:before,
+  .form .forgot-form .user-password-key:before,
+  .form .wp-travel-ResetPassword .user-password-key:before {
+    content: '\f084'; }
+
+.payment-status .paid,
+.payment-status .booked,
+.booking-status .paid,
+.booking-status .booked {
+  background-color: #008600;
+  color: #fff;
+  padding-right: 5px; }
+.payment-status .pending,
+.booking-status .pending {
+  background-color: #FF9800;
+  color: #fff;
+  padding-right: 5px; }
+.payment-status .cancled,
+.booking-status .cancled {
+  background-color: #FE450E;
+  color: #fff;
+  padding-right: 5px; }
+.payment-status .not-available,
+.booking-status .not-available {
+  background-color: #892E2C;
+  color: #fff;
+  padding-right: 5px; }
+
+.login-form .wrapper,
+.register-form .wrapper {
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0 20px;
+  text-align: right; }
+  .login-form .wrapper .info, .login-form .wrapper label,
+  .register-form .wrapper .info,
+  .register-form .wrapper label {
+    font-size: 12px; }
+
+.wp-travel-ResetPassword {
+  text-align: right; }
+  .wp-travel-ResetPassword .user-username,
+  .wp-travel-ResetPassword .user-password,
+  .wp-travel-ResetPassword .user-password-key {
+    text-align: center; }
+
+.dashboard-tab {
+  /*.dashboard-tab li:first-child{
+    border-top: none!important;
+  }*/ }
+  .dashboard-tab ul.resp-tabs-list {
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    background: #f8f7ee;
+    -webkit-box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06);
+    box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06); }
+    .dashboard-tab ul.resp-tabs-list li {
+      text-align: center;
+      color: #848484;
+      padding: 30px 15px !important;
+      border-top: 1px solid #eae9de;
+      border-right: 1px solid #eae9de;
+      border-bottom: none; }
+      .dashboard-tab ul.resp-tabs-list li:hover {
+        color: #29324e; }
+      .dashboard-tab ul.resp-tabs-list li.resp-tab-active {
+        -webkit-box-shadow: inset -2px 0px 0 #f05451;
+        box-shadow: inset -2px 0px 0 #f05451;
+        color: #29324e;
+        border: none;
+        border-top: 1px solid #eee; }
+      .dashboard-tab ul.resp-tabs-list li i {
+        display: block; }
+      .dashboard-tab ul.resp-tabs-list li:last-of-type {
+        border-bottom: 1px solid #eae9de; }
+  .dashboard-tab .resp-tabs-container {
+    width: calc( 100% - 100px );
+    border-radius: 0;
+    border: none;
+    min-height: 485px;
+    padding: 30px;
+    border: 1px solid #eae9de; }
+    @media (max-width: 767.99px) {
+      .dashboard-tab .resp-tabs-container {
+        padding: 0;
+        min-height: auto;
+        width: 100%; }
+        .dashboard-tab .resp-tabs-container .resp-tab-content {
+          border: none; } }
+    .dashboard-tab .resp-tabs-container .resp-tab-content {
+      padding: 0; }
+  .dashboard-tab select, .dashboard-tab input.form-control {
+    width: 100%; }
+  .dashboard-tab .title {
+    margin: 0 0 20px 0; }
+    .dashboard-tab .title h4 {
+      margin-top: 0; }
+  .dashboard-tab .form-horizontal {
+    margin: 0 0 15px 0; }
+  .dashboard-tab .payment-content input[type="submit"],
+  .dashboard-tab .account-setting input[type="submit"] {
+    float: left;
+    border-radius: 3px; }
+  .dashboard-tab .log-out input[type="button"] {
+    margin-top: 20px;
+    border-radius: 3px; }
+  .dashboard-tab .go-back input[type=button] {
+    margin: 20px 0 0 0; }
+  .dashboard-tab .control-label {
+    padding-right: 0; }
+  .dashboard-tab .go-back {
+    display: inline-block; }
+  @media (max-width: 767.99px) {
+    .dashboard-tab .col-sm-8 {
+      padding: 0; } }
+  .dashboard-tab .payment-content span {
+    float: left; }
+  .dashboard-tab input.form-control {
+    -webkit-appearance: button !important;
+    padding: 5px;
+    border-radius: 0; }
+  .dashboard-tab table.order-list-table th,
+  .dashboard-tab table.order-list-table td {
+    border: 0px; }
+  .dashboard-tab .order-list-table ins {
+    background-color: transparent; }
+  .dashboard-tab .tbody-content:nth-of-type(even) td,
+  .dashboard-tab .tbody-content:nth-of-type(even) th {
+    background-color: #f5f5f5; }
+  .dashboard-tab td.product-thumbnail {
+    width: 110px; }
+  .dashboard-tab .order-list-table thead {
+    border-bottom: 2px solid #dcdcdc; }
+  .dashboard-tab .product-thumbnail img {
+    margin-bottom: 0 !important; }
+  .dashboard-tab .order-list-table tbody td,
+  .dashboard-tab .order-list-table tbody th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+  .dashboard-tab .order-list-table td {
+    padding: 10px 5px !important; }
+  .dashboard-tab .log-out span {
+    display: block; }
+  .dashboard-tab .book-more a {
+    display: block; }
+  @media (max-width: 767.99px) {
+    .dashboard-tab .resp-accordion .fa {
+      margin-left: 10px; }
+    .dashboard-tab .list-item {
+      width: 100% !important; }
+    .dashboard-tab .order-list-table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px; }
+    .dashboard-tab .order-list-table tr {
+      border-bottom: 3px solid #ddd;
+      /*display: block;*/
+      margin-bottom: .625em; }
+    .dashboard-tab .order-list-table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: left; }
+    .dashboard-tab .order-list-table td:before {
+      content: attr(data-title);
+      float: right;
+      font-weight: bold;
+      text-transform: uppercase; }
+    .dashboard-tab .order-list-table td:last-child {
+      border-bottom: 0; }
+    .dashboard-tab .item-image-wrap {
+      display: none; }
+    .dashboard-tab .order-item-title {
+      width: 100% !important;
+      text-align: right; }
+    .dashboard-tab .name-title h4 {
+      margin: 0;
+      display: inline-block; }
+    .dashboard-tab .dashboard-tab .resp-tabs-container {
+      width: 100%; }
+    .dashboard-tab .product-thumbnail {
+      border: 0 !important; } }
+  .dashboard-tab .lists {
+    margin: 0 0 0 -20px; }
+  .dashboard-tab .list-item {
+    display: inline-block;
+    width: 50%;
+    float: right; }
+    .dashboard-tab .list-item:nth-of-type(2n +1) {
+      clear: right; }
+    .dashboard-tab .list-item .item {
+      margin: 0 0 40px 20px;
+      border: 1px solid #d6d6d6;
+      padding: 15px 15px 30px;
+      border-radius: 4px; }
+      .dashboard-tab .list-item .item strong {
+        display: block; }
+      .dashboard-tab .list-item .item .box-content p {
+        margin: 0; }
+      .dashboard-tab .list-item .item .box-content ul {
+        margin: 0 0 0 0;
+        padding: 0;
+        list-style: none; }
+        .dashboard-tab .list-item .item .box-content ul li {
+          position: relative;
+          padding-right: 20px; }
+          .dashboard-tab .list-item .item .box-content ul li:before {
+            font-family: fontawesome;
+            content: '\f178';
+            padding-left: 5px;
+            position: absolute;
+            right: 0;
+            top: 4px; }
+  .dashboard-tab .password-opt {
+    margin-bottom: 10px; }
+  .dashboard-tab .box-actions a.action {
+    color: #848484;
+    font-weight: bold;
+    font-size: 11px;
+    margin-left: 15px; }
+    .dashboard-tab .box-actions a.action:hover {
+      color: #f05451; }
+  .dashboard-tab .single-page-article {
+    border: 1px solid #eee; }
+  .dashboard-tab .form-horizontal label.required:after {
+    content: "*";
+    color: #f05451; }
+  .dashboard-tab .form-horizontal p {
+    margin-top: 5px; }
+    .dashboard-tab .form-horizontal p strong {
+      color: #f05451; }
+  .dashboard-tab .box-content a {
+    color: #29324e; }
+    .dashboard-tab .box-content a:hover {
+      color: #e34; }
+  .dashboard-tab input {
+    outline: none; }
+  .dashboard-tab input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 0 0.4em 0.4em;
+    background: white;
+    border: 1px solid #AAAAAA;
+    -webkit-appearance: none; }
+  .dashboard-tab input[type="checkbox"] {
+    border-radius: 2px;
+    position: relative; }
+  .dashboard-tab input[type="checkbox"]:not(:disabled):hover {
+    border: 1px solid #3ac5c9; }
+  .dashboard-tab input[type="radio"]:active:not(:disabled),
+  .dashboard-tab input[type="checkbox"]:active:not(:disabled) {
+    border: 1px solid #3ac5c9; }
+  .dashboard-tab input[type="checkbox"]:checked {
+    border: 1px solid #3ac5c9; }
+  .dashboard-tab input[type="checkbox"]:checked:not(:disabled) {
+    background: #3ac5c9; }
+  .dashboard-tab input[type="checkbox"]:checked:before {
+    font-weight: bold;
+    color: white;
+    content: '\2713';
+    margin-right: 0px;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 4px; }
+  .dashboard-tab .my-order ul li {
+    list-style: none;
+    float: right;
+    margin-left: 20px; }
+  .dashboard-tab .box-actions {
+    float: left; }
+  .dashboard-tab .resp-arrow {
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 5px solid #000; }
+  .dashboard-tab h2.resp-tab-active span.resp-arrow {
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 5px solid #000;
+    border-bottom: none; }
+  .dashboard-tab .order-item-title {
+    width: 50%;
+    float: right;
+    padding-right: 10px; }
+  .dashboard-tab .item-image-wrap {
+    float: right;
+    width: 50%; }
+  .dashboard-tab .resp-tab-content h3 {
+    display: inline-block;
+    margin: 0 0 20px 0; }
+
+.onoffswitch {
+  position: relative;
+  width: 56px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; }
+
+.onoffswitch-checkbox {
+  display: none; }
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  border-radius: 20px; }
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-right: -100%;
+  transition: margin 0.3s ease-in 0s; }
+  .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: right;
+    width: 50%;
+    height: 22px;
+    padding: 0;
+    line-height: 22px;
+    font-size: 12px;
+    color: black;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box; }
+  .onoffswitch-inner:before {
+    content: "ON";
+    padding-right: 6px;
+    background-color: #3AC5C9;
+    color: #FFFFFF; }
+  .onoffswitch-inner:after {
+    content: "OFF";
+    padding-left: 6px;
+    background-color: #E85764;
+    color: #FFFFFF;
+    text-align: left; }
+
+.onoffswitch-switch {
+  display: block;
+  width: 12px;
+  margin: 5px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  border: 2px solid #FFFFFF;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-right: 0; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  left: 0px; }

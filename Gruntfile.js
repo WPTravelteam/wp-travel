@@ -191,8 +191,6 @@ module.exports = function(grunt) {
                     'assets/css/wp-travel-back-end.css': 'assets/css/sass/wp-travel-back-end.scss',
                     'assets/css/wp-travel-front-end.css': 'assets/css/sass/wp-travel-front-end.scss',
                     'assets/css/wp-travel-tabs.css': 'assets/css/sass/wp-travel-tabs.scss',
-                    'assets/css/wp-travel-rtl-front-end.css': 'assets/css/sass/wp-travel-rtl-front-end.scss',
-                    'assets/css/wp-travel-rtl-back-end.css': 'assets/css/sass/wp-travel-rtl-back-end.scss',
                 }
             }
         },
@@ -204,9 +202,11 @@ module.exports = function(grunt) {
                     'assets/css/wp-travel-back-end.min.css': ['assets/css/wp-travel-back-end.css'],
                     'assets/css/wp-travel-front-end.min.css': ['assets/css/wp-travel-front-end.css'],
                     'assets/css/wp-travel-tabs.min.css': ['assets/css/wp-travel-tabs.css'],
-                    'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
-                    'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],
                     'assets/css/wp-travel-user-styles.min.css': ['assets/css/wp-travel-user-styles.css'],
+                    'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],
+                    'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
+                    'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
+                    'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
                 }
             }
         },
@@ -241,7 +241,29 @@ module.exports = function(grunt) {
 
         zip: {
             'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
-        }
+        },
+
+        rtlcss: {
+            myTask:{
+              // task options
+              options: {
+                // generate source maps
+                map: {inline: false},
+                // rtlcss options
+                opts: {
+                  clean:false
+                },
+                // rtlcss plugins
+                plugins:[],
+                // save unmodified files
+                saveUnmodified: true,
+              },
+              expand : true,
+              cwd    : 'assets/css',
+              dest   : 'assets/css/rtl/',
+              src    : ['assets/css/*.css']
+            }
+          }
 
     });
 
@@ -260,6 +282,8 @@ module.exports = function(grunt) {
 
     // Load in `grunt-zip`
     grunt.loadNpmTasks('grunt-zip');
+
+    grunt.loadNpmTasks('grunt-rtlcss');
 
     // Register tasks.
     grunt.registerTask('default', []);
@@ -284,6 +308,10 @@ module.exports = function(grunt) {
     grunt.registerTask('minify', [
         'uglify',
         'cssmin',
+    ]);
+
+    grunt.registerTask('rtlcss', [
+        'rtlcss',
     ]);
 
     grunt.registerTask('deploy', [

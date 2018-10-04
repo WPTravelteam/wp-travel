@@ -371,6 +371,15 @@ class WP_Travel_Admin_Settings {
 		$enquiry_admin_email_settings = isset( $args['settings']['enquiry_admin_template_settings'] ) ? $args['settings']['enquiry_admin_template_settings'] : $enquiry_admin_email_defaults;
 
 		?>
+		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Want to get more e-mail customization options ?', 'wp-travel' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+				</div>
+			</div>
+		<?php endif; ?>
 
 		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
@@ -709,7 +718,18 @@ class WP_Travel_Admin_Settings {
 		}
 
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
-		
+		?>
+
+		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can get global custom tab addition options with customized content and sorting options !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+				</div>
+			</div>
+		<?php endif; ?>
+		<?php
 		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 && ! $custom_tab_enabled ) {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
 		?>
@@ -864,6 +884,12 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
+		<div class="wp-travel-upsell-message">
+			<div class="wp-travel-pro-feature-notice">
+				<h4><?php esc_html_e( 'Need more payment gateway options ?', 'wp-travel' ); ?></h4>
+				<p><?php printf( __( '%1$sCheck All Payment Gateways %2$s OR %3$sRequest a new one%4$s', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads">', '</a>', '<a target="_blank" href="http://wptravel.io/contact">', '</a>' ); ?></p>
+			</div>
+		</div>
 		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' )?></h3>
 		<table class="form-table">
 			<tr>

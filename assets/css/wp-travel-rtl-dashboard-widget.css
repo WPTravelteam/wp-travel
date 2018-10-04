@@ -1,0 +1,46 @@
+/**
+Dashboard Widget CSS
+**/
+
+.wp_travel_booking_dashboard_widget {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.wp_travel_booking_dashboard_widget th {
+  background-color: #efefef;
+  text-align: right;
+}
+
+.wp_travel_booking_dashboard_widget th,
+.wp_travel_booking_dashboard_widget td {
+  padding: 5px 15px 5px 0;
+}
+
+.wp_travel_booking_dashboard_widget tbody tr td {
+  font-size: 12px;
+}
+
+.wp_travel_booking_dashboard_widget tbody tr:nth-of-type(2n) td {
+  background-color: #efefef;
+}
+
+.wp_travel_booking_dashboard_widget tfoot tr {
+  text-align: left;
+}
+
+.wp_travel_booking_dashboard_widget tfoot tr td {
+  border-bottom: 1px solid #efefef;
+  border-top: 1px solid #efefef;
+  padding: 15px 15px 15px 0;
+}
+
+.wp_travel_booking_dashboard_widget tfoot tr a {
+  background-color: #287bc1;
+  color: #fff;
+  padding: 5px;
+}
+
+.wp_travel_booking_dashboard_widget tfoot tr a:hover {
+  opacity: 0.8;
+}

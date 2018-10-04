@@ -205,13 +205,13 @@ function docs_support_page_callback(){
 				<div class="about-header">
 	                <div class="about-text WP-Travel-about-text">
 		                <div class="left-side-section">
-		                	<strong>Welcome to WP Travel.</strong>
-		                		<p>Thanks for installing and we hope you will enjoy using WP Travel. </p>
-		                		<p>We strongly recommend you to install <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank">Travel Log</a> theme for best Front End experiences.</p>
+		                	<strong><?php esc_html_e( 'Welcome to WP Travel.', 'wp-travel' ); ?></strong>
+		                		<p><?php esc_html_e( 'Thanks for installing and we hope you will enjoy using WP Travel.', 'wp-travel' ); ?> </p>
+		                		<p><?php esc_html_e( 'We strongly recommend you to install', 'wp-travel' ); ?> <a class="link-simple" href="https://wordpress.org/themes/travel-log/" target="_blank"><?php esc_html_e( 'Travel Log', 'wp-travel' ) ?></a> <?php esc_html_e( 'theme for best Front End experiences.', 'wp-travel' ); ?></p>
 		                        <p class="WP-Travel-actions">
-		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=itineraries" target="_blank">Add New Trips For You Site</a>
-		                        <span>OR</span>
-		                        <a href="http://wptravel.io/demo" class="link-simple" target="_blank"> <strong>Visit Demo</strong></a>
+		                        <a class="button button-primary button-large" href="<?php echo home_url();?>/wp-admin/post-new.php?post_type=<?php echo WP_TRAVEL_POST_TYPE; ?>" target="_blank"><?php esc_html_e( 'Add New Trips For You Site', 'wp-travel' ); ?></a>
+		                        <span><?php esc_html_e( 'OR', 'wp-travel' ); ?></span>
+		                        <a href="http://wptravel.io/demo" class="link-simple" target="_blank"> <strong><?php esc_html_e( 'Visit Demo', 'wp-travel' ); ?></strong></a>
 		                    </p>
 	                    </div>
 	                    <div class="WP-Travel-badge">
@@ -219,16 +219,16 @@ function docs_support_page_callback(){
 							
 							</span>
 		                	<p>
-		                  		 Version: <?php echo WP_TRAVEL_VERSION ?>
+		        				<?php esc_html_e( 'Version:', 'wp-travel' ); ?> <?php echo WP_TRAVEL_VERSION ?>
 		                	</p>
 		                </div>
 	                </div>
 
 	                <div class="wrap-footer">
 	                    <table class="form-table">
-			                 <tbody>
-			                 <tr>
-			                    <th scope="row">Get add-ons and tips...</th>
+			                <tbody>
+			                	<tr>
+			                    	<th scope="row"><?php esc_html_e( 'Get add-ons and tips...', 'wp-travel' ); ?></th>
 				                    <td>
 				                        <form action="https://wensolutions.us13.list-manage.com/subscribe/post?u=5924e7bef96519e3827fa3024&amp;id=a40eebcccf" method="POST" class="validate" target="_blank" name="mc-embedded-subscribe-form">
 				                            <input class="regular-text ltr" type="email" name="EMAIL" id="mce-EMAIL" placeholder="Email address" required>
@@ -238,13 +238,13 @@ function docs_support_page_callback(){
 											<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_5924e7bef96519e3827fa3024_a40eebcccf" tabindex="-1" value=""></div>
 				                        </form>
 				                    </td>
-				                 </tr>
+				                </tr>
 				            </tbody>
 			            </table>
 			            <div class="WP-Travel-support">
-		                    Questions? Need Help?
+		                    <?php esc_html_e( 'Questions? Need Help?', 'wp-travel' ); ?>
 			                <div id="WP-Travel-contact-us" class="WP-Travel-contact-us">
-			                	<a class="thickbox-contact-us" href="http://wptravel.io/contact/" target="_blank">Contact Us</a>
+			                	<a class="thickbox-contact-us" href="http://wptravel.io/contact/" target="_blank"><?php esc_html_e( 'Contact Us', 'wp-travel' ); ?></a>
 			                </div>
 		                </div>
 			        </div>
@@ -252,77 +252,77 @@ function docs_support_page_callback(){
 
 				<div class="feature-section col two-col">
 		<div class="col">
-			<h3>Description</h3>
+			<h3><?php esc_html_e( 'Description', 'wp-travel' ); ?></h3>
 			<p class="wp-travel-summary">
-				WP Travel is an easy to use and awesome plugin that you can use with any travel site. With WP travel you can simply add the post type to display the packages and WP Travel comes with booking feature as well.  Beside this  plugin provides various kind of feature, setting which makes this plugin more attractive.
+				<?php esc_html_e( 'WP Travel is an easy to use and awesome plugin that you can use with any travel site. With WP travel you can simply add the post type to display the packages and WP Travel comes with booking feature as well.  Beside this  plugin provides various kind of feature, setting which makes this plugin more attractive.
 
-				The compatibility of the plugin is also one of the features. It can also be modified very easily through custom templates.
+				The compatibility of the plugin is also one of the features. It can also be modified very easily through custom templates.', 'wp-travel' ); ?>
 			</p>
-			<h3>Feature Overview</h3>
+			<h3><?php esc_html_e( 'Feature Overview', 'wp-travel' ); ?></h3>
 			<ul class="wp-travel-feature_list">
 				<li class="wp-travel-feature">
-					Get your travel site ready just on few clicks. With our user-friendly system &amp; complete documentation, you won't have any trouble while using the system.				</li>
+					<?php esc_html_e( 'Get your travel site ready just on few clicks. With our user-friendly system &amp; complete documentation, you wont have any trouble while using the system.', 'wp-travel' ); ?>				</li>
 				<li class="wp-travel-feature">
-					WP Travel includes in-build booking system for your travel site. Users can easily book itineraries from your site and you can track all bookings from the backend.				</li>
+					<?php esc_html_e( 'WP Travel includes in-build booking system for your travel site. Users can easily book itineraries from your site and you can track all bookings from the backend.', 'wp-travel' ); ?>				</li>
 				<li class="wp-travel-feature">
-					Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.				</li>
+					<?php esc_html_e( 'Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.', 'wp-travel' ); ?>				</li>
 				<li class="wp-travel-feature">
-					With our payment processing features, you can get partial or full payment for each booking. All that payment will be tracked in the backend and also you can view stat of payments.			</li>
+					<?php esc_html_e( 'With our payment processing features, you can get partial or full payment for each booking. All that payment will be tracked in the backend and also you can view stat of payments.', 'wp-travel' ); ?>			</li>
 				<li class="wp-travel-feature">
-					WP travel plugin is translation ready in order to fulfill customer's needs from all around the world. You can translate WP Travel to any language with the help of WPML Translation Plugin and for the translation of the string, you can use Loco Translate.			</li>
+					<?php esc_html_e( 'WP travel plugin is translation ready in order to fulfill customer needs from all around the world. You can translate WP Travel to any language with the help of WPML Translation Plugin and for the translation of the string, you can use Loco Translate.', 'wp-travel' ); ?>		</li>
 				<li class="wp-travel-feature">
-					<a href="http://wptravel.io/faq/"  class="link-simple" target="_blank">FAQs </a> provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.			</li>
+					<a href="http://wptravel.io/faq/"  class="link-simple" target="_blank"><?php esc_html_e( 'FAQs', 'wp-travel' ); ?></a><?php esc_html_e( ' provide the opportunity to group all those questions that customers ask over and over again related to trips. Also, the itinerary timeline is the new feature added to WP travel plugin which will display the timeline of the trips in tree-like structure.', 'wp-travel' ); ?></li>
 				<li class="wp-travel-feature">
-					Our team is dedicated to continuous development of the plugin. We will be continuously adding new features to the plugin.				</li>
+					<?php esc_html_e( 'Our team is dedicated to continuous development of the plugin. We will be continuously adding new features to the plugin.', 'wp-travel' ); ?>
+				</li>
 				<li class="wp-travel-feature">
-					If you found any issues in the plugin, you can directly <a href="http://wptravel.io/contact/" class="link-simple" target="_blank"> Contact Us</a> or add your issues or problems on <a href="http://wptravel.io/support-forum/" class="link-simple" target="_blank">Support Forum</a>.			</li>
+					<?php esc_html_e( 'If you found any issues in the plugin, you can directly', 'wp-travel' ); ?> <a href="http://wptravel.io/contact/" class="link-simple" target="_blank"> <?php esc_html_e( 'Contact Us', 'wp-travel' ); ?></a> <?php esc_html_e( 'or add your issues or problems on', 'wp-travel' ); ?> <a href="http://wptravel.io/support-forum/" class="link-simple" target="_blank"><?php esc_html_e( 'Support Forum', 'wp-travel' ); ?></a>.</li>
 			</ul>
 		</div>
 
 		<div class="col last-feature">
 			<div class="es-form-setup">
-				<h3>Add Trip</h3>
+				<h3><?php esc_html_e( 'Add Trip', 'wp-travel' ); ?></h3>
 				<p class="wp-travel-faq">
-					<a href="http://wptravel.io/documentations/user-documentation/how-to-create-your-very-first-trip/" target="_blank">How to Add Trip to the website?</a>				</p>
+					<a href="http://wptravel.io/documentations/user-documentation/how-to-create-your-very-first-trip/" target="_blank"><?php esc_html_e( 'How to Add Trip to the website?', 'wp-travel' ); ?></a>				</p>
 				<p>
-					After the activation of the required plugin, you will find the Trips menu on the dashboard.
+					<?php esc_html_e( 'After the activation of the required plugin, you will find the Trips menu on the dashboard.
 					Now  to create the trip of your choice go to Admin Panel > Trips > Add New and begin entering the required content as per your wish.
-					Furthermore, to help you and make you clear we have explained each and every field below in the Overview section.
+					Furthermore, to help you and make you clear we have explained each and every field below in the Overview section.', 'wp-travel' ); ?>
 				</p>
-				<h2> Additional Trip settings</h2>
+				<h2> <?php esc_html_e( 'Additional Trip settings', 'wp-travel' ); ?></h2>
 				<ul class="wp-travel-faq_list">
 					<li class="wp-travel-faq">
-						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-globally-set-the-tabs-format/" target="_blank">How to Globally Set the Tabs Format Shown on Single Trip Page?</a>
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-globally-set-the-tabs-format/" target="_blank"><?php esc_html_e( 'How to Globally Set the Tabs Format Shown on Single Trip Page?', 'wp-travel' ); ?></a>
 					</li>
 					<li class="wp-travel-faq">
-						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-arrange-and-change-tabs-in-single-trip/" target="_blank">How to change the label of tabs shown on Single Trip Page?</a>
+						<a href="http://wptravel.io/documentations/user-documentation/how-to/how-to-arrange-and-change-tabs-in-single-trip/" target="_blank"><?php esc_html_e( 'How to change the label of tabs shown on Single Trip Page?', 'wp-travel' ); ?></a>
 					</li>
 					<li class="wp-travel-faq">
-						See all the Frequently Asked Question Solution For WP Travel Plugin
-						<a href="http://wptravel.io/faq/" target="_blank">Frequently Asked Question</a>
+						<?php esc_html_e( 'See all the Frequently Asked Question Solution For WP Travel Plugin', 'wp-travel' ); ?>
+						<a href="http://wptravel.io/faq/" target="_blank"><?php esc_html_e( 'Frequently Asked Question', 'wp-travel' ); ?></a>
 					</li>
 					<li class="wp-travel-faq">
-					You can find your solution about the problem of WP Travel from our <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support Page</a> or you can create a <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank">Support</a> for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore
-						<a href="http://wptravel.io/support-forum/" target="_blank">Support Forum</a>.
+					<?php esc_html_e( 'You can find your solution about the problem of WP Travel from our', 'wp-travel' ); ?> <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank"><?php esc_html_e( 'Support Page', 'wp-travel' ); ?></a> <?php esc_html_e( 'or you can create a', 'wp-travel' ); ?> <a href="http://wptravel.io/support-forum/forum/wp-travel/" class="link-simple" target="_blank"><?php esc_html_e( 'Support', 'wp-travel' ); ?></a> <?php esc_html_e( 'for free. Feel free to ask a question about the problem, this will eventually help the growth of the plugin furthermore', 'wp-travel' ); ?>
+						<a href="http://wptravel.io/support-forum/" target="_blank"><?php esc_html_e( 'Support Forum', 'wp-travel' ); ?></a>.
 					</li>
 				</ul>
 			</div>
 			<br>
 			<div class="es-setting">
-				<h2>General Plugin Configuration</h2>
+				<h2><?php esc_html_e( 'General Plugin Configuration', 'wp-travel' ); ?></h2>
 				<ul class="wp-travel-faq_list">
 					<li class="wp-travel-faq">
-						 <a href="http://wptravel.io/documentations/user-documentation/" target="_blank">
-						 	See User Documentation to know the plugin and how it works
-						 </a>
+						<a href="http://wptravel.io/documentations/user-documentation/" target="_blank">
+							<?php esc_html_e( 'See User Documentation to know the plugin and how it works', 'wp-travel' ); ?>
+						</a>
 
 						</li>
 
 						<li class="wp-travel-faq">
-						 <a href="http://wptravel.io/documentations/developer-documentation/" target="_blank">
-						 	See Developer Documentation to know the plugin in depth.
-						 </a>
-
+							<a href="http://wptravel.io/documentations/developer-documentation/" target="_blank">
+								<?php esc_html_e( 'See Developer Documentation to know the plugin in depth.', 'wp-travel' ); ?>
+							</a>
 						</li>
 				</ul>
 			</div>
@@ -1004,6 +1004,15 @@ function wp_travel_extras_pro_option_fields() {
 				<option value="unit"><?php esc_html_e( 'Unit', 'wp-travel' ); ?></option>
 				<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
 			</select>
+		</td>
+	</tr>
+	<tr class="wp-travel-upsell-message">
+		<td colspan="2">
+			<div class="wp-travel-pro-feature-notice">
+				<h4><?php esc_html_e( 'Want to use above pro features?', 'wp-travel' ); ?></h4>
+				<p><?php esc_html_e( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ); ?></p>
+				<a target="_blank" href="https://themepalace.com/downloads/wp-travel-tour-extras/"><?php esc_html_e( 'Get Tour Extras Addon', 'wp-travel' ); ?></a>
+			</div>
 		</td>
 	</tr>
 	

@@ -21,8 +21,6 @@ class WP_Travel_Ajax {
 		add_action( 'wp_ajax_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
 
-		add_action( 'wp_ajax_wp_travel_upload_csv', array( $this, 'wp_travel_upload_csv' ) );
-
 		//Check Coupon Code
 		add_action( 'wp_ajax_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
@@ -225,12 +223,6 @@ class WP_Travel_Ajax {
 		
 		$wt_cart->remove( $_POST['cart_id'] );
 		return true;
-	}
-
-	function wp_travel_upload_csv() {
-
-		print_r( $_FILES ); die;
-
 	}
 
 
