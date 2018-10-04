@@ -374,7 +374,7 @@ class WP_Travel_Admin_Settings {
 		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
-					<h4><?php esc_html_e( 'Want to get more e-mail customization options ?' ); ?></h4>
+					<h4><?php esc_html_e( 'Want to get more e-mail customization options ?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ); ?></p>
 					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
@@ -723,7 +723,7 @@ class WP_Travel_Admin_Settings {
 		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
-					<h4><?php esc_html_e( 'Need Additional Tabs ?' ); ?></h4>
+					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can get global custom tab addition options with customized content and sorting options !', 'wp-travel' ); ?></p>
 					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
@@ -886,7 +886,7 @@ class WP_Travel_Admin_Settings {
 		</table>
 		<div class="wp-travel-upsell-message">
 			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Need more payment gateway options ?' ); ?></h4>
+				<h4><?php esc_html_e( 'Need more payment gateway options ?', 'wp-travel' ); ?></h4>
 				<p><?php printf( __( '%1$sCheck All Payment Gateways %2$s OR %3$sRequest a new one%4$s', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads">', '</a>', '<a target="_blank" href="http://wptravel.io/contact">', '</a>' ); ?></p>
 			</div>
 		</div>

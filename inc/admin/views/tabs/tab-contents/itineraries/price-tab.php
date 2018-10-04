@@ -748,7 +748,7 @@ if ( ! $price_per ) {
 <?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 	<div class="wp-travel-upsell-message">
 		<div class="wp-travel-pro-feature-notice">
-			<h4><?php esc_html_e( 'Need More Options ?' ); ?></h4>
+			<h4><?php esc_html_e( 'Need More Options ?', 'wp-travel' ); ?></h4>
 			<p><?php esc_html_e( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ); ?></p>
 			<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
 		</div>
