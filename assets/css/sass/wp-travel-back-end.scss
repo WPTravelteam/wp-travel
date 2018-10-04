@@ -1803,4 +1803,18 @@ span.wp-travel-message {
 .wp-travel-pro-mockup-option {
     opacity: 0.6;
     pointer-events: none;
+    &:last-of-type {
+        opacity: 1;
+        pointer-events: all;
+    }
+    .wp-travel-pro-feature-notice {
+        background-color: #409cd1;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        a {
+            color: #fff;
+            font-weight: 600;
+        }
+    }
 }

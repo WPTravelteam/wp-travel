@@ -1838,5 +1838,19 @@ span.wp-travel-message {
   opacity: 0.6;
   pointer-events: none;
 }
+.wp-travel-pro-mockup-option:last-of-type {
+  opacity: 1;
+  pointer-events: all;
+}
+.wp-travel-pro-mockup-option .wp-travel-pro-feature-notice {
+  background-color: #409cd1;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+}
+.wp-travel-pro-mockup-option .wp-travel-pro-feature-notice a {
+  color: #fff;
+  font-weight: 600;
+}
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */
