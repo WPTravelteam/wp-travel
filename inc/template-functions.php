@@ -1972,7 +1972,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										$pricing_sold_out = $available_pax === 0 || $available_pax < $pricing_min_pax ? true : false;
 
 										if ( empty( $pricing_max_pax ) ) {
-											$pricing_max_pax = $inventory->get_pax_limit( $trip_id );
+											$pricing_max_pax = $inventory->get_available_pax( $trip_id, $price_key );
 											$max_attr = 'max=' . $pricing_max_pax;
 										}
 									}
@@ -2231,7 +2231,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									$pricing_sold_out = $available_pax === 0 || $available_pax < $min_pax ? true : false;
 
 									if ( ! $max_pax ) {
-										$max_pax = $inventory->get_pax_limit( $trip_id );
+										$max_pax = $inventory->get_available_pax( $trip_id, $price_key );
 										$max_attr = 'max=' . $max_pax;
 									}
 								}
