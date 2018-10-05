@@ -1971,10 +1971,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										$inventory_enabled = true;
 										$pricing_sold_out = $available_pax === 0 || $available_pax < $pricing_min_pax ? true : false;
 
-										if ( empty( $pricing_max_pax ) ) {
+										// if ( empty( $pricing_max_pax ) ) {
 											$pricing_max_pax = $inventory->get_available_pax( $trip_id, $price_key );
 											$max_attr = 'max=' . $pricing_max_pax;
-										}
+										// }
 									}
 
 									
