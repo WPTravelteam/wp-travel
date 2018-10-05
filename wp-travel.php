@@ -7,7 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
- * PHP Version: 5.5 or higher
+ * Requires PHP: 5.5 or higher
  * Tested up to: 4.9.8
  *
  * Text Domain: wp-travel
