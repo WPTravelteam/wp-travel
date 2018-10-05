@@ -376,7 +376,7 @@ class WP_Travel_Admin_Settings {
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Want to get more e-mail customization options ?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -725,7 +725,7 @@ class WP_Travel_Admin_Settings {
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can get global custom tab addition options with customized content and sorting options !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
 		<?php endif; ?>

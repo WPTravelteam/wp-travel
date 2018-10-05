@@ -750,7 +750,7 @@ if ( ! $price_per ) {
 		<div class="wp-travel-pro-feature-notice">
 			<h4><?php esc_html_e( 'Need More Options ?', 'wp-travel' ); ?></h4>
 			<p><?php esc_html_e( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ); ?></p>
-			<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+			<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 		</div>
 	</div>
 <?php endif; ?>

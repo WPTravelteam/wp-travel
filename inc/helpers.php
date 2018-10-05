@@ -1450,7 +1450,7 @@ function wp_travel_is_trip_price_tax_enabled(){
 }
 
 /**
- * Wp Tarvel Process Trip Price Tax.
+ * Wp Travel Process Trip Price Tax.
  * @param int $post_id post id.
  * @return mixed $trip_price | $tax_details.
  */
@@ -1506,7 +1506,7 @@ function wp_travel_process_trip_price_tax( $post_id ){
 }
 
 /**
- * Wp Tarvel Process Trip Price Tax.
+ * Wp Travel Process Trip Price Tax.
  * @param int $post_id post id.
  * @return mixed $trip_price | $tax_details.
  */

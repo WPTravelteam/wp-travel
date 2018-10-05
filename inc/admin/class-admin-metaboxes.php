@@ -446,7 +446,7 @@ class WP_Travel_Admin_Metaboxes {
 					<div class="wp-travel-pro-feature-notice">
 						<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
 						<p><?php esc_html_e( 'By upgrading to Pro, you can trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ); ?></p>
-						<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+						<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -543,7 +543,7 @@ class WP_Travel_Admin_Metaboxes {
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Tired of updating repitative FAQs ?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Tarvel Utilities Addon', 'wp-travel' ); ?></a>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -686,6 +686,15 @@ class WP_Travel_Admin_Metaboxes {
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
+		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Need Custom Trip Code ?', 'wp-travel' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
+				</div>
+			</div>
+		<?php endif; ?>
 		<?php
 	}
 
