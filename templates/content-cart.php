@@ -92,14 +92,14 @@ wp_travel_print_notices();
 						$inventory  = new WP_Travel_Util_Inventory();
 						$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
 					}
-					// $data_max_pax = $max_available;
-					// $max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
+					$data_max_pax = $max_available;
+					$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
 					
 					$min_available  = isset( $trip['min_available'] ) ? $trip['min_available'] : '1';
 					$max_attr = '';
 					$min_attr = 'min="1"';
 					if ( $max_available ) {
-						$max_attr = 'max="' . $max_available . '" data-max="' . $max_available . '"';
+						$max_attr = 'max="' . $max_available . '" data-max="' . $data_max_pax . '"';
 					}
 					/**
 					 * Customization Ends.
