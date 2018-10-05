@@ -2240,7 +2240,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 							}
 
 						$unavailable_class = '';
-						if ( strtotime( $start_date . ' 23:59:59' ) < time() )
+						if ( strtotime( $start_date . ' 23:59:59' ) < time() || $pricing_sold_out )
 							$unavailable_class = 'pricing_unavailable';
 					
 					?>
