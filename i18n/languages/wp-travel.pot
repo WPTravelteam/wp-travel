@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.6.2\n"
+"Project-Id-Version: WP Travel 1.6.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-05 05:00:02+00:00\n"
+"POT-Creation-Date: 2018-10-05 11:22:29+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -587,10 +587,11 @@ msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:449
 #: inc/admin/class-admin-metaboxes.php:546
+#: inc/admin/class-admin-metaboxes.php:694
 #: inc/admin/class-admin-settings.php:379
 #: inc/admin/class-admin-settings.php:728
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:753
-msgid "Get WP Tarvel Utilities Addon"
+msgid "Get WP Travel Utilities Addon"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:456
@@ -674,6 +675,16 @@ msgstr ""
 #: inc/gateways/class-wt-gateway-paypal-request.php:173
 #: inc/template-functions.php:473
 msgid "Trip Code"
+msgstr ""
+
+#: inc/admin/class-admin-metaboxes.php:692
+msgid "Need Custom Trip Code ?"
+msgstr ""
+
+#: inc/admin/class-admin-metaboxes.php:693
+msgid ""
+"By upgrading to Pro, you can get Trip Code Customization and removal "
+"features and more !"
 msgstr ""
 
 #: inc/admin/class-admin-permalink-settings.php:45
@@ -1849,7 +1860,7 @@ msgid "Trip"
 msgstr ""
 
 #: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:166
-#: templates/content-cart.php:58 templates/content-cart.php:250
+#: templates/content-cart.php:58 templates/content-cart.php:251
 msgid "Total"
 msgstr ""
 
@@ -1865,11 +1876,11 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:141 templates/content-cart.php:236
+#: inc/cart/cart-mini.php:141 templates/content-cart.php:237
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:143 templates/content-cart.php:238
+#: inc/cart/cart-mini.php:143 templates/content-cart.php:239
 msgid "%"
 msgstr ""
 
@@ -3459,7 +3470,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:66
-#: templates/content-cart.php:260
+#: templates/content-cart.php:261
 msgid "Coupon Code"
 msgstr ""
 
@@ -4543,35 +4554,35 @@ msgstr ""
 msgid "Tour"
 msgstr ""
 
-#: templates/content-cart.php:137
+#: templates/content-cart.php:138
 msgid "Remove this tour"
 msgstr ""
 
-#: templates/content-cart.php:149
+#: templates/content-cart.php:150
 msgid " (%s)"
 msgstr ""
 
-#: templates/content-cart.php:157
+#: templates/content-cart.php:158
 msgid "Booking Date:"
 msgstr ""
 
-#: templates/content-cart.php:222
+#: templates/content-cart.php:223
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:235
+#: templates/content-cart.php:236
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:261
+#: templates/content-cart.php:262
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:267
+#: templates/content-cart.php:268
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:268
+#: templates/content-cart.php:269
 msgid "Proceed to checkout"
 msgstr ""
 
