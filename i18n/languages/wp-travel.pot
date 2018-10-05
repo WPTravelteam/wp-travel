@@ -5,9 +5,16 @@ msgstr ""
 "Project-Id-Version: WP Travel 1.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2018-10-04 11:45:23+00:00\n"
 =======
 "POT-Creation-Date: 2018-09-27 12:05:27+00:00\n"
+>>>>>>> master
+=======
+"POT-Creation-Date: 2018-09-27 12:05:27+00:00\n"
+=======
+"POT-Creation-Date: 2018-10-04 11:45:23+00:00\n"
+>>>>>>> dev
 >>>>>>> master
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -606,8 +613,13 @@ msgid "Uncheck above checkbox to add custom tab settings for this trip."
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:477
 #: inc/admin/class-admin-settings.php:737
+=======
+#: inc/admin/class-admin-metaboxes.php:468
+#: inc/admin/class-admin-settings.php:717
+>>>>>>> master
 msgid "Sorting"
 msgstr ""
 
@@ -621,11 +633,19 @@ msgstr ""
 msgid "Custom Trip Title"
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:480
 #: inc/admin/class-admin-settings.php:740
 =======
 #: inc/admin/class-admin-metaboxes.php:468
 #: inc/admin/class-admin-settings.php:717
+=======
+#: inc/admin/class-admin-metaboxes.php:471
+#: inc/admin/class-admin-settings.php:720
+=======
+#: inc/admin/class-admin-metaboxes.php:477
+#: inc/admin/class-admin-settings.php:737
+>>>>>>> master
 msgid "Sorting"
 msgstr ""
 
@@ -639,8 +659,14 @@ msgstr ""
 msgid "Custom Trip Title"
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:471
 #: inc/admin/class-admin-settings.php:720
+>>>>>>> master
+=======
+#: inc/admin/class-admin-metaboxes.php:480
+#: inc/admin/class-admin-settings.php:740
+>>>>>>> dev
 >>>>>>> master
 msgid "Display"
 msgstr ""
@@ -660,11 +686,20 @@ msgid "Click on add new question to add FAQ."
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:567
 #: inc/admin/class-admin-settings.php:385
 =======
 #: inc/admin/class-admin-metaboxes.php:549
 #: inc/admin/class-admin-settings.php:376
+>>>>>>> master
+=======
+#: inc/admin/class-admin-metaboxes.php:549
+#: inc/admin/class-admin-settings.php:376
+=======
+#: inc/admin/class-admin-metaboxes.php:567
+#: inc/admin/class-admin-settings.php:385
+>>>>>>> dev
 >>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:125
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:481
@@ -673,11 +708,20 @@ msgid "Open All"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:568
 #: inc/admin/class-admin-settings.php:386
 =======
 #: inc/admin/class-admin-metaboxes.php:550
 #: inc/admin/class-admin-settings.php:377
+>>>>>>> master
+=======
+#: inc/admin/class-admin-metaboxes.php:550
+#: inc/admin/class-admin-settings.php:377
+=======
+#: inc/admin/class-admin-metaboxes.php:568
+#: inc/admin/class-admin-settings.php:386
+>>>>>>> dev
 >>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:126
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:482
@@ -945,6 +989,7 @@ msgid "New Enquiry"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:377
 msgid "Want to get more e-mail customization options ?"
 msgstr ""
@@ -956,6 +1001,9 @@ msgid ""
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:396
+=======
+#: inc/admin/class-admin-settings.php:387
+>>>>>>> master
 msgid "Booking Email Templates"
 msgstr ""
 
@@ -1057,9 +1105,25 @@ msgstr ""
 msgid "Enable partial payment while booking."
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:854
 =======
 #: inc/admin/class-admin-settings.php:387
+=======
+#: inc/admin/class-admin-settings.php:834
+=======
+#: inc/admin/class-admin-settings.php:377
+msgid "Want to get more e-mail customization options ?"
+msgstr ""
+
+#: inc/admin/class-admin-settings.php:378
+msgid ""
+"By upgrading to Pro, you can get features like multiple email "
+"notifications, email footer powered by text removal options and more !"
+msgstr ""
+
+#: inc/admin/class-admin-settings.php:396
+>>>>>>> master
 msgid "Booking Email Templates"
 msgstr ""
 
@@ -1155,12 +1219,18 @@ msgstr ""
 msgid "Enable partial payment while booking."
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:834
+>>>>>>> master
+=======
+#: inc/admin/class-admin-settings.php:854
+>>>>>>> dev
 >>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:715
 msgid "Minimum Payout (%)"
 msgstr ""
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:858
 msgid "Minimum percent of amount to pay while booking."
@@ -1174,12 +1244,30 @@ msgstr ""
 
 #: inc/admin/class-admin-settings.php:843
 >>>>>>> master
+=======
+#: inc/admin/class-admin-settings.php:838
+msgid "Minimum percent of amount to pay while booking."
+msgstr ""
+
+#: inc/admin/class-admin-settings.php:843
+=======
+#: inc/admin/class-admin-settings.php:858
+msgid "Minimum percent of amount to pay while booking."
+msgstr ""
+
+#: inc/admin/class-admin-settings.php:863
+>>>>>>> dev
+>>>>>>> master
 #: inc/payments/wp-travel-payments.php:59
 msgid "Standard Paypal"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:866
+=======
+#: inc/admin/class-admin-settings.php:846
+>>>>>>> master
 msgid "Enable Paypal"
 msgstr ""
 
@@ -1279,9 +1367,15 @@ msgstr ""
 msgid " Automatically generate username from customer email."
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:1079
 =======
 #: inc/admin/class-admin-settings.php:846
+=======
+#: inc/admin/class-admin-settings.php:1053
+=======
+#: inc/admin/class-admin-settings.php:866
+>>>>>>> master
 msgid "Enable Paypal"
 msgstr ""
 
@@ -1373,7 +1467,12 @@ msgstr ""
 msgid " Automatically generate username from customer email."
 msgstr ""
 
+<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:1053
+>>>>>>> master
+=======
+#: inc/admin/class-admin-settings.php:1079
+>>>>>>> dev
 >>>>>>> master
 msgid " Automatically generate customer password"
 msgstr ""

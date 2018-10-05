@@ -108,10 +108,18 @@
   margin-left: 10px;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .wp-travel-trip-code span:first-of-type {
   float: right;
 }
+>>>>>>> master
+=======
+.wp-travel-trip-code span:first-of-type {
+  float: right;
+}
+=======
+>>>>>>> dev
 >>>>>>> master
 
 .wp-travel-gallery {
@@ -209,9 +217,16 @@
   border-left: 1px solid rgba(222, 222, 222, 0.49);
   font-size: 15px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   float: none;
 =======
   float: right;
+>>>>>>> master
+=======
+  float: right;
+=======
+  float: none;
+>>>>>>> dev
 >>>>>>> master
   margin: 0;
 }
@@ -479,9 +494,16 @@
 @media (max-width: 992px) {
   .wp-travel.trip-headline-wrapper .featured-side-image.left-plot {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     width: 100%;
     display: block;
@@ -673,10 +695,18 @@
   padding: 15px 0 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .wp-travel.trip-headline-wrapper .wp-travel-keywords .label {
   float: right;
 }
+>>>>>>> master
+=======
+.wp-travel.trip-headline-wrapper .wp-travel-keywords .label {
+  float: right;
+}
+=======
+>>>>>>> dev
 >>>>>>> master
 .wp-travel.trip-headline-wrapper .wp-travel-keyword {
   padding-right: 5px;
@@ -770,9 +800,16 @@
 }
 .wp-tab-review-inner-wrapper .description img {
 <<<<<<< HEAD
+<<<<<<< HEAD
   float: none;
 =======
   float: right;
+>>>>>>> master
+=======
+  float: right;
+=======
+  float: none;
+>>>>>>> dev
 >>>>>>> master
 }
 .wp-tab-review-inner-wrapper img {
@@ -822,9 +859,16 @@
   .comment-respond p.comment-form-author {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -838,9 +882,16 @@
   .comment-respond p.comment-form-email {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -1267,9 +1318,16 @@
   display: block;
   border: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
   background-position: 100% 0;
 =======
   background-position: 0 0;
+>>>>>>> master
+=======
+  background-position: 0 0;
+=======
+  background-position: 100% 0;
+>>>>>>> dev
 >>>>>>> master
 }
 .wp-trave-price-range .ui-slider .ui-slider-handle {
@@ -1374,9 +1432,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 #wp-travel-booking .wp-travel-radio-group input[type=radio]:checked:before, #wp-travel-booking .wp-travel-radio-group .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type=radio]:checked:before, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #wp-travel-booking .wp-travel-radio-group select[type=radio]:checked:before, #wp-travel-booking .wp-travel-radio-group .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type=radio]:checked:before, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field #wp-travel-booking .wp-travel-radio-group textarea[type=radio]:checked:before {
   content: "•";
 <<<<<<< HEAD
+<<<<<<< HEAD
   text-indent: -9999px;
 =======
   text-indent: 9999px;
+>>>>>>> master
+=======
+  text-indent: 9999px;
+=======
+  text-indent: -9999px;
+>>>>>>> dev
 >>>>>>> master
   border-radius: 50px;
   width: 10px;
@@ -1500,7 +1565,11 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 767px) {
   .wp-travel-default-article .wp-travel-article-image-wrap {
     width: 100%;
+<<<<<<< HEAD
     float: none;
+=======
+    float: right;
+>>>>>>> master
 =======
   .wp-travel-default-article .wp-travel-article-image-wrap {
     width: 28%;
@@ -1509,7 +1578,12 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 767px) {
   .wp-travel-default-article .wp-travel-article-image-wrap {
     width: 100%;
+<<<<<<< HEAD
     float: right;
+>>>>>>> master
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     margin-left: 0;
   }
@@ -1534,9 +1608,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   .wp-travel-default-article .wp-travel-entry-content-wrapper {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     display: block;
   }
@@ -1564,9 +1645,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 767px) {
   .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .travel-info, .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .entry-meta .category-list-items, .entry-meta .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .category-list-items {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -1580,9 +1668,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   .wp-travel-default-article .wp-travel-entry-content-wrapper .description-right {
     width: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     padding: 0 15px 15px;
     border-right: none;
@@ -1700,9 +1795,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   left: 0px;
   text-align: right;
 <<<<<<< HEAD
+<<<<<<< HEAD
   background: #fff none repeat scroll 100% 0;
 =======
   background: #fff none repeat scroll 0 0;
+>>>>>>> master
+=======
+  background: #fff none repeat scroll 0 0;
+=======
+  background: #fff none repeat scroll 100% 0;
+>>>>>>> dev
 >>>>>>> master
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   min-width: 115px;
@@ -2029,9 +2131,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   }
   to {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-position: 100% 0;
 =======
     background-position: 0 0;
+>>>>>>> master
+=======
+    background-position: 0 0;
+=======
+    background-position: 100% 0;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -2041,9 +2150,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   }
   to {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-position: 100% 0;
 =======
     background-position: 0 0;
+>>>>>>> master
+=======
+    background-position: 0 0;
+=======
+    background-position: 100% 0;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -2103,9 +2219,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 992px) {
   .wp-travel-toolbar .wp-toolbar-content.wp-toolbar-left {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -2118,9 +2241,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 992px) {
   .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
   }
 }
@@ -2135,9 +2265,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   .wp-travel-toolbar .wp-travel-post-filter .wp-travel-filter-by-heading h4 {
     display: block;
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     margin-top: 0;
   }
@@ -2178,6 +2315,10 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 }
 @media (max-width: 640px) {
   .wp-travel-toolbar .wp_travel_input_filters {
+<<<<<<< HEAD
+>>>>>>> master
+=======
+>>>>>>> dev
 >>>>>>> master
     width: 100%;
   }
@@ -2189,9 +2330,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 992px) {
   .wp-travel-toolbar .wp-toolbar-right {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     position: absolute;
     top: 0;
@@ -2210,9 +2358,16 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 @media (max-width: 640px) {
   .wp-travel-toolbar .wp-toolbar-filter-field, .wp-travel-toolbar .wp-travel-filter-button {
 <<<<<<< HEAD
+<<<<<<< HEAD
     float: none;
 =======
     float: right;
+>>>>>>> master
+=======
+    float: right;
+=======
+    float: none;
+>>>>>>> dev
 >>>>>>> master
     display: block;
   }
@@ -2494,8 +2649,14 @@ ul.availabily-list li > div.wp-travel-booking-row.animate {
   padding-right: 15px !important;
   height: auto;
 <<<<<<< HEAD
+<<<<<<< HEAD
   opacity: 1;
 =======
+>>>>>>> master
+=======
+=======
+  opacity: 1;
+>>>>>>> dev
 >>>>>>> master
 }
 ul.availabily-list li > div.wp-travel-booking-row [class*=col] {
@@ -2677,9 +2838,16 @@ ul.availabily-list .availabily-content.sold-out > div.date-from:after {
   -ms-flex-flow: row wrap;
   -moz-flex-flow: row wrap;
 <<<<<<< HEAD
+<<<<<<< HEAD
   justify-content: left;
 =======
   justify-content: right;
+>>>>>>> master
+=======
+  justify-content: right;
+=======
+  justify-content: left;
+>>>>>>> dev
 >>>>>>> master
 }
 .tour-info .tour-info-column .tour-info-item {
@@ -3143,9 +3311,16 @@ ul.wp-travel-error {
 }
 .checkout-page-wrap .number-accordion .panel-body .center-div {
 <<<<<<< HEAD
+<<<<<<< HEAD
   float: none;
 =======
   float: right;
+>>>>>>> master
+=======
+  float: right;
+=======
+  float: none;
+>>>>>>> dev
 >>>>>>> master
   display: block;
   margin: 0 auto;
@@ -3362,11 +3537,20 @@ ul.wp-travel-error {
   line-height: 30px;
   text-align: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
   color: #F56961;
   border: 2px solid #F56961;
 =======
   color: #f56961;
   border: 2px solid #f56961;
+>>>>>>> master
+=======
+  color: #f56961;
+  border: 2px solid #f56961;
+=======
+  color: #F56961;
+  border: 2px solid #F56961;
+>>>>>>> dev
 >>>>>>> master
   font-size: 16px;
   border-radius: 3px;
@@ -3497,9 +3681,16 @@ ul.wp-travel-error {
 }
 .trip_fixed_starting_dates i.fa-level-down {
 <<<<<<< HEAD
+<<<<<<< HEAD
   transform: rotate(-90deg) scale(1, -1);
 =======
   transform: rotate(90deg) scale(-1, 1);
+>>>>>>> master
+=======
+  transform: rotate(90deg) scale(-1, 1);
+=======
+  transform: rotate(-90deg) scale(1, -1);
+>>>>>>> dev
 >>>>>>> master
 }
 .trip_fixed_starting_dates i.fa-tag {
@@ -3508,9 +3699,16 @@ ul.wp-travel-error {
   position: absolute;
   top: 50%;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transform: translateY(-50%) scale(-1, 1);
 =======
   transform: translateY(-50%) scale(1, -1);
+>>>>>>> master
+=======
+  transform: translateY(-50%) scale(1, -1);
+=======
+  transform: translateY(-50%) scale(-1, 1);
+>>>>>>> dev
 >>>>>>> master
 }
 .trip_fixed_starting_dates .sold_out {
@@ -3604,9 +3802,16 @@ ul.wp-travel-error {
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_price .minus_ribbon {
 <<<<<<< HEAD
+<<<<<<< HEAD
   border-color: transparent transparent transparent #c7d0d9;
 =======
   border-color: transparent #c7d0d9 transparent transparent;
+>>>>>>> master
+=======
+  border-color: transparent #c7d0d9 transparent transparent;
+=======
+  border-color: transparent transparent transparent #c7d0d9;
+>>>>>>> dev
 >>>>>>> master
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking .wp-travel-sold-out a {
@@ -3721,9 +3926,16 @@ ul.wp-travel-error {
   position: absolute;
   top: 50%;
 <<<<<<< HEAD
+<<<<<<< HEAD
   transform: translate(-50%, -50%);
 =======
   transform: translate(50%, -50%);
+>>>>>>> master
+=======
+  transform: translate(50%, -50%);
+=======
+  transform: translate(-50%, -50%);
+>>>>>>> dev
 >>>>>>> master
   height: 2px;
   width: 100%;
@@ -3871,9 +4083,16 @@ ul.wp-travel-error {
   border-radius: 100%;
   height: 40px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   right: 0;
 =======
   left: 0;
+>>>>>>> master
+=======
+  left: 0;
+=======
+  right: 0;
+>>>>>>> dev
 >>>>>>> master
   position: absolute;
   text-align: center;
@@ -4141,7 +4360,14 @@ ul.wp-travel-error {
   margin-left: 5px;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 /*# sourceMappingURL=wp-travel-rtl-front-end.css.map */
+>>>>>>> master
+=======
+
+/*# sourceMappingURL=wp-travel-rtl-front-end.css.map */
+=======
+>>>>>>> dev
 >>>>>>> master
