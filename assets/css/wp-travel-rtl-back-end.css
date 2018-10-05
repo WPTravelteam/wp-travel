@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-body {
-  direction: rtl;
-  unicode-bidi: embed;
-}
-=======
->>>>>>> master
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon.eot?scxfre");
@@ -26,16 +17,6 @@ body {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
-<<<<<<< HEAD
-=======
-body {
-  direction: rtl;
-  unicode-bidi: embed;
-}
->>>>>>> master
-=======
->>>>>>> dev
->>>>>>> master
 
 .icon-indent-dots-option-button:before {
   content: "\e904"; }

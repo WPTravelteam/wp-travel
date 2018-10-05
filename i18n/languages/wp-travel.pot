@@ -4,18 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD
-<<<<<<< HEAD
 "POT-Creation-Date: 2018-10-04 11:45:23+00:00\n"
-=======
-"POT-Creation-Date: 2018-09-27 12:05:27+00:00\n"
->>>>>>> master
-=======
-"POT-Creation-Date: 2018-09-27 12:05:27+00:00\n"
-=======
-"POT-Creation-Date: 2018-10-04 11:45:23+00:00\n"
->>>>>>> dev
->>>>>>> master
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -612,14 +601,8 @@ msgstr ""
 msgid "Uncheck above checkbox to add custom tab settings for this trip."
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:477
 #: inc/admin/class-admin-settings.php:737
-=======
-#: inc/admin/class-admin-metaboxes.php:468
-#: inc/admin/class-admin-settings.php:717
->>>>>>> master
 msgid "Sorting"
 msgstr ""
 
@@ -633,41 +616,8 @@ msgstr ""
 msgid "Custom Trip Title"
 msgstr ""
 
-<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:480
 #: inc/admin/class-admin-settings.php:740
-=======
-#: inc/admin/class-admin-metaboxes.php:468
-#: inc/admin/class-admin-settings.php:717
-=======
-#: inc/admin/class-admin-metaboxes.php:471
-#: inc/admin/class-admin-settings.php:720
-=======
-#: inc/admin/class-admin-metaboxes.php:477
-#: inc/admin/class-admin-settings.php:737
->>>>>>> master
-msgid "Sorting"
-msgstr ""
-
-#: inc/admin/class-admin-metaboxes.php:469
-#: inc/admin/class-admin-settings.php:718
-msgid "Global Trip Title"
-msgstr ""
-
-#: inc/admin/class-admin-metaboxes.php:470
-#: inc/admin/class-admin-settings.php:719
-msgid "Custom Trip Title"
-msgstr ""
-
-<<<<<<< HEAD
-#: inc/admin/class-admin-metaboxes.php:471
-#: inc/admin/class-admin-settings.php:720
->>>>>>> master
-=======
-#: inc/admin/class-admin-metaboxes.php:480
-#: inc/admin/class-admin-settings.php:740
->>>>>>> dev
->>>>>>> master
 msgid "Display"
 msgstr ""
 
@@ -685,44 +635,16 @@ msgstr ""
 msgid "Click on add new question to add FAQ."
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:567
 #: inc/admin/class-admin-settings.php:385
-=======
-#: inc/admin/class-admin-metaboxes.php:549
-#: inc/admin/class-admin-settings.php:376
->>>>>>> master
-=======
-#: inc/admin/class-admin-metaboxes.php:549
-#: inc/admin/class-admin-settings.php:376
-=======
-#: inc/admin/class-admin-metaboxes.php:567
-#: inc/admin/class-admin-settings.php:385
->>>>>>> dev
->>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:125
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:481
 #: inc/template-functions.php:732
 msgid "Open All"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-metaboxes.php:568
 #: inc/admin/class-admin-settings.php:386
-=======
-#: inc/admin/class-admin-metaboxes.php:550
-#: inc/admin/class-admin-settings.php:377
->>>>>>> master
-=======
-#: inc/admin/class-admin-metaboxes.php:550
-#: inc/admin/class-admin-settings.php:377
-=======
-#: inc/admin/class-admin-metaboxes.php:568
-#: inc/admin/class-admin-settings.php:386
->>>>>>> dev
->>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:126
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:482
 #: inc/template-functions.php:733
@@ -988,8 +910,6 @@ msgstr ""
 msgid "New Enquiry"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:377
 msgid "Want to get more e-mail customization options ?"
 msgstr ""
@@ -1001,9 +921,6 @@ msgid ""
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:396
-=======
-#: inc/admin/class-admin-settings.php:387
->>>>>>> master
 msgid "Booking Email Templates"
 msgstr ""
 
@@ -1105,169 +1022,21 @@ msgstr ""
 msgid "Enable partial payment while booking."
 msgstr ""
 
-<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:854
-=======
-#: inc/admin/class-admin-settings.php:387
-=======
-#: inc/admin/class-admin-settings.php:834
-=======
-#: inc/admin/class-admin-settings.php:377
-msgid "Want to get more e-mail customization options ?"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:378
-msgid ""
-"By upgrading to Pro, you can get features like multiple email "
-"notifications, email footer powered by text removal options and more !"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:396
->>>>>>> master
-msgid "Booking Email Templates"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:398
-#: inc/admin/class-admin-settings.php:525
-#: inc/admin/class-admin-settings.php:638
-msgid "Admin Email Template Options"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:403
-msgid "Send Booking mail to admin"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:416
-msgid "Booking Email Subject"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:424
-#: inc/admin/class-admin-settings.php:471
-msgid "Booking Email Title"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:432
-#: inc/admin/class-admin-settings.php:479
-msgid "Booking Email Header Color"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:440
-#: inc/admin/class-admin-settings.php:487
-#: inc/admin/class-admin-settings.php:554
-#: inc/admin/class-admin-settings.php:601
-#: inc/admin/class-admin-settings.php:667
-msgid "Email Content"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:458
-#: inc/admin/class-admin-settings.php:572
-msgid "Client Email Template Options"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:463
-msgid "Booking Client Email Subject"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:515
-msgid "Payment Email Templates"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:530
-#: inc/admin/class-admin-settings.php:577
-msgid "Payment Email Subject"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:538
-#: inc/admin/class-admin-settings.php:585
-msgid "Payment Email Title"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:546
-#: inc/admin/class-admin-settings.php:593
-msgid "Payment Email Header Color"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:628
-msgid "Enquiry Email Templates"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:643
-msgid "Enquiry Email Subject"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:651
-msgid "Enquiry Email Title"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:659
-msgid "Enquiry Email Header Color"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:773
-msgid "Enable Trip Enquiry"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:787
-msgid "GDPR Message : "
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:819 inc/form-fields.php:377
-msgid "Partial Payment"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:829
-msgid "Enable partial payment while booking."
-msgstr ""
-
-<<<<<<< HEAD
-#: inc/admin/class-admin-settings.php:834
->>>>>>> master
-=======
-#: inc/admin/class-admin-settings.php:854
->>>>>>> dev
->>>>>>> master
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:715
 msgid "Minimum Payout (%)"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:858
 msgid "Minimum percent of amount to pay while booking."
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:863
-=======
-#: inc/admin/class-admin-settings.php:838
-msgid "Minimum percent of amount to pay while booking."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:843
->>>>>>> master
-=======
-#: inc/admin/class-admin-settings.php:838
-msgid "Minimum percent of amount to pay while booking."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:843
-=======
-#: inc/admin/class-admin-settings.php:858
-msgid "Minimum percent of amount to pay while booking."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:863
->>>>>>> dev
->>>>>>> master
 #: inc/payments/wp-travel-payments.php:59
 msgid "Standard Paypal"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:866
-=======
-#: inc/admin/class-admin-settings.php:846
->>>>>>> master
 msgid "Enable Paypal"
 msgstr ""
 
@@ -1367,113 +1136,7 @@ msgstr ""
 msgid " Automatically generate username from customer email."
 msgstr ""
 
-<<<<<<< HEAD
 #: inc/admin/class-admin-settings.php:1079
-=======
-#: inc/admin/class-admin-settings.php:846
-=======
-#: inc/admin/class-admin-settings.php:1053
-=======
-#: inc/admin/class-admin-settings.php:866
->>>>>>> master
-msgid "Enable Paypal"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:856
-msgid "Check to enable standard PayPal payment."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:860
-msgid "Paypal Email"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:863
-msgid "PayPal email address that receive payment."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:867
-msgid "TAX Options"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:870
-msgid "Enable Tax for Trip Price"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:880
-msgid "Check to enable Tax options for trips."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:884
-msgid "Trip prices entered with tax"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:887
-msgid "Yes, I will enter trip prices inclusive of tax"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:890
-msgid "No, I will enter trip prices exclusive of tax"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:892
-msgid "This option will affect how you enter trip prices."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:897
-msgid "Tax Percentage"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:901
-msgid "Trip Tax percentage added to trip price."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:923
-msgid "Test Payment"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:926
-msgid "Test Mode"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:935
-msgid "Enable test mode to make test payment."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:939
-msgid "Test Email"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:941
-msgid "Test email address will get test mode payment emails."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:1008
-msgid "Customer Registration"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:1018
-msgid "Require Customer login before booking."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:1028
-msgid "Enable customer registration on the \"My Account\" page."
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:1033
-msgid "Account Creation"
-msgstr ""
-
-#: inc/admin/class-admin-settings.php:1043
-msgid " Automatically generate username from customer email."
-msgstr ""
-
-<<<<<<< HEAD
-#: inc/admin/class-admin-settings.php:1053
->>>>>>> master
-=======
-#: inc/admin/class-admin-settings.php:1079
->>>>>>> dev
->>>>>>> master
 msgid " Automatically generate customer password"
 msgstr ""
 
