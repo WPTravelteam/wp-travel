@@ -7,7 +7,7 @@
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
- * Requires PHP: 5.5 or higher
+ * Requires PHP: 5.5
  * Tested up to: 4.9.8
  *
  * Text Domain: wp-travel
@@ -233,6 +233,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-dashboard-widgets.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/admin/class-wp-travel-term-meta.php', WP_TRAVEL_ABSPATH );
 			}
 
 			if ( $this->is_request( 'frontend' ) ) {

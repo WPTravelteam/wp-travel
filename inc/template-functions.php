@@ -1385,6 +1385,16 @@ function wp_travel_archive_toolbar() {
 <?php
 }
 
+function wp_travel_category_description() {
+
+	?>
+
+		
+
+	<?php
+
+}
+
 /**
  * Archive page wrapper close.
  *
@@ -1771,6 +1781,7 @@ add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
 // Filters HTML.
 add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
+add_action( 'wp_travel_before_main_content', 'wp_travel_category_description' );
 // add_action( 'parse_query', 'wp_travel_posts_filter' );
 add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
@@ -2317,3 +2328,20 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 }
 
 add_action( 'wp_travel_booking_departure_date_list', 'wp_travel_booking_fixed_departure_listing' );
+
+/**
+ * Disable Jetpack Related Posts on Trips page
+ *
+ * @param array $options
+ * @return void
+ */
+function wp_travel_remove_jetpack_related_posts( $options ) {
+
+	$disable_jetpack_related_for_trips = apply_filters( 'wp_travel_disable_jetpack_rp', true );
+
+	if ( is_singular( WP_TRAVEL_POST_TYPE ) && $disable_jetpack_related_for_trips ) {
+		$options['enabled'] = false;
+	}
+	return $options;
+}
+add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
