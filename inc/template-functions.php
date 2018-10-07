@@ -1385,6 +1385,11 @@ function wp_travel_archive_toolbar() {
 <?php
 }
 
+/**
+ * Add Taxonomy archive page description / Image.
+ *
+ * @return void
+ */
 function wp_travel_category_description() {
 
 	?>
