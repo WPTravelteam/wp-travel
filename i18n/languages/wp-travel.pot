@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.6.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-05 11:22:29+00:00\n"
+"POT-Creation-Date: 2018-10-08 11:23:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -349,84 +349,84 @@ msgstr ""
 msgid "Payment Status"
 msgstr ""
 
-#: inc/admin/admin-helper.php:908
+#: inc/admin/admin-helper.php:905
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:543
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:623
 #: inc/coupon/inc/admin/views/tabs/coupons-restrictions.php:38
 msgid "Select multiple"
 msgstr ""
 
-#: inc/admin/admin-helper.php:910
+#: inc/admin/admin-helper.php:907
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:545
 #: inc/coupon/inc/admin/views/tabs/coupons-restrictions.php:40
 msgid " item selected"
 msgstr ""
 
-#: inc/admin/admin-helper.php:921
+#: inc/admin/admin-helper.php:917
 #: inc/coupon/inc/admin/views/tabs/coupons-restrictions.php:51
 msgid "Select all"
 msgstr ""
 
-#: inc/admin/admin-helper.php:972
+#: inc/admin/admin-helper.php:967
 msgid "Pro options"
 msgstr ""
 
-#: inc/admin/admin-helper.php:974 inc/admin/admin-helper.php:983
+#: inc/admin/admin-helper.php:969 inc/admin/admin-helper.php:978
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:79
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:215
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:347
 #: inc/class-shortcode.php:289 inc/template-functions.php:1302
-#: inc/template-functions.php:1928
+#: inc/template-functions.php:1944
 #: inc/widgets/class-wp-travel-search-filters-widget.php:127
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 #: templates/content-cart.php:56 templates/content-pricing-options.php:158
 msgid "Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:975
+#: inc/admin/admin-helper.php:970
 msgid "Item Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:987 inc/admin/admin-helper.php:996
+#: inc/admin/admin-helper.php:982 inc/admin/admin-helper.php:991
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:97
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:236
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:368
 msgid "Sale Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:988
+#: inc/admin/admin-helper.php:983
 msgid "Sale Price(Leave Blank to disable sale)"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1000
+#: inc/admin/admin-helper.php:995
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:62
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:244
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:376
 msgid "Price Per"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1004
+#: inc/admin/admin-helper.php:999
 msgid "Unit"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1005
+#: inc/admin/admin-helper.php:1000
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:248
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:380
 #: inc/helpers.php:582 inc/prices.php:86
 msgid "Person"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1012
+#: inc/admin/admin-helper.php:1007
 msgid "Want to use above pro features?"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1013
+#: inc/admin/admin-helper.php:1008
 msgid ""
 "By upgrading to Pro, you can get features with gallery, detail extras page "
 "in Front-End and more !"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1014
+#: inc/admin/admin-helper.php:1009
 msgid "Get Tour Extras Addon"
 msgstr ""
 
@@ -436,8 +436,8 @@ msgstr ""
 #: inc/booking-functions.php:1030 inc/booking-functions.php:1058
 #: inc/booking-functions.php:1062 inc/helpers.php:551 inc/helpers.php:567
 #: inc/helpers.php:834 inc/helpers.php:1003 inc/helpers.php:1093
-#: inc/helpers.php:1109 inc/helpers.php:1124 inc/template-functions.php:1956
-#: inc/template-functions.php:2215 templates/content-pricing-options.php:92
+#: inc/helpers.php:1109 inc/helpers.php:1124 inc/template-functions.php:1972
+#: inc/template-functions.php:2231 templates/content-pricing-options.php:92
 msgid "N/A"
 msgstr ""
 
@@ -478,7 +478,7 @@ msgid "System Status"
 msgstr ""
 
 #: inc/admin/class-admin-menu.php:12 inc/admin/class-admin-metaboxes.php:145
-#: inc/admin/class-dashboard-widgets.php:51 inc/template-functions.php:1923
+#: inc/admin/class-dashboard-widgets.php:51 inc/template-functions.php:1939
 #: templates/content-pricing-options.php:152
 msgid "Status"
 msgstr ""
@@ -590,7 +590,7 @@ msgstr ""
 #: inc/admin/class-admin-metaboxes.php:694
 #: inc/admin/class-admin-settings.php:379
 #: inc/admin/class-admin-settings.php:728
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:753
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:751
 msgid "Get WP Travel Utilities Addon"
 msgstr ""
 
@@ -1034,7 +1034,7 @@ msgid "Enable partial payment while booking."
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:854
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:715
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:713
 msgid "Minimum Payout (%)"
 msgstr ""
 
@@ -1322,6 +1322,21 @@ msgstr ""
 msgid "View All Bookings"
 msgstr ""
 
+#: inc/admin/class-wp-travel-term-meta.php:63
+#: inc/admin/class-wp-travel-term-meta.php:92
+msgid "Image"
+msgstr ""
+
+#: inc/admin/class-wp-travel-term-meta.php:67
+#: inc/admin/class-wp-travel-term-meta.php:103
+msgid "Add Image"
+msgstr ""
+
+#: inc/admin/class-wp-travel-term-meta.php:68
+#: inc/admin/class-wp-travel-term-meta.php:104
+msgid "Remove Image"
+msgstr ""
+
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:41
 #: inc/class-post-types.php:227
 msgid "Trip Extras"
@@ -1569,7 +1584,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:180
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:312
-#: inc/template-functions.php:1912
+#: inc/template-functions.php:1928
 msgid "Pricing Name"
 msgstr ""
 
@@ -1689,27 +1704,27 @@ msgstr ""
 msgid "Please Add Multiple Pricing Options and update to add multiple dates "
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:706
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:704
 msgid "Minimum Payout"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:710
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:708
 msgid "Default : "
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:728
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:726
 msgid "Use Global"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:738
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:736
 msgid "Custom Min. Payout (%)"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:751
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:749
 msgid "Need More Options ?"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:752
+#: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:750
 msgid ""
 "By upgrading to Pro, you can get additional trip specific features like "
 "Inventory Options, Custom Sold out action/message and Group size limits. !"
@@ -1959,7 +1974,7 @@ msgstr ""
 msgid "Powered By: %1$1sWP Travel.%2$2s"
 msgstr ""
 
-#: inc/class-frontend-assets.php:131 inc/template-functions.php:2046
+#: inc/class-frontend-assets.php:131 inc/template-functions.php:2062
 msgid "Select"
 msgstr ""
 
@@ -3994,92 +4009,92 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: inc/template-functions.php:1915
+#: inc/template-functions.php:1931
 msgid "Min Group Size"
 msgstr ""
 
-#: inc/template-functions.php:1918
+#: inc/template-functions.php:1934
 msgid "Max Group Size"
 msgstr ""
 
-#: inc/template-functions.php:1986
+#: inc/template-functions.php:2002
 msgid "Pricing Name:"
 msgstr ""
 
-#: inc/template-functions.php:1989
+#: inc/template-functions.php:2005
 msgid "Min Group Size:"
 msgstr ""
 
-#: inc/template-functions.php:1990 inc/template-functions.php:1994
+#: inc/template-functions.php:2006 inc/template-functions.php:2010
 msgid "No size limit"
 msgstr ""
 
-#: inc/template-functions.php:1993
+#: inc/template-functions.php:2009
 msgid "Max Group Size:"
 msgstr ""
 
-#: inc/template-functions.php:2001 inc/template-functions.php:2008
+#: inc/template-functions.php:2017 inc/template-functions.php:2024
 #: templates/content-pricing-options.php:199
 msgid "Status:"
 msgstr ""
 
-#: inc/template-functions.php:2002
+#: inc/template-functions.php:2018
 msgid "SOLD OUT"
 msgstr ""
 
-#: inc/template-functions.php:2016 templates/content-pricing-options.php:206
+#: inc/template-functions.php:2032 templates/content-pricing-options.php:206
 msgid "price:"
 msgstr ""
 
-#: inc/template-functions.php:2060 inc/template-functions.php:2064
+#: inc/template-functions.php:2076 inc/template-functions.php:2080
 msgid "Select a Date:"
 msgstr ""
 
-#: inc/template-functions.php:2061 inc/template-functions.php:2065
+#: inc/template-functions.php:2077 inc/template-functions.php:2081
 #: templates/content-pricing-options.php:186
 #: templates/content-pricing-options.php:189
 msgid "Please Select a Date"
 msgstr ""
 
-#: inc/template-functions.php:2088
+#: inc/template-functions.php:2104
 msgid "size"
 msgstr ""
 
-#: inc/template-functions.php:2103 inc/template-functions.php:2303
+#: inc/template-functions.php:2119 inc/template-functions.php:2319
 #: templates/content-pricing-options.php:258
 msgid "Book now"
 msgstr ""
 
-#: inc/template-functions.php:2161
+#: inc/template-functions.php:2177
 msgid "START"
 msgstr ""
 
-#: inc/template-functions.php:2162
+#: inc/template-functions.php:2178
 msgid "END"
 msgstr ""
 
-#: inc/template-functions.php:2164
+#: inc/template-functions.php:2180
 msgid "SEATS LEFT"
 msgstr ""
 
-#: inc/template-functions.php:2166 inc/template-functions.php:2269
+#: inc/template-functions.php:2182 inc/template-functions.php:2285
 #: templates/content-cart.php:57
 msgid "PAX"
 msgstr ""
 
-#: inc/template-functions.php:2167
+#: inc/template-functions.php:2183
 msgid "PRICE"
 msgstr ""
 
-#: inc/template-functions.php:2189 inc/template-functions.php:2190
+#: inc/template-functions.php:2205 inc/template-functions.php:2206
 msgid "%s Pax"
 msgstr ""
 
-#: inc/template-functions.php:2281
+#: inc/template-functions.php:2297
 msgid "sale"
 msgstr ""
 
-#: inc/template-functions.php:2288
+#: inc/template-functions.php:2304
 msgid "Per "
 msgstr ""
 
@@ -4732,7 +4747,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:294
+#: upgrade/update-137.php:25 wp-travel.php:295
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -4744,19 +4759,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:309
+#: wp-travel.php:310
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:310
+#: wp-travel.php:311
 msgid "5.5 or Higher"
 msgstr ""
 
-#: wp-travel.php:314
+#: wp-travel.php:315
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:316
+#: wp-travel.php:317
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -5007,32 +5022,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:383
+#: upgrade/update-137.php:48 wp-travel.php:384
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:388
+#: upgrade/update-137.php:53 wp-travel.php:389
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:393
+#: upgrade/update-137.php:58 wp-travel.php:394
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:384
+#: upgrade/update-137.php:49 wp-travel.php:385
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:389
+#: upgrade/update-137.php:54 wp-travel.php:390
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:394
+#: upgrade/update-137.php:59 wp-travel.php:395
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""
