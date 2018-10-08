@@ -268,8 +268,10 @@
     $(document).on('click', '#wp-travel-enable-pricing-options', function() {
         if ($(this).is(':checked')) {
             $('#wp-travel-multiple-pricing-options').show();
+            $('.wp-travel-tour-extra-title, .wp-travel-tour-extra-content').hide();
         } else {
             $('#wp-travel-multiple-pricing-options').hide();
+            $('.wp-travel-tour-extra-title, .wp-travel-tour-extra-content').css({display:'table-row'});
         }
     });
 
@@ -314,7 +316,7 @@
             $('.hide-if-multidates').hide();
             $('#wp-variations-multiple-dates').show();
         } else {
-            $('.hide-if-multidates').show();
+                $('.hide-if-multidates').show();
             $('#wp-variations-multiple-dates').hide();
         }
     });
@@ -334,11 +336,15 @@
         if ($(this).is(':checked')) {
             $('.wp-travel-fixed-departure-row').css({ 'display': 'table-row' });
             $('.wp-travel-trip-duration-row').css({ 'display': 'none' });
+
+            if ( $('#wp-travel-enable-multiple-fixed-departure').is( ':checked' ) ) {
+                $( '.hide-if-multidates' ).css({ 'display': 'none' });
+            }
+
         } else {
             $('.wp-travel-fixed-departure-row').css({ 'display': 'none' });
             $('.wp-travel-trip-duration-row').css({ 'display': 'table-row' });
         }
-        $('#wp-travel-enable-multiple-fixed-departure').trigger('click');
     });
 
     $(document).on("click", ".wp-travel-featured-post", function(e) {
