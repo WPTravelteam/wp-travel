@@ -12,10 +12,12 @@ jQuery(function($) {
     }
 
     $(document).ready(function() {
-
-        var prices = trip_prices_data.prices.map(function(x) {
-            return parseInt(x, 10);
-        });
+        var prices = [];
+        if( typeof trip_prices_data.prices === 'object' ) {
+          prices = trip_prices_data.prices.map(function(x) {
+              return parseInt(x, 10);
+          });
+        }
 
         var min = Math.min.apply(null, prices),
             max = Math.max.apply(null, prices)
