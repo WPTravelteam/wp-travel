@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Itinerary Archive Template
  *
@@ -16,6 +16,24 @@
  */
 
 get_header( 'itinerary' ); ?>
+	<?php
+	$current_theme = wp_get_theme();
+	if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+		?>
+				<div class="wrap">
+		<?php
+	}
+	?>
+		<header class="page-header">
+					<figure class="wp-travel-archive-image">
+						<img src="" />
+					</figure>
+					<div class="wp-travel-archive-detail">
+						<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+						<?php the_archive_description( '<div class="taxonomy-description"><p>', '</p></div>' ); ?>
+					</div>
+
+		</header>
 <?php do_action( 'wp_travel_before_main_content' ); ?>
 <?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : the_post(); ?>
@@ -26,4 +44,11 @@ get_header( 'itinerary' ); ?>
 <?php endif; ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
+<?php
+if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+	?>
+		</div>
+	<?php
+}
+?>
 <?php get_footer( 'itinerary' ); ?>
