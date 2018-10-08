@@ -199,7 +199,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 
 	// $wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
-	
+
 	<div class="wp-detail-review-wrap">
     	<?php do_action( 'wp_travel_single_before_trip_price', $post_id, $hide_rating ); ?>
 		<div class="wp-travel-trip-detail">
@@ -312,12 +312,12 @@ function wp_travel_single_excerpt( $post_id ) {
 	if( 'yes' == $global_enquiry_option ) {
 
 		$enable_enquiry = $enquery_global_setting;
-		
+
 	}
 	else {
 		$enable_enquiry = get_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', true );
 	}
-	
+
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
 	<div class="trip-short-desc">
@@ -365,7 +365,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					}
 					?>
 					</span>
-				</div>	  	 		
+				</div>
 	  	 	</li>
 	  	 	<li>
 	  	 		<div class="travel-info">
@@ -383,9 +383,9 @@ function wp_travel_single_excerpt( $post_id ) {
 					</span>
 				</div>
 	  	 	</li>
-			<?php 
+			<?php
 			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-			
+
 			if ( is_array( $wp_travel_itinerary_tabs ) && 'no' !== $wp_travel_itinerary_tabs['reviews']['show_in_menu'] && comments_open() ) : ?>
 	  	 	<li>
 	  	 		<div class="travel-info">
@@ -416,12 +416,12 @@ function wp_travel_single_excerpt( $post_id ) {
 			<?php
 			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
 			$booking_tab = $wp_travel_itinerary_tabs['booking'];
-		
+
 			if ( isset( $booking_tab['show_in_menu'] ) && 'yes' === $booking_tab['show_in_menu'] ) :	?>
 			<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
 			<?php endif; ?>
 			<?php if ( 'yes' == $enable_enquiry ) : ?>
-			
+
 				<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 					<span class="wp-travel-booking-enquiry">
 						<span class="dashicons dashicons-editor-help"></span>
@@ -431,13 +431,13 @@ function wp_travel_single_excerpt( $post_id ) {
 					</span>
 				</a>
 			<?php endif; ?>
-		
+
 		</div>
 	</div>
 		<?php
-			if ( 'yes' == $enable_enquiry ) :  
-				wp_travel_get_enquiries_form(); 
-			endif;	
+			if ( 'yes' == $enable_enquiry ) :
+				wp_travel_get_enquiries_form();
+			endif;
 			?>
 	<?php
 	/**
@@ -471,7 +471,7 @@ function wp_travel_single_keywords( $post_id ) {
 	global $wp_travel_itinerary;
 	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) : ?>
 		<div class="wp-travel-trip-code"><span><?php esc_html_e( 'Trip Code', 'wp-travel' ) ?> :</span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ) ?></code></div>
-	<?php endif; 
+	<?php endif;
 
 }
 /**
@@ -487,7 +487,7 @@ function wp_travel_single_location( $post_id ) {
 
 	$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
-	
+
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
@@ -518,7 +518,7 @@ function wp_travel_single_location( $post_id ) {
 							<?php if ( ! $date_format ) : ?>
 								<?php $date_format = 'jS M, Y'; ?>
 							<?php endif; ?>
-							<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?> 
+							<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?>
 						</span>
 					</div>
 				<?php endif; ?>
@@ -577,7 +577,7 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
 	}
 
-	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) { 
+	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
 	?>
 		<!-- TRIP FACTS -->
 		<div class="tour-info">
@@ -599,8 +599,8 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 						?>
 							<span class="tour-info-item tour-info-type">
 								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
-								<?php 
+								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>:
+								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
 									$count = count( $trip_fact['value'] );
 									$i = 1;
@@ -617,7 +617,7 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
 									echo esc_html( $trip_fact['value'] );
 								}
 
-								?>  
+								?>
 							</span>
 						<?php endif; ?>
 					<?php endforeach; ?>
@@ -625,8 +625,8 @@ function wp_travel_frontend_trip_facts(  $post_id ) {
             </div>
 		</div>
 		<!-- TRIP FACTS END -->
-	<?php 
-	} 
+	<?php
+	}
 }
 
 /**
@@ -645,7 +645,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
 
 	$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-	
+
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
@@ -720,7 +720,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 						$booking_template = wp_travel_get_template( 'content-pricing-options.php' );
 						load_template( $booking_template );
-					
+
 					break;
 					case 'faq' : ?>
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
@@ -766,7 +766,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 					<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
 						<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
-					
+
 						<div class="itenary clearfix">
 							<div class="timeline-contents clearfix">
 								<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h2>
@@ -807,7 +807,7 @@ function wp_travel_frontend_contents( $post_id ) {
 										if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
 											$itinerary_date = stripslashes( $itinerary['date'] );
 											$itinerary_date = date( $date_format, strtotime( $itinerary_date ) );
-											
+
 										}
 										if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
 											$itinerary_time = stripslashes( $itinerary['time'] );
@@ -819,7 +819,7 @@ function wp_travel_frontend_contents( $post_id ) {
 												<?php if ( '' !== $itinerary_label ) : ?>
 												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
 												<?php endif; ?>
-												<?php if ( $itinerary_date ) : ?>												
+												<?php if ( $itinerary_date ) : ?>
 													<h3 class="arrival"><?php esc_html_e( 'Date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3>
 												<?php endif; ?>
 												<?php if ( $itinerary_time ) : ?>
@@ -836,26 +836,26 @@ function wp_travel_frontend_contents( $post_id ) {
 										</div><!-- first-content -->
 										<?php $index++ ?>
 									<?php endforeach; ?>
-								
+
 							</div><!-- timeline-contents -->
 						</div><!-- itenary -->
 
 					<?php endif; ?>
-					
+
 					</div>
 					<?php break;
 					 default : ?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-							<?php 
+							<?php
 								if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false ) ) {
-									
+
 									echo do_shortcode( $tab_info['content'] );
 
 								}else {
 
-									echo apply_filters( 'the_content', $tab_info['content'] ) ; 
+									echo apply_filters( 'the_content', $tab_info['content'] ) ;
 								}
-								
+
 							?>
 						</div>
 					<?php break; ?>
@@ -863,7 +863,7 @@ function wp_travel_frontend_contents( $post_id ) {
 			<?php $index++; endforeach; ?>
 		</div>
 		<?php endif; ?>
-	
+
 	</div>
 <?php
 }
@@ -1212,18 +1212,18 @@ function wp_travel_booking_message() {
 			history.replaceState({},null,window.location.pathname);
 		</script>
 		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', __("We've received your booking details. We'll contact you soon.", "wp-travel" ) ); ?></p>
-	
+
 	<?php elseif( isset( $_GET['booked'] ) && 'false' == $_GET['booked']) : ?>
 		<script>
 			history.replaceState({},null,window.location.pathname);
 		</script>
 
-		<?php 
+		<?php
 
 			$err_msg = __( 'Your Item has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' )
 
 		?>
-		
+
 		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
 	<?php endif;
 
@@ -1360,23 +1360,23 @@ function wp_travel_archive_toolbar() {
 		</div>
 	</div>
 	<?php endif; ?>
-	<?php 
-		
+	<?php
+
 		$archive_sidebar_class = '';
-		
+
 		if( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
 			$archive_sidebar_class = 'wp-travel-trips-has-sidebar';
-		} 
-		
+		}
+
 	?>
 	<div class="wp-travel-archive-content <?php echo esc_attr ( $archive_sidebar_class ); ?>">
 		<?php if ( 'grid' === $view_mode ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '3' ); ?>
-			<?php 
+			<?php
 			if( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
 				$col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row' , '2' );
-			}  
-			?>			
+			}
+			?>
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>-per-row">
 		<?php endif; ?>
@@ -1394,7 +1394,7 @@ function wp_travel_category_description() {
 
 	?>
 
-		
+
 
 	<?php
 
@@ -1423,8 +1423,8 @@ function wp_travel_archive_wrapper_close() {
 }
 
 /**
- * Archive page sidebar 
- * 
+ * Archive page sidebar
+ *
  * @since 1.2.1
  * @return void
  */
@@ -1437,8 +1437,8 @@ function wp_travel_archive_listing_sidebar(){
 			<?php dynamic_sidebar('wp-travel-archive-sidebar'); ?>
 		</div>
 
-	<?php 
-	
+	<?php
+
 	endif;
 
 }
@@ -1504,7 +1504,7 @@ function wp_travel_posts_filter( $query ) {
 						),
 					)
 					);
-					
+
 					$query->set('meta_query', array(
 						array(
 							'key'     => 'wp_travel_start_date',
@@ -1597,7 +1597,7 @@ function wp_travel_posts_filter( $query ) {
 								'field' => 'name',
 								'terms' => $keywords,
 							),
-							
+
 						)
 					);
 
@@ -1614,7 +1614,7 @@ function wp_travel_posts_filter( $query ) {
 								'field' => 'name',
 								'terms' => $keywords,
 							),
-							
+
 						)
 					);
 
@@ -1631,7 +1631,7 @@ function wp_travel_posts_filter( $query ) {
 								'field' => 'name',
 								'terms' => $keywords,
 							),
-							
+
 						)
 					);
 
@@ -1648,7 +1648,7 @@ function wp_travel_posts_filter( $query ) {
 								'field' => 'id',
 								'terms' => $location,
 							),
-							
+
 						)
 					);
 
@@ -1694,7 +1694,7 @@ function wp_travel_posts_filter( $query ) {
 						'compare' => 'LIKE',
 					),
 				));
-	
+
 			}
 		}
 	}
@@ -1874,9 +1874,9 @@ add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );
 
 /**
  * wp_travel_booking_tab_pricing_options_list
- * 
+ *
  * @param array $trip_pricing_options_data
- * @return void 
+ * @return void
  */
 function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data = array() ) {
 
@@ -1912,11 +1912,11 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 		$status_msg = get_post_meta( $trip_id, 'wp_travel_inventory_status_message_format', true );
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
 		$wp_travel_inventory_sold_out_action = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_action', true );
-		
+
 		if ( 'allow_trip_enquiry' === $wp_travel_inventory_sold_out_action ) {
 			$sold_out_btn_rep_msg = wp_travel_utilities__get_inquiry_link();
 		}
-		
+
 	}
 
 	if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) : ?>
@@ -1976,12 +1976,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										'{available_pax}' => $available_pax,
 										'{booked_pax}' => $booked_pax,
 										'{pax_limit}' => $pax_limit,
-										
+
 									);
 
 									$global_enabled = $inventory->is_inventory_enabled( $trip_id );
 									$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
-									
+
 									if ( $global_enabled && $inventory_enabled_for_option ) {
 										$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
 										$inventory_enabled = true;
@@ -1993,7 +1993,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										// }
 									}
 
-									
+
 								}
 
 							?>
@@ -2009,10 +2009,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
 									<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 								</div>
-								<?php if( $status_col ) : 
+								<?php if( $status_col ) :
 
 									if ( $pricing_sold_out ) : ?>
-									
+
 										<div class="status">
 											<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
 											<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
@@ -2025,7 +2025,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										<span><?php echo esc_html( $pricing_status_msg ); ?></span>
 									</div>
 
-								<?php 
+								<?php
 									endif;
 								endif; ?>
 								<div class="price">
@@ -2053,20 +2053,20 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<?php endif; ?>
 								</div>
 								<div class="action">
-								
+
 									<?php if ( $pricing_sold_out ) : ?>
-										
+
 										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
-										
+
 									<?php else : ?>
 										<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 									<?php endif; ?>
 								</div>
 								<div class="wp-travel-booking-row">
-									<?php 
+									<?php
 										/**
 										 * Support For WP Travel Tour Extras Plugin.
-										 * 
+										 *
 										 * @since 1.5.8
 										 */
 										do_action('wp_travel_trip_extras', $price_key );
@@ -2075,7 +2075,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									<?php if ( $available_dates ) : ?>
 										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
 										<input name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
-									<?php 
+									<?php
 									else : ?>
 										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
 										<input name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
@@ -2083,7 +2083,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									?>
 									</div>
 									<div class="wp-travel-calender-aside">
-										<?php 
+										<?php
 										$pricing_default_types = wp_travel_get_pricing_variation_options();
 
 										$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
@@ -2106,15 +2106,15 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										<div class="add-to-cart">
 											<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ) ?>" />
 											<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ) ?>" />
-											<?php 
+											<?php
 												$button = '<a href="%s" data-parent-id="pricing-'.esc_attr( $price_key ).'" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 												$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 												if ( 'yes' !== $fixed_departure ) :
 													$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url ); ?>
 													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ) ?>" />
-												<?php										
+												<?php
 												endif;
-												
+
 												$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
 												printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
 											?>
@@ -2139,12 +2139,12 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 	if ( empty( $trip_multiple_dates_data ) || ! is_array( $trip_multiple_dates_data ) )
 		return;
-	
+
 	global $post;
-	
+
 	if ( ! $post )
 		return;
-	
+
 	$trip_id = $post->ID;
 
 	$status_col = false;
@@ -2158,7 +2158,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
 		$wp_travel_inventory_sold_out_action = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_action', true );
-		
+
 		if ( 'allow_trip_enquiry' === $wp_travel_inventory_sold_out_action ) {
 			$sold_out_btn_rep_msg = wp_travel_utilities__get_inquiry_link();
 		}
@@ -2169,7 +2169,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 	$currency_symbol   = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text   = wp_travel_get_price_per_text( $trip_id );
 	$inventory_enabled = false;
-	
+
 	?>
 	<div class="trip_list_by_fixed_departure_dates">
 		<div class="trip_list_by_fixed_departure_dates_header">
@@ -2184,23 +2184,23 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 			</span>
 		</div>
 		<ul class="trip_list_by_fixed_departure_dates_list">
-			<?php foreach(  $trip_multiple_dates_data as $ky => $date_option ) : 
+			<?php foreach(  $trip_multiple_dates_data as $ky => $date_option ) :
 
 				$start_date = isset( $date_option['start_date'] ) && ! empty( $date_option['start_date'] ) ? $date_option['start_date'] : '';
 				$end_date = isset( $date_option['end_date'] ) && ! empty( $date_option['end_date'] ) ? $date_option['end_date'] : '';
 				$pricing_options = isset( $date_option['pricing_options'] ) && ! empty( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
 			?>
 			<?php if ( ! empty( $pricing_options ) && is_array( $pricing_options ) ) : ?>
-				<?php foreach( $pricing_options as $indx => $price_key ) : 
+				<?php foreach( $pricing_options as $indx => $price_key ) :
 					$variation = wp_travel_get_pricing_variation( $trip_id, $price_key );
 
 					if ( ! $variation )
 						continue;
 
-					foreach ( $variation as $k => $var ) : 
+					foreach ( $variation as $k => $var ) :
 
 						$rand = rand();
-					
+
 						$pricing_name = isset( $var['pricing_name'] ) ? $var['pricing_name'] : '';
 						$min_pax = isset( $var['min_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['min_pax'] ) : false;
 						$max_pax = isset( $var['max_pax'] ) && ! empty( $var['min_pax'] ) ? sprintf( __( '%s Pax', 'wp-travel' ), $var['max_pax'] ) : false;
@@ -2235,12 +2235,12 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									'{available_pax}' => $available_pax,
 									'{booked_pax}' => $booked_pax,
 									'{pax_limit}' => $pax_limit,
-									
+
 								);
 
 								$global_enabled = $inventory->is_inventory_enabled( $trip_id );
 								$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id, $price_key );
-								
+
 								if ( $global_enabled && $inventory_enabled_for_option ) {
 									$pricing_status_msg = str_replace( array_keys( $pricing_status_tags ), $pricing_status_tags, $status_msg );
 									$inventory_enabled = true;
@@ -2252,13 +2252,13 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									}
 								}
 
-								
+
 							}
 
 						$unavailable_class = '';
 						if ( strtotime( $start_date . ' 23:59:59' ) < time() || $pricing_sold_out )
 							$unavailable_class = 'pricing_unavailable';
-					
+
 					?>
 						<li class="<?php echo esc_attr( $unavailable_class ); ?>" id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
 							<div class="trip_list_by_fixed_departure_dates_wrap">
@@ -2285,7 +2285,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" placeholder="<?php echo esc_attr__( 'PAX', 'wp-travel' ); ?>" required type="number">
 								</span>
 								<span class="trip_list_by_fixed_departure_dates_price">
-								<?php 
+								<?php
 									$display_price = $pricing_option_price;
 									if ( 'yes' === $pricing_sale_enabled ) {
 										$display_price = $pricing_sale_price;
@@ -2311,13 +2311,13 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									<p class="wp-travel-sold-out">
 										<?php echo $sold_out_btn_rep_msg; ?>
 									</p>
-								<?php else : 
+								<?php else :
 									$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
-									
+
 									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
 									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
-								endif; 
+								endif;
 								?>
 							</div>
 							<?php //do_action('wp_travel_trip_extras', $price_key); ?>
@@ -2350,3 +2350,58 @@ function wp_travel_remove_jetpack_related_posts( $options ) {
 	return $options;
 }
 add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
+
+function wp_travel_get_header_image_tag( $html ) {
+		if( ! is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) {
+			return $html;
+		}
+		$attr = array();
+		$queried_object = get_queried_object();
+		$image_id = get_term_meta( $queried_object->term_id, 'wp_travel_trip_type_image_id', true );
+		if ( false == $image_id || '' == $image_id ) {
+				return $html;
+		}
+		$header = new stdClass();
+		$image_meta = get_post_meta( $image_id, '_wp_attachment_metadata', true );
+		$header->url = wp_get_attachment_url( $image_id );
+		$header->attachment_id = $image_id;
+		$width = absint( $image_meta['width'] );
+		$height = absint( $image_meta['height'] );
+
+		$attr = wp_parse_args(
+				$attr,
+				array(
+						'src' => $header->url,
+						'width' => $width,
+						'height' => $height,
+						'alt' => get_bloginfo( 'name' ),
+				)
+		);
+
+		// Generate 'srcset' and 'sizes' if not already present.
+		if ( empty( $attr['srcset'] ) && ! empty( $header->attachment_id ) ) {
+				$size_array = array( $width, $height );
+
+				if ( is_array( $image_meta ) ) {
+						$srcset = wp_calculate_image_srcset( $size_array, $header->url, $image_meta, $header->attachment_id );
+						$sizes = ! empty( $attr['sizes'] ) ? $attr['sizes'] : wp_calculate_image_sizes( $size_array, $header->url, $image_meta, $header->attachment_id );
+
+						if ( $srcset && $sizes ) {
+								$attr['srcset'] = $srcset;
+								$attr['sizes'] = $sizes;
+						}
+				}
+		}
+
+		$attr = array_map( 'esc_attr', $attr );
+		$html = '<img';
+
+		foreach ( $attr as $name => $value ) {
+				$html .= ' ' . $name . '="' . $value . '"';
+		}
+
+		$html .= ' />';
+		return $html;
+}
+
+add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );

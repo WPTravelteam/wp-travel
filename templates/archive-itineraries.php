@@ -25,14 +25,8 @@ get_header( 'itinerary' ); ?>
 	}
 	?>
 		<header class="page-header">
-					<figure class="wp-travel-archive-image">
-						<img src="" />
-					</figure>
-					<div class="wp-travel-archive-detail">
-						<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-						<?php the_archive_description( '<div class="taxonomy-description"><p>', '</p></div>' ); ?>
-					</div>
-
+				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+				<?php the_archive_description( '<div class="taxonomy-description"><p>', '</p></div>' ); ?>
 		</header>
 <?php do_action( 'wp_travel_before_main_content' ); ?>
 <?php if ( have_posts() ) : ?>
