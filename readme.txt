@@ -30,11 +30,11 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 * Tour filters: User can find their required Itineraries by filtering or using easy search form.
 * Painless Booking System: WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * Full Data Reporting: Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* Payment System: Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io 
-* Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip. 
+* Payment System: Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io
+* Multiple pricing and Multiple dates: This feature allows you to add multiple pricing and multiple dates for a single trip.
 * Tax Options: With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * WP Travel Customer Dashboard and Bookings Views.
-* Trip Facts: You can add the trips facts to your trips. 
+* Trip Facts: You can add the trips facts to your trips.
 * Email Notification: You as an admin will be notified of all booking made by users and also users will also get email notification about their booking details. All email templates are customizable.
 * Customizable tabs: All trip details page tabs in front-end can be customized from backend. You can change their labels and sort by your requirements or hide them.
 * Rating & Reviews: You can allow users to add rating or reviews for each trips. You can also hide them if you want for each trips.
@@ -78,7 +78,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 == Our Addons: ==
 
 * WP Travel Express Checkout
-* WP Travel Stripe Chekout 
+* WP Travel Stripe Chekout
 * WP Travel Instamojo Checkout
 * WP Travel Razorpay Checkout
 * WP Travel Utilities
@@ -128,12 +128,12 @@ Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum
 = WP Travel documentation and user guide =
  For setting up your site using the WP Travel plugin please refer to below given link:
 
-[Documentation page](http://wptravel.io/documentations/) 
+[Documentation page](http://wptravel.io/documentations/)
 
 = Where can I get support? =
 
- If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/) 
- 
+ If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/)
+
 
 = Will WP Travel work with other theme? =
 
@@ -157,6 +157,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 = 1.6.3 =
+* Enhancements: Image fields on taxonomies.
 * Fixes: Inventory Options additional hooks added.
 * Fixes: Cart Page minor CSS issues fixing.
 * Fixes: Minor issues and bug fixes.
@@ -204,17 +205,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Fixes: Settings page JS issue fixing.
 * Fixes: Minor issues and bug fixes.
 
-= 1.5.4 = 
+= 1.5.4 =
 * New Feature: WP Travel Dashboard Bookings Widget.
 * Enhancement: Custom Excerpt support for trips.
-* Fixes: Cart Page Error messages and layout fixes. 
+* Fixes: Cart Page Error messages and layout fixes.
 * Fixes: Minor issues and bug fixes.
 
-= 1.5.3 = 
+= 1.5.3 =
 * Enhancement: WP Travel Utilities Compatibility Fixes.
 * Fixes: Minor issues and bug fixes.
 
-= 1.5.2 = 
+= 1.5.2 =
 * Fixes: Empty FAQ answer errors fixing.
 * Datepicker language translation issue fixes.
 * Fixes: Shortcode render issue fixes with Brizy Page Builder.
@@ -222,60 +223,60 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 * Enhancements: Template options and hooks added.
 * Fixes: Minor issues and bug fixes.
 
-= 1.5.1 = 
+= 1.5.1 =
 * Fixes: Empty FAQ answer errors fixing.
 * Fixes: Max pax empty pricing option cart update issue fixes.
 * Fixes: W3C validator issues fixings.
 * Enhancement: WordPress 4.9.8 Compatibility testing.
 * Fixes: Minor issues and bug fixes.
 
-= 1.5.0 = 
+= 1.5.0 =
 * Enhancement: Booking datepicker Italian Language support added.
 * Fixes: Minor issues and bug fixes.
 
-= 1.4.9 = 
+= 1.4.9 =
 * Enhancement: Backend Trips Error handling enhancements.
 * Trip facts: multilingual support.
 * Fixes: Booking front-end calender design enhancement.
 * Fixes: Minor issues and bug fixes.
 
-= 1.4.8 = 
-* New Feature : WP Travel Filters widget trip facts search / Filters. 
+= 1.4.8 =
+* New Feature : WP Travel Filters widget trip facts search / Filters.
 * Enhancements / Feature : WP Travel Utilities Compatibility support.
 * Template Modification : /template/content-pricing-options.php file updated.
 * Fixes: Minor issues and bug fixes.
 
-= 1.4.7 = 
+= 1.4.7 =
 * Enhancements / Feature : WP Travel Utilities Compatibility support.
 * Fixes: Minor issues and bug fixes.
 
-= 1.4.6 = 
+= 1.4.6 =
 * Enhancements / Feature : Booking datepicker multi-lingual support.
 * Fixes: Cart page "Group" price total issue fixes.
 * Fixes: WP Travel Filter widget currency symbol issue fixed in range filter.
 * Fixes: Minor issues and bug fixes.
 
 
-= 1.4.5 = 
+= 1.4.5 =
 * Enhancements / Feature : GDPR Compatibility Support for Enquiry, Bookings and Payment Forms.
 * Fixes: Translation of strings issue fixes.
 * Fixes: Minor issues and bug fixes.
 
 = 1.4.4 =
-* Enhancements: Yoast SEO Content Analysis support. 
+* Enhancements: Yoast SEO Content Analysis support.
 * Fixes: Booking Only pax validation issue fixing.
 * Fixes: Minor issues and bugs fixes.
 
 = 1.4.3 =
-* New Feature: Discount Coupon creation and usage for payments. 
+* New Feature: Discount Coupon creation and usage for payments.
 * Fixes: Booking code display issue fixing.
 * Fixes: Checkout issue fixings.
-* Fixes: Cart upadtes and functionality improvements. 
+* Fixes: Cart upadtes and functionality improvements.
 * Fixes: Add new Itinerary freeze issue fixings.
 * Fixes: Minor issues and bugs fixes.
 
 = 1.4.2 =
-* New Feature: Frontend Google Maps set zoom level. 
+* New Feature: Frontend Google Maps set zoom level.
 * Fixes: Booking Only form issue fixing.
 * Fixes: Backend link in gallery drop area issue fixed.
 * Fixes: Fixed departure dates selection issue fixed.
@@ -330,7 +331,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.3.2 =
 * New Feature: Multiple Trip Facts options for trips.
 * New Feature: Multiple trip Facts Shortcode.
-* Fixes: Multiple Pricing and date issue fixings. 
+* Fixes: Multiple Pricing and date issue fixings.
 * Fixes: Minor issues and bugs fixings.
 
 = 1.3.1 =
