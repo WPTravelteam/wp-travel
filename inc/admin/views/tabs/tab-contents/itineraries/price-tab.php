@@ -660,13 +660,13 @@ if ( ! $price_per ) {
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
-	<tr>
+	<tr class="wp-travel-tour-extra-title" style="display:<?php echo esc_attr( 'yes' === $enable_pricing_options ) ? 'none':'table-row' ?>">
 		<th colspan="2">
 			<h3><?php echo esc_html( 'Tour Extras', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
-	<tr>
-		<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = false, $key = 'wp_travel_tour_extras' ); ?>
+	<tr class="wp-travel-tour-extra-content" style="display:<?php echo esc_attr( 'yes' === $enable_pricing_options ) ? 'none':'table-row' ?>" >
+		<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 	</tr>
 	<tr>
 		<th colspan="2">

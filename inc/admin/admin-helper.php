@@ -866,7 +866,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 /**
  * Tour Extras Multiselect Options.
  */
-function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key  ) {
+function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key, $table_row = false ) {
 
 $tour_extras = wp_count_posts( 'tour-extras' );
 // Check Tour Extras Count.
@@ -886,18 +886,15 @@ if ( $context && 'pricing_options' === $context ) {
 
 $restricted_trips = ( $trip_extras ) ? $trip_extras: array();
 
-ob_start();
-?>
-	
-	<td class="one-third">
+ob_start(); ?>
+	<?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>		
 		<label for=""><?php echo esc_html( 'Tour Extras', 'wp-travel-coupon-pro' ); ?></label>
-	</td>
-	<td class="two-third">
+	<?php if ( $table_row ) : ?></td><td><?php  else : ?></div><div class="two-third"><?php endif ; ?>		
+			
 		<?php $itineraries = wp_travel_get_tour_extras_array(); ?>
 
 		<div class="custom-multi-select">
-		<?php 
-
+			<?php 
 			$count_options_data = count( $restricted_trips );
 			$count_itineraries = count( $itineraries );
 			$multiple_checked_all = '';
@@ -909,8 +906,7 @@ ob_start();
 			if ( $count_itineraries > 0 ) {
 				$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
 			}
-
-		?>
+			?>
 			<span class="select-main">
 				<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span> 
 				<span class="carret"></span> 
@@ -945,8 +941,7 @@ ob_start();
 			</span>
 
 		</div>
-	</td>
-	
+	<?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>		
 <?php
 $data = ob_get_clean();
 return $data;
