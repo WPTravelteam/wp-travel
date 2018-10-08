@@ -76,7 +76,6 @@ class WP_TRAVEL_TERM_META {
 	* @since 1.6.3
 	*/
 	public function save_category_image ( $term_id, $tt_id ) {
-		error_log( $term_id );
 		if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
 			$image = $_POST['wp_travel_trip_type_image_id'];
 			add_term_meta( $term_id, 'wp_travel_trip_type_image_id', $image );
