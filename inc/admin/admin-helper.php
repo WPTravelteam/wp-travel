@@ -871,7 +871,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 $tour_extras = wp_count_posts( 'tour-extras' );
 // Check Tour Extras Count.
 if( 0 == $tour_extras->publish )
-	return;
+	return  sprintf( 'Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.');
 
 if( empty( $post_id ) || empty( $fetch_key ) )
 	return;
@@ -888,65 +888,65 @@ $restricted_trips = ( $trip_extras ) ? $trip_extras: array();
 
 ob_start();
 ?>
-	<div>
-		<div class="one-third">
-			<label for=""><?php echo esc_html( 'Tour Extras', 'wp-travel-coupon-pro' ); ?></label>
-		</div>
-		<div class="two-third">
-			<?php $itineraries = wp_travel_get_tour_extras_array(); ?>
+	
+	<td class="one-third">
+		<label for=""><?php echo esc_html( 'Tour Extras', 'wp-travel-coupon-pro' ); ?></label>
+	</td>
+	<td class="two-third">
+		<?php $itineraries = wp_travel_get_tour_extras_array(); ?>
 
-			<div class="custom-multi-select">
-			<?php 
+		<div class="custom-multi-select">
+		<?php 
 
-				$count_options_data = count( $restricted_trips );
-				$count_itineraries = count( $itineraries );
-				$multiple_checked_all = '';
-				if ( $count_options_data == $count_itineraries ) {
-					$multiple_checked_all = 'checked=checked';
-				}
+			$count_options_data = count( $restricted_trips );
+			$count_itineraries = count( $itineraries );
+			$multiple_checked_all = '';
+			if ( $count_options_data == $count_itineraries ) {
+				$multiple_checked_all = 'checked=checked';
+			}
 
-				$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
-				if ( $count_itineraries > 0 ) {
-					$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
-				}
+			$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
+			if ( $count_itineraries > 0 ) {
+				$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
+			}
 
-			?>
-				<span class="select-main">
-					<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span> 
-					<span class="carret"></span> 
-					<span class="close"></span>
-					<ul class="wp-travel-multi-inner">
-						<li class="wp-travel-multi-inner">
-							<label class="checkbox wp-travel-multi-inner">
-								<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel' ); ?>
+		?>
+			<span class="select-main">
+				<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span> 
+				<span class="carret"></span> 
+				<span class="close"></span>
+				<ul class="wp-travel-multi-inner">
+					<li class="wp-travel-multi-inner">
+						<label class="checkbox wp-travel-multi-inner">
+							<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel' ); ?>
+						</label>
+					</li>
+					<?php
+					foreach ( $itineraries as $key => $iti ) { 
+						
+						$checked = '';
+						$selecte_list_class = '';
+
+						if ( in_array( $key, $restricted_trips ) ) {
+
+							$checked = 'checked=checked';
+							$selecte_list_class = 'selected';
+
+						}
+
+					?>
+						<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ) ?>">
+							<label class="checkbox wp-travel-multi-inner ">
+								<input <?php echo esc_attr( $checked ); ?>  name="<?php echo esc_attr( $name ); ?>" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $key ); ?>">  <?php echo esc_html( $iti ); ?>
 							</label>
 						</li>
-						<?php
-						foreach ( $itineraries as $key => $iti ) { 
-							
-							$checked = '';
-							$selecte_list_class = '';
+					<?php } ?>
+				</ul>
+			</span>
 
-							if ( in_array( $key, $restricted_trips ) ) {
-
-								$checked = 'checked=checked';
-								$selecte_list_class = 'selected';
-
-							}
-
-						?>
-							<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ) ?>">
-								<label class="checkbox wp-travel-multi-inner ">
-									<input <?php echo esc_attr( $checked ); ?>  name="<?php echo esc_attr( $name ); ?>" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $key ); ?>">  <?php echo esc_html( $iti ); ?>
-								</label>
-							</li>
-						<?php } ?>
-					</ul>
-				</span>
-
-			</div>
 		</div>
-	</div>
+	</td>
+	
 <?php
 $data = ob_get_clean();
 return $data;
