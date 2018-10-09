@@ -246,8 +246,9 @@ function wp_travel_enquiries_info(){
 
 				<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
 					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
-					<?php echo $before_field; ?>
-					<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
+					<?php echo $before_field;
+					$field_type = ('date' === $field['type'] ) ? 'text' : $field['type']; ?>
+					<input <?php // echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field_type ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
 				</div>
 				<?php
 					break;
