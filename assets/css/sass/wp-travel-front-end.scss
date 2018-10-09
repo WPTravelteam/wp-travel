@@ -3594,6 +3594,21 @@ ul.wp-travel-error {
                     }
                 }
             }
+            .wp-travel-booking-row-fd {
+                background-color: #f9f9f9;
+                padding: 15px;
+                padding-left: 15px !important;
+                height: auto;
+                width: 100%;
+                opacity: 1;
+                .add-to-cart-btn {
+                    margin-left: 20px;
+                    padding: 8px 15px;
+                    border: 1px solid #8b8b8b;
+                    font-size: 14px;
+                    display: inline-block;
+                }
+            }
         }
         .trip_list_by_fixed_departure_dates_booking {
             align-self: center;
@@ -4080,6 +4095,7 @@ ul.wp-travel-error {
           border-bottom: 0;
           margin-left: -45px;
           padding: 10px 20px 5px 60px;
+          justify-content: unset;
           @media screen and (max-width: 992px) and (min-width: 768px) {
             > div {
               > span {
@@ -4101,11 +4117,21 @@ ul.wp-travel-error {
         }
         .wp_travel_tour_extras_title {
           margin-right: 0;
+          width: 50%;
+          @media screen and (max-width: 576px) {
+              min-width: 100%;
+          }
         }
         .wp_travel_tour_extras_price {
           margin: 0;
+          text-align: center;
+          min-width: 10%;
+          margin-left: auto;
           @media screen and (max-width: 576px) {
             max-width: 100%;
+            min-width: 100%;
+            text-align: left;
+            margin-left: 0;
           }
           ins {
             font-size: 14px;
@@ -4113,15 +4139,34 @@ ul.wp-travel-error {
           }
         }
         .wp_travel_tour_extras_quantity {
-          width: 90px;
+            min-width: 90px;
           display: flex;
+          margin-left: auto;
           @media screen and (min-width: 768px) and (max-width: 992px) {
             display: block;
           }
+          @media screen and (max-width: 768px) {
+              margin-right: 15px;
+          }
+          @media screen and (max-width: 576px) {
+            min-width: 100%;
+            margin-left: 0;
+            }
           span {
             align-self: center;
             margin-right: 5px;
           }
+          input {
+            @media screen and (max-width: 576px) {
+               width: 90px;
+            }
+          }
+        }
+        .wp_travel_tour_extras_total_price {
+            margin-left: auto;
+            @media screen and (max-width: 768px) {
+                margin-left: 0;
+            }
         }
       }
     }

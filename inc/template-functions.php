@@ -1384,22 +1384,6 @@ function wp_travel_archive_toolbar() {
 
 <?php
 }
-
-/**
- * Add Taxonomy archive page description / Image.
- *
- * @return void
- */
-function wp_travel_category_description() {
-
-	?>
-
-
-
-	<?php
-
-}
-
 /**
  * Archive page wrapper close.
  *
@@ -1786,7 +1770,6 @@ add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
 // Filters HTML.
 add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
-add_action( 'wp_travel_before_main_content', 'wp_travel_category_description' );
 // add_action( 'parse_query', 'wp_travel_posts_filter' );
 add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
 
@@ -2305,21 +2288,53 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 								</span>
 							</div>
 							<div class="trip_list_by_fixed_departure_dates_booking">
-							<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ) ?>" />
-								<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ) ?>" />
-								<?php if ( $pricing_sold_out ) : ?>
-									<p class="wp-travel-sold-out">
-										<?php echo $sold_out_btn_rep_msg; ?>
-									</p>
-								<?php else :
-									$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
-									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+								<div class="action">
+									<?php 
+									$trip_extras_class = new Wp_Travel_Extras_Frontend();
+									if ( $pricing_sold_out ) { ?>
 
-									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
-									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
-								endif;
-								?>
+										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+
+									<?php } else {  ?>
+										<?php if( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { ?>
+											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+										<?php } 
+										
+										else {
+											$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+											$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+
+											$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+											printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+										} 
+									} ?>
+								</div>
+								
 							</div>
+							<div class="wp-travel-booking-row-fd">
+									<?php
+										/**
+										 * Support For WP Travel Tour Extras Plugin.
+										 *
+										 * @since 1.5.8
+										 */
+										do_action('wp_travel_trip_extras', $price_key );
+									?>
+										<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ) ?>" />
+										<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ) ?>" />
+										<?php if ( $pricing_sold_out ) : ?>
+											<p class="wp-travel-sold-out">
+												<?php echo $sold_out_btn_rep_msg; ?>
+											</p>
+										<?php else :
+											$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+											$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+
+											$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+											printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+										endif;
+										?>
+									</div>
 							<?php //do_action('wp_travel_trip_extras', $price_key); ?>
 						</li>
 					<?php endforeach; ?>

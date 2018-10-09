@@ -7,8 +7,7 @@
 class Wp_Travel_Extras_Frontend {
 
     public function __construct() {
-        //Init Class.
-        $this->init();
+
 
     }
     /**
@@ -214,5 +213,12 @@ class Wp_Travel_Extras_Frontend {
 
 }
 
+function Wp_Travel_Extras_Frontend() {
+
+    $Extras_Class = new Wp_Travel_Extras_Frontend();
+    return $Extras_Class->init();
+
+}
+
 // Run the Class. | Construct.
-new Wp_Travel_Extras_Frontend();
+Wp_Travel_Extras_Frontend();

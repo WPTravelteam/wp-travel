@@ -244,6 +244,15 @@ jQuery(document).ready(function($) {
         })
     });
 
+    jQuery('.wp-travel-booking-row-fd').hide();
+    jQuery('.show-booking-row-fd').click(function(event) {
+        event.preventDefault();
+        jQuery(this).parent('.action').parent('.trip_list_by_fixed_departure_dates_booking').siblings('.wp-travel-booking-row-fd').toggle('fast').addClass('animate');
+        jQuery(this).text(function(i, text) {
+            return text === wp_travel_frontend_vars.text_array.pricing_select ? wp_travel_frontend_vars.text_array.pricing_close : wp_travel_frontend_vars.text_array.pricing_select;
+        })
+    });
+
     jQuery('.wp-travel-pricing-dates').each(function() {
         var availabledate = jQuery(this).data('available-dates');
         if (availabledate) {
