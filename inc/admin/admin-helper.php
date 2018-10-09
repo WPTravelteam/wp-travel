@@ -870,8 +870,15 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 
 $tour_extras = wp_count_posts( 'tour-extras' );
 // Check Tour Extras Count.
-if( 0 == $tour_extras->publish )
-	return  sprintf( 'Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.');
+if( 0 == $tour_extras->publish ) {
+	ob_start(); ?>
+	<?php if ( $table_row ) : ?><td><?php  else : ?><div><?php endif ; ?>
+	<?php echo sprintf( 'Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.'); ?>
+	<?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
+	
+	$data = ob_get_clean();
+return $data;
+}
 
 if( empty( $post_id ) || empty( $fetch_key ) )
 	return;
