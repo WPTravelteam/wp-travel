@@ -68,14 +68,14 @@ function wp_travel_enquiries_form_fields() {
 			'label'   => '',
 			'name'    => 'wp_travel_label_submit_enquiry',
 			'id'      => 'wp_travel_label_submit_enquiry',
-			'default' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),			
+			'default' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
 		),
 		'label_processing' => array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'wp_travel_label_processing',
 			'id'      => 'wp_travel_label_processing',
-			'default' => __( 'PROCESSING...', 'wp-travel' ),			
+			'default' => __( 'PROCESSING...', 'wp-travel' ),
 		),
 	);
 	return apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
@@ -186,7 +186,7 @@ function wp_travel_enquiries_info(){
 	array_multisort( $priority, SORT_ASC, $form_fields );
 
 	$wp_travel_post_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : '';
-	
+
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array(); ?>
 
 	<div class="wp-travel-booking-form-wrapper">
@@ -207,8 +207,8 @@ function wp_travel_enquiries_info(){
 
 				$field_type = $field['type'];
 
-				$attributes = '';				
-				if ( isset( $field['attributes'] ) ) {					
+				$attributes = '';
+				if ( isset( $field['attributes'] ) ) {
 					foreach ( $field['attributes'] as $attribute => $attribute_val ) {
 						$attributes .= sprintf( '%s=%s ', $attribute, $attribute_val );
 					}
@@ -227,21 +227,21 @@ function wp_travel_enquiries_info(){
 
 				$input_val = isset( $enquiry_data[$field['name']] ) ? $enquiry_data[$field['name']] : '';
 
-				switch ( $field_type ) { 
+				switch ( $field_type ) {
 				case 'textarea' : ?>
 					<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
 					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 						<textarea <?php echo esc_attr( $attributes ) ?> name="<?php echo esc_attr( $field['name'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val ); ?></textarea>
 					</div>
 				<?php break; ?>
-				
+
 				<?php default : ?>
-	
+
 				<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
 					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
 					<?php echo $before_field; ?>
 					<input <?php echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field['type'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
-				</div>	
+				</div>
 				<?php
 					break;
 				}
@@ -250,7 +250,7 @@ function wp_travel_enquiries_info(){
 
 		</form>
 	</div>
-<?php 
+<?php
 
 }
 
@@ -400,6 +400,8 @@ function wp_travel_save_user_enquiry() {
 	$enquiry_data['wp_travel_enquiry_email'] = isset( $formdata['wp_travel_enquiry_email'] ) ? $formdata['wp_travel_enquiry_email'] : '';
 
 	$enquiry_data['wp_travel_enquiry_query'] = isset( $formdata['wp_travel_enquiry_query'] ) ? $formdata['wp_travel_enquiry_query'] : '';
+
+	$enquiry_data = apply_filters( 'wp_travel_frontend_enquiry_data', $enquiry_data, $formdata );
 
 	$trip_code = wp_travel_get_trip_code( $post_id );
 
