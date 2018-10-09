@@ -110,7 +110,7 @@ function wp_travel_get_enquiries_form() {
 		'submit_button' => array(
 			'name'  => 'wp_travel_enquiry_submit',
 			'id'    => 'wp-travel-enquiry-submit',
-			'value' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
+			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ENQUIRY', 'wp-travel' ) ),
 		),
 		'nonce' => array(
 			'action' => 'wp_travel_security_action',
