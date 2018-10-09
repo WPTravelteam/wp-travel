@@ -492,6 +492,7 @@ function wp_travel_save_user_enquiry() {
 			wp_send_json_error( $errors );
 			return;
 		}
+		do_action( 'wp_travel_after_enquiries_email_sent', $admin_email, $customer_email, $formdata, $enquiry_id );
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(
