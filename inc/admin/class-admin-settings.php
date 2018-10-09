@@ -684,6 +684,8 @@ class WP_Travel_Admin_Settings {
 
 									</table>
 
+									<?php do_action( 'wp_travel_enquiry_customer_email_settings' ); ?>
+
 								</div>
 
 							</div>
