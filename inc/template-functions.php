@@ -426,7 +426,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					<span class="wp-travel-booking-enquiry">
 						<span class="dashicons dashicons-editor-help"></span>
 						<span>
-							<?php esc_html_e( 'Trip Enquiry', 'wp-travel'); ?>
+							<?php echo esc_attr( apply_filters( 'wp_travel_trip_enquiry_popup_link_text', __( 'Trip Enquiry', 'wp-travel' ) ) ); ?>
 						</span>
 					</span>
 				</a>
@@ -2289,7 +2289,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 							</div>
 							<div class="trip_list_by_fixed_departure_dates_booking">
 								<div class="action">
-									<?php 
+									<?php
 									$trip_extras_class = new Wp_Travel_Extras_Frontend();
 									if ( $pricing_sold_out ) { ?>
 
@@ -2298,18 +2298,18 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									<?php } else {  ?>
 										<?php if( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { ?>
 											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
-										<?php } 
-										
+										<?php }
+
 										else {
 											$button = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 											$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 
 											$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
 											printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
-										} 
+										}
 									} ?>
 								</div>
-								
+
 							</div>
 							<div class="wp-travel-booking-row-fd">
 									<?php
