@@ -493,6 +493,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 
 //booking-form
+#wp-travel-enquiries-info {
+    .wp-travel-form-field {
+        display: block;
+    }
+}
 .wp-travel-form-field {
     &.full-width {
         width: calc(90% + 32px);
