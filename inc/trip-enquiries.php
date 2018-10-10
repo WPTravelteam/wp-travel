@@ -254,7 +254,7 @@ function wp_travel_enquiries_info(){
 				<?php case 'date' : ?>
 					<div class="wp-travel-form-field ">
 						<label for="<?php echo esc_attr( $field['id'] ) ?>""><?php echo esc_html( $field['label'] ) ?></label>
-						<input class="wp-travel-datepicker" type="text" id="<?php echo esc_attr( $field['id'] ) ?>"" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>">
+						<input autocomplete="off" class="wp-travel-datepicker" type="text" id="<?php echo esc_attr( $field['id'] ) ?>"" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>">
 					</div>
 
 				<?php
