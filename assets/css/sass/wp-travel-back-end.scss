@@ -495,7 +495,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 //booking-form
 #wp-travel-enquiries-info {
     .wp-travel-form-field {
-        display: block;
+        display: flex;
+        width: 80%;
+        @media screen and (max-width: 768px) {
+            flex-wrap: wrap;
+        }
+        label {
+            margin-right: 15px;
+            min-width: 135px;
+        }
+        input,
+        textarea,
+        select {
+            min-width: calc(100% - 150px);
+        }
     }
 }
 .wp-travel-form-field {
