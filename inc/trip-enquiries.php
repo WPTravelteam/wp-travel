@@ -197,7 +197,6 @@ function wp_travel_enquiries_info(){
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array(); ?>
 
 	<div class="wp-travel-booking-form-wrapper">
-		<form action="" method="post">
 			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 			<div class="wp-travel-form-field full-width">
 				<label for="wp-travel-post-id"><?php echo esc_html( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) ); ?></label>
@@ -242,10 +241,10 @@ function wp_travel_enquiries_info(){
 					</div>
 				<?php break; ?>
 
-				<?php case 'text_info' : 
+				<?php case 'text_info' :
 
 					printf( '<div class="wp-travel-text-info"><span class="wp-travel-info-content" id="%s"><strong>%s</strong></span></div>', $field['id'], $field['label'] );
-					
+
 					break;
 				?>
 
@@ -254,8 +253,8 @@ function wp_travel_enquiries_info(){
 						<label for="<?php echo esc_attr( $field['id'] ) ?>""><?php echo esc_html( $field['label'] ) ?></label>
 						<input class="wp-travel-datepicker" type="text" id="<?php echo esc_attr( $field['id'] ) ?>"" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>">
 					</div>
-					
-				<?php 
+
+				<?php
 					break;
 				?>
 
@@ -272,8 +271,6 @@ function wp_travel_enquiries_info(){
 				}
 
 			endforeach; ?>
-
-		</form>
 	</div>
 <?php
 
@@ -471,7 +468,7 @@ function wp_travel_save_user_enquiry() {
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 	$enquiry_id      = $new_enquiry;
-	$itinerary_id    = sanitize_text_field( $formdata['post_id'] );
+	$itinerary_id    = sanitize_text_field( $enquiry_data['post_id'] );
 	$itinerary_title = get_the_title( $itinerary_id );
 	$customer_name   = $enquiry_data['wp_travel_enquiry_name'];
 	$customer_email  = $enquiry_data['wp_travel_enquiry_email'];
