@@ -242,6 +242,23 @@ function wp_travel_enquiries_info(){
 					</div>
 				<?php break; ?>
 
+				<?php case 'text_info' : 
+
+					printf( '<div class="wp-travel-text-info"><span class="wp-travel-info-content" id="%s"><strong>%s</strong></span></div>', $field['id'], $field['label'] );
+					
+					break;
+				?>
+
+				<?php case 'date' : ?>
+					<div class="wp-travel-form-field ">
+						<label for="<?php echo esc_attr( $field['id'] ) ?>""><?php echo esc_html( $field['label'] ) ?></label>
+						<input class="wp-travel-datepicker" type="text" id="<?php echo esc_attr( $field['id'] ) ?>"" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>">
+					</div>
+					
+				<?php 
+					break;
+				?>
+
 				<?php default : ?>
 
 				<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">

@@ -111,7 +111,7 @@ class WP_Travel_Admin_Assets {
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_enqueue_script( 'jquery-chart-custom' );
 		}
-		$allowed_screen = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE );
+		$allowed_screen = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
 
 		if ( in_array( $screen->id, $allowed_screen ) ) {
 			$settings = wp_travel_get_settings();
