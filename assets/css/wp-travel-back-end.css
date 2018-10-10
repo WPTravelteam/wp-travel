@@ -339,6 +339,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   .stat-toolbar-form .field-group #wp-travel-enquiries-info .wp-travel-form-field textarea,
   #wp-travel-enquiries-info .wp-travel-form-field .stat-toolbar-form .field-group textarea {
     min-width: calc(100% - 150px); }
+#wp-travel-enquiries-info .wp-travel-text-info {
+  margin-bottom: 15px;
+  padding: 0 15px; }
 
 .wp-travel-form-field {
   width: 45%;

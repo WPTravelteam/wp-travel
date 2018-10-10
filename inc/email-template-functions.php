@@ -249,7 +249,7 @@ ob_start();
 
 				</td>
 				<td align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
-					<a href="{itinerary_link}" target="_blank" style="color: #5a418b;text-decoration: none;">{customer_name}</a>
+					{customer_name}
 				</td>	
 			</tr>
 
@@ -259,7 +259,7 @@ ob_start();
 
 				</td>
 				<td align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
-					<a href="{itinerary_link}" target="_blank" style="color: #5a418b;text-decoration: none;">{customer_email}</a>
+					{customer_email}
 				</td>	
 			</tr>
 
@@ -269,13 +269,13 @@ ob_start();
 
 				</td>
 				<td align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
-					<a href="{itinerary_link}" target="_blank" style="color: #5a418b;text-decoration: none;">{customer_note}</a>
+					{customer_note}
 				</td>	
 			</tr>
 
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="center">			
-					<a href="{enquery_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;height: 30px;line-height: 30px;width: 200px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?></a>
+					<a href="{enquery_edit_link}" class="wp-travel-veiw-more" target="_blank" style="color: #fcfffd;text-decoration: none;background: #dd402e;border-radius: 3px;display: block;font-size: 14px;margin: 20px auto;padding: 10px 20px;text-align: center;height: 30px;line-height: 30px;width: 200px;"><?php esc_html_e( 'View details on site', 'wp-travel' ) ?>
 				</td>
 			</tr>
 		</table>
