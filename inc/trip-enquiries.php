@@ -63,28 +63,31 @@ function wp_travel_enquiries_form_fields() {
 			'priority'      => 90,
 			'wrapper_class' => 'full-width textarea-field',
 		),
-		'label_submit_enquiry' => array(
+	);
+
+	if ( ! is_admin() ) {
+		$enquiry_fields['label_submit_enquiry'] = array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'wp_travel_label_submit_enquiry',
 			'id'      => 'wp_travel_label_submit_enquiry',
 			'default' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
-		),
-		'label_processing' => array(
+		);
+		$enquiry_fields['label_processing'] = array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'wp_travel_label_processing',
 			'id'      => 'wp_travel_label_processing',
 			'default' => __( 'PROCESSING...', 'wp-travel' ),
-		),
-		'action' => array(
+		);
+		$enquiry_fields['action'] = array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'action',
 			'id'      => 'wp_travel_enquiry_action',
 			'default' => 'wp_travel_save_user_enquiry',
-		),
-	);
+		);
+	}
 	return apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
 }
 
