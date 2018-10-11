@@ -763,7 +763,7 @@ function wp_travel_book_now() {
 	if ( 'yes' == $send_booking_email_to_admin ) {
 		
 		// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $client_email, $client_email );
+		$headers = $email->email_headers( $reply_to_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
 				

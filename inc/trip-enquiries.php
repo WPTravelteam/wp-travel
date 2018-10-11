@@ -402,6 +402,8 @@ function wp_travel_save_user_enquiry() {
 
 	}
 
+	$settings = wp_travel_get_settings();
+
 	$post_id = $formdata['wp_travel_enquiry_post_id'];
 
 	$post_type = get_post_type( $post_id );
@@ -497,8 +499,10 @@ function wp_travel_save_user_enquiry() {
 	// Admin Subject.
 	$enquiry_subject = $enquiry_template['subject'];
 
+	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
+
 		// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $customer_email, $customer_email );
+		$headers = $email->email_headers( $reply_to_email, $customer_email );
 
 		if ( ! wp_mail( $admin_email, $enquiry_subject, $enquiry_message, $headers ) ) {
 
