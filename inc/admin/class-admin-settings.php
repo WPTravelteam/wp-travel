@@ -385,7 +385,16 @@ class WP_Travel_Admin_Settings {
 				</div>
 			</div>
 		<?php endif; ?>
-
+		<table class="form-table">
+			<tr>
+				<th>
+					<label for="wp_travel_global_from_email"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<input value="<?php echo isset( $args['settings']['wp_travel_from_email'] ) ? $args['settings']['wp_travel_from_email'] : get_option( 'admin_email' ); ?>" type="email" name="wp_travel_from_email" id="wp_travel_global_from_email">
+				</td>
+			</tr>
+		</table>
 		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
@@ -425,14 +434,7 @@ class WP_Travel_Admin_Settings {
 											</span>
 										</td>
 									</tr>
-									<tr>
-										<th>
-											<label for="booking-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-										</th>
-										<td>
-											<input value="<?php echo isset( $booking_admin_email_settings['from_email'] ) ? $booking_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="booking_admin_template[from_email]" id="booking-admin-email-from">
-										</td>
-									</tr>
+									<?php do_action( 'wp_travel_utils_booking_notif' ); ?>
 									<tr>
 										<th>
 											<label for="booking-admin-email-sub"><?php esc_html_e( 'Booking Email Subject', 'wp-travel' ); ?></label>
@@ -480,14 +482,6 @@ class WP_Travel_Admin_Settings {
 							<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
 
 								<table class="form-table">
-									<tr>
-										<th>
-											<label for="booking-client-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-										</th>
-										<td>
-											<input value="<?php echo isset( $booking_client_email_settings['from_email'] ) ? $booking_client_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="booking_client_template[from_email]" id="booking-client-email-from">
-										</td>
-									</tr>
 									<tr>
 										<th>
 											<label for="booking-client-email-sub"><?php esc_html_e( 'Booking Client Email Subject', 'wp-travel' ); ?></label>
@@ -555,14 +549,7 @@ class WP_Travel_Admin_Settings {
 								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
-										<tr>
-											<th>
-												<label for="payment-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-											</th>
-											<td>
-												<input value="<?php echo isset( $payment_admin_email_settings['from_email'] ) ? $payment_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="payment_admin_template[from_email]" id="payment-admin-email-from">
-											</td>
-										</tr>
+									<?php do_action( 'wp_travel_utils_payment_notif' ); ?>
 										<tr>
 											<th>
 												<label for="payment-admin-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
@@ -610,14 +597,6 @@ class WP_Travel_Admin_Settings {
 									<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
-										<tr>
-											<th>
-												<label for="payment-client-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-											</th>
-											<td>
-												<input value="<?php echo isset( $payment_client_email_settings['from_email'] ) ? $payment_client_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="payment_client_template[from_email]" id="payment-client-email-from">
-											</td>
-										</tr>
 										<tr>
 											<th>
 												<label for="payment-client-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
@@ -684,14 +663,7 @@ class WP_Travel_Admin_Settings {
 								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
-										<tr>
-											<th>
-												<label for="enquiry-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-											</th>
-											<td>
-												<input value="<?php echo isset( $enquiry_admin_email_settings['from_email'] ) ? $enquiry_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="enquiry_admin_template[from_email]" id="enquiry-admin-email-from">
-											</td>
-										</tr>
+										<?php do_action( 'wp_travel_utils_enquiries_notif' ); ?>
 										<tr>
 											<th>
 												<label for="enquiry-admin-email-sub"><?php esc_html_e( 'Enquiry Email Subject', 'wp-travel' ); ?></label>
@@ -1230,7 +1202,9 @@ class WP_Travel_Admin_Settings {
 
 			$cart_page_id = ( isset( $_POST['cart_page_id'] ) && '' !== $_POST['cart_page_id'] ) ? $_POST['cart_page_id'] : '';
 
-			$gdpr_message = ( isset( $_POST['wp_travel_gdpr_message'] ) && '' !== $_POST['wp_travel_gdpr_message'] ) ? $_POST['wp_travel_gdpr_message'] : ''; 
+			$gdpr_message = ( isset( $_POST['wp_travel_gdpr_message'] ) && '' !== $_POST['wp_travel_gdpr_message'] ) ? $_POST['wp_travel_gdpr_message'] : '';
+
+			$wp_travel_from_email = ( isset( $_POST['wp_travel_from_email'] ) && '' !== $_POST['wp_travel_from_email'] ) ? $_POST['wp_travel_from_email'] : '';
 
 			if ( '' !== $cart_page_id ) {
 				update_option( 'wp_travel_wp-travel-cart_page_id', $cart_page_id );
@@ -1277,6 +1251,9 @@ class WP_Travel_Admin_Settings {
 			//GDPR Message
 			$settings['wp_travel_gdpr_message'] = $gdpr_message;
 
+			// Save Global From E-mail Setting
+			$settings['wp_travel_from_email'] = $wp_travel_from_email;
+ 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 
