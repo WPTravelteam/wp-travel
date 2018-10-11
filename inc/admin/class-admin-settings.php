@@ -390,7 +390,7 @@ class WP_Travel_Admin_Settings {
 			</div>
 		<?php endif; ?>
 		<table class="form-table">
-			<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel-utilities' ) ?></h4></td></tr>
+			<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel' ) ?></h4></td></tr>
 
 			<tr>
 				<th>

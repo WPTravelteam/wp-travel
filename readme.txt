@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -156,6 +156,13 @@ WP Travel plugin has been tested with the default WordPress theme. It specially 
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.6.5 =
+* Enhancement: New From email settings in general settings.
+* Enhancement: WP Travel Utilities suppot hook added.
+* Enhancement: Related Trips template created.
+* Fixes: Minor issues and bug fixes.
+
 = 1.6.4 =
 * Fixes: Fixed departure trip extras display issue fixes.
 * Fixes: Cart Page minor CSS issues fixing.
