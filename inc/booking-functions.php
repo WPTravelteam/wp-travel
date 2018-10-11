@@ -757,6 +757,8 @@ function wp_travel_book_now() {
 	//Client Subject.
 	$client_subject = $client_template['subject'];
 
+	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
+
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
 		
@@ -786,7 +788,7 @@ function wp_travel_book_now() {
 
 	// Send email to client.
 	// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $site_admin_email, $site_admin_email );
+		$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
 				

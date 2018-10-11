@@ -416,8 +416,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// Client Payment Subject.
 	$client_payment_subject = $client_payment_template['subject'];
 
+	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
+
 	// To send HTML mail, the Content-type header must be set.
-	$headers = $email->email_headers( $site_admin_email, $site_admin_email );
+	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
 		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
