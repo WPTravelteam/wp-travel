@@ -142,7 +142,7 @@ class WP_Travel_Admin_Metaboxes {
 		?>
 		<table>
 			<tr>
-				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ) ?></strong</td>
+				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ) ?></strong></td>
 				<td>
 				<select id="wp_travel_payment_status" name="wp_travel_payment_status" >
 				<?php foreach ( $status as $value => $st ) : ?>
@@ -170,19 +170,19 @@ class WP_Travel_Admin_Metaboxes {
 					$due_amount = 0;
 				} ?>
 				<tr>
-					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ) ?></strong></td>
 					<td><?php echo esc_html( $mode[ $label_key ]['text'] ) ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong></td>
 					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $trip_price ) ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ) ?></strong></td>
 					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $paid_amount ) ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ) ?></strong</td>
+					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ) ?></strong></td>
 					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $due_amount ) ?></td>
 				</tr>
 			<?php endif; ?>
