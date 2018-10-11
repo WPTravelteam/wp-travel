@@ -311,6 +311,7 @@ class WP_Travel_Admin_Settings {
 			'admin_title'  => __( 'New Booking', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
+			'from_email'    => get_option( 'admin_email' ),
 
 		);
 
@@ -321,6 +322,7 @@ class WP_Travel_Admin_Settings {
 			'client_title'  => __( 'Booking Recieved', 'wp-travel' ),
 			'client_header_color' => '',
 			'email_content' => '',
+			'from_email'    => get_option( 'admin_email' ),
 
 		);
 
@@ -332,6 +334,7 @@ class WP_Travel_Admin_Settings {
 			'admin_title'  => __( 'New Booking', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
+			'from_email'    => get_option( 'admin_email' ),
 
 		);
 
@@ -342,6 +345,7 @@ class WP_Travel_Admin_Settings {
 			'client_title'  => __( 'Payment Recieved', 'wp-travel' ),
 			'client_header_color' => '',
 			'email_content' => '',
+			'from_email'    => get_option( 'admin_email' ),
 
 		);
 
@@ -353,6 +357,7 @@ class WP_Travel_Admin_Settings {
 			'admin_title'  => __( 'New Enquiry', 'wp-travel' ),
 			'admin_header_color' => '',
 			'email_content' => '',
+			'from_email'    => get_option( 'admin_email' ),
 
 		);
 		//Booking Admin Email.
@@ -422,6 +427,14 @@ class WP_Travel_Admin_Settings {
 									</tr>
 									<tr>
 										<th>
+											<label for="booking-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input value="<?php echo isset( $booking_admin_email_settings['from_email'] ) ? $booking_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="booking_admin_template[from_email]" id="booking-admin-email-from">
+										</td>
+									</tr>
+									<tr>
+										<th>
 											<label for="booking-admin-email-sub"><?php esc_html_e( 'Booking Email Subject', 'wp-travel' ); ?></label>
 										</th>
 										<td>
@@ -467,6 +480,14 @@ class WP_Travel_Admin_Settings {
 							<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
 
 								<table class="form-table">
+									<tr>
+										<th>
+											<label for="booking-client-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+										</th>
+										<td>
+											<input value="<?php echo isset( $booking_client_email_settings['from_email'] ) ? $booking_client_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="booking_client_template[from_email]" id="booking-client-email-from">
+										</td>
+									</tr>
 									<tr>
 										<th>
 											<label for="booking-client-email-sub"><?php esc_html_e( 'Booking Client Email Subject', 'wp-travel' ); ?></label>
@@ -536,6 +557,14 @@ class WP_Travel_Admin_Settings {
 									<table class="form-table">
 										<tr>
 											<th>
+												<label for="payment-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo isset( $payment_admin_email_settings['from_email'] ) ? $payment_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="payment_admin_template[from_email]" id="payment-admin-email-from">
+											</td>
+										</tr>
+										<tr>
+											<th>
 												<label for="payment-admin-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
 											</th>
 											<td>
@@ -581,6 +610,14 @@ class WP_Travel_Admin_Settings {
 									<h3 class="section-heading"><?php esc_html_e( 'Client Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
+										<tr>
+											<th>
+												<label for="payment-client-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo isset( $payment_client_email_settings['from_email'] ) ? $payment_client_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="payment_client_template[from_email]" id="payment-client-email-from">
+											</td>
+										</tr>
 										<tr>
 											<th>
 												<label for="payment-client-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
@@ -647,6 +684,14 @@ class WP_Travel_Admin_Settings {
 								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
+										<tr>
+											<th>
+												<label for="enquiry-admin-email-from"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+											</th>
+											<td>
+												<input value="<?php echo isset( $enquiry_admin_email_settings['from_email'] ) ? $enquiry_admin_email_settings['from_email'] : get_option( 'admin_email' ); ?>" type="email" name="enquiry_admin_template[from_email]" id="enquiry-admin-email-from">
+											</td>
+										</tr>
 										<tr>
 											<th>
 												<label for="enquiry-admin-email-sub"><?php esc_html_e( 'Enquiry Email Subject', 'wp-travel' ); ?></label>
