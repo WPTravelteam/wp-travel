@@ -260,6 +260,7 @@ class WP_Travel_Admin_Settings {
 		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] )  ? $args['settings']['hide_related_itinerary'] : 'no';
 		$trip_pricing_options_layout = isset( $args['settings']['trip_pricing_options_layout'] )  ? $args['settings']['trip_pricing_options_layout'] : 'by-pricing-option';
 		?>
+		<?php do_action( 'wp_travel_tab_content_before_trips', $args ); ?>
 		<table class="form-table">
 			<tr>
 				<th>
@@ -289,6 +290,8 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
+		<?php do_action( 'wp_travel_tab_content_after_trips', $args ); ?>
+
 	<?php
 	}
 
@@ -376,6 +379,7 @@ class WP_Travel_Admin_Settings {
 		$enquiry_admin_email_settings = isset( $args['settings']['enquiry_admin_template_settings'] ) ? $args['settings']['enquiry_admin_template_settings'] : $enquiry_admin_email_defaults;
 
 		?>
+		<?php do_action( 'wp_travel_tab_content_before_email', $args ); ?>
 		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
@@ -386,6 +390,8 @@ class WP_Travel_Admin_Settings {
 			</div>
 		<?php endif; ?>
 		<table class="form-table">
+			<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel-utilities' ) ?></h4></td></tr>
+
 			<tr>
 				<th>
 					<label for="wp_travel_global_from_email"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
@@ -395,6 +401,7 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
+		<?php do_action( 'wp_travel_tab_content_before_booking_tamplate', $args ); ?>
 		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
