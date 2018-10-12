@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.6.5\n"
+"Project-Id-Version: WP Travel 1.6.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-11 12:15:22+00:00\n"
+"POT-Creation-Date: 2018-10-12 08:35:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -703,39 +703,39 @@ msgstr ""
 msgid "Trip Activity base"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:109
-#: inc/admin/class-admin-pointers.php:127
-#: inc/admin/class-admin-pointers.php:146
+#: inc/admin/class-admin-pointers.php:110
+#: inc/admin/class-admin-pointers.php:128
+#: inc/admin/class-admin-pointers.php:147
 msgid "New in WP Travel v.1.1.0"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:128
+#: inc/admin/class-admin-pointers.php:129
 msgid "\"Trip Code\" has been moved to sidebar \"Trip Info\" metabox. "
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:168
+#: inc/admin/class-admin-pointers.php:169
 msgid "WP Travel permalink options"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:184
+#: inc/admin/class-admin-pointers.php:185
 msgid ""
 "Want to add payment gateway in WP Travel booking? %1sDownload \"Standard "
 "PayPal\"%2s addon for free!!"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:198
+#: inc/admin/class-admin-pointers.php:199
 msgid ""
 "You are using older version of WP Travel Standard paypal. Please "
 "%1sDownload version 1.0.1 Now %3s."
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:201
+#: inc/admin/class-admin-pointers.php:202
 msgid ""
 "Need help With the update ? %1sClick here%2s for detailed instructions on "
 "updating the plugin."
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:225
+#: inc/admin/class-admin-pointers.php:226
 msgid ""
 "WP Travel Standard Paypal plugin will be merged to WP Travel in the next "
 "update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the "
@@ -743,22 +743,36 @@ msgid ""
 " %1sDismiss this Message%2s"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:253
+#: inc/admin/class-admin-pointers.php:254
 msgid ""
 "WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > "
 "Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:281
+#: inc/admin/class-admin-pointers.php:282
 msgid ""
 "With the update to WP Travel version 1.4.0 <strong>%1s addon </strong> "
 "needs to be updated to work, for more information, %2sClick Here%3s"
 msgstr ""
 
-#: inc/admin/class-admin-pointers.php:323
+#: inc/admin/class-admin-pointers.php:324
 msgid ""
 "\"WP Travel\" plugin is currently in test mode. <a href=\"%1$s\">Click "
 "here</a> to disable test mode."
+msgstr ""
+
+#: inc/admin/class-admin-pointers.php:348
+msgid "WP Travel Importer"
+msgstr ""
+
+#: inc/admin/class-admin-pointers.php:349
+msgid ""
+"Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and "
+"Payments data with portable CSV file."
+msgstr ""
+
+#: inc/admin/class-admin-pointers.php:350
+msgid "Get WP Travel Import/Export Addon"
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:68 inc/admin/class-admin-settings.php:79
@@ -4639,11 +4653,11 @@ msgstr ""
 msgid "Group Size:"
 msgstr ""
 
-#: templates/content-related-posts.php:20
+#: templates/content-related-posts.php:19
 msgid "Related trip not found."
 msgstr ""
 
-#: templates/content-related-posts.php:23
+#: templates/content-related-posts.php:22
 msgid "Related Trips"
 msgstr ""
 
