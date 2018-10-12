@@ -24,6 +24,7 @@ class WP_Travel_Admin_Info_Pointers {
 		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_test_mode_notices' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_update_payment_gateways_notice' ) );
+		add_action( 'admin_notices', array( $this, 'wp_travel_importer_upsell_notice' ) );
 		add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
 	}
 
@@ -331,6 +332,28 @@ class WP_Travel_Admin_Info_Pointers {
 	
 			settings_errors( 'wp-travel-notices' );
 		}
+	}
+
+	function wp_travel_importer_upsell_notice() {
+
+		if ( class_exists( 'WP_Travel_Importer' ) )
+			return;
+
+		$screen = get_current_screen();
+		
+		if( 'import' === $screen->id ) {
+			?>
+				<div style="clear:both; width:98%;" class="wp-travel-upsell-message">
+					<div class="wp-travel-pro-feature-notice">
+						<h4><?php esc_html_e( 'WP Travel Importer', 'wp-travel' ); ?></h4>
+						<p><?php esc_html_e( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ); ?></p>
+						<a target="_blank" href="https://themepalace.com/downloads/wp-travel-import-export/"><?php esc_html_e( 'Get WP Travel Import/Export Addon', 'wp-travel' ); ?></a>
+					</div>
+				</div>
+
+			<?php
+		}
+
 	}
 
 }
