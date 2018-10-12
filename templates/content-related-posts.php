@@ -4,7 +4,6 @@
  * @package WP_Travel
  */
 $post_id = $args;
-var_dump( $post_id );
 $settings = wp_travel_get_settings();
 $hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
 
