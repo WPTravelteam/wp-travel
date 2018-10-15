@@ -121,12 +121,10 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 		);
-		if ( wp_travel_premium_addons() > 0 ) {
-			$settings_fields['license'] = array(
-				'tab_label' => __( 'License', 'wp-travel' ),
-				'content_title' => __( 'License Details', 'wp-travel' ),
-			);
-		}
+		$settings_fields['license'] = array(
+			'tab_label' => __( 'License', 'wp-travel' ),
+			'content_title' => __( 'License Details', 'wp-travel' ),
+		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
