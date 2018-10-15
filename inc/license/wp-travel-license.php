@@ -63,7 +63,8 @@ class WP_Travel_License {
 				// retrieve the license from the database.
 				$license_key = ( isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
 				$args        = wp_parse_args( $premium_addon, array(
-					'author' => 'WEN Solutions',
+					'license' => $license_key,
+					'author'  => 'WEN Solutions',
 				) );
 				unset( $args['_option_prefix'] );
 				unset( $args['_file_path'] );
