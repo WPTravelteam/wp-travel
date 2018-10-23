@@ -397,8 +397,9 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$headers = $email->email_headers( $reply_to_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
-			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
+			$thankyou_page_url = $_SERVER['REDIRECT_URL'];
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
 			header( 'Location: ' . $thankyou_page_url );
 			exit;
 		}
@@ -422,10 +423,11 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
-		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $_SERVER['REDIRECT_URL'] );
-			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
-			header( 'Location: ' . $thankyou_page_url );
-			exit;
+		$thankyou_page_url = $_SERVER['REDIRECT_URL'];
+		$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
+		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
+		header( 'Location: ' . $thankyou_page_url );
+		exit;
 	}
 }
 

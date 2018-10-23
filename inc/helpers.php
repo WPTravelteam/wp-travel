@@ -2006,3 +2006,36 @@ function wp_travel_print_notices() {
 	WP_Travel()->notices->print_notices( 'error', true );
 	WP_Travel()->notices->print_notices( 'success', true );
 }
+
+/**
+ * Convert Date Format String form PHP to JS.
+ * 
+ * @param	$date_foramt	string	Date Fromat.
+ *
+ * @since	1.6.7
+ * @return	array
+ */
+function wp_travel_date_format_php_to_js( $date_format ) {
+	if ( ! $date_format ) {
+		return;
+	}
+
+	switch ( $date_format ) {
+		case 'F j, Y' :
+			$js_date_format = 'MM d, yyyy';
+		break;
+		case 'Y-m-d' :
+			$js_date_format = 'yyyy-mm-dd';
+		break;
+		case 'm/d/Y' :
+			$js_date_format = 'mm/dd/yyyy';
+		break;
+		case 'd/m/Y' :
+			$js_date_format = 'dd/mm/yyyy';
+		break;
+		default :
+			$js_date_format = 'MM d, yyyy';
+		break;
+	}
+	return apply_filters( 'wp_travel_js_date_format', $js_date_format );
+}

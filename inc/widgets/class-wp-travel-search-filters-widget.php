@@ -142,20 +142,24 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 						<div class="wp-travel-range-slider"></div>
 					</div>
 				<?php endif; ?>
-				<?php if ( $trip_dates ) : ?>
+				<?php
+				if ( $trip_dates ) :
+					$date_format = get_option( 'date_format' );
+					$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+				?>
 					<div class="wp-travel-form-field wp-travel-trip-duration">
 						<label><?php esc_html_e('Trip Duration', 'wp-travel'); ?></label>
 						<span class="trip-duration-calender">
 							<small><?php esc_html_e( 'From', 'wp-travel' ); ?></small>
-							<input value="<?php echo esc_attr( $trip_start ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker1" name="trip_start">
+							<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $trip_start ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker1" name="trip_start">
 							<label for="datepicker1">
 								<span class="calender-icon"></span>
 							</label>
 						</span>
 						<span class="trip-duration-calender">
 							<small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
-							<input value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
-							<label for="datepicker2">
+							<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
+							<label for="datepick">
 								<span class="calender-icon"></span>
 							</label>
 						</span>
