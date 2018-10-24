@@ -157,6 +157,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.6.7 =
+* Fixes: Filer widget date format.
+* Enhancement: Thankyou page filter hook updated.
+* Enhancement: Review & ratings function updated.
+
 = 1.6.6 =
 * Fixes: Minor issues and bug fixes.
 

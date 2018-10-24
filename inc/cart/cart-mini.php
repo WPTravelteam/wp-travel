@@ -171,3 +171,12 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 		</table>
 	</div>
 </div>
+<?php
+if ( is_array( $trips ) && count( $trips ) > 0 ) {
+	foreach ( $trips as $trip ) {
+		$first_trip_id = $trip['trip_id'];
+		$checkout_for_title = ( get_the_title( $first_trip_id ) ) ? get_the_title( $first_trip_id ) : __( 'Trip Book', 'wp-travel' );
+		break;
+	}
+	?><!--only used in instamojo for now --><input type="hidden" id="wp-travel-checkout-for" value="<?php echo esc_attr( $checkout_for_title ) ?>" ><?php
+}

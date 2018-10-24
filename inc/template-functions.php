@@ -928,24 +928,28 @@ function wp_travel_verify_comment_meta_data( $commentdata ) {
 /**
  * Get the total amount (COUNT) of reviews.
  *
- * @since 1.0.0
+ * @param	Number $post_id Post ID.
+ * @since 1.0.0 / Modified 1.6.7
  * @return int The total number of trips reviews
  */
-function wp_travel_get_review_count() {
+function wp_travel_get_review_count( $post_id = null ) {
 	global $wpdb, $post;
 
-	// No meta date? Do the calculation.
-	if ( ! metadata_exists( 'post', $post->ID, '_wpt_review_count' ) ) {
+	if ( ! $post_id ) {
+		$post_id = $post->ID;
+	}
+	// No meta data? Do the calculation.
+	if ( ! metadata_exists( 'post', $post_id, '_wpt_review_count' ) ) {
 		$count = $wpdb->get_var( $wpdb->prepare("
 			SELECT COUNT(*) FROM $wpdb->comments
 			WHERE comment_parent = 0
 			AND comment_post_ID = %d
 			AND comment_approved = '1'
-		", $post->ID ) );
+		", $post_id ) );
 
-		update_post_meta( $post->ID, '_wpt_review_count', $count );
+		update_post_meta( $post_id, '_wpt_review_count', $count );
 	} else {
-		$count = get_post_meta( $post->ID, '_wpt_review_count', true );
+		$count = get_post_meta( $post_id, '_wpt_review_count', true );
 	}
 
 	return apply_filters( 'wp_travel_review_count', $count, $post );
@@ -953,14 +957,20 @@ function wp_travel_get_review_count() {
 
 /**
  * Get the average rating of product. This is calculated once and stored in postmeta.
+ * 
+ * @param Number $post_id	Post ID.
  *
  * @return string
  */
-function wp_travel_get_average_rating() {
+function wp_travel_get_average_rating( $post_id = null ) {
 	global $wpdb, $post;
 
+	if ( ! $post_id ) {
+		$post_id = $post->ID;
+	}
+
 	// No meta data? Do the calculation.
-	if ( ! metadata_exists( 'post', $post->ID, '_wpt_average_rating' ) ) {
+	if ( ! metadata_exists( 'post', $post_id, '_wpt_average_rating' ) ) {
 
 		if ( $count = wp_travel_get_rating_count() ) {
 			$ratings = $wpdb->get_var( $wpdb->prepare("
@@ -970,15 +980,15 @@ function wp_travel_get_average_rating() {
 				AND comment_post_ID = %d
 				AND comment_approved = '1'
 				AND meta_value > 0
-			", $post->ID ) );
+			", $post_id ) );
 			$average = number_format( $ratings / $count, 2, '.', '' );
 		} else {
 			$average = 0;
 		}
-		update_post_meta( $post->ID, '_wpt_average_rating', $average );
+		update_post_meta( $post_id, '_wpt_average_rating', $average );
 	} else {
 
-		$average = get_post_meta( $post->ID, '_wpt_average_rating', true );
+		$average = get_post_meta( $post_id, '_wpt_average_rating', true );
 	}
 
 	return (string) floatval( $average );
