@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -159,6 +159,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 = 1.6.7 =
 * Fixes: Filer widget date format.
+* Enhancement: Multiple Jetpack Social share on overview / Content.
 * Enhancement: Thankyou page filter hook updated.
 * Enhancement: Review & ratings function updated.
 

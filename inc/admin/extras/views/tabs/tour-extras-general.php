@@ -21,13 +21,13 @@ $item_desc       = isset( $trip_extras_data['extras_item_description'] ) && ! em
 <table class="form-table">
 	<tbody>
 		<tr>
-			<td><label for="coupon-value"><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
+			<td><label for="extras-item-description"><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Description for the service/item', 'wp-travel' ); ?>">
 					<i class="fa fa-question-circle" aria-hidden="true"></i>
 				</span>
 			</td>
 			<td>
-				<textarea name="wp_travel_extras[extras_item_description]" id="" cols="50" rows="5"><?php echo esc_html( $item_desc ); ?></textarea>
+				<textarea name="wp_travel_extras[extras_item_description]" id="extras-item-description" cols="50" rows="5"><?php echo esc_html( $item_desc ); ?></textarea>
 			</td>
 		</tr>
 		<?php do_action( 'wp_travel_extras_pro_options' ); ?>

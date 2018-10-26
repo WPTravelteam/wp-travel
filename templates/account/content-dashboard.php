@@ -19,7 +19,7 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 }
 
 $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_billing_details', true );
-
+dd( $biling_glance_data );
 ?>
 <div class="dashboard-tab">
 	<ul class="resp-tabs-list ver_1">

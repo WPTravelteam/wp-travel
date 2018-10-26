@@ -245,9 +245,9 @@ class Wp_Travel_Form_Handler {
 
 		$current_user = get_user_by( 'id', $user_id );
 
-		if ( ! in_array( 'wp-travel-customer', (array) $current_user->roles ) ) {
-			return;
-		}
+		// if ( ! in_array( 'wp-travel-customer', (array) $current_user->roles ) ) {
+		// 	return;
+		// }
 
 		// Get Billing Data.
 		$billing_address = ! empty( $_POST['customer_billing_address'] ) ? wp_travel_clean_vars( $_POST['customer_billing_address'] ): '';
