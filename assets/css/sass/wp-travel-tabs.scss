@@ -372,11 +372,12 @@ $alto: #ddd;
 }
 
 .marketplace-module {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
     width: 100%;
     .single-module {
-        width: 33.33%;
+        width: 50%;
         float: left;
         padding: 0 15px;
         position: relative;
@@ -384,6 +385,9 @@ $alto: #ddd;
         overflow: hidden;
         margin-bottom: 30px;
         box-sizing: border-box;
+        @media screen and (min-width: 1440px) {
+            width: 33.33%;
+        }
     }
     .single-module-image,
     .single-module-content {
