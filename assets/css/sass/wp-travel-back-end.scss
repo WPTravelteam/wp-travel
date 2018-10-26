@@ -1852,12 +1852,23 @@ span.wp-travel-message {
 /* License Tab */
 #wp-travel-tab-content-license {
     .form-table {
+        table-layout: fixed;
+        th {
+            width: 100px;
+        }
+        td:nth-of-type(1) {
+            width: 500px;
+        }
         input[id*="license"] {
             max-width: 400px !important;
             width: 100%;
             background-color: #fff;
             border: 1px solid #c5c5c5;
             box-shadow: none;
+            ~ span {
+                font-weight: bold;
+                text-decoration: underline;
+            }
         }
         input[class*="button"] {
             width: auto;

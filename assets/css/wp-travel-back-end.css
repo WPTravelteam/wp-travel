@@ -1883,12 +1883,25 @@ span.wp-travel-message {
 }
 
 /* License Tab */
+#wp-travel-tab-content-license .form-table {
+  table-layout: fixed;
+}
+#wp-travel-tab-content-license .form-table th {
+  width: 100px;
+}
+#wp-travel-tab-content-license .form-table td:nth-of-type(1) {
+  width: 500px;
+}
 #wp-travel-tab-content-license .form-table input[id*=license], #wp-travel-tab-content-license .form-table .wp-travel-form-field select[id*=license], .wp-travel-form-field #wp-travel-tab-content-license .form-table select[id*=license], #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[id*=license], .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[id*=license] {
   max-width: 400px !important;
   width: 100%;
   background-color: #fff;
   border: 1px solid #c5c5c5;
   box-shadow: none;
+}
+#wp-travel-tab-content-license .form-table input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field select[id*=license] ~ span, .wp-travel-form-field #wp-travel-tab-content-license .form-table select[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[id*=license] ~ span, .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .stat-toolbar-form .field-group .wp-travel-form-field input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group select[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group textarea[id*=license] ~ span {
+  font-weight: bold;
+  text-decoration: underline;
 }
 #wp-travel-tab-content-license .form-table input[class*=button], #wp-travel-tab-content-license .form-table .wp-travel-form-field select[class*=button], .wp-travel-form-field #wp-travel-tab-content-license .form-table select[class*=button], #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[class*=button], .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[class*=button] {
   width: auto;
