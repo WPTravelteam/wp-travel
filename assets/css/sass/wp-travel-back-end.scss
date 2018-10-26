@@ -1848,3 +1848,19 @@ span.wp-travel-message {
         }
     }
 }
+
+/* License Tab */
+#wp-travel-tab-content-license {
+    .form-table {
+        input[id*="license"] {
+            max-width: 400px !important;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #eee;
+            box-shadow: none;
+        }
+        input[class*="button-secondary"] {
+            width: auto;
+        }
+    }
+}

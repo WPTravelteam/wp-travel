@@ -1882,4 +1882,16 @@ span.wp-travel-message {
   padding: 7px 15px;
 }
 
+/* License Tab */
+#wp-travel-tab-content-license .form-table input[id*=license], #wp-travel-tab-content-license .form-table .wp-travel-form-field select[id*=license], .wp-travel-form-field #wp-travel-tab-content-license .form-table select[id*=license], #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[id*=license], .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[id*=license] {
+  max-width: 400px !important;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #eee;
+  box-shadow: none;
+}
+#wp-travel-tab-content-license .form-table input[class*=button-secondary], #wp-travel-tab-content-license .form-table .wp-travel-form-field select[class*=button-secondary], .wp-travel-form-field #wp-travel-tab-content-license .form-table select[class*=button-secondary], #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[class*=button-secondary], .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[class*=button-secondary] {
+  width: auto;
+}
+
 /*# sourceMappingURL=wp-travel-back-end.css.map */
