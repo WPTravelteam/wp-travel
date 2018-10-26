@@ -376,7 +376,7 @@ $alto: #ddd;
     position: relative;
     width: 100%;
     .single-module {
-        width: 50%;
+        width: 33.33%;
         float: left;
         padding: 0 15px;
         position: relative;
@@ -387,7 +387,6 @@ $alto: #ddd;
     }
     .single-module-image,
     .single-module-content {
-        border: 1px solid #ddd;
         background-color: #fbfbfb;
     }
     .single-module-image {
