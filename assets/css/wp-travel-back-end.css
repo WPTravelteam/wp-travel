@@ -1883,6 +1883,26 @@ span.wp-travel-message {
 }
 
 /* License Tab */
+#wp-travel-tab-content-license .wp-travel-tab-product-single {
+  background-color: #f5f5f5;
+  padding: 5px 15px 15px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px transparent;
+  margin-bottom: 15px;
+  transition: 300ms box-shadow linear;
+}
+#wp-travel-tab-content-license .wp-travel-tab-product-single:hover {
+  box-shadow: 5px 5px 5px #e5e5e5;
+}
+#wp-travel-tab-content-license .wp-travel-tab-product-single .wp-travel-tab-product-title {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  border-bottom: 3px double #dedede;
+  border-right: 1px solid #dedede;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
 #wp-travel-tab-content-license .form-table {
   table-layout: fixed;
 }
