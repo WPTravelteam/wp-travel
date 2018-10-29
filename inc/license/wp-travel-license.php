@@ -103,6 +103,8 @@ class WP_Travel_License {
 								<span style="color:red;"><?php esc_html_e( 'Invalid', 'wp-travel' ); ?></span>
 							<?php elseif ( 'expired' === $status ) : ?>
 								<span style="color:red;"><?php esc_html_e( 'Expired', 'wp-travel' ); ?></span>
+							<?php elseif ( 'inactive' === $status ) :  ?>
+								<span style="color:orange;"><?php esc_html_e( 'Inactive', 'wp-travel' ); ?></span>
 							<?php endif; ?>
 						<?php endif; ?>
 
@@ -234,11 +236,10 @@ class WP_Travel_License {
 			 	if ( ! check_admin_referer( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ) ) {
 					 return; // get out if we didn't click the Activate button.
 				}
-
 				$settings_args = get_option( 'wp_travel_settings' );
 
 				// retrieve the license from the database.
-				$license = isset( $settings_args[ $_POST[ $premium_addon['_option_prefix'] . 'key' ] ] ) ? trim( $_POST[ $premium_addon['_option_prefix'] . 'key' ] ) : '';
+				$license = isset( $settings_args[ $premium_addon['_option_prefix'] . 'key' ] ) ? trim( $settings_args[ $premium_addon['_option_prefix'] . 'key' ] ) : trim( $_POST[ $premium_addon['_option_prefix'] . 'key' ] );
 
 				// data to send in our API request.
 				$api_params = array(
