@@ -5,9 +5,6 @@ class WP_Travel_License {
 	// Store URL.
 	const LIVE_STORE_URL = 'http://themepalace.com';
 
-	// Teting store url.
-	const TESTING_STORE_URL = 'http://themepalace.local';
-
 	/**
 	 * Store URL
 	 *
@@ -18,7 +15,7 @@ class WP_Travel_License {
 	private static $addons = array();
 
 	public function __construct() {
-		self::$store_url = ( defined( 'WS_TESTING_TP_LICENSE' ) && true === WS_TESTING_TP_LICENSE ) ? self::TESTING_STORE_URL : self::LIVE_STORE_URL;
+		self::$store_url = ( defined( 'WP_TRAVEL_TESTING_STORE_URL' ) && '' !== WP_TRAVEL_TESTING_STORE_URL ) ? WP_TRAVEL_TESTING_STORE_URL : self::LIVE_STORE_URL;
 
 		$premium_addons = apply_filters( 'wp_travel_premium_addons_list', array() );
 		if ( count( $premium_addons ) > 0 ) {
