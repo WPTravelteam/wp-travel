@@ -84,9 +84,7 @@ class WP_Travel_License {
 	 */
 	public static function setting_fields( $settings_args ) {
 		$count_premium_addons = WP_Travel_License::count_premium_addons();
-		if ( $count_premium_addons < 1 ) {
-			return;
-		}
+		if ( $count_premium_addons > 0 ) {
 		$premium_addons = self::$addons;
 		$settings       = isset( $settings_args['settings'] ) ? $settings_args['settings'] : array();
 		foreach ( $premium_addons as $key => $premium_addon ) :
@@ -130,8 +128,19 @@ class WP_Travel_License {
 				<?php endif; ?>
 			</tbody>
 		</table>
+
 	<?php
-	endforeach;
+			endforeach;
+		}
+		?>
+		<div class="wp-travel-upsell-message">
+			<div class="wp-travel-pro-feature-notice">
+				<h4><?php esc_html_e( 'Want to add more features in WP Travel?', 'wp-travel' ); ?></h4>
+				<p><?php esc_html_e( 'Get addon for payment, trip extras, Inventory management and other premium features.', 'wp-travel' ); ?></p>
+				<a target="_blank" href="https://wptravel.io/downloads/">Get WP Travel Addons</a>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
