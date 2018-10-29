@@ -220,7 +220,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 * @since 2.2.3
 			 */
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );			
+			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
@@ -240,6 +240,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 				include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 			}
+
+			if ( ! class_exists( 'WP_Travel_EDD_SL_Plugin_Updater' ) ) {
+				// load our custom updater.
+				include sprintf( '%s/inc/license/edd-sl-plugin-updater.php', WP_TRAVEL_ABSPATH );
+			}
+
 		}
 
 		/**
@@ -304,16 +310,16 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		function wp_travel_activation() {
 			// Check for PHP Compatibility
 			global $wp_version;
-			
+
 			if ( version_compare( PHP_VERSION, '5.5', '<' ) ) {
-				
+
 				$flag 	 = __( 'PHP', 'wp-travel' );
 				$version = __( '5.5 or Higher', 'wp-travel' );
-			
+
 				deactivate_plugins( basename( __FILE__ ) );
 
 				$message = sprintf( __( 'WP Travel plugin requires %1$s version %2$s or greater to work.', 'wp-travel' ), $flag, $version );
-				
+
 				wp_die( $message,__('Plugin Activation Error', 'wp-travel' ),  array( 'response'=>200, 'back_link'=>TRUE ) );
 			}
 

@@ -37,9 +37,9 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'misc_options_tab_callback' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_facts' ), 11, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_payment_tab_call_back' ), 12, 2 );
-		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );		
-		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );		
-		
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );
+		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );
+
 		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
 	}
 
@@ -121,6 +121,10 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 		);
+		$settings_fields['license'] = array(
+			'tab_label' => __( 'License', 'wp-travel' ),
+			'content_title' => __( 'License Details', 'wp-travel' ),
+		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
@@ -129,12 +133,6 @@ class WP_Travel_Admin_Settings {
 			'tab_label' => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
 		);
-		if ( wp_travel_premium_addons() > 0 ) {
-			$settings_fields['license'] = array(
-				'tab_label' => __( 'License', 'wp-travel' ),
-				'content_title' => __( 'License Details', 'wp-travel' ),
-			);
-		}
 
 		$tabs[ self::$collection ] = apply_filters( 'wp_travel_settings_tabs', $settings_fields );
 		return $tabs;
@@ -269,7 +267,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary" type="checkbox" />						
+							<input <?php checked( $hide_related_itinerary , 'yes' ); ?> value="1" name="hide_related_itinerary" id="hide_related_itinerary" type="checkbox" />
 							<span class="switch"></span>
 						</label>
 					</span>
@@ -279,14 +277,14 @@ class WP_Travel_Admin_Settings {
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ) ?></label></th>
 				<td>
-					<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio"> 
+					<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio">
 					<?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>
 
 					<label> <input <?php checked( 'by-date', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-date" type="radio">
 					<?php esc_html_e( 'List by fixed departure dates', 'wp-travel' ); ?></label>
 
 					<p class="description"><?php esc_html_e('This options will control how you display trip dates and prices.', 'wp-travel' ); ?></p>
-					
+
 				</td>
 			</tr>
 		</table>
@@ -409,7 +407,7 @@ class WP_Travel_Admin_Settings {
 
 		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				
+
 				<div class="panel panel-default">
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
@@ -435,7 +433,7 @@ class WP_Travel_Admin_Settings {
 										<td>
 											<span class="show-in-frontend checkbox-default-design">
 												<label data-on="ON" data-off="OFF">
-													<input <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />						
+													<input <?php checked( $send_booking_email_to_admin , 'yes' ); ?> value="1" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />
 													<span class="switch"></span>
 												</label>
 											</span>
@@ -471,17 +469,17 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<?php 
+											<?php
 											$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content']  ?  $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
 											wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
 
-									<?php 
+									<?php
 										/**
 										 * Add Support Multiple Booking admin Template.
 										 */
-										do_action( 'wp_travel_multiple_booking_admin_template', $booking_admin_email_settings ); 
+										do_action( 'wp_travel_multiple_booking_admin_template', $booking_admin_email_settings );
 									?>
 
 								</table>
@@ -518,21 +516,21 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<?php 
+											<?php
 											$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
 											wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
 										</td>
 									</tr>
 
-									<?php 
+									<?php
 										/**
 										 * Add Support Multiple Booking client Template.
 										 */
-										do_action( 'wp_travel_multiple_booking_client_template', $booking_client_email_settings ); 
+										do_action( 'wp_travel_multiple_booking_client_template', $booking_client_email_settings );
 									?>
 
 								</table>
-							
+
 							</div>
 
 							</div>
@@ -586,13 +584,13 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php 
+												<?php
 												$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content']  ?  $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
 												wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template[email_content]'  ) ); ?>
 											</td>
 										</tr>
 
-										<?php 
+										<?php
 										/**
 										 * Add Support Multiple payment admin Template.
 										 */
@@ -633,13 +631,13 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php 
+												<?php
 												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content']  ?  $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
 												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template[email_content]'  ) ); ?>
 											</td>
 										</tr>
 
-										<?php 
+										<?php
 										/**
 										 * Add Support Multiple Payment client Template.
 										 */
@@ -700,7 +698,7 @@ class WP_Travel_Admin_Settings {
 												<label for="enquiry-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php 
+												<?php
 												$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !==$enquiry_admin_email_settings['email_content']  ?  $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
 												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template[email_content]'  ) ); ?>
 											</td>
@@ -716,8 +714,8 @@ class WP_Travel_Admin_Settings {
 						</div>
 					</div>
 				</div>
-			
-			
+
+
 			</div>
 		</div>
 
@@ -766,7 +764,7 @@ class WP_Travel_Admin_Settings {
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
-			<?php 
+			<?php
 			foreach ( $global_tabs as $key => $tab ) : ?>
 				<tr>
 					<td width="50px">
@@ -782,7 +780,7 @@ class WP_Travel_Admin_Settings {
 						<div class="wp-travel-sorting-tabs-wrap">
 						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
 						<input type="hidden" name="wp_travel_global_tabs_settings[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
-						
+
 					</div>
 					</td>
 					<td width="20%">
@@ -821,7 +819,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input <?php checked( $enable_trip_enquiry_option , 'yes' ); ?> value="1" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />						
+							<input <?php checked( $enable_trip_enquiry_option , 'yes' ); ?> value="1" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />
 							<span class="switch">
 						  </span>
 						</label>
@@ -838,7 +836,7 @@ class WP_Travel_Admin_Settings {
 
 			</tr>
 		</table>
-	<?php 
+	<?php
 	}
 
 	/**
@@ -854,22 +852,22 @@ class WP_Travel_Admin_Settings {
 		$partial_payment = isset( $args['settings']['partial_payment'] ) ? $args['settings']['partial_payment'] : '';
 		$minimum_partial_payout = isset( $args['settings']['minimum_partial_payout'] ) ? $args['settings']['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		$paypal_email = ( isset( $args['settings']['paypal_email'] ) ) ? $args['settings']['paypal_email'] : '';
-		$payment_option_paypal = ( isset( $args['settings']['payment_option_paypal'] ) ) ? $args['settings']['payment_option_paypal'] : ''; 
+		$payment_option_paypal = ( isset( $args['settings']['payment_option_paypal'] ) ) ? $args['settings']['payment_option_paypal'] : '';
 		$trip_tax_enable = ( isset( $args['settings']['trip_tax_enable'] ) ) ? $args['settings']['trip_tax_enable'] : '';
 		$trip_tax_percentage = isset( $args['settings']['trip_tax_percentage'] ) ? $args['settings']['trip_tax_percentage'] : '';
 		$trip_tax_price_inclusive = isset( $args['settings']['trip_tax_price_inclusive'] ) ? $args['settings']['trip_tax_price_inclusive'] : 'yes';
 		?>
-		
+
 		<table class="form-table">
 			<tr>
 				<th><label for="partial_payment"><?php esc_html_e( 'Partial Payment', 'wp-travel' ) ?></label></th>
 				<td>
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
-						<input type="checkbox" value="yes" <?php checked( 'yes', $partial_payment ) ?> name="partial_payment" id="partial_payment"/>		
+						<input type="checkbox" value="yes" <?php checked( 'yes', $partial_payment ) ?> name="partial_payment" id="partial_payment"/>
 						<span class="switch">
 					</span>
-					
+
 					</label>
 				</span>
 					<p class="description"><?php esc_html_e( 'Enable partial payment while booking.', 'wp-travel' ) ?>
@@ -896,7 +894,7 @@ class WP_Travel_Admin_Settings {
 						<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ) ?> name="payment_option_paypal" id="payment_option_paypal"/>
 						<span class="switch">
 					</span>
-					
+
 					</label>
 				</span>
 					<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ) ?></p>
@@ -926,7 +924,7 @@ class WP_Travel_Admin_Settings {
 						<input type="checkbox" value="yes" <?php checked( 'yes', $trip_tax_enable ) ?> name="trip_tax_enable" id="trip_tax_enable"/>
 						<span class="switch">
 					</span>
-					
+
 					</label>
 				</span>
 					<p class="description"><?php esc_html_e( 'Check to enable Tax options for trips.', 'wp-travel' ) ?></p>
@@ -935,14 +933,14 @@ class WP_Travel_Admin_Settings {
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Trip prices entered with tax', 'wp-travel' ) ?></label></th>
 				<td>
-						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio"> 
+						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio">
 						<?php esc_html_e( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ); ?></label>
 
 						<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
 						<?php esc_html_e( 'No, I will enter trip prices exclusive of tax', 'wp-travel' ); ?></label>
 
 						<p class="description"><?php esc_html_e('This option will affect how you enter trip prices.', 'wp-travel' ); ?></p>
-					
+
 				</td>
 			</tr>
 			<tr id="wp-travel-tax-percentage" <?php echo 'yes' == $trip_tax_price_inclusive ? 'style="display:none;"' : 'style="display:table-row;"'; ?> >
@@ -951,7 +949,7 @@ class WP_Travel_Admin_Settings {
 
 					<label><input type="number" min="0" max="100" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ) ?>" name="trip_tax_percentage" id="trip_tax_percentage_output" />%</label>
 					<p class="description"><?php esc_html_e( 'Trip Tax percentage added to trip price.', 'wp-travel' ) ?></p>
-					
+
 				</td>
 			</tr>
 		</table>
@@ -979,7 +977,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input type="checkbox" value="yes" <?php checked( 'yes', $wt_test_mode ) ?> name="wt_test_mode" id="wt_test_mode"/>					
+							<input type="checkbox" value="yes" <?php checked( 'yes', $wt_test_mode ) ?> name="wt_test_mode" id="wt_test_mode"/>
 							<span class="switch">
 						</span>
 						</label>
@@ -1022,17 +1020,17 @@ class WP_Travel_Admin_Settings {
 		if ( 'account_options_global' !== $tab ) {
 			return;
 		}
-	
+
 		$selected_account_page = isset( $args['settings']['myaccount_page_id'] ) ? $args['settings']['myaccount_page_id'] : wp_travel_get_page_id( 'wp-travel-dashboard' );
-		
+
 		$enable_checkout_customer_registration =  isset( $args['settings']['enable_checkout_customer_registration'] ) ? $args['settings']['enable_checkout_customer_registration'] : 'no';
-	
+
 		$enable_my_account_customer_registration =  isset( $args['settings']['enable_my_account_customer_registration'] ) ? $args['settings']['enable_my_account_customer_registration'] : 'yes';
-	
+
 		$generate_username_from_email =  isset( $args['settings']['generate_username_from_email'] ) ? $args['settings']['generate_username_from_email'] : 'no';
-	
+
 		$generate_user_password =  isset( $args['settings']['generate_user_password'] ) ? $args['settings']['generate_user_password'] : 'no';
-	
+
 			echo '<table class="form-table">';
 				// echo '<tr>';
 				// 	echo '<th>';
@@ -1054,7 +1052,7 @@ class WP_Travel_Admin_Settings {
 				// 		echo '<p class="description">' . esc_html__( 'Choose the page to use as account dashboard for registered users', 'wp-travel' ) . '</p>';
 				// 	echo '</td>';
 				// echo '<tr>';
-	
+
 				echo '<tr>';
 					echo '<th>';
 						echo '<label for="currency">' . esc_html_e( 'Customer Registration', 'wp-travel' ) .  '</label>';
@@ -1062,7 +1060,7 @@ class WP_Travel_Admin_Settings {
 					echo '<td>';
 						echo '<span class="show-in-frontend checkbox-default-design">';
 							echo '<label data-on="ON" data-off="OFF">';
-								echo '<input' . checked( $enable_checkout_customer_registration, 'yes', false ) . ' value="1" name="enable_checkout_customer_registration" id="enable_checkout_customer_registration" type="checkbox" />';						
+								echo '<input' . checked( $enable_checkout_customer_registration, 'yes', false ) . ' value="1" name="enable_checkout_customer_registration" id="enable_checkout_customer_registration" type="checkbox" />';
 								echo '<span class="switch">';
 								echo '</span>';
 							echo '</label>';
@@ -1072,7 +1070,7 @@ class WP_Travel_Admin_Settings {
 					echo '<td>';
 						echo '<span class="show-in-frontend checkbox-default-design">';
 							echo '<label data-on="ON" data-off="OFF">';
-								echo '<input' . checked( $enable_my_account_customer_registration, 'yes', false ) . ' value="1" name="enable_my_account_customer_registration" id="enable_my_account_customer_registration" type="checkbox" />';						
+								echo '<input' . checked( $enable_my_account_customer_registration, 'yes', false ) . ' value="1" name="enable_my_account_customer_registration" id="enable_my_account_customer_registration" type="checkbox" />';
 								echo '<span class="switch">';
 								echo '</span>';
 							echo '</label>';
@@ -1087,7 +1085,7 @@ class WP_Travel_Admin_Settings {
 					echo '<td>';
 						echo '<span class="show-in-frontend checkbox-default-design">';
 							echo '<label data-on="ON" data-off="OFF">';
-								echo '<input' . checked( $generate_username_from_email, 'yes', false ) . ' value="1" name="generate_username_from_email" id="generate_username_from_email" type="checkbox" />';						
+								echo '<input' . checked( $generate_username_from_email, 'yes', false ) . ' value="1" name="generate_username_from_email" id="generate_username_from_email" type="checkbox" />';
 								echo '<span class="switch">';
 								echo '</span>';
 							echo '</label>';
@@ -1097,7 +1095,7 @@ class WP_Travel_Admin_Settings {
 					echo '<td>';
 						echo '<span class="show-in-frontend checkbox-default-design">';
 							echo '<label data-on="ON" data-off="OFF">';
-								echo '<input' . checked( $generate_user_password, 'yes', false ) . ' value="1" name="generate_user_password" id="generate_user_password" type="checkbox" />';						
+								echo '<input' . checked( $generate_user_password, 'yes', false ) . ' value="1" name="generate_user_password" id="generate_user_password" type="checkbox" />';
 								echo '<span class="switch">';
 								echo '</span>';
 							echo '</label>';
@@ -1105,9 +1103,9 @@ class WP_Travel_Admin_Settings {
 						echo '<p class="description"><label for="generate_user_password">' . esc_html__( ' Automatically generate customer password', 'wp-travel' ) . '</label></p>';
 					echo '</td>';
 				echo '</tr>';
-	
+
 			echo '</table>';
-	
+
 	}
 
 	/**
@@ -1176,7 +1174,7 @@ class WP_Travel_Admin_Settings {
 			$settings['hide_related_itinerary']      = $hide_related_itinerary;
 			$settings['trip_pricing_options_layout'] = $trip_pricing_options_layout;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
-			
+
 			// Save Admin Email Options.
 			$settings['booking_admin_template_settings'] = $booking_admin_email_template_settings;
 			$settings['payment_admin_template_settings'] = $payment_admin_email_template_settings;
@@ -1260,7 +1258,7 @@ class WP_Travel_Admin_Settings {
 
 			// Save Global From E-mail Setting
 			$settings['wp_travel_from_email'] = $wp_travel_from_email;
- 
+
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 
