@@ -255,7 +255,7 @@ function wp_travel_single_trip_rating( $post_id, $hide_rating = false ) {
 	if ( ! wp_travel_tab_show_in_menu( 'reviews' ) ) {
 		return;
 	}
-	$average_rating = wp_travel_get_average_rating(); ?>
+	$average_rating = wp_travel_get_average_rating( $post_id ); ?>
 	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
@@ -276,7 +276,7 @@ function wp_travel_trip_rating( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$average_rating = wp_travel_get_average_rating(); ?>
+	$average_rating = wp_travel_get_average_rating( $post_id ); ?>
 	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
