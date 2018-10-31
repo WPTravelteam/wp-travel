@@ -17,7 +17,7 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Play' );
 		wp_enqueue_style( 'wp-travel-itineraries', $this->assets_path . 'assets/css/wp-travel-itineraries.css' );
 		// fontawesome.
-		wp_enqueue_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/css/font-awesome' . $suffix . '.css' );
+		wp_enqueue_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/css/all' . $suffix . '.css' );
 		wp_enqueue_style( 'wp-travel-user-css', $this->assets_path . 'assets/css/wp-travel-user-styles' . $suffix . '.css' );
 
 		// wp_enqueue_style( 'wp-travel-rtl-frontend', $this->assets_path . 'assets/css/wp-travel-rtl-front-end' . $suffix . '.css' );

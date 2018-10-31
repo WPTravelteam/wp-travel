@@ -65,7 +65,7 @@
 			<td>
 				<label for="coupon-code"><?php esc_html_e( 'Coupon Code', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Unique Identifier for the coupon.', 'wp-travel' ); ?>">
-               		<i class="fa fa-question-circle" aria-hidden="true"></i>
+               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
 			<td>
@@ -79,7 +79,7 @@
 		<tr>
 			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart total price ).', 'wp-travel' ); ?>">
-               		<i class="fa fa-question-circle" aria-hidden="true"></i>
+               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
 			<td>
@@ -92,7 +92,7 @@
 		<tr>
 			<td><label for="coupon-value"><?php esc_html_e( 'Coupon Value', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon value amount/percentage', 'wp-travel' ); ?>">
-					<i class="fa fa-question-circle" aria-hidden="true"></i>
+					<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
 				</span>
 			</td>
 			<td>
@@ -109,7 +109,7 @@
 		<tr>
 			<td><label for="coupon-expiry-date"><?php esc_html_e( 'Coupon Expiry Date', 'wp-travel' ); ?>
 			<span class="tooltip-area" title="<?php esc_html_e( 'Coupon expiration date. Leave blank to disable expiration.', 'wp-travel' ); ?>">
-               		<i class="fa fa-question-circle" aria-hidden="true"></i>
+               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
            		</span>
 			</label>
 			</td>

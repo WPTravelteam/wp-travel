@@ -975,7 +975,7 @@ function wp_travel_extras_pro_option_fields() {
 	<tr class="wp-travel-pro-mockup-option">
 		<td><label for="extra-item-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label>
 			<span class="tooltip-area" title="<?php esc_html_e( 'Item Price', 'wp-travel' ); ?>">
-				<i class="fa fa-question-circle" aria-hidden="true"></i>
+				<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
 			</span>
 		</td>
 		<td>
@@ -987,8 +987,8 @@ function wp_travel_extras_pro_option_fields() {
 	</tr>
 	<tr class="wp-travel-pro-mockup-option">
 		<td><label for="extra-item-sale-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
-			<span class="tooltip-area" title="<?php esc_html_e( 'Sale Price(Leave Blank to disable sale)', 'wp-travel' ); ?>">
-				<i class="fa fa-question-circle" aria-hidden="true"></i>
+			<span class="tooltip-area" titl.e="<?php esc_html_e( 'Sale Price(Leave Blank to disable sale)', 'wp-travel' ); ?>">
+				<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
 			</span>
 		</td>
 		<td>

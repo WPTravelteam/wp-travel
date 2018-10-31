@@ -19,7 +19,7 @@
 			<td>
 				<label for=""><?php echo esc_html( 'Restrict Coupon to Trips', 'wp-travel-coupon-pro' ); ?></label>
 					<span class="tooltip-area" title="<?php esc_html_e( 'Choose to apply coupons to certain trips only. Deselect all to apply to all trips', 'wp-travel' ); ?>">
-               			<i class="fa fa-question-circle" aria-hidden="true"></i>
+               			<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
            			</span>
 			</td>
 			<td>
@@ -82,7 +82,7 @@
 			<td>
 				<label for="coupon-limit"><?php esc_html_e( 'Coupon Usage Limit', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php echo esc_attr( 'No. of times coupon can be used before being obsolute.', 'wp-travel' ); ?>">
-               		<i class="fa fa-question-circle" aria-hidden="true"></i>
+               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
            		</span>
 			</td>
 			<td>

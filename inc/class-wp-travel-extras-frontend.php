@@ -134,7 +134,7 @@ class Wp_Travel_Extras_Frontend {
                                             <h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>
                                         </div>
                                         <?php if( $description ) : ?>
-                                            <i class="fa fa-angle-down wp_travel_tour_extras_toggler"></i>
+                                            <i class="wt-icon wt-icon-angle-down wp_travel_tour_extras_toggler"></i>
                                         <?php endif; ?>
                                     </div>
                                 </div>

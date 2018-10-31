@@ -153,7 +153,7 @@
     .form .wp-travel-ResetPassword .user-name:before,
     .form .wp-travel-ResetPassword .user-email:before,
     .form .wp-travel-ResetPassword .user-password-key:before {
-      font-family: fontawesome;
+      font-family: "wt-icon-solid";
       left: 1px;
       top: 1px;
       position: absolute;
@@ -394,7 +394,7 @@
           position: relative;
           padding-left: 20px; }
           .dashboard-tab .list-item .item .box-content ul li:before {
-            font-family: fontawesome;
+            font-family: "wt-icon-solid";
             content: '\f178';
             padding-right: 5px;
             position: absolute;

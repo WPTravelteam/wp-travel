@@ -488,7 +488,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 		?>
 			
 		<div class="wp-travel-trip-time trip-fixed-departure">
-			<i class="fa fa-calendar"></i>
+			<i class="wt-icon-regular wt-icon-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
 				<?php if ( $start_date && $end_date ) : ?>
 					<?php $date_format = get_option( 'date_format' ); ?>
@@ -508,7 +508,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
 		
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="fa fa-clock-o"></i>
+			<i class="wt-icon-regular wt-icon-clock"></i>
 			<span class="wp-travel-trip-duration">
 				<?php if ( ( int ) $trip_duration > 0 ) : ?>
 					<?php echo esc_html( $trip_duration . __( ' Days', 'wp-travel' ) ); ?>

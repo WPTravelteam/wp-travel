@@ -21,11 +21,11 @@ if ( ! empty( $bookings ) && is_array( $bookings ) ) {
 $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_billing_details', true ); ?>
 <div class="dashboard-tab">
 	<ul class="resp-tabs-list ver_1">
-		<li><i class="fa fa-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
-		<li id="wp-tab-mybookings"><i class="fa fa-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
-		<li id="wp-tab-myaddress"><i class="fa fa-address-book-o" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
-		<li id="wp-tab-myaccount"><i class="fa fa-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
-		<li><i class="fa fa-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
+		<li><i class="wt-icon wt-icon-tachometer" aria-hidden="true"></i><?php esc_html_e( 'Dashboard', 'wp-travel' ); ?></li>
+		<li id="wp-tab-mybookings"><i class="wt-icon wt-icon-th-list" aria-hidden="true"></i><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></li>
+		<li id="wp-tab-myaddress"><i class="wt-icon-regular wt-icon-address-book" aria-hidden="true"></i><?php esc_html_e( 'Address', 'wp-travel' ); ?></li>
+		<li id="wp-tab-myaccount"><i class="wt-icon wt-icon-user" aria-hidden="true"></i><?php esc_html_e( 'Account', 'wp-travel' ); ?></li>
+		<li><i class="wt-icon wt-icon-power-off" aria-hidden="true"></i><?php esc_html_e( 'Logout', 'wp-travel' ); ?></li>
 	</ul>
 	<div class="resp-tabs-container ver_1">
 		<div>
@@ -86,7 +86,7 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 							</div>
 							<div class="box-actions">
 								<a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
-									<i class="fa fa-pencil" aria-hidden="true"></i>
+									<i class="wt-icon wt-icon-pencil-alt" aria-hidden="true"></i>
 									<span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
 								</a>
 							</div>
@@ -105,7 +105,7 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 							</div>
 							<div class="box-actions">
 								<a data-tabtitle="wp-tab-myaccount" class="action edit dashtab-nav" href="#">
-									<i class="fa fa-pencil" aria-hidden="true"></i>
+									<i class="wt-icon wt-icon-pencil-alt" aria-hidden="true"></i>
 									<span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
 								</a>
 								<a href="#" data-tabtitle="wp-tab-myaccount" class="action dashtab-nav action change-password">

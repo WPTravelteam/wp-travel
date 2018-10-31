@@ -149,7 +149,7 @@
           position: relative;
           display: block;
           &:before{
-            font-family: fontawesome;
+            font-family: "wt-icon-solid";
             left: 1px;
             top: 1px;
             position: absolute;
@@ -468,7 +468,7 @@
             position:relative;
             padding-left: 20px;
             &:before{
-              font-family: fontawesome;
+              font-family: "wt-icon-solid";
               content: '\f178';
               padding-right: 5px;
               position: absolute;

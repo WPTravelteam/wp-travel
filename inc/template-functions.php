@@ -2293,7 +2293,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 								<?php } ?>
 									<div class="real_price">
 									<?php echo wp_travel_get_currency_symbol(); ?> <?php echo( esc_html( $display_price ) ); ?>
-										<!--<i class="fa fa-rocket"></i>-->
+										<!--<i class="wt-icon wt-icon-rocket"></i>-->
 									</div>
 									<?php echo __( 'Per ', 'wp-travel' ).esc_html( $per_label ); ?>
 								</span>

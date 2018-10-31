@@ -1692,7 +1692,7 @@ span.wp-travel-message {
 .wp-travel-error::before,
 .wp-travel-info::before,
 .wp-travel-message::before {
-    font-family: fontawesome;
+    font-family: "wp-icon-solid";
     font-size: 18px;
     display: inline-block;
     position: absolute;
@@ -1707,6 +1707,7 @@ span.wp-travel-message {
 .wp-travel-message::before {
     content: '\f05d';
     color: #0aa525;
+    font-family: 'wp-icon-regular';
 }
 
 .wp-travel-error::before {

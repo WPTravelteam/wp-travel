@@ -64,7 +64,7 @@ $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
                     <span class="post-category">
                         <?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
                         <?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-                            <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            <i class="wt-icon wt-icon-folder" aria-hidden="true"></i>
                             <?php
                             $first_term = array_shift( $terms );
                             $term_name = $first_term->name;
@@ -75,7 +75,7 @@ $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
                             
                             <?php if ( count( $terms ) > 0 ) : ?>
                             <div class="wp-travel-caret">
-                                <i class="fa fa-caret-down"></i>
+                                <i class="wt-icon wt-icon-caret-down"></i>
 
                                 <div class="sub-category-menu">
                                     <?php foreach ( $terms as $term ) : ?>
@@ -94,7 +94,7 @@ $end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
                     </span>
                 </div>
                 <div class="travel-info">
-                    <i class="fa fa-child" aria-hidden="true"></i>
+                    <i class="wt-icon wt-icon-child" aria-hidden="true"></i>
                     <span class="value"><?php printf( '%s', $group_size ) ?></span>
                 </div>
                 

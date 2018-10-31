@@ -62,7 +62,7 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 					<?php $terms = get_the_terms( get_the_ID(), 'itinerary_types' ); ?>
 					<div class="category-list-items">
 						<?php if ( is_array( $terms ) && count( $terms ) > 0 ) : ?>
-							<i class="fa fa-folder-o" aria-hidden="true"></i>
+							<i class="wt-icon wt-icon-folder" aria-hidden="true"></i>
 							<?php
 							$first_term = array_shift( $terms );
 							$term_name = $first_term->name;
@@ -72,7 +72,7 @@ $sale_price 	= wp_travel_get_trip_sale_price( get_the_ID() ); ?>
 							</a>
 							<?php if ( count( $terms ) > 0 ) : ?>
 							<div class="wp-travel-caret">
-								<i class="fa fa-caret-down"></i>
+								<i class="wt-icon wt-icon-caret-down"></i>
 								<div class="sub-category-menu">
 									<?php foreach( $terms as $term ) : ?>
 										<?php
