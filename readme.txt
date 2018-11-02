@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.6.8
+Stable tag: 1.6.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -160,7 +160,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.6.9 =
 Release Date: November 2nd, 2018
 * Fixes: Email Charset issue with other language.
-* Enhancement: Updated Fontawesome from 4.7 to 5. 
+* Fixes: Average rating fix.
+* Enhancement: Updated Fontawesome from 4.7 to 5.
 * Minor bug fixings.
 
 = 1.6.8 =
