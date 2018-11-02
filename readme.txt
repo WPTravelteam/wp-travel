@@ -157,6 +157,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.6.9 =
+Release Date: November 2nd, 2018
+* Fixes: Email Charset issue with other language.
+* Enhancement: Updated Fontawesome from 4.7 to 5. 
+* Minor bug fixings.
+
 = 1.6.8 =
 Release Date: October 29th, 2018
 * Fixes: License issue.
