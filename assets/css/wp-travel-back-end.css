@@ -1920,7 +1920,7 @@ span.wp-travel-message {
   background-color: #fff;
   border: 1px solid #c5c5c5;
   box-shadow: none;
-  height: 45px;
+  height: 35px;
 }
 #wp-travel-tab-content-license .form-table input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field select[id*=license] ~ span, .wp-travel-form-field #wp-travel-tab-content-license .form-table select[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field textarea[id*=license] ~ span, .wp-travel-form-field #wp-travel-tab-content-license .form-table textarea[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .stat-toolbar-form .field-group .wp-travel-form-field input[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group select[id*=license] ~ span, #wp-travel-tab-content-license .form-table .wp-travel-form-field .stat-toolbar-form .field-group textarea[id*=license] ~ span {
   font-weight: bold;
