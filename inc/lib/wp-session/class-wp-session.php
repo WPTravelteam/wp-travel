@@ -69,8 +69,8 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * @uses apply_filters Calls `wp_session_expiration` to determine how long until sessions expire.
 	 */
 	protected function __construct() {
-		if ( isset( $_COOKIE[WP_SESSION_COOKIE] ) ) {
-			$cookie = stripslashes( $_COOKIE[WP_SESSION_COOKIE] );
+		if ( isset( $_COOKIE[WP_TRAVEL_SESSION_COOKIE] ) ) {
+			$cookie = stripslashes( $_COOKIE[WP_TRAVEL_SESSION_COOKIE] );
 			$cookie_crumbs = explode( '||', $cookie );
 
 			$this->session_id = $cookie_crumbs[0];
@@ -125,7 +125,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	protected function set_cookie() {
         	$secure = apply_filters('wp_session_cookie_secure', false);
         	$httponly = apply_filters('wp_session_cookie_httponly', false);
-		setcookie( WP_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant , $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
+		setcookie( WP_TRAVEL_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant , $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
 	}
 
 	/**

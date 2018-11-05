@@ -25,8 +25,8 @@ class WP_Travel_Session {
 	 */
 	public function __construct() {
 		// Let users change the session cookie name.
-		if ( ! defined( 'WP_SESSION_COOKIE' ) ) {
-			define( 'WP_SESSION_COOKIE', '_wp_travel_session' );
+		if ( ! defined( 'WP_TRAVEL_SESSION_COOKIE' ) ) {
+			define( 'WP_TRAVEL_SESSION_COOKIE', '_wp_travel_session' );
 		}
 
 		if ( ! class_exists( 'Recursive_ArrayAccess' ) ) {
