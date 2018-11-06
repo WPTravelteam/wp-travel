@@ -89,6 +89,9 @@ class WP_Travel_License {
 			$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
 			$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
 		?>
+		<style>
+			#wp-travel-tab-content-license .form-table input[class*=button].button-license{height:35px;line-height:35px}
+		</style>
 		<div class="wp-travel-tab-product-single">
 			<h4 class="wp-travel-tab-content-title wp-travel-tab-product-title"><?php echo esc_html( $premium_addon['item_name'] ); ?></h4>
 			<table class="form-table">
@@ -98,34 +101,35 @@ class WP_Travel_License {
 						<td>
 							<input type="text" value="<?php echo esc_attr( $license_key ) ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key">
 							<?php if ( $license_key ) : ?>
-								<?php if ( 'valid' === $status ) : ?>
-									<span style="color:green;"><?php esc_html_e( 'Active', 'wp-travel' ); ?></span>
-								<?php elseif ( 'invalid' === $status ) : ?>
-									<span style="color:red;"><?php esc_html_e( 'Invalid', 'wp-travel' ); ?></span>
-								<?php elseif ( 'expired' === $status ) : ?>
-									<span style="color:red;"><?php esc_html_e( 'Expired', 'wp-travel' ); ?></span>
-								<?php elseif ( 'inactive' === $status ) :  ?>
-									<span style="color:orange;"><?php esc_html_e( 'Inactive', 'wp-travel' ); ?></span>
-								<?php endif; ?>
+								<span class="license-status-warp" style="position:relative;" >
+									<span style="position:absolute;top:0;right:10px">
+									<?php if ( 'valid' === $status ) : ?>
+										<span style="color:green;"><?php esc_html_e( 'Active', 'wp-travel' ); ?></span>
+									<?php elseif ( 'invalid' === $status ) : ?>
+										<span style="color:red;"><?php esc_html_e( 'Invalid', 'wp-travel' ); ?></span>
+									<?php elseif ( 'expired' === $status ) : ?>
+										<span style="color:red;"><?php esc_html_e( 'Expired', 'wp-travel' ); ?></span>
+									<?php elseif ( 'inactive' === $status ) :  ?>
+										<span style="color:orange;"><?php esc_html_e( 'Inactive', 'wp-travel' ); ?></span>
+									<?php endif; ?>
+									</span>
+								</span>
 							<?php endif; ?>
 
-						</td>
-					</tr>
-					<?php if ( $license_key || 'valid' !== $status ) : ?>
-					<tr>
-						<th><label for="<?php echo $key; ?>-license-key"><?php esc_html_e( 'Activate License', 'wp-travel' ) ?></label></th>
-						<td>
-							<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
+							<?php if ( $license_key || 'valid' !== $status ) : ?>
+							
+								<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
 
-							<?php if ( false !== $status && 'valid' === $status ) { ?>
-								<input type="submit" class="button button-primary" name="<?php echo $premium_addon['_option_prefix']; ?>deactivate" value="<?php esc_html_e( 'Deactivate License', 'wp-travel' ) ?>" />
-							<?php } else { ?>
-								<input type="submit" class="button button-primary" name="<?php echo $premium_addon['_option_prefix']; ?>activate" value="<?php esc_html_e( 'Activate License', 'wp-travel' ) ?>" />
-							<?php } ?>
-							<input type="hidden" name="save_settings_button" value="true" />
+								<?php if ( false !== $status && 'valid' === $status ) { ?>
+									<input type="submit" class="button button-secondary button-license" name="<?php echo $premium_addon['_option_prefix']; ?>deactivate" value="<?php esc_html_e( 'Deactivate License', 'wp-travel' ) ?>" />
+								<?php } else { ?>
+									<input type="submit" class="button button-primary button-license" name="<?php echo $premium_addon['_option_prefix']; ?>activate" value="<?php esc_html_e( 'Activate License', 'wp-travel' ) ?>" />
+								<?php } ?>
+								<input type="hidden" name="save_settings_button" value="true" />
+								
+							<?php endif; ?>
 						</td>
 					</tr>
-					<?php endif; ?>
 				</tbody>
 			</table>
 		</div>
