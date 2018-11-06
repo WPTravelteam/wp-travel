@@ -157,6 +157,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.7.0 =
+Release Date: November 6th, 2018
+* Fixes: Renamed WP_SESSION_COOKEI to WP_TRAVEL_SESSION_COOKEI.
+* Enhancement: List by Fix Departure listing Pricing Name label added.
+
 = 1.6.9 =
 Release Date: November 2nd, 2018
 * Fixes: Email Charset issue with other language.

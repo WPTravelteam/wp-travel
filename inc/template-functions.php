@@ -2168,6 +2168,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 	<div class="trip_list_by_fixed_departure_dates">
 		<div class="trip_list_by_fixed_departure_dates_header">
 			<span class="trip_list_by_fixed_departure_dates_wrap">
+				<span class="trip_list_by_fixed_departure_dates_pricing_name_label"><?php esc_html_e( 'Pricing Name', 'wp-travel' ); ?></span>
 				<span class="trip_list_by_fixed_departure_dates_start_label"><?php esc_html_e( 'START', 'wp-travel' ); ?></span>
 				<span class="trip_list_by_fixed_departure_dates_end_label"><?php esc_html_e( 'END', 'wp-travel' ); ?></span>
 				<?php if( $status_col ) : ?>
@@ -2256,6 +2257,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 					?>
 						<li class="<?php echo esc_attr( $unavailable_class ); ?>" id="princing-<?php echo esc_attr( $price_key ) ?>-<?php echo esc_attr( $rand ); ?>">
 							<div class="trip_list_by_fixed_departure_dates_wrap">
+								<span class="trip_list_by_fixed_departure_dates_pricing_name"><?php echo $pricing_name ?></span>
 								<span class="trip_list_by_fixed_departure_dates_start">
 									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($start_date) ) ); ?></div>
 									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $start_date ) ); ?>
