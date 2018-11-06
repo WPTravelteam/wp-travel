@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.6.9\n"
+"Project-Id-Version: WP Travel 1.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-02 11:48:18+00:00\n"
+"POT-Creation-Date: 2018-11-06 07:51:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -437,7 +437,7 @@ msgstr ""
 #: inc/booking-functions.php:1054 inc/helpers.php:500 inc/helpers.php:516
 #: inc/helpers.php:783 inc/helpers.php:952 inc/helpers.php:1042
 #: inc/helpers.php:1058 inc/helpers.php:1073 inc/template-functions.php:1966
-#: inc/template-functions.php:2225 templates/content-pricing-options.php:92
+#: inc/template-functions.php:2226 templates/content-pricing-options.php:92
 msgid "N/A"
 msgstr ""
 
@@ -1606,7 +1606,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:181
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:313
-#: inc/template-functions.php:1922
+#: inc/template-functions.php:1922 inc/template-functions.php:2171
 msgid "Pricing Name"
 msgstr ""
 
@@ -2001,7 +2001,7 @@ msgid "Powered By: %1$1sWP Travel.%2$2s"
 msgstr ""
 
 #: inc/class-frontend-assets.php:131 inc/template-functions.php:2056
-#: inc/template-functions.php:2311
+#: inc/template-functions.php:2313
 msgid "Select"
 msgstr ""
 
@@ -3950,46 +3950,46 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:96
+#: inc/license/wp-travel-license.php:100
 msgid "License Key"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:101
+#: inc/license/wp-travel-license.php:107
 msgid "Active"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:103
+#: inc/license/wp-travel-license.php:109
 #: inc/payments/wp-travel-payments.php:476
 msgid "Invalid"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:105
+#: inc/license/wp-travel-license.php:111
 msgid "Expired"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:107
+#: inc/license/wp-travel-license.php:113
 msgid "Inactive"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:115 inc/license/wp-travel-license.php:122
-msgid "Activate License"
-msgstr ""
-
-#: inc/license/wp-travel-license.php:120
+#: inc/license/wp-travel-license.php:124
 msgid "Deactivate License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:137
+#: inc/license/wp-travel-license.php:126
+msgid "Activate License"
+msgstr ""
+
+#: inc/license/wp-travel-license.php:143
 msgid "Want to add more features in WP Travel?"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:138
+#: inc/license/wp-travel-license.php:144
 msgid ""
 "Get addon for payment, trip extras, Inventory management and other premium "
 "features."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:335
+#: inc/license/wp-travel-license.php:341
 msgid ""
 "You have not activated the license for %s Addon Go to <a href=\"%s\"> "
 "settings </a> to activate your license."
@@ -4138,41 +4138,41 @@ msgstr ""
 msgid "size"
 msgstr ""
 
-#: inc/template-functions.php:2113 inc/template-functions.php:2319
-#: inc/template-functions.php:2345 templates/content-pricing-options.php:258
+#: inc/template-functions.php:2113 inc/template-functions.php:2321
+#: inc/template-functions.php:2347 templates/content-pricing-options.php:258
 msgid "Book now"
 msgstr ""
 
-#: inc/template-functions.php:2171
+#: inc/template-functions.php:2172
 msgid "START"
 msgstr ""
 
-#: inc/template-functions.php:2172
+#: inc/template-functions.php:2173
 msgid "END"
 msgstr ""
 
-#: inc/template-functions.php:2174
+#: inc/template-functions.php:2175
 msgid "SEATS LEFT"
 msgstr ""
 
-#: inc/template-functions.php:2176 inc/template-functions.php:2279
+#: inc/template-functions.php:2177 inc/template-functions.php:2281
 #: templates/content-cart.php:57
 msgid "PAX"
 msgstr ""
 
-#: inc/template-functions.php:2177
+#: inc/template-functions.php:2178
 msgid "PRICE"
 msgstr ""
 
-#: inc/template-functions.php:2199 inc/template-functions.php:2200
+#: inc/template-functions.php:2200 inc/template-functions.php:2201
 msgid "%s Pax"
 msgstr ""
 
-#: inc/template-functions.php:2291
+#: inc/template-functions.php:2293
 msgid "sale"
 msgstr ""
 
-#: inc/template-functions.php:2298
+#: inc/template-functions.php:2300
 msgid "Per "
 msgstr ""
 
