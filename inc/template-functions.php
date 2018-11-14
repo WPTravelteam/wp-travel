@@ -1483,35 +1483,39 @@ function wp_travel_posts_filter( $query ) {
 
 					$date_format = get_option( 'date_format' );
 					//Convert to timestamp.
-					$date = DateTime::createFromFormat( $date_format, $trip_start );
-					$trip_start = $date->format( 'Y-m-d' );
+					if ( $trip_start ) {
+						$date = DateTime::createFromFormat( $date_format, $trip_start );
+						$trip_start = $date->format( 'Y-m-d' );
+					} else {
+						$trip_start = date( 'Y-m-d' );
+					}
 
 					//Make date in required format.
-					$date2 = DateTime::createFromFormat( $date_format, $trip_end );
-					$trip_end = $date2->format( 'Y-m-d' );
-
-					$query->set('meta_query', array(
+					if ( $trip_end ) {
+						$date2 = DateTime::createFromFormat( $date_format, $trip_end );
+						$trip_end = $date2->format( 'Y-m-d' );
+					} else {
+						$trip_end = date( 'Y-m-d' );
+					}
+					$query->set('meta_query', 
 						array(
-							'key'     => 'wp_travel_start_date',
-							'value'   => array( $trip_start, $trip_end ),
-							'type'    => 'DATE',
-							'compare' => 'BETWEEN',
-						),
-					)
-					);
-
-					$query->set('meta_query', array(
-						array(
-							'key'     => 'wp_travel_start_date',
-							'value'   => array( $trip_start, $trip_end ),
-							'type'    => 'DATE',
-							'compare' => 'BETWEEN',
-						),
-					)
+							'relation' => 'AND',
+							array(
+								'key'     => 'wp_travel_start_date',
+								'value'   => $trip_start,
+								'type'    => 'DATE',
+								'compare' => '>=',
+							),
+							array(
+								'key'     => 'wp_travel_end_date',
+								'value'   => $trip_end,
+								'type'    => 'DATE',
+								'compare' => '<',
+							),
+						)
 					);
 
 				}
-
 			}
 
 			// Filter By Price.
@@ -1649,6 +1653,7 @@ function wp_travel_posts_filter( $query ) {
 
 				} elseif ( $type > 0 ) {
 					$query->set( 'tax_query', array(
+						'relation' => 'AND',
 						array(
 							'taxonomy' => 'itinerary_types',
 							'field' => 'id',
@@ -1677,8 +1682,7 @@ function wp_travel_posts_filter( $query ) {
 
 				}
 			}
-			if ( isset( $_GET['fact'] ) ) {
-
+			if ( isset( $_GET['fact'] ) && '' != $_GET['fact'] ) {
 				$fact = $_GET['fact'];
 
 				$query->set('meta_key', 'wp_travel_trip_facts');
