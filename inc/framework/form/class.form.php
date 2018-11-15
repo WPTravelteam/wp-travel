@@ -152,13 +152,17 @@ class WP_Travel_FW_Form {
 	 */
 	private function slugify( $string, $replace = array(), $delimiter = '-' ) {
 		// https://github.com/phalcon/incubator/blob/master/Library/Phalcon/Utils/Slug.php.
-		if ( ! extension_loaded( 'iconv' ) ) {
-			throw new Exception( 'iconv module not loaded' );
-		}
+		// if ( ! extension_loaded( 'iconv' ) ) {
+		// 	throw new Exception( 'iconv module not loaded' );
+		// }
 		// Save the old locale and set the new locale to UTF-8.
 		$old_locale = setlocale( LC_ALL, '0' );
 		setlocale( LC_ALL, 'en_US.UTF-8' );
-		$clean = iconv( 'UTF-8', 'ASCII//TRANSLIT', $string );
+
+		// $clean = iconv( 'UTF-8', 'ASCII//TRANSLIT', $string );
+		$clean = sanitize_title( $string );
+		$clean = str_replace( '-', '_', $clean );
+	
 		if ( ! empty( $replace ) ) {
 			$clean = str_replace( ( array ) $replace, ' ', $clean );
 		}
