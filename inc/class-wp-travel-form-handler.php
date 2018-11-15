@@ -231,7 +231,7 @@ class Wp_Travel_Form_Handler {
 			return;
 		}
 
-		if ( empty( $_POST['action'] ) || 'wp_travel_save_user_meta_billing_address' !== $_POST['action'] || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_save_user_meta_billing_address' ) ) {
+		if ( empty( $_POST['action'] ) || 'wp_travel_save_user_meta_billing_address' !== $_POST['action'] || empty( $_POST['wp_billing_address_security'] ) || ! wp_verify_nonce( $_POST['wp_billing_address_security'], 'wp_travel_save_user_meta_billing_address' ) ) {
 			return;
 		}
 
@@ -301,7 +301,7 @@ class Wp_Travel_Form_Handler {
 			return;
 		}
 
-		if ( empty( $_POST['action'] ) || 'wp_travel_save_account_details' !== $_POST['action'] || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_save_account_details' ) ) {
+		if ( empty( $_POST['action'] ) || 'wp_travel_save_account_details' !== $_POST['action'] || empty( $_POST['wp_account_details_security'] ) || ! wp_verify_nonce( $_POST['wp_account_details_security'], 'wp_travel_save_account_details' ) ) {
 			return;
 		}
 

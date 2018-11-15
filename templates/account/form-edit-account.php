@@ -100,7 +100,7 @@ do_action( 'wp_travel_before_edit_account_form' ); ?>
 	<?php do_action( 'wp_travel_edit_account_form' ); ?>
 
 	<p>
-		<?php wp_nonce_field( 'wp_travel_save_account_details' ); ?>
+		<?php wp_nonce_field( 'wp_travel_save_account_details', 'wp_account_details_security' ); ?>
 		<input type="submit" class="wp-travel-Button button" name="wp_travel_save_account_details" value="<?php esc_attr_e( 'Save changes', 'wp-travel' ); ?>">
 		<input type="hidden" name="action" value="wp_travel_save_account_details" />
 	</p>

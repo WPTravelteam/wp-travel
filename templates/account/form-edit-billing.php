@@ -106,7 +106,7 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 	<?php do_action( 'wp_travel_edit_billing_form' ); ?>
 
 	<p>
-		<?php wp_nonce_field( 'wp_travel_save_user_meta_billing_address' ); ?>
+		<?php wp_nonce_field( 'wp_travel_save_user_meta_billing_address', 'wp_billing_address_security' ); ?>
 		<input type="submit" class="wp-travel-Button button" name="wp_travel_save_user_meta_billing_address" value="<?php esc_attr_e( 'Save changes', 'wp-travel' ); ?>">
 		<input type="hidden" name="action" value="wp_travel_save_user_meta_billing_address" />
 	</p>
