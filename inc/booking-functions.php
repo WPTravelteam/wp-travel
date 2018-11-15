@@ -649,23 +649,16 @@ function wp_travel_book_now() {
 	}
 
 	if ( is_user_logged_in() ) {
-
 		$user = wp_get_current_user();
-
-		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
-
+		// if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
 			$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
-
 			if ( ! $saved_booking_ids ) {
 				$saved_booking_ids = array();
 			}
-	
-			array_push( $saved_booking_ids, $order_id );
-			
+			array_push( $saved_booking_ids, $order_id );			
 			update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 
-		}
-
+		// }
 	}
 
 	/**
