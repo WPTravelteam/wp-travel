@@ -48,14 +48,24 @@ class WP_Travel_Frontend_Assets {
 		$lang_code = explode( '-', get_bloginfo('language') );
 		$locale = $lang_code[0];
 
-		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.min.js', array( 'jquery' ), '2.2.3', true );
+		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), '2.2.3', true );
 		
-		$locale_path = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.' . $locale . '.js';
-
-		$datepicker_i18n_file = file_exists( $locale_path ) ? $locale_path : plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/i18n/datepicker.en.js';
-
-		$locale = file_exists( $locale_path ) ? $locale : 'en';
+		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
+		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
 		
+		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
+		$default_url = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
+		
+		$filename = 'datepicker.' . $locale . '.js';
+		
+		if ( file_exists(  trailingslashit( $wp_content_file_path ) . $filename ) ) {
+			$datepicker_i18n_file = trailingslashit( $wp_content_file_url ) . $filename;
+		} elseif( file_exists( trailingslashit( $default_path ) . $filename ) ) {
+			$datepicker_i18n_file = $default_url . $filename;
+		} else {
+			$datepicker_i18n_file = $default_url . 'datepicker.en.js';
+			$locale = 'en';
+		}
 		wp_register_script( 'jquery-datepicker-lib-eng', $datepicker_i18n_file, array( 'jquery' ), '', 1 );
 		
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
