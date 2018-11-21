@@ -171,7 +171,7 @@
             }
 
             if (this.opts.timepicker) {
-                this.timepicker = new $.fn.datepicker.Timepicker(this, this.opts);
+                this.timepicker = new $.fn.wpt_datepicker.Timepicker(this, this.opts);
                 this._bindTimepickerEvents();
             }
 
@@ -179,9 +179,9 @@
                 this.$datepicker.addClass('-only-timepicker-');
             }
 
-            this.views[this.currentView] = new $.fn.datepicker.Body(this, this.currentView, this.opts);
+            this.views[this.currentView] = new $.fn.wpt_datepicker.Body(this, this.currentView, this.opts);
             this.views[this.currentView].show();
-            this.nav = new $.fn.datepicker.Navigation(this, this.opts);
+            this.nav = new $.fn.wpt_datepicker.Navigation(this, this.opts);
             this.view = this.currentView;
 
             this.$el.on('clickCell.adp', this._onClickCell.bind(this));
@@ -221,15 +221,15 @@
 
         _defineLocale: function (lang) {
             if (typeof lang == 'string') {
-                this.loc = $.fn.datepicker.language[lang];
+                this.loc = $.fn.wpt_datepicker.language[lang];
                 if (!this.loc) {
                     console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "ru" instead');
-                    this.loc = $.extend(true, {}, $.fn.datepicker.language.ru)
+                    this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru)
                 }
 
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, $.fn.datepicker.language[lang])
+                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru, $.fn.wpt_datepicker.language[lang])
             } else {
-                this.loc = $.extend(true, {}, $.fn.datepicker.language.ru, lang)
+                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru, lang)
             }
 
             if (this.opts.dateFormat) {
@@ -1339,7 +1339,7 @@
 
             if (this.inited) {
                 if (!this.views[val]) {
-                    this.views[val] = new  $.fn.datepicker.Body(this, val, this.opts)
+                    this.views[val] = new  $.fn.wpt_datepicker.Body(this, val, this.opts)
                 } else {
                     this.views[val]._render();
                 }
@@ -1455,7 +1455,7 @@
         return new Date(date.year, date.month, date.date)
     };
 
-    $.fn.datepicker = function ( options ) {
+    $.fn.wpt_datepicker = function ( options ) {
         return this.each(function () {
             if (!$.data(this, pluginName)) {
                 $.data(this,  pluginName,
@@ -1469,9 +1469,9 @@
         });
     };
 
-    $.fn.datepicker.Constructor = Datepicker;
+    $.fn.wpt_datepicker.Constructor = Datepicker;
 
-    $.fn.datepicker.language = {
+    $.fn.wpt_datepicker.language = {
         ru: {
             days: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
             daysShort: ['Вос','Пон','Вто','Сре','Чет','Пят','Суб'],
@@ -1508,7 +1508,7 @@
         '<div class="datepicker--cells datepicker--cells-years"></div>' +
         '</div>'
         },
-        datepicker = $.fn.datepicker,
+        datepicker = $.fn.wpt_datepicker,
         dp = datepicker.Constructor;
 
     datepicker.Body = function (d, type, opts) {
@@ -1811,7 +1811,7 @@
         '<div class="datepicker--nav-action" data-action="next">#{nextHtml}</div>',
         buttonsContainerTemplate = '<div class="datepicker--buttons"></div>',
         button = '<span class="datepicker--button" data-action="#{action}">#{label}</span>',
-        datepicker = $.fn.datepicker,
+        datepicker = $.fn.wpt_datepicker,
         dp = datepicker.Constructor;
 
     datepicker.Navigation = function (d, opts) {
@@ -1966,7 +1966,7 @@
         '   </div>' +
         '</div>' +
         '</div>',
-        datepicker = $.fn.datepicker,
+        datepicker = $.fn.wpt_datepicker,
         dp = datepicker.Constructor;
 
     datepicker.Timepicker = function (inst, opts) {

@@ -1,6 +1,5 @@
-;
-(function ($) { 
-    $.fn.datepicker.language['no'] = { 
+;(function ($) { 
+    var translation = { 
         days: ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'], 
         daysShort: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Løradg'], 
         daysMin: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'], 
@@ -11,5 +10,13 @@
         dateFormat: 'dd/mm/yyyy', 
         timeFormat: 'hh:ii aa', 
         firstDay: 0 
-    }; 
+    };
+
+    if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
+        $.fn.datepicker.language['no'] = translation;
+    }
+    if (typeof( $.fn.wpt_datepicker ) !== 'undefined' && $.isFunction($.fn.wpt_datepicker)) {
+        $.fn.wpt_datepicker.language['no'] = translation;
+    }
+
 })(jQuery);
