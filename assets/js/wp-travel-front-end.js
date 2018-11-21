@@ -249,7 +249,7 @@ jQuery(document).ready(function($) {
     jQuery('.wp-travel-pricing-dates').each(function() {
         var availabledate = jQuery(this).data('available-dates');
         if (availabledate) {
-            jQuery(this).datepicker({
+            jQuery(this).wpt_datepicker({
                 language: wp_travel_frontend_vars.locale,
                 // inline: true,
                 autoClose: true,
@@ -269,7 +269,7 @@ jQuery(document).ready(function($) {
             });
 
         } else {
-            jQuery(this).datepicker({
+            jQuery(this).wpt_datepicker({
                 language: wp_travel_frontend_vars.locale,
                 minDate: new Date(),
                 autoClose: true,

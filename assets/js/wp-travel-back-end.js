@@ -120,8 +120,8 @@
 
     function dateTimePicker() {
 
-        if ($.fn.datepicker) {
-            $('#wp-travel-start-date').datepicker({
+        if ($.fn.wpt_datepicker) {
+            $('#wp-travel-start-date').wpt_datepicker({
                 language: 'en',
                 minDate: new Date(),
                 onSelect: function(dateStr) {
@@ -132,24 +132,24 @@
 
                         newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                     }
-                    $('#wp-travel-end-date').datepicker({
+                    $('#wp-travel-end-date').wpt_datepicker({
                         minDate: newMinDate,
                     });
                 }
             });
 
-            $('#wp-travel-end-date').datepicker({
+            $('#wp-travel-end-date').wpt_datepicker({
                 language: 'en',
                 minDate: new Date()
             });
 
-            $('.wp-travel-datepicker').datepicker({
+            $('.wp-travel-datepicker').wpt_datepicker({
                 language: 'en',
                 minDate: new Date()
             });
 
-            $('.wp-travel-timepicker').datepicker({
-                // language: 'en',
+            $('.wp-travel-timepicker').wpt_datepicker({
+                language: 'en',
                 timepicker: true,
                 onlyTimepicker: true,
 
@@ -272,6 +272,10 @@
         } else {
             $('#wp-travel-multiple-pricing-options').hide();
             $('.wp-travel-tour-extra-title, .wp-travel-tour-extra-content').css({display:'table-row'});
+
+            if ( $('#wp-travel-enable-multiple-fixed-departure').is(':checked') ) {
+                // need to work here for show hide options.
+            }
         }
     });
 
@@ -377,11 +381,11 @@
         var rand = Math.floor(Math.random() * (999 - 10 + 1)) + 10;
         $('.itinerary_block').append(template({ random: rand }));
 
-        $('.itinerary_block .panel:last .wp-travel-datepicker').datepicker({
+        $('.itinerary_block .panel:last .wp-travel-datepicker').wpt_datepicker({
             language: 'en',
             minDate: new Date()
         });
-        $('.itinerary_block .panel:last .wp-travel-timepicker').datepicker({
+        $('.itinerary_block .panel:last .wp-travel-timepicker').wpt_datepicker({
             language: 'en',
             timepicker: true,
             onlyTimepicker: true,
@@ -506,12 +510,12 @@
             new_date_min = new Date(savedMeanDate);
             newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
 
-            $(this).siblings('.wp-travel-multiple-end-date').datepicker({
+            $(this).siblings('.wp-travel-multiple-end-date').wpt_datepicker({
                 minDate: newMinDate,
             });
         }
 
-        $(this).datepicker({
+        $(this).wpt_datepicker({
             language: 'en',
             minDate: new Date(),
             onSelect: function(dateStr) {
@@ -521,7 +525,7 @@
                     new_date_min = new Date(dateStr);
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
-                th.siblings('.wp-travel-multiple-end-date').datepicker({
+                th.siblings('.wp-travel-multiple-end-date').wpt_datepicker({
                     minDate: newMinDate,
                 });
             }
@@ -534,7 +538,7 @@
         var rand = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $('#date-options-data').append(template({ random: rand }));
 
-        $('#date-options-data .panel:last .wp-travel-multiple-start-date').datepicker({
+        $('#date-options-data .panel:last .wp-travel-multiple-start-date').wpt_datepicker({
             language: 'en',
             minDate: new Date(),
             onSelect: function(dateStr) {
@@ -545,7 +549,7 @@
 
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
-                $('#date-options-data .panel:last .wp-travel-multiple-end-date').datepicker({
+                $('#date-options-data .panel:last .wp-travel-multiple-end-date').wpt_datepicker({
                     minDate: newMinDate,
                 });
             }
