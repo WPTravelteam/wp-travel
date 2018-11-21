@@ -158,11 +158,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.7.2 =
-Release Date: November 16th, 2018
+Release Date: November 21st, 2018
 
 * Fixes: PHP Module iconv extension error.
 * Fixes: Dashboard Booking not saved in case of admin.
 * Fixes: Console error with multiple _nonce uses in WP Travel Dashboard.
+* Fixes: Calender locale.
+* Fixes: Conflict with BuddyPress Event calender.
 
 = 1.7.1 =
 Release Date: November 14th, 2018
