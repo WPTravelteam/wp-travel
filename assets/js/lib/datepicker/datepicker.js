@@ -1487,7 +1487,7 @@
     };
 
     $(function () {
-        $(autoInitSelector).datepicker();
+        $(autoInitSelector).wpt_datepicker();
     })
 
 })();
