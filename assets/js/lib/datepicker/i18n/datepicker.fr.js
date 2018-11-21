@@ -12,11 +12,10 @@
         firstDay: 1
     };
 
-    if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
-        $.fn.datepicker.language['fr'] = translation;
-    }
     if (typeof( $.fn.wpt_datepicker ) !== 'undefined' && $.isFunction($.fn.wpt_datepicker)) {
         $.fn.wpt_datepicker.language['fr'] = translation;
+    } else if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
+        $.fn.datepicker.language['fr'] = translation;
     }
 
 })(jQuery);

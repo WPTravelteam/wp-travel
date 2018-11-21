@@ -11,12 +11,11 @@
         timeFormat: 'hh:ii aa',
         firstDay: 1
     };
-
-    if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
-        $.fn.datepicker.language['it'] = translation;
-    }
+    
     if (typeof( $.fn.wpt_datepicker ) !== 'undefined' && $.isFunction($.fn.wpt_datepicker)) {
         $.fn.wpt_datepicker.language['it'] = translation;
+    } else if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
+        $.fn.datepicker.language['it'] = translation;
     }
 
 })(jQuery);

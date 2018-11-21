@@ -12,11 +12,10 @@
         firstDay: 0
     };
 
-    if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
-        $.fn.datepicker.language['nl'] = translation;
-    }
     if (typeof( $.fn.wpt_datepicker ) !== 'undefined' && $.isFunction($.fn.wpt_datepicker)) {
         $.fn.wpt_datepicker.language['nl'] = translation;
+    } else if (typeof( $.fn.datepicker ) !== 'undefined' && $.isFunction($.fn.datepicker)) {
+        $.fn.datepicker.language['nl'] = translation;
     }
 
 })(jQuery);
