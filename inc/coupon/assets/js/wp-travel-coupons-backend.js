@@ -41,8 +41,8 @@
         }
     });
 
-    if ($.fn.datepicker) {
-        $('.wp-travel-datepicker').datepicker({
+    if ($.fn.wpt_datepicker) {
+        $('.wp-travel-datepicker').wpt_datepicker({
             language: 'en',
             minDate: new Date()
         });

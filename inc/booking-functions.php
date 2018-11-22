@@ -326,7 +326,7 @@ function wp_travel_booking_info( $post ) {
 			?>
 			<script>
 				jQuery(document).ready( function($){
-					$(".wp-travel-date").datepicker({
+					$(".wp-travel-date").wpt_datepicker({
 							language: "en",		
 							minDate: new Date()
 						});
