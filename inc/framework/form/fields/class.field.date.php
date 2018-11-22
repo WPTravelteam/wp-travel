@@ -30,7 +30,7 @@ class WP_Travel_FW_Field_Date {
 
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
-		$output .= 		'$("#' . $this->field['id'] . '").datepicker({
+		$output .= 		'$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",		
 							minDate: new Date()
 						});';
