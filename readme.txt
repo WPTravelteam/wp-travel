@@ -158,7 +158,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.7.2 =
-Release Date: November 21st, 2018
+Release Date: November 22nd, 2018
 
 * Fixes: PHP Module iconv extension error.
 * Fixes: Dashboard Booking not saved in case of admin.
