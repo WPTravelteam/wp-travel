@@ -466,7 +466,7 @@ if ( ! $price_per ) {
 
 	<tr id="wp-variations-multiple-dates" style="display:<?php echo ( 'yes' === $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
 
-	<?php if ( 'yes' === $enable_pricing_options && is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : ?>
+	<?php if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : ?>
 
 		<td colspan="2" class="pricing-repeater">
 

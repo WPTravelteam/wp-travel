@@ -1903,6 +1903,8 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 	$status_col = false;
 	$status_msg = false;
 
+	$enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+
 	if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 		$inventory  = new WP_Travel_Util_Inventory();
 		$status_col = get_post_meta( $trip_id, 'status_column_enable', true );
@@ -2070,7 +2072,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 										do_action('wp_travel_trip_extras', $price_key );
 									?>
 									<div class="wp-travel-calender-column no-padding ">
-									<?php if ( $available_dates ) : ?>
+									<?php if ( $available_dates && 'yes' === $enable_multiple_fixed_departue ) : ?>
 										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
 										<input name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 									<?php

@@ -348,6 +348,10 @@ function wp_travel_booking_info( $post ) {
  * @return Mixed
  */
 function wp_travel_save_booking_data( $trip_id ) {
+	if ( ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		return;
+	}
+
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}

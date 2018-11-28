@@ -18,15 +18,7 @@ global $post;
 global $wp_travel_itinerary;
 
 $trip_id = $post->ID;
-
-$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
-$trip_content	= $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
-$trip_outline	= $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
-$trip_include	= $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
-$trip_exclude	= $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
-$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
-
-$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+$settings = wp_travel_get_settings();
 
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 
@@ -40,14 +32,14 @@ $trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 $trip_duration_night = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
 $trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
-$settings = wp_travel_get_settings();
 $currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 $per_person_text = wp_travel_get_price_per_text( $trip_id );
 $sale_price      = wp_travel_get_trip_sale_price( $trip_id ); 
 
-$wp_travel_enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true ); ?>
+$wp_travel_enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
+$wp_travel_enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );?>
 
 <div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
 <?php
@@ -111,7 +103,6 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 		if ( 'allow_trip_enquiry' === $wp_travel_inventory_sold_out_action ) {
 			$sold_out_btn_rep_msg = wp_travel_utilities__get_inquiry_link();
 		}
-
 	}
 	
 	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
@@ -122,16 +113,18 @@ if ( ( $enable_checkout && 0 !== $trip_price ) || $force_checkout ) :
 		$list_type = isset( $settings['trip_pricing_options_layout'] )  ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
 
 		if ( $list_type === 'by-pricing-option' ) {
-			// Default pricing options template.
-			do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
-
-		} elseif( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) {
-			// Date listing template.
-			do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data );
+				// Default pricing options template.
+				do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
 
 		} else {
-			esc_html_e( 'No fixed departure dates found.', 'wp-travel' );
+			if ( 'yes' === $wp_travel_enable_multiple_fixed_departue && 'yes' === $fixed_departure && ( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) ) {
+				// Date listing template.
+				do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data );
+			} else {
+				do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
+			}
 		}
+		
 	else : ?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
