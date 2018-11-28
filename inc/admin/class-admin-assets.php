@@ -25,7 +25,7 @@ class WP_Travel_Admin_Assets {
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker' . $suffix . '.js', array( 'jquery' ), '2.2.3', true );
+		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), '2.2.3', true );
 		wp_register_script( 'jquery-datepicker-lib-eng', $this->assets_path . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), '', 1 );
 
 		$screen = get_current_screen();

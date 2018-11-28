@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -157,8 +157,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.7.3 =
+Release Date: November 28th, 2018
+
+* Fixes: Trip with Fixed Departure Listing.
+* Fixes: Delete Data of multiple date.
+* Fixes: Meta data lost on booking sent to trash.
+* Fixes: Datepicker issue in admin section.
+
 = 1.7.2 =
-Release Date: November 22nd, 2018
+Release Date: November 27th, 2018
 
 * Fixes: PHP Module iconv extension error.
 * Fixes: Dashboard Booking not saved in case of admin.
