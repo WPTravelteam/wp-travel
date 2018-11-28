@@ -957,7 +957,7 @@ function wp_travel_get_review_count( $post_id = null ) {
 
 /**
  * Get the average rating of product. This is calculated once and stored in postmeta.
- * 
+ *
  * @param Number $post_id	Post ID.
  *
  * @return string
@@ -1497,7 +1497,7 @@ function wp_travel_posts_filter( $query ) {
 					} else {
 						$trip_end = date( 'Y-m-d' );
 					}
-					$query->set('meta_query', 
+					$query->set('meta_query',
 						array(
 							'relation' => 'AND',
 							array(
@@ -1762,7 +1762,7 @@ add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating',
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trip_facts');
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 20);
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map', 20 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 20 );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 25 );
 add_filter( 'the_content', 'wp_travel_content_filter' );
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
