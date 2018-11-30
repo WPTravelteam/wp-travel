@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 "WP Travel" the best plugin available for the moguls of travel and tourism industries.It is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin. WP Travel is scalable, powerful and probably, the easiest plugin available in WordPress to manage packages and booking. Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solutions.
 
 
-* [Themes](https://wptravel.io/themes/) | [Addons](https://wptravel.io/downloads/) | [WP Travel](http://wptravel.io/demo).
+[Themes](https://wptravel.io/themes/) | [Addons](https://wptravel.io/downloads/) | [WP Travel](http://wptravel.io/demo).
 
 = COMPATIBLE THEMES FOR "WP TRAVEL" =
 
