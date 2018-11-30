@@ -37,7 +37,7 @@ class WP_Travel_Frontend_Assets {
 			$trip_id = $_GET['trip_id'];
 		}
 
-		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), '2.2.3' );
+		wp_enqueue_style( 'jquery-datepicker', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/css/lib/datepicker/datepicker.css', array(), WP_TRAVEL_VERSION );
 
 		if ( wp_travel_is_checkout_page() ) {
 
@@ -48,7 +48,7 @@ class WP_Travel_Frontend_Assets {
 		$lang_code = explode( '-', get_bloginfo('language') );
 		$locale = $lang_code[0];
 
-		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), '2.2.3', true );
+		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
 		
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
 		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
@@ -66,7 +66,7 @@ class WP_Travel_Frontend_Assets {
 			$datepicker_i18n_file = $default_url . 'datepicker.en.js';
 			$locale = 'en';
 		}
-		wp_register_script( 'jquery-datepicker-lib-eng', $datepicker_i18n_file, array( 'jquery' ), '', 1 );
+		wp_register_script( 'jquery-datepicker-lib-eng', $datepicker_i18n_file, array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 		
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 		wp_enqueue_script( 'jquery-datepicker-lib' );
@@ -85,7 +85,7 @@ class WP_Travel_Frontend_Assets {
 
 		wp_enqueue_script( 'wp-travel-widget-scripts' );
 
-		wp_enqueue_script( 'wp-travel-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ) );
+		wp_enqueue_script( 'wp-travel-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 		// Script only for single itineraries.
 		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
 			$map_data = get_wp_travel_map_data();
@@ -99,24 +99,24 @@ class WP_Travel_Frontend_Assets {
 
 			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 				// Parsley For Frontend Single Trips.
-				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			}
 
-			wp_enqueue_script( 'wp-travel-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'wp-travel-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			wp_register_script( 'wp-travel-script', $this->assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, true );
 			if ( '' != $api_key ) {
 				
 				$wp_travel_google_map_api = apply_filters( 'wp_travel_load_google_maps_api', true );
 				
 				if ( $wp_travel_google_map_api )
-					wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), '', 1 );
+					wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
 
 				$gmap_dependency = array( 'jquery', 'google-map-api' );
 				
 				if ( ! $wp_travel_google_map_api )
 					$gmap_dependency = array( 'jquery' );
 				
-				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', $gmap_dependency, '0.4.24', 1 );
+				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', $gmap_dependency, WP_TRAVEL_VERSION, 1 );
 
 				wp_register_script( 'wp-travel-maps', $this->assets_path . 'assets/js/wp-travel-front-end-map.js', array( 'jquery', 'jquery-gmaps' ), WP_TRAVEL_VERSION, 1 );
 
@@ -151,13 +151,13 @@ class WP_Travel_Frontend_Assets {
 			// Enqueued script.
 			wp_enqueue_script( 'wp-travel-script' );
 
-			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ) );
+			wp_enqueue_script( 'easy-responsive-tabs', $this->assets_path . 'assets/js/easy-responsive-tabs.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			
 			wp_enqueue_script( 'collapse-js', $this->assets_path . 'assets/js/collapse.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
-			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			
-			wp_register_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ) );
+			wp_register_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
 
 			$cart_localize_strings = array(
 				'confirm' => __( 'Are you sure to remove?', 'wp-travel' ),
@@ -190,7 +190,7 @@ class WP_Travel_Frontend_Assets {
 			);
 
 			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
-			wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ) );
+			wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
