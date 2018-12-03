@@ -27,3 +27,7 @@ test.php
 *.map
 /../*.map
 .vscode
+*.sh.exe.stackdump
+*.exe.stackdump
+*.stackdump
+*.exe
