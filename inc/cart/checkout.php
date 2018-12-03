@@ -43,54 +43,77 @@ global $wt_cart;
 $form_field = new WP_Travel_FW_Field(); ?>
 <form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
-	<!-- Travellers info -->  	
-	<div class="panel wp-travel-trip-details">
-		<div class="section-title text-left">
-			<h3><?php echo esc_html__( 'Booking Details', 'wp-travel' ); ?></h3>
-		</div>
-		<p><?php esc_html_e( 'Please fill in your details below to book your trip(s) !', 'wp-travel' ); ?></p>
-		
-		<div class="panel-group number-accordion">
-			<div class="panel ws-theme-timeline-block">
-				<div class="panel-heading">										
-					<h4 class="panel-title"><?php esc_html_e( 'Traveller Details', 'wp-travel' ) ?></h4>
-				</div>
-				<div id="number-accordion2" class="panel-collapse collapse in">
-					<div class="panel-body">
-						<div class="payment-content">
-							<div class="payment-traveller">
-								<?php foreach( $traveller_fields as $field_group => $field ) : 
+	<!-- Travellers info -->
+	<?php foreach( $trips as $cart_id => $trip ) : ?>
+		<div class="wp-travel-trip-details">
+			<div class="section-title text-left">
+				<h3><?php echo esc_html( get_the_title( $trip['trip_id'] ) ) ?><small> / 8 days 7 nights</small></h3>
+			</div>
+			<div class="panel-group number-accordion">
+				<div class="panel ws-theme-timeline-block">
+					<div class="panel-heading">            
+						<h4 class="panel-title">Your selected departure date </h4>
+					</div>
+					<div id="number-accordion1" class="panel-collapse collapse in">
+						<div class="panel-body">
+						<p>Your departure date: June 26, 2018 - June 29, 2016 <a href="#" class="btn btn-block simple">change</a></p>
 
-									$wp_travel_get_multi_traveller_info = apply_filters( 'wp_travel_get_multi_traveller_info', false );
-									
-									if ( $wp_travel_get_multi_traveller_info ) {
-
-										$field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
-										$field['name'] = $field_name;
-
-									}
-									
-									if ( 'hidden' === $field['type'] ) {
-										echo $form_field->init()->render_input( $field );
-										continue;
-									}
-										$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
-									<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
-										<div class="form-group gap-20">
-											<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
-											<div class="col-sm-8 col-md-9">
-												<?php echo $form_field->init()->render_input( $field ); ?>
-											</div>
-										</div>
-									</div>
-								<?php endforeach; ?>                                    
-							</div>														
 						</div>
 					</div>
 				</div>
-			</div>                                        
+				<div class="panel ws-theme-timeline-block">
+					<div class="panel-heading">										
+						<h4 class="panel-title"><?php esc_html_e( 'Traveller Details', 'wp-travel' ) ?></h4>
+					</div>
+					<?php
+					$no_of_travellers = isset( $trip['pax'] ) ? $trip['pax']  : 1;
+					for ( $i = 0; $i < $no_of_travellers; $i++ ) : ?>				
+						<div id="number-accordion2" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<div class="payment-content">
+									<div class="payment-traveller">
+									
+										<div class="row gap-0">
+											<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-9">
+												<h6 class="heading mt-0 mb-15">
+													<?php
+													if ( 0 === $i ) : 
+															esc_html_e( 'Lead Traveller', 'wp-travel' );
+														else :
+															echo esc_html( __( sprintf( 'Traveller %d', $i ), 'wp-travel' ) );
+													endif; ?>
+												</h6>
+											</div>
+										</div>
+										<?php foreach( $traveller_fields as $field_group => $field ) : ?>
+											<?php
+											$field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
+											$field['name'] = $field_name;                               
+											if ( 'hidden' === $field['type'] ) {
+												echo $form_field->init()->render_input( $field );
+												continue;
+											}
+											$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
+											<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
+												<div class="form-group gap-20">
+													<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
+													<div class="col-sm-8 col-md-9">
+														<?php echo $form_field->init()->render_input( $field ); ?>
+													</div>
+												</div>
+											</div>
+										<?php endforeach; ?>                                    
+									</div>														
+								</div>								
+							</div>
+						</div>
+					<?php endfor; ?> 	
+				</div>                                        
+			</div>
 		</div>
-	</div>
+				
+    <?php endforeach; ?>	
+	
 	<?php do_action( 'wp_travel_action_before_billing_info_field' ); ?>
 	<!-- Billing info -->
 	<div class="panel ws-theme-timeline-block">
