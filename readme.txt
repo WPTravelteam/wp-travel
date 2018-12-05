@@ -19,13 +19,13 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 = COMPATIBLE THEMES FOR "WP TRAVEL" =
 
-* [Travel Log](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
 * [Pleased](https://themepalace.com/downloads/pleased/) by Theme Palace.
 * [Pleased Pro](https://themepalace.com/downloads/pleased-pro/) by Theme Palace.
 * [Tourable](https://themepalace.com/downloads/tourable/) by Theme Palace.
 * [Tourable Pro](https://themepalace.com/downloads/tourable-pro/) by Theme Palace.
 * [Travel Gem](https://themepalace.com/downloads/travel-gem/) by WEN Themes.
 * [Travel Gem Pro](https://themepalace.com/downloads/travel-gem-pro/) by WEN Themes.
+* [Travel Log](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
 
 [View all Themes](https://wptravel.io/themes/)
 
@@ -171,6 +171,16 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.7.4 =
+Release Date: December0 5th, 2018
+
+* New Feature: WP Travel Multiple Travellers info.
+* Enhancement: Travellers info style updated.
+* Fixes: Wrong Date in cart page.
+* Fixes: Multiple cart item error on admin booking page.
+* Fixes: Admin Booking page error with stripe payment.
+* Fixes: Form fields issues.
 
 = 1.7.4 =
 Release Date: November 30th, 2018

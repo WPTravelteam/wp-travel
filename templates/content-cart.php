@@ -157,11 +157,7 @@ wp_travel_print_notices();
 									<span class="variation">
 										<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
 										<span>
-										<?php $date_format = get_option( 'date_format' ); ?>
-											<?php if ( ! $date_format ) : ?>
-												<?php $date_format = 'jS M, Y'; ?>
-											<?php endif; ?>
-											<?php echo esc_html( $trip_start_date ) ; ?>
+										<?php echo esc_html( $trip_start_date ) ; ?>
 										</span>
 									</span>
 								<?php endif; ?>

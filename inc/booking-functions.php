@@ -164,10 +164,12 @@ function wp_travel_booking_info( $post ) {
 		return;
 	}
 	$booking_id = $post->ID;
+	$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
+
 	// Support new layout for multiple trips booking.
 	if ( ! empty( $multiple_trips_booking_data ) ) {
 		do_action( 'wp_travel_bookings_backend_multiple_trip_details', $post );
-		exit;
+		return;
 	}
 
 	// $fields = wp_travel_booking_form_fields();
@@ -232,20 +234,45 @@ function wp_travel_booking_info( $post ) {
 
 			// Travellers Fields HTML
 			$field_name = $traveller_fields['first_name']['name'];
+			// echo $field_name;
 			$input_val = get_post_meta( $booking_id, $field_name, true );
+
+			if ( ! $input_val ) {
+				// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+				$field_name = str_replace( '_traveller', '', $field_name );
+				$input_val = get_post_meta( $booking_id, $field_name, true );
+			}
 			
 			$form_field = new WP_Travel_FW_Field(); 
-			if ( is_array( $input_val ) ) { // Multiple Travellers Section.
+			if ( $input_val && is_array( $input_val ) ) { // Multiple Travellers Section.
 				foreach ( $input_val as $cart_id => $field_fname_values ) {
-					foreach ( $field_fname_values as $key => $field_fname_value ) { ?>
+					foreach ( $field_fname_values as $i => $field_fname_value ) { ?>
 						<div class="wp-travel-form-field-wrapper">
 							<?php
+							if ( 0 === $i ) { ?>
+								<h3><?php esc_html_e( 'Lead Traveller', 'wp-travel' ) ?></h3>
+								<?php
+							} else { ?>
+								<h3><?php printf( __( 'Traveller %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
+								<?php
+							}
+							
 							foreach( $traveller_fields as $field_group => $field ) :
+								$field['id'] = $field['id'] . '-' . $cart_id . '-' . $i;
+
+
 								$current_field_name = $field['name'];
 								$current_field_values = get_post_meta( $booking_id, $current_field_name, true );
-								$current_field_value = $current_field_values[ $cart_id ][ $key ];
 
-								$field_name = sprintf( '%s[%s][]', $field['name'], $cart_id );
+								if ( ! $current_field_values ) {
+									// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+									$current_field_name =  str_replace( '_traveller', '', $current_field_name );
+									$current_field_values = get_post_meta( $booking_id, $current_field_name, true );
+								}
+
+								$current_field_value = isset( $current_field_values[ $cart_id ] ) && isset( $current_field_values[ $cart_id ][ $i ] ) ? $current_field_values[ $cart_id ][ $i ] : '' ;
+
+								$field_name = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
 								$field['name'] = $field_name;
 								$field['default'] = $current_field_value;                             
 								if ( 'hidden' === $field['type'] ) {
@@ -255,7 +282,7 @@ function wp_travel_booking_info( $post ) {
 								$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
 								<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
 									<div class="form-group gap-20">
-										<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
+										<label for="<?php echo esc_attr( $field['id'] ) ?>" class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
 										<div class="col-sm-8 col-md-9">
 											<?php echo $form_field->init()->render_input( $field ); ?>
 										</div>
@@ -273,6 +300,11 @@ function wp_travel_booking_info( $post ) {
 					// single foreach for legacy version.
 					foreach( $traveller_fields as $field_group => $field ) :
 						$input_val = get_post_meta( $booking_id, $field['name'], true );
+						if ( ! $input_val ) {
+							// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+							$field_name = str_replace( '_traveller', '', $field['name'] );
+							$input_val = get_post_meta( $booking_id, $field_name, true );
+						}
 						$field['default'] = $input_val;
 						if ( 'hidden' === $field['type'] ) {
 							echo $form_field->init()->render_input( $field );
@@ -281,7 +313,7 @@ function wp_travel_booking_info( $post ) {
 						$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
 						<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
 							<div class="form-group gap-20">
-								<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
+								<label for="<?php echo esc_attr( $field['id'] ) ?>" class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
 								<div class="col-sm-8 col-md-9">
 									<?php echo $form_field->init()->render_input( $field ); ?>
 								</div>
@@ -305,29 +337,7 @@ function wp_travel_booking_info( $post ) {
 					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
 					<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
 						<div class="form-group gap-20">
-							<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
-							<div class="col-sm-8 col-md-9">
-								<?php echo $form_field->init()->render_input( $field ); ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-
-			<div class="wp-travel-form-field-wrapper">
-				<?php
-				// Payment Fields HTML
-				foreach( $payment_fields as $field_group => $field ) :					
-					$input_val = get_post_meta( $booking_id, $field['name'], true );
-					$field['default'] = $input_val;
-					if ( 'hidden' === $field['type'] ) {
-						echo $form_field->init()->render_input( $field );
-						continue;
-					}
-					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
-					<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
-						<div class="form-group gap-20">
-							<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
+							<label for="<?php echo esc_attr( $field['id'] ) ?>" class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
 							<div class="col-sm-8 col-md-9">
 								<?php echo $form_field->init()->render_input( $field ); ?>
 							</div>
@@ -362,7 +372,7 @@ function wp_travel_booking_info( $post ) {
  *
  * @return Mixed
  */
-function wp_travel_save_booking_data( $trip_id ) {
+function wp_travel_save_booking_data( $booking_id ) {
 	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
 		return;
 	}
@@ -370,15 +380,15 @@ function wp_travel_save_booking_data( $trip_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
-	if ( ! current_user_can( 'edit_post', $trip_id ) ) {
+	if ( ! current_user_can( 'edit_post', $booking_id ) ) {
 		return;
 	}
 	// If this is just a revision, don't send the email.
-	if ( wp_is_post_revision( $trip_id ) ) {
+	if ( wp_is_post_revision( $booking_id ) ) {
 		return;
 	}
 
-	$post_type = get_post_type( $trip_id );
+	$post_type = get_post_type( $booking_id );
 
 	// If this isn't a 'itineraries' post, don't update it.
 	if ( 'itinerary-booking' !== $post_type ) {
@@ -390,33 +400,48 @@ function wp_travel_save_booking_data( $trip_id ) {
 	}
 	$order_data = array();
 	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
-	update_post_meta( $trip_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
+	update_post_meta( $booking_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 	$order_data['wp_travel_post_id'] = $wp_travel_post_id;
 
 	// Updating booking status.
 	$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? $_POST['wp_travel_booking_status'] : 'pending';
-	update_post_meta( $trip_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
+	update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
+	
 
-	$fields = wp_travel_booking_form_fields();
-	$priority = array();
-	foreach ( $fields as $key => $row ) {
-		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
-	}
-	array_multisort( $priority, SORT_ASC, $fields );
-	foreach ( $fields as $key => $field ) :
-		$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
-		$trip_id_to_update = apply_filters( 'wp_travel_booking_post_id_to_update', $trip_id, $key, $field['name'] );
-		if ( is_array( $meta_val ) ) {
-			update_post_meta( $trip_id_to_update, $field['name'], array_map( 'sanitize_text_field', $meta_val ) );
-		} else {
-			update_post_meta( $trip_id_to_update, $field['name'], sanitize_text_field( $meta_val ) );
+	$checkout_fields    = wp_travel_get_checkout_form_fields();
+	// $traveller_fields   = $checkout_fields['traveller_fields'];
+	// $billing_fields     = $checkout_fields['billing_fields'];
+	// $payment_fields     = $checkout_fields['payment_fields'];
+
+	foreach ( $checkout_fields as $field_type => $fields ) {
+		$priority = array();
+		foreach ( $fields as $key => $row ) {
+			$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 		}
-		$order_data[ $field['name'] ] = $meta_val;
-	endforeach;
+		array_multisort( $priority, SORT_ASC, $fields );
+		foreach ( $fields as $key => $field ) :
+			$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
+			$booking_id = apply_filters( 'wp_travel_booking_post_id_to_update', $booking_id, $key, $field['name'] );
+			
+			if ( is_array( $meta_val ) ) {
+				$new_meta_value = array();
+				foreach ( $meta_val as $key => $value ) {
+					if ( is_array( $value ) ) {
+						$new_meta_value[ $key ] = array_map( 'sanitize_text_field', $value );
+					} else {
+						$new_meta_value[ $key ] = sanitize_text_field( $value );
+					}
+				}
+				update_post_meta( $booking_id, $field['name'], $new_meta_value );
+			} else {
+				update_post_meta( $booking_id, $field['name'], sanitize_text_field( $meta_val ) );
+			}
+			$order_data[ $field['name'] ] = $meta_val;
+		endforeach;
+	}
 
-	$order_data = array_map( 'sanitize_text_field', wp_unslash( $order_data ) );
-	update_post_meta( $trip_id, 'order_data', $order_data );
-	do_action( 'wp_travel_after_booking_data_save', $trip_id );
+	update_post_meta( $booking_id, 'order_data', $order_data );
+	do_action( 'wp_travel_after_booking_data_save', $booking_id );
 }
 add_action( 'save_post', 'wp_travel_save_booking_data' );
 
@@ -455,9 +480,41 @@ add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_m
 function wp_travel_booking_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'contact_name':
-			$name = get_post_meta( $id , 'wp_travel_fname' , true );
-			$name .= ' ' . get_post_meta( $id , 'wp_travel_mname' , true );
-			$name .= ' ' . get_post_meta( $id , 'wp_travel_lname' , true );
+			$first_name 	= get_post_meta( $id , 'wp_travel_fname_traveller' , true );
+			if ( ! $first_name ) {
+				// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+				$first_name 	= get_post_meta( $id , 'wp_travel_fname' , true );
+			}
+			$middle_name 	= get_post_meta( $id , 'wp_travel_mname_traveller' , true );
+			if ( ! $middle_name ) {
+				$middle_name 	= get_post_meta( $id , 'wp_travel_mname' , true );
+			}
+			$last_name 		= get_post_meta( $id , 'wp_travel_lname_traveller' , true );
+			if ( ! $last_name ) {
+				$last_name 	= get_post_meta( $id , 'wp_travel_mname' , true );
+			}
+			
+			if ( is_array( $first_name ) ) { // Multiple Travellers.
+
+				reset( $first_name );
+				$first_key = key( $first_name );
+
+				$name = '';
+				if ( isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ) {
+					$name .= $first_name[ $first_key ][0];
+				}
+				if ( isset( $middle_name[ $first_key ] ) && isset( $middle_name[ $first_key ][0] ) ) {
+					$name .= ' ' . $middle_name[ $first_key ][0];
+				}
+				if ( isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ) {
+					$name .= ' ' . $last_name[ $first_key ][0];
+				}
+				
+			} else {
+				$name = $first_name;
+				$name .= ' ' . $middle_name;
+				$name .= ' ' . $last_name;
+			}
 			echo esc_attr( $name );
 			break;
 		case 'booking_status':
@@ -573,7 +630,7 @@ function wp_travel_book_now() {
 		} else {
 			// Support for multiple cart items.
 			do_action( 'wp_travel_multiple_trip_booking' );
-			exit;
+			return;
 		}
 	endif;
 	
