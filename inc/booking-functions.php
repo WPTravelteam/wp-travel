@@ -732,8 +732,25 @@ function wp_travel_book_now() {
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
+	$first_name = $_POST['wp_travel_fname_traveller'];
+	$last_name 	= $_POST['wp_travel_lname_traveller'];
+	$country	= $_POST['wp_travel_country_traveller'];
+	$phone 		= $_POST['wp_travel_phone_traveller'];
+	$email 		= $_POST['wp_travel_email_traveller'];
+	
+
+	reset( $first_name );
+	$first_key = key( $first_name );
+
+	$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
+	$last_name = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
+	$country = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
+	$phone = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
+	$email = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
+	
+
 	// Prepare variables to assign in email.
-	$client_email = $_POST['wp_travel_email_traveller'];
+	$client_email = $email;
 
 	$site_admin_email = get_option( 'admin_email' );
 
@@ -758,21 +775,6 @@ function wp_travel_book_now() {
 	$booking_arrival_date 	= $booking_arrival_date;
 	$booking_departure_date = $booking_departure_date;
 
-	$first_name = $_POST['wp_travel_fname_traveller'];
-	$last_name 	= $_POST['wp_travel_lname_traveller'];
-	$country	= $_POST['wp_travel_country_traveller'];
-	$phone 		= $_POST['wp_travel_phone_traveller'];
-	$email 		= $_POST['wp_travel_email_traveller'];
-	
-
-	reset( $first_name );
-	$first_key = key( $first_name );
-
-	$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
-	$last_name = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
-	$country = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
-	$phone = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
-	$email = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
 	
 
 	$customer_name 		  	= $first_name . ' ' . $last_name;
