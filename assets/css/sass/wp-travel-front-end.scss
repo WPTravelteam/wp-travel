@@ -1779,7 +1779,8 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 /* faq accordion */
 
 #faq,
-.global-faq-shortcode {
+.global-faq-shortcode,
+.checkout-accordion {
     .wp-collapse-open {
         margin-bottom: 30px;
         a {
@@ -1880,6 +1881,15 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
     }
     .panel-faq-question {
         padding: 10px 15px;
+    }
+}
+.checkout-page-wrap {
+    .number-accordion{
+        .checkout-accordion{
+            h4{
+                margin:0;
+            }
+        }
     }
 }
 

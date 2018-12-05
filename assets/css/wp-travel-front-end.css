@@ -1334,23 +1334,28 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 
 /* faq accordion */
 #faq .wp-collapse-open,
-.global-faq-shortcode .wp-collapse-open {
+.global-faq-shortcode .wp-collapse-open,
+.checkout-accordion .wp-collapse-open {
   margin-bottom: 30px; }
   #faq .wp-collapse-open a,
-  .global-faq-shortcode .wp-collapse-open a {
+  .global-faq-shortcode .wp-collapse-open a,
+  .checkout-accordion .wp-collapse-open a {
     float: right;
     padding: 5px 10px;
     margin-left: 15px;
     border: 1px solid #8b8b8b;
     font-size: 12px; }
 #faq .collapse,
-.global-faq-shortcode .collapse {
+.global-faq-shortcode .collapse,
+.checkout-accordion .collapse {
   display: none; }
 #faq .collapse.in,
-.global-faq-shortcode .collapse.in {
+.global-faq-shortcode .collapse.in,
+.checkout-accordion .collapse.in {
   display: block; }
 #faq .collapsing,
-.global-faq-shortcode .collapsing {
+.global-faq-shortcode .collapsing,
+.checkout-accordion .collapsing {
   position: relative;
   height: 0;
   overflow: hidden;
@@ -1364,10 +1369,12 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   -o-transition-property: height, visibility;
   transition-property: height, visibility; }
 #faq .panel-heading,
-.global-faq-shortcode .panel-heading {
+.global-faq-shortcode .panel-heading,
+.checkout-accordion .panel-heading {
   position: relative; }
   #faq .panel-heading .collapse-icon,
-  .global-faq-shortcode .panel-heading .collapse-icon {
+  .global-faq-shortcode .panel-heading .collapse-icon,
+  .checkout-accordion .panel-heading .collapse-icon {
     position: absolute;
     right: 15px;
     width: 20px;
@@ -1377,28 +1384,35 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
     text-align: center;
     top: calc( 50% - 13px); }
   #faq .panel-heading [data-toggle="collapse"],
-  .global-faq-shortcode .panel-heading [data-toggle="collapse"] {
+  .global-faq-shortcode .panel-heading [data-toggle="collapse"],
+  .checkout-accordion .panel-heading [data-toggle="collapse"] {
     color: #444; }
     #faq .panel-heading [data-toggle="collapse"] span.collapse-icon:after,
-    .global-faq-shortcode .panel-heading [data-toggle="collapse"] span.collapse-icon:after {
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"] span.collapse-icon:after,
+    .checkout-accordion .panel-heading [data-toggle="collapse"] span.collapse-icon:after {
       font-family: 'dashicons';
       content: "\f142";
       font-size: 18px; }
   #faq .panel-heading [data-toggle="collapse"].collapsed,
-  .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed {
+  .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed,
+  .checkout-accordion .panel-heading [data-toggle="collapse"].collapsed {
     color: #999; }
     #faq .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after,
-    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after {
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after,
+    .checkout-accordion .panel-heading [data-toggle="collapse"].collapsed span.collapse-icon:after {
       content: "\f140"; }
     #faq .panel-heading [data-toggle="collapse"].collapsed:hover,
-    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed:hover {
+    .global-faq-shortcode .panel-heading [data-toggle="collapse"].collapsed:hover,
+    .checkout-accordion .panel-heading [data-toggle="collapse"].collapsed:hover {
       color: #444; }
   #faq .panel-heading .collapse-icon:focus,
-  .global-faq-shortcode .panel-heading .collapse-icon:focus {
+  .global-faq-shortcode .panel-heading .collapse-icon:focus,
+  .checkout-accordion .panel-heading .collapse-icon:focus {
     box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
     outline: none; }
 #faq h4,
-.global-faq-shortcode h4 {
+.global-faq-shortcode h4,
+.checkout-accordion h4 {
   border: 1px solid #ddd;
   padding: 10px 40px 10px 15px;
   margin: 0;
@@ -1407,33 +1421,43 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   font-size: 14px;
   font-weight: 500; }
   #faq h4:hover,
-  .global-faq-shortcode h4:hover {
+  .global-faq-shortcode h4:hover,
+  .checkout-accordion h4:hover {
     background-color: #fff; }
   #faq h4 a,
-  .global-faq-shortcode h4 a {
+  .global-faq-shortcode h4 a,
+  .checkout-accordion h4 a {
     color: #999;
     text-decoration: none; }
   #faq h4 .close-faq,
-  .global-faq-shortcode h4 .close-faq {
+  .global-faq-shortcode h4 .close-faq,
+  .checkout-accordion h4 .close-faq {
     position: absolute;
     right: 10px;
     color: #ca4a1f;
     font-size: 16px; }
 #faq .panel-collapse,
-.global-faq-shortcode .panel-collapse {
+.global-faq-shortcode .panel-collapse,
+.checkout-accordion .panel-collapse {
   padding: 0;
   border: 1px solid #ddd;
   border-top: none; }
 #faq .panel-body,
-.global-faq-shortcode .panel-body {
+.global-faq-shortcode .panel-body,
+.checkout-accordion .panel-body {
   padding: 10px 15px; }
 #faq .panel-default,
-.global-faq-shortcode .panel-default {
+.global-faq-shortcode .panel-default,
+.checkout-accordion .panel-default {
   margin-bottom: 15px;
   background-color: #fff; }
 #faq .panel-faq-question,
-.global-faq-shortcode .panel-faq-question {
+.global-faq-shortcode .panel-faq-question,
+.checkout-accordion .panel-faq-question {
   padding: 10px 15px; }
+
+.checkout-page-wrap .number-accordion .checkout-accordion h4 {
+  margin: 0; }
 
 /* wp-travel pagination
 ----------------------------------------------- */

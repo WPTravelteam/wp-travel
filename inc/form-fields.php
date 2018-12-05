@@ -280,14 +280,60 @@ function wp_travel_get_checkout_form_fields() {
 	// Traveller traveller_fields fields. only array keys
 	$traveller_fields_key = array( 'first_name', 'last_name', 'gender', 'dob', 'email', 'phone_number', 'country' );
 
+	// Skip unset fields
+	$new_fields_travellers = array( 
+		'dob' 	=> array(
+					'type' => 'date',
+					'label' => __( 'Date of Birth', 'wp-travel' ),
+					'name' => 'wp_travel_date_of_birth_traveller',
+					'id' => 'wp-travel-date-of-birth',
+					'class' => 'wp-travel-datepicker',
+					
+					'attributes' => array( 'readonly' => 'readonly', 'data-max-today' => true ),
+					'date_options' => array(),
+					'priority' => 80,
+				), 
+		
+		'gender' => array(
+					'type' => 'radio',
+					'label' => __( 'Gender', 'wp-travel' ),
+					'name' => 'wp_travel_gender_traveller',
+					'id' => 'wp-travel-gender',
+					'wrapper_class'=>'wp-travel-radio-group ',				
+					
+					'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ) ),
+					'default' => 'male',
+					'priority' => 100,
+				),
+		
+		'country' => array()
+	); // dob and gender is not exists in booking form. country field need in billing info as well.
+
+	$new_fields_travellers_keys = array_keys( $new_fields_travellers );
+
+	// dd( $new_fields_travellers_keys, true );
+	
 	$traveller_fields = array();
 	foreach ( $traveller_fields_key as $key ) {
 		if ( isset( $fields[ $key ] ) ) {
-			$traveller_fields[ $key ] = $fields[ $key ];
-			if ( 'country' == $key ) {
+			if ( 'country' === $key ) {
+				// Not overriding country field name in default $fields array.
+				$country_fields['name'] = $country_fields['name'] . '_traveller';
+				$traveller_fields[ $key ] = $country_fields;		
 				continue;
 			}			
+			$fields[$key]['name'] = $fields[$key]['name'] . '_traveller';
+			$traveller_fields[ $key ] = $fields[ $key ];
 			unset( $fields[ $key ] );
+		} else {
+			// temporary fixes for travellers info new fields.
+			if ( in_array( $key, $new_fields_travellers_keys ) ) {
+				if ( 'country' !== $key ) {
+					$traveller_fields[ $key ] = $new_fields_travellers[ $key ];
+				}
+				
+				continue;
+			}
 		}
 	}
 
