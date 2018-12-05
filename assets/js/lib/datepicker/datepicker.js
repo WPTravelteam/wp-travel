@@ -13,7 +13,7 @@
         defaults = {
             classes: '',
             inline: false,
-            language: 'ru',
+            language: 'en',
             startDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
@@ -224,12 +224,12 @@
                 this.loc = $.fn.wpt_datepicker.language[lang];
                 if (!this.loc) {
                     console.warn('Can\'t find language "' + lang + '" in Datepicker.language, will use "ru" instead');
-                    this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru)
+                    this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.en)
                 }
 
-                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru, $.fn.wpt_datepicker.language[lang])
+                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.en, $.fn.wpt_datepicker.language[lang])
             } else {
-                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.ru, lang)
+                this.loc = $.extend(true, {}, $.fn.wpt_datepicker.language.en, lang)
             }
 
             if (this.opts.dateFormat) {
