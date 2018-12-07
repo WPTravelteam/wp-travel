@@ -289,18 +289,35 @@ function wp_travel_send_email_payment( $booking_id ) {
 	
 	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		
-		// Handle Multiple payment Emails.
-		if ( $allow_multiple_cart_items && 1 !== $order_items ) {
-			do_action( 'wp_travel_multiple_payment_emails', $booking_id );
-			exit;
-		}
+	// Handle Multiple payment Emails.
+	if ( $allow_multiple_cart_items && 1 !== $order_items ) {
+		do_action( 'wp_travel_multiple_payment_emails', $booking_id );
+		exit;
+	}
 
 	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
+	$first_name = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+	$last_name 	= get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
+	$country	= get_post_meta( $booking_id, 'wp_travel_country_traveller', true );
+	$phone 		= get_post_meta( $booking_id, 'wp_travel_phone_traveller', true );
+	$email 		= get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
+
+	reset( $first_name );
+	$first_key = key( $first_name );
+
+	$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
+	$last_name = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
+	$country = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
+	$phone = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
+	$email = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
+        
+
+
 	// Prepare variables to assign in email.
-	$client_email = get_post_meta( $booking_id, 'wp_travel_email', true );
+	$client_email = $email;
 
 	$site_admin_email = get_option( 'admin_email' );
 
@@ -337,11 +354,11 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	$booking_departure_date = ! empty( $booking_departure_date ) ? date_i18n( $date_format, strtotime( stripslashes( $booking_departure_date ) ) ) : '';
 	
-	$customer_name 		  	= get_post_meta( $booking_id, 'wp_travel_fname', true ) . ' ' . get_post_meta( $booking_id, 'wp_travel_lname', true );
-	$customer_country 		= get_post_meta( $booking_id, 'wp_travel_country', true );
+	$customer_name 		  	= $first_name . ' ' . $last_name;
+	$customer_country 		= $country;
 	$customer_address 		= get_post_meta( $booking_id, 'wp_travel_address', true );
-	$customer_phone 		= get_post_meta( $booking_id, 'wp_travel_phone', true );
-	$customer_email 		= get_post_meta( $booking_id, 'wp_travel_email', true );
+	$customer_phone 		= $phone;
+	$customer_email 		= $client_email;
 	$customer_note 			= get_post_meta( $booking_id, 'wp_travel_note', true );
 	
 	$wp_travel_payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
