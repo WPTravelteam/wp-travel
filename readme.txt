@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -172,8 +172,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 1.7.4 =
-Release Date: December0 5th, 2018
+= 1.7.5 =
+Release Date: December 7th, 2018
 
 * New Feature: WP Travel Multiple Travellers info.
 * Enhancement: Travellers info style updated.
