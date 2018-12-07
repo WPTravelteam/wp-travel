@@ -327,6 +327,7 @@ function wp_travel_booking_info( $post ) {
 			<div class="wp-travel-form-field-wrapper">
 				<?php
 				// Billing Fields HTML
+				unset( $billing_fields['price-unavailable'] );
 				foreach( $billing_fields as $field_group => $field ) :
 					$input_val = get_post_meta( $booking_id, $field['name'], true );
 					$field['default'] = $input_val;

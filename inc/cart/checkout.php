@@ -9,15 +9,15 @@ $payment_fields     = $checkout_fields['payment_fields'];
 // GDPR Support
 $settings = wp_travel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
+$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
 
-	$privacy_policy_url = false;
+$privacy_policy_url = false;
 
-	if ( function_exists( 'get_privacy_policy_url' ) ) {
+if ( function_exists( 'get_privacy_policy_url' ) ) {
 
-		$privacy_policy_url = get_privacy_policy_url();
+	$privacy_policy_url = get_privacy_policy_url();
 
-	}
+}
 
 if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
 
@@ -38,6 +38,11 @@ if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) &&
 	);
 
 }
+$enable_multiple_travellers = isset( $settings['enable_multiple_travellers'] ) ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
+$repeator_count = isset( $trip['pax'] ) ? $trip['pax']  : 1;
+if ( 'no' === $enable_multiple_travellers ) {
+	$repeator_count = 1;
+}
 
 global $wt_cart;
 $form_field = new WP_Travel_FW_Field(); ?>
@@ -46,17 +51,19 @@ $form_field = new WP_Travel_FW_Field(); ?>
 	<!-- Travellers info -->
 	<?php foreach( $trips as $cart_id => $trip ) : ?>
 		<div class="wp-travel-trip-details">
-			<div class="section-title text-left">
-				<h3><?php echo esc_html( get_the_title( $trip['trip_id'] ) ) ?><!-- <small> / 8 days 7 nights</small> --></h3>
-			</div>
+			<?php if ( 'yes' === $enable_multiple_travellers ) : ?>	
+				<div class="section-title text-left">
+					<h3><?php echo esc_html( get_the_title( $trip['trip_id'] ) ) ?><!-- <small> / 8 days 7 nights</small> --></h3>
+				</div>
+			<?php endif; ?>
 			<div class="panel-group number-accordion">
 				<div class="panel-heading">										
 					<h4 class="panel-title"><?php esc_html_e( 'Traveller Details', 'wp-travel' ) ?></h4>
 				</div>
 				<div class="ws-theme-timeline-block panel-group checkout-accordion" id="checkout-accordion-<?php echo esc_attr( $cart_id ) ?>">
 					<?php
-					$no_of_travellers = isset( $trip['pax'] ) ? $trip['pax']  : 1;
-					for ( $i = 0; $i < $no_of_travellers; $i++ ) : ?>
+					
+					for ( $i = 0; $i < $repeator_count; $i++ ) : ?>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -118,7 +125,7 @@ $form_field = new WP_Travel_FW_Field(); ?>
 				</div>                                        
 			</div>
 		</div>
-				
+		<?php if ( 'no' === $enable_multiple_travellers )break; // Only add one travellers fields. ?>	
     <?php endforeach; ?>	
 	
 	<?php do_action( 'wp_travel_action_before_billing_info_field' ); ?>

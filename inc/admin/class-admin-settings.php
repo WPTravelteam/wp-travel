@@ -256,6 +256,7 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		$hide_related_itinerary = isset( $args['settings']['hide_related_itinerary'] )  ? $args['settings']['hide_related_itinerary'] : 'no';
+		$enable_multiple_travellers = isset( $args['settings']['enable_multiple_travellers'] )  ? $args['settings']['enable_multiple_travellers'] : 'no';
 		$trip_pricing_options_layout = isset( $args['settings']['trip_pricing_options_layout'] )  ? $args['settings']['trip_pricing_options_layout'] : 'by-pricing-option';
 		?>
 		<?php do_action( 'wp_travel_tab_content_before_trips', $args ); ?>
@@ -272,6 +273,20 @@ class WP_Travel_Admin_Settings {
 						</label>
 					</span>
 					<p class="description"><?php esc_html_e( sprintf( 'This will hide your related %s.', WP_TRAVEL_POST_TITLE ), 'wp-travel' );  ?></p>
+				</td>
+			<tr>
+			<tr>
+				<th>
+					<label for="currency"><?php esc_html_e( 'Enable multiple travellers', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $enable_multiple_travellers , 'yes' ); ?> value="1" name="enable_multiple_travellers" id="enable_multiple_travellers" type="checkbox" />
+							<span class="switch"></span>
+						</label>
+					</span>
+					<p class="description"><?php esc_html_e( sprintf( 'Check to enable.' ), 'wp-travel' );  ?></p>
 				</td>
 			<tr>
 			<tr id="wp-travel-tax-price-options" >
@@ -1124,7 +1139,7 @@ class WP_Travel_Admin_Settings {
 			$google_map_zoom_level 	= ( isset( $_POST['google_map_zoom_level'] ) && '' !== $_POST['google_map_zoom_level'] ) ? $_POST['google_map_zoom_level'] : '';
 
 			$hide_related_itinerary = ( isset( $_POST['hide_related_itinerary'] ) && '' !== $_POST['hide_related_itinerary'] ) ? 'yes' : 'no';
-
+			$enable_multiple_travellers = ( isset( $_POST['enable_multiple_travellers'] ) && '' !== $_POST['enable_multiple_travellers'] ) ? 'yes' : 'no';
 			$trip_pricing_options_layout = ( isset( $_POST['trip_pricing_options_layout'] ) && '' !== $_POST['trip_pricing_options_layout'] ) ? $_POST['trip_pricing_options_layout'] : 'by-pricing-option';
 
 			$send_booking_email_to_admin = ( isset( $_POST['send_booking_email_to_admin'] ) && '' !== $_POST['send_booking_email_to_admin'] ) ? 'yes' : 'no';
@@ -1172,6 +1187,7 @@ class WP_Travel_Admin_Settings {
 			$settings['google_map_api_key']          = $google_map_api_key;
 			$settings['google_map_zoom_level']       = $google_map_zoom_level;
 			$settings['hide_related_itinerary']      = $hide_related_itinerary;
+			$settings['enable_multiple_travellers']	 = $enable_multiple_travellers;
 			$settings['trip_pricing_options_layout'] = $trip_pricing_options_layout;
 			$settings['send_booking_email_to_admin'] = $send_booking_email_to_admin;
 
