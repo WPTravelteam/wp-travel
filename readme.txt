@@ -38,6 +38,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 * [WP Travel Razorpay Checkout]("https://wptravel.io/downloads/wp-travel-razorpay-checkout/)
 * [WP Travel Utilities]("https://wptravel.io/downloads/wp-travel-utilities/)
 * [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-stripe-checkout/)
+* [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/)
 
 [View all addons](http://wptravel.io/downloads/)
 
