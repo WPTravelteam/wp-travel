@@ -44,7 +44,7 @@ function wp_travel_marketplace_page() {
 
 	if ( ! $addons_data ) {
 
-		$addons_data = file_get_contents( 'https://themepalace.com/edd-api/v2/products/?s=trave&category=wordpress-plugins' );
+		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/' );
 		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
 
 	}
@@ -89,10 +89,10 @@ function wp_travel_marketplace_page() {
 					<?php if ( $addons_data ) : ?>
 						<div id="tabs-1" class="tab-pannel">
 							<div class="marketplace-module clearfix">
-							<?php foreach( $addons_data as $key => $product ) : 
+							<?php foreach( $addons_data as $key => $product ) :
 								$prod_info = $product->info;
 							?>
-								
+
 								<div class="single-module">
 									<div class="single-module-image">
 										<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
@@ -108,9 +108,18 @@ function wp_travel_marketplace_page() {
 											</a>
 										</h4>
 										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ) ?></a>
+										<a class="btn-default pull-right" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
+											<?php
+											if ( isset( $product->pricing->amount ) && $product->pricing->amount < 1 ) {
+												esc_html_e( 'Download', 'wp-travel' );
+											} else {
+												esc_html_e( 'Purchase', 'wp-travel' );
+											}
+											?>
+										</a>
 									</div>
 								</div>
-							
+
 							<?php endforeach; ?>
 
 							</div>
@@ -216,7 +225,7 @@ function docs_support_page_callback(){
 	                    </div>
 	                    <div class="WP-Travel-badge">
 		                	<span class="dashicons-wp-travel">
-							
+
 							</span>
 		                	<p>
 		        				<?php esc_html_e( 'Version:', 'wp-travel' ); ?> <?php echo WP_TRAVEL_VERSION ?>
@@ -724,13 +733,13 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			$mode = wp_travel_get_payment_mode();
 			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
 			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
-	
+
 			if ( ! $label_key ) {
 				$label_key = 'N/A';
 				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
 				if ( ! $is_partial_enabled ) {
 					$label_key = 'full';
-				}				
+				}
 				update_post_meta( $payment_id , 'wp_travel_payment_mode' , $label_key );
 			}
 			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';
@@ -814,9 +823,9 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 				// Search for an existing page with the specified page slug
 				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
 			}
-		
+
 			$valid_page_found = apply_filters( 'wp_travel_create_page_id', $valid_page_found, $slug, $page_content );
-		
+
 			if ( $valid_page_found ) {
 				if ( $option ) {
 					update_option( $option, $valid_page_found );
@@ -824,7 +833,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 				return $valid_page_found;
 			}
 		}
-	}	
+	}
 
 	// Search for a matching valid trashed page
 	if ( strlen( $page_content ) > 0 ) {
@@ -875,7 +884,7 @@ if( 0 == $tour_extras->publish ) {
 	<?php if ( $table_row ) : ?><td><?php  else : ?><div><?php endif ; ?>
 	<?php echo sprintf( 'Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.'); ?>
 	<?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
-	
+
 	$data = ob_get_clean();
 return $data;
 }
@@ -894,14 +903,14 @@ if ( $context && 'pricing_options' === $context ) {
 $restricted_trips = ( $trip_extras ) ? $trip_extras: array();
 
 ob_start(); ?>
-	<?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>		
+	<?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>
 		<label for=""><?php echo esc_html( 'Tour Extras', 'wp-travel-coupon-pro' ); ?></label>
-	<?php if ( $table_row ) : ?></td><td><?php  else : ?></div><div class="two-third"><?php endif ; ?>		
-			
+	<?php if ( $table_row ) : ?></td><td><?php  else : ?></div><div class="two-third"><?php endif ; ?>
+
 		<?php $itineraries = wp_travel_get_tour_extras_array(); ?>
 
 		<div class="custom-multi-select">
-			<?php 
+			<?php
 			$count_options_data = count( $restricted_trips );
 			$count_itineraries = count( $itineraries );
 			$multiple_checked_all = '';
@@ -915,8 +924,8 @@ ob_start(); ?>
 			}
 			?>
 			<span class="select-main">
-				<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span> 
-				<span class="carret"></span> 
+				<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span>
+				<span class="carret"></span>
 				<span class="close"></span>
 				<ul class="wp-travel-multi-inner">
 					<li class="wp-travel-multi-inner">
@@ -925,8 +934,8 @@ ob_start(); ?>
 						</label>
 					</li>
 					<?php
-					foreach ( $itineraries as $key => $iti ) { 
-						
+					foreach ( $itineraries as $key => $iti ) {
+
 						$checked = '';
 						$selecte_list_class = '';
 
@@ -948,7 +957,7 @@ ob_start(); ?>
 			</span>
 
 		</div>
-	<?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>		
+	<?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>
 <?php
 $data = ob_get_clean();
 return $data;
@@ -1017,6 +1026,6 @@ function wp_travel_extras_pro_option_fields() {
 			</div>
 		</td>
 	</tr>
-	
+
 	<?php
 }
