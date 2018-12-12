@@ -22,6 +22,62 @@ class Wp_Travel_User_Account {
 	}
 
 	/**
+	 * Dashboard menus.
+	 *
+	 * @return array Menus.
+	 */
+	private static function dashboard_menus() {
+		$dashboard_menus = array(
+			'dashboard' => array(
+				'menu_title' => __( 'Dashboard' ),
+				'menu_icon' => 'wt-icon wt-icon-tachometer',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_dashboard_tab' ),
+			),
+			'bookings' => array(
+				'menu_title' => __( 'Bookings' ),
+				'menu_icon' => 'wt-icon wt-icon-th-list',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
+			),
+			'address' => array(
+				'menu_title' => __( 'Address' ),
+				'menu_icon' => 'wt-icon-regular wt-icon-address-book',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_address_tab' ),
+			),
+			'account' => array(
+				'menu_title' => __( 'Account' ),
+				'menu_icon' => 'wt-icon wt-icon-user',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_account_tab' ),
+			),
+			'logout' => array(
+				'menu_title' => __( 'Logout' ),
+				'menu_icon' => 'wt-icon wt-icon-power-off',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_logout_tab' ),
+			),
+		);
+		return $dashboard_menus = apply_filters( 'wp_travel_user_dashboard_menus', $dashboard_menus );
+	}
+
+	public static function dashboard_menu_dashboard_tab( $args ) {
+		echo wp_travel_get_template_html( 'account/tab-content/dashboard.php', $args );
+	}
+
+	public static function dashboard_menu_bookings_tab( $args ) {
+		echo wp_travel_get_template_html( 'account/tab-content/bookings.php', $args );
+	}
+
+	public static function dashboard_menu_address_tab( $args ) {
+		echo wp_travel_get_template_html( 'account/tab-content/address.php', $args );
+	}
+
+	public static function dashboard_menu_account_tab( $args ) {
+		echo wp_travel_get_template_html( 'account/tab-content/account.php', $args );
+	}
+
+	public static function dashboard_menu_logout_tab( $args ) {
+		echo wp_travel_get_template_html( 'account/tab-content/logout.php', $args );
+	}
+
+	/**
 	 * Output of account shortcode.
 	 *
 	 * @since 2.2.3
@@ -37,7 +93,7 @@ class Wp_Travel_User_Account {
 
 				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
 
-			<?php 
+			<?php
 
 			}
 			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) {
@@ -48,8 +104,10 @@ class Wp_Travel_User_Account {
 			}
 		} else {
 			$current_user = wp_get_current_user();
+			$args['current_user'] = $current_user;
+			$args['dashboard_menus'] = self::dashboard_menus();
 			// Get user Dashboard.
-			echo wp_travel_get_template_html( 'account/content-dashboard.php', $current_user );
+			echo wp_travel_get_template_html( 'account/content-dashboard.php', $args );
 		}
 	}
 	/**
@@ -250,4 +308,3 @@ class Wp_Travel_User_Account {
 	}
 
 }
-
