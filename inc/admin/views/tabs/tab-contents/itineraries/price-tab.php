@@ -124,7 +124,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 			<h3><?php echo esc_html( 'Pricing', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
-	<tr>
+	<tr class="pricing-option-title">
 		<td><label for="wp-travel-pricing-option-type"><?php esc_html_e( 'Pricing Option', 'wp-travel' ); ?></label></td>
 		<td>
 			<select name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type">
@@ -176,7 +176,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 	<!-- Multiple Priceing field -->
 	<tr class="<?php echo esc_attr( $multiple_pricing_option_class ); ?>">
 		<td  id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater"  >
-			<div id="wp-travel-pricing-options" style="padding:20px; background:#f1f1f1; margin-bottom:15px">
+			<div id="wp-travel-pricing-options" style="padding:20px 0; margin: 0 -10px;">
 			<?php
 			if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) != 0 ) :
 				$collapse_style = 'display:block';
@@ -337,7 +337,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 																<span class="switch"></span>
 															</label>
 														</span>
-														<span class="wp-travel-enable-inventory"><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></span>
+														<p class="wp-travel-enable-inventory description"><?php esc_html_e( 'Check to enable Inventory for this pricing option."SOLD OUT" message will be shown when the Max Pax value is exceeded by the booked pax.', 'wp-travel' ); ?></p>
 													</div>
 												</div>
 
@@ -353,7 +353,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 					</div>
 				</div>
 			</div>
-			<div class="wp-travel-add-pricing-option clearfix">
+			<div class="wp-travel-add-pricing-option clearfix text-right">
 				<input type="button" value="<?php esc_html_e( 'Add New Pricing Option', 'wp-travel' ); ?>" class="button button-primary wp-travel-pricing-add-new" title="<?php esc_html_e( 'Add New Pricing Option', 'wp-travel' ); ?>" />
 			</div>
 			<!-- Template Script for Pricing Options -->
@@ -717,7 +717,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 					</div>
 				</script>
 			</div>
-			<div class="wp-travel-add-date-option clearfix">
+			<div class="wp-travel-add-date-option clearfix text-right">
 				<input type="button" value="<?php esc_html_e( 'Add New date', 'wp-travel' ); ?>" class="button button-primary wp-travel-multiple-dates-add-new" title="<?php esc_html_e( 'Add New Date', 'wp-travel' ); ?>" />
 			</div>
 		</td>
