@@ -331,15 +331,38 @@
         }
     }
 
-    // Fixed Departure [ On || Off ]
+    // Fixed Departure [ On || Off ]  @since 1.7.6
     $(document).on('click', '#wp-travel-fixed-departure', function() {
         show_fixed_departured_date_fields();
     });
 
-    // Enable Multiple Dates Field
+    // Enable Multiple Dates Field @since 1.7.6
     $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
         show_multiple_dates_fields();        
     });
+
+    $(document).on( 'click', '.wp-travel-clone-post', function(e) {
+        e.preventDefault();
+        var post_id = $(this).data('post_id');
+        var security = $(this).data('security');
+        
+        var data = {
+            post_id : post_id,
+            security: security,
+            action:'wp_travel_clone_trip'
+        }
+        $.ajax({
+            url: ajaxurl,
+            data: data,
+            type: "post",
+            dataType: "json",
+            success: function(data) {
+                
+                location.href = location.href;
+                // location.reload();
+            }
+        });
+    } );
 
     //Pricing Key slugify.
     $(document).on('change', '.wp-travel-variation-pricing-name', function() {
