@@ -6,52 +6,118 @@
  */
 
 global $post;
+$post_id = $post->ID;
 
-$start_date = get_post_meta( $post->ID, 'wp_travel_start_date', true );
-$end_date   = get_post_meta( $post->ID, 'wp_travel_end_date', true );
+$start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
+$end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-$group_size = get_post_meta( $post->ID, 'wp_travel_group_size', true );
+$group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
 
-$fixed_departure           = get_post_meta( $post->ID, 'wp_travel_fixed_departure', true );
+$fixed_departure           = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 $fixed_departure           = ( $fixed_departure ) ? $fixed_departure : 'yes';
 $fixed_departure           = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-$multiple_fixed_departures = get_post_meta( $post->ID, 'wp_travel_enable_multiple_fixed_departue', true );
+$multiple_fixed_departures = get_post_meta( $post_id, 'wp_travel_enable_multiple_fixed_departue', true );
 $multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures', $multiple_fixed_departures );
 
-$enable_pricing_options = get_post_meta( $post->ID, 'wp_travel_enable_pricing_options', true );
+// need to remove in future. [replaced this with 'wp_travel_pricing_option_type' meta in function 'wp_travel_get_pricing_option_type' ]. @since 1.7.6
+$enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
+$pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
 
-$enable_inventory_for_trip = get_post_meta( $post->ID, 'enable_trip_inventory', true );
+$enable_inventory_for_trip = get_post_meta( $post_id, 'enable_trip_inventory', true );
 
-$trip_duration       = get_post_meta( $post->ID, 'wp_travel_trip_duration', true );
+$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 $trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
-$trip_duration_night = get_post_meta( $post->ID, 'wp_travel_trip_duration_night', true );
+$trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night', true );
 $trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
-$price       = get_post_meta( $post->ID, 'wp_travel_price', true );
-$sale_price  = get_post_meta( $post->ID, 'wp_travel_sale_price', true );
-$enable_sale = get_post_meta( $post->ID, 'wp_travel_enable_sale', true );
+$price       = get_post_meta( $post_id, 'wp_travel_price', true );
+$sale_price  = get_post_meta( $post_id, 'wp_travel_sale_price', true );
+$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 
-$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
+$trip_pricing_options_data = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 
-$trip_multiple_date_options = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
+$trip_multiple_date_options = get_post_meta( $post_id, 'wp_travel_multiple_trip_dates', true );
 
 $sale_price_attribute = 'disabled="disabled"';
-$sale_price_style     = 'display:none';
+$sale_price_style_class     = 'hidden';
 
 if ( $enable_sale ) {
 	$sale_price_attribute = '';
-	$sale_price_style     = '';
+	$sale_price_style_class     = '';
 }
 
 	$settings        = wp_travel_get_settings();
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
-	$price_per = get_post_meta( $post->ID, 'wp_travel_price_per', true );
+	$price_per = get_post_meta( $post_id, 'wp_travel_price_per', true );
 if ( ! $price_per ) {
 	$price_per = 'person';
 }
-?>
+
+// CSS Class for trip fields.
+$single_pricing_option_class_array = array();
+$multiple_pricing_option_class_array = array();
+
+if ( 'single-price' === $pricing_option_type  ) {
+	$single_pricing_option_class_array['single-pricing-option-field'] = '';
+	
+	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = 'hidden';
+	$multiple_pricing_option_class_array['hidden'] = ' ';
+} else {
+	$single_pricing_option_class_array['hidden'] = '';
+	unset( $multiple_pricing_option_class_array['hidden'] );
+}
+
+$single_array_key = array_keys( $single_pricing_option_class_array );
+$multiple_array_key = array_keys( $multiple_pricing_option_class_array );
+// CSS Class for Single and Multiple Pricing option fields.
+$single_pricing_option_class = implode( ' ', $single_array_key );
+$multiple_pricing_option_class = implode( ' ', $multiple_array_key );
+
+// Trip Duration option class [Override]
+$trip_duration_option_class_array = $single_fixed_departure_class_array = $single_pricing_option_class_array;
+if ( 'yes' === $fixed_departure ) {
+	$trip_duration_option_class_array['hidden'] = '';
+	unset( $single_fixed_departure_class_array['hidden'] );
+
+	if ( 'yes' === $multiple_fixed_departures ) {
+		$single_fixed_departure_class_array['hidden'] = '';
+	} else {
+		unset( $single_fixed_departure_class_array['hidden'] );
+	}
+} else {
+	unset( $trip_duration_option_class_array['hidden'] );
+	$single_fixed_departure_class_array['hidden'] = '';
+}
+$trip_duration_array_key = array_keys( $trip_duration_option_class_array );
+$trip_duration_option_class = implode( ' ', $trip_duration_array_key );
+
+$single_fixed_departure_array_key = array_keys( $single_fixed_departure_class_array );
+// CSS Class for Single and Multiple Pricing option fields.
+$single_fixed_departure_option_class = implode( ' ', $single_fixed_departure_array_key );
+
+// Enable Multiple Date option class [override]
+$enable_multiple_date_option_class_array = $multiple_date_option_class_array = $multiple_pricing_option_class_array;
+
+if ( 'multiple-price' === $pricing_option_type && 'yes' === $fixed_departure ) {
+	unset( $enable_multiple_date_option_class_array['hidden'] );
+
+	// override
+	if ( 'yes' === $multiple_fixed_departures ) {
+		unset( $multiple_date_option_class_array['hidden'] );
+	} else {
+		$multiple_date_option_class_array['hidden'] = '';
+	}
+
+} else {
+	$enable_multiple_date_option_class_array['hidden'] = '';
+}
+$enable_multiple_date_array_key = array_keys( $enable_multiple_date_option_class_array );
+$enable_multiple_date_option_class = implode( ' ', $enable_multiple_date_array_key );
+
+$multiple_date_array_key = array_keys( $multiple_date_option_class_array );
+$multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 <table class="form-table pricing-tab">
 	<tr class="table-inside-heading">
 		<th colspan="2">
@@ -59,6 +125,15 @@ if ( ! $price_per ) {
 		</th>
 	</tr>
 	<tr>
+		<td><label for="wp-travel-pricing-option-type"><?php esc_html_e( 'Pricing Option', 'wp-travel' ); ?></label></td>
+		<td>
+			<select name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type">
+				<option value="single-price" <?php selected( $pricing_option_type, 'single-price' ) ?> ><?php esc_html_e( 'Single Price', 'wp-travel' ) ?></option>
+				<option value="multiple-price" <?php selected( $pricing_option_type, 'multiple-price' ) ?> ><?php esc_html_e( 'Multiple Price', 'wp-travel' ) ?></option>
+			</select>
+		</td>
+	</tr>
+	<tr class="<?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<td><label for="wp-travel-price-per"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label></td>
 		<td>
 			<?php $price_per_fields = wp_travel_get_price_per_fields(); ?>
@@ -71,17 +146,17 @@ if ( ! $price_per ) {
 			<?php endif; ?>
 		</td>
 	</tr>
-	<tr>
+	<tr class="<?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
 		<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
 	</tr>
-	<tr>
+	<tr class="<?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0.01" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></td>
 	</tr>
 
 
-	<tr>
+	<tr class="<?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<td><label for="wp-travel-enable-sale"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
@@ -93,27 +168,15 @@ if ( ! $price_per ) {
 			<span class="wp-travel-enable-sale"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></span>
 		</td>
 	</tr>
-	<tr style="<?php echo esc_attr( $sale_price_style ); ?>">
+	<tr class="<?php echo esc_attr( $sale_price_style_class . ' ' . $single_pricing_option_class ); ?>">
 		<td><label for="wp-travel-sale-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
 		<td><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input <?php echo esc_attr( $sale_price_attribute ); ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></td>
 	</tr>
 
-	<tr class="table-inside-heading">
-		<td class="pricing-repeater"><label for="wp-travel-enable-pricing-options"><?php esc_html_e( 'Pricing Options', 'wp-travel' ); ?></label>
-		</td>
-		<td>
-			<span class="show-in-frontend checkbox-default-design">
-				<label data-on="ON" data-off="OFF">
-					<input name="wp_travel_enable_pricing_options" type="checkbox" id="wp-travel-enable-pricing-options" <?php checked( 'yes', $enable_pricing_options ); ?> value="yes">	
-					<span class="switch"></span>
-				</label>
-			</span>
-			<span class="wp-travel-enable-pricing-options checkbox-with-label"><?php echo esc_html__( 'Check to enable different pricing options.', 'wp-travel' ); ?></span>
-		</td>
-	</tr>
-	<tr>
-		<td style="display:<?php echo ( 'yes' === $enable_pricing_options ) ? '' : 'none'; ?>" id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater">
-			<div id="wp-travel-pricing-options">
+	<!-- Multiple Priceing field -->
+	<tr class="<?php echo esc_attr( $multiple_pricing_option_class ); ?>">
+		<td  id="wp-travel-multiple-pricing-options" colspan="2" class="pricing-repeater"  >
+			<div id="wp-travel-pricing-options" style="padding:20px; background:#f1f1f1; margin-bottom:15px">
 			<?php
 			if ( is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) != 0 ) :
 				$collapse_style = 'display:block';
@@ -261,7 +324,7 @@ if ( ! $price_per ) {
 												</div>
 											</div>
 											<div class="repeat-row">
-												<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = 'pricing_options', $key ); ?>
+												<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = 'pricing_options', $key ); ?>
 											</div>
 											<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 												
@@ -393,7 +456,7 @@ if ( ! $price_per ) {
 									</div>
 								</div>
 
-								<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
+								<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
 								
 								<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 												
@@ -421,6 +484,9 @@ if ( ! $price_per ) {
 		</td>
 	</tr>
 	<tr>
+		<td colspan="2"><hr></td>
+	</tr>
+	<tr>
 		<th colspan="2">
 			<h3><?php esc_html_e( 'Dates', 'wp-travel' ); ?></h3>
 		</th>
@@ -437,15 +503,15 @@ if ( ! $price_per ) {
 			</span>
 		</td>
 	</tr>
-	<tr class="wp-travel-trip-duration-row" style="display:<?php echo ( 'no' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-trip-duration-row <?php echo esc_attr( $trip_duration_option_class ) ?>" >
 		<td><label for="wp-travel-trip-duration"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></label></td>
 		<td>
 			<input type="number" min="0" step="1" name="wp_travel_trip_duration" id="wp-travel-trip-duration" value="<?php echo esc_attr( $trip_duration ); ?>" /> <?php esc_html_e( 'Day(s)', 'wp-travel' ); ?>
 			<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ); ?>                
 		</td>
-	</tr>        
-
-	<tr class="wp-travel-fixed-departure-row" style="display:<?php echo ( 'yes' === $enable_pricing_options && 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>">
+	</tr>
+	<!-- style="display:<?php echo ( 'yes' === $enable_pricing_options && 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>" -->
+	<tr class="wp-travel-enable-multiple-dates <?php echo esc_attr( $enable_multiple_date_option_class ) ?>" >
 		<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 		<td><span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
@@ -455,16 +521,16 @@ if ( ! $price_per ) {
 			</span>
 		</td>
 	</tr>
-	<tr class="wp-travel-fixed-departure-row hide-if-multidates" style="display:<?php echo ( 'yes' === $fixed_departure && 'yes' !== $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-fixed-departure-row <?php echo esc_attr( $single_fixed_departure_option_class ); ?>" >
 		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
 	</tr>
-	<tr class="wp-travel-fixed-departure-row hide-if-multidates" style="display:<?php echo ( 'yes' === $fixed_departure && 'yes' !== $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
+	<tr class="wp-travel-fixed-departure-row <?php echo esc_attr( $single_fixed_departure_option_class ); ?>">
 		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 		<td><input type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
 
-	<tr id="wp-variations-multiple-dates" style="display:<?php echo ( 'yes' === $multiple_fixed_departures ) ? 'table-row' : 'none'; ?>">
+	<tr id="wp-variations-multiple-dates" class="<?php echo esc_attr( $multiple_date_option_class ); ?>">
 
 	<?php if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) : ?>
 
@@ -667,7 +733,7 @@ if ( ! $price_per ) {
 		</th>
 	</tr>
 	<tr class="wp-travel-tour-extra-content" style="display:<?php echo esc_attr( 'yes' === $enable_pricing_options ) ? 'none':'table-row' ?>" >
-		<?php echo wp_travel_admin_tour_extra_multiselect( $post->ID, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
+		<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 	</tr>
 	<tr>
 		<th colspan="2">
@@ -680,19 +746,19 @@ if ( ! $price_per ) {
 	 *
 	 * @since 1.0.5
 	 */
-	do_action( 'wp_travel_itinerary_after_sale_price', $post->ID ); ?>
+	do_action( 'wp_travel_itinerary_after_sale_price', $post_id ); ?>
 	<?php
 	// WP Travel Standard Paypal merged. since 1.2.1	
-	$wp_travel_minimum_partial_payout = wp_travel_minimum_partial_payout( $post->ID );
+	$wp_travel_minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
 	if ( $wp_travel_minimum_partial_payout < 1 ) {
 		$wp_travel_minimum_partial_payout = '';
 	}
 	$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 )? $settings['minimum_partial_payout']  : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 
-	$trip_price = wp_travel_get_actual_trip_price( $post->ID );
+	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
-	$payout_percent = wp_travel_get_payout_percent( $post->ID );
-	$use_global = wp_travel_use_global_payout_percent( $post->ID ); 
+	$payout_percent = wp_travel_get_payout_percent( $post_id );
+	$use_global = wp_travel_use_global_payout_percent( $post_id ); 
 
 	$custom_payout_class = '';
 

@@ -24,6 +24,12 @@ $settings = wp_travel_get_settings();
 <?php else : ?>
   <div class="map-wrap">
   <p><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=" . WP_TRAVEL_POST_TYPE . "&page=settings\">settings</a>" ) ?></p>
+  <div class="wp-travel-upsell-message">
+			<div class="wp-travel-pro-feature-notice">
+				<h4><?php esc_html_e( 'Need alternative maps ?', 'wp-travel' ); ?></h4>
+				<p><?php printf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel. %1$sView WP Travel Map addons%2$s', 'wp-travel' ), '<br><a target="_blank" href="https://wptravel.io/downloads/category/map/">', '</a>' ); ?></p>
+			</div>
+		</div>
   </div>
 <?php endif; ?>
 </div>

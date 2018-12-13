@@ -173,6 +173,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.7.6 =
+Release Date: 
+
+* New: Added Default google map alternative links in settings and Trip location tab.
+* New: Converted Static User Dashboard Menu with array and callbacks.
+* Enhancement: Pricing fields grouped as per single and multiple pricing option.
+* Fixes: Booking option changed for non price trips.
+* 
+
 = 1.7.5 =
 Release Date: December 7th, 2018
 

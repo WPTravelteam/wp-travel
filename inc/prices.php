@@ -246,3 +246,27 @@ function wp_travel_is_taxable() {
 	}
 	return false;
 }
+
+/**
+ * Get Pricing option type[single-pricing || multiple-pricing].
+ * 
+ * @param	int	$post_id Post ID.
+ * 
+ * @since	1.7.6
+ * @return String Pricing option type.
+ */
+function wp_travel_get_pricing_option_type( $post_id = null ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	// need to remove in future. [replaced this with 'wp_travel_pricing_option_type' meta]. @since 1.7.6
+	$enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
+
+	$pricing_option_type = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
+	if ( ! $pricing_option_type ) {
+		$pricing_option_type = isset( $enable_pricing_options ) && 'yes' === $enable_pricing_options ? 'multiple-price' : 'single-price';
+	}
+	return $pricing_option_type;
+}

@@ -264,25 +264,82 @@
             .replace(/-+$/, ''); // Trim - from end of text
     }
 
-    // Pricing options enable disable. v 1.2.5
-    $(document).on('click', '#wp-travel-enable-pricing-options', function() {
-        if ($(this).is(':checked')) {
-            $('#wp-travel-multiple-pricing-options').show();
-            $('.wp-travel-tour-extra-title, .wp-travel-tour-extra-content').hide();
-        } else {
-            $('#wp-travel-multiple-pricing-options').hide();
-            $('.wp-travel-tour-extra-title, .wp-travel-tour-extra-content').css({display:'table-row'});
+    // @since   1.7.6
+    // Pricing Option [single-price || multiple-price]
+    $( document ).on( 'change', '#wp-travel-pricing-option-type', function() {
+        var pricing_option_type = $(this).val();
 
-            if ( $('#wp-travel-enable-multiple-fixed-departure').is(':checked') ) {
-                // need to work here for show hide options.
+        var single_pricing_field = $( '.single-pricing-option-field' );
+        var multiple_pricing_field = $( '.multiple-pricing-option-field' );
+
+        if ( 'single-price' === pricing_option_type ) { // single pricing
+            single_pricing_field.removeClass( 'hidden' );
+            multiple_pricing_field.addClass( 'hidden' );
+        } else {
+            single_pricing_field.addClass( 'hidden' );
+            multiple_pricing_field.removeClass( 'hidden' );
+        }
+
+        // show / hide fixed departure fields.
+        show_fixed_departured_date_fields();
+    } );
+
+    // @since 1.7.6
+    function show_fixed_departured_date_fields() {
+        var pricing_option_type_val = $( '#wp-travel-pricing-option-type' ).val();
+
+        var fixed_departure = $('#wp-travel-fixed-departure');
+
+        // Default fixed departure field show /hide
+        if ( fixed_departure.is(':checked') ) {
+            $('.wp-travel-fixed-departure-row').removeClass('hidden');
+            $('.wp-travel-trip-duration-row').addClass('hidden');
+        } else {           
+            $('.wp-travel-fixed-departure-row').addClass('hidden');
+            $('.wp-travel-trip-duration-row').removeClass('hidden');
+        }
+
+        // Display Enable Multiple Date if Pricing option set to Multiple Price.
+        $(".wp-travel-enable-multiple-dates").addClass('hidden');
+        if ( 'multiple-price' === pricing_option_type_val ) {
+
+            // Fixed Departure field override.
+            if ( fixed_departure.is(':checked')  ) {
+                // Show Multiple Dates fields.
+                $(".wp-travel-enable-multiple-dates, #wp-variations-multiple-dates").removeClass('hidden');
+
+                // Enable Multiple Dates override.
+                show_multiple_dates_fields();
+                
+            } else {
+                // Hide Multiple Dates fields.
+                $(".wp-travel-enable-multiple-dates, #wp-variations-multiple-dates").addClass('hidden');
             }
         }
+    }
+
+    // @since 1.7.6
+    function show_multiple_dates_fields() {
+        var enable_multiple_dates = $('#wp-travel-enable-multiple-fixed-departure');
+        
+        if ( enable_multiple_dates.is(':checked') ) {
+            $('.wp-travel-fixed-departure-row').addClass('hidden');
+            $( '#wp-variations-multiple-dates' ).removeClass( 'hidden' );
+        } else {
+            $('.wp-travel-fixed-departure-row').removeClass('hidden');
+            $( '#wp-variations-multiple-dates' ).addClass( 'hidden' );
+        }
+    }
+
+    // Fixed Departure [ On || Off ]
+    $(document).on('click', '#wp-travel-fixed-departure', function() {
+        show_fixed_departured_date_fields();
     });
 
-    // //Pricing options multiselect.
-    // $('.wp-travel-multiple-date-pricings').multipleSelect({
-    //     filter: true
-    // });
+    // Enable Multiple Dates Field
+    $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
+        show_multiple_dates_fields();        
+    });
 
     //Pricing Key slugify.
     $(document).on('change', '.wp-travel-variation-pricing-name', function() {
@@ -315,15 +372,7 @@
         }
     });
 
-    $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
-        if ($(this).is(':checked')) {
-            $('.hide-if-multidates').hide();
-            $('#wp-variations-multiple-dates').show();
-        } else {
-                $('.hide-if-multidates').show();
-            $('#wp-variations-multiple-dates').hide();
-        }
-    });
+    
 
     if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
         $(this).parents('.repeat-row').next('.repeat-row').show();
@@ -336,20 +385,7 @@
         $('#wp-travel-sale-price').attr('required', 'required');
     }
 
-    $(document).on('click', '#wp-travel-fixed-departure', function() {
-        if ($(this).is(':checked')) {
-            $('.wp-travel-fixed-departure-row').css({ 'display': 'table-row' });
-            $('.wp-travel-trip-duration-row').css({ 'display': 'none' });
-
-            if ( $('#wp-travel-enable-multiple-fixed-departure').is( ':checked' ) ) {
-                $( '.hide-if-multidates' ).css({ 'display': 'none' });
-            }
-
-        } else {
-            $('.wp-travel-fixed-departure-row').css({ 'display': 'none' });
-            $('.wp-travel-trip-duration-row').css({ 'display': 'table-row' });
-        }
-    });
+    
 
     $(document).on("click", ".wp-travel-featured-post", function(e) {
         e.preventDefault();

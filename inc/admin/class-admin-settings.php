@@ -165,45 +165,43 @@ class WP_Travel_Admin_Settings {
 			'selected'	=> $currency,
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
 			'options'	=> $currency_list,
-		);
-		echo '<table class="form-table">';
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="currency">' . esc_html__( 'Currency', 'wp-travel' ) . '</label>';
-				echo '</th>';
-				echo '<td>';
-					echo wp_travel_get_dropdown_currency_list( $currency_args );
-					echo '<p class="description">' . esc_html__( 'Choose your currency', 'wp-travel' ) . '</p>';
-				echo '</td>';
-			echo '<tr>';
+		); ?>
+		<table class="form-table">
+			<tr>
+				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ) ?></label></th>
+				<td>
+					<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
+					<p class="description"><?php echo esc_html__( 'Choose your currency', 'wp-travel' ) ?></p>
+				</td>
+			<tr>
+			<tr>
+				<th><label for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ) ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $google_map_api_key ) ?>" name="google_map_api_key" id="google_map_api_key"/>
+					<p class="description"><?php echo sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) ?></p>
+				</td>
+			<tr>
+			<tr>
+				<th><label for="google_map_zoom_level"><?php echo esc_html__( 'Map Zoom Level', 'wp-travel' ) ?></label></th>
+				<td>
+					<input step="1" min="1" type="number" value="<?php echo esc_attr( $google_map_zoom_level ) ?>" name="google_map_zoom_level" id="google_map_zoom_level"/>
+				</td>
+			<tr>
+		</table>
+		<div class="wp-travel-upsell-message">
+			<div class="wp-travel-pro-feature-notice">
+				<h4><?php esc_html_e( 'Need alternative maps ?', 'wp-travel' ); ?></h4>
+				<p><?php printf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.  %1$sView WP Travel Map addons%2$s', 'wp-travel' ), '<br><a target="_blank" href="https://wptravel.io/downloads/category/map/">', '</a>' ); ?></p>
+			</div>
+		</div>
+		
+		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Checkout Process', 'wp-travel' ) ?></h3>
 
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="google_map_api_key">' . esc_html__( 'Google Map API Key', 'wp-travel' ) . '</label>';
-				echo '</th>';
-				echo '<td>';
-					echo '<input type="text" value="' . esc_attr( $google_map_api_key ) . '" name="google_map_api_key" id="google_map_api_key"/>';
-					echo '<p class="description">' . sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) . '</p>';
-				echo '</td>';
-			echo '<tr>';
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="google_map_zoom_level">' . esc_html__( 'Map Zoom Level', 'wp-travel' ) . '</label>';
-				echo '</th>';
-				echo '<td>';
-					echo '<input step="1" min="1" type="number" value="' . esc_attr( $google_map_zoom_level ) . '" name="google_map_zoom_level" id="google_map_zoom_level"/>';
-				echo '</td>';
-			echo '<tr>';
-		echo '</table>';
-
-		echo '<h3 class="wp-travel-tab-content-title">' . esc_html__( 'Checkout Process', 'wp-travel' ) . '</h3>';
-
-		echo '<table class="form-table">';
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="cart-page-id">' . esc_html__( 'Cart Page', 'wp-travel' ) . '</label>';
-				echo '</th>';
-				echo '<td>';
+		<table class="form-table">
+			<tr>
+				<th><label for="cart-page-id"><?php echo esc_html__( 'Cart Page', 'wp-travel' ) ?></label></th>
+				<td>
+					<?php
 					wp_dropdown_pages(array(
 						'depth'                 => 0,
 						'child_of'              => 0,
@@ -215,16 +213,15 @@ class WP_Travel_Admin_Settings {
 						'show_option_none'      => null, // string
 						'show_option_no_change' => null, // string
 						'option_none_value'     => null, // string
-					));
-					echo '<p class="description">' . esc_html__( 'Choose the page to use as cart page for trip bookings', 'wp-travel' ) . '</p>';
-				echo '</td>';
-			echo '<tr>';
+					)); ?>
+					<p class="description"><?php echo esc_html__( 'Choose the page to use as cart page for trip bookings', 'wp-travel' ) ?></p>
+				</td>
+			<tr>
 
-			echo '<tr>';
-				echo '<th>';
-					echo '<label for="checkout-page-id">' . esc_html__( 'Checkout Page', 'wp-travel' ) . '</label>';
-				echo '</th>';
-				echo '<td>';
+			<tr>
+				<th><label for="checkout-page-id"><?php echo esc_html__( 'Checkout Page', 'wp-travel' ) ?></label></th>
+				<td>
+					<?php 
 					wp_dropdown_pages(array(
 						'depth'                 => 0,
 						'child_of'              => 0,
@@ -236,13 +233,12 @@ class WP_Travel_Admin_Settings {
 						'show_option_none'      => null, // string
 						'show_option_no_change' => null, // string
 						'option_none_value'     => null, // string
-					));
-					echo '<p class="description">' . esc_html__( 'Choose the page to use as checkout page for booking', 'wp-travel' ) . '</p>';
-				echo '</td>';
-			echo '<tr>';
-
-
-		echo '</table>';
+					)); ?>
+					<p class="description"><?php echo esc_html__( 'Choose the page to use as checkout page for booking', 'wp-travel' ) ?></p>
+				</td>
+			<tr>
+		</table>
+	<?php
 	}
 
 	/**

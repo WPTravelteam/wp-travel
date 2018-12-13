@@ -730,6 +730,13 @@ class WP_Travel_Admin_Metaboxes {
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
 		}
+
+		// Save pricing option type @since 1.7.6
+		if ( isset( $_POST['wp_travel_pricing_option_type'] ) ) {
+			$wp_travel_pricing_option_type = sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) );
+			update_post_meta( $post_id, 'wp_travel_pricing_option_type', $wp_travel_pricing_option_type );
+		}
+
 		$wp_travel_trip_price = 0;
 		// Additional Info section.
 		if ( isset( $_POST['wp_travel_price'] ) ) {
