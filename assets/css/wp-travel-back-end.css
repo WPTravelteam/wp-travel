@@ -63,6 +63,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.text-left {
+  text-align: left; }
+
+.text-center {
+  text-align: center; }
+
+.text-right {
+  text-align: right; }
+
 .wp-travel-clean-metabox {
   background: #f7f7f1;
   overflow: hidden; }
@@ -1723,5 +1732,30 @@ span.wp-travel-message {
   #wp-travel-tab-content-license .form-table .form-horizontal textarea[class*="button"],
   .form-horizontal #wp-travel-tab-content-license .form-table textarea[class*="button"] {
     width: auto; }
+
+#wp-travel-tab-content-price .pricing-tab td {
+  padding: 10px; }
+
+.pricing-option-title {
+  background-color: #eee; }
+  .pricing-option-title label {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase; }
+  .pricing-option-title select, .pricing-option-title .stat-toolbar-form .field-group input, .stat-toolbar-form .field-group .pricing-option-title input, .pricing-option-title .stat-toolbar-form .field-group .wp-travel-form-field select, .stat-toolbar-form .field-group .wp-travel-form-field .pricing-option-title select, .pricing-option-title .wp-travel-form-field .stat-toolbar-form .field-group select, .wp-travel-form-field .stat-toolbar-form .field-group .pricing-option-title select,
+  .pricing-option-title .stat-toolbar-form .field-group .form-horizontal select,
+  .stat-toolbar-form .field-group .form-horizontal .pricing-option-title select,
+  .pricing-option-title .form-horizontal .stat-toolbar-form .field-group select,
+  .form-horizontal .stat-toolbar-form .field-group .pricing-option-title select, .pricing-option-title .stat-toolbar-form .field-group .wp-travel-form-field textarea, .stat-toolbar-form .field-group .wp-travel-form-field .pricing-option-title textarea, .pricing-option-title .wp-travel-form-field .stat-toolbar-form .field-group textarea, .wp-travel-form-field .stat-toolbar-form .field-group .pricing-option-title textarea,
+  .pricing-option-title .stat-toolbar-form .field-group .form-horizontal textarea,
+  .stat-toolbar-form .field-group .form-horizontal .pricing-option-title textarea,
+  .pricing-option-title .form-horizontal .stat-toolbar-form .field-group textarea,
+  .form-horizontal .stat-toolbar-form .field-group .pricing-option-title textarea {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    height: 45px;
+    padding: 0 15px;
+    max-width: 100% !important;
+    width: 100%; }
 
 /*# sourceMappingURL=wp-travel-back-end.css.map */

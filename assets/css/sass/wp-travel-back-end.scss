@@ -122,6 +122,18 @@ $alabaster: #f7f7f1; // Red like color.
     -moz-osx-font-smoothing: grayscale;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
 // Remove wordpress metabox styles and hide buttons.
 .wp-travel-clean-metabox {
     background: $alabaster;
@@ -1925,5 +1937,30 @@ span.wp-travel-message {
         input[class*="button"] {
             width: auto;
         }
+    }
+}
+
+#wp-travel-tab-content-price {
+    .pricing-tab {
+        td {
+            padding: 10px;
+        }
+    }
+}
+
+.pricing-option-title {
+    background-color: #eee;
+    label {
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+    select {
+        border: 1px solid #ddd;
+        box-shadow: none;
+        height: 45px;
+        padding: 0 15px;
+        max-width: 100% !important;
+        width: 100%;
     }
 }
