@@ -96,7 +96,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_total ) ?></span>
 						</td>
 						<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="product-total text-right f-partial-payment">
-							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_partial_total ) ?></span>
+							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol() ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_total_partial ) ?></span>
 						</td>
 					</tr>
 					

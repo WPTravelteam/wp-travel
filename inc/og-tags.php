@@ -51,9 +51,9 @@ function wp_travel_insert_post_tags() {
     }
     
     $ogurl = get_permalink( $post_id );
-
+    $image_size = apply_filters( 'wp_travel_og_image_size', 'large' );
     // Image   
-    $ogimage = wp_travel_get_post_thumbnail_url( $post_id, 'full' );
+    $ogimage = wp_travel_get_post_thumbnail_url( $post_id, $image_size );
     
     // Author
     $articleauthor = get_the_author();
