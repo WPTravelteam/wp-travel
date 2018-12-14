@@ -64,15 +64,13 @@ if ( ! $price_per ) {
 $single_pricing_option_class_array = array();
 $multiple_pricing_option_class_array = array();
 
-if ( 'single-price' === $pricing_option_type  ) {
-	$single_pricing_option_class_array['single-pricing-option-field'] = '';
-	
-	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
-	$multiple_pricing_option_class_array['hidden'] = ' ';
+$single_pricing_option_class_array['single-pricing-option-field'] = '';
+$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
+
+if ( 'single-price' === $pricing_option_type  ) {	
+	$multiple_pricing_option_class_array['hidden'] = '';
 } else {
-	$single_pricing_option_class_array['single-pricing-option-field'] = '';
 	$single_pricing_option_class_array['hidden'] = '';
-	unset( $multiple_pricing_option_class_array['hidden'] );
 }
 
 $single_array_key = array_keys( $single_pricing_option_class_array );
