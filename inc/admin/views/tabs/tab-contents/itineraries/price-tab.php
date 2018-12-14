@@ -7,9 +7,14 @@
 
 global $post;
 $post_id = $post->ID;
+$date_format            = get_option('date_format');
 
 $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
+
+$start_date 	= ! empty( $start_date ) ? date_i18n( $date_format, strtotime( stripslashes( $start_date ) ) ) : '';
+$end_date 	= ! empty( $end_date ) ? date_i18n( $date_format, strtotime( stripslashes( $end_date ) ) ) : '';
+
 
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
 
@@ -59,15 +64,13 @@ if ( ! $price_per ) {
 $single_pricing_option_class_array = array();
 $multiple_pricing_option_class_array = array();
 
+$single_pricing_option_class_array['single-pricing-option-field'] = '';
+$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
+
 if ( 'single-price' === $pricing_option_type  ) {
-	$single_pricing_option_class_array['single-pricing-option-field'] = '';
-	
-	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
-	$multiple_pricing_option_class_array['hidden'] = ' ';
+	$multiple_pricing_option_class_array['hidden'] = '';
 } else {
-	$single_pricing_option_class_array['single-pricing-option-field'] = '';
 	$single_pricing_option_class_array['hidden'] = '';
-	unset( $multiple_pricing_option_class_array['hidden'] );
 }
 
 $single_array_key = array_keys( $single_pricing_option_class_array );
