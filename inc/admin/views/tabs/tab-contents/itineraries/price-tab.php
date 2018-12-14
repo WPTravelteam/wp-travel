@@ -790,8 +790,8 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 			</span>
 			<span class="wp-travel-enable-sale">
 				<?php
-					esc_html_e( 'Use Global', 'wp-travel' );
-					echo sprintf( '%s &percnt;', esc_html( $default_payout_percent ) );
+					esc_html_e( 'Use Global ', 'wp-travel' );
+					echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
 				?>	
 			</span>
 

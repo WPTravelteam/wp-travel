@@ -471,7 +471,7 @@ class WP_Travel_Cart {
 		// Adding tax to sub total;
 		if ( $tax_rate = wp_travel_is_taxable() ) : 
 			$tax_amount = wp_travel_get_formated_price( ( $total_trip_price_after_dis * $tax_rate ) / 100 );
-			// $tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
+			$tax_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $tax_rate ) / 100 );
 		endif;
 		
 		// Totals after tax.
