@@ -38,7 +38,7 @@ $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 $per_person_text = wp_travel_get_price_per_text( $trip_id );
 $sale_price      = wp_travel_get_trip_sale_price( $trip_id ); 
 
-$wp_travel_enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
+$wp_travel_enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 $wp_travel_enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );?>
 
 <div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
@@ -107,7 +107,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
 	$trip_multiple_dates_data = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
 
-	if ( 'yes' === $wp_travel_enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
+	if ( $wp_travel_enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 
 		$list_type = isset( $settings['trip_pricing_options_layout'] )  ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
 

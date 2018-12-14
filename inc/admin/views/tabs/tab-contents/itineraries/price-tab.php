@@ -19,8 +19,8 @@ $fixed_departure           = apply_filters( 'wp_travel_fixed_departure_defalut',
 $multiple_fixed_departures = get_post_meta( $post_id, 'wp_travel_enable_multiple_fixed_departue', true );
 $multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures', $multiple_fixed_departures );
 
-// need to remove in future. [replaced this with 'wp_travel_pricing_option_type' meta in function 'wp_travel_get_pricing_option_type' ]. @since 1.7.6
-$enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
+$enable_pricing_options = wp_travel_is_enable_pricing_options( $post_id );
+
 $pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
 
 $enable_inventory_for_trip = get_post_meta( $post_id, 'enable_trip_inventory', true );
@@ -510,7 +510,6 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 			<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ); ?>                
 		</td>
 	</tr>
-	<!-- style="display:<?php echo ( 'yes' === $enable_pricing_options && 'yes' === $fixed_departure ) ? 'table-row' : 'none'; ?>" -->
 	<tr class="wp-travel-enable-multiple-dates <?php echo esc_attr( $enable_multiple_date_option_class ) ?>" >
 		<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 		<td><span class="show-in-frontend checkbox-default-design">
@@ -727,12 +726,12 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
-	<tr class="wp-travel-tour-extra-title" style="display:<?php echo esc_attr( 'yes' === $enable_pricing_options ) ? 'none':'table-row' ?>">
+	<tr class="wp-travel-tour-extra-title" style="display:<?php echo esc_attr( $enable_pricing_options ) ? 'none':'table-row' ?>">
 		<th colspan="2">
 			<h3><?php echo esc_html( 'Tour Extras', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
-	<tr class="wp-travel-tour-extra-content" style="display:<?php echo esc_attr( 'yes' === $enable_pricing_options ) ? 'none':'table-row' ?>" >
+	<tr class="wp-travel-tour-extra-content" style="display:<?php echo esc_attr( $enable_pricing_options ) ? 'none':'table-row' ?>" >
 		<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 	</tr>
 	<tr>
