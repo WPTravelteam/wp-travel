@@ -821,6 +821,7 @@ class WP_Travel_Admin_Settings {
 			return;
 		}
 		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'yes';
+		$enable_og_tags = isset( $args['settings']['enable_og_tags'] ) ? $args['settings']['enable_og_tags'] : 'no';
 		?>
 		<table class="form-table">
 			<tr>
@@ -831,6 +832,20 @@ class WP_Travel_Admin_Settings {
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
 							<input <?php checked( $enable_trip_enquiry_option , 'yes' ); ?> value="1" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />
+							<span class="switch">
+						  </span>
+						</label>
+					</span>
+				</td>
+			<tr>
+			<tr>
+				<th>
+					<label for="currency"><?php esc_html_e( 'Enable OG Tags', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $enable_og_tags , 'yes' ); ?> value="1" name="enable_og_tags" id="enable_og_tags" type="checkbox" />
 							<span class="switch">
 						  </span>
 						</label>
@@ -1158,6 +1173,7 @@ class WP_Travel_Admin_Settings {
 			$enquiry_admin_email_template_settings = ( isset( $_POST['enquiry_admin_template'] ) && '' !== $_POST['enquiry_admin_template'] ) ? stripslashes_deep( $_POST['enquiry_admin_template'] ) : '';
 
 			$enable_trip_enquiry_option = ( isset( $_POST['enable_trip_enquiry_option'] ) && '' !== $_POST['enable_trip_enquiry_option'] ) ? 'yes' : 'no';
+			$enable_og_tags = ( isset( $_POST['enable_og_tags'] ) && '' !== $_POST['enable_og_tags'] ) ? 'yes' : 'no';
 
 			// Account Page.
 			$myaccount_page_id = isset( $_POST['myaccount_page_id'] ) ? $_POST['myaccount_page_id'] : '';
@@ -1201,6 +1217,8 @@ class WP_Travel_Admin_Settings {
 
 			// @since 1.2 Misc. Options
 			$settings['enable_trip_enquiry_option'] = $enable_trip_enquiry_option;
+			//@since 1.7.6 Misc. Option
+			$settings['enable_og_tags'] = $enable_og_tags;
 
 			// Merged Standard paypal Addons @since 1.2.1
 			$wt_test_mode = ( isset( $_POST['wt_test_mode'] ) && '' !== $_POST['wt_test_mode'] ) ? $_POST['wt_test_mode'] : '';

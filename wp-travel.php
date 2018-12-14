@@ -185,8 +185,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			include_once sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
-
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
+			// Open Graph Tags @since 1.7.6			
+			include sprintf( '%s/inc/og-tags.php', WP_TRAVEL_ABSPATH );
+
 			include sprintf( '%s/inc/class-ajax.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
