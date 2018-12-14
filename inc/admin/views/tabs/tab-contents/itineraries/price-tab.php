@@ -62,9 +62,10 @@ $multiple_pricing_option_class_array = array();
 if ( 'single-price' === $pricing_option_type  ) {
 	$single_pricing_option_class_array['single-pricing-option-field'] = '';
 	
-	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = 'hidden';
+	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
 	$multiple_pricing_option_class_array['hidden'] = ' ';
 } else {
+	$single_pricing_option_class_array['single-pricing-option-field'] = '';
 	$single_pricing_option_class_array['hidden'] = '';
 	unset( $multiple_pricing_option_class_array['hidden'] );
 }
