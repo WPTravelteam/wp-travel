@@ -76,18 +76,19 @@ class WP_Travel_Ajax {
 			}
 		}
 
-		// Cloning taxonomy
-		$tp_travel_post_terms = get_the_terms( $tp_travel_post_id, 'tp-package-category' );
-		$tp_travel_term_names = array();
-		if ( is_array( $tp_travel_post_terms ) && count( $tp_travel_post_terms ) > 0 ) {
-			foreach ( $tp_travel_post_terms as $post_terms ) {
-				$tp_travel_term_names[] = $post_terms->name;
+		// Cloning taxonomies
+		$trip_taxonomies = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+		foreach ( $trip_taxonomies as $taxonomy ) {
+			$trip_terms = get_the_terms( $post_id, $taxonomy );
+			$trip_term_names = array();
+			if ( is_array( $trip_terms ) && count( $trip_terms ) > 0 ) {
+				foreach ( $trip_terms as $post_terms ) {
+					$trip_term_names[] = $post_terms->name;
+				}
 			}
+			wp_set_object_terms( $new_post_id, $trip_term_names, $taxonomy );
 		}
-
 		wp_send_json( array( 'true') );
-
-		
 	}
 
 	function wp_travel_check_coupon_code() {
