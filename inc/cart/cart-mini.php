@@ -66,7 +66,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$pax_label 		= isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 
 					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
-					$single_trip_partial_total = wp_travel_get_formated_price( $trip_price_partial * $pax );
+					$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial * $pax );
 
 					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
 
