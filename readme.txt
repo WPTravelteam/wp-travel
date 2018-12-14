@@ -182,6 +182,7 @@ Release Date: 14th December 2018
 * New: Converted Static User Dashboard Menu with array and callbacks.
 * Enhancement: Pricing fields grouped as per single and multiple pricing option.
 * Fixes: Booking option changed for non price trips.
+* Fixes: Partial payment amount & rate calculation.
 * 
 
 = 1.7.5 =

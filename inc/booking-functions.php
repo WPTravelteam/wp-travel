@@ -733,7 +733,7 @@ function wp_travel_book_now() {
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
-	if ( isset( $_POST['wp_travel_fname'] ) || $_POST['wp_travel_email'] ) { // Booking using old booking form
+	if ( isset( $_POST['wp_travel_fname'] ) || isset( $_POST['wp_travel_email'] ) ) { // Booking using old booking form
 		$first_name = $_POST['wp_travel_fname'];
 		$last_name 	= $_POST['wp_travel_lname'];
 		$country	= $_POST['wp_travel_country'];

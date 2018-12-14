@@ -146,10 +146,15 @@ function wp_travel_get_payout_percent( $post_id ) {
 	}
 	$settings = wp_travel_get_settings();
 	$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 )? $settings['minimum_partial_payout']  : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
-	$payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
-	if ( ! $payout_percent  ) {
-		$payout_percent = $default_payout_percent;
-	}	
+	
+	$payout_percent = $default_payout_percent;
+	$use_global = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', true );
+	
+	$trip_payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
+
+	if ( ! $use_global && $trip_payout_percent ) {
+		$payout_percent = $trip_payout_percent;
+	}		
 	return number_format( $payout_percent, 2, '.', ''  );
 }
 
