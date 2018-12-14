@@ -45,8 +45,8 @@ function wp_travel_insert_post_tags() {
         $ogdescription = get_the_excerpt( $post_id );
     } else {
         $ogdescription = $post->post_content;
-        if ( strlen( $ogdescription ) > 100 ) {
-            $ogdescription = substr( $ogdescription, 0, 100 ) . '...';
+        if ( strlen( $ogdescription ) > 250 ) {
+            $ogdescription = substr( $ogdescription, 0, 250 ) . '...';
         }
     }
     
