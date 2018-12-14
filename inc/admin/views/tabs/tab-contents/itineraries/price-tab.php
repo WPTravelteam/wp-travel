@@ -12,8 +12,8 @@ $date_format            = get_option('date_format');
 $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-$start_date 	= ! empty( $start_date ) ? date_i18n( $date_format, strtotime( stripslashes( $start_date ) ) ) : '';
-$end_date 	= ! empty( $end_date ) ? date_i18n( $date_format, strtotime( stripslashes( $end_date ) ) ) : '';
+// $start_date 	= ! empty( $start_date ) ? date_i18n( $date_format, strtotime( stripslashes( $start_date ) ) ) : '';
+// $end_date 	= ! empty( $end_date ) ? date_i18n( $date_format, strtotime( stripslashes( $end_date ) ) ) : '';
 
 
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
@@ -64,13 +64,15 @@ if ( ! $price_per ) {
 $single_pricing_option_class_array = array();
 $multiple_pricing_option_class_array = array();
 
-$single_pricing_option_class_array['single-pricing-option-field'] = '';
-$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
-
 if ( 'single-price' === $pricing_option_type  ) {
-	$multiple_pricing_option_class_array['hidden'] = '';
+	$single_pricing_option_class_array['single-pricing-option-field'] = '';
+	
+	$multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
+	$multiple_pricing_option_class_array['hidden'] = ' ';
 } else {
+	$single_pricing_option_class_array['single-pricing-option-field'] = '';
 	$single_pricing_option_class_array['hidden'] = '';
+	unset( $multiple_pricing_option_class_array['hidden'] );
 }
 
 $single_array_key = array_keys( $single_pricing_option_class_array );
@@ -730,12 +732,12 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
-	<tr class="wp-travel-tour-extra-title" style="display:<?php echo esc_attr( $enable_pricing_options ) ? 'none':'table-row' ?>">
+	<tr class="wp-travel-tour-extra-title <?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<th colspan="2">
 			<h3><?php echo esc_html( 'Tour Extras', 'wp-travel' ); ?></h3>
 		</th>
 	</tr>
-	<tr class="wp-travel-tour-extra-content" style="display:<?php echo esc_attr( $enable_pricing_options ) ? 'none':'table-row' ?>" >
+	<tr class="wp-travel-tour-extra-content <?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 	</tr>
 	<tr>
