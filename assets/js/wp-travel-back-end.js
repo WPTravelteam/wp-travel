@@ -128,8 +128,8 @@
                     newMinDate = null;
                     newMaxDate = new Date();
                     if ('' !== dateStr) {
-                        new_date_min = new Date(dateStr);
-
+                        milliseconds = moment( dateStr, wp_travel_drag_drop_uploader.moment_date_format ).format( 'MM/DD/YYYY' );
+                        new_date_min = new Date(milliseconds);
                         newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                     }
                     $('#wp-travel-end-date').wpt_datepicker({
@@ -566,9 +566,10 @@
         var savedMeanDate = $(this).val();
         newMinDate = new Date();
         if (savedMeanDate) {
-            new_date_min = new Date(savedMeanDate);
+            milliseconds = moment( savedMeanDate, wp_travel_drag_drop_uploader.moment_date_format ).format( 'MM/DD/YYYY' );
+            new_date_min = new Date(milliseconds);
             newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
-
+            
             $(this).siblings('.wp-travel-multiple-end-date').wpt_datepicker({
                 minDate: newMinDate,
             });
@@ -604,8 +605,8 @@
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
-                    new_date_min = new Date(dateStr);
-
+                    milliseconds = moment( dateStr, wp_travel_drag_drop_uploader.moment_date_format ).format( 'MM/DD/YYYY' );
+                    new_date_min = new Date(milliseconds);
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }
                 $('#date-options-data .panel:last .wp-travel-multiple-end-date').wpt_datepicker({

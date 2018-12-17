@@ -123,7 +123,8 @@ class WP_Travel_Admin_Assets {
 			if ( isset( $settings['google_map_api_key'] ) ) {
 				$api_key = $settings['google_map_api_key'];
 			}
-			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion');
+			wp_register_script( 'wp-travel-moment', $this->assets_path . 'assets/js/moment.js', array('jquery'), WP_TRAVEL_VERSION, 1 );
+			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'wp-travel-moment' );
 
 			if ( '' != $api_key ) {
 				$depencency[] = 'jquery-gmaps';
@@ -151,6 +152,11 @@ class WP_Travel_Admin_Assets {
 				),
 				'drag_drop_nonce' => wp_create_nonce( 'wp-travel-drag-drop-nonce' ),
 			);
+			$date_format            = get_option('date_format');
+			$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+			$moment_date_format = wp_travel_moment_date_format( $date_format );
+			$wp_travel_gallery_data['js_date_format'] = $js_date_format;
+			$wp_travel_gallery_data['moment_date_format'] = $moment_date_format;
 
 			$wp_travel_gallery_data = apply_filters( 'wp_travel_localize_gallery_data', $wp_travel_gallery_data );
 			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_gallery_data );

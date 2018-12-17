@@ -242,7 +242,7 @@ class WP_Travel_Cart {
 	private function read() {
 		$cart = WP_Travel()->session->get( $this->cart_id );
 		$cart_items = $cart['cart_items'];
-		$this->discounts = $cart['discounts'];
+		$this->discounts = isset( $cart['discounts'] ) ? $cart['discounts'] : array();
 		
 		if ( ! empty( $cart_items ) ) {
 			foreach ( $cart_items as $id => $item ) {

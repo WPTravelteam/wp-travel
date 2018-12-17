@@ -725,7 +725,7 @@ class WP_Travel_Admin_Metaboxes {
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 			return;
 		}
-
+		// error_log( serialize( $_POST ) );
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
@@ -781,25 +781,28 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 
+		$date_format = get_option('date_format');
+		$wp_travel_start_date = '';
 		if ( isset( $_POST['wp_travel_start_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
 			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
-
-			$wp_travel_start_date = strtotime( $wp_travel_start_date );
-
-			$wp_travel_start_date = date( 'Y-m-d', $wp_travel_start_date );
-			
-			update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
+			if ( '' !== $wp_travel_start_date ) {
+				$date = DateTime::createFromFormat( $date_format, $wp_travel_start_date );
+				$wp_travel_start_date = $date->format( 'Y-m-d' );				
+			}			
 		}
+		update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
 
-		if ( isset( $_POST['wp_travel_end_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
+		$wp_travel_end_date = '';
+		if ( isset( $_POST['wp_travel_end_date'] ) && '' !== $_POST['wp_travel_end_date'] ) {
 			$wp_travel_end_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_end_date'] ) );
 
-			$wp_travel_end_date = strtotime( $wp_travel_end_date );
+			if ( '' !== $wp_travel_end_date ) {
+				$date = DateTime::createFromFormat( $date_format, $wp_travel_end_date );
+				$wp_travel_end_date = $date->format( 'Y-m-d' );				
+			}
 
-			$wp_travel_end_date = date( 'Y-m-d', $wp_travel_end_date );
-
-			update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
 		}
+		update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
 
 		// Itinerary Details Data.
 
@@ -956,10 +959,26 @@ class WP_Travel_Admin_Metaboxes {
 		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
 
 		//Update multiple trip dates options.
-		$wp_travel_multiple_trip_dates = '';
+		$wp_travel_multiple_trip_dates = array();
 		if ( isset( $_POST['wp_travel_multiple_trip_dates'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_multiple_trip_dates = ( wp_unslash( $_POST['wp_travel_multiple_trip_dates'] ) );
+
+			foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
+
+				if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
+					$date = DateTime::createFromFormat( $date_format, $date_value['start_date'] );
+					$start_date = $date->format( 'Y-m-d' );
+					$wp_travel_multiple_trip_dates[ $date_key ]['start_date'] = $start_date;
+				}
+
+				if ( isset( $date_value['end_date'] ) && '' !== $date_value['end_date'] ) {
+					$date = DateTime::createFromFormat( $date_format, $date_value['end_date'] );
+					$end_date = $date->format( 'Y-m-d' );
+					$wp_travel_multiple_trip_dates[ $date_key ]['end_date'] = $end_date;
+				}
+			}
+			$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
 		}
 
 		update_post_meta( $post_id, 'wp_travel_multiple_trip_dates', $wp_travel_multiple_trip_dates );

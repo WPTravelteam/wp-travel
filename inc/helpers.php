@@ -2042,3 +2042,36 @@ function wp_travel_date_format_php_to_js( $date_format ) {
 	}
 	return apply_filters( 'wp_travel_js_date_format', $js_date_format );
 }
+
+/**
+ * Convert Date Format String form PHP to JS for moment.
+ * 
+ * @param	$date_foramt	string	Date Fromat.
+ *
+ * @since	1.7.6
+ * @return	array
+ */
+function wp_travel_moment_date_format( $date_format ) {
+	if ( ! $date_format ) {
+		return;
+	}
+
+	switch ( $date_format ) {
+		case 'F j, Y' :
+			$js_date_format = 'MM DD, YYYY';
+		break;
+		case 'Y-m-d' :
+			$js_date_format = 'YYYY-MM-DD';
+		break;
+		case 'm/d/Y' :
+			$js_date_format = 'MM/DD/YYYY';
+		break;
+		case 'd/m/Y' :
+			$js_date_format = 'DD/MM/YYYY';
+		break;
+		default :
+			$js_date_format = 'MM DD, YYYY';
+		break;
+	}
+	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
+}
