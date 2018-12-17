@@ -1934,7 +1934,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 			$date_format = 'jS M, Y';
 		endif;
 		
-		$formated_date = esc_html( date_i18n( $date_format, strtotime( $date ) ) );
+		$formated_date = esc_html( date_i18n( $date_format, strtotime( stripslashes( $date ) ) ) );
 
 		return $formated_date;
 
