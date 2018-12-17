@@ -15,7 +15,6 @@ $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 // $start_date 	= ! empty( $start_date ) ? date_i18n( $date_format, strtotime( stripslashes( $start_date ) ) ) : '';
 // $end_date 	= ! empty( $end_date ) ? date_i18n( $date_format, strtotime( stripslashes( $end_date ) ) ) : '';
 
-
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
 
 $fixed_departure           = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
@@ -85,7 +84,7 @@ if ( 'yes' === $fixed_departure ) {
 	$trip_duration_option_class_array['hidden'] = '';
 	unset( $single_fixed_departure_class_array['hidden'] );
 
-	if ( 'yes' === $multiple_fixed_departures ) {
+	if ( 'yes' === $multiple_fixed_departures && 'multiple-price' === $pricing_option_type  ) {
 		$single_fixed_departure_class_array['hidden'] = '';
 	} else {
 		unset( $single_fixed_departure_class_array['hidden'] );

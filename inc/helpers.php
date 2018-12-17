@@ -1924,6 +1924,9 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 	 * Format Date.
 	 */
 	function wp_travel_format_date( $date ) {
+		if ( ! $date ) {
+			return;
+		}
 		$date = str_replace('/', '-', $date);
 		$date_format = get_option( 'date_format' );
 
