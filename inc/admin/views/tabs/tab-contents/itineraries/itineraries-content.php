@@ -96,7 +96,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 						</div>
 						<?php
 						// @since 1.7.6 [ used in utilities to add itinerary images]
-						do_action( 'wp_travel_itinerary_list_before_description', $cnt ); ?>
+						do_action( 'wp_travel_itinerary_list_before_description', $cnt, $itinerary ); ?>
 						<div class="wp-travel-itinerary" style="padding:10px">
 							<?php
 								// $itinerary_settings = array(
@@ -170,7 +170,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				</div>
 				<?php
 				// @since 1.7.6 [ used in utilities to add itinerary images]
-				do_action( 'wp_travel_itinerary_list_template_before_description', $cnt ); ?>
+				do_action( 'wp_travel_itinerary_list_template_before_description', $uid ); ?>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 					<div class="wp-travel-itinerary">
