@@ -5,6 +5,7 @@
 
 global $post;
 $date_format            = get_option('date_format');
+$js_date_format = wp_travel_date_format_php_to_js( $date_format );
 $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data' );
 
 $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
@@ -87,12 +88,15 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
 							<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
-							<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][date]" value="<?php echo esc_html( $itinerary_date ); ?>">
+							<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][date]" value="<?php echo esc_html( $itinerary_date ); ?>">
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
 							<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
 							<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][time]" value="<?php echo esc_html( $itinerary_time ); ?>">
 						</div>
+						<?php
+						// @since 1.7.6 [ used in utilities to add itinerary images]
+						do_action( 'wp_travel_itinerary_list_before_description', $cnt ); ?>
 						<div class="wp-travel-itinerary" style="padding:10px">
 							<?php
 								// $itinerary_settings = array(
@@ -164,6 +168,9 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 					<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>
 					<input class="wp-travel-timepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][time]" value="">
 				</div>
+				<?php
+				// @since 1.7.6 [ used in utilities to add itinerary images]
+				do_action( 'wp_travel_itinerary_list_template_before_description', $cnt ); ?>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 					<div class="wp-travel-itinerary">

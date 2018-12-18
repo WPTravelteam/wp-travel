@@ -1880,6 +1880,8 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 
 	global $post;
 	global $wp_travel_itinerary;
+	$date_format = get_option('date_format');
+	$js_date_format = wp_travel_date_format_php_to_js( $date_format );
 
 	if( ! $post )
 		return;
@@ -2074,7 +2076,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 								<div class="wp-travel-calender-column no-padding ">
 								<?php if ( $available_dates && 'yes' === $enable_multiple_fixed_departue ) : ?>
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 								<?php
 								else : ?>
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
@@ -2358,6 +2360,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 						</li>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
+			<?php else : ?>
+				<p><?php esc_html_e( 'Pricing options not found.', 'wp-travel' ); ?></p>
 			<?php endif; ?>
 			<?php endforeach; ?>
 		</ul>

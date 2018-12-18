@@ -174,7 +174,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.7.6 =
-Release Date: 14th December 2018
+Release Date: 18th December 2018
 
 * New Feature: Added Clone Trips.
 * New Feature: Added Open Graph Tags in trips and its settings in misc tab.
@@ -183,7 +183,7 @@ Release Date: 14th December 2018
 * Enhancement: Pricing fields grouped as per single and multiple pricing option.
 * Fixes: Booking option changed for non price trips.
 * Fixes: Partial payment amount & rate calculation.
-* 
+* Fixes: Date Format as per WP date format option.
 
 = 1.7.5 =
 Release Date: December 7th, 2018
