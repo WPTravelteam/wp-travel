@@ -55,10 +55,8 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				}
 				if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
 					$itinerary_date = stripslashes( $itinerary['date'] );
-					if ( '1.7.6' === WP_TRAVEL_VERSION  ) {
-						
-					}
-					// $itinerary_date = ! empty( $itinerary_date ) ? wp_travel_format_date( $itinerary_date ) : '';
+					// @since 1.7.6
+					$itinerary_date = ! empty( $itinerary_date ) ? wp_travel_format_date( $itinerary_date ) : '';
 				}
 				if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
 					$itinerary_time = stripslashes( $itinerary['time'] );
