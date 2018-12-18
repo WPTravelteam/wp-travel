@@ -71,10 +71,9 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
                     $update_query = "UPDATE {$wpdb->postmeta}  SET meta_value = '$dates' where post_id=$post_id and meta_key='$date_data->meta_key'";
                     $wpdb->get_results( $update_query );
                     
-                    update_option( 'wp_travel_date_migrate_176', 'yes' );
                 }
             }
         }
-        
     }
+    update_option( 'wp_travel_date_migrate_176', 'yes' );
 }
