@@ -2080,7 +2080,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 								<?php
 								else : ?>
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
 								<?php endif;
 								?>
 								</div>
