@@ -181,6 +181,7 @@ Release Date: 18th December 2018
 * New: Added Default google map alternative links in settings and Trip location tab.
 * New: Converted Static User Dashboard Menu with array and callbacks.
 * Enhancement: Pricing fields grouped as per single and multiple pricing option.
+* Enhancement: Template file added for itinerary lists.
 * Fixes: Booking option changed for non price trips.
 * Fixes: Partial payment amount & rate calculation.
 * Fixes: Date Format as per WP date format option.

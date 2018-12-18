@@ -762,86 +762,12 @@ function wp_travel_frontend_contents( $post_id ) {
 					<?php break;
 					case 'trip_outline' : ?>
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-						<?php echo wp_kses_post( $tab_info['content'] ); ?>
+						<?php
+							echo wp_kses_post( $tab_info['content'] );
 
-					<?php $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' ); ?>
-						<?php if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
-
-						<div class="itenary clearfix">
-							<div class="timeline-contents clearfix">
-								<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h2>
-									<?php $index = 1; ?>
-									<?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
-										<?php if ( $index % 2 === 0 ) : ?>
-											<?php
-												$first_class  = 'right';
-												$second_class = 'left';
-												$row_reverse = 'row-reverse';
-											?>
-										<?php else : ?>
-											<?php
-												$first_class  = 'left';
-												$second_class = 'right';
-												$row_reverse = '';
-											?>
-										<?php endif; ?>
-										<?php
-
-										$date_format = get_option('date_format');
-										$time_format = get_option('time_format');
-
-										$itinerary_label = '';
-										$itinerary_title = '';
-										$itinerary_desc  = '';
-										$itinerary_date  = '';
-										$itinerary_time  = '';
-										if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
-											$itinerary_label = stripslashes( $itinerary['label'] );
-										}
-										if ( isset( $itinerary['title'] ) && '' !== $itinerary['title'] ) {
-											$itinerary_title = stripslashes( $itinerary['title'] );
-										}
-										if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
-											$itinerary_desc = stripslashes( $itinerary['desc'] );
-										}
-										if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
-											$itinerary_date = stripslashes( $itinerary['date'] );
-											$itinerary_date = date( $date_format, strtotime( $itinerary_date ) );
-
-										}
-										if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
-											$itinerary_time = stripslashes( $itinerary['time'] );
-											$itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
-										}
-										?>
-										<div class="col clearfix <?php echo esc_attr( $row_reverse ) ?>">
-											<div class="tc-heading <?php echo esc_attr( $first_class ) ?> clearfix">
-												<?php if ( '' !== $itinerary_label ) : ?>
-												<h4><?php echo esc_html( $itinerary_label ); ?></h4>
-												<?php endif; ?>
-												<?php if ( $itinerary_date ) : ?>
-													<h3 class="arrival"><?php esc_html_e( 'Date', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_date ) ?></h3>
-												<?php endif; ?>
-												<?php if ( $itinerary_time ) : ?>
-													<h3><?php esc_html_e( 'Time', 'wp-travel' ) ?> : <?php echo esc_html( $itinerary_time ) ?></h3>
-												<?php endif; ?>
-											</div><!-- tc-content -->
-											<div class="tc-content <?php echo esc_attr( $second_class ) ?> clearfix" >
-												<?php if ( '' !== $itinerary_title ) : ?>
-												<h3><?php echo esc_html( $itinerary_title ); ?></h3>
-												<?php endif; ?>
-												<?php echo wp_kses_post( $itinerary_desc ); ?>
-												<div class="image"></div>
-											</div><!-- tc-content -->
-										</div><!-- first-content -->
-										<?php $index++ ?>
-									<?php endforeach; ?>
-
-							</div><!-- timeline-contents -->
-						</div><!-- itenary -->
-
-					<?php endif; ?>
-
+							$itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
+							load_template( $itinerary_list_template );
+						?>
 					</div>
 					<?php break;
 					 default : ?>
