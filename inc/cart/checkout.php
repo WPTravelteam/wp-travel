@@ -22,7 +22,7 @@ if ( function_exists( 'get_privacy_policy_url' ) ) {
 if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
 
 	// GDPR Compatibility for enquiry.
-	$billing_fields['wp_travel_checkout_gdpr'] = array(
+	$payment_fields['wp_travel_checkout_gdpr'] = array(
 		'type' => 'checkbox',
 		'label' => __('Privacy Policy', 'wp-travel'),
 		'options' => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
@@ -129,35 +129,37 @@ $form_field = new WP_Travel_FW_Field(); ?>
     <?php endforeach; ?>	
 	
 	<?php do_action( 'wp_travel_action_before_billing_info_field' ); ?>
-	<!-- Billing info -->
-	<div class="panel ws-theme-timeline-block">
-		<div class="panel-heading">
-		
-		<h4 class="panel-title"><?php esc_html_e( 'Billing Address', 'wp-travel' ); ?></h4>
-		</div>
-		<div id="number-accordion3" class="panel-collapse collapse in">
-		<div class="panel-body">
-			<div class="payment-content">
-				<?php foreach( $billing_fields as $field_group => $field ) : ?>
-					<?php
-					if ( 'hidden' === $field['type'] ) {
-						echo $form_field->init()->render_input( $field );
-						continue;
-					}
-					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>               
-					<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
-						<div class="form-group gap-20">
-							<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
-							<div class="col-sm-8 col-md-9">
-								<?php echo $form_field->init()->render_input( $field ); ?>
+	<?php if ( is_array( $billing_fields ) && count( $billing_fields ) > 0 ) : ?>
+		<!-- Billing info -->
+		<div class="panel ws-theme-timeline-block">
+			<div class="panel-heading">
+			
+			<h4 class="panel-title"><?php esc_html_e( 'Billing Address', 'wp-travel' ); ?></h4>
+			</div>
+			<div id="number-accordion3" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<div class="payment-content">
+					<?php foreach( $billing_fields as $field_group => $field ) : ?>
+						<?php
+						if ( 'hidden' === $field['type'] ) {
+							echo $form_field->init()->render_input( $field );
+							continue;
+						}
+						$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>               
+						<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
+							<div class="form-group gap-20">
+								<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
+								<div class="col-sm-8 col-md-9">
+									<?php echo $form_field->init()->render_input( $field ); ?>
+								</div>
 							</div>
 						</div>
-					</div>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
+			</div>
 			</div>
 		</div>
-		</div>
-	</div>
+	<?php endif; ?>
 	<?php do_action( 'wp_travel_action_before_payment_info_field' ); ?>
 	<!-- Payment info -->
 	<div class="panel ws-theme-timeline-block">
