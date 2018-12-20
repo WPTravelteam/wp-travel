@@ -157,7 +157,7 @@ class WP_Travel_Admin_Settings {
 		$selected_cart_page = isset( $args['settings']['cart_page_id'] ) ? $args['settings']['cart_page_id'] : wp_travel_get_page_id('wp-travel-cart');
 
 		$selected_checkout_page = isset( $args['settings']['checkout_page_id'] ) ? $args['settings']['checkout_page_id'] : wp_travel_get_page_id('wp-travel-checkout');
-
+		
 		$currency_args = array(
 			'id'		=> 'currency',
 			'class'		=> 'currency',
@@ -165,7 +165,27 @@ class WP_Travel_Admin_Settings {
 			'selected'	=> $currency,
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
 			'options'	=> $currency_list,
-		); ?>
+		);
+		
+		
+
+		$map_data = wp_travel_get_maps();
+		$wp_travel_maps = $map_data['maps'];
+		$selected_map = $map_data['selected'];
+
+
+		$map_dropdown_args = array(
+			'id'		=> 'wp-travel-map-select',
+			'class'		=> '',
+			'name'		=> 'wp_travel_map',
+			'option'	=> '',
+			'options'	=> $wp_travel_maps,
+			'selected'	=> $selected_map,
+			'before_label'	=> '',
+			'after_label'	=> '',
+		);
+		$map_key = 'google-map';
+		?>
 		<table class="form-table">
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ) ?></label></th>
@@ -173,20 +193,34 @@ class WP_Travel_Admin_Settings {
 					<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your currency', 'wp-travel' ) ?></p>
 				</td>
+			</tr>
 			<tr>
+				<th clospan="2">
+					<h3><?php esc_html_e( 'Maps', 'wp-travel' ) ?></h3>
+				</th>
+			</tr>
 			<tr>
+				<th><label for="wp-travel-map"><?php echo esc_html__( 'Select map', 'wp-travel' ) ?></label></th>
+				<td>
+					<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
+					<p class="description"><?php echo esc_html__( 'Choose your map', 'wp-travel' ) ?></p>
+				</td>
+			</tr>
+			<?php ?>
+			<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
+			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ) ?>">
 				<th><label for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ) ?></label></th>
 				<td>
 					<input type="text" value="<?php echo esc_attr( $google_map_api_key ) ?>" name="google_map_api_key" id="google_map_api_key"/>
 					<p class="description"><?php echo sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ) ?></p>
 				</td>
-			<tr>
-			<tr>
+			</tr>
+			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ) ?>">
 				<th><label for="google_map_zoom_level"><?php echo esc_html__( 'Map Zoom Level', 'wp-travel' ) ?></label></th>
 				<td>
 					<input step="1" min="1" type="number" value="<?php echo esc_attr( $google_map_zoom_level ) ?>" name="google_map_zoom_level" id="google_map_zoom_level"/>
 				</td>
-			<tr>
+			</tr>
 		</table>
 		<div class="wp-travel-upsell-message">
 			<div class="wp-travel-pro-feature-notice">
@@ -1146,6 +1180,7 @@ class WP_Travel_Admin_Settings {
 
 			$currency 				= ( isset( $_POST['currency'] ) && '' !== $_POST['currency'] ) ? $_POST['currency'] : '';
 			$google_map_api_key 	= ( isset( $_POST['google_map_api_key'] ) && '' !== $_POST['google_map_api_key'] ) ? $_POST['google_map_api_key'] : '';
+			$wp_travel_map 	= ( isset( $_POST['wp_travel_map'] ) && '' !== $_POST['wp_travel_map'] ) ? $_POST['wp_travel_map'] : '';
 
 			$google_map_zoom_level 	= ( isset( $_POST['google_map_zoom_level'] ) && '' !== $_POST['google_map_zoom_level'] ) ? $_POST['google_map_zoom_level'] : '';
 
@@ -1196,6 +1231,7 @@ class WP_Travel_Admin_Settings {
 			$settings['generate_user_password'] = $generate_user_password;
 
 			$settings['currency']                    = $currency;
+			$settings['wp_travel_map']               = $wp_travel_map;
 			$settings['google_map_api_key']          = $google_map_api_key;
 			$settings['google_map_zoom_level']       = $google_map_zoom_level;
 			$settings['hide_related_itinerary']      = $hide_related_itinerary;

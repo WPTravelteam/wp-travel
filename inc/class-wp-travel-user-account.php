@@ -29,27 +29,27 @@ class Wp_Travel_User_Account {
 	private static function dashboard_menus() {
 		$dashboard_menus = array(
 			'dashboard' => array(
-				'menu_title' => __( 'Dashboard' ),
+				'menu_title' => __( 'Dashboard', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-tachometer',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_dashboard_tab' ),
 			),
 			'bookings' => array(
-				'menu_title' => __( 'Bookings' ),
+				'menu_title' => __( 'Bookings', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-th-list',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
 			),
 			'address' => array(
-				'menu_title' => __( 'Address' ),
+				'menu_title' => __( 'Address', 'wp-travel' ),
 				'menu_icon' => 'wt-icon-regular wt-icon-address-book',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_address_tab' ),
 			),
 			'account' => array(
-				'menu_title' => __( 'Account' ),
+				'menu_title' => __( 'Account', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-user',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_account_tab' ),
 			),
 			'logout' => array(
-				'menu_title' => __( 'Logout' ),
+				'menu_title' => __( 'Logout', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-power-off',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_logout_tab' ),
 			),

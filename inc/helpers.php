@@ -82,6 +82,74 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
 }
 
 /**
+ * Return dropdown. [ need to depricate function with this function  ]
+ *
+ * @param  array $args Arguments for dropdown list.
+ * 
+ * @since	1.7.6
+ * @return HTML  return dropdown list.
+ */
+function wp_travel_get_dropdown_list( $args = array() ) {
+
+
+	$default = array(
+		'id'		=> '',
+		'class'		=> '',
+		'name'		=> '',
+		'option'	=> '',
+		'options'	=> '',
+		'selected'	=> '',
+		'before_label'	=> '',
+		'after_label'	=> '',
+		);
+
+	$args = array_merge( $default, $args );
+
+	$options = $args['options'];
+
+
+	$dropdown = '';
+	if ( is_array( $options )  && count( $options ) > 0 ) {
+		$dropdown .= '<select name="' . $args['name'] . '" id="' . $args['id'] . '" class="' . $args['class'] . '" >';
+		if ( '' != $args['option'] ) {
+			$dropdown .= '<option value="" >' . $args['option'] . '</option>';
+		}
+
+		foreach ( $options as $key => $label ) {
+
+			$dropdown .= '<option value="' . $key . '" ' . selected( $args['selected'], $key, false ) . '  >' . $label . '</option>';
+		}
+		$dropdown .= '</select>';
+
+	}
+
+	return $dropdown;
+}
+
+/**
+ * List all avalable and selceted maps data.
+ * 
+ * @since 1.7.6
+ * Return Array list
+ */
+function wp_travel_get_maps() {
+	
+	$map_key = 'google-map';
+	$settings = wp_travel_get_settings();
+
+	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ) );
+	$wp_travel_maps = apply_filters( 'wp_travel_maps', $wp_travel_maps );
+	
+	$selected_map = ( isset( $settings['wp_travel_map'] ) && in_array( $settings['wp_travel_map'], array_keys( $wp_travel_maps ) ) ) ? $settings['wp_travel_map'] : $map_key;
+	
+	$map = array(
+		'maps' 		=> $wp_travel_maps,
+		'selected'	=> $selected_map
+	);
+	return $map;
+}
+
+/**
  * Return Tree Form of post Object.
  *
  * @param Object $elements Post Object.
