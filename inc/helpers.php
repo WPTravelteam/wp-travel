@@ -137,7 +137,7 @@ function wp_travel_get_maps() {
 	$map_key = 'google-map';
 	$settings = wp_travel_get_settings();
 
-	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ) );
+	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ), 'map2' => 'Map 2' );
 	$wp_travel_maps = apply_filters( 'wp_travel_maps', $wp_travel_maps );
 	
 	$selected_map = ( isset( $settings['wp_travel_map'] ) && in_array( $settings['wp_travel_map'], array_keys( $wp_travel_maps ) ) ) ? $settings['wp_travel_map'] : $map_key;

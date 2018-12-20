@@ -69,8 +69,7 @@ class WP_Travel_Frontend_Assets {
 		wp_register_script( 'jquery-datepicker-lib-eng', $datepicker_i18n_file, array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 		
 		wp_register_script( 'wp-travel-view-mode', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-view-mode.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
-		wp_enqueue_script( 'jquery-datepicker-lib' );
-		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+
 		wp_enqueue_script( 'wp-travel-view-mode' );
 
 		wp_register_script( 'wp-travel-widget-scripts', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/wp-travel-widgets.js', array( 'jquery', 'jquery-ui-slider', 'wp-util' ), WP_TRAVEL_VERSION, 1 );
@@ -88,15 +87,7 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'wp-travel-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 		// Script only for single itineraries.
 		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
-			$map_data = get_wp_travel_map_data();
-
-			$map_zoom_level = isset( $settings['google_map_zoom_level'] ) && '' != $settings['google_map_zoom_level'] ? $settings['google_map_zoom_level'] : 15;
-
-			$api_key = '';
-			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
-				$api_key = $settings['google_map_api_key'];
-			}
-
+			
 			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 				// Parsley For Frontend Single Trips.
 				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
@@ -104,32 +95,24 @@ class WP_Travel_Frontend_Assets {
 
 			wp_enqueue_script( 'wp-travel-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			wp_register_script( 'wp-travel-script', $this->assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, true );
-			if ( '' != $api_key ) {
-				
-				$wp_travel_google_map_api = apply_filters( 'wp_travel_load_google_maps_api', true );
-				
-				if ( $wp_travel_google_map_api )
-					wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
+			
+			$api_key = '';
+			
+			$get_maps = wp_travel_get_maps();
+			$current_map = $get_maps['selected'];
+			
+			$show_google_map = ( 'google-map' === $current_map ) ? true : false;
+			$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
 
+			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
+				$api_key = $settings['google_map_api_key'];
+			}
+			if ( '' != $api_key && $show_google_map ) {
+				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
+				
 				$gmap_dependency = array( 'jquery', 'google-map-api' );
-				
-				if ( ! $wp_travel_google_map_api )
-					$gmap_dependency = array( 'jquery' );
-				
 				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps.min.js', $gmap_dependency, WP_TRAVEL_VERSION, 1 );
-
 				wp_register_script( 'wp-travel-maps', $this->assets_path . 'assets/js/wp-travel-front-end-map.js', array( 'jquery', 'jquery-gmaps' ), WP_TRAVEL_VERSION, 1 );
-
-				$wp_travel = array(
-					'lat'  => $map_data['lat'],
-					'lng'  => $map_data['lng'],
-					'loc'  => $map_data['loc'],
-					'zoom' => $map_zoom_level,
-				);
-
-				$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel );
-				wp_localize_script( 'wp-travel-maps', 'wp_travel', $wp_travel );
-				// Enqueued script with localized data.
 				wp_enqueue_script( 'wp-travel-maps' );
 			}
 			// Add vars.
@@ -195,7 +178,23 @@ class WP_Travel_Frontend_Assets {
 			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 
+			// Localized vars into datepicker. because datepicker is in all pages.
+			$map_data = get_wp_travel_map_data();
+			$map_zoom_level = isset( $settings['google_map_zoom_level'] ) && '' != $settings['google_map_zoom_level'] ? $settings['google_map_zoom_level'] : 15;
+			
+			$wp_travel = array(
+				'lat'  => $map_data['lat'],
+				'lng'  => $map_data['lng'],
+				'loc'  => $map_data['loc'],
+				'zoom' => $map_zoom_level,
+			);
+
+			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel );
+			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 		}
+
+		wp_enqueue_script( 'jquery-datepicker-lib' );
+		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
 	}
 }
 
