@@ -200,7 +200,7 @@ class WP_Travel_Admin_Settings {
 				</th>
 			</tr>
 			<tr>
-				<th><label for="wp-travel-map"><?php echo esc_html__( 'Select map', 'wp-travel' ) ?></label></th>
+				<th><label for="wp-travel-map"><?php echo esc_html__( 'Select Map', 'wp-travel' ) ?></label></th>
 				<td>
 					<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your map', 'wp-travel' ) ?></p>
