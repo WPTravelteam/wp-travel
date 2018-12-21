@@ -157,7 +157,7 @@ class WP_Travel_Admin_Settings {
 		$selected_cart_page = isset( $args['settings']['cart_page_id'] ) ? $args['settings']['cart_page_id'] : wp_travel_get_page_id('wp-travel-cart');
 
 		$selected_checkout_page = isset( $args['settings']['checkout_page_id'] ) ? $args['settings']['checkout_page_id'] : wp_travel_get_page_id('wp-travel-checkout');
-		
+
 		$currency_args = array(
 			'id'		=> 'currency',
 			'class'		=> 'currency',
@@ -166,8 +166,8 @@ class WP_Travel_Admin_Settings {
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
 			'options'	=> $currency_list,
 		);
-		
-		
+
+
 
 		$map_data = wp_travel_get_maps();
 		$wp_travel_maps = $map_data['maps'];
@@ -206,7 +206,6 @@ class WP_Travel_Admin_Settings {
 					<p class="description"><?php echo esc_html__( 'Choose your map', 'wp-travel' ) ?></p>
 				</td>
 			</tr>
-			<?php ?>
 			<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
 			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ) ?>">
 				<th><label for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ) ?></label></th>
@@ -228,7 +227,7 @@ class WP_Travel_Admin_Settings {
 				<p><?php printf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.  %1$sView WP Travel Map addons%2$s', 'wp-travel' ), '<br><a target="_blank" href="https://wptravel.io/downloads/category/map/">', '</a>' ); ?></p>
 			</div>
 		</div>
-		
+
 		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Checkout Process', 'wp-travel' ) ?></h3>
 
 		<table class="form-table">
@@ -255,7 +254,7 @@ class WP_Travel_Admin_Settings {
 			<tr>
 				<th><label for="checkout-page-id"><?php echo esc_html__( 'Checkout Page', 'wp-travel' ) ?></label></th>
 				<td>
-					<?php 
+					<?php
 					wp_dropdown_pages(array(
 						'depth'                 => 0,
 						'child_of'              => 0,

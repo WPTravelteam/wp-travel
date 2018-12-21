@@ -85,7 +85,7 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
  * Return dropdown. [ need to depricate function with this function  ]
  *
  * @param  array $args Arguments for dropdown list.
- * 
+ *
  * @since	1.7.6
  * @return HTML  return dropdown list.
  */
@@ -128,20 +128,20 @@ function wp_travel_get_dropdown_list( $args = array() ) {
 
 /**
  * List all avalable and selceted maps data.
- * 
+ *
  * @since 1.7.6
  * Return Array list
  */
 function wp_travel_get_maps() {
-	
+
 	$map_key = 'google-map';
 	$settings = wp_travel_get_settings();
 
-	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ), 'map2' => 'Map 2' );
+	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ) );
 	$wp_travel_maps = apply_filters( 'wp_travel_maps', $wp_travel_maps );
-	
+
 	$selected_map = ( isset( $settings['wp_travel_map'] ) && in_array( $settings['wp_travel_map'], array_keys( $wp_travel_maps ) ) ) ? $settings['wp_travel_map'] : $map_key;
-	
+
 	$map = array(
 		'maps' 		=> $wp_travel_maps,
 		'selected'	=> $selected_map
@@ -427,7 +427,7 @@ function wp_travel_get_tour_extras_array() {
 
 /**
  * Return JSON Encoded Itinerary price oblect
- * 
+ *
  */
 function wp_reavel_get_itinereries_prices_array(){
 
@@ -437,10 +437,10 @@ function wp_reavel_get_itinereries_prices_array(){
 
 	if ( $itineraries ) {
 
-		foreach ( $itineraries as $key => $itinerary ) { 
+		foreach ( $itineraries as $key => $itinerary ) {
 
 			$prices[] = wp_travel_get_actual_trip_price( $key );
-		
+
 		}
 		if ( is_array( $prices ) && '' !== $prices ) :
 		 return $prices;
@@ -480,7 +480,7 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 function wp_travel_search_form() {
 	ob_start(); ?>
 	<div class="wp-travel-search">
-		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) );  ?>" > 
+		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) );  ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ) ?>" />
 			<p>
 				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
@@ -525,10 +525,10 @@ function wp_travel_search_form() {
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
-			
+
 			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php esc_html_e( 'Search', 'wp-travel' ) ?>"  /></p>
 		</form>
-	</div>	
+	</div>
 	<?php
 	$content = apply_filters( 'wp_travel_search_form', ob_get_clean() );
 	echo $content;
@@ -554,7 +554,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 			$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
 			$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
 		?>
-			
+
 		<div class="wp-travel-trip-time trip-fixed-departure">
 			<i class="wt-icon-regular wt-icon-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
@@ -563,18 +563,18 @@ function wp_travel_get_trip_duration( $post_id ) {
 					<?php if ( ! $date_format ) : ?>
 						<?php $date_format = 'jS M, Y'; ?>
 					<?php endif; ?>
-					<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?> 
+					<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 				<?php endif; ?>
 			</span>
 		</div>
-		
+
 	<?php else : ?>
 		<?php
 		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
-		
+
 		<div class="wp-travel-trip-time trip-duration">
 			<i class="wt-icon-regular wt-icon-clock"></i>
 			<span class="wp-travel-trip-duration">
@@ -727,12 +727,12 @@ function wp_travel_get_booking_data() {
 		if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
 			$query = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
 			from (
-				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
-				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P
+				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id
 				join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 				join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
 				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
-			) Booking 
+			) Booking
 			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
 			$results =  $wpdb->get_results( $query );
 			// set initial load transient for stat data.
@@ -741,22 +741,22 @@ function wp_travel_get_booking_data() {
 			}
 		}
 
-		
+
 		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
 		}
 		$temp_stat_data['data_bg_color'] = __( '#00f', 'wp-travel' );
 		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
-	} else { 
-		// Payment Data Default Query.		
-		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
-		join ( 
-			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost 
-			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID    
+	} else {
+		// Payment Data Default Query.
+		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+		join (
+			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
 			WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
 		) PMT on BOOKING.ID = PMT.post_id
-		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id 
+		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
 		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
 		join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
 		join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
@@ -765,7 +765,7 @@ function wp_travel_get_booking_data() {
 		group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
 
 		$results =  $wpdb->get_results( $query );
-		
+
 		$temp_stat_data['data_label'] = __( 'Payment', 'wp-travel' );
 		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
@@ -773,7 +773,7 @@ function wp_travel_get_booking_data() {
 		$temp_stat_data['data_bg_color'] = __( '#1DFE0E', 'wp-travel' );
 		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'wp-travel' );
 	}
-	
+
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		foreach ( $results as $result ) {
 			$label_date = $result->wt_year . '-' . $result->wt_month . '-' . $result->wt_day;
@@ -803,17 +803,17 @@ function wp_travel_get_booking_data() {
 	if ( '' !== $to_date ) {
 		$booking_stat_to = date( 'm/d/Y', strtotime( $to_date ) );
 	}
-	
+
 	// Query for top country.
 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_top_country' );
 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
 		$top_country_query = "SELECT count(ID) as wt_total, country
 		from (
-			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
-		) Booking 
+		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by country order by wt_total desc";
 
 		$top_countries = array();
@@ -835,11 +835,11 @@ function wp_travel_get_booking_data() {
 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
 		$top_itinerary_query = "SELECT count(ID) as wt_total, itinerary_id
 		from (
-			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
-		) Booking 
+		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by itinerary_id order by wt_total desc";
 
 		$results =  $wpdb->get_results( $top_itinerary_query );
@@ -930,27 +930,27 @@ function wp_travel_get_booking_data() {
 			// Compare Data Default Query.
 			$query = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
 			from (
-				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P 
-				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id 
+				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P
+				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id
 				join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 				join ( Select distinct( post_id ), meta_value as no_of_pax from  {$wpdb->postmeta} WHERE meta_key = 'wp_travel_pax' ) PAX on P.ID = PAX.post_id
 				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
-			) Booking 
+			) Booking
 			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
 			$results =  $wpdb->get_results( $query );
-	
+
 			$temp_compare_data['data_label'] = __( 'Booking 2', 'wp-travel' );
 			$temp_compare_data['data_bg_color'] = __( '#3c0', 'wp-travel' );
 			$temp_compare_data['data_border_color'] = __( '#3c0', 'wp-travel' );
 		} else {
-			// Payment Data Default Query.		
-			$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
-			join ( 
-				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost 
-				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID    
+			// Payment Data Default Query.
+			$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+			join (
+				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
 				WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
 			) PMT on BOOKING.ID = PMT.post_id
-			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
 			join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
 			join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
@@ -986,15 +986,15 @@ function wp_travel_get_booking_data() {
 		// Query for top country.
 		$top_country_query = "SELECT count(ID) as wt_total, country
 		from (
-			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
-		) Booking 
+		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by country order by wt_total desc";
 
 		$top_countries = array();
-		$results =  $wpdb->get_results( $top_country_query );		
+		$results =  $wpdb->get_results( $top_country_query );
 
 		if ( is_array( $results ) && count( $results ) > 0 ) {
 			foreach ( $results as $result ) {
@@ -1005,11 +1005,11 @@ function wp_travel_get_booking_data() {
 		// Query for top Itinerary.
 		$top_itinerary_query = "SELECT count(ID) as wt_total, itinerary_id
 		from (
-			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P 
+			Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id from  {$wpdb->posts} P
 			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' and meta_value != '' ) C on P.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on P.ID = I.post_id
 			group by P.ID, C.country, I.itinerary_id
-		) Booking 
+		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by itinerary_id order by wt_total desc";
 
 		$results =  $wpdb->get_results( $top_itinerary_query );
@@ -1069,13 +1069,13 @@ function wp_travel_get_booking_data() {
 
 		// Query for total 2 in compare stat.
 		// if ( class_exists( 'WP_travel_paypal' ) ) :
-			$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING 
-			join ( 
-				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost 
-				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID    
+			$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+			join (
+				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
 				WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
 			) PMT on BOOKING.ID = PMT.post_id
-			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id 
+			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
 			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
 			join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
 			join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
@@ -1086,7 +1086,7 @@ function wp_travel_get_booking_data() {
 
 			$total_sales_compare = 0;
 			if ( $results ) {
-				foreach ( $results as $result ) {				
+				foreach ( $results as $result ) {
 					$total_sales_compare += $result->payment_amount;
 				}
 			}
@@ -1215,7 +1215,7 @@ function wp_travel_get_permalink_structure() {
 
 /**
  * Return Tabs and its content for single page.
- * 
+ *
  * @since 1.1.2
  *
  * @return void
@@ -1233,7 +1233,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 	$custom_itinerary_tabs = get_post_meta( $post->ID, 'wp_travel_itinerary_custom_tab_cnt_', true );
 
-	$custom_itinerary_tabs = is_array( $custom_itinerary_tabs ) && count( $custom_itinerary_tabs ) != 0 ? $custom_itinerary_tabs : array(); 
+	$custom_itinerary_tabs = is_array( $custom_itinerary_tabs ) && count( $custom_itinerary_tabs ) != 0 ? $custom_itinerary_tabs : array();
 
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
@@ -1246,25 +1246,25 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
 
 	}
-	
+
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
 
-		
+
 		$wp_travel_tabs = $settings['global_tab_settings'];
-		
+
 		if ( $custom_tabs_enable && isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
-			
+
 			$wp_travel_tabs = $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'];
-			
+
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
-			
+
 			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 
 			if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
@@ -1272,14 +1272,14 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 				if ( isset( $tab['global'] ) && 'yes' === $tab['global'] ) {
 
 					$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
-				
+
 				}
 				else {
 
 					$tab_content = isset( $custom_itinerary_tabs[$key]['content'] ) ? $custom_itinerary_tabs[$key]['content'] : '';
 
 				}
-				
+
 
 			}
 
@@ -1361,7 +1361,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
  * Return FAQs
  *
  * @param Integer $post_id
- * 
+ *
  * @since 1.1.2
  * @return array.
  */
@@ -1437,7 +1437,7 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 					$new_data[] = array_values($new_array);
 				}
 
-			}			
+			}
 		}
 		$new_return_data['stat_label'] = $default_array_key;
 		$new_return_data['data'] = $new_data;
@@ -1488,7 +1488,7 @@ function wp_travel_process_trip_price_tax( $post_id ){
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
 		$trip_price = wp_travel_get_actual_trip_price( $post_id );
 		$tax_percentage = @$settings['trip_tax_percentage'];
-		
+
 		if ( 0 == $trip_price || '' == $tax_percentage ) {
 
 			return array( 'trip_price' => $trip_price );
@@ -1544,7 +1544,7 @@ function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
 		$trip_price = $price;
 		$tax_percentage = @$settings['trip_tax_percentage'];
-		
+
 		if ( 0 == $trip_price || '' == $tax_percentage ) {
 
 			return array( 'trip_price' => $trip_price );
@@ -1624,9 +1624,9 @@ function wp_travel_get_cart_url() {
 
 /**
  * Gets the URL of checkout page.
- * 
+ *
  * @since 1.5.7
- * 
+ *
  * @return string Url to checkout page
  */
 function wp_travel_get_checkout_url() {
@@ -1639,7 +1639,7 @@ function wp_travel_get_checkout_url() {
  * @return Boolean
  */
 function wp_travel_is_checkout_page() {
-	
+
 	if ( is_admin() ) {
 		return false;
 	}
@@ -1705,21 +1705,21 @@ function wp_travel_get_pricing_variation_options(){
 		'group'         => __( 'Group', 'wp-travel' ),
 		'custom'        => __( 'Custom', 'wp-travel' ),
 	);
-	
+
 	return apply_filters( 'wp_travel_variation_pricing_options', $variation_options );
 }
 
 /**
  * Get single pricing variation by key.
- * 
+ *
  * @return array $pricing Pricing variations data.
  */
 function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
 
 	if ( '' === $post_id || '' === $pricing_key ) {
-		
+
 		return false;
-	
+
 	}
 
 	//Get Pricing variations.
@@ -1746,9 +1746,9 @@ function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
 function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 
 	if ( '' === $post_id || '' === $pricing_key ) {
-		
+
 		return false;
-	
+
 	}
 
 	//Get Dates.
@@ -1766,7 +1766,7 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 	}
 
 	return false;
-	
+
 }
 
 /**
@@ -1777,9 +1777,9 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ){
 
 	if ( '' === $post_id || '' === $pricing_key ) {
-		
+
 		return false;
-	
+
 	}
 
 	//Get Pricing variations.
@@ -1800,7 +1800,7 @@ function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ){
 	}
 
 	return 'trip-default';
-	
+
 }
 
 /**
@@ -1845,9 +1845,9 @@ if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
 function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
 
 	if ( '' === $post_id || '' === $pricing_key ) {
-		
+
 		return false;
-	
+
 	}
 
 	//Get Dates.
@@ -1868,7 +1868,7 @@ function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
 	}
 
 	return false;
-	
+
 }
 
 /**
@@ -1970,12 +1970,12 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 		}
 
 	}
-}	
+}
 
 add_action( 'wp_travel_created_customer', 'wp_travel_user_new_account_created', 20, 3 );
 
 /**
- * Filters the from name in e-mails 
+ * Filters the from name in e-mails
  */
 function wp_travel_emails_from_name_filter( $from_name ) {
 
@@ -2001,7 +2001,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		if ( ! $date_format ) :
 			$date_format = 'jS M, Y';
 		endif;
-		
+
 		$formated_date = esc_html( date_i18n( $date_format, strtotime( stripslashes( $date ) ) ) );
 
 		return $formated_date;
@@ -2024,16 +2024,16 @@ function wp_travel_get_total_booked_pax( $trip_id, $including_cart=true ) {
 
 	if ( empty( $trip_pricing_options_data ) || ! is_array( $trip_pricing_options_data ) )
 		return;
-	
+
 	$total_booked_pax = 0;
 	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 		$inventory  = new WP_Travel_Util_Inventory();
 		foreach ( $trip_pricing_options_data as $pricing ) :
 			$price_key            = isset( $pricing['price_key'] ) ? $pricing['price_key']      : '';
-			
+
 			$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
 			$booked_pax = ( $booked_pax ) ? $booked_pax : 0;
-			$total_booked_pax += $booked_pax; 
+			$total_booked_pax += $booked_pax;
 		endforeach;
 	}
 	if ( $including_cart ) {
@@ -2080,7 +2080,7 @@ function wp_travel_print_notices() {
 
 /**
  * Convert Date Format String form PHP to JS.
- * 
+ *
  * @param	$date_foramt	string	Date Fromat.
  *
  * @since	1.6.7
@@ -2113,7 +2113,7 @@ function wp_travel_date_format_php_to_js( $date_format ) {
 
 /**
  * Convert Date Format String form PHP to JS for moment.
- * 
+ *
  * @param	$date_foramt	string	Date Fromat.
  *
  * @since	1.7.6
