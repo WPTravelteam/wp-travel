@@ -227,8 +227,8 @@ class WP_Travel_Admin_Settings {
 				<p><?php printf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.  %1$sView WP Travel Map addons%2$s', 'wp-travel' ), '<br><a target="_blank" href="https://wptravel.io/downloads/category/map/">', '</a>' ); ?></p>
 			</div>
 		</div>
-
-		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Checkout Process', 'wp-travel' ) ?></h3>
+		<br>
+		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Pages', 'wp-travel' ) ?></h3>
 
 		<table class="form-table">
 			<tr>
