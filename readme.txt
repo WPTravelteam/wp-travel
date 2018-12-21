@@ -92,6 +92,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 * Complete documentation
 * Customizable
 * Compatible Themes
+* Clone Trips
+* Multiple Travellers info
 [And more ...](https://wptravel.io/features/)
 
 
