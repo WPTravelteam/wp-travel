@@ -47,9 +47,11 @@ if ( post_password_required() ) {
 				<div class="description-left">
 					<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ) ?>
 					<header class="entry-header">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
-						</a>
+						<h2 class="entry-title">
+							<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
+								<?php the_title(); ?>
+							</a>
+						</h2>
 					</header><!-- .entry-header -->
 					<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ) ?>
 					<div class="entry-content">
