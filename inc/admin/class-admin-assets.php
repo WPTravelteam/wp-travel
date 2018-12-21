@@ -111,22 +111,33 @@ class WP_Travel_Admin_Assets {
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_enqueue_script( 'jquery-chart-custom' );
 		}
-		$allowed_screen = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
 
+		$allowed_screen = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
 		if ( in_array( $screen->id, $allowed_screen ) ) {
 			$settings = wp_travel_get_settings();
 			global $post;
+			wp_register_script( 'wp-travel-moment', $this->assets_path . 'assets/js/moment.js', array('jquery'), WP_TRAVEL_VERSION, 1 );
 
 			$map_data = get_wp_travel_map_data();
 
-			$api_key = '';
-			if ( isset( $settings['google_map_api_key'] ) ) {
-				$api_key = $settings['google_map_api_key'];
-			}
-			wp_register_script( 'wp-travel-moment', $this->assets_path . 'assets/js/moment.js', array('jquery'), WP_TRAVEL_VERSION, 1 );
+			
 			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'wp-travel-moment' );
 
-			if ( '' != $api_key ) {
+			$api_key = '';
+
+			$get_maps = wp_travel_get_maps();
+			$current_map = $get_maps['selected'];
+
+			$show_google_map = ( 'google-map' === $current_map ) ? true : false;
+			$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
+
+			if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
+				$api_key = $settings['google_map_api_key'];
+			}
+			if ( '' != $api_key && $show_google_map ) {
+				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
+
+				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps' . $suffix . '.js', array( 'jquery', 'google-map-api' ), WP_TRAVEL_VERSION, 1 );
 				$depencency[] = 'jquery-gmaps';
 			}
 			wp_enqueue_script( 'wp-travel-script-2', $this->assets_path . 'assets/js/jquery.wptraveluploader' . $suffix . '.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
@@ -136,10 +147,7 @@ class WP_Travel_Admin_Assets {
 			// wp_enqueue_script( 'multiple-select-js', $this->assets_path . 'assets/js/lib/multiple-select/multiple-select' . $suffix . '.js', array( 'jquery' ), '', 1 );
 
 			wp_register_script( 'wp-travel-script', $this->assets_path . 'assets/js/wp-travel-back-end' . $suffix . '.js', $depencency, WP_TRAVEL_VERSION, 1 );
-			if ( '' != $api_key ) {
-				wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
-				wp_register_script( 'jquery-gmaps', $this->assets_path . 'assets/js/lib/gmaps/gmaps' . $suffix . '.js', array( 'jquery', 'google-map-api' ), WP_TRAVEL_VERSION, 1 );
-			}
+			
 			wp_register_script( 'wp-travel-media-upload', $this->assets_path . 'assets/js/wp-travel-media-upload' . $suffix . '.js', array( 'jquery', 'plupload-handlers', 'jquery-ui-sortable', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION, 1 );
 
 			$wp_travel_gallery_data = array(

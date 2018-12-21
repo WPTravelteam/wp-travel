@@ -176,7 +176,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.7.6 =
-Release Date: 20th December 2018
+Release Date: 21st December 2018
 
 * New Feature: Added Clone Trips.
 * New Feature: Added Open Graph Tags in trips and its settings in misc tab.
