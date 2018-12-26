@@ -30,6 +30,29 @@ $bookings = $args['bookings'];
                   }
 
                   $ordered_data = get_post_meta( $b_id, 'order_data', true );
+                  
+                  $fname = isset( $ordered_data['wp_travel_fname_traveller'] ) ? $ordered_data['wp_travel_fname_traveller'] : '';
+                  
+                  if ( '' !== $fname && is_array( $fname ) ) {
+                    reset( $fname );
+                    $first_key = key( $fname );
+                   
+                    $fname = isset( $fname[ $first_key ][0] ) ? $fname[ $first_key ][0] : '';
+                  } else {
+                    $fname = isset( $ordered_data['wp_travel_fname'] ) ? $ordered_data['wp_travel_fname'] : '';
+                  }
+                  
+                  $lname = isset( $ordered_data['wp_travel_lname_traveller'] ) ? $ordered_data['wp_travel_lname_traveller'] : '';
+                  
+                  if ( '' !== $lname && is_array( $lname ) ) {
+                    reset( $lname );
+                    $first_key = key( $lname );
+                   
+                    $lname = isset( $lname[ $first_key ][0] ) ? $lname[ $first_key ][0] : '';
+                  } else {
+                    $lname = isset( $ordered_data['wp_travel_lname'] ) ? $ordered_data['wp_travel_lname'] : '';
+                  }
+
                   $booking_status = get_post_meta( $b_id, 'wp_travel_booking_status', true );
                   $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
@@ -56,7 +79,7 @@ $bookings = $args['bookings'];
 
                     <td class="c-name" data-title="Contact Name">
                       <div class="contact-title">
-                          <?php echo esc_html( $ordered_data['wp_travel_fname'] . ' ' . $ordered_data['wp_travel_lname'] ); ?>
+                          <?php echo esc_html( $fname . ' ' . $lname ); ?>
                       </div>
                     </td>
 
