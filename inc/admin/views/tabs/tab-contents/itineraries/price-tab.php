@@ -526,11 +526,11 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 	</tr>
 	<tr class="wp-travel-fixed-departure-row <?php echo esc_attr( $single_fixed_departure_option_class ); ?>" >
 		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
-		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
+		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
 	</tr>
 	<tr class="wp-travel-fixed-departure-row <?php echo esc_attr( $single_fixed_departure_option_class ); ?>">
 		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
-		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
+		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
 	</tr>
 
 	<tr id="wp-variations-multiple-dates" class="<?php echo esc_attr( $multiple_date_option_class ); ?>">
