@@ -805,6 +805,7 @@ function wp_travel_trip_map( $post_id ) {
 	$show_google_map = ( 'google-map' === $current_map ) ? true : false;
 	$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
 
+	$api_key = '';
 	if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 		$api_key = $settings['google_map_api_key'];
 	}
@@ -812,7 +813,7 @@ function wp_travel_trip_map( $post_id ) {
 		<div class="wp-travel-map">
 			<div id="wp-travel-map" style="width:100%;height:300px"></div>
 		</div>
-	<?php } 
+	<?php }
 }
 
 /**
