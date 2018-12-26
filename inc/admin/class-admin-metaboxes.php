@@ -787,7 +787,8 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
 			if ( '' !== $wp_travel_start_date ) {
 				$date = DateTime::createFromFormat( $date_format, $wp_travel_start_date );
-				$wp_travel_start_date = $date->format( 'Y-m-d' );				
+				if ( $date )
+					$wp_travel_start_date = $date->format( 'Y-m-d' );				
 			}			
 		}
 		update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
@@ -798,7 +799,8 @@ class WP_Travel_Admin_Metaboxes {
 
 			if ( '' !== $wp_travel_end_date ) {
 				$date = DateTime::createFromFormat( $date_format, $wp_travel_end_date );
-				$wp_travel_end_date = $date->format( 'Y-m-d' );				
+				if ( $date )
+					$wp_travel_end_date = $date->format( 'Y-m-d' );				
 			}
 
 		}
@@ -968,13 +970,15 @@ class WP_Travel_Admin_Metaboxes {
 
 				if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
 					$date = DateTime::createFromFormat( $date_format, $date_value['start_date'] );
-					$start_date = $date->format( 'Y-m-d' );
+					if ( $date )
+						$start_date = $date->format( 'Y-m-d' );
 					$wp_travel_multiple_trip_dates[ $date_key ]['start_date'] = $start_date;
 				}
 
 				if ( isset( $date_value['end_date'] ) && '' !== $date_value['end_date'] ) {
 					$date = DateTime::createFromFormat( $date_format, $date_value['end_date'] );
-					$end_date = $date->format( 'Y-m-d' );
+					if ( $date )
+						$end_date = $date->format( 'Y-m-d' );
 					$wp_travel_multiple_trip_dates[ $date_key ]['end_date'] = $end_date;
 				}
 			}

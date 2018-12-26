@@ -35,7 +35,8 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 
                                     $date1 = DateTime::createFromFormat( $datepicker_default_format, $start_date );
                                     // Converting Date format to WP Date format.
-                                    $start_date = $date1->format( $date_format );
+                                    if ( $date1 )
+                                        $start_date = $date1->format( $date_format );
 
                                     $dates[ $key ]['start_date'] = $start_date;
                                 }
@@ -44,7 +45,8 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 
                                     $date1 = DateTime::createFromFormat( $datepicker_default_format, $end_date );
                                     // Converting Date format to WP Date format.
-                                    $end_date = $date1->format( $date_format );
+                                    if ( $date1 )
+                                        $end_date = $date1->format( $date_format );
 
                                     $dates[ $key ]['end_date'] = $end_date;
                                 }
@@ -59,7 +61,8 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 
                                     $date1 = DateTime::createFromFormat( $datepicker_default_format, $start_date );
                                     // Converting Date format to WP Date format.
-                                    $start_date = $date1->format( $date_format );
+                                    if ( $date1 )
+                                        $start_date = $date1->format( $date_format );
 
                                     $dates[ $key ]['date'] = $start_date;
                                 }

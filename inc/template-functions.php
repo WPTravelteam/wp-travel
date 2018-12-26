@@ -1418,7 +1418,8 @@ function wp_travel_posts_filter( $query ) {
 					//Convert to timestamp.
 					if ( $trip_start ) {
 						$date = DateTime::createFromFormat( $date_format, $trip_start );
-						$trip_start = $date->format( 'Y-m-d' );
+						if ( $date )
+							$trip_start = $date->format( 'Y-m-d' );
 					} else {
 						$trip_start = date( 'Y-m-d' );
 					}
@@ -1426,7 +1427,8 @@ function wp_travel_posts_filter( $query ) {
 					//Make date in required format.
 					if ( $trip_end ) {
 						$date2 = DateTime::createFromFormat( $date_format, $trip_end );
-						$trip_end = $date2->format( 'Y-m-d' );
+						if ( $date2 )
+							$trip_end = $date2->format( 'Y-m-d' );
 					} else {
 						$trip_end = date( 'Y-m-d' );
 					}
