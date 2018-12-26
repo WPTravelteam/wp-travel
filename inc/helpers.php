@@ -1996,6 +1996,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 			return;
 		}
 		$date = str_replace('/', '-', $date);
+		$date = str_replace('.', '-', $date);
 		$date_format = get_option( 'date_format' );
 
 		if ( ! $date_format ) :
@@ -2126,7 +2127,7 @@ function wp_travel_moment_date_format( $date_format ) {
 
 	switch ( $date_format ) {
 		case 'F j, Y' :
-			$js_date_format = 'MM DD, YYYY';
+			$js_date_format = 'MMMM D, YYYY';
 		break;
 		case 'Y-m-d' :
 			$js_date_format = 'YYYY-MM-DD';
