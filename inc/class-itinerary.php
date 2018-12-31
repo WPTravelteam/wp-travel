@@ -48,12 +48,14 @@ class WP_Travel_Itinerary {
 	/**
 	 * Get trip location.
 	 */
-	function get_location() {		
+	function get_location() {
 		if (
 			isset( $this->post_meta['wp_travel_lat'][0] )
 			&& isset( $this->post_meta['wp_travel_lng'][0] )
+			&& isset( $this->post_meta['wp_travel_location'][0] )
 			&& '' !== $this->post_meta['wp_travel_lat'][0]
 			&& '' !== $this->post_meta['wp_travel_lng'][0]
+			&& '' !== $this->post_meta['wp_travel_location'][0]
 		) {
 			return array(
 				'lat' => $this->post_meta['wp_travel_lat'][0],

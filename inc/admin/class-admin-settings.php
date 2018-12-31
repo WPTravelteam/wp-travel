@@ -160,7 +160,7 @@ class WP_Travel_Admin_Settings {
 
 		$currency_args = array(
 			'id'		=> 'currency',
-			'class'		=> 'currency',
+			'class'		=> 'currency wp-travel-select2',
 			'name'		=> 'currency',
 			'selected'	=> $currency,
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
@@ -176,7 +176,7 @@ class WP_Travel_Admin_Settings {
 
 		$map_dropdown_args = array(
 			'id'		=> 'wp-travel-map-select',
-			'class'		=> '',
+			'class'		=> 'wp-travel-select2',
 			'name'		=> 'wp_travel_map',
 			'option'	=> '',
 			'options'	=> $wp_travel_maps,

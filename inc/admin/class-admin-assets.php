@@ -16,23 +16,34 @@ class WP_Travel_Admin_Assets {
 		// }
 		wp_enqueue_media();
 		wp_enqueue_style( 'jquery-datepicker', $this->assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+		wp_register_style( 'select2-style', $this->assets_path . 'assets/css/lib/select2/select2' . $suffix . '.css', array(), '4.0.5' );
 
 		wp_enqueue_style( 'wp-travel-tabs', $this->assets_path . 'assets/css/wp-travel-tabs' . $suffix . '.css', array('wp-color-picker'), WP_TRAVEL_VERSION );
 		wp_enqueue_style( 'wp-travel-back-end', $this->assets_path . 'assets/css/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
 		// wp_enqueue_style( 'jquery-multiple-select', $this->assets_path . 'assets/css/lib/multiple-select/multiple-select' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
-	}
-	function scripts() {
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
-		wp_register_script( 'jquery-datepicker-lib-eng', $this->assets_path . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 
 		$screen = get_current_screen();
 		// Tab for settings page.
 		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
 		if ( in_array( $screen->id, $setting_allowed ) ) {
-			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable','wp-color-picker'), WP_TRAVEL_VERSION, 1 );
+			wp_enqueue_style( 'select2-style' );
+		}
+	}
+	function scripts() {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
+		wp_register_script( 'jquery-datepicker-lib-eng', $this->assets_path . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
+		wp_register_script( 'select2-js', $this->assets_path . 'assets/js/lib/select2/select2' . $suffix . '.js', array('jquery'), '4.0.5', true);
+		wp_register_script( 'wp-travel-fields-script', $this->assets_path . 'assets/js/wp-travel-fields-scripts' . $suffix . '.js', array( 'select2-js' ), WP_TRAVEL_VERSION, true );
+
+		$screen = get_current_screen();
+		// Tab for settings page.
+		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
+		if ( in_array( $screen->id, $setting_allowed ) ) {
+			wp_register_script( 'wp-travel-tabs', $this->assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable','wp-color-picker', 'select2-js' ), WP_TRAVEL_VERSION, 1 );
+			wp_enqueue_script( 'wp-travel-fields-script' );
 			wp_enqueue_script( 'wp-travel-tabs' );
 		}
 		// @since 1.0.5 // booking stat
@@ -41,7 +52,7 @@ class WP_Travel_Admin_Assets {
 			wp_register_script( 'jquery-chart-util', $this->assets_path . 'assets/js/lib/chartjs/chart-utils.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 			wp_register_script( 'jquery-chart-custom', $this->assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
-			$booking_data = wp_travel_get_booking_data();			
+			$booking_data = wp_travel_get_booking_data();
 			$stat_data = isset( $booking_data['stat_data'] ) ? $booking_data['stat_data'] : array();
 			$labels = isset( $stat_data['stat_label'] ) ? $stat_data['stat_label'] : array();
 			$datas = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
@@ -81,7 +92,7 @@ class WP_Travel_Admin_Assets {
 				'show_more_text' => __( 'More', 'wp-travel' ),
 				'show_less_text' => __( 'Less', 'wp-travel' ),
 				'show_char' => 18,
-				
+
 				'booking_stat_from' => $booking_stat_from,
 				'booking_stat_to' => $booking_stat_to,
 				'compare_stat' => false,
@@ -120,7 +131,7 @@ class WP_Travel_Admin_Assets {
 
 			$map_data = get_wp_travel_map_data();
 
-			
+
 			$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'wp-travel-moment' );
 
 			$api_key = '';
@@ -147,7 +158,7 @@ class WP_Travel_Admin_Assets {
 			// wp_enqueue_script( 'multiple-select-js', $this->assets_path . 'assets/js/lib/multiple-select/multiple-select' . $suffix . '.js', array( 'jquery' ), '', 1 );
 
 			wp_register_script( 'wp-travel-script', $this->assets_path . 'assets/js/wp-travel-back-end' . $suffix . '.js', $depencency, WP_TRAVEL_VERSION, 1 );
-			
+
 			wp_register_script( 'wp-travel-media-upload', $this->assets_path . 'assets/js/wp-travel-media-upload' . $suffix . '.js', array( 'jquery', 'plupload-handlers', 'jquery-ui-sortable', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION, 1 );
 
 			$wp_travel_gallery_data = array(
