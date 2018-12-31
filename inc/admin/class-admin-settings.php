@@ -165,6 +165,9 @@ class WP_Travel_Admin_Settings {
 			'selected'	=> $currency,
 			'option'	=> __( 'Select Currency', 'wp-travel' ),
 			'options'	=> $currency_list,
+			'attributes' => array(
+				'style' => 'width: 300px;',
+			),
 		);
 
 
@@ -183,6 +186,9 @@ class WP_Travel_Admin_Settings {
 			'selected'	=> $selected_map,
 			'before_label'	=> '',
 			'after_label'	=> '',
+			'attributes' => array(
+				'style' => 'width: 300px;',
+			),
 		);
 		$map_key = 'google-map';
 		?>
