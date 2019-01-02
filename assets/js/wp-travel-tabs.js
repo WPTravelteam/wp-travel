@@ -255,11 +255,10 @@
         $('.wp-travel-map-option.' + current_map ).show();
     }
     wp_travel_display_map_fields();
-    $(document).on( 'click', '#wp-travel-map-select', function() {
-        // var current_map = $(this).val();
-        wp_travel_display_map_fields();
 
-    } );
+    $('#wp-travel-map-select').on('select2:select', function (e) {
+        wp_travel_display_map_fields();
+    });
 
 
 }(jQuery));

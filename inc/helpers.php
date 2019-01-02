@@ -52,20 +52,26 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
 
 	$currency_list = wp_travel_get_currency_list();
 
-	$default = array(
+	$defaults = array(
 		'id'		=> '',
 		'class'		=> '',
 		'name'		=> '',
 		'option'	=> '',
 		'options'	=> '',
 		'selected'	=> '',
+		'attributes'	=> array(),
 		);
 
-	$args = array_merge( $default, $args );
-
+	$args = wp_parse_args( $args, $defaults );
 	$dropdown = '';
 	if ( is_array( $currency_list )  && count( $currency_list ) > 0 ) {
-		$dropdown .= '<select name="' . $args['name'] . '" id="' . $args['id'] . '" class="' . $args['class'] . '" >';
+		$attributes = '';
+		if ( ! empty( $args['attributes'] ) ) {
+			foreach( $args['attributes'] as $key => $value ) {
+				$attributes .= sprintf( $key . '="%s" ', $value );
+			}
+		}
+		$dropdown .= '<select name="' . $args['name'] . '" id="' . $args['id'] . '" class="' . $args['class'] . '" ' . $attributes . '>';
 		if ( '' != $args['option'] ) {
 			$dropdown .= '<option value="" >' . $args['option'] . '</option>';
 		}
@@ -92,7 +98,7 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
 function wp_travel_get_dropdown_list( $args = array() ) {
 
 
-	$default = array(
+	$defaults = array(
 		'id'		=> '',
 		'class'		=> '',
 		'name'		=> '',
@@ -101,16 +107,23 @@ function wp_travel_get_dropdown_list( $args = array() ) {
 		'selected'	=> '',
 		'before_label'	=> '',
 		'after_label'	=> '',
+		'attributes'	=> array(),
 		);
 
-	$args = array_merge( $default, $args );
+	$args = wp_parse_args( $args, $defaults );
 
 	$options = $args['options'];
 
 
 	$dropdown = '';
 	if ( is_array( $options )  && count( $options ) > 0 ) {
-		$dropdown .= '<select name="' . $args['name'] . '" id="' . $args['id'] . '" class="' . $args['class'] . '" >';
+		$attributes = '';
+		if ( ! empty( $args['attributes'] ) ) {
+			foreach( $args['attributes'] as $key => $value ) {
+				$attributes .= sprintf( $key . '="%s" ', $value );
+			}
+		}
+		$dropdown .= '<select name="' . $args['name'] . '" id="' . $args['id'] . '" class="' . $args['class'] . '" ' . $attributes . '>';
 		if ( '' != $args['option'] ) {
 			$dropdown .= '<option value="" >' . $args['option'] . '</option>';
 		}

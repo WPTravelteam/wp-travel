@@ -182,6 +182,7 @@ module.exports = function(grunt) {
                     'assets/js/wp-travel-front-end.min.js': ['assets/js/wp-travel-front-end.js'],
                     'assets/js/wp-travel-media-upload.min.js': ['assets/js/wp-travel-media-upload.js'],
                     'assets/js/wp-travel-tabs.min.js': ['assets/js/wp-travel-tabs.js'],
+                    'assets/js/wp-travel-fields-scripts.min.js': ['assets/js/wp-travel-fields-scripts.js'],
                 }
             }
         },

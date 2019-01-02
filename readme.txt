@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,13 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.7.8 =
+Release Date: 31st December 2018
+
+* Enhancement: Added select2 JS.
+* Fixes: Font Awesome issues.
+* Fixes: Other minor issues.
 
 = 1.7.7 =
 Release Date: 26th December 2018

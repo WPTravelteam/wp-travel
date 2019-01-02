@@ -150,7 +150,7 @@ class Wp_Travel_Form_Handler {
 	/**
 	 * Handle lost password form.
 	 */
-	public static function process_lost_password() { 
+	public static function process_lost_password() {
 		if ( isset( $_POST['wp_travel_reset_password'] ) && isset( $_POST['user_login'] ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_lost_password' ) ) {
 			$success = Wp_Travel_User_Account::retrieve_password();
 
