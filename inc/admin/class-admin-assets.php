@@ -23,10 +23,15 @@ class WP_Travel_Admin_Assets {
 
 		// wp_enqueue_style( 'jquery-multiple-select', $this->assets_path . 'assets/css/lib/multiple-select/multiple-select' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
+
+		// fontawesome.
+		wp_register_style( 'font-awesome-css', $this->assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css' );
+
 		$screen = get_current_screen();
 		// Tab for settings page.
 		$setting_allowed = array( WP_TRAVEL_POST_TYPE . '_page_wp-travel-marketplace', WP_TRAVEL_POST_TYPE . '_page_settings' );
 		if ( in_array( $screen->id, $setting_allowed ) ) {
+			wp_enqueue_style( 'font-awesome-css' );
 			wp_enqueue_style( 'select2-style' );
 		}
 	}
