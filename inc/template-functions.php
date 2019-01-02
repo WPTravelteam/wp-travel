@@ -1940,11 +1940,11 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . ' pax' ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<?php if( $status_col ) :
 
@@ -2147,7 +2147,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 						$pricing_option_price = isset( $var['price'] ) ? $var['price'] : '';
 						$price_key = isset( $var['price_key'] ) ? $var['price_key'] : '';
 
-						$per_label = isset( $var['type'] ) && 'custom' !== $var['type'] ? ucfirst( $var['type'] ) : ucfirst( $var['custom_label'] );
+						$price_variations = wp_travel_get_pricing_variation_options();
+						$per_label = isset( $var['type'] ) && 'custom' !== $var['type'] ? $price_variations[ $var['type'] ] : ucfirst( $var['custom_label'] );
 
 						$max_attr = '';
 						$min_attr = 'min=1';
@@ -2240,7 +2241,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									<?php echo wp_travel_get_currency_symbol(); ?> <?php echo( esc_html( $display_price ) ); ?>
 										<!--<i class="wt-icon wt-icon-rocket"></i>-->
 									</div>
-									<?php echo __( 'Per ', 'wp-travel' ).esc_html( $per_label ); ?>
+									<?php echo __( 'Per ', 'wp-travel' ) . esc_html( $per_label ); ?>
 								</span>
 							</div>
 							<div class="trip_list_by_fixed_departure_dates_booking">
