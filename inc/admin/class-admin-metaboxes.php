@@ -73,13 +73,40 @@ class WP_Travel_Admin_Metaboxes {
 
 		
 		$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
-		
-		switch( $payment_method ) {
-			case 'stripe':
-				$stripe_args =  get_post_meta( $payment_id, '_stripe_args', true ); ?>
-				<?php if ( $stripe_args && is_object( $stripe_args ) ) : ?>
+
+		if ( is_string( $payment_method ) ) {
+			$meta_name = sprintf( '_%s_args', $payment_method );
+
+			$payment_args =  get_post_meta( $payment_id, $meta_name, true ); ?>
+			<?php if ( $payment_args && is_object( $payment_args ) ) : ?>
+				<table>						
+					<?php foreach ( $payment_args as $title => $description ) : ?>
+						<tr>
+							<td><?php echo esc_html( $title ) ?></td>
+							<td>
+								<?php
+								if ( is_array( $description ) || is_object( $description ) ) {
+									$description = ( array )  $description;
+									if ( count( $description ) > 0 ) {
+										echo '<pre>';
+										print_r( $description );
+										echo '</pre>';
+									}
+								} else {
+									echo esc_html( $description );
+								} ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			<?php endif;
+		} elseif ( is_array( $payment_method ) ) {
+			foreach ( $payment_method as $method ) {
+				$meta_name = sprintf( '_%s_args', $method );
+				$payment_args =  get_post_meta( $payment_id, $meta_name, true ); ?>
+				<?php if ( $payment_args && is_object( $payment_args ) ) : ?>
 					<table>						
-						<?php foreach ( $stripe_args as $title => $description ) : ?>
+						<?php foreach ( $payment_args as $title => $description ) : ?>
 							<tr>
 								<td><?php echo esc_html( $title ) ?></td>
 								<td>
@@ -99,16 +126,9 @@ class WP_Travel_Admin_Metaboxes {
 						<?php endforeach; ?>
 					</table>
 				<?php endif;
+			}
 
-			break;
-			default :
-				$paypal_args = get_post_meta( $payment_id, '_paypal_args', true );
-				echo '<pre>';
-				print_r( $paypal_args );
-				echo '</pre>';			
-			break;
 		}
-
 	}
 
 	/**
