@@ -170,29 +170,27 @@ function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 /**
  * Returns the url to the lost password endpoint url.
  *
- * @param  string $default_url Default lost password URL.
  * @return string
  */
-function wp_travel_lostpassword_url( $default_url = '' ) {
+function wp_travel_lostpassword_url() {
+	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {
-		return $default_url;
-	}
-
-	// Don't redirect to the WP Travel endpoint on global network admin lost passwords.
-	if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
-		return $default_url;
-	}
-
-	$wp_travel_account_page_url    = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
-	$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
-
-	if ( $wp_travel_account_page_exists ) {
-		return $wp_travel_account_page_url . '?action=lost-pass';
+		$url = $default_url;
 	} else {
-		return $default_url;
+		// Don't redirect to the WP Travel endpoint on global network admin lost passwords.
+		if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
+			$url = $default_url;
+		} else {
+			$wp_travel_account_page_url    = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
+			$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
+
+			if ( $wp_travel_account_page_exists ) {
+				$url = $wp_travel_account_page_url . '?action=lost-pass';
+			} else {
+				$url = $default_url;
+			}
+		}
 	}
+	return apply_filters( 'wp_travel_lostpassword_url', $url, $default_url );
 }
-
-add_filter( 'lostpassword_url', 'wp_travel_lostpassword_url', 10, 1 );
-
