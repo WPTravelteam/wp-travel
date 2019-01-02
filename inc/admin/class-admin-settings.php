@@ -65,7 +65,7 @@ class WP_Travel_Admin_Settings {
 				// print_r( WP_Travel()->notices->get() );
 				echo '<form method="post" action="' . esc_url( $url ) . '">';
 					echo '<div class="wp-travel-setting-buttons">';
-					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
+					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
 					echo '</div>';
 					WP_Travel()->tabs->load( self::$collection, $args );
 					echo '<div class="wp-travel-setting-buttons">';

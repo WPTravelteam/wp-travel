@@ -469,11 +469,15 @@
             padding-left: 20px;
             &:before{
               font-family: "wt-icon-solid";
-              content: '\f178';
+              content: "\f0a9";
               padding-right: 5px;
               position: absolute;
               left: 0;
               top: 4px;
+
+              //removed form wp-travel-wishlists.scss
+              top: 2px;
+              font-size: 12px;
             }
           }
         }
