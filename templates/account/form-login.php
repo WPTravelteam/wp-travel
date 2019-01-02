@@ -56,7 +56,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 				<?php endif; ?>
 					<div class="wrapper">
 						<!--<div class="float-left">
-							<input class="" name="terms-condition" type="checkbox" id="terms-condition" value="forever" /> 
+							<input class="" name="terms-condition" type="checkbox" id="terms-condition" value="forever" />
 							<label for="terms-condition"><span>I have read and agree to the <a href="#">Terms of Use </a>and <a href="#">Privacy Policy</a></span></label>
 						</div> -->
 					</div>
@@ -78,13 +78,13 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 					<div class="wrapper">
 
 						<div class="float-left">
-							<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" /> 
+							<input class="" name="rememberme" type="checkbox" id="rememberme" value="forever" />
 							<?php wp_nonce_field( 'wp-travel-login', 'wp-travel-login-nonce' ); ?>
 							<label for="rememberme"><?php esc_html_e( 'Remember me', 'wp-travel' ); ?></label>
 						</div>
 						<div class="float-right">
 							<p class="info">
-								<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
+								<a href="<?php echo esc_url( wp_travel_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
 							</p>
 						</div>
 					</div>
