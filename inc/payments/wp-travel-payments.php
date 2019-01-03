@@ -276,7 +276,7 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 			}
 		}
 	}
-	update_post_meta( $payment_id, 'wp_travel_payment_status', 'N/A' );
+	// update_post_meta( $payment_id, 'wp_travel_payment_status', 'N/A' );
 }
 
 /**
