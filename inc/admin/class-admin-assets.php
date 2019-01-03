@@ -11,6 +11,9 @@ class WP_Travel_Admin_Assets {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$screen = get_current_screen();
 
+		// Register styles.
+	  wp_register_style( 'magnific-popup-css', $this->assets_path . 'assets/css/magnific-popup' . $suffix . '.css' );
+
 		// if ( 'itineraries' !== $screen->id ) {
 		// 	return;
 		// }
@@ -38,10 +41,12 @@ class WP_Travel_Admin_Assets {
 	function scripts() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+		// Register scripts.
 		wp_register_script( 'jquery-datepicker-lib', $this->assets_path . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
 		wp_register_script( 'jquery-datepicker-lib-eng', $this->assets_path . 'assets/js/lib/datepicker/i18n/datepicker.en.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
 		wp_register_script( 'select2-js', $this->assets_path . 'assets/js/lib/select2/select2' . $suffix . '.js', array('jquery'), '4.0.5', true);
 		wp_register_script( 'wp-travel-fields-script', $this->assets_path . 'assets/js/wp-travel-fields-scripts' . $suffix . '.js', array( 'select2-js' ), WP_TRAVEL_VERSION, true );
+		wp_register_script( 'magnific-popup-script', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 		$screen = get_current_screen();
 		// Tab for settings page.
