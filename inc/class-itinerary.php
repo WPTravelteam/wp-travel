@@ -64,7 +64,11 @@ class WP_Travel_Itinerary {
 			);
 		}
 
-		return false;
+		return array(
+			'lat' => '',
+			'lng' => '',
+			'address' => '',
+		);
 	}
 
 	function get_outline() {
