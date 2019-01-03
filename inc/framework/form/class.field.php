@@ -41,7 +41,7 @@ class WP_Travel_FW_Field {
 		if ( ! empty( $this->fields ) ) {
 			foreach ( $this->fields as $field ) {
 				if ( array_key_exists( $field['type'], $this->field_types ) ) {
-					$content = $this->process_single( $field );					
+					$content = $this->process_single( $field );
 					$output .= ( 'hidden' === $field['type'] ) ? $content : $this->template( $field, $content );
 				}
 			}
@@ -90,6 +90,21 @@ class WP_Travel_FW_Field {
 			$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
 			$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
 			$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
+			$field['attributes'] = isset( $field['attributes'] ) ? $field['attributes'] : array();
+
+			// Lagacy code starts.
+			if ( empty( $field['attributes']['placeholder'] ) && ! empty( $field['placeholder'] ) ) {
+				$field['attributes']['placeholder'] = $field['placeholder'];
+			}
+
+			if ( empty( $field['attributes']['rows'] ) && ! empty( $field['rows'] ) ) {
+				$field['attributes']['rows'] = $field['rows'];
+			}
+
+			if ( empty( $field['attributes']['cols'] ) && ! empty( $field['cols'] ) ) {
+				$field['attributes']['cols'] = $field['cols'];
+			}
+			// Lagacy code ends.
 
 			$field_init = new $this->field_types[ $field['type'] ];
 			return $field_init->init( $field )->render( false );

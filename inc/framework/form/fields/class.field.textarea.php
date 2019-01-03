@@ -13,10 +13,15 @@ class WP_Travel_FW_Field_Textarea {
 				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );
 			}
 		}
-		$this->field['rows'] = isset( $this->field['rows'] ) ? $this->field['rows'] : '';
-		$this->field['cols'] = isset( $this->field['cols'] ) ? $this->field['cols'] : '';
 
-		$output = sprintf( '<textarea id="%s" name="%s" placeholder="%s" rows="%d" cols="%d" %s>', $this->field['id'], $this->field['name'], $this->field['placeholder'], $this->field['rows'], $this->field['cols'], $validations );
+		$attributes = '';
+		if ( isset( $this->field['attributes'] ) ) {
+			foreach ( $this->field['attributes'] as $attribute => $attribute_val ) {
+				$attributes .= sprintf( ' %s="%s" ', $attribute, $attribute_val );
+			}
+		}
+
+		$output = sprintf( '<textarea id="%s" name="%s" %s %s>', $this->field['id'], $this->field['name'], $validations, $attributes );
 		$output .= $this->field['default'];
 		$output .= sprintf( '</textarea>' );
 
