@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 4.9.8
 Requires PHP: 5.5
-Stable tag: 1.7.8
+Stable tag: 1.7.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,13 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.7.9 =
+Release Date: 4th January 2019
+
+* Fixes: Display payment info metabox values.
+* Fixes: Google map console error.
+* Fixes: Admin settings console error.
 
 = 1.7.8 =
 Release Date: 31st December 2018
