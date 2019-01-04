@@ -394,7 +394,7 @@ function wp_travel_save_backend_enqueries_data( $post_id ) {
 	endforeach;
 
 	$enquery_data = array_map( 'sanitize_text_field', wp_unslash( $enquery_data ) );
-
+	$enquery_data = apply_filters( 'wp_travel_admin_enquiry_data', $enquery_data );
 	update_post_meta( $post_id, 'wp_travel_trip_enquiry_data', $enquery_data );
 }
 
