@@ -182,6 +182,7 @@ Release Date: 4th January 2019
 * Fixes: Google map console error.
 * Fixes: Admin settings console error.
 * Fixes: Datepicker localization issue.
+* Fixes: Trip Price conflict with WP Travel Utilities. 
 
 = 1.7.8 =
 Release Date: 31st December 2018
