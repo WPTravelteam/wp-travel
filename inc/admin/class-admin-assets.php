@@ -47,6 +47,7 @@ class WP_Travel_Admin_Assets {
 		wp_register_script( 'select2-js', $this->assets_path . 'assets/js/lib/select2/select2' . $suffix . '.js', array('jquery'), '4.0.5', true);
 		wp_register_script( 'wp-travel-fields-script', $this->assets_path . 'assets/js/wp-travel-fields-scripts' . $suffix . '.js', array( 'select2-js' ), WP_TRAVEL_VERSION, true );
 		wp_register_script( 'magnific-popup-script', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+		wp_register_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 		$screen = get_current_screen();
 		// Tab for settings page.
@@ -193,6 +194,7 @@ class WP_Travel_Admin_Assets {
 			// Enqueued script with localized data.
 			wp_enqueue_script( 'wp-travel-script' );
 			wp_enqueue_script( 'wp-travel-media-upload' );
+			wp_enqueue_script( 'jquery-parsley' );
 		}
 
 		$allowed_itinerary_general_screens = array( WP_TRAVEL_POST_TYPE , 'edit-' . WP_TRAVEL_POST_TYPE , WP_TRAVEL_POST_TYPE . '_page_settings' );
