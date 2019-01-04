@@ -190,7 +190,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 
 							<?php endif; ?>
 						<?php
-						if ( class_exists( 'WP_Travel_Util_Inventory' ) )  :
+						if ( class_exists( 'WP_Travel_Util_Inventory' ) && ! $trip_price )  :
 							// display price unavailable text						
 							$no_price_text 	= isset( $settings['price_unavailable_text'] ) && '' !== $settings['price_unavailable_text'] ? $settings['price_unavailable_text'] : '';
 							echo esc_html( $no_price_text );
