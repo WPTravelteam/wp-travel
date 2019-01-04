@@ -15,6 +15,7 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.number.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.hidden.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.select.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.country_dropdown.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.textarea.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.date.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.radio.php';
@@ -28,6 +29,7 @@ class WP_Travel_FW_Field {
 		$field_types['number'] = 'WP_Travel_FW_Field_Number';
 		$field_types['hidden'] = 'WP_Travel_FW_Field_Hidden';
 		$field_types['select'] = 'WP_Travel_FW_Field_Select';
+		$field_types['country_dropdown'] = 'WP_Travel_FW_Field_Country_Dropdown';
 		$field_types['textarea'] = 'WP_Travel_FW_Field_Textarea';
 		$field_types['date'] = 'WP_Travel_FW_Field_Date';
 		$field_types['radio'] = 'WP_Travel_FW_Field_Radio';

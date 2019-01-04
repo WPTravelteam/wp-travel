@@ -32,7 +32,7 @@ function wp_travel_booking_form_fields() {
 		$cart_trip = array_shift( $cart_trip );
 
 	}
-		
+
 	$trip_id = isset( $cart_trip['trip_id'] ) ? $cart_trip['trip_id'] : $trip_id;
 	$trip_price = isset( $cart_trip['trip_price'] ) ? $cart_trip['trip_price'] : '';
 	$trip_start_date = isset( $cart_trip['trip_start_date'] ) ? $cart_trip['trip_start_date'] : '';
@@ -116,11 +116,11 @@ function wp_travel_booking_form_fields() {
 			'priority' => 20,
 		),
 		'country'		=> array(
-			'type' => 'select',
+			'type' => 'country_dropdown',
 			'label' => __( 'Country', 'wp-travel' ),
 			'name' => 'wp_travel_country',
 			'id' => 'wp-travel-country',
-			'options' => wp_travel_get_countries(),
+			// 'options' => wp_travel_get_countries(),
 			'validations' => array(
 				'required' => true,
 			),
@@ -281,47 +281,47 @@ function wp_travel_get_checkout_form_fields() {
 	$traveller_fields_key = array( 'first_name', 'last_name', 'gender', 'dob', 'email', 'phone_number', 'country' );
 
 	// Skip unset fields
-	$new_fields_travellers = array( 
+	$new_fields_travellers = array(
 		'dob' 	=> array(
 					'type' => 'date',
 					'label' => __( 'Date of Birth', 'wp-travel' ),
 					'name' => 'wp_travel_date_of_birth_traveller',
 					'id' => 'wp-travel-date-of-birth',
 					'class' => 'wp-travel-datepicker',
-					
+
 					'attributes' => array( 'readonly' => 'readonly', 'data-max-today' => true ),
 					'date_options' => array(),
 					'priority' => 80,
-				), 
-		
+				),
+
 		'gender' => array(
 					'type' => 'radio',
 					'label' => __( 'Gender', 'wp-travel' ),
 					'name' => 'wp_travel_gender_traveller',
 					'id' => 'wp-travel-gender',
-					'wrapper_class'=>'wp-travel-radio-group ',				
-					
+					'wrapper_class'=>'wp-travel-radio-group ',
+
 					'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ) ),
 					'default' => 'male',
 					'priority' => 100,
 				),
-		
+
 		'country' => array()
 	); // dob and gender is not exists in booking form. country field need in billing info as well.
 
 	$new_fields_travellers_keys = array_keys( $new_fields_travellers );
 
 	// dd( $new_fields_travellers_keys, true );
-	
+
 	$traveller_fields = array();
 	foreach ( $traveller_fields_key as $key ) {
 		if ( isset( $fields[ $key ] ) ) {
 			if ( 'country' === $key ) {
 				// Not overriding country field name in default $fields array.
 				$country_fields['name'] = $country_fields['name'] . '_traveller';
-				$traveller_fields[ $key ] = $country_fields;		
+				$traveller_fields[ $key ] = $country_fields;
 				continue;
-			}			
+			}
 			$fields[$key]['name'] = $fields[$key]['name'] . '_traveller';
 			$traveller_fields[ $key ] = $fields[ $key ];
 			unset( $fields[ $key ] );
@@ -331,18 +331,18 @@ function wp_travel_get_checkout_form_fields() {
 				if ( 'country' !== $key ) {
 					$traveller_fields[ $key ] = $new_fields_travellers[ $key ];
 				}
-				
+
 				continue;
 			}
 		}
 	}
 
 	// Payment Info Fields
-	
+
 	// Standard paypal Merge.
 	$payment_fields = array();
 	if ( wp_travel_is_payment_enabled() ) {
-		
+
 		global $wt_cart;
 		$cart_amounts = $wt_cart->get_total();
 
@@ -373,7 +373,7 @@ function wp_travel_get_checkout_form_fields() {
 			'id' => 'wp-travel-partial-payment',
 			'default' => $partial_payment,
 		);
-		
+
 		$payment_fields['booking_option'] = array(
 			'type' => 'select',
 			'label' => __( 'Booking Options', 'wp-travel' ),
@@ -399,7 +399,7 @@ function wp_travel_get_checkout_form_fields() {
 				'label' => __( 'Payment Gateway', 'wp-travel' ),
 				'name' => 'wp_travel_payment_gateway',
 				'id' => 'wp-travel-payment-gateway',
-				'wrapper_class'=>'wp-travel-radio-group wp-travel-payment-field f-booking-with-payment f-partial-payment f-full-payment',				
+				'wrapper_class'=>'wp-travel-radio-group wp-travel-payment-field f-booking-with-payment f-partial-payment f-full-payment',
 				'validations' => array(
 					'required' => true,
 				),
@@ -442,7 +442,7 @@ function wp_travel_get_checkout_form_fields() {
 			'label' => __( 'Payment Amount', 'wp-travel' ),
 			'name' => 'wp_travel_payment_amount_info',
 			'id' => 'wp-travel-payment-amount-info',
-			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',					
+			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
 			'before_field' => wp_travel_get_currency_symbol(),
 			'default' => wp_travel_get_formated_price( $total_partial_amount ),
 			'priority' => 115,
@@ -534,7 +534,7 @@ function wp_travel_get_checkout_form_fields() {
 		'billing_fields'   => wp_travel_sort_checkout_fields( $fields ),
 		'payment_fields'   => wp_travel_sort_checkout_fields( $payment_fields ),
 	);
-	return apply_filters( 'wp_travel_checkout_fields', $new_fields );	
+	return apply_filters( 'wp_travel_checkout_fields', $new_fields );
 }
 /**
  * Sort Checkout form fields.
