@@ -5,6 +5,61 @@
  * @package wp-travel/inc/
  */
 
+ /**
+  * Array List of form field to generate enquiry form fields.
+  *
+  * @return array Returns form fields.
+  */
+ function wp_travel_enquiries_form_default_fields() {
+ 	$enquiry_fields = array(
+ 		'full_name'	=> array(
+ 			'type' => 'text',
+ 			'label' => __( 'Full Name', 'wp-travel' ),
+ 			'name' => 'wp_travel_enquiry_name',
+ 			'id' => 'wp-travel-enquiry-name',
+ 			'placeholder' => __( 'Enter your name', 'wp-travel' ),
+ 			'validations' => array(
+ 				'required' => true,
+ 				'maxlength' => '80',
+ 				// 'type' => 'alphanum',
+ 			),
+ 			'attributes' => array(
+ 				'placeholder' => __( 'Enter your full name', 'wp-travel' ),
+ 			),
+ 			'priority' => 10,
+ 		),
+ 		'email' => array(
+ 			'type' => 'email',
+ 			'label' => __( 'Email', 'wp-travel' ),
+ 			'name' => 'wp_travel_enquiry_email',
+ 			'id' => 'wp-travel-enquiry-email',
+ 			'validations' => array(
+ 				'required' => true,
+ 				'maxlength' => '60',
+ 			),
+ 			'attributes' => array(
+ 				'placeholder' => __( 'Enter your email', 'wp-travel' ),
+ 			),
+ 			'priority' => 60,
+ 		),
+ 		'note' => array(
+ 			'type'          => 'textarea',
+ 			'label'         => __( 'Enquiry Message', 'wp-travel' ),
+ 			'name'          => 'wp_travel_enquiry_query',
+ 			'id'            => 'wp-travel-enquiry-query',
+ 			'attributes' => array(
+ 				'placeholder' => __( 'Enter your enqiury...', 'wp-travel' ),
+ 				'rows'          => 6,
+ 				'cols'          => 150,
+ 			),
+ 			'priority'      => 90,
+ 			'wrapper_class' => 'full-width textarea-field',
+ 		),
+ 	);
+
+ 	return $enquiry_fields;
+ }
+
 /**
  * Array List of form field to generate enquiry form fields.
  *
@@ -21,52 +76,9 @@ function wp_travel_enquiries_form_fields() {
 		$post_id = $_POST['wp_travel_post_id'];
 	}
 
-	$enquiry_fields = array(
-		'full_name'	=> array(
-			'type' => 'text',
-			'label' => __( 'Full Name', 'wp-travel' ),
-			'name' => 'wp_travel_enquiry_name',
-			'id' => 'wp-travel-enquiry-name',
-			'placeholder' => __( 'Enter your name', 'wp-travel' ),
-			'validations' => array(
-				'required' => true,
-				'maxlength' => '80',
-				// 'type' => 'alphanum',
-			),
-			'attributes' => array(
-				'placeholder' => __( 'Enter your full name', 'wp-travel' ),
-			),
-			'priority' => 10,
-		),
-		'email' => array(
-			'type' => 'email',
-			'label' => __( 'Email', 'wp-travel' ),
-			'name' => 'wp_travel_enquiry_email',
-			'id' => 'wp-travel-enquiry-email',
-			'validations' => array(
-				'required' => true,
-				'maxlength' => '60',
-			),
-			'attributes' => array(
-				'placeholder' => __( 'Enter your email', 'wp-travel' ),
-			),
-			'priority' => 60,
-		),
-		'note' => array(
-			'type'          => 'textarea',
-			'label'         => __( 'Enquiry Message', 'wp-travel' ),
-			'name'          => 'wp_travel_enquiry_query',
-			'id'            => 'wp-travel-enquiry-query',
-			'attributes' => array(
-				'placeholder' => __( 'Enter your enqiury...', 'wp-travel' ),
-				'rows'          => 6,
-				'cols'          => 150,
-			),
-			'priority'      => 90,
-			'wrapper_class' => 'full-width textarea-field',
-		),
-	);
+	$enquiry_fields = wp_travel_enquiries_form_default_fields();
 
+	$enquiry_fields = apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
 	if ( ! is_admin() ) {
 		$enquiry_fields['label_submit_enquiry'] = array(
 			'type'    => 'hidden',
@@ -90,7 +102,8 @@ function wp_travel_enquiries_form_fields() {
 			'default' => 'wp_travel_save_user_enquiry',
 		);
 	}
-	return apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
+
+	return $enquiry_fields;
 }
 
 /**
