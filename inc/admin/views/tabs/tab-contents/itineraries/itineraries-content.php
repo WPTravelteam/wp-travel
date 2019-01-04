@@ -57,7 +57,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
 					$itinerary_date = stripslashes( $itinerary['date'] );
 					// @since 1.7.6
-					$itinerary_date = ! empty( $itinerary_date ) ? wp_travel_format_date( $itinerary_date ) : '';
+					$itinerary_date = ! empty( $itinerary_date ) ? wp_travel_format_date( $itinerary_date, false ) : '';
 				}
 				if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
 					$itinerary_time = stripslashes( $itinerary['time'] );
@@ -162,7 +162,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
-					<input class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][date]" value="">
+					<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" class="wp-travel-datepicker" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ) ?>][date]" value="">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Time', 'wp-travel' ); ?></label>

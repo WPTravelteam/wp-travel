@@ -13,8 +13,8 @@ $js_date_format = wp_travel_date_format_php_to_js( $date_format );
 $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date ) : '';
-$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date ) : '';
+$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date, false ) : '';
+$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date, false ) : '';
 
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
 
@@ -565,8 +565,8 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 								$date_label       = isset( $date_option['date_label'] ) ? $date_option['date_label'] : '';
 								$start_date       = isset( $date_option['start_date'] ) ? $date_option['start_date'] : '';
 								$end_date         = isset( $date_option['end_date'] ) ? $date_option['end_date'] : '';
-								$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date ) : '';
-								$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date ) : '';
+								$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date, false ) : '';
+								$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date, false ) : '';
 								$pricing_options = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
 						?>
 							<div class="panel panel-default">

@@ -2004,7 +2004,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 	/**
 	 * Format Date.
 	 */
-	function wp_travel_format_date( $date ) {
+	function wp_travel_format_date( $date, $localize = true ) {
 		if ( ! $date ) {
 			return;
 		}
@@ -2015,8 +2015,11 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		if ( ! $date_format ) :
 			$date_format = 'jS M, Y';
 		endif;
-
-		$formated_date = esc_html( date_i18n( $date_format, strtotime( stripslashes( $date ) ) ) );
+		if ( $localize ) {
+			$formated_date = esc_html( date_i18n( $date_format, strtotime( stripslashes( $date ) ) ) );
+		} else {
+			$formated_date = esc_html( date( $date_format, strtotime( stripslashes( $date ) ) ) );
+		}
 
 		return $formated_date;
 
