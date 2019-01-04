@@ -181,6 +181,7 @@ Release Date: 4th January 2019
 * Fixes: Display payment info metabox values.
 * Fixes: Google map console error.
 * Fixes: Admin settings console error.
+* Fixes: Datepicker localization issue.
 
 = 1.7.8 =
 Release Date: 31st December 2018
