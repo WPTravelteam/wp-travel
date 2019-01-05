@@ -1,5 +1,5 @@
 <?php
-class WP_Travel_FW_Field_Date {
+class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	protected $field;
 	protected $field_type = 'text';
 	function init( $field ) {
@@ -8,6 +8,50 @@ class WP_Travel_FW_Field_Date {
 	}
 
 	function render( $display = true ) {
+		$output = parent::render( false );
+
+		$lang_code = explode( '-', get_bloginfo('language') );
+		$locale = $lang_code[0];
+
+
+		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
+		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
+
+		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
+		$default_url = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
+
+		$filename = 'datepicker.' . $locale . '.js';
+
+		if (
+			! file_exists(  trailingslashit( $wp_content_file_path ) . $filename )
+			&& file_exists( trailingslashit( $default_path ) . $filename )
+		) {
+			$locale = 'en';
+		}
+
+		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? true : false;
+		$output .= '<script>';
+		$output .= 'jQuery(document).ready( function($){ ';
+		$output .= 		'$("#' . $this->field['id'] . '").wpt_datepicker({
+							language: "' . $locale . '",';
+		if ( $max_today ) {
+			$output .= 	'maxDate: new Date()';
+		} else {
+			$output .= 	'minDate: new Date()';
+		}
+
+		$output .= 		'});';
+		$output .= '} )';
+		$output .= '</script>';
+
+		if ( ! $display ) {
+			return $output;
+		}
+
+		echo $output;
+	}
+
+	function render_old( $display = true ) {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -28,16 +72,16 @@ class WP_Travel_FW_Field_Date {
 
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
 		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
-		
+
 		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
 		$default_url = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
-		
+
 		$filename = 'datepicker.' . $locale . '.js';
-		
+
 		if (
 			! file_exists(  trailingslashit( $wp_content_file_path ) . $filename )
 			&& file_exists( trailingslashit( $default_path ) . $filename )
-		) {			
+		) {
 			$locale = 'en';
 		}
 
@@ -45,13 +89,13 @@ class WP_Travel_FW_Field_Date {
 		$output .= '<script>';
 		$output .= 'jQuery(document).ready( function($){ ';
 		$output .= 		'$("#' . $this->field['id'] . '").wpt_datepicker({
-							language: "' . $locale . '",';	
+							language: "' . $locale . '",';
 		if ( $max_today ) {
 			$output .= 	'maxDate: new Date()';
 		} else {
 			$output .= 	'minDate: new Date()';
 		}
-							
+
 		$output .= 		'});';
 		$output .= '} )';
 		$output .= '</script>';
