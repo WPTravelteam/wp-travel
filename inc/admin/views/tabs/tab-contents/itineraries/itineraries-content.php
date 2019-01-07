@@ -79,11 +79,11 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 					<div id="collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-itinerary-<?php echo esc_attr( $cnt ) ?>">
 					<div class="panel-body">
 						<div class="panel-wrap panel-wrap-itinerary">
-							<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
+							<label><?php esc_html_e( 'Itinerary Label', 'wp-travel' ); ?></label>
 							<input bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
-							<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
+							<label><?php esc_html_e( 'Itinerary Title', 'wp-travel' ); ?></label>
 							<input bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ) ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
@@ -153,11 +153,11 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 			<div id="collapse-<?php echo esc_attr( $uid ) ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $uid ) ?>">
 			<div class="panel-body">
 				<div class="panel-wrap panel-wrap-itinerary">
-					<label><?php esc_html_e( 'Label', 'wp-travel' ); ?></label>
+					<label><?php esc_html_e( 'Itinerary Label', 'wp-travel' ); ?></label>
 					<input bind="itinerary_label_<?php echo esc_attr( $uid ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
-					<label><?php esc_html_e( 'Title', 'wp-travel' ); ?></label>
+					<label><?php esc_html_e( 'Itinerary Title', 'wp-travel' ); ?></label>
 					<input bind="itinerary_title_<?php echo esc_attr( $uid ) ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
