@@ -2966,7 +2966,7 @@ ul.wp-travel-error {
         font-size: 10px;
         margin-top: 6px; } }
 .datepickers-container {
-  z-index: 999; }
+  z-index: 999999; }
 
 .wp_travel_tour_extras {
   margin-bottom: 40px;

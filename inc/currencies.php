@@ -313,6 +313,6 @@ function wp_travel_get_currency_symbol( $currency_code = null ) {
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
 		return $currency_symbols[ $currency_code ];
 	}
-	return __( 'N/A' );
+	return __( 'N/A', 'wp-travel' );
 
 }

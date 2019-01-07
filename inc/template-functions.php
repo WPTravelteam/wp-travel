@@ -1940,11 +1940,11 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<div class="status">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
 							</div>
 							<?php if( $status_col ) :
 

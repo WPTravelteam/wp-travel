@@ -1,9 +1,9 @@
 === WP Travel ===
-Contributors: WEN Solutions
+Contributors: WEN Solutions, wptravel
 Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
 Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
-Tested up to: 4.9.8
+Tested up to: 5.0.2
 Requires PHP: 5.5
 Stable tag: 1.7.9
 License: GPLv3
@@ -182,7 +182,7 @@ Release Date: 4th January 2019
 * Fixes: Google map console error.
 * Fixes: Admin settings console error.
 * Fixes: Datepicker localization issue.
-* Fixes: Trip Price conflict with WP Travel Utilities. 
+* Fixes: Trip Price conflict with WP Travel Utilities.
 
 = 1.7.8 =
 Release Date: 31st December 2018

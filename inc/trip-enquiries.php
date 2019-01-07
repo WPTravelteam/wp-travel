@@ -197,15 +197,16 @@ function wp_travel_add_enquiries_data_metaboxes() {
  *
  */
 function wp_travel_enquiries_info(){
+  include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 
 	global $post_id;
 
 	$enquiry_data = get_post_meta(  $post_id, 'wp_travel_trip_enquiry_data', true );
-
 	$form_fields = wp_travel_enquiries_form_fields();
 
 	$priority = array();
 		foreach ( $form_fields as $key => $row ) {
+      $form_fields[ $key ]['default'] = ! empty( $enquiry_data[ $row['name'] ] ) ? $enquiry_data[ $row['name'] ] : '';
 			$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 		}
 	array_multisort( $priority, SORT_ASC, $form_fields );
@@ -227,68 +228,15 @@ function wp_travel_enquiries_info(){
 				</select>
 			</div>
 
-			<?php foreach ( $form_fields as $key => $field ) :
-
-				$field_type = $field['type'];
-
-				$attributes = '';
-				if ( isset( $field['attributes'] ) ) {
-					foreach ( $field['attributes'] as $attribute => $attribute_val ) {
-						$attributes .= sprintf( '%s=%s ', $attribute, $attribute_val );
-					}
-				}
-				$wrapper_class = '';
-				if ( isset( $field['wrapper_class'] ) ) {
-					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
-
-				}
-
-				$before_field = '';
-				if ( isset( $field['before_field'] ) ) {
-					$before_field_class = isset( $field['before_field_class'] ) ? $field['before_field_class'] : '';
-					$before_field = sprintf( '<span class="wp-travel-field-before %s">%s</span>', $before_field_class, $field['before_field'] );
-				}
-
-				$input_val = isset( $enquiry_data[$field['name']] ) ? $enquiry_data[$field['name']] : '';
-
-				switch ( $field_type ) {
-				case 'textarea' : ?>
-					<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
-					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
-						<textarea <?php echo esc_attr( $attributes ) ?> name="<?php echo esc_attr( $field['name'] ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" placeholder="<?php esc_html_e( 'Some text...', 'wp-travel' ); ?>" rows="6" cols="150"><?php echo esc_html( $input_val ); ?></textarea>
-					</div>
-				<?php break; ?>
-
-				<?php case 'text_info' :
-
-					printf( '<div class="wp-travel-text-info"><span class="wp-travel-info-content" id="%s"><strong>%s</strong></span></div>', $field['id'], $field['label'] );
-
-					break;
-				?>
-
-				<?php case 'date' : ?>
-					<div class="wp-travel-form-field ">
-						<label for="<?php echo esc_attr( $field['id'] ) ?>""><?php echo esc_html( $field['label'] ) ?></label>
-						<input autocomplete="off" class="wp-travel-datepicker" type="text" id="<?php echo esc_attr( $field['id'] ) ?>"" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>">
-					</div>
-
-				<?php
-					break;
-				?>
-
-				<?php default : ?>
-
-				<div class="wp-travel-form-field <?php echo esc_attr( $wrapper_class ) ?>">
-					<label for="<?php echo esc_attr( $field['id'] ) ?>"><?php echo esc_attr( $field['label'] ) ?></label>
-					<?php echo $before_field;
-					$field_type = ('date' === $field['type'] ) ? 'text' : $field['type']; ?>
-					<input <?php // echo esc_attr( $attributes ) ?> type="<?php echo esc_attr( $field_type ) ?>" id="<?php echo esc_attr( $field['id'] ) ?>" name="<?php echo esc_attr( $field['name'] ) ?>" value="<?php echo esc_attr( $input_val ); ?>" >
-				</div>
-				<?php
-					break;
-				}
-
-			endforeach; ?>
+			<?php
+      $fields = new WP_Travel_FW_Field();
+      $fields->init( $form_fields )->render();
+      ?>
+      <script>
+      jQuery(function($){
+        $('#post').parsley();
+      });
+      </script>
 	</div>
 <?php
 

@@ -1,6 +1,6 @@
 <?php
 class WP_Travel_FW_Field_Select {
-	private $field;
+	protected $field;
 	function init( $field ) {
 		$this->field = $field;
 		return $this;

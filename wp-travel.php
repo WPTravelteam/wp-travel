@@ -8,7 +8,7 @@
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
  * Requires PHP: 5.5
- * Tested up to: 4.9.8
+ * Tested up to: 5.0.2
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
