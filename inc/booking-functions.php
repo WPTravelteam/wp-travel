@@ -211,7 +211,7 @@ function wp_travel_booking_info( $post ) {
 			if ( 'booking_only' == $booking_option ) {
 				unset( $payment_fields['is_partial_payment'], $payment_fields['payment_gateway'], $payment_fields['payment_mode'], $payment_fields['payment_amount'], $payment_fields['payment_amount_info'] );
 			}
-			// Sort Travellers fields.
+			// Sort Travelers fields.
 			$priority = array();
 			foreach ( $traveller_fields as $key => $row ) {
 				$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
@@ -232,7 +232,7 @@ function wp_travel_booking_info( $post ) {
 			}
 			array_multisort( $priority, SORT_ASC, $payment_fields );
 
-			// Travellers Fields HTML
+			// Travelers Fields HTML
 			$field_name = $traveller_fields['first_name']['name'];
 			// echo $field_name;
 			$input_val = get_post_meta( $booking_id, $field_name, true );
@@ -244,16 +244,16 @@ function wp_travel_booking_info( $post ) {
 			}
 			
 			$form_field = new WP_Travel_FW_Field(); 
-			if ( $input_val && is_array( $input_val ) ) { // Multiple Travellers Section.
+			if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
 				foreach ( $input_val as $cart_id => $field_fname_values ) {
 					foreach ( $field_fname_values as $i => $field_fname_value ) { ?>
 						<div class="wp-travel-form-field-wrapper">
 							<?php
 							if ( 0 === $i ) { ?>
-								<h3><?php esc_html_e( 'Lead Traveller', 'wp-travel' ) ?></h3>
+								<h3><?php esc_html_e( 'Lead Traveler', 'wp-travel' ) ?></h3>
 								<?php
 							} else { ?>
-								<h3><?php printf( __( 'Traveller %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
+								<h3><?php printf( __( 'Traveler %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
 								<?php
 							}
 							
@@ -495,7 +495,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 				$last_name 	= get_post_meta( $id , 'wp_travel_mname' , true );
 			}
 			
-			if ( is_array( $first_name ) ) { // Multiple Travellers.
+			if ( is_array( $first_name ) ) { // Multiple Travelers.
 
 				reset( $first_name );
 				$first_key = key( $first_name );

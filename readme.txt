@@ -93,7 +93,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 * Customizable
 * Compatible Themes
 * Clone Trips
-* Multiple Travellers info
+* Multiple Travelers info
 [And more ...](https://wptravel.io/features/)
 
 
@@ -214,8 +214,8 @@ Release Date: 21st December 2018
 = 1.7.5 =
 Release Date: December 7th, 2018
 
-* New Feature: WP Travel Multiple Travellers info.
-* Enhancement: Travellers info style updated.
+* New Feature: WP Travel Multiple Travelers info.
+* Enhancement: Travelers info style updated.
 * Fixes: Wrong Date in cart page.
 * Fixes: Multiple cart item error on admin booking page.
 * Fixes: Admin Booking page error with stripe payment.

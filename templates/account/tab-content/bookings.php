@@ -57,6 +57,7 @@ $bookings = $args['bookings'];
                   $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
                   $payment_id = get_post_meta( $b_id, 'wp_travel_payment_id', true );
+                  // dd( get_post_meta( $payment_id ) );
                   $payment_status = 'N/A';
                   $payment_mode   = 'N/A';
                   $trip_price     = isset( $ordered_data['wp_travel_trip_price'] ) ? $ordered_data['wp_travel_trip_price'] : 0;

@@ -186,7 +186,7 @@ jQuery(document).ready(function($) {
     // Remove Traveller.
     $(document).on('click', '.traveller-remove', function(e) {
         e.preventDefault();
-        if (confirm('Are you sure to remove traveller')) {
+        if (confirm('Are you sure you want to traveler?')) {
             $(this).closest('.payment-traveller').remove();
             $('.payment-traveller.added').each(function(i) {
                 $(this).find('.traveller-index').html(i + 1);

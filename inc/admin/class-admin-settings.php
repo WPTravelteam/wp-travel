@@ -314,7 +314,7 @@ class WP_Travel_Admin_Settings {
 			<tr>
 			<tr>
 				<th>
-					<label for="currency"><?php esc_html_e( 'Enable multiple travellers', 'wp-travel' ); ?></label>
+					<label for="currency"><?php esc_html_e( 'Enable multiple travelers', 'wp-travel' ); ?></label>
 				</th>
 				<td>
 					<span class="show-in-frontend checkbox-default-design">

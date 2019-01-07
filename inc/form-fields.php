@@ -311,8 +311,6 @@ function wp_travel_get_checkout_form_fields() {
 
 	$new_fields_travellers_keys = array_keys( $new_fields_travellers );
 
-	// dd( $new_fields_travellers_keys, true );
-	
 	$traveller_fields = array();
 	foreach ( $traveller_fields_key as $key ) {
 		if ( isset( $fields[ $key ] ) ) {
@@ -326,7 +324,7 @@ function wp_travel_get_checkout_form_fields() {
 			$traveller_fields[ $key ] = $fields[ $key ];
 			unset( $fields[ $key ] );
 		} else {
-			// temporary fixes for travellers info new fields.
+			// temporary fixes for travelers info new fields.
 			if ( in_array( $key, $new_fields_travellers_keys ) ) {
 				if ( 'country' !== $key ) {
 					$traveller_fields[ $key ] = $new_fields_travellers[ $key ];

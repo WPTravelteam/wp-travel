@@ -515,7 +515,7 @@
 
     $(document).on('click', '.wt-accordion-close', function(e) {
         var acc_id = $(this).closest('.tab-accordion').attr('id');
-        if (confirm("Are you sure to Delete ?") == true) {
+        if (confirm("Are you sure you want to delete?") == true) {
             $(this).closest('div.panel-default').remove();
 
             var faqs = $('#' + acc_id + ' .panel-default').length;

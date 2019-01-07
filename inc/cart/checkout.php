@@ -48,7 +48,7 @@ global $wt_cart;
 $form_field = new WP_Travel_FW_Field(); ?>
 <form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
-	<!-- Travellers info -->
+	<!-- Travelers info -->
 	<?php foreach( $trips as $cart_id => $trip ) : ?>
 		<div class="wp-travel-trip-details">
 			<?php if ( 'yes' === $enable_multiple_travellers ) : ?>	
@@ -58,7 +58,7 @@ $form_field = new WP_Travel_FW_Field(); ?>
 			<?php endif; ?>
 			<div class="panel-group number-accordion">
 				<div class="panel-heading">										
-					<h4 class="panel-title"><?php esc_html_e( 'Traveller Details', 'wp-travel' ) ?></h4>
+					<h4 class="panel-title"><?php esc_html_e( 'Traveler Details', 'wp-travel' ) ?></h4>
 				</div>
 				<div class="ws-theme-timeline-block panel-group checkout-accordion" id="checkout-accordion-<?php echo esc_attr( $cart_id ) ?>">
 					<?php
@@ -70,11 +70,11 @@ $form_field = new WP_Travel_FW_Field(); ?>
 									<a class="accordion-toggle" data-toggle="collapse" data-parent="#checkout-accordion-<?php echo esc_attr( $cart_id ) ?>" href="#collapse-<?php echo esc_attr( $cart_id . '-' . $i ); ?>" aria-expanded="true">
 										<?php
 											if ( 0 === $i ) : 
-												esc_html_e( 'Lead Traveller', 'wp-travel' );
+												esc_html_e( 'Lead Traveler', 'wp-travel' );
 												$collapse = 'collapse in';
 												$area_expanded = 'true';
 											else :
-												echo esc_html( __( sprintf( 'Traveller %d', ( $i + 1 ) ), 'wp-travel' ) );
+												echo esc_html( __( sprintf( 'Traveler %d', ( $i + 1 ) ), 'wp-travel' ) );
 												$collapse = 'collapse';
 												$area_expanded = 'false';
 											endif; ?>
