@@ -561,9 +561,10 @@ function wp_travel_get_trip_duration( $post_id ) {
 		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 		$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 		$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-	?>
-	<?php if ( 'yes' === $fixed_departure ) : ?>
-		<?php
+		
+		$show_end_date = wp_travel_booking_show_end_date();
+	
+		if ( 'yes' === $fixed_departure ) :
 			$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
 			$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
 		?>
@@ -571,15 +572,22 @@ function wp_travel_get_trip_duration( $post_id ) {
 		<div class="wp-travel-trip-time trip-fixed-departure">
 			<i class="wt-icon-regular wt-icon-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
-				<?php if ( $start_date && $end_date ) : ?>
-					<?php $date_format = get_option( 'date_format' ); ?>
-					<?php if ( ! $date_format ) : ?>
-						<?php $date_format = 'jS M, Y'; ?>
-					<?php endif; ?>
-					<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?>
-				<?php else : ?>
-					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
-				<?php endif; ?>
+				<?php
+				if ( $start_date || $end_date ) :
+					$date_format = get_option( 'date_format' );
+					if ( ! $date_format ) :
+						$date_format = 'jS M, Y';
+					endif;
+					if ( '' !== $end_date && $show_end_date ) {
+						printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
+					} else {
+						printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
+					}
+
+				else :
+					esc_html_e( 'N/A', 'wp-travel' );
+				endif;
+				?>
 			</span>
 		</div>
 
@@ -1592,11 +1600,25 @@ function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
 }
 
 
-function taxed_amount($amount, $tax_percent, $inclusive =  true){
-	if($inclusive){
-		return number_format( ( $amount - ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
+function wp_travel_taxed_amount( $amount ) {
+
+	$settings = wp_travel_get_settings();
+
+	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+
+	if ( 'yes' == $trip_tax_enable ) {
+		$tax_details = array();
+		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
+		$tax_percentage = @$settings['trip_tax_percentage'];
+
+		if ( 0 == $amount || '' == $tax_percentage ) {
+			return $amount;
+		}
+		if ( 'no' == $tax_inclusive_price ) {
+			return number_format( ( $amount + ( ( $amount * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+		}
 	}
-	return number_format( ( $amount + ( ( $amount * $tax_percent ) / 100 ) ), 2 , '.', '' );
+	return $amount;
 }
 
 /**
@@ -2111,26 +2133,10 @@ function wp_travel_date_format_php_to_js( $date_format ) {
 	$js_date_format = str_replace( 'Y', 'yyyy', $date_format );
 	$js_date_format = str_replace( 'd', 'dd', $js_date_format );
 	$js_date_format = str_replace( 'j', 'd', $js_date_format );
-	$js_date_format = str_replace( 'F', 'MM', $js_date_format );
 	$js_date_format = str_replace( 'm', 'mm', $js_date_format );
+	$js_date_format = str_replace( 'F', 'MM', $js_date_format );
+	// $js_date_format = str_replace( 'F', 'mm', $js_date_format );
 
-	// switch ( $date_format ) {
-	// 	case 'F j, Y' :
-	// 		$js_date_format = 'MM d, yyyy';
-	// 	break;
-	// 	case 'Y-m-d' :
-	// 		$js_date_format = 'yyyy-mm-dd';
-	// 	break;
-	// 	case 'm/d/Y' :
-	// 		$js_date_format = 'mm/dd/yyyy';
-	// 	break;
-	// 	case 'd/m/Y' :
-	// 		$js_date_format = 'dd/mm/yyyy';
-	// 	break;
-	// 	default :
-	// 		$js_date_format = 'MM d, yyyy';
-	// 	break;
-	// }
 	return apply_filters( 'wp_travel_js_date_format', $js_date_format );
 }
 
@@ -2149,24 +2155,72 @@ function wp_travel_moment_date_format( $date_format ) {
 	$js_date_format = str_replace( 'Y', 'YYYY', $date_format );
 	$js_date_format = str_replace( 'd', 'DD', $js_date_format );
 	$js_date_format = str_replace( 'j', 'D', $js_date_format );
-	$js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
 	$js_date_format = str_replace( 'm', 'MM', $js_date_format );
-	// switch ( $date_format ) {
-	// 	case 'F j, Y' :
-	// 		$js_date_format = 'MMMM D, YYYY';
-	// 	break;
-	// 	case 'Y-m-d' :
-	// 		$js_date_format = 'YYYY-MM-DD';
-	// 	break;
-	// 	case 'm/d/Y' :
-	// 		$js_date_format = 'MM/DD/YYYY';
-	// 	break;
-	// 	case 'd/m/Y' :
-	// 		$js_date_format = 'DD/MM/YYYY';
-	// 	break;
-	// 	default :
-	// 		$js_date_format = 'MM DD, YYYY';
-	// 	break;
-	// }
+	$js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
+	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
+
 	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
 }
+
+/**
+ * Calculate Due amount.
+ * 
+ * @since 1.8.0
+ * @return array
+ */
+function wp_travel_booking_data( $booking_id ) {
+    
+    if ( ! $booking_id ) {
+        return;
+	}
+	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+
+	$booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status', true );
+    $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
+
+    $payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+        
+    $trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
+	$trip_price  = number_format( $trip_price, 2, '.', '' );
+	
+	$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including 
+
+    $paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+    $paid_amount = number_format( $paid_amount, 2, '.', '' );
+
+    $due_amount  = number_format( $trip_price - $paid_amount, 2, '.', '' );
+    if ( $due_amount < 0 ) {
+        $due_amount = 0;
+    }
+
+    $payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
+    $payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
+
+    $mode = wp_travel_get_payment_mode();
+    $label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+    $payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
+
+    $amounts = array(
+		'booking_status' => $booking_status,
+        'mode'           => $mode,
+        'payment_mode'   => $mode[ $label_key ]['text'],
+        'payment_status' => $payment_status,
+        'total_price'    => $trip_price,
+        'paid_amount'    => $paid_amount,
+        'due_amount'     => $due_amount,
+        // 'tax'           => 0,
+        // 'discount'      => 0,
+    );
+    return $amounts;
+}
+
+/**
+ * Filter to show hide end date in booking.
+ * 
+ * @since 1.8.0
+ * @return	boolean
+ */
+function wp_travel_booking_show_end_date() {
+	return apply_filters( 'wp_travel_booking_show_end_date', true );
+}
+

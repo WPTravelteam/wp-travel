@@ -63,6 +63,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			$max_price = ( int ) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price'] : '';
 			$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
 			$trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+			$show_end_date = wp_travel_booking_show_end_date();
 
 		?>
 			<div class="wp-travel-itinerary-items">
@@ -156,13 +157,15 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 								<span class="calender-icon"></span>
 							</label>
 						</span>
-						<span class="trip-duration-calender">
-							<small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
-							<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
-							<label for="datepick">
-								<span class="calender-icon"></span>
-							</label>
-						</span>
+						<?php if ( $show_end_date ) : ?>
+							<span class="trip-duration-calender">
+								<small><?php esc_html_e( 'To', 'wp-travel' ); ?></small>
+								<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $trip_end ); ?>" class="wp_travel_search_widget_filters_input<?php echo $index; ?>" type="text" id="datepicker2" name="trip_end" data-position='bottom right'>
+								<label for="datepick">
+									<span class="calender-icon"></span>
+								</label>
+							</span>
+						<?php endif; ?>
 						
 					</div>
 

@@ -487,6 +487,7 @@ function wp_travel_single_location( $post_id ) {
 
 	$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
+	$show_end_date = wp_travel_booking_show_end_date();
 
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
@@ -508,17 +509,28 @@ function wp_travel_single_location( $post_id ) {
 	<?php endif; ?>
 		<li>
 			<?php if ( 'yes' === $fixed_departure ) : ?>
-				<?php if ( $start_date && $end_date ) :  ?>
+				<?php if ( $start_date || $end_date ) :  ?>
 					<div class="travel-info">
 						<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
 					</div>
 					<div class="travel-info">
 						<span class="value">
-							<?php $date_format = get_option( 'date_format' ); ?>
-							<?php if ( ! $date_format ) : ?>
-								<?php $date_format = 'jS M, Y'; ?>
-							<?php endif; ?>
-							<?php printf( '%s - %s', date( $date_format, strtotime( $start_date ) ), date( $date_format, strtotime( $end_date ) ) ); ?>
+							<?php
+								if ( $start_date || $end_date ) :
+									$date_format = get_option( 'date_format' );
+									if ( ! $date_format ) :
+										$date_format = 'jS M, Y';
+									endif;
+									if ( '' !== $end_date && $show_end_date ) {
+										printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
+									} else {
+										printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
+									}
+				
+								else :
+									esc_html_e( 'N/A', 'wp-travel' );
+								endif;
+							?>
 						</span>
 					</div>
 				<?php endif; ?>
@@ -2106,6 +2118,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 	$currency_symbol   = wp_travel_get_currency_symbol( $currency_code );
 	$per_person_text   = wp_travel_get_price_per_text( $trip_id );
 	$inventory_enabled = false;
+	$show_end_date = wp_travel_booking_show_end_date();
 
 	?>
 	<div class="trip_list_by_fixed_departure_dates">
@@ -2113,7 +2126,9 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 			<span class="trip_list_by_fixed_departure_dates_wrap">
 				<span class="trip_list_by_fixed_departure_dates_pricing_name_label"><?php esc_html_e( 'Pricing Name', 'wp-travel' ); ?></span>
 				<span class="trip_list_by_fixed_departure_dates_start_label"><?php esc_html_e( 'START', 'wp-travel' ); ?></span>
-				<span class="trip_list_by_fixed_departure_dates_end_label"><?php esc_html_e( 'END', 'wp-travel' ); ?></span>
+				<?php if ( $show_end_date ) : ?>
+					<span class="trip_list_by_fixed_departure_dates_end_label"><?php esc_html_e( 'END', 'wp-travel' ); ?></span>
+				<?php endif ?>
 				<?php if( $status_col ) : ?>
 					<span class="trip_list_by_fixed_departure_dates_seats_label"><?php esc_html_e( 'SEATS LEFT', 'wp-travel' ); ?></span>
 				<?php endif; ?>
@@ -2207,14 +2222,21 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $start_date ) ); ?>
 									<input type="hidden" name="trip_date" value="<?php echo esc_attr( $start_date ); ?>">
 									</div>
-									<div class="trip_list_by_fixed_departure_dates_length">
-										<div><?php echo esc_html( wp_travel_get_date_diff( $start_date, $end_date ) ); ?></div>
-									</div>
+									<?php if ( $show_end_date && '' !== $end_date ) : ?>
+										<div class="trip_list_by_fixed_departure_dates_length">
+											<div><?php echo esc_html( wp_travel_get_date_diff( $start_date, $end_date ) ); ?></div>
+										</div>
+									<?php endif ?>
 								</span>
-								<span class="trip_list_by_fixed_departure_dates_end">
-									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($end_date) ) ); ?></div>
-									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $end_date ) ); ?></div>
-								</span>
+								
+								<?php if ( $show_end_date ) : ?>
+									<span class="trip_list_by_fixed_departure_dates_end">
+										<?php if (  '' !== $end_date ) : ?>
+											<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($end_date) ) ); ?></div>
+											<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $end_date ) ); ?></div>
+										<?php endif ?>
+									</span>
+								<?php endif; ?>
 								<?php if ( $status_col ) : ?>
 									<span class="trip_list_by_fixed_departure_dates_seats">
 										<span class="seat_qty"><?php echo esc_html( $available_pax ); ?></span>
