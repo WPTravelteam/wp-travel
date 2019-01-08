@@ -1465,7 +1465,6 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   float: left;
   width: 69%;
   display: flex;
-  align-items: center;
 }
 .wp-travel-default-article .wp-travel-entry-content-wrapper:after, .wp-travel-default-article .wp-travel-entry-content-wrapper:before {
   content: "";
