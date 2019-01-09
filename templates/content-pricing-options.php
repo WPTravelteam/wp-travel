@@ -26,6 +26,7 @@ $trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 $trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 $trip_price      = wp_travel_get_trip_price( $trip_id );
 $enable_sale     = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+$show_end_date = wp_travel_booking_show_end_date();
 
 $trip_duration = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 $trip_duration = ( $trip_duration ) ? $trip_duration : 0;
@@ -132,9 +133,11 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 						<div class="date-from">
 							<?php echo esc_html__( 'Start', 'wp-travel' ); ?>
 						</div>
-						<div class="date-to">
-							<?php echo esc_html__( 'End', 'wp-travel' ); ?>
-						</div>
+						<?php if ( $show_end_date ) : ?>
+							<div class="date-to">
+								<?php echo esc_html__( 'End', 'wp-travel' ); ?>
+							</div>
+						<?php endif; ?>
 						<div class="status">
 							<?php echo esc_html__( 'Group Size', 'wp-travel' ); ?>
 						</div>
@@ -162,12 +165,19 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 								<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
 								<input type="hidden" name="trip_date" value="<?php echo esc_attr( $trip_start_date ); ?>">
 							</div>
-							<div class="date-to">
-								<span class="availabily-heading-label"><?php echo esc_html__( 'end:', 'wp-travel' ); ?></span>
-								<?php echo esc_html( date_i18n( 'l', strtotime( $trip_end_date ) ) );  ?>
-								<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
-								<input type="hidden" name="trip_departure_date" value="<?php echo esc_attr( $trip_end_date ); ?>">
-							</div>
+							<?php							
+							if ( $show_end_date  ) : ?>
+								<div class="date-to">
+									<?php  if ( '' !== $trip_end_date ) : ?>
+										<span class="availabily-heading-label"><?php echo esc_html__( 'end:', 'wp-travel' ); ?></span>
+										<?php echo esc_html( date_i18n( 'l', strtotime( $trip_end_date ) ) );  ?>
+										<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_end_date ) ) );  ?></span>
+										<input type="hidden" name="trip_departure_date" value="<?php echo esc_attr( $trip_end_date ); ?>">
+									<?php else : ?>
+										<?php esc_html_e( '-', 'wp-travel' ); ?>
+									<?php endif; ?>	
+								</div>
+							<?php endif; ?>
 						<?php else : ?>
 							<div class="date-from">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'start:', 'wp-travel' ); ?></span>

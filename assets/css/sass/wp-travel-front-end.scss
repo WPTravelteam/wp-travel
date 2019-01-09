@@ -1554,7 +1554,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
         float: left;
         width: 69%;
         display: flex;
-        align-items: center;
+        // align-items: center;
         @include clearfix();
         @include sidr-view {
             width: 69%;

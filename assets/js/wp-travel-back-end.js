@@ -168,9 +168,9 @@
             if ('' == start_date) {
                 error += 'Start date can\'t be empty!' + "\n";
             }
-            if ('' == end_date) {
-                error += 'End date can\'t be empty!' + "\n";
-            }
+            // if ('' == end_date) {
+            //     error += 'End date can\'t be empty!' + "\n";
+            // }
 
             // if ('' != start_date && '' != end_date) {
             //     start_date = new Date(start_date);
@@ -240,7 +240,7 @@
         });
     };
 
-    $("form").each(createAllErrors);
+    // $("form").each(createAllErrors);
 
     $(document).on('click', '#wp-travel-enable-sale', function() {
         if ($(this).is(':checked')) {

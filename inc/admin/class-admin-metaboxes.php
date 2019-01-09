@@ -177,26 +177,19 @@ class WP_Travel_Admin_Metaboxes {
 			</tr>
 			<?php if ( 'paid' === $label_key ) : ?>
 				<?php
-				$mode = wp_travel_get_payment_mode();
-				$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
-
-				$trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
-				$trip_price  = number_format( $trip_price, 2, '.', '' );
-
-				$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
-				$paid_amount = number_format( $paid_amount, 2, '.', '' );
-
-				$due_amount  = number_format( $trip_price - $paid_amount, 2, '.', '' );
-				if ( $due_amount < 0 ) {
-					$due_amount = 0;
-				} ?>
+				$payment_info = wp_travel_booking_data( $booking_id );
+				
+				$total_price  	= $payment_info['total_price'];
+				$paid_amount 	= $payment_info['paid_amount'];
+				$due_amount  	= $payment_info['due_amount'];
+				?>
 				<tr>
 					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( $mode[ $label_key ]['text'] ) ?></td>
+					<td><?php echo esc_html( $payment_info['payment_mode'] ) ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $trip_price ) ?></td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $total_price ) ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ) ?></strong></td>
