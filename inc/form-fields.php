@@ -264,65 +264,6 @@ function wp_travel_booking_form_fields() {
 	return apply_filters( 'wp_travel_booking_form_fields', $booking_fileds );
 }
 
-function wp_travel_checkout_billing_fields() {
-	$fields = array(
-		'address'		=> array(
-			'type' => 'text',
-			'label' => __( 'Address', 'wp-travel' ),
-			'name' => 'wp_travel_address',
-			'id' => 'wp-travel-address',
-			'validations' => array(
-				'required' => true,
-				'maxlength' => '50',
-			),
-			'priority' => 40,
-		),
-		'billing_city' => array(
-			'type' => 'text',
-			'label' => __( 'City', 'wp-travel' ),
-			'name' => 'billing_city',
-			'id' => 'wp-travel-billing-city',
-			'validations' => array(
-				'required' => true,
-			),
-			'priority' => 20,
-		),
-		'billing_postal' => array(
-			'type' => 'text',
-			'label' => __( 'Postal', 'wp-travel' ),
-			'name' => 'billing_postal',
-			'id' => 'wp-travel-billing-postal',
-			'validations' => array(
-				'required' => true,
-			),
-			'priority' => 30,
-		),
-		'country'		=> array(
-			'type' => 'country_dropdown',
-			'label' => __( 'Country', 'wp-travel' ),
-			'name' => 'wp_travel_country',
-			'id' => 'wp-travel-country',
-			'validations' => array(
-				'required' => true,
-			),
-			'priority' => 30,
-		),
-		'note' => array(
-			'type' => 'textarea',
-			'label' => __( 'Note', 'wp-travel' ),
-			'name' => 'wp_travel_note',
-			'id' => 'wp-travel-note',
-			'placeholder' => __( 'Enter some notes...', 'wp-travel' ),
-			'rows' => 6,
-			'cols' => 150,
-			'priority' => 90,
-			'wrapper_class' => 'full-width textarea-field',
-		),
-	);
-
-	return $fields;
-}
-
 /**
  * Return HTML of Checkout Form Fields
  *
@@ -332,68 +273,55 @@ function wp_travel_get_checkout_form_fields() {
 
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 
-	// All Fields
-	$fields = wp_travel_booking_form_fields();
-	$country_fields = $fields['country'];
+	$user_fname      = '';
+	$user_lname      = '';
+	$user_email      = '';
+	$billing_city    = '';
+	$billing_zip     = '';
+	$billing_address = '';
+	$billing_country = '';
+	$billing_phone = '';
 
-	// Traveller traveller_fields fields. only array keys
-	$traveller_fields_key = array( 'first_name', 'last_name', 'gender', 'dob', 'email', 'phone_number', 'country' );
+	// User Details Merged.
+	if ( is_user_logged_in() ) {
+		$user = wp_get_current_user();
+		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+			$user_fname = isset( $user->first_name ) ? $user->first_name : '' ;
+			$user_lname = isset( $user->last_name ) ? $user->last_name : '' ;
+			$user_email = isset( $user->user_email ) ? $user->user_email : '' ;
 
-	// Skip unset fields
-	$new_fields_travellers = array(
-		'dob' 	=> array(
-					'type' => 'date',
-					'label' => __( 'Date of Birth', 'wp-travel' ),
-					'name' => 'wp_travel_date_of_birth_traveller',
-					'id' => 'wp-travel-date-of-birth',
-					'class' => 'wp-travel-datepicker',
-
-					'attributes' => array( 'readonly' => 'readonly', 'data-max-today' => true ),
-					'date_options' => array(),
-					'priority' => 80,
-				),
-
-		'gender' => array(
-					'type' => 'radio',
-					'label' => __( 'Gender', 'wp-travel' ),
-					'name' => 'wp_travel_gender_traveller',
-					'id' => 'wp-travel-gender',
-					'wrapper_class'=>'wp-travel-radio-group ',
-
-					'options' => array( 'male' => __( 'Male', 'wp-travel' ), 'female' => __( 'Female', 'wp-travel' ) ),
-					'default' => 'male',
-					'priority' => 100,
-				),
-
-		'country' => array()
-	); // dob and gender is not exists in booking form. country field need in billing info as well.
-
-	$new_fields_travellers_keys = array_keys( $new_fields_travellers );
-
-
-	$traveller_fields = array();
-	foreach ( $traveller_fields_key as $key ) {
-		if ( isset( $fields[ $key ] ) ) {
-			if ( 'country' === $key ) {
-				// Not overriding country field name in default $fields array.
-				$country_fields['name'] = $country_fields['name'] . '_traveller';
-				$traveller_fields[ $key ] = $country_fields;
-				continue;
-			}
-			$fields[$key]['name'] = $fields[$key]['name'] . '_traveller';
-			$traveller_fields[ $key ] = $fields[ $key ];
-			unset( $fields[ $key ] );
-		} else {
-			// temporary fixes for travelers info new fields.
-			if ( in_array( $key, $new_fields_travellers_keys ) ) {
-				if ( 'country' !== $key ) {
-					$traveller_fields[ $key ] = $new_fields_travellers[ $key ];
-				}
-
-				continue;
-			}
+			$biling_data     = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
+			$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
+			$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
+			$billing_address = isset( $biling_data['billing_address'] ) ? $biling_data['billing_address'] : '';
+			$billing_country = isset( $biling_data['billing_country'] ) ? $biling_data['billing_country'] : '';
+			$billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billing_phone'] : '';
 		}
 	}
+
+
+	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
+	// Set default values.
+	$traveller_fields['first_name']['default'] = $user_fname;
+	$traveller_fields['last_name']['default'] = $user_fname;
+	$traveller_fields['country']['default'] = $billing_country;
+	$traveller_fields['phone_number']['default'] = $billing_phone;
+	$traveller_fields['email']['default'] = $user_email;
+
+
+
+	// Billing fields.
+	$billing_fields = WP_Travel_Default_Form_Fields::billing();
+	$billing_fields = apply_filters( 'wp_travel_checkout_billing_fields', $billing_fields );
+	// Get billing hidden fields.
+	$billing_hidden_fields = WP_Travel_Default_Form_Fields::_billing();
+	$fields = wp_parse_args( $billing_fields, $billing_hidden_fields );
+
+	// Set defaults.
+	$fields['billing_city']['default'] = $billing_city;
+	$fields['country']['default'] = $billing_country;
+	$fields['billing_postal']['default'] = $billing_zip;
+	$fields['address']['default'] = $billing_address;
 
 	// Payment Info Fields
 
@@ -532,66 +460,11 @@ function wp_travel_get_checkout_form_fields() {
 		// }
 	}
 
-	// unset other uncecessary fields form $fields. For Billing info
-	unset(
-		// $fields['pax'],
-		// $fields['trip_price_key'],
-		$fields['wp_travel_arrival_date'],
-		$fields['departure_date'],
-		$fields['arrival_date'],
-		$fields['trip_duration']
-	);
-
-	// Set Arrival and departure date.
-	$fields['address']['priority'] = 10;
-
-	$billing_city = '';
-	$billing_zip = '';
-	$billing_address = '';
-	$billing_country = '';
-
-	// User Details Merged.
-	if ( is_user_logged_in() ) {
-
-		$user = wp_get_current_user();
-
-		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
-
-			$biling_data     = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
-			$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
-			$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
-			$billing_address = isset( $biling_data['billing_address'] ) ? $biling_data['billing_address'] : '';
-			$billing_country = isset( $biling_data['billing_country'] ) ? $biling_data['billing_country'] : '';
-		}
-	}
-
-
-	$billing_fields = wp_travel_checkout_billing_fields();
-	$billing_fields = apply_filters( 'wp_travel_checkout_billing_fields', $billing_fields );
-	$fields = wp_parse_args( $billing_fields, $fields );
-
-	$fields['address']['default'] = $billing_address;
-	$fields['country']['default'] = $billing_country;
-	$fields['billing_city']['default'] = $billing_city;
-	$fields['billing_postal']['default'] = $billing_zip;
 
 	$new_fields = array(
-		'traveller_fields' => wp_travel_sort_checkout_fields( $traveller_fields ),
-		'billing_fields'   => wp_travel_sort_checkout_fields( $fields ),
-		'payment_fields'   => wp_travel_sort_checkout_fields( $payment_fields ),
+		'traveller_fields' => wp_travel_sort_form_fields( $traveller_fields ),
+		'billing_fields'   => wp_travel_sort_form_fields( $fields ),
+		'payment_fields'   => wp_travel_sort_form_fields( $payment_fields ),
 	);
 	return apply_filters( 'wp_travel_checkout_fields', $new_fields );
-}
-/**
- * Sort Checkout form fields.
- *
- * @return array $fields
- */
-function wp_travel_sort_checkout_fields( $fields ) {
-	$priority = array();
-	foreach ( $fields as $key => $row ) {
-		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
-	}
-	array_multisort( $priority, SORT_ASC, $fields );
-	return $fields;
 }
