@@ -43,6 +43,7 @@ class WP_Travel_FW_Form {
 		$this->form_options['submit_button']['id'] = isset( $form_options['submit_button']['id'] ) ? $form_options['submit_button']['id'] : '';
 		$this->form_options['submit_button']['name'] = isset( $form_options['submit_button']['name'] ) ? $form_options['submit_button']['name'] : '';
 		$this->form_options['submit_button']['value'] = isset( $form_options['submit_button']['value'] ) ? $form_options['submit_button']['value'] : '';
+		$this->form_options['submit_button']['class'] = isset( $form_options['submit_button']['class'] ) ? $form_options['submit_button']['class'] : '';
 
 		$this->form_options['nonce']['field'] = isset( $form_options['nonce']['field'] ) ? $form_options['nonce']['field'] : '';
 		$this->form_options['nonce']['action'] = isset( $form_options['nonce']['action'] ) ? $form_options['nonce']['action'] : '';
@@ -101,7 +102,7 @@ class WP_Travel_FW_Form {
 						<?php do_action( $this->form_options['hook_prefix'] . '_before_submit_button' ); ?>
 						<?php wp_nonce_field( $this->form_options['nonce']['action'], $this->form_options['nonce']['field'] ); ?>
 						<?php
-						printf( '<input type="submit" name="%s" id="%s" value="%s">', esc_attr( $this->form_options['submit_button']['name'] ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ) );
+						printf( '<input type="submit" name="%s" id="%s" value="%s" class="%s">', esc_attr( $this->form_options['submit_button']['name'] ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ), esc_attr( $this->form_options['submit_button']['class'] ) );
 						?>
 						<?php do_action( $this->form_options['hook_prefix'] . '_after_submit_button' ); ?>
 					</div>
@@ -149,7 +150,7 @@ class WP_Travel_FW_Form {
 						<?php do_action( $this->form_options['hook_prefix'] . '_before_submit_button' ); ?>
 						<?php wp_nonce_field( $this->form_options['nonce']['action'], $this->form_options['nonce']['field'] ); ?>
 						<?php
-						printf( '<input type="submit" name="%s" id="%s" value="%s">', esc_attr( $this->form_options['submit_button']['name'] ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ) );
+						printf( '<input type="submit" name="%s" id="%s" value="%s" class="%s">', esc_attr( $this->form_options['submit_button']['name'] ), esc_attr( $this->form_options['submit_button']['id'] ), esc_attr( $this->form_options['submit_button']['value'] ), esc_attr( $this->form_options['submit_button']['class'] ) );
 						?>
 						<?php do_action( $this->form_options['hook_prefix'] . '_after_submit_button' ); ?>
 					</div>
