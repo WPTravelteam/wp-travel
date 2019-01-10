@@ -167,7 +167,7 @@ class WP_Travel_Ajax {
 			$wt_cart->add( $trip_id, $trip_price, $pax, $price_key, $attrs );
 		}
 
-		return true;
+		echo true;
 	}
 
 	function wp_travel_update_cart() {		
