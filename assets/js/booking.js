@@ -25,6 +25,10 @@ jQuery(document).ready( function( $ ) {
 } );
 
 function sidebarSticky(){
+	if ( 'undefined' === typeof Modernizr ) {
+		return false;
+	}
+
 	var interval = setInterval(function(){
 		if (Modernizr.mq('(min-width: 768px)')) {
 			 jQuery(".container .sticky-sidebar").stick_in_parent({
