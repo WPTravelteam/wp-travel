@@ -561,9 +561,9 @@ function wp_travel_get_trip_duration( $post_id ) {
 		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 		$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 		$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-		
+
 		$show_end_date = wp_travel_booking_show_end_date();
-	
+
 		if ( 'yes' === $fixed_departure ) :
 			$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
 			$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
@@ -2164,12 +2164,12 @@ function wp_travel_moment_date_format( $date_format ) {
 
 /**
  * Calculate Due amount.
- * 
+ *
  * @since 1.8.0
  * @return array
  */
 function wp_travel_booking_data( $booking_id ) {
-    
+
     if ( ! $booking_id ) {
         return;
 	}
@@ -2179,11 +2179,11 @@ function wp_travel_booking_data( $booking_id ) {
     $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
     $payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-        
+
     $trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
 	$trip_price  = number_format( $trip_price, 2, '.', '' );
-	
-	$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including 
+
+	$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including
 
     $paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
     $paid_amount = number_format( $paid_amount, 2, '.', '' );
@@ -2216,7 +2216,7 @@ function wp_travel_booking_data( $booking_id ) {
 
 /**
  * Filter to show hide end date in booking.
- * 
+ *
  * @since 1.8.0
  * @return	boolean
  */
@@ -2224,3 +2224,16 @@ function wp_travel_booking_show_end_date() {
 	return apply_filters( 'wp_travel_booking_show_end_date', true );
 }
 
+/**
+ * Sort Checkout form fields.
+ *
+ * @return array $fields
+ */
+function wp_travel_sort_form_fields( $fields ) {
+	$priority = array();
+	foreach ( $fields as $key => $row ) {
+		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
+	}
+	array_multisort( $priority, SORT_ASC, $fields );
+	return $fields;
+}
