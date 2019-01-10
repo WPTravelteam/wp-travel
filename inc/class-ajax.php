@@ -139,7 +139,7 @@ class WP_Travel_Ajax {
 		$pax 		    = isset( $_POST['pax'] ) ? $_POST['pax'] : 0;
 		$price_key 	    = isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
 		$arrival_date   = isset( $_POST['trip_date'] ) ? $_POST['trip_date'] : '';
-		$departure_date = isset( $_POST['trip_departure_date'] ) ? $_POST['trip_departure_date'] : '';
+		$departure_date = isset( $_POST['trip_departure_date'] ) ? $_POST['trip_departure_date'] : ''; // Need to remove. is't post value.
 		$trip_extras    = isset( $_POST['wp_travel_trip_extras'] ) ? $_POST['wp_travel_trip_extras'] : array();
 
 		$trip_price = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, true );
