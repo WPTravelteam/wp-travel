@@ -170,17 +170,5 @@ $form_field = new WP_Travel_FW_Field(); ?>
 
 <script type="text/javascript">
 
-	function sidebarSticky(){
-		var interval = setInterval(function(){
-			if (Modernizr.mq('(min-width: 768px)')) {
-			   jQuery(".container .sticky-sidebar").stick_in_parent({
-				container: jQuery(".container"),
-				parent: ".container",
-				offset_top:50
-			  });
-			}
-		},1000)
-	}
-	jQuery(document).ready(sidebarSticky);
-	jQuery(window).resize(sidebarSticky);
+	
 </script>
