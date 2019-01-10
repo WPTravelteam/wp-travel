@@ -2203,7 +2203,7 @@ function wp_travel_booking_data( $booking_id ) {
     $amounts = array(
 		'booking_status' => $booking_status,
         'mode'           => $mode,
-        'payment_mode'   => $mode[ $label_key ]['text'],
+        'payment_mode'   => $payment_mode,
         'payment_status' => $payment_status,
         'total_price'    => $trip_price,
         'paid_amount'    => $paid_amount,

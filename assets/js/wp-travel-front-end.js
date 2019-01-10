@@ -43,7 +43,6 @@ jQuery(document).ready(function($) {
         midClick: true,
         callbacks: {
           open: function() {
-            console.log('ddd');
             $('#wp-travel-enquiries').trigger('reset').parsley().reset();
           },
         }

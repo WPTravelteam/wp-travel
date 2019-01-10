@@ -66,38 +66,38 @@ $bookings = $args['bookings'];
                 ?>
                   <tr class="tbody-content">
 
-                    <td class="name" data-title="name">
+                    <td class="name" data-title="<?php esc_html_e( 'Trip', 'wp-travel' ); ?>">
                       <div class="name-title">
                           <a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>"><?php echo esc_html( get_the_title( $bkd_trip_id ) ); ?></a>
                       </div>
                     </td>
 
-                    <td class="c-name" data-title="Contact Name">
+                    <td class="c-name" data-title="<?php esc_html_e( 'Contact Name', 'wp-travel' ); ?>">
                       <div class="contact-title">
                           <?php echo esc_html( $fname . ' ' . $lname ); ?>
                       </div>
                     </td>
 
-                    <td class="booking-status" data-title="Booking Status">
+                    <td class="booking-status" data-title="<?php esc_html_e( 'Booking Status', 'wp-travel' ); ?>">
                       <div class="contact-title">
                           <?php echo esc_html( $booking_status ); ?>
                       </div>
                     </td>
 
-                    <td class="payment-status" data-title="Payment Status">
+                    <td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
                       <div class="contact-title">
                       <?php echo esc_html( $payment_status ); ?>
                       </div>
                     </td>
 
-                    <td class="payment-mode" data-title="Payment Mode">
+                    <td class="payment-mode" data-title="<?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?>">
                       <div class="contact-title">
                           <?php echo esc_html( $payment_mode ); ?>
                           <?php do_action( 'wp_travel_dashboard_booking_after_payment_mode', $ordered_data, $payment_info );  ?>
                       </div>
                     </td>
 
-                    <td class="product-subtotal text-right" data-title="Total">
+                    <td class="product-subtotal text-right" data-title="<?php esc_html_e( 'Total Price', 'wp-travel' ); ?>">
                       <div class="order-list-table">
                         <p>
                           <strong>
@@ -107,7 +107,7 @@ $bookings = $args['bookings'];
                         </p>
                       </div>
                     </td>
-                    <td class="product-subtotal text-right" data-title="Paid">
+                    <td class="product-subtotal text-right" data-title="<?php esc_html_e( 'Paid', 'wp-travel' ); ?>">
                       <div class="order-list-table">
                         <p>
                           <strong>
@@ -117,7 +117,7 @@ $bookings = $args['bookings'];
                         </p>
                       </div>
                     </td>
-                    <?php do_action( 'wp_travel_dashboard_booking_table_content_after_paid', $ordered_data, $payment_info );  ?>
+                    <?php do_action( 'wp_travel_dashboard_booking_table_content_after_paid', $b_id, $ordered_data, $payment_info );  ?>
 
                   </tr>
                 <?php
