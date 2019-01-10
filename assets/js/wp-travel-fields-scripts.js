@@ -1,7 +1,11 @@
-jQuery(function($) {
+function WPTravelSelect2() {
   $('.wp-travel-select2').select2({
     width: 'resolve' // need to override the changed default
   });
+}
+jQuery(function($) {
+
+  WPTravelSelect2();
 
   function formatFa (icon) {
     if ( ! icon.id ) {

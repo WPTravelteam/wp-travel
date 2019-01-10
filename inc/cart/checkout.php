@@ -17,7 +17,10 @@ if ( 'no' === $enable_multiple_travellers ) {
 }
 
 global $wt_cart;
-$form_field = new WP_Travel_FW_Field(); ?>
+$form_fw = new WP_Travel_FW_Form();
+$form_field = new WP_Travel_FW_Field();
+$form_fw->init_validation( 'wp-travel-booking' );
+?>
 <form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
 	<!-- Travelers info -->
@@ -65,29 +68,18 @@ $form_field = new WP_Travel_FW_Field(); ?>
 											</div>
 										</div>
 										<div class="payment-traveller">
-
-											<?php foreach( $traveller_fields as $field_group => $field ) :
+											<?php
+											foreach( $traveller_fields as $field_group => $field ) :
 												$field_name = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
 												$field['name'] = $field_name;
 												$field['id'] = $field['id'] . '-' . $i;
 
-												if ( $i > 0 ) { // Set required false to extra travellers.
-													unset( $field['validations']['required'] );
-												}
-												if ( 'hidden' === $field['type'] ) {
-													echo $form_field->init()->render_input( $field );
-													continue;
-												}
-												$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
-												<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
-													<div class="form-group gap-20">
-														<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
-														<div class="col-sm-8 col-md-9">
-															<?php echo $form_field->init()->render_input( $field ); ?>
-														</div>
-													</div>
-												</div>
-											<?php endforeach; ?>
+												// Set required false to extra travellers.
+												$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+
+												$form_field->init( array( $field ) )->render();
+											endforeach;
+											?>
 										</div>
 									</div>
 								</div>
@@ -167,20 +159,3 @@ $form_field = new WP_Travel_FW_Field(); ?>
 	</div>
 	<?php do_action( 'wp_travel_action_after_payment_info_field' ); ?>
 </form>
-
-<script type="text/javascript">
-
-	function sidebarSticky(){
-		var interval = setInterval(function(){
-			if (Modernizr.mq('(min-width: 768px)')) {
-			   jQuery(".container .sticky-sidebar").stick_in_parent({
-				container: jQuery(".container"),
-				parent: ".container",
-				offset_top:50
-			  });
-			}
-		},1000)
-	}
-	jQuery(document).ready(sidebarSticky);
-	jQuery(window).resize(sidebarSticky);
-</script>

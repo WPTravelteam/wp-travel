@@ -13,7 +13,7 @@ class WP_Travel_FW_Field_Select {
 				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );
 			}
 		}
-		$output = sprintf( '<select id="%s" name="%s" %s>', $this->field['id'], $this->field['name'], $validations );
+		$output = sprintf( '<select id="%s" name="%s" class="%s" %s>', $this->field['id'], $this->field['name'], $this->field['class'], $validations );
 		if ( ! empty( $this->field['options'] ) ) {
 			foreach ( $this->field['options'] as $key => $value ) {
 
