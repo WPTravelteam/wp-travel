@@ -2988,6 +2988,9 @@ ul.wp-travel-error {
   border-top-color: #b81c24;
 }
 
+.checkout-page-wrap {
+  /* New CSS below while replacing new codes from field-editor */
+}
 @media (min-width: 768px) {
   .checkout-page-wrap .wp-travel-minicart {
     float: right;
@@ -3095,12 +3098,66 @@ ul.wp-travel-error {
   display: inline-block;
   width: 100%;
 }
-.checkout-page-wrap .wp-travel-form-field label,
+.checkout-page-wrap .wp-travel-form-field label {
+  font-weight: 600;
+}
+.checkout-page-wrap .wp-travel-form-field input:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 3px 15px;
+}
+.checkout-page-wrap .wp-travel-form-field select,
+.checkout-page-wrap .wp-travel-form-field textarea,
+.checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+  width: 100%;
+}
+.checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+  margin: -15px 0 0;
+}
+.checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group label {
+  width: 33%;
+  display: inline-block;
+}
+.checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group label:first-of-type {
+  width: 25%;
+}
+@media screen and (min-width: 768px) {
+  .checkout-page-wrap .wp-travel-form-field label,
 .checkout-page-wrap .wp-travel-form-field .wp-travel-text-info {
-  width: 50%;
-  float: left;
-  min-height: 1px;
-  position: relative;
+    width: 33.3333333333%;
+    float: left;
+    min-height: 1px;
+    position: relative;
+    padding: 0 15px 0 0;
+    font-size: 13.8px;
+  }
+  .checkout-page-wrap .wp-travel-form-field input:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+    width: 66.6666666667%;
+    padding: 3px 15px;
+  }
+  .checkout-page-wrap .wp-travel-form-field select,
+.checkout-page-wrap .wp-travel-form-field textarea,
+.checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+    width: 66.6666666667%;
+  }
+  .checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+    float: right;
+    margin: -15px 0 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .checkout-page-wrap .wp-travel-form-field label,
+.checkout-page-wrap .wp-travel-form-field .wp-travel-text-info {
+    width: 25%;
+  }
+  .checkout-page-wrap .wp-travel-form-field input:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+    width: 75%;
+  }
+  .checkout-page-wrap .wp-travel-form-field select,
+.checkout-page-wrap .wp-travel-form-field textarea,
+.checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+    width: 75%;
+  }
 }
 .checkout-page-wrap .checkbox-block {
   padding: 0 15px;
