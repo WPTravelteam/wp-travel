@@ -1,6 +1,7 @@
 <?php
 /**
  * Booking Functions.
+ * // TODO: Remove This function.
  *
  * @package wp-travel/inc/
  */
@@ -271,8 +272,6 @@ function wp_travel_booking_form_fields() {
  */
 function wp_travel_get_checkout_form_fields() {
 
-	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
-
 	$user_fname      = '';
 	$user_lname      = '';
 	$user_email      = '';
@@ -280,7 +279,7 @@ function wp_travel_get_checkout_form_fields() {
 	$billing_zip     = '';
 	$billing_address = '';
 	$billing_country = '';
-	$billing_phone = '';
+	$billing_phone   = '';
 
 	// User Details Merged.
 	if ( is_user_logged_in() ) {
@@ -301,6 +300,7 @@ function wp_travel_get_checkout_form_fields() {
 
 
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
+	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
 	// Set default values.
 	$traveller_fields['first_name']['default'] = $user_fname;
 	$traveller_fields['last_name']['default'] = $user_fname;
@@ -353,6 +353,30 @@ function wp_travel_get_checkout_form_fields() {
 
 		$settings = wp_travel_get_settings();
 		$partial_payment = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : '';
+
+		// GDPR Support
+		$gdpr_msg           = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
+		$privacy_policy_url = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : false;
+
+		if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
+
+			// GDPR Compatibility for enquiry.
+			$payment_fields['wp_travel_checkout_gdpr'] = array(
+				'type' => 'checkbox',
+				'label' => __('Privacy Policy', 'wp-travel'),
+				'options' => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
+				'name' => 'wp_travel_checkout_gdpr_msg',
+				'id' => 'wp-travel-enquiry-gdpr-msg',
+				'validations' => array(
+					'required' => true,
+				),
+				'option_attributes' => array(
+					'required' => true,
+				),
+				'priority' => 120,
+			);
+		}
+
 		$payment_fields['is_partial_payment'] = array(
 			'type' => 'hidden',
 			'name' => 'wp_travel_is_partial_payment',

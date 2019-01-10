@@ -19,7 +19,7 @@ function wp_travel_get_booking_form() {
 		$trip_id = $_POST['wp_travel_post_id'];
 	} elseif ( isset( $post->ID ) ) {
 		$trip_id = $post->ID;
-	} 
+	}
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
 		'id' => 'wp-travel-booking',
@@ -70,7 +70,7 @@ function wp_travel_get_booking_form() {
 			);
 
 		}
-	
+
 	$form = new WP_Travel_FW_Form();
 	$fields['post_id'] = array(
 		'type' => 'hidden',
@@ -95,7 +95,7 @@ function wp_travel_get_booking_form() {
 	}
 
 	$trip_duration = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
-	
+
 	$fields['trip_duration']['default'] = $trip_duration;
 	$fields['trip_duration']['type'] = 'hidden';
 
@@ -141,7 +141,7 @@ function wp_travel_register_booking_metaboxes($a) {
 function wp_travel_admin_head_meta() {
 	global $post;
 	if ( 'itinerary-booking' === $post->post_type ) : ?>
-        
+
 			<style type="text/css">
 				#visibility {
 				    display: none;
@@ -162,6 +162,9 @@ function wp_travel_admin_head_meta() {
 function wp_travel_booking_info( $post ) {
 	if ( ! $post ) {
 		return;
+	}
+	if ( ! class_exists( 'WP_TRAVEL_ABSPATH' ) ) {
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	}
 	$booking_id = $post->ID;
 	$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
@@ -242,8 +245,8 @@ function wp_travel_booking_info( $post ) {
 				$field_name = str_replace( '_traveller', '', $field_name );
 				$input_val = get_post_meta( $booking_id, $field_name, true );
 			}
-			
-			$form_field = new WP_Travel_FW_Field(); 
+
+			$form_field = new WP_Travel_FW_Field();
 			if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
 				foreach ( $input_val as $cart_id => $field_fname_values ) {
 					foreach ( $field_fname_values as $i => $field_fname_value ) { ?>
@@ -256,7 +259,7 @@ function wp_travel_booking_info( $post ) {
 								<h3><?php printf( __( 'Traveler %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
 								<?php
 							}
-							
+
 							foreach( $traveller_fields as $field_group => $field ) :
 								$field['id'] = $field['id'] . '-' . $cart_id . '-' . $i;
 
@@ -274,7 +277,7 @@ function wp_travel_booking_info( $post ) {
 
 								$field_name = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
 								$field['name'] = $field_name;
-								$field['default'] = $current_field_value;                             
+								$field['default'] = $current_field_value;
 								if ( 'hidden' === $field['type'] ) {
 									echo $form_field->init()->render_input( $field );
 									continue;
@@ -354,7 +357,7 @@ function wp_travel_booking_info( $post ) {
 			<script>
 				jQuery(document).ready( function($){
 					$(".wp-travel-date").wpt_datepicker({
-							language: "en",		
+							language: "en",
 							minDate: new Date()
 						});
 				} )
@@ -407,7 +410,7 @@ function wp_travel_save_booking_data( $booking_id ) {
 	// Updating booking status.
 	$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? $_POST['wp_travel_booking_status'] : 'pending';
 	update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
-	
+
 
 	$checkout_fields    = wp_travel_get_checkout_form_fields();
 	// $traveller_fields   = $checkout_fields['traveller_fields'];
@@ -423,7 +426,7 @@ function wp_travel_save_booking_data( $booking_id ) {
 		foreach ( $fields as $key => $field ) :
 			$meta_val = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
 			$booking_id = apply_filters( 'wp_travel_booking_post_id_to_update', $booking_id, $key, $field['name'] );
-			
+
 			if ( is_array( $meta_val ) ) {
 				$new_meta_value = array();
 				foreach ( $meta_val as $key => $value ) {
@@ -494,7 +497,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 			if ( ! $last_name ) {
 				$last_name 	= get_post_meta( $id , 'wp_travel_mname' , true );
 			}
-			
+
 			if ( is_array( $first_name ) ) { // Multiple Travelers.
 
 				reset( $first_name );
@@ -510,7 +513,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 				if ( isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ) {
 					$name .= ' ' . $last_name[ $first_key ][0];
 				}
-				
+
 			} else {
 				$name = $first_name;
 				$name .= ' ' . $middle_name;
@@ -537,7 +540,7 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
  * https://gist.github.com/906872
  */
 function wp_travel_booking_sort( $columns ) {
-	
+
 	$custom = array(
 		'contact_name' 	 => 'contact_name',
 		'booking_status' => 'booking_status',
@@ -586,7 +589,7 @@ function wp_travel_book_now() {
 	if ( ! wp_verify_nonce( $_POST['wp_travel_security'],  'wp_travel_security_action' ) ) {
 		return;
 	}
-	
+
 	$date_format 	 = get_option('date_format') ? get_option('date_format') : 'Y m d';
 	$current_date 	 = date( $date_format  );
 	$trip_id 		 = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : '';
@@ -597,7 +600,7 @@ function wp_travel_book_now() {
 	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
 
 	if ( $enable_checkout && 0 !== $trip_price ) :
-	
+
 		global $wt_cart;
 
 		$items = $wt_cart->getItems();
@@ -620,7 +623,7 @@ function wp_travel_book_now() {
 		$trip_id = '';
 		$pax = 0;
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
-			
+
 		if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 
 			$trip_id = $trip_ids['0'];
@@ -634,7 +637,7 @@ function wp_travel_book_now() {
 			return;
 		}
 	endif;
-	
+
 	if ( empty( $trip_id ) ) {
 		return;
 	}
@@ -720,7 +723,7 @@ function wp_travel_book_now() {
 			if ( ! $saved_booking_ids ) {
 				$saved_booking_ids = array();
 			}
-			array_push( $saved_booking_ids, $booking_id );			
+			array_push( $saved_booking_ids, $booking_id );
 			update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
@@ -745,10 +748,10 @@ function wp_travel_book_now() {
 		$country	= $_POST['wp_travel_country_traveller'];
 		$phone 		= $_POST['wp_travel_phone_traveller'];
 		$email 		= $_POST['wp_travel_email_traveller'];
-		
+
 		reset( $first_name );
 		$first_key = key( $first_name );
-	
+
 		$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
 		$last_name = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
 		$country = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
@@ -782,7 +785,7 @@ function wp_travel_book_now() {
 	$booking_arrival_date 	= $booking_arrival_date;
 	$booking_departure_date = $booking_departure_date;
 
-	
+
 
 	$customer_name 		  	= $first_name . ' ' . $last_name;
 	$customer_country 		= $country;
@@ -810,7 +813,7 @@ function wp_travel_book_now() {
 		'{customer_note}'			=> $customer_note,
 	);
 	$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags );
-		
+
 	$email = new WP_Travel_Emails();
 
 	$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
@@ -830,10 +833,10 @@ function wp_travel_book_now() {
 	$client_message_data = $client_template['mail_header'];
 	$client_message_data .= $client_template['mail_content'];
 	$client_message_data .= $client_template['mail_footer'];
-	
+
 	//Client message.
 	$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
-	
+
 	//Client Subject.
 	$client_subject = $client_template['subject'];
 
@@ -841,22 +844,22 @@ function wp_travel_book_now() {
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
-		
+
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-				
+
 				if ( isset( $wt_cart ) ) {
 					$discounts = $wt_cart->get_discounts();
 					if ( is_array( $discounts ) && ! empty( $discounts ) ) :
-			
+
 						WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
-			
+
 					endif;
 					// Clear Cart After process is complete.
 					$wt_cart->clear();
-				}			
+				}
 			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 		}
 	}
@@ -866,13 +869,13 @@ function wp_travel_book_now() {
 		$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
-				
+
 				if ( isset( $wt_cart ) ) {
 					$discounts = $wt_cart->get_discounts();
 					if ( is_array( $discounts ) && ! empty( $discounts ) ) :
-			
+
 						WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
-			
+
 					endif;
 					// Clear Cart After process is complete.
 					$wt_cart->clear();
@@ -915,7 +918,7 @@ function wp_travel_sanitize_array( $array ) {
 		}
 	}
 	return false;
-} 
+}
 
 /**
  * Get All booking stat data.
@@ -931,9 +934,9 @@ function get_booking_chart() {
 
 	$from_date = ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) ? rawurldecode( $_REQUEST['booking_stat_from'] ) : '';
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
-	
+
 	$compare_stat = ( isset( $_REQUEST['compare_stat'] ) && '' !== $_REQUEST['compare_stat'] ) ? rawurldecode( $_REQUEST['compare_stat'] ) : '';
-	
+
 	$compare_from_date = ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) ? rawurldecode( $_REQUEST['compare_stat_from'] ) : '';
 	$compare_to_date   = ( isset( $_REQUEST['compare_stat_to'] ) && '' !== $_REQUEST['compare_stat_to'] ) ? rawurldecode( $_REQUEST['compare_stat_to'] ) : '';
 	$compare_selected_country = ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) ? $_REQUEST['compare_country'] : '';
@@ -961,7 +964,7 @@ function get_booking_chart() {
 						<span class="checkbox-default-design">
 							<span class="field-label"><?php esc_html_e( 'Compare Stat', 'wp-travel' ); ?>:</span>
 							<label data-on="ON" data-off="OFF">
-								<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ) ?>>						
+								<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ) ?>>
 								<span class="switch">
 							  </span>
 							</label>
@@ -976,22 +979,22 @@ function get_booking_chart() {
 							<input type="text" name="booking_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $from_date ) ?>" id="fromdate1" />
 							<label class="input-group-addon btn" for="fromdate1">
 							<span class="dashicons dashicons-calendar-alt"></span>
-							</label>        
+							</label>
 						</p>
 						<p class="field-group field-group-stat">
 							<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
 							<input type="text" name="booking_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $to_date ) ?>" id="fromdate2" />
 							<label class="input-group-addon btn" for="fromdate2">
 							<span class="dashicons dashicons-calendar-alt"></span>
-							</label> 
+							</label>
 						</p>
 						<p class="field-group field-group-stat">
 							<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
 
 							<select class="selectpicker form-control" name="booking_country">
-							
+
 								<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ) ?></option>
-								
+
 								<?php foreach ( $country_list as $key => $value ) : ?>
 									<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ) ?>>
 										<?php echo esc_html( $value ); ?>
@@ -1018,7 +1021,7 @@ function get_booking_chart() {
 						<div class="show-all btn-show-all" style="display:<?php echo esc_attr( 'yes' ===$compare_stat ? 'none' : 'block' ); ?>" >
 							<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ) ?>
 						</div>
-						
+
 					</div>
 
 					<?php $field_group_display = ( 'yes' === $compare_stat ) ? 'block' : 'none';  ?>
@@ -1029,22 +1032,22 @@ function get_booking_chart() {
 						<input type="text" name="compare_stat_from" class="datepicker-from" class="form-control" value="<?php echo esc_attr( $compare_from_date ) ?>" id="fromdate3" />
 						<label class="input-group-addon btn" for="fromdate3">
 						<span class="dashicons dashicons-calendar-alt"></span>
-						</label>        
+						</label>
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php esc_html_e( 'To', 'wp-travel' ); ?>:</span>
 						<input type="text" name="compare_stat_to" class="datepicker-to" class="form-control" value="<?php echo esc_attr( $compare_to_date ) ?>" id="fromdate4" />
 						<label class="input-group-addon btn" for="fromdate4">
 						<span class="dashicons dashicons-calendar-alt"></span>
-						</label> 
+						</label>
 					</p>
 					<p class="field-group field-group-compare"  style="display:<?php echo esc_attr( $field_group_display ) ?>" >
 						<span class="field-label"><?php esc_html_e( 'Country', 'wp-travel' ); ?>:</span>
 
 						<select class="selectpicker form-control" name="compare_country">
-						
+
 							<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ) ?></option>
-							
+
 							<?php foreach ( $country_list as $key => $value ) : ?>
 								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $compare_selected_country ) ?>>
 									<?php echo esc_html( $value ); ?>
@@ -1071,9 +1074,9 @@ function get_booking_chart() {
 
 
 				</form>
-			</div>	
+			</div>
 		<div class="left-block stat-toolbar-wrap">
-					
+
 		</div>
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
@@ -1151,20 +1154,20 @@ function get_booking_chart() {
 			// @since 1.0.6 // Hook since
 			// do_action( 'wp_travel_after_stat_info_box' ); ?>
 		</div>
-	</div>	
+	</div>
 	<?php
 }
 
 
 /**
  * WP Travel Post Duplicator.
- * 
+ *
  * @param	Array	$actions	Action.
  * @param	Object	$post		Post Object.
- * 
+ *
  * @since	1.7.6
- * 
- * @return	Array $actions; 
+ *
+ * @return	Array $actions;
  */
 function wp_travel_post_duplicator_action_row( $actions, $post ){
 	if( function_exists('wp_travel_post_duplicator_action_row_link') ) {
@@ -1185,13 +1188,13 @@ function wp_travel_post_duplicator_action_row_link( $post ) {
 	if ( WP_TRAVEL_POST_TYPE !== $post_type->name ) {
 		return;
 	}
-	
+
 	// Set the button label
 	$label = sprintf( __( 'Clone %s', 'wp-travel' ), $post_type->labels->singular_name );
 
 	// Create a nonce & add an action
 	$nonce = wp_create_nonce( 'wp_travel_clone_post_nonce' );
-	
+
 	// Return the link
 	return '<a class="wp-travel-clone-post" data-security="' . $nonce . '" href="#" data-post_id="' . $post->ID . '">' . $label . '</a>';
 }
