@@ -3109,17 +3109,23 @@ ul.wp-travel-error {
 .checkout-page-wrap .wp-travel-form-field select,
 .checkout-page-wrap .wp-travel-form-field textarea,
 .checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+  margin-bottom: 15px;
   width: 100%;
 }
 .checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
   margin: -15px 0 0;
 }
-.checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group label {
-  width: 33%;
-  display: inline-block;
-}
 .checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group label:first-of-type {
-  width: 25%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group label:not(:first-of-type) {
+  display: block;
+}
+.checkout-page-wrap .wp-travel-form-field.wp-travel-radio-group > div:last-of-type::before {
+  content: "";
+  display: block;
+  clear: both;
 }
 @media screen and (min-width: 768px) {
   .checkout-page-wrap .wp-travel-form-field label,
@@ -3140,6 +3146,10 @@ ul.wp-travel-error {
 .checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
     width: 66.6666666667%;
   }
+  .checkout-page-wrap .wp-travel-form-field .radio-checkbox-label {
+    width: 66.6666666667%;
+    float: right;
+  }
   .checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
     float: right;
     margin: -15px 0 0;
@@ -3155,7 +3165,8 @@ ul.wp-travel-error {
   }
   .checkout-page-wrap .wp-travel-form-field select,
 .checkout-page-wrap .wp-travel-form-field textarea,
-.checkout-page-wrap .wp-travel-form-field .parsley-errors-list {
+.checkout-page-wrap .wp-travel-form-field .parsley-errors-list,
+.checkout-page-wrap .wp-travel-form-field .radio-checkbox-label {
     width: 75%;
   }
 }

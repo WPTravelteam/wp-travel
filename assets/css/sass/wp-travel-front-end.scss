@@ -3196,6 +3196,7 @@ ul.wp-travel-error {
         select,
         textarea,
         .parsley-errors-list {
+            margin-bottom: 15px;
             width: 100%;
         }
         .parsley-errors-list {
@@ -3203,10 +3204,19 @@ ul.wp-travel-error {
         }
         &.wp-travel-radio-group {
             label {
-                width: 33%;
-                display: inline-block;
                 &:first-of-type {
-                    width: 25%;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
+                &:not(:first-of-type) {
+                    display: block;
+                }
+            }
+            > div:last-of-type {
+                &::before {
+                    content: '';
+                    display: block;
+                    clear: both;
                 }
             }
         }
@@ -3229,6 +3239,10 @@ ul.wp-travel-error {
             .parsley-errors-list {
                 width: 66.6666666667%;
             }
+            .radio-checkbox-label {
+                width: 66.6666666667%;
+                float: right;
+            }
             .parsley-errors-list {
                 float: right;
                 margin: -15px 0 0;
@@ -3244,7 +3258,8 @@ ul.wp-travel-error {
             }
             select,
             textarea,
-            .parsley-errors-list {
+            .parsley-errors-list,
+            .radio-checkbox-label {
                 width: 75%;
             }
         }
