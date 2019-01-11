@@ -75,6 +75,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 												$field['id'] = $field['id'] . '-' . $i;
 
 												// Set required false to extra travellers.
+												$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
 												$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
 
 												$form_field->init( array( $field ) )->render();
