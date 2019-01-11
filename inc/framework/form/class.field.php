@@ -21,6 +21,7 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.radio.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.checkbox.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.text-info.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.heading.php';
 	}
 
 	private function field_types() {
@@ -35,6 +36,7 @@ class WP_Travel_FW_Field {
 		$field_types['radio'] = 'WP_Travel_FW_Field_Radio';
 		$field_types['checkbox'] = 'WP_Travel_FW_Field_Checkbox';
 		$field_types['text_info'] = 'WP_Travel_FW_Field_Text_Info';
+		$field_types['heading'] = 'WP_Travel_FW_Field_Heading';
 		return $field_types;
 	}
 
@@ -44,7 +46,7 @@ class WP_Travel_FW_Field {
 			foreach ( $this->fields as $field ) {
 				if ( array_key_exists( $field['type'], $this->field_types ) ) {
 					$content = $this->process_single( $field );
-					$output .= ( 'hidden' === $field['type'] ) ? $content : $this->template( $field, $content );
+					$output .= ( in_array( $field['type'], array( 'hidden', 'heading' ), true ) ) ? $content : $this->template( $field, $content );
 				}
 			}
 		}
