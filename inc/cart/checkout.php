@@ -109,34 +109,16 @@ $form_fw->init_validation( 'wp-travel-booking' );
 	<?php do_action( 'wp_travel_action_before_payment_info_field' ); ?>
 	<!-- Payment info -->
 	<div class="panel ws-theme-timeline-block">
-		<div class="panel-heading">
-
-		<h4 class="panel-title"><?php esc_html_e( 'Booking / Payments', 'wp-travel' ); ?></h4>
-		</div>
 		<div id="number-accordion4" class="panel-collapse collapse in">
-		<div class="panel-body">
-			<div class="payment-content">
-				<?php foreach( $payment_fields as $field_group => $field ) : ?>
-					<?php if ( 'hidden' === $field['type'] ) {
-						echo $form_field->init()->render_input( $field );
-						continue;
-					}
-					$wrapper_class = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : ''; ?>
-					<div class="form-horizontal <?php echo esc_attr( $wrapper_class ); ?>">
-						<div class="form-group gap-20">
-							<label class="col-sm-4 col-md-3 control-label"><?php echo esc_html( $field['label'] ) ?>:</label>
-							<div class="col-sm-8 col-md-9">
-								<?php echo $form_field->init()->render_input( $field ); ?>
-							</div>
-						</div>
+			<div class="panel-body">
+				<div class="payment-content">
+					<?php $form_field->init( $payment_fields )->render();?>
+					<div class="wp-travel-form-field button-field">
+						<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
+						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 					</div>
-				<?php endforeach; ?>
-				<div class="wp-travel-form-field button-field">
-					<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 	<?php do_action( 'wp_travel_action_after_payment_info_field' ); ?>
