@@ -175,6 +175,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.8.0 =
+Release Date: 
+
+* Fixes: Redirect to homepage on payment.
+* Fixes: Made translation ready some missing translation.
+
 = 1.7.9 =
 Release Date: 4th January 2019
 
