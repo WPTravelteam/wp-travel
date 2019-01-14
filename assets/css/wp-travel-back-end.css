@@ -4519,6 +4519,12 @@ span.wp-travel-message {
   font-size: 12px;
 }
 
+#accountValidationResult {
+  color: green;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
 /* /Error CSS */
 /* License Tab */
 #wp-travel-tab-content-license .wp-travel-tab-product-single {
