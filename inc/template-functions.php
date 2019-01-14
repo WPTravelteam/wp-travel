@@ -2218,7 +2218,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 							<div class="trip_list_by_fixed_departure_dates_wrap">
 								<span class="trip_list_by_fixed_departure_dates_pricing_name"><?php echo $pricing_name ?></span>
 								<span class="trip_list_by_fixed_departure_dates_start">
-									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date('l', strtotime($start_date) ) ); ?></div>
+									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date_i18n('l', strtotime($start_date) ) ); ?></div>
 									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( wp_travel_format_date( $start_date ) ); ?>
 									<input type="hidden" name="trip_date" value="<?php echo esc_attr( $start_date ); ?>">
 									</div>
