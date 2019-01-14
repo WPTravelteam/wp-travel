@@ -26,8 +26,13 @@ $bookings = $args['bookings'];
                 foreach ( $bookings as $key => $b_id ) :
 
                   $bkd_trip_id = get_post_meta( $b_id, 'wp_travel_post_id', true );
-
+                  $booking_status = get_post_status( $b_id );
+                  
                   if ( ! $bkd_trip_id ) {
+                    continue;
+                  }
+
+                  if ( 'publish' !== $booking_status ) {
                     continue;
                   }
                   
