@@ -3188,18 +3188,14 @@ ul.wp-travel-error {
         label {
             font-weight: 600;
         }
-        input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]) {
+        input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
+        select, textarea {
             width: 100%;
             margin-bottom: 15px;
             padding: 3px 15px;
         }
-        select,
-        textarea,
         .parsley-errors-list {
-            margin-bottom: 15px;
             width: 100%;
-        }
-        .parsley-errors-list {
             margin: -15px 0 0;
         }
         &.wp-travel-radio-group {
@@ -3230,13 +3226,8 @@ ul.wp-travel-error {
                 padding: 0 15px 0 0;
                 font-size: 13.8px;
             }
-            input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]) {
-                width: 66.6666666667%;
-                padding: 3px 15px;
-            }
-            select,
-            textarea,
-            .parsley-errors-list {
+            input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
+            select, textarea, .parsley-errors-list {
                 width: 66.6666666667%;
             }
             .radio-checkbox-label {
@@ -3253,13 +3244,8 @@ ul.wp-travel-error {
             .wp-travel-text-info {
                 width: 25%;
             }
-            input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]) {
-                width: 75%;
-            }
-            select,
-            textarea,
-            .parsley-errors-list,
-            .radio-checkbox-label {
+            input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
+            select, textarea, .parsley-errors-list, .radio-checkbox-label {
                 width: 75%;
             }
         }
@@ -3269,8 +3255,6 @@ ul.wp-travel-error {
     }
 
     /* New CSS below while replacing new codes from field-editor */
-
-
 }
 
 .wp-travel-checkout-review-order-table {
