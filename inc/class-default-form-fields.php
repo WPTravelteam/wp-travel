@@ -61,7 +61,16 @@ class WP_Travel_Default_Form_Fields {
    */
   static public function billing() {
   	$fields = array(
-  		'address'		=> array(
+      'wp_travel_billing_address_heading'		=> array(
+  			'type' => 'heading',
+  			'label' => __( 'Billing Address', 'wp-travel' ),
+  			'name' => 'wp_travel_billing_address_heading',
+  			'id' => 'wp-travel-billing-address-heading',
+        'class' => 'panel-title',
+        'heading_tag' => 'h4',
+  			'priority' => 1,
+  		),
+      'address'		=> array(
   			'type' => 'text',
   			'label' => __( 'Address', 'wp-travel' ),
   			'name' => 'wp_travel_address',

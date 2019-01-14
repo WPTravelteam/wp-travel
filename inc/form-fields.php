@@ -328,7 +328,15 @@ function wp_travel_get_checkout_form_fields() {
 	// Standard paypal Merge.
 	$payment_fields = array();
 	if ( wp_travel_is_payment_enabled() ) {
-
+		$payment_fields['wp_travel_billing_address_heading'] = array(
+  			'type' => 'heading',
+  			'label' => __( 'Booking / Payments', 'wp-travel' ),
+  			'name' => 'wp_travel_payment_heading',
+  			'id' => 'wp-travel-payment-heading',
+        'class' => 'panel-title',
+        'heading_tag' => 'h4',
+  			'priority' => 1,
+  		);
 		global $wt_cart;
 		$cart_amounts = $wt_cart->get_total();
 

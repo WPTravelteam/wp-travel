@@ -23,6 +23,7 @@ class WP_Travel_FW_Field_Checkbox {
 		$output = '';
 		// $output = sprintf( '<select id="%s" name="%s" %s>', $this->field['id'], $this->field['name'], $validations );
 		if ( ! empty( $this->field['options'] ) ) {
+			$index = 0;
 			foreach ( $this->field['options'] as $key => $value ) {
 
 				// Option Attributes.
@@ -40,15 +41,19 @@ class WP_Travel_FW_Field_Checkbox {
 					}
 				}
 				if ( is_array( $this->field['default'] ) && count( $this->field['default'] ) > 0 ) {
-					
+
 						$checked = ( in_array( $key, $this->field['default'] ) ) ? 'checked' : '';
-					
+
 				} else {
 					$checked = ( $key == $this->field['default'] ) ? 'checked' : '';
 				}
-				
-				$output .= sprintf( '<label class="radio-checkbox-label"><input type="checkbox" name="%s[]" %s value="%s" %s />%s</label>', $this->field['name'],  $option_attributes, $key, $checked, $value );
+
+				$error_coontainer_id = sprintf( 'error_container-%s', $this->field['id'] );
+				$parsley_error_container = ( 0 === $index ) ? sprintf( 'data-parsley-errors-container="#%s"', $error_coontainer_id ) : '';
+				$output .= sprintf( '<label class="radio-checkbox-label"><input type="checkbox" name="%s[]" %s value="%s" %s %s %s/>%s</label>', $this->field['name'],  $option_attributes, $key, $checked, $validations,$parsley_error_container, $value );
+				$index++;
 			}
+			$output .= sprintf( '<div id="%s"></div>', $error_coontainer_id );
 		}
 		// $output .= sprintf( '</select>' );
 
