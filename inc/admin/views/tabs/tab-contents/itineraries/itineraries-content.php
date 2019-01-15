@@ -4,21 +4,20 @@
  */
 
 global $post;
-$date_format            = get_option('date_format');
-$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+$date_format             = get_option('date_format');
+$js_date_format          = wp_travel_date_format_php_to_js( $date_format );
 $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data' );
-
-$outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
+$outline 	               = get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 
 <table class="form-table">
 	<tr>
-		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
+		<td><div class="wp_travel_admin_editor"><?php wp_editor( $outline, 'wp_travel_outline' ); ?></div></td>
 	</tr>
 </table>
 
 <div id="tab-accordion-itineraries" class="tab-accordion">
 	<div class="itinerary_block panel-group wp-travel-sorting-tabs" id="accordion-itinerary-data" role="tablist" aria-multiselectable="true">
-		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itinerary', 'wp-travel' ) ?></h3> 
+		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itinerary', 'wp-travel' ) ?></h3>
 
 		<?php
 		if ( isset( $trip_itinerary_data_arr[0] ) && is_array( $trip_itinerary_data_arr[0] ) && count( $trip_itinerary_data_arr[0] ) != 0  ) :
