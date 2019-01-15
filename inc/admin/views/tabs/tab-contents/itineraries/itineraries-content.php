@@ -11,7 +11,11 @@ $outline 	               = get_post_meta( $post->ID, 'wp_travel_outline', true )
 
 <table class="form-table">
 	<tr>
-		<td><div class="wp_travel_admin_editor"><?php wp_editor( $outline, 'wp_travel_outline' ); ?></div></td>
+		<td>
+			<div class="wp_travel_admin_editor">
+				<?php wp_editor( $outline, 'wp_travel_outline' ); ?>
+			</div>
+		</td>
 	</tr>
 </table>
 
