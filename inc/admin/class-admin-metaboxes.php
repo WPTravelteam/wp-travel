@@ -53,7 +53,6 @@ class WP_Travel_Admin_Metaboxes {
 		// remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		// remove_meta_box( 'tagsdiv-travel_keywords', WP_TRAVEL_POST_TYPE, 'side' );
-
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
 	}
@@ -69,50 +68,37 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 		$booking_id = $post->ID;
-		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-
 		
-		$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
+		$payment_ids = array();
+		// get previous payment ids.
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+	
+		if ( is_string( $payment_id ) && '' !== $payment_id ) {
+			$payment_ids[] = $payment_id;
+		} else {
+			$payment_ids = $payment_id;
+		}
 
-		if ( is_string( $payment_method ) ) {
+		foreach ( $payment_ids as $payment_id ) :
+
+			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
 			$meta_name = sprintf( '_%s_args', $payment_method );
-
-			$payment_args =  get_post_meta( $payment_id, $meta_name, true ); ?>
-			<?php if ( $payment_args && is_object( $payment_args ) ) : ?>
-				<table>						
-					<?php foreach ( $payment_args as $title => $description ) : ?>
-						<tr>
-							<td><?php echo esc_html( $title ) ?></td>
-							<td>
-								<?php
-								if ( is_array( $description ) || is_object( $description ) ) {
-									$description = ( array )  $description;
-									if ( count( $description ) > 0 ) {
-										echo '<pre>';
-										print_r( $description );
-										echo '</pre>';
-									}
-								} else {
-									echo esc_html( $description );
-								} ?>
-							</td>
-						</tr>
-					<?php endforeach; ?>
-				</table>
-			<?php endif;
-		} elseif ( is_array( $payment_method ) ) {
-			foreach ( $payment_method as $method ) {
-				$meta_name = sprintf( '_%s_args', $method );
-				$payment_args =  get_post_meta( $payment_id, $meta_name, true ); ?>
+			if ( $meta_name ) {
+				$payment_args = get_post_meta( $payment_id, $meta_name, true );
+				?>
 				<?php if ( $payment_args && is_object( $payment_args ) ) : ?>
 					<table>						
+						<tr>
+							<th align="right"><?php esc_html_e( 'Payment ID : ', 'wp-travel' ) ?></th>
+							<td><?php echo esc_html( $payment_id ) ?></td>
+						</tr>
 						<?php foreach ( $payment_args as $title => $description ) : ?>
 							<tr>
-								<td><?php echo esc_html( $title ) ?></td>
+								<th align="right"><?php echo esc_html( $title . ' : ' ); ?></th>
 								<td>
 									<?php
 									if ( is_array( $description ) || is_object( $description ) ) {
-										$description = ( array )  $description;
+										$description = (array) $description;
 										if ( count( $description ) > 0 ) {
 											echo '<pre>';
 											print_r( $description );
@@ -120,15 +106,19 @@ class WP_Travel_Admin_Metaboxes {
 										}
 									} else {
 										echo esc_html( $description );
-									} ?>
+									}
+									?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
 					</table>
-				<?php endif;
+					<hr>
+					<?php
+				endif;
 			}
+		endforeach;
 
-		}
+		
 	}
 
 	/**
@@ -145,29 +135,29 @@ class WP_Travel_Admin_Metaboxes {
 
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 		if ( ! $payment_id ) {
-			$title = 'Payment - #' . $booking_id;
+			$title      = 'Payment - #' . $booking_id;
 			$post_array = array(
-				'post_title' => $title,
+				'post_title'   => $title,
 				'post_content' => '',
-				'post_status' => 'publish',
-				'post_slug' => uniqid(),
-				'post_type' => 'wp-travel-payment',
-				);
+				'post_status'  => 'publish',
+				'post_slug'    => uniqid(),
+				'post_type'    => 'wp-travel-payment',
+			);
 			$payment_id = wp_insert_post( $post_array );
 			update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
 		}
 		$status = wp_travel_get_payment_status();
 
-		$label_key = get_post_meta( $payment_id, 'wp_travel_payment_status', true ) ? get_post_meta( $payment_id, 'wp_travel_payment_status', true ) : 'N/A';
-
+		$details        = wp_travel_booking_data( $booking_id );
+		$payment_status = $details['payment_status'];
 		?>
 		<table>
 			<tr>
-				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ) ?></strong></td>
+				<td><strong><?php esc_html_e( 'Status', 'wp-travel' ); ?></strong></td>
 				<td>
 				<select id="wp_travel_payment_status" name="wp_travel_payment_status" >
 				<?php foreach ( $status as $value => $st ) : ?>
-					<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ) ?>>
+					<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $payment_status ); ?>>
 						<?php echo esc_html( $status[ $value ]['text'] ); ?>
 					</option>
 				<?php endforeach; ?>
@@ -175,29 +165,29 @@ class WP_Travel_Admin_Metaboxes {
 				</td>
 
 			</tr>
-			<?php if ( 'paid' === $label_key ) : ?>
+			<?php if ( 'paid' === $payment_status ) : ?>
 				<?php
 				$payment_info = wp_travel_booking_data( $booking_id );
-				
-				$total_price  	= $payment_info['total_price'];
-				$paid_amount 	= $payment_info['paid_amount'];
-				$due_amount  	= $payment_info['due_amount'];
+
+				$total_price = $payment_info['total_price'];
+				$paid_amount = $payment_info['paid_amount'];
+				$due_amount  = $payment_info['due_amount'];
 				?>
 				<tr>
-					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( $payment_info['payment_mode'] ) ?></td>
+					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?></strong></td>
+					<td><?php echo esc_html( $payment_info['payment_mode'] ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $total_price ) ?></td>
+					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></strong></td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $total_price ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $paid_amount ) ?></td>
+					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ); ?></strong></td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $paid_amount ); ?></td>
 				</tr>
 				<tr>
-					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ) ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $due_amount ) ?></td>
+					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ); ?></strong></td>
+					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $due_amount ); ?></td>
 				</tr>
 			<?php endif; ?>
 		</table>
@@ -208,7 +198,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * Remove metabox.
 	 */
 	public function remove_metaboxs() {
-		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE,'side' );
+		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE, 'side' );
 	}
 	/**
 	 * Clean Metabox Classes.
@@ -227,64 +217,63 @@ class WP_Travel_Admin_Metaboxes {
 	 * @return array
 	 */
 	function add_tabs( $tabs ) {
-		$trips['detail'] = array(
-			'tab_label' => __( 'Description', 'wp-travel' ),
+		$trips['detail']              = array(
+			'tab_label'     => __( 'Description', 'wp-travel' ),
 			'content_title' => __( 'Description', 'wp-travel' ),
 		);
 		$trips['itineraries_content'] = array(
-			'tab_label' => __( 'Itinerary', 'wp-travel' ),
+			'tab_label'     => __( 'Itinerary', 'wp-travel' ),
 			'content_title' => __( 'Outline', 'wp-travel' ),
 		);
-		$trips['price'] = array(
-			'tab_label' => __( 'Dates and Prices', 'wp-travel' ),
+		$trips['price']               = array(
+			'tab_label'     => __( 'Dates and Prices', 'wp-travel' ),
 			'content_title' => __( 'Dates and Prices', 'wp-travel' ),
 		);
-		$trips['trip_includes'] = array(
-			'tab_label' => __( 'Includes/ Excludes', 'wp-travel' ),
+		$trips['trip_includes']       = array(
+			'tab_label'     => __( 'Includes/ Excludes', 'wp-travel' ),
 			'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
 		);
-		$trips['trip_facts'] = array(
-			'tab_label' => __( 'Facts', 'wp-travel' ),
+		$trips['trip_facts']          = array(
+			'tab_label'     => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Trip Facts', 'wp-travel' ),
 		);
 		// $trips['additional_info'] = array(
-		// 	'tab_label' => __( 'Additional Info', 'wp-travel' ),
-		// 	'content_title' => __( 'Additional Info', 'wp-travel' ),
+		// 'tab_label' => __( 'Additional Info', 'wp-travel' ),
+		// 'content_title' => __( 'Additional Info', 'wp-travel' ),
 		// );
 		$trips['images_gallery'] = array(
-			'tab_label' => __( 'Gallery', 'wp-travel' ),
+			'tab_label'     => __( 'Gallery', 'wp-travel' ),
 			'content_title' => __( 'Gallery', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'gallery_tab_callback' ),
 		);
 
 		$trips['locations'] = array(
-			'tab_label' => __( 'Locations', 'wp-travel' ),
+			'tab_label'     => __( 'Locations', 'wp-travel' ),
 			'content_title' => __( 'Locations', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$trips['faq'] = array(
-			'tab_label' => __( 'FAQs', 'wp-travel' ),
+			'tab_label'     => __( 'FAQs', 'wp-travel' ),
 			'content_title' => __( 'FAQs', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
 		);
 		$trips['setting'] = array(
-			'tab_label' => __( 'Tabs', 'wp-travel' ),
+			'tab_label'     => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Tabs', 'wp-travel' ),
 			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$trips['misc_options'] = array(
-			'tab_label' => __( 'Misc. Options', 'wp-travel' ),
+			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 		);
 
 		// $trips['advanced'] = array(
-		// 	'tab_label' => __( 'Advanced', 'wp-travel' ),
-		// 	'content_title' => __( 'Advanced Options', 'wp-travel' ),
-		// 	'content_callback' => array( $this, 'call_back' ),
+		// 'tab_label' => __( 'Advanced', 'wp-travel' ),
+		// 'content_title' => __( 'Advanced Options', 'wp-travel' ),
+		// 'content_callback' => array( $this, 'call_back' ),
 		// );
-
 		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
 		return apply_filters( 'wp_travel_tabs', $tabs );
 	}
@@ -422,40 +411,40 @@ class WP_Travel_Admin_Metaboxes {
 
 		global $post;
 
-		if( 'itineraries_content' !== $tab ) {
+		if ( 'itineraries_content' !== $tab ) {
 			return;
 		}
 
 		WP_Travel()->tabs->content( 'itineraries/itineraries-content.php' );
 
-	 }
-
-	public function trip_facts_callback($tab, $args){
-	if( 'trip_facts' !== $tab ) {
-		return;
 	}
-	WP_Travel()->tabs->content( 'itineraries/fact-tab.php' );
+
+	public function trip_facts_callback( $tab, $args ) {
+		if ( 'trip_facts' !== $tab ) {
+			return;
+		}
+		WP_Travel()->tabs->content( 'itineraries/fact-tab.php' );
 	}
 
 	 /**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab tab name 'itineraries_content'
-	 * @return Mixed
-	 */
+	  * Callback Function For Itineraries Content Tabs
+	  *
+	  * @param string $tab tab name 'itineraries_content'
+	  * @return Mixed
+	  */
 	function frontend_tabs_content_call_back( $tab, $args ) {
-		if( 'setting' !== $tab ) {
+		if ( 'setting' !== $tab ) {
 			return;
 		}
-		$post_id = $args['post']->ID;
-		$tabs = wp_travel_get_frontend_tabs();
+		$post_id                   = $args['post']->ID;
+		$tabs                      = wp_travel_get_frontend_tabs();
 		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
 		if ( is_array( $tabs ) && count( $tabs ) > 0 && ! $enable_custom_itinerary_tabs ) {
 			?>
-			<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+			<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 				<div class="wp-travel-upsell-message">
 					<div class="wp-travel-pro-feature-notice">
 						<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
@@ -471,7 +460,7 @@ class WP_Travel_Admin_Metaboxes {
 							<input name="wp_travel_use_global_tabs" type="hidden"  value="no">
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF">
-							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ) ?> />
+							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ); ?> />
 								<span class="switch">
 								</span>
 							</label>
@@ -486,7 +475,8 @@ class WP_Travel_Admin_Metaboxes {
 					</tr>
 				</table>
 			<?php
-			echo '<table class="wp-travel-sorting-tabs form-table">'; ?>
+			echo '<table class="wp-travel-sorting-tabs form-table">';
+			?>
 				<thead>
 					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
 					<th width="35%"><?php esc_html_e( 'Global Trip Title', 'wp-travel' ); ?></th>
@@ -507,13 +497,13 @@ class WP_Travel_Admin_Metaboxes {
 					</td>
 					<td>
 						<div class="wp-travel-sorting-tabs-wrap">
-						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
-						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" value="no" />
+						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
+						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
 					</div>
 					</td>
 					<td width="20%">
 						<span class="show-in-frontend checkbox-default-design">
-							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ) ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ) ?> /><?php //esc_html_e( 'Display', 'wp-travel' ); ?>
+							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ); ?> /><?php // esc_html_e( 'Display', 'wp-travel' ); ?>
 							<span class="switch">
 							  </span>
 							</label>
@@ -521,20 +511,20 @@ class WP_Travel_Admin_Metaboxes {
 						<span class="check-handeller"></span>
 					</td>
 				</tr>
-			<?php
-			endforeach; 
-		
+				<?php
+			endforeach;
+
 			echo '</tbody></table>';
 		}
 
 		// Custom itinerary tabs support.
 		do_action( 'wp_travel_itinerary_custom_tabs' );
 
-	 }
+	}
 
 	function wp_travel_misc_options_callback( $tab, $args ) {
 
-		if( 'misc_options' !== $tab ) {
+		if ( 'misc_options' !== $tab ) {
 			return;
 		}
 
@@ -549,10 +539,10 @@ class WP_Travel_Admin_Metaboxes {
 
 		do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
 
-		$post_id = $args['post']->ID;
+		$post_id           = $args['post']->ID;
 			$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 		?>
-		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+		<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Tired of updating repitative FAQs ?', 'wp-travel' ); ?></h4>
@@ -563,23 +553,23 @@ class WP_Travel_Admin_Metaboxes {
 		<?php endif; ?>
 		<div class="wp-travel-tab-content-faq-header clearfix">
 			<?php
-			if ( is_array( $faq_questions ) && count( $faq_questions ) != 0  ) :
-				$empty_item_style = 'display:none';
+			if ( is_array( $faq_questions ) && count( $faq_questions ) != 0 ) :
+				$empty_item_style    = 'display:none';
 				$collapse_link_style = 'display:block';
 			else :
-				$empty_item_style = 'display:block';
+				$empty_item_style    = 'display:block';
 				$collapse_link_style = 'display:none';
 			endif;
 			?>
 
-			<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ) ?>">
+			<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ); ?>">
 				<p>
 					<?php esc_html_e( 'Click on add new question to add FAQ.', 'wp-travel' ); ?>
 				</p>
 			</div>
-			<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ) ?>" >
-				<a href="#" data-parent="wp-travel-tab-content-faq" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ) ?></span></a>
-				<a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ) ?></span></a>
+			<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ); ?>" >
+				<a href="#" data-parent="wp-travel-tab-content-faq" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+				<a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 			</div>
 		</div>
 		<div id="tab-accordion" class="tab-accordion">
@@ -588,28 +578,28 @@ class WP_Travel_Admin_Metaboxes {
 
 					<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
 
-					<?php foreach( $faq_questions as $key => $question ) : ?>
-						<?php $question = ( '' !== $question ) ? $question : __( 'Untitled', 'wp-travel' ) ?>
+					<?php foreach ( $faq_questions as $key => $question ) : ?>
+						<?php $question = ( '' !== $question ) ? $question : __( 'Untitled', 'wp-travel' ); ?>
 						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr($key); ?>">
+							<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
 								<h4 class="panel-title">
 									<div class="wp-travel-sorting-handle"></div>
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr($key); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr($key); ?>">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
 
-										<span bind="faq_question_<?php echo esc_attr($key); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
+										<span bind="faq_question_<?php echo esc_attr( $key ); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 
 									<span class="collapse-icon"></span>
 									</a>
 									<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 								</h4>
 							</div>
-							<div id="collapse-<?php echo esc_attr($key); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-"<?php echo esc_attr($key); ?>>
+							<div id="collapse-<?php echo esc_attr( $key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-"<?php echo esc_attr( $key ); ?>>
 							<div class="panel-body">
 								<div class="panel-wrap">
 									<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-									<input bind="faq_question_<?php echo esc_attr($key); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
+									<input bind="faq_question_<?php echo esc_attr( $key ); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
 								</div>
-								<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."><?php echo esc_attr( $faq_answers[ $key ] ) ?></textarea>
+								<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."><?php echo esc_attr( $faq_answers[ $key ] ); ?></textarea>
 							</div>
 							</div>
 						</div>
@@ -670,7 +660,7 @@ class WP_Travel_Admin_Metaboxes {
 			}
 			#>
 		</script>
-	<?php
+		<?php
 	}
 
 	/**
@@ -700,7 +690,7 @@ class WP_Travel_Admin_Metaboxes {
 				<td><input type="text" id="wp-travel-trip-code" disabled="disabled" value="<?php echo esc_attr( $trip_code ); ?>" /></td>
 			</tr>
 		</table>
-		<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+		<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Need Custom Trip Code ?', 'wp-travel' ); ?></h4>
@@ -794,15 +784,16 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
 
-		$date_format = get_option('date_format');
+		$date_format          = get_option( 'date_format' );
 		$wp_travel_start_date = '';
 		if ( isset( $_POST['wp_travel_start_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
 			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
 			if ( '' !== $wp_travel_start_date ) {
 				$date = DateTime::createFromFormat( $date_format, $wp_travel_start_date );
-				if ( $date )
-					$wp_travel_start_date = $date->format( 'Y-m-d' );				
-			}			
+				if ( $date ) {
+					$wp_travel_start_date = $date->format( 'Y-m-d' );
+				}
+			}
 		}
 		update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
 
@@ -812,18 +803,17 @@ class WP_Travel_Admin_Metaboxes {
 
 			if ( '' !== $wp_travel_end_date ) {
 				$date = DateTime::createFromFormat( $date_format, $wp_travel_end_date );
-				if ( $date )
-					$wp_travel_end_date = $date->format( 'Y-m-d' );				
+				if ( $date ) {
+					$wp_travel_end_date = $date->format( 'Y-m-d' );
+				}
 			}
-
 		}
 		update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
 
 		// Itinerary Details Data.
+		if ( isset( $_POST['wp_travel_trip_itinerary_data'] ) ) {
 
-		if( isset( $_POST['wp_travel_trip_itinerary_data'] ) ) {
-
-			$wp_travel_trip_itinerary_data =  wp_unslash( $_POST['wp_travel_trip_itinerary_data'] );
+			$wp_travel_trip_itinerary_data = wp_unslash( $_POST['wp_travel_trip_itinerary_data'] );
 			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $wp_travel_trip_itinerary_data );
 
 		}
@@ -864,7 +854,7 @@ class WP_Travel_Admin_Metaboxes {
 			$fixed_departure = sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
-		
+
 		// Multiple departure dates.
 		$wp_travel_enable_pricing_options = 'no';
 		if ( isset( $_POST['wp_travel_enable_pricing_options'] ) ) {
@@ -878,7 +868,6 @@ class WP_Travel_Admin_Metaboxes {
 			$multiple_departure_enabled = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_multiple_fixed_departue'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_enable_multiple_fixed_departue', $multiple_departure_enabled );
-
 
 		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
 			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );
@@ -896,7 +885,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
 
-		//Trip enquiry Global
+		// Trip enquiry Global
 		$use_global_trip_enquiry_option = 'yes';
 		if ( isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) {
 			$use_global_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) );
@@ -904,7 +893,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		update_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', $use_global_trip_enquiry_option );
 
-		//Trip Specific Enquiry Option
+		// Trip Specific Enquiry Option
 		$enable_trip_enquiry_option = 'no';
 		if ( isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) {
 			$enable_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) );
@@ -932,7 +921,7 @@ class WP_Travel_Admin_Metaboxes {
 			$old_content = get_post_field( 'post_content', $post_id );
 			if ( ! wp_is_post_revision( $post_id ) && $old_content !== $new_content ) {
 				$args = array(
-					'ID' => $post_id,
+					'ID'           => $post_id,
 					'post_content' => $new_content,
 				);
 
@@ -954,7 +943,7 @@ class WP_Travel_Admin_Metaboxes {
 		if ( isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) {
 			$minimum_partial_payout_percent = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) );
 			if ( $minimum_partial_payout_percent > 0 ) {
-				
+
 				update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', $minimum_partial_payout_percent );
 			}
 		}
@@ -963,7 +952,7 @@ class WP_Travel_Admin_Metaboxes {
 			$use_global = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', $use_global );
-		
+
 		// Update Pricing Options Metas.
 		$wp_travel_pricing_options = '';
 		if ( isset( $_POST['wp_travel_pricing_options'] ) ) {
@@ -973,7 +962,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
 
-		//Update multiple trip dates options.
+		// Update multiple trip dates options.
 		$wp_travel_multiple_trip_dates = array();
 		if ( isset( $_POST['wp_travel_multiple_trip_dates'] ) ) {
 			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
@@ -983,15 +972,17 @@ class WP_Travel_Admin_Metaboxes {
 
 				if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
 					$date = DateTime::createFromFormat( $date_format, $date_value['start_date'] );
-					if ( $date )
+					if ( $date ) {
 						$start_date = $date->format( 'Y-m-d' );
+					}
 					$wp_travel_multiple_trip_dates[ $date_key ]['start_date'] = $start_date;
 				}
 
 				if ( isset( $date_value['end_date'] ) && '' !== $date_value['end_date'] ) {
 					$date = DateTime::createFromFormat( $date_format, $date_value['end_date'] );
-					if ( $date )
+					if ( $date ) {
 						$end_date = $date->format( 'Y-m-d' );
+					}
 					$wp_travel_multiple_trip_dates[ $date_key ]['end_date'] = $end_date;
 				}
 			}
@@ -1003,7 +994,7 @@ class WP_Travel_Admin_Metaboxes {
 		$wp_travel_trip_facts = array();
 
 		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
-			$wp_travel_trip_facts = array_filter(array_filter(array_values($_POST['wp_travel_trip_facts']),'array_filter'),'count');
+			$wp_travel_trip_facts = array_filter( array_filter( array_values( $_POST['wp_travel_trip_facts'] ), 'array_filter' ), 'count' );
 		}
 
 		update_post_meta( $post_id, 'wp_travel_trip_facts', $wp_travel_trip_facts );
@@ -1014,9 +1005,8 @@ class WP_Travel_Admin_Metaboxes {
 			$wp_travel_tour_extras = stripslashes_deep( $_POST['wp_travel_tour_extras'] );
 		}
 		update_post_meta( $post_id, 'wp_travel_tour_extras', $wp_travel_tour_extras );
-		
-		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 
+		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
 		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );
 	}
 
@@ -1033,18 +1023,18 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$gallery_ids = get_post_meta( $post->ID, 'wp_travel_itinerary_gallery_ids', true );
 		if ( false !== $gallery_ids && ! empty( $gallery_ids ) ) {
-			$gallery_data = array();
-			$i = 0;
+			$gallery_data  = array();
+			$i             = 0;
 			$_thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
 			foreach ( $gallery_ids as $id ) {
 				if ( 0 === $i && '' === $_thumbnail_id ) {
 					$_thumbnail_id = $id;
 				}
-				$gallery_data[ $i ]['id'] = $id;
+				$gallery_data[ $i ]['id']  = $id;
 				$gallery_data[ $i ]['url'] = wp_get_attachment_thumb_url( $id );
 				$i++;
 			}
-			$data['gallery_data'] = $gallery_data;
+			$data['gallery_data']  = $gallery_data;
 			$data['_thumbnail_id'] = $_thumbnail_id;
 		}
 		return $data;

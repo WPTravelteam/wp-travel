@@ -2178,25 +2178,50 @@ function wp_travel_booking_data( $booking_id ) {
 	$booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status', true );
     $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
-    $payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+	$payment_ids = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+	// dd( $payment_ids, true );
+	$total_paid_amount = 0;
+	$mode = wp_travel_get_payment_mode();
 
-    $trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
-	$trip_price  = number_format( $trip_price, 2, '.', '' );
+	// Total trip price only in first payment id so we need to get total trip price from first payment id.
+	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
+		if ( isset( $payment_ids[0] ) ) {
+			$trip_price  = ( get_post_meta( $payment_ids[0], 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_ids[0], 'wp_travel_trip_price' , true ) : 0;
+			$trip_price  = number_format( $trip_price, 2, '.', '' );
+		}
+		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
+		
+		foreach ( $payment_ids as $payment_id ) {
 
-	$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including
+			$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+			$paid_amount = number_format( $paid_amount, 2, '.', '' );
+			
+			$total_paid_amount += $paid_amount;
+			// $last_payment_id = $payment_id;
+		}
 
-    $paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
-    $paid_amount = number_format( $paid_amount, 2, '.', '' );
+	} else {
+		$payment_id = $payment_ids;
+		
+		$trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
+		$trip_price  = number_format( $trip_price, 2, '.', '' );
+		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
+		
+		$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+		$paid_amount = number_format( $paid_amount, 2, '.', '' );
+		
+		$total_paid_amount += $paid_amount;
+		// $last_payment_id = $payment_id;
+	}
 
-    $due_amount  = number_format( $trip_price - $paid_amount, 2, '.', '' );
+    $due_amount  = number_format( $trip_price - $total_paid_amount, 2, '.', '' );
     if ( $due_amount < 0 ) {
         $due_amount = 0;
     }
 
     $payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
     $payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
-
-    $mode = wp_travel_get_payment_mode();
+    
     $label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
     $payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
 
@@ -2206,7 +2231,7 @@ function wp_travel_booking_data( $booking_id ) {
         'payment_mode'   => $payment_mode,
         'payment_status' => $payment_status,
         'total_price'    => $trip_price,
-        'paid_amount'    => $paid_amount,
+        'paid_amount'    => $total_paid_amount,
         'due_amount'     => $due_amount,
         // 'tax'           => 0,
         // 'discount'      => 0,
