@@ -13,13 +13,13 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 <table class="form-table">
 	<tr>
 		<td><?php wp_editor( $outline, 'wp_travel_outline' ); ?></td>
-	</tr>        
+	</tr>
 </table>
 
 <div id="tab-accordion-itineraries" class="tab-accordion">
 	<div class="itinerary_block panel-group wp-travel-sorting-tabs" id="accordion-itinerary-data" role="tablist" aria-multiselectable="true">
-		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itineraries', 'wp-travel' ) ?></h3> 
-		
+		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itinerary', 'wp-travel' ) ?></h3> 
+
 		<?php
 		if ( isset( $trip_itinerary_data_arr[0] ) && is_array( $trip_itinerary_data_arr[0] ) && count( $trip_itinerary_data_arr[0] ) != 0  ) :
 			$empty_item_style = 'display:none';
@@ -69,7 +69,7 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 							<div class="wp-travel-sorting-handle"></div>
 							<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-itinerary-data" href="#collapse-itinerary-<?php echo esc_attr( $cnt ) ?>" aria-expanded="true" aria-controls="collapse-itinerary<?php echo esc_attr( $cnt ) ?>">
 
-							<span bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>, 
+							<span bind="itinerary_label_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>,
 							<span bind="itinerary_title_<?php echo esc_attr( $cnt ) ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
 							<span class="collapse-icon"></span>
 							</a>
@@ -122,13 +122,13 @@ $outline 	= get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 				</div>
 			<?php $cnt++; ?>
 			<?php endforeach; ?>
-		<?php endif; ?>  
+		<?php endif; ?>
 	</div>
 </div>
 <div class="wp-travel-faq-quest-button">
 	<button id="add_itinerary_row" class="button button-primary" >
-		<?php _e('Add Itinerary', 'wp-travel'); ?> 
-	</button> 
+		<?php _e('Add Itinerary', 'wp-travel'); ?>
+	</button>
 </div>
 
 <script type="text/html" id="tmpl-wp-travel-itinerary-items">
