@@ -463,8 +463,12 @@ function wp_travel_send_email_payment( $booking_id ) {
  * @param string $key Payment args Key.
  * @return void
  */
-function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, $key = '_paypal_args' ) {
-		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, $key = '_paypal_args', $payment_id = null ) {
+		if ( ! $payment_id ) {
+			$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+			// need to get last payment id here. remaining.
+		}	
+		
 		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
 		update_post_meta( $payment_id, $key, $args );
