@@ -2,9 +2,12 @@
 class WP_Travel_FW_Field {
 	private $fields;
 	private $field_types;
-	function init( $fields = array() ) {
+	function init( $fields = array(), $args = array() ) {
 		$this->includes();
 		$this->fields = $fields;
+		if ( ! empty( $args['single'] ) && true === $args['single'] ) {
+			$this->fields = array( $fields );
+		}
 		$this->field_types = $this->field_types();
 		return $this;
 	}
