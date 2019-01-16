@@ -2179,7 +2179,6 @@ function wp_travel_booking_data( $booking_id ) {
     $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
 	$payment_ids = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-	// dd( $payment_ids, true );
 	$total_paid_amount = 0;
 	$mode = wp_travel_get_payment_mode();
 
@@ -2211,9 +2210,9 @@ function wp_travel_booking_data( $booking_id ) {
 		$paid_amount = number_format( $paid_amount, 2, '.', '' );
 		
 		$total_paid_amount += $paid_amount;
-		// $last_payment_id = $payment_id;
 	}
 
+	$total_paid_amount = sprintf( '%0.2f', $total_paid_amount );
     $due_amount  = number_format( $trip_price - $total_paid_amount, 2, '.', '' );
     if ( $due_amount < 0 ) {
         $due_amount = 0;
@@ -2237,6 +2236,47 @@ function wp_travel_booking_data( $booking_id ) {
         // 'discount'      => 0,
     );
     return $amounts;
+}
+
+/**
+ * Return All Payment Details.
+ *
+ * @since 1.8.0
+ * @return array
+ */
+function wp_travel_payment_data( $booking_id ) {
+	if ( ! $booking_id ) {
+		return;
+	}
+
+	$payment_ids = array();
+	// get previous payment ids.
+	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+
+	if ( is_string( $payment_id ) && '' !== $payment_id ) {
+		$payment_ids[] = $payment_id;
+	} else {
+		$payment_ids = $payment_id;
+	}
+	$payment_data = array();
+	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
+		$i = 0;
+		foreach ( $payment_ids as $payment_id ) :
+			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
+			$meta_name = sprintf( '_%s_args', $payment_method );
+			if ( $meta_name ) :
+				$payment_args = get_post_meta( $payment_id, $meta_name, true );
+				if ( $payment_args && ( is_object( $payment_args ) || is_array( $payment_args ) ) ) : 
+					$payment_data[$i]['data'] = $payment_args;
+					$payment_data[$i]['payment_id'] = $payment_id;
+					$payment_data[$i]['payment_method'] = $payment_method;
+					$payment_data[$i]['payment_date'] = get_the_date( '', $payment_id );
+					$i++;
+				endif;
+			endif;
+		endforeach;
+	}
+	return $payment_data;
 }
 
 /**
