@@ -1996,3 +1996,9 @@ span.wp-travel-message {
     margin: 40px auto;
     position: relative;
 }
+
+.wp_travel_admin_editor {
+  iframe {
+      height: 200px!important;
+  }
+}

@@ -72,7 +72,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 											foreach( $traveller_fields as $field_group => $field ) :
 												$field_name = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
 												$field['name'] = $field_name;
-												$field['id'] = $field['id'] . '-' . $i;
+												$field['id'] = sprintf( '%s-%s-%d', $field['id'], $cart_id, $i );
 
 												// Set required false to extra travellers.
 												$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;

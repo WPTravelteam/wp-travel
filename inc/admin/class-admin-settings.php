@@ -97,7 +97,7 @@ class WP_Travel_Admin_Settings {
 		);
 
 		$settings_fields['itinerary'] = array(
-			'tab_label' => __( WP_TRAVEL_POST_TITLE_SINGULAR, 'wp-travel' ),
+			'tab_label' => ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ),
 			'content_title' => __( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) . ' Settings', 'wp-travel' ),
 		);
 
@@ -521,9 +521,11 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<?php
-											$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content']  ?  $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
-											wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
+											<div class="wp_travel_admin_editor">
+												<?php
+												$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content']  ?  $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template[email_content]'  ) ); ?>
+											</div>
 										</td>
 									</tr>
 
@@ -568,9 +570,11 @@ class WP_Travel_Admin_Settings {
 											<label for="booking-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 										</th>
 										<td>
-											<?php
-											$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
-											wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
+											<div class="wp_travel_admin_editor">
+												<?php
+												$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content']  ?  $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
+												wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template[email_content]'  ) ); ?>
+											</div>
 										</td>
 									</tr>
 
@@ -636,9 +640,11 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php
-												$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content']  ?  $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
-												wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template[email_content]'  ) ); ?>
+												<div class="wp_travel_admin_editor">
+													<?php
+													$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content']  ?  $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
+													wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template[email_content]'  ) ); ?>
+												</div>
 											</td>
 										</tr>
 
@@ -683,9 +689,11 @@ class WP_Travel_Admin_Settings {
 												<label for="payment-client-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php
-												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content']  ?  $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
-												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template[email_content]'  ) ); ?>
+												<div class="wp_travel_admin_editor">
+													<?php
+													$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content']  ?  $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
+													wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template[email_content]'  ) ); ?>
+												</div>
 											</td>
 										</tr>
 
@@ -750,9 +758,11 @@ class WP_Travel_Admin_Settings {
 												<label for="enquiry-admin-email-content"><?php esc_html_e( 'Email Content', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<?php
-												$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !==$enquiry_admin_email_settings['email_content']  ?  $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
-												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template[email_content]'  ) ); ?>
+												<div class="wp_travel_admin_editor">
+													<?php
+													$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !==$enquiry_admin_email_settings['email_content']  ?  $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
+													wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template[email_content]'  ) ); ?>
+												</div>
 											</td>
 										</tr>
 
