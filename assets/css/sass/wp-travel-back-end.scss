@@ -509,8 +509,20 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .wp-travel-form-field {
         display: flex;
         width: 80%;
+        .parsley-errors-list {
+            position: absolute;
+            min-width: calc(100% - 167px);
+            right: 0;
+            bottom: -21px;
+        }
         @media screen and (max-width: 768px) {
             flex-wrap: wrap;
+            .parsley-errors-list {
+                min-width: 100%;
+                right: auto;
+                bottom: -21px;
+                left: 15px;
+            }
         }
         label {
             margin-right: 15px;
