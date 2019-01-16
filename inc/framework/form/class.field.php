@@ -47,7 +47,8 @@ class WP_Travel_FW_Field {
 		$output = '';
 		if ( ! empty( $this->fields ) ) {
 			foreach ( $this->fields as $field ) {
-				if ( array_key_exists( $field['type'], $this->field_types ) ) {
+				$field = $this->verify_arguments( $field );
+				if ( $field ) {
 					$content = $this->process_single( $field );
 					$output .= ( in_array( $field['type'], array( 'hidden', 'heading' ), true ) ) ? $content : $this->template( $field, $content );
 				}
@@ -85,10 +86,16 @@ class WP_Travel_FW_Field {
 	}
 
 	private function process_single( $field ) {
-		if ( ! $field  ) {
-			return;
+		$field = $this->verify_arguments( $field );
+		if ( $field ) {
+			$field_init = new $this->field_types[ $field['type'] ];
+			return $field_init->init( $field )->render( false );
 		}
-		if ( array_key_exists( $field['type'], $this->field_types ) ) {
+		return;
+	}
+
+	function verify_arguments( $field ) {
+		if ( ! empty( $field['type'] ) && array_key_exists( $field['type'], $this->field_types ) ) {
 			$field['label'] = isset( $field['label'] ) ? $field['label'] : '';
 			$field['name'] = isset( $field['name'] ) ? $field['name'] : '';
 			$field['id'] = isset( $field['id'] ) ? $field['id'] : $field['name'];
@@ -98,6 +105,11 @@ class WP_Travel_FW_Field {
 			$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
 			$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
 			$field['attributes'] = isset( $field['attributes'] ) ? $field['attributes'] : array();
+
+			// remove required attr if set false.
+			if ( isset( $field['validations']['required'] ) && ( false === $field['validations']['required'] || '' === $field['validations']['required'] ) ) {
+				unset( $field['validations']['required'] );
+			}
 
 			// Lagacy code starts.
 			if ( empty( $field['attributes']['placeholder'] ) && ! empty( $field['placeholder'] ) ) {
@@ -113,9 +125,9 @@ class WP_Travel_FW_Field {
 			}
 			// Lagacy code ends.
 
-			$field_init = new $this->field_types[ $field['type'] ];
-			return $field_init->init( $field )->render( false );
+			return $field;
 		}
-		return;
+
+		return false;
 	}
 }
