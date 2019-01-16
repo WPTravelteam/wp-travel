@@ -27,7 +27,6 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'description_tab_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'additional_info_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'itineraries_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'location_tab_callback' ), 10, 2 );
@@ -49,10 +48,7 @@ class WP_Travel_Admin_Metaboxes {
 	public function register_metaboxes() {
 		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
 		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
-		// remove_meta_box( 'itinerary_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
-		// remove_meta_box( 'itinerary_typesdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
-		// remove_meta_box( 'tagsdiv-travel_keywords', WP_TRAVEL_POST_TYPE, 'side' );
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
 	}
@@ -67,32 +63,33 @@ class WP_Travel_Admin_Metaboxes {
 		if ( ! $post ) {
 			return;
 		}
-		$booking_id = $post->ID;
-		
-		$payment_ids = array();
-		// get previous payment ids.
-		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-	
-		if ( is_string( $payment_id ) && '' !== $payment_id ) {
-			$payment_ids[] = $payment_id;
-		} else {
-			$payment_ids = $payment_id;
-		}
+		$booking_id   = $post->ID;
+		$payment_data = wp_travel_payment_data( $booking_id );
 
-		foreach ( $payment_ids as $payment_id ) :
+		if ( $payment_data && count( $payment_data ) > 0 ) {
+			foreach ( $payment_data as $payment_args ) {
 
-			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
-			$meta_name = sprintf( '_%s_args', $payment_method );
-			if ( $meta_name ) {
-				$payment_args = get_post_meta( $payment_id, $meta_name, true );
-				?>
-				<?php if ( $payment_args && is_object( $payment_args ) ) : ?>
-					<table>						
-						<tr>
-							<th align="right"><?php esc_html_e( 'Payment ID : ', 'wp-travel' ) ?></th>
-							<td><?php echo esc_html( $payment_id ) ?></td>
-						</tr>
-						<?php foreach ( $payment_args as $title => $description ) : ?>
+				if ( isset( $payment_args['data'] ) && ( is_object( $payment_args['data'] ) || is_array( $payment_args['data'] ) ) ) : ?>
+					<table>
+						<?php if ( isset( $payment_args['payment_id'] ) ) : ?>
+							<tr>
+								<th align="right"><?php esc_html_e( 'Payment ID : ', 'wp-travel' ); ?></th>
+								<td><?php echo esc_html( $payment_args['payment_id'] ); ?></td>
+							</tr>
+						<?php endif; ?>
+						<?php if ( isset( $payment_args['payment_method'] ) ) : ?>
+							<tr>
+								<th align="right"><?php esc_html_e( 'Payment Method : ', 'wp-travel' ); ?></th>
+								<td><?php echo esc_html( $payment_args['payment_method'] ); ?></td>
+							</tr>
+						<?php endif; ?>	
+						<?php if ( isset( $payment_args['payment_date'] ) ) : ?>
+							<tr>
+								<th align="right"><?php esc_html_e( 'Payment Date : ', 'wp-travel' ); ?></th>
+								<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
+							</tr>
+						<?php endif; ?>			
+						<?php foreach ( $payment_args['data'] as $title => $description ) : ?>
 							<tr>
 								<th align="right"><?php echo esc_html( $title . ' : ' ); ?></th>
 								<td>
@@ -116,9 +113,7 @@ class WP_Travel_Admin_Metaboxes {
 					<?php
 				endif;
 			}
-		endforeach;
-
-		
+		}
 	}
 
 	/**
@@ -205,7 +200,7 @@ class WP_Travel_Admin_Metaboxes {
 	 *
 	 * @param array $classes Class list array.
 	 */
-	function add_clean_metabox_class( $classes ) {
+	public function add_clean_metabox_class( $classes ) {
 		array_push( $classes, 'wp-travel-clean-metabox' );
 		return $classes;
 	}
@@ -216,7 +211,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param array $tabs Array list of all tabs.
 	 * @return array
 	 */
-	function add_tabs( $tabs ) {
+	public function add_tabs( $tabs ) {
 		$trips['detail']              = array(
 			'tab_label'     => __( 'Description', 'wp-travel' ),
 			'content_title' => __( 'Description', 'wp-travel' ),
@@ -237,31 +232,24 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label'     => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Trip Facts', 'wp-travel' ),
 		);
-		// $trips['additional_info'] = array(
-		// 'tab_label' => __( 'Additional Info', 'wp-travel' ),
-		// 'content_title' => __( 'Additional Info', 'wp-travel' ),
-		// );
+
 		$trips['images_gallery'] = array(
 			'tab_label'     => __( 'Gallery', 'wp-travel' ),
 			'content_title' => __( 'Gallery', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'gallery_tab_callback' ),
 		);
 
 		$trips['locations'] = array(
 			'tab_label'     => __( 'Locations', 'wp-travel' ),
 			'content_title' => __( 'Locations', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
-		$trips['faq'] = array(
+		$trips['faq']     = array(
 			'tab_label'     => __( 'FAQs', 'wp-travel' ),
 			'content_title' => __( 'FAQs', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'call_back' ),
 		);
 		$trips['setting'] = array(
 			'tab_label'     => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Tabs', 'wp-travel' ),
-			// 'content_callback' => array( $this, 'call_back' ),
 		);
 
 		$trips['misc_options'] = array(
@@ -269,11 +257,6 @@ class WP_Travel_Admin_Metaboxes {
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 		);
 
-		// $trips['advanced'] = array(
-		// 'tab_label' => __( 'Advanced', 'wp-travel' ),
-		// 'content_title' => __( 'Advanced Options', 'wp-travel' ),
-		// 'content_callback' => array( $this, 'call_back' ),
-		// );
 		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
 		return apply_filters( 'wp_travel_tabs', $tabs );
 	}
@@ -284,7 +267,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'Description'.
 	 * @return Mixed
 	 */
-	function description_tab_callback( $tab ) {
+	public function description_tab_callback( $tab ) {
 		global $post;
 		if ( 'detail' !== $tab ) {
 			return;
@@ -299,7 +282,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @since 1.0.7
 	 * @return Mixed
 	 */
-	function price_tab_call_back( $tab ) {
+	public function price_tab_call_back( $tab ) {
 		global $post;
 		if ( 'price' !== $tab ) {
 			return;
@@ -312,7 +295,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'additional_info'.
 	 * @return Mixed
 	 */
-	function additional_info_tab_callback( $tab ) {
+	public function additional_info_tab_callback( $tab ) {
 		global $post;
 		if ( 'additional_info' !== $tab ) {
 			return;
@@ -326,7 +309,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'images_gallery'.
 	 * @return Mixed
 	 */
-	function gallery_tab_callback( $tab ) {
+	public function gallery_tab_callback( $tab ) {
 		global $post;
 		if ( 'images_gallery' !== $tab ) {
 			return;
@@ -340,7 +323,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'locations'.
 	 * @return Mixed
 	 */
-	function location_tab_callback( $tab ) {
+	public function location_tab_callback( $tab ) {
 		global $post;
 		if ( 'locations' !== $tab ) {
 			return;
@@ -353,7 +336,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'advanced'.
 	 * @return Mixed
 	 */
-	function advance_tab_callback( $tab ) {
+	public function advance_tab_callback( $tab ) {
 		global $post;
 		if ( 'advanced' !== $tab ) {
 			return;
@@ -366,7 +349,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'advanced'.
 	 * @return Mixed
 	 */
-	function trip_includes_callback( $tab ) {
+	public function trip_includes_callback( $tab ) {
 		global $post;
 		if ( 'trip_includes' !== $tab ) {
 			return;
@@ -379,7 +362,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'advanced'.
 	 * @return Mixed
 	 */
-	function trip_excludes_callback( $tab ) {
+	public function trip_excludes_callback( $tab ) {
 		global $post;
 		if ( 'trip_excludes' !== $tab ) {
 			return;
@@ -393,21 +376,20 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  string $tab tab name 'advanced'.
 	 * @return Mixed
 	 */
-	function call_back( $tab ) {
+	public function call_back( $tab ) {
 		global $post;
 		if ( 'advanced' !== $tab ) {
 			return;
 		}
 		$thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
-		// echo _wp_post_thumbnail_html( $thumbnail_id, $post->ID );
 	}
 	/**
 	 * Callback Function For Itineraries Content Tabs
 	 *
-	 * @param string $tab tab name 'itineraries_content'
+	 * @param string $tab tab name 'itineraries_content'.
 	 * @return Mixed
 	 */
-	function itineraries_content_call_back( $tab ) {
+	public function itineraries_content_call_back( $tab ) {
 
 		global $post;
 
@@ -419,6 +401,13 @@ class WP_Travel_Admin_Metaboxes {
 
 	}
 
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 *
+	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
 	public function trip_facts_callback( $tab, $args ) {
 		if ( 'trip_facts' !== $tab ) {
 			return;
@@ -426,13 +415,14 @@ class WP_Travel_Admin_Metaboxes {
 		WP_Travel()->tabs->content( 'itineraries/fact-tab.php' );
 	}
 
-	 /**
-	  * Callback Function For Itineraries Content Tabs
-	  *
-	  * @param string $tab tab name 'itineraries_content'
-	  * @return Mixed
-	  */
-	function frontend_tabs_content_call_back( $tab, $args ) {
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 *
+	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function frontend_tabs_content_call_back( $tab, $args ) {
 		if ( 'setting' !== $tab ) {
 			return;
 		}
@@ -466,7 +456,6 @@ class WP_Travel_Admin_Metaboxes {
 							</label>
 						</span>
 						</td>
-						
 					</tr>
 					<tr>
 						<td>
@@ -505,7 +494,7 @@ class WP_Travel_Admin_Metaboxes {
 						<span class="show-in-frontend checkbox-default-design">
 							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ); ?> /><?php // esc_html_e( 'Display', 'wp-travel' ); ?>
 							<span class="switch">
-							  </span>
+								</span>
 							</label>
 						</span>
 						<span class="check-handeller"></span>
@@ -522,7 +511,14 @@ class WP_Travel_Admin_Metaboxes {
 
 	}
 
-	function wp_travel_misc_options_callback( $tab, $args ) {
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 *
+	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function wp_travel_misc_options_callback( $tab, $args ) {
 
 		if ( 'misc_options' !== $tab ) {
 			return;
@@ -532,7 +528,14 @@ class WP_Travel_Admin_Metaboxes {
 
 	}
 
-	function wp_travel_faq_callback( $tab, $args ) {
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 *
+	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function wp_travel_faq_callback( $tab, $args ) {
 		if ( 'faq' !== $tab ) {
 			return;
 		}
@@ -642,7 +645,7 @@ class WP_Travel_Admin_Metaboxes {
 	/**
 	 * HTML template for gallery list item.
 	 */
-	function gallery_images_listing() {
+	public function gallery_images_listing() {
 		?>
 		<script type="text/html" id="tmpl-my-template">
 			<#
@@ -668,7 +671,7 @@ class WP_Travel_Admin_Metaboxes {
 	 *
 	 * @param  Object $post Post object.
 	 */
-	function load_tab_template( $post ) {
+	public function load_tab_template( $post ) {
 		$args['post'] = $post;
 		WP_Travel()->tabs->load( self::$post_type, $args );
 	}
@@ -678,7 +681,7 @@ class WP_Travel_Admin_Metaboxes {
 	 *
 	 * @param  Object $post Post object.
 	 */
-	function wp_travel_trip_info( $post ) {
+	public function wp_travel_trip_info( $post ) {
 		if ( ! $post ) {
 			return;
 		}
@@ -709,7 +712,7 @@ class WP_Travel_Admin_Metaboxes {
 	 *
 	 * @return Mixed
 	 */
-	function save_meta_data( $post_id ) {
+	public function save_meta_data( $post_id ) {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
@@ -728,13 +731,12 @@ class WP_Travel_Admin_Metaboxes {
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 			return;
 		}
-		// error_log( serialize( $_POST ) );
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
 		}
 
-		// Save pricing option type @since 1.7.6
+		// Save pricing option type @since 1.7.6.
 		if ( isset( $_POST['wp_travel_pricing_option_type'] ) ) {
 			$wp_travel_pricing_option_type = sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) );
 			update_post_meta( $post_id, 'wp_travel_pricing_option_type', $wp_travel_pricing_option_type );
@@ -878,14 +880,14 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_trip_duration_night', $trip_duration_night );
 		}
 
-		// Saving Tabs Settings
+		// Saving Tabs Settings.
 		$use_global_tabs = 'yes';
 		if ( isset( $_POST['wp_travel_use_global_tabs'] ) ) {
 			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
 		}
 			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
 
-		// Trip enquiry Global
+		// Trip enquiry Global.
 		$use_global_trip_enquiry_option = 'yes';
 		if ( isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) {
 			$use_global_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) );
@@ -893,7 +895,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		update_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', $use_global_trip_enquiry_option );
 
-		// Trip Specific Enquiry Option
+		// Trip Specific Enquiry Option.
 		$enable_trip_enquiry_option = 'no';
 		if ( isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) {
 			$enable_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) );
@@ -901,18 +903,15 @@ class WP_Travel_Admin_Metaboxes {
 			update_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', $enable_trip_enquiry_option );
 
 		if ( isset( $_POST['wp_travel_tabs'] ) ) {
-			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
 			update_post_meta( $post_id, 'wp_travel_tabs', $wp_travel_tabs );
 		}
 		$wp_travel_faq_question = '';
 		if ( isset( $_POST['wp_travel_faq_question'] ) ) {
-			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_faq_question = ( wp_unslash( $_POST['wp_travel_faq_question'] ) );
 		}
 		update_post_meta( $post_id, 'wp_travel_faq_question', $wp_travel_faq_question );
 		if ( isset( $_POST['wp_travel_faq_answer'] ) ) {
-			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_faq_answer = ( wp_unslash( $_POST['wp_travel_faq_answer'] ) );
 			update_post_meta( $post_id, 'wp_travel_faq_answer', $wp_travel_faq_answer );
 		}
@@ -933,7 +932,7 @@ class WP_Travel_Admin_Metaboxes {
 				add_action( 'save_post', array( $this, 'save_meta_data' ) );
 			}
 		}
-		// WP Travel Standard Paypal Merged. @since 1.2.1
+		// WP Travel Standard Paypal Merged. @since 1.2.1.
 		if ( isset( $_POST['wp_travel_minimum_partial_payout'] ) ) {
 			$minimum_partial_payout = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) );
 			if ( $minimum_partial_payout > 0 ) {
@@ -956,7 +955,6 @@ class WP_Travel_Admin_Metaboxes {
 		// Update Pricing Options Metas.
 		$wp_travel_pricing_options = '';
 		if ( isset( $_POST['wp_travel_pricing_options'] ) ) {
-			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_pricing_options = ( wp_unslash( $_POST['wp_travel_pricing_options'] ) );
 		}
 
@@ -965,7 +963,6 @@ class WP_Travel_Admin_Metaboxes {
 		// Update multiple trip dates options.
 		$wp_travel_multiple_trip_dates = array();
 		if ( isset( $_POST['wp_travel_multiple_trip_dates'] ) ) {
-			// $wp_travel_tabs = array_map( 'esc_attr', $_POST['wp_travel_tabs'] );
 			$wp_travel_multiple_trip_dates = ( wp_unslash( $_POST['wp_travel_multiple_trip_dates'] ) );
 
 			foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
@@ -1006,7 +1003,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		update_post_meta( $post_id, 'wp_travel_tour_extras', $wp_travel_tour_extras );
 
-		// Ends WP Travel Standard Paypal Merged. @since 1.2.1
+		// Ends WP Travel Standard Paypal Merged. @since 1.2.1.
 		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );
 	}
 
@@ -1016,7 +1013,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param  array $data Values.
 	 * @return array.
 	 */
-	function localize_gallery_data( $data ) {
+	public function localize_gallery_data( $data ) {
 		global $post;
 		if ( ! $post ) {
 			return;
