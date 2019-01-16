@@ -430,8 +430,7 @@ function wp_travel_payment_admin_default_email_content() {
  */
 function wp_travel_payment_client_default_email_content() {
 
-	ob_start();
-?>	
+	ob_start(); ?>	
 	<table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;">
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
@@ -468,13 +467,13 @@ function wp_travel_payment_client_default_email_content() {
 
 		</table>
 
-<?php 
+	<?php 
 
-$content = ob_get_contents();
+	$content = ob_get_contents();
 
-ob_end_clean();
+	ob_end_clean();
 
-return $content;
+	return $content;
 
 }
 

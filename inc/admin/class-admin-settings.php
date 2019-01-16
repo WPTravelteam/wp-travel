@@ -767,7 +767,9 @@ class WP_Travel_Admin_Settings {
 					</div>
 				</div>
 
-
+				<?php
+				// @since 1.8.0
+				do_action( 'wp_travel_email_template_settings_after_enquiry', $tab, $args ) ?>
 			</div>
 		</div>
 
