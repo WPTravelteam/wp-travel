@@ -50,6 +50,7 @@ class WP_Travel_Frontend_Assets {
 		$locale = $lang_code[0];
 
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
+		wp_register_script( 'wp-travel-moment', $this->assets_path . 'assets/js/moment.js', array('jquery'), WP_TRAVEL_VERSION, 1 );
 
 		// Localized vars into datepicker. because datepicker is in all pages.
 		$map_data = get_wp_travel_map_data();
@@ -102,7 +103,7 @@ class WP_Travel_Frontend_Assets {
 		wp_enqueue_script( 'wp-travel-booking', $this->assets_path . 'assets/js/booking.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 		// Script only for single itineraries.
 		if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
-
+			wp_enqueue_script( 'wp-travel-moment' );
 			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 				// Parsley For Frontend Single Trips.
 				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );

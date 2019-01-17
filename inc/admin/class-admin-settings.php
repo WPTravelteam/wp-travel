@@ -278,6 +278,14 @@ class WP_Travel_Admin_Settings {
 					<p class="description"><?php echo esc_html__( 'Choose the page to use as checkout page for booking', 'wp-travel' ) ?></p>
 				</td>
 			<tr>
+			<?php
+			/**
+			 * Hook.
+			 *
+			 * @since 1.8.0
+			 */
+			do_action( 'wp_travel_after_page_settings', $tab, $args )
+			?>
 		</table>
 	<?php
 	}

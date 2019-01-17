@@ -2030,17 +2030,29 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		if ( ! $date ) {
 			return;
 		}
-		$date = str_replace('/', '-', $date);
-		$date = str_replace('.', '-', $date);
 		$date_format = get_option( 'date_format' );
-
 		if ( ! $date_format ) :
 			$date_format = 'jS M, Y';
 		endif;
+
+		$strtotime = $date;
+		if ( 'Y-m-d' !== $date_format ) {
+			$date = str_replace('/', '-', $date);
+			$date = str_replace('.', '-', $date);
+	
+			$dashed_format = str_replace('/', '-', $date_format);
+			$dashed_format = str_replace('.', '-', $dashed_format);
+			$date = DateTime::createFromFormat( $dashed_format, $date );
+	
+			$strtotime = date_format( $date, 'Y-m-d' );
+		}
+		$strtotime = strtotime( stripslashes( $strtotime ) );
+		
+
 		if ( $localize ) {
-			$formated_date = esc_html( date_i18n( $date_format, strtotime( stripslashes( $date ) ) ) );
+			$formated_date = esc_html( date_i18n( $date_format, $strtotime ) );
 		} else {
-			$formated_date = esc_html( date( $date_format, strtotime( stripslashes( $date ) ) ) );
+			$formated_date = esc_html( date( $date_format, $strtotime ) );
 		}
 
 		return $formated_date;

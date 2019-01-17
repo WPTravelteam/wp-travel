@@ -167,6 +167,7 @@ function wp_travel_booking_info( $post ) {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	}
 
+	$form = new WP_Travel_FW_Form();
 	$form_field = new WP_Travel_FW_Field();
 	$booking_id = $post->ID;
 	$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
@@ -301,6 +302,7 @@ function wp_travel_booking_info( $post ) {
 			</div>
 
 			<?php
+			$form->init_validation( 'post' );
 			wp_enqueue_script('jquery-datepicker-lib');
 			wp_enqueue_script('jquery-datepicker-lib-eng');
 			?>
