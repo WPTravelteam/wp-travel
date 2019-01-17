@@ -23,8 +23,207 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 			<div class="view-order">
 				<div class="order-list">
 					<div class="order-wrapper">
-						<h3><?php esc_html_e( 'Your Bookings Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $back_link ); ?>"><?php esc_html_e( '(Back)', 'wp-travel' ); ?></a></h3>
+						<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $back_link ); ?>"><?php esc_html_e( '(Back)', 'wp-travel' ); ?></a></h3>
 						<div class="table-wrp">
+							<!-- Started Here -->
+							<div class="my-order-single-content-wrap">
+								<div class="my-order-single-sidebar">
+									<h3 class="my-order-single-title">Order Status</h3>
+									<div class="my-order-status my-order-status-pending">Pending</div>
+									<h3 class="my-order-single-sub-title">Payment Gateway</h3>
+									<form action="" class="my-order-payment-gateway">
+										<div class="my-order-single-field">
+											<input type="radio" name="my-order-payment-gateway" value="Standard Paypal" id="my-order-standard-paypal">
+											<label for="my-order-standard-paypal">Standard Paypal</label>
+										</div>
+										<div class="my-order-single-field">
+											<input type="radio" name="my-order-payment-gateway" value="Khalti" id="my-order-khalti">
+											<label for="my-order-khalti">Khalti</label>
+										</div>
+										<div class="my-order-single-field">
+											<input type="radio" name="my-order-payment-gateway" value="Stripe Checkout" id="my-order-stripe-checkout">
+											<label for="my-order-stripe-checkout">Stripe Checkout</label>
+										</div>
+									</form>
+									<a class="my-order-single-payment-button my-order-single-button" href="#">Make an Online Payment</a>
+								</div>
+								<div class="my-order-single-content">
+									<div class="row">
+										<div class="col-md-6">
+											<h3 class="my-order-single-title">Order Status</h3>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Order Number :</span>
+												<span class="my-order-tail">#2</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Booking Date :</span>
+												<span class="my-order-tail">January 16, 2019</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Tour :</span>
+												<span class="my-order-tail">
+													<a href="#" target="_blank">Dubai - All Stunning Places</a>
+												</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Travel Date :</span>
+												<span class="my-order-tail">January 26, 2019</span>
+											</div>
+											<div class="my-order-single-field my-order-additional-note clearfix">
+												<span class="my-order-head">Customer's Note :</span>
+												<span class="my-order-tail">Iure possimus nobis veritatis Nam ut vel mollitia ex incididunt enim dolor exercitation dolores</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<h3 class="my-order-single-title">Billing Detail</h3>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">First Name :</span>
+												<span class="my-order-tail">Chelsea</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Last Name :</span>
+												<span class="my-order-tail">Cooper</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Email :</span>
+												<span class="my-order-tail">
+													<a href="mailto:dasyweqis@mailinator.net">dasyweqis@mailinator.net</a>
+												</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Phone :</span>
+												<span class="my-order-tail">+697-60-9484210</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Country :</span>
+												<span class="my-order-tail">Guinea-Bissau</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Address :</span>
+												<span class="my-order-tail">Sed qui est ipsum ut sit nostrum</span>
+											</div>
+										</div>
+										<div class="col-md-12 my-order-single-col-last">
+											<h3 class="my-order-single-title">Billing Detail</h3>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">First Name :</span>
+												<span class="my-order-tail">Yoshi</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Last Name :</span>
+												<span class="my-order-tail">Dyer</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Email :</span>
+												<span class="my-order-tail">
+													<a href="mailto:pova@mailinator.net">pova@mailinator.net</a>
+												</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Phone :</span>
+												<span class="my-order-tail">+168-39-4333439</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Country :</span>
+												<span class="my-order-tail">Malawi</span>
+											</div>
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Address :</span>
+												<span class="my-order-tail">Aperiam iste voluptatem aperiam reiciendis qui dicta voluptas tempor repellendus Fugiat</span>
+											</div>
+										</div>
+									</div>
+									<div class="my-order-single-traveller-info">
+										<h3 class="my-order-single-title">Traveller Info</h3>
+										<div class="my-order-single-field clearfix">
+											<span class="my-order-head">Traveller 1 :</span>
+											<span class="my-order-tail">Ms Britanney Petty</span>
+										</div>
+										<div class="my-order-single-field clearfix">
+											<span class="my-order-head">Traveller 2 :</span>
+											<span class="my-order-tail">Ms Kirestin Greene</span>
+										</div>
+										<div class="my-order-single-field clearfix">
+											<span class="my-order-head">Traveller 3 :</span>
+											<span class="my-order-tail">Mrs Karen Underwood</span>
+										</div>
+										<div class="my-order-single-field clearfix">
+											<span class="my-order-head">Traveller 4 :</span>
+											<span class="my-order-tail">Miss Sopoline Sanders</span>
+										</div>
+										<div class="my-order-single-field clearfix">
+											<span class="my-order-head">Traveller 5 :</span>
+											<span class="my-order-tail">Master Vielka Marshall</span>
+										</div>
+									</div>
+									<div class="my-order-single-price-breakdown">
+										<h3 class="my-order-single-title">Price Breakdown</h3>
+										<div class="my-order-price-breakdown">
+											<div class="my-order-price-breakdown-base-price-wrap">
+												<div class="my-order-price-breakdown-base-price">
+													<span class="my-order-head">Traveller Base Price</span>
+													<span class="my-order-tail">
+														<span class="my-order-price-detail">5 x $1,200</span>
+														<span class="my-order-price">$6,000.00</span>
+													</span>
+												</div>
+											</div>
+											<div class="my-order-price-breakdown-additional-service">
+												<h3 class="my-order-price-breakdown-additional-service-title">Additional Services</h3>
+												<div class="my-order-price-breakdown-additional-service-item clearfix">
+													<span class="my-order-head">Umbrella (1 x $8)</span>
+													<span class="my-order-tail my-order-right">$8.00</span>
+												</div>
+												<div class="my-order-price-breakdown-additional-service-item clearfix">
+													<span class="my-order-head">Cleaning fee (5 x $9)</span>
+													<span class="my-order-tail my-order-right">$45.00</span>
+												</div>
+												<div class="my-order-price-breakdown-additional-service-item clearfix">
+													<span class="my-order-head">Tip for tour guide (5 x $20)</span>
+													<span class="my-order-tail my-order-right">$100.00</span>
+												</div>
+											</div>
+											<div class="my-order-price-breakdown-summary">
+												<div class="my-order-price-breakdown-sub-total">
+													<span class="my-order-head">Sub Total Price</span>
+													<span class="my-order-tail my-order-right">$6,153.00</span>
+												</div>
+												<div class="my-order-price-breakdown-coupon-code">
+													<span class="my-order-head">Coupon Code :</span>
+													<span class="my-order-tail">
+														<span class="my-order-coupon-code">10PSpecial</span>
+														<span class="my-order-coupon-text">10%</span>
+													</span>
+												</div>
+												<div class="my-order-price-breakdown-coupon-amount">
+													<span class="my-order-head">Discount Price</span>
+													<span class="my-order-tail my-order-right">- $368.70</span>
+												</div>
+												<div class="my-order-price-breakdown-tax-rate">
+													<span class="my-order-head">Tax Rate</span>
+													<span class="my-order-tail my-order-right">9%</span>
+												</div>
+												<div class="my-order-price-breakdown-tax-due">
+													<span class="my-order-head">Tax Due</span>
+													<span class="my-order-tail my-order-right">$553.77</span>
+												</div>
+												<div class="my-order-price-breakdown-service-fee">
+													<span class="my-order-head">Paypal Service Fee (3%)</span>
+													<span class="my-order-tail my-order-right">$201.20</span>
+												</div>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<div class="my-order-single-total-price clearfix">
+											<div class="my-order-single-field clearfix">
+												<span class="my-order-head">Total</span>
+												<span class="my-order-tail">$6,907.97</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<table>
 								<tr>
 									<th><?php esc_html_e( 'Title', 'wp-travel' ); ?></th>
@@ -234,14 +433,14 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 				</div>
 			</div>
 			<div class="book-more">
-				<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book more?', 'wp-travel' ); ?></a>
+				<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book more ?', 'wp-travel' ); ?></a>
 			</div>
 		  </div>
 		<?php else : ?>
 		  <div class="no-order">
 			  <p>
 			<?php esc_html_e( 'You have not booked any trips', 'wp-travel' ); ?>
-			<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book one now?', 'wp-travel' ); ?></a>
+			<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book one now ?', 'wp-travel' ); ?></a>
 			  </p>
 		  </div>
 		<?php endif; ?>
