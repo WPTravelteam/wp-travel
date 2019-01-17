@@ -313,7 +313,7 @@ jQuery(document).ready(function($) {
       });
 
       var trip_departure_date = $('input[name=trip_departure_date]').wpt_datepicker().data('datepicker');
-      if ( 'undefined' !== typeof trip_departure_date.$el ) {
+      if ( 'undefined' !== typeof trip_departure_date ) {
         var day_to_add = trip_departure_date.$el.data('totaldays' );;
         if ( day_to_add > 0 ) {
           someFormattedDate = moment().add(day_to_add, 'days').format('L');
