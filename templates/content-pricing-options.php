@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Itinerary Pricing Options Template
  *
@@ -17,8 +17,14 @@
 global $post;
 global $wp_travel_itinerary;
 
+if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
+	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+}
+
 $trip_id = $post->ID;
 $settings = wp_travel_get_settings();
+$form = new WP_Travel_FW_Form();
+$form_field = new WP_Travel_FW_Field();
 
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 
@@ -37,7 +43,7 @@ $currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 $per_person_text = wp_travel_get_price_per_text( $trip_id );
-$sale_price      = wp_travel_get_trip_sale_price( $trip_id ); 
+$sale_price      = wp_travel_get_trip_sale_price( $trip_id );
 
 $wp_travel_enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 $wp_travel_enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );?>
@@ -60,7 +66,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 	if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
 		$inventory = new WP_Travel_Util_Inventory();
-	
+
 		$status_col = get_post_meta( $trip_id, 'status_column_enable', true );
 
 		$status_col = ( $status_col && 'no' === $status_col ) ? false : true;
@@ -70,15 +76,15 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 		$available_pax = apply_filters( 'wp_travel_available_pax', $available_pax, $trip_id, '' );
 		$booked_pax = $inventory->get_booking_pax_count( $trip_id );
 		$pax_limit = $inventory->get_pax_limit( $trip_id );
-		
+
 		$status_msg = get_post_meta( $trip_id, 'wp_travel_inventory_status_message_format', true );
 
 		$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id );
-		
+
 		if ( ! $status_msg ) {
 			$status_msg = __('Pax Available: {available_pax} / {pax_limit}', 'wp-travel');
 		}
-		
+
 		if ( ! $inventory_enabled_for_option || 0 === $pax_limit ) {
 
 			$status_msg = __( 'N/A', 'wp-travel' );
@@ -89,7 +95,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 			'{available_pax}' => $available_pax,
 			'{booked_pax}'    => $booked_pax,
 			'{pax_limit}'     => $pax_limit,
-			
+
 		);
 
 		$general_status_msg = str_replace( array_keys( $general_status_tags ), $general_status_tags, $status_msg );
@@ -99,12 +105,12 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 		$wp_travel_inventory_sold_out_action = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_action', true );
 
 		$sold_out_btn_rep_msg = get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_message', true );
-		
+
 		if ( 'allow_trip_enquiry' === $wp_travel_inventory_sold_out_action ) {
 			$sold_out_btn_rep_msg = wp_travel_utilities__get_inquiry_link();
 		}
 	}
-	
+
 	$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
 	$trip_multiple_dates_data = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
 
@@ -124,7 +130,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 				do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data );
 			}
 		}
-		
+
 	else : ?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
@@ -145,7 +151,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 							<div class="status">
 								<?php echo esc_html__( 'Status', 'wp-travel' ); ?>
 							</div>
-						<?php endif; ?>						
+						<?php endif; ?>
 						<div class="price">
 							<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
 						</div>
@@ -165,7 +171,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 								<span><?php echo esc_html( date_i18n( $date_format, strtotime( $trip_start_date ) ) );  ?></span>
 								<input type="hidden" name="trip_date" value="<?php echo esc_attr( $trip_start_date ); ?>">
 							</div>
-							<?php							
+							<?php
 							if ( $show_end_date  ) : ?>
 								<div class="date-to">
 									<?php  if ( '' !== $trip_end_date ) : ?>
@@ -175,16 +181,48 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 										<input type="hidden" name="trip_departure_date" value="<?php echo esc_attr( $trip_end_date ); ?>">
 									<?php else : ?>
 										<?php esc_html_e( '-', 'wp-travel' ); ?>
-									<?php endif; ?>	
+									<?php endif; ?>
 								</div>
 							<?php endif; ?>
 						<?php else : ?>
 							<div class="date-from">
 								<span class="availabily-heading-label"><?php echo esc_html__( 'start:', 'wp-travel' ); ?></span>
-								<input placeholder="<?php esc_html_e( 'Arrival date', 'wp-travel' ); ?>" name="trip_date" type="text" class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+								<?php
+								$total_days = 0;
+								if ( $trip_duration > 0 || $trip_duration_night > 0 ) {
+									$days = $trip_duration > $trip_duration_night ? $trip_duration : $trip_duration_night;
+									$days--; // As we need to exclude current selected date.
+									$total_days = $days ? $days : $total_days;
+								}
+								$start_field = array(
+									'label' => esc_html__( 'start', 'wp-travel' ),
+									'type' => 'text',
+									'name' => 'trip_date',
+									'placeholder' => esc_html__( 'Arrival date', 'wp-travel' ),
+									'class' => 'wp-travel-pricing-days-night',
+									'validations' => array(
+										'required' => true,
+									),
+									'attributes' => array(
+										'data-parsley-trigger' => 'change',
+										'data-parsley-required-message' => esc_attr__( 'Please Select a Date', 'wp-travel' ),
+										'data-totaldays' => $total_days,
+									),
+									'wrapper_class' => 'date-from',
+								);
+								$form_field->init()->render_input( $start_field );
+								?>
 							</div>
 							<div class="date-to">
-								<input placeholder="<?php esc_html_e( 'Departure date', 'wp-travel' ); ?>" name="trip_departure_date" type="text" class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+								<?php
+								$end_field = array(
+									'label' => esc_html__( 'End', 'wp-travel' ),
+									'name' => 'trip_departure_date',
+									'placeholder' => esc_html__( 'Departure date', 'wp-travel' ),
+								);
+								$end_field = wp_parse_args( $end_field, $start_field );
+								$form_field->init()->render_input( $end_field );
+								?>
 							</div>
 						<?php endif; ?>
 						<div class="status">
@@ -201,7 +239,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 							<?php endif; ?>
 						<?php
 						if ( class_exists( 'WP_Travel_Util_Inventory' ) && ! $trip_price )  :
-							// display price unavailable text						
+							// display price unavailable text
 							$no_price_text 	= isset( $settings['price_unavailable_text'] ) && '' !== $settings['price_unavailable_text'] ? $settings['price_unavailable_text'] : '';
 							echo esc_html( $no_price_text );
 						else : ?>
@@ -229,9 +267,9 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 						<?php endif; ?>
 						<div class="action">
 							<?php if ( $inventory_enabled_for_option && $general_sold_out ) : ?>
-										
+
 								<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
-										
+
 							<?php else : ?>
 								<?php $pax = 1; ?>
 
@@ -239,7 +277,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 									<input type="hidden" name="pax" value="<?php echo esc_attr( $pax ) ?>">
 									<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ) ?>">
 									<input type="hidden" name="trip_duration_night" value="<?php echo esc_attr( $trip_duration_night ) ?>">
-									<?php 
+									<?php
 										$button = '<a href="%s" class="btn btn-primary add-to-cart-btn btn-sm btn-inverse" data-parent-id="trip-duration-content">%s</a>';
 										$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 										if ( 'yes' !== $fixed_departure ) :
