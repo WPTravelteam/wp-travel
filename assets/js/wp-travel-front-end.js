@@ -282,7 +282,45 @@ jQuery(document).ready(function($) {
             });
         }
 
-    })
+    });
+
+    // Date picker for days and nights.
+    if ( 'undefined' !== typeof moment ) {
+      $('.wp-travel-pricing-days-night').wpt_datepicker({
+        language: wp_travel_frontend_vars.locale,
+        minDate: new Date(),
+        autoClose: true,
+        onSelect: function(formattedDate, date, inst) {
+          var el = inst.$el;
+          var next_el = ( 'trip_date' === $(el).attr('name') ) ? $( 'input[name=trip_departure_date]' ) :$( 'input[name=trip_date]' )
+          var day_to_add = parseInt( el.data('totaldays' ) );
+          if ( day_to_add < 1 ) {
+            return;
+          }
+          var _moment = moment( date );
+          var newdate = new Date( date );
+          if ( 'trip_date' === $(el).attr('name') ) {
+            someFormattedDate = _moment.add(day_to_add, 'days').format('L');
+          } else {
+            // newdate.setDate( newdate.getDate() - day_to_add );
+            someFormattedDate = _moment.subtract( day_to_add, 'days').format('L');
+          }
+
+          var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
+          next_el_datepicker.date = new Date( someFormattedDate );
+          next_el.val( someFormattedDate );
+        }
+      });
+
+      var trip_departure_date = $('input[name=trip_departure_date]').wpt_datepicker().data('datepicker');
+      var day_to_add = trip_departure_date.$el.data('totaldays' );;
+      if ( day_to_add > 0 ) {
+        someFormattedDate = moment().add(day_to_add, 'days').format('L');
+        trip_departure_date.update('minDate', new Date( someFormattedDate ))
+      }
+
+    }
+
 
     $(document).ready(function($) {
 
