@@ -4145,4 +4145,112 @@ ul.wp-travel-error {
   }
 }
 
+#wp-travel-tab-content-bookings .my-order .table-wrp {
+  background-color: #fff;
+  margin: 35px 0;
+  overflow: auto;
+  padding: 25px 15px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table {
+  font-size: 13px;
+  min-width: 800px;
+  border: 0;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table thead {
+  border: 0;
+}
+@media screen and (max-width: 767.99px) {
+  #wp-travel-tab-content-bookings .my-order table.order-list-table thead {
+    clip: unset;
+    height: auto;
+    margin: 0;
+    overflow: unset;
+    padding: unset;
+    position: unset;
+    width: auto;
+  }
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th {
+  color: #545454;
+  text-align: left;
+  border-width: 0px 0px 1px;
+  border-style: solid;
+  border-color: #e8e8e8;
+  padding: 4px 0px 16px;
+  background: transparent;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(1) {
+  width: 35%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(2) {
+  width: 15%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(3) {
+  width: 15%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(4) {
+  width: 15%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(5) {
+  width: 10%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(6) {
+  width: 10%;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table td {
+  color: #545454;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 0px 0px 18px !important;
+  border: 0px;
+  font-weight: normal;
+  text-align: left;
+  text-transform: capitalize;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table td p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table td .name-title a {
+  color: #31708f;
+  display: inline-block;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table td .contact-title a {
+  background-color: #f83531;
+  color: #fff;
+  padding: 5px 15px;
+  display: inline-block;
+  border-radius: 3px;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table td .contact-title a:hover {
+  background-color: #df1814;
+}
+@media screen and (max-width: 767.99px) {
+  #wp-travel-tab-content-bookings .my-order table.order-list-table td {
+    display: unset;
+  }
+}
+@media screen and (max-width: 767.99px) {
+  #wp-travel-tab-content-bookings .my-order table.order-list-table td::before {
+    content: "";
+    display: none;
+  }
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table .tbody-content:first-of-type td {
+  padding-top: 28px !important;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table .tbody-content:nth-of-type(2n) td {
+  background-color: transparent;
+}
+#wp-travel-tab-content-bookings .my-order table.order-list-table .tbody-content:last-of-type td {
+  padding-bottom: 6px !important;
+}
+
 /*# sourceMappingURL=wp-travel-front-end.css.map */

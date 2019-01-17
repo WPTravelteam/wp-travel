@@ -104,13 +104,13 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 						<thead>
 							<tr>
 								<th><?php esc_html_e( 'Trip', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Contact Name', 'wp-travel' ); ?></th>
+								<!-- <th><?php //esc_html_e( 'Contact Name', 'wp-travel' ); ?></th> -->
 								<th><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?></th>
-								<th class="text-right"><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></th>
-								<th class="text-right"><?php esc_html_e( 'Paid', 'wp-travel' ); ?></th>
-								<th class="text-right"><?php esc_html_e( 'Detail', 'wp-travel' ); ?></th>
+								<!-- <th><?php //esc_html_e( 'Payment Mode', 'wp-travel' ); ?></th> -->
+								<th><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Paid', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Detail', 'wp-travel' ); ?></th>
 								<?php do_action( 'wp_travel_dashboard_booking_table_title_after_detail' ); ?>
 							</tr>
 						</thead>
@@ -170,11 +170,11 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								</div>
 							</td>
 
-							<td class="c-name" data-title="<?php esc_html_e( 'Contact Name', 'wp-travel' ); ?>">
+							<!-- <td class="c-name" data-title="<?php //esc_html_e( 'Contact Name', 'wp-travel' ); ?>">
 								<div class="contact-title">
-							<?php echo esc_html( $fname . ' ' . $lname ); ?>
+							<?php //echo esc_html( $fname . ' ' . $lname ); ?>
 								</div>
-							</td>
+							</td> -->
 
 							<td class="booking-status" data-title="<?php esc_html_e( 'Booking Status', 'wp-travel' ); ?>">
 								<div class="contact-title">
@@ -188,14 +188,14 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								</div>
 							</td>
 
-							<td class="payment-mode" data-title="<?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?>">
+							<!-- <td class="payment-mode" data-title="<?php //esc_html_e( 'Payment Mode', 'wp-travel' ); ?>">
 								<div class="contact-title">
-							<?php echo esc_html( $payment_mode ); ?>
-							<?php do_action( 'wp_travel_dashboard_booking_after_payment_mode', $ordered_data, $payment_info ); ?>
+							<?php //echo esc_html( $payment_mode ); ?>
+							<?php //do_action( 'wp_travel_dashboard_booking_after_payment_mode', $ordered_data, $payment_info ); ?>
 								</div>
-							</td>
+							</td> -->
 
-							<td class="product-subtotal text-right" data-title="<?php esc_html_e( 'Total Price', 'wp-travel' ); ?>">
+							<td class="product-subtotal" data-title="<?php esc_html_e( 'Total Price', 'wp-travel' ); ?>">
 								<div class="order-list-table">
 								<p>
 								<strong>
@@ -205,7 +205,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								</p>
 								</div>
 							</td>
-							<td class="product-subtotal text-right" data-title="<?php esc_html_e( 'Paid', 'wp-travel' ); ?>">
+							<td class="product-subtotal" data-title="<?php esc_html_e( 'Paid', 'wp-travel' ); ?>">
 								<div class="order-list-table">
 								<p>
 								<strong>
