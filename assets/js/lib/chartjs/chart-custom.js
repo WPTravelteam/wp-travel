@@ -81,7 +81,7 @@ jQuery(document).ready(function($) {
         $('.wp-travel-top-itineraries-compare').attr('href', compare_edit_url).html(wp_travel_chart_data.compare_top_itinerary.name);
     }
 
-    $('.form-compare-stat .datepicker-from').datepicker({
+    $('.form-compare-stat .datepicker-from').wpt_datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
@@ -100,14 +100,14 @@ jQuery(document).ready(function($) {
                     newMaxDate = maxDate;
                 }
             }
-            $('.form-compare-stat .datepicker-to').datepicker({
+            $('.form-compare-stat .datepicker-to').wpt_datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });
         }
     }).attr('readonly', 'readonly');
 
-    $('.form-compare-stat .datepicker-to').datepicker({
+    $('.form-compare-stat .datepicker-to').wpt_datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
@@ -123,7 +123,7 @@ jQuery(document).ready(function($) {
                 newMaxDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate() - 1)));
 
             }
-            $('.form-compare-stat .datepicker-from').datepicker({
+            $('.form-compare-stat .datepicker-from').wpt_datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });
@@ -131,7 +131,7 @@ jQuery(document).ready(function($) {
 
     }).attr('readonly', 'readonly');
 
-    $('.additional-compare-stat .datepicker-from').datepicker({
+    $('.additional-compare-stat .datepicker-from').wpt_datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
@@ -150,14 +150,14 @@ jQuery(document).ready(function($) {
                     newMaxDate = maxDate;
                 }
             }
-            $('.additional-compare-stat .datepicker-to').datepicker({
+            $('.additional-compare-stat .datepicker-to').wpt_datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });
         }
     }).attr('readonly', 'readonly');
 
-    $('.additional-compare-stat .datepicker-to').datepicker({
+    $('.additional-compare-stat .datepicker-to').wpt_datepicker({
         language: 'en',
         maxDate: new Date(),
         onSelect: function(dateStr) {
@@ -173,7 +173,7 @@ jQuery(document).ready(function($) {
                 newMaxDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate() - 1)));
 
             }
-            $('.additional-compare-stat .datepicker-from').datepicker({
+            $('.additional-compare-stat .datepicker-from').wpt_datepicker({
                 minDate: newMinDate,
                 maxDate: newMaxDate,
             });

@@ -896,7 +896,7 @@ function get_booking_chart() {
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
 		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
-					<input type="hidden" name="post_type" value="itineraries" >
+					<input type="hidden" name="post_type" value="itinerary-booking" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group full-width">
 						<span class="field-label"><?php esc_html_e( 'Display Chart', 'wp-travel' ); ?>:</span>

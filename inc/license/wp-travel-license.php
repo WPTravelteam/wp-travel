@@ -337,7 +337,7 @@ class WP_Travel_License {
 				return false;
 			}
 			$class = 'notice notice-error';
-			$link = admin_url( 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE . '&page=settings#wp-travel-tab-content-license' );
+			$link = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
 			$message = sprintf( __( 'You have not activated the license for %s Addon Go to <a href="%s"> settings </a> to activate your license.', 'wp-travel' ), $premium_addon['item_name'], $link );
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
