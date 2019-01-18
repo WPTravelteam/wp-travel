@@ -27,7 +27,7 @@ class WP_Travel_Admin_Settings {
 	 */
 	public function __construct() {
 
-		self::$parent_slug = 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE;
+		self::$parent_slug = 'edit.php?post_type=itinerary-booking';
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'call_back_tab_itinerary' ), 11, 2 );
@@ -40,7 +40,7 @@ class WP_Travel_Admin_Settings {
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_debug_tab_call_back' ), 12, 2 );
 		add_action( 'wp_travel_tabs_content_settings', array( $this, 'wp_travel_license_tab_call_back' ), 12, 2 );
 
-		add_action( 'load-' . WP_TRAVEL_POST_TYPE . '_page_settings', array( $this, 'save_settings' ) );
+		add_action( 'load-itinerary-booking_page_settings', array( $this, 'save_settings' ) );
 	}
 
 	public function call_back_tab_facts($tab){
