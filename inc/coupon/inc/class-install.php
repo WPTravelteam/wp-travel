@@ -56,7 +56,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 				'public'             => false,
 				'publicly_queryable' => false,
 				'show_ui'            => true,
-				'show_in_menu'       => 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE,
+				'show_in_menu'       => 'edit.php?post_type=itinerary-booking',
 				'query_var'          => true,
 				'rewrite'            => array( 'slug' => 'wp-travel-coupon' ),
 				'capability_type'    => 'post',
