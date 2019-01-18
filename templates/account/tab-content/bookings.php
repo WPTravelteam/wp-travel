@@ -17,7 +17,20 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	$details      = wp_travel_booking_data( $booking_id );
 	$payment_data = wp_travel_payment_data( $booking_id );
 
+
+	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
+	$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
+	$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	$title         = get_the_title( $trip_id );
+
+	// Billing fields.
+	$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
+	$billing_city    = get_post_meta( $booking_id, 'billing_city', true );
+	$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
+	$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
+
 	if ( is_array( $details ) && count( $details ) > 0 ) {
+		// dd(get_post_meta( $booking_id ));
 		?>
 		<div class="my-order my-order-details">
 			<div class="view-order">
@@ -28,9 +41,12 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 							<!-- Started Here -->
 							<div class="my-order-single-content-wrap">
 								<div class="my-order-single-sidebar">
-									<h3 class="my-order-single-title">Order Status</h3>
-									<div class="my-order-status my-order-status-pending">Pending</div>
-									<h3 class="my-order-single-sub-title">Payment Gateway</h3>
+									<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status' ); ?></h3>
+									<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>"><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
+	
+									<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+									
+									<!-- <h3 class="my-order-single-sub-title">Payment Gateway</h3>
 									<form action="" class="my-order-payment-gateway">
 										<div class="my-order-single-field">
 											<input type="radio" name="my-order-payment-gateway" value="Standard Paypal" id="my-order-standard-paypal">
@@ -45,63 +61,55 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											<label for="my-order-stripe-checkout">Stripe Checkout</label>
 										</div>
 									</form>
-									<a class="my-order-single-payment-button my-order-single-button" href="#">Make an Online Payment</a>
+									<a class="my-order-single-payment-button my-order-single-button" href="#">Make an Online Payment</a> -->
 								</div>
 								<div class="my-order-single-content">
 									<div class="row">
 										<div class="col-md-6">
-											<h3 class="my-order-single-title">Order Status</h3>
+											<h3 class="my-order-single-title"><?php esc_html_e( 'Order Status', 'wp-travel' ); ?></h3>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Order Number :</span>
-												<span class="my-order-tail">#2</span>
+												<span class="my-order-head"><?php esc_html_e( 'Order Number :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo sprintf( '#%s', $booking_id ); ?></span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Booking Date :</span>
-												<span class="my-order-tail">January 16, 2019</span>
+												<span class="my-order-head"><?php esc_html_e( 'Booking Date :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo get_the_date( '', $booking_id ); ?></span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Tour :</span>
+												<span class="my-order-head"><?php esc_html_e( 'Tour :', 'wp-travel' ); ?></span>
 												<span class="my-order-tail">
-													<a href="#" target="_blank">Dubai - All Stunning Places</a>
+													<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $title ); ?></a>
 												</span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Travel Date :</span>
-												<span class="my-order-tail">January 26, 2019</span>
+												<span class="my-order-head"><?php esc_html_e( 'Travel Date :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo wp_travel_format_date( $travel_date ); ?></span>
 											</div>
 											<div class="my-order-single-field my-order-additional-note clearfix">
-												<span class="my-order-head">Customer's Note :</span>
-												<span class="my-order-tail">Iure possimus nobis veritatis Nam ut vel mollitia ex incididunt enim dolor exercitation dolores</span>
+												<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo esc_html( $customer_note ); ?></span>
 											</div>
 										</div>
 										<div class="col-md-6">
-											<h3 class="my-order-single-title">Billing Detail</h3>
+											<h3 class="my-order-single-title"><?php esc_html_e( 'Billing Detail', 'wp-travel' ); ?></h3>
+										
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">First Name :</span>
-												<span class="my-order-tail">Chelsea</span>
+												<span class="my-order-head"><?php esc_html_e( 'City :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo esc_html( $billing_city ); ?></span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Last Name :</span>
-												<span class="my-order-tail">Cooper</span>
+												<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo esc_html( $billing_country ); ?></span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Email :</span>
-												<span class="my-order-tail">
-													<a href="mailto:dasyweqis@mailinator.net">dasyweqis@mailinator.net</a>
-												</span>
+												<span class="my-order-head"><?php esc_html_e( 'Postal :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo esc_html( $billing_postal ); ?></span>
 											</div>
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Phone :</span>
-												<span class="my-order-tail">+697-60-9484210</span>
+												<span class="my-order-head"><?php esc_html_e( 'Address :', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo esc_html( $billing_address ); ?></span>
 											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Country :</span>
-												<span class="my-order-tail">Guinea-Bissau</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Address :</span>
-												<span class="my-order-tail">Sed qui est ipsum ut sit nostrum</span>
-											</div>
+											
 										</div>
 										<div class="col-md-12 my-order-single-col-last">
 											<h3 class="my-order-single-title">Billing Detail</h3>
@@ -289,7 +297,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 		</div>
 		<?php
 	}
-	do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id );
+	// do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id );
 } else {
 	?>
 	<div class="my-order">
@@ -303,10 +311,10 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 						<thead>
 							<tr>
 								<th><?php esc_html_e( 'Trip', 'wp-travel' ); ?></th>
-								<!-- <th><?php //esc_html_e( 'Contact Name', 'wp-travel' ); ?></th> -->
+								<!-- <th><?php // esc_html_e( 'Contact Name', 'wp-travel' ); ?></th> -->
 								<th><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></th>
-								<!-- <th><?php //esc_html_e( 'Payment Mode', 'wp-travel' ); ?></th> -->
+								<!-- <th><?php // esc_html_e( 'Payment Mode', 'wp-travel' ); ?></th> -->
 								<th><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Paid', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Detail', 'wp-travel' ); ?></th>
@@ -369,9 +377,9 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								</div>
 							</td>
 
-							<!-- <td class="c-name" data-title="<?php //esc_html_e( 'Contact Name', 'wp-travel' ); ?>">
+							<!-- <td class="c-name" data-title="<?php // esc_html_e( 'Contact Name', 'wp-travel' ); ?>">
 								<div class="contact-title">
-							<?php //echo esc_html( $fname . ' ' . $lname ); ?>
+							<?php // echo esc_html( $fname . ' ' . $lname ); ?>
 								</div>
 							</td> -->
 
@@ -387,10 +395,10 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								</div>
 							</td>
 
-							<!-- <td class="payment-mode" data-title="<?php //esc_html_e( 'Payment Mode', 'wp-travel' ); ?>">
+							<!-- <td class="payment-mode" data-title="<?php // esc_html_e( 'Payment Mode', 'wp-travel' ); ?>">
 								<div class="contact-title">
-							<?php //echo esc_html( $payment_mode ); ?>
-							<?php //do_action( 'wp_travel_dashboard_booking_after_payment_mode', $ordered_data, $payment_info ); ?>
+							<?php // echo esc_html( $payment_mode ); ?>
+							<?php // do_action( 'wp_travel_dashboard_booking_after_payment_mode', $ordered_data, $payment_info ); ?>
 								</div>
 							</td> -->
 
