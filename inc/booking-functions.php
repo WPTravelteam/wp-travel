@@ -189,6 +189,13 @@ function wp_travel_booking_info( $post ) {
 	$booking_option              = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
 	$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
 
+	// @since 1.8.0
+	global $wt_cart;
+	$items = $wt_cart->getItems();
+	$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
+	$totals       = $wt_cart->get_total();
+	$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
+
 	?>
 	<div class="wp-travel-booking-form-wrapper">
 			<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
