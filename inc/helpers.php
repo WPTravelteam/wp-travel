@@ -2039,15 +2039,15 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		if ( 'Y-m-d' !== $date_format ) {
 			$date = str_replace('/', '-', $date);
 			$date = str_replace('.', '-', $date);
-	
+
 			$dashed_format = str_replace('/', '-', $date_format);
 			$dashed_format = str_replace('.', '-', $dashed_format);
 			$date = DateTime::createFromFormat( $dashed_format, $date );
-	
+
 			$strtotime = date_format( $date, 'Y-m-d' );
 		}
 		$strtotime = strtotime( stripslashes( $strtotime ) );
-		
+
 
 		if ( $localize ) {
 			$formated_date = esc_html( date_i18n( $date_format, $strtotime ) );
@@ -2201,26 +2201,26 @@ function wp_travel_booking_data( $booking_id ) {
 			$trip_price  = number_format( $trip_price, 2, '.', '' );
 		}
 		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
-		
+
 		foreach ( $payment_ids as $payment_id ) {
 
 			$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
 			$paid_amount = number_format( $paid_amount, 2, '.', '' );
-			
+
 			$total_paid_amount += $paid_amount;
 			// $last_payment_id = $payment_id;
 		}
 
 	} else {
 		$payment_id = $payment_ids;
-		
+
 		$trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
 		$trip_price  = number_format( $trip_price, 2, '.', '' );
 		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
-		
+
 		$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
 		$paid_amount = number_format( $paid_amount, 2, '.', '' );
-		
+
 		$total_paid_amount += $paid_amount;
 	}
 
@@ -2232,7 +2232,7 @@ function wp_travel_booking_data( $booking_id ) {
 
     $payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
     $payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
-    
+
     $label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
     $payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
 
@@ -2278,7 +2278,7 @@ function wp_travel_payment_data( $booking_id ) {
 			$meta_name = sprintf( '_%s_args', $payment_method );
 			if ( $meta_name ) :
 				$payment_args = get_post_meta( $payment_id, $meta_name, true );
-				if ( $payment_args && ( is_object( $payment_args ) || is_array( $payment_args ) ) ) : 
+				if ( $payment_args && ( is_object( $payment_args ) || is_array( $payment_args ) ) ) :
 					$payment_data[$i]['data'] = $payment_args;
 					$payment_data[$i]['payment_id'] = $payment_id;
 					$payment_data[$i]['payment_method'] = $payment_method;

@@ -117,7 +117,7 @@ class WP_Travel_License {
 							<?php endif; ?>
 
 							<?php if ( $license_key || 'valid' !== $status ) : ?>
-							
+
 								<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
 
 								<?php if ( false !== $status && 'valid' === $status ) { ?>
@@ -126,7 +126,7 @@ class WP_Travel_License {
 									<input type="submit" class="button button-primary button-license" name="<?php echo $premium_addon['_option_prefix']; ?>activate" value="<?php esc_html_e( 'Activate License', 'wp-travel' ) ?>" />
 								<?php } ?>
 								<input type="hidden" name="save_settings_button" value="true" />
-								
+
 							<?php endif; ?>
 						</td>
 					</tr>
@@ -347,7 +347,6 @@ class WP_Travel_License {
 }
 
 function wp_travel_license_init() {
-	$wp_travel_license = new WP_Travel_License();
-	$wp_travel_license::init();
+	WP_Travel_License::init();
 }
 add_action( 'init', 'wp_travel_license_init', 11 );

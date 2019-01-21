@@ -327,10 +327,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 
 			// Flush Rewrite rule.
-			$post_type = new WP_Travel_Post_Types();
-			$post_type::init();
-			$taxonomy = new Wp_Travel_Taxonomies();
-			$taxonomy::init();
+			WP_Travel_Post_Types::init();
+			Wp_Travel_Taxonomies::init();
 			flush_rewrite_rules();
 
 			$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
