@@ -149,8 +149,8 @@ if ( isset( $settings['wp_travel_trip_facts_settings'] ) && count( $settings['wp
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
 	if ( 'no' === $wp_travel_trip_facts_enable ) {
-		$settings_url = site_url( 'wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts' );
-		printf( __( 'Trip facts are disabled insettings currently. Click %1$1shere%2$2s to enable', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
+		$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
+		printf( __( 'Trip facts are disabled in settings currently. Click %1$1shere%2$2s to enable', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
 	}
 
 	if ( '' !== $wp_travel_trip_facts ) {
@@ -230,6 +230,6 @@ $fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_val
 </script>
 <?php 
 } else {
-	$settings_url = site_url( 'wp-admin/edit.php?post_type=itineraries&page=settings#wp-travel-tab-content-facts' );
+	$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
 	printf( __( '%1$1sThere are no labels set currently. Click %2$2shere%3$3s to add one.%4$4s', 'wp-travel' ), '<p id="pass-strength-result" class="good">', '<a href="' . $settings_url . '">', '</a>', '</p>' );
 }
