@@ -51,6 +51,7 @@ class WP_Travel_Frontend_Assets {
 
 		wp_register_script( 'jquery-datepicker-lib', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
 		wp_register_script( 'wp-travel-moment', $this->assets_path . 'assets/js/moment.js', array('jquery'), WP_TRAVEL_VERSION, 1 );
+		wp_register_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 		// Localized vars into datepicker. because datepicker is in all pages.
 		$map_data = get_wp_travel_map_data();
@@ -108,7 +109,7 @@ class WP_Travel_Frontend_Assets {
 			wp_enqueue_script( 'wp-travel-moment' );
 			if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 				// Parsley For Frontend Single Trips.
-				wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+				wp_enqueue_script( 'jquery-parsley' );
 			}
 
 			wp_enqueue_script( 'wp-travel-popup', $this->assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
@@ -156,7 +157,7 @@ class WP_Travel_Frontend_Assets {
 
 			wp_enqueue_script( 'collapse-js', $this->assets_path . 'assets/js/collapse.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
-			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+			wp_enqueue_script( 'jquery-parsley' );
 
 			wp_register_script( 'wp-travel-cart', $this->assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
 
