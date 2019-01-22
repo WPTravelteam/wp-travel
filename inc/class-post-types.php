@@ -27,7 +27,7 @@ class WP_Travel_Post_Types {
 		$labels    = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
 			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),
-			'menu_name'          => _x( 'Tours', 'admin menu', 'wp-travel' ),
+			'menu_name'          => _x( 'Trips', 'admin menu', 'wp-travel' ),
 			'name_admin_bar'     => _x( 'Trip', 'add new on admin bar', 'wp-travel' ),
 			'add_new'            => _x( 'New Trip', 'wp-travel', 'wp-travel' ),
 			'add_new_item'       => __( 'Add New Trip', 'wp-travel' ),
