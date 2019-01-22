@@ -9,21 +9,21 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Inquiry Form Widget.
+ * Enquiry Form Widget.
  *
  * @author   WenSolutions
  * @category Widgets
  * @package  wp-travel/Widgets
  * @extends  WP_Widget
  */
-class WP_Travel_Trip_Inquiry_Form_Widget extends WP_Widget {
+class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Inquiry Form Widget', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Enquiry Form Widget', 'wp-travel' ) );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class WP_Travel_Trip_Inquiry_Form_Widget extends WP_Widget {
 	}
 }
 
-function wp_travel_register_wp_travel_inquiry_form_widgets() {
-	register_widget( 'WP_Travel_Trip_Inquiry_Form_Widget' );
+function wp_travel_register_wp_travel_enquiry_form_widgets() {
+	register_widget( 'WP_Travel_Trip_Enquiry_Form_Widget' );
 }
-add_action( 'widgets_init', 'wp_travel_register_wp_travel_inquiry_form_widgets' );
+add_action( 'widgets_init', 'wp_travel_register_wp_travel_enquiry_form_widgets' );

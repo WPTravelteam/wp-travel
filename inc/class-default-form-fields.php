@@ -43,7 +43,7 @@ class WP_Travel_Default_Form_Fields {
    			'name'          => 'wp_travel_enquiry_query',
    			'id'            => 'wp-travel-enquiry-query',
    			'attributes' => array(
-   				'placeholder' => __( 'Enter your enqiury...', 'wp-travel' ),
+   				'placeholder' => __( 'Enter your enquiry...', 'wp-travel' ),
    				'rows'          => 6,
    				'cols'          => 150,
    			),

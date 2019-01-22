@@ -22,7 +22,7 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wp_travel_trip_facts_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_inquiry_form', array( $this, 'wp_travel_trip_inquiry_form_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'wp_travel_trip_enquiry_form_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -438,11 +438,11 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 	}
 
 	/**
-	 * Inquiry Form shortcode callback
+	 * Enquiry Form shortcode callback
 	 *
 	 * @return String
 	 */
-	public function wp_travel_trip_inquiry_form_shortcode() {
+	public function wp_travel_trip_enquiry_form_shortcode() {
 		ob_start();
 		wp_travel_get_enquiries_form( true );
 		$html = ob_get_clean();
