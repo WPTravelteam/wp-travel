@@ -3464,13 +3464,11 @@ ul.wp-travel-error {
             display: block;
             margin-bottom: 5px;
         }
-        input {
-            &:not([type="checkbox"]) {
-                width: 100%;
-                margin-bottom: 15px;
-                font-size: 14px;
-                padding: .6em 1em .6em;
-            }
+        input:not([type="checkbox"]), select {
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 14px;
+            padding: .6em 1em .6em;
         }
         &.textarea-field {
             margin-bottom: 15px;
@@ -4476,7 +4474,7 @@ ul.wp-travel-error {
                 padding-bottom: 15px;
                 margin-bottom: 20px;
             }
-            
+
             .my-order-single-content {
                 overflow: hidden;
                 .my-order-single-col-last {
@@ -4622,3 +4620,8 @@ ul.wp-travel-error {
     }
 }
 
+.widget {
+    select {
+        width: 100%;
+    }
+}
