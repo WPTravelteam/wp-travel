@@ -22,6 +22,7 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wp_travel_trip_facts_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_inquiry_form', array( $this, 'wp_travel_trip_inquiry_form_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -165,7 +166,7 @@ class Wp_Travel_Shortcodes {
 		?>
 		<div class="wp-travel-itinerary-items">
 			<?php $col_per_row = ( isset( $atts['col'] ) && ! empty( $atts['col'] ) ) ? absint( $atts['col'] ) : apply_filters( 'wp_travel_itineraries_col_per_row' , '2' ); ?>
-			<?php if ( $query->have_posts() ) : ?>				
+			<?php if ( $query->have_posts() ) : ?>
 				<ul style="" class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>-per-row">
 				<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 					<?php
@@ -189,7 +190,7 @@ class Wp_Travel_Shortcodes {
 
 public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 
-	
+
 
 	$keyword_search = true;
 	$fact = true;
@@ -201,7 +202,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 
 	if ( isset( $atts['filters'] ) && 'all' !== $atts['filters'] ) {
 		$filters = explode( ',',$atts['filters'] );
-		
+
 		$keyword_search       = in_array( 'keyword', $filters ) ? true      : false;
 		$fact                 = in_array( 'fact', $filters ) ? true         : false;
 		$trip_type_filter     = in_array( 'trip_type', $filters ) ? true    : false;
@@ -222,7 +223,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 		$max_price  = (int) ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? $_GET['max_price']  : '';
 		$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start']: '';
 		$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
-	
+
 	ob_start();
 
 	?>
@@ -260,7 +261,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 							);
 
 						wp_dropdown_categories( $args, $taxonomy );
-						?>			
+						?>
 					</div>
 				<?php endif; ?>
 				<?php if ( $trip_location_filter ) : ?>
@@ -292,7 +293,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 							<option value="">--</option>
 							<option value="low_high" <?php selected( $price, 'low_high' ) ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ) ?></option>
 							<option value="high_low" <?php selected( $price, 'high_low' ) ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ) ?></option>
-						</select>	
+						</select>
 					</div>
 				<?php endif; ?>
 				<?php if ( $price_range ) : ?>
@@ -321,7 +322,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 								<span class="calender-icon"></span>
 							</label>
 						</span>
-						
+
 					</div>
 
 				<?php endif; ?>
@@ -337,7 +338,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 						<input type="hidden" class="wp-travel-widget-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ) ?>" />
 					<input type="submit" id="wp-travel-filter-search-submit" class="button button-primary wp-travel-filter-search-submit" value="<?php esc_attr_e( 'Search', 'wp-travel' ) ?>">
 				</div>
-					
+
 				</div>
 
 			</div>
@@ -401,8 +402,8 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 							?>
 							<span class="tour-info-item tour-info-type">
 								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>: 
-								<?php 
+								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>:
+								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
 									$count = count( $trip_fact['value'] );
 									$i = 1;
@@ -419,7 +420,7 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 									echo esc_html( $trip_fact['value'] );
 								}
 
-								?>  
+								?>
 							</span>
 						<?php endforeach; ?>
 					</div>
@@ -427,13 +428,25 @@ public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
 			</div>
 			<!-- TRIP FACTS END -->
 			<?php
-				
+
 				$content = ob_get_clean();
-			
+
 
 			return $content;
 
 		}
+	}
+
+	/**
+	 * Inquiry Form shortcode callback
+	 *
+	 * @return String
+	 */
+	public function wp_travel_trip_inquiry_form_shortcode() {
+		ob_start();
+		wp_travel_get_enquiries_form( true );
+		$html = ob_get_clean();
+		return $html;
 	}
 
 }

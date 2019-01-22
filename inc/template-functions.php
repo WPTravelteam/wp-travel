@@ -526,7 +526,7 @@ function wp_travel_single_location( $post_id ) {
 									} else {
 										printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
 									}
-				
+
 								else :
 									esc_html_e( 'N/A', 'wp-travel' );
 								endif;
@@ -2228,7 +2228,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ){
 										</div>
 									<?php endif ?>
 								</span>
-								
+
 								<?php if ( $show_end_date ) : ?>
 									<span class="trip_list_by_fixed_departure_dates_end">
 										<?php if (  '' !== $end_date ) : ?>

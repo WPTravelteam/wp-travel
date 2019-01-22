@@ -92,8 +92,10 @@ class WP_Travel_Frontend_Assets {
 
 		$trip_prices_data = array(
 			'currency_symbol' => wp_travel_get_currency_symbol(),
-			'prices' => wp_reavel_get_itinereries_prices_array(),
-			'locale' => $locale,
+			'prices'          => wp_reavel_get_itinereries_prices_array(),
+			'locale'          => $locale,
+			'nonce'           => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
 		);
 
 		wp_localize_script( 'wp-travel-widget-scripts', 'trip_prices_data', $trip_prices_data );
