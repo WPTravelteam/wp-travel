@@ -84,7 +84,7 @@ function wp_travel_google_map( $settings, $map_data ) {
       </div>
     <?php else : ?>
       <div class="map-wrap">
-      <p class="good" id="pass-strength-result"><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=" . WP_TRAVEL_POST_TYPE . "&page=settings\">settings</a>" ) ?></p>
+      <p class="good" id="pass-strength-result"><?php echo sprintf( "Please add 'google map api key' in the <a href=\"edit.php?post_type=itinerary-booking&page=settings\">settings</a>" ) ?></p>
     </div>
     <?php endif;
   }

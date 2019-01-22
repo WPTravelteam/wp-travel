@@ -36,7 +36,7 @@ function wp_travel_admin_footer_styles() {
 	<?php
 }
 
-add_action( 'admin_footer', 'wp_travel_admin_footer_styles' );
+// add_action( 'admin_footer', 'wp_travel_admin_footer_styles' );
 
 function wp_travel_marketplace_page() {
 

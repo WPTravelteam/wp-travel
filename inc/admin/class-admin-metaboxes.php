@@ -162,15 +162,13 @@ class WP_Travel_Admin_Metaboxes {
 			</tr>
 			<?php if ( 'paid' === $payment_status ) : ?>
 				<?php
-				$payment_info = wp_travel_booking_data( $booking_id );
-
-				$total_price = $payment_info['total_price'];
-				$paid_amount = $payment_info['paid_amount'];
-				$due_amount  = $payment_info['due_amount'];
+				$total_price = $details['total'];
+				$paid_amount = $details['paid_amount'];
+				$due_amount  = $details['due_amount'];
 				?>
 				<tr>
 					<td><strong><?php esc_html_e( 'Payment Mode', 'wp-travel' ); ?></strong></td>
-					<td><?php echo esc_html( $payment_info['payment_mode'] ); ?></td>
+					<td><?php echo esc_html( $details['payment_mode'] ); ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></strong></td>

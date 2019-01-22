@@ -21,7 +21,9 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
 	$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
 	$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	
 	$title         = get_the_title( $trip_id );
+	$pax           = get_post_meta( $booking_id, 'wp_travel_pax', true );
 
 	// Billing fields.
 	$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
@@ -29,8 +31,11 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
 	$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
 
+	// Travelers info.
+	$fname = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+	$lname = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
+
 	if ( is_array( $details ) && count( $details ) > 0 ) {
-		// dd(get_post_meta( $booking_id ));
 		?>
 		<div class="my-order my-order-details">
 			<div class="view-order">
@@ -111,72 +116,66 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											</div>
 											
 										</div>
-										<div class="col-md-12 my-order-single-col-last">
-											<h3 class="my-order-single-title">Billing Detail</h3>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">First Name :</span>
-												<span class="my-order-tail">Yoshi</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Last Name :</span>
-												<span class="my-order-tail">Dyer</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Email :</span>
-												<span class="my-order-tail">
-													<a href="mailto:pova@mailinator.net">pova@mailinator.net</a>
-												</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Phone :</span>
-												<span class="my-order-tail">+168-39-4333439</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Country :</span>
-												<span class="my-order-tail">Malawi</span>
-											</div>
-											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Address :</span>
-												<span class="my-order-tail">Aperiam iste voluptatem aperiam reiciendis qui dicta voluptas tempor repellendus Fugiat</span>
-											</div>
-										</div>
 									</div>
-									<div class="my-order-single-traveller-info">
-										<h3 class="my-order-single-title">Traveller Info</h3>
-										<div class="my-order-single-field clearfix">
-											<span class="my-order-head">Traveller 1 :</span>
-											<span class="my-order-tail">Ms Britanney Petty</span>
-										</div>
-										<div class="my-order-single-field clearfix">
-											<span class="my-order-head">Traveller 2 :</span>
-											<span class="my-order-tail">Ms Kirestin Greene</span>
-										</div>
-										<div class="my-order-single-field clearfix">
-											<span class="my-order-head">Traveller 3 :</span>
-											<span class="my-order-tail">Mrs Karen Underwood</span>
-										</div>
-										<div class="my-order-single-field clearfix">
-											<span class="my-order-head">Traveller 4 :</span>
-											<span class="my-order-tail">Miss Sopoline Sanders</span>
-										</div>
-										<div class="my-order-single-field clearfix">
-											<span class="my-order-head">Traveller 5 :</span>
-											<span class="my-order-tail">Master Vielka Marshall</span>
-										</div>
-									</div>
-									<div class="my-order-single-price-breakdown">
-										<h3 class="my-order-single-title">Price Breakdown</h3>
-										<div class="my-order-price-breakdown">
-											<div class="my-order-price-breakdown-base-price-wrap">
-												<div class="my-order-price-breakdown-base-price">
-													<span class="my-order-head">Traveller Base Price</span>
-													<span class="my-order-tail">
-														<span class="my-order-price-detail">5 x $1,200</span>
-														<span class="my-order-price">$6,000.00</span>
-													</span>
+									<?php
+									if ( is_array( $fname ) && count( $fname ) > 0 ) :
+										foreach ( $fname as $booking_trip_id => $first_names  ) :
+											if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
+											?>
+												<div class="my-order-single-traveller-info">
+													<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
+													
+													<?php foreach ( $first_names as $key => $first_name ) : ?>
+														<div class="my-order-single-field clearfix">
+															<span class="my-order-head"><?php esc_html_e( sprintf( 'Traveller %s :', $key + 1 ), 'wp-travel' ); ?></span>
+															<span class="my-order-tail"><?php echo esc_html( $first_name . ' ' . $lname[ $booking_trip_id ][ $key ] ); ?></span>
+														</div>
+													<?php endforeach; ?>
 												</div>
-											</div>
-											<div class="my-order-price-breakdown-additional-service">
+											<?php
+											endif;
+										endforeach;
+									endif; ?>
+
+									<div class="my-order-single-price-breakdown">
+										<h3 class="my-order-single-title"><?php echo esc_html_e( 'Price Breakdown', 'wp-travel' ); ?></h3>
+										<div class="my-order-price-breakdown">
+											<?php
+											$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
+																		
+											if ( $order_details ) {
+												$order_prices = get_post_meta( $booking_id, 'order_totals', true );
+												foreach( $order_details as $order_detail ) {
+												?>
+													<div class="my-order-price-breakdown-base-price-wrap">
+														<div class="my-order-price-breakdown-base-price">
+															<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ) ?></span>
+															<span class="my-order-tail">
+																<span class="my-order-price-detail"> x <?php echo esc_html( $order_detail['pax'] ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
+																<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $order_detail['trip_price'] ) ?></span>
+															</span>
+														</div>
+													</div>
+													
+												<?php
+												}
+		
+											} else { // single Trips. ?>
+												<div class="my-order-price-breakdown-base-price-wrap">
+													<div class="my-order-price-breakdown-base-price">
+														<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ) ?></span>
+														<span class="my-order-tail">
+															<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
+															<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $details['sub_total'] ) ?></span>
+														</span>
+													</div>
+												</div>
+											<?php
+											} 
+											?>
+
+
+											<!-- <div class="my-order-price-breakdown-additional-service">
 												<h3 class="my-order-price-breakdown-additional-service-title">Additional Services</h3>
 												<div class="my-order-price-breakdown-additional-service-item clearfix">
 													<span class="my-order-head">Umbrella (1 x $8)</span>
@@ -190,49 +189,52 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 													<span class="my-order-head">Tip for tour guide (5 x $20)</span>
 													<span class="my-order-tail my-order-right">$100.00</span>
 												</div>
-											</div>
+											</div> -->
+											
 											<div class="my-order-price-breakdown-summary">
 												<div class="my-order-price-breakdown-sub-total">
-													<span class="my-order-head">Sub Total Price</span>
-													<span class="my-order-tail my-order-right">$6,153.00</span>
+													<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
 												</div>
-												<div class="my-order-price-breakdown-coupon-code">
+												<!-- <div class="my-order-price-breakdown-coupon-code">
 													<span class="my-order-head">Coupon Code :</span>
 													<span class="my-order-tail">
 														<span class="my-order-coupon-code">10PSpecial</span>
 														<span class="my-order-coupon-text">10%</span>
 													</span>
-												</div>
-												<div class="my-order-price-breakdown-coupon-amount">
-													<span class="my-order-head">Discount Price</span>
-													<span class="my-order-tail my-order-right">- $368.70</span>
-												</div>
-												<div class="my-order-price-breakdown-tax-rate">
+												</div> -->
+												<?php if ( $details['discount'] ) : ?>
+													<div class="my-order-price-breakdown-coupon-amount">
+														<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
+														<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ) ?></span>
+													</div>
+												<?php endif; ?>
+												<!-- <div class="my-order-price-breakdown-tax-rate">
 													<span class="my-order-head">Tax Rate</span>
 													<span class="my-order-tail my-order-right">9%</span>
-												</div>
+												</div> -->
 												<div class="my-order-price-breakdown-tax-due">
-													<span class="my-order-head">Tax Due</span>
-													<span class="my-order-tail my-order-right">$553.77</span>
+													<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ) ?> </span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ) ?></span>
 												</div>
-												<div class="my-order-price-breakdown-service-fee">
+												<!-- <div class="my-order-price-breakdown-service-fee">
 													<span class="my-order-head">Paypal Service Fee (3%)</span>
 													<span class="my-order-tail my-order-right">$201.20</span>
-												</div>
+												</div> -->
 											</div>
 											<div class="clear"></div>
 										</div>
 										<div class="my-order-single-total-price clearfix">
 											<div class="my-order-single-field clearfix">
-												<span class="my-order-head">Total</span>
-												<span class="my-order-tail">$6,907.97</span>
+												<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
+												<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ) ?></span>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
-							<table>
+							<!-- <table>
 								<tr>
 									<th><?php esc_html_e( 'Title', 'wp-travel' ); ?></th>
 									<th><?php esc_html_e( 'Detail', 'wp-travel' ); ?></th>
@@ -253,7 +255,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<td><?php echo esc_html( $detail ); ?></td>
 									</tr>
 								<?php endforeach; ?>
-							</table>
+							</table> -->
 						</div>
 					</div>
 					<?php
@@ -341,7 +343,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 						$booking_status = $payment_info['booking_status'];
 						$payment_status = $payment_info['payment_status'];
 						$payment_mode   = $payment_info['payment_mode'];
-						$total_price    = $payment_info['total_price'];
+						$total_price    = $payment_info['total'];
 						$paid_amount    = $payment_info['paid_amount'];
 						$due_amount     = $payment_info['due_amount'];
 

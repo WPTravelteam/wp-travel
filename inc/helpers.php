@@ -53,21 +53,21 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
 	$currency_list = wp_travel_get_currency_list();
 
 	$defaults = array(
-		'id'		=> '',
-		'class'		=> '',
-		'name'		=> '',
-		'option'	=> '',
-		'options'	=> '',
-		'selected'	=> '',
-		'attributes'	=> array(),
-		);
+		'id'         => '',
+		'class'      => '',
+		'name'       => '',
+		'option'     => '',
+		'options'    => '',
+		'selected'   => '',
+		'attributes' => array(),
+	);
 
-	$args = wp_parse_args( $args, $defaults );
+	$args     = wp_parse_args( $args, $defaults );
 	$dropdown = '';
-	if ( is_array( $currency_list )  && count( $currency_list ) > 0 ) {
+	if ( is_array( $currency_list ) && count( $currency_list ) > 0 ) {
 		$attributes = '';
 		if ( ! empty( $args['attributes'] ) ) {
-			foreach( $args['attributes'] as $key => $value ) {
+			foreach ( $args['attributes'] as $key => $value ) {
 				$attributes .= sprintf( $key . '="%s" ', $value );
 			}
 		}
@@ -92,34 +92,32 @@ function wp_travel_get_dropdown_currency_list( $args = array() ) {
  *
  * @param  array $args Arguments for dropdown list.
  *
- * @since	1.7.6
+ * @since   1.7.6
  * @return HTML  return dropdown list.
  */
 function wp_travel_get_dropdown_list( $args = array() ) {
 
-
 	$defaults = array(
-		'id'		=> '',
-		'class'		=> '',
-		'name'		=> '',
-		'option'	=> '',
-		'options'	=> '',
-		'selected'	=> '',
-		'before_label'	=> '',
-		'after_label'	=> '',
-		'attributes'	=> array(),
-		);
+		'id'           => '',
+		'class'        => '',
+		'name'         => '',
+		'option'       => '',
+		'options'      => '',
+		'selected'     => '',
+		'before_label' => '',
+		'after_label'  => '',
+		'attributes'   => array(),
+	);
 
 	$args = wp_parse_args( $args, $defaults );
 
 	$options = $args['options'];
 
-
 	$dropdown = '';
-	if ( is_array( $options )  && count( $options ) > 0 ) {
+	if ( is_array( $options ) && count( $options ) > 0 ) {
 		$attributes = '';
 		if ( ! empty( $args['attributes'] ) ) {
-			foreach( $args['attributes'] as $key => $value ) {
+			foreach ( $args['attributes'] as $key => $value ) {
 				$attributes .= sprintf( $key . '="%s" ', $value );
 			}
 		}
@@ -147,7 +145,7 @@ function wp_travel_get_dropdown_list( $args = array() ) {
  */
 function wp_travel_get_maps() {
 
-	$map_key = 'google-map';
+	$map_key  = 'google-map';
 	$settings = wp_travel_get_settings();
 
 	$wp_travel_maps = array( $map_key => __( 'Google Map', 'wp-travel' ) );
@@ -156,8 +154,8 @@ function wp_travel_get_maps() {
 	$selected_map = ( isset( $settings['wp_travel_map'] ) && in_array( $settings['wp_travel_map'], array_keys( $wp_travel_maps ) ) ) ? $settings['wp_travel_map'] : $map_key;
 
 	$map = array(
-		'maps' 		=> $wp_travel_maps,
-		'selected'	=> $selected_map
+		'maps'     => $wp_travel_maps,
+		'selected' => $selected_map,
 	);
 	return $map;
 }
@@ -207,7 +205,7 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 
 			$contents .= '<option value="' . $content->ID . '" ' . selected( $selected, $content->ID, false ) . ' >' . $space . $content->post_title . '</option>';
 			if ( isset( $content->children ) ) {
-				$contents .= wp_travel_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ) , false );
+				$contents .= wp_travel_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ), false );
 			}
 		}
 	endif;
@@ -226,7 +224,7 @@ function get_wp_travel_map_data() {
 	if ( ! $post ) {
 		return;
 	}
-	$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) :'';
+	$lat = ( '' != get_post_meta( $post->ID, 'wp_travel_lat', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lat', true ) : '';
 	$lng = ( '' != get_post_meta( $post->ID, 'wp_travel_lng', true ) ) ? get_post_meta( $post->ID, 'wp_travel_lng', true ) : '';
 	$loc = ( '' != get_post_meta( $post->ID, 'wp_travel_location', true ) ) ? get_post_meta( $post->ID, 'wp_travel_location', true ) : '';
 
@@ -234,7 +232,7 @@ function get_wp_travel_map_data() {
 		'lat' => $lat,
 		'lng' => $lng,
 		'loc' => $loc,
-		);
+	);
 	return $map_meta;
 }
 
@@ -268,12 +266,12 @@ function wp_travel_get_post_thumbnail( $post_id, $size = 'wp_travel_thumbnail' )
 		global $post;
 		$post_id = $post->ID;
 	}
-	$size = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
+	$size      = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
 	$thumbnail = get_the_post_thumbnail( $post_id, $size );
 
 	if ( ! $thumbnail ) {
 		$placeholder_image_url = wp_travel_get_post_placeholder_image_url();
-		$thumbnail = '<img width="100%" height="100%" src="' . $placeholder_image_url . '">';
+		$thumbnail             = '<img width="100%" height="100%" src="' . $placeholder_image_url . '">';
 	}
 	return $thumbnail;
 }
@@ -289,7 +287,7 @@ function wp_travel_get_post_thumbnail_url( $post_id, $size = 'wp_travel_thumbnai
 	if ( ! $post_id ) {
 		return;
 	}
-	$size = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
+	$size          = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
 	$thumbnail_url = get_the_post_thumbnail_url( $post_id, $size );
 
 	if ( ! $thumbnail_url ) {
@@ -317,71 +315,71 @@ function wp_travel_get_post_placeholder_image_url() {
 function wp_travel_allowed_html( $tags = array() ) {
 
 	$allowed_tags = array(
-		'a' => array(
+		'a'          => array(
 			'class' => array(),
 			'href'  => array(),
 			'rel'   => array(),
 			'title' => array(),
 		),
-		'abbr' => array(
+		'abbr'       => array(
 			'title' => array(),
 		),
-		'b' => array(),
+		'b'          => array(),
 		'blockquote' => array(
-			'cite'  => array(),
+			'cite' => array(),
 		),
-		'cite' => array(
+		'cite'       => array(
 			'title' => array(),
 		),
-		'code' => array(),
-		'del' => array(
+		'code'       => array(),
+		'del'        => array(
 			'datetime' => array(),
-			'title' => array(),
+			'title'    => array(),
 		),
-		'dd' => array(),
-		'div' => array(
+		'dd'         => array(),
+		'div'        => array(
 			'class' => array(),
 			'title' => array(),
 			'style' => array(),
 		),
-		'dl' => array(),
-		'dt' => array(),
-		'em' => array(),
-		'h1' => array(),
-		'h2' => array(),
-		'h3' => array(),
-		'h4' => array(),
-		'h5' => array(),
-		'h6' => array(),
-		'i' => array(),
-		'img' => array(
+		'dl'         => array(),
+		'dt'         => array(),
+		'em'         => array(),
+		'h1'         => array(),
+		'h2'         => array(),
+		'h3'         => array(),
+		'h4'         => array(),
+		'h5'         => array(),
+		'h6'         => array(),
+		'i'          => array(),
+		'img'        => array(
 			'alt'    => array(),
 			'class'  => array(),
 			'height' => array(),
 			'src'    => array(),
 			'width'  => array(),
 		),
-		'li' => array(
+		'li'         => array(
 			'class' => array(),
 		),
-		'ol' => array(
+		'ol'         => array(
 			'class' => array(),
 		),
-		'p' => array(
+		'p'          => array(
 			'class' => array(),
 		),
-		'q' => array(
-			'cite' => array(),
+		'q'          => array(
+			'cite'  => array(),
 			'title' => array(),
 		),
-		'span' => array(
+		'span'       => array(
 			'class' => array(),
 			'title' => array(),
 			'style' => array(),
 		),
-		'strike' => array(),
-		'strong' => array(),
-		'ul' => array(
+		'strike'     => array(),
+		'strong'     => array(),
+		'ul'         => array(
 			'class' => array(),
 		),
 	);
@@ -405,8 +403,8 @@ function wp_travel_allowed_html( $tags = array() ) {
  */
 function wp_travel_get_itineraries_array() {
 	$args = array(
-	  'post_type'   => WP_TRAVEL_POST_TYPE,
-	  'numberposts' => -1,
+		'post_type'   => WP_TRAVEL_POST_TYPE,
+		'numberposts' => -1,
 	);
 
 	$itineraries = get_posts( $args );
@@ -425,8 +423,8 @@ function wp_travel_get_itineraries_array() {
  */
 function wp_travel_get_tour_extras_array() {
 	$args = array(
-	  'post_type'   => 'tour-extras',
-	  'numberposts' => -1,
+		'post_type'   => 'tour-extras',
+		'numberposts' => -1,
 	);
 
 	$itineraries = get_posts( $args );
@@ -440,9 +438,8 @@ function wp_travel_get_tour_extras_array() {
 
 /**
  * Return JSON Encoded Itinerary price oblect
- *
  */
-function wp_reavel_get_itinereries_prices_array(){
+function wp_reavel_get_itinereries_prices_array() {
 
 	$itineraries = wp_travel_get_itineraries_array();
 
@@ -456,10 +453,10 @@ function wp_reavel_get_itinereries_prices_array(){
 
 		}
 		if ( is_array( $prices ) && '' !== $prices ) :
-		 return $prices;
+			return $prices;
 		endif;
 	}
-return false;
+	return false;
 }
 
 /**
@@ -469,8 +466,8 @@ return false;
  * @return array
  */
 function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
-	$args = array(
-		'numberposts' => $no_of_post_to_show,
+	$args        = array(
+		'numberposts'      => $no_of_post_to_show,
 		'offset'           => 0,
 		'orderby'          => 'date',
 		'order'            => 'DESC',
@@ -493,53 +490,53 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
 function wp_travel_search_form() {
 	ob_start(); ?>
 	<div class="wp-travel-search">
-		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) );  ?>" >
-			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ) ?>" />
+		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
+			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
 			<p>
-				<label><?php esc_html_e( 'Search:', 'wp-travel' ) ?></label>
+				<label><?php esc_html_e( 'Search:', 'wp-travel' ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ) ?></label>
+				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ); ?></label>
 				<?php
 				$taxonomy = 'itinerary_types';
-				$args = array(
-					'show_option_all'    => __( 'All', 'wp-travel' ),
-					'hide_empty'         => 0,
-					'selected'           => 1,
-					'hierarchical'       => 1,
-					'name'               => $taxonomy,
-					'class'              => 'wp-travel-taxonomy',
-					'taxonomy'           => $taxonomy,
-					'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
-					'value_field'		 => 'slug',
+				$args     = array(
+					'show_option_all' => __( 'All', 'wp-travel' ),
+					'hide_empty'      => 0,
+					'selected'        => 1,
+					'hierarchical'    => 1,
+					'name'            => $taxonomy,
+					'class'           => 'wp-travel-taxonomy',
+					'taxonomy'        => $taxonomy,
+					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'value_field'     => 'slug',
 				);
 
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Location:', 'wp-travel' ) ?></label>
+				<label><?php esc_html_e( 'Location:', 'wp-travel' ); ?></label>
 				<?php
 				$taxonomy = 'travel_locations';
-				$args = array(
-					'show_option_all'    => __( 'All', 'wp-travel' ),
-					'hide_empty'         => 0,
-					'selected'           => 1,
-					'hierarchical'       => 1,
-					'name'               => $taxonomy,
-					'class'              => 'wp-travel-taxonomy',
-					'taxonomy'           => $taxonomy,
-					'selected'           => ( isset( $_GET[$taxonomy] ) ) ? esc_textarea( $_GET[$taxonomy] ) : 0,
-					'value_field'		 => 'slug',
+				$args     = array(
+					'show_option_all' => __( 'All', 'wp-travel' ),
+					'hide_empty'      => 0,
+					'selected'        => 1,
+					'hierarchical'    => 1,
+					'name'            => $taxonomy,
+					'class'           => 'wp-travel-taxonomy',
+					'taxonomy'        => $taxonomy,
+					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'value_field'     => 'slug',
 				);
 
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
 
-			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php esc_html_e( 'Search', 'wp-travel' ) ?>"  /></p>
+			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>"  /></p>
 		</form>
 	</div>
 	<?php
@@ -554,9 +551,9 @@ function wp_travel_search_form() {
  * @return void
  */
 function wp_travel_get_trip_duration( $post_id ) {
-		if ( ! $post_id ) {
-			return;
-		}
+	if ( ! $post_id ) {
+		return;
+	}
 
 		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 		$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
@@ -564,25 +561,25 @@ function wp_travel_get_trip_duration( $post_id ) {
 
 		$show_end_date = wp_travel_booking_show_end_date();
 
-		if ( 'yes' === $fixed_departure ) :
-			$start_date	= get_post_meta( $post_id, 'wp_travel_start_date', true );
-			$end_date 	= get_post_meta( $post_id, 'wp_travel_end_date', true );
+	if ( 'yes' === $fixed_departure ) :
+		$start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
+		$end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 		?>
 
 		<div class="wp-travel-trip-time trip-fixed-departure">
 			<i class="wt-icon-regular wt-icon-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
-				<?php
-				if ( $start_date || $end_date ) :
-					$date_format = get_option( 'date_format' );
-					if ( ! $date_format ) :
-						$date_format = 'jS M, Y';
+			<?php
+			if ( $start_date || $end_date ) :
+				$date_format = get_option( 'date_format' );
+				if ( ! $date_format ) :
+					$date_format = 'jS M, Y';
 					endif;
-					if ( '' !== $end_date && $show_end_date ) {
-						printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
-					} else {
-						printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
-					}
+				if ( '' !== $end_date && $show_end_date ) {
+					printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
+				} else {
+					printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
+				}
 
 				else :
 					esc_html_e( 'N/A', 'wp-travel' );
@@ -594,19 +591,21 @@ function wp_travel_get_trip_duration( $post_id ) {
 	<?php else : ?>
 		<?php
 		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
-		$trip_duration = ( $trip_duration ) ? $trip_duration : 0; ?>
+		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+		?>
 
 		<div class="wp-travel-trip-time trip-duration">
 			<i class="wt-icon-regular wt-icon-clock"></i>
 			<span class="wp-travel-trip-duration">
-				<?php if ( ( int ) $trip_duration > 0 ) : ?>
+				<?php if ( (int) $trip_duration > 0 ) : ?>
 					<?php echo esc_html( $trip_duration . __( ' Days', 'wp-travel' ) ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 				<?php endif; ?>
 			</span>
 		</div>
-	<?php endif;
+		<?php
+	endif;
 }
 
 /**
@@ -618,7 +617,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 function wp_travel_get_price_per_fields() {
 	$price_per = array(
 		'person' => __( 'Person', 'wp-travel' ),
-		'group'	 => __( 'Group', 'wp-travel' ),
+		'group'  => __( 'Group', 'wp-travel' ),
 	);
 
 	return apply_filters( 'wp_travel_price_per_fields', $price_per );
@@ -657,9 +656,9 @@ function wp_travel_is_enable_sale( $post_id ) {
 	if ( ! $post_id ) {
 		return false;
 	}
-	$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 
-	if ( $enable_sale  ) {
+	if ( $enable_sale ) {
 		return true;
 	}
 	return false;
@@ -678,12 +677,12 @@ function wp_travel_get_booking_data() {
 	$initial_load = true;
 
 	// Default variables.
-	$query_limit = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
-	$limit = "limit {$query_limit}";
-	$where = '';
-	$top_country_where = '';
+	$query_limit         = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
+	$limit               = "limit {$query_limit}";
+	$where               = '';
+	$top_country_where   = '';
 	$top_itinerary_where = '';
-	$groupby = '';
+	$groupby             = '';
 
 	$from_date = '';
 	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
@@ -704,21 +703,20 @@ function wp_travel_get_booking_data() {
 	}
 
 	// Stat Data Array
-
 	// Setting conditions.
 	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
 		// Set initial load to false if there is extra get variables.
 		$initial_load = false;
 
 		if ( '' !== $itinerary ) {
-			$where 	 .= " and itinerary_id={$itinerary} ";
+			$where             .= " and itinerary_id={$itinerary} ";
 			$top_country_where .= $where;
-			$groupby .= ' itinerary_id,';
+			$groupby           .= ' itinerary_id,';
 		}
 		if ( '' !== $country ) {
-			$where   .= " and country='{$country}'";
+			$where               .= " and country='{$country}'";
 			$top_itinerary_where .= " and country='{$country}'";
-			$groupby .= ' country,';
+			$groupby             .= ' country,';
 		}
 
 		if ( '' !== $from_date && '' !== $to_date ) {
@@ -728,25 +726,25 @@ function wp_travel_get_booking_data() {
 			$booking_from = date( $date_format, strtotime( $from_date ) );
 			$booking_to   = date( $date_format, strtotime( $to_date ) );
 
-			$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-			$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$where               .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+			$top_country_where   .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 			$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 		}
 		$limit = '';
 	}
 
-	$stat_data = array();
-	$date_format = 'm/d/Y';
+	$stat_data         = array();
+	$date_format       = 'm/d/Y';
 	$booking_stat_from = $booking_stat_to = date( $date_format );
-	$temp_stat_data = array();
-	$max_bookings = 0;
-	$max_pax = 0;
+	$temp_stat_data    = array();
+	$max_bookings      = 0;
+	$max_pax           = 0;
 
-	if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type']  ) ) {
+	if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type'] ) ) {
 		// Booking Data Default Query.
 		$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
 		if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
-			$query = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
+			$query   = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
 			from (
 				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P
 				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id
@@ -755,19 +753,18 @@ function wp_travel_get_booking_data() {
 				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
 			) Booking
 			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
-			$results =  $wpdb->get_results( $query );
+			$results = $wpdb->get_results( $query );
 			// set initial load transient for stat data.
 			if ( $initial_load && ! $initial_transient ) {
 				set_site_transient( '_transient_wt_booking_stat_data', $results );
 			}
 		}
 
-
 		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
-		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#00f', 'wp-travel' );
+		$temp_stat_data['data_bg_color']     = __( '#00f', 'wp-travel' );
 		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
 	} else {
 		// Payment Data Default Query.
@@ -785,13 +782,13 @@ function wp_travel_get_booking_data() {
 		where post_status='publish' and post_type = 'itinerary-booking' {$where}
 		group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
 
-		$results =  $wpdb->get_results( $query );
+		$results = $wpdb->get_results( $query );
 
 		$temp_stat_data['data_label'] = __( 'Payment', 'wp-travel' );
-		if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
 		}
-		$temp_stat_data['data_bg_color'] = __( '#1DFE0E', 'wp-travel' );
+		$temp_stat_data['data_bg_color']     = __( '#1DFE0E', 'wp-travel' );
 		$temp_stat_data['data_border_color'] = __( '#1DFE0E', 'wp-travel' );
 	}
 
@@ -800,10 +797,10 @@ function wp_travel_get_booking_data() {
 			$label_date = $result->wt_year . '-' . $result->wt_month . '-' . $result->wt_day;
 			$label_date = date( $date_format, strtotime( $label_date ) );
 
-			$temp_stat_data['data'][$label_date] = $result->wt_total;
+			$temp_stat_data['data'][ $label_date ] = $result->wt_total;
 
-			$max_bookings += ( int ) $result->wt_total;
-			$max_pax += ( int ) $result->no_of_pax;
+			$max_bookings += (int) $result->wt_total;
+			$max_pax      += (int) $result->no_of_pax;
 
 			if ( strtotime( $booking_stat_from ) > strtotime( $label_date ) ) {
 
@@ -838,7 +835,7 @@ function wp_travel_get_booking_data() {
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by country order by wt_total desc";
 
 		$top_countries = array();
-		$results =  $wpdb->get_results( $top_country_query );
+		$results       = $wpdb->get_results( $top_country_query );
 		// set initial load transient for stat data.
 		if ( $initial_load && ! $initial_transient ) {
 			set_site_transient( '_transient_wt_booking_top_country', $results );
@@ -863,27 +860,30 @@ function wp_travel_get_booking_data() {
 		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by itinerary_id order by wt_total desc";
 
-		$results =  $wpdb->get_results( $top_itinerary_query );
+		$results = $wpdb->get_results( $top_itinerary_query );
 		// set initial load transient for stat data.
 		if ( $initial_load && ! $initial_transient ) {
 			set_site_transient( '_transient_wt_booking_top_itinerary', $results );
 		}
 	}
-	$top_itinerary = array( 'name' => esc_html__( 'N/A', 'wp-travel' ), 'url' => '' );
+	$top_itinerary = array(
+		'name' => esc_html__( 'N/A', 'wp-travel' ),
+		'url'  => '',
+	);
 	if ( is_array( $results ) && count( $results ) > 0 ) {
 		$itinerary_id = $results['0']->itinerary_id;
 
 		if ( $itinerary_id ) {
 			$top_itinerary['name'] = get_the_title( $itinerary_id );
-			$top_itinerary['id'] = $itinerary_id;
+			$top_itinerary['id']   = $itinerary_id;
 		}
 	}
 
 	$booking_additional_data = array(
-		'from' => $booking_stat_from,
-		'to' => $booking_stat_to,
-		'max_bookings' => $max_bookings,
-		'max_pax' => $max_pax,
+		'from'          => $booking_stat_from,
+		'to'            => $booking_stat_to,
+		'max_bookings'  => $max_bookings,
+		'max_pax'       => $max_pax,
 		'top_countries' => $top_countries,
 		'top_itinerary' => $top_itinerary,
 	);
@@ -891,11 +891,11 @@ function wp_travel_get_booking_data() {
 	$data[] = $temp_stat_data;
 
 	// End of Booking Data Default Query.
-	$where = '';
-	$top_country_where = '';
+	$where               = '';
+	$top_country_where   = '';
 	$top_itinerary_where = '';
-	$groupby = '';
-	if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+	$groupby             = '';
+	if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 
 		$compare_from_date = '';
 		if ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) {
@@ -921,14 +921,14 @@ function wp_travel_get_booking_data() {
 			$initial_load = false;
 
 			if ( '' !== $compare_itinerary ) {
-				$where 	 .= " and itinerary_id={$compare_itinerary} ";
+				$where             .= " and itinerary_id={$compare_itinerary} ";
 				$top_country_where .= $where;
-				$groupby .= ' itinerary_id,';
+				$groupby           .= ' itinerary_id,';
 			}
 			if ( '' !== $compare_country ) {
-				$where   .= " and country='{$compare_country}'";
+				$where               .= " and country='{$compare_country}'";
 				$top_itinerary_where .= " and country='{$compare_country}'";
-				$groupby .= ' country,';
+				$groupby             .= ' country,';
 			}
 
 			if ( '' !== $compare_from_date && '' !== $compare_to_date ) {
@@ -938,18 +938,18 @@ function wp_travel_get_booking_data() {
 				$booking_from = date( $date_format, strtotime( $compare_from_date ) );
 				$booking_to   = date( $date_format, strtotime( $compare_to_date ) );
 
-				$where 	 .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
-				$top_country_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$where               .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
+				$top_country_where   .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 				$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 			}
 			$limit = '';
 		}
 
 		$temp_compare_data = array();
-		if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type']  ) ) {
+		if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type'] ) ) {
 
 			// Compare Data Default Query.
-			$query = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
+			$query   = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
 			from (
 				Select P.ID, P.post_date, P.post_type, P.post_status, C.country, I.itinerary_id, PAX.no_of_pax from {$wpdb->posts} P
 				join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on P.ID = C.post_id
@@ -958,10 +958,10 @@ function wp_travel_get_booking_data() {
 				group by P.ID, C.country, I.itinerary_id, PAX.no_of_pax
 			) Booking
 			where post_type='itinerary-booking' AND post_status='publish' {$where} group by {$groupby} YEAR(post_date), MONTH(post_date), DAY(post_date) {$limit}";
-			$results =  $wpdb->get_results( $query );
+			$results = $wpdb->get_results( $query );
 
-			$temp_compare_data['data_label'] = __( 'Booking 2', 'wp-travel' );
-			$temp_compare_data['data_bg_color'] = __( '#3c0', 'wp-travel' );
+			$temp_compare_data['data_label']        = __( 'Booking 2', 'wp-travel' );
+			$temp_compare_data['data_bg_color']     = __( '#3c0', 'wp-travel' );
 			$temp_compare_data['data_border_color'] = __( '#3c0', 'wp-travel' );
 		} else {
 			// Payment Data Default Query.
@@ -979,28 +979,28 @@ function wp_travel_get_booking_data() {
 			where post_status='publish' and post_type = 'itinerary-booking' {$where}
 			group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
 
-			$results =  $wpdb->get_results( $query );
+			$results = $wpdb->get_results( $query );
 
 			$temp_compare_data['data_label'] = __( 'Payment', 'wp-travel' );
-			if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+			if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
 				$temp_compare_data['data_label'] = __( 'Payment 2', 'wp-travel' );
 			}
-			$temp_compare_data['data_bg_color'] = __( '#000', 'wp-travel' );
+			$temp_compare_data['data_bg_color']     = __( '#000', 'wp-travel' );
 			$temp_compare_data['data_border_color'] = __( '#000', 'wp-travel' );
 		}
 
 		$date_format = 'm/d/Y';
 
 		$max_bookings = 0;
-		$max_pax = 0;
+		$max_pax      = 0;
 		if ( is_array( $results ) && count( $results ) > 0 ) {
 			foreach ( $results as $result ) {
-				$label_date = $result->wt_year . '-' . $result->wt_month . '-' . $result->wt_day;
-				$label_date = date( $date_format, strtotime( $label_date ) );
-				$temp_compare_data['data'][$label_date] = $result->wt_total;
+				$label_date                               = $result->wt_year . '-' . $result->wt_month . '-' . $result->wt_day;
+				$label_date                               = date( $date_format, strtotime( $label_date ) );
+				$temp_compare_data['data'][ $label_date ] = $result->wt_total;
 
-				$max_bookings += ( int ) $result->wt_total;
-				$max_pax += ( int ) $result->no_of_pax;
+				$max_bookings += (int) $result->wt_total;
+				$max_pax      += (int) $result->no_of_pax;
 			}
 		}
 
@@ -1015,7 +1015,7 @@ function wp_travel_get_booking_data() {
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by country order by wt_total desc";
 
 		$top_countries = array();
-		$results =  $wpdb->get_results( $top_country_query );
+		$results       = $wpdb->get_results( $top_country_query );
 
 		if ( is_array( $results ) && count( $results ) > 0 ) {
 			foreach ( $results as $result ) {
@@ -1033,18 +1033,21 @@ function wp_travel_get_booking_data() {
 		) Booking
 		where post_type='itinerary-booking' AND post_status='publish' {$where}  group by itinerary_id order by wt_total desc";
 
-		$results =  $wpdb->get_results( $top_itinerary_query );
+		$results = $wpdb->get_results( $top_itinerary_query );
 		// set initial load transient for stat data.
 		if ( $initial_load && ! $initial_transient ) {
 			set_site_transient( '_transient_wt_booking_top_itinerary', $results );
 		}
-		$top_itinerary = array( 'name' => esc_html__( 'N/A', 'wp-travel' ), 'url' => '' );
+		$top_itinerary = array(
+			'name' => esc_html__( 'N/A', 'wp-travel' ),
+			'url'  => '',
+		);
 		if ( is_array( $results ) && count( $results ) > 0 ) {
 			$itinerary_id = $results['0']->itinerary_id;
 
 			if ( $itinerary_id ) {
 				$top_itinerary['name'] = get_the_title( $itinerary_id );
-				$top_itinerary['id'] = $itinerary_id;
+				$top_itinerary['id']   = $itinerary_id;
 			}
 		}
 		// Compare Calculation ends here.
@@ -1057,32 +1060,32 @@ function wp_travel_get_booking_data() {
 		}
 
 		$compare_additional_data = array(
-			'from' => $compare_from_date,
-			'to' => $compare_to_date,
-			'max_bookings' => $max_bookings,
-			'max_pax' => $max_pax,
+			'from'          => $compare_from_date,
+			'to'            => $compare_to_date,
+			'max_bookings'  => $max_bookings,
+			'max_pax'       => $max_pax,
 			'top_countries' => $top_countries,
 			'top_itinerary' => $top_itinerary,
 		);
 		// Compare Calculation ends here.
 		$data[] = $temp_compare_data;
 	}
-	$data = apply_filters( 'wp_travel_stat_data', $data, $_REQUEST );
+	$data          = apply_filters( 'wp_travel_stat_data', $data, $_REQUEST );
 	$new_stat_data = wp_travel_make_stat_data( $data );
 
 	// End of query for top Itinerary.
-	$stat_data['stat_data']  	= $new_stat_data;
+	$stat_data['stat_data'] = $new_stat_data;
 
 	$stat_data['booking_stat_from'] = $booking_additional_data['from'];
 	$stat_data['booking_stat_to']   = $booking_additional_data['to'];
-	$stat_data['max_bookings']  = $booking_additional_data['max_bookings'];
-	$stat_data['max_pax']       = $booking_additional_data['max_pax'];
-	$stat_data['top_countries'] = wp_travel_get_country_by_code( $booking_additional_data['top_countries'] );
-	$stat_data['top_itinerary'] = $booking_additional_data['top_itinerary'];
+	$stat_data['max_bookings']      = $booking_additional_data['max_bookings'];
+	$stat_data['max_pax']           = $booking_additional_data['max_pax'];
+	$stat_data['top_countries']     = wp_travel_get_country_by_code( $booking_additional_data['top_countries'] );
+	$stat_data['top_itinerary']     = $booking_additional_data['top_itinerary'];
 
-	if( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
-		$stat_data['compare_stat_from'] = $compare_additional_data['from'];
-		$stat_data['compare_stat_to']   = $compare_additional_data['to'];
+	if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		$stat_data['compare_stat_from']     = $compare_additional_data['from'];
+		$stat_data['compare_stat_to']       = $compare_additional_data['to'];
 		$stat_data['compare_max_bookings']  = $compare_additional_data['max_bookings'];
 		$stat_data['compare_max_pax']       = $compare_additional_data['max_pax'];
 		$stat_data['compare_top_countries'] = wp_travel_get_country_by_code( $compare_additional_data['top_countries'] );
@@ -1090,7 +1093,7 @@ function wp_travel_get_booking_data() {
 
 		// Query for total 2 in compare stat.
 		// if ( class_exists( 'WP_travel_paypal' ) ) :
-			$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+			$query   = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
 			join (
 				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
 				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
@@ -1106,11 +1109,11 @@ function wp_travel_get_booking_data() {
 			$results = $wpdb->get_results( $query );
 
 			$total_sales_compare = 0;
-			if ( $results ) {
-				foreach ( $results as $result ) {
-					$total_sales_compare += $result->payment_amount;
-				}
+		if ( $results ) {
+			foreach ( $results as $result ) {
+				$total_sales_compare += $result->payment_amount;
 			}
+		}
 			$stat_data['total_sales_compare'] = number_format( $total_sales_compare, 2, '.', '' );
 		// endif;
 	}
@@ -1125,10 +1128,22 @@ function wp_travel_get_booking_data() {
  */
 function wp_travel_get_booking_status() {
 	$status = array(
-		'pending' => array( 'color' => '#FF9800', 'text' => __( 'Pending', 'wp-travel' ) ),
-		'booked' => array( 'color' => '#008600', 'text' => __( 'Booked', 'wp-travel' ) ),
-		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
-		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+		'pending'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Pending', 'wp-travel' ),
+		),
+		'booked'   => array(
+			'color' => '#008600',
+			'text'  => __( 'Booked', 'wp-travel' ),
+		),
+		'canceled' => array(
+			'color' => '#FE450E',
+			'text'  => __( 'Canceled', 'wp-travel' ),
+		),
+		'N/A'      => array(
+			'color' => '#892E2C',
+			'text'  => __( 'N/A', 'wp-travel' ),
+		),
 	);
 
 	return apply_filters( 'wp_travel_booking_status_list', $status );
@@ -1141,10 +1156,22 @@ function wp_travel_get_booking_status() {
  */
 function wp_travel_get_payment_status() {
 	$status = array(
-		'pending' => array( 'color' => '#FF9800', 'text' => __( 'Pending', 'wp-travel' ) ),
-		'paid' => array( 'color' => '#008600', 'text' => __( 'Paid', 'wp-travel' ) ),
-		'canceled' => array( 'color' => '#FE450E', 'text' => __( 'Canceled', 'wp-travel' ) ),
-		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+		'pending'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Pending', 'wp-travel' ),
+		),
+		'paid'     => array(
+			'color' => '#008600',
+			'text'  => __( 'Paid', 'wp-travel' ),
+		),
+		'canceled' => array(
+			'color' => '#FE450E',
+			'text'  => __( 'Canceled', 'wp-travel' ),
+		),
+		'N/A'      => array(
+			'color' => '#892E2C',
+			'text'  => __( 'N/A', 'wp-travel' ),
+		),
 	);
 
 	return apply_filters( 'wp_travel_payment_status_list', $status );
@@ -1157,9 +1184,18 @@ function wp_travel_get_payment_status() {
  */
 function wp_travel_get_payment_mode() {
 	$mode = array(
-		'partial' => array( 'color' => '#FF9F33', 'text' => __( 'Partial', 'wp-travel' ) ),
-		'full' => array( 'color' => '#FF8A33', 'text' => __( 'Full', 'wp-travel' ) ),
-		'N/A' => array( 'color' => '#892E2C', 'text' => __( 'N/A', 'wp-travel' ) ),
+		'partial' => array(
+			'color' => '#FF9F33',
+			'text'  => __( 'Partial', 'wp-travel' ),
+		),
+		'full'    => array(
+			'color' => '#FF8A33',
+			'text'  => __( 'Full', 'wp-travel' ),
+		),
+		'N/A'     => array(
+			'color' => '#892E2C',
+			'text'  => __( 'N/A', 'wp-travel' ),
+		),
 	);
 
 	return apply_filters( 'wp_travel_payment_mode_list', $mode );
@@ -1179,7 +1215,7 @@ function wp_travel_get_image_sizes() {
 	$sizes = array();
 
 	foreach ( get_intermediate_image_sizes() as $_size ) {
-		if ( in_array( $_size, array('thumbnail', 'medium', 'medium_large', 'large') ) ) {
+		if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
 			$sizes[ $_size ]['width']  = get_option( "{$_size}_size_w" );
 			$sizes[ $_size ]['height'] = get_option( "{$_size}_size_h" );
 			$sizes[ $_size ]['crop']   = (bool) get_option( "{$_size}_crop" );
@@ -1210,26 +1246,27 @@ function is_itinerary() {
  */
 function wp_travel_get_permalink_structure() {
 
-	$permalinks = wp_parse_args( (array) get_option( 'wp_travel_permalinks', array() ), array(
-		'wp_travel_trip_base' => '',
-		'wp_travel_trip_type_base' => '',
-		'wp_travel_destination_base' => '',
-		'wp_travel_activity_base' => '',
-	) );
+	$permalinks = wp_parse_args(
+		(array) get_option( 'wp_travel_permalinks', array() ),
+		array(
+			'wp_travel_trip_base'        => '',
+			'wp_travel_trip_type_base'   => '',
+			'wp_travel_destination_base' => '',
+			'wp_travel_activity_base'    => '',
+		)
+	);
 
 	// $db_version = get_option( 'wp_travel_version' );
 	// $current_version = WP_TRAVEL_VERSION;
-
 	// // Fallback slug
 	// if ( ( ! $db_version ) && '' === $permalinks['wp_travel_trip_base'] ) {
-	// 	$permalinks['wp_travel_trip_base'] = 'itinerary';
+	// $permalinks['wp_travel_trip_base'] = 'itinerary';
 	// }
-
 	// Ensure rewrite slugs are set.
-	$permalinks['wp_travel_trip_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? 'itinerary' : $permalinks['wp_travel_trip_base'] );
+	$permalinks['wp_travel_trip_base']        = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? 'itinerary' : $permalinks['wp_travel_trip_base'] );
 	$permalinks['wp_travel_trip_type_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_type_base'] ) ? 'trip-type' : $permalinks['wp_travel_trip_type_base'] );
-	$permalinks['wp_travel_destination_base']   = untrailingslashit( empty( $permalinks['wp_travel_destination_base'] ) ? 'travel-locations' : $permalinks['wp_travel_destination_base'] );
-	$permalinks['wp_travel_activity_base']   = untrailingslashit( empty( $permalinks['wp_travel_activity_base'] ) ? 'activity' : $permalinks['wp_travel_activity_base'] );
+	$permalinks['wp_travel_destination_base'] = untrailingslashit( empty( $permalinks['wp_travel_destination_base'] ) ? 'travel-locations' : $permalinks['wp_travel_destination_base'] );
+	$permalinks['wp_travel_activity_base']    = untrailingslashit( empty( $permalinks['wp_travel_activity_base'] ) ? 'activity' : $permalinks['wp_travel_activity_base'] );
 
 	return $permalinks;
 }
@@ -1250,7 +1287,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 	$custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
 
-	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ?  $settings['wp_travel_custom_global_tabs'] : array();
+	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ? $settings['wp_travel_custom_global_tabs'] : array();
 
 	$custom_itinerary_tabs = get_post_meta( $post->ID, 'wp_travel_itinerary_custom_tab_cnt_', true );
 
@@ -1270,7 +1307,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
 
-
 		$wp_travel_tabs = $settings['global_tab_settings'];
 
 		if ( $custom_tabs_enable && isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
@@ -1278,10 +1314,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 			$wp_travel_tabs = $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'];
 
 		}
-
-
 	}
-
 
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
@@ -1292,23 +1325,20 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 				if ( isset( $tab['global'] ) && 'yes' === $tab['global'] ) {
 
-					$tab_content = isset( $custom_global_tabs[$key]['content'] ) ? $custom_global_tabs[$key]['content'] : '';
+					$tab_content = isset( $custom_global_tabs[ $key ]['content'] ) ? $custom_global_tabs[ $key ]['content'] : '';
+
+				} else {
+
+					$tab_content = isset( $custom_itinerary_tabs[ $key ]['content'] ) ? $custom_itinerary_tabs[ $key ]['content'] : '';
 
 				}
-				else {
-
-					$tab_content = isset( $custom_itinerary_tabs[$key]['content'] ) ? $custom_itinerary_tabs[$key]['content'] : '';
-
-				}
-
-
 			}
 
 			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			// $new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
-			$new_tabs[ $key ]['label_class'] = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
-			$new_tabs[ $key ]['content'] = $tab_content;
-			$new_tabs[ $key ]['use_global'] = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
+			$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
+			$new_tabs[ $key ]['content']      = $tab_content;
+			$new_tabs[ $key ]['use_global']   = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
 			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 
 			$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
@@ -1317,10 +1347,10 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 			// override if is global.
 			// if ( ! is_admin() ) {
-			// 	if ( 'yes' === $new_tabs[ $key ]['use_global'] ) {
-			// 		$new_tabs[ $key ]['label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
-			// 		$new_tabs[ $key ]['show_in_menu'] = $wp_travel_itinerary_tabs[ $key ]['show_in_menu'];
-			// 	}
+			// if ( 'yes' === $new_tabs[ $key ]['use_global'] ) {
+			// $new_tabs[ $key ]['label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
+			// $new_tabs[ $key ]['show_in_menu'] = $wp_travel_itinerary_tabs[ $key ]['show_in_menu'];
+			// }
 			// }
 		}
 
@@ -1341,38 +1371,87 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
  *
  * @return void
  */
-function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) { // fixes the content filter in page builder.
+function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
+	// fixes the content filter in page builder.
 	// return $is_show_in_menu_query;
 	$trip_content = '';
 	$trip_outline = '';
 	$trip_include = '';
 	$trip_exclude = '';
 	$gallery_ids  = '';
-	$faqs		  = array();
+	$faqs         = array();
 
 	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder.
 		global $wp_travel_itinerary;
 		$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
-		$trip_content	= $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
-		$trip_outline	= $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
-		$trip_include	= $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
-		$trip_exclude	= $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
-		$gallery_ids 	= $wp_travel_itinerary->get_gallery_ids();
+		$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
+		$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
+		$trip_include             = $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
+		$trip_exclude             = $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
+		$gallery_ids              = $wp_travel_itinerary->get_gallery_ids();
 		global $post;
 		if ( $post ) {
 			$post_id = $post->ID;
-			$faqs           = wp_travel_get_faqs( $post_id );
+			$faqs    = wp_travel_get_faqs( $post_id );
 		}
 	}
 	$return_tabs = $wp_travel_itinerary_tabs = array(
-		'overview' 		=> array( 'label' => __( 'Overview', 'wp-travel' ), 'label_class' => '', 'content' => $trip_content, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'trip_outline' 	=> array( 'label' => __( 'Trip Outline', 'wp-travel' ), 'label_class' => '', 'content' => $trip_outline, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'trip_includes' => array( 'label' => __( 'Trip Includes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_include, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'trip_excludes' => array( 'label' => __( 'Trip Excludes', 'wp-travel' ), 'label_class' => '', 'content' => $trip_exclude, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'gallery' 		=> array( 'label' => __( 'Gallery', 'wp-travel' ), 'label_class' => 'wp-travel-tab-gallery-contnet', 'content' => $gallery_ids, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'reviews' 		=> array( 'label' => __( 'Reviews', 'wp-travel' ), 'label_class' => 'wp-travel-review', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'booking' 		=> array( 'label' => __( 'Booking', 'wp-travel' ), 'label_class' => 'wp-travel-booking-form', 'content' => '', 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
-		'faq' 			=> array( 'label' => __( 'FAQ', 'wp-travel' ), 'label_class' => '', 'content' => $faqs, 'use_global' => 'yes', 'show_in_menu' => 'yes' ),
+		'overview'      => array(
+			'label'        => __( 'Overview', 'wp-travel' ),
+			'label_class'  => '',
+			'content'      => $trip_content,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'trip_outline'  => array(
+			'label'        => __( 'Trip Outline', 'wp-travel' ),
+			'label_class'  => '',
+			'content'      => $trip_outline,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'trip_includes' => array(
+			'label'        => __( 'Trip Includes', 'wp-travel' ),
+			'label_class'  => '',
+			'content'      => $trip_include,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'trip_excludes' => array(
+			'label'        => __( 'Trip Excludes', 'wp-travel' ),
+			'label_class'  => '',
+			'content'      => $trip_exclude,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'gallery'       => array(
+			'label'        => __( 'Gallery', 'wp-travel' ),
+			'label_class'  => 'wp-travel-tab-gallery-contnet',
+			'content'      => $gallery_ids,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'reviews'       => array(
+			'label'        => __( 'Reviews', 'wp-travel' ),
+			'label_class'  => 'wp-travel-review',
+			'content'      => '',
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'booking'       => array(
+			'label'        => __( 'Booking', 'wp-travel' ),
+			'label_class'  => 'wp-travel-booking-form',
+			'content'      => '',
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
+		'faq'           => array(
+			'label'        => __( 'FAQ', 'wp-travel' ),
+			'label_class'  => '',
+			'content'      => $faqs,
+			'use_global'   => 'yes',
+			'show_in_menu' => 'yes',
+		),
 	);
 
 	return $return_tabs;
@@ -1401,7 +1480,10 @@ function wp_travel_get_faqs( $post_id ) {
 		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers );
 		foreach ( $questions as $key => $question ) :
 			$answer = isset( $answers[ $key ] ) ? $answers[ $key ] : '';
-			$faq[]  = array( 'question' => $question, 'answer' => $answer );
+			$faq[]  = array(
+				'question' => $question,
+				'answer'   => $answer,
+			);
 		endforeach;
 	endif;
 	return $faq;
@@ -1413,57 +1495,62 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 	}
 	// Split stat data.
 	if ( is_array( $stat_datas ) && count( $stat_datas ) > 0 ) {
-		$data = array();
-		$data_label = array();
-		$data_bg_color = array();
+		$data              = array();
+		$data_label        = array();
+		$data_bg_color     = array();
 		$data_border_color = array();
 		foreach ( $stat_datas as $stat_data ) {
-			$data[] = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
-			$data_label[] = isset( $stat_data['data_label'] ) ? $stat_data['data_label'] : array();
-			$data_bg_color[] = isset( $stat_data['data_bg_color'] ) ? $stat_data['data_bg_color'] : array();
+			$data[]              = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
+			$data_label[]        = isset( $stat_data['data_label'] ) ? $stat_data['data_label'] : array();
+			$data_bg_color[]     = isset( $stat_data['data_bg_color'] ) ? $stat_data['data_bg_color'] : array();
 			$data_border_color[] = isset( $stat_data['data_border_color'] ) ? $stat_data['data_border_color'] : array();
 		}
 	}
 
 	if ( is_array( $data ) ) {
-		if ( count( $data ) == 1  ) {
+		if ( count( $data ) == 1 ) {
 			$default_array_key = array_keys( $data[0] );
-			$new_data[] = array_values( $data[0] );
+			$new_data[]        = array_values( $data[0] );
 
-		} else if ( count( $data ) > 1 ) {
+		} elseif ( count( $data ) > 1 ) {
 			if ( count( $data ) > 1 ) {
 				$array_with_all_keys = $data[0];
-				for( $i=0; $i< count( $data ) - 1; $i++ ) {
-					$next_array_key = array_keys( $data[ $i+1 ] );
+				for ( $i = 0; $i < count( $data ) - 1; $i++ ) {
+					$next_array_key         = array_keys( $data[ $i + 1 ] );
 					$next_array_default_val = array_fill_keys( $next_array_key, 0 );
 
 					$array_with_all_keys = array_merge( $next_array_default_val, $array_with_all_keys );
-					uksort($array_with_all_keys,function($a, $b){
-						return strtotime( $a ) > strtotime( $b );
-					});
+					uksort(
+						$array_with_all_keys,
+						function( $a, $b ) {
+							return strtotime( $a ) > strtotime( $b );
+						}
+					);
 				}
 				$default_array_key = array_keys( $array_with_all_keys );
-				$default_stat_val = null;
+				$default_stat_val  = null;
 				if ( $show_empty ) {
 					$default_stat_val = 0;
 				}
 				$array_key_default_val = array_fill_keys( $default_array_key, $default_stat_val );
 
 				$new_data = array();
-				for( $i=0; $i< count( $data ); $i++ ) {
-					$new_array = array_merge( $array_key_default_val, $data[$i] );
-					uksort($new_array,function($a, $b){
-						return strtotime( $a ) > strtotime( $b );
-					});
-					$new_data[] = array_values($new_array);
+				for ( $i = 0; $i < count( $data ); $i++ ) {
+					$new_array = array_merge( $array_key_default_val, $data[ $i ] );
+					uksort(
+						$new_array,
+						function( $a, $b ) {
+							return strtotime( $a ) > strtotime( $b );
+						}
+					);
+					$new_data[] = array_values( $new_array );
 				}
-
 			}
 		}
-		$new_return_data['stat_label'] = $default_array_key;
-		$new_return_data['data'] = $new_data;
-		$new_return_data['data_label'] = $data_label;
-		$new_return_data['data_bg_color'] = $data_bg_color;
+		$new_return_data['stat_label']        = $default_array_key;
+		$new_return_data['data']              = $new_data;
+		$new_return_data['data_label']        = $data_label;
+		$new_return_data['data_bg_color']     = $data_bg_color;
 		$new_return_data['data_border_color'] = $data_border_color;
 
 		return $new_return_data;
@@ -1472,9 +1559,10 @@ function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
 
 /**
  * WP Travel Trip is trip type enable.
+ *
  * @return bool
  */
-function wp_travel_is_trip_price_tax_enabled(){
+function wp_travel_is_trip_price_tax_enabled() {
 
 	$settings = wp_travel_get_settings();
 
@@ -1489,12 +1577,13 @@ function wp_travel_is_trip_price_tax_enabled(){
 
 /**
  * Wp Travel Process Trip Price Tax.
+ *
  * @param int $post_id post id.
  * @return mixed $trip_price | $tax_details.
  */
-function wp_travel_process_trip_price_tax( $post_id ){
+function wp_travel_process_trip_price_tax( $post_id ) {
 
-	if( ! $post_id ) {
+	if ( ! $post_id ) {
 		return 0;
 	}
 	$settings = wp_travel_get_settings();
@@ -1505,10 +1594,10 @@ function wp_travel_process_trip_price_tax( $post_id ){
 
 	if ( 'yes' == $trip_tax_enable ) {
 
-		$tax_details = array();
+		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
-		$trip_price = wp_travel_get_actual_trip_price( $post_id );
-		$tax_percentage = @$settings['trip_tax_percentage'];
+		$trip_price          = wp_travel_get_actual_trip_price( $post_id );
+		$tax_percentage      = @$settings['trip_tax_percentage'];
 
 		if ( 0 == $trip_price || '' == $tax_percentage ) {
 
@@ -1517,26 +1606,24 @@ function wp_travel_process_trip_price_tax( $post_id ){
 
 		if ( 'yes' == $tax_inclusive_price ) {
 
-			$tax_details['tax_type'] = 'inclusive';
-			$tax_details['tax_percentage'] = $tax_percentage;
-			$actual_trip_price = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
-			$tax_details['trip_price'] = $actual_trip_price;
+			$tax_details['tax_type']          = 'inclusive';
+			$tax_details['tax_percentage']    = $tax_percentage;
+			$actual_trip_price                = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
+			$tax_details['trip_price']        = $actual_trip_price;
 			$tax_details['actual_trip_price'] = $trip_price;
 
 			return $tax_details;
 
-		}
-		else{
+		} else {
 
-			$tax_details['tax_type'] = 'excluxive';
-			$tax_details['trip_price'] = $trip_price;
-			$tax_details['tax_percentage'] = $tax_percentage;
-			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+			$tax_details['tax_type']          = 'excluxive';
+			$tax_details['trip_price']        = $trip_price;
+			$tax_details['tax_percentage']    = $tax_percentage;
+			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2, '.', '' );
 
 			return $tax_details;
 
 		}
-
 	}
 
 	return array( 'trip_price' => $trip_price );
@@ -1545,12 +1632,13 @@ function wp_travel_process_trip_price_tax( $post_id ){
 
 /**
  * Wp Travel Process Trip Price Tax.
+ *
  * @param int $post_id post id.
  * @return mixed $trip_price | $tax_details.
  */
-function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
+function wp_travel_process_trip_price_tax_by_price( $post_id, $price ) {
 
-	if( ! $post_id || ! $price ) {
+	if ( ! $post_id || ! $price ) {
 		return 0;
 	}
 	$settings = wp_travel_get_settings();
@@ -1561,10 +1649,10 @@ function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
 
 	if ( 'yes' == $trip_tax_enable ) {
 
-		$tax_details = array();
+		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
-		$trip_price = $price;
-		$tax_percentage = @$settings['trip_tax_percentage'];
+		$trip_price          = $price;
+		$tax_percentage      = @$settings['trip_tax_percentage'];
 
 		if ( 0 == $trip_price || '' == $tax_percentage ) {
 
@@ -1573,26 +1661,24 @@ function wp_travel_process_trip_price_tax_by_price( $post_id, $price ){
 
 		if ( 'yes' == $tax_inclusive_price ) {
 
-			$tax_details['tax_type'] = 'inclusive';
-			$tax_details['tax_percentage'] = $tax_percentage;
-			$actual_trip_price = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
-			$tax_details['trip_price'] = $actual_trip_price;
+			$tax_details['tax_type']          = 'inclusive';
+			$tax_details['tax_percentage']    = $tax_percentage;
+			$actual_trip_price                = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
+			$tax_details['trip_price']        = $actual_trip_price;
 			$tax_details['actual_trip_price'] = $trip_price;
 
 			return $tax_details;
 
-		}
-		else{
+		} else {
 
-			$tax_details['tax_type'] = 'excluxive';
-			$tax_details['trip_price'] = $trip_price;
-			$tax_details['tax_percentage'] = $tax_percentage;
-			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+			$tax_details['tax_type']          = 'excluxive';
+			$tax_details['trip_price']        = $trip_price;
+			$tax_details['tax_percentage']    = $tax_percentage;
+			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2, '.', '' );
 
 			return $tax_details;
 
 		}
-
 	}
 
 	return array( 'trip_price' => $trip_price );
@@ -1607,15 +1693,15 @@ function wp_travel_taxed_amount( $amount ) {
 	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
 
 	if ( 'yes' == $trip_tax_enable ) {
-		$tax_details = array();
+		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
-		$tax_percentage = @$settings['trip_tax_percentage'];
+		$tax_percentage      = @$settings['trip_tax_percentage'];
 
 		if ( 0 == $amount || '' == $tax_percentage ) {
 			return $amount;
 		}
 		if ( 'no' == $tax_inclusive_price ) {
-			return number_format( ( $amount + ( ( $amount * $tax_percentage ) / 100 ) ), 2 , '.', '' );
+			return number_format( ( $amount + ( ( $amount * $tax_percentage ) / 100 ) ), 2, '.', '' );
 		}
 	}
 	return $amount;
@@ -1679,7 +1765,7 @@ function wp_travel_is_checkout_page() {
 		return false;
 	}
 	global $post;
-	$page_id = get_the_ID();
+	$page_id  = get_the_ID();
 	$settings = wp_travel_get_settings();
 	if ( isset( $settings['checkout_page_id'] ) && (int) $settings['checkout_page_id'] === $page_id ) {
 		return true;
@@ -1696,7 +1782,7 @@ function wp_travel_is_cart_page() {
 	if ( is_admin() ) {
 		return false;
 	}
-	$page_id = get_the_ID();
+	$page_id  = get_the_ID();
 	$settings = wp_travel_get_settings();
 	if ( isset( $settings['cart_page_id'] ) && (int) $settings['cart_page_id'] === $page_id ) {
 		return true;
@@ -1730,15 +1816,15 @@ function wp_travel_is_itinerary( $post_id ) {
  *
  * @return array $variation_options Variation Options.
  */
-function wp_travel_get_pricing_variation_options(){
+function wp_travel_get_pricing_variation_options() {
 
 	$variation_options = array(
-		'adult'         => __( 'Adult', 'wp-travel' ),
-		'children'      => __( 'Child', 'wp-travel' ),
-		'infant'        => __( 'Infant', 'wp-travel' ),
-		'couple'        => __( 'Couple', 'wp-travel' ),
-		'group'         => __( 'Group', 'wp-travel' ),
-		'custom'        => __( 'Custom', 'wp-travel' ),
+		'adult'    => __( 'Adult', 'wp-travel' ),
+		'children' => __( 'Child', 'wp-travel' ),
+		'infant'   => __( 'Infant', 'wp-travel' ),
+		'couple'   => __( 'Couple', 'wp-travel' ),
+		'group'    => __( 'Group', 'wp-travel' ),
+		'custom'   => __( 'Custom', 'wp-travel' ),
 	);
 
 	return apply_filters( 'wp_travel_variation_pricing_options', $variation_options );
@@ -1757,16 +1843,19 @@ function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
 
 	}
 
-	//Get Pricing variations.
+	// Get Pricing variations.
 	$pricing_variations = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 
 	if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
 
-		$result = array_filter($pricing_variations, function($single) use($pricing_key){
-			if ( isset( $single['price_key'] ) ){
-				return $single['price_key'] === $pricing_key;
+		$result = array_filter(
+			$pricing_variations,
+			function( $single ) use ( $pricing_key ) {
+				if ( isset( $single['price_key'] ) ) {
+					return $single['price_key'] === $pricing_key;
+				}
 			}
-		});
+		);
 		return $result;
 	}
 	return false;
@@ -1778,7 +1867,7 @@ function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
  *
  * @return array $available_dates Variation Options.
  */
-function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
+function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ) {
 
 	if ( '' === $post_id || '' === $pricing_key ) {
 
@@ -1786,15 +1875,18 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
 
 	}
 
-	//Get Dates.
+	// Get Dates.
 	$available_trip_dates = get_post_meta( $post_id, 'wp_travel_multiple_trip_dates', true );
 
 	if ( is_array( $available_trip_dates ) && '' !== $available_trip_dates ) {
 
-		$result = array_filter($available_trip_dates, function($single) use($pricing_key){
-			$pricing_options = isset( $single['pricing_options'] ) ? $single['pricing_options'] : array();
-			return in_array($pricing_key, $pricing_options );
-		});
+		$result = array_filter(
+			$available_trip_dates,
+			function( $single ) use ( $pricing_key ) {
+				$pricing_options = isset( $single['pricing_options'] ) ? $single['pricing_options'] : array();
+				return in_array( $pricing_key, $pricing_options );
+			}
+		);
 
 		return $result;
 
@@ -1809,7 +1901,7 @@ function wp_travel_get_pricing_variation_dates( $post_id, $pricing_key ){
  *
  * @return string pricing variation price_per value.
  */
-function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ){
+function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ) {
 
 	if ( '' === $post_id || '' === $pricing_key ) {
 
@@ -1817,21 +1909,19 @@ function wp_travel_get_pricing_variation_price_per( $post_id, $pricing_key ){
 
 	}
 
-	//Get Pricing variations.
+	// Get Pricing variations.
 	$pricing_variations = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 
 	if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
 
-		foreach( $pricing_variations as $ky => $variation ) {
+		foreach ( $pricing_variations as $ky => $variation ) {
 
-			if ( $pricing_variations[$ky]['price_key'] === $pricing_key ) {
+			if ( $pricing_variations[ $ky ]['price_key'] === $pricing_key ) {
 
-				return isset( $pricing_variations[$ky]['price_per'] ) ? $pricing_variations[$ky]['price_per'] : 'trip-default';
+				return isset( $pricing_variations[ $ky ]['price_per'] ) ? $pricing_variations[ $ky ]['price_per'] : 'trip-default';
 
 			}
-
 		}
-
 	}
 
 	return 'trip-default';
@@ -1877,7 +1967,7 @@ if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
  *
  * @return array $available_dates Variation Options.
  */
-function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
+function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ) {
 
 	if ( '' === $post_id || '' === $pricing_key ) {
 
@@ -1885,14 +1975,14 @@ function wp_travel_get_pricing_variation_start_dates( $post_id, $pricing_key ){
 
 	}
 
-	//Get Dates.
+	// Get Dates.
 	$trip_dates = wp_travel_get_pricing_variation_dates( $post_id, $pricing_key );
 
 	$result = array();
 
 	if ( is_array( $trip_dates ) && '' !== $trip_dates ) {
 
-		foreach ( $trip_dates as $d_k => $d_v ){
+		foreach ( $trip_dates as $d_k => $d_v ) {
 
 			$result[] = $d_v['start_date'];
 
@@ -1973,12 +2063,15 @@ function wp_travel_get_notice_count( $notice_type = '' ) {
 function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $password_generated ) {
 
 	// Send email notification.
-	$email_content = wp_travel_get_template_html( 'emails/customer-new-account.php', array(
-		'user_login'         => $new_customer_data['user_login'],
-		'user_pass'          => $new_customer_data['user_pass'],
-		'blogname'           => get_bloginfo('name'),
-		'password_generated' => $password_generated,
-	) );
+	$email_content = wp_travel_get_template_html(
+		'emails/customer-new-account.php',
+		array(
+			'user_login'         => $new_customer_data['user_login'],
+			'user_pass'          => $new_customer_data['user_pass'],
+			'blogname'           => get_bloginfo( 'name' ),
+			'password_generated' => $password_generated,
+		)
+	);
 
 	// To send HTML mail, the Content-type header must be set.
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -1992,18 +2085,17 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 
 	if ( $new_customer_data['user_login'] ) {
 
-	$user_object     = get_user_by( 'login', $new_customer_data['user_login'] );
-	$user_user_login = $new_customer_data['user_login'];
-	$user_user_email = stripslashes( $user_object->user_email );
-	$user_recipient  = $user_user_email;
-	$user_subject    = __( 'New Account Created', 'wp-travel' );
+		$user_object     = get_user_by( 'login', $new_customer_data['user_login'] );
+		$user_user_login = $new_customer_data['user_login'];
+		$user_user_email = stripslashes( $user_object->user_email );
+		$user_recipient  = $user_user_email;
+		$user_subject    = __( 'New Account Created', 'wp-travel' );
 
 		if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
 
 			return false;
 
 		}
-
 	}
 }
 
@@ -2037,17 +2129,16 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 
 		$strtotime = $date;
 		if ( 'Y-m-d' !== $date_format ) {
-			$date = str_replace('/', '-', $date);
-			$date = str_replace('.', '-', $date);
+			$date = str_replace( '/', '-', $date );
+			$date = str_replace( '.', '-', $date );
 
-			$dashed_format = str_replace('/', '-', $date_format);
-			$dashed_format = str_replace('.', '-', $dashed_format);
-			$date = DateTime::createFromFormat( $dashed_format, $date );
+			$dashed_format = str_replace( '/', '-', $date_format );
+			$dashed_format = str_replace( '.', '-', $dashed_format );
+			$date          = DateTime::createFromFormat( $dashed_format, $date );
 
 			$strtotime = date_format( $date, 'Y-m-d' );
 		}
 		$strtotime = strtotime( stripslashes( $strtotime ) );
-
 
 		if ( $localize ) {
 			$formated_date = esc_html( date_i18n( $date_format, $strtotime ) );
@@ -2063,60 +2154,61 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 endif;
 
 if ( ! function_exists( 'wp_travel_get_total_booked_pax' ) ) :
-/**
- * Get Total booked Count.
- */
-function wp_travel_get_total_booked_pax( $trip_id, $including_cart=true ) {
+	/**
+	 * Get Total booked Count.
+	 */
+	function wp_travel_get_total_booked_pax( $trip_id, $including_cart = true ) {
 
-	if ( ! $trip_id ) {
-		return;
-	}
-	$trip_pricing_options_data = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
-
-	if ( empty( $trip_pricing_options_data ) || ! is_array( $trip_pricing_options_data ) )
-		return;
-
-	$total_booked_pax = 0;
-	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-		$inventory  = new WP_Travel_Util_Inventory();
-		foreach ( $trip_pricing_options_data as $pricing ) :
-			$price_key            = isset( $pricing['price_key'] ) ? $pricing['price_key']      : '';
-
-			$booked_pax = $inventory->get_booking_pax_count( $trip_id, $price_key );
-			$booked_pax = ( $booked_pax ) ? $booked_pax : 0;
-			$total_booked_pax += $booked_pax;
-		endforeach;
-	}
-	if ( $including_cart ) {
-		global $wt_cart;
-		$total_pax_on_cart = 0;
-		$items = $wt_cart->getItems();
-		if ( is_array( $items ) && count( $items ) > 0 ) {
-			foreach( $items as $item ) {
-				$cart_trip_id = $item['trip_id'];
-				if ( $trip_id != $cart_trip_id ) {
-					continue;
-				}
-				$pax_on_cart = $item['pax'];
-				$total_pax_on_cart += $pax_on_cart;
-			}
+		if ( ! $trip_id ) {
+			return;
 		}
-		$total_booked_pax += $total_pax_on_cart;
+		$trip_pricing_options_data = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+
+		if ( empty( $trip_pricing_options_data ) || ! is_array( $trip_pricing_options_data ) ) {
+			return;
+		}
+
+		$total_booked_pax = 0;
+		if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+			$inventory = new WP_Travel_Util_Inventory();
+			foreach ( $trip_pricing_options_data as $pricing ) :
+				$price_key = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+
+				$booked_pax        = $inventory->get_booking_pax_count( $trip_id, $price_key );
+				$booked_pax        = ( $booked_pax ) ? $booked_pax : 0;
+				$total_booked_pax += $booked_pax;
+			endforeach;
+		}
+		if ( $including_cart ) {
+			global $wt_cart;
+			$total_pax_on_cart = 0;
+			$items             = $wt_cart->getItems();
+			if ( is_array( $items ) && count( $items ) > 0 ) {
+				foreach ( $items as $item ) {
+					$cart_trip_id = $item['trip_id'];
+					if ( $trip_id != $cart_trip_id ) {
+						continue;
+					}
+					$pax_on_cart        = $item['pax'];
+					$total_pax_on_cart += $pax_on_cart;
+				}
+			}
+			$total_booked_pax += $total_pax_on_cart;
+		}
+		return $total_booked_pax;
 	}
-	return $total_booked_pax;
-}
 endif;
 /**
  * Get no. of days.
  */
-function wp_travel_get_date_diff( $start_date, $end_date ){
+function wp_travel_get_date_diff( $start_date, $end_date ) {
 
-	$date11       = strtotime($start_date);
-	$date22       = strtotime($end_date);
+	$date11       = strtotime( $start_date );
+	$date22       = strtotime( $end_date );
 	$diff         = $date22 - $date11;
-	$diff_in_days = floor($diff/(60*60*24)) + 1;
+	$diff_in_days = floor( $diff / ( 60 * 60 * 24 ) ) + 1;
 
-	return sprintf( __('%s days', 'wp-travel'), $diff_in_days );
+	return sprintf( __( '%s days', 'wp-travel' ), $diff_in_days );
 
 }
 
@@ -2132,10 +2224,10 @@ function wp_travel_print_notices() {
 /**
  * Convert Date Format String form PHP to JS.
  *
- * @param	$date_foramt	string	Date Fromat.
+ * @param   $date_foramt    string  Date Fromat.
  *
- * @since	1.6.7
- * @return	array
+ * @since   1.6.7
+ * @return  array
  */
 function wp_travel_date_format_php_to_js( $date_format ) {
 	if ( ! $date_format ) {
@@ -2148,17 +2240,16 @@ function wp_travel_date_format_php_to_js( $date_format ) {
 	$js_date_format = str_replace( 'm', 'mm', $js_date_format );
 	$js_date_format = str_replace( 'F', 'MM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'mm', $js_date_format );
-
 	return apply_filters( 'wp_travel_js_date_format', $js_date_format );
 }
 
 /**
  * Convert Date Format String form PHP to JS for moment.
  *
- * @param	$date_foramt	string	Date Fromat.
+ * @param   $date_foramt    string  Date Fromat.
  *
- * @since	1.7.6
- * @return	array
+ * @since   1.7.6
+ * @return  array
  */
 function wp_travel_moment_date_format( $date_format ) {
 	if ( ! $date_format ) {
@@ -2170,7 +2261,6 @@ function wp_travel_moment_date_format( $date_format ) {
 	$js_date_format = str_replace( 'm', 'MM', $js_date_format );
 	$js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
-
 	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
 }
 
@@ -2182,72 +2272,86 @@ function wp_travel_moment_date_format( $date_format ) {
  */
 function wp_travel_booking_data( $booking_id ) {
 
-    if ( ! $booking_id ) {
-        return;
+	if ( ! $booking_id ) {
+		return;
 	}
 	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 
 	$booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status', true );
-    $booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
+	$booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
 
-	$payment_ids = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+	$payment_ids       = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 	$total_paid_amount = 0;
-	$mode = wp_travel_get_payment_mode();
+	$mode              = wp_travel_get_payment_mode();
 
 	// Total trip price only in first payment id so we need to get total trip price from first payment id.
 	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
 		if ( isset( $payment_ids[0] ) ) {
-			$trip_price  = ( get_post_meta( $payment_ids[0], 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_ids[0], 'wp_travel_trip_price' , true ) : 0;
-			$trip_price  = number_format( $trip_price, 2, '.', '' );
+			$trip_price = ( get_post_meta( $payment_ids[0], 'wp_travel_trip_price', true ) ) ? get_post_meta( $payment_ids[0], 'wp_travel_trip_price', true ) : 0;
+			$trip_price = number_format( $trip_price, 2, '.', '' );
 		}
-		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
 
 		foreach ( $payment_ids as $payment_id ) {
 
-			$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+			$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) : 0;
 			$paid_amount = number_format( $paid_amount, 2, '.', '' );
 
 			$total_paid_amount += $paid_amount;
 			// $last_payment_id = $payment_id;
 		}
-
 	} else {
 		$payment_id = $payment_ids;
 
-		$trip_price  = ( get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price' , true ) : 0;
-		$trip_price  = number_format( $trip_price, 2, '.', '' );
-		$trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
+		$trip_price = ( get_post_meta( $payment_id, 'wp_travel_trip_price', true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price', true ) : 0;
+		$trip_price = number_format( $trip_price, 2, '.', '' );
 
-		$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount' , true ) : 0;
+		$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) : 0;
 		$paid_amount = number_format( $paid_amount, 2, '.', '' );
 
 		$total_paid_amount += $paid_amount;
 	}
 
+	$sub_total        = $trip_price; // init sub total.
+	$discount         = 0;
+	$taxed_trip_price = wp_travel_taxed_amount( $trip_price ); // Trip price including tax.
+	$tax              = $taxed_trip_price - $sub_total;
+
+	$total = $sub_total - $discount + $tax;
+
+	// Price Calculation for multiple trips. after 1.8.0 it also included in single trip.
+	$order_totals = get_post_meta( $booking_id, 'order_totals', true );
+	if ( isset( $order_totals['sub_total'] ) && $order_totals['sub_total'] > 0 ) {
+		$sub_total = isset( $order_totals['sub_total'] ) ? $order_totals['sub_total'] : $sub_total;
+		$discount  = isset( $order_totals['discount'] ) ? $order_totals['discount'] : $discount;
+		$tax       = isset( $order_totals['tax'] ) ? $order_totals['tax'] : $tax;
+		$total     = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
+	}
+
 	$total_paid_amount = sprintf( '%0.2f', $total_paid_amount );
-    $due_amount  = number_format( $trip_price - $total_paid_amount, 2, '.', '' );
-    if ( $due_amount < 0 ) {
-        $due_amount = 0;
-    }
+	$due_amount        = number_format( $total - $total_paid_amount, 2, '.', '' );
+	if ( $due_amount < 0 ) {
+		$due_amount = 0;
+	}
 
-    $payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
-    $payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
+	$payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
+	$payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
 
-    $label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
-    $payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
+	$label_key    = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
+	$payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
 
-    $amounts = array(
+	$amounts = array(
 		'booking_status' => $booking_status,
-        'mode'           => $mode,
-        'payment_mode'   => $payment_mode,
-        'payment_status' => $payment_status,
-        'total_price'    => $trip_price,
-        'paid_amount'    => $total_paid_amount,
-        'due_amount'     => $due_amount,
-        // 'tax'           => 0,
-        // 'discount'      => 0,
-    );
-    return $amounts;
+		'mode'           => $mode,
+		'payment_mode'   => $payment_mode,
+		'payment_status' => $payment_status,
+		'sub_total'      => $sub_total,
+		'discount'       => $discount,
+		'tax'            => $tax,
+		'total'          => $total,
+		'paid_amount'    => $total_paid_amount,
+		'due_amount'     => $due_amount,
+	);
+	return $amounts;
 }
 
 /**
@@ -2275,14 +2379,14 @@ function wp_travel_payment_data( $booking_id ) {
 		$i = 0;
 		foreach ( $payment_ids as $payment_id ) :
 			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
-			$meta_name = sprintf( '_%s_args', $payment_method );
+			$meta_name      = sprintf( '_%s_args', $payment_method );
 			if ( $meta_name ) :
 				$payment_args = get_post_meta( $payment_id, $meta_name, true );
 				if ( $payment_args && ( is_object( $payment_args ) || is_array( $payment_args ) ) ) :
-					$payment_data[$i]['data'] = $payment_args;
-					$payment_data[$i]['payment_id'] = $payment_id;
-					$payment_data[$i]['payment_method'] = $payment_method;
-					$payment_data[$i]['payment_date'] = get_the_date( '', $payment_id );
+					$payment_data[ $i ]['data']           = $payment_args;
+					$payment_data[ $i ]['payment_id']     = $payment_id;
+					$payment_data[ $i ]['payment_method'] = $payment_method;
+					$payment_data[ $i ]['payment_date']   = get_the_date( '', $payment_id );
 					$i++;
 				endif;
 			endif;
@@ -2295,7 +2399,7 @@ function wp_travel_payment_data( $booking_id ) {
  * Filter to show hide end date in booking.
  *
  * @since 1.8.0
- * @return	boolean
+ * @return  boolean
  */
 function wp_travel_booking_show_end_date() {
 	return apply_filters( 'wp_travel_booking_show_end_date', true );
