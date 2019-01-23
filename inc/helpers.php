@@ -2336,8 +2336,7 @@ function wp_travel_booking_data( $booking_id ) {
 		$total     = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
 	}
 
-	$total_paid_amount = sprintf( '%0.2f', $total_paid_amount );
-	$due_amount        = number_format( $total - $total_paid_amount, 2, '.', '' );
+	$due_amount        = $total - $total_paid_amount;
 	if ( $due_amount < 0 ) {
 		$due_amount = 0;
 	}
@@ -2353,12 +2352,12 @@ function wp_travel_booking_data( $booking_id ) {
 		'mode'           => $mode,
 		'payment_mode'   => $payment_mode,
 		'payment_status' => $payment_status,
-		'sub_total'      => $sub_total,
-		'discount'       => $discount,
-		'tax'            => $tax,
-		'total'          => $total,
-		'paid_amount'    => $total_paid_amount,
-		'due_amount'     => $due_amount,
+		'sub_total'      => sprintf( '%0.2f', $sub_total ),
+		'discount'       => sprintf( '%0.2f', $discount ),
+		'tax'            => sprintf( '%0.2f', $tax ),
+		'total'          => sprintf( '%0.2f', $total ),
+		'paid_amount'    => sprintf( '%0.2f', $total_paid_amount ),
+		'due_amount'     => sprintf( '%0.2f', $due_amount ),
 	);
 	return $amounts;
 }
