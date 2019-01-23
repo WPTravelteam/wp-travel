@@ -262,7 +262,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 					if ( $payment_data && count( $payment_data ) > 0 ) {
 						?>
 						<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
-						<table>
+						<table class="my-order-payment-details">
 							<tr>
 								<th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Payment ID', 'wp-travel' ); ?></th>
