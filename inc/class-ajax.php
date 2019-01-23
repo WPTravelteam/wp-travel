@@ -3,12 +3,12 @@ class WP_Travel_Ajax {
 
 	public function __construct() {
 		add_action( 'wp_ajax_envira_gallery_load_image', array( $this, 'post_gallery_ajax_load_image' ) );
-		
+
 		// Ajax for cart
 		// Add
 		add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'wp_travel_add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'wp_travel_add_to_cart' ) );
-		
+
 		// Update
 		add_action( 'wp_ajax_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
@@ -28,12 +28,12 @@ class WP_Travel_Ajax {
 		// Clone Trip @since 1.7.6
 		add_action( 'wp_ajax_wp_travel_clone_trip', array( $this, 'wp_travel_clone_trip' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_clone_trip', array( $this, 'wp_travel_clone_trip' ) );
-		
+
 	}
 
 	/**
 	 * Ajax callback function to clone trip
-	 * 
+	 *
 	 * @since 1.7.6
 	 */
 	function wp_travel_clone_trip() {
@@ -51,12 +51,12 @@ class WP_Travel_Ajax {
 			return;
 		}
 		$post = get_post( $post_id );
-		
+
 		$post_array = array(
-			'post_title' => $post->post_title,
+			'post_title'   => $post->post_title,
 			'post_content' => $post->post_content,
-			'post_status' => 'draft',
-			'post_type' => WP_TRAVEL_POST_TYPE,
+			'post_status'  => 'draft',
+			'post_type'    => WP_TRAVEL_POST_TYPE,
 		);
 
 		// Cloning old trip.
@@ -129,7 +129,7 @@ class WP_Travel_Ajax {
 		global $wt_cart;
 
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
-		
+
 		if ( ! $allow_multiple_cart_items ) {
 
 			$wt_cart->clear();
@@ -143,7 +143,7 @@ class WP_Travel_Ajax {
 		$trip_extras    = isset( $_POST['wp_travel_trip_extras'] ) ? $_POST['wp_travel_trip_extras'] : array();
 
 		$trip_price = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, true );
-		
+
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 
 		$attrs['arrival_date']   = $arrival_date;
@@ -153,7 +153,7 @@ class WP_Travel_Ajax {
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key );
 
 		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );
-		
+
 		if ( true === $update_cart_on_add ) {
 			$items = $wt_cart->getItems();
 
@@ -170,7 +170,7 @@ class WP_Travel_Ajax {
 		echo true;
 	}
 
-	function wp_travel_update_cart() {		
+	function wp_travel_update_cart() {
 		if ( ! isset( $_POST['update_cart_fields'] ) ) {
 			return;
 		}
@@ -198,7 +198,7 @@ class WP_Travel_Ajax {
 		die;
 	}
 
-	function wt_cart_apply_coupon() {		
+	function wt_cart_apply_coupon() {
 		if ( ! isset( $_POST['CouponCode'] ) ) {
 			return;
 		}
@@ -283,7 +283,7 @@ class WP_Travel_Ajax {
 			return;
 		}
 		global $wt_cart;
-		
+
 		$wt_cart->remove( $_POST['cart_id'] );
 		return true;
 	}
