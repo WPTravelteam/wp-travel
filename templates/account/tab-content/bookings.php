@@ -46,7 +46,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 							<!-- Started Here -->
 							<div class="my-order-single-content-wrap">
 								<div class="my-order-single-sidebar">
-									<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status' ); ?></h3>
+									<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 									<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>"><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
 
 									<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
