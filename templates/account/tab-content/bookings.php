@@ -21,7 +21,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
 	$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
 	$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
-	
+
 	$title         = get_the_title( $trip_id );
 	$pax           = get_post_meta( $booking_id, 'wp_travel_pax', true );
 
@@ -48,9 +48,9 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								<div class="my-order-single-sidebar">
 									<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status' ); ?></h3>
 									<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>"><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
-	
+
 									<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
-									
+
 									<!-- <h3 class="my-order-single-sub-title">Payment Gateway</h3>
 									<form action="" class="my-order-payment-gateway">
 										<div class="my-order-single-field">
@@ -97,7 +97,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 										</div>
 										<div class="col-md-6">
 											<h3 class="my-order-single-title"><?php esc_html_e( 'Billing Detail', 'wp-travel' ); ?></h3>
-										
+
 											<div class="my-order-single-field clearfix">
 												<span class="my-order-head"><?php esc_html_e( 'City :', 'wp-travel' ); ?></span>
 												<span class="my-order-tail"><?php echo esc_html( $billing_city ); ?></span>
@@ -114,7 +114,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 												<span class="my-order-head"><?php esc_html_e( 'Address :', 'wp-travel' ); ?></span>
 												<span class="my-order-tail"><?php echo esc_html( $billing_address ); ?></span>
 											</div>
-											
+
 										</div>
 									</div>
 									<?php
@@ -124,7 +124,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											?>
 												<div class="my-order-single-traveller-info">
 													<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
-													
+
 													<?php foreach ( $first_names as $key => $first_name ) : ?>
 														<div class="my-order-single-field clearfix">
 															<span class="my-order-head"><?php esc_html_e( sprintf( 'Traveller %s :', $key + 1 ), 'wp-travel' ); ?></span>
@@ -137,12 +137,15 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 										endforeach;
 									endif; ?>
 
+									<?php
+									if ( isset( $details['total'] ) && $details['total'] > 0  ) :
+									?>
 									<div class="my-order-single-price-breakdown">
 										<h3 class="my-order-single-title"><?php echo esc_html_e( 'Price Breakdown', 'wp-travel' ); ?></h3>
 										<div class="my-order-price-breakdown">
 											<?php
 											$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
-																		
+
 											if ( $order_details ) {
 												$order_prices = get_post_meta( $booking_id, 'order_totals', true );
 												foreach( $order_details as $order_detail ) {
@@ -156,10 +159,10 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 															</span>
 														</div>
 													</div>
-													
+
 												<?php
 												}
-		
+
 											} else { // single Trips. ?>
 												<div class="my-order-price-breakdown-base-price-wrap">
 													<div class="my-order-price-breakdown-base-price">
@@ -171,7 +174,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 													</div>
 												</div>
 											<?php
-											} 
+											}
 											?>
 
 
@@ -190,7 +193,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 													<span class="my-order-tail my-order-right">$100.00</span>
 												</div>
 											</div> -->
-											
+
 											<div class="my-order-price-breakdown-summary">
 												<div class="my-order-price-breakdown-sub-total">
 													<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
@@ -231,6 +234,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											</div>
 										</div>
 									</div>
+									<?php endif; ?>
 								</div>
 							</div>
 

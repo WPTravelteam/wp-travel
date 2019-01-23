@@ -272,22 +272,22 @@ class WP_Travel_Admin_Info_Pointers {
 	function wp_travel_gdpr_compatible_notice() {
 
 		global $wp_version;
-		// if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
+		if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
 
-		// 	return;
+			return;
 
-		// }
+		}
 
 		$user_id = get_current_user_id();
 
-		// if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) { ?>
+		if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) { ?>
 			<div class="notice notice-info is-dismissible">
 				<p>
 				<strong><?php printf( __( 'WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s', 'wp-travel' ), '<b>', '</b>', '<a href="'. admin_url('privacy.php') .'">', '</a>', '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
 				</p>
 			</div>
 		<?php
-		// }
+		}
 	}
 
 	/**
