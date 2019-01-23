@@ -63,8 +63,8 @@ class WP_Travel_Admin_Dashboard_Widgets {
                     $name .= ' ' . get_post_meta( $id , 'wp_travel_mname' , true );
                     $name .= ' ' . get_post_meta( $id , 'wp_travel_lname' , true );
 
-                    $date = wp_travel_format_date( $booking->post_date );
-                    
+                    $date = wp_travel_format_date( $booking->post_date, true, 'Y-m-d' );
+
                     // Booking Status.
                     $status = wp_travel_get_booking_status();
                     $label_key = get_post_meta( $id , 'wp_travel_booking_status' , true );
@@ -72,7 +72,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
                         $label_key = 'pending';
                         update_post_meta( $id, 'wp_travel_booking_status' , $label_key );
                     }
-                    
+
                     // Payment.
                     $payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
 
