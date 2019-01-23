@@ -2118,7 +2118,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 	/**
 	 * Format Date.
 	 */
-	function wp_travel_format_date( $date, $localize = true ) {
+	function wp_travel_format_date( $date, $localize = true, $base_date_format = '' ) {
 		if ( ! $date ) {
 			return;
 		}
@@ -2128,15 +2128,24 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		endif;
 
 		$strtotime = $date;
-		if ( 'Y-m-d' !== $date_format ) {
-			$date = str_replace( '/', '-', $date );
-			$date = str_replace( '.', '-', $date );
 
-			$dashed_format = str_replace( '/', '-', $date_format );
-			$dashed_format = str_replace( '.', '-', $dashed_format );
-			$date          = DateTime::createFromFormat( $dashed_format, $date );
+		if ( '' !== $base_date_format ) { // Fixes.
+			if ( 'Y-m-d' !== $base_date_format ) {
+				$date          = DateTime::createFromFormat( $base_date_format, $date );
+				$strtotime = date_format( $date, 'Y-m-d' );
+			}
+		} else {
 
-			$strtotime = date_format( $date, 'Y-m-d' );
+			if ( 'Y-m-d' !== $date_format ) {
+				$date = str_replace( '/', '-', $date );
+				$date = str_replace( '.', '-', $date );
+	
+				$dashed_format = str_replace( '/', '-', $date_format );
+				$dashed_format = str_replace( '.', '-', $dashed_format );
+				$date          = DateTime::createFromFormat( $dashed_format, $date );
+	
+				$strtotime = date_format( $date, 'Y-m-d' );
+			}
 		}
 		$strtotime = strtotime( stripslashes( $strtotime ) );
 

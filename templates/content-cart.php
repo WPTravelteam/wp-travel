@@ -66,7 +66,7 @@ wp_travel_print_notices();
 					// $price			= $trip['price']; // Price of single qty.
 					$trip_price		 = $trip['trip_price']; 
 					$trip_duration	 = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
-					$trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'] ) : false;
+					$trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
 					
 					$pax			= $trip['pax'];
 					$price_key		= isset( $trip['price_key'] ) ? $trip['price_key'] : '';
