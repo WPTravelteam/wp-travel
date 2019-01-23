@@ -17,9 +17,11 @@ class WP_Travel_Admin_Info_Pointers {
 	function __construct() {
 
 		// add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
-		// add_filter( 'wp_travel_admin_pointers-'.WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
+		// add_filter( 'wp_travel_admin_pointers-'. WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
 		// add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
-		// add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
+		add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
+		add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
+		add_action('admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 		add_action( 'admin_notices', array( $this, 'wp_travel_gdpr_compatible_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
 		add_action( 'admin_notices', array( $this, 'wp_travel_test_mode_notices' ) );
@@ -62,9 +64,9 @@ class WP_Travel_Admin_Info_Pointers {
 		foreach ( $pointers as $pointer_id => $pointer ) {
 
 			// Sanity check.
-			if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) ) {
-				continue;
-			}
+			// if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) ) {
+			// 	continue;
+			// }
 
 			$pointer['pointer_id'] = $pointer_id;
 
@@ -82,10 +84,11 @@ class WP_Travel_Admin_Info_Pointers {
 		wp_enqueue_style( 'wp-pointer' );
 
 		// Add pointers script to queue. Add custom script.
-		wp_enqueue_script( 'wp-travel-admin-pointers-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/assets/js/wp-travel-backend-pointers.js', array( 'wp-pointer' ) );
+		wp_register_script( 'wp-travel-admin-pointers-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/assets/js/wp-travel-backend-pointers.js', array( 'wp-pointer' ) );
 
 		// Add pointer options to script.
 		wp_localize_script( 'wp-travel-admin-pointers-js', 'wpctgPointer', $valid_pointers );
+		wp_enqueue_script( 'wp-travel-admin-pointers-js' );
 	}
 
 	/**
@@ -174,6 +177,36 @@ class WP_Travel_Admin_Info_Pointers {
 		return $q;
 	}
 
+	function menu_order_changed( $q ) {
+		$pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
+		View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>';
+
+		$q['wp_travel_menu_order_changes'] = array(
+			'target' => '#menu-posts-itinerary-booking',
+			'options' => array(
+				'content' => sprintf( '<h3 class="update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel Menu Changed', 'wp-travel' ), $pointer_content ),
+				'position' => array( 'edge' => 'left', 'align' => 'center' ),
+			),
+		);
+
+		return $q;
+	}
+
+	function new_trips_menu( $q ) {
+		$pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
+		View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>';
+
+		$q['wp_travel_new_trips_menu'] = array(
+			'target'  => '#menu-posts-itineraries',
+			'options' => array(
+				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'WP Travel New Trips Menu', 'wp-travel' ), $pointer_content ),
+				'position' => array( 'edge' => 'left', 'align' => 'center' ),
+			),
+		);
+
+		return $q;
+	}
+
 	function paypal_addon_admin_notice() {
 
 		if ( ! is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
@@ -211,7 +244,7 @@ class WP_Travel_Admin_Info_Pointers {
 
 	/**
 	* wp_travel_paypal_merge_notice
-	* 
+	*
 	* WP Travel Standard paypal merge info.
 	* @since 1.2
 	*/
@@ -233,34 +266,34 @@ class WP_Travel_Admin_Info_Pointers {
 
 	/**
 	* wp_travel_gdpr_compatible_notice
-	* 
+	*
 	* WP Travel GDPR Compatible info.
 	* @since 1.2
 	*/
 	function wp_travel_gdpr_compatible_notice() {
 
 		global $wp_version;
-		if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
-			
-			return;
-		
-		}
+		// if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
+
+		// 	return;
+
+		// }
 
 		$user_id = get_current_user_id();
 
-		if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) { ?>
+		// if ( !get_user_meta( $user_id, 'wp_travel_dismissied_nag_messages' ) ) { ?>
 			<div class="notice notice-info is-dismissible">
 				<p>
 				<strong><?php printf( __( 'WP Travel is %1$s GDPR %2$scompatible now. Please go to %3$s Settings > Privacy %4$s to select Privacy Policy page. %5$sDismiss this Message%6$s', 'wp-travel' ), '<b>', '</b>', '<a href="'. admin_url('privacy.php') .'">', '</a>', '<a href="?wp-travel-dismissed-nag">', '</a>' ); ?></strong>
 				</p>
 			</div>
 		<?php
-		}
+		// }
 	}
 
 	/**
 	* wp_travel_update_payment_gateways_notice
-	* 
+	*
 	* WP Travel Standard paypal merge info.
 	* @since 1.4.0
 	*/
@@ -303,7 +336,7 @@ class WP_Travel_Admin_Info_Pointers {
 	function wp_travel_test_mode_notices() {
 		$screen = get_current_screen();
 		$screen_id = $screen->id;
-	
+
 		$notice_pages = array(
 			'itineraries_page_settings',
 			'itineraries_page_booking_chart',
@@ -315,7 +348,7 @@ class WP_Travel_Admin_Info_Pointers {
 			'itineraries',
 			'itinerary-booking',
 		);
-	
+
 		if ( in_array( $screen_id, $notice_pages ) ) {
 			$notices = array();
 			if ( wp_travel_test_mode() ) {
@@ -325,11 +358,11 @@ class WP_Travel_Admin_Info_Pointers {
 				);
 			}
 			$notices = apply_filters( 'wp_travel_admin_notices', $notices );
-	
+
 			foreach ( $notices as $notice ) {
 				add_settings_error( 'wp-travel-notices', 'wp-travel-notice-' . $notice['slug'], $notice['message'], 'updated' );
 			}
-	
+
 			settings_errors( 'wp-travel-notices' );
 		}
 	}
@@ -340,7 +373,7 @@ class WP_Travel_Admin_Info_Pointers {
 			return;
 
 		$screen = get_current_screen();
-		
+
 		if( 'import' === $screen->id ) {
 			?>
 				<div style="clear:both; width:98%;" class="wp-travel-upsell-message">
