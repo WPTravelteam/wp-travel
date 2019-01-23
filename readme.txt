@@ -189,7 +189,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.8.0 =
 Release Date: 23rd January 2019
 
-* Enhancement: Admin menu splited into WP Travel and Trips.
+* Enhancement: Admin menu split into WP Travel and Trips.
 * Enhancement: User dashboard page layout updated.
 * Enhancement: Added settings to select Dashboard page.
 * Enhancement: Validation in backend forms.
