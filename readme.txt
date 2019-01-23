@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.0-rc
+Stable tag: 1.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,8 +189,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.8.0 =
 Release Date:
 
+* Enhancement: Admin menu splited into WP Travel and Trips.
+* Enhancement: User dashboard page layout updated.
+* Enhancement: Added settings to select Dashboard page.
+* Enhancement: Validation in backend forms.
+* Enhancement: Label text updates.
+* Fixes: Datepicker issue with Portuguese language.
 * Fixes: Redirect to homepage on payment.
+* Fixes: Trip duration validation.
+* Fixes: User dashboard links.
 * Fixes: Made translation ready some missing translation.
+* Fixes: Checkout page and other minor layout issues.
 
 = 1.7.9 =
 Release Date: 4th January 2019
