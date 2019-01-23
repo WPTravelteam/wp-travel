@@ -385,6 +385,11 @@ jQuery(document).ready(function($) {
         var tab = $(this).data('tabtitle');
 
         $('#' + tab).click();
+        if ( $( this ).hasClass( 'change-password' ) ) {
+           if ( ! $('#wp-travel-dsh-change-pass-switch').is( ':checked' ) ) {
+                $('#wp-travel-dsh-change-pass-switch').trigger( 'click' );
+           }
+        }
 
     });
 

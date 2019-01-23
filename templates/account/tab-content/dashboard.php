@@ -58,7 +58,7 @@ $biling_glance_data = $args['biling_glance_data'];
             <?php endif; ?>
           </div>
           <div class="box-actions">
-            <a href="#" data-tabtitle="wp-tab-myaddress" class="action dashtab-nav edit" href="#">
+            <a href="#" data-tabtitle="address" class="action dashtab-nav edit">
               <i class="wt-icon wt-icon-pencil-alt" aria-hidden="true"></i>
               <span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
             </a>
@@ -77,11 +77,11 @@ $biling_glance_data = $args['biling_glance_data'];
             </p>
           </div>
           <div class="box-actions">
-            <a data-tabtitle="wp-tab-myaccount" class="action edit dashtab-nav" href="#">
+            <a data-tabtitle="account" class="action edit dashtab-nav" href="#">
               <i class="wt-icon wt-icon-pencil-alt" aria-hidden="true"></i>
               <span><?php esc_html_e( 'Edit', 'wp-travel' ); ?></span>
             </a>
-            <a href="#" data-tabtitle="wp-tab-myaccount" class="action dashtab-nav action change-password">
+            <a href="#" data-tabtitle="account" class="action dashtab-nav action change-password">
               <?php esc_html_e( 'Change Password', 'wp-travel' ); ?></a>
           </div>
         </div>
