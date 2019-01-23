@@ -761,6 +761,7 @@ function wp_travel_book_now() {
 	if ( ! wp_verify_nonce( $_POST['wp_travel_security'],  'wp_travel_security_action' ) ) {
 		return;
 	}
+	global $wt_cart;
 
 	$date_format 	 = get_option('date_format') ? get_option('date_format') : 'Y m d';
 	$current_date 	 = date( $date_format  );
@@ -773,7 +774,6 @@ function wp_travel_book_now() {
 
 	if ( $enable_checkout && 0 !== $trip_price ) :
 
-		global $wt_cart;
 
 		$items = $wt_cart->getItems();
 		if ( ! count( $items ) ) {
