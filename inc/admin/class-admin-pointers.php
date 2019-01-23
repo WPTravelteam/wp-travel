@@ -64,9 +64,9 @@ class WP_Travel_Admin_Info_Pointers {
 		foreach ( $pointers as $pointer_id => $pointer ) {
 
 			// Sanity check.
-			// if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) ) {
-			// 	continue;
-			// }
+			if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) ) {
+				continue;
+			}
 
 			$pointer['pointer_id'] = $pointer_id;
 
@@ -178,8 +178,8 @@ class WP_Travel_Admin_Info_Pointers {
 	}
 
 	function menu_order_changed( $q ) {
-		$pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
-		View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>';
+		$pointer_content = '<p>We have splited trips menu in two parts: <b>WP Travel</b> & <b>Trips</b> for proper organization of admin links and to make user friendly. Under WP Travel you can find Bookings, Enquiries, Coupons, Trip Extras, Reports, settings.
+		<br>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-8-0-release-note/">here</a></p>';
 
 		$q['wp_travel_menu_order_changes'] = array(
 			'target' => '#menu-posts-itinerary-booking',
@@ -193,8 +193,7 @@ class WP_Travel_Admin_Info_Pointers {
 	}
 
 	function new_trips_menu( $q ) {
-		$pointer_content = 'WP travel archive slugs for Trips, Destinations, Trip Types & Activities can be changed from Permalinks page.
-		View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-1-0-release-note/">here</a>';
+		$pointer_content = '<p>We have splited trips menu in two parts: <b>WP Travel</b> & <b>Trips</b> for proper organization of admin links and to make user friendly. Under Trips you can find All Trips, New Trip, Trip Types, Destinations, Keywords and Activities. <br>View other changes <a target="_blank" href="http://wptravel.io/wp-travel-1-8-0-release-note/">here</a></p>';
 
 		$q['wp_travel_new_trips_menu'] = array(
 			'target'  => '#menu-posts-itineraries',
