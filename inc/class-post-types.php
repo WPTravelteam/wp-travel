@@ -109,9 +109,6 @@ class WP_Travel_Post_Types {
 			'menu_icon'          => 'dashicons-wp-travel',
 			'with_front'         => true,
 			'menu_position'      => 30,
-			'capabilities' => array(
-				'create_posts' => false
-			)
 		);
 		/**
 		 * Register a itinerary-booking post type.

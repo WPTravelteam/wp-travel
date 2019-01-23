@@ -428,70 +428,71 @@ function wp_travel_booking_info( $post ) {
 												endif;
 											endforeach;
 										endif; ?>
-	
-										<div class="my-order-single-price-breakdown">
-											<h3 class="my-order-single-title"><?php echo esc_html_e( 'Price Breakdown', 'wp-travel' ); ?></h3>
-											<div class="my-order-price-breakdown">
-												<?php
-												$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
-												if ( $order_details ) {
-													$order_prices = get_post_meta( $booking_id, 'order_totals', true );
-													foreach( $order_details as $order_detail ) {
-													?>
+										<?php if ( isset( $details['total']  ) && $details['total'] > 0 ) : ?>
+											<div class="my-order-single-price-breakdown">
+												<h3 class="my-order-single-title"><?php echo esc_html_e( 'Price Breakdown', 'wp-travel' ); ?></h3>
+												<div class="my-order-price-breakdown">
+													<?php
+													$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
+													if ( $order_details ) {
+														$order_prices = get_post_meta( $booking_id, 'order_totals', true );
+														foreach( $order_details as $order_detail ) {
+														?>
+															<div class="my-order-price-breakdown-base-price-wrap">
+																<div class="my-order-price-breakdown-base-price">
+																	<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ) ?></span>
+																	<span class="my-order-tail">
+																		<span class="my-order-price-detail"> x <?php echo esc_html( $order_detail['pax'] ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
+																		<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $order_detail['trip_price'] ) ?></span>
+																	</span>
+																</div>
+															</div>
+															
+														<?php
+														}
+													} else { // single Trips. ?>
 														<div class="my-order-price-breakdown-base-price-wrap">
 															<div class="my-order-price-breakdown-base-price">
-																<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ) ?></span>
+																<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ) ?></span>
 																<span class="my-order-tail">
-																	<span class="my-order-price-detail"> x <?php echo esc_html( $order_detail['pax'] ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
-																	<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $order_detail['trip_price'] ) ?></span>
+																	<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
+																	<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $details['sub_total'] ) ?></span>
 																</span>
 															</div>
 														</div>
-														
 													<?php
-													}
-												} else { // single Trips. ?>
-													<div class="my-order-price-breakdown-base-price-wrap">
-														<div class="my-order-price-breakdown-base-price">
-															<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ) ?></span>
-															<span class="my-order-tail">
-																<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
-																<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $details['sub_total'] ) ?></span>
-															</span>
+													} 
+													?>
+													
+													<div class="my-order-price-breakdown-summary">
+														<div class="my-order-price-breakdown-sub-total">
+															<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
+															<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
 														</div>
-													</div>
-												<?php
-												} 
-												?>
-												
-												<div class="my-order-price-breakdown-summary">
-													<div class="my-order-price-breakdown-sub-total">
-														<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-														<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
-													</div>
-													
-													<?php if ( $details['discount'] ) : ?>
-														<div class="my-order-price-breakdown-coupon-amount">
-															<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
-															<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ) ?></span>
+														
+														<?php if ( $details['discount'] ) : ?>
+															<div class="my-order-price-breakdown-coupon-amount">
+																<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
+																<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ) ?></span>
+															</div>
+														<?php endif; ?>
+														
+														<div class="my-order-price-breakdown-tax-due">
+															<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ) ?> </span>
+															<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ) ?></span>
 														</div>
-													<?php endif; ?>
-													
-													<div class="my-order-price-breakdown-tax-due">
-														<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ) ?> </span>
-														<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ) ?></span>
+														
 													</div>
-													
+													<div class="clear"></div>
 												</div>
-												<div class="clear"></div>
-											</div>
-											<div class="my-order-single-total-price clearfix">
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ) ?></span>
+												<div class="my-order-single-total-price clearfix">
+													<div class="my-order-single-field clearfix">
+														<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
+														<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ) ?></span>
+													</div>
 												</div>
 											</div>
-										</div>
+										<?php endif; ?>
 									</div>
 								</div>								
 							</div>
