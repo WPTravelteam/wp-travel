@@ -187,7 +187,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.0 =
-Release Date:
+Release Date: 23rd January 2019
 
 * Enhancement: Admin menu splited into WP Travel and Trips.
 * Enhancement: User dashboard page layout updated.
@@ -197,7 +197,7 @@ Release Date:
 * Fixes: Datepicker issue with Portuguese language.
 * Fixes: Redirect to homepage on payment.
 * Fixes: Trip duration validation.
-* Fixes: User dashboard links.
+* Fixes: User dashboard links not working.
 * Fixes: Made translation ready some missing translation.
 * Fixes: Checkout page and other minor layout issues.
 
