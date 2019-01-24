@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.8.0\n"
+"Project-Id-Version: WP Travel 1.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 13:31:10+00:00\n"
+"POT-Creation-Date: 2019-01-24 12:08:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3868,7 +3868,7 @@ msgid "Facts"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:231
-#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:93
+#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:99
 msgid "Trip Facts"
 msgstr ""
 
@@ -4125,14 +4125,14 @@ msgid "System Information"
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:95
-#: inc/admin/extras/class-tour-extras-admin-metabox.php:61
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:65
+#: inc/admin/extras/class-tour-extras-admin-metabox.php:62
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:66
 msgid "General"
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:96
-#: inc/admin/extras/class-tour-extras-admin-metabox.php:62
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:66
+#: inc/admin/extras/class-tour-extras-admin-metabox.php:63
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:67
 msgid "General Settings"
 msgstr ""
 
@@ -4742,7 +4742,7 @@ msgstr ""
 msgid "Remove Image"
 msgstr ""
 
-#: inc/admin/extras/class-tour-extras-admin-metabox.php:41
+#: inc/admin/extras/class-tour-extras-admin-metabox.php:42
 #: inc/class-post-types.php:232
 msgid "Trip Extras"
 msgstr ""
@@ -4856,11 +4856,11 @@ msgstr ""
 msgid "No of PAX"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:65
+#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:71
 msgid "Icon"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:102
+#: inc/admin/views/tabs/tab-contents/itineraries/fact-setting-tab.php:108
 msgid "Enable Trip Facts display on trip single page."
 msgstr ""
 
@@ -5278,7 +5278,7 @@ msgid "Booking Date"
 msgstr ""
 
 #: inc/booking-functions.php:1034 inc/booking-functions.php:1053
-#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:302
+#: inc/cart/class-cart.php:193 inc/cart/class-cart.php:306
 #: inc/class-wp-travel-form-handler.php:49
 #: inc/class-wp-travel-form-handler.php:53
 #: inc/class-wp-travel-form-handler.php:145
@@ -5423,7 +5423,7 @@ msgstr ""
 msgid "Traveler Details"
 msgstr ""
 
-#: inc/cart/class-cart.php:189 inc/cart/class-cart.php:302
+#: inc/cart/class-cart.php:193 inc/cart/class-cart.php:306
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
@@ -7072,15 +7072,15 @@ msgstr ""
 msgid "Zimbabwe"
 msgstr ""
 
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:42
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:43
 msgid "Coupon Options"
 msgstr ""
 
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:70
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:71
 msgid "Restrictions"
 msgstr ""
 
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:71
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:72
 msgid "Coupon Restrictions"
 msgstr ""
 
@@ -7484,48 +7484,48 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:100
+#: inc/license/wp-travel-license.php:106
 msgid "License Key"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:107
+#: inc/license/wp-travel-license.php:113
 msgid "Active"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:109
+#: inc/license/wp-travel-license.php:115
 #: inc/payments/wp-travel-payments.php:502
 msgid "Invalid"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:111
+#: inc/license/wp-travel-license.php:117
 msgid "Expired"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:113
+#: inc/license/wp-travel-license.php:119
 msgid "Inactive"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:124
+#: inc/license/wp-travel-license.php:130
 msgid "Deactivate License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:126
+#: inc/license/wp-travel-license.php:132
 msgid "Activate License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:143
+#: inc/license/wp-travel-license.php:149
 msgid "Want to add more features in WP Travel?"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:144
+#: inc/license/wp-travel-license.php:150
 msgid ""
 "Get addon for payment, trip extras, Inventory management and other premium "
 "features."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:341
+#: inc/license/wp-travel-license.php:367
 msgid ""
-"You have not activated the license for %s Addon Go to <a href=\"%s\"> "
+"You have not activated the license for %1$s Addon Go to <a href=\"%2$s\"> "
 "settings </a> to activate your license."
 msgstr ""
 
@@ -8393,7 +8393,7 @@ msgid "PHP"
 msgstr ""
 
 #: wp-travel.php:321
-msgid "5.5 or Higher"
+msgid "%s or Higher"
 msgstr ""
 
 #: wp-travel.php:325
