@@ -29,7 +29,7 @@ class WP_Travel_Checkout {
 	public static function output() {
 		global $wt_cart;
 		$trips = $wt_cart->getItems();
-						
+
 		if ( ! $trips ) {
 			$wt_cart->cart_empty_message();
 			return;
@@ -46,15 +46,15 @@ class WP_Travel_Checkout {
 		<div class="checkout-page-wrap">
 			<div class="col-sm-4 wp-travel-minicart">
 				<div class="sticky-sidebar">
-					<div class="checkout-block checkout-right">								
+					<div class="checkout-block checkout-right">
 						<?php include sprintf( '%s/inc/cart/cart-mini.php', WP_TRAVEL_ABSPATH ); ?>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-8 wp-travel-checkout-section">
-				<div class="checkout-block checkout-left">							
+				<div class="checkout-block checkout-left">
 					<?php include sprintf( '%s/inc/cart/checkout.php', WP_TRAVEL_ABSPATH ); ?>
-				</div>							
+				</div>
 			</div>
 		</div>
 	<?php
@@ -108,8 +108,12 @@ class WP_Travel_Checkout {
 		}
 		else {
 
-			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
-			$test_date = ( new DateTime( $test_date ) )->format( 'Y-m-d' );
+			$date_now  = new DateTime();
+			$test_date = new DateTime( $test_date );
+
+			// Check Expiry Date.
+			$date_now  = $date_now->format( 'Y-m-d' );
+			$test_date = $test_date->format( 'Y-m-d' );
 
 			if ( strtotime( $date_now ) <= strtotime( $test_date ) ) {
 
@@ -119,7 +123,7 @@ class WP_Travel_Checkout {
 			return false;
 
 		}
-	}	
+	}
 }
 
 new WP_Travel_Checkout();
