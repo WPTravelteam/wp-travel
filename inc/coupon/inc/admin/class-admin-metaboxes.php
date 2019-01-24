@@ -20,11 +20,12 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 *
 	 * @var string
 	 */
-	public $views_path = WP_TRAVEL_COUPON_PRO_ABSPATH . '/inc/admin/views/tabs/';
+	public $views_path = '';
 	/**
 	 * Constructor WP_Travel_Admin_Coupon_Metaboxes.
 	 */
 	public function __construct() {
+		$this->views_path = sprintf( '%s/inc/admin/views/tabs/', WP_TRAVEL_COUPON_PRO_ABSPATH );
 		// Add coupons metabox.
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
 		// Save Metabox data.
@@ -174,7 +175,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 * Sanitize values in the array befor save.
 	 *
 	 * @param array $data Data Data Array.
-	 * @return array $sanitized_data Sanitized Array. 
+	 * @return array $sanitized_data Sanitized Array.
 	 */
 	public function sanitize_array_values( $data ) {
 
