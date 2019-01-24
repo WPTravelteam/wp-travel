@@ -36,7 +36,7 @@ class WP_Travel_Coupon {
 		$sql = $wpdb->prepare( "
 			SELECT post_id
 			FROM $wpdb->postmeta
-			WHERE meta_key = %s 
+			WHERE meta_key = %s
 			AND meta_value = %s
 		", $meta_key, esc_sql( $string ) );
 
@@ -69,7 +69,7 @@ class WP_Travel_Coupon {
 		if ( ! $coupon_metas ) {
 			return false;
 		}
-		
+
 		if ( is_array( $coupon_metas ) && ! empty( $coupon_metas ) ) {
 
 			return isset( $coupon_metas[ $tab ][ $key ] ) ? $coupon_metas[ $tab ][ $key ] : false;
@@ -101,7 +101,7 @@ class WP_Travel_Coupon {
 		$coupon_metas       = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 		$general_tab        = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
 		$coupon_value       = isset( $general_tab['coupon_value'] ) ? $general_tab['coupon_value'] : '';
-		
+
 		return $coupon_value;
 
 	}
@@ -188,10 +188,12 @@ class WP_Travel_Coupon {
 			return false;
 		}
 		if ( ! empty( $coupon_expiry_date ) ) {
+			$date_now  = new DateTime();
+			$test_date = new DateTime( $coupon_expiry_date );
 
 			// Check Expiry Date.
-			$date_now  = ( new DateTime() )->format( 'Y-m-d' );
-			$test_date = ( new DateTime( $coupon_expiry_date ) )->format( 'Y-m-d' );
+			$date_now  = $date_now->format( 'Y-m-d' );
+			$test_date = $test_date->format( 'Y-m-d' );
 
 			if ( strtotime( $date_now ) > strtotime( $test_date ) ) {
 
