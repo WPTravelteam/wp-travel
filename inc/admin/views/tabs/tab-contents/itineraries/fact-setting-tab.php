@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Facts Settinsgs Global.
  *
@@ -40,7 +40,13 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 				</select>
 			</td>
 		</tr>
-		<tr class="toggle-row multiple-val-<?php echo $fact ? $str : '$index' ?>"<?php if(!$fact || (isset($fact['type']) && !in_array($fact['type'],['single','multiple']))) : ?> style="display:none" <?php endif; ?>>
+		<?php
+		$display_tr = '';
+		if ( ! $fact || ( isset( $fact['type'] ) && !in_array( $fact['type'],array( 'single','multiple' ) ) ) ) {
+			$display_tr = 'style="display:none;"';
+		}
+		?>
+		<tr class="toggle-row multiple-val-<?php echo $fact ? $str : '$index' ?>" <?php echo $display_tr; ?>>
 			<th>
 				<?php echo esc_html( 'Values','wp-travel' ); ?>
 			</th>
@@ -94,7 +100,7 @@ $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] )
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input type="checkbox" value="yes" <?php checked( 'yes', $wp_travel_trip_facts_enable ) ?> name="wp_travel_trip_facts_enable" id="wp_travel_trip_facts_enable"/>		
+					<input type="checkbox" value="yes" <?php checked( 'yes', $wp_travel_trip_facts_enable ) ?> name="wp_travel_trip_facts_enable" id="wp_travel_trip_facts_enable"/>
 					<span class="switch">
 				</span>
 				</label>
@@ -117,4 +123,3 @@ $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] )
 	</div>
 	<button type="button" class="new-fact-setting-adder"><?php echo esc_html( 'Add new', 'wp-travel' ); ?></button>
 </div>
-

@@ -314,11 +314,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		function wp_travel_activation() {
 			// Check for PHP Compatibility
 			global $wp_version;
-
-			if ( version_compare( PHP_VERSION, '5.5', '<' ) ) {
+			$min_php_ver = '5.3.29';
+			if ( version_compare( PHP_VERSION, $min_php_ver, '<' ) ) {
 
 				$flag 	 = __( 'PHP', 'wp-travel' );
-				$version = __( '5.5 or Higher', 'wp-travel' );
+				$version = sprintf( __( '%s or Higher', 'wp-travel' ), $min_php_ver );
 
 				deactivate_plugins( basename( __FILE__ ) );
 
