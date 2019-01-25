@@ -189,7 +189,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.8.2 =
 Release Date: 25th January 2019
 
-* Enhancement: Localized variable name consistancy.
+* Enhancement: Localized variable name consistency.
 * Fixes : Backend trip start and end date fixes.
 * Fixes : User Dashboard booking layout label updated.
 
