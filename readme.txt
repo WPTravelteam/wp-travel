@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -185,6 +185,13 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.8.2 =
+Release Date: 25th January 2019
+
+* Enhancement: Localized variable name consistancy.
+* Fixes : Backend trip start and end date fixes.
+* Fixes : User Dashboard booking layout label updated.
 
 = 1.8.1 =
 Release Date: 24th January 2019
