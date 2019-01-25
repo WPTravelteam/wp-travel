@@ -2139,12 +2139,13 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 			if ( 'Y-m-d' !== $date_format ) {
 				$date = str_replace( '/', '-', $date );
 				$date = str_replace( '.', '-', $date );
-	
+
 				$dashed_format = str_replace( '/', '-', $date_format );
 				$dashed_format = str_replace( '.', '-', $dashed_format );
 				$date          = DateTime::createFromFormat( $dashed_format, $date );
-	
-				$strtotime = date_format( $date, 'Y-m-d' );
+				if ( '' !== trim( $date ) ) {
+					$strtotime = date_format( $date, 'Y-m-d' );
+				}
 			}
 		}
 		$strtotime = strtotime( stripslashes( $strtotime ) );
