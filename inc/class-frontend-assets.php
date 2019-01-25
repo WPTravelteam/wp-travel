@@ -50,7 +50,7 @@ class WP_Travel_Frontend_Assets {
 		$wp_travel         = array();
 		$frontend_vars     = array();
 		$localized_strings = array(
-			'confirm'    => __( 'Are you sure to remove?', 'wp-travel' ),
+			'confirm'    => __( 'Are you sure you want to remove?', 'wp-travel' ),
 			'book_now'   => __( 'Book Now', 'wp-travel' ),
 			'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
 		);
@@ -169,34 +169,32 @@ class WP_Travel_Frontend_Assets {
 
 			wp_enqueue_script( 'wp-travel-cart' );
 
-			// Return if payment is not enabled.
-			if ( ! wp_travel_is_payment_enabled() ) {
-				return;
+			// Load if payment is enabled.
+			if ( wp_travel_is_payment_enabled() ) {
+				$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
+
+				global $wt_cart;
+
+				$cart_amounts   = $wt_cart->get_total();
+				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
+				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
+
+				$wt_payment = array(
+					'book_now'        => __( 'Book Now', 'wp-travel' ),
+					'book_n_pay'      => __( 'Book and Pay', 'wp-travel' ),
+					'currency_code'   => $currency_code,
+					'currency_symbol' => wp_travel_get_currency_symbol(),
+					'price_per'       => wp_travel_get_price_per_text( $trip_id, true ),
+					'trip_price'      => $trip_price,
+					'payment_amount'  => $payment_amount,
+				);
+
+				$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
+				wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+
+				wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
+				wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 			}
-			$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
-
-			global $wt_cart;
-
-			$cart_amounts   = $wt_cart->get_total();
-			$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
-			$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
-
-			$wt_payment = array(
-				'book_now'        => __( 'Book Now', 'wp-travel' ),
-				'book_n_pay'      => __( 'Book and Pay', 'wp-travel' ),
-				'currency_code'   => $currency_code,
-				'currency_symbol' => wp_travel_get_currency_symbol(),
-				'price_per'       => wp_travel_get_price_per_text( $trip_id, true ),
-				'trip_price'      => $trip_price,
-				'payment_amount'  => $payment_amount,
-			);
-
-			$wt_payment = apply_filters( 'wt_payment_vars_localize', $wt_payment, $settings );
-			wp_register_script( 'wp-travel-payment-frontend-script', $this->assets_path . 'assets/js/payment.js', array( 'jquery' ), WP_TRAVEL_VERSION );
-
-			wp_localize_script( 'wp-travel-payment-frontend-script', 'wt_payment', $wt_payment );
-			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
-
 		}
 
 		// Localized vars into datepicker. because datepicker is in all pages.

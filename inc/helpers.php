@@ -2143,7 +2143,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 				$dashed_format = str_replace( '/', '-', $date_format );
 				$dashed_format = str_replace( '.', '-', $dashed_format );
 				$date          = DateTime::createFromFormat( $dashed_format, $date );
-				if ( '' !== trim( $date ) ) {
+				if ( $date && is_object( $date ) ) {
 					$strtotime = date_format( $date, 'Y-m-d' );
 				}
 			}
