@@ -101,7 +101,7 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 		</div>
 	</div>
 
-	<div class="clear"></div>
+	<!-- <div class="clear"></div> -->
 
 	<?php do_action( 'wp_travel_edit_billing_form' ); ?>
 

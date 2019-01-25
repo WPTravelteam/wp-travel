@@ -464,7 +464,7 @@ function wp_travel_booking_info( $post ) {
 													} 
 													?>
 													
-													<div class="my-order-price-breakdown-summary">
+													<div class="my-order-price-breakdown-summary clearfix">
 														<div class="my-order-price-breakdown-sub-total">
 															<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
 															<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
@@ -483,7 +483,7 @@ function wp_travel_booking_info( $post ) {
 														</div>
 														
 													</div>
-													<div class="clear"></div>
+													<!-- <div class="clear"></div> -->
 												</div>
 												<div class="my-order-single-total-price clearfix">
 													<div class="my-order-single-field clearfix">

@@ -184,62 +184,12 @@ jQuery(document).ready(function($) {
         $('.open-all-link').show();
     });
 
-    // Enquiry Submission.
-
-    // $('#wp-travel-enquiries').submit(function(e) {
-
-    //     e.preventDefault();
-
-    //     //Remove any previous errors.
-    //     $('.enquiry-response').remove();
-    //     var formData = $( '#wp-travel-enquiries' ).serializeArray();
-    //     formData.push({name:'nonce',value:wp_travel_frontend_vars.nonce});
-    //     var text_processing = $('#wp_travel_label_processing').val();
-    //     var text_submit_enquiry = $('#wp_travel_label_submit_enquiry').val();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: wp_travel_frontend_vars.ajaxUrl,
-    //         data: formData,
-    //         beforeSend: function() {
-    //             $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');
-    //         },
-    //         success: function(data) {
-
-    //             if (false == data.success) {
-    //                 var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
-    //                 $('#wp-travel-enquiries').append(message);
-    //             } else {
-    //                 if (true == data.success) {
-
-    //                     var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
-    //                     $('#wp-travel-enquiries').append(message);
-
-    //                     setTimeout(function() {
-    //                         jQuery('#wp-travel-send-enquiries').magnificPopup('close');
-    //                         $('#wp-travel-enquiries .enquiry-response ').hide();
-    //                     }, '3000');
-
-    //                 }
-    //             }
-
-    //             $('#wp-travel-enquiry-submit').removeClass('loading-bar loading-bar-striped active').val(text_submit_enquiry).removeAttr('disabled', 'disabled');
-    //             //Reset Form Fields.
-    //             $('#wp-travel-enquiry-name').val('');
-    //             $('#wp-travel-enquiry-email').val('');
-    //             $('#wp-travel-enquiry-query').val('');
-
-    //             return false;
-    //         }
-    //     });
-    //     $('#wp-travel-enquiries').trigger('reset');
-    // });
-
     jQuery('.wp-travel-booking-row').hide();
     jQuery('.show-booking-row').click(function(event) {
         event.preventDefault();
         jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
         jQuery(this).text(function(i, text) {
-            return text === wp_travel_frontend_vars.text_array.pricing_select ? wp_travel_frontend_vars.text_array.pricing_close : wp_travel_frontend_vars.text_array.pricing_select;
+            return text === wp_travel.strings.select ? wp_travel.strings.close : wp_travel.strings.select;
         })
     });
 
@@ -248,7 +198,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         jQuery(this).parent('.action').parent('.trip_list_by_fixed_departure_dates_booking').siblings('.wp-travel-booking-row-fd').toggle('fast').addClass('animate');
         jQuery(this).text(function(i, text) {
-            return text === wp_travel_frontend_vars.text_array.pricing_select ? wp_travel_frontend_vars.text_array.pricing_close : wp_travel_frontend_vars.text_array.pricing_select;
+            return text === wp_travel.strings.select ? wp_travel.strings.close : wp_travel.strings.select;
         })
     });
 
@@ -256,7 +206,7 @@ jQuery(document).ready(function($) {
         var availabledate = jQuery(this).data('available-dates');
         if (availabledate) {
             jQuery(this).wpt_datepicker({
-                language: wp_travel_frontend_vars.locale,
+                language: wp_travel.locale,
                 // inline: true,
                 autoClose: true,
                 minDate: new Date(),
@@ -276,7 +226,7 @@ jQuery(document).ready(function($) {
 
         } else {
             jQuery(this).wpt_datepicker({
-                language: wp_travel_frontend_vars.locale,
+                language: wp_travel.locale,
                 minDate: new Date(),
                 autoClose: true,
             });
@@ -287,7 +237,7 @@ jQuery(document).ready(function($) {
     // Date picker for days and nights.
     if ( 'undefined' !== typeof moment ) {
       $('.wp-travel-pricing-days-night').wpt_datepicker({
-        language: wp_travel_frontend_vars.locale,
+        language: wp_travel.locale,
         minDate: new Date(),
         autoClose: true,
         onSelect: function(formattedDate, date, inst) {

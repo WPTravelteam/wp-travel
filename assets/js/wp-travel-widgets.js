@@ -13,8 +13,8 @@ jQuery(function($) {
 
     $(document).ready(function() {
         var prices = [];
-        if( typeof trip_prices_data.prices === 'object' ) {
-          prices = trip_prices_data.prices.map(function(x) {
+        if( typeof wp_travel.prices === 'object' ) {
+          prices = wp_travel.prices.map(function(x) {
               return parseInt(x, 10);
           });
         }
@@ -40,16 +40,16 @@ jQuery(function($) {
             max: max,
             values: [filteredMin, filteredMax],
             slide: function(event, ui) {
-                $(".price-amount").val(trip_prices_data.currency_symbol + ui.values[0] + " - " + trip_prices_data.currency_symbol + ui.values[1]);
+                $(".price-amount").val(wp_travel.currency_symbol + ui.values[0] + " - " + wp_travel.currency_symbol + ui.values[1]);
                 $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-min').val(ui.values[0]);
                 $('.wp-travel-range-slider').siblings('.wp-travel-filter-price-max').val(ui.values[1]);
             }
         });
-        $(".price-amount").val(trip_prices_data.currency_symbol + $(".wp-travel-range-slider").slider("values", 0) +
-            " - " + trip_prices_data.currency_symbol + $(".wp-travel-range-slider").slider("values", 1));
+        $(".price-amount").val(wp_travel.currency_symbol + $(".wp-travel-range-slider").slider("values", 0) +
+            " - " + wp_travel.currency_symbol + $(".wp-travel-range-slider").slider("values", 1));
 
         $(".trip-duration-calender input").wpt_datepicker({
-            language: trip_prices_data.locale,
+            language: wp_travel.locale,
         });
 
     });
@@ -87,12 +87,12 @@ jQuery(function($) {
         //Remove any previous errors.
         $('.enquiry-response').remove();
         var formData = $( '#wp-travel-enquiries' ).serializeArray();
-        formData.push({name:'nonce',value: trip_prices_data.nonce});
+        formData.push({name:'nonce',value: wp_travel.nonce});
         var text_processing = $('#wp_travel_label_processing').val();
         var text_submit_enquiry = $('#wp_travel_label_submit_enquiry').val();
         $.ajax({
             type: "POST",
-            url: trip_prices_data.ajaxUrl,
+            url: wp_travel.ajaxUrl,
             data: formData,
             beforeSend: function() {
                 $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');

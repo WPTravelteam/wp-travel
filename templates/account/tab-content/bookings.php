@@ -177,55 +177,26 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											}
 											?>
 
-
-											<!-- <div class="my-order-price-breakdown-additional-service">
-												<h3 class="my-order-price-breakdown-additional-service-title">Additional Services</h3>
-												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head">Umbrella (1 x $8)</span>
-													<span class="my-order-tail my-order-right">$8.00</span>
-												</div>
-												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head">Cleaning fee (5 x $9)</span>
-													<span class="my-order-tail my-order-right">$45.00</span>
-												</div>
-												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head">Tip for tour guide (5 x $20)</span>
-													<span class="my-order-tail my-order-right">$100.00</span>
-												</div>
-											</div> -->
-
-											<div class="my-order-price-breakdown-summary">
+											<div class="my-order-price-breakdown-summary clearfix">
 												<div class="my-order-price-breakdown-sub-total">
 													<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
 													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
 												</div>
-												<!-- <div class="my-order-price-breakdown-coupon-code">
-													<span class="my-order-head">Coupon Code :</span>
-													<span class="my-order-tail">
-														<span class="my-order-coupon-code">10PSpecial</span>
-														<span class="my-order-coupon-text">10%</span>
-													</span>
-												</div> -->
+												
 												<?php if ( $details['discount'] ) : ?>
 													<div class="my-order-price-breakdown-coupon-amount">
 														<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
 														<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ) ?></span>
 													</div>
 												<?php endif; ?>
-												<!-- <div class="my-order-price-breakdown-tax-rate">
-													<span class="my-order-head">Tax Rate</span>
-													<span class="my-order-tail my-order-right">9%</span>
-												</div> -->
+												
 												<div class="my-order-price-breakdown-tax-due">
 													<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ) ?> </span>
 													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ) ?></span>
 												</div>
-												<!-- <div class="my-order-price-breakdown-service-fee">
-													<span class="my-order-head">Paypal Service Fee (3%)</span>
-													<span class="my-order-tail my-order-right">$201.20</span>
-												</div> -->
+												
 											</div>
-											<div class="clear"></div>
+											<!-- <div class="clear"></div> -->
 										</div>
 										<div class="my-order-single-total-price clearfix">
 											<div class="my-order-single-field clearfix">

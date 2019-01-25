@@ -46,11 +46,11 @@ jQuery(document).ready(function($) {
 
             $.ajax({
                 type: "POST",
-                url: wp_travel_frontend_vars.ajaxUrl,
+                url: wp_travel.ajaxUrl,
                 data: cart_fields,
                 beforeSend: function() {},
                 success: function(data) {
-                    location.href = wp_travel_frontend_vars.cartUrl;
+                    location.href = wp_travel.cartUrl;
                 }
             });
         }
@@ -59,16 +59,16 @@ jQuery(document).ready(function($) {
     $('.wp-travel-cart-remove').click(function(e) {
         e.preventDefault();
 
-        if (confirm(cart_texts.confirm)) {
+        if (confirm(wp_travel.strings.confirm)) {
             var cart_id = $(this).data('cart-id');
 
             $.ajax({
                 type: "POST",
-                url: wp_travel_frontend_vars.ajaxUrl,
+                url: wp_travel.ajaxUrl,
                 data: { 'action': 'wt_remove_from_cart', 'cart_id': cart_id },
                 beforeSend: function() {},
                 success: function(data) {
-                    location.href = wp_travel_frontend_vars.cartUrl;
+                    location.href = wp_travel.cartUrl;
                 }
             });
 
@@ -126,7 +126,7 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: "POST",
-            url: wp_travel_frontend_vars.ajaxUrl,
+            url: wp_travel.ajaxUrl,
             data: { update_cart_fields, 'action': 'wt_update_cart' },
             beforeSend: function() {},
             success: function(data) {
@@ -150,7 +150,7 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: "POST",
-            url: wp_travel_frontend_vars.ajaxUrl,
+            url: wp_travel.ajaxUrl,
             data: { trip_ids, CouponCode, 'action': 'wt_cart_apply_coupon' },
             beforeSend: function() {},
             success: function(data) {

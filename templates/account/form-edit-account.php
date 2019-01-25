@@ -95,7 +95,7 @@ do_action( 'wp_travel_before_edit_account_form' ); ?>
 		</div>
 	</div>
 
-	<div class="clear"></div>
+	<!-- <div class="clear"></div> -->
 
 	<?php do_action( 'wp_travel_edit_account_form' ); ?>
 

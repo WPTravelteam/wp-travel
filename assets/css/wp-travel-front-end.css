@@ -460,13 +460,6 @@
 #wp-travel_rate a {
   color: #f9a032; }
 
-.clear {
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  zoom: 1; }
-
 .wp-travel-trip-meta-info {
   border: 1px solid rgba(222, 222, 222, 0.49);
   padding: 10px;
