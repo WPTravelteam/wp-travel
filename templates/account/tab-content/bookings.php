@@ -12,18 +12,20 @@ $back_link   = $detail_link;
 
 if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	wp_travel_print_notices();
+	// $pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+	$booking_id    = sanitize_text_field( wp_unslash( $_GET['detail_id'] ) );
+	$details       = wp_travel_booking_data( $booking_id );
+	$payment_data  = wp_travel_payment_data( $booking_id );
+	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
 
-	$booking_id   = sanitize_text_field( wp_unslash( $_GET['detail_id'] ) );
-	$details      = wp_travel_booking_data( $booking_id );
-	$payment_data = wp_travel_payment_data( $booking_id );
 
 
 	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
 	$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
 	$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 
-	$title         = get_the_title( $trip_id );
-	$pax           = get_post_meta( $booking_id, 'wp_travel_pax', true );
+	$title = get_the_title( $trip_id );
+	$pax   = get_post_meta( $booking_id, 'wp_travel_pax', true );
 
 	// Billing fields.
 	$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
@@ -83,7 +85,21 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 											<div class="my-order-single-field clearfix">
 												<span class="my-order-head"><?php esc_html_e( 'Tour :', 'wp-travel' ); ?></span>
 												<span class="my-order-tail">
-													<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $title ); ?></a>
+													<?php
+													if ( $order_details && is_array( $order_details ) && count( $order_details ) > 0 ) : // Multiple.
+														foreach ( $order_details as $order_detail ) :
+															$trip_id      = $order_detail['trip_id'];
+															$price_key    = $order_detail['price_key'];
+															$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+															?>
+															<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>, 
+															<?php
+														endforeach;
+													else :
+														$pricing_name = wp_travel_get_trip_pricing_name( $trip_id );
+														?>
+														<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>
+													<?php endif; ?>
 												</span>
 											</div>
 											<div class="my-order-single-field clearfix">
@@ -118,81 +134,85 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 										</div>
 									</div>
 									<?php
+
 									if ( is_array( $fname ) && count( $fname ) > 0 ) :
-										foreach ( $fname as $booking_trip_id => $first_names  ) :
+										foreach ( $fname as $cart_key => $first_names ) :
 											if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
-											?>
+												$trip_id      = $order_details[ $cart_key ]['trip_id'];
+												$price_key    = $order_details[ $cart_key ]['price_key'];
+												$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+												?>
 												<div class="my-order-single-traveller-info">
-													<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
+													<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', $pricing_name ), 'wp-travel' ); ?></h3>
 
 													<?php foreach ( $first_names as $key => $first_name ) : ?>
 														<div class="my-order-single-field clearfix">
 															<span class="my-order-head"><?php esc_html_e( sprintf( 'Traveller %s :', $key + 1 ), 'wp-travel' ); ?></span>
-															<span class="my-order-tail"><?php echo esc_html( $first_name . ' ' . $lname[ $booking_trip_id ][ $key ] ); ?></span>
+															<span class="my-order-tail"><?php echo esc_html( $first_name . ' ' . $lname[ $cart_key ][ $key ] ); ?></span>
 														</div>
 													<?php endforeach; ?>
 												</div>
-											<?php
+												<?php
 											endif;
 										endforeach;
-									endif; ?>
+									endif;
+									?>
 
 									<?php
-									if ( isset( $details['total'] ) && $details['total'] > 0  ) :
-									?>
+									if ( isset( $details['total'] ) && $details['total'] > 0 ) :
+										?>
 									<div class="my-order-single-price-breakdown">
 										<h3 class="my-order-single-title"><?php echo esc_html_e( 'Price Breakdown', 'wp-travel' ); ?></h3>
 										<div class="my-order-price-breakdown">
 											<?php
-											$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
 
-											if ( $order_details ) {
+											if ( $order_details ) { // Multiple Trips.
 												$order_prices = get_post_meta( $booking_id, 'order_totals', true );
-												foreach( $order_details as $order_detail ) {
-												?>
+												foreach ( $order_details as $order_detail ) {
+													?>
 													<div class="my-order-price-breakdown-base-price-wrap">
 														<div class="my-order-price-breakdown-base-price">
-															<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ) ?></span>
+															<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
 															<span class="my-order-tail">
-																<span class="my-order-price-detail"> x <?php echo esc_html( $order_detail['pax'] ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
-																<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $order_detail['trip_price'] ) ?></span>
+																<span class="my-order-price-detail"> x <?php echo esc_html( $order_detail['pax'] ) . ' ' . __( 'Person/s', 'wp-travel' ); ?> </span>
+																<span class="my-order-price"><?php echo wp_travel_get_currency_symbol() . esc_html( $order_detail['trip_price'] ); ?></span>
 															</span>
 														</div>
 													</div>
 
-												<?php
+													<?php
 												}
-
-											} else { // single Trips. ?>
+											} else { // single Trips.
+												?>
 												<div class="my-order-price-breakdown-base-price-wrap">
 													<div class="my-order-price-breakdown-base-price">
-														<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ) ?></span>
+														<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ); ?></span>
 														<span class="my-order-tail">
-															<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' '. __( 'Person/s', 'wp-travel' ); ?> </span>
-															<span class="my-order-price"><?php echo wp_travel_get_currency_symbol().esc_html( $details['sub_total'] ) ?></span>
+															<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' ' . __( 'Person/s', 'wp-travel' ); ?> </span>
+															<span class="my-order-price"><?php echo wp_travel_get_currency_symbol() . esc_html( $details['sub_total'] ); ?></span>
 														</span>
 													</div>
 												</div>
-											<?php
+												<?php
 											}
 											?>
 
 											<div class="my-order-price-breakdown-summary clearfix">
 												<div class="my-order-price-breakdown-sub-total">
 													<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ) ?></span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ); ?></span>
 												</div>
 												
 												<?php if ( $details['discount'] ) : ?>
 													<div class="my-order-price-breakdown-coupon-amount">
 														<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
-														<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ) ?></span>
+														<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ); ?></span>
 													</div>
 												<?php endif; ?>
 												
 												<div class="my-order-price-breakdown-tax-due">
-													<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ) ?> </span>
-													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ) ?></span>
+													<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ); ?></span>
 												</div>
 												
 											</div>
@@ -201,7 +221,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 										<div class="my-order-single-total-price clearfix">
 											<div class="my-order-single-field clearfix">
 												<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
-												<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ) ?></span>
+												<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ); ?></span>
 											</div>
 										</div>
 									</div>

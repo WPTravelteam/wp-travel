@@ -2415,6 +2415,38 @@ function wp_travel_booking_show_end_date() {
 }
 
 /**
+ * Return Pricing name as per trip id and pricing key.
+ *
+ * @param Number $trip_id   Trip ID.
+ * @param String $price_key Name of pricing.
+ *
+ * @since 1.8.2
+ *
+ * @return String
+ */
+function wp_travel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
+
+	if ( ! $trip_id ) {
+		return;
+	}
+
+	$pricing_name = get_the_title( $trip_id );
+
+	if ( ! empty( $price_key ) ) :
+		$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+		$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
+
+		if ( $pricing_option ) {
+			$pricing_label = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : false;
+			if ( $pricing_label ) {
+				$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing_label );
+			}
+		}
+	endif;
+	return $pricing_name;
+}
+
+/**
  * Sort Checkout form fields.
  *
  * @return array $fields
