@@ -1827,8 +1827,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 
 	global $post;
 	global $wp_travel_itinerary;
-	$date_format = get_option('date_format');
-	$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+	// TODO: Both line below mightnot be required as we are just using yyy-mm-dd format in all input.
+	// $date_format = get_option('date_format');
+	// $js_date_format = wp_travel_date_format_php_to_js( $date_format );
+	$js_date_format = 'yyyy-mm-dd';
 
 	if( ! $post )
 		return;

@@ -58,7 +58,7 @@ wp_travel_print_notices();
 					<th class="text-right"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
 				</tr>
 			</thead>
-			<tbody>				
+			<tbody>
 				<?php
 				foreach ( $trips as $cart_id => $trip ) :
 					$pricing_label = false;
@@ -130,12 +130,12 @@ wp_travel_print_notices();
 
 					<tr class="responsive-cart has_options_selected">
 						<td class="product-remove" >
-							<a href="" class="wp-travel-cart-remove tooltip-area" data-cart-id="<?php echo esc_attr( $cart_id ); ?>" title="<?php esc_attr_e( 'Remove this tour', 'wp-travel' ); ?>">×</a> 
+							<a href="" class="wp-travel-cart-remove tooltip-area" data-cart-id="<?php echo esc_attr( $cart_id ); ?>" title="<?php esc_attr_e( 'Remove this tour', 'wp-travel' ); ?>">×</a>
 						</td>
 						<td class="product-thumbnail" >
 							<a href="<?php echo esc_html( get_permalink( $trip_id ) ); ?>">
 							<?php echo wp_kses( wp_travel_get_post_thumbnail( $trip_id ), wp_travel_allowed_html( array( 'img' ) ) ); ?>
-							</a> 
+							</a>
 						</td>
 						<td class="product-name" colspan="2" data-title="Tour">
 							<div class="item_cart">
@@ -178,8 +178,8 @@ wp_travel_print_notices();
 								?>
 								<input type="hidden" class="wp-travel-customize-group-size" value="<?php echo esc_attr( $group_size ); ?>" >
 								<input type="hidden" class="wp-travel-customize-booked-group-size" value="<?php echo esc_attr( $total_booked_pax ); ?>" >
-								
-								<!-- Customization Ends. -->								
+
+								<!-- Customization Ends. -->
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ); ?>" >
 								<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
 							</div>
@@ -199,7 +199,7 @@ wp_travel_print_notices();
 							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras, $cart_id ); ?>
 						</td>
 					</tr>
-				<?php endforeach; ?>					
+				<?php endforeach; ?>
 			</tbody>
 		</table>
 		<?php $cart_amounts = $wt_cart->get_total(); ?>
@@ -224,7 +224,7 @@ wp_travel_print_notices();
 					<tr>
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal:', 'wp-travel' ); ?></strong></p>
-							<strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?> 
+							<strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?>
 							<span class="tax-percent">
 								<?php
 								echo esc_html( $tax_rate );
@@ -238,7 +238,7 @@ wp_travel_print_notices();
 						</td>
 					</tr>
 				<?php endif; ?>
-				<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>	
+				<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 				<tr>
 					<th colspan="2">
 						<strong><?php echo esc_html__( 'Total', 'wp-travel' ); ?></strong>
@@ -251,17 +251,17 @@ wp_travel_print_notices();
 				<tr>
 					<td>
 						<div class="coupon">
-							<input type="text" name="wp_travel_coupon_code_input" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr__( 'Coupon Code', 'wp-travel' ); ?>"> 
+							<input type="text" name="wp_travel_coupon_code_input" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr__( 'Coupon Code', 'wp-travel' ); ?>">
 							<input type="submit" class="button wp-travel-apply-coupon-btn" name="apply_coupon" value="<?php echo esc_attr__( 'Apply Coupon', 'wp-travel' ); ?>">
 						</div>
 					</td>
 
 					<td>
 						<div class="actions">
-							<button disabled onclick="javascript:void(0)"  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ); ?></button>					
+							<button disabled onclick="javascript:void(0)"  class="btn_full wp-travel-update-cart-btn update-cart" ><?php esc_html_e( 'Update Cart', 'wp-travel' ); ?></button>
 							<input type="submit" class="btn_full book-now-btn" value="<?php esc_html_e( 'Proceed to checkout', 'wp-travel' ); ?>">
 						</div>
-					</td>	
+					</td>
 				</tr>
 			</table>
 	</form>
