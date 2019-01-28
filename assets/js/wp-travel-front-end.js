@@ -241,24 +241,27 @@ jQuery(document).ready(function($) {
         minDate: new Date(),
         autoClose: true,
         onSelect: function(formattedDate, date, inst) {
-          var el = inst.$el;
-          var next_el = ( 'trip_date' === $(el).attr('name') ) ? $( 'input[name=trip_departure_date]' ) :$( 'input[name=trip_date]' )
-          var day_to_add = parseInt( el.data('totaldays' ) );
-          if ( day_to_add < 1 ) {
-            return;
-          }
-          var _moment = moment( date );
-          var newdate = new Date( date );
-          if ( 'trip_date' === $(el).attr('name') ) {
-            someFormattedDate = _moment.add(day_to_add, 'days').format('L');
-          } else {
-            // newdate.setDate( newdate.getDate() - day_to_add );
-            someFormattedDate = _moment.subtract( day_to_add, 'days').format('L');
-          }
+            if ( date ) {
 
-          var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
-          next_el_datepicker.date = new Date( someFormattedDate );
-          next_el.val( someFormattedDate );
+                var el = inst.$el;
+                var next_el = ( 'trip_date' === $(el).attr('name') ) ? $( 'input[name=trip_departure_date]' ) :$( 'input[name=trip_date]' )
+                var day_to_add = parseInt( el.data('totaldays' ) );
+                if ( day_to_add < 1 ) {
+                  return;
+                }
+                var _moment = moment( date );
+                // var newdate = new Date( date );
+                if ( 'trip_date' === $(el).attr('name') ) {
+                  someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
+                } else {
+                  // newdate.setDate( newdate.getDate() - day_to_add );
+                  someFormattedDate = _moment.subtract( day_to_add, 'days').format('YYYY-MM-DD');
+                }
+      
+                var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
+                next_el_datepicker.date = new Date( someFormattedDate );
+                next_el.val( someFormattedDate );
+            }
         }
       });
 
@@ -266,7 +269,7 @@ jQuery(document).ready(function($) {
       if ( 'undefined' !== typeof trip_departure_date ) {
         var day_to_add = trip_departure_date.$el.data('totaldays' );;
         if ( day_to_add > 0 ) {
-          someFormattedDate = moment().add(day_to_add, 'days').format('L');
+          someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
           trip_departure_date.update('minDate', new Date( someFormattedDate ))
         }
       }

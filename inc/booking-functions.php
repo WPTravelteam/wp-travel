@@ -268,10 +268,8 @@ function wp_travel_booking_info( $post ) {
 									$current_field_value = isset( $current_field_values[ $cart_id ] ) && isset( $current_field_values[ $cart_id ][ $i ] ) ? $current_field_values[ $cart_id ][ $i ] : '';
 
 									// @since 1.8.3
-									if ( 'date' === $field['type'] && '' !== $current_field_value ) {
-										if ( ! wp_travel_is_ymd_date( $current_field_value ) ) {
-											$current_field_value = wp_travel_format_ymd_date( $current_field_value, 'm/d/Y' );
-										}
+									if ( 'date' === $field['type'] && '' !== $current_field_value && ! wp_travel_is_ymd_date( $current_field_value ) ) {
+										$current_field_value = wp_travel_format_ymd_date( $current_field_value, 'm/d/Y' );
 									}
 
 									$field_name       = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
@@ -297,10 +295,8 @@ function wp_travel_booking_info( $post ) {
 								$input_val  = get_post_meta( $booking_id, $field_name, true );
 							}
 							// @since 1.8.3
-							if ( 'date' === $field['type'] && '' !== $input_val ) {
-								if ( ! wp_travel_is_ymd_date( $input_val ) ) {
-									$input_val = wp_travel_format_ymd_date( $input_val, 'm/d/Y' );
-								}
+							if ( 'date' === $field['type'] && '' !== $input_val && ! wp_travel_is_ymd_date( $input_val ) ) {
+								$input_val = wp_travel_format_ymd_date( $input_val, 'm/d/Y' );
 							}
 							$field['default'] = $input_val;
 							$form_field->init( $field, array( 'single' => true ) )->render();

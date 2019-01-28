@@ -14,15 +14,11 @@ $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
 // @since 1.8.3
-if ( ! empty( $start_date ) ) {
-	if ( ! wp_travel_is_ymd_date( $start_date ) ) {
-		$start_date = wp_travel_format_ymd_date( $start_date );
-	}
+if ( ! empty( $start_date ) && ! wp_travel_is_ymd_date( $start_date ) ) {
+	$start_date = wp_travel_format_ymd_date( $start_date );
 }
-if ( ! empty( $end_date ) ) {
-	if ( ! wp_travel_is_ymd_date( $end_date ) ) {
-		$end_date = wp_travel_format_ymd_date( $end_date );
-	}
+if ( ! empty( $end_date ) && ! wp_travel_is_ymd_date( $end_date ) ) {
+	$end_date = wp_travel_format_ymd_date( $end_date );
 }
 
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
@@ -574,15 +570,11 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 								$start_date = isset( $date_option['start_date'] ) ? $date_option['start_date'] : '';
 								$end_date   = isset( $date_option['end_date'] ) ? $date_option['end_date'] : '';
 								// @since 1.8.3
-								if ( ! empty( $start_date ) ) {
-									if ( ! wp_travel_is_ymd_date( $start_date ) ) {
-										$start_date = wp_travel_format_ymd_date( $start_date );
-									}
+								if ( ! empty( $start_date ) && ! wp_travel_is_ymd_date( $start_date ) ) {
+									$start_date = wp_travel_format_ymd_date( $start_date );
 								}
-								if ( ! empty( $end_date ) ) {
-									if ( ! wp_travel_is_ymd_date( $end_date ) ) {
-										$end_date = wp_travel_format_ymd_date( $end_date );
-									}
+								if ( ! empty( $end_date ) && ! wp_travel_is_ymd_date( $end_date ) ) {
+									$end_date = wp_travel_format_ymd_date( $end_date );
 								}
 								$pricing_options = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
 

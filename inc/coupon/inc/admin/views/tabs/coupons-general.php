@@ -22,10 +22,8 @@ $date_format    = get_option( 'date_format' );
 $js_date_format = wp_travel_date_format_php_to_js( $date_format );
 
 $old_date_format = 'm/d/Y';
-if ( ! empty( $coupon_expiry_date ) ) {
-	if ( ! wp_travel_is_ymd_date( $coupon_expiry_date ) ) {
-		$coupon_expiry_date = wp_travel_format_ymd_date( $coupon_expiry_date, $old_date_format );
-	}
+if ( ! empty( $coupon_expiry_date ) && ! wp_travel_is_ymd_date( $coupon_expiry_date ) ) {
+	$coupon_expiry_date = wp_travel_format_ymd_date( $coupon_expiry_date, $old_date_format );
 }
 
  $coupon    = new WP_Travel_Coupon();

@@ -60,10 +60,8 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 				if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
 					$itinerary_date = stripslashes( $itinerary['date'] );
 					// @since 1.8.3
-					if ( ! empty( $itinerary_date ) ) {
-						if ( ! wp_travel_is_ymd_date( $itinerary_date ) ) {
-							$itinerary_date = wp_travel_format_ymd_date( $itinerary_date, $date_format );
-						}
+					if ( ! empty( $itinerary_date ) && ! wp_travel_is_ymd_date( $itinerary_date ) ) {						
+						$itinerary_date = wp_travel_format_ymd_date( $itinerary_date, $date_format );
 					}
 				}
 				if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {

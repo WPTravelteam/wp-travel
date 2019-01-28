@@ -60,13 +60,17 @@ wp_travel_print_notices();
 			</thead>
 			<tbody>
 				<?php
+				// dd( $trips );
 				foreach ( $trips as $cart_id => $trip ) :
 					$pricing_label = false;
 					$trip_id       = $trip['trip_id'];
 					// $price			= $trip['price']; // Price of single qty.
 					$trip_price      = $trip['trip_price'];
 					$trip_duration   = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
-					$trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
+
+					// Need to remove $trip_start_date in future version. [ use arrival_date and departure_date instead ].
+					// $trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
+					$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wp_travel_format_date( $trip['arrival_date'], true, 'Y-m-d' ) : false;
 
 					$pax                = $trip['pax'];
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
@@ -145,12 +149,12 @@ wp_travel_print_notices();
 									</a>
 								</h4>
 								<?php
-								if ( $trip_start_date ) :
+								if ( $arrival_date ) :
 									?>
 									<span class="variation">
-										<span><strong><?php esc_html_e( 'Booking Date:', 'wp-travel' ); ?></strong></span>
+										<span><strong><?php esc_html_e( 'Date:', 'wp-travel' ); ?></strong></span>
 										<span>
-										<?php echo esc_html( $trip_start_date ); ?>
+										<?php echo esc_html( $arrival_date ); ?>
 										</span>
 									</span>
 								<?php endif; ?>

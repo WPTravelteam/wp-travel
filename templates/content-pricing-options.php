@@ -196,7 +196,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 								}
 								$start_field = array(
 									'label' => esc_html__( 'start', 'wp-travel' ),
-									'type' => 'text',
+									'type' => 'date',
 									'name' => 'trip_date',
 									'placeholder' => esc_html__( 'Arrival date', 'wp-travel' ),
 									'class' => 'wp-travel-pricing-days-night',
@@ -217,6 +217,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 								<?php
 								$end_field = array(
 									'label' => esc_html__( 'End', 'wp-travel' ),
+									'type' => 'date',
 									'name' => 'trip_departure_date',
 									'placeholder' => esc_html__( 'Departure date', 'wp-travel' ),
 								);

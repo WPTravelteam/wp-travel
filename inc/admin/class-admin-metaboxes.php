@@ -966,17 +966,18 @@ class WP_Travel_Admin_Metaboxes {
 			foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
 
 				if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
-					$date = DateTime::createFromFormat( $date_format, $date_value['start_date'] );
-					if ( $date ) {
-						$start_date = $date->format( 'Y-m-d' );
+					$start_date = $date_value['start_date'];
+					if ( ! wp_travel_is_ymd_date( $start_date ) ) {
+						$start_date = wp_travel_format_ymd_date( $start_date, $date_format );
 					}
+
 					$wp_travel_multiple_trip_dates[ $date_key ]['start_date'] = $start_date;
 				}
 
 				if ( isset( $date_value['end_date'] ) && '' !== $date_value['end_date'] ) {
-					$date = DateTime::createFromFormat( $date_format, $date_value['end_date'] );
-					if ( $date ) {
-						$end_date = $date->format( 'Y-m-d' );
+					$end_date = $date_value['end_date'];
+					if ( ! wp_travel_is_ymd_date( $end_date ) ) {
+						$end_date = wp_travel_format_ymd_date( $end_date, $date_format );
 					}
 					$wp_travel_multiple_trip_dates[ $date_key ]['end_date'] = $end_date;
 				}
