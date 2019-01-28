@@ -1898,3 +1898,32 @@ function wp_travel_fa_icons() {
         'fab fa-youtube-square' => __( 'youtube-square', 'wp-travel' ),
     );
 }
+
+/**
+ * Check if current page is WP Travel admin page.
+ *
+ * @param  array   $pages Pages to check.
+ * @return boolean
+ */
+function wp_travel_is_admin_page( $pages = array() ) {
+	if ( ! is_admin() ) {
+		return false;
+	}
+	$screen = get_current_screen();
+	$wp_travel_pages[] = array( 'itinerary-booking_page_settings' );
+	if ( ! empty( $pages ) ) {
+		foreach( $pages as $page ) {
+			if ( 'settings' === $page ) {
+				$settings_allowed_screens[] = 'itinerary-booking_page_settings';
+				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
+					return true;
+				}
+			}
+		}
+	} else if ( in_array( $screen->id, $wp_travel_pages, true ) ) {
+		return true;
+	}
+
+	// $allowed_screens[] = 'itinerary-booking_page_wp-travel-marketplace';
+	return false;
+}
