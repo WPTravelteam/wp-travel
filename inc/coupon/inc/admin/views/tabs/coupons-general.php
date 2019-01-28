@@ -5,20 +5,31 @@
  * @package WP_Tarvel_Coupons_Pro
  */
 
- global $post;
- // General Tab Data.
- $coupon_metas       = get_post_meta( $post->ID, 'wp_travel_coupon_metas', true );
- $general_tab        = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
- $coupon_code        = get_post_meta( $post->ID, 'wp_travel_coupon_code', true );
- // Field Values.
- $coupon_active      = isset( $general_tab['coupon_active'] ) ? $general_tab['coupon_active'] : 'yes';
- $coupon_code        = ! empty( $coupon_code ) ? $coupon_code : '';
- $coupon_type        = isset( $general_tab['coupon_type'] ) ? $general_tab['coupon_type'] : 'fixed';
- $coupon_value       = isset( $general_tab['coupon_value'] ) ? $general_tab['coupon_value'] : '';
- $coupon_expiry_date = isset( $general_tab['coupon_expiry_date'] ) ? $general_tab['coupon_expiry_date'] : '';
+global $post;
+// General Tab Data.
+$coupon_metas = get_post_meta( $post->ID, 'wp_travel_coupon_metas', true );
+$general_tab  = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
+$coupon_code  = get_post_meta( $post->ID, 'wp_travel_coupon_code', true );
+// Field Values.
+$coupon_active      = isset( $general_tab['coupon_active'] ) ? $general_tab['coupon_active'] : 'yes';
+$coupon_code        = ! empty( $coupon_code ) ? $coupon_code : '';
+$coupon_type        = isset( $general_tab['coupon_type'] ) ? $general_tab['coupon_type'] : 'fixed';
+$coupon_value       = isset( $general_tab['coupon_value'] ) ? $general_tab['coupon_value'] : '';
+$coupon_expiry_date = isset( $general_tab['coupon_expiry_date'] ) ? $general_tab['coupon_expiry_date'] : '';
 
- $coupon = new WP_Travel_Coupon();
- $coupon_id =  $coupon->get_coupon_id_by_code( $coupon_code  );
+
+$date_format    = get_option( 'date_format' );
+$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+
+$old_date_format = 'm/d/Y';
+if ( ! empty( $coupon_expiry_date ) ) {
+	if ( ! wp_travel_is_ymd_date( $coupon_expiry_date ) ) {
+		$coupon_expiry_date = wp_travel_format_ymd_date( $coupon_expiry_date, $old_date_format );
+	}
+}
+
+ $coupon    = new WP_Travel_Coupon();
+ $coupon_id = $coupon->get_coupon_id_by_code( $coupon_code );
 
 ?>
 
@@ -30,32 +41,31 @@
 					<label for="currency"><?php esc_html_e( 'Coupon Status ', 'wp-travel' ); ?></label>
 				</td>
 				<td>
-				<?php 
-				
-					$coupon_status = $coupon->get_coupon_status( $coupon_id  );
+				<?php
 
-					if ( 'active' === $coupon_status ) {
-						?>
+					$coupon_status = $coupon->get_coupon_status( $coupon_id );
+
+				if ( 'active' === $coupon_status ) {
+					?>
 
 							<span class="wp-travel-info-msg">
-								<?php echo esc_html( 'Active', 'wp-travel' ); ?>
+							<?php echo esc_html( 'Active', 'wp-travel' ); ?>
 							</span>
 
-						<?php 
+						<?php
 
-					}
-					else {
+				} else {
 
-						?>
+					?>
 
 							<span class="wp-travel-error-msg">
-								<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
+							<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
 							</span>
 
-						<?php 
+						<?php
 
 
-					}
+				}
 
 				?>
 				</td>
@@ -65,8 +75,8 @@
 			<td>
 				<label for="coupon-code"><?php esc_html_e( 'Coupon Code', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Unique Identifier for the coupon.', 'wp-travel' ); ?>">
-               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
-           		</span>
+					   <i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
+				   </span>
 			</td>
 			<td>
 				<input required="required" type="text" id="coupon-code" name="wp_travel_coupon_code" placeholder="<?php echo esc_attr__( 'WP-TRAVEL-350', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_code ); ?>">
@@ -79,8 +89,8 @@
 		<tr>
 			<td><label for="coupon-type"><?php esc_html_e( 'Coupon Type', 'wp-travel' ); ?></label>
 				<span class="tooltip-area" title="<?php esc_html_e( 'Coupon Type: Fixed Discount Amount or Percentage discount( Applies to cart total price ).', 'wp-travel' ); ?>">
-               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
-           		</span>
+					   <i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
+				   </span>
 			</td>
 			<td>
 				<select id="coupon-type" name="wp_travel_coupon[general][coupon_type]">
@@ -109,12 +119,12 @@
 		<tr>
 			<td><label for="coupon-expiry-date"><?php esc_html_e( 'Coupon Expiry Date', 'wp-travel' ); ?>
 			<span class="tooltip-area" title="<?php esc_html_e( 'Coupon expiration date. Leave blank to disable expiration.', 'wp-travel' ); ?>">
-               		<i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
-           		</span>
+					   <i class="wt-icon wt-icon-question-circle" aria-hidden="true"></i>
+				   </span>
 			</label>
 			</td>
 			<td>
-				<input type="text" class="wp-travel-datepicker" id="coupon-expiry-date" name="wp_travel_coupon[general][coupon_expiry_date]" readonly value="<?php echo esc_attr( $coupon_expiry_date ); ?>">
+				<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" type="text" class="wp-travel-datepicker" id="coupon-expiry-date" name="wp_travel_coupon[general][coupon_expiry_date]" readonly value="<?php echo esc_attr( $coupon_expiry_date ); ?>">
 			</td>
 		</tr>
 
