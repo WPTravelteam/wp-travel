@@ -18,7 +18,7 @@ echo ""
 
 # Copy new set of files to trunk
 echo "copy files to trunk"
-rsync -a --exclude ".git*" --exclude bash --exclude build  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md     ./ ./build/trunk
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md     ./ ./build/trunk
 echo "*********************************"
 echo ""
 
@@ -47,7 +47,7 @@ echo ""
     svn status | grep '^!' | awk '{$1=""; print " --force \""substr($0,2)"@\"" }' | xargs svn delete
     echo "*********************************"
     echo ""
-    
+
 #fi
 
 #svn status
