@@ -144,7 +144,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$plugin_shortcode = new Wp_Travel_Shortcodes();
 			$plugin_shortcode->init();
 		}
-		private function define( $name, $value ) {
+		public function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
 				define( $name, $value );
 			}
