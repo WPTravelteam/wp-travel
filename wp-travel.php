@@ -144,7 +144,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$plugin_shortcode = new Wp_Travel_Shortcodes();
 			$plugin_shortcode->init();
 		}
-		private function define( $name, $value ) {
+		public function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
 				define( $name, $value );
 			}
@@ -248,6 +248,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( ! class_exists( 'WP_Travel_EDD_SL_Plugin_Updater' ) ) {
 				// load our custom updater.
 				include sprintf( '%s/inc/license/edd-sl-plugin-updater.php', WP_TRAVEL_ABSPATH );
+			}
+
+			$module_file = sprintf( '%s/inc/class-modules.php', WP_TRAVEL_ABSPATH );
+			if ( file_exists( $module_file ) ) {
+				include sprintf( '%s/inc/class-modules.php', WP_TRAVEL_ABSPATH );
 			}
 
 		}
