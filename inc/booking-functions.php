@@ -195,13 +195,6 @@ function wp_travel_booking_info( $post ) {
 		$booking_option              = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 		$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
 
-		// @since 1.8.0
-		global $wt_cart;
-		$items        = $wt_cart->getItems();
-		$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
-		$totals       = $wt_cart->get_total();
-		$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
-
 		?>
 		<div class="wp-travel-booking-form-wrapper">
 				<?php do_action( 'wp_travel_booking_before_form_field' ); ?>
@@ -274,6 +267,13 @@ function wp_travel_booking_info( $post ) {
 
 									$current_field_value = isset( $current_field_values[ $cart_id ] ) && isset( $current_field_values[ $cart_id ][ $i ] ) ? $current_field_values[ $cart_id ][ $i ] : '';
 
+									// @since 1.8.3
+									if ( 'date' === $field['type'] && '' !== $current_field_value ) {
+										if ( ! wp_travel_is_ymd_date( $current_field_value ) ) {
+											$current_field_value = wp_travel_format_ymd_date( $current_field_value, 'm/d/Y' );
+										}
+									}
+
 									$field_name       = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
 									$field['name']    = $field_name;
 									$field['default'] = $current_field_value;
@@ -295,6 +295,12 @@ function wp_travel_booking_info( $post ) {
 								// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
 								$field_name = str_replace( '_traveller', '', $field['name'] );
 								$input_val  = get_post_meta( $booking_id, $field_name, true );
+							}
+							// @since 1.8.3
+							if ( 'date' === $field['type'] && '' !== $input_val ) {
+								if ( ! wp_travel_is_ymd_date( $input_val ) ) {
+									$input_val = wp_travel_format_ymd_date( $input_val, 'm/d/Y' );
+								}
 							}
 							$field['default'] = $input_val;
 							$form_field->init( $field, array( 'single' => true ) )->render();
@@ -778,9 +784,9 @@ function wp_travel_book_now() {
 	$booking_arrival_date   = isset( $_POST['wp_travel_arrival_date'] ) ? wp_travel_format_date( $_POST['wp_travel_arrival_date'] ) : '';
 	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
 
+	$items = $wt_cart->getItems();
 	if ( $enable_checkout && 0 !== $trip_price ) :
 
-		$items = $wt_cart->getItems();
 		if ( ! count( $items ) ) {
 			return;
 		}
@@ -832,6 +838,11 @@ function wp_travel_book_now() {
 	);
 	$booking_id = wp_insert_post( $post_array );
 	update_post_meta( $booking_id, 'order_data', $_POST );
+
+	// @since 1.8.3	
+	$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
+	$totals       = $wt_cart->get_total();
+	$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
 
 	// Update Booking Title.
 	$update_data_array = array(

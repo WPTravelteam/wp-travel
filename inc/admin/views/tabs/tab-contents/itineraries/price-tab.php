@@ -6,15 +6,24 @@
  */
 
 global $post;
-$post_id = $post->ID;
-$date_format            = get_option('date_format');
+$post_id        = $post->ID;
+$date_format    = get_option( 'date_format' );
 $js_date_format = wp_travel_date_format_php_to_js( $date_format );
 
 $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 
-$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date, false ) : '';
-$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date, false ) : '';
+// @since 1.8.3
+if ( ! empty( $start_date ) ) {
+	if ( ! wp_travel_is_ymd_date( $start_date ) ) {
+		$start_date = wp_travel_format_ymd_date( $start_date );
+	}
+}
+if ( ! empty( $end_date ) ) {
+	if ( ! wp_travel_is_ymd_date( $end_date ) ) {
+		$end_date = wp_travel_format_ymd_date( $end_date );
+	}
+}
 
 $group_size = get_post_meta( $post_id, 'wp_travel_group_size', true );
 
@@ -43,12 +52,12 @@ $trip_pricing_options_data = get_post_meta( $post_id, 'wp_travel_pricing_options
 
 $trip_multiple_date_options = get_post_meta( $post_id, 'wp_travel_multiple_trip_dates', true );
 
-$sale_price_attribute = 'disabled="disabled"';
-$sale_price_style_class     = 'hidden';
+$sale_price_attribute   = 'disabled="disabled"';
+$sale_price_style_class = 'hidden';
 
 if ( $enable_sale ) {
-	$sale_price_attribute = '';
-	$sale_price_style_class     = '';
+	$sale_price_attribute   = '';
+	$sale_price_style_class = '';
 }
 
 	$settings        = wp_travel_get_settings();
@@ -61,22 +70,22 @@ if ( ! $price_per ) {
 }
 
 // CSS Class for trip fields.
-$single_pricing_option_class_array = array();
+$single_pricing_option_class_array   = array();
 $multiple_pricing_option_class_array = array();
 
-$single_pricing_option_class_array['single-pricing-option-field'] = '';
+$single_pricing_option_class_array['single-pricing-option-field']     = '';
 $multiple_pricing_option_class_array['multiple-pricing-option-field'] = '';
 
-if ( 'single-price' === $pricing_option_type  ) {	
+if ( 'single-price' === $pricing_option_type ) {
 	$multiple_pricing_option_class_array['hidden'] = '';
 } else {
 	$single_pricing_option_class_array['hidden'] = '';
 }
 
-$single_array_key = array_keys( $single_pricing_option_class_array );
+$single_array_key   = array_keys( $single_pricing_option_class_array );
 $multiple_array_key = array_keys( $multiple_pricing_option_class_array );
 // CSS Class for Single and Multiple Pricing option fields.
-$single_pricing_option_class = implode( ' ', $single_array_key );
+$single_pricing_option_class   = implode( ' ', $single_array_key );
 $multiple_pricing_option_class = implode( ' ', $multiple_array_key );
 
 // Trip Duration option class [Override]
@@ -85,7 +94,7 @@ if ( 'yes' === $fixed_departure ) {
 	$trip_duration_option_class_array['hidden'] = '';
 	unset( $single_fixed_departure_class_array['hidden'] );
 
-	if ( 'yes' === $multiple_fixed_departures && 'multiple-price' === $pricing_option_type  ) {
+	if ( 'yes' === $multiple_fixed_departures && 'multiple-price' === $pricing_option_type ) {
 		$single_fixed_departure_class_array['hidden'] = '';
 	} else {
 		unset( $single_fixed_departure_class_array['hidden'] );
@@ -94,7 +103,7 @@ if ( 'yes' === $fixed_departure ) {
 	unset( $trip_duration_option_class_array['hidden'] );
 	$single_fixed_departure_class_array['hidden'] = '';
 }
-$trip_duration_array_key = array_keys( $trip_duration_option_class_array );
+$trip_duration_array_key    = array_keys( $trip_duration_option_class_array );
 $trip_duration_option_class = implode( ' ', $trip_duration_array_key );
 
 $single_fixed_departure_array_key = array_keys( $single_fixed_departure_class_array );
@@ -113,14 +122,13 @@ if ( 'multiple-price' === $pricing_option_type && 'yes' === $fixed_departure ) {
 	} else {
 		$multiple_date_option_class_array['hidden'] = '';
 	}
-
 } else {
 	$enable_multiple_date_option_class_array['hidden'] = '';
 }
-$enable_multiple_date_array_key = array_keys( $enable_multiple_date_option_class_array );
+$enable_multiple_date_array_key    = array_keys( $enable_multiple_date_option_class_array );
 $enable_multiple_date_option_class = implode( ' ', $enable_multiple_date_array_key );
 
-$multiple_date_array_key = array_keys( $multiple_date_option_class_array );
+$multiple_date_array_key    = array_keys( $multiple_date_option_class_array );
 $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 <table class="form-table pricing-tab">
 	<tr class="table-inside-heading">
@@ -132,8 +140,8 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		<td><label for="wp-travel-pricing-option-type"><?php esc_html_e( 'Pricing Option', 'wp-travel' ); ?></label></td>
 		<td>
 			<select name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type">
-				<option value="single-price" <?php selected( $pricing_option_type, 'single-price' ) ?> ><?php esc_html_e( 'Single Price', 'wp-travel' ) ?></option>
-				<option value="multiple-price" <?php selected( $pricing_option_type, 'multiple-price' ) ?> ><?php esc_html_e( 'Multiple Price', 'wp-travel' ) ?></option>
+				<option value="single-price" <?php selected( $pricing_option_type, 'single-price' ); ?> ><?php esc_html_e( 'Single Price', 'wp-travel' ); ?></option>
+				<option value="multiple-price" <?php selected( $pricing_option_type, 'multiple-price' ); ?> ><?php esc_html_e( 'Multiple Price', 'wp-travel' ); ?></option>
 			</select>
 		</td>
 	</tr>
@@ -144,7 +152,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 			<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
 				<select name="wp_travel_price_per">
 					<?php foreach ( $price_per_fields as $val => $label ) : ?>
-						<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $val, $price_per ) ?> ><?php echo esc_html( $label, 'wp-travel' ); ?></option>
+						<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $val, $price_per ); ?> ><?php echo esc_html( $label, 'wp-travel' ); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
@@ -195,10 +203,10 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 				<p class="description"><?php echo esc_html__( 'Select different pricing category with its different sale price', 'wp-travel' ); ?></p>
 				<div id="price-accordion" class="tab-accordion price-accordion">
 						<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
-						<?php 
+						<?php
 						if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) :
 							foreach ( $trip_pricing_options_data as $key => $pricing ) {
-							// Set Vars.
+								// Set Vars.
 								$pricing_name         = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
 								$pricing_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 								$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
@@ -229,7 +237,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 									$custom_pricing_sale_price_attribute = '';
 									$custom_pricing_sale_price_style     = '';
 								}
-						?>
+								?>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
 									<h4 class="panel-title">
@@ -258,14 +266,14 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 												<?php
 												$pricing_variation_options = wp_travel_get_pricing_variation_options();
 												if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
-												?>
+													?>
 													<select name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][type]" class="wp-travel-pricing-options-list">
-														<?php 
-														foreach ( $pricing_variation_options as $option => $value ) {
-														?>
-															<option <?php selected( $pricing_type, $option ); ?> value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $value ); ?></option>
 														<?php
-															}
+														foreach ( $pricing_variation_options as $option => $value ) {
+															?>
+															<option <?php selected( $pricing_type, $option ); ?> value="<?php echo esc_attr( $option ); ?>"><?php echo esc_html( $value ); ?></option>
+															<?php
+														}
 														?>
 													</select>
 												<?php endif; ?>
@@ -292,7 +300,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 												<div class="two-third">
 													<span class="show-in-frontend checkbox-default-design">
 														<label data-on="ON" data-off="OFF">
-															<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][enable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" <?php checked( $pricing_sale_enabled, "yes" ); ?> value="yes">
+															<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][enable_sale]" type="checkbox" class="wp-travel-enable-variation-price-sale" <?php checked( $pricing_sale_enabled, 'yes' ); ?> value="yes">
 															<span class="switch"></span>
 														</label>
 													</span>
@@ -304,7 +312,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 												<label for="sale_price_<?php echo esc_attr( $key ); ?>" class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-													<input id="sale_price_<?php echo esc_attr( $key ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>" <?php echo esc_attr( $pricing_sale_enabled == "yes" ? 'required="required"': '' ) ?>  >
+													<input id="sale_price_<?php echo esc_attr( $key ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $key ); ?>" class="wp-travel-variation-pricing-sale-price" type="number" min="1" max="<?php echo esc_attr( $pricing_option_price ); ?>" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][sale_price]" id="" value="<?php echo esc_attr( $pricing_sale_price ); ?>" <?php echo esc_attr( $pricing_sale_enabled == 'yes' ? 'required="required"' : '' ); ?>  >
 												</div>
 											</div>
 
@@ -324,7 +332,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 												<div class="two-third">
 													<input class="pricing-opt-min-pax" value="<?php echo esc_attr( $pricing_min_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][min_pax]" placeholder="Min PAX"  min="1" />
 
-													<input class="pricing-opt-max-pax" value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ) ?>" />
+													<input class="pricing-opt-max-pax" value="<?php echo esc_attr( $pricing_max_pax ); ?>" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][max_pax]" placeholder="Max PAX"  min="<?php echo esc_attr( ( $pricing_min_pax ) ? $pricing_min_pax : 1 ); ?>" />
 												</div>
 											</div>
 											<div class="repeat-row">
@@ -337,7 +345,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 													<div class="two-third">
 														<span class="show-in-frontend checkbox-default-design">
 															<label data-on="ON" data-off="OFF">
-																<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][enable_inventory]" type="checkbox" class="" <?php checked( $enable_inventory, "yes" ); ?> value="yes">
+																<input name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][enable_inventory]" type="checkbox" class="" <?php checked( $enable_inventory, 'yes' ); ?> value="yes">
 																<span class="switch"></span>
 															</label>
 														</span>
@@ -350,7 +358,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 									</div>
 								</div>
 							</div>
-						<?php 
+								<?php
 							}
 						endif;
 						?>
@@ -390,14 +398,14 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 									<?php
 									$pricing_variation_options = wp_travel_get_pricing_variation_options();
 									if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
-									?>
+										?>
 										<select  name="wp_travel_pricing_options[{{data.random}}][type]" class="wp-travel-pricing-options-list">
 											<?php
 											foreach ( $pricing_variation_options as $key => $value ) {
-											?>
+												?>
 												<option value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></option>
-											<?php
-												}
+												<?php
+											}
 											?>
 										</select>
 									<?php endif; ?>
@@ -501,20 +509,20 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
-					<input type="checkbox" name="wp_travel_fixed_departure" id="wp-travel-fixed-departure" value="yes" <?php checked( 'yes', $fixed_departure ) ?> />							
+					<input type="checkbox" name="wp_travel_fixed_departure" id="wp-travel-fixed-departure" value="yes" <?php checked( 'yes', $fixed_departure ); ?> />							
 					<span class="switch"></span>
 				</label>
 			</span>
 		</td>
 	</tr>
-	<tr class="wp-travel-trip-duration-row <?php echo esc_attr( $trip_duration_option_class ) ?>" >
+	<tr class="wp-travel-trip-duration-row <?php echo esc_attr( $trip_duration_option_class ); ?>" >
 		<td><label for="wp-travel-trip-duration"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></label></td>
 		<td>
 			<input type="number" min="0" step="1" name="wp_travel_trip_duration" id="wp-travel-trip-duration" value="<?php echo esc_attr( $trip_duration ); ?>" /> <?php esc_html_e( 'Day(s)', 'wp-travel' ); ?>
 			<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ); ?>                
 		</td>
 	</tr>
-	<tr class="wp-travel-enable-multiple-dates <?php echo esc_attr( $enable_multiple_date_option_class ) ?>" >
+	<tr class="wp-travel-enable-multiple-dates <?php echo esc_attr( $enable_multiple_date_option_class ); ?>" >
 		<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 		<td><span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
@@ -540,12 +548,12 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		<td colspan="2" class="pricing-repeater">
 
 			<?php
-				if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) != 0 ) :
-					$collapse_style = 'display:block';
+			if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) != 0 ) :
+				$collapse_style = 'display:block';
 				else :
 					$collapse_style = 'display:none';
 				endif;
-			?>
+				?>
 
 				<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
 					<a href="#" data-parent="wp-variations-multiple-dates" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
@@ -562,13 +570,23 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 							foreach ( $trip_multiple_date_options as $date_key => $date_option ) {
 
 								// Set Vars.
-								$date_label       = isset( $date_option['date_label'] ) ? $date_option['date_label'] : '';
-								$start_date       = isset( $date_option['start_date'] ) ? $date_option['start_date'] : '';
-								$end_date         = isset( $date_option['end_date'] ) ? $date_option['end_date'] : '';
-								$start_date = ! empty( $start_date ) ? wp_travel_format_date( $start_date, false ) : '';
-								$end_date 	= ! empty( $end_date ) ? wp_travel_format_date( $end_date, false ) : '';
+								$date_label = isset( $date_option['date_label'] ) ? $date_option['date_label'] : '';
+								$start_date = isset( $date_option['start_date'] ) ? $date_option['start_date'] : '';
+								$end_date   = isset( $date_option['end_date'] ) ? $date_option['end_date'] : '';
+								// @since 1.8.3
+								if ( ! empty( $start_date ) ) {
+									if ( ! wp_travel_is_ymd_date( $start_date ) ) {
+										$start_date = wp_travel_format_ymd_date( $start_date );
+									}
+								}
+								if ( ! empty( $end_date ) ) {
+									if ( ! wp_travel_is_ymd_date( $end_date ) ) {
+										$end_date = wp_travel_format_ymd_date( $end_date );
+									}
+								}
 								$pricing_options = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : array();
-						?>
+
+								?>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $date_key ); ?>">
 									<h4 class="panel-title">
@@ -604,10 +622,10 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 												<div class="two-third">
 
 													<div class="custom-multi-select">
-														<?php 
-														$count_options_data = count( $trip_pricing_options_data );
+														<?php
+														$count_options_data    = count( $trip_pricing_options_data );
 														$count_pricing_options = count( $pricing_options );
-														$multiple_checked_all = '';
+														$multiple_checked_all  = '';
 														if ( $count_options_data == $count_pricing_options ) {
 															$multiple_checked_all = 'checked=checked';
 														}
@@ -615,9 +633,10 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 														$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
 														if ( $count_pricing_options > 0 ) {
 															$multiple_checked_text = $count_pricing_options . __( ' item selected', 'wp-travel' );
-														} ?>
+														}
+														?>
 														<span class="select-main">
-															<span class="selected-item"><?php echo esc_html( $multiple_checked_text ) ?></span> 
+															<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span> 
 															<span class="carret"></span> 
 															<span class="close"></span>
 															<ul class="wp-travel-multi-inner">
@@ -628,13 +647,14 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 																</li>
 																<?php
 																foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
-																	$checked = '';
+																	$checked            = '';
 																	$selecte_list_class = '';
-																	if ( in_array($pricing_option['price_key'], $pricing_options ) ) {
-																		$checked = 'checked=checked';
+																	if ( in_array( $pricing_option['price_key'], $pricing_options ) ) {
+																		$checked            = 'checked=checked';
 																		$selecte_list_class = 'selected';
-																	} ?>
-																	<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ) ?>">
+																	}
+																	?>
+																	<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ); ?>">
 																		<label class="checkbox wp-travel-multi-inner ">
 																			<input <?php echo esc_attr( $checked ); ?> name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][pricing_options][]" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $pricing_opt_key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
 																		</label>
@@ -650,10 +670,11 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 									</div>
 								</div>
 							</div>
-						<?php
-					}
+								<?php
+							}
 				endif;
-				?>	
+						?>
+					
 
 				<!-- Template Script for dates -->
 				<script type="text/html" id="tmpl-wp-travel-multiple-dates">
@@ -692,7 +713,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 										
 											<div class="custom-multi-select">
 												<span class="select-main">
-													<span class="selected-item"><?php  esc_html_e( 'Select multiple', 'wp-travel' ); ?></span> 
+													<span class="selected-item"><?php esc_html_e( 'Select multiple', 'wp-travel' ); ?></span> 
 													<span class="carret"></span> 
 													<span class="close"></span>
 													<ul class="wp-travel-multi-inner">
@@ -702,7 +723,8 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 															</label>
 														</li>
 														<?php
-														foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) { ?>
+														foreach ( $trip_pricing_options_data as $pricing_opt_key => $pricing_option ) {
+															?>
 															<li class="wp-travel-multi-inner">
 																<label class="checkbox wp-travel-multi-inner ">
 																	<input name="wp_travel_multiple_trip_dates[{{data.random}}][pricing_options][]" type="checkbox" id="wp-travel-multi-input-{{data.random}}" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $pricing_option['price_key'] ); ?>">  <?php echo esc_html( $pricing_option['pricing_name'] ); ?>
@@ -751,19 +773,20 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 	 *
 	 * @since 1.0.5
 	 */
-	do_action( 'wp_travel_itinerary_after_sale_price', $post_id ); ?>
+	do_action( 'wp_travel_itinerary_after_sale_price', $post_id );
+	?>
 	<?php
-	// WP Travel Standard Paypal merged. since 1.2.1	
+	// WP Travel Standard Paypal merged. since 1.2.1
 	$wp_travel_minimum_partial_payout = wp_travel_minimum_partial_payout( $post_id );
 	if ( $wp_travel_minimum_partial_payout < 1 ) {
 		$wp_travel_minimum_partial_payout = '';
 	}
-	$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 )? $settings['minimum_partial_payout']  : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+	$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
 	$payout_percent = wp_travel_get_payout_percent( $post_id );
-	$use_global = wp_travel_use_global_payout_percent( $post_id ); 
+	$use_global     = wp_travel_use_global_payout_percent( $post_id );
 
 	$custom_payout_class = '';
 
@@ -771,13 +794,19 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 
 		$custom_payout_class = 'display:none';
 
-	} ?>
+	}
+	?>
 	<tr style="display:none">
 		<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span>
 			<input type="number" step="0.01" name="wp_travel_minimum_partial_payout" id="wp-travel-minimum-partial-payout" value="<?php echo esc_attr( $wp_travel_minimum_partial_payout ); ?>" />
-			<span class="description"><?php esc_html_e( 'Default : ', 'wp-travel' ); echo sprintf( '%s&percnt; of %s%s', esc_html( $default_payout_percent ), esc_html( $currency_symbol ), esc_html( $trip_price ) ) ?></span>
+			<span class="description">
+			<?php
+			esc_html_e( 'Default : ', 'wp-travel' );
+			echo sprintf( '%s&percnt; of %s%s', esc_html( $default_payout_percent ), esc_html( $currency_symbol ), esc_html( $trip_price ) );
+			?>
+			</span>
 		</td>
 	</tr>
 
@@ -797,7 +826,8 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 				<?php
 					esc_html_e( 'Use Global ', 'wp-travel' );
 					echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
-				?>	
+				?>
+					
 			</span>
 
 			</span>
@@ -815,7 +845,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 	// Ends WP Travel Standard Paypal merged. since 1.2.1.
 	?>
 </table>
-<?php if( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
 	<div class="wp-travel-upsell-message">
 		<div class="wp-travel-pro-feature-notice">
 			<h4><?php esc_html_e( 'Need More Options ?', 'wp-travel' ); ?></h4>
@@ -824,4 +854,3 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 		</div>
 	</div>
 <?php endif; ?>
-

@@ -2131,7 +2131,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 
 		if ( '' !== $base_date_format ) { // Fixes.
 			if ( 'Y-m-d' !== $base_date_format ) {
-				$date          = DateTime::createFromFormat( $base_date_format, $date );
+				$date      = DateTime::createFromFormat( $base_date_format, $date );
 				$strtotime = date_format( $date, 'Y-m-d' );
 			}
 		} else {
@@ -2160,6 +2160,52 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 
 	}
 
+	/**
+	 * Format Date to YMD.
+	 *
+	 * @param String $date        Date.
+	 * @param String $date_format Date.
+	 * @since 1.8.3
+	 */
+	function wp_travel_format_ymd_date( $date, $date_format = '' ) {
+		if ( ! $date ) {
+			return;
+		}
+
+		if ( ! $date_format ) :
+			$date_format = get_option( 'date_format' );
+		endif;
+
+		$strtotime = $date;
+
+		if ( 'Y-m-d' !== $date_format ) {
+			
+			$date = str_replace( '/', '-', $date );
+			$date = str_replace( '.', '-', $date );
+
+			$dashed_format = str_replace( '/', '-', $date_format );
+			$dashed_format = str_replace( '.', '-', $dashed_format );
+			$date          = DateTime::createFromFormat( $dashed_format, $date );
+			if ( $date && is_object( $date ) ) {
+				$strtotime = date_format( $date, 'Y-m-d' );
+			} else {
+				// Fallback date [today]
+				$strtotime = (string) date( 'Y-m-d' );
+			}
+		}
+		return $strtotime;
+		
+		$strtotime = strtotime( stripslashes( $strtotime ) );
+
+		if ( $localize ) {
+			$formated_date = esc_html( date_i18n( $date_format, $strtotime ) );
+		} else {
+			$formated_date = esc_html( date( $date_format, $strtotime ) );
+		}
+
+		return $formated_date;
+
+	}
 
 endif;
 
@@ -2234,7 +2280,7 @@ function wp_travel_print_notices() {
 /**
  * Convert Date Format String form PHP to JS.
  *
- * @param   $date_foramt    string  Date Fromat.
+ * @param string $date_format Date Fromat.
  *
  * @since   1.6.7
  * @return  array
@@ -2243,20 +2289,19 @@ function wp_travel_date_format_php_to_js( $date_format ) {
 	if ( ! $date_format ) {
 		return;
 	}
-
-	$js_date_format = str_replace( 'Y', 'yyyy', $date_format );
-	$js_date_format = str_replace( 'd', 'dd', $js_date_format );
-	$js_date_format = str_replace( 'j', 'd', $js_date_format );
-	$js_date_format = str_replace( 'm', 'mm', $js_date_format );
-	$js_date_format = str_replace( 'F', 'MM', $js_date_format );
-	// $js_date_format = str_replace( 'F', 'mm', $js_date_format );
+	// $js_date_format = str_replace( 'Y', 'yyyy', $date_format );
+	// $js_date_format = str_replace( 'd', 'dd', $js_date_format );
+	// $js_date_format = str_replace( 'j', 'd', $js_date_format );
+	// $js_date_format = str_replace( 'm', 'mm', $js_date_format );
+	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
+	$js_date_format = 'yyyy-mm-dd';
 	return apply_filters( 'wp_travel_js_date_format', $js_date_format );
 }
 
 /**
  * Convert Date Format String form PHP to JS for moment.
  *
- * @param   $date_foramt    string  Date Fromat.
+ * @param string $date_format Date Fromat.
  *
  * @since   1.7.6
  * @return  array
@@ -2272,6 +2317,27 @@ function wp_travel_moment_date_format( $date_format ) {
 	$js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
 	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
+}
+
+/**
+ * Check current date formant is Y-m-d or not.
+ *
+ * @param string $date Date.
+ *
+ * @since   1.8.3
+ * @return  array
+ */
+function wp_travel_is_ymd_date( $date ) {
+	if ( ! $date ) {
+		return;
+	}
+
+	if ( preg_match( '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $date ) ) {
+		return true;
+	} else {
+		return false;
+	}
+
 }
 
 /**
@@ -2337,7 +2403,7 @@ function wp_travel_booking_data( $booking_id ) {
 		$total     = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
 	}
 
-	$due_amount        = $total - $total_paid_amount;
+	$due_amount = $total - $total_paid_amount;
 	if ( $due_amount < 0 ) {
 		$due_amount = 0;
 	}

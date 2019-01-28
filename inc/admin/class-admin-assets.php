@@ -27,7 +27,7 @@ class WP_Travel_Admin_Assets {
 
 		$screen = get_current_screen();
 		// Tab for settings page.
-		$setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings' );
+		$setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons' );
 		if ( in_array( $screen->id, $setting_allowed ) ) {
 			wp_enqueue_style( 'font-awesome-css' );
 			wp_enqueue_style( 'select2-style' );

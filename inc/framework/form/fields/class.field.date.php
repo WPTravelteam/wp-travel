@@ -10,37 +10,37 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	function render( $display = true ) {
 		$output = parent::render( false );
 
-		$lang_code = explode( '-', get_bloginfo('language') );
-		$locale = $lang_code[0];
-
+		$lang_code = explode( '-', get_bloginfo( 'language' ) );
+		$locale    = $lang_code[0];
 
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
-		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
+		$default_path         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
 
 		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
-		$default_url = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
+		$default_url         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
 
 		$filename = 'datepicker.' . $locale . '.js';
 
 		if (
-			! file_exists(  trailingslashit( $wp_content_file_path ) . $filename )
+			! file_exists( trailingslashit( $wp_content_file_path ) . $filename )
 			&& file_exists( trailingslashit( $default_path ) . $filename )
 		) {
 			$locale = 'en';
 		}
 
 		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? true : false;
-		$output .= '<script>';
-		$output .= 'jQuery(document).ready( function($){ ';
-		$output .= 		'$("#' . $this->field['id'] . '").wpt_datepicker({
+		$output   .= '<script>';
+		$output   .= 'jQuery(document).ready( function($){ ';
+		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
+		$output   .= "dateFormat: 'yyyy-mm-dd',";
 		if ( $max_today ) {
-			$output .= 	'maxDate: new Date()';
+			$output .= 'maxDate: new Date()';
 		} else {
-			$output .= 	'minDate: new Date()';
+			$output .= 'minDate: new Date()';
 		}
 
-		$output .= 		'});';
+		$output .= '});';
 		$output .= '} )';
 		$output .= '</script>';
 
@@ -64,39 +64,38 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 				$attributes .= sprintf( '%s="%s"', $attribute, $attribute_val );
 			}
 		}
-		$output = sprintf( '<input type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
+		$output = sprintf( '<input data-date-format="yyyy-mm-dd" type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
 
-		$lang_code = explode( '-', get_bloginfo('language') );
-		$locale = $lang_code[0];
-
+		$lang_code = explode( '-', get_bloginfo( 'language' ) );
+		$locale    = $lang_code[0];
 
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
-		$default_path = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
+		$default_path         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
 
 		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
-		$default_url = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
+		$default_url         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) );
 
 		$filename = 'datepicker.' . $locale . '.js';
 
 		if (
-			! file_exists(  trailingslashit( $wp_content_file_path ) . $filename )
+			! file_exists( trailingslashit( $wp_content_file_path ) . $filename )
 			&& file_exists( trailingslashit( $default_path ) . $filename )
 		) {
 			$locale = 'en';
 		}
 
 		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? true : false;
-		$output .= '<script>';
-		$output .= 'jQuery(document).ready( function($){ ';
-		$output .= 		'$("#' . $this->field['id'] . '").wpt_datepicker({
+		$output   .= '<script>';
+		$output   .= 'jQuery(document).ready( function($){ ';
+		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
 		if ( $max_today ) {
-			$output .= 	'maxDate: new Date()';
+			$output .= 'maxDate: new Date()';
 		} else {
-			$output .= 	'minDate: new Date()';
+			$output .= 'minDate: new Date()';
 		}
 
-		$output .= 		'});';
+		$output .= '});';
 		$output .= '} )';
 		$output .= '</script>';
 
