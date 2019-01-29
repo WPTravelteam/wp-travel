@@ -507,49 +507,48 @@ function wp_travel_single_location( $post_id ) {
 			</div>
 		</li>
 	<?php endif; ?>
-		<li>
-			<?php if ( 'yes' === $fixed_departure ) : ?>
-				<?php if ( $start_date || $end_date ) :  ?>
-					<div class="travel-info">
-						<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
-					</div>
-					<div class="travel-info">
-						<span class="value">
-							<?php
-								if ( $start_date || $end_date ) :
-									$date_format = get_option( 'date_format' );
-									if ( ! $date_format ) :
-										$date_format = 'jS M, Y';
-									endif;
-									if ( '' !== $end_date && $show_end_date ) {
-										printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
-									} else {
-										printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
-									}
-
-								else :
-									esc_html_e( 'N/A', 'wp-travel' );
+	<?php if ( 'yes' === $fixed_departure ) : ?>
+		<?php if ( $start_date || $end_date ) :  ?>
+			<li>
+				<div class="travel-info">
+					<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
+				</div>
+				<div class="travel-info">
+					<span class="value">
+						<?php
+							if ( $start_date || $end_date ) :
+								$date_format = get_option( 'date_format' );
+								if ( ! $date_format ) :
+									$date_format = 'jS M, Y';
 								endif;
-							?>
-						</span>
-					</div>
-				<?php endif; ?>
-			<?php else : ?>
-				<?php if ( $trip_duration || $trip_duration_night ) : ?>
-					<div class="travel-info">
-						<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
-					</div>
-					<div class="travel-info">
-						<span class="value">
-							<?php printf( __( '%s Day(s) %s Night(s)', 'wp-travel' ), $trip_duration, $trip_duration_night ); ?>
-						</span>
-					</div>
-				<?php endif; ?>
+								if ( '' !== $end_date && $show_end_date ) {
+									printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
+								} else {
+									printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
+								}
 
-			<?php endif; ?>
-		</li>
-	<?php
-
+							else :
+								esc_html_e( 'N/A', 'wp-travel' );
+							endif;
+						?>
+					</span>
+				</div>
+			</li>
+		<?php endif; ?>
+	<?php else : ?>
+		<?php if ( $trip_duration || $trip_duration_night ) : ?>
+			<li>
+				<div class="travel-info">
+					<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
+				</div>
+				<div class="travel-info">
+					<span class="value">
+						<?php printf( __( '%s Day(s) %s Night(s)', 'wp-travel' ), $trip_duration, $trip_duration_night ); ?>
+					</span>
+				</div>
+			</li>
+		<?php endif; ?>
+	<?php endif;
 }
 
 /**
