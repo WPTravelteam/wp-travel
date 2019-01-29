@@ -353,12 +353,11 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$date_format            = get_option('date_format');
 
 	$booking_arrival_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
-	$booking_arrival_date 	= ! empty( $booking_arrival_date ) ? date_i18n( $date_format, strtotime( stripslashes( $booking_arrival_date ) ) ) : '';
-
 	$booking_departure_date = get_post_meta( $booking_id, 'wp_travel_departure_date', true );
 
-	$booking_departure_date = ! empty( $booking_departure_date ) ? date_i18n( $date_format, strtotime( stripslashes( $booking_departure_date ) ) ) : '';
-	
+	$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
+	$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
+
 	$customer_name 		  	= $first_name . ' ' . $last_name;
 	$customer_country 		= $country;
 	$customer_address 		= get_post_meta( $booking_id, 'wp_travel_address', true );

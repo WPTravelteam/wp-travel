@@ -966,8 +966,8 @@ function wp_travel_book_now() {
 	$booking_no_of_pax      = $pax;
 	$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 	$date_format            = get_option( 'date_format' );
-	$booking_arrival_date   = $booking_arrival_date;
-	$booking_departure_date = $booking_departure_date;
+	$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
+	$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
 
 	$customer_name    = $first_name . ' ' . $last_name;
 	$customer_country = $country;
