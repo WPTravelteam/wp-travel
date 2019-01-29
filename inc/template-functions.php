@@ -1910,8 +1910,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 							$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax']          : '';
 							$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax']          : '';
 
-							$available_dates = wp_travel_get_pricing_variation_start_dates( $post->ID, $price_key );
-
+							$available_dates = wp_travel_get_trip_available_dates( $trip_id, $price_key );
 							$pricing_sold_out = false;
 
 							if( class_exists( 'WP_Travel_Util_Inventory' ) ) {
@@ -2023,15 +2022,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_pricing_options_data 
 									do_action('wp_travel_trip_extras', $price_key );
 								?>
 								<div class="wp-travel-calender-column no-padding ">
-								<?php if ( $available_dates && 'yes' === $enable_multiple_fixed_departue ) : ?>
+									
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo esc_attr( wp_json_encode( $available_dates ) ); ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
-								<?php
-								else : ?>
-									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
-								<?php endif;
-								?>
+									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo ( $available_dates ) ? esc_attr( wp_json_encode( $available_dates ) ) : ''; ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+								
 								</div>
 								<div class="wp-travel-calender-aside">
 									<?php

@@ -60,7 +60,6 @@ wp_travel_print_notices();
 			</thead>
 			<tbody>
 				<?php
-				// dd( $trips );
 				foreach ( $trips as $cart_id => $trip ) :
 					$pricing_label = false;
 					$trip_id       = $trip['trip_id'];

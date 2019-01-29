@@ -2179,7 +2179,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 		$strtotime = $date;
 
 		if ( 'Y-m-d' !== $date_format ) {
-			
+
 			$date = str_replace( '/', '-', $date );
 			$date = str_replace( '.', '-', $date );
 
@@ -2194,7 +2194,7 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 			}
 		}
 		return $strtotime;
-		
+
 		$strtotime = strtotime( stripslashes( $strtotime ) );
 
 		if ( $localize ) {
@@ -2208,6 +2208,37 @@ if ( ! function_exists( 'wp_travel_format_date' ) ) :
 	}
 
 endif;
+
+if ( ! function_exists( 'wp_travel_get_trip_available_dates' ) ) {
+
+	/**
+	 * Get Available Dates for specific trip.
+	 *
+	 * @param Number $trip_id Current trip id.
+	 * @since 1.8.3
+	 */
+	function wp_travel_get_trip_available_dates( $trip_id, $price_key = '' ) {
+
+		if ( ! $trip_id ) {
+			return;
+		}
+
+		$multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+
+		$available_dates = array();
+
+		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+		if ( 'yes' === $fixed_departure ) {
+			if ( 'yes' === $multiple_fixed_departue ) {
+				$available_dates = wp_travel_get_pricing_variation_start_dates( $trip_id, $price_key );
+			} else {
+				$date            = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+				$available_dates = array( $date );
+			}
+		}
+		return $available_dates;
+	}
+}
 
 if ( ! function_exists( 'wp_travel_get_total_booked_pax' ) ) :
 	/**

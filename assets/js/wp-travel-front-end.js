@@ -202,6 +202,7 @@ jQuery(document).ready(function($) {
         })
     });
 
+    // Multiple Pricing > Fixed Departure No, Multiple Date Off.
     jQuery('.wp-travel-pricing-dates').each(function() {
         var availabledate = jQuery(this).data('available-dates');
         if (availabledate) {
