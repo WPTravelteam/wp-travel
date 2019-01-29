@@ -21,9 +21,13 @@ if ( is_string( $wp_travel_trip_facts ) ) {
 function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 	?>
 	<select name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="">
-		<?php foreach($setting['options'] as $option):?>
-			<option <?php if($option == $fact['value']) echo 'selected'; ?>  value="<?php echo $option; ?>"><?php echo $option; ?></option>
-		<?php endforeach; ?>
+		<?php 
+		if ( isset( $setting['options'] ) && is_array( $setting['options'] ) && count( $setting['options'] ) > 0 ) {
+			foreach($setting['options'] as $option):?>
+				<option <?php if($option == $fact['value']) echo 'selected'; ?>  value="<?php echo $option; ?>"><?php echo $option; ?></option>
+			<?php endforeach;
+		}
+		?>
 	</select>
 	<?php
 }
