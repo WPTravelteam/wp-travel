@@ -249,7 +249,7 @@ class WP_Travel_Admin_Settings {
 							'echo'                  => 1,
 							'name'                  => 'cart_page_id',
 							'id'                    => 'cart-page-id', // string
-							'class'                 => null, // string
+							'class'                 => 'wp-travel-select2', // string
 							'show_option_none'      => null, // string
 							'show_option_no_change' => null, // string
 							'option_none_value'     => null, // string
@@ -272,7 +272,7 @@ class WP_Travel_Admin_Settings {
 							'echo'                  => 1,
 							'name'                  => 'checkout_page_id',
 							'id'                    => 'checkout-page-id', // string
-							'class'                 => null, // string
+							'class'                 => 'wp-travel-select2', // string
 							'show_option_none'      => null, // string
 							'show_option_no_change' => null, // string
 							'option_none_value'     => null, // string
@@ -294,7 +294,7 @@ class WP_Travel_Admin_Settings {
 							'echo'                  => 1,
 							'name'                  => 'dashboard_page_id',
 							'id'                    => 'dashboard-page-id', // string
-							'class'                 => null, // string
+							'class'                 => 'wp-travel-select2', // string
 							'show_option_none'      => null, // string
 							'show_option_no_change' => null, // string
 							'option_none_value'     => null, // string

@@ -11,10 +11,6 @@ $payment_fields   = $checkout_fields['payment_fields'];
 $settings         = wp_travel_get_settings();
 
 $enable_multiple_travellers = isset( $settings['enable_multiple_travellers'] ) ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
-$repeator_count             = isset( $trip['pax'] ) ? $trip['pax'] : 1;
-if ( 'no' === $enable_multiple_travellers ) {
-	$repeator_count = 1;
-}
 
 global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();
@@ -26,9 +22,13 @@ $form_fw->init_validation( 'wp-travel-booking' );
 	<!-- Travelers info -->
 	<?php
 	foreach ( $trips as $cart_id => $trip ) :
-		$trip_id      = $trip['trip_id'];
-		$price_key    = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
-		$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+		$trip_id        = $trip['trip_id'];
+		$price_key      = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
+		$pricing_name   = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
+		if ( 'no' === $enable_multiple_travellers ) {
+			$repeator_count = 1;
+		}
 		?>
 		<div class="wp-travel-trip-details">
 			<?php if ( 'yes' === $enable_multiple_travellers ) : ?>
