@@ -250,11 +250,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/license/edd-sl-plugin-updater.php', WP_TRAVEL_ABSPATH );
 			}
 
-			$module_file = sprintf( '%s/inc/class-modules.php', WP_TRAVEL_ABSPATH );
-			if ( file_exists( $module_file ) ) {
-				include sprintf( '%s/inc/class-modules.php', WP_TRAVEL_ABSPATH );
-			}
-
 		}
 
 		/**
