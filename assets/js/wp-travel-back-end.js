@@ -465,7 +465,7 @@
         return false;
     });
     var textareaID;
-    $('#tab-accordion .wp-travel-sorting-tabs,#tab-accordion-itineraries #accordion-itinerary-data').sortable({
+    $('.tab-accordion .wp-travel-sorting-tabs, #tab-accordion .wp-travel-sorting-tabs, #tab-accordion-itineraries #accordion-itinerary-data').sortable({
         handle: '.wp-travel-sorting-handle',
         // start: function(event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
         //     textareaID = $(ui.item).find('.wp-editor-container textarea').attr('id');
