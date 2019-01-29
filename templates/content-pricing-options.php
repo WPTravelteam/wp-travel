@@ -79,13 +79,13 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 
 		$status_msg = get_post_meta( $trip_id, 'wp_travel_inventory_status_message_format', true );
 
-		$inventory_enabled_for_option = $inventory->is_inventory_enabled( $trip_id );
+		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
 
 		if ( ! $status_msg ) {
 			$status_msg = __('Pax Available: {available_pax} / {pax_limit}', 'wp-travel');
 		}
 
-		if ( ! $inventory_enabled_for_option || 0 === $pax_limit ) {
+		if ( ! $inventory_enabled || 0 === $pax_limit ) {
 
 			$status_msg = __( 'N/A', 'wp-travel' );
 
@@ -97,8 +97,11 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 			'{pax_limit}'     => $pax_limit,
 
 		);
+		// echo $pax_limit . '-' . $available_pax . ' test' ;
+		if ( $inventory_enabled ) {
+			$general_status_msg = str_replace( array_keys( $general_status_tags ), $general_status_tags, $status_msg );
+		}
 
-		$general_status_msg = str_replace( array_keys( $general_status_tags ), $general_status_tags, $status_msg );
 
 		$general_sold_out = $available_pax === 0 ? true : false;
 
@@ -267,7 +270,7 @@ if ( ( $enable_checkout  ) || $force_checkout ) :
 							</div>
 						<?php endif; ?>
 						<div class="action">
-							<?php if ( $inventory_enabled_for_option && $general_sold_out ) : ?>
+							<?php if ( $inventory_enabled && $general_sold_out ) : ?>
 
 								<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 
