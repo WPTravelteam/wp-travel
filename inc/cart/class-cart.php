@@ -164,9 +164,9 @@ class WP_Travel_Cart {
 	 */
 	public function add( $trip_id, $trip_price = 0, $pax, $price_key = '', $attrs = array() ) {
 
-		$trip_start_date = isset( $attrs['trip_start_date'] ) ? $attrs['trip_start_date'] : '';
+		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 
-		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $trip_start_date );
+		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
