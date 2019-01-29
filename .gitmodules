@@ -1,3 +1,0 @@
-[submodule "modules/wp-travel-field-editor"]
-	path = modules/wp-travel-field-editor
-	url = git@gitlab.com:ws-plugins/wp-travel-field-editor-core.git
