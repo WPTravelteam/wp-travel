@@ -120,6 +120,7 @@ if ( 'multiple-price' === $pricing_option_type && 'yes' === $fixed_departure ) {
 	}
 } else {
 	$enable_multiple_date_option_class_array['hidden'] = '';
+	$multiple_date_option_class_array['hidden'] = '';
 }
 $enable_multiple_date_array_key    = array_keys( $enable_multiple_date_option_class_array );
 $enable_multiple_date_option_class = implode( ' ', $enable_multiple_date_array_key );
