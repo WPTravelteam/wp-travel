@@ -4,6 +4,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	protected $field_type = 'text';
 	function init( $field ) {
 		$this->field = $field;
+		$this->field['attributes']['autocomplete'] = 'off';
 		return $this;
 	}
 
@@ -41,7 +42,12 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 		}
 
 		$output .= '});';
-		$output .= '} )';
+		$output .= '} );';
+
+		$output .= 'window.ParsleyValidator.addValidator("dateformat", function (value, requirement) {';
+    $output .= 'return moment( value, requirement,true).isValid(); ';
+    $output .= '       ';
+    $output .= '}, 32)';
 		$output .= '</script>';
 
 		if ( ! $display ) {
