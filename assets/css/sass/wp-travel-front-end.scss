@@ -4681,20 +4681,11 @@ ul.wp-travel-error {
         }
     }
     .my-order-status {
-        &.my-order-status-paid,
-        &.my-order-status-pending {
-            display: inline-block;
-            padding: 2px 10px 3px;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 13px;
-        }
-        &.my-order-status-paid {
-            background-color: green;
-        }
-        &.my-order-status-pending {
-            background-color: #DF8040;
-        }
+        display: inline-block;
+        padding: 2px 10px 3px;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 13px;
     }
     label[for*="wp-travel-amount-info"],
     label[for*="wp-travel-payment-gateway"] {

@@ -36,8 +36,9 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	// Travelers info.
 	$fname = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
 	$lname = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
-
+	$status_list = wp_travel_get_payment_status();
 	if ( is_array( $details ) && count( $details ) > 0 ) {
+		$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] )  ?  $status_list[ $details['payment_status'] ]['color'] : '';
 		?>
 		<div class="my-order my-order-details">
 			<div class="view-order">
@@ -47,29 +48,13 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 						<div class="table-wrp">
 							<!-- Started Here -->
 							<div class="my-order-single-content-wrap">
-								<div class="my-order-single-sidebar">
-									<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
-									<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>"><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
-
-									<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
-
-									<!-- <h3 class="my-order-single-sub-title">Payment Gateway</h3>
-									<form action="" class="my-order-payment-gateway">
-										<div class="my-order-single-field">
-											<input type="radio" name="my-order-payment-gateway" value="Standard Paypal" id="my-order-standard-paypal">
-											<label for="my-order-standard-paypal">Standard Paypal</label>
-										</div>
-										<div class="my-order-single-field">
-											<input type="radio" name="my-order-payment-gateway" value="Khalti" id="my-order-khalti">
-											<label for="my-order-khalti">Khalti</label>
-										</div>
-										<div class="my-order-single-field">
-											<input type="radio" name="my-order-payment-gateway" value="Stripe Checkout" id="my-order-stripe-checkout">
-											<label for="my-order-stripe-checkout">Stripe Checkout</label>
-										</div>
-									</form>
-									<a class="my-order-single-payment-button my-order-single-button" href="#">Make an Online Payment</a> -->
-								</div>
+								<?php if ( wp_travel_is_payment_enabled() ) : ?>
+									<div class="my-order-single-sidebar">
+										<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
+										<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
+										<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+									</div>
+								<?php endif; ?>
 								<div class="my-order-single-content">
 									<div class="row">
 										<div class="col-md-6">
@@ -179,8 +164,39 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 															</span>
 														</div>
 													</div>
+													<?php 
+													if ( isset( $order_detail['trip_extras'] ) && isset( $order_detail['trip_extras']['id'] ) && count( $order_detail['trip_extras']['id'] ) > 0  ) :
+													$extras = $order_detail['trip_extras'];
+													
+													?>
+													
+														<div class="my-order-price-breakdown-additional-service">
+															<h3 class="my-order-price-breakdown-additional-service-title">Additional Services</h3>
+															<?php foreach ( $order_detail['trip_extras']['id'] as $k => $extra_id ) :
+																
+																$trip_extras_data = get_post_meta( $extra_id, 'wp_travel_tour_extras_metas', true );
+
+																$price = isset( $trip_extras_data['extras_item_price'] ) && ! empty( $trip_extras_data['extras_item_price'] ) ? $trip_extras_data['extras_item_price'] : false;
+																$sale_price = isset( $trip_extras_data['extras_item_sale_price'] ) && ! empty( $trip_extras_data['extras_item_sale_price'] ) ? $trip_extras_data['extras_item_sale_price'] : false;
+
+																if( $sale_price )
+																	$price = $sale_price;
+
+																$qty = isset( $extras['qty'][$k] ) ? $extras['qty'][$k] : 1;
+
+																$price = wp_travel_get_formated_price( $price );
+																$total = wp_travel_get_formated_price( $price * $qty );
+																?>
+																<div class="my-order-price-breakdown-additional-service-item clearfix">
+																	<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo sprintf( '%s x %s%s', $extras['qty'][$k], wp_travel_get_currency_symbol(), $price ); ?> )</span>
+																	<span class="my-order-tail my-order-right"><?php echo esc_html(  wp_travel_get_currency_symbol() . $total ); ?></span>
+																</div>
+															<?php endforeach; ?>
+															
+														</div>
 
 													<?php
+													endif;
 												}
 											} else { // single Trips.
 												?>
@@ -227,30 +243,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									</div>
 									<?php endif; ?>
 								</div>
-							</div>
-
-							<!-- <table>
-								<tr>
-									<th><?php esc_html_e( 'Title', 'wp-travel' ); ?></th>
-									<th><?php esc_html_e( 'Detail', 'wp-travel' ); ?></th>
-								</tr>
-								<?php
-								foreach ( $details as $order_title => $detail ) :
-									if ( 'mode' === $order_title ) {
-										continue;
-									}
-									if ( in_array( $order_title, array( 'total_price', 'paid_amount', 'due_amount' ) ) ) {
-										$detail = sprintf( '%s %0.2f', wp_travel_get_currency_symbol(), $detail );
-									} else {
-										$detail = ucfirst( $detail );
-									}
-									?>
-									<tr>
-									<td><?php echo esc_html( str_replace( '_', ' ', ucfirst( $order_title ) ) ); ?></td>
-									<td><?php echo esc_html( $detail ); ?></td>
-									</tr>
-								<?php endforeach; ?>
-							</table> -->
+							</div>							
 						</div>
 					</div>
 					<?php
@@ -294,7 +287,6 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 		</div>
 		<?php
 	}
-	// do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id );
 } else {
 	?>
 	<div class="my-order">

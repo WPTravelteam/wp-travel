@@ -2430,6 +2430,8 @@ function wp_travel_booking_data( $booking_id ) {
 	if ( isset( $order_totals['sub_total'] ) && $order_totals['sub_total'] > 0 ) {
 		$sub_total = isset( $order_totals['sub_total'] ) ? $order_totals['sub_total'] : $sub_total;
 		$discount  = isset( $order_totals['discount'] ) ? $order_totals['discount'] : $discount;
+		// Above sub total excludes discount so we need to add it here.
+		$sub_total += $discount;
 		$tax       = isset( $order_totals['tax'] ) ? $order_totals['tax'] : $tax;
 		$total     = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
 	}

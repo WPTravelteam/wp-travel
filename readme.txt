@@ -190,6 +190,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 
 
 * Fixes: System information page permission issue.
+* Fixes: Search widget date range.
 
 = 1.8.3 =
 Release Date: 29th January 2019
