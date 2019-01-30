@@ -9,7 +9,7 @@ class WP_Travel_Admin_Menu {
 	 */
 	public function add_menus() {
 		// Trips Submenu.
-		add_submenu_page( 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE, __( 'System Status', 'wp-travel' ), __( 'Status', 'wp-travel' ), 'manage_options', 'sysinfo', array( 'WP_Travel_Admin_Settings', 'get_system_info' ) );
+		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'System Status', 'wp-travel' ), __( 'Status', 'wp-travel' ), 'manage_options', 'sysinfo', array( 'WP_Travel_Admin_Settings', 'get_system_info' ) );
 
 		// WP Travel Submenu.
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Reports', 'wp-travel' ), __( 'Reports', 'wp-travel' ), 'manage_options', 'booking_chart', 'get_booking_chart' );
@@ -17,7 +17,7 @@ class WP_Travel_Admin_Menu {
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Marketplace', 'wp-travel' ), __( 'Marketplace', 'wp-travel' ), 'manage_options', 'wp-travel-marketplace', 'wp_travel_marketplace_page' );
 
 		// Remove from menu.
-		remove_submenu_page( 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE, 'sysinfo' );
+		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'sysinfo' );
 		global $submenu;
 		unset( $submenu['edit.php?post_type=itinerary-booking'][10] ); // Removes 'Add New'.
 	}
