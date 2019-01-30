@@ -1456,7 +1456,7 @@ function wp_travel_posts_filter( $query ) {
 								'key'     => 'wp_travel_end_date',
 								'value'   => $trip_end,
 								'type'    => 'DATE',
-								'compare' => '<',
+								'compare' => '<=',
 							),
 						)
 					);
