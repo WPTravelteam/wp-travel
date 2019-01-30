@@ -612,7 +612,8 @@
                 newMinDate = null;
                 newMaxDate = new Date();
                 if ('' !== dateStr) {
-                    milliseconds = moment( dateStr, wp_travel_drag_drop_uploader.moment_date_format ).format( 'MM/DD/YYYY' );
+                    // milliseconds = moment( dateStr, wp_travel_drag_drop_uploader.moment_date_format ).format( 'MM/DD/YYYY' );
+                    milliseconds = moment( dateStr, 'YYYY-MM-DD' );
                     new_date_min = new Date(milliseconds);
                     newMinDate = new Date(new_date_min.setDate(new Date(new_date_min.getDate())));
                 }

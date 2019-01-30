@@ -186,11 +186,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.8.4 =
+Release Date: 
+
+* Fixes: System information page permission issue.
+
 = 1.8.3 =
 Release Date: 29th January 2019
 
 * Fixes: Datepicker format set to Y-m-d.
 * Fixes: minor layout fixes.
+* Fixes: Trip tab sortable.
 
 = 1.8.2 =
 Release Date: 25th January 2019
