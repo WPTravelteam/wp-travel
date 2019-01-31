@@ -473,6 +473,24 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     line-height: 38px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px; }
+  .wp-travel-form-field input:disabled, .wp-travel-form-field select:disabled, .wp-travel-form-field textarea:disabled,
+  .wp-travel-form-field select:disabled,
+  .wp-travel-form-field .stat-toolbar-form .field-group input:disabled,
+  .stat-toolbar-form .field-group .wp-travel-form-field input:disabled,
+  .stat-toolbar-form .field-group .wp-travel-form-field textarea:disabled,
+  .wp-travel-form-field .stat-toolbar-form .field-group textarea:disabled,
+  .wp-travel-form-field textarea:disabled,
+  .form-horizontal input:disabled,
+  .form-horizontal select:disabled,
+  .form-horizontal textarea:disabled,
+  .form-horizontal select:disabled,
+  .form-horizontal .stat-toolbar-form .field-group input:disabled,
+  .stat-toolbar-form .field-group .form-horizontal input:disabled,
+  .stat-toolbar-form .field-group .form-horizontal textarea:disabled,
+  .form-horizontal .stat-toolbar-form .field-group textarea:disabled,
+  .form-horizontal textarea:disabled {
+    background: #eceaea;
+    color: #b5b2b2; }
 
 .wp-travel-form-field-wrapper {
   width: 100%;
@@ -1698,7 +1716,7 @@ span.wp-travel-message {
 /* Error CSS */
 .parsley-errors-list {
   margin: 0; }
-  .parsley-errors-list .parsley-required {
+  .parsley-errors-list li {
     color: #f00;
     font-size: 12px; }
 
