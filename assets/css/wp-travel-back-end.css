@@ -1716,7 +1716,7 @@ span.wp-travel-message {
 /* Error CSS */
 .parsley-errors-list {
   margin: 0; }
-  .parsley-errors-list .parsley-required {
+  .parsley-errors-list li {
     color: #f00;
     font-size: 12px; }
 
