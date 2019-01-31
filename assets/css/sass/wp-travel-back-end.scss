@@ -599,6 +599,14 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
     }
+    input,
+    select,
+    textarea {
+      &:disabled{
+        background: #eceaea;
+        color: #b5b2b2;
+      }
+    }
 }
 
 .wp-travel-form-field-wrapper {
@@ -2279,7 +2287,7 @@ span.wp-travel-message {
                 padding-bottom: 15px;
                 margin-bottom: 20px;
             }
-            
+
             .my-order-single-content {
                 overflow: hidden;
                 .my-order-single-col-last {
