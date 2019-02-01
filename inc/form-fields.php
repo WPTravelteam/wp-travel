@@ -327,6 +327,32 @@ function wp_travel_get_checkout_form_fields() {
 
 	// Standard paypal Merge.
 	$payment_fields = array();
+	$settings = wp_travel_get_settings();
+
+	// GDPR Support
+	$gdpr_msg           = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
+	$privacy_policy_url = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : false;
+
+
+	if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
+
+		// GDPR Compatibility for enquiry.
+		$payment_fields['wp_travel_checkout_gdpr'] = array(
+			'type' => 'checkbox',
+			'label' => __('Privacy Policy', 'wp-travel'),
+			'options' => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
+			'name' => 'wp_travel_checkout_gdpr_msg',
+			'id' => 'wp-travel-enquiry-gdpr-msg',
+			'validations' => array(
+				'required' => true,
+			),
+			'option_attributes' => array(
+				'required' => true,
+			),
+			'priority' => 120,
+		);
+	}
+
 	if ( wp_travel_is_payment_enabled() ) {
 		$payment_fields['wp_travel_billing_address_heading'] = array(
   			'type' => 'heading',
@@ -358,32 +384,8 @@ function wp_travel_get_checkout_form_fields() {
 
 		$total_amount = $cart_amounts['total'];
 		$total_partial_amount = $cart_amounts['total_partial'];
-
-		$settings = wp_travel_get_settings();
 		$partial_payment = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : '';
 
-		// GDPR Support
-		$gdpr_msg           = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ): __( 'By contacting us, you agree to our ', 'wp-travel' );
-		$privacy_policy_url = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : false;
-
-		if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
-
-			// GDPR Compatibility for enquiry.
-			$payment_fields['wp_travel_checkout_gdpr'] = array(
-				'type' => 'checkbox',
-				'label' => __('Privacy Policy', 'wp-travel'),
-				'options' => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
-				'name' => 'wp_travel_checkout_gdpr_msg',
-				'id' => 'wp-travel-enquiry-gdpr-msg',
-				'validations' => array(
-					'required' => true,
-				),
-				'option_attributes' => array(
-					'required' => true,
-				),
-				'priority' => 120,
-			);
-		}
 
 		$payment_fields['is_partial_payment'] = array(
 			'type' => 'hidden',
