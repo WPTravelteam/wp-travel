@@ -135,7 +135,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 			'option_attributes' => array(
 				'required' => true,
 			),
-			'priority'          => 100,
+			'priority'          => 500,
 		);
 
 	}
