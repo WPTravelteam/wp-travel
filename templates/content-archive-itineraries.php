@@ -39,13 +39,13 @@ if ( post_password_required() ) {
 				</a>
 				<?php if ( $enable_sale ) : ?>
 				<div class="wp-travel-offer">
-					<span><?php esc_html_e( 'Offer', 'wp-travel' ) ?></span>
+					<span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
 				</div>
 				<?php endif; ?>
 			</div>
 			<div class="wp-travel-entry-content-wrapper">
 				<div class="description-left">
-					<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ) ?>
+					<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ); ?>
 					<header class="entry-header">
 						<h2 class="entry-title">
 							<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
@@ -53,7 +53,7 @@ if ( post_password_required() ) {
 							</a>
 						</h2>
 					</header><!-- .entry-header -->
-					<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ) ?>
+					<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ); ?>
 					<div class="entry-content">
 						<?php the_excerpt(); ?>
 
@@ -61,7 +61,7 @@ if ( post_password_required() ) {
 					<?php if ( wp_travel_tab_show_in_menu( 'reviews' ) ) : ?>
 						<div class="wp-travel-average-review">
 							<?php wp_travel_trip_rating( get_the_ID() ); ?>
-							<?php $count = (int) wp_travel_get_review_count() ?>
+							<?php $count = (int) wp_travel_get_review_count(); ?>
 						</div>
 						<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
 					<?php endif; ?>
