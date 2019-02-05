@@ -64,8 +64,8 @@ wp_travel_print_notices();
 					$pricing_label = false;
 					$trip_id       = $trip['trip_id'];
 					// $price			= $trip['price']; // Price of single qty.
-					$trip_price      = $trip['trip_price'];
-					$trip_duration   = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
+					$trip_price    = $trip['trip_price'];
+					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
 
 					// Need to remove $trip_start_date in future version. [ use arrival_date and departure_date instead ].
 					// $trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
@@ -75,22 +75,12 @@ wp_travel_print_notices();
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$enable_partial     = $trip['enable_partial'];
 					$trip_price_partial = $trip['trip_price_partial'];
+					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
+					$max_available      = isset( $trip['max_available'] ) ? $trip['max_available'] : '';
+					$trip_extras        = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
 
-					$pax_label     = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
-					$max_available = isset( $trip['max_available'] ) ? $trip['max_available'] : '';
-
-					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
-
-					$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
-					$pax_limit    = '';
-					/**
-					 * Customization Starts.
-					 */
-					if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-						$inventory = new WP_Travel_Util_Inventory();
-						// $available_pax = $inventory->get_available_pax( $trip_id, $price_key );
-						$pax_limit = $inventory->get_pricing_option_pax_limit( $trip_id, $price_key );
-					}
+					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+					$pax_limit     = apply_filters( 'wp_travel_inventory_pax_limit', '', $trip_id, $price_key );
 					$data_max_pax  = apply_filters( 'wp_travel_data_max_pax', $max_available, $pax_limit );
 					$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
 
@@ -100,14 +90,10 @@ wp_travel_print_notices();
 					if ( $max_available ) {
 						$max_attr = 'max="' . $max_available . '" data-max="' . $data_max_pax . '"';
 					}
-					/**
-					 * Customization Ends.
-					 */
+
 					$min_available = isset( $trip['min_available'] ) ? $trip['min_available'] : '1';
 					$min_attr      = 'min="1"';
-					// if ( $max_available ) {
-					// $max_attr = 'max="' . $max_available . '"';
-					// }
+
 					if ( $min_available ) {
 						$min_attr = 'min="' . $min_available . '"';
 					}

@@ -2558,3 +2558,29 @@ function wp_travel_sort_form_fields( $fields ) {
 	array_multisort( $priority, SORT_ASC, $fields );
 	return $fields;
 }
+
+/**
+ * Get Inquiry Link.
+ */
+function wp_travel_get_inquiry_link() {
+
+	ob_start();
+
+	?>
+
+		<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
+			<span class="wp-travel-booking-enquiry">
+				<span class="dashicons dashicons-editor-help"></span>
+				<span>
+					<?php esc_html_e( 'Trip Enquiry', 'wp-travel-utilities' ); ?>
+				</span>
+			</span>
+		</a>
+
+	<?php
+
+	$data = ob_get_clean();
+
+	return $data;
+
+}
