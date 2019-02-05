@@ -2044,7 +2044,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						$min_pax            = $inventory_data['min_pax'];
 						$max_pax            = $inventory_data['max_pax'];
 
-						$pricing_max_pax = $available_pax;
+						if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+							$inventory = new WP_Travel_Util_Inventory();
+							if ( $inventory->is_inventory_enabled( $trip_id, $price_key ) ) {
+								$pricing_max_pax = $available_pax;
+							}
+						}
 						$max_attr        = 'max=' . $pricing_max_pax;
 						?>
 						<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
