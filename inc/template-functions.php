@@ -1517,47 +1517,35 @@ function wp_travel_posts_filter( $query ) {
 
 				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
 
+				$current_meta = $query->get( 'meta_query' );
+				$current_meta = ( $current_meta ) ? $current_meta : array();
 				if ( $trip_start || $trip_end ) {
 
 					$date_format = get_option( 'date_format' );
 					// Convert to timestamp.
-					if ( $trip_start ) {
-						$date = DateTime::createFromFormat( $date_format, $trip_start );
-						if ( $date ) {
-							$trip_start = $date->format( 'Y-m-d' );
-						}
-					} else {
+					if ( ! $trip_start ) {
 						$trip_start = date( 'Y-m-d' );
 					}
 
-					// Make date in required format.
-					if ( $trip_end ) {
-						$date2 = DateTime::createFromFormat( $date_format, $trip_end );
-						if ( $date2 ) {
-							$trip_end = $date2->format( 'Y-m-d' );
-						}
-					} else {
-						$trip_end = date( 'Y-m-d' );
-					}
-					$query->set(
-						'meta_query',
+					$custom_meta = array(
+						'relation' => 'AND',
 						array(
-							'relation' => 'AND',
-							array(
-								'key'     => 'wp_travel_start_date',
-								'value'   => $trip_start,
-								'type'    => 'DATE',
-								'compare' => '>=',
-							),
-							array(
-								'key'     => 'wp_travel_end_date',
-								'value'   => $trip_end,
-								'type'    => 'DATE',
-								'compare' => '<=',
-							),
-						)
+							'key'     => 'wp_travel_start_date',
+							'value'   => $trip_start,
+							'type'    => 'DATE',
+							'compare' => '>=',
+						),
 					);
 
+					if ( $trip_end ) {
+						$custom_meta[] = array(
+							'key'     => 'wp_travel_end_date',
+							'value'   => $trip_end,
+							'type'    => 'DATE',
+							'compare' => '<=',
+						);
+					}
+					$current_meta[] = $custom_meta;
 				}
 			}
 
@@ -1590,17 +1578,15 @@ function wp_travel_posts_filter( $query ) {
 
 					$query->set( 'meta_key', 'wp_travel_trip_price' );
 
-					$query->set(
-						'meta_query',
+					$custom_meta    = array(
 						array(
-							array(
-								'key'     => 'wp_travel_trip_price',
-								'value'   => array( $min_price, $max_price ),
-								'type'    => 'numeric',
-								'compare' => 'BETWEEN',
-							),
-						)
+							'key'     => 'wp_travel_trip_price',
+							'value'   => array( $min_price, $max_price ),
+							'type'    => 'numeric',
+							'compare' => 'BETWEEN',
+						),
 					);
+					$current_meta[] = $custom_meta;
 				}
 			}
 
@@ -1748,18 +1734,19 @@ function wp_travel_posts_filter( $query ) {
 				$fact = $_GET['fact'];
 
 				$query->set( 'meta_key', 'wp_travel_trip_facts' );
-				$query->set(
-					'meta_query',
+
+				$custom_meta    = array(
 					array(
-						array(
-							'key'     => 'wp_travel_trip_facts',
-							'value'   => $fact,
-							'compare' => 'LIKE',
-						),
-					)
+						'key'     => 'wp_travel_trip_facts',
+						'value'   => $fact,
+						'compare' => 'LIKE',
+					),
 				);
+				$current_meta[] = $custom_meta;
 
 			}
+			$query->set( 'meta_query', array( $current_meta ) );
+			// error_log( print_r(  $query->get( 'meta_query' ), true ) );
 		}
 	}
 }
@@ -2197,7 +2184,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 			'max_pax'        => 0,
 		);
 
-		$inventory_data     = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, '' );
+		$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, '' );
 
 		$pricing_status_msg = $inventory_data['status_message'];
 		$pricing_sold_out   = $inventory_data['sold_out'];
@@ -2346,7 +2333,8 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						<div class="action">
 							<?php
 							// if ( $inventory_enabled && $general_sold_out ) :
-							if ( $general_sold_out ) : ?>
+							if ( $general_sold_out ) :
+								?>
 
 								<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 
