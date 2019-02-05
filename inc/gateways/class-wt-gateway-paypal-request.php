@@ -83,7 +83,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		$itinery_id    = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id']          : 0;
 		$paypal_email  = sanitize_email( $settings['paypal_email'] );
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency']                  : '';
-		$payment_mode  = isset( $_POST['wp_travel_payment_mode'] ) ? $_POST['wp_travel_payment_mode']: 'partial';
+		$payment_mode  = isset( $_POST['wp_travel_payment_mode'] ) ? $_POST['wp_travel_payment_mode']: '';
 		$current_url   = get_permalink( $itinery_id );
 		$current_url   = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
 		$cart_amounts  = $wt_cart->get_total();
