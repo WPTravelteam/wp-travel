@@ -1510,15 +1510,15 @@ function wp_travel_posts_filter( $query ) {
 		 */
 		if ( is_wp_travel_archive_page() && ! is_admin() ) {
 
-			// // Filter By Dates.
+			$current_meta = $query->get( 'meta_query' );
+			$current_meta = ( $current_meta ) ? $current_meta : array();
+			// Filter By Dates.
 			if ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) {
 
 				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
 
 				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
 
-				$current_meta = $query->get( 'meta_query' );
-				$current_meta = ( $current_meta ) ? $current_meta : array();
 				if ( $trip_start || $trip_end ) {
 
 					$date_format = get_option( 'date_format' );
