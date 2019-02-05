@@ -39,15 +39,6 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$title      = apply_filters( 'wp_travel_search_widget_title', isset( $instance['title'] ) ? $instance['title'] : '' );
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 
-		// Filters
-		// $keyword_search = isset( $instance['keyword_search'] ) ? $instance['keyword_search'] : '';
-		// $fact = isset( $instance['fact'] ) ? $instance['fact'] : true;
-		// $trip_type_filter = isset( $instance['trip_type_filter'] ) ? $instance['trip_type_filter'] : '';
-		// $trip_location_filter = isset( $instance['trip_location_filter'] ) ? $instance['trip_location_filter'] : '';
-		// $price_orderby = isset( $instance['price_orderby'] ) ? $instance['price_orderby'] : '';
-		$price_range = isset( $instance['price_range'] ) ? $instance['price_range'] : '';
-		$trip_dates  = isset( $instance['trip_dates'] ) ? $instance['trip_dates'] : '';
-
 		$index = uniqid();
 
 		echo $before_widget;
@@ -105,7 +96,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance               = $old_instance;
-		$instance['title']      = sanitize_text_field( $new_instance['title'] );
+		$instance['title']      = isset( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 
 		// Filters
@@ -126,15 +117,9 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$title      = '';
 		$hide_title = '';
 
-		if ( ! $instance ) {
-			return;
-		}
-
 		if ( $instance ) {
-			$title = esc_attr( $instance['title'] );
-		}
-		if ( isset( $instance['hide_title'] ) ) {
-			$hide_title = esc_attr( $instance['hide_title'] );
+			$title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+			$hide_title = isset( $instance['hide_title'] ) ? esc_attr( $instance['hide_title'] ) : '';
 		}
 		?>
 		
@@ -171,4 +156,4 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 function wp_travel_register_wp_travel_search_filter_widgets() {
 	register_widget( 'WP_Travel_Widget_Filter_Search_Widget' );
 }
-add_action( 'widgets_init', 'wp_travel_register_wp_travel_search_filter_widgets' );
+add_action( 'widgets_init', 'wp_travel_register_wp_travel_search_filter_widgets', 100 );
