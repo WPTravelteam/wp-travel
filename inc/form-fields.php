@@ -445,6 +445,16 @@ function wp_travel_get_checkout_form_fields() {
 				'default'       => 'full',
 				'priority'      => 102,
 			);
+			$payment_fields['payment_amount_info'] = array(
+				'type'          => 'text_info',
+				'label'         => __( 'Payment Amount', 'wp-travel' ),
+				'name'          => 'wp_travel_payment_amount_info',
+				'id'            => 'wp-travel-payment-amount-info',
+				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
+				'before_field'  => wp_travel_get_currency_symbol(),
+				'default'       => wp_travel_get_formated_price( $total_partial_amount ),
+				'priority'      => 115,
+			);
 		}
 
 		$payment_fields['trip_price_info']     = array(
@@ -457,16 +467,7 @@ function wp_travel_get_checkout_form_fields() {
 			'default'       => wp_travel_get_formated_price( $total_amount ),
 			'priority'      => 110,
 		);
-		$payment_fields['payment_amount_info'] = array(
-			'type'          => 'text_info',
-			'label'         => __( 'Payment Amount', 'wp-travel' ),
-			'name'          => 'wp_travel_payment_amount_info',
-			'id'            => 'wp-travel-payment-amount-info',
-			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
-			'before_field'  => wp_travel_get_currency_symbol(),
-			'default'       => wp_travel_get_formated_price( $total_partial_amount ),
-			'priority'      => 115,
-		);
+
 		$payment_fields['trip_price']          = array(
 			'type'     => 'hidden',
 			'label'    => __( 'Trip Price', 'wp-travel' ),
@@ -475,22 +476,6 @@ function wp_travel_get_checkout_form_fields() {
 			'default'  => wp_travel_get_formated_price( $trip_price ),
 			'priority' => 102,
 		);
-
-		// if ( $tax_rate = wp_travel_is_taxable() ) {
-		// $payment_fields['payment_tax_percentage_info'] = array(
-		// 'type' => 'text_info',
-		// 'label' => __( 'Tax', 'wp-travel' ).$inclusive_text,
-		// 'name' => 'wp_travel_payment_tax_percentage',
-		// 'id' => 'wp-travel-payment-tax-percentage-info',
-		// 'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
-		// 'validations' => array(
-		// 'required' => true,
-		// ),
-		// 'before_field' => '',
-		// 'default' => $tax_rate .' %',
-		// 'priority' => 109,
-		// );
-		// }
 	}
 
 	$new_fields = array(
