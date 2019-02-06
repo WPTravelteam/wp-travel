@@ -38,7 +38,7 @@ class WP_Travel_FW_Field_Category_Dropdown {
 		
 		if ( ! empty( $terms ) ) {
 			if ( isset( $this->field['show_option_all'] ) ) {
-				$output .= sprintf( '<option value="0">%s</option>', $this->field['show_option_all'] );
+				$output .= sprintf( '<option value="">%s</option>', $this->field['show_option_all'] );
 			}
 			foreach ( $terms as $term ) {
 				// Option Attributes.
@@ -56,7 +56,7 @@ class WP_Travel_FW_Field_Category_Dropdown {
 					}
 					
 				}
-				$key = $term->term_id;
+				$key = $term->slug;
 				$value = $term->name;
 				$selected = ( $key == $this->field['default'] ) ? 'selected' : '';
 				$output .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );

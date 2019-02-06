@@ -1590,146 +1590,6 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 
-			// Filter by location,trip type and Keywords.
-			if ( isset( $_GET['type'] ) || isset( $_GET['location'] ) || isset( $_GET['keyword'] ) ) {
-
-				$type     = 0;
-				$location = 0;
-				$keyword  = '';
-				$keywords = '';
-				if ( isset( $_GET['type'] ) && '' != $_GET['type'] ) {
-					$type = $_GET['type'];
-				}
-				if ( isset( $_GET['location'] ) && '' != $_GET['location'] ) {
-					$location = $_GET['location'];
-				}
-				if ( isset( $_GET['keyword'] ) && '' != $_GET['keyword'] ) {
-					$keyword  = $_GET['keyword'];
-					$keywords = explode( ' ', $keyword );
-				}
-
-				if ( $type > 0 && $location > 0 && '' !== $keywords ) {
-
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'itinerary_types',
-								'field'    => 'id',
-								'terms'    => $type,
-							),
-							array(
-								'taxonomy' => 'travel_locations',
-								'field'    => 'id',
-								'terms'    => $location,
-							),
-							array(
-								'taxonomy' => 'travel_keywords',
-								'field'    => 'name',
-								'terms'    => $keywords,
-							),
-
-						)
-					);
-
-				} elseif ( $type && '' !== $keywords ) {
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'itinerary_types',
-								'field'    => 'id',
-								'terms'    => $type,
-							),
-							array(
-								'taxonomy' => 'travel_keywords',
-								'field'    => 'name',
-								'terms'    => $keywords,
-							),
-
-						)
-					);
-
-				} elseif ( $location > 0 && '' !== $keywords ) {
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'travel_locations',
-								'field'    => 'id',
-								'terms'    => $location,
-							),
-							array(
-								'taxonomy' => 'travel_keywords',
-								'field'    => 'name',
-								'terms'    => $keywords,
-							),
-
-						)
-					);
-
-				} elseif ( $type > 0 && $location > 0 ) {
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'itinerary_types',
-								'field'    => 'id',
-								'terms'    => $type,
-							),
-							array(
-								'taxonomy' => 'travel_locations',
-								'field'    => 'id',
-								'terms'    => $location,
-							),
-
-						)
-					);
-
-				} elseif ( $type > 0 ) {
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'itinerary_types',
-								'field'    => 'id',
-								'terms'    => $type,
-							),
-						)
-					);
-				} elseif ( $location > 0 ) {
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'travel_locations',
-								'field'    => 'id',
-								'terms'    => $location,
-							),
-						)
-					);
-				} elseif ( '' !== $keywords ) {
-
-					$query->set(
-						'tax_query',
-						array(
-							'relation' => 'AND',
-							array(
-								'taxonomy' => 'travel_keywords',
-								'field'    => 'name',
-								'terms'    => $keywords,
-							),
-						)
-					);
-
-				}
-			}
 			if ( isset( $_GET['fact'] ) && '' != $_GET['fact'] ) {
 				$fact = $_GET['fact'];
 
@@ -1743,10 +1603,26 @@ function wp_travel_posts_filter( $query ) {
 					),
 				);
 				$current_meta[] = $custom_meta;
-
 			}
 			$query->set( 'meta_query', array( $current_meta ) );
-			// error_log( print_r(  $query->get( 'meta_query' ), true ) );
+
+			// Filter by Keywords.
+			$current_tax = $query->get( 'tax_query' );
+			$current_tax = ( $current_tax ) ? $current_tax : array();
+			if ( isset( $_GET['keyword'] ) && '' != $_GET['keyword'] ) {
+
+				$keyword  = $_GET['keyword'];
+				$keywords = explode( ' ', $keyword );
+
+				$current_tax[] = array(
+					array(
+						'taxonomy' => 'travel_keywords',
+						'field'    => 'name',
+						'terms'    => $keywords,
+					),
+				);
+			}
+			$query->set( 'tax_query', $current_tax );
 		}
 	}
 }
@@ -2050,7 +1926,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								$pricing_max_pax = $available_pax;
 							}
 						}
-						$max_attr        = 'max=' . $pricing_max_pax;
+						$max_attr = 'max=' . $pricing_max_pax;
 						?>
 						<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
 							<div class="date-from">

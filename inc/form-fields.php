@@ -495,8 +495,8 @@ function wp_travel_search_filter_widget_form_fields() {
 
 	$keyword  = ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) ? $_GET['keyword'] : '';
 	$fact     = ( isset( $_GET['fact'] ) && '' !== $_GET['fact'] ) ? $_GET['fact'] : '';
-	$type     = ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? (int) $_GET['type'] : 0;
-	$location = ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? (int) $_GET['location'] : 0;
+	$type     = ( isset( $_GET['itinerary_types'] ) && '' !== $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
+	$location = ( isset( $_GET['travel_locations'] ) && '' !== $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
 	$price    = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
 
 	$min_price   = ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? (int) $_GET['min_price'] : 0;
@@ -516,6 +516,8 @@ function wp_travel_search_filter_widget_form_fields() {
 
 	$trip_start = ( int ) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
 	$trip_end = ( int ) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+
+	$show_end_date = wp_travel_booking_show_end_date();
 	$trip_duration = array(
 		array(
 			'name'  => 'trip_start',
@@ -524,13 +526,15 @@ function wp_travel_search_filter_widget_form_fields() {
 			'id' => 'datepicker1', // Extra id.
 
 		),
-		array(
+	);
+	if ( $show_end_date ) {
+		$trip_duration[] =  array(
 			'name'  => 'trip_end',
 			'label'  => __( 'To', 'wp-travel' ),
 			'value' => $trip_end,
 			'id' => 'datepicker2', // Extra id.
-		),
-	);
+		);
+	}
 
 	// Note. Main key of $fields array is used as customizer to show field.
 	$fields = array(
@@ -566,8 +570,8 @@ function wp_travel_search_filter_widget_form_fields() {
 			'taxonomy'        => 'itinerary_types', // only for category_dropdown
 			'show_option_all' => __( 'All', 'wp-travel' ),  // only for category_dropdown
 			'label'           => __( 'Trip Type:', 'wp-travel' ),
-			'name'            => 'type',
-			'id'              => 'type',
+			'name'            => 'itinerary_types',
+			'id'              => 'itinerary_types',
 			'class'           => 'wp_travel_search_widget_filters_input',
 
 			'validations'     => array(
@@ -582,8 +586,8 @@ function wp_travel_search_filter_widget_form_fields() {
 			'taxonomy'        => 'travel_locations', // only for category_dropdown.
 			'show_option_all' => __( 'All', 'wp-travel' ),  // only for category_dropdown.
 			'label'           => __( 'Location:', 'wp-travel' ),
-			'name'            => 'location',
-			'id'              => 'location',
+			'name'            => 'travel_locations',
+			'id'              => 'travel_locations',
 			'class'           => 'wp_travel_search_widget_filters_input',
 
 			'validations'     => array(

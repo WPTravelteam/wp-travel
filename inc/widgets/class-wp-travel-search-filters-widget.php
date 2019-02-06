@@ -46,11 +46,6 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 
-		$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
-		$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
-
-		$show_end_date = wp_travel_booking_show_end_date();
-
 		if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 			include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 		}
