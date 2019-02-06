@@ -1943,7 +1943,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 		$trip_id = $trip_data;
 	}
 
-	$js_date_format = 'yyyy-mm-dd';
+	$js_date_format = wp_travel_date_format_php_to_js();
 
 	$settings   = wp_travel_get_settings();
 	$form       = new WP_Travel_FW_Form();

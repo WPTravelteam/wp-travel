@@ -30,6 +30,7 @@ class WP_Travel_FW_Field_Date_Range {
 
 		$defaults = $this->field['default'];
 		foreach ( $defaults as $default ) {
+			$js_date_format = wp_travel_date_format_php_to_js();
 			// $input_class = isset( $default['class'] ) ? $default['class'] : '';
 			$name  = isset( $default['name'] ) ? $default['name'] : '';
 			$label = isset( $default['label'] ) ? $default['label'] : '';
@@ -38,7 +39,7 @@ class WP_Travel_FW_Field_Date_Range {
 
 			$output .= '<span class="trip-duration-calender">';
 			$output .= sprintf( '<small>%s</small>', $label );
-			$output .= sprintf( '<input data-date-format="yyyy-mm-dd" value="%s" class="%s" type="text" id="%s" name="%s">', $value, $this->field['class'], $id, $name );
+			$output .= sprintf( '<input data-date-format="%s" value="%s" class="%s" type="text" id="%s" name="%s">', $js_date_format, $value, $this->field['class'], $id, $name );
 			$output .= sprintf( '<label for="%s">', $id );
 			$output .= '<span class="calender-icon"></span>';
 			$output .= '</label>';

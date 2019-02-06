@@ -5,7 +5,7 @@
 
 global $post;
 $date_format             = get_option( 'date_format' );
-$js_date_format          = wp_travel_date_format_php_to_js( $date_format );
+$js_date_format          = wp_travel_date_format_php_to_js();
 $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data' );
 $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 

@@ -181,7 +181,7 @@ class WP_Travel_Admin_Assets {
 				'drag_drop_nonce' => wp_create_nonce( 'wp-travel-drag-drop-nonce' ),
 			);
 			$date_format                                  = get_option( 'date_format' );
-			$js_date_format                               = wp_travel_date_format_php_to_js( $date_format );
+			$js_date_format                               = wp_travel_date_format_php_to_js();
 			$moment_date_format                           = wp_travel_moment_date_format( $date_format );
 			$wp_travel_gallery_data['js_date_format']     = $js_date_format;
 			$wp_travel_gallery_data['moment_date_format'] = $moment_date_format;

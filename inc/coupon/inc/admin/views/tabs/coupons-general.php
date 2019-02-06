@@ -19,7 +19,7 @@ $coupon_expiry_date = isset( $general_tab['coupon_expiry_date'] ) ? $general_tab
 
 
 $date_format    = get_option( 'date_format' );
-$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+$js_date_format = wp_travel_date_format_php_to_js();
 
 $old_date_format = 'm/d/Y';
 if ( ! empty( $coupon_expiry_date ) && ! wp_travel_is_ymd_date( $coupon_expiry_date ) ) {

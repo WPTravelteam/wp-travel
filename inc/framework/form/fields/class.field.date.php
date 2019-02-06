@@ -9,6 +9,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	}
 
 	function render( $display = true ) {
+		$js_date_format = wp_travel_date_format_php_to_js();
 		$output = parent::render( false );
 
 		$lang_code = explode( '-', get_bloginfo( 'language' ) );
@@ -34,7 +35,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 		$output   .= 'jQuery(document).ready( function($){ ';
 		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
-		$output   .= "dateFormat: 'yyyy-mm-dd',";
+		$output   .= "dateFormat: '" . $js_date_format . "',";
 		if ( $max_today ) {
 			$output .= 'maxDate: new Date()';
 		} else {
@@ -58,6 +59,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	}
 
 	function render_old( $display = true ) {
+		$js_date_format = wp_travel_date_format_php_to_js();
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -70,7 +72,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 				$attributes .= sprintf( '%s="%s"', $attribute, $attribute_val );
 			}
 		}
-		$output = sprintf( '<input data-date-format="yyyy-mm-dd" type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
+		$output = sprintf( '<input data-date-format="%s" type="%s" id="%s" name="%s" value="%s" %s class="%s" %s >', $js_date_format, $this->field_type, $this->field['id'], $this->field['name'], $this->field['default'], $validations, $this->field['class'], $attributes );
 
 		$lang_code = explode( '-', get_bloginfo( 'language' ) );
 		$locale    = $lang_code[0];

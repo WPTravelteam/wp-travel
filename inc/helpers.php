@@ -2316,10 +2316,11 @@ function wp_travel_print_notices() {
  * @since   1.6.7
  * @return  array
  */
-function wp_travel_date_format_php_to_js( $date_format ) {
-	if ( ! $date_format ) {
-		return;
-	}
+function wp_travel_date_format_php_to_js( $date_format = null ) {
+
+	// if ( ! $date_format ) {
+	// 	$date_format = get_option( 'date_format' );
+	// }
 	// $js_date_format = str_replace( 'Y', 'yyyy', $date_format );
 	// $js_date_format = str_replace( 'd', 'dd', $js_date_format );
 	// $js_date_format = str_replace( 'j', 'd', $js_date_format );
@@ -2337,16 +2338,17 @@ function wp_travel_date_format_php_to_js( $date_format ) {
  * @since   1.7.6
  * @return  array
  */
-function wp_travel_moment_date_format( $date_format ) {
-	if ( ! $date_format ) {
-		return;
-	}
-	$js_date_format = str_replace( 'Y', 'YYYY', $date_format );
-	$js_date_format = str_replace( 'd', 'DD', $js_date_format );
-	$js_date_format = str_replace( 'j', 'D', $js_date_format );
-	$js_date_format = str_replace( 'm', 'MM', $js_date_format );
-	$js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
+function wp_travel_moment_date_format( $date_format = null ) {
+	// if ( ! $date_format ) {
+	// 	$date_format = get_option( 'date_format' );
+	// }
+	// $js_date_format = str_replace( 'Y', 'YYYY', $date_format );
+	// $js_date_format = str_replace( 'd', 'DD', $js_date_format );
+	// $js_date_format = str_replace( 'j', 'D', $js_date_format );
+	// $js_date_format = str_replace( 'm', 'MM', $js_date_format );
+	// $js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
+	$js_date_format =  'YYYY-MM-DD';
 	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
 }
 

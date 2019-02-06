@@ -8,7 +8,7 @@
 global $post;
 $post_id        = $post->ID;
 $date_format    = get_option( 'date_format' );
-$js_date_format = wp_travel_date_format_php_to_js( $date_format );
+$js_date_format = wp_travel_date_format_php_to_js();
 
 $start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 $end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
