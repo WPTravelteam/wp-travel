@@ -2574,7 +2574,7 @@ function wp_travel_get_inquiry_link() {
 			<span class="wp-travel-booking-enquiry">
 				<span class="dashicons dashicons-editor-help"></span>
 				<span>
-					<?php esc_html_e( 'Trip Enquiry', 'wp-travel-utilities' ); ?>
+					<?php esc_html_e( 'Trip Enquiry', 'wp-travel' ); ?>
 				</span>
 			</span>
 		</a>
@@ -2586,6 +2586,7 @@ function wp_travel_get_inquiry_link() {
 	return $data;
 
 }
+
 
 function wp_travel_get_search_filter_form( $args ) {
 
@@ -2604,7 +2605,7 @@ function wp_travel_get_search_filter_form( $args ) {
 		return;
 	}
 	?>
-	
+
 		<div class="wp-travel-itinerary-items">
 			<div>
 				<?php
@@ -2630,4 +2631,13 @@ function wp_travel_get_search_filter_form( $args ) {
 			</div>
 		</div>
 	<?php
+}
+
+function wp_travel_get_pricing_option_listing_type( $settings = null ) {
+	if ( ! $settings ) {
+		$settings = wp_travel_get_settings();
+	}
+	$list_type = isset( $settings['trip_pricing_options_layout'] ) ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
+	// $list_type = 'by-date';
+	return apply_filters( 'wp_travel_pricing_option_listing_type', $list_type );
 }
