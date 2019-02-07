@@ -1285,7 +1285,8 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 	$settings = wp_travel_get_settings();
 
-	$custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
+	// $custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
+	$custom_tabs_enable = apply_filters( 'wp_travel_enable_custom_tab', false );
 
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ? $settings['wp_travel_custom_global_tabs'] : array();
 
