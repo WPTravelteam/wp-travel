@@ -2586,3 +2586,12 @@ function wp_travel_get_inquiry_link() {
 	return $data;
 
 }
+
+function wp_travel_get_pricing_option_listing_type( $settings = null ) {
+	if ( ! $settings ) {
+		$settings = wp_travel_get_settings();
+	}
+	// $list_type = isset( $settings['trip_pricing_options_layout'] ) ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
+	$list_type = 'by-date';
+	return apply_filters( 'wp_travel_pricing_option_listing_type', $list_type );
+}

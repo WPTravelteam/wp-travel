@@ -328,7 +328,7 @@ class WP_Travel_Admin_Settings {
 		}
 		$hide_related_itinerary      = isset( $args['settings']['hide_related_itinerary'] ) ? $args['settings']['hide_related_itinerary'] : 'no';
 		$enable_multiple_travellers  = isset( $args['settings']['enable_multiple_travellers'] ) ? $args['settings']['enable_multiple_travellers'] : 'no';
-		$trip_pricing_options_layout = isset( $args['settings']['trip_pricing_options_layout'] ) ? $args['settings']['trip_pricing_options_layout'] : 'by-pricing-option';
+		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $args['settings'] );
 		?>
 		<?php do_action( 'wp_travel_tab_content_before_trips', $args ); ?>
 		<table class="form-table">
