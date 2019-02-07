@@ -734,185 +734,6 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		// Save pricing option type @since 1.7.6.
-		if ( isset( $_POST['wp_travel_pricing_option_type'] ) ) {
-			$wp_travel_pricing_option_type = sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) );
-			update_post_meta( $post_id, 'wp_travel_pricing_option_type', $wp_travel_pricing_option_type );
-		}
-
-		$wp_travel_trip_price = 0;
-		// Additional Info section.
-		if ( isset( $_POST['wp_travel_price'] ) ) {
-			$wp_travel_price = sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) );
-			update_post_meta( $post_id, 'wp_travel_price', $wp_travel_price );
-			$wp_travel_trip_price = $wp_travel_price;
-		}
-
-		if ( isset( $_POST['wp_travel_price_per'] ) ) {
-			$wp_travel_price_per = sanitize_text_field( wp_unslash( $_POST['wp_travel_price_per'] ) );
-			update_post_meta( $post_id, 'wp_travel_price_per', $wp_travel_price_per );
-		}
-
-		$wp_travel_enable_sale = 0;
-		if ( isset( $_POST['wp_travel_enable_sale'] ) ) {
-			$wp_travel_enable_sale = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) );
-		}
-		update_post_meta( $post_id, 'wp_travel_enable_sale', $wp_travel_enable_sale );
-		if ( isset( $_POST['wp_travel_sale_price'] ) ) {
-			$wp_travel_sale_price = sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) );
-			update_post_meta( $post_id, 'wp_travel_sale_price', $wp_travel_sale_price );
-			$wp_travel_trip_price = $wp_travel_sale_price;
-		}
-		update_post_meta( $post_id, 'wp_travel_trip_price', $wp_travel_trip_price );
-
-		if ( isset( $_POST['wp_travel_group_size'] ) ) {
-			$wp_travel_group_size = sanitize_text_field( wp_unslash( $_POST['wp_travel_group_size'] ) );
-			update_post_meta( $post_id, 'wp_travel_group_size', $wp_travel_group_size );
-		}
-
-		if ( isset( $_POST['wp_travel_trip_include'] ) ) {
-			$wp_travel_trip_include = $_POST['wp_travel_trip_include'];
-			update_post_meta( $post_id, 'wp_travel_trip_include', $wp_travel_trip_include );
-		}
-		if ( isset( $_POST['wp_travel_trip_exclude'] ) ) {
-			$wp_travel_trip_exclude = $_POST['wp_travel_trip_exclude'];
-			update_post_meta( $post_id, 'wp_travel_trip_exclude', $wp_travel_trip_exclude );
-		}
-		$wp_travel_outline = '';
-		if ( isset( $_POST['wp_travel_outline'] ) ) {
-			$wp_travel_outline = $_POST['wp_travel_outline'];
-		}
-		update_post_meta( $post_id, 'wp_travel_outline', $wp_travel_outline );
-
-		$date_format          = get_option( 'date_format' );
-		$wp_travel_start_date = '';
-		if ( isset( $_POST['wp_travel_start_date'] ) && '' !== $_POST['wp_travel_start_date'] ) {
-			$wp_travel_start_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_start_date'] ) );
-			if ( '' !== $wp_travel_start_date ) {
-				$date = DateTime::createFromFormat( $date_format, $wp_travel_start_date );
-				if ( $date ) {
-					$wp_travel_start_date = $date->format( 'Y-m-d' );
-				}
-			}
-		}
-		update_post_meta( $post_id, 'wp_travel_start_date', $wp_travel_start_date );
-
-		$wp_travel_end_date = '';
-		if ( isset( $_POST['wp_travel_end_date'] ) && '' !== $_POST['wp_travel_end_date'] ) {
-			$wp_travel_end_date = sanitize_text_field( wp_unslash( $_POST['wp_travel_end_date'] ) );
-
-			if ( '' !== $wp_travel_end_date ) {
-				$date = DateTime::createFromFormat( $date_format, $wp_travel_end_date );
-				if ( $date ) {
-					$wp_travel_end_date = $date->format( 'Y-m-d' );
-				}
-			}
-		}
-		update_post_meta( $post_id, 'wp_travel_end_date', $wp_travel_end_date );
-
-		// Itinerary Details Data.
-		if ( isset( $_POST['wp_travel_trip_itinerary_data'] ) ) {
-
-			$wp_travel_trip_itinerary_data = wp_unslash( $_POST['wp_travel_trip_itinerary_data'] );
-			update_post_meta( $post_id, 'wp_travel_trip_itinerary_data', $wp_travel_trip_itinerary_data );
-
-		}
-
-		// Gallery.
-		$gallery_ids = array();
-		if ( isset( $_POST['wp_travel_gallery_ids'] ) && '' != $_POST['wp_travel_gallery_ids'] ) {
-			$gallery_ids = explode( ',', $_POST['wp_travel_gallery_ids'] );
-		}
-		update_post_meta( $post_id, 'wp_travel_itinerary_gallery_ids', $gallery_ids );
-
-		if ( isset( $_POST['wp_travel_thumbnail_id'] ) ) {
-			$wp_travel_thumbnail_id = (int) $_POST['wp_travel_thumbnail_id'];
-			update_post_meta( $post_id, '_thumbnail_id', $wp_travel_thumbnail_id );
-		}
-
-		if ( isset( $_POST['wp_travel_location'] ) ) {
-			$wp_travel_location = sanitize_text_field( wp_unslash( $_POST['wp_travel_location'] ) );
-			update_post_meta( $post_id, 'wp_travel_location', $wp_travel_location );
-		}
-
-		if ( isset( $_POST['wp_travel_lat'] ) ) {
-			$wp_travel_lat = sanitize_text_field( wp_unslash( $_POST['wp_travel_lat'] ) );
-			update_post_meta( $post_id, 'wp_travel_lat', $wp_travel_lat );
-		}
-
-		if ( isset( $_POST['wp_travel_lng'] ) ) {
-			$wp_travel_lng = sanitize_text_field( wp_unslash( $_POST['wp_travel_lng'] ) );
-			update_post_meta( $post_id, 'wp_travel_lng', $wp_travel_lng );
-		}
-		if ( isset( $_POST['wp_travel_location_id'] ) ) {
-			$wp_travel_location_id = sanitize_text_field( wp_unslash( $_POST['wp_travel_location_id'] ) );
-			update_post_meta( $post_id, 'wp_travel_location_id', $wp_travel_location_id );
-		}
-
-		$fixed_departure = 'no';
-		if ( isset( $_POST['wp_travel_fixed_departure'] ) ) {
-			$fixed_departure = sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) );
-		}
-		update_post_meta( $post_id, 'wp_travel_fixed_departure', $fixed_departure );
-
-		// Multiple departure dates.
-		$wp_travel_enable_pricing_options = 'no';
-		if ( isset( $_POST['wp_travel_enable_pricing_options'] ) ) {
-			$wp_travel_enable_pricing_options = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_pricing_options'] ) );
-		}
-		update_post_meta( $post_id, 'wp_travel_enable_pricing_options', $wp_travel_enable_pricing_options );
-
-		// Multiple departure dates.
-		$multiple_departure_enabled = 'no';
-		if ( isset( $_POST['wp_travel_enable_multiple_fixed_departue'] ) ) {
-			$multiple_departure_enabled = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_multiple_fixed_departue'] ) );
-		}
-		update_post_meta( $post_id, 'wp_travel_enable_multiple_fixed_departue', $multiple_departure_enabled );
-
-		if ( isset( $_POST['wp_travel_trip_duration'] ) ) {
-			$trip_duration = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) );
-			update_post_meta( $post_id, 'wp_travel_trip_duration', $trip_duration );
-		}
-		if ( isset( $_POST['wp_travel_trip_duration_night'] ) ) {
-			$trip_duration_night = sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration_night'] ) );
-			update_post_meta( $post_id, 'wp_travel_trip_duration_night', $trip_duration_night );
-		}
-
-		// Saving Tabs Settings.
-		$use_global_tabs = 'yes';
-		if ( isset( $_POST['wp_travel_use_global_tabs'] ) ) {
-			$use_global_tabs = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) );
-		}
-			update_post_meta( $post_id, 'wp_travel_use_global_tabs', $use_global_tabs );
-
-		// Trip enquiry Global.
-		$use_global_trip_enquiry_option = 'yes';
-		if ( isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) {
-			$use_global_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) );
-		}
-
-		update_post_meta( $post_id, 'wp_travel_use_global_trip_enquiry_option', $use_global_trip_enquiry_option );
-
-		// Trip Specific Enquiry Option.
-		$enable_trip_enquiry_option = 'no';
-		if ( isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) {
-			$enable_trip_enquiry_option = sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) );
-		}
-			update_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', $enable_trip_enquiry_option );
-
-		if ( isset( $_POST['wp_travel_tabs'] ) ) {
-			$wp_travel_tabs = ( wp_unslash( $_POST['wp_travel_tabs'] ) );
-			update_post_meta( $post_id, 'wp_travel_tabs', $wp_travel_tabs );
-		}
-		$wp_travel_faq_question = '';
-		if ( isset( $_POST['wp_travel_faq_question'] ) ) {
-			$wp_travel_faq_question = ( wp_unslash( $_POST['wp_travel_faq_question'] ) );
-		}
-		update_post_meta( $post_id, 'wp_travel_faq_question', $wp_travel_faq_question );
-		if ( isset( $_POST['wp_travel_faq_answer'] ) ) {
-			$wp_travel_faq_answer = ( wp_unslash( $_POST['wp_travel_faq_answer'] ) );
-			update_post_meta( $post_id, 'wp_travel_faq_answer', $wp_travel_faq_answer );
-		}
 		if ( isset( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
@@ -930,33 +751,70 @@ class WP_Travel_Admin_Metaboxes {
 				add_action( 'save_post', array( $this, 'save_meta_data' ) );
 			}
 		}
-		// WP Travel Standard Paypal Merged. @since 1.2.1.
-		if ( isset( $_POST['wp_travel_minimum_partial_payout'] ) ) {
-			$minimum_partial_payout = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) );
-			if ( $minimum_partial_payout > 0 ) {
-				update_post_meta( $post_id, 'wp_travel_minimum_partial_payout', $minimum_partial_payout );
-			}
-		}
-		if ( isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) {
-			$minimum_partial_payout_percent = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) );
-			if ( $minimum_partial_payout_percent > 0 ) {
 
-				update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', $minimum_partial_payout_percent );
-			}
+		$trip_meta = array();
+
+		// Save pricing option type @since 1.7.6.
+		$trip_meta['wp_travel_pricing_option_type'] = isset( $_POST['wp_travel_pricing_option_type'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) ) : '';
+		$trip_meta['wp_travel_price']               = isset( $_POST['wp_travel_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) ) : 0;
+
+		// Setting trip price.
+		$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_price'];
+
+		$trip_meta['wp_travel_enable_sale'] = isset( $_POST['wp_travel_enable_sale'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) ) : 0;
+		$trip_meta['wp_travel_sale_price']  = isset( $_POST['wp_travel_sale_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) ) : 0;
+		if ( $trip_meta['wp_travel_sale_price'] ) {
+			// Update trip price.
+			$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_sale_price'];
 		}
-		$use_global = '';
-		if ( isset( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ) {
-			$use_global = sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) );
+
+		$trip_meta['wp_travel_price_per']           = isset( $_POST['wp_travel_price_per'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price_per'] ) ) : '';
+		$trip_meta['wp_travel_group_size']          = isset( $_POST['wp_travel_group_size'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_group_size'] ) ) : '';
+		$trip_meta['wp_travel_trip_include']        = isset( $_POST['wp_travel_trip_include'] ) ? $_POST['wp_travel_trip_include'] : '';
+		$trip_meta['wp_travel_trip_exclude']        = isset( $_POST['wp_travel_trip_exclude'] ) ? $_POST['wp_travel_trip_exclude'] : '';
+		$trip_meta['wp_travel_outline']             = isset( $_POST['wp_travel_outline'] ) ? $_POST['wp_travel_outline'] : '';
+		$trip_meta['wp_travel_start_date']          = isset( $_POST['wp_travel_start_date'] ) ? $_POST['wp_travel_start_date'] : '';
+		$trip_meta['wp_travel_end_date']            = isset( $_POST['wp_travel_end_date'] ) ? $_POST['wp_travel_end_date'] : '';
+		$trip_meta['wp_travel_trip_itinerary_data'] = isset( $_POST['wp_travel_trip_itinerary_data'] ) ? wp_unslash( $_POST['wp_travel_trip_itinerary_data'] ) : '';
+
+		// Gallery.
+		$gallery_ids = array();
+		if ( isset( $_POST['wp_travel_gallery_ids'] ) && '' != $_POST['wp_travel_gallery_ids'] ) {
+			$gallery_ids = explode( ',', $_POST['wp_travel_gallery_ids'] );
 		}
-		update_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', $use_global );
+		$trip_meta['wp_travel_itinerary_gallery_ids'] = $gallery_ids;
+		$trip_meta['_thumbnail_id']                   = isset( $_POST['wp_travel_thumbnail_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_thumbnail_id'] ) ) : 0;
+
+		$trip_meta['wp_travel_location']    = isset( $_POST['wp_travel_location'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_location'] ) ) : '';
+		$trip_meta['wp_travel_lat']         = isset( $_POST['wp_travel_lat'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_lat'] ) ) : '';
+		$trip_meta['wp_travel_lng']         = isset( $_POST['wp_travel_lng'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_lng'] ) ) : '';
+		$trip_meta['wp_travel_location_id'] = isset( $_POST['wp_travel_location_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_location_id'] ) ) : '';
+
+		$trip_meta['wp_travel_fixed_departure']                = isset( $_POST['wp_travel_fixed_departure'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) ) : 'no';
+		$trip_meta['wp_travel_enable_pricing_options']         = isset( $_POST['wp_travel_enable_pricing_options'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_pricing_options'] ) ) : 'no';
+		$trip_meta['wp_travel_enable_multiple_fixed_departue'] = isset( $_POST['wp_travel_enable_multiple_fixed_departue'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_multiple_fixed_departue'] ) ) : 'no';
+		$trip_meta['wp_travel_trip_duration']                  = isset( $_POST['wp_travel_trip_duration'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration'] ) ) : '';
+		$trip_meta['wp_travel_trip_duration_night']            = isset( $_POST['wp_travel_trip_duration_night'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_trip_duration_night'] ) ) : '';
+
+		// Saving Tabs Settings.
+		$trip_meta['wp_travel_use_global_tabs'] = isset( $_POST['wp_travel_use_global_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) ) : 'yes';
+		$trip_meta['wp_travel_tabs']            = isset( $_POST['wp_travel_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_tabs'] ) ) : array();
+
+		// Trip enquiry Global.
+		$trip_meta['wp_travel_use_global_trip_enquiry_option'] = isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) : 'yes';
+		// Trip Specific Enquiry Option.
+		$trip_meta['wp_travel_enable_trip_enquiry_option'] = isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) : 'no';
+
+		$trip_meta['wp_travel_faq_question'] = isset( $_POST['wp_travel_faq_question'] ) ? ( wp_unslash( $_POST['wp_travel_faq_question'] ) ) : '';
+		$trip_meta['wp_travel_faq_answer']   = isset( $_POST['wp_travel_faq_answer'] ) ? ( wp_unslash( $_POST['wp_travel_faq_answer'] ) ) : '';
+
+		// WP Travel Standard Paypal Merged. @since 1.2.1.
+		$trip_meta['wp_travel_minimum_partial_payout']            = isset( $_POST['wp_travel_minimum_partial_payout'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) ) : 0;
+		$trip_meta['wp_travel_minimum_partial_payout_percent']    = isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) : 0;
+		$trip_meta['wp_travel_minimum_partial_payout_use_global'] = isset( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ) : '';
 
 		// Update Pricing Options Metas.
-		$wp_travel_pricing_options = '';
-		if ( isset( $_POST['wp_travel_pricing_options'] ) ) {
-			$wp_travel_pricing_options = ( wp_unslash( $_POST['wp_travel_pricing_options'] ) );
-		}
-
-		update_post_meta( $post_id, 'wp_travel_pricing_options', $wp_travel_pricing_options );
+		$trip_meta['wp_travel_pricing_options'] = isset( $_POST['wp_travel_pricing_options'] ) ? ( wp_unslash( $_POST['wp_travel_pricing_options'] ) ) : '';
 
 		// Update multiple trip dates options.
 		$wp_travel_multiple_trip_dates = array();
@@ -984,23 +842,26 @@ class WP_Travel_Admin_Metaboxes {
 			}
 			$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
 		}
+		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
-		update_post_meta( $post_id, 'wp_travel_multiple_trip_dates', $wp_travel_multiple_trip_dates );
-
-		$wp_travel_trip_facts = array();
-
+		$wp_travel_trip_facts = array();		
 		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
 			$wp_travel_trip_facts = array_filter( array_filter( array_values( $_POST['wp_travel_trip_facts'] ), 'array_filter' ), 'count' );
 		}
-
-		update_post_meta( $post_id, 'wp_travel_trip_facts', $wp_travel_trip_facts );
+		$trip_meta['wp_travel_trip_facts'] = $wp_travel_trip_facts;
 
 		$wp_travel_tour_extras = array();
-
 		if ( isset( $_POST['wp_travel_tour_extras'] ) ) {
 			$wp_travel_tour_extras = stripslashes_deep( $_POST['wp_travel_tour_extras'] );
 		}
-		update_post_meta( $post_id, 'wp_travel_tour_extras', $wp_travel_tour_extras );
+		$trip_meta['wp_travel_tour_extras'] = $wp_travel_tour_extras;
+
+		// @since 1.8.4
+		$trip_meta = apply_filters( 'wp_travel_save_trip_metas', $trip_meta, $post_id );
+
+		foreach ( $trip_meta as $meta_key => $meta_value ) {
+			update_post_meta( $post_id, $meta_key, $meta_value );
+		}
 
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1.
 		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );

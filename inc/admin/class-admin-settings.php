@@ -368,8 +368,8 @@ class WP_Travel_Admin_Settings {
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ); ?></label></th>
 				<td>
-					<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio">
-					<?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>
+					<!--<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio">
+					<?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>-->
 
 					<label> <input <?php checked( 'by-date', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-date" type="radio">
 					<?php esc_html_e( 'List by fixed departure dates', 'wp-travel' ); ?></label>
