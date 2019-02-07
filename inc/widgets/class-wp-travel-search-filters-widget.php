@@ -39,47 +39,12 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$title      = apply_filters( 'wp_travel_search_widget_title', isset( $instance['title'] ) ? $instance['title'] : '' );
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 
-		$index = uniqid();
-
 		echo $before_widget;
 		if ( ! $hide_title ) {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 
-		if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
-			include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
-		}
-		$form_field    = new WP_Travel_FW_Field();
-		$search_fields = wp_travel_search_filter_widget_form_fields();
-
-		?>
-		<div class="wp-travel-itinerary-items">
-			<div>
-				<?php
-				foreach ( $search_fields as $key => $search_field ) {
-
-					$show_fields = isset( $instance[ $key ] ) ? $instance[ $key ] : '';
-					if ( $show_fields ) {
-						$search_field['class'] = isset( $search_field['class'] ) && '' !== $search_field['class'] ? $search_field['class'] . $index : '';
-						$form_field->init( $search_field, array( 'single' => true ) )->render();
-					}
-				}
-				$view_mode = wp_travel_get_archive_view_mode(); ?>
-
-				<div class="wp-travel-search">
-
-					<input class="filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
-
-					<input class="wp-travel-widget-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
-
-					<input type="hidden" class="wp-travel-widget-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
-					<input type="submit" id="wp-travel-filter-search-submit" class="button button-primary wp-travel-filter-search-submit" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>">
-				</div>
-
-			</div>
-
-		</div>
-		<?php
+		echo wp_travel_get_search_filter_form( array( 'widget' => $instance ) );
 
 		echo $after_widget;
 	}
@@ -117,7 +82,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			$hide_title = isset( $instance['hide_title'] ) ? esc_attr( $instance['hide_title'] ) : '';
 		}
 		?>
-		
+
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">

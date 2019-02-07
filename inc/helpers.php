@@ -2586,3 +2586,48 @@ function wp_travel_get_inquiry_link() {
 	return $data;
 
 }
+
+function wp_travel_get_search_filter_form( $args ) {
+
+	if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+	}
+	$form_field    = new WP_Travel_FW_Field();
+	$search_fields = wp_travel_search_filter_widget_form_fields();
+	$index         = uniqid();
+	$instance      = array();
+	if ( isset( $args['widget'] ) ) {
+		$instance = $args['widget'];
+	} elseif ( isset( $args['shortcode'] ) ) {
+		$instance = $args['shortcode'];
+	} else {
+		return;
+	}
+	?>
+	
+		<div class="wp-travel-itinerary-items">
+			<div>
+				<?php
+				foreach ( $search_fields as $key => $search_field ) {
+
+					$show_fields = isset( $instance[ $key ] ) ? $instance[ $key ] : '';
+					if ( $show_fields ) {
+						$search_field['class'] = isset( $search_field['class'] ) && '' !== $search_field['class'] ? $search_field['class'] . $index : '';
+						$form_field->init( $search_field, array( 'single' => true ) )->render();
+					}
+				}
+				$view_mode = wp_travel_get_archive_view_mode(); ?>
+
+				<div class="wp-travel-search">
+
+					<input class="filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
+
+					<input class="wp-travel-widget-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
+
+					<input type="hidden" class="wp-travel-widget-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
+					<input type="submit" id="wp-travel-filter-search-submit" class="button button-primary wp-travel-filter-search-submit" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>">
+				</div>
+			</div>
+		</div>
+	<?php
+}

@@ -521,7 +521,7 @@ function wp_travel_single_location( $post_id ) {
 											 <?php
 												foreach ( $terms as $term ) :
 													?>
-					
+
 													<?php
 													if ( $i > 0 ) :
 														?>
@@ -1312,8 +1312,8 @@ function wp_travel_archive_filter_by() {
 		<input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
 		<?php
 			$price    = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
-			$type     = (int) ( isset( $_GET['type'] ) && '' !== $_GET['type'] ) ? $_GET['type'] : 0;
-			$location = (int) ( isset( $_GET['location'] ) && '' !== $_GET['location'] ) ? $_GET['location'] : 0;
+			$type     = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
+			$location = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
 		?>
 
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
@@ -1333,11 +1333,12 @@ function wp_travel_archive_filter_by() {
 			wp_dropdown_categories(
 				array(
 					'taxonomy'          => 'itinerary_types',
-					'name'              => 'type',
+					'name'              => 'itinerary_types',
 					'class'             => 'wp_travel_input_filters type',
 					'show_option_none'  => '--',
 					'option_none_value' => '',
 					'selected'          => $type,
+					'value_field'       => 'slug',
 				)
 			);
 			?>
@@ -1348,11 +1349,12 @@ function wp_travel_archive_filter_by() {
 			wp_dropdown_categories(
 				array(
 					'taxonomy'          => 'travel_locations',
-					'name'              => 'location',
+					'name'              => 'travel_locations',
 					'class'             => 'wp_travel_input_filters location',
 					'show_option_none'  => '--',
 					'option_none_value' => '',
 					'selected'          => $location,
+					'value_field'       => 'slug',
 				)
 			);
 			?>
@@ -1875,7 +1877,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						<?php if ( $status_col ) : ?>
 							<div class="status">
 								<?php echo esc_html__( 'Status', 'wp-travel' ); ?>
-							</div>	
+							</div>
 						<?php endif; ?>
 						<div class="price">
 							<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
@@ -2002,10 +2004,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									do_action( 'wp_travel_trip_extras', $price_key );
 								?>
 								<div class="wp-travel-calender-column no-padding ">
-									
+
 									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
 									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo ( $available_dates ) ? esc_attr( wp_json_encode( $available_dates ) ) : ''; ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
-								
+
 								</div>
 								<div class="wp-travel-calender-aside">
 									<?php
