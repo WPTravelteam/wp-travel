@@ -5,7 +5,7 @@ Donate link: http://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.3
+Stable tag: 1.8.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -187,10 +187,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.4 =
-Release Date: 
+Release Date: 10th Feburary 2019
 
+* Enhancement: Search Filter Widget fields.
 * Fixes: System information page permission issue.
 * Fixes: Search widget date range.
+* Fixes: Total amount and payment amount mismatched in checkout page.
+* Fixes: Discount not add up in standard paypal.
+* Fixes: Booking Status not updated.
 
 = 1.8.3 =
 Release Date: 29th January 2019

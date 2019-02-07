@@ -2574,7 +2574,7 @@ function wp_travel_get_inquiry_link() {
 			<span class="wp-travel-booking-enquiry">
 				<span class="dashicons dashicons-editor-help"></span>
 				<span>
-					<?php esc_html_e( 'Trip Enquiry', 'wp-travel-utilities' ); ?>
+					<?php esc_html_e( 'Trip Enquiry', 'wp-travel' ); ?>
 				</span>
 			</span>
 		</a>
