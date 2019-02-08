@@ -37,6 +37,7 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
         clean: {
+            deploy: ['deploy'],
             post_build: [
                 'build'
             ],
@@ -51,7 +52,7 @@ module.exports = function(grunt) {
                 },
                 expand: true,
                 src: svn_files_list,
-                dest: 'build/<%= pkg.name %>_<%= pkg.version %>/'
+                dest: 'build/<%= pkg.name %>/'
             },
             deploy: {
                 src: [
@@ -223,11 +224,6 @@ module.exports = function(grunt) {
             ]
         },
 
-        // Clean the directory.
-        clean: {
-            deploy: ['deploy']
-        },
-
         // Compress files.
         compress: {
             deploy: {
@@ -242,7 +238,12 @@ module.exports = function(grunt) {
         },
 
         zip: {
-            'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
+            // 'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
+            'using-cwd': {
+                cwd: 'build/',
+                src: ['build/<%= pkg.name %>/**'],
+                dest: 'build/<%= pkg.name %>-<%= pkg.version %>.zip'
+            }
         },
 
         rtlcss: {
@@ -327,13 +328,7 @@ module.exports = function(grunt) {
     grunt.registerTask('release', ['push_svn']);
     grunt.registerTask('post_release', ['clean:post_build']);
 
-    grunt.registerTask('build', [
-
-        'pre_release',
-        'zip',
-
-    ]);
-
+    grunt.registerTask( 'build', [ 'pre_release', 'clean:deploy', 'copy:build_it', 'zip' ] );
 };
 
 /**
