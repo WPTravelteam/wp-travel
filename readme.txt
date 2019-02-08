@@ -1,7 +1,7 @@
 === WP Travel ===
 Contributors: wptravel, WEN Solutions
-Tags: travel, Travel booking, Tour Operator, travel agency, Tours, tour,  itinerary, tour itinerary, tour operator, tour itineraries, accommodation, accommodation listings, destinations, regions, tourism, locations, map, trip book, tabs
-Donate link: http://wptravel.io/downloads/
+Tags: tour booking plugin, travel plugin, Travel booking plugin, Tour Operator, travel agency plugin, travel itinerary, travel agency, tour itinerary, booking engine, tour operator, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
+Donate link: https://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
@@ -9,15 +9,16 @@ Stable tag: 1.8.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP Travel is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin. WP Travel is scalable, powerful and probably, the easiest plugin available in WordPress to manage packages and booking
+WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
-WP Travel the best plugin available for the moguls of travel and tourism industries.It is the best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales. It's scalable, powerful, easy to use plugin for WordPress to manage packages and booking. Make a decision to enhance your travel site with powerful features with our simple plugin. WP Travel is scalable, powerful and probably, the easiest plugin available in WordPress to manage packages and booking. Check detail info at ["wptravel.io"](http://wptravel.io/) by WEN Solutions.
+WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes! As one of the most powerful and scalable WordPress travel engine, you can create customized itinerary & travel packages in minutes.  Powered with powerful addons, this plugin helps you save hours of development and deploy your website in minutes. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
+With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing customized itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/) website.
 
-[Demo](http://wptravel.io/demo) | [Addons](https://wptravel.io/downloads/) | [Themes](https://wptravel.io/themes/) | [Documentations](https://wptravel.io/documentations/)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo) | [Travel Plugin Addons](https://wptravel.io/downloads/) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/)
 
-= COMPATIBLE THEMES FOR "WP TRAVEL" =
+= COMPATIBLE THEMES FOR WP TRAVEL =
 
 * [Travel Ultimate](https://themepalace.com/downloads/travel-ultimate/) by Theme Palace.
 * [Travel Ultimate Pro](https://themepalace.com/downloads/travel-ultimate-pro/) by Theme Palace.
@@ -30,7 +31,7 @@ WP Travel the best plugin available for the moguls of travel and tourism industr
 * [Travel Gem](https://themepalace.com/downloads/travel-gem/) by WEN Themes.
 * [Travel Gem Pro](https://themepalace.com/downloads/travel-gem-pro/) by WEN Themes.
 * [Travel Log](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
-* [View all Themes](https://wptravel.io/themes/)
+* [View all WordPress Travel & Tour Themes](https://wptravel.io/themes/)
 
 
 == Our Addons: ==
@@ -112,7 +113,7 @@ WP Travel the best plugin available for the moguls of travel and tourism industr
 WP Travel plugin is very flexible and highly customizable. There are a number of hooks and filters which makes plugin really flexible from the developer's point of view. There are bulk of options which add further more flexibility in the plugin.
 
 
-These themes are specially designed for ìWP Travelî plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
+These themes are specially designed for WP Travel plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support with any issues using the theme.
 
 
 
@@ -187,7 +188,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.4 =
-Release Date: 
+Release Date:
 
 * Fixes: System information page permission issue.
 * Fixes: Search widget date range.
