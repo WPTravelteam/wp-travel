@@ -1924,7 +1924,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 
 						if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 							$inventory = new WP_Travel_Util_Inventory();
-							if ( $inventory->is_inventory_enabled( $trip_id, $price_key ) ) {
+							if ( $inventory->is_inventory_enabled( $trip_id ) && $available_pax ) {
 								$pricing_max_pax = $available_pax;
 							}
 						}
@@ -2334,7 +2334,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 								'booked_pax'     => 0,
 								'pax_limit'      => 0,
 								'min_pax'        => $min_pax,
-								'max_pax'        => $max_attr,
+								'max_pax'        => $max_pax,
 							);
 
 							$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key );

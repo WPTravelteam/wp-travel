@@ -172,15 +172,8 @@ class WP_Travel_Cart {
 
 			$inventory = new WP_Travel_Util_Inventory();
 
-			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
-			$available_pax     = $inventory->get_available_pax( $trip_id, false );
-
-			if ( isset( $price_key ) && '' !== $price_key ) {
-
-				$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
-				$available_pax     = $inventory->get_available_pax( $trip_id, $price_key );
-
-			}
+			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
+			$available_pax     = $inventory->get_available_pax( $trip_id, $price_key );
 
 			/**
 			 * Customization Starts.

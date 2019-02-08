@@ -43,7 +43,7 @@ $force_checkout  = apply_filters( 'wp_travel_is_force_checkout_enabled', false )
 
 		if ( $enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 
-			$list_type = isset( $settings['trip_pricing_options_layout'] ) ? $settings['trip_pricing_options_layout'] : 'by-pricing-option';
+			$list_type = wp_travel_get_pricing_option_listing_type( $settings );
 
 			if ( 'by-pricing-option' === $list_type ) {
 				// Default pricing options template.

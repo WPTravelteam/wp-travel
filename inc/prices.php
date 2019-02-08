@@ -132,17 +132,12 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
 		$available_pax     = $inventory->get_available_pax( $trip_id, false );
 
-		if ( isset( $price_key ) && '' !== $price_key ) {
+		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
+		$available_pax = $inventory->get_available_pax( $trip_id, $price_key );
 
-			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id, $price_key );
-			$available_pax     = $inventory->get_available_pax( $trip_id, $price_key );
-
-		}
 
 		if ( $inventory_enabled && $available_pax ) {
-
 			$max_available = $available_pax;
-
 		}
 	}
 
