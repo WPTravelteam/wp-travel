@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.8.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 08:37:30+00:00\n"
+"POT-Creation-Date: 2019-02-10 15:03:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5181,7 +5181,7 @@ msgid "Booking Date"
 msgstr ""
 
 #: inc/booking-functions.php:871 inc/booking-functions.php:890
-#: inc/cart/class-cart.php:197 inc/cart/class-cart.php:307
+#: inc/cart/class-cart.php:190 inc/cart/class-cart.php:300
 #: inc/class-wp-travel-form-handler.php:49
 #: inc/class-wp-travel-form-handler.php:53
 #: inc/class-wp-travel-form-handler.php:145
@@ -5329,7 +5329,7 @@ msgstr ""
 msgid "Traveler Details"
 msgstr ""
 
-#: inc/cart/class-cart.php:197 inc/cart/class-cart.php:307
+#: inc/cart/class-cart.php:190 inc/cart/class-cart.php:300
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."

@@ -188,13 +188,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.4 =
-Release Date: 10th Feburary 2019
+Release Date: 10th February 2019
 
 * Enhancement: Search Filter Widget fields.
 * Fixes: System information page permission issue.
 * Fixes: Search widget date range.
 * Fixes: Total amount and payment amount mismatched in checkout page.
-* Fixes: Discount not add up in standard paypal.
+* Fixes: Discount not add up in standard PayPal.
 * Fixes: Booking Status not updated.
 * Fixes: Partial Payment discount.
 * Fixes: Other Minor fixes.
