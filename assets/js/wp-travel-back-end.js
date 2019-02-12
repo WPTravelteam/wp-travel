@@ -701,9 +701,9 @@
 
     $(document).on('click', '#wp-travel-minimum-partial-payout-percent-use-global', function() {
         if ($(this).is(':checked')) {
-            $('#wp-travel-minimum-partial-payout-percent').attr('disabled', 'disabled').closest('tr').hide();
+            $('#wp-travel-minimum-partial-payout-percent').closest('tr').hide();
         } else {
-            $('#wp-travel-minimum-partial-payout-percent').removeAttr('disabled', 'disabled').closest('tr').show();
+            $('#wp-travel-minimum-partial-payout-percent').closest('tr').show();
         }
     });
     // Ends WP Travel Standard Paypal Merged. @since 1.2.1

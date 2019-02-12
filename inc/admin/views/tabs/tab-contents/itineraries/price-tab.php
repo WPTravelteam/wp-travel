@@ -778,7 +778,10 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
-	$payout_percent = wp_travel_get_payout_percent( $post_id );
+	$payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
+	if ( ! $payout_percent ) {
+		$payout_percent = wp_travel_get_payout_percent( $post_id );
+	}
 	$use_global     = wp_travel_use_global_payout_percent( $post_id );
 
 	$custom_payout_class = '';

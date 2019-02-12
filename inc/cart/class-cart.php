@@ -202,14 +202,16 @@ class WP_Travel_Cart {
 		$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 		$this->items[ $cart_item_id ]['pax']        = $pax;
 		$this->items[ $cart_item_id ]['price_key']  = $price_key;
-
+		// error_log( print_r( $attrs, true ) );
+		// error_log( print_r( $this->items, true ) );
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {
 				$this->items[ $cart_item_id ][ $key ] = $attr;
 			}
 		}
-
+		
+		// error_log( print_r( $this->items, true ) );
 		$this->write();
 		return true;
 	}

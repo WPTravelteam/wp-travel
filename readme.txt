@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.4
+Stable tag: 1.8.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -187,6 +187,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.8.5 =
+Release Date: 12th February 2019
+
+* Fixes: WP Travel trip date disply in admin booking.
+* Fixes: Unable to click update button on bookings.
+
 = 1.8.4 =
 Release Date: 10th February 2019
 
@@ -198,7 +204,6 @@ Release Date: 10th February 2019
 * Fixes: Booking Status not updated.
 * Fixes: Partial Payment discount.
 * Fixes: Other Minor fixes.
-
 
 = 1.8.3 =
 Release Date: 29th January 2019

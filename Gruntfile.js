@@ -239,10 +239,11 @@ module.exports = function(grunt) {
 
         zip: {
             // 'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
-            'using-cwd': {
+            'using-delate': {
                 cwd: 'build/',
                 src: ['build/<%= pkg.name %>/**'],
-                dest: 'build/<%= pkg.name %>-<%= pkg.version %>.zip'
+                dest: 'build/<%= pkg.name %>-<%= pkg.version %>.zip',
+                compression: 'DEFLATE'
             }
         },
 
