@@ -2696,10 +2696,17 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<span class="my-order-tail">
 									<?php
 									if ( $order_details && is_array( $order_details ) && count( $order_details ) > 0 ) : // Multiple.
+										$travel_date = '';
 										foreach ( $order_details as $order_detail ) :
 											$trip_id      = $order_detail['trip_id'];
 											$price_key    = $order_detail['price_key'];
 											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+
+											if ( '' !== $order_detail['arrival_date'] ) {
+												$travel_date .= wp_travel_format_date( $order_detail['arrival_date'] ) . ', ';
+											} else {
+												$travel_date .= __( 'N/A', 'wp-travel' ) . ', ';
+											}
 											?>
 											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>, 
 											<?php
@@ -2713,7 +2720,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							</div>
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Travel Date :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo wp_travel_format_date( $travel_date ); ?></span>
+								<span class="my-order-tail"><?php echo $travel_date; ?></span>
 							</div>
 							<div class="my-order-single-field my-order-additional-note clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>

@@ -264,6 +264,9 @@ function wp_travel_booking_info( $post ) {
 
 			if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
 				foreach ( $input_val as $cart_id => $field_fname_values ) {
+					$trip_id = isset( $multiple_trips_booking_data[ $cart_id ]['trip_id'] ) ? $multiple_trips_booking_data[ $cart_id ]['trip_id'] : 0;
+					$price_key = isset( $multiple_trips_booking_data[ $cart_id ]['price_key'] ) ? $multiple_trips_booking_data[ $cart_id ]['price_key'] : '';
+					echo '<h3>' . wp_travel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>';
 					foreach ( $field_fname_values as $i => $field_fname_value ) {
 						?>
 						<div class="wp-travel-form-field-wrapper">
