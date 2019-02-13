@@ -634,8 +634,7 @@ function wp_travel_book_now() {
 			$booking_departure_date[] = $item['departure_date'];
 
 		}
-		$trip_id                   = '';
-		$pax                       = 0;
+		// $pax                       = 0;
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 
 		if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
@@ -645,10 +644,6 @@ function wp_travel_book_now() {
 			$booking_arrival_date   = $booking_arrival_date[0];
 			$booking_departure_date = $booking_departure_date[0];
 
-		} else {
-			// Support for multiple cart items.
-			do_action( 'wp_travel_multiple_trip_booking' );
-			return;
 		}
 	endif;
 
@@ -656,8 +651,9 @@ function wp_travel_book_now() {
 		return;
 	}
 
-	$trip_code         = wp_travel_get_trip_code( $trip_id );
-	$thankyou_page_url = get_permalink( $trip_id );
+	// $trip_code         = wp_travel_get_trip_code( $trip_id );
+	$thankyou_page_url = wp_travel_thankyou_page_url( $trip_id );
+
 	$title             = 'Booking - ' . $current_date;
 
 	$post_array = array(
@@ -670,11 +666,6 @@ function wp_travel_book_now() {
 	$booking_id = wp_insert_post( $post_array );
 	update_post_meta( $booking_id, 'order_data', $_POST );
 
-	// @since 1.8.3
-	$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
-	$totals       = $wt_cart->get_total();
-	$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
-
 	// Update Booking Title.
 	$update_data_array = array(
 		'ID'         => $booking_id,
@@ -682,6 +673,13 @@ function wp_travel_book_now() {
 	);
 
 	$booking_id = wp_update_post( $update_data_array );
+
+	// @since 1.8.3
+	$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
+	$totals       = $wt_cart->get_total();
+	$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
+
+
 
 	$trip_id           = sanitize_text_field( $trip_id );
 	$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
@@ -715,6 +713,7 @@ function wp_travel_book_now() {
 		}
 	}
 
+	// Why this code?
 	if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
 
 		$pax_count_based_by_date = get_post_meta( $trip_id, 'total_pax_booked', true );
@@ -746,14 +745,15 @@ function wp_travel_book_now() {
 			update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
-	/**
-	 * Add Support for invertory addon options.
-	 */
-	do_action( 'wp_travel_update_trip_inventory_values' );
-
 	$settings = wp_travel_get_settings();
 
-	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
+	if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
+		/**
+		 * Add Support for invertory addon options.
+		 */
+		do_action( 'wp_travel_update_trip_inventory_values' );
+
+		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
 	if ( isset( $_POST['wp_travel_fname'] ) || isset( $_POST['wp_travel_email'] ) ) { // Booking using old booking form
 		$first_name = $_POST['wp_travel_fname'];
@@ -867,14 +867,14 @@ function wp_travel_book_now() {
 
 		if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
 
-			if ( isset( $wt_cart ) ) {
-				$discounts = $wt_cart->get_discounts();
-				if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+			// if ( isset( $wt_cart ) ) {
+			// 	$discounts = $wt_cart->get_discounts();
+			// 	if ( is_array( $discounts ) && ! empty( $discounts ) ) :
 
-					WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+			// 		WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
 
-					endif;
-			}
+			// 		endif;
+			// }
 			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 		}
 	}
@@ -885,17 +885,88 @@ function wp_travel_book_now() {
 
 	if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
 
-		if ( isset( $wt_cart ) ) {
-			$discounts = $wt_cart->get_discounts();
-			if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+		// if ( isset( $wt_cart ) ) {
+		// 	$discounts = $wt_cart->get_discounts();
+		// 	if ( is_array( $discounts ) && ! empty( $discounts ) ) :
 
-				WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+		// 		WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
 
-				endif;
+		// 		endif;
 
-		}
+		// }
 			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 	}
+	} else {
+		
+		// Update single trip vals.
+		foreach ( $items as $item_key => $trip ) {
+		
+			$trip_id           = $trip['trip_id'];
+			$pax               = $trip['pax'];
+			$price_key         = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
+			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
+			$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
+			$new_booking_count = $booking_count + 1;
+			update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
+
+			if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
+
+				$pax_count_based_by_date = get_post_meta( $trip_id, 'total_pax_booked', true );
+				if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
+					$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
+				}
+
+				$pax_count_based_by_date[ $_POST['wp_travel_date'] ] += $pax;
+
+				update_post_meta( $trip_id, 'total_pax_booked', $pax_count_based_by_date );
+
+				$order_ids = get_post_meta( $trip_id, 'order_ids', true );
+
+				if ( ! $order_ids ) {
+					$order_ids = array();
+				}
+
+				update_post_meta( $trip_id, 'order_ids', $order_ids );
+			}
+
+			if ( is_user_logged_in() ) {
+
+				$user = wp_get_current_user();
+
+				if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+
+					$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
+
+					if ( ! $saved_booking_ids ) {
+						$saved_booking_ids = array();
+					}
+
+					array_push( $saved_booking_ids, $order_id );
+
+					update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
+
+				}
+			}
+
+			/**
+			 * Add Support for invertory addon options.
+			 */
+			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
+			do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
+
+			if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
+				$multiple_order = new WP_Travel_Multiple_Cart_Booking();
+				// Finally, send the booking e-mails.
+				$multiple_order->send_emails( $booking_id );
+			}
+		}
+
+	}
+
+
+	
+
+	
 	/**
 	 * Hook used to add payment and its info.
 	 *

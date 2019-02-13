@@ -188,10 +188,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.5 =
-Release Date: 12th February 2019
+Release Date: 13th February 2019
 
+* Enhancement: Thankyou page url function added.
 * Fixes: WP Travel trip date disply in admin booking.
+* Fixes: Multiple checkout listing in User Dashboard page.
 * Fixes: Unable to click update button on bookings.
+* Fixes: Trip date for multiple checkout option.
+* Fixes: Minor Layout issue fixes.
 
 = 1.8.4 =
 Release Date: 10th February 2019

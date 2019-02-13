@@ -36,10 +36,10 @@ class WP_Travel_FW_Field_Category_Dropdown {
 		}
 		$terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true ) );
 		
+		if ( isset( $this->field['show_option_all'] ) ) {
+			$output .= sprintf( '<option value="">%s</option>', $this->field['show_option_all'] );
+		}
 		if ( ! empty( $terms ) ) {
-			if ( isset( $this->field['show_option_all'] ) ) {
-				$output .= sprintf( '<option value="">%s</option>', $this->field['show_option_all'] );
-			}
 			foreach ( $terms as $term ) {
 				// Option Attributes.
 				$option_attributes = '';

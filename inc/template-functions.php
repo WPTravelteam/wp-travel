@@ -2188,7 +2188,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						if ( class_exists( 'WP_Travel_Util_Inventory' ) && ! $trip_price ) :
 							// display price unavailable text
 							$no_price_text = isset( $settings['price_unavailable_text'] ) && '' !== $settings['price_unavailable_text'] ? $settings['price_unavailable_text'] : '';
-							echo esc_html( $no_price_text );
+							echo '<div class="price"><strong>'. esc_html( $no_price_text ) . '</strong></div>';
 						else :
 							?>
 							<div class="price">
