@@ -73,7 +73,7 @@ class WP_Travel_License {
 				unset( $args['_file_path'] );
 
 				// Setup the updater.
-				$updater = new WP_Travel_EDD_SL_Plugin_Updater( self::$store_url, $premium_addon['_file_path'], $args );
+				$updater = new WP_Travel_Plugin_Updater( self::$store_url, $premium_addon['_file_path'], $args );
 			}
 		}
 

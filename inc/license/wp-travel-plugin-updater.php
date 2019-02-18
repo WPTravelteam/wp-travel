@@ -6,13 +6,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-/**
- * Allows plugins to use their own update API.
- *
- * @author Pippin Williamson
- * @version 1.0.0
- */
-class WP_Travel_EDD_SL_Plugin_Updater {
+class WP_Travel_Plugin_Updater {
 	private $api_url   = '';
 	private $api_data  = array();
 	private $name      = '';

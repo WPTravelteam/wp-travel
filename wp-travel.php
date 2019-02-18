@@ -245,9 +245,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 			}
 
-			if ( ! class_exists( 'WP_Travel_EDD_SL_Plugin_Updater' ) ) {
+			if ( ! class_exists( 'WP_Travel_Plugin_Updater' ) ) {
 				// load our custom updater.
-				include sprintf( '%s/inc/license/edd-sl-plugin-updater.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/license/wp-travel-plugin-updater.php', WP_TRAVEL_ABSPATH );
 			}
 
 		}

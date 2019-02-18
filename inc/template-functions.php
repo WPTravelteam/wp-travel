@@ -1899,7 +1899,16 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
-						$available_dates  = wp_travel_get_trip_available_dates( $trip_id, $price_key );
+						$available_dates  = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
+						
+						
+						if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) {
+							foreach ( $available_dates as $trip_date ) {
+								// wp_travel_default_trip_list_items( $pricing, $trip_date );
+							}
+						} else {
+							// wp_travel_default_trip_list_items( $pricing );
+						}
 						$pricing_sold_out = false;
 
 						$inventory_data = array(
@@ -1912,7 +1921,8 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 							'max_pax'        => $pricing_max_pax,
 						);
 
-						$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key );
+						$trip_date = isset( $available_dates ) && is_array( $available_dates ) && count( $available_dates ) > 0 ? $available_dates[0] : '';
+						$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $trip_date ); // Need to pass inventory date to get availability as per specific date.
 
 						$pricing_status_msg = $inventory_data['status_message'];
 						$pricing_sold_out   = $inventory_data['sold_out'];
@@ -1955,6 +1965,14 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									<div class="status">
 										<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
 										<span><?php echo esc_html( $pricing_status_msg ); ?></span>
+										<?php if ( $trip_date ) : ?>
+											<span class="availibility-for">
+												<?php esc_html_e( 'Availability for :', 'wp-travel' ); ?>
+												<span class="availibility-date">
+													<?php echo wp_travel_format_date( $trip_date, true, 'Y-m-d' );  ?>
+												</span>
+											</span>
+										<?php endif; ?>
 									</div>
 									<?php
 								endif;
@@ -2337,7 +2355,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 								'max_pax'        => $max_pax,
 							);
 
-							$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key );
+							$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
 
 							$pricing_status_msg = $inventory_data['status_message'];
 							$pricing_sold_out   = $inventory_data['sold_out'];
