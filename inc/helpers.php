@@ -2320,7 +2320,7 @@ function wp_travel_print_notices() {
 function wp_travel_date_format_php_to_js( $date_format = null ) {
 
 	// if ( ! $date_format ) {
-	// 	$date_format = get_option( 'date_format' );
+	// $date_format = get_option( 'date_format' );
 	// }
 	// $js_date_format = str_replace( 'Y', 'yyyy', $date_format );
 	// $js_date_format = str_replace( 'd', 'dd', $js_date_format );
@@ -2341,7 +2341,7 @@ function wp_travel_date_format_php_to_js( $date_format = null ) {
  */
 function wp_travel_moment_date_format( $date_format = null ) {
 	// if ( ! $date_format ) {
-	// 	$date_format = get_option( 'date_format' );
+	// $date_format = get_option( 'date_format' );
 	// }
 	// $js_date_format = str_replace( 'Y', 'YYYY', $date_format );
 	// $js_date_format = str_replace( 'd', 'DD', $js_date_format );
@@ -2349,7 +2349,7 @@ function wp_travel_moment_date_format( $date_format = null ) {
 	// $js_date_format = str_replace( 'm', 'MM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'MMMM', $js_date_format );
 	// $js_date_format = str_replace( 'F', 'MM', $js_date_format );
-	$js_date_format =  'YYYY-MM-DD';
+	$js_date_format = 'YYYY-MM-DD';
 	return apply_filters( 'wp_travel_moment_date_format', $js_date_format );
 }
 
@@ -2435,8 +2435,8 @@ function wp_travel_booking_data( $booking_id ) {
 		$discount  = isset( $order_totals['discount'] ) ? $order_totals['discount'] : $discount;
 		// Above sub total excludes discount so we need to add it here.
 		$sub_total += $discount;
-		$tax       = isset( $order_totals['tax'] ) ? $order_totals['tax'] : $tax;
-		$total     = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
+		$tax        = isset( $order_totals['tax'] ) ? $order_totals['tax'] : $tax;
+		$total      = isset( $order_totals['total'] ) ? $order_totals['total'] : $total;
 	}
 
 	$due_amount = $total - $total_paid_amount;
@@ -2618,7 +2618,8 @@ function wp_travel_get_search_filter_form( $args ) {
 						$form_field->init( $search_field, array( 'single' => true ) )->render();
 					}
 				}
-				$view_mode = wp_travel_get_archive_view_mode(); ?>
+				$view_mode = wp_travel_get_archive_view_mode();
+				?>
 
 				<div class="wp-travel-search">
 
@@ -2648,8 +2649,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 		return;
 	}
 
-	$details      = wp_travel_booking_data( $booking_id );
-	
+	$details = wp_travel_booking_data( $booking_id );
+
 	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
 
 	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
@@ -2665,7 +2666,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 	$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
 	$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
 
-	$status_list = wp_travel_get_payment_status();
+	$status_list  = wp_travel_get_payment_status();
 	$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] ) ? $status_list[ $details['payment_status'] ]['color'] : '';
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
@@ -2752,13 +2753,13 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<?php
 
 					// Travelers info.
-					$fname = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
-					$lname = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
+					$fname   = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+					$lname   = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
 					$country = get_post_meta( $booking_id, 'wp_travel_country_traveller', true );
-					$phone = get_post_meta( $booking_id, 'wp_travel_phone_traveller', true );
-					$email = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
-					$dob = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
-					$gender = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
+					$phone   = get_post_meta( $booking_id, 'wp_travel_phone_traveller', true );
+					$email   = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
+					$dob     = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
+					$gender  = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
 
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
 						foreach ( $fname as $booking_trip_id => $first_names ) :
@@ -2796,7 +2797,6 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 													<span class="my-order-tail"><?php echo esc_html( $gender[ $booking_trip_id ][ $key ] ); ?></span>
 												</div>
 											</div>
-											
 										<?php endforeach; ?>
 									</div>
 								</div>
@@ -2833,9 +2833,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 									<?php
 									if ( isset( $order_detail['trip_extras'] ) && isset( $order_detail['trip_extras']['id'] ) && count( $order_detail['trip_extras']['id'] ) > 0 ) :
 										$extras = $order_detail['trip_extras'];
-
 										?>
-									
 										<div class="my-order-price-breakdown-additional-service">
 											<h3 class="my-order-price-breakdown-additional-service-title"><?php esc_html_e( 'Additional Services', 'wp-travel' ); ?></h3>
 											<?php
@@ -2850,13 +2848,13 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 													$price = $sale_price;
 												}
 
-												$qty = isset( $extras['qty'][ $k ] ) ? $extras['qty'][ $k ] : 1;
+												$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 												$price = wp_travel_get_formated_price( $price );
 												$total = wp_travel_get_formated_price( $price * $qty );
 												?>
 												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo sprintf( '%s x %s%s', $extras['qty'][ $k ], wp_travel_get_currency_symbol(), $price ); ?> )</span>
+													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo sprintf( '%s x %s%s', $qty, wp_travel_get_currency_symbol(), $price ); ?> )</span>
 													<span class="my-order-tail my-order-right"><?php echo esc_html( wp_travel_get_currency_symbol() . $total ); ?></span>
 												</div>
 											<?php endforeach; ?>
@@ -2921,7 +2919,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 	}
 
 	$payment_data = wp_travel_payment_data( $booking_id );
-	$status_list = wp_travel_get_payment_status();
+	$status_list  = wp_travel_get_payment_status();
 	if ( $payment_data && count( $payment_data ) > 0 ) {
 		?>
 		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
@@ -2962,26 +2960,26 @@ function wp_travel_view_payment_details_table( $booking_id ) {
  * Return Thankyou page url.
  *
  * @param Mixed $trip_id Number or null.
- * 
+ *
  * @since 1.8.5
  * @return String URL.
  */
 function wp_travel_thankyou_page_url( $trip_id = null ) {
-	$settings          = wp_travel_get_settings();
+	$settings = wp_travel_get_settings();
 
 	if ( ! $trip_id ) {
 		global $wt_cart;
 		$items = $wt_cart->getItems();
-		if ( count( $items ) > 0 ){
+		if ( count( $items ) > 0 ) {
 			reset( $items );
-			$first_key = key( $items );
+			$first_key        = key( $items );
 			$thankyou_page_id = $first_key && isset( $items[ $first_key ]['trip_id'] ) ? $items[ $first_key ]['trip_id'] : 0;
 		}
 	}
 
 	if ( class_exists( 'WP_Travel_Cart_Checkout_Addon' ) ) {
-		$thankyou_page_id  = isset( $settings['thank_you_page_id'] ) && ! empty( $settings['thank_you_page_id'] ) ? $settings['thank_you_page_id'] : wp_travel_get_page_id( 'booking-thank-you' );
-	} 
+		$thankyou_page_id = isset( $settings['thank_you_page_id'] ) && ! empty( $settings['thank_you_page_id'] ) ? $settings['thank_you_page_id'] : wp_travel_get_page_id( 'booking-thank-you' );
+	}
 	$thankyou_page_url = 0 < $thankyou_page_id ? get_permalink( $thankyou_page_id ) : get_home_url();
 	return $thankyou_page_url;
 }
