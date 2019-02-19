@@ -2965,8 +2965,8 @@ function wp_travel_view_payment_details_table( $booking_id ) {
  * @return String URL.
  */
 function wp_travel_thankyou_page_url( $trip_id = null ) {
+	$thankyou_page_id = $trip_id;
 	$settings = wp_travel_get_settings();
-
 	if ( ! $trip_id ) {
 		global $wt_cart;
 		$items = $wt_cart->getItems();
@@ -2981,5 +2981,5 @@ function wp_travel_thankyou_page_url( $trip_id = null ) {
 		$thankyou_page_id = isset( $settings['thank_you_page_id'] ) && ! empty( $settings['thank_you_page_id'] ) ? $settings['thank_you_page_id'] : wp_travel_get_page_id( 'booking-thank-you' );
 	}
 	$thankyou_page_url = 0 < $thankyou_page_id ? get_permalink( $thankyou_page_id ) : get_home_url();
-	return apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
+	return apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $trip_id );
 }
