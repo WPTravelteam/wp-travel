@@ -2981,5 +2981,5 @@ function wp_travel_thankyou_page_url( $trip_id = null ) {
 		$thankyou_page_id = isset( $settings['thank_you_page_id'] ) && ! empty( $settings['thank_you_page_id'] ) ? $settings['thank_you_page_id'] : wp_travel_get_page_id( 'booking-thank-you' );
 	}
 	$thankyou_page_url = 0 < $thankyou_page_id ? get_permalink( $thankyou_page_id ) : get_home_url();
-	return $thankyou_page_url;
+	return apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url );
 }
