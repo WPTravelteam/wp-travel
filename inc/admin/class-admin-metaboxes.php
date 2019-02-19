@@ -798,7 +798,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		// Saving Tabs Settings.
 		$trip_meta['wp_travel_use_global_tabs'] = isset( $_POST['wp_travel_use_global_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) ) : 'yes';
-		$trip_meta['wp_travel_tabs']            = isset( $_POST['wp_travel_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_tabs'] ) ) : array();
+		$trip_meta['wp_travel_tabs']            = isset( $_POST['wp_travel_tabs'] ) ? ( wp_unslash( $_POST['wp_travel_tabs'] ) ) : array();
 
 		// Trip enquiry Global.
 		$trip_meta['wp_travel_use_global_trip_enquiry_option'] = isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) : 'yes';
