@@ -284,9 +284,20 @@ function wp_travel_send_email_payment( $booking_id ) {
 		return;
 	}
 	$order_items = get_post_meta( $booking_id, 'order_items_data', true );
+	
+	$price_keys = array();
+	foreach ( $order_items as $key => $item ) {
+		$price_keys[] = $item['price_key'];
+	}
+	
 	$order_items = ( $order_items && is_array( $order_items ) ) ? count( $order_items ) : 1;
 
 	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+
+	$price_key = false;
+	if ( ! $allow_multiple_cart_items || ( 1 === $order_items ) ) {
+		$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
+	}
 
 	// Handle Multiple payment Emails.
 	if ( $allow_multiple_cart_items && 1 !== $order_items ) {
@@ -364,7 +375,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$email_tags = array(
 		'{sitename}'               => $sitename,
 		'{itinerary_link}'         => get_permalink( $itinerary_id ),
-		'{itinerary_title}'        => $itinerary_title,
+		'{itinerary_title}'        => wp_travel_get_trip_pricing_name( $itinerary_id, $price_key ),
 		'{booking_id}'             => $booking_id,
 		'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
 		'{booking_no_of_pax}'      => $booking_no_of_pax,

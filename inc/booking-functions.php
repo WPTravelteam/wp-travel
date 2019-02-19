@@ -815,7 +815,7 @@ function wp_travel_book_now() {
 		$email_tags = array(
 			'{sitename}'               => $sitename,
 			'{itinerary_link}'         => get_permalink( $itinerary_id ),
-			'{itinerary_title}'        => $itinerary_title,
+			'{itinerary_title}'        => wp_travel_get_trip_pricing_name( $trip_id, $price_key ),
 			'{booking_id}'             => $booking_id,
 			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
 			'{booking_no_of_pax}'      => $booking_no_of_pax,
@@ -939,7 +939,6 @@ function wp_travel_book_now() {
 			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
 			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
 			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $trip_date );
-
 
 			if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
 				$multiple_order = new WP_Travel_Multiple_Cart_Booking();
