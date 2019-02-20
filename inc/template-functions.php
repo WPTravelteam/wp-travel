@@ -1900,15 +1900,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
 						$available_dates  = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
-						
-						
-						if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) {
-							foreach ( $available_dates as $trip_date ) {
-								// wp_travel_default_trip_list_items( $pricing, $trip_date );
-							}
-						} else {
-							// wp_travel_default_trip_list_items( $pricing );
-						}
+
 						$pricing_sold_out = false;
 
 						$inventory_data = array(

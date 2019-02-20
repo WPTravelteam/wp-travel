@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * WP travel Shortcode class.
  *
  * @class WP_Pattern
- * @version	1.0.0
+ * @version 1.0.0
  */
 class Wp_Travel_Shortcodes {
 
@@ -26,13 +26,14 @@ class Wp_Travel_Shortcodes {
 
 		/**
 		 * Checkout Shortcodes.
+		 *
 		 * @since 2.2.3
 		 * Shortcodes for new checkout process.
 		 */
 		$shortcodes = array(
-			'wp_travel_cart'           => __CLASS__ . '::cart',
-			'wp_travel_checkout' 	   => __CLASS__ . '::checkout',
-			'wp_travel_user_account'   => __CLASS__ . '::user_account',
+			'wp_travel_cart'         => __CLASS__ . '::cart',
+			'wp_travel_checkout'     => __CLASS__ . '::checkout',
+			'wp_travel_user_account' => __CLASS__ . '::user_account',
 		);
 
 		$shortcode = apply_filters( 'wp_travel_shortcodes', $shortcodes );
@@ -104,59 +105,59 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wp_travel_get_itineraries_shortcode(  $atts, $content = '' ) {
+	public static function wp_travel_get_itineraries_shortcode( $atts, $content = '' ) {
 
 		$type = isset( $atts['type'] ) ? $atts['type'] : '';
 
-		$iti_id = isset( $atts['itinerary_id'] ) ? absint($atts['itinerary_id']) : '';
+		$iti_id = isset( $atts['itinerary_id'] ) ? absint( $atts['itinerary_id'] ) : '';
 
 		$view_mode = ( isset( $atts['view_mode'] ) && ! empty( $atts['view_mode'] ) ) ? $atts['view_mode'] : 'grid';
 
-		$id   = isset( $atts['id'] ) ? $atts['id'] : 0;
-		$id   = absint( $id );
-		$slug = isset( $atts['slug'] ) ? $atts['slug'] : '';
+		$id    = isset( $atts['id'] ) ? $atts['id'] : 0;
+		$id    = absint( $id );
+		$slug  = isset( $atts['slug'] ) ? $atts['slug'] : '';
 		$limit = isset( $atts['limit'] ) ? $atts['limit'] : 20;
 		$limit = absint( $limit );
 
 		$args = array(
-			'post_type' 		=> 'itineraries',
-			'posts_per_page' 	=> $limit,
-			'status'       => 'published',
+			'post_type'      => 'itineraries',
+			'posts_per_page' => $limit,
+			'status'         => 'published',
 		);
 
 		if ( ! empty( $iti_id ) ) :
-			$args['p'] 	= $iti_id;
+			$args['p'] = $iti_id;
 		else :
 			$taxonomies = array( 'itinerary_types', 'travel_locations' );
 			// if type is taxonomy.
 			if ( in_array( $type, $taxonomies ) ) {
 
-				if (  $id > 0 ) {
-					$args['tax_query']	 = array(
-											array(
-												'taxonomy' => $type,
-												'field'    => 'term_id',
-												'terms'    => $id,
-												),
-											);
+				if ( $id > 0 ) {
+					$args['tax_query'] = array(
+						array(
+							'taxonomy' => $type,
+							'field'    => 'term_id',
+							'terms'    => $id,
+						),
+					);
 				} elseif ( '' !== $slug ) {
-					$args['tax_query']	 = array(
-											array(
-												'taxonomy' => $type,
-												'field'    => 'slug',
-												'terms'    => $slug,
-												),
-											);
+					$args['tax_query'] = array(
+						array(
+							'taxonomy' => $type,
+							'field'    => 'slug',
+							'terms'    => $slug,
+						),
+					);
 				}
 			} elseif ( 'featured' === $type ) {
 				$args['meta_key']   = 'wp_travel_featured';
 				$args['meta_query'] = array(
-									array(
-										'key'     => 'wp_travel_featured',
-										'value'   => 'yes',
-										// 'compare' => 'IN',
-									),
-								);
+					array(
+						'key'   => 'wp_travel_featured',
+						'value' => 'yes',
+						// 'compare' => 'IN',
+					),
+				);
 			}
 
 		endif;
@@ -165,12 +166,15 @@ class Wp_Travel_Shortcodes {
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php $col_per_row = ( isset( $atts['col'] ) && ! empty( $atts['col'] ) ) ? absint( $atts['col'] ) : apply_filters( 'wp_travel_itineraries_col_per_row' , '2' ); ?>
+			<?php $col_per_row = ( isset( $atts['col'] ) && ! empty( $atts['col'] ) ) ? absint( $atts['col'] ) : apply_filters( 'wp_travel_itineraries_col_per_row', '2' ); ?>
 			<?php if ( $query->have_posts() ) : ?>
-				<ul style="" class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ) ?>-per-row">
-				<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+				<ul style="" class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row">
+				<?php
+				while ( $query->have_posts() ) :
+					$query->the_post();
+					?>
 					<?php
-					if( 'grid' === $view_mode ) :
+					if ( 'grid' === $view_mode ) :
 						wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
 					else :
 						wp_travel_get_template_part( 'shortcode/itinerary', 'item-list' );
@@ -182,7 +186,8 @@ class Wp_Travel_Shortcodes {
 				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
 			<?php endif; ?>
 		</div>
-		<?php wp_reset_query();
+		<?php
+		wp_reset_query();
 		$content = ob_get_contents();
 		ob_end_clean();
 		return $content;
@@ -196,8 +201,8 @@ class Wp_Travel_Shortcodes {
 	 * @return String
 	 */
 	public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
-
-		$defaults = array(
+		$search_widget_fields = wp_travel_search_filter_widget_form_fields();
+		$defaults             = array(
 			'keyword_search'       => 1,
 			'fact'                 => 1,
 			'trip_type_filter'     => 1,
@@ -211,21 +216,30 @@ class Wp_Travel_Shortcodes {
 
 		if ( isset( $atts['filters'] ) && 'all' !== $atts['filters'] ) {
 			$atts = explode( ',', $atts['filters'] );
+
 			if ( count( $atts ) > 0 ) {
 				$defaults = array();
-				foreach ( $atts as $key ) {
-					$defaults[ $key ] = 1;
+				foreach ( $search_widget_fields as $key => $filter ) {
+					if ( in_array( $filter['name'], $atts ) ) {
+						$defaults[ $key ] = 1;
+					}
 				}
 			}
 		}
 		if ( isset( $atts['exclude'] ) ) {
 			$atts = explode( ',', $atts['exclude'] );
 			if ( count( $atts ) > 0 ) {
-				foreach ( $atts as $key ) {
-					unset( $defaults[ $key ] );
+				foreach ( $search_widget_fields as $key => $filter ) {
+					if ( in_array( $filter['name'], $atts ) ) {
+						unset( $defaults[ $key ] );
+					}
 				}
+				// foreach ( $atts as $key ) {
+				// unset( $defaults[ $key ] );
+				// }
 			}
 		}
+
 		ob_start();
 		echo '<div class="widget_wp_travel_filter_search_widget">';
 		wp_travel_get_search_filter_form( array( 'shortcode' => $defaults ) );
@@ -253,9 +267,9 @@ class Wp_Travel_Shortcodes {
 
 		$wp_travel_trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 
-		if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ){
+		if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ) {
 
-			$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts,true );
+			$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
 
 		}
 
@@ -271,10 +285,13 @@ class Wp_Travel_Shortcodes {
 						<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 							<?php
 
-								$icon = array_filter( $settings['wp_travel_trip_facts_settings'], function( $setting ) use ( $trip_fact ) {
+								$icon = array_filter(
+									$settings['wp_travel_trip_facts_settings'],
+									function( $setting ) use ( $trip_fact ) {
 
-									return $setting['name'] === $trip_fact['label'];
-								} );
+										return $setting['name'] === $trip_fact['label'];
+									}
+								);
 
 							foreach ( $icon as $key => $ico ) {
 
@@ -283,21 +300,19 @@ class Wp_Travel_Shortcodes {
 							?>
 							<span class="tour-info-item tour-info-type">
 								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-								<strong><?php echo esc_html( $trip_fact['label'] );?></strong>:
+								<strong><?php echo esc_html( $trip_fact['label'] ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
 									$count = count( $trip_fact['value'] );
-									$i = 1;
+									$i     = 1;
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										echo esc_html( $val );
 										if ( $count > 1 && $i !== $count ) {
 											echo esc_html( ',', 'wp-travel' );
 										}
-									$i++;
+										$i++;
 									}
-
-								}
-								else {
+								} else {
 									echo esc_html( $trip_fact['value'] );
 								}
 
@@ -311,7 +326,6 @@ class Wp_Travel_Shortcodes {
 			<?php
 
 				$content = ob_get_clean();
-
 
 			return $content;
 
