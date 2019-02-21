@@ -194,6 +194,9 @@ Release Date: 21 February 2019
 * Fixes: Pricing label updated in email for pricing option.
 * Fixes: Trip extra amount included in standard paypal.
 * Fixes: Minor layout update in trip single.
+* Fixes: Trip update issue.
+* Fixes: Trip enquiry on sold out.
+* Fixes: Partial payment amount for standard paypal.
 * Fixes: Search filter shortcode fields.
 
 = 1.8.5 =

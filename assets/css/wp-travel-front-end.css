@@ -2964,7 +2964,7 @@ ul.wp-travel-error {
 li.pricing_unavailable > div {
   color: #c7d0d9;
   pointer-events: none; }
-li.pricing_unavailable > div.action {
+li.pricing_unavailable > div.action, li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking {
   pointer-events: all; }
 
 @media screen and (max-width: 1024px) {

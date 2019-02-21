@@ -41,6 +41,7 @@ $trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night',
 $trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
 
 $price       = get_post_meta( $post_id, 'wp_travel_price', true );
+$price = $price ? $price : '';
 $sale_price  = get_post_meta( $post_id, 'wp_travel_sale_price', true );
 $enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 
@@ -610,7 +611,7 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 													<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 												</div>
 											</div>
-											<?php do_action( 'wp_travel_price_tab_after_multiple_date', $post_id ); ?>
+											<?php do_action( 'wp_travel_price_tab_after_multiple_date', $post_id, $date_key ); ?>
 											<div class="repeat-row">
 												<label class="one-third"><?php esc_html_e( 'Select pricing options', 'wp-travel' ); ?></label>
 												<div class="two-third">
