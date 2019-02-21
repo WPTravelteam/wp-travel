@@ -181,6 +181,8 @@ class WP_Travel_Gateway_Paypal_Request {
 				// $args['os1_' . $agrs_index ] = $payment_mode;
 				$args[ 'os2_' . $agrs_index ] = $item['trip_price'];
 
+				$args = apply_filters( 'wp_travel_tour_extra_paypal_args', $args, $item, $cart_id, $agrs_index );
+
 				$agrs_index++;
 			}
 		} elseif ( $complete_partial_payment ) { // For partial payment addons.

@@ -195,9 +195,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $post_id );
-
-	// $wp_travel_itinerary = new WP_Travel_Itinerary();
+	$per_person_text = wp_travel_get_price_per_text( $post_id );	
 	?>
 
 	<div class="wp-detail-review-wrap">
@@ -463,19 +461,20 @@ function wp_travel_single_keywords( $post_id ) {
 	if ( is_array( $terms ) && count( $terms ) > 0 ) :
 		?>
 		<div class="wp-travel-keywords">
-		<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ); ?></span>
-		<?php $i = 0; ?>
-		<?php foreach ( $terms as $term ) : ?>
+			<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ); ?></span>
 			<?php
-			if ( $i > 0 ) :
+			$i = 0;
+			foreach ( $terms as $term ) : 
+				if ( $i > 0 ) :
+					?> , 
+					<?php
+				endif;
 				?>
-				,
-			<?php endif; ?>
-			<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
-			<?php
-			$i++;
-endforeach;
-		?>
+				<span class="wp-travel-keyword"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
+				<?php
+				$i++;
+			endforeach;
+			?>
 		</div>
 		<?php
 	endif;
@@ -517,19 +516,20 @@ function wp_travel_single_location( $post_id ) {
 				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
 			</div>
 			<div class="travel-info">
-				<span class="value"><?php $i = 0; ?>
-											 <?php
-												foreach ( $terms as $term ) :
-													?>
-
-													<?php
-													if ( $i > 0 ) :
-														?>
-					, <?php endif; ?><span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
-													<?php
-													$i++;
-endforeach;
-												?>
+				<span class="value">
+					<?php
+					$i = 0;
+					foreach ( $terms as $term ) :
+						if ( $i > 0 ) :
+							?> , 
+							<?php
+						endif;
+						?>
+						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
+						<?php
+						$i++;
+					endforeach;
+					?>
 				</span>
 			</div>
 		</li>
@@ -706,22 +706,23 @@ function wp_travel_frontend_contents( $post_id ) {
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
-		<ul class="wp-travel tab-list resp-tabs-list ">
-			<?php $index = 1; ?>
-			<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
-				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
-					<?php continue; ?>
-				<?php endif; ?>
-				<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
-					<?php continue; ?>
-				<?php endif; ?>
-				<?php $tab_label = $tab_info['label']; ?>
-				<li class="wp-travel-ert <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_label ); ?></li>
+			<ul class="wp-travel tab-list resp-tabs-list ">
 				<?php
-				$index++;
-endforeach;
-			?>
-		</ul>
+				$index = 1;
+				foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+					<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
+						<?php continue; ?>
+					<?php endif; ?>
+					<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
+						<?php continue; ?>
+					<?php endif; ?>
+					<?php $tab_label = $tab_info['label']; ?>
+					<li class="wp-travel-ert <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_label ); ?></li>
+					<?php
+					$index++;
+				endforeach;
+				?>
+			</ul>
 		<div class="resp-tabs-container">
 			<?php $index = 1; ?>
 			<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
@@ -1865,9 +1866,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 			<div class="availabily-wrapper">
 				<ul class="availabily-list additional-col">
 					<li class="availabily-heading clearfix">
-							<div class="date-from">
-								<?php echo esc_html__( 'Pricing Name', 'wp-travel' ); ?>
-							</div>
+						<div class="date-from">
+							<?php echo esc_html__( 'Pricing Name', 'wp-travel' ); ?>
+						</div>
+						<div class="date-from">
+							<?php echo esc_html__( 'Start', 'wp-travel' ); ?>
+						</div>
 						<div class="status">
 							<?php echo esc_html__( 'Min Group Size', 'wp-travel' ); ?>
 						</div>
@@ -1899,7 +1903,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						$pricing_min_pax      = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : '';
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
-						$available_dates  = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
+						$available_dates = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
 
 						$pricing_sold_out = false;
 
@@ -1913,154 +1917,300 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 							'max_pax'        => $pricing_max_pax,
 						);
 
-						$trip_date = isset( $available_dates ) && is_array( $available_dates ) && count( $available_dates ) > 0 ? $available_dates[0] : '';
-						$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $trip_date ); // Need to pass inventory date to get availability as per specific date.
+						if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) { // multiple available dates
+							foreach ( $available_dates as $available_date ) {
+								// echo $available_date;
+								$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $available_date ); // Need to pass inventory date to get availability as per specific date.
 
-						$pricing_status_msg = $inventory_data['status_message'];
-						$pricing_sold_out   = $inventory_data['sold_out'];
-						$available_pax      = $inventory_data['available_pax'];
-						$booked_pax         = $inventory_data['booked_pax'];
-						$pax_limit          = $inventory_data['pax_limit'];
-						$min_pax            = $inventory_data['min_pax'];
-						$max_pax            = $inventory_data['max_pax'];
+								$pricing_status_msg = $inventory_data['status_message'];
+								$pricing_sold_out   = $inventory_data['sold_out'];
+								$available_pax      = $inventory_data['available_pax'];
+								$booked_pax         = $inventory_data['booked_pax'];
+								$pax_limit          = $inventory_data['pax_limit'];
+								$min_pax            = $inventory_data['min_pax'];
+								$max_pax            = $inventory_data['max_pax'];
 
-						if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-							$inventory = new WP_Travel_Util_Inventory();
-							if ( $inventory->is_inventory_enabled( $trip_id ) && $available_pax ) {
-								$pricing_max_pax = $available_pax;
-							}
-						}
-						$max_attr = 'max=' . $pricing_max_pax;
-						?>
-						<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
-							<div class="date-from">
-								<span class="availabily-heading-label"><?php echo esc_html__( 'Pricing Name:', 'wp-travel' ); ?></span> <span><?php echo esc_html( $pricing_name ); ?></span>
-							</div>
-							<div class="status">
-								<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
-							</div>
-							<div class="status">
-								<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
-								<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
-							</div>
-							<?php
-							if ( $status_col ) :
-
-								if ( $pricing_sold_out ) :
-									?>
-									<div class="status">
-										<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
-										<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
+								if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+									$inventory = new WP_Travel_Util_Inventory();
+									if ( $inventory->is_inventory_enabled( $trip_id ) && $available_pax ) {
+										$pricing_max_pax = $available_pax;
+									}
+								}
+								$max_attr  = 'max=' . $pricing_max_pax;
+								$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $available_date );
+								?>
+								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix">
+									<div class="date-from">
+										<span class="availabily-heading-label"><?php echo esc_html__( 'Pricing Name:', 'wp-travel' ); ?></span>
+										<span> <?php echo esc_html( $pricing_name ); ?> </span>
 									</div>
-								<?php else : ?>
+									<div class="date-from">
+										<span class="availabily-heading-label"><?php echo esc_html__( 'Start:', 'wp-travel' ); ?></span>
+										<span> <?php echo esc_html( $available_date ); ?> </span>
+									</div>
 									<div class="status">
-										<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
-										<span><?php echo esc_html( $pricing_status_msg ); ?></span>
-										<?php if ( $trip_date ) : ?>
-											<span class="availibility-for">
-												<?php esc_html_e( 'Availability for :', 'wp-travel' ); ?>
-												<span class="availibility-date">
-													<?php echo wp_travel_format_date( $trip_date, true, 'Y-m-d' );  ?>
+										<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
+										<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+									</div>
+									<div class="status">
+										<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
+										<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+									</div>
+									<?php
+									if ( $status_col ) :
+
+										if ( $pricing_sold_out ) :
+											?>
+											<div class="status">
+												<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+												<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
+											</div>
+										<?php else : ?>
+											<div class="status">
+												<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+												<span><?php echo esc_html( $pricing_status_msg ); ?></span>
+
+											</div>
+											<?php
+										endif;
+									endif;
+									?>
+									<div class="price">
+										<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
+										<?php if ( '' !== $pricing_option_price || '0' !== $pricing_option_price ) : ?>
+
+											<?php if ( 'yes' === $pricing_sale_enabled ) : ?>
+												<del>
+													<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price ); ?></span>
+												</del>
+											<?php endif; ?>
+												<span class="person-count">
+													<ins>
+														<span>
+															<?php
+															if ( 'yes' === $pricing_sale_enabled ) {
+																echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $pricing_sale_price ), $currency_symbol, $pricing_sale_price );
+															} else {
+																echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price );
+															}
+															?>
+														</span>
+													</ins>/<?php echo esc_html( $per_person_text ); ?>
 												</span>
-											</span>
 										<?php endif; ?>
 									</div>
-									<?php
-								endif;
-							endif;
-							?>
-							<div class="price">
-								<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
-								<?php if ( '' !== $pricing_option_price || '0' !== $pricing_option_price ) : ?>
-
-									<?php if ( 'yes' === $pricing_sale_enabled ) : ?>
-										<del>
-											<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price ); ?></span>
-										</del>
-									<?php endif; ?>
-										<span class="person-count">
-											<ins>
-												<span>
-													<?php
-													if ( 'yes' === $pricing_sale_enabled ) {
-														echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $pricing_sale_price ), $currency_symbol, $pricing_sale_price );
-													} else {
-														echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price );
-													}
-													?>
-												</span>
-											</ins>/<?php echo esc_html( $per_person_text ); ?>
-										</span>
-								<?php endif; ?>
-							</div>
-							<div class="action">
-
-								<?php if ( $pricing_sold_out ) : ?>
-
-									<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
-
-								<?php else : ?>
-									<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
-								<?php endif; ?>
-							</div>
-							<div class="wp-travel-booking-row">
-								<?php
-									/**
-									 * Support For WP Travel Tour Extras Plugin.
-									 *
-									 * @since 1.5.8
-									 */
-									do_action( 'wp_travel_trip_extras', $price_key );
-								?>
-								<div class="wp-travel-calender-column no-padding ">
-
-									<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
-									<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo ( $available_dates ) ? esc_attr( wp_json_encode( $available_dates ) ) : ''; ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
-
-								</div>
-								<div class="wp-travel-calender-aside">
-									<?php
-									$pricing_default_types = wp_travel_get_pricing_variation_options();
-
-									$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
-
-									$max_attr = '';
-									$min_attr = 'min=1';
-									if ( '' !== $pricing_max_pax ) {
-
-										$max_attr = 'max=' . $pricing_max_pax;
-									}
-									if ( '' !== $pricing_min_pax ) {
-										$min_attr = 'min=' . $pricing_min_pax;
-									}
-
-									?>
-									<div class="col-sm-3">
-										<label for=""><?php echo esc_html( ucfirst( $pricing_type_label ) ); ?></label>
-										<input name="pax" type="number" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+									<div class="action">
+		
+										<?php if ( $pricing_sold_out ) : ?>
+		
+											<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+		
+										<?php else : ?>
+											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+										<?php endif; ?>
 									</div>
-									<div class="add-to-cart">
-										<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
-										<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
-										<?php
-											$button   = '<a href="%s" data-parent-id="pricing-' . esc_attr( $price_key ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
-											$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
-										if ( 'yes' !== $fixed_departure ) :
-											$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
-											?>
-												<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
+									<?php if ( ! $pricing_sold_out ) : // Remove Book now if trip is soldout. ?>
+										<div class="wp-travel-booking-row">
 											<?php
-											endif;
+												/**
+												 * Support For WP Travel Tour Extras Plugin.
+												 *
+												 * @since 1.5.8
+												 */
+												do_action( 'wp_travel_trip_extras', $price_key, $available_date );
+											?>
+											<div class="wp-travel-calender-aside">
+												<?php
+												$pricing_default_types = wp_travel_get_pricing_variation_options();
 
-											$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
-											printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+												$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
+
+												$max_attr = '';
+												$min_attr = 'min=1';
+												if ( '' !== $pricing_max_pax ) {
+
+													$max_attr = 'max=' . $pricing_max_pax;
+												}
+												if ( '' !== $pricing_min_pax ) {
+													$min_attr = 'min=' . $pricing_min_pax;
+												}
+
+												?>
+												<div class="col-sm-3">
+													<label for=""><?php echo esc_html( ucfirst( $pricing_type_label ) ); ?></label>
+													<input name="pax" type="number" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+												</div>
+												<div class="add-to-cart">
+													<input type="hidden" name="trip_date" value="<?php echo esc_attr( $available_date ); ?>" >
+													<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+													<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+													<?php
+														$button   = '<a href="%s" data-parent-id="' . $parent_id . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+														$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+													if ( 'yes' !== $fixed_departure ) :
+														$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
+														?>
+															<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
+														<?php
+														endif;
+
+														$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+														printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+													?>
+												</div>
+											</div>
+										</div>
+									<?php endif; ?>
+								</li>
+								<?php
+							}
+						} else {
+							$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key ); // Need to pass inventory date to get availability as per specific date.
+
+							$pricing_status_msg = $inventory_data['status_message'];
+							$pricing_sold_out   = $inventory_data['sold_out'];
+							$available_pax      = $inventory_data['available_pax'];
+							$booked_pax         = $inventory_data['booked_pax'];
+							$pax_limit          = $inventory_data['pax_limit'];
+							$min_pax            = $inventory_data['min_pax'];
+							$max_pax            = $inventory_data['max_pax'];
+
+							if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+								$inventory = new WP_Travel_Util_Inventory();
+								if ( $inventory->is_inventory_enabled( $trip_id ) && $available_pax ) {
+									$pricing_max_pax = $available_pax;
+								}
+							}
+							$max_attr = 'max=' . $pricing_max_pax;
+							?>
+							<li id="pricing-<?php echo esc_attr( $price_key ); ?>" class="availabily-content clearfix">
+								<div class="date-from">
+									<span class="availabily-heading-label"><?php echo esc_html__( 'Pricing Name:', 'wp-travel' ); ?></span> <span><?php echo esc_html( $pricing_name ); ?></span>
+								</div>
+								<div class="date-from">
+									<span class="availabily-heading-label"><?php echo esc_html__( 'Start:', 'wp-travel' ); ?></span>
+									<span></span>
+								</div>
+								<div class="status">
+									<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>
+									<span><?php echo ! empty( $pricing_min_pax ) ? esc_html( $pricing_min_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								</div>
+								<div class="status">
+									<span class="availabily-heading-label"><?php echo esc_html__( 'Max Group Size:', 'wp-travel' ); ?></span>
+									<span><?php echo ! empty( $pricing_max_pax ) ? esc_html( $pricing_max_pax . __( ' pax', 'wp-travel' ) ) : esc_html__( 'No size limit', 'wp-travel' ); ?></span>
+								</div>
+								<?php
+								if ( $status_col ) :
+
+									if ( $pricing_sold_out ) :
 										?>
+										<div class="status">
+											<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+											<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
+										</div>
+									<?php else : ?>
+										<div class="status">
+											<span class="availabily-heading-label"><?php echo esc_html__( 'Status:', 'wp-travel' ); ?></span>
+											<span><?php echo esc_html( $pricing_status_msg ); ?></span>
+										</div>
+										<?php
+									endif;
+														endif;
+								?>
+								<div class="price">
+									<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
+									<?php if ( '' !== $pricing_option_price || '0' !== $pricing_option_price ) : ?>
+	
+										<?php if ( 'yes' === $pricing_sale_enabled ) : ?>
+											<del>
+												<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price ); ?></span>
+											</del>
+										<?php endif; ?>
+											<span class="person-count">
+												<ins>
+													<span>
+														<?php
+														if ( 'yes' === $pricing_sale_enabled ) {
+															echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s %s', $currency_symbol, $pricing_sale_price ), $currency_symbol, $pricing_sale_price );
+														} else {
+															echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $pricing_option_price ), $currency_symbol, $pricing_option_price );
+														}
+														?>
+													</span>
+												</ins>/<?php echo esc_html( $per_person_text ); ?>
+											</span>
+									<?php endif; ?>
+								</div>
+								<div class="action">
+	
+															<?php if ( $pricing_sold_out ) : ?>
+	
+										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+	
+									<?php else : ?>
+										<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+									<?php endif; ?>
+								</div>
+								<div class="wp-travel-booking-row">
+															<?php
+																/**
+																 * Support For WP Travel Tour Extras Plugin.
+																 *
+																 * @since 1.5.8
+																 */
+																do_action( 'wp_travel_trip_extras', $price_key );
+															?>
+									<div class="wp-travel-calender-column no-padding ">
+	
+										<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
+										<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo ( $available_dates ) ? esc_attr( wp_json_encode( $available_dates ) ) : ''; ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">
+	
+									</div>
+									<div class="wp-travel-calender-aside">
+										<?php
+										$pricing_default_types = wp_travel_get_pricing_variation_options();
+
+										$pricing_type_label = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
+
+										$max_attr = '';
+										$min_attr = 'min=1';
+										if ( '' !== $pricing_max_pax ) {
+
+											$max_attr = 'max=' . $pricing_max_pax;
+										}
+										if ( '' !== $pricing_min_pax ) {
+											$min_attr = 'min=' . $pricing_min_pax;
+										}
+
+										?>
+										<div class="col-sm-3">
+											<label for=""><?php echo esc_html( ucfirst( $pricing_type_label ) ); ?></label>
+											<input name="pax" type="number" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+										</div>
+										<div class="add-to-cart">
+											<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+											<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+											<?php
+												$button   = '<a href="%s" data-parent-id="pricing-' . esc_attr( $price_key ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+												$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+											if ( 'yes' !== $fixed_departure ) :
+												$cart_url = add_query_arg( 'trip_duration', $trip_duration, $cart_url );
+												?>
+													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
+												<?php
+												endif;
+
+												$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+												printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+											?>
+										</div>
 									</div>
 								</div>
-							</div>
-						</li>
-					<?php endforeach; ?>
+							</li>
+													<?php
+						}
+					endforeach;
+					?>
 				</ul>
 			</div>
 		</div>
@@ -2198,7 +2348,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						if ( class_exists( 'WP_Travel_Util_Inventory' ) && ! $trip_price ) :
 							// display price unavailable text
 							$no_price_text = isset( $settings['price_unavailable_text'] ) && '' !== $settings['price_unavailable_text'] ? $settings['price_unavailable_text'] : '';
-							echo '<div class="price"><strong>'. esc_html( $no_price_text ) . '</strong></div>';
+							echo '<div class="price"><strong>' . esc_html( $no_price_text ) . '</strong></div>';
 						else :
 							?>
 							<div class="price">
@@ -2472,7 +2622,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 									endif;
 								?>
 							</div>
-							<?php // do_action('wp_travel_trip_extras', $price_key); ?>
 						</li>
 						<?php endforeach; ?>
 					<?php endforeach; ?>

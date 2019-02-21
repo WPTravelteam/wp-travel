@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
                 data: cart_fields,
                 beforeSend: function() {},
                 success: function(data) {
-                    location.href = wp_travel.cartUrl;
+                    // location.href = wp_travel.cartUrl;
                 }
             });
         }

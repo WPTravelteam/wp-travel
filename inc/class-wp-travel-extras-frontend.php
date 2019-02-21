@@ -16,7 +16,7 @@ class Wp_Travel_Extras_Frontend {
      */
     public function init() {
 
-        add_action( 'wp_travel_trip_extras', array( $this, 'tour_extras_frontend' ) );
+        add_action( 'wp_travel_trip_extras', array( $this, 'tour_extras_frontend' ), 10, 2 );
         
     }
     /**
@@ -90,7 +90,7 @@ class Wp_Travel_Extras_Frontend {
      * @param int $trip_id
      * @return void
      */
-    public function tour_extras_frontend( $price_key = false ) {
+    public function tour_extras_frontend( $price_key = false, $trip_date = false ) {
 
         global $post;
 
@@ -107,7 +107,7 @@ class Wp_Travel_Extras_Frontend {
         if ( is_array( $trip_extras ) && ! empty ( $trip_extras ) ) :
 
             if ( $this->is_extras_pro() ) {
-                do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras, $price_key );
+                do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras, $price_key, $trip_date );
             } else {
                 ?>
                 <div class="wp_travel_tour_extras">
@@ -127,8 +127,8 @@ class Wp_Travel_Extras_Frontend {
                             <div class="wp_travel_tour_extras_option_single">
                             <div class="wp_travel_tour_extras_option_single_content">
                                 <div class="wp_travel_tour_extras_option_top">
-                                    <input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) ?>" type="checkbox">
-                                    <label for="trip_extra_<?php echo esc_attr( $key ) ?>" class="check_icon"></label>
+                                    <input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) . '_' . $trip_date ?>" type="checkbox">
+                                    <label for="trip_extra_<?php echo esc_attr( $key ) . '_' . $trip_date ?>" class="check_icon"></label>
                                     <div class="wp_travel_tour_extras_option_label">
                                         <div class="wp_travel_tour_extras_title">
                                             <h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>
