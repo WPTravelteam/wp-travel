@@ -2416,35 +2416,7 @@ ul.availabily-list {
                 &.btn {
                     margin-right: -8px;
                 }
-                .wp-travel-sold-out {
-                    border: 1px solid;
-                    color: #ff4d4d;
-                    font-weight: 500;
-                    margin-bottom: 0;
-                    text-align: center;
-                    .wp-travel-booking-enquiry {
-                        background-color: #ff4d4f;
-                        color: #fff;
-                        padding: 5px 0;
-                        display: flex;
-                        display: -webkit-box;
-                        display: -ms-flexbox;
-                        display: flex;
-                        -webkit-box-pack: center;
-                        -ms-flex-pack: center;
-                        justify-content: center;
-                        &:hover {
-                            opacity: 0.9;
-                        }
-                        >.dashicons {
-                            height: 14px;
-                        }
-                        >* {
-                            -ms-flex-item-align: center;
-                            align-self: center;
-                        }
-                    }
-                }
+                
             }
             span {
                 display: block;
@@ -2578,6 +2550,36 @@ ul.availabily-list {
         }
         &>div.date-from:after {
             display: none;
+        }
+    }
+}
+
+.wp-travel-sold-out {
+    border: 1px solid;
+    color: #ff4d4d;
+    font-weight: 500;
+    margin-bottom: 0;
+    text-align: center;
+    .wp-travel-booking-enquiry {
+        background-color: #ff4d4f;
+        color: #fff;
+        padding: 5px 0;
+        display: flex;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        &:hover {
+            opacity: 0.9;
+        }
+        >.dashicons {
+            height: 14px;
+        }
+        >* {
+            -ms-flex-item-align: center;
+            align-self: center;
         }
     }
 }
@@ -3634,8 +3636,10 @@ ul.wp-travel-error {
             flex-wrap: wrap;
             list-style-type: none;
             &.pricing_unavailable {
-                color: #c7d0d9;
-                pointer-events: none;
+                .trip_list_by_fixed_departure_dates_wrap{
+                    color: #c7d0d9;
+                    pointer-events: none;
+                }
                 .trip_list_by_fixed_departure_dates_booking {
                     .btn {
                         border-color: #c7d0d9;
@@ -3677,13 +3681,13 @@ ul.wp-travel-error {
                         border-color: transparent #c7d0d9 transparent transparent;
                     }
                 }
-                .trip_list_by_fixed_departure_dates_booking {
-                    .wp-travel-sold-out {
-                        a {
-                            color: #c7d0d9;
-                        }
-                    }
-                }
+                // .trip_list_by_fixed_departure_dates_booking {
+                //     .wp-travel-sold-out {
+                //         a {
+                //             color: #c7d0d9;
+                //         }
+                //     }
+                // }
             }
             &:hover {
                 &:not(.pricing_unavailable) {
@@ -3850,6 +3854,18 @@ ul.wp-travel-error {
                     margin-left: 4px;
                 }
             }
+        }
+    }
+}
+li {
+
+    &.pricing_unavailable{
+        >div{
+            color: #c7d0d9;
+            pointer-events: none;
+        }
+        >div.action{
+            pointer-events: all;
         }
     }
 }

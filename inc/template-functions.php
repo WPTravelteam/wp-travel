@@ -1938,8 +1938,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								}
 								$max_attr  = 'max=' . $pricing_max_pax;
 								$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $available_date );
+
+								$unavailable_class = $pricing_sold_out ? 'pricing_unavailable' : '';
 								?>
-								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix">
+								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ) ?>">
 									<div class="date-from">
 										<span class="availabily-heading-label"><?php echo esc_html__( 'Pricing Name:', 'wp-travel' ); ?></span>
 										<span> <?php echo esc_html( $pricing_name ); ?> </span>

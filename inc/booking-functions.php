@@ -962,6 +962,7 @@ function wp_travel_book_now() {
 	$wt_cart->clear();
 
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
+	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
 	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
 	header( 'Location: ' . $thankyou_page_url );
 	exit;

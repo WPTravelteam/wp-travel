@@ -425,7 +425,7 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 		$post_id                   = $args['post']->ID;
-		$tabs                      = wp_travel_get_frontend_tabs();
+		$tabs                      = wp_travel_get_frontend_tabs( false, false );
 		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
@@ -799,7 +799,7 @@ class WP_Travel_Admin_Metaboxes {
 		// Saving Tabs Settings.
 		$trip_meta['wp_travel_use_global_tabs'] = isset( $_POST['wp_travel_use_global_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) ) : 'yes';
 		$trip_meta['wp_travel_tabs']            = isset( $_POST['wp_travel_tabs'] ) ? ( wp_unslash( $_POST['wp_travel_tabs'] ) ) : array();
-
+// error_log( print_r( $_POST, true ) );
 		// Trip enquiry Global.
 		$trip_meta['wp_travel_use_global_trip_enquiry_option'] = isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) : 'yes';
 		// Trip Specific Enquiry Option.

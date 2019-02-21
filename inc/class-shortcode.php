@@ -220,8 +220,14 @@ class Wp_Travel_Shortcodes {
 			if ( count( $atts ) > 0 ) {
 				$defaults = array();
 				foreach ( $search_widget_fields as $key => $filter ) {
-					if ( in_array( $filter['name'], $atts ) ) {
-						$defaults[ $key ] = 1;
+					if ( isset( $filter['name'] ) ) {
+						if ( in_array( $filter['name'], $atts ) ) {
+							$defaults[ $key ] = 1;
+						}
+					} else {
+						if ( in_array( $key, $atts ) ) {
+							$defaults[ $key ] = 1;
+						}
 					}
 				}
 			}

@@ -85,11 +85,11 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		global $wt_cart;
 		$items = $wt_cart->getItems();
-
-		$current_url = get_permalink( $itinery_id );
+		$current_url = wp_travel_thankyou_page_url($itinery_id);
+		// $current_url = get_permalink( $itinery_id );
 		if ( $items ) {  // Normal Payment.
 
-			$current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
+			// $current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
 			$cart_amounts = $wt_cart->get_total();
 
 			$tax = 0;

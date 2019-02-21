@@ -173,7 +173,7 @@ class WP_Travel_Cart {
 			$inventory = new WP_Travel_Util_Inventory();
 
 			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
-			$available_pax     = $inventory->get_available_pax( $trip_id, $price_key );
+			$available_pax     = $inventory->get_available_pax( $trip_id, $price_key, $arrival_date );
 
 			/**
 			 * Customization Starts.
@@ -423,15 +423,15 @@ class WP_Travel_Cart {
 
 				$trip_extras_total = 0;
 
-				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) ) {
+				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) && isset( $trip['trip_extras']['id'] ) && is_array( $trip['trip_extras']['id'] ) ) {
 
 					foreach ( $trip['trip_extras']['id'] as $k => $e_id ) {
 
 						$trip_extras_data = get_post_meta( $e_id, 'wp_travel_tour_extras_metas', true );
 
-						$price      = isset( $trip_extras_data['extras_item_price'] ) && ! empty( $trip_extras_data['extras_item_price'] ) ? $trip_extras_data['extras_item_price'] : false;
+						$price      = isset( $trip_extras_data['extras_item_price'] ) && ! empty( $trip_extras_data['extras_item_price'] ) ? $trip_extras_data['extras_item_price'] : 0;
 						$sale_price = isset( $trip_extras_data['extras_item_sale_price'] ) && ! empty( $trip_extras_data['extras_item_sale_price'] ) ? $trip_extras_data['extras_item_sale_price'] : false;
-						$unit       = isset( $trip_extras_data['extras_item_unit'] ) && ! empty( $trip_extras_data['extras_item_unit'] ) ? $trip_extras_data['extras_item_unit'] : false;
+						$unit       = isset( $trip_extras_data['extras_item_unit'] ) && ! empty( $trip_extras_data['extras_item_unit'] ) ? $trip_extras_data['extras_item_unit'] : 0;
 
 						if ( $sale_price ) {
 							$price = $sale_price;

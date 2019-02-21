@@ -1278,7 +1278,7 @@ function wp_travel_get_permalink_structure() {
  *
  * @return void
  */
-function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
+function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend = true ) {
 
 	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs( $show_in_menu_query );
 	global $post;
@@ -1304,6 +1304,9 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
 
+	}
+	if ( ! $for_frontend ) {
+		return $wp_travel_tabs;
 	}
 
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
