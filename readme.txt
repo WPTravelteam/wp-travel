@@ -200,6 +200,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 23rd February 2019
 
 * Readme file updated.
+* Enhancement: New hooks added / updated for email.
 * Fixes: Minor issue fixes.
 
 = 1.8.6 =
