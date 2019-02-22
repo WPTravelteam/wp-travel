@@ -148,8 +148,8 @@ class WP_Travel_Ajax {
 
 		$attrs['arrival_date']   = $arrival_date;
 		$attrs['departure_date'] = $departure_date;
-		$attrs['trip_extras']    = $trip_extras;
-
+		$attrs['trip_extras']    = $trip_extras;	
+		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );

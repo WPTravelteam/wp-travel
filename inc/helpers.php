@@ -2726,6 +2726,10 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<span class="my-order-head"><?php esc_html_e( 'Travel Date :', 'wp-travel' ); ?></span>
 								<span class="my-order-tail"><?php echo $travel_date; ?></span>
 							</div>
+							
+							<!-- Hook to add booking time details at booking-->
+							<?php do_action( 'wp_travel_booked_times_details', $order_detail ); ?>
+
 							<div class="my-order-single-field my-order-additional-note clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>
 								<span class="my-order-tail"><?php echo esc_html( $customer_note ); ?></span>

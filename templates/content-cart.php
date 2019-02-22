@@ -139,6 +139,7 @@ wp_travel_print_notices();
 										<span><strong><?php esc_html_e( 'Date:', 'wp-travel' ); ?></strong></span>
 										<span>
 										<?php echo esc_html( $arrival_date ); ?>
+										<?php do_action( 'wp_travel_multiple_time_cart_page', $trip, $trip_id, $price_key ); ?>
 										</span>
 									</span>
 								<?php endif; ?>
