@@ -188,7 +188,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.8.6 =
-Release Date: 21 February 2019
+Release Date: 22th February 2019
 
 * Enhancement: Thankyou page url function enhanced with filters.
 * Fixes: Pricing label updated in email for pricing option.
