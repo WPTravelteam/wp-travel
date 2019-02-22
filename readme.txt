@@ -1,67 +1,76 @@
 === WP Travel ===
 Contributors: wptravel, WEN Solutions
-Tags: tour booking plugin, travel plugin, Travel booking plugin, Tour Operator, travel agency plugin, travel itinerary, travel agency, tour itinerary, booking engine, tour operator, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
-Donate link: https://wptravel.io/downloads/
+Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
+Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.6
+Stable tag: 1.8.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
-WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes! As one of the most powerful and scalable WordPress travel engine, you can create customized itinerary & travel packages in minutes.  Powered with powerful addons, this plugin helps you save hours of development and deploy your website in minutes. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
+WP Travel is a free powerful travel engine for making customized travel & tour agency websites on WordPress in minutes! With this SEO-friendly & scalable WordPress travel engine, you can create customized itinerary & travel packages on the fly. Powered with powerful addons, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
-With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing customized itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/) website.
+With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo) | [Travel Plugin Addons](https://wptravel.io/downloads/) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
-= COMPATIBLE THEMES FOR WP TRAVEL =
+= WP TRAVEL PAYMENT ADDONS =
 
-* [Travel Ultimate](https://themepalace.com/downloads/travel-ultimate/) by Theme Palace.
-* [Travel Ultimate Pro](https://themepalace.com/downloads/travel-ultimate-pro/) by Theme Palace.
-* [Travel Base](https://themepalace.com/downloads/travel-base/) by Theme Palace.
-* [Travel Base Pro](https://themepalace.com/downloads/travel-base-pro/) by Theme Palace.
-* [Pleased](https://themepalace.com/downloads/pleased/) by Theme Palace.
-* [Pleased Pro](https://themepalace.com/downloads/pleased-pro/) by Theme Palace.
-* [Tourable](https://themepalace.com/downloads/tourable/) by Theme Palace.
-* [Tourable Pro](https://themepalace.com/downloads/tourable-pro/) by Theme Palace.
-* [Travel Gem](https://themepalace.com/downloads/travel-gem/) by WEN Themes.
-* [Travel Gem Pro](https://themepalace.com/downloads/travel-gem-pro/) by WEN Themes.
-* [Travel Log](http://wensolutions.com/themes/travel-log/) by WEN Solutions.
-* [View all WordPress Travel & Tour Themes](https://wptravel.io/themes/)
+* [WP Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin)
+* [WP Stripe Chekout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin)
+* [WP Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/?utm_source=addons&utm_medium=authorize&utm_campaign=WP%20Plugin)
+* [WP Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin)
+* [WP Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin)
 
-
-== Our Addons: ==
-
-* [WP Travel Utilities]("https://wptravel.io/downloads/wp-travel-utilities/)
-* [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/)
-* [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/)
-
-= Payment Addons =
-
-* [WP Travel Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/)
-* [WP Travel Stripe Chekout](https://wptravel.io/downloads/wp-travel-stripe-checkout/)
-* [WP Travel Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/)
-* [WP Travel Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/)
-* [WP Travel Razorpay Checkout]("https://wptravel.io/downloads/wp-travel-razorpay-checkout/)
-
-= Map Addons =
-* [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/)
-* [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/)
-
-[View all addons](http://wptravel.io/downloads/)
+= WP ITINERARY ADDONS =
+* [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/?utm_source=addons&utm_medium=utilities&utm_campaign=WP%20Plugin)
+* [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/?utm_source=addons&utm_medium=tourextras&utm_campaign=WP%20Plugin)
+* [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/?utm_source=addons&utm_medium=wishlist&utm_campaign=WP%20Plugin)
+* [WP Travel Field Editor](https://wptravel.io/downloads/wp-travel-field-editor/?utm_source=addons&utm_medium=field-editor&utm_campaign=WP%20Plugin)
 
 
-= Some important features of the plugin: =
-* **Tour packages with no limit:** Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily.
+= WP TRAVEL MAP ADDONS =
+* [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/?utm_source=addons&utm_medium=heremap&utm_campaign=WP%20Plugin)
+* [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/?utm_source=addons&utm_medium=mapquest&utm_campaign=WP%20Plugin)
+
+[View all WP Travel addons](http://wptravel.io/downloads/?utm_source=addons&utm_medium=viewall&utm_campaign=WP%20Plugin)
+
+
+
+= FREE TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
+
+* [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
+* [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Themes
+* [Travel Base](https://wptravel.io/demo/?demo=travel-base&utm_source=freethemes&utm_medium=travelbase&utm_campaign=WP%20Plugin) by Theme Palace
+* [Tourable](https://wptravel.io/demo/?demo=tourable&utm_source=freethemes&utm_medium=tourable&utm_campaign=WP%20Plugin) by Theme Palace
+* [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
+* [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
+* [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
+* [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
+
+= PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
+
+* [Travel Gem Pro](https://wptravel.io/demo/?demo=travel-gem-pro&utm_source=paidthemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
+* [Travel Ultimate Pro](https://wptravel.io/demo/?demo=travel-ultimate-pro&utm_source=paidthemes&utm_medium=ultimatepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Pleased Pro](https://wptravel.io/demo/?demo=pleased-pro&utm_source=paidthemes&utm_medium=pleasedpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Tourable Pro](https://wptravel.io/demo/?demo=tourable-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/themes/&utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
+
+
+= WP TRAVEL PLUGIN CORE FEATURES : =
+
+* **Unlimited Tour packages:** Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily.
 * **Tour filters:** User can find their required Itineraries by filtering or using easy search form.
 * **Tour Extras:** It allows you add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has four additional payment gateway. Please refer to the link to know about additional payment gateway. link: http://wptravel.io
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 5 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin) 
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -72,7 +81,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo) | [Travel Plu
 * **Map:** For each trip, you can show Google map. In front-end user can see where is the location of trip.
 * **Coupon:** With WP Travel coupon, percentage or fixed amount of coupons are applied to the trips.
 
-= Other features: =
+= More Features: =
 * Trip Search / Filter Shortcode
 * Trip Search / Filter Widget
 * Sale widget added.
@@ -106,7 +115,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo) | [Travel Plu
 * Compatible Themes
 * Clone Trips
 * Multiple Travelers info
-[And more ...](https://wptravel.io/features/)
+[And much more ...](https://wptravel.io/features/?utm_source=features&utm_medium=morefeatures&utm_campaign=WP%20Plugin)
 
 
 = Customization and Flexibility =
@@ -118,12 +127,12 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 
 
 = Dedicated Support and Documentation =
-We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/).
+We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=support&utm_medium=forum&utm_campaign=WP%20Plugin).
 
-Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/).
+Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
 
 = Release Notes: =
-Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
+Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/?utm_source=releasenotes&utm_medium=relasenotes&utm_campaign=WP%20Plugin).
 
 == Installation ==
 = Using The WordPress Dashboard =
@@ -149,25 +158,25 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Frequently Asked Questions ==
 = There is something cool you could add... =
 
-Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
+Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=suggestions&utm_campaign=WP%20Plugin "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 = WP Travel documentation and user guide =
  For setting up your site using the WP Travel plugin please refer to below given link:
 
-[Documentation page](http://wptravel.io/documentations/)
+[Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
 
 = Where can I get support? =
 
- If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/)
+ If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin)
 
 
 = Will WP Travel work with other theme? =
 
-WP Travel plugin has been tested with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/)
+WP Travel plugin has been tested with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
 
 = Does the plugin have the payment gateways? =
 
- WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/)
+ WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
 
 == Screenshots ==
 1. Backend: Settings
@@ -187,8 +196,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.8.7 =
+Release Date: 23rd February 2019
+
+* Fixes: Minor issue fixes.
+
 = 1.8.6 =
-Release Date: 22th February 2019
+Release Date: 22nd February 2019
 
 * Enhancement: Thankyou page url function enhanced with filters.
 * Fixes: Pricing label updated in email for pricing option.
@@ -607,7 +621,7 @@ Release Date: October 29th, 2018
 = 1.1.1 =
 * Fixes: PHP Error below PHP Ver 5.4.
 
-= 1.1 =
+= 1.1.0 =
 * New Feature: "Loco Translate" support.
 * New Feature: "WPML Translate" support.
 * New Feature: Payment fields added globally.
