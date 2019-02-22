@@ -199,6 +199,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 1.8.7 =
 Release Date: 23rd February 2019
 
+* Readme file updated.
 * Fixes: Minor issue fixes.
 
 = 1.8.6 =
