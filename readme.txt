@@ -193,9 +193,9 @@ Release Date: 22th February 2019
 * Enhancement: Thankyou page url function enhanced with filters.
 * Fixes: Pricing label updated in email for pricing option.
 * Fixes: Trip extra amount included in standard paypal.
-* Fixes: Minor layout update in trip single.
-* Fixes: Trip update issue.
-* Fixes: Trip enquiry on sold out.
+* Fixes: Minor layout & listing display updated in trip single.
+* Fixes: Trip update issue when price 0.
+* Fixes: Trip enquiry on sold out popup.
 * Fixes: Partial payment amount for standard paypal.
 * Fixes: Search filter shortcode fields.
 
