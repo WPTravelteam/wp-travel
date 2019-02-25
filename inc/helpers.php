@@ -1282,7 +1282,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 
 	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs( $show_in_menu_query );
 	global $post;
-
 	$settings = wp_travel_get_settings();
 
 	// $custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
@@ -1297,16 +1296,15 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
+	$return_tabs = $wp_travel_tabs ? $wp_travel_tabs : $return_tabs; // set default tab if not saved initially.
 
 	$custom_itinerary_tabs_sorting = get_post_meta( $post->ID, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
 
 	if ( $custom_tabs_enable && is_array( $custom_itinerary_tabs_sorting ) && ! empty( $custom_itinerary_tabs_sorting ) ) {
-
 		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
-
 	}
 	if ( ! $for_frontend ) {
-		return $wp_travel_tabs;
+		return $return_tabs;
 	}
 
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {

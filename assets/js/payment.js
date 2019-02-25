@@ -27,9 +27,8 @@ const display_booking_option = {
 }
 const payments = {
     paypal: function() {
-        jQuery('#wp-travel-book-now').show();
-        jQuery('#wp-travel-book-now').siblings().hide();
-        jQuery('#wp-travel-book-now').siblings('.paypal-button').hide();
+        jQuery("#wp-travel-book-now, #wp-travel-complete-partial-payment").show().siblings().hide();
+        jQuery(".paypal-button").remove();
     }
 };
 
