@@ -1296,7 +1296,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
 	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
-	$return_tabs = $wp_travel_tabs ? $wp_travel_tabs : $return_tabs; // set default tab if not saved initially.
+	$return_tabs    = $wp_travel_tabs ? $wp_travel_tabs : $return_tabs; // set default tab if not saved initially.
 
 	$custom_itinerary_tabs_sorting = get_post_meta( $post->ID, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
 
@@ -2971,7 +2971,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
  */
 function wp_travel_thankyou_page_url( $trip_id = null ) {
 	$thankyou_page_id = $trip_id;
-	$settings = wp_travel_get_settings();
+	$settings         = wp_travel_get_settings();
 	if ( ! $trip_id ) {
 		global $wt_cart;
 		$items = $wt_cart->getItems();
@@ -2987,4 +2987,45 @@ function wp_travel_thankyou_page_url( $trip_id = null ) {
 	}
 	$thankyou_page_url = 0 < $thankyou_page_id ? get_permalink( $thankyou_page_id ) : get_home_url();
 	return apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $trip_id );
+}
+
+/**
+ * Function to check current trip is available or not.
+ */
+function wp_travel_trip_availability( $trip_id, $price_key, $start_date, $sold_out ) {
+
+	// For now only start date and sold out is used to determine availability. Need Enhancement in future.
+	$availability = true;
+	if ( strtotime( $start_date . ' 23:59:59' ) < time() || $sold_out ) {
+		$availability = false;
+	}
+	return apply_filters( 'wp_travel_trip_availability', $availability, $trip_id, $price_key, $start_date );
+}
+
+/**
+ * Privacy Policy Link.
+ */
+function wp_travel_privacy_link() {
+	$settings = wp_travel_get_settings();
+	$link     = '';
+
+	$privacy_policy_url = false;
+	if ( function_exists( 'get_privacy_policy_url' ) ) {
+		$privacy_policy_url = get_privacy_policy_url();
+	}
+
+	if ( $privacy_policy_url ) {
+		$policy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
+		$page_title     = ( $policy_page_id ) ? get_the_title( $policy_page_id ) : '';
+
+		$open_in_new_tab = isset( $settings['open_gdpr_in_new_tab'] ) ? esc_html( $settings['open_gdpr_in_new_tab'] ): '';
+
+		$attr = '';
+		if ( 'yes' === $open_in_new_tab ) {
+			$attr = 'target="_blank"';
+		}
+
+		$link = sprintf( '<a href="%1s" %2s >%3s</a>', esc_url( $privacy_policy_url ), esc_attr( $attr ), $page_title );
+	}
+	return $link;
 }

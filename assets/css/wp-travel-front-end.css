@@ -2830,8 +2830,8 @@ ul.wp-travel-error {
       border-color: transparent #c7d0d9 transparent transparent; }
     .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover:not(.pricing_unavailable) {
       background-color: #fcfcfc; }
-    .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover .trip_list_by_fixed_departure_dates_booking .btn {
-      border-color: #f83531; }
+      .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover:not(.pricing_unavailable) .trip_list_by_fixed_departure_dates_booking .btn {
+        border-color: #c7d0d9; }
     .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li .wp-travel-booking-row-fd {
       background-color: #f9f9f9;
       padding: 15px;
@@ -2966,6 +2966,11 @@ li.pricing_unavailable > div {
   pointer-events: none; }
 li.pricing_unavailable > div.action, li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking {
   pointer-events: all; }
+  li.pricing_unavailable > div.action .show-booking-row,
+  li.pricing_unavailable > div.action .show-booking-row-fd, li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking .show-booking-row,
+  li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking .show-booking-row-fd {
+    pointer-events: none;
+    color: #c7d0d9; }
 
 @media screen and (max-width: 1024px) {
   .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_wrap {

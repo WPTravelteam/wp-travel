@@ -918,6 +918,7 @@ class WP_Travel_Admin_Settings {
 		}
 		$enable_trip_enquiry_option = isset( $args['settings']['enable_trip_enquiry_option'] ) ? $args['settings']['enable_trip_enquiry_option'] : 'yes';
 		$enable_og_tags             = isset( $args['settings']['enable_og_tags'] ) ? $args['settings']['enable_og_tags'] : 'no';
+		$open_gdpr_in_new_tab       = isset( $args['settings']['open_gdpr_in_new_tab'] ) ? $args['settings']['open_gdpr_in_new_tab'] : 'no';
 		?>
 		<table class="form-table">
 			<tr>
@@ -949,13 +950,26 @@ class WP_Travel_Admin_Settings {
 				</td>
 			<tr>
 			<tr>
-			<th>
-			<label for="wp_travel_gdpr_message"><?php _e( 'GDPR Message : ', 'wp-travel' ); ?></label> </th>
-			<td>
-				<textarea rows="4" cols="30" id="wp_travel_gdpr_message" name="wp_travel_gdpr_message"><?php echo isset( $args['settings']['wp_travel_gdpr_message'] ) ? esc_attr( $args['settings']['wp_travel_gdpr_message'] ) : 'By contacting us, you agree to our '; ?></textarea>
-
-			</td>
-
+				<th>
+					<label for="wp_travel_gdpr_message"><?php _e( 'GDPR Message : ', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<textarea rows="4" cols="30" id="wp_travel_gdpr_message" name="wp_travel_gdpr_message"><?php echo isset( $args['settings']['wp_travel_gdpr_message'] ) ? esc_attr( $args['settings']['wp_travel_gdpr_message'] ) : 'By contacting us, you agree to our '; ?></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="wp_travel_gdpr_message"><?php _e( 'Open GDPR in new tab: ', 'wp-travel' ); ?></label>
+				</th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input <?php checked( $open_gdpr_in_new_tab, 'yes' ); ?> value="1" name="open_gdpr_in_new_tab" id="open_gdpr_in_new_tab" type="checkbox" />
+							<span class="switch">
+						  </span>
+						</label>
+					</span>
+				</td>
 			</tr>
 		</table>
 		<?php
@@ -1332,6 +1346,7 @@ class WP_Travel_Admin_Settings {
 			$payment_option_paypal = ( isset( $_POST['payment_option_paypal'] ) && '' !== $_POST['payment_option_paypal'] ) ? $_POST['payment_option_paypal'] : '';
 
 			$gdpr_message = ( isset( $_POST['wp_travel_gdpr_message'] ) && '' !== $_POST['wp_travel_gdpr_message'] ) ? $_POST['wp_travel_gdpr_message'] : '';
+			$open_gdpr_in_new_tab = ( isset( $_POST['open_gdpr_in_new_tab'] ) && '' !== $_POST['open_gdpr_in_new_tab'] ) ? 'yes': 'no';
 
 			$wp_travel_from_email = ( isset( $_POST['wp_travel_from_email'] ) && '' !== $_POST['wp_travel_from_email'] ) ? $_POST['wp_travel_from_email'] : '';
 
@@ -1385,6 +1400,7 @@ class WP_Travel_Admin_Settings {
 
 			// GDPR Message
 			$settings['wp_travel_gdpr_message'] = $gdpr_message;
+			$settings['open_gdpr_in_new_tab'] = $open_gdpr_in_new_tab;
 
 			// Save Global From E-mail Setting
 			$settings['wp_travel_from_email'] = $wp_travel_from_email;

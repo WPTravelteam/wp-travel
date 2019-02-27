@@ -37,26 +37,19 @@ function wp_travel_get_booking_form() {
 
 	$fields = wp_travel_booking_form_fields();
 
-		// GDPR Support
-		$settings = wp_travel_get_settings();
+	// GDPR Support
+	$settings = wp_travel_get_settings();
 
-		$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
-		$privacy_policy_url = false;
-
-	if ( function_exists( 'get_privacy_policy_url' ) ) {
-
-		$privacy_policy_url = get_privacy_policy_url();
-
-	}
-
-	if ( function_exists( 'get_the_privacy_policy_link' ) && ! empty( $gdpr_msg ) && $privacy_policy_url ) {
+	$policy_link = wp_travel_privacy_link();
+	if ( ! empty( $gdpr_msg ) && $policy_link ) {
 
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_booking_gdpr'] = array(
 			'type'              => 'checkbox',
 			'label'             => __( 'Privacy Policy', 'wp-travel' ),
-			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, get_the_privacy_policy_link() ) ),
+			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, $policy_link ) ),
 			'name'              => 'wp_travel_booking_gdpr_msg',
 			'id'                => 'wp-travel-enquiry-gdpr-msg',
 			'validations'       => array(
@@ -176,40 +169,8 @@ function wp_travel_booking_info( $post ) {
 	$edit_link = add_query_arg( 'edit_booking', 1, $edit_link );
 	wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
 
-	// 1. Display Booking info fields.
-	if ( ! isset( $_GET['edit_booking'] ) ) {
-		$details      = wp_travel_booking_data( $booking_id );
-		$payment_data = wp_travel_payment_data( $booking_id );
-
-		$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
-		$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
-		$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
-
-		$title = get_the_title( $trip_id );
-		$pax   = get_post_meta( $booking_id, 'wp_travel_pax', true );
-
-		// Billing fields.
-		$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
-		$billing_city    = get_post_meta( $booking_id, 'billing_city', true );
-		$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
-		$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
-
-		if ( is_array( $details ) && count( $details ) > 0 ) {
-			?>
-			<div class="my-order my-order-details">
-				<div class="view-order">
-					<div class="order-list">
-						<div class="order-wrapper">
-							<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
-							<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
-						</div>
-						<?php wp_travel_view_payment_details_table( $booking_id ); ?>
-					</div>
-				</div>
-			</div>
-			<?php
-		}
-	} else { // 2. Edit Booking Section.
+	// 2. Edit Booking Section.
+	if ( isset( $_GET['edit_booking'] ) ) {
 		$checkout_fields  = wp_travel_get_checkout_form_fields();
 		$traveller_fields = $checkout_fields['traveller_fields'];
 		$billing_fields   = $checkout_fields['billing_fields'];
@@ -366,6 +327,40 @@ function wp_travel_booking_info( $post ) {
 			<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
 		</div>
 		<?php
+	
+	} else { // 1. Display Booking info fields.
+		$details      = wp_travel_booking_data( $booking_id );
+		$payment_data = wp_travel_payment_data( $booking_id );
+
+		$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
+		$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
+		$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+
+		$title = get_the_title( $trip_id );
+		$pax   = get_post_meta( $booking_id, 'wp_travel_pax', true );
+
+		// Billing fields.
+		$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
+		$billing_city    = get_post_meta( $booking_id, 'billing_city', true );
+		$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
+		$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
+
+		if ( is_array( $details ) && count( $details ) > 0 ) {
+			?>
+			<div class="my-order my-order-details">
+				<div class="view-order">
+					<div class="order-list">
+						<div class="order-wrapper">
+							<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
+							<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
+						</div>
+						<?php wp_travel_view_payment_details_table( $booking_id ); ?>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+		
 	}
 
 }

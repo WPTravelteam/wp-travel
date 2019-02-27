@@ -1939,7 +1939,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								$max_attr  = 'max=' . $pricing_max_pax;
 								$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $available_date );
 
-								$unavailable_class = $pricing_sold_out ? 'pricing_unavailable' : '';
+								// $unavailable_class = ( $pricing_sold_out || date( 'Y-m-d', strtotime( $available_date ) ) < date( 'Y-m-d' ) ) ? 'pricing_unavailable' : '';
+								$unavailable_class = '';
+								$availability = wp_travel_trip_availability( $trip_id, $price_key, $available_date, $pricing_sold_out );
+								if ( ! $availability ) {
+									$unavailable_class = 'pricing_unavailable';
+								}
 								?>
 								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ) ?>">
 									<div class="date-from">
@@ -2011,7 +2016,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 										<?php endif; ?>
 									</div>
-									<?php if ( ! $pricing_sold_out ) : // Remove Book now if trip is soldout. ?>
+									<?php if ( $availability ) : // Remove Book now if trip is soldout. ?>
 										<div class="wp-travel-booking-row">
 											<?php
 												/**
@@ -2519,7 +2524,8 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 							}
 
 							$unavailable_class = '';
-							if ( strtotime( $start_date . ' 23:59:59' ) < time() || $pricing_sold_out ) {
+							$availability = wp_travel_trip_availability( $trip_id, $price_key, $start_date, $pricing_sold_out );
+							if ( ! $availability ) {
 								$unavailable_class = 'pricing_unavailable';
 							}
 							?>
@@ -2599,31 +2605,33 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 								</div>
 
 							</div>
-							<div class="wp-travel-booking-row-fd">
-								<?php
-								/**
-								 * Support For WP Travel Tour Extras Plugin.
-								 *
-								 * @since 1.5.8
-								 */
-								do_action( 'wp_travel_trip_extras', $price_key );
-								?>
-								<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
-								<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
-								<?php if ( $pricing_sold_out ) : ?>
-									<p class="wp-travel-sold-out">
-										<?php echo $sold_out_btn_rep_msg; ?>
-									</p>
+							<?php if ( $availability ) : ?>
+								<div class="wp-travel-booking-row-fd">
 									<?php
-								else :
-									$button   = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
-									$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+									/**
+									 * Support For WP Travel Tour Extras Plugin.
+									 *
+									 * @since 1.5.8
+									 */
+									do_action( 'wp_travel_trip_extras', $price_key );
+									?>
+									<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+									<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+									<?php if ( $pricing_sold_out ) : ?>
+										<p class="wp-travel-sold-out">
+											<?php echo $sold_out_btn_rep_msg; ?>
+										</p>
+										<?php
+									else :
+										$button   = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+										$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 
-									$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
-									printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
-									endif;
-								?>
-							</div>
+										$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
+										printf( $button, esc_url( $cart_url ), esc_html__( 'Book now', 'wp-travel' ) );
+										endif;
+									?>
+								</div>
+							<?php endif; ?>
 						</li>
 						<?php endforeach; ?>
 					<?php endforeach; ?>

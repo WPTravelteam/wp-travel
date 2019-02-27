@@ -3692,12 +3692,19 @@ ul.wp-travel-error {
             &:hover {
                 &:not(.pricing_unavailable) {
                     background-color: #fcfcfc;
-                }
-                .trip_list_by_fixed_departure_dates_booking {
-                    .btn {
-                        border-color: #f83531;
+
+                    .trip_list_by_fixed_departure_dates_booking{
+
+                        .btn {
+                            border-color: #c7d0d9;
+                        }
                     }
                 }
+                // .trip_list_by_fixed_departure_dates_booking {
+                //     .btn {
+                //         border-color: #f83531;
+                //     }
+                // }
             }
             .wp-travel-booking-row-fd {
                 background-color: #f9f9f9;
@@ -3864,8 +3871,15 @@ li {
             color: #c7d0d9;
             pointer-events: none;
         }
-        >div.action, div.trip_list_by_fixed_departure_dates_booking{
+        >div.action,
+        div.trip_list_by_fixed_departure_dates_booking{
             pointer-events: all;
+            .show-booking-row,
+            .show-booking-row-fd{
+                pointer-events: none;
+                color:#c7d0d9;
+            }
+
         }
     }
 }
