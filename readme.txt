@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.7
+Stable tag: 1.8.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -195,6 +195,15 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.8.8 =
+Release Date: 28th February 2019
+
+* Enhancement: Made the privacy link open in new tab .
+* Fixes: Frontend Dashboard view all link not clickable.
+* Fixes: Book now button can be clicked even it is marked as expired.
+* Fixes: Thankyou page url in case of standard paypal payment.
+* Fixes: Tab section of trip is empty in the new setup.
 
 = 1.8.7 =
 Release Date: 23rd February 2019

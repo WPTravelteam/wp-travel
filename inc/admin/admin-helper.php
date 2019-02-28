@@ -23,21 +23,6 @@ function wp_travel_admin_init() {
 	}
 }
 
-function wp_travel_admin_footer_styles() {
-	global $_wp_admin_css_colors;
-	$current_color_scheme = get_user_option( 'admin_color' );
-	$active_color_code = $_wp_admin_css_colors[$current_color_scheme]->colors[3];
-	?>
-	<style>
-		#menu-posts-<?php echo WP_TRAVEL_POST_TYPE; ?> ul li:last-child a{
-			color: <?php echo $active_color_code; ?>!important;
-		}
-	</style>
-	<?php
-}
-
-// add_action( 'admin_footer', 'wp_travel_admin_footer_styles' );
-
 function wp_travel_marketplace_page() {
 
 	$addons_data = get_transient( 'wp_travel_marketplace_addons_list' );
@@ -254,11 +239,8 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 		return 0;
 	}
 	global $wpdb;
-	//delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
 	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
-	// error_log( 'booking  count ' . $booking_count . ' itinerary id ' . $itinerary_id );
 	if ( ! $booking_count ) {
-		// error_log( 'no count ' . $itinerary_id );
 		$booking_count = 0;
 		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P
 		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";
@@ -333,11 +315,6 @@ function wp_travel_itineraries_manage_columns( $column_name, $id ) {
 	} // end switch
 }
 
-/*
- * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
- * https://gist.github.com/906872
- */
-add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_sortable_columns', 'wp_travel_itineraries_sort' );
 function wp_travel_itineraries_sort( $columns ) {
 
 	$custom = array(
@@ -345,6 +322,11 @@ function wp_travel_itineraries_sort( $columns ) {
 	);
 	return wp_parse_args( $custom, $columns );
 }
+/*
+ * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
+ * https://gist.github.com/906872
+ */
+add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_sortable_columns', 'wp_travel_itineraries_sort' );
 
 /*
  * ADMIN COLUMN - SORTING - ORDERBY
@@ -368,8 +350,6 @@ function wp_travel_itineraries_column_orderby( $vars ) {
 	return $vars;
 }
 
-
-
 /**
  * Ajax for adding feature aditem.
  */
@@ -391,9 +371,6 @@ function wp_travel_featured_admin_ajax() {
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
 
-
-add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
-// add_action( 'save_post', 'save_article_or_box' );
 function wp_travel_publish_metabox() {
 	global $post;
 	if ( get_post_type( $post ) === 'itinerary-booking' ) {
@@ -417,6 +394,7 @@ function wp_travel_publish_metabox() {
 	<?php
 	}
 }
+add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
 
 function wp_travel_upgrade_to_110() {
 	$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
@@ -428,121 +406,6 @@ function wp_travel_upgrade_to_110() {
 		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
 	}
 }
-
-/**
- * Stat Data for Payment.
- *
- * @param Array $stat_data
- * @return void
- */
-// function wp_travel_payment_stat_data( $stat_data, $request ) {
-// 	if ( ! $stat_data ) {
-// 		return;
-// 	}
-
-// 	global $wpdb;
-
-// 	// Default variables.
-// 	$query_limit = apply_filters( 'wp_travel_stat_default_query_limit', 10 );
-// 	$limit = "limit {$query_limit}";
-// 	$where = '';
-// 	$groupby = '';
-
-// 	$from_date = '';
-// 	if ( isset( $request['booking_stat_from'] ) && '' !== $request['booking_stat_from'] ) {
-// 		$from_date = $request['booking_stat_from'];
-// 	}
-// 	$to_date = '';
-// 	if ( isset( $request['booking_stat_to'] ) && '' !== $request['booking_stat_to'] ) {
-// 		$to_date = $request['booking_stat_to'] . ' 23:59:59';
-// 	}
-// 	$country = '';
-// 	if ( isset( $request['booking_country'] ) && '' !== $request['booking_country'] ) {
-// 		$country = $request['booking_country'];
-// 	}
-
-// 	$itinerary = '';
-// 	if ( isset( $request['booking_itinerary'] ) && '' !== $request['booking_itinerary'] ) {
-// 		$itinerary = $request['booking_itinerary'];
-// 	}
-
-// 	// Setting conditions.
-// 	if ( '' !== $from_date || '' !== $to_date || '' !== $country || '' !== $itinerary ) {
-// 		// Set initial load to false if there is extra get variables.
-// 		$initial_load = false;
-// 		if ( '' !== $itinerary ) {
-// 			$where 	 .= " and I.itinerary_id={$itinerary} ";
-// 		}
-// 		if ( '' !== $country ) {
-// 			$where   .= " and country='{$country}'";
-// 		}
-
-// 		if ( '' !== $from_date && '' !== $to_date ) {
-
-// 			$date_format = 'Y-m-d H:i:s';
-
-// 			$booking_from = date( $date_format, strtotime( $from_date ) );
-// 			$booking_to   = date( $date_format, strtotime( $to_date ) );
-
-// 			$where 	 .= " and payment_date >= '{$booking_from}' and payment_date <= '{$booking_to}' ";
-// 		}
-// 		$limit = '';
-// 	}
-
-// 	// Payment Data Default Query.
-// 	$initial_transient = $results = get_site_transient( '_transient_wt_booking_payment_stat_data' );
-// 	if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
-// 		$query = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
-// 		join (
-// 			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
-// 			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
-// 			WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
-// 		) PMT on BOOKING.ID = PMT.post_id
-// 		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
-// 		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
-// 		join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
-// 		join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
-//        end as payment_amount from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_amount'  ) AMT on PMT.payment_id = AMT.post_id
-// 		where post_status='publish' and post_type = 'itinerary-booking' {$where}
-// 		group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
-// 		$results = $wpdb->get_results( $query );
-// 		// set initial load transient for stat data.
-// 		if ( $initial_load && ! $initial_transient ) {
-// 			set_site_transient( '_transient_wt_booking_payment_stat_data', $results );
-// 		}
-// 	}
-// 	// End of Payment Data Default Query.
-// 	$payment_data = array();
-// 	$payment_label = array();
-// 	$date_format = 'jS M, Y';
-// 	$payment_stat_from = $payment_stat_to = date( $date_format );
-// 	$total_sales = 0;
-
-// 	if ( $results ) {
-// 		foreach ( $results as $result ) {
-// 			$label_date = $result->payment_year . '-' . $result->payment_month . '-' . $result->payment_day;
-// 			$label_date = date( $date_format, strtotime( $label_date ) );
-// 			$payment_data[] = $result->no_of_payment;
-// 			$payment_label[] = $label_date;
-// 			$total_sales += $result->payment_amount;
-// 		}
-// 	}
-
-// 	if ( isset( $request['chart_type'] ) &&  'payment' == $request['chart_type'] ) {
-// 		$payment_data2[] = array(
-// 			'label' => esc_html__( 'Payment', 'wp-travel' ),
-// 			'backgroundColor' => '#1DFE0E',
-// 			'borderColor' => '#1DFE0E',
-// 			'data' => $payment_data,
-// 			'fill' => false,
-// 		);
-// 		// $stat_data['labels'] = json_encode( $payment_label );
-// 		// $stat_data['datasets'] = json_encode( $payment_data2 );
-// 	}
-
-// 	// $stat_data['total_sales'] = number_format( $total_sales, 2, '.', '' );
-// 	return $stat_data;
-// }
 
 /*
  * ADMIN COLUMN - HEADERS
@@ -566,10 +429,7 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
 	return $booking_columns;
 }
 
-/*
- * ADMIN COLUMN - CONTENT
- */
-add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_payment_manage_columns', 10, 2 );
+
 
 /**
  * Add data to custom column.
@@ -580,7 +440,12 @@ add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_p
 function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'payment_status':
-			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
+            $payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
+            if ( is_array( $payment_id ) ) {
+                if ( count( $payment_id ) > 0 ) {
+                    $payment_id = $payment_id[0];
+                }
+            }
 			$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
 
 			$label_key = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
@@ -610,31 +475,10 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			break;
 	} // end switch
 }
-
 /*
- * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
- * https://gist.github.com/906872
+ * ADMIN COLUMN - CONTENT
  */
-// add_filter( 'manage_edit-itinerary-booking_sortable_columns', 'wp_travel_booking_payment_sort' );
-// function wp_travel_booking_payment_sort( $columns ) {
-
-// 	$custom = array(
-// 		'payment_status' => 'payment_status',
-// 		'payment_mode' 	 => 'payment_mode',
-// 	);
-// 	return wp_parse_args( $custom, $columns );
-// 	/* or this way
-// 		$columns['concertdate'] = 'concertdate';
-// 		$columns['city'] = 'city';
-// 		return $columns;
-// 	*/
-// }
-
-/*
- * ADMIN COLUMN - SORTING - ORDERBY
- * http://scribu.net/wordpress/custom-sortable-columns.html#comment-4732
- */
-add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
+add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_payment_manage_columns', 10, 2 );
 
 /**
  * Manage Order By custom column.
@@ -658,7 +502,7 @@ function wp_travel_booking_payment_column_orderby( $vars ) {
 	}
 	return $vars;
 }
-
+add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
 
 /**
  * Create a page and store the ID in an option.

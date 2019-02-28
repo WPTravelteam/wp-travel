@@ -87,7 +87,60 @@ class WP_Travel_Gateway_Paypal_Request {
 		$items = $wt_cart->getItems();
 		$current_url = wp_travel_thankyou_page_url($itinery_id);
 		// $current_url = get_permalink( $itinery_id );
-		if ( $items ) {  // Normal Payment.
+		if ( $complete_partial_payment ) { // For partial payment addons.
+
+			$args['cmd']                  = '_cart';
+			$args['upload']               = '1';
+			$args['currency_code']        = sanitize_text_field( $currency_code );
+			$args['business']             = sanitize_email( $paypal_email );
+			$args['bn']                   = '';
+			$args['rm']                   = '2';
+			$args['discount_amount_cart'] = 0;
+			$args['tax_cart']             = 0;
+			$args['charset']              = get_bloginfo( 'charset' );
+			$args['cbt']                  = get_bloginfo( 'name' );
+			$args['return']               = add_query_arg(
+				array(
+					'booking_id' => $booking_id,
+					'booked'     => true,
+					'status'     => 'success',
+					'partial'    => true,
+				),
+				$current_url
+			);
+			$args['cancel']               = add_query_arg(
+				array(
+					'booking_id' => $booking_id,
+					'booked'     => true,
+					'status'     => 'cancel',
+					'partial'    => true,
+				),
+				$current_url
+			);
+			$args['handling']             = 0;
+			$args['handling_cart']        = 0;
+			$args['no_shipping']          = 0;
+			$args['notify_url']           = esc_url(
+				add_query_arg(
+					array(
+						'wp_travel_listener' => 'IPN',
+						'partial'            => true,
+					),
+					home_url( 'index.php' )
+				)
+			);
+
+			// Cart Item.
+			$agrs_index = 1;
+
+			$args[ 'item_name_' . $agrs_index ] = 'Partial Payment for Booking #' . $booking_id;
+
+			$args[ 'quantity_' . $agrs_index ] = 1;
+
+			$args[ 'amount_' . $agrs_index ]      = $_POST['amount'];
+			$args[ 'item_number_' . $agrs_index ] = $booking_id;
+
+		} elseif ( $items ) {  // Normal Payment.
 
 			// $current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
 			$cart_amounts = $wt_cart->get_total();
@@ -120,6 +173,7 @@ class WP_Travel_Gateway_Paypal_Request {
 					'booking_id' => $booking_id,
 					'booked'     => true,
 					'status'     => 'success',
+					'order_id'   => $booking_id
 				),
 				$current_url
 			);
@@ -185,59 +239,6 @@ class WP_Travel_Gateway_Paypal_Request {
 
 				$agrs_index++;
 			}
-		} elseif ( $complete_partial_payment ) { // For partial payment addons.
-
-			$args['cmd']                  = '_cart';
-			$args['upload']               = '1';
-			$args['currency_code']        = sanitize_text_field( $currency_code );
-			$args['business']             = sanitize_email( $paypal_email );
-			$args['bn']                   = '';
-			$args['rm']                   = '2';
-			$args['discount_amount_cart'] = 0;
-			$args['tax_cart']             = 0;
-			$args['charset']              = get_bloginfo( 'charset' );
-			$args['cbt']                  = get_bloginfo( 'name' );
-			$args['return']               = add_query_arg(
-				array(
-					'booking_id' => $booking_id,
-					'booked'     => true,
-					'status'     => 'success',
-					'partial'    => true,
-				),
-				$current_url
-			);
-			$args['cancel']               = add_query_arg(
-				array(
-					'booking_id' => $booking_id,
-					'booked'     => true,
-					'status'     => 'cancel',
-					'partial'    => true,
-				),
-				$current_url
-			);
-			$args['handling']             = 0;
-			$args['handling_cart']        = 0;
-			$args['no_shipping']          = 0;
-			$args['notify_url']           = esc_url(
-				add_query_arg(
-					array(
-						'wp_travel_listener' => 'IPN',
-						'partial'            => true,
-					),
-					home_url( 'index.php' )
-				)
-			);
-
-			// Cart Item.
-			$agrs_index = 1;
-
-			$args[ 'item_name_' . $agrs_index ] = 'Partial Payment for Booking #' . $booking_id;
-
-			$args[ 'quantity_' . $agrs_index ] = 1;
-
-			$args[ 'amount_' . $agrs_index ]      = $_POST['amount'];
-			$args[ 'item_number_' . $agrs_index ] = $booking_id;
-
 		} else {
 			return;
 		}

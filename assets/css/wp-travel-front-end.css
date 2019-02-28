@@ -2964,10 +2964,12 @@ ul.wp-travel-error {
 li.pricing_unavailable > div {
   color: #c7d0d9;
   pointer-events: none; }
-li.pricing_unavailable > div.action, li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking {
+li.pricing_unavailable > div.action,
+li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking {
   pointer-events: all; }
   li.pricing_unavailable > div.action .show-booking-row,
-  li.pricing_unavailable > div.action .show-booking-row-fd, li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking .show-booking-row,
+  li.pricing_unavailable > div.action .show-booking-row-fd,
+  li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking .show-booking-row,
   li.pricing_unavailable div.trip_list_by_fixed_departure_dates_booking .show-booking-row-fd {
     pointer-events: none;
     color: #c7d0d9; }

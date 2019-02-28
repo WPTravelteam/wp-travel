@@ -1939,7 +1939,6 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								$max_attr  = 'max=' . $pricing_max_pax;
 								$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $available_date );
 
-								// $unavailable_class = ( $pricing_sold_out || date( 'Y-m-d', strtotime( $available_date ) ) < date( 'Y-m-d' ) ) ? 'pricing_unavailable' : '';
 								$unavailable_class = '';
 								$availability = wp_travel_trip_availability( $trip_id, $price_key, $available_date, $pricing_sold_out );
 								if ( ! $availability ) {
@@ -1953,7 +1952,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									</div>
 									<div class="date-from">
 										<span class="availabily-heading-label"><?php echo esc_html__( 'Start:', 'wp-travel' ); ?></span>
-										<span> <?php echo esc_html( $available_date ); ?> </span>
+										<span> <?php echo esc_html( wp_travel_format_date( $available_date ) ); ?> </span>
 									</div>
 									<div class="status">
 										<span class="availabily-heading-label"><?php echo esc_html__( 'Min Group Size:', 'wp-travel' ); ?></span>

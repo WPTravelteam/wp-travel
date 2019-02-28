@@ -827,8 +827,6 @@ function wp_travel_book_now() {
 		);
 		$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags, $booking_id );
 
-		error_log( print_r( $email_tags, true ) );
-
 		$email = new WP_Travel_Emails();
 
 		$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
