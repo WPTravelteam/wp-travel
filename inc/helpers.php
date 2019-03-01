@@ -2574,17 +2574,26 @@ function wp_travel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
 }
 
 /**
+ * Sort array by priority.
+ *
+ * @return array $array
+ */
+function wp_travel_sort_array_by_priority( $array, $priority_key = 'priority' ) {
+	$priority = array();
+	foreach ( $array as $key => $row ) {
+		$priority[ $key ] = isset( $row[ $priority_key ] ) ? $row[ $priority_key ] : 1;
+	}
+	array_multisort( $priority, SORT_ASC, $array );
+	return $array;
+}
+
+/**
  * Sort Checkout form fields.
  *
  * @return array $fields
  */
 function wp_travel_sort_form_fields( $fields ) {
-	$priority = array();
-	foreach ( $fields as $key => $row ) {
-		$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
-	}
-	array_multisort( $priority, SORT_ASC, $fields );
-	return $fields;
+	return wp_travel_sort_array_by_priority( $fields );
 }
 
 /**
@@ -2734,7 +2743,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 												$travel_date .= __( 'N/A', 'wp-travel' ) . ', ';
 											}
 											?>
-											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>, 
+											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>,
 											<?php
 										endforeach;
 									else :
@@ -2748,7 +2757,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<span class="my-order-head"><?php esc_html_e( 'Travel Date :', 'wp-travel' ); ?></span>
 								<span class="my-order-tail"><?php echo $travel_date; ?></span>
 							</div>
-							
+
 							<!-- Hook to add booking time details at booking-->
 							<?php do_action( 'wp_travel_booked_times_details', $order_detail ); ?>
 
@@ -2936,8 +2945,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					</div>
 					<?php endif; ?>
 				</div>
-			</div>							
-		</div>	
+			</div>
+		</div>
 		<?php
 	}
 }
