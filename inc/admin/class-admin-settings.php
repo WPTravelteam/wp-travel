@@ -94,11 +94,13 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['general'] = array(
 			'tab_label'     => __( 'General', 'wp-travel' ),
 			'content_title' => __( 'General Settings', 'wp-travel' ),
+			'priority'			=> 10
 		);
 
 		$settings_fields['itinerary'] = array(
 			'tab_label'     => ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ),
 			'content_title' => __( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) . ' Settings', 'wp-travel' ),
+			'priority'			=> 20
 		);
 
 		$settings_fields['email'] = array(
@@ -109,34 +111,41 @@ class WP_Travel_Admin_Settings {
 		$settings_fields['account_options_global'] = array(
 			'tab_label'     => __( 'Account Settings', 'wp-travel' ),
 			'content_title' => __( 'Account Settings', 'wp-travel' ),
+			'priority'			=> 30
 		);
 
 		$settings_fields['tabs_global']         = array(
 			'tab_label'     => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
+			'priority'			=> 40
 		);
 		$settings_fields['payment']             = array(
 			'tab_label'     => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
+			'priority'			=> 50
 		);
 		$settings_fields['facts']               = array(
 			'tab_label'     => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Facts Settings', 'wp-travel' ),
+			'priority'			=> 60
 		);
 		$settings_fields['license']             = array(
 			'tab_label'     => __( 'License', 'wp-travel' ),
 			'content_title' => __( 'License Details', 'wp-travel' ),
+			'priority'			=> 70
 		);
 		$settings_fields['misc_options_global'] = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+			'priority'			=> 80
 		);
 		$settings_fields['debug']               = array(
 			'tab_label'     => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
+			'priority'			=> 90
 		);
 
-		$tabs[ self::$collection ] = apply_filters( 'wp_travel_settings_tabs', $settings_fields );
+		$tabs[ self::$collection ] = wp_travel_sort_array_by_priority( apply_filters( 'wp_travel_settings_tabs', $settings_fields ) );
 		return $tabs;
 	}
 
