@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.8
+Stable tag: 1.8.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -196,10 +196,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.8.9 =
+Release Date: ???????????
+
+* Enhancement: Added Helper function to load payment scripts for payment addons.
+* Fixes: Manual add new booking from admin dashboard. Previously need to click edit link to display fields to input.
+
 = 1.8.8 =
 Release Date: 28th February 2019
 
-* Enhancement: Made the privacy link open in new tab .
+* Enhancement: Made the privacy link open in new tab.
 * Fixes: Frontend Dashboard view all link not clickable.
 * Fixes: Book now button can be clicked even it is marked as expired.
 * Fixes: Thankyou page url in case of standard paypal payment.
