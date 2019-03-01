@@ -170,7 +170,7 @@ function wp_travel_booking_info( $post ) {
 	wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
 
 	// 2. Edit Booking Section.
-	if ( isset( $_GET['edit_booking'] ) ) {
+	if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
 		$checkout_fields  = wp_travel_get_checkout_form_fields();
 		$traveller_fields = $checkout_fields['traveller_fields'];
 		$billing_fields   = $checkout_fields['billing_fields'];
@@ -1239,7 +1239,7 @@ function get_booking_chart() {
  * @return  Array $actions;
  */
 function wp_travel_post_duplicator_action_row( $actions, $post ) {
-	if ( function_exists( 'wp_travel_post_duplicator_action_row_link' ) ) {
+	if ( WP_TRAVEL_POST_TYPE === $post_type->name && function_exists( 'wp_travel_post_duplicator_action_row_link' ) ) {
 		$actions['wp_travel_duplicate_post'] = wp_travel_post_duplicator_action_row_link( $post );
 	}
 	return $actions;

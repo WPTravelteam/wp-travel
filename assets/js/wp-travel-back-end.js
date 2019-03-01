@@ -342,7 +342,8 @@
     $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
         show_multiple_dates_fields();        
     });
-
+    show_multiple_dates_fields();
+    show_fixed_departured_date_fields();
     $(document).on( 'click', '.wp-travel-clone-post', function(e) {
         e.preventDefault();
         var post_id = $(this).data('post_id');

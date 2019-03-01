@@ -1792,6 +1792,23 @@ function wp_travel_is_cart_page() {
 	return false;
 }
 
+/**
+ * Check whether page is dashboard page or not.
+ *
+ * @return Boolean
+ */
+function wp_travel_is_dashboard_page() {
+	if ( is_admin() ) {
+		return false;
+	}
+	$page_id  = get_the_ID();
+	$settings = wp_travel_get_settings();
+	if ( isset( $settings['dashboard_page_id'] ) && (int) $settings['dashboard_page_id'] === $page_id ) {
+		return true;
+	}
+	return false;
+}
+
 function wp_travel_is_itinerary( $post_id ) {
 	if ( ! $post_id ) {
 		global $post;
@@ -1809,6 +1826,13 @@ function wp_travel_is_itinerary( $post_id ) {
 		return true;
 	}
 	return false;
+}
+
+/**
+ * Check whether payment script is loadable or not.
+ */
+function wp_travel_can_load_payment_scripts() {
+	return wp_travel_is_dashboard_page() || wp_travel_is_checkout_page();
 }
 
 // WP Travel Pricing Varition options.
