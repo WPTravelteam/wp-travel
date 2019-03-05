@@ -1771,3 +1771,13 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	// $allowed_screens[] = 'itinerary-booking_page_wp-travel-marketplace';
 	return false;
 }
+
+function wp_travel_get_pricing_option_list() {
+    $type = array(
+        'single-price' => __( 'Single Price', 'wp-travel' ),
+        'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
+        // 'custom-price' => __( 'Custom', 'wp-travel' ),
+    );
+
+    return apply_filters( 'wp_travel_pricing_option_list', $type );
+}

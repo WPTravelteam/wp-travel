@@ -137,10 +137,16 @@ $multiple_date_option_class = implode( ' ', $multiple_date_array_key ); ?>
 	<tr class="pricing-option-title">
 		<td><label for="wp-travel-pricing-option-type"><?php esc_html_e( 'Pricing Option', 'wp-travel' ); ?></label></td>
 		<td>
-			<select name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type">
-				<option value="single-price" <?php selected( $pricing_option_type, 'single-price' ); ?> ><?php esc_html_e( 'Single Price', 'wp-travel' ); ?></option>
-				<option value="multiple-price" <?php selected( $pricing_option_type, 'multiple-price' ); ?> ><?php esc_html_e( 'Multiple Price', 'wp-travel' ); ?></option>
-			</select>
+			<?php
+			$pricing_types = wp_travel_get_pricing_option_list();
+			if ( is_array( $pricing_types ) && count( $pricing_types ) > 0 ) { ?>
+				<select name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type">
+					<?php foreach( $pricing_types as $value => $pricing_label ): ?>
+					<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $pricing_option_type, $value ); ?> ><?php echo esc_html( $pricing_label ); ?></option>
+					<?php endforeach; ?>
+				</select>
+			<?php
+			} ?>
 		</td>
 	</tr>
 	<tr class="<?php echo esc_attr( $single_pricing_option_class ); ?>">
