@@ -46,6 +46,7 @@ class WP_Travel_FW_Field {
 		$field_types['heading'] = 'WP_Travel_FW_Field_Heading';
 		$field_types['range'] = 'WP_Travel_FW_Field_Range';
 		$field_types['date_range'] = 'WP_Travel_FW_Field_Date_Range';
+		$field_types = apply_filters( 'wp_travel_register_field_types', $field_types );
 		return $field_types;
 	}
 
