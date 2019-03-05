@@ -344,12 +344,12 @@
 
     // Enable Multiple Dates Field @since 1.7.6
     $(document).on('change', '#wp-travel-enable-multiple-fixed-departure', function() {
-        show_multiple_dates_fields();        
+        show_multiple_dates_fields();    
     });
 
     show_price_option_row(); // single | multiple price fields
     show_fixed_departured_date_row();
-    show_multiple_dates_fields();
+    // show_multiple_dates_fields();
     $(document).on( 'click', '.wp-travel-clone-post', function(e) {
         e.preventDefault();
         var post_id = $(this).data('post_id');
