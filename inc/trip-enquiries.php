@@ -75,7 +75,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 
 	$form_options = array(
 		'id'            => 'wp-travel-enquiries',
-		'class'         => 'mfp-hide',
+		'class'         => 'mfp-hide wp-travel-enquiries-form',
 		'wrapper_class' => 'wp-travel-enquiries-form-wrapper',
 		'submit_button' => array(
 			'name'  => 'wp_travel_enquiry_submit',
@@ -91,7 +91,7 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 	$fields = wp_travel_enquiries_form_fields();
 	$form   = new WP_Travel_FW_Form();
 	if ( $trips_dropdown ) {
-		$form_options['class'] = '';
+		$form_options['class'] = 'wp-travel-enquiries-form';
 		$query   = new WP_Query( array(
 			'post_type'      => WP_TRAVEL_POST_TYPE,
 			'status'         => 'published',
