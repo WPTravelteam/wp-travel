@@ -457,7 +457,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 1.0.0
 		 */
 		private function add_image_sizes() {
-			add_image_size( 'wp_travel_thumbnail', 365, 215, true );
+			$image_size = apply_filters( 'wp_travel_image_size', array( 'width' => 365, 'height' => 215 ) );
+			$width = $image_size['width'];
+			$height = $image_size['height'];
+			add_image_size( 'wp_travel_thumbnail', $width, $height, true );
 		}
 
 		function wp_travel_plugin_load_first_order() {

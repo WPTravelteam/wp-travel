@@ -200,6 +200,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: ???????????
 
 * Enhancement: Added Helper function to load payment scripts for payment addons.
+* Enhancement: Added Filter to customize wp_travel_thumbnail image size.
 * Fixes: Manual add new booking from admin dashboard. Previously need to click edit link to display fields to input.
 
 = 1.8.8 =

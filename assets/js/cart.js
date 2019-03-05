@@ -12,12 +12,12 @@ jQuery(document).ready(function($) {
         var isValid = true;
         var parent = '#' + $(this).data('parent-id');
 
-        $(parent + ' input').each(function() {
+        $(parent + ' input, ' + parent + ' select').each(function() {
             if ($(this).parsley().validate() !== true) isValid = false;
         });
         if (isValid) {
             var cart_fields = {};
-            $(parent + ' input').each(function(index) {
+            $(parent + ' input, ' + parent + ' select').each(function(index) {
                 filterby = $(this).attr('name');
                 filterby_val = $(this).val();
 
