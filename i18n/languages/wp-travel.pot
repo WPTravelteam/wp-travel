@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.8.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 08:59:54+00:00\n"
+"POT-Creation-Date: 2019-03-06 09:20:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5148,7 +5148,7 @@ msgstr ""
 msgid "Trip Excludes"
 msgstr ""
 
-#: inc/booking-functions.php:30 inc/cart/checkout.php:128
+#: inc/booking-functions.php:30 inc/cart/checkout.php:130
 #: inc/class-frontend-assets.php:54 inc/class-frontend-assets.php:183
 #: inc/template-functions.php:423
 msgid "Book Now"

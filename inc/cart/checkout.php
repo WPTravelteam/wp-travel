@@ -11,7 +11,7 @@ $payment_fields   = $checkout_fields['payment_fields'];
 $settings         = wp_travel_get_settings();
 
 $enable_multiple_travellers = isset( $settings['enable_multiple_travellers'] ) ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
-
+$all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
 global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
@@ -81,9 +81,11 @@ $form_fw->init_validation( 'wp-travel-booking' );
 												$field['name'] = $field_name;
 												$field['id']   = sprintf( '%s-%s-%d', $field['id'], $cart_id, $i );
 
-												// Set required false to extra travellers.
-												$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
-												$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+												if ( ! $all_travelers_fields_require ) {
+													// Set required false to extra travellers.
+													$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
+													$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+												}
 
 												$form_field->init( array( $field ) )->render();
 											endforeach;
