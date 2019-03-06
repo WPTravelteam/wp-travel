@@ -2449,6 +2449,17 @@ span.wp-travel-message {
             margin-bottom: 10px;
             text-align: center;
         }
+        .wp-travel-radio{
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 20px;
+            .radio-checkbox-label{
+                padding-left: 5px;
+            }
+        }
+
     }
     .my-order-status {
         &.my-order-status-paid,
@@ -2482,7 +2493,6 @@ span.wp-travel-message {
     .wp-travel-radio-group,
     .button-field {
         width: 100%;
-        padding: 0;
     }
     .wp-travel-text-info {
         font-size: 14px;

@@ -204,6 +204,7 @@ Release Date: 6th March
 * Enhancement: Script optimized to show / hide Dates and price field.
 * Enhancement: Added filter to made all travelers field required.
 * Fixes: Manual add new booking from admin dashboard. Previously need to click edit link to display fields to input.
+* Fixes: Minor layout update, admin booking radio layout.
 
 = 1.8.8 =
 Release Date: 28th February 2019
