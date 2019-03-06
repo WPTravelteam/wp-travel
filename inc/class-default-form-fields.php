@@ -176,12 +176,12 @@ class WP_Travel_Default_Form_Fields {
   			'default' => $price_key,
   			'priority' => 98,
   		),
-  		'post_id' => array(
-  			'type' => 'hidden',
-  			'name' => 'wp_travel_post_id',
-  			'id' => 'wp-travel-post-id',
-  			'default' => $trip_id,
-  		),
+  		// 'post_id' => array(
+  		// 	'type' => 'hidden',
+  		// 	'name' => 'wp_travel_post_id',
+  		// 	'id' => 'wp-travel-post-id',
+  		// 	'default' => $trip_id,
+  		// ),
   	);
   	if ( isset( $max_pax ) && '' != $max_pax ) {
   		$booking_fileds['pax']['validations']['max'] = $max_pax;

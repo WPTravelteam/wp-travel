@@ -2759,7 +2759,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							</div>
 
 							<!-- Hook to add booking time details at booking-->
-							<?php do_action( 'wp_travel_booked_times_details', $order_detail ); ?>
+							<?php do_action( 'wp_travel_booked_times_details', $order_details ); ?>
 
 							<div class="my-order-single-field my-order-additional-note clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>
@@ -2841,6 +2841,41 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<?php
 							endif;
 						endforeach;
+					else :
+						?>
+						<div class="my-order-single-traveller-info">
+							<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $trip_id ) ), 'wp-travel' ); ?></h3>
+							<div class="row">
+								<div class="col-md-6">
+									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Lead Traveler :' ), 'wp-travel' ); ?></h3>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Name :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $fname . ' ' . $lname ); ?></span>
+									</div>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $country ); ?></span>
+									</div>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Phone No. :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $phone ); ?></span>
+									</div>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Email :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $email ); ?></span>
+									</div>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Date of Birth :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $dob ); ?></span>
+									</div>
+									<div class="my-order-single-field clearfix">
+										<span class="my-order-head"><?php esc_html_e( 'Gender :', 'wp-travel' ); ?></span>
+										<span class="my-order-tail"><?php echo esc_html( $gender ); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php
 					endif;
 					?>
 

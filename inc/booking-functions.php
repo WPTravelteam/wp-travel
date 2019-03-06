@@ -440,7 +440,7 @@ function wp_travel_save_booking_data( $booking_id ) {
 			$order_data[ $field['name'] ] = $meta_val;
 		endforeach;
 	}
-
+	dd( $order_data, true );
 	update_post_meta( $booking_id, 'order_data', $order_data );
 	do_action( 'wp_travel_after_booking_data_save', $booking_id );
 }
