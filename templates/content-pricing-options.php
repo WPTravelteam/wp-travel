@@ -34,7 +34,7 @@ $enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_mul
 $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 $force_checkout  = apply_filters( 'wp_travel_is_force_checkout_enabled', false );
 
-$pricing_option_type = wp_travel_get_pricing_option_type( $post_id ); ?>
+$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id ); ?>
 
 <div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
 	<?php
@@ -43,8 +43,8 @@ $pricing_option_type = wp_travel_get_pricing_option_type( $post_id ); ?>
 		$default_pricing_options = array( 'single-price', 'multiple-price' );
 		if ( in_array( $pricing_option_type, $default_pricing_options ) ) {
 
-			$trip_pricing_options_data = get_post_meta( $post->ID, 'wp_travel_pricing_options', true );
-			$trip_multiple_dates_data  = get_post_meta( $post->ID, 'wp_travel_multiple_trip_dates', true );
+			$trip_pricing_options_data = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+			$trip_multiple_dates_data  = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 
 			if ( $enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 

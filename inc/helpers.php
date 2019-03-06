@@ -3015,7 +3015,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 						<td>
 							<?php
 							if ( $payment_amount > 0 ) :
-								echo esc_html( sprintf( ' %s %s ', wp_travel_get_currency_symbol(), $payment_amount ) );
+								echo esc_html( sprintf( ' %s %s ', wp_travel_get_currency_symbol(), sprintf( '%0.2f', $payment_amount ) ) );
 							endif;
 							?>
 						</td>

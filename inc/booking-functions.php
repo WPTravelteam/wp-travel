@@ -1238,6 +1238,8 @@ function get_booking_chart() {
  * @return  Array $actions;
  */
 function wp_travel_post_duplicator_action_row( $actions, $post ) {
+	// Get the post type object
+	$post_type = get_post_type_object( $post->post_type );
 	if ( WP_TRAVEL_POST_TYPE === $post_type->name && function_exists( 'wp_travel_post_duplicator_action_row_link' ) ) {
 		$actions['wp_travel_duplicate_post'] = wp_travel_post_duplicator_action_row_link( $post );
 	}
