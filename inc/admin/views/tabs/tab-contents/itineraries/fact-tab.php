@@ -7,12 +7,12 @@
 
 global $post;
 
-$settings = get_option( 'wp_travel_settings' );
+$settings = wp_travel_get_settings();
 
 $wp_travel_trip_facts = get_post_meta( $post->ID, 'wp_travel_trip_facts', true );
 
 if ( is_string( $wp_travel_trip_facts ) ) {
-	
+
 	$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
 }
 /**
@@ -21,11 +21,18 @@ if ( is_string( $wp_travel_trip_facts ) ) {
 function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 	?>
 	<select name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="">
-		<?php 
+		<?php
 		if ( isset( $setting['options'] ) && is_array( $setting['options'] ) && count( $setting['options'] ) > 0 ) {
-			foreach($setting['options'] as $option):?>
-				<option <?php if($option == $fact['value']) echo 'selected'; ?>  value="<?php echo $option; ?>"><?php echo $option; ?></option>
-			<?php endforeach;
+			foreach ( $setting['options'] as $option ) :
+				?>
+				<option 
+				<?php
+				if ( $option == $fact['value'] ) {
+					echo 'selected';}
+				?>
+				  value="<?php echo $option; ?>"><?php echo $option; ?></option>
+				<?php
+			endforeach;
 		}
 		?>
 	</select>
@@ -37,10 +44,15 @@ function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
 	if ( isset( $setting['options'] ) && is_array( $setting['options'] ) ) {
 
-		foreach ( $setting['options'] as $option ):
-		?>
+		foreach ( $setting['options'] as $option ) :
+			?>
 			<label style="display:block; margin-top:5px; margin-bottom:5px;">
-				<input type="checkbox" <?php if(isset($fact['value']) && is_array($fact['value']) && in_array($option, $fact['value'])) echo 'checked'; ?> name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id="" /><?php echo $option; ?>
+				<input type="checkbox" 
+				<?php
+				if ( isset( $fact['value'] ) && is_array( $fact['value'] ) && in_array( $option, $fact['value'] ) ) {
+					echo 'checked';}
+				?>
+				 name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $option; ?>" id="" /><?php echo $option; ?>
 			</label>
 			<?php
 		endforeach;
@@ -60,20 +72,20 @@ function wp_travel_fact_text( $fact, $index, $setings = array() ) {
  * Fact Defaults.
  */
 function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
-?>
-	<input type="hidden" class="icon-<?php echo esc_attr( $index );?>" name="wp_travel_trip_facts[<?php echo $index; ?>][icon]" id="" value="<?php echo $settings['icon']; ?>">
-	<input type="hidden"  class="type-<?php echo esc_attr( $index );?>" name="wp_travel_trip_facts[<?php echo $index; ?>][type]" id="" value="<?php echo $settings['type']; ?>">
+	?>
+	<input type="hidden" class="icon-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][icon]" id="" value="<?php echo $settings['icon']; ?>">
+	<input type="hidden"  class="type-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][type]" id="" value="<?php echo $settings['type']; ?>">
 
-<?php
+	<?php
 }
 /**
  * Wp_travel_trip_facts_single_html Trips facts single html.
  *
  * @param array $fact.
- * @param int $index.
+ * @param int   $index.
  */
 function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
-	$settings = get_option( 'wp_travel_settings' );
+	$settings = wp_travel_get_settings();
 	$settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_values( $settings['wp_travel_trip_facts_settings'] ) : array();
 
 	if ( '' === $settings ) {
@@ -85,20 +97,19 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 	}
 	if ( isset( $fact['label'] ) && ! in_array( $fact['label'], $name ) ) {
 		return '';
-	}
-	else {
+	} else {
 		$label = $fact['label'];
 	}
 
 	ob_start();
 	is_array( $fact ) && extract( $fact );
 
-?>
+	?>
 	<div class="panel panel-default ">
 			<div class="panel-heading" role="tab" id="heading-<?php echo $index; ?>">
 				<h4 class="panel-title">
 					<div class="wp-travel-sorting-handle"></div>
-					<a class="<?php $index && print_r('collapsed') ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
+					<a class="<?php $index && print_r( 'collapsed' ); ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
 						<span><?php echo esc_html( $fact['label'] ); ?> <span>
 						<span class="collapse-icon"></span>
 					</a>
@@ -116,13 +127,17 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 									</th>
 									<td>
 										<select class="fact-type-selecter" data-index="<?php echo $index; ?>" name="<?php echo 'wp_travel_trip_facts[' . $index . '][label]'; ?>">
-										<?php if ( ! isset( $type ) ): ?>
+										<?php if ( ! isset( $type ) ) : ?>
 											<option value=""><?php esc_html_e( 'Select a Label', 'wp-travel' ); ?></option>
 										<?php endif; ?>  
-										<?php foreach ( $settings as $key => $setting ): ?>
-												<option <?php if ( isset( $label ) && $label == $setting['name'] ):
-													$settings = $setting; 
-													$selected = $setting['type']; ?> selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name']); ?></option>
+										<?php foreach ( $settings as $key => $setting ) : ?>
+												<option 
+												<?php
+												if ( isset( $label ) && $label == $setting['name'] ) :
+													$settings = $setting;
+													$selected = $setting['type'];
+													?>
+													 selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name'] ); ?></option>
 											<?php endforeach; ?>
 										</select>
 									</td>
@@ -131,7 +146,7 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 									<th>
 										<label><?php echo esc_html( 'Value', 'wp-admin' ); ?></label>
 									</th>
-									<td class="fact-<?php echo $index ?>">
+									<td class="fact-<?php echo $index; ?>">
 										<?php isset( $selected ) && call_user_func( 'wp_travel_fact_' . $selected, $fact, $index, $settings ); ?>
 									</td>
 									<?php call_user_func( 'wp_travel_fact_defaults', $fact, $index, $settings ); ?>
@@ -142,7 +157,7 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 				</div>
 			</div>
 		</div>
-<?php
+	<?php
 	$content = ob_get_contents();
 	ob_end_clean();
 	return $content;
@@ -158,12 +173,12 @@ if ( isset( $settings['wp_travel_trip_facts_settings'] ) && count( $settings['wp
 	}
 
 	if ( '' !== $wp_travel_trip_facts ) {
-	?>
+		?>
 		<div class="form-table fact-table">	
 			<div id="tab-accordion" class="tab-accordion">
 				<div data-factssettings='<?php echo isset( $settings['wp_travel_trip_facts_settings'] ) ? wp_json_encode( array_values( $settings['wp_travel_trip_facts_settings'] ) ) : '[]'; ?>' class="panel-group wp-travel-sorting-tabs ui-sortable" id="accordion-fact-data" role="tablist" aria-multiselectable="true">
 					<?php
-					if ( is_array( $wp_travel_trip_facts ) ):
+					if ( is_array( $wp_travel_trip_facts ) ) :
 						foreach ( $wp_travel_trip_facts as $key => $fact ) :
 							// Saved Facts.
 							echo wp_travel_trip_facts_single_html( $fact, $key );
@@ -174,65 +189,69 @@ if ( isset( $settings['wp_travel_trip_facts_settings'] ) && count( $settings['wp
 			</div>
 		</div>
 
-	<?php
+		<?php
 	}
 	?>
 	<div class="wp-travel-fact-quest-button clearfix">
 		<input type="button" value="<?php echo esc_html( 'Add Fact', 'wp-travel' ); ?>" class="wp-travel-trip-facts-add-new button button-primary">
 	</div>
-<?php
-$settings = get_option( 'wp_travel_settings' );
-$fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_values( $settings['wp_travel_trip_facts_settings'] ) : array();
-?>
-<script type="text/html" id="tmpl-wp-travel-trip-facts-options">
-	<div class="panel panel-default ">
-		<div class="panel-heading" role="tab" id="heading-{{data.random}}">
-			<h4 class="panel-title">
-				<div class="wp-travel-sorting-handle"></div>
-				<a class="collapse in" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
-					<span bind="fact_question_{{data.random}}"><?php echo esc_html__('Fact', 'wp-travel'); ?><span>
-					<span class="collapse-icon"></span>
-				</a>
-				<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
-			</h4>
-		</div>
-		<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}
-			<div class="panel-body">
-				<div class="panel-wrap">
-					<table class="form-table">
-						<tbody>
-							<tr>
-								<th>
-									<label for="fact_type_{{data.random}}" ><?php esc_html_e( 'Select Type', 'wp-travel' ); ?></label>
-								</th>
-								<td>
-									<select id="fact_type_{{data.random}}" required class="fact-type-selecter" data-index="{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][label]">
-										<option value=""><?php esc_html_e( 'Select a Label', 'wp-travel' ); ?></option>  
-									<?php foreach ( $fact_settings as $key => $setting ): ?>
-											<option <?php if ( isset( $type ) && $type == $setting['name'] ):
-												$fact_settings = $setting; $selected = $setting['type']; ?> selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name']); ?></option>
-										<?php endforeach; ?>
-									</select>
-								</td>
-							</tr>
-							<tr class="fact-holder faq-question-text">
-								<th>
-									<label><?php echo esc_html( 'Value', 'wp-admin' ); ?></label>
-								</th>
-								<td class="fact-{{data.random}}">
+	<?php
+	$fact_settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_values( $settings['wp_travel_trip_facts_settings'] ) : array();
+	?>
+	<script type="text/html" id="tmpl-wp-travel-trip-facts-options">
+		<div class="panel panel-default ">
+			<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+				<h4 class="panel-title">
+					<div class="wp-travel-sorting-handle"></div>
+					<a class="collapse in" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
+						<span bind="fact_question_{{data.random}}"><?php echo esc_html__( 'Fact', 'wp-travel' ); ?><span>
+						<span class="collapse-icon"></span>
+					</a>
+					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+				</h4>
+			</div>
+			<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}
+				<div class="panel-body">
+					<div class="panel-wrap">
+						<table class="form-table">
+							<tbody>
+								<tr>
+									<th>
+										<label for="fact_type_{{data.random}}" ><?php esc_html_e( 'Select Type', 'wp-travel' ); ?></label>
+									</th>
+									<td>
+										<select id="fact_type_{{data.random}}" required class="fact-type-selecter" data-index="{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][label]">
+											<option value=""><?php esc_html_e( 'Select a Label', 'wp-travel' ); ?></option>  
+										<?php foreach ( $fact_settings as $key => $setting ) : ?>
+												<option 
+												<?php
+												if ( isset( $type ) && $type == $setting['name'] ) :
+													$fact_settings = $setting;
+													$selected      = $setting['type'];
+													?>
+													selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name'] ); ?></option>
+											<?php endforeach; ?>
+										</select>
+									</td>
+								</tr>
+								<tr class="fact-holder faq-question-text">
+									<th>
+										<label><?php echo esc_html( 'Value', 'wp-admin' ); ?></label>
+									</th>
+									<td class="fact-{{data.random}}">
 
-								</td>
-								<input type="hidden" class="icon-{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][icon]" id="" value="">
-								<input type="hidden"  class="type-{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][type]" id="" value="">
-							</tr >
-						</tbody>
-					</table>
+									</td>
+									<input type="hidden" class="icon-{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][icon]" id="" value="">
+									<input type="hidden"  class="type-{{data.random}}" name="wp_travel_trip_facts[{{data.random}}][type]" id="" value="">
+								</tr >
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</script>
-<?php 
+	</script>
+	<?php
 } else {
 	$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
 	printf( __( '%1$1sThere are no labels set currently. Click %2$2shere%3$3s to add one.%4$4s', 'wp-travel' ), '<p id="pass-strength-result" class="good">', '<a href="' . $settings_url . '">', '</a>', '</p>' );
