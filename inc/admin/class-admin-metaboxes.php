@@ -427,7 +427,6 @@ class WP_Travel_Admin_Metaboxes {
 		$post_id                   = $args['post']->ID;
 		$tabs                      = wp_travel_get_frontend_tabs( false, false );
 		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
-
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
 		if ( is_array( $tabs ) && count( $tabs ) > 0 && ! $enable_custom_itinerary_tabs ) {
