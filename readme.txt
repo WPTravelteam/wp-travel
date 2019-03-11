@@ -196,8 +196,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.9.0 =
+Release Date: 20 March 2019
+
+* Enhancement: Settings field modified and added default settings fields.
+
+
 = 1.8.9 =
-Release Date: 6th March
+Release Date: 6th March 2019
 
 * Enhancement: Added Helper function to load payment scripts for payment addons.
 * Enhancement: Added Filter to customize wp_travel_thumbnail image size.
