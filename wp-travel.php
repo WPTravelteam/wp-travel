@@ -205,7 +205,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			/**
 			 * Include Query Classes.
-			 * @since 2.2.6
+			 * @since 1.2.6
 			 */
 			include sprintf( '%s/inc/class-wp-travel-query.php', WP_TRAVEL_ABSPATH );
 
@@ -221,7 +221,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-sidebars.php', WP_TRAVEL_ABSPATH );
 			/**
 			 * Include Cart and Checkout Classes.
-			 * @since 2.2.3
+			 * @since 1.2.3
 			 */
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
