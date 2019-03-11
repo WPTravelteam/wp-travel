@@ -19,9 +19,122 @@ function wp_travel_get_gallery_ids( $post_id ) {
 	return $gallery_ids;
 }
 
+// @since 1.9.0
+function wp_travel_settings_default_fields() {
+
+	// Booking Admin Defaults.
+	$booking_admin_email_defaults = array(
+		'admin_subject'      => __( 'New Booking', 'wp-travel' ),
+		'admin_title'        => __( 'New Booking', 'wp-travel' ),
+		'admin_header_color' => '',
+		'email_content'      => wp_travel_booking_admin_default_email_content(),
+		'from_email'         => get_option( 'admin_email' ),
+	);
+
+	// Booking client Defaults.
+	$booking_client_email_defaults = array(
+		'client_subject'      => __( 'Booking Recieved', 'wp-travel' ),
+		'client_title'        => __( 'Booking Recieved', 'wp-travel' ),
+		'client_header_color' => '',
+		'email_content'       => wp_travel_booking_client_default_email_content(),
+		'from_email'          => get_option( 'admin_email' ),
+	);
+
+	// Payment Admin Defaults.
+	$payment_admin_email_defaults = array(
+		'admin_subject'      => __( 'New Booking', 'wp-travel' ),
+		'admin_title'        => __( 'New Booking', 'wp-travel' ),
+		'admin_header_color' => '',
+		'email_content'      => wp_travel_payment_admin_default_email_content(),
+		'from_email'         => get_option( 'admin_email' ),
+	);
+
+	// Payment client Defaults.
+	$payment_client_email_defaults = array(
+		'client_subject'      => __( 'Payment Recieved', 'wp-travel' ),
+		'client_title'        => __( 'Payment Recieved', 'wp-travel' ),
+		'client_header_color' => '',
+		'email_content'       => wp_travel_payment_client_default_email_content(),
+		'from_email'          => get_option( 'admin_email' ),
+	);
+
+	// emquiry Admin Defaults.
+	$enquiry_admin_email_defaults = array(
+		'admin_subject'      => __( 'New Enquiry', 'wp-travel' ),
+		'admin_title'        => __( 'New Enquiry', 'wp-travel' ),
+		'admin_header_color' => '',
+		'email_content'      => wp_travel_enquiries_admin_default_email_content(),
+		'from_email'         => get_option( 'admin_email' ),
+	);
+
+	$settings_fields = array(
+		// General Settings Fields.
+		'currency'                                => 'USD',
+		'wp_travel_map'                           => 'google-map',
+		'google_map_api_key'                      => '',
+		'google_map_zoom_level'                   => 15,
+
+		'cart_page_id'                            => wp_travel_get_page_id( 'wp-travel-cart' ),
+		'checkout_page_id'                        => wp_travel_get_page_id( 'wp-travel-checkout' ),
+		'dashboard_page_id'                       => wp_travel_get_page_id( 'wp-travel-dashboard' ),
+
+		// Trip Settings Fields.
+		'hide_related_itinerary'                  => 'no',
+		'enable_multiple_travellers'              => 'no',
+		'trip_pricing_options_layout'             => 'by-pricing-option',
+
+		// Email Settings Fields.
+		'wp_travel_from_email'                    => get_option( 'admin_email' ),
+		'send_booking_email_to_admin'             => 'yes',
+		'booking_admin_template_settings'         => $booking_admin_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
+		'booking_client_template_settings'        => $booking_client_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
+		'payment_admin_template_settings'         => $payment_admin_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
+		'payment_client_template_settings'        => $payment_client_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
+		'enquiry_admin_template_settings'         => $enquiry_admin_email_defaults, // _settings appended in legacy version <= 1.8.9 settings.
+
+		// Account Settings Fields.
+		'enable_checkout_customer_registration'   => 'no',
+		'enable_my_account_customer_registration' => 'yes',
+		'generate_username_from_email'            => 'no',
+		'generate_user_password'                  => 'no',
+
+		// Payment Settings Fields.
+		'partial_payment'                         => 'no',
+		'minimum_partial_payout'                  => WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT,
+		'payment_option_paypal'                   => 'no',
+		'paypal_email'                            => '',
+		'trip_tax_enable'                         => 'no',
+		'trip_tax_price_inclusive'                => 'yes',
+		'trip_tax_percentage'                     => 13,
+
+		// Fact Tab Settings Fields.
+		'wp_travel_trip_facts_enable'             => 'yes',
+		'wp_travel_trip_facts_settings'           => array(),
+
+		// Misc Settings Fields.
+		'enable_trip_enquiry_option'              => 'yes', // @since 1.2 Misc. Options
+		'enable_og_tags'                          => 'no', // @since 1.7.6 Misc. Option
+		'wp_travel_gdpr_message'                  => __( 'By contacting us, you agree to our ' ),
+		'open_gdpr_in_new_tab'                    => 'no',
+
+		// Debug Settings field.
+		'wt_test_mode'                            => 'yes',
+		'wt_test_email'                           => '',
+	);
+
+	if ( is_admin() ) { // due to infinite loop when calling settings from frontend.
+		// Tabs Settings Fields.
+		$settings_fields['global_tab_settings'] = wp_travel_get_default_frontend_tabs(); // @since 1.1.1 Global tabs settings.
+	}
+	return apply_filters( 'wp_travel_settings_fields', $settings_fields ); // flter @since 1.9.0.
+}
+
 /** Return All Settings of WP travel. */
 function wp_travel_get_settings() {
-	$settings = get_option( 'wp_travel_settings' );
+	$default_settings = wp_travel_settings_default_fields();
+	$settings         = get_option( 'wp_travel_settings' ) ? get_option( 'wp_travel_settings' ) : array();
+
+	$settings = array_merge( $default_settings, $settings );
 	return $settings;
 }
 
@@ -1284,7 +1397,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 	global $post;
 	$settings = wp_travel_get_settings();
 
-	// $custom_tabs_enable = defined( 'WP_TRAVEL_UTILITIES_PLUGIN_NAME' ) ? true : false;
 	$custom_tabs_enable = apply_filters( 'wp_travel_enable_custom_tab', false );
 
 	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ? $settings['wp_travel_custom_global_tabs'] : array();
@@ -1304,12 +1416,14 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
 	}
 	if ( ! $for_frontend ) {
-		return $return_tabs;
+		if ( $wp_travel_tabs ) {
+			return $wp_travel_tabs; // Return if tabs data are saved.
+		}
+		return $return_tabs; // Default tabs data.
 	}
-
 	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
-
-		$wp_travel_tabs = $settings['global_tab_settings'];
+		// Quick fixes empty tabs settings.
+		$wp_travel_tabs = ( ! empty( $settings['global_tab_settings'] ) ) ? $settings['global_tab_settings'] : wp_travel_get_default_frontend_tabs();
 
 		if ( $custom_tabs_enable && isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
 
@@ -1346,14 +1460,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 			$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
 
 			$new_tabs[ $key ]['global'] = isset( $tab['global'] ) ? $tab['global'] : 'no';
-
-			// override if is global.
-			// if ( ! is_admin() ) {
-			// if ( 'yes' === $new_tabs[ $key ]['use_global'] ) {
-			// $new_tabs[ $key ]['label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
-			// $new_tabs[ $key ]['show_in_menu'] = $wp_travel_itinerary_tabs[ $key ]['show_in_menu'];
-			// }
-			// }
 		}
 
 		foreach ( $wp_travel_itinerary_tabs as $k => $val ) {
@@ -1365,7 +1471,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 	}
 
 	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
-
 }
 
 /**
@@ -1374,8 +1479,6 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
  * @return void
  */
 function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
-	// fixes the content filter in page builder.
-	// return $is_show_in_menu_query;
 	$trip_content = '';
 	$trip_outline = '';
 	$trip_include = '';
@@ -1383,18 +1486,20 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 	$gallery_ids  = '';
 	$faqs         = array();
 
-	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder.
+	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue.
 		global $wp_travel_itinerary;
-		$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
-		$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
-		$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
-		$trip_include             = $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
-		$trip_exclude             = $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
-		$gallery_ids              = $wp_travel_itinerary->get_gallery_ids();
-		global $post;
-		if ( $post ) {
-			$post_id = $post->ID;
-			$faqs    = wp_travel_get_faqs( $post_id );
+		if ( $wp_travel_itinerary ) {
+			$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
+			$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
+			$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
+			$trip_include             = $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
+			$trip_exclude             = $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
+			$gallery_ids              = $wp_travel_itinerary->get_gallery_ids();
+			global $post;
+			if ( $post ) {
+				$post_id = $post->ID;
+				$faqs    = wp_travel_get_faqs( $post_id );
+			}
 		}
 	}
 	$return_tabs = $wp_travel_itinerary_tabs = array(
@@ -1462,7 +1567,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 /**
  * Return FAQs
  *
- * @param Integer $post_id
+ * @param Int $post_id Post ID.
  *
  * @since 1.1.2
  * @return array.
@@ -3086,7 +3191,7 @@ function wp_travel_privacy_link() {
 		$policy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
 		$page_title     = ( $policy_page_id ) ? get_the_title( $policy_page_id ) : '';
 
-		$open_in_new_tab = isset( $settings['open_gdpr_in_new_tab'] ) ? esc_html( $settings['open_gdpr_in_new_tab'] ): '';
+		$open_in_new_tab = isset( $settings['open_gdpr_in_new_tab'] ) ? esc_html( $settings['open_gdpr_in_new_tab'] ) : '';
 
 		$attr = '';
 		if ( 'yes' === $open_in_new_tab ) {
