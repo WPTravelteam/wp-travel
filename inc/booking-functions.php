@@ -327,7 +327,7 @@ function wp_travel_booking_info( $post ) {
 			<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
 		</div>
 		<?php
-	
+
 	} else { // 1. Display Booking info fields.
 		$details      = wp_travel_booking_data( $booking_id );
 		$payment_data = wp_travel_payment_data( $booking_id );
@@ -360,7 +360,7 @@ function wp_travel_booking_info( $post ) {
 			</div>
 			<?php
 		}
-		
+
 	}
 
 }
@@ -825,6 +825,7 @@ function wp_travel_book_now() {
 			'{customer_note}'          => $customer_note,
 		);
 		$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags, $booking_id );
+		$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );
 
 		$email = new WP_Travel_Emails();
 
@@ -881,7 +882,7 @@ function wp_travel_book_now() {
 			$pax               = $trip['pax'];
 			$price_key         = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
 			$trip_date         = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
-			
+
 			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 			$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
 			$new_booking_count = $booking_count + 1;
