@@ -114,7 +114,7 @@ function wp_travel_settings_default_fields() {
 		// Misc Settings Fields.
 		'enable_trip_enquiry_option'              => 'yes', // @since 1.2 Misc. Options
 		'enable_og_tags'                          => 'no', // @since 1.7.6 Misc. Option
-		'wp_travel_gdpr_message'                  => __( 'By contacting us, you agree to our ' ),
+		'wp_travel_gdpr_message'                  => __( 'By contacting us, you agree to our ', 'wp-travel' ),
 		'open_gdpr_in_new_tab'                    => 'no',
 
 		// Debug Settings field.

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.8.9
+Stable tag: 1.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -197,9 +197,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.0 =
-Release Date: 20 March 2019
+Release Date: 12th March 2019
 
 * Enhancement: Settings field modified and added default settings fields.
+* Enhancement: Gallery image size changed from medium to thumbnail.
+* Fixes: Trip extra not added in single pricing option trips.
+* Fixes: When applying coupon, gives wrong total amount if discount amount is greater than total.
+* Fixes: WP Travel Field Editor compatibility.
 
 
 = 1.8.9 =

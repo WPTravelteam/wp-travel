@@ -32,77 +32,77 @@ class WP_Travel_FW_Field {
 
 	public function register_field_types() {
 		$field_types['text'] = array(
-			'label' => __( 'Text' ),
+			'label' => __( 'Text', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Text',
 		);
 
 		$field_types['email'] = array(
-			'label' => __( 'Email' ),
+			'label' => __( 'Email', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Email',
 		);
 
 		$field_types['number'] = array(
-			'label' => __( 'Number' ),
+			'label' => __( 'Number', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Number',
 		);
 
 		$field_types['hidden'] = array(
-			'label' => __( 'Hidden' ),
+			'label' => __( 'Hidden', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Hidden',
 		);
 
 		$field_types['select'] = array(
-			'label' => __( 'Select' ),
+			'label' => __( 'Select', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Select',
 		);
 
 		$field_types['category_dropdown'] = array(
-			'label' => __( 'Category Dropdown' ),
+			'label' => __( 'Category Dropdown', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Category_Dropdown',
 		);
 
 		$field_types['country_dropdown'] = array(
-			'label' => __( 'Country Dropdown' ),
+			'label' => __( 'Country Dropdown', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Country_Dropdown',
 		);
 
 		$field_types['textarea'] = array(
-			'label' => __( 'Textarea' ),
+			'label' => __( 'Textarea', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Textarea',
 		);
 
 		$field_types['date'] = array(
-			'label' => __( 'Date' ),
+			'label' => __( 'Date', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Date',
 		);
 
 		$field_types['radio'] = array(
-			'label' => __( 'Radio' ),
+			'label' => __( 'Radio', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Radio',
 		);
 
 		$field_types['checkbox'] = array(
-			'label' => __( 'Checkbox' ),
+			'label' => __( 'Checkbox', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Checkbox',
 		);
 
 		$field_types['text_info'] = array(
-			'label' => __( 'Text Info' ),
+			'label' => __( 'Text Info', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Text_Info',
 		);
 
 		$field_types['heading'] = array(
-			'label' => __( 'Heading' ),
+			'label' => __( 'Heading', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Heading',
 		);
 
 		$field_types['range'] = array(
-			'label' => __( 'Range' ),
+			'label' => __( 'Range', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Range',
 		);
 
 		$field_types['date_range'] = array(
-			'label' => __( 'Date Range' ),
+			'label' => __( 'Date Range', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Date_Range',
 		);
 		$field_types = apply_filters( 'wp_travel_register_field_types', $field_types );
