@@ -9,8 +9,7 @@ $traveller_fields = $checkout_fields['traveller_fields'];
 $billing_fields   = $checkout_fields['billing_fields'];
 $payment_fields   = $checkout_fields['payment_fields'];
 $settings         = wp_travel_get_settings();
-
-$enable_multiple_travellers = isset( $settings['enable_multiple_travellers'] ) ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
+$enable_multiple_travellers = isset( $settings['enable_multiple_travellers'] ) && $settings['enable_multiple_travellers'] ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
 $all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
 global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();

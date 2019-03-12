@@ -350,7 +350,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="hide_related_itinerary" type="hidden" />
+							<input value="no" name="hide_related_itinerary" type="hidden" />
 							<input <?php checked( $hide_related_itinerary, 'yes' ); ?> value="yes" name="hide_related_itinerary" id="hide_related_itinerary" type="checkbox" />
 							<span class="switch"></span>
 						</label>
@@ -365,7 +365,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="enable_multiple_travellers" type="hidden" />
+							<input value="no" name="enable_multiple_travellers" type="hidden" />
 							<input <?php checked( $enable_multiple_travellers, 'yes' ); ?> value="yes" name="enable_multiple_travellers" id="enable_multiple_travellers" type="checkbox" />
 							<span class="switch"></span>
 						</label>
@@ -471,7 +471,7 @@ class WP_Travel_Admin_Settings {
 											<td>
 												<span class="show-in-frontend checkbox-default-design">
 													<label data-on="ON" data-off="OFF">
-														<input value="" name="send_booking_email_to_admin" type="hidden" />
+														<input value="no" name="send_booking_email_to_admin" type="hidden" />
 														<input <?php checked( $send_booking_email_to_admin, 'yes' ); ?> value="yes" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />
 														<span class="switch"></span>
 													</label>
@@ -797,7 +797,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="enable_checkout_customer_registration" type="hidden" />
+							<input value="no" name="enable_checkout_customer_registration" type="hidden" />
 							<input <?php checked( $enable_checkout_customer_registration, 'yes' ); ?> value="yes" name="enable_checkout_customer_registration" id="enable_checkout_customer_registration" type="checkbox" />
 							<span class="switch">
 							</span>
@@ -808,7 +808,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="enable_my_account_customer_registration" type="hidden" />
+							<input value="no" name="enable_my_account_customer_registration" type="hidden" />
 							<input <?php checked( $enable_my_account_customer_registration, 'yes' ); ?> value="yes" name="enable_my_account_customer_registration" id="enable_my_account_customer_registration" type="checkbox" />
 							<span class="switch">
 							</span>
@@ -824,7 +824,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="generate_username_from_email" type="hidden" />
+							<input value="no" name="generate_username_from_email" type="hidden" />
 							<input <?php checked( $generate_username_from_email, 'yes' ); ?> value="yes" name="generate_username_from_email" id="generate_username_from_email" type="checkbox" />
 							<span class="switch">
 							</span>
@@ -835,7 +835,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="generate_user_password" type="hidden" />
+							<input value="no" name="generate_user_password" type="hidden" />
 							<input <?php checked( $generate_user_password, 'yes' ); ?> value="yes" name="generate_user_password" id="generate_user_password" type="checkbox" />
 							<span class="switch">
 							</span>
@@ -947,7 +947,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
-						<input value="" name="partial_payment" type="hidden" />
+						<input value="no" name="partial_payment" type="hidden" />
 						<input type="checkbox" value="yes" <?php checked( 'yes', $partial_payment ); ?> name="partial_payment" id="partial_payment"/>
 						<span class="switch">
 					</span>
@@ -975,7 +975,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
-					<input value="" name="payment_option_paypal" type="hidden" />
+					<input value="no" name="payment_option_paypal" type="hidden" />
 						<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal"/>
 						<span class="switch">
 					</span>
@@ -1006,7 +1006,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
-						<input value="" name="trip_tax_enable" type="hidden" />
+						<input value="no" name="trip_tax_enable" type="hidden" />
 						<input type="checkbox" value="yes" <?php checked( 'yes', $trip_tax_enable ); ?> name="trip_tax_enable" id="trip_tax_enable"/>
 						<span class="switch">
 					</span>
@@ -1083,7 +1083,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="enable_trip_enquiry_option" type="hidden" />
+							<input value="no" name="enable_trip_enquiry_option" type="hidden" />
 							<input <?php checked( $enable_trip_enquiry_option, 'yes' ); ?> value="yes" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />
 							<span class="switch">
 						  </span>
@@ -1098,7 +1098,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="enable_og_tags" type="hidden" />
+							<input value="no" name="enable_og_tags" type="hidden" />
 							<input <?php checked( $enable_og_tags, 'yes' ); ?> value="yes" name="enable_og_tags" id="enable_og_tags" type="checkbox" />
 							<span class="switch">
 						  </span>
@@ -1121,7 +1121,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-						<input value="" name="open_gdpr_in_new_tab" type="hidden" />
+						<input value="no" name="open_gdpr_in_new_tab" type="hidden" />
 							<input <?php checked( $open_gdpr_in_new_tab, 'yes' ); ?> value="yes" name="open_gdpr_in_new_tab" id="open_gdpr_in_new_tab" type="checkbox" />
 							<span class="switch">
 						  </span>
@@ -1152,7 +1152,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input value="" name="wt_test_mode" type="hidden" />
+							<input value="no" name="wt_test_mode" type="hidden" />
 							<input type="checkbox" value="yes" <?php checked( 'yes', $wt_test_mode ); ?> name="wt_test_mode" id="wt_test_mode"/>
 							<span class="switch">
 						</span>
@@ -1193,7 +1193,7 @@ class WP_Travel_Admin_Settings {
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
-						update_option( 'wp_travel_' . $settings_field . '_page_id', $cart_page_id );
+						update_option( 'wp_travel_' . $settings_field . '_page_id', $_POST[ $settings_field ]  );
 					}
 				}
 			}
