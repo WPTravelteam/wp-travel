@@ -99,6 +99,7 @@ $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] )
 		<td>
 			<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
+					<input value="" name="wp_travel_trip_facts_enable" type="hidden" />
 					<input type="checkbox" value="yes" <?php checked( 'yes', $wp_travel_trip_facts_enable ) ?> name="wp_travel_trip_facts_enable" id="wp_travel_trip_facts_enable"/>
 					<span class="switch">
 				</span>
