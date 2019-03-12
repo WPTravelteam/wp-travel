@@ -60,27 +60,27 @@ class WP_Travel_Admin_Settings {
 		$sysinfo_url            = add_query_arg( array( 'page' => 'sysinfo' ), $url );
 
 		echo '<div class="wrap wp-trave-settings-warp">';
-				echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
-				echo '<div class="wp-trave-settings-form-warp">';
-				do_action( 'wp_travel_before_admin_setting_form' );
-				echo '<form method="post" action="' . esc_url( $url ) . '">';
-					echo '<div class="wp-travel-setting-buttons">';
-					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
-					echo '</div>';
-					WP_Travel()->tabs->load( self::$collection, $args );
-					echo '<div class="wp-travel-setting-buttons">';
-					echo '<div class="wp-travel-setting-system-info">';
-						echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
-							esc_html_e( 'System Information', 'wp-travel' );
-						echo '</a>';
-					echo '</div>';
-					echo '<input type="hidden" name="current_tab" id="wp-travel-settings-current-tab">';
-					wp_nonce_field( 'wp_travel_settings_page_nonce' );
-					submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
-					echo '</div>';
-				echo '</form>';
-				do_action( 'wp_travel_after_admin_setting_form' );
-			echo '</div>';
+			echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
+			echo '<div class="wp-trave-settings-form-warp">';
+			do_action( 'wp_travel_before_admin_setting_form' );
+			echo '<form method="post" action="' . esc_url( $url ) . '">';
+				echo '<div class="wp-travel-setting-buttons">';
+				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
+				echo '</div>';
+				WP_Travel()->tabs->load( self::$collection, $args );
+				echo '<div class="wp-travel-setting-buttons">';
+				echo '<div class="wp-travel-setting-system-info">';
+					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
+						esc_html_e( 'System Information', 'wp-travel' );
+					echo '</a>';
+				echo '</div>';
+				echo '<input type="hidden" name="current_tab" id="wp-travel-settings-current-tab">';
+				wp_nonce_field( 'wp_travel_settings_page_nonce' );
+				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
+				echo '</div>';
+			echo '</form>';
+			do_action( 'wp_travel_after_admin_setting_form' );
+		echo '</div>';
 		echo '</div>';
 	}
 
@@ -203,7 +203,7 @@ class WP_Travel_Admin_Settings {
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
-					<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
+				<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your currency', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
@@ -215,11 +215,11 @@ class WP_Travel_Admin_Settings {
 			<tr>
 				<th><label for="wp-travel-map-select"><?php echo esc_html__( 'Select Map', 'wp-travel' ); ?></label></th>
 				<td>
-					<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
+				<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your map', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
-			<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
+		<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
 			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ); ?>">
 				<th><label for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ); ?></label></th>
 				<td>
@@ -247,22 +247,22 @@ class WP_Travel_Admin_Settings {
 			<tr>
 				<th><label for="cart-page-id"><?php echo esc_html__( 'Cart Page', 'wp-travel' ); ?></label></th>
 				<td>
-					<?php
-					wp_dropdown_pages(
-						array(
-							'depth'                 => 0,
-							'child_of'              => 0,
-							'selected'              => $selected_cart_page,
-							'echo'                  => 1,
-							'name'                  => 'cart_page_id',
-							'id'                    => 'cart-page-id', // string
-							'class'                 => 'wp-travel-select2', // string
-							'show_option_none'      => null, // string
-							'show_option_no_change' => null, // string
-							'option_none_value'     => null, // string
-						)
-					);
-					?>
+				<?php
+				wp_dropdown_pages(
+					array(
+						'depth'                 => 0,
+						'child_of'              => 0,
+						'selected'              => $selected_cart_page,
+						'echo'                  => 1,
+						'name'                  => 'cart_page_id',
+						'id'                    => 'cart-page-id', // string
+						'class'                 => 'wp-travel-select2', // string
+						'show_option_none'      => null, // string
+						'show_option_no_change' => null, // string
+						'option_none_value'     => null, // string
+					)
+				);
+				?>
 					<p class="description"><?php echo esc_html__( 'Choose the page to use as cart page for trip bookings which contents cart page shortcode [wp_travel_cart]', 'wp-travel' ); ?></p>
 				</td>
 			<tr>
@@ -311,16 +311,16 @@ class WP_Travel_Admin_Settings {
 					<p class="description"><?php echo esc_html__( 'Choose the page to use as dashboard page which contents dashboard page shortcode [wp_travel_user_account].', 'wp-travel' ); ?></p>
 				</td>
 			<tr>
-			<?php
-			/**
-			 * Hook.
-			 *
-			 * @since 1.8.0
-			 */
-			do_action( 'wp_travel_after_page_settings', $tab, $args )
-			?>
+				<?php
+				/**
+				 * Hook.
+				 *
+				 * @since 1.8.0
+				 */
+				do_action( 'wp_travel_after_page_settings', $tab, $args )
+				?>
 		</table>
-		<?php
+			<?php
 	}
 
 	/**
@@ -341,10 +341,10 @@ class WP_Travel_Admin_Settings {
 			<tr>
 				<th>
 					<label for="hide_related_itinerary">
-					<?php
-					esc_html_e( 'Hide related ', 'wp-travel' );
-					echo esc_attr( WP_TRAVEL_POST_TITLE );
-					?>
+				<?php
+				esc_html_e( 'Hide related ', 'wp-travel' );
+				echo esc_attr( WP_TRAVEL_POST_TITLE );
+				?>
 					</label>
 				</th>
 				<td>
@@ -385,8 +385,8 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		<?php
-		do_action( 'wp_travel_tab_content_after_trips', $args );
+			<?php
+			do_action( 'wp_travel_tab_content_after_trips', $args );
 	}
 
 	/**
@@ -449,7 +449,7 @@ class WP_Travel_Admin_Settings {
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								<?php esc_html_e( 'Booking Email Templates', 'wp-travel' ); ?>
+							<?php esc_html_e( 'Booking Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
 						</h4>
@@ -475,7 +475,7 @@ class WP_Travel_Admin_Settings {
 												</span>
 											</td>
 										</tr>
-										<?php do_action( 'wp_travel_utils_booking_notif' ); ?>
+									<?php do_action( 'wp_travel_utils_booking_notif' ); ?>
 										<tr>
 											<th>
 												<label for="booking-admin-email-sub"><?php esc_html_e( 'Booking Email Subject', 'wp-travel' ); ?></label>
@@ -506,20 +506,20 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<div class="wp_travel_admin_editor">
-													<?php
-													$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content'] ? $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
-													wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template_settings[email_content]' ) );
-													?>
+												<?php
+												$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content'] ? $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template_settings[email_content]' ) );
+												?>
 												</div>
 											</td>
 										</tr>
 
-										<?php
+											<?php
 											/**
 											 * Add Support Multiple Booking admin Template.
 											 */
 											do_action( 'wp_travel_multiple_booking_admin_template_settings', $booking_admin_email_settings );
-										?>
+											?>
 
 									</table>
 
@@ -556,20 +556,20 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<div class="wp_travel_admin_editor">
-													<?php
-													$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content'] ? $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
-													wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template_settings[email_content]' ) );
-													?>
+												<?php
+												$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content'] ? $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
+												wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template_settings[email_content]' ) );
+												?>
 												</div>
 											</td>
 										</tr>
 
-										<?php
+											<?php
 											/**
 											 * Add Support Multiple Booking client Template.
 											 */
 											do_action( 'wp_travel_multiple_booking_client_template', $booking_client_email_settings );
-										?>
+											?>
 
 									</table>
 
@@ -582,7 +582,7 @@ class WP_Travel_Admin_Settings {
 					<div class="panel-heading" role="tab" id="headingTwo">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="true" aria-controls="collapseTwo">
-								<?php esc_html_e( 'Payment Email Templates', 'wp-travel' ); ?>
+									<?php esc_html_e( 'Payment Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
 						</h4>
@@ -595,7 +595,7 @@ class WP_Travel_Admin_Settings {
 								<h3 class="section-heading"><?php esc_html_e( 'Admin Email Template Options', 'wp-travel' ); ?></h3>
 
 									<table class="form-table">
-									<?php do_action( 'wp_travel_utils_payment_notif' ); ?>
+										<?php do_action( 'wp_travel_utils_payment_notif' ); ?>
 										<tr>
 											<th>
 												<label for="payment-admin-email-sub"><?php esc_html_e( 'Payment Email Subject', 'wp-travel' ); ?></label>
@@ -626,20 +626,20 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<div class="wp_travel_admin_editor">
-													<?php
-													$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content'] ? $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
-													wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template_settings[email_content]' ) );
-													?>
+												<?php
+												$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content'] ? $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
+												wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template_settings[email_content]' ) );
+												?>
 												</div>
 											</td>
 										</tr>
 
-										<?php
-										/**
-										 * Add Support Multiple payment admin Template.
-										 */
-										do_action( 'wp_travel_multiple_payment_admin_template', $payment_admin_email_settings );
-										?>
+											<?php
+											/**
+											 * Add Support Multiple payment admin Template.
+											 */
+											do_action( 'wp_travel_multiple_payment_admin_template', $payment_admin_email_settings );
+											?>
 
 									</table>
 
@@ -676,20 +676,20 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<div class="wp_travel_admin_editor">
-													<?php
-													$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content'] ? $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
-													wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template_settings[email_content]' ) );
-													?>
+												<?php
+												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content'] ? $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
+												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template_settings[email_content]' ) );
+												?>
 												</div>
 											</td>
 										</tr>
 
-										<?php
-										/**
-										 * Add Support Multiple Payment client Template.
-										 */
-										do_action( 'wp_travel_multiple_payment_client_template', $payment_client_email_settings );
-										?>
+											<?php
+											/**
+											 * Add Support Multiple Payment client Template.
+											 */
+											do_action( 'wp_travel_multiple_payment_client_template', $payment_client_email_settings );
+											?>
 									</table>
 								</div>
 							</div>
@@ -700,7 +700,7 @@ class WP_Travel_Admin_Settings {
 					<div class="panel-heading" role="tab" id="headingThree">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="true" aria-controls="collapseThree">
-								<?php esc_html_e( 'Enquiry Email Templates', 'wp-travel' ); ?>
+									<?php esc_html_e( 'Enquiry Email Templates', 'wp-travel' ); ?>
 								<span class="collapse-icon"></span>
 							</a>
 						</h4>
@@ -744,17 +744,17 @@ class WP_Travel_Admin_Settings {
 											</th>
 											<td>
 												<div class="wp_travel_admin_editor">
-													<?php
-													$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !== $enquiry_admin_email_settings['email_content'] ? $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
-													wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template_settings[email_content]' ) );
-													?>
+												<?php
+												$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !== $enquiry_admin_email_settings['email_content'] ? $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
+												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template_settings[email_content]' ) );
+												?>
 												</div>
 											</td>
 										</tr>
 
 									</table>
 
-									<?php do_action( 'wp_travel_enquiry_customer_email_settings' ); ?>
+										<?php do_action( 'wp_travel_enquiry_customer_email_settings' ); ?>
 
 								</div>
 
@@ -763,13 +763,13 @@ class WP_Travel_Admin_Settings {
 					</div>
 				</div>
 
-				<?php
-				// @since 1.8.0
-				do_action( 'wp_travel_email_template_settings_after_enquiry', $tab, $args )
-				?>
+					<?php
+					// @since 1.8.0
+					do_action( 'wp_travel_email_template_settings_after_enquiry', $tab, $args )
+					?>
 			</div>
 		</div>
-		<?php
+			<?php
 	}
 
 	/**
@@ -1009,13 +1009,13 @@ class WP_Travel_Admin_Settings {
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Trip prices entered with tax', 'wp-travel' ); ?></label></th>
 				<td>
-						<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio">
-						<?php esc_html_e( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ); ?></label>
+					<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio">
+					<?php esc_html_e( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ); ?></label>
 
-						<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
-						<?php esc_html_e( 'No, I will enter trip prices exclusive of tax', 'wp-travel' ); ?></label>
+					<label> <input <?php checked( 'no', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="no" type="radio">
+					<?php esc_html_e( 'No, I will enter trip prices exclusive of tax', 'wp-travel' ); ?></label>
 
-						<p class="description"><?php esc_html_e( 'This option will affect how you enter trip prices.', 'wp-travel' ); ?></p>
+					<p class="description"><?php esc_html_e( 'This option will affect how you enter trip prices.', 'wp-travel' ); ?></p>
 
 				</td>
 			</tr>
@@ -1176,6 +1176,12 @@ class WP_Travel_Admin_Settings {
 			foreach ( $settings_fields as $settings_field ) {
 				if ( isset( $_POST[ $settings_field ] ) ) {
 					$settings[ $settings_field ] = $_POST[ $settings_field ];
+
+					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
+					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
+					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
+						update_option( 'wp_travel_' . $settings_field . '_page_id', $cart_page_id );
+					}
 				}
 			}
 
