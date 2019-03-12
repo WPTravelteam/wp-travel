@@ -456,8 +456,10 @@ class WP_Travel_Cart {
 			$d_val = $discounts['value'];
 
 			if ( 'fixed' === $d_typ ) {
-				$discount_amount = wp_travel_get_formated_price( $d_val );
-				$discount_amount_partial = wp_travel_get_formated_price( $d_val );
+				$discount_amount = $discount_amount_partial = wp_travel_get_formated_price( $d_val );
+				if ( $discount_amount_partial >= $sub_total_partial ) {
+					$discount_amount_partial = 0;
+				}
 			} elseif ( 'percentage' === $d_typ ) {
 				$discount_amount = wp_travel_get_formated_price( ( $sub_total * $d_val ) / 100 );
 				$discount_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $d_val ) / 100 );
