@@ -177,7 +177,7 @@ wp_travel_print_notices();
 							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 								<div class="item_cart">
 									<p>
-										<strong><span class="woocommerce-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> <?php echo esc_html( $single_trip_total ); ?> </span></strong>
+										<strong><span class="wp-travel-price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> <?php echo esc_html( $single_trip_total ); ?> </span></strong>
 									</p>
 								</div>
 							<?php endif; ?>
