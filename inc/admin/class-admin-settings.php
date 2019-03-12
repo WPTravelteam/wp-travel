@@ -1060,7 +1060,6 @@ class WP_Travel_Admin_Settings {
 	 */
 	public function settings_callback_misc_options_global( $tab, $args ) {
 		$settings = $args['settings'];
-
 		$enable_trip_enquiry_option = $settings['enable_trip_enquiry_option'];
 		$enable_og_tags             = $settings['enable_og_tags'];
 		$wp_travel_gdpr_message     = $settings['wp_travel_gdpr_message'];
@@ -1074,7 +1073,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input <?php checked( $enable_trip_enquiry_option, 'yes' ); ?> value="1" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />
+							<input <?php checked( $enable_trip_enquiry_option, 'yes' ); ?> value="yes" name="enable_trip_enquiry_option" id="enable_trip_enquiry_option" type="checkbox" />
 							<span class="switch">
 						  </span>
 						</label>
@@ -1088,7 +1087,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input <?php checked( $enable_og_tags, 'yes' ); ?> value="1" name="enable_og_tags" id="enable_og_tags" type="checkbox" />
+							<input <?php checked( $enable_og_tags, 'yes' ); ?> value="yes" name="enable_og_tags" id="enable_og_tags" type="checkbox" />
 							<span class="switch">
 						  </span>
 						</label>
@@ -1110,7 +1109,7 @@ class WP_Travel_Admin_Settings {
 				<td>
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
-							<input <?php checked( $open_gdpr_in_new_tab, 'yes' ); ?> value="1" name="open_gdpr_in_new_tab" id="open_gdpr_in_new_tab" type="checkbox" />
+							<input <?php checked( $open_gdpr_in_new_tab, 'yes' ); ?> value="yes" name="open_gdpr_in_new_tab" id="open_gdpr_in_new_tab" type="checkbox" />
 							<span class="switch">
 						  </span>
 						</label>
@@ -1169,7 +1168,7 @@ class WP_Travel_Admin_Settings {
 			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 			// Getting saved settings first.
-			$settings = wp_travel_get_settings();
+			// $settings = wp_travel_get_settings();
 
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
