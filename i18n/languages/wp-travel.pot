@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-12 11:06:05+00:00\n"
+"POT-Creation-Date: 2019-03-12 12:25:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3742,7 +3742,7 @@ msgid "Multiple Price"
 msgstr ""
 
 #: inc/admin/class-admin-assets.php:73 inc/admin/class-admin-assets.php:117
-#: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:158
+#: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:157
 #: inc/booking-functions.php:797 inc/booking-functions.php:1179
 #: inc/booking-functions.php:1183 inc/booking-functions.php:1212
 #: inc/booking-functions.php:1216 inc/currencies.php:316 inc/helpers.php:698
@@ -4543,29 +4543,29 @@ msgstr ""
 msgid "Test email address will get test mode payment emails."
 msgstr ""
 
-#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:62
+#: inc/admin/class-admin-status.php:65
 msgid ""
 "%s - For better performance, we recommend setting memory to at least 64MB. "
 "See: %s"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:62
+#: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:56
 msgid "Increasing memory allocated to PHP"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:125
+#: inc/admin/class-admin-status.php:78
 msgid "%s - Recommend  PHP version of 5.6. See: %s"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:125
+#: inc/admin/class-admin-status.php:78 inc/admin/views/status.php:122
 msgid "How to update your PHP version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:83 inc/admin/views/status.php:130
+#: inc/admin/class-admin-status.php:83 inc/admin/views/status.php:127
 msgid "Couldn't determine PHP version because phpversion() doesn't exist."
 msgstr ""
 
-#: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:186
+#: inc/admin/class-admin-status.php:107
 msgid "%s - We recommend a minimum MySQL version of 5.6. See: %s"
 msgstr ""
 
@@ -4573,63 +4573,63 @@ msgstr ""
 msgid "WordPress Requirements"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:141 inc/admin/views/status.php:19
+#: inc/admin/class-admin-status.php:141 inc/admin/views/status.php:17
 msgid "Home URL"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:142 inc/admin/views/status.php:25
+#: inc/admin/class-admin-status.php:142 inc/admin/views/status.php:21
 msgid "Site URL"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:143 inc/admin/views/status.php:33
+#: inc/admin/class-admin-status.php:143 inc/admin/views/status.php:25
 msgid "WP Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:144 inc/admin/views/status.php:38
+#: inc/admin/class-admin-status.php:144 inc/admin/views/status.php:29
 msgid "WP Multisite"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:145 inc/admin/views/status.php:48
+#: inc/admin/class-admin-status.php:145 inc/admin/views/status.php:41
 msgid "WP Memory Limit"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:146 inc/admin/views/status.php:70
+#: inc/admin/class-admin-status.php:146 inc/admin/views/status.php:64
 msgid "WP Debug Mode"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:147 inc/admin/views/status.php:81
+#: inc/admin/class-admin-status.php:147 inc/admin/views/status.php:75
 msgid "WP Cron"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:148 inc/admin/views/status.php:93
+#: inc/admin/class-admin-status.php:148 inc/admin/views/status.php:87
 msgid "Language"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:149 inc/admin/views/status.php:99
+#: inc/admin/class-admin-status.php:149 inc/admin/views/status.php:93
 msgid "Upload Directory  Location"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:160 inc/admin/views/status.php:112
+#: inc/admin/class-admin-status.php:160 inc/admin/views/status.php:108
 msgid "Server Info"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:161 inc/admin/views/status.php:117
+#: inc/admin/class-admin-status.php:161 inc/admin/views/status.php:113
 msgid "PHP Version"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:167 inc/admin/views/status.php:136
+#: inc/admin/class-admin-status.php:167 inc/admin/views/status.php:134
 msgid "PHP Post Max Size"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:168 inc/admin/views/status.php:141
+#: inc/admin/class-admin-status.php:168 inc/admin/views/status.php:139
 msgid "PHP Time Limit"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:169 inc/admin/views/status.php:146
+#: inc/admin/class-admin-status.php:169 inc/admin/views/status.php:144
 msgid "PHP Max Input Vars"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:170 inc/admin/views/status.php:151
+#: inc/admin/class-admin-status.php:170 inc/admin/views/status.php:149
 msgid "cURL Version"
 msgstr ""
 
@@ -4649,7 +4649,7 @@ msgstr ""
 msgid "Default Timezone is UTC"
 msgstr ""
 
-#: inc/admin/class-admin-status.php:175 inc/admin/views/status.php:213
+#: inc/admin/class-admin-status.php:175 inc/admin/views/status.php:214
 msgid "PHP Error Log File Location"
 msgstr ""
 
@@ -4742,43 +4742,57 @@ msgstr ""
 msgid "WordPress Information"
 msgstr ""
 
-#: inc/admin/views/status.php:108
+#: inc/admin/views/status.php:56
+msgid ""
+"%1$s - For better performance, we recommend setting memory to at least "
+"64MB. See: %2$s"
+msgstr ""
+
+#: inc/admin/views/status.php:104
 msgid "Server Information"
 msgstr ""
 
-#: inc/admin/views/status.php:205
+#: inc/admin/views/status.php:122
+msgid "%1$s - Recommend  PHP version of 5.6. See: %2$s"
+msgstr ""
+
+#: inc/admin/views/status.php:186
+msgid "%1$s - We recommend a minimum MySQL version of 5.6. See: %2$s"
+msgstr ""
+
+#: inc/admin/views/status.php:206
 msgid "Default timezone is %s - it should be UTC"
 msgstr ""
 
-#: inc/admin/views/status.php:242
+#: inc/admin/views/status.php:245
 msgid ""
 "Your server does not have the %s class enabled - some gateway plugins which "
 "use SOAP may not work as expected."
 msgstr ""
 
-#: inc/admin/views/status.php:253
+#: inc/admin/views/status.php:256
 msgid ""
 "Your server does not have the %s class enabled - HTML/Multipart emails, and "
 "also some extensions, will not work without DOMDocument."
 msgstr ""
 
-#: inc/admin/views/status.php:264
+#: inc/admin/views/status.php:267
 msgid ""
 "Your server does not support the %s function - this is required to use the "
 "GeoIP database from MaxMind."
 msgstr ""
 
-#: inc/admin/views/status.php:275
+#: inc/admin/views/status.php:278
 msgid ""
 "Your server does not support the %s functions - this is required for better "
 "character encoding. Some fallbacks will be used instead for it."
 msgstr ""
 
-#: inc/admin/views/status.php:318
+#: inc/admin/views/status.php:320
 msgid "Current Theme"
 msgstr ""
 
-#: inc/admin/views/status.php:329 inc/email-template-functions.php:72
+#: inc/admin/views/status.php:331 inc/email-template-functions.php:72
 #: inc/email-template-functions.php:177 inc/email-template-functions.php:248
 #: inc/email-template-functions.php:355 inc/email-template-functions.php:687
 #: inc/email-template-functions.php:995 inc/email-template-functions.php:1238
@@ -4786,49 +4800,45 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: inc/admin/views/status.php:334
+#: inc/admin/views/status.php:336
 msgid "Version"
 msgstr ""
 
-#: inc/admin/views/status.php:341
+#: inc/admin/views/status.php:345
 msgid "Author URL"
 msgstr ""
 
-#: inc/admin/views/status.php:346
+#: inc/admin/views/status.php:350
 msgid "Child Theme"
 msgstr ""
 
-#: inc/admin/views/status.php:349
+#: inc/admin/views/status.php:354
 msgid ""
 "If you're want to modifying a theme, it safe to create a child theme.  See: "
 "<a href=\"%s\" target=\"_blank\">How to create a child theme</a>"
 msgstr ""
 
-#: inc/admin/views/status.php:357
+#: inc/admin/views/status.php:363
 msgid "Parent Theme Name"
 msgstr ""
 
-#: inc/admin/views/status.php:362
+#: inc/admin/views/status.php:368
 msgid "Parent Theme Version"
 msgstr ""
 
-#: inc/admin/views/status.php:373
+#: inc/admin/views/status.php:381
 msgid "Parent Theme Author URL"
 msgstr ""
 
-#: inc/admin/views/status.php:381
+#: inc/admin/views/status.php:389
 msgid "Active Plugins"
 msgstr ""
 
-#: inc/admin/views/status.php:405
+#: inc/admin/views/status.php:413
 msgid "Visit plugin homepage"
 msgstr ""
 
-#: inc/admin/views/status.php:432
-msgid "Network enabled"
-msgstr ""
-
-#: inc/admin/views/status.php:448
+#: inc/admin/views/status.php:428
 msgid "Export to CSV"
 msgstr ""
 
@@ -5125,7 +5135,7 @@ msgstr ""
 msgid "Trip Excludes"
 msgstr ""
 
-#: inc/booking-functions.php:30 inc/cart/checkout.php:130
+#: inc/booking-functions.php:30 inc/cart/checkout.php:129
 #: inc/class-frontend-assets.php:54 inc/class-frontend-assets.php:183
 #: inc/template-functions.php:424
 msgid "Book Now"
@@ -5141,7 +5151,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: inc/booking-functions.php:237 inc/cart/checkout.php:54
+#: inc/booking-functions.php:237 inc/cart/checkout.php:53
 msgid "Lead Traveler"
 msgstr ""
 
@@ -5307,7 +5317,7 @@ msgstr ""
 msgid "Trip Book"
 msgstr ""
 
-#: inc/cart/checkout.php:41
+#: inc/cart/checkout.php:40
 msgid "Traveler Details"
 msgstr ""
 
@@ -8467,12 +8477,7 @@ msgctxt "slug"
 msgid "travel-locations"
 msgstr ""
 
-#: inc/admin/views/status.php:428
-msgctxt "Version info"
-msgid "%s is available"
-msgstr ""
-
-#: inc/admin/views/status.php:439
+#: inc/admin/views/status.php:419
 msgctxt "by author"
 msgid "by %s"
 msgstr ""
