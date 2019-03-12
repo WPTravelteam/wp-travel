@@ -2433,7 +2433,8 @@ ul.availabily-list {
                     display: inline-block;
                 }
             }
-            &.wp-travel-booking-row {
+            &.wp-travel-booking-row,
+            &.wp-travel-booking-row-single-price {
                 width: 100% !important;
                 padding-top: 20px;
                 margin-top: 10px;

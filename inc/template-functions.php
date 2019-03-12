@@ -2409,9 +2409,11 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									?>
 							<?php endif; ?>
 						</div>
+						<div class="wp-travel-booking-row-single-price">
+							<?php do_action( 'wp_travel_trip_extras' ); ?>
+						</div>
 					</li>
 				</ul>
-				<?php do_action( 'wp_travel_trip_extras' ); ?>
 			</div>
 		</div>
 		<?php
