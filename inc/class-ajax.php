@@ -270,9 +270,18 @@ class WP_Travel_Ajax {
 		$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
 		$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
 
+		if ( 'fixed' === $discount_type ) {
+			$cart_amounts = $wt_cart->get_total( $with_discount = false );
+			$total = $cart_amounts['total'];
+			if ( $discount_amount >= $total ) {
+				WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
+				return;
+			}
+		}
+
 		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount );
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
+		WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
 
 		echo true;
 		die;

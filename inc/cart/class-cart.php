@@ -377,7 +377,7 @@ class WP_Travel_Cart {
 	// * Remove cart trip extras.
 	// */
 	// public function remove_trip_extras
-	function get_total() {
+	function get_total( $with_discount = true ) {
 
 		$trips = $this->items;
 
@@ -450,7 +450,7 @@ class WP_Travel_Cart {
 		$sub_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $sub_total ) );
 
 		// Discounts Calculation.
-		if ( ! empty( $discounts ) ) {
+		if ( ! empty( $discounts ) && $with_discount ) { // $with_discount will help to get actual total while calculating discount.
 
 			$d_typ = $discounts['type'];
 			$d_val = $discounts['value'];
