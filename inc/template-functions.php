@@ -185,7 +185,8 @@ function wp_travel_wrapper_end() {
 /**
  * Add html of trip price.
  *
- * @param int $post_id ID for current post.
+ * @param int  $post_id ID for current post.
+ * @param bool $hide_rating Boolean value to show/hide rating.
  */
 function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$settings   = wp_travel_get_settings();
@@ -195,7 +196,7 @@ function wp_travel_trip_price( $post_id, $hide_rating = false ) {
 	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $post_id );	
+	$per_person_text = wp_travel_get_price_per_text( $post_id );
 	?>
 
 	<div class="wp-detail-review-wrap">
@@ -464,9 +465,10 @@ function wp_travel_single_keywords( $post_id ) {
 			<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ); ?></span>
 			<?php
 			$i = 0;
-			foreach ( $terms as $term ) : 
+			foreach ( $terms as $term ) :
 				if ( $i > 0 ) :
-					?> , 
+					?>
+					 , 
 					<?php
 				endif;
 				?>
@@ -521,7 +523,8 @@ function wp_travel_single_location( $post_id ) {
 					$i = 0;
 					foreach ( $terms as $term ) :
 						if ( $i > 0 ) :
-							?> , 
+							?>
+							 , 
 							<?php
 						endif;
 						?>
@@ -709,7 +712,8 @@ function wp_travel_frontend_contents( $post_id ) {
 			<ul class="wp-travel tab-list resp-tabs-list ">
 				<?php
 				$index = 1;
-				foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+				foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+					?>
 					<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
 						<?php continue; ?>
 					<?php endif; ?>
@@ -735,6 +739,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php
 				switch ( $tab_key ) {
 					case 'gallery':
+						$image_size = apply_filters( 'wp_travel_gallery_image', 'thumbnail' ); // previously using 'medium' before 1.9.0
 						?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php if ( false !== $tab_info['content'] ) : ?>
@@ -743,7 +748,7 @@ function wp_travel_frontend_contents( $post_id ) {
 									<ul>
 										<?php foreach ( $tab_info['content'] as $gallery_id ) : ?>
 										<li>
-											<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, 'medium' ); ?>
+											<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size ); ?>
 											<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
 											<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
 											</a>
@@ -1940,12 +1945,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $available_date );
 
 								$unavailable_class = '';
-								$availability = wp_travel_trip_availability( $trip_id, $price_key, $available_date, $pricing_sold_out );
+								$availability      = wp_travel_trip_availability( $trip_id, $price_key, $available_date, $pricing_sold_out );
 								if ( ! $availability ) {
 									$unavailable_class = 'pricing_unavailable';
 								}
 								?>
-								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ) ?>">
+								<li id="<?php echo esc_html( $parent_id ); ?>" class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ); ?>">
 									<div class="date-from">
 										<span class="availabily-heading-label"><?php echo esc_html__( 'Pricing Name:', 'wp-travel' ); ?></span>
 										<span> <?php echo esc_html( $pricing_name ); ?> </span>
@@ -2523,7 +2528,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 							}
 
 							$unavailable_class = '';
-							$availability = wp_travel_trip_availability( $trip_id, $price_key, $start_date, $pricing_sold_out );
+							$availability      = wp_travel_trip_availability( $trip_id, $price_key, $start_date, $pricing_sold_out );
 							if ( ! $availability ) {
 								$unavailable_class = 'pricing_unavailable';
 							}
