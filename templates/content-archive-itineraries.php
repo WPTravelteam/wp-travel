@@ -45,7 +45,8 @@ if ( post_password_required() ) {
 			</div>
 			<div class="wp-travel-entry-content-wrapper">
 				<div class="description-left">
-					<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ); ?>
+					<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ); // Depricated. ?>
+					<?php do_action( 'wp_travel_before_archive_content_title', get_the_ID() ); ?>
 					<header class="entry-header">
 						<h2 class="entry-title">
 							<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">

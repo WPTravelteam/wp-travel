@@ -2,7 +2,7 @@
 /**
  * Coupons General Tab Callback.
  *
- * @package WP_Tarvel_Coupons_Pro
+ * @package WP_Travel_Coupons_Pro
  */
 
 global $post;

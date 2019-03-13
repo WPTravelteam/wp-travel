@@ -52,7 +52,8 @@ do_action( 'wp_travel_before_content_start');
 	        </div>
 	        <div class="wp-travel-feature-slide-content featured-detail-section right-plot">
 				<div class="right-plot-inner-wrap">
-					<?php do_action( 'wp_tarvel_before_single_title', get_the_ID() ) ?>
+					<?php do_action( 'wp_tarvel_before_single_title', get_the_ID() ); // Depricated. ?>
+					<?php do_action( 'wp_travel_before_single_title', get_the_ID() ); ?>
 					<?php $show_title = apply_filters( 'wp_travel_show_single_page_title', true ); ?>
 					<?php if ( $show_title ) : ?>
 						<header class="entry-header">

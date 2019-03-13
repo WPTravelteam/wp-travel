@@ -1193,7 +1193,7 @@ class WP_Travel_Admin_Settings {
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
-						update_option( 'wp_travel_' . $settings_field . '_page_id', $_POST[ $settings_field ]  );
+						update_option( 'wp_travel_' . $settings_field, $_POST[ $settings_field ]  );
 					}
 				}
 			}

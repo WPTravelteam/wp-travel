@@ -39,7 +39,8 @@ $sale_price 	= wp_travel_get_trip_sale_price( $post_id ); ?>
 			<?php wp_travel_save_offer( $post_id ); ?>
 		</div>
 		<div class="wp-travel-post-info clearfix">
-			<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ) ?>
+			<?php do_action( 'wp_tarvel_before_archive_title', get_the_ID() ); // Depricated. ?>
+			<?php do_action( 'wp_travel_before_item_title', get_the_ID() ); ?>
 			<h4 class="post-title">
 				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 					<?php the_title(); ?>
