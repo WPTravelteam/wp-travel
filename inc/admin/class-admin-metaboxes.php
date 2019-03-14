@@ -728,6 +728,12 @@ class WP_Travel_Admin_Metaboxes {
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 			return;
 		}
+
+		// Return if action is quick edit.
+		if ( isset( $_POST['action'] ) && 'inline-save' === $_POST['action'] ) {
+			return;
+		}
+
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
 			return;
