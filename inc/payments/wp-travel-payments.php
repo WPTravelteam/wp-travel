@@ -209,7 +209,7 @@ if ( ! function_exists( 'wp_travel_is_partial_payment_enabled' ) ) {
 	function wp_travel_is_partial_payment_enabled() {
 		$settings = wp_travel_get_settings();
 
-		if ( isset( $settings['partial_payment'] ) && '' !== $settings['partial_payment'] ) {
+		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
 			return true;
 		}
 		return false;
