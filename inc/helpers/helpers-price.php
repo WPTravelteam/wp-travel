@@ -407,42 +407,60 @@ function wp_travel_get_trip_sale_price( $post_id = 0 ) {
 /**
  * Return Trip Price.
  *
- * @param  int $post_id Post id of the post.
+ * @param int    $trip_id Post id of the post.
+ * @param String $price_key Price key for multiple pricing.
+ * @param Bool   $only_regular_price Return only trip price rather than sale price as trip price if this is set to true.
  *
- * @since 1.0.5
+ * @since 1.0.5 // Modified 1.9.2
  * @return int Trip Price.
  */
-function wp_travel_get_actual_trip_price( $trip_id = 0 ) {
+function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_regular_price = false ) {
 	if ( ! $trip_id ) {
 		return 0;
 	}
 
-	$trip_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
-	if ( ! $trip_price ) {
-		$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+	$trip_price  = wp_travel_get_trip_price( $trip_id );
+	$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+	if ( $enable_sale && ! $only_regular_price ) {
+		$trip_price = wp_travel_get_trip_sale_price( $trip_id );
+	}
 
-		if ( $enable_sale ) {
-			$trip_price = wp_travel_get_trip_sale_price( $trip_id );
-		} else {
-			$trip_price = wp_travel_get_trip_price( $trip_id );
+	// @since 1.9.2 // Added price calculation for pricing key [multiple pricing].
+	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
+	$valid_price_key        = wp_travel_is_price_key_valid( $trip_id, $price_key );
+
+	if ( '' !== $price_key && $enable_pricing_options && $valid_price_key ) {
+		$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
+		if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
+
+			foreach ( $pricing_data as $p_ky => $pricing ) :
+
+				$trip_price  = $pricing['price'];
+				$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
+				$sale_price  = isset( $pricing['sale_price'] ) && $pricing['sale_price'] > 0 ? $pricing['sale_price'] : 0;
+
+				if ( $enable_sale && $sale_price && ! $only_regular_price ) {
+					$trip_price = $pricing['sale_price'];
+				}
+			endforeach;
 		}
 	}
+
 	return $trip_price;
 }
 // End of Migrated functions from inc/helpers.php / These prices are only for display.
+
+/**
+ * Get Cart Attrs [  Need Enhancement ]
+ */
 function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_price = false ) {
 	if ( ! $trip_id ) {
 		return 0;
 	}
 	// Default Pricings.
-	$trip_price = wp_travel_get_actual_trip_price( $trip_id ); // Default Trip Price.
-	// $price = $trip_price; // Price for single qty.
-	// Price Person Text.
+	$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // Default Trip Price.
+	
 	$per_person_text = wp_travel_get_price_per_text( $trip_id );
-	// if ( 'person' === strtolower( $per_person_text ) && $pax > 0 ) {
-	// $trip_price *= $pax;
-	// }
-	// $enable_pricing_options = get_post_meta( $trip_id, 'wp_travel_enable_pricing_options', true );
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 
 	$pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
@@ -457,14 +475,6 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 			if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
 
 				foreach ( $pricing_data as $p_ky => $pricing ) :
-
-					$trip_price  = $pricing['price'];
-					$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false;
-
-					if ( $enable_sale && isset( $pricing['sale_price'] ) && '' !== $pricing['sale_price'] ) {
-						$trip_price = $pricing['sale_price'];
-					}
-
 					// Product Metas.
 					$trip_start_date       = isset( $_REQUEST['trip_date'] ) && '' !== $_REQUEST['trip_date'] ? $_REQUEST['trip_date'] : '';
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
@@ -494,7 +504,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		$inventory = new WP_Travel_Util_Inventory();
 
 		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
-		$available_pax = $inventory->get_available_pax( $trip_id, $price_key, $trip_start_date );
+		$available_pax     = $inventory->get_available_pax( $trip_id, $price_key, $trip_start_date );
 
 		if ( $inventory_enabled && $available_pax ) {
 			$max_available = $available_pax;
@@ -502,7 +512,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	}
 
 	$trip_price = wp_travel_get_formated_price( $trip_price );
-	// $price = wp_travel_get_formated_price( $price );
+
 	if ( $return_price ) {
 		return $trip_price;
 	}
@@ -519,17 +529,18 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	);
 
 	$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
+	
 	$trip_price_partial      = $trip_price;
-
 	if ( $attrs['enable_partial'] ) {
 		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
+
 		if ( $payout_percent > 0 ) {
 			$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
 			$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
 		}
-		$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
+		$attrs['trip_price_partial'] = $trip_price_partial;
 	}
-	$attrs['trip_price_partial'] = $trip_price_partial;
 
 	return $attrs;
 }
@@ -572,6 +583,31 @@ function wp_travel_is_enable_pricing_options( $trip_id ) {
 	}
 
 	return false;
+}
+
+function wp_travel_get_min_price_key( $pricing_options ) {
+	if ( ! $pricing_options || ! is_array( $pricing_options ) ) {
+		return '';
+	}
+	$min_price = 0;
+	$price_key = '';
+	foreach ( $pricing_options as $pricing_option ) {
+
+		$current_price = $pricing_option['price'];
+		$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
+		$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+
+		if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+			$current_price = $sale_price;
+
+		}
+
+		if ( ( 0 === $min_price && $current_price > 0 ) || $min_price > $current_price ) { // Initialize min price if 0.
+			$min_price = $current_price;
+			$price_key = $pricing_option['price_key'];
+		}
+	}
+	return $price_key;
 }
 
 function wp_travel_get_formated_price( $price, $thausand_sep = false, $round = 2 ) {

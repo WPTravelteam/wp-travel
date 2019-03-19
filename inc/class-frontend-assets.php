@@ -97,7 +97,7 @@ class WP_Travel_Frontend_Assets {
 			'currency_symbol' => wp_travel_get_currency_symbol(),
 			'prices'          => wp_reavel_get_itinereries_prices_array(), // why this ?
 			'locale'          => $locale,
-			'nonce'           => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+			'nonce'           => wp_create_nonce( 'wp_travel_frontend_security' ),
 			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
 		);
 
@@ -140,7 +140,7 @@ class WP_Travel_Frontend_Assets {
 			// Add vars.
 			$frontend_vars = array(
 				'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
-				'nonce'      => wp_create_nonce( 'wp_travel_frontend_enqueries' ),
+				'nonce'      => wp_create_nonce( 'wp_travel_frontend_security' ),
 				'cartUrl'    => wp_travel_get_cart_url(),
 				'text_array' => array(
 					'pricing_select' => __( 'Select', 'wp-travel' ), // Strings

@@ -202,16 +202,13 @@ class WP_Travel_Cart {
 		$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 		$this->items[ $cart_item_id ]['pax']        = $pax;
 		$this->items[ $cart_item_id ]['price_key']  = $price_key;
-		// error_log( print_r( $attrs, true ) );
-		// error_log( print_r( $this->items, true ) );
+		
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {
 				$this->items[ $cart_item_id ][ $key ] = $attr;
 			}
 		}
-		
-		// error_log( print_r( $this->items, true ) );
 		$this->write();
 		return true;
 	}
@@ -281,26 +278,41 @@ class WP_Travel_Cart {
 			$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 			$price_key     = $this->items[ $cart_item_id ]['price_key'];
 
+			$trip_price    = $this->items[ $cart_item_id ]['trip_price'];
+			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+				$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
+				if ( $group_trip_price ) {
+					$trip_price = $group_trip_price;
+				}
+			}
+
+			$trip_price_partial      = $trip_price;
+			if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
+				$payout_percent = wp_travel_get_payout_percent( $trip_id );
+
+				$this->items[ $cart_item_id ]['partial_payout_figure'] = $payout_percent;
+
+				if ( $payout_percent > 0 ) {
+					$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
+					$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+				}
+				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
+			}
+
 			$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
-			/**
-			 * Customization Ends.
-			 */
 
 			$this->items[ $cart_item_id ]['pax'] = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
+			$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 
 			if ( $trip_extras ) {
 
 				if ( is_array( $trip_extras ) && ! empty( $trip_extras ) ) {
-
 					$this->items[ $cart_item_id ]['trip_extras'] = $trip_extras;
-
 				}
 			}
 
 			if ( $max_available && $pax > $max_available ) {
-
 				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
-
 			}
 
 			$this->write();

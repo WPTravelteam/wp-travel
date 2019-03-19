@@ -1168,6 +1168,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &:last-of-type {
             border-bottom: none;
         }
+        &.hidden{
+            display:none;
+        }
     }
     .one-third,
     .two-third {

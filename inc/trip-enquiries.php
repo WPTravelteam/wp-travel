@@ -319,7 +319,7 @@ function wp_travel_save_user_enquiry() {
 
 	$formdata = $_POST;
 
-	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_frontend_enqueries' ) ) {
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_frontend_security' ) ) {
 
 		$errors['message'] = __( 'Nonce Verification Failed !!', 'wp-travel' );
 

@@ -142,13 +142,21 @@ class WP_Travel_Ajax {
 		$departure_date = isset( $_POST['trip_departure_date'] ) ? $_POST['trip_departure_date'] : ''; // Need to remove. is't post value.
 		$trip_extras    = isset( $_POST['wp_travel_trip_extras'] ) ? $_POST['wp_travel_trip_extras'] : array();
 
-		$trip_price = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, true );
+		$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
+
+		if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+			$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
+			if ( $group_trip_price ) {
+				$trip_price = $group_trip_price;
+			}
+		}
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 
 		$attrs['arrival_date']   = $arrival_date;
 		$attrs['departure_date'] = $departure_date;
-		$attrs['trip_extras']    = $trip_extras;	
+		$attrs['trip_extras']    = $trip_extras;
+		
 		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 

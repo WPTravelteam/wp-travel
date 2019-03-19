@@ -300,6 +300,14 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 
 											<?php endif; ?>
 										</div>
+										<?php
+										/**
+										 * @since 1.9.2
+										 *
+										 * @hooked 
+										 */
+										do_action( 'wp_travel_pricing_option_content_after_trip_extra', $post_id, $key, $pricing );
+										?>
 									</div>
 								</div>
 							</div>
@@ -397,9 +405,9 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 									<label for="price_per_{{data.random}}" class="one-third"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<select id="price_per_{{data.random}}" name="wp_travel_pricing_options[{{data.random}}][price_per]">
-												<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
-												<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
-												<option value="group"><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
+											<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
+											<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
+											<option value="group"><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
 										</select>
 									</div>
 								</div>
@@ -433,6 +441,14 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 								<?php endif; ?>
 
 							</div>
+							<?php
+							/**
+							 * @since 1.9.2
+							 *
+							 * @hooked 
+							 */
+							do_action( 'wp_travel_pricing_option_content_after_trip_extra_repeator', '{{data.random}}' );
+							?>
 						</div>
 					</div>
 				</div>

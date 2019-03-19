@@ -1042,6 +1042,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .price-accordion .repeat-row:last-of-type,
     .date-accordion .repeat-row:last-of-type {
       border-bottom: none; }
+    .price-accordion .repeat-row.hidden,
+    .date-accordion .repeat-row.hidden {
+      display: none; }
   .price-accordion .one-third,
   .price-accordion .two-third,
   .date-accordion .one-third,

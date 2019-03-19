@@ -76,7 +76,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 						<tbody>
 						<?php
 						foreach ( $bookings as $key => $b_id ) :
-
+							dd(get_post_meta( $b_id));
 							$bkd_trip_id    = get_post_meta( $b_id, 'wp_travel_post_id', true );
 							$booking_status = get_post_status( $b_id );
 

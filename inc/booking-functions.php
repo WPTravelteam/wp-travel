@@ -687,6 +687,7 @@ function wp_travel_book_now() {
 	 */
 	update_post_meta( $booking_id, 'wp_travel_arrival_date', $booking_arrival_date );
 	update_post_meta( $booking_id, 'wp_travel_departure_date', $booking_departure_date );
+	update_post_meta( $booking_id, 'wp_travel_post_id', $trip_id ); // quick fix [booking not listing in user dashboard].
 
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
 	foreach ( $_POST as $meta_name => $meta_val ) {
@@ -736,8 +737,11 @@ function wp_travel_book_now() {
 		if ( ! $saved_booking_ids ) {
 			$saved_booking_ids = array();
 		}
-			array_push( $saved_booking_ids, $booking_id );
-			update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
+		// error_log( $user->ID );
+		// error_log( print_R( $saved_booking_ids, true ) );
+		array_push( $saved_booking_ids, $booking_id );
+		// error_log( print_R( $saved_booking_ids, true ) );
+		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
 	$settings = wp_travel_get_settings();

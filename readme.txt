@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 5.5
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,17 +20,20 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = WP TRAVEL PAYMENT ADDONS =
 
-* [WP Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin)
-* [WP Stripe Chekout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin)
-* [WP Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/?utm_source=addons&utm_medium=authorize&utm_campaign=WP%20Plugin)
-* [WP Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin)
-* [WP Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin)
+* [WP Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Stripe Chekout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/?utm_source=addons&utm_medium=authorize&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Travel Paystack Checkout](https://wptravel.io/downloads/wp-travel-paystack-checkout/?utm_source=addons&utm_medium=paystack&utm_campaign=WP%20Plugin) (For online payments in Nigeria)
+* [WP Travel Khalti Checkout](https://wptravel.io/downloads/wp-travel-khalti-checkout/?utm_source=addons&utm_medium=khalti&utm_campaign=WP%20Plugin) (For online payments in Nepal)
+* [WP Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin) (For online payments in India)
+* [WP Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/?utm_source=addons&utm_medium=utilities&utm_campaign=WP%20Plugin)
 * [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/?utm_source=addons&utm_medium=tourextras&utm_campaign=WP%20Plugin)
 * [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/?utm_source=addons&utm_medium=wishlist&utm_campaign=WP%20Plugin)
 * [WP Travel Field Editor](https://wptravel.io/downloads/wp-travel-field-editor/?utm_source=addons&utm_medium=field-editor&utm_campaign=WP%20Plugin)
+* [WP Travel Partial Payment](https://wptravel.io/downloads/wp-travel-partial-payment/?utm_source=addons&utm_medium=partial-payment&utm_campaign=WP%20Plugin)
 
 
 = WP TRAVEL MAP ADDONS =
@@ -44,7 +47,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 = FREE TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
-* [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Themes
+* [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Base](https://wptravel.io/demo/?demo=travel-base&utm_source=freethemes&utm_medium=travelbase&utm_campaign=WP%20Plugin) by Theme Palace
 * [Tourable](https://wptravel.io/demo/?demo=tourable&utm_source=freethemes&utm_medium=tourable&utm_campaign=WP%20Plugin) by Theme Palace
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
@@ -70,7 +73,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * **Tour Extras:** It allows you add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 5 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin) 
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 7 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin) 
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -195,6 +198,17 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.9.2 =
+Release Date: 13th March 2019
+
+Enhancement:
+
+* Enhanced pricing function to get single multiple and group price.
+
+Fixes: 
+
+* When doing quick edit, it clears all custom field(meta) values.  
 
 = 1.9.1 =
 Release Date: 13th March 2019

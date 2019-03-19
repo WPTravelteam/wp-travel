@@ -2347,9 +2347,17 @@ ul.availabily-list {
     li {
         border-bottom: 1px solid #E3E3E3;
         line-height: 1.2;
-        padding: 10px 0 20px;
+        // padding: 10px 0 20px;
         margin: 10px 0;
         position: relative;
+        box-shadow: 2px 2px 40px #e4e4e4;
+        padding: 20px;
+        &:first-child {
+            div{
+                font-size: 15px;
+                color: #c56462;
+            }
+        }
         &>div {
             display: inline-block;
             width: 16%;
@@ -2381,17 +2389,7 @@ ul.availabily-list {
             }
             &.date-from {
                 padding-right: 10px;
-                position: relative;
-                // &:after {
-                //     font-family: 'wt-icon-solid';
-                //     content: "\f058";
-                //     position: absolute;
-                //     top: 50%;
-                //     right: 0;
-                //     margin-top: -4px;
-                //     display: block;
-                //     color: #f83531;
-                // }
+                position: relative;                
             }
             &.date-to {
                 padding-left: 10px;
@@ -2415,13 +2413,21 @@ ul.availabily-list {
                 text-align: right;
                 &.btn {
                     margin-right: -8px;
+                    padding: 8px 25px;
+                    border: none;
+                    font-size: 14px;
+                    display: inline-block;
+                    background: #f83531;
+                    color: #fff;
+                    border-radius: 4px;
                 }
                 
             }
             span {
                 display: block;
                 font-size: 14px;
-                font-weight: 600;
+                font-weight: 400;
+                text-transform: capitalize;
                 &.availabily-heading-label {
                     display: none;
                     font-size: 12px;
@@ -2444,7 +2450,7 @@ ul.availabily-list {
                     padding-left: 0 !important;
                 }
                 &.animate {
-                    background-color: #f9f9f9;
+                    // background-color: #f9f9f9;
                     padding: 15px;
                     padding-left: 15px !important;
                     height: auto;
@@ -2503,6 +2509,21 @@ ul.availabily-list {
                 }
             }
         }
+
+        // Tour extra
+        .wp_travel_tour_extras_content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 60px;
+        }
+        .wp_travel_tour_extras{
+
+            .wp_travel_tour_extras_option_single {
+                margin-bottom: 0px;
+                padding: 0px;
+                position: relative;
+            }
+        }
     }
     &.additional-col {
         li {
@@ -2514,7 +2535,7 @@ ul.availabily-list {
     .availabily-heading {
         font-size: 12px;
         color: #555;
-        padding-bottom: 5px;
+        padding-bottom: 14px;
         font-weight: 600;
         text-transform: capitalize;
         @include mob {

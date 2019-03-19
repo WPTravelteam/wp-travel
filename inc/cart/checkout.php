@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'WP_TRAVEL_ABSPATH' ) ) {
+if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 }
 

@@ -1811,9 +1811,13 @@ ul.availabily-list {
   ul.availabily-list li {
     border-bottom: 1px solid #E3E3E3;
     line-height: 1.2;
-    padding: 10px 0 20px;
     margin: 10px 0;
-    position: relative; }
+    position: relative;
+    box-shadow: 2px 2px 40px #e4e4e4;
+    padding: 20px; }
+    ul.availabily-list li:first-child div {
+      font-size: 15px;
+      color: #c56462; }
     ul.availabily-list li > div {
       display: inline-block;
       width: 16%;
@@ -1852,11 +1856,19 @@ ul.availabily-list {
       ul.availabily-list li > div.action {
         text-align: right; }
         ul.availabily-list li > div.action.btn {
-          margin-right: -8px; }
+          margin-right: -8px;
+          padding: 8px 25px;
+          border: none;
+          font-size: 14px;
+          display: inline-block;
+          background: #f83531;
+          color: #fff;
+          border-radius: 4px; }
       ul.availabily-list li > div span {
         display: block;
         font-size: 14px;
-        font-weight: 600; }
+        font-weight: 400;
+        text-transform: capitalize; }
         ul.availabily-list li > div span.availabily-heading-label {
           display: none;
           font-size: 12px;
@@ -1873,7 +1885,6 @@ ul.availabily-list {
           ul.availabily-list li > div.wp-travel-booking-row, ul.availabily-list li > div.wp-travel-booking-row-single-price {
             padding-left: 0 !important; } }
         ul.availabily-list li > div.wp-travel-booking-row.animate, ul.availabily-list li > div.wp-travel-booking-row-single-price.animate {
-          background-color: #f9f9f9;
           padding: 15px;
           padding-left: 15px !important;
           height: auto;
@@ -1922,12 +1933,20 @@ ul.availabily-list {
           width: 100%; }
           ul.availabily-list li .wp-travel-calender-aside [class*=col] {
             padding-left: 0; } }
+    ul.availabily-list li .wp_travel_tour_extras_content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 60px; }
+    ul.availabily-list li .wp_travel_tour_extras .wp_travel_tour_extras_option_single {
+      margin-bottom: 0px;
+      padding: 0px;
+      position: relative; }
   ul.availabily-list.additional-col li > div {
     width: 14.26%; }
   ul.availabily-list .availabily-heading {
     font-size: 12px;
     color: #555;
-    padding-bottom: 5px;
+    padding-bottom: 14px;
     font-weight: 600;
     text-transform: capitalize; }
     @media (max-width: 767px) {
