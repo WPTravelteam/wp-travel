@@ -858,7 +858,7 @@ class WP_Travel_Admin_Settings {
 		$settings = $args['settings'];
 
 		$global_tabs = $settings['global_tab_settings'];
-		if ( empty( $global_tabs ) ) {
+		if ( empty( $global_tabs ) ) { // may be not required from 1.9.2.
 			// Fallback to default Tabs.
 			$global_tabs = wp_travel_get_default_frontend_tabs();
 		}

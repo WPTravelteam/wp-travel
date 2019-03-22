@@ -2167,11 +2167,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 											<span class="person-count">
 												<ins>
 													<span>
-														<?php
-
-															echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s <span class="wp-travel-trip-price-figure" >%s</span>', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
-
-														?>
+														<?php echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s <span class="wp-travel-trip-price-figure" >%s</span>', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );?>
 													</span>
 												</ins>/<?php echo esc_html( $pricing_type_label ); ?>
 											</span>

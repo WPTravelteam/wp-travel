@@ -146,10 +146,12 @@ wp_travel_print_notices();
 							</div>
 						</td>
 						<td class="product-price" data-title="Price">
-							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
+							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : 
+								$actual_trip_price = isset( $trip_tax_details['actual_trip_price'] ) ? $trip_tax_details['actual_trip_price'] : '' ;
+								?>
 								<span class="person-count">
 									<ins>
-										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( @$trip_tax_details['actual_trip_price'] ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
+										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( $actual_trip_price ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
 											<?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?>
 										</span>
 									</ins>/<?php echo esc_html( ucfirst( $pax_label ) ); ?>
