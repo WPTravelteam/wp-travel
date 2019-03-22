@@ -187,7 +187,12 @@ jQuery(document).ready(function($) {
     jQuery('.wp-travel-booking-row').hide();
     jQuery('.show-booking-row').click(function(event) {
         event.preventDefault();
-        jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast').addClass('animate');
+        var parent = $(this).closest('li.availabily-content');
+        
+        jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast', function() {
+            
+            parent.toggleClass('opened');
+        }).addClass('animate');
         jQuery(this).text(function(i, text) {
             return text === wp_travel.strings.select ? wp_travel.strings.close : wp_travel.strings.select;
         })
