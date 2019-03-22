@@ -1832,7 +1832,6 @@ ul.availabily-list {
       float: left; }
       ul.availabily-list li > div input[type="text"], ul.availabily-list li > div .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type="text"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field ul.availabily-list li > div select[type="text"], ul.availabily-list li > div .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type="text"], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field ul.availabily-list li > div textarea[type="text"] {
         border: 1px solid #ccc;
-        border-radius: 0;
         font-size: 13px;
         height: 35px;
         padding-left: 10px;
