@@ -2107,7 +2107,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								</div>
 								<div class="date-from">
 									<span class="availabily-heading-label"><?php echo esc_html__( 'Start:', 'wp-travel' ); ?></span>
-									<div class="wp-travel-calender-column no-padding ">
+									<div class="wp-travel-calender-column1 no-padding ">
 		
 											<label for=""><?php echo esc_html__( 'Select a Date:', 'wp-travel' ); ?></label>
 											<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="trip_date" type="text" data-available-dates="<?php echo ( $available_dates ) ? esc_attr( wp_json_encode( $available_dates ) ) : ''; ?>" readonly class="wp-travel-pricing-dates" required data-parsley-trigger="change" data-parsley-required-message="<?php echo esc_attr__( 'Please Select a Date', 'wp-travel' ); ?>">

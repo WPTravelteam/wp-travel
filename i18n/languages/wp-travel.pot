@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 1.9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 11:08:25+00:00\n"
+"POT-Creation-Date: 2019-03-22 11:17:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5289,7 +5289,7 @@ msgid "Trip"
 msgstr ""
 
 #: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:172 inc/helpers.php:2160
-#: templates/content-cart.php:57 templates/content-cart.php:233
+#: templates/content-cart.php:57 templates/content-cart.php:235
 msgid "Total"
 msgstr ""
 
@@ -5305,11 +5305,11 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:144 templates/content-cart.php:216
+#: inc/cart/cart-mini.php:144 templates/content-cart.php:218
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:148 templates/content-cart.php:220
+#: inc/cart/cart-mini.php:148 templates/content-cart.php:222
 msgid "%"
 msgstr ""
 
@@ -6946,7 +6946,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/coupon/inc/admin/views/tabs/coupons-general.php:74
-#: templates/content-cart.php:243
+#: templates/content-cart.php:245
 msgid "Coupon Code"
 msgstr ""
 
@@ -8276,23 +8276,23 @@ msgstr ""
 msgid "Date:"
 msgstr ""
 
-#: templates/content-cart.php:202
+#: templates/content-cart.php:204
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:215
+#: templates/content-cart.php:217
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:244
+#: templates/content-cart.php:246
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:250
+#: templates/content-cart.php:252
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:251
+#: templates/content-cart.php:253
 msgid "Proceed to checkout"
 msgstr ""
 
