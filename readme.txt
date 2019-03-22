@@ -214,7 +214,8 @@ Fixes:
 * Standard Paypal payment compatibility with multiple checkout.  
 * Date translation on trip page.  
 * Admin settings tab position placement changed. 
-* Display Tabs in frontend isn't correct as per settings. 
+* Display Tabs in frontend isn't correct as per settings.
+* Booking not listed in WP Travel Dashboard. When booking made from frontend it is not listed as booking in Dashboard page.
 
 = 1.9.1 =
 Release Date: 13th March 2019

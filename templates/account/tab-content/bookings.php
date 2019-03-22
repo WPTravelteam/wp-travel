@@ -80,7 +80,15 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 							$booking_status = get_post_status( $b_id );
 
 							if ( ! $bkd_trip_id ) {
-								continue;
+								// Quick fix booking list hide from dashboard if booking updated form admin [ meta - wp_travel_post_id is not updated ]
+								$order_details = get_post_meta( $b_id, 'order_items_data', true ); // Multiple Trips.
+								if ( $order_details && is_array( $order_details ) && count( $order_details ) > 0 ) : // Multiple.
+									$travel_date = '';
+									foreach ( $order_details as $order_detail ) :
+										$bkd_trip_id      = $order_detail['trip_id'];
+										break;
+									endforeach;
+								endif;
 							}
 
 							if ( 'publish' !== $booking_status ) {
