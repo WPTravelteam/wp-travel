@@ -73,7 +73,7 @@ wp_travel_print_notices();
 					$pax                = $trip['pax'];
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$enable_partial     = $trip['enable_partial'];
-					$trip_price_partial = $trip['trip_price_partial'];
+					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available      = isset( $trip['max_available'] ) ? $trip['max_available'] : '';
 					$trip_extras        = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();

@@ -408,7 +408,7 @@ class WP_Travel_Cart {
 			foreach ( $trips as $cart_id => $trip ) :
 
 				$trip_price         = $trip['trip_price'];
-				$trip_price_partial = $trip['trip_price_partial'];
+				$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 				$pax                = ! empty( $trip['pax'] ) ? $trip['pax'] : 1;
 
 				$single_trip_total         = wp_travel_get_formated_price( $trip_price * $pax );

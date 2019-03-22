@@ -416,23 +416,27 @@ function wp_travel_single_excerpt( $post_id ) {
 		<div class="wp-travel-booking-wrapper">
 			<?php
 			$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-			$booking_tab              = $wp_travel_itinerary_tabs['booking'];
+			if ( isset( $wp_travel_itinerary_tabs['booking'] ) ) {
+				$booking_tab = $wp_travel_itinerary_tabs['booking'];
 
-			if ( isset( $booking_tab['show_in_menu'] ) && 'yes' === $booking_tab['show_in_menu'] ) :
-				?>
-			<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
-			<?php endif; ?>
-			<?php if ( 'yes' == $enable_enquiry ) : ?>
+				if ( isset( $booking_tab['show_in_menu'] ) && 'yes' === $booking_tab['show_in_menu'] ) :
+					?>
+					<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', __( 'Book Now', 'wp-travel' ) ) ); ?></button>
+					<?php endif; ?>
+					<?php if ( 'yes' == $enable_enquiry ) : ?>
 
-				<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
-					<span class="wp-travel-booking-enquiry">
-						<span class="dashicons dashicons-editor-help"></span>
-						<span>
-							<?php echo esc_attr( apply_filters( 'wp_travel_trip_enquiry_popup_link_text', __( 'Trip Enquiry', 'wp-travel' ) ) ); ?>
-						</span>
-					</span>
-				</a>
-			<?php endif; ?>
+						<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
+							<span class="wp-travel-booking-enquiry">
+								<span class="dashicons dashicons-editor-help"></span>
+								<span>
+									<?php echo esc_attr( apply_filters( 'wp_travel_trip_enquiry_popup_link_text', __( 'Trip Enquiry', 'wp-travel' ) ) ); ?>
+								</span>
+							</span>
+						</a>
+						<?php
+				endif;
+			}
+			?>
 
 		</div>
 	</div>
@@ -1907,7 +1911,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 						$pricing_max_pax      = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : '';
 
 						$regular_price = $pricing_option_price;
-						$trip_price = $pricing_option_price;
+						$trip_price    = $pricing_option_price;
 						if ( 'yes' === $pricing_sale_enabled ) {
 							$trip_price = $pricing_sale_price;
 						}
@@ -1916,7 +1920,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 
 						$pricing_sold_out = false;
 
-						$inventory_data = array(
+						$inventory_data        = array(
 							'status_message' => __( 'N/A', 'wp-travel' ),
 							'sold_out'       => false,
 							'available_pax'  => 0,
@@ -2146,7 +2150,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
 									<?php if ( $pricing_option_price ) : ?>
 	
-										<?php if ( 'yes' === $pricing_sale_enabled ) :  ?>
+										<?php if ( 'yes' === $pricing_sale_enabled ) : ?>
 											<del>
 												<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( '%s <span class="wp-travel-regular-price-figure" >%s</span> ', $currency_symbol, $regular_price ), $currency_symbol, $regular_price ); ?></span>
 											</del>
@@ -2155,9 +2159,9 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 												<ins>
 													<span>
 														<?php
-														
+
 															echo apply_filters( 'wp_travel_itinerary_sale_price', sprintf( ' %s <span class="wp-travel-trip-price-figure" >%s</span>', $currency_symbol, $trip_price ), $currency_symbol, $trip_price );
-														
+
 														?>
 													</span>
 												</ins>/<?php echo esc_html( $pricing_type_label ); ?>
@@ -2186,7 +2190,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									<div class="wp-travel-calender-aside">
 										
 										<?php
-										
+
 										$max_attr = '';
 										$min_attr = 'min=1';
 										if ( '' !== $pricing_max_pax ) {

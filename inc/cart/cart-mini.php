@@ -62,7 +62,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$pricing_name       = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 					$enable_partial     = $trip['enable_partial'];
-					$trip_price_partial = $trip['trip_price_partial'];
+					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 
 					$pax_label = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 
