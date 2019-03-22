@@ -2142,6 +2142,15 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 										<?php
 									endif;
 								endif;
+								$max_attr = '';
+								$min_attr = 'min=1';
+								if ( '' !== $pricing_max_pax ) {
+
+									$max_attr = 'max=' . $pricing_max_pax;
+								}
+								if ( '' !== $pricing_min_pax ) {
+									$min_attr = 'min=' . $pricing_min_pax;
+								}
 								?>
 								<div class="no-of-pax">
 									<input name="pax" type="number" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
@@ -2187,22 +2196,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									 */
 									do_action( 'wp_travel_trip_extras', $price_key );
 									?>
-									<div class="wp-travel-calender-aside">
-										
-										<?php
-
-										$max_attr = '';
-										$min_attr = 'min=1';
-										if ( '' !== $pricing_max_pax ) {
-
-											$max_attr = 'max=' . $pricing_max_pax;
-										}
-										if ( '' !== $pricing_min_pax ) {
-											$min_attr = 'min=' . $pricing_min_pax;
-										}
-
-										?>
-										
+									<div class="wp-travel-calender-aside">										
 										<div class="add-to-cart">
 											<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
 											<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
