@@ -635,13 +635,15 @@ function wp_travel_book_now() {
 
 		if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 
-			$trip_id                = $trip_ids[0];
+			// $trip_id                = $trip_ids[0];
 			$pax                    = $pax_array[0];
 			$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
 			$booking_arrival_date   = $booking_arrival_date[0];
 			$booking_departure_date = $booking_departure_date[0];
 
 		}
+		// Quick fixes trip id.
+		$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : $trip_id;
 	endif;
 
 	if ( empty( $trip_id ) ) {
@@ -737,10 +739,7 @@ function wp_travel_book_now() {
 		if ( ! $saved_booking_ids ) {
 			$saved_booking_ids = array();
 		}
-		// error_log( $user->ID );
-		// error_log( print_R( $saved_booking_ids, true ) );
 		array_push( $saved_booking_ids, $booking_id );
-		// error_log( print_R( $saved_booking_ids, true ) );
 		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 

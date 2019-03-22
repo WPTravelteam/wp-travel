@@ -3,7 +3,7 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.0.3
+Tested up to: 5.1.1
 Requires PHP: 5.5
 Stable tag: 1.9.2
 License: GPLv3
@@ -20,13 +20,13 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = WP TRAVEL PAYMENT ADDONS =
 
-* [WP Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin) (International transactions)
-* [WP Stripe Chekout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin) (International transactions)
-* [WP Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/?utm_source=addons&utm_medium=authorize&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Travel Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Travel Stripe Checkout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin) (International transactions)
+* [WP Travel Authorize.Net Checkout](https://wptravel.io/downloads/wp-travel-authorize-net-checkout/?utm_source=addons&utm_medium=authorize&utm_campaign=WP%20Plugin) (International transactions)
 * [WP Travel Paystack Checkout](https://wptravel.io/downloads/wp-travel-paystack-checkout/?utm_source=addons&utm_medium=paystack&utm_campaign=WP%20Plugin) (For online payments in Nigeria)
 * [WP Travel Khalti Checkout](https://wptravel.io/downloads/wp-travel-khalti-checkout/?utm_source=addons&utm_medium=khalti&utm_campaign=WP%20Plugin) (For online payments in Nepal)
-* [WP Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin) (For online payments in India)
-* [WP Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
+* [WP Travel Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin) (For online payments in India)
+* [WP Travel Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/?utm_source=addons&utm_medium=utilities&utm_campaign=WP%20Plugin)
@@ -44,7 +44,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 
 
-= FREE TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
+= FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
@@ -200,15 +200,21 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.2 =
-Release Date: 13th March 2019
+Release Date: 24th March 2019
 
 Enhancement:
 
-* Enhanced pricing function to get single multiple and group price.
+* Pricing function enhanced to get single, multiple and group price.
+* Trip page layout updated for trip extras.
 
 Fixes: 
 
 * When doing quick edit, it clears all custom field(meta) values.  
+* Partial Payment Option is visible on checkout page even it is disabled from admin settings.  
+* Standard Paypal payment compatibility with multiple checkout.  
+* Date translation on trip page.  
+* Admin settings tab position placement changed. 
+* Display Tabs in frontend isn't correct as per settings. 
 
 = 1.9.1 =
 Release Date: 13th March 2019

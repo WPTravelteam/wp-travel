@@ -100,6 +100,9 @@ function wp_travel_settings_default_fields() {
 		'generate_username_from_email'            => 'no',
 		'generate_user_password'                  => 'no',
 
+		// Tabs Settings Fields.
+		'global_tab_settings'                     => wp_travel_get_default_frontend_tabs( true ), // @since 1.1.1 Global tabs settings.
+
 		// Payment Settings Fields.
 		'partial_payment'                         => 'no',
 		'minimum_partial_payout'                  => WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT,
@@ -123,11 +126,6 @@ function wp_travel_settings_default_fields() {
 		'wt_test_mode'                            => 'yes',
 		'wt_test_email'                           => '',
 	);
-
-	if ( is_admin() ) { // due to infinite loop when calling settings from frontend.
-		// Tabs Settings Fields.
-		$settings_fields['global_tab_settings'] = wp_travel_get_default_frontend_tabs(); // @since 1.1.1 Global tabs settings.
-	}
 	return apply_filters( 'wp_travel_settings_fields', $settings_fields ); // flter @since 1.9.0.
 }
 
@@ -937,7 +935,8 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
 /**
  * Default Tabs and its content.
  *
- * @return void
+ * @var bool $is_show_in_menu_query  Set true when this function need to call from admin.
+ * @return array
  */
 function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 	$trip_content = '';
@@ -947,7 +946,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 	$gallery_ids  = '';
 	$faqs         = array();
 
-	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue.
+	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue. 
 		global $wp_travel_itinerary;
 		if ( $wp_travel_itinerary ) {
 			$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
@@ -1022,7 +1021,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 		),
 	);
 
-	return $return_tabs;
+	return apply_filters( 'wp_travel_default_frontend_tabs', $return_tabs );
 }
 
 /**
@@ -1067,7 +1066,7 @@ function wp_travel_get_faqs( $post_id ) {
 function wp_travel_get_page_id( $page ) {
 
 	$settings = get_option( 'wp_travel_settings' ); // Not used wp_travel_get_settings due to infinite loop.
-	$page = str_replace( 'wp-travel', '', $page );
+	$page     = str_replace( 'wp-travel', '', $page );
 	$page_id  = ( isset( $settings[ $page . '_page_id' ] ) ) ? $settings[ $page . '_page_id' ] : '';
 
 	if ( ! $page_id ) {
