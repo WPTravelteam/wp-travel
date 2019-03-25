@@ -2040,6 +2040,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 		
 										<?php else : ?>
 											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+											<?php
+											// @since 1.9.3 To display group discount pricing lists. 
+											do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+											?>
 										<?php endif; ?>
 									</div>
 									<?php if ( $availability ) : // Remove Book now if trip is soldout. ?>
@@ -2181,6 +2185,10 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 	
 									<?php else : ?>
 										<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+										<?php
+										// @since 1.9.3 To display group discount pricing lists. 
+										do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+										?>
 									<?php endif; ?>
 								</div>
 								<div class="wp-travel-booking-row">
@@ -2527,8 +2535,9 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 							if ( ! $availability ) {
 								$unavailable_class = 'pricing_unavailable';
 							}
+							$parent_id = sprintf( 'pricing-%s-%s', esc_attr( $price_key ), $rand );
 							?>
-						<li class="<?php echo esc_attr( $unavailable_class ); ?>" id="princing-<?php echo esc_attr( $price_key ); ?>-<?php echo esc_attr( $rand ); ?>">
+						<li class="<?php echo esc_attr( $unavailable_class ); ?>" id="<?php echo esc_attr( $parent_id ); ?>">
 							<div class="trip_list_by_fixed_departure_dates_wrap">
 								<span class="trip_list_by_fixed_departure_dates_pricing_name"><?php echo $pricing_name; ?></span>
 								<span class="trip_list_by_fixed_departure_dates_start">
@@ -2558,7 +2567,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 									</span>
 								<?php endif; ?>
 								<span class="trip_list_by_fixed_departure_dates_pax">
-									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" placeholder="<?php echo esc_attr__( 'PAX', 'wp-travel' ); ?>" required type="number">
+									<input <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> name="pax" placeholder="<?php echo esc_attr__( 'PAX', 'wp-travel' ); ?>" required type="number" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 								</span>
 								<span class="trip_list_by_fixed_departure_dates_price">
 								<?php
@@ -2592,8 +2601,12 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 										<?php if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { ?>
 											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 											<?php
+											// @since 1.9.3 To display group discount pricing lists. 
+											do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+											?>
+											<?php
 										} else {
-											$button   = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+											$button   = '<a href="%s" data-parent-id="' . esc_attr( $parent_id ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 											$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 
 											$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
@@ -2622,7 +2635,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 										</p>
 										<?php
 									else :
-										$button   = '<a href="%s" data-parent-id="princing-' . esc_attr( $price_key ) . '-' . esc_attr( $rand ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
+										$button   = '<a href="%s" data-parent-id="' . esc_attr( $parent_id ) . '" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse">%s</a>';
 										$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 
 										$cart_url = add_query_arg( 'price_key', $price_key, $cart_url );
