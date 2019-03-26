@@ -857,10 +857,30 @@ class WP_Travel_Admin_Settings {
 	public function settings_callback_tabs_global( $tab, $args ) {
 		$settings = $args['settings'];
 
-		$global_tabs = $settings['global_tab_settings'];
-		if ( empty( $global_tabs ) ) { // may be not required from 1.9.2.
-			// Fallback to default Tabs.
-			$global_tabs = wp_travel_get_default_frontend_tabs();
+		// Default tab.
+		$global_tabs = wp_travel_get_default_frontend_tabs();
+
+		if ( ! empty( $settings['global_tab_settings'] ) ) {
+			// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
+			$default_tabs      = $global_tabs;
+			$default_tabs_keys = array_keys( $default_tabs );
+
+			// Saved Tabs.
+			$global_tabs     = $settings['global_tab_settings'];
+			$saved_tabs_keys = array_keys( $global_tabs );
+
+			foreach ( $default_tabs_keys as $tab_key ) {
+				if ( ! in_array( $tab_key, $saved_tabs_keys ) ) {
+					$global_tabs[ $tab_key ] = $default_tabs[ $tab_key ];
+				}
+			}
+
+			// Remove Tabs into saved tab array which newly added tabs in default tabs via hook.
+			foreach ( $saved_tabs_keys as $tab_key ) {
+				if ( ! in_array( $tab_key, $default_tabs_keys ) ) {
+					unset( $global_tabs[ $tab_key ] );
+				}
+			}
 		}
 
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
@@ -1069,7 +1089,7 @@ class WP_Travel_Admin_Settings {
 	 * @param  Array $args Settings arg list.
 	 */
 	public function settings_callback_misc_options_global( $tab, $args ) {
-		$settings = $args['settings'];
+		$settings                   = $args['settings'];
 		$enable_trip_enquiry_option = $settings['enable_trip_enquiry_option'];
 		$enable_og_tags             = $settings['enable_og_tags'];
 		$wp_travel_gdpr_message     = $settings['wp_travel_gdpr_message'];
@@ -1183,7 +1203,6 @@ class WP_Travel_Admin_Settings {
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 			// Getting saved settings first.
 			// $settings = wp_travel_get_settings();
-
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {
@@ -1193,7 +1212,7 @@ class WP_Travel_Admin_Settings {
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
-						update_option( 'wp_travel_' . $settings_field, $_POST[ $settings_field ]  );
+						update_option( 'wp_travel_' . $settings_field, $_POST[ $settings_field ] );
 					}
 				}
 			}
