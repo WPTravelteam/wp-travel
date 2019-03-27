@@ -200,11 +200,20 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.3 =
-Release Date: 27th March 2019
+Release Date: 28th March 2019
 
 Enhancement:
 
 * Compatibility with group discount.
+* Tabs code optimized and added new functions to get global trips, admin trips, frontend trips tab.
+
+Deprecated:
+
+* Function wp_travel_get_default_frontend_tabs is deprecated. use wp_travel_get_default_trip_tabs instead.
+
+Compatibility:
+
+WP Travel Utilities 1.2.3 or above.
 
 = 1.9.2 =
 Release Date: 24th March 2019

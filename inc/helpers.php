@@ -101,7 +101,7 @@ function wp_travel_settings_default_fields() {
 		'generate_user_password'                  => 'no',
 
 		// Tabs Settings Fields.
-		'global_tab_settings'                     => wp_travel_get_default_frontend_tabs( true ), // @since 1.1.1 Global tabs settings.
+		'global_tab_settings'                     => wp_travel_get_default_trip_tabs( true ), // @since 1.1.1 Global tabs settings.
 
 		// Payment Settings Fields.
 		'partial_payment'                         => 'no',
@@ -850,67 +850,33 @@ function wp_travel_get_permalink_structure() {
  *
  * @return void
  */
-function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend = true ) {
+function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
-	$return_tabs = $wp_travel_itinerary_tabs = wp_travel_get_default_frontend_tabs( $show_in_menu_query );
 	global $post;
-	$settings = wp_travel_get_settings();
-
-	$custom_tabs_enable = apply_filters( 'wp_travel_enable_custom_tab', false );
-
-	$custom_global_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) && '' !== $settings['wp_travel_custom_global_tabs'] ? $settings['wp_travel_custom_global_tabs'] : array();
-
-	$custom_itinerary_tabs = get_post_meta( $post->ID, 'wp_travel_itinerary_custom_tab_cnt_', true );
-
-	$custom_itinerary_tabs = is_array( $custom_itinerary_tabs ) && count( $custom_itinerary_tabs ) != 0 ? $custom_itinerary_tabs : array();
-
+	$settings                  = wp_travel_get_settings();
 	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
 
-	$wp_travel_tabs = get_post_meta( $post->ID, 'wp_travel_tabs', true );
-	$return_tabs    = $wp_travel_tabs ? $wp_travel_tabs : $return_tabs; // set default tab if not saved initially.
-
-	$custom_itinerary_tabs_sorting = get_post_meta( $post->ID, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
-
-	if ( $custom_tabs_enable && is_array( $custom_itinerary_tabs_sorting ) && ! empty( $custom_itinerary_tabs_sorting ) ) {
-		$wp_travel_tabs = $custom_itinerary_tabs_sorting;
-	}
-	if ( ! $for_frontend ) {
-		if ( $wp_travel_tabs ) {
-			return $wp_travel_tabs; // Return if tabs data are saved.
-		}
-		return $return_tabs; // Default tabs data.
-	}
-	if ( 'yes' == $wp_travel_use_global_tabs && isset( $settings['global_tab_settings'] ) ) {
-		// Quick fixes empty tabs settings.
-		$wp_travel_tabs = ( ! empty( $settings['global_tab_settings'] ) ) ? $settings['global_tab_settings'] : wp_travel_get_default_frontend_tabs();
-
-		if ( $custom_tabs_enable && isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && '' !== $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) {
-
-			$wp_travel_tabs = $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'];
-
-		}
+	if ( 'yes' === $wp_travel_use_global_tabs ) {
+		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
+		$wp_travel_tabs     = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
+	} else {
+		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', true );
+		$wp_travel_tabs               = wp_travel_get_admin_trip_tabs( $post->ID, $enable_custom_itinerary_tabs );
 	}
 
+	// Adding Content to the tabs.
+	$return_tabs              = array();
+	$wp_travel_itinerary_tabs = wp_travel_get_default_trip_tabs( $show_in_menu_query );
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		foreach ( $wp_travel_tabs as $key => $tab ) {
 
 			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 
 			if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
-
-				if ( isset( $tab['global'] ) && 'yes' === $tab['global'] ) {
-
-					$tab_content = isset( $custom_global_tabs[ $key ]['content'] ) ? $custom_global_tabs[ $key ]['content'] : '';
-
-				} else {
-
-					$tab_content = isset( $custom_itinerary_tabs[ $key ]['content'] ) ? $custom_itinerary_tabs[ $key ]['content'] : '';
-
-				}
+				$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
 			}
 
-			$new_tabs[ $key ]['label'] = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
-			// $new_tabs[ $key ]['global_label'] = $wp_travel_itinerary_tabs[ $key ]['label'];
+			$new_tabs[ $key ]['label']        = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
 			$new_tabs[ $key ]['content']      = $tab_content;
 			$new_tabs[ $key ]['use_global']   = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
@@ -938,7 +904,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $for_frontend
  * @var bool $is_show_in_menu_query  Set true when this function need to call from admin.
  * @return array
  */
-function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
+function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false ) {
 	$trip_content = '';
 	$trip_outline = '';
 	$trip_include = '';
@@ -946,7 +912,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 	$gallery_ids  = '';
 	$faqs         = array();
 
-	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue. 
+	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue.
 		global $wp_travel_itinerary;
 		if ( $wp_travel_itinerary ) {
 			$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
@@ -959,6 +925,7 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 			if ( $post ) {
 				$post_id = $post->ID;
 				$faqs    = wp_travel_get_faqs( $post_id );
+				$faqs    = $faqs ? $faqs : $no_details_found_message;
 			}
 		}
 	}
@@ -1021,7 +988,110 @@ function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 		),
 	);
 
-	return apply_filters( 'wp_travel_default_frontend_tabs', $return_tabs );
+	$return_tabs = apply_filters( 'wp_travel_default_trip_tabs', $return_tabs ); // Added in 1.9.3
+	return apply_filters( 'wp_travel_default_frontend_tabs', $return_tabs );   // Need to deprecate.
+}
+
+/**
+ * Return list of global tabs for settigns page.
+ *
+ * @param array $settings Settings data.
+ * @since 1.9.3
+ * @return array
+ */
+function wp_travel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
+	if ( ! $settings ) {
+		$settings = wp_travel_get_settings();
+	}
+
+	// Default tab.
+	$global_tabs = wp_travel_get_default_trip_tabs();
+
+	if ( $custom_tab_enabled ) { // Need to merge custom tabs. Note: Only enabled if WP Travel Utilities plugin is activated.
+		$custom_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+		$global_tabs = array_merge( $global_tabs, $custom_tabs );
+	}
+
+	if ( ! empty( $settings['global_tab_settings'] ) ) {
+		// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
+		$default_tabs      = $global_tabs;
+		$default_tabs_keys = array_keys( $default_tabs );
+
+		// Saved Tabs.
+		$global_tabs     = $settings['global_tab_settings'];
+		$saved_tabs_keys = array_keys( $global_tabs );
+
+		foreach ( $default_tabs_keys as $tab_key ) {
+			if ( ! in_array( $tab_key, $saved_tabs_keys ) ) {
+				$global_tabs[ $tab_key ] = $default_tabs[ $tab_key ];
+			}
+		}
+
+		if ( $custom_tab_enabled ) {
+			// Add Custom tabs content which is override by above assignment $global_tabs = $settings['global_tab_settings'];.
+			$global_tabs = array_merge( $global_tabs, $custom_tabs );
+		}
+
+		// Remove Tabs from saved tab array which newly added tabs in default tabs via hook.
+		foreach ( $saved_tabs_keys as $tab_key ) {
+			if ( ! in_array( $tab_key, $default_tabs_keys ) ) {
+				unset( $global_tabs[ $tab_key ] );
+			}
+		}
+	}
+	return $global_tabs;
+}
+
+/**
+ * Return list of trip tabs for admin trip page.
+ *
+ * @param array $settings Settings data.
+ * @since 1.9.3
+ * @return array
+ */
+function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	// Default tab.
+	$trip_tabs = wp_travel_get_default_trip_tabs();
+
+	if ( $custom_tab_enabled ) { // Need to merge custom tabs. Note: Only enabled if WP Travel Utilities plugin is activated.
+		$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
+		$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
+		$trip_tabs   = array_merge( $trip_tabs, $custom_tabs );
+	}
+
+	$wp_travel_tabs = get_post_meta( $post_id, 'wp_travel_tabs', true );
+	if ( ! empty( $wp_travel_tabs ) ) {
+		// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
+		$default_tabs      = $trip_tabs;
+		$default_tabs_keys = array_keys( $default_tabs );
+
+		// Saved Tabs.
+		$trip_tabs       = $wp_travel_tabs;
+		$saved_tabs_keys = array_keys( $trip_tabs );
+
+		foreach ( $default_tabs_keys as $tab_key ) {
+			if ( ! in_array( $tab_key, $saved_tabs_keys ) ) {
+				$trip_tabs[ $tab_key ] = $default_tabs[ $tab_key ];
+			}
+		}
+
+		if ( $custom_tab_enabled ) {
+			// Add Custom tabs content which is override by above  by above assignment $trip_tabs = $wp_travel_tabs;.
+			$trip_tabs = array_merge( $trip_tabs, $custom_tabs );
+		}
+		// Remove Tabs from saved tab array which newly added tabs in default tabs via hook.
+		foreach ( $saved_tabs_keys as $tab_key ) {
+			if ( ! in_array( $tab_key, $default_tabs_keys ) ) {
+				unset( $trip_tabs[ $tab_key ] );
+			}
+		}
+	}
+	return $trip_tabs;
 }
 
 /**

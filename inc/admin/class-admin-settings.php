@@ -856,37 +856,20 @@ class WP_Travel_Admin_Settings {
 	 */
 	public function settings_callback_tabs_global( $tab, $args ) {
 		$settings = $args['settings'];
-
-		// Default tab.
-		$global_tabs = wp_travel_get_default_frontend_tabs();
-
-		if ( ! empty( $settings['global_tab_settings'] ) ) {
-			// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
-			$default_tabs      = $global_tabs;
-			$default_tabs_keys = array_keys( $default_tabs );
-
-			// Saved Tabs.
-			$global_tabs     = $settings['global_tab_settings'];
-			$saved_tabs_keys = array_keys( $global_tabs );
-
-			foreach ( $default_tabs_keys as $tab_key ) {
-				if ( ! in_array( $tab_key, $saved_tabs_keys ) ) {
-					$global_tabs[ $tab_key ] = $default_tabs[ $tab_key ];
-				}
-			}
-
-			// Remove Tabs into saved tab array which newly added tabs in default tabs via hook.
-			foreach ( $saved_tabs_keys as $tab_key ) {
-				if ( ! in_array( $tab_key, $default_tabs_keys ) ) {
-					unset( $global_tabs[ $tab_key ] );
-				}
-			}
-		}
-
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
+
+		$default_tabs = wp_travel_get_default_trip_tabs();
+		// Global tab.
+		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
+		// dd( $global_tabs );
+
+		$custom_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+		// dd( $custom_tabs );
 		?>
 
-		<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
+		<?php
+		if ( ! class_exists( 'WP_Travel_Utilities' ) ) :
+			?>
 			<div class="wp-travel-upsell-message">
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
@@ -894,9 +877,12 @@ class WP_Travel_Admin_Settings {
 					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
-		<?php endif; ?>
-		<?php
-		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 && ! $custom_tab_enabled ) {
+			<?php		
+		endif;
+		// Add custom Tabs Support.
+		do_action( 'wp_travel_custom_global_tabs' );
+
+		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0  ) {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
 			?>
 				<thead>
@@ -908,6 +894,7 @@ class WP_Travel_Admin_Settings {
 				<tbody>
 			<?php
 			foreach ( $global_tabs as $key => $tab ) :
+				$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 				?>
 				<tr>
 					<td width="50px">
@@ -916,12 +903,12 @@ class WP_Travel_Admin_Settings {
 					</td>
 					<td width="35%">
 						<div class="wp-travel-sorting-tabs-wrap">
-						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $default_label ); ?></span>
 					</div>
 					</td>
 					<td width="35%">
 						<div class="wp-travel-sorting-tabs-wrap">
-						<input type="text" class="wp_travel_tabs_input-field section_title" name="global_tab_settings[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
+						<input type="text" class="wp_travel_tabs_input-field section_title" name="global_tab_settings[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $default_label ); ?>" />
 						<input type="hidden" name="global_tab_settings[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
 
 					</div>
@@ -938,9 +925,6 @@ class WP_Travel_Admin_Settings {
 
 			echo '<tbody></table>';
 		}
-
-		// Add custom Tabs Support.
-		do_action( 'wp_travel_custom_global_tabs' );
 	}
 
 	/**

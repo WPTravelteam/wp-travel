@@ -424,45 +424,50 @@ class WP_Travel_Admin_Metaboxes {
 		if ( 'setting' !== $tab ) {
 			return;
 		}
-		$post_id                   = $args['post']->ID;
-		$tabs                      = wp_travel_get_frontend_tabs( false, false );
-		$wp_travel_use_global_tabs = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
+
+		$post_id  = $args['post']->ID;
+
+		$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
-		if ( is_array( $tabs ) && count( $tabs ) > 0 && ! $enable_custom_itinerary_tabs ) {
+		$tabs = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
+		if ( ! class_exists( 'WP_Travel_Utilities' ) ) :
 			?>
-			<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
-				<div class="wp-travel-upsell-message">
-					<div class="wp-travel-pro-feature-notice">
-						<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
-						<p><?php esc_html_e( 'By upgrading to Pro, you can trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ); ?></p>
-						<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
-					</div>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
-			<?php endif; ?>
-				<table class="form-table">
-					<tr>
-						<td>
-							<label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
-							<input name="wp_travel_use_global_tabs" type="hidden"  value="no">
-						<span class="show-in-frontend checkbox-default-design">
-							<label data-on="ON" data-off="OFF">
-							<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ); ?> />
-								<span class="switch">
-								</span>
-							</label>
-						</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
-						</td>
-					</tr>
-				</table>
+			</div>
 			<?php
-			echo '<table class="wp-travel-sorting-tabs form-table">';
+		endif;
+
+		// Custom itinerary tabs support.
+		do_action( 'wp_travel_itinerary_custom_tabs' );
+		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 			?>
+			<table class="form-table">
+				<tr>
+					<td>
+						<label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
+						<input name="wp_travel_use_global_tabs" type="hidden"  value="no">
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+						<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ); ?> />
+							<span class="switch">
+							</span>
+						</label>
+					</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
+					</td>
+				</tr>
+			</table>
+			<table class="wp-travel-sorting-tabs form-table">
 				<thead>
 					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
 					<th width="35%"><?php esc_html_e( 'Global Trip Title', 'wp-travel' ); ?></th>
@@ -470,42 +475,42 @@ class WP_Travel_Admin_Metaboxes {
 					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
 				</thead>
 				<tbody>
-			<?php foreach ( $tabs as $key => $tab ) : ?>
-				<tr>
-					<td width="50px">
-						<div class="wp-travel-sorting-handle">
-						</div>
-					</td>
-					<td width="35%">
-					<div class="wp-travel-sorting-tabs-wrap">
-						<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
-					</div>
-					</td>
-					<td>
-						<div class="wp-travel-sorting-tabs-wrap">
-						<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
-						<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
-					</div>
-					</td>
-					<td width="20%">
-						<span class="show-in-frontend checkbox-default-design">
-							<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ); ?> /><?php // esc_html_e( 'Display', 'wp-travel' ); ?>
-							<span class="switch">
-								</span>
-							</label>
-						</span>
-						<span class="check-handeller"></span>
-					</td>
-				</tr>
 				<?php
-			endforeach;
-
-			echo '</tbody></table>';
+				foreach ( $tabs as $key => $tab ) :
+					?>
+					<tr>
+						<td width="50px">
+							<div class="wp-travel-sorting-handle">
+							</div>
+						</td>
+						<td width="35%">
+						<div class="wp-travel-sorting-tabs-wrap">
+							<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+						</div>
+						</td>
+						<td>
+							<div class="wp-travel-sorting-tabs-wrap">
+							<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
+							<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
+						</div>
+						</td>
+						<td width="20%">
+							<span class="show-in-frontend checkbox-default-design">
+								<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ); ?> /><?php // esc_html_e( 'Display', 'wp-travel' ); ?>
+								<span class="switch">
+									</span>
+								</label>
+							</span>
+							<span class="check-handeller"></span>
+						</td>
+					</tr>
+					<?php
+				endforeach;
+				?>
+				</tbody>
+			</table>
+			<?php
 		}
-
-		// Custom itinerary tabs support.
-		do_action( 'wp_travel_itinerary_custom_tabs' );
-
 	}
 
 	/**
@@ -804,7 +809,7 @@ class WP_Travel_Admin_Metaboxes {
 		// Saving Tabs Settings.
 		$trip_meta['wp_travel_use_global_tabs'] = isset( $_POST['wp_travel_use_global_tabs'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_tabs'] ) ) : 'yes';
 		$trip_meta['wp_travel_tabs']            = isset( $_POST['wp_travel_tabs'] ) ? ( wp_unslash( $_POST['wp_travel_tabs'] ) ) : array();
-// error_log( print_r( $_POST, true ) );
+		// error_log( print_r( $_POST, true ) );
 		// Trip enquiry Global.
 		$trip_meta['wp_travel_use_global_trip_enquiry_option'] = isset( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_use_global_trip_enquiry_option'] ) ) : 'yes';
 		// Trip Specific Enquiry Option.
@@ -849,7 +854,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
-		$wp_travel_trip_facts = array();		
+		$wp_travel_trip_facts = array();
 		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
 			$wp_travel_trip_facts = array_filter( array_filter( array_values( $_POST['wp_travel_trip_facts'] ), 'array_filter' ), 'count' );
 		}
