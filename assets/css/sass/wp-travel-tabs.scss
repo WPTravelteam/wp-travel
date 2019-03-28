@@ -176,6 +176,15 @@ $alto: #ddd;
                     line-height: 20px;
                 }
             }
+            &#wp-travel-tab-downloads a{
+
+                &:before {
+                    // font-family: Dashicons;
+                    content: "\f316";
+                    font-size: 18px;
+                    line-height: 20px;
+                 }
+            }
         }
     }
     .wp-travel-tabs-contents {

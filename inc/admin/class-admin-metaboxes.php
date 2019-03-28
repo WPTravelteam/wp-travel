@@ -39,6 +39,7 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_downloads_callback' ), 10, 2 );
 
 	}
 
@@ -253,6 +254,10 @@ class WP_Travel_Admin_Metaboxes {
 		$trips['misc_options'] = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+		);
+		$trips['downloads'] = array(
+			'tab_label'     => __( 'Downloads List', 'wp-travel' ),
+			'content_title' => __( 'Select Downloads Here', 'wp-travel' ),
 		);
 
 		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
@@ -538,6 +543,34 @@ class WP_Travel_Admin_Metaboxes {
 		WP_Travel()->tabs->content( 'itineraries/misc-tab.php' );
 
 	}
+
+	/**
+	 * Callback Function For Itineraries Content Tabs
+	 *
+	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function wp_travel_downloads_callback( $tab, $args ) {
+
+		if ( 'downloads' !== $tab ) {
+			return;
+		}
+
+		if ( ! class_exists( 'WP_Travel_Downloads' ) ) : ?>
+			<div class="wp-travel-upsell-message">
+				<div class="wp-travel-pro-feature-notice">
+					<h4><?php esc_html_e( 'Need to add your downloads?', 'wp-travel' ); ?></h4>
+					<p><?php esc_html_e( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ); ?></p>
+					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-downloads/"><?php esc_html_e( 'Get WP Travel Downloads Addon', 'wp-travel' ); ?></a>
+				</div>
+			</div>
+		<?php endif;
+
+		do_action( 'wp_travel_trip_download_tab_content', $args );
+	}
+
+	
 
 	/**
 	 * Callback Function For Itineraries Content Tabs

@@ -116,6 +116,10 @@
         content: '\f174';
         font-size: 15px;
         line-height: 20px; }
+      .wp-travel-tabs-wrap .wp-travel-tabs-nav li#wp-travel-tab-downloads a:before {
+        content: "\f316";
+        font-size: 18px;
+        line-height: 20px; }
   .wp-travel-tabs-wrap .wp-travel-tabs-contents {
     margin: 0 0 0 160px;
     padding: 20px;
