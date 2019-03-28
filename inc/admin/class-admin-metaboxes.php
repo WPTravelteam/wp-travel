@@ -429,7 +429,8 @@ class WP_Travel_Admin_Metaboxes {
 
 		$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
-
+		
+		$default_tabs = wp_travel_get_default_trip_tabs();
 		$tabs = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
 		if ( ! class_exists( 'WP_Travel_Utilities' ) ) :
 			?>
@@ -477,6 +478,7 @@ class WP_Travel_Admin_Metaboxes {
 				<tbody>
 				<?php
 				foreach ( $tabs as $key => $tab ) :
+					$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 					?>
 					<tr>
 						<td width="50px">
@@ -485,12 +487,12 @@ class WP_Travel_Admin_Metaboxes {
 						</td>
 						<td width="35%">
 						<div class="wp-travel-sorting-tabs-wrap">
-							<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $tab['label'] ); ?></span>
+							<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $default_label ); ?></span>
 						</div>
 						</td>
 						<td>
 							<div class="wp-travel-sorting-tabs-wrap">
-							<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $tab['label'] ); ?>" />
+							<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $default_label ); ?>" />
 							<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
 						</div>
 						</td>

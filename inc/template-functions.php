@@ -1699,7 +1699,7 @@ add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trip_facts' );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 20 );
+add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 15 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map', 20 );
 add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 25 );
 add_filter( 'the_content', 'wp_travel_content_filter' );
