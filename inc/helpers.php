@@ -860,7 +860,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 		$wp_travel_tabs     = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
 	} else {
-		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', true );
+		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 		$wp_travel_tabs               = wp_travel_get_admin_trip_tabs( $post->ID, $enable_custom_itinerary_tabs );
 	}
 
