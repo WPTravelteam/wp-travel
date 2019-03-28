@@ -884,7 +884,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 			$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
 			$new_tabs[ $key ]['content']      = $tab_content;
 			$new_tabs[ $key ]['use_global']   = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
-			$new_tabs[ $key ]['show_in_menu'] = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
+			$new_tabs[ $key ]['show_in_menu'] = $show_in_menu;
 
 			$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
 
