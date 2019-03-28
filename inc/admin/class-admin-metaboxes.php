@@ -425,13 +425,20 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		$post_id  = $args['post']->ID;
+		$post_id = $args['post']->ID;
 
 		$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
-		
+
 		$default_tabs = wp_travel_get_default_trip_tabs();
-		$tabs = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
+		$tabs         = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
+
+		if ( $enable_custom_itinerary_tabs ) { // If utilities is activated.
+			$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
+			$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
+
+			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
+		}
 		if ( ! class_exists( 'WP_Travel_Utilities' ) ) :
 			?>
 			<div class="wp-travel-upsell-message">

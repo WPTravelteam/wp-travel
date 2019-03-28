@@ -1033,7 +1033,17 @@ function wp_travel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
 
 		if ( $custom_tab_enabled ) {
 			// Add Custom tabs content which is override by above assignment $global_tabs = $settings['global_tab_settings'];.
-			$global_tabs = array_merge( $global_tabs, $custom_tabs );
+			// $global_tabs = array_merge( $global_tabs, $custom_tabs );
+			if ( is_array( $custom_tabs ) && count( $custom_tabs ) > 0 ) {
+				foreach ( $custom_tabs as $tab_key => $tab ) {
+					if ( isset( $tab['content'] ) ) {
+						$global_tabs[ $tab_key ]['content'] = $tab['content'];
+					}
+					if ( isset( $tab['custom'] ) ) {
+						$global_tabs[ $tab_key ]['custom'] = $tab['custom'];
+					}
+				}
+			}
 		}
 
 		// Remove Tabs from saved tab array which newly added tabs in default tabs via hook.
@@ -1086,7 +1096,17 @@ function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false ) 
 
 		if ( $custom_tab_enabled ) {
 			// Add Custom tabs content which is override by above  by above assignment $trip_tabs = $wp_travel_tabs;.
-			$trip_tabs = array_merge( $trip_tabs, $custom_tabs );
+			// $trip_tabs = array_merge( $trip_tabs, $custom_tabs );
+			if ( is_array( $custom_tabs ) && count( $custom_tabs ) > 0 ) {
+				foreach ( $custom_tabs as $tab_key => $tab ) {
+					if ( isset( $tab['content'] ) ) {
+						$trip_tabs[ $tab_key ]['content'] = $tab['content'];
+					}
+					if ( isset( $tab['custom'] ) ) {
+						$trip_tabs[ $tab_key ]['custom'] = $tab['custom'];
+					}
+				}
+			}
 		}
 		// Remove Tabs from saved tab array which newly added tabs in default tabs via hook.
 		foreach ( $saved_tabs_keys as $tab_key ) {

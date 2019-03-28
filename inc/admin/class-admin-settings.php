@@ -855,14 +855,18 @@ class WP_Travel_Admin_Settings {
 	 * @param  Array $args Settings arg list.
 	 */
 	public function settings_callback_tabs_global( $tab, $args ) {
-		$settings = $args['settings'];
+		$settings           = $args['settings'];
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 
 		$default_tabs = wp_travel_get_default_trip_tabs();
+
 		// Global tab.
 		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
 
-		$custom_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+		if ( $custom_tab_enabled ) { // If utilities is activated.
+			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
+		}
 		?>
 
 		<?php
@@ -875,12 +879,12 @@ class WP_Travel_Admin_Settings {
 					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
-			<?php		
+			<?php
 		endif;
 		// Add custom Tabs Support.
 		do_action( 'wp_travel_custom_global_tabs' );
 
-		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0  ) {
+		if ( is_array( $global_tabs ) && count( $global_tabs ) > 0 ) {
 			echo '<table class="wp-travel-sorting-tabs form-table">';
 			?>
 				<thead>
