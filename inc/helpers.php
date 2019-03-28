@@ -872,9 +872,13 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
 
 			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 
+			// Adding custom tab content.
 			if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
 				$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
 			}
+
+			$show_in_menu = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
+			$show_in_menu = apply_filters( 'wp_travel_frontend_tab_show_in_menu', $show_in_menu, $post->ID, $key ); // @since 1.9.3.
 
 			$new_tabs[ $key ]['label']        = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 			$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
@@ -1212,8 +1216,6 @@ function wp_travel_is_cart_page() {
 	}
 	$page_id  = get_the_ID();
 	$settings = wp_travel_get_settings();
-	// echo $page_id;
-	// dd( $settings, true );
 	if ( isset( $settings['cart_page_id'] ) && (int) $settings['cart_page_id'] === $page_id ) {
 		return true;
 	}

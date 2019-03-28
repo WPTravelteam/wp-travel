@@ -861,10 +861,8 @@ class WP_Travel_Admin_Settings {
 		$default_tabs = wp_travel_get_default_trip_tabs();
 		// Global tab.
 		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
-		// dd( $global_tabs );
 
 		$custom_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
-		// dd( $custom_tabs );
 		?>
 
 		<?php
