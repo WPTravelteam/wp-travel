@@ -562,7 +562,7 @@ class WP_Travel_Admin_Metaboxes {
 				<div class="wp-travel-pro-feature-notice">
 					<h4><?php esc_html_e( 'Need to add your downloads?', 'wp-travel' ); ?></h4>
 					<p><?php esc_html_e( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-downloads/"><?php esc_html_e( 'Get WP Travel Downloads Addon', 'wp-travel' ); ?></a>
+					<a target="_blank" href="https://wptravel.io/downloads/"><?php esc_html_e( 'Get WP Travel Downloads Addon', 'wp-travel' ); ?></a>
 				</div>
 			</div>
 		<?php endif;
