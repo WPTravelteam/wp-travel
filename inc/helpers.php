@@ -1014,6 +1014,13 @@ function wp_travel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
 	if ( $custom_tab_enabled ) { // Need to merge custom tabs. Note: Only enabled if WP Travel Utilities plugin is activated.
 		$custom_tabs = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 		$global_tabs = array_merge( $global_tabs, $custom_tabs );
+
+		// Updating Utilities settings to global settings.
+		if ( isset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) && ! empty( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] ) ) {
+			$settings['global_tab_settings'] = $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'];
+			unset( $settings['wp_travel_utilities_custom_global_tabs_sorting_settings'] );
+			update_option( 'wp_travel_settings', $settings );
+		}
 	}
 
 	if ( ! empty( $settings['global_tab_settings'] ) ) {
@@ -1072,13 +1079,22 @@ function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false ) 
 	// Default tab.
 	$trip_tabs = wp_travel_get_default_trip_tabs();
 
+	$wp_travel_tabs = get_post_meta( $post_id, 'wp_travel_tabs', true );
+
 	if ( $custom_tab_enabled ) { // Need to merge custom tabs. Note: Only enabled if WP Travel Utilities plugin is activated.
 		$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
 		$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
 		$trip_tabs   = array_merge( $trip_tabs, $custom_tabs );
+
+		// Updating Utilities tabs to global settings.
+		$trip_tabs_utilities = get_post_meta( $post_id, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings', true );
+
+		if ( $trip_tabs_utilities ) {
+			$wp_travel_tabs = $trip_tabs_utilities;
+			delete_post_meta( $post_id, 'wp_travel_utilities_custom_itinerary_tabs_sorting_settings' );
+		}
 	}
 
-	$wp_travel_tabs = get_post_meta( $post_id, 'wp_travel_tabs', true );
 	if ( ! empty( $wp_travel_tabs ) ) {
 		// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
 		$default_tabs      = $trip_tabs;
