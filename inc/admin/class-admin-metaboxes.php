@@ -567,7 +567,7 @@ class WP_Travel_Admin_Metaboxes {
 			</div>
 		<?php endif;
 
-		do_action( 'wp_travel_trip_download_tab_content', $args );
+		do_action( 'wp_travel_trip_downloads_tab_content', $args );
 	}
 
 	
