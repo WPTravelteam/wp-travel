@@ -190,6 +190,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
+                    'assets/css/wp-travel-admin.css': 'assets/css/sass/admin/wp-travel-admin.scss',
                     'assets/css/wp-travel-back-end.css': 'assets/css/sass/wp-travel-back-end.scss',
                     'assets/css/wp-travel-front-end.css': 'assets/css/sass/wp-travel-front-end.scss',
                     'assets/css/wp-travel-tabs.css': 'assets/css/sass/wp-travel-tabs.scss',
@@ -201,9 +202,10 @@ module.exports = function(grunt) {
         cssmin: {
             target: {
                 files: {
-                    'assets/css/magnific-popup.min.css': ['assets/css/magnific-popup.css'],
+                    'assets/css/wp-travel-admin.min.css': ['assets/css/wp-travel-admin.css'],
                     'assets/css/wp-travel-back-end.min.css': ['assets/css/wp-travel-back-end.css'],
                     'assets/css/wp-travel-front-end.min.css': ['assets/css/wp-travel-front-end.css'],
+                    'assets/css/magnific-popup.min.css': ['assets/css/magnific-popup.css'],
                     'assets/css/wp-travel-tabs.min.css': ['assets/css/wp-travel-tabs.css'],
                     'assets/css/wp-travel-user-styles.min.css': ['assets/css/wp-travel-user-styles.css'],
                     'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],

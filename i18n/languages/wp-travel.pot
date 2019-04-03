@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 1.9.3\n"
+"Project-Id-Version: WP Travel 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 17:12:32+00:00\n"
+"POT-Creation-Date: 2019-04-02 09:28:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Language: en_US\n"
 "X-Poedit-SearchPath-0: ../../wp-travel\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: grunt-wp-i18n1.0.2\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: inc/admin/admin-helper.php:46 inc/admin/class-admin-menu.php:17
 msgid "Marketplace"
@@ -3745,7 +3745,8 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:157
 #: inc/booking-functions.php:800 inc/booking-functions.php:1182
 #: inc/booking-functions.php:1186 inc/booking-functions.php:1215
-#: inc/booking-functions.php:1219 inc/currencies.php:316
+#: inc/booking-functions.php:1219 inc/class-assets.php:233
+#: inc/class-assets.php:276 inc/currencies.php:316
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:698 inc/helpers.php:716
 #: inc/helpers.php:745 inc/helpers.php:769 inc/helpers.php:2035
@@ -3754,19 +3755,19 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: inc/admin/class-admin-assets.php:93
+#: inc/admin/class-admin-assets.php:93 inc/class-assets.php:252
 msgid "Chart Stat"
 msgstr ""
 
-#: inc/admin/class-admin-assets.php:101
+#: inc/admin/class-admin-assets.php:101 inc/class-assets.php:260
 msgid "More"
 msgstr ""
 
-#: inc/admin/class-admin-assets.php:102
+#: inc/admin/class-admin-assets.php:102 inc/class-assets.php:261
 msgid "Less"
 msgstr ""
 
-#: inc/admin/class-admin-assets.php:179
+#: inc/admin/class-admin-assets.php:179 inc/class-assets.php:336
 msgid "Select Files from Your Computer"
 msgstr ""
 
@@ -3783,7 +3784,7 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: inc/admin/class-admin-menu.php:16 inc/admin/class-admin-settings.php:63
+#: inc/admin/class-admin-menu.php:16 inc/admin/class-admin-settings.php:79
 msgid "WP Travel Settings"
 msgstr ""
 
@@ -3869,7 +3870,7 @@ msgid "Trip Includes and Excludes"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:231
-#: inc/admin/class-admin-settings.php:128
+#: inc/admin/class-admin-settings.php:151
 msgid "Facts"
 msgstr ""
 
@@ -3895,17 +3896,17 @@ msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:250
 #: inc/admin/class-admin-metaboxes.php:251
-#: inc/admin/class-admin-settings.php:118
+#: inc/admin/class-admin-settings.php:139
 msgid "Tabs"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:255
-#: inc/admin/class-admin-settings.php:138
+#: inc/admin/class-admin-settings.php:163
 msgid "Misc. Options"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:256
-#: inc/admin/class-admin-settings.php:139
+#: inc/admin/class-admin-settings.php:164
 msgid "Miscellanaous Options"
 msgstr ""
 
@@ -3918,7 +3919,7 @@ msgid "Select Downloads Here"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:451
-#: inc/admin/class-admin-settings.php:877
+#: inc/admin/class-admin-settings.php:904
 msgid "Need Additional Tabs ?"
 msgstr ""
 
@@ -3931,8 +3932,8 @@ msgstr ""
 #: inc/admin/class-admin-metaboxes.php:453
 #: inc/admin/class-admin-metaboxes.php:597
 #: inc/admin/class-admin-metaboxes.php:745
-#: inc/admin/class-admin-settings.php:425
-#: inc/admin/class-admin-settings.php:879
+#: inc/admin/class-admin-settings.php:452
+#: inc/admin/class-admin-settings.php:906
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:801
 msgid "Get WP Travel Utilities Addon"
 msgstr ""
@@ -3946,22 +3947,22 @@ msgid "Uncheck above checkbox to add custom tab settings for this trip."
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:485
-#: inc/admin/class-admin-settings.php:891
+#: inc/admin/class-admin-settings.php:918
 msgid "Sorting"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:486
-#: inc/admin/class-admin-settings.php:892
+#: inc/admin/class-admin-settings.php:919
 msgid "Global Trip Title"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:487
-#: inc/admin/class-admin-settings.php:893
+#: inc/admin/class-admin-settings.php:920
 msgid "Custom Trip Title"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:488
-#: inc/admin/class-admin-settings.php:894
+#: inc/admin/class-admin-settings.php:921
 msgid "Display"
 msgstr ""
 
@@ -3992,7 +3993,7 @@ msgid "Click on add new question to add FAQ."
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:618
-#: inc/admin/class-admin-settings.php:443
+#: inc/admin/class-admin-settings.php:470
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:145
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:518
 #: inc/template-functions.php:790
@@ -4000,7 +4001,7 @@ msgid "Open All"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:619
-#: inc/admin/class-admin-settings.php:444
+#: inc/admin/class-admin-settings.php:471
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:146
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:519
 #: inc/template-functions.php:791
@@ -4138,31 +4139,31 @@ msgstr ""
 msgid "Get WP Travel Import/Export Addon"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:68 inc/admin/class-admin-settings.php:79
+#: inc/admin/class-admin-settings.php:84 inc/admin/class-admin-settings.php:95
 msgid "Save Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:73
+#: inc/admin/class-admin-settings.php:89
 msgid "View system information"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:74 inc/admin/views/status.php:9
+#: inc/admin/class-admin-settings.php:90 inc/admin/views/status.php:9
 msgid "System Information"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:94
+#: inc/admin/class-admin-settings.php:110
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:62
 #: inc/coupon/inc/admin/class-admin-metaboxes.php:66
 msgid "General"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:95
+#: inc/admin/class-admin-settings.php:111
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:63
 #: inc/coupon/inc/admin/class-admin-metaboxes.php:67
 msgid "General Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:106 inc/class-default-form-fields.php:28
+#: inc/admin/class-admin-settings.php:125 inc/class-default-form-fields.php:28
 #: inc/class-default-form-fields.php:251 inc/email-template-functions.php:90
 #: inc/email-template-functions.php:195 inc/email-template-functions.php:373
 #: inc/email-template-functions.php:743 inc/email-template-functions.php:1051
@@ -4172,393 +4173,410 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:107
+#: inc/admin/class-admin-settings.php:126
 msgid "Email Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:112
-#: inc/admin/class-admin-settings.php:113
+#: inc/admin/class-admin-settings.php:132
+#: inc/admin/class-admin-settings.php:133
 msgid "Account Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:119
+#: inc/admin/class-admin-settings.php:140
 msgid "Global Tabs Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:123
+#: inc/admin/class-admin-settings.php:145
 #: inc/admin/class-dashboard-widgets.php:52 inc/booking-functions.php:1013
 #: inc/helpers/helpers-stat.php:128 inc/helpers/helpers-stat.php:325
 msgid "Payment"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:124
+#: inc/admin/class-admin-settings.php:146
 msgid "Payment Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:129
+#: inc/admin/class-admin-settings.php:152
 msgid "Facts Settings"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:133
+#: inc/admin/class-admin-settings.php:157
 msgid "License"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:134
+#: inc/admin/class-admin-settings.php:158
 msgid "License Details"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:143
+#: inc/admin/class-admin-settings.php:169
 msgid "Debug"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:144
+#: inc/admin/class-admin-settings.php:170
 msgid "Debug Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:176
+#: inc/admin/class-admin-settings.php:203
+#: inc/admin/views/tabs/tab-contents/settings/general.php:27
 msgid "Select Currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:204
+#: inc/admin/class-admin-settings.php:231
+#: inc/admin/views/tabs/tab-contents/settings/general.php:55
 msgid "Currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:207
+#: inc/admin/class-admin-settings.php:234
+#: inc/admin/views/tabs/tab-contents/settings/general.php:58
 msgid "Choose your currency"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:212
+#: inc/admin/class-admin-settings.php:239
+#: inc/admin/views/tabs/tab-contents/settings/general.php:63
 msgid "Maps"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:216
+#: inc/admin/class-admin-settings.php:243
+#: inc/admin/views/tabs/tab-contents/settings/general.php:67
 msgid "Select Map"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:219
+#: inc/admin/class-admin-settings.php:246
+#: inc/admin/views/tabs/tab-contents/settings/general.php:70
 msgid "Choose your map"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:224
+#: inc/admin/class-admin-settings.php:251
+#: inc/admin/views/tabs/tab-contents/settings/general.php:75
 msgid "Google Map API Key"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:231
+#: inc/admin/class-admin-settings.php:258
+#: inc/admin/views/tabs/tab-contents/settings/general.php:82
 msgid "Map Zoom Level"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:239
+#: inc/admin/class-admin-settings.php:266
 #: inc/admin/views/tabs/tab-contents/itineraries/location-tab.php:23
+#: inc/admin/views/tabs/tab-contents/settings/general.php:90
 msgid "Need alternative maps ?"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:240
+#: inc/admin/class-admin-settings.php:267
+#: inc/admin/views/tabs/tab-contents/settings/general.php:91
 msgid ""
 "If you need alternative to current map then you can get free or pro maps "
 "for WP Travel.  %1$sView WP Travel Map addons%2$s"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:244
+#: inc/admin/class-admin-settings.php:271
+#: inc/admin/views/tabs/tab-contents/settings/general.php:95
 msgid "Pages"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:248
+#: inc/admin/class-admin-settings.php:275
+#: inc/admin/views/tabs/tab-contents/settings/general.php:99
 msgid "Cart Page"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:266
+#: inc/admin/class-admin-settings.php:293
+#: inc/admin/views/tabs/tab-contents/settings/general.php:117
 msgid ""
 "Choose the page to use as cart page for trip bookings which contents cart "
 "page shortcode [wp_travel_cart]"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:271
+#: inc/admin/class-admin-settings.php:298
+#: inc/admin/views/tabs/tab-contents/settings/general.php:122
 msgid "Checkout Page"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:289
+#: inc/admin/class-admin-settings.php:316
+#: inc/admin/views/tabs/tab-contents/settings/general.php:140
 msgid ""
 "Choose the page to use as checkout page for booking which contents checkout "
 "page shortcode [wp_travel_checkout]"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:293
+#: inc/admin/class-admin-settings.php:320
+#: inc/admin/views/tabs/tab-contents/settings/general.php:144
 msgid "Dashboard Page"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:311
+#: inc/admin/class-admin-settings.php:338
+#: inc/admin/views/tabs/tab-contents/settings/general.php:162
 msgid ""
 "Choose the page to use as dashboard page which contents dashboard page "
 "shortcode [wp_travel_user_account]."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:345
+#: inc/admin/class-admin-settings.php:372
 msgid "Hide related "
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:363
+#: inc/admin/class-admin-settings.php:390
 msgid "Enable multiple travelers"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:377
+#: inc/admin/class-admin-settings.php:404
 msgid "Trip Pricing Options Listing"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:380
+#: inc/admin/class-admin-settings.php:407
 msgid "List by pricing options ( Default )"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:383
+#: inc/admin/class-admin-settings.php:410
 msgid "List by fixed departure dates"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:385
+#: inc/admin/class-admin-settings.php:412
 msgid "This options will control how you display trip dates and prices."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:423
+#: inc/admin/class-admin-settings.php:450
 msgid "Want to get more e-mail customization options ?"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:424
+#: inc/admin/class-admin-settings.php:451
 msgid ""
 "By upgrading to Pro, you can get features like multiple email "
 "notifications, email footer powered by text removal options and more !"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:430
+#: inc/admin/class-admin-settings.php:457
 msgid "General Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:434
+#: inc/admin/class-admin-settings.php:461
 msgid "From Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:454
+#: inc/admin/class-admin-settings.php:481
 msgid "Booking Email Templates"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:464
-#: inc/admin/class-admin-settings.php:598
-#: inc/admin/class-admin-settings.php:716
+#: inc/admin/class-admin-settings.php:491
+#: inc/admin/class-admin-settings.php:625
+#: inc/admin/class-admin-settings.php:743
 msgid "Admin Email Template Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:469
+#: inc/admin/class-admin-settings.php:496
 msgid "Send Booking mail to admin"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:484
+#: inc/admin/class-admin-settings.php:511
 msgid "Booking Email Subject"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:492
-#: inc/admin/class-admin-settings.php:542
+#: inc/admin/class-admin-settings.php:519
+#: inc/admin/class-admin-settings.php:569
 msgid "Booking Email Title"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:500
-#: inc/admin/class-admin-settings.php:550
+#: inc/admin/class-admin-settings.php:527
+#: inc/admin/class-admin-settings.php:577
 msgid "Booking Email Header Color"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:508
-#: inc/admin/class-admin-settings.php:558
-#: inc/admin/class-admin-settings.php:628
-#: inc/admin/class-admin-settings.php:678
-#: inc/admin/class-admin-settings.php:746
+#: inc/admin/class-admin-settings.php:535
+#: inc/admin/class-admin-settings.php:585
+#: inc/admin/class-admin-settings.php:655
+#: inc/admin/class-admin-settings.php:705
+#: inc/admin/class-admin-settings.php:773
 msgid "Email Content"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:529
-#: inc/admin/class-admin-settings.php:649
+#: inc/admin/class-admin-settings.php:556
+#: inc/admin/class-admin-settings.php:676
 msgid "Client Email Template Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:534
+#: inc/admin/class-admin-settings.php:561
 msgid "Booking Client Email Subject"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:588
+#: inc/admin/class-admin-settings.php:615
 msgid "Payment Email Templates"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:604
-#: inc/admin/class-admin-settings.php:654
+#: inc/admin/class-admin-settings.php:631
+#: inc/admin/class-admin-settings.php:681
 msgid "Payment Email Subject"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:612
-#: inc/admin/class-admin-settings.php:662
+#: inc/admin/class-admin-settings.php:639
+#: inc/admin/class-admin-settings.php:689
 msgid "Payment Email Title"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:620
-#: inc/admin/class-admin-settings.php:670
+#: inc/admin/class-admin-settings.php:647
+#: inc/admin/class-admin-settings.php:697
 msgid "Payment Email Header Color"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:706
+#: inc/admin/class-admin-settings.php:733
 msgid "Enquiry Email Templates"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:722
+#: inc/admin/class-admin-settings.php:749
 msgid "Enquiry Email Subject"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:730
+#: inc/admin/class-admin-settings.php:757
 msgid "Enquiry Email Title"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:738
+#: inc/admin/class-admin-settings.php:765
 msgid "Enquiry Email Header Color"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:795
+#: inc/admin/class-admin-settings.php:822
 msgid "Customer Registration"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:806
+#: inc/admin/class-admin-settings.php:833
 msgid "Require Customer login before booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:817
+#: inc/admin/class-admin-settings.php:844
 msgid "Enable customer registration on the \"My Account\" page."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:822
+#: inc/admin/class-admin-settings.php:849
 msgid "Account Creation"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:833
+#: inc/admin/class-admin-settings.php:860
 msgid " Automatically generate username from customer email."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:844
+#: inc/admin/class-admin-settings.php:871
 msgid " Automatically generate customer password"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:878
+#: inc/admin/class-admin-settings.php:905
 msgid ""
 "By upgrading to Pro, you can get global custom tab addition options with "
 "customized content and sorting options !"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:952 inc/form-fields.php:442
+#: inc/admin/class-admin-settings.php:979 inc/form-fields.php:442
 msgid "Partial Payment"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:963
+#: inc/admin/class-admin-settings.php:990
 msgid "Enable partial payment while booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:968
+#: inc/admin/class-admin-settings.php:995
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:767
 msgid "Minimum Payout (%)"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:972
+#: inc/admin/class-admin-settings.php:999
 msgid "Minimum percent of amount to pay while booking."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:977
+#: inc/admin/class-admin-settings.php:1004
 #: inc/payments/wp-travel-payments.php:59
 msgid "Standard Paypal"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:980
+#: inc/admin/class-admin-settings.php:1007
 msgid "Enable Paypal"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:991
+#: inc/admin/class-admin-settings.php:1018
 msgid "Check to enable standard PayPal payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:995
+#: inc/admin/class-admin-settings.php:1022
 msgid "Paypal Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:998
+#: inc/admin/class-admin-settings.php:1025
 msgid "PayPal email address that receive payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1004
+#: inc/admin/class-admin-settings.php:1031
 msgid "Need more payment gateway options ?"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1005
+#: inc/admin/class-admin-settings.php:1032
 msgid "%1$sCheck All Payment Gateways %2$s OR %3$sRequest a new one%4$s"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1008
+#: inc/admin/class-admin-settings.php:1035
 msgid "TAX Options"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1011
+#: inc/admin/class-admin-settings.php:1038
 msgid "Enable Tax for Trip Price"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1022
+#: inc/admin/class-admin-settings.php:1049
 msgid "Check to enable Tax options for trips."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1026
+#: inc/admin/class-admin-settings.php:1053
 msgid "Trip prices entered with tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1029
+#: inc/admin/class-admin-settings.php:1056
 msgid "Yes, I will enter trip prices inclusive of tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1032
+#: inc/admin/class-admin-settings.php:1059
 msgid "No, I will enter trip prices exclusive of tax"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1034
+#: inc/admin/class-admin-settings.php:1061
 msgid "This option will affect how you enter trip prices."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1039
+#: inc/admin/class-admin-settings.php:1066
 msgid "Tax Percentage"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1043
+#: inc/admin/class-admin-settings.php:1070
 msgid "Trip Tax percentage added to trip price."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1087
+#: inc/admin/class-admin-settings.php:1114
 msgid "Enable Trip Enquiry"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1102
+#: inc/admin/class-admin-settings.php:1129
 msgid "Enable OG Tags"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1117
+#: inc/admin/class-admin-settings.php:1144
 msgid "GDPR Message : "
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1125
+#: inc/admin/class-admin-settings.php:1152
 msgid "Open GDPR in new tab: "
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1154
+#: inc/admin/class-admin-settings.php:1181
 msgid "Test Payment"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1157
+#: inc/admin/class-admin-settings.php:1184
 msgid "Test Mode"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1167
+#: inc/admin/class-admin-settings.php:1194
 msgid "Enable test mode to make test payment."
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1171
+#: inc/admin/class-admin-settings.php:1198
 msgid "Test Email"
 msgstr ""
 
-#: inc/admin/class-admin-settings.php:1173
+#: inc/admin/class-admin-settings.php:1200
 msgid "Test email address will get test mode payment emails."
 msgstr ""
 
@@ -5026,7 +5044,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:270
 #: inc/admin/views/tabs/tab-contents/itineraries/price-tab.php:410
-#: inc/helpers/helpers-price.php:19 inc/helpers.php:1318
+#: inc/helpers/helpers-price.php:19 inc/helpers.php:1330
 msgid "Group"
 msgstr ""
 
@@ -5156,7 +5174,7 @@ msgstr ""
 
 #: inc/booking-functions.php:30 inc/cart/checkout.php:129
 #: inc/class-frontend-assets.php:54 inc/class-frontend-assets.php:183
-#: inc/template-functions.php:424
+#: inc/helpers.php:2401 inc/template-functions.php:424
 msgid "Book Now"
 msgstr ""
 
@@ -5493,21 +5511,22 @@ msgstr ""
 msgid "Powered By: %1$1sWP Travel.%2$2s"
 msgstr ""
 
-#: inc/class-frontend-assets.php:53
+#: inc/class-frontend-assets.php:53 inc/helpers.php:2400
 msgid "Are you sure you want to remove?"
 msgstr ""
 
 #: inc/class-frontend-assets.php:55 inc/class-frontend-assets.php:184
+#: inc/helpers.php:2402
 msgid "Book and Pay"
 msgstr ""
 
 #: inc/class-frontend-assets.php:146 inc/framework/form/class.field.php:55
-#: inc/template-functions.php:2042 inc/template-functions.php:2187
-#: inc/template-functions.php:2602
+#: inc/helpers.php:2403 inc/template-functions.php:2042
+#: inc/template-functions.php:2187 inc/template-functions.php:2602
 msgid "Select"
 msgstr ""
 
-#: inc/class-frontend-assets.php:147
+#: inc/class-frontend-assets.php:147 inc/helpers.php:2404
 msgid "Close"
 msgstr ""
 
@@ -7436,23 +7455,23 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: inc/helpers.php:1314
+#: inc/helpers.php:1326
 msgid "Adult"
 msgstr ""
 
-#: inc/helpers.php:1315
+#: inc/helpers.php:1327
 msgid "Child"
 msgstr ""
 
-#: inc/helpers.php:1316
+#: inc/helpers.php:1328
 msgid "Infant"
 msgstr ""
 
-#: inc/helpers.php:1317
+#: inc/helpers.php:1329
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1319
+#: inc/helpers.php:1331
 msgid "Custom"
 msgstr ""
 
@@ -8437,7 +8456,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:304
+#: upgrade/update-137.php:25 wp-travel.php:308
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -8449,19 +8468,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:319
+#: wp-travel.php:323
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:320
+#: wp-travel.php:324
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:324
+#: wp-travel.php:328
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:326
+#: wp-travel.php:330
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -8712,32 +8731,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:391
+#: upgrade/update-137.php:48 wp-travel.php:395
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:396
+#: upgrade/update-137.php:53 wp-travel.php:400
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:401
+#: upgrade/update-137.php:58 wp-travel.php:405
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:392
+#: upgrade/update-137.php:49 wp-travel.php:396
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:397
+#: upgrade/update-137.php:54 wp-travel.php:401
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:402
+#: upgrade/update-137.php:59 wp-travel.php:406
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""

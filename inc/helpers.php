@@ -1275,7 +1275,19 @@ function wp_travel_is_dashboard_page() {
 	return false;
 }
 
-function wp_travel_is_itinerary( $post_id ) {
+if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
+
+	/**
+	 * wp_travel_Is_account_page - Returns true when viewing an account page.
+	 *
+	 * @return bool
+	 */
+	function wp_travel_is_account_page() {
+		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
+	}
+}
+
+function wp_travel_is_itinerary( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
@@ -1298,7 +1310,7 @@ function wp_travel_is_itinerary( $post_id ) {
  * Check whether payment script is loadable or not.
  */
 function wp_travel_can_load_payment_scripts() {
-	return wp_travel_is_dashboard_page() || wp_travel_is_checkout_page();
+	return ( wp_travel_is_dashboard_page() || wp_travel_is_checkout_page() ) && wp_travel_is_payment_enabled();
 }
 
 // WP Travel Pricing Varition options.
@@ -1375,18 +1387,6 @@ function wp_travel_get_raw_referer() {
 	}
 
 	return false;
-}
-
-if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
-
-	/**
-	 * wp_travel_Is_account_page - Returns true when viewing an account page.
-	 *
-	 * @return bool
-	 */
-	function wp_travel_is_account_page() {
-		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
-	}
 }
 
 /**
@@ -2388,4 +2388,21 @@ function wp_travel_privacy_link() {
 		$link = sprintf( '<a href="%1s" %2s >%3s</a>', esc_url( $privacy_policy_url ), esc_attr( $attr ), $page_title );
 	}
 	return $link;
+}
+
+/**
+ * Return WP Travel Strings.
+ *
+ * @since 2.0.0
+ */
+function wp_travel_get_strings() {
+	$localized_strings = array(
+		'confirm'    => __( 'Are you sure you want to remove?', 'wp-travel' ),
+		'book_now'   => __( 'Book Now', 'wp-travel' ),
+		'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
+		'select'     => __( 'Select', 'wp-travel' ),
+		'close'      => __( 'Close', 'wp-travel' ),
+	);
+
+	return apply_filters( 'wp_travel_strings', $localized_strings );
 }

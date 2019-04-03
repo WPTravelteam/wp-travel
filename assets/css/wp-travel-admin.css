@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800");
+::-moz-selection {
+  color: #fff;
+  background: #c6791f; }
+
+::selection {
+  color: #fff;
+  background: #69C8A7; }
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both; }
+
+.wp-travel-upsell-message {
+  position: relative;
+  background: #ECF8F4;
+  padding: 36px 40px 45px 48px;
+  border-radius: 10px;
+  margin-bottom: 100px;
+  box-shadow: 0 10px 30px rgba(59, 59, 59, 0.04); }
+  .wp-travel-upsell-message::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 8px;
+    background: #69C8A7;
+    content: ""; }
+  .wp-travel-upsell-message h3 {
+    color: #69C8A7;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px; }
+  .wp-travel-upsell-message p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 39px; }
+  .wp-travel-upsell-message a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background: #69C8A7;
+    border-radius: 50px;
+    padding: 15px 39px;
+    text-transform: capitalize; }
+
+.wp-travel-tabs-wrap {
+  margin: 20px 0; }
+  .wp-travel-tabs-wrap a {
+    text-decoration: none; }
+  .wp-travel-tabs-wrap ul.wp-travel-tabs-nav {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 0 49px rgba(0, 0, 0, 0.06); }
+    .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li a {
+      cursor: pointer;
+      background-color: transparent;
+      font-size: 18px;
+      font-weight: 300;
+      text-transform: capitalize;
+      color: #777;
+      padding: 21px 45px;
+      display: block; }
+  .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li:hover, .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li.active {
+    background-color: #9CB8D6;
+    color: #fff; }
+  .wp-travel-tabs-wrap .wp-travel-tab-content {
+    display: none; }
+    .wp-travel-tabs-wrap .wp-travel-tab-content h2 {
+      color: #1D3A58;
+      font-size: 26px;
+      text-transform: capitalize;
+      font-weight: 600;
+      margin-bottom: 42px; }
+    .wp-travel-tabs-wrap .wp-travel-tab-content .tab_content_title {
+      color: #1D3A58;
+      font-size: #1D3A58;
+      text-transform: capitalize;
+      font-weight: 500;
+      margin-bottom: 36px; }
+    .wp-travel-tabs-wrap .wp-travel-tab-content .general_option_form {
+      display: flex;
+      margin-bottom: 100px; }
+      .wp-travel-tabs-wrap .wp-travel-tab-content .general_option_form .fas {
+        background: #69c8a7;
+        color: #fff;
+        font-size: 24px;
+        padding: 39px; }
+      .wp-travel-tabs-wrap .wp-travel-tab-content .general_option_form input {
+        width: 100%;
+        padding: 0 0 0 30px;
+        font-size: 18px;
+        color: #A7A7A7;
+        font-weight: 300;
+        border: 0;
+        background: transparent;
+        box-shadow: 8px 0 49px rgba(0, 0, 0, 0.06); }
+  .wp-travel-tabs-wrap .tab_drawer_heading {
+    display: none; }
+
+@media screen and (max-width: 480px) {
+  .wp-travel-tabs-nav {
+    display: none; }
+
+  .tab_drawer_heading {
+    background-color: #ccc;
+    color: #fff;
+    margin: 0;
+    padding: 5px 20px;
+    display: block;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+
+  .d_active {
+    background-color: #666;
+    color: #fff; } }
+@media screen and (min-width: 768px) and (max-width: 1360px) {
+  ul.wp-travel-tabs-nav {
+    width: 20%;
+    float: left; }
+
+  .wp-travel-tabs-contents {
+    width: 64%;
+    float: left;
+    margin-left: 70px; } }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  ul.wp-travel-tabs-nav li {
+    text-align: center; }
+    ul.wp-travel-tabs-nav li .fas {
+      display: block;
+      margin-bottom: 5px; }
+
+  .wp-travel-tab-content .general_option_form .fas {
+    padding: 29px; }
+
+  .email_template_opt .template_opt_form {
+    flex-direction: column; }
+
+  .email_template_opt .template_opt_form form {
+    flex-basis: 100%; }
+
+  .email_template_opt .template_opt_form .admin_mail {
+    flex-basis: 100%; } }
+@media screen and (min-width: 1360px) {
+  ul.wp-travel-tabs-nav {
+    width: 18%;
+    float: left; }
+
+  .wp-travel-tabs-contents {
+    width: 64%;
+    float: left;
+    margin-left: 70px; } }
+.panel-group .panel {
+  border-radius: 0;
+  border: 0;
+  box-shadow: 8px 0 49px rgba(0, 0, 0, 0.02); }
+
+.panel-default > .panel-heading {
+  padding: 0;
+  border-radius: 0;
+  color: #212121;
+  background-color: #FAFAFA;
+  border-color: #EEEEEE; }
+
+.panel-title {
+  font-size: 14px; }
+  .panel-title > a {
+    display: block;
+    padding: 30px 40px;
+    background: transparent;
+    box-shadow: 8px 0 49px rgba(0, 0, 0, 0.06);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #7A7A7A; }
+
+.more-less {
+  float: right;
+  color: #7a7a7a; }
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #e6e6e6;
+  padding: 50px 40px;
+  position: relative;
+  display: inline-block; }
+  .panel-default > .panel-heading + .panel-collapse > .panel-body::after {
+    position: absolute;
+    background: url("../images/Path.png");
+    width: 100%;
+    height: 198px;
+    content: "";
+    left: 0;
+    bottom: 0; }
+
+.panel-heading.active a,
+.panel-heading.active .more-less {
+  color: #69C8A7; }
+
+.template_opt_title {
+  color: #7D7D7D;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: capitalize;
+  position: relative; }
+  .template_opt_title::before {
+    background-image: url("../images/repeat-dot.png");
+    width: 88%;
+    height: 79px;
+    position: absolute;
+    left: 0;
+    content: "";
+    top: -17px; }
+
+.email_template_opt {
+  float: left;
+  width: 100%; }
+  .email_template_opt .template_opt_form {
+    padding: 69px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; }
+    .email_template_opt .template_opt_form form {
+      flex-basis: 75%; }
+      .email_template_opt .template_opt_form form .form-group {
+        padding-bottom: 50px;
+        float: left;
+        width: 100%; }
+      .email_template_opt .template_opt_form form label {
+        color: #9F9F9F;
+        font-size: 20px;
+        font-weight: 500; }
+      .email_template_opt .template_opt_form form input {
+        background: transparent;
+        border: 2px solid #C9C9C9;
+        padding: 22px 32px;
+        margin-bottom: 11px;
+        font-size: 16px;
+        color: #BEBEBE;
+        font-weight: 300; }
+      .email_template_opt .template_opt_form form figcaption {
+        font-size: 12px;
+        font-weight: 300;
+        color: #A7A7A7; }
+      .email_template_opt .template_opt_form form .form-control:focus {
+        border-left-width: 3px;
+        border-left-color: #69C8A7; }
+      .email_template_opt .template_opt_form form textarea {
+        width: 100%;
+        height: 170px;
+        border-color: #C9C9C9;
+        border-width: 2px;
+        padding: 22px 32px;
+        font-size: 16px;
+        color: #BEBEBE;
+        font-weight: 300; }
+    .email_template_opt .template_opt_form .admin_mail {
+      flex-basis: 23%;
+      text-align: center;
+      padding: 15px;
+      background: #E1F3ED; }
+      .email_template_opt .template_opt_form .admin_mail h1 {
+        color: #69C8A7;
+        font-size: 15px;
+        text-align: center;
+        font-weight: 500;
+        text-transform: capitalize;
+        margin-bottom: 19px; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch {
+        position: relative;
+        width: 60px;
+        text-align: left;
+        margin: 0 auto;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox {
+        display: none; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 20px; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner {
+        display: block;
+        width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in 0s; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:before,
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:after {
+        display: block;
+        float: left;
+        width: 50%;
+        height: 22px;
+        padding: 0;
+        line-height: 22px;
+        font-size: 12px;
+        color: black;
+        font-family: Trebuchet, Arial, sans-serif;
+        font-weight: bold;
+        box-sizing: border-box; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:before {
+        content: "ON";
+        padding-left: 6px;
+        background-color: #3AC5C9;
+        color: #FFFFFF; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:after {
+        content: "OFF";
+        padding-right: 6px;
+        background-color: #E85764;
+        color: #FFFFFF;
+        text-align: right; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-switch {
+        display: block;
+        width: 12px;
+        margin: 5px;
+        background: #FFFFFF;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 35px;
+        border: 2px solid #FFFFFF;
+        border-radius: 20px;
+        transition: all 0.3s ease-in 0s; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+        margin-left: 0; }
+      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+        right: 0px; }
+    .email_template_opt .template_opt_form .radio {
+      margin: 0.5rem; }
+      .email_template_opt .template_opt_form .radio input[type="radio"] {
+        opacity: 0; }
+        .email_template_opt .template_opt_form .radio input[type="radio"] + .radio-label:before {
+          content: '';
+          background: #D6F6EB;
+          border-radius: 100%;
+          display: inline-block;
+          width: 1em;
+          height: 1em;
+          position: relative;
+          top: 0.2em;
+          margin-right: 1em;
+          vertical-align: top;
+          cursor: pointer;
+          text-align: center;
+          transition: all 250ms ease; }
+        .email_template_opt .template_opt_form .radio input[type="radio"]:checked + .radio-label:before {
+          background-color: #69C8A7;
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
+        .email_template_opt .template_opt_form .radio input[type="radio"]:focus + .radio-label:before {
+          outline: none;
+          border-color: #69C8A7; }
+      .email_template_opt .template_opt_form .radio label {
+        font-size: 14px;
+        font-weight: 300;
+        color: #A7A7A7;
+        margin-bottom: 9px; }
+  .email_template_opt .template_opt_form.client {
+    display: block; }
+    .email_template_opt .template_opt_form.client .wp-travel-select2,
+    .email_template_opt .template_opt_form.client .select2-container {
+      width: 100% !important; }
+    .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single {
+      background-color: #fff;
+      border-radius: 4px;
+      background: transparent;
+      border: 2px solid #C9C9C9;
+      padding: 12px 32px;
+      font-size: 16px;
+      color: #BEBEBE !important;
+      font-weight: 300;
+      height: auto !important;
+      text-transform: capitalize; }
+    .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: auto;
+      top: 50%; }
+
+.select2-container--default .select2-results > .select2-results__options {
+  box-shadow: 0 23px 26px rgba(138, 138, 138, 0.16) !important; }
+
+.wp-trave-settings-warp .wp-travel-setting-buttons {
+  text-align: right; }
+
+/*# sourceMappingURL=wp-travel-admin.css.map */
