@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800");
+.itinerary-booking_page_settings #wpwrap {
+  background: #fff; }
+
 .onoffswitch {
   position: relative;
   width: 56px;
@@ -42,7 +45,8 @@
   content: "ON";
   padding-left: 6px;
   background-color: #3ac5c9;
-  color: #ffffff; }
+  color: #ffffff;
+  text-align: left; }
 
 .onoffswitch-inner:after {
   content: "OFF";
@@ -72,16 +76,21 @@
 
 .label_title {
   color: #757575;
-  font-size: 16px;
+  font-size: 15px;
   text-transform: capitalize;
   font-weight: 500; }
 
 .subject_input {
   position: relative; }
+  .subject_input figcaption {
+    font-size: 12px;
+    font-weight: 300;
+    color: #A7A7A7; }
   .subject_input input {
     padding: 7px 15px;
     font-size: 14px;
     margin-bottom: 7px;
+    height: auto;
     width: 100%;
     border-color: #c9c9c9;
     border-width: 2px;
@@ -110,8 +119,10 @@
   margin-bottom: 42px; }
 
 .subject_input input:focus {
-  border-left-width: 3px;
-  border-left-color: #69c8a7; }
+  box-shadow: none;
+  outline: none !important;
+  border: 2px solid #c9c9c9;
+  border-left: 3px solid #69c8a7; }
 
 .wp-travel-tab-content {
   width: 100% !important; }
@@ -140,9 +151,18 @@
         box-shadow: none;
         border: 0; }
 
+.wp-travel-upsell-message .wp-travel-pro-feature-notice a {
+  float: left;
+  margin-right: 30px; }
+
 .wp-travel-sorting-tabs {
   border-collapse: collapse;
   width: 100%; }
+  .wp-travel-sorting-tabs .form_field {
+    display: block;
+    margin-bottom: 0; }
+    .wp-travel-sorting-tabs .form_field .onoffswitch {
+      margin: 0 auto; }
 
 .wp-travel-sorting-tabs td {
   font-size: 16px;
@@ -152,7 +172,7 @@
 .wp-travel-sorting-tabs td,
 .wp-travel-sorting-tabs th {
   border: 1px solid #ddd;
-  padding: 4px 14px;
+  padding: 14px;
   text-align: center; }
 
 .wp-travel-sorting-tabs tr:nth-child(odd) {
@@ -170,6 +190,65 @@
 .wp-travel-sorting-tabs-wrap .form_field {
   display: block;
   margin-bottom: 0; }
+
+.select2-container--default .select2-selection--single {
+  background-color: #fff !important;
+  border: 2px solid !important;
+  border-radius: 0 !important;
+  padding: 4px 15px;
+  font-size: 14px;
+  margin-bottom: 7px;
+  width: 100%;
+  border-color: #c9c9c9 !important;
+  border-width: 2px;
+  background: transparent;
+  height: auto !important;
+  line-height: 0; }
+
+.select2-container {
+  width: 100% !important; }
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  margin-left: -14px !important;
+  margin-top: 3px !important; }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0; }
+
+.radio {
+  margin: 0.5rem; }
+  .radio input[type="radio"] {
+    opacity: 0; }
+    .radio input[type="radio"] + .radio-label:before {
+      content: '';
+      background: #D6F6EB;
+      border-radius: 100%;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: 0.2em;
+      margin-right: 1em;
+      vertical-align: top;
+      cursor: pointer;
+      text-align: center;
+      transition: all 250ms ease; }
+    .radio input[type="radio"]:checked + .radio-label:before {
+      background-color: #69C8A7;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
+    .radio input[type="radio"]:focus + .radio-label:before {
+      outline: none;
+      border-color: #69C8A7; }
+  .radio label {
+    font-size: 14px;
+    font-weight: 300;
+    color: #A7A7A7;
+    margin-bottom: 9px; }
+
+.wp-radio {
+  position: absolute;
+  top: -30px;
+  left: 0px; }
 
 ::-moz-selection {
   color: #fff;
@@ -409,42 +488,9 @@
   font-size: 14px;
   color: #BEBEBE;
   font-weight: 300; }
-.email_template_opt .template_opt_form figcaption {
-  font-size: 12px;
-  font-weight: 300;
-  color: #A7A7A7; }
 .email_template_opt .template_opt_form .form-control:focus {
   border-left-width: 3px;
   border-left-color: #69C8A7; }
-.email_template_opt .template_opt_form .radio {
-  margin: 0.5rem; }
-  .email_template_opt .template_opt_form .radio input[type="radio"] {
-    opacity: 0; }
-    .email_template_opt .template_opt_form .radio input[type="radio"] + .radio-label:before {
-      content: '';
-      background: #D6F6EB;
-      border-radius: 100%;
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      position: relative;
-      top: 0.2em;
-      margin-right: 1em;
-      vertical-align: top;
-      cursor: pointer;
-      text-align: center;
-      transition: all 250ms ease; }
-    .email_template_opt .template_opt_form .radio input[type="radio"]:checked + .radio-label:before {
-      background-color: #69C8A7;
-      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
-    .email_template_opt .template_opt_form .radio input[type="radio"]:focus + .radio-label:before {
-      outline: none;
-      border-color: #69C8A7; }
-  .email_template_opt .template_opt_form .radio label {
-    font-size: 14px;
-    font-weight: 300;
-    color: #A7A7A7;
-    margin-bottom: 9px; }
 .email_template_opt .template_opt_form.client {
   display: block; }
   .email_template_opt .template_opt_form.client .wp-travel-select2,

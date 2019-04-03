@@ -100,7 +100,7 @@ function settings_callback_payment( $tab, $args ) {
 		</div>
 	</div>
 
-	<div class="form_field" id="wp-travel-tax-price-options">
+	<!-- <div class="form_field" id="wp-travel-tax-price-options">
 		<label class="label_title" for=""><?php esc_html_e( 'Trip prices entered with tax', 'wp-travel' ); ?></label>
 		<div class="subject_input">
 			<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio">
@@ -111,13 +111,30 @@ function settings_callback_payment( $tab, $args ) {
 				
 			<figcaption><?php esc_html_e( 'This option will affect how you enter trip prices.', 'wp-travel' ); ?></figcaption>
 		</div>
-	</div>
+	</div> -->
 	
-	<div class="form_field" id="wp-travel-tax-percentage" <?php echo 'yes' == $trip_tax_price_inclusive ? 'style="display:none;"' : 'style="display:table-row;"'; ?> >
+	<!-- <div class="form_field" id="wp-travel-tax-percentage" <?php echo 'yes' == $trip_tax_price_inclusive ? 'style="display:none;"' : 'style="display:table-row;"'; ?> >
 		<label class="label_title" for="trip_tax_percentage_output"><?php esc_html_e( 'Tax Percentage (%)', 'wp-travel' ); ?></label>
 		<div class="subject_input">
 			<input type="number" min="0" max="100" step="0.01" value="<?php echo esc_attr( $trip_tax_percentage ); ?>" name="trip_tax_percentage" id="trip_tax_percentage_output" />
 			<figcaption><label for="trip_tax_percentage_output"><?php esc_html_e( 'Trip Tax percentage added to trip price.', 'wp-travel' ); ?></label></figcaption>
+		</div>
+	</div> -->
+
+	<div class="form_field" id="wp-travel-tax-percentage">
+	<label class="label_title" for="trip_tax_percentage_output"><?php esc_html_e( 'Tax Percentage (%)', 'wp-travel' ); ?></label>
+		<div class="subject_input">
+			<div class="wp-radio">
+				<div class="radio">
+						<input id="radio-1" name="radio" type="radio" checked />
+						<label for="radio-1" class="radio-label">Checked</label>
+					</div>
+
+					<div class="radio">
+						<input id="radio-2" name="radio" type="radio" />
+						<label for="radio-2" class="radio-label">Unchecked</label>
+					</div>
+					</div>
 		</div>
 	</div>
 	<?php

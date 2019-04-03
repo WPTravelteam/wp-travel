@@ -126,7 +126,7 @@ function settings_callback_facts( $tab ) {
     </div>
 
     <!-- new-design -->
-
+        
 
     <!-- ends -->
     <?php

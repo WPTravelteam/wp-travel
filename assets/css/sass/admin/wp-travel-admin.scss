@@ -356,68 +356,14 @@
 			font-weight: 300;
 		}
 
-		figcaption {
-			font-size: 12px;
-			font-weight: 300;
-			color: #A7A7A7;
-		}
+
 
 		.form-control:focus {
 			border-left-width: 3px;
 			border-left-color: $primary-color;
 		}
 
-		.radio {
-			margin: 0.5rem;
 
-			input[type="radio"] {
-				opacity: 0;
-
-				+.radio-label {
-					&:before {
-						content: '';
-						background: #D6F6EB;
-						border-radius: 100%;
-						display: inline-block;
-						width: 1em;
-						height: 1em;
-						position: relative;
-						top: 0.2em;
-						margin-right: 1em;
-						vertical-align: top;
-						cursor: pointer;
-						text-align: center;
-						transition: all 250ms ease;
-					}
-				}
-
-				&:checked {
-					+.radio-label {
-						&:before {
-							background-color: #69C8A7;
-							box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16)
-						}
-					}
-				}
-
-				&:focus {
-					+.radio-label {
-						&:before {
-							outline: none;
-							border-color: $primary-color;
-						}
-					}
-				}
-			}
-
-			label {
-				font-size: 14px;
-				font-weight: 300;
-				color: #A7A7A7;
-				margin-bottom: 9px;
-			}
-
-		}
 	}
 
 	.template_opt_form.client {
