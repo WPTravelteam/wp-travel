@@ -1791,12 +1791,11 @@ function wp_travel_upsell_message( $args ) {
     $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons' );
     ?>
     <div class="wp-travel-upsell-message">
-		<div class="wp-travel-pro-feature-notice">
+		<div class="wp-travel-pro-feature-notice clearfix">
 			<h4><?php echo esc_html( $title ); ?></h4>
 			<p><?php echo esc_html( $content ); ?></p>
             <a target="_blank" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $link_label ); ?></a> 
             <?php if ( ! empty( $link2 ) ) : ?>
-                <?php esc_html_e( 'OR', 'wp-travel' ); ?>
                 <a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
             <?php endif; ?>       
         </div>
