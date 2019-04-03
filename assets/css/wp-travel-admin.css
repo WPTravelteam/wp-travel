@@ -140,6 +140,37 @@
         box-shadow: none;
         border: 0; }
 
+.wp-travel-sorting-tabs {
+  border-collapse: collapse;
+  width: 100%; }
+
+.wp-travel-sorting-tabs td {
+  font-size: 16px;
+  font-weight: 400;
+  color: #929292; }
+
+.wp-travel-sorting-tabs td,
+.wp-travel-sorting-tabs th {
+  border: 1px solid #ddd;
+  padding: 4px 14px;
+  text-align: center; }
+
+.wp-travel-sorting-tabs tr:nth-child(odd) {
+  background-color: #e2e2e2; }
+
+.wp-travel-sorting-tabs th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #69c8a7;
+  color: white;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500; }
+
+.wp-travel-sorting-tabs-wrap .form_field {
+  display: block;
+  margin-bottom: 0; }
+
 ::-moz-selection {
   color: #fff;
   background: #c6791f; }
@@ -158,7 +189,7 @@
   background: #ECF8F4;
   padding: 16px 40px 45px 30px;
   border-radius: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   box-shadow: 0 10px 30px rgba(59, 59, 59, 0.04); }
   .wp-travel-upsell-message::before {
     position: absolute;

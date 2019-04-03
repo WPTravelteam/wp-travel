@@ -124,5 +124,10 @@ function settings_callback_facts( $tab ) {
         </div>
         <button type="button" class="new-fact-setting-adder"><?php echo esc_html( 'Add new', 'wp-travel' ); ?></button>
     </div>
+
+    <!-- new-design -->
+
+
+    <!-- ends -->
     <?php
 }

@@ -174,3 +174,47 @@
 		}
 	}
 }
+
+.wp-travel-sorting-tabs {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.wp-travel-sorting-tabs td {
+	font-size: 16px;
+	font-weight: 400;
+	color: #929292;
+}
+
+.wp-travel-sorting-tabs td,
+.wp-travel-sorting-tabs th {
+	border: 1px solid #ddd;
+	padding: 14px;
+	text-align: center;
+}
+
+.wp-travel-sorting-tabs tr:nth-child(odd) {
+	background-color: #e2e2e2;
+}
+
+// .wp-travel-sorting-tabs tr:hover {
+// 	background-color: #a1e8d0;
+// }
+
+.wp-travel-sorting-tabs th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #69c8a7;
+	color: white;
+	text-transform: capitalize;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.wp-travel-sorting-tabs-wrap {
+	.form_field {
+		display: block;
+		margin-bottom: 0;
+		;
+	}
+}
