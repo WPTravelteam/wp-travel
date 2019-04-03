@@ -36,21 +36,20 @@ function settings_callback_debug( $tab, $args ) {
 		</tr>
 	</table>
 		<!-- new design -->
-		<div class="admin_mail">
-		<span class="test_mode_title">test mode</span>
-				<div class="onoffswitch">
-			
+		<div class="form_field">
+				<label class="test_mode_title">enable trip enquiry</label>
+				<div class="subject_input">
+					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
 					<label class="onoffswitch-label" for="myonoffswitch">
 						<span class="onoffswitch-inner"></span>
 						<span class="onoffswitch-switch"></span>
 					</label>
 				</div>
-			</div>
-		<div class="email_template_opt">
+				</div>
+		</div>
                       
-				<div class="template_opt_form">
-					<div class="form-group">
+				<div class="form_field">
 						<label for="inputEmail3" class="control-label test_mode_title">text email</label>
 						<div class="subject_input">
 							<input type="email" class="form-control" id="inputEmail3" placeholder="New Subjects">
@@ -59,8 +58,6 @@ function settings_callback_debug( $tab, $args ) {
 								emails.
 							</figcaption>
 							</div>
-					</div>
-				</div>		
 			</div>
 		<!-- ends -->
 

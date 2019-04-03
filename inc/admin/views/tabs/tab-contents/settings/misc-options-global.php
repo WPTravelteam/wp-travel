@@ -69,32 +69,52 @@ function settings_callback_misc_options_global( $tab, $args ) {
 		</table>
 
 		<!-- new design -->
-		<div class="admin_mail">
-		<span class="test_mode_title">test mode</span>
-				<div class="onoffswitch">
-			
+		<div class="form_field">
+				<label class="test_mode_title">enable trip enquiry</label>
+				<div class="subject_input">
+					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
 					<label class="onoffswitch-label" for="myonoffswitch">
 						<span class="onoffswitch-inner"></span>
 						<span class="onoffswitch-switch"></span>
 					</label>
 				</div>
+				</div>
+		</div>
+
+		<div class="form_field">
+				<label class="test_mode_title">enable OG tags</label>
+				<div class="subject_input">
+					<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+				</div>
+		</div>
+
+		<div class="form_field">
+			<label class="test_mode_title">GDPR message</label>
+			<div class="subject_input">
+				<textarea placholder="Your Message"></textarea>
 			</div>
-		<div class="email_template_opt">
-                      
-				<div class="template_opt_form">
-					<div class="form-group">
-						<label for="inputEmail3" class="control-label test_mode_title">text email</label>
-						<div class="subject_input">
-							<input type="email" class="form-control" id="inputEmail3" placeholder="New Subjects">
-							<figcaption>
-								Test email address will get test mode payment
-								emails.
-							</figcaption>
-							</div>
-					</div>
-				</div>		
-			</div>
+		</div>
+
+		<div class="form_field">
+				<label class="test_mode_title">open GDPR in new tab</label>
+				<div class="subject_input">
+					<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+				</div>
+		</div>
+	
 		<!-- ends -->
 		<?php
 }
