@@ -37,7 +37,7 @@ function settings_callback_debug( $tab, $args ) {
 	</table>
 		<!-- new design -->
 		<div class="form_field">
-				<label class="test_mode_title">enable trip enquiry</label>
+				<label class="label_title">enable trip enquiry</label>
 				<div class="subject_input">
 					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
@@ -50,7 +50,7 @@ function settings_callback_debug( $tab, $args ) {
 		</div>
                       
 				<div class="form_field">
-						<label for="inputEmail3" class="control-label test_mode_title">text email</label>
+						<label for="inputEmail3" class="control-label label_title">text email</label>
 						<div class="subject_input">
 							<input type="email" class="form-control" id="inputEmail3" placeholder="New Subjects">
 							<figcaption>

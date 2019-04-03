@@ -18,7 +18,7 @@
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
-	border: 2px solid #FFFFFF;
+	border: 2px solid #ffffff;
 	border-radius: 20px;
 }
 
@@ -47,15 +47,15 @@
 .onoffswitch-inner:before {
 	content: "ON";
 	padding-left: 6px;
-	background-color: #3AC5C9;
-	color: #FFFFFF;
+	background-color: #3ac5c9;
+	color: #ffffff;
 }
 
 .onoffswitch-inner:after {
 	content: "OFF";
 	padding-right: 6px;
-	background-color: #E85764;
-	color: #FFFFFF;
+	background-color: #e85764;
+	color: #ffffff;
 	text-align: right;
 }
 
@@ -63,12 +63,12 @@
 	display: block;
 	width: 12px;
 	margin: 5px;
-	background: #FFFFFF;
+	background: #ffffff;
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 30px;
-	border: 2px solid #FFFFFF;
+	border: 2px solid #ffffff;
 	border-radius: 20px;
 	transition: all 0.3s ease-in 0s;
 }
@@ -81,7 +81,7 @@
 	right: 0px;
 }
 
-.test_mode_title {
+.label_title {
 	color: #757575;
 	font-size: 16px;
 	text-transform: capitalize;
@@ -89,24 +89,41 @@
 }
 
 .subject_input {
+	position: relative;
+
 	input {
 		padding: 7px 15px;
 		font-size: 14px;
 		margin-bottom: 7px;
 		width: 100%;
-		border-color: #C9C9C9;
+		border-color: #c9c9c9;
 		border-width: 2px;
+		background: transparent;
 	}
 
 	textarea {
 		width: 100%;
 		height: 170px;
-		border-color: #C9C9C9;
+		border-color: #c9c9c9;
 		border-width: 2px;
 		padding: 13px 20px;
 		font-size: 14px;
-		color: #BEBEBE;
+		color: #5d5d5d;
 		font-weight: 300;
+	}
+
+	.fas {
+		position: absolute;
+		top: 12px;
+		right: 20px;
+	}
+
+	.fa-check {
+		color: #41b58d;
+	}
+
+	.fa-times {
+		color: #ea4444;
 	}
 }
 
@@ -118,9 +135,42 @@
 
 .subject_input input:focus {
 	border-left-width: 3px;
-	border-left-color: #69C8A7;
+	border-left-color: #69c8a7;
 }
 
 .wp-travel-tab-content {
 	width: 100% !important;
+}
+
+.license_wrapper {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 30px;
+
+	.license_grid {
+		background: transparent;
+		padding: 21px;
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.10);
+
+		.form_field {
+			display: grid;
+			grid-template-columns: 1fr;
+			margin-bottom: 0;
+
+			.label_title {
+				margin-bottom: 12px;
+			}
+
+			.button {
+				background: #69c8a7;
+				padding: 8px;
+				height: auto;
+				color: #fff;
+				font-size: 16px;
+				font-weight: 400;
+				box-shadow: none;
+				border: 0;
+			}
+		}
+	}
 }

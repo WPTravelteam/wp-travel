@@ -70,7 +70,7 @@ function settings_callback_misc_options_global( $tab, $args ) {
 
 		<!-- new design -->
 		<div class="form_field">
-				<label class="test_mode_title">enable trip enquiry</label>
+				<label class="label_title">enable trip enquiry</label>
 				<div class="subject_input">
 					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
@@ -83,7 +83,7 @@ function settings_callback_misc_options_global( $tab, $args ) {
 		</div>
 
 		<div class="form_field">
-				<label class="test_mode_title">enable OG tags</label>
+				<label class="label_title">enable OG tags</label>
 				<div class="subject_input">
 					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
@@ -96,14 +96,14 @@ function settings_callback_misc_options_global( $tab, $args ) {
 		</div>
 
 		<div class="form_field">
-			<label class="test_mode_title">GDPR message</label>
+			<label for="textarea" class="label_title">GDPR message</label>
 			<div class="subject_input">
-				<textarea placholder="Your Message"></textarea>
+				<textarea id="textarea" placeholder="Your Message"></textarea>
 			</div>
 		</div>
 
 		<div class="form_field">
-				<label class="test_mode_title">open GDPR in new tab</label>
+				<label class="label_title">open GDPR in new tab</label>
 				<div class="subject_input">
 					<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
