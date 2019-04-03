@@ -12,6 +12,7 @@ function settings_callback_debug( $tab, $args ) {
 	$wt_test_email = $settings['wt_test_email'];
 	?>
 	<h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'Test Payment', 'wp-travel' ); ?></h4>
+
 	<table class="form-table">
 		<tr>
 			<th><label for="wt_test_mode"><?php esc_html_e( 'Test Mode', 'wp-travel' ); ?></label></th>
@@ -34,7 +35,35 @@ function settings_callback_debug( $tab, $args ) {
 			</td>
 		</tr>
 	</table>
-	
+		<!-- new design -->
+		<div class="admin_mail">
+		<span class="test_mode_title">test mode</span>
+				<div class="onoffswitch">
+			
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			</div>
+		<div class="email_template_opt">
+                      
+				<div class="template_opt_form">
+					<div class="form-group">
+						<label for="inputEmail3" class="control-label test_mode_title">text email</label>
+						<div class="subject_input">
+							<input type="email" class="form-control" id="inputEmail3" placeholder="New Subjects">
+							<figcaption>
+								Test email address will get test mode payment
+								emails.
+							</figcaption>
+							</div>
+					</div>
+				</div>		
+			</div>
+		<!-- ends -->
+
 	<?php do_action( 'wp_travel_below_debug_tab_fields', $args ); ?>
 	<?php
 }

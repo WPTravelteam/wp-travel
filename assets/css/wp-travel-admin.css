@@ -1,4 +1,96 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800");
+.onoffswitch {
+  position: relative;
+  width: 56px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; }
+  .onoffswitch .onoffswitch-checkbox {
+    display: none; }
+
+.onoffswitch-checkbox {
+  display: none; }
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  border-radius: 20px; }
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s; }
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 22px;
+  padding: 0;
+  line-height: 22px;
+  font-size: 12px;
+  color: black;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box; }
+
+.onoffswitch-inner:before {
+  content: "ON";
+  padding-left: 6px;
+  background-color: #3AC5C9;
+  color: #FFFFFF; }
+
+.onoffswitch-inner:after {
+  content: "OFF";
+  padding-right: 6px;
+  background-color: #E85764;
+  color: #FFFFFF;
+  text-align: right; }
+
+.onoffswitch-switch {
+  display: block;
+  width: 12px;
+  margin: 5px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 30px;
+  border: 2px solid #FFFFFF;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; }
+
+.test_mode_title {
+  color: #757575;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 500; }
+
+.subject_input input {
+  padding: 7px 15px;
+  font-size: 14px;
+  margin-bottom: 7px;
+  width: 100%; }
+
+.template_opt_form .form-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr; }
+
+.admin_mail {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin-bottom: 42px; }
+
 ::-moz-selection {
   color: #fff;
   background: #c6791f; }
@@ -230,168 +322,77 @@
     content: "";
     top: -17px; }
 
-.email_template_opt {
-  float: left;
-  width: 100%; }
-  .email_template_opt .template_opt_form {
-    padding: 69px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; }
-    .email_template_opt .template_opt_form form {
-      flex-basis: 75%; }
-      .email_template_opt .template_opt_form form .form-group {
-        padding-bottom: 50px;
-        float: left;
-        width: 100%; }
-      .email_template_opt .template_opt_form form label {
-        color: #9F9F9F;
-        font-size: 20px;
-        font-weight: 500; }
-      .email_template_opt .template_opt_form form input {
-        background: transparent;
-        border: 2px solid #C9C9C9;
-        padding: 22px 32px;
-        margin-bottom: 11px;
-        font-size: 16px;
-        color: #BEBEBE;
-        font-weight: 300; }
-      .email_template_opt .template_opt_form form figcaption {
-        font-size: 12px;
-        font-weight: 300;
-        color: #A7A7A7; }
-      .email_template_opt .template_opt_form form .form-control:focus {
-        border-left-width: 3px;
-        border-left-color: #69C8A7; }
-      .email_template_opt .template_opt_form form textarea {
-        width: 100%;
-        height: 170px;
-        border-color: #C9C9C9;
-        border-width: 2px;
-        padding: 22px 32px;
-        font-size: 16px;
-        color: #BEBEBE;
-        font-weight: 300; }
-    .email_template_opt .template_opt_form .admin_mail {
-      flex-basis: 23%;
+.email_template_opt .template_opt_form input {
+  background: transparent;
+  border: 2px solid #C9C9C9;
+  margin-bottom: 11px;
+  font-size: 14px;
+  color: #BEBEBE;
+  font-weight: 300; }
+.email_template_opt .template_opt_form figcaption {
+  font-size: 12px;
+  font-weight: 300;
+  color: #A7A7A7; }
+.email_template_opt .template_opt_form .form-control:focus {
+  border-left-width: 3px;
+  border-left-color: #69C8A7; }
+.email_template_opt .template_opt_form textarea {
+  width: 100%;
+  height: 170px;
+  border-color: #C9C9C9;
+  border-width: 2px;
+  padding: 22px 32px;
+  font-size: 16px;
+  color: #BEBEBE;
+  font-weight: 300; }
+.email_template_opt .template_opt_form .radio {
+  margin: 0.5rem; }
+  .email_template_opt .template_opt_form .radio input[type="radio"] {
+    opacity: 0; }
+    .email_template_opt .template_opt_form .radio input[type="radio"] + .radio-label:before {
+      content: '';
+      background: #D6F6EB;
+      border-radius: 100%;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: 0.2em;
+      margin-right: 1em;
+      vertical-align: top;
+      cursor: pointer;
       text-align: center;
-      padding: 15px;
-      background: #E1F3ED; }
-      .email_template_opt .template_opt_form .admin_mail h1 {
-        color: #69C8A7;
-        font-size: 15px;
-        text-align: center;
-        font-weight: 500;
-        text-transform: capitalize;
-        margin-bottom: 19px; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch {
-        position: relative;
-        width: 60px;
-        text-align: left;
-        margin: 0 auto;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox {
-        display: none; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-label {
-        display: block;
-        overflow: hidden;
-        cursor: pointer;
-        border-radius: 20px; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner {
-        display: block;
-        width: 200%;
-        margin-left: -100%;
-        transition: margin 0.3s ease-in 0s; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:before,
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:after {
-        display: block;
-        float: left;
-        width: 50%;
-        height: 22px;
-        padding: 0;
-        line-height: 22px;
-        font-size: 12px;
-        color: black;
-        font-family: Trebuchet, Arial, sans-serif;
-        font-weight: bold;
-        box-sizing: border-box; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:before {
-        content: "ON";
-        padding-left: 6px;
-        background-color: #3AC5C9;
-        color: #FFFFFF; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-inner:after {
-        content: "OFF";
-        padding-right: 6px;
-        background-color: #E85764;
-        color: #FFFFFF;
-        text-align: right; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-switch {
-        display: block;
-        width: 12px;
-        margin: 5px;
-        background: #FFFFFF;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 35px;
-        border: 2px solid #FFFFFF;
-        border-radius: 20px;
-        transition: all 0.3s ease-in 0s; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-        margin-left: 0; }
-      .email_template_opt .template_opt_form .admin_mail .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-        right: 0px; }
-    .email_template_opt .template_opt_form .radio {
-      margin: 0.5rem; }
-      .email_template_opt .template_opt_form .radio input[type="radio"] {
-        opacity: 0; }
-        .email_template_opt .template_opt_form .radio input[type="radio"] + .radio-label:before {
-          content: '';
-          background: #D6F6EB;
-          border-radius: 100%;
-          display: inline-block;
-          width: 1em;
-          height: 1em;
-          position: relative;
-          top: 0.2em;
-          margin-right: 1em;
-          vertical-align: top;
-          cursor: pointer;
-          text-align: center;
-          transition: all 250ms ease; }
-        .email_template_opt .template_opt_form .radio input[type="radio"]:checked + .radio-label:before {
-          background-color: #69C8A7;
-          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
-        .email_template_opt .template_opt_form .radio input[type="radio"]:focus + .radio-label:before {
-          outline: none;
-          border-color: #69C8A7; }
-      .email_template_opt .template_opt_form .radio label {
-        font-size: 14px;
-        font-weight: 300;
-        color: #A7A7A7;
-        margin-bottom: 9px; }
-  .email_template_opt .template_opt_form.client {
-    display: block; }
-    .email_template_opt .template_opt_form.client .wp-travel-select2,
-    .email_template_opt .template_opt_form.client .select2-container {
-      width: 100% !important; }
-    .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single {
-      background-color: #fff;
-      border-radius: 4px;
-      background: transparent;
-      border: 2px solid #C9C9C9;
-      padding: 12px 32px;
-      font-size: 16px;
-      color: #BEBEBE !important;
-      font-weight: 300;
-      height: auto !important;
-      text-transform: capitalize; }
-    .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single .select2-selection__arrow {
-      height: auto;
-      top: 50%; }
+      transition: all 250ms ease; }
+    .email_template_opt .template_opt_form .radio input[type="radio"]:checked + .radio-label:before {
+      background-color: #69C8A7;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
+    .email_template_opt .template_opt_form .radio input[type="radio"]:focus + .radio-label:before {
+      outline: none;
+      border-color: #69C8A7; }
+  .email_template_opt .template_opt_form .radio label {
+    font-size: 14px;
+    font-weight: 300;
+    color: #A7A7A7;
+    margin-bottom: 9px; }
+.email_template_opt .template_opt_form.client {
+  display: block; }
+  .email_template_opt .template_opt_form.client .wp-travel-select2,
+  .email_template_opt .template_opt_form.client .select2-container {
+    width: 100% !important; }
+  .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border-radius: 4px;
+    background: transparent;
+    border: 2px solid #C9C9C9;
+    padding: 12px 32px;
+    font-size: 16px;
+    color: #BEBEBE !important;
+    font-weight: 300;
+    height: auto !important;
+    text-transform: capitalize; }
+  .email_template_opt .template_opt_form.client .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: auto;
+    top: 50%; }
 
 .select2-container--default .select2-results > .select2-results__options {
   box-shadow: 0 23px 26px rgba(138, 138, 138, 0.16) !important; }
