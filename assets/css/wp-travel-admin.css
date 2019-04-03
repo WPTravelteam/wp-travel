@@ -15,7 +15,7 @@
 .wp-travel-upsell-message {
   position: relative;
   background: #ECF8F4;
-  padding: 36px 40px 45px 48px;
+  padding: 16px 40px 25px 30px;
   border-radius: 10px;
   margin-bottom: 100px;
   box-shadow: 0 10px 30px rgba(59, 59, 59, 0.04); }
@@ -47,6 +47,7 @@
     text-transform: capitalize; }
 
 .wp-travel-tabs-wrap {
+  font-family: 'Poppins', sans-serif;
   margin: 20px 0; }
   .wp-travel-tabs-wrap a {
     text-decoration: none; }
@@ -57,12 +58,22 @@
     .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li a {
       cursor: pointer;
       background-color: transparent;
-      font-size: 18px;
-      font-weight: 300;
+      font-size: 16px;
+      font-weight: 400;
       text-transform: capitalize;
       color: #777;
-      padding: 21px 45px;
+      padding: 18px 22px;
       display: block; }
+      .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li a .fas {
+        margin-right: 15px; }
+    .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li:hover a {
+      background-color: #9CB8D6;
+      color: #fff; }
+    .wp-travel-tabs-wrap ul.wp-travel-tabs-nav .ui-tabs-active a {
+      background-color: #9CB8D6;
+      color: #fff !important;
+      outline: 0 !important;
+      box-shadow: none; }
   .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li:hover, .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li.active {
     background-color: #9CB8D6;
     color: #fff; }
@@ -156,7 +167,7 @@
   .wp-travel-tabs-contents {
     width: 64%;
     float: left;
-    margin-left: 70px; } }
+    margin-left: 50px; } }
 .panel-group .panel {
   border-radius: 0;
   border: 0;
@@ -387,5 +398,24 @@
 
 .wp-trave-settings-warp .wp-travel-setting-buttons {
   text-align: right; }
+
+.wp-core-ui .button-primary {
+  background: #769eca;
+  border-color: #9cb8d6 #9cb8d6 #9cb8d6;
+  box-shadow: 0 1px 0 #9cb8d6;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px #9cb8d6, 1px 0 1px #9cb8d6, 0 1px 1px #9cb8d6, -1px 0 1px #9cb8d6; }
+  .wp-core-ui .button-primary:hover {
+    background: #5b8abd;
+    border-color: #5b8abd #5b8abd #5b8abd;
+    box-shadow: 0 1px 0 #5b8abd; }
+
+.wp-travel-setting-system-info {
+  float: left; }
+
+.wp-trave-settings-warp .wp-travel-setting-buttons a {
+  color: #456f9c;
+  text-decoration: none; }
 
 /*# sourceMappingURL=wp-travel-admin.css.map */
