@@ -196,7 +196,6 @@ class WP_Travel_Gateway_Paypal_Request {
 				$trip_id            = $item['trip_id'];
 				$pax                = $item['pax'];
 				$trip_price         = $item['trip_price'];
-				$trip_price_partial = $item['trip_price_partial'];
 
 				$item_name = html_entity_decode( get_the_title( $trip_id ) );
 				$trip_code = wp_travel_get_trip_code( $trip_id );
@@ -213,6 +212,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 				$payment_amount = wp_travel_get_formated_price( $trip_price );
 				if ( 'partial' === $payment_mode ) {
+					$trip_price_partial = $item['trip_price_partial'];
 					$payment_amount = wp_travel_get_formated_price( $trip_price_partial );
 				}
 				// Group Multiply disable.
