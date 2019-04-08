@@ -333,7 +333,7 @@ class WP_Travel_Admin_Info_Pointers {
 
 	function wp_travel_importer_upsell_notice() {
 
-		if ( class_exists( 'WP_Travel_Importer_Core' ) ) {
+		if ( class_exists( 'WP_Travel_Import_Export_Core' ) ) {
 			return;
 		}
 
