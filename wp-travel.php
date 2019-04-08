@@ -227,6 +227,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/admin/admin-notices.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-uploader.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-tabs.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-metaboxes.php', WP_TRAVEL_ABSPATH );
