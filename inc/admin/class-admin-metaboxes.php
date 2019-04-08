@@ -808,7 +808,7 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_price']               = isset( $_POST['wp_travel_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) ) : 0;
 
 		// Setting trip price.
-		$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_price'];
+		$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_price']; // This price is used to sort archive list by price so need to update accordingly [ for single and multiple pricing option ]
 
 		$trip_meta['wp_travel_enable_sale'] = isset( $_POST['wp_travel_enable_sale'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) ) : 0;
 		$trip_meta['wp_travel_sale_price']  = isset( $_POST['wp_travel_sale_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) ) : 0;
@@ -861,8 +861,18 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_minimum_partial_payout_percent']    = isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) : 0;
 		$trip_meta['wp_travel_minimum_partial_payout_use_global'] = isset( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ) : '';
 
-		// Update Pricing Options Metas.
+		// Update Pricing Options Metas. [ Multiple Pricing data ].
 		$trip_meta['wp_travel_pricing_options'] = isset( $_POST['wp_travel_pricing_options'] ) ? ( wp_unslash( $_POST['wp_travel_pricing_options'] ) ) : '';
+
+		if ( 'multiple-price' === $trip_meta['wp_travel_pricing_option_type'] && is_array( $trip_meta['wp_travel_pricing_options'] ) && count( $trip_meta['wp_travel_pricing_options'] ) > 0 ) {
+			$pricing_options = $trip_meta['wp_travel_pricing_options'];
+			// Need to update wp_travel_trip_price which is used to filter by price in archive page.
+			$price_key = wp_travel_get_min_price_key( $pricing_options );
+			$price = wp_travel_get_actual_trip_price( $post_id, $price_key );
+			if ( $price ) {
+				$trip_meta['wp_travel_trip_price'] = $price;
+			}
+		}
 
 		// Update multiple trip dates options.
 		$wp_travel_multiple_trip_dates = array();

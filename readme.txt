@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.1.1
 Requires PHP: 5.5
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -198,6 +198,19 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.9.4 =
+Release Date: 8th April 2019
+
+Enhancement:
+
+* Admin Notice list layout changed.
+
+Fixes: 
+
+* Fixed lost password url on dashboard page. Previously it is going to worpress reset password link.
+* Fixed Filter by price high to low and low to high.
+* Minor Notification issue fixes for import export.
 
 = 1.9.3 =
 Release Date: 28th March 2019

@@ -1176,7 +1176,7 @@ function wp_travel_get_faqs( $post_id ) {
 function wp_travel_get_page_id( $page ) {
 
 	$settings = get_option( 'wp_travel_settings' ); // Not used wp_travel_get_settings due to infinite loop.
-	$page     = str_replace( 'wp-travel', '', $page );
+	$page     = str_replace( 'wp-travel-', '', $page );
 	$page_id  = ( isset( $settings[ $page . '_page_id' ] ) ) ? $settings[ $page . '_page_id' ] : '';
 
 	if ( ! $page_id ) {
