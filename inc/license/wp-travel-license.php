@@ -47,7 +47,9 @@ class WP_Travel_License {
 
 		add_action( 'admin_init', 'WP_Travel_License::activate_license' );
 		add_action( 'admin_init', 'WP_Travel_License::deactivate_license' );
-		add_action( 'admin_notices', 'WP_Travel_License::show_admin_notice' );
+
+		add_filter( 'wp_travel_display_critical_admin_notices', 'WP_Travel_License::display_critical_notices' );
+		add_action( 'wp_travel_critical_admin_notice', 'WP_Travel_License::critical_admin_notices' );
 	}
 
 	/**
@@ -143,15 +145,13 @@ class WP_Travel_License {
 				<?php
 			endforeach;
 		}
-		?>
-		<div class="wp-travel-upsell-message">
-			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Want to add more features in WP Travel?', 'wp-travel' ); ?></h4>
-				<p><?php esc_html_e( 'Get addon for payment, trip extras, Inventory management and other premium features.', 'wp-travel' ); ?></p>
-				<a target="_blank" href="https://wptravel.io/downloads/">Get WP Travel Addons</a>
-			</div>
-		</div>
-		<?php
+		$args = array(
+			'title' => __( 'Want to add more features in WP Travel?', 'wp-travel' ),
+			'content' => __( 'Get addon for payment, trip extras, Inventory management and other premium features.', 'wp-travel' ),
+			'link' => 'https://wptravel.io/downloads/',
+			'link_label' => __( 'Get WP Travel Addons', 'wp-travel' ),
+		);
+		wp_travel_upsell_message( $args );
 	}
 
 	/**
@@ -352,7 +352,7 @@ class WP_Travel_License {
 	 *
 	 * @return Mixed
 	 */
-	public static function show_admin_notice() {
+	public static function critical_admin_notices() {
 		$count_premium_addons = self::count_premium_addons();
 		if ( $count_premium_addons < 1 ) {
 			return;
@@ -362,12 +362,20 @@ class WP_Travel_License {
 			if ( false !== $check_license && 'valid' === $check_license ) {
 				return false;
 			}
-			$class   = 'notice notice-error';
+			$class   = '';
 			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
 			$message = sprintf( __( 'You have not activated the license for %1$s Addon Go to <a href="%2$s"> settings </a> to activate your license.', 'wp-travel' ), $premium_addon['item_name'], $link );
 
 			printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
 		}
+	}
+
+	public static function display_critical_notices( $display ) {
+		$count_premium_addons = self::count_premium_addons();
+		if ( $count_premium_addons > 0 ) {
+			$display = true;
+		}
+		return $display;
 	}
 
 }

@@ -1781,3 +1781,24 @@ function wp_travel_get_pricing_option_list() {
 
     return apply_filters( 'wp_travel_pricing_option_list', $type );
 }
+
+function wp_travel_upsell_message( $args ) {
+    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel' );
+    $content = isset( $args['content'] ) ? $args['content'] : '';
+    $link = isset( $args['link'] ) ? $args['link'] : '';
+    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'View WP Travel Addons' );
+    $link2 = isset( $args['link2'] ) ? $args['link2'] : '';
+    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons' );
+    ?>
+    <div class="wp-travel-upsell-message">
+		<div class="wp-travel-pro-feature-notice clearfix">
+			<h4><?php echo esc_html( $title ); ?></h4>
+			<p><?php echo esc_html( $content ); ?></p>
+            <a target="_blank" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $link_label ); ?></a> 
+            <?php if ( ! empty( $link2 ) ) : ?>
+                <a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
+            <?php endif; ?>       
+        </div>
+	</div>
+    <?php 
+}

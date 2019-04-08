@@ -234,12 +234,15 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		<div class="wp-travel-upsell-message">
-			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Need alternative maps ?', 'wp-travel' ); ?></h4>
-				<p><?php printf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.  %1$sView WP Travel Map addons%2$s', 'wp-travel' ), '<br><a target="_blank" href="https://wptravel.io/downloads/category/map/">', '</a>' ); ?></p>
-			</div>
-		</div>
+		<?php
+			$args = array(
+				'title'      => __( 'Need alternative maps ?', 'wp-travel' ),
+				'content'    => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/category/map/',
+				'link_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		?>
 		<br>
 		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Pages', 'wp-travel' ); ?></h3>
 
@@ -417,15 +420,17 @@ class WP_Travel_Admin_Settings {
 
 		?>
 		<?php do_action( 'wp_travel_tab_content_before_email', $args ); ?>
-		<?php if ( ! class_exists( 'WP_Travel_Utilities' ) ) : ?>
-			<div class="wp-travel-upsell-message">
-				<div class="wp-travel-pro-feature-notice">
-					<h4><?php esc_html_e( 'Want to get more e-mail customization options ?', 'wp-travel' ); ?></h4>
-					<p><?php esc_html_e( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
-				</div>
-			</div>
-		<?php endif; ?>
+		<?php
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title' => __( 'Want to get more e-mail customization options ?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+		?>
 		<table class="form-table">
 			<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel' ); ?></h4></td></tr>
 
@@ -870,16 +875,14 @@ class WP_Travel_Admin_Settings {
 		?>
 
 		<?php
-		if ( ! class_exists( 'WP_Travel_Utilities' ) ) :
-			?>
-			<div class="wp-travel-upsell-message">
-				<div class="wp-travel-pro-feature-notice">
-					<h4><?php esc_html_e( 'Need Additional Tabs ?', 'wp-travel' ); ?></h4>
-					<p><?php esc_html_e( 'By upgrading to Pro, you can get global custom tab addition options with customized content and sorting options !', 'wp-travel' ); ?></p>
-					<a target="_blank" href="https://themepalace.com/downloads/wp-travel-utilites/"><?php esc_html_e( 'Get WP Travel Utilities Addon', 'wp-travel' ); ?></a>
-				</div>
-			</div>
-			<?php
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title' => __( 'Need Additional Tabs ?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
 		endif;
 		// Add custom Tabs Support.
 		do_action( 'wp_travel_custom_global_tabs' );
@@ -999,12 +1002,20 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		<div class="wp-travel-upsell-message">
-			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Need more payment gateway options ?', 'wp-travel' ); ?></h4>
-				<p><?php printf( __( '%1$sCheck All Payment Gateways %2$s OR %3$sRequest a new one%4$s', 'wp-travel' ), '<a target="_blank" href="http://wptravel.io/downloads">', '</a>', '<a target="_blank" href="http://wptravel.io/contact">', '</a>' ); ?></p>
-			</div>
-		</div>
+		
+		<br>
+		<?php
+			$args = array(
+				'title'      => __( 'Need more payment gateway options ?', 'wp-travel' ),
+				'content'    => '',
+				'link'       => 'http://wptravel.io/downloads/',
+				'link_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
+				'link2'      => 'http://wptravel.io/contact',
+				'link2_label' => __( 'Request a new one', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		?>
+		<br>
 		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' ); ?></h3>
 		<table class="form-table">
 			<tr>
