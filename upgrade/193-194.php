@@ -19,7 +19,7 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 	foreach ( $post_ids as $custom_post ) {
 		$custom_post_id = $custom_post->ID;
 
-		$pricing_option_type = get_post_meta( $custom_post_id, 'wp_travel_pricing_option_type', true );
+		$pricing_option_type = wp_travel_get_pricing_option_type( $custom_post_id );
 		$pricing_options     = get_post_meta( $custom_post_id, 'wp_travel_pricing_options', true );
 
 		if ( 'multiple-price' === $pricing_option_type && is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
