@@ -804,10 +804,10 @@ function wp_travel_book_now() {
 
 		$customer_name    = $first_name . ' ' . $last_name;
 		$customer_country = $country;
-		$customer_address = $_POST['wp_travel_address'];
+		$customer_address = isset( $_POST['wp_travel_address'] ) ? $_POST['wp_travel_address'] : '';
 		$customer_phone   = $phone;
 		$customer_email   = $email;
-		$customer_note    = $_POST['wp_travel_note'];
+		$customer_note    = isset( $_POST['wp_travel_note'] ) ? $_POST['wp_travel_note'] : '';
 
 		$email_tags = array(
 			'{sitename}'               => $sitename,

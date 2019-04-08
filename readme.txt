@@ -205,6 +205,7 @@ Release Date: 8th April 2019
 Enhancement:
 
 * Admin Notice list layout changed.
+* Hook enhanced to remove billing fields.
 
 Fixes: 
 
