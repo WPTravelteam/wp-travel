@@ -12,6 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
+> **WP Travel Mobile App**
+> Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
+
 WP Travel is a free powerful travel engine for making customized travel & tour agency websites on WordPress in minutes! With this SEO-friendly & scalable WordPress travel engine, you can create customized itinerary & travel packages on the fly. Powered with powerful addons, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
@@ -34,6 +37,11 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/?utm_source=addons&utm_medium=wishlist&utm_campaign=WP%20Plugin)
 * [WP Travel Field Editor](https://wptravel.io/downloads/wp-travel-field-editor/?utm_source=addons&utm_medium=field-editor&utm_campaign=WP%20Plugin)
 * [WP Travel Partial Payment](https://wptravel.io/downloads/wp-travel-partial-payment/?utm_source=addons&utm_medium=partial-payment&utm_campaign=WP%20Plugin)
+* [WP Travel Rest API](https://wptravel.io/downloads/wp-travel-rest-api/)
+* [WP Travel Downloads](https://wptravel.io/downloads/wp-travel-downloads/)
+* [WP Travel MailChimp](https://wptravel.io/downloads/wp-travel-mailchimp/)
+* [WP Travel Custom Filters](https://wptravel.io/downloads/wp-travel-custom-filter/)
+* [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/)
 
 
 = WP TRAVEL MAP ADDONS =
@@ -73,7 +81,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * **Tour Extras:** It allows you add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 7 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin) 
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 7 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -207,7 +215,7 @@ Enhancement:
 * Admin Notice list layout changed.
 * Hook enhanced to remove billing fields.
 
-Fixes: 
+Fixes:
 
 * Fixed lost password url on dashboard page. Previously it is going to worpress reset password link.
 * Fixed Filter by price high to low and low to high.
@@ -237,13 +245,13 @@ Enhancement:
 * Pricing function enhanced to get single, multiple and group price.
 * Trip page layout updated for trip extras.
 
-Fixes: 
+Fixes:
 
-* When doing quick edit, it clears all custom field(meta) values.  
-* Partial Payment Option is visible on checkout page even it is disabled from admin settings.  
-* Standard Paypal payment compatibility with multiple checkout.  
-* Date translation on trip page.  
-* Admin settings tab position placement changed. 
+* When doing quick edit, it clears all custom field(meta) values.
+* Partial Payment Option is visible on checkout page even it is disabled from admin settings.
+* Standard Paypal payment compatibility with multiple checkout.
+* Date translation on trip page.
+* Admin settings tab position placement changed.
 * Display Tabs in frontend isn't correct as per settings.
 * Booking not listed in WP Travel Dashboard. When booking made from frontend it is not listed as booking in Dashboard page.
 
