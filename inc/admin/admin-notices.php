@@ -59,7 +59,7 @@ add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
 	if ( ! in_array( $screen_id, $notice_pages ) ) { // Only display general notice on WP Travel pages.
 		return false;
 	}
-	
+
 	$show_notices = apply_filters( 'wp_travel_display_general_admin_notices', false );
 	if ( ! $show_notices ) {
 		return;

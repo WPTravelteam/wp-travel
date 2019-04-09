@@ -1783,12 +1783,12 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
-    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel' );
+    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
     $content = isset( $args['content'] ) ? $args['content'] : '';
     $link = isset( $args['link'] ) ? $args['link'] : '';
-    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'View WP Travel Addons' );
+    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'View WP Travel Addons', 'wp-travel' );
     $link2 = isset( $args['link2'] ) ? $args['link2'] : '';
-    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons' );
+    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons', 'wp-travel' );
     ?>
     <div class="wp-travel-upsell-message">
 		<div class="wp-travel-pro-feature-notice clearfix">

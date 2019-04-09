@@ -718,7 +718,7 @@ class WP_Travel_Admin_Metaboxes {
 	}
 
 	/**
-	 * Trip Info metabox.
+	 * Trip Info metabox. [ metabox is removed in utilities ]
 	 *
 	 * @param  Object $post Post object.
 	 */
