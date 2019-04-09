@@ -358,32 +358,6 @@ class WP_Travel_Admin_Info_Pointers {
 	}
 	function display_general_admin_notices( $display ) {
 
-		$screen       = get_current_screen();
-		$screen_id    = $screen->id;
-		$notice_pages = array(
-			'itinerary-booking_page_settings',
-			'itineraries_page_booking_chart', // may be not reqd
-			'itinerary-booking_page_booking_chart',
-			'edit-itinerary-booking',
-			'edit-travel_keywords',
-			'edit-travel_locations',
-			'edit-itinerary_types',
-			'edit-itineraries',
-			'itineraries',
-			'itinerary-booking',
-			'edit-activity',
-			'edit-wp-travel-coupons',
-			'edit-itinerary-enquiries',
-			'edit-tour-extras',
-			'edit-wp_travel_downloads',
-			'itinerary-booking_page_wp-travel-marketplace',
-			'itinerary-booking_page_wp_travel_custom_filters_page',
-		);
-		$notice_pages = apply_filters( 'wp_travel_admin_general_notice_page_screen_ids', $notice_pages );
-		if ( ! in_array( $screen_id, $notice_pages ) ) {
-			return false;
-		}
-
 		// Show notices channel if gdpr isn't dismissed.
 		global $wp_version;
 		$user_id = get_current_user_id();
