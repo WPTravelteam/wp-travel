@@ -231,6 +231,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/admin/admin-notices.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-uploader.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-tabs.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-metaboxes.php', WP_TRAVEL_ABSPATH );
@@ -424,6 +425,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			if ( version_compare( $this->version, '1.7.5', '>' ) ) {
 				include_once sprintf( '%s/upgrade/175-176.php', WP_TRAVEL_ABSPATH );
+			}
+			if ( version_compare( $this->version, '1.9.3', '>' ) ) {
+				include_once sprintf( '%s/upgrade/193-194.php', WP_TRAVEL_ABSPATH );
 			}
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {

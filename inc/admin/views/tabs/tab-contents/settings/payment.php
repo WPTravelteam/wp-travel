@@ -75,9 +75,9 @@ function settings_callback_payment( $tab, $args ) {
 			'title'      => __( 'Need more payment gateway options ?', 'wp-travel' ),
 			'content'    => '',
 			'link'       => 'http://wptravel.io/downloads/',
-			'link_text'  => __( 'Check All Payment Gateways', 'wp-travel' ),
+			'link_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
 			'link2'      => 'http://wptravel.io/contact',
-			'link2_text' => __( 'Request a new one', 'wp-travel' ),
+			'link2_label' => __( 'Request a new one', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	?>

@@ -88,13 +88,13 @@ function settings_callback_general( $tab, $args ) {
 	</div>
 
 	<?php
-		$args = array(
+		$upsell_args = array(
 			'title'     => __( 'Need alternative maps ?', 'wp-travel' ),
 			'content'   => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
 			'link'      => 'https://wptravel.io/downloads/',
 			'link_text' => __( 'View WP Travel Map addons', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wp_travel_upsell_message( $upsell_args );
 	?>
 	
 	<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Pages', 'wp-travel' ); ?></h3>
