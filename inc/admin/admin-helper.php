@@ -117,8 +117,8 @@ function wp_travel_marketplace_page() {
 			'name' => __( 'Travel Log', 'wp-travel' ),
 			'type' => 'free',
 			'img_url' => plugins_url( '/wp-travel/assets/images/devices_web.png' ),
-			'demo_url' => 'http://wensolutions.com/themes/travel-log/',
-			'detail_url' => 'https://downloads.wordpress.org/theme/travel-log.zip',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-log',
+			'detail_url' => 'http://wensolutions.com/themes/travel-log/',
 		),
 	);
 
