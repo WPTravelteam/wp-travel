@@ -11,21 +11,20 @@ $trip_code_disabled = '';
 $trip_code_input_name = 'name=wp_travel_trip_code';
 if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 	$trip_code_disabled = 'disabled=disabled';
-	$trip_code_input_name = '';
-
-	$args = array(
-		'title' => __( 'Need Custom Trip Code ?', 'wp-travel' ),
-		'content' => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
-		'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
-		'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
-	);
-	wp_travel_upsell_message( $args );
+	$trip_code_input_name = '';	
 endif;
 ?>
 <table class="form-table">
 	<tr>
 		<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
-		<td><input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" /></td>
+		<td>
+			<input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" />
+			<?php if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) : ?>
+			<p class="description">
+				<?php printf( __( 'Need Custom Trip Code ?%s Checkout WP Travel Utilities addons%s.', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank">', '<a>' ); ?>
+			</p>
+			<?php endif; ?>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
@@ -37,8 +36,8 @@ endif;
 		<td colspan="2">
 			<h4><?php esc_html_e( 'Short Description' ); ?></h4>
 			<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo $post->post_excerpt ?></textarea>
-			<p>
-				<?php printf( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts %s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt">', '<a>' ); ?>
+			<p class="description">
+				<?php printf( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts %s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ); ?>
 			</p>
 		</td>
 	</tr>	
