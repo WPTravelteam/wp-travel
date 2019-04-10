@@ -213,14 +213,13 @@
 
 #aside-wrap {
   float: right;
-  margin-right: -300px;
-  width: 280px; }
+  width: 26%; }
 
 .itineraries_page_wp-travel-marketplace #post-body {
   margin-right: 300px; }
 
 .wp-travel-marketplace-tab-wrap {
-  width: 100%;
+  width: 72%;
   margin-top: 50px;
   float: left; }
   .wp-travel-marketplace-tab-wrap ul {
