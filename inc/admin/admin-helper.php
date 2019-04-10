@@ -29,7 +29,7 @@ function wp_travel_marketplace_page() {
 
 	if ( ! $addons_data ) {
 
-		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/' );
+		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/?number=-1' );
 		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
 
 	}
