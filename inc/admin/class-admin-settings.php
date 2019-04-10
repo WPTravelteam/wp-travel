@@ -43,6 +43,8 @@ class WP_Travel_Admin_Settings {
 		add_action( "{$tab_hook_prefix}_facts", array( $this, 'settings_callback_facts' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_license", array( $this, 'settings_callback_license' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_misc_options_global", array( $this, 'settings_callback_misc_options_global' ), 11, 2 );
+		add_action( "{$tab_hook_prefix}_utilities_faq_global", array( $this, 'settings_callback_utilities_faq_global' ), 11, 2 );
+		add_action( "{$tab_hook_prefix}_cart_checkout_settings_global", array( $this, 'settings_callback_cart_checkout_settings_global' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_debug", array( $this, 'settings_callback_debug' ), 11, 2 );
 
 		// Save Settings.
@@ -138,6 +140,16 @@ class WP_Travel_Admin_Settings {
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 			'priority'      => 80,
+		);
+		$settings_fields['utilities_faq_global'] = array(
+			'tab_label'     => __( 'FAQs', 'wp-travel-pro' ),
+			'content_title' => __( 'Global FAQs', 'wp-travel-pro' ),
+			'priority'      => 85,
+		);
+		$settings_fields['cart_checkout_settings_global'] = array(
+			'tab_label'     => __( 'Cart / Checkout', 'wp-travel-pro' ),
+			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel-pro' ),
+			'priority'      => 86,
 		);
 		$settings_fields['debug']               = array(
 			'tab_label'     => __( 'Debug', 'wp-travel' ),
@@ -1148,6 +1160,44 @@ class WP_Travel_Admin_Settings {
 			</tr>
 		</table>
 		<?php
+	}
+
+	/**
+	 * Callback for Global Faq tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	public function settings_callback_utilities_faq_global( $tab, $args ) {
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title' => __( 'Need Additional Global FAQs ?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+		do_action( 'wp_travel_settings_tab_faq_fields', $args );
+	}
+
+	/**
+	 * Callback for Checkout tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	public function settings_callback_cart_checkout_settings_global( $tab, $args ) {
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title' => __( 'Need Checkout options ?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can get checkout option features and more !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+		do_action( 'wp_travel_settings_tab_cart_checkout_fields', $args );
 	}
 
 	/**

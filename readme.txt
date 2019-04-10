@@ -207,6 +207,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.9.5 =
+Release Date: 
+
+Enhancement:
+
+* Trip Tab Name update and content placement.
+
 = 1.9.4 =
 Release Date: 8th April 2019
 

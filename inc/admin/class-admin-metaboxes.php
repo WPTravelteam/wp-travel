@@ -26,6 +26,8 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
+
+		// Trip Tabs.
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'description_tab_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'itineraries_content_call_back' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
@@ -40,7 +42,9 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
 		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_downloads_callback' ), 10, 2 );
-
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_inventory_callback' ), 10, 2 );
+		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_cart_checkout_callback' ), 10, 2 );
+		
 	}
 
 	/**
@@ -48,10 +52,10 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function register_metaboxes() {
 		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
-		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
-		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		// add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 	}
 
 	/**
@@ -193,6 +197,7 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function remove_metaboxs() {
 		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE, 'side' );
+		remove_meta_box( 'postexcerpt', WP_TRAVEL_POST_TYPE, 'normal' );
 	}
 	/**
 	 * Clean Metabox Classes.
@@ -212,8 +217,8 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function add_tabs( $tabs ) {
 		$trips['detail']              = array(
-			'tab_label'     => __( 'Description', 'wp-travel' ),
-			'content_title' => __( 'Description', 'wp-travel' ),
+			'tab_label'     => __( 'General', 'wp-travel' ),
+			'content_title' => __( 'General', 'wp-travel' ),
 		);
 		$trips['itineraries_content'] = array(
 			'tab_label'     => __( 'Itinerary', 'wp-travel' ),
@@ -259,6 +264,14 @@ class WP_Travel_Admin_Metaboxes {
 			'tab_label'     => __( 'Downloads List', 'wp-travel' ),
 			'content_title' => __( 'Select Downloads Here', 'wp-travel' ),
 		);
+		$trips['inventory'] = array(
+			'tab_label'     => __( 'Inventory Options', 'wp-travel-pro' ),
+			'content_title' => __( 'Trip Inventory', 'wp-travel-pro' ),
+		);
+		$trips['cart_checkout'] = array(
+			'tab_label' => __( 'Cart / Checkout', 'wp-travel-pro' ),
+			'content_title' => __( 'Cart / Checkout Options', 'wp-travel-pro' ),
+        );
 
 		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
 		return apply_filters( 'wp_travel_tabs', $tabs );
@@ -543,9 +556,9 @@ class WP_Travel_Admin_Metaboxes {
 	}
 
 	/**
-	 * Callback Function For Itineraries Content Tabs
+	 * Callback Function For Downloads Content Tabs
 	 *
-	 * @param string $tab  tab name 'itineraries_content'.
+	 * @param string $tab  tab name 'downloads'.
 	 * @param array  $args arguments function arugments.
 	 * @return Mixed
 	 */
@@ -568,6 +581,58 @@ class WP_Travel_Admin_Metaboxes {
 		do_action( 'wp_travel_trip_downloads_tab_content', $args );
 	}
 
+	/**
+	 * Callback Function For Inventory Content Tabs
+	 *
+	 * @param string $tab  tab name 'inventory'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function wp_travel_inventory_callback( $tab, $args ) {
+
+		if ( 'inventory' !== $tab ) {
+			return;
+		}
+
+		if ( ! class_exists( 'WP_Travel_Inventory_Management_Core' ) ) :
+			$args = array(
+				'title' => __( 'Need to add your inventory options?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can add your inventory options in all of your trips !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+
+		do_action( 'wp_travel_trip_inventory_tab_content', $args );
+	}
+
+	/**
+	 * Callback Function For Inventory Content Tabs
+	 *
+	 * @param string $tab  tab name 'inventory'.
+	 * @param array  $args arguments function arugments.
+	 * @return Mixed
+	 */
+	public function wp_travel_cart_checkout_callback( $tab, $args ) {
+
+		if ( 'cart_checkout' !== $tab ) {
+			return;
+		}
+
+		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
+			$args = array(
+				'title' => __( 'Need to add your checkout options?', 'wp-travel' ),
+				'content' => __( 'By upgrading to Pro, you can add your checkout options for all of your trips !', 'wp-travel' ),
+				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+
+		do_action( 'wp_travel_trip_cart_checkout_tab_content', $args );
+	}
+	
 	/**
 	 * Callback Function For Itineraries Content Tabs
 	 *
