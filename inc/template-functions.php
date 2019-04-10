@@ -2369,7 +2369,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 								<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
 								<?php if ( $enable_sale ) : ?>
 									<del>
-										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
+										<span><?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s <span class="wp-travel-trip-price-figure" >%s </span> ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?></span>
 									</del>
 								<?php endif; ?>
 								<span class="person-count">
@@ -2583,7 +2583,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 									</div>
 								<?php } ?>
 									<div class="real_price">
-									<?php echo wp_travel_get_currency_symbol(); ?> <?php echo( esc_html( $display_price ) ); ?>
+									<?php echo wp_travel_get_currency_symbol(); ?> <span class="wp-travel-trip-price-figure"><?php echo( esc_html( $display_price ) ); ?></span>
 										<!--<i class="wt-icon wt-icon-rocket"></i>-->
 									</div>
 									<?php echo __( 'Per ', 'wp-travel' ) . esc_html( $per_label ); ?>
