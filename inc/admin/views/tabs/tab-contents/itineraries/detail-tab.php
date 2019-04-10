@@ -35,8 +35,11 @@ endif;
 	</tr>
 	<tr>
 		<td colspan="2">
-			<h4><?php esc_html_e( 'Excerpt' ); ?></h4>
+			<h4><?php esc_html_e( 'Short Description' ); ?></h4>
 			<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo $post->post_excerpt ?></textarea>
+			<p>
+				<?php printf( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts %s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt">', '<a>' ); ?>
+			</p>
 		</td>
 	</tr>	
 </table>

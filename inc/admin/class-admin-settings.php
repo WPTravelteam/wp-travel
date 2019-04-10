@@ -42,6 +42,7 @@ class WP_Travel_Admin_Settings {
 		add_action( "{$tab_hook_prefix}_payment", array( $this, 'settings_callback_payment' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_facts", array( $this, 'settings_callback_facts' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_license", array( $this, 'settings_callback_license' ), 11, 2 );
+		add_action( "{$tab_hook_prefix}_field_editor", array( $this, 'settings_callback_field_editor' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_misc_options_global", array( $this, 'settings_callback_misc_options_global' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_utilities_faq_global", array( $this, 'settings_callback_utilities_faq_global' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_cart_checkout_settings_global", array( $this, 'settings_callback_cart_checkout_settings_global' ), 11, 2 );
@@ -116,32 +117,37 @@ class WP_Travel_Admin_Settings {
 			'priority'      => 30,
 		);
 
-		$settings_fields['tabs_global']         = array(
+		$settings_fields['tabs_global']                   = array(
 			'tab_label'     => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 			'priority'      => 40,
 		);
-		$settings_fields['payment']             = array(
+		$settings_fields['payment']                       = array(
 			'tab_label'     => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
 			'priority'      => 50,
 		);
-		$settings_fields['facts']               = array(
+		$settings_fields['facts']                         = array(
 			'tab_label'     => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 			'priority'      => 60,
 		);
-		$settings_fields['license']             = array(
+		$settings_fields['license']                       = array(
 			'tab_label'     => __( 'License', 'wp-travel' ),
 			'content_title' => __( 'License Details', 'wp-travel' ),
 			'priority'      => 70,
 		);
-		$settings_fields['misc_options_global'] = array(
+		$settings_fields['field_editor']                  = array(
+			'tab_label'     => __( 'Field Editor', 'wp-travel-pro' ),
+			'content_title' => __( 'Field Editor', 'wp-travel-pro' ),
+			'priority'      => 75,
+		);
+		$settings_fields['misc_options_global']           = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 			'priority'      => 80,
 		);
-		$settings_fields['utilities_faq_global'] = array(
+		$settings_fields['utilities_faq_global']          = array(
 			'tab_label'     => __( 'FAQs', 'wp-travel-pro' ),
 			'content_title' => __( 'Global FAQs', 'wp-travel-pro' ),
 			'priority'      => 85,
@@ -151,7 +157,7 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel-pro' ),
 			'priority'      => 86,
 		);
-		$settings_fields['debug']               = array(
+		$settings_fields['debug']                         = array(
 			'tab_label'     => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
 			'priority'      => 90,
@@ -435,9 +441,9 @@ class WP_Travel_Admin_Settings {
 		<?php
 		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 			$args = array(
-				'title' => __( 'Want to get more e-mail customization options ?', 'wp-travel' ),
-				'content' => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
-				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'title'      => __( 'Want to get more e-mail customization options ?', 'wp-travel' ),
+				'content'    => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
@@ -889,9 +895,9 @@ class WP_Travel_Admin_Settings {
 		<?php
 		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 			$args = array(
-				'title' => __( 'Need Additional Tabs ?', 'wp-travel' ),
-				'content' => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
+				'content'    => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
@@ -1018,11 +1024,11 @@ class WP_Travel_Admin_Settings {
 		<br>
 		<?php
 			$args = array(
-				'title'      => __( 'Need more payment gateway options ?', 'wp-travel' ),
-				'content'    => '',
-				'link'       => 'http://wptravel.io/downloads/',
+				'title'       => __( 'Need more payment gateway options ?', 'wp-travel' ),
+				'content'     => '',
+				'link'        => 'http://wptravel.io/downloads/',
 				'link_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
-				'link2'      => 'http://wptravel.io/contact',
+				'link2'       => 'http://wptravel.io/contact',
 				'link2_label' => __( 'Request a new one', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
@@ -1089,6 +1095,25 @@ class WP_Travel_Admin_Settings {
 	 */
 	public function settings_callback_license( $tab, $args ) {
 		do_action( 'wp_travel_license_tab_fields', $args );
+	}
+
+	/**
+	 * Callback for Field Editor tab.
+	 *
+	 * @param  Array $tab  List of tabs.
+	 * @param  Array $args Settings arg list.
+	 */
+	public function settings_callback_field_editor( $tab, $args ) {
+		if ( ! class_exists( 'WP_Travel_Field_Editor_Core' ) ) :
+			$args = array(
+				'title'      => __( 'Want to customize your Traveler fields, billing fields and more?', 'wp-travel' ),
+				'content'    => __( 'By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
+				'link_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
+			);
+			wp_travel_upsell_message( $args );
+		endif;
+		do_action( 'wp_travel_settings_tab_field_editor_fields', $args );
 	}
 
 	/**
@@ -1171,9 +1196,9 @@ class WP_Travel_Admin_Settings {
 	public function settings_callback_utilities_faq_global( $tab, $args ) {
 		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 			$args = array(
-				'title' => __( 'Need Additional Global FAQs ?', 'wp-travel' ),
-				'content' => __( 'By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel' ),
-				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'title'      => __( 'Need Additional Global FAQs ?', 'wp-travel' ),
+				'content'    => __( 'By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
@@ -1190,9 +1215,9 @@ class WP_Travel_Admin_Settings {
 	public function settings_callback_cart_checkout_settings_global( $tab, $args ) {
 		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 			$args = array(
-				'title' => __( 'Need Checkout options ?', 'wp-travel' ),
-				'content' => __( 'By upgrading to Pro, you can get checkout option features and more !', 'wp-travel' ),
-				'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'title'      => __( 'Need Checkout options ?', 'wp-travel' ),
+				'content'    => __( 'By upgrading to Pro, you can get checkout option features and more !', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
