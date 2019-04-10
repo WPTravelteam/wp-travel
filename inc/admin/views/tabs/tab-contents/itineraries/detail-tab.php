@@ -11,7 +11,7 @@ $trip_code_disabled = '';
 $trip_code_input_name = 'name=wp_travel_trip_code';
 if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 	$trip_code_disabled = 'disabled=disabled';
-	$trip_code_input_name = '';	
+	$trip_code_input_name = '';
 endif;
 ?>
 <table class="form-table">
@@ -21,7 +21,7 @@ endif;
 			<input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" />
 			<?php if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) : ?>
 			<p class="description">
-				<?php printf( __( 'Need Custom Trip Code ?%s Checkout WP Travel Utilities addons%s.', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank">', '<a>' ); ?>
+				<?php printf( __( 'Need Custom Trip Code? Check %s Utilities addons%s', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
 			</p>
 			<?php endif; ?>
 		</td>
@@ -34,13 +34,13 @@ endif;
 	</tr>
 	<tr>
 		<td colspan="2">
-			<h4><?php esc_html_e( 'Short Description' ); ?></h4>
+			<h4><label for="excerpt"><?php esc_html_e( 'Short Description' ); ?></label></h4>
 			<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo $post->post_excerpt ?></textarea>
 			<p class="description">
 				<?php printf( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts %s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ); ?>
 			</p>
 		</td>
-	</tr>	
+	</tr>
 </table>
 <?php
 wp_nonce_field( 'wp_travel_save_data_process', 'wp_travel_save_data' );

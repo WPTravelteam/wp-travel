@@ -2227,4 +2227,25 @@ span.wp-travel-message {
     left: 0;
     line-height: inherit; }
 
+.form-table .description {
+  font-size: 10px; }
+
+.wp-travel-upsell-badge {
+  border: 1px solid #5cb85c;
+  background-color: transparent;
+  color: #5cb85c;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  transition: background-color 0.2s ease-out;
+  padding: .2em .6em;
+  font-size: 0.8em;
+  border-radius: 5px;
+  text-decoration: none !important; }
+
+.wp-travel-upsell-badge:hover {
+  background-color: #5cb85c;
+  color: #fff; }
+
 /*# sourceMappingURL=wp-travel-back-end.css.map */

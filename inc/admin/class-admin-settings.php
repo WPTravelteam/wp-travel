@@ -142,19 +142,19 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Field Editor', 'wp-travel-pro' ),
 			'priority'      => 75,
 		);
-		$settings_fields['misc_options_global']           = array(
-			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
-			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
-			'priority'      => 80,
-		);
 		$settings_fields['utilities_faq_global']          = array(
 			'tab_label'     => __( 'FAQs', 'wp-travel-pro' ),
 			'content_title' => __( 'Global FAQs', 'wp-travel-pro' ),
-			'priority'      => 85,
+			'priority'      => 80,
 		);
 		$settings_fields['cart_checkout_settings_global'] = array(
 			'tab_label'     => __( 'Cart / Checkout', 'wp-travel-pro' ),
 			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel-pro' ),
+			'priority'      => 85,
+		);
+		$settings_fields['misc_options_global']           = array(
+			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
+			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 			'priority'      => 86,
 		);
 		$settings_fields['debug']                         = array(
@@ -1020,7 +1020,7 @@ class WP_Travel_Admin_Settings {
 				</td>
 			</tr>
 		</table>
-		
+
 		<br>
 		<?php
 			$args = array(
