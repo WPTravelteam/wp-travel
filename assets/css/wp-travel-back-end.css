@@ -2248,4 +2248,18 @@ span.wp-travel-message {
   background-color: #5cb85c;
   color: #fff; }
 
+a.wp-travel-tablenav {
+  display: inline-block;
+  padding: 3px;
+  margin: 4px; }
+  a.wp-travel-tablenav span {
+    border: 1px solid green;
+    font-size: 8px;
+    padding: 1px 3px;
+    border-radius: 2px;
+    color: green;
+    margin: 0px 0px 0px 6px;
+    display: inline-block;
+    line-height: 11px; }
+
 /*# sourceMappingURL=wp-travel-back-end.css.map */
