@@ -16,7 +16,7 @@ function wp_travel_display_critical_admin_notices() {
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-error"> 
 		<div class="notification-title">
-			<h3><?php echo esc_html__( 'WP Travel Alert' ); ?></h3>
+			<h3><?php echo esc_html__( 'WP Travel Alert', 'wp-travel' ); ?></h3>
 		</div>
 		<div class="notification-content">
 			<ul>
@@ -67,7 +67,7 @@ add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
 		<div class="notification-title">
-			<h3><?php echo esc_html__( 'WP Travel Notifications' ); ?></h3>
+			<h3><?php echo esc_html__( 'WP Travel Notifications', 'wp-travel' ); ?></h3>
 		</div>
 		<div class="notification-content">
 			<ul>

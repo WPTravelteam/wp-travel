@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.1.1
 Requires PHP: 5.5
-Stable tag: 1.9.4
+Stable tag: 1.9.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,11 +208,18 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.5 =
-Release Date: 
+Release Date: 11th April 2019
 
 Enhancement:
 
 * Trip Tab Name update and content placement.
+* Compatibility with WP Travel Pro
+* Tab label placement changed for settings and trips.
+* Trip Code Metabox and excerpt moved to General Tab.
+* Marketplace addons and themes listing update.
+
+Fixes:
+* Mionr laoyut issue fixes.
 
 = 1.9.4 =
 Release Date: 8th April 2019

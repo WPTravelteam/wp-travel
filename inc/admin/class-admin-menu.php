@@ -12,6 +12,9 @@ class WP_Travel_Admin_Menu {
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'System Status', 'wp-travel' ), __( 'Status', 'wp-travel' ), 'manage_options', 'sysinfo', array( 'WP_Travel_Admin_Settings', 'get_system_info' ) );
 
 		// WP Travel Submenu.
+		if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
+			add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Downloads', 'wp-travel' ), __( 'Downloads', 'wp-travel' ), 'manage_options', 'download_upsell_page', 'wp_travel_get_download_upsell' );
+		endif;
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Reports', 'wp-travel' ), __( 'Reports', 'wp-travel' ), 'manage_options', 'booking_chart', 'get_booking_chart' );
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'WP Travel Settings', 'wp-travel' ), __( 'Settings', 'wp-travel' ), 'manage_options', 'settings', array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ) );
 		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Marketplace', 'wp-travel' ), __( 'Marketplace', 'wp-travel' ), 'manage_options', 'wp-travel-marketplace', 'wp_travel_marketplace_page' );

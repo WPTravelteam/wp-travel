@@ -122,8 +122,8 @@ function wp_travel_marketplace_page() {
 		),
 	);
 
-    $info_btn_text = __( 'View Demo' );
-    $download_btn_text = __( 'View Detail' );
+    $info_btn_text = __( 'View Demo', 'wp-travel' );
+    $download_btn_text = __( 'View Detail', 'wp-travel' );
 
 	?>
 	<div class="wrap">
@@ -277,13 +277,28 @@ Its great plugin for travel or tour agent websites."', 'wp-travel' ) ?></h5>
 <?php
 }
 
+// Upsell Message Callback for Download submenu. WP Travel > Downloads.
+function wp_travel_get_download_upsell() {
+    ?>
+    <h2><?php echo esc_html( 'Downloads' ); ?></h2>
+    <?php
+    if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
+        $args = array(
+            'title'      => __( 'Need to add your downloads ?', 'wp-travel' ),
+            'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
+            'link'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+            'link_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+        );
+        wp_travel_upsell_message( $args );
+    endif;
+}
+
 /**
  * Modify Admin Footer Message.
  */
 function wp_travel_modify_admin_footer_admin_settings_page(){
 
-	printf(__('If you like %1s, please consider leaving us a %2s rating. A huge thank you from WEN Solutions in advance!', 'wp-travel' ), '<strong>WP Travel</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>' );
-
+	printf(__('Love %1s, Consider leaving us a %2s rating, also checkout %3s . A huge thanks in advance!', 'wp-travel' ), '<strong>WP Travel ?</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' );
 }
 /**
  * Modify Admin Footer Message.

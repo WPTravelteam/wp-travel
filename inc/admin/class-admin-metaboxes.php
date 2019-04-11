@@ -246,12 +246,12 @@ class WP_Travel_Admin_Metaboxes {
 				'content_title' => __( 'Locations', 'wp-travel' ),
 			),
 			'cart_checkout'       => array(
-				'tab_label'     => __( 'Cart / Checkout', 'wp-travel-pro' ),
-				'content_title' => __( 'Cart / Checkout Options', 'wp-travel-pro' ),
+				'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
+				'content_title' => __( 'Cart / Checkout Options', 'wp-travel' ),
 			),
 			'inventory'           => array(
-				'tab_label'     => __( 'Inventory Options', 'wp-travel-pro' ),
-				'content_title' => __( 'Trip Inventory', 'wp-travel-pro' ),
+				'tab_label'     => __( 'Inventory Options', 'wp-travel' ),
+				'content_title' => __( 'Trip Inventory', 'wp-travel' ),
 			),
 			'faq'                 => array(
 				'tab_label'     => __( 'FAQs', 'wp-travel' ),

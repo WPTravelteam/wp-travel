@@ -26,7 +26,7 @@ class Wp_Travel_Extras_Frontend {
      */
     public function is_extras_pro() {
 
-        return class_exists( 'WP_Travel_Tour_Extras' );
+        return class_exists( 'WP_Travel_Tour_Extras_Core' );
 
     }
     /**
