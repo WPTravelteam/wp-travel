@@ -29,7 +29,7 @@ function wp_travel_marketplace_page() {
 
 	if ( ! $addons_data ) {
 
-		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/' );
+		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/?number=-1' );
 		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
 
 	}
@@ -39,7 +39,92 @@ function wp_travel_marketplace_page() {
 		$addons_data = json_decode( $addons_data );
 		$addons_data = $addons_data->products;
 
-	endif;
+    endif;
+    
+    // Hardcoded themes data.
+	$themes_data = array(
+		'travel-base-pro' => array(
+			'name' => __( 'Travel Base Pro', 'wp-travel' ),
+			'type' => 'premium',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-pro.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-base-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-base-pro/',
+		),
+		'travel-base' => array(
+			'name' => __( 'Travel Base', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-free.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-base-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-base/',
+		),
+		'travel-ultimate-pro' => array(
+			'name' => __( 'Travel Ultimate Pro', 'wp-travel' ),
+			'type' => 'premium',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-pro.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate-pro/',
+		),
+		'travel-ultimate' => array(
+			'name' => __( 'Travel Ultimate', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-free.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate/',
+		),
+		'pleased-pro' => array(
+			'name' => __( 'Pleased Pro', 'wp-travel' ),
+			'type' => 'premium',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-pro.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=pleased-pro',
+			'detail_url' => 'https://themepalace.com/downloads/pleased-pro/',
+		),
+		'pleased' => array(
+			'name' => __( 'Pleased', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-free.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=pleased-pro',
+			'detail_url' => 'https://themepalace.com/downloads/pleased/',
+		),
+		'travel-gem-pro' => array(
+			'name' => __( 'Travel Gem Pro', 'wp-travel' ),
+			'type' => 'premium',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-pro.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-gem-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-gem-pro/',
+		),
+		'travel-gem' => array(
+			'name' => __( 'Travel Gem', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-free.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-gem-pro',
+			'detail_url' => 'https://themepalace.com/downloads/travel-gem/',
+		),
+		'tourable-pro' => array(
+			'name' => __( 'Tourable Pro', 'wp-travel' ),
+			'type' => 'premium',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-pro.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=tourable-pro',
+			'detail_url' => 'https://themepalace.com/downloads/tourable-pro/',
+		),
+		'tourable' => array(
+			'name' => __( 'Tourable', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-free.png',
+			'demo_url' => 'https://wptravel.io/demo/?demo=tourable-pro',
+			'detail_url' => 'https://themepalace.com/downloads/tourable/',
+		),
+		'travel-log' => array(
+			'name' => __( 'Travel Log', 'wp-travel' ),
+			'type' => 'free',
+			'img_url' => plugins_url( '/wp-travel/assets/images/devices_web.png' ),
+			'demo_url' => 'https://wptravel.io/demo/?demo=travel-log',
+			'detail_url' => 'http://wensolutions.com/themes/travel-log/',
+		),
+	);
+
+    $info_btn_text = __( 'View Demo' );
+    $download_btn_text = __( 'View Detail' );
+
 	?>
 	<div class="wrap">
 		<div id="poststuff">
@@ -55,20 +140,22 @@ function wp_travel_marketplace_page() {
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
-							<div class="single-module">
-								<div class="single-module-image">
-									<a href="http://wensolutions.com/themes/travel-log/" target="_blank">
-									<img width="423" height="237" src="<?php echo plugins_url( '/wp-travel/assets/images/devices_web.png' ) ?>" class="" alt="" >
-									</a>
-								</div>
-								<div class="single-module-content clearfix">
-									<h4 class="text-title"><a href="http://wensolutions.com/themes/travel-log/" target="_blank">
-									<span class="dashicons-wp-travel">
-									</span><?php esc_html_e( 'Travel Log', 'wp-travel' ); ?></a></h4>
-									<a class="btn-default pull-left" href="http://wensolutions.com/themes/travel-log/" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ); ?></a>
-									<a class="btn-default pull-right" href="https://downloads.wordpress.org/theme/travel-log.zip" target="_blank"><?php esc_html_e( 'Download', 'wp-travel' ); ?></a>
-								</div>
-							</div>
+                            <?php foreach ( $themes_data as $theme ) : ?>
+                                <div class="single-module">
+                                    <div class="single-module-image">
+                                        <a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
+                                        <img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
+                                        </a>
+                                    </div>
+                                    <div class="single-module-content clearfix">
+                                        <h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
+                                        <span class="dashicons-wp-travel">
+                                        </span><?php echo esc_html( $theme['name'] ); ?></a></h4>
+                                        <a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
+                                        <a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
 						</div>
 					</div>
 					<?php if ( $addons_data ) : ?>
@@ -190,12 +277,28 @@ Its great plugin for travel or tour agent websites."', 'wp-travel' ) ?></h5>
 <?php
 }
 
+// Upsell Message Callback for Download submenu. WP Travel > Downloads.
+function wp_travel_get_download_upsell() {
+    ?>
+    <h2><?php echo esc_html( 'Downloads' ); ?></h2>
+    <?php
+    if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
+        $args = array(
+            'title'      => __( 'Need to add your downloads ?', 'wp-travel' ),
+            'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
+            'link'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+            'link_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+        );
+        wp_travel_upsell_message( $args );
+    endif;
+}
+
 /**
  * Modify Admin Footer Message.
  */
 function wp_travel_modify_admin_footer_admin_settings_page(){
 
-	printf(__('If you like %1s, please consider leaving us a %2s rating. A huge thank you from WEN Solutions in advance!', 'wp-travel' ), '<strong>WP Travel</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>' );
+    printf(__('Love %1s, Consider leaving us a %2s rating, also checkout %3s . A huge thanks in advance!', 'wp-travel' ), '<strong>WP Travel ?</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' );
 
 }
 /**

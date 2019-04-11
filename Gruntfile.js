@@ -188,14 +188,24 @@ module.exports = function(grunt) {
             }
         },
         sass: {
+            options: {
+                sourcemap: 'none',
+                style: 'expanded',
+                lineNumbers: false
+            },
             dist: {
                 files: {
-                    'assets/css/wp-travel-admin.css': 'assets/css/sass/admin/wp-travel-admin.scss',
-                    'assets/css/wp-travel-back-end.css': 'assets/css/sass/wp-travel-back-end.scss',
-                    'assets/css/wp-travel-front-end.css': 'assets/css/sass/wp-travel-front-end.scss',
-                    'assets/css/wp-travel-tabs.css': 'assets/css/sass/wp-travel-tabs.scss',
-                    'assets/css/wp-travel-user-styles.css': 'assets/css/sass/wp-travel-user-styles.scss',
+                    'assets/css/wp-travel-back-end.css': 'assets/sass/wp-travel-back-end.scss',
+                    'assets/css/wp-travel-front-end.css': 'assets/sass/wp-travel-front-end.scss',
+                    'assets/css/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
+                    'assets/css/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
                 }
+            }
+        },
+        watch: {
+            css: {
+                files: ['assets/sass/**/*.scss'],
+                tasks: ['sass'],                
             }
         },
         // CSS minification.
@@ -277,6 +287,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-wp-i18n');
     grunt.loadNpmTasks('grunt-checktextdomain');

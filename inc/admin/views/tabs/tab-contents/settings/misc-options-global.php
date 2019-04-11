@@ -11,6 +11,17 @@ function settings_callback_misc_options_global( $tab, $args ) {
 	$enable_og_tags             = $settings['enable_og_tags'];
 	$wp_travel_gdpr_message     = $settings['wp_travel_gdpr_message'];
 	$open_gdpr_in_new_tab       = $settings['open_gdpr_in_new_tab'];
+
+	if ( ! class_exists( 'WP_Travel_Wishlists_Core' ) ) :
+		$args = array(
+			'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
+			'content'    => __( 'Whishlists helps user to save trip they like for future, so that they can book them later.!', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
+			'link_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
+		);
+		wp_travel_upsell_message( $args );
+	endif;
+
 	?>
 
 	<div class="form_field">
@@ -59,4 +70,25 @@ function settings_callback_misc_options_global( $tab, $args ) {
 		</div>
 	</div>
 	<?php
+	if ( ! class_exists( 'WP_Travel_Mailchimp_Core' ) ) :
+		$args = array(
+			'title'      => __( 'Using Mailchimp for email marketing ?', 'wp-travel' ),
+			'content'    => __( 'You can import customer email from booking and inquiry to Mailchimp. That help help you grow your business.', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/downloads/wp-travel-mailchimp/',
+			'link_label' => __( 'Get WP Travel Mailchimp', 'wp-travel' ),
+		);
+		wp_travel_upsell_message( $args );
+	endif;
+	echo '<br>';
+	if ( ! class_exists( 'WP_Travel_Currency_Exchange_Rates_Core' ) ) :
+		$args = array(
+			'title'      => __( 'Display current exchange rate in your site.', 'wp-travel' ),
+			'content'    => __( 'You can display current exchange rate for different currency in pages or sidebar of your site.!', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
+			'link_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
+		);
+		wp_travel_upsell_message( $args );
+	endif;
+
+	do_action( 'wp_travel_settings_tab_misc_options_fields', $args );
 }
