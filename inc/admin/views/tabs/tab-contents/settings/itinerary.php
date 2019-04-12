@@ -46,11 +46,17 @@ function settings_callback_itinerary( $tab, $args ) {
 	<div class="form_field wp-travel-tax-price-options">
 		<label class="label_title" for=""><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ); ?></label>
 		<div class="subject_input">
-			<label><input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-pricing-option" type="radio">
-			<?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>
+			<div class="wp-radio">
+				<div class="radio">
+					<input <?php checked( 'by-pricing-option', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" id="trip_pricing_options_layout_by_pricing" value="by-pricing-option" type="radio">
+					<label class="radio-label" for="trip_pricing_options_layout_by_pricing" ><?php esc_html_e( 'List by pricing options ( Default )', 'wp-travel' ); ?></label>
+				</div>
 
-			<label> <input <?php checked( 'by-date', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" value="by-date" type="radio">
-			<?php esc_html_e( 'List by fixed departure dates', 'wp-travel' ); ?></label>
+				<div class="radio">
+				<input <?php checked( 'by-date', $trip_pricing_options_layout ); ?> name="trip_pricing_options_layout" id="trip_pricing_options_layout_by_date" value="by-date" type="radio">
+					<label class="radio-label" for="trip_pricing_options_layout_by_date" ><?php esc_html_e( 'List by fixed departure dates.', 'wp-travel' ); ?></label>
+				</div>
+			</div>
 			<figcaption><?php esc_html_e( 'This options will control how you display trip dates and prices.', 'wp-travel' ); ?></figcaption>
 		</div>
 	</div>

@@ -90,6 +90,14 @@ class WP_Travel_License {
 	public static function setting_fields( $settings_args ) {
 		$count_premium_addons = self::count_premium_addons();
 		if ( $count_premium_addons > 0 ) {
+
+			$grid_template_columns = '';
+			if ( $count_premium_addons < 3 ) {
+				$grid_template_columns = 'grid-template-columns: repeat(' . $count_premium_addons . ', 1fr)';
+			}
+			?>
+			<div class="license_wrapper" style="<?php echo esc_attr( $grid_template_columns ); ?>">
+			<?php
 			$premium_addons = self::$addons;
 			$settings       = isset( $settings_args['settings'] ) ? $settings_args['settings'] : array();
 			foreach ( $premium_addons as $key => $premium_addon ) :
@@ -97,33 +105,38 @@ class WP_Travel_License {
 				$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
 				$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
 				?>
-		<style>
-			#wp-travel-tab-content-license .form-table input[class*=button].button-license{height:35px;line-height:35px}
-		</style>
-		<div class="wp-travel-tab-product-single">
-			<h4 class="wp-travel-tab-content-title wp-travel-tab-product-title"><?php echo esc_html( $premium_addon['item_name'] ); ?></h4>
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th><label for="<?php echo $key; ?>-license-key"><?php esc_html_e( 'License Key', 'wp-travel' ); ?></label></th>
-						<td>
-							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key">
-							<?php if ( $license_key ) : ?>
-								<span class="license-status-warp" style="position:relative;" >
-									<span style="position:absolute;top:0;right:10px">
-									<?php if ( 'valid' === $status ) : ?>
-										<span style="color:green;"><?php esc_html_e( 'Active', 'wp-travel' ); ?></span>
-									<?php elseif ( 'invalid' === $status ) : ?>
-										<span style="color:red;"><?php esc_html_e( 'Invalid', 'wp-travel' ); ?></span>
-									<?php elseif ( 'expired' === $status ) : ?>
-										<span style="color:red;"><?php esc_html_e( 'Expired', 'wp-travel' ); ?></span>
-									<?php elseif ( 'inactive' === $status ) : ?>
-										<span style="color:orange;"><?php esc_html_e( 'Inactive', 'wp-travel' ); ?></span>
-									<?php endif; ?>
-									</span>
-								</span>
-							<?php endif; ?>
+				<style>
+					#wp-travel-tab-content-license .form-table input[class*=button].button-license{height:35px;line-height:35px}
+				</style>
 
+				<?php
+				$status_message = '';
+				$status_class = '';
+				if ( $license_key ) :
+					if ( 'valid' === $status ) :
+						$status_message = __( 'Active', 'wp-travel' );
+						$status_class = 'fa-check';
+					elseif ( 'invalid' === $status ) :
+						$status_message = __( 'Invalid', 'wp-travel' );
+						$status_class = 'fa-times';
+					elseif ( 'expired' === $status ) :
+						$status_message = __( 'Expired', 'wp-travel' );
+						$status_class = 'fa-times';
+					elseif ( 'inactive' === $status ) :
+						$status_message = __( 'Inactive', 'wp-travel' );
+						$status_class = 'fa-times';
+					endif;
+				endif;
+				?>
+
+				<div class="license_grid">
+					<div class="form_field">
+						<label for="key1" class="control-label label_title">
+							<?php echo esc_html( sprintf( 'License key : %s', $premium_addon['item_name'] ) ); ?>
+							<?php echo ( $status_message ) ? esc_html( sprintf( '[%s]', $status_message ) ) : ''; ?>
+						</label>
+						<div class="subject_input">
+							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key">
 							<?php if ( $license_key || 'valid' !== $status ) : ?>
 
 								<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
@@ -136,14 +149,18 @@ class WP_Travel_License {
 								<input type="hidden" name="save_settings_button" value="true" />
 
 							<?php endif; ?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+							<?php if ( $status_class ) : ?>
+								<i class="fas <?php echo esc_html( $status_class ); ?>"></i>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
 
 				<?php
 			endforeach;
+			?>
+			</div>
+			<?php
 		}
 		$args = array(
 			'title' => __( 'Want to add more features in WP Travel?', 'wp-travel' ),

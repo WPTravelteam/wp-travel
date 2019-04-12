@@ -69,7 +69,7 @@ function settings_callback_general( $tab, $args ) {
 	</div>
 	<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
 
-	<div class="form_field">
+	<div class="form_field wp-travel-map-option <?php echo esc_attr( $map_key ); ?>">
 		<label class="label_title" for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ); ?></label>
 		<div class="subject_input">
 		

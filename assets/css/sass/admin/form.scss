@@ -88,7 +88,7 @@
 
 .label_title {
 	color: #757575;
-	font-size: 15px;
+	font-size: 1em;
 	text-transform: capitalize;
 	font-weight: 500;
 }
@@ -159,7 +159,8 @@
 .license_wrapper {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 30px;
+	margin-bottom: 30px;
+	// grid-gap: 30px;
 
 	.license_grid {
 		background: transparent;
@@ -285,6 +286,7 @@
 
 	input[type="radio"] {
 		opacity: 0;
+		display:none;
 
 		+.radio-label {
 			&:before {
@@ -332,8 +334,19 @@
 
 }
 
-.wp-radio {
-	position: absolute;
-	top: -30px;
-	left: 0px;
+// .wp-radio {
+// 	position: absolute;
+// 	top: -30px;
+// 	left: 0px;
+// }
+
+@media screen and (max-width: 1067px) {
+	.license_wrapper{
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+@media screen and (min-width: 1068px) and (max-width: 1366px) {
+	.license_wrapper{
+		grid-template-columns: repeat(2, 1fr);
+	}
 }

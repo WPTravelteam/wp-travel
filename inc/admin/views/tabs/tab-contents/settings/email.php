@@ -36,19 +36,17 @@ function settings_callback_email( $tab, $args ) {
 		wp_travel_upsell_message( $args );
 	endif;
 	?>
-	<table class="form-table">
-		<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel' ); ?></h4></td></tr>
-
-		<tr>
-			<th>
-				<label for="wp_travel_global_from_email"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
-			</th>
-			<td>
-				<input value="<?php echo isset( $args['settings']['wp_travel_from_email'] ) ? $args['settings']['wp_travel_from_email'] : get_option( 'admin_email' ); ?>" type="email" name="wp_travel_from_email" id="wp_travel_global_from_email">
-			</td>
-		</tr>
-	</table>
+	<h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel' ); ?></h4>
+	<div class="form_field" id="wp-travel-paypal-email" >
+		<label class="label_title" for="wp_travel_global_from_email"><?php esc_html_e( 'From Email', 'wp-travel' ); ?></label>
+		<div class="subject_input">
+			<input value="<?php echo isset( $args['settings']['wp_travel_from_email'] ) ? $args['settings']['wp_travel_from_email'] : get_option( 'admin_email' ); ?>" type="email" name="wp_travel_from_email" id="wp_travel_global_from_email">
+			<figcaption><label for="wp_travel_global_from_email"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ); ?></label></figcaption>
+		</div>
+	</div>
+	
 	<?php do_action( 'wp_travel_tab_content_before_booking_tamplate', $args ); ?>
+	
 	<div class="wp-collapse-open clearfix">
 		<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 		<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>

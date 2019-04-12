@@ -159,19 +159,21 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Field Editor', 'wp-travel-pro' ),
 			'priority'      => 75,
 			'callback'      => 'settings_callback_field_editor',
-			'icon'          => 'fa-id-badge',
+			'icon'          => 'fa-newspaper',
 		);
 		$settings_fields['utilities_faq_global']          = array(
 			'tab_label'     => __( 'FAQs', 'wp-travel-pro' ),
 			'content_title' => __( 'Global FAQs', 'wp-travel-pro' ),
-			'callback'      => 'settings_callback_utilities_faq_global',
 			'priority'      => 80,
+			'callback'      => 'settings_callback_utilities_faq_global',
+			'icon'          => 'fa-question-circle',
 		);
 		$settings_fields['cart_checkout_settings_global'] = array(
 			'tab_label'     => __( 'Cart / Checkout', 'wp-travel-pro' ),
 			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel-pro' ),
-			'callback'      => 'settings_callback_cart_checkout_settings_global',
 			'priority'      => 85,
+			'callback'      => 'settings_callback_cart_checkout_settings_global',
+			'icon'          => 'fa-shopping-cart',
 		);
 		$settings_fields['misc_options_global']           = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
