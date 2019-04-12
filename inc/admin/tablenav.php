@@ -31,8 +31,8 @@ function wp_travel_tablenav( $which ) {
 			}
 			?>			
 			<a href="https://wptravel.io/downloads/wp-travel-import-export/" class="wp-travel-tablenav" target="_blank" >
-				<?php esc_html_e( 'Import or Export CSV' ); ?>
-				<span ><?php esc_html_e( 'Get Pro' ); ?></span>
+				<?php esc_html_e( 'Import or Export CSV', 'wp-travel' ); ?>
+				<span ><?php esc_html_e( 'Get Pro', 'wp-travel' ); ?></span>
 			</a>
 			<?php
 		}

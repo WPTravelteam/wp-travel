@@ -154,7 +154,7 @@ class WP_Travel_Admin_Settings {
 		);
 		$settings_fields['misc_options_global']           = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
-			'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+			'content_title' => __( 'Miscellaneous Options', 'wp-travel' ),
 			'priority'      => 86,
 		);
 		$settings_fields['debug']                         = array(

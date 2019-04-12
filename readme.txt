@@ -208,7 +208,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.5 =
-Release Date: 11th April 2019
+Release Date: 14th April 2019
 
 Enhancement:
 
