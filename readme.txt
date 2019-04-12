@@ -5,11 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.1.1
 Requires PHP: 5.5
-<<<<<<< HEAD
 Stable tag: 2.0.0
-=======
-Stable tag: 1.9.5
->>>>>>> f6671ebcfd09174e1202a049f7fec5e4d0a83fe8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

@@ -253,6 +253,7 @@ jQuery(document).ready(function($) {
                 var next_el = ( 'trip_date' === $(el).attr('name') ) ? $( 'input[name=trip_departure_date]' ) :$( 'input[name=trip_date]' )
                 var day_to_add = parseInt( el.data('totaldays' ) );
                 if ( day_to_add < 1 ) {
+                    next_el.val( formattedDate );
                   return;
                 }
                 var _moment = moment( date );

@@ -67,11 +67,7 @@ add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
 	?>
 	<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
 		<div class="notification-title">
-<<<<<<< HEAD
 			<h3><?php echo esc_html__( 'WP Travel Notifications', 'wp-travel' ); ?></h3>
-=======
-			<h3><?php echo esc_html__( 'WP Travel Notifications', 'wp-travel' ); ?></h3>
->>>>>>> f6671ebcfd09174e1202a049f7fec5e4d0a83fe8
 		</div>
 		<div class="notification-content">
 			<ul>

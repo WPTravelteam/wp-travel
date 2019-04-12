@@ -51,7 +51,7 @@ function settings_callback_payment( $tab, $args ) {
 		<label class="label_title" for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ); ?></label>
 		<div class="subject_input">
 			<div class="onoffswitch">
-			<input value="no" name="payment_option_paypal" type="hidden" />
+				<input value="no" name="payment_option_paypal" type="hidden" />
 				<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal" class="onoffswitch-checkbox" />
 				<label class="onoffswitch-label" for="payment_option_paypal">
 					<span class="onoffswitch-inner"></span>
