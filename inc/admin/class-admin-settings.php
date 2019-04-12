@@ -155,22 +155,22 @@ class WP_Travel_Admin_Settings {
 			'icon'          => 'fa-id-badge',
 		);
 		$settings_fields['field_editor']                  = array(
-			'tab_label'     => __( 'Field Editor', 'wp-travel-pro' ),
-			'content_title' => __( 'Field Editor', 'wp-travel-pro' ),
+			'tab_label'     => __( 'Field Editor', 'wp-travel' ),
+			'content_title' => __( 'Field Editor', 'wp-travel' ),
 			'priority'      => 75,
 			'callback'      => 'settings_callback_field_editor',
 			'icon'          => 'fa-newspaper',
 		);
 		$settings_fields['utilities_faq_global']          = array(
-			'tab_label'     => __( 'FAQs', 'wp-travel-pro' ),
-			'content_title' => __( 'Global FAQs', 'wp-travel-pro' ),
+			'tab_label'     => __( 'FAQs', 'wp-travel' ),
+			'content_title' => __( 'Global FAQs', 'wp-travel' ),
 			'priority'      => 80,
 			'callback'      => 'settings_callback_utilities_faq_global',
 			'icon'          => 'fa-question-circle',
 		);
 		$settings_fields['cart_checkout_settings_global'] = array(
-			'tab_label'     => __( 'Cart / Checkout', 'wp-travel-pro' ),
-			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel-pro' ),
+			'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
+			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel' ),
 			'priority'      => 85,
 			'callback'      => 'settings_callback_cart_checkout_settings_global',
 			'icon'          => 'fa-shopping-cart',

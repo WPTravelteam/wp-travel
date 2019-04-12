@@ -62,7 +62,7 @@ $alabaster: #f7f7f1; // Red like color.
     flex-wrap: wrap;
   }
 
-  
+
   .col-md-6 {
     min-height: 1px;
     position: relative;
@@ -71,14 +71,14 @@ $alabaster: #f7f7f1; // Red like color.
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   @media screen and (min-width: 768px) {
     .col-md-6 {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       max-width: 50%;
     }
-  
+
   }
 
 [class^="icon-"],
@@ -2512,5 +2512,45 @@ span.wp-travel-message {
             left: 0;
             line-height: inherit;
         }
+    }
+}
+
+.form-table .description {
+      font-size: 10px;
+}
+
+.wp-travel-upsell-badge {
+  border: 1px solid #5cb85c;
+  background-color: transparent;
+  color: #5cb85c;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  transition: background-color 0.2s ease-out;
+  padding: .2em .6em;
+  font-size: 0.8em;
+  border-radius: 5px;
+  text-decoration: none !important;
+}
+
+.wp-travel-upsell-badge:hover {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+a.wp-travel-tablenav{
+    display: inline-block;
+    padding: 3px;
+    margin: 4px;
+    span{
+        border: 1px solid green;
+        font-size: 8px;
+        padding: 1px 3px;
+        border-radius: 2px;
+        color: green;
+        margin: 0px 0px 0px 6px;
+        display: inline-block;
+        line-height: 11px;
     }
 }
