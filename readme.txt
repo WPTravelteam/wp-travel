@@ -23,7 +23,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 
 > **WP Travel PRO**
-> With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/pro/)
+> With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
 
 = WP TRAVEL PAYMENT ADDONS =
