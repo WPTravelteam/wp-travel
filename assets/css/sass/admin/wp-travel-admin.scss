@@ -196,13 +196,116 @@
 }
 
 // Accordion.
-.email-global-accordion.tab-accordion {
-    .panel-title {
-        padding: 0;
-        a {
-            display: block;
-            padding: 10px 15px 10px 15px;
+.tab-accordion {
+    .panel-heading {
+        position: relative;
+        .collapse-icon {
+            position: absolute;
+            right: 50px;
+            width: 20px;
+            height: 20px;
+            top: calc( 50% - 10px);
+            border-radius: 50%;
+            float: right;
+            text-align: center;
         }
+        [data-toggle="collapse"] {
+            color: #444;
+            & span.collapse-icon:after {
+                font-family: 'dashicons';
+                content: "\f142";
+                font-size: 18px;
+            }
+        }
+        [data-toggle="collapse"].collapsed {
+            color: #999;
+            & span.collapse-icon:after {
+                content: "\f140";
+            }
+            &:hover {
+                color: #444;
+            }
+        }
+        .collapse-icon:focus {
+            box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, .8);
+            outline: none;
+        }
+    }
+    h4 {
+        // border: 1px solid #ddd;
+        // padding: 10px 15px 10px 45px;
+        margin: 0 !important;
+        background-color: #f7f7f1;
+        position: relative;
+        &:hover {
+            background-color: #fff;
+        }
+        a {
+            color: #999;
+            text-decoration: none;
+            .faq-label {
+                padding-right: 50px;
+                display: block;
+            }
+        }
+        .wt-accordion-close,
+        .wt-utils-accordion-close {
+            position: absolute;
+            right: 10px;
+            color: #ca4a1f;
+            font-size: 16px;
+            top: calc( 50% - 8px);
+            cursor: pointer;
+        }
+    }
+    .panel-collapse {
+        padding: 0;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+    .panel-body {
+        margin-bottom: -4px;
+    }
+    textarea {
+        width: 100%;
+        min-height: 130px;
+        border: none;
+        padding: 10px 15px;
+        border-top: 1px solid #ddd;
+    }
+    .panel-wrap {
+        padding: 10px 15px;
+        textarea {
+            box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07);
+            width: 100%;
+            display: block;
+            border: 1px solid #ddd;
+        }
+        .faq-question-text {
+            width: 100%;
+            margin-top: 5px;
+        }
+    }
+    .panel-default {
+        margin-bottom: 15px;
+        background-color: #fff;
+    }
+    .panel-wrap-itinerary {
+        padding: 10px 15px;
+        label {
+            width: 100%;
+            margin-right: 10%;
+            vertical-align: baseline;
+            max-width: 100px;
+            float: left;
+        }
+        input {
+            width: 60%;
+        }
+    }
+    .wp-travel-itinerary {
+        display: inline-block;
+        width: 60%;
     }
 }
 
@@ -302,7 +405,7 @@
 
 	>a {
 		display: block;
-		padding: 30px 40px;
+		padding: 20px 30px;
 		background: transparent;
 		box-shadow: 8px 0 49px rgba(0, 0, 0, 0.06);
 		margin-bottom: 10px;
@@ -310,6 +413,7 @@
 		font-weight: 500;
 		text-transform: capitalize;
 		color: #7A7A7A;
+		margin-bottom: 0px;
 	}
 }
 
@@ -323,18 +427,6 @@
 	&>.panel-body {
 		border-top-color: #e6e6e6;
 		padding: 50px 40px;
-		// position: relative;
-		// display: inline-block;
-	
-		&::after {
-			position: absolute;
-			background: url("../images/Path.png");
-			width: 100%;
-			height: 198px;
-			content: "";
-			left: 0;
-			bottom: 0;
-		}
 	}
 	
 }

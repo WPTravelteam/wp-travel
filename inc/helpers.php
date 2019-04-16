@@ -1872,10 +1872,12 @@ function wp_travel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
  */
 function wp_travel_sort_array_by_priority( $array, $priority_key = 'priority' ) {
 	$priority = array();
-	foreach ( $array as $key => $row ) {
-		$priority[ $key ] = isset( $row[ $priority_key ] ) ? $row[ $priority_key ] : 1;
+	if ( is_array( $array ) && count( $array ) > 0 ) {
+		foreach ( $array as $key => $row ) {
+			$priority[ $key ] = isset( $row[ $priority_key ] ) ? $row[ $priority_key ] : 1;
+		}
+		array_multisort( $priority, SORT_ASC, $array );
 	}
-	array_multisort( $priority, SORT_ASC, $array );
 	return $array;
 }
 
