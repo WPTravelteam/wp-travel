@@ -113,7 +113,6 @@ function settings_callback_facts( $tab ) {
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
 	?>
-	
 
 	<div class="form_field">
 		<label class="label_title" for="wp_travel_trip_facts_enable"><?php esc_html_e( 'Trip Facts', 'wp-travel' ); ?></label>
@@ -148,9 +147,6 @@ function settings_callback_facts( $tab ) {
 			<?php echo wp_travel_trip_facts_setting_sample(); ?>
 		</div>
 	</div>
-
-	<!-- new-design -->
-		
 
 	<!-- ends -->
 	<?php
