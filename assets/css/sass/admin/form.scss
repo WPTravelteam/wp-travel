@@ -198,17 +198,19 @@
 		}
 	}
 }
+.wp-trave-settings-form-warp{
 
-.wp-travel-sorting-tabs {
-	border-collapse: collapse;
-	width: 100%;
-
-	.form_field {
-		display: block;
-		margin-bottom: 0;
-
-		.onoffswitch {
-			margin: 0 auto;
+	.wp-travel-sorting-tabs {
+		border-collapse: collapse;
+		width: 100%;
+	
+		.form_field {
+			display: block;
+			margin-bottom: 0;
+	
+			.onoffswitch {
+				margin: 0 auto;
+			}
 		}
 	}
 }
@@ -334,11 +336,95 @@
 
 }
 
-// .wp-radio {
-// 	position: absolute;
-// 	top: -30px;
-// 	left: 0px;
-// }
+.form_field.hidden{
+	display:none;
+}
+
+.custom-multi-select {
+    .select-main {
+        padding: 0px 25px 0px 0px;
+        border: 1px solid #999;
+        position: relative;
+        display: inline-block;
+        min-width: 200px;
+        .selected-item {
+            line-height: 30px;
+            padding-left: 5px;
+            display: block;
+            cursor: pointer;
+        }
+        ul {
+            visibility: hidden;
+            opacity: 0;
+            margin: 0;
+            position: absolute;
+            display: inline-block;
+            box-sizing: border-box;
+            top: calc( 100% + 1px);
+            width: 100%;
+            left: 0;
+            li {
+                margin: 0;
+                background: #fff;
+                padding: 0;
+                box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.14);
+                font-size: 12px;
+                border: none;
+                input {
+                    position: relative !important;
+                    width: auto;
+                    pointer-events: none;
+                }
+                label {
+                    display: block;
+                    line-height: 18px;
+                    padding: 5px;
+                    border-bottom: 1px solid #ddd;
+                }
+                &.selected {
+                    background-color: #0073aa;
+                    label {
+                        color: #fff;
+                    }
+                }
+            }
+            &.wp-travel-active {
+                visibility: visible;
+                opacity: 1;
+                z-index: 9;
+                max-height: 150px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                display: inline-block;
+                box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.33);
+            }
+        }
+    }
+    .carret {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-top: 5px solid #555;
+        position: absolute;
+        top: 45%;
+        right: 8px;
+        cursor: pointer;
+    }
+    .close {
+        position: absolute;
+        top: 45%;
+        right: 8px;
+        cursor: pointer;
+        &:before {
+            position: absolute;
+            top: -8px;
+            right: 1px;
+            content: 'x';
+        }
+    }
+}
 
 @media screen and (max-width: 1067px) {
 	.license_wrapper{

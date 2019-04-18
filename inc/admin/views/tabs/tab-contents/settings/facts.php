@@ -26,11 +26,10 @@ function settings_callback_facts( $tab ) {
 						<a role="button" data-toggle="collapse" data-parent="#accordion-fact" href="#collapse-fact-<?php echo esc_attr( $i ); ?>" aria-expanded="true" aria-controls="collapse-fact-<?php echo esc_attr( $i ); ?>">
 							<?php echo $name ? esc_html( $name ) : __( 'Your field name', 'wp-travel' ); ?>
 							<span class="collapse-icon"></span>
-							<span class="fact-remover" title="remove-table">
-									<i class="dashicons dashicons-no-alt"></i>
-								</span>
 							
 						</a>
+						<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close fact-remover"></span> 
+						<!-- Enhancement : need to use wt-accordion-close to delete row instead fact-remover -->
 					</h4>
 				</div>
 				<div id="collapse-fact-<?php echo esc_attr( $i ); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">

@@ -14,9 +14,10 @@
 		foreach ( $tabs as $key => $tab ) :
 			$icon = isset( $tab['icon'] ) ? $tab['icon'] : 'fa-thumbtack';
 			$class = ( 0 === $i ) ? 'wp-travel-tab-active' : '';
+			$callback = isset( $tab['callback'] ) ? $tab['callback'] : ''; // just to display callback function.
 		?>
 
-		<li id="wp-travel-tab-<?php echo esc_attr( $key ); ?>"  ><a href="#wp-travel-tab-content-<?php echo esc_attr( $key ); ?>" class="<?php echo esc_attr( $class ); ?>"><i class="fas <?php echo esc_attr( $icon ); ?>"></i><?php echo esc_attr( $tab['tab_label'] ); ?></a></li>
+		<li data-cb="<?php echo esc_attr( $callback ) ?>" id="wp-travel-tab-<?php echo esc_attr( $key ); ?>"  ><a href="#wp-travel-tab-content-<?php echo esc_attr( $key ); ?>" class="<?php echo esc_attr( $class ); ?>"><i class="fas <?php echo esc_attr( $icon ); ?>"></i><?php echo esc_attr( $tab['tab_label'] ); ?></a></li>
 		<?php endforeach; ?>
 	</ul>
 	<div class="wp-travel-tabs-contents">

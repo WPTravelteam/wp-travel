@@ -190,7 +190,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_enqueue_style( 'wp-travel-admin-style', self::$assets_path . 'assets/css/wp-travel-admin' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 	
 			// Tab for settings page.
-			$setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons' );
+			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons' );
 			if ( in_array( $screen->id, $setting_allowed ) ) {
 				wp_enqueue_style( 'font-awesome-css' );
 				wp_enqueue_style( 'select2-style' );
@@ -206,7 +206,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 	
 			$screen = get_current_screen();
 			// Tab for settings page.
-			$setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings' );
+			// $setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings' );
 			if ( in_array( $screen->id, $setting_allowed ) ) {
 				wp_register_script( 'wp-travel-tabs', self::$assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wp-color-picker', 'select2-js' ), WP_TRAVEL_VERSION, 1 );
 				wp_enqueue_script( 'wp-travel-fields-script' );

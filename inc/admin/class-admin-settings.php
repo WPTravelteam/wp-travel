@@ -33,7 +33,7 @@ class WP_Travel_Admin_Settings {
 		$collection      = self::$collection;
 		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
 		$wp_travel_tabs  = new WP_Travel_Admin_Tabs();
-		$tabs            = $wp_travel_tabs->list_by_collection( self::$collection );
+		$tabs            = $wp_travel_tabs->list_by_collection( $collection );
 		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 			foreach ( $tabs as $tab_key => $tab ) {
 				$filename          = str_replace( '_', '-', $tab_key ) . '.php';
