@@ -48,21 +48,6 @@ class WP_Travel_Admin_Metaboxes {
 			}
 		}
 
-		// Trip Tabs.
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'location_tab_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'advance_tab_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'call_back' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'price_tab_call_back' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_includes_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_facts_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_downloads_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_inventory_callback' ), 10, 2 );
-		// add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_cart_checkout_callback' ), 10, 2 );
 	}
 
 	/**
@@ -77,91 +62,91 @@ class WP_Travel_Admin_Metaboxes {
 				'tab_label'     => __( 'General', 'wp-travel' ),
 				'content_title' => __( 'General', 'wp-travel' ),
 				'priority'      => 10,
-				'callback'      => 'trip_callback_detail',
+				'callback'      => 'wp_travel_trip_callback_detail',
 				'icon'          => 'fa-sticky-note',
 			),
 			'itineraries_content' => array(
 				'tab_label'     => __( 'Itinerary', 'wp-travel' ),
 				'content_title' => __( 'Outline', 'wp-travel' ),
 				'priority'      => 20,
-				'callback'      => 'trip_callback_itineraries_content',
+				'callback'      => 'wp_travel_trip_callback_itineraries_content',
 				'icon'          => 'fa-clipboard-list',
 			),
 			'price'               => array(
 				'tab_label'     => __( 'Dates and Prices', 'wp-travel' ),
 				'content_title' => __( 'Dates and Prices', 'wp-travel' ),
 				'priority'      => 30,
-				'callback'      => 'trip_callback_price',
+				'callback'      => 'wp_travel_trip_callback_price',
 				'icon'          => 'fa-tag',
 			),
 			'trip_includes'       => array(
 				'tab_label'     => __( 'Includes/ Excludes', 'wp-travel' ),
 				'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
 				'priority'      => 40,
-				'callback'      => 'trip_callback_trip_includes',
+				'callback'      => 'wp_travel_trip_callback_trip_includes',
 				'icon'          => 'fa-sliders-h',
 			),
 			'trip_facts'          => array(
 				'tab_label'     => __( 'Facts', 'wp-travel' ),
 				'content_title' => __( 'Trip Facts', 'wp-travel' ),
 				'priority'      => 50,
-				'callback'      => 'trip_callback_trip_facts',
+				'callback'      => 'wp_travel_trip_callback_trip_facts',
 				'icon'          => 'fa-industry',
 			),
 			'images_gallery'      => array(
 				'tab_label'     => __( 'Gallery', 'wp-travel' ),
 				'content_title' => __( 'Gallery', 'wp-travel' ),
 				'priority'      => 60,
-				'callback'      => 'trip_callback_images_gallery',
+				'callback'      => 'wp_travel_trip_callback_images_gallery',
 				'icon'          => 'fa-images',
 			),
 			'locations'           => array(
 				'tab_label'     => __( 'Locations', 'wp-travel' ),
 				'content_title' => __( 'Locations', 'wp-travel' ),
 				'priority'      => 70,
-				'callback'      => 'trip_callback_locations',
+				'callback'      => 'wp_travel_trip_callback_locations',
 				'icon'          => 'fa-map-marked-alt',
 			),
 			'cart_checkout'       => array(
 				'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
 				'content_title' => __( 'Cart / Checkout Options', 'wp-travel' ),
 				'priority'      => 80,
-				'callback'      => 'trip_callback_cart_checkout',
+				'callback'      => 'wp_travel_trip_callback_cart_checkout',
 				'icon'          => 'fa-shopping-cart',
 			),
 			'inventory'           => array(
 				'tab_label'     => __( 'Inventory Options', 'wp-travel' ),
 				'content_title' => __( 'Trip Inventory', 'wp-travel' ),
 				'priority'      => 90,
-				'callback'      => 'trip_callback_inventory',
+				'callback'      => 'wp_travel_trip_callback_inventory',
 				'icon'          => 'fa-truck-moving',
 			),
 			'faq'                 => array(
 				'tab_label'     => __( 'FAQs', 'wp-travel' ),
 				'content_title' => __( 'FAQs', 'wp-travel' ),
 				'priority'      => 100,
-				'callback'      => 'trip_callback_faq',
+				'callback'      => 'wp_travel_trip_callback_faq',
 				'icon'          => 'fa-question-circle',
 			),
 			'downloads'           => array(
 				'tab_label'     => __( 'Downloads List', 'wp-travel' ),
 				'content_title' => __( 'Select Downloads Here', 'wp-travel' ),
 				'priority'      => 110,
-				'callback'      => 'trip_callback_downloads',
+				'callback'      => 'wp_travel_trip_callback_downloads',
 				'icon'          => 'fa-download',
 			),
 			'tabs'             => array(
 				'tab_label'     => __( 'Tabs', 'wp-travel' ),
 				'content_title' => __( 'Tabs', 'wp-travel' ),
 				'priority'      => 120,
-				'callback'      => 'trip_callback_tabs',
+				'callback'      => 'wp_travel_trip_callback_tabs',
 				'icon'          => 'fa-folder-open',
 			),
 			'misc_options'        => array(
 				'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 				'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
 				'priority'      => 120,
-				'callback'      => 'trip_callback_misc_options',
+				'callback'      => 'wp_travel_trip_callback_misc_options',
 				// 'icon'          => 'fa-images',
 			),
 

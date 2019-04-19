@@ -6,7 +6,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function settings_callback_general( $tab, $args ) {
+function wp_travel_settings_callback_general( $tab, $args ) {
 	$settings = $args['settings'];
 
 		$currency_list         = wp_travel_get_currency_list();

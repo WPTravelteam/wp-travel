@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function settings_callback_tabs_global( $tab, $args ) {
+function wp_travel_settings_callback_tabs_global( $tab, $args ) {
 	$settings           = $args['settings'];
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 

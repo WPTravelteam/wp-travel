@@ -1,7 +1,7 @@
 <?php
 
-if ( ! function_exists( 'trip_callback_locations' ) ) {
-	function trip_callback_locations() {
+if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
+	function wp_travel_trip_callback_locations() {
 		global $post;
 
 		$map_data = get_wp_travel_map_data();
