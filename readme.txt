@@ -222,6 +222,7 @@ Enhancement:
 
 Fixes:
 
+* WP Travel displaying empty alert notification.
 * Datepicker Console error in admin booking.
 * Add to cart issue with some multiple trips.
 * Admin Trips tab sale price field show hide issue. Previously it was not hiding sale price on pricing option change.
