@@ -460,8 +460,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -571,8 +573,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Need to add your downloads?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-				'link_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+				'link2_label' => __( 'Get WP Travel Downloads', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -597,8 +601,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Need to add your inventory options?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can add your inventory options in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -623,8 +629,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Need to add your checkout options?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can add your checkout options for all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -653,8 +661,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -804,8 +814,10 @@ class WP_Travel_Admin_Metaboxes {
 			$args = array(
 				'title'      => __( 'Need Custom Trip Code ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;

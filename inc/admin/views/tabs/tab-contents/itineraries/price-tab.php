@@ -798,8 +798,10 @@ if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 	$args = array(
 		'title' => __( 'Need More Options ?', 'wp-travel' ),
 		'content' => __( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ),
-		'link' => 'https://wptravel.io/downloads/wp-travel-utilities/',
-		'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+		'link'       => 'https://wptravel.io/wp-travel-pro/',
+        'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+		'link2' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+		'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 	);
 	wp_travel_upsell_message( $args );
 endif;

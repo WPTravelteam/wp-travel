@@ -346,8 +346,10 @@ class WP_Travel_Admin_Info_Pointers {
 					$args = array(
 						'title'      => __( 'WP Travel Importer', 'wp-travel' ),
 						'content'    => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
-						'link'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
-						'link_label' => __( 'Get WP Travel Import/Export Addon', 'wp-travel' ),
+						'link'       => 'https://wptravel.io/wp-travel-pro/',
+            			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+						'link2'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
+						'link2_label' => __( 'Get WP Travel Import/Export', 'wp-travel' ),
 					);
 					wp_travel_upsell_message( $args );
 				?>

@@ -22,8 +22,10 @@ add_action( 'wp_travel_admin_map_area', 'wp_travel_google_map', 10, 2 );
 		$args = array(
 			'title'      => __( 'Need alternative maps ?', 'wp-travel' ),
 			'content'    => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/downloads/category/map/',
-			'link_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/wp-travel-pro/',
+      'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'link2'       => 'https://wptravel.io/downloads/category/map/',
+			'link2_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	?>

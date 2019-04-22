@@ -256,8 +256,10 @@ class WP_Travel_Admin_Settings {
 			$upsell_args = array(
 				'title'      => __( 'Need alternative maps ?', 'wp-travel' ),
 				'content'    => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/category/map/',
-				'link_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/category/map/',
+				'link2_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $upsell_args );
 		?>
@@ -443,8 +445,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Want to get more e-mail customization options ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -897,8 +901,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1026,10 +1032,12 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'       => __( 'Need more payment gateway options ?', 'wp-travel' ),
 				'content'     => '',
-				'link'        => 'http://wptravel.io/downloads/',
-				'link_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
-				'link2'       => 'http://wptravel.io/contact',
-				'link2_label' => __( 'Request a new one', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'        => 'http://wptravel.io/downloads/',
+				'link2_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
+				'link3'       => 'http://wptravel.io/contact',
+				'link3_label' => __( 'Request a new one', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		?>
@@ -1108,8 +1116,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Want to customize your Traveler fields, billing fields and more?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
-				'link_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
+				'link2_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1137,8 +1147,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
 				'content'    => __( 'Whishlists helps user to save trip they like for future, so that they can book them later.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-wishlists/',
-				'link_label' => __( 'Get WP Travel Wishlists', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-wishlists/',
+				'link2_label' => __( 'Get WP Travel Wishlists', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1207,8 +1219,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Display current exchange rate in your site.', 'wp-travel' ),
 				'content'    => __( 'You can display current exchange rate for different currency in pages or sidebar of your site.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/',
-				'link_label' => __( 'Get WP Travel Currency Exchange Rates', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/',
+				'link2_label' => __( 'Get WP Travel Currency Exchange Rates', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1220,8 +1234,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Using Mailchimp for email marketing ?', 'wp-travel' ),
 				'content'    => __( 'You can import customer email from booking and inquiry to Mailchimp. That help you grow your business.', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-mailchimp/',
-				'link_label' => __( 'Get WP Travel Mailchimp', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-mailchimp/',
+				'link2_label' => __( 'Get WP Travel Mailchimp', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1241,8 +1257,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Need Additional Global FAQs ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
@@ -1260,8 +1278,10 @@ class WP_Travel_Admin_Settings {
 			$args = array(
 				'title'      => __( 'Need Checkout options ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get checkout option features and more !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;
