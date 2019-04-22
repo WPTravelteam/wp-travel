@@ -2268,33 +2268,33 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 		?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
-				<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
-					<ul class="availabily-list <?php echo 'yes' === $fixed_departure ? 'additional-col' : ''; ?>">
-						<li class="availabily-heading clearfix">
-							<div class="date-from">
-								<?php echo esc_html__( 'Start', 'wp-travel' ); ?>
+				<ul class="availabily-list <?php echo 'yes' === $fixed_departure ? 'additional-col' : ''; ?>">
+					<li class="availabily-heading clearfix">
+						<div class="date-from">
+							<?php echo esc_html__( 'Start', 'wp-travel' ); ?>
+						</div>
+						<?php if ( $show_end_date ) : ?>
+							<div class="date-to">
+								<?php echo esc_html__( 'End', 'wp-travel' ); ?>
 							</div>
-							<?php if ( $show_end_date ) : ?>
-								<div class="date-to">
-									<?php echo esc_html__( 'End', 'wp-travel' ); ?>
-								</div>
-							<?php endif; ?>
+						<?php endif; ?>
+						<div class="status">
+							<?php echo esc_html__( 'Group Size', 'wp-travel' ); ?>
+						</div>
+						<?php if ( $status_col ) : ?>
 							<div class="status">
-								<?php echo esc_html__( 'Group Size', 'wp-travel' ); ?>
+								<?php echo esc_html__( 'Status', 'wp-travel' ); ?>
 							</div>
-							<?php if ( $status_col ) : ?>
-								<div class="status">
-									<?php echo esc_html__( 'Status', 'wp-travel' ); ?>
-								</div>
-							<?php endif; ?>
-							<div class="price">
-								<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
-							</div>
-							<div class="action">
-								&nbsp;
-							</div>
-						</li>
-						<li class="availabily-content clearfix" >
+						<?php endif; ?>
+						<div class="price">
+							<?php echo esc_html__( 'Price', 'wp-travel' ); ?>
+						</div>
+						<div class="action">
+							&nbsp;
+						</div>
+					</li>
+					<li class="availabily-content clearfix" >
+						<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
 							<?php if ( 'yes' == $fixed_departure ) : ?>
 								<div class="date-from">
 									<span class="availabily-heading-label"><?php echo esc_html__( 'start:', 'wp-travel' ); ?></span>
@@ -2426,9 +2426,9 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 							<div class="wp-travel-booking-row-single-price">
 								<?php do_action( 'wp_travel_trip_extras' ); ?>
 							</div>
-						</li>
-					</ul>
-				</form>
+						</form>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<?php
