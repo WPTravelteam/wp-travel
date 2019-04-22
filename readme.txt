@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.1.1
 Requires PHP: 5.5
-Stable tag: 1.9.5
+Stable tag: 1.9.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -212,6 +212,20 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 1.9.6 =
+Release Date: 22nd April 2019
+
+Enhancement:
+
+* Set WP Travel Dashboard tab menu priority to change placement of tabs. 
+
+Fixes:
+
+* Datepicker Console error in admin booking.
+* Add to cart issue with some multiple trips.
+* Admin Trips tab sale price field show hide issue. Previously it was not hiding sale price on pricing option change.
+* Minor billing fields warning in admin booking.
 
 = 1.9.5 =
 Release Date: 15th April 2019

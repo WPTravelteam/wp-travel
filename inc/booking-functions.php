@@ -172,9 +172,9 @@ function wp_travel_booking_info( $post ) {
 	// 2. Edit Booking Section.
 	if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
 		$checkout_fields  = wp_travel_get_checkout_form_fields();
-		$traveller_fields = $checkout_fields['traveller_fields'];
-		$billing_fields   = $checkout_fields['billing_fields'];
-		$payment_fields   = $checkout_fields['payment_fields'];
+		$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
+		$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
+		$payment_fields   = isset( $checkout_fields['payment_fields'] ) ? $checkout_fields['payment_fields'] : array();
 
 		$wp_travel_post_id           = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 		$ordered_data                = get_post_meta( $booking_id, 'order_data', true );

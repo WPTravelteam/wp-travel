@@ -2547,7 +2547,7 @@ ul.availabily-list {
         }
     }
     &.additional-col {
-        li {
+        li { 
             >div {
                 // width: 16.66%;
                 width: 14.26%;
@@ -2654,11 +2654,11 @@ ul.availabily-list {
         font-size: 13px;
         padding: 0px;
     }
-    ul.availabily-list li>div span {
+    ul.availabily-list li form >div span {
         // display: block;
         font-size: 14px;
     }
-    ul.availabily-list li>div.action .btn {
+    ul.availabily-list li form >div.action .btn {
         font-size: 10px;
         margin-right: 0px;
     }
@@ -2681,7 +2681,7 @@ ul.availabily-list {
         grid-gap: 30px;
     }
     ul.availabily-list {
-        li>div {
+        li > form > div {
             display: block;
             width: 100% !important;
             position: relative;
@@ -2704,7 +2704,7 @@ ul.availabily-list {
                 }
             }
         }
-        li.availabily-content>div.date-from:after {
+        li.availabily-content form >div.date-from:after {
             top: 0;
             right: auto;
             left: 0;
@@ -3641,7 +3641,23 @@ ul.wp-travel-error {
         }
     }
 }
-
+.wp-travel-add-to-cart-form{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+#wp-travel-date-price{
+    .wp-travel-add-to-cart-form{
+        > div.date-from,
+        > div.group-size,
+        > div.no-of-pax,
+        > div.price,
+        > div.action,
+        {
+            width:14.66%
+        }
+    }
+}
 .trip_list_by_fixed_departure_dates {
     .trip_list_by_fixed_departure_dates_header {
         margin-bottom: 10px;
@@ -3695,10 +3711,10 @@ ul.wp-travel-error {
         padding-left: 0;
         >li {
             border: 1px solid #f2f2f2;
-            display: flex;
-            flex-wrap: wrap;
+            
             padding: 20px;
             list-style-type: none;
+            
             &.pricing_unavailable {
                 .trip_list_by_fixed_departure_dates_wrap{
                     color: #c7d0d9;
@@ -3931,7 +3947,7 @@ ul.wp-travel-error {
 }
 li {
 
-    &.pricing_unavailable{
+    &.pricing_unavailable form {
         >div{
             color: #c7d0d9;
             pointer-events: none;
