@@ -226,7 +226,7 @@ Fixes:
 * Datepicker Console error in admin booking.
 * Add to cart issue with some multiple trips.
 * Admin Trips tab sale price field show hide issue. Previously it was not hiding sale price on pricing option change.
-* Minor billing fields warning in admin booking.
+* Billing fields warning notices in admin booking.
 
 = 1.9.5 =
 Release Date: 15th April 2019
