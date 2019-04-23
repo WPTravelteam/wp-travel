@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function settings_callback_email( $tab, $args ) {
+function wp_travel_settings_callback_email( $tab, $args ) {
 	$settings = $args['settings'];
 
 		$send_booking_email_to_admin = $settings['send_booking_email_to_admin'];

@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function settings_callback_payment( $tab, $args ) {
+function wp_travel_settings_callback_payment( $tab, $args ) {
 	$settings = $args['settings'];
 
 	$partial_payment          = $settings['partial_payment'];

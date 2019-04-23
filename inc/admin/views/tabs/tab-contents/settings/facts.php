@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function settings_callback_facts( $tab ) {
+function wp_travel_settings_callback_facts( $tab ) {
 	$settings = wp_travel_get_settings();
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 	
