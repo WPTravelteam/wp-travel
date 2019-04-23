@@ -1,0 +1,654 @@
+.wp-travel-dashboard-form {
+    input {
+    outline: none;
+  }
+  input[type="checkbox"] {
+      height: 20px;
+      width: 20px;
+      line-height:18px;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 0.4em 0.4em 0;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid #AAAAAA;
+      -webkit-appearance: none;
+  }
+  input[type="checkbox"] {
+      border-radius: 2px;
+      position:relative;
+  }
+  input[type="checkbox"]:not(:disabled):hover {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+  input[type="radio"]:active:not(:disabled),
+  input[type="checkbox"]:active:not(:disabled) {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+  input[type="checkbox"]:checked {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+
+  input[type="checkbox"]:checked:not(:disabled) {
+      background: rgba(58, 197, 201, 1);
+  }
+  input[type="checkbox"]:checked:before {
+      font-weight: bold;
+      color: white;
+      content: '\2713';
+      margin-left: 0px;
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+      left: 4px;
+  }
+}
+.login-logo {
+    background:rgba(208, 208, 208, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    width: 142px;
+    transition: 0.5s cubic-bezier(1, 0, 0, 1);
+
+    @media (max-width:767.99px){
+      width:100%;
+      img{
+        margin-bottom:0 !important;
+      }
+    }
+}
+.login-page {
+    margin: auto;
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s ease;
+    min-width: 290px;
+    max-width: 492px;
+    border: 1px solid #ddd;
+
+    @media (max-width:767.99px){
+      flex-direction:column;
+    }
+
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: rgba(210, 210, 210, 0.70);
+    margin: 0 auto;
+    padding:30px;
+    text-align: center;
+    width: 100%;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    outline: 0;
+    background: #fff;
+    width: 100%;
+    margin: 0 0 15px;
+    padding:5px 15px 5px 50px !important;
+    box-sizing: border-box;
+    font-size: 14px;
+    height:40px;
+    line-height:40px;
+
+  }
+  h3{
+    margin-top: 0;
+    margin-bottom: 30px;
+    color:#333;
+  }
+  button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #df1814;
+    border: 0;
+    padding: 10px 30px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    letter-spacing: 3px;
+    border-radius: 0;
+
+    &:hover,
+    &:focus,
+    &:active{
+      background: #f83531;
+    }
+  }
+  .message {
+    margin: 40px 0 0;
+    color: #464646;
+    font-size: 12px;
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  }
+  .register-form,
+  .forgot-form {
+    display: none;
+  }
+  .login-form,
+  .register-form,
+  .forgot-form,
+  .wp-travel-ResetPassword{
+      span.user-username,
+      span.user-password,
+      .user-name,
+      .user-email,
+      .user-password-key {
+          position: relative;
+          display: block;
+          &:before{
+            font-family: "wt-icon-solid";
+            left: 1px;
+            top: 1px;
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            line-height: 40px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+          }
+      }
+      .user-username:before,
+      .user-name:before {
+        content: '\f007';
+      }
+      .user-password:before{
+        content:'\f023';
+      }
+      .user-email:before{
+        content:'\f0e0';
+      }
+      .user-password-key:before{
+        content:'\f084';
+      }
+    } 
+}
+
+.payment-status,
+.booking-status{
+
+  .paid,
+  .booked{
+    background-color:#008600;
+    color: #fff;
+    padding-left: 5px;
+  }
+
+  .pending{
+    background-color:#FF9800;
+    color: #fff;
+    padding-left: 5px;
+  }
+  .cancled{
+    background-color:#FE450E;
+    color: #fff;
+    padding-left: 5px;
+  }
+  .not-available{
+    background-color:#892E2C;
+    color: #fff;
+    padding-left: 5px;
+  }
+
+} 
+
+
+
+
+
+.login-form,
+.register-form{
+
+  .wrapper{
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 20px;
+    text-align: left;
+
+    .info,label{
+      font-size:12px;
+    }
+  }
+
+}
+
+.wp-travel-ResetPassword{
+  text-align:left;
+
+  .user-username,
+  .user-password,
+  .user-password-key{
+    text-align:center;
+  }
+}
+
+
+
+.dashboard-tab{
+  ul.resp-tabs-list{
+      width: 100px;
+      margin: 0;
+      padding: 0;
+      background: #f8f7ee;
+      -webkit-box-shadow: inset 0 -2px 3px rgba(203,196,130,.06);
+      box-shadow: inset 0 -2px 3px rgba(203,196,130,.06);
+
+    li{
+      text-align:center;
+      color: #848484;
+      padding:30px 15px !important;
+      border-top: 1px solid #eae9de;
+      border-left:1px solid #eae9de;
+      border-bottom: none; 
+
+      &:hover{
+        color: #29324e;
+      }
+      &.resp-tab-active{
+        -webkit-box-shadow: inset 2px 0px 0 #f05451;
+        box-shadow: inset 2px 0px 0 #f05451;
+        color: #29324e;
+        border:none;
+        border-top:1px solid #eee;
+      }
+      i{
+        display:block;
+      }
+
+      &:last-of-type{
+        border-bottom:1px solid #eae9de;
+      }
+    }
+  }
+  .resp-tabs-container{
+    width:calc( 100% - 100px );
+    border-radius:0;
+    border:none;
+    min-height: 485px;
+    padding: 30px;
+    border: 1px solid #eae9de;
+
+    @media (max-width:767.99px){
+      padding:0;
+      min-height:auto;
+      width:100%;
+      .resp-tab-content{
+        border:none;
+      }
+    }
+
+    .resp-tab-content{
+      padding:0;
+    }
+  }
+   select , input.form-control{
+    width: 100%;
+  }
+  .title {
+    margin: 0 0 20px 0;
+    h4{
+      margin-top:0;
+    }
+  }
+  .form-horizontal{
+    margin: 0 0 15px 0;
+  }
+
+  .payment-content input[type="submit"],
+  .account-setting input[type="submit"],{
+    float: right;
+    border-radius: 3px;
+
+  }
+  .log-out input[type="button"]{
+    margin-top: 20px;
+    border-radius: 3px;
+  }
+  .go-back input[type=button] {
+    margin: 20px 0 0 0;
+  }
+  .control-label{
+    padding-left: 0;
+  }
+  .go-back{
+    display: inline-block;
+  }
+  @media (max-width:767.99px){
+    .col-sm-8{
+      padding:0;
+    }
+  }
+  .payment-content span{
+    float: right;
+  }
+  input.form-control {
+      -webkit-appearance: button!important;
+      padding: 5px;
+      border-radius: 0;
+  }
+  table.order-list-table th,
+  table.order-list-table td
+  {
+    border: 0px;
+  }
+  .order-list-table{
+    ins{
+      background-color:transparent;
+    }
+  }
+   .tbody-content:nth-of-type(even) td, 
+   .tbody-content:nth-of-type(even) th{
+      background-color: #f5f5f5;
+   }
+
+  td.product-thumbnail {
+      width: 110px;
+  }
+
+  .order-list-table thead{
+    border-bottom: 2px solid #dcdcdc;
+  }
+  .product-thumbnail img{
+    margin-bottom: 0 !important;
+  }
+  .order-list-table tbody td,
+  .order-list-table tbody th{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .order-list-table td{
+    padding: 10px 5px!important;
+  }
+  .log-out span{
+  display: block;
+  }
+  .book-more a{
+    display: block;
+  }
+  @media (max-width: 767.99px){
+    .resp-accordion .fa{
+      margin-right:10px; 
+    }
+    .list-item{
+      width: 100%!important;
+    }
+    .order-list-table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    .order-list-table tr {
+      border-bottom: 3px solid #ddd;
+      /*display: block;*/
+      margin-bottom: .625em;
+    }
+    
+    .order-list-table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    .order-list-table td:before {
+      content: attr(data-title);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .order-list-table td:last-child {
+      border-bottom: 0;
+    }
+    .item-image-wrap{
+      display: none;
+    }
+    .order-item-title{
+      width: 100%!important;
+      text-align: left;
+    }
+    .name-title h4{
+      margin: 0;
+      display: inline-block;
+    }
+    .dashboard-tab .resp-tabs-container{
+      width: 100%;
+    }
+    .product-thumbnail{
+      border: 0!important;
+    }
+  }
+
+
+  .lists{
+    margin: 0 -20px 0 0;
+  }
+  .list-item{
+    display: inline-block;
+    width: 50%;
+    float: left;
+      &:nth-of-type(2n +1) {
+          clear: left;
+      }
+    .item{
+      margin: 0 20px 40px 0;
+      border: 1px solid #d6d6d6;
+      padding: 15px 15px 30px;
+      border-radius: 4px;
+      strong{
+        display: block;
+      }
+      .box-content{
+        p{
+          margin: 0;
+        }
+        ul {
+          margin: 0 0 0 0;
+          padding: 0;
+          list-style: none;
+
+          li{
+            position:relative;
+            padding-left: 20px;
+            &:before{
+              font-family: "wt-icon-solid";
+              content: "\f0a9";
+              padding-right: 5px;
+              position: absolute;
+              left: 0;
+              top: 4px;
+
+              //removed form wp-travel-wishlists.scss
+              top: 2px;
+              font-size: 12px;
+            }
+          }
+        }
+      } 
+    } 
+  } 
+
+  .password-opt{
+    margin-bottom: 10px;
+  }
+  .box-actions a.action{
+    color: #848484;
+    font-weight: bold;
+    font-size: 11px;
+    margin-right: 15px;
+    &:hover{
+      color:#f05451;
+    }
+  }
+  .single-page-article{
+    border: 1px solid #eee;
+  }
+  /*.dashboard-tab li:first-child{
+    border-top: none!important;
+  }*/
+  .form-horizontal label.required:after{
+    content: "*";
+    color: #f05451;
+  }
+  .form-horizontal p{
+    margin-top :5px;
+   strong{
+    color:#f05451;
+    }
+  }
+  .box-content a{
+    color: #29324e;
+    &:hover{
+      color:#e34;
+    }
+  }
+  input {
+    outline: none;
+  }
+  input[type="checkbox"] {
+      height: 20px;
+      width: 20px;
+      line-height:18px;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 0.4em 0.4em 0;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid #AAAAAA;
+      -webkit-appearance: none;
+  }
+  input[type="checkbox"] {
+      border-radius: 2px;
+      position:relative;
+  }
+  input[type="checkbox"]:not(:disabled):hover {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+  input[type="radio"]:active:not(:disabled),
+  input[type="checkbox"]:active:not(:disabled) {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+  input[type="checkbox"]:checked {
+      border: 1px solid rgba(58, 197, 201, 1);
+  }
+
+  input[type="checkbox"]:checked:not(:disabled) {
+      background: rgba(58, 197, 201, 1);
+  }
+  input[type="checkbox"]:checked:before {
+      font-weight: bold;
+      color: white;
+      content: '\2713';
+      margin-left: 0px;
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+      left: 4px;
+  }
+  .my-order ul li{
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+  }
+  .box-actions {
+      float: right;
+  }
+  .resp-arrow{
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid #000;
+  }
+  h2.resp-tab-active span.resp-arrow{
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid #000;
+      border-bottom: none;
+  }
+  .order-item-title{
+   width: 50%;
+   float: left;
+   padding-left: 10px;
+  }
+  .item-image-wrap{
+    float: left;
+    width: 50%;
+  }
+  .resp-tab-content h3{
+    display: inline-block;
+    margin: 0 0 20px 0;
+  }
+
+
+}
+
+
+
+
+
+
+.onoffswitch {
+    position: relative; width: 56px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #FFFFFF; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+
+    &:before,
+    &:after{
+      display: block; float: left; width: 50%; height: 22px; padding: 0; line-height: 22px;
+      font-size: 12px; color: black; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+      box-sizing: border-box;
+    }
+
+    &:before {
+      content: "ON";
+      padding-left: 6px;
+      background-color: #3AC5C9; color: #FFFFFF;
+    }
+    &:after {
+      content: "OFF";
+      padding-right: 6px;
+      background-color: #E85764; color: #FFFFFF;
+      text-align: right;
+    }
+}
+.onoffswitch-switch {
+    display: block; width: 12px; margin: 5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 30px;
+    border: 2px solid #FFFFFF; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+
