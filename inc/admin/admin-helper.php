@@ -294,8 +294,10 @@ function wp_travel_get_download_upsell() {
 		$args = array(
 			'title'      => __( 'Need to add your downloads ?', 'wp-travel' ),
 			'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-			'link_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+            'link'       => 'https://wptravel.io/wp-travel-pro/',
+            'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+            'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+			'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;
@@ -1913,22 +1915,33 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
-	$title       = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
-	$content     = isset( $args['content'] ) ? $args['content'] : '';
-	$link        = isset( $args['link'] ) ? $args['link'] : '';
-	$link_label  = isset( $args['link_label'] ) ? $args['link_label'] : __( 'View WP Travel Addons', 'wp-travel' );
-	$link2       = isset( $args['link2'] ) ? $args['link2'] : '';
-	$link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons', 'wp-travel' );
-	?>
-	<div class="wp-travel-upsell-message">
+    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
+    $content = isset( $args['content'] ) ? $args['content'] : '';
+    $link = isset( $args['link'] ) ? $args['link'] : '';
+    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'Get Pro', 'wp-travel' );
+    $link2 = isset( $args['link2'] ) ? $args['link2'] : '';
+    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons', 'wp-travel' );
+
+    $link3 = isset( $args['link3'] ) ? $args['link3'] : '';
+    $link3_label = isset( $args['link3_label'] ) ? $args['link3_label'] : __( 'View WP Travel Addons', 'wp-travel' );
+    ?>
+    <div class="wp-travel-upsell-message">
 		<div class="wp-travel-pro-feature-notice clearfix">
 			<h4><?php echo esc_html( $title ); ?></h4>
-			<p><?php echo esc_html( $content ); ?></p>
-			<a target="_blank" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $link_label ); ?></a> 
-			<?php if ( ! empty( $link2 ) ) : ?>
-				<a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
-			<?php endif; ?>       
-		</div>
+            <p><?php echo esc_html( $content ); ?></p>
+            <div class="buy-pro-action buy-pro">
+                <a target="_blank" href="<?php echo esc_url( $link ); ?>" class="action-btn" ><?php echo esc_html( $link_label ); ?></a>
+                <?php if ( ! empty( $link2 ) ) : ?>
+                <br>
+                    <?php esc_html_e( 'or' ); ?> <a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
+                <?php endif; ?>  
+            </div>
+            <div class="buy-pro-action action2">
+                <?php if ( ! empty( $link3 ) ) : ?>
+                    <a target="_blank" href="<?php echo esc_url( $link3 ); ?>" class="action-btn" ><?php echo esc_html( $link3_label ); ?></a> 
+                <?php endif; ?>       
+            </div>
+        </div>
 	</div>
-	<?php
+    <?php 
 }

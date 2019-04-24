@@ -112,6 +112,8 @@ function wp_travel_settings_default_fields() {
 		'trip_tax_price_inclusive'                => 'yes',
 		'trip_tax_percentage'                     => 13,
 
+		'sorted_gateways'                         => wp_travel_payment_gateway_lists(),
+
 		// Fact Tab Settings Fields.
 		'wp_travel_trip_facts_enable'             => 'yes',
 		'wp_travel_trip_facts_settings'           => array(),

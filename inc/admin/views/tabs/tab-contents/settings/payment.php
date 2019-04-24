@@ -10,8 +10,6 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 
 	$partial_payment          = $settings['partial_payment'];
 	$minimum_partial_payout   = $settings['minimum_partial_payout'];
-	$paypal_email             = $settings['paypal_email'];
-	$payment_option_paypal    = $settings['payment_option_paypal'];
 	$trip_tax_enable          = $settings['trip_tax_enable'];
 	$trip_tax_percentage      = $settings['trip_tax_percentage'];
 	$trip_tax_price_inclusive = $settings['trip_tax_price_inclusive'];
@@ -43,48 +41,76 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			</td>
 		</tr>
 	</table>
-	<?php do_action( 'wp_travel_payment_gateway_fields', $args ); ?>
-	<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Standard Paypal', 'wp-travel' ); ?></h3>
-	<table class="form-table">
-		<tr>
-			<th><label for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ); ?></label></th>
-			<td>
-				<span class="show-in-frontend checkbox-default-design">
-				<label data-on="ON" data-off="OFF">
-				<input value="no" name="payment_option_paypal" type="hidden" />
-					<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal"/>
-					<span class="switch">
-				</span>
 
-				</label>
-			</span>
-				<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ); ?></p>
-			</td>
-		</tr>
-		<tr id="wp-travel-paypal-email" >
-			<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
-			<td>
-				<input type="text" value="<?php echo esc_attr( $paypal_email ); ?>" name="paypal_email" id="paypal_email"/>
-				<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ); ?></p>
-			</td>
-		</tr>
-	</table>
+
+	<?php
+		do_action( 'wp_travel_payment_gateway_fields', $args ); // old hook.
+		// @since 2.0.0
+		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
+		// Sorting.
+		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
+			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content">
+				
+				<tbody>
+					<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
+						<tr>
+							<td width="30px">
+								<div class="wp-travel-sorting-handle">
+								</div>
+							</td>
+							<td >
+								<div class="panel-heading" role="tab">
+								<h3 class="wp-travel-tab-content-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion-fact" href="#payment-gateway-<?php echo esc_attr( $gateway ); ?>" aria-expanded="true" aria-controls="payment-gateway-<?php echo esc_attr( $gateway ); ?>">
+										<?php echo $gateway_label ? esc_html( $gateway_label ) : __( 'Payment', 'wp-travel' ); ?>
+										<span class="collapse-icon"></span>
+									</a>
+								</h3>
+								</div>
+
+								<div id="payment-gateway-<?php echo esc_attr( $gateway ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<div class="panel-wrap">
+											<div class="wp-travel-license-content">
+												<!-- Fields -->
+												<?php do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); ?>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<input type="hidden" name="sorted_gateways[]" value="<?php echo $gateway ?>" >
+							
+							</td>
+						</tr>
+						
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php endif; ?>
+	
 
 	<br>
 	<?php
 		$args = array(
 			'title'       => __( 'Need more payment gateway options ?', 'wp-travel' ),
 			'content'     => '',
-			'link'        => 'http://wptravel.io/downloads/',
-			'link_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
-			'link2'       => 'http://wptravel.io/contact',
-			'link2_label' => __( 'Request a new one', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/wp-travel-pro/',
+        	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'link2'        => 'http://wptravel.io/downloads/',
+			'link2_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
+			'link3'       => 'http://wptravel.io/contact',
+			'link3_label' => __( 'Request a new one', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	?>
 	<br>
-	<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' ); ?></h3>
 	<table class="form-table">
+		<tr>
+			<th colspan="2">
+				<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' ); ?></h3>
+			</th>
+		</tr>
 		<tr>
 			<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax for Trip Price', 'wp-travel' ); ?></label></th>
 			<td>
@@ -125,3 +151,40 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	</table>
 	<?php
 }
+
+function wp_travel_standard_paypal_settings_callback( $args ) {
+
+	$settings = $args['settings'];
+
+	$paypal_email             = $settings['paypal_email'];
+	$payment_option_paypal    = $settings['payment_option_paypal'];
+	?>
+	<table class="form-table form-table-payment">
+		
+		<tr>
+			<th><label for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ); ?></label></th>
+			<td>
+				<span class="show-in-frontend checkbox-default-design">
+				<label data-on="ON" data-off="OFF">
+				<input value="no" name="payment_option_paypal" type="hidden" />
+					<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal"/>
+					<span class="switch">
+				</span>
+
+				</label>
+			</span>
+				<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ); ?></p>
+			</td>
+		</tr>
+		<tr id="wp-travel-paypal-email" >
+			<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
+			<td>
+				<input type="text" value="<?php echo esc_attr( $paypal_email ); ?>" name="paypal_email" id="paypal_email"/>
+				<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ); ?></p>
+			</td>
+		</tr>
+	</table>
+	<?php
+}
+
+add_action( 'wp_travel_payment_gateway_fields_paypal', 'wp_travel_standard_paypal_settings_callback' );

@@ -135,8 +135,8 @@
 
 .form_field {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  margin-bottom: 42px;
+  grid-template-columns: 1fr 6fr;
+  margin-bottom: 24px;
 }
 
 .subject_input input:focus {
@@ -148,6 +148,27 @@
 
 .wp-travel-tab-content {
   width: 100% !important;
+}
+.wp-travel-tab-content h4,
+.wp-travel-tab-content h3 {
+  font-size: 16px;
+  color: #444444;
+  margin: 0 0 25px 0;
+  font-weight: 500;
+}
+.wp-travel-tab-content .wp-collapse-open {
+  float: right;
+  margin-top: -48px;
+}
+.wp-travel-tab-content .wp-collapse-open a {
+  text-shadow: 2px 2px 9px #909090;
+  display: block;
+  font-weight: 500;
+  color: #f8f8f8;
+  background: #69c8a7;
+  box-shadow: 0px 3px 3px #ccc;
+  padding: 8px 34px;
+  border-radius: 3px;
 }
 
 .license_wrapper {
@@ -241,6 +262,7 @@
   background: transparent;
   height: auto !important;
   line-height: 0;
+  outline: 0;
 }
 
 .select2-container {
@@ -290,7 +312,8 @@
   font-size: 14px;
   font-weight: 300;
   color: #A7A7A7;
-  margin-bottom: 9px;
+  margin-bottom: 15px;
+  display: block;
 }
 
 .form_field.hidden {
@@ -317,7 +340,7 @@
   position: absolute;
   display: inline-block;
   box-sizing: border-box;
-  top: calc( 100% + 1px);
+  top: calc(100% + 1px);
   width: 100%;
   left: 0;
 }
@@ -486,7 +509,7 @@
 .wp-travel-upsell-message {
   position: relative;
   background: #ECF8F4;
-  padding: 16px 40px 45px 30px;
+  padding: 16px 40px 30px 30px;
   border-radius: 10px;
   margin-bottom: 40px;
   box-shadow: 0 10px 30px rgba(59, 59, 59, 0.04);
@@ -510,7 +533,7 @@
   font-size: 14px;
   font-weight: 400;
   color: #929292;
-  margin-bottom: 19px;
+  margin: 8px 0 22px 0;
 }
 .wp-travel-upsell-message a {
   font-size: 14px;
@@ -555,10 +578,10 @@
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav {
   float: left;
   margin: 0;
-  width: 190px;
+  width: 210px;
   display: flex;
   flex-direction: column;
-  box-shadow: 8px 0 49px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.06);
 }
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li a {
   cursor: pointer;
@@ -568,28 +591,30 @@
   text-transform: capitalize;
   color: #777;
   padding: 15px 12px;
+  outline: none;
+  box-shadow: none;
   display: block;
 }
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li a .fas {
   margin-right: 15px;
 }
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li:hover, .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li.active {
-  background-color: #9CB8D6;
+  background-color: #69c8a7;
   color: #fff;
 }
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav li:hover a {
-  background-color: #9CB8D6;
+  background-color: #69c8a7;
   color: #fff;
 }
 .wp-travel-tabs-wrap ul.wp-travel-tabs-nav .ui-tabs-active a {
-  background-color: #9CB8D6;
+  background-color: #69c8a7;
   color: #fff !important;
   outline: 0 !important;
   box-shadow: none;
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents {
   float: right;
-  width: calc( 100% - 190px );
+  width: calc(100% - 230px);
   box-sizing: border-box;
   padding: 20px;
 }
@@ -605,10 +630,10 @@
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .tab_content_title {
   color: #1D3A58;
-  font-size: #1D3A58;
+  font-size: 18px;
   text-transform: capitalize;
   font-weight: 500;
-  margin-bottom: 36px;
+  margin: 0 0 30px 0;
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .general_option_form {
   display: flex;
@@ -679,7 +704,7 @@
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp-travel-sorting-tabs-wrap .wp_travel_tabs_input-field {
   display: inline;
-  max-width: calc( 33.333% - 15px);
+  max-width: calc(33.333% - 15px);
   float: left;
   width: 100%;
   min-width: 200px;
@@ -733,13 +758,8 @@
 }
 .tab-accordion .panel-heading .collapse-icon {
   position: absolute;
-  right: 50px;
-  width: 20px;
-  height: 20px;
-  top: calc( 50% - 10px);
-  border-radius: 50%;
-  float: right;
-  text-align: center;
+  right: 30px;
+  top: 13px;
 }
 .tab-accordion .panel-heading [data-toggle="collapse"] {
   color: #444;
@@ -784,12 +804,11 @@
   right: 10px;
   color: #ca4a1f;
   font-size: 16px;
-  top: calc( 50% - 8px);
+  top: calc(50% - 8px);
   cursor: pointer;
 }
 .tab-accordion .panel-collapse {
   padding: 0;
-  border: 1px solid #ddd;
   border-top: none;
 }
 .tab-accordion .panel-body {
@@ -905,7 +924,7 @@
   position: relative;
   margin-right: 10px;
   margin-bottom: 10px;
-  width: calc( 25% - 10px);
+  width: calc(25% - 10px);
 }
 .wp-travel-post-tab-content-section .wp-travel-open-uploaded-images li.featured-image:before {
   content: "\f155";
@@ -1002,15 +1021,15 @@
 }
 .panel-title > a {
   display: block;
-  padding: 20px 30px;
-  background: transparent;
-  box-shadow: 8px 0 49px rgba(0, 0, 0, 0.06);
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 500;
+  padding: 16px 20px;
+  background: #f4f4f4;
+  box-shadow: 0px 5px 6px #d9d9d9;
+  font-size: 15px;
+  font-weight: 400;
   text-transform: capitalize;
-  color: #7A7A7A;
+  color: #7A7A7A !important;
   margin-bottom: 0px;
+  border-radius: 3px;
 }
 
 .more-less {
@@ -1020,7 +1039,7 @@
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #e6e6e6;
-  padding: 50px 40px;
+  padding: 25px 20px;
 }
 
 .collapse {
@@ -1123,7 +1142,15 @@
 
 .wp-travel-pro-feature-notice h4 {
   color: #69C8A7;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 18px;
+  margin: 18px 0 0px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #69c8a7 !important;
+}
+
+.select2-container--open .select2-dropdown {
+  top: -8px;
 }

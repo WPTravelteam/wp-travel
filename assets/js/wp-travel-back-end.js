@@ -335,11 +335,11 @@
         var price_option_type = $( '#wp-travel-pricing-option-type' ).val();
         if ( 'single-price' ==  price_option_type && $('#wp-travel-enable-sale').is(':checked')) {
             //
-            $('#wp-travel-sale-price').removeAttr('disabled').closest('.form_field').removeClass( 'hidden' );
+            $('#wp-travel-sale-price').removeAttr('disabled').closest('.price-option-row').removeClass( 'hidden' );
             $('#wp-travel-price').attr('required', 'required');
             $('#wp-travel-sale-price').attr('required', 'required');
         } else {
-            $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('.form_field').addClass( 'hidden' );
+            $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('.price-option-row').addClass( 'hidden' );
             $('#wp-travel-price').removeAttr('required');
             $('#wp-travel-sale-price').removeAttr('required');
         }
@@ -347,9 +347,9 @@
     }
     function show_custom_payout_field() {
         if ($('#wp-travel-minimum-partial-payout-percent-use-global').is(':checked')) {
-            $('#wp-travel-minimum-partial-payout-percent').closest('.form_field').addClass( 'hidden' );
+            $('#wp-travel-minimum-partial-payout-percent').closest('.price-option-row').addClass( 'hidden' );
         } else {
-            $('#wp-travel-minimum-partial-payout-percent').closest('.form_field').removeClass( 'hidden' );
+            $('#wp-travel-minimum-partial-payout-percent').closest('.price-option-row').removeClass( 'hidden' );
         }
     }
 
@@ -401,15 +401,15 @@
     // Pricing options change function.
     $(document).on('change', '.wp-travel-pricing-options-list', function() {
         if ($(this).val() === 'custom') {
-            $(this).parents('.form_field').next('.custom-pricing-label-wrap').removeClass( 'hidden' );
+            $(this).parents('.price-option-row').next('.custom-pricing-label-wrap').removeClass( 'hidden' );
         } else {
-            $(this).parents('.form_field').next('.custom-pricing-label-wrap').addClass( 'hidden' );
+            $(this).parents('.price-option-row').next('.custom-pricing-label-wrap').addClass( 'hidden' );
         }
     });
 
     //Pricing options Enable Sale.
     $(document).on('change', '.wp-travel-enable-variation-price-sale', function() {
-        var siblings = $(this).parents('.form_field').next('.form_field');
+        var siblings = $(this).parents('.price-option-row').next('.price-option-row');
         if ($(this).is(':checked')) {
             siblings.removeClass( 'hidden' );
             siblings.find('input[type="number"]').attr('required', 'required');
@@ -423,9 +423,9 @@
     
 
     if ($('.wp-travel-enable-variation-price-sale').is(':checked')) {
-        $(this).parents('.form_field').next('.form_field').removeClass( 'hidden' );
+        $(this).parents('.price-option-row').next('.price-option-row').removeClass( 'hidden' );
     } else {
-        $(this).parents('.form_field').next('.form_field').addClass( 'hidden' );
+        $(this).parents('.price-option-row').next('.price-option-row').addClass( 'hidden' );
     }
 
     if ($('#wp-travel-enable-sale').is(':checked')) {

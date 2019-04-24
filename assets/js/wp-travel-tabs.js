@@ -20,7 +20,7 @@
     }
 
     // Sortable for Global tabs.
-    $('#wp-travel-tab-content-tabs_global .wp-travel-sorting-tabs tbody').sortable({
+    $('.wp-travel-sorting-tabs tbody').sortable({
         handle: '.wp-travel-sorting-handle'
     });
 

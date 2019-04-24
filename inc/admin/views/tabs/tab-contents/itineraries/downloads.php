@@ -18,8 +18,10 @@ function wp_travel_trip_callback_downloads( $tab, $args ) {
 		$args = array(
 			'title'      => __( 'Need to add your downloads?', 'wp-travel' ),
 			'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-			'link_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/wp-travel-pro/',
+        	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+			'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;

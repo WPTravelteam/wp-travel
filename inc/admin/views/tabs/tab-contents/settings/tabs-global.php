@@ -25,8 +25,10 @@ function wp_travel_settings_callback_tabs_global( $tab, $args ) {
 			$args = array(
 				'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;

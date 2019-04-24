@@ -10,7 +10,7 @@ wp_travel_print_notices();
 
 // Set User.
 $current_user         = $args['current_user'];
-$user_dashboard_menus = $args['dashboard_menus'];
+$user_dashboard_menus = wp_travel_sort_array_by_priority( $args['dashboard_menus'] );
 $bookings             = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
 $bookings_glance      = false;
 // Resverse Chronological Order For Bookings.

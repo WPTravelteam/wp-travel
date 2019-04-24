@@ -12,8 +12,10 @@ if ( ! function_exists( 'wp_travel_settings_callback_field_editor' ) ) {
 			$args = array(
 				'title'      => __( 'Want to customize your Traveler fields, billing fields and more?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
-				'link_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
+				'link'       => 'https://wptravel.io/wp-travel-pro/',
+        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+				'link2'       => 'https://wptravel.io/downloads/wp-travel-field-editor/',
+				'link2_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;

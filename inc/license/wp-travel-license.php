@@ -377,7 +377,7 @@ class WP_Travel_License {
 		foreach ( self::$addons as $key => $premium_addon ) {
 			$check_license = self::check_license( $premium_addon );
 			if ( false !== $check_license && 'valid' === $check_license ) {
-				return false;
+				continue;
 			}
 			$class   = '';
 			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
@@ -389,8 +389,16 @@ class WP_Travel_License {
 
 	public static function display_critical_notices( $display ) {
 		$count_premium_addons = self::count_premium_addons();
-		if ( $count_premium_addons > 0 ) {
+		if ( $count_premium_addons < 1 ) {
+			return;
+		}
+		foreach ( self::$addons as $key => $premium_addon ) {
+			$check_license = self::check_license( $premium_addon );
+			if ( false !== $check_license && 'valid' === $check_license ) {
+				continue;
+			}
 			$display = true;
+			break;
 		}
 		return $display;
 	}
