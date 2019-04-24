@@ -406,6 +406,7 @@ function wp_travel_get_checkout_form_fields() {
 
 		$gateway_list        = wp_travel_get_active_gateways();
 		$active_gateway_list = isset( $gateway_list['active'] ) ? $gateway_list['active'] : array();
+		// $active_gateway_list = wp_travel_sorted_payment_gateway_lists();
 		$selected_gateway    = isset( $gateway_list['selected'] ) ? $gateway_list['selected'] : '';
 
 		if ( is_array( $active_gateway_list ) && count( $active_gateway_list ) > 0 ) {

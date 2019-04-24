@@ -30,6 +30,11 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 					'link2'       => 'https://wptravel.io/downloads/category/map/',
 					'link2_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
 				);
+				if ( class_exists( 'WP_Travel_Pro' ) ) {
+					$args['link'] = $args['link2'];
+					$args['link_label'] = $args['link2_label'];
+					unset( $args['link2'], $args['link2_label'] );
+				}
 				wp_travel_upsell_message( $args );
 				?>
 		<style>

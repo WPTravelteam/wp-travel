@@ -175,17 +175,25 @@ class WP_Travel_Admin_Settings {
 			'callback'      => 'wp_travel_settings_callback_cart_checkout_settings_global',
 			'icon'          => 'fa-shopping-cart',
 		);
+
+		$settings_fields['addons_settings']           = array(
+			'tab_label'     => __( 'Addons Settings', 'wp-travel' ),
+			'content_title' => __( 'Enable / Disable Addons', 'wp-travel' ),
+			'priority'      => 90,
+			'callback'      => 'wp_travel_settings_callback_addons_settings',
+			'icon'          => 'fa-palette',
+		);
 		$settings_fields['misc_options_global']           = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellaneous Options', 'wp-travel' ),
-			'priority'      => 86,
+			'priority'      => 95,
 			'callback'      => 'wp_travel_settings_callback_misc_options_global',
 			'icon'          => 'fa-thumbtack',
 		);
 		$settings_fields['debug']                         = array(
 			'tab_label'     => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
-			'priority'      => 90,
+			'priority'      => 100,
 			'callback'      => 'wp_travel_settings_callback_debug',
 			'icon'          => 'fa-bug',
 		);

@@ -569,7 +569,7 @@ function wp_travel_get_total_amount() {
  * Return Active Payment gateway list.
  */
 function wp_travel_get_active_gateways() {
-	$payment_gatway_list = wp_travel_payment_gateway_lists();
+	$payment_gatway_list = wp_travel_sorted_payment_gateway_lists();
 	$active_gateway_list = array();
 	$selected_gateway    = '';
 	$settings            = wp_travel_get_settings();

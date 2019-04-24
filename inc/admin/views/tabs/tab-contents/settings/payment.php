@@ -102,6 +102,12 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			'link3'       => 'http://wptravel.io/contact',
 			'link3_label' => __( 'Request a new one', 'wp-travel' ),
 		);
+
+		if ( class_exists( 'WP_Travel_Pro' ) ) {
+			$args['link'] = $args['link2'];
+			$args['link_label'] = $args['link2_label'];
+			unset( $args['link2'], $args['link2_label'] );
+		}
 		wp_travel_upsell_message( $args );
 	?>
 	<br>
