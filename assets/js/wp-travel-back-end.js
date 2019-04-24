@@ -353,6 +353,20 @@
         }
     }
 
+    function show_sale_price_field() {
+        var price_option_type = $( '#wp-travel-pricing-option-type' ).val();
+        if ( 'single-price' ==  price_option_type && $('#wp-travel-enable-sale').is(':checked')) {
+            $('#wp-travel-sale-price').removeAttr('disabled').closest('.price-option-row').removeClass( 'hidden' );
+            $('#wp-travel-price').attr('required', 'required');
+            $('#wp-travel-sale-price').attr('required', 'required');
+        } else {
+            $('#wp-travel-sale-price').attr('disabled', 'disabled').closest('.price-option-row').addClass( 'hidden' );
+            $('#wp-travel-price').removeAttr('required');
+            $('#wp-travel-sale-price').removeAttr('required');
+        }
+        
+    }
+
     // Fixed Departure [ On || Off ]  @since 1.7.6
     $(document).on('click', '#wp-travel-fixed-departure', function() {
         show_fixed_departured_date_row();

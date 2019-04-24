@@ -791,7 +791,10 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 						</li>
 					<?php } ?>
 				</ul>
-			</span>
+            </span>
+            <p class="description">
+				<?php printf( __( 'Need advance Trip Extras options? %s GET PRO%s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
+			</p>
 
 		</div>
 	</div>
@@ -1933,7 +1936,7 @@ function wp_travel_upsell_message( $args ) {
                 <a target="_blank" href="<?php echo esc_url( $link ); ?>" class="action-btn" ><?php echo esc_html( $link_label ); ?></a>
                 <?php if ( ! empty( $link2 ) ) : ?>
                 <br>
-                    <?php esc_html_e( 'or' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
+                    <?php esc_html_e( 'or', 'wp-travel' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
                 <?php endif; ?>  
             </div>
             <div class="buy-pro-action action2">

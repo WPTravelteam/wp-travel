@@ -21,6 +21,11 @@ With such a powerful tour and travel engine, you can efficiently create customiz
 
 View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
+
+> **WP Travel PRO**
+> With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
+
+
 = WP TRAVEL PAYMENT ADDONS =
 
 * [WP Travel Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin) (International transactions)
@@ -32,6 +37,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
 
 = WP ITINERARY ADDONS =
+* [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
 * [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/?utm_source=addons&utm_medium=utilities&utm_campaign=WP%20Plugin)
 * [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/?utm_source=addons&utm_medium=tourextras&utm_campaign=WP%20Plugin)
 * [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/?utm_source=addons&utm_medium=wishlist&utm_campaign=WP%20Plugin)
@@ -207,8 +213,23 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.9.6 =
+Release Date: 22nd April 2019
+
+Enhancement:
+
+* Set WP Travel Dashboard tab menu priority to change placement of tabs. 
+
+Fixes:
+
+* WP Travel displaying empty alert notification.
+* Datepicker Console error in admin booking.
+* Add to cart issue with some multiple trips.
+* Admin Trips tab sale price field show hide issue. Previously it was not hiding sale price on pricing option change.
+* Billing fields warning notices in admin booking.
+
 = 1.9.5 =
-Release Date: 11th April 2019
+Release Date: 15th April 2019
 
 Enhancement:
 

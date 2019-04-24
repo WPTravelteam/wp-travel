@@ -2055,10 +2055,19 @@ span.wp-travel-message {
   font-size: 16px;
   margin-bottom: 15px;
 }
-.wp-travel-upsell-message .wp-travel-pro-feature-notice a {
+.wp-travel-upsell-message .wp-travel-pro-feature-notice .buy-pro-action {
+  float: left;
+}
+.wp-travel-upsell-message .wp-travel-pro-feature-notice .buy-pro-action.buy-pro {
+  margin-right: 10px;
+}
+.wp-travel-upsell-message .wp-travel-pro-feature-notice .buy-pro-action a {
+  display: inline-block;
+  padding: 7px 0;
+}
+.wp-travel-upsell-message .wp-travel-pro-feature-notice .buy-pro-action a.action-btn {
   border-radius: 3px;
   color: #fff;
-  display: inline-block;
   font-weight: 600;
   background-color: #409cd1;
   margin-top: 15px;

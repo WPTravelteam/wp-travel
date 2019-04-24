@@ -1931,16 +1931,26 @@ span.wp-travel-message {
             font-size: 16px;
             margin-bottom: 15px;
         }
-        a {
-            border-radius: 3px;
-            color: #fff;
-            display: inline-block;
-            font-weight: 600;
-            background-color: #409cd1;
-            margin-top: 15px;
-            text-decoration: none;
-            padding: 7px 15px;
+        .buy-pro-action{
+            float:left;
+            &.buy-pro{
+                margin-right: 10px;
+            }
+            a{
+                display: inline-block;
+                padding:7px 0;
+                &.action-btn {
+                    border-radius: 3px;
+                    color: #fff;
+                    font-weight: 600;
+                    background-color: #409cd1;
+                    margin-top: 15px;
+                    text-decoration: none;
+                    padding: 7px 15px;
+                }
+            }
         }
+        
     }
 }
 
