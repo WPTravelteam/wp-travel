@@ -51,7 +51,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
 			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content">
 				
-				<tbody>
+				<tbody class="tab-accordion">
 					<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
 						<tr>
 							<td width="30px">

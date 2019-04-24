@@ -1933,7 +1933,7 @@ function wp_travel_upsell_message( $args ) {
                 <a target="_blank" href="<?php echo esc_url( $link ); ?>" class="action-btn" ><?php echo esc_html( $link_label ); ?></a>
                 <?php if ( ! empty( $link2 ) ) : ?>
                 <br>
-                    <?php esc_html_e( 'or' ); ?> <a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
+                    <?php esc_html_e( 'or' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
                 <?php endif; ?>  
             </div>
             <div class="buy-pro-action action2">
