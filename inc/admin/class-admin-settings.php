@@ -45,6 +45,7 @@ class WP_Travel_Admin_Settings {
 		add_action( "{$tab_hook_prefix}_field_editor", array( $this, 'settings_callback_field_editor' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_misc_options_global", array( $this, 'settings_callback_misc_options_global' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_utilities_faq_global", array( $this, 'settings_callback_utilities_faq_global' ), 11, 2 );
+		add_action( "{$tab_hook_prefix}_addons_settings", array( $this, 'settings_callback_addons_settings' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_cart_checkout_settings_global", array( $this, 'settings_callback_cart_checkout_settings_global' ), 11, 2 );
 		add_action( "{$tab_hook_prefix}_debug", array( $this, 'settings_callback_debug' ), 11, 2 );
 
@@ -146,6 +147,13 @@ class WP_Travel_Admin_Settings {
 			'tab_label'     => __( 'FAQs', 'wp-travel' ),
 			'content_title' => __( 'Global FAQs', 'wp-travel' ),
 			'priority'      => 80,
+		);
+		$settings_fields['addons_settings']           = array(
+			'tab_label'     => __( 'Addons Settings', 'wp-travel' ),
+			'content_title' => __( 'Enable / Disable Addons', 'wp-travel' ),
+			'priority'      => 81,
+			// 'callback'      => 'wp_travel_settings_callback_addons_settings',
+			// 'icon'          => 'fa-palette',
 		);
 		$settings_fields['cart_checkout_settings_global'] = array(
 			'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
@@ -1039,6 +1047,11 @@ class WP_Travel_Admin_Settings {
 				'link3'       => 'http://wptravel.io/contact',
 				'link3_label' => __( 'Request a new one', 'wp-travel' ),
 			);
+			if ( class_exists( 'WP_Travel_Pro' ) ) {
+				$args['link'] = $args['link2'];
+				$args['link_label'] = $args['link2_label'];
+				unset( $args['link2'], $args['link2_label'] );
+			}
 			wp_travel_upsell_message( $args );
 		?>
 		<br>
@@ -1266,6 +1279,19 @@ class WP_Travel_Admin_Settings {
 		endif;
 		do_action( 'wp_travel_settings_tab_faq_fields', $args );
 	}
+
+	/*
+	* Callback for Addons setings tab.
+	*
+	* @param  Array $tab  List of tabs.
+	* @param  Array $args Settings arg list.
+	*/
+   function settings_callback_addons_settings( $tab, $args ) {
+	   ?>
+	   <p><?php echo esc_html( 'You can enable/disable addons here.' ); ?></p>
+	   <?php
+	   do_action( 'wp_travel_addons_setings_tab_fields', $args );
+   }
 
 	/**
 	 * Callback for Checkout tab.

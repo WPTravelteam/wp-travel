@@ -153,6 +153,12 @@ class WP_Travel_License {
 			'link2' => 'https://wptravel.io/downloads/',
 			'link2_label' => __( 'Get WP Travel Addons', 'wp-travel' ),
 		);
+
+		if ( class_exists( 'WP_Travel_Pro' ) ) {
+			$args['link'] = $args['link2'];
+			$args['link_label'] = $args['link2_label'];
+			unset( $args['link2'], $args['link2_label'] );
+		}
 		wp_travel_upsell_message( $args );
 	}
 
