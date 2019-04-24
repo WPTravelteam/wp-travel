@@ -189,7 +189,7 @@ module.exports = function (grunt) {
 		},
 		sass: {
 			options: {
-				sourcemap: 'none',
+				// sourcemap: 'none',
 				style: 'expanded',
 				lineNumbers: false
 			},
