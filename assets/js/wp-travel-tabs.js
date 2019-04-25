@@ -15,10 +15,12 @@
         });
 
         $(".wp-travel-marketplace-tab-wrap").tabs();
-
-
     }
 
+    $('.wp-travel-enable-payment').click(function(){
+        $(this).closest( '.wp-travel-enable-payment-wrapper' ).find('.wp-travel-enable-payment-body').toggle();
+    });
+    
     // Sortable for Global tabs.
     $('.wp-travel-sorting-tabs tbody').sortable({
         handle: '.wp-travel-sorting-handle'
@@ -73,45 +75,6 @@
         slider.value = value;
     }
 
-    // TAX Slider JS.
-
-    // var slider = document.getElementById("trip_tax_percentage");
-    // var output = document.getElementById("trip_tax_percentage_output");
-
-    // output.innerHTML = slider.value; // Display the default slider value
-    // // Update the current slider value (each time you drag the slider handle)
-    // const wp_travel_tax_percentage_range_func = function() {
-    //     var value = this.value;
-
-    //     if (this.value >= 100) {
-    //         value = 100;
-    //     }
-    //     if (this.value <= 1) {
-    //         value = 1;
-    //     }
-    //     value = Math.max(value, 1);
-    //     slider.value = value;
-    //     output.value = value;
-
-    // }
-
-    // output.onkeyup = wp_travel_tax_percentage_range_func;
-
-    // output.oninput = wp_travel_tax_percentage_range_func;
-
-    // slider.oninput = function() {
-    //         var value = this.value;
-
-    //         if (this.value >= 100) {
-    //             value = 100;
-    //         }
-    //         if (this.value <= 1) {
-    //             value = 1;
-    //         }
-    //         value = Math.max(value, 1);
-    //         output.value = value;
-    //         slider.value = value;
-    //     }
     //Partial Payout Options.
     if ($('#partial_payment').is(':checked')) {
         $('#wp-travel-minimum-partial-payout').show();
@@ -134,20 +97,6 @@
             $('#fact-app').hide();
         }
     });
-
-
-
-    // Tax options change function.
-    // if ($('#trip_tax_enable').is(':checked')) {
-    //     $('#wp-travel-tax-percentage').show();
-    //     $('#wp-travel-tax-price-options').show();
-    //     $('#trip_tax_percentage_output').attr('required', true)
-
-    // } else {
-    //     $('#wp-travel-tax-percentage').hide();
-    //     $('#wp-travel-tax-price-options').hide();
-    //     $('#trip_tax_percentage_output').attr('required', false)
-    // }
 
     $('#trip_tax_enable').change(function() {
         if ($(this).is(':checked')) {

@@ -104,6 +104,7 @@ class WP_Travel_License {
 				// Get license status.
 				$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
 				$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
+				$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
 				?>
 				<style>
 					#wp-travel-tab-content-license .form-table input[class*=button].button-license{height:35px;line-height:35px}
@@ -112,6 +113,7 @@ class WP_Travel_License {
 				<?php
 				$status_message = '';
 				$status_class = '';
+				$expires_in = '';
 				if ( $license_key ) :
 					if ( 'valid' === $status ) :
 						$status_message = __( 'Active', 'wp-travel' );
@@ -127,6 +129,10 @@ class WP_Travel_License {
 						$status_class = 'fa-times';
 					endif;
 				endif;
+
+				if ( isset( $license_data->expires ) && 'lifetime' != $license_data->expires ) {
+					$expires_in = $license_data->expires;
+				}
 				?>
 
 				<div class="license_grid">
@@ -151,6 +157,12 @@ class WP_Travel_License {
 							<?php endif; ?>
 							<?php if ( $status_class ) : ?>
 								<i class="fas <?php echo esc_html( $status_class ); ?>"></i>
+							<?php endif; ?>
+							<?php if ( $expires_in  ) :
+								$date_format = get_option('date_format');
+								?>
+								<br>
+								<span class="expire-in"><?php esc_html_e( 'Expires in' ); ?><strong><?php echo date( $date_format, strtotime( $expires_in ) ); ?></strong></span>
 							<?php endif; ?>
 						</div>
 					</div>

@@ -715,13 +715,13 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 	// Check Tour Extras Count.
 	if ( 0 == $tour_extras->publish ) {
 		ob_start(); ?>
-		
-		<label class="label_title"><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
-		
-		<div class="subject_input">
-			<?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result">Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>' ); ?>
-		</div>
-		<?php
+		<?php if ( $table_row ) : ?><td><?php  else : ?><div class="one-third"><?php endif ; ?>
+        <label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+        <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ; ?>
+
+        <?php if ( $table_row ) : ?><td><?php  else : ?><div class="two-third"><?php endif ; ?>
+        <?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result">Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>'); ?>
+        <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
 
 		$data = ob_get_clean();
 		return $data;
@@ -744,12 +744,12 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 	$restricted_trips = ( $trip_extras ) ? $trip_extras : array();
 
 	$itineraries = wp_travel_get_tour_extras_array();
-	ob_start();
-	?>
-	<label class="label_title"><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+    ob_start(); ?>
+    <?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>
+		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+	<?php if ( $table_row ) : ?></td><td><?php  else : ?></div><div class="two-third"><?php endif ; ?>
 	
-	<div class="subject_input">
-	<div class="custom-multi-select">
+	    <div class="custom-multi-select">
 			<?php
 			$count_options_data   = count( $restricted_trips );
 			$count_itineraries    = count( $itineraries );
@@ -797,13 +797,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 			</p>
 
 		</div>
-	</div>
-
-
-		
-
-		
-
+    <?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>
 	<?php
 	$data = ob_get_clean();
 	return $data;

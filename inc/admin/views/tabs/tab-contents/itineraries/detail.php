@@ -17,7 +17,7 @@ endif;
 ?>
 <table class="form-table">
 	<tr>
-		<td><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></td>
+		<th><label for="wp-travel-detail"><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?></label></th>
 		<td>
 			<input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" />
 			<?php if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) : ?>
