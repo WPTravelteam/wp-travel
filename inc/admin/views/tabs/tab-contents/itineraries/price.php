@@ -705,6 +705,9 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
+	<tr>
+		<td colspan="2"><hr></td>
+	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-title">
 		<th colspan="2">
 			<h3><?php echo esc_html( 'Tour Extras', 'wp-travel' ); ?></h3>
@@ -712,6 +715,9 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-content">
 		<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
+	</tr>
+	<tr>
+		<td colspan="2"><hr></td>
 	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?>">
 		<th colspan="2">

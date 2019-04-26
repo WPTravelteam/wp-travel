@@ -28,7 +28,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 
 				</label>
 			</span>
-				<p class="description"><?php esc_html_e( 'Enable partial payment while booking.', 'wp-travel' ); ?>
+				<p class="description"><?php esc_html_e( 'Enable Partial Payment while booking.', 'wp-travel' ); ?>
 				</p>
 			</td>
 		</tr>
@@ -155,6 +155,16 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript" defer>
+		const payment_option_change = function(){
+			var gateway_fields = jQuery(this).closest('.form-table').find('.payment-gateway-fields');
+			jQuery(this).is(':checked') ? gateway_fields.fadeIn(): gateway_fields.fadeOut() ;
+		}
+		jQuery(document).ready(function($) {
+			$('.enable-payment-gateway').on( 'click change', payment_option_change );
+			$('.enable-payment-gateway').trigger( 'change' );
+		});
+	</script>
 	<?php
 }
 
@@ -173,7 +183,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 				<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
 				<input value="no" name="payment_option_paypal" type="hidden" />
-					<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal"/>
+					<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_paypal ); ?> name="payment_option_paypal" id="payment_option_paypal" class="enable-payment-gateway" />
 					<span class="switch">
 				</span>
 
@@ -182,13 +192,16 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 				<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ); ?></p>
 			</td>
 		</tr>
-		<tr id="wp-travel-paypal-email" >
-			<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
-			<td>
-				<input type="text" value="<?php echo esc_attr( $paypal_email ); ?>" name="paypal_email" id="paypal_email"/>
-				<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ); ?></p>
-			</td>
-		</tr>
+		<tbody class="payment-gateway-fields">
+		
+			<tr id="wp-travel-paypal-email" >
+				<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $paypal_email ); ?>" name="paypal_email" id="paypal_email"/>
+					<p class="description"><?php esc_html_e( 'PayPal email address that receive payment.', 'wp-travel' ); ?></p>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 	<?php
 }
