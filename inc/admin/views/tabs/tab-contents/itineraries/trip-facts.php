@@ -111,7 +111,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 			<?php
 		} else {
 			$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
-			printf( __( ' %1$1sThere are no labels set currently. %2$2sAdd label%3$3s.%4$4s', 'wp-travel' ),  '<i class="fas fa-exclamation-triangle"></i><p id="pass-strength-result" class="good">', '<a href="' . $settings_url . '">', '</a>', '</p>' );
+			printf( __( ' %1$1sThere are no labels set currently. %2$2sAdd label%3$3s.%4$4s', 'wp-travel' ),  '<p id="pass-strength-result" class="good"><i class="fas fa-exclamation-triangle"></i>', '<a href="' . $settings_url . '">', '</a>', '</p>' );
 		}
 		
 	}
