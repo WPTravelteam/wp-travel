@@ -213,6 +213,18 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 1.9.7 =
+Release Date: 28th April, 2019
+
+Enhancement:
+
+* Addons Settings tab added. It helps to enable / disable addons
+* New hook for payment settings.
+
+Fixes:
+
+* Upsell notices fixes.
+
 = 1.9.6 =
 Release Date: 22nd April 2019
 
