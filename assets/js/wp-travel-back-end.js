@@ -692,15 +692,15 @@
     });
 
     if ($('#wp-travel-use-global-tabs').is(':checked')) {
-        $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
+        $('#wp-travel-tab-content-tabs .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
     } else {
-        $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
+        $('#wp-travel-tab-content-tabs .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
     }
     $('#wp-travel-use-global-tabs').change(function() {
         if ($(this).is(':checked')) {
-            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
+            $('#wp-travel-tab-content-tabs .wp-travel-sorting-tabs').css({ "opacity": "0.3", "pointer-events": "none" });
         } else {
-            $('#wp-travel-tab-content-setting .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
+            $('#wp-travel-tab-content-tabs .wp-travel-sorting-tabs').css({ "opacity": "1", "pointer-events": "auto" });
         }
     });
 
