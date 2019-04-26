@@ -171,7 +171,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 
 								// Pricing Sale.
 								$custom_pricing_sale_price_attribute = 'disabled="disabled"';
-								$custom_pricing_sale_price_style     = 'display:none';
+								$custom_pricing_sale_price_class     = 'hidden';
 
 								// Check for label.
 								if ( 'custom' === $pricing_type ) {
@@ -181,7 +181,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 								// Check for sale.
 								if ( 'yes' === $pricing_sale_enabled ) {
 									$custom_pricing_sale_price_attribute = '';
-									$custom_pricing_sale_price_style     = '';
+									$custom_pricing_sale_price_class     = '';
 								}
 								?>
 							<div class="panel panel-default">
@@ -254,7 +254,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 												</div>
 											</div>
 
-											<div style="<?php echo esc_attr( $custom_pricing_sale_price_style ); ?>" <?php echo esc_attr( $custom_pricing_sale_price_attribute ); ?> class="repeat-row">
+											<div <?php echo esc_attr( $custom_pricing_sale_price_attribute ); ?> class="repeat-row <?php echo esc_attr( $custom_pricing_sale_price_class ); ?>">
 												<label for="sale_price_<?php echo esc_attr( $key ); ?>" class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
