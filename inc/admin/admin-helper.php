@@ -837,11 +837,19 @@ function wp_travel_extras_pro_option_fields() {
 	</tr>
 	<tr class="wp-travel-upsell-message">
 		<td colspan="2">
-			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Want to use above pro features?', 'wp-travel' ); ?></h4>
-				<p><?php esc_html_e( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ); ?></p>
-				<a target="_blank" href="https://themepalace.com/downloads/wp-travel-tour-extras/"><?php esc_html_e( 'Get Tour Extras Addon', 'wp-travel' ); ?></a>
-			</div>
+            <?php
+                if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) :
+                    $args = array(
+                        'title'      => __( 'Want to use above pro features?', 'wp-travel' ),
+                        'content'    => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
+                        'link'       => 'https://wptravel.io/wp-travel-pro/',
+                        'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+                        'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
+                        'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
+                    );
+                    wp_travel_upsell_message( $args );
+                endif;
+            ?>
 		</td>
 	</tr>
 

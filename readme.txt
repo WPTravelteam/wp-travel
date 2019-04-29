@@ -214,7 +214,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 1.9.7 =
-Release Date: 28th April, 2019
+Release Date: 29th April, 2019
 
 Enhancement:
 
@@ -224,6 +224,7 @@ Enhancement:
 Fixes:
 
 * Upsell notices fixes.
+* Other minor issue fixes.
 
 = 1.9.6 =
 Release Date: 22nd April 2019
