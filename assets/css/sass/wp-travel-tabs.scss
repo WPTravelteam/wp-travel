@@ -528,3 +528,32 @@ $alto: #ddd;
         margin-left: 0;
     }
 }
+
+.full-pro-section {
+    width: 96%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    background: #349f3f;
+    color: #fff;
+
+    .single-module-image {
+            float: left;
+    width: 30%;
+    }
+
+    .single-module-content {
+        float: left;
+    width: 60%;
+    }
+
+    .text-title a {
+        color: #fff;
+    }
+
+    .buy-btn {
+            float: left;
+    margin: 0 20px;
+    }
+}
