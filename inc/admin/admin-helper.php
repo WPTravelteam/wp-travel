@@ -164,6 +164,40 @@ function wp_travel_marketplace_page() {
 							<?php foreach( $addons_data as $key => $product ) :
 								$prod_info = $product->info;
 							?>
+                            <div class="single-module full-section" style="
+                                width: 96%;
+                                overflow: hidden;
+                                background: #fbfbfb;
+                                padding: 0;
+                                margin: 0 auto;
+                                margin-bottom: 25px;
+                                background: #349f3f;
+                                color: #fff;
+                            ">
+                                                                <div class="single-module-image" style="
+                                float: left;
+                                width: 200px;
+                                /* background: #349f3f; */
+                            ">
+                                                                    <a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
+                                                                    <img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="single-module-content clearfix" style="
+                                float: left;
+                                width: 60%;
+                            ">
+                                        <h4 class="text-title">
+                                            <a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
+                                                <span class="dashicons-wp-travel">
+                                                </span>WP Travel PRO</a>
+                                        </h4>
+
+<p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
+                                        <a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
+                                        <a class="btn-default pull-right" href="https://themepalace.com/download-checkout/?edd_action=add_to_cart&amp;download_id=95078" target="_blank">Buy Now</a>
+                                    </div>
+                                </div>
 
 								<div class="single-module">
 									<div class="single-module-image">
