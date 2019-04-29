@@ -386,7 +386,7 @@ $alto: #ddd;
     position: relative;
     width: 100%;
     .single-module {
-        width: 50%;
+        width: 33%;
         float: left;
         padding: 0 15px;
         position: relative;
@@ -530,11 +530,11 @@ $alto: #ddd;
 }
 
 .full-pro-section {
-    width: 96%;
-    overflow: hidden;
-    padding: 0;
+        width: 96%!important;
+    /* overflow: hidden; */
+    padding: 0 !important;
     margin: 0 auto;
-    margin-bottom: 25px;
+    margin-bottom: 25px!important;
     background: #349f3f;
     color: #fff;
 
@@ -546,8 +546,17 @@ $alto: #ddd;
     .single-module-content {
         float: left;
     width: 60%;
+    background: transparent!important;
     }
-
+    img {
+        border: none!important;
+    }
+    .dashicons-wp-travel:before {
+        color: #fff;
+    }
+    .single-module-image {
+        background: transparent!important;
+    }
     .text-title a {
         color: #fff;
     }

@@ -324,7 +324,7 @@
   width: 100%;
 }
 .marketplace-module .single-module {
-  width: 50%;
+  width: 33%;
   float: left;
   padding: 0 15px;
   position: relative;
@@ -462,6 +462,40 @@
     margin-right: 12px;
     margin-left: 0;
   }
+}
+.full-pro-section {
+  width: 96% !important;
+  /* overflow: hidden; */
+  padding: 0 !important;
+  margin: 0 auto;
+  margin-bottom: 25px !important;
+  background: #349f3f;
+  color: #fff;
+}
+.full-pro-section .single-module-image {
+  float: left;
+  width: 30%;
+}
+.full-pro-section .single-module-content {
+  float: left;
+  width: 60%;
+  background: transparent !important;
+}
+.full-pro-section img {
+  border: none !important;
+}
+.full-pro-section .dashicons-wp-travel:before {
+  color: #fff;
+}
+.full-pro-section .single-module-image {
+  background: transparent !important;
+}
+.full-pro-section .text-title a {
+  color: #fff;
+}
+.full-pro-section .buy-btn {
+  float: left;
+  margin: 0 20px;
 }
 
 /*# sourceMappingURL=wp-travel-tabs.css.map */
