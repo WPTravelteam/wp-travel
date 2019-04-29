@@ -77,7 +77,6 @@ function wp_travel_paypal_ipn_process() {
 		 * Check if the seller email that was processed by the IPN matches what is saved as
 		 * the seller email in our DB
 		 */
-		$settings = wp_travel_get_settings();
 		if ( $_POST['receiver_email'] != $settings['paypal_email'] ) {
 			$message .= "\nEmail seller email does not match email in settings\n";
 		}
@@ -88,7 +87,6 @@ function wp_travel_paypal_ipn_process() {
 		 * Check if the currency that was processed by the IPN matches what is saved as
 		 * the currency setting
 		 */
-		$settings = wp_travel_get_settings();
 		if ( $_POST['mc_currency'] != $settings['currency'] ) {
 			$message .= "\nCurrency does not match those assigned in settings\n";
 		}
@@ -200,7 +198,7 @@ function wp_travel_paypal_ipn_process() {
 		 * a good idea to have a developer or sys admin manually investigate any
 		 * invalid IPN.
 		 */
-		wp_mail( $settings->from_email, 'Invalid IPN', $listener->getTextReport() );
+		wp_mail( $settings['from_email'], 'Invalid IPN', $listener->getTextReport() );
 
 	}
 }
