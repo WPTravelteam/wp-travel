@@ -1922,38 +1922,6 @@ span.wp-travel-message {
     pointer-events: none;
 }
 
-.wp-travel-upsell-message {
-    .wp-travel-pro-feature-notice {
-        background-color: #fbfbe1;
-        border: 1px solid #faeec9;
-        padding: 20px 15px;
-        h4 {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .buy-pro-action{
-            float:left;
-            &.buy-pro{
-                margin-right: 10px;
-            }
-            a{
-                display: inline-block;
-                padding:7px 0;
-                &.action-btn {
-                    border-radius: 3px;
-                    color: #fff;
-                    font-weight: 600;
-                    background-color: #409cd1;
-                    margin-top: 15px;
-                    text-decoration: none;
-                    padding: 7px 15px;
-                }
-            }
-        }
-        
-    }
-}
-
 /* Error CSS */
 .parsley-errors-list {
     margin: 0;

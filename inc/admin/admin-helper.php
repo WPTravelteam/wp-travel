@@ -1938,37 +1938,46 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
-    $type = isset( $args['type'] ) ? $args['type'] : 'utilities';
-    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $type );
+    $defaults = array(
+        'type' => 'utilities',
+        'title' => __( 'Get WP Travel PRO', 'wp-travel' ),
+        'content' => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
+        'link' => 'https://wptravel.io/wp-travel-pro/',
+        'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+		'link2' => 'https://wptravel.io/downloads/',
+		'link2_label' => __( 'Check all Add-ons', 'wp-travel' ),
+		'link3' => '',
+        'link3_label' => __( 'View WP Travel Addons', 'wp-travel' ),
+        'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
+    );
+    $args = wp_parse_args( $args, $defaults );
+
+    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $args['type'] );
 
     if ( ! $show_upsell ) {
         return;
     }
-    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
-    $content = isset( $args['content'] ) ? $args['content'] : '';
-    $link = isset( $args['link'] ) ? $args['link'] : '';
-    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'Get Pro', 'wp-travel' );
-    $link2 = isset( $args['link2'] ) ? $args['link2'] : '';
-    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons', 'wp-travel' );
-
-    $link3 = isset( $args['link3'] ) ? $args['link3'] : '';
-    $link3_label = isset( $args['link3_label'] ) ? $args['link3_label'] : __( 'View WP Travel Addons', 'wp-travel' );
     ?>
-    <div class="wp-travel-upsell-message">
+    <div class="wp-travel-upsell-message <?php echo esc_attr( implode( ' ', $args['main_wrapper_class'] ) ); ?>">
 		<div class="wp-travel-pro-feature-notice clearfix">
-			<h4><?php echo esc_html( $title ); ?></h4>
-            <p><?php echo esc_html( $content ); ?></p>
-            <div class="buy-pro-action buy-pro">
-                <a target="_blank" href="<?php echo esc_url( $link ); ?>" class="action-btn" ><?php echo esc_html( $link_label ); ?></a>
-                <?php if ( ! empty( $link2 ) ) : ?>
-                <br>
-                    <?php esc_html_e( 'or', 'wp-travel' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
-                <?php endif; ?>  
+            <div class="section-one">
+                <h4><?php echo esc_html( $args['title'] ); ?></h4>
+                <p><?php echo $args['content']; ?></p>
             </div>
-            <div class="buy-pro-action action2">
-                <?php if ( ! empty( $link3 ) ) : ?>
-                    <a target="_blank" href="<?php echo esc_url( $link3 ); ?>" class="action-btn" ><?php echo esc_html( $link3_label ); ?></a> 
-                <?php endif; ?>       
+            <div class="section-two">
+            <div class="buy-pro-action buy-pro">
+                <a target="_blank" href="<?php echo esc_url( $args['link'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link_label'] ); ?></a>
+                <?php if ( ! empty( $args['link2'] ) ) : ?>
+                <p>
+                    <?php esc_html_e( 'or', 'wp-travel' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url(  $args['link2'] ); ?>"><?php echo esc_html( $args['link2_label'] ); ?></a>
+                </p> 
+                <?php endif; ?>  
+                </div>
+                <?php if ( ! empty( $args['link3'] ) ) : ?>
+                <div class="buy-pro-action action2">
+                    <a target="_blank" href="<?php echo esc_url( $args['link3'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link3_label'] ); ?></a> 
+                </div>
+                <?php endif; ?>
             </div>
         </div>
 	</div>

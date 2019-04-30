@@ -17,15 +17,16 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 			?>
 			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Wishlists Options', 'wp-travel' ); ?></h3>
 			<?php
-			$args = array(
+			$upsell_args = array(
 				'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
-				'content'    => __( 'Whishlists helps user to save trip they like for future, so that they can book them later.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-wishlists/',
-				'link2_label' => __( 'Get WP Travel Wishlists', 'wp-travel' ),
+				'content'    => sprintf( __( 'Whishlists helps user to save trip they like for future, so that they can book them later. Checkout out %sWP Travel PRO%s or %sWP Travel Wishlists%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-wishlists/" target="__blank">', '</a>' ),
+				'link'       => '',
+        		'link_label' => '',
+				'link2'       => '',
+				'link2_label' => '',
+				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $args );
+			wp_travel_upsell_message( $upsell_args );
 		endif;
 		
 		?>
@@ -89,30 +90,32 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 			?>
 			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Currency Exchange Rate API', 'wp-travel' ); ?></h3>
 			<?php
-			$args = array(
+			$upsell_args = array(
 				'title'      => __( 'Display current exchange rate in your site.', 'wp-travel' ),
-				'content'    => __( 'You can display current exchange rate for different currency in pages or sidebar of your site.!', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/',
-				'link2_label' => __( 'Get WP Travel Currency Exchange Rates', 'wp-travel' ),
+				'content'    => sprintf( __( 'You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out %sWP Travel PRO%s or %sWP Travel Currency Exchange Rates%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/" target="__blank">', '</a>' ),
+				'link'       => '',
+        		'link_label' => '',
+				'link2'       => '',
+				'link2_label' => '',
+				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $args );
+			wp_travel_upsell_message( $upsell_args );
 		endif;
 		echo '<br>';
 		if ( ! class_exists( 'WP_Travel_Mailchimp_Core' ) ) :
 			?>
 			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Mailchimp Settings', 'wp-travel' ); ?></h3>
 			<?php
-			$args = array(
-				'title'      => __( 'Using Mailchimp for email marketing ?', 'wp-travel' ),
-				'content'    => __( 'You can import customer email from booking and inquiry to Mailchimp. That help you grow your business.', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-mailchimp/',
-				'link2_label' => __( 'Get WP Travel Mailchimp', 'wp-travel' ),
+			$upsell_args = array(
+				'title'      => __( 'Using Mailchimp for email marketing?', 'wp-travel' ),
+				'content'    => sprintf( __( 'You can import customer email from booking and inquiry to Mailchimp. That help you grow your business. Checkout out %sWP Travel PRO%s or %sWP Travel Mailchimp%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-mailchimp/" target="__blank">', '</a>' ),
+				'link'       => '',
+        		'link_label' => '',
+				'link2'       => '',
+				'link2_label' => '',
+				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $args );
+			wp_travel_upsell_message( $upsell_args );
 		endif;
 
 		do_action( 'wp_travel_settings_tab_misc_options_fields', $args );

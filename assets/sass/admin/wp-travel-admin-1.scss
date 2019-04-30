@@ -263,69 +263,6 @@
 			}
 
 			.wp-travel-pro-feature-notice {
-				position: relative;
-				background: #ecf8f4;
-				padding: 36px 40px 25px 30px;
-				border-radius: 10px;
-				margin: 20px 0;
-				box-shadow: 0 8px 10px rgba(183, 214, 204, 0.42);
-				border: 0;
-
-				&::before {
-					position: absolute;
-					left: 0;
-					top: 0;
-					width: 100%;
-					height: 8px;
-					background: #69c8a7;
-					content: "";
-				}
-
-				h4 {
-					color: #69c8a7;
-					font-size: 16px;
-					font-weight: 500;
-					margin: 0;
-					margin-bottom: 8px;
-				}
-
-				p {
-					font-size: 14px;
-					font-weight: 400;
-					color: #929292;
-					margin: 0;
-					margin-bottom: 10px;
-				}
-
-				a {
-					font-size: 13px;
-					font-weight: 500;
-					color: #fff;
-					background: #69c8a7;
-					border-radius: 4px;
-					padding: 8px 16px;
-					text-transform: capitalize;
-					letter-spacing: 0.5px;
-					box-shadow: 0 5px #5ab797;
-					transition: all ease 0.2s;
-					margin-top: 0;
-					margin-right: 20px;
-
-					&:hover {
-						background: #53b392;
-						box-shadow: 0 5px #3c9c7b;
-					}
-				}
-
-				a:nth-child(even) {
-					background: #9e9e9e;
-					box-shadow: 0 5px #6b6b6b;
-
-					&:hover {
-						background: #848484;
-						box-shadow: 0 5px #4e4e4e;
-					}
-				}
 			}
 
 			.wp-travel-sorting-tabs {
@@ -970,12 +907,7 @@
 	top: 0;
 }
 
-.buy-pro-action.buy-pro {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	margin-top: 15px;
-}
+
 
 .link-default {
 	background: transparent !important;
@@ -1296,6 +1228,110 @@
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+/**
+ * Upsell message section css.
+ */
+.wp-travel-upsell-message {
+	.wp-travel-pro-feature-notice {
+			background: #ecf8f4;
+			margin: 20px 0;
+	}
+	a{
+		color: #69c8a7;
+	}
+	h4 {
+		color: #69c8a7;
+		font-size: 16px;
+		font-weight: 500;
+		margin: 0;
+		margin-bottom: 8px;
+	}
+
+	p {
+		font-size: 14px;
+		font-weight: 400;
+		color: #929292;
+		margin: 0;
+		margin-bottom: 10px;
+	}
+
+	&.wp-travel-upsell-message-normal{
+		font-size: 13px;
+
+		.wp-travel-pro-feature-notice {
+			box-shadow: none;
+			border-radius: 0;
+			padding: 10px;
+		}
+
+		h4 {
+			font-size: 13px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+
+		.section-one {
+			float: left;
+			width: 70%;
+			text-align: left;
+		}
+
+		.section-two{
+			float: right;
+			text-align: right;
+		}
+	}
+	&.wp-travel-upsell-message-wide {
+		&.wp-travel-upsell-message-center {
+			text-align: center;
+		}
+		
+		.action-btn {
+			margin-bottom: 20px;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 13px;
+			font-weight: 500;
+			color: #fff;
+			background: #69c8a7;
+			border-radius: 4px;
+			padding: 8px 16px;
+			text-transform: capitalize;
+			letter-spacing: 0.5px;
+			box-shadow: 0 5px #5ab797;
+			transition: all ease 0.2s;
+	
+			&:hover {
+				background: #53b392;
+				box-shadow: 0 5px #3c9c7b;
+			}
+		}
+	
+		.buy-pro-action.buy-pro {
+			margin-top: 15px;
+		}
+		.wp-travel-pro-feature-notice {
+			position: relative;
+			padding: 36px 40px 25px 30px;
+			border-radius: 10px;
+			box-shadow: 0 8px 10px rgba(183, 214, 204, 0.42);
+			border: 0;
+	
+			&::before {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 8px;
+				background: #69c8a7;
+				content: "";
 			}
 		}
 	}
