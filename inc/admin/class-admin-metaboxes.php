@@ -243,6 +243,7 @@ class WP_Travel_Admin_Metaboxes {
 		$booking_id = $post->ID;
 
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		$payment_id = wp_travel_get_payment_id( $booking_id );
 		if ( ! $payment_id ) {
 			$title      = 'Payment - #' . $booking_id;
 			$post_array = array(

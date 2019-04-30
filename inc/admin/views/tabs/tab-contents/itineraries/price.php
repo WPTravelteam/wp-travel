@@ -705,7 +705,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 		<td colspan="2"><p class="description"><?php echo esc_html__( 'Please Add Multiple Pricing Options and update to add multiple dates ', 'wp-travel' ); ?></p></td>
 	<?php endif; ?>
 	</tr>
-	<tr>
+	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
 		<td colspan="2"><hr></td>
 	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-title">

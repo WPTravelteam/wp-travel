@@ -32,6 +32,10 @@ const payments = {
     }
 };
 
+payments.upload_voucher = function() {
+    console.log('voucher');
+}
+
 
 const display_payment_mode_option = {
     partial: function() {

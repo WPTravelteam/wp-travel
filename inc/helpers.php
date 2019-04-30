@@ -738,6 +738,14 @@ function wp_travel_get_payment_status() {
 			'color' => '#008600',
 			'text'  => __( 'Paid', 'wp-travel' ),
 		),
+		'waiting_voucher'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Waiting for voucher', 'wp-travel' ),
+		),
+		'voucher_submited'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Voucher submited', 'wp-travel' ),
+		),
 		'canceled' => array(
 			'color' => '#FE450E',
 			'text'  => __( 'Canceled', 'wp-travel' ),

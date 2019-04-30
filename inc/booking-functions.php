@@ -441,7 +441,7 @@ function wp_travel_save_booking_data( $booking_id ) {
 		endforeach;
 	}
 	update_post_meta( $booking_id, 'order_data', $order_data );
-	do_action( 'wp_travel_after_booking_data_save', $booking_id );
+	do_action( 'wp_travel_after_booking_data_save', $booking_id ); // update payment status.
 }
 add_action( 'save_post', 'wp_travel_save_booking_data' );
 

@@ -97,7 +97,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			'content'     => '',
 			'link'       => 'https://wptravel.io/wp-travel-pro/',
         	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'        => 'http://wptravel.io/downloads/',
+			'link2'        => 'https://wptravel.io/downloads/category/payment-gateways/',
 			'link2_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
 			'link3'       => 'http://wptravel.io/contact',
 			'link3_label' => __( 'Request a new one', 'wp-travel' ),

@@ -161,6 +161,24 @@ function wp_travel_marketplace_page() {
 					<?php if ( $addons_data ) : ?>
 						<div id="tabs-1" class="tab-pannel">
 							<div class="marketplace-module clearfix">
+                                <div class="single-module full-pro-section">
+                                    <div class="single-module-image">
+                                        <a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
+                                        <img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="single-module-content clearfix">
+                                        <h4 class="text-title">
+                                            <a href="https://wptravel.io/wp-travel-pro/" target="_blank">
+                                            <span class="dashicons-wp-travel">
+                                            </span>WP Travel PRO</a>
+                                        </h4>
+
+                                        <p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
+                                        <a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
+                                        <a class="btn-default buy-btn" href="https://themepalace.com/download-checkout/?edd_action=add_to_cart&amp;download_id=95078" target="_blank">Buy Now</a>
+                                    </div>
+                                </div>
 							<?php
 							foreach ( $addons_data as $key => $product ) :
 								$prod_info = $product->info;
@@ -859,11 +877,19 @@ function wp_travel_extras_pro_option_fields() {
 	</tr>
 	<tr class="wp-travel-upsell-message">
 		<td colspan="2">
-			<div class="wp-travel-pro-feature-notice">
-				<h4><?php esc_html_e( 'Want to use above pro features?', 'wp-travel' ); ?></h4>
-				<p><?php esc_html_e( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ); ?></p>
-				<a target="_blank" href="https://themepalace.com/downloads/wp-travel-tour-extras/"><?php esc_html_e( 'Get Tour Extras Addon', 'wp-travel' ); ?></a>
-			</div>
+            <?php
+                if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) :
+                    $args = array(
+                        'title'      => __( 'Want to use above pro features?', 'wp-travel' ),
+                        'content'    => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
+                        'link'       => 'https://wptravel.io/wp-travel-pro/',
+                        'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+                        'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
+                        'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
+                    );
+                    wp_travel_upsell_message( $args );
+                endif;
+            ?>
 		</td>
 	</tr>
 

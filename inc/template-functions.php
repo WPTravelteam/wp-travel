@@ -2198,36 +2198,47 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 	
 										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 	
-									<?php else : ?>
-										<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
-										<?php
-										// @since 1.9.3 To display group discount pricing lists. 
-										do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+									<?php else :
+										$trip_extras_class = new Wp_Travel_Extras_Frontend();
+										if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { 
+											?>
+											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+											<?php
+											// @since 1.9.3 To display group discount pricing lists. 
+											do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+										} else {
 										?>
+											<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+										
+										<?php
+										}
+											?>
 									<?php endif; ?>
 								</div>
-								<div class="wp-travel-booking-row">
-									<?php
-									/**
-									 * Support For WP Travel Tour Extras Plugin.
-									 *
-									 * @since 1.5.8
-									 */
-									do_action( 'wp_travel_trip_extras', $price_key );
-									?>
-									<div class="wp-travel-calender-aside">										
-										<div class="add-to-cart">
-											<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
-											<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
-											<?php
-											if ( 'yes' !== $fixed_departure ) : ?>
-													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
-											<?php endif; ?>
-											<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+								<?php if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) : ?>
+									<div class="wp-travel-booking-row">
+										<?php
+										/**
+										 * Support For WP Travel Tour Extras Plugin.
+										 *
+										 * @since 1.5.8
+										 */
+										do_action( 'wp_travel_trip_extras', $price_key );
+										?>
+										<div class="wp-travel-calender-aside">										
+											<div class="add-to-cart">
+												<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+												<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+												<?php
+												if ( 'yes' !== $fixed_departure ) : ?>
+														<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
+												<?php endif; ?>
+												<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 
+											</div>
 										</div>
 									</div>
-								</div>
+								<?php endif; ?>
 								</form>
 							</li>
 													<?php

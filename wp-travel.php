@@ -189,7 +189,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
-			include_once sprintf( '%s/inc/gateways/bank-transfer/bank-transfer.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/bank-deposit/bank-deposit.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
 			// Open Graph Tags @since 1.7.6
 			include sprintf( '%s/inc/og-tags.php', WP_TRAVEL_ABSPATH );

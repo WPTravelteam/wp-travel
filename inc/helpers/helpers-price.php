@@ -370,6 +370,19 @@ function wp_travel_booking_data( $booking_id ) {
 	return $amounts;
 }
 
+function wp_travel_get_payment_id( $booking_id ) {
+	if ( ! $booking_id ) {
+		return;
+	}
+	$payment_ids       = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+
+	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
+		$payment_id = end( $payment_ids );
+	} else {
+		$payment_id = $payment_ids;
+	}
+	return $payment_id;
+}
 /**
  * Return Trip Price.
  *
