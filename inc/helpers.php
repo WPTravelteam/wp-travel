@@ -1105,7 +1105,7 @@ function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false ) 
 		}
 	}
 
-	if ( ! empty( $wp_travel_tabs ) ) {
+	if ( ! empty( $wp_travel_tabs ) && is_array( $wp_travel_tabs ) ) {
 		// Add Tabs into saved tab array which newly added tabs in default tabs via hook.
 		$default_tabs      = $trip_tabs;
 		$default_tabs_keys = array_keys( $default_tabs );
