@@ -262,7 +262,7 @@ function wp_travel_update_payment_status_admin( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
-	$payment_id = wp_travel_get_payment_id( $booking_id );;
+	$payment_id = wp_travel_get_payment_id( $booking_id );
 
 	if ( $payment_id ) {
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? $_POST['wp_travel_payment_status'] : 'N/A';
