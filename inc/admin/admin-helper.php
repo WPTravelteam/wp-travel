@@ -1938,6 +1938,12 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
+    $type = isset( $args['type'] ) ? $args['type'] : 'utilities';
+    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $type );
+
+    if ( ! $show_upsell ) {
+        return;
+    }
     $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
     $content = isset( $args['content'] ) ? $args['content'] : '';
     $link = isset( $args['link'] ) ? $args['link'] : '';
