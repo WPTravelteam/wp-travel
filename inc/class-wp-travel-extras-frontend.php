@@ -25,8 +25,11 @@ class Wp_Travel_Extras_Frontend {
      * @return boolean
      */
     public function is_extras_pro() {
+        $settings = wp_travel_get_settings();
+        
+		$enable_tour_extras = isset( $settings['show_wp_travel_tour_extras'] ) ? $settings['show_wp_travel_tour_extras'] : 'yes';
 
-        return class_exists( 'WP_Travel_Tour_Extras_Core' );
+        return class_exists( 'WP_Travel_Tour_Extras_Core' ) && 'yes' === $enable_tour_extras;
 
     }
     /**

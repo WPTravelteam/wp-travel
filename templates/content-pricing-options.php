@@ -65,8 +65,7 @@ $pricing_option_type = wp_travel_get_pricing_option_type( $trip_id ); ?>
 			else :
 				// Default pricing options template with trip id.
 				do_action( 'wp_travel_booking_princing_options_list', (int) $trip_id );
-				?>
-			<?php endif;
+			endif;
 		} else {
 			do_action( "wp_travel_{$pricing_option_type}_options_list", $trip_id );
 		}

@@ -61,6 +61,45 @@ function wp_travel_payment_gateway_lists() {
 	return apply_filters( 'wp_travel_payment_gateway_lists', $gateway );
 }
 
+// Return sorted payment gateway list. @since 1.9.8
+function wp_travel_sorted_payment_gateway_lists() {
+	$settings = wp_travel_get_settings();
+
+	$default_gateways      = wp_travel_payment_gateway_lists();
+	$default_gateways_keys = array_keys( wp_travel_payment_gateway_lists() );
+
+	$sorted_gateways = isset( $settings['sorted_gateways'] ) ? $settings['sorted_gateways'] : array();
+
+	// remove if gateway not listed in default [ due to deactivated plugin ].
+	if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 && count( $default_gateways_keys ) > 0 ) {
+		foreach ( $sorted_gateways as $key => $gateway ) {
+			if ( ! in_array( $gateway, $default_gateways_keys ) ) {
+				unset( $sorted_gateways[ $key ] );
+			}
+		}
+	}
+
+	// List newly added payment gateway into sorting list.
+	foreach ( $default_gateways_keys as $gateway ) {
+		if ( ! in_array( $gateway, $sorted_gateways ) ) {
+			$sorted_gateways[] = $gateway;
+		}
+	}
+
+	if ( empty( $sorted_gateways ) ) {
+		$sorted_gateways = $default_gateways_keys;
+	}
+	// assign label into gateway.
+
+	$sorted = array();
+	foreach ( $sorted_gateways as $gateway_key ) {
+		$sorted[ $gateway_key ] = $default_gateways[ $gateway_key  ];
+	}
+
+
+	return $sorted;
+}
+
 /**
  * Get Minimum payout amount
  *

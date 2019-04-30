@@ -1009,7 +1009,14 @@ class WP_Travel_Admin_Settings {
 			</tr>
 		</table>
 		<?php do_action( 'wp_travel_payment_gateway_fields', $args ); // old hook. ?>
-		<?php do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); // new hook ?>
+		<?php
+		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
+		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) :
+			foreach ( $sorted_gateways as $gateway => $gateway_label ) :
+				do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); // new hook
+			endforeach;
+		endif;
+		?>
 		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Standard Paypal', 'wp-travel' ); ?></h3>
 		<table class="form-table">
 			<tr>
