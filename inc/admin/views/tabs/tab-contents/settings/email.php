@@ -39,7 +39,11 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 		endif;
 		?>
 		<table class="form-table">
-			<tr><td colspan="2" ><h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'General Options', 'wp-travel' ); ?></h4></td></tr>
+			<tr>
+				<th clospan="2">
+					<h3><?php esc_html_e( 'General Options', 'wp-travel' ); ?></h3>
+				</th>
+			</tr>
 
 			<tr>
 				<th>
@@ -47,10 +51,13 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 				</th>
 				<td>
 					<input value="<?php echo isset( $args['settings']['wp_travel_from_email'] ) ? $args['settings']['wp_travel_from_email'] : get_option( 'admin_email' ); ?>" type="email" name="wp_travel_from_email" id="wp_travel_global_from_email">
+					
+					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( 'Email address to send email from.', 'wp-travel' ); ?></label></p>
 				</td>
 			</tr>
 		</table>
 		<?php do_action( 'wp_travel_tab_content_before_booking_tamplate', $args ); ?>
+		<h3 class="wp-travel-section-title"><?php esc_html_e( 'Email Templates', 'wp-travel' ); ?></h3>
 		<div class="wp-collapse-open clearfix">
 			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
@@ -78,7 +85,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 									<table class="form-table">
 										<tr>
 											<th>
-												<label for="send_booking_email_to_admin"><?php esc_html_e( 'Send Booking mail to admin', 'wp-travel' ); ?></label>
+												<label for="send_booking_email_to_admin"><?php esc_html_e( 'Send Email', 'wp-travel' ); ?></label>
 											</th>
 											<td>
 												<span class="show-in-frontend checkbox-default-design">
@@ -87,6 +94,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 														<input <?php checked( $send_booking_email_to_admin, 'yes' ); ?> value="yes" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />
 														<span class="switch"></span>
 													</label>
+													<p class="description"><?php _e( 'Enable or disable Email notification to admin' ); ?></p>
 												</span>
 											</td>
 										</tr>
@@ -96,7 +104,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="booking-admin-email-sub"><?php esc_html_e( 'Booking Email Subject', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input value="<?php echo $booking_admin_email_settings['admin_subject']; ?>" type="text" name="booking_admin_template_settings[admin_subject]" id="booking-admin-email-sub">
+												<input value="<?php echo $booking_admin_email_settings['admin_subject']; ?>" type="text" name="booking_admin_template_settings[admin_subject]" id="booking-admin-email-sub" type="text">
 											</td>
 										</tr>
 										<tr>

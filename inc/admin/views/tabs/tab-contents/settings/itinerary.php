@@ -47,7 +47,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 							<span class="switch"></span>
 						</label>
 					</span>
-					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( sprintf( 'Check to enable.' ), 'wp-travel' ); ?></label></p>
+					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( 'Collect multiple travelers information from checkout page.', 'wp-travel' ); ?></label></p>
 				</td>
 			<tr>
 			<tr id="wp-travel-tax-price-options" >

@@ -88,12 +88,14 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		</table>
 		<?php
 			$upsell_args = array(
-				'title'      => __( 'Need alternative maps ?', 'wp-travel' ),
-				'content'    => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/category/map/',
-				'link2_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
+				'title'              => __( 'Need alternative maps ?', 'wp-travel' ),
+				'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel. Get %s WP Travel Pro %s or %sView WP Travel Map addons%s', 'wp-travel' ) , '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>' ),
+				'link'               => '',
+        		'link_label'         => '',
+				'link2'              => '',
+				'link2_label'        => '',
+				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
+				'type'               => 'maps',
 			);
 			if ( class_exists( 'WP_Travel_Pro' ) ) {
 				$upsell_args['link'] = $upsell_args['link2'];
@@ -104,7 +106,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		?>
 
 		<table class="form-table">
-		<tr>
+			<tr>
 				<th clospan="2">
 					<h3><?php esc_html_e( 'Pages', 'wp-travel' ); ?></h3>
 				</th>

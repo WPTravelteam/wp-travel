@@ -119,11 +119,11 @@ class WP_Travel_Admin_Settings {
 		);
 
 		$settings_fields['account_options_global'] = array(
-			'tab_label'     => __( 'Account Settings', 'wp-travel' ),
+			'tab_label'     => __( 'Account', 'wp-travel' ),
 			'content_title' => __( 'Account Settings', 'wp-travel' ),
 			'priority'      => 30,
 			'callback'      => 'wp_travel_settings_callback_account_options_global',
-			'icon'          => 'fa-cog',
+			'icon'          => 'fa-lock',
 		);
 
 		$settings_fields['tabs_global']                   = array(
@@ -131,14 +131,14 @@ class WP_Travel_Admin_Settings {
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 			'priority'      => 40,
 			'callback'      => 'wp_travel_settings_callback_tabs_global',
-			'icon'          => 'fa-folder-open',
+			'icon'          => 'fa-window-maximize',
 		);
 		$settings_fields['payment']                       = array(
 			'tab_label'     => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
 			'priority'      => 50,
 			'callback'      => 'wp_travel_settings_callback_payment',
-			'icon'          => 'fa-hand-holding-usd',
+			'icon'          => 'fa-credit-card',
 		);
 		$settings_fields['facts']                         = array(
 			'tab_label'     => __( 'Facts', 'wp-travel' ),

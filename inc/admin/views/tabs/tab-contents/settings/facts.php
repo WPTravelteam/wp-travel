@@ -60,22 +60,22 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 			<tbody>
 				<tr>
 					<th>
-						<?php echo esc_html( 'Field Name','wp-travel' ); ?>
+						<label for="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_name"><?php echo esc_html( 'Field Name','wp-travel' ); ?></label>
 					</th>
 					<td>
-						<input value="<?php echo isset($fact['name']) ? $fact['name'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][name]" placeholder="<?php echo esc_attr( 'Enter field name', 'wp-travel' ); ?>" />
+						<input value="<?php echo isset($fact['name']) ? $fact['name'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][name]" id="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_name" placeholder="<?php echo esc_attr( 'Enter field name', 'wp-travel' ); ?>" type="text" />
 					</td>
 				</tr>
 				<tr class="toggle-row">
 					<th>
-						<?php echo esc_html( 'Field Type','wp-travel' ); ?>
+						<label for="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_type"><?php echo esc_html( 'Field Type','wp-travel' ); ?></label>
 					</th>
 					<td>
-						<select data-index="<?php echo $fact ? $str : '$index' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][type]" class="fact-type-changer">
-								<option value=""><?php echo esc_html( 'Select a type', 'wp-travel' ); ?></option>
+						<select data-index="<?php echo $fact ? $str : '$index' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][type]" id="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_type" class="fact-type-changer">
+								<option value="text" <?php if( isset( $fact['type'] ) && $fact['type'] == 'text') echo 'selected'; ?>><?php echo esc_html( 'Plain Text', 'wp-travel' ); ?></option>
+								<!-- <option value=""><?php echo esc_html( 'Select a type', 'wp-travel' ); ?></option> -->
 								<option value="single" <?php if ( isset( $fact['type'] ) && $fact['type'] == 'single') echo 'selected'; ?>><?php echo esc_html( 'Single Select', 'wp-travel' ); ?></option>
 								<option value="multiple" <?php if( isset( $fact['type']) && $fact['type'] == 'multiple' ) echo 'selected'; ?>><?php echo esc_html( 'Multiple Select', 'wp-travel' ); ?></option>
-								<option value="text" <?php if( isset( $fact['type'] ) && $fact['type'] == 'text') echo 'selected'; ?>><?php echo esc_html( 'Plain Text', 'wp-travel' ); ?></option>
 						</select>
 					</td>
 				</tr>
@@ -87,11 +87,11 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 				?>
 				<tr class="toggle-row multiple-val-<?php echo $fact ? $str : '$index' ?>" <?php echo $display_tr; ?>>
 					<th>
-						<?php echo esc_html( 'Values','wp-travel' ); ?>
+						<label for="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index'; ?>_options"><?php echo esc_html( 'Values','wp-travel' ); ?></label>
 					</th>
 					<td>
 						<div class="fact-options">
-							<input value=""  name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index'; ?>][options]" class="fact-options-list"  placeholder="<?php echo esc_attr( 'Add an option and press "Enter"', 'wp-travel' ); ?>"/>
+							<input value=""  name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index'; ?>][options]" id=""wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index'; ?>_options" class="fact-options-list"  placeholder="<?php echo esc_attr( 'Add an option and press "Enter"', 'wp-travel' ); ?>" type="text"/>
 							<div class="options-holder">
 								<?php if ( isset( $fact['options'] ) && is_array( $fact['options'] ) ) : ?>
 									<?php foreach ( $fact['options'] as $option ): ?>
@@ -104,10 +104,10 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 				</tr>
 				<tr class="toggle-row">
 					<th>
-						<?php echo esc_html( 'Icon Class','wp-travel' ); ?>
+						<label for="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_icon"><?php echo esc_html( 'Icon Class','wp-travel' ); ?></label>
 					</th>
 					<td>
-						<input value="<?php echo isset($fact['icon']) ? $fact['icon'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][icon]" placeholder="<?php esc_html_e( 'Icon', 'wp-travel' ); ?>"/>
+						<input value="<?php echo isset($fact['icon']) ? $fact['icon'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][icon]" id="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_icon"  placeholder="<?php esc_html_e( 'Icon', 'wp-travel' ); ?>" type="text"/>
 					</td>
 				</tr>
 				<tr class="open-close-row">

@@ -49,12 +49,13 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
 		// Sorting.
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
-			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content">
+			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
+			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content wp-travel-combined-accordion">
 				
 				<tbody class="tab-accordion">
 					<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
-						<tr>
-							<td width="30px">
+						<tr class="wp-travel-combined-accordion-list">
+							<td class="sorting-handle">
 								<div class="wp-travel-sorting-handle">
 								</div>
 							</td>

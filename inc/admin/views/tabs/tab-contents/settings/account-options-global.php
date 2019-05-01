@@ -27,8 +27,11 @@ function wp_travel_settings_callback_account_options_global( $tab, $args ) {
 						</span>
 					</label>
 				</span>
-				<p class="description"><label for="enable_checkout_customer_registration"><?php echo esc_html__( 'Require Customer login before booking.', 'wp-travel' ); ?></label></p>
+				<p class="description"><label for="enable_checkout_customer_registration"><?php echo esc_html__( 'Require Customer login or register before booking.', 'wp-travel' ); ?></label></p>
 			</td>
+			</tr>
+			<tr>
+			<th></th>
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
@@ -56,6 +59,9 @@ function wp_travel_settings_callback_account_options_global( $tab, $args ) {
 				</span>
 				<p class="description"><label for="generate_username_from_email"><?php echo esc_html__( ' Automatically generate username from customer email.', 'wp-travel' ); ?></label></p>
 			</td>
+			</tr>
+			<tr>
+			<th></th>
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
