@@ -55,7 +55,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
 				<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
-					<p class="description"><?php echo esc_html__( 'Choose your currency', 'wp-travel' ); ?></p>
+					<p class="description"><?php echo esc_html__( 'Choose currency you accept payments in.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 			<tr>
@@ -67,21 +67,22 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				<th><label for="wp-travel-map-select"><?php echo esc_html__( 'Select Map', 'wp-travel' ); ?></label></th>
 				<td>
 				<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
-					<p class="description"><?php echo esc_html__( 'Choose your map', 'wp-travel' ); ?></p>
+					<p class="description"><?php echo esc_html__( 'Choose your map provider to display map in site.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 		<?php do_action( 'wp_travel_settings_after_currency', $tab, $args ); ?>
 			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ); ?>">
-				<th><label for="google_map_api_key"><?php echo esc_html__( 'Google Map API Key', 'wp-travel' ); ?></label></th>
+				<th><label for="google_map_api_key"><?php echo esc_html__( 'API Key', 'wp-travel' ); ?></label></th>
 				<td>
 					<input type="text" value="<?php echo esc_attr( $google_map_api_key ); ?>" name="google_map_api_key" id="google_map_api_key"/>
-					<p class="description"><?php echo sprintf( 'Don\'t have api key <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">click here</a>', 'wp-travel' ); ?></p>
+					<p class="description"><?php echo sprintf( __( 'To get your Google map API keys %sclick here%s', 'wp-travel' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></p>
 				</td>
 			</tr>
 			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ); ?>">
-				<th><label for="google_map_zoom_level"><?php echo esc_html__( 'Map Zoom Level', 'wp-travel' ); ?></label></th>
+				<th><label for="google_map_zoom_level"><?php echo esc_html__( 'Zoom Level', 'wp-travel' ); ?></label></th>
 				<td>
 					<input step="1" min="1" type="number" value="<?php echo esc_attr( $google_map_zoom_level ); ?>" name="google_map_zoom_level" id="google_map_zoom_level"/>
+					<p class="description"><?php _e( 'Set default zoom level of map.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 		</table>
@@ -101,10 +102,13 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			}
 			wp_travel_upsell_message( $upsell_args );
 		?>
-		<br>
-		<h3 class="wp-travel-tab-content-title"><?php echo esc_html__( 'Pages', 'wp-travel' ); ?></h3>
 
 		<table class="form-table">
+		<tr>
+				<th clospan="2">
+					<h3><?php esc_html_e( 'Pages', 'wp-travel' ); ?></h3>
+				</th>
+			</tr>
 			<tr>
 				<th><label for="cart-page-id"><?php echo esc_html__( 'Cart Page', 'wp-travel' ); ?></label></th>
 				<td>
