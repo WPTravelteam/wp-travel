@@ -63,7 +63,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 		</div>
 
-		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion">
+		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion wp-travel-accordion">
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 				<div class="panel panel-default">
