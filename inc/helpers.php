@@ -2418,3 +2418,108 @@ function wp_travel_get_strings() {
 
 	return apply_filters( 'wp_travel_strings', $localized_strings );
 }
+
+/**
+ * Return WP Travel Bank deposit account details.
+ *
+ * @since 2.0.0
+ */
+function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) {
+	$settings = wp_travel_get_settings();
+
+	$bank_account_details = array();
+
+	$display_fields = array(
+		'account_name',
+		'account_number',
+		'bank_name',
+		'sort_code',
+		'iban',
+		'swift',
+	);
+	$display_fields = apply_filters( 'wp_travel_filter_bank_deposit_account_fields', $display_fields );
+
+	$bank_deposits = $settings['wp_travel_bank_deposits'];
+	if ( isset( $bank_deposits['account_name'] ) && is_array( $bank_deposits['account_name'] ) && count( $bank_deposits['account_name'] ) > 0 ) {
+		foreach ( $bank_deposits['account_name'] as $i => $account_name ) {
+			$enable         = isset( $bank_deposits['enable'][ $i ] ) ? $bank_deposits['enable'][ $i ] : 'no';
+
+			if ( ! $display_all_row && 'no' === $enable ) { // Controls to display each enabled row.
+				continue;
+			}
+
+			$account_number = isset( $bank_deposits['account_number'][ $i ] ) ? $bank_deposits['account_number'][ $i ] : '';
+			$bank_name      = isset( $bank_deposits['bank_name'][ $i ] ) ? $bank_deposits['bank_name'][ $i ] : '';
+			$sort_code      = isset( $bank_deposits['sort_code'][ $i ] ) ? $bank_deposits['sort_code'][ $i ] : '';
+			$iban           = isset( $bank_deposits['iban'][ $i ] ) ? $bank_deposits['iban'][ $i ] : '';
+			$swift          = isset( $bank_deposits['swift'][ $i ] ) ? $bank_deposits['swift'][ $i ] : '';
+
+			$field = array();
+			foreach ( $display_fields as $field_name ) {
+				$field[ $field_name ] = isset( $$field_name ) ? $$field_name : ''; // Filtered fields.
+			}
+
+			$bank_account_details[] = $field;
+		}
+	}
+	return $bank_account_details;
+}
+
+function wp_travel_get_bank_deposit_account_table() {
+	$account_data = wp_travel_get_bank_deposit_account_details();
+	ob_start();
+	if ( is_array( $account_data ) && count( $account_data ) > 0 ) {
+		?>
+		<table>
+			<tr>
+				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
+					<td><?php _e( 'Account Name' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['account_number'] ) ) : ?>
+					<td><?php _e( 'Account Number' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['bank_name'] ) ) : ?>
+					<td><?php _e( 'Bank Name' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['sort_code'] ) ) : ?>
+					<td><?php _e( 'Sort Code' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['iban'] ) ) : ?>
+					<td><?php _e( 'IBAN' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['swift'] ) ) : ?>
+					<td><?php _e( 'Swift' ); ?></td>
+				<?php endif; ?>
+			</tr>
+			<?php foreach ( $account_data as $data ) { ?>
+				<tr>
+					<?php if ( isset( $data['account_name'] ) ) : ?>
+						<td><?php echo esc_html( $data['account_name'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['account_number'] ) ) : ?>
+						<td><?php echo esc_html( $data['account_number'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['bank_name'] ) ) : ?>
+						<td><?php echo esc_html( $data['bank_name'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['sort_code'] ) ) : ?>
+						<td><?php echo esc_html( $data['sort_code'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['iban'] ) ) : ?>
+						<td><?php echo esc_html( $data['iban'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['swift'] ) ) : ?>
+						<td><?php echo esc_html( $data['swift'] ); ?></td>
+					<?php endif; ?>
+				</tr>
+			<?php } ?>
+		</table>
+		<?php
+	} else {
+		esc_html_e( 'No detail found' );
+	}
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+	
+}

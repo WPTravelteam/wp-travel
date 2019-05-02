@@ -2,6 +2,11 @@ var gateway_change = function() {
     const func = jQuery('[name=wp_travel_payment_gateway]:checked').val();
     const executor = payments[func];
     executor && executor();
+
+    jQuery( '.f-bank-deposit' ).hide();
+    if ( func === 'bank_deposit' ) {
+        jQuery( '.f-bank-deposit' ).show();
+    }
 };
 const display_booking_option = {
     booking_only: function() {

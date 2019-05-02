@@ -406,7 +406,6 @@ function wp_travel_get_checkout_form_fields() {
 
 		$gateway_list        = wp_travel_get_active_gateways();
 		$active_gateway_list = isset( $gateway_list['active'] ) ? $gateway_list['active'] : array();
-		// $active_gateway_list = wp_travel_sorted_payment_gateway_lists();
 		$selected_gateway    = isset( $gateway_list['selected'] ) ? $gateway_list['selected'] : '';
 
 		if ( is_array( $active_gateway_list ) && count( $active_gateway_list ) > 0 ) {
@@ -427,9 +426,7 @@ function wp_travel_get_checkout_form_fields() {
 			);
 		}
 
-		// $payment_amount = $actual_trip_price;
 		if ( wp_travel_is_partial_payment_enabled() ) {
-			// $payment_amount = $minimum_partial_payout;
 			$payment_fields['payment_mode'] = array(
 				'type'          => 'select',
 				'label'         => __( 'Payment Mode', 'wp-travel' ),
@@ -454,6 +451,20 @@ function wp_travel_get_checkout_form_fields() {
 				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
 				'before_field'  => wp_travel_get_currency_symbol(),
 				'default'       => wp_travel_get_formated_price( $total_partial_amount ),
+				'priority'      => 115,
+			);
+		}
+
+		$method = array_keys( $active_gateway_list );
+		if ( in_array( 'bank_deposit', $method ) ) {
+			$payment_fields['bank_deposite_info'] = array(
+				'type'          => 'text_info',
+				'label'         => __( 'Bank Detail', 'wp-travel' ),
+				'name'          => 'wp_travel_payment_bank_detail',
+				'id'            => 'wp-travel-payment-bank-detail',
+				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment f-bank-deposit',
+				// 'before_field'  => wp_travel_get_currency_symbol(),
+				'default'       => wp_travel_get_bank_deposit_account_table(),
 				'priority'      => 115,
 			);
 		}
