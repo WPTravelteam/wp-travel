@@ -116,16 +116,16 @@ class WP_Travel_License {
 				$expires_in = '';
 				if ( $license_key ) :
 					if ( 'valid' === $status ) :
-						$status_message = __( 'Active', 'wp-travel' );
+						$status_message = __( 'License Active', 'wp-travel' );
 						$status_class = 'fa-check';
 					elseif ( 'invalid' === $status ) :
-						$status_message = __( 'Invalid', 'wp-travel' );
+						$status_message = __( 'Invalid License', 'wp-travel' );
 						$status_class = 'fa-times';
 					elseif ( 'expired' === $status ) :
-						$status_message = __( 'Expired', 'wp-travel' );
+						$status_message = __( 'License Expired', 'wp-travel' );
 						$status_class = 'fa-times';
 					elseif ( 'inactive' === $status ) :
-						$status_message = __( 'Inactive', 'wp-travel' );
+						$status_message = __( 'License Inactive', 'wp-travel' );
 						$status_class = 'fa-times';
 					endif;
 				endif;
@@ -137,12 +137,14 @@ class WP_Travel_License {
 
 				<div class="license_grid">
 					<div class="form_field">
-						<label for="key1" class="control-label label_title">
-							<?php echo esc_html( sprintf( 'License key : %s', $premium_addon['item_name'] ) ); ?>
-							<?php echo ( $status_message ) ? esc_html( sprintf( '[%s]', $status_message ) ) : ''; ?>
-						</label>
+						<h3>
+							<label for="<?php echo $key; ?>-license-key" class="control-label label_title">
+								<?php echo esc_html( $premium_addon['item_name'] ); ?>
+								<?php echo ( $status_message ) ? esc_html( sprintf( '[%s]', $status_message ) ) : ''; ?>
+							</label>
+						</h3>
 						<div class="subject_input">
-							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key">
+							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key" placeholder="<?php _e( 'Enter license key' ); ?>">
 							<?php if ( $license_key || 'valid' !== $status ) : ?>
 
 								<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
@@ -157,6 +159,7 @@ class WP_Travel_License {
 							<?php endif; ?>
 							<?php if ( $status_class ) : ?>
 								<i class="fas <?php echo esc_html( $status_class ); ?>"></i>
+								<span><?php echo $status_message; ?>
 							<?php endif; ?>
 							<?php if ( $expires_in  ) :
 								$date_format = get_option('date_format');
@@ -164,6 +167,7 @@ class WP_Travel_License {
 								<br>
 								<span class="expire-in"><?php esc_html_e( 'Expires in' ); ?><strong><?php echo date( $date_format, strtotime( $expires_in ) ); ?></strong></span>
 							<?php endif; ?>
+							<p class="description"><?php printf( __( 'Enter license key for %s here.'), $premium_addon['item_name']); ?></p>
 						</div>
 					</div>
 				</div>
