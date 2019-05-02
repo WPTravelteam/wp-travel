@@ -11,23 +11,6 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		$enable_og_tags             = $settings['enable_og_tags'];
 		$wp_travel_gdpr_message     = $settings['wp_travel_gdpr_message'];
 		$open_gdpr_in_new_tab       = $settings['open_gdpr_in_new_tab'];
-
-		
-		if ( ! class_exists( 'WP_Travel_Wishlists_Core' ) ) :
-			?>
-			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Wishlists Options', 'wp-travel' ); ?></h3>
-			<?php
-			$upsell_args = array(
-				'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
-				'content'    => sprintf( __( 'Whishlists helps user to save trip they like for future, so that they can book them later. Checkout out %sWP Travel PRO%s or %sWP Travel Wishlists%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-wishlists/" target="__blank">', '</a>' ),
-				'link'       => '',
-        		'link_label' => '',
-				'link2'       => '',
-				'link2_label' => '',
-				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
-			);
-			wp_travel_upsell_message( $upsell_args );
-		endif;
 		
 		?>
 		<table class="form-table">
@@ -88,7 +71,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		<?php
 		if ( ! class_exists( 'WP_Travel_Currency_Exchange_Rates_Core' ) ) :
 			?>
-			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Currency Exchange Rate API', 'wp-travel' ); ?></h3>
+			<h3><?php echo esc_html( 'Currency Exchange Rate API', 'wp-travel' ); ?></h3>
 			<?php
 			$upsell_args = array(
 				'title'      => __( 'Display current exchange rate in your site.', 'wp-travel' ),
@@ -104,7 +87,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		echo '<br>';
 		if ( ! class_exists( 'WP_Travel_Mailchimp_Core' ) ) :
 			?>
-			<h3 class="wp-travel-tab-content-title"><?php echo esc_html( 'Mailchimp Settings', 'wp-travel' ); ?></h3>
+			<h3><?php echo esc_html( 'Mailchimp Settings', 'wp-travel' ); ?></h3>
 			<?php
 			$upsell_args = array(
 				'title'      => __( 'Using Mailchimp for email marketing?', 'wp-travel' ),
@@ -119,4 +102,22 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		endif;
 
 		do_action( 'wp_travel_settings_tab_misc_options_fields', $args );
+		
+
+		
+		if ( ! class_exists( 'WP_Travel_Wishlists_Core' ) ) :
+			?>
+			<h3><?php echo esc_html( 'Wishlists Options', 'wp-travel' ); ?></h3>
+			<?php
+			$upsell_args = array(
+				'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
+				'content'    => sprintf( __( 'Whishlists helps user to save trip they like for future, so that they can book them later. Checkout out %sWP Travel PRO%s or %sWP Travel Wishlists%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-wishlists/" target="__blank">', '</a>' ),
+				'link'       => '',
+        		'link_label' => '',
+				'link2'       => '',
+				'link2_label' => '',
+				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
+			);
+			wp_travel_upsell_message( $upsell_args );
+		endif;
 }

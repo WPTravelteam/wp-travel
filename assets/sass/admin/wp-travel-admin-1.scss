@@ -62,7 +62,7 @@
 	.panel-title {
 		a {
 			display: block;
-			padding: 10px;
+			padding: 10px 10px 10px 30px;
 			border: 1px solid #eaeaea;
 			background-color: #eaeaea;
 			border-radius: 4px 4px 0 0;
@@ -70,16 +70,16 @@
 			color: #6c6c6c;
 			text-decoration: none;
 			font-weight: 500;
+			position: relative;
 
 			.collapse-icon {
 				margin-right: 5px;
 				display: inline-block;
-				position: relative;
 				width: 16px;
 				height: 16px;
-				&:after{
-					position: absolute;
-				}
+				position: absolute;
+				left: 10px;
+				top: 8px;
 			}
 		}
 	}
@@ -778,8 +778,8 @@
 				a {
 
 					&.collapsed {
-						color: #848484;
-						border-radius: 4px;
+						// color: #848484;
+						// border-radius: 4px;
 						
 						span {
 							display: inline-block;

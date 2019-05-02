@@ -108,8 +108,8 @@ class WP_Travel_Admin_Metaboxes {
 				'icon'          => 'fa-map-marked-alt',
 			),
 			'cart_checkout'       => array(
-				'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
-				'content_title' => __( 'Cart / Checkout Options', 'wp-travel' ),
+				'tab_label'     => __( 'Cart & Checkout', 'wp-travel' ),
+				'content_title' => __( 'Cart & Checkout Options', 'wp-travel' ),
 				'priority'      => 80,
 				'callback'      => 'wp_travel_trip_callback_cart_checkout',
 				'icon'          => 'fa-shopping-cart',

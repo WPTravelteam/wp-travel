@@ -88,7 +88,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		</table>
 		<?php
 			$upsell_args = array(
-				'title'              => __( 'Need alternative maps ?', 'wp-travel' ),
+				'title'              => __( 'Need alternative maps?', 'wp-travel' ),
 				'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel. Get %s WP Travel Pro %s or %sView WP Travel Map addons%s', 'wp-travel' ) , '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>' ),
 				'link'               => '',
         		'link_label'         => '',
@@ -97,12 +97,21 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 				'type'               => 'maps',
 			);
-			if ( class_exists( 'WP_Travel_Pro' ) ) {
-				$upsell_args['link'] = $upsell_args['link2'];
-				$upsell_args['link_label'] = $upsell_args['link2_label'];
-				unset( $upsell_args['link2'], $upsell_args['link2_label'] );
-			}
 			wp_travel_upsell_message( $upsell_args );
+
+			// if ( apply_filters( 'wp_travel_show_upsell_message', true, 'maps' ) ) {
+			// 	$upsell_args = array(
+			// 		'title'              => __( 'Need alternative maps?', 'wp-travel' ),
+			// 		'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel %sfrom here%s or %srequest a new one%s.', 'wp-travel' ) , '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>', '<a href="https://wptravel.io/contact/" target="__blank">', '</a>' ),
+			// 		'link'               => '',
+			// 		'link_label'         => '',
+			// 		'link2'              => '',
+			// 		'link2_label'        => '',
+			// 		'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
+			// 		'type'               => 'general',
+			// 	);
+			// 	wp_travel_upsell_message( $upsell_args );
+			// }
 		?>
 
 		<table class="form-table">

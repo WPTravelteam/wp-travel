@@ -1939,7 +1939,7 @@ function wp_travel_get_pricing_option_list() {
 
 function wp_travel_upsell_message( $args ) {
     $defaults = array(
-        'type' => 'utilities',
+        'type' => array( 'wp-travel-pro' ),
         'title' => __( 'Get WP Travel PRO', 'wp-travel' ),
         'content' => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
         'link' => 'https://wptravel.io/wp-travel-pro/',
@@ -1951,8 +1951,17 @@ function wp_travel_upsell_message( $args ) {
         'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
     );
     $args = wp_parse_args( $args, $defaults );
+    $add_groups = array(
+        'maps' => array( 'wp-travel-here-map' ),
+        'payments' => array( 'wp-travel-paypal-express-checkout' ),
+    );
+    $types = $args['type'];
+    if ( is_string( $types ) ) {
+        $types = isset( $add_groups[ $args['type'] ] ) ? $add_groups[ $args['type'] ] : $types;
+    }
 
-    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $args['type'] );
+    $types[] = 'wp-travel-pro';
+    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $types );
 
     if ( ! $show_upsell ) {
         return;

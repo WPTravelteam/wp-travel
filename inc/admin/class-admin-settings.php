@@ -168,16 +168,9 @@ class WP_Travel_Admin_Settings {
 			'callback'      => 'wp_travel_settings_callback_utilities_faq_global',
 			'icon'          => 'fa-question-circle',
 		);
-		$settings_fields['addons_settings']           = array(
-			'tab_label'     => __( 'Addons Settings', 'wp-travel' ),
-			'content_title' => __( 'Enable / Disable Addons', 'wp-travel' ),
-			'priority'      => 81,
-			// 'callback'      => 'wp_travel_settings_callback_addons_settings',
-			// 'icon'          => 'fa-palette',
-		);
 		$settings_fields['cart_checkout_settings_global'] = array(
-			'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
-			'content_title' => __( 'Cart / Checkout Process Options', 'wp-travel' ),
+			'tab_label'     => __( 'Cart & Checkout', 'wp-travel' ),
+			'content_title' => __( 'Cart & Checkout Process Options', 'wp-travel' ),
 			'priority'      => 85,
 			'callback'      => 'wp_travel_settings_callback_cart_checkout_settings_global',
 			'icon'          => 'fa-shopping-cart',
@@ -185,10 +178,10 @@ class WP_Travel_Admin_Settings {
 
 		$settings_fields['addons_settings']           = array(
 			'tab_label'     => __( 'Addons Settings', 'wp-travel' ),
-			'content_title' => __( 'Enable / Disable Addons', 'wp-travel' ),
+			'content_title' => __( 'Addons Settings', 'wp-travel' ),
 			'priority'      => 90,
 			'callback'      => 'wp_travel_settings_callback_addons_settings',
-			'icon'          => 'fa-palette',
+			'icon'          => 'fa-plug',
 		);
 		$settings_fields['misc_options_global']           = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),

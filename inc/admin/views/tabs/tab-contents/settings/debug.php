@@ -11,7 +11,7 @@ function wp_travel_settings_callback_debug( $tab, $args ) {
 		$wt_test_mode  = $settings['wt_test_mode'];
 		$wt_test_email = $settings['wt_test_email'];
 		?>
-		<h4 class="wp-travel-tab-content-title"><?php esc_html_e( 'Test Payment', 'wp-travel' ); ?></h4>
+		<h3><?php esc_html_e( 'Test Payment', 'wp-travel' ); ?></h3>
 		<table class="form-table">
 			<tr>
 				<th><label for="wt_test_mode"><?php esc_html_e( 'Test Mode', 'wp-travel' ); ?></label></th>
