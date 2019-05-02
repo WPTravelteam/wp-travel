@@ -50,6 +50,49 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		// Sorting.
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
 			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
+			<div class="tab-accordion wp-travel-accordion has-handler">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<div class="wp-travel-sorting-handle ui-sortable-handle"></div>
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+								Booking Email Templates
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse">
+							<div class="panel-body">
+								<div class="panel-wrap">trait_exists
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<div class="wp-travel-sorting-handle ui-sortable-handle"></div>
+								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+								Booking Email Templates
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse">
+							<div class="panel-body">
+								<div class="panel-wrap">trait_exists
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+			$( function() {
+				$( "#accordion" ).accordion();
+			} );
+			</script>
 			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content wp-travel-combined-accordion">
 				
 				<tbody class="tab-accordion">

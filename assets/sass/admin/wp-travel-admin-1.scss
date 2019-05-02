@@ -44,6 +44,17 @@
 			border-left: 1px solid #d3d3d3;
 		}
 	}
+
+	a {
+		color: #6c6c6c;
+	}
+	a:hover {
+		color: #69c8a7;
+	}
+
+	strong {
+		text-decoration: none;
+	}
 }
 
 .wp-travel-accordion {
@@ -639,21 +650,21 @@
 			.wp-travel-settings-section-tabs {
 				li {
 
-					a,
-					strong {
-						padding: 0 10px;
-						color: #6c6c6c !important;
-						font-size: 14px;
-						margin: 0;
-						text-decoration: underline;
-						font-weight: 400 !important;
-						margin-bottom: 10px;
-						display: inline-block;
-					}
+					// a,
+					// strong {
+					// 	padding: 0 10px;
+					// 	color: #6c6c6c !important;
+					// 	font-size: 14px;
+					// 	margin: 0;
+					// 	text-decoration: underline;
+					// 	font-weight: 400 !important;
+					// 	margin-bottom: 10px;
+					// 	display: inline-block;
+					// }
 
-					strong {
-						text-decoration: none;
-					}
+					// strong {
+					// 	text-decoration: none;
+					// }
 				}
 			}
 
