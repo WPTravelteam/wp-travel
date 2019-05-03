@@ -1352,7 +1352,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
         .use-global-tab,
         .show-in-frontend {
-            float: right;
+            // float: right;
+            display: inline-block;
         }
         .wp_travel_tabs_input-field {
             margin-right: 15px;
@@ -1498,18 +1499,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     }
 }
 
-#fact-app {
-    .new-fact-setting-adder {
-        background-color: #0085ba;
-        color: #fff;
-        border: 1px solid #0085ba;
-        padding: 5px 15px;
-        line-height: 1.5;
-        cursor: pointer;
-        margin-top: 25px;
-    }
-}
-
 #fact-sample-collector,
 .booking-emails {
     .form-table {
@@ -1524,11 +1513,11 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         .delete-row {
             position: absolute;
             top: 25px;
-            button {
-                background-color: transparent;
-                border-color: #014966;
-                cursor: pointer;
-            }
+            // button {
+            //     background-color: transparent;
+            //     border-color: #014966;
+            //     cursor: pointer;
+            // }
         }
         .delete-row {
             right: 0;

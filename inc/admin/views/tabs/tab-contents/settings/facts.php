@@ -38,7 +38,7 @@ function wp_travel_settings_callback_facts( $tab ) {
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</div>
-		<button type="button" class="new-fact-setting-adder"><?php echo esc_html( 'Add new', 'wp-travel' ); ?></button>
+		<button type="button" class="new-fact-setting-adder button"><?php echo esc_html( 'Add new', 'wp-travel' ); ?></button>
 	</div>
 	
 	<?php
@@ -112,12 +112,12 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 				</tr>
 				<tr class="open-close-row">
 					<td colspan="2">
-						<button type="button" class="fact-open" title="Toggle Table"><span class="dashicons <?php echo ( $fact ) ? 'dashicons-arrow-up' : 'dashicons-arrow-down'; ?>"></span></button>
+						<button type="button" class="fact-open button" title="Toggle Table"><span class="dashicons <?php echo ( $fact ) ? 'dashicons-arrow-up' : 'dashicons-arrow-down'; ?>"></span></button>
 					</td>
 				</tr>
 				<tr class="delete-row">
 					<td colspan="2">
-						<button type="button" class="fact-remover" title="remove-table"><span class="dashicons dashicons-no-alt"></span></button>
+						<button type="button" class="fact-remover button" title="remove-table"><span class="dashicons dashicons-no-alt"></span></button>
 					</td>
 				</tr>
 			</tbody>

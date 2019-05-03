@@ -3171,7 +3171,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .use-global-tab,
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .show-in-frontend {
-  float: right;
+  display: inline-block;
 }
 .wp-travel-tabs-contents .wp-travel-sorting-tabs .wp_travel_tabs_input-field {
   margin-right: 15px;
@@ -3330,16 +3330,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border-color: #0085ba;
 }
 
-#fact-app .new-fact-setting-adder {
-  background-color: #0085ba;
-  color: #fff;
-  border: 1px solid #0085ba;
-  padding: 5px 15px;
-  line-height: 1.5;
-  cursor: pointer;
-  margin-top: 25px;
-}
-
 #fact-sample-collector .form-table,
 .booking-emails .form-table {
   position: relative;
@@ -3357,14 +3347,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .booking-emails .form-table .delete-row {
   position: absolute;
   top: 25px;
-}
-#fact-sample-collector .form-table .open-close-row button,
-#fact-sample-collector .form-table .delete-row button,
-.booking-emails .form-table .open-close-row button,
-.booking-emails .form-table .delete-row button {
-  background-color: transparent;
-  border-color: #014966;
-  cursor: pointer;
 }
 #fact-sample-collector .form-table .delete-row,
 .booking-emails .form-table .delete-row {

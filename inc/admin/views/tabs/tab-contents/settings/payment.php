@@ -51,86 +51,29 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
 			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
 			<div class="tab-accordion wp-travel-accordion has-handler">
-				<div class="panel-group">
+				<div class="panel-group wp-travel-sorting-tabs">
+				<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<div class="wp-travel-sorting-handle ui-sortable-handle"></div>
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-								Booking Email Templates
+								<div class="wp-travel-sorting-handle"></div>
+								<a>
+								<?php echo $gateway_label ? esc_html( $gateway_label ) : __( 'Payment', 'wp-travel' ); ?>
 								</a>
 							</h4>
 						</div>
 						<div id="collapseOne" class="panel-collapse">
 							<div class="panel-body">
-								<div class="panel-wrap">trait_exists
-
+								<div class="panel-wrap">
+									<?php do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); ?>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<div class="wp-travel-sorting-handle ui-sortable-handle"></div>
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-								Booking Email Templates
-								</a>
-							</h4>
-						</div>
-						<div id="collapseOne" class="panel-collapse">
-							<div class="panel-body">
-								<div class="panel-wrap">trait_exists
-
-								</div>
-							</div>
-						</div>
-					</div>
+					<input type="hidden" name="sorted_gateways[]" value="<?php echo $gateway ?>" >
+				<?php endforeach; ?>
 				</div>
 			</div>
-			<script>
-			$( function() {
-				$( "#accordion" ).accordion();
-			} );
-			</script>
-			<table class="wp-travel-sorting-tabs form-table panel panel-default sortable-with-content wp-travel-combined-accordion">
-				
-				<tbody class="tab-accordion">
-					<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
-						<tr class="wp-travel-combined-accordion-list">
-							<td class="sorting-handle">
-								<div class="wp-travel-sorting-handle">
-								</div>
-							</td>
-							<td >
-								<div class="panel-heading" role="tab">
-								<h3 class="wp-travel-tab-content-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion-fact" href="#payment-gateway-<?php echo esc_attr( $gateway ); ?>" aria-expanded="true" aria-controls="payment-gateway-<?php echo esc_attr( $gateway ); ?>">
-										<?php echo $gateway_label ? esc_html( $gateway_label ) : __( 'Payment', 'wp-travel' ); ?>
-										<span class="collapse-icon"></span>
-									</a>
-								</h3>
-								</div>
-
-								<div id="payment-gateway-<?php echo esc_attr( $gateway ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-									<div class="panel-body">
-										<div class="panel-wrap">
-											<div class="wp-travel-license-content">
-												<!-- Fields -->
-												<?php do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); ?>
-											</div>
-										</div>
-									</div>
-								</div>
-								
-								<input type="hidden" name="sorted_gateways[]" value="<?php echo $gateway ?>" >
-							
-							</td>
-						</tr>
-						
-					<?php endforeach; ?>
-				</tbody>
-			</table>
 		<?php endif; ?>
 	
 
@@ -158,11 +101,11 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	<table class="form-table">
 		<tr>
 			<th colspan="2">
-				<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'TAX Options', 'wp-travel' ); ?></h3>
+				<h3><?php esc_html_e( 'TAX Options', 'wp-travel' ); ?></h3>
 			</th>
 		</tr>
 		<tr>
-			<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax for Trip Price', 'wp-travel' ); ?></label></th>
+			<th><label for="trip_tax_enable"><?php esc_html_e( 'Enable Tax', 'wp-travel' ); ?></label></th>
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
 				<label data-on="ON" data-off="OFF">
@@ -177,7 +120,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			</td>
 		</tr>
 		<tr id="wp-travel-tax-price-options" >
-			<th><label><?php esc_html_e( 'Trip prices entered with tax', 'wp-travel' ); ?></label></th>
+			<th><label><?php esc_html_e( 'Tax on Trip prices', 'wp-travel' ); ?></label></th>
 			<td>
 				<label><input <?php checked( 'yes', $trip_tax_price_inclusive ); ?> name="trip_tax_price_inclusive" value="yes" type="radio">
 				<?php esc_html_e( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ); ?></label>

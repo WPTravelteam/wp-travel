@@ -1,15 +1,15 @@
-(function($) {
+(function ($) {
     if ($.fn.tabs) {
         $('.wp-travel-tabs-wrap').tabs({
-            activate: function(event, ui) {
+            activate: function (event, ui) {
                 $(ui.newPanel).css({ display: 'table' });
                 $('#wp-travel-settings-current-tab').val($(ui.newPanel).attr('id'));
             },
-            create: function(event, ui) {
+            create: function (event, ui) {
                 $(ui.panel).css({ display: 'table' });
                 $('#wp-travel-settings-current-tab').val($(ui.panel).attr('id'));
             },
-            load: function(event, ui) {
+            load: function (event, ui) {
                 // console.log( ui );
             }
         });
@@ -17,16 +17,21 @@
         $(".wp-travel-marketplace-tab-wrap").tabs();
     }
 
-    $('.wp-travel-enable-payment').click(function(){
-        $(this).closest( '.wp-travel-enable-payment-wrapper' ).find('.wp-travel-enable-payment-body').toggle();
+    $('.wp-travel-enable-payment').click(function () {
+        $(this).closest('.wp-travel-enable-payment-wrapper').find('.wp-travel-enable-payment-body').toggle();
     });
-    
+
     // Sortable for Global tabs.
-    $('.wp-travel-sorting-tabs tbody').sortable({
+    $('.wp-travel-sorting-tabs tbody, .wp-travel-accordion .wp-travel-sorting-tabs').sortable({
         handle: '.wp-travel-sorting-handle'
     });
 
-    $(document).on('keyup change', '.section_title', function() {
+    $(".wp-travel-accordion > .panel-group").accordion({
+        header: "> div.panel > div.panel-heading",
+        collapsible: true
+    });
+
+    $(document).on('keyup change', '.section_title', function () {
         var title = $(this).val();
         // alert(title);
         $(this).siblings('.wp-travel-accordion-title').html(title);
@@ -42,7 +47,7 @@
 
     output.innerHTML = slider.value; // Display the default slider value
     // Update the current slider value (each time you drag the slider handle)
-    const wp_travel_range_func = function() {
+    const wp_travel_range_func = function () {
         var value = this.value;
 
         if (this.value >= 100) {
@@ -61,7 +66,7 @@
 
     output.oninput = wp_travel_range_func;
 
-    slider.oninput = function() {
+    slider.oninput = function () {
         var value = this.value;
 
         if (this.value >= 100) {
@@ -82,7 +87,7 @@
         $('#wp-travel-minimum-partial-payout').hide();
     }
 
-    $('#partial_payment').change(function() {
+    $('#partial_payment').change(function () {
         if ($(this).is(':checked')) {
             $('#wp-travel-minimum-partial-payout').show();
         } else {
@@ -90,7 +95,7 @@
         }
     });
 
-    $('#wp_travel_trip_facts_enable').change(function() {
+    $('#wp_travel_trip_facts_enable').change(function () {
         if ($(this).is(':checked')) {
             $('#fact-app').show();
         } else {
@@ -98,7 +103,7 @@
         }
     });
 
-    $('#trip_tax_enable').change(function() {
+    $('#trip_tax_enable').change(function () {
         if ($(this).is(':checked')) {
             $('#wp-travel-tax-percentage').show();
             $('#wp-travel-tax-price-options').show();
@@ -117,7 +122,7 @@
         $('#wp-travel-paypal-email').hide();
     }
 
-    $('#payment_option_paypal').change(function() {
+    $('#payment_option_paypal').change(function () {
         if ($(this).is(':checked')) {
             $('#wp-travel-paypal-email').show();
         } else {
@@ -125,15 +130,15 @@
         }
     });
 
-    (function($) {
+    (function ($) {
         // Add Color Picker to all inputs that have 'color-field' class
-        $(function() {
+        $(function () {
             $('.wp-travel-color-field').wpColorPicker();
         });
     })(jQuery);
 
     // Open All And Close All accordion.
-    $('.open-all-link').click(function(e) {
+    $('.open-all-link').click(function (e) {
         e.preventDefault();
         $('.panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
         $('.panel-collapse').addClass('in');
@@ -141,7 +146,7 @@
         $('.close-all-link').show();
         $('#tab-accordion .panel-collapse').css('height', 'auto');
     });
-    $('.close-all-link').click(function(e) {
+    $('.close-all-link').click(function (e) {
         e.preventDefault();
         $('.panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
         $('.panel-collapse').removeClass('in');
@@ -150,32 +155,32 @@
     });
 
     //Facts Tab.
-    jQuery(document).on('click', '.fact-open', function() {
+    jQuery(document).on('click', '.fact-open', function () {
         jQuery(this).parents('table').toggleClass('open-table');
         jQuery(this).toggleClass('hide');
     });
 
 
-    jQuery(document).on('click', '.new-fact-setting-adder', function() {
+    jQuery(document).on('click', '.new-fact-setting-adder', function () {
         jQuery('#fact-sample-collector').append(jQuery('#sampler').html().split('$index').join(Math.random().toString(36).substring(2, 15)));
     });
 
-    jQuery(document).on('click', '.fact-remover', function() {
+    jQuery(document).on('click', '.fact-remover', function () {
         confirm('Are you sure ?') && jQuery(this).parent().parent().parent().parent().remove();
     });
 
-    jQuery(document).on('change', '.fact-type-changer', function() {
+    jQuery(document).on('change', '.fact-type-changer', function () {
         const val = jQuery(this).find(':selected').val();
         var index = jQuery(this).data('index');
         const multiple = jQuery('.multiple-val-' + index);
         ['single', 'multiple'].includes(val) ? multiple.fadeIn() : multiple.fadeOut();
     })
 
-    jQuery(document).on('click', '.option-deleter', function() {
+    jQuery(document).on('click', '.option-deleter', function () {
         jQuery(this).parent().remove();
     })
 
-    jQuery(document).on('keypress', '.fact-options-list', function(e) {
+    jQuery(document).on('keypress', '.fact-options-list', function (e) {
         if (e.which == 13) {
             e.preventDefault();
             if (jQuery(this).val() == '') {
@@ -187,7 +192,7 @@
         }
     });
 
-    $('[name="trip_tax_price_inclusive"]').change(function() {
+    $('[name="trip_tax_price_inclusive"]').change(function () {
 
         if ('yes' === $(this).val()) {
             $('#wp-travel-tax-percentage').hide();
@@ -201,7 +206,7 @@
     function wp_travel_display_map_fields() {
         var current_map = $('#wp-travel-map-select').val();
         $('.wp-travel-map-option').hide();
-        $('.wp-travel-map-option.' + current_map ).show();
+        $('.wp-travel-map-option.' + current_map).show();
     }
     wp_travel_display_map_fields();
 

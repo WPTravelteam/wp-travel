@@ -29,7 +29,6 @@ function wp_travel_settings_bank_deposit( $args ) {
 	$field_style = ( 'yes' === $payment_option_bank_deposit ) ? 'display:table-row-group' : 'display:none';
 
 	?>
-	<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Bank deposit Settings', 'wp-travel' ); ?></h3>
 	<table class="form-table wp-travel-enable-payment-wrapper bank-deposite">
 			
 		<tr >
@@ -48,27 +47,23 @@ function wp_travel_settings_bank_deposit( $args ) {
 
 		
 		<tbody class="wp-travel-enable-payment-body" style="<?php echo esc_attr( $field_style ); ?>">
+			
 			<tr>
 				<td colspan="2">
 					<h4>
 						<label for=""><?php esc_html_e( 'Account Detail', 'wp-travel' ); ?></label>
 					</h4>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-					<table class="wp-travel-account-detail">
+					<table class="wp-travel-account-detail widefat">
 						<thead>
 							<tr>
-								<td></td>
-								<td><?php esc_html_e( 'Account Name' ); ?></td>
-								<td><?php esc_html_e( 'Account Number' ); ?></td>
-								<td><?php esc_html_e( 'Bank Name' ); ?></td>
-								<td><?php esc_html_e( 'Sort Code' ); ?></td>
-								<td><?php esc_html_e( 'IBAN' ); ?></td>
-								<td><?php esc_html_e( 'BIC/Swift' ); ?></td>
-								<td colspan="2"><?php esc_html_e( 'Action' ); ?></td>
+								<th></td>
+								<th><?php esc_html_e( 'Account Name' ); ?></th>
+								<th><?php esc_html_e( 'Account Number' ); ?></th>
+								<th><?php esc_html_e( 'Bank Name' ); ?></th>
+								<th><?php esc_html_e( 'Sort Code' ); ?></th>
+								<th><?php esc_html_e( 'IBAN' ); ?></th>
+								<th><?php esc_html_e( 'BIC/Swift' ); ?></th>
+								<th colspan="2"><?php esc_html_e( 'Action' ); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -108,7 +103,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 										<td>
 											<input type="text" name="wp_travel_bank_deposits[swift][<?php echo esc_attr( $i ); ?>]" class="wp_travel_bank_deposit_swift" value="<?php echo esc_attr( $swift ); ?>">
 										</td>
-										<td>
+										<td class="align-center">
 											<span class="show-in-frontend checkbox-default-design">
 												<label data-on="ON" data-off="OFF">
 													<input value="no" name="wp_travel_bank_deposits[enable][<?php echo esc_attr( $i ); ?>]" type="hidden" />
@@ -118,7 +113,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 												</label>
 											</span>
 										</td>
-										<td>
+										<td class="align-center">
 											<a href="#" class="wp-travel-close-row">X</a>
 										</td>
 									</tr>
@@ -129,7 +124,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 							
 						</tbody>
 					</table>
-					<a href="#" class="btn btn-add-new-bank-deposite">Add New</a>
+					<button class="button btn-add-new-bank-deposite">Add New</button>
 					
 				</td>
 			</tr>
@@ -175,7 +170,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 			<td>
 				<input type="text" name="wp_travel_bank_deposits[swift][{{data.index}}]" class="wp_travel_bank_deposit_swift" value="">
 			</td>
-			<td>
+			<td class="align-center">
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
 						<input value="no" name="wp_travel_bank_deposits[enable][{{data.index}}]" type="hidden" />
@@ -185,7 +180,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 					</label>
 				</span>
 			</td>
-			<td>
+			<td class="align-center">
 				<a href="#" class="wp-travel-close-row">X</a>
 			</td>
 		</tr>
@@ -220,3 +215,4 @@ function wp_travel_settings_bank_deposit( $args ) {
 }
 
  add_action( 'wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel_settings_bank_deposit' );
+ 
