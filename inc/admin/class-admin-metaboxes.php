@@ -315,7 +315,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param array $classes Class list array.
 	 */
 	public function add_clean_metabox_class( $classes ) {
-		array_push( $classes, 'wp-travel-clean-metabox' );
+		array_push( $classes, 'wp-travel-clean-metabox wp-travel-styles' );
 		return $classes;
 	}
 

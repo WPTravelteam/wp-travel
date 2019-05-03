@@ -54,7 +54,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
             <a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
         </div>
     </div>
-    <div id="tab-accordion" class="tab-accordion">
+    <div id="tab-accordion" class="tab-accordion wp-travel-accordion has-handler">
         <div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
             <?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
 
@@ -70,7 +70,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 
                                     <span bind="faq_question_<?php echo esc_attr( $key ); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 
-                                <span class="collapse-icon"></span>
+                                <!-- <span class="collapse-icon"></span> -->
                                 </a>
                                 <span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
                             </h4>
@@ -102,7 +102,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 
                         <span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
 
-                    <span class="collapse-icon"></span>
+                    <!-- <span class="collapse-icon"></span> -->
                     </a>
                     <span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
                 </h4>

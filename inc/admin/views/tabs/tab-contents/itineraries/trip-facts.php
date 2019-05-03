@@ -32,7 +32,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 			if ( '' !== $wp_travel_trip_facts ) {
 				?>
 				<div class="form-table fact-table">	
-					<div id="tab-accordion" class="tab-accordion">
+					<div id="tab-accordion" class="tab-accordion wp-travel-accordion has-handler">
 						<div data-factssettings='<?php echo isset( $settings['wp_travel_trip_facts_settings'] ) ? wp_json_encode( array_values( $settings['wp_travel_trip_facts_settings'] ) ) : '[]'; ?>' class="panel-group wp-travel-sorting-tabs ui-sortable" id="accordion-fact-data" role="tablist" aria-multiselectable="true">
 							<?php
 							if ( is_array( $wp_travel_trip_facts ) ) :
@@ -62,7 +62,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 							<div class="wp-travel-sorting-handle"></div>
 							<a class="collapse in" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
 								<span bind="fact_question_{{data.random}}"><?php echo esc_html__( 'Fact', 'wp-travel' ); ?><span>
-								<span class="collapse-icon"></span>
+								<!-- <span class="collapse-icon"></span> -->
 							</a>
 							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 						</h4>
@@ -215,7 +215,7 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 					<div class="wp-travel-sorting-handle"></div>
 					<a class="<?php $index && print_r( 'collapsed' ); ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
 						<span><?php echo esc_html( $fact['label'] ); ?> <span>
-						<span class="collapse-icon"></span>
+						<!-- <span class="collapse-icon"></span> -->
 					</a>
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 				</h4>

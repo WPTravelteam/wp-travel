@@ -112,21 +112,6 @@
   text-align: right;
 }
 
-.wp-travel-clean-metabox {
-  background: #f7f7f1;
-  overflow: hidden;
-}
-.wp-travel-clean-metabox .handlediv.button-link {
-  display: none;
-}
-.wp-travel-clean-metabox .hndle {
-  display: none;
-}
-.wp-travel-clean-metabox .inside {
-  margin: 0 !important;
-  padding: 0;
-}
-
 .wp-travel-open-upload-area #plupload-upload-ui.drag-drop #drag-drop-area {
   border: 4px dashed #b4b9be;
   height: 200px;

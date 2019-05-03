@@ -147,7 +147,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 					<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 				</div>
 				<p class="description"><?php echo esc_html__( 'Select different pricing category with its different sale price', 'wp-travel' ); ?></p>
-				<div id="price-accordion" class="tab-accordion price-accordion">
+				<div id="price-accordion" class="tab-accordion price-accordion wp-travel-accordion has-handler">
 						<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
 						<?php
 						if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) :
@@ -190,7 +190,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 										<div class="wp-travel-sorting-handle"></div>
 											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
 												<span bind="pricing_option_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $pricing_name ); ?></span>
-												<span class="collapse-icon"></span>
+												<!-- <span class="collapse-icon"></span> -->
 											</a>
 										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 									</h4>
@@ -330,7 +330,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 							<div class="wp-travel-sorting-handle"></div>
 								<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
 									<span bind="pricing_option_{{data.random}}"><?php echo esc_html( 'Pricing Option', 'wp-travel' ); ?></span>
-									<span class="collapse-icon"></span>
+									<!-- <span class="collapse-icon"></span> -->
 								</a>
 							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 						</h4>

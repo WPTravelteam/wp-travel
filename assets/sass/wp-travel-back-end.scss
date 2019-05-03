@@ -162,22 +162,6 @@ $alabaster: #f7f7f1; // Red like color.
     text-align: right;
 }
 
-// Remove wordpress metabox styles and hide buttons.
-.wp-travel-clean-metabox {
-    background: $alabaster;
-    overflow: hidden;
-    .handlediv.button-link {
-        display: none;
-    }
-    .hndle {
-        display: none;
-    }
-    .inside {
-        margin: 0!important;
-        padding: 0;
-    }
-}
-
 // Drag and drop area.
 .wp-travel-open-upload-area {
     #plupload-upload-ui {

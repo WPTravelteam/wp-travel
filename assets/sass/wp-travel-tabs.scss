@@ -148,6 +148,8 @@ $alto: #ddd;
 					margin-right: 10px;
 					margin-bottom: 10px;
 					width: calc(25% - 10px);
+					text-align: center;
+					border: 1px solid #ccc;
 
 					&.featured-image:before {
 						content: "\f155";

@@ -21,7 +21,7 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 	</tr>
 </table>
 
-<div id="tab-accordion-itineraries" class="tab-accordion">
+<div id="tab-accordion-itineraries" class="tab-accordion wp-travel-accordion has-handler">
 	<div class="itinerary_block panel-group wp-travel-sorting-tabs" id="accordion-itinerary-data" role="tablist" aria-multiselectable="true">
 		<h3 class="wp-travel-tab-content-title"><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></h3>
 
@@ -78,7 +78,7 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 
 							<span bind="itinerary_label_<?php echo esc_attr( $cnt ); ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>,
 							<span bind="itinerary_title_<?php echo esc_attr( $cnt ); ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
-							<span class="collapse-icon"></span>
+							<!-- <span class="collapse-icon"></span> -->
 							</a>
 							<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 						</h4>
@@ -153,7 +153,7 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 
 					<span bind="itinerary_label_<?php echo esc_attr( $uid ); ?>" class="itinerary-label"><?php echo esc_html( $itinerary_label ); ?></span>,
 					<span bind="itinerary_title_<?php echo esc_attr( $uid ); ?>" class="itinerary-label"><?php echo esc_html( $itinerary_title ); ?></span>
-					<span class="collapse-icon"></span>
+					<!-- <span class="collapse-icon"></span> -->
 					</a>
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 				</h4>
