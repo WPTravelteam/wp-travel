@@ -811,7 +811,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 				</ul>
             </span>
             <p class="description">
-				<?php printf( __( 'Need advance Trip Extras options? %s GET PRO%s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
+				<?php printf( __( 'Need advance Trip Extras options? %s GET PRO%s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '</a>' ); ?>
 			</p>
 
 		</div>

@@ -170,6 +170,14 @@
 .wp-trave-settings-form-warp .ui-accordion-content {
   height: auto !important;
 }
+.wp-travel-styles .repeat-row,
+.wp-trave-settings-form-warp .repeat-row {
+  margin-top: 0;
+  position: relative;
+  padding: 10px 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 .wp-travel-accordion.has-handler .panel-title {
   position: relative;
@@ -336,9 +344,6 @@
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content table .wp-travel-express-checkout tr td {
   width: calc(100% - 30px) !important;
-}
-.wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content table td label {
-  width: inherit;
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content table td p {
   font-family: "Poppins", sans-serif;

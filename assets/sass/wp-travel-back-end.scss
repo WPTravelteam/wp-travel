@@ -1134,7 +1134,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         box-sizing: border-box;
     }
     .one-third {
-        width: 25%;
+        width: 33.3333%;
     }
     .two-third {
         display: -webkit-box;
@@ -1145,7 +1145,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         width: 66.6666%;
         select,
         input {
-            width: 30%;
+            // width: 30%;
         }
         .show-in-frontend {
             float: left !important;
@@ -1395,21 +1395,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         }
         .wp-travel-currency-symbol {
             z-index: 1;
-        }
-    }
-    select {
-        display: inline-block;
-        min-width: 25%;
-    }
-    input {
-        display: inline;
-        position: relative;
-        line-height: 1;
-        height: 28px;
-        max-width: 100px;
-        min-width: 25%;
-        &.wp-travel-variation-pricing-name {
-            min-width: 100%;
         }
     }
 }

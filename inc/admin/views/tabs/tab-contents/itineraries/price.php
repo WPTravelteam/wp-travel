@@ -521,7 +521,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 			</div>
 			<p class="description"><?php echo esc_html( 'You can select different dates for each category.', 'wp-travel' ); ?></p>
 
-			<div class="tab-accordion date-accordion">	
+			<div class="tab-accordion date-accordion wp-travel-accordion has-handler">	
 				<div id="date-options-data" class="panel-group wp-travel-sorting-tabs" role="tablist" aria-multiselectable="true">
 					<?php
 					if ( is_array( $trip_multiple_date_options ) && count( $trip_multiple_date_options ) !== 0 ) :
@@ -545,7 +545,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 										<div class="wp-travel-sorting-handle"></div>
 											<a role="button" data-toggle="collapse" data-parent="#pricing-options-data" href="#collapse-<?php echo esc_attr( $date_key ); ?>" aria-expanded="false" aria-controls="collapse-<?php echo esc_attr( $date_key ); ?>" class="collapsed">
 												<span bind="wp_travel_multiple_dates_<?php echo esc_attr( $date_key ); ?>"><?php echo esc_attr( $date_label ); ?></span>
-												<span class="collapse-icon"></span>
+												<!-- <span class="collapse-icon"></span> -->
 											</a>
 										<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 									</h4>
@@ -635,7 +635,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 
 											<span bind="wp_travel_multiple_dates_{{data.random}}"><?php echo esc_html( 'Multiple Date 1', 'wp-travel' ); ?></span>
 
-											<span class="collapse-icon"></span>
+											<!-- <span class="collapse-icon"></span> -->
 										</a>
 									<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 								</h4>

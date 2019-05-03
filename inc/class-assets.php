@@ -209,7 +209,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// Tab for settings page.
 			// $setting_allowed = array( 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings' );
 			if ( in_array( $screen->id, $setting_allowed ) ) {
-				wp_register_script( 'wp-travel-tabs', self::$assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wp-color-picker', 'select2-js' ), WP_TRAVEL_VERSION, 1 );
+				wp_register_script( 'wp-travel-tabs', self::$assets_path . 'assets/js/wp-travel-tabs' . $suffix . '.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wp-color-picker', 'select2-js', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, 1 );
 				wp_enqueue_script( 'wp-travel-fields-script' );
 				wp_enqueue_script( 'wp-travel-tabs' );
 			}
