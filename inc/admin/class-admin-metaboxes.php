@@ -129,8 +129,8 @@ class WP_Travel_Admin_Metaboxes {
 				'icon'          => 'fa-question-circle',
 			),
 			'downloads'           => array(
-				'tab_label'     => __( 'Downloads List', 'wp-travel' ),
-				'content_title' => __( 'Select Downloads Here', 'wp-travel' ),
+				'tab_label'     => __( 'Downloads', 'wp-travel' ),
+				'content_title' => __( 'Downloads', 'wp-travel' ),
 				'priority'      => 110,
 				'callback'      => 'wp_travel_trip_callback_downloads',
 				'icon'          => 'fa-download',
