@@ -134,6 +134,15 @@ $alabaster: #f7f7f1; // Red like color.
 	.ui-accordion-content {
 		height: auto!important;
 	}
+
+	.repeat-row {
+		margin-top: 0;
+		position: relative;
+		// border-bottom: 1px solid #ddd;
+		padding: 10px 0px;
+		width: 100%;
+		box-sizing: border-box;
+	}
 }
 
 .wp-travel-accordion {
@@ -358,7 +367,7 @@ $alabaster: #f7f7f1; // Red like color.
 					// padding: 15px 0;
 
 					label {
-						width: inherit;
+						// width: inherit;
 					}
 
 					p {
