@@ -134,7 +134,9 @@ $alabaster: #f7f7f1; // Red like color.
 		height: auto;
 		text-shadow: none;
 		border: 0;
-		&:hover {
+		&:hover,
+		&:active,
+		&:focus {
 			background: #53b392;
 			box-shadow: 0 5px #3c9c7b;
 		}
