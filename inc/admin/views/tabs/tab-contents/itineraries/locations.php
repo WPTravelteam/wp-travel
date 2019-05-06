@@ -91,18 +91,18 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 		if ( $show_google_map ) {
 			if ( '' != $api_key ) :
 				?>
-			<div class="map-wrap">
-			<input id="search-input" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
-			<div id="gmap" style="width:100%;height:300px"></div>
-			<input type="hidden" name="wp_travel_location" id="wp-travel-location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
-			<input type="hidden" name="wp_travel_lat" id="wp-travel-lat" value="<?php echo esc_html( $map_data['lat'] ); ?>" >
-			<input type="hidden" name="wp_travel_lng" id="wp-travel-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
-			</div>
-			<?php else : ?>
-			<div class="map-wrap">
-			<p class="good" id="pass-strength-result"><i class="fas fa-map-pin"></i><?php echo sprintf( 'Please add \'Google Map API Key\' in the %ssettings%s.', '<a href="edit.php?post_type=itinerary-booking&page=settings">', '</a>' ); ?></p>
-		</div>
-				<?php
+				<div class="map-wrap">
+					<input id="search-input" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
+					<div id="gmap" style="width:100%;height:300px"></div>
+					<input type="hidden" name="wp_travel_location" id="wp-travel-location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
+					<input type="hidden" name="wp_travel_lat" id="wp-travel-lat" value="<?php echo esc_html( $map_data['lat'] ); ?>" >
+					<input type="hidden" name="wp_travel_lng" id="wp-travel-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
+					</div>
+					<?php else : ?>
+					<div class="map-wrap">
+					<p class="good" id="pass-strength-result"><i class="fas fa-map-pin"></i><?php echo sprintf( 'Please add \'Google Map API Key\' in the %ssettings%s.', '<a href="edit.php?post_type=itinerary-booking&page=settings">', '</a>' ); ?></p>
+				</div>
+			<?php
 		endif;
 		}
 	}

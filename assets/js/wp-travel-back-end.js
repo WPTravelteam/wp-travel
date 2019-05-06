@@ -105,8 +105,10 @@
                 $(ui.newPanel).css({ display: 'inline-block' });
                 $('#wp-travel-settings-current-tab').val($(ui.newPanel).attr('id'));
                 if ('undefined' != typeof(GMaps) && $('#gmap').length > 0) {
+                    alert( 'map refresh' );
+                    console.log( map );
                     map.refresh();
-                    map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
+                    // map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
                 }
                 // wp_travel_backend_map_holder();
             },
@@ -530,7 +532,7 @@
         e.preventDefault();
         var parent = '#' + $(this).data('parent');
         $(parent + ' .panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-        $(parent + ' .panel-collapse').addClass('in').css('height', 'auto');
+        $(parent + ' .panel-collapse').addClass('collapse in').css('height', 'auto');
         $(this).addClass( 'hidden' );
         $(parent + ' .close-all-link').removeClass( 'hidden' );
         $(parent + ' #tab-accordion .panel-collapse').css('height', 'auto');

@@ -28,6 +28,7 @@ class WP_Travel_FW_Field {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.heading.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.range.php';
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.date_range.php';
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/fields/class.field.file.php';
 	}
 
 	public function register_field_types() {
@@ -104,6 +105,10 @@ class WP_Travel_FW_Field {
 		$field_types['date_range'] = array(
 			'label' => __( 'Date Range', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Date_Range',
+		);
+		$field_types['file'] = array(
+			'label' => __( 'File', 'wp-travel' ),
+			'class' => 'WP_Travel_FW_Field_File',
 		);
 		$field_types = apply_filters( 'wp_travel_register_field_types', $field_types );
 		return $field_types;

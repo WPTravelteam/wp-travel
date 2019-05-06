@@ -679,3 +679,11 @@ function wp_travel_get_pricing_option_type( $post_id = null ) {
 	}
 	return $pricing_option_type;
 }
+
+function wp_travel_get_payment_modes() {
+	$modes = array(
+		'partial' => esc_html__( 'Partial Payment', 'wp-travel' ),
+		'full'    => esc_html__( 'Full Payment', 'wp-travel' ),
+	);
+	return apply_filters( 'wp_travel_payment_modes', $modes );
+}

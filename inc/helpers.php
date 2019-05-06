@@ -2006,6 +2006,23 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 	$status_list  = wp_travel_get_payment_status();
 	$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] ) ? $status_list[ $details['payment_status'] ]['color'] : '';
+	
+	$form              = new WP_Travel_FW_Form();
+	$form_options = array(
+		'id'            => 'wp-travel-submit-slip',
+		'wrapper_class' => 'wp-travel-submit-slip-form-wrapper',
+		'submit_button' => array(
+			'name'  => 'wp_travel_submit_slip',
+			'id'    => 'wp-travel-submit-slip',
+			'value' => __( 'Submit', 'wp-travel' ),
+		),
+		'multipart' => true,
+		'nonce'         => array(
+			'action' => 'wp_travel_security_action',
+			'field'  => 'wp_travel_security',
+		),
+	);
+	$bank_deposit_fields = wp_travel_get_bank_deposit_form_fields();
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
 		<div class="table-wrp">
@@ -2016,6 +2033,68 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
 						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+
+						<?php
+							$bank_deposit_status = array( 'waiting_voucher' );
+							if ( in_array( $details['payment_status'], $bank_deposit_status ) ) { ?>
+									<div class="wp-travel-bank-deposit-wrap ">
+										<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip">Upload Slip</a>
+										<div id="wp-travel-bank-deposit-content" >
+											<h3><?php esc_html_e( 'Submit Bank Payment Receipt' ); ?></h3>
+											<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
+										</div>
+									</div>
+									
+									<script type="text/javascript">
+										jQuery(document).ready(function($){
+											// popup
+											$('.wp-travel-upload-slip').magnificPopup({
+												type: 'inline',
+											});
+
+											// form submit
+											$('.wp-travel-submit-slip').submit(function (event) {
+												// event.preventDefault();
+
+												// // Validate all input fields.
+												// var parent = '#' + $(this).attr('id');
+												// var data = $(this).serializeArray();
+												// console.log( data );
+												// var cart_fields = {};
+												
+												// cart_fields['action'] = 'wt_add_to_cart';
+												// // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
+
+												// $.ajax({
+												// 	type: "POST",
+												// 	url: wp_travel.ajaxUrl,
+												// 	data: cart_fields,
+												// 	beforeSend: function () { },
+												// 	success: function (data) {
+												// 		// location.href = wp_travel.cartUrl;
+												// 	}
+												// });
+
+											});
+										});
+									</script>
+									<style>
+										#wp-travel-bank-deposit-content{
+											width:600px;
+											height:400px;
+											display:none;
+											background:rgba( 255, 255, 255, 0.5 );
+											margin-left: calc( 50% - 300px );
+											padding:20px;
+											box-sizing:border-box;
+										}
+										.mfp-content #wp-travel-bank-deposit-content{
+											display:block;
+										}
+									</style>
+								<?php
+							}
+						?>
 					</div>
 				<?php endif; ?>
 				<div class="my-order-single-content">

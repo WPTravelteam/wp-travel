@@ -281,7 +281,6 @@ jQuery(document).ready(function($) {
         });
     });
 
-    if ( 'undefined' !== typeof easyResponsiveTabs  ) {
     $('.dashboard-tab').easyResponsiveTabs({
         type: 'vertical',
         width: 'auto',
@@ -292,7 +291,6 @@ jQuery(document).ready(function($) {
         active_border_color: '#c1c1c1', // border color for active tabs heads in this group
         active_content_border_color: '#5AB1D0' // border color for active tabs contect in this group so that it matches the tab head border
     });
-    }
 
     $('.dashtab-nav').click(function(e) {
 
