@@ -2694,106 +2694,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   top: 5px;
   left: 5px;
 }
-.price-accordion .two-third .wp-travel-currency-symbol + input, .price-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + select, .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .form-horizontal .wp-travel-currency-symbol + select,
-.form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + select, .price-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + textarea, .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .form-horizontal .wp-travel-currency-symbol + textarea,
-.form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + textarea, .price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + input, .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + input, .price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + input, .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + input, .price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + select, .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + select, .price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + select, .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + select,
-.wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + select,
-.form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + select, .price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + textarea, .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + textarea, .price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea, .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + input,
-.form-horizontal .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + input,
-.price-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + input,
-.stat-toolbar-form .field-group .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + input,
-.price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.form-horizontal .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + select,
-.price-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .form-horizontal .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.price-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.form-horizontal .stat-toolbar-form .field-group .price-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .wp-travel-currency-symbol + input,
-.date-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + select,
-.wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .form-horizontal .wp-travel-currency-symbol + select,
-.form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .form-horizontal .wp-travel-currency-symbol + textarea,
-.form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + input,
-.wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + input,
-.date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + input,
-.stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + input,
-.date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + select,
-.wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + select,
-.form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .stat-toolbar-form .field-group .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .form-horizontal .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.wp-travel-form-field .form-horizontal .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .wp-travel-currency-symbol + textarea,
-.form-horizontal .stat-toolbar-form .field-group .wp-travel-form-field .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + input,
-.form-horizontal .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + input,
-.date-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + input,
-.stat-toolbar-form .field-group .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + input,
-.date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + select,
-.stat-toolbar-form .field-group .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + select,
-.form-horizontal .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + select,
-.date-accordion .two-third .stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .wp-travel-form-field .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.form-horizontal .wp-travel-form-field .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .stat-toolbar-form .field-group .form-horizontal .wp-travel-currency-symbol + textarea,
-.stat-toolbar-form .field-group .form-horizontal .date-accordion .two-third .wp-travel-currency-symbol + textarea,
-.date-accordion .two-third .form-horizontal .stat-toolbar-form .field-group .wp-travel-currency-symbol + textarea,
-.form-horizontal .stat-toolbar-form .field-group .date-accordion .two-third .wp-travel-currency-symbol + textarea {
-  left: -3px;
-}
 
 .price-accordion .two-third > .wp-travel-enable-inventory {
   margin-top: 10px;
@@ -3409,12 +3309,8 @@ span.wp-travel-message {
   width: auto;
 }
 
-#wp-travel-tab-content-price .pricing-tab td {
-  padding: 10px;
-}
-
 .pricing-option-title {
-  background-color: #eee;
+  border-bottom: 1px solid #ccc;
 }
 .pricing-option-title label {
   font-weight: 700;
@@ -4206,10 +4102,6 @@ span.wp-travel-message {
   top: 0;
   left: 0;
   line-height: inherit;
-}
-
-.form-table .description {
-  font-size: 10px;
 }
 
 .wp-travel-upsell-badge {

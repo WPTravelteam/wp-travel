@@ -738,7 +738,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
         <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ; ?>
 
         <?php if ( $table_row ) : ?><td><?php  else : ?><div class="two-third"><?php endif ; ?>
-        <?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result">Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>'); ?>
+        <?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result"><span class="dashicons dashicons-info"></span> Please <a href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>'); ?>
         <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
 
 		$data = ob_get_clean();

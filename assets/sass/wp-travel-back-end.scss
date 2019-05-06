@@ -1162,9 +1162,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             top: 5px;
             left: 5px;
         }
-        .wp-travel-currency-symbol+input {
-            left: -3px;
-        }
     }
 }
 
@@ -1836,16 +1833,16 @@ span.wp-travel-message {
     }
 }
 
-#wp-travel-tab-content-price {
-    .pricing-tab {
-        td {
-            padding: 10px;
-        }
-    }
-}
+// #wp-travel-tab-content-price {
+//     .pricing-tab {
+//         td {
+//             padding: 10px;
+//         }
+//     }
+// }
 
 .pricing-option-title {
-    background-color: #eee;
+    border-bottom: 1px solid #ccc;
     label {
         font-weight: 700;
         font-size: 12px;
@@ -2346,10 +2343,6 @@ span.wp-travel-message {
             line-height: inherit;
         }
     }
-}
-
-.form-table .description {
-      font-size: 10px;
 }
 
 .wp-travel-upsell-badge {

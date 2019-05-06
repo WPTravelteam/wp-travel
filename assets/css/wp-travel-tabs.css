@@ -116,10 +116,10 @@
   content: "";
   color: #f1d375;
   position: absolute;
-  left: -7px;
+  left: 5px;
   font-family: dashicons;
   text-shadow: 0px 1px 1px #000;
-  top: -8px;
+  top: 3px;
   z-index: 1;
   font-size: 15px;
 }
@@ -133,13 +133,6 @@
   text-align: center;
   padding: 2px 0px;
   cursor: pointer;
-}
-.wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content input#wp-travel-trip-duration {
-  width: 50px;
-}
-.wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content input#wp-travel-trip-duration-night {
-  width: 50px;
-  margin-left: 10px;
 }
 .wp-travel-tabs-wrap .itinerary_wrap .remove_itinery {
   margin-top: 20px;
