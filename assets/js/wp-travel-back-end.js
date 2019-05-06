@@ -1,4 +1,101 @@
 (function($) {
+    if ('undefined' != typeof(GMaps) && $('#gmap').length > 0) {
+        var map = new GMaps({
+                div: '#gmap',
+                lat: wp_travel_drag_drop_uploader.lat,
+                lng: wp_travel_drag_drop_uploader.lng
+            }),
+            input = document.getElementById('search-input'),
+            autocomplete = new google.maps.places.Autocomplete(input);
+
+        map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
+        map.setZoom(15);
+        map.addMarker({
+            lat: wp_travel_drag_drop_uploader.lat,
+            lng: wp_travel_drag_drop_uploader.lng,
+            title: wp_travel_drag_drop_uploader.loc,
+            draggable: true,
+            dragend: function(e) {
+                var lat = e.latLng.lat();
+                var lng = e.latLng.lng();
+                map.setCenter(lat, lng);
+
+                var latlng = new google.maps.LatLng(lat, lng);
+                var geocoder = geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'latLng': latlng }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                            $('#wp-travel-lat').val(lat);
+                            $('#wp-travel-lng').val(lng);
+                            $('#wp-travel-location').val(results[1].formatted_address);
+                            $('#search-input').val(results[1].formatted_address);
+                        }
+                    }
+                });
+
+            }
+        });
+
+        autocomplete.bindTo('bounds', map);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+            map.removeMarkers();
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(15);
+            }
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        $('#wp-travel-lat').val(lat);
+                        $('#wp-travel-lng').val(lng);
+                        $('#wp-travel-location').val(results[1].formatted_address);
+                        $('#search-input').val(results[1].formatted_address);
+                    }
+                }
+            });
+
+            map.addMarker({
+                lat: lat,
+                lng: lng,
+                title: place.formatted_address,
+                draggable: true,
+                dragend: function(e) {
+                    var lat = e.latLng.lat();
+                    var lng = e.latLng.lng();
+                    map.setCenter(lat, lng);
+
+                    var latlng = new google.maps.LatLng(lat, lng);
+                    var geocoder = geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ 'latLng': latlng }, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[1]) {
+                                $('#wp-travel-lat').val(lat);
+                                $('#wp-travel-lng').val(lng);
+                                $('#wp-travel-location').val(results[1].formatted_address);
+                                $('#search-input').val(results[1].formatted_address);
+                            }
+                        }
+                    });
+
+                }
+            });
+
+        });
+    }
+
     /*
      * Tab js.
      */
@@ -7,109 +104,13 @@
             activate: function(event, ui) {
                 $(ui.newPanel).css({ display: 'inline-block' });
                 $('#wp-travel-settings-current-tab').val($(ui.newPanel).attr('id'));
-                if ('undefined' != typeof (GMaps) && $('#gmap').length > 0) {
-                    var map = new GMaps({
-                        div: '#gmap',
-                        lat: wp_travel_drag_drop_uploader.lat,
-                        lng: wp_travel_drag_drop_uploader.lng
-                    }),
-                        input = document.getElementById('search-input'),
-                        autocomplete = new google.maps.places.Autocomplete(input);
-
-                    map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
-                    map.setZoom(15);
-                    map.addMarker({
-                        lat: wp_travel_drag_drop_uploader.lat,
-                        lng: wp_travel_drag_drop_uploader.lng,
-                        title: wp_travel_drag_drop_uploader.loc,
-                        draggable: true,
-                        dragend: function (e) {
-                            var lat = e.latLng.lat();
-                            var lng = e.latLng.lng();
-                            map.setCenter(lat, lng);
-
-                            var latlng = new google.maps.LatLng(lat, lng);
-                            var geocoder = geocoder = new google.maps.Geocoder();
-                            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                if (status == google.maps.GeocoderStatus.OK) {
-                                    if (results[1]) {
-                                        $('#wp-travel-lat').val(lat);
-                                        $('#wp-travel-lng').val(lng);
-                                        $('#wp-travel-location').val(results[1].formatted_address);
-                                        $('#search-input').val(results[1].formatted_address);
-                                    }
-                                }
-                            });
-
-                        }
-                    });
-
-                    autocomplete.bindTo('bounds', map);
-                    autocomplete.addListener('place_changed', function () {
-                        var place = autocomplete.getPlace();
-                        if (!place.geometry) {
-                            window.alert("Autocomplete's returned place contains no geometry");
-                            return;
-                        }
-                        map.removeMarkers();
-                        // If the place has a geometry, then present it on a map.
-                        if (place.geometry.viewport) {
-                            map.fitBounds(place.geometry.viewport);
-                        } else {
-                            map.setCenter(place.geometry.location);
-                            map.setZoom(15);
-                        }
-                        var lat = place.geometry.location.lat();
-                        var lng = place.geometry.location.lng();
-
-                        var latlng = new google.maps.LatLng(lat, lng);
-                        var geocoder = geocoder = new google.maps.Geocoder();
-                        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                            if (status == google.maps.GeocoderStatus.OK) {
-                                if (results[1]) {
-                                    $('#wp-travel-lat').val(lat);
-                                    $('#wp-travel-lng').val(lng);
-                                    $('#wp-travel-location').val(results[1].formatted_address);
-                                    $('#search-input').val(results[1].formatted_address);
-                                }
-                            }
-                        });
-
-                        map.addMarker({
-                            lat: lat,
-                            lng: lng,
-                            title: place.formatted_address,
-                            draggable: true,
-                            dragend: function (e) {
-                                var lat = e.latLng.lat();
-                                var lng = e.latLng.lng();
-                                map.setCenter(lat, lng);
-
-                                var latlng = new google.maps.LatLng(lat, lng);
-                                var geocoder = geocoder = new google.maps.Geocoder();
-                                geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                    if (status == google.maps.GeocoderStatus.OK) {
-                                        if (results[1]) {
-                                            $('#wp-travel-lat').val(lat);
-                                            $('#wp-travel-lng').val(lng);
-                                            $('#wp-travel-location').val(results[1].formatted_address);
-                                            $('#search-input').val(results[1].formatted_address);
-                                        }
-                                    }
-                                });
-
-                            }
-                        });
-
-                    });
+                if ('undefined' != typeof(GMaps) && $('#gmap').length > 0) {
+                    // alert( 'map refresh' );
+                    console.log( map );
+                    map.refresh();
+                    google.maps.event.trigger(map.map, "resize");
+                    // map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
                 }
-                // if ('undefined' != typeof(GMaps) && $('#gmap').length > 0) {
-                //     // alert( 'map refresh' );
-                //     console.log( map.map );
-                //     map.refresh();
-                //     google.maps.event.trigger(map.map, "resize");
-                //     // map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
-                // }
                 // wp_travel_backend_map_holder();
             },
             create: function(event, ui) {
