@@ -1366,4 +1366,11 @@
   border-bottom: none;
 }
 
+/**
+ * Media uploader.
+ */
+.media-modal-content a.wp-travel-open-uploader {
+  display: none;
+}
+
 /*# sourceMappingURL=wp-travel-admin-1.css.map */

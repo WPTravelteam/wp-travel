@@ -3318,7 +3318,7 @@ ul.wp-travel-error {
             }
         }
         @media screen and (min-width: 992px) {
-            label,
+            label:not(.radio-checkbox-label),
             .wp-travel-text-info {
                 width: 25%;
             }
@@ -3675,7 +3675,7 @@ ul.wp-travel-error {
             display: inline-block;
             font-size: 11px;
             line-height: 10px;
-            padding-bottom: 5px;
+            padding: 5px 0;
         }
         .trip_list_by_fixed_departure_dates_pricing_name_label {
             text-transform: uppercase;

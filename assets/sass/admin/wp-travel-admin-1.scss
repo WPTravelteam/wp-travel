@@ -1381,3 +1381,12 @@ $alabaster: #f7f7f1; // Red like color.
 		}
 	}
 }
+
+/**
+ * Media uploader.
+ */
+.media-modal-content {
+	a.wp-travel-open-uploader {
+		display: none;
+	}
+}

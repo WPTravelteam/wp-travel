@@ -173,27 +173,40 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 
 == Frequently Asked Questions ==
+= Where can I find WP Travel documentation and user guides? =
+
+For setting up your site using the WP Travel plugin and extensions please refer to [Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
+
 = There is something cool you could add... =
 
 Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=suggestions&utm_campaign=WP%20Plugin "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
-= WP Travel documentation and user guide =
- For setting up your site using the WP Travel plugin please refer to below given link:
-
-[Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
 
 = Where can I get support? =
 
  If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin)
 
 
-= Will WP Travel work with other theme? =
+= Will WP Travel work with my theme? =
 
-WP Travel plugin has been tested with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+
+= Can I run WooCommerce or Easy Digital Downloads and WP Travel at the same time? =
+
+Yes, there are no technological conflicts between the three, you could run them all at the same time on the same domain name. But all plug-ins have their own cart system so WooCommerce or Easy Digital Downloads products will be added in their cart page and WP Travel trips will be added in WP Travel cart page. Also checkout will be processed in own individual way. We need to note that both WooCommerce, Easy Digital Downloads and WP Travel are standalone plug-ins for WordPress, conceptual and functional way.
 
 = Does the plugin have the payment gateways? =
 
- WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
+WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
+
+= Where can I request new features, WP Travel themes and extensions? =
+
+You can do that by filling up the form in our [support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+
+= Where can I get support or talk to other users? =
+
+If you have any queries regarding the plugin and extensions then you can ask for help in [Support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+
 
 == Screenshots ==
 1. Backend: Settings
