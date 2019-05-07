@@ -105,9 +105,8 @@
                 $(ui.newPanel).css({ display: 'inline-block' });
                 $('#wp-travel-settings-current-tab').val($(ui.newPanel).attr('id'));
                 if ('undefined' != typeof(GMaps) && $('#gmap').length > 0) {
-                    alert( 'map refresh' );
-                    console.log( map );
                     map.refresh();
+                    google.maps.event.trigger(map.map, "resize");
                     // map.setCenter(wp_travel_drag_drop_uploader.lat, wp_travel_drag_drop_uploader.lng);
                 }
                 // wp_travel_backend_map_holder();

@@ -23,7 +23,7 @@ function wp_travel_trip_callback_misc_options() {
 	}
 	?>
 	<h3><?php _e( 'Trip Enquiry' ); ?></h3>
-	<table>
+	<table class="form-table">
 		<tr>
 			<td><label for="wp-travel-use-global-trip-enquiry"><?php esc_html_e( 'Global Trip Enquiry Option', 'wp-travel' ); ?></label></td>
 			<td>
