@@ -290,7 +290,7 @@ function wp_travel_booking_data( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
-	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	$trip_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 
 	$booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status', true );
 	$booking_status = ! empty( $booking_status ) ? $booking_status : 'N/A';
@@ -367,6 +367,24 @@ function wp_travel_booking_data( $booking_id ) {
 		'paid_amount'    => sprintf( '%0.2f', $total_paid_amount ),
 		'due_amount'     => sprintf( '%0.2f', $due_amount ),
 	);
+
+	// Partical calculation.
+	if ( wp_travel_is_partial_payment_enabled() ) {
+		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		
+		if ( $payout_percent > 0 ) {
+			$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
+			$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+			$taxed_trip_price_partial = wp_travel_taxed_amount( $trip_price_partial ); // Trip price including tax.
+			$tax_partial              = $taxed_trip_price_partial - $trip_price_partial;
+
+			$total_partial = $trip_price_partial + $tax_partial;
+
+			$amounts['sub_total_partial'] = $trip_price_partial;
+			$amounts['tax_partial'] = $tax_partial;
+			$amounts['total_partial'] = $total_partial;
+		}
+	}
 	return $amounts;
 }
 
@@ -556,6 +574,21 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	}
 
 	return $attrs;
+}
+
+function wp_travel_get_partial_trip_price( $trip_id, $price_key = null ) {
+
+	$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
+
+	if ( wp_travel_is_partial_payment_enabled() ) {
+		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		if ( $payout_percent > 0 ) {
+			$trip_price = ( $trip_price * $payout_percent ) / 100;
+			$trip_price = wp_travel_get_formated_price( $trip_price );
+		}
+	}
+
+	return $trip_price;
 }
 
 /**

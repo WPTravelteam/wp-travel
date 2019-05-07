@@ -2023,6 +2023,12 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 		),
 	);
 	$bank_deposit_fields = wp_travel_get_bank_deposit_form_fields();
+	$bank_deposit_fields['booking_id'] = array(
+		'type'    => 'hidden',
+		'name'    => 'booking_id',
+		'id'      => 'wp-travel-booking_id',
+		'default' => $booking_id,
+	);
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
 		<div class="table-wrp">
@@ -2038,7 +2044,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$bank_deposit_status = array( 'waiting_voucher' );
 							if ( in_array( $details['payment_status'], $bank_deposit_status ) ) { ?>
 									<div class="wp-travel-bank-deposit-wrap ">
-										<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip">Upload Slip</a>
+										<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip' ); ?></a>
 										<div id="wp-travel-bank-deposit-content" >
 											<h3><?php esc_html_e( 'Submit Bank Payment Receipt' ); ?></h3>
 											<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
@@ -2054,26 +2060,6 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 											// form submit
 											$('.wp-travel-submit-slip').submit(function (event) {
-												// event.preventDefault();
-
-												// // Validate all input fields.
-												// var parent = '#' + $(this).attr('id');
-												// var data = $(this).serializeArray();
-												// console.log( data );
-												// var cart_fields = {};
-												
-												// cart_fields['action'] = 'wt_add_to_cart';
-												// // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
-
-												// $.ajax({
-												// 	type: "POST",
-												// 	url: wp_travel.ajaxUrl,
-												// 	data: cart_fields,
-												// 	beforeSend: function () { },
-												// 	success: function (data) {
-												// 		// location.href = wp_travel.cartUrl;
-												// 	}
-												// });
 
 											});
 										});
