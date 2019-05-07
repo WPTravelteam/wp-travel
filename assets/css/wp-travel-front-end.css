@@ -3209,7 +3209,7 @@ ul.wp-travel-error {
   }
 }
 @media screen and (min-width: 992px) {
-  .checkout-page-wrap .wp-travel-form-field label,
+  .checkout-page-wrap .wp-travel-form-field label:not(.radio-checkbox-label),
 .checkout-page-wrap .wp-travel-form-field .wp-travel-text-info {
     width: 25%;
   }

@@ -135,8 +135,11 @@ class WP_Travel_FW_Field {
 	}
 
 	function template( $field, $content ) {
-		ob_start(); ?>
-			<div class="wp-travel-form-field <?php echo esc_attr( (isset($field['wrapper_class']))? $field['wrapper_class'] : '' ); ?>">
+		ob_start();
+		$classes = ( isset($field['wrapper_class'] ) ) ? $field['wrapper_class'] : '';
+		$classes = ( 'radio' === $field['type'] ) ? $classes . ' wp-travel-radio-group ' : $classes;
+		?>
+			<div class="wp-travel-form-field <?php echo esc_attr( $classes ); ?>">
 				<label for="<?php echo esc_attr( $field['id'] ); ?>">
 					<?php echo esc_attr( $field['label'] ); ?>
 					<?php if ( isset( $field['validations']['required'] ) ) { ?>

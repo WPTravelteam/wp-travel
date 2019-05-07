@@ -3318,7 +3318,7 @@ ul.wp-travel-error {
             }
         }
         @media screen and (min-width: 992px) {
-            label,
+            label:not(.radio-checkbox-label),
             .wp-travel-text-info {
                 width: 25%;
             }
