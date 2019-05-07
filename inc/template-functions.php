@@ -2591,7 +2591,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 										<?php if ( $status_col ) : ?>
 											<span class="trip_list_by_fixed_departure_dates_seats">
 												<!-- <span class="seat_qty"><?php echo esc_html( $available_pax ); ?></span> -->
-												<?php echo esc_html( $pricing_status_msg ); ?>
+												<?php echo ( $pricing_status_msg ); ?>
 											</span>
 										<?php endif; ?>
 										<span class="trip_list_by_fixed_departure_dates_pax">
