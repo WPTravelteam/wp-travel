@@ -35,8 +35,8 @@ function wp_travel_settings_default_fields() {
 
 	// Booking client Defaults.
 	$booking_client_email_defaults = array(
-		'client_subject'      => __( 'Booking Recieved', 'wp-travel' ),
-		'client_title'        => __( 'Booking Recieved', 'wp-travel' ),
+		'client_subject'      => __( 'Booking Received', 'wp-travel' ),
+		'client_title'        => __( 'Booking Received', 'wp-travel' ),
 		'client_header_color' => '',
 		'email_content'       => wp_travel_booking_client_default_email_content(),
 		'from_email'          => get_option( 'admin_email' ),

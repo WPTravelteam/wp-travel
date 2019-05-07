@@ -8,6 +8,7 @@
 function wp_travel_bank_deposit_default_settings_fields( $settings ) {
 	$settings['payment_option_bank_deposit'] = 'no';
 	$settings['wp_travel_bank_deposits']      = array();
+	$settings['payment_option_bank_deposit_description'] = '';
 	return $settings;
 }
 
@@ -26,6 +27,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 	$settings = $args['settings'];
 
 	$payment_option_bank_deposit = isset( $settings['payment_option_bank_deposit'] ) ? $settings['payment_option_bank_deposit'] : 'no';
+	$payment_option_bank_deposit_description = isset( $settings['payment_option_bank_deposit_description'] ) ? $settings['payment_option_bank_deposit_description'] : '';
 	$field_style = ( 'yes' === $payment_option_bank_deposit ) ? 'display:table-row-group' : 'display:none';
 
 	?>
@@ -47,7 +49,12 @@ function wp_travel_settings_bank_deposit( $args ) {
 
 		
 		<tbody class="wp-travel-enable-payment-body" style="<?php echo esc_attr( $field_style ); ?>">
-			
+			<tr >
+				<th><label for="payment_option_bank_deposit_description"><?php esc_html_e( 'Description ', 'wp-travel' ); ?></label></th>
+				<td>
+					<textarea name="payment_option_bank_deposit_description" id="payment_option_bank_deposit_description" cols="30" rows="10"><?php echo esc_html( $payment_option_bank_deposit_description ); ?></textarea>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="2">
 					<h4>

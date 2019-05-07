@@ -460,10 +460,22 @@ function wp_travel_get_checkout_form_fields() {
 				'name'          => 'wp_travel_payment_bank_detail',
 				'id'            => 'wp-travel-payment-bank-detail',
 				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment f-bank-deposit',
-				// 'before_field'  => wp_travel_get_currency_symbol(),
 				'default'       => wp_travel_get_bank_deposit_account_table(),
-				'priority'      => 115,
+				'priority'      => 116,
 			);
+			$payment_option_bank_deposit_description = isset( $settings['payment_option_bank_deposit_description'] ) ? $settings['payment_option_bank_deposit_description'] : '';
+
+			if ( ! empty( $payment_option_bank_deposit_description ) ) {
+				$payment_fields['bank_deposite_description'] = array(
+					'type'          => 'text_info',
+					'label'         => __( 'Description', 'wp-travel' ),
+					'name'          => 'wp_travel_payment_bank_description',
+					'id'            => 'wp-travel-payment-bank-description',
+					'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment f-bank-deposit',
+					'default'       =>$payment_option_bank_deposit_description,
+					'priority'      => 117,
+				);
+			}
 		}
 
 		$payment_fields['trip_price_info'] = array(

@@ -17,34 +17,36 @@ add_action( 'wp_travel_after_frontend_booking_save', 'wp_travel_booking_bank_dep
 function wp_travel_submit_bank_deposit_slip() {
 	if ( isset( $_POST['wp_travel_submit_slip'] ) ) {
 
-		$target_dir = WP_CONTENT_DIR . '/wp-travel-slip/';
+		$target_dir = WP_CONTENT_DIR .  '/' . WP_TRAVEL_SLIP_UPLOAD_DIR . '/';
 		if ( ! file_exists( $target_dir ) ) {
 			$created = mkdir( $target_dir, 0755, true );
 
 			if ( ! $created ) {
-				// unable to create directory notice.
+				WP_Travel()->notices->add( '<strong>' . __( 'Error:' ) . '</strong> ' . __( 'Unable to create directory "wp-travel-slip"' ), 'error' );
 			}
 		}
-		$target_file = $target_dir . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
+		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
+		$target_file = $target_dir . $filename;
 
-		$imageFileType = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 		$tmp_name      = $tmp_name = $_FILES['wp_travel_bank_deposit_slip']['tmp_name'];
-
+		
 		// Check if image file is a actual image or fake image.
 		$check = getimagesize( $tmp_name );
 		if ( $check !== false ) {
 			$move = move_uploaded_file( $tmp_name, $target_file );
 			if ( $move ) {
-				$uploadOk = true;
+				$upload_ok = true;
 			}
 		} else {
-			echo 'File is not an image.';
-			$uploadOk = false;
+			WP_Travel()->notices->add( '<strong>' . __( 'Error:' ) . '</strong> ' . __( 'Please upload valid file. "wp-travel-slip"' ), 'error' );
+			// echo 'File is not an image.';
+			$upload_ok = false;
 		}
+		// $image_type = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 
 		// Update status if file is uploaded. and save image path to meta.
-		if ( true === $uploadOk ) {
-
+		if ( true === $upload_ok ) {
+			
 		}
 	}
 }
