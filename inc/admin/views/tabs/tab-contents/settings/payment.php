@@ -50,19 +50,20 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		// Sorting.
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
 			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
-			<div class="tab-accordion wp-travel-accordion has-handler">
-				<div class="panel-group wp-travel-sorting-tabs">
+			<div class="tab-accordion main-setting wp-travel-accordion has-handler" id="wp-travel-payment-accordion">
+				<div class="panel-group wp-travel-sorting-tabs wp-travel-sorting-tabs"  role="tablist" aria-multiselectable="true" >
 				<?php foreach ( $sorted_gateways as $gateway => $gateway_label ) : ?>
 					<div class="panel panel-default">
-						<div class="panel-heading">
+						<div class="panel-heading"  role="tab" id="heading-<?php echo esc_attr( $gateway ); ?>">
 							<h4 class="panel-title">
 								<div class="wp-travel-sorting-handle"></div>
-								<a>
+								<a role="button" data-toggle="collapse" data-parent="#wp-travel-payment-accordion" href="#collapse-<?php echo esc_attr( $gateway ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $gateway ); ?>">
 								<?php echo $gateway_label ? esc_html( $gateway_label ) : __( 'Payment', 'wp-travel' ); ?>
 								</a>
 							</h4>
 						</div>
-						<div id="collapseOne" class="panel-collapse">
+						<div id="collapse-<?php echo esc_attr( $gateway ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $gateway ); ?>">
+
 							<div class="panel-body">
 								<div class="panel-wrap">
 									<?php do_action( 'wp_travel_payment_gateway_fields_' . $gateway, $args ); ?>
