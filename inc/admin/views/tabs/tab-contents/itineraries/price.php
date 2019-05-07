@@ -404,7 +404,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 									</div>
 								</div>
 
-								<div class="repeat-row" style="display:none">
+								<div class="repeat-row hidden">
 									<label for="sale_price_{{data.random}}" class="one-third"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label>
 									<div class="two-third">
 										<div class="field-price-currency-input">
