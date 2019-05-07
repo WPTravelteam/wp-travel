@@ -2129,32 +2129,27 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 							<!-- Hook to add booking time details at booking-->
 							<?php do_action( 'wp_travel_booked_times_details', $order_details ); ?>
-
-							<div class="my-order-single-field my-order-additional-note clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $customer_note ); ?></span>
-							</div>
 						</div>
 						<div class="col-md-6">
-							<h3 class="my-order-single-title"><?php esc_html_e( 'Billing Detail', 'wp-travel' ); ?></h3>
-
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'City :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_city ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_country ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Postal :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_postal ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Address :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_address ); ?></span>
-							</div>
-
+							<?php
+							$checkout_fields  = wp_travel_get_checkout_form_fields();
+							$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
+							$billing_fields   = wp_travel_sort_form_fields( $billing_fields );
+							if ( ! empty( $billing_fields ) ) {
+								foreach( $billing_fields as $field ) {
+									if ( 'heading' === $field['type'] ) {
+										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
+									} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+										// Do nothing
+									} else {
+										echo '<div class="my-order-single-field clearfix">';
+										printf( '<span class="my-order-head">%s:</span>', $field['label'] );
+										printf( '<span class="my-order-tail">%s</span>', get_post_meta( $booking_id, $field['name'], true ) );
+										echo '</div>';
+									}
+								}
+							}
+							?>
 						</div>
 					</div>
 					<?php
@@ -2167,6 +2162,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					$email   = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
 					$dob     = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
 					$gender  = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
+					$traveller_infos = get_post_meta( $booking_id );
 
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
 						foreach ( $fname as $booking_trip_id => $first_names ) :
@@ -2175,34 +2171,31 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<div class="my-order-single-traveller-info">
 									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
 									<div class="row">
-
 										<?php foreach ( $first_names as $key => $first_name ) : ?>
 											<div class="col-md-6">
 												<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Traveler %s :', $key + 1 ), 'wp-travel' ); ?></h3>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Name :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $first_name . ' ' . $lname[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $country[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Phone No. :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $phone[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Email :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $email[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Date of Birth :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $dob[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Gender :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $gender[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
+												<?php
+												$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
+												$traveller_fields   = wp_travel_sort_form_fields( $traveller_fields );
+												if ( ! empty( $traveller_fields ) ) {
+													foreach( $traveller_fields as $field ) {
+														if ( 'heading' === $field['type'] ) {
+															// Do nothing.
+														} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+															// Do nothing.
+														} else {
+															$value = maybe_unserialize(  $traveller_infos[ $field['name'] ][0] );
+															$value = is_array( $value ) ? array_values( $value ) : $value;
+															$value = is_array( $value ) ? array_shift( $value ) : $value;
+															$value = is_array( $value ) ? $value[$key] : $value;
+															echo '<div class="my-order-single-field clearfix">';
+															printf( '<span class="my-order-head">%s:</span>', $field['label'] );
+															printf( '<span class="my-order-tail">%s</span>', $value );
+															echo '</div>';
+														}
+													}
+												}
+												?>
 											</div>
 										<?php endforeach; ?>
 									</div>

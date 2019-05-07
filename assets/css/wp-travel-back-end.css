@@ -3382,9 +3382,6 @@ span.wp-travel-message {
   margin: 35px 0;
   overflow: auto;
   padding: 25px 15px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
 #wp-travel-booking-info .my-order table.order-list-table, #wp-travel-booking-info .my-order table.my-order-payment-details {
   font-size: 13px;
@@ -3894,9 +3891,6 @@ span.wp-travel-message {
   -webkit-transform: scale(1);
   transform: scale(1);
 }
-#wp-travel-booking-info .my-order-details .my-order-single-content-wrap {
-  padding: 20px 15px;
-}
 #wp-travel-booking-info .my-order-details .table-wrp {
   margin: 20px 0;
   padding: 0;
@@ -3913,11 +3907,6 @@ span.wp-travel-message {
   padding-left: 30px;
 }
 #wp-travel-booking-info .my-order-details .table-wrp .my-order-single-title {
-  font-size: 15px;
-  text-transform: uppercase;
-  padding-top: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e1e1e1;
   color: #31708f;
   margin-bottom: 10px;
 }
@@ -4017,8 +4006,6 @@ span.wp-travel-message {
   padding-bottom: 3px;
   margin-top: 20px;
   margin-bottom: 15px;
-  border-top: 1px solid #e1e1e1;
-  border-bottom: 1px solid #e1e1e1;
 }
 #wp-travel-booking-info .my-order-details .table-wrp .my-order-single-total-price .my-order-single-field {
   color: #545454;
