@@ -88,9 +88,11 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_register_script( 'wp-travel-script', self::$assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js', array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION, true );
 			wp_register_script( 'wp-travel-cart', self::$assets_path . 'assets/js/cart.js', array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
 			wp_register_script( 'wp-travel-payment-frontend-script', self::$assets_path . 'assets/js/payment.js', array( 'jquery' ), WP_TRAVEL_VERSION );
-	
+			wp_register_script( 'wp-travel-accordion', self::$assets_path . 'assets/js/wp-travel-accordion.js', array( 'jquery', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION );
+			
 			// Enqueue.
 			wp_enqueue_script( 'wp-travel-view-mode' );
+			wp_enqueue_script( 'wp-travel-accordion' );
 	
 			if ( wp_travel_is_checkout_page() ) {
 				wp_enqueue_script( 'wp-travel-modernizer', self::$assets_path . 'assets/js/lib/modernizer/modernizr.min.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );
@@ -204,6 +206,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_register_script( 'wp-travel-fields-script', self::$assets_path . 'assets/js/wp-travel-fields-scripts' . $suffix . '.js', array( 'select2-js' ), WP_TRAVEL_VERSION, true );
 			wp_register_script( 'magnific-popup-script', self::$assets_path . 'assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			wp_register_script( 'jquery-parsley', self::$assets_path . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+			wp_register_script( 'wp-travel-accordion', self::$assets_path . 'assets/js/wp-travel-accordion.js', array( 'jquery', 'jquery-ui-accordion' ), WP_TRAVEL_VERSION );
 	
 			$screen = get_current_screen();
 			// Tab for settings page.
@@ -358,6 +361,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			if ( in_array( $screen->id, $allowed_itinerary_general_screens ) ) {
 				wp_enqueue_script( 'collapse-js', self::$assets_path . 'assets/js/collapse.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 			}
+			wp_enqueue_script( 'wp-travel-accordion' );
 		}
 	
 	}

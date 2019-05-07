@@ -526,24 +526,7 @@
         }
         this._originalKeyDown(event);
     };
-    // Open All And Close All accordion.
-    $('.open-all-link').click(function(e) {
-        e.preventDefault();
-        var parent = '#' + $(this).data('parent');
-        $(parent + ' .panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-        $(parent + ' .panel-collapse').addClass('collapse in').css('height', 'auto');
-        $(this).addClass( 'hidden' );
-        $(parent + ' .close-all-link').removeClass( 'hidden' );
-        $(parent + ' #tab-accordion .panel-collapse').css('height', 'auto');
-    });
-    $('.close-all-link').click(function(e) {
-        var parent = '#' + $(this).data('parent');
-        e.preventDefault();
-        $(parent + ' .panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
-        $(parent + ' .panel-collapse').removeClass('in');
-        $(this).addClass( 'hidden' );
-        $(parent + ' .open-all-link').removeClass( 'hidden' );
-    });
+    
 
 
     $('.ui-accordion-header').click(function() {
