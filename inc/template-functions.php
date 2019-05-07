@@ -2055,6 +2055,9 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 												<?php
 											} ?>
 										<?php endif; ?>
+										<input type="hidden" name="trip_date" value="<?php echo esc_attr( $available_date ); ?>" >
+										<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+										<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
 									</div>
 									<?php if ( $availability ) : // Remove Book now if trip is soldout. ?>
 										<div class="wp-travel-booking-row">
@@ -2068,9 +2071,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 											?>
 											<div class="wp-travel-calender-aside">											
 												<div class="add-to-cart">
-													<input type="hidden" name="trip_date" value="<?php echo esc_attr( $available_date ); ?>" >
-													<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
-													<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+													
 													<?php
 													if ( 'yes' !== $fixed_departure ) :
 														?>
@@ -2214,6 +2215,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 										}
 											?>
 									<?php endif; ?>
+									<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
+									<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
+									<?php
+									if ( 'yes' !== $fixed_departure ) : ?>
+											<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
+									<?php endif; ?>
 								</div>
 								<?php if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) : ?>
 									<div class="wp-travel-booking-row">
@@ -2227,12 +2234,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 										?>
 										<div class="wp-travel-calender-aside">										
 											<div class="add-to-cart">
-												<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />
-												<input type="hidden" name="price_key" value="<?php echo esc_attr( $price_key ); ?>" />
-												<?php
-												if ( 'yes' !== $fixed_departure ) : ?>
-														<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $trip_duration ); ?>" />
-												<?php endif; ?>
+												
 												<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 
 											</div>
