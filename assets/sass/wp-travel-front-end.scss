@@ -1384,7 +1384,8 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
     margin: 18px 0 0;
 }
 
-#wp-travel-booking {
+#wp-travel-booking,
+.wp-travel-enquiries-form {
     .form-group {
         input:not([type="radio"]):not([type="checkbox"]),
         select {
@@ -1973,6 +1974,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 }
 
 .radio-checkbox-label {
+    width: 70%;
     input[type="checkbox"] {
         border: 1px solid #b4b9be !important;
         background: #ddd;
@@ -3136,7 +3138,8 @@ ul.wp-travel-error {
 
 //end
 //checkout page
-.checkout-page-wrap {
+.checkout-page-wrap,
+.wp-travel-enquiries-form {
     @media (min-width: 768px) {
         .wp-travel-minicart {
             float: right;
@@ -3517,7 +3520,7 @@ ul.wp-travel-error {
 /* enquiry form single trips */
 
 #wp-travel-enquiries {
-    max-width: 450px;
+    max-width: 550px;
     margin: 0 auto;
     top: 0;
     background: #fff;
@@ -3529,11 +3532,11 @@ ul.wp-travel-error {
     @include clearfix;
     .wp-travel-form-field {
         label {
-            width: 100%;
-            display: block;
-            margin-bottom: 5px;
+            // width: 100%;
+            display: inline-block;
+            // margin-bottom: 5px;
         }
-        input:not([type="checkbox"]), select {
+        input:not([type="checkbox"]):not([type=radio]), select {
             width: 100%;
             margin-bottom: 15px;
             font-size: 14px;
