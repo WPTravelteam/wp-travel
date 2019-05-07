@@ -68,6 +68,90 @@
 .wp-trave-settings-form-warp .field-price-currency-input input {
   padding-left: 35px !important;
 }
+.wp-travel-styles input[type=text],
+.wp-travel-styles input[type=password],
+.wp-travel-styles input[type=date],
+.wp-travel-styles input[type=datetime],
+.wp-travel-styles input[type=datetime-local],
+.wp-travel-styles input[type=email],
+.wp-travel-styles input[type=month],
+.wp-travel-styles input[type=number],
+.wp-travel-styles input[type=search],
+.wp-travel-styles input[type=tel],
+.wp-travel-styles input[type=time],
+.wp-travel-styles input[type=url],
+.wp-travel-styles input[type=week],
+.wp-travel-styles select,
+.wp-trave-settings-form-warp input[type=text],
+.wp-trave-settings-form-warp input[type=password],
+.wp-trave-settings-form-warp input[type=date],
+.wp-trave-settings-form-warp input[type=datetime],
+.wp-trave-settings-form-warp input[type=datetime-local],
+.wp-trave-settings-form-warp input[type=email],
+.wp-trave-settings-form-warp input[type=month],
+.wp-trave-settings-form-warp input[type=number],
+.wp-trave-settings-form-warp input[type=search],
+.wp-trave-settings-form-warp input[type=tel],
+.wp-trave-settings-form-warp input[type=time],
+.wp-trave-settings-form-warp input[type=url],
+.wp-trave-settings-form-warp input[type=week],
+.wp-trave-settings-form-warp select {
+  max-width: 300px;
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  padding: 8px 12px;
+  height: 36px;
+  outline: 0;
+  border-left: 3px solid #d3d3d3;
+}
+.wp-travel-styles input[type=text]:focus,
+.wp-travel-styles input[type=password]:focus,
+.wp-travel-styles input[type=date]:focus,
+.wp-travel-styles input[type=datetime]:focus,
+.wp-travel-styles input[type=datetime-local]:focus,
+.wp-travel-styles input[type=email]:focus,
+.wp-travel-styles input[type=month]:focus,
+.wp-travel-styles input[type=number]:focus,
+.wp-travel-styles input[type=search]:focus,
+.wp-travel-styles input[type=tel]:focus,
+.wp-travel-styles input[type=time]:focus,
+.wp-travel-styles input[type=url]:focus,
+.wp-travel-styles input[type=week]:focus,
+.wp-travel-styles select:focus,
+.wp-trave-settings-form-warp input[type=text]:focus,
+.wp-trave-settings-form-warp input[type=password]:focus,
+.wp-trave-settings-form-warp input[type=date]:focus,
+.wp-trave-settings-form-warp input[type=datetime]:focus,
+.wp-trave-settings-form-warp input[type=datetime-local]:focus,
+.wp-trave-settings-form-warp input[type=email]:focus,
+.wp-trave-settings-form-warp input[type=month]:focus,
+.wp-trave-settings-form-warp input[type=number]:focus,
+.wp-trave-settings-form-warp input[type=search]:focus,
+.wp-trave-settings-form-warp input[type=tel]:focus,
+.wp-trave-settings-form-warp input[type=time]:focus,
+.wp-trave-settings-form-warp input[type=url]:focus,
+.wp-trave-settings-form-warp input[type=week]:focus,
+.wp-trave-settings-form-warp select:focus {
+  border-left: 3px solid #38a17d;
+}
+.wp-travel-styles input[type=number],
+.wp-travel-styles input.date-input,
+.wp-trave-settings-form-warp input[type=number],
+.wp-trave-settings-form-warp input.date-input {
+  width: 180px;
+}
+.wp-travel-styles input[type=radio],
+.wp-trave-settings-form-warp input[type=radio] {
+  width: 16px;
+  border-radius: 50%;
+  height: 16px;
+}
+.wp-travel-styles input[type=radio]:focus,
+.wp-trave-settings-form-warp input[type=radio]:focus {
+  border-left: 1px solid #d3d3d3;
+}
 .wp-travel-styles .label_title,
 .wp-trave-settings-form-warp .label_title {
   color: #757575;
@@ -353,88 +437,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-.wp-travel-styles input[type=text],
-.wp-travel-styles input[type=password],
-.wp-travel-styles input[type=date],
-.wp-travel-styles input[type=datetime],
-.wp-travel-styles input[type=datetime-local],
-.wp-travel-styles input[type=email],
-.wp-travel-styles input[type=month],
-.wp-travel-styles input[type=number],
-.wp-travel-styles input[type=search],
-.wp-travel-styles input[type=tel],
-.wp-travel-styles input[type=time],
-.wp-travel-styles input[type=url],
-.wp-travel-styles input[type=week],
-.wp-travel-styles select,
-.wp-trave-settings-form-warp input[type=text],
-.wp-trave-settings-form-warp input[type=password],
-.wp-trave-settings-form-warp input[type=date],
-.wp-trave-settings-form-warp input[type=datetime],
-.wp-trave-settings-form-warp input[type=datetime-local],
-.wp-trave-settings-form-warp input[type=email],
-.wp-trave-settings-form-warp input[type=month],
-.wp-trave-settings-form-warp input[type=number],
-.wp-trave-settings-form-warp input[type=search],
-.wp-trave-settings-form-warp input[type=tel],
-.wp-trave-settings-form-warp input[type=time],
-.wp-trave-settings-form-warp input[type=url],
-.wp-trave-settings-form-warp input[type=week],
-.wp-trave-settings-form-warp select {
-  max-width: 300px;
-  width: 100%;
-  box-shadow: none;
-  border: 1px solid #d3d3d3;
-  border-radius: 4px;
-  padding: 8px 12px;
-  height: 36px;
-  outline: 0;
-  border-left: 3px solid #d3d3d3;
-}
-.wp-travel-styles input[type=text]:focus,
-.wp-travel-styles input[type=password]:focus,
-.wp-travel-styles input[type=date]:focus,
-.wp-travel-styles input[type=datetime]:focus,
-.wp-travel-styles input[type=datetime-local]:focus,
-.wp-travel-styles input[type=email]:focus,
-.wp-travel-styles input[type=month]:focus,
-.wp-travel-styles input[type=number]:focus,
-.wp-travel-styles input[type=search]:focus,
-.wp-travel-styles input[type=tel]:focus,
-.wp-travel-styles input[type=time]:focus,
-.wp-travel-styles input[type=url]:focus,
-.wp-travel-styles input[type=week]:focus,
-.wp-travel-styles select:focus,
-.wp-trave-settings-form-warp input[type=text]:focus,
-.wp-trave-settings-form-warp input[type=password]:focus,
-.wp-trave-settings-form-warp input[type=date]:focus,
-.wp-trave-settings-form-warp input[type=datetime]:focus,
-.wp-trave-settings-form-warp input[type=datetime-local]:focus,
-.wp-trave-settings-form-warp input[type=email]:focus,
-.wp-trave-settings-form-warp input[type=month]:focus,
-.wp-trave-settings-form-warp input[type=number]:focus,
-.wp-trave-settings-form-warp input[type=search]:focus,
-.wp-trave-settings-form-warp input[type=tel]:focus,
-.wp-trave-settings-form-warp input[type=time]:focus,
-.wp-trave-settings-form-warp input[type=url]:focus,
-.wp-trave-settings-form-warp input[type=week]:focus,
-.wp-trave-settings-form-warp select:focus {
-  border-left: 3px solid #38a17d;
-}
 .wp-travel-styles .select2-container,
 .wp-trave-settings-form-warp .select2-container {
   max-width: 300px !important;
   width: 100% !important;
-}
-.wp-travel-styles input[type=radio],
-.wp-trave-settings-form-warp input[type=radio] {
-  width: 16px;
-  border-radius: 50%;
-  height: 16px;
-}
-.wp-travel-styles input[type=radio]:focus,
-.wp-trave-settings-form-warp input[type=radio]:focus {
-  border-left: 1px solid #d3d3d3;
 }
 .wp-travel-styles a,
 .wp-trave-settings-form-warp a {
@@ -464,29 +470,8 @@
   color: red;
   padding: 10px 25px;
 }
-.wp-travel-styles button.insert-media,
-.wp-trave-settings-form-warp button.insert-media {
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-  background: inherit;
-  border-radius: inherit;
-  padding: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  box-shadow: inherit;
-  height: inherit;
-  text-shadow: inherit;
-  border: inherit;
-}
-.wp-travel-styles button.insert-media:hover,
-.wp-trave-settings-form-warp button.insert-media:hover {
-  background: inherit;
-  box-shadow: none;
-  color: #fff;
-}
-.wp-travel-styles .button,
-.wp-trave-settings-form-warp .button {
+.wp-travel-styles .button:not(.ed_button):not(.add_media),
+.wp-trave-settings-form-warp .button:not(.ed_button):not(.add_media) {
   font-size: 13px;
   font-weight: 500;
   color: #fff;
@@ -500,10 +485,10 @@
   text-shadow: none;
   border: 0;
 }
-.wp-travel-styles .button:hover, .wp-travel-styles .button:active, .wp-travel-styles .button:focus,
-.wp-trave-settings-form-warp .button:hover,
-.wp-trave-settings-form-warp .button:active,
-.wp-trave-settings-form-warp .button:focus {
+.wp-travel-styles .button:not(.ed_button):not(.add_media):hover, .wp-travel-styles .button:not(.ed_button):not(.add_media):active, .wp-travel-styles .button:not(.ed_button):not(.add_media):focus,
+.wp-trave-settings-form-warp .button:not(.ed_button):not(.add_media):hover,
+.wp-trave-settings-form-warp .button:not(.ed_button):not(.add_media):active,
+.wp-trave-settings-form-warp .button:not(.ed_button):not(.add_media):focus {
   background: #53b392;
   box-shadow: 0 5px #3c9c7b;
 }

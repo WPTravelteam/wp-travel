@@ -3,6 +3,18 @@
   margin-top: 0;
 }
 
+.map-wrap #search-input {
+  left: 243px;
+  padding: 10px 11px 10px 13px;
+  height: 40px;
+  max-width: 100%;
+  width: 50%;
+}
+.map-wrap .map-inside-map {
+  min-width: 100%;
+  min-height: 400px;
+}
+
 .clearfix:before,
 .clearfix:after {
   clear: both;

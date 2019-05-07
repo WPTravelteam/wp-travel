@@ -508,11 +508,11 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-fixed-departure-row" >
 		<td><label for="wp-travel-start-date"><?php esc_html_e( 'Starting Date', 'wp-travel' ); ?></label></td>
-		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" /></td>
+		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_start_date" id="wp-travel-start-date" value="<?php echo esc_attr( $start_date ); ?>" class="date-input" /></td>
 	</tr>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-fixed-departure-row">
 		<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
-		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" /></td>
+		<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" class="date-input" /></td>
 	</tr>
 
 	<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>" id="wp-variations-multiple-dates" >
@@ -575,8 +575,8 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 											<div class="repeat-row">
 												<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
 												<div class="two-third">
-													<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $start_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-													<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+													<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $start_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date date-input" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+													<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" value="<?php echo esc_attr( $end_date ); ?>" name="wp_travel_multiple_trip_dates[<?php echo esc_attr( $date_key ); ?>][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date date-input" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 												</div>
 											</div>
 											<?php do_action( 'wp_travel_price_tab_after_multiple_date', $post_id, $date_key ); ?>
@@ -664,8 +664,8 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 										<div class="repeat-row">
 											<label class="one-third"><?php echo esc_html( 'Select a Date', 'wp-travel' ); ?></label>
 											<div class="two-third">
-												<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
-												<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
+												<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="wp_travel_multiple_trip_dates[{{data.random}}][start_date]" type="text" data-language="en" class=" wp-travel-multiple-start-date date-input" readonly placeholder="<?php echo esc_attr( 'Start Date', 'wp-travel' ); ?>" />
+												<input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" name="wp_travel_multiple_trip_dates[{{data.random}}][end_date]" type="text" data-language="en" class=" wp-travel-multiple-end-date date-input" readonly placeholder="<?php echo esc_attr( 'End Date', 'wp-travel' ); ?>" />
 											</div>
 										</div>
 										<?php do_action( 'wp_travel_price_tab_after_multiple_date_template', $post_id ); ?>
