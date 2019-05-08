@@ -2037,66 +2037,55 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 				<?php if ( wp_travel_is_payment_enabled() && ! $hide_payment_column ) : ?>
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
-						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
-							<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
-							<div class="wp-travel-bank-deposit-wrap ">
-								<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
-								<div id="wp-travel-bank-deposit-content" >
-									<h3><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
-									<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
-								</div>
-
-								<?php
-								$payment_id = wp_travel_get_payment_id( $booking_id );
-								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
-								if ( ! empty( $payment_slip ) ) {
-									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-									<div class="wp-travel-magnific-popup-image">
-										<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
-									</div>
-									<?php
-								}
-								?>
+						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
+							<?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?>
+						</div>
+						<div class="wp-travel-bank-deposit-wrap wp-travel-popup">
+							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
+							<div id="wp-travel-bank-deposit-content" >
+								<h3 class=".popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
+								<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
+								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
 							</div>
-							
-							<script type="text/javascript">
-								jQuery(document).ready(function($){
-									// popup
-									$('.wp-travel-upload-slip').magnificPopup({
-										type: 'inline',
-									});
 
-									$('.wp-travel-magnific-popup-image').magnificPopup({
-										delegate: 'a', // child items selector, by clicking on it popup will open
-										type: 'image',
-										// other options
-										gallery: {
-											enabled: true
-										}
-									});
+							<?php
+							$payment_id = wp_travel_get_payment_id( $booking_id );
+							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+							if ( ! empty( $payment_slip ) ) {
+								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
+								<div class="wp-travel-magnific-popup-image">
+									<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
+								</div>
+								<?php
+							}
+							?>
 
-									// form submit
-									$('.wp-travel-submit-slip').submit(function (event) {
+						</div>
+						<script type="text/javascript">
+							jQuery(document).ready(function($){
+								// popup
+								$('.wp-travel-upload-slip').magnificPopup({
+									type: 'inline',
+									// showCloseBtn:false
+								});
 
-									});
+								$('.wp-travel-magnific-popup-image').magnificPopup({
+									delegate: 'a', // child items selector, by clicking on it popup will open
+									type: 'image',
+									// other options
+									gallery: {
+										enabled: true
+									}
+								});
+
+								// form submit
+								$('.wp-travel-submit-slip').submit(function (event) {
 
 								});
-							</script>
-							<style>
-								#wp-travel-bank-deposit-content{
-									width:600px;
-									height:400px;
-									display:none;
-									background:rgba( 255, 255, 255, 0.5 );
-									margin-left: calc( 50% - 300px );
-									padding:20px;
-									box-sizing:border-box;
-								}
-								.mfp-content #wp-travel-bank-deposit-content{
-									display:block;
-								}
-							</style>
-								
+
+							});
+						</script>
+						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
 					</div>
 				<?php endif; ?>
 				<div class="my-order-single-content">
@@ -2546,9 +2535,15 @@ function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) 
  */
 function wp_travel_get_bank_deposit_account_table() {
 	$account_data = wp_travel_get_bank_deposit_account_details();
+	$settings = wp_travel_get_settings();
 	ob_start();
 	if ( is_array( $account_data ) && count( $account_data ) > 0 ) {
-		?>
+		$wp_travel_bank_deposit_description = isset( $settings['wp_travel_bank_deposit_description'] ) ? $settings['wp_travel_bank_deposit_description'] : '';
+
+		if ( ! empty( $wp_travel_bank_deposit_description ) ) : ?>
+			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
+		<?php endif; ?>
+		
 		<table>
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
