@@ -440,6 +440,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
 
 	$email = new WP_Travel_Emails();
+	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
@@ -454,8 +455,6 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		// Admin Subject.
 		$admin_payment_subject = $admin_payment_template['subject'];
-
-		$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
