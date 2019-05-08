@@ -818,7 +818,7 @@
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .wp-collapse-open {
   margin-bottom: 15px;
-  display: inline-block !important;
+  display: inline-block;
   width: 100%;
 }
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .wp-travel-tab-content .wp-collapse-open span {

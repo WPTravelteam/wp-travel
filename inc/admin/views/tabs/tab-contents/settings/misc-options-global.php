@@ -75,7 +75,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 			<?php
 			$upsell_args = array(
 				'title'      => __( 'Display current exchange rate in your site.', 'wp-travel' ),
-				'content'    => sprintf( __( 'You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out %sWP Travel PRO%s or %sWP Travel Currency Exchange Rates%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/" target="__blank">', '</a>' ),
+				'content'    => sprintf( __( 'You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out %sWP Travel PRO%s or %sWP Travel Currency Exchange Rates%s.', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/" target="__blank">', '</a>' ),
 				'link'       => '',
         		'link_label' => '',
 				'link2'       => '',
@@ -91,7 +91,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 			<?php
 			$upsell_args = array(
 				'title'      => __( 'Using Mailchimp for email marketing?', 'wp-travel' ),
-				'content'    => sprintf( __( 'You can import customer email from booking and inquiry to Mailchimp. That help you grow your business. Checkout out %sWP Travel PRO%s or %sWP Travel Mailchimp%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-mailchimp/" target="__blank">', '</a>' ),
+				'content'    => sprintf( __( 'You can import customer email from booking and inquiry to Mailchimp. That help you grow your business. Checkout out %sWP Travel PRO%s or %sWP Travel Mailchimp%s.', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-mailchimp/" target="__blank">', '</a>' ),
 				'link'       => '',
         		'link_label' => '',
 				'link2'       => '',
@@ -111,7 +111,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 			<?php
 			$upsell_args = array(
 				'title'      => __( 'Allow customers to save trip for future.', 'wp-travel' ),
-				'content'    => sprintf( __( 'Whishlists helps user to save trip they like for future, so that they can book them later. Checkout out %sWP Travel PRO%s or %sWP Travel Wishlists%s.' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-wishlists/" target="__blank">', '</a>' ),
+				'content'    => sprintf( __( 'Whishlists helps user to save trip they like for future, so that they can book them later. Checkout out %sWP Travel PRO%s or %sWP Travel Wishlists%s.', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/wp-travel-wishlists/" target="__blank">', '</a>' ),
 				'link'       => '',
         		'link_label' => '',
 				'link2'       => '',
