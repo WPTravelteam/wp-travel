@@ -2038,7 +2038,10 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
-							<?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?>
+							<?php 
+							$status_lists = wp_travel_get_payment_status();
+							$payment_status = $status_lists[ $details['payment_status'] ]; 
+							echo esc_html( $payment_status['text'] ); ?>
 						</div>
 						<div class="wp-travel-bank-deposit-wrap">
 							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
@@ -2389,7 +2392,38 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 					<tr>
 						<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
 						<td><?php echo esc_html( $payment_args['payment_id'] ); ?></td>
-						<td><?php echo esc_html( $payment_args['payment_method'] ); ?></td>
+						<td>
+							<?php
+							$gateway_lists = wp_travel_payment_gateway_lists();
+
+							// use payment method key in case of payment disabled or deactivated.
+							$payment_method = isset( $gateway_lists[ $payment_args['payment_method'] ] ) ? $gateway_lists[ $payment_args['payment_method'] ] : $payment_args['payment_method']; 
+
+							echo esc_html( $payment_method );
+
+							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
+
+								
+								$payment_id = $payment_args['payment_id'];
+								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+								if ( ! empty( $payment_slip ) ) {
+									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
+									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><?php esc_html_e( 'View slip' ); ?></a>
+									
+									<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
+									</div>
+									<style>
+										td #wp-travel-magnific-popup-image-payment-table.wp-travel-popup{
+											display:none;
+										}
+									</style>
+									<?php
+								}
+							}
+							?>
+							
+						</td>
 						<td>
 							<?php
 							if ( $payment_amount > 0 ) :
