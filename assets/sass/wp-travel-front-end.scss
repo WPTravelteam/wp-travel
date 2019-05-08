@@ -4857,6 +4857,7 @@ li {
     margin-left: calc( 50% - 300px );
     padding: 20px;
     box-sizing: border-box;
+    position: relative;
 
     .popup-title {
         font-weight: bold;
@@ -4866,8 +4867,8 @@ li {
 
     .mfp-close,
     .close-button {
-        right: -12px;
-        top: -12px;
+        right: -12px!important;
+        top: -12px!important;
         margin: 0;
         display: inline-block;
         background: #fff;

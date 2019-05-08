@@ -4721,6 +4721,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   margin-left: calc( 50% - 300px );
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 }
 .wp-travel-popup .popup-title {
   font-weight: bold;
@@ -4729,8 +4730,8 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 .wp-travel-popup .mfp-close,
 .wp-travel-popup .close-button {
-  right: -12px;
-  top: -12px;
+  right: -12px !important;
+  top: -12px !important;
   margin: 0;
   display: inline-block;
   background: #fff;
