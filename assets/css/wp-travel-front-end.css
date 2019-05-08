@@ -4713,11 +4713,13 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 .wp-travel-popup {
   width: 600px;
-  display: none;
   background: #fff;
   margin-left: calc( 50% - 300px );
   padding: 20px;
   box-sizing: border-box;
+}
+.wp-travel-popup#wp-travel-bank-deposit-content .wp-travel-popup.wp-travel-magnific-popup-image {
+  display: none;
 }
 .wp-travel-popup .popup-title {
   font-weight: bold;

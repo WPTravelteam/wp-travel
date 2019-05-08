@@ -4845,9 +4845,14 @@ li {
     }
 }
 
+
 .wp-travel-popup {
+    &#wp-travel-bank-deposit-content
+    &.wp-travel-magnific-popup-image{
+        display: none;
+    }
+
     width: 600px;
-    display: none;
     background: #fff;
     margin-left: calc( 50% - 300px );
     padding: 20px;
