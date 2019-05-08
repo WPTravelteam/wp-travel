@@ -788,7 +788,7 @@ function wp_travel_frontend_contents( $post_id ) {
 							?>
 							<div class="wp-collapse-open clearfix">
 								<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-								<a href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
+								<a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 							</div>
 							<?php foreach ( $faqs as $k => $faq ) : ?>
 							<div class="panel panel-default">
