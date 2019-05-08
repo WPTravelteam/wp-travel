@@ -2053,13 +2053,13 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 							if ( ! empty( $payment_slip ) ) {
 								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-								<div class="wp-travel-magnific-popup-image wp-travel-popup">
+								<div class="wp-travel-magnific-popup-image ">
 									<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
 								</div>
 								<?php
 							}
 							?>
-
+<!-- wp-travel-popup -->
 						</div>
 						<script type="text/javascript">
 							jQuery(document).ready(function($){
@@ -2075,6 +2075,16 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 									// other options
 									gallery: {
 										enabled: true
+									},
+									image:{
+										markup: '<div class="mfp-figure wp-travel-popup">'+
+													'<div class="mfp-close"></div>'+
+													'<div class="mfp-img"></div>'+
+													'<div class="mfp-bottom-bar">'+
+													'<div class="mfp-title"></div>'+
+													'<div class="mfp-counter"></div>'+
+													'</div>'+
+												'</div>',
 									}
 								});
 
