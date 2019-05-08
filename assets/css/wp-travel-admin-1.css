@@ -102,7 +102,7 @@
   border: 1px solid #d3d3d3;
   border-radius: 4px;
   padding: 8px 12px;
-  height: 36px;
+  height: 38px;
   outline: 0;
   border-left: 3px solid #d3d3d3;
 }
@@ -503,6 +503,12 @@
   padding: 10px 0px;
   width: 100%;
   box-sizing: border-box;
+}
+.wp-travel-styles .while-empty,
+.wp-trave-settings-form-warp .while-empty {
+  background: #4299e4;
+  color: #fff;
+  padding: 5px;
 }
 
 .wp-travel-accordion.has-handler .panel-title {
