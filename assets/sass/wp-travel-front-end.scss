@@ -4846,8 +4846,11 @@ li {
 }
 
 .wp-travel-bank-deposit-wrap {
-    #wp-travel-bank-deposit-content.wp-travel-popup{
-        display: none;
+    #wp-travel-bank-deposit-content,
+    #wp-travel-magnific-popup-image {
+        &.wp-travel-popup{
+            display: none;
+        }
     }
 }
 

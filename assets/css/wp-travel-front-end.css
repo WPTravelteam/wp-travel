@@ -4711,7 +4711,8 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
     margin: -20px !important;
   }
 }
-.wp-travel-bank-deposit-wrap #wp-travel-bank-deposit-content.wp-travel-popup {
+.wp-travel-bank-deposit-wrap #wp-travel-bank-deposit-content.wp-travel-popup,
+.wp-travel-bank-deposit-wrap #wp-travel-magnific-popup-image.wp-travel-popup {
   display: none;
 }
 
