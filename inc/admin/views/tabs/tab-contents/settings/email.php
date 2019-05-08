@@ -91,7 +91,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 														<input <?php checked( $send_booking_email_to_admin, 'yes' ); ?> value="yes" name="send_booking_email_to_admin" id="send_booking_email_to_admin" type="checkbox" />
 														<span class="switch"></span>
 													</label>
-													<p class="description"><?php _e( 'Enable or disable Email notification to admin' ); ?></p>
+													<p class="description"><?php _e( 'Enable or disable Email notification to admin', 'wp-travel' ); ?></p>
 												</span>
 											</td>
 										</tr>

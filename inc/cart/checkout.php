@@ -54,7 +54,11 @@ $form_fw->init_validation( 'wp-travel-booking' );
 											$collapse      = 'collapse in';
 											$area_expanded = 'true';
 											else :
-												echo esc_html( __( sprintf( 'Traveler %d', ( $i + 1 ) ), 'wp-travel' ) );
+												$traveler_index = $i + 1;
+												/**
+												 * translators: %d placeholder is used to show number of traveler except lead traveler.
+												 */
+												echo sprintf( __( 'Traveler %d', 'wp-travel' ), $traveler_index );
 												$collapse      = 'collapse';
 												$area_expanded = 'false';
 											endif;

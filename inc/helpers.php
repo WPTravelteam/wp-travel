@@ -2040,9 +2040,9 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
 							<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
 							<div class="wp-travel-bank-deposit-wrap ">
-								<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip' ); ?></a>
+								<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
 								<div id="wp-travel-bank-deposit-content" >
-									<h3><?php esc_html_e( 'Submit Bank Payment Receipt' ); ?></h3>
+									<h3><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 									<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
 								</div>
 
@@ -2552,22 +2552,22 @@ function wp_travel_get_bank_deposit_account_table() {
 		<table>
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
-					<td><?php _e( 'Account Name' ); ?></td>
+					<td><?php _e( 'Account Name', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['account_number'] ) ) : ?>
-					<td><?php _e( 'Account Number' ); ?></td>
+					<td><?php _e( 'Account Number', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['bank_name'] ) ) : ?>
-					<td><?php _e( 'Bank Name' ); ?></td>
+					<td><?php _e( 'Bank Name', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['sort_code'] ) ) : ?>
-					<td><?php _e( 'Sort Code' ); ?></td>
+					<td><?php _e( 'Sort Code', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['iban'] ) ) : ?>
-					<td><?php _e( 'IBAN' ); ?></td>
+					<td><?php _e( 'IBAN', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['swift'] ) ) : ?>
-					<td><?php _e( 'Swift' ); ?></td>
+					<td><?php _e( 'Swift', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 			</tr>
 			<?php foreach ( $account_data as $data ) { ?>
@@ -2595,7 +2595,7 @@ function wp_travel_get_bank_deposit_account_table() {
 		</table>
 		<?php
 	} else {
-		esc_html_e( 'No detail found' );
+		esc_html_e( 'No detail found', 'wp-travel' );
 	}
 	$content = ob_get_contents();
 	ob_end_clean();

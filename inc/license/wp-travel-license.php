@@ -144,7 +144,7 @@ class WP_Travel_License {
 							</label>
 						</h3>
 						<div class="subject_input">
-							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key" placeholder="<?php _e( 'Enter license key' ); ?>">
+							<input type="text" value="<?php echo esc_attr( $license_key ); ?>" name="<?php echo $premium_addon['_option_prefix']; ?>key" id="<?php echo $key; ?>-license-key" placeholder="<?php _e( 'Enter license key', 'wp-travel' ); ?>">
 							<?php if ( $license_key || 'valid' !== $status ) : ?>
 
 								<?php wp_nonce_field( $premium_addon['_option_prefix'] . 'nonce', $premium_addon['_option_prefix'] . 'nonce' ); ?>
@@ -165,9 +165,9 @@ class WP_Travel_License {
 								$date_format = get_option('date_format');
 								?>
 								<br>
-								<span class="expire-in"><?php esc_html_e( 'Expires in' ); ?><strong><?php echo date( $date_format, strtotime( $expires_in ) ); ?></strong></span>
+								<span class="expire-in"><?php esc_html_e( 'Expires in', 'wp-travel' ); ?><strong><?php echo date( $date_format, strtotime( $expires_in ) ); ?></strong></span>
 							<?php endif; ?>
-							<p class="description"><?php printf( __( 'Enter license key for %s here.'), $premium_addon['item_name']); ?></p>
+							<p class="description"><?php printf( __( 'Enter license key for %s here.', 'wp-travel'), $premium_addon['item_name']); ?></p>
 						</div>
 					</div>
 				</div>

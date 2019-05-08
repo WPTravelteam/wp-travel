@@ -75,13 +75,13 @@ function wp_travel_settings_bank_deposit( $args ) {
 						<thead>
 							<tr>
 								<th></td>
-								<th><?php esc_html_e( 'Account Name' ); ?></th>
-								<th><?php esc_html_e( 'Account Number' ); ?></th>
-								<th><?php esc_html_e( 'Bank Name' ); ?></th>
-								<th><?php esc_html_e( 'Sort Code' ); ?></th>
-								<th><?php esc_html_e( 'IBAN' ); ?></th>
-								<th><?php esc_html_e( 'BIC/Swift' ); ?></th>
-								<th colspan="2"><?php esc_html_e( 'Action' ); ?></th>
+								<th><?php esc_html_e( 'Account Name', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Account Number', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Bank Name', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Sort Code', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'IBAN', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'BIC/Swift', 'wp-travel' ); ?></th>
+								<th colspan="2"><?php esc_html_e( 'Action', 'wp-travel' ); ?></th>
 							</tr>
 						</thead>
 						<tbody>
