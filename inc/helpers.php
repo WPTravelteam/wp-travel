@@ -2041,7 +2041,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							<?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?>
 						</div>
 						<div class="wp-travel-bank-deposit-wrap">
-							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
+							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
 							<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
 								<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 								<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
@@ -2053,40 +2053,41 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 							if ( ! empty( $payment_slip ) ) {
 								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-								<div class="wp-travel-magnific-popup-image ">
-									<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
+								<a href="#wp-travel-magnific-popup-image" class="wp-travel-magnific-popup" ><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
+								
+								<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
+									<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
 								</div>
 								<?php
 							}
 							?>
-<!-- wp-travel-popup -->
 						</div>
 						<script type="text/javascript">
 							jQuery(document).ready(function($){
 								// popup
-								$('.wp-travel-upload-slip').magnificPopup({
+								$('.wp-travel-magnific-popup').magnificPopup({
 									type: 'inline',
 									// showCloseBtn:false
 								});
 
-								$('.wp-travel-magnific-popup-image').magnificPopup({
-									delegate: 'a', // child items selector, by clicking on it popup will open
-									type: 'image',
-									// other options
-									gallery: {
-										enabled: true
-									},
-									image:{
-										markup: '<div class="mfp-figure wp-travel-popup">'+
-													'<div class="mfp-close"></div>'+
-													'<div class="mfp-img"></div>'+
-													'<div class="mfp-bottom-bar">'+
-													'<div class="mfp-title"></div>'+
-													'<div class="mfp-counter"></div>'+
-													'</div>'+
-												'</div>',
-									}
-								});
+								// $('.wp-travel-magnific-popup-image').magnificPopup({
+								// 	delegate: 'a', // child items selector, by clicking on it popup will open
+								// 	type: 'image',
+								// 	// other options
+								// 	gallery: {
+								// 		enabled: true
+								// 	},
+								// 	image:{
+								// 		markup: '<div class="mfp-figure wp-travel-popup">'+
+								// 					'<div class="mfp-close"></div>'+
+								// 					'<div class="mfp-img"></div>'+
+								// 					'<div class="mfp-bottom-bar">'+
+								// 					'<div class="mfp-title"></div>'+
+								// 					'<div class="mfp-counter"></div>'+
+								// 					'</div>'+
+								// 				'</div>',
+								// 	}
+								// });
 
 								// form submit
 								$('.wp-travel-submit-slip').submit(function (event) {
