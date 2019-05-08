@@ -2038,49 +2038,65 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
-						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+							<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+							<div class="wp-travel-bank-deposit-wrap ">
+								<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip' ); ?></a>
+								<div id="wp-travel-bank-deposit-content" >
+									<h3><?php esc_html_e( 'Submit Bank Payment Receipt' ); ?></h3>
+									<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
+								</div>
 
-						<?php
-							$bank_deposit_status = array( 'waiting_voucher' );
-							if ( in_array( $details['payment_status'], $bank_deposit_status ) ) { ?>
-									<div class="wp-travel-bank-deposit-wrap ">
-										<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip' ); ?></a>
-										<div id="wp-travel-bank-deposit-content" >
-											<h3><?php esc_html_e( 'Submit Bank Payment Receipt' ); ?></h3>
-											<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
-										</div>
-									</div>
-									
-									<script type="text/javascript">
-										jQuery(document).ready(function($){
-											// popup
-											$('.wp-travel-upload-slip').magnificPopup({
-												type: 'inline',
-											});
-
-											// form submit
-											$('.wp-travel-submit-slip').submit(function (event) {
-
-											});
-										});
-									</script>
-									<style>
-										#wp-travel-bank-deposit-content{
-											width:600px;
-											height:400px;
-											display:none;
-											background:rgba( 255, 255, 255, 0.5 );
-											margin-left: calc( 50% - 300px );
-											padding:20px;
-											box-sizing:border-box;
-										}
-										.mfp-content #wp-travel-bank-deposit-content{
-											display:block;
-										}
-									</style>
 								<?php
-							}
-						?>
+								$payment_id = wp_travel_get_payment_id( $booking_id );
+								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+								if ( ! empty( $payment_slip ) ) {
+									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
+									<div class="wp-travel-magnific-popup-image">
+										<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
+									</div>
+									<?php
+								}
+								?>
+							</div>
+							
+							<script type="text/javascript">
+								jQuery(document).ready(function($){
+									// popup
+									$('.wp-travel-upload-slip').magnificPopup({
+										type: 'inline',
+									});
+
+									$('.wp-travel-magnific-popup-image').magnificPopup({
+										delegate: 'a', // child items selector, by clicking on it popup will open
+										type: 'image',
+										// other options
+										gallery: {
+											enabled: true
+										}
+									});
+
+									// form submit
+									$('.wp-travel-submit-slip').submit(function (event) {
+
+									});
+
+								});
+							</script>
+							<style>
+								#wp-travel-bank-deposit-content{
+									width:600px;
+									height:400px;
+									display:none;
+									background:rgba( 255, 255, 255, 0.5 );
+									margin-left: calc( 50% - 300px );
+									padding:20px;
+									box-sizing:border-box;
+								}
+								.mfp-content #wp-travel-bank-deposit-content{
+									display:block;
+								}
+							</style>
+								
 					</div>
 				<?php endif; ?>
 				<div class="my-order-single-content">
@@ -2523,6 +2539,11 @@ function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) 
 	return $bank_account_details;
 }
 
+/**
+ * Return WP Travel Bank deposit account table.
+ *
+ * @since 2.0.0
+ */
 function wp_travel_get_bank_deposit_account_table() {
 	$account_data = wp_travel_get_bank_deposit_account_details();
 	ob_start();
