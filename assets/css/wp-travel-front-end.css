@@ -1935,9 +1935,6 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 .wp-travel-form-field:last-of-type {
   margin-top: 30px;
 }
-.wp-travel-form-field .radio-checkbox-label {
-  margin-bottom: 15px !important;
-}
 
 .radio-checkbox-label {
   width: 70%;
@@ -2377,6 +2374,9 @@ ul.availabily-list li > form > div.price del span {
 }
 ul.availabily-list li > form > div.price ins {
   background-color: rgba(255, 255, 255, 0);
+}
+ul.availabily-list li > form > div.price, ul.availabily-list li > form > div.status {
+  padding: 0 15px;
 }
 ul.availabily-list li > form > div.action {
   text-align: right;
@@ -3254,6 +3254,13 @@ ul.wp-travel-error {
     position: relative;
     padding: 0 15px 0 0;
     font-size: 13.8px;
+  }
+  .checkout-page-wrap .wp-travel-form-field label.radio-checkbox-label,
+.checkout-page-wrap .wp-travel-form-field .wp-travel-text-info.radio-checkbox-label,
+.wp-travel-enquiries-form .wp-travel-form-field label.radio-checkbox-label,
+.wp-travel-enquiries-form .wp-travel-form-field .wp-travel-text-info.radio-checkbox-label {
+    margin-bottom: 15px !important;
+    width: 75%;
   }
   .checkout-page-wrap .wp-travel-form-field input:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field select:not([type=radio]):not([type=checkbox]):not([type=submit]), .checkout-page-wrap .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]), .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .checkout-page-wrap .wp-travel-form-field textarea:not([type=radio]):not([type=checkbox]):not([type=submit]),
 .checkout-page-wrap .wp-travel-form-field select, .checkout-page-wrap .wp-travel-form-field textarea, .checkout-page-wrap .wp-travel-form-field .parsley-errors-list,
@@ -4703,6 +4710,46 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_option_label {
     margin: -20px !important;
   }
+}
+.wp-travel-popup {
+  width: 600px;
+  display: none;
+  background: #fff;
+  margin-left: calc( 50% - 300px );
+  padding: 20px;
+  box-sizing: border-box;
+}
+.wp-travel-popup .popup-title {
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.wp-travel-popup .mfp-close,
+.wp-travel-popup .close-button {
+  right: -12px;
+  top: -12px;
+  margin: 0;
+  display: inline-block;
+  background: #fff;
+  width: 30px;
+  min-width: 30px;
+  opacity: 1;
+  line-height: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #252525;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.wp-travel-popup form .wp-travel-form-field {
+  padding: 10px 0;
+}
+.wp-travel-popup form label {
+  width: 35%;
+  font-weight: bold;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
