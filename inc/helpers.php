@@ -2040,10 +2040,10 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
 							<?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?>
 						</div>
-						<div class="wp-travel-bank-deposit-wrap wp-travel-popup">
+						<div class="wp-travel-bank-deposit-wrap">
 							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
-							<div id="wp-travel-bank-deposit-content" >
-								<h3 class=".popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
+							<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
+								<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 								<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
 								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
 							</div>
@@ -2053,7 +2053,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 							if ( ! empty( $payment_slip ) ) {
 								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-								<div class="wp-travel-magnific-popup-image">
+								<div class="wp-travel-magnific-popup-image wp-travel-popup"">
 									<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
 								</div>
 								<?php
