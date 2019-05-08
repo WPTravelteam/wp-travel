@@ -70,15 +70,14 @@ function wp_travel_submit_bank_deposit_slip() {
 
 			do_action( 'wt_before_payment_process', $booking_id );
 
-			// $json   = sanitize_text_field( wp_unslash( $_REQUEST['payment_details'] ) );
-			// $detail = json_decode( $json );
-			// $amount = isset( $detail->amount ) ? $detail->amount : 0;
+			
 
 			$detail['amount'] = $amount;
 
 			$payment_id     = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
 			update_post_meta( $payment_id, 'wp_travel_payment_gateway', $payment_method );
+			update_post_meta( $payment_id, 'wp_travel_payment_slip_name', $filename );
 
 			wp_travel_update_payment_status( $booking_id, $amount, 'voucher_submited', $detail, sprintf( '_%s_args', $payment_method ), $payment_id );
 			do_action( 'wp_travel_after_successful_payment', $booking_id );
