@@ -2053,7 +2053,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 							if ( ! empty( $payment_slip ) ) {
 								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-								<div class="wp-travel-magnific-popup-image">
+								<div class="wp-travel-magnific-popup-image wp-travel-popup"">
 									<a href="<?php echo esc_url( $img_url ); ?>"><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
 								</div>
 								<?php
