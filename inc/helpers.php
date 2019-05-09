@@ -2054,9 +2054,9 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
 							if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
 							?>
-							<h3 class="my-order-single-title"><?php _e( 'Bank Payment' ); ?></h3>
+							<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
 							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
-							<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details' ); ?></a>
+							<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
 							<?php endif; ?>
 							<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
 								<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
@@ -2390,7 +2390,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 								if ( ! empty( $payment_slip ) ) {
 									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt' ); ?></a>
+									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt', 'wp-travel' ); ?></a>
 									<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
 										<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
 									</div>
