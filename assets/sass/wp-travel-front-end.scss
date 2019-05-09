@@ -72,6 +72,33 @@
     }
 }
 
+.wp-travel {
+    .button {
+        border: 0;
+        border-color: #ccc #ccc #bbb;
+        border-radius: 3px;
+        background: #f83531;
+        color: #fff !important;
+        // font-size: 16px;
+        line-height: 1.5;
+        padding: .5em 1em 0.5em;
+        display: inline-block;
+        &:hover{
+            background-color: #df1814;
+            color: #ffffff !important;
+        }
+    }
+
+    .wp-travel-bank-deposit-wrap {
+        padding: 10px 0;
+
+            .wp-travel-popup{
+                display: none;
+            }
+
+    }
+}
+
 .no-padding {
     padding: 0 !important;
 }
@@ -4466,13 +4493,13 @@ li {
                     padding: 4px 0px 16px;
                     background: transparent;
                     &:nth-child(1) {
-                        width: 31%;
+                        width: 10%;
                     }
                     &:nth-child(2) {
                         width: 17%;
                     }
                     &:nth-child(3) {
-                        width: 17%;
+                        width: 38%;
                     }
                     &:nth-child(4) {
                         width: 15%;
@@ -4842,15 +4869,6 @@ li {
     .wp_travel_tour_extras .wp_travel_tour_extras_option_single_content .wp_travel_tour_extras_option_label
     {
         margin: -20px !important;
-    }
-}
-
-.wp-travel-bank-deposit-wrap {
-    #wp-travel-bank-deposit-content,
-    #wp-travel-magnific-popup-image {
-        &.wp-travel-popup{
-            display: none;
-        }
     }
 }
 

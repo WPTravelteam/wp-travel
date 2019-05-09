@@ -316,4 +316,8 @@ jQuery(document).ready(function($) {
         $(this).parents('.wp_travel_tour_extras_option_single_content').children('.wp_travel_tour_extras_option_bottom').slideToggle();
     });
 
+    // popup
+    $('.wp-travel-magnific-popup').magnificPopup({
+        type: 'inline',
+    });
 });

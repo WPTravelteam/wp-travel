@@ -2006,8 +2006,13 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 	$status_list  = wp_travel_get_payment_status();
 	$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] ) ? $status_list[ $details['payment_status'] ]['color'] : '';
-	
+
+	if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
+		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+	}
+
 	$form              = new WP_Travel_FW_Form();
+
 	$form_options = array(
 		'id'            => 'wp-travel-submit-slip',
 		'wrapper_class' => 'wp-travel-submit-slip-form-wrapper',
@@ -2038,67 +2043,32 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
-							<?php 
-							$status_lists = wp_travel_get_payment_status();
-							$payment_status = $status_lists[ $details['payment_status'] ]; 
-							echo esc_html( $payment_status['text'] ); ?>
+						<?php
+						$status_lists   = wp_travel_get_payment_status();
+						$payment_status = $status_lists[ $details['payment_status'] ];
+						echo esc_html( $payment_status['text'] );
+						?>
 						</div>
 						<div class="wp-travel-bank-deposit-wrap">
-							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup"><?php esc_html_e( 'Upload Slip', 'wp-travel' ); ?></a>
+							<?php
+							$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
+							if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
+							?>
+							<h3 class="my-order-single-title"><?php _e( 'Bank Payment' ); ?></h3>
+							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
+							<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details' ); ?></a>
+							<?php endif; ?>
 							<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
 								<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 								<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
 								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
 							</div>
-
-							<?php
-							$payment_id = wp_travel_get_payment_id( $booking_id );
-							$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
-							if ( ! empty( $payment_slip ) ) {
-								$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-								<a href="#wp-travel-magnific-popup-image" class="wp-travel-magnific-popup" ><img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip"></a>
-								
-								<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
-									<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
-								</div>
-								<?php
-							}
-							?>
+							<div id="wp-travel-bank-details-content" class="wp-travel-popup" >
+								<h3 class="popup-title"><?php esc_html_e( 'Bank Details', 'wp-travel' ); ?></h3>
+								<?php echo wp_travel_get_bank_deposit_account_table(); ?>
+								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
+							</div>
 						</div>
-						<script type="text/javascript">
-							jQuery(document).ready(function($){
-								// popup
-								$('.wp-travel-magnific-popup').magnificPopup({
-									type: 'inline',
-									// showCloseBtn:false
-								});
-
-								// $('.wp-travel-magnific-popup-image').magnificPopup({
-								// 	delegate: 'a', // child items selector, by clicking on it popup will open
-								// 	type: 'image',
-								// 	// other options
-								// 	gallery: {
-								// 		enabled: true
-								// 	},
-								// 	image:{
-								// 		markup: '<div class="mfp-figure wp-travel-popup">'+
-								// 					'<div class="mfp-close"></div>'+
-								// 					'<div class="mfp-img"></div>'+
-								// 					'<div class="mfp-bottom-bar">'+
-								// 					'<div class="mfp-title"></div>'+
-								// 					'<div class="mfp-counter"></div>'+
-								// 					'</div>'+
-								// 				'</div>',
-								// 	}
-								// });
-
-								// form submit
-								$('.wp-travel-submit-slip').submit(function (event) {
-
-								});
-
-							});
-						</script>
 						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
 					</div>
 				<?php endif; ?>
@@ -2375,7 +2345,19 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 	$payment_data = wp_travel_payment_data( $booking_id );
 	$status_list  = wp_travel_get_payment_status();
 	if ( $payment_data && count( $payment_data ) > 0 ) {
-		?>
+		$payment_id   = wp_travel_get_payment_id( $booking_id );
+		$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+		if ( ! empty( $payment_slip ) ) {
+			$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
+	?>
+	<div class="wp-travel-bank-deposit-wrap">
+		<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
+			<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
+		</div>
+	</div>
+		<?php
+		}
+	?>
 		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
@@ -2404,12 +2386,11 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
 
 								
-								$payment_id = $payment_args['payment_id'];
+								$payment_id   = $payment_args['payment_id'];
 								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 								if ( ! empty( $payment_slip ) ) {
 									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
-									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><?php esc_html_e( 'View slip' ); ?></a>
-									
+									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt' ); ?></a>
 									<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
 										<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
 									</div>

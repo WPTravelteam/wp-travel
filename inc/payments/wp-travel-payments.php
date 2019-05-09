@@ -229,20 +229,29 @@ function wp_travel_test_mode() {
 	return false;
 }
 
-/** Return true if Payment checked */
-function wp_travel_is_payment_enabled() {
-	$settings = wp_travel_get_settings();
-
+/**
+ * List of enabled payment gateways.
+ *
+ * @return array
+ */
+function wp_travel_enabled_payment_gateways() {
+	$gateways            = array();
+	$settings            = wp_travel_get_settings();
 	$payment_gatway_list = wp_travel_payment_gateway_lists();
-
 	if ( is_array( $payment_gatway_list ) && count( $payment_gatway_list ) > 0 ) {
 		foreach ( $payment_gatway_list as $gateway => $label ) {
 			if ( isset( $settings[ "payment_option_{$gateway}" ] ) && 'yes' === $settings[ "payment_option_{$gateway}" ] ) {
-				return true;
+				$gateways[] = $gateway;
 			}
 		}
 	}
-	return false;
+	return $gateways;
+}
+
+/** Return true if Payment checked */
+function wp_travel_is_payment_enabled() {
+	$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
+	return ! empty( $enabled_payment_gateways ) ? true : false;
 }
 
 /** Return true if Payment checked */

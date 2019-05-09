@@ -1,4 +1,25 @@
 @charset "UTF-8";
+.wp-travel .button {
+  border: 0;
+  border-color: #ccc #ccc #bbb;
+  border-radius: 3px;
+  background: #f83531;
+  color: #fff !important;
+  line-height: 1.5;
+  padding: 0.5em 1em 0.5em;
+  display: inline-block;
+}
+.wp-travel .button:hover {
+  background-color: #df1814;
+  color: #ffffff !important;
+}
+.wp-travel .wp-travel-bank-deposit-wrap {
+  padding: 10px 0;
+}
+.wp-travel .wp-travel-bank-deposit-wrap .wp-travel-popup {
+  display: none;
+}
+
 .no-padding {
   padding: 0 !important;
 }
@@ -4375,13 +4396,13 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   background: transparent;
 }
 #wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(1), #wp-travel-tab-content-bookings .my-order table.my-order-payment-details th:nth-child(1) {
-  width: 31%;
+  width: 10%;
 }
 #wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(2), #wp-travel-tab-content-bookings .my-order table.my-order-payment-details th:nth-child(2) {
   width: 17%;
 }
 #wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(3), #wp-travel-tab-content-bookings .my-order table.my-order-payment-details th:nth-child(3) {
-  width: 17%;
+  width: 38%;
 }
 #wp-travel-tab-content-bookings .my-order table.order-list-table th:nth-child(4), #wp-travel-tab-content-bookings .my-order table.my-order-payment-details th:nth-child(4) {
   width: 15%;
@@ -4711,11 +4732,6 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
     margin: -20px !important;
   }
 }
-.wp-travel-bank-deposit-wrap #wp-travel-bank-deposit-content.wp-travel-popup,
-.wp-travel-bank-deposit-wrap #wp-travel-magnific-popup-image.wp-travel-popup {
-  display: none;
-}
-
 .wp-travel-popup {
   width: 600px;
   background: #fff;

@@ -42,7 +42,7 @@ function wp_travel_trip_callback_tabs( $tab, $args ) {
 	endif;
 
 	// Custom itinerary tabs support.
-	do_action( 'wp_travel_itinerary_custom_tabs' );
+	do_action( 'wp_travel_itinerary_custom_tabs', $post_id );
 	if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
 		?>
 		<table class="form-table">
