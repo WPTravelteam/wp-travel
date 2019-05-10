@@ -5,8 +5,14 @@ var gateway_change = function() {
 
     jQuery( '.f-bank-deposit' ).hide();
     if ( func === 'bank_deposit' ) {
+        // For Frontend submission.
         jQuery( '.f-bank-deposit' ).show();
+
+        // For wp travel dashboard submission.
+        jQuery( '.wp-travel-bank-deposit-wrap' ).show();
+        jQuery( '[name=complete_partial_payment]' ).hide();
     }
+   
 };
 const display_booking_option = {
     booking_only: function() {
@@ -34,13 +40,11 @@ const payments = {
     paypal: function() {
         jQuery("#wp-travel-book-now, #wp-travel-complete-partial-payment").show().siblings().hide();
         jQuery(".paypal-button").remove();
-    }
+    },
+    // bank_deposit = function() {
+    //     // only apply in dashboard partial payment.
+    // }
 };
-
-payments.bank_deposit = function() {
-    // only apply in dashboard partial payment.
-    jQuery( '.wp-travel-bank-deposit-wrap' ).show();
-}
 
 
 const display_payment_mode_option = {

@@ -57,6 +57,7 @@ function wp_travel_submit_bank_deposit_slip() {
 		// Update status if file is uploaded. and save image path to meta.
 		if ( true === $upload_ok ) {
 			$booking_id = $_POST['booking_id'];
+			$txn_id = isset( $_POST['wp_travel_bank_deposit_transaction_id'] ) ? $_POST['wp_travel_bank_deposit_transaction_id'] : '';
 			$data = wp_travel_booking_data( $booking_id );
 
 			$total = $data['total'];
@@ -68,10 +69,10 @@ function wp_travel_submit_bank_deposit_slip() {
 			$amount = $total - $paid;
 			$amount = wp_travel_get_formated_price( $amount );
 
-
 			do_action( 'wt_before_payment_process', $booking_id );
 
 			$detail['amount'] = $amount;
+			$detail['txn_id'] = $txn_id;
 
 			$payment_id     = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
@@ -88,8 +89,40 @@ function wp_travel_submit_bank_deposit_slip() {
 add_action( 'init', 'wp_travel_submit_bank_deposit_slip' );
 
 
-function wp_travel_bank_deposite_fields( $booking_id = null, $details = array() ) {
-	// die;
+function wp_travel_bank_deposite_button( $booking_id = null, $details = array() ) {
+	// In Case of partial payment activated.
+	if ( ! $booking_id ) {
+		$booking_id = isset( $_GET['detail_id'] ) ? $_GET['detail_id'] : 0;
+	}
+	if ( ! $booking_id ) {
+		return;
+	} ?>
+	<div class="wp-travel-bank-deposit-wrap">
+		<?php
+		$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
+		//if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
+			?>
+			<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
+			<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
+			<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
+		<?php //endif; ?>
+	</div>
+	<?php
+
+}
+
+// Bank deposit Payment button in wp travel dashboard. @since 2.0.0
+function wp_travel_show_bank_payment_section () {
+
+	if ( class_exists( 'WP_Travel_Partial_Payment_Core' ) ) {
+		add_action( 'wp_travel_partial_payment_before_submit_button', 'wp_travel_bank_deposite_button' );
+	} else {
+		add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_button', 9, 2 );
+	}
+}
+add_action( 'init', 'wp_travel_show_bank_payment_section' );
+
+function wp_travel_bank_deposite_content( $booking_id = null, $details = array() ) {
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? $_GET['detail_id'] : 0;
@@ -131,15 +164,7 @@ function wp_travel_bank_deposite_fields( $booking_id = null, $details = array() 
 		'default' => $booking_id,
 	);
 	?>
-	<div class="wp-travel-bank-deposit-wrap">
-		<?php
-		$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
-		//if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
-			?>
-			<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
-			<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
-			<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
-		<?php //endif; ?>
+	<div class="wp-travel-bank-deposit-wrap">		
 		<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
 			<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 			<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
@@ -155,14 +180,5 @@ function wp_travel_bank_deposite_fields( $booking_id = null, $details = array() 
 
 }
 
-// Partial Payment fields in wp travel dashboard. @since 2.0.0
-function wp_travel_show_bank_payment_section () {
-
-	if ( class_exists( 'WP_Travel_Partial_Payment_Core' ) ) {
-		add_action( 'wp_travel_partial_payment_before_submit_button', 'wp_travel_bank_deposite_fields' );
-	} else {
-		add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_fields', 9, 2 );
-	}
-}
-
-add_action( 'init', 'wp_travel_show_bank_payment_section' );
+// Bank deposit Payment content.
+add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_content', 9, 2 );

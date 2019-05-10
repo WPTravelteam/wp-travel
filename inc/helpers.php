@@ -2316,7 +2316,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 		<table class="my-order-payment-details">
 			<tr>
 				<th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment ID', 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( 'Payment ID / Txn ID', 'wp-travel' ); ?></th>
 				<th><?php esc_html_e( 'Payment Method', 'wp-travel' ); ?></th>
 				<th><?php esc_html_e( 'Payment Amount', 'wp-travel' ); ?></th>
 			</tr>
@@ -2327,7 +2327,16 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 					?>
 					<tr>
 						<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
-						<td><?php echo esc_html( $payment_args['payment_id'] ); ?></td>
+						<td>
+							<?php echo esc_html( $payment_args['payment_id'] );
+							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
+								$txn_id = get_post_meta( $payment_args['payment_id'], 'txn_id', true );
+								if ( ! empty( $txt_id ) ) {
+									echo ' / ' . $txt_id;
+								}
+							}
+							?>
+						</td>
 						<td>
 							<?php
 							$gateway_lists = wp_travel_payment_gateway_lists();
@@ -2338,8 +2347,6 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 							echo esc_html( $payment_method );
 
 							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
-
-								
 								$payment_id   = $payment_args['payment_id'];
 								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 								if ( ! empty( $payment_slip ) ) {
