@@ -105,12 +105,6 @@ class WP_Travel_License {
 				$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
 				$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
 				$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
-				?>
-				<style>
-					#wp-travel-tab-content-license .form-table input[class*=button].button-license{height:35px;line-height:35px}
-				</style>
-
-				<?php
 				$status_message = '';
 				$status_class = '';
 				$expires_in = '';

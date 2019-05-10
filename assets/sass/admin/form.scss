@@ -180,15 +180,16 @@ input[type="radio"] {
 }
 
 .license_wrapper {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	// display: grid;
+	// grid-template-columns: repeat(3, 1fr);
 	margin-bottom: 30px;
 	// grid-gap: 30px;
 
 	.license_grid {
 		background: transparent;
 		padding: 21px;
-		box-shadow: 0 0 25px rgba(0, 0, 0, 0.10);
+		// box-shadow: 0 0 25px rgba(0, 0, 0, 0.10);
+		border-bottom: 1px solid #c8e2d9;
 
 		.form_field {
 			display: grid;
@@ -459,17 +460,5 @@ input[type="radio"] {
 			right: 1px;
 			content: 'x';
 		}
-	}
-}
-
-@media screen and (max-width: 1067px) {
-	.license_wrapper {
-		grid-template-columns: repeat(1, 1fr);
-	}
-}
-
-@media screen and (min-width: 1068px) and (max-width: 1366px) {
-	.license_wrapper {
-		grid-template-columns: repeat(2, 1fr);
 	}
 }
