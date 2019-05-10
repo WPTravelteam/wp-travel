@@ -198,8 +198,10 @@ function wp_travel_paypal_ipn_process() {
 		 * a good idea to have a developer or sys admin manually investigate any
 		 * invalid IPN.
 		 */
-		wp_mail( $settings['from_email'], 'Invalid IPN', $listener->getTextReport() );
-
+		$from_email = isset( $settings['from_email'] ) ? $settings['from_email'] : '';
+		if ( ! empty( $from_email ) ) {
+			wp_mail( $settings['from_email'], 'Invalid IPN', $listener->getTextReport() );
+		}
 	}
 }
 add_action( 'wp_travel_verify_paypal_ipn', 'wp_travel_paypal_ipn_process' );
