@@ -2531,7 +2531,7 @@ function wp_travel_get_bank_deposit_account_table() {
 			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
 		<?php endif; ?>
 		
-		<table>
+		<table width="100%">
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
 					<td><?php _e( 'Account Name', 'wp-travel' ); ?></td>
