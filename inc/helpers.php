@@ -2520,14 +2520,14 @@ function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) 
  *
  * @since 2.0.0
  */
-function wp_travel_get_bank_deposit_account_table() {
+function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
 	$account_data = wp_travel_get_bank_deposit_account_details();
 	$settings = wp_travel_get_settings();
 	ob_start();
 	if ( is_array( $account_data ) && count( $account_data ) > 0 ) {
 		$wp_travel_bank_deposit_description = isset( $settings['wp_travel_bank_deposit_description'] ) ? $settings['wp_travel_bank_deposit_description'] : '';
 
-		if ( ! empty( $wp_travel_bank_deposit_description ) ) : ?>
+		if ( ! empty( $wp_travel_bank_deposit_description ) && true == $show_description ) : ?>
 			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
 		<?php endif; ?>
 		

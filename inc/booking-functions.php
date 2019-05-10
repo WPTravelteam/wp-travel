@@ -811,7 +811,7 @@ function wp_travel_book_now() {
 
 		$bank_deposit_table = '';
 		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
-			$bank_deposit_table = wp_travel_get_bank_deposit_account_table();
+			$bank_deposit_table = wp_travel_get_bank_deposit_account_table(false);
 		}
 
 		$email_tags = array(
