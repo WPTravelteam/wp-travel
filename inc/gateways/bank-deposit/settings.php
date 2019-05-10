@@ -9,7 +9,7 @@ function wp_travel_bank_deposit_default_settings_fields( $settings ) {
 	$settings['payment_option_bank_deposit'] = 'no';
 	$settings['wp_travel_bank_deposits']      = array();
 	$settings['wp_travel_bank_deposit_description'] = '';
-	$settings['wp_travel_bank_deposit_allowed_file'] = 'jpg, png';
+	// $settings['wp_travel_bank_deposit_allowed_file'] = 'jpg, png';
 	return $settings;
 }
 
@@ -29,7 +29,6 @@ function wp_travel_settings_bank_deposit( $args ) {
 
 	$payment_option_bank_deposit = isset( $settings['payment_option_bank_deposit'] ) ? $settings['payment_option_bank_deposit'] : 'no';
 	$wp_travel_bank_deposit_description = isset( $settings['wp_travel_bank_deposit_description'] ) ? $settings['wp_travel_bank_deposit_description'] : '';
-	$wp_travel_bank_deposit_allowed_file = isset( $settings['wp_travel_bank_deposit_allowed_file'] ) ? $settings['wp_travel_bank_deposit_allowed_file'] : 'jpg, png';
 	
 	$field_style = ( 'yes' === $payment_option_bank_deposit ) ? 'display:table-row-group' : 'display:none';
 
@@ -39,27 +38,22 @@ function wp_travel_settings_bank_deposit( $args ) {
 		<tr >
 			<th><label for="payment_option_bank_deposit"><?php esc_html_e( 'Enable ', 'wp-travel' ); ?></label></th>
 			<td>
-				<span class="show-in-frontend checkbox-default-design">
-					<label data-on="ON" data-off="OFF">
-					<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_bank_deposit ); ?> name="payment_option_bank_deposit" id="payment_option_bank_deposit" class="wp-travel-enable-payment" />
-						<span class="switch">
-						</span>
-					</label>
-				</span>
-				<p class="description"><label for="payment_option_bank_deposit"><?php esc_html_e( 'Check to enable Bank deposit.', 'wp-travel' ); ?></label></p>
+				<label for="payment_option_bank_deposit">
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+						<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_bank_deposit ); ?> name="payment_option_bank_deposit" id="payment_option_bank_deposit" class="wp-travel-enable-payment" />
+							<span class="switch">
+							</span>
+						</label>
+					</span>
+					<p class="description"><?php esc_html_e( 'Check to enable Bank deposit.', 'wp-travel' ); ?></p>
+				</label>
 			</td>
 		</tr>
 
 		
 		<tbody class="wp-travel-enable-payment-body" style="<?php echo esc_attr( $field_style ); ?>">
-			<tr >
-				<th><label for="wp_travel_bank_deposit_allowed_file"><?php esc_html_e( 'Allowed file to upload ', 'wp-travel' ); ?></label></th>
-				<td>
-					<input type="text" name="wp_travel_bank_deposit_allowed_file" id="wp_travel_bank_deposit_allowed_file" value="<?php echo esc_html( $wp_travel_bank_deposit_allowed_file ); ?>"  />
-					<p class="description"><label for="wp_travel_bank_deposit_allowed_file"><?php esc_html_e( 'Seperate value with comma( , ).', 'wp-travel' ); ?></label></p>
-
-				</td>
-			</tr>
+			
 			<tr >
 				<th><label for="wp_travel_bank_deposit_description"><?php esc_html_e( 'Description ', 'wp-travel' ); ?></label></th>
 				<td>

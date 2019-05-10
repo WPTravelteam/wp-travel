@@ -177,7 +177,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 
 				</label>
 			</span>
-				<p class="description"><?php esc_html_e( 'Check to enable standard PayPal payment.', 'wp-travel' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Check to enable Standard PayPal payment.', 'wp-travel' ); ?></p>
 			</td>
 		</tr>
 		<tbody class="payment-gateway-fields">

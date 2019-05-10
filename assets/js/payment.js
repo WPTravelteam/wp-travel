@@ -37,8 +37,9 @@ const payments = {
     }
 };
 
-payments.upload_voucher = function() {
-    console.log('voucher');
+payments.bank_deposit = function() {
+    // only apply in dashboard partial payment.
+    jQuery( '.wp-travel-bank-deposit-wrap' ).show();
 }
 
 

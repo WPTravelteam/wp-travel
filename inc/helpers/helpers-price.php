@@ -388,6 +388,11 @@ function wp_travel_booking_data( $booking_id ) {
 	return $amounts;
 }
 
+/**
+ * Return last payment ID.
+ *
+ * @since 2.0.0
+ */
 function wp_travel_get_payment_id( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;

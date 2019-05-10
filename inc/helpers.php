@@ -2007,33 +2007,6 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 	$status_list  = wp_travel_get_payment_status();
 	$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] ) ? $status_list[ $details['payment_status'] ]['color'] : '';
 
-	if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
-		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
-	}
-
-	$form              = new WP_Travel_FW_Form();
-
-	$form_options = array(
-		'id'            => 'wp-travel-submit-slip',
-		'wrapper_class' => 'wp-travel-submit-slip-form-wrapper',
-		'submit_button' => array(
-			'name'  => 'wp_travel_submit_slip',
-			'id'    => 'wp-travel-submit-slip',
-			'value' => __( 'Submit', 'wp-travel' ),
-		),
-		'multipart' => true,
-		'nonce'         => array(
-			'action' => 'wp_travel_security_action',
-			'field'  => 'wp_travel_security',
-		),
-	);
-	$bank_deposit_fields = wp_travel_get_bank_deposit_form_fields();
-	$bank_deposit_fields['booking_id'] = array(
-		'type'    => 'hidden',
-		'name'    => 'booking_id',
-		'id'      => 'wp-travel-booking_id',
-		'default' => $booking_id,
-	);
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
 		<div class="table-wrp">
@@ -2043,33 +2016,14 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
 						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
-						<?php
-						$status_lists   = wp_travel_get_payment_status();
-						$payment_status = $status_lists[ $details['payment_status'] ];
-						echo esc_html( $payment_status['text'] );
-						?>
-						</div>
-						<div class="wp-travel-bank-deposit-wrap">
 							<?php
-							$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
-							if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
+							$status_lists   = wp_travel_get_payment_status();
+							$payment_status = $status_lists[ $details['payment_status'] ];
+							echo esc_html( $payment_status['text'] );
 							?>
-							<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
-							<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
-							<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
-							<?php endif; ?>
-							<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
-								<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
-								<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>
-								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
-							</div>
-							<div id="wp-travel-bank-details-content" class="wp-travel-popup" >
-								<h3 class="popup-title"><?php esc_html_e( 'Bank Details', 'wp-travel' ); ?></h3>
-								<?php echo wp_travel_get_bank_deposit_account_table(); ?>
-								<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
-							</div>
 						</div>
-						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+						
+						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id, $details ); ?>
 					</div>
 				<?php endif; ?>
 				<div class="my-order-single-content">
