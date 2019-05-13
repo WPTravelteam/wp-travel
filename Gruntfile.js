@@ -223,6 +223,7 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
 					'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
 					'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
+					'assets/css/wp-travel-admin-1.min.css': ['assets/css/wp-travel-admin-1.css'],
 				}
 			}
 		},
