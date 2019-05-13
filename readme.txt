@@ -3,7 +3,7 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.1.1
+Tested up to: 5.2
 Requires PHP: 5.5
 Stable tag: 2.0.0
 License: GPLv3
@@ -225,6 +225,36 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 2.0.0 =
+Release Date: 13th May, 2019
+
+Enhancement:
+
+* Payment addons sortable. Made all payment addons sortable to change position of payment methods in checkout and admin settings page.
+* Admin layout and tabs update. New admin layout implemented as well as tabs and layouts in admin pages.
+* Bank deposit feature. Added new feature as Bank deposit to upload payment slip via WP Travel Dashboard. It will be verified by admin after uploding slip.
+
+Fixes:
+* Add to cart issue with some trips. if trips have no trip extra then trip is not able to add to cart.
+* Minor typo error fixes in email template and backend settings.
+* Custom trip code enable disable fixes.
+* Undefined index gateway in admin settings page.
+* Trip Extras not display in frontend trips if disabled from admin.
+* Tabs error fixes.
+
+= 1.9.7 =
+Release Date: 29th April, 2019
+
+Enhancement:
+
+* Addons Settings tab added. It helps to enable / disable addons
+* New hook for payment settings.
+
+Fixes:
+
+* Upsell notices fixes.
+* Other minor issue fixes.
 
 = 1.9.6 =
 Release Date: 22nd April 2019
