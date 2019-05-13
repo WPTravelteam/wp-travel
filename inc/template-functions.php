@@ -1868,6 +1868,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 		if ( empty( $trip_data ) ) {
 			return;
 		}
+		$trip_extras_class = new Wp_Travel_Extras_Frontend();
 		?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
@@ -2044,7 +2045,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 											<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 		
 										<?php else : 
-											$trip_extras_class = new Wp_Travel_Extras_Frontend();
+											// $trip_extras_class = new Wp_Travel_Extras_Frontend();
 											if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { ?>
 												<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 												<?php
@@ -2200,7 +2201,6 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 	
 									<?php else :
-										$trip_extras_class = new Wp_Travel_Extras_Frontend();
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { 
 											?>
 											<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
@@ -2477,6 +2477,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 	$per_person_text   = wp_travel_get_price_per_text( $trip_id );
 	$inventory_enabled = false;
 	$show_end_date     = wp_travel_booking_show_end_date();
+	$trip_extras_class = new Wp_Travel_Extras_Frontend();
 
 	?>
 	<div class="trip_list_by_fixed_departure_dates">
@@ -2622,7 +2623,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 									<div class="trip_list_by_fixed_departure_dates_booking">
 										<div class="action">
 											<?php
-											$trip_extras_class = new Wp_Travel_Extras_Frontend();
+											// $trip_extras_class = new Wp_Travel_Extras_Frontend();
 											if ( $pricing_sold_out ) {
 												?>
 												<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
