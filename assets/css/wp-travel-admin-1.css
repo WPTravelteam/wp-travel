@@ -215,15 +215,13 @@
 }
 .wp-travel-styles .license_wrapper,
 .wp-trave-settings-form-warp .license_wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 30px;
 }
 .wp-travel-styles .license_wrapper .license_grid,
 .wp-trave-settings-form-warp .license_wrapper .license_grid {
   background: transparent;
   padding: 21px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #c8e2d9;
 }
 .wp-travel-styles .license_wrapper .license_grid .form_field,
 .wp-trave-settings-form-warp .license_wrapper .license_grid .form_field {
@@ -406,18 +404,6 @@
   top: -8px;
   right: 1px;
   content: "x";
-}
-@media screen and (max-width: 1067px) {
-  .wp-travel-styles .license_wrapper,
-.wp-trave-settings-form-warp .license_wrapper {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-@media screen and (min-width: 1068px) and (max-width: 1366px) {
-  .wp-travel-styles .license_wrapper,
-.wp-trave-settings-form-warp .license_wrapper {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 .wp-travel-styles .select2-container,
 .wp-trave-settings-form-warp .select2-container {
