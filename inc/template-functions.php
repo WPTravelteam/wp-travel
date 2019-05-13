@@ -2049,12 +2049,13 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 											if ( $trip_extras_class->has_trip_extras( $trip_id, $price_key ) ) { ?>
 												<a href="#0" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 												<?php
-												// @since 1.9.3 To display group discount pricing lists. 
-												do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
 											} else { ?>
 												<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 												<?php
-											} ?>
+											} 
+											// @since 1.9.3 To display group discount pricing lists. 
+											do_action( 'wp_travel_booking_after_select_button', $trip_id, $price_key  );
+											?>
 										<?php endif; ?>
 										<input type="hidden" name="trip_date" value="<?php echo esc_attr( $available_date ); ?>" >
 										<input type="hidden" name="trip_id" value="<?php echo esc_attr( get_the_ID() ); ?>" />

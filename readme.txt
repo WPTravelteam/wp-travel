@@ -240,6 +240,7 @@ Fixes:
 * Minor typo error fixes in email template and backend settings.
 * Custom trip code enable disable fixes.
 * Undefined index gateway in admin settings page.
+* Group discount table not displaying for some trips.
 * Trip Extras not display in frontend trips if disabled from admin.
 * Tabs error fixes.
 
