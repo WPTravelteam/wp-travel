@@ -201,6 +201,9 @@ ob_start();
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">{customer_note}</td>
 			</tr>
+			<tr class="wp-travel-content" style="background: #fff;">
+				<td colspan="2" align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">{bank_deposit_table}</td>
+			</tr>
 	</table>
 
 <?php 

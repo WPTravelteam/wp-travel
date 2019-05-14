@@ -57,11 +57,13 @@ function wp_travel_payment_field_list() {
 function wp_travel_payment_gateway_lists() {
 	$gateway = array(
 		'paypal' => __( 'Standard Paypal', 'wp-travel' ),
+		'bank_deposit' => __( 'Bank Deposit', 'wp-travel' ),
 	);
 	return apply_filters( 'wp_travel_payment_gateway_lists', $gateway );
+
 }
 
-// Return sorted payment gateway list. @since 1.9.8
+// Return sorted payment gateway list.
 function wp_travel_sorted_payment_gateway_lists() {
 	$settings = wp_travel_get_settings();
 
@@ -227,20 +229,29 @@ function wp_travel_test_mode() {
 	return false;
 }
 
-/** Return true if Payment checked */
-function wp_travel_is_payment_enabled() {
-	$settings = wp_travel_get_settings();
-
+/**
+ * List of enabled payment gateways.
+ *
+ * @return array
+ */
+function wp_travel_enabled_payment_gateways() {
+	$gateways            = array();
+	$settings            = wp_travel_get_settings();
 	$payment_gatway_list = wp_travel_payment_gateway_lists();
-
 	if ( is_array( $payment_gatway_list ) && count( $payment_gatway_list ) > 0 ) {
 		foreach ( $payment_gatway_list as $gateway => $label ) {
 			if ( isset( $settings[ "payment_option_{$gateway}" ] ) && 'yes' === $settings[ "payment_option_{$gateway}" ] ) {
-				return true;
+				$gateways[] = $gateway;
 			}
 		}
 	}
-	return false;
+	return $gateways;
+}
+
+/** Return true if Payment checked */
+function wp_travel_is_payment_enabled() {
+	$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
+	return ! empty( $enabled_payment_gateways ) ? true : false;
 }
 
 /** Return true if Payment checked */
@@ -256,11 +267,11 @@ if ( ! function_exists( 'wp_travel_is_partial_payment_enabled' ) ) {
 }
 
 
-function wp_travel_update_payment_status_admin( $post_id ) {
-	if ( ! $post_id ) {
+function wp_travel_update_payment_status_admin( $booking_id ) {
+	if ( ! $booking_id ) {
 		return;
 	}
-	$payment_id = get_post_meta( $post_id, 'wp_travel_payment_id', true );
+	$payment_id = wp_travel_get_payment_id( $booking_id );
 
 	if ( $payment_id ) {
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? $_POST['wp_travel_payment_status'] : 'N/A';
@@ -438,6 +449,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
 
 	$email = new WP_Travel_Emails();
+	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
@@ -452,8 +464,6 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		// Admin Subject.
 		$admin_payment_subject = $admin_payment_template['subject'];
-
-		$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
@@ -569,7 +579,7 @@ function wp_travel_get_total_amount() {
  * Return Active Payment gateway list.
  */
 function wp_travel_get_active_gateways() {
-	$payment_gatway_list = wp_travel_payment_gateway_lists();
+	$payment_gatway_list = wp_travel_sorted_payment_gateway_lists();
 	$active_gateway_list = array();
 	$selected_gateway    = '';
 	$settings            = wp_travel_get_settings();
@@ -584,6 +594,9 @@ function wp_travel_get_active_gateways() {
 			}
 		}
 		$gateway_list['active'] = $active_gateway_list;
+	}
+	if ( isset( $gateway_list['selected'] ) ) {
+		$gateway_list['selected'] = apply_filters( 'wp_travel_selected_payment_gateway', $gateway_list['selected'] );
 	}
 	return $gateway_list;
 }

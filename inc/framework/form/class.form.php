@@ -48,6 +48,7 @@ class WP_Travel_FW_Form {
 		$this->form_options['nonce']['field'] = isset( $form_options['nonce']['field'] ) ? $form_options['nonce']['field'] : '';
 		$this->form_options['nonce']['action'] = isset( $form_options['nonce']['action'] ) ? $form_options['nonce']['action'] : '';
 
+		$this->form_options['multipart'] = isset( $form_options['multipart'] ) && $form_options['multipart'] ? true : false;
 		return $this;
 	}
 
@@ -92,7 +93,7 @@ class WP_Travel_FW_Form {
 		$this->init_assets();
 		?>
 			<div class="<?php echo esc_attr( $this->form_options['wrapper_class'] ); ?>">
-				<form action="" method="post" id="<?php echo esc_attr( $this->form_options['id'] ); ?>"  class="<?php echo esc_attr( $this->form_options['class'] ); ?>">
+				<form action="" method="post" id="<?php echo esc_attr( $this->form_options['id'] ); ?>"  class="<?php echo esc_attr( $this->form_options['class'] ); ?>" enctype="multipart/form-data" >
 					<?php do_action( $this->form_options['hook_prefix'] . '_before_form_field' ); ?>
 					<?php
 					$fields = new WP_Travel_FW_Field();
@@ -138,9 +139,13 @@ class WP_Travel_FW_Form {
 	 */
 	function template_new() {
 		wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+		$multipart = '';
+		if ( $this->form_options['multipart']  ) {
+			$multipart = 'enctype="multipart/form-data"';
+		}
 		?>
 			<div class="<?php echo esc_attr( $this->form_options['wrapper_class'] ); ?>">
-				<form action="" method="post" id="<?php echo esc_attr( $this->form_options['id'] ); ?>"  class="<?php echo esc_attr( $this->form_options['class'] ); ?>">
+				<form action="" method="post" id="<?php echo esc_attr( $this->form_options['id'] ); ?>"  class="<?php echo esc_attr( $this->form_options['class'] ); ?>" <?php echo esc_html( $multipart ); ?>>
 					<?php do_action( $this->form_options['hook_prefix'] . '_before_form_field' ); ?>
 					<?php
 					$fields = new WP_Travel_FW_Field();

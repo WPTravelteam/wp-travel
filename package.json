@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "1.9.7",
+  "version": "2.0.0",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
@@ -24,12 +24,12 @@
   "homepage": "https://gitlab.com/ws-plugins/wp-travel#README",
   "devDependencies": {
     "eslint": "^3.13.1",
-    "grunt": "^1.0.4",
+    "grunt": "^1.0.3",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-compress": "^1.5.0",
+    "grunt-contrib-compress": "^1.4.3",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
@@ -38,7 +38,8 @@
     "grunt-push-svn": "^0.2.2",
     "grunt-rtlcss": "^2.0.1",
     "grunt-svn-export": "^0.1.7",
-    "grunt-wp-i18n": "^1.0.3"
+    "grunt-wp-i18n": "^1.0.0",
+    "sass": "^0.5.0"
   },
   "dependencies": {
     "grunt-zip": "^0.18.1",

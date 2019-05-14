@@ -18,7 +18,6 @@ class WP_Travel_Gateway_Paypal_Request {
 	 * Constructor.
 	 */
 	function __construct() {
-		// add_action( 'init', array( $this, 'process' ) );
 		add_action( 'wp_travel_after_frontend_booking_save', array( $this, 'process' ) );
 		// For partial payment.
 		add_action( 'wp_travel_before_partial_payment_complete', array( $this, 'process' ), 10, 2 );

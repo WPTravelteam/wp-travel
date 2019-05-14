@@ -441,7 +441,7 @@ function wp_travel_save_booking_data( $booking_id ) {
 		endforeach;
 	}
 	update_post_meta( $booking_id, 'order_data', $order_data );
-	do_action( 'wp_travel_after_booking_data_save', $booking_id );
+	do_action( 'wp_travel_after_booking_data_save', $booking_id ); // update payment status.
 }
 add_action( 'save_post', 'wp_travel_save_booking_data' );
 
@@ -809,6 +809,11 @@ function wp_travel_book_now() {
 		$customer_email   = $email;
 		$customer_note    = isset( $_POST['wp_travel_note'] ) ? $_POST['wp_travel_note'] : '';
 
+		$bank_deposit_table = '';
+		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
+			$bank_deposit_table = wp_travel_get_bank_deposit_account_table(false);
+		}
+
 		$email_tags = array(
 			'{sitename}'               => $sitename,
 			'{itinerary_link}'         => get_permalink( $itinerary_id ),
@@ -826,6 +831,7 @@ function wp_travel_book_now() {
 			'{customer_phone}'         => $customer_phone,
 			'{customer_email}'         => $customer_email,
 			'{customer_note}'          => $customer_note,
+			'{bank_deposit_table}'     => $bank_deposit_table,
 		);
 		$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags, $booking_id );
 		$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );

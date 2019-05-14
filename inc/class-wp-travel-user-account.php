@@ -32,13 +32,13 @@ class Wp_Travel_User_Account {
 				'menu_title' => __( 'Dashboard', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-tachometer',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_dashboard_tab' ),
-				'priority' => 20,
+				'priority' => 10,
 			),
 			'bookings' => array(
 				'menu_title' => __( 'Bookings', 'wp-travel' ),
 				'menu_icon' => 'wt-icon wt-icon-th-list',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
-				'priority' => 10,
+				'priority' => 20,
 			),
 			'address' => array(
 				'menu_title' => __( 'Address', 'wp-travel' ),

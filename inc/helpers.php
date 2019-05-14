@@ -35,8 +35,8 @@ function wp_travel_settings_default_fields() {
 
 	// Booking client Defaults.
 	$booking_client_email_defaults = array(
-		'client_subject'      => __( 'Booking Recieved', 'wp-travel' ),
-		'client_title'        => __( 'Booking Recieved', 'wp-travel' ),
+		'client_subject'      => __( 'Booking Received', 'wp-travel' ),
+		'client_title'        => __( 'Booking Received', 'wp-travel' ),
 		'client_header_color' => '',
 		'email_content'       => wp_travel_booking_client_default_email_content(),
 		'from_email'          => get_option( 'admin_email' ),
@@ -111,6 +111,8 @@ function wp_travel_settings_default_fields() {
 		'trip_tax_enable'                         => 'no',
 		'trip_tax_price_inclusive'                => 'yes',
 		'trip_tax_percentage'                     => 13,
+
+		'sorted_gateways'                         => wp_travel_payment_gateway_lists(),
 
 		// Fact Tab Settings Fields.
 		'wp_travel_trip_facts_enable'             => 'yes',
@@ -736,6 +738,14 @@ function wp_travel_get_payment_status() {
 			'color' => '#008600',
 			'text'  => __( 'Paid', 'wp-travel' ),
 		),
+		'waiting_voucher'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Waiting for voucher', 'wp-travel' ),
+		),
+		'voucher_submited'  => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Voucher submited', 'wp-travel' ),
+		),
 		'canceled' => array(
 			'color' => '#FE450E',
 			'text'  => __( 'Canceled', 'wp-travel' ),
@@ -1275,7 +1285,19 @@ function wp_travel_is_dashboard_page() {
 	return false;
 }
 
-function wp_travel_is_itinerary( $post_id ) {
+if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
+
+	/**
+	 * wp_travel_Is_account_page - Returns true when viewing an account page.
+	 *
+	 * @return bool
+	 */
+	function wp_travel_is_account_page() {
+		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
+	}
+}
+
+function wp_travel_is_itinerary( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
@@ -1298,7 +1320,7 @@ function wp_travel_is_itinerary( $post_id ) {
  * Check whether payment script is loadable or not.
  */
 function wp_travel_can_load_payment_scripts() {
-	return wp_travel_is_dashboard_page() || wp_travel_is_checkout_page();
+	return ( wp_travel_is_dashboard_page() || wp_travel_is_checkout_page() ) && wp_travel_is_payment_enabled();
 }
 
 // WP Travel Pricing Varition options.
@@ -1375,18 +1397,6 @@ function wp_travel_get_raw_referer() {
 	}
 
 	return false;
-}
-
-if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
-
-	/**
-	 * wp_travel_Is_account_page - Returns true when viewing an account page.
-	 *
-	 * @return bool
-	 */
-	function wp_travel_is_account_page() {
-		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
-	}
 }
 
 /**
@@ -1996,6 +2006,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 	$status_list  = wp_travel_get_payment_status();
 	$status_color = isset( $details['payment_status'] ) && isset( $status_list[ $details['payment_status'] ]['color'] ) ? $status_list[ $details['payment_status'] ]['color'] : '';
+
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
 		<div class="table-wrp">
@@ -2004,8 +2015,15 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 				<?php if ( wp_travel_is_payment_enabled() && ! $hide_payment_column ) : ?>
 					<div class="my-order-single-sidebar">
 						<h3 class="my-order-single-title"><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></h3>
-						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" ><?php echo esc_html( ucfirst( $details['payment_status'] ) ); ?></div>
-						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id ); ?>
+						<div class="my-order-status my-order-status-<?php echo esc_html( $details['payment_status'] ); ?>" style="background:<?php echo esc_attr( $status_color ); ?>" >
+							<?php
+							$status_lists   = wp_travel_get_payment_status();
+							$payment_status = $status_lists[ $details['payment_status'] ];
+							echo esc_html( $payment_status['text'] );
+							?>
+						</div>
+						
+						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id, $details ); ?>
 					</div>
 				<?php endif; ?>
 				<div class="my-order-single-content">
@@ -2054,32 +2072,27 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 							<!-- Hook to add booking time details at booking-->
 							<?php do_action( 'wp_travel_booked_times_details', $order_details ); ?>
-
-							<div class="my-order-single-field my-order-additional-note clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Customer\'s Note :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $customer_note ); ?></span>
-							</div>
 						</div>
 						<div class="col-md-6">
-							<h3 class="my-order-single-title"><?php esc_html_e( 'Billing Detail', 'wp-travel' ); ?></h3>
-
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'City :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_city ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_country ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Postal :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_postal ); ?></span>
-							</div>
-							<div class="my-order-single-field clearfix">
-								<span class="my-order-head"><?php esc_html_e( 'Address :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo esc_html( $billing_address ); ?></span>
-							</div>
-
+							<?php
+							$checkout_fields  = wp_travel_get_checkout_form_fields();
+							$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
+							$billing_fields   = wp_travel_sort_form_fields( $billing_fields );
+							if ( ! empty( $billing_fields ) ) {
+								foreach( $billing_fields as $field ) {
+									if ( 'heading' === $field['type'] ) {
+										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
+									} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+										// Do nothing
+									} else {
+										echo '<div class="my-order-single-field clearfix">';
+										printf( '<span class="my-order-head">%s:</span>', $field['label'] );
+										printf( '<span class="my-order-tail">%s</span>', get_post_meta( $booking_id, $field['name'], true ) );
+										echo '</div>';
+									}
+								}
+							}
+							?>
 						</div>
 					</div>
 					<?php
@@ -2092,6 +2105,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					$email   = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
 					$dob     = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
 					$gender  = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
+					$traveller_infos = get_post_meta( $booking_id );
 
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
 						foreach ( $fname as $booking_trip_id => $first_names ) :
@@ -2100,34 +2114,31 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<div class="my-order-single-traveller-info">
 									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
 									<div class="row">
-
 										<?php foreach ( $first_names as $key => $first_name ) : ?>
 											<div class="col-md-6">
 												<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Traveler %s :', $key + 1 ), 'wp-travel' ); ?></h3>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Name :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $first_name . ' ' . $lname[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $country[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Phone No. :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $phone[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Email :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $email[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Date of Birth :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $dob[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
-												<div class="my-order-single-field clearfix">
-													<span class="my-order-head"><?php esc_html_e( 'Gender :', 'wp-travel' ); ?></span>
-													<span class="my-order-tail"><?php echo esc_html( $gender[ $booking_trip_id ][ $key ] ); ?></span>
-												</div>
+												<?php
+												$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
+												$traveller_fields   = wp_travel_sort_form_fields( $traveller_fields );
+												if ( ! empty( $traveller_fields ) ) {
+													foreach( $traveller_fields as $field ) {
+														if ( 'heading' === $field['type'] ) {
+															// Do nothing.
+														} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+															// Do nothing.
+														} else {
+															$value = maybe_unserialize(  $traveller_infos[ $field['name'] ][0] );
+															$value = is_array( $value ) ? array_values( $value ) : $value;
+															$value = is_array( $value ) ? array_shift( $value ) : $value;
+															$value = is_array( $value ) ? $value[$key] : $value;
+															echo '<div class="my-order-single-field clearfix">';
+															printf( '<span class="my-order-head">%s:</span>', $field['label'] );
+															printf( '<span class="my-order-tail">%s</span>', $value );
+															echo '</div>';
+														}
+													}
+												}
+												?>
 											</div>
 										<?php endforeach; ?>
 									</div>
@@ -2288,12 +2299,24 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 	$payment_data = wp_travel_payment_data( $booking_id );
 	$status_list  = wp_travel_get_payment_status();
 	if ( $payment_data && count( $payment_data ) > 0 ) {
-		?>
+		$payment_id   = wp_travel_get_payment_id( $booking_id );
+		$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+		if ( ! empty( $payment_slip ) ) {
+			$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
+	?>
+	<div class="wp-travel-bank-deposit-wrap">
+		<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
+			<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
+		</div>
+	</div>
+		<?php
+		}
+	?>
 		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
 				<th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment ID', 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( 'Payment ID / Txn ID', 'wp-travel' ); ?></th>
 				<th><?php esc_html_e( 'Payment Method', 'wp-travel' ); ?></th>
 				<th><?php esc_html_e( 'Payment Amount', 'wp-travel' ); ?></th>
 			</tr>
@@ -2304,8 +2327,45 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 					?>
 					<tr>
 						<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
-						<td><?php echo esc_html( $payment_args['payment_id'] ); ?></td>
-						<td><?php echo esc_html( $payment_args['payment_method'] ); ?></td>
+						<td>
+							<?php echo esc_html( $payment_args['payment_id'] );
+							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
+								$txn_id = get_post_meta( $payment_args['payment_id'], 'txn_id', true );
+								if ( ! empty( $txt_id ) ) {
+									echo ' / ' . $txt_id;
+								}
+							}
+							?>
+						</td>
+						<td>
+							<?php
+							$gateway_lists = wp_travel_payment_gateway_lists();
+
+							// use payment method key in case of payment disabled or deactivated.
+							$payment_method = isset( $gateway_lists[ $payment_args['payment_method'] ] ) ? $gateway_lists[ $payment_args['payment_method'] ] : $payment_args['payment_method']; 
+
+							echo esc_html( $payment_method );
+
+							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
+								$payment_id   = $payment_args['payment_id'];
+								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
+								if ( ! empty( $payment_slip ) ) {
+									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
+									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt', 'wp-travel' ); ?></a>
+									<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
+									</div>
+									<style>
+										td #wp-travel-magnific-popup-image-payment-table.wp-travel-popup{
+											display:none;
+										}
+									</style>
+									<?php
+								}
+							}
+							?>
+							
+						</td>
 						<td>
 							<?php
 							if ( $payment_amount > 0 ) :
@@ -2390,4 +2450,137 @@ function wp_travel_privacy_link() {
 		$link = sprintf( '<a href="%1s" %2s >%3s</a>', esc_url( $privacy_policy_url ), esc_attr( $attr ), $page_title );
 	}
 	return $link;
+}
+
+/**
+ * Return WP Travel Strings.
+ *
+ * @since 2.0.0
+ */
+function wp_travel_get_strings() {
+	$localized_strings = array(
+		'confirm'    => __( 'Are you sure you want to remove?', 'wp-travel' ),
+		'book_now'   => __( 'Book Now', 'wp-travel' ),
+		'book_n_pay' => __( 'Book and Pay', 'wp-travel' ),
+		'select'     => __( 'Select', 'wp-travel' ),
+		'close'      => __( 'Close', 'wp-travel' ),
+	);
+
+	return apply_filters( 'wp_travel_strings', $localized_strings );
+}
+
+/**
+ * Return WP Travel Bank deposit account details.
+ *
+ * @since 2.0.0
+ */
+function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) {
+	$settings = wp_travel_get_settings();
+
+	$bank_account_details = array();
+
+	$display_fields = array(
+		'account_name',
+		'account_number',
+		'bank_name',
+		'sort_code',
+		'iban',
+		'swift',
+	);
+	$display_fields = apply_filters( 'wp_travel_filter_bank_deposit_account_fields', $display_fields );
+
+	$bank_deposits = $settings['wp_travel_bank_deposits'];
+	if ( isset( $bank_deposits['account_name'] ) && is_array( $bank_deposits['account_name'] ) && count( $bank_deposits['account_name'] ) > 0 ) {
+		foreach ( $bank_deposits['account_name'] as $i => $account_name ) {
+			$enable         = isset( $bank_deposits['enable'][ $i ] ) ? $bank_deposits['enable'][ $i ] : 'no';
+
+			if ( ! $display_all_row && 'no' === $enable ) { // Controls to display each enabled row.
+				continue;
+			}
+
+			$account_number = isset( $bank_deposits['account_number'][ $i ] ) ? $bank_deposits['account_number'][ $i ] : '';
+			$bank_name      = isset( $bank_deposits['bank_name'][ $i ] ) ? $bank_deposits['bank_name'][ $i ] : '';
+			$sort_code      = isset( $bank_deposits['sort_code'][ $i ] ) ? $bank_deposits['sort_code'][ $i ] : '';
+			$iban           = isset( $bank_deposits['iban'][ $i ] ) ? $bank_deposits['iban'][ $i ] : '';
+			$swift          = isset( $bank_deposits['swift'][ $i ] ) ? $bank_deposits['swift'][ $i ] : '';
+
+			$field = array();
+			foreach ( $display_fields as $field_name ) {
+				$field[ $field_name ] = isset( $$field_name ) ? $$field_name : ''; // Filtered fields.
+			}
+
+			$bank_account_details[] = $field;
+		}
+	}
+	return $bank_account_details;
+}
+
+/**
+ * Return WP Travel Bank deposit account table.
+ *
+ * @since 2.0.0
+ */
+function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
+	$account_data = wp_travel_get_bank_deposit_account_details();
+	$settings = wp_travel_get_settings();
+	ob_start();
+	if ( is_array( $account_data ) && count( $account_data ) > 0 ) {
+		$wp_travel_bank_deposit_description = isset( $settings['wp_travel_bank_deposit_description'] ) ? $settings['wp_travel_bank_deposit_description'] : '';
+
+		if ( ! empty( $wp_travel_bank_deposit_description ) && true == $show_description ) : ?>
+			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
+		<?php endif; ?>
+		
+		<table width="100%">
+			<tr>
+				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
+					<td><?php _e( 'Account Name', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['account_number'] ) ) : ?>
+					<td><?php _e( 'Account Number', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['bank_name'] ) ) : ?>
+					<td><?php _e( 'Bank Name', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['sort_code'] ) ) : ?>
+					<td><?php _e( 'Sort Code', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['iban'] ) ) : ?>
+					<td><?php _e( 'IBAN', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['swift'] ) ) : ?>
+					<td><?php _e( 'Swift', 'wp-travel' ); ?></td>
+				<?php endif; ?>
+			</tr>
+			<?php foreach ( $account_data as $data ) { ?>
+				<tr>
+					<?php if ( isset( $data['account_name'] ) ) : ?>
+						<td><?php echo esc_html( $data['account_name'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['account_number'] ) ) : ?>
+						<td><?php echo esc_html( $data['account_number'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['bank_name'] ) ) : ?>
+						<td><?php echo esc_html( $data['bank_name'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['sort_code'] ) ) : ?>
+						<td><?php echo esc_html( $data['sort_code'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['iban'] ) ) : ?>
+						<td><?php echo esc_html( $data['iban'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['swift'] ) ) : ?>
+						<td><?php echo esc_html( $data['swift'] ); ?></td>
+					<?php endif; ?>
+				</tr>
+			<?php } ?>
+		</table>
+		<?php
+	} else {
+		esc_html_e( 'No detail found', 'wp-travel' );
+	}
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+	
 }

@@ -19,6 +19,8 @@ class WP_Travel_Admin_Metaboxes {
 	 * Constructor WP_Travel_Admin_Metaboxes.
 	 */
 	public function __construct() {
+
+		
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
 		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 );
 		add_filter( 'postbox_classes_' . WP_TRAVEL_POST_TYPE . '_wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', array( $this, 'add_clean_metabox_class' ) );
@@ -27,24 +29,131 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
 
-		// Trip Tabs.
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'description_tab_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'itineraries_content_call_back' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'gallery_tab_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'location_tab_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'advance_tab_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'call_back' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'price_tab_call_back' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_includes_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_excludes_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'trip_facts_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'frontend_tabs_content_call_back' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_faq_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_misc_options_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_downloads_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_inventory_callback' ), 10, 2 );
-		add_action( 'wp_travel_tabs_content_' . WP_TRAVEL_POST_TYPE, array( $this, 'wp_travel_cart_checkout_callback' ), 10, 2 );
+		// Tabs.
+		$collection      = self::$post_type;
+		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
+		$wp_travel_tabs  = new WP_Travel_Admin_Tabs();
+		$tabs            = $wp_travel_tabs->list_by_collection( $collection );
+		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+			foreach ( $tabs as $tab_key => $tab ) {
+				$filename          = str_replace( '_', '-', $tab_key ) . '.php';
+				$callback_file     = sprintf( '%sinc/admin/views/tabs/tab-contents/itineraries/%s', WP_TRAVEL_ABSPATH, $filename );
+				$callback_function = isset( $tab['callback'] ) ? $tab['callback'] : '';
+				if ( file_exists( $callback_file ) ) {
+					require_once $callback_file;
+				}
+				if ( ! empty( $callback_function ) && function_exists( $callback_function ) ) {
+					add_action( "{$tab_hook_prefix}_{$tab_key}", $callback_function, 12, 2 );
+				}
+			}
+		}
 
+	}
+
+	/**
+	 * Function to add tab.
+	 *
+	 * @param array $tabs Array list of all tabs.
+	 * @return array
+	 */
+	public function add_tabs( $tabs ) {
+		$trips = array(
+			'detail'              => array(
+				'tab_label'     => __( 'General', 'wp-travel' ),
+				'content_title' => __( 'General', 'wp-travel' ),
+				'priority'      => 10,
+				'callback'      => 'wp_travel_trip_callback_detail',
+				'icon'          => 'fa-sticky-note',
+			),
+			'itineraries_content' => array(
+				'tab_label'     => __( 'Itinerary', 'wp-travel' ),
+				'content_title' => __( 'Outline', 'wp-travel' ),
+				'priority'      => 20,
+				'callback'      => 'wp_travel_trip_callback_itineraries_content',
+				'icon'          => 'fa-clipboard-list',
+			),
+			'price'               => array(
+				'tab_label'     => __( 'Dates and Prices', 'wp-travel' ),
+				'content_title' => __( 'Dates and Prices', 'wp-travel' ),
+				'priority'      => 30,
+				'callback'      => 'wp_travel_trip_callback_price',
+				'icon'          => 'fa-tag',
+			),
+			'trip_includes'       => array(
+				'tab_label'     => __( 'Includes/ Excludes', 'wp-travel' ),
+				'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
+				'priority'      => 40,
+				'callback'      => 'wp_travel_trip_callback_trip_includes',
+				'icon'          => 'fa-sliders-h',
+			),
+			'trip_facts'          => array(
+				'tab_label'     => __( 'Facts', 'wp-travel' ),
+				'content_title' => __( 'Trip Facts', 'wp-travel' ),
+				'priority'      => 50,
+				'callback'      => 'wp_travel_trip_callback_trip_facts',
+				'icon'          => 'fa-industry',
+			),
+			'images_gallery'      => array(
+				'tab_label'     => __( 'Gallery', 'wp-travel' ),
+				'content_title' => __( 'Gallery', 'wp-travel' ),
+				'priority'      => 60,
+				'callback'      => 'wp_travel_trip_callback_images_gallery',
+				'icon'          => 'fa-images',
+			),
+			'locations'           => array(
+				'tab_label'     => __( 'Locations', 'wp-travel' ),
+				'content_title' => __( 'Locations', 'wp-travel' ),
+				'priority'      => 70,
+				'callback'      => 'wp_travel_trip_callback_locations',
+				'icon'          => 'fa-map-marked-alt',
+			),
+			'cart_checkout'       => array(
+				'tab_label'     => __( 'Cart & Checkout', 'wp-travel' ),
+				'content_title' => __( 'Cart & Checkout Options', 'wp-travel' ),
+				'priority'      => 80,
+				'callback'      => 'wp_travel_trip_callback_cart_checkout',
+				'icon'          => 'fa-shopping-cart',
+			),
+			'inventory'           => array(
+				'tab_label'     => __( 'Inventory Options', 'wp-travel' ),
+				'content_title' => __( 'Trip Inventory', 'wp-travel' ),
+				'priority'      => 90,
+				'callback'      => 'wp_travel_trip_callback_inventory',
+				'icon'          => 'fa-truck-moving',
+			),
+			'faq'                 => array(
+				'tab_label'     => __( 'FAQs', 'wp-travel' ),
+				'content_title' => __( 'FAQs', 'wp-travel' ),
+				'priority'      => 100,
+				'callback'      => 'wp_travel_trip_callback_faq',
+				'icon'          => 'fa-question-circle',
+			),
+			'downloads'           => array(
+				'tab_label'     => __( 'Downloads', 'wp-travel' ),
+				'content_title' => __( 'Downloads', 'wp-travel' ),
+				'priority'      => 110,
+				'callback'      => 'wp_travel_trip_callback_downloads',
+				'icon'          => 'fa-download',
+			),
+			'tabs'             => array(
+				'tab_label'     => __( 'Tabs', 'wp-travel' ),
+				'content_title' => __( 'Tabs', 'wp-travel' ),
+				'priority'      => 120,
+				'callback'      => 'wp_travel_trip_callback_tabs',
+				'icon'          => 'fa-folder-open',
+			),
+			'misc_options'        => array(
+				'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
+				'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
+				'priority'      => 120,
+				'callback'      => 'wp_travel_trip_callback_misc_options',
+				// 'icon'          => 'fa-images',
+			),
+
+		);
+
+		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
+		return apply_filters( 'wp_travel_tabs', $tabs );
 	}
 
 	/**
@@ -134,6 +243,7 @@ class WP_Travel_Admin_Metaboxes {
 		$booking_id = $post->ID;
 
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		$payment_id = wp_travel_get_payment_id( $booking_id );
 		if ( ! $payment_id ) {
 			$title      = 'Payment - #' . $booking_id;
 			$post_array = array(
@@ -205,557 +315,8 @@ class WP_Travel_Admin_Metaboxes {
 	 * @param array $classes Class list array.
 	 */
 	public function add_clean_metabox_class( $classes ) {
-		array_push( $classes, 'wp-travel-clean-metabox' );
+		array_push( $classes, 'wp-travel-clean-metabox wp-travel-styles' );
 		return $classes;
-	}
-
-	/**
-	 * Function to add tab.
-	 *
-	 * @param array $tabs Array list of all tabs.
-	 * @return array
-	 */
-	public function add_tabs( $tabs ) {
-		$trips = array(
-			'detail'              => array(
-				'tab_label'     => __( 'General', 'wp-travel' ),
-				'content_title' => __( 'General', 'wp-travel' ),
-			),
-			'itineraries_content' => array(
-				'tab_label'     => __( 'Itinerary', 'wp-travel' ),
-				'content_title' => __( 'Outline', 'wp-travel' ),
-			),
-			'price'               => array(
-				'tab_label'     => __( 'Dates and Prices', 'wp-travel' ),
-				'content_title' => __( 'Dates and Prices', 'wp-travel' ),
-			),
-			'trip_includes'       => array(
-				'tab_label'     => __( 'Includes/ Excludes', 'wp-travel' ),
-				'content_title' => __( 'Trip Includes and Excludes', 'wp-travel' ),
-			),
-			'trip_facts'          => array(
-				'tab_label'     => __( 'Facts', 'wp-travel' ),
-				'content_title' => __( 'Trip Facts', 'wp-travel' ),
-			),
-			'images_gallery'      => array(
-				'tab_label'     => __( 'Gallery', 'wp-travel' ),
-				'content_title' => __( 'Gallery', 'wp-travel' ),
-			),
-			'locations'           => array(
-				'tab_label'     => __( 'Locations', 'wp-travel' ),
-				'content_title' => __( 'Locations', 'wp-travel' ),
-			),
-			'cart_checkout'       => array(
-				'tab_label'     => __( 'Cart / Checkout', 'wp-travel' ),
-				'content_title' => __( 'Cart / Checkout Options', 'wp-travel' ),
-			),
-			'inventory'           => array(
-				'tab_label'     => __( 'Inventory Options', 'wp-travel' ),
-				'content_title' => __( 'Trip Inventory', 'wp-travel' ),
-			),
-			'faq'                 => array(
-				'tab_label'     => __( 'FAQs', 'wp-travel' ),
-				'content_title' => __( 'FAQs', 'wp-travel' ),
-			),
-			'downloads'           => array(
-				'tab_label'     => __( 'Downloads List', 'wp-travel' ),
-				'content_title' => __( 'Select Downloads Here', 'wp-travel' ),
-			),
-			'setting'             => array(
-				'tab_label'     => __( 'Tabs', 'wp-travel' ),
-				'content_title' => __( 'Tabs', 'wp-travel' ),
-			),
-			'misc_options'        => array(
-				'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
-				'content_title' => __( 'Miscellanaous Options', 'wp-travel' ),
-			),
-
-		);
-
-		$tabs[ WP_TRAVEL_POST_TYPE ] = $trips;
-		return apply_filters( 'wp_travel_tabs', $tabs );
-	}
-
-	/**
-	 * Callback Function for Description Tabs.
-	 *
-	 * @param  string $tab tab name 'Description'.
-	 * @return Mixed
-	 */
-	public function description_tab_callback( $tab ) {
-		global $post;
-		if ( 'detail' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/detail-tab.php' );
-	}
-
-	/**
-	 * Callback Function for Price Tabs.
-	 *
-	 * @param  string $tab tab name 'price'.
-	 * @since 1.0.7
-	 * @return Mixed
-	 */
-	public function price_tab_call_back( $tab ) {
-		global $post;
-		if ( 'price' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/price-tab.php' );
-	}
-	/**
-	 * Callback Function for additional_info Tabs.
-	 *
-	 * @param  string $tab tab name 'additional_info'.
-	 * @return Mixed
-	 */
-	public function additional_info_tab_callback( $tab ) {
-		global $post;
-		if ( 'additional_info' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/additional-info-tab.php' );
-	}
-
-	/**
-	 * Callback Function for images_gallery Tabs.
-	 *
-	 * @param  string $tab tab name 'images_gallery'.
-	 * @return Mixed
-	 */
-	public function gallery_tab_callback( $tab ) {
-		global $post;
-		if ( 'images_gallery' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/gallery-tab.php' );
-	}
-
-	/**
-	 * Callback Function for locations Tabs.
-	 *
-	 * @param  string $tab tab name 'locations'.
-	 * @return Mixed
-	 */
-	public function location_tab_callback( $tab ) {
-		global $post;
-		if ( 'locations' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/location-tab.php' );
-	}
-	/**
-	 * Callback Function for advanced Tabs.
-	 *
-	 * @param  string $tab tab name 'advanced'.
-	 * @return Mixed
-	 */
-	public function advance_tab_callback( $tab ) {
-		global $post;
-		if ( 'advanced' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/advance-tab.php' );
-	}
-	/**
-	 * Callback Function for Trip includes Tabs.
-	 *
-	 * @param  string $tab tab name 'advanced'.
-	 * @return Mixed
-	 */
-	public function trip_includes_callback( $tab ) {
-		global $post;
-		if ( 'trip_includes' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/trip-includes.php' );
-	}
-	/**
-	 * Callback Function for Trip excludes Tabs.
-	 *
-	 * @param  string $tab tab name 'advanced'.
-	 * @return Mixed
-	 */
-	public function trip_excludes_callback( $tab ) {
-		global $post;
-		if ( 'trip_excludes' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/trip-excludes.php' );
-	}
-
-	/**
-	 * Callback Function for advanced Tabs.
-	 *
-	 * @param  string $tab tab name 'advanced'.
-	 * @return Mixed
-	 */
-	public function call_back( $tab ) {
-		global $post;
-		if ( 'advanced' !== $tab ) {
-			return;
-		}
-		$thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
-	}
-	/**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab tab name 'itineraries_content'.
-	 * @return Mixed
-	 */
-	public function itineraries_content_call_back( $tab ) {
-
-		global $post;
-
-		if ( 'itineraries_content' !== $tab ) {
-			return;
-		}
-
-		WP_Travel()->tabs->content( 'itineraries/itineraries-content.php' );
-
-	}
-
-	/**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab  tab name 'itineraries_content'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function trip_facts_callback( $tab, $args ) {
-		if ( 'trip_facts' !== $tab ) {
-			return;
-		}
-		WP_Travel()->tabs->content( 'itineraries/fact-tab.php' );
-	}
-
-	/**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab  tab name 'itineraries_content'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function frontend_tabs_content_call_back( $tab, $args ) {
-		if ( 'setting' !== $tab ) {
-			return;
-		}
-
-		$post_id = $args['post']->ID;
-
-		$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
-		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
-
-		$default_tabs = wp_travel_get_default_trip_tabs();
-		$tabs         = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
-
-		if ( $enable_custom_itinerary_tabs ) { // If utilities is activated.
-			$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
-			$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
-
-			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
-		}
-		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
-			$args = array(
-				'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
-				'content'    => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
-
-		// Custom itinerary tabs support.
-		do_action( 'wp_travel_itinerary_custom_tabs' );
-		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
-			?>
-			<table class="form-table">
-				<tr>
-					<td>
-						<label for="wp-travel-use-global-tabs" class="show-in-frontend-label"><?php esc_html_e( 'Use Global Tabs Layout', 'wp-travel' ); ?></label>
-						<input name="wp_travel_use_global_tabs" type="hidden"  value="no">
-					<span class="show-in-frontend checkbox-default-design">
-						<label data-on="ON" data-off="OFF">
-						<input type="checkbox" name="wp_travel_use_global_tabs" id="wp-travel-use-global-tabs" value="yes" <?php checked( 'yes', $wp_travel_use_global_tabs ); ?> />
-							<span class="switch">
-							</span>
-						</label>
-					</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p class="description wp-travel-custom-tabs-message"><?php _e( 'Uncheck above checkbox to add custom tab settings for this trip.', 'wp-travel' ); ?> </p>
-					</td>
-				</tr>
-			</table>
-			<table class="wp-travel-sorting-tabs form-table">
-				<thead>
-					<th width="50px"><?php esc_html_e( 'Sorting', 'wp-travel' ); ?></th>
-					<th width="35%"><?php esc_html_e( 'Global Trip Title', 'wp-travel' ); ?></th>
-					<th width="35%"><?php esc_html_e( 'Custom Trip Title', 'wp-travel' ); ?></th>
-					<th width="20%"><?php esc_html_e( 'Display', 'wp-travel' ); ?></th>
-				</thead>
-				<tbody>
-				<?php
-				foreach ( $tabs as $key => $tab ) :
-					$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
-					?>
-					<tr>
-						<td width="50px">
-							<div class="wp-travel-sorting-handle">
-							</div>
-						</td>
-						<td width="35%">
-						<div class="wp-travel-sorting-tabs-wrap">
-							<span class="wp-travel-tab-label wp-travel-accordion-title"><?php echo esc_html( $default_label ); ?></span>
-						</div>
-						</td>
-						<td>
-							<div class="wp-travel-sorting-tabs-wrap">
-							<input type="text" class="wp_travel_tabs_input-field section_title" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][label]" value="<?php echo esc_html( $tab['label'] ); ?>" placeholder="<?php echo esc_html( $default_label ); ?>" />
-							<input type="hidden" name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" value="no" />
-						</div>
-						</td>
-						<td width="20%">
-							<span class="show-in-frontend checkbox-default-design">
-								<label data-on="ON" data-off="OFF"><input name="wp_travel_tabs[<?php echo esc_attr( $key ); ?>][show_in_menu]" type="checkbox" value="yes" <?php checked( 'yes', $tab['show_in_menu'] ); ?> /><?php // esc_html_e( 'Display', 'wp-travel' ); ?>
-								<span class="switch">
-									</span>
-								</label>
-							</span>
-							<span class="check-handeller"></span>
-						</td>
-					</tr>
-					<?php
-				endforeach;
-				?>
-				</tbody>
-			</table>
-			<?php
-		}
-	}
-
-	/**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab  tab name 'itineraries_content'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function wp_travel_misc_options_callback( $tab, $args ) {
-
-		if ( 'misc_options' !== $tab ) {
-			return;
-		}
-
-		WP_Travel()->tabs->content( 'itineraries/misc-tab.php' );
-
-	}
-
-	/**
-	 * Callback Function For Downloads Content Tabs
-	 *
-	 * @param string $tab  tab name 'downloads'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function wp_travel_downloads_callback( $tab, $args ) {
-
-		if ( 'downloads' !== $tab ) {
-			return;
-		}
-
-		if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
-			$args = array(
-				'title'      => __( 'Need to add your downloads?', 'wp-travel' ),
-				'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-				'link2_label' => __( 'Get WP Travel Downloads', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
-
-		do_action( 'wp_travel_trip_downloads_tab_content', $args );
-	}
-
-	/**
-	 * Callback Function For Inventory Content Tabs
-	 *
-	 * @param string $tab  tab name 'inventory'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function wp_travel_inventory_callback( $tab, $args ) {
-
-		if ( 'inventory' !== $tab ) {
-			return;
-		}
-
-		if ( ! class_exists( 'WP_Travel_Inventory_Management_Core' ) ) :
-			$args = array(
-				'title'      => __( 'Need to add your inventory options?', 'wp-travel' ),
-				'content'    => __( 'By upgrading to Pro, you can add your inventory options in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
-
-		do_action( 'wp_travel_trip_inventory_tab_content', $args );
-	}
-
-	/**
-	 * Callback Function For Inventory Content Tabs
-	 *
-	 * @param string $tab  tab name 'inventory'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function wp_travel_cart_checkout_callback( $tab, $args ) {
-
-		if ( 'cart_checkout' !== $tab ) {
-			return;
-		}
-
-		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
-			$args = array(
-				'title'      => __( 'Need to add your checkout options?', 'wp-travel' ),
-				'content'    => __( 'By upgrading to Pro, you can add your checkout options for all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
-
-		do_action( 'wp_travel_trip_cart_checkout_tab_content', $args );
-	}
-
-	/**
-	 * Callback Function For Itineraries Content Tabs
-	 *
-	 * @param string $tab  tab name 'itineraries_content'.
-	 * @param array  $args arguments function arugments.
-	 * @return Mixed
-	 */
-	public function wp_travel_faq_callback( $tab, $args ) {
-		if ( 'faq' !== $tab ) {
-			return;
-		}
-
-		do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
-
-		$post_id       = $args['post']->ID;
-		$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
-
-		if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
-			$args = array(
-				'title'      => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),
-				'content'    => __( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ),
-				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
-			);
-			wp_travel_upsell_message( $args );
-		endif;
-		?>
-				
-		<div class="wp-travel-tab-content-faq-header clearfix">
-			<?php
-			if ( is_array( $faq_questions ) && count( $faq_questions ) != 0 ) :
-				$empty_item_style    = 'display:none';
-				$collapse_link_style = 'display:block';
-			else :
-				$empty_item_style    = 'display:block';
-				$collapse_link_style = 'display:none';
-			endif;
-			?>
-
-			<div class="while-empty" style="<?php echo esc_attr( $empty_item_style ); ?>">
-				<p>
-					<?php esc_html_e( 'Click on add new question to add FAQ.', 'wp-travel' ); ?>
-				</p>
-			</div>
-			<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_link_style ); ?>" >
-				<a href="#" data-parent="wp-travel-tab-content-faq" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-				<a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-			</div>
-		</div>
-		<div id="tab-accordion" class="tab-accordion">
-			<div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
-				<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
-
-					<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
-
-					<?php foreach ( $faq_questions as $key => $question ) : ?>
-						<?php $question = ( '' !== $question ) ? $question : __( 'Untitled', 'wp-travel' ); ?>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
-								<h4 class="panel-title">
-									<div class="wp-travel-sorting-handle"></div>
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
-
-										<span bind="faq_question_<?php echo esc_attr( $key ); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
-
-									<span class="collapse-icon"></span>
-									</a>
-									<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
-								</h4>
-							</div>
-							<div id="collapse-<?php echo esc_attr( $key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-"<?php echo esc_attr( $key ); ?>>
-							<div class="panel-body">
-								<div class="panel-wrap">
-									<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-									<input bind="faq_question_<?php echo esc_attr( $key ); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
-								</div>
-								<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."><?php echo esc_attr( $faq_answers[ $key ] ); ?></textarea>
-							</div>
-							</div>
-						</div>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			</div>
-		</div>
-		<div class="wp-travel-faq-quest-button clearfix">
-			<input type="button" value="Add New Question" class="button button-primary wp-travel-faq-add-new">
-		</div>
-		<script type="text/html" id="tmpl-wp-travel-faq">
-
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab" id="heading-{{data.random}}">
-					<h4 class="panel-title">
-						<div class="wp-travel-sorting-handle"></div>
-						<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
-
-							<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
-
-						<span class="collapse-icon"></span>
-						</a>
-						<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
-					</h4>
-				</div>
-				<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
-					<div class="panel-body">
-						<div class="panel-wrap">
-							<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-							<input bind="faq_question_{{data.random}}" type="text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" class="faq-question-text" value="">
-						</div>
-						<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."></textarea>
-					</div>
-				</div>
-			</div>
-		</script>
-		<?php
 	}
 
 	/**
@@ -815,9 +376,9 @@ class WP_Travel_Admin_Metaboxes {
 				'title'      => __( 'Need Custom Trip Code ?', 'wp-travel' ),
 				'content'    => __( 'By upgrading to Pro, you can get Trip Code Customization and removal features and more !', 'wp-travel' ),
 				'link'       => 'https://wptravel.io/wp-travel-pro/',
-            	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+        		'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
-				'link2_label' => __( 'Get WP Travel Utilities', 'wp-travel' ),
+				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
 			wp_travel_upsell_message( $args );
 		endif;

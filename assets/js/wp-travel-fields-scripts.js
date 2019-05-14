@@ -1,6 +1,14 @@
 function WPTravelSelect2() {
-  $('.wp-travel-select2').select2({
-    width: 'resolve' // need to override the changed default
+ 
+  $('.wp-travel-select2').each(function(){
+    var options = {
+      width: 'resolve' // need to override the changed default
+    };
+    var hide_search = $(this).data('hide-search');
+    if ( true == hide_search ) {
+      options.minimumResultsForSearch = -1;
+    }
+    $(this).select2( options );
   });
 }
 jQuery(function($) {

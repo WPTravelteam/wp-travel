@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 1.9.7
+ * Version: 2.0.0
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
@@ -36,7 +36,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.9.7';
+		public $version = '2.0.0';
 		/**
 		 * The single instance of the class.
 		 *
@@ -86,6 +86,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 			$this->define( 'WP_TRAVEL_VERSION', $this->version );
 			$this->define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', 10 ); // In percent.
+			$this->define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 		}
 
 		/**
@@ -104,10 +105,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wp_travel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+			add_action( 'wp_enqueue_scripts', array( 'WP_Travel_Assets', 'frontend' ) );
 			if ( $this->is_request( 'admin' ) ) {
+				add_action( 'admin_enqueue_scripts', array( 'WP_Travel_Assets', 'admin' ) );
+
 				// To delete transient.
 				add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
 				// add_action( 'admin_menu', 'wp_travel_marketplace_menu');
+
 				$this->tabs = new WP_Travel_Admin_Tabs();
 				$this->uploader = new WP_Travel_Admin_Uploader();
 
@@ -163,12 +168,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		function includes() {
+			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
 			include sprintf( '%s/inc/license/wp-travel-license.php',  dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/class-frontend-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/booking-functions.php', WP_TRAVEL_ABSPATH );
@@ -183,8 +188,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
 
-			include_once sprintf( '%s/inc/gateways/class-wt-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
-			include_once sprintf( '%s/inc/gateways/paypal-functions.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
+			include_once sprintf( '%s/inc/gateways/bank-deposit/bank-deposit.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
 			// Open Graph Tags @since 1.7.6
 			include sprintf( '%s/inc/og-tags.php', WP_TRAVEL_ABSPATH );
@@ -232,7 +238,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/class-admin-tabs.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-metaboxes.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/extras/class-tour-extras-admin-metabox.php', WP_TRAVEL_ABSPATH );
-				include sprintf( '%s/inc/admin/class-admin-assets.php', WP_TRAVEL_ABSPATH );
+				// include sprintf( '%s/inc/admin/class-admin-assets.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-settings.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );

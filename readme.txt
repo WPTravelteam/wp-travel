@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.1.1
+Tested up to: 5.2
 Requires PHP: 5.5
-Stable tag: 1.9.7
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -173,27 +173,40 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 
 == Frequently Asked Questions ==
+= Where can I find WP Travel documentation and user guides? =
+
+For setting up your site using the WP Travel plugin and extensions please refer to [Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
+
 = There is something cool you could add... =
 
 Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=suggestions&utm_campaign=WP%20Plugin "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
-= WP Travel documentation and user guide =
- For setting up your site using the WP Travel plugin please refer to below given link:
-
-[Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
 
 = Where can I get support? =
 
  If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin)
 
 
-= Will WP Travel work with other theme? =
+= Will WP Travel work with my theme? =
 
-WP Travel plugin has been tested with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+
+= Can I run WooCommerce or Easy Digital Downloads and WP Travel at the same time? =
+
+Yes, there are no technological conflicts between the three, you could run them all at the same time on the same domain name. But all plug-ins have their own cart system so WooCommerce or Easy Digital Downloads products will be added in their cart page and WP Travel trips will be added in WP Travel cart page. Also checkout will be processed in own individual way. We need to note that both WooCommerce, Easy Digital Downloads and WP Travel are standalone plug-ins for WordPress, conceptual and functional way.
 
 = Does the plugin have the payment gateways? =
 
- WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
+WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
+
+= Where can I request new features, WP Travel themes and extensions? =
+
+You can do that by filling up the form in our [support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+
+= Where can I get support or talk to other users? =
+
+If you have any queries regarding the plugin and extensions then you can ask for help in [Support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+
 
 == Screenshots ==
 1. Backend: Settings
@@ -212,6 +225,24 @@ WP Travel plugin has been tested with the default WordPress theme. There are add
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 2.0.0 =
+Release Date: 13th May, 2019
+
+Enhancement:
+
+* Payment addons sortable. Made all payment addons sortable to change position of payment methods in checkout and admin settings page.
+* Admin layout and tabs update. New admin layout implemented as well as tabs and layouts in admin pages.
+* Bank deposit feature. Added new feature as Bank deposit to upload payment slip via WP Travel Dashboard. It will be verified by admin after uploding slip.
+
+Fixes:
+* Add to cart issue with some trips. if trips have no trip extra then trip is not able to add to cart.
+* Minor typo error fixes in email template and backend settings.
+* Custom trip code enable disable fixes.
+* Undefined index gateway in admin settings page.
+* Group discount table not displaying for some trips.
+* Trip Extras not display in frontend trips if disabled from admin.
+* Tabs error fixes.
 
 = 1.9.7 =
 Release Date: 29th April, 2019

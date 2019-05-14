@@ -15,10 +15,10 @@ function wp_travel_admin_init() {
 	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
 		wp_travel_upgrade_to_110();
 	}
-	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' )) {
+	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
 	}
-	if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' )) {
+	if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-137.php', WP_TRAVEL_ABSPATH );
 	}
 }
@@ -39,150 +39,150 @@ function wp_travel_marketplace_page() {
 		$addons_data = json_decode( $addons_data );
 		$addons_data = $addons_data->products;
 
-    endif;
-    
-    // Hardcoded themes data.
+	endif;
+
+	// Hardcoded themes data.
 	$themes_data = array(
-		'travel-base-pro' => array(
-			'name' => __( 'Travel Base Pro', 'wp-travel' ),
-			'type' => 'premium',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-pro.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-base-pro',
+		'travel-base-pro'     => array(
+			'name'       => __( 'Travel Base Pro', 'wp-travel' ),
+			'type'       => 'premium',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-pro.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-base-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-base-pro/',
 		),
-		'travel-base' => array(
-			'name' => __( 'Travel Base', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-free.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-base-pro',
+		'travel-base'         => array(
+			'name'       => __( 'Travel Base', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-free.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-base-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-base/',
 		),
 		'travel-ultimate-pro' => array(
-			'name' => __( 'Travel Ultimate Pro', 'wp-travel' ),
-			'type' => 'premium',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-pro.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
+			'name'       => __( 'Travel Ultimate Pro', 'wp-travel' ),
+			'type'       => 'premium',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-pro.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate-pro/',
 		),
-		'travel-ultimate' => array(
-			'name' => __( 'Travel Ultimate', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-free.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
+		'travel-ultimate'     => array(
+			'name'       => __( 'Travel Ultimate', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-free.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate/',
 		),
-		'pleased-pro' => array(
-			'name' => __( 'Pleased Pro', 'wp-travel' ),
-			'type' => 'premium',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-pro.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=pleased-pro',
+		'pleased-pro'         => array(
+			'name'       => __( 'Pleased Pro', 'wp-travel' ),
+			'type'       => 'premium',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-pro.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=pleased-pro',
 			'detail_url' => 'https://themepalace.com/downloads/pleased-pro/',
 		),
-		'pleased' => array(
-			'name' => __( 'Pleased', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-free.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=pleased-pro',
+		'pleased'             => array(
+			'name'       => __( 'Pleased', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-free.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=pleased-pro',
 			'detail_url' => 'https://themepalace.com/downloads/pleased/',
 		),
-		'travel-gem-pro' => array(
-			'name' => __( 'Travel Gem Pro', 'wp-travel' ),
-			'type' => 'premium',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-pro.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-gem-pro',
+		'travel-gem-pro'      => array(
+			'name'       => __( 'Travel Gem Pro', 'wp-travel' ),
+			'type'       => 'premium',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-pro.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-gem-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-gem-pro/',
 		),
-		'travel-gem' => array(
-			'name' => __( 'Travel Gem', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-free.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-gem-pro',
+		'travel-gem'          => array(
+			'name'       => __( 'Travel Gem', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-free.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-gem-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-gem/',
 		),
-		'tourable-pro' => array(
-			'name' => __( 'Tourable Pro', 'wp-travel' ),
-			'type' => 'premium',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-pro.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=tourable-pro',
+		'tourable-pro'        => array(
+			'name'       => __( 'Tourable Pro', 'wp-travel' ),
+			'type'       => 'premium',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-pro.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=tourable-pro',
 			'detail_url' => 'https://themepalace.com/downloads/tourable-pro/',
 		),
-		'tourable' => array(
-			'name' => __( 'Tourable', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-free.png',
-			'demo_url' => 'https://wptravel.io/demo/?demo=tourable-pro',
+		'tourable'            => array(
+			'name'       => __( 'Tourable', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-free.png',
+			'demo_url'   => 'https://wptravel.io/demo/?demo=tourable-pro',
 			'detail_url' => 'https://themepalace.com/downloads/tourable/',
 		),
-		'travel-log' => array(
-			'name' => __( 'Travel Log', 'wp-travel' ),
-			'type' => 'free',
-			'img_url' => plugins_url( '/wp-travel/assets/images/devices_web.png' ),
-			'demo_url' => 'https://wptravel.io/demo/?demo=travel-log',
+		'travel-log'          => array(
+			'name'       => __( 'Travel Log', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/devices_web.png' ),
+			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-log',
 			'detail_url' => 'http://wensolutions.com/themes/travel-log/',
 		),
 	);
 
-    $info_btn_text = __( 'View Demo', 'wp-travel' );
-    $download_btn_text = __( 'View Detail', 'wp-travel' );
+	$info_btn_text     = __( 'View Demo', 'wp-travel' );
+	$download_btn_text = __( 'View Detail', 'wp-travel' );
 
 	?>
 	<div class="wrap">
 		<div id="poststuff">
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ) ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ); ?></h1>
 			<div id="post-body">
 				<div class="wp-travel-marketplace-tab-wrap">
 					<ul>
 
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ) ?></a></li>
+						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ); ?></a></li>
 						<?php if ( $addons_data ) : ?>
-							<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ) ?></a></li>
+							<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ); ?></a></li>
 						<?php endif; ?>
 					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
-                            <?php foreach ( $themes_data as $theme ) : ?>
-                                <div class="single-module">
-                                    <div class="single-module-image">
-                                        <a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
-                                        <img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
-                                        </a>
-                                    </div>
-                                    <div class="single-module-content clearfix">
-                                        <h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
-                                        <span class="dashicons-wp-travel">
-                                        </span><?php echo esc_html( $theme['name'] ); ?></a></h4>
-                                        <a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
-                                        <a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
+							<?php foreach ( $themes_data as $theme ) : ?>
+								<div class="single-module">
+									<div class="single-module-image">
+										<a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
+										<img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
+										</a>
+									</div>
+									<div class="single-module-content clearfix">
+										<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
+										<span class="dashicons-wp-travel">
+										</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
+										<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
+										<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
+									</div>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 					<?php if ( $addons_data ) : ?>
 						<div id="tabs-1" class="tab-pannel">
 							<div class="marketplace-module clearfix">
                                 <div class="single-module full-pro-section">
-                                                                <div class="single-module-image">
-                                                                    <a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
-                                                                    <img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="single-module-content clearfix">
+                                    <div class="single-module-image">
+                                        <a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
+                                        <img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="single-module-content clearfix">
                                         <h4 class="text-title">
-                                            <a href=https://wptravel.io/wp-travel-pro/" target="_blank">
-                                                <span class="dashicons-wp-travel">
-                                                </span>WP Travel PRO</a>
+                                            <a href="https://wptravel.io/wp-travel-pro/" target="_blank">
+                                            <span class="dashicons-wp-travel">
+                                            </span>WP Travel PRO</a>
                                         </h4>
 
-<p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
+                                        <p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
                                         <a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
                                         <a class="btn-default buy-btn" href="https://themepalace.com/download-checkout/?edd_action=add_to_cart&amp;download_id=95078" target="_blank">Buy Now</a>
                                     </div>
                                 </div>
-							<?php foreach( $addons_data as $key => $product ) :
+							<?php
+							foreach ( $addons_data as $key => $product ) :
 								$prod_info = $product->info;
-							?>
-                            
+								?>
 
 								<div class="single-module">
 									<div class="single-module-image">
@@ -193,16 +193,18 @@ function wp_travel_marketplace_page() {
 									<div class="single-module-content clearfix">
 										<h4 class="text-title">
 											<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
-												<?php echo esc_html( str_replace( 'WP Travel', '', $prod_info->title ) ); ?>
+												<span class="dashicons-wp-travel">
+												</span>
+												<?php echo esc_html( $prod_info->title ); ?>
 											</a>
 										</h4>
-										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ) ?></a>
+										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ); ?></a>
 										<a class="btn-default pull-right" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
 											<?php
 											if ( isset( $product->pricing->amount ) && $product->pricing->amount < 1 ) {
 												esc_html_e( 'Download', 'wp-travel' );
 											} else {
-												esc_html_e( 'Buy Now', 'wp-travel' );
+												esc_html_e( 'Purchase', 'wp-travel' );
 											}
 											?>
 										</a>
@@ -222,18 +224,18 @@ function wp_travel_marketplace_page() {
 
 		<div id="wp_travel_support_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ) ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
 				<span class="toggle-indicator-acc" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Support', 'wp-travel' ) ?></span>
+				<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
 			</h2>
 			<div class="inside">
 
 			<div class="thumbnail">
-				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ) ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ) ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ) ?></a></p>
+				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
+					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
+					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
 			</div>
 
 			</div>
@@ -241,18 +243,18 @@ function wp_travel_marketplace_page() {
 
 		<div id="wp_travel_doc_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ) ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Documentation', 'wp-travel' ) ?></span>
+				<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
 			</h2>
 			<div class="inside">
 
 				<div class="thumbnail">
-					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ) ?>">
-						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ) ?> </p>
-						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ) ?></a></p>
+					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
+						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
+						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
 				</div>
 
 			</div>
@@ -260,11 +262,11 @@ function wp_travel_marketplace_page() {
 
 		<div id="wp_travel_review_block_id" class="postbox ">
 			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ) ?></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
 				<span class="toggle-indicator" aria-hidden="true"></span>
 			</button>
 			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Reviews', 'wp-travel' ) ?></span>
+				<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
 			</h2>
 			<div class="inside">
 				<div class="thumbnail">
@@ -275,15 +277,22 @@ function wp_travel_marketplace_page() {
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
 					</p>
-					<h5><?php esc_html_e( '"The plugin is very intuitive and fresh.
+					<h5>
+					<?php
+					esc_html_e(
+						'"The plugin is very intuitive and fresh.
 The layout fits well into theme with flexibility to different shortcodes.
-Its great plugin for travel or tour agent websites."', 'wp-travel' ) ?></h5>
-					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ) ?></a></strong></span>
+Its great plugin for travel or tour agent websites."',
+						'wp-travel'
+					)
+					?>
+						</h5>
+					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ); ?></a></strong></span>
 
 				</div>
 				<div class="thumbnail last">
-					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ) ?></h5>
-					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ) ?></a></p>
+					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
+					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
 				</div>
 			</div>
 		</div>
@@ -291,52 +300,52 @@ Its great plugin for travel or tour agent websites."', 'wp-travel' ) ?></h5>
 </div>
 </div>
 </div>
-<?php
+	<?php
 }
 
 // Upsell Message Callback for Download submenu. WP Travel > Downloads.
 function wp_travel_get_download_upsell() {
-    ?>
-    <h2><?php echo esc_html( 'Downloads' ); ?></h2>
-    <?php
-    if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
-        $args = array(
-            'title'      => __( 'Need to add your downloads ?', 'wp-travel' ),
-            'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
+	?>
+	<h2><?php echo esc_html( 'Downloads' ); ?></h2>
+	<?php
+	if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
+		$args = array(
+			'title'      => __( 'Need to add your downloads ?', 'wp-travel' ),
+			'content'    => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
             'link'       => 'https://wptravel.io/wp-travel-pro/',
             'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
             'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-            'link2_label' => __( 'Get WP Travel Downloads', 'wp-travel' ),
-        );
-        wp_travel_upsell_message( $args );
-    endif;
+			'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+		);
+		wp_travel_upsell_message( $args );
+	endif;
 }
 
 /**
  * Modify Admin Footer Message.
  */
-function wp_travel_modify_admin_footer_admin_settings_page(){
+function wp_travel_modify_admin_footer_admin_settings_page() {
 
-	printf(__('Love %1s, Consider leaving us a %2s rating, also checkout %3s . A huge thanks in advance!', 'wp-travel' ), '<strong>WP Travel ?</strong>','<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' );
+	printf( __( 'Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge thanks in advance!', 'wp-travel' ), '<strong>WP Travel ?</strong>', '<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' );
 }
 /**
  * Modify Admin Footer Message.
  */
-function wp_travel_modify_admin_footer_version(){
+function wp_travel_modify_admin_footer_version() {
 
-	printf(__('WP Travel version: %s', 'wp-travel' ), '<strong>' . WP_TRAVEL_VERSION . '</strong>' );
+	printf( __( 'WP Travel version: %s', 'wp-travel' ), '<strong>' . WP_TRAVEL_VERSION . '</strong>' );
 
 }
 /**
  * Add Footer Custom Text Hook.
  */
-function wp_travel_doc_support_footer_custom_text(){
+function wp_travel_doc_support_footer_custom_text() {
 
 	$screen = get_current_screen();
 
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type ) {
 
-		add_filter('admin_footer_text', 'wp_travel_modify_admin_footer_admin_settings_page');
+		add_filter( 'admin_footer_text', 'wp_travel_modify_admin_footer_admin_settings_page' );
 		add_filter( 'update_footer', 'wp_travel_modify_admin_footer_version', 11 );
 	}
 }
@@ -363,9 +372,9 @@ function wp_travel_get_booking_count( $itinerary_id ) {
 	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
 	if ( ! $booking_count ) {
 		$booking_count = 0;
-		$query = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P
+		$query         = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P
 		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";
-		$results = $wpdb->get_row( $query );
+		$results       = $wpdb->get_row( $query );
 		if ( $results ) {
 			$booking_count = $results->booking_count;
 		}
@@ -389,13 +398,13 @@ add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itiner
  * @return Array                  [description]
  */
 function wp_travel_itineraries_columns( $itinerary_columns ) {
-	$comment = isset( $itinerary_columns['comments'] ) ?  $itinerary_columns['comments'] : '';
-	$date = $itinerary_columns['date'];
+	$comment = isset( $itinerary_columns['comments'] ) ? $itinerary_columns['comments'] : '';
+	$date    = $itinerary_columns['date'];
 	unset( $itinerary_columns['date'] );
 	unset( $itinerary_columns['comments'] );
 
 	$itinerary_columns['booking_count'] = __( 'Booking', 'wp-travel' );
-	$itinerary_columns['featured'] = __( 'Featured', 'wp-travel' );
+	$itinerary_columns['featured']      = __( 'Featured', 'wp-travel' );
 	if ( $comment ) {
 		$itinerary_columns['comments'] = $comment;
 	}
@@ -412,7 +421,7 @@ add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wp_travel
  * Add data to custom column.
  *
  * @param  String $column_name Custom column name.
- * @param  int 	  $id          Post ID.
+ * @param  int    $id          Post ID.
  */
 function wp_travel_itineraries_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
@@ -439,7 +448,7 @@ function wp_travel_itineraries_manage_columns( $column_name, $id ) {
 function wp_travel_itineraries_sort( $columns ) {
 
 	$custom = array(
-		'booking_count' 	=> 'booking_count',
+		'booking_count' => 'booking_count',
 	);
 	return wp_parse_args( $custom, $columns );
 }
@@ -463,10 +472,13 @@ add_filter( 'request', 'wp_travel_itineraries_column_orderby' );
  */
 function wp_travel_itineraries_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'booking_count' == $vars['orderby'] ) {
-		$vars = array_merge( $vars, array(
-			'meta_key' => 'wp_travel_booking_count',
-			'orderby' => 'meta_value',
-		) );
+		$vars = array_merge(
+			$vars,
+			array(
+				'meta_key' => 'wp_travel_booking_count',
+				'orderby'  => 'meta_value',
+			)
+		);
 	}
 	return $vars;
 }
@@ -480,14 +492,16 @@ function wp_travel_featured_admin_ajax() {
 	}
 
 	header( 'Content-Type: application/json' );
-	$post_id = intval( $_POST['post_id'] );
+	$post_id         = intval( $_POST['post_id'] );
 	$featured_status = esc_attr( get_post_meta( $post_id, 'wp_travel_featured', true ) );
-	$new_status = $featured_status == 'yes' ? 'no' : 'yes';
+	$new_status      = $featured_status == 'yes' ? 'no' : 'yes';
 	update_post_meta( $post_id, 'wp_travel_featured', $new_status );
-	echo json_encode( array(
-		'ID' => $post_id,
-		'new_status' => $new_status,
-	) );
+	echo json_encode(
+		array(
+			'ID'         => $post_id,
+			'new_status' => $new_status,
+		)
+	);
 	die();
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
@@ -495,30 +509,35 @@ add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' )
 function wp_travel_publish_metabox() {
 	global $post;
 	if ( get_post_type( $post ) === 'itinerary-booking' ) {
-	?>
+		?>
 		<div class="misc-pub-section misc-pub-booking-status">
 			<?php
-			$status = wp_travel_get_booking_status();
+			$status    = wp_travel_get_booking_status();
 			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
 			?>
 
 			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
 			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
 			<?php foreach ( $status as $value => $st ) : ?>
-				<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ) ?>>
+				<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ); ?>>
 					<?php echo esc_html( $status[ $value ]['text'] ); ?>
 				</option>
 			<?php endforeach; ?>
 			</select>
 		</div>
 
-	<?php
+		<?php
 	}
 }
 add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
 
 function wp_travel_upgrade_to_110() {
-	$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
+	$itineraries        = get_posts(
+		array(
+			'post_type'   => 'itineraries',
+			'post_status' => 'publish',
+		)
+	);
 	$current_db_version = get_option( 'wp_travel_version' );
 	if ( ! $current_db_version ) {
 		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
@@ -544,9 +563,9 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
 	$date = $booking_columns['date'];
 	unset( $booking_columns['date'] );
 
-	$booking_columns['payment_mode'] = __( 'Payment Mode', 'wp-travel' );
+	$booking_columns['payment_mode']   = __( 'Payment Mode', 'wp-travel' );
 	$booking_columns['payment_status'] = __( 'Payment Status', 'wp-travel' );
-	$booking_columns['date'] = $date;
+	$booking_columns['date']           = $date;
 	return $booking_columns;
 }
 
@@ -556,39 +575,39 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
  * Add data to custom column.
  *
  * @param  String $column_name Custom column name.
- * @param  int 	  $id          Post ID.
+ * @param  int    $id          Post ID.
  */
 function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'payment_status':
-            $payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
-            if ( is_array( $payment_id ) ) {
-                if ( count( $payment_id ) > 0 ) {
-                    $payment_id = $payment_id[0];
-                }
-            }
-			$booking_option = get_post_meta( $payment_id , 'wp_travel_booking_option' , true );
+			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
+			if ( is_array( $payment_id ) ) {
+				if ( count( $payment_id ) > 0 ) {
+					$payment_id = $payment_id[0];
+				}
+			}
+			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 
-			$label_key = get_post_meta( $payment_id , 'wp_travel_payment_status' , true );
+			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 			if ( ! $label_key ) {
 				$label_key = 'N/A';
-				update_post_meta( $payment_id , 'wp_travel_payment_status' , $label_key );
+				update_post_meta( $payment_id, 'wp_travel_payment_status', $label_key );
 			}
 			$status = wp_travel_get_payment_status();
 			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
 		case 'payment_mode':
-			$mode = wp_travel_get_payment_mode();
-			$payment_id = get_post_meta( $id , 'wp_travel_payment_id' , true );
-			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_mode' , true );
+			$mode       = wp_travel_get_payment_mode();
+			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
+			$label_key  = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
 
 			if ( ! $label_key ) {
-				$label_key = 'N/A';
+				$label_key          = 'N/A';
 				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
 				if ( ! $is_partial_enabled ) {
 					$label_key = 'full';
 				}
-				update_post_meta( $payment_id , 'wp_travel_payment_mode' , $label_key );
+				update_post_meta( $payment_id, 'wp_travel_payment_mode', $label_key );
 			}
 			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
@@ -610,16 +629,22 @@ add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_p
  */
 function wp_travel_booking_payment_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'payment_status' == $vars['orderby'] ) {
-		$vars = array_merge( $vars, array(
-			'meta_key' => 'wp_travel_payment_status',
-			'orderby' => 'meta_value',
-		) );
+		$vars = array_merge(
+			$vars,
+			array(
+				'meta_key' => 'wp_travel_payment_status',
+				'orderby'  => 'meta_value',
+			)
+		);
 	}
 	if ( isset( $vars['orderby'] ) && 'payment_mode' == $vars['orderby'] ) {
-		$vars = array_merge( $vars, array(
-			'meta_key' => 'wp_travel_payment_mode',
-			'orderby' => 'meta_value',
-		) );
+		$vars = array_merge(
+			$vars,
+			array(
+				'meta_key' => 'wp_travel_payment_mode',
+				'orderby'  => 'meta_value',
+			)
+		);
 	}
 	return $vars;
 }
@@ -628,17 +653,17 @@ add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
 /**
  * Create a page and store the ID in an option.
  *
- * @param mixed $slug Slug for the new page
+ * @param mixed  $slug Slug for the new page
  * @param string $option Option name to store the page's ID
  * @param string $page_title (default: '') Title for the new page
  * @param string $page_content (default: '') Content for the new page
- * @param int $post_parent (default: 0) Parent for the new page
+ * @param int    $post_parent (default: 0) Parent for the new page
  * @return int page ID
  */
 function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 	global $wpdb;
 
-	$option_value     = get_option( $option );
+	$option_value = get_option( $option );
 
 	if ( $option_value > 0 && ( $page_object = get_post( $option_value ) ) ) {
 		if ( 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
@@ -674,10 +699,10 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 	if ( $trashed_page_found ) {
 		$page_id   = $trashed_page_found;
 		$page_data = array(
-			'ID'             => $page_id,
-			'post_status'    => 'publish',
+			'ID'          => $page_id,
+			'post_status' => 'publish',
 		);
-	 	wp_update_post( $page_data );
+		wp_update_post( $page_data );
 	} else {
 		$page_data = array(
 			'post_status'    => 'publish',
@@ -689,7 +714,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 			'post_parent'    => $post_parent,
 			'comment_status' => 'closed',
 		);
-		$page_id = wp_insert_post( $page_data );
+		$page_id   = wp_insert_post( $page_data );
 	}
 
 	if ( $option ) {
@@ -704,47 +729,48 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
  */
 function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key, $table_row = false ) {
 
-$tour_extras = wp_count_posts( 'tour-extras' );
-// Check Tour Extras Count.
-if( 0 == $tour_extras->publish ) {
-	ob_start(); ?>
+	$tour_extras = wp_count_posts( 'tour-extras' );
+	// Check Tour Extras Count.
+	if ( 0 == $tour_extras->publish ) {
+		ob_start(); ?>
+		<?php if ( $table_row ) : ?><td><?php  else : ?><div class="one-third"><?php endif ; ?>
+        <label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+        <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ; ?>
 
-	<?php if ( $table_row ) : ?><td><?php  else : ?><div class="one-third"><?php endif ; ?>
-	<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
-	<?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ; ?>
+        <?php if ( $table_row ) : ?><td><?php  else : ?><div class="two-third"><?php endif ; ?>
+        <?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result"><span class="dashicons dashicons-info"></span> Please <a href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>'); ?>
+        <?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
 
-	<?php if ( $table_row ) : ?><td><?php  else : ?><div class="two-third"><?php endif ; ?>
-	<?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result">Please <a class="button-link" href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>'); ?>
-	<?php if ( $table_row ) : ?></td><?php  else : ?></div><?php endif ;
+		$data = ob_get_clean();
+		return $data;
+	}
 
-	$data = ob_get_clean();
-return $data;
-}
+	if ( empty( $post_id ) || empty( $fetch_key ) ) {
+		return;
+	}
 
-if( empty( $post_id ) || empty( $fetch_key ) )
-	return;
-$name = 'wp_travel_tour_extras[]';
-if ( $context && 'pricing_options' === $context ) {
-	$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
-	$trip_extras = isset( $pricing_options[$fetch_key]['tour_extras'] ) && ! empty( $pricing_options[$fetch_key]['tour_extras'] ) ? $pricing_options[$fetch_key]['tour_extras'] : false;
-	$name = 'wp_travel_pricing_options[' . $fetch_key . '][tour_extras][]';
-} elseif( ! $context && 'wp_travel_tour_extras' === $fetch_key ) {
-	$trip_extras = get_post_meta( $post_id, 'wp_travel_tour_extras', true );
-}
 
-$restricted_trips = ( $trip_extras ) ? $trip_extras: array();
+	$name = 'wp_travel_tour_extras[]';
+	if ( $context && 'pricing_options' === $context ) {
+		$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
+		$trip_extras     = isset( $pricing_options[ $fetch_key ]['tour_extras'] ) && ! empty( $pricing_options[ $fetch_key ]['tour_extras'] ) ? $pricing_options[ $fetch_key ]['tour_extras'] : false;
+		$name            = 'wp_travel_pricing_options[' . $fetch_key . '][tour_extras][]';
+	} elseif ( ! $context && 'wp_travel_tour_extras' === $fetch_key ) {
+		$trip_extras = get_post_meta( $post_id, 'wp_travel_tour_extras', true );
+	}
 
-ob_start(); ?>
-	<?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>
+	$restricted_trips = ( $trip_extras ) ? $trip_extras : array();
+
+	$itineraries = wp_travel_get_tour_extras_array();
+    ob_start(); ?>
+    <?php if ( $table_row ) : ?><td><?php  else : ?><div><div class="one-third"><?php endif ; ?>
 		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
 	<?php if ( $table_row ) : ?></td><td><?php  else : ?></div><div class="two-third"><?php endif ; ?>
-
-		<?php $itineraries = wp_travel_get_tour_extras_array(); ?>
-
-		<div class="custom-multi-select">
+	
+	    <div class="custom-multi-select">
 			<?php
-			$count_options_data = count( $restricted_trips );
-			$count_itineraries = count( $itineraries );
+			$count_options_data   = count( $restricted_trips );
+			$count_itineraries    = count( $itineraries );
 			$multiple_checked_all = '';
 			if ( $count_options_data == $count_itineraries ) {
 				$multiple_checked_all = 'checked=checked';
@@ -768,18 +794,15 @@ ob_start(); ?>
 					<?php
 					foreach ( $itineraries as $key => $iti ) {
 
-						$checked = '';
+						$checked            = '';
 						$selecte_list_class = '';
 
 						if ( in_array( $key, $restricted_trips ) ) {
-
-							$checked = 'checked=checked';
+							$checked            = 'checked=checked';
 							$selecte_list_class = 'selected';
-
 						}
-
-					?>
-						<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ) ?>">
+						?>
+						<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ); ?>">
 							<label class="checkbox wp-travel-multi-inner ">
 								<input <?php echo esc_attr( $checked ); ?>  name="<?php echo esc_attr( $name ); ?>" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $key ); ?>">  <?php echo esc_html( $iti ); ?>
 							</label>
@@ -788,14 +811,14 @@ ob_start(); ?>
 				</ul>
             </span>
             <p class="description">
-				<?php printf( __( 'Need advance Trip Extras options? %s GET PRO%s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
+				<?php printf( __( 'Need advance Trip Extras options? %s GET PRO%s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '</a>' ); ?>
 			</p>
 
 		</div>
-	<?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>
-<?php
-$data = ob_get_clean();
-return $data;
+    <?php if ( $table_row ) : ?></td><?php  else : ?></div></div><?php endif ; ?>
+	<?php
+	$data = ob_get_clean();
+	return $data;
 
 }
 
@@ -1878,17 +1901,17 @@ function wp_travel_fa_icons() {
 /**
  * Check if current page is WP Travel admin page.
  *
- * @param  array   $pages Pages to check.
+ * @param  array $pages Pages to check.
  * @return boolean
  */
 function wp_travel_is_admin_page( $pages = array() ) {
 	if ( ! is_admin() ) {
 		return false;
 	}
-	$screen = get_current_screen();
+	$screen            = get_current_screen();
 	$wp_travel_pages[] = array( 'itinerary-booking_page_settings' );
 	if ( ! empty( $pages ) ) {
-		foreach( $pages as $page ) {
+		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
 				$settings_allowed_screens[] = 'itinerary-booking_page_settings';
 				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
@@ -1896,7 +1919,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 				}
 			}
 		}
-	} else if ( in_array( $screen->id, $wp_travel_pages, true ) ) {
+	} elseif ( in_array( $screen->id, $wp_travel_pages, true ) ) {
 		return true;
 	}
 
@@ -1905,47 +1928,65 @@ function wp_travel_is_admin_page( $pages = array() ) {
 }
 
 function wp_travel_get_pricing_option_list() {
-    $type = array(
-        'single-price' => __( 'Single Price', 'wp-travel' ),
-        'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
-        // 'custom-price' => __( 'Custom', 'wp-travel' ),
-    );
+	$type = array(
+		'single-price'   => __( 'Single Price', 'wp-travel' ),
+		'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
+		// 'custom-price' => __( 'Custom', 'wp-travel' ),
+	);
 
-    return apply_filters( 'wp_travel_pricing_option_list', $type );
+	return apply_filters( 'wp_travel_pricing_option_list', $type );
 }
 
 function wp_travel_upsell_message( $args ) {
-    $type = isset( $args['type'] ) ? $args['type'] : 'utilities';
-    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $type );
+    $defaults = array(
+        'type' => array( 'wp-travel-pro' ),
+        'title' => __( 'Get WP Travel PRO', 'wp-travel' ),
+        'content' => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
+        'link' => 'https://wptravel.io/wp-travel-pro/',
+        'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+		'link2' => 'https://wptravel.io/downloads/',
+		'link2_label' => __( 'Check all Add-ons', 'wp-travel' ),
+		'link3' => '',
+        'link3_label' => __( 'View WP Travel Addons', 'wp-travel' ),
+        'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
+    );
+    $args = wp_parse_args( $args, $defaults );
+    $add_groups = array(
+        'maps' => array( 'wp-travel-here-map' ),
+        'payments' => array( 'wp-travel-paypal-express-checkout' ),
+    );
+    $types = $args['type'];
+    if ( is_string( $types ) ) {
+        $types = isset( $add_groups[ $args['type'] ] ) ? $add_groups[ $args['type'] ] : $types;
+    }
+
+    $types[] = 'wp-travel-pro';
+    $show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $types );
 
     if ( ! $show_upsell ) {
         return;
     }
-    $title = isset( $args['title'] ) ? $args['title'] : __( 'WP Travel', 'wp-travel' );
-    $content = isset( $args['content'] ) ? $args['content'] : '';
-    $link = isset( $args['link'] ) ? $args['link'] : '';
-    $link_label = isset( $args['link_label'] ) ? $args['link_label'] : __( 'Get Pro', 'wp-travel' );
-    $link2 = isset( $args['link2'] ) ? $args['link2'] : '';
-    $link2_label = isset( $args['link2_label'] ) ? $args['link2_label'] : __( 'View WP Travel Addons', 'wp-travel' );
-
-    $link3 = isset( $args['link3'] ) ? $args['link3'] : '';
-    $link3_label = isset( $args['link3_label'] ) ? $args['link3_label'] : __( 'View WP Travel Addons', 'wp-travel' );
     ?>
-    <div class="wp-travel-upsell-message">
+    <div class="wp-travel-upsell-message <?php echo esc_attr( implode( ' ', $args['main_wrapper_class'] ) ); ?>">
 		<div class="wp-travel-pro-feature-notice clearfix">
-			<h4><?php echo esc_html( $title ); ?></h4>
-            <p><?php echo esc_html( $content ); ?></p>
-            <div class="buy-pro-action buy-pro">
-                <a target="_blank" href="<?php echo esc_url( $link ); ?>" class="action-btn" ><?php echo esc_html( $link_label ); ?></a>
-                <?php if ( ! empty( $link2 ) ) : ?>
-                <br>
-                    or <a target="_blank" href="<?php echo esc_url( $link2 ); ?>"><?php echo esc_html( $link2_label ); ?></a> 
-                <?php endif; ?>  
+            <div class="section-one">
+                <h4><?php echo esc_html( $args['title'] ); ?></h4>
+                <p><?php echo $args['content']; ?></p>
             </div>
-            <div class="buy-pro-action action2">
-                <?php if ( ! empty( $link3 ) ) : ?>
-                    <a target="_blank" href="<?php echo esc_url( $link3 ); ?>" class="action-btn" ><?php echo esc_html( $link3_label ); ?></a> 
-                <?php endif; ?>       
+            <div class="section-two">
+            <div class="buy-pro-action buy-pro">
+                <a target="_blank" href="<?php echo esc_url( $args['link'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link_label'] ); ?></a>
+                <?php if ( ! empty( $args['link2'] ) ) : ?>
+                <p>
+                    <?php esc_html_e( 'or', 'wp-travel' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url(  $args['link2'] ); ?>"><?php echo esc_html( $args['link2_label'] ); ?></a>
+                </p> 
+                <?php endif; ?>  
+                </div>
+                <?php if ( ! empty( $args['link3'] ) ) : ?>
+                <div class="buy-pro-action action2">
+                    <a target="_blank" href="<?php echo esc_url( $args['link3'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link3_label'] ); ?></a> 
+                </div>
+                <?php endif; ?>
             </div>
         </div>
 	</div>
