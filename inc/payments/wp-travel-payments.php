@@ -190,6 +190,8 @@ function wp_travel_get_payout_percent( $post_id ) {
 	if ( ! $use_global && $trip_payout_percent ) {
 		$payout_percent = $trip_payout_percent;
 	}
+
+	$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $post_id );
 	return number_format( $payout_percent, 2, '.', '' );
 }
 
