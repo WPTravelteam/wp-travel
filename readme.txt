@@ -226,8 +226,18 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.1 =
+Release Date: Upcoming
+
+Fixes:
+
+* WP Travel Notice label text updated. 
+* Console error fixes in field editor.
+* Show / Hide Bank Detail on checkout page. Displaying Bank Detail field on payment mode change.
+* Payment status wating for voucher on booking only.
+
 = 2.0.0 =
-Release Date: 13th May, 2019
+Release Date: 14th May, 2019
 
 Enhancement:
 
