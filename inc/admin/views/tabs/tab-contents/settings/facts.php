@@ -91,7 +91,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 					</th>
 					<td>
 						<div class="fact-options">
-							<input value=""  name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index'; ?>][options]" id=""wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index'; ?>_options" class="fact-options-list"  placeholder="<?php echo esc_attr( 'Add an option and press "Enter"', 'wp-travel' ); ?>" type="text"/>
+							<input value=""  name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index'; ?>][options]"  class="fact-options-list"  placeholder="<?php echo esc_attr( 'Add an option and press "Enter"', 'wp-travel' ); ?>" type="text"/>
 							<div class="options-holder">
 								<?php if ( isset( $fact['options'] ) && is_array( $fact['options'] ) ) : ?>
 									<?php foreach ( $fact['options'] as $option ): ?>
@@ -107,7 +107,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 						<label for="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_icon"><?php echo esc_html( 'Icon Class','wp-travel' ); ?></label>
 					</th>
 					<td>
-						<input value="<?php echo isset($fact['icon']) ? $fact['icon'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][icon]" id="wp_travel_trip_facts_settings_<?php echo $fact ? $str : '$index' ?>_icon"  placeholder="<?php esc_html_e( 'Icon', 'wp-travel' ); ?>" type="text"/>
+						<input value="<?php echo isset($fact['icon']) ? $fact['icon'] : '' ?>" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][icon]"   placeholder="<?php esc_html_e( 'Icon', 'wp-travel' ); ?>" type="text"/>
 					</td>
 				</tr>
 				<tr class="open-close-row">
