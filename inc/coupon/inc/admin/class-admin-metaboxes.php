@@ -65,11 +65,17 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 		$coupons['coupons_general'] = array(
 			'tab_label'     => __( 'General', 'wp-travel' ),
 			'content_title' => __( 'General Settings', 'wp-travel' ),
+			'priority'      => 110,
+			'callback'      => 'wp_travel_coupons_general_tab_callback',
+			'icon'          => 'fa-info-circle',
 		);
 
 		$coupons['coupons_restrictions'] = array(
 			'tab_label'     => __( 'Restrictions', 'wp-travel' ),
 			'content_title' => __( 'Coupon Restrictions', 'wp-travel' ),
+			'priority'      => 110,
+			'callback'      => 'wp_travel_coupons_restrictions_tab_callback',
+			'icon'          => 'fa-lock',
 		);
 
 		// $coupons['coupons_usage_limits'] = array(

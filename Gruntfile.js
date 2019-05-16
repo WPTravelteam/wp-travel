@@ -200,6 +200,9 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
 					'assets/css/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
 					'assets/css/wp-travel-admin-1.css': 'assets/sass/admin/wp-travel-admin-1.scss',
+					
+					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
+					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
 				}
 			}
 		},
@@ -224,6 +227,9 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
 					'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
 					'assets/css/wp-travel-admin-1.min.css': ['assets/css/wp-travel-admin-1.css'],
+
+					'inc/coupon/assets/css/wp-travel-coupons-backend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-backend.css'],
+					'inc/coupon/assets/css/wp-travel-coupons-frontend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-frontend.css'],
 				}
 			}
 		},
