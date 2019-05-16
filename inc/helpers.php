@@ -72,6 +72,10 @@ function wp_travel_settings_default_fields() {
 	$settings_fields = array(
 		// General Settings Fields.
 		'currency'                                => 'USD',
+		'currency_position'                       => 'left',
+		'thousand_separator'                       => ',',
+		'decimal_separator'                       => '.',
+		'number_of_decimals'                       => 2,
 		'wp_travel_map'                           => 'google-map',
 		'google_map_api_key'                      => '',
 		'google_map_zoom_level'                   => 15,
@@ -2203,8 +2207,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										<div class="my-order-price-breakdown-base-price">
 											<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
 											<span class="my-order-tail">
-												<span class="my-order-price-detail">(<?php echo sprintf( '%s x %s%s', $pax, wp_travel_get_currency_symbol(), $trip_price ); ?>) </span>
-												<span class="my-order-price"><?php echo wp_travel_get_currency_symbol() . esc_html( $total ); ?></span>
+												<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price ); ?>) </span>
+												<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
 											</span>
 										</div>
 									</div>
@@ -2228,12 +2232,11 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 
 												$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
-												$price = wp_travel_get_formated_price( $price );
-												$total = wp_travel_get_formated_price( $price * $qty );
+												$total = $price * $qty;
 												?>
 												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo sprintf( '%s x %s%s', $qty, wp_travel_get_currency_symbol(), $price ); ?> )</span>
-													<span class="my-order-tail my-order-right"><?php echo esc_html( wp_travel_get_currency_symbol() . $total ); ?></span>
+													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wp_travel_get_formated_price_currency( $price ); ?>)</span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
 												</div>
 											<?php endforeach; ?>
 
@@ -2249,7 +2252,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ); ?></span>
 										<span class="my-order-tail">
 											<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' ' . __( 'Person/s', 'wp-travel' ); ?> </span>
-											<span class="my-order-price"><?php echo wp_travel_get_currency_symbol() . esc_html( $details['sub_total'] ); ?></span>
+											<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'] ); ?></span>
 										</span>
 									</div>
 								</div>
@@ -2260,26 +2263,26 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							<div class="my-order-price-breakdown-summary clearfix">
 								<div class="my-order-price-breakdown-sub-total">
 									<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['sub_total'] ); ?></span>
+									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'] ); ?></span>
 								</div>
 
 								<?php if ( $details['discount'] ) : ?>
 									<div class="my-order-price-breakdown-coupon-amount">
 										<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
-										<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['discount'] ); ?></span>
+										<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_formated_price_currency( $details['discount'] ); ?></span>
 									</div>
 								<?php endif; ?>
 
 								<div class="my-order-price-breakdown-tax-due">
 									<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
-									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['tax'] ); ?></span>
+									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['tax'] ); ?></span>
 								</div>
 							</div>
 						</div>
 						<div class="my-order-single-total-price clearfix">
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo wp_travel_get_currency_symbol() . ' ' . esc_html( $details['total'] ); ?></span>
+								<span class="my-order-tail"><?php echo wp_travel_get_formated_price_currency( $details['total'] ); ?></span>
 							</div>
 						</div>
 					</div>
@@ -2303,15 +2306,15 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 		$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 		if ( ! empty( $payment_slip ) ) {
 			$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
-	?>
-	<div class="wp-travel-bank-deposit-wrap">
-		<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
-			<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
-		</div>
-	</div>
-		<?php
+			?>
+			<div class="wp-travel-bank-deposit-wrap">
+				<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
+				</div>
+			</div>
+			<?php
 		}
-	?>
+		?>
 		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
@@ -2369,7 +2372,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 						<td>
 							<?php
 							if ( $payment_amount > 0 ) :
-								echo esc_html( sprintf( ' %s %s ', wp_travel_get_currency_symbol(), sprintf( '%0.2f', $payment_amount ) ) );
+								echo wp_travel_get_formated_price_currency( $payment_amount );
 							endif;
 							?>
 						</td>

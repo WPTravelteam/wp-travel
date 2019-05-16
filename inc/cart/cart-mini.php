@@ -95,10 +95,10 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<?php echo esc_html( $pricing_name ); ?> &nbsp; <strong class="product-quantity">× <span class="wp-travel-cart-pax"><?php echo esc_html( $pax ); ?></span> <?php printf( $pax_label ); ?> </strong> 
 						</td>
 						<td class="product-total text-right">
-							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol(); ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_total ); ?></span>
+							<span class="product-total-price amount" ><?php echo wp_travel_get_formated_price_currency( $single_trip_total ); ?></span>
 						</td>
 						<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="product-total text-right f-partial-payment">
-							<span class="wp-travel-Price-currencySymbol "><?php echo wp_travel_get_currency_symbol(); ?></span><span class="product-total-price amount" ><?php echo esc_html( $single_trip_total_partial ); ?></span>
+							<span class="product-total-price amount" ><?php echo wp_travel_get_formated_price_currency( $single_trip_total_partial ); ?></span>
 						</td>
 					</tr>
 					
@@ -119,7 +119,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<span><strong><?php esc_html_e( 'Coupon Discount ', 'wp-travel' ); ?> </strong></span>
 						</th>
 						<td  class="text-right">
-							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong>
+							<strong>- <?php echo wp_travel_get_formated_price_currency( $cart_amounts['discount'] ); ?></strong>
 						</td>
 						<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="text-right f-partial-payment">
 
@@ -129,7 +129,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 							<?php else : ?>
 
-								<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) ); ?></strong>
+								<strong><?php echo wp_travel_get_formated_price_currency( $cart_amounts['discount_partial'] ); ?></strong>
 							
 							<?php endif; ?>
 
@@ -150,19 +150,19 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							</span></strong></p>
 						</th>
 						<td  class="text-right">
-							<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['sub_total'] ) ); ?></strong></p>
-							<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax'] ) ); ?></strong></p>
+							<p><strong><span class="wp-travel-sub-total"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['sub_total'] ); ?></span></strong></p>
+							<p><strong><span class="wp-travel-tax"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['tax'] ); ?></span></strong></p>
 						</td>
 						<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="text-right f-partial-payment">
-							<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['sub_total_partial'] ) ); ?></strong></p>
+							<p><strong><span class="wp-travel-sub-total"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['sub_total_partial'] ); ?></span></strong></p>
 
 							<?php if ( 0 === $cart_amounts['tax_partial'] ) : ?>
 
-								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol">--</strong></p>
+								<p><strong><span class="wp-travel-tax ">--</strong></p>
 
 							<?php else : ?>
 
-								<p><strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax_partial'] ) ); ?></strong></p>
+								<p><strong><span class="wp-travel-tax "><?php echo wp_travel_get_formated_price_currency( $cart_amounts['tax_partial'] ); ?></span></strong></p>
 
 							<?php endif; ?>
 						</td>
@@ -170,8 +170,9 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 				<?php endif; ?>
 				<tr class="order-total ">
 				<th><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
-				<td class="text-right"><strong><span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-total-price-amount amount"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong> </td>
-				<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="text-right f-partial-payment"><strong><span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-total-price-amount amount"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total_partial'] ) ); ?></span></strong> </td>
+				<td class="text-right"><strong><span class="wp-travel-total-price-amount amount"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['total'] ); ?></span></strong> </td>
+				<td style="display:<?php echo wp_travel_is_partial_payment_enabled() ? 'table-cell' : 'none'; ?>;" class="text-right f-partial-payment">
+					<strong><span class="wp-travel-total-price-amount amount"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['total_partial'] ); ?></span></strong> </td>
 				</tr>
 			</tfoot>
 		</table>

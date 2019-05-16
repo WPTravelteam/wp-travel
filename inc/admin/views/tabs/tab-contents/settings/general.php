@@ -9,8 +9,13 @@
 function wp_travel_settings_callback_general( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$currency_list         = wp_travel_get_currency_list();
-		$currency              = $settings['currency'];
+		$currency_list      = wp_travel_get_currency_list();
+		$currency           = $settings['currency'];
+		$currency_position  = $settings['currency_position'];
+		$thousand_separator = $settings['thousand_separator'];
+		$decimal_separator  = $settings['decimal_separator'];
+		$number_of_decimals = $settings['number_of_decimals'];
+
 		$google_map_api_key    = $settings['google_map_api_key'];
 		$google_map_zoom_level = $settings['google_map_zoom_level'];
 
@@ -26,6 +31,23 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			'selected'   => $currency,
 			'option'     => __( 'Select Currency', 'wp-travel' ),
 			'options'    => $currency_list,
+			'attributes' => array(
+				'style' => 'width: 300px;',
+			),
+		);
+
+		$currency_position_args = array(
+			'id'         => 'currency-position',
+			'class'      => 'currency-position wp-travel-select2',
+			'name'       => 'currency_position',
+			'selected'   => $currency_position,
+			// 'option'     => __( 'Select Currency', 'wp-travel' ),
+			'options'    => array(
+				'left'             => __( 'Left' ),
+				'right'            => __( 'Right' ),
+				'left_with_space'  => __( 'Left with space' ),
+				'right_with_space' => __( 'Right with space' ),
+			),
 			'attributes' => array(
 				'style' => 'width: 300px;',
 			),
@@ -49,13 +71,41 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			),
 		);
 		$map_key           = 'google-map';
-		?>
+	?>
 		<table class="form-table">
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
 				<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose currency you accept payments in.', 'wp-travel' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="currency-position"><?php echo esc_html__( 'Currency Position', 'wp-travel' ); ?></label></th>
+				<td>
+				<?php echo wp_travel_get_dropdown_list( $currency_position_args ); ?>
+					<p class="description"><?php echo esc_html__( 'Choose currency position.', 'wp-travel' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="thousand-separator"><?php echo esc_html__( 'Thousand separator', 'wp-travel' ); ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $thousand_separator ); ?>" name="thousand_separator" id="thousand-separator"/>
+					<p class="description"><?php echo esc_html__( 'This sets the thousand separator of displayed prices.', 'wp-travel' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="decimal-separator"><?php echo esc_html__( 'Decimal separator', 'wp-travel' ); ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $decimal_separator ); ?>" name="decimal_separator" id="decimal-separator"/>
+					<p class="description"><?php echo esc_html__( 'This sets the Decimal separator of displayed prices.', 'wp-travel' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="number-of-decimals"><?php echo esc_html__( 'Number of decimals', 'wp-travel' ); ?></label></th>
+				<td>
+					<input type="text" value="<?php echo esc_attr( $number_of_decimals ); ?>" name="number_of_decimals" id="number-of-decimals"/>
+					<p class="description"><?php echo esc_html__( 'This sets the Number of decimal of displayed prices.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 			<tr>
@@ -75,7 +125,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				<th><label for="google_map_api_key"><?php echo esc_html__( 'API Key', 'wp-travel' ); ?></label></th>
 				<td>
 					<input type="text" value="<?php echo esc_attr( $google_map_api_key ); ?>" name="google_map_api_key" id="google_map_api_key"/>
-					<p class="description"><?php echo sprintf( __( 'To get your Google map API keys %sclick here%s', 'wp-travel' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></p>
+					<p class="description"><?php echo sprintf( __( 'To get your Google map API keys %1$sclick here%2$s', 'wp-travel' ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></p>
 				</td>
 			</tr>
 			<tr class="wp-travel-map-option <?php echo esc_attr( $map_key ); ?>">
@@ -89,9 +139,9 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		<?php
 			$upsell_args = array(
 				'title'              => __( 'Need alternative maps?', 'wp-travel' ),
-				'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel. Get %s WP Travel Pro %s or %sView WP Travel Map addons%s', 'wp-travel' ) , '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>' ),
+				'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel. Get %1$s WP Travel Pro %2$s or %3$sView WP Travel Map addons%4$s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="__blank">', '</a>', '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>' ),
 				'link'               => '',
-        		'link_label'         => '',
+				'link_label'         => '',
 				'link2'              => '',
 				'link2_label'        => '',
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
@@ -100,17 +150,17 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			wp_travel_upsell_message( $upsell_args );
 
 			// if ( apply_filters( 'wp_travel_show_upsell_message', true, 'maps' ) ) {
-			// 	$upsell_args = array(
-			// 		'title'              => __( 'Need alternative maps?', 'wp-travel' ),
-			// 		'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel %sfrom here%s or %srequest a new one%s.', 'wp-travel' ) , '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>', '<a href="https://wptravel.io/contact/" target="__blank">', '</a>' ),
-			// 		'link'               => '',
-			// 		'link_label'         => '',
-			// 		'link2'              => '',
-			// 		'link2_label'        => '',
-			// 		'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
-			// 		'type'               => 'general',
-			// 	);
-			// 	wp_travel_upsell_message( $upsell_args );
+			// $upsell_args = array(
+			// 'title'              => __( 'Need alternative maps?', 'wp-travel' ),
+			// 'content'            => sprintf( __( 'If you need alternative to current map then you can get free or pro maps for WP Travel %sfrom here%s or %srequest a new one%s.', 'wp-travel' ) , '<a href="https://wptravel.io/downloads/category/map/" target="__blank">', '</a>', '<a href="https://wptravel.io/contact/" target="__blank">', '</a>' ),
+			// 'link'               => '',
+			// 'link_label'         => '',
+			// 'link2'              => '',
+			// 'link2_label'        => '',
+			// 'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
+			// 'type'               => 'general',
+			// );
+			// wp_travel_upsell_message( $upsell_args );
 			// }
 		?>
 

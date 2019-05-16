@@ -446,8 +446,8 @@ function wp_travel_get_checkout_form_fields() {
 				'name'          => 'wp_travel_payment_amount_info',
 				'id'            => 'wp-travel-payment-amount-info',
 				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
-				'before_field'  => wp_travel_get_currency_symbol(),
-				'default'       => wp_travel_get_formated_price( $total_partial_amount ),
+				// 'before_field'  => wp_travel_get_currency_symbol(),
+				'default'       => wp_travel_get_formated_price_currency( $total_partial_amount ),
 				'priority'      => 115,
 			);
 		}
@@ -471,8 +471,8 @@ function wp_travel_get_checkout_form_fields() {
 			'name'          => 'wp_travel_trip_price_info',
 			'id'            => 'wp-travel-trip-price_info',
 			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
-			'before_field'  => wp_travel_get_currency_symbol(),
-			'default'       => wp_travel_get_formated_price( $total_amount ),
+			// 'before_field'  => wp_travel_get_currency_symbol(),
+			'default'       => wp_travel_get_formated_price_currency( $total_amount ),
 			'priority'      => 110,
 		);
 

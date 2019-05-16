@@ -152,7 +152,7 @@ wp_travel_print_notices();
 								<span class="person-count">
 									<ins>
 										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( $actual_trip_price ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
-											<?php echo apply_filters( 'wp_travel_itinerary_price', sprintf( ' %s %s ', $currency_symbol, $trip_price ), $currency_symbol, $trip_price ); ?>
+											<?php echo wp_travel_get_formated_price_currency( $trip_price ); ?>
 										</span>
 									</ins>/<?php echo esc_html( ucfirst( $pax_label ) ); ?>
 								</span>
@@ -178,9 +178,7 @@ wp_travel_print_notices();
 						<td class="product-subtotal text-right" data-title="Total">
 							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 								<div class="item_cart">
-									<p>
-										<strong><span class="wp-travel-price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><span class="wp-travel-trip-total"> <?php echo esc_html( $single_trip_total ); ?> </span></strong>
-									</p>
+									<p><strong><?php echo wp_travel_get_formated_price_currency( $single_trip_total ); ?></strong></p>
 								</div>
 							<?php endif; ?>
 						</td>
@@ -206,7 +204,7 @@ wp_travel_print_notices();
 							</span></strong>
 						</th>
 						<td  class="text-right">
-							<strong> - <span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['discount'] ) ); ?></strong>
+							<strong> - <?php echo wp_travel_get_formated_price_currency( $cart_amounts['discount'] ); ?></strong>
 						</td>
 					</tr>
 
@@ -224,8 +222,8 @@ wp_travel_print_notices();
 							</span></strong>
 						</th>
 						<td  class="text-right">
-							<p><strong><span class="wp-travel-sub-total ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['sub_total'] ) ); ?></strong></p>
-							<strong><span class="wp-travel-tax ws-theme-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['tax'] ) ); ?></strong>
+							<p><strong><span class="wp-travel-sub-total"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['sub_total'] ); ?></span></strong></p>
+							<strong><span class="wp-travel-tax"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['tax'] ); ?></span></strong>
 						</td>
 					</tr>
 				<?php endif; ?>
@@ -234,7 +232,7 @@ wp_travel_print_notices();
 					<th colspan="2">
 						<strong><?php echo esc_html__( 'Total', 'wp-travel' ); ?></strong>
 						<p class="total">
-							<strong><?php echo wp_travel_get_currency_symbol(); ?><span class="wp-travel-total ws-theme-currencySymbol"><?php echo esc_html( wp_travel_get_formated_price( $cart_amounts['total'] ) ); ?></span></strong>
+							<strong><span class="wp-travel-total"><?php echo wp_travel_get_formated_price_currency( $cart_amounts['total'] ); ?></span></strong>
 						</p>
 					</th>
 				</tr>

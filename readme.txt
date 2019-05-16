@@ -229,12 +229,18 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 2.0.1 =
 Release Date: Upcoming
 
+Enhancement:
+
+* Currency Position added for price.
+
 Fixes:
 
 * WP Travel Notice label text updated. 
 * Console error fixes in field editor.
 * Show / Hide Bank Detail on checkout page. Displaying Bank Detail field on payment mode change.
 * Payment status wating for voucher on booking only.
+* Review reply link not working fixes.
+* Coupon tab multiple icon on tab label.
 
 = 2.0.0 =
 Release Date: 14th May, 2019

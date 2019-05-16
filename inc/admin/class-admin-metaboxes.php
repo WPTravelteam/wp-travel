@@ -287,15 +287,15 @@ class WP_Travel_Admin_Metaboxes {
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $total_price ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $total_price ); ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ); ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $paid_amount ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $paid_amount ); ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ); ?></strong></td>
-					<td><?php echo esc_html( wp_travel_get_currency_symbol() . ' ' . $due_amount ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $due_amount ); ?></td>
 				</tr>
 			<?php endif; ?>
 		</table>

@@ -143,7 +143,11 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 
 								<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
 									<div class="contact-title">
-								<?php echo esc_html( $payment_status ); ?>
+										<?php
+										$status_lists   = wp_travel_get_payment_status();
+										$status = $status_lists[ $payment_status ];
+										echo esc_html( $status['text'] );
+										// echo esc_html( $payment_status ); ?>
 									</div>
 								</td>
 
@@ -151,8 +155,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>
-									<span class="wp-travel-trip-total"> <?php echo esc_html( $total_price ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $total_price ); ?> </span>
 									</strong>
 									</p>
 									</div>
@@ -161,8 +164,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-Price-currencySymbol"><?php echo wp_travel_get_currency_symbol(); ?></span>
-									<span class="wp-travel-trip-total"> <?php echo esc_html( $paid_amount ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $paid_amount ); ?> </span>
 									</strong>
 									</p>
 									</div>

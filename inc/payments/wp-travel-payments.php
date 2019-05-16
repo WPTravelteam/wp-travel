@@ -443,9 +443,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 		'{customer_note}'          => $customer_note,
 		'{payment_status}'         => $wp_travel_payment_status,
 		'{payment_mode}'           => $wp_travel_payment_mode,
-		'{trip_price}'             => wp_travel_get_formated_price( $trip_price ),
-		'{payment_amount}'         => wp_travel_get_formated_price( $payment_amount ),
-		'{currency_symbol}'        => wp_travel_get_currency_symbol(),
+		'{trip_price}'             => wp_travel_get_formated_price_currency( $trip_price ),
+		'{payment_amount}'         => wp_travel_get_formated_price_currency( $payment_amount ),
+		'{currency_symbol}'        => '', // Depricated tag @since 2.0.1.
+		'{currency}'               => wp_travel_get_currency_symbol(),
 	);
 
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
