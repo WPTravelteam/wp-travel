@@ -2050,7 +2050,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										$travel_date = '';
 										foreach ( $order_details as $order_detail ) :
 											$trip_id      = $order_detail['trip_id'];
-											$price_key    = $order_detail['price_key'];
+											$price_key    = isset( $order_detail['price_key'] ) ? $order_detail['price_key'] : '';
 											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 
 											if ( '' !== $order_detail['arrival_date'] ) {
@@ -2110,13 +2110,14 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					$dob     = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
 					$gender  = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
 					$traveller_infos = get_post_meta( $booking_id );
-
+					$order_items_data = get_post_meta( $booking_id, 'order_items_data', true );
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
-						foreach ( $fname as $booking_trip_id => $first_names ) :
+						foreach ( $fname as $cart_id => $first_names ) :
 							if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
-								?>
+								$trip_id = $order_items_data[ $cart_id ]['trip_id'];
+								 ?>
 								<div class="my-order-single-traveller-info">
-									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $booking_trip_id ) ), 'wp-travel' ); ?></h3>
+									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $trip_id ) ), 'wp-travel' ); ?></h3>
 									<div class="row">
 										<?php foreach ( $first_names as $key => $first_name ) : ?>
 											<div class="col-md-6">

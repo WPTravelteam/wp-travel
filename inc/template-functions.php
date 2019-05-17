@@ -197,7 +197,7 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 	$regular_price = wp_travel_get_actual_trip_price( $trip_id, $min_price_key, true ); // Third param will return regular price if sale price isn't enabled.
 	$trip_price    = wp_travel_get_actual_trip_price( $trip_id, $min_price_key ); // This is actual price.
 
-	$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+	$enable_sale = wp_travel_is_enable_sale( $trip_id );
 
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
@@ -694,7 +694,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 	$trip_price      = wp_travel_get_trip_price( $post_id );
-	$enable_sale     = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	$enable_sale     = wp_travel_is_enable_sale( $post_id );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -1184,7 +1184,7 @@ function wp_travel_save_offer( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	$enable_sale = wp_travel_is_enable_sale( $post_id  );
 
 	if ( ! $enable_sale ) {
 		return;
@@ -1841,7 +1841,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 	$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 	$trip_price      = wp_travel_get_trip_price( $trip_id );
-	$enable_sale     = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+	$enable_sale     = wp_travel_is_enable_sale( $trip_id );
 
 	$trip_duration       = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;

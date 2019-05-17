@@ -279,6 +279,7 @@ function wp_travel_booking_info( $post ) {
 				<div class="wp-travel-form-field-wrapper">
 					<?php
 					// single foreach for legacy version.
+					$cart_id = rand();
 					foreach ( $traveller_fields as $field_group => $field ) {
 						$input_val = get_post_meta( $booking_id, $field['name'], true );
 						if ( ! $input_val ) {
@@ -292,6 +293,10 @@ function wp_travel_booking_info( $post ) {
 						}
 						$field['default'] = $input_val;
 
+						// @since 2.0.1
+						$field_name    = sprintf( '%s[%s][0]', $field['name'], $cart_id );
+						$field['name'] = $field_name;
+
 						$form_field->init( $field, array( 'single' => true ) )->render();
 					}
 					?>
@@ -299,7 +304,52 @@ function wp_travel_booking_info( $post ) {
 				<?php
 			}
 			?>
+			<div class="wp-travel-form-field-wrapper">
+				<?php
+					$arrival_date   = isset( $multiple_trips_booking_data[ $cart_id ]['arrival_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['arrival_date'] : '';
+					$departure_date = isset( $multiple_trips_booking_data[ $cart_id ]['departure_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['departure_date'] : '';
+					$pax            = isset( $multiple_trips_booking_data[ $cart_id ]['pax'] ) ? $multiple_trips_booking_data[ $cart_id ]['pax'] : '';
+					$booking_fields   = array();
+					$booking_fields[] = array(
+						'label'         => esc_html( 'Arrival Date' ),
+						'name'          => 'arrival_date',
+						'type'          => 'date',
+						'class'        => 'wp-travel-datepicker',
+						'validations'  => array(
+							'required' => true,
+						),
+						'attributes'   => array( 'readonly' => 'readonly' ),
+						'wrapper_class' => '',
+						'default'       => $arrival_date,
+						
+					);
+					$booking_fields[] = array(
+						'label'         => esc_html( 'Departure Date' ),
+						'name'          => 'departure_date',
+						'type'          => 'date',
+						'class'        => 'wp-travel-datepicker',
+						'validations'  => array(
+							'required' => true,
+						),
+						'attributes'   => array( 'readonly' => 'readonly' ),
+						'wrapper_class' => '',
+						'default'       => $departure_date,
+					);
+					$booking_fields[] = array(
+						'label'         => esc_html( 'Pax' ),
+						'name'          => 'pax',
+						'type'          => 'number',
+						'class'         => '',
+						'wrapper_class' => '',
+						'default'       => $pax,
+					);
+					foreach ( $booking_fields as $field ) {
+						$form_field->init( $field, array( 'single' => true ) )->render();
+					}
 
+				?>
+				
+			</div>
 			<div class="wp-travel-form-field-wrapper">
 				<?php
 				// Billing Fields HTML
@@ -329,21 +379,7 @@ function wp_travel_booking_info( $post ) {
 		<?php
 
 	} else { // 1. Display Booking info fields.
-		$details      = wp_travel_booking_data( $booking_id );
-		$payment_data = wp_travel_payment_data( $booking_id );
-
-		$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
-		$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
-		$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
-
-		$title = get_the_title( $trip_id );
-		$pax   = get_post_meta( $booking_id, 'wp_travel_pax', true );
-
-		// Billing fields.
-		$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
-		$billing_city    = get_post_meta( $booking_id, 'billing_city', true );
-		$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
-		$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
+		$details = wp_travel_booking_data( $booking_id );
 
 		if ( is_array( $details ) && count( $details ) > 0 ) {
 			?>
@@ -360,7 +396,6 @@ function wp_travel_booking_info( $post ) {
 			</div>
 			<?php
 		}
-
 	}
 
 }
@@ -402,16 +437,12 @@ function wp_travel_save_booking_data( $booking_id ) {
 	$order_data        = array();
 	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
 	update_post_meta( $booking_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
-	$order_data['wp_travel_post_id'] = $wp_travel_post_id;
-
+	// $order_data['wp_travel_post_id'] = $wp_travel_post_id; // Commented since 2.0.1
 	// Updating booking status.
 	$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? $_POST['wp_travel_booking_status'] : 'pending';
 	update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
 
 	$checkout_fields = wp_travel_get_checkout_form_fields();
-	// $traveller_fields   = $checkout_fields['traveller_fields'];
-	// $billing_fields     = $checkout_fields['billing_fields'];
-	// $payment_fields     = $checkout_fields['payment_fields'];
 	foreach ( $checkout_fields as $field_type => $fields ) {
 		$priority = array();
 		foreach ( $fields as $key => $row ) {
@@ -440,7 +471,29 @@ function wp_travel_save_booking_data( $booking_id ) {
 			$order_data[ $field['name'] ] = $meta_val;
 		endforeach;
 	}
-	update_post_meta( $booking_id, 'order_data', $order_data );
+	update_post_meta( $booking_id, 'order_data', $order_data ); // We will use only travellers info from here. for more detail about payment use order_items_data meta.
+
+	// Prepare data for order_items_data [Need cart id to set order_items_data ].
+	if ( isset( $_POST['wp_travel_fname_traveller'] ) && is_array( $_POST['wp_travel_fname_traveller'] ) ) {
+		$order_items_data = get_post_meta( $booking_id, 'order_items_data', true );
+		if ( ! $order_items_data ) {
+			$order_items_data = array();
+		}
+
+		foreach ( $_POST['wp_travel_fname_traveller'] as $cart_id => $v ) {
+			$pax            = isset( $_POST['pax'] ) ? sanitize_text_field( $_POST['pax'] ) : 0;
+			$arrival_date   = isset( $_POST['arrival_date'] ) ? sanitize_text_field( $_POST['arrival_date'] ) : '';
+			$departure_date = isset( $_POST['departure_date'] ) ? sanitize_text_field( $_POST['departure_date'] ) : '';
+
+			$order_items_data[ $cart_id ]['trip_id']        = $wp_travel_post_id;
+			$order_items_data[ $cart_id ]['pax']            = $pax;
+			$order_items_data[ $cart_id ]['arrival_date']   = $arrival_date;
+			$order_items_data[ $cart_id ]['departure_date'] = $departure_date;
+			// $order_items_data[ $cart_id ]['currency'] = $wp_travel_post_id;
+		}
+		update_post_meta( $booking_id, 'order_items_data', $order_items_data ); // use this instead of order_data meta.
+	}
+
 	do_action( 'wp_travel_after_booking_data_save', $booking_id ); // update payment status.
 }
 add_action( 'save_post', 'wp_travel_save_booking_data' );
@@ -618,26 +671,26 @@ function wp_travel_book_now() {
 
 		$trip_ids               = array();
 		$pax_array              = array();
-		$price_keys = array();
+		$price_keys             = array();
 		$booking_arrival_date   = array();
 		$booking_departure_date = array();
 		foreach ( $items as $key => $item ) {
 
 			$trip_ids[]               = $item['trip_id'];
 			$pax_array[]              = $item['pax'];
-			$price_keys[] = $item['price_key'];
+			$price_keys[]             = $item['price_key'];
 			$booking_arrival_date[]   = $item['arrival_date'];
 			$booking_departure_date[] = $item['departure_date'];
 
 		}
-		$price_key = false;
+		$price_key                 = false;
 		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 
 		if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 
 			// $trip_id                = $trip_ids[0];
 			$pax                    = $pax_array[0];
-			$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
+			$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
 			$booking_arrival_date   = $booking_arrival_date[0];
 			$booking_departure_date = $booking_departure_date[0];
 
@@ -811,7 +864,7 @@ function wp_travel_book_now() {
 
 		$bank_deposit_table = '';
 		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
-			$bank_deposit_table = wp_travel_get_bank_deposit_account_table(false);
+			$bank_deposit_table = wp_travel_get_bank_deposit_account_table( false );
 		}
 
 		$email_tags = array(
@@ -887,10 +940,10 @@ function wp_travel_book_now() {
 		// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
 		foreach ( $items as $item_key => $trip ) {
 
-			$trip_id           = $trip['trip_id'];
-			$pax               = $trip['pax'];
-			$price_key         = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
-			$trip_date         = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
+			$trip_id   = $trip['trip_id'];
+			$pax       = $trip['pax'];
+			$price_key = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
+			$trip_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
 
 			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 			$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;

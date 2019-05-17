@@ -357,6 +357,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 		exit;
 	}
 
+	// Clearing cart after successfult payment.
+	global $wt_cart;
+	$wt_cart->clear();
+
 	$settings = wp_travel_get_settings();
 
 	$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
@@ -503,6 +507,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		header( 'Location: ' . $thankyou_page_url );
 		exit;
 	}
+	
 }
 
 /**
