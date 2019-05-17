@@ -314,15 +314,24 @@ function wp_travel_booking_info( $post ) {
 						'label'         => esc_html( 'Arrival Date' ),
 						'name'          => 'arrival_date',
 						'type'          => 'date',
-						'class'         => '',
+						'class'        => 'wp-travel-datepicker',
+						'validations'  => array(
+							'required' => true,
+						),
+						'attributes'   => array( 'readonly' => 'readonly' ),
 						'wrapper_class' => '',
 						'default'       => $arrival_date,
+						
 					);
 					$booking_fields[] = array(
 						'label'         => esc_html( 'Departure Date' ),
 						'name'          => 'departure_date',
 						'type'          => 'date',
-						'class'         => '',
+						'class'        => 'wp-travel-datepicker',
+						'validations'  => array(
+							'required' => true,
+						),
+						'attributes'   => array( 'readonly' => 'readonly' ),
 						'wrapper_class' => '',
 						'default'       => $departure_date,
 					);
