@@ -49,13 +49,28 @@ function wp_travel_get_price_per_text( $post_id, $key = false ) {
  * Check sale price enable or not.
  *
  * @param Number $post_id Current post id.
- * @since 1.0.5
+ * @since 1.0.5 Modified in 2.0.1
  */
 function wp_travel_is_enable_sale( $post_id ) {
 	if ( ! $post_id ) {
 		return false;
 	}
-	$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	$pricing_option = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
+	$enable_sale = false;
+	
+	if ( 'single_price' === $pricing_option ) {
+		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	} elseif ( 'multiple-price' === $pricing_option ) {
+		$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
+		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+			foreach ( $pricing_options as $pricing_key => $option ) {
+				if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
+					$enable_sale = true;
+					break;
+				}
+			}
+		}
+	} 
 
 	if ( $enable_sale ) {
 		return true;

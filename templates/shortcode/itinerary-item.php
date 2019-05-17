@@ -25,7 +25,7 @@ if ( post_password_required() ) {
 	return;
 }
 $post_id 		= get_the_ID();
-$enable_sale 	= get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+$enable_sale 	= wp_travel_is_enable_sale( $post_id );
 $trip_price 	= wp_travel_get_trip_price( $post_id );
 $sale_price 	= wp_travel_get_trip_sale_price( $post_id ); ?>
 <li>
