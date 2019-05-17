@@ -43,10 +43,10 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			'selected'   => $currency_position,
 			// 'option'     => __( 'Select Currency', 'wp-travel' ),
 			'options'    => array(
-				'left'             => __( 'Left' ),
-				'right'            => __( 'Right' ),
-				'left_with_space'  => __( 'Left with space' ),
-				'right_with_space' => __( 'Right with space' ),
+				'left'             => __( 'Left', 'wp-travel' ),
+				'right'            => __( 'Right', 'wp-travel' ),
+				'left_with_space'  => __( 'Left with space', 'wp-travel' ),
+				'right_with_space' => __( 'Right with space', 'wp-travel' ),
 			),
 			'attributes' => array(
 				'style' => 'width: 300px;',

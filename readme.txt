@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2
 Requires PHP: 5.5
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -227,7 +227,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.1 =
-Release Date: Upcoming
+Release Date: 19th May, 2019
 
 Enhancement:
 
@@ -235,12 +235,14 @@ Enhancement:
 
 Fixes:
 
-* WP Travel Notice label text updated. 
-* Console error fixes in field editor.
 * Show / Hide Bank Detail on checkout page. Displaying Bank Detail field on payment mode change.
+* Fixed trip date is not being able to add from admin when adding new booking.
+* Console error fixes in field editor.
 * Payment status wating for voucher on booking only.
 * Review reply link not working fixes.
+* Offer sign not showing for multiple pricing.
 * Coupon tab multiple icon on tab label.
+* WP Travel Notice label text updated. 
 
 = 2.0.0 =
 Release Date: 14th May, 2019
