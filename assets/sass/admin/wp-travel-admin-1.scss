@@ -54,9 +54,17 @@ $alabaster: #f7f7f1; // Red like color.
 
 				.wp-travel-close-row {
 					position: absolute;
-					top: 17px;
-					color: red;
-					padding: 10px 25px;
+					top: 21px;
+					background: red;
+					color: white;
+					border-radius: 50%;
+					width: 10px;
+					height: 10px;
+					font-size: 7px;
+					padding: 4px;
+					line-height: 9px;
+					right: -14px;
+					font-weight: bold;
 				}
 			}
 		}
