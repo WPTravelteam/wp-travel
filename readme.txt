@@ -239,7 +239,7 @@ Fixes:
 * Fixed trip date is not being able to add from admin when adding new booking.
 * Console error fixes in field editor.
 * Payment status wating for voucher on booking only.
-* Review reply link not working fixes.
+* Review reply link not working is fixed.
 * Offer sign not showing for multiple pricing.
 * Coupon tab multiple icon on tab label.
 * WP Travel Notice label text updated. 
