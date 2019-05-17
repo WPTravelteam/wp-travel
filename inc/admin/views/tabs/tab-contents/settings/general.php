@@ -104,7 +104,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			<tr>
 				<th><label for="number-of-decimals"><?php echo esc_html__( 'Number of decimals', 'wp-travel' ); ?></label></th>
 				<td>
-					<input type="text" value="<?php echo esc_attr( $number_of_decimals ); ?>" name="number_of_decimals" id="number-of-decimals"/>
+					<input type="number" min="1" max="9" value="<?php echo esc_attr( $number_of_decimals ); ?>" name="number_of_decimals" id="number-of-decimals"/>
 					<p class="description"><?php echo esc_html__( 'This sets the Number of decimal of displayed prices.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>

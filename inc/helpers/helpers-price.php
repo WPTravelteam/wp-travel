@@ -705,7 +705,7 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 	// Price Format Start.
 	$thousand_separator = $settings['thousand_separator'];
 	$decimal_separator = $settings['decimal_separator'];
-	$number_of_decimals = $settings['number_of_decimals'];
+	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
 	$price = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 	// End of Price Format.
 
