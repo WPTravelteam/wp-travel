@@ -243,6 +243,7 @@ Fixes:
 * Offer sign not showing for multiple pricing.
 * Coupon tab multiple icon on tab label.
 * WP Travel Notice label text updated. 
+* Minor layout issue fixes for admin settings. 
 
 = 2.0.0 =
 Release Date: 14th May, 2019

@@ -19,6 +19,10 @@ var bank_deposit_field = function() {
         jQuery( '.wp-travel-bank-deposit-wrap' ).show();
         jQuery( '[name=complete_partial_payment]' ).hide();
     }
+    if ( func !== 'express_checkout' ) {
+        jQuery("#wp-travel-book-now, #wp-travel-complete-partial-payment").show().siblings().hide();
+        jQuery(".paypal-button").remove();
+    }
 };
 const display_booking_option = {
     booking_only: function() {

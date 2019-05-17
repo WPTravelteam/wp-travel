@@ -115,7 +115,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 										<td>
 											<input type="text" name="wp_travel_bank_deposits[swift][<?php echo esc_attr( $i ); ?>]" class="wp_travel_bank_deposit_swift" value="<?php echo esc_attr( $swift ); ?>">
 										</td>
-										<td class="align-center">
+										<td>
 											<span class="show-in-frontend checkbox-default-design">
 												<label data-on="ON" data-off="OFF">
 													<input value="no" name="wp_travel_bank_deposits[enable][<?php echo esc_attr( $i ); ?>]" type="hidden" />

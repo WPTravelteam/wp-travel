@@ -58,7 +58,7 @@ function wp_travel_is_enable_sale( $post_id ) {
 	$pricing_option = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
 	$enable_sale = false;
 	
-	if ( 'single_price' === $pricing_option ) {
+	if ( 'single-price' === $pricing_option ) {
 		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	} elseif ( 'multiple-price' === $pricing_option ) {
 		$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
