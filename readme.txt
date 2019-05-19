@@ -35,6 +35,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Khalti Checkout](https://wptravel.io/downloads/wp-travel-khalti-checkout/?utm_source=addons&utm_medium=khalti&utm_campaign=WP%20Plugin) (For online payments in Nepal)
 * [WP Travel Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin) (For online payments in India)
 * [WP Travel Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
+* [WP Travel PayFast Checkout](https://wptravel.io/downloads/wp-travel-payfast-checkout/?utm_source=addons&utm_medium=payfast&utm_campaign=WP%20Plugin) (For online payments in South Africa)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
