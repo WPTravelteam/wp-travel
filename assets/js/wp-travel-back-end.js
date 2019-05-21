@@ -250,10 +250,10 @@
     });
 
     // Slugify the text string.
-    function wp_travel_slugify_string(text) {
+    function wp_travel_filter_string(text) {
         return text.toString().toLowerCase()
             .replace(/\s+/g, '-') // Replace spaces with -
-            .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+            // .replace(/[^\w\-]+/g, '') // Remove all non-word chars
             .replace(/\-\-+/g, '-') // Replace multiple - with single -
             .replace(/^-+/, '') // Trim - from start of text
             .replace(/-+$/, ''); // Trim - from end of text
@@ -407,7 +407,7 @@
     //Pricing Key slugify.
     $(document).on('change', '.wp-travel-variation-pricing-name', function() {
 
-        var price_key = wp_travel_slugify_string($(this).val());
+        var price_key = wp_travel_filter_string($(this).val());
 
         $(this).siblings('.wp-travel-variation-pricing-uniquekey').val(price_key)
 
