@@ -37,6 +37,7 @@
 					<key name="label"/>
 				</key>
 			</key>
+			<key name="wp_travel_gdpr_message"/>
 		</key>
 	</admin-texts>      
 </wpml-config>
