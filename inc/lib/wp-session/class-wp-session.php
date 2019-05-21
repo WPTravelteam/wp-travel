@@ -80,8 +80,8 @@ final class WP_Session extends Recursive_ArrayAccess {
 			// Update the session expiration if we're past the variant time
 			if ( time() > $this->exp_variant ) {
 				$this->set_expiration();
-				delete_option( "_wp_session_expires_{$this->session_id}" );
-				add_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
+				// delete_option( "_wp_session_expires_{$this->session_id}" );
+				update_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
 			}
 		} else {
 			$this->session_id = WP_Session_Utils::generate_id();
@@ -151,8 +151,8 @@ final class WP_Session extends Recursive_ArrayAccess {
 			add_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
 			add_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
 		} else {
-			delete_option( "_wp_session_{$this->session_id}" );
-			add_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
+			// delete_option( "_wp_session_{$this->session_id}" );
+			update_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
 		}
 	}
 
