@@ -8,16 +8,23 @@ class WP_Travel_Admin_Menu {
 	 * Add / Remove Menu items.
 	 */
 	public function add_menus() {
-		// Trips Submenu.
-		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'System Status', 'wp-travel' ), __( 'Status', 'wp-travel' ), 'manage_options', 'sysinfo', array( 'WP_Travel_Admin_Settings', 'get_system_info' ) );
 
-		// WP Travel Submenu.
-		if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
-			add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Downloads', 'wp-travel' ), __( 'Downloads', 'wp-travel' ), 'manage_options', 'download_upsell_page', 'wp_travel_get_download_upsell' );
-		endif;
-		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Reports', 'wp-travel' ), __( 'Reports', 'wp-travel' ), 'manage_options', 'booking_chart', 'get_booking_chart' );
-		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'WP Travel Settings', 'wp-travel' ), __( 'Settings', 'wp-travel' ), 'manage_options', 'settings', array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ) );
-		add_submenu_page( 'edit.php?post_type=itinerary-booking', __( 'Marketplace', 'wp-travel' ), __( 'Marketplace', 'wp-travel' ), 'manage_options', 'wp-travel-marketplace', 'wp_travel_marketplace_page' );
+		$all_submenus = wp_travel_get_submenu();
+		
+		foreach ( $all_submenus as $type => $submenus ) {
+			$parent_slug = '';
+			if ( 'bookings' === $type ) {
+				$parent_slug = 'edit.php?post_type=itinerary-booking';
+			}
+			$submenus = wp_travel_sort_array_by_priority( $submenus );
+			foreach ( $submenus as $submenu ) {
+				if ( ! isset( $submenu['page_title'] ) || ! isset( $submenu['menu_title'] ) || ! isset( $submenu['menu_slug'] )  || ! isset( $submenu['callback'] ) ) {
+					continue;
+				}
+				$capability = isset( $submenu['capability'] ) ? $submenu['capability'] : 'manage_options';
+				add_submenu_page( $parent_slug, $submenu['page_title'], $submenu['menu_title'], $capability, $submenu['menu_slug'], $submenu['callback'] );
+			}
+		}
 
 		// Remove from menu.
 		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'sysinfo' );

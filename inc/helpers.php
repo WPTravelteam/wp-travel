@@ -7,6 +7,7 @@
 
 require sprintf( '%s/inc/helpers/helpers-price.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/helpers/helpers-stat.php', WP_TRAVEL_ABSPATH );
+require sprintf( '%s/inc/helpers/helpers-fontawesome.php', WP_TRAVEL_ABSPATH );
 /**
  * Return all Gallery ID of specific post.
  *
@@ -73,9 +74,9 @@ function wp_travel_settings_default_fields() {
 		// General Settings Fields.
 		'currency'                                => 'USD',
 		'currency_position'                       => 'left',
-		'thousand_separator'                       => ',',
+		'thousand_separator'                      => ',',
 		'decimal_separator'                       => '.',
-		'number_of_decimals'                       => 2,
+		'number_of_decimals'                      => 2,
 		'wp_travel_map'                           => 'google-map',
 		'google_map_api_key'                      => '',
 		'google_map_zoom_level'                   => 15,
@@ -734,11 +735,11 @@ function wp_travel_get_trip_duration( $post_id ) {
  */
 function wp_travel_get_payment_status() {
 	$status = array(
-		'pending'  => array(
+		'pending'          => array(
 			'color' => '#FF9800',
 			'text'  => __( 'Pending', 'wp-travel' ),
 		),
-		'paid'     => array(
+		'paid'             => array(
 			'color' => '#008600',
 			'text'  => __( 'Paid', 'wp-travel' ),
 		),
@@ -746,15 +747,15 @@ function wp_travel_get_payment_status() {
 			'color' => '#FF9800',
 			'text'  => __( 'Waiting for voucher', 'wp-travel' ),
 		),
-		'voucher_submited'  => array(
+		'voucher_submited' => array(
 			'color' => '#FF9800',
 			'text'  => __( 'Voucher submited', 'wp-travel' ),
 		),
-		'canceled' => array(
+		'canceled'         => array(
 			'color' => '#FE450E',
 			'text'  => __( 'Canceled', 'wp-travel' ),
 		),
-		'N/A'      => array(
+		'N/A'              => array(
 			'color' => '#892E2C',
 			'text'  => __( 'N/A', 'wp-travel' ),
 		),
@@ -2079,14 +2080,14 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 						</div>
 						<div class="col-md-6">
 							<?php
-							$checkout_fields  = wp_travel_get_checkout_form_fields();
-							$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
-							$billing_fields   = wp_travel_sort_form_fields( $billing_fields );
+							$checkout_fields = wp_travel_get_checkout_form_fields();
+							$billing_fields  = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
+							$billing_fields  = wp_travel_sort_form_fields( $billing_fields );
 							if ( ! empty( $billing_fields ) ) {
-								foreach( $billing_fields as $field ) {
+								foreach ( $billing_fields as $field ) {
 									if ( 'heading' === $field['type'] ) {
 										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
-									} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+									} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 										// Do nothing
 									} else {
 										echo '<div class="my-order-single-field clearfix">';
@@ -2102,20 +2103,20 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 					<?php
 
 					// Travelers info.
-					$fname   = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
-					$lname   = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
-					$country = get_post_meta( $booking_id, 'wp_travel_country_traveller', true );
-					$phone   = get_post_meta( $booking_id, 'wp_travel_phone_traveller', true );
-					$email   = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
-					$dob     = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
-					$gender  = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
-					$traveller_infos = get_post_meta( $booking_id );
+					$fname            = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+					$lname            = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
+					$country          = get_post_meta( $booking_id, 'wp_travel_country_traveller', true );
+					$phone            = get_post_meta( $booking_id, 'wp_travel_phone_traveller', true );
+					$email            = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
+					$dob              = get_post_meta( $booking_id, 'wp_travel_date_of_birth_traveller', true );
+					$gender           = get_post_meta( $booking_id, 'wp_travel_gender_traveller', true );
+					$traveller_infos  = get_post_meta( $booking_id );
 					$order_items_data = get_post_meta( $booking_id, 'order_items_data', true );
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
 						foreach ( $fname as $cart_id => $first_names ) :
 							if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
 								$trip_id = $order_items_data[ $cart_id ]['trip_id'];
-								 ?>
+								?>
 								<div class="my-order-single-traveller-info">
 									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $trip_id ) ), 'wp-travel' ); ?></h3>
 									<div class="row">
@@ -2124,18 +2125,18 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 												<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Traveler %s :', $key + 1 ), 'wp-travel' ); ?></h3>
 												<?php
 												$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
-												$traveller_fields   = wp_travel_sort_form_fields( $traveller_fields );
+												$traveller_fields = wp_travel_sort_form_fields( $traveller_fields );
 												if ( ! empty( $traveller_fields ) ) {
-													foreach( $traveller_fields as $field ) {
+													foreach ( $traveller_fields as $field ) {
 														if ( 'heading' === $field['type'] ) {
 															// Do nothing.
-														} else if ( in_array( $field['type'], array( 'hidden' ) ) ) {
+														} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 															// Do nothing.
 														} else {
-															$value = maybe_unserialize(  $traveller_infos[ $field['name'] ][0] );
+															$value = maybe_unserialize( $traveller_infos[ $field['name'] ][0] );
 															$value = is_array( $value ) ? array_values( $value ) : $value;
 															$value = is_array( $value ) ? array_shift( $value ) : $value;
-															$value = is_array( $value ) ? $value[$key] : $value;
+															$value = is_array( $value ) ? $value[ $key ] : $value;
 															echo '<div class="my-order-single-field clearfix">';
 															printf( '<span class="my-order-head">%s:</span>', $field['label'] );
 															printf( '<span class="my-order-tail">%s</span>', $value );
@@ -2332,7 +2333,8 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 					<tr>
 						<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
 						<td>
-							<?php echo esc_html( $payment_args['payment_id'] );
+							<?php
+							echo esc_html( $payment_args['payment_id'] );
 							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
 								$txn_id = get_post_meta( $payment_args['payment_id'], 'txn_id', true );
 								if ( ! empty( $txt_id ) ) {
@@ -2346,7 +2348,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 							$gateway_lists = wp_travel_payment_gateway_lists();
 
 							// use payment method key in case of payment disabled or deactivated.
-							$payment_method = isset( $gateway_lists[ $payment_args['payment_method'] ] ) ? $gateway_lists[ $payment_args['payment_method'] ] : $payment_args['payment_method']; 
+							$payment_method = isset( $gateway_lists[ $payment_args['payment_method'] ] ) ? $gateway_lists[ $payment_args['payment_method'] ] : $payment_args['payment_method'];
 
 							echo esc_html( $payment_method );
 
@@ -2354,7 +2356,8 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 								$payment_id   = $payment_args['payment_id'];
 								$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
 								if ( ! empty( $payment_slip ) ) {
-									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip ); ?>
+									$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
+									?>
 									<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt', 'wp-travel' ); ?></a>
 									<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
 										<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
@@ -2496,7 +2499,7 @@ function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) 
 	$bank_deposits = $settings['wp_travel_bank_deposits'];
 	if ( isset( $bank_deposits['account_name'] ) && is_array( $bank_deposits['account_name'] ) && count( $bank_deposits['account_name'] ) > 0 ) {
 		foreach ( $bank_deposits['account_name'] as $i => $account_name ) {
-			$enable         = isset( $bank_deposits['enable'][ $i ] ) ? $bank_deposits['enable'][ $i ] : 'no';
+			$enable = isset( $bank_deposits['enable'][ $i ] ) ? $bank_deposits['enable'][ $i ] : 'no';
 
 			if ( ! $display_all_row && 'no' === $enable ) { // Controls to display each enabled row.
 				continue;
@@ -2526,12 +2529,13 @@ function wp_travel_get_bank_deposit_account_details( $display_all_row = false ) 
  */
 function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
 	$account_data = wp_travel_get_bank_deposit_account_details();
-	$settings = wp_travel_get_settings();
+	$settings     = wp_travel_get_settings();
 	ob_start();
 	if ( is_array( $account_data ) && count( $account_data ) > 0 ) {
 		$wp_travel_bank_deposit_description = isset( $settings['wp_travel_bank_deposit_description'] ) ? $settings['wp_travel_bank_deposit_description'] : '';
 
-		if ( ! empty( $wp_travel_bank_deposit_description ) && true == $show_description ) : ?>
+		if ( ! empty( $wp_travel_bank_deposit_description ) && true == $show_description ) :
+			?>
 			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
 		<?php endif; ?>
 		
@@ -2586,5 +2590,70 @@ function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
 	$content = ob_get_contents();
 	ob_end_clean();
 	return $content;
-	
+
+}
+
+/**
+ * Return list of submenu array.
+ *
+ * @since 2.0.2
+ */
+function wp_travel_get_submenu() {
+	$all_submenus = array(
+		'bookings' => array(
+
+			'coupon'         => array( 'priority' => '20' ), // post types.
+			'enquiries'      => array( 'priority' => '30' ), // post types.
+			'extras'         => array( 'priority' => '40' ), // post types.
+			'downloads'      => array( 'priority' => '100' ), // post types.
+
+			'system_info'    => array(
+				'priority'   => '100',
+				'page_title' => __( 'System Status', 'wp-travel' ),
+				'menu_title' => __( 'Status', 'wp-travel' ),
+				'menu_slug'  => 'sysinfo',
+				'callback'   => array( 'WP_Travel_Admin_Settings', 'get_system_info' ),
+			),
+			'reports'        => array(
+				'priority'   => '120',
+				'page_title' => __( 'Reports', 'wp-travel' ),
+				'menu_title' => __( 'Reports', 'wp-travel' ),
+				'menu_slug'  => 'booking_chart',
+				'callback'   => 'get_booking_chart',
+			),
+			'custom_filters' => array(
+				'priority'   => '125',
+				'page_title' => __( 'Custom Filters', 'wp-travel' ),
+				'menu_title' => __( 'Custom Filters', 'wp-travel' ),
+				'menu_slug'  => 'wp_travel_custom_filters_page',
+			),
+			'settings'       => array(
+				'priority'   => '130',
+				'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
+				'menu_title' => __( 'Settings', 'wp-travel' ),
+				'menu_slug'  => 'settings',
+				'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ),
+			),
+			'marketplace'    => array(
+				'priority'   => '140',
+				'page_title' => __( 'Marketplace', 'wp-travel' ),
+				'menu_title' => __( 'Marketplace', 'wp-travel' ),
+				'menu_slug'  => 'wp-travel-marketplace',
+				'callback'   => 'wp_travel_marketplace_page',
+			),
+		),
+	);
+
+	if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
+		$all_submenus['bookings']['downloads']['page_title'] = __( 'Downloads', 'wp-travel' );
+		$all_submenus['bookings']['downloads']['menu_title'] = __( 'Downloads', 'wp-travel' );
+		$all_submenus['bookings']['downloads']['menu_slug']  = 'download_upsell_page';
+		$all_submenus['bookings']['downloads']['callback']   = 'wp_travel_get_download_upsell';
+	endif;
+
+	if ( ! class_exists( 'WP_Travel_Custom_Filters_Core' ) ) {
+		$all_submenus['bookings']['custom_filters']['callback']   = 'wp_travel_custom_filters_upsell';
+	}
+
+	return apply_filters( 'wp_travel_submenus', $all_submenus );
 }

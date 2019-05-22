@@ -13,9 +13,9 @@ class WP_Travel_Post_Types {
 	public static function init() {
 		self::register_bookings();
 		self::register_trip();
-		self::register_enquiries();
+		// self::register_enquiries();
 		self::register_payment();
-		self::register_tour_extras();
+		// self::register_tour_extras();
 	}
 	/**
 	 * Register Post Type Trip.

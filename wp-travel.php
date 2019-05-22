@@ -101,6 +101,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
 
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
+
+			// Set priority to move submenu.
+			$sbumenus = wp_travel_get_submenu();
+			$priority_enquiry = isset( $sbumenus['bookings']['enquiries']['priority'] ) ? $sbumenus['bookings']['enquiries']['priority'] : 10;
+			$priority_extras = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
+			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_enquiries' ), $priority_enquiry );
+			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_tour_extras' ), $priority_extras );
+
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
 			add_action( 'init', 'wp_travel_book_now', 99 );

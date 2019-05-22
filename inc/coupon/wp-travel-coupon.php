@@ -97,7 +97,12 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		 */
 		private function init_hooks() {
 			// register_activation_hook( __FILE__, array( $this, 'wp_travel_coupons_activation' ) );
-			add_action( 'init', array( 'WP_Travel_Coupons_Pro_Install', 'init' ) );
+			$priority = 10;
+			if ( function_exists( 'wp_travel_get_submenu' ) ) {
+				$sbumenus = wp_travel_get_submenu();
+				$priority = isset( $sbumenus['bookings']['coupon']['priority'] ) ? $sbumenus['bookings']['coupon']['priority'] : $priority;
+			}
+			add_action( 'init', array( 'WP_Travel_Coupons_Pro_Install', 'init' ), $priority );
 		}
 
 		/**
