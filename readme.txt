@@ -227,6 +227,19 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.2 =
+Release Date: 26th May, 2019
+
+Enhancement:
+
+* WPML compatibility added for settings strings.
+* Open All and Close All travelers info added in checkout page.
+
+Fixes:
+
+* Cart empty issue. For some user there are cart empty issue due to db user privilege.
+* Pricing option label issue with other than english language. Previously if pricing option name is set with different language, then inventory options is not functioning and also price is not rendering correctly.
+
 = 2.0.1 =
 Release Date: 19th May, 2019
 
