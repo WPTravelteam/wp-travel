@@ -40,6 +40,10 @@ $form_fw->init_validation( 'wp-travel-booking' );
 					<h4 class="panel-title"><?php esc_html_e( 'Traveler Details', 'wp-travel' ); ?></h4>
 				</div>
 				<div class="ws-theme-timeline-block panel-group checkout-accordion" id="checkout-accordion-<?php echo esc_attr( $cart_id ); ?>">
+					<div class="wp-collapse-open clearfix">
+						<a href="#" class="open-all-link" style="display: none;"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All' ); ?></span></a>
+						<a href="#" class="close-all-link" style="display: block;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All' ); ?></span></a>
+					</div>
 					<?php
 
 					for ( $i = 0; $i < $repeator_count; $i++ ) :
@@ -49,18 +53,18 @@ $form_fw->init_validation( 'wp-travel-booking' );
 								<h4 class="panel-title">
 									<a class="accordion-toggle" data-toggle="collapse" data-parent="#checkout-accordion-<?php echo esc_attr( $cart_id ); ?>" href="#collapse-<?php echo esc_attr( $cart_id . '-' . $i ); ?>" aria-expanded="true">
 										<?php
+										$collapse      = 'collapse in';
+										$area_expanded = 'true';
 										if ( 0 === $i ) :
 											esc_html_e( 'Lead Traveler', 'wp-travel' );
-											$collapse      = 'collapse in';
-											$area_expanded = 'true';
 											else :
 												$traveler_index = $i + 1;
 												/**
 												 * translators: %d placeholder is used to show number of traveler except lead traveler.
 												 */
 												echo sprintf( __( 'Traveler %d', 'wp-travel' ), $traveler_index );
-												$collapse      = 'collapse';
-												$area_expanded = 'false';
+												// $collapse      = 'collapse';
+												// $area_expanded = 'false';
 											endif;
 											?>
 										<span class="collapse-icon"></span>
