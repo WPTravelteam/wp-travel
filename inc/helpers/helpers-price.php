@@ -510,6 +510,12 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	}
 	// Default Pricings.
 	$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // Default Trip Price.
+	if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+		$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
+		if ( $group_trip_price ) {
+			$trip_price = $group_trip_price;
+		}
+	}
 	
 	$per_person_text = wp_travel_get_price_per_text( $trip_id );
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
