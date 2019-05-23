@@ -274,7 +274,6 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 												<label for="price_per_<?php echo esc_attr( $key ); ?>" class="one-third"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
 												<div class="two-third">
 													<select id="price_per_<?php echo esc_attr( $key ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][price_per]">
-														<option value="trip-default" <?php selected( $pricing_price_per, 'trip-default' ); ?>><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
 														<option value="person" <?php selected( $pricing_price_per, 'person' ); ?>><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
 														<option value="group" <?php selected( $pricing_price_per, 'group' ); ?>><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
 													</select>

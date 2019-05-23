@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2
 Requires PHP: 5.5
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -228,17 +228,19 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.2 =
-Release Date: 26th May, 2019
+Release Date: 23rd May, 2019
 
 Enhancement:
 
 * WPML compatibility added for settings strings.
 * Open All and Close All travelers info added in checkout page.
+* Filter added for submenu positions change.
 
 Fixes:
 
 * Cart empty issue. For some user there are cart empty issue due to db user privilege.
 * Pricing option label issue with other than english language. Previously if pricing option name is set with different language, then inventory options is not functioning and also price is not rendering correctly.
+* Removed Trip default option from Price per field of multiple pricing.
 
 = 2.0.1 =
 Release Date: 19th May, 2019
