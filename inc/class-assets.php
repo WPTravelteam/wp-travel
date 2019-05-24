@@ -131,7 +131,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 					$wp_travel['payment']['currency_code']   = $settings['currency'];
 					$wp_travel['payment']['currency_symbol'] = wp_travel_get_currency_symbol();
-					$wp_travel['payment']['price_per']       = wp_travel_get_price_per_text( $trip_id, true );
+					$wp_travel['payment']['price_per']       = wp_travel_get_price_per_text( $trip_id, '', true );
 					$wp_travel['payment']['trip_price']      = $trip_price;
 					$wp_travel['payment']['payment_amount']  = $payment_amount;
 

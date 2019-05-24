@@ -28,21 +28,48 @@ function wp_travel_get_price_per_fields() {
  * @param Number $post_id Current post id.
  * @since 1.0.5
  */
-function wp_travel_get_price_per_text( $post_id, $key = false ) {
-	if ( ! $post_id ) {
+function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = false ) {
+	if ( ! $trip_id ) {
 		return;
 	}
-	$per_person_text = get_post_meta( $post_id, 'wp_travel_price_per', true );
-	if ( ! $per_person_text ) {
-		$per_person_text = 'person';
-	}
-	$price_per_fields = wp_travel_get_price_per_fields();
+	$pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
 
-	if ( true === $key ) {
-		return $per_person_text;
+	if ( 'single-price' === $pricing_option_type ) {
+		// Single pricing option.
+		$price_per_fields = wp_travel_get_price_per_fields();
+
+		$per_person_text = get_post_meta( $trip_id, 'wp_travel_price_per', true );
+		if ( ! $per_person_text ) {
+			$per_person_text = 'person';
+		}
+
+		if ( true === $return_key ) {
+			return $per_person_text;
+		}
+
+		return $price_per_fields[ $per_person_text ];
+
+	} elseif ( 'multiple-price' === $pricing_option_type ) {
+		// multiple pricing option.
+		$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
+		if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
+			$price_per_fields      = wp_travel_get_pricing_variation_options();
+			$pricing_default_types = wp_travel_get_pricing_variation_options();
+
+			foreach ( $pricing_data as $p_ky => $pricing ) :
+				$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
+				$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
+				$per_person_text      = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
+			endforeach;
+			if ( true === $return_key ) {
+				return $per_person_text;
+			}
+
+			return $price_per_fields[ $per_person_text ];
+
+		}
 	}
 
-	return $price_per_fields[ $per_person_text ];
 }
 
 /**
@@ -56,8 +83,8 @@ function wp_travel_is_enable_sale( $post_id ) {
 		return false;
 	}
 	$pricing_option = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
-	$enable_sale = false;
-	
+	$enable_sale    = false;
+
 	if ( 'single-price' === $pricing_option ) {
 		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	} elseif ( 'multiple-price' === $pricing_option ) {
@@ -70,7 +97,7 @@ function wp_travel_is_enable_sale( $post_id ) {
 				}
 			}
 		}
-	} 
+	}
 
 	if ( $enable_sale ) {
 		return true;
@@ -386,18 +413,18 @@ function wp_travel_booking_data( $booking_id ) {
 	// Partical calculation.
 	if ( wp_travel_is_partial_payment_enabled() ) {
 		$payout_percent = wp_travel_get_payout_percent( $trip_id );
-		
+
 		if ( $payout_percent > 0 ) {
-			$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-			$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+			$trip_price_partial       = ( $trip_price * $payout_percent ) / 100;
+			$trip_price_partial       = wp_travel_get_formated_price( $trip_price_partial );
 			$taxed_trip_price_partial = wp_travel_taxed_amount( $trip_price_partial ); // Trip price including tax.
 			$tax_partial              = $taxed_trip_price_partial - $trip_price_partial;
 
 			$total_partial = $trip_price_partial + $tax_partial;
 
 			$amounts['sub_total_partial'] = $trip_price_partial;
-			$amounts['tax_partial'] = $tax_partial;
-			$amounts['total_partial'] = $total_partial;
+			$amounts['tax_partial']       = $tax_partial;
+			$amounts['total_partial']     = $total_partial;
 		}
 	}
 	return $amounts;
@@ -412,7 +439,7 @@ function wp_travel_get_payment_id( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
-	$payment_ids       = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+	$payment_ids = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
 	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
 		$payment_id = end( $payment_ids );
@@ -516,8 +543,8 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 			$trip_price = $group_trip_price;
 		}
 	}
-	
-	$per_person_text = wp_travel_get_price_per_text( $trip_id );
+
+	$per_person_text        = wp_travel_get_price_per_text( $trip_id );
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 
 	$pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
@@ -586,10 +613,10 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	);
 
 	$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
-	
-	$trip_price_partial      = $trip_price;
+
+	$trip_price_partial = $trip_price;
 	if ( $attrs['enable_partial'] ) {
-		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
 		$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
 
 		if ( $payout_percent > 0 ) {
@@ -698,7 +725,7 @@ function wp_travel_get_formated_price( $price, $round = 2 ) {
  * @since 2.0.1
  */
 function wp_travel_get_formated_price_currency( $price, $regular_price = false ) {
-	$settings = wp_travel_get_settings();
+	$settings          = wp_travel_get_settings();
 	$currency_position = isset( $settings['currency_position'] ) ? $settings['currency_position'] : 'left';
 
 	$filter_name = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
@@ -710,11 +737,10 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 
 	// Price Format Start.
 	$thousand_separator = $settings['thousand_separator'];
-	$decimal_separator = $settings['decimal_separator'];
+	$decimal_separator  = $settings['decimal_separator'];
 	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
-	$price = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
+	$price              = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 	// End of Price Format.
-
 	// $currency_element = '<span class="wp-travel-trip-currency">' . wp_travel_get_currency_symbol() . '</span>';
 	// $price_element = '<span class="' . $price_class . '">' . esc_html( wp_travel_get_formated_price( $price ) ) . '</span>';
 	ob_start();

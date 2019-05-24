@@ -201,7 +201,7 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $trip_id );
+	$per_person_text = wp_travel_get_price_per_text( $trip_id, $min_price_key, true );
 	?>
 
 	<div class="wp-detail-review-wrap">
