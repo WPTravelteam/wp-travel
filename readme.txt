@@ -36,6 +36,8 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Instamojo Checkout](https://wptravel.io/downloads/wp-travel-instamojo-checkout/?utm_source=addons&utm_medium=instamojo&utm_campaign=WP%20Plugin) (For online payments in India)
 * [WP Travel Razorpay Checkout](https://wptravel.io/downloads/wp-travel-razorpay-checkout/?utm_source=addons&utm_medium=razorpay&utm_campaign=WP%20Plugin) (For online payments in India)
 * [WP Travel PayFast Checkout](https://wptravel.io/downloads/wp-travel-payfast-checkout/?utm_source=addons&utm_medium=payfast&utm_campaign=WP%20Plugin) (For online payments in South Africa)
+* [WP Travel PayU Checkout](https://wptravel.io/downloads/wp-travel-payu-checkout/?utm_source=addons&utm_medium=payu&utm_campaign=WP%20Plugin) (For online payments in Poland)
+* [WP Travel Payhere Checkout](https://wptravel.io/downloads/wp-travel-payhere-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Sri Lanka)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
