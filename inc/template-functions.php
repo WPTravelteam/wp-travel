@@ -1840,16 +1840,20 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 
 	$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+
 	$trip_price      = wp_travel_get_trip_price( $trip_id );
+	$regular_price   = $trip_price;
+
 	$enable_sale     = wp_travel_is_enable_sale( $trip_id );
+	if ( $enable_sale ) {
+		$trip_price = wp_travel_get_trip_sale_price( $trip_id );
+	}
+	$per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 	$trip_duration       = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
 	$trip_duration_night = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
 	$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
-
-	$per_person_text = wp_travel_get_price_per_text( $trip_id );
-	$sale_price      = wp_travel_get_trip_sale_price( $trip_id );
 
 	$available_pax    = false;
 	$booked_pax       = false;
@@ -2393,12 +2397,12 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									<span class="availabily-heading-label"><?php echo esc_html__( 'price:', 'wp-travel' ); ?></span>
 									<?php if ( $enable_sale ) : ?>
 										<del>
-											<span><?php echo wp_travel_get_formated_price_currency( $trip_price, true ); ?></span>
+											<span><?php echo wp_travel_get_formated_price_currency( $regular_price, true ); ?></span>
 										</del>
 									<?php endif; ?>
 									<span class="person-count">
 										<ins>
-											<span><?php echo wp_travel_get_formated_price_currency( $sale_price ); ?></span>
+											<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
 										</ins>/<?php echo esc_html( $per_person_text ); ?>
 									</span>
 								</div>
