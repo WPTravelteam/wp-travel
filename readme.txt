@@ -243,6 +243,7 @@ Fixes:
 * Pricing option label issue with other than english language. Previously if pricing option name is set with different language, then inventory options is not functioning and also price is not rendering correctly.
 * Removed Trip default option from Price per field of multiple pricing.
 * Price 0 for single pricing option and always fetching sale price for single pricing option.
+* Price per text in the top of trip page only shows from single trip though trip have multiple pricing option selected.
 
 = 2.0.1 =
 Release Date: 19th May, 2019

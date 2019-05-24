@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 2.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-24 07:49:24+00:00\n"
+"POT-Creation-Date: 2019-05-24 10:19:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -308,7 +308,7 @@ msgstr ""
 #: inc/admin/admin-helper.php:946
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:277
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:421
-#: inc/helpers/helpers-price.php:18 inc/helpers/helpers-price.php:523
+#: inc/helpers/helpers-price.php:18 inc/helpers/helpers-price.php:550
 msgid "Person"
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:20
-#: inc/helpers/helpers-price.php:798
+#: inc/helpers/helpers-price.php:824
 msgid "Partial Payment"
 msgstr ""
 
@@ -7896,7 +7896,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:799
+#: inc/helpers/helpers-price.php:825
 msgid "Full Payment"
 msgstr ""
 
