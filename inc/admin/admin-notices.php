@@ -27,8 +27,15 @@ function wp_travel_display_critical_admin_notices() {
 	<?php
 
 }
-
-add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+if ( ! is_multisite() ) {
+	add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+	
+} else {
+	add_action( 'network_admin_notices', 'wp_travel_display_critical_admin_notices' );
+	if ( is_main_site() ) {
+		add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+	}
+}
 
  /**
   * Display General admin notices.

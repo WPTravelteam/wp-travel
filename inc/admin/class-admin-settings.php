@@ -147,13 +147,15 @@ class WP_Travel_Admin_Settings {
 			'callback'      => 'wp_travel_settings_callback_facts',
 			'icon'          => 'fa-industry',
 		);
-		$settings_fields['license']                       = array(
-			'tab_label'     => __( 'License', 'wp-travel' ),
-			'content_title' => __( 'License Details', 'wp-travel' ),
-			'priority'      => 70,
-			'callback'      => 'wp_travel_settings_callback_license',
-			'icon'          => 'fa-id-badge',
-		);
+		if ( ! is_multisite()  ) :
+			$settings_fields['license']                       = array(
+				'tab_label'     => __( 'License', 'wp-travel' ),
+				'content_title' => __( 'License Details', 'wp-travel' ),
+				'priority'      => 70,
+				'callback'      => 'wp_travel_settings_callback_license',
+				'icon'          => 'fa-id-badge',
+			);
+		endif;
 		$settings_fields['field_editor']                  = array(
 			'tab_label'     => __( 'Field Editor', 'wp-travel' ),
 			'content_title' => __( 'Field Editor', 'wp-travel' ),

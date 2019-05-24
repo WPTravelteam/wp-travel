@@ -8,7 +8,7 @@
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
  * Requires PHP: 5.5
- * Tested up to: 5.2
+ * Tested up to: 5.2.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -129,12 +129,19 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->session = new WP_Travel_Session();
 			$this->notices = new WP_Travel_Notices();
 			$this->coupon  = new WP_Travel_Coupon();
+
+			// For Network.
+			add_action('network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
+		}
+
+		public function wp_travel_network_menu() {
+			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WP_Travel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
 		}
 
 		/**
 		 * Load localisation files.
 		 */
-		function load_textdomain() {
+		public function load_textdomain() {
 			$locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
 			$locale = apply_filters( 'plugin_locale', $locale, 'wp-travel' );
 			unload_textdomain( 'wp-travel' );
@@ -248,6 +255,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/extras/class-tour-extras-admin-metabox.php', WP_TRAVEL_ABSPATH );
 				// include sprintf( '%s/inc/admin/class-admin-assets.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-settings.php', WP_TRAVEL_ABSPATH );
+				include sprintf( '%s/inc/admin/class-network-settings.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-menu.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-status.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-dashboard-widgets.php', WP_TRAVEL_ABSPATH );

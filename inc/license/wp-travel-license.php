@@ -337,6 +337,10 @@ class WP_Travel_License {
 
 		global $wp_version;
 
+		if ( is_multisite() ) {
+			$main_site_id = defined( 'SITE_ID_CURRENT_SITE' ) ? SITE_ID_CURRENT_SITE : 1;
+			switch_to_blog( $main_site_id );
+		}
 		$license_data = get_transient( $addon['_option_prefix'] . 'data' );
 		if ( empty( $license_data ) ) {
 			$settings_args = get_option( 'wp_travel_settings' );
@@ -374,6 +378,9 @@ class WP_Travel_License {
 				update_option( $addon['_option_prefix'] . 'status', '' );
 			}
 		}
+		if ( is_multisite() ) {
+			restore_current_blog();
+		}
 
 		if ( isset( $license_data->license ) ) {
 			return $license_data->license;
@@ -397,9 +404,18 @@ class WP_Travel_License {
 			if ( false !== $check_license && 'valid' === $check_license ) {
 				continue;
 			}
+			$screen = get_current_screen();
 			$class   = '';
 			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
-			$message = sprintf( __( 'You have not activated the license for %1$s addon,  go to <a href="%2$s"> settings </a> to activate your license.', 'wp-travel' ), $premium_addon['item_name'], $link );
+			$message = sprintf( __( 'You have not activated the license for %1$s addon.', 'wp-travel' ), $premium_addon['item_name'] );
+
+			if ( ! is_multisite() || ( is_multisite() && 'toplevel_page_wp_travel_network_settings-network' != $screen->id ) ) {
+
+				if ( is_multisite() && 'toplevel_page_wp_travel_network_settings-network' != $screen->id ) {
+					$link    = admin_url( 'network/admin.php?page=wp_travel_network_settings#wp-travel-tab-content-license' );
+				} 
+				$message = rtrim( $message, '.' ) .  sprintf( __( ', go to <a href="%1$s"> settings </a> to activate your license.', 'wp-travel' ), $link );
+			}
 
 			printf( '<li class="%1$s"><p>%2$s</p></li>', $class, $message );
 		}
