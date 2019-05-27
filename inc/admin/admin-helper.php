@@ -12,6 +12,7 @@
  */
 function wp_travel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
+	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
 	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
 		wp_travel_upgrade_to_110();
 	}
@@ -370,16 +371,35 @@ function wp_travel_doc_support_footer_custom_text() {
 
 add_action( 'current_screen', 'wp_travel_doc_support_footer_custom_text' );
 
-function wp_travel_clear_booking_count_transient( $post_id ) {
-	if ( ! $post_id ) {
+function wp_travel_clear_booking_count_transient( $booking_id ) {
+	if ( ! $booking_id ) {
 		return;
 	}
 	global $post_type;
 	if ( 'itinerary-booking' !== $post_type ) {
 		return;
 	}
-	$itinerary_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
-	delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	$trip_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	do_action( 'wp_travel_action_after_trash_booking', $booking_id ); // @since 2.0.3 to update current booking inventory data.
+}
+
+/**
+ * Restore Booking on untrash booking.
+ * 
+ * @param Number $booking_id
+ */
+function wp_travel_clear_booking_count_transient_untrash( $booking_id ) {
+	if ( ! $booking_id ) {
+		return;
+	}
+	global $post_type;
+	if ( 'itinerary-booking' !== $post_type ) {
+		return;
+	}
+	$trip_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	do_action( 'wp_travel_action_after_untrash_booking', $booking_id ); // @since 2.0.3 to update current booking inventory data.
 }
 
 function wp_travel_get_booking_count( $itinerary_id ) {
