@@ -1912,13 +1912,15 @@ function wp_travel_get_inquiry_link() {
 
 	ob_start();
 
+	$enquiry_text = apply_filters( 'wp_travel_trip_enquiry_label', __( 'Trip Enquiry', 'wp-travel' ) );
+
 	?>
 
 		<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 			<span class="wp-travel-booking-enquiry">
 				<span class="dashicons dashicons-editor-help"></span>
 				<span>
-					<?php esc_html_e( 'Trip Enquiry', 'wp-travel' ); ?>
+					<?php echo esc_html( $enquiry_text ); ?>
 				</span>
 			</span>
 		</a>
