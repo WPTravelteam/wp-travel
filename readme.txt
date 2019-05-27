@@ -230,7 +230,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.2 =
-Release Date: 26th May, 2019
+Release Date: 27th May, 2019
 
 Enhancement:
 

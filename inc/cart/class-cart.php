@@ -202,7 +202,7 @@ class WP_Travel_Cart {
 		$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 		$this->items[ $cart_item_id ]['pax']        = $pax;
 		$this->items[ $cart_item_id ]['price_key']  = $price_key;
-		
+
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {
@@ -278,7 +278,7 @@ class WP_Travel_Cart {
 			$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 			$price_key     = $this->items[ $cart_item_id ]['price_key'];
 
-			$trip_price    = $this->items[ $cart_item_id ]['trip_price'];
+			$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 				$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
 				if ( $group_trip_price ) {
@@ -286,7 +286,7 @@ class WP_Travel_Cart {
 				}
 			}
 
-			$trip_price_partial      = $trip_price;
+			$trip_price_partial = $trip_price;
 			if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 				$payout_percent = wp_travel_get_payout_percent( $trip_id );
 
@@ -301,7 +301,7 @@ class WP_Travel_Cart {
 
 			$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
 
-			$this->items[ $cart_item_id ]['pax'] = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
+			$this->items[ $cart_item_id ]['pax']        = ( $max_available && $pax > $max_available ) ? $max_available : $pax;
 			$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 
 			if ( $trip_extras ) {
@@ -445,6 +445,10 @@ class WP_Travel_Cart {
 						$sale_price = isset( $trip_extras_data['extras_item_sale_price'] ) && ! empty( $trip_extras_data['extras_item_sale_price'] ) ? $trip_extras_data['extras_item_sale_price'] : false;
 						$unit       = isset( $trip_extras_data['extras_item_unit'] ) && ! empty( $trip_extras_data['extras_item_unit'] ) ? $trip_extras_data['extras_item_unit'] : 0;
 
+						// Filter to add the custom price for the tour extras.
+						$price      = apply_filters( 'wp_travel_trip_extras_class_cart_custom_prices', $price, $e_id, $trip );
+						$sale_price = apply_filters( 'wp_travel_trip_extras_class_cart_custom_sale_prices', $sale_price, $e_id, $trip );
+						// Filter to add the custom price for the tour extras.
 						if ( $sale_price ) {
 							$price = $sale_price;
 						}
@@ -473,7 +477,7 @@ class WP_Travel_Cart {
 					$discount_amount_partial = 0;
 				}
 			} elseif ( 'percentage' === $d_typ ) {
-				$discount_amount = wp_travel_get_formated_price( ( $sub_total * $d_val ) / 100 );
+				$discount_amount         = wp_travel_get_formated_price( ( $sub_total * $d_val ) / 100 );
 				$discount_amount_partial = wp_travel_get_formated_price( ( $sub_total_partial * $d_val ) / 100 );
 			}
 		}
