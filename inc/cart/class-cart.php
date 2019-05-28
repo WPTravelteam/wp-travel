@@ -454,12 +454,23 @@ class WP_Travel_Cart {
 						}
 
 						$qty                = isset( $trip['trip_extras']['qty'][ $k ] ) && ! empty( $trip['trip_extras']['qty'][ $k ] ) ? $trip['trip_extras']['qty'][ $k ] : 1;
-						$trip_extras_total += wp_travel_get_formated_price( $price * $qty );
+						$extra_price        = wp_travel_get_formated_price( $price * $qty );
+						$trip_extras_total += $extra_price;
+						$trip_extras_total_partial = $extra_price;
+
+						// Trip extra partial calculation.
+						if ( function_exists( 'wp_travel_tour_extras_enable_partial' ) && wp_travel_tour_extras_enable_partial( $trip['trip_id'], $trip['price_key'] ) ) {
+							$payout_percent = wp_travel_get_payout_percent( $trip['trip_id'] );
+							if ( $payout_percent > 0 && $extra_price > 0 ) {
+								$trip_extras_total_partial = ( $extra_price * $payout_percent ) / 100;
+								$trip_extras_total_partial = wp_travel_get_formated_price( $trip_extras_total_partial );
+							}
+						}
 					}
 				}
 
 				$sub_total         += $trip_extras_total;
-				$sub_total_partial += $trip_extras_total;
+				$sub_total_partial += $trip_extras_total_partial;
 			endforeach;
 		}
 

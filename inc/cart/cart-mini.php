@@ -73,12 +73,12 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 					$price_per = 'trip-default';
 
-					if ( isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ) {
-						$price_per = wp_travel_get_pricing_variation_price_per( $trip['trip_id'], $trip['price_key'] );
+					if ( ! empty( $price_key ) ) {
+						$price_per = wp_travel_get_pricing_variation_price_per( $trip_id, $price_key );
 					}
 
 					if ( 'trip-default' === $price_per ) {
-						$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
+						$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
 					}
 
 					if ( 'group' === $price_per ) {
@@ -102,7 +102,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						</td>
 					</tr>
 					
-					<?php do_action( 'wp_travel_tour_extras_mini_cart_block', $trip_extras, $cart_id ); ?>
+					<?php do_action( 'wp_travel_tour_extras_mini_cart_block', $trip_extras, $cart_id, $trip_id, $price_key ); ?>
 
 				<?php endforeach; ?>
 

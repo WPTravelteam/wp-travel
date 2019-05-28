@@ -829,8 +829,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 
 	$itineraries = wp_travel_get_tour_extras_array();
 	ob_start();
-	?>
-	<?php
+
 	if ( $table_row ) :
 		?>
 		<td>
@@ -841,7 +840,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 		<?php
 	endif;
 	?>
-		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+		<label for=""><?php echo esc_html__( 'Trip Extras', 'wp-travel' ); ?></label>
 	<?php
 	if ( $table_row ) :
 		?>
@@ -912,8 +911,11 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 	else :
 		?>
 		</div></div>
-	<?php endif; ?>
-	<?php
+		<?php
+	endif;
+	// @since 2.0.3
+	do_action( 'wp_travel_trip_extras_fields', $post_id, $context, $fetch_key, $table_row );
+
 	$data = ob_get_clean();
 	return $data;
 

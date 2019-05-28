@@ -229,12 +229,25 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.3 =
+Release Date:
+
+Enhancement:
+
+* Filter added to customize trip enquiry label on price unavailable label.
+* Added partial payment support for trip extra items price.
+
+Fixes:
+
+* Hide upsell message for trip extras. It is displaying in pricing option even pro is activated.
+* Price per text translation issue fixes.
+
 = 2.0.2 =
 Release Date: 27th May, 2019
 
 Enhancement:
 
-* Added Multisite License compatibility. Now One single license is valid for all sub sites using network activate plugin and activate license on network. This will work for all subsites.
+* Added Multisite License compatibility. Now One single license is valid for all subsites using network activate the plugin and activate a license on a network. This will work for all subsites.
 * WPML compatibility added for settings strings.
 * Open All and Close All travelers info added in checkout page.
 * Filter added to change admin booking submenu positions.
