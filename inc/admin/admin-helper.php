@@ -386,7 +386,7 @@ function wp_travel_clear_booking_count_transient( $booking_id ) {
 
 /**
  * Restore Booking on untrash booking.
- * 
+ *
  * @param Number $booking_id
  */
 function wp_travel_clear_booking_count_transient_untrash( $booking_id ) {
@@ -771,47 +771,45 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 	// Check Tour Extras Count.
 	if ( 0 == $tour_extras->publish ) {
 		ob_start();
-		?>
-		<?php
+
 		if ( $table_row ) :
 			?>
 			<td>
 			<?php
-else :
-	?>
-			<div class="one-third"><?php endif; ?>
+		else :
+			?>
+			<div class="one-third">
+			<?php
+		endif;
+		?>
 		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
 		<?php
 		if ( $table_row ) :
 			?>
 			</td>
-			<?php
-else :
-	?>
-			</div><?php endif; ?>
-
-		<?php
-		if ( $table_row ) :
-			?>
 			<td>
 			<?php
-else :
-	?>
-			<div class="two-third"><?php endif; ?>
-		<?php echo sprintf( '<p class="wp-travel-trip-extra-notice good" id="pass-strength-result"><span class="dashicons dashicons-info"></span> Please <a href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>' ); ?>
+		else :
+			?>
+			</div>
+			<div class="two-third">
+			<?php
+		endif;
+		?>
+		<p class="wp-travel-trip-extra-notice good" id="pass-strength-result"><span class="dashicons dashicons-info"></span> Please <a href="post-new.php?post_type=tour-extras">Click here </a> to add Trip Extra first.</p>
 		<?php
 		if ( $table_row ) :
 			?>
 			</td>
 			<?php
-else :
-	?>
+		else :
+			?>
 			</div>
-	<?php
+			<?php
 		endif;
 
-			$data = ob_get_clean();
-			return $data;
+		$data = ob_get_clean();
+		return $data;
 	}
 
 	if ( empty( $post_id ) || empty( $fetch_key ) ) {
@@ -835,11 +833,14 @@ else :
 	<?php
 	if ( $table_row ) :
 		?>
-		<td><?php
+		<td>
+		<?php
 	else :
+		?>
+		<div><div class="one-third">
+		<?php
+	endif;
 	?>
-		<div><div class="one-third"><?php
-	endif; ?>
 		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
 	<?php
 	if ( $table_row ) :
@@ -847,58 +848,62 @@ else :
 		</td><td>
 		<?php
 	else :
+		?>
+		</div><div class="two-third">
+		<?php
+	endif;
 	?>
-		</div><div class="two-third"><?php
-	endif; ?>
 	
-		<div class="custom-multi-select">
-			<?php
-			$count_options_data   = count( $restricted_trips );
-			$count_itineraries    = count( $itineraries );
-			$multiple_checked_all = '';
-			if ( $count_options_data == $count_itineraries ) {
-				$multiple_checked_all = 'checked=checked';
-			}
+	<div class="custom-multi-select">
+		<?php
+		$count_options_data   = count( $restricted_trips );
+		$count_itineraries    = count( $itineraries );
+		$multiple_checked_all = '';
+		if ( $count_options_data == $count_itineraries ) {
+			$multiple_checked_all = 'checked=checked';
+		}
 
-			$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
-			if ( $count_itineraries > 0 ) {
-				$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
-			}
-			?>
-			<span class="select-main">
-				<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span>
-				<span class="carret"></span>
-				<span class="close"></span>
-				<ul class="wp-travel-multi-inner">
-					<li class="wp-travel-multi-inner">
-						<label class="checkbox wp-travel-multi-inner">
-							<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel' ); ?>
+		$multiple_checked_text = __( 'Select multiple', 'wp-travel' );
+		if ( $count_itineraries > 0 ) {
+			$multiple_checked_text = $count_options_data . __( ' item selected', 'wp-travel' );
+		}
+		?>
+		<span class="select-main">
+			<span class="selected-item"><?php echo esc_html( $multiple_checked_text ); ?></span>
+			<span class="carret"></span>
+			<span class="close"></span>
+			<ul class="wp-travel-multi-inner">
+				<li class="wp-travel-multi-inner">
+					<label class="checkbox wp-travel-multi-inner">
+						<input <?php echo esc_attr( $multiple_checked_all ); ?> type="checkbox"  id="wp-travel-multi-input-1" class="wp-travel-multi-inner multiselect-all" value="multiselect-all"><?php esc_html_e( 'Select all', 'wp-travel' ); ?>
+					</label>
+				</li>
+				<?php
+				foreach ( $itineraries as $key => $iti ) {
+
+					$checked            = '';
+					$selecte_list_class = '';
+
+					if ( in_array( $key, $restricted_trips ) ) {
+						$checked            = 'checked=checked';
+						$selecte_list_class = 'selected';
+					}
+					?>
+					<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ); ?>">
+						<label class="checkbox wp-travel-multi-inner ">
+							<input <?php echo esc_attr( $checked ); ?>  name="<?php echo esc_attr( $name ); ?>" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $key ); ?>">  <?php echo esc_html( $iti ); ?>
 						</label>
 					</li>
-					<?php
-					foreach ( $itineraries as $key => $iti ) {
-
-						$checked            = '';
-						$selecte_list_class = '';
-
-						if ( in_array( $key, $restricted_trips ) ) {
-							$checked            = 'checked=checked';
-							$selecte_list_class = 'selected';
-						}
-						?>
-						<li class="wp-travel-multi-inner <?php echo esc_attr( $selecte_list_class ); ?>">
-							<label class="checkbox wp-travel-multi-inner ">
-								<input <?php echo esc_attr( $checked ); ?>  name="<?php echo esc_attr( $name ); ?>" type="checkbox" id="wp-travel-multi-input-<?php echo esc_attr( $key ); ?>" class="wp-travel-multi-inner multiselect-value" value="<?php echo esc_attr( $key ); ?>">  <?php echo esc_html( $iti ); ?>
-							</label>
-						</li>
-					<?php } ?>
-				</ul>
-			</span>
+				<?php } ?>
+			</ul>
+		</span>
+		<?php if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) : ?>
 			<p class="description">
 				<?php printf( __( 'Need advance Trip Extras options? %1$s GET PRO%2$s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '</a>' ); ?>
 			</p>
+		<?php endif; ?>
 
-		</div>
+	</div>
 	<?php
 	if ( $table_row ) :
 		?>

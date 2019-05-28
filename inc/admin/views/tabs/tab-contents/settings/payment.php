@@ -71,7 +71,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 							</div>
 						</div>
 					</div>
-					<input type="hidden" name="sorted_gateways[]" value="<?php echo $gateway ?>" >
+					<input type="hidden" name="sorted_gateways[]" value="<?php echo esc_attr( $gateway ); ?>" >
 				<?php endforeach; ?>
 				</div>
 			</div>
