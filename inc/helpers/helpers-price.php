@@ -38,34 +38,34 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 		// Single pricing option.
 		$price_per_fields = wp_travel_get_price_per_fields();
 
-		$per_person_text = get_post_meta( $trip_id, 'wp_travel_price_per', true );
-		if ( ! $per_person_text ) {
-			$per_person_text = 'person';
+		$per_person_key = get_post_meta( $trip_id, 'wp_travel_price_per', true );
+		if ( ! $per_person_key ) {
+			$per_person_key = 'person';
 		}
 
 		if ( true === $return_key ) {
-			return $per_person_text;
+			return $per_person_key;
 		}
 
-		return $price_per_fields[ $per_person_text ];
+		return $price_per_fields[ $per_person_key ];
 
 	} elseif ( 'multiple-price' === $pricing_option_type ) {
 		// multiple pricing option.
 		$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
 		if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
 			$price_per_fields      = wp_travel_get_pricing_variation_options();
-			$pricing_default_types = wp_travel_get_pricing_variation_options();
 
 			foreach ( $pricing_data as $p_ky => $pricing ) :
 				$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
 				$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
-				$per_person_text      = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_default_types[ $pricing_type ];
+				$per_person_key      = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type;
 			endforeach;
+			
 			if ( true === $return_key ) {
-				return $per_person_text;
+				return $per_person_key;
 			}
 
-			return $price_per_fields[ $per_person_text ];
+			return $price_per_fields[ $per_person_key ];
 
 		}
 	}
