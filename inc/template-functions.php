@@ -873,7 +873,11 @@ function wp_travel_trip_map( $post_id ) {
 		$api_key = $settings['google_map_api_key'];
 	}
 
-	if ( '' != $api_key && $show_google_map ) {
+	$map_data = get_wp_travel_map_data();
+	$lat = isset( $map_data['lat'] ) ? $map_data['lat'] : '';
+	$lng = isset( $map_data['lng'] ) ? $map_data['lng'] : '';
+
+	if ( '' != $api_key && $show_google_map && ! empty( $lat ) && ! empty( $lng ) ) {
 		?>
 		<div class="wp-travel-map">
 			<div id="wp-travel-map" style="width:100%;height:300px"></div>
