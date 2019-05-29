@@ -185,7 +185,7 @@ wp_travel_print_notices();
 					</tr>
 					<tr class="child_products">
 						<td colspan="8">
-							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras, $cart_id ); ?>
+							<?php do_action( 'wp_travel_tour_extras_cart_block', $trip_extras, $cart_id, $trip_id ); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

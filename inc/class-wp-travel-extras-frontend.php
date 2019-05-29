@@ -115,7 +115,7 @@ class Wp_Travel_Extras_Frontend {
 		if ( is_array( $trip_extras ) && ! empty( $trip_extras ) ) :
 
 			if ( $this->is_extras_pro() ) {
-				do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras, $price_key, $trip_date );
+				do_action( 'wp_travel_extras_pro_extras_layout', $trip_extras, $price_key, $trip_date, $trip_id );
 			} else {
 				?>
 				<div class="wp_travel_tour_extras">

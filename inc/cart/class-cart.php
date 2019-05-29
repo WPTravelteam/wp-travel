@@ -446,8 +446,10 @@ class WP_Travel_Cart {
 						$unit       = isset( $trip_extras_data['extras_item_unit'] ) && ! empty( $trip_extras_data['extras_item_unit'] ) ? $trip_extras_data['extras_item_unit'] : 0;
 
 						// Filter to add the custom price for the tour extras.
-						$price      = apply_filters( 'wp_travel_trip_extras_class_cart_custom_prices', $price, $e_id, $trip );
-						$sale_price = apply_filters( 'wp_travel_trip_extras_class_cart_custom_sale_prices', $sale_price, $e_id, $trip );
+						$price      = apply_filters( 'wp_travel_trip_extras_custom_prices', $price, $e_id, $trip['trip_id'] );
+						$sale_price = apply_filters( 'wp_travel_trip_extras_custom_sale_prices', $sale_price, $e_id, $trip['trip_id'] );
+						// Filter to add the custom price for the tour extras.
+
 						// Filter to add the custom price for the tour extras.
 						if ( $sale_price ) {
 							$price = $sale_price;
