@@ -714,14 +714,15 @@ function wp_travel_get_min_price_key( $pricing_options ) {
 	return $price_key;
 }
 
-function wp_travel_get_formated_price( $price, $round = 2 ) {
+function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
 	if ( ! $price ) {
 		return;
 	}
-
-	$sep = apply_filters( 'wp_travel_price_thousand_seperator', '' );
-
-	return number_format( $price, $round, '.', $sep );
+	$settings          = wp_travel_get_settings();
+	$thousand_separator = apply_filters( 'wp_travel_price_thousand_seperator', $settings['thousand_separator'] );
+	$decimal_separator  = $settings['decimal_separator'];
+	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
+	return  number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 }
 
 /**
@@ -735,6 +736,7 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 
 	$filter_name = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
 	$price_class = 'wp-travel-trip-price-figure';
+	$currency_symbol = apply_filters( 'wp_travel_display_currency_symbol', wp_travel_get_currency_symbol() );
 	if ( $regular_price ) {
 		$filter_name = 'wp_travel_itinerary_price';
 		$price_class = 'wp-travel-regular-price-figure';
@@ -746,30 +748,29 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
 	$price              = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 	// End of Price Format.
-	// $currency_element = '<span class="wp-travel-trip-currency">' . wp_travel_get_currency_symbol() . '</span>';
-	// $price_element = '<span class="' . $price_class . '">' . esc_html( wp_travel_get_formated_price( $price ) ) . '</span>';
+
 	ob_start();
 	switch ( $currency_position ) {
 		case 'left':
 			?>
-			<span class="wp-travel-trip-currency"><?php echo esc_html( wp_travel_get_currency_symbol() ); ?></span><span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+			<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span><span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
 			<?php
 			break;
 		case 'left_with_space':
 			?>
-			<span class="wp-travel-trip-currency"><?php echo esc_html( wp_travel_get_currency_symbol() ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+			<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
 			<?php
 			// $value = sprintf( '%s %s', $currency_element, $price_element );
 			break;
 		case 'right':
 			?>
-			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wp-travel-trip-currency"><?php echo esc_html( wp_travel_get_currency_symbol() ); ?></span>
+			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
 			<?php
 			// $value = sprintf( '%s%s', $price_element, $currency_element );
 			break;
 		case 'right_with_space':
 			?>
-			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wp-travel-trip-currency"><?php echo esc_html( wp_travel_get_currency_symbol() ); ?></span>
+			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
 			<?php
 			// $value = sprintf( '%s %s', $price_element, $currency_element );
 			break;
@@ -777,7 +778,7 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 	$content = ob_get_contents();
 	ob_end_clean();
 
-	return apply_filters( $filter_name, $content, wp_travel_get_currency_symbol(), $price );
+	return apply_filters( $filter_name, $content, $currency_symbol, $price );
 }
 
 function wp_travel_is_taxable() {
