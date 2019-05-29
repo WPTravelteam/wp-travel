@@ -58,9 +58,15 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 			foreach ( $pricing_data as $p_ky => $pricing ) :
 				$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
 				$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
-				$per_person_key      = ( 'custom' === $pricing_type ) ? $pricing_custom_label : $pricing_type;
+
+				$per_person_key      = $pricing_type;
+				if ( 'custom' === $pricing_type ) {
+					$per_person_key = $pricing_custom_label;
+					// also append this key value in $price_per_fields.
+					$price_per_fields[ $per_person_key ] = $per_person_key;
+				}
 			endforeach;
-			
+
 			if ( true === $return_key ) {
 				return $per_person_key;
 			}
