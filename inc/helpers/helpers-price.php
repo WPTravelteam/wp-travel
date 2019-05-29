@@ -529,8 +529,7 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_r
 			endforeach;
 		}
 	}
-
-	return $trip_price;
+	return apply_filters( 'wp_travel_trip_price', $trip_price, $trip_id, $price_key );
 }
 // End of Migrated functions from inc/helpers.php / These prices are only for display.
 
