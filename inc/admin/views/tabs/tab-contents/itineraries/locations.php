@@ -92,9 +92,8 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 			if ( '' != $api_key ) :
 				?>
 				<div class="map-wrap">
-					<input id="search-input" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
+					<input id="search-input" name="wp_travel_location" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
 					<div id="gmap" class="map-inside-map"></div>
-					<input type="hidden" name="wp_travel_location" id="wp-travel-location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
 					<input type="hidden" name="wp_travel_lat" id="wp-travel-lat" value="<?php echo esc_html( $map_data['lat'] ); ?>" >
 					<input type="hidden" name="wp_travel_lng" id="wp-travel-lng" value="<?php echo esc_html( $map_data['lng'] ); ?>" >
 					</div>

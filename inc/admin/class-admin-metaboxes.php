@@ -475,6 +475,10 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_location']    = isset( $_POST['wp_travel_location'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_location'] ) ) : '';
 		$trip_meta['wp_travel_lat']         = isset( $_POST['wp_travel_lat'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_lat'] ) ) : '';
 		$trip_meta['wp_travel_lng']         = isset( $_POST['wp_travel_lng'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_lng'] ) ) : '';
+		if ( empty( $trip_meta['wp_travel_location'] ) ) {
+			$trip_meta['wp_travel_lat'] = '';
+			$trip_meta['wp_travel_lng'] = '';
+		}
 		$trip_meta['wp_travel_location_id'] = isset( $_POST['wp_travel_location_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_location_id'] ) ) : '';
 
 		$trip_meta['wp_travel_fixed_departure']                = isset( $_POST['wp_travel_fixed_departure'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_fixed_departure'] ) ) : 'no';
