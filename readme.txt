@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.2
+Tested up to: 5.2.1
 Requires PHP: 5.5
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,7 +230,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.3 =
-Release Date:
+Release Date: 2nd June, 2019
 
 Enhancement:
 
@@ -241,6 +241,10 @@ Fixes:
 
 * Hide upsell message for trip extras. It is displaying in pricing option even pro is activated.
 * Price per text translation issue fixes.
+* Pricing options custom pricing label translation issue fixes.
+* Fixes for group discount ajax response price.
+* Map spacing issue if No map location is not set.
+* Minor layout issue fixes.
 
 = 2.0.2 =
 Release Date: 27th May, 2019

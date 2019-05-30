@@ -434,6 +434,7 @@ class WP_Travel_Cart {
 				$sub_total_partial += $single_trip_total_partial;
 
 				$trip_extras_total = 0;
+				$trip_extras_total_partial = 0;
 
 				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) && isset( $trip['trip_extras']['id'] ) && is_array( $trip['trip_extras']['id'] ) ) {
 
@@ -450,7 +451,6 @@ class WP_Travel_Cart {
 						$sale_price = apply_filters( 'wp_travel_trip_extras_custom_sale_prices', $sale_price, $e_id, $trip['trip_id'] );
 						// Filter to add the custom price for the tour extras.
 
-						// Filter to add the custom price for the tour extras.
 						if ( $sale_price ) {
 							$price = $sale_price;
 						}

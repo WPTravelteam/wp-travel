@@ -53,13 +53,13 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 		// multiple pricing option.
 		$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
 		if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
-			$price_per_fields      = wp_travel_get_pricing_variation_options();
+			$price_per_fields = wp_travel_get_pricing_variation_options();
 
 			foreach ( $pricing_data as $p_ky => $pricing ) :
 				$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
 				$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
 
-				$per_person_key      = $pricing_type;
+				$per_person_key = $pricing_type;
 				if ( 'custom' === $pricing_type ) {
 					$per_person_key = $pricing_custom_label;
 					// also append this key value in $price_per_fields.
@@ -711,31 +711,40 @@ function wp_travel_get_min_price_key( $pricing_options ) {
 			$price_key = $pricing_option['price_key'];
 		}
 	}
-	return $price_key;
+	return apply_filters( 'wp_travel_min_price_key', $price_key, $pricing_options ); // Filter @since 2.0.3.
 }
 
+/**
+ * Used For Calculation purpose. for display purpose use wp_travel_get_formated_price_currency.
+ */
 function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
 	if ( ! $price ) {
 		return;
 	}
-	$settings          = wp_travel_get_settings();
-	$thousand_separator = apply_filters( 'wp_travel_price_thousand_seperator', $settings['thousand_separator'] );
+	$settings           = wp_travel_get_settings();
+	$thousand_separator = '';
 	$decimal_separator  = $settings['decimal_separator'];
 	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
-	return  number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
+	return number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 }
 
 /**
  * Currency position with price
  *
- * @since 2.0.1
+ * @param Number  $price         Price.
+ * @param Boolean $regular_price Is price regular or sale price.
+ * @param String  $price_key     Price key of the price. It is only required for some customization.
+ *
+ * @since 2.0.1 / 2.0.3
+ *
+ * @return Mixed
  */
-function wp_travel_get_formated_price_currency( $price, $regular_price = false ) {
+function wp_travel_get_formated_price_currency( $price, $regular_price = false, $price_key = '' ) {
 	$settings          = wp_travel_get_settings();
 	$currency_position = isset( $settings['currency_position'] ) ? $settings['currency_position'] : 'left';
 
-	$filter_name = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
-	$price_class = 'wp-travel-trip-price-figure';
+	$filter_name     = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
+	$price_class     = 'wp-travel-trip-price-figure';
 	$currency_symbol = apply_filters( 'wp_travel_display_currency_symbol', wp_travel_get_currency_symbol() );
 	if ( $regular_price ) {
 		$filter_name = 'wp_travel_itinerary_price';
@@ -748,7 +757,6 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
 	$price              = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 	// End of Price Format.
-
 	ob_start();
 	switch ( $currency_position ) {
 		case 'left':
@@ -760,19 +768,16 @@ function wp_travel_get_formated_price_currency( $price, $regular_price = false )
 			?>
 			<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
 			<?php
-			// $value = sprintf( '%s %s', $currency_element, $price_element );
 			break;
 		case 'right':
 			?>
 			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
 			<?php
-			// $value = sprintf( '%s%s', $price_element, $currency_element );
 			break;
 		case 'right_with_space':
 			?>
 			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
 			<?php
-			// $value = sprintf( '%s %s', $price_element, $currency_element );
 			break;
 	}
 	$content = ob_get_contents();

@@ -66,6 +66,12 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// Localized varialble.
 			$wp_travel = array(
 				'currency_symbol' => wp_travel_get_currency_symbol(),
+				'currency_position' => $settings['currency_position'],
+				'thousand_separator' => $settings['thousand_separator'],
+				'decimal_separator' => $settings['decimal_separator'],
+				'number_of_decimals' => $settings['number_of_decimals'],
+
+				'prices'          => wp_reavel_get_itinereries_prices_array(), // why this ?
 				'prices'          => wp_reavel_get_itinereries_prices_array(), // why this ?
 				'locale'          => $locale,
 				'nonce'           => wp_create_nonce( 'wp_travel_frontend_security' ),
