@@ -86,13 +86,17 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						$single_trip_total         = wp_travel_get_formated_price( $trip_price );
 						$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial );
 
+						$price_per_label = '( ' . $pax . __( ' Pax' ) . ' )';
+
+					} else {
+						$price_per_label = ' × ' . $pax . ' /' . $pax_label;
 					}
 
 					?>
 
 					<tr class="cart_item">
 						<td class="product-name">
-							<?php echo esc_html( $pricing_name ); ?> &nbsp; <strong class="product-quantity">× <span class="wp-travel-cart-pax"><?php echo esc_html( $pax ); ?></span> <?php printf( $pax_label ); ?> </strong> 
+							<?php echo esc_html( $pricing_name ); ?> &nbsp; <strong class="product-quantity"> <span class="wp-travel-cart-pax"><?php echo esc_html( $price_per_label ); ?></span>  </strong> 
 						</td>
 						<td class="product-total text-right">
 							<span class="product-total-price amount" ><?php echo wp_travel_get_formated_price_currency( $single_trip_total ); ?></span>
