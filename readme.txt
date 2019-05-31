@@ -244,6 +244,7 @@ Fixes:
 * Pricing options custom pricing label translation issue fixes.
 * Fixes for group discount ajax response price.
 * Map spacing issue if No map location is not set.
+* Per group price fixes on cart page.
 * Minor layout issue fixes.
 
 = 2.0.2 =
