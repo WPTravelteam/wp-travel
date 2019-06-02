@@ -86,7 +86,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						$single_trip_total         = wp_travel_get_formated_price( $trip_price );
 						$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial );
 
-						$price_per_label = '( ' . $pax . __( ' Pax' ) . ' )';
+						$price_per_label = '( ' . $pax . __( ' Pax', 'wp-travel' ) . ' )';
 
 					} else {
 						$price_per_label = ' × ' . $pax . ' /' . $pax_label;
