@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 08:40:31+00:00\n"
+"POT-Creation-Date: 2019-06-02 17:02:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2160,7 +2160,7 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:172 inc/helpers.php:2288
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:176 inc/helpers.php:2288
 #: templates/content-cart.php:57 templates/content-cart.php:233
 msgid "Total"
 msgstr ""
@@ -2169,23 +2169,27 @@ msgstr ""
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:119
+#: inc/cart/cart-mini.php:89
+msgid " Pax"
+msgstr ""
+
+#: inc/cart/cart-mini.php:123
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:143
+#: inc/cart/cart-mini.php:147
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:144 templates/content-cart.php:216
+#: inc/cart/cart-mini.php:148 templates/content-cart.php:216
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:148 templates/content-cart.php:220
+#: inc/cart/cart-mini.php:152 templates/content-cart.php:220
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:185
+#: inc/cart/cart-mini.php:189
 msgid "Trip Book"
 msgstr ""
 
