@@ -26,8 +26,8 @@
 		?>
 		<div id="wp-travel-tab-content-<?php echo esc_attr( $key ); ?>" class="ui-state-active wp-travel-tab-content">
 			<h3 class="wp-travel-tab-content-title tab_content_title"><?php echo esc_attr( $tab['content_title'] ); ?></h3>
-			<?php do_action( 'wp_travel_tabs_content_' . $collection, $key, $args ); ?>
-			<?php do_action( 'wp_travel_tabs_content_' . $collection . '_' . $key, $key, $args ); // @since 1.9.0  ?>
+			<?php do_action( 'wp_travel_tabs_content_' . $collection . '_' . $key, $key, $args ); // @since 1.9.0 ?>
+			<?php wp_travel_do_deprecated_action( 'wp_travel_tabs_content_' . $collection, array( $key, $args ), '2.0.4', 'wp_travel_tabs_content_' . $collection . '_' . $key ); ?>
 		</div>
 		<?php endforeach; ?>
 

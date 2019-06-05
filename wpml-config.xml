@@ -38,6 +38,34 @@
 				</key>
 			</key>
 			<key name="wp_travel_gdpr_message"/>
+
+			<key name="booking_admin_template_settings">
+				<key name="admin_subject"/>
+				<key name="admin_title"/>
+				<key name="email_content"/>
+			</key>
+			<key name="booking_client_template_settings">
+				<key name="client_subject"/>
+				<key name="client_title"/>
+				<key name="email_content"/>
+			</key>
+
+			<key name="payment_admin_template_settings">
+				<key name="admin_subject"/>
+				<key name="admin_title"/>
+				<key name="email_content"/>
+			</key>
+			<key name="payment_client_template_settings">
+				<key name="client_subject"/>
+				<key name="client_title"/>
+				<key name="email_content"/>
+			</key>
+
+			<key name="enquiry_admin_template_settings">
+				<key name="admin_subject"/>
+				<key name="admin_title"/>
+				<key name="email_content"/>
+			</key>
 		</key>
 	</admin-texts>      
 </wpml-config>

@@ -20,7 +20,6 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function __construct() {
 
-		
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
 		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 );
 		add_filter( 'postbox_classes_' . WP_TRAVEL_POST_TYPE . '_wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', array( $this, 'add_clean_metabox_class' ) );
@@ -28,25 +27,6 @@ class WP_Travel_Admin_Metaboxes {
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
 		add_action( 'save_post', array( $this, 'save_meta_data' ) );
 		add_filter( 'wp_travel_localize_gallery_data', array( $this, 'localize_gallery_data' ) );
-
-		// Tabs.
-		$collection      = self::$post_type;
-		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
-		$wp_travel_tabs  = new WP_Travel_Admin_Tabs();
-		$tabs            = $wp_travel_tabs->list_by_collection( $collection );
-		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
-			foreach ( $tabs as $tab_key => $tab ) {
-				$filename          = str_replace( '_', '-', $tab_key ) . '.php';
-				$callback_file     = sprintf( '%sinc/admin/views/tabs/tab-contents/itineraries/%s', WP_TRAVEL_ABSPATH, $filename );
-				$callback_function = isset( $tab['callback'] ) ? $tab['callback'] : '';
-				if ( file_exists( $callback_file ) ) {
-					require_once $callback_file;
-				}
-				if ( ! empty( $callback_function ) && function_exists( $callback_function ) ) {
-					add_action( "{$tab_hook_prefix}_{$tab_key}", $callback_function, 12, 2 );
-				}
-			}
-		}
 
 	}
 
