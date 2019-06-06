@@ -198,7 +198,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_enqueue_style( 'wp-travel-admin-1-style', self::$assets_path . 'assets/css/wp-travel-admin-1' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
 			// Tab for settings page.
-			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network' );
+			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
 
 			// Register scripts.
 			wp_register_script( 'jquery-datepicker-lib', self::$assets_path . 'assets/js/lib/datepicker/datepicker.js', array( 'jquery' ), WP_TRAVEL_VERSION, true );

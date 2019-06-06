@@ -29,25 +29,6 @@ class WP_Travel_Admin_Settings {
 
 		self::$parent_slug = 'edit.php?post_type=itinerary-booking';
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
-
-		$collection      = self::$collection;
-		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
-		$wp_travel_tabs  = new WP_Travel_Admin_Tabs();
-		$tabs            = $wp_travel_tabs->list_by_collection( $collection );
-		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
-			foreach ( $tabs as $tab_key => $tab ) {
-				$filename          = str_replace( '_', '-', $tab_key ) . '.php';
-				$callback_file     = sprintf( '%sinc/admin/views/tabs/tab-contents/settings/%s', WP_TRAVEL_ABSPATH, $filename );
-				$callback_function = isset( $tab['callback'] ) ? $tab['callback'] : '';
-				if ( file_exists( $callback_file ) ) {
-					require_once $callback_file;
-				}
-				if ( ! empty( $callback_function ) && function_exists( $callback_function ) ) {
-					add_action( "{$tab_hook_prefix}_{$tab_key}", $callback_function, 12, 2 );
-				}
-			}
-		}
-
 		// Save Settings.
 		add_action( 'load-itinerary-booking_page_settings', array( $this, 'save_settings' ) );
 	}

@@ -43,7 +43,53 @@ function wp_traval_get_currency_symbol( $currency_code = null ) {
 	return wp_travel_get_currency_symbol( $currency_code );
 }
 
-function wp_travel_get_default_frontend_tabs(  $is_show_in_menu_query = false ) {
+function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
 	wp_travel_deprecated_function( 'wp_travel_get_default_frontend_tabs', '1.9.3', 'wp_travel_get_default_trip_tabs' );
 	return wp_travel_get_default_trip_tabs( $is_show_in_menu_query );
 }
+
+
+/**
+ * Runs a deprecated action with notice only if used.
+ *
+ * @since 2.0.4
+ * @param string $tag         The name of the action hook.
+ * @param array  $args        Array of additional function arguments to be passed to do_action().
+ * @param string $version     The version of WooCommerce that deprecated the hook.
+ * @param string $replacement The hook that should have been used.
+ * @param string $message     A message regarding the change.
+ */
+function wp_travel_do_deprecated_action( $tag, $args, $version, $replacement = null, $message = null ) {
+	if ( ! has_action( $tag ) ) {
+		return;
+	}
+
+	wp_travel_deprecated_hook( $tag, $version, $replacement, $message );
+	do_action_ref_array( $tag, $args );
+}
+
+/**
+ * Wrapper for deprecated hook so we can apply some extra logic.
+ *
+ * @since 2.0.4
+ * @param string $hook        The hook that was used.
+ * @param string $version     The version of WordPress that deprecated the hook.
+ * @param string $replacement The hook that should have been used.
+ * @param string $message     A message regarding the change.
+ */
+function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
+	// @codingStandardsIgnoreStart
+	if ( is_ajax() ) {
+		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
+
+		$message    = empty( $message ) ? '' : ' ' . $message;
+		$log_string = "{$hook} is deprecated since version {$version}";
+		$log_string .= $replacement ? "! Use {$replacement} instead." : ' with no alternative available.';
+
+		error_log( $log_string . $message );
+	} else {
+		_deprecated_hook( $hook, $version, $replacement, $message );
+	}
+	// @codingStandardsIgnoreEnd
+}
+

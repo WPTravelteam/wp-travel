@@ -26,26 +26,25 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	 */
 	public function __construct() {
 		$this->views_path = WP_TRAVEL_ABSPATH . 'inc/admin/extras/views/tabs/';
-		// Add coupons metabox.
+		// Add Extras metabox.
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
 		// Save Metabox data.
-		add_action( 'save_post', array( $this, 'save_coupons_metabox_data' ) );
-		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
+		add_action( 'save_post', array( $this, 'save_extras_metabox_data' ) );
+		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ), 9 );
 		add_filter( 'postbox_classes_' . self::$post_type . '_' . self::$post_type . '-detail', array( $this, 'add_clean_metabox_class' ), 30 );
-		add_action( 'wp_travel_tabs_content_' . self::$post_type, array( $this, 'tour_extras_general_tab_callback' ), 10, 2 );
 
 	}
 	/**
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( self::$post_type . '-detail', __( 'Trip Extras', 'wp-travel' ), array( $this, 'load_coupons_tab_template' ), self::$post_type, 'normal', 'high' );
+		add_meta_box( self::$post_type . '-detail', __( 'Trip Extras', 'wp-travel' ), array( $this, 'load_tour_extras_tab_template' ), self::$post_type, 'normal', 'high' );
 
 	}
 	/**
-	 * Load Coupons Tab Template.
+	 * Load Extras Tab Template.
 	 */
-	public function load_coupons_tab_template( $post ) {
+	public function load_tour_extras_tab_template( $post ) {
 
 		$args['post'] = $post;
 		WP_Travel()->tabs->load( self::$post_type, $args );
@@ -61,14 +60,25 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 		$tour_extras['tour_extras_general'] = array(
 			'tab_label'     => __( 'General', 'wp-travel' ),
 			'content_title' => __( 'General Settings', 'wp-travel' ),
+			'priority'      => 10,
+			'callback'      => 'wp_travel_tour_extras_general_tab_callback',
+			'icon'          => 'fa-sticky-note',
 		);
+		$tour_extras['tour_extras_gallery'] = array(
+			'tab_label'     => __( 'Gallery', 'wp-travel-tour-extras' ),
+			'content_title' => __( 'Gallery', 'wp-travel-tour-extras' ),
+			'priority'      => 20,
+			'callback'      => 'wp_travel_tour_extras_gallery_tab_callback',
+			'icon'          => 'fa-images',
+		);
+
 
 		$tabs[ self::$post_type ] = $tour_extras;
 		return apply_filters( 'wp_travel_tour_extras_tabs', $tabs );
 	}
 
 	/**
-	 * Callback Function for Coupons General Tabs.
+	 * Callback Function for Tour Extras General Tabs.
 	 *
 	 * @param  string $tab tab name 'General'.
 	 * @return Mixed
@@ -91,9 +101,9 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	}
 
 	/**
-	 * Save Coupons Metabox Data
+	 * Save Tour Extras Metabox Data
 	 */
-	public function save_coupons_metabox_data( $post_id ) {
+	public function save_extras_metabox_data( $post_id ) {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;

@@ -48,6 +48,28 @@ class WP_Travel_Admin_Tabs {
 		if ( empty( $tabs ) ) {
 			return false;
 		}
+
+		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
+		$tabs            = $this->list_by_collection( $collection );
+
+		$tab_content_directory = $collection;
+		if ( WP_TRAVEL_POST_TYPE == $collection && 'itineraries' != $collection ) { // directory must remain same if somebody changed their post type.
+			$tab_content_directory = 'itineraries';
+		}
+
+		if ( is_array( $tabs ) && count( $tabs ) > 0 ) {
+			foreach ( $tabs as $tab_key => $tab ) {
+				$filename          = str_replace( '_', '-', $tab_key ) . '.php';
+				$callback_file     = sprintf( '%sinc/admin/views/tabs/tab-contents/%s/%s', WP_TRAVEL_ABSPATH, $tab_content_directory, $filename );
+				$callback_function = isset( $tab['callback'] ) ? $tab['callback'] : '';
+				if ( file_exists( $callback_file ) ) {
+					require_once $callback_file;
+				}
+				if ( ! empty( $callback_function ) && function_exists( $callback_function ) ) {
+					add_action( "{$tab_hook_prefix}_{$tab_key}", $callback_function, 12, 2 );
+				}
+			}
+		}
 		include sprintf( '%s/inc/admin/views/tabs/tabs.php', WP_TRAVEL_ABSPATH );
 	}
 
