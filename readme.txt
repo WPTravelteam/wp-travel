@@ -236,6 +236,8 @@ Fixes:
 * WPML Translation support for email contents.
 * Old hooks deprecated.
 * Tab enhancement and issue fixes for not able to modify callback tab function using a filter.
+* Admin Email Settings tab open all and close all not working.
+* Missing tab icon on edit coupon page.
 
 = 2.0.3 =
 Release Date: 2nd June, 2019

@@ -60,11 +60,16 @@ do_action( 'wp_travel_before_content_start');
 							<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 						</header>
 					<?php endif; ?>					
-					<?php do_action( 'wp_travel_after_single_title', get_the_ID() ) ?>
+					<?php wp_travel_do_deprecated_action( 'wp_travel_after_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_single_trip_after_title' );  // @since 1.0.4 and deprecated in 2.0.4 ?>
+					<?php do_action( 'wp_travel_single_trip_after_title', get_the_ID() ) ?>
+					
 				</div>
 	        </div>
 	    </div>
-	    <?php do_action( 'wp_travel_after_single_itinerary_header', get_the_ID() ); ?>
+		<?php
+			wp_travel_do_deprecated_action( 'wp_travel_after_single_itinerary_header', array( get_the_ID() ), '2.0.4', 'wp_travel_single_trip_after_header' );  // @since 1.0.4 and deprecated in 2.0.4
+			do_action( 'wp_travel_single_trip_after_header', get_the_ID() );
+		?>
 	</div><!-- .summary -->
 </div><!-- #itinerary-<?php the_ID(); ?> -->
 

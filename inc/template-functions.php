@@ -5,6 +5,51 @@
  * @package wp-travel/inc/
  */
 
+// Hooks.
+add_action( 'wp_travel_single_trip_after_title', 'wp_travel_trip_price', 1 );
+add_action( 'wp_travel_single_trip_after_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'wp_travel_single_trip_after_booknow', 'wp_travel_single_keywords', 1 );
+add_action( 'wp_travel_single_trip_meta_list', 'wp_travel_single_location', 1 );
+add_action( 'wp_travel_single_trip_after_price', 'wp_travel_single_trip_rating', 10, 2 );
+add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_trip_facts' );
+add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents', 15 );
+add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
+add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
+add_filter( 'the_content', 'wp_travel_content_filter' );
+add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
+add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
+
+add_action( 'comment_post', 'wp_travel_add_comment_rating' );
+add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
+
+// Clear transients.
+add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
+
+add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
+
+add_filter( 'template_include', 'wp_travel_template_loader' );
+
+add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
+add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
+
+add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
+
+add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
+// Filters HTML.
+add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
+// add_action( 'parse_query', 'wp_travel_posts_filter' );
+add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
+add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
+add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
+add_action( 'save_post', 'wp_travel_clear_booking_transient' );
+add_filter( 'excerpt_more', 'wp_travel_excerpt_more' );
+add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
+add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );
+add_action( 'wp_travel_booking_princing_options_list', 'wp_travel_booking_tab_pricing_options_list' );
+add_action( 'wp_travel_booking_departure_date_list', 'wp_travel_booking_fixed_departure_listing' );
+add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );
+add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
+
 /**
  * Return template.
  *
@@ -226,7 +271,10 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 				</div>
 			<?php endif; ?>
 		</div>
-		<?php do_action( 'wp_travel_single_after_trip_price', $trip_id, $hide_rating ); ?>
+		<?php
+			wp_travel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );  // deprecated in 2.0.4
+			do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating );
+		?>
 	</div>
 
 	<?php
@@ -323,10 +371,7 @@ function wp_travel_single_excerpt( $post_id ) {
 	<div class="wp-travel-trip-meta-info">
 		  <ul>
 			<?php
-			/**
-			 * @since 1.0.4
-			 */
-			do_action( 'wp_travel_single_itinerary_before_trip_meta_list', $post_id );
+			wp_travel_do_deprecated_action( 'wp_travel_single_itinerary_before_trip_meta_list', array( $post_id ), '2.0.4', 'wp_travel_single_trip_meta_list' );  // @since 1.0.4 and deprecated in 2.0.4
 			?>
 			  <li>
 				   <div class="travel-info">
@@ -402,10 +447,8 @@ function wp_travel_single_excerpt( $post_id ) {
 			   </li>
 			<?php endif; ?>
 			<?php
-			/**
-			 * @since 1.0.4
-			 */
-			do_action( 'wp_travel_single_itinerary_after_trip_meta_list', $post_id );
+			wp_travel_do_deprecated_action( 'wp_travel_single_itinerary_after_trip_meta_list', array( $post_id ), '2.0.4', 'wp_travel_single_trip_meta_list' );  // @since 1.0.4 and deprecated in 2.0.4
+			do_action( 'wp_travel_single_trip_meta_list', $post_id );
 			?>
 		  </ul>
 	</div>
@@ -444,10 +487,9 @@ function wp_travel_single_excerpt( $post_id ) {
 			endif;
 		?>
 	<?php
-	/**
-	 * @since 1.0.4
-	 */
-	do_action( 'wp_travel_single_after_booknow', $post_id );
+	wp_travel_do_deprecated_action( 'wp_travel_single_after_booknow', array( $post_id ), '2.0.4', 'wp_travel_single_trip_after_booknow' );  // @since 1.0.4 and deprecated in 2.0.4
+	do_action( 'wp_travel_single_trip_after_booknow', $post_id ); // @since 2.0.4
+	
 }
 
 /**
@@ -1694,47 +1736,7 @@ function wp_travel_clear_booking_transient( $post_id ) {
 	do_action( 'wp_travel_after_deleting_booking_transient' );
 }
 
-// Hooks.
-add_action( 'wp_travel_after_single_title', 'wp_travel_trip_price', 1 );
-add_action( 'wp_travel_after_single_title', 'wp_travel_single_excerpt', 1 );
-add_action( 'wp_travel_single_after_booknow', 'wp_travel_single_keywords', 1 );
-add_action( 'wp_travel_single_itinerary_after_trip_meta_list', 'wp_travel_single_location', 1 );
-add_action( 'wp_travel_single_after_trip_price', 'wp_travel_single_trip_rating', 10, 2 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_trip_facts' );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_frontend_contents', 15 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_trip_map', 20 );
-add_action( 'wp_travel_after_single_itinerary_header', 'wp_travel_related_itineraries', 25 );
-add_filter( 'the_content', 'wp_travel_content_filter' );
-add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
-add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
 
-add_action( 'comment_post', 'wp_travel_add_comment_rating' );
-add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
-
-// Clear transients.
-add_action( 'wp_update_comment_count', 'wp_travel_clear_transients' );
-
-add_filter( 'comments_template', 'wp_travel_comments_template_loader' );
-
-add_filter( 'template_include', 'wp_travel_template_loader' );
-
-add_filter( 'excerpt_length', 'wp_travel_excerpt_length', 999 );
-add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
-
-add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
-
-add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
-// Filters HTML.
-add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
-// add_action( 'parse_query', 'wp_travel_posts_filter' );
-add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
-
-
-add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
-
-add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
-
-add_action( 'save_post', 'wp_travel_clear_booking_transient' );
 /**
  * Excerpt.
  *
@@ -1749,7 +1751,6 @@ function wp_travel_excerpt_more( $more ) {
 
 	return '...';
 }
-add_filter( 'excerpt_more', 'wp_travel_excerpt_more' );
 
 function wp_travel_wpkses_post_iframe( $tags, $context ) {
 	if ( 'post' === $context ) {
@@ -1763,7 +1764,6 @@ function wp_travel_wpkses_post_iframe( $tags, $context ) {
 	}
 	return $tags;
 }
-add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
 
 if ( ! function_exists( 'is_wp_travel_endpoint_url' ) ) :
 	/**
@@ -1809,8 +1809,6 @@ function wp_travel_prevent_endpoint_indexing() {
 		@header( 'X-Robots-Tag: noindex' ); // @codingStandardsIgnoreLine
 	}
 }
-add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );
-
 
 /**
  * wp_travel_booking_tab_pricing_options_list
@@ -2443,7 +2441,6 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 	}
 
 }
-add_action( 'wp_travel_booking_princing_options_list', 'wp_travel_booking_tab_pricing_options_list' );
 
 /**
  * WP Travel Fixed Departure listing
@@ -2681,8 +2678,6 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 	<?php
 }
 
-add_action( 'wp_travel_booking_departure_date_list', 'wp_travel_booking_fixed_departure_listing' );
-
 /**
  * Disable Jetpack Related Posts on Trips page
  *
@@ -2698,7 +2693,6 @@ function wp_travel_remove_jetpack_related_posts( $options ) {
 	}
 	return $options;
 }
-add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
 
 function wp_travel_get_header_image_tag( $html ) {
 	if ( ! is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) {
@@ -2752,5 +2746,3 @@ function wp_travel_get_header_image_tag( $html ) {
 		$html .= ' />';
 		return $html;
 }
-
-add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );
