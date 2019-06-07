@@ -236,7 +236,7 @@ class Wp_Travel_Shortcodes {
 			$atts = explode( ',', $atts['exclude'] );
 			if ( count( $atts ) > 0 ) {
 				foreach ( $search_widget_fields as $key => $filter ) {
-					if ( in_array( $filter['name'], $atts ) ) {
+					if ( isset( $filter['name'] ) && in_array( $filter['name'], $atts ) ) {
 						unset( $defaults[ $key ] );
 					}
 				}
