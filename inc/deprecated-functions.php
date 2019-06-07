@@ -79,7 +79,7 @@ function wp_travel_do_deprecated_action( $tag, $args, $version, $replacement = n
  */
 function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
 	// @codingStandardsIgnoreStart
-	if ( is_ajax() ) {
+	if ( defined( 'DOING_AJAX' ) ) {
 		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
 
 		$message    = empty( $message ) ? '' : ' ' . $message;
