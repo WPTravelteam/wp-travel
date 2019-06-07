@@ -56,8 +56,8 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 		<?php do_action( 'wp_travel_tab_content_before_booking_tamplate', $args ); ?>
 		<h3 class="wp-travel-section-title"><?php esc_html_e( 'Email Templates', 'wp-travel' ); ?></h3>
 		<div class="wp-collapse-open clearfix">
-			<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-			<a style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
+			<a href="#" class="open-all-link" data-parent="wp-travel-tab-content-email" ><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+			<a href="#" class="close-all-link" data-parent="wp-travel-tab-content-email" style="display:none;" ><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 		</div>
 
 		<div id="wp-travel-email-global-accordion" class="email-global-accordion tab-accordion wp-travel-accordion">

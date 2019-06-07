@@ -44,7 +44,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 
 
 	<?php
-		wp_travel_do_deprecated_action( 'wp_travel_payment_gateway_fields', array( $args ), '2.0.4', 'wp_travel_payment_gateway_fields_{$gateway}' );
+		wp_travel_do_deprecated_action( 'wp_travel_payment_gateway_fields', array( $args ), '2.0.4', 'wp_travel_payment_gateway_fields_{$gateway }' );
 
 		// @since 2.0.0
 		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
