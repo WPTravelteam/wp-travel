@@ -214,14 +214,13 @@ If you have any queries regarding the plugin and extensions then you can ask for
 == Screenshots ==
 1. Backend: Settings
 2. Backend: New trip, Description
-3. Backend: New trip, Itinerary
-4. Backend: New trip, Dates and prices
-5. Backend: New trip, Locations
-6. Backend: New trip, Tabs
+3. Backend: New trip, Dates and prices
+4. Backend: New trip, Locations
+5. Backend: New trip, Tabs
+6. Frontend: Trip detail
 7. Frontend: WP Travel Cart
 8. Frontend: WP Travel Checkout
-9. Frontend: Trip detail
-10. Frontend: Trip listing
+9. Frontend: Trip listing
 
 
 == Upgrade Notice ==
@@ -235,8 +234,8 @@ Release Date: 9th June, 2019
 Fixes:
 
 * WPML Translation support for email contents.
-* Old hooks depricated.
-* Tab enhancement and issue fixes for not able to modify callback tab function using filer.
+* Old hooks deprecated.
+* Tab enhancement and issue fixes for not able to modify callback tab function using a filter.
 
 = 2.0.3 =
 Release Date: 2nd June, 2019
