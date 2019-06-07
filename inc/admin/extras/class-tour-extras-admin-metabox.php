@@ -65,8 +65,8 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 			'icon'          => 'fa-sticky-note',
 		);
 		$tour_extras['tour_extras_gallery'] = array(
-			'tab_label'     => __( 'Gallery', 'wp-travel-tour-extras' ),
-			'content_title' => __( 'Gallery', 'wp-travel-tour-extras' ),
+			'tab_label'     => __( 'Gallery', 'wp-travel' ),
+			'content_title' => __( 'Gallery', 'wp-travel' ),
 			'priority'      => 20,
 			'callback'      => 'wp_travel_tour_extras_gallery_tab_callback',
 			'icon'          => 'fa-images',
