@@ -30,15 +30,15 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 			$locale = 'en';
 		}
 
-		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? true : false;
+		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? $this->field['attributes']['data-max-today'] : '';
 		$output   .= '<script>';
 		$output   .= 'jQuery(document).ready( function($){ ';
 		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
 		$output   .= "dateFormat: '" . $js_date_format . "',";
-		if ( $max_today ) {
+		if ( '' !== $max_today && true == $max_today ) {
 			$output .= 'maxDate: new Date()';
-		} else {
+		} else if( '' !== $max_today && false == $max_today ) {
 			$output .= 'minDate: new Date()';
 		}
 
