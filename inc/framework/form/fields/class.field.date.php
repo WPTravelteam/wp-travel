@@ -37,9 +37,9 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 							language: "' . $locale . '",';
 		$output   .= "dateFormat: '" . $js_date_format . "',";
 		if ( '' !== $max_today && true == $max_today ) {
-			$output .= 'maxDate: new Date()';
+			$output .= 'maxDate: new Date(),';
 		} else if( '' !== $max_today && false == $max_today ) {
-			$output .= 'minDate: new Date()';
+			$output .= 'minDate: new Date(),';
 		}
 
 		$output .= '});';
