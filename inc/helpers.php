@@ -675,40 +675,13 @@ function wp_travel_get_trip_duration( $post_id ) {
 		return;
 	}
 
-		$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
-		$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-		$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-
-		$show_end_date = wp_travel_booking_show_end_date();
+	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
+	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
+	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
 	if ( 'yes' === $fixed_departure ) :
-		$start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
-		$end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
-		?>
-
-		<div class="wp-travel-trip-time trip-fixed-departure">
-			<i class="wt-icon-regular wt-icon-calendar-alt"></i>
-			<span class="wp-travel-trip-duration">
-			<?php
-			if ( $start_date || $end_date ) :
-				$date_format = get_option( 'date_format' );
-				if ( ! $date_format ) :
-					$date_format = 'jS M, Y';
-					endif;
-				if ( '' !== $end_date && $show_end_date ) {
-					printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
-				} else {
-					printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
-				}
-
-				else :
-					esc_html_e( 'N/A', 'wp-travel' );
-				endif;
-				?>
-			</span>
-		</div>
-
-	<?php else : ?>
+		echo wp_travel_get_fixed_departure_date( $post_id );
+	else : ?>
 		<?php
 		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
@@ -2654,8 +2627,80 @@ function wp_travel_get_submenu() {
 	endif;
 
 	if ( ! class_exists( 'WP_Travel_Custom_Filters_Core' ) ) {
-		$all_submenus['bookings']['custom_filters']['callback']   = 'wp_travel_custom_filters_upsell';
+		$all_submenus['bookings']['custom_filters']['callback'] = 'wp_travel_custom_filters_upsell';
 	}
 
 	return apply_filters( 'wp_travel_submenus', $all_submenus );
+}
+
+
+/**
+ * Return all fixed departure date. single and multiple date.
+ *
+ * @since 2.0.5
+ */
+function wp_travel_get_fixed_departure_date( $trip_id ) {
+
+	$start_date    = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+	$end_date      = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+	$show_end_date = wp_travel_booking_show_end_date();
+	$date_format   = get_option( 'date_format' );
+	if ( ! $date_format ) :
+		$date_format = 'jS M, Y';
+	endif;
+
+	ob_start();
+	if ( 'single-price' === wp_travel_get_pricing_option_type() ) {
+		if ( $start_date || $end_date ) :
+			if ( $start_date || $end_date ) :
+
+				if ( '' !== $end_date && $show_end_date ) {
+					printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
+				} else {
+					printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
+				}
+			else :
+				esc_html_e( 'N/A', 'wp-travel' );
+			endif;
+		endif;
+
+	} elseif ( 'multiple-price' === wp_travel_get_pricing_option_type() ) {
+		$dates                = array();
+		$trip_pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+		if ( is_array( $trip_pricing_options ) && count( $trip_pricing_options ) > 0 ) {
+			foreach ( $trip_pricing_options as $price_key => $pricing ) :
+				// Set Vars.
+				$price_key       = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+				$available_dates = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
+				if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) { // multiple available dates
+					foreach ( $available_dates as $available_date ) {
+						$dates[] = $available_date;
+					}
+				}
+			endforeach;
+			$dates = array_unique( $dates );
+			usort( $dates, 'wp_travel_date_sort' );
+			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', false );
+
+			if ( $show_multiple ) {
+				echo '<ul>';
+				foreach ( $dates as $date ) {
+					printf( '<li>%s</li>', date_i18n( $date_format, strtotime( $date ) ) );
+				}
+				echo '</ul>';
+			} else {
+				if ( isset( $dates[0] ) ) {
+					printf( '%s', date_i18n( $date_format, strtotime( $dates[0] ) ) );
+				}
+			}
+		}
+	}
+
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
+}
+
+function wp_travel_date_sort( $a, $b ) {
+	return strtotime( $a ) - strtotime( $b );
 }

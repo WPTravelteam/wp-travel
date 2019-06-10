@@ -542,9 +542,7 @@ function wp_travel_single_location( $post_id ) {
 	}
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
-	$start_date    = get_post_meta( $post_id, 'wp_travel_start_date', true );
-	$end_date      = get_post_meta( $post_id, 'wp_travel_end_date', true );
-	$show_end_date = wp_travel_booking_show_end_date();
+	
 
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
@@ -580,34 +578,23 @@ function wp_travel_single_location( $post_id ) {
 			</div>
 		</li>
 	<?php endif; ?>
-	<?php if ( 'yes' === $fixed_departure ) : ?>
-		<?php if ( $start_date || $end_date ) : ?>
-			<li>
-				<div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
-				</div>
-				<div class="travel-info">
-					<span class="value">
-						<?php
-						if ( $start_date || $end_date ) :
-							$date_format = get_option( 'date_format' );
-							if ( ! $date_format ) :
-								$date_format = 'jS M, Y';
-								endif;
-							if ( '' !== $end_date && $show_end_date ) {
-								printf( '%s - %s', date_i18n( $date_format, strtotime( $start_date ) ), date_i18n( $date_format, strtotime( $end_date ) ) );
-							} else {
-								printf( '%s', date_i18n( $date_format, strtotime( $start_date ) ) );
-							}
-
-							else :
-								esc_html_e( 'N/A', 'wp-travel' );
-							endif;
-							?>
-					</span>
-				</div>
-			</li>
-		<?php endif; ?>
+	<?php if ( 'yes' === $fixed_departure ) :
+			if ( $dates = wp_travel_get_fixed_departure_date( $post_id ) ) {
+				?>
+				<li>
+					<div class="travel-info">
+						<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
+					</div>
+					<div class="travel-info">
+						<span class="value">
+							<?php echo $dates; ?>
+						</span>
+					</div>
+				</li>
+				<?php
+			}
+		?>
+		
 	<?php else : ?>
 		<?php if ( $trip_duration || $trip_duration_night ) : ?>
 			<li>

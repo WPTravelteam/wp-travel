@@ -228,6 +228,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.5=
+Release Date: 
+
+Enhancement:
+
+* Added Multiple pricing available dates in trip and related trip page.
+
 = 2.0.4=
 Release Date: 9th June, 2019
 
