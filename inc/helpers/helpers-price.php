@@ -82,7 +82,7 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
  * Check sale price enable or not.
  *
  * @param Number $post_id Current post id.
- * @since 1.0.5 Modified in 2.0.1
+ * @since 1.0.5 Modified in 2.0.1, 2.0.5
  */
 function wp_travel_is_enable_sale( $post_id ) {
 	if ( ! $post_id ) {
@@ -104,6 +104,8 @@ function wp_travel_is_enable_sale( $post_id ) {
 			}
 		}
 	}
+
+	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $post_id, $pricing_option );
 
 	if ( $enable_sale ) {
 		return true;

@@ -20,7 +20,7 @@ class WP_Travel_Itinerary {
 		return $this->post;
 	}
 
-	function is_sale_enabled() {
+	function is_sale_enabled() { // depricated. use wp_travel_is_enable_sale() instead.
 		$sale_enabled = get_post_meta( $this->post->ID, 'wp_travel_enable_sale', true );
 		if ( false !== $sale_enabled && '1' === $sale_enabled ) {
 			return true;

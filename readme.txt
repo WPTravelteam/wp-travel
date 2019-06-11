@@ -90,7 +90,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * **Tour Extras:** It allows you add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has five additional payment gateway. [View all 10 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has ten additional payment gateway. [View all 10 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -234,6 +234,10 @@ Release Date:
 Enhancement:
 
 * Added Multiple pricing available dates in trip and related trip page.
+
+Fixes:
+
+* Trip offer not working for multiple pricing option.
 
 = 2.0.4=
 Release Date: 9th June, 2019
