@@ -105,7 +105,7 @@ function wp_travel_is_enable_sale( $post_id ) {
 		}
 	}
 
-	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $post_id, $pricing_option );
+	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $post_id, $pricing_option ); // Filter since 2.0.5.
 
 	if ( $enable_sale ) {
 		return true;
