@@ -2701,6 +2701,20 @@ function wp_travel_get_fixed_departure_date( $trip_id ) {
 	return $content;
 }
 
+/**
+ * Custom Function to sort date array.
+ *
+ * @since 2.0.5
+ */
 function wp_travel_date_sort( $a, $b ) {
 	return strtotime( $a ) - strtotime( $b );
+}
+
+/**
+ * Used to display price per field in single trip page main price, related trip and archive.
+ *
+ * @since 2.0.5
+ */
+function wp_travel_hide_price_per_field( $trip_id = null, $price_key = null ) {
+	return apply_filters( 'wp_travel_hide_per_person', false, $trip_id, $price_key );
 }

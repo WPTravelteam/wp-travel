@@ -234,10 +234,14 @@ Release Date:
 Enhancement:
 
 * Added Multiple pricing available dates in trip and related trip page.
+* Function wp_travel_get_min_price_key enhanced. Now only trip id param is used to return min price key.
+* Hook added to hide price per text in Trip page, related trip section and trip archive page. 
 
 Fixes:
 
 * Trip offer not working for multiple pricing option.
+* Bank Deposit not working in wp travel dashboard.
+* Fixed available date shows N/A in case of multiple date. 
 
 = 2.0.4=
 Release Date: 9th June, 2019

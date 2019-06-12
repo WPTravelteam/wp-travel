@@ -236,9 +236,7 @@ function wp_travel_wrapper_end() {
 function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 	$settings = wp_travel_get_settings();
 
-	$trip_pricing_options_data = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
-
-	$min_price_key = wp_travel_get_min_price_key( $trip_pricing_options_data );
+	$min_price_key = wp_travel_get_min_price_key( $trip_id );
 	$regular_price = wp_travel_get_actual_trip_price( $trip_id, $min_price_key, true ); // Third param will return regular price if sale price isn't enabled.
 	$trip_price    = wp_travel_get_actual_trip_price( $trip_id, $min_price_key ); // This is actual price.
 
@@ -246,7 +244,10 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $trip_id, $min_price_key );
+	$price_per_text = wp_travel_get_price_per_text( $trip_id, $min_price_key );
+
+	$hide_price_per = wp_travel_hide_price_per_field( $trip_id );
+
 	?>
 
 	<div class="wp-detail-review-wrap">
@@ -264,8 +265,8 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 						<ins>
 							<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
 						</ins>
-						<?php if ( ! empty( $per_person_text ) ) : ?>
-							/<?php echo esc_html( $per_person_text ); ?>
+						<?php if ( ! empty( $price_per_text ) && ! $hide_price_per ) : ?>
+							/<?php echo esc_html( $price_per_text ); ?>
 						<?php endif; ?>
 					</span>
 				</div>
@@ -734,7 +735,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
-	$per_person_text = wp_travel_get_price_per_text( $post_id );
+	$price_per_text = wp_travel_get_price_per_text( $post_id );
 	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
 	?>
 	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
@@ -1837,7 +1838,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 	if ( $enable_sale ) {
 		$trip_price = wp_travel_get_trip_sale_price( $trip_id );
 	}
-	$per_person_text = wp_travel_get_price_per_text( $trip_id );
+	$price_per_text = wp_travel_get_price_per_text( $trip_id );
 
 	$trip_duration       = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -2392,7 +2393,7 @@ function wp_travel_booking_tab_pricing_options_list( $trip_data = null ) {
 									<span class="person-count">
 										<ins>
 											<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
-										</ins>/<?php echo esc_html( $per_person_text ); ?>
+										</ins>/<?php echo esc_html( $price_per_text ); ?>
 									</span>
 								</div>
 							<?php endif; ?>
@@ -2453,7 +2454,7 @@ function wp_travel_booking_fixed_departure_listing( $trip_multiple_dates_data ) 
 	$sold_out_btn_rep_msg = apply_filters( 'wp_travel_inventory_sold_out_button', '', $trip_id );
 
 	$currency_symbol   = wp_travel_get_currency_symbol();
-	$per_person_text   = wp_travel_get_price_per_text( $trip_id );
+	$price_per_text   = wp_travel_get_price_per_text( $trip_id );
 	$inventory_enabled = false;
 	$show_end_date     = wp_travel_booking_show_end_date();
 	$trip_extras_class = new Wp_Travel_Extras_Frontend();

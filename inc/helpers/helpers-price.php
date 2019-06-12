@@ -691,10 +691,31 @@ function wp_travel_is_enable_pricing_options( $trip_id ) {
 	return false;
 }
 
-function wp_travel_get_min_price_key( $pricing_options ) {
-	if ( ! $pricing_options || ! is_array( $pricing_options ) ) {
-		return '';
+/**
+ * Return Min price key for the trip
+ *
+ * @param Mixed $options pricing_option | trip id.
+ *
+ * @since 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ]
+ * @return Mixed.
+ */
+
+function wp_travel_get_min_price_key( $options ) {
+	if ( ! $options ) {
+		return;
 	}
+
+	if ( is_array( $options ) ) {
+		$pricing_options = $options;
+	} elseif ( is_numeric( $options ) ) {
+		$trip_id = $options;
+		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+	}
+
+	if ( ! $pricing_options ) {
+		return;
+	}
+
 	$min_price = 0;
 	$price_key = '';
 	foreach ( $pricing_options as $pricing_option ) {
