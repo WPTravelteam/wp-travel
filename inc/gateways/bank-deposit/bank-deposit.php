@@ -119,15 +119,15 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 }
 
 // Bank deposit Payment button in wp travel dashboard. @since 2.0.0
-function wp_travel_show_bank_payment_section() {
+// function wp_travel_show_bank_payment_section() {
 
-	if ( class_exists( 'WP_Travel_Partial_Payment_Core' ) ) {
-		add_action( 'wp_travel_partial_payment_before_submit_button', 'wp_travel_bank_deposite_button' );
-	} else {
-		add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_button', 9, 2 );
-	}
-}
-add_action( 'init', 'wp_travel_show_bank_payment_section' );
+// 	if ( class_exists( 'WP_Travel_Partial_Payment_Core' ) ) {
+// 		add_action( 'wp_travel_partial_payment_before_submit_button', 'wp_travel_bank_deposite_button', 100 );
+// 	} else {
+// 	}
+// }
+// add_action( 'init', 'wp_travel_show_bank_payment_section', 20 );
+add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_button', 20, 2 );
 
 function wp_travel_bank_deposite_content( $booking_id = null, $details = array() ) {
 	// In Case of partial payment activated.
@@ -155,6 +155,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 			'id'    => 'wp-travel-submit-slip',
 			'value' => __( 'Submit', 'wp-travel' ),
 		),
+		'hook_prefix' => 'wp_travel_partial_payment',
 		'multipart'     => true,
 		'nonce'         => array(
 			'action' => 'wp_travel_security_action',
