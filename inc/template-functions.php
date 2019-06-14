@@ -787,7 +787,7 @@ function wp_travel_frontend_contents( $post_id ) {
 					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 						<div class="panel-group" id="accordion">
 						<?php
-						$faqs = wp_travel_get_faqs( $post_id );
+						$faqs = $tab_info['content'];
 						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 							?>
 							<div class="wp-collapse-open clearfix">

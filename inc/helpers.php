@@ -953,7 +953,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false ) {
 		'gallery'       => array(
 			'label'        => __( 'Gallery', 'wp-travel' ),
 			'label_class'  => 'wp-travel-tab-gallery-contnet',
-			'content'      => wp_travel_frontend_gallery( $gallery_ids ),
+			'content'      => wp_travel_frontend_tab_gallery( $gallery_ids ),
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
@@ -2727,7 +2727,7 @@ function wp_travel_hide_price_per_field( $trip_id = null, $price_key = null ) {
  * 
  * @since 2.0.6
  */
-function wp_travel_frontend_gallery( $gallery_ids ) {
+function wp_travel_frontend_tab_gallery( $gallery_ids ) {
 	if ( ! $gallery_ids ) {
 		return;
 	}
