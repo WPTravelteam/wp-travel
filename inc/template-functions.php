@@ -769,31 +769,7 @@ function wp_travel_frontend_contents( $post_id ) {
 				<?php endif; ?>
 				<?php
 				switch ( $tab_key ) {
-					case 'gallery':
-						$image_size = apply_filters( 'wp_travel_gallery_image', 'thumbnail' ); // previously using 'medium' before 1.9.0
-						?>
-						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-							<?php if ( false !== $tab_info['content'] ) : ?>
-							<div class="wp-travel-gallery wp-travel-container-wrap">
-								<div class="wp-travel-row-wrap">
-									<ul>
-										<?php foreach ( $tab_info['content'] as $gallery_id ) : ?>
-										<li>
-											<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size ); ?>
-											<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-											<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
-											</a>
-										</li>
-										<?php endforeach; ?>
-									</ul>
-								</div>
-							</div>
-							<?php else : ?>
-								<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No gallery images found.', 'wp-travel' ); ?></p>
-							<?php endif; ?>
-						</div>
-						<?php
-						break;
+					
 					case 'reviews':
 						?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">

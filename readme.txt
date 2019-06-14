@@ -234,6 +234,7 @@ Release Date: 20th June, 2019
 Enhancement:
 
 * Checkout form field sorting. Previously need to sort again while using filter to sort checkout form field.
+* Gallery enhancement for advanced gallery.
 
 Fixes:
 

@@ -19,6 +19,8 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 	$post_id       = $args['post']->ID;
 	$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 
+	dd( $faq_questions );
+
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
 			'title'       => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),

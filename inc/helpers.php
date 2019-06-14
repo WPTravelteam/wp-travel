@@ -953,7 +953,7 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false ) {
 		'gallery'       => array(
 			'label'        => __( 'Gallery', 'wp-travel' ),
 			'label_class'  => 'wp-travel-tab-gallery-contnet',
-			'content'      => $gallery_ids,
+			'content'      => wp_travel_frontend_gallery( $gallery_ids ),
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
@@ -2717,4 +2717,43 @@ function wp_travel_date_sort( $a, $b ) {
  */
 function wp_travel_hide_price_per_field( $trip_id = null, $price_key = null ) {
 	return apply_filters( 'wp_travel_hide_per_person', false, $trip_id, $price_key );
+}
+
+/**
+ * 
+ * Function to return Frontend Gallery Block.
+ * 
+ * @param array $gallery_ids All gallery ids.
+ * 
+ * @since 2.0.6
+ */
+function wp_travel_frontend_gallery( $gallery_ids ) {
+	if ( ! $gallery_ids ) {
+		return;
+	}
+	ob_start();
+	if ( is_array( $gallery_ids ) && count( $gallery_ids ) > 0 ) :
+		$image_size = apply_filters( 'wp_travel_gallery_image', 'thumbnail' ); // previously using 'medium' before 1.9.0
+		?>
+		<div class="wp-travel-gallery wp-travel-container-wrap">
+			<div class="wp-travel-row-wrap">
+				<ul>
+					<?php foreach ( $gallery_ids as $gallery_id ) : ?>
+					<li>
+						<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size ); ?>
+						<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
+						<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
+						</a>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+	<?php else : ?>
+		<p class="wp-travel-no-detail-found-msg"><?php esc_html_e( 'No gallery images found.', 'wp-travel' ); ?></p>
+	<?php endif;
+
+	$content = ob_get_contents();
+	ob_end_clean();
+	return $content;
 }
