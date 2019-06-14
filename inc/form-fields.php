@@ -486,12 +486,29 @@ function wp_travel_get_checkout_form_fields() {
 		);
 	}
 
-	$new_fields = array(
-		'traveller_fields' => wp_travel_sort_form_fields( $traveller_fields ),
-		'billing_fields'   => wp_travel_sort_form_fields( $fields ),
-		'payment_fields'   => wp_travel_sort_form_fields( $payment_fields ),
+	$checkout_fields = array(
+		'traveller_fields' => $traveller_fields,
+		'billing_fields'   => $fields,
+		'payment_fields'   => $payment_fields,
 	);
-	return apply_filters( 'wp_travel_checkout_fields', $new_fields );
+	$checkout_fields = apply_filters( 'wp_travel_checkout_fields', $checkout_fields ); /// sort field after this filter.
+
+	$checkout_fields = array(
+		'traveller_fields' => wp_travel_sort_form_fields( $checkout_fields['traveller_fields'] ),
+		'billing_fields'   => wp_travel_sort_form_fields( $checkout_fields['billing_fields'] ),
+		'payment_fields'   => wp_travel_sort_form_fields( $checkout_fields['payment_fields'] ),
+	);
+
+	if ( isset( $checkout_fields['traveller_fields'] ) ) {
+		$checkout_fields['traveller_fields'] = wp_travel_sort_form_fields( $checkout_fields['traveller_fields'] );
+	}
+	if ( isset( $checkout_fields['billing_fields'] ) ) {
+		$checkout_fields['billing_fields'] = wp_travel_sort_form_fields( $checkout_fields['billing_fields'] );
+	}
+	if ( isset( $checkout_fields['payment_fields'] ) ) {
+		$checkout_fields['payment_fields'] = wp_travel_sort_form_fields( $checkout_fields['payment_fields'] );
+	}
+	return $checkout_fields;
 }
 
 /**
