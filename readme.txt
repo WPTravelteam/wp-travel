@@ -228,6 +228,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.6=
+Release Date: 20th June, 2019
+
+Enhancement:
+
+* Checkout form field sorting. Previously need to sort again while using filter to sort checkout form field.
+
+Fixes:
+
+* Pricing name causing add to cart empty issue.
+
 = 2.0.5=
 Release Date: 12th June, 2019
 
