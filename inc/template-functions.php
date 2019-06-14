@@ -16,6 +16,7 @@ add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents',
 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
 add_filter( 'the_content', 'wp_travel_content_filter' );
+add_filter( 'wp_travel_trip_tabs_output_raw', 'wp_travel_raw_output_on_tab_content', 10, 2 ); // @since 2.0.6. Need true to hide trip detail.
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
 
@@ -840,7 +841,7 @@ function wp_travel_frontend_contents( $post_id ) {
 						?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php
-							if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false ) ) {
+							if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
 
 								echo do_shortcode( $tab_info['content'] );
 
@@ -2709,4 +2710,21 @@ function wp_travel_get_header_image_tag( $html ) {
 
 		$html .= ' />';
 		return $html;
+}
+
+/**
+ * If return false then, the_content filter used for tab content to display.
+ * 
+ * @param boolean $raw false to use the_content filter to fetch content.
+ * @param string  $tab_key Frontend tab key.
+ * 
+ * @since 2.0.6
+ * 
+ * @return bool
+ */
+function wp_travel_raw_output_on_tab_content( $raw, $tab_key ) {
+	if ( 'gallery' === $tab_key ) { // Hide extra tab content on gallery tab.
+		$raw = true;
+	}
+	return $raw;
 }
