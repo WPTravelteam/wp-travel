@@ -17,7 +17,6 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 	do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
 
 	$post_id       = $args['post']->ID;
-	$faq_questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
@@ -30,11 +29,13 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 		);
 		wp_travel_upsell_message( $args );
 	endif;
+	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
+	$faqs = wp_travel_get_faqs( $post_id );
 	?>
 			
 	<div class="wp-travel-tab-content-faq-header clearfix">
 		<?php
-		if ( is_array( $faq_questions ) && count( $faq_questions ) != 0 ) :
+		if ( is_array( $faqs ) && count( $faqs ) != 0 ) :
 			$empty_item_style    = 'display:none';
 			$collapse_link_style = 'display:block';
 		else :
@@ -55,32 +56,35 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 	</div>
 	<div id="tab-accordion" class="tab-accordion wp-travel-accordion has-handler">
 		<div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
-			<?php if ( is_array( $faq_questions ) && count( $faq_questions ) > 0 ) : ?>
+			<?php if ( is_array( $faqs ) && count( $faqs ) > 0 ) : ?>
 
-				<?php $faq_answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true ); ?>
-
-				<?php foreach ( $faq_questions as $key => $question ) : ?>
-					<?php $question = ( '' !== $question ) ? $question : __( 'Untitled', 'wp-travel' ); ?>
-					<div class="panel panel-default">
+				<?php foreach ( $faqs as $key => $faq ) : ?>
+					<?php
+						$question   = ( isset( $faq['question'] ) && '' !== $faq['question'] ) ? $faq['question'] : __( 'Untitled', 'wp-travel' );
+						$answer     = ( isset( $faq['answer'] ) && '' !== $faq['answer'] ) ? $faq['answer'] : '';
+						$global_faq = ( isset( $faq['global'] ) && '' !== $faq['global'] ) ? $faq['global'] : 'no';
+						$attr_read_only = ( 'yes' === $global_faq ) ? 'readonly' : '';
+					?>
+					<div class="panel panel-default global-<?php echo esc_attr( $global_faq ); ?>" data-global="<?php echo esc_attr( $global_faq ); ?>" >
 						<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
 							<h4 class="panel-title">
 								<div class="wp-travel-sorting-handle"></div>
 								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
-
 									<span bind="faq_question_<?php echo esc_attr( $key ); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
-
-								<!-- <span class="collapse-icon"></span> -->
 								</a>
+								<?php if ( 'yes' !== $global_faq ) : ?>
 								<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
+								<?php endif; ?>
 							</h4>
 						</div>
 						<div id="collapse-<?php echo esc_attr( $key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $key ); ?>">
 						<div class="panel-body">
 							<div class="panel-wrap">
 								<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
-								<input bind="faq_question_<?php echo esc_attr( $key ); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>">
+								<input bind="faq_question_<?php echo esc_attr( $key ); ?>" type="text" class="faq-question-text" name="wp_travel_faq_question[]" placeholder="FAQ Question?" value="<?php echo esc_html( $question ); ?>" <?php echo esc_attr( $attr_read_only ); ?> >
 							</div>
-							<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer."><?php echo esc_attr( $faq_answers[ $key ] ); ?></textarea>
+							<textarea rows="6" name="wp_travel_faq_answer[]" placeholder="Write Your Answer." <?php echo esc_attr( $attr_read_only ); ?> ><?php echo esc_attr( $answer ); ?></textarea>
+							<input type="hidden" name="wp_travel_is_global_faq[]" value="<?php echo esc_attr( $global_faq ); ?>" >
 						</div>
 						</div>
 					</div>

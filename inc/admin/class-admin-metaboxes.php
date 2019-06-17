@@ -475,8 +475,8 @@ class WP_Travel_Admin_Metaboxes {
 		// Trip Specific Enquiry Option.
 		$trip_meta['wp_travel_enable_trip_enquiry_option'] = isset( $_POST['wp_travel_enable_trip_enquiry_option'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_trip_enquiry_option'] ) ) : 'no';
 
-		$trip_meta['wp_travel_faq_question'] = isset( $_POST['wp_travel_faq_question'] ) ? ( wp_unslash( $_POST['wp_travel_faq_question'] ) ) : '';
-		$trip_meta['wp_travel_faq_answer']   = isset( $_POST['wp_travel_faq_answer'] ) ? ( wp_unslash( $_POST['wp_travel_faq_answer'] ) ) : '';
+		$trip_meta['wp_travel_faq_question'] = isset( $_POST['wp_travel_faq_question'] ) ? ( wp_unslash( $_POST['wp_travel_faq_question'] ) ) : array();
+		$trip_meta['wp_travel_faq_answer']   = isset( $_POST['wp_travel_faq_answer'] ) ? ( wp_unslash( $_POST['wp_travel_faq_answer'] ) ) : array();
 
 		// WP Travel Standard Paypal Merged. @since 1.2.1.
 		$trip_meta['wp_travel_minimum_partial_payout']            = isset( $_POST['wp_travel_minimum_partial_payout'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) ) : 0;

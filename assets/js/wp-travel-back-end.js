@@ -540,15 +540,15 @@
         if (confirm("Are you sure you want to delete?") == true) {
             $(this).closest('div.panel-default').remove();
 
-            var faqs = $('#' + acc_id + ' .panel-default').length;
+            var faqs = $('#' + acc_id + ' .panel-default:visible').length;
 
             // alert(faqs);
             if (faqs > 0) {
-                $('.while-empty').addClass( 'hidden' );
-                $('.wp-collapse-open').removeClass( 'hidden' );
+                $('.while-empty').addClass( 'hidden' ).hide();
+                $('.wp-collapse-open').removeClass( 'hidden' ).show();
             } else {
-                $('.wp-collapse-open').addClass( 'hidden' );
-                $('.while-empty').removeClass( 'hidden' );
+                $('.wp-collapse-open').addClass( 'hidden' ).hide();
+                $('.while-empty').removeClass( 'hidden' ).show();
             }
         }
         return;

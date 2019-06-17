@@ -1138,16 +1138,55 @@ function wp_travel_get_faqs( $post_id ) {
 	$faq = array();
 
 	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
+	$questions = ( $questions ) ? $questions : array();
 	$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions );
+	
+	$settings        = wp_travel_get_settings();
+	$is_global_faq = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
+	$global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
+
+	
+	
+	$use_global_faq = get_post_meta( $post_id, 'wp_travel_utils_use_global_faq_for_trip', true );
+	$use_global_faq = ( $use_global_faq ) ? $use_global_faq : 'no';
+	
+	$use_trip_faq = get_post_meta( $post_id, 'wp_travel_utils_use_trip_faq_for_trip', true );
+	$use_trip_faq = ( $use_trip_faq ) ? $use_trip_faq : 'no';
 
 	if ( is_array( $questions ) && count( $questions ) > 0 ) :
 		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
 		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers );
 		foreach ( $questions as $key => $question ) :
+
+			// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
+			$global_faq = 'no';
+			if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
+				$global_faq = 'yes';
+			}
+
+			// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
+			if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq ) ) {
+				$global_faq = $is_global_faq[ $key ];
+			}
+
 			$answer = isset( $answers[ $key ] ) ? $answers[ $key ] : '';
+
+			// remove global if utilities is not exists.
+			if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $global_faq ) {
+				continue;
+			}
+
+			if ( ! is_admin() ) { // filter for frontend.
+				if ( 'no' === $use_global_faq && 'yes' == $global_faq ) { // Trip faq.
+					continue;
+				} elseif ( 'yes' == $use_global_faq && 'no' == $use_trip_faq && 'no' == $global_faq ) { // only global
+					continue;
+				}
+			} 
 			$faq[]  = array(
 				'question' => $question,
 				'answer'   => $answer,
+				'global'   => $global_faq,
 			);
 		endforeach;
 	endif;
