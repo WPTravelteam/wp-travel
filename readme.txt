@@ -240,6 +240,7 @@ Enhancement:
 Fixes:
 
 * Pricing name causing add to cart empty issue.
+* Minor issue fixing in tabs. Invalid argument supplied for foreach issue.
 
 = 2.0.5=
 Release Date: 12th June, 2019

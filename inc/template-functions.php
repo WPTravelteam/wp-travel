@@ -760,104 +760,106 @@ function wp_travel_frontend_contents( $post_id ) {
 				?>
 			</ul>
 		<div class="resp-tabs-container">
-			<?php $index = 1; ?>
-			<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
-				<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
-					<?php continue; ?>
-				<?php endif; ?>
-				<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
-					<?php continue; ?>
-				<?php endif; ?>
-				<?php
-				switch ( $tab_key ) {
-					
-					case 'reviews':
-						?>
+			<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
+				<?php $index = 1; ?>
+				<?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
+					<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
+						<?php continue; ?>
+					<?php endif; ?>
+					<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
+						<?php continue; ?>
+					<?php endif; ?>
+					<?php
+					switch ( $tab_key ) {
+						
+						case 'reviews':
+							?>
+							<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+								<?php comments_template(); ?>
+							</div>
+							<?php
+							break;
+						case 'booking':
+							$booking_template = wp_travel_get_template( 'content-pricing-options.php' );
+							load_template( $booking_template );
+
+							break;
+						case 'faq':
+							?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-							<?php comments_template(); ?>
+							<div class="panel-group" id="accordion">
+							<?php
+							$faqs = $tab_info['content'];
+							if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+								?>
+								<div class="wp-collapse-open clearfix">
+									<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+									<a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
+								</div>
+								<?php foreach ( $faqs as $k => $faq ) : ?>
+								<div class="panel panel-default">
+								<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k + 1 ); ?>">
+									<?php echo esc_html( $faq['question'] ); ?>
+									<span class="collapse-icon"></span>
+									</a>
+								</h4>
+								</div>
+								<div id="collapse<?php echo esc_attr( $k + 1 ); ?>" class="panel-collapse collapse">
+								<div class="panel-body">
+									<?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
+								</div>
+								</div>
+							</div>
+									<?php
+								endforeach;
+							} else {
+								?>
+								<div class="while-empty">
+									<p class="wp-travel-no-detail-found-msg" >
+										<?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
+									</p>
+								</div>
+							<?php } ?>
+							</div>
 						</div>
-						<?php
-						break;
-					case 'booking':
-						$booking_template = wp_travel_get_template( 'content-pricing-options.php' );
-						load_template( $booking_template );
-
-						break;
-					case 'faq':
-						?>
-					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-						<div class="panel-group" id="accordion">
-						<?php
-						$faqs = $tab_info['content'];
-						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+							<?php
+							break;
+						case 'trip_outline':
 							?>
-							<div class="wp-collapse-open clearfix">
-								<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-								<a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-							</div>
-							<?php foreach ( $faqs as $k => $faq ) : ?>
-							<div class="panel panel-default">
-							<div class="panel-heading">
-							  <h4 class="panel-title">
-								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k + 1 ); ?>">
-								  <?php echo esc_html( $faq['question'] ); ?>
-								  <span class="collapse-icon"></span>
-								</a>
-							  </h4>
-							</div>
-							<div id="collapse<?php echo esc_attr( $k + 1 ); ?>" class="panel-collapse collapse">
-							  <div class="panel-body">
-								<?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
-							  </div>
-							</div>
-						  </div>
-								<?php
-							endforeach;
-						} else {
-							?>
-							<div class="while-empty">
-								<p class="wp-travel-no-detail-found-msg" >
-									<?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
-								</p>
-							</div>
-						<?php } ?>
-						</div>
-					</div>
-						<?php
-						break;
-					case 'trip_outline':
-						?>
-					<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-						<?php
-							echo wp_kses_post( $tab_info['content'] );
-
-							$itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
-							load_template( $itinerary_list_template );
-						?>
-					</div>
-						<?php
-						break;
-					default:
-						?>
 						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 							<?php
-							if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
+								echo wp_kses_post( $tab_info['content'] );
 
-								echo do_shortcode( $tab_info['content'] );
-
-							} else {
-
-								echo apply_filters( 'the_content', $tab_info['content'] );
-							}
-
+								$itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
+								load_template( $itinerary_list_template );
 							?>
 						</div>
-					<?php break; ?>
-				<?php } ?>
-				<?php
-				$index++;
-endforeach;
-			?>
+							<?php
+							break;
+						default:
+							?>
+							<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+								<?php
+								if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
+
+									echo do_shortcode( $tab_info['content'] );
+
+								} else {
+
+									echo apply_filters( 'the_content', $tab_info['content'] );
+								}
+
+								?>
+							</div>
+						<?php break; ?>
+					<?php } ?>
+					<?php
+					$index++;
+				endforeach;
+				?>
+			<?php endif; ?>
 		</div>
 		<?php endif; ?>
 
