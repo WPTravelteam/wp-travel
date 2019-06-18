@@ -1,5 +1,9 @@
 /* jshint node:true */
 module.exports = function (grunt) {
+
+	const hbs = require('handlebars');
+	const fs = require('fs');
+
 	/**
 	 * FIles added to WordPress SVN, don't inlucde 'assets/**' here.
 	 * @type {Array}
@@ -33,6 +37,9 @@ module.exports = function (grunt) {
 		'push_dot_org.sh',
 	]);
 
+	let package_json = fs.readFileSync('package.json');
+	package_json = JSON.parse(package_json);
+	
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
@@ -289,6 +296,19 @@ module.exports = function (grunt) {
 				dest: 'assets/css/rtl/',
 				src: ['assets/css/*.css']
 			}
+		},
+
+		writefile: {
+			options: {
+				// data: 'path/to/data.json',
+				data: package_json,
+			},
+			main: {
+				files: [{
+					src: 'bash/push_dot_org.hbs',
+					dest: `push_dot_org.sh`,
+				}]
+			}
 		}
 
 	});
@@ -306,6 +326,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-file-creator');
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
+	grunt.loadNpmTasks('grunt-writefile');
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -348,7 +369,7 @@ module.exports = function (grunt) {
 	]);
 
 	grunt.registerTask('pre_vcs', ['assets', 'textdomain']);
-	grunt.registerTask('pre_release', ['pre_vcs']);
+	grunt.registerTask('pre_release', ['pre_vcs', 'writefile']);
 	grunt.registerTask('release', ['push_svn']);
 	grunt.registerTask('post_release', ['clean:post_build']);
 
