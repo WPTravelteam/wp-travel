@@ -727,7 +727,15 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-content">
 		<?php echo wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 	</tr>
-	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?>">
+
+	<?php
+	$custom_payout_class = 'custom-payout-option-row';
+	if ( 'yes' == $settings['partial_payment'] ) {
+		$custom_payout_class = 'custom-payout-option-row global-enabled';
+	}
+
+	?>
+	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?> <?php echo esc_attr( $custom_payout_class ); ?>">
 		<th colspan="2">
 			<h3><?php echo esc_html( 'Payout', 'wp-travel' ); ?></h3>
 		</th>
@@ -756,15 +764,9 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 	}
 	$use_global = wp_travel_use_global_payout_percent( $post_id );
 
-	$custom_payout_class = '';
-
-	if ( 1 == $use_global ) {
-
-		$custom_payout_class = 'display:none';
-
-	}
+	
 	?>
-	<tr style="display:none">
+	<tr style="display:none" class="<?php echo esc_attr( $custom_payout_class ); ?>" >
 		<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="wp-travel-currency-symbol"><?php esc_html_e( $currency_symbol, 'wp-travel' ); ?></span>
@@ -778,7 +780,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 		</td>
 	</tr>
 
-	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?>">
+	<tr class="price-option-row <?php echo esc_attr( sprintf( '%s %s %s', $single_pricing_option_class, $multiple_pricing_option_class, $custom_payout_class ) ); ?>">
 		<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout (%)', 'wp-travel' ); ?></label></td>
 		<td>
 			<span class="use-global" >
@@ -798,7 +800,7 @@ $multiple_pricing_option_class = 'multiple-price-option-row'; ?>
 			</span>
 		</td>
 	</tr>
-	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?>" style="<?php echo esc_attr( $custom_payout_class ); ?>" >
+	<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?> <?php echo esc_attr( $custom_payout_class ); ?> "  >
 		<td>
 			<label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Custom Min. Payout (%)', 'wp-travel' ); ?></label>
 		</td>

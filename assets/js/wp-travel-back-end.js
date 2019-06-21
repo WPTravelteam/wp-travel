@@ -266,6 +266,7 @@
         show_price_option_row();
         // show / hide fixed departure fields.
         show_fixed_departured_date_row();
+        show_minimum_payout_row();
     } );
 
     /**
@@ -369,6 +370,16 @@
         
     }
 
+    function show_minimum_payout_row() {
+        $( '.custom-payout-option-row' ).each( function(){
+            if ( $(this).hasClass( 'global-enabled' ) ) {
+                $(this).removeClass( 'hidden' );
+            } else {
+                $(this).addClass( 'hidden' );
+            }
+        } );
+    }
+
     // Fixed Departure [ On || Off ]  @since 1.7.6
     $(document).on('click', '#wp-travel-fixed-departure', function() {
         show_fixed_departured_date_row();
@@ -381,6 +392,8 @@
 
     show_price_option_row(); // single | multiple price fields
     show_fixed_departured_date_row();
+
+    show_minimum_payout_row();
     // show_multiple_dates_fields();
     $(document).on( 'click', '.wp-travel-clone-post', function(e) {
         e.preventDefault();
