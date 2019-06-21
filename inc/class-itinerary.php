@@ -106,11 +106,32 @@ class WP_Travel_Itinerary {
 	}
 
 	function get_group_size() {
-		if (
-			isset( $this->post_meta['wp_travel_group_size'][0] )
-			&& '' !== $this->post_meta['wp_travel_group_size'][0]
-		) {
-			return (int) $this->post_meta['wp_travel_group_size'][0];
+
+		// $pricing_option = ( isset( $this->post_meta['wp_travel_pricing_option_type'][0] ) && ! empty( $this->post_meta['wp_travel_pricing_option_type'][0] ) ) ? $this->post_meta['wp_travel_pricing_option_type'][0] : 'single-price';
+		$pricing_option = wp_travel_get_pricing_option_type();
+		if ( 'single-price' === $pricing_option ) {
+			if (
+				isset( $this->post_meta['wp_travel_group_size'][0] )
+				&& '' !== $this->post_meta['wp_travel_group_size'][0]
+			) {
+				return (int) $this->post_meta['wp_travel_group_size'][0];
+			}
+		} else {
+
+			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
+
+			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+				$group_size = 0;
+				foreach ( $pricing_options as $pricing_option ) {
+					if ( $pricing_option['max_pax'] > $group_size ) {
+						$group_size = $pricing_option['max_pax'];
+					}
+				}
+			}
+
+			if (  $group_size ) {
+				return (int) $group_size;
+			}
 		}
 		return false;
 	}
