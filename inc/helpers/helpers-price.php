@@ -497,7 +497,7 @@ function wp_travel_get_trip_sale_price( $post_id = 0 ) {
  * @param String $price_key Price key for multiple pricing.
  * @param Bool   $only_regular_price Return only trip price rather than sale price as trip price if this is set to true.
  *
- * @since 1.0.5 // Modified 1.9.2
+ * @since 1.0.5 // Modified 1.9.2, 2.0.7
  * @return int Trip Price.
  */
 function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_regular_price = false ) {
@@ -531,7 +531,7 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_r
 			endforeach;
 		}
 	}
-	return apply_filters( 'wp_travel_trip_price', $trip_price, $trip_id, $price_key );
+	return apply_filters( 'wp_travel_trip_price', $trip_price, $trip_id, $price_key, $only_regular_price );
 }
 // End of Migrated functions from inc/helpers.php / These prices are only for display.
 

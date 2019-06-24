@@ -381,7 +381,6 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				$datepicker_i18n_file = $default_url . $filename;
 			} else {
 				$datepicker_i18n_file = $default_url . 'datepicker.en.js';
-				$locale               = 'en';
 			}
 
 			// General
