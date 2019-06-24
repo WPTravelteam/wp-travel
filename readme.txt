@@ -228,6 +228,18 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.7=
+Release Date:
+
+Enhancement:
+
+
+Fixes:
+
+* In an admin trip section, Partial payment section is displaying even it is disabled from settings.
+* Group size of multiple pricing is displayed in the featured section. Previously group size value is displaying from single pricing option though pricing option set as multiple pricing options.
+* Fixed multiple script enqueue from multiple addons. Now all scripts are registered here and used handler to enqueue. 
+
 = 2.0.6=
 Release Date: 18th June, 2019
 
