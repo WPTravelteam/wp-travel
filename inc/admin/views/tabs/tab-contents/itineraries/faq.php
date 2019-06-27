@@ -54,7 +54,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 			<a data-parent="wp-travel-tab-content-faq" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 		</div>
 	</div>
-	<div id="tab-accordion" class="tab-accordion wp-travel-accordion has-handler">
+	<div id="tab-accordion-faq" class="tab-accordion wp-travel-accordion has-handler">
 		<div class="panel-group wp-travel-sorting-tabs" id="accordion-faq-data" role="tablist" aria-multiselectable="true">
 			<?php if ( is_array( $faqs ) && count( $faqs ) > 0 ) : ?>
 
@@ -66,10 +66,10 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 						$attr_read_only = ( 'yes' === $global_faq ) ? 'readonly' : '';
 					?>
 					<div class="panel panel-default global-<?php echo esc_attr( $global_faq ); ?>" data-global="<?php echo esc_attr( $global_faq ); ?>" >
-						<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $key ); ?>">
+						<div class="panel-heading" role="tab" id="heading-faq-<?php echo esc_attr( $key ); ?>">
 							<h4 class="panel-title">
 								<div class="wp-travel-sorting-handle"></div>
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $key ); ?>">
+								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-faq-<?php echo esc_attr( $key ); ?>" aria-expanded="true" aria-controls="collapse-faq-<?php echo esc_attr( $key ); ?>">
 									<span bind="faq_question_<?php echo esc_attr( $key ); ?>" class="faq-label"><?php echo esc_html( $question ); ?></span>
 								</a>
 								<?php if ( 'yes' !== $global_faq ) : ?>
@@ -77,7 +77,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 								<?php endif; ?>
 							</h4>
 						</div>
-						<div id="collapse-<?php echo esc_attr( $key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<?php echo esc_attr( $key ); ?>">
+						<div id="collapse-faq-<?php echo esc_attr( $key ); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-faq-<?php echo esc_attr( $key ); ?>">
 						<div class="panel-body">
 							<div class="panel-wrap">
 								<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>
@@ -98,19 +98,19 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 	<script type="text/html" id="tmpl-wp-travel-faq">
 
 		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="heading-{{data.random}}">
+			<div class="panel-heading" role="tab" id="heading-faq-{{data.random}}">
 				<h4 class="panel-title">
 					<div class="wp-travel-sorting-handle"></div>
-					<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-{{data.random}}" aria-expanded="true" aria-controls="collapse-{{data.random}}">
+					<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-faq-{{data.random}}" aria-expanded="true" aria-controls="collapse-faq-{{data.random}}">
 
 						<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
 
-					<!-- <span class="collapse-icon"></span> -->
+					<!-- <span class="collapse-faq-icon"></span> -->
 					</a>
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
 				</h4>
 			</div>
-			<div id="collapse-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{data.random}}">
+			<div id="collapse-faq-{{data.random}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-faq-{{data.random}}">
 				<div class="panel-body">
 					<div class="panel-wrap">
 						<label><?php esc_html_e( 'Enter Your Question', 'wp-travel' ); ?></label>

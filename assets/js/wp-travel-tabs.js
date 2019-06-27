@@ -138,23 +138,6 @@
         });
     })(jQuery);
 
-    // Open All And Close All accordion.
-    // $('.open-all-link').click(function (e) {
-    //     e.preventDefault();
-    //     $('.panel-title a').removeClass('collapsed').attr({ 'aria-expanded': 'true' });
-    //     $('.panel-collapse').addClass('in');
-    //     $(this).hide();
-    //     $('.close-all-link').show();
-    //     $('#tab-accordion .panel-collapse').css('height', 'auto');
-    // });
-    // $('.close-all-link').click(function (e) {
-    //     e.preventDefault();
-    //     $('.panel-title a').addClass('collapsed').attr({ 'aria-expanded': 'false' });
-    //     $('.panel-collapse').removeClass('in');
-    //     $(this).hide();
-    //     $('.open-all-link').show();
-    // });
-
     //Facts Tab.
     jQuery(document).on('click', '.fact-open', function () {
         jQuery(this).parents('table').toggleClass('open-table');
