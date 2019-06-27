@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.2.1
+Tested up to: 5.2.2
 Requires PHP: 5.5
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -233,12 +233,18 @@ Release Date:
 
 Enhancement:
 
+* Fixed multiple script enqueue from multiple addons. Now all scripts are registered in WP Travel and used handler to enqueue.
 
 Fixes:
 
 * In an admin trip section, Partial payment section is displaying even it is disabled from settings.
 * Group size of multiple pricing is displayed in the featured section. Previously group size value is displaying from single pricing option though pricing option set as multiple pricing options.
-* Fixed multiple script enqueue from multiple addons. Now all scripts are registered here and used handler to enqueue. 
+* FAQs are not being correctly saved on admin trips page. If global FAQs are enabled by WP Travel Utilities plugin and added global FAQ in first and then deactivate utilities. This will not save FAQ correctly.
+* Fixed settings fields data are lost if addons disabled. It will not save settings of disabled addons if we update settings after disabling addons from addons settings.
+* Trip FAQ accordion conflict with Trip Facts. 
+
+Optimize
+* Trip code on frontend tabs optimized.
 
 = 2.0.6=
 Release Date: 18th June, 2019
