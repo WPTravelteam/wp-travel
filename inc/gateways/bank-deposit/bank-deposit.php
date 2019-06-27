@@ -111,7 +111,7 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 		?>
 			<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
 			<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
-			<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup"><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
+			<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup view-bank-deposit-button" style="display:block; padding:5px 0" ><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
 		<?php // endif; ?>
 	</div>
 	<?php
