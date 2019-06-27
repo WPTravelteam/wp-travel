@@ -170,4 +170,14 @@ class WP_Travel_Itinerary {
 		}
 		return false;
 	}
+
+	/**
+	 * Get faqs.
+	 *
+	 * @since 2.0.7
+	 */
+	public function get_faqs() {
+		$post_id = $this->post->ID;
+		return wp_travel_get_faqs( $post_id );
+	}
 }

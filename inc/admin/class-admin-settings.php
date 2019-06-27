@@ -195,7 +195,7 @@ class WP_Travel_Admin_Settings {
 			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 			// Getting saved settings first.
-			// $settings = wp_travel_get_settings();
+			$settings = wp_travel_get_settings();
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {

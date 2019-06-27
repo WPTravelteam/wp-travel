@@ -834,49 +834,51 @@ function wp_travel_get_permalink_structure() {
 /**
  * Return Tabs and its content for single page.
  *
- * @since 1.1.2
+ * @since 1.1.2 Modified in 2.0.7
  *
  * @return void
  */
-function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
-
+function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide_content = false ) {
+	
 	global $post;
+	$trip_id = $post->ID;
+	
 	$settings                  = wp_travel_get_settings();
-	$wp_travel_use_global_tabs = get_post_meta( $post->ID, 'wp_travel_use_global_tabs', true );
-
+	$wp_travel_use_global_tabs = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 	if ( 'yes' === $wp_travel_use_global_tabs ) {
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 		$wp_travel_tabs     = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
 	} else {
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
-		$wp_travel_tabs               = wp_travel_get_admin_trip_tabs( $post->ID, $enable_custom_itinerary_tabs );
+		$wp_travel_tabs               = wp_travel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs, $frontend_hide_content );
 	}
 
 	// Adding Content to the tabs.
 	$return_tabs              = array();
-	$wp_travel_itinerary_tabs = wp_travel_get_default_trip_tabs( $show_in_menu_query );
+	
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
+		$wp_travel_itinerary_tabs = wp_travel_get_default_trip_tabs( $show_in_menu_query, $frontend_hide_content ); // 2nd param is used to return only show_in_menu key.
 		foreach ( $wp_travel_tabs as $key => $tab ) {
-
-			$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
-
-			// Adding custom tab content.
-			if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
-				$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
+			$show_in_menu = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
+			$show_in_menu = apply_filters( 'wp_travel_frontend_tab_show_in_menu', $show_in_menu, $trip_id, $key ); // @since 1.9.3.
+			
+			if ( ! $frontend_hide_content ) {  // this var is passed to check value whether current tab show in frontend or not. so content is not required
+				$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
+	
+				// Adding custom tab content.
+				if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
+					$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
+				}
+				$new_tabs[ $key ]['label']        = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
+				$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
+				$new_tabs[ $key ]['content']      = $tab_content;
+				$new_tabs[ $key ]['use_global']   = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
+				$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
+				$new_tabs[ $key ]['global'] = isset( $tab['global'] ) ? $tab['global'] : 'no';
 			}
 
-			$show_in_menu = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
-			$show_in_menu = apply_filters( 'wp_travel_frontend_tab_show_in_menu', $show_in_menu, $post->ID, $key ); // @since 1.9.3.
-
-			$new_tabs[ $key ]['label']        = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
-			$new_tabs[ $key ]['label_class']  = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
-			$new_tabs[ $key ]['content']      = $tab_content;
-			$new_tabs[ $key ]['use_global']   = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
 			$new_tabs[ $key ]['show_in_menu'] = $show_in_menu;
 
-			$new_tabs[ $key ]['custom'] = isset( $tab['custom'] ) ? $tab['custom'] : 'no';
-
-			$new_tabs[ $key ]['global'] = isset( $tab['global'] ) ? $tab['global'] : 'no';
 		}
 
 		foreach ( $wp_travel_itinerary_tabs as $k => $val ) {
@@ -894,9 +896,10 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false ) {
  * Default Tabs and its content.
  *
  * @var bool $is_show_in_menu_query  Set true when this function need to call from admin.
+ * @since Modified in 2.0.7
  * @return array
  */
-function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false ) {
+function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false, $frontend_hide_content = false ) {
 	$trip_content = '';
 	$trip_outline = '';
 	$trip_include = '';
@@ -905,19 +908,17 @@ function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = false ) {
 	$faqs         = array();
 
 	if ( ! is_admin() && ! $is_show_in_menu_query ) { // fixes the content filter in page builder. Multiple content issue.
-		global $wp_travel_itinerary;
-		if ( $wp_travel_itinerary ) {
-			$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
-			$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
-			$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
-			$trip_include             = $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
-			$trip_exclude             = $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
-			$gallery_ids              = $wp_travel_itinerary->get_gallery_ids();
-			global $post;
-			if ( $post ) {
-				$post_id = $post->ID;
-				$faqs    = wp_travel_get_faqs( $post_id );
-				$faqs    = $faqs ? $faqs : $no_details_found_message;
+		if ( ! $frontend_hide_content ) {
+			global $wp_travel_itinerary;
+			if ( $wp_travel_itinerary ) {
+				$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
+
+				$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
+				$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
+				$trip_include             = $wp_travel_itinerary->get_trip_include() ? $wp_travel_itinerary->get_trip_include() : $no_details_found_message;
+				$trip_exclude             = $wp_travel_itinerary->get_trip_exclude() ? $wp_travel_itinerary->get_trip_exclude() : $no_details_found_message;
+				$gallery_ids              = $wp_travel_itinerary->get_gallery_ids();
+				$faqs                     = $wp_travel_itinerary->get_faqs() ? $wp_travel_itinerary->get_faqs() : $no_details_found_message;
 			}
 		}
 	}
@@ -1055,17 +1056,18 @@ function wp_travel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
  * Return list of trip tabs for admin trip page.
  *
  * @param array $settings Settings data.
- * @since 1.9.3
+ * @since 1.9.3 Modified in 2.0.7
  * @return array
  */
-function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false ) {
+function wp_travel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $frontend_hide_content = false ) {
 	if ( ! $post_id ) {
 		global $post;
 		$post_id = $post->ID;
 	}
 
 	// Default tab.
-	$trip_tabs = wp_travel_get_default_trip_tabs();
+	// $trip_tabs = wp_travel_get_default_trip_tabs();
+	$trip_tabs = wp_travel_get_default_trip_tabs( false, $frontend_hide_content );
 
 	$wp_travel_tabs = get_post_meta( $post_id, 'wp_travel_tabs', true );
 
@@ -1134,18 +1136,15 @@ function wp_travel_get_faqs( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-
 	$faq = array();
 
 	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
 	$questions = ( $questions ) ? $questions : array();
-	$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions );
+	$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions, $post_id ); // Modified in 2.0.7
 	
 	$settings        = wp_travel_get_settings();
 	$is_global_faq = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
 	$global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
-
-	
 	
 	$use_global_faq = get_post_meta( $post_id, 'wp_travel_utils_use_global_faq_for_trip', true );
 	$use_global_faq = ( $use_global_faq ) ? $use_global_faq : 'no';
@@ -1155,7 +1154,7 @@ function wp_travel_get_faqs( $post_id ) {
 
 	if ( is_array( $questions ) && count( $questions ) > 0 ) :
 		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
-		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers );
+		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers, $post_id ); // Modified in 2.0.7
 		foreach ( $questions as $key => $question ) :
 
 			// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
