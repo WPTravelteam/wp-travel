@@ -12,8 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
-> **WP Travel Mobile App**
-> Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
+> **WP Travel PRO**
+> With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
 WP Travel is a free powerful travel engine for making customized travel & tour agency websites on WordPress in minutes! With this SEO-friendly & scalable WordPress travel engine, you can create customized itinerary & travel packages on the fly. Powered with powerful addons, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
@@ -21,9 +21,8 @@ With such a powerful tour and travel engine, you can efficiently create customiz
 
 View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
-
-> **WP Travel PRO**
-> With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
+> **WP Travel Mobile App**
+> Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
 
 
 = WP TRAVEL PAYMENT ADDONS =
