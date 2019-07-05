@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.2
 Requires PHP: 5.5
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -227,12 +227,24 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.0.8 =
+Release Date: 7th July, 2019
+
+Enhancement:
+
+* Frontend Trip data enhancement and optimized. Single source is used to fetch trip data in single, multiple pricing and fixed departure listing.
+
+Fixes:
+
+* Departure Date is added in email and thankyou page for multiple pricing trips.
+* Group size field added on fixed departure listing.
+
 = 2.0.7=
 Release Date: 28th June, 2019
 
 Enhancement:
 
-* Fixed multiple script enqueue from multiple addons. Now all scripts are registered in WP Travel and used handler to enqueue.
+* Enhancement of same scripts are enqueue from multiple addons. Now all scripts are registered in WP Travel and used handler to enqueue.
 
 Fixes:
 

@@ -230,7 +230,8 @@ jQuery(document).ready(function($) {
             if ( date ) {
 
                 var el = inst.$el;
-                var next_el = ( 'trip_date' === $(el).attr('name') ) ? $( 'input[name=trip_departure_date]' ) :$( 'input[name=trip_date]' )
+                var parent = $(el).closest('form').attr( 'id' );
+                var next_el = ( 'arrival_date' === $(el).attr('name') ) ? $( '#' + parent + ' input[name=departure_date]' ) :$( '#' + parent + ' input[name=arrival_date]' )
                 var day_to_add = parseInt( el.data('totaldays' ) );
                 if ( day_to_add < 1 ) {
                     next_el.val( formattedDate );
@@ -238,7 +239,7 @@ jQuery(document).ready(function($) {
                 }
                 var _moment = moment( date );
                 // var newdate = new Date( date );
-                if ( 'trip_date' === $(el).attr('name') ) {
+                if ( 'arrival_date' === $(el).attr('name') ) {
                   someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
                 } else {
                   // newdate.setDate( newdate.getDate() - day_to_add );
@@ -252,14 +253,29 @@ jQuery(document).ready(function($) {
         }
       });
 
-      var trip_departure_date = $('input[name=trip_departure_date]').wpt_datepicker().data('datepicker');
-      if ( 'undefined' !== typeof trip_departure_date ) {
-        var day_to_add = trip_departure_date.$el.data('totaldays' );;
-        if ( day_to_add > 0 ) {
-          someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
-          trip_departure_date.update('minDate', new Date( someFormattedDate ))
-        }
-      }
+    //   var departure_date = $('input[name=departure_date]').wpt_datepicker().data('datepicker');
+    //   if ( 'undefined' !== typeof departure_date ) {
+    //     var day_to_add = departure_date.$el.data('totaldays' );;
+    //     if ( day_to_add > 0 ) {
+    //       someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+    //       departure_date.update('minDate', new Date( someFormattedDate ))
+    //     }
+    //   }
+
+      $('input[name=departure_date]').each( function(){
+        //   var parent = $(this).closest('form').attr( 'id' );
+          
+          var departure_date = $(this).wpt_datepicker().data('datepicker');
+          if ( 'undefined' !== typeof departure_date ) {
+            var day_to_add = departure_date.$el.data('totaldays' );;
+            if ( day_to_add > 0 ) {
+              someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+              departure_date.update('minDate', new Date( someFormattedDate ))
+            }
+          }
+      } );
+
+
 
     }
 

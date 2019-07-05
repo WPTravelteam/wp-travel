@@ -943,7 +943,7 @@ function wp_travel_book_now() {
 			$trip_id   = $trip['trip_id'];
 			$pax       = $trip['pax'];
 			$price_key = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
-			$trip_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
+			$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
 
 			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 			$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
@@ -995,7 +995,7 @@ function wp_travel_book_now() {
 			 */
 			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
 			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
-			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $trip_date );
+			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date );
 
 			if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
 				$multiple_order = new WP_Travel_Multiple_Cart_Booking();

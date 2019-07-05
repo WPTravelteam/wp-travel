@@ -82,9 +82,10 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
  * Check sale price enable or not.
  *
  * @param Number $post_id Current post id.
- * @since 1.0.5 Modified in 2.0.1, 2.0.5
+ * @param String $price_key Price Key for multiple pricing.
+ * @since 1.0.5 Modified in 2.0.1, 2.0.5, 2.0.7
  */
-function wp_travel_is_enable_sale( $post_id ) {
+function wp_travel_is_enable_sale( $post_id, $price_key = null ) {
 	if ( ! $post_id ) {
 		return false;
 	}
@@ -95,17 +96,24 @@ function wp_travel_is_enable_sale( $post_id ) {
 		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	} elseif ( 'multiple-price' === $pricing_option ) {
 		$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
-		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
-			foreach ( $pricing_options as $pricing_key => $option ) {
-				if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
-					$enable_sale = true;
-					break;
+
+		if ( $price_key & ! empty( $price_key ) ) { // checks in indivicual pricing key [specific pricing is enabled in trip].
+			if ( isset( $pricing_options[ $price_key ]['enable_sale'] ) && 'yes' === $pricing_options[ $price_key ]['enable_sale'] ) {
+				$enable_sale = true;
+			}
+		} else { // Checks as a whole. if any pricing is enabled then return true.
+			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+				foreach ( $pricing_options as $pricing_key => $option ) {
+					if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
+						$enable_sale = true;
+						break;
+					}
 				}
 			}
 		}
 	}
 
-	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $post_id, $pricing_option ); // Filter since 2.0.5.
+	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $post_id, $pricing_option, $price_key ); // Filter since 2.0.5.
 
 	if ( $enable_sale ) {
 		return true;
@@ -567,7 +575,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 
 				foreach ( $pricing_data as $p_ky => $pricing ) :
 					// Product Metas.
-					$trip_start_date       = isset( $_REQUEST['trip_date'] ) && '' !== $_REQUEST['trip_date'] ? $_REQUEST['trip_date'] : '';
+					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? $_REQUEST['arrival_date'] : '';
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
 					$pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
 					$max_available         = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;

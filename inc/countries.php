@@ -133,7 +133,7 @@ function wp_travel_get_countries() {
 		'LT' => __( 'Lithuania', 'wp-travel' ),
 		'LU' => __( 'Luxembourg', 'wp-travel' ),
 		'MO' => __( 'Macao S.A.R., China', 'wp-travel' ),
-		'MK' => __( 'Macedonia', 'wp-travel' ),
+		'MK' => __( 'North Macedonia', 'wp-travel' ),
 		'MG' => __( 'Madagascar', 'wp-travel' ),
 		'MW' => __( 'Malawi', 'wp-travel' ),
 		'MY' => __( 'Malaysia', 'wp-travel' ),
