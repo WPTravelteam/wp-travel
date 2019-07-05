@@ -48,7 +48,7 @@ add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
 add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );
 
 // add_action( 'wp_travel_booking_princing_options_list', 'wp_travel_booking_tab_pricing_options_list' ); // Depricated.
-add_action( 'wp_travel_booking_default_princing_list', 'wp_travel_booking_default_princing_list_content' );
+add_action( 'wp_travel_booking_default_princing_list', 'wp_travel_booking_default_princing_list_content' ); // if any issue exists in default listing, please update in fixed departure listing.
 
 // add_action( 'wp_travel_booking_departure_date_list', 'wp_travel_booking_fixed_departure_listing' ); // Depricated.
 add_action( 'wp_travel_booking_fixed_departure_list', 'wp_travel_booking_fixed_departure_list_content' );
@@ -2659,7 +2659,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
 								</div>
-								<?php if ( $availability ) : // Remove Book now if trip is soldout. ?>
+								<?php if ( $availability || 'no' === $pricing['fixed_departure'] ) : // Remove Book now if trip is soldout. ?>
 									<div class="wp-travel-booking-row">
 										<?php
 											/**
@@ -2667,7 +2667,8 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											 *
 											 * @since 1.5.8
 											 */
-											do_action( 'wp_travel_trip_extras', $pricing['price_key'], $pricing['arrival_date'] );
+											$arrival_date = isset( $pricing['arrival_date'] ) ? $pricing['arrival_date'] : '';
+											do_action( 'wp_travel_trip_extras', $pricing['price_key'], $arrival_date );
 										?>
 										<div class="wp-travel-calender-aside">											
 											<div class="add-to-cart">
@@ -2995,10 +2996,10 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 					if ( $pricing['available_pax'] ) {
 						$max_attr = 'max=' . $pricing['available_pax'];
 					}
-
-					$parent_id = 'wp-travel-pricing-wrap';
+					$rand = rand();
+					$parent_id = 'wp-travel-pricing-wrap-' . $rand;
 					if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
-						$parent_id = sprintf( 'pricing-%s', $pricing['price_key'] );
+						$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], $rand );
 					}
 
 					$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
@@ -3097,7 +3098,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<?php else :
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
 											?>
-											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
 											<?php
 										} else {
 											?>
@@ -3116,33 +3117,34 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
 								</div>
-								<?php if ( $availability ) : // Remove Book now if trip is soldout. ?>
-									<div class="wp-travel-booking-row">
-										<?php
-											/**
-											 * Support For WP Travel Tour Extras Plugin.
-											 *
-											 * @since 1.5.8
-											 */
-											do_action( 'wp_travel_trip_extras', $pricing['price_key'], $pricing['arrival_date'] );
-										?>
-										<div class="wp-travel-calender-aside">											
-											<div class="add-to-cart">
-												
-												<?php
-												if ( 'yes' !== $pricing['fixed_departure'] ) :
-													?>
-													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $pricing['trip_duration_days'] ); ?>" />
-													<?php
-												endif;
+							</div>
+							<?php if ( $availability  || 'no' === $pricing['fixed_departure']  ) : // Remove Book now if trip is soldout. ?>
+								<div class="wp-travel-booking-row-fd">
+									<?php
+										/**
+										 * Support For WP Travel Tour Extras Plugin.
+										 *
+										 * @since 1.5.8
+										 */
+										$arrival_date = isset( $pricing['arrival_date'] ) ? $pricing['arrival_date'] : '';
+										do_action( 'wp_travel_trip_extras', $pricing['price_key'], $arrival_date );
+									?>
+									<div class="wp-travel-calender-aside">											
+										<div class="add-to-cart">
+											
+											<?php
+											if ( 'yes' !== $pricing['fixed_departure'] ) :
 												?>
-												<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+												<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $pricing['trip_duration_days'] ); ?>" />
+												<?php
+											endif;
+											?>
+											<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 
-											</div>
 										</div>
 									</div>
-								<?php endif; ?>
-							</div>
+								</div>
+							<?php endif; ?>
 						</form>
 					</li>
 				<?php endforeach; ?>
