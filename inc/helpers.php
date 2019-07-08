@@ -1165,7 +1165,7 @@ function wp_travel_get_faqs( $post_id ) {
 			}
 
 			// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
-			if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq ) ) {
+			if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq[ $key ] ) ) {
 				$global_faq = $is_global_faq[ $key ];
 			}
 
@@ -1182,6 +1182,10 @@ function wp_travel_get_faqs( $post_id ) {
 				} elseif ( 'yes' == $use_global_faq && 'no' == $use_trip_faq && 'no' == $global_faq ) { // only global
 					continue;
 				}
+			}
+
+			if ( 'yes' === $global_faq && is_array( $global_questions ) && ! in_array( $question, $global_questions ) ) { // If this is global faq and deleted this faq from global then need to remove this faq.
+				continue;
 			}
 			$faq[] = array(
 				'question' => $question,
@@ -2903,14 +2907,15 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		$trip_duration['night'] = $night;
 	}
 	if ( 'single-price' === $pricing_option_type ) {
+		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 		$inventory_data = array(
 			'status_message' => __( 'N/A', 'wp-travel' ),
 			'sold_out'       => false,
 			'available_pax'  => 0,
 			'booked_pax'     => 0,
 			'pax_limit'      => 0,
-			'min_pax'        => '',
-			'max_pax'        => 0,
+			'min_pax'        => 1,
+			'max_pax'        => $group_size,
 		);
 
 		// Price.

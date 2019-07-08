@@ -228,7 +228,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.8 =
-Release Date: 7th July, 2019
+Release Date: 8th July, 2019
 
 Enhancement:
 
@@ -238,6 +238,8 @@ Fixes:
 
 * Departure Date is added in email and thankyou page for multiple pricing trips.
 * Group size field added on fixed departure listing.
+* Pricing name issue with "/" character. If this character is used in multiple pricing, then it is ubable to add this trip in cart.
+* Global FAQ Can't be empty issue.
 
 = 2.0.7=
 Release Date: 28th June, 2019
