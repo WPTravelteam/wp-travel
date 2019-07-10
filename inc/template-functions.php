@@ -1974,9 +1974,9 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										<?php
 
 										if ( ! empty( $pricing['max_pax'] ) ) {
-											echo sprintf( '%s - %s %s', $min, $max, __( 'Pax', 'wp-travel' ) );
+											echo sprintf( '%s - %s %s', $min, $max, $pax_string );
 										} else {
-											echo sprintf( '%s %s - %s', $min, __( 'Pax', 'wp-travel' ), $max );
+											echo sprintf( '%s %s - %s', $min, $pax_string, $max );
 										}
 										?>
 									</span>
@@ -2063,7 +2063,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													<?php
 												endif;
 												?>
-												<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+												<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 
 											</div>
 										</div>
@@ -2212,16 +2212,16 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										$max = ! empty( $pricing['max_pax'] ) ? esc_html( $pricing['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 
 										if ( ! empty( $pricing['max_pax'] ) ) {
-											echo sprintf( '%s - %s %s', $min, $max, __( 'Pax', 'wp-travel' ) );
+											echo sprintf( '%s - %s %s', $min, $max, $pax_string );
 										} else {
-											echo sprintf( '%s %s - %s', $min, __( 'Pax', 'wp-travel' ), $max );
+											echo sprintf( '%s %s - %s', $min, $pax_string, $max );
 										}
 										?>
 								</span>
 								<?php if ( $show_status_col ) : ?>
 									<span class="trip_list_by_fixed_departure_dates_seats">	
 										<?php if ( $pricing['sold_out'] ) : ?>
-											<span><?php echo esc_html__( 'SOLD OUT', 'wp-travel' ); ?></span>
+											<span><?php echo esc_html( $sold_out_string ); ?></span>
 										<?php else : ?>
 											<span><?php echo esc_html( $pricing['status'] ); ?></span>
 										<?php endif; ?>
@@ -2261,11 +2261,11 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									else :
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
 											?>
-											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html__( 'Select', 'wp-travel' ); ?></a>
+											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row-fd"><?php echo esc_html( $select_string ); ?></a>
 											<?php
 										} else {
 											?>
-											<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+											<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 											<?php
 										}
 										// @since 1.9.3 To display group discount pricing lists.
@@ -2302,7 +2302,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 												<?php
 											endif;
 											?>
-											<input type="submit" value="<?php echo esc_html__( 'Book now', 'wp-travel' ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+											<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
 
 										</div>
 									</div>
