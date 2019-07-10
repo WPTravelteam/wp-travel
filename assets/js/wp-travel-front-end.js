@@ -174,7 +174,7 @@ jQuery(document).ready(function($) {
             parent.toggleClass('opened');
         }).addClass('animate');
         jQuery(this).text(function(i, text) {
-            return text === wp_travel.strings.select ? wp_travel.strings.close : wp_travel.strings.select;
+            return text === wp_travel.strings.bookings.select ? wp_travel.strings.bookings.close : wp_travel.strings.bookings.select;
         })
     });
 
@@ -183,7 +183,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         jQuery(this).parent('.action').parent('.trip_list_by_fixed_departure_dates_booking').siblings('.wp-travel-booking-row-fd').toggle('fast').addClass('animate');
         jQuery(this).text(function(i, text) {
-            return text === wp_travel.strings.select ? wp_travel.strings.close : wp_travel.strings.select;
+            return text === wp_travel.strings.bookings.select ? wp_travel.strings.bookings.close : wp_travel.strings.bookings.select;
         })
     });
 
