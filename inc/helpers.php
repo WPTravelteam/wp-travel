@@ -2535,6 +2535,13 @@ function wp_travel_get_strings() {
 		'featured_book_now'     => __( 'Book Now', 'wp-travel' ), // Book Now at the featured section.
 		'featured_trip_enquiry' => __( 'Trip Enquiry', 'wp-travel' ), // Trip Enquiry at the featured section.
 		'trip_enquiry'          => __( 'Trip Enquiry', 'wp-travel' ),
+		'trip_type'             => __( 'Trip Type', 'wp-travel' ),
+		'activities'            => __( 'Activities', 'wp-travel' ),
+		'group_size'            => __( 'Group size', 'wp-travel' ),
+		'reviews'               => __( 'Reviews', 'wp-travel' ),
+		'locations'				=> __( 'Locations', 'wp-travel' ),
+		'fixed_departure'       => __( 'Fixed departure', 'wp-travel' ),
+		'trip_duration'         => __( 'Trip duration', 'wp-travel' ),
 		'bookings'              => array(
 			'pricing_name'   => __( 'Pricing Name', 'wp-travel' ),
 			'start_date'     => __( 'Start', 'wp-travel' ),

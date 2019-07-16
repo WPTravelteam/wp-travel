@@ -369,6 +369,12 @@ function wp_travel_single_excerpt( $post_id ) {
 		$enable_enquiry = get_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', true );
 	}
 
+	// Strings
+	$trip_type_text       = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
+	$activities_text      = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
+	$group_size_text      = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
+	$reviews_text         = isset( $strings['reviews'] ) ? $strings['reviews'] : __( 'Reviews', 'wp-travel' );
+
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
 	<div class="trip-short-desc">
@@ -381,7 +387,7 @@ function wp_travel_single_excerpt( $post_id ) {
 			?>
 			  <li>
 				   <div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Trip Type', 'wp-travel' ); ?></strong>
+					<strong class="title"><?php echo esc_html( $trip_type_text ); ?></strong>
 				</div>
 				<div class="travel-info">
 					<span class="value">
@@ -399,7 +405,7 @@ function wp_travel_single_excerpt( $post_id ) {
 			   </li>
 			   <li>
 				<div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Activities', 'wp-travel' ); ?></strong>
+					<strong class="title"><?php echo esc_html( $activities_text ); ?></strong>
 				</div>
 			   <div class="travel-info">
 					<span class="value">
@@ -417,7 +423,7 @@ function wp_travel_single_excerpt( $post_id ) {
 			   </li>
 			   <li>
 				   <div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></strong>
+					<strong class="title"><?php echo esc_html( $group_size_text ); ?></strong>
 				</div>
 				<div class="travel-info">
 					<span class="value">
@@ -437,7 +443,7 @@ function wp_travel_single_excerpt( $post_id ) {
 				?>
 			   <li>
 				   <div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></strong>
+					<strong class="title"><?php echo esc_html( $reviews_text ); ?></strong>
 				</div>
 				<div class="travel-info">
 				<span class="value">
@@ -540,6 +546,9 @@ function wp_travel_single_location( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+	// Get Strings
+	$strings = wp_travel_get_strings();
+
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
@@ -550,11 +559,17 @@ function wp_travel_single_location( $post_id ) {
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
 	$trip_duration_night = get_post_meta( $post_id, 'wp_travel_trip_duration_night', true );
 	$trip_duration_night = ( $trip_duration_night ) ? $trip_duration_night : 0;
+
+	// Strings
+	$locations_text       = isset( $strings['locations'] ) ? $strings['locations'] : __( 'Locations', 'wp-travel' );
+	$fixed_departure_text = isset( $strings['fixed_departure'] ) ? $strings['fixed_departure'] : __( 'Fixed departure', 'wp-travel' );
+	$trip_duration_text   = isset( $strings['trip_duration'] ) ? $strings['trip_duration'] : __( 'Trip duration', 'wp-travel' );
+
 	if ( is_array( $terms ) && count( $terms ) > 0 ) :
 		?>
 		<li class="no-border">
 			<div class="travel-info">
-				<strong class="title"><?php esc_html_e( 'Locations', 'wp-travel' ); ?></strong>
+				<strong class="title"><?php echo esc_html( $locations_text ); ?></strong>
 			</div>
 			<div class="travel-info">
 				<span class="value">
@@ -582,7 +597,7 @@ function wp_travel_single_location( $post_id ) {
 			?>
 				<li>
 					<div class="travel-info">
-						<strong class="title"><?php esc_html_e( 'Fixed Departure', 'wp-travel' ); ?></strong>
+						<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
 					</div>
 					<div class="travel-info">
 						<span class="value">
@@ -598,7 +613,7 @@ function wp_travel_single_location( $post_id ) {
 		<?php if ( $trip_duration || $trip_duration_night ) : ?>
 			<li>
 				<div class="travel-info">
-					<strong class="title"><?php esc_html_e( 'Trip Duration', 'wp-travel' ); ?></strong>
+					<strong class="title"><?php echo esc_html( $trip_duration_text ); ?></strong>
 				</div>
 				<div class="travel-info">
 					<span class="value">

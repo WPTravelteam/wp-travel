@@ -233,6 +233,7 @@ Release Date:
 Fixes:
 
 * Booking Tab strings translation issue on 2.0.8.
+* Minor PHP Warning. Undefined index pricing_options.
 
 = 2.0.8 =
 Release Date: 8th July, 2019
