@@ -233,6 +233,7 @@ Release Date:
 Fixes:
 
 * Booking Tab strings translation issue on 2.0.8.
+* Datepicker input field conflict with ninja form. It is hiding date picker of ninja form.
 * Minor PHP Warning. Undefined index pricing_options.
 
 = 2.0.8 =
