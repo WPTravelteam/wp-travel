@@ -713,6 +713,8 @@ function wp_travel_get_min_price_key( $options ) {
 		return;
 	}
 
+	$pricing_options = false;
+
 	if ( is_array( $options ) ) {
 		$pricing_options = $options;
 	} elseif ( is_numeric( $options ) ) {

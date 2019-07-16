@@ -46,9 +46,15 @@ add_action( 'save_post', 'wp_travel_clear_booking_transient' );
 add_filter( 'excerpt_more', 'wp_travel_excerpt_more' );
 add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
 add_action( 'template_redirect', 'wp_travel_prevent_endpoint_indexing' );
+// old Listings[pricing options in a trip as different trip]
+// add_action( 'wp_travel_booking_default_princing_list', 'wp_travel_booking_default_princing_list_content' ); // if any issue exists in default listing, please update in fixed departure listing.
+// add_action( 'wp_travel_booking_fixed_departure_list', 'wp_travel_booking_fixed_departure_list_content' );
 
-add_action( 'wp_travel_booking_default_princing_list', 'wp_travel_booking_default_princing_list_content' ); // if any issue exists in default listing, please update in fixed departure listing.
-add_action( 'wp_travel_booking_fixed_departure_list', 'wp_travel_booking_fixed_departure_list_content' );
+// New Listings[pricing options in a trip as same trip]
+add_action( 'wp_travel_booking_default_princing_list', 'wp_travel_booking_default_princing_list_content_new' ); // if any issue exists in default listing, please update in fixed departure listing.
+add_action( 'wp_travel_booking_fixed_departure_list', 'wp_travel_booking_fixed_departure_list_content_new' );
+
+
 add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
 
@@ -1274,17 +1280,15 @@ function wp_travel_booking_message() {
  */
 function wp_travel_get_group_size( $post_id = null ) {
 	if ( ! is_null( $post_id ) ) {
-		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $post_id ) );
-	} else {
-		global $post;
+		$post = get_post( $post_id );
 		$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
-	}
+		$group_size = $wp_travel_itinerary->get_group_size();
+	
+		if ( $group_size ) {
+			return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ), $group_size );
+		}
+	} 
 
-	$group_size = $wp_travel_itinerary->get_group_size();
-
-	if ( $group_size ) {
-		return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ), $group_size );
-	}
 
 	return apply_filters( 'wp_travel_default_group_size_text', esc_html__( 'No Size Limit', 'wp-travel' ) );
 }
@@ -2084,6 +2088,430 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 			padding-right:5px;
 		}
 		</style>
+		<?php
+	}
+}
+
+function wp_travel_booking_default_princing_list_content_new( $trip_id ) {
+
+	if ( '' == $trip_id ) {
+		return;
+	}
+	// Strings
+	$strings               = wp_travel_get_strings();
+	$pricing_name_string   = isset( $strings['bookings']['pricing_name'] ) ? $strings['bookings']['pricing_name'] : __( 'Pricing Name', 'wp-travel' );
+	$start_date_string     = isset( $strings['bookings']['start_date'] ) ? $strings['bookings']['start_date'] : __( 'Start', 'wp-travel' );
+	$end_date_string       = isset( $strings['bookings']['end_date'] ) ? $strings['bookings']['end_date'] : __( 'End', 'wp-travel' );
+	$group_size_string     = isset( $strings['bookings']['group_size'] ) ? $strings['bookings']['group_size'] : __( 'Group (min-max)', 'wp-travel' );
+	$seats_left_string     = isset( $strings['bookings']['seats_left'] ) ? $strings['bookings']['seats_left'] : __( 'Seats Left', 'wp-travel' );
+	$pax_string            = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
+	$price_string          = isset( $strings['bookings']['price'] ) ? $strings['bookings']['price'] : __( 'Price', 'wp-travel' );
+	$arrival_date_string   = isset( $strings['bookings']['arrival_date'] ) ? $strings['bookings']['arrival_date'] : __( 'Arrival Date', 'wp-travel' );
+	$departure_date_string = isset( $strings['bookings']['departure_date'] ) ? $strings['bookings']['departure_date'] : __( 'Departure Date', 'wp-travel' );
+	$sold_out_string       = isset( $strings['bookings']['sold_out'] ) ? $strings['bookings']['sold_out'] : __( 'Sold out', 'wp-travel' );
+	$book_now_string       = isset( $strings['bookings']['book_now'] ) ? $strings['bookings']['book_now'] : __( 'Book Now', 'wp-travel' );
+	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
+	// Endf of strings
+	$pricings     = wp_travel_get_trip_listing_option( $trip_id );
+	$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
+	$fixed_departure = isset( $pricings['fixed_departure'] ) ? $pricings['fixed_departure'] : 'no';
+	// Pricing Lists.
+	if ( is_array( $pricing_data ) && count( $pricing_data ) > 0 ) {
+		$js_date_format = wp_travel_date_format_php_to_js();
+		$date_format    = get_option( 'date_format' );
+
+		$settings             = wp_travel_get_settings();
+		$form_field           = new WP_Travel_FW_Field();
+		$sold_out_btn_rep_msg = apply_filters( 'wp_travel_inventory_sold_out_button', '', $trip_id );
+
+		$show_pricing_name = isset( $pricing_data[0]['price_key'] ) && ! empty( $pricing_data[0]['price_key'] ) ? true : false;
+		$show_status_col   = apply_filters( 'wp_travel_inventory_enable_status_column', false, $trip_id );
+		$show_end_date     = wp_travel_booking_show_end_date();
+
+		$trip_extras_class = new Wp_Travel_Extras_Frontend();
+
+		$default_columns = 5; // To determine width of columns;
+		?>
+
+		<div id="wp-travel-date-price" class="detail-content">
+			<div class="availabily-wrapper">
+				<ul class="availabily-list additional-col">
+					<li class="availabily-heading clearfix">
+						<div class="date-from">
+							<?php echo esc_html( $start_date_string ); ?>
+						</div>
+						<?php
+						if ( $show_end_date ) :
+							$default_columns++;
+							?>
+							<div class="date-to">
+								<?php echo esc_html( $end_date_string ); ?>
+							</div>
+						<?php endif; ?>
+						<div class="group-size">
+							<?php echo esc_html( $group_size_string ); ?>
+						</div>
+						<?php
+						if ( $show_status_col ) :
+							$default_columns++;
+							?>
+							<div class="seats-left" >
+								<?php echo esc_html( $seats_left_string ); ?>
+							</div>
+						<?php endif; ?>
+						<div class="no-of-pax">
+							<?php echo esc_html( $pax_string ); ?>
+						</div>
+						<div class="price">
+							<?php echo esc_html( $price_string ); ?>
+						</div>
+						<div class="action">
+							&nbsp;
+						</div>
+					</li>
+					<!-- pricing loop -->
+					<?php
+					foreach ( $pricing_data as $p ) :
+
+						$arrival_date   = $p['arrival_date'];
+						$departure_date = $p['departure_date'];
+						$date_label     = $p['date_label'];
+						$pricing_options = $p['pricing_options'];
+
+						$parent_id = 'wp-travel-pricing-wrap';
+						if ( 'yes' === $fixed_departure ) {
+							$parent_id = sprintf( 'pricing-%s', $arrival_date );
+						}
+
+						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
+						if ( 'yes' !== $fixed_departure ) :
+							$cart_url = add_query_arg( 'trip_duration', $p['trip_duration_days'], $cart_url );
+						endif;
+						// $cart_url = add_query_arg( 'price_key', $pricing['price_key'], $cart_url );
+
+						// $unavailable_class = '';
+						// $availability      = false;
+						// if ( isset( $pricing['arrival_date'] ) ) {
+						// 	$availability = wp_travel_trip_availability( $trip_id, $pricing['price_key'], $pricing['arrival_date'], $pricing['sold_out'] );
+						// 	if ( ! $availability ) {
+						// 		$unavailable_class = 'pricing_unavailable';
+						// 	}
+						// }
+						
+						?>
+
+						<li class="availabily-content clearfix <?php //echo esc_attr( $unavailable_class ); ?>">
+							<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
+
+								<?php if ( 'yes' === $fixed_departure ) : ?>
+									<div class="date-from">
+										<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
+										<?php echo esc_html( date_i18n( 'l', strtotime( $arrival_date ) ) ); ?>
+										<span><?php echo esc_html( date_i18n( $date_format, strtotime( $arrival_date ) ) ); ?></span>
+										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $arrival_date ); ?>">
+									</div>
+									<?php if ( $show_end_date ) : ?>
+										<div class="date-to">
+											<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
+											<?php echo esc_html( date_i18n( 'l', strtotime( $departure_date ) ) ); ?>
+											<span><?php echo esc_html( date_i18n( $date_format, strtotime( $departure_date ) ) ); ?></span>
+											<input type="hidden" name="departure_date" value="<?php echo esc_attr( $departure_date ); ?>">
+										</div>
+									<?php endif; ?>
+								<?php else : ?>
+									<div class="date-from">
+										<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
+										<?php
+										$total_days = 0;
+										if ( $pricing['trip_duration_days'] > 0 || $pricing['trip_duration_night'] > 0 ) {
+											$days = $pricing['trip_duration_days'] > $pricing['trip_duration_night'] ? $pricing['trip_duration_days'] : $pricing['trip_duration_night'];
+											$days--; // As we need to exclude current selected date.
+											$total_days = $days ? $days : $total_days;
+										}
+										$start_field = array(
+											'label'       => esc_html__( 'Start', 'wp-travel' ),
+											'type'        => 'date',
+											'name'        => 'arrival_date',
+											'placeholder' => esc_html( $arrival_date_string  ),
+											'class'       => 'wp-travel-pricing-days-night',
+											'validations' => array(
+												'required' => true,
+											),
+											'attributes'  => array(
+												'data-parsley-trigger' => 'change',
+												'data-parsley-required-message' => esc_attr__( 'Please Select a Date', 'wp-travel' ),
+												'data-totaldays' => $total_days,
+												'data-date-format' => $js_date_format,
+											),
+											'wrapper_class' => 'date-from',
+										);
+										$form_field->init()->render_input( $start_field );
+										?>
+									</div>
+									<?php if ( $show_end_date ) : ?>
+
+										<div class="date-to">
+											<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
+											<?php
+											$end_field = array(
+												'label' => esc_html__( 'End', 'wp-travel' ),
+												'type'  => 'date',
+												'name'  => 'departure_date',
+												'placeholder' => esc_html( $departure_date_string ),
+											);
+											$end_field = wp_parse_args( $end_field, $start_field );
+											$form_field->init()->render_input( $end_field );
+											?>
+										</div>
+									<?php endif; ?>
+								<?php endif; ?>
+
+								
+								<!-- Pricing option loop inside date -->
+								<div class="group-size">
+									<div id="paxpicker" class="paxpicker">
+										<div class="icon-users summary"><input readonly="readonly"
+												class="participants-summary-container" value="Select Pax"></div>
+										<div class="pricing-categories" id="pricing-categories">
+											<span class="separator">&nbsp;</span>
+											<?php
+											foreach ( $pricing_options as $pricing ) :
+												// dd( $pricing );
+												$max_attr = '';
+												$min_attr = 'min=1';
+												$min = ! empty( $pricing['min_pax'] ) ? esc_html( $pricing['min_pax'] ) : 1;
+												$max = ! empty( $pricing['max_pax'] ) ? esc_html( $pricing['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
+												$min      = ! empty( $pricing['min_pax'] ) ? esc_html( $pricing['min_pax'] ) : 1;
+												if ( '' !== $pricing['min_pax'] ) {
+													$min_attr = 'min=' . esc_attr( $pricing['min_pax'] );
+												}
+												if ( '' !== $pricing['max_pax'] ) { // This value is wrong sometimes.
+													$max_attr = 'max=' . esc_attr( $pricing['max_pax'] );
+													$max      = esc_attr( $pricing['max_pax'] );
+												}
+												if ( $pricing['available_pax'] ) {
+													$max_attr = 'max=' . esc_attr( $pricing['available_pax'] );
+													$max      = esc_attr( $pricing['available_pax'] );
+												}
+
+												?>
+												<div class="category">
+													<p class="picker-info">
+														<span class="pax-type">
+															<strong><?php echo esc_html( $pricing['price_per'] ); ?></strong>
+															<span class="min-max-pax">
+																(<?php
+																	if ( ! empty( $pricing['max_pax'] ) ) {
+																		echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+																	} else {
+																		echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+																	}
+																?>)
+															</span>
+														</span>
+														<span class="price-per-info">
+															<?php if ( $pricing['price'] ) : ?>
+
+																<?php if ( 'yes' === $pricing['enable_sale'] ) : ?>
+																	<del>
+																		<span><?php echo wp_travel_get_formated_price_currency( $pricing['regular'], true ); ?></span>
+																	</del>
+																<?php endif; ?>
+																<span class="person-count">
+																	<ins>
+																		<span><?php echo wp_travel_get_formated_price_currency( $pricing['price'] ); ?></span>
+																	</ins>/<?php echo esc_html( $pricing['price_per'] ); ?>
+																</span>
+															<?php endif; ?>
+														</span>
+
+														<span class="pricing-name">( <?php echo esc_html( $pricing['pricing_name'] ); ?> )</span>
+													</p>
+													<div class="pax-select-container">
+														<a href="#" class="icon-minus pax-picker-minus">-</a>
+														<input class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" <?php echo sprintf( ' %s %s', $min_attr, $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
+														<a href="#" class="icon-plus pax-picker-plus">+</a>
+													</div>
+												</div>
+												
+												<?php
+											endforeach; ?>
+											
+											
+										</div>
+									</div>										
+								</div>
+								<div class="pax-selected">
+									<p class="no-pax-selected">Please select Pax</p>
+									<ul>
+										<li id="item1">
+											<span><strong>Adult <span class="selected-pax">5</span> x $5/ Person </strong></span>
+										</li>
+									</ul>
+								</div>
+								<div class="action">
+
+									<?php if ( $pricing['sold_out'] ) : ?>
+
+										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+
+										<?php
+									else :
+										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
+											?>
+											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html( $select_string ); ?></a>
+											<?php
+										} else {
+											?>
+											<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+											<?php
+										}
+										// @since 1.9.3 To display group discount pricing lists.
+										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+										?>
+									<?php endif; ?>
+									<?php if ( isset( $arrival_date ) ) : ?>
+										<!-- if fixed departure -->
+										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $arrival_date ); ?>" >
+										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $departure_date ); ?>" >
+									<?php endif; ?>
+									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
+									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
+								</div>
+								<?php if ( $availability || 'no' === $fixed_departure ) : // Remove Book now if trip is soldout. ?>
+									<div class="wp-travel-booking-row">
+										<?php
+											/**
+											 * Support For WP Travel Tour Extras Plugin.
+											 *
+											 * @since 1.5.8
+											 */
+											$arrival_date = isset( $arrival_date ) ? $arrival_date : '';
+											do_action( 'wp_travel_trip_extras', $pricing['price_key'], $arrival_date );
+										?>
+										<div class="wp-travel-calender-aside">											
+											<div class="add-to-cart">
+												
+												<?php
+												if ( 'yes' !== $pricing['fixed_departure'] ) :
+													?>
+													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $pricing['trip_duration_days'] ); ?>" />
+													<?php
+												endif;
+												?>
+												<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+
+											</div>
+										</div>
+									</div>
+								<?php endif; ?>
+							</form>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+		<?php $column_width = sprintf( '%0.4f', 100 / $default_columns ); ?>
+		<style>
+		ul.availabily-list li.availabily-heading >div,
+		ul.availabily-list li > form > div{
+			width: <?php echo esc_attr( $column_width ); ?>%;
+			padding:0;
+			padding-right:5px;
+		}
+		ul.availabily-list li > form > div.group-size{
+			width:35%;
+		}
+		ul.availabily-list li > form > div.pax-selected{
+			width:20%
+		}
+		ul.availabily-list.additional-col li > div.paxpicker{
+			width:100%;
+		}
+		.paxpicker.is-active .pricing-categories{
+			z-index:11;
+		}
+		</style>
+
+		<script>
+			jQuery(document).ready( function($) {
+
+				$(document).on( 'click', '.paxpicker .icon-users', function( e ) {
+					if ( $(this).closest('.paxpicker').hasClass('is-active') ) {
+						$(this).closest('.paxpicker').removeClass( 'is-active' );
+					} else {
+						$(this).closest('.paxpicker').addClass('is-active');
+					}
+				} );
+
+				$(document).on( 'click', '.pax-picker-plus', function(e) {
+					e.preventDefault();
+
+					// Calculate Pax Value on pax increase.
+					var input = $(this).siblings('.paxpicker-input');
+					var min = input.data('min');
+					var max = input.data('max');
+
+					var current_val = ( input.val() ) ? parseInt( input.val() ) : 0;
+					if ( ! current_val ) {
+						current_val = min;
+					} else {
+						current_val += 1;
+					}
+					
+					if ( current_val > max ) {
+						input.attr('disabled', 'disabled');
+					} else {
+						input.removeAttr( 'disabled' ).val( current_val );
+					}
+
+
+
+				} );
+
+				$(document).on( 'click', '.pax-picker-minus', function(e) {
+					e.preventDefault();
+
+					
+					// Calculate Pax Value on pax increase.
+					var input = $(this).siblings('.paxpicker-input');
+
+					var min = input.attr('min');
+					var max = input.attr('max');
+
+					var step = ( input.attr('step') ) ? input.attr('step') : 1;
+
+					var current_val = ( input.val() ) ? parseInt( input.val() ) : min;
+					if ( current_val ) {
+						current_val -= step;
+					}
+					
+
+					input.attr( 'min', min );
+					//set min value to 0 if min value is reached.
+					if ( current_val == min ) {
+						input.attr( {'min': '0', 'step' : input.data('min') } ).removeAttr('disabled').val( current_val );
+						if ( 0 == current_val ) {
+							input.attr( 'disabled', 'disabled' );
+						}
+					} else {
+						input.attr( {'min': input.data( 'min' ), 'step' : 1 });
+						if ( current_val < min || 0 == current_val ) {
+							input.attr('disabled', 'disabled');
+						} else {
+							input.removeAttr( 'disabled' ).val( current_val );
+						}
+					}
+					console.log( current_val + ' ' + min  );
+
+					
+
+				} );
+			} );
+
+			
+		</script>
+
 		<?php
 	}
 }

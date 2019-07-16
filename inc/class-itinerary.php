@@ -108,7 +108,7 @@ class WP_Travel_Itinerary {
 	function get_group_size() {
 
 		// $pricing_option = ( isset( $this->post_meta['wp_travel_pricing_option_type'][0] ) && ! empty( $this->post_meta['wp_travel_pricing_option_type'][0] ) ) ? $this->post_meta['wp_travel_pricing_option_type'][0] : 'single-price';
-		$pricing_option = wp_travel_get_pricing_option_type();
+		$pricing_option = wp_travel_get_pricing_option_type($this->post->ID);
 		if ( 'single-price' === $pricing_option ) {
 			if (
 				isset( $this->post_meta['wp_travel_group_size'][0] )
