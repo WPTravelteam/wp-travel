@@ -34,7 +34,7 @@ echo ""
 
 # Copy new set of files to tag
 echo "copy files to tag"
-rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md  --exclude .sass-cache     ./ ./build/$CURRENT_TAG
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md  --exclude .sass-cache     ./ ./build/tags/$CURRENT_TAG
 echo "*********************************"
 echo ""
 
