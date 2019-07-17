@@ -2542,6 +2542,7 @@ function wp_travel_get_strings() {
 		'locations'				=> __( 'Locations', 'wp-travel' ),
 		'fixed_departure'       => __( 'Fixed departure', 'wp-travel' ),
 		'trip_duration'         => __( 'Trip duration', 'wp-travel' ),
+		
 		'bookings'              => array(
 			'pricing_name'   => __( 'Pricing Name', 'wp-travel' ),
 			'start_date'     => __( 'Start', 'wp-travel' ),
@@ -2557,10 +2558,40 @@ function wp_travel_get_strings() {
 			'close'          => __( 'Close', 'wp-travel' ),
 			'book_now'       => __( 'Book Now', 'wp-travel' ),
 		),
+		'alert' => array(
+			'required_pax_alert'    => __( 'Pax is required.', 'wp-travel' ),
+			'min_pax_alert'         => __( 'Pax should be greater than or equal to {min_pax}.', 'wp-travel' ),
+			'max_pax_alert'         => __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' ),
+			'both_pax_alert'        => __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' ),
+		),
 
 	);
 
 	return apply_filters( 'wp_travel_strings', $localized_strings );
+}
+
+function wp_travel_pax_alert_message( $min = false, $max = false ) {
+
+	// Strings
+	$strings               = wp_travel_get_strings();
+
+	$range_alert = '';
+	if ( $min && $max ) {
+		$range_alert = isset( $strings['alert']['both_pax_alert'] ) ? $strings['alert']['both_pax_alert'] : __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' );
+	} elseif ( $min ) {
+		$range_alert = isset( $strings['alert']['min_pax_alert'] ) ? $strings['alert']['min_pax_alert'] : __( 'Pax should be greater than or equal to {min_pax}.', 'wp-travel' );
+	} elseif( $max ) {
+		$range_alert = isset( $strings['alert']['max_pax_alert'] ) ? $strings['alert']['max_pax_alert'] : __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' );
+	}
+
+	$pax_tags = array(
+		'{min_pax}' => $min,
+		'{max_pax}' => $max,
+	);
+	$range_alert = str_replace( array_keys( $pax_tags ), $pax_tags, $range_alert );
+	$required_pax_alert = isset( $strings['alert']['required_pax_alert'] ) ? $strings['alert']['required_pax_alert'] : __( 'Pax is required.', 'wp-travel' );
+
+	return array( 'range' => $range_alert, 'required' => $required_pax_alert );
 }
 
 /**

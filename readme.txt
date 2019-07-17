@@ -37,6 +37,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel PayFast Checkout](https://wptravel.io/downloads/wp-travel-payfast-checkout/?utm_source=addons&utm_medium=payfast&utm_campaign=WP%20Plugin) (For online payments in South Africa)
 * [WP Travel PayU Checkout](https://wptravel.io/downloads/wp-travel-payu-checkout/?utm_source=addons&utm_medium=payu&utm_campaign=WP%20Plugin) (For online payments in Poland)
 * [WP Travel Payhere Checkout](https://wptravel.io/downloads/wp-travel-payhere-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Sri Lanka)
+* [WP Travel PayU Latam](https://wptravel.io/downloads/wp-travel-payu-latam-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Latin American Countries : Columbia, Argentina, Brasil, Chile, Mexico, Panama and Peru)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
@@ -89,7 +90,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * **Tour Extras:** It allows you add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel include very easy and simple booking system which user can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data are very important for all business. WP Travel has in-build booking stat that helps you to generate the report from different date range, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has ten additional payment gateway. [View all 10 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has eleven additional payment gateway. [View all 11 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -228,12 +229,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.0.9 =
-Release Date:
+Release Date: 17th July, 2019
 
 Fixes:
 
-* Booking Tab strings translation issue on 2.0.8.
-* Datepicker input field conflict with ninja form. It is hiding date picker of ninja form.
+* Booking Tab Label strings translation issue on 2.0.8.
+* Datepicker input field conflict with ninja form. Previously, it is hiding date picker of ninja form.
 * Minor PHP Warning. Undefined index pricing_options.
 
 = 2.0.8 =

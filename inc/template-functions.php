@@ -2007,9 +2007,14 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										<?php endif; ?>
 									</div>
 								<?php endif; ?>
+								<?php
+									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
+									$range_alert = $pax_alerts['range'];
+									$required_alert = $pax_alerts['required'];
+								?>
 								
 								<div class="no-of-pax">
-									<input name="pax" type="number" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+									<input name="pax" type="number" data-parsley-range-message="<?php echo esc_attr( $range_alert ); ?>" data-parsley-required-message="<?php echo esc_attr( $required_alert ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
 								</div>
 
 								<div class="price">
@@ -2242,9 +2247,13 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										<?php endif; ?>
 									</span>
 								<?php endif; ?>
-								
+								<?php
+									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
+									$range_alert = $pax_alerts['range'];
+									$required_alert = $pax_alerts['required'];
+								?>
 								<span class="trip_list_by_fixed_departure_dates_pax">
-									<input name="pax" type="number" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
+									<input name="pax" type="number" data-parsley-range-message="<?php echo esc_attr( $range_alert ); ?>" data-parsley-required-message="<?php echo esc_attr( $required_alert ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
 								</span>
 
 								<span class="trip_list_by_fixed_departure_dates_price">
