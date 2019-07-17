@@ -37,7 +37,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel PayFast Checkout](https://wptravel.io/downloads/wp-travel-payfast-checkout/?utm_source=addons&utm_medium=payfast&utm_campaign=WP%20Plugin) (For online payments in South Africa)
 * [WP Travel PayU Checkout](https://wptravel.io/downloads/wp-travel-payu-checkout/?utm_source=addons&utm_medium=payu&utm_campaign=WP%20Plugin) (For online payments in Poland)
 * [WP Travel Payhere Checkout](https://wptravel.io/downloads/wp-travel-payhere-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Sri Lanka)
-* [WP Travel PayU Latam](https://wptravel.io/downloads/wp-travel-payu-latam-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Latin American Countries : Columbia, Argentina, Brasil, Chile, Mexico, Panama and Peru)
+* [WP Travel PayU Latam](https://wptravel.io/downloads/wp-travel-payu-latam-checkout/?utm_source=addons&utm_medium=payulatam&utm_campaign=WP%20Plugin) (For online payments in Latin American Countries : Columbia, Argentina, Brasil, Chile, Mexico, Panama and Peru)
 
 = WP ITINERARY ADDONS =
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
@@ -46,11 +46,13 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Wishlists](https://wptravel.io/downloads/wp-travel-wishlists/?utm_source=addons&utm_medium=wishlist&utm_campaign=WP%20Plugin)
 * [WP Travel Field Editor](https://wptravel.io/downloads/wp-travel-field-editor/?utm_source=addons&utm_medium=field-editor&utm_campaign=WP%20Plugin)
 * [WP Travel Partial Payment](https://wptravel.io/downloads/wp-travel-partial-payment/?utm_source=addons&utm_medium=partial-payment&utm_campaign=WP%20Plugin)
-* [WP Travel Rest API](https://wptravel.io/downloads/wp-travel-rest-api/)
-* [WP Travel Downloads](https://wptravel.io/downloads/wp-travel-downloads/)
-* [WP Travel MailChimp](https://wptravel.io/downloads/wp-travel-mailchimp/)
-* [WP Travel Custom Filters](https://wptravel.io/downloads/wp-travel-custom-filter/)
-* [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/)
+* [WP Travel Rest API](https://wptravel.io/downloads/wp-travel-rest-api/?utm_source=addons&utm_medium=rest-api&utm_campaign=WP%20Plugin)
+* [WP Travel Downloads](https://wptravel.io/downloads/wp-travel-downloads/?utm_source=addons&utm_medium=downloads&utm_campaign=WP%20Plugin)
+* [WP Travel MailChimp](https://wptravel.io/downloads/wp-travel-mailchimp/?utm_source=addons&utm_medium=mailchimp&utm_campaign=WP%20Plugin)
+* [WP Travel Custom Filters](https://wptravel.io/downloads/wp-travel-custom-filter/?utm_source=addons&utm_medium=custom-filters&utm_campaign=WP%20Plugin)
+* [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/?utm_source=addons&utm_medium=import-export&utm_campaign=WP%20Plugin)
+* [WP Travel Advanced Gallery](https://wptravel.io/downloads/wp-travel-advanced-gallery/?utm_source=addons&utm_medium=advanced-gallery&utm_campaign=WP%20Plugin)
+* [WP Travel Blocks](https://wptravel.io/downloads/wp-travel-blocks/?utm_source=addons&utm_medium=blocks&utm_campaign=WP%20Plugin)
 
 
 = WP TRAVEL MAP ADDONS =
