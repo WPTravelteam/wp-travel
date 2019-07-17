@@ -1491,7 +1491,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 .wp-travel-default-article .wp-travel-article-image-wrap {
   float: left;
   width: 29%;
-  margin-right: 15px;
+  margin-right: 1%;
   text-align: center;
   position: relative;
 }

@@ -797,7 +797,7 @@ function wp_travel_book_now() {
 	}
 
 	$settings = wp_travel_get_settings();
-
+	$first_key = '';
 	if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 		/**
 		 * Add Support for invertory addon options.
@@ -1010,7 +1010,7 @@ function wp_travel_book_now() {
 	 *
 	 * @since 1.0.5 // For Payment.
 	 */
-	do_action( 'wp_travel_after_frontend_booking_save', $booking_id );
+	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key );
 
 	// Clear Transient To update booking Count.
 	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );

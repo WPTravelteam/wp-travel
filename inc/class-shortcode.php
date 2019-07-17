@@ -120,7 +120,7 @@ class Wp_Travel_Shortcodes {
 		$limit = absint( $limit );
 
 		$args = array(
-			'post_type'      => 'itineraries',
+			'post_type'      => WP_TRAVEL_POST_TYPE,
 			'posts_per_page' => $limit,
 			'status'         => 'published',
 		);

@@ -2570,6 +2570,14 @@ function wp_travel_get_strings() {
 	return apply_filters( 'wp_travel_strings', $localized_strings );
 }
 
+/**
+ * Return Pax alert message.
+ *
+ * @param number $min Min pax.
+ * @param number $max Max pax.
+ * 
+ * @since 2.0.9
+ */
 function wp_travel_pax_alert_message( $min = false, $max = false ) {
 
 	// Strings

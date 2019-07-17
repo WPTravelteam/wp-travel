@@ -308,6 +308,12 @@ function wp_travel_save_backend_enqueries_data( $post_id ) {
 	$enquery_data = array_map( 'sanitize_text_field', wp_unslash( $enquery_data ) );
 	$enquery_data = apply_filters( 'wp_travel_admin_enquiry_data', $enquery_data );
 	update_post_meta( $post_id, 'wp_travel_trip_enquiry_data', $enquery_data );
+	/**
+	 * Hook used to initialize zapier automation.
+	 *
+	 * @since 2.0.9
+	 */
+	do_action( 'wp_travel_after_enquiry_save', $post_id, $enquery_data );
 }
 
 add_action( 'save_post', 'wp_travel_save_backend_enqueries_data' );

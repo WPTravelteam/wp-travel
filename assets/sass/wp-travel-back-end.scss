@@ -540,10 +540,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             margin-right: 15px;
             min-width: 135px;
         }
-        input,
+
         textarea,
         select {
             min-width: calc(100% - 150px);
+        }
+        input {
+            &:not( [type="checkbox"] ):not( [type="radio"] ) {
+                min-width: calc(100% - 150px);
+            }
         }
     }
     .wp-travel-text-info {

@@ -476,7 +476,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   margin-right: 15px;
   min-width: 135px;
 }
-#wp-travel-enquiries-info .wp-travel-form-field input, #wp-travel-enquiries-info .wp-travel-form-field select, #wp-travel-enquiries-info .wp-travel-form-field textarea,
 #wp-travel-enquiries-info .wp-travel-form-field textarea,
 #wp-travel-enquiries-info .wp-travel-form-field select,
 #wp-travel-enquiries-info .wp-travel-form-field .stat-toolbar-form .field-group input,
@@ -484,6 +483,9 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 #wp-travel-enquiries-info .stat-toolbar-form .field-group .wp-travel-form-field textarea,
 .stat-toolbar-form .field-group #wp-travel-enquiries-info .wp-travel-form-field textarea,
 #wp-travel-enquiries-info .wp-travel-form-field .stat-toolbar-form .field-group textarea {
+  min-width: calc(100% - 150px);
+}
+#wp-travel-enquiries-info .wp-travel-form-field input:not([type="checkbox"]):not([type="radio"]), #wp-travel-enquiries-info .wp-travel-form-field select:not([type="checkbox"]):not([type="radio"]), #wp-travel-enquiries-info .wp-travel-form-field textarea:not([type="checkbox"]):not([type="radio"]) {
   min-width: calc(100% - 150px);
 }
 #wp-travel-enquiries-info .wp-travel-text-info {
