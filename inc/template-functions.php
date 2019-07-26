@@ -238,14 +238,11 @@ function wp_travel_wrapper_end() {
 function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 	$settings = wp_travel_get_settings();
 
+	$trip_price = wp_travel_get_price( $trip_id );
+	$regular_price = wp_travel_get_price( $trip_id, true );
 	$min_price_key = wp_travel_get_min_price_key( $trip_id );
-	$regular_price = wp_travel_get_actual_trip_price( $trip_id, $min_price_key, true ); // Third param will return regular price if sale price isn't enabled.
-	$trip_price    = wp_travel_get_actual_trip_price( $trip_id, $min_price_key ); // This is actual price.
 
-	$enable_sale = wp_travel_is_enable_sale( $trip_id );
-
-	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
+	$enable_sale = wp_travel_is_enable_sale_price( $trip_id );
 	$price_per_text  = wp_travel_get_price_per_text( $trip_id, $min_price_key );
 
 	$hide_price_per = wp_travel_hide_price_per_field( $trip_id );
@@ -737,7 +734,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 	$trip_price      = wp_travel_get_trip_price( $post_id );
-	$enable_sale     = wp_travel_is_enable_sale( $post_id );
+	$enable_sale     = wp_travel_is_enable_sale_price( $post_id );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -1209,7 +1206,7 @@ function wp_travel_save_offer( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$enable_sale = wp_travel_is_enable_sale( $post_id );
+	$enable_sale = wp_travel_is_enable_sale_price( $post_id );
 
 	if ( ! $enable_sale ) {
 		return;
@@ -1808,6 +1805,8 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
 	// Endf of strings
 	$pricings     = wp_travel_get_trip_pricing_option( $trip_id );
+	dd( $pricings );
+	// dd( wp_travel_get_trip_listing_option( $trip_id ) );
 	$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
 	// Pricing Lists.
 	if ( is_array( $pricing_data ) && count( $pricing_data ) > 0 ) {
@@ -1984,18 +1983,79 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<?php endif; ?>
 								<?php endif; ?>
 								<div class="group-size">
-									<span class="availabily-heading-label"><?php echo esc_html( $group_size_string ); ?></span>
-									<span>
-										<?php
+									<div id="paxpicker" class="paxpicker">
+										<div class="icon-users summary"><input readonly="readonly"
+												class="participants-summary-container" value="Select Pax"></div>
+										<div class="pricing-categories" id="pricing-categories">
+											<span class="separator">&nbsp;</span>
+											<?php
+											foreach ( $pricing_options as $pricing ) :
+												// dd( $pricing );
+												$max_attr = '';
+												$min_attr = 'min=1';
+												$min = ! empty( $pricing['min_pax'] ) ? esc_html( $pricing['min_pax'] ) : 1;
+												$max = ! empty( $pricing['max_pax'] ) ? esc_html( $pricing['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
+												$min      = ! empty( $pricing['min_pax'] ) ? esc_html( $pricing['min_pax'] ) : 1;
+												if ( '' !== $pricing['min_pax'] ) {
+													$min_attr = 'min=' . esc_attr( $pricing['min_pax'] );
+												}
+												if ( '' !== $pricing['max_pax'] ) { // This value is wrong sometimes.
+													$max_attr = 'max=' . esc_attr( $pricing['max_pax'] );
+													$max      = esc_attr( $pricing['max_pax'] );
+												}
+												if ( $pricing['available_pax'] ) {
+													$max_attr = 'max=' . esc_attr( $pricing['available_pax'] );
+													$max      = esc_attr( $pricing['available_pax'] );
+												}
 
-										if ( ! empty( $pricing['max_pax'] ) ) {
-											echo sprintf( '%s - %s %s', $min, $max, $pax_string );
-										} else {
-											echo sprintf( '%s %s - %s', $min, $pax_string, $max );
-										}
-										?>
-									</span>
-								</div>									
+												?>
+												<div class="category">
+													<p class="picker-info">
+														<span class="pax-type">
+															<strong><?php echo esc_html( $pricing['price_per'] ); ?></strong>
+															<span class="min-max-pax">
+																(<?php
+																	if ( ! empty( $pricing['max_pax'] ) ) {
+																		echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+																	} else {
+																		echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+																	}
+																?>)
+															</span>
+														</span>
+														<span class="price-per-info">
+															<?php if ( $pricing['price'] ) : ?>
+
+																<?php if ( 'yes' === $pricing['enable_sale'] ) : ?>
+																	<del>
+																		<span><?php echo wp_travel_get_formated_price_currency( $pricing['regular'], true ); ?></span>
+																	</del>
+																<?php endif; ?>
+																<span class="person-count">
+																	<ins>
+																		<span><?php echo wp_travel_get_formated_price_currency( $pricing['price'] ); ?></span>
+																	</ins>/<?php echo esc_html( $pricing['price_per'] ); ?>
+																</span>
+															<?php endif; ?>
+														</span>
+
+														<span class="pricing-name">( <?php echo esc_html( $pricing['pricing_name'] ); ?> )</span>
+													</p>
+													<div class="pax-select-container">
+														<a href="#" class="icon-minus pax-picker-minus">-</a>
+														<input class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" <?php echo sprintf( ' %s %s', $min_attr, $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
+														<a href="#" class="icon-plus pax-picker-plus">+</a>
+													</div>
+												</div>
+												
+												<?php
+											endforeach; ?>
+											
+											
+										</div>
+									</div>										
+								</div>
+																	
 								<?php if ( $show_status_col ) : ?>
 									<div class="status">
 										<span class="availabily-heading-label"><?php echo esc_html( $seats_left_string ); ?></span>
@@ -2012,27 +2072,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									$range_alert = $pax_alerts['range'];
 									$required_alert = $pax_alerts['required'];
 								?>
-								
-								<div class="no-of-pax">
-									<input name="pax" type="number" data-parsley-range-message="<?php echo esc_attr( $range_alert ); ?>" data-parsley-required-message="<?php echo esc_attr( $required_alert ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" <?php echo esc_attr( $min_attr ); ?> <?php echo esc_attr( $max_attr ); ?> placeholder="<?php echo esc_attr__( 'size', 'wp-travel' ); ?>" required data-parsley-trigger="change">
-								</div>
 
-								<div class="price">
-									<span class="availabily-heading-label"><?php echo esc_html( $price_string ); ?></span>
-									<?php if ( $pricing['price'] ) : ?>
-
-										<?php if ( 'yes' === $pricing['enable_sale'] ) : ?>
-											<del>
-												<span><?php echo wp_travel_get_formated_price_currency( $pricing['regular'], true ); ?></span>
-											</del>
-										<?php endif; ?>
-											<span class="person-count">
-												<ins>
-													<span><?php echo wp_travel_get_formated_price_currency( $pricing['price'] ); ?></span>
-												</ins>/<?php echo esc_html( $pricing['price_per'] ); ?>
-											</span>
-									<?php endif; ?>
-								</div>
 								<div class="action">
 
 									<?php if ( $pricing['sold_out'] ) : ?>
@@ -2103,7 +2143,97 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 			padding:0;
 			padding-right:5px;
 		}
+		ul.availabily-list li > form > div.group-size{
+			width:35%;
+		}
+		ul.availabily-list li > form > div.pax-selected{
+			width:20%
+		}
+		ul.availabily-list.additional-col li > div.paxpicker{
+			width:100%;
+		}
+		.paxpicker.is-active .pricing-categories{
+			z-index:11;
+		}
 		</style>
+		<script>
+			jQuery(document).ready( function($) {
+
+				$(document).on( 'click', '.paxpicker .icon-users', function( e ) {
+					if ( $(this).closest('.paxpicker').hasClass('is-active') ) {
+						$(this).closest('.paxpicker').removeClass( 'is-active' );
+					} else {
+						$(this).closest('.paxpicker').addClass('is-active');
+					}
+				} );
+
+				$(document).on( 'click', '.pax-picker-plus', function(e) {
+					e.preventDefault();
+
+					// Calculate Pax Value on pax increase.
+					var input = $(this).siblings('.paxpicker-input');
+					var min = input.data('min');
+					var max = input.data('max');
+
+					var current_val = ( input.val() ) ? parseInt( input.val() ) : 0;
+					if ( ! current_val ) {
+						current_val = min;
+					} else {
+						current_val += 1;
+					}
+					
+					if ( current_val > max ) {
+						input.attr('disabled', 'disabled');
+					} else {
+						input.removeAttr( 'disabled' ).val( current_val );
+					}
+
+
+
+				} );
+
+				$(document).on( 'click', '.pax-picker-minus', function(e) {
+					e.preventDefault();
+
+					
+					// Calculate Pax Value on pax increase.
+					var input = $(this).siblings('.paxpicker-input');
+
+					var min = input.attr('min');
+					var max = input.attr('max');
+
+					var step = ( input.attr('step') ) ? input.attr('step') : 1;
+
+					var current_val = ( input.val() ) ? parseInt( input.val() ) : min;
+					if ( current_val ) {
+						current_val -= step;
+					}
+					
+
+					input.attr( 'min', min );
+					//set min value to 0 if min value is reached.
+					if ( current_val == min ) {
+						input.attr( {'min': '0', 'step' : input.data('min') } ).removeAttr('disabled').val( current_val );
+						if ( 0 == current_val ) {
+							input.attr( 'disabled', 'disabled' );
+						}
+					} else {
+						input.attr( {'min': input.data( 'min' ), 'step' : 1 });
+						if ( current_val < min || 0 == current_val ) {
+							input.attr('disabled', 'disabled');
+						} else {
+							input.removeAttr( 'disabled' ).val( current_val );
+						}
+					}
+					console.log( current_val + ' ' + min  );
+
+					
+
+				} );
+			} );
+
+			
+		</script>
 		<?php
 	}
 }

@@ -449,6 +449,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
+				if ( empty( $current_db_version ) ) {
+					update_option( 'wp_travel_user_since', WP_TRAVEL_VERSION ); // @since new-version-number
+					update_option( 'wp_travel_user_after_multiple_pricing_category', 'yes' ); // option is used to hide option 'Enable multiple category on pricing' and single pricng option @since new-version-number 
+				}
 				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
 			}
 			// Update marketplace data transient.

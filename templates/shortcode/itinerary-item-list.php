@@ -25,7 +25,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-$enable_sale = wp_travel_is_enable_sale( get_the_ID() );
+$enable_sale = wp_travel_is_enable_sale_price( get_the_ID() );
 $trip_price  = wp_travel_get_trip_price( get_the_ID() );
 $sale_price  = wp_travel_get_trip_sale_price( get_the_ID() );
 $group_size  = wp_travel_get_group_size( get_the_ID() );
@@ -108,7 +108,7 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 		<div class="description-right">
 			<?php wp_travel_trip_price( get_the_ID() ); ?>
 			<div class="wp-travel-explore">
-					<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
+				<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
 			</div>
 		</div>
 	</div>

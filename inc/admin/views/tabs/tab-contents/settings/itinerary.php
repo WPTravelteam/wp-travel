@@ -9,8 +9,9 @@
 function wp_travel_settings_callback_itinerary( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$hide_related_itinerary      = $settings['hide_related_itinerary'];
-		$enable_multiple_travellers  = $settings['enable_multiple_travellers'];
+		$hide_related_itinerary              = $settings['hide_related_itinerary'];
+		$enable_multiple_travellers          = $settings['enable_multiple_travellers'];
+		
 		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
 		?>
@@ -18,10 +19,10 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 			<tr>
 				<th>
 					<label for="hide_related_itinerary">
-				<?php
-				esc_html_e( 'Hide related ', 'wp-travel' );
-				echo esc_attr( WP_TRAVEL_POST_TITLE );
-				?>
+						<?php
+						esc_html_e( 'Hide related ', 'wp-travel' );
+						echo esc_attr( WP_TRAVEL_POST_TITLE );
+						?>
 					</label>
 				</th>
 				<td>
@@ -50,6 +51,28 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( 'Collect multiple travelers information from checkout page.', 'wp-travel' ); ?></label></p>
 				</td>
 			<tr>
+			<?php
+			$hide_enable_multiple_category_on_pricing = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since new-version-number
+			if ( 'yes' !== $hide_enable_multiple_category_on_pricing ) : // Hide this option for user who uses WP Travel from @since new-version-number and up.
+				$enable_multiple_category_on_pricing = $settings['enable_multiple_category_on_pricing'];
+				?>
+				<tr>
+					<th>
+						<label for="enable_multiple_category_on_pricing"><?php esc_html_e( 'Enable multiple category on pricing', 'wp-travel' ); ?></label>
+					</th>
+					<td>
+						<span class="show-in-frontend checkbox-default-design">
+							<label data-on="ON" data-off="OFF">
+								<input value="no" name="enable_multiple_category_on_pricing" type="hidden" />
+								<input <?php checked( $enable_multiple_category_on_pricing, 'yes' ); ?> value="yes" name="enable_multiple_category_on_pricing" id="enable_multiple_category_on_pricing" type="checkbox" />
+								<span class="switch"></span>
+							</label>
+						</span>
+						<p class="description"><label for="enable_multiple_category_on_pricing"><?php esc_html_e( 'This will enable multiple category like Adult, Child category in single pricing option', 'wp-travel' ); ?></label></p>
+					</td>
+				<tr>
+			<?php endif; ?>
+
 			<tr id="wp-travel-tax-price-options" >
 				<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ); ?></label></th>
 				<td>

@@ -230,6 +230,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 2.1.0 =
+Release Date: 
+
+Enhancement:
+
+* Removed Single Pricing from this version of WP Travel. Old user can still use single pricing option.
+* WP Travel Pricing Category (Adult, Child, ..) structure and layout updated.
+* Option wp_travel_user_since added to track WP Travel user since.
+* Cleanup unnecessary files.
+
 = 2.0.9 =
 Release Date: 17th July, 2019
 

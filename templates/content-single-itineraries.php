@@ -40,7 +40,7 @@ do_action( 'wp_travel_before_content_start');
 						<?php echo wp_kses( wp_travel_get_post_thumbnail( get_the_ID() ), wp_travel_allowed_html( array( 'img' )  ) ); ?>
 	        	</div>
 				<?php // if ( $wp_travel_itinerary->is_sale_enabled() ) : ?>
-				<?php if ( wp_travel_is_enable_sale( get_the_ID() ) ) : ?>
+				<?php if ( wp_travel_is_enable_sale_price( get_the_ID() ) ) : ?>
 
 					<div class="wp-travel-offer">
 						<span><?php esc_html_e( 'Offer', 'wp-travel' ) ?></span>
