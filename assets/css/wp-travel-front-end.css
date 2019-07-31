@@ -4973,15 +4973,15 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   -o-justify-content: space-between;
   justify-content: space-between;
   -ms-flex-pack: justify;
-  -webkit-flex-basis: 100%;
-  -moz-flex-basis: 100%;
-  flex-basis: 100%;
-  -ms-flex-preferred-size: 100%;
+  -webkit-flex-basis: calc(100% - 30px);
+  -moz-flex-basis: calc(100% - 30px);
+  flex-basis: calc(100% - 30px);
+  -ms-flex-preferred-size: calc(100% - 30px);
   font-size: 1.6rem;
   line-height: 2.4rem;
   font-weight: 500;
   margin: 0 0 0 15px;
-  padding: 15px 0;
+  padding: 15px 0px 15px 10px;
   background: #c1c1c1;
 }
 .paxpicker .category:nth-child(2n) {

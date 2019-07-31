@@ -15,7 +15,7 @@ if ( ! $trips ) {
 	$wt_cart->cart_empty_message();
 	return;
 }
-
+dd( $trips, true );
 $settings = wp_travel_get_settings();
 
 $checkout_page_url = wp_travel_get_checkout_url();
