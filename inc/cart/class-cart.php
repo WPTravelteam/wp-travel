@@ -163,46 +163,54 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function add( $trip_id, $trip_price = 0, $pax, $price_key = '', $attrs = array() ) {
-
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
-
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
-		if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-
-			$inventory = new WP_Travel_Util_Inventory();
-
-			$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
-			$available_pax     = $inventory->get_available_pax( $trip_id, $price_key, $arrival_date );
-
-			/**
-			 * Customization Starts.
-			 */
-			$available_pax = apply_filters( 'wp_travel_available_pax', $available_pax, $trip_id, $price_key );
-			/**
-			 * Customization Ends.
-			 */
-
-			if ( $inventory_enabled && $available_pax ) {
-
-				if ( $pax > $available_pax ) {
-
-					WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
-
-					$pax = $available_pax;
-
-					$this->quantity_limit = $pax;
-
+		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since new-version-number
+		if ( 'yes' === $wp_travel_user_after_multiple_pricing_category ) : 
+			$this->items[ $cart_item_id ]['trip_id']    = $trip_id;
+			$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+			
+		else :
+		
+			
+	
+			if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+	
+				$inventory = new WP_Travel_Util_Inventory();
+	
+				$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
+				$available_pax     = $inventory->get_available_pax( $trip_id, $price_key, $arrival_date );
+	
+				/**
+				 * Customization Starts.
+				 */
+				$available_pax = apply_filters( 'wp_travel_available_pax', $available_pax, $trip_id, $price_key );
+				/**
+				 * Customization Ends.
+				 */
+	
+				if ( $inventory_enabled && $available_pax ) {
+	
+					if ( $pax > $available_pax ) {
+	
+						WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+	
+						$pax = $available_pax;
+	
+						$this->quantity_limit = $pax;
+	
+					}
 				}
 			}
-		}
-
-		// Add product id.
-		$this->items[ $cart_item_id ]['trip_id']    = $trip_id;
-		$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
-		$this->items[ $cart_item_id ]['pax']        = $pax;
-		$this->items[ $cart_item_id ]['price_key']  = $price_key;
-
+	
+			// Add product id.
+			$this->items[ $cart_item_id ]['trip_id']    = $trip_id;
+			$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+			$this->items[ $cart_item_id ]['pax']        = $pax;
+			$this->items[ $cart_item_id ]['price_key']  = $price_key;
+	
+		endif;
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {

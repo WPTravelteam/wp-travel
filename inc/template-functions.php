@@ -2179,6 +2179,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 							var category_id = $(this).data('cagetory-id'); // category id
 							display_value +=  ', ' +  type + ' x ' + $(this).val();
 							pax_input += '<input type="hidden" name="pax['+ category_id +']" value="'+$(this).val()+'" >';
+							// pax_input += '<input type="hidden" name="pax['+ category_id +'][price]" value="'+$(this).val()+'" >';
 
 						}
 					} );

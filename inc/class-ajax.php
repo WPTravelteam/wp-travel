@@ -138,18 +138,28 @@ class WP_Travel_Ajax {
 		$trip_id 	    = $_POST['trip_id'];
 		$pax 		    = isset( $_POST['pax'] ) ? $_POST['pax'] : 0;
 		$arrival_date   = isset( $_POST['arrival_date'] ) ? $_POST['arrival_date'] : '';
-		$departure_date = isset( $_POST['departure_date'] ) ? $_POST['departure_date'] : ''; // Need to remove. is't post value.
+		$departure_date = isset( $_POST['departure_date'] ) ? $_POST['departure_date'] : '';
 		$trip_extras    = isset( $_POST['wp_travel_trip_extras'] ) ? $_POST['wp_travel_trip_extras'] : array();
 		$pricing_id     = isset( $_POST['pricing_id'] ) ? $_POST['pricing_id'] : '';
 
 		// Only for non category pricing (Old).
 		$price_key 	    = isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
-		
+		$attrs = array();
 		if ( $pax && is_array( $pax ) ) { // Multiple category (New).
+			$trip = array();
 			$trip_price = 0;
 			foreach ( $pax as $category_id => $pax_value ) {
-				$trip_price += wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+				$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+				$trip[ $category_id ] = array( 'pax' => $pax_value, 'price' => $category_price, 'type' => '' );
+
+				//multiply category_price by pax to add in trip price if price per is person.
+				$category_price *= $pax_value;
+				// add price 
+				$trip_price += $category_price;
+
 			}
+			$attrs['trip']   = $trip;
+		
 		} else {
 			$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
 	
@@ -160,16 +170,16 @@ class WP_Travel_Ajax {
 				}
 			}
 	
+			$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 		}
 		
-		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 
 		$attrs['arrival_date']   = $arrival_date;
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 		$attrs['pricing_id']     = $pricing_id;
 		
-		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
+		// $attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );
