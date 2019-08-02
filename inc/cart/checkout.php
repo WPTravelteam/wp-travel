@@ -39,7 +39,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		if ( 'no' === $enable_multiple_travellers ) {
 			$repeator_count = 1;
 		}
-		dd( $repeator_count );
+		// dd( $repeator_count );
 		?>
 		<div class="wp-travel-trip-details">
 			<?php if ( 'yes' === $enable_multiple_travellers ) : ?>

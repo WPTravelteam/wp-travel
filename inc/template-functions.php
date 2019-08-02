@@ -1865,12 +1865,11 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					<!-- pricing loop -->
 					<?php
 					foreach ( $pricing_data as $pricing_id => $pricing ) :
-						// dd( $pricing );
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
 						$parent_id = 'wp-travel-pricing-wrap';
-						if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
-							$parent_id = sprintf( 'pricing-%s', $pricing['price_key'] );
+						if ( ! empty( $pricing_id ) ) { // Multiple pricing.
+							$parent_id = sprintf( 'pricing-%s', $pricing_id );
 						}
 
 						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
@@ -2026,22 +2025,10 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 												}
 											}
 											?>
-											<span class="pricing-input"></span>
+											<span class="pricing-input"></span> <!-- pax inputs -->
 										</div>
 									</div>										
 								</div>
-																	
-								<?php if ( $show_status_col ) : ?>
-									<div class="status">
-										<span class="availabily-heading-label"><?php echo esc_html( $seats_left_string ); ?></span>
-										
-										<?php if ( $pricing['sold_out'] ) : ?>
-											<span><?php echo esc_html( $sold_out_string ); ?></span>
-										<?php else : ?>
-											<span><?php echo esc_html( $pricing['status'] ); ?></span>
-										<?php endif; ?>
-									</div>
-								<?php endif; ?>
 								<?php
 									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
 									$range_alert = $pax_alerts['range'];
@@ -2050,25 +2037,19 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 								<div class="action">
 
-									<?php //if ( $pricing['sold_out'] ) : ?>
-
-										<!-- <p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p> -->
-
-										<?php
-									//else :
-										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
-											?>
-											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html( $select_string ); ?></a>
-											<?php
-										} else {
-											?>
-											<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
-											<?php
-										}
-										// @since 1.9.3 To display group discount pricing lists.
-										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+									<?php
+									if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
 										?>
-									<?php //endif; ?>
+										<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html( $select_string ); ?></a>
+										<?php
+									} else {
+										?>
+										<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+										<?php
+									}
+									// @since 1.9.3 To display group discount pricing lists.
+									do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+									?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
 										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
