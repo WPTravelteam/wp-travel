@@ -983,8 +983,6 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 				if ( ! empty( $category_id ) ) {
 
 					$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
-					// error_log( 'trip id ' . $trip_id . ' pricing id ' . $pricing_id . ' category id ' . $category_id );
-					// error_log( print_r( $pricing_option, true ) );
 					$price  = $category_option['price'];
 					$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
 					$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;

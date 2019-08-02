@@ -73,28 +73,29 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         var update_cart_fields = {};
         $('.ws-theme-cart-page tr.responsive-cart').each(function (i) {
-            pax = $(this).find('input[name="pax"]').val();
+            // pax = $(this).find('input[name="pax^"]').val();
             cart_id = $(this).find('input[name="cart_id"]').val();
+            pricing_id = $(this).find('input[name="pricing_id"]').val();
             extra_id = false;
             extra_qty = false;
 
-            // console.log(extra_id);
+            var pax = {};
+
+            $('input.wp-travel-trip-pax').each(function() {
+                pax[$(this).data('category-id') ] = this.value; 
+            });
+
+            // console.log(pax);
 
             var update_cart_field = {};
             update_cart_field['extras'] = {};
             update_cart_field['extras']['id'] = {};
             update_cart_field['extras']['qty'] = {};
-            update_cart_field['pax'] = pax;
+            update_cart_field['pax'] = pax; // Pax includes category id as pax key.
+            update_cart_field['pricing_id'] = pricing_id;
             update_cart_field['cart_id'] = cart_id;
-            // update_cart_field['extras'] = {};
-            // update_cart_field['extras'][i] = {};
+            
 
-            // if( extra_id ) {
-            //     update_cart_field['extras'][i]['id'] = extra_id;
-            // }
-            // if( extra_qty ) {
-            //     update_cart_field['extras'][i]['qty'] = extra_qty;
-            // }
 
             if ($(this).next('.child_products').find('input[name="extra_id"]').length > 0) {
 
@@ -116,6 +117,7 @@ jQuery(document).ready(function ($) {
 
             update_cart_fields[i] = update_cart_field;
         });
+        // console.log( update_cart_fields );
 
         $.ajax({
             type: "POST",

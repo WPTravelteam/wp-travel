@@ -29,7 +29,7 @@ class WP_Travel_Gateway_Paypal_Request {
 	 * @param int $booking_id Booking ID.
 	 * @return void
 	 */
-	function process( $booking_id, $complete_partial_payment = false ) {
+	public function process( $booking_id, $complete_partial_payment = false ) {
 		if ( ! $booking_id ) {
 			return;
 		}
@@ -77,15 +77,14 @@ class WP_Travel_Gateway_Paypal_Request {
 			return false;
 		}
 
-		$itinery_id    = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
+		$itinerary_id  = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
 		$paypal_email  = sanitize_email( $settings['paypal_email'] );
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 		$payment_mode  = isset( $_POST['wp_travel_payment_mode'] ) ? $_POST['wp_travel_payment_mode'] : '';
 
 		global $wt_cart;
-		$items = $wt_cart->getItems();
-		$current_url = wp_travel_thankyou_page_url($itinery_id);
-		// $current_url = get_permalink( $itinery_id );
+		$items       = $wt_cart->getItems();
+		$current_url = wp_travel_thankyou_page_url( $itinerary_id );
 		if ( $complete_partial_payment ) { // For partial payment addons.
 
 			$args['cmd']                  = '_cart';
@@ -172,7 +171,7 @@ class WP_Travel_Gateway_Paypal_Request {
 					'booking_id' => $booking_id,
 					'booked'     => true,
 					'status'     => 'success',
-					'order_id'   => $booking_id
+					'order_id'   => $booking_id,
 				),
 				$current_url
 			);
@@ -192,9 +191,9 @@ class WP_Travel_Gateway_Paypal_Request {
 			// Cart Item.
 			$agrs_index = 1;
 			foreach ( $items as $cart_id => $item ) {
-				$trip_id            = $item['trip_id'];
-				$pax                = $item['pax'];
-				$trip_price         = $item['trip_price'];
+				$trip_id    = $item['trip_id'];
+				$pax        = $item['pax'];
+				$trip_price = $item['trip_price'];
 
 				$item_name = html_entity_decode( get_the_title( $trip_id ) );
 				$trip_code = wp_travel_get_trip_code( $trip_id );
@@ -212,7 +211,7 @@ class WP_Travel_Gateway_Paypal_Request {
 				$payment_amount = wp_travel_get_formated_price( $trip_price );
 				if ( 'partial' === $payment_mode ) {
 					$trip_price_partial = $item['trip_price_partial'];
-					$payment_amount = wp_travel_get_formated_price( $trip_price_partial );
+					$payment_amount     = wp_travel_get_formated_price( $trip_price_partial );
 				}
 				// Group Multiply disable.
 				if ( 'group' === $price_per ) {
