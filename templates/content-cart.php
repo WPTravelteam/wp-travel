@@ -15,7 +15,7 @@ if ( ! $trips ) {
 	$wt_cart->cart_empty_message();
 	return;
 }
-dd( $trips);
+// dd( $trips);
 $settings = wp_travel_get_settings();
 
 $checkout_page_url = wp_travel_get_checkout_url();
@@ -61,7 +61,7 @@ if ( 'yes' === $wp_travel_user_after_multiple_pricing_category ) : // New Multip
 				<tbody>
 					<?php
 					foreach ( $trips as $cart_id => $trip ) :
-						
+
 						$pricing_label = false;
 						$trip_id       = $trip['trip_id'];
 						$trip_price    = $trip['trip_price'];

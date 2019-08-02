@@ -54,6 +54,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 				<?php foreach ( $trips as $cart_id => $trip ) : ?>
 					<?php
+					
 					$trip_id       = $trip['trip_id'];
 					$trip_price    = $trip['trip_price'];
 					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
@@ -92,11 +93,37 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						$price_per_label = ' × ' . $pax . ' /' . $pax_label;
 					}
 
+					$cart_trip 			= isset( $trip['trip'] ) ? $trip['trip'] : array();
+
 					?>
 
 					<tr class="cart_item">
 						<td class="product-name">
-							<?php echo esc_html( $pricing_name ); ?> &nbsp; <strong class="product-quantity"> <span class="wp-travel-cart-pax"><?php echo esc_html( $price_per_label ); ?></span>  </strong> 
+							<?php echo esc_html( $pricing_name ); ?>
+							<?php
+							if ( count( $cart_trip ) > 0 ) :
+								?>
+								<ul>
+									<?php
+									foreach ( $cart_trip as $category_id => $category ) {
+										$category_type = isset( $category['type'] ) ? $category['type'] : '';
+
+										$price = $category['price'];
+										$pax = $category['pax'];
+										if ( 'group' !== $category_type ) {
+											$price *= $pax;
+										}
+										?>
+										<li class="person-count">
+											<?php echo sprintf( '%s * %s /%s, %s', wp_travel_get_formated_price_currency( $category['price'] ), esc_html( $pax ), esc_html( $category_type ), wp_travel_get_formated_price_currency( $price ) ); ?>
+										</li>
+										<?php
+									}
+									?>
+								</ul>
+								<?php
+							endif;
+							?>
 						</td>
 						<td class="product-total text-right">
 							<span class="product-total-price amount" ><?php echo wp_travel_get_formated_price_currency( $single_trip_total ); ?></span>

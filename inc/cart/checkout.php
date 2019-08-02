@@ -25,9 +25,21 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		$price_key      = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 		$pricing_name   = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
+
+		// New @since new-version-number.
+		$cart_trip      = isset( $trip['trip'] ) ? $trip['trip'] : array();
+		if ( is_array( $cart_trip ) && count( $cart_trip ) > 0 ) {
+			$repeator_count = 0;
+			foreach ( $cart_trip as $category_id => $category ) {
+				$repeator_count += isset( $category['pax'] ) ? $category['pax'] : 0;
+			}
+		}
+		// endo of new.
+		
 		if ( 'no' === $enable_multiple_travellers ) {
 			$repeator_count = 1;
 		}
+		dd( $repeator_count );
 		?>
 		<div class="wp-travel-trip-details">
 			<?php if ( 'yes' === $enable_multiple_travellers ) : ?>
