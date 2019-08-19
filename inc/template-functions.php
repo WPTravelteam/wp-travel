@@ -467,9 +467,9 @@ function wp_travel_single_excerpt( $post_id ) {
 	  <div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<?php
+			$trip_enquiry_text = isset( $strings['featured_trip_enquiry'] ) ? $strings['featured_trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
 			if ( wp_travel_tab_show_in_menu( 'booking' ) ) :
 				$book_now_text     = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
-				$trip_enquiry_text = isset( $strings['featured_trip_enquiry'] ) ? $strings['featured_trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
 				?>
 				<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); ?></button>
 			<?php endif; ?>
