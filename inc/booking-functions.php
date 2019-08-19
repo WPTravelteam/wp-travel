@@ -321,7 +321,7 @@ function wp_travel_booking_info( $post ) {
 						'attributes'   => array( 'readonly' => 'readonly' ),
 						'wrapper_class' => '',
 						'default'       => $arrival_date,
-						
+
 					);
 					$booking_fields[] = array(
 						'label'         => esc_html( 'Departure Date' ),
@@ -348,7 +348,7 @@ function wp_travel_booking_info( $post ) {
 					}
 
 				?>
-				
+
 			</div>
 			<div class="wp-travel-form-field-wrapper">
 				<?php
@@ -754,6 +754,18 @@ function wp_travel_book_now() {
 			foreach ( $meta_val as $key => $value ) {
 				if ( is_array( $value ) ) {
 					$new_meta_value[ $key ] = array_map( 'sanitize_text_field', $value );
+					/**
+					 * Quick fix for the field editor checkbox issue for the data save.
+					 *
+					 * @since 2.1.0
+					 */
+					if ( isset( $value[0] ) && is_array( $value[0] ) ) {
+						$new_value = array();
+						foreach ( $value as $nested_value ) {
+							$new_value[] = implode( ', ', $nested_value );
+						}
+						$new_meta_value[ $key ] = array_map( 'sanitize_text_field', $new_value );
+					}
 				} else {
 					$new_meta_value[ $key ] = sanitize_text_field( $value );
 				}

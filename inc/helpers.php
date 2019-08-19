@@ -2147,6 +2147,16 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							$billing_fields  = wp_travel_sort_form_fields( $billing_fields );
 							if ( ! empty( $billing_fields ) ) {
 								foreach ( $billing_fields as $field ) {
+									$billing_data = get_post_meta( $booking_id, $field['name'], true );
+									if ( is_array( $billing_data ) && count( $billing_data ) > 0 ) {
+										/**
+										 * Fix for field editor billing checkbox issue.
+										 *
+										 * @since v2.1.0
+										 */
+										$billing_data = implode( ', ', $billing_data );
+									}
+
 									if ( 'heading' === $field['type'] ) {
 										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
 									} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
@@ -2154,7 +2164,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 									} else {
 										echo '<div class="my-order-single-field clearfix">';
 										printf( '<span class="my-order-head">%s:</span>', $field['label'] );
-										printf( '<span class="my-order-tail">%s</span>', get_post_meta( $booking_id, $field['name'], true ) );
+										printf( '<span class="my-order-tail">%s</span>', $billing_data );
 										echo '</div>';
 									}
 								}
