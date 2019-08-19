@@ -130,7 +130,7 @@ function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 				?>
 				<option 
 				<?php
-				if ( $option == $fact['value'] ) {
+				if ( isset( $fact['value'] ) && $option == $fact['value'] ) {
 					echo 'selected';}
 				?>
 				  value="<?php echo $option; ?>"><?php echo $option; ?></option>
