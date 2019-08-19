@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.2
 Requires PHP: 5.5
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 2.1.0 =
+Release Date: 19th August, 2019
+
+Fixes:
+
+* Fixes issue with Field Editor conflict. It is throwing issue while adding the field editor checkbox in the billing field.
+* Fixes Enquiry button is also turned off when the booking tab is turned off.
+* Fixes Special character issue in pricing option. When added the "()" in the pricing name in the pricing name field, "Book Now" button does not work.
 
 = 2.0.9 =
 Release Date: 17th July, 2019
