@@ -88,7 +88,7 @@ function wp_travel_settings_default_fields() {
 		// Trip Settings Fields.
 		'hide_related_itinerary'                  => 'no',
 		'enable_multiple_travellers'              => 'no',
-		'enable_multiple_category_on_pricing'     => 'yes',
+		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.
 		'trip_pricing_options_layout'             => 'by-pricing-option',
 
 		// Email Settings Fields.

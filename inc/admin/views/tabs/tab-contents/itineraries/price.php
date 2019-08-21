@@ -116,7 +116,21 @@ function wp_travel_new_pricing_list_admin() {
 									$pricing_name         = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
 									$pricing_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 
-									
+									// Old legacy data. Need to migrate to new data. @since new-version-number
+									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new category id and assign values in the category
+										$category_id = substr( md5( rand( 1000, 9999 ) ), 0, 20 );
+										$pricing['categories'][ $category_id ] = array(
+											'type' => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
+											'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
+											'min_pax' => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
+											'max_pax' => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
+											'price_per' => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
+											'price' => isset( $pricing['price'] ) ? $pricing['price'] : 0,
+											'enable_sale' => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false,
+											'sale_price' => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
+											'tour_extras' => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
+										);
+									}
 
 									// Pricing Label.
 									$custom_pricing_label_attribute = 'disabled="disabled"';
