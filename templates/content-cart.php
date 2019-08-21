@@ -70,7 +70,7 @@ wp_travel_print_notices();
 					// $trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
 					$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wp_travel_format_date( $trip['arrival_date'], true, 'Y-m-d' ) : false;
 
-					$pax                = $trip['pax'];
+					$pax                = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 					$enable_partial     = $trip['enable_partial'];
 					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
