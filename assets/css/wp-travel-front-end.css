@@ -2628,6 +2628,10 @@ ul.availabily-list .availabily-content.sold-out > div.date-from:after {
   }
 }
 @media only screen and (max-width: 767px) {
+  ul.availabily-list li.availabily-heading {
+    display: none;
+  }
+
   ul.availabily-list li {
     padding: 0px;
     margin: 15px 0px 25px;

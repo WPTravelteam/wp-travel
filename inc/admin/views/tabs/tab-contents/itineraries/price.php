@@ -5,7 +5,7 @@
  * @package WP_Travel
  */
 function wp_travel_trip_callback_price() {
-	$settings        = wp_travel_get_settings();
+	$settings = wp_travel_get_settings();
 
 	$new_multiple_category = $settings['enable_multiple_category_on_pricing']; // @since new-version-number
 	// Implement new multiple category options(child, adult) on multiple pricing option. eg . Pricing A, have adult, child option in one pricing.
@@ -54,7 +54,7 @@ function wp_travel_new_pricing_list_admin() {
 	$multiple_fixed_departures = apply_filters( 'wp_travel_multiple_fixed_departures', $multiple_fixed_departures );
 
 	// Looped data.
-    $trip_pricing_options_data = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
+	$trip_pricing_options_data  = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 	$trip_multiple_date_options = get_post_meta( $post_id, 'wp_travel_multiple_trip_dates', true );
 
 	?>
@@ -98,7 +98,8 @@ function wp_travel_new_pricing_list_admin() {
 						$collapse_style = 'display:block';
 					else :
 						$collapse_style = 'display:none';
-					endif; ?>
+					endif;
+					?>
 					<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
 						<a href="#" data-parent="wp-travel-multiple-pricing-options" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 						<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
@@ -113,22 +114,22 @@ function wp_travel_new_pricing_list_admin() {
 							if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) :
 								foreach ( $trip_pricing_options_data as $pricing_id => $pricing ) {
 									// Set Vars.
-									$pricing_name         = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
-									$pricing_key          = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+									$pricing_name = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
+									$pricing_key  = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 
 									// Old legacy data. Need to migrate to new data. @since new-version-number
 									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new category id and assign values in the category
-										$category_id = substr( md5( rand( 1000, 9999 ) ), 0, 20 );
+										$category_id                           = substr( md5( rand( 1000, 9999 ) ), 0, 20 );
 										$pricing['categories'][ $category_id ] = array(
-											'type' => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
+											'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
 											'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
-											'min_pax' => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
-											'max_pax' => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
-											'price_per' => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
-											'price' => isset( $pricing['price'] ) ? $pricing['price'] : 0,
-											'enable_sale' => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
-											'sale_price' => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
-											'tour_extras' => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
+											'min_pax'      => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
+											'max_pax'      => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
+											'price_per'    => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
+											'price'        => isset( $pricing['price'] ) ? $pricing['price'] : 0,
+											'enable_sale'  => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
+											'sale_price'   => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
+											'tour_extras'  => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
 										);
 									}
 
@@ -140,7 +141,6 @@ function wp_travel_new_pricing_list_admin() {
 									$custom_pricing_sale_price_attribute = 'disabled="disabled"';
 									$custom_pricing_sale_price_class     = 'hidden';
 
-									
 									?>
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="heading-<?php echo esc_attr( $pricing_id ); ?>">
@@ -202,7 +202,8 @@ function wp_travel_new_pricing_list_admin() {
 													<?php
 													$categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
-													if ( is_array( $categories ) && count( $categories ) > 0 ) { ?>
+													if ( is_array( $categories ) && count( $categories ) > 0 ) {
+														?>
 														<div class="new-category-row row new-category-row-content" id="new-category-row-content-<?php echo esc_attr( $pricing_id ); ?>">
 
 															<?php
@@ -252,15 +253,15 @@ function wp_travel_new_pricing_list_admin() {
 																	</div>
 																	<div class="repeat-row">
 																		<select id="price_per_<?php echo esc_attr( $pricing_id ); ?>_<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price_per]">
-																			<option value="person" <?php selected( 'person', $pricing_price_per ) ?> ><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
-																			<option value="group" <?php selected( 'group', $pricing_price_per ) ?>><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
+																			<option value="person" <?php selected( 'person', $pricing_price_per ); ?> ><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
+																			<option value="group" <?php selected( 'group', $pricing_price_per ); ?>><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
 																		</select>
 																	</div>
 																		
 																	<div class="repeat-row">
 																		<div class="field-price-currency-input">
 																			<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-																			<input id="price_<?php echo esc_attr( $pricing_id ); ?>" bindPrice="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price]" value="<?php echo esc_attr( $pricing_option_price ) ?>" >
+																			<input id="price_<?php echo esc_attr( $pricing_id ); ?>" bindPrice="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price]" value="<?php echo esc_attr( $pricing_option_price ); ?>" >
 																		</div>
 																	</div>
 																	<div class="repeat-row">
@@ -278,7 +279,7 @@ function wp_travel_new_pricing_list_admin() {
 																	<div class="repeat-row <?php echo ( 'yes' !== $pricing_sale_enabled ) ? 'visibility-hidden' : ''; ?>">
 																		<div class="field-price-currency-input">
 																			<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-																			<input id="sale_price_<?php echo esc_attr( $pricing_id ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][sale_price]" value="<?php echo esc_attr( $pricing_sale_price ) ?>" />
+																			<input id="sale_price_<?php echo esc_attr( $pricing_id ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][sale_price]" value="<?php echo esc_attr( $pricing_sale_price ); ?>" />
 																		</div>
 																	</div>
 																</div>
@@ -863,9 +864,9 @@ function wp_travel_old_pricing_list_admin() {
 	global $post;
 	$post_id        = $post->ID;
 	$date_format    = get_option( 'date_format' );
-	$settings        = wp_travel_get_settings();
+	$settings       = wp_travel_get_settings();
 	$js_date_format = wp_travel_date_format_php_to_js();
-	$pricing_types = wp_travel_get_pricing_option_list();
+	$pricing_types  = wp_travel_get_pricing_option_list();
 
 	$start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
@@ -924,7 +925,8 @@ function wp_travel_old_pricing_list_admin() {
 
 	// CSS Class for Single and Multiple Pricing option fields.
 	$single_pricing_option_class   = 'single-price-option-row';
-	$multiple_pricing_option_class = 'multiple-price-option-row'; ?>
+	$multiple_pricing_option_class = 'multiple-price-option-row';
+	?>
 	<table class="form-table pricing-tab">
 		<tr class="table-inside-heading">
 			<th colspan="2">
@@ -944,7 +946,8 @@ function wp_travel_old_pricing_list_admin() {
 						</select>
 					</td>
 				</tr>
-			<?php else :
+				<?php
+			else :
 				$pricing_option_type = 'multiple-price';
 				?>
 				<input type="hidden" name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type" value="<?php echo esc_attr( $pricing_option_type ); ?>" >
@@ -977,7 +980,7 @@ function wp_travel_old_pricing_list_admin() {
 			<td>
 				<span class="show-in-frontend checkbox-default-design">
 					<label data-on="ON" data-off="OFF">
-						<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" " />							
+						<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" />							
 						<span class="switch"></span>
 					</label>
 				</span>
@@ -1170,7 +1173,7 @@ function wp_travel_old_pricing_list_admin() {
 											/**
 											 * @since 1.9.2
 											 *
-											 * @hooked 
+											 * @hooked
 											 */
 											do_action( 'wp_travel_pricing_option_content_after_trip_extra', $post_id, $key, $pricing );
 											?>
@@ -1313,10 +1316,10 @@ function wp_travel_old_pricing_list_admin() {
 								</div>
 								<?php
 								/**
-								* @since 1.9.2
-								*
-								* @hooked 
-								*/
+								 * @since 1.9.2
+								 *
+								 * @hooked
+								 */
 								do_action( 'wp_travel_pricing_option_content_after_trip_extra_repeator', '{{data.random}}' );
 								?>
 							</div>
@@ -1622,7 +1625,6 @@ function wp_travel_old_pricing_list_admin() {
 		}
 		$use_global = wp_travel_use_global_payout_percent( $post_id );
 
-		
 		?>
 		<tr style="display:none" class="<?php echo esc_attr( $custom_payout_class ); ?>" >
 			<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout', 'wp-travel' ); ?></label></td>
@@ -1671,11 +1673,11 @@ function wp_travel_old_pricing_list_admin() {
 	<?php
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
-			'title' => __( 'Need More Options ?', 'wp-travel' ),
-			'content' => __( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/wp-travel-pro/',
-			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2' => 'https://wptravel.io/downloads/wp-travel-utilities/',
+			'title'       => __( 'Need More Options ?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ),
+			'link'        => 'https://wptravel.io/wp-travel-pro/',
+			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
