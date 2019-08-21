@@ -126,7 +126,7 @@ function wp_travel_new_pricing_list_admin() {
 											'max_pax' => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
 											'price_per' => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
 											'price' => isset( $pricing['price'] ) ? $pricing['price'] : 0,
-											'enable_sale' => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? true : false,
+											'enable_sale' => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
 											'sale_price' => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
 											'tour_extras' => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
 										);
