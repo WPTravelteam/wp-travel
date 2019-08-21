@@ -3234,7 +3234,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						$pricing_data['trip_duration_days']  = $days;
 						$pricing_data['trip_duration_night'] = $night;
 
-						$pricing[] = $pricing_data; // Trip duration, multiple pricing.
+						$pricing[ $pricing_id ] = $pricing_data; // Trip duration, multiple pricing.
 					} else {
 						$multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
 
@@ -3264,7 +3264,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 									$pricing_data['arrival_date']   = $start_date;
 									$pricing_data['departure_date'] = $end_date;
 									$pricing_data['date_label']     = $date_label;
-									$pricing[]                      = $pricing_data;
+									$pricing[ $pricing_id ]         = $pricing_data;
 								}
 							}
 						} else {
@@ -3280,7 +3280,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							$pricing_data['min_pax']       = $inventory_data['min_pax'];
 							$pricing_data['max_pax']       = $inventory_data['max_pax'];
 							// Inventory Ends.
-							$pricing[] = $pricing_data;  // single date multiple pricing.
+							$pricing[ $pricing_id ]        = $pricing_data;  // single date multiple pricing.
 						}
 					}
 				}

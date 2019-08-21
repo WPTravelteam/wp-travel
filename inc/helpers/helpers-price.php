@@ -964,7 +964,7 @@ function wp_travel_get_payment_modes() {
 /**
  * Get Price of trip. Price key is only for old data less than WP Travel @since new-version-number-below legacy version
  */
-function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_id = '', $category_id = '', $return_price = 'min', $price_key = '' ) {
+function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 
 	if ( ! $trip_id ) {
 		return;
