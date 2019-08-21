@@ -979,7 +979,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 		if ( ! empty( $pricing_id ) ) {
 			$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
-
+				$price = wp_travel_get_actual_trip_price( $trip_id, $price_key, $return_regular_price );
 			} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
 				if ( ! empty( $category_id ) ) {
 

@@ -154,7 +154,7 @@ class WP_Travel_Ajax {
 			$trip       = array();
 			$trip_price = 0;
 			foreach ( $pax as $category_id => $pax_value ) {
-				$category_price       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+				$category_price       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since new-version-number.
 
 				$category = isset( $pricing_data[ $pricing_id ][ 'categories' ][ $category_id ]  ) ? $pricing_data[ $pricing_id ][ 'categories' ][ $category_id ] : array();
 				$trip[ $category_id ] = array(
