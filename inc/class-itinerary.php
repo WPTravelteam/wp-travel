@@ -123,8 +123,12 @@ class WP_Travel_Itinerary {
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 				$group_size = 0;
 				foreach ( $pricing_options as $pricing_option ) {
-					if ( $pricing_option['max_pax'] > $group_size ) {
+					if ( isset( $pricing_option['max_pax'] ) && $pricing_option['max_pax'] > $group_size ) {
 						$group_size = $pricing_option['max_pax'];
+					} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
+						$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
+						$max_pax       = array_sum( $max_pax_array );
+						$group_size    = $max_pax;
 					}
 				}
 			}
