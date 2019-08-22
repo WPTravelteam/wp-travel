@@ -92,20 +92,12 @@ wp_travel_print_notices();
 					if ( $min_available ) {
 						$min_attr = 'min="' . $min_available . '"';
 					}
-					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 
 					$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
 
 					if ( isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ) {
 						$price_per = wp_travel_get_pricing_variation_price_per( $trip['trip_id'], $trip['price_key'] );
-					}
-
-					if ( 'group' === $price_per ) {
-
-						$single_trip_total = wp_travel_get_formated_price( $trip_price );
-
-					}
-					?>
+					} ?>
 
 					<tr class="responsive-cart has_options_selected">
 						<td class="product-remove" >
