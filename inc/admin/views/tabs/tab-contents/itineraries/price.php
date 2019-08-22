@@ -118,8 +118,8 @@ function wp_travel_new_pricing_list_admin() {
 									$pricing_key  = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 
 									// Old legacy data. Need to migrate to new data. @since new-version-number
-									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new category id and assign values in the category
-										$category_id                           = substr( md5( rand( 1000, 9999 ) ), 0, 20 );
+									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
+										$category_id = $pricing_id;
 										$pricing['categories'][ $category_id ] = array(
 											'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
 											'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
