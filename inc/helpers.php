@@ -2273,20 +2273,41 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							if ( $order_details ) { // Multiple Trips. Now from 1.8.3 it also included in single trip.
 								$order_prices = get_post_meta( $booking_id, 'order_totals', true );
 								foreach ( $order_details as $order_detail ) {
-									$pax        = $order_detail['pax'];
-									$trip_price = $order_detail['trip_price'];
-									$total      = wp_travel_get_formated_price( $trip_price * $pax );
-									?>
-									<div class="my-order-price-breakdown-base-price-wrap">
-										<div class="my-order-price-breakdown-base-price">
-											<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
-											<span class="my-order-tail">
-												<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price ); ?>) </span>
-												<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
-											</span>
+
+									if ( isset( $order_detail['trip'] ) ) { // @since new-version-number.
+										$total = $order_detail['trip_price'];
+										?>
+										<div class="my-order-price-breakdown-base-price-wrap">
+											<div class="my-order-price-breakdown-base-price">
+												<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
+												<span class="my-order-tail">
+													<?php if ( ! empty( $order_detail['trip'] ) ) : ?>
+														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) : ?>
+															<span class="my-order-price-detail">(<?php echo esc_attr( $trip['pax'] ) . ' x ' . wp_travel_get_formated_price_currency( $trip['price'] ); ?>) </span>
+														<?php endforeach; ?>
+													<?php endif; ?>
+													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
+												</span>
+											</div>
 										</div>
-									</div>
-									<?php
+										<?php
+									} else { // Legacy Version.
+
+										$pax        = $order_detail['pax'];
+										$trip_price = $order_detail['trip_price'];
+										$total      = wp_travel_get_formated_price( $trip_price * $pax );
+										?>
+										<div class="my-order-price-breakdown-base-price-wrap">
+											<div class="my-order-price-breakdown-base-price">
+												<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
+												<span class="my-order-tail">
+													<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price ); ?>) </span>
+													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
+												</span>
+											</div>
+										</div>
+										<?php
+									}
 									if ( isset( $order_detail['trip_extras'] ) && isset( $order_detail['trip_extras']['id'] ) && count( $order_detail['trip_extras']['id'] ) > 0 ) :
 										$extras = $order_detail['trip_extras'];
 										?>
