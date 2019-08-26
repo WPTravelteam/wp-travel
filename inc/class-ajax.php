@@ -147,30 +147,38 @@ class WP_Travel_Ajax {
 		// Only for non category pricing (Old).
 		$price_key = isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
 		$attrs     = array();
-
+		// $attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key ); // Temporary removed. Need to migrate data.
 		$pricings     = wp_travel_get_trip_pricing_option( $trip_id );
 		$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
 		if ( $pax && is_array( $pax ) ) { // Multiple category (New). @since new-version-number 
 			$trip       = array();
 			$trip_price = 0;
+			$trip_price_partial = 0;
 			foreach ( $pax as $category_id => $pax_value ) {
-				$category_price       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since new-version-number.
+				$category_price         = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since new-version-number.
+				$category_price_partial = $category_price;
 
+				if ( wp_travel_is_partial_payment_enabled() ) {
+					$percent = wp_travel_get_actual_payout_percent( $trip_id );
+					$category_price_partial = ( $category_price * $percent ) / 100;
+				}
 				$category = isset( $pricing_data[ $pricing_id ][ 'categories' ][ $category_id ]  ) ? $pricing_data[ $pricing_id ][ 'categories' ][ $category_id ] : array();
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
-					'price'         => $category_price,
-					'price_partial' => '',
-					'type'          => isset( $category['type'] ) ? $category['type'] : '',
+					'price'         => wp_travel_get_formated_price( $category_price ),
+					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'type'          => isset( $category['type'] ) ? $category['type'] : '', // Not set yet.
 					'price_per'     => isset( $category['price_per'] ) ? $category['price_per'] : 'person',
 				);
 
 				// multiply category_price by pax to add in trip price if price per is person.
 				if ( 'person' == $trip[ $category_id ]['price_per'] ) {
 					$category_price *= $pax_value;
+					$category_price_partial *= $pax_value;
 				}
 				// add price.
 				$trip_price += $category_price;
+				$trip_price_partial += $category_price_partial;
 			}
 			$attrs['trip'] = $trip;
 
@@ -184,8 +192,9 @@ class WP_Travel_Ajax {
 				}
 			}
 
-			$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
+			
 		}
+		error_log( print_r( $attrs, true ) );
 
 		$attrs['arrival_date']   = $arrival_date;
 		$attrs['departure_date'] = $departure_date;
@@ -204,10 +213,10 @@ class WP_Travel_Ajax {
 				$pax += $items[ $cart_item_id ]['pax'];
 				$wt_cart->update( $cart_item_id, $pax );
 			} else {
-				$wt_cart->add( $trip_id, $trip_price, $pax, $price_key, $attrs );
+				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
 			}
 		} else {
-			$wt_cart->add( $trip_id, $trip_price, $pax, $price_key, $attrs );
+			$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
 		}
 
 		echo true;

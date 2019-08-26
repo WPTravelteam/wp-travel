@@ -16,6 +16,8 @@ if ( ! $trips ) {
 	return;
 }
 // dd( $trips);
+// dd( $wt_cart->get_discounts() );
+// dd( $wt_cart->get_total() );
 $settings = wp_travel_get_settings();
 
 $checkout_page_url = wp_travel_get_checkout_url();

@@ -842,7 +842,7 @@ function wp_travel_get_min_price_key( $options ) {
  */
 function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
 	if ( ! $price ) {
-		return;
+		return 0;
 	}
 	$settings           = wp_travel_get_settings();
 	$thousand_separator = '';
