@@ -2089,7 +2089,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							echo esc_html( $payment_status['text'] );
 							?>
 						</div>
-						
+
 						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id, $details ); ?>
 					</div>
 				<?php endif; ?>
@@ -2443,7 +2443,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 								}
 							}
 							?>
-							
+
 						</td>
 						<td>
 							<?php
@@ -2678,7 +2678,7 @@ function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
 			?>
 			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
 		<?php endif; ?>
-		
+
 		<table width="100%">
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
@@ -3054,6 +3054,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					// 'pax_limit'       => $inventory_data['pax_limit'],
 					// 'min_pax'         => $inventory_data['min_pax'],
 					// 'max_pax'         => $inventory_data['max_pax'],
+					'min_pax'         => $pricing_option['min_pax'],
+					'max_pax'         => $pricing_option['max_pax'],
 				);
 
 				if ( 'no' === $fixed_departure ) {
@@ -3111,13 +3113,13 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 			}
 		endif;
 
-	
+
 
 	else :
 		// Legacy version @since new-version-number
 		// $customized_pricing_options = array(); // To use in api.
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
-		
+
 
 		if ( ! empty( $days ) ) {
 			$trip_duration['days']  = $days;

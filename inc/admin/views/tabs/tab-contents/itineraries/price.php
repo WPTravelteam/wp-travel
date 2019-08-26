@@ -197,9 +197,9 @@ function wp_travel_new_pricing_list_admin() {
 															<label ><?php esc_html_e( 'Category', 'wp-travel' ); ?></label>
 														</div>
 
-														<div class="repeat-row heading-no-of-pax">
+														<!-- <div class="repeat-row heading-no-of-pax">
 															<label ><?php esc_html_e( 'Min/ Max Pax', 'wp-travel' ); ?></label>
-														</div>
+														</div> -->
 
 														<div class="repeat-row heading-price-per">
 															<label ><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
@@ -264,10 +264,10 @@ function wp_travel_new_pricing_list_admin() {
 																			<input type="text" style="display:none" class="custom-pricing-label-wrap" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][custom_label]" placeholder="Custom Label" />
 																		<?php endif; ?>
 																	</div>
-																	<div class="repeat-row">
+																	<!-- <div class="repeat-row">
 																		<input class="pricing-opt-min-pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][min_pax]" placeholder="Min"  min="1" value="<?php echo esc_attr( $pricing_min_pax ); ?>" />
 																		<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][max_pax]" placeholder="Max"  min="1" value="<?php echo esc_attr( $pricing_max_pax ); ?>" />
-																	</div>
+																	</div> -->
 																	<div class="repeat-row">
 																		<select id="price_per_<?php echo esc_attr( $pricing_id ); ?>_<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price_per]">
 																			<option value="person" <?php selected( 'person', $pricing_price_per ); ?> ><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
