@@ -162,14 +162,15 @@ class WP_Travel_Cart {
 	 * @param array $attrs Item attributes.
 	 * @return boolean
 	 */
-	public function add( $trip_id, $trip_price = 0, $pax, $price_key = '', $attrs = array() ) {
+	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax, $price_key = '', $attrs = array() ) {
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since new-version-number
 		if ( is_array( $pax ) ) :
 			$this->items[ $cart_item_id ]['trip_id']    = $trip_id;
-			$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+			$this->items[ $cart_item_id ]['trip_price'] = wp_travel_get_formated_price( $trip_price );
+			$this->items[ $cart_item_id ]['trip_price_partial'] = wp_travel_get_formated_price( $trip_price_partial );
 
 		else :
 
