@@ -2868,16 +2868,29 @@ function wp_travel_get_fixed_departure_date( $trip_id ) {
 			usort( $dates, 'wp_travel_date_sort' );
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', false );
 
+			$date_found = false;
 			if ( $show_multiple ) {
 				echo '<ul>';
 				foreach ( $dates as $date ) {
-					printf( '<li>%s</li>', date_i18n( $date_format, strtotime( $date ) ) );
+					if ( date('Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
+						$date_found = true;
+						printf( '<li>%s</li>', date_i18n( $date_format, strtotime( $date ) ) );
+					}
 				}
 				echo '</ul>';
 			} else {
-				if ( isset( $dates[0] ) ) {
-					printf( '%s', date_i18n( $date_format, strtotime( $dates[0] ) ) );
+				if ( is_array( $dates ) && count( $dates ) > 0 ) {
+					foreach ( $dates as $date ) {
+						if ( date('Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
+							$date_found = true;
+							printf( '%s', date_i18n( $date_format, strtotime( $date ) ) );
+							break;
+						}
+					}
 				}
+			}
+			if ( ! $date_found ) {
+				echo __( 'N/A', 'wp-travel' );
 			}
 		}
 	}
