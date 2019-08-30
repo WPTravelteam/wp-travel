@@ -4876,6 +4876,10 @@ li {
     }
 }
 
+// popup
+.mfp-container{
+    position: fixed !important;
+}
 .wp-travel-popup {
     width: 600px;
     background: #fff;
@@ -4918,9 +4922,42 @@ li {
             width: 35%;
             font-weight: bold;
             display: inline-block;
+
+            @include sm() {
+                width:100%;
+            }
         }
     }
 }
+
+@media screen and (max-width: 680px){
+    .wp-travel-popup{
+        width: 450px;
+        margin-left: calc( 50% - 225px );
+    }
+    .wp-travel-form-field label{
+        width: 60%;
+    }
+}
+@media screen and (max-width: 508px){
+    .wp-travel-popup{
+        width: 300px;
+        margin-left: calc( 50% - 150px );
+    }
+}
+@media screen and (max-width: 408px){
+    .wp-travel-popup{
+        width: 300px;
+        margin-left: calc( 50% - 150px );
+    }
+    .wp-travel-popup .popup-title{
+        text-align: center;
+    }
+    .wp-travel-form-field label{
+        width: 75%;
+    }
+}
+// Popup ends.
 
 .nf-field-element input.datepicker{
     position: unset;
