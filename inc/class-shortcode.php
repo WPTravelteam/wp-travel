@@ -107,17 +107,24 @@ class Wp_Travel_Shortcodes {
 	 */
 	public static function wp_travel_get_itineraries_shortcode( $atts, $content = '' ) {
 
-		$type = isset( $atts['type'] ) ? $atts['type'] : '';
+		$default = array(
+			'id' => 0,
+			'type' => '',
+			'itinerary_id' => '',
+			'view_mode' => 'grid',
+			'slug' => '',
+			'limit' => 20,
+			'col' => apply_filters( 'wp_travel_itineraries_col_per_row', 2 ),
+		);
 
-		$iti_id = isset( $atts['itinerary_id'] ) ? absint( $atts['itinerary_id'] ) : '';
+		$atts = shortcode_atts( $default, $atts, 'WP_TRAVEL_ITINERARIES' );
 
-		$view_mode = ( isset( $atts['view_mode'] ) && ! empty( $atts['view_mode'] ) ) ? $atts['view_mode'] : 'grid';
-
-		$id    = isset( $atts['id'] ) ? $atts['id'] : 0;
-		$id    = absint( $id );
-		$slug  = isset( $atts['slug'] ) ? $atts['slug'] : '';
-		$limit = isset( $atts['limit'] ) ? $atts['limit'] : 20;
-		$limit = absint( $limit );
+		$type = $atts['type'];
+		$iti_id = $atts['itinerary_id'];
+		$view_mode = $atts['view_mode'];
+		$id    = absint( $atts['id'] );
+		$slug  = $atts['slug'];
+		$limit = absint( $atts['limit'] );
 
 		$args = array(
 			'post_type'      => WP_TRAVEL_POST_TYPE,
@@ -166,9 +173,9 @@ class Wp_Travel_Shortcodes {
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php $col_per_row = ( isset( $atts['col'] ) && ! empty( $atts['col'] ) ) ? absint( $atts['col'] ) : apply_filters( 'wp_travel_itineraries_col_per_row', '2' ); ?>
+			<?php $col_per_row = $atts['col']; ?>
 			<?php if ( $query->have_posts() ) : ?>
-				<ul style="" class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row">
+				<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
 				<?php
 				while ( $query->have_posts() ) :
 					$query->the_post();
