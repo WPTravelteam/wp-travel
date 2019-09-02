@@ -117,7 +117,9 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="booking-admin-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = "<?php echo $booking_admin_email_settings['admin_header_color']; ?>" type="text" name="booking_admin_template_settings[admin_header_color]" id="booking-admin-email-header-color">
+												<div class="wp-travel-color-picker-wrapper">
+													<input class="wp-travel-color-field" value = "<?php echo $booking_admin_email_settings['admin_header_color']; ?>" type="text" name="booking_admin_template_settings[admin_header_color]" id="booking-admin-email-header-color">
+												</div>
 											</td>
 										</tr>
 										<tr>
@@ -167,7 +169,9 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="booking-client-email-header-color"><?php esc_html_e( 'Booking Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = "<?php echo $booking_client_email_settings['client_header_color']; ?>" type="text" name="booking_client_template_settings[client_header_color]" id="booking-client-email-header-color">
+												<div class="wp-travel-color-picker-wrapper">
+													<input class="wp-travel-color-field" value = "<?php echo $booking_client_email_settings['client_header_color']; ?>" type="text" name="booking_client_template_settings[client_header_color]" id="booking-client-email-header-color">
+												</div>
 											</td>
 										</tr>
 										<tr>
@@ -237,7 +241,9 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="payment-admin-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = "<?php echo $payment_admin_email_settings['admin_header_color']; ?>" type="text" name="payment_admin_template_settings[admin_header_color]" id="payment-admin-email-header-color">
+												<div class="wp-travel-color-picker-wrapper">
+													<input class="wp-travel-color-field" value = "<?php echo $payment_admin_email_settings['admin_header_color']; ?>" type="text" name="payment_admin_template_settings[admin_header_color]" id="payment-admin-email-header-color">
+												</div>
 											</td>
 										</tr>
 										<tr>
@@ -287,7 +293,9 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="payment-client-email-header-color"><?php esc_html_e( 'Payment Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = "<?php echo $payment_client_email_settings['client_header_color']; ?>" type="text" name="payment_client_template_settings[client_header_color]" id="payment-client-email-header-color">
+												<div class="wp-travel-color-picker-wrapper">
+													<input class="wp-travel-color-field" value = "<?php echo $payment_client_email_settings['client_header_color']; ?>" type="text" name="payment_client_template_settings[client_header_color]" id="payment-client-email-header-color">
+												</div>
 											</td>
 										</tr>
 										<tr>
@@ -355,7 +363,9 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 												<label for="enquiry-admin-email-header-color"><?php esc_html_e( 'Enquiry Email Header Color', 'wp-travel' ); ?></label>
 											</th>
 											<td>
-												<input class="wp-travel-color-field" value = "<?php echo $enquiry_admin_email_settings['admin_header_color']; ?>" type="text" name="enquiry_admin_template_settings[admin_header_color]" id="enquiry-admin-email-header-color">
+												<div class="wp-travel-color-picker-wrapper">
+													<input class="wp-travel-color-field" value = "<?php echo $enquiry_admin_email_settings['admin_header_color']; ?>" type="text" name="enquiry_admin_template_settings[admin_header_color]" id="enquiry-admin-email-header-color">
+												</div>
 											</td>
 										</tr>
 										<tr>
