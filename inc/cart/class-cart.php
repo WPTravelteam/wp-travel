@@ -168,8 +168,8 @@ class WP_Travel_Cart {
 
 		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since new-version-number
 		if ( is_array( $pax ) ) :
-			$this->items[ $cart_item_id ]['trip_id']    = $trip_id;
-			$this->items[ $cart_item_id ]['trip_price'] = wp_travel_get_formated_price( $trip_price );
+			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
+			$this->items[ $cart_item_id ]['trip_price']         = wp_travel_get_formated_price( $trip_price );
 			$this->items[ $cart_item_id ]['trip_price_partial'] = wp_travel_get_formated_price( $trip_price_partial );
 
 		else :
@@ -288,12 +288,14 @@ class WP_Travel_Cart {
 				 * Customization Starts.
 				 */
 				// $max_available = $this->items[ $cart_item_id ]['max_available'];
-				$trip_id    = $this->items[ $cart_item_id ]['trip_id'];
-				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
-				$pricing_id = $this->items[ $cart_item_id ]['pricing_id'];
-				$cart_trip  = $this->items[ $cart_item_id ]['trip'];
+				$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
+				$trip_price    = $this->items[ $cart_item_id ]['trip_price'];
+				$pricing_id    = $this->items[ $cart_item_id ]['pricing_id'];
+				$cart_trip     = $this->items[ $cart_item_id ]['trip'];
+				$max_available = $this->items[ $cart_item_id ]['max_available'];
 
 				$trip_price = 0;
+				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
 					if ( $pax_value < 1 ) {
 						unset( $this->items[ $cart_item_id ]['trip'][ $category_id ] );
@@ -302,15 +304,23 @@ class WP_Travel_Cart {
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
 					$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+					$category_price_partial = $category_price;
+					if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
+						$percent = wp_travel_get_actual_payout_percent( $trip_id );
+						$category_price_partial = ( $category_price * $percent ) / 100;
+					}
 					// multiply category_price by pax to add in trip price if price per is person.
 					if ( 'person' == $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price *= $pax_value;
+						$category_price_partial *= $pax_value;
 					}
 					// add price.
 					$trip_price += $category_price;
+					$trip_price_partial += $category_price_partial;
 
 				}
 				$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 
 				if ( $trip_extras ) {
 
@@ -318,8 +328,8 @@ class WP_Travel_Cart {
 						$this->items[ $cart_item_id ]['trip_extras'] = $trip_extras;
 					}
 				}
-
-				if ( $max_available && $pax > $max_available ) {
+				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
+				if ( $max_available && $cart_pax > $max_available ) {
 					WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
 				}
 			} else {

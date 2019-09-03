@@ -1374,15 +1374,13 @@ function wp_travel_get_pricing_variation_options() {
 function wp_travel_get_pricing_variation( $post_id, $pricing_key ) {
 
 	if ( '' === $post_id || '' === $pricing_key ) {
-
 		return false;
-
 	}
 
 	// Get Pricing variations.
 	$pricing_variations = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 
-	if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
+	if ( is_array( $pricing_variations ) ) {
 
 		$result = array_filter(
 			$pricing_variations,
@@ -3024,13 +3022,20 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 
 				$pricing_categories   = isset( $pricing_option['categories'] ) ? $pricing_option['categories'] : array();
 
+				$pricing_min_pax = isset( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : '';
+				$pricing_max_pax = isset( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : '';
+
 				// Pricing Category.
 				$categories = array();
 				if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 					foreach ( $pricing_categories as $category_id => $pricing_category ) {
 
-						$pricing_min_pax = isset( $pricing_category['min_pax'] ) ? $pricing_category['min_pax'] : '';
-						$pricing_max_pax = isset( $pricing_category['max_pax'] ) ? $pricing_category['max_pax'] : '';
+						/**
+						 * Since Category Min Max Removed.
+						 */
+						// $pricing_min_pax = isset( $pricing_category['min_pax'] ) ? $pricing_category['min_pax'] : '';
+						// $pricing_max_pax = isset( $pricing_category['max_pax'] ) ? $pricing_category['max_pax'] : '';
+
 						// Default Inventory data.
 						$inventory_data = array(
 							'status_message' => __( 'N/A', 'wp-travel' ),
@@ -3038,8 +3043,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							'available_pax'  => 0,
 							'booked_pax'     => 0,
 							'pax_limit'      => 0,
-							'min_pax'        => $pricing_min_pax,
-							'max_pax'        => $pricing_max_pax,
+							// 'min_pax'        => $pricing_min_pax, //Not Needed for now as category min-max removed.
+							// 'max_pax'        => $pricing_max_pax, //Not Needed for now as category min-max removed.
 						);
 
 
@@ -3101,13 +3106,13 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								// Inventory option in multiple dates.
 								$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
 
-								// $pricing_data['status']        = $inventory_data['status_message'];
-								// $pricing_data['sold_out']      = $inventory_data['sold_out'];
-								// $pricing_data['available_pax'] = $inventory_data['available_pax'];
-								// $pricing_data['booked_pax']    = $inventory_data['booked_pax'];
-								// $pricing_data['pax_limit']     = $inventory_data['pax_limit'];
+								$pricing_data['status']        = $inventory_data['status_message'];
+								$pricing_data['sold_out']      = $inventory_data['sold_out'];
+								$pricing_data['available_pax'] = $inventory_data['available_pax'];
+								$pricing_data['booked_pax']    = $inventory_data['booked_pax'];
+								$pricing_data['pax_limit']     = $inventory_data['pax_limit'];
 								// $pricing_data['min_pax']       = $inventory_data['min_pax'];
-								// $pricing_data['max_pax']       = $inventory_data['max_pax'];
+								$pricing_data['max_pax']       = $inventory_data['max_pax'];
 								// Inventory Ends.
 								$pricing_data['arrival_date']   = $start_date;
 								$pricing_data['departure_date'] = $end_date;
@@ -3133,9 +3138,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				}
 			}
 		endif;
-
-
-
 	else :
 		// Legacy version @since new-version-number
 		// $customized_pricing_options = array(); // To use in api.

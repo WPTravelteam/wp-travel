@@ -630,17 +630,14 @@ add_filter( 'request', 'wp_travel_booking_column_orderby' );
 
 /** Front end Booking and send Email after clicking Book Now. */
 function wp_travel_book_now() {
-	if ( ! isset( $_POST['wp_travel_book_now'] ) ) {
+	if (
+		! isset( $_POST['wp_travel_book_now'] )
+		|| ! isset( $_POST['wp_travel_security'] )
+		|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+		) {
 		return;
 	}
 
-	if ( ! isset( $_POST['wp_travel_security'] ) ) {
-		return;
-	}
-
-	if ( ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
-		return;
-	}
 	global $wt_cart;
 
 	if ( isset( $wt_cart ) ) {
@@ -1229,7 +1226,7 @@ function get_booking_chart() {
 					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
 				</div>
 				<?php endif; ?>
-		
+
 				<div class="right-block-single">
 					<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales">0</big></strong><br />
 					<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>

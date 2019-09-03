@@ -54,7 +54,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 				<?php foreach ( $trips as $cart_id => $trip ) : ?>
 					<?php
-					
+
 					$trip_id       = $trip['trip_id'];
 					$trip_price    = $trip['trip_price'];
 					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
@@ -67,8 +67,10 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 					$pax_label = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 
-					$single_trip_total         = wp_travel_get_formated_price( $trip_price * $pax );
-					$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial * $pax );
+					// $single_trip_total         = wp_travel_get_formated_price( $trip_price * $pax );
+					$single_trip_total = wp_travel_get_formated_price( $trip_price ); // Applies to categorized pricing @since new-version-number
+					// $single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial * $pax );
+					$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial ); // Applies to categorized pricing @since new-version-number
 
 					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
 
@@ -93,7 +95,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						$price_per_label = ' × ' . $pax . ' /' . $pax_label;
 					}
 
-					$cart_trip 			= isset( $trip['trip'] ) ? $trip['trip'] : array();
+					$cart_trip = isset( $trip['trip'] ) ? $trip['trip'] : array();
 
 					?>
 
@@ -109,7 +111,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 										$category_type = isset( $category['type'] ) ? $category['type'] : '';
 
 										$price = $category['price'];
-										$pax = $category['pax'];
+										$pax   = $category['pax'];
 										if ( 'group' !== $category_type ) {
 											$price *= $pax;
 										}
@@ -132,7 +134,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<span class="product-total-price amount" ><?php echo wp_travel_get_formated_price_currency( $single_trip_total_partial ); ?></span>
 						</td>
 					</tr>
-					
+
 					<?php do_action( 'wp_travel_tour_extras_mini_cart_block', $trip_extras, $cart_id, $trip_id, $price_key ); ?>
 
 				<?php endforeach; ?>
@@ -161,7 +163,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 							<?php else : ?>
 
 								<strong><?php echo wp_travel_get_formated_price_currency( $cart_amounts['discount_partial'] ); ?></strong>
-							
+
 							<?php endif; ?>
 
 						</td>
@@ -172,7 +174,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					<tr>
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
-							<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?> 
+							<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?>
 							<span class="tax-percent">
 								<?php
 								echo esc_html( $tax_rate );

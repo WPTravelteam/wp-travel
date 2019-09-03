@@ -45,7 +45,9 @@ function wp_travel_booking_form_fields() {
 
 	$pax_size = 1;
 	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ) {
-		$pax_size = $_REQUEST['pax'];
+		if( is_array( $_REQUEST['pax'] ) ) {
+			$pax_size = array_sum( $_REQUEST['pax'] );
+		}
 	}
 	$trip_duration = 1;
 	if ( isset( $_REQUEST['trip_duration'] ) ) {
