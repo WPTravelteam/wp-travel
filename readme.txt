@@ -231,7 +231,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 2.1.1 =
-Release Date: 
+Release Date: 3rd September, 2019
 
 Fixes:
 
