@@ -436,11 +436,10 @@
   top: 21px;
   background: red;
   color: white;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  font-size: 7px;
-  padding: 4px;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  padding: 5px;
   line-height: 9px;
   right: -14px;
   font-weight: bold;
