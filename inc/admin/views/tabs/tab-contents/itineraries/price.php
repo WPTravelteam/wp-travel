@@ -175,7 +175,7 @@ function wp_travel_new_pricing_list_admin() {
 														<label for="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_min_pax" class="one-third"><?php esc_html_e( 'Min Pax:', 'wp-travel' ); ?></label>
 														<div class="two-third">
 															<div class="field-input">
-																<input class="wp-travel-variation-pricing-min-pax" id="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_min_pax" class="wp-travel-variation-pricing-min-pax" required bind="pricing_option_<?php echo esc_attr( $pricing_id ); ?>_min_pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][min_pax]" value="<?php echo esc_attr( $pricing_min_pax ); ?>">
+																<input class="pricing-opt-min-pax" required bind="pricing_option_<?php echo esc_attr( $pricing_id ); ?>_min_pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][min_pax]" value="<?php echo esc_attr( $pricing_min_pax ); ?>">
 															</div>
 														</div>
 													</div>
@@ -183,7 +183,7 @@ function wp_travel_new_pricing_list_admin() {
 														<label for="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_max_pax" class="one-third"><?php esc_html_e( 'Max Pax:', 'wp-travel' ); ?></label>
 														<div class="two-third">
 															<div class="field-input">
-																<input class="wp-travel-variation-pricing-max-pax" id="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_max_pax" class="wp-travel-variation-pricing-max-pax" required bind="pricing_option_<?php echo esc_attr( $pricing_id ); ?>_max_pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][max_pax]" value="<?php echo esc_attr( $pricing_max_pax ); ?>">
+																<input class="pricing-opt-max-pax" required bind="pricing_option_<?php echo esc_attr( $pricing_id ); ?>_max_pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][max_pax]" value="<?php echo esc_attr( $pricing_max_pax ); ?>">
 															</div>
 														</div>
 													</div>
@@ -289,7 +289,7 @@ function wp_travel_new_pricing_list_admin() {
 																					<span class="switch"></span>
 																				</label>
 																			</span>
-																			<p class="wp-travel-enable-sale wp-travel-enable-variation-price-sale-new description"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></p>
+																			<p class="wp-travel-enable-sale wp-travel-enable-variation-price-sale-new description"><?php esc_html_e( 'Check to enable.', 'wp-travel' ); ?></p>
 
 																		</div>
 																	</div>
@@ -299,6 +299,8 @@ function wp_travel_new_pricing_list_admin() {
 																			<input id="sale_price_<?php echo esc_attr( $pricing_id ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][sale_price]" value="<?php echo esc_attr( $pricing_sale_price ); ?>" />
 																		</div>
 																	</div>
+
+																	<?php do_action( 'wp_travel_pricing_option_content_after_category_repeator', $post_id, $pricing_id, $category_id, $category ); ?>
 																</div>
 																<?php
 															}

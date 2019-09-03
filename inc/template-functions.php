@@ -1891,7 +1891,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 						$parent_id = 'wp-travel-pricing-wrap';
 						if ( ! empty( $pricing_id ) ) { // Multiple pricing.
-							$parent_id = sprintf( 'pricing-%s', $pricing_id );
+							$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], rand( 1000, 9999 ) );
 						}
 
 						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );

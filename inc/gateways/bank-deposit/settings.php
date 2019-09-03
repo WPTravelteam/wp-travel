@@ -41,6 +41,7 @@ function wp_travel_settings_bank_deposit( $args ) {
 				<label for="payment_option_bank_deposit">
 					<span class="show-in-frontend checkbox-default-design">
 						<label data-on="ON" data-off="OFF">
+						<input type="hidden" value="no" name="payment_option_bank_deposit" />
 						<input type="checkbox" value="yes" <?php checked( 'yes', $payment_option_bank_deposit ); ?> name="payment_option_bank_deposit" id="payment_option_bank_deposit" class="wp-travel-enable-payment" />
 							<span class="switch">
 							</span>

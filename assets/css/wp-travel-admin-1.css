@@ -436,11 +436,10 @@
   top: 21px;
   background: red;
   color: white;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  font-size: 7px;
-  padding: 4px;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  padding: 5px;
   line-height: 9px;
   right: -14px;
   font-weight: bold;
@@ -928,23 +927,6 @@
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .tab-accordion .panel-title:active .collapsed {
   color: #fff !important;
 }
-.wp-travel-tabs-wrap .wp-travel-tabs-contents .tab-accordion .panel-body .form-table .wp-picker-container button {
-  margin: 0;
-  border: 0;
-  box-shadow: none;
-  outline: 0;
-  height: auto;
-  padding: 0 0 0 40px;
-}
-.wp-travel-tabs-wrap .wp-travel-tabs-contents .tab-accordion .panel-body .form-table .wp-picker-container button span {
-  background: #fff;
-  color: #474747;
-  font-size: 14px;
-  padding: 8px 20px;
-  border: 1px solid #d3d3d3;
-  box-shadow: none;
-  outline: 0;
-}
 .wp-travel-tabs-wrap .wp-travel-tabs-contents .tab-accordion .panel-body .section-heading {
   color: #6c6c6c;
   font-size: 16px;
@@ -996,7 +978,7 @@
   border: 0;
 }
 
-.form-table .wp-picker-container button {
+.form-table .wp-travel-color-picker-wrapper .wp-picker-container button {
   margin: 0 !important;
   border: 0;
   box-shadow: none;
@@ -1004,7 +986,7 @@
   height: auto !important;
   padding: 0 0 0 40px !important;
 }
-.form-table .wp-picker-container button span {
+.form-table .wp-travel-color-picker-wrapper .wp-picker-container button span {
   background: #fff;
   color: #474747;
   font-size: 14px;
