@@ -103,19 +103,25 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 	}
 	if ( ! $booking_id ) {
 		return;
-	} ?>
-	<div class="wp-travel-bank-deposit-wrap">
-		<?php
-		$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
-		// if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
-		?>
+	}
+	$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
+	$details    = wp_travel_booking_data( $booking_id );
+	if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
+		if ( ! class_exists( 'WP_Travel_Partial_Payment_Core' ) ) :
+			$details['due_amount'] = apply_filters( 'wp_travel_partial_payment_due_amount', $details['due_amount'] );
+			?>
+			<div class="wp-travel-form-field  wp-travel-text-info">
+				<label for="wp-travel-amount-info"><?php _e( 'Amount', 'wp-travel' ); ?></label>
+				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'] ); ?></div>
+			</div>
+		<?php endif; ?>
+		<div class="wp-travel-bank-deposit-wrap">
 			<h3 class="my-order-single-title"><?php _e( 'Bank Payment', 'wp-travel' ); ?></h3>
 			<a href="#wp-travel-bank-deposit-content" class="wp-travel-upload-slip wp-travel-magnific-popup button"><?php esc_html_e( 'Submit Payment Receipt', 'wp-travel' ); ?></a>
 			<a href="#wp-travel-bank-details-content" class="wp-travel-magnific-popup view-bank-deposit-button" style="display:block; padding:5px 0" ><?php _e( 'View Bank Details', 'wp-travel' ); ?></a>
-		<?php // endif; ?>
-	</div>
-	<?php
-
+		</div>
+		<?php
+	endif;
 }
 
 // Bank deposit Payment button in wp travel dashboard. @since 2.0.0
