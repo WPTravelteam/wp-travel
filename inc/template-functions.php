@@ -1805,7 +1805,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
 	// Endf of strings
 
-	// Filter added @since new_version
+	// Filter added @since new-version-number
 	$is_inventory_enabled  = apply_filters( 'inventory_enabled', false, $trip_id );
 
 	// All Pricings.
@@ -1988,7 +1988,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['price_key'] ); ?>" data-booked-pax="<?php esc_attr( $pricing['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['available_pax'] ); ?>" data-min="<?php echo esc_attr( $pricing['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['max_pax'] ); ?>">
 											<span class="separator">&nbsp;</span>
 											<?php
-											if ( $is_inventory_enabled ) :
+											// if ( $is_inventory_enabled ) :
 												$pricing_max_pax = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
 												$available_pax = ! empty( $pricing['available_pax'] ) ? $pricing['available_pax'] : '';
 											?>
@@ -1996,7 +1996,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											<div class="category available-seats">
 												<?php echo esc_html( 'Availabe Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 											</div>
-											<?php endif; ?>
+											<?php// endif; ?>
 											<?php
 											if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 												foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
@@ -2017,7 +2017,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 														$max_attr = ! empty( $pricing['max_pax'] ) ? 'max=' . $pricing['max_pax'] : 'No size limit';
 														$max = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
 													}
-													if ( $pricing_category['inventory']['available_pax'] ) {
+													if ( isset( $pricing_category['inventory']['available_pax'] ) ) {
 														$max_attr = 'max=' . $pricing_category['inventory']['available_pax'];
 														$max      = $pricing_category['inventory']['available_pax'];
 													}
