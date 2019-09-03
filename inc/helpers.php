@@ -3114,7 +3114,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							$date_label = isset( $date_option['date_label'] ) ? $date_option['date_label'] : null;
 
 							$price_keys = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : null; // Price key to validate pricing. need to remove in future version. use $pricing_id instead of this.
-							if ( in_array( $price_key, $price_keys ) ) {
+							if ( is_array( $price_keys ) && in_array( $price_key, $price_keys ) ) {
 
 								// Inventory option in multiple dates.
 								$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
