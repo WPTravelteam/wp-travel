@@ -1872,7 +1872,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					</li>
 					<!-- pricing loop -->
 					<?php
-					foreach ( $pricing_data as $pricing ) :
+					foreach ( $pricing_data as $pricing_data_key => $pricing ) :
 
 						$max_attr = '';
 						$min_attr = 'min=1';
@@ -1891,10 +1891,10 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 							$max      = $pricing['available_pax'];
 						}
 
-						$parent_id = 'wp-travel-pricing-wrap';
-						if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
-							$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], rand( 1000, 9999 ) );
-						}
+						// $parent_id = 'wp-travel-pricing-wrap';
+						// if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
+							$parent_id = sprintf( 'pricing-%s-%s', $pricing_data_key, rand( 1000, 9999 ) );
+						// }
 
 						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 						if ( 'yes' !== $pricing['fixed_departure'] ) :
@@ -2166,7 +2166,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 			<ul class="trip_list_by_fixed_departure_dates_list">					
 				<!-- pricing loop -->
 				<?php
-				foreach ( $pricing_data as $pricing ) :
+				foreach ( $pricing_data as $pricing_data_key => $pricing ) :
 					$max_attr = '';
 					$min_attr = 'min=1';
 					if ( '' !== $pricing['min_pax'] ) {
@@ -2179,10 +2179,10 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 						$max_attr = 'max=' . $pricing['available_pax'];
 					}
 					$rand      = rand();
-					$parent_id = 'wp-travel-pricing-wrap-' . $rand;
-					if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
-						$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], $rand );
-					}
+					// $parent_id = 'wp-travel-pricing-wrap-' . $rand;
+					// if ( ! empty( $pricing['price_key'] ) ) { // Multiple pricing.
+						$parent_id = sprintf( 'pricing-%s-%s', $pricing_data_key, $rand );
+					// }
 
 					$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
 					if ( 'yes' !== $pricing['fixed_departure'] ) :
