@@ -1903,7 +1903,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						$unavailable_class = '';
 						$availability      = false;
 						if ( isset( $pricing['arrival_date'] ) ) {
-							$availability = wp_travel_trip_availability( $trip_id, $pricing['price_key'], $pricing['arrival_date'], $pricing['sold_out'] );
+							$availability = wp_travel_trip_availability( $trip_id, $pricing['price_key'], $pricing['arrival_date'], $pricing['inventory']['sold_out'] );
 							if ( ! $availability || ( $is_inventory_enabled && $pricing['min_pax'] > $pricing['available_pax'] ) ) {
 								$unavailable_class = 'pricing_unavailable';
 							}
@@ -1978,21 +1978,21 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<?php endif; ?>
 								<?php endif; ?>
 								<div class="group-size-min-max">
-									<?php echo esc_html( $pricing['min_pax'] . '-' . $pricing['max_pax'] ); ?>
+									<?php echo esc_html( $pricing['inventory']['min_pax'] . '-' . $pricing['inventory']['max_pax'] ); ?>
 								</div>
 								<div class="group-size">
 									<div id="paxpicker" class="paxpicker">
 										<div class="icon-users summary">
 											<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
 										</div>
-										<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['price_key'] ); ?>" data-booked-pax="<?php esc_attr( $pricing['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['available_pax'] ); ?>" data-min="<?php echo esc_attr( $pricing['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['max_pax'] ); ?>">
+										<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['price_key'] ); ?>" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 											<span class="separator">&nbsp;</span>
 											<?php
 											if ( $is_inventory_enabled ) :
-												$pricing_max_pax = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
-												$available_pax = ! empty( $pricing['available_pax'] ) ? $pricing['available_pax'] : '';
+												$pricing_max_pax = ! empty( $pricing['inventory']['max_pax'] ) ? $pricing['inventory']['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
+												$available_pax = ! empty( $pricing['inventory']['available_pax'] ) ? $pricing['inventory']['available_pax'] : '';
 											else :
-												$available_pax = $pricing['max_pax'];
+												$available_pax = $pricing['inventory']['max_pax'];
 											endif;
 											?>
 
@@ -2002,33 +2002,33 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											<?php
 											if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 												foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
-													$max_attr = '';
-													$min_attr = 'min=1';
-													$max      = '';
-													$min      = 1;
-													if ( ! empty( $pricing_category['min_pax'] ) ) {
-														$min      = $pricing_category['min_pax'];
-														$min_attr = "min={$min}";
-													} elseif ( ! empty( $pricing['min_pax'] ) ) {
-														$min      = $pricing['min_pax'];
-														$min_attr = "min={$min}";
-													}
+													$max      = $pricing['inventory']['max_pax'];
+													$min      = $pricing['inventory']['min_pax'];
+													$max_attr = "max={$max}";
+													$min_attr = "min={$min}";
+													// if ( ! empty( $pricing_category['min_pax'] ) ) {
+													// 	$min      = $pricing_category['min_pax'];
+													// 	$min_attr = "min={$min}";
+													// } elseif ( ! empty( $pricing['min_pax'] ) ) {
+													// 	$min      = $pricing['min_pax'];
+													// 	$min_attr = "min={$min}";
+													// }
 
-													if ( ! empty( $pricing_category['max_pax'] ) ) {
-														$max      = $pricing_category['max_pax'];
-														$max_attr = "max={$max}";
-													} elseif ( ! empty( $pricing['max_pax'] ) ) {
-														$max      = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
-														$max_attr = "max={$max}";
-													}
+													// if ( ! empty( $pricing_category['max_pax'] ) ) {
+													// 	$max      = $pricing_category['max_pax'];
+													// 	$max_attr = "max={$max}";
+													// } elseif ( ! empty( $pricing['max_pax'] ) ) {
+													// 	$max      = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
+													// 	$max_attr = "max={$max}";
+													// }
 
-													if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
-														$max      = $pricing['available_pax'];
-														$max_attr = "max={$max}";
-													} else {
-														$max      = $pricing['max_pax'];
-														$max_attr = "max={$max}";
-													}
+													// if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
+													// 	$max      = $pricing['available_pax'];
+													// 	$max_attr = "max={$max}";
+													// } else {
+													// 	$max      = $pricing['inventory']['max_pax'];
+													// 	$max_attr = "max={$max}";
+													// }
 													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
 													// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 													?>
