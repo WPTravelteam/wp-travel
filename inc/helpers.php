@@ -3015,8 +3015,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		$trip_duration['night'] = $night;
 	}
 
+	$settings = wp_travel_get_settings();
+	$enable_multiple_category_on_pricing = $settings['enable_multiple_category_on_pricing'];
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since new-version-number
-	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
+	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing  ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
