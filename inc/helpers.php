@@ -3154,11 +3154,11 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		// $customized_pricing_options = array(); // To use in api.
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 
-
 		// if ( ! empty( $days ) ) {
 		// 	$trip_duration['days']  = $days;
 		// 	$trip_duration['night'] = $night;
 		// }
+
 		if ( 'single-price' === $pricing_option_type ) {
 			$group_size     = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 			$inventory_data = array(
@@ -3191,6 +3191,18 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				'min_pax'         => $inventory_data['min_pax'],
 				'max_pax'         => $inventory_data['max_pax'],
 				'fixed_departure' => $fixed_departure,
+			);
+
+			$pricing_data['categories'][] = array(
+				'type'         => isset( $inventory_data['type'] ) ? $inventory_data['type'] : '',
+				'custom_label' => isset( $inventory_data['custom_label'] ) ? $inventory_data['custom_label'] : '',
+				'min_pax'      => isset( $inventory_data['min_pax'] ) ? $inventory_data['min_pax'] : '',
+				'max_pax'      => isset( $inventory_data['max_pax'] ) ? $inventory_data['max_pax'] : '',
+				'price_per'    => isset( $inventory_data['price_per'] ) ? $inventory_data['price_per'] : '',
+				'price'        => isset( $inventory_data['price'] ) ? $inventory_data['price'] : '',
+				'enable_sale'  => isset( $inventory_data['enable_sale'] ) ? $inventory_data['enable_sale'] : '',
+				'sale_price'   => isset( $inventory_data['sale_price'] ) ? $inventory_data['sale_price'] : '',
+				'tour_extras'  => isset( $inventory_data['tour_extras'] ) ? $inventory_data['tour_extras'] : '',
 			);
 
 			if ( 'no' === $fixed_departure ) {
@@ -3243,6 +3255,19 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						'pax_limit'      => 0,
 						'min_pax'        => $pricing_min_pax,
 						'max_pax'        => $pricing_max_pax,
+					);
+
+
+					$pricing_data['categories'][] = array(
+						'type'         => isset( $inventory_data['type'] ) ? $inventory_data['type'] : '',
+						'custom_label' => isset( $inventory_data['custom_label'] ) ? $inventory_data['custom_label'] : '',
+						'min_pax'      => isset( $inventory_data['min_pax'] ) ? $inventory_data['min_pax'] : '',
+						'max_pax'      => isset( $inventory_data['max_pax'] ) ? $inventory_data['max_pax'] : '',
+						'price_per'    => isset( $inventory_data['price_per'] ) ? $inventory_data['price_per'] : '',
+						'price'        => isset( $inventory_data['price'] ) ? $inventory_data['price'] : '',
+						'enable_sale'  => isset( $inventory_data['enable_sale'] ) ? $inventory_data['enable_sale'] : '',
+						'sale_price'   => isset( $inventory_data['sale_price'] ) ? $inventory_data['sale_price'] : '',
+						'tour_extras'  => isset( $inventory_data['tour_extras'] ) ? $inventory_data['tour_extras'] : '',
 					);
 
 					$pricing_data = array(
