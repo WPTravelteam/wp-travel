@@ -1988,15 +1988,17 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['price_key'] ); ?>" data-booked-pax="<?php esc_attr( $pricing['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['available_pax'] ); ?>" data-min="<?php echo esc_attr( $pricing['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['max_pax'] ); ?>">
 											<span class="separator">&nbsp;</span>
 											<?php
-											// if ( $is_inventory_enabled ) :
+											if ( $is_inventory_enabled ) :
 												$pricing_max_pax = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
 												$available_pax = ! empty( $pricing['available_pax'] ) ? $pricing['available_pax'] : '';
+											else :
+												$available_pax = $pricing['max_pax'];
+											endif;
 											?>
 
 											<div class="category available-seats">
 												<?php echo esc_html( 'Availabe Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 											</div>
-											<?php// endif; ?>
 											<?php
 											if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 												foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
@@ -2022,6 +2024,9 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 													if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
 														$max      = $pricing['available_pax'];
+														$max_attr = "max={$max}";
+													} else {
+														$max      = $pricing['max_pax'];
 														$max_attr = "max={$max}";
 													}
 													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
