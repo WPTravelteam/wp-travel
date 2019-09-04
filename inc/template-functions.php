@@ -1810,7 +1810,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 	// All Pricings.
 	$pricings     = wp_travel_get_trip_pricing_option( $trip_id );
-	lp($pricings);
+	// lp($pricings);
 	$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
 	// Pricing Lists.
 	if ( is_array( $pricing_data ) && count( $pricing_data ) > 0 ) {
