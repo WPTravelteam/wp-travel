@@ -1904,7 +1904,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						$availability      = false;
 						if ( isset( $pricing['arrival_date'] ) ) {
 							$availability = wp_travel_trip_availability( $trip_id, $pricing['price_key'], $pricing['arrival_date'], $pricing['sold_out'] );
-							if ( ! $availability || $pricing['min_pax'] > $pricing['available_pax'] ) {
+							if ( ! $availability || ( $is_inventory_enabled && $pricing['min_pax'] > $pricing['available_pax'] ) ) {
 								$unavailable_class = 'pricing_unavailable';
 							}
 						} ?>
