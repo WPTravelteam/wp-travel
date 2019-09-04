@@ -300,7 +300,7 @@ function wp_travel_new_pricing_list_admin() {
 																		</div>
 																	</div>
 
-																	<?php do_action( 'wp_travel_pricing_option_content_after_category_repeator', $post_id, $pricing_id, $category_id, $category ); ?>
+																	<?php do_action( 'wp_travel_pricing_option_content_after_category', $post_id, $pricing_id, $category_id, $category ); ?>
 																</div>
 																<?php
 															}
@@ -381,11 +381,6 @@ function wp_travel_new_pricing_list_admin() {
 										<div class="repeat-row heading-category">
 											<label ><?php esc_html_e( 'Category', 'wp-travel' ); ?></label>
 										</div>
-
-										<div class="repeat-row heading-no-of-pax">
-											<label ><?php esc_html_e( 'Min/ Max Pax', 'wp-travel' ); ?></label>
-										</div>
-
 										<div class="repeat-row heading-price-per">
 											<label ><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label>
 										</div>
@@ -420,10 +415,7 @@ function wp_travel_new_pricing_list_admin() {
 													<input type="text" style="display:none" class="custom-pricing-label-wrap" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][custom_label]" placeholder="Custom Label" />
 												<?php endif; ?>
 											</div>
-											<div class="repeat-row">
-												<input class="pricing-opt-min-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][min_pax]" placeholder="Min"  min="1" />
-												<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][max_pax]" placeholder="Max"  min="1" />
-											</div>
+											
 											<div class="repeat-row">
 												<select id="price_per_{{data.random}}_{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price_per]">
 													<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
@@ -456,6 +448,8 @@ function wp_travel_new_pricing_list_admin() {
 													<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][sale_price]" />
 												</div>
 											</div>
+											<?php do_action( 'wp_travel_pricing_option_content_after_category_repeator', $post_id, $pricing_id, $category_id, $category ); ?>
+
 										</div>
 									</div>
 									<div class="repeat-row">
@@ -495,12 +489,7 @@ function wp_travel_new_pricing_list_admin() {
 							<?php endif; ?>
 						</div>
 
-						<div class="repeat-row">
-							<input class="pricing-opt-min-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][min_pax]" placeholder="Min"  min="1" />
-							<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][max_pax]" placeholder="Max"  min="1" />
-						</div>
-
-
+						
 						<div class="repeat-row">
 							<select id="price_per_{{data.random}}_{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price_per]">
 								<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>

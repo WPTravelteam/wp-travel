@@ -3018,7 +3018,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$settings = wp_travel_get_settings();
 	$enable_multiple_category_on_pricing = $settings['enable_multiple_category_on_pricing'];
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since new-version-number
-	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing  ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
+	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
@@ -3260,18 +3260,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					);
 
 
-					$pricing_data['categories'][] = array(
-						'type'         => isset( $inventory_data['type'] ) ? $inventory_data['type'] : '',
-						'custom_label' => isset( $inventory_data['custom_label'] ) ? $inventory_data['custom_label'] : '',
-						'min_pax'      => isset( $inventory_data['min_pax'] ) ? $inventory_data['min_pax'] : '',
-						'max_pax'      => isset( $inventory_data['max_pax'] ) ? $inventory_data['max_pax'] : '',
-						'price_per'    => isset( $inventory_data['price_per'] ) ? $inventory_data['price_per'] : '',
-						'price'        => isset( $inventory_data['price'] ) ? $inventory_data['price'] : '',
-						'enable_sale'  => isset( $inventory_data['enable_sale'] ) ? $inventory_data['enable_sale'] : '',
-						'sale_price'   => isset( $inventory_data['sale_price'] ) ? $inventory_data['sale_price'] : '',
-						'tour_extras'  => isset( $inventory_data['tour_extras'] ) ? $inventory_data['tour_extras'] : '',
-					);
-
 					$pricing_data = array(
 						'pricing_name'    => $pricing_name,
 						'price_key'       => $price_key,
@@ -3292,6 +3280,18 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						'min_pax'         => $inventory_data['min_pax'],
 						'max_pax'         => $inventory_data['max_pax'],
 					);
+					$pricing_data['categories'][$pricing_id] = array(
+						'type'         => isset( $inventory_data['type'] ) ? $inventory_data['type'] : '',
+						'custom_label' => isset( $inventory_data['custom_label'] ) ? $inventory_data['custom_label'] : '',
+						'min_pax'      => isset( $inventory_data['min_pax'] ) ? $inventory_data['min_pax'] : '',
+						'max_pax'      => isset( $inventory_data['max_pax'] ) ? $inventory_data['max_pax'] : '',
+						'price_per'    => isset( $inventory_data['price_per'] ) ? $inventory_data['price_per'] : '',
+						'price'        => isset( $inventory_data['price'] ) ? $inventory_data['price'] : '',
+						'enable_sale'  => isset( $inventory_data['enable_sale'] ) ? $inventory_data['enable_sale'] : '',
+						'sale_price'   => isset( $inventory_data['sale_price'] ) ? $inventory_data['sale_price'] : '',
+						// 'tour_extras'  => isset( $inventory_data['tour_extras'] ) ? $inventory_data['tour_extras'] : '',
+					);
+
 
 					if ( 'no' === $fixed_departure ) {
 						$pricing_data['trip_duration_days']  = $days;
