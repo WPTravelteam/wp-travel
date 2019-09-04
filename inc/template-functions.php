@@ -1873,20 +1873,20 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					foreach ( $pricing_data as $pricing_id => $pricing ) :
 						// Old legacy data. Need to migrate to new data. @since new-version-number
 
-						if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
-							$category_id = $pricing_id;
-							$pricing['categories'][ $category_id ] = array(
-								'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
-								'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
-								'min_pax'      => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
-								'max_pax'      => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
-								'price_per'    => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
-								'price'        => isset( $pricing['price'] ) ? $pricing['price'] : 0,
-								'enable_sale'  => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
-								'sale_price'   => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
-								'tour_extras'  => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
-							);
-						}
+						// if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
+						// 	$category_id = $pricing_id;
+						// 	$pricing['categories'][ $category_id ] = array(
+						// 		'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
+						// 		'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
+						// 		'min_pax'      => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
+						// 		'max_pax'      => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
+						// 		'price_per'    => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
+						// 		'price'        => isset( $pricing['price'] ) ? $pricing['price'] : 0,
+						// 		'enable_sale'  => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
+						// 		'sale_price'   => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
+						// 		'tour_extras'  => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
+						// 	);
+						// }
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
 						$parent_id = 'wp-travel-pricing-wrap';
