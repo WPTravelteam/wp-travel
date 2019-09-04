@@ -2003,23 +2003,26 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													$max_attr = '';
 													$min_attr = 'min=1';
 													$max      = '';
-													$min      = '';
-													$min      = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
+													$min      = 1;
 													if ( ! empty( $pricing_category['min_pax'] ) ) {
-														$min_attr = 'min=' . $pricing_category['min_pax'];
-													} else {
-														$min_attr = ! empty( $pricing['min_pax'] ) ? 'min=' . $pricing['min_pax'] : 1;
+														$min      = $pricing_category['min_pax'];
+														$min_attr = "min={$min}";
+													} elseif ( ! empty( $pricing['min_pax'] ) ) {
+														$min      = $pricing['min_pax'];
+														$min_attr = "min={$min}";
 													}
+
 													if ( ! empty( $pricing_category['max_pax'] ) ) {
-														$max_attr = 'max=' . $pricing_category['max_pax'];
 														$max      = $pricing_category['max_pax'];
-													} else {
-														$max_attr = ! empty( $pricing['max_pax'] ) ? 'max=' . $pricing['max_pax'] : 'No size limit';
-														$max = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
+														$max_attr = "max={$max}";
+													} elseif ( ! empty( $pricing['max_pax'] ) ) {
+														$max      = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
+														$max_attr = "max={$max}";
 													}
-													if ( isset( $pricing_category['inventory']['available_pax'] ) ) {
-														$max_attr = 'max=' . $pricing_category['inventory']['available_pax'];
-														$max      = $pricing_category['inventory']['available_pax'];
+
+													if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
+														$max      = $pricing['available_pax'];
+														$max_attr = "max={$max}";
 													}
 													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
 													// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
@@ -2030,7 +2033,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 																	<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
 																	<span class="min-max-pax">
 																		(<?php
-																			if ( ! empty( $pricing_category['max_pax'] ) ) {
+																			if ( ! empty( $pricing['max_pax'] ) ) {
 																				echo sprintf( '%s - %s %s', $min, $max, $pax_string );
 																			} else {
 																				echo sprintf( '%s %s - %s', $min, $pax_string, $max );
