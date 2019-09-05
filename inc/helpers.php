@@ -3080,6 +3080,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					'arrival_date'             => '',
 					'departure_date'           => '',
 					'status'                   => '',
+					'pricing_id'               => $pricing_id,
 				);
 
 				if ( 'yes' === $fixed_departure ) {
@@ -3101,7 +3102,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								$pricing_data['departure_date'] = $end_date;
 								$pricing_data['date_label']     = $date_label;
 								$pricing_data['inventory']      = $inventory_data;
-								$pricing_data['pricing_id']     = $pricing_id;
 								$pricing[]                      = $pricing_data;
 							}
 						}

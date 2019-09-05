@@ -385,7 +385,7 @@ jQuery(document).ready(function($) {
         $('#' + parent_id + ' .paxpicker-input').each( function(){
             if($(this).val() > 0) {
                 var type = $(this).data('type'); // Type refers to category.
-                var category_id = $(this).data('cagetory-id'); // category id
+                var category_id = $(this).data('category-id'); // category id
                 display_value +=  ', ' +  type + ' x ' + $(this).val();
                 pax_input += '<input type="hidden" name="pax['+ category_id +']" value="'+$(this).val()+'" >';
             }
