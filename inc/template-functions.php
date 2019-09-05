@@ -1870,7 +1870,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					</li>
 					<!-- pricing loop -->
 					<?php
-					foreach ( $pricing_data as $pricing_id => $pricing ) :
+					foreach ( $pricing_data as $pricing ) :
 						// Old legacy data. Need to migrate to new data. @since new-version-number
 
 						// if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
@@ -2064,7 +2064,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 															</p>
 															<div class="pax-select-container">
 																<a href="#" class="icon-minus pax-picker-minus">-</a>
-																<input readonly class="input-num paxpicker-input" data-pricing-id="<?php echo esc_attr( $pricing_id ); ?>" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-cagetory-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
+																<input readonly class="input-num paxpicker-input" data-pricing-id="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-cagetory-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
 																<a href="#" class="icon-plus pax-picker-plus">+</a>
 															</div>
 
@@ -2210,7 +2210,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 			<ul class="trip_list_by_fixed_departure_dates_list">
 				<!-- pricing loop -->
 				<?php
-				foreach ( $pricing_data as $pricing_id => $pricing ) :
+				foreach ( $pricing_data as $pricing ) :
 
 					$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 					$max_attr = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax']  : 'max=' . $pricing['inventory']['max_apx'] ) : ''; // set available_pax as max_pax if available
@@ -2375,7 +2375,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 															</p>
 															<div class="pax-select-container">
 																<a href="#" class="icon-minus pax-picker-minus">-</a>
-																<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-pricing-id="<?php echo esc_attr( $pricing_id ); ?>" data-cagetory-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
+																<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-pricing-id="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" data-cagetory-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
 																<a href="#" class="icon-plus pax-picker-plus">+</a>
 															</div>
 
