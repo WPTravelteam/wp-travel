@@ -3008,6 +3008,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$days               = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 	$night              = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
 	$default_group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+	$default_group_size = ! empty( $default_group_size ) ? $default_group_size : 99;
 
 	// Fixed Departures
 	$fixed_departure         = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
@@ -3099,6 +3100,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								$pricing_data['departure_date'] = $end_date;
 								$pricing_data['date_label']     = $date_label;
 								$pricing_data['inventory']      = $inventory_data;
+								$pricing_data['pricing_id']     = $pricing_id;
 								$pricing[]                      = $pricing_data;
 							}
 						}
@@ -3124,9 +3126,9 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 			$inventory_data = array(
 				'status_message' => __( 'N/A', 'wp-travel' ),
 				'sold_out'       => false,
-				'available_pax'  => 0,
+				'available_pax'  => $default_group_size,
 				'booked_pax'     => 0,
-				'pax_limit'      => 0,
+				'pax_limit'      => $default_group_size,
 				'min_pax'        => 1,
 				'max_pax'        => $default_group_size,
 			);
@@ -3178,8 +3180,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							$pricing_option_price = isset( $pricing_option['price'] ) ? $pricing_option['price'] : '';
 							$pricing_sale_enabled = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
 							$pricing_sale_price   = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : '';
-							$pricing_min_pax      = isset( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : '';
-							$pricing_max_pax      = isset( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : '';
+							$pricing_min_pax      = isset( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
+							$pricing_max_pax      = isset( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
 
 							// Default Inventory data.
 							$inventory_data = array(
@@ -3231,7 +3233,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 											$pricing_data['departure_date'] = $end_date;
 											$pricing_data['date_label']     = $date_label;
 											$pricing_data['inventory']      = $inventory_data;
-											$pricing[]                      = $pricing_data;
+											$pricing[$pricing_id]           = $pricing_data;
 										}
 									}
 								} else {
