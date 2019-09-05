@@ -2032,7 +2032,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
 													// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 													?>
-														<div class="category">
+														<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 															<p class="picker-info">
 																<span class="pax-type">
 																	<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
@@ -2343,7 +2343,8 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
 													// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 													?>
-														<div class="category">
+														<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
+
 															<p class="picker-info">
 																<span class="pax-type">
 																	<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
