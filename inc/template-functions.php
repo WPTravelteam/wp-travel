@@ -2392,7 +2392,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 							<div class="trip_list_by_fixed_departure_dates_booking">
 								<div class="action">
 
-									<?php if ( $pricing['sold_out'] ) : ?>
+									<?php if ( $pricing['inventory']['sold_out'] ) : ?>
 
 										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 
