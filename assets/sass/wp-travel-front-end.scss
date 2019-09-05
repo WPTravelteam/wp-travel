@@ -1,3 +1,5 @@
+@import 'pax-picker';
+
 @mixin clearfix {
     &:after,
     &:before {
@@ -2435,7 +2437,7 @@ ul.availabily-list {
             }
             &.date-from {
                 padding-right: 10px;
-                position: relative;                
+                position: relative;
             }
             &.date-to {
                 padding-left: 10px;
@@ -2468,7 +2470,7 @@ ul.availabily-list {
                     color: #fff;
                     border-radius: 4px;
                 }
-                
+
             }
             span {
                 // display: block;
@@ -2586,7 +2588,7 @@ ul.availabily-list {
         }
     }
     &.additional-col {
-        li { 
+        li {
             >div {
                 // width: 16.66%;
                 width: 14.26%;
@@ -3334,7 +3336,7 @@ ul.wp-travel-error {
                 position: relative;
                 padding: 0 15px 0 0;
                 font-size: 13.8px;
-                
+
                 &.radio-checkbox-label {
                     margin-bottom: 15px !important;
                     width: 75%;
@@ -3752,10 +3754,10 @@ ul.wp-travel-error {
         padding-left: 0;
         >li {
             border: 1px solid #f2f2f2;
-            
+
             padding: 20px;
             list-style-type: none;
-            
+
             &.pricing_unavailable {
                 .trip_list_by_fixed_departure_dates_wrap{
                     color: #c7d0d9;
@@ -4157,9 +4159,9 @@ li {
         justify-content: space-between;
         margin: -20px -20px -20px -40px;
         padding: 20px 20px 15px 60px;
-        
+
       }
-      
+
       .wp_travel_tour_extras_title {
         margin-right: 25px;
         h5 {

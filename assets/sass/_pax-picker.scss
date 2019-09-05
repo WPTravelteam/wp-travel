@@ -1,0 +1,31 @@
+ul.availabily-list li.availabily-heading >div,
+ul.availabily-list li > form > div{
+    padding:0;
+    padding-right:5px;
+}
+.paxpicker .category.available-seats {
+    line-height: 1;
+    font-size: 1em;
+}
+.paxpicker .category.available-seats > span {
+    flex: 1 0 auto;
+}
+ul.availabily-list li > form > div.group-size-min-max{
+    width:14.2857%;
+}
+ul.availabily-list li > form > div.group-size{
+    width:calc( 2 * 14.2857% );
+}
+ul.availabily-list li > form > div.pax-selected{
+    width:20%
+}
+ul.availabily-list.additional-col li > div.paxpicker{
+    width:100%;
+}
+.paxpicker.is-active .pricing-categories{
+    z-index:11;
+}
+
+.paxpicker.is-active .participants-summary-container{
+    width:95%
+}

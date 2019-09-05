@@ -3079,6 +3079,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					'trip_duration_night'      => $night,
 					'arrival_date'             => '',
 					'departure_date'           => '',
+					'status'                   => '',
 				);
 
 				if ( 'yes' === $fixed_departure ) {
@@ -3138,6 +3139,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				'trip_duration_night' => $night,
 				'arrival_date'        => '',
 				'departure_date'      => '',
+				'status'              => '',
 			);
 
 			switch ( $pricing_option_type ) {
@@ -3202,6 +3204,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								'price_per_key'       => wp_travel_get_price_per_text( $trip_id, $price_key, true ),
 								'trip_duration_days'  => $days,
 								'trip_duration_night' => $night,
+								'status'              => '',
 								'categories'          => array(
 									$pricing_id => array(
 										'type'        => $pricing_type,

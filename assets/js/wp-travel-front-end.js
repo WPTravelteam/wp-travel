@@ -168,9 +168,9 @@ jQuery(document).ready(function($) {
     jQuery('.show-booking-row').click(function(event) {
         event.preventDefault();
         var parent = $(this).closest('li.availabily-content');
-        
+
         jQuery(this).parent('.action').siblings('.wp-travel-booking-row').toggle('fast', function() {
-            
+
             parent.toggleClass('opened');
         }).addClass('animate');
         jQuery(this).text(function(i, text) {
@@ -245,7 +245,7 @@ jQuery(document).ready(function($) {
                   // newdate.setDate( newdate.getDate() - day_to_add );
                   someFormattedDate = _moment.subtract( day_to_add, 'days').format('YYYY-MM-DD');
                 }
-      
+
                 var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
                 next_el_datepicker.date = new Date( someFormattedDate );
                 next_el.val( someFormattedDate );
@@ -264,7 +264,7 @@ jQuery(document).ready(function($) {
 
       $('input[name=departure_date]').each( function(){
         //   var parent = $(this).closest('form').attr( 'id' );
-          
+
           var departure_date = $(this).wpt_datepicker().data('datepicker');
           if ( 'undefined' !== typeof departure_date ) {
             var day_to_add = departure_date.$el.data('totaldays' );;
@@ -337,3 +337,66 @@ jQuery(document).ready(function($) {
         type: 'inline',
     });
 });
+
+// Pax Picker for categorized pricing
+( function($) {
+
+    $(document).on( 'click', '.paxpicker .icon-users', function( e ) {
+        if ( $(this).closest('.paxpicker').hasClass('is-active') ) {
+            $(this).closest('.paxpicker').removeClass( 'is-active' );
+        } else {
+            $(this).closest('.paxpicker').addClass('is-active');
+        }
+    } );
+
+    $(document).on( 'click', '.pax-picker-plus, .pax-picker-minus', function(e) {
+        e.preventDefault();
+        var parent_id = $(this).closest('.pricing-categories').attr('id');
+        var pricing_form = $('#'+parent_id).closest('form');
+        var available_pax = parseInt( document.getElementById(parent_id).dataset.availablePax )
+        var booked_pax = parseInt(document.getElementById(parent_id).dataset.bookedPax)
+        var max_pax = parseInt( document.getElementById(parent_id).dataset.max)
+        var min_pax = parseInt( document.getElementById(parent_id).dataset.min)
+
+        inventoryController(this);
+
+        function inventoryController(el) {
+            var input = $(el).siblings('.paxpicker-input');
+            var current_val = ( input.val() ) ? parseInt( input.val() ) : 0;
+            $('#'+parent_id).find('.available-seats').find('span').text(function(){
+                // var seats = parseInt($(this).text())
+                if ( $(el).hasClass('pax-picker-plus') && available_pax > 0 ) {
+                    document.getElementById(parent_id).dataset.availablePax = --available_pax;
+                    document.getElementById(parent_id).dataset.bookedPax = ++booked_pax
+                    input.removeAttr('disabled').val( ++current_val ).trigger('change')
+                    return available_pax;
+                }else if( $(el).hasClass('pax-picker-minus') && current_val > 0 ) {
+                    document.getElementById(parent_id).dataset.availablePax = ++available_pax;
+                    document.getElementById(parent_id).dataset.bookedPax = --booked_pax
+                    input.removeAttr('disabled').val( --current_val ).trigger('change')
+                    return available_pax;
+                }
+            })
+        }
+
+        booked_pax < min_pax && pricing_form.find('input[type=submit]').attr('disabled','disabled') || pricing_form.find('input[type=submit]').removeAttr('disabled')
+        var display_value = '';
+        var pax_input = '';
+        $('#' + parent_id + ' .paxpicker-input').each( function(){
+            if($(this).val() > 0) {
+                var type = $(this).data('type'); // Type refers to category.
+                var category_id = $(this).data('cagetory-id'); // category id
+                display_value +=  ', ' +  type + ' x ' + $(this).val();
+                pax_input += '<input type="hidden" name="pax['+ category_id +']" value="'+$(this).val()+'" >';
+            }
+        } );
+
+        if ( ! display_value ) {
+            var display_value = $( '#' + parent_id ).siblings('.summary').find('.participants-summary-container').data('default');
+        }
+        display_value = display_value.replace(/^,|,$/g,''); // Trim Comma(').
+        $( '#' + parent_id ).siblings('.summary').find('.participants-summary-container').val( display_value );
+        $(  '#' + parent_id + ' .pricing-input' ).html(pax_input);
+
+    } );
+} )(jQuery);
