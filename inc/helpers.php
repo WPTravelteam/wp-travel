@@ -3053,8 +3053,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						$categories[ $category_id ]['price_per']   = $pricing_category['price_per'];
 						$categories[ $category_id ]['sale_price']  = $pricing_category['sale_price'];
 						$categories[ $category_id ]['enable_sale'] = isset( $pricing_category['enable_sale'] ) ? $pricing_category['enable_sale'] : 'no';
-						$categories[ $category_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_option['pricing_id'], $category_id );
-						$categories[ $category_id ]['price']       = wp_travel_get_price( $trip_id, false, $pricing_option['pricing_id'], $category_id );
+						$categories[ $category_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, $category_id );
+						$categories[ $category_id ]['price']       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
 					}
 				}
 
