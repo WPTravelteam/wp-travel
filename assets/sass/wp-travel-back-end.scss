@@ -1149,8 +1149,26 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &.new-category-row-content{
             margin-bottom: 30px;
             .new-category-repeator{
-                // padding: 10px 30px;
+                position: relative;
                 padding: 10px;
+
+                .wp-travel-remove-pricing-category{
+                    position: absolute;
+                    // top: calc( 50% - 20px );
+                    // right: -15px;
+                    top: 0;
+                    right: 0;
+                    background: #a00;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: 600;
+                    z-index: 1;
+                    display: none;
+                    &:hover{
+                        background: #f00;
+                    }
+                }
             }
             .new-category-repeator:nth-child(2n+1) {
                 background: #ddd;
@@ -1192,6 +1210,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             }
         }
 
+        
     }
     .one-third,
     .two-third {

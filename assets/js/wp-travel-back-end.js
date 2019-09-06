@@ -479,19 +479,6 @@
         $(this).closest('.repeat-row').next('.repeat-row').addClass( 'visibility-hidden' );
     }
 
-    // Add  New Pricing option category
-    $(document).on('click', '.wp-travel-add-new-pricing-category', function() {
-        var parent = $(this).closest('.repeat-row').siblings('.new-category-row-content').attr('id');
-        var template = wp.template('wp-travel-pricing-options-category');
-        var price_key = $(this).closest('.panel-wrap').find('.wp-travel-price-key').val();
-        if ( ! price_key ) {
-            var price_key = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        }
-        var category_id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-
-        $('#' + parent ).append(template({ random: price_key, category_id:category_id }));
-    });
-
     if ($('#wp-travel-enable-sale').is(':checked')) {
         $('#wp-travel-price').attr('required', 'required');
         $('#wp-travel-sale-price').attr('required', 'required');
