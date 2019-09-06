@@ -156,6 +156,14 @@ class WP_Travel_Ajax {
 
 			foreach ( $pax as $category_id => $pax_value ) {
 				$category_price         = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since new-version-number.
+
+				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
+
+					if ( $group_trip_price ) {
+						$category_price = $group_trip_price;
+					}
+				}
 				$category_price_partial = $category_price;
 
 				if ( wp_travel_is_partial_payment_enabled() ) {
@@ -194,7 +202,7 @@ class WP_Travel_Ajax {
 			$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
 
 			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-				$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
+				$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $pricing_id ); // for old price pricing id is treated as category id.
 				if ( $group_trip_price ) {
 					$trip_price = $group_trip_price;
 				}
