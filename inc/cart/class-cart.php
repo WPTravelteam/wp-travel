@@ -166,6 +166,13 @@ class WP_Travel_Cart {
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
+		// For additional cart item attrs.
+		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
+			foreach ( $attrs as $key => $attr ) {
+				$this->items[ $cart_item_id ][ $key ] = $attr;
+			}
+		}
+
 		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since new-version-number
 		if ( is_array( $pax ) ) :
 			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
@@ -210,12 +217,7 @@ class WP_Travel_Cart {
 			$this->items[ $cart_item_id ]['price_key']  = $price_key;
 
 		endif;
-		// For additional cart item attrs.
-		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
-			foreach ( $attrs as $key => $attr ) {
-				$this->items[ $cart_item_id ][ $key ] = $attr;
-			}
-		}
+		
 		$this->write();
 		return true;
 	}
@@ -304,7 +306,19 @@ class WP_Travel_Cart {
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
 					$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
+
+						if ( $group_trip_price ) {
+							$category_price = $group_trip_price;
+						}
+					}
 					$category_price_partial = $category_price;
+
+					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price'] = $category_price;
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
+
 					if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 						$percent = wp_travel_get_actual_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
@@ -342,7 +356,7 @@ class WP_Travel_Cart {
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-					$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
+					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $category_id, $price_key );
 					if ( $group_trip_price ) {
 						$trip_price = $group_trip_price;
 					}
