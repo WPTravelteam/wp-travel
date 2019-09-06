@@ -170,14 +170,23 @@ class WP_Travel_Ajax {
 					$percent                = wp_travel_get_actual_payout_percent( $trip_id );
 					$category_price_partial = ( $category_price * $percent ) / 100;
 				}
-				$array_column = array_column( $pricing_data, 'categories' );
+
 				$pricing_index = null;
-				foreach ( $array_column as $index => $key ) {
-					if( array_key_exists( $category_id, $key ) ) {
-						$pricing_index = $index;
-						break;
-					};
+				foreach ( $pricing_data as $index => $pricing ) {
+					if ( isset( $pricing['categories'] ) && is_array( $pricing['categories'] ) ) {
+						if( array_key_exists( $category_id, $pricing['categories'] ) ) {
+							$pricing_index = $index;
+							break;
+						};
+					}
 				}
+				// $array_column = array_column( $pricing_data, 'categories' );
+				// foreach ( $array_column as $index => $key ) {
+				// 	if( array_key_exists( $category_id, $key ) ) {
+				// 		$pricing_index = $index;
+				// 		break;
+				// 	};
+				// }
 				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
