@@ -351,8 +351,8 @@ jQuery(document).ready(function ($) {
 
     $('.add-to-cart-btn').on('click', function(){
         var pricing = $(this).closest('form').find('.pricing-categories');
-        var selectedPax = pricing[0].dataset.selectedPax
-        var min_pax = pricing[0].dataset.min
+        var selectedPax = parseInt(pricing[0].dataset.selectedPax)
+        var min_pax = parseInt(pricing[0].dataset.min)
         if ( selectedPax < min_pax ) {
             alert('Please select at least minimum pax.')
             $(this).attr('disabled', 'disabled').css({'opacity' : '.5'})
