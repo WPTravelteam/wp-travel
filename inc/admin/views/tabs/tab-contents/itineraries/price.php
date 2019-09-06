@@ -278,7 +278,7 @@ function wp_travel_new_pricing_list_admin() {
 																	<div class="repeat-row">
 																		<div class="field-price-currency-input">
 																			<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-																			<input id="price_<?php echo esc_attr( $pricing_id ); ?>" bindPrice="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price]" value="<?php echo esc_attr( $pricing_option_price ); ?>" >
+																			<input id="price_<?php echo esc_attr( $pricing_id ); ?>" bindPrice="pricing_variation_<?php echo esc_attr( $pricing_id . '-' . $category_id ); ?>" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][price]" value="<?php echo esc_attr( $pricing_option_price ); ?>" >
 																		</div>
 																	</div>
 																	<div class="repeat-row">
@@ -296,7 +296,7 @@ function wp_travel_new_pricing_list_admin() {
 																	<div class="repeat-row <?php echo ( 'yes' !== $pricing_sale_enabled ) ? 'visibility-hidden' : ''; ?>">
 																		<div class="field-price-currency-input">
 																			<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-																			<input id="sale_price_<?php echo esc_attr( $pricing_id ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $pricing_id ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][sale_price]" value="<?php echo esc_attr( $pricing_sale_price ); ?>" />
+																			<input id="sale_price_<?php echo esc_attr( $pricing_id ); ?>" bindSale="pricing_variation_<?php echo esc_attr( $pricing_id . '-' . $category_id ); ?>" type="number" min="1" step="0.01" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][sale_price]" value="<?php echo esc_attr( $pricing_sale_price ); ?>" />
 																		</div>
 																	</div>
 
@@ -501,7 +501,7 @@ function wp_travel_new_pricing_list_admin() {
 						<div class="repeat-row">
 							<div class="field-price-currency-input">
 								<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-								<input id="price_{{data.random}}" bindPrice="pricing_variation_{{data.random}}" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price]">
+								<input id="price_{{data.random}}" bindPrice="pricing_variation_{{data.random}}-{{data.category_id}}" required="required" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price]">
 							</div>
 						</div>
 						<div class="repeat-row">
@@ -518,7 +518,7 @@ function wp_travel_new_pricing_list_admin() {
 						<div class="repeat-row visibility-hidden">
 							<div class="field-price-currency-input">
 								<span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span>
-								<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][sale_price]" />
+								<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}-{{data.category_id}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][sale_price]" />
 							</div>
 						</div>
 
