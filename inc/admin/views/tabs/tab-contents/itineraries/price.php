@@ -189,7 +189,7 @@ function wp_travel_new_pricing_list_admin() {
 													</div>
 													<div class="repeat-row">
 														<label for="pricing_name_<?php echo esc_attr( $pricing_id ); ?>" class="one-third"><?php esc_html_e( 'Prices', 'wp-travel' ); ?> </label>
-														<input type="button" value="<?php esc_html_e( 'Add New', 'wp-travel' ); ?>" class="button button-primary wp-travel-add-new-pricing-category" title="<?php esc_html_e( 'Add New Category', 'wp-travel' ); ?>" style="float:right" />
+														<?php do_action( 'wp_travel_pricing_add_new_category_button' ); ?>
 													</div>
 
 													<div class="new-category-row row new-category-row-heading">
@@ -247,6 +247,7 @@ function wp_travel_new_pricing_list_admin() {
 																}
 																?>
 																<div class="new-category-repeator">
+																	<a href="#" class="wp-travel-remove-pricing-category" >X</a>
 																	<div class="repeat-row">
 																		<?php
 																		$pricing_variation_options = wp_travel_get_pricing_variation_options();
@@ -375,7 +376,7 @@ function wp_travel_new_pricing_list_admin() {
 									</div>
 									<div class="repeat-row">
 										<label for="pricing_name_{{data.random}}" class="one-third"><?php esc_html_e( 'Prices', 'wp-travel' ); ?></label>
-										<input type="button" value="<?php esc_html_e( 'Add New', 'wp-travel' ); ?>" class="button button-primary wp-travel-add-new-pricing-category" title="<?php esc_html_e( 'Add New Category', 'wp-travel' ); ?>" style="float:right" />
+										<?php do_action( 'wp_travel_pricing_add_new_category_button_repeator' ); ?>
 									</div>
 									<div class="new-category-row row new-category-row-heading">
 										<div class="repeat-row heading-category">
@@ -398,6 +399,7 @@ function wp_travel_new_pricing_list_admin() {
 
 									<div class="new-category-row row new-category-row-content" id="new-category-row-content-{{data.random}}">
 										<div class="new-category-repeator">
+											<a href="#" class="wp-travel-remove-pricing-category" >X</a>
 											<div class="repeat-row">
 												<?php
 												$pricing_variation_options = wp_travel_get_pricing_variation_options();
@@ -448,7 +450,7 @@ function wp_travel_new_pricing_list_admin() {
 													<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][sale_price]" />
 												</div>
 											</div>
-											<?php do_action( 'wp_travel_pricing_option_content_after_category_repeator', $post_id, $pricing_id, $category_id, $category ); ?>
+											<?php do_action( 'wp_travel_pricing_option_content_after_category_inside_repeator', '{{data.random}}', '{{data.category_id}}' ); ?>
 
 										</div>
 									</div>
@@ -471,6 +473,7 @@ function wp_travel_new_pricing_list_admin() {
 				<!-- Pricing Template End -->
 				<script type="text/html" id="tmpl-wp-travel-pricing-options-category">
 					<div class="new-category-repeator">
+						<a href="#" class="wp-travel-remove-pricing-category" >X</a>
 						<div class="repeat-row">
 							<?php
 							$pricing_variation_options = wp_travel_get_pricing_variation_options();
@@ -521,7 +524,7 @@ function wp_travel_new_pricing_list_admin() {
 								<input id="sale_price_{{data.random}}" bindSale="pricing_variation_{{data.random}}-{{data.category_id}}" type="number" min="1" step="0.01" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][sale_price]" />
 							</div>
 						</div>
-
+						<?php do_action( 'wp_travel_pricing_option_content_after_category_inside_repeator', '{{data.random}}', '{{data.category_id}}' ); ?>
 					</div>
 				</script>
 			</td>
