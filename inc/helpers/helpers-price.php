@@ -203,7 +203,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 		}
 	}
 
-	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since 2.0.5.
+	// $enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since 2.0.5.
 
 	if ( $enable_sale ) {
 		return true;

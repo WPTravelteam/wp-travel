@@ -15,7 +15,7 @@ if ( ! $trips ) {
 	$wt_cart->cart_empty_message();
 	return;
 }
-// dd( $trips);
+// print_r( $trips);
 // dd( $wt_cart->get_discounts() );
 // dd( $wt_cart->get_total() );
 $settings = wp_travel_get_settings();

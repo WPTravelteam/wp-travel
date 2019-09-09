@@ -217,7 +217,7 @@ class WP_Travel_Cart {
 			$this->items[ $cart_item_id ]['price_key']  = $price_key;
 
 		endif;
-		
+
 		$this->write();
 		return true;
 	}
@@ -305,7 +305,11 @@ class WP_Travel_Cart {
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
-					$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since new-version-number
+						$category_price = wp_travel_get_actual_trip_price( $trip_id );
+					} else {
+						$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+					}
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
 
@@ -353,6 +357,7 @@ class WP_Travel_Cart {
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 				$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 				$price_key     = $this->items[ $cart_item_id ]['price_key'];
+				$pax           = is_array( $pax ) ? array_sum( $pax ) : 0;
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.

@@ -44,8 +44,9 @@ class Wp_Travel_Extras_Frontend {
 		if ( empty( $trip_id ) ) {
 			return false;
 		}
+		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 
-		if ( $price_key ) {
+		if ( $price_key && 'multiple-price' === $pricing_option_type ) {
 			$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
 			$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
 
@@ -200,15 +201,15 @@ class Wp_Travel_Extras_Frontend {
 									<h5>Additional Night</h5>
 								</div>
 								<div class="wp_travel_tour_extras_price">
-									<span>Price:</span> 
+									<span>Price:</span>
 									<ins>$5</ins>
 								</div>
 								<div class="wp_travel_tour_extras_quantity">
-									<span>Qty:</span> 
+									<span>Qty:</span>
 									<input type="number">
 								</div>
 								<div class="wp_travel_tour_extras_total_price">
-									<span>Total:</span> 
+									<span>Total:</span>
 									<strong>$5</strong>
 								</div>
 							</div>
