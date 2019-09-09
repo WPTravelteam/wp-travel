@@ -128,6 +128,11 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 	$pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
 	$enable_sale         = false;
 
+	if ( $enable_sale_for_min_price ) {
+		// get min price to check whether min price has sale enabled of not.
+		$trip_price = wp_travel_get_price( $trip_id );
+	}
+
 	if ( 'single-price' === $pricing_option_type ) {
 		$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true ); // only for old user.
 	} elseif ( 'multiple-price' === $pricing_option_type ) {
@@ -176,8 +181,17 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 							if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 								foreach ( $pricing_options as $pricing_key => $option ) {
 									if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
-										$enable_sale = true;
-										break;
+										// error_log( print_r( $pricing_options, true ) );
+										if ( $enable_sale_for_min_price ) {
+											error_log( 'enabled' );
+											if ( $option['sale_price'] === $trip_price ) {
+												$enable_sale = true;
+												break;
+											}
+										} else {
+											$enable_sale = true;
+											break;
+										}
 									}
 								}
 							}
@@ -188,12 +202,18 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 						} else {
 							$min_catetory_id = '';
 							$catetory_id_max_price = '';
-							foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
+							foreach ( $pricing_option['categories'] as $category_option ) {
 								$pricing_enable_sale = isset( $category_option['enable_sale'] ) ? $category_option['enable_sale'] : 'no';
-
 								if ( 'yes' === $pricing_enable_sale ) {
-									$enable_sale = true;
-									break;
+									if ( $enable_sale_for_min_price ) {
+										if ( $category_option['sale_price'] === $trip_price ) {
+											$enable_sale = true;
+											break;
+										}
+									} else {
+										$enable_sale = true;
+										break;
+									}
 								}
 							}
 						}
