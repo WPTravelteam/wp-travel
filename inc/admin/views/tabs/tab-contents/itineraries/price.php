@@ -34,6 +34,19 @@ function wp_travel_new_pricing_list_admin() {
 		$price_per = 'person';
 	}
 
+	// Only for single pricing option. Legacy pricing.
+	$price       = get_post_meta( $post_id, 'wp_travel_price', true );
+	$price       = $price ? $price : '';
+	$sale_price  = get_post_meta( $post_id, 'wp_travel_sale_price', true );
+	$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
+	$sale_price_attribute   = 'disabled="disabled"';
+	$sale_price_style_class = 'hidden';
+
+	if ( $enable_sale ) {
+		$sale_price_attribute   = '';
+		$sale_price_style_class = '';
+	}
+
 	// CSS Class for Single and Multiple Pricing option fields.
 	$single_pricing_option_class   = 'single-price-option-row';
 	$multiple_pricing_option_class = 'multiple-price-option-row';
@@ -88,6 +101,43 @@ function wp_travel_new_pricing_list_admin() {
 				<input type="hidden" name="wp_travel_pricing_option_type" id="wp-travel-pricing-option-type" value="<?php echo esc_attr( $current_pricing_type ); ?>" >
 			<?php endif; ?>
 		<?php endif; ?>
+		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
+			<td><label for="wp-travel-price-per"><?php esc_html_e( 'Price Per', 'wp-travel' ); ?></label></td>
+			<td>
+				<?php $price_per_fields = wp_travel_get_price_per_fields(); ?>
+				<?php if ( is_array( $price_per_fields ) && count( $price_per_fields ) > 0 ) : ?>
+					<select name="wp_travel_price_per">
+						<?php foreach ( $price_per_fields as $val => $label ) : ?>
+							<option value="<?php echo esc_attr( $val ); ?>" <?php selected( $val, $price_per ); ?> ><?php echo esc_html( $label, 'wp-travel' ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
+			<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
+			<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
+		</tr>
+		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
+			<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
+			<td><div class="field-price-currency-input"><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0.01" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></div></td>
+		</tr>
+		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
+			<td><label for="wp-travel-enable-sale"><?php esc_html_e( 'Enable Sale', 'wp-travel' ); ?></label></td>
+			<td>
+				<span class="show-in-frontend checkbox-default-design">
+					<label data-on="ON" data-off="OFF">
+						<input name="wp_travel_enable_sale" type="checkbox" id="wp-travel-enable-sale" <?php checked( $enable_sale, 1 ); ?> value="1" />
+						<span class="switch"></span>
+					</label>
+				</span>
+				<p class="wp-travel-enable-sale description"><?php esc_html_e( 'Check to enable sale.', 'wp-travel' ); ?></p>
+			</td>
+		</tr>
+		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $sale_price_style_class ); ?>">
+			<td><label for="wp-travel-sale-price"><?php esc_html_e( 'Sale Price', 'wp-travel' ); ?></label></td>
+			<td><div class="field-price-currency-input"><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input <?php echo esc_attr( $sale_price_attribute ); ?> type="number" min="1" max="<?php echo esc_attr( $price ); ?>" step="0.01" name="wp_travel_sale_price" id="wp-travel-sale-price" value="<?php echo esc_attr( $sale_price ); ?>" /></div></td>
+		</tr>
 
 		<!-- Multiple Priceing field -->
 		<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>">
