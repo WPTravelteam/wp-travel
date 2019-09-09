@@ -545,7 +545,6 @@ function wp_travel_new_pricing_list_admin() {
 						
 						<div class="repeat-row">
 							<select id="price_per_{{data.random}}_{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price_per]">
-								<option value="trip-default"><?php esc_html_e( 'Trip Default', 'wp-travel' ); ?></option>
 								<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
 								<option value="group"><?php esc_html_e( 'Group', 'wp-travel' ); ?></option>
 							</select>
