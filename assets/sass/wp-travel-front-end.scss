@@ -3748,7 +3748,34 @@ ul.wp-travel-error {
             text-align: center;
             width: 9%;
         }
+
+        .trip_list_by_fixed_departure_dates_pricing_name_label,
+        .trip_list_by_fixed_departure_dates_start_label,
+        .trip_list_by_fixed_departure_dates_end_label,
+        .trip_list_by_fixed_departure_dates_seats_label,
+        .trip_list_by_fixed_departure_dates_pax_label,
+        .trip_list_by_fixed_departure_dates_price_label{
+            font-weight: bold;
+        }
+
+        .trip_list_by_fixed_departure_dates_seats{
+            width: 13%;
+        }
+
+        .group-size-label{
+          width: 10%;  
+        }
+
+        .available-seats{
+            width: auto;
+        }
+
+        .pax-selection{
+            width: 24%;
+            align-self: center;
+        }
     }
+
     .trip_list_by_fixed_departure_dates_list {
         margin-left: 0;
         padding-left: 0;
@@ -3988,6 +4015,18 @@ ul.wp-travel-error {
         }
     }
 }
+
+
+@media screen and(max-width: 768px){
+    .trip_list_by_fixed_departure_dates{
+        .trip_list_by_fixed_departure_dates_wrap{
+            .pax-selection{
+                width: 100%;
+            }
+        }
+    } 
+}
+
 li {
 
     &.pricing_unavailable form {
@@ -4011,7 +4050,7 @@ li {
 @media screen and (max-width: 1024px) {
     .trip_list_by_fixed_departure_dates {
         .trip_list_by_fixed_departure_dates_wrap {
-            width: 100%;
+            width: 83%;
         }
         .trip_list_by_fixed_departure_dates_list {
             >li {
@@ -4019,7 +4058,7 @@ li {
             }
             .trip_list_by_fixed_departure_dates_booking {
                 padding: 0;
-                width: 100%;
+                margin-left: 10px;
                 .btn {
                     display: block;
                     padding: 8px;
@@ -4030,6 +4069,16 @@ li {
     }
 }
 
+@media screen and (max-width: 767px){
+    .trip_list_by_fixed_departure_dates{
+        .trip_list_by_fixed_departure_dates_list{
+            .trip_list_by_fixed_departure_dates_booking{
+                width: 100%;
+            }
+        }
+    }  
+}
+
 @media screen and (max-width: 768px) {
     .trip_list_by_fixed_departure_dates {
         .trip_list_by_fixed_departure_dates_header {
@@ -4037,6 +4086,7 @@ li {
         }
         .trip_list_by_fixed_departure_dates_wrap {
             margin-bottom: 20px;
+            width: 100%;
         }
         .trip_list_by_fixed_departure_dates_list {
             >li {
@@ -4047,13 +4097,14 @@ li {
                 border-bottom: 1px solid #f2f2f2;
                 padding-left: 0;
                 text-align: center;
-                width: 50%;
+                width: 100%;
+                padding: 20px 0;
             }
             .trip_list_by_fixed_departure_dates_seats,
             .trip_list_by_fixed_departure_dates_pax,
             .trip_list_by_fixed_departure_dates_price {
                 padding: 8px 0;
-                width: 50%;
+                width: 100%;
             }
         }
     }
@@ -4080,6 +4131,17 @@ li {
             }
         }
     }
+}
+
+@media screen and (max-width: 768px){
+    .trip_list_by_fixed_departure_dates{
+        .trip_list_by_fixed_departure_dates_list{
+            .trip_list_by_fixed_departure_dates_length{
+                left: calc( 50% - 21.5px );
+                top: 87px;
+            }
+        }
+    } 
 }
 
 .datepickers-container {
@@ -5079,6 +5141,12 @@ li {
 
 .paxpicker.is-active .pricing-categories.show-only-three .category:nth-child(3n+1) {
     display: none
+}
+
+@media screen and (max-width: 1024px){
+    .paxpicker.is-active .pricing-categories{
+        width: auto;
+    }
 }
 
 @media(min-width: 736px) {

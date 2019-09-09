@@ -2197,7 +2197,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 					<?php if ( $show_end_date ) : ?>
 						<span class="trip_list_by_fixed_departure_dates_end_label"><?php echo esc_html( $end_date_string ); ?></span>
 					<?php endif ?>
-					<span class="trip_list_by_fixed_departure_dates_seats_label"><?php echo esc_html( $group_size_string ); ?></span>
+					<span class="trip_list_by_fixed_departure_dates_seats_label group-size-label"><?php echo esc_html( $group_size_string ); ?></span>
 					<?php if ( $show_status_col ) : ?>
 						<span class="trip_list_by_fixed_departure_dates_seats_label"><?php echo esc_html( $seats_left_string ); ?></span>
 					<?php endif; ?>
@@ -2277,7 +2277,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										?>
 								</span>
 								<?php if ( $show_status_col ) : ?>
-									<span class="trip_list_by_fixed_departure_dates_seats">
+									<span class="trip_list_by_fixed_departure_dates_seats available-seats">
 										<?php if ( $pricing['inventory']['sold_out'] ) : ?>
 											<span><?php echo esc_html( $sold_out_string ); ?></span>
 										<?php else : ?>
@@ -2290,7 +2290,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									$range_alert = $pax_alerts['range'];
 									$required_alert = $pax_alerts['required'];
                                 ?>
-                                <div class="group-size">
+                                <div class="group-size pax-selection">
 									<div id="paxpicker" class="paxpicker">
 										<div class="icon-users summary">
 											<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
