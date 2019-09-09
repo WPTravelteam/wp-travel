@@ -114,10 +114,7 @@ function wp_travel_new_pricing_list_admin() {
 				<?php endif; ?>
 			</td>
 		</tr>
-		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
-			<td><label for="wp-travel-detail"><?php esc_html_e( 'Group Size', 'wp-travel' ); ?></label></td>
-			<td><input min="1" type="number" id="wp-travel-group-size" name="wp_travel_group_size" placeholder="<?php esc_attr_e( 'No of PAX', 'wp-travel' ); ?>" value="<?php echo esc_attr( $group_size ); ?>" /></td>
-		</tr>
+		
 		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
 			<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 			<td><div class="field-price-currency-input"><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0.01" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></div></td>
