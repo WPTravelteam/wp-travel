@@ -242,7 +242,7 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 	$regular_price = wp_travel_get_price( $trip_id, true );
 	$min_price_key = wp_travel_get_min_price_key( $trip_id ); // Need to deprecated.
 
-	$enable_sale = wp_travel_is_enable_sale_price( $trip_id );
+	$enable_sale = wp_travel_is_enable_sale_price( $trip_id, true );
 	$price_per_text  = wp_travel_get_price_per_text( $trip_id, $min_price_key );
 
 	$hide_price_per = wp_travel_hide_price_per_field( $trip_id );
