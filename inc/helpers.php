@@ -3042,6 +3042,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				'group_size'               => $default_group_size,
 				'fixed_departure'          => $fixed_departure,
 				'multiple_fixed_departure' => $multiple_fixed_departue,
+				'arrival_date'             => $start_date,
+				'departure_date'           => $end_date,
 				'categories'               => array(
 					array(
 						'type'        => 'default',
@@ -3061,7 +3063,9 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					'min_pax'        => 1,
 					'max_pax'        => $default_group_size,
 				),
+				'pricing_id'              => 'single-pricing-id',
 			);
+			$pricing['single-pricing'] = $pricing_data; // Legacy single pricing migration @since new-version-number
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
