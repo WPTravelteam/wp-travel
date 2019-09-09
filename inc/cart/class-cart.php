@@ -357,7 +357,6 @@ class WP_Travel_Cart {
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 				$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 				$price_key     = $this->items[ $cart_item_id ]['price_key'];
-				$pax           = is_array( $pax ) ? array_sum( $pax ) : 0;
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.

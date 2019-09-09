@@ -147,7 +147,7 @@ class WP_Travel_Ajax {
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
-		if ( is_array( $pax ) && 'mulitple-price' === $pricing_option_type ) { // @since new-version-number
+		if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since new-version-number
 			$total_pax          = array_sum( $pax );
 			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
