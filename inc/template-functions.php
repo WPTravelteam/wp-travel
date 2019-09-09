@@ -2084,19 +2084,24 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								?>
 
 								<div class="action">
-
 									<?php
-									if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
+									if ( $pricing['inventory']['sold_out'] ) :
 										?>
-										<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html( $select_string ); ?></a>
+										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
 										<?php
-									} else {
-										?>
-										<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
-										<?php
-									}
-									// @since 1.9.3 To display group discount pricing lists.
-									do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+									else :
+										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
+											?>
+											<a href="#" class="btn btn-primary btn-sm btn-inverse show-booking-row"><?php echo esc_html( $select_string ); ?></a>
+											<?php
+										} else {
+											?>
+											<input type="submit" value="<?php echo esc_html( $book_now_string ); ?>" class="btn add-to-cart-btn btn-primary btn-sm btn-inverse" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" >
+											<?php
+										}
+										// @since 1.9.3 To display group discount pricing lists.
+										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+									endif;
 									?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
