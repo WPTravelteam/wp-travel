@@ -146,8 +146,8 @@ class WP_Travel_Ajax {
 		$trip_price     = 0;
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
-
-		if ( is_array( $pax ) ) { // @since new-version-number
+		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
+		if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since new-version-number
 			$total_pax          = array_sum( $pax );
 			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
@@ -208,7 +208,28 @@ class WP_Travel_Ajax {
 			$attrs['trip'] = $trip;
 			$pax   = $total_pax;
 		} else {
-			$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
+			$pax        = array_sum( $pax );
+			$price_per  = ! empty( get_post_meta( $trip_id, 'wp_travel_price_per', true ) ) ? get_post_meta( $trip_id, 'wp_travel_price_per', true ) : 'person';
+			// multiply category_price by pax to add in trip price if price per is person.
+			$price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // per price
+			if ( wp_travel_is_partial_payment_enabled() ) {
+				$percent                = wp_travel_get_actual_payout_percent( $trip_id );
+				$category_price_partial = ( $trip_price * $percent ) / 100;
+			}
+			if ( 'person' == $price_per ) {
+				$trip_price = $price * $pax;
+				// $price_partial *= $pax;
+			}
+			$attrs['trip'] = array(
+				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since new-version-number
+					'pax'           => $pax,
+					'price'         => $price,
+					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'type'          => 'adult', // Not set yet.
+					'price_per'     => $price_per,
+					'trip_price'    => $trip_price,
+				)
+			);
 
 			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 				$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $pricing_id ); // for old price pricing id is treated as category id.
