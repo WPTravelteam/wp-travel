@@ -2087,7 +2087,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											<div class="add-to-cart">
 
 												<?php
-												if ( 'yes' !== $pricing['fixed_departure'] ) :
+												if ( 'yes' !== $pricing['fixed_departure'] && ! empty( $pricing['trip_duration_days'] ) ) :
 													?>
 													<input type="hidden" name="trip_duration" value="<?php echo esc_attr( $pricing['trip_duration_days'] ); ?>" />
 													<?php
