@@ -2855,6 +2855,19 @@ ul.availabily-list .availabily-content.sold-out > div.date-from:after {
 .ws-theme-cart-page .ws-theme-cart-list tbody .product-price ins {
   background-color: transparent;
 }
+.ws-theme-cart-page .ws-theme-cart-list tbody .product-price ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+  float: right;
+}
+.ws-theme-cart-page .ws-theme-cart-list tbody .product-price ul li {
+  text-align: left;
+}
+.ws-theme-cart-page .ws-theme-cart-list tbody .product-price ul .category-type {
+  width: 55px;
+  display: inline-block;
+}
 .ws-theme-cart-page .ws-theme-cart-list .product-thumbnail {
   width: 100px;
 }
