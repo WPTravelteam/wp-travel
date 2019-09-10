@@ -2900,6 +2900,21 @@ ul.availabily-list {
                 ins {
                     background-color: transparent;
                 }
+                ul{
+                    list-style-type: none;
+                    padding-left: 0px;
+                    margin-left: 0px;
+                    float: right;
+
+                    li{
+                        text-align: left;
+                    }
+
+                    .category-type{
+                        width: 52px;
+                        display: inline-block;
+                    }
+                }
             }
         }
         .product-thumbnail {
