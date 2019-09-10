@@ -3816,10 +3816,6 @@ ul.wp-travel-error {
 
             &.pricing_unavailable {
                 .trip_list_by_fixed_departure_dates_wrap{
-                    padding:0;
-                    &.sold-out {
-                        width:100%;
-                    }
                     color: #c7d0d9;
                     pointer-events: none;
 
@@ -3829,7 +3825,10 @@ ul.wp-travel-error {
                     }
                 }
                 .trip_list_by_fixed_departure_dates_booking {
-
+                    padding:0;
+                    &.sold-out {
+                        width:100%;
+                    }
                     .btn {
                         border-color: #c7d0d9;
                         color: #c7d0d9;
@@ -4159,7 +4158,7 @@ li {
             }
             .trip_list_by_fixed_departure_dates_length {
                 height: 35px;
-                top: 15%;
+                top: 70px !important;
                 transform: translateY(-15%);
                 right: -18px;
                 width: 35px;
