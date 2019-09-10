@@ -1880,7 +1880,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						}
 
 						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
-						if ( 'yes' !== $pricing['fixed_departure'] ) :
+						if ( 'yes' !== $pricing['fixed_departure'] && ! empty( $pricing['trip_duration_days'] ) ) :
 							$cart_url = add_query_arg( 'trip_duration', $pricing['trip_duration_days'], $cart_url );
 						endif;
 						$cart_url = add_query_arg( 'price_key', $pricing['price_key'], $cart_url );
