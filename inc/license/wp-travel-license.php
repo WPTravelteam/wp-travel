@@ -255,7 +255,6 @@ class WP_Travel_License {
 
 				// make sure the response came back okay.
 				if ( is_wp_error( $response ) ) {
-					error_log( print_r( $response, true ) );
 					return false;
 				}
 
@@ -413,7 +412,7 @@ class WP_Travel_License {
 
 				if ( is_multisite() && 'toplevel_page_wp_travel_network_settings-network' != $screen->id ) {
 					$link    = admin_url( 'network/admin.php?page=wp_travel_network_settings#wp-travel-tab-content-license' );
-				} 
+				}
 				$message = rtrim( $message, '.' ) .  sprintf( __( ', go to <a href="%1$s"> settings </a> to activate your license.', 'wp-travel' ), $link );
 			}
 

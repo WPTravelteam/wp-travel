@@ -180,13 +180,7 @@ class WP_Travel_Ajax {
 						};
 					}
 				}
-				// $array_column = array_column( $pricing_data, 'categories' );
-				// foreach ( $array_column as $index => $key ) {
-				// 	if( array_key_exists( $category_id, $key ) ) {
-				// 		$pricing_index = $index;
-				// 		break;
-				// 	};
-				// }
+
 				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
@@ -218,7 +212,6 @@ class WP_Travel_Ajax {
 			}
 			if ( 'person' == $price_per ) {
 				$trip_price = $price * $pax;
-				// $price_partial *= $pax;
 			}
 			$attrs['trip'] = array(
 				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since new-version-number
@@ -257,7 +250,6 @@ class WP_Travel_Ajax {
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 
-		// lp($attrs,'Cart Attributes');
 		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
 
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );

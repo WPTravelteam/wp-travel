@@ -1810,7 +1810,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 	// All Pricings.
 	$pricings     = wp_travel_get_trip_pricing_option( $trip_id );
-	// lp($pricings);
+
 	$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
 	// Pricing Lists.
 	if ( is_array( $pricing_data ) && count( $pricing_data ) > 0 ) {
@@ -1871,22 +1871,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					<!-- pricing loop -->
 					<?php
 					foreach ( $pricing_data as $pricing ) :
-						// Old legacy data. Need to migrate to new data. @since new-version-number
 
-						// if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
-						// 	$category_id = $pricing_id;
-						// 	$pricing['categories'][ $category_id ] = array(
-						// 		'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
-						// 		'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
-						// 		'min_pax'      => isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1,
-						// 		'max_pax'      => isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 1,
-						// 		'price_per'    => isset( $pricing['price_per'] ) ? $pricing['price_per'] : 'person',
-						// 		'price'        => isset( $pricing['price'] ) ? $pricing['price'] : 0,
-						// 		'enable_sale'  => isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'] ? $pricing['enable_sale'] : 'no',
-						// 		'sale_price'   => isset( $pricing['sale_price'] ) ? $pricing['sale_price'] : 0,
-						// 		'tour_extras'  => isset( $pricing['tour_extras'] ) ? $pricing['tour_extras'] : array(),
-						// 	);
-						// }
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
 						$parent_id = 'wp-travel-pricing-wrap';
@@ -1997,7 +1982,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											?>
 
 											<div class="category available-seats">
-												<?php echo esc_html( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
+												<?php echo esc_html__( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 											</div>
 											<?php
 											if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
@@ -2006,31 +1991,6 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													$min      = $pricing['inventory']['min_pax'];
 													$max_attr = "max={$max}";
 													$min_attr = "min={$min}";
-													// if ( ! empty( $pricing_category['min_pax'] ) ) {
-													// 	$min      = $pricing_category['min_pax'];
-													// 	$min_attr = "min={$min}";
-													// } elseif ( ! empty( $pricing['min_pax'] ) ) {
-													// 	$min      = $pricing['min_pax'];
-													// 	$min_attr = "min={$min}";
-													// }
-
-													// if ( ! empty( $pricing_category['max_pax'] ) ) {
-													// 	$max      = $pricing_category['max_pax'];
-													// 	$max_attr = "max={$max}";
-													// } elseif ( ! empty( $pricing['max_pax'] ) ) {
-													// 	$max      = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
-													// 	$max_attr = "max={$max}";
-													// }
-
-													// if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
-													// 	$max      = $pricing['available_pax'];
-													// 	$max_attr = "max={$max}";
-													// } else {
-													// 	$max      = $pricing['inventory']['max_pax'];
-													// 	$max_attr = "max={$max}";
-													// }
-													// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
-													// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 													?>
 														<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 															<p class="picker-info">

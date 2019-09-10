@@ -144,20 +144,14 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 				$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
 				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
-					// if ( $price_key && ! empty( $price_key ) ) { // checks in indivicual pricing key [specific pricing is enabled in trip].
-					// 	if ( isset( $pricing_options[ $price_key ]['enable_sale'] ) && 'yes' === $pricing_options[ $price_key ]['enable_sale'] ) {
-					// 		$enable_sale = true;
-					// 	}
-					// } else { // Checks as a whole. if any pricing is enabled then return true.
-						if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
-							foreach ( $pricing_options as $pricing_key => $option ) {
-								if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
-									$enable_sale = true;
-									break;
-								}
+					if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+						foreach ( $pricing_options as $pricing_key => $option ) {
+							if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
+								$enable_sale = true;
+								break;
 							}
 						}
-					// }
+					}
 				} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
 					if ( ! empty( $category_id ) ) {
 						$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
@@ -181,9 +175,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 							if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 								foreach ( $pricing_options as $pricing_key => $option ) {
 									if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
-										// error_log( print_r( $pricing_options, true ) );
 										if ( $enable_sale_for_min_price ) {
-											error_log( 'enabled' );
 											if ( $option['sale_price'] === $trip_price ) {
 												$enable_sale = true;
 												break;

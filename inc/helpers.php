@@ -3032,7 +3032,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 
 		// variable used for api data.
-		// dd($pricing_options);
 		// End of variable used for api data.
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 		if ( 'single-price' === $pricing_option_type ) { // Legacy Support for single price option @since new-version-number

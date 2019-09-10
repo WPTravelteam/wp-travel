@@ -114,7 +114,7 @@ function wp_travel_new_pricing_list_admin() {
 				<?php endif; ?>
 			</td>
 		</tr>
-		
+
 		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?>">
 			<td><label for="wp-travel-price"><?php esc_html_e( 'Price', 'wp-travel' ); ?></label></td>
 			<td><div class="field-price-currency-input"><span class="wp-travel-currency-symbol"><?php echo esc_html( $currency_symbol ); ?></span><input type="number" min="0.01" step="0.01" name="wp_travel_price" id="wp-travel-price" value="<?php echo esc_attr( $price ); ?>" /></div></td>
@@ -147,7 +147,7 @@ function wp_travel_new_pricing_list_admin() {
 						$collapse_style = 'display:none';
 					endif;
 					?>
-					<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
+					<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style )kw; ?>">
 						<a href="#" data-parent="wp-travel-multiple-pricing-options" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 						<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 					</div>
@@ -157,7 +157,6 @@ function wp_travel_new_pricing_list_admin() {
 					<div id="price-accordion" class="tab-accordion price-accordion wp-travel-accordion has-handler">
 							<div class="panel-group wp-travel-sorting-tabs" id="pricing-options-data" role="tablist" aria-multiselectable="true">
 							<?php
-							// dd( $trip_pricing_options_data );
 							if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) :
 								foreach ( $trip_pricing_options_data as $pricing_id => $pricing ) {
 									// Set Vars.
@@ -464,7 +463,7 @@ function wp_travel_new_pricing_list_admin() {
 													<input type="text" style="display:none" class="custom-pricing-label-wrap" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][custom_label]" placeholder="Custom Label" />
 												<?php endif; ?>
 											</div>
-											
+
 											<div class="repeat-row">
 												<select id="price_per_{{data.random}}_{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price_per]">
 													<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
@@ -538,7 +537,7 @@ function wp_travel_new_pricing_list_admin() {
 							<?php endif; ?>
 						</div>
 
-						
+
 						<div class="repeat-row">
 							<select id="price_per_{{data.random}}_{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][price_per]">
 								<option value="person"><?php esc_html_e( 'Person', 'wp-travel' ); ?></option>
