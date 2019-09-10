@@ -1200,6 +1200,8 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 				}
 			}
 		}
+	} else { // Default single pricing price
+		$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
 	}
 
 	return $price;
