@@ -147,7 +147,7 @@ function wp_travel_new_pricing_list_admin() {
 						$collapse_style = 'display:none';
 					endif;
 					?>
-					<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style )kw; ?>">
+					<div class="wp-collapse-open" style="<?php echo esc_attr( $collapse_style ); ?>">
 						<a href="#" data-parent="wp-travel-multiple-pricing-options" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
 						<a data-parent="wp-travel-multiple-pricing-options" style="display:none;" href="#" class="close-all-link"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 					</div>
