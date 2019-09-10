@@ -3806,6 +3806,10 @@ ul.wp-travel-error {
                     pointer-events: none;
                 }
                 .trip_list_by_fixed_departure_dates_booking {
+                    padding: 0;
+                    &.sold-out {
+                        width: 100%;
+                    }
                     .btn {
                         border-color: #c7d0d9;
                         color: #c7d0d9;

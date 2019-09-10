@@ -2177,7 +2177,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 				foreach ( $pricing_data as $pricing ) :
 
 					$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
-					$max_attr = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax']  : 'max=' . $pricing['inventory']['max_pax'] ) : ''; // set available_pax as max_pax if available
+					$max_attr = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax']  : 'max=' . $pricing['inventory']['max_apx'] ) : ''; // set available_pax as max_pax if available
                     $min_attr = ! empty( $pricing['inventory']['min_pax'] ) ? 'min=' . $pricing['inventory']['min_pax'] : 'min=1';
 
                     $rand = rand(); // Generate random key.
@@ -2356,13 +2356,13 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									</div>
 								<?php endif; ?>
 							</div>
-							<div class="trip_list_by_fixed_departure_dates_booking">
+							<?php
+							$sold_class = $pricing['inventory']['sold_out'] && 'show_sold_out_msg_only' === get_post_meta( $trip_id, 'wp_travel_inventory_sold_out_action', true ) ? 'sold-out' : '';
+							?>
+							<div class="trip_list_by_fixed_departure_dates_booking <?php echo esc_attr( $sold_class ); ?>">
 								<div class="action">
-
 									<?php if ( $pricing['inventory']['sold_out'] ) : ?>
-
 										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
-
 										<?php
 									else :
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
