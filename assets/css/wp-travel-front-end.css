@@ -3810,10 +3810,6 @@ ul.wp-travel-error {
   width: 18%;
   margin-left: 10px;
 }
-.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking {
-  width: 100%;
-  padding: 0px;
-}
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking .btn {
   border-color: #c7d0d9;
   color: #c7d0d9;
