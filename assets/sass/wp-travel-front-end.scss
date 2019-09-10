@@ -3715,6 +3715,20 @@ ul.wp-travel-error {
     pointer-events: none;
 }
 
+@media screen and(max-width: 768px){
+   .pricing_unavailable{
+        .trip_list_by_fixed_departure_dates_wrap{
+            .pax-selection{
+                width: 100% !important;
+                margin-left: 0px !important;
+            }
+        }
+        .trip_list_by_fixed_departure_dates_booking{
+            margin-left: 0px !important;
+        }
+   }
+}
+
 .trip_list_by_fixed_departure_dates {
     .trip_list_by_fixed_departure_dates_header {
         margin-bottom: 10px;
@@ -3778,7 +3792,7 @@ ul.wp-travel-error {
         }
 
         .group-size-label{
-          width: 10%;  
+          width: 10%;
         }
 
         .available-seats{
@@ -3804,8 +3818,17 @@ ul.wp-travel-error {
                 .trip_list_by_fixed_departure_dates_wrap{
                     color: #c7d0d9;
                     pointer-events: none;
+
+                    .pax-selection{
+                        width: 18%;
+                        margin-left: 10px;
+                    }
                 }
                 .trip_list_by_fixed_departure_dates_booking {
+                    padding:0;
+                    &.sold-out {
+                        width:100%;
+                    }
                     .btn {
                         border-color: #c7d0d9;
                         color: #c7d0d9;
@@ -4039,7 +4062,7 @@ ul.wp-travel-error {
                 width: 100%;
             }
         }
-    } 
+    }
 }
 
 li {
@@ -4091,7 +4114,7 @@ li {
                 width: 100%;
             }
         }
-    }  
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -4135,7 +4158,7 @@ li {
             }
             .trip_list_by_fixed_departure_dates_length {
                 height: 35px;
-                top: 15%;
+                top: 70px !important;
                 transform: translateY(-15%);
                 right: -18px;
                 width: 35px;
@@ -4156,7 +4179,7 @@ li {
                 top: 87px;
             }
         }
-    } 
+    }
 }
 
 .datepickers-container {
@@ -5346,5 +5369,20 @@ li {
 @media(max-width: 1365px) {
     .category .label .picker-info {
         margin: 0 0 0 10px
+    }
+}
+
+// mini-cart styling
+.checkout-block {
+    .person-count {
+        .right {
+            vertical-align: bottom;
+            text-align: right;
+        }
+        .left {
+            span:first-child {
+                text-transform:capitalize;
+            }
+        }
     }
 }

@@ -3713,6 +3713,15 @@ ul.wp-travel-error {
   pointer-events: none;
 }
 
+@media screen and (max-width: 768px) {
+  .pricing_unavailable .trip_list_by_fixed_departure_dates_wrap .pax-selection {
+    width: 100% !important;
+    margin-left: 0px !important;
+  }
+  .pricing_unavailable .trip_list_by_fixed_departure_dates_booking {
+    margin-left: 0px !important;
+  }
+}
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_header {
   margin-bottom: 10px;
 }
@@ -3796,6 +3805,16 @@ ul.wp-travel-error {
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_wrap {
   color: #c7d0d9;
   pointer-events: none;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_wrap .pax-selection {
+  width: 18%;
+  margin-left: 10px;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking {
+  padding: 0;
+}
+.trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking.sold-out {
+  width: 100%;
 }
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_booking .btn {
   border-color: #c7d0d9;
@@ -4066,7 +4085,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   }
   .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_length {
     height: 35px;
-    top: 15%;
+    top: 70px !important;
     transform: translateY(-15%);
     right: -18px;
     width: 35px;
@@ -5209,6 +5228,13 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   .category .label .picker-info {
     margin: 0 0 0 10px;
   }
+}
+.checkout-block .person-count .right {
+  vertical-align: bottom;
+  text-align: right;
+}
+.checkout-block .person-count .left span:first-child {
+  text-transform: capitalize;
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
