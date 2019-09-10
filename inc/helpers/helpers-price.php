@@ -132,11 +132,10 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 		// get min price to check whether min price has sale enabled of not.
 		$trip_price = wp_travel_get_price( $trip_id );
 	}
-
+	$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 	if ( 'single-price' === $pricing_option_type ) {
 		$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true ); // only for old user.
 	} elseif ( 'multiple-price' === $pricing_option_type ) {
-		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 
@@ -215,7 +214,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 		}
 	}
 
-	// $enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since 2.0.5.
+	$enable_sale = apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since 2.0.5.
 
 	if ( $enable_sale ) {
 		return true;
