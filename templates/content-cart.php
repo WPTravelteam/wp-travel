@@ -128,7 +128,7 @@ wp_travel_print_notices();
 								<?php endif; ?>
 							</div>
 						</td>
-						<td class="product-price" data-title="Price" data-max-pax="<?php echo esc_attr( $max_available ); ?>" data-min-pax="<?php echo esc_attr( $min_available ); ?>" data-booked-pax="<?php echo esc_attr( $trip['pax'] ); ?>">
+						<td class="product-price clearfix" data-title="Price" data-max-pax="<?php echo esc_attr( $max_available ); ?>" data-min-pax="<?php echo esc_attr( $min_available ); ?>" data-booked-pax="<?php echo esc_attr( $trip['pax'] ); ?>">
 							<?php
 							if ( count( $cart_trip ) > 0 ) :
 								?>
