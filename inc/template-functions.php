@@ -2177,7 +2177,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 				foreach ( $pricing_data as $pricing ) :
 
 					$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
-					$max_attr = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax']  : 'max=' . $pricing['inventory']['max_apx'] ) : ''; // set available_pax as max_pax if available
+					$max_attr = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax']  : 'max=' . $pricing['inventory']['max_pax'] ) : ''; // set available_pax as max_pax if available
                     $min_attr = ! empty( $pricing['inventory']['min_pax'] ) ? 'min=' . $pricing['inventory']['min_pax'] : 'min=1';
 
                     $rand = rand(); // Generate random key.
