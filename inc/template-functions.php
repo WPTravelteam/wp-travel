@@ -1920,7 +1920,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 										<?php
 										$total_days = 0;
-										if ( $pricing['trip_duration_days'] > 0 || $pricing['trip_duration_night'] > 0 ) {
+										if ( 'yes' !== $pricing['fixed_departure'] && ( ! empty( $pricing['trip_duration_days'] ) || ! empty($pricing['trip_duration_night'] ) ) ) {
 											$days = $pricing['trip_duration_days'] > $pricing['trip_duration_night'] ? $pricing['trip_duration_days'] : $pricing['trip_duration_night'];
 											$days--; // As we need to exclude current selected date.
 											$total_days = $days ? $days : $total_days;
