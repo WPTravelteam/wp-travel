@@ -471,6 +471,14 @@ ul.availabily-list.additional-col li > div.paxpicker {
     flex-wrap: wrap;
   }
 }
+.availabily-list .availabily-heading .group-size {
+  text-align: center;
+}
+
+.availabily-content .group-size-min-max {
+  text-align: center;
+}
+
 @media (min-width: 992px) {
   .travel-log-front-page-full-width-widget .widget_wp_travel_featured,
 .travel-log-front-page-full-width-widget .widget_wp_travel_location,
@@ -2379,7 +2387,7 @@ ul.availabily-list li.availabily-heading {
   flex-wrap: wrap;
 }
 ul.availabily-list li.availabily-heading > div {
-  width: 14.26%;
+  width: 14.26% !important;
 }
 ul.availabily-list li > form {
   border-bottom: 1px solid #E3E3E3;
@@ -2387,6 +2395,9 @@ ul.availabily-list li > form {
   margin: 10px 0;
   position: relative;
   padding: 20px 0;
+}
+ul.availabily-list li > form group-size {
+  text-align: center;
 }
 ul.availabily-list li > form.opened {
   box-shadow: 2px 2px 10px #e4e4e4;
