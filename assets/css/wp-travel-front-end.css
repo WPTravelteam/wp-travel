@@ -5210,5 +5210,12 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
     margin: 0 0 0 10px;
   }
 }
+.checkout-block .person-count .right {
+  vertical-align: bottom;
+  text-align: right;
+}
+.checkout-block .person-count .left span:first-child {
+  text-transform: capitalize;
+}
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */

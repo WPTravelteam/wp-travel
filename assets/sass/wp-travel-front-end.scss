@@ -3778,7 +3778,7 @@ ul.wp-travel-error {
         }
 
         .group-size-label{
-          width: 10%;  
+          width: 10%;
         }
 
         .available-seats{
@@ -4039,7 +4039,7 @@ ul.wp-travel-error {
                 width: 100%;
             }
         }
-    } 
+    }
 }
 
 li {
@@ -4091,7 +4091,7 @@ li {
                 width: 100%;
             }
         }
-    }  
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -4156,7 +4156,7 @@ li {
                 top: 87px;
             }
         }
-    } 
+    }
 }
 
 .datepickers-container {
@@ -5346,5 +5346,20 @@ li {
 @media(max-width: 1365px) {
     .category .label .picker-info {
         margin: 0 0 0 10px
+    }
+}
+
+// mini-cart styling
+.checkout-block {
+    .person-count {
+        .right {
+            vertical-align: bottom;
+            text-align: right;
+        }
+        .left {
+            span:first-child {
+                text-transform:capitalize;
+            }
+        }
     }
 }

@@ -89,9 +89,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 									<div class="payment-content">
 										<div class="row gap-0">
 											<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-9">
-												<h6 class="heading mt-0 mb-15">
-
-												</h6>
+												<h6 class="heading mt-0 mb-15"></h6>
 											</div>
 										</div>
 										<div class="payment-traveller">
