@@ -3726,7 +3726,7 @@ ul.wp-travel-error {
         .trip_list_by_fixed_departure_dates_booking{
             margin-left: 0px !important;
         }
-   } 
+   }
 }
 
 .trip_list_by_fixed_departure_dates {
@@ -3816,6 +3816,10 @@ ul.wp-travel-error {
 
             &.pricing_unavailable {
                 .trip_list_by_fixed_departure_dates_wrap{
+                    padding:0;
+                    &.sold-out {
+                        width:100%;
+                    }
                     color: #c7d0d9;
                     pointer-events: none;
 
