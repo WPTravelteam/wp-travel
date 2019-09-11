@@ -1812,6 +1812,8 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$pricings     = wp_travel_get_trip_pricing_option( $trip_id );
 
 	$pricing_data = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
+
+	$is_single_pricing = 'single-price' === wp_travel_get_pricing_option_type( $trip_id ); // added to hide column on legacy single pricing option. @since 3.0.0
 	// Pricing Lists.
 	if ( is_array( $pricing_data ) && count( $pricing_data ) > 0 ) {
 		$js_date_format = wp_travel_date_format_php_to_js();
@@ -1832,10 +1834,11 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 			<div class="availabily-wrapper">
 				<ul class="availabily-list additional-col">
 					<li class="availabily-heading clearfix">
-
+						<?php if ( $is_single_pricing ) :  ?>
 						<div class="pricing-name">
 							<?php echo esc_html( $pricing_name_string ); ?>
 						</div>
+						<?php endif; ?>
 						<div class="date-from">
 							<?php echo esc_html( $start_date_string ); ?>
 						</div>
@@ -1895,11 +1898,12 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						} ?>
 						<li class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ); ?>">
 							<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
+								<?php if ( $is_single_pricing ) : ?>
 								<div class="pricing-name">
 									<span class="availabily-heading-label"><?php echo esc_html( $pricing_name_string ); ?></span>
 									<span> <?php echo esc_html( $pricing['pricing_name'] ); ?> </span>
 								</div>
-
+								<?php endif; ?>
 								<?php if ( 'yes' === $pricing['fixed_departure'] ) : ?>
 									<div class="date-from">
 										<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
