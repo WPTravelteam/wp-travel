@@ -66,13 +66,7 @@ wp_travel_print_notices();
 					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
 
 					$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wp_travel_format_date( $trip['arrival_date'], true, 'Y-m-d' ) : false;
-<<<<<<< HEAD
-
-					$pax                = isset( $trip['pax'] ) ? $trip['pax'] : 1;
-					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
-=======
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : ''; // May be not required from @since 3.0.0.
->>>>>>> category
 					$enable_partial     = $trip['enable_partial'];
 					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
