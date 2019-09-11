@@ -511,7 +511,22 @@
             display: flex;
             -ms-flex-wrap: wrap;
             flex-wrap: wrap;
+
         }
+    }
+}
+
+.availabily-list{
+    .availabily-heading{
+        .group-size{
+            text-align: center;
+        }
+    }
+}
+
+.availabily-content{
+    .group-size-min-max{
+        text-align: center;
     }
 }
 
@@ -2382,13 +2397,16 @@ ul.availabily-list {
             display:flex;
             flex-wrap:wrap;
             > div{
-                width: 14.26%;
+                width: 14.26% !important;
             }
         }
     }
 
     li > form
     {
+        group-size{
+            text-align: center;
+        }
         &.opened{
             box-shadow: 2px 2px 10px #e4e4e4;
             border: 1px solid #E3E3E3;

@@ -1826,7 +1826,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 		$trip_extras_class = new Wp_Travel_Extras_Frontend();
 
-		$default_columns = 5; // To determine width of columns;
+		$default_columns = 6; // To determine width of columns;
 		?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
