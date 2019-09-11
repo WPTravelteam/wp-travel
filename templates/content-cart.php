@@ -40,8 +40,8 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 
 // Print Errors / Notices.
 wp_travel_print_notices();
-?>
 
+?>
 <!-- CART HTML START -->
 <div class="ws-theme-cart-page">
 	<form action="<?php echo esc_url( $checkout_page_url ); ?>" method="post">
@@ -52,31 +52,33 @@ wp_travel_print_notices();
 					<th></th>
 					<th></th>
 					<th colspan="2"><?php esc_html_e( 'Tour', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'Price', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
+					<th></th>
 					<th class="text-right"><?php esc_html_e( 'Total', 'wp-travel' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
 				foreach ( $trips as $cart_id => $trip ) :
+
 					$pricing_label = false;
 					$trip_id       = $trip['trip_id'];
-					// $price			= $trip['price']; // Price of single qty.
 					$trip_price    = $trip['trip_price'];
 					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
 
-					// Need to remove $trip_start_date in future version. [ use arrival_date and departure_date instead ].
-					// $trip_start_date = isset( $trip['trip_start_date'] ) && ! empty( $trip['trip_start_date'] ) ? wp_travel_format_date( $trip['trip_start_date'], true, 'Y-m-d' ) : false;
 					$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wp_travel_format_date( $trip['arrival_date'], true, 'Y-m-d' ) : false;
+<<<<<<< HEAD
 
 					$pax                = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
+=======
+					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : ''; // May be not required from @since 3.0.0.
+>>>>>>> category
 					$enable_partial     = $trip['enable_partial'];
 					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available      = isset( $trip['max_available'] ) ? $trip['max_available'] : '';
 					$trip_extras        = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
+					$cart_trip 			= isset( $trip['trip'] ) ? $trip['trip'] : array();
 
 					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 					$pax_limit     = apply_filters( 'wp_travel_inventory_pax_limit', '', $trip_id, $price_key );
@@ -96,25 +98,12 @@ wp_travel_print_notices();
 					if ( $min_available ) {
 						$min_attr = 'min="' . $min_available . '"';
 					}
-					$single_trip_total = wp_travel_get_formated_price( $trip_price * $pax );
 
 					$price_per = get_post_meta( $trip['trip_id'], 'wp_travel_price_per', true );
 
-					// $price_per = 'trip-default';
 					if ( isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ) {
 						$price_per = wp_travel_get_pricing_variation_price_per( $trip['trip_id'], $trip['price_key'] );
-						if ( 'trip-default' === $price_per ) {
-							$price_per = 'person';
-						}
-					}
-
-					if ( 'group' === $price_per ) {
-
-						$single_trip_total = wp_travel_get_formated_price( $trip_price );
-
-					}
-
-					?>
+					} ?>
 
 					<tr class="responsive-cart has_options_selected">
 						<td class="product-remove" >
@@ -145,24 +134,35 @@ wp_travel_print_notices();
 								<?php endif; ?>
 							</div>
 						</td>
-						<td class="product-price" data-title="Price">
-							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : 
-								$actual_trip_price = isset( $trip_tax_details['actual_trip_price'] ) ? $trip_tax_details['actual_trip_price'] : '' ;
+						<td class="product-price clearfix" data-title="Price" data-max-pax="<?php echo esc_attr( $max_available ); ?>" data-min-pax="<?php echo esc_attr( $min_available ); ?>" data-booked-pax="<?php echo esc_attr( $trip['pax'] ); ?>">
+							<?php
+							if ( count( $cart_trip ) > 0 ) :
 								?>
-								<span class="person-count">
-									<ins>
-										<span class="wp-travel-trip-price" payment_price="<?php echo esc_attr( $actual_trip_price ); ?>" trip_price="<?php echo esc_attr( $trip_price ); ?>" >
-											<?php echo wp_travel_get_formated_price_currency( $trip_price ); ?>
-										</span>
-									</ins>/<?php echo esc_html( ucfirst( $pax_label ) ); ?>
-								</span>
-							<?php endif; ?>
-						</td>
-						<td class="product-quantity" data-title="PAX">
-							<div class="st_adults">
-								<!--<span class="label"><?php echo esc_html( ucfirst( $pax_label ) ); ?></span>-->
-								<!-- Customization Starts. -->
-								<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" <?php echo $min_attr; ?> <?php echo $max_attr; ?> name="pax" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
+								<ul>
+									<?php
+									foreach ( $cart_trip as $category_id => $category ) {
+										$category_type = isset( $category['type'] ) ? $category['type'] : '';
+										$price_per     = isset( $category['price_per'] ) ? $category['price_per'] : 'person';
+
+										$price = $category['price'];
+										$pax = $category['pax'];
+										if ( 'group' !== $price_per ) :
+											$price *= $pax;
+											?>
+											<li class="person-count">
+												<span class="category-type"><?php echo esc_html( $category_type ); ?></span><input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php //echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> x <?php echo ( wp_travel_get_formated_price_currency( $category['price'] ) ); ?> = <?php echo ( wp_travel_get_formated_price_currency( $price ) ); ?>
+											</li>
+											<?php
+										else : // if group.
+											?>
+											<li class="person-count">
+											<span class="category-type"><?php _e( 'Group', 'wp-travel' ); ?></span> (<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php //echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">) <?php echo wp_travel_get_formated_price_currency( $price ); ?>
+											</li>
+											<?php
+										endif;
+									}
+									?>
+								</ul>
 								<?php
 								$group_size       = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 								$total_booked_pax = wp_travel_get_total_booked_pax( $trip_id, false );
@@ -173,12 +173,15 @@ wp_travel_print_notices();
 								<!-- Customization Ends. -->
 								<input type="hidden" name="cart_id" value="<?php echo esc_attr( $cart_id ); ?>" >
 								<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" >
-							</div>
+								<input type="hidden" name="pricing_id" value="<?php echo esc_attr( $trip['pricing_id'] ); ?>" >
+								<?php
+							endif;
+							?>
 						</td>
 						<td class="product-subtotal text-right" data-title="Total">
 							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 								<div class="item_cart">
-									<p><strong><?php echo wp_travel_get_formated_price_currency( $single_trip_total ); ?></strong></p>
+									<p><strong><?php echo wp_travel_get_formated_price_currency( $trip['trip_price'] ); ?></strong></p>
 								</div>
 							<?php endif; ?>
 						</td>
@@ -255,3 +258,4 @@ wp_travel_print_notices();
 			</table>
 	</form>
 </div>
+<?php

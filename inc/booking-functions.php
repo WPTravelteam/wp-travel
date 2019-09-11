@@ -630,17 +630,14 @@ add_filter( 'request', 'wp_travel_booking_column_orderby' );
 
 /** Front end Booking and send Email after clicking Book Now. */
 function wp_travel_book_now() {
-	if ( ! isset( $_POST['wp_travel_book_now'] ) ) {
+	if (
+		! isset( $_POST['wp_travel_book_now'] )
+		|| ! isset( $_POST['wp_travel_security'] )
+		|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+		) {
 		return;
 	}
 
-	if ( ! isset( $_POST['wp_travel_security'] ) ) {
-		return;
-	}
-
-	if ( ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
-		return;
-	}
 	global $wt_cart;
 
 	if ( isset( $wt_cart ) ) {
@@ -754,7 +751,6 @@ function wp_travel_book_now() {
 			foreach ( $meta_val as $key => $value ) {
 				if ( is_array( $value ) ) {
 					$new_meta_value[ $key ] = array_map( 'sanitize_text_field', $value );
-
 					/**
 					 * Quick fix for the field editor checkbox issue for the data save.
 					 *
@@ -762,7 +758,7 @@ function wp_travel_book_now() {
 					 */
 					if ( isset( $value[0] ) && is_array( $value[0] ) ) {
 						$new_value = array();
-						foreach( $value as $nested_value ) {
+						foreach ( $value as $nested_value ) {
 							$new_value[] = implode( ', ', $nested_value );
 						}
 						$new_meta_value[ $key ] = array_map( 'sanitize_text_field', $new_value );

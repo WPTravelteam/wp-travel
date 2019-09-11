@@ -1026,10 +1026,14 @@ function wp_travel_is_admin_page( $pages = array() ) {
 
 function wp_travel_get_pricing_option_list() {
 	$type = array(
-		'single-price'   => __( 'Single Price', 'wp-travel' ),
 		'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
-		// 'custom-price' => __( 'Custom', 'wp-travel' ),
 	);
+
+	$hide_single_for_new_user = get_option( 'wp_travel_user_after_multiple_pricing_category' );  // @since 3.0.0
+	
+	if ( 'yes' !== $hide_single_for_new_user ) { // Single pricing is only available for old user who is using it.
+		$type['single-price'] = __( 'Single Price', 'wp-travel' );
+	}
 
 	return apply_filters( 'wp_travel_pricing_option_list', $type );
 }

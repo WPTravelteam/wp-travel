@@ -26,7 +26,7 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
-	$enable_sale 	= wp_travel_is_enable_sale( get_the_ID() );
+	$enable_sale 	= wp_travel_is_enable_sale_price( get_the_ID() );
 	$group_size 	= wp_travel_get_group_size( get_the_ID() );
 	$start_date 	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
 	$end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); ?>

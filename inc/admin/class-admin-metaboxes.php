@@ -422,7 +422,7 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta = array();
 
 		// Save pricing option type @since 1.7.6.
-		$trip_meta['wp_travel_pricing_option_type'] = isset( $_POST['wp_travel_pricing_option_type'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) ) : '';
+		$trip_meta['wp_travel_pricing_option_type'] = isset( $_POST['wp_travel_pricing_option_type'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) ) : 'multiple-price'; // default multiple price @since 3.0.0.
 		$trip_meta['wp_travel_price']               = isset( $_POST['wp_travel_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) ) : 0;
 
 		// Setting trip price.

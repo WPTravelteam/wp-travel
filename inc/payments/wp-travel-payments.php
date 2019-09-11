@@ -261,10 +261,7 @@ if ( ! function_exists( 'wp_travel_is_partial_payment_enabled' ) ) {
 	function wp_travel_is_partial_payment_enabled() {
 		$settings = wp_travel_get_settings();
 
-		if ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] ) {
-			return true;
-		}
-		return false;
+		return ( isset( $settings['partial_payment'] ) && 'yes' === $settings['partial_payment'] );
 	}
 }
 
@@ -336,12 +333,12 @@ function wp_travel_send_email_payment( $booking_id ) {
 		return;
 	}
 	$order_items = get_post_meta( $booking_id, 'order_items_data', true );
-	
+
 	$price_keys = array();
 	foreach ( $order_items as $key => $item ) {
 		$price_keys[] = $item['price_key'];
 	}
-	
+
 	$order_items = ( $order_items && is_array( $order_items ) ) ? count( $order_items ) : 1;
 
 	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
@@ -507,7 +504,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		header( 'Location: ' . $thankyou_page_url );
 		exit;
 	}
-	
+
 }
 
 /**
@@ -614,5 +611,3 @@ add_action( 'wp_travel_after_booking_data_save', 'wp_travel_update_payment_statu
 add_action( 'wt_before_payment_process', 'wp_travel_update_payment_status_booking_process_frontend' );
 add_action( 'wp_travel_after_successful_payment', 'wp_travel_send_email_payment' );
 add_filter( 'wp_travel_booked_message', 'wp_travel_payment_booking_message' );
-
-

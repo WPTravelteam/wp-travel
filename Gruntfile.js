@@ -10,6 +10,8 @@ module.exports = function (grunt) {
 	 */
 	svn_files_list = [
 		'assets/**',
+		'!assets/sass/**',
+		'!assets/css/*.map',
 		'i18n/**',
 		'inc/**',
 		'templates/**',
@@ -73,7 +75,8 @@ module.exports = function (grunt) {
 					'!package.json',
 					'!node_modules/**',
 					'!tests/**',
-					'!docs/**'
+					'!docs/**',
+					'!assets/sass/**'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,

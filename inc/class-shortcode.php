@@ -107,23 +107,23 @@ class Wp_Travel_Shortcodes {
 	 */
 	public static function wp_travel_get_itineraries_shortcode( $atts, $content = '' ) {
 		$default = array(
-			'id' => 0,
-			'type' => '',
+			'id'           => 0,
+			'type'         => '',
 			'itinerary_id' => '',
-			'view_mode' => 'grid',
-			'slug' => '',
-			'limit' => 20,
-			'col' => apply_filters( 'wp_travel_itineraries_col_per_row', "2" ),
+			'view_mode'    => 'grid',
+			'slug'         => '',
+			'limit'        => 20,
+			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', "2" ),
 		);
 
 		$atts = shortcode_atts( $default, $atts, 'WP_TRAVEL_ITINERARIES' );
 
-		$type = $atts['type'];
-		$iti_id = $atts['itinerary_id'];
+		$type      = $atts['type'];
+		$iti_id    = $atts['itinerary_id'];
 		$view_mode = $atts['view_mode'];
-		$id    = absint( $atts['id'] );
-		$slug  = $atts['slug'];
-		$limit = absint( $atts['limit'] );
+		$id        = absint( $atts['id'] );
+		$slug      = $atts['slug'];
+		$limit     = absint( $atts['limit'] );
 
 		$args = array(
 			'post_type'      => WP_TRAVEL_POST_TYPE,

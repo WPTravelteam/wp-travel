@@ -1130,6 +1130,87 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
         &.hidden{
             display:none;
         }
+        &.visibility-hidden{
+            visibility: hidden;
+        }
+
+    }
+
+    .new-category-row{
+        background: #efefef;
+        box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        margin: 0px;
+        
+        &.new-category-row-heading{
+            background:#53b392;
+            // padding: 10px 30px;
+            padding: 10px;
+        }
+        &.new-category-row-content{
+            margin-bottom: 30px;
+            .new-category-repeator{
+                position: relative;
+                padding: 10px;
+
+                .wp-travel-remove-pricing-category{
+                    position: absolute;
+                    // top: calc( 50% - 20px );
+                    // right: -15px;
+                    top: 0;
+                    right: 0;
+                    background: #a00;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: 600;
+                    z-index: 1;
+                    display: none;
+                    &:hover{
+                        background: #f00;
+                    }
+                }
+            }
+            .new-category-repeator:nth-child(2n+1) {
+                background: #ddd;
+            }
+        }
+        &.new-category-row-heading > .repeat-row,
+        .new-category-repeator > .repeat-row {
+            width: 20%;
+            float:left;
+            padding-right:10px;
+            box-sizing: border-box;
+            &>label{
+                display: block;
+            }
+            
+            input:not([type="radio"]):not([type="checkbox"]):not(.pricing-opt-min-pax):not(.pricing-opt-max-pax) {
+                width:100%;
+            }
+            input[type="number"] {
+                padding:8px 5px 8px 10px;
+            }
+            input.pricing-opt-min-pax,
+            input.pricing-opt-max-pax{
+                width:46%;
+                display: inline-block;
+                box-sizing: border-box;
+            }
+            .field-price-currency-input{
+                input{
+                    padding-left: 30px !important;
+                }
+            }
+            @media screen and (max-width: 1366.99px) {
+                input.pricing-opt-min-pax,
+                input.pricing-opt-max-pax{
+                    width:100%;
+                    display: block;
+                }
+            }
+        }
+
+        
     }
     .one-third,
     .two-third {
