@@ -299,7 +299,7 @@ function wp_travel_new_pricing_list_admin() {
 																		$pricing_variation_options = wp_travel_get_pricing_variation_options();
 																		if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
 																			?>
-																			<select  name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][type]" class="wp-travel-pricing-options-list">
+																			<select data-category-id="<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][type]" class="wp-travel-pricing-options-list">
 																				<?php
 																				foreach ( $pricing_variation_options as $pk => $value ) {
 																					?>
@@ -308,7 +308,7 @@ function wp_travel_new_pricing_list_admin() {
 																				}
 																				?>
 																			</select>
-																			<input type="text" style="display:none" class="custom-pricing-label-wrap" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][custom_label]" placeholder="Custom Label" />
+																			<input type="text" style="display:none" class="custom-pricing-label-wrap-<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][custom_label]" placeholder="Custom Label" />
 																		<?php endif; ?>
 																	</div>
 																	<!-- <div class="repeat-row">
@@ -524,7 +524,7 @@ function wp_travel_new_pricing_list_admin() {
 							$pricing_variation_options = wp_travel_get_pricing_variation_options();
 							if ( ! empty( $pricing_variation_options ) && is_array( $pricing_variation_options ) ) :
 								?>
-								<select  name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][type]" class="wp-travel-pricing-options-list">
+								<select data-category-id="{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][type]" class="wp-travel-pricing-options-list">
 									<?php
 									foreach ( $pricing_variation_options as $key => $value ) {
 										?>
@@ -533,7 +533,7 @@ function wp_travel_new_pricing_list_admin() {
 									}
 									?>
 								</select>
-								<input type="text" style="display:none" class="custom-pricing-label-wrap" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][custom_label]" placeholder="Custom Label" />
+								<input type="text" style="display:none" class="custom-pricing-label-wrap-{{data.category_id}}" name="wp_travel_pricing_options[{{data.random}}][categories][{{data.category_id}}][custom_label]" placeholder="Custom Label" />
 							<?php endif; ?>
 						</div>
 
