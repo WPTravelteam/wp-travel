@@ -239,6 +239,7 @@ Enhancement:
 * Pricing layout updated to select pax and price in the trip single page. Now it uses pax picker dropdown to select pax as per pricing category.
 * Meta Structure update for the trip to support Multiple Category on every pricing option.
 * Removed Single Pricing option for New User since WP Travel 3.0.0. Old WP Travel User still have access to use a single pricing option.
+* Added currency symbol of Armenian Dram (AMD).
 
 Fixes:
 
@@ -303,7 +304,7 @@ Fixes:
 * Group size of multiple pricing is displayed in the featured section. Previously group size value is displaying from single pricing option though pricing option set as multiple pricing options.
 * FAQs are not being correctly saved on admin trips page. If global FAQs are enabled by WP Travel Utilities plugin and added global FAQ in first and then deactivate utilities. This will not save FAQ correctly.
 * Fixed settings fields data are lost if addons disabled. It will not save settings of disabled addons if we update settings after disabling addons from addons settings.
-* Trip FAQ accordion conflict with Trip Facts. 
+* Trip FAQ accordion conflict with Trip Facts.
 
 Optimize
 * Trip code on frontend tabs optimized.
@@ -329,13 +330,13 @@ Enhancement:
 
 * Added Multiple pricing available dates in trip and related trip page.
 * Function wp_travel_get_min_price_key enhanced. Now only trip id param is used to return min price key.
-* Hook added to hide price per text in Trip page, related trip section and trip archive page. 
+* Hook added to hide price per text in Trip page, related trip section and trip archive page.
 
 Fixes:
 
 * Trip offer not working for multiple pricing option.
 * Bank Deposit not working in wp travel dashboard.
-* Fixed available date shows N/A in case of multiple date. 
+* Fixed available date shows N/A in case of multiple date.
 
 = 2.0.4=
 Release Date: 9th June, 2019
@@ -400,8 +401,8 @@ Fixes:
 * Review reply link not working is fixed.
 * Offer sign not showing for multiple pricing.
 * Coupon tab multiple icon on tab label.
-* WP Travel Notice label text updated. 
-* Minor layout issue fixes for admin settings. 
+* WP Travel Notice label text updated.
+* Minor layout issue fixes for admin settings.
 
 = 2.0.0 =
 Release Date: 14th May, 2019
@@ -439,7 +440,7 @@ Release Date: 22nd April 2019
 
 Enhancement:
 
-* Set WP Travel Dashboard tab menu priority to change placement of tabs. 
+* Set WP Travel Dashboard tab menu priority to change placement of tabs.
 
 Fixes:
 
