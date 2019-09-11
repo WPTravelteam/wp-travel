@@ -1834,7 +1834,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 			<div class="availabily-wrapper">
 				<ul class="availabily-list additional-col">
 					<li class="availabily-heading clearfix">
-						<?php if ( $is_single_pricing ) :  ?>
+						<?php if ( ! $is_single_pricing ) :  ?>
 						<div class="pricing-name">
 							<?php echo esc_html( $pricing_name_string ); ?>
 						</div>
@@ -1898,7 +1898,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						} ?>
 						<li class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ); ?>">
 							<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
-								<?php if ( $is_single_pricing ) : ?>
+								<?php if ( ! $is_single_pricing ) : ?>
 								<div class="pricing-name">
 									<span class="availabily-heading-label"><?php echo esc_html( $pricing_name_string ); ?></span>
 									<span> <?php echo esc_html( $pricing['pricing_name'] ); ?> </span>
