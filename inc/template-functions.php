@@ -2093,7 +2093,11 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											 * @since 1.5.8
 											 */
 											$arrival_date = isset( $pricing['arrival_date'] ) ? $pricing['arrival_date'] : '';
-											do_action( 'wp_travel_trip_extras', $pricing['price_key'], $arrival_date );
+											$pricing_key = $pricing['price_key'];
+											if ( 'default-pricing' === $pricing['price_key'] ) {
+												$pricing_key = ''; // Quick fixing for single pricing
+											}
+											do_action( 'wp_travel_trip_extras', $pricing_key, $arrival_date );
 										?>
 										<div class="wp-travel-calender-aside">
 											<div class="add-to-cart">
@@ -2414,7 +2418,11 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										 * @since 1.5.8
 										 */
 										$arrival_date = isset( $pricing['arrival_date'] ) ? $pricing['arrival_date'] : '';
-										do_action( 'wp_travel_trip_extras', $pricing['price_key'], $arrival_date );
+										$pricing_key = $pricing['price_key'];
+										if ( 'default-pricing' === $pricing['price_key'] ) {
+											$pricing_key = ''; // Quick fixing for single pricing
+										}
+										do_action( 'wp_travel_trip_extras', $pricing_key, $arrival_date );
 									?>
 									<div class="wp-travel-calender-aside">
 										<div class="add-to-cart">
