@@ -1803,6 +1803,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$sold_out_string       = isset( $strings['bookings']['sold_out'] ) ? $strings['bookings']['sold_out'] : __( 'Sold out', 'wp-travel' );
 	$book_now_string       = isset( $strings['bookings']['book_now'] ) ? $strings['bookings']['book_now'] : __( 'Book Now', 'wp-travel' );
 	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
+	$pricing_string        = isset( $strings['bookings']['combined_pricing'] ) ? $strings['bookings']['combined_pricing'] : __( 'Pricing', 'wp-travel' );
 	// Endf of strings
 
 	// Filter added @since new-version-number
@@ -1828,20 +1829,23 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 
 		$trip_extras_class = new Wp_Travel_Extras_Frontend();
 
-		$default_columns = 6; // To determine width of columns;
+		$default_columns = 5; // To determine width of columns;
 		?>
 		<div id="wp-travel-date-price" class="detail-content">
 			<div class="availabily-wrapper">
 				<ul class="availabily-list additional-col">
 					<li class="availabily-heading clearfix">
-						<?php if ( ! $is_single_pricing ) :  ?>
+						<!-- Column: Pricing Name -->
+						<?php if ( ! $is_single_pricing ) : $default_columns++;  ?>
 						<div class="pricing-name">
 							<?php echo esc_html( $pricing_name_string ); ?>
 						</div>
 						<?php endif; ?>
+						<!-- Column: Start Date -->
 						<div class="date-from">
 							<?php echo esc_html( $start_date_string ); ?>
 						</div>
+						<!-- Column: End Date -->
 						<?php
 						if ( $show_end_date ) :
 							$default_columns++;
@@ -1850,23 +1854,17 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php echo esc_html( $end_date_string ); ?>
 							</div>
 						<?php endif; ?>
+						<!-- Column: Group Size -->
 						<div class="group-size">
 							<?php echo esc_html( $group_size_string ); ?>
 						</div>
-						<?php
-						if ( $show_status_col ) :
-							$default_columns++;
-							?>
-							<div class="seats-left" >
-								<?php echo esc_html( $seats_left_string ); ?>
-							</div>
-						<?php endif; ?>
-						<div class="no-of-pax">
-							<?php echo esc_html( $pax_string ); ?>
+
+						<!-- Column: Pricing -->
+						<div class="pricing">
+							<?php echo esc_html( $pricing_string ); ?>
 						</div>
-						<div class="price">
-							<?php echo esc_html( $price_string ); ?>
-						</div>
+
+						<!-- Column: Action -->
 						<div class="action">
 							&nbsp;
 						</div>
@@ -1898,13 +1896,15 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						} ?>
 						<li class="availabily-content clearfix <?php echo esc_attr( $unavailable_class ); ?>">
 							<form action="<?php echo esc_url( $cart_url ); ?>" id="<?php echo esc_attr( $parent_id ); ?>" class="wp-travel-add-to-cart-form">
+								<!-- Column: Pricing Name -->
 								<?php if ( ! $is_single_pricing ) : ?>
-								<div class="pricing-name">
-									<span class="availabily-heading-label"><?php echo esc_html( $pricing_name_string ); ?></span>
-									<span> <?php echo esc_html( $pricing['pricing_name'] ); ?> </span>
-								</div>
+									<div class="pricing-name">
+										<span class="availabily-heading-label"><?php echo esc_html( $pricing_name_string ); ?></span>
+										<span> <?php echo esc_html( $pricing['pricing_name'] ); ?> </span>
+									</div>
 								<?php endif; ?>
 								<?php if ( 'yes' === $pricing['fixed_departure'] ) : ?>
+									<!-- Column: Start Date -->
 									<div class="date-from">
 										<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 										<?php echo esc_html( date_i18n( 'l', strtotime( $pricing['arrival_date'] ) ) ); ?>
@@ -1966,87 +1966,95 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										</div>
 									<?php endif; ?>
 								<?php endif; ?>
+								<!-- Column: Group Size -->
 								<div class="group-size-min-max">
 									<?php echo esc_html( $pricing['inventory']['min_pax'] . '-' . $pricing['inventory']['max_pax'] ); ?>
 								</div>
-								<div class="group-size">
-									<div id="paxpicker" class="paxpicker">
-										<div class="icon-users summary">
-											<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
-										</div>
-										<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
-											<span class="separator">&nbsp;</span>
-											<?php
-											if ( $is_inventory_enabled ) :
-												$pricing_max_pax = ! empty( $pricing['inventory']['max_pax'] ) ? $pricing['inventory']['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
-												$available_pax = ! empty( $pricing['inventory']['available_pax'] ) ? $pricing['inventory']['available_pax'] : $pricing_max_pax;
-											else :
-												$available_pax = $pricing['inventory']['max_pax'];
-											endif;
-											?>
 
-											<div class="category available-seats">
-												<?php echo esc_html__( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
+								<?php if ( $unavailable_class !== 'pricing_unavailable' ) : ?>
+									<!-- Column: Pricing -->
+									<div class="group-size">
+										<div id="paxpicker" class="paxpicker">
+											<div class="icon-users summary">
+												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
 											</div>
-											<?php
-											if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
-												foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
-													$max      = $pricing['inventory']['max_pax'];
-													$min      = $pricing['inventory']['min_pax'];
-													$max_attr = "max={$max}";
-													$min_attr = "min={$min}";
-													?>
-														<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
-															<p class="picker-info">
-																<span class="pax-type">
-																	<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
-																	<span class="min-max-pax">
-																		(<?php
-																			if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
-																				echo sprintf( '%s - %s %s', $min, $max, $pax_string );
-																			} else {
-																				echo sprintf( '%s %s - %s', $min, $pax_string, $max );
-																			}
-																		?>)
-																	</span>
-																</span>
-																<span class="price-per-info">
-																	<?php if ( $pricing_category['price'] ) : ?>
+											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
+												<span class="separator">&nbsp;</span>
+												<?php
+												if ( $is_inventory_enabled ) :
+													$pricing_max_pax = ! empty( $pricing['inventory']['max_pax'] ) ? $pricing['inventory']['max_pax'] : get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
+													$available_pax = ! empty( $pricing['inventory']['available_pax'] ) ? $pricing['inventory']['available_pax'] : $pricing_max_pax;
+												else :
+													$available_pax = $pricing['inventory']['max_pax'];
+												endif;
+												?>
 
-																		<?php if ( 'yes' === $pricing_category['enable_sale'] ) : ?>
-																			<del>
-																				<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['regular'], true ); ?></span>
-																			</del>
-																		<?php endif; ?>
-																		<span class="person-count">
-																			<ins>
-																				<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
-																			</ins>/<?php echo esc_html( $pricing_category['price_per'] ); ?>
+												<div class="category available-seats">
+													<?php echo esc_html__( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
+												</div>
+												<?php
+												if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
+													foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
+														$max      = $pricing['inventory']['max_pax'];
+														$min      = $pricing['inventory']['min_pax'];
+														$max_attr = "max={$max}";
+														$min_attr = "min={$min}";
+														?>
+															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
+																<p class="picker-info">
+																	<span class="pax-type">
+																		<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
+																		<span class="min-max-pax">
+																			(<?php
+																				if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
+																					echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+																				} else {
+																					echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+																				}
+																			?>)
 																		</span>
-																	<?php endif; ?>
-																</span>
-															</p>
-															<div class="pax-select-container">
-																<a href="#" class="icon-minus pax-picker-minus">-</a>
-																<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
-																<a href="#" class="icon-plus pax-picker-plus">+</a>
-															</div>
+																	</span>
+																	<span class="price-per-info">
+																		<?php if ( $pricing_category['price'] ) : ?>
 
-														</div>
-													<?php
+																			<?php if ( 'yes' === $pricing_category['enable_sale'] ) : ?>
+																				<del>
+																					<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['regular'], true ); ?></span>
+																				</del>
+																			<?php endif; ?>
+																			<span class="person-count">
+																				<ins>
+																					<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
+																				</ins>/<?php echo esc_html( $pricing_category['price_per'] ); ?>
+																			</span>
+																		<?php endif; ?>
+																	</span>
+																</p>
+																<div class="pax-select-container">
+																	<a href="#" class="icon-minus pax-picker-minus">-</a>
+																	<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo $min ?>" data-max="<?php echo $max ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ) ?>   step="1" maxlength="2" autocomplete="off">
+																	<a href="#" class="icon-plus pax-picker-plus">+</a>
+																</div>
+
+															</div>
+														<?php
+													}
 												}
-											}
-											?>
-											<span class="pricing-input"></span> <!-- pax inputs -->
+												?>
+												<span class="pricing-input"></span> <!-- pax inputs -->
+											</div>
 										</div>
 									</div>
-								</div>
+								<?php else: ?>
+								<div class="group-size">&nbsp;</div>
+								<?php endif; ?>
 								<?php
 									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
 									$range_alert = $pax_alerts['range'];
 									$required_alert = $pax_alerts['required'];
 								?>
 
+								<!-- Column: Action -->
 								<div class="action">
 									<?php
 									if ( $pricing['inventory']['sold_out'] ) :
