@@ -3047,7 +3047,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					array(
 						'type'        => 'default',
 						'price_per'   => wp_travel_get_price_per_text( $trip_id ),
-						'sale_price'  => wp_travel_get_actual_trip_price( $trip_id ),
+						// 'sale_price'  => wp_travel_get_actual_trip_price( $trip_id ),
 						'enable_sale' => ( wp_travel_is_enable_sale_price( $trip_id ) ) ? 'yes' : 'no',
 						'regular'     => wp_travel_get_actual_trip_price( $trip_id, '', true ),
 						'price'       => wp_travel_get_actual_trip_price( $trip_id ),
@@ -3083,7 +3083,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							// $categories[ $category_id ]                = $pricing_category;
 							$categories[ $category_id ]['type']        = $pricing_category['type'];
 							$categories[ $category_id ]['price_per']   = $pricing_category['price_per'];
-							$categories[ $category_id ]['sale_price']  = $pricing_category['sale_price'];
+							// $categories[ $category_id ]['sale_price']  = $pricing_category['sale_price'];
 							$categories[ $category_id ]['enable_sale'] = isset( $pricing_category['enable_sale'] ) ? $pricing_category['enable_sale'] : 'no';
 							$categories[ $category_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, $category_id );
 							$categories[ $category_id ]['price']       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
@@ -3091,10 +3091,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					} else {
 						$categories[ $pricing_id ]['type']        = $pricing_option['type'];
 						$categories[ $pricing_id ]['price_per']   = $pricing_option['price_per'];
-						$categories[ $pricing_id ]['sale_price']  = $pricing_option['sale_price'];
+						// $categories[ $pricing_id ]['sale_price']  = $pricing_option['sale_price'];
 						$categories[ $pricing_id ]['enable_sale'] = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
 						$categories[ $pricing_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, '', $pricing_option['price_key'] );
-						$categories[ $pricing_id ]['price']       = $pricing_option['price'];
+						$categories[ $pricing_id ]['price']       = $categories[ $pricing_id ]['enable_sale'] === 'yes' ? $pricing_option['sale_price'] : $pricing_option['price'];
 					}
 
 					$inventory_data = array(
