@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 2.0.9
+ * Version: 3.0.0
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
  * Requires PHP: 5.5
- * Tested up to: 5.2.2
+ * Tested up to: 5.2.3
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -36,7 +36,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '2.0.9';
+		public $version = '3.0.0';
 		/**
 		 * The single instance of the class.
 		 *
@@ -450,8 +450,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				if ( empty( $current_db_version ) ) {
-					update_option( 'wp_travel_user_since', WP_TRAVEL_VERSION ); // @since new-version-number
-					update_option( 'wp_travel_user_after_multiple_pricing_category', 'yes' ); // option is used to hide option 'Enable multiple category on pricing' and single pricng option @since new-version-number 
+					update_option( 'wp_travel_user_since', WP_TRAVEL_VERSION ); // @since 3.0.0
+					update_option( 'wp_travel_user_after_multiple_pricing_category', 'yes' ); // option is used to hide option 'Enable multiple category on pricing' and single pricng option @since 3.0.0 
 				}
 				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
 			}

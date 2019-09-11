@@ -66,7 +66,7 @@ wp_travel_print_notices();
 					$trip_duration = isset( $trip['trip_duration'] ) ? $trip['trip_duration'] : '';
 
 					$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wp_travel_format_date( $trip['arrival_date'], true, 'Y-m-d' ) : false;
-					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : ''; // May be not required from @since new-version-number.
+					$price_key          = isset( $trip['price_key'] ) ? $trip['price_key'] : ''; // May be not required from @since 3.0.0.
 					$enable_partial     = $trip['enable_partial'];
 					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
@@ -150,7 +150,7 @@ wp_travel_print_notices();
 										else : // if group.
 											?>
 											<li class="person-count">
-											<span class="category-type"><?php _e( 'Group' ); ?></span> (<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php //echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">) <?php echo wp_travel_get_formated_price_currency( $price ); ?>
+											<span class="category-type"><?php _e( 'Group', 'wp-travel' ); ?></span> (<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php //echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">) <?php echo wp_travel_get_formated_price_currency( $price ); ?>
 											</li>
 											<?php
 										endif;

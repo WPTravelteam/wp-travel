@@ -7,9 +7,9 @@
 function wp_travel_trip_callback_price() {
 	$settings = wp_travel_get_settings();
 
-	$new_multiple_category = $settings['enable_multiple_category_on_pricing']; // @since new-version-number
+	$new_multiple_category = $settings['enable_multiple_category_on_pricing']; // @since 3.0.0
 	// Implement new multiple category options(child, adult) on multiple pricing option. eg . Pricing A, have adult, child option in one pricing.
-	// Also single pricing option is removed form this version (@since new-version-number) as well for new users.
+	// Also single pricing option is removed form this version (@since 3.0.0) as well for new users.
 	if ( 'yes' === $new_multiple_category ) {
 		wp_travel_new_pricing_list_admin();
 	} else {
@@ -165,7 +165,7 @@ function wp_travel_new_pricing_list_admin() {
 									$pricing_max_pax = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 0;
 									$pricing_key  = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 
-									// Old legacy data. Need to migrate to new data. @since new-version-number
+									// Old legacy data. Need to migrate to new data. @since 3.0.0
 									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
 										$category_id = $pricing_id;
 										$pricing['categories'][ $category_id ] = array(

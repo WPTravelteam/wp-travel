@@ -173,7 +173,7 @@ class WP_Travel_Cart {
 			}
 		}
 
-		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since new-version-number
+		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since 3.0.0
 		if ( is_array( $pax ) ) :
 			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
 			$this->items[ $cart_item_id ]['trip_price']         = wp_travel_get_formated_price( $trip_price );
@@ -285,7 +285,7 @@ class WP_Travel_Cart {
 
 		// Update quantity.
 		if ( isset( $this->items[ $cart_item_id ] ) ) {
-			if ( is_array( $pax ) ) { // New @since new-version-number.
+			if ( is_array( $pax ) ) { // New @since 3.0.0.
 				/**
 				 * Customization Starts.
 				 */
@@ -305,7 +305,7 @@ class WP_Travel_Cart {
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
-					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since new-version-number
+					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0
 						$category_price = wp_travel_get_actual_trip_price( $trip_id );
 					} else {
 						$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );

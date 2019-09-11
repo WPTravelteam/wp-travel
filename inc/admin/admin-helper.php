@@ -1029,7 +1029,7 @@ function wp_travel_get_pricing_option_list() {
 		'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
 	);
 
-	$hide_single_for_new_user = get_option( 'wp_travel_user_after_multiple_pricing_category' );  // @since new-version-number
+	$hide_single_for_new_user = get_option( 'wp_travel_user_after_multiple_pricing_category' );  // @since 3.0.0
 	
 	if ( 'yes' !== $hide_single_for_new_user ) { // Single pricing is only available for old user who is using it.
 		$type['single-price'] = __( 'Single Price', 'wp-travel' );

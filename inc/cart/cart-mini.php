@@ -68,9 +68,9 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$pax_label = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 
 					// $single_trip_total         = wp_travel_get_formated_price( $trip_price * $pax );
-					$single_trip_total = wp_travel_get_formated_price( $trip_price ); // Applies to categorized pricing @since new-version-number
+					$single_trip_total = wp_travel_get_formated_price( $trip_price ); // Applies to categorized pricing @since 3.0.0
 					// $single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial * $pax );
-					$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial ); // Applies to categorized pricing @since new-version-number
+					$single_trip_total_partial = wp_travel_get_formated_price( $trip_price_partial ); // Applies to categorized pricing @since 3.0.0
 
 					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
 
@@ -98,7 +98,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					$cart_trip = isset( $trip['trip'] ) ? $trip['trip'] : array();
 
 					?>
-					<!-- New Layout @since new-version-number -->
+					<!-- New Layout @since 3.0.0 -->
 					<tr class="product-name">
 						<td colspan="2">
 							<?php echo esc_html( $pricing_name ); ?>
@@ -132,7 +132,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 								?>
 								<tr class="person-count">
 									<td class="left">
-										<span style="display:table-row"><?php echo sprintf( esc_html__( 'Group (%s)' ), esc_html( $pax ) ); ?></span>
+										<span style="display:table-row"><?php echo sprintf( esc_html__( 'Group (%s)', 'wp-travel' ), esc_html( $pax ) ); ?></span>
 										<?php echo sprintf( '%2$s x %1$s', wp_travel_get_formated_price_currency( $category['price'] ), '1', esc_html( $category_type ) ); ?>
 									</td>
 									<td class="right">

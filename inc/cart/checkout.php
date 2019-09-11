@@ -26,7 +26,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		$pricing_name   = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 
-		// New @since new-version-number.
+		// New @since 3.0.0.
 		$cart_trip      = isset( $trip['trip'] ) ? $trip['trip'] : array();
 		if ( is_array( $cart_trip ) && count( $cart_trip ) > 0 ) {
 			$repeator_count = 0;

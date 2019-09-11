@@ -138,7 +138,7 @@ class WP_Travel_Ajax {
 
 		$trip_id        = $_POST['trip_id'];
 		$price_key      = isset( $_POST['price_key'] ) ? $_POST['price_key'] : '';
-		$pricing_id     = isset( $_POST['pricing_id'] ) ? $_POST['pricing_id'] : ''; // @since new-version-number
+		$pricing_id     = isset( $_POST['pricing_id'] ) ? $_POST['pricing_id'] : ''; // @since 3.0.0
 		$arrival_date   = isset( $_POST['arrival_date'] ) ? $_POST['arrival_date'] : '';
 		$departure_date = isset( $_POST['departure_date'] ) ? $_POST['departure_date'] : ''; // Need to remove. is't post value.
 		$pax            = isset( $_POST['pax'] ) ? $_POST['pax'] : 0;
@@ -147,7 +147,7 @@ class WP_Travel_Ajax {
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
-		if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since new-version-number
+		if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			$total_pax          = array_sum( $pax );
 			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
@@ -155,7 +155,7 @@ class WP_Travel_Ajax {
 			$trip_price_partial = 0;
 
 			foreach ( $pax as $category_id => $pax_value ) {
-				$category_price         = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since new-version-number.
+				$category_price         = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since 3.0.0.
 
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
@@ -214,7 +214,7 @@ class WP_Travel_Ajax {
 				$trip_price = $price * $pax;
 			}
 			$attrs['trip'] = array(
-				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since new-version-number
+				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since 3.0.0
 					'pax'           => $pax,
 					'price'         => $price,
 					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),

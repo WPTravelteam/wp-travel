@@ -1806,7 +1806,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$pricing_string        = isset( $strings['bookings']['combined_pricing'] ) ? $strings['bookings']['combined_pricing'] : __( 'Pricing', 'wp-travel' );
 	// Endf of strings
 
-	// Filter added @since new-version-number
+	// Filter added @since 3.0.0
 	$is_inventory_enabled  = apply_filters( 'inventory_enabled', false, $trip_id );
 
 	// All Pricings.
@@ -1990,7 +1990,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 												?>
 
 												<div class="category available-seats">
-													<?php echo esc_html__( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
+													<?php echo esc_html__( 'Available Seats: ', 'wp-travel' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 												</div>
 												<?php
 												if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {

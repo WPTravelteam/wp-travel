@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.2.2
+Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 2.0.9
+Stable tag: 3.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,15 +230,37 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 2.1.0 =
-Release Date: 
+= 3.0.0 =
+Release Date: 11th September, 2019
 
 Enhancement:
 
-* Removed Single Pricing from this version of WP Travel. Old user can still use single pricing option.
-* WP Travel Pricing Category (Adult, Child, ..) structure and layout updated.
-* Option wp_travel_user_since added to track WP Travel user since.
-* Cleanup unnecessary files.
+* Multiple Pricing Category support in a pricing option. Now, You can assign multiple category like Child, adult in a pricing option. You have to select multiple pricing for this feature with WP Travel Utilities enable.
+
+Fixes:
+
+* Bank Deposite is not being disabled from the settings.
+
+= 2.1.1 =
+Release Date: 3rd September, 2019
+
+Fixes:
+
+* Bank Deposite is not being disabled from the settings.
+* Bank Deposite responsive issue on WP Travel Dashboard page.
+* Shortcode WP_TRAVEL_ITINERARIES attributes are not working.
+* Displaying old fixed departue in the featured section.
+* CSS conflict with wp-picker input field.
+* Cart page empty pax and PHP warning fixed.
+
+= 2.1.0 =
+Release Date: 19th August, 2019
+
+Fixes:
+
+* Fixes issue with Field Editor conflict. It is throwing issue while adding the field editor checkbox in the billing field.
+* Fixes Enquiry button is also turned off when the booking tab is turned off.
+* Fixes Special character issue in pricing option. When added the "()" in the pricing name in the pricing name field, "Book Now" button does not work.
 
 = 2.0.9 =
 Release Date: 17th July, 2019

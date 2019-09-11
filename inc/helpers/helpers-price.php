@@ -83,7 +83,7 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
  *
  * @param Number $post_id Current post id.
  * @param String $price_key Price Key for multiple pricing.
- * @since 1.0.5 Modified in 2.0.1, 2.0.5, 2.0.7 // Need to depricate, use wp_travel_is_enable_sale_price @since new-version-number
+ * @since 1.0.5 Modified in 2.0.1, 2.0.5, 2.0.7 // Need to depricate, use wp_travel_is_enable_sale_price @since 3.0.0
  */
 function wp_travel_is_enable_sale( $post_id, $price_key = null ) {
 	if ( ! $post_id ) {
@@ -142,7 +142,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 			if ( ! empty( $pricing_id ) ) {
 				$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
-				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
+				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
 					if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 						foreach ( $pricing_options as $pricing_key => $option ) {
 							if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
@@ -165,7 +165,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $enable_sale_for_min_price = 
 
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
 
-					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version.
+					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version.
 						if ( $price_key && ! empty( $price_key ) ) { // checks in indivicual pricing key [specific pricing is enabled in trip].
 							if ( isset( $pricing_options[ $price_key ]['enable_sale'] ) && 'yes' === $pricing_options[ $price_key ]['enable_sale'] ) {
 								$enable_sale = true;
@@ -942,7 +942,7 @@ function wp_travel_is_enable_pricing_options( $trip_id ) {
  *
  * @param Mixed $options pricing_option | trip id.
  *
- * @since 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ] not required @since new-version-number.
+ * @since 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ] not required @since 3.0.0.
  * @return Mixed.
  */
 
@@ -1110,7 +1110,7 @@ function wp_travel_get_payment_modes() {
 }
 
 /**
- * Get Price of trip. Price key is only for old data less than WP Travel @since new-version-number-below legacy version
+ * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version
  */
 function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 
@@ -1126,7 +1126,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 		// Specific listing as per pricing_id to get price.
 		if ( ! empty( $pricing_id ) ) {
 			$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
-			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
+			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
 				if ( ! $price_key && $pricing_id === $category_id ) { // By default we set category_id = pricing_id due to no category_id in listing of legacy version.
 					$price_key = isset( $pricing_options[ $pricing_id ]['price_key'] ) ? $pricing_options[ $pricing_id ]['price_key'] : '';
 				}
@@ -1156,7 +1156,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 			$pricing_option = ! empty( $pricing_id ) && isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
 
-			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
+			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
 
 				if ( isset( $pricing_option['price'] ) ) { // old pricing option.
 					$current_price = $pricing_option['price'];
@@ -1224,7 +1224,7 @@ function wp_travel_get_min_pricing_id( $trip_id ) {
 	// All listings to get min price.
 	foreach ( $pricing_options as $pricing_id => $pricing_option ) {
 
-		if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since new-version-number-below legacy version
+		if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
 			// foreach ( $pricing_options as $pricing_option ) {
 				if ( isset( $pricing_option['price'] ) ) { // old pricing option.
 					$current_price = $pricing_option['price'];

@@ -2272,7 +2272,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								$order_prices = get_post_meta( $booking_id, 'order_totals', true );
 								foreach ( $order_details as $order_detail ) {
 
-									if ( isset( $order_detail['trip'] ) ) { // @since new-version-number.
+									if ( isset( $order_detail['trip'] ) ) { // @since 3.0.0.
 										$total = $order_detail['trip_price'];
 										?>
 										<div class="my-order-price-breakdown-base-price-wrap">
@@ -3023,7 +3023,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 
 	$settings                                       = wp_travel_get_settings();
 	$enable_multiple_category_on_pricing            = $settings['enable_multiple_category_on_pricing'];
-	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since new-version-number
+	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since 3.0.0
 	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 
 		// Price.
@@ -3035,7 +3035,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		// variable used for api data.
 		// End of variable used for api data.
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
-		if ( 'single-price' === $pricing_option_type ) { // Legacy Support for single price option @since new-version-number
+		if ( 'single-price' === $pricing_option_type ) { // Legacy Support for single price option @since 3.0.0
 			$pricing_data = array(
 				'pricing_name'             => 'Default Price',
 				'price_key'                => 'default-pricing',
@@ -3065,7 +3065,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				),
 				'pricing_id'              => 'single-pricing-id',
 			);
-			$pricing['single-pricing'] = $pricing_data; // Legacy single pricing migration @since new-version-number
+			$pricing['single-pricing'] = $pricing_data; // Legacy single pricing migration @since 3.0.0
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
