@@ -235,11 +235,14 @@ Release Date: 11th September, 2019
 
 Enhancement:
 
-* Multiple Pricing Category support in a pricing option. Now, You can assign multiple category like Child, adult in a pricing option. You have to select multiple pricing for this feature with WP Travel Utilities enable.
+* Multiple Pricing Category support in a pricing option. Now, you can assign multiple categories like Child, adult in a pricing option. You have to select multiple pricing for this feature with WP Travel Utilities enable.
+* Pricing layout updated to select pax and price in the trip single page. Now it uses pax picker dropdown to select pax as per pricing category.
+* Meta Structure update for the trip to support Multiple Category on every pricing option.
+* Removed Single Pricing option for New User since WP Travel 3.0.0. Old WP Travel User still have access to use a single pricing option.
 
 Fixes:
 
-* Bank Deposite is not being disabled from the settings.
+* Displaying sale price even pricing has no sale price in case of multiple pricing. When getting min pricing and the min pricing doesn't have any sale price but any of the prices have sale price then the current min price is also treated like it has sale price and displaying sale value same as price value.
 
 = 2.1.1 =
 Release Date: 3rd September, 2019
