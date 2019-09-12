@@ -230,6 +230,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.0.1 =
+Release Date: 
+
+* Fixes: Notice: Undefined variable: pricing_option on helpers file.
+
 = 3.0.0 =
 Release Date: 11th September, 2019
 
