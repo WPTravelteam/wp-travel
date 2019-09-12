@@ -1871,7 +1871,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					</li>
 					<!-- pricing loop -->
 					<?php
-					foreach ( $pricing_data as $pricing ) :
+					foreach ( $pricing_data as $pricing_data_key => $pricing ) :
 
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
