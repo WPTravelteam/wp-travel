@@ -1163,7 +1163,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 					$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
 					$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
 
-					if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+					if ( 'yes' === $enable_sale && $sale_price > 0 && ! $return_regular_price ) {
 						$current_price = $sale_price;
 					}
 
