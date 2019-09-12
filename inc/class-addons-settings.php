@@ -12,7 +12,12 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 	 * Class to generate toggle settings for the addons.
 	 *
 	 * Pass the addon name as the parameter.
-	 * For ex: for the plugin wp travel downloads, add name as WP Travel Downloads
+	 * For ex: for the plugin wp travel multiple currency, add name as WP Travel Multiple Currency
+	 *	==Code snipet==
+	 *  $addon_settings = new WP_Travel_Addons_Settings( 'WP Travel Multiple Currency' );
+	 *  if ( ! ( $addon_settings->is_addon_active() ) ) {
+	 * 	  return;
+	 *  }
 	 */
 	class WP_Travel_Addons_Settings {
 
@@ -35,14 +40,27 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name = strtolower( $plugin_name );
 			$plugin_name = str_replace( ' ', '_', $plugin_name );
 
-			$settings      = wp_travel_get_settings();
-			$enable_addon  = isset( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
-
 			add_filter( 'wp_travel_settings_fields', array( $this, 'settings_fields' ) );
 			add_action( 'wp_travel_addons_setings_tab_fields', array( $this, 'plugin_action' ) );
+
+		}
+
+		/**
+		 * Checks if current addon is active or not.
+		 *
+		 * @return boolean
+		 */
+		public function is_addon_active() {
+			$plugin_name = $this->plugin_name;
+			$plugin_name = strtolower( $plugin_name );
+			$plugin_name = str_replace( ' ', '_', $plugin_name );
+			$settings    = wp_travel_get_settings();
+			$enable_addon = isset( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
+
 			if ( 'yes' !== $enable_addon ) {
-				return;
+				return false;
 			}
+			return true;
 		}
 
 		/**
