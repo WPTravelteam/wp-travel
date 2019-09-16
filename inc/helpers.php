@@ -3071,8 +3071,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
 					$pricing_name    = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : '';
 					$price_key       = isset( $pricing_option['price_key'] ) ? $pricing_option['price_key'] : '';
-					$pricing_min_pax = isset( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
-					$pricing_max_pax = isset( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
+					$pricing_min_pax = ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
+					$pricing_max_pax = ! empty( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
 
 					$pricing_categories = isset( $pricing_option['categories'] ) ? $pricing_option['categories'] : array();
 

@@ -1968,7 +1968,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php endif; ?>
 								<!-- Column: Group Size -->
 								<div class="group-size-min-max">
-									<?php echo esc_html( $pricing['inventory']['min_pax'] . '-' . $pricing['inventory']['max_pax'] ); ?>
+									<?php echo esc_html( $pricing['inventory']['min_pax'] . '-' . $pricing['inventory']['max_pax'] ) . ' ' . $pax_string; ?>
 								</div>
 
 								<?php if ( $unavailable_class !== 'pricing_unavailable' ) : ?>
