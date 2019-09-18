@@ -89,7 +89,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name_replaced = str_replace( ' ', '_', $plugin_name_lower );
 
 			$field_name  = 'show_' . $plugin_name_replaced;
-			$field_label = __( $plugin_name_ucfirst, 'wp-travel-pro' );
+			$field_label = __( $plugin_name_ucfirst, 'wp-travel' );
 
 			$field_value = isset( $settings[ $field_name ] ) ? $settings[ $field_name ] : 'yes'; ?>
 			<table class="form-table">

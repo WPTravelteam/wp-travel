@@ -648,122 +648,6 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_r
 }
 // End of Migrated functions from inc/helpers.php / These prices are only for display.
 
-/**
- * Get Cart Attrs [  Need Enhancement ]
- */
-// function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_price = false, $pricing_id = null ) {
-// 	if ( ! $trip_id ) {
-// 		return 0;
-// 	}
-
-// 	$attrs = [
-// 		'pax_label'       => '', // what is pax_label?
-// 		'max_available'   => '',
-// 		'min_available'   => '',
-// 		'trip_start_date' => '',
-// 		'arrival_date'    => '',
-// 		'departure_date'  => '',
-// 		'trip_extras'     => '',
-// 		'currency'        => '',
-// 		'enable_partial'  => '',
-// 		'trip'            => [],
-// 	];
-
-// 	// Default Pricings.
-// 	$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // Default Trip Price.
-
-// 	if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-// 		$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
-// 		if ( $group_trip_price ) {
-// 			$trip_price = $group_trip_price;
-// 		}
-// 	}
-
-// 	$per_person_text        = wp_travel_get_price_per_text( $trip_id );
-// 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
-
-// 	$pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
-
-// 	if ( '' != $price_key && $enable_pricing_options ) {
-// 		$valid_price_key = wp_travel_is_price_key_valid( $trip_id, $price_key );
-
-// 		if ( $valid_price_key && $enable_pricing_options ) {
-
-// 			$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
-
-// 			if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
-
-// 				foreach ( $pricing_data as $p_ky => $pricing ) :
-// 					// Product Metas.
-// 					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? $_REQUEST['arrival_date'] : '';
-// 					$pricing_default_types = wp_travel_get_pricing_variation_options();
-// 					$pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
-// 					$max_available         = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? true : false;
-// 					$min_available         = isset( $pricing['min_pax'] ) && '' !== $pricing['min_pax'] ? true : false;
-
-// 					if ( $max_available ) {
-// 						$max_available = $pricing['max_pax'];
-// 						// $max_attr = 'max=' . $pricing['max_pax'];
-// 					}
-// 					if ( $min_available ) {
-// 						$min_available = $pricing['min_pax'];
-// 					}
-// 				endforeach;
-// 			}
-// 		}
-// 	} else {
-// 		// Product Metas.
-// 		$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-// 		$max_available   = get_post_meta( $trip_id, 'wp_travel_group_size', true );
-// 		$min_available   = 1;
-// 	}
-
-// 	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-
-// 		$inventory = new WP_Travel_Util_Inventory();
-
-// 		$inventory_enabled = $inventory->is_inventory_enabled( $trip_id );
-// 		$available_pax     = $inventory->get_available_pax( $trip_id, $price_key, $trip_start_date );
-
-// 		if ( $inventory_enabled && $available_pax ) {
-// 			$max_available = $available_pax;
-// 		}
-// 	}
-
-// 	$trip_price = wp_travel_get_formated_price( $trip_price );
-
-// 	if ( $return_price ) {
-// 		return $trip_price;
-// 	}
-
-// 	$attrs = array(
-// 		'pax_label'       => $pax_label,
-// 		'max_available'   => $max_available,
-// 		'min_available'   => $min_available,
-// 		'trip_start_date' => $trip_start_date,
-// 		'arrival_date'    => '',
-// 		'departure_date'  => '',
-// 		'trip_extras'     => '',
-// 		'currency'        => wp_travel_get_currency_symbol(), // added in 1.8.4
-// 	);
-
-// 	$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
-
-// 	// $trip_price_partial = $trip_price;
-// 	// if ( $attrs['enable_partial'] ) {
-// 	// 	$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
-// 	// 	$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
-
-// 	// 	if ( $payout_percent > 0 ) {
-// 	// 		$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-// 	// 		$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
-// 	// 	}
-// 	// 	$attrs['trip_price_partial'] = $trip_price_partial;
-// 	// }
-
-// 	return $attrs;
-
-// }
 
 /**
  * Modified version of previous `wp_travel_get_cart_attrs` function.
@@ -779,27 +663,9 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		return 0;
 	}
 
-	// $attrs = array(
-	// 	'pax_label'       => '', // what is pax_label?
-	// 	'max_available'   => '',
-	// 	'min_available'   => '',
-	// 	'trip_start_date' => '',
-	// 	'currency'        => '',
-	// 	'enable_partial'  => '',
-	// );
-
-	// Default Pricings.
-	// $trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // Default Trip Price.
-
-	// if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-	// 	$group_trip_price = wp_travel_group_discount_price( $trip_id, $price_key, $pax );
-	// 	if ( $group_trip_price ) {
-	// 		$trip_price = $group_trip_price;
-	// 	}
-	// }
-
-	// $per_person_text        = wp_travel_get_price_per_text( $trip_id );
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
+	$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+	$group_size = ! empty( $group_size ) ? $group_size : 999;
 
 	// $pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
 
@@ -817,8 +683,8 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? $_REQUEST['arrival_date'] : '';
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
 					// $pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
-					$max_available         = isset( $pricing['max_pax'] ) && '' !== $pricing['max_pax'] ? $pricing['max_pax'] : '';
-					$min_available         = isset( $pricing['min_pax'] ) && '' !== $pricing['min_pax'] ? $pricing['min_pax'] : '';
+					$max_available         = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
+					$min_available         = ! empty( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1;
 
 					// if ( $max_available ) {
 					// 	$max_available = $pricing['max_pax'];
@@ -833,7 +699,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 	} else {
 		// Product Metas.
 		$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-		$max_available   = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+		$max_available   = $group_size;
 		$min_available   = 1;
 	}
 
@@ -849,44 +715,12 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		}
 	}
 
-	// $trip_price = wp_travel_get_formated_price( $trip_price );
-
-	// if ( $return_price ) {
-	// 	return $trip_price;
-	// }
-
 	$attrs = array(
-		// 'pax_label'       => $pax_label,
 		'max_available'   => $max_available,
 		'min_available'   => $min_available,
 		'trip_start_date' => $trip_start_date,
-		// 'arrival_date'    => '',
-		// 'departure_date'  => '',
-		// 'trip_extras'     => '',
 		'currency'        => wp_travel_get_currency_symbol(), // added in 1.8.4
 	);
-	// $attrs = array(
-	// 	// 'pax_label'       => '', // what is pax_label?
-	// 	'max_available'   => $max_available,
-	// 	'min_available'   => $min_available,
-	// 	'trip_start_date' => '',
-	// 	'currency'        => '',
-	// 	'enable_partial'  => '',
-	// );
-
-	// $attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
-
-	// $trip_price_partial = $trip_price;
-	// if ( $attrs['enable_partial'] ) {
-	// 	$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
-	// 	$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
-
-	// 	if ( $payout_percent > 0 ) {
-	// 		$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-	// 		$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
-	// 	}
-	// 	$attrs['trip_price_partial'] = $trip_price_partial;
-	// }
 
 	return $attrs;
 

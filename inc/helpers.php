@@ -3009,7 +3009,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$days               = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
 	$night              = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
 	$default_group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
-	$default_group_size = ! empty( $default_group_size ) ? $default_group_size : 99;
+	$default_group_size = ! empty( $default_group_size ) ? $default_group_size : 999;
 
 	// Fixed Departures
 	$fixed_departure         = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
