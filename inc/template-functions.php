@@ -1968,7 +1968,13 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php endif; ?>
 								<!-- Column: Group Size -->
 								<div class="group-size-min-max">
-									<?php echo esc_html( $pricing['inventory']['min_pax'] . '-' . $pricing['inventory']['max_pax'] ); ?>
+									<?php
+									if ( $pricing['inventory']['max_pax'] < 999 ) {
+										echo esc_html( $pricing['inventory']['min_pax'] . ' - ' . $pricing['inventory']['max_pax'] . ' ' . $pax_string );
+									} else {
+										echo esc_html( $pricing['inventory']['min_pax'] . $pax_string . ' - ' . __( 'No size limit', 'wp-travel' ) );
+									}
+									?>
 								</div>
 
 								<?php if ( $unavailable_class !== 'pricing_unavailable' ) : ?>
@@ -1989,7 +1995,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 												endif;
 												?>
 
-												<div class="category available-seats">
+												<div class="category available-seats" style="<?php echo ( (int) $pricing['inventory']['max_pax'] < 999 ) ? '' : 'display:none';  ?>">
 													<?php echo esc_html__( 'Available Seats: ', 'wp-travel' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 												</div>
 												<?php
@@ -2006,10 +2012,11 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 																		<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
 																		<span class="min-max-pax">
 																			(<?php
-																				if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
+																				if ( ! empty( $pricing['inventory']['max_pax'] ) && $pricing['inventory']['max_pax'] < 999 ) {
 																					echo sprintf( '%s - %s %s', $min, $max, $pax_string );
 																				} else {
-																					echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+
+																					echo sprintf( '%s %s - %s', $min, $pax_string, __( 'No size limit.', 'wp-travel' ) );
 																				}
 																			?>)
 																		</span>
@@ -2293,7 +2300,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 												endif;
 												?>
 
-												<div class="category available-seats">
+												<div class="category available-seats" style="<?php echo ( (int) $pricing['inventory']['max_pax'] < 999 ) ? '' : 'display:none';  ?>">
 													<?php echo esc_html( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 												</div>
 												<?php

@@ -221,7 +221,7 @@ function wp_travel_new_pricing_list_admin() {
 														<label for="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_min_pax" class="one-third"><?php esc_html_e( 'Min Pax:', 'wp-travel' ); ?></label>
 														<div class="two-third">
 															<div class="field-input">
-																<input class="pricing-opt-min-pax" required type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][min_pax]" value="<?php echo esc_attr( $pricing_min_pax ); ?>" min="1">
+																<input class="pricing-opt-min-pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][min_pax]" value="<?php echo esc_attr( $pricing_min_pax ); ?>" min="1">
 															</div>
 														</div>
 													</div>
@@ -229,7 +229,7 @@ function wp_travel_new_pricing_list_admin() {
 														<label for="pricing_name_<?php echo esc_attr( $pricing_id ); ?>_max_pax" class="one-third"><?php esc_html_e( 'Max Pax:', 'wp-travel' ); ?></label>
 														<div class="two-third">
 															<div class="field-input">
-																<input class="pricing-opt-max-pax" required type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][max_pax]" value="<?php echo esc_attr( $pricing_max_pax ); ?>" min="1">
+																<input class="pricing-opt-max-pax" type="number" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][max_pax]" value="<?php echo esc_attr( $pricing_max_pax ); ?>" min="1">
 															</div>
 														</div>
 													</div>
@@ -411,13 +411,13 @@ function wp_travel_new_pricing_list_admin() {
 									<div class="repeat-row">
 										<label for="pricing_name_{{data.random}}_min_pax" class="one-third"><?php esc_html_e( 'Min Pax:', 'wp-travel' ); ?></label>
 										<div class="two-third">
-											<input class="wp-travel-variation-pricing-min-pax" required="required" type="number" id="pricing_name_{{data.random}}_min_pax" name="wp_travel_pricing_options[{{data.random}}][min_pax]" value="" min="1">
+											<input class="wp-travel-variation-pricing-min-pax" type="number" id="pricing_name_{{data.random}}_min_pax" name="wp_travel_pricing_options[{{data.random}}][min_pax]" value="" min="1">
 										</div>
 									</div>
 									<div class="repeat-row">
 										<label for="pricing_name_{{data.random}}_max_pax" class="one-third"><?php esc_html_e( 'Max Pax:', 'wp-travel' ); ?></label>
 										<div class="two-third">
-											<input class="wp-travel-variation-pricing-max-pax" required="required" type="number" id="pricing_name_{{data.random}}_max_pax" name="wp_travel_pricing_options[{{data.random}}][max_pax]" value="" min="1">
+											<input class="wp-travel-variation-pricing-max-pax" type="number" id="pricing_name_{{data.random}}_max_pax" name="wp_travel_pricing_options[{{data.random}}][max_pax]" value="" min="1">
 										</div>
 									</div>
 									<div class="repeat-row">
