@@ -3065,6 +3065,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				),
 				'pricing_id'              => 'single-pricing-id',
 			);
+			if ( 'no' === $fixed_departure ) {
+				$pricing_data['trip_duration_days'] = $days;
+				$pricing_data['trip_duration_night'] = $night;
+			}
 			$pricing['single-pricing'] = $pricing_data; // Legacy single pricing migration @since 3.0.0
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :
