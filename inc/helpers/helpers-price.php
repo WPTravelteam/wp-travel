@@ -839,18 +839,19 @@ function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
  * @param Number  $price         Price.
  * @param Boolean $regular_price Is price regular or sale price.
  * @param String  $price_key     Price key of the price. It is only required for some customization.
+ * @param int     $post_id       Can be booking id or trip id @since 3.0.2
  *
  * @since 2.0.1 / 2.0.3
  *
  * @return Mixed
  */
-function wp_travel_get_formated_price_currency( $price, $regular_price = false, $price_key = '' ) {
+function wp_travel_get_formated_price_currency( $price, $regular_price = false, $price_key = '', $post_id = null ) {
 	$settings          = wp_travel_get_settings();
 	$currency_position = isset( $settings['currency_position'] ) ? $settings['currency_position'] : 'left';
 
 	$filter_name     = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
 	$price_class     = 'wp-travel-trip-price-figure';
-	$currency_symbol = apply_filters( 'wp_travel_display_currency_symbol', wp_travel_get_currency_symbol() );
+	$currency_symbol = apply_filters( 'wp_travel_display_currency_symbol', wp_travel_get_currency_symbol(), $post_id );
 	if ( $regular_price ) {
 		$filter_name = 'wp_travel_itinerary_price';
 		$price_class = 'wp-travel-regular-price-figure';

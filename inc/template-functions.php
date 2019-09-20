@@ -425,7 +425,8 @@ function wp_travel_single_excerpt( $post_id ) {
 				<div class="travel-info">
 					<span class="value">
 						<?php
-						if ( $group_size = wp_travel_get_group_size( $post_id ) ) {
+						$group_size = wp_travel_get_group_size( $post_id );
+						if ( (int) $group_size && $group_size < 999 ) {
 							printf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ), esc_html( $group_size ) );
 						} else {
 							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No size limit', 'wp-travel' ) ) );

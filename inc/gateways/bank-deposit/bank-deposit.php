@@ -112,7 +112,7 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 			?>
 			<div class="wp-travel-form-field  wp-travel-text-info">
 				<label for="wp-travel-amount-info"><?php _e( 'Amount', 'wp-travel' ); ?></label>
-				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'] ); ?></div>
+				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'], false, '', $booking_id ); ?></div>
 			</div>
 		<?php endif; ?>
 		<div class="wp-travel-bank-deposit-wrap">
@@ -176,7 +176,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 		'default' => $booking_id,
 	);
 	?>
-	<div class="wp-travel-bank-deposit-wrap">		
+	<div class="wp-travel-bank-deposit-wrap">
 		<div id="wp-travel-bank-deposit-content" class="wp-travel-popup" >
 			<h3 class="popup-title"><?php esc_html_e( 'Submit Bank Payment Receipt', 'wp-travel' ); ?></h3>
 			<?php $form->init( $form_options )->fields( $bank_deposit_fields )->template(); ?>

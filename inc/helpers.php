@@ -2281,10 +2281,10 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 												<span class="my-order-tail">
 													<?php if ( ! empty( $order_detail['trip'] ) ) : ?>
 														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) : ?>
-															<span class="my-order-price-detail">(<?php echo esc_attr( $trip['pax'] ) . ' x ' . wp_travel_get_formated_price_currency( $trip['price'] ); ?>) </span>
+															<span class="my-order-price-detail">(<?php echo esc_attr( $trip['pax'] ) . ' x ' . wp_travel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
 														<?php endforeach; ?>
 													<?php endif; ?>
-													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
+													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total, false, '', $booking_id  ); ?></span>
 												</span>
 											</div>
 										</div>
@@ -2299,8 +2299,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 											<div class="my-order-price-breakdown-base-price">
 												<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
 												<span class="my-order-tail">
-													<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price ); ?>) </span>
-													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
+													<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price, false, '', $booking_id  ); ?>) </span>
+													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total, false, '', $booking_id  ); ?></span>
 												</span>
 											</div>
 										</div>
@@ -2328,8 +2328,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 												$total = $price * $qty;
 												?>
 												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wp_travel_get_formated_price_currency( $price ); ?>)</span>
-													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $total ); ?></span>
+													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wp_travel_get_formated_price_currency( $price, false, '', $booking_id  ); ?>)</span>
+													<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $total, false, '', $booking_id  ); ?></span>
 												</div>
 											<?php endforeach; ?>
 
@@ -2345,7 +2345,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ); ?></span>
 										<span class="my-order-tail">
 											<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' ' . __( 'Person/s', 'wp-travel' ); ?> </span>
-											<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'] ); ?></span>
+											<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); ?></span>
 										</span>
 									</div>
 								</div>
@@ -2356,26 +2356,26 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							<div class="my-order-price-breakdown-summary clearfix">
 								<div class="my-order-price-breakdown-sub-total">
 									<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'] ); ?></span>
+									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); ?></span>
 								</div>
 
 								<?php if ( $details['discount'] ) : ?>
 									<div class="my-order-price-breakdown-coupon-amount">
 										<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
-										<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_formated_price_currency( $details['discount'] ); ?></span>
+										<span class="my-order-tail my-order-right">- <?php echo wp_travel_get_formated_price_currency( $details['discount'], false, '', $booking_id ); ?></span>
 									</div>
 								<?php endif; ?>
 
 								<div class="my-order-price-breakdown-tax-due">
 									<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
-									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['tax'] ); ?></span>
+									<span class="my-order-tail my-order-right"><?php echo wp_travel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); ?></span>
 								</div>
 							</div>
 						</div>
 						<div class="my-order-single-total-price clearfix">
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo wp_travel_get_formated_price_currency( $details['total'] ); ?></span>
+								<span class="my-order-tail"><?php echo wp_travel_get_formated_price_currency( $details['total'], false, '', $booking_id ); ?></span>
 							</div>
 						</div>
 					</div>
@@ -2467,7 +2467,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 						<td>
 							<?php
 							if ( $payment_amount > 0 ) :
-								echo wp_travel_get_formated_price_currency( $payment_amount );
+								echo wp_travel_get_formated_price_currency( $payment_amount, false, '', $booking_id );
 							endif;
 							?>
 						</td>
@@ -3065,6 +3065,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				),
 				'pricing_id'              => 'single-pricing-id',
 			);
+			if ( 'no' === $fixed_departure ) {
+				$pricing_data['trip_duration_days'] = $days;
+				$pricing_data['trip_duration_night'] = $night;
+			}
 			$pricing['single-pricing'] = $pricing_data; // Legacy single pricing migration @since 3.0.0
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :

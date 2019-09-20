@@ -155,7 +155,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $total_price ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $total_price, false, '', $b_id ); ?> </span>
 									</strong>
 									</p>
 									</div>
@@ -164,7 +164,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $paid_amount ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $paid_amount, false, '', $b_id ); ?> </span>
 									</strong>
 									</p>
 									</div>
