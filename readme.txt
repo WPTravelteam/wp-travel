@@ -233,7 +233,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 3.0.2 =
 Release Date:
 
-* Fixes: Single Page Group Pax Fixes.
+* Fixes: Shows No Size limit when No max-limit.
 * Fixes: Single Pricing Date Selector fixes for duration option.
 
 = 3.0.1 =
