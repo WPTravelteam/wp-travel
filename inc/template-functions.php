@@ -2056,12 +2056,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php else: ?>
 								<div class="group-size">&nbsp;</div>
 								<?php endif; ?>
-								<?php
-									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
-									$range_alert = $pax_alerts['range'];
-									$required_alert = $pax_alerts['required'];
-								?>
-
+								
 								<!-- Column: Action -->
 								<div class="action">
 									<?php
@@ -2279,18 +2274,14 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										<?php endif; ?>
 									</span>
 								<?php endif; ?>
-								<?php
-									$pax_alerts = wp_travel_pax_alert_message( $min, $max );
-									$range_alert = $pax_alerts['range'];
-									$required_alert = $pax_alerts['required'];
-								?>
+								
 								<?php if ( $unavailable_class !== 'pricing_unavailable' ) : ?>
 									<div class="group-size pax-selection">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
 												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
 											</div>
-											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
+											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ) ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
 												<?php
 												if ( $is_inventory_enabled ) :

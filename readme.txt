@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.2
+Stable tag: 3.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,14 +230,25 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.0.3 =
+Release Date: 23rd September, 2019
+
+* Fixes: Undefined index if PAX limit reached. If Inventory is on and booked all available PAX, then undefined index $min and $max is showing in log.
+* Fixes: Displayed group size value in the featured section of single trip page.
+* Fixes: Booking can be made even selected pax is less than min pax in Fixed departure listing.
+
+Enhancement:
+
+* Support for multiple currency symbols. It will enable Multiple currencies for all of your trips. For this, You need to WP Travel Pro with multiple Currency enabled.
+
 = 3.0.2 =
-Release Date:
+Release Date: 20th September, 2019
 
 * Fixes: Shows No Size limit when No max-limit.
 * Fixes: Single Pricing Date Selector fixes for duration option.
 
 = 3.0.1 =
-Release Date:
+Release Date: 18th September, 2019
 
 * Fixes: Notice: Undefined variable: pricing_option on helpers file.
 * Fixes: Min-max pax is no-more required on pricing category.
