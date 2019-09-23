@@ -110,15 +110,16 @@ class WP_Travel_Itinerary {
 		// $pricing_option = ( isset( $this->post_meta['wp_travel_pricing_option_type'][0] ) && ! empty( $this->post_meta['wp_travel_pricing_option_type'][0] ) ) ? $this->post_meta['wp_travel_pricing_option_type'][0] : 'single-price';
 		$pricing_option = wp_travel_get_pricing_option_type();
 		$group_size     = 0;
-		if ( 'single-price' === $pricing_option ) {
-			if (
-				isset( $this->post_meta['wp_travel_group_size'][0] )
-				&& '' !== $this->post_meta['wp_travel_group_size'][0]
-			) {
-				return (int) $this->post_meta['wp_travel_group_size'][0];
-			}
-		} else {
+		if ( 'single-price' === $pricing_option || 'multiple-price' === $pricing_option ) {
 
+			// Single Pricing.
+			if ( 'single-price' === $pricing_option ) {
+				if ( isset( $this->post_meta['wp_travel_group_size'][0] ) && '' !== $this->post_meta['wp_travel_group_size'][0] ) {
+					return (int) $this->post_meta['wp_travel_group_size'][0];
+				}
+			}
+
+			// Multiple Pricing.
 			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
@@ -134,7 +135,11 @@ class WP_Travel_Itinerary {
 				}
 			}
 
-			if (  $group_size ) {
+			if ( ! $group_size && isset( $this->post_meta['wp_travel_group_size'][0] ) && '' !== $this->post_meta['wp_travel_group_size'][0] ) {
+				return (int) $this->post_meta['wp_travel_group_size'][0];
+			}
+
+			if ( $group_size ) {
 				return (int) $group_size;
 			}
 		}
