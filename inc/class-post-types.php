@@ -60,7 +60,7 @@ class WP_Travel_Post_Types {
 			'supports'           => array( 'title', 'comments', 'excerpt' ),
 			'menu_icon'          => 'dashicons-location',
 			'menu_position'      => 30,
-
+			'show_in_rest'       => true,
 		);
 		/**
 		 * Register a itineraries post type.
@@ -109,6 +109,7 @@ class WP_Travel_Post_Types {
 			'menu_icon'          => 'dashicons-wp-travel',
 			'with_front'         => true,
 			'menu_position'      => 30,
+			'show_in_rest'       => true,
 		);
 		/**
 		 * Register a itinerary-booking post type.
@@ -157,6 +158,7 @@ class WP_Travel_Post_Types {
 			'supports'           => array( 'title' ),
 			'menu_icon'          => 'dashicons-help',
 			'with_front'         => true,
+			'show_in_rest'       => true,
 		);
 		/**
 		 * Register a itinerary-booking post type.
@@ -251,6 +253,7 @@ class WP_Travel_Post_Types {
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'thumbnail' ),
 			'menu_icon'          => 'dashicons-wp-travel',
+			'show_in_rest'       => true,
 		);
 
 		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args );
