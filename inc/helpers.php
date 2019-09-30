@@ -2135,8 +2135,20 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 								<span class="my-order-tail"><?php echo $travel_date; ?></span>
 							</div>
 
-							<!-- Hook to add booking time details at booking-->
-							<?php do_action( 'wp_travel_booked_times_details', $order_details ); ?>
+							<?php
+							/**
+							 * Hook to add booking time details at booking.
+							 * Will be deprecated in future, use wp_travel_after_bookings_travel_date instead.
+							 * @todo Must deprecate this hook letter.
+							 */
+							do_action( 'wp_travel_booked_times_details', $order_details );
+
+							/**
+							 * @since 3.0.4
+							 */
+							do_action( 'wp_travel_after_bookings_travel_date', $order_details );
+
+							?>
 						</div>
 						<div class="col-md-6">
 							<?php

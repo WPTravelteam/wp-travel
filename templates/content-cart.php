@@ -160,6 +160,16 @@ wp_travel_print_notices();
 								<?php
 								$group_size       = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 								$total_booked_pax = wp_travel_get_total_booked_pax( $trip_id, false );
+
+								/**
+								 * @since 3.0.4
+								 */
+								$args = array(
+									'trip_id'  => $trip_id,
+									'price_id' => $trip['pricing_id'],
+									'cart_id'  => $cart_id,
+								);
+								do_action( 'wp_travel_cart_before_product_subtotal', $args );
 								?>
 								<input type="hidden" class="wp-travel-customize-group-size" value="<?php echo esc_attr( $group_size ); ?>" >
 								<input type="hidden" class="wp-travel-customize-booked-group-size" value="<?php echo esc_attr( $total_booked_pax ); ?>" >
