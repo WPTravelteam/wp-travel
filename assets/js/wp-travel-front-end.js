@@ -399,7 +399,6 @@ jQuery(document).ready(function ($) {
             })
         }
 
-        console.log( 'selected ' +  selectedPax + ' min pax ' + min_pax );
         selectedPax < min_pax && pricing_form.find('input[type=submit]').attr('disabled', 'disabled').css({'opacity' : '.5'}) || pricing_form.find('input[type=submit]').removeAttr('disabled').removeAttr('style');
         var display_value = '';
         var pax_input = '';
