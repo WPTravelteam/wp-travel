@@ -714,6 +714,10 @@ function wp_travel_get_payment_status() {
 			'color' => '#FF9800',
 			'text'  => __( 'Pending', 'wp-travel' ),
 		),
+		'partially_paid'   => array(
+			'color' => '#FF9800',
+			'text'  => __( 'Partially Paid', 'wp-travel' ),
+		),
 		'paid'             => array(
 			'color' => '#008600',
 			'text'  => __( 'Paid', 'wp-travel' ),
