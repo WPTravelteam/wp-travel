@@ -2004,7 +2004,6 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													foreach ( $pricing_categories as $category_id =>  $pricing_category ) {
 														$max      = apply_filters( 'wp_travel_pricing_max_pax', $pricing['inventory']['max_pax'], $pricing['pricing_id'] );
 														$min      = apply_filters( 'wp_travel_pricing_min_pax', $pricing['inventory']['min_pax'], $pricing['pricing_id'] );
-														error_log($min, $max);
 														$max_attr = "max={$max}";
 														$min_attr = "min={$min}";
 														$step     = apply_filters( 'wp_travel_pricing_pax_step', 1, $pricing['pricing_id'] );
