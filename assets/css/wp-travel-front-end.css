@@ -2587,9 +2587,6 @@ ul.availabily-list .availabily-heading {
 ul.availabily-list .availabily-heading .date-from:after {
   content: none;
 }
-ul.availabily-list .availabily-content input[type=number], ul.availabily-list .availabily-content .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type=number], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field ul.availabily-list .availabily-content select[type=number], ul.availabily-list .availabily-content .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type=number], .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field ul.availabily-list .availabily-content textarea[type=number] {
-  width: 70%;
-}
 ul.availabily-list .availabily-content .btn {
   padding: 8px 15px;
   border: 1px solid #8b8b8b;
