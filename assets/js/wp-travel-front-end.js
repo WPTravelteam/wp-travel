@@ -378,15 +378,22 @@ jQuery(document).ready(function ($) {
             var current_val = (input.val()) ? parseInt(input.val()) : 0;
             $('#' + parent_id).find('.available-seats').find('span').text(function () {
                 // var seats = parseInt($(this).text())
+                var step = parseInt( jQuery(input).attr('step') );
                 if ($(el).hasClass('pax-picker-plus') && available_pax > 0) {
-                    document.getElementById(parent_id).dataset.availablePax = --available_pax;
-                    document.getElementById(parent_id).dataset.selectedPax = ++selectedPax
-                    input.removeAttr('disabled').val(++current_val).trigger('change')
+                    available_pax = available_pax - step;
+                    selectedPax = selectedPax + step;
+                    current_val = current_val + step;
+                    document.getElementById(parent_id).dataset.availablePax = available_pax;
+                    document.getElementById(parent_id).dataset.selectedPax = selectedPax
+                    input.removeAttr('disabled').val(current_val).trigger('change')
                     return available_pax;
                 } else if ($(el).hasClass('pax-picker-minus') && current_val > 0) {
-                    document.getElementById(parent_id).dataset.availablePax = ++available_pax;
-                    document.getElementById(parent_id).dataset.selectedPax = --selectedPax
-                    input.removeAttr('disabled').val(--current_val).trigger('change')
+                    available_pax = available_pax + step;
+                    selectedPax = selectedPax - step;
+                    current_val = current_val - step;
+                    document.getElementById(parent_id).dataset.availablePax = available_pax;
+                    document.getElementById(parent_id).dataset.selectedPax = selectedPax
+                    input.removeAttr('disabled').val(current_val).trigger('change')
                     return available_pax;
                 }
             })
