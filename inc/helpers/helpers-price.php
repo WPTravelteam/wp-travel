@@ -826,11 +826,17 @@ function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
 	if ( ! $price ) {
 		return 0;
 	}
-	$settings           = wp_travel_get_settings();
-	$thousand_separator = '';
-	$decimal_separator  = $settings['decimal_separator'];
-	$number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
-	return number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
+
+	// $settings           = wp_travel_get_settings();
+	// $thousand_separator = '';
+	// $decimal_separator  = $settings['decimal_separator'];
+	// $number_of_decimals = isset( $settings['number_of_decimals'] ) && ! empty( $settings['number_of_decimals'] ) ? $settings['number_of_decimals'] : 0;
+	/**
+	 * Defaults to all the currency to fix the issue caused by formatting.
+	 *
+	 * @since wp-travel v3.0.4
+	 */
+	return number_format( $price, $number_of_decimals, '.', '' );
 }
 
 /**
