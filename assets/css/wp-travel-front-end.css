@@ -31,7 +31,7 @@ ul.availabily-list.additional-col li > div.paxpicker {
 }
 
 .paxpicker.is-active .pricing-categories {
-  z-index: 11;
+  z-index: 401;
 }
 
 .paxpicker.is-active .participants-summary-container {
