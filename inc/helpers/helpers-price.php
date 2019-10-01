@@ -821,8 +821,12 @@ function wp_travel_get_min_price_key( $options ) {
 
 /**
  * Used For Calculation purpose. for display purpose use wp_travel_get_formated_price_currency.
+ *
+ * @param int $price Amount to be formatted.
+ * @param int $format If true should be formatted according to the WP Travel Number fomatting Setting @since WP Travel v3.0.4
+ * @param int $number_of_decimals Number after decimal .00.
  */
-function wp_travel_get_formated_price( $price, $number_of_decimals = 2 ) {
+function wp_travel_get_formated_price( $price, $format = true, $number_of_decimals = 2 ) {
 	if ( ! $price ) {
 		return 0;
 	}
