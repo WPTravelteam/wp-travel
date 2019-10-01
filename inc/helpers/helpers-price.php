@@ -833,7 +833,7 @@ function wp_travel_get_formated_price( $price, $format = true, $number_of_decima
 	$price = filter_var( $price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 
 	if ( ! $format ) {
-		return number_format( $price, $number_of_decimals );
+		return number_format( $price, $number_of_decimals, '.', '' );
 	}
 	$settings           = wp_travel_get_settings();
 	$thousand_separator = '';
