@@ -536,7 +536,7 @@ class WP_Travel_Cart {
 			endforeach;
 		}
 
-		$cart_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $cart_total ) );
+		$cart_total = apply_filters( 'wp_travel_cart_sub_total', wp_travel_get_formated_price( $cart_total, false ) );
 
 		// Discounts Calculation.
 		if ( ! empty( $discounts ) && $with_discount ) { // $with_discount will help to get actual total while calculating discount.
@@ -570,18 +570,18 @@ class WP_Travel_Cart {
 		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial;
 
 		$get_total = array(
-			'cart_total'         => wp_travel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
-			'discount'           => wp_travel_get_formated_price( $discount_amount ),
-			'sub_total'          => wp_travel_get_formated_price( $total_trip_price_after_dis ),
-			'tax'                => wp_travel_get_formated_price( $tax_amount ),
-			'total'              => wp_travel_get_formated_price( $total_trip_price ),
+			'cart_total'         => wp_travel_get_formated_price( $cart_total, false ), // Effective for multiple cart items[cart_total].
+			'discount'           => wp_travel_get_formated_price( $discount_amount, false ),
+			'sub_total'          => wp_travel_get_formated_price( $total_trip_price_after_dis, false ),
+			'tax'                => wp_travel_get_formated_price( $tax_amount, false ),
+			'total'              => wp_travel_get_formated_price( $total_trip_price, false ),
 
 			// Total payble amount // Same as above price if partial payment not enabled.
-			'cart_total_partial' => wp_travel_get_formated_price( $cart_total_partial ),
-			'discount_partial'   => wp_travel_get_formated_price( $discount_amount_partial ),
-			'sub_total_partial'  => wp_travel_get_formated_price( $total_trip_price_partial_after_dis ),
-			'tax_partial'        => wp_travel_get_formated_price( $tax_amount_partial ),
-			'total_partial'      => wp_travel_get_formated_price( $total_trip_price_partial ),
+			'cart_total_partial' => wp_travel_get_formated_price( $cart_total_partial, false ),
+			'discount_partial'   => wp_travel_get_formated_price( $discount_amount_partial, false ),
+			'sub_total_partial'  => wp_travel_get_formated_price( $total_trip_price_partial_after_dis, false ),
+			'tax_partial'        => wp_travel_get_formated_price( $tax_amount_partial, false ),
+			'total_partial'      => wp_travel_get_formated_price( $total_trip_price_partial, false ),
 		);
 
 		$get_total = apply_filters( 'wp_travel_cart_get_total_fields', $get_total );

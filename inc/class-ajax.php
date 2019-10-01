@@ -184,8 +184,8 @@ class WP_Travel_Ajax {
 				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
-					'price'         => wp_travel_get_formated_price( $category_price ),
-					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'price'         => wp_travel_get_formated_price( $category_price, false ),
+					'price_partial' => wp_travel_get_formated_price( $category_price_partial, false ),
 					'type'          => isset( $category['type'] ) ? $category['type'] : '', // Not set yet.
 					'price_per'     => isset( $category['price_per'] ) ? $category['price_per'] : 'person',
 				);
@@ -217,7 +217,7 @@ class WP_Travel_Ajax {
 				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since 3.0.0
 					'pax'           => $pax,
 					'price'         => $price,
-					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'price_partial' => wp_travel_get_formated_price( $category_price_partial, false ),
 					'type'          => 'adult', // Not set yet.
 					'price_per'     => $price_per,
 					'trip_price'    => $trip_price,
@@ -240,7 +240,7 @@ class WP_Travel_Ajax {
 
 			if ( $payout_percent > 0 ) {
 				$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-				$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+				$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial, false );
 			}
 			$attrs['trip_price_partial'] = $trip_price_partial;
 		}
