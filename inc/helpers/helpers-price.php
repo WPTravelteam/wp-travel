@@ -92,10 +92,10 @@ function wp_travel_is_enable_sale( $post_id, $price_key = null ) {
 	$pricing_option_type = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
 	$enable_sale         = false;
 
+	$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 	if ( 'single-price' === $pricing_option_type ) {
 		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 	} elseif ( 'multiple-price' === $pricing_option_type ) {
-		$pricing_options = get_post_meta( $post_id, 'wp_travel_pricing_options', true );
 
 		if ( $price_key & ! empty( $price_key ) ) { // checks in indivicual pricing key [specific pricing is enabled in trip].
 			if ( isset( $pricing_options[ $price_key ]['enable_sale'] ) && 'yes' === $pricing_options[ $price_key ]['enable_sale'] ) {
