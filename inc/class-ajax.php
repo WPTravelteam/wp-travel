@@ -206,6 +206,7 @@ class WP_Travel_Ajax {
 			$price_per  = ! empty( get_post_meta( $trip_id, 'wp_travel_price_per', true ) ) ? get_post_meta( $trip_id, 'wp_travel_price_per', true ) : 'person';
 			// multiply category_price by pax to add in trip price if price per is person.
 			$price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // per price
+			$price = $trip_price;
 			if ( wp_travel_is_partial_payment_enabled() ) {
 				$percent                = wp_travel_get_actual_payout_percent( $trip_id );
 				$category_price_partial = ( $trip_price * $percent ) / 100;
