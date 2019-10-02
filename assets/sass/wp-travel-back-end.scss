@@ -1198,7 +1198,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             }
             .field-price-currency-input{
                 input{
-                    padding-left: 30px !important;
+                    padding-left: 45px !important;
                 }
             }
             @media screen and (max-width: 1366.99px) {
@@ -1460,6 +1460,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     text-align: center;
     line-height: 28px;
     border: 1px solid #ddd;
+    padding: 0 !important;
 }
 
 //pricing tab css

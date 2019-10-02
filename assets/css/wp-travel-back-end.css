@@ -3706,7 +3706,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .stat-toolbar-form .field-group .form-horizontal .date-accordion .new-category-row .new-category-repeator > .repeat-row .field-price-currency-input textarea,
 .date-accordion .new-category-row .new-category-repeator > .repeat-row .field-price-currency-input .form-horizontal .stat-toolbar-form .field-group textarea,
 .form-horizontal .stat-toolbar-form .field-group .date-accordion .new-category-row .new-category-repeator > .repeat-row .field-price-currency-input textarea {
-  padding-left: 30px !important;
+  padding-left: 45px !important;
 }
 @media screen and (max-width: 1366.99px) {
   .price-accordion .new-category-row.new-category-row-heading > .repeat-row input.pricing-opt-min-pax, .price-accordion .new-category-row.new-category-row-heading > .repeat-row .wp-travel-form-field select.pricing-opt-min-pax, .wp-travel-form-field .price-accordion .new-category-row.new-category-row-heading > .repeat-row select.pricing-opt-min-pax,
@@ -4470,6 +4470,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   text-align: center;
   line-height: 28px;
   border: 1px solid #ddd;
+  padding: 0 !important;
 }
 
 .table-inside-heading th {

@@ -192,7 +192,13 @@ class WP_Travel_Gateway_Paypal_Request {
 			$agrs_index = 1;
 			foreach ( $items as $cart_id => $item ) {
 				$trip_id    = $item['trip_id'];
-				$pax        = $item['pax'];
+				// $pax        = $item['pax'];
+				/**
+				 * Since We are sending calculated total trip price.
+				 *
+				 * @since 3.0.4
+				 */
+				$pax        = 1;
 				$trip_price = $item['trip_price'];
 
 				$item_name = html_entity_decode( get_the_title( $trip_id ) );
