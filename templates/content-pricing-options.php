@@ -60,7 +60,7 @@ $pricing_option_type = wp_travel_get_pricing_option_type( $trip_id ); ?>
 						// Date listing template.
 						do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data ); // Need To deprecate.
 						do_action( 'wp_travel_booking_fixed_departure_list', $trip_id );
-						
+
 					} else {
 						do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data ); // Neeed to deprecate.
 						do_action( 'wp_travel_booking_default_princing_list', $trip_id );

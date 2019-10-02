@@ -3158,6 +3158,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 									// Inventory option in multiple dates.
 									$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
 
+									$pricing_data['date_id']        = $date_options_key;
 									$pricing_data['arrival_date']   = $start_date;
 									$pricing_data['departure_date'] = $end_date;
 									$pricing_data['date_label']     = $date_label;

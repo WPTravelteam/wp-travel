@@ -1873,7 +1873,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 					<!-- pricing loop -->
 					<?php
 					foreach ( $pricing_data as $pricing_data_key => $pricing ) :
-
+						$date_id            = isset( $pricing['date_id'] ) ? $pricing['date_id'] : 0;
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
 						$parent_id = 'wp-travel-pricing-wrap';
@@ -2076,7 +2076,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 											<?php
 										}
 										// @since 1.9.3 To display group discount pricing lists.
-										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
+										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'], $date_id );
 									endif;
 									?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
