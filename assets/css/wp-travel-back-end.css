@@ -1601,6 +1601,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   text-align: center;
   line-height: 28px;
   border: 1px solid #ddd;
+  padding: 0 !important;
 }
 
 .table-inside-heading th {
