@@ -319,14 +319,15 @@ class WP_Travel_Cart {
 					}
 					$category_price_partial = $category_price;
 
+					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
+					if ( wp_travel_is_partial_payment_enabled() ) {
+						$percent = wp_travel_get_actual_payout_percent( $trip_id );
+						$category_price_partial = ( $category_price * $percent ) / 100;
+					}
 					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price'] = $category_price;
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
 
-					if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
-						$percent = wp_travel_get_actual_payout_percent( $trip_id );
-						$category_price_partial = ( $category_price * $percent ) / 100;
-					}
 					// multiply category_price by pax to add in trip price if price per is person.
 					if ( 'person' == $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price *= $pax_value;
