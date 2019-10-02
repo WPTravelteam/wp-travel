@@ -134,6 +134,8 @@ function wp_travel_get_enquiries_form( $trips_dropdown = false ) {
 				'required' => true,
 			),
 			'priority'          => 500,
+			'wrapper_class' => 'wp-travel-enquiry-gdpr-section',
+
 		);
 
 	}
