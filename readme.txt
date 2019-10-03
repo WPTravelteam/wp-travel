@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,14 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.0.5 =
+Release Date: 3rd October, 2019
+
+* Fixes: Book Now buttons hidden conflict with bootstrap accordion on the checkout page.
+* Fixes: Invalid argument supplied for foreach() in helpers-price.php in case of no pricing option added in admin Dates and Price Tab.
+* Fixes: Added a separate class for each form field in the Enquiry form so that it would be easy to give the precise fix.
+* Fixes: Pax Picker input field layout issue in Firefox.
 
 = 3.0.4 =
 Release Date: 2nd October, 2019

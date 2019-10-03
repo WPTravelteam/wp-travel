@@ -5455,3 +5455,8 @@ li {
         }
     }
 }
+
+// Booking form fixes for bootstrap
+#wp-travel-booking .collapse:not(.show){
+    display: block !important;
+ }
