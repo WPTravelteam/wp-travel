@@ -5230,7 +5230,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   color: #1593ff;
 }
 
-.pax-select-container .paxpicker-input {
+.paxpicker-input {
   line-height: 2.4rem;
   text-align: center;
   padding: 0;
@@ -5238,6 +5238,16 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border-color: #c6c8d0;
   border-radius: 2px;
   width: 40px;
+}
+.paxpicker-input::-webkit-outer-spin-button, .paxpicker-input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+.paxpicker-input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
 }
 
 .pax-select-container .pax-picker-minus {
@@ -5282,6 +5292,10 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 .checkout-block .person-count .left span:first-child {
   text-transform: capitalize;
+}
+
+#wp-travel-booking .collapse:not(.show) {
+  display: block !important;
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
