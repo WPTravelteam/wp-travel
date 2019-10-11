@@ -230,6 +230,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.0.6 =
+Release Date:
+
+* Fixes: Used minified styles and scripts.
+* Fixes: Checkout page form filed layout issue with accordion.
+
 = 3.0.5 =
 Release Date: 3rd October, 2019
 
