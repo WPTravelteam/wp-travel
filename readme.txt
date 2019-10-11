@@ -236,6 +236,7 @@ Release Date: 11th October, 2019
 * Fixes: Used minified styles and scripts.
 * Fixes: Checkout page form filed layout issue with accordion.
 * Fixes: Made Per person and pricing category text translation ready.
+* Fixes: View Gallery link on the thumbnail is not displaying if advanced gallery is used.
 
 = 3.0.5 =
 Release Date: 3rd October, 2019

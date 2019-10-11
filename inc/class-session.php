@@ -43,11 +43,9 @@ class WP_Travel_Session {
 		}
 
 		if ( empty( $this->session ) ) { // on page load or refresh.
-			error_log('empty session');
 			add_action( 'plugins_loaded', array( $this, 'init' ), -1 );
 		} else {
-			error_log('not empty session');
-			add_action( 'init', array( $this, 'init' ), -1 );
+			add_action( 'init', array( $this, 'init' ), -1 ); // maybe not required.
 		}
 	}
 
