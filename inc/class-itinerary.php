@@ -34,6 +34,12 @@ class WP_Travel_Itinerary {
 			return $gallery_ids;
 		}
 
+		$adv_gallery_ids = get_post_meta( $this->post->ID, 'wp_travel_advanced_gallery', true );
+
+		if ( false !== $adv_gallery_ids && ! empty( $adv_gallery_ids ) && isset( $adv_gallery_ids['items'] ) ) {
+			return $adv_gallery_ids['items'];
+		} 
+
 		return false;
 
 	}

@@ -23,6 +23,22 @@ function wp_travel_get_price_per_fields() {
 }
 
 /**
+ * @since 3.0.6
+ */
+function wp_travel_get_price_per_by_key( $key = null ) {
+	if ( ! $key ) {
+		return;
+	}
+
+	$variation = wp_travel_get_price_per_fields();
+
+	if ( array_key_exists( $key, $variation ) ) {
+		return $variation[ $key ];
+	}
+	return;
+}
+
+/**
  * Get Price Per text.
  *
  * @param Number $post_id Current post id.
