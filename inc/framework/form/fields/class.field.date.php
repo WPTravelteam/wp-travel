@@ -32,7 +32,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 
 		$max_today = isset( $this->field['attributes'] ) && isset( $this->field['attributes']['data-max-today'] ) ? $this->field['attributes']['data-max-today'] : '';
 		$output   .= '<script>';
-		$output   .= 'jQuery(document).ready( function($){ ';
+		$output   .= 'jQuery(function($){ ';
 		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
 		$output   .= "dateFormat: '" . $js_date_format . "',";
