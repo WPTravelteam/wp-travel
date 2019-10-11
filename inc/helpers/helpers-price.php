@@ -1071,47 +1071,49 @@ function wp_travel_get_min_pricing_id( $trip_id ) {
 	$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 	// All listings to get min price.
-	foreach ( $pricing_options as $pricing_id => $pricing_option ) {
-
-		if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
-			// foreach ( $pricing_options as $pricing_option ) {
-				if ( isset( $pricing_option['price'] ) ) { // old pricing option.
-					$current_price = $pricing_option['price'];
-					$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
-					$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
-
+	if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+		foreach ( $pricing_options as $pricing_id => $pricing_option ) {
+	
+			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
+				// foreach ( $pricing_options as $pricing_option ) {
+					if ( isset( $pricing_option['price'] ) ) { // old pricing option.
+						$current_price = $pricing_option['price'];
+						$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
+						$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+	
+						if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+							$current_price = $sale_price;
+						}
+	
+						if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
+							$price = $current_price;
+							$min_pricing_id = $pricing_id;
+						}
+					}
+				// }
+			} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
+				foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
+	
+					$current_price = $category_option['price'];
+					$enable_sale   = isset( $category_option['enable_sale'] ) ? $category_option['enable_sale'] : 'no';
+					$sale_price    = isset( $category_option['sale_price'] ) ? $category_option['sale_price'] : 0;
+	
 					if ( 'yes' === $enable_sale && $sale_price > 0 ) {
 						$current_price = $sale_price;
 					}
-
+	
 					if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
-						$price = $current_price;
+						$price                 = $current_price;
+						$min_catetory_id = $category_id; // Add min price category id.
 						$min_pricing_id = $pricing_id;
 					}
 				}
-			// }
-		} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
-			foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
-
-				$current_price = $category_option['price'];
-				$enable_sale   = isset( $category_option['enable_sale'] ) ? $category_option['enable_sale'] : 'no';
-				$sale_price    = isset( $category_option['sale_price'] ) ? $category_option['sale_price'] : 0;
-
-				if ( 'yes' === $enable_sale && $sale_price > 0 ) {
-					$current_price = $sale_price;
-				}
-
-				if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
-					$price                 = $current_price;
-					$min_catetory_id = $category_id; // Add min price category id.
-					$min_pricing_id = $pricing_id;
-				}
+	
+				// Return regular price.
+				// if ( $return_regular_price && ! empty( $min_catetory_id ) && isset( $pricing_option['categories'][ $min_catetory_id ]['price'] ) ) {
+				// 	$price = $pricing_option['categories'][ $min_catetory_id ]['price'];
+				// }
 			}
-
-			// Return regular price.
-			// if ( $return_regular_price && ! empty( $min_catetory_id ) && isset( $pricing_option['categories'][ $min_catetory_id ]['price'] ) ) {
-			// 	$price = $pricing_option['categories'][ $min_catetory_id ]['price'];
-			// }
 		}
 	}
 	return array( 'pricing_id' => $min_pricing_id, 'category_id' => $min_category_id  );

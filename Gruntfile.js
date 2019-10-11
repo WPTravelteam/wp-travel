@@ -188,6 +188,16 @@ module.exports = function (grunt) {
 				files: {
 
 					'assets/js/booking.min.js': ['assets/js/booking.js'],
+					'assets/js/moment.min.js': ['assets/js/moment.js'],
+					'assets/js/wp-travel-widgets.min.js': ['assets/js/wp-travel-widgets.js'],
+					'assets/js/wp-travel-accordion.min.js': ['assets/js/wp-travel-accordion.js'],
+					'assets/js/easy-responsive-tabs.min.js': ['assets/js/easy-responsive-tabs.js'],
+					'assets/js/collapse.min.js': ['assets/js/collapse.js'],
+					// 'assets/js/cart.min.js': ['assets/js/cart.js'],
+					'assets/js/wp-travel-view-mode.min.js': ['assets/js/wp-travel-view-mode.js'],
+					'assets/js/payment.min.js': ['assets/js/payment.js'],
+					'assets/js/booking.min.js': ['assets/js/booking.js'],
+
 					'assets/js/jquery.wptraveluploader.min.js': ['assets/js/jquery.wptraveluploader.js'],
 					'assets/js/wp-travel-back-end.min.js': ['assets/js/wp-travel-back-end.js'],
 					'assets/js/wp-travel-front-end.min.js': ['assets/js/wp-travel-front-end.js'],
@@ -237,6 +247,8 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
 					'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
 					'assets/css/wp-travel-admin-1.min.css': ['assets/css/wp-travel-admin-1.css'],
+					'assets/css/easy-responsive-tabs.min.css': ['assets/css/easy-responsive-tabs.css'],
+					'assets/css/wp-travel-itineraries.min.css': ['assets/css/wp-travel-itineraries.css'],
 
 					'inc/coupon/assets/css/wp-travel-coupons-backend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-backend.css'],
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-frontend.css'],

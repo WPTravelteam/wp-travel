@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.3
+Stable tag: 3.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,30 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.0.6 =
+Release Date:
+
+* Fixes: Used minified styles and scripts.
+* Fixes: Checkout page form filed layout issue with accordion.
+
+= 3.0.5 =
+Release Date: 3rd October, 2019
+
+* Fixes: Book Now buttons hidden conflict with bootstrap accordion on the checkout page.
+* Fixes: Invalid argument supplied for foreach() in helpers-price.php in case of no pricing option added in admin Dates and Price Tab.
+* Fixes: Added a separate class for each form field in the Enquiry form so that it would be easy to give the precise fix.
+* Fixes: Pax Picker input field layout issue in Firefox.
+
+= 3.0.4 =
+Release Date: 2nd October, 2019
+
+* Fixes: Partial Price on trip is not displaying in the checkout page mini cart section.
+* Fixes: Undefined variable: pricing_options in helpers-price.php
+* Fixes: Minor layout issue with Pax Picker and mapquest. Pax Picker fields are stacked under the map.
+* Fixes: Admin Trip Price initial letter is hidden under currency. The issue occurs only with double letter currency.
+* Fixes: Pricing issue related to Standard PayPal is fixed. In the case of multiple pricing, price in the cart and the PayPal Payment Price is different.
+* Fixes: Pricing issue in cart page in case of single pricing is fixed.
 
 = 3.0.3 =
 Release Date: 23rd September, 2019
@@ -1074,3 +1098,4 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
+

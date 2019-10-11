@@ -203,9 +203,11 @@ class WP_Travel_Ajax {
 			$pax   = $total_pax;
 		} else {
 			$pax        = array_sum( $pax );
-			$price_per  = ! empty( get_post_meta( $trip_id, 'wp_travel_price_per', true ) ) ? get_post_meta( $trip_id, 'wp_travel_price_per', true ) : 'person';
+			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
+			$price_per  = ! empty( $price_pe ) ? $price_per : 'person';
 			// multiply category_price by pax to add in trip price if price per is person.
 			$price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // per price
+			$trip_price = $price;
 			if ( wp_travel_is_partial_payment_enabled() ) {
 				$percent                = wp_travel_get_actual_payout_percent( $trip_id );
 				$category_price_partial = ( $trip_price * $percent ) / 100;
