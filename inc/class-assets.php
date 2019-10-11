@@ -388,7 +388,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// General
 			$scripts = array(
 				'jquery-datepicker-lib' => array(
-					'src'       => self::$assets_path . 'assets/js/lib/datepicker/datepicker' . $suffix . '.js',
+					'src'       => self::$assets_path . 'assets/js/lib/datepicker/datepicker.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -521,7 +521,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// Frontend Specific.
 			if ( self::is_request( 'frontend' ) ) {
 				$scripts['wp-travel-script'] = array(
-					'src'       => self::$assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js',
+					'src'       => self::$assets_path . 'assets/js/wp-travel-front-end.js',
 					'deps'      => array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
