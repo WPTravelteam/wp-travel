@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -231,10 +231,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.0.6 =
-Release Date:
+Release Date: 11th October, 2019
 
 * Fixes: Used minified styles and scripts.
 * Fixes: Checkout page form filed layout issue with accordion.
+* Fixes: Made Per person and pricing category text translation ready.
 
 = 3.0.5 =
 Release Date: 3rd October, 2019
