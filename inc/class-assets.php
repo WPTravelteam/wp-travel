@@ -400,7 +400,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'in_footer' => true,
 				),
 				'wp-travel-moment' => array(
-					'src'       => self::$assets_path . 'assets/js/moment.js',
+					'src'       => self::$assets_path . 'assets/js/moment' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -412,13 +412,13 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'in_footer' => false,
 				),
 				'wp-travel-widget-scripts' => array(
-					'src'       => self::$assets_path . 'assets/js/wp-travel-widgets.js',
+					'src'       => self::$assets_path . 'assets/js/wp-travel-widgets' . $suffix . '.js',
 					'deps'      => array( 'jquery', 'jquery-ui-slider', 'wp-util' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
 				'wp-travel-accordion' => array(
-					'src'       => self::$assets_path . 'assets/js/wp-travel-accordion.js',
+					'src'       => self::$assets_path . 'assets/js/wp-travel-accordion' . $suffix . '.js',
 					'deps'      => array( 'jquery', 'jquery-ui-accordion' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -442,13 +442,13 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'in_footer' => true,
 				),
 				'easy-responsive-tabs' => array(
-					'src'       => self::$assets_path . 'assets/js/easy-responsive-tabs.js',
+					'src'       => self::$assets_path . 'assets/js/easy-responsive-tabs' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
 				'collapse-js' => array(
-					'src'       => self::$assets_path . 'assets/js/collapse.js',
+					'src'       => self::$assets_path . 'assets/js/collapse' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -469,25 +469,25 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-frontend' => array(
-					'src'       => self::$assets_path . 'assets/css/wp-travel-front-end.css',
+					'src'       => self::$assets_path . 'assets/css/wp-travel-front-end' . $suffix . '.css',
 					'deps'      => array(),
 					'ver'       => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'wp-travel-popup' => array(
-					'src'       => self::$assets_path . 'assets/css/magnific-popup.css',
+					'src'       => self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css',
 					'deps'      => array(),
 					'ver'       => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'easy-responsive-tabs' => array(
-					'src'       => self::$assets_path . 'assets/css/easy-responsive-tabs.css',
+					'src'       => self::$assets_path . 'assets/css/easy-responsive-tabs' . $suffix . '.css',
 					'deps'      => array(),
 					'ver'       => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'wp-travel-itineraries' => array(
-					'src'       => self::$assets_path . 'assets/css/wp-travel-itineraries.css',
+					'src'       => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
 					'deps'      => array(),
 					'ver'       => WP_TRAVEL_VERSION,
 					'media' => 'all',
@@ -511,7 +511,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'jquery-datepicker-lib' => array(
-					'src'       => self::$assets_path . 'assets/css/lib/datepicker/datepicker.css',
+					'src'       => self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css',
 					'deps'      => array(),
 					'ver'       => WP_TRAVEL_VERSION,
 					'media' => 'all',
@@ -521,7 +521,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// Frontend Specific.
 			if ( self::is_request( 'frontend' ) ) {
 				$scripts['wp-travel-script'] = array(
-					'src'       => self::$assets_path . 'assets/js/wp-travel-front-end' . $suffix . '.js',
+					'src'       => self::$assets_path . 'assets/js/wp-travel-front-end.js',
 					'deps'      => array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -534,20 +534,20 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				);
 
 				$scripts['wp-travel-view-mode'] = array(
-					'src'       => self::$assets_path . 'assets/js/wp-travel-view-mode.js',
+					'src'       => self::$assets_path . 'assets/js/wp-travel-view-mode' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				);
 
 				$scripts['wp-travel-payment-frontend-script'] = array(
-					'src'       => self::$assets_path . 'assets/js/payment.js',
+					'src'       => self::$assets_path . 'assets/js/payment' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				);
 				$scripts['wp-travel-booking'] = array(
-					'src'       => self::$assets_path . 'assets/js/booking.js',
+					'src'       => self::$assets_path . 'assets/js/booking' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,

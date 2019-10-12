@@ -81,7 +81,7 @@ jQuery(document).ready(function ($) {
 
             var pax = {};
 
-            $('input.wp-travel-trip-pax').each(function () {
+            $(this).find('input.wp-travel-trip-pax').each(function () {
                 pax[$(this).data('category-id')] = this.value;
             });
 
@@ -190,23 +190,24 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click, change', '.wp-travel-pax', function () {
-        var productPrice = $(this).closest('.product-price');
+        $this = $(this);
+        var productPrice = $this.closest('.product-price');
         var availablePax = productPrice.data('maxPax');
         var minPax = productPrice.data('minPax');
         var selectedPax = 0;
-        $('.wp-travel-pax').each(function (index) {
+        productPrice.find('.wp-travel-pax').each(function (index) {
             selectedPax += parseInt(this.value);
         })
-        if ( selectedPax > availablePax ) {
-            alert(wp_travel.strings.alert.max_pax_alert.replace('{max_pax}',availablePax));
-            $('.wp-travel-update-cart-btn').attr('disabled','disabled');
-        }else if( selectedPax < minPax ) {
-            alert(wp_travel.strings.alert.min_pax_alert.replace('{min_pax}',minPax));
-            $('.wp-travel-update-cart-btn').attr('disabled','disabled');
-        }else{
+        if (selectedPax > availablePax) {
+            alert(wp_travel.strings.alert.max_pax_alert.replace('{max_pax}', availablePax));
+            $this.val(parseInt(availablePax) + parseInt($this.val()) - parseInt(selectedPax));
+            $('.wp-travel-update-cart-btn').removeAttr('disabled');
+        } else if (selectedPax < minPax) {
+            alert(wp_travel.strings.alert.min_pax_alert.replace('{min_pax}', minPax));
+            $('.wp-travel-update-cart-btn').attr('disabled', 'disabled');
+        } else {
             $('.wp-travel-update-cart-btn').removeAttr('disabled');
         }
-        console.log(selectedPax);
     })
 
 });

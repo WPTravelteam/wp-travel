@@ -42,10 +42,10 @@ class WP_Travel_Session {
 			include sprintf( '%s/inc/lib/wp-session/wp-session.php', WP_TRAVEL_ABSPATH );
 		}
 
-		if ( empty( $this->session ) ) {
+		if ( empty( $this->session ) ) { // on page load or refresh.
 			add_action( 'plugins_loaded', array( $this, 'init' ), -1 );
 		} else {
-			add_action( 'init', array( $this, 'init' ), -1 );
+			add_action( 'init', array( $this, 'init' ), -1 ); // maybe not required.
 		}
 	}
 

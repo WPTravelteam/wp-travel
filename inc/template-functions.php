@@ -2011,7 +2011,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
+																		<strong><?php echo esc_html( wp_travel_get_pricing_name_by_key( $pricing_category['type'] ) ); ?></strong>
 																		<span class="min-max-pax">
 																			(<?php
 																				if ( ! empty( $pricing['inventory']['max_pax'] ) && $pricing['inventory']['max_pax'] < 999 ) {
@@ -2034,7 +2034,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 																			<span class="person-count">
 																				<ins>
 																					<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
-																				</ins>/<?php echo esc_html( $pricing_category['price_per'] ); ?>
+																				</ins>/<?php echo esc_html( wp_travel_get_price_per_by_key( $pricing_category['price_per'] ) ); ?>
 																			</span>
 																		<?php endif; ?>
 																	</span>
@@ -2333,7 +2333,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( $pricing_category['type'] ); ?></strong>
+																		<strong><?php echo esc_html( wp_travel_get_pricing_name_by_key( $pricing_category['type'] ) ); ?></strong>
 																		<span class="min-max-pax">
 																			(<?php
 																				if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
@@ -2355,7 +2355,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 																			<span class="person-count">
 																				<ins>
 																					<span><?php echo wp_travel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
-																				</ins>/<?php echo esc_html( $pricing_category['price_per'] ); ?>
+																				</ins>/<?php echo esc_html( wp_travel_get_price_per_by_key( $pricing_category['price_per'] ) ); ?>
 																			</span>
 																		<?php endif; ?>
 																	</span>

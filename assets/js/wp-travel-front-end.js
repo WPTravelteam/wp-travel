@@ -221,66 +221,67 @@ jQuery(document).ready(function ($) {
     });
 
     // Date picker for days and nights.
-    if ('undefined' !== typeof moment) {
-        $('.wp-travel-pricing-days-night').wpt_datepicker({
-            language: wp_travel.locale,
-            minDate: new Date(),
-            autoClose: true,
-            onSelect: function (formattedDate, date, inst) {
-                if (date) {
 
-                    var el = inst.$el;
-                    var parent = $(el).closest('form').attr('id');
-                    var next_el = ('arrival_date' === $(el).attr('name')) ? $('#' + parent + ' input[name=departure_date]') : $('#' + parent + ' input[name=arrival_date]')
-                    var day_to_add = parseInt(el.data('totaldays'));
-                    if (day_to_add < 1) {
-                        next_el.val(formattedDate);
-                        return;
-                    }
-                    var _moment = moment(date);
-                    // var newdate = new Date( date );
-                    if ('arrival_date' === $(el).attr('name')) {
-                        someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
-                    } else {
-                        // newdate.setDate( newdate.getDate() - day_to_add );
-                        someFormattedDate = _moment.subtract(day_to_add, 'days').format('YYYY-MM-DD');
-                    }
-
-                    var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
-                    next_el_datepicker.date = new Date(someFormattedDate);
-                    next_el.val(someFormattedDate);
-                }
-            }
-        });
-
-        //   var departure_date = $('input[name=departure_date]').wpt_datepicker().data('datepicker');
-        //   if ( 'undefined' !== typeof departure_date ) {
-        //     var day_to_add = departure_date.$el.data('totaldays' );;
-        //     if ( day_to_add > 0 ) {
-        //       someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
-        //       departure_date.update('minDate', new Date( someFormattedDate ))
-        //     }
-        //   }
-
-        $('input[name=departure_date]').each(function () {
-            //   var parent = $(this).closest('form').attr( 'id' );
-
-            var departure_date = $(this).wpt_datepicker().data('datepicker');
-            if ('undefined' !== typeof departure_date) {
-                var day_to_add = departure_date.$el.data('totaldays');;
-                if (day_to_add > 0) {
-                    someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
-                    departure_date.update('minDate', new Date(someFormattedDate))
-                }
-            }
-        });
-
-
-
-    }
 
 
     $(document).ready(function ($) {
+        if ('undefined' !== typeof moment) {
+            $('.wp-travel-pricing-days-night').wpt_datepicker({
+                language: wp_travel.locale,
+                minDate: new Date(),
+                autoClose: true,
+                onSelect: function (formattedDate, date, inst) {
+                    if (date) {
+
+                        var el = inst.$el;
+                        var parent = $(el).closest('form').attr('id');
+                        var next_el = ('arrival_date' === $(el).attr('name')) ? $('#' + parent + ' input[name=departure_date]') : $('#' + parent + ' input[name=arrival_date]')
+                        var day_to_add = parseInt(el.data('totaldays'));
+                        if (day_to_add < 1) {
+                            next_el.val(formattedDate);
+                            return;
+                        }
+                        var _moment = moment(date);
+                        // var newdate = new Date( date );
+                        if ('arrival_date' === $(el).attr('name')) {
+                            someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
+                        } else {
+                            // newdate.setDate( newdate.getDate() - day_to_add );
+                            someFormattedDate = _moment.subtract(day_to_add, 'days').format('YYYY-MM-DD');
+                        }
+
+                        var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
+                        next_el_datepicker.date = new Date(someFormattedDate);
+                        next_el.val(someFormattedDate);
+                    }
+                }
+            });
+
+            //   var departure_date = $('input[name=departure_date]').wpt_datepicker().data('datepicker');
+            //   if ( 'undefined' !== typeof departure_date ) {
+            //     var day_to_add = departure_date.$el.data('totaldays' );;
+            //     if ( day_to_add > 0 ) {
+            //       someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+            //       departure_date.update('minDate', new Date( someFormattedDate ))
+            //     }
+            //   }
+
+            $('input[name=departure_date]').each(function () {
+                //   var parent = $(this).closest('form').attr( 'id' );
+
+                var departure_date = $(this).wpt_datepicker().data('datepicker');
+                if ('undefined' !== typeof departure_date) {
+                    var day_to_add = departure_date.$el.data('totaldays');;
+                    if (day_to_add > 0) {
+                        someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+                        departure_date.update('minDate', new Date(someFormattedDate))
+                    }
+                }
+            });
+
+
+
+        }
 
         if (typeof parsley == "function") {
 
@@ -288,9 +289,6 @@ jQuery(document).ready(function ($) {
 
         }
 
-    });
-
-    jQuery(document).ready(function ($) {
         $('.login-page .message a').click(function (e) {
             e.preventDefault();
             $('.login-page form.login-form,.login-page form.register-form').animate({ height: "toggle", opacity: "toggle" }, "slow");
@@ -349,13 +347,13 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $('.add-to-cart-btn').on('click', function(){
+    $('.add-to-cart-btn').on('click', function () {
         var pricing = $(this).closest('form').find('.pricing-categories');
         var selectedPax = parseInt(pricing[0].dataset.selectedPax)
         var min_pax = parseInt(pricing[0].dataset.min)
-        if ( selectedPax < min_pax ) {
+        if (selectedPax < min_pax) {
             alert('Please select at least minimum pax.')
-            $(this).attr('disabled', 'disabled').css({'opacity' : '.5'})
+            $(this).attr('disabled', 'disabled').css({ 'opacity': '.5' })
         } else {
             $(this).removeAttr('disabled').removeAttr('style');
         }
@@ -378,7 +376,7 @@ jQuery(document).ready(function ($) {
             var current_val = (input.val()) ? parseInt(input.val()) : 0;
             $('#' + parent_id).find('.available-seats').find('span').text(function () {
                 // var seats = parseInt($(this).text())
-                var step = parseInt( jQuery(input).attr('step') );
+                var step = parseInt(jQuery(input).attr('step'));
                 if ($(el).hasClass('pax-picker-plus') && available_pax > 0) {
                     available_pax = available_pax - step;
                     selectedPax = selectedPax + step;
@@ -399,7 +397,7 @@ jQuery(document).ready(function ($) {
             })
         }
 
-        selectedPax < min_pax && pricing_form.find('input[type=submit]').attr('disabled', 'disabled').css({'opacity' : '.5'}) || pricing_form.find('input[type=submit]').removeAttr('disabled').removeAttr('style');
+        selectedPax < min_pax && pricing_form.find('input[type=submit]').attr('disabled', 'disabled').css({ 'opacity': '.5' }) || pricing_form.find('input[type=submit]').removeAttr('disabled').removeAttr('style');
         var display_value = '';
         var pax_input = '';
         $('#' + parent_id + ' .paxpicker-input').each(function () {

@@ -1371,6 +1371,22 @@ function wp_travel_get_pricing_variation_options() {
 }
 
 /**
+ * @since 3.0.6
+ */
+function wp_travel_get_pricing_name_by_key( $key = null ) {
+	if ( ! $key ) {
+		return;
+	}
+
+	$variation = wp_travel_get_pricing_variation_options();
+
+	if ( array_key_exists( $key, $variation ) ) {
+		return $variation[ $key ];
+	}
+	return;
+}
+
+/**
  * Get single pricing variation by key.
  *
  * @return array $pricing Pricing variations data.
