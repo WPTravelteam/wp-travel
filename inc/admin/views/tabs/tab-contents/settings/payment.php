@@ -40,6 +40,14 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 				<p class="description"><?php esc_html_e( 'Minimum percent of amount to pay while booking.', 'wp-travel' ); ?></p>
 			</td>
 		</tr>
+		<?php
+			/**
+			 * Action hook added for extending partial payment.
+			 *
+			 * @since 3.0.7
+			 */
+			do_action( 'wp_travel_after_minimum_partial_payout', $settings );
+		?>
 	</table>
 
 
@@ -77,7 +85,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 				</div>
 			</div>
 		<?php endif; ?>
-	
+
 
 	<br>
 	<?php
@@ -165,7 +173,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 	$payment_option_paypal    = $settings['payment_option_paypal'];
 	?>
 	<table class="form-table form-table-payment">
-		
+
 		<tr>
 			<th><label for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ); ?></label></th>
 			<td>
@@ -182,7 +190,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 			</td>
 		</tr>
 		<tbody class="payment-gateway-fields">
-		
+
 			<tr id="wp-travel-paypal-email" >
 				<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
 				<td>
