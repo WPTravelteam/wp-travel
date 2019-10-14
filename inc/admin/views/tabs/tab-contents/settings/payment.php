@@ -15,7 +15,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	$trip_tax_price_inclusive = $settings['trip_tax_price_inclusive'];
 	?>
 
-	<table class="form-table">
+	<table id="wp_travel_partial_payment_table" class="form-table">
 		<tr>
 			<th><label for="partial_payment"><?php esc_html_e( 'Partial Payment', 'wp-travel' ); ?></label></th>
 			<td>
