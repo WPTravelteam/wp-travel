@@ -13,6 +13,8 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	$trip_tax_enable          = $settings['trip_tax_enable'];
 	$trip_tax_percentage      = $settings['trip_tax_percentage'];
 	$trip_tax_price_inclusive = $settings['trip_tax_price_inclusive'];
+	$partial_payment_string    = __( 'Minimum Payout (%)', 'wp-travel' );
+	$partial_payment_string    = apply_filters( 'wp_travel_partial_payment_string', $partial_payment_string, $settings );
 	?>
 
 	<table id="wp_travel_partial_payment_table" class="form-table">
@@ -41,7 +43,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 			do_action( 'wp_travel_before_minimum_partial_payout', $settings );
 		?>
 		<tr id="wp-travel-minimum-partial-payout">
-			<th><label for="minimum_partial_payout"><?php esc_html_e( 'Minimum Payout (%)', 'wp-travel' ); ?></label></th>
+			<th><label for="minimum_partial_payout_output"><?php echo esc_html( $partial_payment_string ); ?></label></th>
 			<td>
 				<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout" id="minimum_partial_payout" class="wt-slider" />
 				<label><input type="number" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout" id="minimum_partial_payout_output" />%</label>
