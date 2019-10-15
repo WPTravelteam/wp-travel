@@ -13,8 +13,8 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	$trip_tax_enable          = $settings['trip_tax_enable'];
 	$trip_tax_percentage      = $settings['trip_tax_percentage'];
 	$trip_tax_price_inclusive = $settings['trip_tax_price_inclusive'];
-	$partial_payment_string    = __( 'Minimum Payout (%)', 'wp-travel' );
-	$partial_payment_string    = apply_filters( 'wp_travel_partial_payment_string', $partial_payment_string, $settings );
+	$partial_payment_string   = __( 'Minimum Payout (%)', 'wp-travel' );
+	$partial_payment_string   = apply_filters( 'wp_travel_partial_payment_string', $partial_payment_string, $settings );
 	?>
 
 	<table id="wp_travel_partial_payment_table" class="form-table">
