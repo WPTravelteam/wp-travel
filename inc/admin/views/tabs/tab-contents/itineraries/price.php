@@ -882,7 +882,7 @@ function wp_travel_new_pricing_list_admin() {
 		 * @since 3.0.7
 		 */
 		$custom_partial_payout_string = __( 'Custom Min. Payout (%)', 'wp-travel' );
-		$custom_partial_payout_string = apply_filters( 'wp_travel_custom_partial_payment_string', $custom_partial_payout_string )
+		$custom_partial_payout_string = apply_filters( 'wp_travel_custom_partial_payment_string', $custom_partial_payout_string );
 		?>
 		<tr style="display:none" class="<?php echo esc_attr( $custom_payout_class ); ?>" >
 			<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout', 'wp-travel' ); ?></label></td>
