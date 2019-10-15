@@ -912,7 +912,7 @@ function wp_travel_new_pricing_list_admin() {
 					<p class="wp-travel-enable-sale description">
 						<?php
 							esc_html_e( 'Use Global Payout', 'wp-travel' );
-							echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
+							//echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
 						?>
 					</p>
 				</span>
