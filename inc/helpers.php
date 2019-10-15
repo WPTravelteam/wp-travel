@@ -2589,6 +2589,7 @@ function wp_travel_privacy_link() {
  */
 function wp_travel_get_strings() {
 	$localized_strings = array(
+		'from'					=> __( 'From', 'wp-travel' ),
 		'confirm'               => __( 'Are you sure you want to remove?', 'wp-travel' ),
 		'book_now'              => __( 'Book Now', 'wp-travel' ),
 		'book_n_pay'            => __( 'Book and Pay', 'wp-travel' ),

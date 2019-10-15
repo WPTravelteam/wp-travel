@@ -1,8 +1,7 @@
-@charset "UTF-8";
 .wp-travel-dashboard-form input {
   outline: none;
 }
-.wp-travel-dashboard-form input[type=checkbox] {
+.wp-travel-dashboard-form input[type="checkbox"] {
   height: 20px;
   width: 20px;
   line-height: 18px;
@@ -13,27 +12,27 @@
   border: 1px solid #AAAAAA;
   -webkit-appearance: none;
 }
-.wp-travel-dashboard-form input[type=checkbox] {
+.wp-travel-dashboard-form input[type="checkbox"] {
   border-radius: 2px;
   position: relative;
 }
-.wp-travel-dashboard-form input[type=checkbox]:not(:disabled):hover {
+.wp-travel-dashboard-form input[type="checkbox"]:not(:disabled):hover {
   border: 1px solid #3ac5c9;
 }
-.wp-travel-dashboard-form input[type=radio]:active:not(:disabled),
-.wp-travel-dashboard-form input[type=checkbox]:active:not(:disabled) {
+.wp-travel-dashboard-form input[type="radio"]:active:not(:disabled),
+.wp-travel-dashboard-form input[type="checkbox"]:active:not(:disabled) {
   border: 1px solid #3ac5c9;
 }
-.wp-travel-dashboard-form input[type=checkbox]:checked {
+.wp-travel-dashboard-form input[type="checkbox"]:checked {
   border: 1px solid #3ac5c9;
 }
-.wp-travel-dashboard-form input[type=checkbox]:checked:not(:disabled) {
+.wp-travel-dashboard-form input[type="checkbox"]:checked:not(:disabled) {
   background: #3ac5c9;
 }
-.wp-travel-dashboard-form input[type=checkbox]:checked:before {
+.wp-travel-dashboard-form input[type="checkbox"]:checked:before {
   font-weight: bold;
   color: white;
-  content: "✓";
+  content: '\2713';
   margin-left: 0px;
   font-size: 12px;
   position: absolute;
@@ -87,9 +86,9 @@
   text-align: center;
   width: 100%;
 }
-.form input[type=text],
-.form input[type=email],
-.form input[type=password] {
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"] {
   outline: 0;
   background: #fff;
   width: 100%;
@@ -196,25 +195,25 @@
 .form .forgot-form .user-name:before,
 .form .wp-travel-ResetPassword .user-username:before,
 .form .wp-travel-ResetPassword .user-name:before {
-  content: "";
+  content: '\f007';
 }
 .form .login-form .user-password:before,
 .form .register-form .user-password:before,
 .form .forgot-form .user-password:before,
 .form .wp-travel-ResetPassword .user-password:before {
-  content: "";
+  content: '\f023';
 }
 .form .login-form .user-email:before,
 .form .register-form .user-email:before,
 .form .forgot-form .user-email:before,
 .form .wp-travel-ResetPassword .user-email:before {
-  content: "";
+  content: '\f0e0';
 }
 .form .login-form .user-password-key:before,
 .form .register-form .user-password-key:before,
 .form .forgot-form .user-password-key:before,
 .form .wp-travel-ResetPassword .user-password-key:before {
-  content: "";
+  content: '\f084';
 }
 
 .payment-status .paid,
@@ -336,12 +335,12 @@
 .dashboard-tab .form-horizontal {
   margin: 0 0 15px 0;
 }
-.dashboard-tab .payment-content input[type=submit],
-.dashboard-tab .account-setting input[type=submit] {
+.dashboard-tab .payment-content input[type="submit"],
+.dashboard-tab .account-setting input[type="submit"] {
   float: right;
   border-radius: 3px;
 }
-.dashboard-tab .log-out input[type=button] {
+.dashboard-tab .log-out input[type="button"] {
   margin-top: 20px;
   border-radius: 3px;
 }
@@ -420,12 +419,12 @@
   .dashboard-tab .order-list-table tr {
     border-bottom: 3px solid #ddd;
     /*display: block;*/
-    margin-bottom: 0.625em;
+    margin-bottom: .625em;
   }
   .dashboard-tab .order-list-table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: 0.8em;
+    font-size: .8em;
     text-align: right;
   }
   .dashboard-tab .order-list-table td:before {
@@ -489,7 +488,7 @@
 }
 .dashboard-tab .list-item .item .box-content ul li:before {
   font-family: "wt-icon-solid";
-  content: "";
+  content: "\f0a9";
   padding-right: 5px;
   position: absolute;
   left: 0;
@@ -531,7 +530,7 @@
 .dashboard-tab input {
   outline: none;
 }
-.dashboard-tab input[type=checkbox] {
+.dashboard-tab input[type="checkbox"] {
   height: 20px;
   width: 20px;
   line-height: 18px;
@@ -542,27 +541,27 @@
   border: 1px solid #AAAAAA;
   -webkit-appearance: none;
 }
-.dashboard-tab input[type=checkbox] {
+.dashboard-tab input[type="checkbox"] {
   border-radius: 2px;
   position: relative;
 }
-.dashboard-tab input[type=checkbox]:not(:disabled):hover {
+.dashboard-tab input[type="checkbox"]:not(:disabled):hover {
   border: 1px solid #3ac5c9;
 }
-.dashboard-tab input[type=radio]:active:not(:disabled),
-.dashboard-tab input[type=checkbox]:active:not(:disabled) {
+.dashboard-tab input[type="radio"]:active:not(:disabled),
+.dashboard-tab input[type="checkbox"]:active:not(:disabled) {
   border: 1px solid #3ac5c9;
 }
-.dashboard-tab input[type=checkbox]:checked {
+.dashboard-tab input[type="checkbox"]:checked {
   border: 1px solid #3ac5c9;
 }
-.dashboard-tab input[type=checkbox]:checked:not(:disabled) {
+.dashboard-tab input[type="checkbox"]:checked:not(:disabled) {
   background: #3ac5c9;
 }
-.dashboard-tab input[type=checkbox]:checked:before {
+.dashboard-tab input[type="checkbox"]:checked:before {
   font-weight: bold;
   color: white;
-  content: "✓";
+  content: '\2713';
   margin-left: 0px;
   font-size: 12px;
   position: absolute;

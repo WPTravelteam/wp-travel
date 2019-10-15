@@ -148,8 +148,8 @@ final class WP_Session extends Recursive_ArrayAccess {
 		$option_key = "_wp_session_{$this->session_id}";
 		
 		if ( false === get_option( $option_key ) ) {
-			add_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
-			add_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
+			update_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
+			update_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
 		} else {
 			// delete_option( "_wp_session_{$this->session_id}" );
 			update_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );

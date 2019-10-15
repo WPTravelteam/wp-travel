@@ -44,7 +44,7 @@ function wp_travel_get_price_per_by_key( $key = null ) {
  * @param Number $post_id Current post id.
  * @since 1.0.5
  */
-function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = false ) {
+function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = false, $category_id = null ) {
 	if ( ! $trip_id ) {
 		return;
 	}
@@ -72,14 +72,43 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 			$price_per_fields = wp_travel_get_pricing_variation_options();
 
 			foreach ( $pricing_data as $p_ky => $pricing ) :
-				$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
-				$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
 
-				$per_person_key = $pricing_type;
-				if ( 'custom' === $pricing_type ) {
-					$per_person_key = $pricing_custom_label;
-					// also append this key value in $price_per_fields.
-					$price_per_fields[ $per_person_key ] = $per_person_key;
+				if ( isset( $pricing['categories'] ) ) {
+					if ( is_array( $pricing['categories'] ) && count( $pricing['categories'] ) > 0 ) {
+
+						if ( $category_id ) {
+							$category_option = isset( $pricing_data['categories'][ $category_id ] ) ? $pricing_data['categories'][ $category_id ] : array();
+							$per_person_key  = isset( $category_option['type'] ) ? $category_option['type'] : '';
+						} else {
+							$min_price = 0;
+							foreach ( $pricing['categories'] as $category_id => $category_option ) {
+
+								$price       = $category_option['price'];
+								$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
+								$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;
+
+								if ( $enable_sale && $sale_price ) {
+									$price = $category_option['sale_price'];
+								}
+
+								if ( ! $min_price || $price < $min_price ) {
+									$min_price      = $price;
+									$per_person_key = $category_option['type'];
+								}
+							}
+						}
+					}
+				} else {
+
+					$pricing_type         = isset( $pricing['type'] ) ? $pricing['type'] : '';
+					$pricing_custom_label = isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '';
+					
+					$per_person_key = $pricing_type;
+					if ( 'custom' === $pricing_type ) {
+						$per_person_key = $pricing_custom_label;
+						// also append this key value in $price_per_fields.
+						$price_per_fields[ $per_person_key ] = $per_person_key;
+					}
 				}
 			endforeach;
 
@@ -816,19 +845,41 @@ function wp_travel_get_min_price_key( $options ) {
 	$price_key = '';
 	foreach ( $pricing_options as $pricing_option ) {
 
-		if ( isset( $pricing_option['price'] ) ) { // old pricing option.
-			$current_price = $pricing_option['price'];
-			$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
-			$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+		if ( isset( $pricing_option['categories'] ) ) {
+			if ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
+				$min_price = 0;
+				foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
 
-			if ( 'yes' === $enable_sale && $sale_price > 0 ) {
-				$current_price = $sale_price;
+					$price       = $category_option['price'];
+					$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
+					$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;
 
+					if ( $enable_sale && $sale_price ) {
+						$price = $category_option['sale_price'];
+					}
+
+					if ( ! $min_price || $price < $min_price ) {
+						$min_price = $price;
+						$price_key = $pricing_option['price_key'];
+					}
+				}
 			}
-
-			if ( ( 0 === $min_price && $current_price > 0 ) || $min_price > $current_price ) { // Initialize min price if 0.
-				$min_price = $current_price;
-				$price_key = $pricing_option['price_key'];
+		} else {
+			
+			if ( isset( $pricing_option['price'] ) ) { // old pricing option.
+				$current_price = $pricing_option['price'];
+				$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
+				$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+	
+				if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+					$current_price = $sale_price;
+	
+				}
+	
+				if ( ( 0 === $min_price && $current_price > 0 ) || $min_price > $current_price ) { // Initialize min price if 0.
+					$min_price = $current_price;
+					$price_key = $pricing_option['price_key'];
+				}
 			}
 		}
 	}
