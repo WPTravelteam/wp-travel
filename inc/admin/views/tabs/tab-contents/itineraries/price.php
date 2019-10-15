@@ -618,6 +618,15 @@ function wp_travel_new_pricing_list_admin() {
 			<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 			<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" class="date-input" /></td>
 		</tr>
+		<?php
+			/**
+			 * @since 3.0.7
+			 */
+			$args = array(
+				'trip_id' => $post_id,
+			);
+			do_action( 'wp_travel_after_end_date', $args );
+		?>
 
 		<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>" id="wp-variations-multiple-dates" >
 
@@ -1440,6 +1449,16 @@ function wp_travel_old_pricing_list_admin() {
 			<td><label for="wp_travel_end_date"><?php esc_html_e( 'Ending Date', 'wp-travel' ); ?></label></td>
 			<td><input data-date-format="<?php echo esc_attr( $js_date_format ); ?>" autocomplete="off" type="text" name="wp_travel_end_date" id="wp-travel-end-date" value="<?php echo esc_attr( $end_date ); ?>" class="date-input" /></td>
 		</tr>
+
+		<?php
+			/**
+			 * @since 3.0.7
+			 */
+			$args = array(
+				'trip_id' => $post_id,
+			);
+			do_action( 'wp_travel_after_end_date', $args );
+		?>
 
 		<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>" id="wp-variations-multiple-dates" >
 
