@@ -876,7 +876,13 @@ function wp_travel_new_pricing_list_admin() {
 			$payout_percent = wp_travel_get_payout_percent( $post_id );
 		}
 		$use_global = wp_travel_use_global_payout_percent( $post_id );
-
+		/**
+		 * Added filter for custom multiple partial payment.
+		 * 
+		 * @since 3.0.7
+		 */
+		$custom_partial_payout_string = __( 'Custom Min. Payout (%)', 'wp-travel' );
+		$custom_partial_payout_string = apply_filters( 'wp_travel_custom_partial_payment_string', $custom_partial_payout_string )
 		?>
 		<tr style="display:none" class="<?php echo esc_attr( $custom_payout_class ); ?>" >
 			<td><label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Minimum Payout', 'wp-travel' ); ?></label></td>
@@ -905,7 +911,7 @@ function wp_travel_new_pricing_list_admin() {
 					</span>
 					<p class="wp-travel-enable-sale description">
 						<?php
-							esc_html_e( 'Use Global ', 'wp-travel' );
+							esc_html_e( 'Use Global Payout', 'wp-travel' );
 							echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
 						?>
 					</p>
@@ -914,7 +920,7 @@ function wp_travel_new_pricing_list_admin() {
 		</tr>
 		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> <?php echo esc_attr( $multiple_pricing_option_class ); ?> <?php echo esc_attr( $custom_payout_class ); ?> "  >
 			<td>
-				<label for="wp-travel-minimum-partial-payout"><?php esc_html_e( 'Custom Min. Payout (%)', 'wp-travel' ); ?></label>
+				<label for="wp-travel-minimum-partial-payout-percent"><?php echo esc_html( $custom_partial_payout_string ); ?></label>
 			</td>
 			<td>
 				<input type="number" min="1" max="100" step="0.01" name="wp_travel_minimum_partial_payout_percent" id="wp-travel-minimum-partial-payout-percent" value="<?php echo esc_attr( $payout_percent ); ?>" />
