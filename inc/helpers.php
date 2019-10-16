@@ -1371,9 +1371,9 @@ function wp_travel_get_pricing_variation_options() {
 }
 
 /**
- * @since 3.0.6
+ * @since 3.0.7
  */
-function wp_travel_get_pricing_name_by_key( $key = null ) {
+function wp_travel_get_pricing_category_by_key( $key = null ) {
 	if ( ! $key ) {
 		return;
 	}

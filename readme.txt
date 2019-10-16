@@ -230,8 +230,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.0.7 =
+Release Date:
+
+* Fixes: Price Per Field empty issue.
+* Fixes: Minor Translation issue fixes on the price per category text. like: adult, child etc.
+* Deprecated : Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
+
 = 3.0.6 =
-Release Date: 11th October, 2019
+Release Date: 12th October, 2019
 
 * Fixes: Used minified styles and scripts.
 * Fixes: Checkout page form filed layout issue with accordion.
