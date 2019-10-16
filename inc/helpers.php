@@ -738,6 +738,10 @@ function wp_travel_get_payment_status() {
 			'color' => '#892E2C',
 			'text'  => __( 'N/A', 'wp-travel' ),
 		),
+		'refund'    => array(
+			'color' => '#892E2C',
+			'text'  => __( 'Refund', 'wp-travel' ),
+		),
 	);
 
 	return apply_filters( 'wp_travel_payment_status_list', $status );
