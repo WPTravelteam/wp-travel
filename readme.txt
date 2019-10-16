@@ -233,9 +233,19 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 3.0.7 =
 Release Date:
 
-* Fixes: Price Per Field empty issue.
-* Fixes: Minor Translation issue fixes on the price per category text. like: adult, child etc.
-* Deprecated : Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
+Enhancement :
+
+* Booking Status Refund added to update booking status to refund manually.
+
+Fixes:
+
+* Price Per Field empty issue.
+* Minor Translation issue fixes on the price per category text. like: adult, child etc.
+* In Bank Deposit settings, last detail / bank field can not be removed in the admin settings.
+
+Deprecated :
+
+* Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
 
 = 3.0.6 =
 Release Date: 12th October, 2019
