@@ -242,11 +242,24 @@ class WP_Travel_Admin_Settings {
 				unset( $indexed['$index'] );
 			}
 			foreach ( $indexed as $key => $index ) {
-				if ( empty( $index['name'] ) ) {
-					unset( $indexed[ $key ] );
+				if ( ! empty( $index['name'] ) ) {
+					$index['id'] = $key;
+					if ( is_array( $index['options'] ) ){
+						$options = [];
+						$i = 1;
+						foreach ( $index['options'] as $option ) {
+							$options[ 'option' . $i ] = $option;
+							$i++;
+						}
+						$index['options'] = $options;
+					}
+					$indexed[ $key ] = $index;
+					continue;
 				}
+				unset( $indexed[ $key ] );
 			}
 			$settings['wp_travel_trip_facts_settings'] = $indexed;
+			update_option( 'facts', ['wp_travel_trip_facts_settings' => $indexed ] );
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );

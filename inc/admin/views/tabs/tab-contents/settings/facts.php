@@ -7,8 +7,9 @@
  */
 function wp_travel_settings_callback_facts( $tab ) {
 	$settings = wp_travel_get_settings();
+	$settings = get_option( 'facts' );
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
-	
+
 	?>
 	<table class="form-table">
 		<tr>
@@ -32,15 +33,18 @@ function wp_travel_settings_callback_facts( $tab ) {
 			<?php echo wp_travel_trip_facts_setting_sample(); ?>
 		</div>
 		<div id="fact-sample-collector">
-			<?php if ( is_array( $settings ) && array_key_exists( 'wp_travel_trip_facts_settings', $settings ) ) : ?>
-				<?php foreach ( $settings['wp_travel_trip_facts_settings'] as $fact ) : ?>
-					<?php echo wp_travel_trip_facts_setting_sample( $fact ); ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
+			<?php
+			if ( is_array( $settings ) && array_key_exists( 'wp_travel_trip_facts_settings', $settings ) ) :
+				foreach ( $settings['wp_travel_trip_facts_settings'] as $key => $fact ) :
+					$fact['id'] = $key;
+					echo wp_travel_trip_facts_setting_sample( $fact );
+				endforeach;
+			endif;
+			?>
 		</div>
 		<button type="button" class="new-fact-setting-adder button"><?php echo esc_html( 'Add new', 'wp-travel' ); ?></button>
 	</div>
-	
+
 	<?php
 }
 
@@ -53,7 +57,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 	 */
 	function wp_travel_trip_facts_setting_sample( $fact = false ) {
 		ob_start();
-		$str = random_int( 1, 1000000 );
+		$str = isset( $fact['id'] ) ? $fact['id'] : random_int( 1, 1000000 );
 		?>
 
 		<table class="form-table <?php echo ( ! $fact ) ? '' : 'open-table'; ?>">
@@ -95,7 +99,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 							<div class="options-holder">
 								<?php if ( isset( $fact['options'] ) && is_array( $fact['options'] ) ) : ?>
 									<?php foreach ( $fact['options'] as $option ): ?>
-									<p><?php echo $option; ?><input type="hidden" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][options][]" value="<?php echo $option; ?>"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>
+									<p><input type="text" name="wp_travel_trip_facts_settings[<?php echo $fact ? $str : '$index' ?>][options][]" value="<?php echo $option; ?>"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</div>

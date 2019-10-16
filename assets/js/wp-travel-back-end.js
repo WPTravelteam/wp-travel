@@ -849,15 +849,18 @@
         multiple: function(obj, unique) {
             val = this.val();
             index = this.data('index');
-            jQuery('.fact-' + index).html((obj.options || []).map(function(option) {
-                return jQuery('<label><input type="checkbox" name="wp_travel_trip_facts[' + unique + '][value][]" value="' + option + '"  >' + option + '</label>');
+            jQuery('.fact-' + index).html((obj.options && Object.entries(obj.options) || []).map(function(option) {
+                return jQuery('<label><input type="checkbox" name="wp_travel_trip_facts[' + unique + '][value][]" value="' + option[0] + '"  >' + option[1] + '</label>');
             }));
         },
         single: function(obj, unique) {
             val = this.val();
             index = this.data('index');
-            jQuery('.fact-' + index).html(jQuery('<select>').attr('name', 'wp_travel_trip_facts[' + unique + '][value]').html((obj.options || []).map(function(option) {
-                return jQuery('<option>').attr('value', option).html(option);
+            jQuery('.fact-' + index)
+            .html(jQuery('<select>').attr('name', 'wp_travel_trip_facts[' + unique + '][value]')
+            .html(
+                (obj.options && Object.entries(obj.options) || []).map(function(option) {
+                return jQuery('<option>').attr('value', option[0]).html(option[1]);
             })));
         },
         text: function(obj, unique) {
@@ -869,6 +872,7 @@
 
             val = this.val();
             index = this.data('index');
+            jQuery('.fact-id-' + index).attr('name', 'wp_travel_trip_facts[' + unique + '][fact_id]').val(obj.id);
             jQuery('.icon-' + index).attr('name', 'wp_travel_trip_facts[' + unique + '][icon]').val(obj.icon);
             jQuery('.type-' + index).attr('name', 'wp_travel_trip_facts[' + unique + '][type]').val(obj.type);
 
@@ -881,7 +885,7 @@
         const val = jQuery(this).val();
         var settings = jQuery('#accordion-fact-data').data('factssettings');
         const setting = settings.filter(function(setting) {
-            return val == setting['name']
+            return val == setting['name'] || setting['id'] && val == setting['id']
         })[0];
         const type = settings.filter(function(setting) {
             return val == setting['type']

@@ -261,7 +261,7 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 					<span class="person-count">
 						<ins>
 							<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
-						</ins>						
+						</ins>
 					</span>
 				</div>
 			<?php endif; ?>
@@ -631,16 +631,16 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 	}
 	$settings = wp_travel_get_settings();
 
-	if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) ) {
+	if ( empty( $settings['wp_travel_trip_facts_settings'] ) ) {
 		return '';
 	}
-	if ( isset( $settings['wp_travel_trip_facts_settings'] ) ) {
+	// if ( isset( $settings['wp_travel_trip_facts_settings'] ) ) {
 
-		if ( ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
+	// 	if ( ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
 
-			return '';
-		}
-	}
+	// 		return '';
+	// 	}
+	// }
 
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
@@ -663,7 +663,8 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 				<div class="tour-info-column clearfix">
 					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 						<?php
-
+							$trip_fact_id = $trip_fact['fact_id'];
+							// $settings['wp_travel_trip_facts_settings'];
 							$icon = array_filter(
 								$settings['wp_travel_trip_facts_settings'],
 								function( $setting ) use ( $trip_fact ) {
@@ -672,21 +673,22 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 								}
 							);
 
-						foreach ( $icon as $key => $ico ) {
+						// foreach ( $icon as $key => $ico ) {
 
-							$icon = $ico['icon'];
-						}
+						// 	$icon = $ico['icon'];
+						// }
 						if ( isset( $trip_fact['value'] ) ) :
 							?>
 							<span class="tour-info-item tour-info-type">
-								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-								<strong><?php echo esc_html( $trip_fact['label'] ); ?></strong>:
+								<i class="fa <?php echo esc_attr( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'] ); ?>" aria-hidden="true"></i>
+								<strong><?php echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'] ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
 									$count = count( $trip_fact['value'] );
 									$i     = 1;
 									foreach ( $trip_fact['value'] as $key => $val ) {
-										echo esc_html( $val );
+										// echo esc_html( $val );
+										echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
 										if ( $count > 1 && $i !== $count ) {
 											echo esc_html( ',', 'wp-travel' );
 										}
