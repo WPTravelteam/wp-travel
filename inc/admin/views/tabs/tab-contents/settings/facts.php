@@ -7,7 +7,7 @@
  */
 function wp_travel_settings_callback_facts( $tab ) {
 	$settings = wp_travel_get_settings();
-	$settings = get_option( 'facts' );
+	// $settings = get_option( 'facts' );
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
 	?>

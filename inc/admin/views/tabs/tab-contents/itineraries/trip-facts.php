@@ -178,7 +178,9 @@ function wp_travel_fact_text( $fact, $index, $setings = array() ) {
  */
 function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
 	?>
+	<?php if ( isset( $settings['id'] ) ) : ?>
 	<input type="hidden" class="fact-id-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][fact_id]" id="" value="<?php echo $settings['id']; ?>">
+	<?php endif; ?>
 	<input type="hidden" class="icon-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][icon]" id="" value="<?php echo $settings['icon']; ?>">
 	<input type="hidden"  class="type-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][type]" id="" value="<?php echo $settings['type']; ?>">
 
@@ -207,8 +209,11 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 	// 	$label = $fact['label'];
 	// }
 	$fact_id = isset( $fact['fact_id'] ) ? $fact['fact_id'] : null;
-	$selected_fact_setting = array_filter( $settings, function( $setting ) use ( $fact_id ) {
-		return $fact_id === $setting['id'];
+	$selected_fact_setting = array_filter( $settings, function( $setting ) use ( $fact ) {
+		if ( isset( $fact['id'] ) ) {
+			return $fact['id'] === $setting['id'];
+		}
+		return $fact['label'] === $setting['name'];
 	} );
 	foreach( $selected_fact_setting as $set ) {
 		$fact_setting = $set;
@@ -219,9 +224,9 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 	// $fact_setting = $selected_fact_setting[0];
 
 	$label = ! empty( $fact_setting ) ? $fact_setting['name'] : $fact['label'];
-	$icon  = ! empty( $fact_setting['icon'] ) ? $fact_setting['icon'] : $fact['icon'];
-	$value = $fact['value'];
 	$type  = $fact['type'];
+	$icon  = ! empty( $fact_setting['icon'] ) ? $fact_setting['icon'] : $fact['icon'];
+	$value = isset( $fact['value'] ) ? $fact['value'] : is_array( $type ) ? [] : '';
 
 	ob_start();
 	// is_array( $fact ) && extract( $fact );

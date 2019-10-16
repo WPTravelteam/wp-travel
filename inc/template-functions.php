@@ -663,15 +663,24 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 				<div class="tour-info-column clearfix">
 					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 						<?php
+						if ( isset( $trip_fact['fact_id'] ) ) {
 							$trip_fact_id = $trip_fact['fact_id'];
-							// $settings['wp_travel_trip_facts_settings'];
-							$icon = array_filter(
+							$icon = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'];
+							$label = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'];
+						} else {
+							$trip_fact_setting = array_filter(
 								$settings['wp_travel_trip_facts_settings'],
 								function( $setting ) use ( $trip_fact ) {
 
 									return $setting['name'] === $trip_fact['label'];
 								}
 							);
+							foreach( $trip_fact_setting as $set ) {
+								$icon = $set['icon'];
+								$label = $set['name'];
+							}
+						}
+							// $settings['wp_travel_trip_facts_settings'];
 
 						// foreach ( $icon as $key => $ico ) {
 
@@ -680,15 +689,20 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 						if ( isset( $trip_fact['value'] ) ) :
 							?>
 							<span class="tour-info-item tour-info-type">
-								<i class="fa <?php echo esc_attr( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'] ); ?>" aria-hidden="true"></i>
-								<strong><?php echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'] ); ?></strong>:
+
+								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<strong><?php echo esc_html( $label ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
 									$count = count( $trip_fact['value'] );
 									$i     = 1;
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										// echo esc_html( $val );
-										echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
+										if ( isset( $trip_fact['fact_id'] ) ) {
+											echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
+										} else {
+											echo esc_html( $val );
+										}
 										if ( $count > 1 && $i !== $count ) {
 											echo esc_html( ',', 'wp-travel' );
 										}
