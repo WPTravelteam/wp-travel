@@ -665,6 +665,9 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 						<?php
 						if ( isset( $trip_fact['fact_id'] ) ) {
 							$trip_fact_id = $trip_fact['fact_id'];
+							if ( ! isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ] ) ) {
+								continue;
+							}
 							$icon = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'];
 							$label = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'];
 						} else {
@@ -1350,7 +1353,7 @@ function wp_travel_archive_filter_by() {
 	$trip_type_text = $strings['trip_type'];
 	$location_text  = $strings['location'];
 	$show_text      = $strings['show'];
-	
+
 	?>
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
