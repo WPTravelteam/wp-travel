@@ -2609,6 +2609,9 @@ function wp_travel_get_strings() {
 		'locations'             => __( 'Locations', 'wp-travel' ),
 		'fixed_departure'       => __( 'Fixed departure', 'wp-travel' ),
 		'trip_duration'         => __( 'Trip duration', 'wp-travel' ),
+		'filter_by'             => __( 'Filter By', 'wp-travel' ),
+		'price'                 => __( 'Price', 'wp-travel' ),
+		'location'              => __( 'Location', 'wp-travel' ),
 
 		'bookings'              => array(
 			'pricing_name'     => __( 'Pricing Name', 'wp-travel' ),

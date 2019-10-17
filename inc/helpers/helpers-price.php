@@ -31,8 +31,6 @@ function wp_travel_get_price_per_by_key( $key = null ) {
 	}
 
 	$variation = wp_travel_get_price_per_fields();
-	error_log( $key );
-	error_log( print_r( $variation, true ) );
 
 	if ( array_key_exists( $key, $variation ) ) {
 		return $variation[ $key ];
