@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -235,13 +235,15 @@ Release Date:
 
 Enhancement :
 
+* Trip Fact enhanced. Now update in trip fact from settings will also be render in trip.
 * Booking Status Refund added to update booking status to refund manually.
 
 Fixes:
 
 * Price Per Field empty issue.
-* Minor Translation issue fixes on the price per category text. like: adult, child etc.
-* In Bank Deposit settings, last detail / bank field can not be removed in the admin settings.
+* Minor Translation issue fixes on the price per category text. like: adult, child, etc.
+* In Bank Deposit settings, the last detail/bank field can not be removed in the admin settings.
+* Travel Date is not displaying in case of Trip Duration.
 
 Deprecated :
 
