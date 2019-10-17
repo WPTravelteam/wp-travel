@@ -213,12 +213,12 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 		if ( isset( $fact['id'] ) ) {
 			return $fact['id'] === $setting['id'];
 		}
-		return $fact['label'] === $setting['name'];
+		return $fact['label'] === $setting['name'] || ( isset( $setting['initial'] ) && $fact['label'] === $setting['initial'] );
 	} );
-	foreach( $selected_fact_setting as $set ) {
+	foreach ( $selected_fact_setting as $set ) {
 		$fact_setting = $set;
 	}
-	if ( empty( $fact_setting  ) || $fact_setting['type'] !== $fact['type'] ){
+	if ( empty( $fact_setting  ) || $fact_setting['type'] !== $fact['type'] ) {
 		return '';
 	}
 	// $fact_setting = $selected_fact_setting[0];

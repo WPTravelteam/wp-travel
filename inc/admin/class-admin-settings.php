@@ -199,6 +199,9 @@ class WP_Travel_Admin_Settings {
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {
+				if ( 'wp_travel_trip_facts_settings' === $settings_field ) {
+					continue;
+				}
 				if ( isset( $_POST[ $settings_field ] ) ) {
 					$settings[ $settings_field ] = $_POST[ $settings_field ];
 
@@ -244,7 +247,7 @@ class WP_Travel_Admin_Settings {
 			foreach ( $indexed as $key => $index ) {
 				if ( ! empty( $index['name'] ) ) {
 					$index['id'] = $key;
-					if ( is_array( $index['options'] ) ){
+					if ( is_array( $index['options'] ) ) {
 						$options = [];
 						$i = 1;
 						foreach ( $index['options'] as $option ) {

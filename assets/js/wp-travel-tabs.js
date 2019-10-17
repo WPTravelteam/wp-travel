@@ -198,5 +198,10 @@
         wp_travel_display_map_fields();
     });
 
+    // Added for fact migration
+    // $('.fact-title').on('keyup change', function() {
+    //     jQuery(this).next().val(jQuery(this).data('initial-title'));
+    // });
+
 
 }(jQuery));
