@@ -2081,8 +2081,8 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
-										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" >
+										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
+										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
 									<?php endif; ?>
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
@@ -2401,8 +2401,8 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<?php endif; ?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
-										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" >
+										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
+										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
 									<?php endif; ?>
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); // Need to remove price key. ?>" />
