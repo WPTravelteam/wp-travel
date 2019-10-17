@@ -236,6 +236,7 @@ Release Date:
 Enhancement :
 
 * Trip Fact enhanced. Now update in trip fact from settings will also be render in trip.
+* Enhancement : Trip fact options are editable for single select and multiple select.
 * Booking Status Refund added to update booking status to refund manually.
 
 Fixes:
@@ -1119,4 +1120,3 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
-
