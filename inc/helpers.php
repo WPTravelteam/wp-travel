@@ -2612,6 +2612,7 @@ function wp_travel_get_strings() {
 		'filter_by'             => __( 'Filter By', 'wp-travel' ),
 		'price'                 => __( 'Price', 'wp-travel' ),
 		'location'              => __( 'Location', 'wp-travel' ),
+		'show'                  => __( 'Show', 'wp-travel' ),
 
 		'bookings'              => array(
 			'pricing_name'     => __( 'Pricing Name', 'wp-travel' ),

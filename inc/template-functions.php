@@ -1333,6 +1333,7 @@ function wp_travel_archive_filter_by() {
 	$price_text     = $strings['price'];
 	$trip_type_text = $strings['trip_type'];
 	$location_text  = $strings['location'];
+	$show_text      = $strings['show'];
 	
 	?>
 	<div class="wp-travel-post-filter clearfix">
@@ -1392,7 +1393,7 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-travel-filter-button">
-			<button class="btn-wp-travel-filter"><?php esc_html_e( 'Show', 'wp-travel' ); ?></button>
+			<button class="btn-wp-travel-filter"><?php echo esc_html( $show_text ); ?></button>
 		</div>
 		<?php do_action( 'wp_travel_after_post_filter' ); ?>
 	</div>
