@@ -118,7 +118,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 								?>
 								<tr class="person-count">
 									<td class="left">
-										<span style="display:table-row"><?php echo esc_html( esc_html( $category_type ) ); ?></span>
+										<span style="display:table-row"><?php echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) ); ?></span>
 										<?php echo sprintf( '%2$s x %1$s', wp_travel_get_formated_price_currency( $category['price'] ), esc_html( $pax ) ); ?>
 									</td>
 									<td class="right">

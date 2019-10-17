@@ -264,6 +264,10 @@ class WP_Travel_Admin_Settings {
 			$settings['wp_travel_trip_facts_settings'] = $indexed;
 			update_option( 'facts', ['wp_travel_trip_facts_settings' => $indexed ] );
 
+			if ( ! isset( $_POST['wp_travel_bank_deposits'] ) ) {
+				$settings['wp_travel_bank_deposits'] = array();
+			}
+
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 

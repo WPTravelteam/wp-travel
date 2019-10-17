@@ -1343,10 +1343,18 @@ function wp_travel_archive_filter_by() {
 	if ( ! is_wp_travel_archive_page() ) {
 		return;
 	}
+	$strings = wp_travel_get_strings();
+
+	$filter_by_text = $strings['filter_by'];
+	$price_text     = $strings['price'];
+	$trip_type_text = $strings['trip_type'];
+	$location_text  = $strings['location'];
+	$show_text      = $strings['show'];
+	
 	?>
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
-			<h4><?php esc_html_e( 'Filter By', 'wp-travel' ); ?></h4>
+			<h4><?php echo esc_html( $filter_by_text ); ?></h4>
 		</div>
 
 		<?php do_action( 'wp_travel_before_post_filter' ); ?>
@@ -1360,7 +1368,7 @@ function wp_travel_archive_filter_by() {
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
 		<?php if ( $enable_filter_price ) : ?>
 			<div class="wp-toolbar-filter-field wt-filter-by-price">
-				<p><?php esc_html_e( 'Price', 'wp-travel' ); ?></p>
+				<p><?php echo esc_html( $price_text ); ?></p>
 				<select name="price" class="wp_travel_input_filters price">
 					<option value="">--</option>
 					<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
@@ -1369,7 +1377,7 @@ function wp_travel_archive_filter_by() {
 			</div>
 		<?php endif; ?>
 		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
-			<p><?php esc_html_e( 'Trip Type', 'wp-travel' ); ?></p>
+			<p><?php echo esc_html( $trip_type_text ); ?></p>
 			<?php
 			wp_dropdown_categories(
 				array(
@@ -1385,7 +1393,7 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
-			<p><?php esc_html_e( 'Location', 'wp-travel' ); ?></p>
+			<p><?php echo esc_html( $location_text ); ?></p>
 			<?php
 			wp_dropdown_categories(
 				array(
@@ -1401,7 +1409,7 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-travel-filter-button">
-			<button class="btn-wp-travel-filter"><?php esc_html_e( 'Show', 'wp-travel' ); ?></button>
+			<button class="btn-wp-travel-filter"><?php echo esc_html( $show_text ); ?></button>
 		</div>
 		<?php do_action( 'wp_travel_after_post_filter' ); ?>
 	</div>
@@ -2025,7 +2033,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_name_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php
@@ -2097,8 +2105,8 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
-										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" >
+										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
+										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
 									<?php endif; ?>
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
@@ -2347,7 +2355,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_name_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php
@@ -2417,8 +2425,8 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<?php endif; ?>
 									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
 										<!-- if fixed departure -->
-										<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" >
+										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
+										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
 									<?php endif; ?>
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); // Need to remove price key. ?>" />

@@ -36,8 +36,6 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		</tr>
 		<?php
 			/**
-			 * Action hook added for extending partial payment.
-			 *
 			 * @since 3.0.7
 			 */
 			do_action( 'wp_travel_before_minimum_partial_payout', $settings );
@@ -52,8 +50,6 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		</tr>
 		<?php
 			/**
-			 * Action hook added for extending partial payment.
-			 *
 			 * @since 3.0.7
 			 */
 			do_action( 'wp_travel_after_minimum_partial_payout', $settings );
