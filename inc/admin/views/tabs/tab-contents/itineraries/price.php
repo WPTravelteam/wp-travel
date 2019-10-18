@@ -874,10 +874,14 @@ function wp_travel_new_pricing_list_admin() {
 
 		$payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent, true );
-
+		
 		if ( ! $payout_percent ) {
 			$payout_percent = wp_travel_get_payout_percent( $post_id );
 		}
+		if ( '0.00' === $payout_percent ) {
+			$payout_percent = $default_payout_percent;
+		}
+		$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent, true );
 		$use_global = wp_travel_use_global_payout_percent( $post_id );
 		/**
 		 * Added filter for custom multiple partial payment.
