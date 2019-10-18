@@ -852,7 +852,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 		<?php
 	endif;
 	?>
-	
+
 	<div class="custom-multi-select">
 		<?php
 		$count_options_data   = count( $restricted_trips );
@@ -1030,7 +1030,7 @@ function wp_travel_get_pricing_option_list() {
 	);
 
 	$hide_single_for_new_user = get_option( 'wp_travel_user_after_multiple_pricing_category' );  // @since 3.0.0
-	
+
 	if ( 'yes' !== $hide_single_for_new_user ) { // Single pricing is only available for old user who is using it.
 		$type['single-price'] = __( 'Single Price', 'wp-travel' );
 	}
@@ -1080,16 +1080,39 @@ function wp_travel_upsell_message( $args ) {
 				<?php if ( ! empty( $args['link2'] ) ) : ?>
 				<p>
 					<?php esc_html_e( 'or', 'wp-travel' ); ?> <a target="_blank" class="link-default" href="<?php echo esc_url( $args['link2'] ); ?>"><?php echo esc_html( $args['link2_label'] ); ?></a>
-				</p> 
-				<?php endif; ?>  
+				</p>
+				<?php endif; ?>
 				</div>
 				<?php if ( ! empty( $args['link3'] ) ) : ?>
 				<div class="buy-pro-action action2">
-					<a target="_blank" href="<?php echo esc_url( $args['link3'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link3_label'] ); ?></a> 
+					<a target="_blank" href="<?php echo esc_url( $args['link3'] ); ?>" class="action-btn" ><?php echo esc_html( $args['link3_label'] ); ?></a>
 				</div>
 				<?php endif; ?>
 			</div>
 		</div>
 	</div>
 	<?php
+}
+
+/**
+ * Checks if specific wp travel addon is active or not.
+ * Enter addon name as 'WP Travel Downloads'
+ *
+ * @param  string $plugin_name Plugin name as that you want to check.
+ * @return boolean
+ */
+function wp_travel_is_plugin_active( $plugin_name ) {
+	$plugin_upper = ucfirst( $plugin_name );
+	$plugin_class = str_replace( ' ', '_', $plugin_upper );
+
+	$plugin_lower = strtolower( $plugin_name );
+	$plugin_name  = str_replace( ' ', '_', $plugin_lower );
+
+	$settings          = wp_travel_get_settings();
+	$is_plugin_enabled = isset( $settings['show_' . $plugin_name ] ) && ! empty( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
+	$does_class_exists = class_exists( $plugin_class ) || class_exists( $plugin_class . '_Core' ) ? true : false;
+	if ( ! $does_class_exists || 'yes' !== $is_plugin_enabled ) {
+		return false;
+	}
+	return true;
 }
