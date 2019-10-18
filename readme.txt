@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,8 +230,28 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.0.7 =
+Release Date: 18th October, 2019
+
+Enhancement :
+
+* Trip Fact enhanced. Now update in trip fact from settings will also be render in trip.
+* Enhancement : Trip fact options are editable for single select and multiple select.
+* Booking Status Refund added to update booking status to refund manually.
+
+Fixes:
+
+* Price Per Field empty issue.
+* Minor Translation issue fixes on the price per category text. like: adult, child, etc.
+* In Bank Deposit settings, the last detail/bank field can not be removed in the admin settings.
+* Travel Date is not displaying in case of Trip Duration.
+
+Deprecated :
+
+* Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
+
 = 3.0.6 =
-Release Date: 11th October, 2019
+Release Date: 12th October, 2019
 
 * Fixes: Used minified styles and scripts.
 * Fixes: Checkout page form filed layout issue with accordion.
@@ -1100,4 +1120,3 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
-

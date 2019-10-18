@@ -13,9 +13,11 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	$trip_tax_enable          = $settings['trip_tax_enable'];
 	$trip_tax_percentage      = $settings['trip_tax_percentage'];
 	$trip_tax_price_inclusive = $settings['trip_tax_price_inclusive'];
+	$partial_payment_string   = __( 'Minimum Payout (%)', 'wp-travel' );
+	$partial_payment_string   = apply_filters( 'wp_travel_partial_payment_string', $partial_payment_string, $settings );
 	?>
 
-	<table class="form-table">
+	<table id="wp_travel_partial_payment_table" class="form-table">
 		<tr>
 			<th><label for="partial_payment"><?php esc_html_e( 'Partial Payment', 'wp-travel' ); ?></label></th>
 			<td>
@@ -32,14 +34,26 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 				</p>
 			</td>
 		</tr>
+		<?php
+			/**
+			 * @since 3.0.7
+			 */
+			do_action( 'wp_travel_before_minimum_partial_payout', $settings );
+		?>
 		<tr id="wp-travel-minimum-partial-payout">
-			<th><label for="minimum_partial_payout"><?php esc_html_e( 'Minimum Payout (%)', 'wp-travel' ); ?></label></th>
+			<th><label for="minimum_partial_payout_output"><?php echo esc_html( $partial_payment_string ); ?></label></th>
 			<td>
 				<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout" id="minimum_partial_payout" class="wt-slider" />
 				<label><input type="number" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout" id="minimum_partial_payout_output" />%</label>
 				<p class="description"><?php esc_html_e( 'Minimum percent of amount to pay while booking.', 'wp-travel' ); ?></p>
 			</td>
 		</tr>
+		<?php
+			/**
+			 * @since 3.0.7
+			 */
+			do_action( 'wp_travel_after_minimum_partial_payout', $settings );
+		?>
 	</table>
 
 
@@ -77,7 +91,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 				</div>
 			</div>
 		<?php endif; ?>
-	
+
 
 	<br>
 	<?php
@@ -165,7 +179,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 	$payment_option_paypal    = $settings['payment_option_paypal'];
 	?>
 	<table class="form-table form-table-payment">
-		
+
 		<tr>
 			<th><label for="payment_option_paypal"><?php esc_html_e( 'Enable Paypal', 'wp-travel' ); ?></label></th>
 			<td>
@@ -182,7 +196,7 @@ function wp_travel_standard_paypal_settings_callback( $args ) {
 			</td>
 		</tr>
 		<tbody class="payment-gateway-fields">
-		
+
 			<tr id="wp-travel-paypal-email" >
 				<th><label for="paypal_email"><?php esc_html_e( 'Paypal Email', 'wp-travel' ); ?></label></th>
 				<td>

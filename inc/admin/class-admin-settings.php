@@ -199,6 +199,9 @@ class WP_Travel_Admin_Settings {
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {
+				if ( 'wp_travel_trip_facts_settings' === $settings_field ) {
+					continue;
+				}
 				if ( isset( $_POST[ $settings_field ] ) ) {
 					$settings[ $settings_field ] = $_POST[ $settings_field ];
 
@@ -242,11 +245,28 @@ class WP_Travel_Admin_Settings {
 				unset( $indexed['$index'] );
 			}
 			foreach ( $indexed as $key => $index ) {
-				if ( empty( $index['name'] ) ) {
-					unset( $indexed[ $key ] );
+				if ( ! empty( $index['name'] ) ) {
+					$index['id'] = $key;
+					if ( is_array( $index['options'] ) ) {
+						$options = [];
+						$i = 1;
+						foreach ( $index['options'] as $option ) {
+							$options[ 'option' . $i ] = $option;
+							$i++;
+						}
+						$index['options'] = $options;
+					}
+					$indexed[ $key ] = $index;
+					continue;
 				}
+				unset( $indexed[ $key ] );
 			}
 			$settings['wp_travel_trip_facts_settings'] = $indexed;
+			update_option( 'facts', ['wp_travel_trip_facts_settings' => $indexed ] );
+
+			if ( ! isset( $_POST['wp_travel_bank_deposits'] ) ) {
+				$settings['wp_travel_bank_deposits'] = array();
+			}
 
 			// @since 1.0.5 Used this filter below.
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );

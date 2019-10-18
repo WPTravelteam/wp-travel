@@ -63,12 +63,12 @@
     if (slider) {
         output.innerHTML = slider.value; // Display the default slider value
         output.onkeyup = wp_travel_range_func;
-    
+
         output.oninput = wp_travel_range_func;
 
         slider.oninput = function () {
             var value = this.value;
-    
+
             if (this.value >= 100) {
                 value = 100;
             }
@@ -172,7 +172,7 @@
             }
             const val = jQuery(this).val();
             jQuery(this).val('')
-            jQuery(this).siblings('.options-holder').append('<p>' + val + '<input type="hidden" name="' + jQuery(this).attr('name') + '[]" value="' + val + '"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>')
+            jQuery(this).siblings('.options-holder').append('<p><input type="text" name="' + jQuery(this).attr('name') + '[]" value="' + val + '"/><span class="option-deleter"><span class="dashicons dashicons-no-alt"></span></span></p>')
         }
     });
 
@@ -197,6 +197,11 @@
     $('#wp-travel-map-select').on('select2:select', function (e) {
         wp_travel_display_map_fields();
     });
+
+    // Added for fact migration
+    // $('.fact-title').on('keyup change', function() {
+    //     jQuery(this).next().val(jQuery(this).data('initial-title'));
+    // });
 
 
 }(jQuery));

@@ -738,6 +738,10 @@ function wp_travel_get_payment_status() {
 			'color' => '#892E2C',
 			'text'  => __( 'N/A', 'wp-travel' ),
 		),
+		'refund'    => array(
+			'color' => '#892E2C',
+			'text'  => __( 'Refund', 'wp-travel' ),
+		),
 	);
 
 	return apply_filters( 'wp_travel_payment_status_list', $status );
@@ -1371,9 +1375,9 @@ function wp_travel_get_pricing_variation_options() {
 }
 
 /**
- * @since 3.0.6
+ * @since 3.0.7
  */
-function wp_travel_get_pricing_name_by_key( $key = null ) {
+function wp_travel_get_pricing_category_by_key( $key = null ) {
 	if ( ! $key ) {
 		return;
 	}
@@ -2589,6 +2593,7 @@ function wp_travel_privacy_link() {
  */
 function wp_travel_get_strings() {
 	$localized_strings = array(
+		'from'					=> __( 'From', 'wp-travel' ),
 		'confirm'               => __( 'Are you sure you want to remove?', 'wp-travel' ),
 		'book_now'              => __( 'Book Now', 'wp-travel' ),
 		'book_n_pay'            => __( 'Book and Pay', 'wp-travel' ),
@@ -2604,6 +2609,10 @@ function wp_travel_get_strings() {
 		'locations'             => __( 'Locations', 'wp-travel' ),
 		'fixed_departure'       => __( 'Fixed departure', 'wp-travel' ),
 		'trip_duration'         => __( 'Trip duration', 'wp-travel' ),
+		'filter_by'             => __( 'Filter By', 'wp-travel' ),
+		'price'                 => __( 'Price', 'wp-travel' ),
+		'location'              => __( 'Location', 'wp-travel' ),
+		'show'                  => __( 'Show', 'wp-travel' ),
 
 		'bookings'              => array(
 			'pricing_name'     => __( 'Pricing Name', 'wp-travel' ),
