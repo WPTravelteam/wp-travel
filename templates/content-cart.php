@@ -123,6 +123,7 @@ wp_travel_print_notices();
 										<span>
 										<?php echo esc_html( $arrival_date ); ?>
 										<?php do_action( 'wp_travel_multiple_time_cart_page', $trip, $trip_id, $price_key, $trip['arrival_date'] ); ?>
+										<?php do_action( 'wp_travel_action_cart_after_date', $trip, $trip_id ); // @since 3.0.8 ?>
 										</span>
 									</span>
 								<?php endif; ?>

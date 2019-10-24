@@ -127,14 +127,14 @@ function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 	<select name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="">
 		<?php
 		if ( isset( $setting['options'] ) && is_array( $setting['options'] ) && count( $setting['options'] ) > 0 ) {
-			foreach ( $setting['options'] as $option ) :
+			foreach ( $setting['options'] as $key => $option ) :
 				?>
 				<option
 				<?php
-				if ( isset( $fact['value'] ) && $option == $fact['value'] ) {
+				if ( isset( $fact['value'] ) && is_array( $fact['value'] ) && in_array( $key, $fact['value'] ) ) {
 					echo 'selected';}
 				?>
-				  value="<?php echo $option; ?>"><?php echo $option; ?></option>
+				value="<?php echo $key; ?>"><?php echo $option; ?></option>
 				<?php
 			endforeach;
 		}
@@ -156,7 +156,7 @@ function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
 				if ( isset( $fact['value'] ) && is_array( $fact['value'] ) && in_array( $key, $fact['value'] ) ) {
 					echo 'checked';}
 				?>
-				 name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $key; ?>" id="" /><?php echo $option; ?>
+				name="wp_travel_trip_facts[<?php echo $index; ?>][value][]" value="<?php echo $key; ?>" id="" /><?php echo $option; ?>
 			</label>
 			<?php
 		endforeach;
