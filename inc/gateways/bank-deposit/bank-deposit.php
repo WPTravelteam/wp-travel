@@ -105,7 +105,7 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 		return;
 	}
 	$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
-	$details    = wp_travel_booking_data( $booking_id );
+	$details                  = wp_travel_booking_data( $booking_id );
 	if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
 		if ( ! class_exists( 'WP_Travel_Partial_Payment_Core' ) ) :
 			$details['due_amount'] = apply_filters( 'wp_travel_partial_payment_due_amount', $details['due_amount'] );
