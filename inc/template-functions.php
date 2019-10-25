@@ -2048,7 +2048,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 														$max      = apply_filters( 'wp_travel_pricing_max_pax', $pricing['inventory']['max_pax'], $pricing['pricing_id'] );
 														$min      = apply_filters( 'wp_travel_pricing_min_pax', $pricing['inventory']['min_pax'], $pricing['pricing_id'] );
 														$max_attr = "max={$max}";
-														$min_attr = "min={$min}";
+														$min_attr = "";//"min={$min}";
 														$step     = apply_filters( 'wp_travel_pricing_pax_step', 1, $pricing['pricing_id'] );
 														?>
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
@@ -2347,7 +2347,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 														$max      = $pricing['inventory']['max_pax'];
 														$min      = $pricing['inventory']['min_pax'];
 														$max_attr = "max={$max}";
-														$min_attr = "min={$min}";
+														$min_attr = ""; //"min={$min}";
 														// if ( ! empty( $pricing_category['min_pax'] ) ) {
 														// $min      = $pricing_category['min_pax'];
 														// $min_attr = "min={$min}";
