@@ -247,6 +247,7 @@ class WP_Travel_Admin_Settings {
 			foreach ( $indexed as $key => $index ) {
 				if ( ! empty( $index['name'] ) ) {
 					$index['id'] = $key;
+					$index['initial'] = ! empty( $index['initial'] ) ? $index['initial'] : $index['name'];
 					if ( is_array( $index['options'] ) ) {
 						$options = [];
 						$i = 1;
@@ -262,7 +263,6 @@ class WP_Travel_Admin_Settings {
 				unset( $indexed[ $key ] );
 			}
 			$settings['wp_travel_trip_facts_settings'] = $indexed;
-			update_option( 'facts', ['wp_travel_trip_facts_settings' => $indexed ] );
 
 			if ( ! isset( $_POST['wp_travel_bank_deposits'] ) ) {
 				$settings['wp_travel_bank_deposits'] = array();

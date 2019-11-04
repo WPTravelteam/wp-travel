@@ -179,10 +179,8 @@ function wp_travel_get_payout_percent( $post_id ) {
 	if ( ! $post_id ) {
 		return 0;
 	}
-	$settings               = wp_travel_get_settings();
-	$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
-
-	$payout_percent = $default_payout_percent;
+	$settings       = wp_travel_get_settings();
+	$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 	$use_global     = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', true );
 
 	$trip_payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
@@ -192,6 +190,7 @@ function wp_travel_get_payout_percent( $post_id ) {
 	}
 
 	$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $post_id );
+	$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent );
 	return number_format( $payout_percent, 2, '.', '' );
 }
 
@@ -200,11 +199,36 @@ function wp_travel_get_actual_payout_percent( $post_id ) {
 		return 0;
 	}
 	if ( wp_travel_use_global_payout_percent( $post_id ) ) {
-		$settings                      = wp_travel_get_settings();
-		return $default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+		$settings               = wp_travel_get_settings();
+		$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
+		$default_payout_percent = wp_travel_initial_partial_payout_unformated( $default_payout_percent );
+		return $default_payout_percent;
 	}
 
 	return wp_travel_get_payout_percent( $post_id );
+}
+
+/**
+ * Returns the minimum or initial partial payout, no matter if payout was saved as string or array.
+ *
+ * @param mixed   $partial_payout Int|Float|String|Array.
+ * @param boolean $force_format   True if you want to force format number.
+ * @return float  $partial_payout Minimum partial payout.
+ */
+function wp_travel_initial_partial_payout_unformated( $partial_payout, $force_format = false ) {
+	if ( empty( $partial_payout ) ) {
+		return $partial_payout;
+	}
+	if ( is_array( $partial_payout ) && isset( $partial_payout[0] ) ) {
+		$partial_payout = $partial_payout[0];
+	}
+	if ( is_string( $partial_payout ) ) {
+		$partial_payout = (float) $partial_payout;
+	}
+	if ( $force_format ) {
+		$partial_payout = number_format( $partial_payout, 2, '.', '' );
+	}
+	return $partial_payout;
 }
 
 function wp_travel_use_global_payout_percent( $post_id ) {

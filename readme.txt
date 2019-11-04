@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.2.3
 Requires PHP: 5.5
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,13 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.0.8 =
+Release Date: 25th October, 2019
+Fixes :
+
+* Pax Selector Issue.
+
 
 = 3.0.7 =
 Release Date: 18th October, 2019

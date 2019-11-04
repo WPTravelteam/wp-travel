@@ -480,8 +480,8 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_is_global_faq']   = isset( $_POST['wp_travel_is_global_faq'] ) ? ( wp_unslash( $_POST['wp_travel_is_global_faq'] ) ) : array(); // fixes issue with is global faq values not updating when disabling pro. 
 
 		// WP Travel Standard Paypal Merged. @since 1.2.1.
-		$trip_meta['wp_travel_minimum_partial_payout']            = isset( $_POST['wp_travel_minimum_partial_payout'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) ) : 0;
-		$trip_meta['wp_travel_minimum_partial_payout_percent']    = isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) : 0;
+		$trip_meta['wp_travel_minimum_partial_payout']            = isset( $_POST['wp_travel_minimum_partial_payout'] ) ? ( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) ) : 0;
+		$trip_meta['wp_travel_minimum_partial_payout_percent']    = isset( $_POST['wp_travel_minimum_partial_payout_percent'] ) ? ( wp_unslash( $_POST['wp_travel_minimum_partial_payout_percent'] ) ) : 0;
 		$trip_meta['wp_travel_minimum_partial_payout_use_global'] = isset( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_minimum_partial_payout_use_global'] ) ) : '';
 
 		// Update Pricing Options Metas. [ Multiple Pricing data ].
