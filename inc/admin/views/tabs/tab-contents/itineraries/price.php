@@ -931,7 +931,7 @@ function wp_travel_new_pricing_list_admin() {
 			</td>
 			<td>
 				<input type="number" min="1" max="100" step="0.01" name="wp_travel_minimum_partial_payout_percent[]" id="wp-travel-minimum-partial-payout-percent" value="<?php echo esc_attr( $payout_percent ); ?>" />
-				<p class="description"><?php echo esc_html__( 'Global partial payout: ', 'wp_travel' ) . esc_html( $default_payout_percent ) . esc_html( '%' ); ?></p>
+				<p class="description"><?php echo esc_html__( 'Global partial payout: ', 'wp-travel' ) . esc_html( $default_payout_percent ) . esc_html( '%' ); ?></p>
 			</td>
 		</tr>
 		<?php do_action( 'wp_travel_itinerary_price_tab_table_last_row', $post_id ); ?>

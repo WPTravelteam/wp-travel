@@ -2038,7 +2038,6 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 													$available_pax = $pricing['inventory']['max_pax'];
 												endif;
 												?>
-
 												<div class="category available-seats" style="<?php echo ( (int) $pricing['inventory']['max_pax'] < 999 ) ? '' : 'display:none'; ?>">
 													<?php echo esc_html__( 'Available Seats: ', 'wp-travel' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 												</div>
