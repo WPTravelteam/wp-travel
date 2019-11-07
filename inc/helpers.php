@@ -2170,7 +2170,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							/**
 							 * @since 3.0.4
 							 */
-							do_action( 'wp_travel_after_bookings_travel_date', $order_details );
+							do_action( 'wp_travel_after_bookings_travel_date', $booking_id );
 
 							?>
 						</div>
