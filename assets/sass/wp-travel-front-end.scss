@@ -2755,7 +2755,7 @@ ul.availabily-list {
             span.availabily-heading-label {
                 display: block;
                 position: absolute;
-                top: 0;
+                top: auto;
                 left: 0;
                 text-align: left;
                 width: 120px;
@@ -5460,3 +5460,13 @@ li {
 #wp-travel-booking .collapse:not(.show){
     // display: block !important;
  }
+
+@media screen and (min-width: 768px){
+    .date-wrapper .date-from{
+        float: left;
+    }
+
+    .date-wrapper .date-to{
+        float: right;
+    }
+}
