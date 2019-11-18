@@ -226,7 +226,7 @@ class WP_Travel_Ajax {
 				)
 			);
 
-			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+			if ( function_exists( 'wp_travel_group_discount_price' ) && 'single-pricing-id' !== $pricing_id ) { // From Group Discount addons.
 				$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $pricing_id ); // for old price pricing id is treated as category id.
 				if ( $group_trip_price ) {
 					$trip_price = $group_trip_price;

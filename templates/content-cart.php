@@ -135,6 +135,7 @@ wp_travel_print_notices();
 								?>
 								<ul>
 									<?php
+									$trip_price = 0;
 									foreach ( $cart_trip as $category_id => $category ) {
 										$category_type = isset( $category['type'] ) ? $category['type'] : '';
 										$price_per     = isset( $category['price_per'] ) ? $category['price_per'] : 'person';
@@ -155,6 +156,7 @@ wp_travel_print_notices();
 											</li>
 											<?php
 										endif;
+										$trip_price += $price;
 									}
 									?>
 								</ul>
