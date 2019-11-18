@@ -74,12 +74,6 @@ wp_travel_print_notices();
 					$trip_extras        = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
 					$cart_trip 			= isset( $trip['trip'] ) ? $trip['trip'] : array();
 
-					// Single Pricing Cart calcuation fixes @since 3.0.9
-					if ( 'default-pricing' == $trip['price_key'] ) {
-						$trip_price         = $trip['trip_price'] * $trip['pax']; // Total Price of Pricing option / trip.
-						$trip_price_partial = isset( $trip['trip_price_partial'] ) ? (int) $trip_price_partial * $trip['pax'] : $trip_price * $trip['pax'];
-					}
-
 					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 					$pax_limit     = apply_filters( 'wp_travel_inventory_pax_limit', '', $trip_id, $price_key );
 					$data_max_pax  = apply_filters( 'wp_travel_data_max_pax', $max_available, $pax_limit );

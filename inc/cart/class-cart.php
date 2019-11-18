@@ -492,11 +492,6 @@ class WP_Travel_Cart {
 				$trip_price         = $trip['trip_price']; // Total Price of Pricing option / trip.
 				$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 
-				if ( 'default-pricing' == $trip['price_key'] ) {
-					$trip_price         = $trip['trip_price'] * $trip['pax']; // Total Price of Pricing option / trip.
-					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? (int) $trip_price_partial * $trip['pax'] : $trip_price * $trip['pax'];
-				}
-
 				$cart_total         += $trip_price;
 				$cart_total_partial += $trip_price_partial;
 
