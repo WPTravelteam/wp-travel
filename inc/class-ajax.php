@@ -204,7 +204,7 @@ class WP_Travel_Ajax {
 		} else {
 			$pax        = array_sum( $pax );
 			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
-			$price_per  = ! empty( $price_pe ) ? $price_per : 'person';
+			$price_per  = ! empty( $price_per ) ? $price_per : 'person';
 			// multiply category_price by pax to add in trip price if price per is person.
 			$price = wp_travel_get_actual_trip_price( $trip_id, $price_key ); // per price
 			$trip_price = $price;
@@ -226,7 +226,7 @@ class WP_Travel_Ajax {
 				)
 			);
 
-			if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
+			if ( function_exists( 'wp_travel_group_discount_price' ) && 'single-pricing-id' !== $pricing_id ) { // From Group Discount addons.
 				$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $pricing_id ); // for old price pricing id is treated as category id.
 				if ( $group_trip_price ) {
 					$trip_price = $group_trip_price;

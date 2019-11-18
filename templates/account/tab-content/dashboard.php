@@ -87,5 +87,6 @@ $biling_glance_data = $args['biling_glance_data'];
 		</div>
 	  </div>
 	</div>
+	<?php do_action( 'wp_travel_user_dashboard_after_account_info' ); ?>
   </div>
 </div>

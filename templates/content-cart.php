@@ -135,6 +135,7 @@ wp_travel_print_notices();
 								?>
 								<ul>
 									<?php
+									$trip_price = 0;
 									foreach ( $cart_trip as $category_id => $category ) {
 										$category_type = isset( $category['type'] ) ? $category['type'] : '';
 										$price_per     = isset( $category['price_per'] ) ? $category['price_per'] : 'person';
@@ -155,6 +156,7 @@ wp_travel_print_notices();
 											</li>
 											<?php
 										endif;
+										$trip_price += $price;
 									}
 									?>
 								</ul>
@@ -186,7 +188,7 @@ wp_travel_print_notices();
 						<td class="product-subtotal text-right" data-title="Total">
 							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 								<div class="item_cart">
-									<p><strong><?php echo wp_travel_get_formated_price_currency( $trip['trip_price'] ); ?></strong></p>
+									<p><strong><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></strong></p>
 								</div>
 							<?php endif; ?>
 						</td>

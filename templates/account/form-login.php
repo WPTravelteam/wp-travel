@@ -54,6 +54,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 						<input name="password" type="password" placeholder="<?php echo esc_attr__( 'Password', 'wp-travel' ); ?>"/>
 					</span>
 				<?php endif; ?>
+				<?php do_action( 'wp_travel_after_registration_form_password', $settings ); ?>
 					<div class="wrapper">
 						<!--<div class="float-left">
 							<input class="" name="terms-condition" type="checkbox" id="terms-condition" value="forever" />
