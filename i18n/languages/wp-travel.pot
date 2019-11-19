@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 3.0.8\n"
+"Project-Id-Version: WP Travel 3.0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-18 12:15:14+00:00\n"
+"POT-Creation-Date: 2019-11-19 11:08:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -8351,7 +8351,7 @@ msgstr ""
 msgid "Custom Filters"
 msgstr ""
 
-#: inc/helpers.php:2834 wp-travel.php:138
+#: inc/helpers.php:2834 wp-travel.php:139
 msgid "Settings"
 msgstr ""
 
@@ -9115,31 +9115,31 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:328
+#: upgrade/update-137.php:25 wp-travel.php:329
 msgid "WP Travel Customer"
 msgstr ""
 
-#: wp-travel.php:80
+#: wp-travel.php:81
 msgid "trips"
 msgstr ""
 
-#: wp-travel.php:81
+#: wp-travel.php:82
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:343
+#: wp-travel.php:344
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:344
+#: wp-travel.php:345
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:348
+#: wp-travel.php:349
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:350
+#: wp-travel.php:351
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -9390,32 +9390,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:415
+#: upgrade/update-137.php:48 wp-travel.php:416
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:420
+#: upgrade/update-137.php:53 wp-travel.php:421
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:425
+#: upgrade/update-137.php:58 wp-travel.php:426
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:416
+#: upgrade/update-137.php:49 wp-travel.php:417
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:421
+#: upgrade/update-137.php:54 wp-travel.php:422
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:426
+#: upgrade/update-137.php:59 wp-travel.php:427
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""
