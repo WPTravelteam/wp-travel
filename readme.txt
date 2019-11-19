@@ -231,7 +231,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.0.9 =
-Release Date: 25th October, 2019
+Release Date: 19th November, 2019
 Fixes :
 
 * Single Pricing Calculation.
