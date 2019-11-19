@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 3.0.8\n"
+"Project-Id-Version: WP Travel 3.0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-04 14:55:36+00:00\n"
+"POT-Creation-Date: 2019-11-18 11:25:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Language: en_US\n"
 "X-Poedit-SearchPath-0: ../../wp-travel\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: grunt-wp-i18n1.0.2\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: inc/admin/admin-helper.php:48
 msgid "Travel Base Pro"
@@ -134,8 +134,8 @@ msgstr ""
 
 #: inc/admin/admin-helper.php:283
 msgid ""
-"\"The plugin is very intuitive and fresh.\n"
-"The layout fits well into theme with flexibility to different shortcodes.\n"
+"\"The plugin is very intuitive and fresh.\r\n"
+"The layout fits well into theme with flexibility to different shortcodes.\r\n"
 "Its great plugin for travel or tour agent websites.\""
 msgstr ""
 
@@ -1359,7 +1359,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1229
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1372
 #: inc/helpers/helpers-price.php:19 inc/helpers.php:1370
-#: templates/content-cart.php:154
+#: templates/content-cart.php:155
 msgid "Group"
 msgstr ""
 
@@ -2120,7 +2120,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-general.php:74
-#: templates/content-cart.php:251
+#: templates/content-cart.php:253
 msgid "Coupon Code"
 msgstr ""
 
@@ -2337,8 +2337,8 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:216 inc/helpers.php:2413
-#: templates/content-cart.php:56 templates/content-cart.php:241
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:222 inc/helpers.php:2413
+#: templates/content-cart.php:56 templates/content-cart.php:243
 msgid "Total"
 msgstr ""
 
@@ -2350,27 +2350,27 @@ msgstr ""
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:134
+#: inc/cart/cart-mini.php:140
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:163
+#: inc/cart/cart-mini.php:169
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:187
+#: inc/cart/cart-mini.php:193
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:188 templates/content-cart.php:224
+#: inc/cart/cart-mini.php:194 templates/content-cart.php:226
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:192 templates/content-cart.php:228
+#: inc/cart/cart-mini.php:198 templates/content-cart.php:230
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:229
+#: inc/cart/cart-mini.php:235
 msgid "Trip Book"
 msgstr ""
 
@@ -8774,11 +8774,11 @@ msgstr ""
 msgid "Phone:"
 msgstr ""
 
-#: templates/account/form-login.php:43 templates/account/form-login.php:65
+#: templates/account/form-login.php:43 templates/account/form-login.php:66
 msgid "Register"
 msgstr ""
 
-#: templates/account/form-login.php:46 templates/account/form-login.php:73
+#: templates/account/form-login.php:46 templates/account/form-login.php:74
 msgid "Username"
 msgstr ""
 
@@ -8786,35 +8786,35 @@ msgstr ""
 msgid "Email Address"
 msgstr ""
 
-#: templates/account/form-login.php:54 templates/account/form-login.php:76
+#: templates/account/form-login.php:54 templates/account/form-login.php:77
 msgid "Password"
 msgstr ""
 
-#: templates/account/form-login.php:66
+#: templates/account/form-login.php:67
 msgid "Already registered?"
 msgstr ""
 
-#: templates/account/form-login.php:66
+#: templates/account/form-login.php:67
 msgid "Sign In"
 msgstr ""
 
-#: templates/account/form-login.php:71 templates/account/form-login.php:91
+#: templates/account/form-login.php:72 templates/account/form-login.php:92
 msgid "Login"
 msgstr ""
 
-#: templates/account/form-login.php:83
+#: templates/account/form-login.php:84
 msgid "Remember me"
 msgstr ""
 
-#: templates/account/form-login.php:87
+#: templates/account/form-login.php:88
 msgid "Forgot Password ?"
 msgstr ""
 
-#: templates/account/form-login.php:93
+#: templates/account/form-login.php:94
 msgid "Not registered?"
 msgstr ""
 
-#: templates/account/form-login.php:93
+#: templates/account/form-login.php:94
 msgid "Create an account"
 msgstr ""
 
@@ -8982,23 +8982,23 @@ msgstr ""
 msgid "Date:"
 msgstr ""
 
-#: templates/content-cart.php:210
+#: templates/content-cart.php:212
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:223
+#: templates/content-cart.php:225
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:252
+#: templates/content-cart.php:254
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:258
+#: templates/content-cart.php:260
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:259
+#: templates/content-cart.php:261
 msgid "Proceed to checkout"
 msgstr ""
 

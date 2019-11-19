@@ -1,4 +1,4 @@
-jQuery(document).ready(function ($) {
+jQuery(function ($) {
 
     if ($('.wp-travel-error').length > 0) {
 
@@ -337,7 +337,7 @@ jQuery(document).ready(function ($) {
 });
 
 // Pax Picker for categorized pricing
-(function ($) {
+jQuery(function ($) {
 
     $(document).on('click', '.paxpicker .icon-users', function (e) {
         if ($(this).closest('.paxpicker').hasClass('is-active')) {
@@ -416,4 +416,4 @@ jQuery(document).ready(function ($) {
         $('#' + parent_id).siblings('.summary').find('.participants-summary-container').val(display_value);
         $('#' + parent_id + ' .pricing-input').html(pax_input);
     });
-})(jQuery);
+});
