@@ -96,8 +96,8 @@ function wp_travel_black_friday_notice() {
 
 	if ( ! get_option( 'wp_travel_black_friday_2019_' . $user_id, false ) ) {
 		?>
-			<div class="updated notice wp-travel-notice-black-friday is-dismissible" data-notice="wp-travel-black-friday">
-				<p><?php _e( sprintf( 'WP Travel offers Thanksgiving, Black Friday and Cyber Monday Deals on WP Travel bundles and extensions offering <b>25&#37; off</b>. Coupon Code: bftgcm <a href="%s" target="_blank"> Shop now!</a> <br><b>Offer valid</b>: 22nd Nov – 2nd Dec 2019.', esc_url( 'wp-travel' ) ), 'wp-travel' ); ?></p>
+			<div class="updated notice wp-travel-notice-black-friday is-dismissible" data-notice="wp-travel-black-friday" style="background: #69c8a7; color:#fff; border-left-color: #38a17d;text-align:center">
+				<p><?php _e( sprintf( '<b>WP Travel offers </b>Thanksgiving, Black Friday and Cyber Monday Deals on <a href="%s" target="_blank" style="color:#fff"><b>WP Travel Pro</b></a> and <a href="%s" target="_blank" style="color:#fff"><b>extensions</b></a> offering <b>25&#37; off</b>.<br>Coupon Code: <b>bftgcm</b> (Offer valid: 22nd Nov – 2nd Dec 2019)<br><a href="%s" target="_blank" style="color:#fff"> <b>Shop now!</b></a>', esc_url( 'wp-travel' ), esc_url( 'https://wptravel.io/downloads/' ), esc_url( 'https://wptravel.io/wp-travel-pro/' ) ), 'wp-travel' ); ?></p>
 
 			</div>
 		<?php

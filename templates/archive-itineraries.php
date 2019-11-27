@@ -21,7 +21,7 @@ get_header( 'itinerary' ); ?>
 	
 	if( 'Divi' === $template ) {
 		?>
-				<div class="container">
+				<div class="container clearfix">
 		<?php
 	}
 
