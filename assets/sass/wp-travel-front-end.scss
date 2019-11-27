@@ -5461,14 +5461,26 @@ li {
     // display: block !important;
  }
 
-@media screen and (min-width: 768px){
-    .date-wrapper .date-from{
-        float: left;
-    }
+.date-wrapper .date-from{
+  width: 50%;
+  float: left;
+ }
 
-    .date-wrapper .date-to{
-        float: right;
-    }
+.date-wrapper .date-to{
+  width: 50%;
+  float: right;
+ }
+
+@media screen and (max-width: 767px){
+.date-wrapper .date-from{
+  width: 100%;
+  float: none;
+ }
+
+.date-wrapper .date-to{
+  width: 100%;
+  float: none;
+ }
 }
 
 @media screen and (max-width: 1199px) and (min-width: 992px){

@@ -1944,14 +1944,14 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php if ( 'yes' === $pricing['fixed_departure'] ) : ?>
 									<!-- Column: Start Date -->
 									<div class="date-wrapper" style="width:<?php echo esc_attr( $date_field_wrapper_width ); ?>%">
-										<div class="date-from" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%">
+										<div class="date-from" >
 											<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 											<?php echo esc_html( date_i18n( 'l', strtotime( $pricing['arrival_date'] ) ) ); ?>
 											<span><?php echo esc_html( date_i18n( $date_format, strtotime( $pricing['arrival_date'] ) ) ); ?></span>
 											<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>">
 										</div>
 										<?php if ( $show_end_date ) : ?>
-											<div class="date-to" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%">
+											<div class="date-to" >
 												<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
 												<?php echo esc_html( date_i18n( 'l', strtotime( $pricing['departure_date'] ) ) ); ?>
 												<span><?php echo esc_html( date_i18n( $date_format, strtotime( $pricing['departure_date'] ) ) ); ?></span>
@@ -1962,7 +1962,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php else : ?>
 									<div class="date-wrapper" style="width:<?php echo esc_attr( $date_field_wrapper_width ); ?>%;">
 
-										<div class="date-from" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%; float:left">
+										<div class="date-from">
 											<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 											<?php
 											$total_days = 0;
@@ -1993,7 +1993,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										</div>
 										<?php if ( $show_end_date ) : ?>
 
-											<div class="date-to" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%; float : right">
+											<div class="date-to" >
 												<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
 												<?php
 												$end_field = array(
