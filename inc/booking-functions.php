@@ -816,17 +816,17 @@ function wp_travel_book_now() {
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
 		if ( isset( $_POST['wp_travel_fname'] ) || isset( $_POST['wp_travel_email'] ) ) { // Booking using old booking form
-			$first_name = $_POST['wp_travel_fname'];
-			$last_name  = $_POST['wp_travel_lname'];
-			$country    = $_POST['wp_travel_country'];
-			$phone      = $_POST['wp_travel_phone'];
-			$email      = $_POST['wp_travel_email'];
+			$first_name = isset( $_POST['wp_travel_fname'] ) ? $_POST['wp_travel_fname'] : '';
+			$last_name  = isset( $_POST['wp_travel_lname'] ) ? $_POST['wp_travel_lname'] : '';
+			$country    = isset( $_POST['wp_travel_country'] ) ? $_POST['wp_travel_country'] : '';
+			$phone      = isset( $_POST['wp_travel_phone'] ) ? $_POST['wp_travel_phone'] : '';
+			$email      = isset( $_POST['wp_travel_email'] ) ? $_POST['wp_travel_email'] : '';
 		} else {
-			$first_name = $_POST['wp_travel_fname_traveller'];
-			$last_name  = $_POST['wp_travel_lname_traveller'];
-			$country    = $_POST['wp_travel_country_traveller'];
-			$phone      = $_POST['wp_travel_phone_traveller'];
-			$email      = $_POST['wp_travel_email_traveller'];
+			$first_name = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
+			$last_name  = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
+			$country    = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
+			$phone      = isset( $_POST['wp_travel_phone_traveller'] ) ? $_POST['wp_travel_phone_traveller'] : '';
+			$email      = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : '';
 
 			reset( $first_name );
 			$first_key = key( $first_name );

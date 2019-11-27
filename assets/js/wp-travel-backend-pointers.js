@@ -25,26 +25,19 @@ jQuery(document).ready(function($) {
     }
     wptuts_open_pointer(0);
 
-    // function wptuts_open_pointer(i) {
-    //     $.each(wpctgPointer.pointers, function(index, value) {
-
-    //         $(value.target).pointer({
-    //             content: value.options.content,
-    //             position: {
-    //                 edge: value.options.position.edge,
-    //                 align: value.options.position.align
-
-    //             },
-
-    //             close: $.proxy(function() {
-    //                 $.post(ajaxurl, this);
-    //             }, {
-    //                 pointer: value.pointer_id,
-    //                 action: 'dismiss-wp-pointer'
-    //             }),
-
-    //         }).pointer('open');
-    //     });
-    // }
-
+    jQuery( document ).on(
+        'click',
+        '.wp-travel-notice-black-friday .notice-dismiss',
+        function () {
+            // Make an AJAX call
+            // Since WP 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+            $ . ajax( ajaxurl, {
+                    type: 'POST',
+                    data: {
+                        action: 'wp_travel_black_friday_dismiss',
+                    }
+                }
+            );
+        }
+    );
 });

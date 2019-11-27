@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 3.0.9\n"
+"Project-Id-Version: WP Travel 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 11:08:25+00:00\n"
+"POT-Creation-Date: 2019-11-27 11:52:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2005,7 +2005,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:1022
+#: inc/helpers/helpers-price.php:1025
 msgid "Partial Payment"
 msgstr ""
 
@@ -8020,7 +8020,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:1023
+#: inc/helpers/helpers-price.php:1026
 msgid "Full Payment"
 msgstr ""
 
@@ -8530,6 +8530,10 @@ msgstr ""
 
 #: inc/template-functions.php:1985
 msgid "Please Select a Date"
+msgstr ""
+
+#: inc/template-functions.php:2029 inc/template-functions.php:2327
+msgid "Select Pax"
 msgstr ""
 
 #: inc/template-functions.php:2042

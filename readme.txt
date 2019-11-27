@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.3
 Requires PHP: 5.5
-Stable tag: 3.0.9
+Stable tag: 3.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.0 =
+Release Date: 27th November, 2019
+Fixes :
+
+* Divi Theme compatibility added.
+* String translation issue fixed.
+* Undefined index fixed.
+* Minor fixes.
 
 = 3.0.9 =
 Release Date: 19th November, 2019
