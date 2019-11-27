@@ -21,5 +21,14 @@ jQuery(document).ready( function( $ ) {
 		$(parent + ' .open-all-link').show();
 	});
 
+	$( document ).on( 'click', '.wp-travel-notice-black-friday .notice-dismiss', function () {
+        $.ajax( ajaxurl, {
+				type: 'POST',
+				data: {
+					action: 'wp_travel_black_friday_dismiss',
+				}
+			} );
+        } );
+
 } );
 

@@ -5498,4 +5498,13 @@ li {
        padding-right: 0px;
     }
    }
+
+   @media screen and (min-width: 769px) and (max-width: 991px){
+    .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list  .trip_list_by_fixed_departure_dates_start {
+      padding-right: 20px;
+   }
+  .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_end {
+      padding-left: 30px;
+  }
+  }
    

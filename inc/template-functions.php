@@ -189,7 +189,7 @@ function wp_travel_wrapper_start() {
 			echo '<div class="wrap"><div id="primary" class="content-area twentyseventeen"><div id="main" class="site-main">';
 			break;
 		default:
-			echo '<div id="wp-travel-content" class="wp-travel-content container" role="main">';
+			echo '<div id="wp-travel-content" class="wp-travel-content container clearfix" role="main">';
 			break;
 	}
 }
@@ -2026,7 +2026,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<div class="group-size">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
@@ -2324,7 +2324,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<div class="group-size pax-selection">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ); ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>

@@ -17,6 +17,14 @@
 
 get_header( 'itinerary' ); ?>
 	<?php
+	$template = get_option( 'template' );
+	
+	if( 'Divi' === $template ) {
+		?>
+				<div class="container">
+		<?php
+	}
+
 	$current_theme = wp_get_theme();
 	if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 		?>
@@ -40,6 +48,11 @@ get_header( 'itinerary' ); ?>
 <?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
 <?php
 if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+	?>
+		</div>
+	<?php
+}
+if( 'Divi' === $template ) {
 	?>
 		</div>
 	<?php

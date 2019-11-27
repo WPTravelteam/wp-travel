@@ -2239,7 +2239,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 														} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 															// Do nothing.
 														} else {
-															$value = maybe_unserialize( $traveller_infos[ $field['name'] ][0] );
+															$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
 															$value = is_array( $value ) ? array_values( $value ) : $value;
 															$value = is_array( $value ) ? array_shift( $value ) : $value;
 															$value = is_array( $value ) ? $value[ $key ] : $value;
