@@ -5339,5 +5339,10 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
     padding-left: 30px;
   }
 }
+@media screen and (min-width: 769px) and (max-width: 991px) {
+  #wp-travel-tab-wrapper .resp-tabs-list {
+    display: flex;
+  }
+}
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
