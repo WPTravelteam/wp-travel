@@ -19,8 +19,11 @@ class WP_Travel_Admin_Info_Pointers {
 		// add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
 		// add_filter( 'wp_travel_admin_pointers-'. WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
 		// add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
-		add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
-		add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
+		$after_multiple_pricing = get_option( 'wp_travel_user_after_multiple_pricing_category' );
+		if ( 'yes' === $after_multiple_pricing ) {
+			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
+			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
+		}
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
 		// Admin General Notices.
