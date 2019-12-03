@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 3.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-03 06:52:51+00:00\n"
+"POT-Creation-Date: 2019-12-03 08:53:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1369,7 +1369,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1229
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1372
 #: inc/helpers/helpers-price.php:19 inc/helpers.php:1370
-#: templates/content-cart.php:155
+#: templates/content-cart.php:162
 msgid "Group"
 msgstr ""
 
@@ -2130,7 +2130,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-general.php:74
-#: templates/content-cart.php:253
+#: templates/content-cart.php:260
 msgid "Coupon Code"
 msgstr ""
 
@@ -2347,8 +2347,8 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:222 inc/helpers.php:2416
-#: templates/content-cart.php:56 templates/content-cart.php:243
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:230 inc/helpers.php:2416
+#: templates/content-cart.php:56 templates/content-cart.php:250
 msgid "Total"
 msgstr ""
 
@@ -2360,27 +2360,27 @@ msgstr ""
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:140
+#: inc/cart/cart-mini.php:148
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:169
+#: inc/cart/cart-mini.php:177
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:193
+#: inc/cart/cart-mini.php:201
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:194 templates/content-cart.php:226
+#: inc/cart/cart-mini.php:202 templates/content-cart.php:233
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:198 templates/content-cart.php:230
+#: inc/cart/cart-mini.php:206 templates/content-cart.php:237
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:235
+#: inc/cart/cart-mini.php:243
 msgid "Trip Book"
 msgstr ""
 
@@ -2395,39 +2395,44 @@ msgid ""
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: inc/class-ajax.php:301
+#: inc/class-ajax.php:190 inc/class-ajax.php:225 inc/helpers.php:1371
+#: inc/helpers.php:3094
+msgid "Custom"
+msgstr ""
+
+#: inc/class-ajax.php:303
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:318
+#: inc/class-ajax.php:320
 msgid "<strong>Error : </strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:327
+#: inc/class-ajax.php:329
 msgid "<strong>Error : </strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:337
+#: inc/class-ajax.php:339
 msgid ""
 "<strong>Error : </strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:349
+#: inc/class-ajax.php:351
 msgid "<strong>Error : </strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:365
+#: inc/class-ajax.php:367
 msgid ""
 "<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:382
+#: inc/class-ajax.php:384
 msgid "<strong>Error : </strong>Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:389
+#: inc/class-ajax.php:391
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -8159,10 +8164,6 @@ msgstr ""
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1371 inc/helpers.php:3094
-msgid "Custom"
-msgstr ""
-
 #: inc/helpers.php:1576
 msgid "New Account Created"
 msgstr ""
@@ -8996,23 +8997,23 @@ msgstr ""
 msgid "Date:"
 msgstr ""
 
-#: templates/content-cart.php:212
+#: templates/content-cart.php:219
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:225
+#: templates/content-cart.php:232
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:254
+#: templates/content-cart.php:261
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:260
+#: templates/content-cart.php:267
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:261
+#: templates/content-cart.php:268
 msgid "Proceed to checkout"
 msgstr ""
 

@@ -187,6 +187,7 @@ class WP_Travel_Ajax {
 					'price'         => wp_travel_get_formated_price( $category_price ),
 					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
 					'type'          => isset( $category['type'] ) ? $category['type'] : '', // Not set yet.
+					'custom_label'  => isset( $category['custom_label'] ) ? $category['custom_label'] : __( 'Custom', 'wp-travel' ),
 					'price_per'     => isset( $category['price_per'] ) ? $category['price_per'] : 'person',
 				);
 
@@ -221,6 +222,7 @@ class WP_Travel_Ajax {
 					'price'         => $price,
 					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
 					'type'          => 'adult', // Not set yet.
+					'custom_label'  => __( 'Custom', 'wp-travel' ),
 					'price_per'     => $price_per,
 					'trip_price'    => $trip_price,
 				)
