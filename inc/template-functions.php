@@ -2053,7 +2053,13 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong>
+																			<?php if( 'custom' === $pricing_category['type'] && isset( $pricing_category['custom_label'] ) && ! empty( $pricing_category['custom_label'] ) ) {
+																					echo esc_html( $pricing_category['custom_label'] );
+																				} else{
+																					echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) );
+																				} ?>
+																		</strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php
@@ -2375,7 +2381,13 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong>
+																			<?php if( 'custom' === $pricing_category['type'] && isset( $pricing_category['custom_label'] ) && ! empty( $pricing_category['custom_label'] ) ) {
+																					echo esc_html( $pricing_category['custom_label'] );
+																				} else{
+																					echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) );
+																				} ?>
+																		</strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php

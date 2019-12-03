@@ -1385,6 +1385,9 @@ function wp_travel_get_pricing_category_by_key( $key = null ) {
 	$variation = wp_travel_get_pricing_variation_options();
 
 	if ( array_key_exists( $key, $variation ) ) {
+		if ( 'custom' === $key ) { // Fix for translated string compare.
+			return $key;
+		}
 		return $variation[ $key ];
 	}
 	return;
@@ -3088,6 +3091,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 				'categories'               => array(
 					array(
 						'type'        => 'default',
+						'custom_label'=> __( 'Custom', 'wp-travel' ),
 						'price_per'   => wp_travel_get_price_per_text( $trip_id ),
 						// 'sale_price'  => wp_travel_get_actual_trip_price( $trip_id ),
 						'enable_sale' => ( wp_travel_is_enable_sale_price( $trip_id ) ) ? 'yes' : 'no',
@@ -3128,6 +3132,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						foreach ( $pricing_categories as $category_id => $pricing_category ) {
 							// $categories[ $category_id ]                = $pricing_category;
 							$categories[ $category_id ]['type']        = $pricing_category['type'];
+							$categories[ $category_id ]['custom_label']= $pricing_category['custom_label'];
 							$categories[ $category_id ]['price_per']   = $pricing_category['price_per'];
 							// $categories[ $category_id ]['sale_price']  = $pricing_category['sale_price'];
 							$categories[ $category_id ]['enable_sale'] = isset( $pricing_category['enable_sale'] ) ? $pricing_category['enable_sale'] : 'no';
@@ -3136,6 +3141,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 						}
 					} else {
 						$categories[ $pricing_id ]['type']        = $pricing_option['type'];
+						$categories[ $pricing_id ]['custom_label']= $pricing_option['custom_label'];
 						$categories[ $pricing_id ]['price_per']   = $pricing_option['price_per'];
 						// $categories[ $pricing_id ]['sale_price']  = $pricing_option['sale_price'];
 						$categories[ $pricing_id ]['enable_sale'] = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
