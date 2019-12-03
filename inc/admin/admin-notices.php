@@ -143,12 +143,11 @@ function wp_travel_black_friday_notice() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'wp_travel_black_friday_notice' );
-add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
-
+// add_action( 'admin_notices', 'wp_travel_black_friday_notice' );
 
 function wp_travel_black_friday_dismiss_notice_ajax() {
 	$user_id = get_current_user_id();
 	$key = 'wp_travel_black_friday_2019_' . $user_id;
 	update_option( $key, true );
 }
+// add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
