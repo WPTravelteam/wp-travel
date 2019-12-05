@@ -609,17 +609,29 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @since  1.0.2
  */
 function wp_travel_search_form() {
+	$label_string = apply_filters(
+		'wp_travel_search_filter_label_strings',
+		array(
+			'search'    => __( 'Search:', 'wp-travel' ),
+			'trip_type' => __( 'Trip Type:', 'wp-travel' ),
+			'location'  => __( 'Location:', 'wp-travel' ),
+		)
+	);
+
+	$search_string    = ! empty( $label_string['search'] ) ? $label_string['search'] : '';
+	$trip_type_string = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
+	$location_string  = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
 			<p>
-				<label><?php esc_html_e( 'Search:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $search_string ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $trip_type_string ); ?></label>
 				<?php
 				$taxonomy = 'itinerary_types';
 				$args     = array(
@@ -638,7 +650,7 @@ function wp_travel_search_form() {
 				?>
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Location:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $location_string ); ?></label>
 				<?php
 				$taxonomy = 'travel_locations';
 				$args     = array(
