@@ -308,7 +308,7 @@ function wp_travel_new_pricing_list_admin() {
 																				}
 																				?>
 																			</select>
-																			<input type="text" style="display:none" class="custom-pricing-label-wrap-<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][custom_label]" placeholder="Custom Label" />
+																			<input type="text" style="display:none" class="custom-pricing-label-wrap-<?php echo esc_attr( $category_id ); ?>" name="wp_travel_pricing_options[<?php echo esc_attr( $pricing_id ); ?>][categories][<?php echo esc_attr( $category_id ); ?>][custom_label]" placeholder="Custom Label" value="<?php echo esc_attr( $pricing_custom_label ); ?>" />
 																		<?php endif; ?>
 																	</div>
 																	<!-- <div class="repeat-row">
@@ -1182,7 +1182,7 @@ function wp_travel_old_pricing_list_admin() {
 												<div style="<?php echo esc_attr( $custom_pricing_label_style ); ?>" <?php echo esc_attr( $custom_pricing_label_attribute ); ?> class="repeat-row custom-pricing-label-wrap">
 													<label class="one-third"><?php esc_html_e( 'Custom pricing Label', 'wp-travel' ); ?></label>
 													<div class="two-third">
-														<input value="<?php echo esc_attr( $pricing_custom_label ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][custom_label]" placeholder="name" />
+														<input value="<?php echo esc_attr( $pricing_custom_label ); ?>" type="text" name="wp_travel_pricing_options[<?php echo esc_attr( $key ); ?>][custom_label]" placeholder="name" value="<?php echo esc_attr( $pricing_custom_label ); ?>" />
 													</div>
 												</div>
 

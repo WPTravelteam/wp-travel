@@ -5461,12 +5461,82 @@ li {
     // display: block !important;
  }
 
-@media screen and (min-width: 768px){
-    .date-wrapper .date-from{
-        float: left;
-    }
+.date-wrapper .date-from{
+  width: 50%;
+  float: left;
+ }
 
-    .date-wrapper .date-to{
-        float: right;
+.date-wrapper .date-to{
+  width: 50%;
+  float: right;
+ }
+
+@media screen and (max-width: 767px){
+.date-wrapper .date-from{
+  width: 100%;
+  float: none;
+ }
+
+.date-wrapper .date-to{
+  width: 100%;
+  float: none;
+ }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 992px){
+    .pax-select-container{
+      width: 75px;
+    }
+   
+    .pax-select-container .icon-minus{
+      padding-left: 0px;
+      padding-right: 5px;
+    }
+   
+    .pax-select-container .icon-plus{
+       padding-left: 5px;
+       padding-right: 0px;
     }
 }
+
+@media screen and (min-width: 769px) and (max-width: 991px){
+    .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list  .trip_list_by_fixed_departure_dates_start {
+        padding-right: 20px;
+    }
+    .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list .trip_list_by_fixed_departure_dates_end {
+        padding-left: 30px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px){
+    #wp-travel-tab-wrapper .resp-tabs-list{
+     display: flex;
+   } 
+}
+   
+// css for pax selector section in frontend
+
+.available-seats span{
+    text-align: left;
+    padding-left: 5px;
+  }
+  
+  .category .min-max-pax{
+    display: none;
+  }
+  
+  .category .pax-type{
+   text-transform: uppercase;
+  }
+  
+  .pax-select-container .pax-picker-minus{
+    color: grey !important;
+  }
+  
+  .pax-select-container .pax-picker-plus{
+    color: grey !important;
+  }
+  
+  .category .person-count ins{
+    background: none;
+  }

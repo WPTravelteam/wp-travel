@@ -189,7 +189,7 @@ function wp_travel_wrapper_start() {
 			echo '<div class="wrap"><div id="primary" class="content-area twentyseventeen"><div id="main" class="site-main">';
 			break;
 		default:
-			echo '<div id="wp-travel-content" class="wp-travel-content container" role="main">';
+			echo '<div id="wp-travel-content" class="wp-travel-content container clearfix" role="main">';
 			break;
 	}
 }
@@ -1944,14 +1944,14 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php if ( 'yes' === $pricing['fixed_departure'] ) : ?>
 									<!-- Column: Start Date -->
 									<div class="date-wrapper" style="width:<?php echo esc_attr( $date_field_wrapper_width ); ?>%">
-										<div class="date-from" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%">
+										<div class="date-from" >
 											<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 											<?php echo esc_html( date_i18n( 'l', strtotime( $pricing['arrival_date'] ) ) ); ?>
 											<span><?php echo esc_html( date_i18n( $date_format, strtotime( $pricing['arrival_date'] ) ) ); ?></span>
 											<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>">
 										</div>
 										<?php if ( $show_end_date ) : ?>
-											<div class="date-to" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%">
+											<div class="date-to" >
 												<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
 												<?php echo esc_html( date_i18n( 'l', strtotime( $pricing['departure_date'] ) ) ); ?>
 												<span><?php echo esc_html( date_i18n( $date_format, strtotime( $pricing['departure_date'] ) ) ); ?></span>
@@ -1962,7 +1962,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 								<?php else : ?>
 									<div class="date-wrapper" style="width:<?php echo esc_attr( $date_field_wrapper_width ); ?>%;">
 
-										<div class="date-from" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%; float:left">
+										<div class="date-from">
 											<span class="availabily-heading-label"><?php echo esc_html( $start_date_string ); ?></span>
 											<?php
 											$total_days = 0;
@@ -1993,7 +1993,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										</div>
 										<?php if ( $show_end_date ) : ?>
 
-											<div class="date-to" style="width:<?php echo esc_attr( $date_field_input_width ); ?>%; float : right">
+											<div class="date-to" >
 												<span class="availabily-heading-label"><?php echo esc_html( $end_date_string ); ?></span>
 												<?php
 												$end_field = array(
@@ -2026,7 +2026,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<div class="group-size">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
@@ -2053,7 +2053,13 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong>
+																			<?php if( 'custom' === $pricing_category['type'] && isset( $pricing_category['custom_label'] ) && ! empty( $pricing_category['custom_label'] ) ) {
+																					echo esc_html( $pricing_category['custom_label'] );
+																				} else{
+																					echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) );
+																				} ?>
+																		</strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php
@@ -2324,7 +2330,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<div class="group-size pax-selection">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="Select Pax" data-default="Select Pax" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ); ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
@@ -2375,7 +2381,13 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 
 																<p class="picker-info">
 																	<span class="pax-type">
-																		<strong><?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?></strong>
+																		<strong>
+																			<?php if( 'custom' === $pricing_category['type'] && isset( $pricing_category['custom_label'] ) && ! empty( $pricing_category['custom_label'] ) ) {
+																					echo esc_html( $pricing_category['custom_label'] );
+																				} else{
+																					echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) );
+																				} ?>
+																		</strong>
 																		<span class="min-max-pax">
 																			(
 																			<?php

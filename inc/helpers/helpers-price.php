@@ -112,11 +112,14 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 				}
 			endforeach;
 
-			if ( true === $return_key ) {
-				return $per_person_key;
-			}
+			if ( $per_person_key ) {
 
-			return $price_per_fields[ $per_person_key ];
+				if ( true === $return_key ) {
+					return $per_person_key;
+				}
+	
+				return $price_per_fields[ $per_person_key ];
+			}
 
 		}
 	}
