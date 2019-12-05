@@ -100,9 +100,14 @@ $form_fw->init_validation( 'wp-travel-booking' );
 												$field['id']   = sprintf( '%s-%s-%d', $field['id'], $cart_id, $i );
 
 												if ( ! $all_travelers_fields_require ) {
-													// Set required false to extra travellers.
-													$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
-													$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+													// Added to control over required fields for travellers @since 3.1.3.
+													if ( isset( $field['validations']['required_for_all'] ) ) {
+														$field['validations']['required'] = $i > 0 ? true : $field['validations']['required'];
+													} else {
+														// Set required false to extra travellers.
+														$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
+														$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+													}
 												}
 
 												$form_field->init( array( $field ) )->render();

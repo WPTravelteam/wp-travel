@@ -11,7 +11,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		$enable_og_tags             = $settings['enable_og_tags'];
 		$wp_travel_gdpr_message     = $settings['wp_travel_gdpr_message'];
 		$open_gdpr_in_new_tab       = $settings['open_gdpr_in_new_tab'];
-		
+
 		?>
 		<table class="form-table">
 			<tr>
@@ -39,7 +39,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 							<input value="no" name="enable_og_tags" type="hidden" />
 							<input <?php checked( $enable_og_tags, 'yes' ); ?> value="yes" name="enable_og_tags" id="enable_og_tags" type="checkbox" />
 							<span class="switch">
-						  </span>
+							</span>
 						</label>
 					</span>
 				</td>
@@ -62,7 +62,7 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 						<input value="no" name="open_gdpr_in_new_tab" type="hidden" />
 							<input <?php checked( $open_gdpr_in_new_tab, 'yes' ); ?> value="yes" name="open_gdpr_in_new_tab" id="open_gdpr_in_new_tab" type="checkbox" />
 							<span class="switch">
-						  </span>
+							</span>
 						</label>
 					</span>
 				</td>
@@ -102,9 +102,9 @@ function wp_travel_settings_callback_misc_options_global( $tab, $args ) {
 		endif;
 
 		do_action( 'wp_travel_settings_tab_misc_options_fields', $args );
-		
 
-		
+
+
 		if ( ! class_exists( 'WP_Travel_Wishlists_Core' ) ) :
 			?>
 			<h3><?php echo esc_html( 'Wishlists Options', 'wp-travel' ); ?></h3>
