@@ -230,6 +230,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.1.3 =
+Release Date: ?????????????
+Fixes :
+
+* Fixed special character issue with add to cart. Previously when we use a special character in the pricing name. then the trip is not able to add to the cart.
+
 = 3.1.2 =
 Release Date: 3rd December, 2019
 Fixes :

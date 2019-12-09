@@ -1906,8 +1906,12 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 						$pricing_categories = isset( $pricing['categories'] ) ? $pricing['categories'] : array();
 
 						$parent_id = 'wp-travel-pricing-wrap';
+						$rand = wp_rand(); // Generate random key.
 						if ( ! empty( $pricing['pricing_id'] ) ) { // Multiple pricing.
 							$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], rand( 1000, 9999 ) );
+							// Quick fixes for pricing key with special char not being able to add to cart.
+							$temp_rand = '-' . wp_rand( 10, 999 ) . '-';
+							$parent_id = sprintf( 'pricing-%s-%s', preg_replace( '/[^A-Za-z0-9\-]/', $temp_rand, str_replace( ' ', '-', $pricing['price_key'] ) ), $rand );
 						}
 
 						$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
@@ -2254,12 +2258,14 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 					$max_attr           = ! empty( $pricing['inventory']['max_pax'] ) ? ( ! empty( $pricing['inventory']['available_pax'] ) ? 'max=' . $pricing['inventory']['available_pax'] : 'max=' . $pricing['inventory']['max_pax'] ) : ''; // set available_pax as max_pax if available
 					$min_attr           = ! empty( $pricing['inventory']['min_pax'] ) ? 'min=' . $pricing['inventory']['min_pax'] : 'min=1';
 
-					$rand = rand(); // Generate random key.
+					$rand = wp_rand(); // Generate random key.
 
 					$parent_id = 'wp-travel-pricing-wrap-' . $rand; // Default random parent_id.
 
 					if ( ! empty( $pricing['pricing_id'] ) ) { // Multiple pricing.
-						$parent_id = sprintf( 'pricing-%s-%s', $pricing['price_key'], $rand );
+						// Quick fixes for pricing key with special char not being able to add to cart.
+						$temp_rand = '-' . wp_rand( 10, 999 ) . '-';
+						$parent_id = sprintf( 'pricing-%s-%s', preg_replace( '/[^A-Za-z0-9\-]/', $temp_rand, str_replace( ' ', '-', $pricing['price_key'] ) ), $rand );
 					}
 
 					$cart_url = add_query_arg( 'trip_id', get_the_ID(), wp_travel_get_cart_url() );
