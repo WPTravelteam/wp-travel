@@ -2243,7 +2243,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 					<?php endif ?>
 					<span class="trip_list_by_fixed_departure_dates_seats_label group-size-label"><?php echo esc_html( $group_size_string ); ?></span>
 					<?php if ( $show_status_col ) : ?>
-					<span class="trip_list_by_fixed_departure_dates_seats_label"><?php echo esc_html( $seats_left_string ); ?></span>
+					<!-- <span class="trip_list_by_fixed_departure_dates_seats_label"><?php echo esc_html( $seats_left_string ); ?></span> -->
 					<?php endif; ?>
 					<span class="trip_list_by_fixed_departure_dates_pax_label"><?php echo esc_html( $pax_string ); ?></span>
 					<span class="trip_list_by_fixed_departure_dates_price_label"><?php echo esc_html( $price_string ); ?></span>
@@ -2323,6 +2323,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										}
 										?>
 								</span>
+								<?php do_action( 'wp_travel_action_after_itinerary_date', $trip_id, $pricing ); // @since 3.1.3 ?>
 								<?php if ( $show_status_col ) : ?>
 									<span class="trip_list_by_fixed_departure_dates_seats available-seats">
 										<?php if ( $pricing['inventory']['sold_out'] ) : ?>

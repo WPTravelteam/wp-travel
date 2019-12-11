@@ -236,6 +236,7 @@ Fixes :
 
 * Fixed special character issue with add to cart. Previously when we use a special character in the pricing name. then the trip is not able to add to the cart.
 * Fixed the min price is not able to set as 0. 
+* Minor layout issue fixes. 
 
 Enhancement :
 
