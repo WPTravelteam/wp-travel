@@ -1962,6 +1962,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 												<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>">
 											</div>
 										<?php endif; ?>
+										<?php do_action( 'wp_travel_action_after_itinerary_date', $trip_id, $pricing ); // @since 3.1.3 ?>
 									</div>
 								<?php else : ?>
 									<div class="date-wrapper" style="width:<?php echo esc_attr( $date_field_wrapper_width ); ?>%;">
