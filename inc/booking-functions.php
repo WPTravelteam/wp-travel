@@ -679,7 +679,7 @@ function wp_travel_book_now() {
 			$price_keys[]             = $item['price_key'];
 			$booking_arrival_date[]   = $item['arrival_date'];
 			$booking_departure_date[] = $item['departure_date'];
-			$arrival_date_email_tag   = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
+			$arrival_date_email_tag[] = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
 
 		}
 		$price_key                 = false;
