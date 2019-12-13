@@ -2154,19 +2154,22 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 
 											if ( '' !== $order_detail['arrival_date'] ) {
-												$travel_date .= wp_travel_format_date( $order_detail['arrival_date'] ) . ', ';
+												$travel_date .= wp_travel_format_date( $order_detail['arrival_date'] );
 											} else {
-												$travel_date .= __( 'N/A', 'wp-travel' ) . ', ';
+												$travel_date .= __( 'N/A', 'wp-travel' );
 											}
+
+											$travel_date = apply_filters( 'wp_travel_booking_travel_date', $travel_date, $order_detail );  // @since 3.1.3
+											$travel_date .= ' | ';
 											?>
 											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>,
 											<?php
 										endforeach;
-										else :
-											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id );
-											?>
+									else :
+										$pricing_name = wp_travel_get_trip_pricing_name( $trip_id );
+										?>
 										<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>
-										<?php endif; ?>
+									<?php endif; ?>
 								</span>
 							</div>
 							<div class="my-order-single-field clearfix">
@@ -2647,6 +2650,7 @@ function wp_travel_get_strings() {
 		),
 		'alert'                 => array(
 			'required_pax_alert' => __( 'Pax is required.', 'wp-travel' ),
+			'atleast_min_pax_alert' => __( 'Please select at least minimum pax.', 'wp-travel' ),
 			'min_pax_alert'      => __( 'Pax should be greater than or equal to {min_pax}.', 'wp-travel' ),
 			'max_pax_alert'      => __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' ),
 			'both_pax_alert'     => __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' ),

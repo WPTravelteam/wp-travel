@@ -2361,6 +2361,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 														$min      = $pricing['inventory']['min_pax'];
 														$max_attr = "max={$max}";
 														$min_attr = ""; //"min={$min}";
+														$custom_label = isset( $pricing_category['custom_label'] ) ? $pricing_category['custom_label'] : '';
 														// if ( ! empty( $pricing_category['min_pax'] ) ) {
 														// $min      = $pricing_category['min_pax'];
 														// $min_attr = "min={$min}";
@@ -2426,7 +2427,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min; ?>"  data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min; ?>"  data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 

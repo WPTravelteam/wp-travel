@@ -231,12 +231,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.3 =
-Release Date: 11th December, 2019
+Release Date: 16th December, 2019
 Fixes :
 
 * Fixed special character issue with add to cart. Previously when we use a special character in the pricing name. then the trip is not able to add to the cart.
 * Fixed the min price is not able to set as 0. 
-* Minor layout issue fixes. 
+* Minor layout issue fixes.
+* Fixes: Some string translation fixes.
+* Fixes: Custom label value as static custom text changed to related custom label text. 
 
 Enhancement :
 
