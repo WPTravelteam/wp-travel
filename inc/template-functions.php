@@ -2295,7 +2295,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<div class="trip_list_by_fixed_departure_dates_day"><?php echo esc_html( date_i18n( 'l', strtotime( $pricing['arrival_date'] ) ) ); ?></div>
 									<div class="trip_list_by_fixed_departure_dates_date"><?php echo esc_html( date_i18n( $date_format, strtotime( $pricing['arrival_date'] ) ) ); ?></div>
 									<input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>">
-
+									<?php do_action( 'wp_travel_action_after_itinerary_date', $trip_id, $pricing ); // @since 3.1.3 ?>
 									<?php if ( $show_end_date && '' !== $pricing['departure_date'] ) : ?>
 										<div class="trip_list_by_fixed_departure_dates_length">
 											<div><?php echo esc_html( wp_travel_get_date_diff( $pricing['arrival_date'], $pricing['departure_date'] ) ); ?></div>
@@ -2323,7 +2323,6 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										}
 										?>
 								</span>
-								<?php do_action( 'wp_travel_action_after_itinerary_date', $trip_id, $pricing ); // @since 3.1.3 ?>
 								<?php if ( $show_status_col ) : ?>
 									<span class="trip_list_by_fixed_departure_dates_seats available-seats">
 										<?php if ( $pricing['inventory']['sold_out'] ) : ?>
