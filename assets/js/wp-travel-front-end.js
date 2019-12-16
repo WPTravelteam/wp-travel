@@ -352,7 +352,7 @@ jQuery(function ($) {
         var selectedPax = parseInt(pricing[0].dataset.selectedPax)
         var min_pax = parseInt(pricing[0].dataset.min)
         if (selectedPax < min_pax) {
-            alert('Please select at least minimum pax.')
+            alert(wp_travel.strings.alert.atleast_min_pax_alert)
             $(this).attr('disabled', 'disabled').css({ 'opacity': '.5' })
         } else {
             $(this).removeAttr('disabled').removeAttr('style');
@@ -403,6 +403,10 @@ jQuery(function ($) {
         $('#' + parent_id + ' .paxpicker-input').each(function () {
             if ($(this).val() > 0) {
                 var type = $(this).data('type'); // Type refers to category.
+                var custom_label = $(this).data('custom');
+                if ( 'custom' === type && '' != custom_label ) {
+                    type = custom_label;
+                }
                 var category_id = $(this).data('category-id'); // category id
                 display_value += ', ' + type + ' x ' + $(this).val();
                 pax_input += '<input type="hidden" name="pax[' + category_id + ']" value="' + $(this).val() + '" >';

@@ -609,17 +609,29 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @since  1.0.2
  */
 function wp_travel_search_form() {
+	$label_string = apply_filters(
+		'wp_travel_search_filter_label_strings',
+		array(
+			'search'    => __( 'Search:', 'wp-travel' ),
+			'trip_type' => __( 'Trip Type:', 'wp-travel' ),
+			'location'  => __( 'Location:', 'wp-travel' ),
+		)
+	);
+
+	$search_string    = ! empty( $label_string['search'] ) ? $label_string['search'] : '';
+	$trip_type_string = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
+	$location_string  = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
 			<p>
-				<label><?php esc_html_e( 'Search:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $search_string ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Trip Type:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $trip_type_string ); ?></label>
 				<?php
 				$taxonomy = 'itinerary_types';
 				$args     = array(
@@ -638,7 +650,7 @@ function wp_travel_search_form() {
 				?>
 			</p>
 			<p>
-				<label><?php esc_html_e( 'Location:', 'wp-travel' ); ?></label>
+				<label><?php echo esc_html( $location_string ); ?></label>
 				<?php
 				$taxonomy = 'travel_locations';
 				$args     = array(
@@ -2142,19 +2154,22 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
 
 											if ( '' !== $order_detail['arrival_date'] ) {
-												$travel_date .= wp_travel_format_date( $order_detail['arrival_date'] ) . ', ';
+												$travel_date .= wp_travel_format_date( $order_detail['arrival_date'] );
 											} else {
-												$travel_date .= __( 'N/A', 'wp-travel' ) . ', ';
+												$travel_date .= __( 'N/A', 'wp-travel' );
 											}
+
+											$travel_date = apply_filters( 'wp_travel_booking_travel_date', $travel_date, $order_detail );  // @since 3.1.3
+											$travel_date .= ' | ';
 											?>
 											<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>,
 											<?php
 										endforeach;
-										else :
-											$pricing_name = wp_travel_get_trip_pricing_name( $trip_id );
-											?>
+									else :
+										$pricing_name = wp_travel_get_trip_pricing_name( $trip_id );
+										?>
 										<a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>" target="_blank"><?php echo esc_attr( $pricing_name ); ?></a>
-										<?php endif; ?>
+									<?php endif; ?>
 								</span>
 							</div>
 							<div class="my-order-single-field clearfix">
@@ -2635,6 +2650,7 @@ function wp_travel_get_strings() {
 		),
 		'alert'                 => array(
 			'required_pax_alert' => __( 'Pax is required.', 'wp-travel' ),
+			'atleast_min_pax_alert' => __( 'Please select at least minimum pax.', 'wp-travel' ),
 			'min_pax_alert'      => __( 'Pax should be greater than or equal to {min_pax}.', 'wp-travel' ),
 			'max_pax_alert'      => __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' ),
 			'both_pax_alert'     => __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' ),

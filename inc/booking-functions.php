@@ -671,6 +671,7 @@ function wp_travel_book_now() {
 		$price_keys             = array();
 		$booking_arrival_date   = array();
 		$booking_departure_date = array();
+		$arrival_date_email_tag = array(); // quick fix to add arrival date along with time in email.
 		foreach ( $items as $key => $item ) {
 
 			$trip_ids[]               = $item['trip_id'];
@@ -678,6 +679,7 @@ function wp_travel_book_now() {
 			$price_keys[]             = $item['price_key'];
 			$booking_arrival_date[]   = $item['arrival_date'];
 			$booking_departure_date[] = $item['departure_date'];
+			$arrival_date_email_tag[] = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
 
 		}
 		$price_key                 = false;
@@ -690,6 +692,7 @@ function wp_travel_book_now() {
 			$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
 			$booking_arrival_date   = $booking_arrival_date[0];
 			$booking_departure_date = $booking_departure_date[0];
+			$arrival_date_email_tag = $arrival_date_email_tag[0];
 
 		}
 		// Quick fixes trip id.
@@ -740,6 +743,7 @@ function wp_travel_book_now() {
 	update_post_meta( $booking_id, 'wp_travel_arrival_date', $booking_arrival_date );
 	update_post_meta( $booking_id, 'wp_travel_departure_date', $booking_departure_date );
 	update_post_meta( $booking_id, 'wp_travel_post_id', $trip_id ); // quick fix [booking not listing in user dashboard].
+	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', $arrival_date_email_tag ); // quick fix arrival date with time.
 
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
 	foreach ( $_POST as $meta_name => $meta_val ) {
@@ -884,7 +888,7 @@ function wp_travel_book_now() {
 			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
 			'{booking_no_of_pax}'      => $booking_no_of_pax,
 			'{booking_scheduled_date}' => $booking_scheduled_date,
-			'{booking_arrival_date}'   => $booking_arrival_date,
+			'{booking_arrival_date}'   => $arrival_date_email_tag,
 			'{booking_departure_date}' => $booking_departure_date,
 
 			'{customer_name}'          => $customer_name,

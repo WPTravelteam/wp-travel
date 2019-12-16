@@ -176,13 +176,13 @@ class WP_Travel_Admin_Metaboxes {
 								<th align="right"><?php esc_html_e( 'Payment Method : ', 'wp-travel' ); ?></th>
 								<td><?php echo esc_html( $payment_args['payment_method'] ); ?></td>
 							</tr>
-						<?php endif; ?>	
+						<?php endif; ?>
 						<?php if ( isset( $payment_args['payment_date'] ) ) : ?>
 							<tr>
 								<th align="right"><?php esc_html_e( 'Payment Date : ', 'wp-travel' ); ?></th>
 								<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
 							</tr>
-						<?php endif; ?>			
+						<?php endif; ?>
 						<?php foreach ( $payment_args['data'] as $title => $description ) : ?>
 							<tr>
 								<th align="right"><?php echo esc_html( $title . ' : ' ); ?></th>
@@ -477,7 +477,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		$trip_meta['wp_travel_faq_question'] = isset( $_POST['wp_travel_faq_question'] ) ? ( wp_unslash( $_POST['wp_travel_faq_question'] ) ) : array();
 		$trip_meta['wp_travel_faq_answer']   = isset( $_POST['wp_travel_faq_answer'] ) ? ( wp_unslash( $_POST['wp_travel_faq_answer'] ) ) : array();
-		$trip_meta['wp_travel_is_global_faq']   = isset( $_POST['wp_travel_is_global_faq'] ) ? ( wp_unslash( $_POST['wp_travel_is_global_faq'] ) ) : array(); // fixes issue with is global faq values not updating when disabling pro. 
+		$trip_meta['wp_travel_is_global_faq']   = isset( $_POST['wp_travel_is_global_faq'] ) ? ( wp_unslash( $_POST['wp_travel_is_global_faq'] ) ) : array(); // fixes issue with is global faq values not updating when disabling pro.
 
 		// WP Travel Standard Paypal Merged. @since 1.2.1.
 		$trip_meta['wp_travel_minimum_partial_payout']            = isset( $_POST['wp_travel_minimum_partial_payout'] ) ? ( wp_unslash( $_POST['wp_travel_minimum_partial_payout'] ) ) : 0;

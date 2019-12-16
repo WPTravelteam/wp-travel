@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.3
 Requires PHP: 5.5
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,20 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.3 =
+Release Date: 16th December, 2019
+Fixes :
+
+* Fixed special character issue with add to cart. Previously when we use a special character in the pricing name. then the trip is not able to add to the cart.
+* Fixed the min price is not able to set as 0. 
+* Minor layout issue fixes.
+* Fixes: Some string translation fixes.
+* Fixes: Custom label value as static custom text changed to related custom label text. 
+
+Enhancement :
+
+* Compatibility for trip time added under date.
 
 = 3.1.2 =
 Release Date: 3rd December, 2019
