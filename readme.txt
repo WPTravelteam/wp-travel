@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.3
 Requires PHP: 5.5
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -229,6 +229,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.4 =
+Release Date: 24th December, 2019
+Fixes :
+
+* Transient replaced with post meta for booking count in trip.
+* Added CSS class in helper function 'wp_travel_get_trip_duration'.
+* Translation string fixes in the cart empty message.
+* Settings to update Number of decimal for the price.
 
 = 3.1.3 =
 Release Date: 16th December, 2019

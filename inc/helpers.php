@@ -693,7 +693,14 @@ function wp_travel_get_trip_duration( $post_id ) {
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
 
 	if ( 'yes' === $fixed_departure ) :
-		echo wp_travel_get_fixed_departure_date( $post_id );
+		?>
+		<div class="wp-travel-trip-time trip-duration">
+			<i class="wt-icon-regular wt-icon-clock"></i>
+			<span class="wp-travel-trip-duration">
+				<?php echo wp_travel_get_fixed_departure_date( $post_id ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
+			</span>
+		</div>
+		<?php
 	else :
 		?>
 		<?php

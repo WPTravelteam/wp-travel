@@ -1026,7 +1026,8 @@ function wp_travel_book_now() {
 	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key );
 
 	// Clear Transient To update booking Count.
-	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 
 	// Clear Cart After process is complete.
 	$wt_cart->clear();

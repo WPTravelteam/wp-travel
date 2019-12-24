@@ -436,7 +436,7 @@ class WP_Travel_Cart {
 
 	public function cart_empty_message() {
 		$url = get_post_type_archive_link( WP_TRAVEL_POST_TYPE );
-		echo ( __( sprintf( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', $url ), 'wp-travel' ) );
+		echo sprintf( __( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', 'wp-travel' ), esc_url( $url ) );
 	}
 	/**
 	 * Clear all items in the cart.
