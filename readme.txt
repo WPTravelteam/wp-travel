@@ -3,7 +3,7 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.3
+Tested up to: 5.3.2
 Requires PHP: 5.5
 Stable tag: 3.1.4
 License: GPLv3
@@ -81,7 +81,8 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Pleased Pro](https://wptravel.io/demo/?demo=pleased-pro&utm_source=paidthemes&utm_medium=pleasedpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Tourable Pro](https://wptravel.io/demo/?demo=tourable-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
-* [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=taletravelpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Travel Master Pro](https://wptravel.io/demo/?demo=travel-master-pro&utm_source=paidthemes&utm_medium=travelmasterpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/themes/&utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
 
