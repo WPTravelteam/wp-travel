@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.4 =
-Release Date: 24th December, 2019
+Release Date: 26th December, 2019
 Fixes :
 
 * Transient replaced with post meta for booking count in trip.
