@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.3
+Tested up to: 5.3.2
 Requires PHP: 5.5
-Stable tag: 3.1.3
+Stable tag: 3.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -81,7 +81,8 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Pleased Pro](https://wptravel.io/demo/?demo=pleased-pro&utm_source=paidthemes&utm_medium=pleasedpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Tourable Pro](https://wptravel.io/demo/?demo=tourable-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
-* [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=taletravelpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Travel Master Pro](https://wptravel.io/demo/?demo=travel-master-pro&utm_source=paidthemes&utm_medium=travelmasterpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/themes/&utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
 
@@ -229,6 +230,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.4 =
+Release Date: 26th December, 2019
+Fixes :
+
+* Transient replaced with post meta for booking count in trip.
+* Added CSS class in helper function 'wp_travel_get_trip_duration'.
+* Translation string fixes in the cart empty message.
+* Settings to update Number of decimal for the price.
 
 = 3.1.3 =
 Release Date: 16th December, 2019

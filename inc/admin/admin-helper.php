@@ -381,6 +381,7 @@ function wp_travel_clear_booking_count_transient( $booking_id ) {
 	}
 	$trip_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 	do_action( 'wp_travel_action_after_trash_booking', $booking_id ); // @since 2.0.3 to update current booking inventory data.
 }
 
@@ -398,28 +399,30 @@ function wp_travel_clear_booking_count_transient_untrash( $booking_id ) {
 		return;
 	}
 	$trip_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
-	delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 	do_action( 'wp_travel_action_after_untrash_booking', $booking_id ); // @since 2.0.3 to update current booking inventory data.
 }
 
-function wp_travel_get_booking_count( $itinerary_id ) {
-	if ( ! $itinerary_id ) {
+function wp_travel_get_booking_count( $trip_id ) {
+	if ( ! $trip_id ) {
 		return 0;
 	}
 	global $wpdb;
-	$booking_count = get_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	// $booking_count = get_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 	if ( ! $booking_count ) {
 		$booking_count = 0;
 		$query         = "SELECT count( itinerary_id ) as booking_count FROM {$wpdb->posts} P
-		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$itinerary_id} group by itinerary_id";
+		JOIN ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' and meta_value > 0 ) I on P.ID = I.post_id  where post_type='itinerary-booking' and post_status='publish' and itinerary_id={$trip_id} group by itinerary_id";
 		$results       = $wpdb->get_row( $query );
 		if ( $results ) {
 			$booking_count = $results->booking_count;
 		}
-		set_site_transient( "_transient_wt_booking_count_{$itinerary_id}", $booking_count );
+		// set_site_transient( "_transient_wt_booking_count_{$trip_id}", $booking_count );
 
-		// Post meta only for sorting.
-		update_post_meta( $itinerary_id, 'wp_travel_booking_count', $booking_count );
+		// Post meta only for sorting. // @since 3.0.4 it is also used for count.
+		update_post_meta( $trip_id, 'wp_travel_booking_count', $booking_count );
 	}
 	return $booking_count;
 }

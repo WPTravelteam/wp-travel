@@ -1729,8 +1729,9 @@ function wp_travel_clear_booking_transient( $post_id ) {
 	delete_site_transient( '_transient_wt_booking_top_itinerary' );
 
 	// Booking Count Transient
-	$itinerary_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
-	delete_site_transient( "_transient_wt_booking_count_{$itinerary_id}" );
+	$trip_id = get_post_meta( $post_id, 'wp_travel_post_id', true );
+	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 	delete_site_transient( '_transient_wt_booking_payment_stat_data' );
 	// @since 1.0.6
 	do_action( 'wp_travel_after_deleting_booking_transient' );
@@ -2096,7 +2097,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" <?php echo $min_attr; ?> <?php echo sprintf( '%s', $max_attr ); ?>   step="<?php echo esc_attr( $step ); ?>" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-type="<?php  echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" <?php echo $min_attr; ?> <?php echo sprintf( '%s', $max_attr ); ?>   step="<?php echo esc_attr( $step ); ?>" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 
@@ -2351,7 +2352,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 												?>
 
 												<div class="category available-seats" style="<?php echo ( (int) $pricing['inventory']['max_pax'] < 999 ) ? '' : 'display:none'; ?>">
-													<?php echo esc_html( 'Available Seats: ' ) . '<span>' . (int) $available_pax . '</span>'; ?>
+													<?php echo esc_html__( 'Available Seats: ', 'wp-travel' ) . '<span>' . (int) $available_pax . '</span>'; ?>
 												</div>
 												<?php
 												if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
@@ -2426,7 +2427,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min; ?>"  data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( $pricing_category['type'] ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min; ?>"  data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 
