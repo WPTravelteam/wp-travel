@@ -5376,4 +5376,23 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   background: none;
 }
 
+@media screen and (min-width: 1200px) {
+  .wp-toolbar-filter-field .wp_travel_input_filters, .wp-travel-toolbar .wp-travel-filter-button .wp_travel_input_filters {
+    width: 140px;
+  }
+}
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+  .wp-toolbar-filter-field .wp_travel_input_filters, .wp-travel-toolbar .wp-travel-filter-button .wp_travel_input_filters {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  .wp-toolbar-filter-field .wp_travel_input_filters, .wp-travel-toolbar .wp-travel-filter-button .wp_travel_input_filters {
+    width: 70px;
+  }
+}
+.wp-toolbar-filter-field p, .wp-travel-toolbar .wp-travel-filter-button p {
+  text-transform: capitalize;
+}
+
 /*# sourceMappingURL=wp-travel-front-end.css.map */
