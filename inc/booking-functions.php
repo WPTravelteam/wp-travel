@@ -692,7 +692,7 @@ function wp_travel_book_now() {
 			$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
 			$booking_arrival_date   = $booking_arrival_date[0];
 			$booking_departure_date = $booking_departure_date[0];
-			$arrival_date_email_tag = $arrival_date_email_tag[0];
+			$arrival_date_email_tag = wp_travel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' ) ;
 
 		}
 		// Quick fixes trip id.
