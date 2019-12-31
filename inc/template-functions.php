@@ -1356,7 +1356,7 @@ function wp_travel_archive_filter_by() {
 	$trip_type_text = $strings['trip_type'];
 	$location_text  = $strings['location'];
 	$show_text      = $strings['show'];
-	$trip_date_text = 'trip date';
+	$trip_date_text = $strings['trip_date'];
 
 	?>
 	<div class="wp-travel-post-filter clearfix">
@@ -1693,7 +1693,7 @@ function wp_travel_posts_filter( $query ) {
 
 			if ( isset( $_GET['trip_date'] ) && '' != $_GET['trip_date'] ) {
 				$query->set( 'meta_key', 'trip_date' );
-				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'orderby', 'meta_value' );
 				if ( 'asc' === $_GET['trip_date'] ) {
 					$query->set( 'order', 'asc' );
 				} else {
