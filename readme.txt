@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.5 =
-Release Date: 1st January, 2020
+Release Date: 2nd January, 2020
 Enhancement :
 
 * Added filter by trip date. Ascending / Descending options are in the trip archive page to sort by trip date.
