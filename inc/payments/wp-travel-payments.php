@@ -437,7 +437,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
 	$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
 
-	$arrival_date_email_tag = $booking_arrival_date;  // email tag date only.
+	$arrival_date_email_tag = wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' );  // email tag date only.
 	$wp_travel_arrival_date_email_tag = get_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', true ); 
 	if ( $wp_travel_arrival_date_email_tag ) {
 		$arrival_date_email_tag = $wp_travel_arrival_date_email_tag; // email date tag along with time.

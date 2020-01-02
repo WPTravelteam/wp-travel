@@ -2451,7 +2451,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 			background: #e0e0e0;
 			// display: inline-block;
 			float: left;
-			height: 100%;
+			//height: 100%;
 			line-height: 1.55;
 
 			@include sidr-view {
@@ -6289,4 +6289,36 @@ li {
 
 .category .person-count ins {
 	background: none;
+}
+
+//css for sorting by trip date in frontend
+
+@media screen and (min-width: 1200px){
+	.wp-toolbar-filter-field{
+		.wp_travel_input_filters{
+	    	width: 140px;
+		}
+	} 
+}
+
+@media screen and (max-width: 1199px) and (min-width: 992px){
+	.wp-toolbar-filter-field{
+		.wp_travel_input_filters{
+   			width: 100px;
+	    }
+	}
+}
+
+@media screen and (max-width: 991px) and (min-width: 768px){
+	.wp-toolbar-filter-field{
+       .wp_travel_input_filters{
+	    	width: 70px;
+	    }
+	}
+}
+
+.wp-toolbar-filter-field{
+	p{
+		text-transform: capitalize;
+	}
 }

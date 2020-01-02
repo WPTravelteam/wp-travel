@@ -2092,6 +2092,16 @@ function wp_travel_get_pricing_option_listing_type( $settings = null ) {
 	// $list_type = 'by-date';
 	return apply_filters( 'wp_travel_pricing_option_listing_type', $list_type );
 }
+/**
+ * @since 3.1.5
+ */
+function wp_travel_get_trip_archive_filter_by( $settings = null ) {
+	if ( ! $settings ) {
+		$settings = wp_travel_get_settings();
+	}
+	$list_type = isset( $settings['trip_archive_filter_by'] ) ? $settings['trip_archive_filter_by'] : 'default';
+	return apply_filters( 'wp_travel_trip_archive_filter_by', $list_type );
+}
 
 function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column = false ) {
 	if ( ! $booking_id ) {
@@ -2637,6 +2647,7 @@ function wp_travel_get_strings() {
 		'filter_by'             => __( 'Filter By', 'wp-travel' ),
 		'price'                 => __( 'Price', 'wp-travel' ),
 		'location'              => __( 'Location', 'wp-travel' ),
+		'trip_date'             => __( 'Trip date', 'wp-travel' ),
 		'show'                  => __( 'Show', 'wp-travel' ),
 
 		'bookings'              => array(
@@ -2967,12 +2978,34 @@ function wp_travel_get_fixed_departure_date( $trip_id ) {
 }
 
 /**
- * Custom Function to sort date array.
+ * Custom Function to sort date array. [Just to sort date]. Do not use it directly.
  *
  * @since 2.0.5
  */
 function wp_travel_date_sort( $a, $b ) {
 	return strtotime( $a ) - strtotime( $b );
+}
+
+/**
+ * Custom Function to sort date array desc. [Just to sort date]. Do not use it directly.
+ *
+ * @since 3.0.5
+ */
+function wp_travel_date_sort_desc( $a, $b ) {
+	return strtotime( $b ) - strtotime( $a );
+}
+
+/**
+ * Removes expired date form the array.
+ *
+ * @param array $dates date.
+ * @since 3.0.5
+ */
+function wp_travel_filter_expired_date( $dates ) {
+	$dates = array_filter( $dates, function($date)  {
+		return strtotime( $date ) >= strtotime( 'today' );
+	});
+	return $dates;
 }
 
 /**

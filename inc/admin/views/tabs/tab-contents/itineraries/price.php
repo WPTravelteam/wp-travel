@@ -600,6 +600,12 @@ function wp_travel_new_pricing_list_admin() {
 				<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ); ?>
 			</td>
 		</tr>
+		<?php
+			$args = array(
+				'trip_id' => $post_id,
+			);
+			do_action( 'wp_travel_after_trip_duration_fields', $args );
+		?>
 		<tr class="price-option-row  <?php echo esc_attr( $multiple_pricing_option_class ); ?> wp-travel-enable-multiple-dates" >
 			<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 			<td><span class="show-in-frontend checkbox-default-design">
@@ -1445,6 +1451,12 @@ function wp_travel_old_pricing_list_admin() {
 				<input type="number" min="0" step="1" name="wp_travel_trip_duration_night" id="wp-travel-trip-duration-night" value="<?php echo esc_attr( $trip_duration_night ); ?>" /> <?php esc_html_e( 'Night(s)', 'wp-travel' ); ?>
 			</td>
 		</tr>
+		<?php
+			$args = array(
+				'trip_id' => $post_id,
+			);
+			do_action( 'wp_travel_after_trip_duration_fields', $args );
+		?>
 		<tr class="price-option-row  <?php echo esc_attr( $multiple_pricing_option_class ); ?> wp-travel-enable-multiple-dates" >
 			<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 			<td><span class="show-in-frontend checkbox-default-design">
