@@ -388,6 +388,7 @@ function wp_travel_booking_info( $post ) {
 					<div class="order-list">
 						<div class="order-wrapper">
 							<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
+							<?php do_action( 'wp_travel_booking_metabox_after_title', $booking_id ); // @since 3.0.6 ?>
 							<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
 						</div>
 						<?php wp_travel_view_payment_details_table( $booking_id ); ?>

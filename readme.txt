@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.3.2
 Requires PHP: 5.5
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,6 +230,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.6 =
+Release Date: 22nd January, 2020
+Enhancement :
+
+* Support for WP Travel Invoice.
 
 = 3.1.5 =
 Release Date: 2nd January, 2020
