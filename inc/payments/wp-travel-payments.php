@@ -422,10 +422,10 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 	$payment_id   = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
-	$trip_code = wp_travel_get_trip_code( $itinerary_id );
-	$title     = 'Booking - ' . $trip_code;
+	// $trip_code = wp_travel_get_trip_code( $itinerary_id );
+	// $title     = 'Booking - ' . $trip_code;
 
-	$itinerary_title = get_the_title( $itinerary_id );
+	// $itinerary_title = get_the_title( $itinerary_id );
 
 	$booking_no_of_pax      = get_post_meta( $booking_id, 'wp_travel_pax', true );
 	$booking_scheduled_date = 'N/A';
@@ -535,6 +535,8 @@ function wp_travel_send_email_payment( $booking_id ) {
 		exit;
 	}
 
+	$email_data = array( 'from' => $reply_to_email, 'to' => $customer_email );
+	do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.
 }
 
 /**
