@@ -216,6 +216,11 @@ class WP_Travel_Ajax {
 			if ( 'person' == $price_per ) {
 				$trip_price = $price * $pax;
 			}
+
+			// Custom Trip Price.
+			if ( isset( $_POST['trip_price'] ) && $_POST['trip_price'] > 0 ) {
+				$trip_price = $_POST['trip_price'];
+			}
 			$attrs['trip'] = array(
 				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since 3.0.0
 					'pax'           => $pax,
@@ -234,6 +239,11 @@ class WP_Travel_Ajax {
 					$trip_price = $group_trip_price;
 				}
 			}
+		}
+
+		// Custom Trip Price.
+		if ( isset( $_POST['trip_price'] ) && $_POST['trip_price'] > 0 ) {
+			$trip_price = $_POST['trip_price'];
 		}
 
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
