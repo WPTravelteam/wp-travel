@@ -125,7 +125,11 @@ class WP_Travel_Ajax {
 	}
 
 	function wp_travel_add_to_cart() {
-		if ( ! isset( $_REQUEST['trip_id'] ) ) {
+		$post_data = $_POST;
+		$postData = json_decode( file_get_contents('php://input') );
+		$post_data = ! empty( $postData ) ? (array) $postData : $post_data;
+
+		if ( ! isset( $post_data['trip_id'] ) ) {
 			return;
 		}
 		global $wt_cart;
@@ -136,13 +140,13 @@ class WP_Travel_Ajax {
 			$wt_cart->clear();
 		}
 
-		$trip_id        = $_REQUEST['trip_id'];
-		$price_key      = isset( $_REQUEST['price_key'] ) ? $_REQUEST['price_key'] : '';
-		$pricing_id     = isset( $_REQUEST['pricing_id'] ) ? $_REQUEST['pricing_id'] : ''; // @since 3.0.0
-		$arrival_date   = isset( $_REQUEST['arrival_date'] ) ? $_REQUEST['arrival_date'] : '';
-		$departure_date = isset( $_REQUEST['departure_date'] ) ? $_REQUEST['departure_date'] : ''; // Need to remove. is't post value.
-		$pax            = isset( $_REQUEST['pax'] ) ? $_REQUEST['pax'] : 0;
-		$trip_extras    = isset( $_REQUEST['wp_travel_trip_extras'] ) ? $_REQUEST['wp_travel_trip_extras'] : array();
+		$trip_id        = $post_data['trip_id'];
+		$price_key      = isset( $post_data['price_key'] ) ? $post_data['price_key'] : '';
+		$pricing_id     = isset( $post_data['pricing_id'] ) ? $post_data['pricing_id'] : ''; // @since 3.0.0
+		$arrival_date   = isset( $post_data['arrival_date'] ) ? $post_data['arrival_date'] : '';
+		$departure_date = isset( $post_data['departure_date'] ) ? $post_data['departure_date'] : ''; // Need to remove. is't post value.
+		$pax            = isset( $post_data['pax'] ) ? $post_data['pax'] : 0;
+		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
@@ -203,7 +207,7 @@ class WP_Travel_Ajax {
 			$attrs['trip'] = $trip;
 			$pax   = $total_pax;
 		} else {
-			$pax        = array_sum( $pax );
+			$pax        = array_sum( (array) $pax );
 			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
 			$price_per  = ! empty( $price_per ) ? $price_per : 'person';
 			// multiply category_price by pax to add in trip price if price per is person.
@@ -218,8 +222,8 @@ class WP_Travel_Ajax {
 			}
 
 			// Custom Trip Price.
-			if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
-				$trip_price = $_REQUEST['trip_price'];
+			if ( isset( $post_data['trip_price'] ) && $post_data['trip_price'] > 0 ) {
+				$trip_price = $post_data['trip_price'];
 			}
 			$attrs['trip'] = array(
 				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since 3.0.0
@@ -242,8 +246,8 @@ class WP_Travel_Ajax {
 		}
 
 		// Custom Trip Price.
-		if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
-			$trip_price = $_REQUEST['trip_price'];
+		if ( isset( $post_data['trip_price'] ) && $post_data['trip_price'] > 0 ) {
+			$trip_price = $post_data['trip_price'];
 		}
 
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
