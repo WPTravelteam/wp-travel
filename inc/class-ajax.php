@@ -268,7 +268,7 @@ class WP_Travel_Ajax {
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 
-		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs );
+		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs, $post_data );
 
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
@@ -283,9 +283,8 @@ class WP_Travel_Ajax {
 				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
 			}
 		} else {
-			$wt_cart->add( $trip_id, $trip_price, $pax, $price_key, $attrs );
+			$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
 		}
-
 		echo true;
 
 	}
