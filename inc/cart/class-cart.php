@@ -165,7 +165,10 @@ class WP_Travel_Cart {
 	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax, $price_key = '', $attrs = array() ) {
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
-
+		error_log( $cart_item_id );
+		// error_log( $trip_id );
+		error_log( $price_key );
+		// error_log( $arrival_date );
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {
@@ -234,7 +237,7 @@ class WP_Travel_Cart {
 				continue;
 			}
 			$items[ $id ] = $item;
-			print_r( $item );
+			// print_r( $item );
 		}
 
 		$cart['cart_items'] = $items;
@@ -609,9 +612,13 @@ class WP_Travel_Cart {
 	 * @since   1.5.8
 	 */
 	public function wp_travel_get_cart_item_id( $trip_id, $price_key = '', $start_date = '' ) {
-
+		error_log( 'cart item id ' .   print_R( $price_key, true ) );
+		error_log( 'trip_id ' .   $trip_id);
 		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
 		$cart_item_id = ( isset( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
+		return $cart_item_id;
+		error_log( 'cart id ' .   $cart_item_id);
+
 		return apply_filters( 'wp_travel_filter_cart_item_id', $cart_item_id, $trip_id, $price_key );
 	}
 }
