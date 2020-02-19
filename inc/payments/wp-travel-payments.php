@@ -356,6 +356,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	do_action( 'wp_travel_before_payment_email_send', $booking_id );
 	$order_items = get_post_meta( $booking_id, 'order_items_data', true );
 
 	$price_keys = array();
