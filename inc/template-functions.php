@@ -588,7 +588,7 @@ function wp_travel_single_location( $post_id ) {
 	if ( 'yes' === $fixed_departure ) :
 		if ( $dates = wp_travel_get_fixed_departure_date( $post_id ) ) {
 			?>
-				<li>
+				<li class="wp-travel-fixed-departure">
 					<div class="travel-info">
 						<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
 					</div>
@@ -604,7 +604,7 @@ function wp_travel_single_location( $post_id ) {
 
 	<?php else : ?>
 		<?php if ( $trip_duration || $trip_duration_night ) : ?>
-			<li>
+			<li class="wp-travel-trip-duration">
 				<div class="travel-info">
 					<strong class="title"><?php echo esc_html( $trip_duration_text ); ?></strong>
 				</div>
