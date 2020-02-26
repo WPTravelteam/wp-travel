@@ -151,7 +151,8 @@ class WP_Travel_Ajax {
 
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
-		if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
+		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
+		// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			$total_pax          = array_sum( $pax );
 			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
@@ -186,11 +187,17 @@ class WP_Travel_Ajax {
 				}
 
 				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
+				
+				$catetory_type = isset( $category['type'] ) ? $category['type'] : ''; // Old Way to get type in WP Travel.
+				if ( empty( $catetory_type ) && is_numeric( $category_id ) ) { // Set category type if category is taxonomy term.
+					$pricing_category = get_term($category_id, 'itinerary_pricing_category');
+					$catetory_type = $pricing_category->name;
+				}
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
 					'price'         => wp_travel_get_formated_price( $category_price ),
 					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
-					'type'          => isset( $category['type'] ) ? $category['type'] : '', // Not set yet.
+					'type'          => $catetory_type,
 					'custom_label'  => isset( $category['custom_label'] ) ? $category['custom_label'] : __( 'Custom', 'wp-travel' ),
 					'price_per'     => isset( $category['price_per'] ) ? $category['price_per'] : 'person',
 				);
