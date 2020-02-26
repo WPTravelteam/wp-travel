@@ -1009,7 +1009,7 @@ function wp_travel_book_now() {
 			 */
 			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
 			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
-			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date );
+			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date, $booking_id );
 
 			if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
 				$multiple_order = new WP_Travel_Multiple_Cart_Booking();

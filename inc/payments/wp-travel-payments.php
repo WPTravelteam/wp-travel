@@ -494,6 +494,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$admin_message_data  = $admin_payment_template['mail_header'];
 		$admin_message_data .= $admin_payment_template['mail_content'];
 		$admin_message_data .= $admin_payment_template['mail_footer'];
+		$admin_message_data  = apply_filters( 'wp_travel_admin_payment_email', $admin_message_data, $booking_id );
 
 		// Admin message.
 		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
@@ -519,7 +520,8 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$client_message_data  = $client_payment_template['mail_header'];
 	$client_message_data .= $client_payment_template['mail_content'];
 	$client_message_data .= $client_payment_template['mail_footer'];
-
+	$client_message_data = apply_filters( 'wp_travel_client_payment_email', $client_message_data, $booking_id );
+	
 	// Client Payment message.
 	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	// Client Payment Subject.
