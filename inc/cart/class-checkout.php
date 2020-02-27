@@ -41,9 +41,12 @@ class WP_Travel_Checkout {
 
         if ( 'yes' === $require_login_to_checkout && ! is_user_logged_in() ) {
             return wp_travel_get_template_part( 'account/form', 'login' );
-        }
+		}
+		
+		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', false );
 		?>
 		<div class="checkout-page-wrap">
+			<?php if ( ! $hide_mini_cart ) : ?>
 			<div class="col-sm-4 wp-travel-minicart">
 				<div class="sticky-sidebar">
 					<div class="checkout-block checkout-right">
@@ -51,7 +54,8 @@ class WP_Travel_Checkout {
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8 wp-travel-checkout-section">
+			<?php endif; ?>
+			<div class="wp-travel-checkout-section <?php echo $hide_mini_cart ? 'col-sm-12' : 'col-sm-8'; ?>">
 				<div class="checkout-block checkout-left">
 					<?php include sprintf( '%s/inc/cart/checkout.php', WP_TRAVEL_ABSPATH ); ?>
 				</div>
