@@ -414,12 +414,15 @@ class WP_Travel_Cart {
 
 	/**
 	 * Add Discount Values
+	 *
+	 * @param $coupon_code Coupon Code. @since 3.1.7
 	 */
-	public function add_discount_values( $coupon_id, $discount_type, $discount_value ) {
+	public function add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code = null ) {
 
 		$this->discounts['type']      = $discount_type;
 		$this->discounts['value']     = $discount_value;
 		$this->discounts['coupon_id'] = $coupon_id;
+		$this->discounts['coupon_code'] = is_null( $coupon_code ) ? '' : $coupon_code;
 
 		$this->write();
 

@@ -187,7 +187,7 @@ class WP_Travel_Ajax {
 				}
 
 				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
-				
+
 				$catetory_type = isset( $category['type'] ) ? $category['type'] : ''; // Old Way to get type in WP Travel.
 				if ( empty( $catetory_type ) && is_numeric( $category_id ) ) { // Set category type if category is taxonomy term.
 					$pricing_category = get_term($category_id, 'itinerary_pricing_category');
@@ -405,7 +405,7 @@ class WP_Travel_Ajax {
 			}
 		}
 
-		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount );
+		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, $_POST['CouponCode'] ); // $_POST['CouponCode'] @since 3.1.7
 
 		WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
 
