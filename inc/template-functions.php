@@ -1682,13 +1682,6 @@ function wp_travel_posts_filter( $query ) {
 
 				$keywords = explode( ',', $keyword );
 
-				$keywords = array_map(
-					function( $keyword ) {
-						return preg_replace( '/\s/', '-', $keyword );
-					},
-					$keywords
-				);
-
 				$current_tax[] = array(
 					array(
 						'taxonomy' => 'travel_keywords',
