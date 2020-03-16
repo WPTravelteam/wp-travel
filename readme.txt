@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.7 =
-Release Date: 13 March, 2020
+Release Date: 16th March, 2020
 Enhancement :
 * New library assets added.
 
