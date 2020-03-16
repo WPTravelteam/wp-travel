@@ -338,6 +338,11 @@ class WP_Travel_Cart {
 					$trip_price_partial += $category_price_partial;
 
 				}
+				// Custom Trip Price.
+				if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
+					$trip_price = $_REQUEST['trip_price'];
+				}
+
 				$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 
@@ -360,6 +365,10 @@ class WP_Travel_Cart {
 				$price_key     = $this->items[ $cart_item_id ]['price_key'];
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
+				// Custom Trip Price.
+				if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
+					$trip_price = $_REQUEST['trip_price'];
+				}
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $category_id, $price_key );
 					if ( $group_trip_price ) {
@@ -405,12 +414,15 @@ class WP_Travel_Cart {
 
 	/**
 	 * Add Discount Values
+	 *
+	 * @param $coupon_code Coupon Code. @since 3.1.7
 	 */
-	public function add_discount_values( $coupon_id, $discount_type, $discount_value ) {
+	public function add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code = null ) {
 
 		$this->discounts['type']      = $discount_type;
 		$this->discounts['value']     = $discount_value;
 		$this->discounts['coupon_id'] = $coupon_id;
+		$this->discounts['coupon_code'] = is_null( $coupon_code ) ? '' : $coupon_code;
 
 		$this->write();
 

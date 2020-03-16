@@ -1294,7 +1294,17 @@ function wp_travel_is_checkout_page() {
 	global $post;
 	$page_id  = get_the_ID();
 	$settings = wp_travel_get_settings();
-	if ( isset( $settings['checkout_page_id'] ) && (int) $settings['checkout_page_id'] === $page_id ) {
+
+	$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id']  : 0;
+
+	/**
+	 * WPML filter to get translated checkout page id if available.
+	 * 
+	 * @since 3.1.7
+	 */
+	$translated_checkout_page_id = apply_filters( 'wpml_object_id', $checkout_page_id, 'page', true );
+
+	if ( $translated_checkout_page_id === $page_id ) {
 		return true;
 	}
 	return false;
@@ -1309,12 +1319,19 @@ function wp_travel_is_cart_page() {
 	if ( is_admin() ) {
 		return false;
 	}
-	$page_id  = get_the_ID();
+	$page_id  = (int) get_the_ID();
 	$settings = wp_travel_get_settings();
-	if ( isset( $settings['cart_page_id'] ) && (int) $settings['cart_page_id'] === $page_id ) {
-		return true;
-	}
-	return false;
+
+	$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id']  : 0;
+
+	/**
+	 * WPML filter to get translated cart page id if available.
+	 * 
+	 * @since 3.1.7
+	 */
+	$translated_cart_page_id = apply_filters( 'wpml_object_id', $cart_page_id, 'page', true );
+
+	return (int) $translated_cart_page_id === $page_id;
 }
 
 /**
@@ -1328,10 +1345,17 @@ function wp_travel_is_dashboard_page() {
 	}
 	$page_id  = get_the_ID();
 	$settings = wp_travel_get_settings();
-	if ( isset( $settings['dashboard_page_id'] ) && (int) $settings['dashboard_page_id'] === $page_id ) {
-		return true;
-	}
-	return false;
+
+	$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id']  : 0;
+
+	/**
+	 * WPML filter to get translated dashboard page id if available.
+	 * 
+	 * @since 3.1.7
+	 */
+	$translated_dashboard_page_id = apply_filters( 'wpml_object_id', $dashboard_page_id, 'page', true );
+
+	return (int) $translated_dashboard_page_id === $page_id;
 }
 
 if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
@@ -1591,10 +1615,21 @@ function wp_travel_user_new_account_created( $customer_id, $new_customer_data, $
 		$user_object     = get_user_by( 'login', $new_customer_data['user_login'] );
 		$user_user_login = $new_customer_data['user_login'];
 		$user_user_email = stripslashes( $user_object->user_email );
-		$user_recipient  = $user_user_email;
 		$user_subject    = __( 'New Account Created', 'wp-travel' );
-
-		if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
+		$args = array(
+			'customer_id'   => $customer_id,
+			'user_email'    => $user_user_email,
+			'user_login'    => $user_user_login,
+			'user_subject'  => $user_subject,
+			'email_content' => $email_content,
+			'headers'       => $headers,
+		);
+		$user_email_data = apply_filters( 'wp_travel_before_user_registration_email', $args );
+		$user_user_email = ! empty( $user_email_data['user_email'] ) ? $user_email_data['user_email'] : $user_user_email;
+		$user_subject = ! empty( $user_email_data['user_subject'] ) ? $user_email_data['user_subject'] : $user_subject;
+		$email_content = ! empty( $user_email_data['email_content'] ) ? $user_email_data['email_content'] : $email_content;
+		$headers = ! empty( $user_email_data['headers'] ) ? $user_email_data['headers'] : $headers;
+		if ( ! wp_mail( $user_user_email, $user_subject, $email_content, $headers ) ) {
 
 			return false;
 

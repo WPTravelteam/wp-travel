@@ -44,8 +44,8 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 		<tr id="wp-travel-minimum-partial-payout">
 			<th><label for="minimum_partial_payout_output"><?php echo esc_html( $partial_payment_string ); ?></label></th>
 			<td>
-				<input type="range" min="1" max="100" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" id="minimum_partial_payout" class="wt-slider" />
-				<label><input type="number" step="0.01" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout[]" id="minimum_partial_payout_output" />%</label>
+				<input type="range" min="1" max="100" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" id="minimum_partial_payout" class="wt-slider" />
+				<label><input type="number" value="<?php echo esc_attr( $minimum_partial_payout ); ?>" name="minimum_partial_payout[]" id="minimum_partial_payout_output" />%</label>
 				<p class="description"><?php esc_html_e( 'Minimum percent of amount to pay while booking.', 'wp-travel' ); ?></p>
 			</td>
 		</tr>

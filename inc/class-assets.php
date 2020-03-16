@@ -9,7 +9,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		 */
 		public static function frontend() {
 			self::$assets_path = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE );
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$suffix            = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			$settings = wp_travel_get_settings();
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			$locale               = $lang_code[0];
 			$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
 			$default_path         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
-			$filename = 'datepicker.' . $locale . '.js';
+			$filename             = 'datepicker.' . $locale . '.js';
 			if ( ! file_exists( trailingslashit( $wp_content_file_path ) . $filename ) && ! file_exists( trailingslashit( $default_path ) . $filename ) ) {
 				$locale = 'en';
 			}
@@ -57,8 +57,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'zoom'               => $map_zoom_level,
 			);
 
-			$registered = self::register_scripts();
-			$registered_styles = isset( $registered['styles'] ) ? $registered['styles'] : array();
+			$registered         = self::register_scripts();
+			$registered_styles  = isset( $registered['styles'] ) ? $registered['styles'] : array();
 			$registered_scripts = isset( $registered['scripts'] ) ? $registered['scripts'] : array();
 
 			// Registered Styles.
@@ -387,7 +387,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 			// General
 			$scripts = array(
-				'jquery-datepicker-lib' => array(
+				'jquery-datepicker-lib'     => array(
 					'src'       => self::$assets_path . 'assets/js/lib/datepicker/datepicker.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
@@ -399,62 +399,68 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-moment' => array(
+				'wp-travel-moment'          => array(
 					'src'       => self::$assets_path . 'assets/js/moment' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'jquery-parsley' => array(
+				'jquery-parsley'            => array(
 					'src'       => self::$assets_path . 'assets/js/lib/parsley/parsley.min.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => false,
 				),
-				'wp-travel-widget-scripts' => array(
+				'wp-travel-widget-scripts'  => array(
 					'src'       => self::$assets_path . 'assets/js/wp-travel-widgets' . $suffix . '.js',
 					'deps'      => array( 'jquery', 'jquery-ui-slider', 'wp-util' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-accordion' => array(
+				'wp-travel-accordion'       => array(
 					'src'       => self::$assets_path . 'assets/js/wp-travel-accordion' . $suffix . '.js',
 					'deps'      => array( 'jquery', 'jquery-ui-accordion' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-modernizer' => array(
+				'wp-travel-modernizer'      => array(
 					'src'       => self::$assets_path . 'assets/js/lib/modernizer/modernizr.min.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-sticky-kit' => array(
+				'wp-travel-sticky-kit'      => array(
 					'src'       => self::$assets_path . 'assets/js/lib/sticky-kit/sticky-kit.min.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-popup' => array(
+				'wp-travel-popup'           => array(
 					'src'       => self::$assets_path . 'assets/js/jquery.magnific-popup.min.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'easy-responsive-tabs' => array(
+				'easy-responsive-tabs'      => array(
 					'src'       => self::$assets_path . 'assets/js/easy-responsive-tabs' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'collapse-js' => array(
+				'collapse-js'               => array(
 					'src'       => self::$assets_path . 'assets/js/collapse' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
-				'wp-travel-slick' => array(
+				'wp-travel-slick'           => array(
 					'src'       => self::$assets_path . 'assets/js/lib/slick/slick.min.js',
+					'deps'      => array( 'jquery' ),
+					'ver'       => WP_TRAVEL_VERSION,
+					'in_footer' => true,
+				),
+				'wp-travel-isotope'         => array( // added since @3.1.7.
+					'src'       => self::$assets_path . 'assets/js/lib/isotope/isotope.pkgd.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
@@ -462,58 +468,58 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			);
 
 			$styles = array(
-				'wp-travel-slick' => array(
-					'src'       => self::$assets_path . 'assets/css/lib/slick/slick.min.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'wp-travel-slick'       => array(
+					'src'   => self::$assets_path . 'assets/css/lib/slick/slick.min.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-frontend' => array(
-					'src'       => self::$assets_path . 'assets/css/wp-travel-front-end' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'wp-travel-frontend'    => array(
+					'src'   => self::$assets_path . 'assets/css/wp-travel-front-end' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-popup' => array(
-					'src'       => self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'wp-travel-popup'       => array(
+					'src'   => self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'easy-responsive-tabs' => array(
-					'src'       => self::$assets_path . 'assets/css/easy-responsive-tabs' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'easy-responsive-tabs'  => array(
+					'src'   => self::$assets_path . 'assets/css/easy-responsive-tabs' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'wp-travel-itineraries' => array(
-					'src'       => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+					'src'   => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'font-awesome-css' => array(
-					'src'       => self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'font-awesome-css'      => array(
+					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-fa-css' => array(
-					'src'       => self::$assets_path . 'assets/css/lib/font-awesome/css/wp-travel-fa-icons' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'wp-travel-fa-css'      => array(
+					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/wp-travel-fa-icons' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-user-css' => array(
-					'src'       => self::$assets_path . 'assets/css/wp-travel-user-styles' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+				'wp-travel-user-css'    => array(
+					'src'   => self::$assets_path . 'assets/css/wp-travel-user-styles' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'jquery-datepicker-lib' => array(
-					'src'       => self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css',
-					'deps'      => array(),
-					'ver'       => WP_TRAVEL_VERSION,
+					'src'   => self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 			);
@@ -526,7 +532,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				);
-				$scripts['wp-travel-cart'] = array(
+				$scripts['wp-travel-cart']   = array(
 					'src'       => self::$assets_path . 'assets/js/cart.js',
 					'deps'      => array( 'jquery', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ),
 					'ver'       => WP_TRAVEL_VERSION,
@@ -546,7 +552,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				);
-				$scripts['wp-travel-booking'] = array(
+				$scripts['wp-travel-booking']                 = array(
 					'src'       => self::$assets_path . 'assets/js/booking' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
 					'ver'       => WP_TRAVEL_VERSION,
@@ -559,19 +565,25 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				// admin.
 			}
 
-			return apply_filters( 'wp_travel_registered_scripts', array( 'scripts' => $scripts, 'styles' => $styles ) );
+			return apply_filters(
+				'wp_travel_registered_scripts',
+				array(
+					'scripts' => $scripts,
+					'styles'  => $styles,
+				)
+			);
 
 		}
 
 		private static function is_request( $type ) {
 			switch ( $type ) {
-				case 'admin' :
+				case 'admin':
 					return is_admin();
-				case 'ajax' :
+				case 'ajax':
 					return defined( 'DOING_AJAX' );
-				case 'cron' :
+				case 'cron':
 					return defined( 'DOING_CRON' );
-				case 'frontend' :
+				case 'frontend':
 					return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 			}
 		}
