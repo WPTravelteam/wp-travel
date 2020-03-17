@@ -14,6 +14,7 @@ module.exports = function (grunt) {
 		'!assets/css/*.map',
 		'i18n/**',
 		'inc/**',
+		'!inc/extended/node_modules/**',
 		'templates/**',
 		'upgrade/**',
 		'loco.xml',
@@ -76,7 +77,8 @@ module.exports = function (grunt) {
 					'!node_modules/**',
 					'!tests/**',
 					'!docs/**',
-					'!assets/sass/**'
+					'!assets/sass/**',
+					'!inc/extended/node_modules/**'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,
