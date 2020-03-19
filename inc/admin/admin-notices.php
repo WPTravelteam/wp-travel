@@ -151,3 +151,35 @@ function wp_travel_black_friday_dismiss_notice_ajax() {
 	update_option( $key, true );
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
+
+
+function wp_travel_in_plugin_update_message( $args, $response ) {
+	/* translators: %s: version number */
+	$message = sprintf( __( "<strong>Heads up!</strong> The versions of the following plugins you're running haven't been tested with WP Travel 4.0.0. Please update them or confirm compatibility before updating WP Travel, or you may experience issues:", 'wp-travel' ) );
+
+	// ob_start();
+	// include 'views/html-notice-untested-extensions-inline.php';
+	?>
+	<div class="wc_plugin_upgrade_notice extensions_warning <?php echo esc_attr( $upgrade_type ); ?>">
+		<?php echo wp_kses_post( $message ); ?>
+
+		<table class="plugin-details-table" cellspacing="0">
+			<thead>
+				<tr>
+					<th><?php esc_html_e( 'Plugin', 'wp-travel' ); ?></th>
+					<th><?php esc_html_e( 'Tested up to WP Travel version', 'wp-travel' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<tr>
+					<td>WP Travel Pro</td>
+					<td>4.0.0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );

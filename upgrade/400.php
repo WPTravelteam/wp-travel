@@ -1,0 +1,335 @@
+<?php
+
+/**
+ * WP Travel Data Update for above version 4.0.0
+ *
+ * @package wp-travel/upgrade
+ */
+
+
+if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
+	function wp_travel_update_to_400() {
+		global $wpdb;
+		$migrate_400 = get_option( 'wp_travel_migrate_400' );
+
+		if ( $migrate_400 && 'yes' === $migrate_400 ) {
+			return;
+		}
+
+		/**
+		 * @todo WP Travel Table need to get from function/class.
+		 */
+		if ( is_multisite() ) {
+			$blog_id                       = get_current_blog_id();
+			$pricings_table                = $wpdb->base_prefix . $blog_id . '_wt_pricings';
+			$date_table                    = $wpdb->base_prefix . $blog_id . '_wt_dates';
+			$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
+		} else {
+			$pricings_table                = $wpdb->base_prefix . 'wt_pricings';
+			$date_table                    = $wpdb->base_prefix . 'wt_dates';
+			$price_category_relation_table = $wpdb->base_prefix . 'wt_price_category_relation';
+		}
+
+		$custom_post_type = WP_TRAVEL_POST_TYPE;
+		$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
+		$post_ids         = $wpdb->get_results( $query1 );
+
+		if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
+			foreach ( $post_ids as $custom_post ) {
+				$trip_id = $custom_post->ID;
+				$wp_travel_pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) : 'multiple-price';
+				$wp_travel_fixed_departure     = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) ? get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) : 'no';
+
+				if ( $wp_travel_pricing_option_type == 'multiple-price' ) {
+					// Migration start.
+					$wp_travel_pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) : array();
+					$temp_pricing_ids = array();
+
+					// First need to migrate Pricings to set it in dates table.
+					// Pricing Migration Start.
+					if ( is_array( $wp_travel_pricing_options ) && count( $wp_travel_pricing_options ) > 0 ) {
+						foreach ( $wp_travel_pricing_options as $old_pricing_id => $old_pricing ) {
+							$wpdb->insert(
+								$pricings_table,
+								array(
+									'title'           => $old_pricing['pricing_name'],
+									'max_pax'         => ! empty( $old_pricing['max_pax'] ) ? absint( $old_pricing['max_pax'] ) : 0,
+									'min_pax'         => ! empty( $old_pricing['min_pax'] ) ? absint( $old_pricing['min_pax'] ) : 0,
+									'has_group_price' => 0,
+									'group_prices'    => array(),
+									'trip_id'         => $trip_id,
+									'trip_extras'     => ! empty( $old_pricing['tour_extras'] ) ? esc_attr( implode( ', ', $old_pricing['tour_extras'] ) ) : '',
+								),
+								array(
+									'%s',
+									'%d',
+									'%d',
+									'%d',
+									'%s',
+									'%d',
+									'%s',
+								)
+							);
+							$new_pricing_id = $wpdb->insert_id; // New Pricing ID.
+
+							// if ( empty( $new_pricing_id ) ) {
+							// return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_SAVING_PRICING' );
+							// }
+							$temp_pricing_ids[ $old_pricing['price_key'] ] = $new_pricing_id;
+							// Category Migration Start.
+							$old_pricing_categories = isset( $old_pricing['categories'] ) && is_array( $old_pricing['categories'] ) ? $old_pricing['categories'] : array();
+							if ( is_array( $old_pricing_categories ) && count( $old_pricing_categories ) > 0 ) { // category migration for v3.0.0 or above.
+
+								foreach ( $old_pricing_categories as $old_category_id => $old_pricing_category ) {
+									$new_category_id = 0;
+									// create term if not exists and insert it into price category relation table.
+									$tax       = 'itinerary_pricing_category';
+									$old_category_name = $old_pricing_category['type'];
+									if ( 'custom' == $old_category_name ) {
+										$old_category_name = isset( $old_pricing_category['custom_label'] ) && ! empty( $old_pricing_category['custom_label'] ) ? $old_pricing_category['custom_label'] : $old_category_name;
+									}
+									$termExits = term_exists( $old_category_name, $tax );
+									if ( ! $termExits ) {
+										$term = wp_insert_term(
+											ucfirst( $old_category_name ),   // the term
+											$tax, // the taxonomy
+											array(
+												'slug' => strtolower( $old_category_name ),
+											)
+										);
+										if ( ! is_wp_error( $term ) ) {
+											update_term_meta( $term['term_id'], 'pax_size', 1 );
+											$new_category_id = $term['term_id'];
+										}
+									} else {
+										$term = get_term_by( 'slug', $old_category_name, $tax );
+										update_term_meta( $term->term_id, 'pax_size', 1 );
+										$new_category_id = $term->term_id;
+									}
+
+									if ( $new_category_id > 0 ) {
+										$old_price_per   = $old_pricing_category['price_per'];
+										$old_price       = $old_pricing_category['price'];
+										$old_enable_sale = isset( $old_pricing_category['enable_sale'] ) && 'yes' === $old_pricing_category['enable_sale'] ? 1 : 0;
+										$old_sale_price  = $old_pricing_category['sale_price'];
+
+										// Insert new category in price category relation table.
+										$wpdb->insert(
+											$price_category_relation_table,
+											array(
+												'pricing_id' => $new_pricing_id,
+												'pricing_category_id' => $new_category_id,
+												'price_per' => $old_price_per,
+												'regular_price' => $old_price,
+												'is_sale' => $old_enable_sale,
+												'sale_price' => $old_sale_price,
+												'has_group_price' => 0,
+												'group_prices' => '',
+											),
+											array(
+												'%d',
+												'%d',
+												'%s',
+												'%s',
+												'%d',
+												'%s',
+												'%d',
+												'%s',
+											)
+										);
+									}
+								}
+							} else { // Category migration for below 3.0.0.
+								$new_category_id = 0;
+								// create term if not exists and insert it into price category relation table.
+								$tax       = 'itinerary_pricing_category';
+								$old_category_name = $old_pricing['type'];
+								if ( 'custom' == $old_category_name ) {
+									$old_category_name = isset( $old_pricing['custom_label'] ) && ! empty( $old_pricing['custom_label'] ) ? $old_pricing['custom_label'] : $old_category_name;
+								}
+								$termExits = term_exists( $old_category_name, $tax );
+								if ( ! $termExits ) {
+									$term = wp_insert_term(
+										ucfirst( $old_category_name ),   // the term
+										$tax, // the taxonomy
+										array(
+											'slug' => strtolower( $old_category_name ),
+										)
+									);
+									if ( ! is_wp_error( $term ) ) {
+										update_term_meta( $term['term_id'], 'pax_size', 1 );
+										$new_category_id = $term['term_id'];
+									}
+								} else {
+									$term = get_term_by( 'slug', $old_category_name, $tax );
+									update_term_meta( $term->term_id, 'pax_size', 1 );
+									$new_category_id = $term->term_id;
+								}
+
+								if ( $new_category_id > 0 ) {
+									$old_price_per   = $old_pricing['price_per'];
+									$old_price       = $old_pricing['price'];
+									$old_enable_sale = isset( $old_pricing['enable_sale'] ) && 'yes' === $old_pricing['enable_sale'] ? 1 : 0;
+									$old_sale_price  = $old_pricing['sale_price'];
+
+									// Insert new category in price category relation table.
+									$wpdb->insert(
+										$price_category_relation_table,
+										array(
+											'pricing_id' => $new_pricing_id,
+											'pricing_category_id' => $new_category_id,
+											'price_per' => $old_price_per,
+											'regular_price' => $old_price,
+											'is_sale' => $old_enable_sale,
+											'sale_price' => $old_sale_price,
+											'has_group_price' => 0,
+											'group_prices' => '',
+										),
+										array(
+											'%d',
+											'%d',
+											'%s',
+											'%s',
+											'%d',
+											'%s',
+											'%d',
+											'%s',
+										)
+									);
+								}
+							}
+						}
+					}
+
+					if ( 'yes' === $wp_travel_fixed_departure ) { // Fixed Departure Migration start.
+						$wp_travel_enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true ) ? get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true ) : 'no';
+
+						if ( 'yes' === $wp_travel_enable_multiple_fixed_departue ) { // Multiple fixed departure start.
+							$wp_travel_multiple_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true ) ? get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true ) : array();
+							if ( is_array( $wp_travel_multiple_trip_dates ) && count( $wp_travel_multiple_trip_dates ) > 0 ) {
+
+								foreach ( $wp_travel_multiple_trip_dates as $old_date ) {
+									$pricing_options = $old_date['pricing_options'];
+									$new_pricing_ids = array();
+									foreach ( $pricing_options as $pricing_option_key ) {
+
+										if ( isset( $temp_pricing_ids[ $pricing_option_key ] ) ) {
+											$new_pricing_ids[] = $temp_pricing_ids[ $pricing_option_key ];
+										}
+									}
+									// Insert New Date along with new pricing ids.
+									$wpdb->insert(
+										$date_table,
+										array(
+											'trip_id'     => $trip_id,
+											'title'       => $old_date['date_label'],
+											'recurring'   => '0',
+											'years'       => '',
+											'months'      => '',
+											'weeks'       => '',
+											'days'        => '',
+											'date_days'   => '',
+											'start_date'  => $old_date['start_date'],
+											'end_date'    => $old_date['end_date'],
+											'trip_time'   => '',
+											'pricing_ids' => implode( ', ', $new_pricing_ids ),
+										),
+										array(
+											'%d',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+											'%s',
+										)
+									);
+									$inserted_id = $wpdb->insert_id;
+								}
+							}
+						} else { // Single fixed departure date.
+							// insert date.
+							$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+							$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+							$wpdb->insert(
+								$date_table,
+								array(
+									'trip_id'     => $trip_id,
+									'title'       => __( 'Date', 'wp-travel' ),
+									'recurring'   => '0',
+									'years'       => '',
+									'months'      => '',
+									'weeks'       => '',
+									'days'        => '',
+									'date_days'   => '',
+									'start_date'  => $trip_start_date,
+									'end_date'    => $trip_end_date,
+									'trip_time'   => '',
+									'pricing_ids' => implode( ', ', array_values( $temp_pricing_ids ) ),
+								),
+								array(
+									'%d',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+									'%s',
+								)
+							);
+							$inserted_id = $wpdb->insert_id;
+						}
+					} else {
+						// Trip Duration
+						$wpdb->insert(
+							$date_table,
+							array(
+								'trip_id'     => $trip_id,
+								'title'       => __( 'Date', 'wp-travel' ),
+								'recurring'   => '0',
+								'years'       => '',
+								'months'      => '',
+								'weeks'       => '',
+								'days'        => '',
+								'date_days'   => '',
+								'start_date'  => date( 'Y-m-d' ),
+								'end_date'    => date( 'Y-m-d' ),
+								'trip_time'   => '',
+								'pricing_ids' => implode( ', ', array_values( $temp_pricing_ids ) ),
+							),
+							array(
+								'%d',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+								'%s',
+							)
+						);
+					}
+				} elseif ( $wp_travel_pricing_option_type == 'single-price' ) {
+					// Convert it to multiple price
+					// Migration Start
+				}
+			}
+		}
+		update_option( 'wp_travel_migrate_400', 'yes' );
+	}
+}
+wp_travel_update_to_400();

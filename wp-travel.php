@@ -97,6 +97,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
+			include sprintf( '%s/inc/extended/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
 			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
 			add_action( 'activated_plugin', array( $this, 'wp_travel_plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
@@ -453,6 +454,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( version_compare( $this->version, '3.0.3', '>' ) ) {
 				include_once sprintf( '%s/upgrade/303-304.php', WP_TRAVEL_ABSPATH );
 			}
+			include_once sprintf( '%s/upgrade/400.php', WP_TRAVEL_ABSPATH );
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				if ( empty( $current_db_version ) ) {
