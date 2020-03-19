@@ -97,7 +97,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			}
 
 			// Script only for itineraries.
-			if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
+			$is_wp_travel_single_pages = is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page();
+			if ( apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_single_pages, $trip_id ) ) {
 
 				// Add localized vars.
 				$wp_travel['cartUrl'] = wp_travel_get_cart_url();
