@@ -97,7 +97,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-			include sprintf( '%s/inc/extended/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
+			if ( file_exists( sprintf( '%s/inc/extended/wp-travel-extended.php', WP_TRAVEL_ABSPATH ) ) ) {
+				include sprintf( '%s/inc/extended/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
+			}
 			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
 			add_action( 'activated_plugin', array( $this, 'wp_travel_plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
