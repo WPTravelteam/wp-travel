@@ -106,6 +106,7 @@ class Wp_Travel_Extras_Frontend {
 		}
 
 		$trip_id = $post->ID;
+		$trip_id = apply_filters( 'tour_extra_custom_trip_id', $trip_id );
 
 		$trip_extras = $this->get_trip_extras( $trip_id );
 
