@@ -385,6 +385,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		$post_type = get_post_type( $post_id );
+		$screen    = get_current_screen();
+
+		if ( '' == $screen ) {
+			return;
+		}
 
 		// If this isn't a WP_TRAVEL_POST_TYPE post, don't update it.
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
@@ -533,7 +538,6 @@ class WP_Travel_Admin_Metaboxes {
 			if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
 				$trip_meta['trip_date'] = $trip_dates[0]; // Use it in sorting according to trip dates. @since 3.0.5
 			}
-
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
