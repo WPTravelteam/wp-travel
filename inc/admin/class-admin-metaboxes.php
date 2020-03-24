@@ -385,6 +385,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		$post_type = get_post_type( $post_id );
+		$screen    = get_current_screen();
+
+		if ( '' == $screen ) {
+			return;
+		}
 
 		// If this isn't a WP_TRAVEL_POST_TYPE post, don't update it.
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {

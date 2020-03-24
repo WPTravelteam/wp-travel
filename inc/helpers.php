@@ -1299,7 +1299,7 @@ function wp_travel_is_checkout_page() {
 
 	/**
 	 * WPML filter to get translated checkout page id if available.
-	 * 
+	 *
 	 * @since 3.1.7
 	 */
 	$translated_checkout_page_id = apply_filters( 'wpml_object_id', $checkout_page_id, 'page', true );
@@ -1326,7 +1326,7 @@ function wp_travel_is_cart_page() {
 
 	/**
 	 * WPML filter to get translated cart page id if available.
-	 * 
+	 *
 	 * @since 3.1.7
 	 */
 	$translated_cart_page_id = apply_filters( 'wpml_object_id', $cart_page_id, 'page', true );
@@ -1350,7 +1350,7 @@ function wp_travel_is_dashboard_page() {
 
 	/**
 	 * WPML filter to get translated dashboard page id if available.
-	 * 
+	 *
 	 * @since 3.1.7
 	 */
 	$translated_dashboard_page_id = apply_filters( 'wpml_object_id', $dashboard_page_id, 'page', true );
@@ -3083,7 +3083,7 @@ function wp_travel_hide_price_per_field( $trip_id = null, $price_key = null ) {
  * @since 2.0.6
  */
 function wp_travel_frontend_tab_gallery( $gallery_ids ) {
-	if ( ! $gallery_ids ) {
+	if ( ! $gallery_ids  ) {
 		return;
 	}
 	ob_start();
