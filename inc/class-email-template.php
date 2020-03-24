@@ -254,7 +254,7 @@ class WP_Travel_Emails {
 		$email_template['mail_content'] = $email_content;
 		$email_template['mail_footer']  = $this->wp_travel_email_footer();
 
-		return $email_template;
+		return apply_filters( 'wp_travel_email_template', $email_template, $type, $sent_to );
 
 	}
 	/**
