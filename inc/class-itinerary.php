@@ -15,12 +15,13 @@ class WP_Travel_Itinerary {
 	 * Constructor.
 	 */
 	function __construct( $post = null ) {
-		$this->post = is_null( $post ) ? get_post( get_the_ID() ) : $post;
+		$this->post      = is_null( $post ) ? get_post( get_the_ID() ) : $post;
 		$this->post_meta = get_post_meta( $this->post->ID );
 		return $this->post;
 	}
 
-	function is_sale_enabled() { // depricated. use wp_travel_is_enable_sale() instead.
+	function is_sale_enabled() {
+		// depricated. use wp_travel_is_enable_sale() instead.
 		$sale_enabled = get_post_meta( $this->post->ID, 'wp_travel_enable_sale', true );
 		if ( false !== $sale_enabled && '1' === $sale_enabled ) {
 			return true;
@@ -36,9 +37,15 @@ class WP_Travel_Itinerary {
 
 		$adv_gallery_ids = get_post_meta( $this->post->ID, 'wp_travel_advanced_gallery', true );
 
-		if ( false !== $adv_gallery_ids && ! empty( $adv_gallery_ids ) && isset( $adv_gallery_ids['items'] ) ) {
-			return $adv_gallery_ids['items'];
-		} 
+		if ( ! empty( $adv_gallery_ids ) && isset( $adv_gallery_ids['items'] ) ) {
+			return array_map(
+				function( $item ) {
+					$item = (object) $item;
+					return $item->id;
+				},
+				$adv_gallery_ids['items']
+			);
+		}
 
 		return false;
 
@@ -64,15 +71,15 @@ class WP_Travel_Itinerary {
 			&& '' !== $this->post_meta['wp_travel_location'][0]
 		) {
 			return array(
-				'lat' => $this->post_meta['wp_travel_lat'][0],
-				'lng' => $this->post_meta['wp_travel_lng'][0],
+				'lat'     => $this->post_meta['wp_travel_lat'][0],
+				'lng'     => $this->post_meta['wp_travel_lng'][0],
 				'address' => $this->post_meta['wp_travel_location'][0],
 			);
 		}
 
 		return array(
-			'lat' => '',
-			'lng' => '',
+			'lat'     => '',
+			'lng'     => '',
 			'address' => '',
 		);
 	}

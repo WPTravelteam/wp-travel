@@ -21,6 +21,7 @@ module.exports = function (grunt) {
 		'readme.txt',
 		'wp-travel.php',
 		'wpml-config.xml',
+		'!inc/extended/app/src/**'
 	];
 
 	/**
@@ -42,7 +43,7 @@ module.exports = function (grunt) {
 
 	let package_json = fs.readFileSync('package.json');
 	package_json = JSON.parse(package_json);
-	
+
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
@@ -222,7 +223,7 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
 					'assets/css/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
 					'assets/css/wp-travel-admin-1.css': 'assets/sass/admin/wp-travel-admin-1.scss',
-					
+
 					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
 				}
