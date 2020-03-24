@@ -401,6 +401,11 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
+		$screen = get_current_screen();
+		if ( ! $screen ) { // Quick fixes [ Data override as empty form elementor ].
+			return;
+		}
+
 		if ( isset( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
 			$old_content = get_post_field( 'post_content', $post_id );
@@ -533,7 +538,6 @@ class WP_Travel_Admin_Metaboxes {
 			if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
 				$trip_meta['trip_date'] = $trip_dates[0]; // Use it in sorting according to trip dates. @since 3.0.5
 			}
-
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
