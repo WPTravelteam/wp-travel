@@ -1244,6 +1244,8 @@ function wp_travel_get_page_id( $page ) {
 
 	$page_id = apply_filters( 'wp_travel_get_' . $page . '_page_id', $page_id );
 
+	$page_id = apply_filters( 'wptravel_wpml_object_id', $page_id, $page ); // @since 3.1.8 WPML compatibility.
+
 	return $page_id ? absint( $page_id ) : -1;
 }
 
@@ -1304,6 +1306,16 @@ function wp_travel_is_checkout_page() {
 	 */
 	$translated_checkout_page_id = apply_filters( 'wpml_object_id', $checkout_page_id, 'page', true );
 
+	/**
+	 * Added to fix pages mismatch using WPML.
+	 * 
+	 * @since 3.1.8 
+	 */
+	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
+		$page_id_by_locale = get_option( 'wp_travel_checkout_page_id_' . ICL_LANGUAGE_CODE );
+		$translated_checkout_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_checkout_page_id;
+	}
+
 	if ( $translated_checkout_page_id === $page_id ) {
 		return true;
 	}
@@ -1331,6 +1343,16 @@ function wp_travel_is_cart_page() {
 	 */
 	$translated_cart_page_id = apply_filters( 'wpml_object_id', $cart_page_id, 'page', true );
 
+	/**
+	 * Added to fix pages mismatch using WPML.
+	 * 
+	 * @since 3.1.8 
+	 */
+	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
+		$page_id_by_locale = get_option( 'wp_travel_cart_page_id_' . ICL_LANGUAGE_CODE );
+		$translated_cart_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_cart_page_id;
+	}
+
 	return (int) $translated_cart_page_id === $page_id;
 }
 
@@ -1354,7 +1376,15 @@ function wp_travel_is_dashboard_page() {
 	 * @since 3.1.7
 	 */
 	$translated_dashboard_page_id = apply_filters( 'wpml_object_id', $dashboard_page_id, 'page', true );
-
+	/**
+	 * Added to fix pages mismatch using WPML.
+	 * 
+	 * @since 3.1.8 
+	 */
+	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
+		$page_id_by_locale = get_option( 'wp_travel_dashboard_page_id_' . ICL_LANGUAGE_CODE );
+		$translated_dashboard_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_dashboard_page_id;
+	}
 	return (int) $translated_dashboard_page_id === $page_id;
 }
 

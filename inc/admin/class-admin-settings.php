@@ -107,29 +107,29 @@ class WP_Travel_Admin_Settings {
 			'icon'          => 'fa-lock',
 		);
 
-		$settings_fields['tabs_global']                   = array(
+		$settings_fields['tabs_global'] = array(
 			'tab_label'     => __( 'Tabs', 'wp-travel' ),
 			'content_title' => __( 'Global Tabs Settings', 'wp-travel' ),
 			'priority'      => 40,
 			'callback'      => 'wp_travel_settings_callback_tabs_global',
 			'icon'          => 'fa-window-maximize',
 		);
-		$settings_fields['payment']                       = array(
+		$settings_fields['payment']     = array(
 			'tab_label'     => __( 'Payment', 'wp-travel' ),
 			'content_title' => __( 'Payment Settings', 'wp-travel' ),
 			'priority'      => 50,
 			'callback'      => 'wp_travel_settings_callback_payment',
 			'icon'          => 'fa-credit-card',
 		);
-		$settings_fields['facts']                         = array(
+		$settings_fields['facts']       = array(
 			'tab_label'     => __( 'Facts', 'wp-travel' ),
 			'content_title' => __( 'Facts Settings', 'wp-travel' ),
 			'priority'      => 60,
 			'callback'      => 'wp_travel_settings_callback_facts',
 			'icon'          => 'fa-industry',
 		);
-		if ( ! is_multisite()  ) :
-			$settings_fields['license']                       = array(
+		if ( ! is_multisite() ) :
+			$settings_fields['license'] = array(
 				'tab_label'     => __( 'License', 'wp-travel' ),
 				'content_title' => __( 'License Details', 'wp-travel' ),
 				'priority'      => 70,
@@ -159,21 +159,21 @@ class WP_Travel_Admin_Settings {
 			'icon'          => 'fa-shopping-cart',
 		);
 
-		$settings_fields['addons_settings']           = array(
+		$settings_fields['addons_settings']     = array(
 			'tab_label'     => __( 'Addons Settings', 'wp-travel' ),
 			'content_title' => __( 'Addons Settings', 'wp-travel' ),
 			'priority'      => 90,
 			'callback'      => 'wp_travel_settings_callback_addons_settings',
 			'icon'          => 'fa-plug',
 		);
-		$settings_fields['misc_options_global']           = array(
+		$settings_fields['misc_options_global'] = array(
 			'tab_label'     => __( 'Misc. Options', 'wp-travel' ),
 			'content_title' => __( 'Miscellaneous Options', 'wp-travel' ),
 			'priority'      => 95,
 			'callback'      => 'wp_travel_settings_callback_misc_options_global',
 			'icon'          => 'fa-thumbtack',
 		);
-		$settings_fields['debug']                         = array(
+		$settings_fields['debug']               = array(
 			'tab_label'     => __( 'Debug', 'wp-travel' ),
 			'content_title' => __( 'Debug Options', 'wp-travel' ),
 			'priority'      => 100,
@@ -195,7 +195,7 @@ class WP_Travel_Admin_Settings {
 			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 			// Getting saved settings first.
-			$settings = wp_travel_get_settings();
+			$settings        = wp_travel_get_settings();
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {
@@ -203,13 +203,19 @@ class WP_Travel_Admin_Settings {
 					continue;
 				}
 				if ( isset( $_POST[ $settings_field ] ) ) {
-					$settings[ $settings_field ] = $_POST[ $settings_field ];
-
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
-						update_option( 'wp_travel_' . $settings_field, $_POST[ $settings_field ] );
+						$page_id = $_POST[ $settings_field ];
+						if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+							update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );
+							continue;
+						} else {
+							update_option( 'wp_travel_' . $settings_field, $page_id );
+						}
 					}
+
+					$settings[ $settings_field ] = $_POST[ $settings_field ];
 				}
 			}
 
@@ -246,11 +252,11 @@ class WP_Travel_Admin_Settings {
 			}
 			foreach ( $indexed as $key => $index ) {
 				if ( ! empty( $index['name'] ) ) {
-					$index['id'] = $key;
+					$index['id']      = $key;
 					$index['initial'] = ! empty( $index['initial'] ) ? $index['initial'] : $index['name'];
 					if ( is_array( $index['options'] ) ) {
-						$options = [];
-						$i = 1;
+						$options = array();
+						$i       = 1;
 						foreach ( $index['options'] as $option ) {
 							$options[ 'option' . $i ] = $option;
 							$i++;

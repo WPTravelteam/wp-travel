@@ -133,6 +133,28 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			// For Network.
 			add_action('network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
+
+			/**
+			 * To resolve the pages mismatch issue when using WPML.
+			 * 
+			 * @since 3.1.8
+			 */
+			add_filter( 'wptravel_wpml_object_id', array( $this, 'get_wp_travel_page_id_by_locale' ), 11, 2);
+
+		}
+
+		/**
+		 * To resolve the pages mismatch issue when using WPML.
+		 * 
+		 * @since 3.1.8
+		 */
+		public function get_wp_travel_page_id_by_locale( $page_id, $option ) {
+			$_page_id = apply_filters( 'wpml_object_id', $page_id, 'page', true );
+			if ( defined( 'ICL_LANGUAGE_CODE' ) && $page_id === $_page_id  ) {
+				$_page_id = get_option( "wp_travel_{$option}_" . ICL_LANGUAGE_CODE, $_page_id );
+			}
+
+			return $_page_id;
 		}
 
 		public function wp_travel_network_menu() {
