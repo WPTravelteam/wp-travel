@@ -24,16 +24,6 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		$selected_checkout_page  = $settings['checkout_page_id'];
 		$selected_dashboard_page = $settings['dashboard_page_id'];
 
-		/**
-		 * WPML Compatible.
-		 * @since 3.1.8
-		 */
-		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
-			$selected_cart_page      = apply_filters( 'wptravel_wpml_object_id', $selected_cart_page, 'cart_page_id' ); // @since 3.1.8 WPML compatibility.
-			$selected_checkout_page  = apply_filters( 'wptravel_wpml_object_id', $selected_checkout_page, 'checkout_page_id' ); // @since 3.1.8 WPML compatibility.
-			$selected_dashboard_page = apply_filters( 'wptravel_wpml_object_id', $selected_dashboard_page, 'dashboard_page_id' ); // @since 3.1.8 WPML compatibility.
-		}
-
 		$currency_args = array(
 			'id'         => 'currency',
 			'class'      => 'currency wp-travel-select2',

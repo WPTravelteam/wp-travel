@@ -1299,27 +1299,7 @@ function wp_travel_is_checkout_page() {
 
 	$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id']  : 0;
 
-	/**
-	 * WPML filter to get translated checkout page id if available.
-	 * 
-	 * @since 3.1.7
-	 */
-	$translated_checkout_page_id = apply_filters( 'wpml_object_id', $checkout_page_id, 'page', true );
-
-	/**
-	 * Added to fix pages mismatch using WPML.
-	 * 
-	 * @since 3.1.8 
-	 */
-	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
-		$page_id_by_locale = get_option( 'wp_travel_checkout_page_id_' . ICL_LANGUAGE_CODE );
-		$translated_checkout_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_checkout_page_id;
-	}
-
-	if ( $translated_checkout_page_id === $page_id ) {
-		return true;
-	}
-	return false;
+	return (int) $checkout_page_id === $page_id;
 }
 
 /**
@@ -1336,24 +1316,7 @@ function wp_travel_is_cart_page() {
 
 	$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id']  : 0;
 
-	/**
-	 * WPML filter to get translated cart page id if available.
-	 * 
-	 * @since 3.1.7
-	 */
-	$translated_cart_page_id = apply_filters( 'wpml_object_id', $cart_page_id, 'page', true );
-
-	/**
-	 * Added to fix pages mismatch using WPML.
-	 * 
-	 * @since 3.1.8 
-	 */
-	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
-		$page_id_by_locale = get_option( 'wp_travel_cart_page_id_' . ICL_LANGUAGE_CODE );
-		$translated_cart_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_cart_page_id;
-	}
-
-	return (int) $translated_cart_page_id === $page_id;
+	return (int) $cart_page_id === $page_id;
 }
 
 /**
@@ -1370,22 +1333,7 @@ function wp_travel_is_dashboard_page() {
 
 	$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id']  : 0;
 
-	/**
-	 * WPML filter to get translated dashboard page id if available.
-	 * 
-	 * @since 3.1.7
-	 */
-	$translated_dashboard_page_id = apply_filters( 'wpml_object_id', $dashboard_page_id, 'page', true );
-	/**
-	 * Added to fix pages mismatch using WPML.
-	 * 
-	 * @since 3.1.8 
-	 */
-	if ( defined( 'ICL_LANGUAGE_CODE ' ) ) {
-		$page_id_by_locale = get_option( 'wp_travel_dashboard_page_id_' . ICL_LANGUAGE_CODE );
-		$translated_dashboard_page_id = ! empty( $page_id_by_locale ) ? (int) $page_id_by_locale : $translated_dashboard_page_id;
-	}
-	return (int) $translated_dashboard_page_id === $page_id;
+	return (int) $dashboard_page_id === $page_id;
 }
 
 if ( ! function_exists( 'wp_travel_is_account_page' ) ) {

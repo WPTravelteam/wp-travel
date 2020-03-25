@@ -204,9 +204,12 @@ class WP_Travel_Admin_Settings {
 				}
 				if ( isset( $_POST[ $settings_field ] ) ) {
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
-					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id' );
+					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id', 'thank_you_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
 						$page_id = $_POST[ $settings_field ];
+						/**
+						 * @since 3.1.8 WPML configuration.
+						 */
 						if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
 							update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );
 							continue;
