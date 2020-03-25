@@ -37,8 +37,18 @@ class WP_Travel_Itinerary {
 		$adv_gallery_ids = (array) get_post_meta( $this->post->ID, 'wp_travel_advanced_gallery', true );
 
 		if ( false !== $adv_gallery_ids && ! empty( $adv_gallery_ids ) && isset( $adv_gallery_ids['items'] ) ) {
-			return $adv_gallery_ids['items'];
-		} 
+			/**
+			 * Resolves data type issues
+			 * @since 1.0.8
+			 */
+			return array_map(
+				function( $item ) {
+					$item = (object) $item;
+					return $item->id;
+				},
+				$adv_gallery_ids['items']
+			);
+		}
 
 		return false;
 
