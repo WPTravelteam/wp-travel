@@ -1244,8 +1244,6 @@ function wp_travel_get_page_id( $page ) {
 
 	$page_id = apply_filters( 'wp_travel_get_' . $page . '_page_id', $page_id );
 
-	$page_id = apply_filters( 'wptravel_wpml_object_id', $page_id, $page ); // @since 3.1.8 WPML compatibility.
-
 	return $page_id ? absint( $page_id ) : -1;
 }
 
