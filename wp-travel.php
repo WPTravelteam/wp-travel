@@ -150,7 +150,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 */
 		public function get_wp_travel_page_id_by_locale( $page_id, $option ) {
 			$_page_id = apply_filters( 'wpml_object_id', $page_id, 'page', true );
-			if ( defined( 'ICL_LANGUAGE_CODE' ) && $page_id === $_page_id  ) {
+			if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
 				$_page_id = get_option( "wp_travel_{$option}_" . ICL_LANGUAGE_CODE, $_page_id );
 			}
 
