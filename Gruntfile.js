@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 		'!assets/css/*.map',
 		'i18n/**',
 		'inc/**',
-		'!inc/extended/node_modules/**',
+		'!inc/extended/**',
 		'templates/**',
 		'upgrade/**',
 		'loco.xml',
