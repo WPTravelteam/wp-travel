@@ -71,7 +71,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			),
 		);
 		$map_key           = 'google-map';
-	?>
+		?>
 		<table class="form-table">
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
@@ -162,7 +162,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			// );
 			// wp_travel_upsell_message( $upsell_args );
 			// }
-		?>
+			?>
 
 		<table class="form-table">
 			<tr>

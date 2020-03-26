@@ -22,6 +22,7 @@ if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 }
 
 $trip_id    = $post->ID;
+$trip_id    = apply_filters( 'wp_travel_booking_tab_custom_trip_id', $trip_id );
 $settings   = wp_travel_get_settings();
 $form       = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();

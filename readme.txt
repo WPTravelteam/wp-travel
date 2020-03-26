@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.3.2
 Requires PHP: 5.5
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -230,6 +230,11 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.8 =
+Release Date: 26th March, 2020
+Enhancement :
+* WPML Compatibility with WP Travel pages.
 
 = 3.1.7 =
 Release Date: 16th March, 2020
