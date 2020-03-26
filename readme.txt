@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.8 =
-Release Date: 25th March, 2020
+Release Date: 26th March, 2020
 Enhancement :
 * WPML Compatibility with WP Travel pages.
 
