@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 3.1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-26 07:15:18+00:00\n"
+"POT-Creation-Date: 2020-03-26 12:58:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -134,8 +134,8 @@ msgstr ""
 
 #: inc/admin/admin-helper.php:283
 msgid ""
-"\"The plugin is very intuitive and fresh.\r\n"
-"The layout fits well into theme with flexibility to different shortcodes.\r\n"
+"\"The plugin is very intuitive and fresh.\n"
+"The layout fits well into theme with flexibility to different shortcodes.\n"
 "Its great plugin for travel or tour agent websites.\""
 msgstr ""
 
@@ -2348,7 +2348,7 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:230 inc/helpers.php:2459
+#: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:231 inc/helpers.php:2459
 #: templates/content-cart.php:56 templates/content-cart.php:250
 msgid "Total"
 msgstr ""
@@ -2361,27 +2361,27 @@ msgstr ""
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:148
+#: inc/cart/cart-mini.php:149
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:177
+#: inc/cart/cart-mini.php:178
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:201
+#: inc/cart/cart-mini.php:202
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:202 templates/content-cart.php:233
+#: inc/cart/cart-mini.php:203 templates/content-cart.php:233
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:206 templates/content-cart.php:237
+#: inc/cart/cart-mini.php:207 templates/content-cart.php:237
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:243
+#: inc/cart/cart-mini.php:244
 msgid "Trip Book"
 msgstr ""
 
