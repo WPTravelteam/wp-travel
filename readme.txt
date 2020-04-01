@@ -236,6 +236,7 @@ Release Date: 1st April, 2020
 Fixes :
 * Theme page URL fixed in the readme file.
 * String Select Pax text is updated with filter.
+* Compatibility update with WordPress 5.4
 
 = 3.1.8 =
 Release Date: 26th March, 2020
