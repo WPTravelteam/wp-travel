@@ -19,7 +19,7 @@ WP Travel is a free powerful travel engine for making customized travel & tour a
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
 > **WP Travel Mobile App**
 > Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
