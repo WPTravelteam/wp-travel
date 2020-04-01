@@ -3,9 +3,9 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.3.2
+Tested up to: 5.4.0
 Requires PHP: 5.5
-Stable tag: 3.1.8
+Stable tag: 3.1.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,7 +83,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Tourable Pro](https://wptravel.io/demo/?demo=tourable-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=taletravelpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Travel Master Pro](https://wptravel.io/demo/?demo=travel-master-pro&utm_source=paidthemes&utm_medium=travelmasterpro&utm_campaign=WP%20Plugin) by Theme Palace.
-* [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/themes/&utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
+* [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
 
 = WP TRAVEL PLUGIN CORE FEATURES : =
@@ -230,6 +230,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 3.1.9 =
+Release Date: 1st April, 2020
+Fixes :
+* Theme page URL fixed in the readme file.
+* String Select Pax text is update with filter.
 
 = 3.1.8 =
 Release Date: 26th March, 2020
