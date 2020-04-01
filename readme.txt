@@ -235,7 +235,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 1st April, 2020
 Fixes :
 * Theme page URL fixed in the readme file.
-* String Select Pax text is update with filter.
+* String Select Pax text is updated with filter.
 
 = 3.1.8 =
 Release Date: 26th March, 2020
