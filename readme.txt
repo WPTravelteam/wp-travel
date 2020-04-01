@@ -19,7 +19,7 @@ WP Travel is a free powerful travel engine for making customized travel & tour a
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
 > **WP Travel Mobile App**
 > Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
@@ -72,7 +72,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
 * [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
 * [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
-* [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
+* [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
@@ -195,7 +195,7 @@ Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum
 
 = Will WP Travel work with my theme? =
 
-Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
 
 = Can I run WooCommerce or Easy Digital Downloads and WP Travel at the same time? =
 
