@@ -3505,3 +3505,16 @@ function wp_travel_get_trip_listing_option( $trip_id = null ) {
 		'pricing_data' => $pricing,
 	);
 }
+if ( ! function_exists( 'wp_travel_comments' ) ) {
+	function wp_travel_comments( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment;
+		wp_travel_load_template(
+			'review.php',
+			array(
+				'comment' => $comment,
+				'args'    => $args,
+				'depth'   => $depth,
+			)
+		);
+	}
+}
