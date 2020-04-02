@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.1.9 =
-Release Date: 1st April, 2020
+Release Date: 2st April, 2020
 Fixes :
 * Theme page URL fixed in the readme file.
 * String Select Pax text is updated with filter.
