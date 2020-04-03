@@ -103,17 +103,3 @@ if ( ! comments_open() ) {
 	<!-- <div class="clear"></div> -->
 </div>
 
-
-<?php
-
-function wp_travel_comments( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	wp_travel_load_template(
-		'review.php',
-		array(
-			'comment' => $comment,
-			'args'    => $args,
-			'depth'   => $depth,
-		)
-	);
-}

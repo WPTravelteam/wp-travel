@@ -1852,6 +1852,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 	$book_now_string       = isset( $strings['bookings']['book_now'] ) ? $strings['bookings']['book_now'] : __( 'Book Now', 'wp-travel' );
 	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
 	$pricing_string        = isset( $strings['bookings']['combined_pricing'] ) ? $strings['bookings']['combined_pricing'] : __( 'Pricing', 'wp-travel' );
+	$select_pax            = isset( $strings['bookings']['select_pax'] ) ? $strings['bookings']['select_pax'] : __( 'Select Pax', 'wp-travel' );
 	// Endf of strings
 	// Filter added @since 3.0.0
 	$is_inventory_enabled = apply_filters( 'inventory_enabled', false, $trip_id );
@@ -2053,7 +2054,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<div class="group-size">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php echo esc_attr( $select_pax ); ?>" data-default="<?php echo esc_attr( $select_pax ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
@@ -2233,6 +2234,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 	$sold_out_string       = isset( $strings['bookings']['sold_out'] ) ? $strings['bookings']['sold_out'] : __( 'Sold out', 'wp-travel' );
 	$book_now_string       = isset( $strings['bookings']['book_now'] ) ? $strings['bookings']['book_now'] : __( 'Book Now', 'wp-travel' );
 	$select_string         = isset( $strings['bookings']['select'] ) ? $strings['bookings']['select'] : __( 'Select', 'wp-travel' );
+	$select_pax            = isset( $strings['bookings']['select_pax'] ) ? $strings['bookings']['select_pax'] : __( 'Select Pax', 'wp-travel' );
 	// Endf of strings
 	$is_inventory_enabled = apply_filters( 'inventory_enabled', false, $trip_id );
 
@@ -2361,7 +2363,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 									<div class="group-size pax-selection">
 										<div id="paxpicker" class="paxpicker">
 											<div class="icon-users summary">
-												<input readonly="readonly" class="participants-summary-container" value="<?php _e( 'Select Pax', 'wp-travel' ); ?>" data-default="<?php _e( 'Select Pax', 'wp-travel' ); ?>" >
+												<input readonly="readonly" class="participants-summary-container" value="<?php echo esc_attr( $select_pax ); ?>" data-default="<?php echo esc_attr( $select_pax ); ?>" >
 											</div>
 											<div class="pricing-categories" id="pricing-categories-<?php echo esc_attr( $pricing['pricing_id'] ) . '-' . rand( 1000, 9999 ); ?>" data-selected-pax="0" data-booked-pax="<?php esc_attr( $pricing['inventory']['booked_pax'] ); ?>" data-available-pax="<?php echo esc_attr( $pricing['inventory']['available_pax'] ); ?>" data-parent-form-id="<?php echo esc_attr( $parent_id ); ?>" data-min="<?php echo esc_attr( $pricing['inventory']['min_pax'] ); ?>" data-max="<?php echo esc_attr( $pricing['inventory']['max_pax'] ); ?>">
 												<span class="separator">&nbsp;</span>
