@@ -2697,6 +2697,7 @@ function wp_travel_get_strings() {
 			'group_size'       => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'       => __( 'Seats left', 'wp-travel' ),
 			'pax'              => __( 'Pax', 'wp-travel' ),
+			'select_pax'       => __( 'Select Pax', 'wp-travel' ),
 			'price'            => __( 'Price', 'wp-travel' ),
 			'arrival_date'     => __( 'Arrival date', 'wp-travel' ),
 			'departure_date'   => __( 'Departure date', 'wp-travel' ),
