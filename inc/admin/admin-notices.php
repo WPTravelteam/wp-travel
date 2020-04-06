@@ -88,7 +88,7 @@ function wp_travel_display_general_admin_notices() {
 
 add_action( 'admin_notices', 'wp_travel_display_general_admin_notices' );
 
-//Deprecated notice.
+// Deprecated notice.
 function wp_travel_display_deprecated_notice() {
 	$notices = apply_filters( 'wp_travel_deprecated_admin_notice', array() );
 	if ( count( $notices ) < 1 ) {
@@ -103,8 +103,9 @@ function wp_travel_display_deprecated_notice() {
 			<ul>
 				<?php foreach ( $notices as $notice ) : ?>
 					<li><?php echo esc_html( $notice ); ?></li>
-				<?php
-				endforeach; ?>
+					<?php
+				endforeach;
+				?>
 			</ul>
 		</div>
 	</div>
@@ -116,7 +117,7 @@ add_action( 'admin_notices', 'wp_travel_display_deprecated_notice' );
 // Single Pricing deprecated notice.
 function wp_travel_display_single_pricing_deprecated_notice( $notices ) {
 
-	$screen = get_current_screen();
+	$screen  = get_current_screen();
 	$post_id = get_the_ID();
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type && $screen->parent_base == 'edit' && ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) && $post_id ) {
 		if ( $post_id ) {
@@ -147,7 +148,7 @@ function wp_travel_black_friday_notice() {
 
 function wp_travel_black_friday_dismiss_notice_ajax() {
 	$user_id = get_current_user_id();
-	$key = 'wp_travel_black_friday_2019_' . $user_id;
+	$key     = 'wp_travel_black_friday_2019_' . $user_id;
 	update_option( $key, true );
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
@@ -182,4 +183,4 @@ function wp_travel_in_plugin_update_message( $args, $response ) {
 	<?php
 	return ob_get_clean();
 }
-add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );
+// add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );
