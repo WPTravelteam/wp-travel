@@ -69,12 +69,12 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * @uses apply_filters Calls `wp_session_expiration` to determine how long until sessions expire.
 	 */
 	protected function __construct() {
-		if ( isset( $_COOKIE[WP_TRAVEL_SESSION_COOKIE] ) ) {
-			$cookie = stripslashes( $_COOKIE[WP_TRAVEL_SESSION_COOKIE] );
+		if ( isset( $_COOKIE[ WP_TRAVEL_SESSION_COOKIE ] ) ) {
+			$cookie        = stripslashes( $_COOKIE[ WP_TRAVEL_SESSION_COOKIE ] );
 			$cookie_crumbs = explode( '||', $cookie );
 
-			$this->session_id = $cookie_crumbs[0];
-			$this->expires = $cookie_crumbs[1];
+			$this->session_id  = $cookie_crumbs[0];
+			$this->expires     = $cookie_crumbs[1];
 			$this->exp_variant = $cookie_crumbs[2];
 
 			// Update the session expiration if we're past the variant time
@@ -114,18 +114,21 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 */
 	protected function set_expiration() {
 		$this->exp_variant = time() + (int) apply_filters( 'wp_session_expiration_variant', 24 * 60 );
-		$this->expires = time() + (int) apply_filters( 'wp_session_expiration', 30 * 60 );
+		$this->expires     = time() + (int) apply_filters( 'wp_session_expiration', 30 * 60 );
 	}
 
 	/**
-	* Set the session cookie
-     	* @uses apply_filters Calls `wp_session_cookie_secure` to set the $secure parameter of setcookie()
-     	* @uses apply_filters Calls `wp_session_cookie_httponly` to set the $httponly parameter of setcookie()
-     	*/
+	 * Set the session cookie
+	 *
+	 * @uses apply_filters Calls `wp_session_cookie_secure` to set the $secure parameter of setcookie()
+	 * @uses apply_filters Calls `wp_session_cookie_httponly` to set the $httponly parameter of setcookie()
+	 */
 	protected function set_cookie() {
-        	$secure = apply_filters('wp_session_cookie_secure', false);
-        	$httponly = apply_filters('wp_session_cookie_httponly', false);
-		setcookie( WP_TRAVEL_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant , $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
+		$secure   = apply_filters( 'wp_session_cookie_secure', false );
+		$httponly = apply_filters( 'wp_session_cookie_httponly', false );
+		if ( ! headers_sent() ) {
+			setcookie( WP_TRAVEL_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant, $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
+		}
 	}
 
 	/**
@@ -146,7 +149,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 */
 	public function write_data() {
 		$option_key = "_wp_session_{$this->session_id}";
-		
+
 		if ( false === get_option( $option_key ) ) {
 			update_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
 			update_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
@@ -204,7 +207,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * @return bool
 	 */
 	public function session_started() {
-		return !!self::$instance;
+		return ! ! self::$instance;
 	}
 
 	/**

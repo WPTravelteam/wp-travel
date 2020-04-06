@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.4.0
 Requires PHP: 5.5
-Stable tag: 3.1.9
+Stable tag: 3.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -231,8 +231,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.2.0 =
+Release Date: 6th April, 2020
+Enhancement :
+* Supported WP Travel Gutenberg Elementor Blocks feature.
+* Supported WP Travel Saferpay Checkout.
+
 = 3.1.9 =
-Release Date: 2st April, 2020
+Release Date: 2nd April, 2020
 Fixes :
 * Theme page URL fixed in the readme file.
 * String Select Pax text is updated with filter.

@@ -204,7 +204,9 @@ class WP_Travel_Admin_Metaboxes {
 						<?php endforeach; ?>
 					</table>
 					<hr>
+
 					<?php
+					do_action( 'wp_travel_after_payment_detail', $booking_id, $payment_args );
 				endif;
 			}
 		}
