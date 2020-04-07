@@ -546,6 +546,10 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
+		if ( 'no'  == $trip_meta['wp_travel_enable_multiple_fixed_departue'] ) {
+			$trip_meta['trip_date'] = $trip_meta['wp_travel_start_date'];
+		}
+
 		$wp_travel_trip_facts = array();
 		if ( isset( $_POST['wp_travel_trip_facts'] ) ) {
 			$wp_travel_trip_facts = array_filter( array_filter( array_values( $_POST['wp_travel_trip_facts'] ), 'array_filter' ), 'count' );
