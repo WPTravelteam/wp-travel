@@ -16,7 +16,7 @@ $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
 ?>
-<form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
+<form method="POST" action="/" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
 	<!-- Travelers info -->
 	<?php
