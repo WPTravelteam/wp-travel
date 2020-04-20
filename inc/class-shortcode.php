@@ -105,7 +105,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wp_travel_get_itineraries_shortcode( $atts, $content = '' ) {
+	public static function wp_travel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
 		$default = array(
 			'id'           => 0,
 			'type'         => '',
@@ -118,7 +118,7 @@ class Wp_Travel_Shortcodes {
 			'order'        => 'asc',
 		);
 
-		$atts = shortcode_atts( $default, $atts, 'WP_TRAVEL_ITINERARIES' );
+		$atts = shortcode_atts( $default, $shortcode_atts, 'WP_TRAVEL_ITINERARIES' );
 
 		$type      = $atts['type'];
 		$iti_id    = $atts['itinerary_id'];
@@ -171,9 +171,9 @@ class Wp_Travel_Shortcodes {
 		endif;
 
 		// Sorting Start.
-		if ( isset( $atts['orderby'] ) ) {
+		if ( isset( $shortcode_atts['orderby'] ) ) { // if attribute passed from shortcode.
 
-			switch ( $atts['orderby'] ) {
+			switch ( $shortcode_atts['orderby'] ) {
 				case 'trip_date':
 					$args['meta_query'] = array(
 						array( 'key' => 'trip_date' ),
