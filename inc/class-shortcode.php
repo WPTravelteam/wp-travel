@@ -105,7 +105,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wp_travel_get_itineraries_shortcode( $atts, $content = '' ) {
+	public static function wp_travel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
 		$default = array(
 			'id'           => 0,
 			'type'         => '',
@@ -114,11 +114,11 @@ class Wp_Travel_Shortcodes {
 			'slug'         => '',
 			'limit'        => 20,
 			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '2' ),
-			'orderby'      => 'trip_date',
+			// 'orderby'      => 'trip_date',
 			'order'        => 'asc',
 		);
 
-		$atts = shortcode_atts( $default, $atts, 'WP_TRAVEL_ITINERARIES' );
+		$atts = shortcode_atts( $default, $shortcode_atts, 'WP_TRAVEL_ITINERARIES' );
 
 		$type      = $atts['type'];
 		$iti_id    = $atts['itinerary_id'];
@@ -136,7 +136,7 @@ class Wp_Travel_Shortcodes {
 		if ( ! empty( $iti_id ) ) :
 			$args['p'] = $iti_id;
 		else :
-			$taxonomies = array( 'itinerary_types', 'travel_locations' );
+			$taxonomies = array( 'itinerary_types', 'travel_locations', 'activity' );
 			// if type is taxonomy.
 			if ( in_array( $type, $taxonomies ) ) {
 
@@ -171,9 +171,9 @@ class Wp_Travel_Shortcodes {
 		endif;
 
 		// Sorting Start.
-		if ( $atts['orderby'] ) {
+		if ( isset( $shortcode_atts['orderby'] ) ) { // if attribute passed from shortcode.
 
-			switch ( $atts['orderby'] ) {
+			switch ( $shortcode_atts['orderby'] ) {
 				case 'trip_date':
 					$args['meta_query'] = array(
 						array( 'key' => 'trip_date' ),
