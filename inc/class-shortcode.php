@@ -114,7 +114,7 @@ class Wp_Travel_Shortcodes {
 			'slug'         => '',
 			'limit'        => 20,
 			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '2' ),
-			'orderby'      => 'trip_date',
+			// 'orderby'      => 'trip_date',
 			'order'        => 'asc',
 		);
 
@@ -171,7 +171,7 @@ class Wp_Travel_Shortcodes {
 		endif;
 
 		// Sorting Start.
-		if ( $atts['orderby'] ) {
+		if ( isset( $atts['orderby'] ) ) {
 
 			switch ( $atts['orderby'] ) {
 				case 'trip_date':
