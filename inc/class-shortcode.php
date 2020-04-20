@@ -136,7 +136,7 @@ class Wp_Travel_Shortcodes {
 		if ( ! empty( $iti_id ) ) :
 			$args['p'] = $iti_id;
 		else :
-			$taxonomies = array( 'itinerary_types', 'travel_locations' );
+			$taxonomies = array( 'itinerary_types', 'travel_locations', 'activity' );
 			// if type is taxonomy.
 			if ( in_array( $type, $taxonomies ) ) {
 
