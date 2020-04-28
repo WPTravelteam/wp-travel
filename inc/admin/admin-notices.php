@@ -182,4 +182,4 @@ function wp_travel_in_plugin_update_message( $args, $response ) {
 	<?php
 	return ob_get_clean();
 }
-add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );
+// add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );
