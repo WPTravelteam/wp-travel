@@ -237,6 +237,9 @@ Release Date: 28th April, 2020
 Fixed :
 * Trip Filter range not working in search widget.
 
+Enhancement :
+* Filter wp_travel_currency_symbol added in wp_travel_get_currency_symbol function.
+
 = 3.2.2 =
 Release Date: 20th April, 2020
 
