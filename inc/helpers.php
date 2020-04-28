@@ -570,7 +570,7 @@ function wp_reavel_get_itinereries_prices_array() {
 
 		foreach ( $itineraries as $key => $itinerary ) {
 
-			$prices[] = wp_travel_get_actual_trip_price( $key );
+			$prices[] = wp_travel_get_price( $key );
 
 		}
 		if ( is_array( $prices ) && '' !== $prices ) :
