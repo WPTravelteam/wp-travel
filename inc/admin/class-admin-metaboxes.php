@@ -493,7 +493,7 @@ class WP_Travel_Admin_Metaboxes {
 			$pricing_options = $trip_meta['wp_travel_pricing_options'];
 			// Need to update wp_travel_trip_price which is used to filter by price in archive page.
 			$price_key = wp_travel_get_min_price_key( $pricing_options );
-			$price     = wp_travel_get_actual_trip_price( $post_id, $price_key );
+			$price     = wp_travel_get_price( $post_id );
 			if ( $price ) {
 				$trip_meta['wp_travel_trip_price'] = $price;
 			}
