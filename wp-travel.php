@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 3.1.7
+ * Version: 4.0.0
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
@@ -107,9 +107,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 
 			// Set priority to move submenu.
-			$sbumenus = wp_travel_get_submenu();
+			$sbumenus         = wp_travel_get_submenu();
 			$priority_enquiry = isset( $sbumenus['bookings']['enquiries']['priority'] ) ? $sbumenus['bookings']['enquiries']['priority'] : 10;
-			$priority_extras = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
+			$priority_extras  = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_enquiries' ), $priority_enquiry );
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_tour_extras' ), $priority_extras );
 
@@ -125,7 +125,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
 				// add_action( 'admin_menu', 'wp_travel_marketplace_menu');
 
-				$this->tabs = new WP_Travel_Admin_Tabs();
+				$this->tabs     = new WP_Travel_Admin_Tabs();
 				$this->uploader = new WP_Travel_Admin_Uploader();
 
 				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
@@ -135,7 +135,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->coupon  = new WP_Travel_Coupon();
 
 			// For Network.
-			add_action('network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
+			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
 		}
 
 		public function wp_travel_network_menu() {
@@ -164,7 +164,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Init Shortcode for WP Travel.
 		 */
-		private function init_shortcodes(){
+		private function init_shortcodes() {
 			$plugin_shortcode = new Wp_Travel_Shortcodes();
 			$plugin_shortcode->init();
 		}
@@ -176,7 +176,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Init Sidebars for WP Travel.
 		 */
-		private function init_sidebars(){
+		private function init_sidebars() {
 			$plugin_sidebars = new Wp_Travel_Sidebars();
 			$plugin_sidebars->init();
 		}
@@ -190,8 +190,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/payments/wp-travel-payments.php',  dirname( __FILE__ ) );
-			include sprintf( '%s/inc/license/wp-travel-license.php',  dirname( __FILE__ ) );
+			include sprintf( '%s/inc/payments/wp-travel-payments.php', dirname( __FILE__ ) );
+			include sprintf( '%s/inc/license/wp-travel-license.php', dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
@@ -230,6 +230,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			/**
 			 * Include Query Classes.
+			 *
 			 * @since 1.2.6
 			 */
 			include sprintf( '%s/inc/class-wp-travel-query.php', WP_TRAVEL_ABSPATH );
@@ -242,10 +243,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Pointers Class Includes.
 			include sprintf( '%s/inc/admin/class-admin-pointers.php', WP_TRAVEL_ABSPATH );
 
-			//Include Sidebars Class.
+			// Include Sidebars Class.
 			include sprintf( '%s/inc/class-sidebars.php', WP_TRAVEL_ABSPATH );
 			/**
 			 * Include Cart and Checkout Classes.
+			 *
 			 * @since 1.2.3
 			 */
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
@@ -289,9 +291,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 
 			switch ( $screen->id ) {
-				case 'options-permalink' :
+				case 'options-permalink':
 					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
-				break;
+					break;
 			}
 		}
 
@@ -303,13 +305,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 */
 		private function is_request( $type ) {
 			switch ( $type ) {
-				case 'admin' :
+				case 'admin':
 					return is_admin();
-				case 'ajax' :
+				case 'ajax':
 					return defined( 'DOING_AJAX' );
-				case 'cron' :
+				case 'cron':
 					return defined( 'DOING_CRON' );
-				case 'frontend' :
+				case 'frontend':
 					return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 			}
 		}
@@ -345,14 +347,21 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$min_php_ver = '5.3.29';
 			if ( version_compare( PHP_VERSION, $min_php_ver, '<' ) ) {
 
-				$flag 	 = __( 'PHP', 'wp-travel' );
+				$flag    = __( 'PHP', 'wp-travel' );
 				$version = sprintf( __( '%s or Higher', 'wp-travel' ), $min_php_ver );
 
 				deactivate_plugins( basename( __FILE__ ) );
 
 				$message = sprintf( __( 'WP Travel plugin requires %1$s version %2$s or greater to work.', 'wp-travel' ), $flag, $version );
 
-				wp_die( $message,__('Plugin Activation Error', 'wp-travel' ),  array( 'response'=>200, 'back_link'=>TRUE ) );
+				wp_die(
+					$message,
+					__( 'Plugin Activation Error', 'wp-travel' ),
+					array(
+						'response'  => 200,
+						'back_link' => true,
+					)
+				);
 			}
 
 			// Flush Rewrite rule.
@@ -360,10 +369,15 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			Wp_Travel_Taxonomies::init();
 			flush_rewrite_rules();
 
-			$itineraries = get_posts( array( 'post_type' => 'itineraries', 'post_status' => 'publish' ) );
+			$itineraries = get_posts(
+				array(
+					'post_type'   => 'itineraries',
+					'post_status' => 'publish',
+				)
+			);
 			if ( count( $itineraries ) > 0 ) {
-				foreach( $itineraries as $itinerary ) {
-					$post_id = $itinerary->ID;
+				foreach ( $itineraries as $itinerary ) {
+					$post_id    = $itinerary->ID;
 					$trip_price = get_post_meta( $post_id, 'wp_travel_trip_price', true );
 					if ( $trip_price > 0 ) {
 						continue;
@@ -381,7 +395,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			// Added Date Formatting for filter.
 			if ( count( $itineraries ) > 0 ) {
-				foreach( $itineraries as $itinerary ) {
+				foreach ( $itineraries as $itinerary ) {
 					$post_id         = $itinerary->ID;
 					$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 					if ( 'no' == $fixed_departure ) {
@@ -415,7 +429,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include_once sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
 
 				$pages = apply_filters(
-					'wp_travel_create_pages', array(
+					'wp_travel_create_pages',
+					array(
 						'wp-travel-cart'      => array(
 							'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
 							'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),
@@ -470,6 +485,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			/**
 			 * Define Roles.
+			 *
 			 * @since 1.3.7
 			 */
 			self::create_roles();
@@ -496,9 +512,15 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 1.0.0
 		 */
 		private function add_image_sizes() {
-			$image_size = apply_filters( 'wp_travel_image_size', array( 'width' => 365, 'height' => 215 ) );
-			$width = $image_size['width'];
-			$height = $image_size['height'];
+			$image_size = apply_filters(
+				'wp_travel_image_size',
+				array(
+					'width'  => 365,
+					'height' => 215,
+				)
+			);
+			$width      = $image_size['width'];
+			$height     = $image_size['height'];
 			add_image_size( 'wp_travel_thumbnail', $width, $height, true );
 		}
 

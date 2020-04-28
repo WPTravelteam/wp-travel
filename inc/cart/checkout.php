@@ -16,7 +16,7 @@ $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
 ?>
-<form method="POST" action="" class="wp-travel-booking" id="wp-travel-booking">
+<form method="POST" action="/" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
 	<!-- Travelers info -->
 	<?php
@@ -27,7 +27,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 
 		// New @since 3.0.0.
-		$cart_trip      = isset( $trip['trip'] ) ? $trip['trip'] : array();
+		$cart_trip = isset( $trip['trip'] ) ? $trip['trip'] : array();
 		if ( is_array( $cart_trip ) && count( $cart_trip ) > 0 ) {
 			$repeator_count = 0;
 			foreach ( $cart_trip as $category_id => $category ) {
