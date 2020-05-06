@@ -903,8 +903,12 @@ function wp_travel_trip_map( $post_id ) {
 	$current_map     = $get_maps['selected'];
 	$show_google_map = ( 'google-map' === $current_map ) ? true : false;
 	$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
-	$settings        = wp_travel_get_settings();
-	$api_key         = '';
+
+	if ( ! $show_google_map ) {
+		return;
+	}
+	$settings = wp_travel_get_settings();
+	$api_key  = '';
 	if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 		$api_key = $settings['google_map_api_key'];
 	}
@@ -917,6 +921,20 @@ function wp_travel_trip_map( $post_id ) {
 		?>
 		<div class="wp-travel-map">
 			<div id="wp-travel-map" style="width:100%;height:300px"></div>
+		</div>
+		<?php
+	} else {
+		$use_lat_lng = get_post_meta( $post_id, 'wp_travel_trip_map_use_lat_lng', true );
+		if ( $use_lat_lng === 'yes' ) {
+			$q = "{$lat},{$lng}";
+		} else {
+			$q = $map_data['loc'];
+		}
+		?>
+		<div class="wp-travel-map">
+			<iframe
+				style="width:100%;height:300px"
+				src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near"></iframe>
 		</div>
 		<?php
 	}
