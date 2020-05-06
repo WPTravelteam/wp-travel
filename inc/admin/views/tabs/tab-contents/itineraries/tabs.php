@@ -75,6 +75,9 @@ function wp_travel_trip_callback_tabs( $tab, $args ) {
 			<tbody>
 			<?php
 			foreach ( $tabs as $key => $tab ) :
+				if ( ! is_array( $tab ) ) {
+					$tab = ( array ) $tab; // @todo need to reset tab.
+				}
 				$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 				?>
 				<tr>
