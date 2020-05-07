@@ -301,7 +301,7 @@ function wp_travel_get_checkout_form_fields() {
 	}
 
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
-	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
+	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields ); ////
 	// Set default values.
 	$traveller_fields['first_name']['default']   = $user_fname;
 	$traveller_fields['last_name']['default']    = $user_fname;
