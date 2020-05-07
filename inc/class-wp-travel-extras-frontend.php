@@ -41,17 +41,25 @@ class Wp_Travel_Extras_Frontend {
 	 */
 	public function has_trip_extras( $trip_id, $price_key = false ) {
 
+		$wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
+
 		if ( empty( $trip_id ) ) {
 			return false;
 		}
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 
+		
 		if ( $price_key && 'multiple-price' === $pricing_option_type ) {
-			$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
-			$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
-
-			if ( $pricing_option ) {
-				$trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
+			if( ! $wp_travel_migrated_400 ) {
+				$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+				$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
+	
+				if ( $pricing_option ) {
+					$trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
+				}
+			} else {
+				$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
+				$trip_extras              = $trip_pricings_with_dates[ $price_key ]['trip_extras'];
 			}
 		} else {
 

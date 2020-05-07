@@ -3124,6 +3124,69 @@ function wp_travel_frontend_tab_gallery( $gallery_ids ) {
 }
 
 /**
+ * Get Pricing Options.
+ * 
+ * @since 4.0.0
+ */
+if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
+	function wp_travel_get_trip_pricings_with_dates( $trip_id ) {
+		if ( ! $trip_id ) {
+			global $post;
+			if ( WP_TRAVEL_POST_TYPE !== $post->post_type ) {
+				return;
+			}
+			$trip_id = $post->ID;   
+		}
+		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+		$trip_pricings = isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); //  Trip Pricings.
+
+		$dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
+		$trip_dates = 'WP_TRAVEL_TRIP_DATES' === $dates_data['code'] ? $dates_data['dates'] : array(); // All the trip related dates;
+
+		$trip_pricings_with_dates = array(); // This will contains all the looping pricing while listing.
+
+		/**
+		 * Pricing by pricing id to add date easily on looping array item.
+		 */
+		$trip_pricings_by_id = array_column( $trip_pricings, NULL, 'id' );
+	
+		$i = 0;
+		foreach ( $trip_dates as $trip_date ) {
+			$date_pricings = explode( ',', $trip_date['pricing_ids'] ); // Date may contains multiple pricing ids separated by (,). 
+	
+			/**
+			 * Making final looping array with both pricing and dates.
+			 * Each item for each pricing and each pricing for each date.
+			 */
+			foreach ( $date_pricings as $pricing_id ) {
+				$pricing = array();
+				if ( isset( $trip_pricings_by_id[ $pricing_id ] ) ) {
+					$pricing = $trip_pricings_by_id[ $pricing_id ];
+
+					$trip_pricings_with_dates[ $i ]         = $pricing;
+					$trip_pricings_with_dates[ $i ]['date'] = $trip_date;
+					$i++;
+				}
+			}
+		}
+
+		uasort(
+			$trip_pricings_with_dates,
+			function( $a, $b ) {
+				$date_a = $a['date']['start_date'];
+				$date_b = $b['date']['start_date'];
+				if ( $date_a == $date_b ) {
+					return 0;
+				}
+				return $date_a < $date_b ? -1 : 1;
+			} 
+		);
+
+		return $trip_pricings_with_dates;
+	} // ends.
+}
+
+/**
  *
  * Return All Pricing. Use to display regular listing.
  *
@@ -3142,12 +3205,13 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		return;
 	}
 
+    $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' ); // @since 4.0.0 Option added when pricings migrated to v4
+
 	// Dates and prices.
 	$dates         = array();
 	$pricing       = array();
 	$trip_duration = array();
 
-	// Date. [need in multiple pricing also, if multiple date is disabled].
 	$start_date         = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 	$end_date           = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 	$days               = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
@@ -3169,11 +3233,17 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since 3.0.0
 	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 
-		// Price.
-		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
-
-		// Dates.
-		$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
+		if( $wp_travel_migrated_400  ) {
+			$pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
+			// $pricing_options = $trip_pricings_and_date['pricings'];
+			// $pricing_options = $trip_pricings_and_date['dates'];
+		} else { // Our tradition before < 4.0.0
+			// Price.
+			$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+	
+			// Dates.
+			$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
+		}
 
 		// variable used for api data.
 		// End of variable used for api data.
@@ -3217,10 +3287,17 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
-					$pricing_name    = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : '';
-					$price_key       = isset( $pricing_option['price_key'] ) ? $pricing_option['price_key'] : '';
-					$pricing_min_pax = ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
-					$pricing_max_pax = ! empty( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
+					if ( $wp_travel_migrated_400 ) {
+						$pricing_name    = isset( $pricing_option['title'] ) ? $pricing_option['title'] : '';
+						$price_key       = isset( $pricing_option['id'] ) ? $pricing_option['id'] : '';
+						$pricing_min_pax = ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
+						$pricing_max_pax = ! empty( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
+					} else {
+						$pricing_name    = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : '';
+						$price_key       = isset( $pricing_option['price_key'] ) ? $pricing_option['price_key'] : '';
+						$pricing_min_pax = ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
+						$pricing_max_pax = ! empty( $pricing_option['max_pax'] ) ? $pricing_option['max_pax'] : $default_group_size;
+					}
 
 					$pricing_categories = isset( $pricing_option['categories'] ) ? $pricing_option['categories'] : array();
 
@@ -3229,14 +3306,24 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 
 					if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 						foreach ( $pricing_categories as $category_id => $pricing_category ) {
-							// $categories[ $category_id ]                = $pricing_category;
-							$categories[ $category_id ]['type']         = $pricing_category['type'];
-							$categories[ $category_id ]['custom_label'] = $pricing_category['custom_label'];
-							$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];
-							// $categories[ $category_id ]['sale_price']  = $pricing_category['sale_price'];
-							$categories[ $category_id ]['enable_sale'] = isset( $pricing_category['enable_sale'] ) ? $pricing_category['enable_sale'] : 'no';
-							$categories[ $category_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, $category_id );
-							$categories[ $category_id ]['price']       = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+							
+							if ( $wp_travel_migrated_400 ) {
+								// $categories[ $pricing_category['id'] ] = $pricing_category;
+								$categories[ $category_id ]['type']         = 'custom'; // following the tradition.
+								$categories[ $category_id ]['custom_label'] = $pricing_category['term_info']['title'];
+								$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];
+								$categories[ $category_id ]['enable_sale']  = isset( $pricing_category['is_sale'] ) ? 'yes' : 'no';
+								$categories[ $category_id ]['regular']      = $pricing_category['regular_price'];
+								$categories[ $category_id ]['price']        = $pricing_category['sale_price'];
+							} else {
+								$categories[ $category_id ]['type']         = $pricing_category['type'];
+								$categories[ $category_id ]['custom_label'] = $pricing_category['custom_label'];
+								$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];
+								$categories[ $category_id ]['enable_sale']  = isset( $pricing_category['enable_sale'] ) ? $pricing_category['enable_sale'] : 'no';
+								$categories[ $category_id ]['regular']      = wp_travel_get_price( $trip_id, true, $pricing_id, $category_id );
+								$categories[ $category_id ]['price']        = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
+							}
+
 						}
 					} else {
 						$categories[ $pricing_id ]['type']         = $pricing_option['type'];
@@ -3276,26 +3363,43 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					if ( 'yes' === $fixed_departure ) {
 						// If Multiple Fixed Departure Enabled.
 						if ( 'yes' === $multiple_fixed_departue ) {
-							$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
-							foreach ( $available_trip_dates as $date_options_key => $date_option ) {
-								$start_date = isset( $date_option['start_date'] ) ? $date_option['start_date'] : null;
-								$end_date   = isset( $date_option['end_date'] ) ? $date_option['end_date'] : null;
-								$date_label = isset( $date_option['date_label'] ) ? $date_option['date_label'] : null;
+							if ( ! $wp_travel_migrated_400 ) : // If data not migrated yet follow the tradition.
+								$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
+								foreach ( $available_trip_dates as $date_options_key => $date_option ) {
+									$start_date = isset( $date_option['start_date'] ) ? $date_option['start_date'] : null;
+									$end_date   = isset( $date_option['end_date'] ) ? $date_option['end_date'] : null;
+									$date_label = isset( $date_option['date_label'] ) ? $date_option['date_label'] : null;
 
-								$price_keys = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : null; // Price key to validate pricing. need to remove in future version. use $pricing_id instead of this.
-								if ( is_array( $price_keys ) && in_array( $price_key, $price_keys ) ) {
+									$price_keys = isset( $date_option['pricing_options'] ) ? $date_option['pricing_options'] : null; // Price key to validate pricing. need to remove in future version. use $pricing_id instead of this.
+									if ( is_array( $price_keys ) && in_array( $price_key, $price_keys ) ) {
 
-									// Inventory option in multiple dates.
-									$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
+										// Inventory option in multiple dates.
+										$inventory_data = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
 
-									$pricing_data['date_id']        = $date_options_key;
-									$pricing_data['arrival_date']   = $start_date;
-									$pricing_data['departure_date'] = $end_date;
-									$pricing_data['date_label']     = $date_label;
-									$pricing_data['inventory']      = $inventory_data;
-									$pricing[]                      = $pricing_data;
+										$pricing_data['date_id']        = $date_options_key;
+										$pricing_data['arrival_date']   = $start_date;
+										$pricing_data['departure_date'] = $end_date;
+										$pricing_data['date_label']     = $date_label;
+										$pricing_data['inventory']      = $inventory_data;
+										$pricing[]                      = $pricing_data;
+									}
 								}
-							}
+							else: // If pricing data migrated.
+								$pricing_date = $pricing_option['date'];
+								$start_date   = isset( $pricing_date['start_date'] ) ? $pricing_date['start_date'] : null;
+								$end_date     = isset( $pricing_date['end_date'] ) ? $pricing_date['end_date'] : null;
+								$date_label   = isset( $pricing_date['title'] ) ? $pricing_date['title'] : null;
+
+								$pricing_data['arrival_date']   = $start_date;
+								$pricing_data['departure_date'] = $end_date;
+								// Inventory option in single dates.
+								$inventory_data            = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
+								$pricing_data['inventory'] = $inventory_data;
+								$pricing_data['date']      = $pricing_date;
+								$pricing[]    = $pricing_data;
+								
+								// $pricing[] = $pricing_data;
+							endif;// If not migrated condition block ends.
 						} else { // Fixed departure but not multi fixed departure.
 							$pricing_data['arrival_date']   = $start_date;
 							$pricing_data['departure_date'] = $end_date;

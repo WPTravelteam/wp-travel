@@ -1039,90 +1039,117 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 
 	$price = 0;
 
-	$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+	if ( 'yes' !== get_option( 'wp_travel_migrate_400' ) ) : // Follow the tradtion to get price.
 
-	if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
-		// Specific listing as per pricing_id to get price.
-		if ( ! empty( $pricing_id ) ) {
-			$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
-			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
-				if ( ! $price_key && $pricing_id === $category_id ) { // By default we set category_id = pricing_id due to no category_id in listing of legacy version.
-					$price_key = isset( $pricing_options[ $pricing_id ]['price_key'] ) ? $pricing_options[ $pricing_id ]['price_key'] : '';
-				}
+		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
-				$price = wp_travel_get_actual_trip_price( $trip_id, $price_key, $return_regular_price );
-			} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
-				if ( ! empty( $category_id ) ) {
-
-					$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
-					$price  = $category_option['price'];
-					$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
-					$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;
-
-					if ( $enable_sale && $sale_price && ! $return_regular_price ) {
-						$price = $category_option['sale_price'];
-					}
-				} else {
-
-					foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
-
-					}
-				}
-			}
-		} else {
-			$min_keys = wp_travel_get_min_pricing_id( $trip_id );
-			$pricing_id = isset( $min_keys[ 'pricing_id' ] ) ?  $min_keys[ 'pricing_id' ] : '';
-			$pricing_option = ! empty( $pricing_id ) && isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
-
-
-			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
-
-				if ( isset( $pricing_option['price'] ) ) { // old pricing option.
-					$current_price = $pricing_option['price'];
-					$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
-					$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
-
-					if ( 'yes' === $enable_sale && $sale_price > 0 && ! $return_regular_price ) {
-						$current_price = $sale_price;
+		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+			// Specific listing as per pricing_id to get price.
+			if ( ! empty( $pricing_id ) ) {
+				$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
+				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
+					if ( ! $price_key && $pricing_id === $category_id ) { // By default we set category_id = pricing_id due to no category_id in listing of legacy version.
+						$price_key = isset( $pricing_options[ $pricing_id ]['price_key'] ) ? $pricing_options[ $pricing_id ]['price_key'] : '';
 					}
 
-					if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
-						$price = $current_price;
+					$price = wp_travel_get_actual_trip_price( $trip_id, $price_key, $return_regular_price );
+				} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
+					if ( ! empty( $category_id ) ) {
+
+						$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
+						$price  = $category_option['price'];
+						$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
+						$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;
+
+						if ( $enable_sale && $sale_price && ! $return_regular_price ) {
+							$price = $category_option['sale_price'];
+						}
+					} else {
+
+						foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
+
+						}
 					}
 				}
-			} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
-				if ( ! empty( $category_id ) ) {
-					$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
-				} else {
+			} else {
+				$min_keys = wp_travel_get_min_pricing_id( $trip_id );
+				$pricing_id = isset( $min_keys[ 'pricing_id' ] ) ?  $min_keys[ 'pricing_id' ] : '';
+				$pricing_option = ! empty( $pricing_id ) && isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
-					$min_catetory_id = '';
-					$catetory_id_max_price = '';
-					foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
 
-						$current_price = $category_option['price'];
-						$enable_sale   = isset( $category_option['enable_sale'] ) ? $category_option['enable_sale'] : 'no';
-						$sale_price    = isset( $category_option['sale_price'] ) ? $category_option['sale_price'] : 0;
+				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
 
-						if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+					if ( isset( $pricing_option['price'] ) ) { // old pricing option.
+						$current_price = $pricing_option['price'];
+						$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
+						$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+
+						if ( 'yes' === $enable_sale && $sale_price > 0 && ! $return_regular_price ) {
 							$current_price = $sale_price;
 						}
 
 						if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
-							$price                 = $current_price;
-							$min_catetory_id = $category_id; // Add min price category id.
+							$price = $current_price;
 						}
 					}
+				} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
+					if ( ! empty( $category_id ) ) {
+						$category_option = isset( $pricing_option['categories'][ $category_id ] ) ? $pricing_option['categories'][ $category_id ] : array();
+					} else {
 
-					// Return regular price.
-					if ( $return_regular_price && ! empty( $min_catetory_id ) && isset( $pricing_option['categories'][ $min_catetory_id ]['price'] ) ) {
-						$price = $pricing_option['categories'][ $min_catetory_id ]['price'];
+						$min_catetory_id = '';
+						$catetory_id_max_price = '';
+						foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
+
+							$current_price = $category_option['price'];
+							$enable_sale   = isset( $category_option['enable_sale'] ) ? $category_option['enable_sale'] : 'no';
+							$sale_price    = isset( $category_option['sale_price'] ) ? $category_option['sale_price'] : 0;
+
+							if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+								$current_price = $sale_price;
+							}
+
+							if ( ( 0 === $price && $current_price > 0 ) || $price > $current_price ) { // Initialize min price if 0.
+								$price                 = $current_price;
+								$min_catetory_id = $category_id; // Add min price category id.
+							}
+						}
+
+						// Return regular price.
+						if ( $return_regular_price && ! empty( $min_catetory_id ) && isset( $pricing_option['categories'][ $min_catetory_id ]['price'] ) ) {
+							$price = $pricing_option['categories'][ $min_catetory_id ]['price'];
+						}
 					}
 				}
 			}
+		} else { // Default single pricing price
+			$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
 		}
-	} else { // Default single pricing price
-		$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
-	}
+		// TODO: Group Implementation.
+	else : // New way to grab price @since 4.0.0
+		$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
+
+		$price = 0;
+		if ( is_array( $trip_pricings_with_dates ) && count( $trip_pricings_with_dates ) ) {
+			$pricing_categories = array_column( $trip_pricings_with_dates, 'categories', 'id' );
+			foreach ( $pricing_categories as $categories ) {
+				foreach ( $categories as $category ) {
+					// error_log( print_r( $category, true ) );
+					if ( $category['is_sale'] && ! $return_regular_price ) {
+						$category_price = $category['sale_price'];
+					} else {
+						$category_price = $category['regular_price'];
+					}
+
+					if ( $category_price < $price || $price <= 0 ) {
+						$price = (float) $category_price;
+					}
+				}
+			}
+		} else { // Incase if single pricing still lives.
+			$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
+		}
+	endif;
 
 	$price = apply_filters( 'wp_travel_price', $price );
 
