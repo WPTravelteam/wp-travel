@@ -101,7 +101,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 
 												if ( ! $all_travelers_fields_require ) {
 													// Added to control over required fields for travellers @since 3.1.3.
-													if ( isset( $field['validations']['required_for_all'] ) ) {
+													if ( isset( $field['validations']['required_for_all'] ) && $field['validations']['required_for_all'] ) {
 														$field['validations']['required'] = $i > 0 ? true : $field['validations']['required'];
 													} else {
 														// Set required false to extra travellers.
