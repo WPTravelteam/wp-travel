@@ -38,6 +38,10 @@ $force_checkout  = apply_filters( 'wp_travel_is_force_checkout_enabled', false )
 $pricing_option_type = wp_travel_get_pricing_option_type( $trip_id ); ?>
 
 <div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
+	<div id="wp-travel-booking-widget"></div>
+</div>
+<?php return; ?>
+<div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
 	<?php
 	if ( ( $enable_checkout ) || $force_checkout ) :
 		// Set Default WP Travel options list as it is.
