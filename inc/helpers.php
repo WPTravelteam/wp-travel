@@ -3182,7 +3182,7 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 			} 
 		);
 
-		return $trip_pricings_with_dates;
+		return $trip_pricings_with_dates; // index must be pricing id to work in most cases.
 	} // ends.
 }
 

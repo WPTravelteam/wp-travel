@@ -58,8 +58,9 @@ class Wp_Travel_Extras_Frontend {
 					$trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
 				}
 			} else {
+				$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
 				$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
-				$trip_extras              = $trip_pricings_with_dates[ $price_key ]['trip_extras'];
+				$trip_extras              = $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
 			}
 		} else {
 
@@ -81,6 +82,15 @@ class Wp_Travel_Extras_Frontend {
 		}
 
 		$trip_extras = array();
+
+		$wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' );
+
+		if ( $wp_travel_migrated_400 ) {
+			$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
+			$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
+			$trip_extras              = $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
+			return is_array( $trip_extras ) && count( $trip_extras ) > 0 ? $trip_extras : array();
+		}
 
 		if ( $this->has_trip_extras( $trip_id, $price_key ) ) {
 			if ( $price_key ) {
