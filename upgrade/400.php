@@ -36,14 +36,14 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 
 		if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 			foreach ( $post_ids as $custom_post ) {
-				$trip_id = $custom_post->ID;
+				$trip_id                       = $custom_post->ID;
 				$wp_travel_pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) : 'multiple-price';
 				$wp_travel_fixed_departure     = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) ? get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) : 'no';
 
 				if ( $wp_travel_pricing_option_type == 'multiple-price' ) {
 					// Migration start.
 					$wp_travel_pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) : array();
-					$temp_pricing_ids = array();
+					$temp_pricing_ids          = array();
 
 					// First need to migrate Pricings to set it in dates table.
 					// Pricing Migration Start.
@@ -52,20 +52,20 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 							$wpdb->insert(
 								$pricings_table,
 								array(
-									'title'           => $old_pricing['pricing_name'],
-									'max_pax'         => ! empty( $old_pricing['max_pax'] ) ? absint( $old_pricing['max_pax'] ) : 0,
-									'min_pax'         => ! empty( $old_pricing['min_pax'] ) ? absint( $old_pricing['min_pax'] ) : 0,
-									'has_group_price' => 0,
-									'group_prices'    => array(),
-									'trip_id'         => $trip_id,
-									'trip_extras'     => ! empty( $old_pricing['tour_extras'] ) ? esc_attr( implode( ', ', $old_pricing['tour_extras'] ) ) : '',
+									'title'       => $old_pricing['pricing_name'],
+									'max_pax'     => ! empty( $old_pricing['max_pax'] ) ? absint( $old_pricing['max_pax'] ) : 0,
+									'min_pax'     => ! empty( $old_pricing['min_pax'] ) ? absint( $old_pricing['min_pax'] ) : 0,
+									// 'has_group_price' => 0,
+									// 'group_prices'    => array(),
+									'trip_id'     => $trip_id,
+									'trip_extras' => ! empty( $old_pricing['tour_extras'] ) ? esc_attr( implode( ', ', $old_pricing['tour_extras'] ) ) : '',
 								),
 								array(
 									'%s',
 									'%d',
 									'%d',
-									'%d',
-									'%s',
+									// '%d',
+									// '%s',
 									'%d',
 									'%s',
 								)
@@ -83,7 +83,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 								foreach ( $old_pricing_categories as $old_category_id => $old_pricing_category ) {
 									$new_category_id = 0;
 									// create term if not exists and insert it into price category relation table.
-									$tax       = 'itinerary_pricing_category';
+									$tax               = 'itinerary_pricing_category';
 									$old_category_name = $old_pricing_category['type'];
 									if ( 'custom' == $old_category_name ) {
 										$old_category_name = isset( $old_pricing_category['custom_label'] ) && ! empty( $old_pricing_category['custom_label'] ) ? $old_pricing_category['custom_label'] : $old_category_name;
@@ -113,6 +113,29 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 										$old_enable_sale = isset( $old_pricing_category['enable_sale'] ) && 'yes' === $old_pricing_category['enable_sale'] ? 1 : 0;
 										$old_sale_price  = $old_pricing_category['sale_price'];
 
+										// Group Discount.
+										$group_discount = get_post_meta( $trip_id, 'wp_travel_group_discount', true );
+										$group_discount = isset( $group_discount[ $old_pricing_id ] ) ? $group_discount[ $old_pricing_id ] : array(); // Legacy version data.
+
+										if ( isset( $group_discount[ $old_category_id ] ) ) {
+											$group_discount = $group_discount[ $old_category_id ];
+										}
+										$group_discount_enable   = isset( $group_discount['enable_group_discount'] ) ? $group_discount['enable_group_discount'] : 'no';
+										$group_discount_pax_from = isset( $group_discount['pax_from'] ) ? $group_discount['pax_from'] : 1;
+										$group_discount_pax_to   = isset( $group_discount['pax_to'] ) ? $group_discount['pax_to'] : 1;
+										$group_discount_price    = isset( $group_discount['price'] ) ? $group_discount['price'] : '1';
+
+										$group_prices = array();
+										if ( is_array( $group_discount_pax_from ) && count( $group_discount_pax_from ) > 0 ) {
+											foreach ( $group_discount_pax_from as $gd_key => $pax_from ) {
+												$group_prices[] = array(
+													'min_pax' => $pax_from,
+													'max_pax' => $group_discount_pax_to[ $gd_key ],
+													'price' => $group_discount_price[ $gd_key ],
+												);
+											}
+										}
+
 										// Insert new category in price category relation table.
 										$wpdb->insert(
 											$price_category_relation_table,
@@ -123,8 +146,8 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 												'regular_price' => $old_price,
 												'is_sale' => $old_enable_sale,
 												'sale_price' => $old_sale_price,
-												'has_group_price' => 0,
-												'group_prices' => '',
+												'has_group_price' => 'yes' == $group_discount_enable ? 1 : 0,
+												'group_prices' => maybe_serialize( $group_prices ),
 											),
 											array(
 												'%d',
@@ -142,7 +165,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 							} else { // Category migration for below 3.0.0.
 								$new_category_id = 0;
 								// create term if not exists and insert it into price category relation table.
-								$tax       = 'itinerary_pricing_category';
+								$tax               = 'itinerary_pricing_category';
 								$old_category_name = $old_pricing['type'];
 								if ( 'custom' == $old_category_name ) {
 									$old_category_name = isset( $old_pricing['custom_label'] ) && ! empty( $old_pricing['custom_label'] ) ? $old_pricing['custom_label'] : $old_category_name;
@@ -172,18 +195,42 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 									$old_enable_sale = isset( $old_pricing['enable_sale'] ) && 'yes' === $old_pricing['enable_sale'] ? 1 : 0;
 									$old_sale_price  = $old_pricing['sale_price'];
 
+									// Group Discount.
+									$group_discount = get_post_meta( $trip_id, 'wp_travel_group_discount', true );
+
+									$group_discount = isset( $group_discount[ $old_pricing_id ] ) ? $group_discount[ $old_pricing_id ] : array(); // Legacy version data.
+
+									// if ( isset( $group_discount[ $old_category_id ] ) ) {
+									// 	$group_discount = $group_discount[ $old_category_id ];
+									// }
+									$group_discount_enable   = isset( $group_discount['enable_group_discount'] ) ? $group_discount['enable_group_discount'] : 'no';
+									$group_discount_pax_from = isset( $group_discount['pax_from'] ) ? $group_discount['pax_from'] : 1;
+									$group_discount_pax_to   = isset( $group_discount['pax_to'] ) ? $group_discount['pax_to'] : 1;
+									$group_discount_price    = isset( $group_discount['price'] ) ? $group_discount['price'] : '1';
+
+									$group_prices = array();
+									if ( is_array( $group_discount_pax_from ) && count( $group_discount_pax_from ) > 0 ) {
+										foreach ( $group_discount_pax_from as $gd_key => $pax_from ) {
+											$group_prices[] = array(
+												'min_pax' => $pax_from,
+												'max_pax' => $group_discount_pax_to[ $gd_key ],
+												'price' => $group_discount_price[ $gd_key ],
+											);
+										}
+									}
+
 									// Insert new category in price category relation table.
 									$wpdb->insert(
 										$price_category_relation_table,
 										array(
-											'pricing_id' => $new_pricing_id,
+											'pricing_id'   => $new_pricing_id,
 											'pricing_category_id' => $new_category_id,
-											'price_per' => $old_price_per,
+											'price_per'    => $old_price_per,
 											'regular_price' => $old_price,
-											'is_sale' => $old_enable_sale,
-											'sale_price' => $old_sale_price,
-											'has_group_price' => 0,
-											'group_prices' => '',
+											'is_sale'      => $old_enable_sale,
+											'sale_price'   => $old_sale_price,
+											'has_group_price' => 'yes' == $group_discount_enable ? 1 : 0,
+											'group_prices' => maybe_serialize( $group_prices ),
 										),
 										array(
 											'%d',
