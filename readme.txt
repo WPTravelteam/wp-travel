@@ -233,14 +233,6 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 
 
-if ( isset( $_POST['action'] ) ) {
-			if ( 'inline-save' === $_POST['action'] ) {
-				return; // Return if action is quick edit.
-			}
-			if ( 'elementor_ajax' === $_POST['action'] ) {
-				return; // Return if action is elementor ajax.
-			}
-		}
 = 3.2.4 =
 Release Date: 
 
