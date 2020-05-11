@@ -399,9 +399,13 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		// Return if action is quick edit.
-		if ( isset( $_POST['action'] ) && 'inline-save' === $_POST['action'] ) {
-			return;
+		if ( isset( $_POST['action'] ) ) {
+			if ( 'inline-save' === $_POST['action'] ) {
+				return; // Return if action is quick edit.
+			}
+			if ( 'elementor_ajax' === $_POST['action'] ) {
+				return; // Return if action is elementor ajax.
+			}
 		}
 
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
