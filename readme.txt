@@ -231,6 +231,23 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+
+
+if ( isset( $_POST['action'] ) ) {
+			if ( 'inline-save' === $_POST['action'] ) {
+				return; // Return if action is quick edit.
+			}
+			if ( 'elementor_ajax' === $_POST['action'] ) {
+				return; // Return if action is elementor ajax.
+			}
+		}
+= 3.2.4 =
+Release Date: 
+
+Fixed :
+* Field editor requird field fixed. Email field is required for all travelers even not checked as required for all.
+* Trip data messed up while saving from Elementor blocks.
+
 = 3.2.3 =
 Release Date: 28th April, 2020
 
