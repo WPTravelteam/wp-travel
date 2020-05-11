@@ -23,6 +23,8 @@ class WP_Travel_Post_Types {
 	 * @return void
 	 */
 	public static function register_trip() {
+		$settings = wp_travel_get_settings();
+		$switch_to_react = $settings['wp_travel_switch_to_react'];
 		$permalink = wp_travel_get_permalink_structure();
 		$labels    = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
@@ -62,6 +64,10 @@ class WP_Travel_Post_Types {
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
 		);
+		if ( 'yes' === $switch_to_react ) {
+			$args['supports'][] = 'editor';
+			$args['show_in_rest'] = false;
+		}
 		/**
 		 * Register a itineraries post type.
 		 *
