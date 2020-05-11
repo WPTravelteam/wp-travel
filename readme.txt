@@ -234,11 +234,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 
 = 3.2.4 =
-Release Date: 
+Release Date: 11th May, 2020
 
 Fixed :
 * Field editor requird field fixed. Email field is required for all travelers even not checked as required for all.
-* Trip data messed up while saving from Elementor blocks.
+* Trip data messed up while saving from Elementor blocks fixed.
 
 = 3.2.3 =
 Release Date: 28th April, 2020
