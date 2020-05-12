@@ -11,8 +11,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 
 		$hide_related_itinerary              = $settings['hide_related_itinerary'];
 		$enable_multiple_travellers          = $settings['enable_multiple_travellers'];
-		$wp_travel_switch_to_react           = $settings['wp_travel_switch_to_react'];
-		
+
 		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
 		?>
@@ -62,20 +61,6 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 					<?php esc_html_e( 'List by fixed departure dates', 'wp-travel' ); ?></label>
 
 					<p class="description"><?php esc_html_e( 'This options will control how you display trip dates and prices.', 'wp-travel' ); ?></p>
-
-				</td>
-			</tr>
-			<tr id="wp-travel-tax-price-options" >
-				<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
-				<td>
-					<span class="show-in-frontend checkbox-default-design">
-						<label data-on="ON" data-off="OFF">
-							<input value="no" name="wp_travel_switch_to_react" type="hidden" />
-							<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
-							<span class="switch"></span>
-						</label>
-					</span>
-					<p class="description"><?php esc_html_e( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ); ?></p>
 
 				</td>
 			</tr>

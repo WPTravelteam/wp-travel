@@ -16,6 +16,8 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		$decimal_separator  = $settings['decimal_separator'];
 		$number_of_decimals = $settings['number_of_decimals'];
 
+		$wp_travel_switch_to_react = $settings['wp_travel_switch_to_react'];
+
 		$google_map_api_key    = $settings['google_map_api_key'];
 		$google_map_zoom_level = $settings['google_map_zoom_level'];
 
@@ -73,6 +75,20 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 		$map_key           = 'google-map';
 	?>
 		<table class="form-table">
+			<tr id="wp-travel-tax-price-options" >
+				<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input value="no" name="wp_travel_switch_to_react" type="hidden" />
+							<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
+							<span class="switch"></span>
+						</label>
+					</span>
+					<p class="description"><?php esc_html_e( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ); ?></p>
+
+				</td>
+			</tr>
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
