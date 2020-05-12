@@ -23,7 +23,7 @@ echo "*********************************"
 echo ""
 
 #!/bin/bash          
-CURRENT_TAG=3.2.3
+CURRENT_TAG=3.2.4
 
 # Create tag folder
 echo "Create new tag folder"
