@@ -376,7 +376,9 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 				}
 			}
 		}
-		update_option( 'wp_travel_migrate_400', 'yes' );
+		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
+		update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
+
 	}
 }
 wp_travel_update_to_400();

@@ -140,11 +140,14 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
-		// add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
+		$settings = wp_travel_get_settings();
+		$switch_to_react = $settings['wp_travel_switch_to_react'];
+		if ( 'no' === $switch_to_react ) {
+			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
+			remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		}
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
-		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 	}
 
 	/**
@@ -396,9 +399,13 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		// Return if action is quick edit.
-		if ( isset( $_POST['action'] ) && 'inline-save' === $_POST['action'] ) {
-			return;
+		if ( isset( $_POST['action'] ) ) {
+			if ( 'inline-save' === $_POST['action'] ) {
+				return; // Return if action is quick edit.
+			}
+			if ( 'elementor_ajax' === $_POST['action'] ) {
+				return; // Return if action is elementor ajax.
+			}
 		}
 
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );

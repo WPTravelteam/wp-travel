@@ -11,7 +11,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 
 		$hide_related_itinerary              = $settings['hide_related_itinerary'];
 		$enable_multiple_travellers          = $settings['enable_multiple_travellers'];
-		
+
 		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
 		?>
