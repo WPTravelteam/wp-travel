@@ -73,22 +73,30 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			),
 		);
 		$map_key           = 'google-map';
+		$wp_travel_user_since = get_option( 'wp_travel_user_since', '3.0.0' );
 	?>
 		<table class="form-table">
-			<tr id="wp-travel-tax-price-options" >
-				<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
-				<td>
-					<span class="show-in-frontend checkbox-default-design">
-						<label data-on="ON" data-off="OFF">
-							<input value="no" name="wp_travel_switch_to_react" type="hidden" />
-							<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
-							<span class="switch"></span>
-						</label>
-					</span>
-					<p class="description"><?php esc_html_e( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ); ?></p>
+			<?php
+				if ( version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) { // Hide this option for new user from v4.
+					?>
+					<tr id="wp-travel-tax-price-options" >
+						<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
+						<td>
+							<span class="show-in-frontend checkbox-default-design">
+								<label data-on="ON" data-off="OFF">
+									<input value="no" name="wp_travel_switch_to_react" type="hidden" />
+									<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
+									<span class="switch"></span>
+								</label>
+							</span>
+							<p class="description"><?php esc_html_e( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ); ?></p>
 
-				</td>
-			</tr>
+						</td>
+					</tr>
+					<?php
+				}
+			?>
+			
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
