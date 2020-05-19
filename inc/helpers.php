@@ -3126,7 +3126,7 @@ function wp_travel_frontend_tab_gallery( $gallery_ids ) {
 
 /**
  * Get Pricing Options.
- * 
+ *
  * @since 4.0.0
  */
 if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
@@ -3136,10 +3136,10 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 			if ( WP_TRAVEL_POST_TYPE !== $post->post_type ) {
 				return;
 			}
-			$trip_id = $post->ID;   
+			$trip_id = $post->ID;
 		}
 		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); //  Trip Pricings.
+		$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
 
 		$dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
 		$trip_dates = ! is_wp_error( $dates_data ) && 'WP_TRAVEL_TRIP_DATES' === $dates_data['code'] ? $dates_data['dates'] : array(); // All the trip related dates;
@@ -3149,12 +3149,12 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 		/**
 		 * Pricing by pricing id to add date easily on looping array item.
 		 */
-		$trip_pricings_by_id = array_column( $trip_pricings, NULL, 'id' );
-	
+		$trip_pricings_by_id = array_column( $trip_pricings, null, 'id' );
+
 		$i = 0;
 		foreach ( $trip_dates as $trip_date ) {
-			$date_pricings = explode( ',', $trip_date['pricing_ids'] ); // Date may contains multiple pricing ids separated by (,). 
-	
+			$date_pricings = explode( ',', $trip_date['pricing_ids'] ); // Date may contains multiple pricing ids separated by (,).
+
 			/**
 			 * Making final looping array with both pricing and dates.
 			 * Each item for each pricing and each pricing for each date.
@@ -3180,7 +3180,7 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 					return 0;
 				}
 				return $date_a < $date_b ? -1 : 1;
-			} 
+			}
 		);
 
 		return $trip_pricings_with_dates; // index must be pricing id to work in most cases.
@@ -3206,7 +3206,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		return;
 	}
 
-    $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' ); // @since 4.0.0 Option added when pricings migrated to v4
+	$wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' ); // @since 4.0.0 Option added when pricings migrated to v4
 
 	// Dates and prices.
 	$dates         = array();
@@ -3234,14 +3234,14 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since 3.0.0
 	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 
-		if( $wp_travel_migrated_400  ) {
+		if ( $wp_travel_migrated_400 ) {
 			$pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
 			// $pricing_options = $trip_pricings_and_date['pricings'];
 			// $pricing_options = $trip_pricings_and_date['dates'];
 		} else { // Our tradition before < 4.0.0
 			// Price.
 			$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
-	
+
 			// Dates.
 			$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 		}
@@ -3307,7 +3307,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 
 					if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 						foreach ( $pricing_categories as $category_id => $pricing_category ) {
-							
+
 							if ( $wp_travel_migrated_400 ) {
 								// $categories[ $pricing_category['id'] ] = $pricing_category;
 								$categories[ $category_id ]['type']         = 'custom'; // following the tradition.
@@ -3324,7 +3324,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								$categories[ $category_id ]['regular']      = wp_travel_get_price( $trip_id, true, $pricing_id, $category_id );
 								$categories[ $category_id ]['price']        = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
 							}
-
 						}
 					} else {
 						$categories[ $pricing_id ]['type']         = $pricing_option['type'];
@@ -3385,7 +3384,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 										$pricing[]                      = $pricing_data;
 									}
 								}
-							else: // If pricing data migrated.
+							else : // If pricing data migrated.
 								$pricing_date = $pricing_option['date'];
 								$start_date   = isset( $pricing_date['start_date'] ) ? $pricing_date['start_date'] : null;
 								$end_date     = isset( $pricing_date['end_date'] ) ? $pricing_date['end_date'] : null;
@@ -3397,8 +3396,8 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								$inventory_data            = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, $price_key, $start_date );
 								$pricing_data['inventory'] = $inventory_data;
 								$pricing_data['date']      = $pricing_date;
-								$pricing[]    = $pricing_data;
-								
+								$pricing[]                 = $pricing_data;
+
 								// $pricing[] = $pricing_data;
 							endif;// If not migrated condition block ends.
 						} else { // Fixed departure but not multi fixed departure.
@@ -3640,6 +3639,26 @@ function wp_travel_get_trip_listing_option( $trip_id = null ) {
 	return array(
 		'pricing_data' => $pricing,
 	);
+}
+
+/**
+ * Return DB Privieges as per current db user.
+ */
+function wp_travel_db_user_privileges() {
+	global $wpdb;
+	$query = "SELECT * FROM mysql.user WHERE user = '" . DB_USER . "'";
+	$privileges = $wpdb->get_row( $query );
+
+	$response = array(
+		'insert' => 'Y' === $privileges->Insert_priv ? true : false,
+		'update' => 'Y' === $privileges->Update_priv ? true : false,
+		'delete' => 'Y' === $privileges->Delete_priv ? true : false,
+		'create' => 'Y' === $privileges->Create_priv ? true : false,
+		'drop' => 'Y' === $privileges->Drop_priv ? true : false,
+		'alter' => 'Y' === $privileges->Alter_priv ? true : false,
+		
+	);
+	return $response;
 }
 
 if ( ! function_exists( 'wp_travel_comments' ) ) {

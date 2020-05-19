@@ -291,6 +291,8 @@ class WP_Travel_Admin_Metaboxes {
 	public function remove_metaboxs() {
 		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'postexcerpt', WP_TRAVEL_POST_TYPE, 'normal' );
+		remove_meta_box( 'itinerary_pricing_categorydiv', WP_TRAVEL_POST_TYPE, 'side' );
+		
 	}
 	/**
 	 * Clean Metabox Classes.
