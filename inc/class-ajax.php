@@ -145,11 +145,12 @@ class WP_Travel_Ajax {
 		$pricing_id     = isset( $post_data['pricing_id'] ) ? $post_data['pricing_id'] : ''; // @since 3.0.0
 		$arrival_date   = isset( $post_data['arrival_date'] ) ? $post_data['arrival_date'] : '';
 		$departure_date = isset( $post_data['departure_date'] ) ? $post_data['departure_date'] : ''; // Need to remove. is't post value.
-		$pax            = isset( $post_data['pax'] ) ? $post_data['pax'] : 0;
+		$pax            = isset( $post_data['pax'] ) ? (array) $post_data['pax'] : 0;
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
-		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key );
+		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, $pricing_id, $arrival_date ); // pricing_id && $trip_start_date @since 4.0.0.
+		
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 		// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
@@ -185,14 +186,14 @@ class WP_Travel_Ajax {
 						};
 					}
 				}
-
-				$category             = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
+				$category = isset( $pricing_data[ $pricing_index ]['categories'][ $category_id ] ) ? $pricing_data[ $pricing_index ]['categories'][ $category_id ] : array();
 
 				$catetory_type = isset( $category['type'] ) ? $category['type'] : ''; // Old Way to get type in WP Travel.
 				if ( empty( $catetory_type ) && is_numeric( $category_id ) ) { // Set category type if category is taxonomy term.
-					$pricing_category = get_term($category_id, 'itinerary_pricing_category');
-					$catetory_type = $pricing_category->name;
+					$pricing_category = get_term( $category_id, 'itinerary_pricing_category' );
+					$catetory_type    = $pricing_category->name;
 				}
+
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
 					'price'         => wp_travel_get_formated_price( $category_price ),
@@ -260,7 +261,7 @@ class WP_Travel_Ajax {
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
 		if ( $attrs['enable_partial'] ) {
 			$trip_price_partial = $trip_price;
-			$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
+			$payout_percent     = wp_travel_get_payout_percent( $trip_id );
 			$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
 
 			if ( $payout_percent > 0 ) {

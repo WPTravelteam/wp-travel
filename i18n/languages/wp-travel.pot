@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-12 13:50:41+00:00\n"
+"POT-Creation-Date: 2020-05-19 05:27:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -835,8 +835,8 @@ msgstr ""
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:722 inc/helpers.php:763
 #: inc/helpers.php:791 inc/helpers.php:2216 inc/helpers.php:2968
-#: inc/helpers.php:3012 inc/helpers.php:3273 inc/helpers.php:3481
-#: inc/helpers.php:3553
+#: inc/helpers.php:3012 inc/helpers.php:3273 inc/helpers.php:3483
+#: inc/helpers.php:3555
 msgid "N/A"
 msgstr ""
 
@@ -1386,7 +1386,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1235
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1378
 #: inc/helpers/helpers-price.php:19 inc/helpers.php:1418
-#: templates/content-cart.php:162
+#: templates/content-cart.php:177
 msgid "Group"
 msgstr ""
 
@@ -2040,7 +2040,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:1025
+#: inc/helpers/helpers-price.php:1038
 msgid "Partial Payment"
 msgstr ""
 
@@ -2155,7 +2155,7 @@ msgid "Coupon Status "
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-general.php:74
-#: templates/content-cart.php:260
+#: templates/content-cart.php:275
 msgid "Coupon Code"
 msgstr ""
 
@@ -2374,7 +2374,7 @@ msgid "Trip"
 msgstr ""
 
 #: inc/cart/cart-mini.php:49 inc/cart/cart-mini.php:230 inc/helpers.php:2489
-#: templates/content-cart.php:56 templates/content-cart.php:250
+#: templates/content-cart.php:56 templates/content-cart.php:265
 msgid "Total"
 msgstr ""
 
@@ -2398,11 +2398,11 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:202 templates/content-cart.php:233
+#: inc/cart/cart-mini.php:202 templates/content-cart.php:248
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:206 templates/content-cart.php:237
+#: inc/cart/cart-mini.php:206 templates/content-cart.php:252
 msgid "%"
 msgstr ""
 
@@ -2426,46 +2426,46 @@ msgstr ""
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
-#: inc/class-ajax.php:201 inc/class-ajax.php:241
+#: inc/class-ajax.php:211 inc/class-ajax.php:251
 #: inc/extended/core/helpers/cart.php:288
 #: inc/extended/core/helpers/cart_.php:279 inc/helpers.php:1419
 #: inc/helpers.php:3264
 msgid "Custom"
 msgstr ""
 
-#: inc/class-ajax.php:322
+#: inc/class-ajax.php:332
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:339
+#: inc/class-ajax.php:349
 msgid "<strong>Error : </strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:348
+#: inc/class-ajax.php:358
 msgid "<strong>Error : </strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:358
+#: inc/class-ajax.php:368
 msgid ""
 "<strong>Error : </strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:370
+#: inc/class-ajax.php:380
 msgid "<strong>Error : </strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:386
+#: inc/class-ajax.php:396
 msgid ""
 "<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:403 inc/extended/core/ajax/coupon.php:29
+#: inc/class-ajax.php:413 inc/extended/core/ajax/coupon.php:29
 msgid "<strong>Error : </strong>Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:410
+#: inc/class-ajax.php:420
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -2914,7 +2914,7 @@ msgstr ""
 msgid "Activities"
 msgstr ""
 
-#: inc/class-wp-travel-extras-frontend.php:144
+#: inc/class-wp-travel-extras-frontend.php:150
 msgid "Trip Extras:"
 msgstr ""
 
@@ -8349,7 +8349,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:1026
+#: inc/helpers/helpers-price.php:1039
 msgid "Full Payment"
 msgstr ""
 
@@ -9321,23 +9321,23 @@ msgstr ""
 msgid "Date:"
 msgstr ""
 
-#: templates/content-cart.php:219
+#: templates/content-cart.php:234
 msgid "Coupon Discount: "
 msgstr ""
 
-#: templates/content-cart.php:232
+#: templates/content-cart.php:247
 msgid "Subtotal:"
 msgstr ""
 
-#: templates/content-cart.php:261
+#: templates/content-cart.php:276
 msgid "Apply Coupon"
 msgstr ""
 
-#: templates/content-cart.php:267
+#: templates/content-cart.php:282
 msgid "Update Cart"
 msgstr ""
 
-#: templates/content-cart.php:268
+#: templates/content-cart.php:283
 msgid "Proceed to checkout"
 msgstr ""
 

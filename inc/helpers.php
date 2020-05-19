@@ -2383,6 +2383,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							if ( $order_details ) { // Multiple Trips. Now from 1.8.3 it also included in single trip.
 								$order_prices = get_post_meta( $booking_id, 'order_totals', true );
 								foreach ( $order_details as $order_detail ) {
+									$order_detail['trip_extras'] = (array) $order_detail['trip_extras'];
 
 									if ( isset( $order_detail['trip'] ) ) { // @since 3.0.0.
 										$total = $order_detail['trip_price'];
@@ -2403,9 +2404,10 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 										<?php
 									} else { // Legacy Version.
 
-										$pax        = $order_detail['pax'];
-										$trip_price = $order_detail['trip_price'];
-										$total      = wp_travel_get_formated_price( $trip_price * $pax );
+										$pax         = $order_detail['pax'];
+										$trip_price  = $order_detail['trip_price'];
+										$total       = wp_travel_get_formated_price( $trip_price * $pax );
+
 										?>
 										<div class="my-order-price-breakdown-base-price-wrap">
 											<div class="my-order-price-breakdown-base-price">
@@ -3306,17 +3308,19 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					$categories = array();
 
 					if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
-						foreach ( $pricing_categories as $category_id => $pricing_category ) {
+						foreach ( $pricing_categories as $index => $pricing_category ) {
 							
 							if ( $wp_travel_migrated_400 ) {
+								$pricing_category_id = $pricing_category['id'];
 								// $categories[ $pricing_category['id'] ] = $pricing_category;
-								$categories[ $category_id ]['type']         = 'custom'; // following the tradition.
-								$categories[ $category_id ]['custom_label'] = $pricing_category['term_info']['title'];
-								$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];
-								$categories[ $category_id ]['enable_sale']  = isset( $pricing_category['is_sale'] ) ? 'yes' : 'no';
-								$categories[ $category_id ]['regular']      = $pricing_category['regular_price'];
-								$categories[ $category_id ]['price']        = $pricing_category['sale_price'];
+								$categories[ $pricing_category_id ]['type']         = 'custom'; // following the tradition.
+								$categories[ $pricing_category_id ]['custom_label'] = $pricing_category['term_info']['title'];
+								$categories[ $pricing_category_id ]['price_per']    = $pricing_category['price_per'];
+								$categories[ $pricing_category_id ]['enable_sale']  = isset( $pricing_category['is_sale'] ) ? 'yes' : 'no';
+								$categories[ $pricing_category_id ]['regular']      = $pricing_category['regular_price'];
+								$categories[ $pricing_category_id ]['price']        = $pricing_category['sale_price'];
 							} else {
+								$category_id = $index;
 								$categories[ $category_id ]['type']         = $pricing_category['type'];
 								$categories[ $category_id ]['custom_label'] = $pricing_category['custom_label'];
 								$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];

@@ -501,6 +501,8 @@ class WP_Travel_Cart {
 		if ( is_array( $trips ) && count( $trips ) > 0 ) {
 			foreach ( $trips as $cart_id => $trip ) :
 
+				$trip_extras = (array) $trip['trip_extras'];
+
 				$trip_price         = $trip['trip_price']; // Total Price of Pricing option / trip.
 				$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 
@@ -509,10 +511,10 @@ class WP_Travel_Cart {
 
 				$trip_extras_total         = 0;
 				$trip_extras_total_partial = 0;
+				// if ( 'yes' !== get_option( 'wp_travel_migrate_400', 'no' ) ) {
+				if ( isset( $trip_extras ) && ! empty( $trip_extras ) && isset( $trip_extras['id'] ) && is_array( $trip_extras['id'] ) ) {
 
-				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) && isset( $trip['trip_extras']['id'] ) && is_array( $trip['trip_extras']['id'] ) ) {
-
-					foreach ( $trip['trip_extras']['id'] as $k => $e_id ) {
+					foreach ( $trip_extras['id'] as $k => $e_id ) {
 
 						$trip_extras_data = get_post_meta( $e_id, 'wp_travel_tour_extras_metas', true );
 
@@ -528,7 +530,7 @@ class WP_Travel_Cart {
 							$price = $sale_price;
 						}
 
-						$qty                       = isset( $trip['trip_extras']['qty'][ $k ] ) && ! empty( $trip['trip_extras']['qty'][ $k ] ) ? $trip['trip_extras']['qty'][ $k ] : 1;
+						$qty                       = isset( $trip_extras['qty'][ $k ] ) && ! empty( $trip_extras['qty'][ $k ] ) ? $trip_extras['qty'][ $k ] : 1;
 						$extra_price               = wp_travel_get_formated_price( $price * $qty );
 						$trip_extras_total        += $extra_price;
 						$trip_extras_total_partial = $extra_price;
@@ -543,6 +545,7 @@ class WP_Travel_Cart {
 						}
 					}
 				}
+				// }
 
 				$cart_total         += $trip_extras_total;
 				$cart_total_partial += $trip_extras_total_partial;

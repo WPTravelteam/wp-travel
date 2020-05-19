@@ -60,7 +60,12 @@ class Wp_Travel_Extras_Frontend {
 			} else {
 				$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
 				$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
-				$trip_extras              = $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
+				foreach ( $trip_pricings_with_dates as $pricing ) {
+					if ( $pricing_id === $pricing['id'] ) {
+						$trip_extras = $pricing['trip_extras'];
+						break;
+					}
+				}
 			}
 		} else {
 

@@ -706,11 +706,11 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_r
  * @param boolean $return_price
  * @return void
  */
-function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_price = false ) {
+function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing_id = null, $trip_start_date = null, $return_price = false ) {
 	if ( ! $trip_id ) {
 		return 0;
 	}
-
+	
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 	$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 	$group_size = ! empty( $group_size ) ? $group_size : 999;
@@ -721,7 +721,6 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 		$valid_price_key = wp_travel_is_price_key_valid( $trip_id, $price_key );
 
 		if ( $valid_price_key ) {
-
 			$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
 
 			if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
@@ -745,10 +744,24 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $return_
 			}
 		}
 	} else {
-		// Product Metas.
-		$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-		$max_available   = $group_size;
-		$min_available   = 1;
+		if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) && $pricing_id ) {
+			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+			if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+				$pricings_data = $pricings_data['pricings'];
+				foreach ( $pricings_data as $pricing_data ) {
+					if ( $pricing_data['id'] === (int) $pricing_id ) {
+						$max_available = $pricing_data['max_pax'];
+						$min_available = 1;
+						break;
+					}
+				}
+			}
+		} else {
+			// Product Metas.
+			$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+			$max_available   = $group_size;
+			$min_available   = 1;
+		}
 	}
 
 	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
@@ -1127,6 +1140,33 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 		}
 		// TODO: Group Implementation.
 	else : // New way to grab price @since 4.0.0
+
+		if ( ! empty( $pricing_id ) && ! empty( $category_id ) ) {
+			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+			// $pricing = array_filter( $pricings_data['pricings'], function($p) use ($pricing_id) {
+			// 	return $p['id'] == $pricing_id;
+			// } );
+			$pricings = array_filter( 
+				$pricings_data['pricings'], 
+				function($p) use($pricing_id) {
+					return $p['id'] == $pricing_id;
+				}
+			);
+			$pricing = array_shift( $pricings );
+			$categories = array_filter(
+				$pricing['categories'],
+				function($c) use ($category_id) {
+					return $c['id'] == $category_id;
+				}
+			);
+			$category = array_shift( $categories );
+			// $category = $pricing['categories'][$category_id];
+			if( $category['is_sale'] ) {
+				return $category['sale_price'];
+			}
+			return $category['regular_price'];
+		}
+
 		$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
 
 		$price = 0;

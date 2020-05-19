@@ -153,7 +153,22 @@ wp_travel_print_notices();
 														echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) );
 													} ?>
 												</span>
-												<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php //echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> x <?php echo ( wp_travel_get_formated_price_currency( $category['price'] ) ); ?> = <?php echo ( wp_travel_get_formated_price_currency( $price ) ); ?>
+												<input type="number"
+														class="input-text wp-travel-pax text wp-travel-trip-pax"
+														data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>"
+														data-trip-id="<?php echo esc_attr( $trip_id ); ?>"
+														step="1"
+														min="0"
+														<?php echo $max_attr; ?>
+														name="pax[]"
+														data-category-id="<?php echo esc_attr( $category_id ); ?>"
+														value="<?php echo esc_attr( $pax ); ?>"
+														title="Qty"
+														size="4"
+														pattern="[0-9]*"
+														inputmode="numeric" /> x 
+														<?php echo ( wp_travel_get_formated_price_currency( $category['price'] ) ); ?> = 
+														<?php echo ( wp_travel_get_formated_price_currency( $price ) ); ?>
 											</li>
 											<?php
 										else : // if group.
