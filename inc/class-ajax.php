@@ -149,7 +149,11 @@ class WP_Travel_Ajax {
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
+		
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, $pricing_id, $arrival_date ); // pricing_id && $trip_start_date @since 4.0.0.
+		if ( isset( $post_data['trip_time'] ) ) {
+			$attrs['trip_time'] = $post_data['trip_time'];
+		}
 		
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
