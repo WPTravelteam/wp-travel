@@ -389,6 +389,12 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
+		$settings = wp_travel_get_settings();
+		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+		if ( 'yes' === $switch_to_v4 ) {
+			return;
+		}
+
 		$post_type = get_post_type( $post_id );
 		$screen    = get_current_screen();
 
