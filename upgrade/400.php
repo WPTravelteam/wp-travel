@@ -6,29 +6,18 @@
  * @package wp-travel/upgrade
  */
 
-
-if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
-	function wp_travel_update_to_400() {
-		global $wpdb;
-		$migrate_400 = get_option( 'wp_travel_migrate_400' );
-
-		if ( $migrate_400 && 'yes' === $migrate_400 ) {
+if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
+	function wp_travel_migrate_data_to_400( $tables = array() ) {
+		if ( ! is_array( $tables ) || count( $tables ) == 0 ) {
 			return;
 		}
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
 
-		/**
-		 * @todo WP Travel Table need to get from function/class.
-		 */
-		if ( is_multisite() ) {
-			$blog_id                       = get_current_blog_id();
-			$pricings_table                = $wpdb->base_prefix . $blog_id . '_wt_pricings';
-			$date_table                    = $wpdb->base_prefix . $blog_id . '_wt_dates';
-			$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
-		} else {
-			$pricings_table                = $wpdb->base_prefix . 'wt_pricings';
-			$date_table                    = $wpdb->base_prefix . 'wt_dates';
-			$price_category_relation_table = $wpdb->base_prefix . 'wt_price_category_relation';
-		}
+		$pricings_table = $tables['pricings_table'];
+		$dates_table = $tables['dates_table'];
+		$price_category_relation_table = $tables['price_category_relation_table'];
+		
 
 		$custom_post_type = WP_TRAVEL_POST_TYPE;
 		$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
@@ -201,7 +190,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 									$group_discount = isset( $group_discount[ $old_pricing_id ] ) ? $group_discount[ $old_pricing_id ] : array(); // Legacy version data.
 
 									// if ( isset( $group_discount[ $old_category_id ] ) ) {
-									// 	$group_discount = $group_discount[ $old_category_id ];
+									// $group_discount = $group_discount[ $old_category_id ];
 									// }
 									$group_discount_enable   = isset( $group_discount['enable_group_discount'] ) ? $group_discount['enable_group_discount'] : 'no';
 									$group_discount_pax_from = isset( $group_discount['pax_from'] ) ? $group_discount['pax_from'] : 1;
@@ -214,7 +203,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 											$group_prices[] = array(
 												'min_pax' => $pax_from,
 												'max_pax' => $group_discount_pax_to[ $gd_key ],
-												'price' => $group_discount_price[ $gd_key ],
+												'price'   => $group_discount_price[ $gd_key ],
 											);
 										}
 									}
@@ -266,7 +255,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 									}
 									// Insert New Date along with new pricing ids.
 									$wpdb->insert(
-										$date_table,
+										$dates_table,
 										array(
 											'trip_id'     => $trip_id,
 											'title'       => $old_date['date_label'],
@@ -304,7 +293,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 							$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 							$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 							$wpdb->insert(
-								$date_table,
+								$dates_table,
 								array(
 									'trip_id'     => $trip_id,
 									'title'       => __( 'Date', 'wp-travel' ),
@@ -339,7 +328,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 					} else {
 						// Trip Duration
 						$wpdb->insert(
-							$date_table,
+							$dates_table,
 							array(
 								'trip_id'     => $trip_id,
 								'title'       => __( 'Date', 'wp-travel' ),
@@ -376,9 +365,75 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 				}
 			}
 		}
+
+	}
+}
+
+
+if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
+	function wp_travel_update_to_400( $network_enabled ) {
+		global $wpdb;
+		$migrate_400 = get_option( 'wp_travel_migrate_400' );
+
+		// if ( $migrate_400 && 'yes' === $migrate_400 ) {
+		// return;
+		// }
+
+		/**
+		 * @todo WP Travel Table need to get from function/class.
+		 */
+		if ( is_multisite() ) {
+			if ( $network_enabled ) {
+				$sites = get_sites();
+				if ( is_array( $sites ) && count( $sites ) > 0 ) {
+					foreach ( $sites as $site ) {
+						$blog_id = $site->blog_id;
+						// switch to blog.
+						switch_to_blog( $blog_id );
+						$pricings_table                = $wpdb->base_prefix . $blog_id . '_wt_pricings';
+						$dates_table                   = $wpdb->base_prefix . $blog_id . '_wt_dates';
+						$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
+
+						$tables = array(
+							'pricings_table'            => $pricings_table,
+							'dates_table'               => $dates_table,
+							'price_category_relation_table' => $price_category_relation_table,
+						);
+
+						wp_travel_migrate_data_to_400( $tables );
+						restore_current_blog();
+						// restore current blog.
+					}
+				}
+			} else {
+				$blog_id                       = get_current_blog_id();
+				$pricings_table                = $wpdb->base_prefix . $blog_id . '_wt_pricings';
+				$dates_table                   = $wpdb->base_prefix . $blog_id . '_wt_dates';
+				$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
+
+				$tables = array(
+					'pricings_table'                => $pricings_table,
+					'dates_table'                   => $dates_table,
+					'price_category_relation_table' => $price_category_relation_table,
+				);
+				wp_travel_migrate_data_to_400( $tables );
+			}
+		} else {
+			$pricings_table                = $wpdb->base_prefix . 'wt_pricings';
+			$dates_table                    = $wpdb->base_prefix . 'wt_dates';
+			$price_category_relation_table = $wpdb->base_prefix . 'wt_price_category_relation';
+
+			$tables = array(
+				'pricings_table'                => $pricings_table,
+				'dates_table'                   => $dates_table,
+				'price_category_relation_table' => $price_category_relation_table,
+			);
+			wp_travel_migrate_data_to_400( $tables );
+		}
+
 		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
 		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
 
 	}
 }
-wp_travel_update_to_400();
+wp_travel_update_to_400( $network_enabled );

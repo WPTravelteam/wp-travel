@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Travel
+ * Plugin Name: WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
  * Version: 4.0.0
@@ -341,7 +341,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * WP Travel Activation.
 		 */
-		function wp_travel_activation() {
+		function wp_travel_activation( $network_enabled ) {
 			// Check for PHP Compatibility
 			global $wp_version;
 			$min_php_ver = '5.3.29';
