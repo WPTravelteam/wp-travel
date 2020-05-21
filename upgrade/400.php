@@ -364,6 +364,8 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 					// Migration Start
 				}
 			}
+			update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
+			update_option( 'wp_travel_pricing_table_created', 'yes' ); // quick fix for multisite network enabled.
 		}
 
 	}
@@ -431,7 +433,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 			wp_travel_migrate_data_to_400( $tables );
 		}
 
-		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
+		// update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
 		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
 
 	}

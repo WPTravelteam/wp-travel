@@ -153,34 +153,22 @@ function wp_travel_black_friday_dismiss_notice_ajax() {
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
 
+function wp_travel_pricing_table_created_notice_display( $show ) {
 
-function wp_travel_in_plugin_update_message( $args, $response ) {
-	/* translators: %s: version number */
-	$message = sprintf( __( "<strong>Heads up!</strong> The versions of the following plugins you're running haven't been tested with WP Travel 4.0.0. Please update them or confirm compatibility before updating WP Travel, or you may experience issues:", 'wp-travel' ) );
-
-	// ob_start();
-	// include 'views/html-notice-untested-extensions-inline.php';
-	?>
-	<div class="wc_plugin_upgrade_notice extensions_warning <?php echo esc_attr( $upgrade_type ); ?>">
-		<?php echo wp_kses_post( $message ); ?>
-
-		<table class="plugin-details-table" cellspacing="0">
-			<thead>
-				<tr>
-					<th><?php esc_html_e( 'Plugin', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'Tested up to WP Travel version', 'wp-travel' ); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-				
-				<tr>
-					<td>WP Travel Pro</td>
-					<td>4.0.0</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<?php
-	return ob_get_clean();
+	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
+		$show = true;
+	}
+	return $show;
 }
-// add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', 'wp_travel_in_plugin_update_message', 10, 2 );
+
+add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display' );
+
+
+function wp_travel_pricing_table_created_notice() {
+	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
+		?>
+		<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel Database Need an update. Please deactivate and activate your wp travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+		<?php
+	}
+}
+add_action( 'wp_travel_general_admin_notice', 'wp_travel_pricing_table_created_notice' );

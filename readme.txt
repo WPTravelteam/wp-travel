@@ -1210,3 +1210,8 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
+
+== Upgrade Notice ==
+
+= 4.0 =
+4.0 is a major update. Make a full site backup, update your theme and extensions, and [review update best practices](https://wptravel.io/blog) before upgrading.
