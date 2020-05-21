@@ -232,7 +232,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 3.2.4 =
-Release Date: 11th May, 2020
+Release Date: 12th May, 2020
 
 Fixed :
 * Field editor requird field fixed. Email field is required for all travelers even not checked as required for all.
