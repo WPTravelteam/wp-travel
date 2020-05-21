@@ -341,6 +341,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				case 'options-permalink':
 					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
 					break;
+				case 'plugins':
+				case 'plugins-network':
+					include sprintf( '%s/inc/admin/class-admin-plugin-screen-updates.php', WP_TRAVEL_ABSPATH );
+					break;
 			}
 		}
 
