@@ -71,7 +71,7 @@ wp_travel_print_notices();
 					$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
 					$pax_label          = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 					$max_available      = isset( $trip['max_available'] ) ? $trip['max_available'] : '';
-					$trip_extras        = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
+					$trip_extras        = isset( $trip['trip_extras'] ) ? (array) $trip['trip_extras'] : array();
 					$cart_trip 			= isset( $trip['trip'] ) ? $trip['trip'] : array();
 
 					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
