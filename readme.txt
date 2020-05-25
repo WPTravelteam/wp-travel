@@ -12,6 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
+> **Notice: WP Travel V4.0**
+> We are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to [check this link for more details](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post).
+
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 

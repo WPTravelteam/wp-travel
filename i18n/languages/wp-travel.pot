@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 3.2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 11:33:49+00:00\n"
+"POT-Creation-Date: 2020-05-25 12:30:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4433,6 +4433,10 @@ msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:119
 msgid "The Attachment not found."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:132
+msgid "Error code note found."
 msgstr ""
 
 #: inc/extended/core/helpers/response_codes.php:7
