@@ -1,17 +1,20 @@
-=== WP Travel ===
+=== WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
 Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
 Tested up to: 5.4.1
 Requires PHP: 5.5
-Stable tag: 3.2.4
+Stable tag: 3.2.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
+> **Notice: WP Travel V4.0**
+> We are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to [check this link for more details](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post).
+
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
@@ -231,8 +234,19 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 3.2.5 =
+Release Date: 25th May, 2020
+
+Plugin Name changed to WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine.
+
+Fixed :
+* Fixed Book Now redirect to homepage issue.
+
+Enhancement: 
+* Upgrade notice enhanced for major release.
+
 = 3.2.4 =
-Release Date: 121th May, 2020
+Release Date: 12th May, 2020
 
 Fixed :
 * Field editor requird field fixed. Email field is required for all travelers even not checked as required for all.
