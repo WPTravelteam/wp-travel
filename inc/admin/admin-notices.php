@@ -151,3 +151,28 @@ function wp_travel_black_friday_dismiss_notice_ajax() {
 	update_option( $key, true );
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
+
+
+// V4 Update Notice
+function wp_travel_version_4_notice() {
+
+	$user_id = get_current_user_id();
+
+	// if ( ! get_option( 'wp_travel_v4_update_notice_' . $user_id, false ) ) {
+		?>
+			<div class="notice notice-error wp-travel-notice-v4-update is-dismissible" data-notice="wp-travel-black-friday" style="background: #ffd6d3; color:#000;">
+				<p><?php printf( 'Dear users, we are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to check this <a href="%s" target="_blank" >link</a> for more details.', esc_url( 'https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post' ) ); ?></p>
+			</div>
+		<?php
+	// }
+}
+add_action( 'admin_notices', 'wp_travel_version_4_notice' );
+
+function wp_travel_v4_update_dismiss_notice_ajax() {
+	$user_id = get_current_user_id();
+	$key = 'wp_travel_v4_update_notice_' . $user_id;
+	update_option( $key, true );
+}
+add_action( 'wp_ajax_wp_travel_v4_update_dismiss', 'wp_travel_v4_update_dismiss_notice_ajax' );
+
+

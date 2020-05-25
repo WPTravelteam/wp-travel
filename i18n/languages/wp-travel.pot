@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 3.2.4\n"
+"Project-Id-Version: WP Travel 3.2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-12 04:03:12+00:00\n"
+"POT-Creation-Date: 2020-05-25 11:33:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4210,6 +4210,12 @@ msgstr ""
 msgid "Trip Options"
 msgstr ""
 
+#: inc/extended/app/inc/admin/metabox-trip-edit.php:23
+msgid ""
+"Your database user has no privileges to create table, alter table access. "
+"Please update your database user privileges."
+msgstr ""
+
 #: inc/extended/core/REST/cart.php:6
 msgid "Invalid trip id"
 msgstr ""
@@ -4320,76 +4326,92 @@ msgid "No pricings found for the trip."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:22
-msgid "Pricing trip id."
+msgid "Pricing id not found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:25
-msgid "No trip pricing categories found."
+msgid "Please add date."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:28
-msgid "No Pricing category id."
+msgid "Please add pax."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:31
-msgid "No Pricing category found."
+msgid "No trip pricing categories found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:34
-msgid "Error adding pricing category."
+msgid "No Pricing category id."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:37
-msgid "Error deleting pricing categories."
+msgid "No Pricing category found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:40
-msgid "Error updating pricing category."
+msgid "Error adding pricing category."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:43
-msgid "Error deleting pricing category."
+msgid "Error deleting pricing categories."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:46
-msgid "Error saving Pricing."
+msgid "Error updating pricing category."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:49
+msgid "Error deleting pricing category."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:52
+msgid "Error saving Pricing."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:55
 msgid "Error deleting Pricing."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:54
-#: inc/extended/core/helpers/error_codes.php:68
+#: inc/extended/core/helpers/error_codes.php:60
+#: inc/extended/core/helpers/error_codes.php:81
 msgid "Error deleting trip dates."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:57
+#: inc/extended/core/helpers/error_codes.php:63
 msgid "No trip dates."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:60
+#: inc/extended/core/helpers/error_codes.php:66
 msgid "No trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:63
-#: inc/extended/core/helpers/error_codes.php:77
+#: inc/extended/core/helpers/error_codes.php:69
+#: inc/extended/core/helpers/error_codes.php:90
 msgid "Error adding trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:71
+#: inc/extended/core/helpers/error_codes.php:72
+msgid "No trip date id"
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:75
+msgid "Error deleting trip date."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:84
 msgid "No exclude trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:74
+#: inc/extended/core/helpers/error_codes.php:87
 msgid "No trip exclude dates & time found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:82
+#: inc/extended/core/helpers/error_codes.php:95
 msgid "No trip extras found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:87
+#: inc/extended/core/helpers/error_codes.php:100
 #: inc/widgets/class-wp-travel-widget-location.php:117
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:107
 #: inc/widgets/class-wp-travel-widget-trip-type.php:117
@@ -4397,24 +4419,20 @@ msgstr ""
 msgid "Trips not found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:92
+#: inc/extended/core/helpers/error_codes.php:105
 msgid "No trip pricing category term found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:97
+#: inc/extended/core/helpers/error_codes.php:110
 msgid "The coupon code is invalid."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:102
+#: inc/extended/core/helpers/error_codes.php:115
 msgid "The Attachment is invalid."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:106
-msgid "The Attachment not found."
-msgstr ""
-
 #: inc/extended/core/helpers/error_codes.php:119
-msgid "Error code note found."
+msgid "The Attachment not found."
 msgstr ""
 
 #: inc/extended/core/helpers/response_codes.php:7
@@ -4438,40 +4456,44 @@ msgid "Successfully listed trip dates."
 msgstr ""
 
 #: inc/extended/core/helpers/response_codes.php:28
-#: inc/extended/core/helpers/response_codes.php:42
+#: inc/extended/core/helpers/response_codes.php:44
 msgid "Successfully removed trip dates."
 msgstr ""
 
 #: inc/extended/core/helpers/response_codes.php:31
-#: inc/extended/core/helpers/response_codes.php:45
+#: inc/extended/core/helpers/response_codes.php:47
 msgid "Successfully added trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:36
+#: inc/extended/core/helpers/response_codes.php:34
+msgid "Removed trip date successfully."
+msgstr ""
+
+#: inc/extended/core/helpers/response_codes.php:38
 msgid "Successfully listed trip dates & times."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:39
+#: inc/extended/core/helpers/response_codes.php:41
 msgid "Successfully updated trip dates & times."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:50
+#: inc/extended/core/helpers/response_codes.php:52
 msgid "Successfully added trip to cart."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:55
+#: inc/extended/core/helpers/response_codes.php:57
 msgid "Successfully listed filter result."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:60
+#: inc/extended/core/helpers/response_codes.php:62
 msgid "Attachment data."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:63
+#: inc/extended/core/helpers/response_codes.php:65
 msgid "Trip Tab loaded successfully."
 msgstr ""
 
-#: inc/extended/core/helpers/response_codes.php:66
+#: inc/extended/core/helpers/response_codes.php:68
 msgid "Settings loaded successfully."
 msgstr ""
 
@@ -9417,7 +9439,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:382
+#: upgrade/update-137.php:25 wp-travel.php:386
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -9429,19 +9451,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:397
+#: wp-travel.php:401
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:398
+#: wp-travel.php:402
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:402
+#: wp-travel.php:406
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:406
+#: wp-travel.php:410
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -9702,32 +9724,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:482
+#: upgrade/update-137.php:48 wp-travel.php:486
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:487
+#: upgrade/update-137.php:53 wp-travel.php:491
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:492
+#: upgrade/update-137.php:58 wp-travel.php:496
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:483
+#: upgrade/update-137.php:49 wp-travel.php:487
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:488
+#: upgrade/update-137.php:54 wp-travel.php:492
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:493
+#: upgrade/update-137.php:59 wp-travel.php:497
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""
