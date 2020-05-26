@@ -251,6 +251,28 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 
 										if ( isset( $temp_pricing_ids[ $pricing_option_key ] ) ) {
 											$new_pricing_ids[] = $temp_pricing_ids[ $pricing_option_key ];
+
+											// Inventory Migration Start.
+											$old_inventory_meta_key = 'wp_travel_inventory_booking_pax_count';
+											if ( $pricing_option_key ) {
+												$old_inventory_meta_key .= sprintf( '_%s', $pricing_option_key );
+											}
+											if ( $old_date['start_date'] ) {
+												$old_inventory_meta_key .= sprintf( '_%s', $old_date['start_date'] );
+											}
+											$old_inventory_value = get_post_meta( $trip_id, $old_inventory_meta_key, true );
+
+											if ( $old_inventory_value ) {
+												$new_inventory_meta_key = 'wt_booked_pax';
+												if ( $temp_pricing_ids[ $pricing_option_key ] ) {
+													$new_inventory_meta_key .= sprintf( '-%s', $temp_pricing_ids[ $pricing_option_key ] ); // Added to work with trip pricing_id.
+												}
+												if ( $old_date['start_date'] ) {
+													$new_inventory_meta_key .= sprintf( '-%s', str_replace( '-', '_', $old_date['start_date'] ) ); // Added to work with trip date.
+												}
+												update_post_meta( $trip_id, $new_inventory_meta_key, $old_inventory_value );
+											}
+											// Inventory Migration ends.
 										}
 									}
 									// Insert New Date along with new pricing ids.
@@ -292,6 +314,31 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 							// insert date.
 							$trip_start_date = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 							$trip_end_date   = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+
+							foreach ( $temp_pricing_ids as $old_price_key => $new_pricing_id ) {
+								// Inventory Migration Start.
+								$old_inventory_meta_key = 'wp_travel_inventory_booking_pax_count';
+								if ( $old_price_key ) {
+									$old_inventory_meta_key .= sprintf( '_%s', $old_price_key );
+								}
+								if ( $trip_start_date ) {
+									$old_inventory_meta_key .= sprintf( '_%s', $trip_start_date );
+								}
+								$old_inventory_value = get_post_meta( $trip_id, $old_inventory_meta_key, true );
+
+								if ( $old_inventory_value ) {
+									$new_inventory_meta_key = 'wt_booked_pax';
+									if ( new_pricing_id ) {
+										$new_inventory_meta_key .= sprintf( '-%s', new_pricing_id ); // Added to work with trip pricing_id.
+									}
+									if ( $trip_start_date ) {
+										$new_inventory_meta_key .= sprintf( '-%s', str_replace( '-', '_', $trip_start_date ) ); // Added to work with trip date.
+									}
+									update_post_meta( $trip_id, $new_inventory_meta_key, $old_inventory_value );
+								}
+								// Inventory Migration ends.
+							}
+
 							$wpdb->insert(
 								$dates_table,
 								array(
