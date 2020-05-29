@@ -229,6 +229,7 @@ jQuery(document).ready(function ($) {
             let tripTotalContainer = ci.querySelector('[data-wpt-item-total]')
             let formGroupsCategory = ci.querySelectorAll('[data-wpt-category]')
             let formGroupsTx = ci.querySelectorAll('[data-wpt-tx]')
+            let wptCTotals = ci.querySelectorAll('[data-wpt-category-count]')
             formGroupsCategory && formGroupsCategory.forEach(fg => {
                 let itemTotalContainer = fg.querySelector('[data-wpt-category-total]')
                 let dataCategoryCount = fg.querySelector('[data-wpt-category-count-input]')
@@ -236,10 +237,15 @@ jQuery(document).ready(function ($) {
                 let _price = dataCategoryPrice && parseFloat(dataCategoryPrice.textContent) || 0
                 let _count = dataCategoryCount && dataCategoryCount.value || 0
                 let itemTotal = _price * _count
+                wptCTotals && wptCTotals.forEach(wpct => {
+                    if( wpct.dataset.wptCategoryCount == fg.dataset.wptCategory )
+                        wpct.textContent = _count
+                })
                 if (itemTotalContainer)
                     itemTotalContainer.textContent = itemTotal
                 tripTotal += itemTotal
                 cartTotal += itemTotal
+
                 console.debug(_price, _count, tripTotal)
             })
             formGroupsTx && formGroupsTx.forEach(tx => {
@@ -329,7 +335,6 @@ jQuery(document).ready(function ($) {
                 const categoryId = cf.dataset.wptCategory
                 const value = _input && _input.value
                 pax = { ...pax, [categoryId]: value }
-                // return { categoryId: value }
             })
 
             let txCounts = {}

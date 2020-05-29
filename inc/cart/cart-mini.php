@@ -86,7 +86,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 
 										$category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
 										$category_total += $pax * (float) $category_price;
-										echo "<span><span data-category-id=\"" . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
+										echo "<span><span data-wpt-category-count=\"" . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
 									}
 									$cart_total += $category_total;
 									?>
