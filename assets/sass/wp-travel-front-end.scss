@@ -6556,7 +6556,6 @@ $primaryColor: #3399ff;
                             align-items: flex-start;
                         }
                         >div{
-                            flex: 0 0 220px;
                             display: flex;
                             align-items: center;
                             @media(max-width: 575px){
@@ -6568,6 +6567,9 @@ $primaryColor: #3399ff;
                         }
                         label{
                             font-size: 14px;
+                            @media(min-width: 576px){
+                                margin-bottom: 0;
+                            }
                         }
                         .input-group-btn{
                             .btn{
@@ -6577,6 +6579,8 @@ $primaryColor: #3399ff;
                                 width: 20px;
                                 height: 30px;
                                 line-height: 6px;
+                                border: 0;
+                                border-radius: 0;
                             }
                         }
                         .qty{
