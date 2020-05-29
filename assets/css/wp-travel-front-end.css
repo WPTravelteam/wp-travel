@@ -5631,7 +5631,6 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   }
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div {
-  flex: 0 0 220px;
   display: flex;
   align-items: center;
 }
@@ -5642,9 +5641,15 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div > .input-group {
   margin-right: 10px;
+  display: flex;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
   font-size: 14px;
+}
+@media (min-width: 576px) {
+  #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
+    margin-bottom: 0;
+  }
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn .btn {
   background: #3399ff;
@@ -5653,6 +5658,9 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   width: 20px;
   height: 30px;
   line-height: 6px;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .qty {
   width: 40px;
@@ -5685,7 +5693,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 @media (max-width: 575px) {
   #shopping-cart .cart-summary .cart-summary-bottom .flex-wrapper {
@@ -5714,9 +5722,6 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 #shopping-cart .cart-summary .cart-summary-bottom .checkout-btn {
   display: block;
   margin-top: 1em;
-}
-#shopping-cart .cart-summary .cart-summary-bottom .update-cart-form {
-  margin-bottom: 1em;
 }
 #shopping-cart .cart-summary .cart-summary-bottom .update-cart-form .field-inline {
   display: flex;
