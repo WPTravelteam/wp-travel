@@ -6638,8 +6638,10 @@ $primaryColor: #3399ff;
                 margin-top: 1em;
             }
             .update-cart-form{
+                margin-bottom: 1em;
                 .field-inline{
                     display: flex;
+                    position: relative;
                     input{
                         flex: 1;
                         margin-right: .5em;
@@ -6648,6 +6650,23 @@ $primaryColor: #3399ff;
                     }
                     .btn{
                         font-size: 12px;
+                    }
+                    .error{
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        color: red;
+                        display: flex;
+                        align-items: center;
+                        margin-top: .25em;
+                        svg{
+                            width: 15px;
+                            height: 15px;
+                            margin-right: .5em;
+                            path{
+                                fill: red;
+                            }
+                        }
                     }
                 }
             }
