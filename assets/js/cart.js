@@ -317,42 +317,34 @@ jQuery(document).ready(function ($) {
         })
     })
 
-    cartItemForms && cartItemForms.forEach(form => {
-        const categoriesFields = form.querySelectorAll('.wp-travel-cart-category-qty')
-        const tripExtrasFields = form.querySelectorAll('.wp-travel-cart-extras-qty')
-        categoriesFields.forEach(cf => {
-            cf.addEventListener('wptcartcategoryupdate', e => {
-                console.log(e.detail)
-            })
-        })
-        tripExtrasFields.forEach(txf => {
-            txf.addEventListener('wptcarttxupdate', e => {
-                console.log(e.detail)
-            })
-        })
-        form.addEventListener('submit', e => {
+    cartItems && cartItems.forEach(ci => {
+        const categories = ci.querySelectorAll('[data-wpt-category]')
+        const tripExtras = ci.querySelectorAll('[data-wpt-tx]')
+        ci.addEventListener('submit', e => {
             e.preventDefault()
-            const cartId = form.dataset.cartId
+            const cartId = ci.dataset.cartId
             let pax = {}
-            categoriesFields && categoriesFields.forEach(cf => {
-                const categoryId = cf.dataset.categoryId
-                const value = cf.value
+            categories && categories.forEach(cf => {
+                let _input = cf.querySelector('[data-wpt-category-count-input]')
+                const categoryId = cf.dataset.wptCategory
+                const value = _input && _input.value
                 pax = { ...pax, [categoryId]: value }
                 // return { categoryId: value }
             })
 
-            let tripExtras = {}
-            tripExtrasFields && tripExtrasFields.forEach(tx => {
-                const txId = tx.dataset.tripExtraId
-                const value = tx.value
-                tripExtras = { ...tripExtras, [txId]: value }
+            let txCounts = {}
+            tripExtras && tripExtras.forEach(tx => {
+                let _input = tx.querySelector('[data-wpt-tx-count-input]')
+                const txId = tx.dataset.wptTx
+                const value = _input && _input.value
+                txCounts = { ...txCounts, [txId]: value }
             })
 
             const _data = {
                 pax,
                 wp_travel_trip_extras: {
-                    id: Object.keys(tripExtras),
-                    qty: Object.values(tripExtras)
+                    id: Object.keys(txCounts),
+                    qty: Object.values(txCounts)
                 }
             }
 
@@ -369,17 +361,17 @@ jQuery(document).ready(function ($) {
                         let pricingId = cartItem.pricing_id
                         let pricing = tripData.pricings.find(p => p.id == pricingId)
                         let categories = pricing.categories
-
-                        categoriesFields.forEach(cf => {
-                            let category = categories.find(c => c.id == cf.dataset.categoryId)
-                            let _event = new CustomEvent('wptcartcategoryupdate', { bubbles: true, detail: { cart: cartItem.trip, category } })
-                            cf.dispatchEvent(_event)
-                        })
-                        tripExtrasFields.forEach(txf => {
-                            let extras = pricing.trip_extras.find(tx => tx.id == txf.dataset.tripExtraId)
-                            let _event = new CustomEvent('wptcarttxupdate', { bubbles: true, detail: { cart: cartItem.extras, extras } })
-                            txf.dispatchEvent(_event)
-                        })
+                        console.log(result)
+                        // categoriesFields.forEach(cf => {
+                        //     let category = categories.find(c => c.id == cf.dataset.categoryId)
+                        //     let _event = new CustomEvent('wptcartcategoryupdate', { bubbles: true, detail: { cart: cartItem.trip, category } })
+                        //     cf.dispatchEvent(_event)
+                        // })
+                        // tripExtrasFields.forEach(txf => {
+                        //     let extras = pricing.trip_extras.find(tx => tx.id == txf.dataset.tripExtraId)
+                        //     let _event = new CustomEvent('wptcarttxupdate', { bubbles: true, detail: { cart: cartItem.extras, extras } })
+                        //     txf.dispatchEvent(_event)
+                        // })
 
                     }
                 })
@@ -429,6 +421,4 @@ jQuery(document).ready(function ($) {
                 })
         }
     })
-
-    // shoppingCart.dispatchEvent(new Event('wptcartchange'))
 })()

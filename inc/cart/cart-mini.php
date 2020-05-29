@@ -69,7 +69,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 						$cart_total = 0;
 						?>
 						<li class="list-group-item" data-cart-id="<?php echo esc_attr( $cart_id ); ?>">
-							<button type="button" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?' ), $trip_data['title'] ) ); ?>">×</button>
+							<button type="button" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>">×</button>
 							<div>
 								<div class="content-left">
 									<img src="./img/trip-1.jpg" alt="">
@@ -130,7 +130,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 									}
 
 									if ( count( $trip_extras ) > 0 ) {
-										echo '<h4>' . __( 'Trip Extras:' ) . '</h4>';
+										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
 										foreach ( $trip_extras as $tx ) {
 											$title = isset( $tx['title'] ) ? $tx['title'] : '';
 											?>
@@ -175,14 +175,14 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 						<div class="flex-wrapper">
 							<form id="wp-travel-coupon-form" action="" class="update-cart-form">
 								<div class="field-inline">
-									<input type="text" class="coupon-input-field" placeholder="<?php esc_attr_e( 'Enter promo code' ); ?>">
-									<button type="submit" class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-trave'); ?>">
-										<?php esc_html_e( 'Apply Coupon' ); ?>
+									<input type="text" class="coupon-input-field" placeholder="<?php esc_attr_e( 'Enter promo code', 'wp-travel' ); ?>">
+									<button type="submit" class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-travel'); ?>">
+										<?php esc_html_e( 'Apply Coupon', 'wp-travel' ); ?>
 									</button>
 								</div>
 								<div class="price-calculate">
 									<div class="total-price">
-										<p><?php esc_html_e( 'Total:' ); ?>
+										<p><?php esc_html_e( 'Total:', 'wp-travel' ); ?>
 											<strong>
 											<?php echo $currency_symbol . '<span data-wpt-cart-total="' . $cart_total . '">' . $cart_total . '</span>'; ?>
 											</strong>
