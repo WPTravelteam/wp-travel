@@ -471,3 +471,12 @@ function wp_travel_save_user_enquiry() {
 }
 add_action( 'wp_ajax_wp_travel_save_user_enquiry', 'wp_travel_save_user_enquiry' );
 add_action( 'wp_ajax_nopriv_wp_travel_save_user_enquiry', 'wp_travel_save_user_enquiry' );
+
+function wp_travel_enquiry_form_header() {
+	?>
+		<div class="wp-travel-inquiry__form-header">
+			<h3>Enquiry: <?php the_title(); ?></h3>
+		</div>
+	<?php
+}
+add_action( 'wp_travel_enquiries_before_form_field', 'wp_travel_enquiry_form_header', 20 );
