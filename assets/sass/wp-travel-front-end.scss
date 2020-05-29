@@ -6619,7 +6619,8 @@ $primaryColor: #3399ff;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 2em;
+				margin-bottom: 2em;
+				flex-wrap: wrap;
                 @media(max-width: 575px){
                     flex-direction: column-reverse;
                 }
