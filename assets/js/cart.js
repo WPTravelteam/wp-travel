@@ -211,3 +211,224 @@ jQuery(document).ready(function ($) {
     })
 
 });
+
+(function () {
+    const shoppingCart = document.getElementById('shopping-cart')
+    const cartItems = shoppingCart && shoppingCart.querySelectorAll('[data-cart-id]')
+    const cartItemForms = document.querySelectorAll('.wp-travel__cart-item')
+    const couponForm = document.getElementById('wp-travel-coupon-form')
+    const couponBtn = couponForm && couponForm.querySelector('button')
+    const couponField = couponForm && couponForm.querySelector('.coupon-input-field')
+
+    shoppingCart && shoppingCart.addEventListener('wptcartchange', e => {
+        let cartTotal = 0
+        let cartTotalContainer = e.target.querySelector('[data-wpt-cart-total]')
+        let _cartItems = e.target.querySelectorAll('[data-cart-id]')
+        _cartItems && _cartItems.forEach(ci => {
+            let tripTotal = 0
+            let tripTotalContainer = ci.querySelector('[data-wpt-item-total]')
+            let formGroupsCategory = ci.querySelectorAll('[data-wpt-category]')
+            let formGroupsTx = ci.querySelectorAll('[data-wpt-tx]')
+            formGroupsCategory && formGroupsCategory.forEach(fg => {
+                let itemTotalContainer = fg.querySelector('[data-wpt-category-total]')
+                let dataCategoryCount = fg.querySelector('[data-wpt-category-count-input]')
+                let dataCategoryPrice = fg.querySelector('[data-wpt-category-price]')
+                let _price = dataCategoryPrice && parseFloat(dataCategoryPrice.textContent) || 0
+                let _count = dataCategoryCount && dataCategoryCount.value || 0
+                let itemTotal = _price * _count
+                if (itemTotalContainer)
+                    itemTotalContainer.textContent = itemTotal
+                tripTotal += itemTotal
+                cartTotal += itemTotal
+                console.debug(_price, _count, tripTotal)
+            })
+            formGroupsTx && formGroupsTx.forEach(tx => {
+                let txTotalContainer = tx.querySelector('[data-wpt-tx-total]')
+                let datatxCount = tx.querySelector('[data-wpt-tx-count-input]')
+                let datatxPrice = tx.querySelector('[data-wpt-tx-price]')
+                let _price = datatxPrice && parseFloat(datatxPrice.textContent) || 0
+                let _count = datatxCount && datatxCount.value || 0
+                let itemTotal = _price * _count
+                if (txTotalContainer)
+                    txTotalContainer.textContent = itemTotal
+                tripTotal += itemTotal
+                cartTotal += itemTotal
+                console.debug(tripTotal)
+
+            })
+            if (tripTotalContainer)
+                tripTotalContainer.textContent = tripTotal
+        })
+        if (cartTotalContainer)
+            cartTotalContainer.textContent = cartTotal
+        let cartItemsCountContainer = e.target.querySelector('[data-wpt-cart-item-count]')
+        if( cartItemsCountContainer )
+            cartItemsCountContainer.textContent = _cartItems.length
+
+        console.log(cartTotal)
+    })
+
+
+    cartItems && cartItems.forEach(ci => {
+        let edit = ci.querySelector('a.edit')
+        let collapse = ci.querySelector('.update-fields-collapse')
+        let _deleteBtn = ci.querySelector('.del-btn')
+        _deleteBtn && _deleteBtn.addEventListener('click', e => {
+            e.preventDefault()
+            if (confirm(_deleteBtn.dataset.l10n)) {
+                fetch(`${wp_travel.ajaxUrl}?action=wp_travel_remove_cart_item&_nonce=${wp_travel._nonce}&cart_id=${ci.dataset.cartId}`)
+                    .then(res => res.json())
+                    .then(result => {
+                        if(result.success && result.data.code == 'WP_TRAVEL_REMOVED_CART_ITEM') {
+                            ci.remove()
+                            shoppingCart.dispatchEvent(new Event('wptcartchange'))
+                        }
+                    })
+            }
+        })
+        edit && edit.addEventListener('click', () => {
+            if (collapse.className.indexOf('active') < 0) {
+                collapse.style.display = 'block'
+                collapse.classList.add('active')
+            } else {
+                collapse.style.display = 'none'
+                collapse.classList.remove('active')
+            }
+        })
+
+        const wptCategories = ci.querySelectorAll('[data-wpt-category], [data-wpt-tx]')
+        wptCategories && wptCategories.forEach(wc => {
+            let _input = wc.querySelector('[data-wpt-category-count-input], [data-wpt-tx-count-input]')
+            let spinners = wc.querySelectorAll('[data-wpt-count-up],[data-wpt-count-down]')
+            spinners && spinners.forEach(sp => {
+                sp.addEventListener('click', e => {
+                    e.preventDefault()
+                    if (typeof sp.dataset.wptCountUp != 'undefined') {
+                        if (_input)
+                            _input.value = parseInt(_input.value) + 1 < 0 ? 0 : parseInt(_input.value) + 1
+                    }
+                    if (typeof sp.dataset.wptCountDown != 'undefined') {
+                        if (_input)
+                            _input.value = parseInt(_input.value) - 1 < 0 ? 0 : parseInt(_input.value) - 1
+                    }
+                    shoppingCart.dispatchEvent(new Event('wptcartchange'))
+                })
+            })
+        })
+    })
+
+    cartItemForms && cartItemForms.forEach(form => {
+        const categoriesFields = form.querySelectorAll('.wp-travel-cart-category-qty')
+        const tripExtrasFields = form.querySelectorAll('.wp-travel-cart-extras-qty')
+        categoriesFields.forEach(cf => {
+            cf.addEventListener('wptcartcategoryupdate', e => {
+                console.log(e.detail)
+            })
+        })
+        tripExtrasFields.forEach(txf => {
+            txf.addEventListener('wptcarttxupdate', e => {
+                console.log(e.detail)
+            })
+        })
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            const cartId = form.dataset.cartId
+            let pax = {}
+            categoriesFields && categoriesFields.forEach(cf => {
+                const categoryId = cf.dataset.categoryId
+                const value = cf.value
+                pax = { ...pax, [categoryId]: value }
+                // return { categoryId: value }
+            })
+
+            let tripExtras = {}
+            tripExtrasFields && tripExtrasFields.forEach(tx => {
+                const txId = tx.dataset.tripExtraId
+                const value = tx.value
+                tripExtras = { ...tripExtras, [txId]: value }
+            })
+
+            const _data = {
+                pax,
+                wp_travel_trip_extras: {
+                    id: Object.keys(tripExtras),
+                    qty: Object.values(tripExtras)
+                }
+            }
+
+            console.debug(_data)
+
+            fetch(`${wp_travel.ajaxUrl}?action=wp_travel_update_cart_item&cart_id=${cartId}&_nonce=${wp_travel._nonce}`, {
+                method: 'POST',
+                body: JSON.stringify(_data)
+            }).then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        let cartItem = result.data.cart.cart_items[cartId]
+                        let tripData = cartItem.trip_data
+                        let pricingId = cartItem.pricing_id
+                        let pricing = tripData.pricings.find(p => p.id == pricingId)
+                        let categories = pricing.categories
+
+                        categoriesFields.forEach(cf => {
+                            let category = categories.find(c => c.id == cf.dataset.categoryId)
+                            let _event = new CustomEvent('wptcartcategoryupdate', { bubbles: true, detail: { cart: cartItem.trip, category } })
+                            cf.dispatchEvent(_event)
+                        })
+                        tripExtrasFields.forEach(txf => {
+                            let extras = pricing.trip_extras.find(tx => tx.id == txf.dataset.tripExtraId)
+                            let _event = new CustomEvent('wptcarttxupdate', { bubbles: true, detail: { cart: cartItem.extras, extras } })
+                            txf.dispatchEvent(_event)
+                        })
+
+                    }
+                })
+        })
+    })
+
+
+    // Coupon 
+    couponField && couponField.addEventListener('keyup', e => {
+        toggleError(e.target)
+        e.target.value.length > 0 && e.target.removeAttribute('style')
+    })
+
+    const toggleError = (el, message) => {
+        if (message) {
+            let p = document.createElement('p')
+            p.classList.add('error')
+            p.textContent = message
+            el.after(p)
+        } else {
+            let error = el.parentElement.querySelector('.error')
+            error && error.remove()
+        }
+    }
+
+    couponBtn && couponField && couponBtn.addEventListener('click', e => {
+        e.preventDefault()
+        if (couponField.value.length <= 0) {
+            couponField.style.borderColor = 'red'
+            couponField.focus()
+        } else {
+            e.target.disabled = true
+            fetch(`${wp_travel.ajaxUrl}?action=wp_travel_apply_coupon&_nonce=${wp_travel._nonce}`, {
+                method: 'POST',
+                body: JSON.stringify({ couponCode: couponField.value })
+            }).then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        couponField.toggleAttribute('readonly')
+                        e.target.textContent = e.target.dataset.successL10n
+                        e.target.style.backgroundColor = 'green'
+                    } else {
+                        couponField.focus()
+                        toggleError(couponField, result.data[0].message)
+                        e.target.disabled = false
+                    }
+                })
+        }
+    })
+
+    // shoppingCart.dispatchEvent(new Event('wptcartchange'))
+})()

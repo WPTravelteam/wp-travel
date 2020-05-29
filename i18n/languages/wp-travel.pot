@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 10:30:02+00:00\n"
+"POT-Creation-Date: 2020-05-26 19:38:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: inc/admin/admin-helper.php:452 inc/admin/class-dashboard-widgets.php:53
 #: inc/framework/form/class.field.php:76 inc/helpers.php:2528
-#: templates/itineraries-list.php:57 upgrade/400.php:310 upgrade/400.php:345
+#: templates/itineraries-list.php:57 upgrade/400.php:299 upgrade/400.php:334
 msgid "Date"
 msgstr ""
 
@@ -399,21 +399,10 @@ msgid ""
 "Travel. Please update your pricing to multiple pricing."
 msgstr ""
 
-#: inc/admin/admin-notices.php:159
-#. translators: %s: version number
-msgid ""
-"<strong>Heads up!</strong> The versions of the following plugins you're "
-"running haven't been tested with WP Travel 4.0.0. Please update them or "
-"confirm compatibility before updating WP Travel, or you may experience "
-"issues:"
-msgstr ""
-
 #: inc/admin/admin-notices.php:170
-msgid "Plugin"
-msgstr ""
-
-#: inc/admin/admin-notices.php:171
-msgid "Tested up to WP Travel version"
+msgid ""
+"WP Travel Database Need an update. Please deactivate and activate your wp "
+"travel once to update your database."
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:42
@@ -4235,7 +4224,7 @@ msgstr ""
 msgid "Trip Options"
 msgstr ""
 
-#: inc/extended/app/inc/admin/metabox-trip-edit.php:24
+#: inc/extended/app/inc/admin/metabox-trip-edit.php:23
 msgid ""
 "Your database user has no privileges to create table, alter table access. "
 "Please update your database user privileges."
@@ -4351,84 +4340,92 @@ msgid "No pricings found for the trip."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:22
-msgid "Pricing trip id."
+msgid "Pricing id not found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:25
-msgid "No trip pricing categories found."
+msgid "Please add date."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:28
-msgid "No Pricing category id."
+msgid "Please add pax."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:31
-msgid "No Pricing category found."
+msgid "No trip pricing categories found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:34
-msgid "Error adding pricing category."
+msgid "No Pricing category id."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:37
-msgid "Error deleting pricing categories."
+msgid "No Pricing category found."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:40
-msgid "Error updating pricing category."
+msgid "Error adding pricing category."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:43
-msgid "Error deleting pricing category."
+msgid "Error deleting pricing categories."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:46
-msgid "Error saving Pricing."
+msgid "Error updating pricing category."
 msgstr ""
 
 #: inc/extended/core/helpers/error_codes.php:49
+msgid "Error deleting pricing category."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:52
+msgid "Error saving Pricing."
+msgstr ""
+
+#: inc/extended/core/helpers/error_codes.php:55
 msgid "Error deleting Pricing."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:54
-#: inc/extended/core/helpers/error_codes.php:75
+#: inc/extended/core/helpers/error_codes.php:60
+#: inc/extended/core/helpers/error_codes.php:81
 msgid "Error deleting trip dates."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:57
+#: inc/extended/core/helpers/error_codes.php:63
 msgid "No trip dates."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:60
+#: inc/extended/core/helpers/error_codes.php:66
 msgid "No trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:63
-#: inc/extended/core/helpers/error_codes.php:84
+#: inc/extended/core/helpers/error_codes.php:69
+#: inc/extended/core/helpers/error_codes.php:90
 msgid "Error adding trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:66
+#: inc/extended/core/helpers/error_codes.php:72
 msgid "No trip date id"
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:69
+#: inc/extended/core/helpers/error_codes.php:75
 msgid "Error deleting trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:78
+#: inc/extended/core/helpers/error_codes.php:84
 msgid "No exclude trip date."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:81
+#: inc/extended/core/helpers/error_codes.php:87
 msgid "No trip exclude dates & time found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:89
+#: inc/extended/core/helpers/error_codes.php:95
 msgid "No trip extras found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:94
+#: inc/extended/core/helpers/error_codes.php:100
 #: inc/widgets/class-wp-travel-widget-location.php:117
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:107
 #: inc/widgets/class-wp-travel-widget-trip-type.php:117
@@ -4436,24 +4433,20 @@ msgstr ""
 msgid "Trips not found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:99
+#: inc/extended/core/helpers/error_codes.php:105
 msgid "No trip pricing category term found."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:104
+#: inc/extended/core/helpers/error_codes.php:110
 msgid "The coupon code is invalid."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:109
+#: inc/extended/core/helpers/error_codes.php:115
 msgid "The Attachment is invalid."
 msgstr ""
 
-#: inc/extended/core/helpers/error_codes.php:113
+#: inc/extended/core/helpers/error_codes.php:119
 msgid "The Attachment not found."
-msgstr ""
-
-#: inc/extended/core/helpers/error_codes.php:126
-msgid "Error code note found."
 msgstr ""
 
 #: inc/extended/core/helpers/response_codes.php:7
@@ -9460,7 +9453,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:335
+#: upgrade/update-137.php:25 wp-travel.php:338
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -9472,19 +9465,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:350
+#: wp-travel.php:353
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:351
+#: wp-travel.php:354
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:355
+#: wp-travel.php:358
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:359
+#: wp-travel.php:362
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -9745,32 +9738,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:435
+#: upgrade/update-137.php:48 wp-travel.php:438
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:440
+#: upgrade/update-137.php:53 wp-travel.php:443
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:445
+#: upgrade/update-137.php:58 wp-travel.php:448
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:436
+#: upgrade/update-137.php:49 wp-travel.php:439
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:441
+#: upgrade/update-137.php:54 wp-travel.php:444
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:446
+#: upgrade/update-137.php:59 wp-travel.php:449
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""

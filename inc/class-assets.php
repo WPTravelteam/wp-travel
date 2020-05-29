@@ -48,6 +48,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'prices'             => wp_reavel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
+				"_nonce"             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 				'strings'            => wp_travel_get_strings(),
 				// Need map data enhancement.

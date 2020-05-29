@@ -272,8 +272,9 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
-
-		if ( is_array( $pax ) ) {
+		
+		if ( is_array( $pax ) || is_object( $pax ) ) {
+			$pax = (array) $pax;
 			if ( empty( $pax ) ) {
 				return $this->remove( $cart_item_id );
 			}
