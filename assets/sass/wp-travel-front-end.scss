@@ -6556,7 +6556,6 @@ $primaryColor: #3399ff;
                             align-items: flex-start;
                         }
                         >div{
-                            flex: 0 0 220px;
                             display: flex;
                             align-items: center;
                             @media(max-width: 575px){
@@ -6564,10 +6563,14 @@ $primaryColor: #3399ff;
                             }
                             > .input-group{
                                 margin-right: 10px;
+                                display: flex;
                             }
                         }
                         label{
                             font-size: 14px;
+                            @media(min-width: 576px){
+                                margin-bottom: 0;
+                            }
                         }
                         .input-group-btn{
                             .btn{
@@ -6577,6 +6580,9 @@ $primaryColor: #3399ff;
                                 width: 20px;
                                 height: 30px;
                                 line-height: 6px;
+                                border: 0;
+                                border-radius: 0;
+                                margin: 0;
                             }
                         }
                         .qty{
@@ -6613,7 +6619,7 @@ $primaryColor: #3399ff;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 1em;
+                margin-bottom: 2em;
                 @media(max-width: 575px){
                     flex-direction: column-reverse;
                 }
@@ -6642,7 +6648,6 @@ $primaryColor: #3399ff;
                 margin-top: 1em;
             }
             .update-cart-form{
-                margin-bottom: 1em;
                 .field-inline{
                     display: flex;
                     position: relative;
