@@ -3,7 +3,7 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 4.4.0
-Tested up to: 5.3.2
+Tested up to: 5.4.1
 Requires PHP: 5.5
 Stable tag: 4.0.0
 License: GPLv3
@@ -12,6 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
+> **Notice: WP Travel V4.0**
+> We are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to [check this link for more details](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post).
+
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
@@ -19,7 +22,7 @@ WP Travel is a free powerful travel engine for making customized travel & tour a
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/themes/?utm_source=Themes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
 > **WP Travel Mobile App**
 > Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
@@ -77,7 +80,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
-* [Travel Jpy Pro](https://wptravel.io/demo/?demo=travel-joy-pro&utm_source=paidthemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
+* [Travel Joy Pro](https://wptravel.io/demo/?demo=travel-joy-pro&utm_source=paidthemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem Pro](https://wptravel.io/demo/?demo=travel-gem-pro&utm_source=paidthemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Ultimate Pro](https://wptravel.io/demo/?demo=travel-ultimate-pro&utm_source=paidthemes&utm_medium=ultimatepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.
@@ -197,7 +200,7 @@ Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum
 
 = Will WP Travel work with my theme? =
 
-Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
+Yes, WP Travel will work with any theme, but may require some styling to make it match nicely. Also, plugin perfectly works with the default WordPress theme. There are additional themes which are developed specially to work with the WP Travel plugin. Please go to the link to find out the theme that are compatible with WP Travel plugin: [Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=FAQ&utm_medium=themes&utm_campaign=WP%20Plugin)
 
 = Can I run WooCommerce or Easy Digital Downloads and WP Travel at the same time? =
 
@@ -232,6 +235,76 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.0.0 =
+Release Date:
+
+Enhancement: 
+* Trip Backend layout updated.
+
+Fixed :
+
+= 3.2.5 =
+Release Date: 25th May, 2020
+
+Plugin Name changed to WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine.
+
+Fixed :
+* Fixed Book Now redirect to homepage issue.
+
+Enhancement: 
+* Upgrade notice enhanced for major release.
+
+= 3.2.4 =
+Release Date: 12th May, 2020
+
+Fixed :
+* Field editor requird field fixed. Email field is required for all travelers even not checked as required for all.
+* Trip data messed up while saving from Elementor blocks fixed.
+
+= 3.2.3 =
+Release Date: 28th April, 2020
+
+Fixed :
+* Trip Filter range not working in search widget.
+
+Enhancement :
+* Filter wp_travel_currency_symbol added in wp_travel_get_currency_symbol function.
+
+= 3.2.2 =
+Release Date: 20th April, 2020
+
+Fixed :
+* Shortcode WP_TRAVEL_ITINERARIES is not displaying fixed departure date.
+
+Enhancement :
+* Trip list by trip activity added in shortcode WP_TRAVEL_ITINERARIES.
+
+= 3.2.1 =
+Release Date: 16th April, 2020
+Fixed :
+* Post type payment hide for user.
+
+Enhancement :
+* Sort by trip date added in shortcode WP_TRAVEL_ITINERARIES.
+
+= 3.2.0 =
+Release Date: 6th April, 2020
+Enhancement :
+* Supported WP Travel Gutenberg Elementor Blocks feature.
+* Supported WP Travel Saferpay Checkout.
+
+= 3.1.9 =
+Release Date: 2nd April, 2020
+Fixes :
+* Theme page URL fixed in the readme file.
+* String Select Pax text is updated with filter.
+* Compatibility update with WordPress 5.4
+
+= 3.1.8 =
+Release Date: 26th March, 2020
+Enhancement :
+* WPML Compatibility with WP Travel pages.
 
 = 3.1.7 =
 Release Date: 16th March, 2020
@@ -1212,8 +1285,3 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
-
-== Upgrade Notice ==
-
-= 4.0 =
-4.0 is a major update. Make a full site backup, update your theme and extensions, and [review update best practices](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post) before upgrading.
