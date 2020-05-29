@@ -6613,7 +6613,7 @@ $primaryColor: #3399ff;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 1em;
+                margin-bottom: 2em;
                 @media(max-width: 575px){
                     flex-direction: column-reverse;
                 }
@@ -6642,7 +6642,6 @@ $primaryColor: #3399ff;
                 margin-top: 1em;
             }
             .update-cart-form{
-                margin-bottom: 1em;
                 .field-inline{
                     display: flex;
                     position: relative;
