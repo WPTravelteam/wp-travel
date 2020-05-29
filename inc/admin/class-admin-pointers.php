@@ -32,7 +32,7 @@ class WP_Travel_Admin_Info_Pointers {
 		add_action( 'admin_notices', array( $this, 'wp_travel_importer_upsell_notice' ) );
 		add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
 
-		add_filter( 'wp_travel_display_general_admin_notices', array( $this, 'display_general_admin_notices' ) );
+		// add_filter( 'wp_travel_display_general_admin_notices', array( $this, 'display_general_admin_notices' ) );
 		add_action( 'wp_travel_general_admin_notice', array( $this, 'general_admin_notices' ) );
 	}
 

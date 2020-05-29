@@ -136,7 +136,61 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			// For Network.
 			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
+			/**
+			 * To resolve the pages mismatch issue when using WPML.
+			 *
+			 * @since 3.1.8
+			 */
+			add_filter( 'wptravel_wpml_object_id', array( $this, 'get_wp_travel_page_id_by_locale' ), 11, 2 );
+
+			/**
+			 * To resolve the pages mismatch issue when using WPML.
+			 *
+			 * @since 3.1.8
+			 */
+			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
+
 		}
+
+		/**
+		 * To resolve the pages mismatch issue when using WPML.
+		 * 
+		 *
+		 * @since 3.1.8
+		 */
+		public function filter_wp_travel_settings( $value, $option ) {
+			$settings_keys = array(
+				'cart_page_id',
+				'checkout_page_id',
+				'dashboard_page_id',
+				'thank_you_page_id',
+			);
+
+			foreach ( $settings_keys as $skey ) {
+				if ( isset( $value[ $skey ] ) ) {
+					$page_id        = apply_filters( 'wptravel_wpml_object_id', (int) $value[ $skey ], $skey, true );
+					$value[ $skey ] = $page_id;
+				}
+			}
+
+			return $value;
+		}
+
+
+		/**
+		 * To resolve the pages mismatch issue when using WPML.
+		 *
+		 * @since 3.1.8
+		 */
+		public function get_wp_travel_page_id_by_locale( $page_id, $option ) {
+			$_page_id = apply_filters( 'wpml_object_id', $page_id, 'page', true );
+			if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+				$_page_id = get_option( "wp_travel_{$option}_" . ICL_LANGUAGE_CODE, $_page_id );
+			}
+
+			return $_page_id;
+		}
+
 
 		public function wp_travel_network_menu() {
 			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WP_Travel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
@@ -473,6 +527,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			if ( version_compare( $this->version, '3.0.3', '>' ) ) {
 				include_once sprintf( '%s/upgrade/303-304.php', WP_TRAVEL_ABSPATH );
+			}
+			if ( version_compare( $this->version, '3.2.2', '>' ) ) {
+				include_once sprintf( '%s/upgrade/322-323.php', WP_TRAVEL_ABSPATH );
 			}
 			include_once sprintf( '%s/upgrade/400.php', WP_TRAVEL_ABSPATH );
 			$current_db_version = get_option( 'wp_travel_version' );

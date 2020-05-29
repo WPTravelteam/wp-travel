@@ -200,8 +200,8 @@ class WP_Travel_Post_Types {
 		$args = array(
 			'labels'             => $labels,
 			'description'        => __( 'Description.', 'wp-travel' ),
-			'public'             => true,
-			'publicly_queryable' => true,
+			'public'             => false,
+			'publicly_queryable' => false,
 			'show_ui'            => true,
 			'show_in_menu'       => false,
 			'query_var'          => true,

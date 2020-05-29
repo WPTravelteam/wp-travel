@@ -316,6 +316,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 								$args           = array(
 									'trip_id'       => $trip_id,
 									'price_partial' => $price_partial,
+									'pax'           => $pax,
 								);
 								$price_partial  = apply_filters( 'wp_travel_cart_mini_custom_partial_value', $args );
 								$price_partial  = is_array( $price_partial ) && isset( $price_partial['price_partial'] ) ? $price_partial['price_partial'] : $price_partial;

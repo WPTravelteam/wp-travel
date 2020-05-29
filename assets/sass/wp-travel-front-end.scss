@@ -6411,6 +6411,7 @@ input[type=number].wp-travel-form-control{
 }
 
 // Cart
+$primaryColor: #3399ff;
 #shopping-cart{
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -6428,9 +6429,13 @@ input[type=number].wp-travel-form-control{
                 color: #444;
                 margin-bottom: .5em;
                 display: flex;
-                img{
+                svg{
                     width: 20px;
+                    height: 20px;
                     margin-right: 10px;
+                    path{
+                        fill: #444;
+                    }
                 }
             }
             .subtitle{
@@ -6637,8 +6642,10 @@ input[type=number].wp-travel-form-control{
                 margin-top: 1em;
             }
             .update-cart-form{
+                margin-bottom: 1em;
                 .field-inline{
                     display: flex;
+                    position: relative;
                     input{
                         flex: 1;
                         margin-right: .5em;
@@ -6647,6 +6654,23 @@ input[type=number].wp-travel-form-control{
                     }
                     .btn{
                         font-size: 12px;
+                    }
+                    .error{
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        color: red;
+                        display: flex;
+                        align-items: center;
+                        margin-top: .25em;
+                        svg{
+                            width: 15px;
+                            height: 15px;
+                            margin-right: .5em;
+                            path{
+                                fill: red;
+                            }
+                        }
                     }
                 }
             }
@@ -6676,5 +6700,39 @@ input[type=number].wp-travel-form-control{
                 width: 100%;
             }
         }
+    }
+}
+
+// enquiry form
+.mfp-container.mfp-inline-holder{
+	overflow: auto;
+	top: 15px;
+}
+#wp-travel-enquiries{
+    overflow: hidden;
+    .wp-travel-inquiry__form-header{
+        background-color: #777;
+        text-align: center;
+        padding: 1em;
+        margin: -20px -20px 1em;
+        border-bottom: 5px solid #00afe9;
+        h3{
+            font-weight: bold;
+            margin: 0;
+            color: #fff;
+        }
+    }
+    .wp-travel-form-field{
+        label{
+            width: 100%;
+        }
+    }
+    .mfp-close{
+        position: absolute;
+        top: 5px !important;
+        right: 5px !important;
+        background-color: #fff !important;
+        color: red;
+        font-size: 24px;
     }
 }

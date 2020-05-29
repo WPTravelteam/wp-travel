@@ -21,7 +21,7 @@ $settings = wp_travel_get_settings();
 $checkout_page_url = wp_travel_get_checkout_url();
 
 if ( isset( $settings['checkout_page_id'] ) ) {
-	$checkout_page_id  = $settings['checkout_page_id'];
+	$checkout_page_id  = apply_filters( 'wptravel_wpml_object_id', $settings['checkout_page_id'], 'checkout_page_id' ); // @since 3.1.8 WPML
 	$checkout_page_url = get_permalink( $checkout_page_id );
 }
 
