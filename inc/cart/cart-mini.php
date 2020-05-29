@@ -180,16 +180,16 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 										<?php esc_html_e( 'Apply Coupon', 'wp-travel' ); ?>
 									</button>
 								</div>
-								<div class="price-calculate">
-									<div class="total-price">
-										<p><?php esc_html_e( 'Total:', 'wp-travel' ); ?>
-											<strong>
-											<?php echo $currency_symbol . '<span data-wpt-cart-total="' . $cart_total . '">' . $cart_total . '</span>'; ?>
-											</strong>
-										</p>
-									</div>
-								</div>
 							</form>
+							<div class="price-calculate">
+								<div class="total-price">
+									<p><?php esc_html_e( 'Total:', 'wp-travel' ); ?>
+										<strong>
+										<?php echo $currency_symbol . '<span data-wpt-cart-total="' . $cart_total . '">' . $cart_total . '</span>'; ?>
+										</strong>
+									</p>
+								</div>
+							</div>
 						</div>
 						<a href="javascript:void(0);" class="btn btn-dark checkout-btn"><?php esc_html_e( 'Proceed to Pay', 'wp-travel' ); ?></a>
 					</div>
