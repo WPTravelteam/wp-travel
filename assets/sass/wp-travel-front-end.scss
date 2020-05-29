@@ -6429,9 +6429,13 @@ $primaryColor: #3399ff;
                 color: #444;
                 margin-bottom: .5em;
                 display: flex;
-                img{
+                svg{
                     width: 20px;
+                    height: 20px;
                     margin-right: 10px;
+                    path{
+                        fill: #444;
+                    }
                 }
             }
             .subtitle{
