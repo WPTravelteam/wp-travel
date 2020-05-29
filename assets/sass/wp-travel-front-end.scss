@@ -6679,3 +6679,33 @@ $primaryColor: #3399ff;
         }
     }
 }
+
+// enquiry form
+#wp-travel-enquiries{
+    overflow: hidden;
+    .wp-travel-inquiry__form-header{
+        background-color: #777;
+        text-align: center;
+        padding: 1em;
+        margin: -20px -20px 1em;
+        border-bottom: 5px solid #00afe9;
+        h3{
+            font-weight: bold;
+            margin: 0;
+            color: #fff;
+        }
+    }
+    .wp-travel-form-field{
+        label{
+            width: 100%;
+        }
+    }
+    .mfp-close{
+        position: absolute;
+        top: 5px !important;
+        right: 5px !important;
+        background-color: #fff !important;
+        color: red;
+        font-size: 24px;
+    }
+}
