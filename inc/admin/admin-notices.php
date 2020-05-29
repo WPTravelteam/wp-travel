@@ -161,7 +161,7 @@ function wp_travel_pricing_table_created_notice_display( $show ) {
 	return $show;
 }
 
-add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display' );
+add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 20 );
 
 
 function wp_travel_pricing_table_created_notice() {

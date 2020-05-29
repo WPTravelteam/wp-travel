@@ -65,6 +65,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
+* [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Base](https://wptravel.io/demo/?demo=travel-base&utm_source=freethemes&utm_medium=travelbase&utm_campaign=WP%20Plugin) by Theme Palace
@@ -76,6 +77,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
+* [Travel Jpy Pro](https://wptravel.io/demo/?demo=travel-joy-pro&utm_source=paidthemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem Pro](https://wptravel.io/demo/?demo=travel-gem-pro&utm_source=paidthemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Ultimate Pro](https://wptravel.io/demo/?demo=travel-ultimate-pro&utm_source=paidthemes&utm_medium=ultimatepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.

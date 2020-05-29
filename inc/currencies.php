@@ -311,7 +311,7 @@ function wp_travel_get_currency_symbol( $currency_code = null ) {
 	$currency_symbols = apply_filters( 'wp_travel_currency_symbols', $currency_symbols );
 
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
-		return $currency_symbols[ $currency_code ];
+		return apply_filters( 'wp_travel_currency_symbol', $currency_symbols[ $currency_code ], $currency_code, $currency_symbols );
 	}
 	return __( 'N/A', 'wp-travel' );
 

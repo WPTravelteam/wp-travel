@@ -696,7 +696,7 @@ function wp_travel_get_trip_duration( $post_id ) {
 	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
 	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
 	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
-
+	ob_start();
 	if ( 'yes' === $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
@@ -725,6 +725,11 @@ function wp_travel_get_trip_duration( $post_id ) {
 		</div>
 		<?php
 	endif;
+	$content = ob_get_contents();
+	ob_end_clean();
+	$content = apply_filters( 'wp_travel_trip_duration', $content, $post_id );
+	echo $content; // phpcs:ignore
+
 }
 
 /**
@@ -1301,18 +1306,7 @@ function wp_travel_is_checkout_page() {
 	$settings = wp_travel_get_settings();
 
 	$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
-
-	/**
-	 * WPML filter to get translated checkout page id if available.
-	 *
-	 * @since 3.1.7
-	 */
-	$translated_checkout_page_id = apply_filters( 'wpml_object_id', $checkout_page_id, 'page', true );
-
-	if ( $translated_checkout_page_id === $page_id ) {
-		return true;
-	}
-	return false;
+	return (int) $checkout_page_id === $page_id;
 }
 
 /**
@@ -1329,14 +1323,7 @@ function wp_travel_is_cart_page() {
 
 	$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;
 
-	/**
-	 * WPML filter to get translated cart page id if available.
-	 *
-	 * @since 3.1.7
-	 */
-	$translated_cart_page_id = apply_filters( 'wpml_object_id', $cart_page_id, 'page', true );
-
-	return (int) $translated_cart_page_id === $page_id;
+	return (int) $cart_page_id === $page_id;
 }
 
 /**
@@ -1353,14 +1340,7 @@ function wp_travel_is_dashboard_page() {
 
 	$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
 
-	/**
-	 * WPML filter to get translated dashboard page id if available.
-	 *
-	 * @since 3.1.7
-	 */
-	$translated_dashboard_page_id = apply_filters( 'wpml_object_id', $dashboard_page_id, 'page', true );
-
-	return (int) $translated_dashboard_page_id === $page_id;
+	return (int) $dashboard_page_id === $page_id;
 }
 
 if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
