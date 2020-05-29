@@ -5694,6 +5694,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2em;
+  flex-wrap: wrap;
 }
 @media (max-width: 575px) {
   #shopping-cart .cart-summary .cart-summary-bottom .flex-wrapper {
