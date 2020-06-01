@@ -5514,6 +5514,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border-top: 1px solid #f4f4f4;
 }
 #shopping-cart .cart-summary .list-group li .del-btn {
+  font-size: 12px;
   position: absolute;
   top: 5px;
   left: -10px;
@@ -5527,6 +5528,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border: 0;
   line-height: 9px;
   cursor: pointer;
+  z-index: 1;
 }
 #shopping-cart .cart-summary .list-group li .del-btn:hover {
   background-color: red;
@@ -5639,6 +5641,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div > .input-group {
   margin-right: 10px;
   display: flex;
+  align-items: center;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
   font-size: 14px;
@@ -5647,6 +5650,9 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
     margin-bottom: 0;
   }
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn {
+  display: flex;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn .btn {
   padding: .45em .25em;

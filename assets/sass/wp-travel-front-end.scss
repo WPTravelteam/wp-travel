@@ -6387,6 +6387,14 @@ $primaryColor: #3399ff;
 
 // Cart
 $primaryColor: #3399ff;
+@keyframes loader{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 #shopping-cart{
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -6466,6 +6474,7 @@ $primaryColor: #3399ff;
                     border-top: 1px solid #f4f4f4;
                 }
                 .del-btn{
+					font-size: 12px;
                     position: absolute;
                     top: 5px;
                     left: -10px;
@@ -6478,7 +6487,8 @@ $primaryColor: #3399ff;
                     text-align: center;
                     border: 0;
                     line-height: 9px;
-                    cursor: pointer;
+					cursor: pointer;
+					z-index: 1;
                     &:hover{
                         background-color: red;
                     }
@@ -6566,7 +6576,8 @@ $primaryColor: #3399ff;
                         align-items: center;
                         svg{
                             width: 30px;
-                            height: 30px;
+							height: 30px;
+							animation: loader 1s linear infinite;
                             path{
                                 fill: $primaryColor;
                             }
@@ -6594,7 +6605,8 @@ $primaryColor: #3399ff;
                             // }
                             > .input-group{
                                 margin-right: 10px;
-                                display: flex;
+								display: flex;
+								align-items: center;
                             }
                         }
                         label{
@@ -6604,6 +6616,7 @@ $primaryColor: #3399ff;
                             }
                         }
                         .input-group-btn{
+							display: flex;
                             .btn{
                                 // background: $primaryColor;
                                 // color: #fff;
