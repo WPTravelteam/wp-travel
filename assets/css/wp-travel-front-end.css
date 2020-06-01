@@ -5443,6 +5443,14 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border: 0;
 }
 
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 #shopping-cart {
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -5452,13 +5460,22 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   background-color: #fff;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
 }
+#shopping-cart a {
+  color: #3399ff;
+}
 #shopping-cart .btn {
   outline: none;
+  background-color: #3399ff;
+  color: #fff;
   padding: .75em 1em;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   text-align: center;
+}
+#shopping-cart .btn:hover {
+  background-color: rgba(51, 153, 255, 0.7);
+  text-decoration: none;
 }
 #shopping-cart .btn.btn-dark {
   background-color: #444;
@@ -5514,6 +5531,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border-top: 1px solid #f4f4f4;
 }
 #shopping-cart .cart-summary .list-group li .del-btn {
+  font-size: 12px;
   position: absolute;
   top: 5px;
   left: -10px;
@@ -5527,6 +5545,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border: 0;
   line-height: 9px;
   cursor: pointer;
+  z-index: 1;
 }
 #shopping-cart .cart-summary .list-group li .del-btn:hover {
   background-color: red;
@@ -5542,7 +5561,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   object-fit: cover;
 }
 #shopping-cart .cart-summary .list-group li > div .content-left {
-  flex: 0 0 18%;
+  flex: 0 0 22%;
   margin-right: 20px;
 }
 #shopping-cart .cart-summary .list-group li > div .content-left img {
@@ -5554,6 +5573,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .list-group li > div .content-right h5 {
   margin: 0;
+  line-height: 1;
 }
 #shopping-cart .cart-summary .list-group li > div .content-right h5 a {
   text-decoration: none;
@@ -5599,6 +5619,27 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .update-fields-collapse {
   margin-top: 1em;
   display: none;
+  background: none;
+  position: relative;
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse #loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse #loader svg {
+  width: 30px;
+  height: 30px;
+  animation: loader 1s linear infinite;
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse #loader svg path {
+  fill: #3399ff;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse form {
   width: 100%;
@@ -5618,6 +5659,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div > .input-group {
   margin-right: 10px;
   display: flex;
+  align-items: center;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
   font-size: 14px;
@@ -5626,6 +5668,9 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group label {
     margin-bottom: 0;
   }
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn {
+  display: flex;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn .btn {
   padding: .45em .25em;

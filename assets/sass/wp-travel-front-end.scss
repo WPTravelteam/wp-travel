@@ -6387,6 +6387,14 @@ $primaryColor: #3399ff;
 
 // Cart
 $primaryColor: #3399ff;
+@keyframes loader{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 #shopping-cart{
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -6395,22 +6403,22 @@ $primaryColor: #3399ff;
     top: 20px;
     background-color: #fff;
 	box-shadow: 0 20px 30px rgba(0,0,0, .15);
+	a{
+		color: $primaryColor;
+	}
 	.btn{
 		outline: none;
 		// border: 1px solid $primaryColor;
-		// background-color: #efefef;
+		background-color: $primaryColor;
+		color: #fff;
 		padding: .75em 1em;
 		font-size: 16px;
 		font-weight: 500;
 		cursor: pointer;
 		text-align: center;
-		&.btn-primary{
-			// background-color: $primaryColor;
-			// color: #fff;
-			&:hover{
-				// background-color: rgba($primaryColor, .7);
-				// text-decoration: none;
-			}
+		&:hover{
+			background-color: rgba($primaryColor, .7);
+			text-decoration: none;
 		}
 		&.btn-dark{
 			background-color: #444;
@@ -6466,6 +6474,7 @@ $primaryColor: #3399ff;
                     border-top: 1px solid #f4f4f4;
                 }
                 .del-btn{
+					font-size: 12px;
                     position: absolute;
                     top: 5px;
                     left: -10px;
@@ -6478,7 +6487,8 @@ $primaryColor: #3399ff;
                     text-align: center;
                     border: 0;
                     line-height: 9px;
-                    cursor: pointer;
+					cursor: pointer;
+					z-index: 1;
                     &:hover{
                         background-color: red;
                     }
@@ -6493,7 +6503,7 @@ $primaryColor: #3399ff;
                         object-fit: cover;
                     }
                     .content-left{
-                        flex: 0 0 18%;
+                        flex: 0 0 22%;
                         margin-right: 20px;
                         img{
                             border: 1px solid #efefef;
@@ -6504,6 +6514,7 @@ $primaryColor: #3399ff;
                         flex: 1;
                         h5{
 							margin: 0;
+							line-height: 1;
                             a{
                                 text-decoration: none;
                                 color: #444;
@@ -6550,7 +6561,28 @@ $primaryColor: #3399ff;
                 }
                 .update-fields-collapse{
 					margin-top: 1em;
-                    display: none;
+					display: none;
+					background: none;
+					position: relative;
+                    #loader{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(#fff, .8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        svg{
+                            width: 30px;
+							height: 30px;
+							animation: loader 1s linear infinite;
+                            path{
+                                fill: $primaryColor;
+                            }
+                        }
+                    }
                     form{
                         width: 100%;
                     }
@@ -6573,7 +6605,8 @@ $primaryColor: #3399ff;
                             // }
                             > .input-group{
                                 margin-right: 10px;
-                                display: flex;
+								display: flex;
+								align-items: center;
                             }
                         }
                         label{
@@ -6583,6 +6616,7 @@ $primaryColor: #3399ff;
                             }
                         }
                         .input-group-btn{
+							display: flex;
                             .btn{
                                 // background: $primaryColor;
                                 // color: #fff;
