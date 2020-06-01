@@ -6360,6 +6360,27 @@ $primaryColor: #3399ff;
 		.checkout-left{
 			border-radius: 5px;
 			border-color: #ccc;
+			// .wp-travel-booking{
+			// 	.wp-travel-trip-details{
+			// 		margin-top: 0;
+			// 	}
+			// }
+			.ws-theme-timeline-block{
+				.panel-body{
+					padding: 0;
+					.payment-content{
+						.wp-travel-form-field{
+							#wp-travel-book-now{
+								margin: 0;
+								float: right;
+							}
+						}
+					}
+				}
+				.panel-collapse{
+					border: 0;
+				}
+			}
 		}
 	}
 }
@@ -6688,8 +6709,11 @@ $primaryColor: #3399ff;
                         margin-top: 0;
                     }
                     p{
-						font-size: 18px;
+						font-size: 14px;
 						margin: 0;
+						strong{
+							font-size: 18px;
+						}
                     }
                 }
                 .price-description{

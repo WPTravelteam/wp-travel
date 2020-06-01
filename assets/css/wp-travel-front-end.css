@@ -5432,6 +5432,16 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   border-radius: 5px;
   border-color: #ccc;
 }
+.checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body {
+  padding: 0;
+}
+.checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body .payment-content .wp-travel-form-field #wp-travel-book-now {
+  margin: 0;
+  float: right;
+}
+.checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-collapse {
+  border: 0;
+}
 
 #shopping-cart {
   border-radius: 5px;
@@ -5751,8 +5761,11 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   }
 }
 #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .total-price p {
-  font-size: 18px;
+  font-size: 14px;
   margin: 0;
+}
+#shopping-cart .cart-summary .cart-summary-bottom .price-calculate .total-price p strong {
+  font-size: 18px;
 }
 #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .price-description {
   text-align: center;
