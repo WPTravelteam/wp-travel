@@ -6326,6 +6326,23 @@ li {
 //Cart and checkout page
 
 $primaryColor: #3399ff;
+
+.checkout-page-wrap{
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    grid-gap: 100px;
+	margin-top: 50px;
+	>div{
+		width: 100%;
+	}
+    @media(max-width: 1199px){
+        grid-template-columns: 1fr 42%;
+        grid-gap: 30px;
+    }
+    @media(max-width: 991px){
+        grid-template-columns: 1fr;
+    }
+}
 .page-checkout{
     padding-top: 100px;
     padding-bottom: 100px;
