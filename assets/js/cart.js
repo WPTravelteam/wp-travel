@@ -212,9 +212,29 @@ jQuery(document).ready(function ($) {
 
 });
 
-(function () {
+
+let wp_travel_cart = {}
+const wptravelcheckout = () => {
   const shoppingCart = document.getElementById('shopping-cart')
   const cartItems = shoppingCart && shoppingCart.querySelectorAll('[data-cart-id]')
+  // let cart = {}
+  const fetchCart = () => {
+    // const fetchInventoryData = (qs) => {
+    fetch(`${wp_travel.ajaxUrl}?action=wp_travel_get_cart&_nonce=${wp_travel._nonce}`)
+      .then(res => {
+        res.json()
+          .then(result => {
+            if (result.success && result.data.code === 'WP_TRAVEL_CART') {
+              if (result.data.cart) {
+                wp_travel_cart = result.data.cart
+                Object.freeze(wp_travel_cart)
+              }
+            }
+          })
+      })
+  }
+
+  window.addEventListener('load', e => fetchCart())
 
   shoppingCart && shoppingCart.addEventListener('wptcartchange', e => {
     let cartTotal = 0
@@ -266,7 +286,6 @@ jQuery(document).ready(function ($) {
     console.log(cartTotal)
   })
 
-
   cartItems && cartItems.forEach(ci => {
     let edit = ci.querySelector('a.edit')
     let collapse = ci.querySelector('.update-fields-collapse')
@@ -284,13 +303,40 @@ jQuery(document).ready(function ($) {
           })
       }
     })
-    edit && edit.addEventListener('click', () => {
+    edit && edit.addEventListener('click', e => {
       if (collapse.className.indexOf('active') < 0) {
         collapse.style.display = 'block'
         collapse.classList.add('active')
       } else {
         collapse.style.display = 'none'
         collapse.classList.remove('active')
+      }
+      if (cart.trip_data.inventory && cart.trip_data.inventory.enable_trip_inventory === 'yes') {
+        let qs = ''
+
+        let cart_id = e.target.dataset.wptTargetCartId
+        let cart = wp_travel_cart.cart_items && wp_travel_cart.cart_items[cart_id] || {}
+
+        let pricing_id = cart.pricing_id || 0
+        qs += pricing_id && `pricing_id=${pricing_id}` || ''
+
+        let trip_id = cart.trip_data && cart.trip_data.id || 0
+        qs += trip_id && `&trip_id=${trip_id}` || ''
+
+        let trip_time = cart.trip_time
+        qs += trip_time && `&trip_time=${trip_time}` || ''
+
+        if (cart.arrival_date && new Date(cart.arrival_date).toString().toLowerCase() != 'invalid date') {
+          let _date = new Date(cart.arrival_date)
+          let _year = _date.getFullYear()
+          let _month = _date.getMonth() + 1
+          _month = String(_month).padStart(2, '0')
+          let _day = String(_date.getDate()).padStart(2, '0')
+          _date = `${_year}-${_month}-${_day}`
+          qs += _date && `&selected_date=${_date}` || ''
+        }
+        fetch(`${wp_travel.ajaxUrl}?${qs}&action=wp_travel_get_inventory&_nonce=${wp_travel._nonce}`)
+          .then(res => res.json().then(result => console.log(result)))
       }
     })
 
@@ -421,4 +467,6 @@ jQuery(document).ready(function ($) {
         })
     }
   })
-})()
+
+}
+wptravelcheckout()

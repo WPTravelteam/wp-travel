@@ -21,8 +21,8 @@ function wp_travel_key_by( $items, $key_by = 'id' ) {
 function wp_travel_checkout_category_total() {
 
 }
-$settings        = wp_travel_get_settings();
-$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
+$settings      = wp_travel_get_settings();
+$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
@@ -46,10 +46,10 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 					<ul class="cart-summary-content list-group">
 					<?php
 					foreach( $cart_items as $cart_id => $cart_item ) {
-						$pricing_id     = $cart_item['pricing_id'];
-						$pricings       = $cart_item['trip_data']['pricings']; // all pricings
+						$pricing_id   = $cart_item['pricing_id'];
+						$pricings     = $cart_item['trip_data']['pricings']; // all pricings
 						$cart_pricing = null;
-						$trip_data      = $cart_item['trip_data'];
+						$trip_data    = $cart_item['trip_data'];
 						foreach( $pricings as $pricing ) { // getting pricing here.
 							$pricing = (array) $pricing;
 							if ( $pricing['id'] ==  $pricing_id ) {
@@ -96,7 +96,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 								</div>
 								<div class="price">
 									<span><?php echo $currency_symbol . '<span data-wpt-item-total="' . $category_total . '">' . $category_total . '</span>'; ?></span>
-									<a href="javascript:void(0);" class="edit"><svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m384.721 0-323.626 323.627-61.095 188.373 188.374-61.094 323.626-323.627zm84.853 127.279-42.427 42.427-84.853-84.853 42.426-42.427zm-388.611 232.331 71.427 71.428-32.036 10.39-49.782-49.782zm14.501-27.925 225.617-225.618 31.82 31.82-225.618 225.617zm53.032 53.032 225.618-225.619 31.82 31.82-225.618 225.619zm-88.313 38.965 28.136 28.136-41.642 13.505z"></path></g></svg> Edit</a>
+									<a href="javascript:void(0);" class="edit" data-wpt-target-cart-id="<?php echo esc_attr( $cart_id ); ?>" data-wpt-target-trip="<?php echo esc_attr( $trip_data['id'] ); ?>" data-wpt-target-pricing="<?php echo esc_attr( $cart_pricing['id'] ); ?>"><svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m384.721 0-323.626 323.627-61.095 188.373 188.374-61.094 323.626-323.627zm84.853 127.279-42.427 42.427-84.853-84.853 42.426-42.427zm-388.611 232.331 71.427 71.428-32.036 10.39-49.782-49.782zm14.501-27.925 225.617-225.618 31.82 31.82-225.618 225.617zm53.032 53.032 225.618-225.619 31.82 31.82-225.618 225.619zm-88.313 38.965 28.136 28.136-41.642 13.505z"></path></g></svg> Edit</a>
 								</div>
 							</div>
 							<div class="update-fields-collapse" style="display: none;">
