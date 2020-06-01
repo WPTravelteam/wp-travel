@@ -72,7 +72,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 							<button type="button" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>">×</button>
 							<div>
 								<div class="content-left">
-									<img src="./img/trip-1.jpg" alt="">
+									<?php echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ); ?>
 								</div>
 								<div class="content-right">
 									<h5><a href="javascript:void(0);"><?php echo esc_html( $trip_data['title'] ); ?></a></h5>
