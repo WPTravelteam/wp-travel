@@ -5554,6 +5554,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .list-group li > div .content-right h5 {
   margin: 0;
+  line-height: 2;
 }
 #shopping-cart .cart-summary .list-group li > div .content-right h5 a {
   text-decoration: none;
@@ -5599,6 +5600,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .update-fields-collapse {
   margin-top: 1em;
   display: none;
+  background: none;
   position: relative;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse #loader {

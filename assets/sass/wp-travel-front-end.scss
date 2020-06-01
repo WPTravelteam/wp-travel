@@ -6504,6 +6504,7 @@ $primaryColor: #3399ff;
                         flex: 1;
                         h5{
 							margin: 0;
+							line-height: 2;
                             a{
                                 text-decoration: none;
                                 color: #444;
@@ -6551,6 +6552,7 @@ $primaryColor: #3399ff;
                 .update-fields-collapse{
 					margin-top: 1em;
 					display: none;
+					background: none;
 					position: relative;
                     #loader{
                         position: absolute;
