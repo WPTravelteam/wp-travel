@@ -5396,7 +5396,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 
 .checkout-page-wrap {
   display: grid;
-  grid-template-columns: 35% 1fr;
+  grid-template-columns: 1fr 35%;
   grid-gap: 100px;
   margin-top: 50px;
 }
@@ -5414,95 +5414,23 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
     grid-template-columns: 1fr;
   }
 }
-
-.page-checkout {
-  padding-top: 100px;
-  padding-bottom: 100px;
-}
-.page-checkout hr {
-  border: .1px solid #ccc;
-  margin-bottom: 1em;
-}
-
-.checkout-page-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 35%;
-  grid-gap: 100px;
-  margin-top: 50px;
-}
-@media (max-width: 1199px) {
-  .checkout-page-wrapper {
-    grid-template-columns: 1fr 42%;
-    grid-gap: 30px;
-  }
-}
-@media (max-width: 991px) {
-  .checkout-page-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-.wp-travel-form-group {
-  margin-bottom: 1em;
-}
-.wp-travel-form-group label {
-  margin-bottom: .5em;
-  display: inline-block;
-}
-
-.wp-travel-form-control {
-  width: 100%;
-  padding: .75em 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.wp-travel-row {
-  margin: 0 -15px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.wp-travel-row .wp-travel-col-6 {
-  flex: 0 0 50%;
-  padding: 0 15px;
-}
-
-select.wp-travel-form-control {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  background-image: url("../img/down-chevron.svg");
-  background-size: 10px;
-  background-position: right 10px center;
-  background-repeat: no-repeat;
-}
-
-input[type=number].wp-travel-form-control::-webkit-inner-spin-button, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type=number].wp-travel-form-control::-webkit-inner-spin-button, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type=number].wp-travel-form-control::-webkit-inner-spin-button, input[type=number].wp-travel-form-control::-webkit-outer-spin-button, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type=number].wp-travel-form-control::-webkit-outer-spin-button, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type=number].wp-travel-form-control::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
-input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field select[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-booking-form-wrapper form .wp-travel-form-field textarea[type=number].wp-travel-form-control {
-  -moz-appearance: textfield;
-}
-
-.checkout-form {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  padding: 1em 2em;
-}
-@media (max-width: 991px) {
-  .checkout-form {
+@media (min-width: 992px) {
+  .checkout-page-wrap .wp-travel-minicart {
     order: 2;
   }
 }
-.checkout-form h2 {
-  margin-bottom: 1em;
+.checkout-page-wrap .wp-travel-minicart .sticky-sidebar .checkout-right {
+  padding: 0;
+  border: 0;
 }
-
-@media (max-width: 991px) {
-  .wp-travel-cart-sidebar {
+@media (min-width: 992px) {
+  .checkout-page-wrap .wp-travel-checkout-section {
     order: 1;
   }
+}
+.checkout-page-wrap .wp-travel-checkout-section .checkout-left {
+  border-radius: 5px;
+  border-color: #ccc;
 }
 
 #shopping-cart {
@@ -5512,6 +5440,34 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   position: sticky;
   top: 20px;
   background-color: #fff;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+#shopping-cart .btn {
+  outline: none;
+  border: 1px solid #3399ff;
+  background-color: #efefef;
+  padding: .75em 1em;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+}
+#shopping-cart .btn.btn-primary {
+  background-color: #3399ff;
+  color: #fff;
+}
+#shopping-cart .btn.btn-primary:hover {
+  background-color: rgba(51, 153, 255, 0.7);
+  text-decoration: none;
+}
+#shopping-cart .btn.btn-dark {
+  background-color: #444;
+  color: #fff;
+  border-color: #444;
+}
+#shopping-cart .btn.btn-dark:hover {
+  background-color: rgba(68, 68, 68, 0.7);
+  text-decoration: none;
 }
 #shopping-cart .cart-summary .cart-header {
   padding: 1em 1.5em .5em;
@@ -5520,8 +5476,8 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   font-size: 18px;
   font-weight: bold;
   color: #444;
-  margin-bottom: .5em;
   display: flex;
+  margin: 0;
 }
 #shopping-cart .cart-summary .cart-header .title svg {
   width: 20px;
@@ -5535,6 +5491,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   color: #999;
   font-weight: 500;
   font-size: 14px;
+  margin: 0;
 }
 #shopping-cart .cart-summary .cart-header .subtitle strong {
   display: inline-block;
@@ -5547,7 +5504,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 #shopping-cart .cart-summary .list-group {
   list-style: none;
   padding: 0 1.5em;
-  margin-top: 1em;
+  margin: 1em 0 0 0;
 }
 #shopping-cart .cart-summary .list-group li {
   position: relative;
@@ -5580,6 +5537,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 #shopping-cart .cart-summary .list-group li > div img {
   max-width: 100%;
   width: 100%;
+  max-width: 60px;
   height: 60px;
   object-fit: cover;
 }
@@ -5593,6 +5551,9 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 }
 #shopping-cart .cart-summary .list-group li > div .content-right {
   flex: 1;
+}
+#shopping-cart .cart-summary .list-group li > div .content-right h5 {
+  margin: 0;
 }
 #shopping-cart .cart-summary .list-group li > div .content-right h5 a {
   text-decoration: none;
@@ -5616,17 +5577,21 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 #shopping-cart .cart-summary .list-group li > div .price {
   flex: 0 0 20%;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 #shopping-cart .cart-summary .list-group li > div .price span {
   font-weight: 600;
 }
 #shopping-cart .cart-summary .list-group li > div .edit {
-  display: inline-block;
-  margin-top: .5em;
+  display: inline-flex;
+  align-items: center;
 }
 #shopping-cart .cart-summary .list-group li > div .edit svg {
   width: 15px;
   height: 15px;
+  margin-right: .25em;
 }
 #shopping-cart .cart-summary .list-group li > div .edit svg path {
   fill: #3399ff;
@@ -5644,21 +5609,11 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   justify-content: space-between;
   border-bottom: 1px solid #eee;
   padding-bottom: 1em;
-}
-@media (max-width: 575px) {
-  #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  margin-bottom: 1em;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div {
   display: flex;
   align-items: center;
-}
-@media (max-width: 575px) {
-  #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div {
-    flex: auto;
-  }
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div > .input-group {
   margin-right: 10px;
@@ -5691,6 +5646,10 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   font-size: 14px;
   padding: .5em;
   height: 30px;
+  -moz-appearance: textfield;
+}
+#shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .qty::-webkit-inner-spin-button, #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .prices {
   font-size: 14px;
@@ -5702,7 +5661,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   text-align: right;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .trip-submit .btn {
-  font-size: 14px;
+  font-size: 12px;
 }
 #shopping-cart .cart-summary .cart-summary-bottom {
   border-top: 1px solid #efefef;
@@ -5714,13 +5673,19 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2em;
   flex-wrap: wrap;
 }
 @media (max-width: 575px) {
   #shopping-cart .cart-summary .cart-summary-bottom .flex-wrapper {
     flex-direction: column-reverse;
   }
+}
+#shopping-cart .cart-summary .cart-summary-bottom .flex-wrapper .update-cart-form {
+  margin-bottom: 1em;
+}
+#shopping-cart .cart-summary .cart-summary-bottom .flex-wrapper .price-calculate {
+  margin: 0;
+  margin-bottom: 1em;
 }
 #shopping-cart .cart-summary .cart-summary-bottom p {
   font-size: 14px;
@@ -5744,6 +5709,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 #shopping-cart .cart-summary .cart-summary-bottom .checkout-btn {
   display: block;
   margin-top: 1em;
+  border-radius: 4px;
 }
 #shopping-cart .cart-summary .cart-summary-bottom .update-cart-form .field-inline {
   display: flex;
@@ -5757,6 +5723,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 }
 #shopping-cart .cart-summary .cart-summary-bottom .update-cart-form .field-inline .btn {
   font-size: 12px;
+  margin: 0;
 }
 #shopping-cart .cart-summary .cart-summary-bottom .update-cart-form .field-inline .error {
   position: absolute;
@@ -5777,7 +5744,6 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 }
 #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .total-price {
   text-align: center;
-  margin: 1em 0;
 }
 @media (max-width: 575px) {
   #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .total-price {
@@ -5786,6 +5752,7 @@ input[type=number].wp-travel-form-control, .wp-travel-tab-wrapper .wp-travel-boo
 }
 #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .total-price p {
   font-size: 18px;
+  margin: 0;
 }
 #shopping-cart .cart-summary .cart-summary-bottom .price-calculate .price-description {
   text-align: center;
