@@ -6326,88 +6326,42 @@ li {
 //Cart and checkout page
 
 $primaryColor: #3399ff;
-.page-checkout{
-    padding-top: 100px;
-    padding-bottom: 100px;
-    hr{
-        border: .1px solid #ccc;
-        margin-bottom: 1em;
-    }
-}
 
-.checkout-page-wrapper{
+.checkout-page-wrap{
     display: grid;
     grid-template-columns: 1fr 35%;
     grid-gap: 100px;
-    margin-top: 50px;
+	margin-top: 50px;
+	>div{
+		width: 100%;
+	}
     @media(max-width: 1199px){
-        grid-template-columns: 1fr 42%;
+		grid-template-columns: 1fr 42%;
         grid-gap: 30px;
     }
     @media(max-width: 991px){
         grid-template-columns: 1fr;
-    }
-}
-
-.wp-travel-form-group{
-    margin-bottom: 1em;
-    label{
-        margin-bottom: .5em;
-        display: inline-block;
-    }
-}
-
-.wp-travel-form-control{
-    width: 100%;
-    padding: .75em 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.wp-travel-row{
-    margin: 0 -15px;
-    display: flex;
-    flex-wrap: wrap;
-    .wp-travel-col-6{
-        flex: 0 0 50%;
-        padding: 0 15px;
-    }
-}
-
-select.wp-travel-form-control{
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    background-image: url("../img/down-chevron.svg");
-    background-size: 10px;
-    background-position: right 10px center;
-    background-repeat: no-repeat;
-}
-
-input[type=number].wp-travel-form-control::-webkit-inner-spin-button,input[type=number].wp-travel-form-control::-webkit-outer-spin-button,{
-    -webkit-appearance: none;
-}
-
-input[type=number].wp-travel-form-control{
-    -moz-appearance: textfield;
-}
-
-.checkout-form{
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    padding: 1em 2em;
-    @media(max-width: 991px){
-        order: 2;
-    }
-    h2{
-        margin-bottom: 1em;
-    }
-}
-
-.wp-travel-cart-sidebar{
-    @media(max-width: 991px){
-        order: 1;
-    }
+	}
+	.wp-travel-minicart{
+		@media(min-width: 992px){
+			order: 2;
+		}
+		.sticky-sidebar{
+			.checkout-right{
+				padding: 0;
+				border: 0;
+			}
+		}
+	}
+	.wp-travel-checkout-section{
+		@media(min-width: 992px){
+			order: 1;
+		}
+		.checkout-left{
+			border-radius: 5px;
+			border-color: #ccc;
+		}
+	}
 }
 
 // Cart
@@ -6419,7 +6373,34 @@ $primaryColor: #3399ff;
     position: sticky;
     top: 20px;
     background-color: #fff;
-    //box-shadow: 0 20px 30px rgba(0,0,0, .15);
+	box-shadow: 0 20px 30px rgba(0,0,0, .15);
+	.btn{
+		outline: none;
+		border: 1px solid $primaryColor;
+		background-color: #efefef;
+		padding: .75em 1em;
+		font-size: 16px;
+		font-weight: 500;
+		cursor: pointer;
+		text-align: center;
+		&.btn-primary{
+			background-color: $primaryColor;
+			color: #fff;
+			&:hover{
+				background-color: rgba($primaryColor, .7);
+				text-decoration: none;
+			}
+		}
+		&.btn-dark{
+			background-color: #444;
+			color: #fff;
+			border-color: #444;
+			&:hover{
+				background-color: rgba(#444, .7);
+				text-decoration: none;
+			}
+		}
+	}
     .cart-summary{
         .cart-header{
             padding: 1em 1.5em .5em;
@@ -6427,8 +6408,8 @@ $primaryColor: #3399ff;
                 font-size: 18px;
                 font-weight: bold;
                 color: #444;
-                margin-bottom: .5em;
-                display: flex;
+				display: flex;
+				margin: 0;
                 svg{
                     width: 20px;
                     height: 20px;
@@ -6441,7 +6422,8 @@ $primaryColor: #3399ff;
             .subtitle{
                 color: #999;
                 font-weight: 500;
-                font-size: 14px;
+				font-size: 14px;
+				margin: 0;
                 strong{
                     display: inline-block;
                     border-radius: 3px;
@@ -6455,7 +6437,7 @@ $primaryColor: #3399ff;
         .list-group{
             list-style: none;
             padding: 0 1.5em;
-            margin-top: 1em;
+            margin: 1em 0 0 0;
             li{
                 position: relative;
                 padding: 15px 0;
@@ -6484,7 +6466,8 @@ $primaryColor: #3399ff;
                     display: flex;
                     img{
                         max-width: 100%;
-                        width: 100%;
+						width: 100%;
+						max-width: 60px;
                         height: 60px;
                         object-fit: cover;
                     }
@@ -6499,6 +6482,7 @@ $primaryColor: #3399ff;
                     .content-right{
                         flex: 1;
                         h5{
+							margin: 0;
                             a{
                                 text-decoration: none;
                                 color: #444;
@@ -6522,17 +6506,21 @@ $primaryColor: #3399ff;
                     }
                     .price{
                         flex: 0 0 20%;
-                        text-align: right;
+						text-align: right;
+						display: flex;
+						flex-direction: column;
+						align-items: flex-end;
                         span{
                             font-weight: 600;
                         }
                     }
                     .edit{
-                        display: inline-block;
-                        margin-top: .5em;
+                        display: inline-flex;
+                        align-items: center;
                         svg{
                             width: 15px;
-                            height: 15px;
+							height: 15px;
+							margin-right: .25em;
                             path{
                                 fill: $primaryColor;
                             }
@@ -6540,7 +6528,7 @@ $primaryColor: #3399ff;
                     }
                 }
                 .update-fields-collapse{
-                    margin-top: 1em;
+					margin-top: 1em;
                     display: none;
                     form{
                         width: 100%;
@@ -6550,17 +6538,18 @@ $primaryColor: #3399ff;
                         align-items: center;
                         justify-content: space-between;
                         border-bottom: 1px solid #eee;
-                        padding-bottom: 1em;
-                        @media(max-width: 575px){
-                            flex-direction: column;
-                            align-items: flex-start;
-                        }
+						padding-bottom: 1em;
+						margin-bottom: 1em;
+                        // @media(max-width: 575px){
+                        //     flex-direction: column;
+                        //     align-items: flex-start;
+                        // }
                         >div{
                             display: flex;
                             align-items: center;
-                            @media(max-width: 575px){
-                                flex: auto;
-                            }
+                            // @media(max-width: 575px){
+                            //     flex: auto;
+                            // }
                             > .input-group{
                                 margin-right: 10px;
                                 display: flex;
@@ -6592,7 +6581,11 @@ $primaryColor: #3399ff;
                             border-color: $primaryColor;
                             font-size: 14px;
                             padding: .5em;
-                            height: 30px;
+							height: 30px;
+							-moz-appearance: textfield;
+							&::-webkit-inner-spin-button, &::-webkit-outer-spin-button{
+								-webkit-appearance: none;
+							}
                         }
                         .prices{
                             font-size: 14px;
@@ -6604,7 +6597,7 @@ $primaryColor: #3399ff;
                     .trip-submit{
                         text-align: right;
                         .btn{
-                            font-size: 14px;
+							font-size: 12px;
                         }
                     }
                 }
@@ -6619,11 +6612,17 @@ $primaryColor: #3399ff;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-				margin-bottom: 2em;
 				flex-wrap: wrap;
                 @media(max-width: 575px){
                     flex-direction: column-reverse;
-                }
+				}
+				.update-cart-form{
+					margin-bottom: 1em;
+				}
+				.price-calculate{
+					margin: 0;
+					margin-bottom: 1em;
+				}
             }
             p{
                 font-size: 14px;
@@ -6646,7 +6645,8 @@ $primaryColor: #3399ff;
             }
             .checkout-btn{
                 display: block;
-                margin-top: 1em;
+				margin-top: 1em;
+				border-radius: 4px;
             }
             .update-cart-form{
                 .field-inline{
@@ -6659,7 +6659,8 @@ $primaryColor: #3399ff;
                         max-width: 140px;
                     }
                     .btn{
-                        font-size: 12px;
+						font-size: 12px;
+						margin: 0;
                     }
                     .error{
                         position: absolute;
@@ -6683,19 +6684,16 @@ $primaryColor: #3399ff;
             .price-calculate{
                 .total-price{
                     text-align: center;
-                    margin: 1em 0;
                     @media(max-width: 575px){
                         margin-top: 0;
                     }
                     p{
-                        font-size: 18px;
+						font-size: 18px;
+						margin: 0;
                     }
                 }
                 .price-description{
                     text-align: center;
-                    p{
-
-                    }
                 }
             }
         }
