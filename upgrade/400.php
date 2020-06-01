@@ -453,9 +453,9 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 		global $wpdb;
 		$migrate_400 = get_option( 'wp_travel_migrate_400' );
 
-		// if ( $migrate_400 && 'yes' === $migrate_400 ) {
-		// return;
-		// }
+		if ( $migrate_400 && 'yes' === $migrate_400 ) {
+			return;
+		}
 
 		/**
 		 * @todo WP Travel Table need to get from function/class.
@@ -509,8 +509,8 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 			wp_travel_migrate_data_to_400( $tables );
 		}
 
-		// update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
-		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
+		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
+		update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
 
 	}
 }
