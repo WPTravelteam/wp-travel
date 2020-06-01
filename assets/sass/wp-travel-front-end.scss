@@ -6403,22 +6403,22 @@ $primaryColor: #3399ff;
     top: 20px;
     background-color: #fff;
 	box-shadow: 0 20px 30px rgba(0,0,0, .15);
+	a{
+		color: $primaryColor;
+	}
 	.btn{
 		outline: none;
 		// border: 1px solid $primaryColor;
-		// background-color: #efefef;
+		background-color: $primaryColor;
+		color: #fff;
 		padding: .75em 1em;
 		font-size: 16px;
 		font-weight: 500;
 		cursor: pointer;
 		text-align: center;
-		&.btn-primary{
-			// background-color: $primaryColor;
-			// color: #fff;
-			&:hover{
-				// background-color: rgba($primaryColor, .7);
-				// text-decoration: none;
-			}
+		&:hover{
+			background-color: rgba($primaryColor, .7);
+			text-decoration: none;
 		}
 		&.btn-dark{
 			background-color: #444;
@@ -6514,7 +6514,7 @@ $primaryColor: #3399ff;
                         flex: 1;
                         h5{
 							margin: 0;
-							line-height: 2;
+							line-height: 1;
                             a{
                                 text-decoration: none;
                                 color: #444;
