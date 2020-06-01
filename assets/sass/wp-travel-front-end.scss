@@ -6397,19 +6397,19 @@ $primaryColor: #3399ff;
 	box-shadow: 0 20px 30px rgba(0,0,0, .15);
 	.btn{
 		outline: none;
-		border: 1px solid $primaryColor;
-		background-color: #efefef;
+		// border: 1px solid $primaryColor;
+		// background-color: #efefef;
 		padding: .75em 1em;
 		font-size: 16px;
 		font-weight: 500;
 		cursor: pointer;
 		text-align: center;
 		&.btn-primary{
-			background-color: $primaryColor;
-			color: #fff;
+			// background-color: $primaryColor;
+			// color: #fff;
 			&:hover{
-				background-color: rgba($primaryColor, .7);
-				text-decoration: none;
+				// background-color: rgba($primaryColor, .7);
+				// text-decoration: none;
 			}
 		}
 		&.btn-dark{
@@ -6584,8 +6584,8 @@ $primaryColor: #3399ff;
                         }
                         .input-group-btn{
                             .btn{
-                                background: $primaryColor;
-                                color: #fff;
+                                // background: $primaryColor;
+                                // color: #fff;
                                 padding: .45em .25em;
                                 width: 20px;
                                 height: 30px;
@@ -6599,7 +6599,8 @@ $primaryColor: #3399ff;
                             width: 40px;
                             text-align: center;
                             border-radius: 0;
-                            border-color: $primaryColor;
+							border-color: transparent;
+							background: none;
                             font-size: 14px;
                             padding: .5em;
 							height: 30px;

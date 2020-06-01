@@ -5454,21 +5454,11 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .btn {
   outline: none;
-  border: 1px solid #3399ff;
-  background-color: #efefef;
   padding: .75em 1em;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   text-align: center;
-}
-#shopping-cart .btn.btn-primary {
-  background-color: #3399ff;
-  color: #fff;
-}
-#shopping-cart .btn.btn-primary:hover {
-  background-color: rgba(51, 153, 255, 0.7);
-  text-decoration: none;
 }
 #shopping-cart .btn.btn-dark {
   background-color: #444;
@@ -5638,8 +5628,6 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   }
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .input-group-btn .btn {
-  background: #3399ff;
-  color: #fff;
   padding: .45em .25em;
   width: 20px;
   height: 30px;
@@ -5652,7 +5640,8 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   width: 40px;
   text-align: center;
   border-radius: 0;
-  border-color: #3399ff;
+  border-color: transparent;
+  background: none;
   font-size: 14px;
   padding: .5em;
   height: 30px;
