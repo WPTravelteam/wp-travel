@@ -62,7 +62,9 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wp_travel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
-						$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
+						if( ! empty( $cart_extras ) ) {
+							$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
+						}
 
 						$cart_pax = (array) $cart_item['trip'];
 						// print_r( $cart_pax );
