@@ -250,20 +250,21 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 									$times = get_post_meta( $trip_id, 'wp_travel_trip_time', true );
 
 									$selected_times = ! empty( $times ) && isset( $times[ $old_date_id ] ) && isset( $times[ $old_date_id ]['times'] ) ? $times[ $old_date_id ]['times'] : array();
-									// error_log( print_r( $old_date_id, true ) );
-									// error_log( print_r( $old_date, true ) );
-									// error_log( print_r( $times, true ) );
-									// error_log( print_r( $selected_times, true ) );
-									// if ( is_array( $selected_times ) && count( $selected_times ) > 0 ) {
-									// 	foreach ( $selected_times as $selected_time ) {
-									// 		$selected_time = date("H:i", strtotime($selected_time));
-									// 		error_log( $selected_time );
-									// 	}
-									// }
-									// error_log( '===' );
+									
 									$pricing_options = $old_date['pricing_options'];
 									$new_pricing_ids = array();
+									$selected_times_migration = array(); // quick fix.
 									foreach ( $pricing_options as $pricing_option_key ) {
+										/// Trip Time Migration
+										if ( is_array( $selected_times ) && count( $selected_times ) > 0 ) {
+											foreach ( $selected_times as $selected_time ) {
+												$selected_time = date("H:i", strtotime($selected_time));
+												if ( $selected_time ) {
+													$selected_times_migration[] = $selected_time;
+												}
+											}
+										}
+										/// End of Trip Time Migration
 
 										if ( isset( $temp_pricing_ids[ $pricing_option_key ] ) ) {
 											$new_pricing_ids[] = $temp_pricing_ids[ $pricing_option_key ];
@@ -304,6 +305,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 											// Inventory Migration ends.
 										}
 									}
+									// error_log( print_r( $selected_times_migration, true )  );
 									// Insert New Date along with new pricing ids.
 									$wpdb->insert(
 										$dates_table,
@@ -318,7 +320,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 											'date_days'   => '',
 											'start_date'  => $old_date['start_date'],
 											'end_date'    => $old_date['end_date'],
-											'trip_time'   => '',
+											'trip_time'   => implode( ',', $selected_times_migration ),
 											'pricing_ids' => implode( ', ', $new_pricing_ids ),
 										),
 										array(

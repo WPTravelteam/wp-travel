@@ -1049,11 +1049,10 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 	if ( ! $trip_id ) {
 		return;
 	}
-
+	$settings = wp_travel_get_settings();
+	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 	$price = 0;
-
-	if ( 'yes' !== get_option( 'wp_travel_migrate_400' ) ) : // Follow the tradtion to get price.
-
+	if ( 'yes' !== $switch_to_v4 ) : // Follow the tradtion to get price.
 		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
@@ -1138,6 +1137,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 		} else { // Default single pricing price
 			$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
 		}
+		$price = apply_filters( 'wp_travel_price', $price ); // Do not need wp_travel filter because it is already filtered.
 		// TODO: Group Implementation.
 	else : // New way to grab price @since 4.0.0
 
@@ -1191,7 +1191,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 		}
 	endif;
 
-	$price = apply_filters( 'wp_travel_price', $price );
+	
 
 	return $price;
 }
