@@ -5505,6 +5505,9 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   background-color: rgba(68, 68, 68, 0.7);
   text-decoration: none;
 }
+#shopping-cart .cart-summary {
+  position: relative;
+}
 #shopping-cart .cart-summary .cart-header {
   padding: 1em 1.5em 0.5em;
 }
