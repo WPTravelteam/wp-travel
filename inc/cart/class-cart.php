@@ -364,6 +364,7 @@ class WP_Travel_Cart {
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 				$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 				$price_key     = $this->items[ $cart_item_id ]['price_key'];
+				$pricing_id    = $this->items[ $cart_item_id ]['pricing_id'];
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				// Custom Trip Price.

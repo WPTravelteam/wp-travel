@@ -127,18 +127,18 @@ class WP_Travel_Ajax {
 	function wp_travel_add_to_cart() {
 		$post_data = $_POST;
 		$postData = json_decode( file_get_contents('php://input') );
-		$post_data = ! empty( $postData ) ? (array) $postData : $post_data;
+ 		$post_data = ! empty( $postData ) ? (array) $postData : $post_data;
 
 		if ( ! isset( $post_data['trip_id'] ) ) {
 			return;
 		}
 		global $wt_cart;
 
-		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 
-		if ( ! $allow_multiple_cart_items ) {
-			$wt_cart->clear();
-		}
+		// if ( ! $allow_multiple_cart_items ) {
+		// 	$wt_cart->clear();
+		// }
 
 		$trip_id        = $post_data['trip_id'];
 		$price_key      = isset( $post_data['price_key'] ) ? $post_data['price_key'] : '';
@@ -217,7 +217,7 @@ class WP_Travel_Ajax {
 				$trip_price_partial += $category_price_partial;
 			}
 			$attrs['trip'] = $trip;
-			$pax   = $total_pax;
+			// $pax   = $total_pax;
 		} else {
 			$pax        = array_sum( (array) $pax );
 			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
@@ -260,6 +260,10 @@ class WP_Travel_Ajax {
 		// Custom Trip Price.
 		if ( isset( $post_data['trip_price'] ) && $post_data['trip_price'] > 0 ) {
 			$trip_price = $post_data['trip_price'];
+			if ( wp_travel_is_partial_payment_enabled() ) {
+				$percent            = wp_travel_get_actual_payout_percent( $trip_id );
+				$trip_price_partial = $trip_price * $percent / 100;
+			}
 		}
 
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
@@ -292,10 +296,10 @@ class WP_Travel_Ajax {
 				$pax += $items[ $cart_item_id ]['pax'];
 				$wt_cart->update( $cart_item_id, $pax );
 			} else {
-				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
+				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
 			}
 		} else {
-			$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $pax, $price_key, $attrs );
+			$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
 		}
 		echo true;
 

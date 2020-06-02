@@ -45,14 +45,14 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 					</div>
 					<ul class="cart-summary-content list-group">
 					<?php
-					foreach ( $cart_items as $cart_id => $cart_item ) {
+					foreach( $cart_items as $cart_id => $cart_item ) {
 						$pricing_id   = $cart_item['pricing_id'];
 						$pricings     = $cart_item['trip_data']['pricings']; // all pricings
 						$cart_pricing = null;
 						$trip_data    = $cart_item['trip_data'];
-						foreach ( $pricings as $pricing ) { // getting pricing here.
+						foreach( $pricings as $pricing ) { // getting pricing here.
 							$pricing = (array) $pricing;
-							if ( $pricing['id'] == $pricing_id ) {
+							if ( $pricing['id'] ==  $pricing_id ) {
 								$cart_pricing = $pricing;
 								break;
 							}
@@ -62,7 +62,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wp_travel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
-						if ( ! empty( $cart_extras ) ) {
+						if( ! empty( $cart_extras ) ) {
 							$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
 						}
 
@@ -80,24 +80,27 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 									<h5><a href="javascript:void(0);"><?php echo esc_html( $trip_data['title'] ); ?></a></h5>
 									<div class="meta-content">
 									<?php
-									// $category_total = 0;
-									// foreach ( $cart_pax as $category_id => $detail ) {
-									// $category = $categories[$category_id];
-									// $ctitle   = $category['term_info']['title'];
-									// $pax      = (int) $detail['pax'];
-
-									// $price_per_group = $category['price_per'] == 'group';
-
-									// $category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
-									// $category_total += $pax * (float) $category_price;
-									// echo "<span><span data-wpt-category-count=\"" . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
-									// }
-									// $cart_total += $category_total;
+									foreach ( $cart_pax as $category_id => $detail ) {
+										$category = $categories[$category_id];
+										$ctitle   = $category['term_info']['title'];
+										$pax      = (int) $detail['pax'];
+										echo "<span><span data-wpt-category-count=\"" . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
+									}
+									// Trip Total Calculation
+									$trip_total = $cart_item[ 'trip_price' ];
+									foreach ( $cart_extras as $xid => $count ) {
+										$tx = $trip_extras[$xid];
+										if ( isset( $tx['tour_extras_metas'] ) ) :
+											$tx_price    = $tx['is_sale'] ? $tx['tour_extras_metas']['extras_item_sale_price'] : $tx['tour_extras_metas']['extras_item_price'];
+											$tx_total    = (int) $count * (int) $tx_price;
+											$trip_total += $tx_total;
+										endif;
+									}
 									?>
 									</div>
 								</div>
 								<div class="price">
-									<span><?php echo $currency_symbol . '<span data-wpt-item-total="' . $cart['cart']['cart_total_regular'] . '">' . $cart['cart']['cart_total_regular'] . '</span>'; ?></span>
+									<span><?php echo $currency_symbol . '<span data-wpt-item-total="' . $trip_total . '">' . $trip_total . '</span>'; ?></span>
 									<a href="javascript:void(0);" class="edit" data-wpt-target-cart-id="<?php echo esc_attr( $cart_id ); ?>" data-wpt-target-trip="<?php echo esc_attr( $trip_data['id'] ); ?>" data-wpt-target-pricing="<?php echo esc_attr( $cart_pricing['id'] ); ?>"><svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m384.721 0-323.626 323.627-61.095 188.373 188.374-61.094 323.626-323.627zm84.853 127.279-42.427 42.427-84.853-84.853 42.426-42.427zm-388.611 232.331 71.427 71.428-32.036 10.39-49.782-49.782zm14.501-27.925 225.617-225.618 31.82 31.82-225.618 225.617zm53.032 53.032 225.618-225.619 31.82 31.82-225.618 225.619zm-88.313 38.965 28.136 28.136-41.642 13.505z"></path></g></svg> Edit</a>
 								</div>
 							</div>
@@ -106,16 +109,15 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 									<?php
 									// $category_total = 0;
 									foreach ( $cart_pax as $category_id => $detail ) {
-										$category = $categories[ $category_id ];
+										$category = $categories[$category_id];
 										$ctitle   = $category['term_info']['title'];
 										$pax      = (int) $detail['pax'];
-
+										
 										$price_per_group = $category['price_per'] == 'group';
 
 										$category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
 
 										$category_total = $price_per_group ? $category_price : $pax * (float) $category_price;
-										$category_total = $pax > 0 ? $category_total : 0;
 
 										$min_pax = ! empty( $category['default_pax'] ) ? $category['default_pax'] : 0;
 										$max_pax = ! empty( $cart_pricing['max_pax'] ) ? $cart_pricing['max_pax'] : 999;
@@ -133,7 +135,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 													</span>
 												</div>
 												<span class="prices">
-													<?php echo $price_per_group ? '' : ' x ' . $currency_symbol . '<span data-wpt-category-price="' . $category_price . '">' . $category_price . '</span>'; ?>  <strong><?php echo $currency_symbol . '<span data-wpt-category-total="' . $category_total . '">' . $category_total . '</span>'; ?></strong>
+													<?php echo $price_per_group ? ''  : ' x ' . $currency_symbol . '<span data-wpt-category-price="' . $category_price . '">' . $category_price . '</span>'; ?>  <strong><?php echo $currency_symbol . '<span data-wpt-category-total="' . $category_total . '">'  . $category_total . '</span>'; ?></strong>
 												</span>
 											</div>
 										</div>
@@ -148,14 +150,14 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
 												<?php
-												if ( isset( $tx['tour_extras_metas'] ) ) :
+												if ( isset( $tx['tour_extras_metas'] ) ) : 
 													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 													$tx_price    = $tx['is_sale'] ? $tx['tour_extras_metas']['extras_item_sale_price'] : $tx['tour_extras_metas']['extras_item_price'];
 													$tx_total    = $tx_count * (int) $tx_price;
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
-													$cart_total += $tx_total;
+													// $cart_total += $tx_total;
 													$required    = isset( $tx['is_required'] ) && $tx['is_required']
-													?>
+												?>
 												<div>
 													<div class="input-group">
 														<span class="input-group-btn input-group-prepend">
@@ -170,7 +172,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 												<?php endif; ?>
 											</div>
 											<?php
-										}
+										}	
 									}
 									?>
 									<div class="trip-submit">
@@ -183,13 +185,31 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 					}
 					?>
 					</ul>
+					<ul class="extra-fields">
+						<li>
+							<label><?php esc_html_e( 'Subtotal' ); ?></label>
+							<div class="price"><strong><?php echo $currency_symbol . $cart['cart']['total']['cart_total']; ?></strong></div>
+						</li>
+						<?php if ( (float) $cart['cart']['total']['discount'] > 0 ) : ?>
+							<li>
+								<label><?php esc_html_e( 'Discount' ); ?></label>
+								<div class="price"><strong><?php echo '- ' . $currency_symbol . $cart['cart']['total']['discount']; ?></strong></div>
+							</li>
+						<?php endif; ?>
+						<?php if ( (float) $cart['cart']['total']['tax'] > 0 ) : ?>
+							<li>
+								<label><?php echo sprintf( esc_html__( 'Tax(%s)', 'wp-travel' ), '13 fake' ); ?></label>
+								<div class="price"><strong><?php echo '+ ' . $currency_symbol . $cart['cart']['total']['tax']; ?></strong></div>
+							</li>
+						<?php endif; ?>
+					</ul>
 					<div class="cart-summary-bottom">
 						<div class="flex-wrapper">
 							<form id="wp-travel-coupon-form" action="" class="update-cart-form">
 								<?php
 								$coupon_applied = $cart['cart']['coupon_applied'];
-								$readonly       = '';
-								$disabled       = '';
+								$readonly = '';
+								$disabled = '';
 								if ( $coupon_applied ) {
 									$readonly = 'readonly';
 									$disabled = 'disabled="disabled"';
@@ -198,7 +218,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 								?>
 								<div class="field-inline">
 									<input type="text" <?php echo esc_attr( $readonly ); ?> class="coupon-input-field" placeholder="<?php esc_attr_e( 'Enter promo code', 'wp-travel' ); ?>">
-									<button type="submit" <?php echo esc_attr( $disabled ); ?> class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-travel' ); ?>">
+									<button type="submit" <?php echo esc_attr( $disabled ); ?> class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-travel'); ?>">
 										<?php $coupon_applied ? esc_html_e( 'Coupon Applied', 'wp-travel' ) : esc_html_e( 'Apply Coupon', 'wp-travel' ); ?>
 									</button>
 								</div>
@@ -208,8 +228,8 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 									<p><?php esc_html_e( 'Total:', 'wp-travel' ); ?>
 										<strong>
 											<?php echo $currency_symbol; ?>
-											<?php echo $cart['cart']['cart_total'] < $cart['cart']['cart_total_regular'] ? '<del data-wpt-cart-full-total="">' . $cart['cart']['cart_total_regular'] . '</del>' : '<del data-wpt-cart-full-total=""></del>'; ?>
-											<?php echo '<span data-wpt-cart-total="' . $cart['cart']['cart_total'] . '">' . $cart['cart']['cart_total'] . '</span>'; ?>
+											<?php echo (float) $cart['cart']['total']['cart_total'] > (float) $cart['cart']['total']['total'] ? '<del data-wpt-cart-full-total="">' . $cart['cart']['total']['cart_total'] . '</del>' : '<del data-wpt-cart-full-total=""></del>'; ?>
+											<?php echo '<span data-wpt-cart-total="' . $cart['cart']['total']['total'] . '">' . $cart['cart']['total']['total'] . '</span>'?>
 										</strong>
 									</p>
 								</div>
@@ -325,17 +345,17 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 						foreach ( $cart_trip as $category_id => $category ) {
 							$category_type = isset( $category['type'] ) ? $category['type'] : '';
 							$price_per     = isset( $category['price_per'] ) ? $category['price_per'] : 'person';
-							$price         = $category['price'];
+							$price = $category['price'];
 							$price_partial = $category['price_partial'];
-							$pax           = $category['pax'];
+							$pax   = $category['pax'];
 
-							if ( 'custom' === $category_type && isset( $category['custom_label'] ) && ! empty( $category['custom_label'] ) ) {
+							if( 'custom' === $category_type && isset( $category['custom_label'] ) && ! empty( $category['custom_label'] ) ) {
 								$label = $category['custom_label'];
-							} else {
+							} else{
 								$label = wp_travel_get_pricing_category_by_key( $category_type );
 							}
 							if ( 'group' !== $price_per ) {
-								$price         *= $pax;
+								$price *= $pax;
 								$price_partial *= $pax;
 								$args           = array(
 									'trip_id'       => $trip_id,
