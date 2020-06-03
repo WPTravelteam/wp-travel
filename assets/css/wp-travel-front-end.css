@@ -5473,6 +5473,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 22222222222;
 }
 #shopping-cart .wp-travel-cart-loader svg {
   width: 30px;
@@ -5705,6 +5706,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .prices {
   font-size: 14px;
   width: 130px;
+  text-align: right;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group .prices strong {
   margin-left: .75em;

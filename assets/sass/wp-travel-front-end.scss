@@ -6415,7 +6415,8 @@ $primaryColor: #3399ff;
         background-color: rgba(#fff, .8);
         display: flex;
         justify-content: center;
-        align-items: center;
+		align-items: center;
+		z-index: 22222222222;
         svg{
             width: 30px;
             height: 30px;
@@ -6653,6 +6654,7 @@ $primaryColor: #3399ff;
                         .prices{
 							font-size: 14px;
 							width: 130px;
+							text-align: right;
 							strong{
 								margin-left: .75em;
 							}
