@@ -6406,7 +6406,7 @@ $primaryColor: #3399ff;
 	a{
 		color: $primaryColor;
 	}
-	#loader{
+	.wp-travel-cart-loader{
         position: absolute;
         top: 0;
         left: 0;
@@ -6447,6 +6447,12 @@ $primaryColor: #3399ff;
 				background-color: rgba(#444, .7);
 				text-decoration: none;
 			}
+		}
+	}
+	button, a{
+		&:disabled{
+			opacity: .7;
+			pointer-events: none;
 		}
 	}
     .cart-summary{
@@ -6645,7 +6651,11 @@ $primaryColor: #3399ff;
 							}
                         }
                         .prices{
-                            font-size: 14px;
+							font-size: 14px;
+							width: 130px;
+							strong{
+								margin-left: .75em;
+							}
                         }
                     }
                     h4{
@@ -6670,9 +6680,6 @@ $primaryColor: #3399ff;
                 align-items: center;
                 border-top: 1px solid #eee;
                 padding: 1em 0;
-                &:last-child{
-                    padding-bottom: 0;
-                }
                 label{
                     margin: 0;
                 }
@@ -6682,7 +6689,7 @@ $primaryColor: #3399ff;
             border-top: 1px solid #efefef;
             background-color: #fff;
             padding: 1em 1.5em 1em;
-            margin-top: 1em;
+            // margin-top: 1em;
             .flex-wrapper{
                 display: flex;
                 align-items: center;
