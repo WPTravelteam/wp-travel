@@ -39,6 +39,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 		<div class="wp-travel-cart-sidebar">
 			<div id="shopping-cart">
 				<div class="cart-summary">
+					<div id="loader" class="wp-travel-cart-loader" style="display:none;"><svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M256.001,0c-8.284,0-15,6.716-15,15v96.4c0,8.284,6.716,15,15,15s15-6.716,15-15V15C271.001,6.716,264.285,0,256.001,0z"></path><path d="M256.001,385.601c-8.284,0-15,6.716-15,15V497c0,8.284,6.716,15,15,15s15-6.716,15-15v-96.399 C271.001,392.316,264.285,385.601,256.001,385.601z"></path><path d="M196.691,123.272l-48.2-83.485c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49l48.2,83.485 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012C198.375,139.62,200.833,130.446,196.691,123.272z"></path><path d="M389.491,457.212l-48.199-83.483c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49 l48.199,83.483c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012 C391.175,473.56,393.633,464.386,389.491,457.212z"></path><path d="M138.274,170.711L54.788,122.51c-7.176-4.144-16.348-1.685-20.49,5.49c-4.142,7.174-1.684,16.348,5.49,20.49 l83.486,48.202c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.503 C147.906,184.027,145.448,174.853,138.274,170.711z"></path><path d="M472.213,363.51l-83.484-48.199c-7.176-4.142-16.349-1.684-20.49,5.491c-4.142,7.175-1.684,16.349,5.49,20.49 l83.484,48.199c2.363,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502 C481.845,376.825,479.387,367.651,472.213,363.51z"></path><path d="M111.401,241.002H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h96.401c8.284,0,15-6.716,15-15 S119.685,241.002,111.401,241.002z"></path><path d="M497,241.002h-96.398c-8.284,0-15,6.716-15,15s6.716,15,15,15H497c8.284,0,15-6.716,15-15S505.284,241.002,497,241.002z"></path><path d="M143.765,320.802c-4.142-7.175-13.314-9.633-20.49-5.49l-83.486,48.2c-7.174,4.142-9.632,13.316-5.49,20.49 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012l83.486-48.2 C145.449,337.15,147.907,327.976,143.765,320.802z"></path><path d="M477.702,128.003c-4.142-7.175-13.315-9.632-20.49-5.49l-83.484,48.2c-7.174,4.141-9.632,13.315-5.49,20.489 c2.778,4.813,7.82,7.503,13.004,7.503c2.544,0,5.124-0.648,7.486-2.012l83.484-48.2 C479.386,144.351,481.844,135.177,477.702,128.003z"></path><path d="M191.201,368.239c-7.174-4.144-16.349-1.685-20.49,5.49l-48.2,83.485c-4.142,7.174-1.684,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502l48.2-83.485 C200.833,381.555,198.375,372.381,191.201,368.239z"></path><path d="M384.001,34.3c-7.175-4.144-16.349-1.685-20.49,5.49l-48.199,83.483c-4.143,7.174-1.685,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.502l48.199-83.483 C393.633,47.616,391.175,38.442,384.001,34.3z"></path></svg></div>
 					<div class="cart-header">
 						<h4 class="title"><img src="./img/shopping-cart.svg" alt=""><?php _e( 'Your Order', 'wp-travel' ); ?></h4>
 						<p class="subtitle"><?php echo wp_kses_post( sprintf( __( 'You have selected %s items in your cart', 'wp-travel' ), '<strong data-wpt-cart-item-count="">' . count( $cart_items ) . '</strong>' ) ); ?></p>
@@ -71,6 +72,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 						$cart_total = 0;
 						?>
 						<li class="list-group-item" data-cart-id="<?php echo esc_attr( $cart_id ); ?>">
+							<div id="loader" class="wp-travel-cart-loader" style="display:none;"><svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M256.001,0c-8.284,0-15,6.716-15,15v96.4c0,8.284,6.716,15,15,15s15-6.716,15-15V15C271.001,6.716,264.285,0,256.001,0z"></path><path d="M256.001,385.601c-8.284,0-15,6.716-15,15V497c0,8.284,6.716,15,15,15s15-6.716,15-15v-96.399 C271.001,392.316,264.285,385.601,256.001,385.601z"></path><path d="M196.691,123.272l-48.2-83.485c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49l48.2,83.485 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012C198.375,139.62,200.833,130.446,196.691,123.272z"></path><path d="M389.491,457.212l-48.199-83.483c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49 l48.199,83.483c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012 C391.175,473.56,393.633,464.386,389.491,457.212z"></path><path d="M138.274,170.711L54.788,122.51c-7.176-4.144-16.348-1.685-20.49,5.49c-4.142,7.174-1.684,16.348,5.49,20.49 l83.486,48.202c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.503 C147.906,184.027,145.448,174.853,138.274,170.711z"></path><path d="M472.213,363.51l-83.484-48.199c-7.176-4.142-16.349-1.684-20.49,5.491c-4.142,7.175-1.684,16.349,5.49,20.49 l83.484,48.199c2.363,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502 C481.845,376.825,479.387,367.651,472.213,363.51z"></path><path d="M111.401,241.002H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h96.401c8.284,0,15-6.716,15-15 S119.685,241.002,111.401,241.002z"></path><path d="M497,241.002h-96.398c-8.284,0-15,6.716-15,15s6.716,15,15,15H497c8.284,0,15-6.716,15-15S505.284,241.002,497,241.002z"></path><path d="M143.765,320.802c-4.142-7.175-13.314-9.633-20.49-5.49l-83.486,48.2c-7.174,4.142-9.632,13.316-5.49,20.49 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012l83.486-48.2 C145.449,337.15,147.907,327.976,143.765,320.802z"></path><path d="M477.702,128.003c-4.142-7.175-13.315-9.632-20.49-5.49l-83.484,48.2c-7.174,4.141-9.632,13.315-5.49,20.489 c2.778,4.813,7.82,7.503,13.004,7.503c2.544,0,5.124-0.648,7.486-2.012l83.484-48.2 C479.386,144.351,481.844,135.177,477.702,128.003z"></path><path d="M191.201,368.239c-7.174-4.144-16.349-1.685-20.49,5.49l-48.2,83.485c-4.142,7.174-1.684,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502l48.2-83.485 C200.833,381.555,198.375,372.381,191.201,368.239z"></path><path d="M384.001,34.3c-7.175-4.144-16.349-1.685-20.49,5.49l-48.199,83.483c-4.143,7.174-1.685,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.502l48.199-83.483 C393.633,47.616,391.175,38.442,384.001,34.3z"></path></svg></div>
 							<button type="button" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>">×</button>
 							<div>
 								<div class="content-left">
@@ -146,6 +148,8 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
 										foreach ( $trip_extras as $tx ) {
 											$title = isset( $tx['title'] ) ? $tx['title'] : '';
+											$tx_count = 0;
+											$tx_price = 0;
 											?>
 											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
@@ -156,14 +160,14 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 													$tx_total    = $tx_count * (int) $tx_price;
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
 													// $cart_total += $tx_total;
-													$required    = isset( $tx['is_required'] ) && $tx['is_required']
+													$required    = isset( $tx['is_required'] ) && $tx['is_required'];
 												?>
 												<div>
 													<div class="input-group">
 														<span class="input-group-btn input-group-prepend">
 															<button class="btn" type="button" data-wpt-count-down>-</button>
 														</span>
-														<input readonly <?php echo $required ? 'required min="1"' : ''; ?> type="number" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" <?php echo esc_attr( $tx_min_attr ); ?> name="" id="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" min="1" value="<?php echo esc_attr( $tx_count ); ?>">
+														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" />
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
 															<?php echo ' x ' . $currency_symbol . '<span data-wpt-tx-price="' . $tx_price . '">' . $tx_price . '</span>' . ' = <strong>' . $currency_symbol . '<span data-wpt-tx-total="' . $tx_total . '">' . $tx_total . '</span>' . '</strong>'; ?>
@@ -176,7 +180,7 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 									}
 									?>
 									<div class="trip-submit">
-										<button type="submit" class="btn btn-primary"><?php esc_html_e( 'Update', 'wp-travel' ); ?></button>
+										<button type="submit" disabled="disabled" class="btn btn-primary"><?php esc_html_e( 'Update', 'wp-travel' ); ?></button>
 									</div>
 								</form>
 							</div>
@@ -186,28 +190,35 @@ if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
 					?>
 					</ul>
 					<ul class="extra-fields">
-						<li>
+						<li data-wpt-extra-field>
 							<label><?php esc_html_e( 'Subtotal' ); ?></label>
-							<div class="price"><strong><?php echo $currency_symbol . $cart['cart']['total']['cart_total']; ?></strong></div>
+							<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $cart['cart']['total']['cart_total'] ); ?>"><?php echo $currency_symbol . $cart['cart']['total']['cart_total']; ?></strong></div>
 						</li>
-						<?php if ( (float) $cart['cart']['total']['discount'] > 0 ) : ?>
-							<li>
-								<label><?php esc_html_e( 'Discount' ); ?></label>
-								<div class="price"><strong><?php echo '- ' . $currency_symbol . $cart['cart']['total']['discount']; ?></strong></div>
-							</li>
-						<?php endif; ?>
-						<?php if ( (float) $cart['cart']['total']['tax'] > 0 ) : ?>
-							<li>
-								<label><?php echo sprintf( esc_html__( 'Tax(%s)', 'wp-travel' ), '13 fake' ); ?></label>
-								<div class="price"><strong><?php echo '+ ' . $currency_symbol . $cart['cart']['total']['tax']; ?></strong></div>
-							</li>
-						<?php endif; ?>
+						<?php
+						$display  = $cart['cart']['total']['discount'] > 0 ? '' : 'display:none;';
+						$discount = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
+						?>
+						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
+							<label><?php esc_html_e( 'Discount:' ); ?></label>
+							<div class="price">
+								<strong data-wpt-cart-discount="<?php echo esc_attr( $discount ); ?>"><?php echo '- ' . $currency_symbol . $discount; ?></strong>
+							</div>
+						</li>
+						<?php
+						$display  = $cart['cart']['tax'] ? '' : 'display:none;';
+						$tax_rate = $cart['cart']['tax'] ? $cart['cart']['tax'] : '';
+						$tax      = $cart['cart']['tax'] ? $cart['cart']['total']['tax'] : '';
+						?>
+						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
+							<label><?php echo sprintf( esc_html__( 'Tax(%s):', 'wp-travel' ), $tax_rate . '%' ); ?></label>
+							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . $currency_symbol . $tax; ?></strong></div>
+						</li>
 					</ul>
 					<div class="cart-summary-bottom">
 						<div class="flex-wrapper">
 							<form id="wp-travel-coupon-form" action="" class="update-cart-form">
 								<?php
-								$coupon_applied = $cart['cart']['coupon_applied'];
+								$coupon_applied = isset( $cart['cart']['coupon']['coupon_id'] );
 								$readonly = '';
 								$disabled = '';
 								if ( $coupon_applied ) {
