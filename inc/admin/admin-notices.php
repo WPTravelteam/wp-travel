@@ -161,14 +161,14 @@ function wp_travel_pricing_table_created_notice_display( $show ) {
 	return $show;
 }
 
-add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 20 );
+add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 100 );
 
 
 function wp_travel_pricing_table_created_notice() {
 	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
 		?>
-		<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel Database Need an update. Please deactivate and activate your wp travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+		<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database need an update. Please deactivate and activate your wp travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
 		<?php
 	}
 }
-add_action( 'wp_travel_general_admin_notice', 'wp_travel_pricing_table_created_notice' );
+add_action( 'wp_travel_general_admin_notice', 'wp_travel_pricing_table_created_notice', 100 );
