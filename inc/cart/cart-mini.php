@@ -26,7 +26,7 @@ $currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : ''
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
-if ( isset( $settings[ 'wp_travel_switch_to_react' ] ) && 'yes' === $settings[ 'wp_travel_switch_to_react' ] ) {
+if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
 	if ( class_exists( 'WP_Travel_Helpers_Cart' ) ) {
 		$cart = WP_Travel_Helpers_Cart::get_cart();
 
@@ -191,7 +191,7 @@ if ( isset( $settings[ 'wp_travel_switch_to_react' ] ) && 'yes' === $settings[ '
 					</ul>
 					<ul class="extra-fields">
 						<li data-wpt-extra-field>
-							<label><?php esc_html_e( 'Subtotal' ); ?></label>
+							<label><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></label>
 							<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $cart['cart']['total']['cart_total'] ); ?>"><?php echo $currency_symbol . $cart['cart']['total']['cart_total']; ?></strong></div>
 						</li>
 						<?php
@@ -199,7 +199,7 @@ if ( isset( $settings[ 'wp_travel_switch_to_react' ] ) && 'yes' === $settings[ '
 						$discount = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
 						?>
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
-							<label><?php esc_html_e( 'Discount:' ); ?></label>
+							<label><?php esc_html_e( 'Discount:', 'wp-travel' ); ?></label>
 							<div class="price">
 								<strong data-wpt-cart-discount="<?php echo esc_attr( $discount ); ?>"><?php echo '- ' . $currency_symbol . $discount; ?></strong>
 							</div>

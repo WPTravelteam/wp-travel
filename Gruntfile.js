@@ -269,6 +269,18 @@ module.exports = function (grunt) {
 			]
 		},
 
+		babel: {
+			options: {
+				sourceMap: true,
+				presets: ['@babel/preset-env']
+			},
+			dist: {
+				files: {
+					'assets/js/cart.js': 'assets/js/src/cart.js'
+				}
+			}
+		},
+
 		// Compress files.
 		compress: {
 			deploy: {
@@ -345,6 +357,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
 	grunt.loadNpmTasks('grunt-writefile');
+	// grunt.loadNpmTasks('grunt-babel')
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -355,8 +368,10 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', []);
 
 	grunt.registerTask('gitattributes', ['file-creator']);
+	// grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
+		// 'babel',
 		'uglify',
 		'sass',
 		'cssmin',
