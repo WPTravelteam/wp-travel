@@ -5507,7 +5507,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   text-decoration: none;
 }
 #shopping-cart button:disabled, #shopping-cart a:disabled {
-  opacity: .7;
+  opacity: .5;
   pointer-events: none;
 }
 #shopping-cart .cart-summary {
@@ -5658,7 +5658,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   justify-content: space-between;
   border-bottom: 1px solid #eee;
   padding-bottom: 1em;
-  margin-bottom: 1em;
+  margin-top: 1em;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .wp-travel-form-group > div {
   display: flex;

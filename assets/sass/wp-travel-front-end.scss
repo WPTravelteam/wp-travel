@@ -6452,7 +6452,7 @@ $primaryColor: #3399ff;
 	}
 	button, a{
 		&:disabled{
-			opacity: .7;
+			opacity: .5;
 			pointer-events: none;
 		}
 	}
@@ -6593,14 +6593,14 @@ $primaryColor: #3399ff;
 					position: relative;
                     form{
                         width: 100%;
-                    }
+					}
                     .wp-travel-form-group{
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         border-bottom: 1px solid #eee;
 						padding-bottom: 1em;
-						margin-bottom: 1em;
+						margin-top: 1em;
                         // @media(max-width: 575px){
                         //     flex-direction: column;
                         //     align-items: flex-start;
