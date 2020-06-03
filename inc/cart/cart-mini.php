@@ -26,7 +26,7 @@ $currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : ''
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
-if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) ) {
+if ( isset( $settings[ 'wp_travel_switch_to_react' ] ) && 'yes' === $settings[ 'wp_travel_switch_to_react' ] ) {
 	if ( class_exists( 'WP_Travel_Helpers_Cart' ) ) {
 		$cart = WP_Travel_Helpers_Cart::get_cart();
 
