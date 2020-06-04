@@ -26,8 +26,10 @@ class WP_Travel_Admin_Info_Pointers {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
 		}
 		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
+		$settings        = wp_travel_get_settings();
+		$switch_to_react = $settings['wp_travel_switch_to_react'];
 
-		if ( version_compare( $user_since, '4.0.0', '<' )  ) {
+		if ( version_compare( $user_since, '4.0.0', '<' ) && 'no' == $switch_to_react ) {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'enable_v4_pointer' ) );
 			add_filter( 'wp_travel_admin_pointers-edit-itinerary-booking', array( $this, 'enable_v4_pointer' ) );
 			add_filter( 'wp_travel_admin_pointers-edit-itineraries', array( $this, 'enable_v4_pointer' ) );
