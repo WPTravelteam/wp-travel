@@ -229,6 +229,15 @@ ul.availabily-list.additional-col li > div.paxpicker {
   margin-left: 20px;
 }
 
+.wp-travel-feature-slide-content.featured-detail-section .right-plot-inner-wrap .entry-header {
+  padding-top: 0;
+  padding-bottom: 0;
+  background: none;
+}
+.wp-travel-feature-slide-content.featured-detail-section .right-plot-inner-wrap .entry-header .entry-title {
+  margin: 0;
+}
+
 .wp-travel-tab-wrapper {
   padding: 0;
   position: relative;
