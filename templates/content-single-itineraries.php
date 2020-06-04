@@ -28,14 +28,7 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
-$wrapper_class = '';
-$template = get_option( 'template' );
-
-switch ( $template ) {
-	case 'twentytwenty':
-		$wrapper_class = 'alignwide';
-		break;
-}
+$wrapper_class = wp_travel_get_theme_wrapper_class();
 do_action( 'wp_travel_before_content_start');
 ?>
 
