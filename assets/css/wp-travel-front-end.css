@@ -232,6 +232,8 @@ ul.availabily-list.additional-col li > div.paxpicker {
 .wp-travel-tab-wrapper {
   padding: 0;
   position: relative;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 @media (max-width: 767px) {
   .wp-travel-tab-wrapper {

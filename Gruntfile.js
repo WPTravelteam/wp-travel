@@ -70,6 +70,7 @@ module.exports = function (grunt) {
 					'**',
 					'!.*',
 					'!*.md',
+					'1*.map',
 					'!.*/**',
 					'!tmp/**',
 					'!Gruntfile.js',
