@@ -15,6 +15,7 @@ class WP_Travel_Admin_Info_Pointers {
 	 * Constructor.
 	 */
 	function __construct() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
 		// add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
 		// add_filter( 'wp_travel_admin_pointers-'. WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
@@ -24,7 +25,15 @@ class WP_Travel_Admin_Info_Pointers {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
 		}
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
+		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
+
+		if ( version_compare( $user_since, '4.0.0', '<' )  ) {
+			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'enable_v4' ) );
+			add_filter( 'wp_travel_admin_pointers-edit-itinerary-booking', array( $this, 'enable_v4' ) );
+			add_filter( 'wp_travel_admin_pointers-edit-itineraries', array( $this, 'enable_v4' ) );
+			add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'enable_v4' ) );
+			add_filter( 'wp_travel_admin_pointers-itinerary-booking_page_settings', array( $this, 'enable_v4' ) );
+		}
 
 		// Admin General Notices.
 		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
@@ -231,6 +240,24 @@ class WP_Travel_Admin_Info_Pointers {
 
 		return $q;
 	}
+	function enable_v4( $q ) {
+		$pointer_content = '<p>Please go to WP Travel > Settings > General. Now enable siwtch to V4 option and save settings to enable WP Travel version 4.0.0 layout.</p>';
+
+		$q['wp_travel_enable_v4'] = array(
+			'target'  => '#menu-posts-itinerary-booking',
+			'options' => array(
+				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'Enable WP Travel Version 4.0.0', 'wp-travel' ), $pointer_content ),
+				'position' => array(
+					'edge'  => 'left',
+					'align' => 'center',
+				),
+			),
+		);
+
+		return $q;
+	}
+	
+
 
 	function paypal_addon_admin_notice() {
 
