@@ -28,11 +28,11 @@ class WP_Travel_Admin_Info_Pointers {
 		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
 
 		if ( version_compare( $user_since, '4.0.0', '<' )  ) {
-			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'enable_v4' ) );
-			add_filter( 'wp_travel_admin_pointers-edit-itinerary-booking', array( $this, 'enable_v4' ) );
-			add_filter( 'wp_travel_admin_pointers-edit-itineraries', array( $this, 'enable_v4' ) );
-			add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'enable_v4' ) );
-			add_filter( 'wp_travel_admin_pointers-itinerary-booking_page_settings', array( $this, 'enable_v4' ) );
+			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'enable_v4_pointer' ) );
+			add_filter( 'wp_travel_admin_pointers-edit-itinerary-booking', array( $this, 'enable_v4_pointer' ) );
+			add_filter( 'wp_travel_admin_pointers-edit-itineraries', array( $this, 'enable_v4_pointer' ) );
+			add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'enable_v4_pointer' ) );
+			add_filter( 'wp_travel_admin_pointers-itinerary-booking_page_settings', array( $this, 'enable_v4_pointer' ) );
 		}
 
 		// Admin General Notices.
@@ -240,10 +240,10 @@ class WP_Travel_Admin_Info_Pointers {
 
 		return $q;
 	}
-	function enable_v4( $q ) {
+	function enable_v4_pointer( $q ) {
 		$pointer_content = '<p>Please go to WP Travel > Settings > General. Now enable siwtch to V4 option and save settings to enable WP Travel version 4.0.0 layout.</p>';
 
-		$q['wp_travel_enable_v4'] = array(
+		$q['wp_travel_enable_v4_pointer'] = array(
 			'target'  => '#menu-posts-itinerary-booking',
 			'options' => array(
 				'content'  => sprintf( '<h3 class = "update-notice"> %s </h3> <p> %s </p>', __( 'Enable WP Travel Version 4.0.0', 'wp-travel' ), $pointer_content ),
