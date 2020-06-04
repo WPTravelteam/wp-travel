@@ -765,8 +765,17 @@ function wp_travel_frontend_contents( $post_id ) {
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$price_per_text  = wp_travel_get_price_per_text( $post_id );
 	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
+
+	$wrapper_class = '';
+	$template = get_option( 'template' );
+
+	switch ( $template ) {
+		case 'twentytwenty':
+			$wrapper_class = 'alignwide';
+			break;
+	}
 	?>
-	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
+	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper <?php echo esc_attr( $wrapper_class ); ?>">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 			<ul class="wp-travel tab-list resp-tabs-list ">
 				<?php
