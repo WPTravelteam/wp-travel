@@ -134,11 +134,11 @@ class WP_Travel_Ajax {
 		}
 		global $wt_cart;
 
-		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 
-		// if ( ! $allow_multiple_cart_items ) {
-		// 	$wt_cart->clear();
-		// }
+		if ( ! $allow_multiple_cart_items ) {
+			$wt_cart->clear();
+		}
 
 		$trip_id        = $post_data['trip_id'];
 		$price_key      = isset( $post_data['price_key'] ) ? $post_data['price_key'] : '';
