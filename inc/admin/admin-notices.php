@@ -167,8 +167,14 @@ add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_
 function wp_travel_pricing_table_created_notice() {
 	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
 		?>
-		<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database needs an update. Please deactivate and activate your WP Travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
+			<div class="notification-content">
+				<ul>
+					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database needs an update. Please deactivate and activate your WP Travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+				</ul>
+			</div>
+		</div>
 		<?php
 	}
 }
-add_action( 'wp_travel_general_admin_notice', 'wp_travel_pricing_table_created_notice', 100 );
+add_action( 'admin_notices', 'wp_travel_pricing_table_created_notice', 100 );
