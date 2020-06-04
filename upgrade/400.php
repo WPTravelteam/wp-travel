@@ -320,7 +320,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 											'date_days'   => '',
 											'start_date'  => $old_date['start_date'],
 											'end_date'    => $old_date['end_date'],
-											'trip_time'   => implode( ',', $selected_times_migration ),
+											'trip_time'   => implode( ',', array_unique( $selected_times_migration ) ),
 											'pricing_ids' => implode( ', ', $new_pricing_ids ),
 										),
 										array(
