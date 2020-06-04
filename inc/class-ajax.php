@@ -293,8 +293,13 @@ class WP_Travel_Ajax {
 			$items = $wt_cart->getItems();
 
 			if ( isset( $items[ $cart_item_id ] ) ) {
-				$pax += $items[ $cart_item_id ]['pax'];
-				$wt_cart->update( $cart_item_id, $pax );
+				if ( is_array( $pax ) ) {
+					$trip_extras = isset( $post_data['wp_travel_trip_extras'] ) ? (array) $post_data['wp_travel_trip_extras'] : array();
+					$wt_cart->update( $cart_item_id, $pax, $trip_extras, $post_data );
+				} else {
+					$pax += $items[ $cart_item_id ]['pax'];
+					$wt_cart->update( $cart_item_id, $pax );
+				}
 			} else {
 				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
 			}
