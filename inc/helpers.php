@@ -87,7 +87,7 @@ function wp_travel_settings_default_fields() {
 
 		// Trip Settings Fields.
 		'hide_related_itinerary'                  => 'no',
-		'wp_travel_switch_to_react'               => 'yes',
+		'wp_travel_switch_to_react'               => 'no',
 		'enable_multiple_travellers'              => 'no',
 		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.
 		'trip_pricing_options_layout'             => 'by-pricing-option',
@@ -135,6 +135,11 @@ function wp_travel_settings_default_fields() {
 		'wt_test_mode'                            => 'yes',
 		'wt_test_email'                           => '',
 	);
+
+	$user_since = get_option( 'wp_travel_user_since' );
+	if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
+		$settings_fields['wp_travel_switch_to_react'] = 'yes';
+	}
 	return apply_filters( 'wp_travel_settings_fields', $settings_fields ); // flter @since 1.9.0.
 }
 

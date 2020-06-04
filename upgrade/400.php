@@ -320,7 +320,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 											'date_days'   => '',
 											'start_date'  => $old_date['start_date'],
 											'end_date'    => $old_date['end_date'],
-											'trip_time'   => implode( ',', $selected_times_migration ),
+											'trip_time'   => implode( ',', array_unique( $selected_times_migration ) ),
 											'pricing_ids' => implode( ', ', $new_pricing_ids ),
 										),
 										array(
@@ -512,7 +512,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 		}
 
 		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
-		update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
+		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
 
 	}
 }
