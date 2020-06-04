@@ -28,6 +28,9 @@ function sidebarSticky(){
 	if ( 'undefined' === typeof Modernizr ) {
 		return false;
 	}
+	if ( 'undefined' == typeof Modernizr.mq ) {
+		return
+	}
 
 	var interval = setInterval(function(){
 		if (Modernizr.mq('(min-width: 768px)')) {
