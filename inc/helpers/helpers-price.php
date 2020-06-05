@@ -744,7 +744,10 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 			}
 		}
 	} else {
-		if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) && $pricing_id ) {
+		$settings = wp_travel_get_settings();
+		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
+
+		if ( 'yes' === $switch_to_react && $pricing_id ) {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
 			if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings_data = $pricings_data['pricings'];

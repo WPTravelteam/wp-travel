@@ -2657,6 +2657,7 @@ function wp_travel_privacy_link() {
 function wp_travel_get_strings() {
 	$localized_strings = array(
 		'from'                  => __( 'From', 'wp-travel' ),
+		'to'                    => __( 'To', 'wp-travel' ),
 		'confirm'               => __( 'Are you sure you want to remove?', 'wp-travel' ),
 		'book_now'              => __( 'Book Now', 'wp-travel' ),
 		'book_n_pay'            => __( 'Book and Pay', 'wp-travel' ),
@@ -3219,9 +3220,11 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$settings                                       = wp_travel_get_settings();
 	$enable_multiple_category_on_pricing            = $settings['enable_multiple_category_on_pricing'];
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since 3.0.0
+	
+	$switch_to_react = $settings['wp_travel_switch_to_react'];
 	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
-
-		if ( $wp_travel_migrated_400 ) {
+		
+		if ( 'yes' == $switch_to_react ) {
 			$pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
 			// $pricing_options = $trip_pricings_and_date['pricings'];
 			// $pricing_options = $trip_pricings_and_date['dates'];
