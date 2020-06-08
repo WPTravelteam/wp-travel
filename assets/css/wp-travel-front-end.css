@@ -5737,9 +5737,11 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .trip-submit {
   text-align: right;
+  margin-top: 1em;
 }
 #shopping-cart .cart-summary .list-group li .update-fields-collapse .trip-submit .btn {
   font-size: 12px;
+  margin: 0;
 }
 #shopping-cart .cart-summary .extra-fields {
   list-style: none;
@@ -5890,6 +5892,18 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   background-color: #fff !important;
   color: red;
   font-size: 24px;
+}
+
+.itenary .timeline-contents .tc-content img {
+  transform: translateY(8px);
+}
+.itenary .timeline-contents .tc-content.right img {
+  float: left;
+  margin-right: 1.5em;
+}
+.itenary .timeline-contents .tc-content.left img {
+  float: right;
+  margin-left: 1.5em;
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
