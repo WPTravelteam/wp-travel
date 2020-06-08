@@ -14,10 +14,9 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
 
-		$pricings_table = $tables['pricings_table'];
-		$dates_table = $tables['dates_table'];
+		$pricings_table                = $tables['pricings_table'];
+		$dates_table                   = $tables['dates_table'];
 		$price_category_relation_table = $tables['price_category_relation_table'];
-		
 
 		$custom_post_type = WP_TRAVEL_POST_TYPE;
 		$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
@@ -29,6 +28,23 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 				$wp_travel_pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true ) : 'multiple-price';
 				$wp_travel_fixed_departure     = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) ? get_post_meta( $trip_id, 'wp_travel_fixed_departure', true ) : 'no';
 
+				// Pax size limit migration.
+				$pax_limit         = 0;
+				$limit_type        = get_post_meta( $trip_id, 'wp_travel_inventory_pax_limit_type', true );
+				$custom_group_size = get_post_meta( $trip_id, 'wp_travel_inventory_custom_max_pax', true );
+				if ( 'custom_value' === $limit_type ) { // Return custom pax size for inventory if custom_value is set.
+					if ( $custom_group_size ) {
+						$pax_limit = $custom_group_size;
+					}
+				} else {
+					$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+					if ( $group_size ) {
+
+						$pax_limit = $group_size;
+					}
+				}
+				update_post_meta( $trip_id, 'wp_travel_inventory_size', $pax_limit );
+				// End of pax size limit migration.
 				if ( $wp_travel_pricing_option_type == 'multiple-price' ) {
 					// Migration start.
 					$wp_travel_pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) ? get_post_meta( $trip_id, 'wp_travel_pricing_options', true ) : array();
@@ -245,27 +261,25 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 							if ( is_array( $wp_travel_multiple_trip_dates ) && count( $wp_travel_multiple_trip_dates ) > 0 ) {
 
 								foreach ( $wp_travel_multiple_trip_dates as $old_date_id => $old_date ) {
-									
 
 									$times = get_post_meta( $trip_id, 'wp_travel_trip_time', true );
 
 									$selected_times = ! empty( $times ) && isset( $times[ $old_date_id ] ) && isset( $times[ $old_date_id ]['times'] ) ? $times[ $old_date_id ]['times'] : array();
-									
-									$pricing_options = $old_date['pricing_options'];
-									$new_pricing_ids = array();
+
+									$pricing_options          = $old_date['pricing_options'];
+									$new_pricing_ids          = array();
 									$selected_times_migration = array(); // quick fix.
 									foreach ( $pricing_options as $pricing_option_key ) {
-										/// Trip Time Migration
+										// Trip Time Migration
 										if ( is_array( $selected_times ) && count( $selected_times ) > 0 ) {
 											foreach ( $selected_times as $selected_time ) {
-												$selected_time = date("H:i", strtotime($selected_time));
+												$selected_time = date( 'H:i', strtotime( $selected_time ) );
 												if ( $selected_time ) {
 													$selected_times_migration[] = $selected_time;
 												}
 											}
 										}
-										/// End of Trip Time Migration
-
+										// End of Trip Time Migration
 										if ( isset( $temp_pricing_ids[ $pricing_option_key ] ) ) {
 											$new_pricing_ids[] = $temp_pricing_ids[ $pricing_option_key ];
 
@@ -289,7 +303,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 												}
 												if ( is_array( $selected_times ) && count( $selected_times ) > 0 ) {
 													foreach ( $selected_times as $selected_time ) {
-														$selected_time = date("H:i", strtotime($selected_time));
+														$selected_time = date( 'H:i', strtotime( $selected_time ) );
 														if ( $selected_time ) {
 															$new_inventory_meta_key .= sprintf( '-%s', str_replace( ':', '_', $selected_time ) ); // Added to work with trip time.
 															// update inventory with time.
@@ -475,8 +489,8 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 						$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
 
 						$tables = array(
-							'pricings_table'            => $pricings_table,
-							'dates_table'               => $dates_table,
+							'pricings_table' => $pricings_table,
+							'dates_table'    => $dates_table,
 							'price_category_relation_table' => $price_category_relation_table,
 						);
 
@@ -500,7 +514,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 			}
 		} else {
 			$pricings_table                = $wpdb->base_prefix . 'wt_pricings';
-			$dates_table                    = $wpdb->base_prefix . 'wt_dates';
+			$dates_table                   = $wpdb->base_prefix . 'wt_dates';
 			$price_category_relation_table = $wpdb->base_prefix . 'wt_price_category_relation';
 
 			$tables = array(
@@ -512,7 +526,7 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 		}
 
 		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
-		update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
+		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
 
 	}
 }

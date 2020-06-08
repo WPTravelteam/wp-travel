@@ -35,9 +35,14 @@ $enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_mul
 $enable_checkout = apply_filters( 'wp_travel_enable_checkout', true );
 $force_checkout  = apply_filters( 'wp_travel_is_force_checkout_enabled', false );
 
-$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id ); ?>
+$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 
-<div id="<?php echo isset( $tab_key ) ? esc_attr( $tab_key ) : 'booking'; ?>" class="tab-list-content">
+$wrapper_id = isset( $tab_key ) ? $tab_key . '-booking-form' : 'booking-form'; // temp fixes.
+if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
+	$wrapper_id = isset( $tab_key ) ? $tab_key  : 'booking';
+} ?>
+
+<div id="<?php echo esc_attr( $wrapper_id ); ?>" class="tab-list-content">
 	<?php
 	if ( ( $enable_checkout ) || $force_checkout ) :
 		// Set Default WP Travel options list as it is.

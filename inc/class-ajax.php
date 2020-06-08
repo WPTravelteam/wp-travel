@@ -134,11 +134,11 @@ class WP_Travel_Ajax {
 		}
 		global $wt_cart;
 
-		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 
-		// if ( ! $allow_multiple_cart_items ) {
-		// 	$wt_cart->clear();
-		// }
+		if ( ! $allow_multiple_cart_items ) {
+			$wt_cart->clear();
+		}
 
 		$trip_id        = $post_data['trip_id'];
 		$price_key      = isset( $post_data['price_key'] ) ? $post_data['price_key'] : '';
@@ -293,8 +293,13 @@ class WP_Travel_Ajax {
 			$items = $wt_cart->getItems();
 
 			if ( isset( $items[ $cart_item_id ] ) ) {
-				$pax += $items[ $cart_item_id ]['pax'];
-				$wt_cart->update( $cart_item_id, $pax );
+				if ( is_array( $pax ) ) {
+					$trip_extras = isset( $post_data['wp_travel_trip_extras'] ) ? (array) $post_data['wp_travel_trip_extras'] : array();
+					$wt_cart->update( $cart_item_id, $pax, $trip_extras, $post_data );
+				} else {
+					$pax += $items[ $cart_item_id ]['pax'];
+					$wt_cart->update( $cart_item_id, $pax );
+				}
 			} else {
 				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
 			}
