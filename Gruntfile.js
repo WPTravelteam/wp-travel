@@ -21,7 +21,12 @@ module.exports = function (grunt) {
 		'readme.txt',
 		'wp-travel.php',
 		'wpml-config.xml',
-		'!inc/extended/app/src/**'
+		'!inc/extended/app/src/**',
+		'!inc/extended/package.json',
+		'!inc/extended/postcss.config.js',
+		'!inc/extended/webpack.config.js',
+		'!inc/extended/yarn.lock',
+		'!inc/extended/yarn-error.log'
 	];
 
 	/**
@@ -80,7 +85,13 @@ module.exports = function (grunt) {
 					'!tests/**',
 					'!docs/**',
 					'!assets/sass/**',
-					'!inc/extended/node_modules/**'
+					'!inc/extended/node_modules/**',
+					'!inc/extended/app/src/**',
+					'!inc/extended/package.json',
+					'!inc/extended/postcss.config.js',
+					'!inc/extended/webpack.config.js',
+					'!inc/extended/yarn.lock',
+					'!inc/extended/yarn-error.log'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,
