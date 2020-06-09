@@ -372,7 +372,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
-		'babel',
+		// 'babel',
 		'uglify',
 		'sass',
 		'cssmin',

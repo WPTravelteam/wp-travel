@@ -18,26 +18,6 @@ function wp_travel_key_by( $items, $key_by = 'id' ) {
 	return $key_by_array;
 }
 
-// function wp_travel_currency_format( $price ) {
-// 	$settings           = wp_travel_get_settings();
-// 	$currency_symbol    = wp_travel_get_currency_symbol();
-// 	$currency_position  = $settings['currency_position'];
-// 	$thousand_separator = $settings['thousand_separator'];
-// 	$decimal_separator  = $settings['decimal_separator'];
-// 	$number_of_decimals = $settings['number_of_decimals'];
-
-// 	$number = number_format( (float) $price, $number_of_decimals, $decimal_separator, $thousand_separator );
-
-// 	$positions = array(
-// 		'left'             => "{$currency_symbol}<span>{$number}</span>",
-// 		'left_with_space'  => "{$currency_symbol} <span>{$number}</span>",
-// 		'right'            => "<span>{$number}</span>{$currency_symbol}",
-// 		'right_with_space' => "<span>{$number}</span> {$currency_symbol}",
-// 	);
-
-// 	return $positions[ $currency_position ];
-// }
-
 $settings      = wp_travel_get_settings();
 $currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 
