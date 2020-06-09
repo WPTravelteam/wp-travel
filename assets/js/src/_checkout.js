@@ -11,8 +11,8 @@ jQuery(document).ready(function ($) {
 
         var cart_fields = {};
         $(parent + ' input, ' + parent + ' select').each(function (index) {
-            filterby = $(this).attr('name');
-            filterby_val = $(this).val();
+            var filterby = $(this).attr('name');
+            var filterby_val = $(this).val();
 
             if ($(this).data('multiple') == true) {
                 if ('undefined' == typeof (cart_fields[filterby])) {
@@ -74,10 +74,10 @@ jQuery(document).ready(function ($) {
         var update_cart_fields = {};
         $('.ws-theme-cart-page tr.responsive-cart').each(function (i) {
             // pax = $(this).find('input[name="pax^"]').val();
-            cart_id = $(this).find('input[name="cart_id"]').val();
-            pricing_id = $(this).find('input[name="pricing_id"]').val();
-            extra_id = false;
-            extra_qty = false;
+            var cart_id = $(this).find('input[name="cart_id"]').val();
+            var pricing_id = $(this).find('input[name="pricing_id"]').val();
+            var extra_id = false;
+            var extra_qty = false;
 
             var pax = {};
 
@@ -190,7 +190,7 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).on('click, change', '.wp-travel-pax', function () {
-        $this = $(this);
+        var $this = $(this);
         var productPrice = $this.closest('.product-price');
         var availablePax = productPrice.data('maxPax');
         var minPax = productPrice.data('minPax');
@@ -326,8 +326,8 @@ const wptravelcheckout = (shoppingCart) => {
 
             if (categoryTotalContainer)
                 categoryTotalContainer.innerHTML = wp_travel_cart.format(categoryTotal)
-            tripTotal += categoryTotal
-            tripTotalWOExtras += categoryTotal
+            tripTotal += parseFloat(categoryTotal)
+            tripTotalWOExtras += parseFloat(categoryTotal)
             tripTotalPartialWOExtras += parseFloat(categoryTotal) * parseFloat(payoutPercentage) / 100
         })
         // Extras.
