@@ -403,7 +403,10 @@ const wptravelcheckout = (shoppingCart) => {
 
         if (cartTotalPartialContainers) {
             cartTotalPartialContainers.forEach(ctpc => {
-                let _partialTotal = (tripTotalPartialWOExtras + txTotal) * (100 + parseFloat(wp_travel_cart.cart.tax)) / 100
+                let _partialTotal = (tripTotalPartialWOExtras + txTotal)
+                if(wp_travel_cart.cart.tax) {
+                    _partialTotal = _partialTotal * (100 + parseFloat(wp_travel_cart.cart.tax)) / 100
+                }
                 ctpc.innerHTML = wp_travel_cart.format(_partialTotal)
             })
         }
