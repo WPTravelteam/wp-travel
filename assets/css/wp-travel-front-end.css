@@ -5496,8 +5496,6 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .btn {
   outline: none;
-  background-color: #3399ff;
-  color: #fff;
   padding: .75em 1em;
   font-size: 16px;
   font-weight: 500;
@@ -5551,7 +5549,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .cart-header .subtitle strong {
   display: inline-block;
   border-radius: 3px;
-  background-color: #3399ff;
+  background-color: #444;
   color: #fff;
   padding: 0 5px;
   line-height: 1;

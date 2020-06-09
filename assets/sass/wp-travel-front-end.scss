@@ -6444,8 +6444,8 @@ $primaryColor: #3399ff;
 	.btn{
 		outline: none;
 		// border: 1px solid $primaryColor;
-		background-color: $primaryColor;
-		color: #fff;
+		// background-color: $primaryColor;
+		// color: #fff;
 		padding: .75em 1em;
 		font-size: 16px;
 		font-weight: 500;
@@ -6498,7 +6498,7 @@ $primaryColor: #3399ff;
                 strong{
                     display: inline-block;
                     border-radius: 3px;
-                    background-color: $primaryColor;
+                    background-color: #444;
                     color: #fff;
                     padding: 0 5px;
                     line-height: 1;
