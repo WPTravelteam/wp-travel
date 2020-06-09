@@ -277,7 +277,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'assets/js/cart.js': 'assets/js/src/cart.js'
+					'assets/js/src/cart.js': 'assets/js/src/_cart.js'
 				}
 			}
 		},
@@ -358,7 +358,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
 	grunt.loadNpmTasks('grunt-writefile');
-	// grunt.loadNpmTasks('grunt-babel')
+	grunt.loadNpmTasks('grunt-babel')
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -369,10 +369,10 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', []);
 
 	grunt.registerTask('gitattributes', ['file-creator']);
-	// grunt.registerTask('babel', ['babel']);
+	grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
-		// 'babel',
+		'babel',
 		'uglify',
 		'sass',
 		'cssmin',

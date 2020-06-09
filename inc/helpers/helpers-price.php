@@ -710,6 +710,8 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 	if ( ! $trip_id ) {
 		return 0;
 	}
+
+	$settings = wp_travel_get_settings();
 	
 	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
 	$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
@@ -744,7 +746,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 			}
 		}
 	} else {
-		if ( 'yes' === get_option( 'wp_travel_migrate_400', 'no' ) && $pricing_id ) {
+		if (  isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] && $pricing_id ) {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
 			if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings_data = $pricings_data['pricings'];
@@ -1190,8 +1192,6 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 			$price = wp_travel_get_actual_trip_price( $trip_id, '', $return_regular_price );
 		}
 	endif;
-
-	
 
 	return $price;
 }

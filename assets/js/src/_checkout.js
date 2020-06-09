@@ -212,7 +212,9 @@ jQuery(document).ready(function ($) {
 
 });
 
-wp_travel.format = (_num, style = 'currency') => {
+let wp_travel_cart = {}
+
+wp_travel_cart.format = (_num, style = 'currency') => {
     const {
         currency,
         currency_symbol: _currencySymbol,
@@ -231,15 +233,15 @@ wp_travel.format = (_num, style = 'currency') => {
         return _formattedNum
     }
     let positions = {
-        'left': `${_currencySymbol}${_formattedNum}`,
-        'left_with_space': `${_currencySymbol} ${_formattedNum}`,
-        'right': `${_formattedNum}${_currencySymbol}`,
-        'right_with_space': `${_formattedNum} ${_currencySymbol}`,
+        'left': `${_currencySymbol}<span>${_formattedNum}</span>`,
+        'left_with_space': `${_currencySymbol} <span>${_formattedNum}</span>`,
+        'right': `<span>${_formattedNum}</span>${_currencySymbol}`,
+        'right_with_space': `<span>${_formattedNum}</span> ${_currencySymbol}`,
     }
     return positions[currencyPosition]
 }
 
-wp_travel.timeout = (promise, ms) => {
+wp_travel_cart.timeout = (promise, ms) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             reject(new Error("request timeout"))
@@ -248,12 +250,16 @@ wp_travel.timeout = (promise, ms) => {
     })
 }
 
-let wp_travel_cart = {}
-const wptravelcheckout = () => {
-    const shoppingCart = document.getElementById('shopping-cart')
+const wptravelcheckout = (shoppingCart) => {
+    if (!shoppingCart) {
+        return
+    }
     const cartItems = shoppingCart && shoppingCart.querySelectorAll('[data-cart-id]')
-    const toggleCartLoader = ( on ) => {
-        if(on) {
+    if (cartItems && cartItems.length <= 0) {
+        return
+    }
+    const toggleCartLoader = (on) => {
+        if (on) {
             cartLoader.removeAttribute('style')
         } else {
             cartLoader.style.display = 'none'
@@ -262,15 +268,15 @@ const wptravelcheckout = () => {
     // let cart = {}
     let cartLoader = shoppingCart.querySelector('.wp-travel-cart-loader')
     cartLoader && toggleCartLoader(true)
-    wp_travel && wp_travel.timeout(fetch(`${wp_travel.ajaxUrl}?action=wp_travel_get_cart&_nonce=${wp_travel._nonce}`)
+    wp_travel && wp_travel_cart.timeout(fetch(`${wp_travel.ajaxUrl}?action=wp_travel_get_cart&_nonce=${wp_travel._nonce}`)
         .then(res => {
             res.json()
                 .then(result => {
                     toggleCartLoader()
                     if (result.success && result.data.code === 'WP_TRAVEL_CART') {
                         if (result.data.cart) {
-                            wp_travel_cart = result.data.cart
-                            Object.freeze(wp_travel_cart)
+                            wp_travel_cart.cart = result.data.cart
+                            Object.freeze(wp_travel_cart.cart)
                         }
                     }
                 })
@@ -281,16 +287,19 @@ const wptravelcheckout = () => {
             toggleCartLoader()
         })
 
-    // let cartItems = shoppingCart.querySelectorAll('[data-cart-id]')
-
     const updateItem = id => {
+        let _data = {}
+        let tripTotalWOExtras = 0, tripTotalPartialWOExtras = 0, extrasTotal = 0
+
         let tripTotal = 0
-        let item = wp_travel_cart && wp_travel_cart.cart_items && wp_travel_cart.cart_items[id]
+        let item = wp_travel_cart.cart && wp_travel_cart.cart.cart_items && wp_travel_cart.cart.cart_items[id]
         let itemNode = shoppingCart.querySelector(`[data-cart-id="${id}"]`)
         let pricing = item.trip_data.pricings.find(p => p.id == parseInt(item.pricing_id))
         let categories = pricing.categories
         let _tripExtras = pricing.trip_extras
         let wptCTotals = itemNode.querySelectorAll('[data-wpt-category-count]')
+
+        let payoutPercentage = item.trip_data && item.trip_data.minimum_partial_payout_percent
 
         // Categories.
         let formGroupsCategory = itemNode.querySelectorAll('[data-wpt-category]')
@@ -302,16 +311,24 @@ const wptravelcheckout = () => {
             let _category = categories.find(c => c.id == parseInt(fg.dataset.wptCategory))
 
             let _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price'])
-            let _count = dataCategoryCount && dataCategoryCount.value || 0
+            let _count = dataCategoryCount && parseInt(dataCategoryCount.value) || 0
+            if (_category.has_group_price) {
+                let _groupPrice = _category.group_prices.find(gp => _count >= parseInt(gp.min_pax) && _count <= parseInt(gp.max_pax))
+                _price = _groupPrice && _groupPrice.price || _price
+                if (dataCategoryPrice)
+                    dataCategoryPrice.innerHTML = wp_travel_cart.format(_price)
+            }
             let categoryTotal = _category.price_per == 'group' ? _count > 0 && _price || 0 : _price * _count
             wptCTotals && wptCTotals.forEach(wpct => {
                 if (wpct.dataset.wptCategoryCount == fg.dataset.wptCategory)
-                    wpct.textContent = _count
+                    wpct.innerHTML = _count
             })
 
             if (categoryTotalContainer)
-                categoryTotalContainer.textContent = wp_travel.format(categoryTotal, 'decimal')
+                categoryTotalContainer.innerHTML = wp_travel_cart.format(categoryTotal)
             tripTotal += categoryTotal
+            tripTotalWOExtras += categoryTotal
+            tripTotalPartialWOExtras += parseFloat(categoryTotal) * parseFloat(payoutPercentage) / 100
         })
         // Extras.
 
@@ -327,51 +344,81 @@ const wptravelcheckout = () => {
             let _count = datatxCount && datatxCount.value || 0
             let itemTotal = parseFloat(_price) * parseInt(_count)
             if (txTotalContainer)
-                txTotalContainer.textContent = wp_travel.format(itemTotal, 'decimal')
+                txTotalContainer.innerHTML = wp_travel_cart.format(itemTotal)
             tripTotal += itemTotal
+            extrasTotal += itemTotal
         })
 
-        itemNode.querySelector('[data-wpt-item-total]').textContent = wp_travel.format(tripTotal, 'decimal')
-        return tripTotal
+        _data = {
+            tripTotalWOExtras,
+            tripTotalPartialWOExtras,
+            extrasTotal,
+            tripTotal
+        }
+
+        itemNode.querySelector('[data-wpt-item-total]').innerHTML = wp_travel_cart.format(tripTotal)
+        return _data
     }
 
     shoppingCart && shoppingCart.addEventListener('wptcartchange', e => {
-        let cartTotal = 0
-        let cartTotalContainer = e.target.querySelector('[data-wpt-cart-total]')
+        let cartTotal = 0, tripTotalWOExtras = 0, txTotal = 0, tripTotalPartialWOExtras = 0;
+        let cartTotalContainers = document.querySelectorAll('[data-wpt-cart-total]')
+        let cartTotalPartialContainers = document.querySelectorAll('[data-wpt-cart-partial-total]')
         let cartSubtotalContainer = e.target.querySelector('[data-wpt-cart-subtotal]')
         let cartDiscountContainer = e.target.querySelector('[data-wpt-cart-discount]')
         let cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]')
         let _cartItems = e.target.querySelectorAll('[data-cart-id]')
         _cartItems && _cartItems.forEach(ci => {
-            cartTotal += updateItem(ci.dataset.cartId)
+            let totals = updateItem(ci.dataset.cartId)
+            cartTotal += totals.tripTotal
+            tripTotalWOExtras += totals.tripTotalWOExtras
+            tripTotalPartialWOExtras += totals.tripTotalPartialWOExtras
+            txTotal += totals.extrasTotal
         })
 
         if (cartSubtotalContainer)
-            cartSubtotalContainer.textContent = wp_travel.format(cartTotal)
+            cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
 
-        if (e.detail && e.detail.coupon || wp_travel_cart.coupon && wp_travel_cart.coupon.coupon_id) {
-            let coupon = e.detail && e.detail.coupon || wp_travel_cart.coupon
+        if (e.detail && e.detail.coupon || wp_travel_cart.cart.coupon && wp_travel_cart.cart.coupon.coupon_id) {
+            let coupon = e.detail && e.detail.coupon || wp_travel_cart.cart.coupon
             let _cValue = coupon.value && parseInt(coupon.value) || 0
             let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
-            fullTotalContainer.textContent = cartTotal
+            fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
             if (cartDiscountContainer) {
-                cartDiscountContainer.textContent = coupon.type == 'fixed' ? '- ' + wp_travel.format(_cValue) : '- ' + wp_travel.format(cartTotal * _cValue / 100)
+                cartDiscountContainer.innerHTML = coupon.type == 'fixed' ? '- ' + wp_travel_cart.format(_cValue) : '- ' + wp_travel_cart.format(cartTotal * _cValue / 100)
                 cartDiscountContainer.closest('[data-wpt-extra-field]').removeAttribute('style')
             }
             cartTotal = coupon.type == 'fixed' ? cartTotal - _cValue : cartTotal * (100 - _cValue) / 100
         }
 
-        if (wp_travel_cart.tax) {
+        if (wp_travel_cart.cart.tax) {
             if (cartTaxContainer)
-                cartTaxContainer.textContent = '+ ' + wp_travel.format(cartTotal * parseInt(wp_travel_cart.tax) / 100)
-            cartTotal = cartTotal * (100 + parseInt(wp_travel_cart.tax)) / 100
+                cartTaxContainer.innerHTML = '+ ' + wp_travel_cart.format(cartTotal * parseInt(wp_travel_cart.cart.tax) / 100)
+            cartTotal = cartTotal * (100 + parseInt(wp_travel_cart.cart.tax)) / 100
         }
 
-        if (cartTotalContainer)
-            cartTotalContainer.textContent = wp_travel.format(cartTotal, 'decimal')
+        if (cartTotalContainers) {
+            cartTotalContainers.forEach(ctt => ctt.innerHTML = wp_travel_cart.format(cartTotal))
+        }
+
+        if (cartTotalPartialContainers) {
+            cartTotalPartialContainers.forEach(ctpc => {
+                let _partialTotal = (tripTotalPartialWOExtras + txTotal) * (100 + parseFloat(wp_travel_cart.cart.tax)) / 100
+                ctpc.innerHTML = wp_travel_cart.format(_partialTotal)
+            })
+        }
+
+        // cartTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
         let cartItemsCountContainer = e.target.querySelector('[data-wpt-cart-item-count]')
         if (cartItemsCountContainer)
-            cartItemsCountContainer.textContent = _cartItems.length
+            cartItemsCountContainer.innerHTML = _cartItems.length
+
+        console.debug({
+            cartTotal,
+            tripTotalWOExtras,
+            txTotal,
+            tripTotalPartialWOExtras
+        })
     })
 
     cartItems && cartItems.forEach(ci => {
@@ -383,7 +430,7 @@ const wptravelcheckout = () => {
             e.preventDefault()
             if (confirm(_deleteBtn.dataset.l10n)) {
                 toggleCartLoader(true)
-                wp_travel.timeout(
+                wp_travel_cart.timeout(
                     fetch(`${wp_travel.ajaxUrl}?action=wp_travel_remove_cart_item&_nonce=${wp_travel._nonce}&cart_id=${ci.dataset.cartId}`)
                         .then(res => res.json())
                         .then(result => {
@@ -414,8 +461,8 @@ const wptravelcheckout = () => {
                 return
             }
             let cart_id = e.target.dataset.wptTargetCartId
-            let cart = wp_travel_cart.cart_items && wp_travel_cart.cart_items[cart_id] || {}
-            if (cart.trip_data.inventory && cart.trip_data.inventory.enable_trip_inventory === 'yes') {
+            let cart = wp_travel_cart.cart.cart_items && wp_travel_cart.cart.cart_items[cart_id] || {}
+            if (cart.trip_data && cart.trip_data.inventory && cart.trip_data.inventory.enable_trip_inventory === 'yes') {
                 let qs = ''
 
                 let pricing_id = cart.pricing_id || 0
@@ -437,14 +484,14 @@ const wptravelcheckout = () => {
                     qs += _date && `&selected_date=${_date}` || ''
                 }
                 loader.removeAttribute('style')
-                wp_travel.timeout(
+                wp_travel_cart.timeout(
                     fetch(`${wp_travel.ajaxUrl}?${qs}&action=wp_travel_get_inventory&_nonce=${wp_travel._nonce}`)
                         .then(res => res.json().then(result => {
                             loader.style.display = 'none'
                             if (result.success && result.data.code === 'WP_TRAVEL_INVENTORY_INFO') {
                                 if (result.data.inventory.length > 0) {
                                     let inventory = result.data.inventory[0]
-                                    ci.querySelectorAll('[data-wpt-category-count-input]').forEach(_ci => _ci.max = inventory.pax_limit)
+                                    ci.querySelectorAll('[data-wpt-category-count-input]').forEach(_ci => _ci.max = inventory.pax_available)
                                 }
                             }
                         }))
@@ -531,7 +578,7 @@ const wptravelcheckout = () => {
                 }
             }
 
-            wp_travel.timeout(
+            wp_travel_cart.timeout(
                 fetch(`${wp_travel.ajaxUrl}?action=wp_travel_update_cart_item&cart_id=${cartId}&_nonce=${wp_travel._nonce}`, {
                     method: 'POST',
                     body: JSON.stringify(_data)
@@ -539,7 +586,12 @@ const wptravelcheckout = () => {
                     .then(result => {
                         loader.style.display = 'none'
                         if (result.success) {
-                            wp_travel_cart = result.data.cart
+                            wp_travel_cart.cart = result.data.cart
+                            let total = result.data.cart.total
+                            if (wp_travel.payment) {
+                                wp_travel.payment.trip_price = parseFloat(total.total)
+                                wp_travel.payment.payment_amount = parseFloat(total.total_partial)
+                            }
                             ci.querySelector('h5 a').removeAttribute('style')
                         } else {
                             _btn.disabled = false
@@ -552,6 +604,19 @@ const wptravelcheckout = () => {
                 })
 
         })
+    })
+
+    const paymentModeInput = document.getElementById('wp-travel-payment-mode')
+    paymentModeInput && paymentModeInput.addEventListener('change', e => {
+        let basket = document.querySelector('#shopping-cart')
+        let container = basket && basket.querySelector('[data-wpt-cart-partial-total]') && basket.querySelector('[data-wpt-cart-partial-total]').closest('p')
+        if ('partial' === e.target.value) {
+            if (container && container.style.display == 'none') {
+                container.removeAttribute('style')
+            }
+        } else {
+            container.style.display = 'none'
+        }
     })
 
     // Coupon
@@ -568,7 +633,7 @@ const wptravelcheckout = () => {
         if (message) {
             let p = document.createElement('p')
             p.classList.add('error')
-            p.textContent = message
+            p.innerHTML = message
             el.after(p)
         } else {
             let error = el.parentElement.querySelector('.error')
@@ -584,7 +649,7 @@ const wptravelcheckout = () => {
         } else {
             toggleCartLoader(true)
             e.target.disabled = true
-            wp_travel.timeout(
+            wp_travel_cart.timeout(
                 fetch(`${wp_travel.ajaxUrl}?action=wp_travel_apply_coupon&_nonce=${wp_travel._nonce}`, {
                     method: 'POST',
                     body: JSON.stringify({ couponCode: couponField.value })
@@ -592,9 +657,9 @@ const wptravelcheckout = () => {
                     .then(result => {
                         toggleCartLoader()
                         if (result.success) {
-                            wp_travel_cart = result.data.cart
+                            wp_travel_cart.cart = result.data.cart
                             couponField.toggleAttribute('readonly')
-                            e.target.textContent = e.target.dataset.successL10n
+                            e.target.innerHTML = e.target.dataset.successL10n
                             e.target.style.backgroundColor = 'green'
                             shoppingCart.dispatchEvent(new CustomEvent('wptcartchange', { detail: { coupon: result.data.cart.coupon } }))
                         } else {
@@ -603,12 +668,12 @@ const wptravelcheckout = () => {
                             e.target.disabled = false
                         }
                     }), 10000)
-                    .catch(error => {
-                        alert('[X] Request Timeout!')
-                        toggleCartLoader()
-                    })
+                .catch(error => {
+                    alert('[X] Request Timeout!')
+                    toggleCartLoader()
+                })
         }
     })
 
 }
-wptravelcheckout()
+document.getElementById('shopping-cart') && wptravelcheckout(document.getElementById('shopping-cart'))

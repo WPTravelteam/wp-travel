@@ -18,25 +18,25 @@ function wp_travel_key_by( $items, $key_by = 'id' ) {
 	return $key_by_array;
 }
 
-function wp_travel_currency_format( $price ) {
-	$settings           = wp_travel_get_settings();
-	$currency_symbol    = wp_travel_get_currency_symbol();
-	$currency_position  = $settings['currency_position'];
-	$thousand_separator = $settings['thousand_separator'];
-	$decimal_separator  = $settings['decimal_separator'];
-	$number_of_decimals = $settings['number_of_decimals'];
+// function wp_travel_currency_format( $price ) {
+// 	$settings           = wp_travel_get_settings();
+// 	$currency_symbol    = wp_travel_get_currency_symbol();
+// 	$currency_position  = $settings['currency_position'];
+// 	$thousand_separator = $settings['thousand_separator'];
+// 	$decimal_separator  = $settings['decimal_separator'];
+// 	$number_of_decimals = $settings['number_of_decimals'];
 
-	$number = number_format( (float) $price, $number_of_decimals, $decimal_separator, $thousand_separator );
+// 	$number = number_format( (float) $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 
-	$positions = array(
-		'left'             => "{$currency_symbol}<span>{$number}</span>",
-		'left_with_space'  => "{$currency_symbol} <span>{$number}</span>",
-		'right'            => "<span>{$number}</span>{$currency_symbol}",
-		'right_with_space' => "<span>{$number}</span> {$currency_symbol}",
-	);
+// 	$positions = array(
+// 		'left'             => "{$currency_symbol}<span>{$number}</span>",
+// 		'left_with_space'  => "{$currency_symbol} <span>{$number}</span>",
+// 		'right'            => "<span>{$number}</span>{$currency_symbol}",
+// 		'right_with_space' => "<span>{$number}</span> {$currency_symbol}",
+// 	);
 
-	return $positions[ $currency_position ];
-}
+// 	return $positions[ $currency_position ];
+// }
 
 $settings      = wp_travel_get_settings();
 $currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
@@ -48,8 +48,6 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 		$cart = WP_Travel_Helpers_Cart::get_cart();
 
 		$cart_items = isset( $cart['cart']['cart_items'] ) ? $cart['cart']['cart_items'] : array();
-		// error_log( print_r( $cart, true ) );
-		// echo 'I\'m here';
 	}
 	?>
 	<div class="order-wrapper">
@@ -119,7 +117,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 									</div>
 								</div>
 								<div class="price">
-									<span><?php echo '<span data-wpt-item-total="' . $trip_total . '">' . wp_travel_currency_format( $trip_total ) . '</span>'; ?></span>
+									<span><?php echo '<span data-wpt-item-total="' . $trip_total . '">' . wp_travel_get_formated_price_currency( $trip_total ) . '</span>'; ?></span>
 									<a href="javascript:void(0);" class="edit" data-wpt-target-cart-id="<?php echo esc_attr( $cart_id ); ?>" data-wpt-target-trip="<?php echo esc_attr( $trip_data['id'] ); ?>" data-wpt-target-pricing="<?php echo esc_attr( $cart_pricing['id'] ); ?>"><svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m384.721 0-323.626 323.627-61.095 188.373 188.374-61.094 323.626-323.627zm84.853 127.279-42.427 42.427-84.853-84.853 42.426-42.427zm-388.611 232.331 71.427 71.428-32.036 10.39-49.782-49.782zm14.501-27.925 225.617-225.618 31.82 31.82-225.618 225.617zm53.032 53.032 225.618-225.619 31.82 31.82-225.618 225.619zm-88.313 38.965 28.136 28.136-41.642 13.505z"></path></g></svg> Edit</a>
 								</div>
 							</div>
@@ -166,7 +164,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 													</span>
 												</div>
 												<span class="prices">
-													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wp_travel_currency_format( $category_price ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . wp_travel_currency_format( $category_total ) . '">' . wp_travel_currency_format( $category_total ) . '</span>'; ?></strong>
+													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wp_travel_get_formated_price_currency( $category_price ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . $category_total . '">' . wp_travel_get_formated_price_currency( $category_total ) . '</span>'; ?></strong>
 												</span>
 											</div>
 										</div>
@@ -199,7 +197,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" />
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
-															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wp_travel_currency_format( $tx_price ) . '</span>' . '<strong><span data-wpt-tx-total="' . wp_travel_currency_format( $tx_total ) . '">' . wp_travel_currency_format( $tx_total ) . '</span>' . '</strong>'; ?>
+															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wp_travel_get_formated_price_currency( $tx_price ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wp_travel_get_formated_price_currency( $tx_total ) . '</span>' . '</strong>'; ?>
 														</span>
 												</div>
 												<?php endif; ?>
@@ -221,7 +219,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 					<ul class="extra-fields">
 						<li data-wpt-extra-field>
 							<label><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></label>
-							<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $cart['cart']['total']['cart_total'] ); ?>"><?php echo wp_travel_currency_format( $cart['cart']['total']['cart_total'] ); ?></strong></div>
+							<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $cart['cart']['total']['cart_total'] ); ?>"><?php echo wp_travel_get_formated_price_currency( $cart['cart']['total']['cart_total'] ); ?></strong></div>
 						</li>
 						<?php
 						$display  = $cart['cart']['total']['discount'] > 0 ? '' : 'display:none;';
@@ -230,7 +228,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 							<label><?php esc_html_e( 'Discount:', 'wp-travel' ); ?></label>
 							<div class="price">
-								<strong data-wpt-cart-discount="<?php echo esc_attr( $discount ); ?>"><?php echo '- ' . wp_travel_currency_format( $discount ); ?></strong>
+								<strong data-wpt-cart-discount="<?php echo esc_attr( $discount ); ?>"><?php echo '- ' . wp_travel_get_formated_price_currency( $discount ); ?></strong>
 							</div>
 						</li>
 						<?php
@@ -240,7 +238,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 						?>
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 							<label><?php echo sprintf( esc_html__( 'Tax(%s):', 'wp-travel' ), $tax_rate . '%' ); ?></label>
-							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . wp_travel_currency_format( $tax ); ?></strong></div>
+							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . wp_travel_get_formated_price_currency( $tax ); ?></strong></div>
 						</li>
 					</ul>
 					<div class="cart-summary-bottom">
@@ -269,8 +267,13 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 								<div class="total-price">
 									<p><?php esc_html_e( 'Total:', 'wp-travel' ); ?>
 										<strong>
-											<?php echo (float) $cart['cart']['total']['cart_total'] > (float) $cart['cart']['total']['total'] ? '<del data-wpt-cart-full-total="">' . wp_travel_currency_format( $cart['cart']['total']['cart_total'] ) . '</del>' : '<del data-wpt-cart-full-total=""></del>'; ?>
-											<?php echo '<span data-wpt-cart-total="' . $cart['cart']['total']['total'] . '">' . wp_travel_currency_format( $cart['cart']['total']['total'] ) . '</span>'; ?>
+											<?php echo (float) $cart['cart']['total']['cart_total'] > (float) $cart['cart']['total']['total'] ? '<del data-wpt-cart-full-total="">' . wp_travel_get_formated_price_currency( $cart['cart']['total']['cart_total'] ) . '</del>' : '<del data-wpt-cart-full-total=""></del>'; ?>
+											<?php echo '<span data-wpt-cart-total="' . $cart['cart']['total']['total'] . '">' . wp_travel_get_formated_price_currency( $cart['cart']['total']['total'] ) . '</span>'; ?>
+										</strong>
+									</p>
+									<p style="display:none;"><?php esc_html_e( 'Payment Amount:', 'wp-travel' ); ?>
+										<strong>
+											<?php echo '<span data-wpt-cart-partial-total="' . $cart['cart']['total']['total_partial'] . '">' . wp_travel_get_formated_price_currency( $cart['cart']['total']['total_partial'] ) . '</span>'; ?>
 										</strong>
 									</p>
 								</div>
