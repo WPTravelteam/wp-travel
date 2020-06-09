@@ -5492,7 +5492,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   animation: loader 1s linear infinite;
 }
 #shopping-cart .wp-travel-cart-loader svg path {
-  fill: #3399ff;
+  fill: #444;
 }
 #shopping-cart .btn {
   outline: none;
@@ -5503,7 +5503,6 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   text-align: center;
 }
 #shopping-cart .btn:hover {
-  background-color: rgba(51, 153, 255, 0.7);
   text-decoration: none;
 }
 #shopping-cart .btn.btn-dark {

@@ -6437,7 +6437,7 @@ $primaryColor: #3399ff;
             height: 30px;
             animation: loader 1s linear infinite;
             path{
-                fill: $primaryColor;
+                fill: #444;
             }
         }
     }
@@ -6452,7 +6452,6 @@ $primaryColor: #3399ff;
 		cursor: pointer;
 		text-align: center;
 		&:hover{
-			background-color: rgba($primaryColor, .7);
 			text-decoration: none;
 		}
 		&.btn-dark{
