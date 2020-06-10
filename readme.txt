@@ -239,11 +239,20 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 4.0.0 =
 Release Date:
 
+New: 
+Added support for recurring dates.
+
 Enhancement: 
-* Trip Backend layout updated.
+* Trip edit layout updated to WordPress Block layout.
 
 Fixed :
 * Currency symbol conflict with multiple currency.
+* Frontend layout updated.
+
+Removed: 
+* List by fixed departure option.
+* Option Partial payment for extras.
+* Group size removed.
 
 = 3.2.5 =
 Release Date: 25th May, 2020
