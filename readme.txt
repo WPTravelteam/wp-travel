@@ -233,6 +233,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.0.2 =
+Release Date: 10th June, 2020
+
+Fixed:
+* Fixes issue on cart and checkout for non pro user.
+* Fixes issue on multiple pricing case.
+
 = 4.0.1 =
 Release Date: 10th June, 2020
 
