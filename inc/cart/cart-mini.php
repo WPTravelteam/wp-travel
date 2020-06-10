@@ -154,6 +154,9 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 									if ( count( $trip_extras ) > 0 ) {
 										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
 										foreach ( $trip_extras as $tx ) {
+											if ( ! isset( $cart_extras[ $tx['id'] ] ) || $cart_extras[ $tx['id'] ] <= 0 ) {
+												continue;
+											}
 											$title    = isset( $tx['title'] ) ? $tx['title'] : '';
 											$tx_count = 0;
 											$tx_price = 0;

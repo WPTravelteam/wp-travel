@@ -17,8 +17,8 @@ jQuery(document).ready(function ($) {
     var parent = '#' + $(this).attr('id');
     var cart_fields = {};
     $(parent + ' input, ' + parent + ' select').each(function (index) {
-      filterby = $(this).attr('name');
-      filterby_val = $(this).val();
+      var filterby = $(this).attr('name');
+      var filterby_val = $(this).val();
 
       if ($(this).data('multiple') == true) {
         if ('undefined' == typeof cart_fields[filterby]) {
@@ -80,10 +80,10 @@ jQuery(document).ready(function ($) {
     var update_cart_fields = {};
     $('.ws-theme-cart-page tr.responsive-cart').each(function (i) {
       // pax = $(this).find('input[name="pax^"]').val();
-      cart_id = $(this).find('input[name="cart_id"]').val();
-      pricing_id = $(this).find('input[name="pricing_id"]').val();
-      extra_id = false;
-      extra_qty = false;
+      var cart_id = $(this).find('input[name="cart_id"]').val();
+      var pricing_id = $(this).find('input[name="pricing_id"]').val();
+      var extra_id = false;
+      var extra_qty = false;
       var pax = {};
       $(this).find('input.wp-travel-trip-pax').each(function () {
         pax[$(this).data('category-id')] = this.value;
@@ -192,7 +192,7 @@ jQuery(document).ready(function ($) {
     }
   });
   $(document).on('click, change', '.wp-travel-pax', function () {
-    $this = $(this);
+    var $this = $(this);
     var productPrice = $this.closest('.product-price');
     var availablePax = productPrice.data('maxPax');
     var minPax = productPrice.data('minPax');
@@ -334,8 +334,8 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
         if (wpct.dataset.wptCategoryCount == fg.dataset.wptCategory) wpct.innerHTML = _count;
       });
       if (categoryTotalContainer) categoryTotalContainer.innerHTML = wp_travel_cart.format(categoryTotal);
-      tripTotal += categoryTotal;
-      tripTotalWOExtras += categoryTotal;
+      tripTotal += parseFloat(categoryTotal);
+      tripTotalWOExtras += parseFloat(categoryTotal);
       tripTotalPartialWOExtras += parseFloat(categoryTotal) * parseFloat(payoutPercentage) / 100;
     }); // Extras.
 
@@ -422,7 +422,11 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
     if (cartTotalPartialContainers) {
       cartTotalPartialContainers.forEach(function (ctpc) {
-        var _partialTotal = (tripTotalPartialWOExtras + txTotal) * (100 + parseFloat(wp_travel_cart.cart.tax)) / 100;
+        var _partialTotal = tripTotalPartialWOExtras + txTotal;
+
+        if (wp_travel_cart.cart.tax) {
+          _partialTotal = _partialTotal * (100 + parseFloat(wp_travel_cart.cart.tax)) / 100;
+        }
 
         ctpc.innerHTML = wp_travel_cart.format(_partialTotal);
       });
@@ -486,10 +490,8 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
       if (cart.trip_data && cart.trip_data.inventory && cart.trip_data.inventory.enable_trip_inventory === 'yes') {
         var qs = '';
-
-        var _pricing_id = cart.pricing_id || 0;
-
-        qs += _pricing_id && "pricing_id=".concat(_pricing_id) || '';
+        var pricing_id = cart.pricing_id || 0;
+        qs += pricing_id && "pricing_id=".concat(pricing_id) || '';
 
         var _trip_id = cart.trip_data && cart.trip_data.id || 0;
 

@@ -243,6 +243,7 @@ Enhancement:
 * Trip Backend layout updated.
 
 Fixed :
+* Currency symbol conflict with multiple currency.
 
 = 3.2.5 =
 Release Date: 25th May, 2020

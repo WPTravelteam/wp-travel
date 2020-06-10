@@ -42,7 +42,7 @@ class Wp_Travel_Extras_Frontend {
 	public function has_trip_extras( $trip_id, $price_key = false ) {
 
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
-		$settings = wp_travel_get_settings();
+		$settings_fields = wp_travel_get_settings();
 		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
 
 		if ( empty( $trip_id ) ) {
@@ -91,7 +91,7 @@ class Wp_Travel_Extras_Frontend {
 		$trip_extras = array();
 
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' );
-		$settings = wp_travel_get_settings();
+		$settings_fields = wp_travel_get_settings();
 		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
 
 		if ( 'yes' == $switch_to_react ) {
