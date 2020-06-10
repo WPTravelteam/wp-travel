@@ -21,7 +21,12 @@ module.exports = function (grunt) {
 		'readme.txt',
 		'wp-travel.php',
 		'wpml-config.xml',
-		'!inc/extended/app/src/**'
+		'!inc/extended/app/src/**',
+		'!inc/extended/package.json',
+		'!inc/extended/postcss.config.js',
+		'!inc/extended/webpack.config.js',
+		'!inc/extended/yarn.lock',
+		'!inc/extended/yarn-error.log'
 	];
 
 	/**
@@ -80,7 +85,13 @@ module.exports = function (grunt) {
 					'!tests/**',
 					'!docs/**',
 					'!assets/sass/**',
-					'!inc/extended/node_modules/**'
+					'!inc/extended/node_modules/**',
+					'!inc/extended/app/src/**',
+					'!inc/extended/package.json',
+					'!inc/extended/postcss.config.js',
+					'!inc/extended/webpack.config.js',
+					'!inc/extended/yarn.lock',
+					'!inc/extended/yarn-error.log'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,
@@ -277,7 +288,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'assets/js/cart.js': 'assets/js/src/cart.js'
+					'assets/js/src/cart.js': 'assets/js/src/_cart.js'
 				}
 			}
 		},
@@ -358,7 +369,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
 	grunt.loadNpmTasks('grunt-writefile');
-	// grunt.loadNpmTasks('grunt-babel')
+	grunt.loadNpmTasks('grunt-babel')
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -369,7 +380,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', []);
 
 	grunt.registerTask('gitattributes', ['file-creator']);
-	// grunt.registerTask('babel', ['babel']);
+	grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
 		// 'babel',

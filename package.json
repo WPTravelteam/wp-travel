@@ -45,6 +45,7 @@
     "sass": "^0.5.0"
   },
   "dependencies": {
+    "@babel/cli": "^7.10.1",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
     "node-native-zip": "^1.1.0"
