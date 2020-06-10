@@ -794,7 +794,7 @@ function wp_travel_frontend_contents( $post_id ) {
 						<?php continue; ?>
 					<?php endif; ?>
 					<?php $tab_label = $tab_info['label']; ?>
-					<li class="wp-travel-ert wp-travel-<?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_label ); ?></li>
+					<li class="wp-travel-ert <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?> tab-<?php echo esc_attr( $index ); ?>" data-tab="tab-<?php echo esc_attr( $index ); ?>-cont"><?php echo esc_attr( $tab_label ); ?></li>
 					<?php
 					$index++;
 				endforeach;
