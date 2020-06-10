@@ -243,7 +243,7 @@ class WP_Travel_Admin_Info_Pointers {
 		return $q;
 	}
 	function enable_v4_pointer( $q ) {
-		$pointer_content = '<p>Please go to WP Travel > Settings > General. Now enable switch to V4 option and save settings to enable WP Travel version 4.0.0 layout. <a href="https://wptravel.io/wp-travel-version-(4-0-0)-post-release-post" target="_blank">Learn More</a></p>';
+		$pointer_content = '<p>Please go to WP Travel > Settings > General. Now enable switch to V4 option and save settings to enable WP Travel version 4.0.0 layout. <a href="https://wptravel.io/wp-travel-version-4-0-0-release/" target="_blank">Learn More</a></p>';
 
 		$q['wp_travel_enable_v4_pointer'] = array(
 			'target'  => '#menu-posts-itinerary-booking',
