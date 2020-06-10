@@ -237,7 +237,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.0.0 =
-Release Date:
+Release Date: 10th June, 2020
 
 New: 
 Added support for recurring dates.
