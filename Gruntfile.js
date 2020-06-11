@@ -26,7 +26,12 @@ module.exports = function (grunt) {
 		'!inc/extended/postcss.config.js',
 		'!inc/extended/webpack.config.js',
 		'!inc/extended/yarn.lock',
-		'!inc/extended/yarn-error.log'
+		'!inc/extended/yarn-error.log',
+		'!app/src/**',
+		'!yarn-error.log',
+		'!yarn.lock',
+		'!postcss.config.js',
+		'!webpack.config.js'
 	];
 
 	/**
@@ -44,6 +49,9 @@ module.exports = function (grunt) {
 		'package-lock.json',
 		'package.json',
 		'push_dot_org.sh',
+		'postcss.config.js',
+		'yarn.lock',
+		'webpack.config.js'
 	]);
 
 	let package_json = fs.readFileSync('package.json');
