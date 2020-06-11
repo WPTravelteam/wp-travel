@@ -732,10 +732,6 @@ function wp_travel_get_trip_duration( $post_id ) {
 	ob_end_clean();
 	$content = apply_filters( 'wp_travel_trip_duration', $content, $post_id );
 	echo $content; // phpcs:ignore
-<<<<<<< .merge_file_a09980
-=======
-
->>>>>>> .merge_file_a14876
 }
 
 /**
@@ -1312,10 +1308,6 @@ function wp_travel_is_checkout_page() {
 	$settings = wp_travel_get_settings();
 
 	$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
-<<<<<<< .merge_file_a09980
-
-=======
->>>>>>> .merge_file_a14876
 	return (int) $checkout_page_id === $page_id;
 }
 
@@ -2662,10 +2654,7 @@ function wp_travel_privacy_link() {
 function wp_travel_get_strings() {
 	$localized_strings = array(
 		'from'                  => __( 'From', 'wp-travel' ),
-<<<<<<< .merge_file_a09980
-=======
 		'to'                    => __( 'To', 'wp-travel' ),
->>>>>>> .merge_file_a14876
 		'confirm'               => __( 'Are you sure you want to remove?', 'wp-travel' ),
 		'book_now'              => __( 'Book Now', 'wp-travel' ),
 		'book_n_pay'            => __( 'Book and Pay', 'wp-travel' ),
