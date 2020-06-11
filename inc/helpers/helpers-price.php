@@ -1023,6 +1023,8 @@ function wp_travel_get_pricing_option_type( $post_id = null ) {
 		global $post;
 		$post_id = $post->ID;
 	}
+	$settings = wp_travel_get_settings();
+	$switch_to_react = $settings['wp_travel_switch_to_react'];
 
 	// need to remove in future. [replaced this with 'wp_travel_pricing_option_type' meta]. @since 1.7.6
 	$enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
@@ -1030,6 +1032,10 @@ function wp_travel_get_pricing_option_type( $post_id = null ) {
 	$pricing_option_type = get_post_meta( $post_id, 'wp_travel_pricing_option_type', true );
 	if ( ! $pricing_option_type ) {
 		$pricing_option_type = isset( $enable_pricing_options ) && 'yes' === $enable_pricing_options ? 'multiple-price' : 'single-price';
+	}
+
+	if ( 'yes' == $switch_to_react && 'single-price' == $pricing_option_type ) {
+		$pricing_option_type = 'multiple-price';
 	}
 	return $pricing_option_type;
 }

@@ -5,16 +5,13 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.4.1
 Requires PHP: 5.5
-Stable tag: 4.0.0
+Stable tag: 4.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
 
 == Description ==
-> **Notice: WP Travel V4.0**
-> We are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to [check this link for more details](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post).
-
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
@@ -236,14 +233,36 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.0.2 =
+Release Date: 10th June, 2020
+
+Fixed:
+* Fixes issue on cart and checkout for non pro user.
+* Fixes issue on multiple pricing case.
+
+= 4.0.1 =
+Release Date: 10th June, 2020
+
+Fixed: 
+Minor issues.
+
 = 4.0.0 =
-Release Date:
+Release Date: 10th June, 2020
+
+New: 
+Added support for recurring dates.
 
 Enhancement: 
-* Trip Backend layout updated.
+* Trip edit layout updated to WordPress Block layout.
 
 Fixed :
 * Currency symbol conflict with multiple currency.
+* Frontend layout updated.
+
+Removed: 
+* List by fixed departure option.
+* Option Partial payment for extras.
+* Group size removed.
 
 = 3.2.5 =
 Release Date: 25th May, 2020

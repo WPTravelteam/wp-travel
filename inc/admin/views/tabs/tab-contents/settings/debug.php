@@ -34,42 +34,6 @@ function wp_travel_settings_callback_debug( $tab, $args ) {
 				</td>
 			</tr>
 		</table>
-		<?php 
-		if ( 'yes' == $wt_test_mode ) {
-			?>
-				<a href="edit.php?post_type=itinerary-booking&page=settings&clear_v4_migration=yes">clear v4 migration and table</a>
-			<?php
-
-
-			if ( isset( $_GET['clear_v4_migration'] ) && $_GET['clear_v4_migration'] == 'yes' ) {
-				delete_option( 'wp_travel_migrate_400' );
-				delete_option( 'wp_travel_pricing_table_created' );
-
-				global $wpdb;
-				
-				if ( is_multisite() ) {
-					$blog_id                       = get_current_blog_id();
-					$pricings_table                = $wpdb->base_prefix . $blog_id . '_wt_pricings';
-					$date_table                    = $wpdb->base_prefix . $blog_id . '_wt_dates';
-					$price_category_relation_table = $wpdb->base_prefix . $blog_id . '_wt_price_category_relation';
-					$excluded_dates_times_table    = $wpdb->base_prefix . $blog_id . '_wt_excluded_dates_times';
-					
-				} else {
-					$pricings_table                = $wpdb->base_prefix . 'wt_pricings';
-					$date_table                    = $wpdb->base_prefix . 'wt_dates';
-					$price_category_relation_table = $wpdb->base_prefix . 'wt_price_category_relation';
-					$excluded_dates_times_table    = $wpdb->base_prefix . 'wt_excluded_dates_times';
-				}
-				
-				$wpdb->query("DROP TABLE IF EXISTS {$pricings_table}");
-				$wpdb->query("DROP TABLE IF EXISTS {$date_table}");
-				$wpdb->query("DROP TABLE IF EXISTS {$price_category_relation_table}");
-				$wpdb->query("DROP TABLE IF EXISTS {$excluded_dates_times_table}");
-
-			}
-			
-		}
-		?>
 		<?php do_action( 'wp_travel_below_debug_tab_fields', $args ); ?>
 		<?php
 }
