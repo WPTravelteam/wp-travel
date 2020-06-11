@@ -1,12 +1,12 @@
 {
   "name": "wp-travel",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:pre_release": "npx grunt build"
+    "build:pre_release": "npx wp-scripts build && npx grunt build"
   },
   "repository": {
     "type": "git",
