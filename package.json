@@ -6,7 +6,7 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:pre_release": "bash bash/pre_release.sh"
+    "build:pre_release": "npx grunt build"
   },
   "repository": {
     "type": "git",

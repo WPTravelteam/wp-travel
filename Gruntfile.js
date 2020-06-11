@@ -99,6 +99,7 @@ module.exports = function (grunt) {
 					'!tests/**',
 					'!docs/**',
 					'!assets/sass/**',
+					'!assets/js/src/**',
 					'!inc/extended/node_modules/**',
 					'!inc/extended/app/src/**',
 					'!inc/extended/package.json',

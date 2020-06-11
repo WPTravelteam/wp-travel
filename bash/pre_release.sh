@@ -10,10 +10,6 @@ echo "Assets Tasks"
 grunt pre_release
 echo "*********************************"
 
-echo "React build"
-npx wp-scripts build
-echo "*********************************"
-
 echo "State files"
 git add --all
 echo "*********************************"
