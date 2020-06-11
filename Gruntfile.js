@@ -21,6 +21,17 @@ module.exports = function (grunt) {
 		'readme.txt',
 		'wp-travel.php',
 		'wpml-config.xml',
+		'!inc/extended/app/src/**',
+		'!inc/extended/package.json',
+		'!inc/extended/postcss.config.js',
+		'!inc/extended/webpack.config.js',
+		'!inc/extended/yarn.lock',
+		'!inc/extended/yarn-error.log',
+		'!app/src/**',
+		'!yarn-error.log',
+		'!yarn.lock',
+		'!postcss.config.js',
+		'!webpack.config.js'
 	];
 
 	/**
@@ -38,11 +49,14 @@ module.exports = function (grunt) {
 		'package-lock.json',
 		'package.json',
 		'push_dot_org.sh',
+		'postcss.config.js',
+		'yarn.lock',
+		'webpack.config.js'
 	]);
 
 	let package_json = fs.readFileSync('package.json');
 	package_json = JSON.parse(package_json);
-	
+
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
@@ -69,6 +83,7 @@ module.exports = function (grunt) {
 					'**',
 					'!.*',
 					'!*.md',
+					'1*.map',
 					'!.*/**',
 					'!tmp/**',
 					'!Gruntfile.js',
@@ -78,7 +93,13 @@ module.exports = function (grunt) {
 					'!tests/**',
 					'!docs/**',
 					'!assets/sass/**',
-					'!inc/extended/node_modules/**'
+					'!inc/extended/node_modules/**',
+					'!inc/extended/app/src/**',
+					'!inc/extended/package.json',
+					'!inc/extended/postcss.config.js',
+					'!inc/extended/webpack.config.js',
+					'!inc/extended/yarn.lock',
+					'!inc/extended/yarn-error.log'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,
@@ -222,7 +243,7 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
 					'assets/css/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
 					'assets/css/wp-travel-admin-1.css': 'assets/sass/admin/wp-travel-admin-1.scss',
-					
+
 					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
 				}
@@ -266,6 +287,18 @@ module.exports = function (grunt) {
 				'<%= dirs.js %>/*.js',
 				'!<%= dirs.js %>/*.min.js'
 			]
+		},
+
+		babel: {
+			options: {
+				sourceMap: true,
+				presets: ['@babel/preset-env']
+			},
+			dist: {
+				files: {
+					'assets/js/src/cart.js': 'assets/js/src/_cart.js'
+				}
+			}
 		},
 
 		// Compress files.
@@ -344,6 +377,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
 	grunt.loadNpmTasks('grunt-writefile');
+	grunt.loadNpmTasks('grunt-babel')
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -354,8 +388,10 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', []);
 
 	grunt.registerTask('gitattributes', ['file-creator']);
+	grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
+		// 'babel',
 		'uglify',
 		'sass',
 		'cssmin',

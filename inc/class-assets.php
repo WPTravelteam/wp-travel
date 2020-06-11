@@ -48,6 +48,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'prices'             => wp_reavel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
+				"_nonce"             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 				'strings'            => wp_travel_get_strings(),
 				// Need map data enhancement.
@@ -97,7 +98,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			}
 
 			// Script only for itineraries.
-			if ( is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page() ) {
+			$is_wp_travel_single_pages = is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page();
+			if ( apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_single_pages, $trip_id ) ) {
 
 				// Add localized vars.
 				$wp_travel['cartUrl'] = wp_travel_get_cart_url();

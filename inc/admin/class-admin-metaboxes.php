@@ -140,11 +140,14 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
-		// add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-info', __( 'Trip Info', 'wp-travel' ), array( $this, 'wp_travel_trip_info' ), WP_TRAVEL_POST_TYPE, 'side' );
+		$settings = wp_travel_get_settings();
+		$switch_to_react = $settings['wp_travel_switch_to_react'];
+		if ( 'no' === $switch_to_react ) {
+			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
+			remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
+		}
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
-		remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 	}
 
 	/**
@@ -290,6 +293,8 @@ class WP_Travel_Admin_Metaboxes {
 	public function remove_metaboxs() {
 		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE, 'side' );
 		remove_meta_box( 'postexcerpt', WP_TRAVEL_POST_TYPE, 'normal' );
+		remove_meta_box( 'itinerary_pricing_categorydiv', WP_TRAVEL_POST_TYPE, 'side' );
+		
 	}
 	/**
 	 * Clean Metabox Classes.
@@ -386,7 +391,18 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
+		$settings = wp_travel_get_settings();
+		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+		if ( 'yes' === $switch_to_v4 ) {
+			return;
+		}
+
 		$post_type = get_post_type( $post_id );
+		$screen    = get_current_screen();
+
+		if ( '' == $screen ) {
+			return;
+		}
 
 		// If this isn't a WP_TRAVEL_POST_TYPE post, don't update it.
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
@@ -404,6 +420,11 @@ class WP_Travel_Admin_Metaboxes {
 
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
 		if ( isset( $_POST['wp_travel_save_data'] ) && ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen ) { // Quick fixes [ Data override as empty form elementor ].
 			return;
 		}
 
@@ -539,7 +560,6 @@ class WP_Travel_Admin_Metaboxes {
 			if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
 				$trip_meta['trip_date'] = $trip_dates[0]; // Use it in sorting according to trip dates. @since 3.0.5
 			}
-
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 

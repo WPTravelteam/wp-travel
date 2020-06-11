@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 3.2.5
+ * Version: 4.0.2
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 4.4
  * Requires PHP: 5.5
- * Tested up to: 5.3.2
+ * Tested up to: 5.4.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -36,7 +36,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '3.2.5';
+		public $version = '4.0.2';
 
 		/**
 		 * The single instance of the class.
@@ -97,6 +97,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
+			if ( file_exists( sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH ) ) ) {
+				include sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
+			}
 			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
 			add_action( 'activated_plugin', array( $this, 'wp_travel_plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
@@ -133,7 +136,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			// For Network.
 			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
-
 			/**
 			 * To resolve the pages mismatch issue when using WPML.
 			 *
@@ -184,6 +186,46 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			return $_page_id;
 		}
+
+		/**
+		 * To resolve the pages mismatch issue when using WPML.
+		 * 
+		 *
+		 * @since 3.1.8
+		 */
+		public function filter_wp_travel_settings( $value, $option ) {
+			$settings_keys = array(
+				'cart_page_id',
+				'checkout_page_id',
+				'dashboard_page_id',
+				'thank_you_page_id',
+			);
+
+			foreach ( $settings_keys as $skey ) {
+				if ( isset( $value[ $skey ] ) ) {
+					$page_id        = apply_filters( 'wptravel_wpml_object_id', (int) $value[ $skey ], $skey, true );
+					$value[ $skey ] = $page_id;
+				}
+			}
+
+			return $value;
+		}
+
+
+		/**
+		 * To resolve the pages mismatch issue when using WPML.
+		 *
+		 * @since 3.1.8
+		 */
+		public function get_wp_travel_page_id_by_locale( $page_id, $option ) {
+			$_page_id = apply_filters( 'wpml_object_id', $page_id, 'page', true );
+			if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+				$_page_id = get_option( "wp_travel_{$option}_" . ICL_LANGUAGE_CODE, $_page_id );
+			}
+
+			return $_page_id;
+		}
+
 
 		public function wp_travel_network_menu() {
 			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WP_Travel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
@@ -336,7 +378,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( ! $screen = get_current_screen() ) {
 				return;
 			}
-
 			switch ( $screen->id ) {
 				case 'options-permalink':
 					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
@@ -392,7 +433,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * WP Travel Activation.
 		 */
-		function wp_travel_activation() {
+		function wp_travel_activation( $network_enabled ) {
 			// Check for PHP Compatibility
 			global $wp_version;
 			$min_php_ver = '5.3.29';
@@ -525,6 +566,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( version_compare( $this->version, '3.2.2', '>' ) ) {
 				include_once sprintf( '%s/upgrade/322-323.php', WP_TRAVEL_ABSPATH );
 			}
+<<<<<<< .merge_file_a11468
+=======
+			include_once sprintf( '%s/upgrade/400.php', WP_TRAVEL_ABSPATH );
+>>>>>>> .merge_file_a13288
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				if ( empty( $current_db_version ) ) {

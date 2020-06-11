@@ -102,4 +102,3 @@ if ( ! comments_open() ) {
 
 	<!-- <div class="clear"></div> -->
 </div>
-

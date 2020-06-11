@@ -10,6 +10,7 @@ project.properties
 /node_modules/
 /deploy/
 /build/
+/app/build
 # Docs
 /docs/
 # Sass

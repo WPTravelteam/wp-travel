@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 4.4.0
 Tested up to: 5.4.1
 Requires PHP: 5.5
-Stable tag: 3.2.5
+Stable tag: 4.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -68,6 +68,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
+* [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Base](https://wptravel.io/demo/?demo=travel-base&utm_source=freethemes&utm_medium=travelbase&utm_campaign=WP%20Plugin) by Theme Palace
@@ -79,6 +80,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
+* [Travel Joy Pro](https://wptravel.io/demo/?demo=travel-joy-pro&utm_source=paidthemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem Pro](https://wptravel.io/demo/?demo=travel-gem-pro&utm_source=paidthemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Ultimate Pro](https://wptravel.io/demo/?demo=travel-ultimate-pro&utm_source=paidthemes&utm_medium=ultimatepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Travel Base Pro](https://wptravel.io/demo/?demo=travel-base-pro&utm_source=paidthemes&utm_medium=travelbasepro&utm_campaign=WP%20Plugin) by Theme Palace.
@@ -233,6 +235,37 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.0.2 =
+Release Date: 10th June, 2020
+
+Fixed:
+* Fixes issue on cart and checkout for non pro user.
+* Fixes issue on multiple pricing case.
+
+= 4.0.1 =
+Release Date: 10th June, 2020
+
+Fixed: 
+Minor issues.
+
+= 4.0.0 =
+Release Date: 10th June, 2020
+
+New: 
+Added support for recurring dates.
+
+Enhancement: 
+* Trip edit layout updated to WordPress Block layout.
+
+Fixed :
+* Currency symbol conflict with multiple currency.
+* Frontend layout updated.
+
+Removed: 
+* List by fixed departure option.
+* Option Partial payment for extras.
+* Group size removed.
 
 = 3.2.5 =
 Release Date: 25th May, 2020
@@ -1275,3 +1308,8 @@ Release Date: October 29th, 2018
 
 = 1.0.0 =
 * Initial  release.
+
+== Upgrade Notice ==
+
+= 4.0 =
+4.0 is a major update. Make a full site backup, update your theme and extensions, and [review update best practices](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post) before upgrading.

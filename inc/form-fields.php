@@ -301,7 +301,7 @@ function wp_travel_get_checkout_form_fields() {
 	}
 
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
-	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
+	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields ); ////
 	// Set default values.
 	$traveller_fields['first_name']['default']   = $user_fname;
 	$traveller_fields['last_name']['default']    = $user_fname;
@@ -448,6 +448,9 @@ function wp_travel_get_checkout_form_fields() {
 				'name'          => 'wp_travel_payment_amount_info',
 				'id'            => 'wp-travel-payment-amount-info',
 				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
+				'attributes'    => array( 
+					'data-wpt-cart-partial-total' => '',
+				 ),
 				// 'before_field'  => wp_travel_get_currency_symbol(),
 				'default'       => wp_travel_get_formated_price_currency( $total_partial_amount ),
 				'priority'      => 115,
@@ -472,6 +475,9 @@ function wp_travel_get_checkout_form_fields() {
 			'label'         => __( 'Total Trip Price', 'wp-travel' ),
 			'name'          => 'wp_travel_trip_price_info',
 			'id'            => 'wp-travel-trip-price_info',
+			'attributes'    => array( 
+				'data-wpt-cart-total' => '',
+			 ),
 			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
 			// 'before_field'  => wp_travel_get_currency_symbol(),
 			'default'       => wp_travel_get_formated_price_currency( $total_amount ),
@@ -479,12 +485,15 @@ function wp_travel_get_checkout_form_fields() {
 		);
 
 		$payment_fields['trip_price'] = array(
-			'type'     => 'hidden',
-			'label'    => __( 'Trip Price', 'wp-travel' ),
-			'name'     => 'wp_travel_trip_price',
-			'id'       => 'wp-travel-trip-price',
-			'default'  => wp_travel_get_formated_price( $trip_price ),
-			'priority' => 102,
+			'type'       => 'hidden',
+			'label'      => __( 'Trip Price', 'wp-travel' ),
+			'name'       => 'wp_travel_trip_price',
+			'id'         => 'wp-travel-trip-price',
+			'default'    => wp_travel_get_formated_price( $trip_price ),
+			'priority'   => 102,
+			'attributes' => array( 
+				'data-wpt-cart-total' => '',
+			 ),
 		);
 	}
 

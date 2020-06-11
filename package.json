@@ -1,10 +1,12 @@
 {
   "name": "wp-travel",
-  "version": "3.2.5",
+  "version": "4.0.2",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "build:pre_release": "bash bash/pre_release.sh"
   },
   "repository": {
     "type": "git",
@@ -23,8 +25,11 @@
   },
   "homepage": "https://gitlab.com/ws-plugins/wp-travel#README",
   "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
     "eslint": "^3.13.1",
     "grunt": "^1.0.4",
+    "grunt-babel": "^8.0.0",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.3",
@@ -39,11 +44,28 @@
     "grunt-rtlcss": "^2.0.1",
     "grunt-svn-export": "^0.1.7",
     "grunt-wp-i18n": "^1.0.0",
-    "sass": "^0.5.0"
-  },
-  "dependencies": {
+    "sass": "^0.5.0",
+    "@wordpress/scripts": "^6.2.0",
+    "autoprefixer": "^9.7.4",
+    "css-loader": "^3.4.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "@babel/cli": "^7.10.1",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
     "node-native-zip": "^1.1.0"
+  },
+  "dependencies": {
+    "@wordpress/icons": "^1.3.1",
+    "react-datepicker": "^2.12.1",
+    "react-geocode": "^0.2.1",
+    "react-gmaps": "^1.9.0",
+    "react-google-autocomplete": "^1.1.2",
+    "react-select": "^3.0.8",
+    "react-sortablejs": "^2.0.11",
+    "rrule": "^2.6.4"
   }
 }

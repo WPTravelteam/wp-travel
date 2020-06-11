@@ -89,6 +89,8 @@ class Wp_Travel_Shortcodes {
 			'after'  => null,
 		)
 	) {
+		$wrapper_class     = wp_travel_get_theme_wrapper_class();
+		$wrapper['class'] .= ' ' . $wrapper_class;
 		ob_start();
 
 		// @codingStandardsIgnoreStart

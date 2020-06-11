@@ -88,7 +88,7 @@ function wp_travel_display_general_admin_notices() {
 
 add_action( 'admin_notices', 'wp_travel_display_general_admin_notices' );
 
-//Deprecated notice.
+// Deprecated notice.
 function wp_travel_display_deprecated_notice() {
 	$notices = apply_filters( 'wp_travel_deprecated_admin_notice', array() );
 	if ( count( $notices ) < 1 ) {
@@ -103,8 +103,9 @@ function wp_travel_display_deprecated_notice() {
 			<ul>
 				<?php foreach ( $notices as $notice ) : ?>
 					<li><?php echo esc_html( $notice ); ?></li>
-				<?php
-				endforeach; ?>
+					<?php
+				endforeach;
+				?>
 			</ul>
 		</div>
 	</div>
@@ -116,7 +117,7 @@ add_action( 'admin_notices', 'wp_travel_display_deprecated_notice' );
 // Single Pricing deprecated notice.
 function wp_travel_display_single_pricing_deprecated_notice( $notices ) {
 
-	$screen = get_current_screen();
+	$screen  = get_current_screen();
 	$post_id = get_the_ID();
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type && $screen->parent_base == 'edit' && ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) && $post_id ) {
 		if ( $post_id ) {
@@ -147,32 +148,33 @@ function wp_travel_black_friday_notice() {
 
 function wp_travel_black_friday_dismiss_notice_ajax() {
 	$user_id = get_current_user_id();
-	$key = 'wp_travel_black_friday_2019_' . $user_id;
+	$key     = 'wp_travel_black_friday_2019_' . $user_id;
 	update_option( $key, true );
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
 
+function wp_travel_pricing_table_created_notice_display( $show ) {
 
-// V4 Update Notice
-function wp_travel_version_4_notice() {
+	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
+		$show = true;
+	}
+	return $show;
+}
 
-	$user_id = get_current_user_id();
+add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 100 );
 
-	// if ( ! get_option( 'wp_travel_v4_update_notice_' . $user_id, false ) ) {
+
+function wp_travel_pricing_table_created_notice() {
+	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
 		?>
-			<div class="notice notice-error wp-travel-notice-v4-update is-dismissible" data-notice="wp-travel-black-friday" style="background: #ffd6d3; color:#000;">
-				<p><?php printf( 'Dear users, we are about to release WP Travel V4 version with a huge enhancement and functionality changes. It is strongly advised to check this <a href="%s" target="_blank" >link</a> for more details.', esc_url( 'https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post' ) ); ?></p>
+		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
+			<div class="notification-content">
+				<ul>
+					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( 'WP Travel database needs an update. Please deactivate and activate your WP Travel once to update your database.', 'wp-travel' ); ?></strong></p></div>
+				</ul>
 			</div>
+		</div>
 		<?php
-	// }
+	}
 }
-add_action( 'admin_notices', 'wp_travel_version_4_notice' );
-
-function wp_travel_v4_update_dismiss_notice_ajax() {
-	$user_id = get_current_user_id();
-	$key = 'wp_travel_v4_update_notice_' . $user_id;
-	update_option( $key, true );
-}
-add_action( 'wp_ajax_wp_travel_v4_update_dismiss', 'wp_travel_v4_update_dismiss_notice_ajax' );
-
-
+add_action( 'admin_notices', 'wp_travel_pricing_table_created_notice', 100 );

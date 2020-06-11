@@ -1,0 +1,70 @@
+.wp-travel-ui {
+	&.wp-travel-ui-card {
+		border: 1px solid #e0e0e0;
+		padding: 16px;
+		margin-bottom: 15px;
+		padding-top: 7px;
+		padding-bottom: 0 !important;
+
+		&.wp-travel-save-changes {
+			border-top: 1px solid #eee !important;
+			margin: 0 !important;
+			padding: 15px !important;
+		}
+
+		&.wp-travel-ui-card-top-border {
+			border-top: 5px solid #e0e0e0;
+		}
+
+		&.wp-travel-ui-card-no-border {
+			border: 0;
+		}
+
+		h3,
+		h4 {
+			margin-top: 0;
+		}
+	}
+}
+
+.wp-traval-button-danger {
+	color: #F44336 !important;
+	border-color: #F44336 !important;
+	margin-top: 13px !important;
+
+	&:not(:disabled):not([aria-disabled="true"]):hover {
+		color: #F44336 !important;
+		border-color: #F44336 !important;
+	}
+}
+
+.components-button {
+	height: auto;
+	min-height: 32px;
+
+	&.is-small {
+		margin-top: 15px;
+	}
+}
+// For WP Travel map UI.
+.wp-travel-map-wrap {
+	width: 100%;
+	.wp-travel-map__container {
+		position: relative;
+	}
+
+	.wp-travel-map__search {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		width: 100%;
+		max-width: 240px;
+
+		input[type="search"] {
+			border: none;
+			height: 35px;
+			padding: 0 15px;
+			width: 100%;
+		}
+	}
+}

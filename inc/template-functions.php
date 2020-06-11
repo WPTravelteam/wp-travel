@@ -194,6 +194,18 @@ function wp_travel_wrapper_start() {
 	}
 }
 
+function wp_travel_get_theme_wrapper_class() {
+	$wrapper_class = '';
+	$template = get_option( 'template' );
+	
+	switch ( $template ) {
+		case 'twentytwenty':
+			$wrapper_class = 'alignwide';
+			break;
+	}
+	return apply_filters( 'wp_travel_theme_wrapper_class', $wrapper_class, $template );
+}
+
 /**
  * Wrapper Ends.
  */
@@ -765,8 +777,10 @@ function wp_travel_frontend_contents( $post_id ) {
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$price_per_text  = wp_travel_get_price_per_text( $post_id );
 	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
+
+	$wrapper_class = wp_travel_get_theme_wrapper_class();
 	?>
-	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper">
+	<div id="wp-travel-tab-wrapper" class="wp-travel-tab-wrapper <?php echo esc_attr( $wrapper_class ); ?>">
 		<?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
 			<ul class="wp-travel tab-list resp-tabs-list ">
 				<?php
@@ -903,8 +917,12 @@ function wp_travel_trip_map( $post_id ) {
 	$current_map     = $get_maps['selected'];
 	$show_google_map = ( 'google-map' === $current_map ) ? true : false;
 	$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
-	$settings        = wp_travel_get_settings();
-	$api_key         = '';
+
+	if ( ! $show_google_map ) {
+		return;
+	}
+	$settings = wp_travel_get_settings();
+	$api_key  = '';
 	if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
 		$api_key = $settings['google_map_api_key'];
 	}
@@ -913,10 +931,25 @@ function wp_travel_trip_map( $post_id ) {
 	$lat      = isset( $map_data['lat'] ) ? $map_data['lat'] : '';
 	$lng      = isset( $map_data['lng'] ) ? $map_data['lng'] : '';
 
+	$wrapper_class = wp_travel_get_theme_wrapper_class();
 	if ( '' != $api_key && $show_google_map && ! empty( $lat ) && ! empty( $lng ) ) {
 		?>
-		<div class="wp-travel-map">
+		<div class="wp-travel-map <?php echo esc_attr( $wrapper_class ); ?>">
 			<div id="wp-travel-map" style="width:100%;height:300px"></div>
+		</div>
+		<?php
+	} else {
+		$use_lat_lng = get_post_meta( $post_id, 'wp_travel_trip_map_use_lat_lng', true );
+		if ( $use_lat_lng === 'yes' ) {
+			$q = "{$lat},{$lng}";
+		} else {
+			$q = $map_data['loc'];
+		}
+		?>
+		<div class="wp-travel-map  <?php echo esc_attr( $wrapper_class ); ?>">
+			<iframe
+				style="width:100%;height:300px"
+				src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near"></iframe>
 		</div>
 		<?php
 	}

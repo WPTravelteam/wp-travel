@@ -272,8 +272,9 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
-
-		if ( is_array( $pax ) ) {
+		
+		if ( is_array( $pax ) || is_object( $pax ) ) {
+			$pax = (array) $pax;
 			if ( empty( $pax ) ) {
 				return $this->remove( $cart_item_id );
 			}
@@ -363,6 +364,7 @@ class WP_Travel_Cart {
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 				$trip_id       = $this->items[ $cart_item_id ]['trip_id'];
 				$price_key     = $this->items[ $cart_item_id ]['price_key'];
+				$pricing_id    = $this->items[ $cart_item_id ]['pricing_id'];
 
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				// Custom Trip Price.
@@ -497,9 +499,18 @@ class WP_Travel_Cart {
 		$tax_amount_partial      = 0;
 		$discount_amount_partial = 0;
 
+		/**
+		 * @since 4.0.0
+		 * 
+		 */
+		$settings        = wp_travel_get_settings();
+		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
+
 		// Total amount without tax.
 		if ( is_array( $trips ) && count( $trips ) > 0 ) {
 			foreach ( $trips as $cart_id => $trip ) :
+
+				$trip_extras = (array) $trip['trip_extras'];
 
 				$trip_price         = $trip['trip_price']; // Total Price of Pricing option / trip.
 				$trip_price_partial = isset( $trip['trip_price_partial'] ) ? $trip['trip_price_partial'] : $trip_price;
@@ -509,10 +520,10 @@ class WP_Travel_Cart {
 
 				$trip_extras_total         = 0;
 				$trip_extras_total_partial = 0;
+				// if ( 'yes' !== get_option( 'wp_travel_migrate_400', 'no' ) ) {
+				if ( isset( $trip_extras ) && ! empty( $trip_extras ) && isset( $trip_extras['id'] ) && is_array( $trip_extras['id'] ) ) {
 
-				if ( isset( $trip['trip_extras'] ) && ! empty( $trip['trip_extras'] ) && isset( $trip['trip_extras']['id'] ) && is_array( $trip['trip_extras']['id'] ) ) {
-
-					foreach ( $trip['trip_extras']['id'] as $k => $e_id ) {
+					foreach ( $trip_extras['id'] as $k => $e_id ) {
 
 						$trip_extras_data = get_post_meta( $e_id, 'wp_travel_tour_extras_metas', true );
 
@@ -528,13 +539,13 @@ class WP_Travel_Cart {
 							$price = $sale_price;
 						}
 
-						$qty                       = isset( $trip['trip_extras']['qty'][ $k ] ) && ! empty( $trip['trip_extras']['qty'][ $k ] ) ? $trip['trip_extras']['qty'][ $k ] : 1;
-						$extra_price               = wp_travel_get_formated_price( $price * $qty );
-						$trip_extras_total        += $extra_price;
-						$trip_extras_total_partial = $extra_price;
+						$qty                        = isset( $trip_extras['qty'][ $k ] ) && ! empty( $trip_extras['qty'][ $k ] ) ? $trip_extras['qty'][ $k ] : 1;
+						$extra_price                = wp_travel_get_formated_price( $price * $qty );
+						$trip_extras_total         += $extra_price;
+						$trip_extras_total_partial += $extra_price;
 
 						// Trip extra partial calculation.
-						if ( function_exists( 'wp_travel_tour_extras_enable_partial' ) && wp_travel_tour_extras_enable_partial( $trip['trip_id'], $trip['price_key'] ) ) {
+						if ( function_exists( 'wp_travel_tour_extras_enable_partial' ) && ! $wp_travel_react && wp_travel_tour_extras_enable_partial( $trip['trip_id'], $trip['price_key'] ) ) {
 							$payout_percent = wp_travel_get_payout_percent( $trip['trip_id'] );
 							if ( $payout_percent > 0 && $extra_price > 0 ) {
 								$trip_extras_total_partial = ( $extra_price * $payout_percent ) / 100;
@@ -543,6 +554,7 @@ class WP_Travel_Cart {
 						}
 					}
 				}
+				// }
 
 				$cart_total         += $trip_extras_total;
 				$cart_total_partial += $trip_extras_total_partial;
