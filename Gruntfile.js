@@ -10,6 +10,7 @@ module.exports = function (grunt) {
 	 */
 	svn_files_list = [
 		'assets/**',
+		'!assets/js/src/**',
 		'!assets/sass/**',
 		'!assets/css/*.map',
 		'i18n/**',
@@ -31,7 +32,11 @@ module.exports = function (grunt) {
 		'!yarn-error.log',
 		'!yarn.lock',
 		'!postcss.config.js',
-		'!webpack.config.js'
+		'!webpack.config.js',
+		'app/build/**',
+		'!app/build/*.map',
+		'app/inc/**',
+		'core/**'
 	];
 
 	/**
@@ -45,6 +50,7 @@ module.exports = function (grunt) {
 		'\.gitignore',
 		'\.gitlab-ci.yml',
 		'\.jshintrc',
+		'assets/js/src/**',
 		'Gruntfile.js',
 		'package-lock.json',
 		'package.json',
@@ -99,7 +105,12 @@ module.exports = function (grunt) {
 					'!inc/extended/postcss.config.js',
 					'!inc/extended/webpack.config.js',
 					'!inc/extended/yarn.lock',
-					'!inc/extended/yarn-error.log'
+					'!inc/extended/yarn-error.log',
+					'!app/src/**',
+					'!yarn-error.log',
+					'!yarn.lock',
+					'!postcss.config.js',
+					'!webpack.config.js'
 				],
 				dest: 'deploy/<%= pkg.name %>',
 				expand: true,
@@ -166,7 +177,9 @@ module.exports = function (grunt) {
 						'**/*.php',
 						'!node_modules/**',
 						'!deploy/**',
-						'!tests/**'
+						'!tests/**',
+						'!app/src',
+						'!app/build'
 					]
 				}
 			}
@@ -197,7 +210,9 @@ module.exports = function (grunt) {
 				src: [
 					'**/*.php',
 					'!node_modules/**',
-					'!deploy/**'
+					'!deploy/**',
+					'!app/build',
+					'!app/src'
 				],
 				expand: true
 			}
@@ -291,12 +306,12 @@ module.exports = function (grunt) {
 
 		babel: {
 			options: {
-				sourceMap: true,
+				sourceMap: false,
 				presets: ['@babel/preset-env']
 			},
 			dist: {
 				files: {
-					'assets/js/src/cart.js': 'assets/js/src/_cart.js'
+					'assets/js/cart.js': 'assets/js/src/_checkout.js'
 				}
 			}
 		},
@@ -377,7 +392,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svn-export');
 	grunt.loadNpmTasks('grunt-push-svn');
 	grunt.loadNpmTasks('grunt-writefile');
-	grunt.loadNpmTasks('grunt-babel')
+	grunt.loadNpmTasks('grunt-babel');
 
 	// Load in `grunt-zip`
 	grunt.loadNpmTasks('grunt-zip');
@@ -388,10 +403,10 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', []);
 
 	grunt.registerTask('gitattributes', ['file-creator']);
-	grunt.registerTask('babel', ['babel']);
+	// grunt.registerTask('babel', ['babel']);
 
 	grunt.registerTask('assets', [
-		// 'babel',
+		'babel',
 		'uglify',
 		'sass',
 		'cssmin',
