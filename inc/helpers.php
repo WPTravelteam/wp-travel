@@ -3110,6 +3110,80 @@ function wp_travel_frontend_tab_gallery( $gallery_ids ) {
 }
 
 /**
+ * Get Cart Item Price with Trip Extras.
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial = false ) {
+	global $wt_cart;
+
+	$items = $wt_cart->getItems();
+
+	$price = 0;
+
+	if ( isset( $items[ $cart_id ] ) ) {
+		$item = $items[ $cart_id ];
+
+		$price       = $partial ? (float) $item['trip_price_partial'] : (float) $item['trip_price'];
+		$pricing     = wp_travel_get_cart_pricing( $cart_id );
+		$trip_extras = isset( $pricing[ 'trip_extras' ] ) ? array_column( $pricing[ 'trip_extras' ], null, 'id' ) : array();
+
+		$cart_extras = isset( $item['trip_extras'] ) ? (array) $item['trip_extras'] : array( 'id' => array(), 'qty' => array() );
+
+		$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
+
+		foreach ( $cart_extras as $xid => $xqty ) {
+			$extra = isset( $trip_extras[ $xid ] ) ? $trip_extras[ $xid ] : null;
+			if ( is_null( $extra ) || empty( $extra['tour_extras_metas'] ) ) {
+				continue;
+			}
+			$extra_metas = $extra['tour_extras_metas'];
+			$xprice = isset( $extra['is_sale'] ) && $extra['is_sale'] ? $extra_metas['extras_item_sale_price'] : $extra_metas['extras_item_price'];
+			$xqty = (int) $xqty;
+			$xqty = $extra['is_required'] && $xqty <= 0 ? 1 : $xqty;
+			
+			$price += $xqty * (float) $xprice;
+		}
+	}
+
+	return $price;
+}
+
+/**
+ * Get Pricing by pricing Id
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id ) {
+	$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+	$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+	/**
+	 * Pricing by pricing id to add date easily on looping array item.
+	 */
+	$trip_pricings_by_id = array_column( $trip_pricings, null, 'id' );
+
+	return isset( $trip_pricings_by_id[ $pricing_id ] ) ? $trip_pricings_by_id[ $pricing_id ] : null;
+}
+
+/**
+ * Get Pricing by Cart ID.
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_cart_pricing( $cart_id ) {
+	global $wt_cart;
+	$items = $wt_cart->getItems();
+
+	if ( isset( $items[$cart_id] ) ) {
+		$item = $items[$cart_id];
+		$pricing_id = $item['pricing_id'];
+		$trip_id    = $item['trip_id'];
+		return wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
+	}
+	return null;
+}
+
+/**
  * Get Pricing Options.
  *
  * @since 4.0.0
