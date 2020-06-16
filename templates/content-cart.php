@@ -180,9 +180,9 @@ wp_travel_print_notices();
 												<span class="category-type">
 													<?php
 													if ( 'custom' === $category_type && ! empty( $category['custom_label'] ) ) {
-														echo esc_html( $category['custom_label'] ) . __( ' (Group)' );
+														echo esc_html( $category['custom_label'] ) . __( ' (Group)', 'wp-travel' );
 													} else {
-														echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) ) . __( ' (Group)' );
+														echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) ) . __( ' (Group)', 'wp-travel' );
 													}
 													?>
 													<?php // _e( 'Group', 'wp-travel' ); ?>
