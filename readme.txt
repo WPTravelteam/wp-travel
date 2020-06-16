@@ -2,8 +2,8 @@
 Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 4.4.0
-Tested up to: 5.4.1
+Requires at least: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 5.5
 Stable tag: 4.0.3
 License: GPLv3
@@ -222,14 +222,14 @@ If you have any queries regarding the plugin and extensions then you can ask for
 == Screenshots ==
 1. Backend: Settings
 2. Backend: New trip, Description
-3. Backend: New trip, Dates and prices
-4. Backend: New trip, Locations
-5. Backend: New trip, Tabs
-6. Frontend: Trip detail
-7. Frontend: WP Travel Cart
-8. Frontend: WP Travel Checkout
-9. Frontend: Trip listing
-
+3. Backend: New trip, Prices
+4. Backend: New trip, Dates
+5. Backend: New trip, Locations
+6. Backend: New trip, Tabs
+7. Frontend: Trip detail
+8. Frontend: WP Travel Cart
+9. Frontend: WP Travel Checkout
+10. Frontend: Trip listing
 
 == Upgrade Notice ==
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
@@ -237,9 +237,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.0.3 =
-Release Date: 12th June, 2020
+Release Date: 16th June, 2020
 
+Fixed:
 * Minor Fixes.
+* Cart Issues.
+* Fixes Standard paypal amount mismatch.
+
+Enhancements:
+* Adds excerpt field.
 
 = 4.0.2 =
 Release Date: 10th June, 2020

@@ -1585,6 +1585,12 @@ function wp_travel_archive_listing_sidebar() {
 function wp_travel_posts_filter( $query ) {
 	global $pagenow;
 	$type = '';
+
+	$filter_args = $_GET;
+
+	$filter_args['start_date'] = $_GET['trip_start'];
+	$filter_args['end_date']   = $_GET['trip_end'];
+	// WP_Travel_Helpers_Trips::filter_trips( $filter_args );
 	
 	if ( isset( $_GET['post_type'] ) ) {
 		$type = $_GET['post_type'];
