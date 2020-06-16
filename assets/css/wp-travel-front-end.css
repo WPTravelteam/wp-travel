@@ -5905,7 +5905,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 
 #wp-travel-tab-wrapper {
   position: relative;
-  z-index: 99;
+  z-index: 999;
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
