@@ -74,7 +74,13 @@ wp_travel_print_notices();
 					$trip_extras        = isset( $trip['trip_extras'] ) ? (array) $trip['trip_extras'] : array();
 					$cart_trip          = isset( $trip['trip'] ) ? $trip['trip'] : array();
 
-					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+					if ( wp_travel_is_react_version_enabled() ) {
+						$pricing_id = $trip['pricing_id'];
+					} else {
+						$pricing_id = $price_key;
+					}
+
+					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $pricing_id );
 					$pax_limit     = apply_filters( 'wp_travel_inventory_pax_limit', '', $trip_id, $price_key );
 					$data_max_pax  = apply_filters( 'wp_travel_data_max_pax', $max_available, $pax_limit );
 					$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
