@@ -218,7 +218,7 @@ class WP_Travel_Ajax_Trips {
 	}
 
 
-	public function get_trips_permissions_check() {
+	public static function get_trips_permissions_check() {
 		/**
 		 * Nonce Verification.
 		 */
