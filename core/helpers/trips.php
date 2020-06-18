@@ -437,7 +437,7 @@ class WP_Travel_Helpers_Trips {
 		if ( $the_query->have_posts() ) {
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				error_log( get_the_ID() );
+				// error_log( get_the_ID() );
 				$trip_info = self::get_trip( get_the_ID() );
 				$trips[]   = $trip_info['trip'];
 			} // end while
@@ -584,7 +584,7 @@ class WP_Travel_Helpers_Trips {
 			if ( empty( $post_ids ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 			}
-			
+
 			return WP_Travel_Helpers_Response_Codes::get_success_response(
 				'WP_TRAVEL_TRIP_IDS',
 				array(
