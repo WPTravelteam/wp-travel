@@ -10,12 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function wp_travel_key_by( $items, $key_by = 'id' ) {
-	$key_by_array = array();
-	foreach ( $items as $item ) {
-		$key_by_array[ $item[ $key_by ] ] = $item;
+if ( ! function_exists( 'wp_travel_key_by' ) ) {
+	function wp_travel_key_by( array $object, $key_by = 'id' ) {
+		return array_column(
+			$object,
+			null,
+			$key_by
+		);
 	}
-	return $key_by_array;
 }
 
 $settings      = wp_travel_get_settings();
