@@ -2,6 +2,7 @@
 class WP_Travel_Helpers_Trips {
 	private static $date_table    = 'wt_dates';
 	private static $pricing_table = 'wt_pricings';
+	private static $price_category_table = 'wt_price_category_relation';
 	public static function get_trip( $trip_id = false ) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -462,6 +463,7 @@ class WP_Travel_Helpers_Trips {
 
 		$date_table    = $wpdb->prefix . self::$date_table;
 		$pricing_table = $wpdb->prefix . self::$pricing_table;
+		$price_category_table = $wpdb->prefix . self::$price_category_table;
 
 		if ( is_multisite() ) {
 			/**
@@ -477,6 +479,8 @@ class WP_Travel_Helpers_Trips {
 		$travel_locations = $args['travel_locations'];
 		$itinerary_types  = $args['itinerary_types'];
 		$max_pax          = $args['max_pax'];
+		$min_price        = $args['min_price'];
+		$max_price        = $args['max_price'];
 
 		// List all trip ids as per filter arguments.
 		$sql = "select trip_id from {$date_table}";
@@ -526,24 +530,76 @@ class WP_Travel_Helpers_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
 
-		// Second query for group size if max_pax param.
-		$post_ids = array();
-		if ( $max_pax && $max_pax > 0 ) {
-			foreach ( $results as $result ) {
-				$post_ids[] = $result->trip_id;
-			}
-			$sql     = "select distinct trip_id from {$pricing_table} where trip_id IN(" . implode( ',', $post_ids ) . ") and max_pax >= {$max_pax}";
-			$results = $wpdb->get_results( $sql );
 
-			if ( empty( $results ) ) {
-				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
-			}
-		}
-
+		// Get Distinct post ids.
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
 		}
+		$sql     = "select distinct trip_id from {$pricing_table} where trip_id IN(" . implode( ',', $post_ids ) . ") ";
+
+		// Second query for group size if max_pax param.
+		if ( $max_pax && $max_pax > 0 ) {
+			$sql .= " and max_pax >= {$max_pax}";
+		}
+		$results = $wpdb->get_results( $sql );
+
+		if ( empty( $results ) ) {
+			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+		}
+		
+		$post_ids = array();
+		foreach ( $results as $result ) {
+			$post_ids[] = $result->trip_id;
+		}
+		
+		// Filter as per min and max price @todo:need query enhancement.
+		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
+			$sql     = "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id from {$price_category_table} PC join {$pricing_table} P on PC.pricing_id=P.id  where P.trip_id IN(" . implode( ',', $post_ids ) . ") ";
+			// error_log($sql);
+			$results = $wpdb->get_results( $sql );
+	
+			if ( empty( $results ) ) {
+				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+			}
+
+			// return form here if min and max price.
+			$post_ids = array();
+			foreach ( $results as $result ) {
+				$price = $result->is_sale && $result->sale_price ? $result->sale_price : $result->regular_price;
+				if ( $min_price && $max_price ) {
+					if ( $price >= $min_price && $price <= $max_price ) {
+						$post_ids[] = $result->trip_id;
+					}
+				} elseif( $min_price ) {
+					if ( $price >= $min_price ) {
+						$post_ids[] = $result->trip_id;
+					}
+				} else {
+					if ( $price <= $max_price ) {
+						$post_ids[] = $result->trip_id;
+					}
+				}
+			}
+			if ( empty( $post_ids ) ) {
+				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+			}
+			
+			return WP_Travel_Helpers_Response_Codes::get_success_response(
+				'WP_TRAVEL_TRIP_IDS',
+				array(
+					'trip_ids' => $post_ids,
+				)
+			);
+
+		}
+
+		
+		$post_ids = array();
+		foreach ( $results as $result ) {
+			$post_ids[] = $result->trip_id;
+		}
+
 // return $post_ids;
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_IDS',

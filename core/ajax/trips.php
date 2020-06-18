@@ -17,6 +17,10 @@ class WP_Travel_Ajax_Trips {
 		add_action( 'wp_ajax_wp_travel_filter_trips', array( __CLASS__, 'filter_trips' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_filter_trips', array( __CLASS__, 'filter_trips' ) );
 
+		// Filter trip ids .
+		add_action( 'wp_ajax_wp_travel_get_trip_ids', array( __CLASS__, 'get_trip_ids' ) );
+		add_action( 'wp_ajax_nopriv_wp_travel_get_trip_ids', array( __CLASS__, 'get_trip_ids' ) );
+
 		// Trip tab.
 		add_action( 'wp_ajax_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
@@ -175,6 +179,50 @@ class WP_Travel_Ajax_Trips {
 		);
 
 		$response = WP_Travel_Helpers_Trips::filter_trips( $args );
+		WP_Travel_Helpers_REST_API::response( $response );
+	}
+
+	/**
+	 * Filter Trips according to Param.
+	 */
+	public static function get_trip_ids() {
+
+		/**
+		 * Permission Check
+		 */
+		$permission = self::get_trips_permissions_check();
+
+		if ( is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		} elseif ( false === $permission || null === $permission ) {
+			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
+			WP_Travel_Helpers_REST_API::response( $error );
+		}
+		 /**
+		 * Return list of filtered trips according to conditions.
+		 *
+		 * @todo Check Nonce.
+		 */
+
+		$start_date       = ! empty( $_GET['start_date'] ) ? $_GET['start_date'] : '';
+		$end_date         = ! empty( $_GET['end_date'] ) ? $_GET['end_date'] : '';
+		$min_price        = ! empty( $_GET['min_price'] ) ? $_GET['min_price'] : 0;
+		$max_price        = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
+		$travel_locations = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : ''; // Not used yet to get trip id
+		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : ''; // Not used yet to get trip id
+		$max_pax          = ! empty( $_GET['max_pax'] ) ? $_GET['max_pax'] : ''; // Not used yet to get trip id
+
+		$args = array(
+			'start_date'       => $start_date,
+			'end_date'         => $end_date,
+			'min_price'        => $min_price,
+			'max_price'        => $max_price,
+			'travel_locations' => $travel_locations,
+			'max_pax'          => $max_pax,
+			'itinerary_types'  => $itinerary_types,
+		);
+
+		$response = WP_Travel_Helpers_Trips::get_trip_ids( $args );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
