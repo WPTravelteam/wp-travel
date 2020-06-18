@@ -218,7 +218,7 @@ class WP_Travel_Admin_Settings {
 						}
 					}
 
-					$settings[ $settings_field ] = $_POST[ $settings_field ];
+					$settings[ $settings_field ] = wp_unslash( $_POST[ $settings_field ] );
 				}
 			}
 

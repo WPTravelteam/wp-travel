@@ -140,7 +140,7 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
-		$settings = wp_travel_get_settings();
+		$settings        = wp_travel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
 		if ( 'no' === $switch_to_react ) {
 			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
@@ -292,9 +292,13 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function remove_metaboxs() {
 		remove_meta_box( 'postimagediv', WP_TRAVEL_POST_TYPE, 'side' );
-		remove_meta_box( 'postexcerpt', WP_TRAVEL_POST_TYPE, 'normal' );
+		$settings        = wp_travel_get_settings();
+		$switch_to_react = $settings['wp_travel_switch_to_react'];
+		if ( 'yes' !== $switch_to_react ) {
+			remove_meta_box( 'postexcerpt', WP_TRAVEL_POST_TYPE, 'normal' );
+		}
 		remove_meta_box( 'itinerary_pricing_categorydiv', WP_TRAVEL_POST_TYPE, 'side' );
-		
+
 	}
 	/**
 	 * Clean Metabox Classes.
@@ -391,7 +395,7 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		$settings = wp_travel_get_settings();
+		$settings     = wp_travel_get_settings();
 		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 		if ( 'yes' === $switch_to_v4 ) {
 			return;
@@ -563,7 +567,7 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;
 
-		if ( 'no'  == $trip_meta['wp_travel_enable_multiple_fixed_departue'] ) {
+		if ( 'no' == $trip_meta['wp_travel_enable_multiple_fixed_departue'] ) {
 			$trip_meta['trip_date'] = $trip_meta['wp_travel_start_date'];
 		}
 

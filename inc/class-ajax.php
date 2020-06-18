@@ -183,6 +183,13 @@ class WP_Travel_Ajax {
 
 				$pricing_index = null;
 				foreach ( $pricing_data as $index => $pricing ) {
+					if ( wp_travel_is_react_version_enabled() ) {
+						if( (int) $pricing_id === (int) $pricing['pricing_id'] ) {
+							$pricing_index = $index;
+							break;
+						}
+						continue;
+					}
 					if ( isset( $pricing['categories'] ) && is_array( $pricing['categories'] ) ) {
 						if( array_key_exists( $category_id, $pricing['categories'] ) ) {
 							$pricing_index = $index;

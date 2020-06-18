@@ -193,6 +193,8 @@ class WP_Travel_Gateway_Paypal_Request {
 			foreach ( $items as $cart_id => $item ) {
 				$trip_id    = $item['trip_id'];
 				// $pax        = $item['pax'];
+
+
 				/**
 				 * Since We are sending calculated total trip price.
 				 *
@@ -200,6 +202,8 @@ class WP_Travel_Gateway_Paypal_Request {
 				 */
 				$pax        = 1;
 				$trip_price = $item['trip_price'];
+
+				$settings = wp_travel_get_settings();
 
 				$item_name = html_entity_decode( get_the_title( $trip_id ) );
 				$trip_code = wp_travel_get_trip_code( $trip_id );
@@ -219,6 +223,16 @@ class WP_Travel_Gateway_Paypal_Request {
 					$trip_price_partial = $item['trip_price_partial'];
 					$payment_amount     = wp_travel_get_formated_price( $trip_price_partial );
 				}
+
+				/**
+				 * @since 4.0.0
+				 */
+				if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
+					$partial = 'partial' === $payment_mode;
+					$trip_price = wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
+					$payment_amount = wp_travel_get_formated_price( $trip_price );
+				}
+
 				// Group Multiply disable.
 				if ( 'group' === $price_per ) {
 					$pax = 1;

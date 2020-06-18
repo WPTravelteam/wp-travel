@@ -1753,6 +1753,18 @@ if ( ! function_exists( 'wp_travel_get_trip_available_dates' ) ) {
 		$available_dates = array();
 
 		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+
+		if ( wp_travel_is_react_version_enabled() && 'yes' === $fixed_departure ) {
+			$data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
+			if ( 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
+				$dates = $data['dates'];
+				foreach ( $dates as $date ) {
+					$available_dates[] = $date['start_date'];
+				}
+			}
+			return $available_dates;
+		}
+
 		if ( 'yes' === $fixed_departure ) {
 			if ( 'yes' === $multiple_fixed_departue ) {
 				$available_dates = wp_travel_get_pricing_variation_start_dates( $trip_id, $price_key );
@@ -1761,10 +1773,21 @@ if ( ! function_exists( 'wp_travel_get_trip_available_dates' ) ) {
 				$available_dates = array( $date );
 			}
 		}
+
 		return $available_dates;
 	}
 }
 
+/**
+ * Helper function that checks if react version of WP Travel.
+ * 
+ * @since 4.0.3
+ */
+
+function wp_travel_is_react_version_enabled() {
+	$settings = wp_travel_get_settings();
+	return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
+}
 
 if ( ! function_exists( 'wp_travel_get_multiple_pricing_available_dates' ) ) {
 
@@ -1784,6 +1807,7 @@ if ( ! function_exists( 'wp_travel_get_multiple_pricing_available_dates' ) ) {
 		$available_dates = array();
 
 		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+
 		if ( 'yes' === $fixed_departure ) {
 			if ( 'yes' === $multiple_fixed_departue ) {
 				if ( ! empty( $price_key ) ) {
@@ -1975,16 +1999,39 @@ function wp_travel_booking_show_end_date() {
 }
 
 /**
+ * Gets Pricing Name/Label.
+ * 
+ * @param $trip_id Trip Id.
+ * @param $pricing_id Pricing ID.
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_trip_pricing_name_by_pricing_id ( $trip_id, $pricing_id ) {
+	$pricing_name = get_the_title( $trip_id );
+	$pricing      = wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
+	if ( ! is_null( $pricing ) ) {
+		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing['title'] );
+	}
+	return $pricing_name;
+}
+
+/**
  * Return Pricing name as per trip id and pricing key.
  *
  * @param Number $trip_id   Trip ID.
  * @param String $price_key Name of pricing.
  *
  * @since 1.8.2
+ * 
+ * @deprecated 4.0.3
  *
  * @return String
  */
 function wp_travel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
+	if ( wp_travel_is_react_version_enabled() ) {
+		$pricing_id = $price_key;
+		return wp_travel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id );
+	}
 
 	if ( ! $trip_id ) {
 		return;
@@ -2939,6 +2986,8 @@ function wp_travel_get_fixed_departure_date( $trip_id ) {
 		$date_format = 'jS M, Y';
 	endif;
 
+	$react_version_enabled = wp_travel_is_react_version_enabled();
+
 	ob_start();
 	if ( 'single-price' === wp_travel_get_pricing_option_type() ) {
 		if ( $start_date || $end_date ) :
@@ -2957,17 +3006,27 @@ function wp_travel_get_fixed_departure_date( $trip_id ) {
 	} elseif ( 'multiple-price' === wp_travel_get_pricing_option_type() ) {
 		$dates                = array();
 		$trip_pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+		/**
+		 * @since 4.0.3
+		 */
+		if ( $react_version_enabled ) {
+			$trip_pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
+		}
 		if ( is_array( $trip_pricing_options ) && count( $trip_pricing_options ) > 0 ) {
-			foreach ( $trip_pricing_options as $price_key => $pricing ) :
-				// Set Vars.
-				$price_key       = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
-				$available_dates = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
-				if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) { // multiple available dates
-					foreach ( $available_dates as $available_date ) {
-						$dates[] = $available_date;
+			if ( $react_version_enabled ) { // @since 4.0.3
+				$dates = wp_travel_get_trip_available_dates( $trip_id );
+			} else {
+				foreach ( $trip_pricing_options as $price_key => $pricing ) :
+					// Set Vars.
+					$price_key       = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+					$available_dates = wp_travel_get_trip_available_dates( $trip_id, $price_key ); // No need to pass date
+					if ( is_array( $available_dates ) && count( $available_dates ) > 0 ) { // multiple available dates
+						foreach ( $available_dates as $available_date ) {
+							$dates[] = $available_date;
+						}
 					}
-				}
-			endforeach;
+				endforeach;
+			}
 			$dates = array_unique( $dates );
 			usort( $dates, 'wp_travel_date_sort' );
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', false );
@@ -3110,6 +3169,81 @@ function wp_travel_frontend_tab_gallery( $gallery_ids ) {
 }
 
 /**
+ * Get Cart Item Price with Trip Extras.
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial = false ) {
+	global $wt_cart;
+
+	$items = $wt_cart->getItems();
+
+	$price = 0;
+
+	if ( isset( $items[ $cart_id ] ) ) {
+		$item = $items[ $cart_id ];
+
+		$price       = $partial ? (float) $item['trip_price_partial'] : (float) $item['trip_price'];
+		$pricing     = wp_travel_get_cart_pricing( $cart_id );
+		$trip_extras = isset( $pricing[ 'trip_extras' ] ) ? array_column( $pricing[ 'trip_extras' ], null, 'id' ) : array();
+
+		$cart_extras = isset( $item['trip_extras'] ) ? (array) $item['trip_extras'] : array( 'id' => array(), 'qty' => array() );
+
+		$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
+
+		foreach ( $cart_extras as $xid => $xqty ) {
+			$extra = isset( $trip_extras[ $xid ] ) ? $trip_extras[ $xid ] : null;
+			if ( is_null( $extra ) || empty( $extra['tour_extras_metas'] ) ) {
+				continue;
+			}
+			$extra_metas = $extra['tour_extras_metas'];
+			$xprice = isset( $extra['is_sale'] ) && $extra['is_sale'] ? $extra_metas['extras_item_sale_price'] : $extra_metas['extras_item_price'];
+			$xqty = (int) $xqty;
+			$xqty = $extra['is_required'] && $xqty <= 0 ? 1 : $xqty;
+			
+			$price += $xqty * (float) $xprice;
+		}
+	}
+
+	return $price;
+}
+
+/**
+ * Get Pricing by pricing Id
+ * 
+ * @since 4.0.3
+ * @return array|null
+ */
+function wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id ) {
+	$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+	$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+	/**
+	 * Pricing by pricing id to add date easily on looping array item.
+	 */
+	$trip_pricings_by_id = array_column( $trip_pricings, null, 'id' );
+
+	return isset( $trip_pricings_by_id[ $pricing_id ] ) ? $trip_pricings_by_id[ $pricing_id ] : null;
+}
+
+/**
+ * Get Pricing by Cart ID.
+ * 
+ * @since 4.0.3
+ */
+function wp_travel_get_cart_pricing( $cart_id ) {
+	global $wt_cart;
+	$items = $wt_cart->getItems();
+
+	if ( isset( $items[$cart_id] ) ) {
+		$item = $items[$cart_id];
+		$pricing_id = $item['pricing_id'];
+		$trip_id    = $item['trip_id'];
+		return wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
+	}
+	return null;
+}
+
+/**
  * Get Pricing Options.
  *
  * @since 4.0.0
@@ -3216,10 +3350,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	$enable_multiple_category_on_pricing            = $settings['enable_multiple_category_on_pricing'];
 	$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // Hide enable_multiple_category_on_pricing option if user is new from @since 3.0.0
 
-	$switch_to_react = $settings['wp_travel_switch_to_react'];
+	$switch_to_react = wp_travel_is_react_version_enabled();
 	if ( 'yes' === $wp_travel_user_after_multiple_pricing_category || 'yes' === $enable_multiple_category_on_pricing ) : // New Multiple category on pricing. // From this version single pricing is removed for new users.
 		
-		if ( 'yes' == $switch_to_react ) {
+		if ( $switch_to_react ) {
 			$pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
 			// $pricing_options = $trip_pricings_and_date['pricings'];
 			// $pricing_options = $trip_pricings_and_date['dates'];
@@ -3273,7 +3407,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 		} elseif ( 'multiple-price' === $pricing_option_type ) { // Case: Multiple Pricing.
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) :
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
-					if ( 'yes' === $switch_to_react ) {
+					if ( $switch_to_react ) {
+						$pricing_id = $pricing_option['id'];
+					}
+					if ( $switch_to_react ) {
 						$pricing_name    = isset( $pricing_option['title'] ) ? $pricing_option['title'] : '';
 						$price_key       = isset( $pricing_option['id'] ) ? $pricing_option['id'] : '';
 						$pricing_min_pax = ! empty( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 1;
@@ -3293,7 +3430,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					if ( is_array( $pricing_categories ) && count( $pricing_categories ) > 0 ) {
 						foreach ( $pricing_categories as $index => $pricing_category ) {
 							
-							if ( 'yes' === $switch_to_react ) {
+							if ( $switch_to_react ) {
 								$pricing_category_id = $pricing_category['id'];
 								// $categories[ $pricing_category['id'] ] = $pricing_category;
 								$categories[ $pricing_category_id ]['type']         = 'custom'; // following the tradition.
@@ -3350,7 +3487,7 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 					if ( 'yes' === $fixed_departure ) {
 						// If Multiple Fixed Departure Enabled.
 						if ( 'yes' === $multiple_fixed_departue ) {
-							if ( 'yes' !== $switch_to_react ) : // If data not migrated yet follow the tradition.
+							if ( ! $switch_to_react ) : // If data not migrated yet follow the tradition.
 								$available_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 								foreach ( $available_trip_dates as $date_options_key => $date_option ) {
 									$start_date = isset( $date_option['start_date'] ) ? $date_option['start_date'] : null;

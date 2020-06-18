@@ -1585,6 +1585,7 @@ function wp_travel_archive_listing_sidebar() {
 function wp_travel_posts_filter( $query ) {
 	global $pagenow;
 	$type = '';
+	
 	if ( isset( $_GET['post_type'] ) ) {
 		$type = $_GET['post_type'];
 	}

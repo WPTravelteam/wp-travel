@@ -297,15 +297,16 @@ const BookingCalender = () => {
 				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 			}
 			if (data.start_date) {
-				if (moment(date).isSameOrAfter(moment(data.start_date))) {
-					if (data.end_date) {
-						if (String(new Date(data.end_date)).toLowerCase() == 'invalid date') {
-							return true
-						}
-						return moment(date).isSameOrBefore(moment(data.end_date))
-					}
-				}
-				return moment(date).isSameOrAfter(moment(data.start_date))
+				return moment(date).isSame(moment(data.start_date))
+				// if (moment(date).isSameOrAfter(moment(data.start_date))) {
+				// 	if (data.end_date) {
+				// 		if (String(new Date(data.end_date)).toLowerCase() == 'invalid date') {
+				// 			return true
+				// 		}
+				// 		return moment(date).isSameOrBefore(moment(data.end_date))
+				// 	}
+				// }
+				// return moment(date).isSameOrAfter(moment(data.start_date))
 			}
 			return false
 		})
@@ -351,15 +352,16 @@ const BookingCalender = () => {
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
 				if (_date.start_date) {
-					if (moment(date).isSameOrAfter(moment(_date.start_date))) {
-						if (_date.end_date && moment(date).isSameOrBefore(moment(_date.end_date))) {
-							if (String(new Date(_date.end_date)).toLowerCase() == 'invalid date') {
-								return true
-							}
-							return moment(date).isSameOrBefore(moment(_date.end_date))
-						}
-					}
-					return moment(date).isSameOrAfter(moment(_date.start_date))
+					return moment(date).isSame(moment(_date.start_date))
+					// if (moment(date).isSameOrAfter(moment(_date.start_date))) {
+					// 	if (_date.end_date && moment(date).isSameOrBefore(moment(_date.end_date))) {
+					// 		if (String(new Date(_date.end_date)).toLowerCase() == 'invalid date') {
+					// 			return true
+					// 		}
+					// 		return moment(date).isSameOrBefore(moment(_date.end_date))
+					// 	}
+					// }
+					// return moment(date).isSameOrAfter(moment(_date.start_date))
 				}
 				return moment(_date.start_date).isSame(moment(date))
 			}).map(d => d.id)

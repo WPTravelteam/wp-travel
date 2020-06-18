@@ -74,7 +74,13 @@ wp_travel_print_notices();
 					$trip_extras        = isset( $trip['trip_extras'] ) ? (array) $trip['trip_extras'] : array();
 					$cart_trip          = isset( $trip['trip'] ) ? $trip['trip'] : array();
 
-					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+					if ( wp_travel_is_react_version_enabled() ) {
+						$pricing_id = $trip['pricing_id'];
+					} else {
+						$pricing_id = $price_key;
+					}
+
+					$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $pricing_id );
 					$pax_limit     = apply_filters( 'wp_travel_inventory_pax_limit', '', $trip_id, $price_key );
 					$data_max_pax  = apply_filters( 'wp_travel_data_max_pax', $max_available, $pax_limit );
 					$max_available = apply_filters( 'wp_travel_available_pax', $max_available, $trip_id, $price_key );
@@ -149,7 +155,7 @@ wp_travel_print_notices();
 											<li class="person-count">
 												<span class="category-type">
 													<?php
-													if ( 'custom' === $category_type && isset( $category['custom_label'] ) && ! empty( $category['custom_label'] ) ) {
+													if ( 'custom' === $category_type && ! empty( $category['custom_label'] ) ) {
 														echo esc_html( $category['custom_label'] );
 													} else {
 														echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) );
@@ -177,7 +183,16 @@ wp_travel_print_notices();
 										else : // if group.
 											?>
 											<li class="person-count">
-											<span class="category-type"><?php _e( 'Group', 'wp-travel' ); ?></span> (<input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php // echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">) <?php echo wp_travel_get_formated_price_currency( $price ); ?>
+												<span class="category-type">
+													<?php
+													if ( 'custom' === $category_type && ! empty( $category['custom_label'] ) ) {
+														echo esc_html( $category['custom_label'] ) . __( ' (Group)', 'wp-travel' );
+													} else {
+														echo esc_html( wp_travel_get_pricing_category_by_key( $category_type ) ) . __( ' (Group)', 'wp-travel' );
+													}
+													?>
+													<?php // _e( 'Group', 'wp-travel' ); ?>
+												</span> <input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php // echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> <?php echo wp_travel_get_formated_price_currency( $price ); ?>
 											</li>
 											<?php
 										endif;

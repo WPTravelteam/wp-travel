@@ -30,7 +30,9 @@ const WPTravelTripOptionsLocationContent = () => {
 }
 
 const WPTravelTripOptionsLocation = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsLocationContent /></div>
+    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">
+        <WPTravelTripOptionsLocationContent />
+    </div>
 }
 
 const GmapIframe = props => {
@@ -194,8 +196,8 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
 
     }
     const coords = {
-        lat: map_data.lat,
-        lng: map_data.lng
+        lat: map_data && map_data.lat,
+        lng: map_data && map_data.lng
     };
 
     // const params = {v: '3.exp', key: 'YOUR_API_KEY'};
@@ -213,8 +215,7 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
                 }}
                 placeholder={map_data.loc}
                 searchText={map_data.loc}
-
-                types={['(regions)']}
+                types={['address']}
             />
         </div>
         <Gmaps
