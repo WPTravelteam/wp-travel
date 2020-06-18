@@ -82,17 +82,19 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 					$custom_post_id                = $custom_post->ID;
 					$wp_travel_multiple_trip_dates = get_post_meta( $custom_post_id, 'wp_travel_multiple_trip_dates', true );
 					$trip_dates                    = array();
-					foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
+					if ( is_array( $wp_travel_multiple_trip_dates ) ) : // @since 4.0.4 To prevent Warning.
+						foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
 
-						if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
-							$start_date   = $date_value['start_date'];
-							$trip_dates[] = $start_date;
+							if ( isset( $date_value['start_date'] ) && '' !== $date_value['start_date'] ) {
+								$start_date   = $date_value['start_date'];
+								$trip_dates[] = $start_date;
+							}
 						}
-					}
-					$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
-					$trip_dates                    = wp_unslash( array_unique( $trip_dates ) ); // Filter unique date.
-					$trip_dates                    = wp_travel_filter_expired_date( $trip_dates );
-					usort( $trip_dates, 'wp_travel_date_sort' );
+						$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
+						$trip_dates                    = wp_unslash( array_unique( $trip_dates ) ); // Filter unique date.
+						$trip_dates                    = wp_travel_filter_expired_date( $trip_dates );
+						usort( $trip_dates, 'wp_travel_date_sort' );
+					endif;
 
 					update_post_meta( $custom_post_id, 'trip_dates', $trip_dates );
 					if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
