@@ -474,13 +474,13 @@ class WP_Travel_Helpers_Trips {
 			$pricing_table = $wpdb->base_prefix . $blog_id . '_' . self::$pricing_table;
 		}
 		// Filter Arguments.
-		$start_date       = $args['start_date'];
-		$end_date         = $args['end_date'];
-		$travel_locations = $args['travel_locations'];
-		$itinerary_types  = $args['itinerary_types'];
-		$max_pax          = $args['max_pax'];
-		$min_price        = $args['min_price'];
-		$max_price        = $args['max_price'];
+		$start_date       = isset( $args['start_date'] ) ? $args['start_date'] : '';
+		$end_date         = isset( $args['end_date'] ) ? $args['end_date'] : '';
+		$travel_locations = isset( $args['travel_locations'] ) ? $args['travel_locations'] : '';
+		$itinerary_types  = isset( $args['itinerary_types'] ) ? $args['itinerary_types'] : '';
+		$max_pax          = isset( $args['max_pax'] ) ? $args['max_pax'] : '';
+		$min_price        = isset( $args['min_price'] ) ? $args['min_price'] : '';
+		$max_price        = isset( $args['max_price'] ) ? $args['max_price'] : '';
 
 		// List all trip ids as per filter arguments.
 		$sql = "select trip_id from {$date_table}";

@@ -945,13 +945,15 @@ function wp_travel_trip_map( $post_id ) {
 		} else {
 			$q = $map_data['loc'];
 		}
-		?>
-		<div class="wp-travel-map  <?php echo esc_attr( $wrapper_class ); ?>">
-			<iframe
-				style="width:100%;height:300px"
-				src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near"></iframe>
-		</div>
-		<?php
+		if ( ! empty( $q ) ) :
+			?>
+			<div class="wp-travel-map  <?php echo esc_attr( $wrapper_class ); ?>">
+				<iframe
+					style="width:100%;height:300px"
+					src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near"></iframe>
+			</div>
+			<?php
+		endif;
 	}
 }
 
