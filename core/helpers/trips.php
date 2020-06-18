@@ -80,7 +80,7 @@ class WP_Travel_Helpers_Trips {
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
 		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
-		$minimum_partial_payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
+		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		if ( ! $minimum_partial_payout_percent ) {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
@@ -111,7 +111,7 @@ class WP_Travel_Helpers_Trips {
 			'trip_duration'                     => $trip_duration,
 			'group_size'                        => (int) $group_size, // Labeled as Inventory size.
 			'minimum_partial_payout_use_global' => $minimum_partial_payout_use_global,
-			'minimum_partial_payout_percent'    => $minimum_partial_payout_percent
+			'minimum_partial_payout_percent'    => $minimum_partial_payout_percent,
 			// '_post' => $trip,
 		);
 
@@ -366,6 +366,100 @@ class WP_Travel_Helpers_Trips {
 	public static function filter_trips( $args = array() ) {
 
 		global $wpdb;
+		
+		$post_ids = array();
+		$post_ids_data = self::get_trip_ids( $args );
+		if ( isset( $post_ids_data['code'] ) && 'WP_TRAVEL_TRIP_IDS' == $post_ids_data['code'] ) {
+			$post_ids = $post_ids_data['trip_ids'];
+		}
+		$query_args = array();
+		if ( count( $post_ids ) > 0 ) {
+			$query_args['post__in'] = $post_ids;
+		}
+
+		// WP Parameters.
+		$parameter_mappings = array(
+			'exclude'  => 'post__not_in',
+			'include'  => 'post__in',
+			'offset'   => 'offset',
+			'order'    => 'order',
+			'orderby'  => 'orderby',
+			'page'     => 'paged',
+			'slug'     => 'post_name__in',
+			'status'   => 'post_status',
+			'per_page' => 'posts_per_page',
+		);
+
+		/*
+		 * For each known parameter which is both registered and present in the request,
+		 * set the parameter's value on the query $args.
+		 */
+		foreach ( $parameter_mappings as $api_param => $wp_param ) {
+			if ( isset( $_GET[ $api_param ] ) ) {
+				$query_args[ $wp_param ] = $_GET[ $api_param ];
+			}
+		}
+		/**
+		 * WP Travel Post-Type.
+		 */
+		$query_args['post_type'] = WP_TRAVEL_POST_TYPE;
+
+		if ( ! empty( $query_args['post__in'] ) && ! is_array( $query_args['post__in'] ) ) {
+			$query_args['post__in'] = implode( ',', $query_args['post__in'] );
+		}
+
+		// Tax Query Args.
+		if ( ! empty( $travel_locations ) || ! empty( $itinerary_types ) ) {
+
+			$query_args['tax_query'] = array();
+
+			if ( ! empty( $travel_locations ) ) {
+				$query_args['tax_query']['relation'] = 'AND';
+				$query_args['tax_query']             = array(
+					'taxonomy' => 'travel_locations',
+					'field'    => 'slug',
+					'terms'    => $travel_locations,
+				);
+			}
+			if ( ! empty( $itinerary_types ) ) {
+				$query_args['tax_query'][] = array(
+					'taxonomy' => 'itinerary_types',
+					'field'    => 'slug',
+					'terms'    => $itinerary_types,
+				);
+			}
+		}
+		// error_log( print_r($query_args, true) );
+		$the_query = new WP_Query( $query_args );
+		$trips     = array();
+		// The Loop.
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				error_log( get_the_ID() );
+				$trip_info = self::get_trip( get_the_ID() );
+				$trips[]   = $trip_info['trip'];
+			} // end while
+		} // endif
+
+		// Reset Post Data.
+		wp_reset_postdata();
+
+		if ( empty( $trips ) ) {
+			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+		}
+
+		return WP_Travel_Helpers_Response_Codes::get_success_response(
+			'WP_TRAVEL_FILTER_RESULTS',
+			array(
+				'trip' => $trips,
+			)
+		);
+	}
+
+	public static function get_trip_ids( $args = array() ) {
+		global $wpdb;
+
 		$date_table    = $wpdb->prefix . self::$date_table;
 		$pricing_table = $wpdb->prefix . self::$pricing_table;
 
@@ -416,29 +510,16 @@ class WP_Travel_Helpers_Trips {
 					)";
 			}
 
-			// if ( ! empty( $end_date ) ) {
-			// if ( ! empty( $start_date ) ) {
-			// $sql .= 'AND  ';
-			// }
-			// $sql .= " ( '' = IFNULL(end_date,'') || end_date <= '{$end_date}' )";
-			// }
 			if ( ! empty( $end_date ) ) {
 				if ( ! empty( $start_date ) ) {
 					$sql .= 'AND  ';
 				}
-				// $sql .= " ( '' = IFNULL(end_date,'') || end_date <= '{$end_date}' )";
 				$sql .= "
 					(
-						( '' = IFNULL(end_date,'') || start_date <= '{$end_date}' )
-						OR 
-						( 
-							( FIND_IN_SET( '{$year}', years)  || '' = IFNULL(years,'' ) || 'every_year' = years ) AND 
-							( FIND_IN_SET( '{$month}', months) || '' = IFNULL(months,'' ) || 'every_month' = months )
-						)
+						( '' = IFNULL(end_date,'') || end_date <= '{$end_date}' )
 					)";
 			}
 		}
-		// $query   = $wpdb->prepare( $sql );
 		$results = $wpdb->get_results( $sql );
 
 		if ( empty( $results ) ) {
@@ -453,96 +534,21 @@ class WP_Travel_Helpers_Trips {
 			}
 			$sql     = "select distinct trip_id from {$pricing_table} where trip_id IN(" . implode( ',', $post_ids ) . ") and max_pax >= {$max_pax}";
 			$results = $wpdb->get_results( $sql );
-		}
 
-		if ( empty( $results ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+			if ( empty( $results ) ) {
+				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+			}
 		}
 
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
 		}
-
-		$query_args = array();
-
-		// WP Parameters.
-		$parameter_mappings = array(
-			'exclude'  => 'post__not_in',
-			'include'  => 'post__in',
-			'offset'   => 'offset',
-			'order'    => 'order',
-			'orderby'  => 'orderby',
-			'page'     => 'paged',
-			'slug'     => 'post_name__in',
-			'status'   => 'post_status',
-			'per_page' => 'posts_per_page',
-		);
-
-		/*
-		 * For each known parameter which is both registered and present in the request,
-		 * set the parameter's value on the query $args.
-		 */
-		foreach ( $parameter_mappings as $api_param => $wp_param ) {
-			if ( isset( $_GET[ $api_param ] ) ) {
-				$query_args[ $wp_param ] = $_GET[ $api_param ];
-			}
-		}
-
-		/**
-		 * WP Travel Post-Type.
-		 */
-		$query_args['post_type'] = WP_TRAVEL_POST_TYPE;
-		$query_args['post__in']  = ( ! empty( $query_args['post__in'] ) ) ? array( $query_args['post__in'] ) : array();
-
-		// $query_args = array(
-		// 'post_type' => WP_TRAVEL_POST_TYPE,
-		// 'post__in'  => $post_ids,
-		// );
-		// Tax Query Args.
-		if ( ! empty( $travel_locations ) || ! empty( $itinerary_types ) ) {
-
-			$query_args['tax_query'] = array();
-
-			if ( ! empty( $travel_locations ) ) {
-				$query_args['tax_query']['relation'] = 'AND';
-				$query_args['tax_query']             = array(
-					'taxonomy' => 'travel_locations',
-					'field'    => 'slug',
-					'terms'    => $travel_locations,
-				);
-			}
-			if ( ! empty( $itinerary_types ) ) {
-				$query_args['tax_query'][] = array(
-					'taxonomy' => 'itinerary_types',
-					'field'    => 'slug',
-					'terms'    => $itinerary_types,
-				);
-			}
-		}
-
-		$the_query = new WP_Query( $query_args );
-		$trips     = array();
-		// The Loop.
-		if ( $the_query->have_posts() ) {
-			while ( $the_query->have_posts() ) {
-				$the_query->the_post();
-				$trip_info = self::get_trip( get_the_ID() );
-				$trips[]   = $trip_info['trip'];
-			} // end while
-		} // endif
-
-		// Reset Post Data.
-		wp_reset_postdata();
-
-		if ( empty( $trips ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
-		}
-
+// return $post_ids;
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
-			'WP_TRAVEL_FILTER_RESULTS',
+			'WP_TRAVEL_TRIP_IDS',
 			array(
-				'trip' => $trips,
+				'trip_ids' => $post_ids,
 			)
 		);
 	}
