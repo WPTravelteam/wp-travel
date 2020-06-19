@@ -25,7 +25,7 @@ $currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : ''
 
 $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 
-if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
+if ( wp_travel_is_react_version_enabled() ) {
 	if ( class_exists( 'WP_Travel_Helpers_Cart' ) ) {
 		$cart = WP_Travel_Helpers_Cart::get_cart();
 
@@ -153,7 +153,7 @@ if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_
 										<?php
 									}
 
-									if ( count( $trip_extras ) > 0 ) {
+									if ( count( $trip_extras ) > 0 && count( $cart_extras ) > 0 ) {
 										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
 										foreach ( $trip_extras as $tx ) {
 											if ( ! isset( $cart_extras[ $tx['id'] ] ) || $cart_extras[ $tx['id'] ] <= 0 ) {

@@ -253,6 +253,11 @@ wp_travel_cart.timeout = function (promise, ms) {
 };
 
 var wptravelcheckout = function wptravelcheckout(shoppingCart) {
+  var bookNowBtn = document.getElementById('wp-travel-book-now');
+  bookNowBtn && bookNowBtn.addEventListener('wptcartchange', function (e) {
+    e.target.disabled = true;
+  });
+
   if (!shoppingCart) {
     return;
   }
@@ -262,6 +267,20 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
   if (cartItems && cartItems.length <= 0) {
     return;
   }
+
+  var toggleBookNowBtn = function toggleBookNowBtn() {
+    var dirtyItems = shoppingCart.querySelectorAll('[data-dirty]');
+
+    if (!bookNowBtn) {
+      return;
+    }
+
+    if (!!dirtyItems && dirtyItems.length > 0) {
+      bookNowBtn.disabled = true;
+    } else {
+      bookNowBtn.disabled = false;
+    }
+  };
 
   var toggleCartLoader = function toggleCartLoader(on) {
     if (on) {
@@ -572,6 +591,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
           }
 
           shoppingCart.dispatchEvent(new Event('wptcartchange'));
+          bookNowBtn && bookNowBtn.dispatchEvent(new Event('wptcartchange'));
           ci.querySelector('form [type="submit"]').disabled = false;
           ci.querySelector('h5 a').style.color = 'orange';
         });
@@ -633,6 +653,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
             wp_travel.payment.payment_amount = parseFloat(total.total_partial);
           }
 
+          toggleBookNowBtn();
           ci.querySelector('h5 a').removeAttribute('style');
         } else {
           _btn.disabled = false;

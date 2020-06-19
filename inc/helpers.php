@@ -1785,7 +1785,7 @@ if ( ! function_exists( 'wp_travel_get_trip_available_dates' ) ) {
  */
 
 function wp_travel_is_react_version_enabled() {
-	$settings = wp_travel_get_settings();
+	$settings = get_option( 'wp_travel_settings', array() );
 	return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
 }
 

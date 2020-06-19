@@ -52,6 +52,102 @@ add_action( 'wp_travel_booking_fixed_departure_list', 'wp_travel_booking_fixed_d
 add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
 
+add_filter( 'posts_clauses', 'wp_travel_posts_clauses_filter', 11, 2 );
+/**
+ * @since 4.0.4
+ * 
+ * Filters post clause to filter trips after 4.0.0
+ */
+function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
+	global $wpdb;
+
+	if ( ! is_wp_travel_archive_page() || ( is_wp_travel_archive_page() && is_admin() ) || ! wp_travel_is_react_version_enabled() ) {
+		return $post_clauses;
+	}
+
+	// Tables.
+	$dates_table          = $wpdb->prefix . 'wt_dates';
+	$pricings_table       = $wpdb->prefix . 'wt_pricings';
+	$price_category_table = $wpdb->prefix . 'wt_price_category_relation';
+
+	// Join Tables.
+	$join  = ''; // JOIN clause.
+	$join .= "
+		INNER JOIN {$dates_table} ON ( {$wpdb->posts}.ID = {$dates_table}.trip_id )
+		INNER JOIN {$pricings_table} ON ( {$wpdb->posts}.ID = {$pricings_table}.trip_id )
+		INNER JOIN {$price_category_table} ON ({$pricings_table}.id = {$price_category_table}.pricing_id )
+	";
+
+	// Where clause.
+	$where = '';
+		$start_date = isset( $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
+		$end_date   = isset( $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+
+		// Filter by date clause.
+		if ( ! empty( $start_date ) || ! empty( $end_date ) ) {
+			$where .= ' AND ( '; // <1
+			$where .= ' ( '; // <2
+			if ( ! empty( $start_date ) ) {
+				$where .= " CAST({$dates_table}.start_date AS DATE) >= '{$start_date}'";
+				$where .= ! empty( $end_date ) ? " AND CAST({$dates_table}.end_date AS DATE) <= '{$end_date}'" : '';
+			} else {
+				$where .= ! empty( $end_date ) ? " CAST({$dates_table}.end_date AS DATE) <= '{$end_date}'" : '';
+			}
+			$where .= ' ) '; // 2>
+			if ( ! empty( $start_date ) ) {
+				$year  = date( 'Y', strtotime( $start_date ) );
+				$month = date( 'n', strtotime( $start_date ) );
+
+				$where .= ' OR (';// <3
+				$where .= "
+				{$dates_table}.recurring = 1 
+				AND (
+					( FIND_IN_SET( {$year}, years) || 'every_year' = years )
+					 AND 
+					( FIND_IN_SET( {$month}, months) || 'every_month' = months )
+				 )
+				";
+				$where .= ' ) '; // 3>
+
+			}
+			$where .= ' ) '; // 1>
+		}
+
+		$min_price  = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
+		$max_price  = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
+
+		// Filter by Price clause.
+		if ( ! empty( $min_price ) || ! empty( $max_price ) ) {
+			$where .= ' AND ( '; // <11
+			if ( $min_price >= 0 && $max_price > 0 ) {
+				$where .= "
+				(
+					{$price_category_table}.is_sale = 1
+					AND CAST({$price_category_table}.sale_price AS SIGNED) BETWEEN {$min_price} AND {$max_price}
+				)
+				OR
+				(
+					CAST({$price_category_table}.regular_price AS SIGNED) BETWEEN {$min_price} AND {$max_price}
+				)
+				";
+			}
+			$where .= ' ) '; // 11>
+		}
+
+	$post_clauses['join'] = $post_clauses['join'] . $join;
+	$post_clauses['where'] = $post_clauses['where'] . $where;
+	$post_clauses['distinct'] = 'DISTINCT';
+
+	if ( isset( $_GET['price'] ) && in_array( $_GET['price'], array( 'low_high', 'high_low' ) ) ) {
+		$post_clauses['orderby'] = 'low_high' === $_GET['price'] ? "{$price_category_table}.regular_price ASC" : "{$price_category_table}.regular_price DESC";
+	}
+	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
+		$post_clauses['orderby'] = 'asc' === $_GET['trip_date'] ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
+	}
+
+	return $post_clauses;
+}
+
 /**
  * Return template.
  *
@@ -196,8 +292,8 @@ function wp_travel_wrapper_start() {
 
 function wp_travel_get_theme_wrapper_class() {
 	$wrapper_class = '';
-	$template = get_option( 'template' );
-	
+	$template      = get_option( 'template' );
+
 	switch ( $template ) {
 		case 'twentytwenty':
 			$wrapper_class = 'alignwide';
@@ -1587,10 +1683,12 @@ function wp_travel_archive_listing_sidebar() {
 function wp_travel_posts_filter( $query ) {
 	global $pagenow;
 	$type = '';
-	
+
 	if ( isset( $_GET['post_type'] ) ) {
 		$type = $_GET['post_type'];
 	}
+
+	$enabled_react = wp_travel_is_react_version_enabled();
 
 	if ( $query->is_main_query() ) {
 
@@ -1616,7 +1714,7 @@ function wp_travel_posts_filter( $query ) {
 			$current_meta = $query->get( 'meta_query' );
 			$current_meta = ( $current_meta ) ? $current_meta : array();
 			// Filter By Dates.
-			if ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) {
+			if ( ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) && ! $enabled_react ) {
 
 				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
 
@@ -1653,7 +1751,7 @@ function wp_travel_posts_filter( $query ) {
 			}
 
 			// Filter By Price.
-			if ( isset( $_GET['price'] ) && '' != $_GET['price'] ) {
+			if ( ! $enabled_react && isset( $_GET['price'] ) && '' != $_GET['price'] ) {
 				$filter_by = $_GET['price'];
 
 				$query->set( 'meta_key', 'wp_travel_trip_price' );
@@ -1671,7 +1769,7 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 			// Trip Cost Range Filter.
-			if ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) {
+			if ( ! $enabled_react && ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) ) {
 
 				$max_price = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
 
@@ -1728,7 +1826,7 @@ function wp_travel_posts_filter( $query ) {
 			}
 			$query->set( 'tax_query', $current_tax );
 
-			if ( isset( $_GET['trip_date'] ) && '' != $_GET['trip_date'] ) {
+			if ( ! $enabled_react && ( isset( $_GET['trip_date'] ) && '' != $_GET['trip_date'] ) ) {
 				$query->set( 'meta_key', 'trip_date' );
 				$query->set( 'orderby', 'meta_value' );
 				if ( 'asc' === $_GET['trip_date'] ) {
