@@ -634,7 +634,7 @@ const BookingCalender = () => {
                     C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
 				</path>
 				</svg>
-				{__i18n.bookings.booking_tab_clear_all + 'np'}</button>}
+				{__i18n.bookings.booking_tab_clear_all}</button>}
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			<DatePicker {...params} />
