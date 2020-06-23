@@ -139,6 +139,10 @@ class WP_Travel_Itinerary {
 			// Multiple Pricing.
 			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
+			if ( wp_travel_is_react_version_enabled() ) {
+				$pricing_options = wp_travel_get_trip_pricings_with_dates( $this->post->ID );
+			}
+
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 				$group_size = 0;
 				foreach ( $pricing_options as $pricing_option ) {

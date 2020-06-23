@@ -3,7 +3,9 @@ import { __ } from '@wordpress/i18n';
 
 const _ = lodash
 const storeName = 'WPTravelFrontend/BookingWidget';
-
+const __i18n = {
+	..._wp_travel.strings
+}
 const PricingListing =  ({ selected, options, onPricingSelect }) => {
 
 	const allData = useSelect((select) => {
@@ -14,7 +16,7 @@ const PricingListing =  ({ selected, options, onPricingSelect }) => {
 	return <div className="wp-travel-booking__pricing-name">
 		{
 			options.length > 1 && <>
-				<h4>{__('Pricings')}</h4>
+				<h4>{__i18n.bookings.pricings_list_label}</h4>
 				{
 					options.map(
 						(id, i) => <button key={i}

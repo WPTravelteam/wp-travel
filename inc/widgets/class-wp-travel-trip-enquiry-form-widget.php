@@ -35,6 +35,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 		if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 			// Parsley For Frontend Single Trips.
 			wp_enqueue_script( 'jquery-parsley' );
+			wp_enqueue_script( 'wp-travel-widget-scripts' );
 		}
 		$title = isset( $instance['title'] ) ? $instance['title'] : '';
 		extract( $args );

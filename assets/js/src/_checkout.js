@@ -254,7 +254,10 @@ const wptravelcheckout = (shoppingCart) => {
     const bookNowBtn = document.getElementById('wp-travel-book-now')
     bookNowBtn && bookNowBtn.addEventListener( 'wptcartchange', e => {
         e.target.disabled = true
-    } ) 
+    } )
+    bookNowBtn && bookNowBtn.addEventListener('click', e => {
+        
+    })
     if (!shoppingCart) {
         return
     }

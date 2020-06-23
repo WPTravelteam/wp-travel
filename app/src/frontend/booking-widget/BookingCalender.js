@@ -1,19 +1,17 @@
-import DatePicker from "react-datepicker";
-import RRule, { RRuleSet } from "rrule";
-import { useSelect, dispatch } from '@wordpress/data';
+import apiFetch from '@wordpress/api-fetch';
+import { useSelect } from '@wordpress/data';
+import { forwardRef, useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import moment from 'moment';
-import { useState, useEffect, Component, forwardRef } from '@wordpress/element'
-import { __, sprintf } from '@wordpress/i18n'
-import apiFetch from '@wordpress/api-fetch'
-
+import DatePicker from "react-datepicker";
+import RRule from "rrule";
+import ErrorBoundry from './ErrorBoundry';
+import { wpTravelFormat, wpTravelTimeout } from "./functions";
+import PaxSelector from './sub-components/PaxSelector';
 // sub-components
-import PricingListing from './sub-components/PricingListing'
-import TripTimesListing from './sub-components/TripTimesListing'
-import TripExtrasListing from './sub-components/TripExtrasListing'
-import PaxSelector from './sub-components/PaxSelector'
-
-import ErrorBoundry from './ErrorBoundry'
-import { wpTravelTimeout, wpTravelFormat } from "./functions";
+import PricingListing from './sub-components/PricingListing';
+import TripExtrasListing from './sub-components/TripExtrasListing';
+import TripTimesListing from './sub-components/TripTimesListing';
 
 const _ = lodash
 
@@ -44,6 +42,9 @@ const initialState = {
 	excludedDateTimes: [],
 	pricingUnavailable: false
 }
+const __i18n = {
+	..._wp_travel.strings
+}
 
 const InventoryNotice = ({ inventory }) => {
 	const {
@@ -69,12 +70,12 @@ const InventoryNotice = ({ inventory }) => {
 				}}>
 				<span className="wp-travel-booking-enquiry">
 					<span className="dashicons dashicons-editor-help"></span>
-					<span>{__('Trip Enquiry')}</span>
+					<span>{__i18n.trip_enquiry}</span>
 				</span>
 			</a>
 		</p>
 	}
-	return <p>{__('The pricing is not available on the selected Date. Please choose another date or pricing.')}</p>
+	return <p>{__i18n.bookings.pricing_not_available}</p>
 }
 
 const BookingCalender = () => {
@@ -402,7 +403,7 @@ const BookingCalender = () => {
 					return
 				let em = document.createElement('em')
 				em.classList.add('error')
-				em.textContent = __('Max. Pax Exceeded.')
+				em.textContent = __i18n.bookings.max_pax_exceeded
 				e.target.parentElement.appendChild(em)
 				setTimeout(() => {
 					em.remove()
@@ -589,7 +590,7 @@ const BookingCalender = () => {
 
 	const DatePickerBtn = forwardRef(({ value, onClick }, ref) => (
 		<button className="wp-travel-date-picker-btn" onClick={onClick}>
-			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MM/DD/YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MM/DD/YYYY')}` || moment(selectedDate).format('MM/DD/YYYY') : __('Select a Date', 'wp-travel')}
+			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
 			<span>
 				<svg enableBackground="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m446 40h-46v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-224v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-46c-36.393 0-66 29.607-66 66v340c0 36.393 29.607 66 66 66h380c36.393 0 66-29.607 66-66v-340c0-36.393-29.607-66-66-66zm-380 32h46v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h224v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h46c18.748 0 34 15.252 34 34v38h-448v-38c0-18.748 15.252-34 34-34zm380 408h-380c-18.748 0-34-15.252-34-34v-270h448v270c0 18.748-15.252 34-34 34z"></path></g></svg>
 			</span>
@@ -620,7 +621,7 @@ const BookingCalender = () => {
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	return <>
 		<div className="wp-travel-booking__header">
-			<h3>{__('Select Date and Pricing Options', 'wp-travel')}</h3>
+			<h3>{__i18n.booking_tab_content_label}</h3>
 			{selectedDate && <button onClick={() => {
 				let _initialState = Object.assign(initialState)
 				if (!isFixedDeparture)
@@ -633,11 +634,11 @@ const BookingCalender = () => {
                     C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
 				</path>
 				</svg>
-				{__('Clear All', 'wp-travel')}</button>}
+				{__i18n.bookings.booking_tab_clear_all + 'np'}</button>}
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			<DatePicker {...params} />
-			{!selectedDateTime && <p>{__('Select a Date to view available pricings and other options.', 'wp-travel')}</p> || null}
+			{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
 		</div>
 		{
 			selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
@@ -684,7 +685,6 @@ const BookingCalender = () => {
 						&& allData.tripData.inventory
 						&& allData.tripData.inventory.enable_trip_inventory == 'yes'
 						&& <InventoryNotice inventory={allData.tripData.inventory} />
-						// || <p>{__('The pricing is not available on the selected Date. Please choose another date or pricing.')}</p>
 					}
 				</Notice>
 				}
@@ -694,8 +694,8 @@ const BookingCalender = () => {
 			</div>
 		}
 		{selectedDate && selectedPricing && <div className="wp-travel-booking__panel-bottom">
-			<p>{__('Total:', 'wp-travel')}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-			<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__('Book Now')}</button>
+			<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
+			<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
 		</div>}
 	</>;
 }

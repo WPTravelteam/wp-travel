@@ -2,7 +2,9 @@ import { __ } from '@wordpress/i18n';
 import { wpTravelFormat } from '../functions'
 
 const { currency_symbol: currencySymbol } = _wp_travel
-
+const __i18n = {
+	..._wp_travel.strings
+}
 const TripExtrasListing = ({ options, onChange, counts }) => {
 	const handleClick = (index, inc) => () => {
 		let id = options[index].id
@@ -15,7 +17,7 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 	return <div className="wp-travel-booking__trip-extras-wrapper">
 		{
 			options.length > 0 && <>
-				<h4>{__('Trip Extras')}</h4>
+				<h4>{__i18n.bookings.trip_extras_list_label}</h4>
 				<ul className="wp-travel-booking__trip-option-list">
 					{
 						options.map((tx, i) => {
@@ -51,7 +53,7 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 									<strong>{tx.title}</strong>
 									{tx.content && <div>
 										<p dangerouslySetInnerHTML={{
-											__html: `${tx.content}${tx.link && `<a target="new" href="${tx.link}">${__('Learn More')}</a>`}`
+											__html: `${tx.content}${tx.link && `<a target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`
 										}}>
 										</p>
 									</div>

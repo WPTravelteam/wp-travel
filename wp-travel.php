@@ -526,7 +526,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( version_compare( $this->version, '3.2.2', '>' ) ) {
 				include_once sprintf( '%s/upgrade/322-323.php', WP_TRAVEL_ABSPATH );
 			}
-			include_once sprintf( '%s/upgrade/400.php', WP_TRAVEL_ABSPATH );
+			if ( version_compare( $this->version, '4.0.0', '>' ) ) {
+				include_once sprintf( '%s/upgrade/400.php', WP_TRAVEL_ABSPATH );
+			}
+			include_once sprintf( '%s/upgrade/404.php', WP_TRAVEL_ABSPATH );
+			
 			$current_db_version = get_option( 'wp_travel_version' );
 			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
 				if ( empty( $current_db_version ) ) {

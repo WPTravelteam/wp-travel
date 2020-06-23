@@ -90,7 +90,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// Scripts.
 			// wp_enqueue_script( 'wp-travel-view-mode' );
 			// wp_enqueue_script( 'wp-travel-accordion' );
-			wp_enqueue_script( 'wp-travel-widget-scripts' );
+			// wp_enqueue_script( 'wp-travel-widget-scripts' ); // Enqueued from individual widgets. @since 4.0.4
 
 			/**
 			 * @since 4.0.4
@@ -170,8 +170,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel, $settings );
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 
-			wp_enqueue_script( 'jquery-datepicker-lib' );
-			wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+			// wp_enqueue_script( 'jquery-datepicker-lib' );
+			// wp_enqueue_script( 'jquery-datepicker-lib-eng' );
 		}
 
 		/**
@@ -423,7 +423,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				),
 				'wp-travel-widget-scripts'  => array(
 					'src'       => self::$assets_path . 'assets/js/wp-travel-widgets' . $suffix . '.js',
-					'deps'      => array( 'jquery', 'jquery-ui-slider', 'wp-util' ),
+					'deps'      => array( 'jquery', 'jquery-ui-slider', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ),
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),

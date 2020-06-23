@@ -34,4 +34,9 @@ const wpTravelTimeout = (promise, ms = 10000) => {
     })
 }
 
+const wpTravelPHPtoMomentDateFormat = (dateFormat) => {
+    const formats = {
+        
+    }
+}
 export { wpTravelFormat, wpTravelTimeout }

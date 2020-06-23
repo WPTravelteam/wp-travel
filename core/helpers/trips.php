@@ -349,6 +349,15 @@ class WP_Travel_Helpers_Trips {
 			// update_post_meta( $trip_id, 'wp_travel_map_iframe_height', wp_unslash( $data['iframe_height'] ) );
 		}
 
+		/**
+		 * Update meta with min price for sorting.
+		 * 
+		 * @since 4.0.4
+		 */
+		$prev_min_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
+		$min_price      = wp_travel_get_price( $trip_id );
+		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
+
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );
 

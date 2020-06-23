@@ -2722,7 +2722,7 @@ function wp_travel_get_strings() {
 		'location'              => __( 'Location', 'wp-travel' ),
 		'trip_date'             => __( 'Trip date', 'wp-travel' ),
 		'show'                  => __( 'Show', 'wp-travel' ),
-
+		'booking_tab_content_label' => __('Select Date and Pricing Options', 'wp-travel'),
 		'bookings'              => array(
 			'pricing_name'     => __( 'Pricing Name', 'wp-travel' ),
 			'start_date'       => __( 'Start', 'wp-travel' ),
@@ -2739,6 +2739,20 @@ function wp_travel_get_strings() {
 			'close'            => __( 'Close', 'wp-travel' ),
 			'book_now'         => __( 'Book Now', 'wp-travel' ),
 			'combined_pricing' => __( 'Pricing', 'wp-travel' ), // Added for combined pricing label for categorized pricing @since 3.0.0
+			'pricing_not_available' => __( 'The pricing is not available on the selected Date. Please choose another date or pricing.', 'wp-travel' ),
+			'max_pax_exceeded' => __('Max. Pax Exceeded.', 'wp-travel'),
+			'date_select' => __('Select a Date', 'wp-travel'),
+			'date_select_to_view_options' => __( 'Select a Date to view available pricings and other options.', 'wp-travel' ),
+			'booking_tab_clear_all' => __('Clear All', 'wp-travel'),
+			'booking_tab_cart_total' => __('Total:', 'wp-travel'),
+			'booking_tab_booking_btn_label' => __( 'Book Now', 'wp-travel' ),
+			'booking_tab_pax_selector' => __('Pax Selector', 'wp-travel'),
+			'group_discount_tooltip' => __('Group Discounts', 'wp-travel'),
+			'view_group_discount' => __('Discounts', 'wp-travel'),
+			'pricings_list_label' => __('Pricings', 'wp-travel'),
+			'trip_extras_list_label' => __('Trip Extras', 'wp-travel'),
+			'trip_extras_link_label' => __('Learn More', 'wp-travel'),
+			'available_trip_times' => __('Available times', 'wp-travel')
 		),
 		'alert'                 => array(
 			'required_pax_alert'    => __( 'Pax is required.', 'wp-travel' ),

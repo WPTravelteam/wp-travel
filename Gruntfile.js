@@ -308,7 +308,8 @@ module.exports = function (grunt) {
 		babel: {
 			options: {
 				sourceMap: false,
-				presets: ['@babel/preset-env']
+				presets: ['@babel/preset-env'],
+				sourceType: 'script'
 			},
 			dist: {
 				files: {

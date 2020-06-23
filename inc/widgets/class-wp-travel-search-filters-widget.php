@@ -33,7 +33,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 * @param  Mixed $instance Instance value of widget.
 	 */
 	function widget( $args, $instance ) {
-
+		wp_enqueue_script( 'wp-travel-widget-scripts' );
 		extract( $args );
 		// These are the widget options.
 		$title      = apply_filters( 'wp_travel_search_widget_title', isset( $instance['title'] ) ? $instance['title'] : '' );
@@ -78,7 +78,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$hide_title = '';
 
 		if ( $instance ) {
-			$title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+			$title      = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
 			$hide_title = isset( $instance['hide_title'] ) ? esc_attr( $instance['hide_title'] ) : '';
 		}
 		?>

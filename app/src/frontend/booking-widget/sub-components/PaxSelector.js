@@ -4,7 +4,9 @@ import { wpTravelFormat } from '../functions'
 
 const _ = lodash
 const { currency_symbol: currencySymbol } = _wp_travel
-
+const __i18n = {
+	..._wp_travel.strings
+}
 const DiscountTable = ({ groupPricings }) => {
 	return <div className="discount-table" style={{ display: 'none' }}>
 		<table>
@@ -75,7 +77,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 	}
 
 	return <div className="wp-travel-booking__pax-selector-wrapper">
-		<h4>{__('Pax Selector', 'wp-travel')}</h4>
+		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
 		<ul className="wp-travel-booking__trip-option-list">
 			{
 				categories.map((c, i) => {
@@ -84,7 +86,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 						<div className="text-left">
 							<strong>{`${c.term_info.title}`}</strong>
 							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip group-discount-button" onClick={groupDiscountClickhandler}>
-								<span>{__('Group Discounts', 'wp-travel')}</span>
+								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
                                         c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
                                         c-4.647,0.656-9.242-0.838-12.613-4.099l-31.251-30.232c-17.401-16.834-44.661-16.835-62.061,0L193.72,42.859
@@ -104,7 +106,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
                                         c13.569,0,24.608-11.039,24.608-24.608S328.63,310.141,315.061,310.141z"></path><path d="M196.941,152.646c-13.569,0-24.608,11.039-24.608,24.608c0,13.569,11.039,24.609,24.608,24.609
                                         c13.569,0,24.609-11.039,24.609-24.609C221.549,163.686,210.51,152.646,196.941,152.646z"></path>
 								</svg>
-								{__('Discounts', 'wp-travel')}
+								{__i18n.bookings.view_group_discount}
 							</span>}
 						</div>
 						<div className="text-right">
