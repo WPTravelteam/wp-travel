@@ -83,7 +83,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 									<h5><a href="javascript:void(0);"><?php echo esc_html( $trip_data['title'] ) . '(' . $cart_pricing['title'] . ')'; ?></a></h5>
 									<div class="meta-content">
 										<span>
-											<strong><?php _e( 'Date: ' ); ?></strong><span><?php echo $trip_date . $trip_time; ?></span>
+											<strong><?php _e( 'Date: ', 'wp-travel' ); ?></strong><span><?php echo $trip_date . $trip_time; ?></span>
 										</span>
 										<?php
 										foreach ( $cart_pax as $category_id => $detail ) {

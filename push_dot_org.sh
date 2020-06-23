@@ -27,14 +27,14 @@ echo ""
 
 # Copy new set of files to trunk
 echo "copy files to trunk"
-rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude inc/extended/app/src --exclude inc/extended/package.json --exclude inc/extended/postcss.config.js --exclude inc/extended/webpack.config.js --exclude inc/extended/yarn.lock --exclude inc/extended/yarn-error.log --include inc/extended/app/build     ./ ./build/trunk
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json    ./ ./build/trunk
 
-rsync -a ./inc/extended/app/build ./build/trunk/inc/extended/app
+rsync -a ./app/build ./build/trunk/app
 echo "*********************************"
 echo ""
 
 #!/bin/bash          
-CURRENT_TAG=4.0.3
+CURRENT_TAG=4.0.4
 
 # Create tag folder
 echo "Create new tag folder"
@@ -45,9 +45,9 @@ echo ""
 
 # Copy new set of files to tag
 echo "copy files to tag"
-rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md  --exclude .sass-cache --exclude inc/extended/app/src --exclude inc/extended/package.json --exclude inc/extended/postcss.config.js --exclude inc/extended/webpack.config.js --exclude inc/extended/yarn.lock --exclude inc/extended/yarn-error.log --include inc/extended/app/build     ./ ./build/tags/$CURRENT_TAG
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json    ./ ./build/tags/$CURRENT_TAG
 
-rsync -a ./inc/extended/app/build ./build/tags/$CURRENT_TAG/inc/extended/app
+rsync -a ./app/build ./build/tags/$CURRENT_TAG/app
 echo "*********************************"
 echo ""
 

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.4.2
 Requires PHP: 5.5
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -232,6 +232,26 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.0.4 =
+Release Date: 23rd June, 2020
+
+Fixed: 
+* Fixes incorrect Price in Group Pricing issue.
+* Fixes category not displaying issue on cart page in case of per group.
+* Fixes the wrong departure date on the trip description.
+* Fixes incorrect available times on booking tab in some cases.
+* Fixes Group Size info on the trip description section.
+* Fixes Apply Coupon button not working issue on the cart page.
+* Fixes Issue on WP Travel Filter Widget, Shortcode and supports for new pricings options and dates.
+
+Optimization:
+* Script and Style files optimized with compression.
+
+Enhancements:
+* Displays selected Pricing Name, Date and Time on the new mini-cart on checkout page.
+* New date format for selected date on booking tab which was confusing.
+* Strings are translate ready for new booking tab (@since 4.0.0).
 
 = 4.0.3 =
 Release Date: 16th June, 2020
