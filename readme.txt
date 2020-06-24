@@ -234,7 +234,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.0.4 =
-Release Date: 23rd June, 2020
+Release Date: 24rd June, 2020
 
 Fixed: 
 * Fixes incorrect Price in Group Pricing issue.
