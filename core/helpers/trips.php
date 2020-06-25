@@ -3,6 +3,7 @@ class WP_Travel_Helpers_Trips {
 	private static $date_table    = 'wt_dates';
 	private static $pricing_table = 'wt_pricings';
 	private static $price_category_table = 'wt_price_category_relation';
+
 	public static function get_trip( $trip_id = false ) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -180,6 +181,10 @@ class WP_Travel_Helpers_Trips {
 			'code' => 'WP_TRAVEL_TRIP_INFO',
 			'trip' => $trip_data,
 		);
+	}
+
+	public static function get_trips( $args = array() ) {
+		return self::filter_trips( $args );
 	}
 
 	public static function update_trip( $trip_id, $trip_data ) {
@@ -454,6 +459,20 @@ class WP_Travel_Helpers_Trips {
 
 		// Reset Post Data.
 		wp_reset_postdata();
+
+		$trips = array();
+		$the_query = new WP_Query( array(
+			'post_type' => WP_TRAVEL_POST_TYPE,
+		) );
+
+		if ( $the_query->have_posts() ) {
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$trip_info = self::get_trip( get_the_ID() );
+				$trips[]   = $trip_info['trip'];
+			}
+			wp_reset_postdata();
+		}
 
 		if ( empty( $trips ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );

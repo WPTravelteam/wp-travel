@@ -329,6 +329,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/license/wp-travel-plugin-updater.php', WP_TRAVEL_ABSPATH );
 			}
 
+			/**
+			 * WP Travel REST API.
+			 * 
+			 * @since 4.0.5
+			 */
+			include sprintf( '%s/inc/rest-api/wp-travel-rest-api.php', WP_TRAVEL_ABSPATH );
+
 		}
 
 		/**
