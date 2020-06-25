@@ -124,8 +124,15 @@ class WP_Travel_REST_Trips_Controller extends WP_Travel_REST_Controller {
 	 * @return array|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_items( $request ) {
-		$data = WP_Travel_Helpers_Trips::get_trips();
+		$data     = WP_Travel_Helpers_Trips::get_trips();
 		$response = rest_ensure_response( $data );
+
+		$total_posts = isset( $data['total_trips'] ) ? $data['total_trips'] : 0;
+		$max_pages   = isset( $data['max_pages'] ) ? $data['max_pages'] : 0;
+
+		$response->header( 'X-WP-Total', (int) $total_posts );
+		$response->header( 'X-WP-TotalPages', (int) $max_pages );
+		
 		return $response;
 	}
 

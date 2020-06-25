@@ -6,6 +6,9 @@ class WP_Travel_Helpers_Response_Codes{
             'WP_TRAVEL_UPDATED_TRIP' => array(
                 'message' => __( 'Successfully updated trip.', 'wp-travel' ),
             ),
+            'WP_TRAVEL_TRIPS' => array( 
+                'message' => __( 'All Trips.', 'wp-travel' ),
+            ),
 
             // Trip Pricings
             'WP_TRAVEL_REMOVED_TRIP_PRICING' => array(
