@@ -12,7 +12,6 @@ import PaxSelector from './sub-components/PaxSelector';
 import PricingListing from './sub-components/PricingListing';
 import TripExtrasListing from './sub-components/TripExtrasListing';
 import TripTimesListing from './sub-components/TripTimesListing';
-import DatesListing from './sub-components/DatesListing'
 
 const _ = lodash
 
@@ -355,6 +354,15 @@ const BookingCalender = () => {
 				}
 				if (_date.start_date) {
 					return moment(date).isSame(moment(_date.start_date))
+					// if (moment(date).isSameOrAfter(moment(_date.start_date))) {
+					// 	if (_date.end_date && moment(date).isSameOrBefore(moment(_date.end_date))) {
+					// 		if (String(new Date(_date.end_date)).toLowerCase() == 'invalid date') {
+					// 			return true
+					// 		}
+					// 		return moment(date).isSameOrBefore(moment(_date.end_date))
+					// 	}
+					// }
+					// return moment(date).isSameOrAfter(moment(_date.start_date))
 				}
 				return moment(_date.start_date).isSame(moment(date))
 			}).map(d => d.id)
@@ -566,6 +574,12 @@ const BookingCalender = () => {
 	}
 
 	const handlePricingSelect = id => () => {
+		// 		updateState({
+		// 			paxCounts: initialState.paxCounts,
+		// 			tripExtras: initialState.tripExtras,
+		// 			nomineeTimes: initialState.nomineeTimes,
+		// 			isLoading: true
+		// 		})
 
 		let _state = {}
 		_state.isLoading = true
@@ -623,11 +637,8 @@ const BookingCalender = () => {
 				{__i18n.bookings.booking_tab_clear_all}</button>}
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
-			{!1 && <>
 			<DatePicker {...params} />
 			{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
-			</>}
-			<DatesListing />
 		</div>
 		{
 			selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
