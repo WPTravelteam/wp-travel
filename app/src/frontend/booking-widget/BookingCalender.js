@@ -233,6 +233,10 @@ const BookingCalender = () => {
 		}
 	}, [selectedDateTime])
 
+	// useEffect(() => {
+
+	// }, [])
+
 
 	const generateRRule = (data, startDate) => {
 		// let _startDate = moment(data.start_date)
@@ -300,19 +304,10 @@ const BookingCalender = () => {
 			}
 			if (data.start_date) {
 				return moment(date).isSame(moment(data.start_date))
-				// if (moment(date).isSameOrAfter(moment(data.start_date))) {
-				// 	if (data.end_date) {
-				// 		if (String(new Date(data.end_date)).toLowerCase() == 'invalid date') {
-				// 			return true
-				// 		}
-				// 		return moment(date).isSameOrBefore(moment(data.end_date))
-				// 	}
-				// }
-				// return moment(date).isSameOrAfter(moment(data.start_date))
 			}
 			return false
 		})
-		return _date && 'undefined' !== typeof _date.id
+		return !!_date && 'undefined' !== typeof _date.id
 		// }
 	}
 
@@ -354,6 +349,7 @@ const BookingCalender = () => {
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
 				if (_date.start_date) {
+					let istrue = moment(date).isSame(moment(_date.start_date))
 					return moment(date).isSame(moment(_date.start_date))
 				}
 				return moment(_date.start_date).isSame(moment(date))
@@ -623,11 +619,11 @@ const BookingCalender = () => {
 				{__i18n.bookings.booking_tab_clear_all}</button>}
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
-			{!1 && <>
-			<DatePicker {...params} />
-			{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+			{<>
+				<DatePicker {...params} />
+				{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+				<DatesListing {...{ ...params, dates: datesById }} />
 			</>}
-			<DatesListing />
 		</div>
 		{
 			selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">

@@ -743,3 +743,23 @@ $defaultColor: #3399ff;
         border: 0;
     }
 }
+
+// Recurring button style
+.wp-travel-recurring-date-picker-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0 0 1em;
+    overflow: hidden;
+    font-weight: bold;
+    white-space: nowrap;
+    .btn {
+        display: inline-block;
+        margin-left: 1em;
+        padding: .75em 1em;
+        background-color: rgba(0, 0, 0, 0.3);
+        svg {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
