@@ -14,6 +14,7 @@ class WP_Travel_Helpers_Trips {
 		if ( ! is_object( $trip ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
+		
 		$settings = wp_travel_get_settings();
 
 		$extras            = WP_Travel_Helpers_Trip_Extras::get_trip_extras();
@@ -221,7 +222,7 @@ class WP_Travel_Helpers_Trips {
 
 			if ( ! empty( $travel_locations ) ) {
 				$query_args['tax_query']['relation'] = 'AND';
-				$query_args['tax_query']             = array(
+				$query_args['tax_query'][]           = array(
 					'taxonomy' => 'travel_locations',
 					'field'    => 'slug',
 					'terms'    => explode( ',', $travel_locations ),
@@ -249,6 +250,18 @@ class WP_Travel_Helpers_Trips {
 			}
 		}
 
+		$total_posts = $the_query->found_posts;
+
+		if ( $total_posts < 1 ) {
+			// Out-of-bounds, run the query again without LIMIT for total count.
+			unset( $query_args['paged'] );
+
+			$count_query = new WP_Query();
+			$count_query->query( $query_args );
+			$total_posts = $count_query->found_posts;
+		}
+		$max_pages = ceil( $total_posts / (int) $the_query->query_vars['posts_per_page'] );
+
 		if ( empty( $trips ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
@@ -256,7 +269,9 @@ class WP_Travel_Helpers_Trips {
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIPS',
 			array(
-				'trips' => $trips,
+				'total_trips' => $the_query->found_posts,
+				'max_pages'   => $max_pages,
+				'trips'       => $trips,
 			)
 		);
 	}

@@ -124,11 +124,20 @@ class WP_Travel_REST_Trips_Controller extends WP_Travel_REST_Controller {
 	 * @return array|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_items( $request ) {
-		$data     = WP_Travel_Helpers_Trips::get_trips();
-		$response = rest_ensure_response( $data );
+		$params = $request->get_query_params();
+
+		$data     = WP_Travel_Helpers_Trips::get_trips( $params );
+
+		if ( is_wp_error( $data ) ) {
+			return $data;
+		}
 
 		$total_posts = isset( $data['total_trips'] ) ? $data['total_trips'] : 0;
 		$max_pages   = isset( $data['max_pages'] ) ? $data['max_pages'] : 0;
+		unset( $data['total_trips'] );
+		unset( $data['max_pages'] );
+
+		$response = rest_ensure_response( $data );
 
 		$response->header( 'X-WP-Total', (int) $total_posts );
 		$response->header( 'X-WP-TotalPages', (int) $max_pages );
@@ -148,5 +157,61 @@ class WP_Travel_REST_Trips_Controller extends WP_Travel_REST_Controller {
 		}
 
 		return true;
+	}
+
+	public function get_item( $request ) {
+		return WP_Travel_Helpers_Trips::get_trip( $request['id'] );
+	}
+
+	public function get_item_permissions_check( $request ) {
+		$post = get_post( $request['id'] );
+		if ( is_wp_error( $post ) ) {
+			return $post;
+		}
+
+		if ( is_null( $post ) || $post->post_type !== $this->post_type ) {
+			return new WP_Error( 'WP_TRAVEL_NO_TRIP_FOUND', __( 'No trip found with the provided ID', 'wp-travel' ) );
+		}
+
+		if ( 'edit' === $request['context'] && $post && ! $this->check_update_permission( $post ) ) {
+			return new WP_Error(
+				'rest_forbidden_context',
+				__( 'Sorry, you are not allowed to edit this post.' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
+		}
+
+		if ( $post && ! empty( $request['password'] ) ) {
+			// Check post password, and return error if invalid.
+			if ( ! hash_equals( $post->post_password, $request['password'] ) ) {
+				return new WP_Error(
+					'rest_post_incorrect_password',
+					__( 'Incorrect post password.' ),
+					array( 'status' => 403 )
+				);
+			}
+		}
+
+		// Allow access to all password protected posts if the context is edit.
+		if ( 'edit' === $request['context'] ) {
+			add_filter( 'post_password_required', '__return_false' );
+		}
+
+		if ( $post ) {
+			return $this->check_read_permission( $post );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks if trip can be viewed.
+	 */
+	public function check_read_permission( $post ) {
+		$post_type = get_post_type_object( $post->post_type );
+		if ( 'publish' === $post->post_status || current_user_can( $post_type->cap->read_post, $post->ID ) ) {
+			return true;
+		}
+		return false;
 	}
 }
