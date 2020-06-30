@@ -70,6 +70,15 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Call back function for Settings menu page.
+	 */
+	public static function setting_page_callback_new() {
+		?>
+			<div id="wp-travel-settings-block"></div>
+		<?php
+	}
+
+	/**
 	 * Add Tabs to settings page.
 	 *
 	 * @param array $tabs Tabs array list.

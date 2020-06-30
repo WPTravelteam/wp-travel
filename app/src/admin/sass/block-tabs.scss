@@ -1,0 +1,39 @@
+.wp-travel-block-tabs {
+  display: grid;
+  grid-template-columns: 20% 80%;
+
+  .components-tab-panel__tabs {
+    background: #f3f4f5;
+    border-right: 1px solid #e2e4e7;
+    min-width: 20%;
+
+    button {
+      box-shadow: unset;
+      border-radius: 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 10px 5px;
+      font-weight: 400;
+      padding: 15px;
+      border-bottom: 1px solid #e2e4e7;
+      &:focus {
+        background: transparent;
+      }
+      &.active-tab {
+        // font-weight: 600;
+        box-shadow: inset -3px 0px #007cba;
+      }
+
+      &:hover {
+        box-shadow: inset -3px 0px #007cba;
+      }
+    }
+  }
+
+  .components-tab-panel__tab-content {
+    // padding: 16px;
+    flex: 1;
+  }
+  
+}

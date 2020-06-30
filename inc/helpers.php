@@ -2960,6 +2960,13 @@ function wp_travel_get_submenu() {
 				'menu_slug'  => 'settings',
 				'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ),
 			),
+			'settings2'       => array(
+				'priority'   => '130',
+				'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
+				'menu_title' => __( 'Settings2', 'wp-travel' ),
+				'menu_slug'  => 'settings2',
+				'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
+			),
 			'marketplace'    => array(
 				'priority'   => '140',
 				'page_title' => __( 'Marketplace', 'wp-travel' ),
