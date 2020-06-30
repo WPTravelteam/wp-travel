@@ -4,6 +4,38 @@ class WP_Travel_Helpers_Settings {
 	private static $pricing_table = 'wt_pricings';
 	private static $price_category_table = 'wt_price_category_relation';
 
+	public static function get_settings() {
+		
+		$settings = wp_travel_get_settings();
+
+
+		// currency option.
+		$currency_options = wp_travel_get_currency_list();
+
+		$mapped_currency_options = array();
+		$i= 0;
+		foreach ( $currency_options as $value => $label ) {
+			// $mapped_currency_options[ $i ]['label'] = $label;
+			$mapped_currency_options[ $i ]['label'] = $label . ' (' . html_entity_decode( wp_travel_get_currency_symbol( $value ) ) . ')';
+			$mapped_currency_options[ $i ]['value'] = $value;
+			$i++;
+		}
+
+		// Additional option values.
+		$settings_options = array(
+			'currencies' => $mapped_currency_options,
+		);
+		$settings['options'] = $settings_options;
+
+
+		return WP_Travel_Helpers_Response_Codes::get_success_response(
+			'WP_TRAVEL_SETTINGS',
+			array(
+				'settings' => $settings,
+			)
+		);
+	}
+
 	public static function update_settings( $settings_data ) {
 
 		$settings_data = (array) $settings_data;

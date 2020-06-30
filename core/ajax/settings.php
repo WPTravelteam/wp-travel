@@ -29,12 +29,8 @@ class WP_Travel_Ajax_Settings {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$response = WP_Travel_Helpers_Response_Codes::get_success_response(
-			'WP_TRAVEL_SETTINGS',
-			array(
-				'settings' => wp_travel_get_settings(),
-			)
-		);
+		$response = WP_Travel_Helpers_Settings::get_settings();
+
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
