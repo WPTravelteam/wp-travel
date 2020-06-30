@@ -13,6 +13,7 @@ require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/actions/activation.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/lib/cart.php';
 
 // Helpers.
+require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/settings.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/media.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/trip-pricing-categories-taxonomy.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/trip-extras.php';

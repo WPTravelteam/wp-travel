@@ -12,114 +12,30 @@ const DEFAULT_STATE = () => {
 }
 
 const actions = {
+    
     updateStateChange(isChanged) {
         return {
             type: 'UPDATE_STATE_CHANGE',
             isChanged
         };
     },
-    displayUpdatedMessage(isUpdated) {
+    displaySavedMessage(isUpdated) {
         return {
             type: 'DATA_UPDATED',
             isUpdated
         };
     },
-    
     updateRequestSending(requesting) {
         return {
             type: 'UPDATE_REQUEST_SENDING',
             requesting
         };
     },
-    setTripPricingType(pricingType) {
+
+    updateSettings(data){
         return {
-            type: 'SET_TRIP_PRICING_TYPE',
-            pricingType
-        };
-    },
-    updateTripPrices(pricings){
-        return {
-            type: 'UPDATE_TRIP_PRICES',
-            pricings
-        };
-    },
-    updateTripPricing(pricingData, index) {
-        return {
-            type: 'UPDATE_TRIP_PRICING',
-            pricingData,
-            index
-        };
-    },
-    addTripPricing(pricingData) {
-        return {
-            type: 'ADD_TRIP_PRICING',
-            pricingData
-        };
-    },
-    getTripDataFromAPI( url ) {
-        return {
-            type: 'FETCH_FROM_API',
-            url,
-        };
-    },
-    getTripPricingCategoriesFromAPI( url ) {
-        return {
-            type: 'FETCH_FROM_API',
-            url,
-        };
-    },
-    setTripData(data){ // sent it to reducer.
-        return {
-            type: 'SET_TRIP_DATA',
+            type: 'UPDATE_SETTINGS',
             data,
-        };
-    },
-    updateTripData(data){
-        return {
-            type: 'UPDATE_TRIP_DATA',
-            data,
-        };
-    },
-    setTripPricingCategoriesData(data){
-        return {
-            type: 'SET_TRIP_PRICING_CATEGORY_DATA',
-            data,
-        };
-    },
-    getTripTabsFromAPI(url){
-        return {
-            type: 'FETCH_FROM_API',
-            url,
-        };
-    },
-    setTripTabsData(data){
-        return {
-            type: 'SET_TRIP_TABS_DATA',
-            data,
-        };
-    },
-    addNewItinerary(itineraryData) {
-        return {
-            type: 'ADD_NEW_ITINERARY',
-            itineraryData
-        };
-    },
-    addNewFaq(faqData) {
-        return {
-            type: 'ADD_NEW_FAQ',
-            faqData
-        };
-    },
-    addNewFact(factData) {
-        return {
-            type: 'ADD_NEW_FACT',
-            factData
-        };
-    },
-    addNewTripDate(dateData) {
-        return {
-            type: 'ADD_NEW_TRIP_DATE',
-            dateData
         };
     },
     getSettingsFromAPI(url) {
@@ -138,21 +54,26 @@ const actions = {
     
 };
 
-registerStore('WPTravel/Settings', {
+registerStore('WPTravel/Admin', {
     reducer(state = DEFAULT_STATE(), action) {
         switch (action.type) {
-            // case 'UPDATE_REQUEST_SENDING':
-            //     return {...state,is_sending_request:action.requesting};
-            // case 'UPDATE_STATE_CHANGE':
-            //     return {...state,has_state_changes:action.isChanged, show_updated_message:true};
-            // case 'DATA_UPDATED':
-            //     return {...state, show_updated_message:action.isUpdated};
+            case 'UPDATE_REQUEST_SENDING':
+                return {...state,is_sending_request:action.requesting};
+            case 'UPDATE_STATE_CHANGE':
+                return {...state,has_state_changes:action.isChanged, show_updated_message:true};
+            case 'DATA_UPDATED':
+                return {...state, show_updated_message:action.isUpdated};
                 
             case 'SET_SETTINGS':
                 return {
                     ...state,
                     ...action.settings,
                     is_sending_request:false
+                };
+            case 'UPDATE_SETTINGS':
+                return {...state,
+                    ...action.data,
+                    has_state_changes:true
                 };
                 
         }

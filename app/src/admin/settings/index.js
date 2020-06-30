@@ -15,11 +15,11 @@ import SettingsGeneral from './tab-components/SettingsGeneral';
 
 const WPTravelTripSettings = () => {
     const settingsData = useSelect((select) => {
-        return select('WPTravel/Settings').getSettings()
+        return select('WPTravel/Admin').getSettings()
     }, []);
     
     const allData = useSelect((select) => {
-        return select('WPTravel/Settings').getAllStore()
+        return select('WPTravel/Admin').getAllStore()
     }, []);
     
 
@@ -45,6 +45,7 @@ const WPTravelTripSettings = () => {
     ]);
     return <div className={wrapperClasses}>
         {allData.is_sending_request && <Spinner />}
+        <SaveSettings />
         <TabPanel className="wp-travel-block-tabs"
             activeClass="active-tab"
             onSelect={() => false}

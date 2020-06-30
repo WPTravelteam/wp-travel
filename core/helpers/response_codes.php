@@ -67,6 +67,9 @@ class WP_Travel_Helpers_Response_Codes{
             'WP_TRAVEL_SETTINGS' => array(
                 'message' => __( 'Settings loaded successfully.', 'wp-travel' ),
             ),
+            'WP_TRAVEL_UPDATED_SETTINGS' => array(
+                'message' => __( 'Settings updated successfully.', 'wp-travel' ),
+            ),
             'WP_TRAVEL_TRIP_IDS' => array(
                 'message' => __( 'Trip ID loaded successfully.', 'wp-travel' ),
             ),
