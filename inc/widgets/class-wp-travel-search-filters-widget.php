@@ -33,7 +33,9 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 * @param  Mixed $instance Instance value of widget.
 	 */
 	function widget( $args, $instance ) {
-		wp_enqueue_script( 'wp-travel-widget-scripts' );
+		if ( ! wp_script_is( 'wp-travel-frontend-bundle', 'enqueued' ) ) {
+			wp_enqueue_script( 'wp-travel-widget-scripts' );
+		}
 		extract( $args );
 		// These are the widget options.
 		$title      = apply_filters( 'wp_travel_search_widget_title', isset( $instance['title'] ) ? $instance['title'] : '' );

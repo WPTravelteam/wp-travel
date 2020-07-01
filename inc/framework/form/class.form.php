@@ -64,7 +64,9 @@ class WP_Travel_FW_Form {
 	 * Init assets.
 	 */
 	public function init_assets() {
-		wp_enqueue_script( 'jquery-parsley' );
+		if ( ! wp_script_is( 'wp-travel-lib-bundle', 'enqueued' ) ) {
+			wp_enqueue_script( 'jquery-parsley' );
+		}
 	}
 
 	/**
@@ -138,7 +140,9 @@ class WP_Travel_FW_Form {
 	 * @return void
 	 */
 	function template_new() {
-		wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+		if ( ! wp_script_is( 'wp-travel-lib-bundle', 'enqueued' ) ) {
+			wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
+		}
 		$multipart = '';
 		if ( $this->form_options['multipart']  ) {
 			$multipart = 'enctype="multipart/form-data"';
