@@ -41,7 +41,7 @@ const SaveSettings = () => {
             
         }}
         disabled={!has_state_changes}
-        >{__('Save Changes', 'wp-travel' )}</Button>
+        >{__('Save Settings', 'wp-travel' )}</Button>
     </PanelRow>
 }
 

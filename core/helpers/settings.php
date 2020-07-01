@@ -1,32 +1,67 @@
 <?php
 class WP_Travel_Helpers_Settings {
-	private static $date_table    = 'wt_dates';
-	private static $pricing_table = 'wt_pricings';
+	private static $date_table           = 'wt_dates';
+	private static $pricing_table        = 'wt_pricings';
 	private static $price_category_table = 'wt_price_category_relation';
 
 	public static function get_settings() {
-		
+
 		$settings = wp_travel_get_settings();
 
+		$settings_options = array(); // Additional option values.
 
 		// currency option.
-		$currency_options = wp_travel_get_currency_list();
-
+		$currency_options        = wp_travel_get_currency_list();
 		$mapped_currency_options = array();
-		$i= 0;
+		$i                       = 0;
 		foreach ( $currency_options as $value => $label ) {
 			// $mapped_currency_options[ $i ]['label'] = $label;
 			$mapped_currency_options[ $i ]['label'] = $label . ' (' . html_entity_decode( wp_travel_get_currency_symbol( $value ) ) . ')';
 			$mapped_currency_options[ $i ]['value'] = $value;
 			$i++;
 		}
+		$settings_options['currencies'] = $mapped_currency_options;
 
-		// Additional option values.
-		$settings_options = array(
-			'currencies' => $mapped_currency_options,
+		// currency position option.
+		$currency_positions                     = array(
+			array(
+				'label' => __( 'Left', 'wp-travel' ),
+				'value' => 'left',
+			),
+			array(
+				'label' => __( 'Right', 'wp-travel' ),
+				'value' => 'right',
+			),
+			array(
+				'label' => __( 'Left with space', 'wp-travel' ),
+				'value' => 'left_with_space',
+			),
+			array(
+				'label' => __( 'Right with space', 'wp-travel' ),
+				'value' => 'right_with_space',
+			),
 		);
-		$settings['options'] = $settings_options;
+		$settings_options['currency_positions'] = $currency_positions;
 
+		// map Options
+		$map_data = wp_travel_get_maps();
+		$maps     = $map_data['maps'];
+		$i        = 0;
+		$mapped_map_options = array();
+		foreach ( $maps as $value => $label ) {
+			$mapped_map_options[ $i ]['label'] = $label;
+			$mapped_map_options[ $i ]['value'] = $value;
+			$i++;
+		}
+		$settings_options['maps'] = $mapped_map_options;
+		$settings['wp_travel_map'] = $map_data['selected']; // override fallback map if addons map is selected in option and deactivate addon map.
+
+
+
+
+		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options );
+		// Asign Additional option values.
+		$settings['options'] = $settings_options;
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_SETTINGS',
@@ -39,7 +74,6 @@ class WP_Travel_Helpers_Settings {
 	public static function update_settings( $settings_data ) {
 
 		$settings_data = (array) $settings_data;
-		
 
 		$settings        = wp_travel_get_settings();
 		$settings_fields = array_keys( wp_travel_settings_default_fields() );
@@ -127,8 +161,6 @@ class WP_Travel_Helpers_Settings {
 
 		// @since 1.0.5 Used this filter below.
 		$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
-
-
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
