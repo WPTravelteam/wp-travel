@@ -3,7 +3,7 @@ import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
 import Select from 'react-select'
-import PostList from '../../fields/PostList'
+import {VersionCompare} from '../../fields/VersionCompare'
 
 import ErrorBoundary from '../../error/ErrorBoundry';
 
@@ -64,22 +64,25 @@ export default () => {
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h4>{ __( 'General Settings', 'wp-travel' ) }</h4>
         <ErrorBoundary>
-            <PanelRow>
-                <label>{ __( 'Switch to V4', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    <ToggleControl
-                        // help={ __( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ) }
-                        checked={ switch_to_react == 'yes' }
-                        onChange={ () => {
-                            updateSettings({
-                                ...allData,
-                                wp_travel_switch_to_react: 'yes' == switch_to_react ? 'no': 'yes'
-                            })
-                        } }
-                    />
-                    <p className="description">{__( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
-                </div>
-            </PanelRow>
+            { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
+            
+                <PanelRow>
+                    <label>{ __( 'Switch to V4', 'wp-travel' ) }</label>
+                    <div className="wp-travel-field-value">
+                        <ToggleControl
+                            // help={ __( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ) }
+                            checked={ switch_to_react == 'yes' }
+                            onChange={ () => {
+                                updateSettings({
+                                    ...allData,
+                                    wp_travel_switch_to_react: 'yes' == switch_to_react ? 'no': 'yes'
+                                })
+                            } }
+                        />
+                        <p className="description">{__( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
+                    </div>
+                </PanelRow>
+            }
             <PanelRow>
                 <label>{ __( 'Currency', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">

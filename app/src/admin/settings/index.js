@@ -12,6 +12,7 @@ import SaveSettings from './sub-components/SaveSettings'
 
 // Tab Items.
 import SettingsGeneral from './tab-components/SettingsGeneral';
+import SettingsTrip from './tab-components/SettingsTrip';
 
 
 const WPTravelTripSettings = () => {
@@ -40,7 +41,7 @@ const WPTravelTripSettings = () => {
             name: 'trip',
             title: __('Trip', 'wp-travel'),
             className: 'tab-trip',
-            content: 'a'
+            content: SettingsTrip
         },
         {
             name: 'email',

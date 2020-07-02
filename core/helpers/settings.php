@@ -68,6 +68,8 @@ class WP_Travel_Helpers_Settings {
 		}
 		$settings_options['page_list'] = $page_list;
 
+		$settings_options['wp_travel_user_since'] = get_option( 'wp_travel_user_since', '3.0.0' );
+
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options );
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
