@@ -127,7 +127,7 @@ const WPTravelTripSettings = () => {
 
 
 // Filters
-addFilter('wp_travel_settings_after_maps_fields', 'wp_travel', (content, allData) => {
+addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData) => {
     content = [
         <>
             <Notice isDismissible={false} status="informational">

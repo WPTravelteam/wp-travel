@@ -240,7 +240,10 @@ export default () => {
                 </PanelRow>
             </> }
             {applyFilters('wp_travel_settings_after_maps_fields', [] )}
+            {applyFilters('wp_travel_settings_after_maps_upsell', [] )}
 
+            <br/><br/>
+            <h4>{ __( 'Pages', 'wp-travel' ) }</h4>
             <PanelRow>
                 <label>{ __( 'Cart Page', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
