@@ -4,6 +4,7 @@ import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and als
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
+import ErrorBoundary from '../error/ErrorBoundry';
 
 import './store/settings-store';
 
@@ -28,7 +29,7 @@ const WPTravelTripSettings = () => {
     wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
 
     // Add filter to tabs.
-    let tabs = applyFilters('wp_travel_trip_options_tabs', [
+    let tabs = applyFilters('wp_travel_settings_tabs', [
         {
             name: 'general',
             title: __('General', 'wp-travel'),
@@ -39,7 +40,73 @@ const WPTravelTripSettings = () => {
             name: 'trip',
             title: __('Trip', 'wp-travel'),
             className: 'tab-trip',
-            content: SettingsGeneral
+            content: 'a'
+        },
+        {
+            name: 'email',
+            title: __('Email', 'wp-travel'),
+            className: 'tab-email',
+            content: 'a'
+        },
+        {
+            name: 'account',
+            title: __('Account', 'wp-travel'),
+            className: 'tab-account',
+            content: 'a'
+        },
+        {
+            name: 'tabs',
+            title: __('Tabs', 'wp-travel'),
+            className: 'tab-tabs',
+            content: 'a'
+        },
+        {
+            name: 'payment',
+            title: __('Payment', 'wp-travel'),
+            className: 'tab-payment',
+            content: 'a'
+        },
+        {
+            name: 'facts',
+            title: __('Facts', 'wp-travel'),
+            className: 'tab-facts',
+            content: 'a'
+        },
+        {
+            name: 'field-editor',
+            title: __('Field Editor', 'wp-travel'),
+            className: 'tab-field-editor',
+            content: 'a'
+        },
+        {
+            name: 'faqs',
+            title: __('FAQs', 'wp-travel'),
+            className: 'tab-faqs',
+            content: 'a'
+        },
+        {
+            name: 'cart-checkout',
+            title: __('Cart & Checkout', 'wp-travel'),
+            className: 'tab-cart-checkout',
+            content: 'a'
+        },
+        {
+            name: 'addons-settings',
+            title: __('Addons Settings', 'wp-travel'),
+            className: 'tab-addons-settings',
+            content: 'a'
+        },
+        {
+            name: 'misc-options',
+            title: __('Misc. Options', 'wp-travel'),
+            className: 'tab-misc-options',
+            content: 'a'
+        },
+        {
+            name: 'debug',
+            title: __('Debug', 'wp-travel'),
+            className: 'tab-debug',
+            content: 'a'
         },
         
     ]);
@@ -51,12 +118,33 @@ const WPTravelTripSettings = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <><tab.content /></> : <>{__('Error', 'wp-travel')}</>
+                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>{__('Error', 'wp-travel')}</>
             }
         </TabPanel>
         <SaveSettings />
     </div>
 };
+
+
+// Filters
+addFilter('wp_travel_settings_after_maps_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need alternative maps?', 'wp-travel')}</strong>
+                <br />
+                {__('If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/category/map/">{__('View WP Travel Map addons', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
 
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp-travel-settings-block') && null !== document.getElementById('wp-travel-settings-block')) {

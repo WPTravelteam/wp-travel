@@ -57,7 +57,16 @@ class WP_Travel_Helpers_Settings {
 		$settings['wp_travel_map'] = $map_data['selected']; // override fallback map if addons map is selected in option and deactivate addon map.
 
 
-
+		// Page Lists.
+		$lists = get_posts( array( 'numberposts' => -1, 'post_type' => 'page', 'orderby' => 'title', 'order' => 'asc' ) );
+		$page_list = array();
+		$i        = 0;
+		foreach ( $lists as $page_data ) {
+			$page_list[ $i ]['label'] = $page_data->post_title;
+			$page_list[ $i ]['value'] = $page_data->ID;
+			$i++;
+		}
+		$settings_options['page_list'] = $page_list;
 
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options );
 		// Asign Additional option values.
