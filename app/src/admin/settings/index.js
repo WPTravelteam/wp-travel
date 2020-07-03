@@ -13,6 +13,8 @@ import SaveSettings from './sub-components/SaveSettings'
 // Tab Items.
 import SettingsGeneral from './tab-components/SettingsGeneral';
 import SettingsTrip from './tab-components/SettingsTrip';
+import SettingsEmail from './tab-components/SettingsEmail';
+import SettingsAccount from './tab-components/SettingsAccount';
 
 
 const WPTravelTripSettings = () => {
@@ -47,13 +49,13 @@ const WPTravelTripSettings = () => {
             name: 'email',
             title: __('Email', 'wp-travel'),
             className: 'tab-email',
-            content: 'a'
+            content: SettingsEmail
         },
         {
             name: 'account',
             title: __('Account', 'wp-travel'),
             className: 'tab-account',
-            content: 'a'
+            content: SettingsAccount
         },
         {
             name: 'tabs',
@@ -146,6 +148,26 @@ addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData
     ]
     return content
 });
+
+addFilter('wp_travel_tab_content_before_email', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Want to get more e-mail customization options?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
 
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp-travel-settings-block') && null !== document.getElementById('wp-travel-settings-block')) {

@@ -62,7 +62,7 @@ export default () => {
     let switch_to_react = 'undefined' != typeof wp_travel_switch_to_react ? wp_travel_switch_to_react : 'no'
     
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
-        <h4>{ __( 'General Settings', 'wp-travel' ) }</h4>
+        <h2>{ __( 'General Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
             { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
             

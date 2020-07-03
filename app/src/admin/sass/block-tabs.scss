@@ -2,6 +2,20 @@
   display: grid;
   grid-template-columns: 20% 80%;
 
+  .components-toggle-control .components-base-control__field {
+    flex-direction: column;
+    align-items: flex-end;
+    .components-form-toggle{
+      margin-right: 0;
+    }
+  }
+  .wp-travel-field-value{
+    width: 250px;
+  }
+  p.description{
+    text-align: right;
+  }
+
   .components-tab-panel__tabs {
     background: #f3f4f5;
     border-right: 1px solid #e2e4e7;
