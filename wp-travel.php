@@ -118,6 +118,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', 'wp_travel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'wp_enqueue_scripts', array( 'WP_Travel_Assets', 'frontend' ) );
+			add_action( 'wp_head', array( 'WP_Travel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
+			add_action( 'wp_footer', array( 'WP_Travel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
 				add_action( 'admin_enqueue_scripts', array( 'WP_Travel_Assets', 'admin' ) );
 
