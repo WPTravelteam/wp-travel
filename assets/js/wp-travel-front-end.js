@@ -48,6 +48,8 @@ jQuery(function ($) {
         }
     });
 
+    $('#wp-travel-tab-wrapper').easyResponsiveTabs({});
+
     if (window.location.hash) {
         var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
 
@@ -324,7 +326,7 @@ jQuery(function ($) {
             $(this).closest('.paxpicker').addClass('is-active');
         }
     });
-    
+
     $('.add-to-cart-btn').on('click', function () {
         var pricing = $(this).closest('form').find('.pricing-categories');
         var selectedPax = parseInt(pricing[0].dataset.selectedPax)
@@ -336,7 +338,7 @@ jQuery(function ($) {
             $(this).removeAttr('disabled').removeAttr('style');
         }
     });
-    
+
     $(document).on('click', '.pax-picker-plus, .pax-picker-minus', function (e) {
         e.preventDefault();
         var parent = $(this).closest('.pricing-categories');
@@ -346,9 +348,9 @@ jQuery(function ($) {
         var selectedPax = parseInt(document.getElementById(parent_id).dataset.selectedPax)
         var max_pax = parseInt(document.getElementById(parent_id).dataset.max)
         var min_pax = parseInt(document.getElementById(parent_id).dataset.min)
-    
+
         inventoryController(this);
-    
+
         function inventoryController(el) {
             var input = $(el).siblings('.paxpicker-input');
             var current_val = (input.val()) ? parseInt(input.val()) : 0;
@@ -374,7 +376,7 @@ jQuery(function ($) {
                 }
             })
         }
-    
+
         selectedPax < min_pax && pricing_form.find('input[type=submit]').attr('disabled', 'disabled').css({ 'opacity': '.5' }) || pricing_form.find('input[type=submit]').removeAttr('disabled').removeAttr('style');
         var display_value = '';
         var pax_input = '';
@@ -390,7 +392,7 @@ jQuery(function ($) {
                 pax_input += '<input type="hidden" name="pax[' + category_id + ']" value="' + $(this).val() + '" >';
             }
         });
-    
+
         if (!display_value) {
             var display_value = $('#' + parent_id).siblings('.summary').find('.participants-summary-container').data('default');
         }
@@ -403,9 +405,9 @@ jQuery(function ($) {
      * Enquiry Form.
      */
     $('#wp-travel-enquiries').submit(function (e) {
-    
+
         e.preventDefault();
-    
+
         //Remove any previous errors.
         $('.enquiry-response').remove();
         var formData = $('#wp-travel-enquiries').serializeArray();
@@ -420,34 +422,34 @@ jQuery(function ($) {
                 $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');
             },
             success: function (data) {
-    
+
                 if (false == data.success) {
                     var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
                     $('#wp-travel-enquiries').append(message);
                 } else {
                     if (true == data.success) {
-    
+
                         var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
                         $('#wp-travel-enquiries').append(message);
-    
+
                         setTimeout(function () {
                             jQuery('#wp-travel-send-enquiries').magnificPopup('close');
                             $('#wp-travel-enquiries .enquiry-response ').hide();
                         }, '3000');
-    
+
                     }
                 }
-    
+
                 $('#wp-travel-enquiry-submit').removeClass('loading-bar loading-bar-striped active').val(text_submit_enquiry).removeAttr('disabled', 'disabled');
                 //Reset Form Fields.
                 $('#wp-travel-enquiry-name').val('');
                 $('#wp-travel-enquiry-email').val('');
                 $('#wp-travel-enquiry-query').val('');
-    
+
                 return false;
             }
         });
         $('#wp-travel-enquiries').trigger('reset');
     });
-    
+
 });

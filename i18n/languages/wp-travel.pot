@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-01 10:05:01+00:00\n"
+"POT-Creation-Date: 2020-07-03 07:44:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1139,8 +1139,8 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:157
 #: inc/booking-functions.php:883 inc/booking-functions.php:1278
 #: inc/booking-functions.php:1282 inc/booking-functions.php:1306
-#: inc/booking-functions.php:1310 inc/class-assets.php:254
-#: inc/class-assets.php:297 inc/currencies.php:316
+#: inc/booking-functions.php:1310 inc/class-assets.php:242
+#: inc/class-assets.php:285 inc/currencies.php:316
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:732 inc/helpers.php:777
 #: inc/helpers.php:805 inc/helpers.php:2252 inc/helpers.php:3023
@@ -2809,19 +2809,19 @@ msgstr ""
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
-#: inc/class-assets.php:273
+#: inc/class-assets.php:261
 msgid "Chart Stat"
 msgstr ""
 
-#: inc/class-assets.php:281
+#: inc/class-assets.php:269
 msgid "More"
 msgstr ""
 
-#: inc/class-assets.php:282
+#: inc/class-assets.php:270
 msgid "Less"
 msgstr ""
 
-#: inc/class-assets.php:357
+#: inc/class-assets.php:345
 msgid "Select Files from Your Computer"
 msgstr ""
 
@@ -8794,7 +8794,7 @@ msgstr ""
 msgid "Custom Filters"
 msgstr ""
 
-#: inc/helpers.php:2966 wp-travel.php:191
+#: inc/helpers.php:2966 wp-travel.php:193
 msgid "Settings"
 msgstr ""
 
@@ -9031,7 +9031,7 @@ msgstr ""
 msgid "WP Travel Filters Widget"
 msgstr ""
 
-#: inc/widgets/class-wp-travel-search-filters-widget.php:89
+#: inc/widgets/class-wp-travel-search-filters-widget.php:87
 #: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:71
 #: inc/widgets/class-wp-travel-widget-featured.php:162
 #: inc/widgets/class-wp-travel-widget-location.php:171
@@ -9041,7 +9041,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/class-wp-travel-search-filters-widget.php:93
+#: inc/widgets/class-wp-travel-search-filters-widget.php:91
 #: inc/widgets/class-wp-travel-widget-featured.php:189
 #: inc/widgets/class-wp-travel-widget-location.php:198
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:176
@@ -9049,7 +9049,7 @@ msgstr ""
 msgid "Hide title"
 msgstr ""
 
-#: inc/widgets/class-wp-travel-search-filters-widget.php:94
+#: inc/widgets/class-wp-travel-search-filters-widget.php:92
 #: inc/widgets/class-wp-travel-widget-featured.php:190
 #: inc/widgets/class-wp-travel-widget-location.php:199
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:177
@@ -9057,7 +9057,7 @@ msgstr ""
 msgid "Check to Hide"
 msgstr ""
 
-#: inc/widgets/class-wp-travel-search-filters-widget.php:98
+#: inc/widgets/class-wp-travel-search-filters-widget.php:96
 msgid "Enable Filters"
 msgstr ""
 
@@ -9559,7 +9559,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:387
+#: upgrade/update-137.php:25 wp-travel.php:389
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -9571,19 +9571,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:402
+#: wp-travel.php:404
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:403
+#: wp-travel.php:405
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:407
+#: wp-travel.php:409
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:411
+#: wp-travel.php:413
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -9844,32 +9844,32 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:487
+#: upgrade/update-137.php:48 wp-travel.php:489
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:492
+#: upgrade/update-137.php:53 wp-travel.php:494
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:497
+#: upgrade/update-137.php:58 wp-travel.php:499
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:488
+#: upgrade/update-137.php:49 wp-travel.php:490
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:493
+#: upgrade/update-137.php:54 wp-travel.php:495
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:498
+#: upgrade/update-137.php:59 wp-travel.php:500
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""
