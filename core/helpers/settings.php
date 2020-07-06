@@ -44,23 +44,51 @@ class WP_Travel_Helpers_Settings {
 		$settings_options['currency_positions'] = $currency_positions;
 
 		// map Options
-		$map_data = wp_travel_get_maps();
-		$maps     = $map_data['maps'];
-		$i        = 0;
+		$map_data           = wp_travel_get_maps();
+		$maps               = $map_data['maps'];
+		$i                  = 0;
 		$mapped_map_options = array();
 		foreach ( $maps as $value => $label ) {
 			$mapped_map_options[ $i ]['label'] = $label;
 			$mapped_map_options[ $i ]['value'] = $value;
 			$i++;
 		}
-		$settings_options['maps'] = $mapped_map_options;
+		$settings_options['maps']  = $mapped_map_options;
 		$settings['wp_travel_map'] = $map_data['selected']; // override fallback map if addons map is selected in option and deactivate addon map.
 
+		// Global Tabs override
+		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
+
+		$default_tabs = wp_travel_get_default_trip_tabs();
+
+		// Global tab.
+		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
+		if ( $custom_tab_enabled ) { // If utilities is activated.
+			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
+		}
+		$filtered_global_tabs = array();
+		foreach ( $global_tabs as $key => $tab ) {
+			$default_label             = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
+			$tab_data                  = $tab;
+			$tab_data['tab_key']       = $key;
+			$tab_data['default_label'] = $default_label;
+
+			$filtered_global_tabs[] = $tab_data;
+		}
+		$settings['global_tab_settings'] = $filtered_global_tabs; // override values.
 
 		// Page Lists.
-		$lists = get_posts( array( 'numberposts' => -1, 'post_type' => 'page', 'orderby' => 'title', 'order' => 'asc' ) );
+		$lists     = get_posts(
+			array(
+				'numberposts' => -1,
+				'post_type'   => 'page',
+				'orderby'     => 'title',
+				'order'       => 'asc',
+			)
+		);
 		$page_list = array();
-		$i        = 0;
+		$i         = 0;
 		foreach ( $lists as $page_data ) {
 			$page_list[ $i ]['label'] = $page_data->post_title;
 			$page_list[ $i ]['value'] = $page_data->ID;
@@ -89,8 +117,9 @@ class WP_Travel_Helpers_Settings {
 		$settings        = wp_travel_get_settings();
 		$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
+		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings' );
 		foreach ( $settings_fields as $settings_field ) {
-			if ( 'wp_travel_trip_facts_settings' === $settings_field ) {
+			if ( in_array( $settings_field, $ignore_fields ) ) {
 				continue;
 			}
 			// error_log( print_r( $settings_data[ $settings_field ], true ) );
@@ -113,6 +142,16 @@ class WP_Travel_Helpers_Settings {
 
 				$settings[ $settings_field ] = wp_unslash( $settings_data[ $settings_field ] );
 			}
+		}
+		if ( isset( $settings_data['global_tab_settings'] ) && is_array( $settings_data['global_tab_settings'] ) ) {
+
+			$global_tabs = array();
+			foreach ( $settings_data['global_tab_settings'] as  $global_tab ) {
+				$tab_key                                 = $global_tab['tab_key']; // quick fix.
+				$global_tabs[ $tab_key ]['label']        = $global_tab['label'];
+				$global_tabs[ $tab_key ]['show_in_menu'] = $global_tab['show_in_menu'];
+			}
+			$settings['global_tab_settings'] = $global_tabs;
 		}
 
 		// Email Templates

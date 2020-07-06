@@ -15,7 +15,16 @@ import SettingsGeneral from './tab-components/SettingsGeneral';
 import SettingsTrip from './tab-components/SettingsTrip';
 import SettingsEmail from './tab-components/SettingsEmail';
 import SettingsAccount from './tab-components/SettingsAccount';
+import SettingsTabs from './tab-components/SettingsTabs';
+import SettingsPayment from './tab-components/SettingsPayment';
 
+
+import SettingsFieldEditor from './tab-components/SettingsFieldEditor';
+import SettingsFaqs from './tab-components/SettingsFaqs';
+import SettingsCartCheckout from './tab-components/SettingsCartCheckout';
+import SettingsAddons from './tab-components/SettingsAddons';
+import SettingsMisc from './tab-components/SettingsMisc';
+import SettingsDebug from './tab-components/SettingsDebug';
 
 const WPTravelTripSettings = () => {
     const settingsData = useSelect((select) => {
@@ -61,13 +70,13 @@ const WPTravelTripSettings = () => {
             name: 'tabs',
             title: __('Tabs', 'wp-travel'),
             className: 'tab-tabs',
-            content: 'a'
+            content: SettingsTabs
         },
         {
             name: 'payment',
             title: __('Payment', 'wp-travel'),
             className: 'tab-payment',
-            content: 'a'
+            content: SettingsPayment
         },
         {
             name: 'facts',
@@ -79,37 +88,37 @@ const WPTravelTripSettings = () => {
             name: 'field-editor',
             title: __('Field Editor', 'wp-travel'),
             className: 'tab-field-editor',
-            content: 'a'
+            content: SettingsFieldEditor
         },
         {
             name: 'faqs',
             title: __('FAQs', 'wp-travel'),
             className: 'tab-faqs',
-            content: 'a'
+            content: SettingsFaqs
         },
         {
             name: 'cart-checkout',
             title: __('Cart & Checkout', 'wp-travel'),
             className: 'tab-cart-checkout',
-            content: 'a'
+            content: SettingsCartCheckout
         },
         {
             name: 'addons-settings',
             title: __('Addons Settings', 'wp-travel'),
             className: 'tab-addons-settings',
-            content: 'a'
+            content: SettingsAddons
         },
         {
             name: 'misc-options',
             title: __('Misc. Options', 'wp-travel'),
             className: 'tab-misc-options',
-            content: 'a'
+            content: SettingsMisc
         },
         {
             name: 'debug',
             title: __('Debug', 'wp-travel'),
             className: 'tab-debug',
-            content: 'a'
+            content: SettingsDebug
         },
         
     ]);
@@ -161,6 +170,103 @@ addFilter('wp_travel_tab_content_before_email', 'wp_travel', (content, allData) 
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
                     &nbsp;&nbsp;
                     <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+addFilter('wp_travel_custom_global_tabs', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Additional Tabs?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+addFilter('wp_travel_settings_tab_field_editor_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Want to customize your Traveler fields, billing fields and more?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-field-editor/">{__('Get WP Travel Field Editor', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+
+addFilter('wp_travel_settings_tab_faq_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Additional Global FAQs ?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+addFilter('wp_travel_settings_tab_cart_checkout_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Checkout options ?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get checkout option features and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+
+addFilter('wp_travel_addons_setings_tab_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Want to add more features in WP Travel?', 'wp-travel')}</strong>
+                <br />
+                {__('Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('Check all Add-ons', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
