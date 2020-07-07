@@ -38,6 +38,12 @@ const actions = {
             data,
         };
     },
+    addNewBankDetail(bankData) {
+        return {
+            type: 'ADD_NEW_BANK_DETAIL',
+            bankData
+        };
+    },
     getSettingsFromAPI(url) {
         return {
             type: 'FETCH_FROM_API',
@@ -73,6 +79,14 @@ registerStore('WPTravel/Admin', {
             case 'UPDATE_SETTINGS':
                 return {...state,
                     ...action.data,
+                    has_state_changes:true
+                };
+            case 'ADD_NEW_BANK_DETAIL':
+                let addNewBank = [...state.wp_travel_bank_deposits,action.bankData];
+                
+                return {
+                    ...state,
+                    wp_travel_bank_deposits: addNewBank,
                     has_state_changes:true
                 };
                 

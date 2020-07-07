@@ -34,7 +34,7 @@ export default () => {
     }
 
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
-        <h2>{ __( 'Trip Settings', 'wp-travel' ) }</h2>
+        <h2>{ __( 'Global Tabs Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
             {applyFilters( 'wp_travel_custom_global_tabs', [] ) }
 

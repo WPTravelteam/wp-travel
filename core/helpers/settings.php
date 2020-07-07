@@ -79,14 +79,36 @@ class WP_Travel_Helpers_Settings {
 		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
 
 		// Mapped sorted gateways.
-		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
+		$sorted_gateways        = wp_travel_sorted_payment_gateway_lists();
 		$mapped_sorted_gateways = array();
 		foreach ( $sorted_gateways as $key => $label ) {
-			$gateway = array( 'key' => $key, 'label' => $label );
+			$gateway                  = array(
+				'key'   => $key,
+				'label' => $label,
+			);
 			$mapped_sorted_gateways[] = $gateway;
 		}
 		$settings['sorted_gateways'] = $mapped_sorted_gateways; // override values.
 
+		// Bank Deposit
+		$bank_deposits        = $settings['wp_travel_bank_deposits'];
+		$mapped_bank_deposite = array();
+		if ( isset( $bank_deposits['account_name'] ) && is_array( $bank_deposits['account_name'] ) && count( $bank_deposits['account_name'] ) > 0 ) {
+			foreach ( $bank_deposits['account_name'] as $key => $account_name ) {
+				$bank_data = array(
+					'account_name'   => $account_name,
+					'account_number' => isset( $bank_deposits['account_number'][ $key ] ) ? $bank_deposits['account_number'][ $key ] : '',
+					'bank_name'      => isset( $bank_deposits['bank_name'][ $key ] ) ? $bank_deposits['bank_name'][ $key ] : '',
+					'sort_code'      => isset( $bank_deposits['sort_code'][ $key ] ) ? $bank_deposits['sort_code'][ $key ] : '',
+					'iban'           => isset( $bank_deposits['iban'][ $key ] ) ? $bank_deposits['iban'][ $key ] : '',
+					'swift'          => isset( $bank_deposits['swift'][ $key ] ) ? $bank_deposits['swift'][ $key ] : '',
+					'enable'         => isset( $bank_deposits['enable'][ $key ] ) ? $bank_deposits['enable'][ $key ] : '',
+				);
+
+				$mapped_bank_deposite[] = $bank_data;
+			}
+		}
+		$settings['wp_travel_bank_deposits'] = $mapped_bank_deposite; // override values.
 
 		// Page Lists.
 		$lists     = get_posts(
@@ -127,7 +149,7 @@ class WP_Travel_Helpers_Settings {
 		$settings        = wp_travel_get_settings();
 		$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
-		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings', 'sorted_gateways' );
+		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings', 'sorted_gateways', 'wp_travel_bank_deposits' );
 		foreach ( $settings_fields as $settings_field ) {
 			if ( in_array( $settings_field, $ignore_fields ) ) {
 				continue;
@@ -153,6 +175,27 @@ class WP_Travel_Helpers_Settings {
 				$settings[ $settings_field ] = wp_unslash( $settings_data[ $settings_field ] );
 			}
 		}
+
+		if ( isset( $settings_data['wp_travel_bank_deposits'] ) && is_array( $settings_data['wp_travel_bank_deposits'] ) ) {
+			$i = 0;
+			foreach ( $settings_data['wp_travel_bank_deposits'] as $bank_deposit ) {
+
+				if ( ! $bank_deposit['account_name'] && ! $bank_deposit['account_number'] ) {
+					continue; // Not save if no account name and number.
+				}
+				$bank_deposits['account_name'][ $i ] = $bank_deposit['account_name'];
+				$bank_deposits['account_number'][ $i ] = $bank_deposit['account_number'];
+				$bank_deposits['bank_name'][ $i ] = $bank_deposit['bank_name'];
+				$bank_deposits['sort_code'][ $i ] = $bank_deposit['sort_code'];
+				$bank_deposits['iban'][ $i ] = $bank_deposit['iban'];
+				$bank_deposits['swift'][ $i ] = $bank_deposit['swift'];
+				$bank_deposits['enable'][ $i ] = $bank_deposit['enable'];
+				$i++;
+			}
+			$settings['wp_travel_bank_deposits'] = $bank_deposits;
+
+		}
+
 		if ( isset( $settings_data['global_tab_settings'] ) && is_array( $settings_data['global_tab_settings'] ) ) {
 
 			$global_tabs = array();
@@ -167,12 +210,11 @@ class WP_Travel_Helpers_Settings {
 
 			$sorted_gateways = array();
 			foreach ( $settings_data['sorted_gateways'] as  $gateway ) {
-				$sorted_gateways[]                                 = $gateway['key']; // quick fix.
+				$sorted_gateways[] = $gateway['key']; // quick fix.
 				// $sorted_gateways[ $key ]        = $gateway['label'];
 			}
 			$settings['sorted_gateways'] = $sorted_gateways;
 		}
-		
 
 		// Email Templates
 		// Booking Admin Email Settings.
