@@ -404,24 +404,24 @@ jQuery(function ($) {
     /**
      * Enquiry Form.
      */
-    $('#wp-travel-enquiries').submit(function (e) {
+    var handleEnquirySubmission = function(e) {
 
         e.preventDefault();
 
         //Remove any previous errors.
         $('.enquiry-response').remove();
-        var formData = $('#wp-travel-enquiries').serializeArray();
-        formData.push({ name: 'nonce', value: wp_travel.nonce });
+        var formData = $( '#wp-travel-enquiries' ).serializeArray();
+        formData.push({name:'nonce',value: wp_travel.nonce});
         var text_processing = $('#wp_travel_label_processing').val();
         var text_submit_enquiry = $('#wp_travel_label_submit_enquiry').val();
         $.ajax({
             type: "POST",
             url: wp_travel.ajaxUrl,
             data: formData,
-            beforeSend: function () {
+            beforeSend: function() {
                 $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');
             },
-            success: function (data) {
+            success: function(data) {
 
                 if (false == data.success) {
                     var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
@@ -432,7 +432,7 @@ jQuery(function ($) {
                         var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
                         $('#wp-travel-enquiries').append(message);
 
-                        setTimeout(function () {
+                        setTimeout(function() {
                             jQuery('#wp-travel-send-enquiries').magnificPopup('close');
                             $('#wp-travel-enquiries .enquiry-response ').hide();
                         }, '3000');
@@ -450,6 +450,7 @@ jQuery(function ($) {
             }
         });
         $('#wp-travel-enquiries').trigger('reset');
-    });
+    }
+    $('#wp-travel-enquiries').submit(handleEnquirySubmission);
 
 });

@@ -171,6 +171,10 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
 
+			if ( wp_travel_can_load_bundled_scripts() ) {
+				wp_enqueue_script( 'wp-travel-frontend-bundle' );
+			}
+
 			wp_enqueue_script( 'jquery-datepicker-lib' );
 			wp_enqueue_script( 'jquery-datepicker-lib-eng' );
 
@@ -727,20 +731,20 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			);
 
 			global $wp_scripts;
-			$queued_scripts = $wp_scripts->queue;
-			$register_scripts = $wp_scripts->registered;
+			$queued_scripts   = $wp_scripts->queue;
+ 			$register_scripts = $wp_scripts->registered;
 			// error_log( print_r( $wp_scripts->queue, true ) );
 
 			$wp_travel_addon_handles = apply_filters( 'wp-travel-script-handles', array() );
 			$items_in_pro_bundle     = apply_filters( 'wp-travel-pro-bundle-items', array( 'scripts' => array(), 'styles' => array() ) );
 
-			$scripts_in_pro_bundle   = $items_in_pro_bundle['scripts'];
+			$scripts_in_pro_bundle = $items_in_pro_bundle['scripts'];
 
 			$all_handles = array_unique( array_merge( $items_in_frontend_bundle, $wp_travel_addon_handles, $scripts_in_pro_bundle ) );
 			
 			$wpt_enqueued_scripts = array_intersect( $queued_scripts, $all_handles );
 			
-			if ( count( $wpt_enqueued_scripts ) > 0 ) {
+			if ( count( $wpt_enqueued_scripts ) < 0 ) {
 				wp_enqueue_script( 'wp-travel-frontend-bundle' );
 			}
 

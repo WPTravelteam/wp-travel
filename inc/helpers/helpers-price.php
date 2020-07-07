@@ -943,7 +943,7 @@ function wp_travel_get_formated_price( $price, $format = true, $number_of_decima
  *
  * @return Mixed
  */
-function wp_travel_get_formated_price_currency( $price, $regular_price = false, $price_key = '', $post_id = null ) {
+function wp_travel_get_formated_price_currency( float $price, $regular_price = false, $price_key = '', $post_id = null ) {
 	$settings          = wp_travel_get_settings();
 	$currency_position = isset( $settings['currency_position'] ) ? $settings['currency_position'] : 'left';
 

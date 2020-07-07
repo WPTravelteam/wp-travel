@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.0.5\n"
+"Project-Id-Version: WP Travel 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-03 07:44:42+00:00\n"
+"POT-Creation-Date: 2020-07-07 06:00:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1139,8 +1139,8 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:157
 #: inc/booking-functions.php:883 inc/booking-functions.php:1278
 #: inc/booking-functions.php:1282 inc/booking-functions.php:1306
-#: inc/booking-functions.php:1310 inc/class-assets.php:242
-#: inc/class-assets.php:285 inc/currencies.php:316
+#: inc/booking-functions.php:1310 inc/class-assets.php:246
+#: inc/class-assets.php:289 inc/currencies.php:316
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:732 inc/helpers.php:777
 #: inc/helpers.php:805 inc/helpers.php:2252 inc/helpers.php:3023
@@ -2809,19 +2809,19 @@ msgstr ""
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
-#: inc/class-assets.php:261
+#: inc/class-assets.php:265
 msgid "Chart Stat"
 msgstr ""
 
-#: inc/class-assets.php:269
+#: inc/class-assets.php:273
 msgid "More"
 msgstr ""
 
-#: inc/class-assets.php:270
+#: inc/class-assets.php:274
 msgid "Less"
 msgstr ""
 
-#: inc/class-assets.php:345
+#: inc/class-assets.php:349
 msgid "Select Files from Your Computer"
 msgstr ""
 
