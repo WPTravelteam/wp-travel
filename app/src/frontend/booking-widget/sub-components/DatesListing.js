@@ -4,15 +4,18 @@ import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
 
 const generateRRule = (data) => {
     // let _startDate = moment(data.start_date)
-    let startDate = data.start_date && moment(data.start_date).toDate() || new Date()
-    let dtstart = moment(new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 12, 0, 0))).utc().toDate();
-    let endDate = data.end_date
+    let startDate = data.start_date && new Date( data.start_date ) || new Date()
     let ruleArgs = {
         freq: RRule.DAILY,
         count: 10,
-        dtstart: startDate,
-        until: moment(endDate).utc().toDate(),
+        dtstart: new Date( Date.UTC( startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0
+        , 0, 0 ) ),
     };
+    if ( !!data.end_date ) {
+        let endDate = new Date( data.end_date )
+        ruleArgs.until = new Date( Date.UTC( endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 0
+        , 0, 0 ) )
+    }
 
     // let rule = new RRule(ruleArgs);
     // return new RRule(ruleArgs).all();
@@ -35,7 +38,7 @@ const generateRRule = (data) => {
     else if (selectedDates.length > 0) {
         ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
     }
-
+console.log(ruleArgs)
     let rule = new RRule(ruleArgs);
     return rule.all()
 }
@@ -54,7 +57,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     return <>
         <ul>
             {/* {dates.map(date => <option><button onChange={value => onClick(value)()}>{moment(date).format('MMM DD, YYYY')}</button></li>)} */}
-            {dates.map(date => <li><button onClick={onDateClick(date)}>{moment(date).utc().format('MMM DD, YYYY')}</button></li>)}
+            {dates.map(date => <li><button onClick={onDateClick(date)}>{moment.utc(date).format()}</button></li>)}
         </ul>
         <button onClick={() => { }}>Load More...</button>
     </>
@@ -65,7 +68,7 @@ const DatesListing = ({ dates, onChange, filterDate }) => {
     // console.debug(onChange, dates, filterDate)
     const handleClick = date => () => {
         if (typeof onChange === 'function') {
-            onChange(moment(date).utc().toDate())
+            onChange(moment.utc(date).toDate())
         }
     }
 
@@ -92,7 +95,7 @@ const DatesListing = ({ dates, onChange, filterDate }) => {
                         </div>
                         ||
                         <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                            {moment(date.start_date).format('MMM DD, YYYY')}
+                            {moment.utc(date.start_date).format()}
                         </button>
                     }
                 </>
