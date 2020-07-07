@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import WPEditor from '../../fields/WPEditor';
@@ -75,7 +75,7 @@ const BookingEmailTemplates = () => {
         booking_admin_template_settings,
         booking_client_template_settings,
         } = allData;
-
+    console.log(booking_admin_template_settings)
     let sendBookingEmailToAdmin = 'undefined' != typeof send_booking_email_to_admin ? send_booking_email_to_admin : 'no'
 
     const updateEmailData = ( storeName, storeKey, value) => { // storeName[storeKey] = value
@@ -128,7 +128,11 @@ const BookingEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ booking_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'booking_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -170,7 +174,11 @@ const BookingEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ booking_client_template_settings.client_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'booking_client_template_settings', 'client_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -233,7 +241,11 @@ const PaymentEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Payment Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ payment_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'payment_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -275,7 +287,11 @@ const PaymentEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Payment Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ payment_client_template_settings.client_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'payment_client_template_settings', 'client_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -313,7 +329,11 @@ const EnquiryEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'To Emails', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ enquiry_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'enquiry_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 

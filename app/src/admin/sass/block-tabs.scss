@@ -9,6 +9,12 @@
       margin-right: 0;
     }
   }
+  .components-panel__body.is-opened {
+      background: #fbfbfb;
+      &>.components-panel__body-title{
+        background: #e0e0e0;
+      }
+  }
   .wp-travel-field-value{
     width: 250px;
   }

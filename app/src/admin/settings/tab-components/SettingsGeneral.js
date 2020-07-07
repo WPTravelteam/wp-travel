@@ -12,8 +12,6 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
-
-    const { updateSettings } = dispatch('WPTravel/Admin');
     const {
         wp_travel_switch_to_react, 
         currency, 
@@ -28,6 +26,8 @@ export default () => {
         checkout_page_id,
         dashboard_page_id,
         options } = allData;
+
+    const { updateSettings } = dispatch('WPTravel/Admin');
     
     // options
     let currencyOptions = [];

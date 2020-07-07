@@ -67,16 +67,26 @@ class WP_Travel_Helpers_Settings {
 			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
 		}
-		$filtered_global_tabs = array();
+		$mapped_global_tabs = array();
 		foreach ( $global_tabs as $key => $tab ) {
 			$default_label             = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 			$tab_data                  = $tab;
 			$tab_data['tab_key']       = $key;
 			$tab_data['default_label'] = $default_label;
 
-			$filtered_global_tabs[] = $tab_data;
+			$mapped_global_tabs[] = $tab_data;
 		}
-		$settings['global_tab_settings'] = $filtered_global_tabs; // override values.
+		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
+
+		// Mapped sorted gateways.
+		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
+		$mapped_sorted_gateways = array();
+		foreach ( $sorted_gateways as $key => $label ) {
+			$gateway = array( 'key' => $key, 'label' => $label );
+			$mapped_sorted_gateways[] = $gateway;
+		}
+		$settings['sorted_gateways'] = $mapped_sorted_gateways; // override values.
+
 
 		// Page Lists.
 		$lists     = get_posts(
@@ -117,7 +127,7 @@ class WP_Travel_Helpers_Settings {
 		$settings        = wp_travel_get_settings();
 		$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
-		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings' );
+		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings', 'sorted_gateways' );
 		foreach ( $settings_fields as $settings_field ) {
 			if ( in_array( $settings_field, $ignore_fields ) ) {
 				continue;
@@ -153,6 +163,16 @@ class WP_Travel_Helpers_Settings {
 			}
 			$settings['global_tab_settings'] = $global_tabs;
 		}
+		if ( isset( $settings_data['sorted_gateways'] ) && is_array( $settings_data['sorted_gateways'] ) ) {
+
+			$sorted_gateways = array();
+			foreach ( $settings_data['sorted_gateways'] as  $gateway ) {
+				$sorted_gateways[]                                 = $gateway['key']; // quick fix.
+				// $sorted_gateways[ $key ]        = $gateway['label'];
+			}
+			$settings['sorted_gateways'] = $sorted_gateways;
+		}
+		
 
 		// Email Templates
 		// Booking Admin Email Settings.

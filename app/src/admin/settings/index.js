@@ -37,7 +37,7 @@ const WPTravelTripSettings = () => {
     
 
    
-    let wrapperClasses = "wp-travel-trip-pricings";
+    let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
     wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
 
     // Add filter to tabs.
