@@ -89,7 +89,7 @@ export default () => {
             </PanelRow>
             
         
-            {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}
+            {applyFilters( 'wp_travel_settings_tab_misc_options_fields', [] )}
         </ErrorBoundary>
     </div>
 }
