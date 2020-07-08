@@ -763,3 +763,16 @@ $defaultColor: #3399ff;
         }
     }
 }
+
+#booking{
+    .wp-travel-recurring-dates{
+        position: relative;
+        margin-right: 10px;
+        ul{
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+        }
+    }
+}
