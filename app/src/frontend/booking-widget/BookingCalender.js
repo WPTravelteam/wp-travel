@@ -313,6 +313,10 @@ const BookingCalender = () => {
 
 	const dayClicked = date => {
 
+		// const dateYear = clickedDate.getUTCFullYear()
+		// const dateMonth = clickedDate.getUTCMonth()
+		// const dateDate = clickedDate.getUTCDate()
+		// const date = clickedDate
 		console.debug('clicked day', date)
 
 		if (!isFixedDeparture) {
@@ -622,9 +626,11 @@ const BookingCalender = () => {
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			{<>
-				<DatePicker {...params} />
+				<>
+				{/* <DatePicker {...params} /> */}
 				{/* {!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null} */}
-				<DatesListing {...{ ...params, dates: datesById }} />
+				</>
+				<DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
 			</>}
 		</div>
 		{
