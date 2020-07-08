@@ -3265,6 +3265,16 @@ function wp_travel_get_cart_pricing( $cart_id ) {
 }
 
 /**
+ * @since 4.0.6
+ */
+if ( ! function_exists( 'wp_travel_get_trip_pricings' ) ) :
+	function wp_travel_get_trip_pricings( $trip_id ) {
+		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+		return ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+	}
+endif;
+
+/**
  * Get Pricing Options.
  *
  * @since 4.0.0
@@ -3278,8 +3288,10 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 			}
 			$trip_id = $post->ID;
 		}
-		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+		// $pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+		// $trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+
+		$trip_pricings = wp_travel_get_trip_pricings( $trip_id );
 
 		$dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
 		$trip_dates = ! is_wp_error( $dates_data ) && 'WP_TRAVEL_TRIP_DATES' === $dates_data['code'] ? $dates_data['dates'] : array(); // All the trip related dates;

@@ -40,6 +40,7 @@ class WP_Travel_Itinerary {
 		if ( false !== $adv_gallery_ids && ! empty( $adv_gallery_ids ) && isset( $adv_gallery_ids['items'] ) ) {
 			/**
 			 * Resolves data type issues
+			 *
 			 * @since 1.0.8
 			 */
 			return array_map(
@@ -140,14 +141,16 @@ class WP_Travel_Itinerary {
 			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
 			if ( wp_travel_is_react_version_enabled() ) {
-				$pricing_options = wp_travel_get_trip_pricings_with_dates( $this->post->ID );
+				$pricing_options = wp_travel_get_trip_pricings( $this->post->ID );
 			}
 
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 				$group_size = 0;
 				foreach ( $pricing_options as $pricing_option ) {
-					if ( isset( $pricing_option['max_pax'] ) && $pricing_option['max_pax'] > $group_size ) {
-						$group_size = $pricing_option['max_pax'];
+					if ( isset( $pricing_option['max_pax'] ) ) {
+						if ( $pricing_option['max_pax'] > $group_size ) {
+							$group_size = $pricing_option['max_pax'];
+						}
 					} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
 						$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
 						$max_pax       = array_sum( $max_pax_array );
