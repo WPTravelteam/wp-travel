@@ -768,11 +768,43 @@ $defaultColor: #3399ff;
     .wp-travel-recurring-dates{
         position: relative;
         margin-right: 10px;
-        ul{
-            list-style: none;
-            padding: 0;
+        .wp-travel-recurring-dates-wrapper{
             position: absolute;
             top: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            box-shadow: 0 5px 10px rgba(#000, .1);
+            z-index: 22;
+            &::before, &::after{
+                content: "";
+                position: absolute;
+                border-bottom: 10px solid #fff;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                top: -10px;
+                left: 49px;
+            }
+            &::before{
+                border-bottom-color: #ccc;
+                top: -11px;
+            }
+            ul{
+                list-style: none;
+                padding: 0;
+                li{
+                    margin-bottom: 5px;
+                    button{
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+            > button{
+                margin-right: 5px;
+            }
         }
     }
 }
