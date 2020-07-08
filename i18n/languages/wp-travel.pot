@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 06:00:20+00:00\n"
+"POT-Creation-Date: 2020-07-08 10:36:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,7 +87,7 @@ msgid "Invalid trip id."
 msgstr ""
 
 #: core/helpers/cart.php:299 core/helpers/cart_.php:279 inc/class-ajax.php:213
-#: inc/class-ajax.php:253 inc/helpers.php:1408 inc/helpers.php:3404
+#: inc/class-ajax.php:253 inc/helpers.php:1408 inc/helpers.php:3416
 msgid "Custom"
 msgstr ""
 
@@ -1144,8 +1144,8 @@ msgstr ""
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:732 inc/helpers.php:777
 #: inc/helpers.php:805 inc/helpers.php:2252 inc/helpers.php:3023
-#: inc/helpers.php:3077 inc/helpers.php:3413 inc/helpers.php:3625
-#: inc/helpers.php:3697
+#: inc/helpers.php:3077 inc/helpers.php:3425 inc/helpers.php:3637
+#: inc/helpers.php:3709
 msgid "N/A"
 msgstr ""
 

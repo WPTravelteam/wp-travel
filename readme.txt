@@ -240,6 +240,9 @@ Enhancements:
 * Adds bundled scripts files for optimization, reduces page load time and requests.
 * Adds new option to enable/disable load bundled scripts on settings.
 
+Fixes:
+* Fixes Group Pax issue on multiple pricings. 
+
 = 4.0.5 =
 Release Date: 26th June, 2020
 
