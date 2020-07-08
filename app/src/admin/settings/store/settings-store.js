@@ -44,6 +44,12 @@ const actions = {
             bankData
         };
     },
+    addNewFact(newData) {
+        return {
+            type: 'ADD_NEW_FACT',
+            newData
+        };
+    },
     getSettingsFromAPI(url) {
         return {
             type: 'FETCH_FROM_API',
@@ -89,6 +95,15 @@ registerStore('WPTravel/Admin', {
                     wp_travel_bank_deposits: addNewBank,
                     has_state_changes:true
                 };
+            case 'ADD_NEW_FACT':
+                let addNewData = [...state.wp_travel_trip_facts_settings,action.newData];
+                
+                return {
+                    ...state,
+                    wp_travel_trip_facts_settings: addNewData,
+                    has_state_changes:true
+                };
+                
                 
         }
 

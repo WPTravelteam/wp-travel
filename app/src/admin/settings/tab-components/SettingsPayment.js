@@ -92,7 +92,7 @@ export default () => {
                 >
                     {
                         sorted_gateways.map((gateway, index) => {
-                            console.log(gateway.key)
+                            // console.log(gateway.key)
                             return <PanelBody
                                 icon= {alignJustify}
                                 title={ gateway.label }

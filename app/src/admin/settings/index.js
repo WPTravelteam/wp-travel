@@ -17,8 +17,7 @@ import SettingsEmail from './tab-components/SettingsEmail';
 import SettingsAccount from './tab-components/SettingsAccount';
 import SettingsTabs from './tab-components/SettingsTabs';
 import SettingsPayment from './tab-components/SettingsPayment';
-
-
+import SettingsFacts from './tab-components/SettingsFacts';
 import SettingsFieldEditor from './tab-components/SettingsFieldEditor';
 import SettingsFaqs from './tab-components/SettingsFaqs';
 import SettingsCartCheckout from './tab-components/SettingsCartCheckout';
@@ -82,7 +81,7 @@ const WPTravelTripSettings = () => {
             name: 'facts',
             title: __('Facts', 'wp-travel'),
             className: 'tab-facts',
-            content: 'a'
+            content: SettingsFacts
         },
         {
             name: 'field-editor',

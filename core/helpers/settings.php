@@ -78,6 +78,24 @@ class WP_Travel_Helpers_Settings {
 		}
 		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
 
+		// trip facts.
+		$facts        = $settings['wp_travel_trip_facts_settings'];
+		// error_log(print_r( $facts, true ));
+		$mapped_facts = array();
+		if ( is_array( $facts ) && count( $facts ) > 0 ) {
+			foreach ( $facts as $key => $fact ) {
+				$new_fact       = array(
+					'key'     => $key,
+					'name'    => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'    => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options' => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'    => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+				);
+				$mapped_facts[] = $new_fact;
+			}
+		}
+		$settings['wp_travel_trip_facts_settings'] = $mapped_facts; // override values.
+
 		// Mapped sorted gateways.
 		$sorted_gateways        = wp_travel_sorted_payment_gateway_lists();
 		$mapped_sorted_gateways = array();
@@ -129,6 +147,22 @@ class WP_Travel_Helpers_Settings {
 		$settings_options['page_list'] = $page_list;
 
 		$settings_options['wp_travel_user_since'] = get_option( 'wp_travel_user_since', '3.0.0' );
+
+		// fact options.
+		$settings_options['fact_options'] = array(
+			array(
+				'label' => __( 'Plain Text', 'wp-travel' ),
+				'value' => 'text',
+			),
+			array(
+				'label' => __( 'Single Select', 'wp-travel' ),
+				'value' => 'single',
+			),
+			array(
+				'label' => __( 'Multiple Select', 'wp-travel' ),
+				'value' => 'multiple',
+			),
+		);
 
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options );
 		// Asign Additional option values.
@@ -183,13 +217,13 @@ class WP_Travel_Helpers_Settings {
 				if ( ! $bank_deposit['account_name'] && ! $bank_deposit['account_number'] ) {
 					continue; // Not save if no account name and number.
 				}
-				$bank_deposits['account_name'][ $i ] = $bank_deposit['account_name'];
+				$bank_deposits['account_name'][ $i ]   = $bank_deposit['account_name'];
 				$bank_deposits['account_number'][ $i ] = $bank_deposit['account_number'];
-				$bank_deposits['bank_name'][ $i ] = $bank_deposit['bank_name'];
-				$bank_deposits['sort_code'][ $i ] = $bank_deposit['sort_code'];
-				$bank_deposits['iban'][ $i ] = $bank_deposit['iban'];
-				$bank_deposits['swift'][ $i ] = $bank_deposit['swift'];
-				$bank_deposits['enable'][ $i ] = $bank_deposit['enable'];
+				$bank_deposits['bank_name'][ $i ]      = $bank_deposit['bank_name'];
+				$bank_deposits['sort_code'][ $i ]      = $bank_deposit['sort_code'];
+				$bank_deposits['iban'][ $i ]           = $bank_deposit['iban'];
+				$bank_deposits['swift'][ $i ]          = $bank_deposit['swift'];
+				$bank_deposits['enable'][ $i ]         = $bank_deposit['enable'];
 				$i++;
 			}
 			$settings['wp_travel_bank_deposits'] = $bank_deposits;
@@ -214,6 +248,42 @@ class WP_Travel_Helpers_Settings {
 				// $sorted_gateways[ $key ]        = $gateway['label'];
 			}
 			$settings['sorted_gateways'] = $sorted_gateways;
+		}
+
+		// Facts
+		if ( isset( $settings_data['wp_travel_trip_facts_settings'] ) && is_array( $settings_data['wp_travel_trip_facts_settings'] ) ) {
+
+			$facts_settings = array();
+			foreach ( $settings_data['wp_travel_trip_facts_settings'] as $index => $fact ) {
+				$name = $fact['name'];
+				$type = $fact['type'];
+				$options = $fact['options'];
+				if ( ! is_array( $options ) ) {
+					$options = explode( ',', $options );
+				}
+				$icon = $fact['icon'];
+				$key = isset( $fact['key'] ) && ! empty( $fact['key'] ) ? $fact['key'] : $index;
+
+				$facts_settings[ $key ] = array(
+					'name' => $name,
+					'type' => $type,
+					'options' => $options,
+					'icon' => $icon,
+				);
+			}
+			$settings['wp_travel_trip_facts_settings'] = $facts_settings;
+		}
+		if ( is_array( $facts ) && count( $facts ) > 0 ) {
+			foreach ( $facts as $key => $fact ) {
+				$new_fact       = array(
+					'key'     => $key,
+					'name'    => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'    => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options' => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'    => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+				);
+				$mapped_facts[] = $new_fact;
+			}
 		}
 
 		// Email Templates
