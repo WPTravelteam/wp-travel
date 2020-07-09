@@ -85,26 +85,28 @@ export default () => {
 
             <h3>{__( 'Payment Gateways', 'wp-travel' )}</h3>
             {
-                <ReactSortable
-                    list={sorted_gateways}
-                    setList={sorted => sortGateways(sorted)}
-                    handle=".settings-general .components-panel__icon"
-                >
-                    {
-                        sorted_gateways.map((gateway, index) => {
-                            // console.log(gateway.key)
-                            return <PanelBody
-                                icon= {alignJustify}
-                                title={ gateway.label }
-                                initialOpen={false}
-                            >
+                <div className="wp-travel-block-sortable">
+                    <ReactSortable
+                        list={sorted_gateways}
+                        setList={sorted => sortGateways(sorted)}
+                        handle=".settings-general .components-panel__icon"
+                    >
+                        {
+                            sorted_gateways.map((gateway, index) => {
+                                // console.log(gateway.key)
+                                return <PanelBody
+                                    icon= {alignJustify}
+                                    title={ gateway.label }
+                                    initialOpen={false}
+                                >
 
-                                {applyFilters( `wp_travel_payment_gateway_fields_${gateway.key}`, [], allData )}
-                            </PanelBody>
-                        } )
-                    }
+                                    {applyFilters( `wp_travel_payment_gateway_fields_${gateway.key}`, [], allData )}
+                                </PanelBody>
+                            } )
+                        }
 
-                </ReactSortable>}
+                    </ReactSortable>}
+                </div>
         
         </ErrorBoundary>
     </div>
