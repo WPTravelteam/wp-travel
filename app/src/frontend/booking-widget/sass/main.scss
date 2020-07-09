@@ -764,10 +764,22 @@ $defaultColor: #3399ff;
     }
 }
 
+#wp-travel-tab-wrapper{
+    z-index: 9999 !important;
+}
+
 #booking{
     .wp-travel-recurring-dates{
         position: relative;
         margin-right: 10px;
+        .wp-travel-recurring-date-picker-btn{
+            .btn{
+                margin-top: 0;
+                height: 42px;
+                display: flex;
+                align-items: center;
+            }
+        }
         .wp-travel-recurring-dates-wrapper{
             position: absolute;
             top: 100%;
@@ -793,6 +805,7 @@ $defaultColor: #3399ff;
                 top: -11px;
             }
             ul{
+                margin: 0;
                 list-style: none;
                 padding: 0;
                 display: grid;
@@ -805,30 +818,38 @@ $defaultColor: #3399ff;
                     }
                 }
             }
-            > button{
-                margin-right: 5px;
-                display: inline-flex;
+            .wp-travel-recurring-dates-nav-btns{
+                display: flex;
                 align-items: center;
-                &.prev{
-                    &::before{
-                        content: "\f141";
-                        font-family: dashicons;
-                        display: inline-block;
+                flex-wrap: wrap;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid #eee;
+                button{
+                    margin-right: 5px;
+                    display: inline-flex;
+                    align-items: center;
+                    &.prev{
+                        &::before{
+                            content: "\f141";
+                            font-family: dashicons;
+                            display: inline-block;
+                        }
                     }
-                }
-                &.next{
-                    &::after{
-                        content: "\f139";
-                        font-family: dashicons;
-                        display: inline-block;
+                    &.next{
+                        &::after{
+                            content: "\f139";
+                            font-family: dashicons;
+                            display: inline-block;
+                        }
                     }
-                }
-                &.show-more{
-                    &::before{
-                        content: "\f531";
-                        font-family: dashicons;
-                        display: inline-block;
-                        margin-right: 5px;
+                    &.show-more{
+                        &::before{
+                            content: "\f531";
+                            font-family: dashicons;
+                            display: inline-block;
+                            margin-right: 5px;
+                        }
                     }
                 }
             }
