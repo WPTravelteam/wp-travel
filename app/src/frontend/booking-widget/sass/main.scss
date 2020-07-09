@@ -778,7 +778,7 @@ $defaultColor: #3399ff;
             border-radius: 4px;
             box-shadow: 0 5px 10px rgba(#000, .1);
             z-index: 22;
-            min-width: 200px;
+            min-width: 345px;
             &::before, &::after{
                 content: "";
                 position: absolute;
@@ -795,8 +795,10 @@ $defaultColor: #3399ff;
             ul{
                 list-style: none;
                 padding: 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 10px;
                 li{
-                    margin-bottom: 5px;
                     button{
                         display: block;
                         width: 100%;
@@ -819,6 +821,14 @@ $defaultColor: #3399ff;
                         content: "\f139";
                         font-family: dashicons;
                         display: inline-block;
+                    }
+                }
+                &.show-more{
+                    &::before{
+                        content: "\f531";
+                        font-family: dashicons;
+                        display: inline-block;
+                        margin-right: 5px;
                     }
                 }
             }

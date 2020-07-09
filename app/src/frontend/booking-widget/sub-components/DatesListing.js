@@ -1,7 +1,7 @@
 import moment from 'moment'
 import RRule from "rrule"
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
-import {__} from '@wordpress/i18n'
+import { __ } from '@wordpress/i18n'
 
 const generateRRule = rruleArgs => {
     let rule = new RRule(rruleArgs);
@@ -122,9 +122,11 @@ const RecurringDates = ({ data, onDateClick }) => {
                                 return <li><button onClick={handleDateClick(_date)}>{_date.format('ddd, MMM Do YYYY')}</button></li>
                             })}
                         </ul>
-                        {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
-                        {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
-                        {activePage >= pagesCount && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
+                        <div className="wp-travel-recurring-dates-nav-btns">
+                            {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
+                            {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
+                            {activePage >= pagesCount && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
+                        </div>
                     </div>
                 </>
             }
