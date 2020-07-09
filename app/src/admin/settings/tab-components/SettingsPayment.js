@@ -105,8 +105,9 @@ export default () => {
                             } )
                         }
 
-                    </ReactSortable>}
+                    </ReactSortable>
                 </div>
+            }
         
         </ErrorBoundary>
     </div>
