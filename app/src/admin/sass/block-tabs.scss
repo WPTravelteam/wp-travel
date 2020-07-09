@@ -1,59 +1,70 @@
-.wp-travel-block-tabs {
-  display: grid;
-  grid-template-columns: 20% 80%;
-
-  .components-toggle-control .components-base-control__field {
-    flex-direction: column;
-    align-items: flex-end;
-    .components-form-toggle{
-      margin-right: 0;
-    }
+.wp-travel-trip-settings{
+  margin-top: 20px;
+  .wp-travel-save-changes{
+      background-color: #fff;
+      border: 1px solid #ccc !important;
   }
-  .components-panel__body.is-opened {
-      background: #fbfbfb;
-      &>.components-panel__body-title{
-        background: #e0e0e0;
-      }
-  }
-  .wp-travel-field-value{
-    width: 250px;
-  }
-  p.description{
-    text-align: right;
-  }
-
-  .components-tab-panel__tabs {
-    background: #f3f4f5;
-    border-right: 1px solid #e2e4e7;
-    min-width: 20%;
-
-    button {
-      box-shadow: unset;
-      border-radius: 0;
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 10px 5px;
-      font-weight: 400;
-      padding: 15px;
-      border-bottom: 1px solid #e2e4e7;
-      &:focus {
-        background: transparent;
-      }
-      &.active-tab {
-        // font-weight: 600;
-        box-shadow: inset -3px 0px #007cba;
-      }
-
-      &:hover {
-        box-shadow: inset -3px 0px #007cba;
+  .wp-travel-block-tabs {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    .components-toggle-control .components-base-control__field {
+      flex-direction: column;
+      align-items: flex-end;
+      .components-form-toggle{
+        margin-right: 0;
       }
     }
-  }
-
-  .components-tab-panel__tab-content {
-    // padding: 16px;
-    flex: 1;
-  }
+    .components-panel__body.is-opened {
+        background: #fbfbfb;
+        &>.components-panel__body-title{
+          background: #e0e0e0;
+        }
+    }
+    .wp-travel-field-value{
+      width: 250px;
+    }
+    p.description{
+      text-align: right;
+    }
   
+    .components-tab-panel__tabs {
+      background: #f3f4f5;
+      border: 1px solid #e0e0e0;
+      min-width: 20%;
+  
+      button {
+        box-shadow: unset;
+        border-radius: 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 10px 5px;
+        font-weight: 400;
+        padding: 15px;
+        border-bottom: 1px solid #e2e4e7;
+        &:focus {
+          background: transparent;
+        }
+        &.active-tab {
+          // font-weight: 600;
+          box-shadow: inset -3px 0px #007cba;
+        }
+  
+        &:hover {
+          box-shadow: inset -3px 0px #007cba;
+        }
+      }
+    }
+  
+    .components-tab-panel__tab-content {
+      // padding: 16px;
+      flex: 1;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      .wp-travel-ui{
+          border: 0;
+      }
+    }
+    
+  }
 }
