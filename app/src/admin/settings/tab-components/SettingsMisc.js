@@ -88,7 +88,7 @@ export default () => {
                 </div>
             </PanelRow>
             
-        
+            <h3>{ __( 'Currency Exchange Rate API', 'wp-travel' ) }</h3>
             {applyFilters( 'wp_travel_settings_tab_misc_options_fields', [] )}
         </ErrorBoundary>
     </div>

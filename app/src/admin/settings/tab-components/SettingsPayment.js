@@ -1,7 +1,7 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, RangeControl, PanelBody, TextControl, TextareaControl, Button, Icon } from '@wordpress/components';
+import { PanelRow, ToggleControl, RangeControl, RadioControl, PanelBody, TextControl, TextareaControl, Button, Icon } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import { ReactSortable } from 'react-sortablejs';
@@ -20,6 +20,9 @@ export default () => {
         partial_payment,
         minimum_partial_payout,
         sorted_gateways,
+        trip_tax_enable,
+        trip_tax_price_inclusive,
+        trip_tax_percentage,
         options
         } = allData;
     
@@ -112,6 +115,72 @@ export default () => {
 
                     </ReactSortable>
                 </div>
+            }
+            {applyFilters( 'wp_travel_after_payment_fields', [] )}
+
+            <h3>{__( 'Tax Options', 'wp-travel' )}</h3>
+            <PanelRow>
+                <label>{ __( 'Enable Tax', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ trip_tax_enable == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                trip_tax_enable: 'yes' == trip_tax_enable ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'Check to enable Tax options for trips.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+
+            {'undefined' != typeof trip_tax_enable && 'yes' == trip_tax_enable &&
+                <>
+                    <PanelRow>
+                        <label>{ __( 'Tax on Trip prices', 'wp-travel' ) }</label>
+                        <div className="wp-travel-field-value">
+                            <RadioControl
+                                selected={ trip_tax_price_inclusive }
+                                options={ [
+                                    { label: __( 'Yes, I will enter trip prices inclusive of tax', 'wp-travel' ), value: 'yes' },
+                                    { label: __( 'No, I will enter trip prices exclusive of tax', 'wp-travel' ), value: 'no' },
+                                ] }
+                                onChange={ ( option ) => { 
+                                    updateSettings({
+                                        ...allData,
+                                        trip_tax_price_inclusive: option
+                                    })
+                                } }
+                            />
+                            <p className="description">{__( 'This option will affect how you enter trip prices.', 'wp-travel' )}</p>
+                        </div>
+                    </PanelRow>
+                    { 'undefined' != typeof trip_tax_price_inclusive && 'no' == trip_tax_price_inclusive &&
+                        <>
+                            <PanelRow>
+                                <label>{ __( 'Tax Percentage', 'wp-travel' ) }</label>
+                                <div className="wp-travel-field-value">
+                                    
+                                    <TextControl
+                                        type="number"
+                                        value={trip_tax_percentage}
+                                        onChange={ 
+                                            (value) => { 
+                                                updateSettings({
+                                                    ...allData,
+                                                    trip_tax_percentage: value
+                                                })
+                                            }
+                                        }
+                                    />
+                                    <p className="description">{__( 'Trip Tax percentage added to trip price.', 'wp-travel' )}</p>
+                                </div>
+                            </PanelRow>
+                        </>
+                    }
+
+                </>
             }
         
         </ErrorBoundary>

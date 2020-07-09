@@ -273,6 +273,47 @@ addFilter('wp_travel_addons_setings_tab_fields', 'wp_travel', (content, allData)
     return content
 });
 
+addFilter('wp_travel_after_payment_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need more payment gateway options ?', 'wp-travel')}</strong>
+                <br />
+                {/* {__('Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')} */}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="http://wptravel.io/contact">{__('Request A new One', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/category/payment-gateways/">{__('Check All Payment Gateways', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, allData) => {
+
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Display current exchange rate in your site.', 'wp-travel')}</strong>
+                <br />
+                {__('You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                &nbsp;&nbsp;
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('WP Travel Currency Exchange Rates', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
 
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp-travel-settings-block') && null !== document.getElementById('wp-travel-settings-block')) {
