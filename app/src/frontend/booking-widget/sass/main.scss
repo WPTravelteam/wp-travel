@@ -769,10 +769,28 @@ $defaultColor: #3399ff;
 }
 
 #booking{
+    .wp-travel-booking__datepicker-wrapper{
+        flex-wrap: wrap;
+        .wp-travel-recurring-date-picker-btn{
+            margin-right: 10px;
+            margin-bottom: 10px;
+            @media(max-width: 575px){
+                width: 100%;
+            }
+        }
+    }
     .wp-travel-recurring-dates{
         position: relative;
-        margin-right: 10px;
+        @media(max-width: 575px){
+            width: 100%;
+        }
         .wp-travel-recurring-date-picker-btn{
+            margin-right: 10px;
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            display: inline-flex;
+            justify-content: space-between;
             .btn{
                 margin-top: 0;
                 height: 42px;
@@ -791,6 +809,10 @@ $defaultColor: #3399ff;
             box-shadow: 0 5px 10px rgba(#000, .1);
             z-index: 22;
             min-width: 345px;
+            @media(max-width: 575px){
+                min-width: unset;
+                width: 100%;
+            }
             &::before, &::after{
                 content: "";
                 position: absolute;
@@ -811,6 +833,11 @@ $defaultColor: #3399ff;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 grid-gap: 10px;
+                @media(max-width: 575px){
+                    grid-template-columns: 1fr;
+                    max-height: 150px;
+                    overflow: auto;
+                }
                 li{
                     button{
                         display: block;
