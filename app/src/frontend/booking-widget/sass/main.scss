@@ -778,6 +778,7 @@ $defaultColor: #3399ff;
             border-radius: 4px;
             box-shadow: 0 5px 10px rgba(#000, .1);
             z-index: 22;
+            min-width: 200px;
             &::before, &::after{
                 content: "";
                 position: absolute;
@@ -804,6 +805,22 @@ $defaultColor: #3399ff;
             }
             > button{
                 margin-right: 5px;
+                display: inline-flex;
+                align-items: center;
+                &.prev{
+                    &::before{
+                        content: "\f141";
+                        font-family: dashicons;
+                        display: inline-block;
+                    }
+                }
+                &.next{
+                    &::after{
+                        content: "\f139";
+                        font-family: dashicons;
+                        display: inline-block;
+                    }
+                }
             }
         }
     }
