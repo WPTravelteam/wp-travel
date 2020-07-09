@@ -94,7 +94,7 @@ export default () => {
                                 value={ 'undefined' != typeof selectedFactOptions[0] && 'undefined' != typeof selectedFactOptions[0].label ? selectedFactOptions[0] : []}
                                 onChange={(data)=>{
                                     if ( '' !== data ) {
-                                        updateFact( 'type', data.value, index )
+                                        updateFact( 'type', data.value, props.index )
                                     }
                                 }}
                             />
