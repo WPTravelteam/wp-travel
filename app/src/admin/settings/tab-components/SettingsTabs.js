@@ -39,42 +39,44 @@ export default () => {
             {applyFilters( 'wp_travel_custom_global_tabs', [] ) }
 
             {global_tab_settings.map(function (tab, tabIndex) {
-                return <PanelBody
-                    // icon= {alignJustify}
-                    title={tab.label ? tab.label : tab.default_label }
-                    initialOpen={false}
-                >
-                    <PanelRow>
-                        <label>{__('Default Tab Title', 'wp-travel')}</label>
-                        <TextControl
-                            value={tab.default_label}
-                            disabled={true}
-                        />
-                    </PanelRow>
-                    <PanelRow>
-                        <label>{__('Custom Tab Title', 'wp-travel')}</label>
-                        <TextControl
-                            value={tab.label}
-                            placeholder={tab.default_label }
-                            onChange={ 
-                                (value) => { 
-                                    updateTabOption( 'label', value, tabIndex ) 
+                return <div className="wp-travel-block-section">
+                        <PanelBody
+                            // icon= {alignJustify}
+                            title={tab.label ? tab.label : tab.default_label }
+                            initialOpen={false}
+                        >
+                        <PanelRow>
+                            <label>{__('Default Tab Title', 'wp-travel')}</label>
+                            <TextControl
+                                value={tab.default_label}
+                                disabled={true}
+                            />
+                        </PanelRow>
+                        <PanelRow>
+                            <label>{__('Custom Tab Title', 'wp-travel')}</label>
+                            <TextControl
+                                value={tab.label}
+                                placeholder={tab.default_label }
+                                onChange={ 
+                                    (value) => { 
+                                        updateTabOption( 'label', value, tabIndex ) 
+                                    }
                                 }
-                            }
-                        />
-                    </PanelRow>
+                            />
+                        </PanelRow>
 
-                    <PanelRow>
-                        <label>{__('Display', 'wp-travel')}</label>
-                        <ToggleControl
-                            checked={tab.show_in_menu == 'yes'}
-                            onChange={
-                                (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' ? 'no' : 'yes', tabIndex)
-                            }
-                        />
-                    </PanelRow>
+                        <PanelRow>
+                            <label>{__('Display', 'wp-travel')}</label>
+                                <ToggleControl
+                                    checked={tab.show_in_menu == 'yes'}
+                                    onChange={
+                                        (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' ? 'no' : 'yes', tabIndex)
+                                    }
+                                />
+                            </PanelRow>
 
-                </PanelBody>
+                        </PanelBody>
+                </div>
             })}
           
             {applyFilters( 'wp_travel_tab_content_after_tabs', [] )}

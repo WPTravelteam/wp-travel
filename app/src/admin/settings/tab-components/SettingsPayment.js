@@ -85,7 +85,7 @@ export default () => {
 
             <h3>{__( 'Payment Gateways', 'wp-travel' )}</h3>
             {
-                <div className="wp-travel-block-sortable">
+                <div className="wp-travel-block-section wp-travel-block-sortable">
                     <ReactSortable
                         list={sorted_gateways}
                         setList={sorted => sortGateways(sorted)}
