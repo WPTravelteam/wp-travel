@@ -607,7 +607,7 @@ const BookingCalender = () => {
 	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
-	const dateView = 'calender'
+	const calendarDateView = _wp_travel.calender_date_view
 	return <>
 		<div className="wp-travel-booking__header">
 			<h3>{__i18n.booking_tab_content_label}</h3>
@@ -629,7 +629,7 @@ const BookingCalender = () => {
 			{<>
 				{
 					isFixedDeparture
-					&& dateView !== 'calendar'
+					&& ! calendarDateView
 					&& <DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
 					||
 					<>
