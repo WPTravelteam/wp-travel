@@ -234,7 +234,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.0.6 =
-Release Date: 8th July, 2020
+Release Date: 9th July, 2020
 
 Enhancements:
 * Adds bundled scripts files for optimization, reduces page load time and requests.

@@ -1,6 +1,7 @@
 import moment from 'moment'
 import RRule from "rrule"
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
+import {__} from '@wordpress/i18n'
 
 const generateRRule = rruleArgs => {
     let rule = new RRule(rruleArgs);
@@ -75,7 +76,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     console.debug(dates)
     const nextStartDate = dates.length > 0 && moment(dates[dates.length - 1]).add(1, 'days').toDate()
 
-    const LoadMoreDates = page => () => {
+    const loadMoreDates = page => () => {
         let start = page < 0 ? (activePage - 2) * datesPerPage : activePage * datesPerPage
         let end = start + datesPerPage
         let _dates = []
@@ -110,13 +111,13 @@ const RecurringDates = ({ data, onDateClick }) => {
                     <div className="wp-travel-recurring-dates-wrapper">
                         <ul>
                             {activeRecurringDates.map(date => {
-                                let _date = moment(moment(date).format("YYYY-MM-DD")).toDate()
-                                return <li><button onClick={onDateClick(_date)}>{moment(_date).format()}</button></li>
+                                let _date = moment(moment(date).format("YYYY-MM-DD"))
+                                return <li><button onClick={onDateClick(_date)}>{_date.format('MMM DD, YYYY')}</button></li>
                             })}
                         </ul>
-                        {activePage > 1 && <button onClick={LoadMoreDates(-1)}>Previous</button>}
-                        {activePage < pagesCount && activePage >= 1 && <button onClick={LoadMoreDates(1)}>Next</button>}
-                        {activePage >= pagesCount && <button onClick={LoadMoreDates(1)}>Load More...</button>}
+                        {activePage > 1 && <button onClick={loadMoreDates(-1)}>{__('Previous')}</button>}
+                        {activePage < pagesCount && activePage >= 1 && <button onClick={loadMoreDates(1)}>Next</button>}
+                        {activePage >= pagesCount && <button onClick={loadMoreDates(1)}>{__('Load More...')}</button>}
                     </div>
                 </>
             }
@@ -141,7 +142,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                     {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
                         ||
                         <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                            {moment(date.start_date).format()}
+                            {moment(date.start_date).format('MMM DD, YYYY')}
                         </button>
                     }
                 </>
