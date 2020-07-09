@@ -7,7 +7,12 @@ class WP_Travel_Frontend_Assets {
 	public static function assets() {
 		if ( is_singular( 'itineraries' ) ) {
 			global $post;
-			$deps = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
+			$deps                   = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
+			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+				$deps['dependencies'][] = 'jquery-datepicker-lib';
+			} else {
+				$deps['dependencies'][] = 'wp-travel-frontend-bundle';
+			}
 			wp_register_script( 'wp-travel-frontend-booking-widget', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.js', $deps['dependencies'], $deps['version'], true );
 			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.css', array(), $deps['version'] );
 

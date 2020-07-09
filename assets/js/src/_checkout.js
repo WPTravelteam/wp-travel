@@ -1,3 +1,4 @@
+/*WP Travel Cart and Chekcout JS.*/
 jQuery(document).ready(function ($) {
 
     if (typeof parsley !== "undefined") {

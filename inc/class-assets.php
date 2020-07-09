@@ -48,7 +48,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'prices'             => wp_reavel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
-				"_nonce"             => wp_create_nonce( 'wp_travel_nonce' ),
+				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 				'strings'            => wp_travel_get_strings(),
 				// Need map data enhancement.
@@ -88,9 +88,9 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_enqueue_style( 'jquery-datepicker-lib' );
 
 			// Scripts.
-			// wp_enqueue_script( 'wp-travel-view-mode' );
-			// wp_enqueue_script( 'wp-travel-accordion' );
-			// wp_enqueue_script( 'wp-travel-widget-scripts' ); // Enqueued from individual widgets. @since 4.0.4
+			wp_enqueue_script( 'wp-travel-view-mode' );
+			wp_enqueue_script( 'wp-travel-accordion' );
+			wp_enqueue_script( 'wp-travel-widget-scripts' );
 
 			/**
 			 * @since 4.0.4
@@ -169,9 +169,15 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel, $settings );
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
+			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
 
-			// wp_enqueue_script( 'jquery-datepicker-lib' );
-			// wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+			if ( wp_travel_can_load_bundled_scripts() ) {
+				wp_enqueue_script( 'wp-travel-frontend-bundle' );
+			}
+
+			wp_enqueue_script( 'jquery-datepicker-lib' );
+			wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+
 		}
 
 		/**
@@ -532,6 +538,18 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
+				'wp-travel-frontend-bundle' => array(
+					'src'   => self::$assets_path . 'assets/css/wp-travel-frontend.bundle.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
+					'media' => 'all',
+				),
+				'wp-travel-fonts-bundle' => array(
+					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/wp-travel-fonts.bundle.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
+					'media' => 'all',
+				),
 			);
 
 			// Frontend Specific.
@@ -568,6 +586,17 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				);
+				$scripts['wp-travel-frontend-bundle'] = array(
+					'src'       => self::$assets_path . 'assets/js/wp-travel-frontend.bundle.js',
+					'deps'      => array(
+						'jquery',
+						'jquery-ui-accordion',
+						'jquery-datepicker-lib-eng',
+						'jquery-ui-slider',
+					),
+					'ver'       => WP_TRAVEL_VERSION,
+					'in_footer' => true,
+				);
 			}
 
 			// Admin Specific.
@@ -598,5 +627,149 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			}
 		}
 
+		private static function is_wp_travel_single_pages() {
+			return is_singular( WP_TRAVEL_POST_TYPE ) || wp_travel_is_cart_page() || wp_travel_is_checkout_page() || wp_travel_is_account_page();
+		}
+
+		public static function styles_filter() {
+			$load_optimized_scripts = wp_travel_can_load_bundled_scripts();
+			if ( ! $load_optimized_scripts ) {
+				return;
+			}
+
+			wp_enqueue_style( 'wp-travel-frontend-bundle' );
+			wp_enqueue_style( 'wp-travel-pro-bundle' );
+
+			global $wp_styles;
+
+			$items_in_frontend_bundle = array(
+				'wp-travel-frontend',
+				'wp-travel-popup',
+				'easy-responsive-tabs',
+				'wp-travel-itineraries',
+				'wp-travel-user-css',
+				'jquery-datepicker',
+				'wp-travel-slick',
+				// bundled in wp-travel-frontend-bundle
+				'font-awesome-css',
+				'wp-travel-fa-css'
+			);
+
+			$queued_styles = array_keys( $wp_styles->registered );
+
+			$items_in_pro_bundle = apply_filters( 'wp-travel-pro-bundle-items', array( 'scripts' => array(), 'styles' => array() ) );
+			$styles_in_pro_bundle = $items_in_pro_bundle['styles'];
+
+			$all_styles = array_merge( $items_in_frontend_bundle, $styles_in_pro_bundle );
+
+			$wpt_enqueued_styles = array_intersect( $all_styles, $queued_styles );
+
+			if ( count( array_intersect( array( 'font-awesome-css', 'wp-travel-fa-css' ), $wpt_enqueued_styles ) ) > 0 ) {
+				wp_enqueue_style( 'wp-travel-fonts-bundle' );
+			}
+
+			foreach ( $wpt_enqueued_styles as $handle ) {
+				wp_deregister_style( $handle );
+			}
+
+			error_log( print_r( $queued_styles, true ) );
+		}
+
+		/**
+		 * Filters and Loads Bundled Scripts.
+		 * 
+		 * @since 4.0.6
+		 */
+		public static function scripts_filter() {
+			// self::frontend();
+			$load_optimized_scripts = wp_travel_can_load_bundled_scripts();
+			if ( ! $load_optimized_scripts ) {
+				return;
+			}
+
+			$wp_travel_handles = array(
+				'jquery-datepicker-lib',
+				'jquery-datepicker-lib-eng',
+				'wp-travel-moment',
+				'jquery-parsley',
+				'wp-travel-widget-scripts',
+				'wp-travel-accordion',
+				'wp-travel-modernizer',
+				'wp-travel-sticky-kit',
+				'wp-travel-popup',
+				'easy-responsive-tabs',
+				'collapse-js',
+				'wp-travel-slick',
+				'wp-travel-isotope',
+				'wp-travel-script',
+				'wp-travel-cart',
+				'wp-travel-view-mode',
+				'wp-travel-payment-frontend-script',
+				'wp-travel-booking',
+				'wp-travel-lib-bundle',
+				'wp-travel-frontend-bundle',
+				'jquery-isotope-pkgd-js',
+			);
+
+			$items_in_frontend_bundle = array(
+				'jquery-datepicker-lib',
+				'wp-travel-popup',
+				'wp-travel-slick',
+				'wp-travel-moment',
+				'wp-travel-modernizer',
+				'jquery-parsley',
+				'wp-travel-accordion',
+				'wp-travel-sticky-kit',
+				'collapse-js',
+				'easy-responsive-tabs',
+				'wp-travel-isotope',
+				'wp-travel-widget-scripts',
+				'wp-travel-booking',
+				'wp-travel-script',
+				'wp-travel-cart',
+				'wp-travel-view-mode',
+			);
+
+			global $wp_scripts;
+			$queued_scripts   = $wp_scripts->queue;
+ 			$register_scripts = $wp_scripts->registered;
+			// error_log( print_r( $wp_scripts->queue, true ) );
+
+			$wp_travel_addon_handles = apply_filters( 'wp-travel-script-handles', array() );
+			$items_in_pro_bundle     = apply_filters( 'wp-travel-pro-bundle-items', array( 'scripts' => array(), 'styles' => array() ) );
+
+			$scripts_in_pro_bundle = $items_in_pro_bundle['scripts'];
+
+			$all_handles = array_unique( array_merge( $items_in_frontend_bundle, $wp_travel_addon_handles, $scripts_in_pro_bundle ) );
+			
+			$wpt_enqueued_scripts = array_intersect( $queued_scripts, $all_handles );
+			
+			if ( count( $wpt_enqueued_scripts ) < 0 ) {
+				wp_enqueue_script( 'wp-travel-frontend-bundle' );
+			}
+
+			if ( count( array_intersect( $wpt_enqueued_scripts, $scripts_in_pro_bundle ) ) > 0 ) {
+				wp_enqueue_script( 'wp-travel-pro-bundle' );
+			}
+
+			foreach( $wpt_enqueued_scripts as $key => $handle ) {
+				if ( in_array( $handle, $items_in_frontend_bundle, true ) || in_array( $handle, $scripts_in_pro_bundle, true ) ) {
+					wp_dequeue_script( $handle );
+					unset( $wpt_enqueued_scripts[ $key ] );
+					continue;
+				}
+
+				$registered = $register_scripts[ $handle ];
+	
+				$new_deps = $registered->deps;
+				// wp_deregister_script( $addon_handle );
+				foreach(  $registered->deps as $index => $dep ) {
+					if ( in_array( $dep, $items_in_frontend_bundle, true ) ) {
+						unset( $new_deps[ $index ] );
+					}
+				}
+				$wp_scripts->registered[ $addon_handle ]->deps = $new_deps;
+			}
+		}
 	}
 }

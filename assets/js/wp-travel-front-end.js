@@ -48,17 +48,10 @@ jQuery(function ($) {
         }
     });
 
-    $('#wp-travel-tab-wrapper').easyResponsiveTabs({
-
-    });
+    $('#wp-travel-tab-wrapper').easyResponsiveTabs({});
 
     if (window.location.hash) {
         var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-
-        // var match = hash.match(/wp-travel-/);
-        // if (!match) {
-        //     hash = 'wp-travel-' + hash;
-        // }
 
         if ($("ul.resp-tabs-list > li." + hash).hasClass('wp-travel-ert')) {
             lis = $("ul.resp-tabs-list > li");
@@ -80,11 +73,6 @@ jQuery(function ($) {
             }, 1200);
         }
     }
-
-    // $('ul.resp-tabs-list > li').on('click', function() {
-    //     // window.location.hash = '';
-    //     // history.pushState("", document.title, window.location.pathname);
-    // });
 
     // Rating script starts.
     $('.rate_label').hover(function () {
@@ -221,78 +209,73 @@ jQuery(function ($) {
     });
 
     // Date picker for days and nights.
+    if ('undefined' !== typeof moment) {
+        $('.wp-travel-pricing-days-night').wpt_datepicker({
+            language: wp_travel.locale,
+            minDate: new Date(),
+            autoClose: true,
+            onSelect: function (formattedDate, date, inst) {
+                if (date) {
 
-
-
-    $(document).ready(function ($) {
-        if ('undefined' !== typeof moment) {
-            $('.wp-travel-pricing-days-night').wpt_datepicker({
-                language: wp_travel.locale,
-                minDate: new Date(),
-                autoClose: true,
-                onSelect: function (formattedDate, date, inst) {
-                    if (date) {
-
-                        var el = inst.$el;
-                        var parent = $(el).closest('form').attr('id');
-                        var next_el = ('arrival_date' === $(el).attr('name')) ? $('#' + parent + ' input[name=departure_date]') : $('#' + parent + ' input[name=arrival_date]')
-                        var day_to_add = parseInt(el.data('totaldays'));
-                        if (day_to_add < 1) {
-                            next_el.val(formattedDate);
-                            return;
-                        }
-                        var _moment = moment(date);
-                        // var newdate = new Date( date );
-                        if ('arrival_date' === $(el).attr('name')) {
-                            someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
-                        } else {
-                            // newdate.setDate( newdate.getDate() - day_to_add );
-                            someFormattedDate = _moment.subtract(day_to_add, 'days').format('YYYY-MM-DD');
-                        }
-
-                        var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
-                        next_el_datepicker.date = new Date(someFormattedDate);
-                        next_el.val(someFormattedDate);
+                    var el = inst.$el;
+                    var parent = $(el).closest('form').attr('id');
+                    var next_el = ('arrival_date' === $(el).attr('name')) ? $('#' + parent + ' input[name=departure_date]') : $('#' + parent + ' input[name=arrival_date]')
+                    var day_to_add = parseInt(el.data('totaldays'));
+                    if (day_to_add < 1) {
+                        next_el.val(formattedDate);
+                        return;
                     }
-                }
-            });
-
-            //   var departure_date = $('input[name=departure_date]').wpt_datepicker().data('datepicker');
-            //   if ( 'undefined' !== typeof departure_date ) {
-            //     var day_to_add = departure_date.$el.data('totaldays' );;
-            //     if ( day_to_add > 0 ) {
-            //       someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
-            //       departure_date.update('minDate', new Date( someFormattedDate ))
-            //     }
-            //   }
-
-            $('input[name=departure_date]').each(function () {
-                //   var parent = $(this).closest('form').attr( 'id' );
-
-                var departure_date = $(this).wpt_datepicker().data('datepicker');
-                if ('undefined' !== typeof departure_date) {
-                    var day_to_add = departure_date.$el.data('totaldays');;
-                    if (day_to_add > 0) {
-                        someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
-                        departure_date.update('minDate', new Date(someFormattedDate))
+                    var _moment = moment(date);
+                    // var newdate = new Date( date );
+                    if ('arrival_date' === $(el).attr('name')) {
+                        someFormattedDate = _moment.add(day_to_add, 'days').format('YYYY-MM-DD');
+                    } else {
+                        // newdate.setDate( newdate.getDate() - day_to_add );
+                        someFormattedDate = _moment.subtract(day_to_add, 'days').format('YYYY-MM-DD');
                     }
+
+                    var next_el_datepicker = next_el.wpt_datepicker().data('datepicker');
+                    next_el_datepicker.date = new Date(someFormattedDate);
+                    next_el.val(someFormattedDate);
                 }
-            });
-
-
-
-        }
-
-        if (typeof parsley == "function") {
-
-            $('input').parsley();
-
-        }
-
-        $('.login-page .message a').click(function (e) {
-            e.preventDefault();
-            $('.login-page form.login-form,.login-page form.register-form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+            }
         });
+
+        //   var departure_date = $('input[name=departure_date]').wpt_datepicker().data('datepicker');
+        //   if ( 'undefined' !== typeof departure_date ) {
+        //     var day_to_add = departure_date.$el.data('totaldays' );;
+        //     if ( day_to_add > 0 ) {
+        //       someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+        //       departure_date.update('minDate', new Date( someFormattedDate ))
+        //     }
+        //   }
+
+        $('input[name=departure_date]').each(function () {
+            //   var parent = $(this).closest('form').attr( 'id' );
+
+            var departure_date = $(this).wpt_datepicker().data('datepicker');
+            if ('undefined' !== typeof departure_date) {
+                var day_to_add = departure_date.$el.data('totaldays');;
+                if (day_to_add > 0) {
+                    someFormattedDate = moment().add(day_to_add, 'days').format('YYYY-MM-DD');
+                    departure_date.update('minDate', new Date(someFormattedDate))
+                }
+            }
+        });
+
+
+
+    }
+
+    if (typeof parsley == "function") {
+
+        $('input').parsley();
+
+    }
+
+    $('.login-page .message a').click(function (e) {
+        e.preventDefault();
+        $('.login-page form.login-form,.login-page form.register-form').animate({ height: "toggle", opacity: "toggle" }, "slow");
     });
 
     $('.dashboard-tab').easyResponsiveTabs({
@@ -334,11 +317,8 @@ jQuery(function ($) {
     $('.wp-travel-magnific-popup').magnificPopup({
         type: 'inline',
     });
-});
 
-// Pax Picker for categorized pricing
-jQuery(function ($) {
-
+    // Pax Picker for categorized pricing
     $(document).on('click', '.paxpicker .icon-users', function (e) {
         if ($(this).closest('.paxpicker').hasClass('is-active')) {
             $(this).closest('.paxpicker').removeClass('is-active');
@@ -404,7 +384,7 @@ jQuery(function ($) {
             if ($(this).val() > 0) {
                 var type = $(this).data('type'); // Type refers to category.
                 var custom_label = $(this).data('custom');
-                if ( 'custom' === type && '' != custom_label ) {
+                if ('custom' === type && '' != custom_label) {
                     type = custom_label;
                 }
                 var category_id = $(this).data('category-id'); // category id
@@ -420,4 +400,57 @@ jQuery(function ($) {
         $('#' + parent_id).siblings('.summary').find('.participants-summary-container').val(display_value);
         $('#' + parent_id + ' .pricing-input').html(pax_input);
     });
+
+    /**
+     * Enquiry Form.
+     */
+    var handleEnquirySubmission = function(e) {
+
+        e.preventDefault();
+
+        //Remove any previous errors.
+        $('.enquiry-response').remove();
+        var formData = $( '#wp-travel-enquiries' ).serializeArray();
+        formData.push({name:'nonce',value: wp_travel.nonce});
+        var text_processing = $('#wp_travel_label_processing').val();
+        var text_submit_enquiry = $('#wp_travel_label_submit_enquiry').val();
+        $.ajax({
+            type: "POST",
+            url: wp_travel.ajaxUrl,
+            data: formData,
+            beforeSend: function() {
+                $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');
+            },
+            success: function(data) {
+
+                if (false == data.success) {
+                    var message = '<span class="enquiry-response enquiry-error-msg">' + data.data.message + '</span>';
+                    $('#wp-travel-enquiries').append(message);
+                } else {
+                    if (true == data.success) {
+
+                        var message = '<span class="enquiry-response enquiry-success-msg">' + data.data.message + '</span>';
+                        $('#wp-travel-enquiries').append(message);
+
+                        setTimeout(function() {
+                            jQuery('#wp-travel-send-enquiries').magnificPopup('close');
+                            $('#wp-travel-enquiries .enquiry-response ').hide();
+                        }, '3000');
+
+                    }
+                }
+
+                $('#wp-travel-enquiry-submit').removeClass('loading-bar loading-bar-striped active').val(text_submit_enquiry).removeAttr('disabled', 'disabled');
+                //Reset Form Fields.
+                $('#wp-travel-enquiry-name').val('');
+                $('#wp-travel-enquiry-email').val('');
+                $('#wp-travel-enquiry-query').val('');
+
+                return false;
+            }
+        });
+        $('#wp-travel-enquiries').trigger('reset');
+    }
+    $('#wp-travel-enquiries').submit(handleEnquirySubmission);
+
 });

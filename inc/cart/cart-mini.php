@@ -226,7 +226,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 						<?php
 						$display  = $cart['cart']['tax'] ? '' : 'display:none;';
 						$tax_rate = $cart['cart']['tax'] ? $cart['cart']['tax'] : '';
-						$tax      = $cart['cart']['tax'] ? $cart['cart']['total']['tax'] : '';
+						$tax      = $cart['cart']['tax'] ? $cart['cart']['total']['tax'] : 0;
 						?>
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 							<label><?php echo sprintf( esc_html__( 'Tax(%s):', 'wp-travel' ), $tax_rate . '%' ); ?></label>

@@ -221,11 +221,30 @@ module.exports = function (grunt) {
 
 		uglify: {
 			options: {
-				mangle: false
+				mangle: {
+					reserved: ['jQuery', 'Backbone', 'wp_travel']
+				}
 			},
 			my_target: {
 				files: {
-
+					'assets/js/wp-travel-frontend.bundle.js': [
+						'assets/js/lib/datepicker/datepicker.js', // jquery-datepicker-lib
+						'assets/js/jquery.magnific-popup.min.js',
+						'assets/js/lib/slick/slick.min.js',
+						'assets/js/lib/modernizer/modernizr.min.js',
+						'assets/js/wp-travel-accordion.js',//wp-travel-accordion ['jquery','jquery-ui-accordion']
+						'assets/js/lib/parsley/parsley.min.js',
+						'assets/js/booking.js',//wp-travel-booking ['jquery']
+						'assets/js/lib/isotope/isotope.pkgd.js',
+						'assets/js/wp-travel-front-end.js', // wp-travel-script ['jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion']
+						'assets/js/cart.js',//wp-travel-cart ['wp-util','jquery-datepicker-lib', 'jquery-datepicker-lib-eng']
+						'assets/js/wp-travel-view-mode.js',
+						'assets/js/wp-travel-widgets.js',
+						'assets/js/easy-responsive-tabs.js',//easy-responsive-tabs ['jquery']
+						'assets/js/collapse.js',//collapse-js ['jquery]
+						'assets/js/lib/sticky-kit/sticky-kit.min.js',
+						'assets/js/moment.min.js',
+					],
 					'assets/js/booking.min.js': ['assets/js/booking.js'],
 					'assets/js/moment.min.js': ['assets/js/moment.js'],
 					'assets/js/wp-travel-widgets.min.js': ['assets/js/wp-travel-widgets.js'],
@@ -243,6 +262,7 @@ module.exports = function (grunt) {
 					'assets/js/wp-travel-media-upload.min.js': ['assets/js/wp-travel-media-upload.js'],
 					'assets/js/wp-travel-tabs.min.js': ['assets/js/wp-travel-tabs.js'],
 					'assets/js/wp-travel-fields-scripts.min.js': ['assets/js/wp-travel-fields-scripts.js'],
+					'assets/js/cart.min.js': ['assets/js/cart.js']
 				}
 			}
 		},
@@ -275,6 +295,19 @@ module.exports = function (grunt) {
 		cssmin: {
 			target: {
 				files: {
+					'assets/css/wp-travel-frontend.bundle.css': [
+						'assets/css/wp-travel-front-end.css', // wp-travel-frontend
+						'assets/css/magnific-popup.css', // wp-travel-popup
+						'assets/css/easy-responsive-tabs.css', // easy-responsive-tabs
+						'assets/css/wp-travel-itineraries.css', // wp-travel-itineraries
+						'assets/css/wp-travel-user-styles.css', // wp-travel-user-css
+						'assets/css/lib/datepicker/datepicker.css', // 
+						'assets/css/lib/slick/slick.min.css',
+					],
+					'assets/css/lib/font-awesome/css/wp-travel-fonts.bundle.css': [
+						'assets/css/lib/font-awesome/css/fontawesome-all.css',
+						'assets/css/lib/font-awesome/css/wp-travel-fa-icons.css'
+					],
 					'assets/css/wp-travel-admin.min.css': ['assets/css/wp-travel-admin.css'],
 					'assets/css/wp-travel-back-end.min.css': ['assets/css/wp-travel-back-end.css'],
 					'assets/css/wp-travel-front-end.min.css': ['assets/css/wp-travel-front-end.css'],
