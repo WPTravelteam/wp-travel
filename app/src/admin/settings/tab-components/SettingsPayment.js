@@ -63,23 +63,28 @@ export default () => {
             </PanelRow>
             
             {applyFilters( 'wp_travel_before_minimum_partial_payout', [] )}
-            {minimum_partial_payout.map( (minPayout, index ) => {
+            { 'undefined' != typeof partial_payment && partial_payment == 'yes' &&
+            
+                <>
+                    {minimum_partial_payout.map( (minPayout, index ) => {
 
-                return <PanelRow>
-                    <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
-                    <div className="wp-travel-field-value">
-                        <RangeControl
-                            value={ minPayout }
-                            onChange={
-                                (value) => updatePayoutOption( value, index )
-                            }
-                            min={ 1 }
-                            max={ 100 }
-                        />
-                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-                    </div>
-                </PanelRow>
-            } ) }
+                        return <PanelRow>
+                            <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
+                            <div className="wp-travel-field-value">
+                                <RangeControl
+                                    value={ minPayout }
+                                    onChange={
+                                        (value) => updatePayoutOption( value, index )
+                                    }
+                                    min={ 1 }
+                                    max={ 100 }
+                                />
+                                <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
+                            </div>
+                        </PanelRow>
+                    } ) }
+                </>
+            }
             {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )}
 
 
@@ -308,7 +313,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                             <td>
                                                 <TextControl
                                                     value={bankDeposite.iban}
-                                                    placeholder={__( 'BIC/Swift', 'wp-travel' )}
+                                                    placeholder={__( 'IBAN', 'wp-travel' )}
                                                     onChange={ 
                                                         (value) => { updateBankDeposit( 'iban', value, index ) }
                                                     }

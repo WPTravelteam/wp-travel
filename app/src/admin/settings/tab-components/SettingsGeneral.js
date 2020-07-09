@@ -70,7 +70,7 @@ export default () => {
                     <label>{ __( 'Switch to V4', 'wp-travel' ) }</label>
                     <div className="wp-travel-field-value">
                         <ToggleControl
-                            // help={ __( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ) }
+                            // help={ __( 'This option will switch your trip edit page layout to new layout.', 'wp-travel' ) }
                             checked={ switch_to_react == 'yes' }
                             onChange={ () => {
                                 updateSettings({
@@ -79,7 +79,7 @@ export default () => {
                                 })
                             } }
                         />
-                        <p className="description">{__( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
+                        <p className="description">{__( 'This option will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
                     </div>
                 </PanelRow>
             }

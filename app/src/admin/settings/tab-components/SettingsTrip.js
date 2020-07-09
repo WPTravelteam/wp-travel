@@ -19,6 +19,7 @@ export default () => {
         hide_related_itinerary,
         enable_multiple_travellers,
         trip_pricing_options_layout,
+        calender_view,
         options
         } = allData;
 
@@ -58,29 +59,49 @@ export default () => {
                 </div>
             </PanelRow>
 
-            { 'no' == switch_to_react && 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
-                <PanelRow>
-                    <label>{ __( 'Trip Pricing Options Listing', 'wp-travel' ) }</label>
-                    <div className="wp-travel-field-value">
-                        <RadioControl
-                            selected={ trip_pricing_options_layout }
-                            options={ [
-                                { label: __( 'List by pricing options ( Default )', 'wp-travel' ), value: 'by-pricing-option' },
-                                { label: __( 'List by fixed departure dates', 'wp-travel' ), value: 'by-date' },
-                            ] }
-                            onChange={ ( option ) => { 
-                                updateSettings({
-                                    ...allData,
-                                    trip_pricing_options_layout: option
-                                })
-                            } }
-                        />
-                        <p className="description">{__( 'This options will control how you display trip dates and prices.', 'wp-travel' )}</p>
-                    </div>
-                </PanelRow>
-                
-                
+            { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) && 
+                <>
+            
+                    { 'no' == switch_to_react ?
+                        <PanelRow>
+                            <label>{ __( 'Trip Pricing Options Listing', 'wp-travel' ) }</label>
+                            <div className="wp-travel-field-value">
+                                <RadioControl
+                                    selected={ trip_pricing_options_layout }
+                                    options={ [
+                                        { label: __( 'List by pricing options ( Default )', 'wp-travel' ), value: 'by-pricing-option' },
+                                        { label: __( 'List by fixed departure dates', 'wp-travel' ), value: 'by-date' },
+                                    ] }
+                                    onChange={ ( option ) => { 
+                                        updateSettings({
+                                            ...allData,
+                                            trip_pricing_options_layout: option
+                                        })
+                                    } }
+                                />
+                                <p className="description">{__( 'This options will control how you display trip dates and prices.', 'wp-travel' )}</p>
+                            </div>
+                        </PanelRow>
+                        :
+                        <PanelRow>
+                            <label>{ __( 'Trip Dates Calendar View', 'wp-travel' ) }</label>
+                            <div className="wp-travel-field-value">
+                                <ToggleControl
+                                    checked={ calender_view == 'yes' }
+                                    onChange={ () => {
+                                        updateSettings({
+                                            ...allData,
+                                            calender_view: 'yes' == calender_view ? 'no': 'yes'
+                                        })
+                                    } }
+                                />
+                                <p className="description">{__( 'Enable/Disable calender view on the booking tab of trip page.', 'wp-travel' )}</p>
+                            </div>
+                        </PanelRow>
+                    }
+                </>
             }
+
             {applyFilters( 'wp_travel_tab_content_after_trips', [] )}
         </ErrorBoundary>
     </div>

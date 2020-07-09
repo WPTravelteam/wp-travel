@@ -17,6 +17,13 @@
     background-color: #fff;
     border: 1px solid #eee;
     box-shadow: 0 5px 10px rgba(#000, .1);
+    .components-color-picker__saturation{
+      .components-color-picker__saturation-pointer{
+        min-height: unset;
+        width: 20px;
+        height: 20px;
+      }
+    }
     .components-color-picker__inputs-wrapper{
       margin-top: 13px;
       padding-top: 8px;
@@ -111,12 +118,24 @@
         height: 100%;
         border: 0;
         margin: 0;
+        .components-panel__body{
+          margin-bottom: 10px;
+        }
         .wp-travel-block-section{
           margin-bottom: 10px;
         }
         .wp-travel-block-sortable{
           .components-panel__body{
             margin-bottom: 10px;
+            .components-panel__body-toggle{
+              padding-left: 40px;
+              position: relative;
+              .components-panel__icon{
+                position: absolute;
+                left: 7px;
+                top: 16px;
+              }
+            }
           }
         }
       }
