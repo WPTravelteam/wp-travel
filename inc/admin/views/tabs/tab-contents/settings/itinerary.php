@@ -9,15 +9,15 @@
 function wp_travel_settings_callback_itinerary( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$hide_related_itinerary              = $settings['hide_related_itinerary'];
-		$enable_multiple_travellers          = $settings['enable_multiple_travellers'];
-		$wp_travel_switch_to_react			 = $settings['wp_travel_switch_to_react'];
+		$hide_related_itinerary     = $settings['hide_related_itinerary'];
+		$enable_multiple_travellers = $settings['enable_multiple_travellers'];
+		$wp_travel_switch_to_react  = $settings['wp_travel_switch_to_react'];
 
-		$wp_travel_user_since                = get_option( 'wp_travel_user_since' );
+		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
 
 		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
-		?>
+	?>
 		<table class="form-table">
 			<tr>
 				<th>
@@ -54,7 +54,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( 'Collect multiple travelers information from checkout page.', 'wp-travel' ); ?></label></p>
 				</td>
 			<tr>
-			<?php if ( 'no' === $wp_travel_switch_to_react && version_compare( $wp_travel_user_since, '4.0.0', '<' )  )  : ?>
+			<?php if ( 'no' === $wp_travel_switch_to_react && version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) : ?>
 				<tr id="wp-travel-tax-price-options" >
 					<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ); ?></label></th>
 					<td>
@@ -69,9 +69,27 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 					</td>
 				</tr>
 			<?php endif; ?>
+			<?php
+			if ( wp_travel_is_react_version_enabled() ) :
+				$calender_view = isset( $settings['calender_view'] ) ? $settings['calender_view'] : 'no';
+				?>
+			<tr>
+				<th><label><?php esc_html_e( 'Trip Dates Calendar View', 'wp-travel' ); ?></label></th>
+				<td>
+					<span class="show-in-frontend checkbox-default-design">
+						<label data-on="ON" data-off="OFF">
+							<input value="no" name="calender_view" type="hidden" />
+							<input <?php checked( $calender_view, 'yes' ); ?> value="yes" name="calender_view" id="calender_view" type="checkbox" />
+							<span class="switch"></span>
+						</label>
+					</span>
+					<p class="description"><label for="calender_view"><?php esc_html_e( 'Enable/Disable calender view on the booking tab of trip page.', 'wp-travel' ); ?></label></p>
+				</td>
+			</tr>
+			<?php endif; ?>
 		</table>
 			<?php
 			do_action( 'wp_travel_tab_content_after_trips', $args );
-	
+
 }
 

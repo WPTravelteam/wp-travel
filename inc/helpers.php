@@ -141,6 +141,11 @@ function wp_travel_settings_default_fields() {
 		 * @since 4.0.6
 		 */
 		'wt_load_optimized_script' => 'no',
+		
+		/**
+		 * @since 4.0.7
+		 */
+		'calender_view' => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
