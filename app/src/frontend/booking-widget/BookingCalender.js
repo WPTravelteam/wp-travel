@@ -607,6 +607,7 @@ const BookingCalender = () => {
 	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
+	const dateView = 'calender'
 	return <>
 		<div className="wp-travel-booking__header">
 			<h3>{__i18n.booking_tab_content_label}</h3>
@@ -626,11 +627,16 @@ const BookingCalender = () => {
 		</div>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			{<>
-				<>
-				{/* <DatePicker {...params} /> */}
-				{/* {!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null} */}
-				</>
-				<DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
+				{
+					isFixedDeparture
+					&& dateView !== 'calendar'
+					&& <DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
+					||
+					<>
+						<DatePicker {...params} />
+						{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+					</>
+				}
 			</>}
 		</div>
 		{

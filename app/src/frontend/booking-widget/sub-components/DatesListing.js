@@ -53,6 +53,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     const [activeRecurringDates, setActiveRecurringDates] = useState([])
     const [rruleArgs, setRRuleArgs] = useState(null)
     const [showRecurringDates, showRecurringDatesToggle] = useState(false)
+    const [selectedDate, setSelectedDate] = useState(null)
     const [{ activePage, datesPerPage, pagesCount }, setPagination] = useState({
         activePage: 0,
         datesPerPage: 10,
@@ -76,6 +77,12 @@ const RecurringDates = ({ data, onDateClick }) => {
     console.debug(dates)
     const nextStartDate = dates.length > 0 && moment(dates[dates.length - 1]).add(1, 'days').toDate()
 
+    const handleDateClick = _date => e => {
+        e.target.disabled = true
+        showRecurringDatesToggle(!showRecurringDates)
+        setSelectedDate(_date)
+        onDateClick(_date)() // onDateClick returns a function.
+    }
     const loadMoreDates = page => () => {
         let start = page < 0 ? (activePage - 2) * datesPerPage : activePage * datesPerPage
         let end = start + datesPerPage
@@ -101,7 +108,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     return <>
         <div className="wp-travel-recurring-dates">
             <div className="wp-travel-recurring-date-picker-btn">
-                {moment(dates[0]).format('MMM DD, YYYY')}
+                {selectedDate && moment(selectedDate).format('ddd, MMM Do YYYY') || moment(dates[0]).format('ddd, MMM Do YYYY')}
                 <button className="btn" title={!!rruleArgs && new RRule(rruleArgs).toText() || 'Recurring Dates'} onClick={() => { showRecurringDatesToggle(!showRecurringDates) }}>
                     <svg viewBox="0 0 384.107 384.107" style={{ enableBackground: 'new 0 0 384.107 384.107' }}><g><g><g><polygon points="170.774,106.707 170.774,213.374 262.081,267.56 277.441,241.747 202.774,197.374 202.774,106.707" /><path d="M384.107,0.04l-58.347,59.947c-74.773-74.133-195.093-74.133-269.867,0c-74.88,74.133-74.347,194.347,0.533,268.48s196.48,74.133,271.36,0c37.547-37.227,56.32-92.053,56.32-134.293h-42.773c0.107,42.24-14.4,75.627-43.413,104.427c-58.24,57.707-152.533,57.707-210.773,0s-58.24-151.147,0-208.853s152.533-55.573,210.773,2.133l-58.56,60.16h144.747V0.04z" /></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                 </button>
@@ -112,12 +119,12 @@ const RecurringDates = ({ data, onDateClick }) => {
                         <ul>
                             {activeRecurringDates.map(date => {
                                 let _date = moment(moment(date).format("YYYY-MM-DD"))
-                                return <li><button onClick={onDateClick(_date)}>{_date.format('MMM DD, YYYY')}</button></li>
+                                return <li><button onClick={handleDateClick(_date)}>{_date.format('ddd, MMM Do YYYY')}</button></li>
                             })}
                         </ul>
-                        {activePage > 1 && <button onClick={loadMoreDates(-1)}>{__('Previous')}</button>}
-                        {activePage < pagesCount && activePage >= 1 && <button onClick={loadMoreDates(1)}>Next</button>}
-                        {activePage >= pagesCount && <button onClick={loadMoreDates(1)}>{__('Load More...')}</button>}
+                        {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
+                        {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
+                        {activePage >= pagesCount && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
                     </div>
                 </>
             }
@@ -142,7 +149,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                     {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
                         ||
                         <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                            {moment(date.start_date).format('MMM DD, YYYY')}
+                            {moment(date.start_date).format('ddd, MMM Do YYYY')}
                         </button>
                     }
                 </>
