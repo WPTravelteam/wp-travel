@@ -24,6 +24,7 @@ import SettingsCartCheckout from './tab-components/SettingsCartCheckout';
 import SettingsAddons from './tab-components/SettingsAddons';
 import SettingsMisc from './tab-components/SettingsMisc';
 import SettingsDebug from './tab-components/SettingsDebug';
+import SettingsLicense from './tab-components/SettingsLicense';
 
 const WPTravelTripSettings = () => {
     const settingsData = useSelect((select) => {
@@ -34,6 +35,8 @@ const WPTravelTripSettings = () => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
     
+    const {options}= allData
+    // console.log(options)
 
    
     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
@@ -120,7 +123,7 @@ const WPTravelTripSettings = () => {
             content: SettingsDebug
         },
         
-    ]);
+    ], allData );
     return <div className={wrapperClasses}>
         {allData.is_sending_request && <Spinner />}
         <SaveSettings />
@@ -138,6 +141,22 @@ const WPTravelTripSettings = () => {
 
 
 // Filters
+addFilter('wp_travel_settings_tabs', 'wp_travel', (content, allData) => {
+    const {options} = allData
+    // if ( 'undefined' != typeof options && ! options.is_multisite ) {
+        content = [
+            ...content,
+            {
+                name: 'license',
+                title: __('License', 'wp-travel'),
+                className: 'tab-license',
+                content: SettingsLicense
+            },
+        ]
+    // }
+    return content
+});
+
 addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData) => {
     content = [
         <>

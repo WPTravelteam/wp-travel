@@ -326,17 +326,6 @@ const EnquiryEmailTemplates = () => {
     return <>
       <PanelBody title={__( 'Enquiry Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
-            <PanelRow>
-                <label>{ __( 'To Emails', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    <ColorPicker
-                        color={ enquiry_admin_template_settings.admin_header_color }
-                        onChangeComplete={ ( value ) => { updateEmailData( 'enquiry_admin_template_settings', 'admin_header_color', value.hex )} }
-                        disableAlpha
-                    />
-                </div>
-            </PanelRow>
-
 
             <PanelRow>
                 <label>{ __( 'Enquiry Email Subject', 'wp-travel' ) }</label>
@@ -363,7 +352,11 @@ const EnquiryEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ enquiry_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'enquiry_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
