@@ -1,3 +1,28 @@
+#wp-travel-settings-block-wrapper{
+  display: flex;
+  padding-right: 18px;
+  padding-left: 15px;
+  #wp-travel-settings-block{
+    flex: 1;
+  }
+  #aside-wrap{
+    margin-top: 20px;
+    margin-left: 20px;
+    .postbox{
+      h2{
+        margin-top: 0;
+        padding: 10px 15px;
+      }
+      .thumbnail{
+        img{
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
 .wp-travel-trip-settings{
   margin-top: 20px;
   .wp-editor-wrap{
