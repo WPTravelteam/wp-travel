@@ -166,7 +166,8 @@ class WP_Travel_Helpers_Settings {
 		// is multisite.
 		$settings_options['is_multisite'] = is_multisite();
 
-		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings );
+		$settings = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
+		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
 

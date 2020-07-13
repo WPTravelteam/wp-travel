@@ -13,6 +13,7 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
+    const {premium_addons_keys, premium_addons_data} = allData
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'License Details', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -23,19 +24,30 @@ export default () => {
 
 addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
-    const {options} = allData
-    // console.log(options)
+    const {premium_addons_keys, premium_addons_data} = allData
+    const { updateSettings } = dispatch('WPTravel/Admin');
+
+    const updateLicenseData = (key, value, index) => {
+        // console.log(allData)
+        let {premium_addons_data} = allData
+        
+        let _premium_addons_data = premium_addons_data;
+        _premium_addons_data[index][key] = value
+
+        updateSettings({
+            ...allData,
+            premium_addons_data: [..._premium_addons_data]
+        })
+        
+        // updateSettings({ ...allData, [storeName] : { ...allData[storeName], [storeKey]: value } })
+
+    }
 
     let LicenseFields = ( props  ) => {
-        
-        const { options } = props.allData;
-        let license =  'undefined' != typeof options && 'undefined' != typeof props.premiumAddonKey && 'undefined' != typeof options.premium_addons[props.premiumAddonKey] ? options.premium_addons[props.premiumAddonKey]: {}
-        console.log(license)
-        
-        const { updateSettings } = dispatch('WPTravel/Admin');
+        let license =   'undefined' != typeof props.addons ? props.addons : []
         return <>
             {
-                'undefined' != typeof options && 'undefined' != typeof license && 
+                'undefined' != typeof license && 
                 <>
 
                     <h3>{license.item_name}</h3>
@@ -44,7 +56,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                             placeholder={__( 'Enter License Key', 'wp-travel' )}
                             value={license.license_key}
                             onChange={(value) => {
-                                // updateFact( 'name', value, index ) 
+                                updateLicenseData( 'license_key', value, props.index ) 
                             }}
                         />
                         <Button isDefault onClick={() => activateLicense(license)}>{ __( 'Activate', 'wp-travel' ) }</Button>
@@ -62,14 +74,12 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         apiFetch( { url: `${ajaxurl}?action=wp_travel_activate_license&_nonce=${_wp_travel._nonce}`, data:license, method:'post' } ).then( res => {
             // updateRequestSending(false);
             
-            if( res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code){
+            if( res.success && "WP_TRAVEL_LICENSE_ACTIVATION" === res.data.code){
                 // updateStateChange(false)
                 // displaySavedMessage(true)
             }
         } );
     }
-
-
 
     content = [
         <>
@@ -87,14 +97,14 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         ...content,
     ]
 
-    { 'undefined' != typeof options && 'undefined' != typeof options.premium_addons && Object.keys(options.premium_addons).length > 0  &&
+    { 'undefined' != typeof premium_addons_data && premium_addons_data.length > 0  &&
         <>
         {
-            Object.keys(options.premium_addons).map((addonKey, index) => {
+            premium_addons_data.map((addons, index) => {
 
                 content = [
                     ...content,
-                    <LicenseFields allData={allData} premiumAddonKey={addonKey} />
+                    <LicenseFields addons={addons} index={index}  />
                 ]
 
             }) 
