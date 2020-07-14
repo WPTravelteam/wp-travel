@@ -49,7 +49,7 @@ export default () => {
                     <p className="description">{__( 'Email address to send email from.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-
+            {applyFilters( 'wp_travel_tab_content_before_booking_tamplate', [] )}
             <h3>{ __( 'Email Templates', 'wp-travel' ) }</h3>
 
 
@@ -101,7 +101,8 @@ const BookingEmailTemplates = () => {
                     <p className="description">{__( 'Enable or disable Email notification to admin.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-
+            
+            {applyFilters( 'wp_travel_utils_booking_notif', [] )}
 
             <PanelRow>
                 <label>{ __( 'Booking Email Subject', 'wp-travel' ) }</label>

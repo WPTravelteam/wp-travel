@@ -344,8 +344,7 @@ class WP_Travel_Helpers_Settings {
 			$settings['wp_travel_bank_deposits'] = array();
 		}
 
-		// @since 1.0.5 Used this filter below.
-		$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
+		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(

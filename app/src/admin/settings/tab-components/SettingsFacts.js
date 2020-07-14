@@ -125,92 +125,95 @@ export default () => {
                 </div>
             </PanelRow>
 
-            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addNewFactData()}>{ __( '+ Add New', 'wp-travel' ) }</Button></PanelRow>
-
-            { 'undefined' != typeof wp_travel_trip_facts_settings &&
+            { 'undefined' != typeof wp_travel_trip_facts_enable && 'yes' == wp_travel_trip_facts_enable &&
                 <>
-                    {wp_travel_trip_facts_settings.map( ( fact, index) =>{
-                        // let selectedFactOptions = factOptions.filter( opt => { return opt.value == fact.type } )
-                        
-                        return <PanelBody
-                            title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
-                            initialOpen={false}
-                            >
-                            <PanelRow>
-                                <label>{__( 'Field Name', 'wp-travel' )}</label>
-                                <TextControl
-                                    placeholder={__( 'Enter Field name', 'wp-travel' )}
-                                    value={fact.name}
-                                    onChange={(value) => {
-                                        updateFact( 'name', value, index ) 
-                                    }}
-                                />
-                            </PanelRow>
+                    <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addNewFactData()}>{ __( '+ Add New', 'wp-travel' ) }</Button></PanelRow>
 
-
-                            {/* <PanelRow>
-                                <label>{ __( 'Field Type', 'wp-travel' ) }</label>
-                                <div className="wp-travel-field-value">
-                                    <div className="wp-travel-select-wrapper">
-                                        <Select
-                                            options={factOptions}
-                                            value={ 'undefined' != typeof selectedFactOptions[0] && 'undefined' != typeof selectedFactOptions[0].label ? selectedFactOptions[0] : []}
-                                            onChange={(data)=>{
-                                                if ( '' !== data ) {
-                                                    updateFact( 'type', data.value, index )
-                                                }
+                    { 'undefined' != typeof wp_travel_trip_facts_settings &&
+                        <>
+                            {wp_travel_trip_facts_settings.map( ( fact, index) =>{
+                                // let selectedFactOptions = factOptions.filter( opt => { return opt.value == fact.type } )
+                                
+                                return <PanelBody
+                                    title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
+                                    initialOpen={false}
+                                    >
+                                    <PanelRow>
+                                        <label>{__( 'Field Name', 'wp-travel' )}</label>
+                                        <TextControl
+                                            placeholder={__( 'Enter Field name', 'wp-travel' )}
+                                            value={fact.name}
+                                            onChange={(value) => {
+                                                updateFact( 'name', value, index ) 
                                             }}
                                         />
-                                    </div>
-                                </div>
-                            </PanelRow> */}
-                            { ( 'undefined' != typeof fact.key ) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} /> } 
-                            
-                            {fact.type != 'text' &&
-                                <PanelRow>
-                                    <label>{ __( 'Values', 'wp-travel' ) }</label>
-                                    <div className="wp-travel-field-value">
-                                        <FormTokenField 
-                                            label=""
-                                            value={ fact.options } 
-                                            suggestions={ [] } 
-                                            onChange={ tokens =>{
-                                                updateFact( 'options', tokens, index )
-                                            }}
-                                            placeholder={ __( 'Add an option and press Enter', 'wp-travel' ) }
-                                        />
-                                    </div>
-                                </PanelRow>
-                            }
-                            <PanelRow>
-                                <label>{__( 'Icon Class', 'wp-travel' )}</label>
-                                <TextControl
-                                    placeholder={__( 'icon', 'wp-travel' )}
-                                    value={fact.icon}
-                                    onChange={(value) => {
-                                        updateFact( 'icon', value, index ) 
-                                    }}
-                                />
-                            </PanelRow>
-                            <PanelRow className="wp-travel-action-section">
-                                <span></span>
-                                <Button isDefault onClick={() => {
-                                    if (!confirm(__( 'Are you sure to delete Fact?', 'wp-travel' ) )) {
-                                        return false;
+                                    </PanelRow>
+
+
+                                    {/* <PanelRow>
+                                        <label>{ __( 'Field Type', 'wp-travel' ) }</label>
+                                        <div className="wp-travel-field-value">
+                                            <div className="wp-travel-select-wrapper">
+                                                <Select
+                                                    options={factOptions}
+                                                    value={ 'undefined' != typeof selectedFactOptions[0] && 'undefined' != typeof selectedFactOptions[0].label ? selectedFactOptions[0] : []}
+                                                    onChange={(data)=>{
+                                                        if ( '' !== data ) {
+                                                            updateFact( 'type', data.value, index )
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </PanelRow> */}
+                                    { ( 'undefined' != typeof fact.key ) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} /> } 
+                                    
+                                    {fact.type != 'text' &&
+                                        <PanelRow>
+                                            <label>{ __( 'Values', 'wp-travel' ) }</label>
+                                            <div className="wp-travel-field-value">
+                                                <FormTokenField 
+                                                    label=""
+                                                    value={ fact.options } 
+                                                    suggestions={ [] } 
+                                                    onChange={ tokens =>{
+                                                        updateFact( 'options', tokens, index )
+                                                    }}
+                                                    placeholder={ __( 'Add an option and press Enter', 'wp-travel' ) }
+                                                />
+                                            </div>
+                                        </PanelRow>
                                     }
-                                    let factData = [];
-                                    factData = wp_travel_trip_facts_settings.filter((data, newIndex) => {
-                                        return newIndex != index;
-                                    });
-                                    removeFact(factData);
-                                }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button></PanelRow>
-                            
-                        </PanelBody>
-                    } )}
+                                    <PanelRow>
+                                        <label>{__( 'Icon Class', 'wp-travel' )}</label>
+                                        <TextControl
+                                            placeholder={__( 'icon', 'wp-travel' )}
+                                            value={fact.icon}
+                                            onChange={(value) => {
+                                                updateFact( 'icon', value, index ) 
+                                            }}
+                                        />
+                                    </PanelRow>
+                                    <PanelRow className="wp-travel-action-section">
+                                        <span></span>
+                                        <Button isDefault onClick={() => {
+                                            if (!confirm(__( 'Are you sure to delete Fact?', 'wp-travel' ) )) {
+                                                return false;
+                                            }
+                                            let factData = [];
+                                            factData = wp_travel_trip_facts_settings.filter((data, newIndex) => {
+                                                return newIndex != index;
+                                            });
+                                            removeFact(factData);
+                                        }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button></PanelRow>
+                                    
+                                </PanelBody>
+                            } )}
 
-                    {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addNewFactData()}>{ __( '+ Add New', 'wp-travel' ) }</Button></PanelRow>}
+                            {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addNewFactData()}>{ __( '+ Add New', 'wp-travel' ) }</Button></PanelRow>}
+                        </>
+                    }
                 </>
-                
             }
 
             
