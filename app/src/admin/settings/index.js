@@ -315,21 +315,59 @@ addFilter('wp_travel_after_payment_fields', 'wp_travel', (content, allData) => {
 
 addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, allData) => {
 
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Display current exchange rate in your site.', 'wp-travel')}</strong>
-                <br />
-                {__('You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
-                &nbsp;&nbsp;
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('WP Travel Currency Exchange Rates', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
+    let miscNocice = {
+        currencyExchange: <>
+                <h3>{ __( 'Currency Exchange Rate API', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Display current exchange rate in your site.', 'wp-travel')}</strong>
+                    <br />
+                    {__('You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('WP Travel Currency Exchange Rates', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+        mailchimp: <>
+                <h3>{ __( 'Mailchimp Settings', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Using Mailchimp for email marketing?', 'wp-travel')}</strong>
+                    <br />
+                    {__('You can import customer email from booking and inquiry to Mailchimp. That help you grow your business.', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-mailchimp/">{__('WP Travel Mailchimp', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+        wishlists: <>
+                <h3>{ __( 'Wishlists Options', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Allow customers to save trip for future.', 'wp-travel')}</strong>
+                    <br />
+                    {__('Whishlists helps user to save trip they like for future, so that they can book them later. ', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-wishlists/">{__('WP Travel Wishlists', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+    }
+
+    miscNocice = applyFilters( 'wp_travel_misc_addons_notices', miscNocice );
+    if ( Object.keys(miscNocice).length > 0 ) {
+        let AllNotices = Object.keys(miscNocice).map( (index) => {
+            return miscNocice[ index ]
+        } )
+        content = [
+            AllNotices
+            ,
+            ...content,
+        ]
+    }
     return content
 });
 
