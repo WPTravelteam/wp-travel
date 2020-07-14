@@ -25,21 +25,21 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		$index      = 0;
 		foreach ( $results as $result ) {
 			$regular_price = apply_filters( 'wp_travel_multiple_currency', $result->regular_price );
-			$sale_price = apply_filters( 'wp_travel_multiple_currency', $result->sale_price );
+			$sale_price    = apply_filters( 'wp_travel_multiple_currency', $result->sale_price );
 
-			$group_prices = ! empty( $result->group_prices ) ? maybe_unserialize( $result->group_prices ) : array();
+			$group_prices     = ! empty( $result->group_prices ) ? maybe_unserialize( $result->group_prices ) : array();
 			$new_group_prices = $group_prices;
 			if ( is_array( $group_prices ) && count( $group_prices ) > 0 ) {
 				foreach ( $group_prices as $i => $group_price ) {
-					$new_group_price = apply_filters( 'wp_travel_multiple_currency', $group_price['price'] );
-					$new_group_prices[$i]['price'] = wp_travel_get_formated_price( $new_group_price );
+					$new_group_price                 = apply_filters( 'wp_travel_multiple_currency', $group_price['price'] );
+					$new_group_prices[ $i ]['price'] = get_converted_price( $new_group_price );
 				}
 			}
 			$categories[ $index ]['id']              = absint( $result->pricing_category_id );
 			$categories[ $index ]['price_per']       = $result->price_per;
-			$categories[ $index ]['regular_price']   = wp_travel_get_formated_price( $regular_price );
+			$categories[ $index ]['regular_price']   = get_converted_price( $regular_price );
 			$categories[ $index ]['is_sale']         = ! empty( $result->is_sale ) ? true : false;
-			$categories[ $index ]['sale_price']      = wp_travel_get_formated_price( $sale_price );
+			$categories[ $index ]['sale_price']      = get_converted_price( $sale_price );
 			$categories[ $index ]['has_group_price'] = ! empty( $result->has_group_price );
 			$categories[ $index ]['group_prices']    = $new_group_prices;
 
@@ -48,8 +48,8 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 				$categories[ $index ]['group_prices']    = array();
 			}
 
-			$categories[ $index ]['default_pax']     = ! empty( $result->default_pax ) ? absint( $result->default_pax ) : '0';
-			$term_info                               = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( absint( $result->pricing_category_id ) );
+			$categories[ $index ]['default_pax'] = ! empty( $result->default_pax ) ? absint( $result->default_pax ) : '0';
+			$term_info                           = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( absint( $result->pricing_category_id ) );
 			if ( ! is_wp_error( $term_info ) && 'WP_TRAVEL_TRIP_PRICING_CATEGORIES_TAXONOMY_TERM' === $term_info['code'] ) {
 				$categories[ $index ]['term_info'] = $term_info['pricing_category_term_info'];
 			}
@@ -251,5 +251,14 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_DELETING_PRICING_CATEGORY' );
 		}
 		return WP_Travel_Helpers_Response_Codes::get_success_response( 'WP_TRAVEL_REMOVED_TRIP_PRICING_CATEGORY' );
+	}
+
+	private static function get_converted_price( $price ) {
+		$price = apply_filters( 'wp_travel_trip_price_conversion', $price );
+		return self::get_formatted_price( $price );
+	}
+
+	private static function get_formatted_price( $amount, $number_of_decimals = 2 ) {
+		return number_format( $amount, $number_of_decimals, '.', '' );
 	}
 }

@@ -33,7 +33,7 @@ const actions = {
             type: 'UPDATE_STORE_DATA',
             data
         };
-    },
+    }
 };
 
 registerStore( 'WPTravelFrontend/BookingWidget', {

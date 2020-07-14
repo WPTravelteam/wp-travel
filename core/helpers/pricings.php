@@ -70,7 +70,6 @@ class WP_Travel_Helpers_Pricings {
 			}
 			$index++;
 		}
-		// error_log( print_r( $pricings, true ) );
 		return array(
 			'code'     => 'WP_TRAVEL_TRIP_PRICINGS',
 			'pricings' => $pricings,
@@ -90,7 +89,6 @@ class WP_Travel_Helpers_Pricings {
 		foreach ( $pricings as $pricing ) {
 			$pricing_id = isset( $pricing['id'] ) ? absint( $pricing['id'] ) : 0;
 			if ( empty( $pricing_id ) ) {
-				// error_log('7777');
 				$result = self::add_individual_pricing( $trip_id, $pricing );
 				if ( ! is_wp_error( $result ) && 'WP_TRAVEL_ADDED_TRIP_PRICING' === $result['code'] && ! empty( $pricing['categories'] ) ) {
 					WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $result['pricing_id'], $pricing['categories'] );
@@ -98,7 +96,6 @@ class WP_Travel_Helpers_Pricings {
 			} else {
 				$result = self::update_individual_pricing( $pricing_id, $pricing );
 				if ( ! is_wp_error( $result ) && 'WP_TRAVEL_UPDATED_TRIP_PRICING' === $result['code'] && ! empty( $pricing['categories'] ) ) {
-					// error_log( print_r( $result, true ) );
 					WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $pricing_id, $pricing['categories'] );
 				} elseif ( empty( $pricing['categories'] ) ) {
 					WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $pricing_id );

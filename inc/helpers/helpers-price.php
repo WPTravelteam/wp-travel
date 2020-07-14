@@ -1148,7 +1148,6 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 	else : // New way to grab price @since 4.0.0
 		// return 100;
 		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		// error_log( print_r( $pricings_data,true ) );
 		if ( ! empty( $pricing_id ) && ! empty( $category_id ) ) {
 
 			$pricings   = array_filter(

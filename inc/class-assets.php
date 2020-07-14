@@ -672,7 +672,6 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				wp_deregister_style( $handle );
 			}
 
-			error_log( print_r( $queued_styles, true ) );
 		}
 
 		/**
@@ -733,7 +732,6 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			global $wp_scripts;
 			$queued_scripts   = $wp_scripts->queue;
  			$register_scripts = $wp_scripts->registered;
-			// error_log( print_r( $wp_scripts->queue, true ) );
 
 			$wp_travel_addon_handles = apply_filters( 'wp-travel-script-handles', array() );
 			$items_in_pro_bundle     = apply_filters( 'wp-travel-pro-bundle-items', array( 'scripts' => array(), 'styles' => array() ) );

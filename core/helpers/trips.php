@@ -195,10 +195,8 @@ class WP_Travel_Helpers_Trips {
 		// if ( $trip->post_status == 'auto-draft' ) {
 		// wp_transition_post_status( 'publish', $trip->post_status, $trip );
 		// }
-		// error_log( print_r($trip, true) );
 		$trip_data = (object) $trip_data;
 		if ( ! empty( $trip_data->pricings ) ) {
-			// error_log( print_r( $trip_data->pricings, true ) );
 			WP_Travel_Helpers_Pricings::update_pricings( $trip_id, $trip_data->pricings );
 		}
 
@@ -439,14 +437,12 @@ class WP_Travel_Helpers_Trips {
 				);
 			}
 		}
-		// error_log( print_r($query_args, true) );
 		$the_query = new WP_Query( $query_args );
 		$trips     = array();
 		// The Loop.
 		if ( $the_query->have_posts() ) {
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				// error_log( get_the_ID() );
 				$trip_info = self::get_trip( get_the_ID() );
 				$trips[]   = $trip_info['trip'];
 			} // end while
@@ -565,7 +561,6 @@ class WP_Travel_Helpers_Trips {
 		// Filter as per min and max price @todo:need query enhancement.
 		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
 			$sql     = "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id from {$price_category_table} PC join {$pricing_table} P on PC.pricing_id=P.id  where P.trip_id IN(" . implode( ',', $post_ids ) . ") ";
-			// error_log($sql);
 			$results = $wpdb->get_results( $sql );
 	
 			if ( empty( $results ) ) {

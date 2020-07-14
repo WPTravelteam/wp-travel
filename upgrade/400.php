@@ -319,7 +319,6 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 											// Inventory Migration ends.
 										}
 									}
-									// error_log( print_r( $selected_times_migration, true )  );
 									// Insert New Date along with new pricing ids.
 									$wpdb->insert(
 										$dates_table,
