@@ -32,14 +32,14 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 			if ( is_array( $group_prices ) && count( $group_prices ) > 0 ) {
 				foreach ( $group_prices as $i => $group_price ) {
 					$new_group_price                 = apply_filters( 'wp_travel_multiple_currency', $group_price['price'] );
-					$new_group_prices[ $i ]['price'] = get_converted_price( $new_group_price );
+					$new_group_prices[ $i ]['price'] = self::get_converted_price( $new_group_price );
 				}
 			}
 			$categories[ $index ]['id']              = absint( $result->pricing_category_id );
 			$categories[ $index ]['price_per']       = $result->price_per;
-			$categories[ $index ]['regular_price']   = get_converted_price( $regular_price );
+			$categories[ $index ]['regular_price']   = self::get_converted_price( $regular_price );
 			$categories[ $index ]['is_sale']         = ! empty( $result->is_sale ) ? true : false;
-			$categories[ $index ]['sale_price']      = get_converted_price( $sale_price );
+			$categories[ $index ]['sale_price']      = self::get_converted_price( $sale_price );
 			$categories[ $index ]['has_group_price'] = ! empty( $result->has_group_price );
 			$categories[ $index ]['group_prices']    = $new_group_prices;
 

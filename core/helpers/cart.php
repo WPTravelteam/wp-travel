@@ -29,7 +29,7 @@ class WP_Travel_Helpers_Cart {
 			$cart_total = $cart_total - $tax_amount;
 			// $tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		}
-		
+
 		return array(
 			'code' => 'WP_TRAVEL_CART',
 			'cart' => array(
@@ -60,98 +60,7 @@ class WP_Travel_Helpers_Cart {
 
 		// Start Discount Implementation
 		$terms    = array();
-		$discount = array();
-		if ( count( $cart_items ) > 1 ) :
-			$common_terms = array();
-			foreach ( $cart_items as $cart_id => $item ) {
-				$cart_trip_count[ $item['trip_id'] ] = ! isset( $cart_trip_count[ $item['trip_id'] ] ) ? 1 : ( $cart_trip_count[ $item['trip_id'] ] + 1 );
-				$taxonomy                            = 'itinerary_types';
-				// $primary_term = get_post_meta( $item['trip_id'], "_primary_term_{$taxonomy" );
-				$trip_terms = get_the_terms( $item['trip_id'], 'itinerary_types' );
-				if ( is_array( $trip_terms ) ) :
-					$terms[ $item['trip_id'] ] = array_map(
-						function( $sterm ) {
-							return $sterm->term_id;
-						},
-						$trip_terms
-					);
-					if ( empty( $common_terms ) ) {
-						$common_terms = $terms[ $item['trip_id'] ];
-					} else {
-						$common_terms = array_intersect( $common_terms, $terms[ $item['trip_id'] ] );
-					}
-				endif;
-
-				// $discount = array();
-				// $common_terms = array_unique( array_merge( $terms ) );
-				// if ( ! empty( $common_terms ) ) {
-				// $discount_info = array();
-				// foreach ( $common_terms[0] as $common_term_id ) {
-				// $discount_info[ $common_term_id ]['discount_figure']     = (float) get_term_meta( $common_term_id, 'trip_types_discount', true );
-				// $discount_info[ $common_term_id ]['is_percent_discount'] = 'yes' === get_term_meta( $common_term_id, 'trip_type_percent_discount', true ) ? 'yes' : 'no';
-				// $discount_info[ $common_term_id ]['no_of_trips']         = (int) get_term_meta( $common_term_id, 'trip_types_discount_trip_count', true );
-				// }
-				// $discount = array_filter(
-				// $discount_info,
-				// function( $di ) use ( $cart_items ) {
-				// return $di['no_of_trips'] <= count( $cart_items );
-				// }
-				// );
-
-				// usort(
-				// $discount,
-				// function( $a, $b ) {
-				// if ( $a['discount_figure'] == $b['discount_figure'] ) {
-				// return 0;
-				// }
-				// return ( $a['discount_figure'] < $b['discount_figure'] ) ? 1 : -1;
-				// }
-				// );
-				// }
-				// if ( is_array( $terms ) && count( $terms ) > 0 ) {
-				// foreach ( $terms as $term ) {
-				// $term_id          = $term->term_id;
-				// $discount_figure = get_term_meta( $term_id, 'trip_types_discount', true );
-				// $is_percent_discount = get_term_meta( $term_id, 'trip_type_percent_discount', true );
-				// $is_percent_discount = ( 'yes' === $is_percent_discount  )  ? 'yes' : 'no';
-				// if ( $discount_figure > 0 ) {
-				// $category_discount_data[ $item['trip_id'] ] = array( 'discount_figure' => $discount_figure, 'is_percent_discount' => $is_percent_discount );
-				// }
-				// }
-				// }
-			}
-			// $discount         = array();
-				$common_terms = array_unique( array_merge( $terms ) );
-			if ( ! empty( $common_terms ) ) {
-				$discount_info = array();
-				foreach ( $common_terms[0] as $common_term_id ) {
-					$discount_info[ $common_term_id ]['discount_figure'] = (float) get_term_meta( $common_term_id, 'trip_types_discount', true );
-					// $discount_info[ $common_term_id ]['is_percent_discount'] = 'yes' === get_term_meta( $common_term_id, 'trip_type_percent_discount', true ) ? 'yes' : 'no';
-					$discount_info[ $common_term_id ]['no_of_trips'] = (int) get_term_meta( $common_term_id, 'trip_types_discount_trip_count', true );
-				}
-				$discount = array_filter(
-					$discount_info,
-					function( $di ) use ( $cart_items ) {
-						return $di['no_of_trips'] <= count( $cart_items );
-					}
-				);
-
-				usort(
-					$discount,
-					function( $a, $b ) {
-						if ( $a['discount_figure'] == $b['discount_figure'] ) {
-							return 0;
-						}
-						return ( $a['discount_figure'] < $b['discount_figure'] ) ? 1 : -1;
-					}
-				);
-			}
-
-			// return array(
-			// 'code'       => 'WP_TRAVEL_CART_ITEMS',
-			// 'cart_items' => array($category_discount_data, $cart_trip_count, $terms),
-			// );
-		endif;
+		$discount = apply_filters( 'wp_travel_trip_discounts', array(), $cart_items );
 
 		// End Discount Implementation
 		$cart = array();
@@ -170,8 +79,8 @@ class WP_Travel_Helpers_Cart {
 				$cart[ $cart_id ]['trip_price'] = (float) number_format( $item['trip_price'], 2, '.', '' );
 
 				// Start Apply Discounts if applicable
-				if ( ! empty( $discount ) ) {
-					$trip_price = (float) $item['trip_price'] * ( 100 - (float) $discount[0]['discount_figure'] ) / 100;
+				if ( ! empty( $discount ) && isset( $discount['coupon'] ) && ! $discount['coupon'] ) {
+					$trip_price = (float) $item['trip_price'] * ( 100 - (float) $discount['value'] ) / 100;
 					// if ( ! empty( $discount[0]['is_percent_discount'] ) && 'yes' === $discount[0]['is_percent_discount'] ) {
 					// } else {
 					// $trip_price = (float) $item['trip_price'] - (float) $discount[0]['discount_figure'];
@@ -378,9 +287,9 @@ class WP_Travel_Helpers_Cart {
 		}
 		global $wt_cart;
 		// print_r($itemData);
-		$pax = isset(  $itemData['pax'] ) ? $itemData['pax'] : array();
-		$trip_extras = isset(  $itemData['wp_travel_trip_extras'] ) ? (array) $itemData['wp_travel_trip_extras'] : array();
-		$response = $wt_cart->update( $cart_id, $pax, $trip_extras, $itemData );
+		$pax         = isset( $itemData['pax'] ) ? $itemData['pax'] : array();
+		$trip_extras = isset( $itemData['wp_travel_trip_extras'] ) ? (array) $itemData['wp_travel_trip_extras'] : array();
+		$response    = $wt_cart->update( $cart_id, $pax, $trip_extras, $itemData );
 		if ( ! $response ) {
 			return new WP_Error( 'WP_TRAVEL_CART_ITEM_NOT_UPDATED', __( 'Cart item not updated.', 'wp-travel' ) );
 		}
@@ -389,7 +298,7 @@ class WP_Travel_Helpers_Cart {
 		return array(
 			'code'    => 'WP_TRAVEL_CART_ITEM_UPDATED',
 			'message' => __( 'Cart item updated.', 'wp-travel' ),
-			'cart'    => $cart
+			'cart'    => $cart,
 		);
 	}
 
@@ -403,14 +312,6 @@ class WP_Travel_Helpers_Cart {
 			$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
 			$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
 
-			// if ( 'fixed' === $discount_type ) {
-			// 	$cart_amounts = $wt_cart->get_total( false );
-			// 	$total        = $cart_amounts['total'];
-			// 	if ( $discount_amount >= $total ) {
-			// 		WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
-			// 		return;
-			// 	}
-			// }
 
 			$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, $coupon_code );
 
@@ -425,7 +326,7 @@ class WP_Travel_Helpers_Cart {
 				'cart'    => $cart['cart'],
 			);
 		} else {
-			return  WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
+			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
 		}
 	}
 }

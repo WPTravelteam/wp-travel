@@ -272,7 +272,7 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
-		
+
 		if ( is_array( $pax ) || is_object( $pax ) ) {
 			$pax = (array) $pax;
 			if ( empty( $pax ) ) {
@@ -297,7 +297,7 @@ class WP_Travel_Cart {
 				$cart_trip     = $this->items[ $cart_item_id ]['trip'];
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 
-				$trip_price = 0;
+				$trip_price         = 0;
 				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
 					if ( $pax_value < 1 ) {
@@ -322,20 +322,20 @@ class WP_Travel_Cart {
 
 					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 					if ( wp_travel_is_partial_payment_enabled() ) {
-						$percent = wp_travel_get_actual_payout_percent( $trip_id );
+						$percent                = wp_travel_get_actual_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
 					}
 					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
-					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price'] = $category_price;
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price']         = $category_price;
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
 
 					// multiply category_price by pax to add in trip price if price per is person.
 					if ( 'person' == $cart_trip[ $category_id ]['price_per'] ) {
-						$category_price *= $pax_value;
+						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
 					// add price.
-					$trip_price += $category_price;
+					$trip_price         += $category_price;
 					$trip_price_partial += $category_price_partial;
 
 				}
@@ -344,7 +344,7 @@ class WP_Travel_Cart {
 					$trip_price = $_REQUEST['trip_price'];
 				}
 
-				$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 
 				if ( $trip_extras ) {
@@ -421,9 +421,9 @@ class WP_Travel_Cart {
 	 */
 	public function add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code = null ) {
 
-		$this->discounts['type']      = $discount_type;
-		$this->discounts['value']     = $discount_value;
-		$this->discounts['coupon_id'] = $coupon_id;
+		$this->discounts['type']        = $discount_type;
+		$this->discounts['value']       = $discount_value;
+		$this->discounts['coupon_id']   = $coupon_id;
 		$this->discounts['coupon_code'] = is_null( $coupon_code ) ? '' : $coupon_code;
 
 		$this->write();
@@ -489,7 +489,7 @@ class WP_Travel_Cart {
 
 		$trips = $this->items;
 
-		$discounts = $this->discounts;
+		$discounts = apply_filters( 'wp_travel_trip_discounts', $this->discounts, $trips );
 
 		$cart_total      = 0;
 		$tax_amount      = 0;
@@ -501,7 +501,6 @@ class WP_Travel_Cart {
 
 		/**
 		 * @since 4.0.0
-		 * 
 		 */
 		$settings        = wp_travel_get_settings();
 		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];

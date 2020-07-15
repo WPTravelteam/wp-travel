@@ -42,7 +42,8 @@ class WP_Travel_Checkout {
         if ( 'yes' === $require_login_to_checkout && ! is_user_logged_in() ) {
             return wp_travel_get_template_part( 'account/form', 'login' );
 		}
-		
+		// @since 4.0.7
+		do_action( 'wp_travel_before_checkout_page_wrap' );
 		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', false );
 		?>
 		<div class="checkout-page-wrap">
