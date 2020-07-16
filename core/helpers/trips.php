@@ -103,7 +103,7 @@ class WP_Travel_Helpers_Trips {
 			'trip_include'                      => $trip_include,
 			'trip_exclude'                      => $trip_exclude,
 			'trip_outline'                      => $trip_outline,
-			'itineraries'                       => $itineraries,
+			'itineraries'                       => array_values( $itineraries ),
 			'faqs'                              => $faqs,
 			'trip_facts'                        => $trip_facts,
 			'use_global_trip_enquiry_option'    => $use_global_trip_enquiry_option,
