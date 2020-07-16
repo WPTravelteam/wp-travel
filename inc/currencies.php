@@ -133,11 +133,12 @@ function wp_travel_get_currency_list() {
 	return apply_filters( 'wp_travel_currencies', $currency );
 }
 
-function wp_travel_get_currency_symbol( $currency_code = null ) {
-	if ( ! $currency_code ) {
-		$settings = wp_travel_get_settings();
-		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
-	}
+/**
+ * Returns the array of currency symbols with their codes.
+ *
+ * @since 4.0.7
+ */
+function wp_travel_currency_symbols() {
 
 	$currency_symbols = array(
 		'AED' => '&#1583;.&#1573;',
@@ -309,6 +310,18 @@ function wp_travel_get_currency_symbol( $currency_code = null ) {
 	);
 
 	$currency_symbols = apply_filters( 'wp_travel_currency_symbols', $currency_symbols );
+
+	return $currency_symbols;
+
+}
+
+function wp_travel_get_currency_symbol( $currency_code = null ) {
+	if ( ! $currency_code ) {
+		$settings      = wp_travel_get_settings();
+		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
+	}
+
+	$currency_symbols = wp_travel_currency_symbols();
 
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
 		return apply_filters( 'wp_travel_currency_symbol', $currency_symbols[ $currency_code ], $currency_code, $currency_symbols );

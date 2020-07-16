@@ -399,16 +399,21 @@ const wptravelcheckout = (shoppingCart) => {
         if (cartSubtotalContainer)
             cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
 
+        let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
         if (e.detail && e.detail.coupon || wp_travel_cart.cart.coupon && wp_travel_cart.cart.coupon.coupon_id) {
             let coupon = e.detail && e.detail.coupon || wp_travel_cart.cart.coupon
             let _cValue = coupon.value && parseInt(coupon.value) || 0
-            let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
             fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
             if (cartDiscountContainer) {
                 cartDiscountContainer.innerHTML = coupon.type == 'fixed' ? '- ' + wp_travel_cart.format(_cValue) : '- ' + wp_travel_cart.format(cartTotal * _cValue / 100)
                 cartDiscountContainer.closest('[data-wpt-extra-field]').removeAttribute('style')
             }
             cartTotal = coupon.type == 'fixed' ? cartTotal - _cValue : cartTotal * (100 - _cValue) / 100
+        }
+
+        if( wp_travel_cart.cart.total.discount <= 0 ) {
+            fullTotalContainer.innerHTML = ''
+            cartDiscountContainer.closest('[data-wpt-extra-field]').style.display = 'none'
         }
 
         if (wp_travel_cart.cart.tax) {
@@ -435,13 +440,6 @@ const wptravelcheckout = (shoppingCart) => {
         let cartItemsCountContainer = e.target.querySelector('[data-wpt-cart-item-count]')
         if (cartItemsCountContainer)
             cartItemsCountContainer.innerHTML = _cartItems.length
-
-        console.debug({
-            cartTotal,
-            tripTotalWOExtras,
-            txTotal,
-            tripTotalPartialWOExtras
-        })
     })
 
     cartItems && cartItems.forEach(ci => {
@@ -460,6 +458,12 @@ const wptravelcheckout = (shoppingCart) => {
                             if (result.success && result.data.code == 'WP_TRAVEL_REMOVED_CART_ITEM') {
                                 if (result.data.cart && result.data.cart.length <= 0) {
                                     window.location.reload()
+                                }
+                                wp_travel_cart.cart = result.data.cart
+                                let total = result.data.cart.total
+                                if (wp_travel.payment) {
+                                    wp_travel.payment.trip_price = parseFloat(total.total)
+                                    wp_travel.payment.payment_amount = parseFloat(total.total_partial)
                                 }
                                 ci.remove()
                                 shoppingCart.dispatchEvent(new Event('wptcartchange'))
