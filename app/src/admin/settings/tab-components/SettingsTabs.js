@@ -7,7 +7,7 @@ import {VersionCompare} from '../../fields/VersionCompare'
 import {alignJustify } from '@wordpress/icons';
 import { ReactSortable } from 'react-sortablejs';
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 

@@ -4,7 +4,7 @@ import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and als
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
-import ErrorBoundary from '../error/ErrorBoundry';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 import './store/settings-store';
 

@@ -5,7 +5,7 @@ import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 

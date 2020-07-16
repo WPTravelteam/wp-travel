@@ -6,7 +6,7 @@ import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import apiFetch from '@wordpress/api-fetch';
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 

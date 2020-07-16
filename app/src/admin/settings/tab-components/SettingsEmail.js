@@ -6,7 +6,7 @@ import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import WPEditor from '../../fields/WPEditor';
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
