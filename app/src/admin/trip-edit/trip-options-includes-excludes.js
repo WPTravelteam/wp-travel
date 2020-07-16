@@ -5,6 +5,7 @@ import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
 import WPEditor from '../fields/WPEditor';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripOptionsIncludesExcludesContent = () => {
     const allData = useSelect((select) => {
@@ -12,7 +13,7 @@ const WPTravelTripOptionsIncludesExcludesContent = () => {
     }, []);
     const { updateTripData, updateRequestSending, setTripData, updateStateChange } = dispatch('WPTravel/TripEdit');
     const { trip_include, trip_exclude } = allData;
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-itinerary">
             <PanelRow>
                 <label>{__( 'Trip Includes' )}</label>
@@ -39,7 +40,7 @@ const WPTravelTripOptionsIncludesExcludesContent = () => {
                 }} name="trip_exclude" />}
             </PanelRow>
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 
 const WPTravelTripOptionsIncludesExcludes = () => {

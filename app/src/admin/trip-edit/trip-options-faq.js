@@ -5,6 +5,8 @@ import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
 const WPTravelTripOptionsFaqContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -46,7 +48,7 @@ const WPTravelTripOptionsFaqContent = () => {
             faqs: sortedFaqs
         })
     }
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
             
@@ -133,7 +135,7 @@ const WPTravelTripOptionsFaqContent = () => {
                 }]}>{ __( 'Please add new FAQ here.', 'wp-travel' ) }</Notice></>
             }
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', (content, allData) => {
     content = [

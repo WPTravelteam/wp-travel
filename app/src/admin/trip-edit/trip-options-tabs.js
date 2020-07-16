@@ -8,6 +8,8 @@ import { sprintf, _n, __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
 const WPTravelTripOptionsTabsContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -91,7 +93,7 @@ const WPTravelTripOptionsTabsContent = () => {
 
     }
     
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-tabs">
 
             {applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}
@@ -115,7 +117,7 @@ const WPTravelTripOptionsTabsContent = () => {
                 tabsContent()
             }
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 
 addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', (content, id, allData) => {
