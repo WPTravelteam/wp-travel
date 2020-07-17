@@ -259,6 +259,9 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 	}
 
 	private static function get_formatted_price( $amount, $number_of_decimals = 2 ) {
+		if ( ! is_float( $amount ) ) {
+			$amount = (float) $amount;
+		}
 		return number_format( $amount, $number_of_decimals, '.', '' );
 	}
 }
