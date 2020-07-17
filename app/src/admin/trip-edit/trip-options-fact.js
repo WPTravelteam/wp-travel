@@ -9,7 +9,7 @@ import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 import Select from 'react-select'
 
-
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripOptionsFactContent = () => {
     const allData = useSelect((select) => {
@@ -100,7 +100,7 @@ const WPTravelTripOptionsFactContent = () => {
             trip_facts: sortedFact
         })
     }
-    return( <>
+    return( <ErrorBoundary>
         <div className="wp-travel-trip-fact">
             {typeof wp_travel_trip_facts_settings != 'undefined' && <>
                 { Object.keys(wp_travel_trip_facts_settings).length > 0 ? 
@@ -255,7 +255,7 @@ const WPTravelTripOptionsFactContent = () => {
           
             
         </div>
-    </>);
+    </ErrorBoundary>);
 }
 
 const WPTravelTripOptionsFact = () => {

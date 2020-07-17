@@ -12,6 +12,8 @@ import Select from 'react-select'
 import WPTravelTripPricingCategories from './trip-pricings-categories';
 import WPTravelTripDates from './trip-dates';
 
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
 const WPTravelTripOptionsPricings = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -44,7 +46,7 @@ const WPTravelTripOptionsPricings = () => {
         })
     }
     let totalPayout = 0
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
@@ -294,7 +296,7 @@ const WPTravelTripOptionsPricings = () => {
 
             {applyFilters('wp_travel_after_pricings_options', [], allData )}
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 
 const WPTravelTripOptionsPriceDates = () => {
@@ -314,7 +316,7 @@ const WPTravelTripOptionsPriceDates = () => {
             },
         ]}>
         {
-            (tab) => 'prices' == tab.name ? <WPTravelTripOptionsPricings /> : <WPTravelTripDates />
+            (tab) => 'prices' == tab.name ? <ErrorBoundary> <WPTravelTripOptionsPricings /></ErrorBoundary> : <ErrorBoundary><WPTravelTripDates /></ErrorBoundary>
         }
     </TabPanel>;
 }

@@ -7,6 +7,8 @@ import Geocode from "react-geocode";
 import { Gmaps, Marker } from 'react-gmaps';
 import Autocomplete from 'react-google-autocomplete';
 
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
 const WPTravelTripOptionsLocationContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -20,13 +22,13 @@ const WPTravelTripOptionsLocationContent = () => {
     // console.log(settingsData)
 
 
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-location">
             <h4>{__('Map', 'wp-travel')}</h4>
 
             {applyFilters('wp_travel_admin_map_area', '', settingsData, map_data)}
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 
 const WPTravelTripOptionsLocation = () => {

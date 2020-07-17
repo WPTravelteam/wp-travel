@@ -8,6 +8,7 @@ import { applyFilters } from '@wordpress/hooks';
 import _ from 'lodash';
 
 import TripDatesTimes from './dates-times';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripDates = () => {
     
@@ -106,7 +107,7 @@ const WPTravelTripDates = () => {
     }
     
 
-    return <>
+    return <ErrorBoundary>
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
         <h4>{ __( 'Date & Time', 'wp-travel' ) }</h4>
         <PanelRow>
@@ -215,7 +216,7 @@ const WPTravelTripDates = () => {
         disabled={!has_state_changes}
         >Save Changes</Button>
     </PanelRow> */}
-    </>
+    </ErrorBoundary>
 }
 
 export default WPTravelTripDates;

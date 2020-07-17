@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripPricingCategories = ({priceIndex}) => {
     const { pricing_categories, pricings } = useSelect((select) => {
@@ -60,7 +61,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
     }
     // console.log(price);
     
-    return <>{ 'undefined' !== typeof price && 'undefined' !== typeof price.categories && price.categories.length > 0 ?<>{ price.categories.map((category, catIndex) => {
+    return <ErrorBoundary>{ 'undefined' !== typeof price && 'undefined' !== typeof price.categories && price.categories.length > 0 ?<>{ price.categories.map((category, catIndex) => {
         let currentCategory = _.find(pricing_categories, function(o) { 
             let catId = category.id>0?category.id:pricing_categories[0].id;
             return o.id === catId; 
@@ -160,7 +161,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     noDefaultClasses:true,
                     className:'is-link'
                 }]}>{ __( 'No categories found.', 'wp-travel' ) }</Notice>
-    }</>
+    }</ErrorBoundary>
 }
 
 export default WPTravelTripPricingCategories;

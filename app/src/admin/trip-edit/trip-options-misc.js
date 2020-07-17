@@ -4,6 +4,7 @@ import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripOptionsMiscContent = () => {
     const allData = useSelect((select) => {
@@ -15,7 +16,7 @@ const WPTravelTripOptionsMiscContent = () => {
     // console.log( allData )
     const { use_global_trip_enquiry_option, enable_trip_enquiry_option } = allData;
 
-    return <>
+    return <ErrorBoundary>
         <div className="wp-travel-trip-misc">
             <h3>{__( 'Trip Enquiry', 'wp-travel' ) }</h3>
             {/* {applyFilters( 'wp_travel_itinerary_custom_tabs', '', id, allData )} */}
@@ -53,7 +54,7 @@ const WPTravelTripOptionsMiscContent = () => {
             }
            
         </div>
-    </>;
+    </ErrorBoundary>;
 }
 
 const WPTravelTripOptionsMisc = () => {

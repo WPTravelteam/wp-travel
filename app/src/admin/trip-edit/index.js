@@ -4,6 +4,7 @@ import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and als
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 import './trip-store';
 import './trip-pro-options';
@@ -143,7 +144,7 @@ const WPTravelTripOptions = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <><tab.content /></> : <>Error.</>
+                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>Error.</>
             }
         </TabPanel>
         <SaveTripSection />

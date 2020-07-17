@@ -1,6 +1,7 @@
 import { Button, Spinner, Notice } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 export default props => {
     const {
         images: gallery,
@@ -10,7 +11,7 @@ export default props => {
         onImagesSort,
         onItemClick
     } = props
-    return <>
+    return <ErrorBoundary>
         {gallery.length > 0 &&
             <ReactSortable
                 list={gallery}
@@ -32,5 +33,5 @@ export default props => {
                 })}
             </ReactSortable>
             || <Notice isDismissible={false} status="info">{__('There are no gallery images.')}</Notice>}
-    </>
+    </ErrorBoundary>
 }

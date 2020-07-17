@@ -4,6 +4,8 @@ import { sprintf, _n, __ } from '@wordpress/i18n';
 import { useSelect, dispatch } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
 const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
     const updateDatesTimes = (data, _dateIndex) => {
@@ -47,7 +49,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
         })
     }
 
-    return <>
+    return <ErrorBoundary>
         {dates.length > 0 && <>
             <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__('+ Add Date', 'wp-travel')}</Button></PanelRow>
             {dates.map((_date, _dateIndex) => {
@@ -288,7 +290,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                 className: 'is-link'
             }]}>{__('No dates found.', 'wp-travel')}</Notice>
         }
-    </>
+    </ErrorBoundary>
 }
 
 export default TripDatesTimes;

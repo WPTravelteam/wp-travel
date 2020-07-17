@@ -9,6 +9,7 @@ import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
 import WPEditor from '../fields/WPEditor';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripOptionsItineraryContent = () => {
     const allData = useSelect((select) => {
@@ -60,6 +61,7 @@ const WPTravelTripOptionsItineraryContent = () => {
     
     return <>
         <div className="wp-travel-trip-itinerary">
+            <ErrorBoundary>
             {applyFilters('wp_travel_before_itinerary_content', '', allData)}
             <PanelRow>
                 <label htmlFor="wp-travel-trip-outline">{__('Trip Outline')}</label>
@@ -249,6 +251,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                     className:'is-link'
                 }]}>{__( 'No Itineraries found.', 'wp-travel')}</Notice></>
             }
+            </ErrorBoundary>
         </div>
     </>;
 }
