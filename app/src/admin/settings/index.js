@@ -22,6 +22,7 @@ import SettingsFieldEditor from './tab-components/SettingsFieldEditor';
 import SettingsFaqs from './tab-components/SettingsFaqs';
 import SettingsCartCheckout from './tab-components/SettingsCartCheckout';
 import SettingsAddons from './tab-components/SettingsAddons';
+import SettingsInvoice from './tab-components/SettingsInvoice';
 import SettingsMisc from './tab-components/SettingsMisc';
 import SettingsDebug from './tab-components/SettingsDebug';
 import SettingsLicense from './tab-components/SettingsLicense';
@@ -109,6 +110,12 @@ const WPTravelTripSettings = () => {
             title: __('Addons Settings', 'wp-travel'),
             className: 'tab-addons-settings',
             content: SettingsAddons
+        },
+        {
+            name: 'invoice',
+            title: __('Invoice', 'wp-travel'),
+            className: 'tab-invoice',
+            content: SettingsInvoice
         },
         {
             name: 'misc-options',
