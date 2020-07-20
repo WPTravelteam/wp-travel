@@ -13,16 +13,11 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
-<<<<<<< HEAD
-=======
-    // console.log(allData)
->>>>>>> c1bd037455553939c5557efca61ec478736f6afe
 
     const { updateSettings } = dispatch('WPTravel/Admin');
     const {
         partial_payment,
         minimum_partial_payout,
-<<<<<<< HEAD
         options,
         total_payout_fields,
         } = allData;
@@ -32,15 +27,6 @@ export default () => {
     }, 0);
     
     const remain_percent = 100 - total_percent
-=======
-        sorted_gateways,
-        trip_tax_enable,
-        trip_tax_price_inclusive,
-        trip_tax_percentage,
-        options
-        } = allData;
-    
->>>>>>> c1bd037455553939c5557efca61ec478736f6afe
 
     const updatePayoutOption = (value, _tabIndex) => {
 
@@ -57,16 +43,7 @@ export default () => {
         })
     }
 
-<<<<<<< HEAD
     let x = 1;
-=======
-    const sortGateways = ( sortedPricing) => {
-        updateSettings({
-            ...allData, // allData
-            sorted_gateways: sortedPricing
-        })
-    }
->>>>>>> c1bd037455553939c5557efca61ec478736f6afe
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Payment Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -87,7 +64,6 @@ export default () => {
             </PanelRow>
             
             {applyFilters( 'wp_travel_before_minimum_partial_payout', [] )}
-<<<<<<< HEAD
             { 'yes' == partial_payment ? minimum_partial_payout.map( (minPayout, index ) => {
                 var label = minimum_partial_payout.length > 1 ? __( 'Partial Payout ' + (x++) + '(%)',  '' ) : __( 'Minimum Payout (%)', 'wp-travel' );
                 return <PanelRow>
@@ -105,30 +81,6 @@ export default () => {
                     </div>
                 </PanelRow>
             } ) : '' }
-=======
-            { 'undefined' != typeof partial_payment && partial_payment == 'yes' &&
-            
-                <>
-                    {minimum_partial_payout.map( (minPayout, index ) => {
-
-                        return <PanelRow>
-                            <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
-                            <div className="wp-travel-field-value">
-                                <RangeControl
-                                    value={ minPayout }
-                                    onChange={
-                                        (value) => updatePayoutOption( value, index )
-                                    }
-                                    min={ 1 }
-                                    max={ 100 }
-                                />
-                                <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-                            </div>
-                        </PanelRow>
-                    } ) }
-                </>
-            }
->>>>>>> c1bd037455553939c5557efca61ec478736f6afe
             {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )}
 
 
