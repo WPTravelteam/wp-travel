@@ -4,7 +4,7 @@ import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and als
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
-import ErrorBoundary from '../error/ErrorBoundry';
+import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 import './store/settings-store';
 
@@ -17,14 +17,15 @@ import SettingsEmail from './tab-components/SettingsEmail';
 import SettingsAccount from './tab-components/SettingsAccount';
 import SettingsTabs from './tab-components/SettingsTabs';
 import SettingsPayment from './tab-components/SettingsPayment';
-
-
+import SettingsFacts from './tab-components/SettingsFacts';
 import SettingsFieldEditor from './tab-components/SettingsFieldEditor';
 import SettingsFaqs from './tab-components/SettingsFaqs';
 import SettingsCartCheckout from './tab-components/SettingsCartCheckout';
 import SettingsAddons from './tab-components/SettingsAddons';
+import SettingsInvoice from './tab-components/SettingsInvoice';
 import SettingsMisc from './tab-components/SettingsMisc';
 import SettingsDebug from './tab-components/SettingsDebug';
+import SettingsLicense from './tab-components/SettingsLicense';
 
 const WPTravelTripSettings = () => {
     const settingsData = useSelect((select) => {
@@ -35,9 +36,11 @@ const WPTravelTripSettings = () => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
     
+    const {options}= allData
+    // console.log(options)
 
    
-    let wrapperClasses = "wp-travel-trip-pricings";
+    let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
     wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
 
     // Add filter to tabs.
@@ -82,7 +85,7 @@ const WPTravelTripSettings = () => {
             name: 'facts',
             title: __('Facts', 'wp-travel'),
             className: 'tab-facts',
-            content: 'a'
+            content: SettingsFacts
         },
         {
             name: 'field-editor',
@@ -109,6 +112,12 @@ const WPTravelTripSettings = () => {
             content: SettingsAddons
         },
         {
+            name: 'invoice',
+            title: __('Invoice', 'wp-travel'),
+            className: 'tab-invoice',
+            content: SettingsInvoice
+        },
+        {
             name: 'misc-options',
             title: __('Misc. Options', 'wp-travel'),
             className: 'tab-misc-options',
@@ -121,7 +130,7 @@ const WPTravelTripSettings = () => {
             content: SettingsDebug
         },
         
-    ]);
+    ], allData );
     return <div className={wrapperClasses}>
         {allData.is_sending_request && <Spinner />}
         <SaveSettings />
@@ -139,6 +148,22 @@ const WPTravelTripSettings = () => {
 
 
 // Filters
+addFilter('wp_travel_settings_tabs', 'wp_travel', (content, allData) => {
+    const {options} = allData
+    // if ( 'undefined' != typeof options && ! options.is_multisite ) {
+        content = [
+            ...content,
+            {
+                name: 'license',
+                title: __('License', 'wp-travel'),
+                className: 'tab-license',
+                content: SettingsLicense
+            },
+        ]
+    // }
+    return content
+});
+
 addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData) => {
     content = [
         <>
@@ -271,6 +296,85 @@ addFilter('wp_travel_addons_setings_tab_fields', 'wp_travel', (content, allData)
         </>,
         ...content,
     ]
+    return content
+});
+
+addFilter('wp_travel_after_payment_fields', 'wp_travel', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need more payment gateway options ?', 'wp-travel')}</strong>
+                <br />
+                {/* {__('Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')} */}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="http://wptravel.io/contact">{__('Request A new One', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/category/payment-gateways/">{__('Check All Payment Gateways', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, allData) => {
+
+    let miscNocice = {
+        currencyExchange: <>
+                <h3>{ __( 'Currency Exchange Rate API', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Display current exchange rate in your site.', 'wp-travel')}</strong>
+                    <br />
+                    {__('You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('WP Travel Currency Exchange Rates', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+        mailchimp: <>
+                <h3>{ __( 'Mailchimp Settings', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Using Mailchimp for email marketing?', 'wp-travel')}</strong>
+                    <br />
+                    {__('You can import customer email from booking and inquiry to Mailchimp. That help you grow your business.', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-mailchimp/">{__('WP Travel Mailchimp', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+        wishlists: <>
+                <h3>{ __( 'Wishlists Options', 'wp-travel' ) }</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Allow customers to save trip for future.', 'wp-travel')}</strong>
+                    <br />
+                    {__('Whishlists helps user to save trip they like for future, so that they can book them later. ', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                    &nbsp;&nbsp;
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-wishlists/">{__('WP Travel Wishlists', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+    }
+
+    miscNocice = applyFilters( 'wp_travel_misc_addons_notices', miscNocice );
+    if ( Object.keys(miscNocice).length > 0 ) {
+        let AllNotices = Object.keys(miscNocice).map( (index) => {
+            return miscNocice[ index ]
+        } )
+        content = [
+            AllNotices
+            ,
+            ...content,
+        ]
+    }
     return content
 });
 

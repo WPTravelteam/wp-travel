@@ -67,16 +67,66 @@ class WP_Travel_Helpers_Settings {
 			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
 		}
-		$filtered_global_tabs = array();
+		$mapped_global_tabs = array();
 		foreach ( $global_tabs as $key => $tab ) {
 			$default_label             = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 			$tab_data                  = $tab;
 			$tab_data['tab_key']       = $key;
 			$tab_data['default_label'] = $default_label;
 
-			$filtered_global_tabs[] = $tab_data;
+			$mapped_global_tabs[] = $tab_data;
 		}
-		$settings['global_tab_settings'] = $filtered_global_tabs; // override values.
+		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
+
+		// trip facts.
+		$facts        = $settings['wp_travel_trip_facts_settings'];
+		// error_log(print_r( $facts, true ));
+		$mapped_facts = array();
+		if ( is_array( $facts ) && count( $facts ) > 0 ) {
+			foreach ( $facts as $key => $fact ) {
+				$new_fact       = array(
+					'key'     => $key,
+					'name'    => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'    => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options' => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'    => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+				);
+				$mapped_facts[] = $new_fact;
+			}
+		}
+		$settings['wp_travel_trip_facts_settings'] = $mapped_facts; // override values.
+
+		// Mapped sorted gateways.
+		$sorted_gateways        = wp_travel_sorted_payment_gateway_lists();
+		$mapped_sorted_gateways = array();
+		foreach ( $sorted_gateways as $key => $label ) {
+			$gateway                  = array(
+				'key'   => $key,
+				'label' => $label,
+			);
+			$mapped_sorted_gateways[] = $gateway;
+		}
+		$settings['sorted_gateways'] = $mapped_sorted_gateways; // override values.
+
+		// Bank Deposit
+		$bank_deposits        = $settings['wp_travel_bank_deposits'];
+		$mapped_bank_deposite = array();
+		if ( isset( $bank_deposits['account_name'] ) && is_array( $bank_deposits['account_name'] ) && count( $bank_deposits['account_name'] ) > 0 ) {
+			foreach ( $bank_deposits['account_name'] as $key => $account_name ) {
+				$bank_data = array(
+					'account_name'   => $account_name,
+					'account_number' => isset( $bank_deposits['account_number'][ $key ] ) ? $bank_deposits['account_number'][ $key ] : '',
+					'bank_name'      => isset( $bank_deposits['bank_name'][ $key ] ) ? $bank_deposits['bank_name'][ $key ] : '',
+					'sort_code'      => isset( $bank_deposits['sort_code'][ $key ] ) ? $bank_deposits['sort_code'][ $key ] : '',
+					'iban'           => isset( $bank_deposits['iban'][ $key ] ) ? $bank_deposits['iban'][ $key ] : '',
+					'swift'          => isset( $bank_deposits['swift'][ $key ] ) ? $bank_deposits['swift'][ $key ] : '',
+					'enable'         => isset( $bank_deposits['enable'][ $key ] ) ? $bank_deposits['enable'][ $key ] : '',
+				);
+
+				$mapped_bank_deposite[] = $bank_data;
+			}
+		}
+		$settings['wp_travel_bank_deposits'] = $mapped_bank_deposite; // override values.
 
 		// Page Lists.
 		$lists     = get_posts(
@@ -98,7 +148,26 @@ class WP_Travel_Helpers_Settings {
 
 		$settings_options['wp_travel_user_since'] = get_option( 'wp_travel_user_since', '3.0.0' );
 
-		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options );
+		// fact options.
+		$settings_options['fact_options'] = array(
+			array(
+				'label' => __( 'Plain Text', 'wp-travel' ),
+				'value' => 'text',
+			),
+			array(
+				'label' => __( 'Single Select', 'wp-travel' ),
+				'value' => 'single',
+			),
+			array(
+				'label' => __( 'Multiple Select', 'wp-travel' ),
+				'value' => 'multiple',
+			),
+		);
+		// is multisite.
+		$settings_options['is_multisite'] = is_multisite();
+
+		$settings = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
+		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
 
@@ -117,7 +186,7 @@ class WP_Travel_Helpers_Settings {
 		$settings        = wp_travel_get_settings();
 		$settings_fields = array_keys( wp_travel_settings_default_fields() );
 
-		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings' );
+		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings', 'sorted_gateways', 'wp_travel_bank_deposits' );
 		foreach ( $settings_fields as $settings_field ) {
 			if ( in_array( $settings_field, $ignore_fields ) ) {
 				continue;
@@ -143,6 +212,27 @@ class WP_Travel_Helpers_Settings {
 				$settings[ $settings_field ] = wp_unslash( $settings_data[ $settings_field ] );
 			}
 		}
+
+		if ( isset( $settings_data['wp_travel_bank_deposits'] ) && is_array( $settings_data['wp_travel_bank_deposits'] ) ) {
+			$i = 0;
+			foreach ( $settings_data['wp_travel_bank_deposits'] as $bank_deposit ) {
+
+				if ( ! $bank_deposit['account_name'] && ! $bank_deposit['account_number'] ) {
+					continue; // Not save if no account name and number.
+				}
+				$bank_deposits['account_name'][ $i ]   = $bank_deposit['account_name'];
+				$bank_deposits['account_number'][ $i ] = $bank_deposit['account_number'];
+				$bank_deposits['bank_name'][ $i ]      = $bank_deposit['bank_name'];
+				$bank_deposits['sort_code'][ $i ]      = $bank_deposit['sort_code'];
+				$bank_deposits['iban'][ $i ]           = $bank_deposit['iban'];
+				$bank_deposits['swift'][ $i ]          = $bank_deposit['swift'];
+				$bank_deposits['enable'][ $i ]         = $bank_deposit['enable'];
+				$i++;
+			}
+			$settings['wp_travel_bank_deposits'] = $bank_deposits;
+
+		}
+
 		if ( isset( $settings_data['global_tab_settings'] ) && is_array( $settings_data['global_tab_settings'] ) ) {
 
 			$global_tabs = array();
@@ -152,6 +242,51 @@ class WP_Travel_Helpers_Settings {
 				$global_tabs[ $tab_key ]['show_in_menu'] = $global_tab['show_in_menu'];
 			}
 			$settings['global_tab_settings'] = $global_tabs;
+		}
+		if ( isset( $settings_data['sorted_gateways'] ) && is_array( $settings_data['sorted_gateways'] ) ) {
+
+			$sorted_gateways = array();
+			foreach ( $settings_data['sorted_gateways'] as  $gateway ) {
+				$sorted_gateways[] = $gateway['key']; // quick fix.
+				// $sorted_gateways[ $key ]        = $gateway['label'];
+			}
+			$settings['sorted_gateways'] = $sorted_gateways;
+		}
+
+		// Facts
+		if ( isset( $settings_data['wp_travel_trip_facts_settings'] ) && is_array( $settings_data['wp_travel_trip_facts_settings'] ) ) {
+
+			$facts_settings = array();
+			foreach ( $settings_data['wp_travel_trip_facts_settings'] as $index => $fact ) {
+				$name = $fact['name'];
+				$type = $fact['type'];
+				$options = $fact['options'];
+				if ( ! is_array( $options ) ) {
+					$options = explode( ',', $options );
+				}
+				$icon = $fact['icon'];
+				$key = isset( $fact['key'] ) && ! empty( $fact['key'] ) ? $fact['key'] : $index;
+
+				$facts_settings[ $key ] = array(
+					'name' => $name,
+					'type' => $type,
+					'options' => $options,
+					'icon' => $icon,
+				);
+			}
+			$settings['wp_travel_trip_facts_settings'] = $facts_settings;
+		}
+		if ( is_array( $facts ) && count( $facts ) > 0 ) {
+			foreach ( $facts as $key => $fact ) {
+				$new_fact       = array(
+					'key'     => $key,
+					'name'    => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'    => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options' => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'    => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+				);
+				$mapped_facts[] = $new_fact;
+			}
 		}
 
 		// Email Templates
@@ -209,8 +344,7 @@ class WP_Travel_Helpers_Settings {
 			$settings['wp_travel_bank_deposits'] = array();
 		}
 
-		// @since 1.0.5 Used this filter below.
-		$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
+		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(

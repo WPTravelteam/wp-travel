@@ -5,8 +5,9 @@ import { PanelBody, PanelRow, ToggleControl, TextControl, RadioControl } from '@
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import {alignJustify } from '@wordpress/icons';
+import { ReactSortable } from 'react-sortablejs';
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
@@ -32,50 +33,66 @@ export default () => {
             global_tab_settings: [..._allTabs]
         })
     }
+    const SortTabs = ( sortedPricing) => {
+        updateSettings({
+            ...allData, // allData
+            global_tab_settings: sortedPricing
+        })
+    }
 
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
-        <h2>{ __( 'Trip Settings', 'wp-travel' ) }</h2>
+        <h2>{ __( 'Global Tabs Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            {applyFilters( 'wp_travel_custom_global_tabs', [] ) }
+            {applyFilters( 'wp_travel_custom_global_tabs', [], allData ) }
 
-            {global_tab_settings.map(function (tab, tabIndex) {
-                return <PanelBody
-                    // icon= {alignJustify}
-                    title={tab.label ? tab.label : tab.default_label }
-                    initialOpen={false}
+            <div className="wp-travel-block-section wp-travel-block-sortable">
+                <ReactSortable
+                    list={global_tab_settings}
+                    setList={sorted => SortTabs(sorted)}
+                    handle=".settings-general .components-panel__icon"
                 >
-                    <PanelRow>
-                        <label>{__('Default Tab Title', 'wp-travel')}</label>
-                        <TextControl
-                            value={tab.default_label}
-                            disabled={true}
-                        />
-                    </PanelRow>
-                    <PanelRow>
-                        <label>{__('Custom Tab Title', 'wp-travel')}</label>
-                        <TextControl
-                            value={tab.label}
-                            placeholder={tab.default_label }
-                            onChange={ 
-                                (value) => { 
-                                    updateTabOption( 'label', value, tabIndex ) 
-                                }
-                            }
-                        />
-                    </PanelRow>
+                    {global_tab_settings.map(function (tab, tabIndex) {
+                        return <div className="wp-travel-block-section">
+                                <PanelBody
+                                    icon= {alignJustify}
+                                    title={tab.label ? tab.label : tab.default_label }
+                                    initialOpen={false}
+                                >
+                                <PanelRow>
+                                    <label>{__('Default Tab Title', 'wp-travel')}</label>
+                                    <TextControl
+                                        value={tab.default_label}
+                                        disabled={true}
+                                    />
+                                </PanelRow>
+                                <PanelRow>
+                                    <label>{__('Custom Tab Title', 'wp-travel')}</label>
+                                    <TextControl
+                                        value={tab.label}
+                                        placeholder={tab.default_label }
+                                        onChange={ 
+                                            (value) => { 
+                                                updateTabOption( 'label', value, tabIndex ) 
+                                            }
+                                        }
+                                    />
+                                </PanelRow>
 
-                    <PanelRow>
-                        <label>{__('Display', 'wp-travel')}</label>
-                        <ToggleControl
-                            checked={tab.show_in_menu == 'yes'}
-                            onChange={
-                                (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' ? 'no' : 'yes', tabIndex)
-                            }
-                        />
-                    </PanelRow>
+                                <PanelRow>
+                                    <label>{__('Display', 'wp-travel')}</label>
+                                        <ToggleControl
+                                            checked={tab.show_in_menu == 'yes'}
+                                            onChange={
+                                                (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' ? 'no' : 'yes', tabIndex)
+                                            }
+                                        />
+                                    </PanelRow>
 
-                </PanelBody>
-            })}
+                                </PanelBody>
+                        </div>
+                    })}
+                </ReactSortable>
+            </div>
           
             {applyFilters( 'wp_travel_tab_content_after_tabs', [] )}
         </ErrorBoundary>

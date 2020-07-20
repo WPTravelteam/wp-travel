@@ -54,8 +54,8 @@ function wp_travel_settings_default_fields() {
 
 	// Payment client Defaults.
 	$payment_client_email_defaults = array(
-		'client_subject'      => __( 'Payment Recieved', 'wp-travel' ),
-		'client_title'        => __( 'Payment Recieved', 'wp-travel' ),
+		'client_subject'      => __( 'Payment Received', 'wp-travel' ),
+		'client_title'        => __( 'Payment Received', 'wp-travel' ),
 		'client_header_color' => '',
 		'email_content'       => wp_travel_payment_client_default_email_content(),
 		'from_email'          => get_option( 'admin_email' ),
@@ -134,6 +134,18 @@ function wp_travel_settings_default_fields() {
 		// Debug Settings field.
 		'wt_test_mode'                            => 'yes',
 		'wt_test_email'                           => '',
+
+		/**
+		 * Load Optimized assets.
+		 * 
+		 * @since 4.0.6
+		 */
+		'wt_load_optimized_script' => 'no',
+		
+		/**
+		 * @since 4.0.7
+		 */
+		'calender_view' => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -3265,6 +3277,16 @@ function wp_travel_get_cart_pricing( $cart_id ) {
 }
 
 /**
+ * @since 4.0.6
+ */
+if ( ! function_exists( 'wp_travel_get_trip_pricings' ) ) :
+	function wp_travel_get_trip_pricings( $trip_id ) {
+		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+		return ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+	}
+endif;
+
+/**
  * Get Pricing Options.
  *
  * @since 4.0.0
@@ -3278,8 +3300,8 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 			}
 			$trip_id = $post->ID;
 		}
-		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		$trip_pricings = ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
+
+		$trip_pricings = wp_travel_get_trip_pricings( $trip_id );
 
 		$dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
 		$trip_dates = ! is_wp_error( $dates_data ) && 'WP_TRAVEL_TRIP_DATES' === $dates_data['code'] ? $dates_data['dates'] : array(); // All the trip related dates;
@@ -3818,4 +3840,14 @@ if ( ! function_exists( 'wp_travel_comments' ) ) {
 			)
 		);
 	}
+}
+
+/**
+ * Checks if Load optimized Scripts Enabled.
+ * 
+ * @since 4.0.6
+ */
+function wp_travel_can_load_bundled_scripts() {
+	$settings = get_option( 'wp_travel_settings', array() );
+	return isset( $settings['wt_load_optimized_script'] ) && 'yes' === $settings['wt_load_optimized_script'];
 }

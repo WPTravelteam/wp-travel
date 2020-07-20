@@ -14,6 +14,7 @@ require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/lib/cart.php';
 
 // Helpers.
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/settings.php';
+require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/license.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/media.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/trip-pricing-categories-taxonomy.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/trip-extras.php';
@@ -27,6 +28,7 @@ require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/rest-api.php';
 
 // Ajax.
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/settings.php';
+require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/license.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-pricing-categories-taxonomy.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-extras.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-pricing-categories.php';

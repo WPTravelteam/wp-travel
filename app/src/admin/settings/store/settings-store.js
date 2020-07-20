@@ -38,6 +38,18 @@ const actions = {
             data,
         };
     },
+    addNewBankDetail(bankData) {
+        return {
+            type: 'ADD_NEW_BANK_DETAIL',
+            bankData
+        };
+    },
+    addNewFact(newData) {
+        return {
+            type: 'ADD_NEW_FACT',
+            newData
+        };
+    },
     getSettingsFromAPI(url) {
         return {
             type: 'FETCH_FROM_API',
@@ -75,6 +87,23 @@ registerStore('WPTravel/Admin', {
                     ...action.data,
                     has_state_changes:true
                 };
+            case 'ADD_NEW_BANK_DETAIL':
+                let addNewBank = [...state.wp_travel_bank_deposits,action.bankData];
+                
+                return {
+                    ...state,
+                    wp_travel_bank_deposits: addNewBank,
+                    has_state_changes:true
+                };
+            case 'ADD_NEW_FACT':
+                let addNewData = [...state.wp_travel_trip_facts_settings,action.newData];
+                
+                return {
+                    ...state,
+                    wp_travel_trip_facts_settings: addNewData,
+                    has_state_changes:true
+                };
+                
                 
         }
 

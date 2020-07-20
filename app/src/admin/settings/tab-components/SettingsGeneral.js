@@ -5,15 +5,13 @@ import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
-
-    const { updateSettings } = dispatch('WPTravel/Admin');
     const {
         wp_travel_switch_to_react, 
         currency, 
@@ -28,6 +26,8 @@ export default () => {
         checkout_page_id,
         dashboard_page_id,
         options } = allData;
+
+    const { updateSettings } = dispatch('WPTravel/Admin');
     
     // options
     let currencyOptions = [];
@@ -70,7 +70,7 @@ export default () => {
                     <label>{ __( 'Switch to V4', 'wp-travel' ) }</label>
                     <div className="wp-travel-field-value">
                         <ToggleControl
-                            // help={ __( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' ) }
+                            // help={ __( 'This option will switch your trip edit page layout to new layout.', 'wp-travel' ) }
                             checked={ switch_to_react == 'yes' }
                             onChange={ () => {
                                 updateSettings({
@@ -79,7 +79,7 @@ export default () => {
                                 })
                             } }
                         />
-                        <p className="description">{__( 'This options will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
+                        <p className="description">{__( 'This option will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
                     </div>
                 </PanelRow>
             }

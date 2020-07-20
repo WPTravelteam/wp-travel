@@ -1,12 +1,12 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import WPEditor from '../../fields/WPEditor';
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
@@ -49,7 +49,7 @@ export default () => {
                     <p className="description">{__( 'Email address to send email from.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-
+            {applyFilters( 'wp_travel_tab_content_before_booking_tamplate', [] )}
             <h3>{ __( 'Email Templates', 'wp-travel' ) }</h3>
 
 
@@ -75,7 +75,7 @@ const BookingEmailTemplates = () => {
         booking_admin_template_settings,
         booking_client_template_settings,
         } = allData;
-
+    // console.log(booking_admin_template_settings)
     let sendBookingEmailToAdmin = 'undefined' != typeof send_booking_email_to_admin ? send_booking_email_to_admin : 'no'
 
     const updateEmailData = ( storeName, storeKey, value) => { // storeName[storeKey] = value
@@ -101,7 +101,8 @@ const BookingEmailTemplates = () => {
                     <p className="description">{__( 'Enable or disable Email notification to admin.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-
+            
+            {applyFilters( 'wp_travel_utils_booking_notif', [] )}
 
             <PanelRow>
                 <label>{ __( 'Booking Email Subject', 'wp-travel' ) }</label>
@@ -128,7 +129,11 @@ const BookingEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ booking_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'booking_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -170,7 +175,11 @@ const BookingEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ booking_client_template_settings.client_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'booking_client_template_settings', 'client_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -233,7 +242,11 @@ const PaymentEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Payment Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ payment_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'payment_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -275,7 +288,11 @@ const PaymentEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Payment Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ payment_client_template_settings.client_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'payment_client_template_settings', 'client_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 
@@ -310,13 +327,6 @@ const EnquiryEmailTemplates = () => {
     return <>
       <PanelBody title={__( 'Enquiry Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
-            <PanelRow>
-                <label>{ __( 'To Emails', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    remaining
-                </div>
-            </PanelRow>
-
 
             <PanelRow>
                 <label>{ __( 'Enquiry Email Subject', 'wp-travel' ) }</label>
@@ -343,7 +353,11 @@ const EnquiryEmailTemplates = () => {
             <PanelRow>
                 <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    remaining
+                    <ColorPicker
+                        color={ enquiry_admin_template_settings.admin_header_color }
+                        onChangeComplete={ ( value ) => { updateEmailData( 'enquiry_admin_template_settings', 'admin_header_color', value.hex )} }
+                        disableAlpha
+                    />
                 </div>
             </PanelRow>
 

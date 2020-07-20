@@ -5,7 +5,7 @@ import { PanelRow, ToggleControl, TextareaControl } from '@wordpress/components'
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
-import ErrorBoundary from '../../error/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
@@ -88,8 +88,7 @@ export default () => {
                 </div>
             </PanelRow>
             
-        
-            {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}
+            {applyFilters( 'wp_travel_settings_tab_misc_options_fields', [] )}
         </ErrorBoundary>
     </div>
 }
