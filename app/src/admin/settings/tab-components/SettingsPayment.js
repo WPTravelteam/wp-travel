@@ -18,6 +18,10 @@ export default () => {
     const {
         partial_payment,
         minimum_partial_payout,
+        sorted_gateways,
+        trip_tax_enable,
+        trip_tax_price_inclusive,
+        trip_tax_percentage,
         options,
         total_payout_fields,
         } = allData;
@@ -34,12 +38,19 @@ export default () => {
 
         let _allPayouts = minimum_partial_payout;
 
-        value = remain_percent != 0 ? value : _allPayouts[_tabIndex] = value --;
+        value = remain_percent != 0 ? value : _allPayouts[_tabIndex] = --value;
         _allPayouts[_tabIndex] = value
 
         updateSettings({
             ...allData,
             minimum_partial_payout: [..._allPayouts]
+        })
+    }
+
+    const sortGateways = ( sortedPricing) => {
+        updateSettings({
+            ...allData, // allData
+            sorted_gateways: sortedPricing
         })
     }
 
