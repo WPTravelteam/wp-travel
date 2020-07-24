@@ -3,7 +3,7 @@ class WP_Travel_Helpers_Pricings {
 	protected static $table_name = 'wt_pricings';
 	public static function get_pricings( $trip_id = false, $date = false ) {
 		// if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
-		// 	return;
+		// return;
 		// }
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -50,7 +50,7 @@ class WP_Travel_Helpers_Pricings {
 			);
 			// $pricings = apply_filters( 'wp_travel_inventory_data', $inventory_data, $trip_id, '', $start_date );
 			// End Inventory.
-			
+
 			$pricings[ $index ]['categories'] = array();
 			$categories                       = WP_Travel_Helpers_Trip_Pricing_Categories::get_trip_pricing_categories( absint( $price->id ) );
 			if ( ! is_wp_error( $categories ) && 'WP_TRAVEL_TRIP_PRICING_CATEGORIES' === $categories['code'] ) {
