@@ -139,6 +139,23 @@
       .components-panel__body{
         border: 1px solid #e2e4e7;
       }
+      .components-tab-panel__tabs{
+        border: 0;
+        padding: 0 15px;
+        margin: 0 -15px;
+        .components-button{
+          display: inline-block;
+          width: unset;
+         box-shadow: none;
+         border: 0 !important;
+          &.active-tab{
+            background-color: #fff;
+          }
+        }
+      }
+      .components-tab-panel__tab-content{
+        border: 0;
+      }
       .wp-travel-ui{
         height: 100%;
         border: 0;
