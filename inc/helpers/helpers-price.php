@@ -1148,7 +1148,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 	else : // New way to grab price @since 4.0.0
 		// return 100;
 		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		if ( ! empty( $pricing_id ) && ! empty( $category_id ) ) {
+		if ( ! empty( $pricing_id ) && ! empty( $category_id ) && is_array( $pricings_data ) ) { // Quick Fix here. Pricing data may be WP Error object.
 
 			$pricings   = array_filter(
 				$pricings_data['pricings'],
