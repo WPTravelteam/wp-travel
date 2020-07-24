@@ -411,13 +411,13 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       txTotal += totals.extrasTotal;
     });
     if (cartSubtotalContainer) cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal);
+    var fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]');
 
     if (e.detail && e.detail.coupon || wp_travel_cart.cart.coupon && wp_travel_cart.cart.coupon.coupon_id) {
       var coupon = e.detail && e.detail.coupon || wp_travel_cart.cart.coupon;
 
       var _cValue = coupon.value && parseInt(coupon.value) || 0;
 
-      var fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]');
       fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal);
 
       if (cartDiscountContainer) {
@@ -426,6 +426,11 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       }
 
       cartTotal = coupon.type == 'fixed' ? cartTotal - _cValue : cartTotal * (100 - _cValue) / 100;
+    }
+
+    if (wp_travel_cart.cart.total.discount <= 0) {
+      fullTotalContainer.innerHTML = '';
+      cartDiscountContainer.closest('[data-wpt-extra-field]').style.display = 'none';
     }
 
     if (wp_travel_cart.cart.tax) {
@@ -454,12 +459,6 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
     var cartItemsCountContainer = e.target.querySelector('[data-wpt-cart-item-count]');
     if (cartItemsCountContainer) cartItemsCountContainer.innerHTML = _cartItems.length;
-    console.debug({
-      cartTotal: cartTotal,
-      tripTotalWOExtras: tripTotalWOExtras,
-      txTotal: txTotal,
-      tripTotalPartialWOExtras: tripTotalPartialWOExtras
-    });
   });
   cartItems && cartItems.forEach(function (ci) {
     var edit = ci.querySelector('a.edit');
@@ -479,6 +478,14 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
           if (result.success && result.data.code == 'WP_TRAVEL_REMOVED_CART_ITEM') {
             if (result.data.cart && result.data.cart.length <= 0) {
               window.location.reload();
+            }
+
+            wp_travel_cart.cart = result.data.cart;
+            var total = result.data.cart.total;
+
+            if (wp_travel.payment) {
+              wp_travel.payment.trip_price = parseFloat(total.total);
+              wp_travel.payment.payment_amount = parseFloat(total.total_partial);
             }
 
             ci.remove();

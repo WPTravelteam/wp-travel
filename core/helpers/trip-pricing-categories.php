@@ -254,7 +254,9 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 	}
 
 	private static function get_converted_price( $price ) {
-		$price = apply_filters( 'wp_travel_trip_price_conversion', $price );
+		if ( ! is_admin() ) {
+			$price = apply_filters( 'wp_travel_trip_price_conversion', $price );
+		}
 		return self::get_formatted_price( $price );
 	}
 
