@@ -238,7 +238,7 @@ Release Date: 28th July, 2020
 
 Fixes:
 * Fixes Structural Issue on tabs due to previous release of WP Travel 4.0.6 when bundled scripts is disabled.
-* Adds missing Strings Internalization.
+* Adds missing Strings for Internationalization.
 * Fixes crash issue while editing Trips on Trip Edit Page.
 * Minor Fixes.
 
