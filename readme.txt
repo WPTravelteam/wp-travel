@@ -152,7 +152,7 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 
 
 = Dedicated Support and Documentation =
-We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=support&utm_medium=forum&utm_campaign=WP%20Plugin).
+We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](https://wptravel.io/contact/).
 
 Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
 
@@ -238,7 +238,7 @@ Release Date: 28th July, 2020
 
 Fixes:
 * Fixes Structural Issue on tabs due to previous release of WP Travel 4.0.6 when bundled scripts is disabled.
-* Adds missing Strings for Internationalization.
+* Adds missing Strings Internalization.
 * Fixes crash issue while editing Trips on Trip Edit Page.
 * Minor Fixes.
 
