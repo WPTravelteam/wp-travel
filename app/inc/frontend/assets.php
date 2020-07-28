@@ -8,7 +8,7 @@ class WP_Travel_Frontend_Assets {
 		if ( is_singular( 'itineraries' ) ) {
 			global $post;
 			$deps                   = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			if ( ! wp_travel_can_load_bundled_scripts() ) {
 				$deps['dependencies'][] = 'jquery-datepicker-lib';
 			} else {
 				$deps['dependencies'][] = 'wp-travel-frontend-bundle';

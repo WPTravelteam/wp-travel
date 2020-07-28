@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.4.2
 Requires PHP: 5.5
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -232,6 +232,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.0.7 =
+Release Date: 28th July, 2020
+
+Fixes:
+* Fixes Structural Issue on tabs due to previous release of WP Travel 4.0.6 when bundled scripts is disabled.
+* Adds missing Strings Internalization.
+* Fixes crash issue while adding new Trip on Trip Edit Page.
+* Minor Fixes.
 
 = 4.0.6 =
 Release Date: 9th July, 2020

@@ -169,8 +169,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel, $settings );
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
+			
 			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
-
 			if ( wp_travel_can_load_bundled_scripts() ) {
 				wp_enqueue_script( 'wp-travel-frontend-bundle' );
 			}
