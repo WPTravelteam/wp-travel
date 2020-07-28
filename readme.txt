@@ -187,12 +187,12 @@ For setting up your site using the WP Travel plugin and extensions please refer 
 
 = There is something cool you could add... =
 
-Nice, send us a request on [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=suggestions&utm_campaign=WP%20Plugin "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
+Nice, send us a request on [Support page](https://wptravel.io/contact/ "WEN Solutions Support") and let us know. We are always looking for ways to improve our plugins.
 
 
 = Where can I get support? =
 
- If you have any queries regarding the plugin then you can ask for help in [Support page](http://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin)
+ If you have any queries regarding the plugin then you can ask for help in [Support page](https://wptravel.io/contact/)
 
 
 = Will WP Travel work with my theme? =
@@ -209,11 +209,11 @@ WP Travel plugin do have a number of payment gateways to make the payment proces
 
 = Where can I request new features, WP Travel themes and extensions? =
 
-You can do that by filling up the form in our [support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+You can do that by filling up the form in our [support page](https://wptravel.io/contact/).
 
 = Where can I get support or talk to other users? =
 
-If you have any queries regarding the plugin and extensions then you can ask for help in [Support page](https://wptravel.io/support-forum/forum/wp-travel/?utm_source=FAQ&utm_medium=support&utm_campaign=WP%20Plugin).
+If you have any queries regarding the plugin and extensions then you can ask for help in [Support page](https://wptravel.io/contact/).
 
 
 == Screenshots ==
@@ -239,7 +239,7 @@ Release Date: 28th July, 2020
 Fixes:
 * Fixes Structural Issue on tabs due to previous release of WP Travel 4.0.6 when bundled scripts is disabled.
 * Adds missing Strings Internalization.
-* Fixes crash issue while adding new Trip on Trip Edit Page.
+* Fixes crash issue while editing Trips on Trip Edit Page.
 * Minor Fixes.
 
 = 4.0.6 =

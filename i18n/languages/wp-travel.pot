@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.0.6\n"
+"Project-Id-Version: WP Travel 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 13:09:52+00:00\n"
+"POT-Creation-Date: 2020-07-28 11:26:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1290,7 +1290,7 @@ msgid "ID"
 msgstr ""
 
 #: inc/admin/class-dashboard-widgets.php:50 inc/booking-functions.php:517
-#: inc/trip-enquiries.php:226
+#: inc/trip-enquiries.php:227
 msgid "Contact Name"
 msgstr ""
 
@@ -2361,7 +2361,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:1045
+#: inc/helpers/helpers-price.php:1069
 msgid "Partial Payment"
 msgstr ""
 
@@ -2550,7 +2550,7 @@ msgid "By contacting us, you agree to our "
 msgstr ""
 
 #: inc/booking-functions.php:51 inc/form-fields.php:339
-#: inc/trip-enquiries.php:126
+#: inc/trip-enquiries.php:128
 msgid "Privacy Policy"
 msgstr ""
 
@@ -8404,7 +8404,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:1046
+#: inc/helpers/helpers-price.php:1070
 msgid "Full Payment"
 msgstr ""
 
@@ -8951,7 +8951,7 @@ msgstr ""
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1425 inc/trip-enquiries.php:454
+#: inc/template-functions.php:1425 inc/trip-enquiries.php:455
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
@@ -8999,31 +8999,31 @@ msgstr ""
 msgid "PROCESSING..."
 msgstr ""
 
-#: inc/trip-enquiries.php:107
+#: inc/trip-enquiries.php:109
 msgid "Trips"
 msgstr ""
 
-#: inc/trip-enquiries.php:227
+#: inc/trip-enquiries.php:228
 msgid "Contact Email"
 msgstr ""
 
-#: inc/trip-enquiries.php:228
+#: inc/trip-enquiries.php:229
 msgid "Enquiry Date"
 msgstr ""
 
-#: inc/trip-enquiries.php:332
+#: inc/trip-enquiries.php:333
 msgid "Nonce Verification Failed !!"
 msgstr ""
 
-#: inc/trip-enquiries.php:357
+#: inc/trip-enquiries.php:358
 msgid "Invalid Post Type"
 msgstr ""
 
-#: inc/trip-enquiries.php:454
+#: inc/trip-enquiries.php:455
 msgid "Your Enquiery has been added but the email could not be sent."
 msgstr ""
 
-#: inc/trip-enquiries.php:464
+#: inc/trip-enquiries.php:465
 msgid "Enquiry sent succesfully !!"
 msgstr ""
 
@@ -9647,7 +9647,7 @@ msgctxt "by author"
 msgid "by %s"
 msgstr ""
 
-#: inc/booking-functions.php:516 inc/trip-enquiries.php:225
+#: inc/booking-functions.php:516 inc/trip-enquiries.php:226
 msgctxt "column name"
 msgid "Title"
 msgstr ""
@@ -9842,6 +9842,11 @@ msgstr ""
 #: inc/class-taxonomies.php:88
 msgctxt "singular name"
 msgid "Activity"
+msgstr ""
+
+#: inc/trip-enquiries.php:479
+msgctxt "Trip Enquiry Form Title"
+msgid "Enquiry: %s"
 msgstr ""
 
 #: upgrade/update-137.php:48 wp-travel.php:489
