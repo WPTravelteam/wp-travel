@@ -234,7 +234,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.0.7 =
-Release Date: 28th July, 2020
+Release Date: 29th July, 2020
 
 Fixes:
 * Fixes Structural Issue on tabs due to previous release of WP Travel 4.0.6 when bundled scripts is disabled.
