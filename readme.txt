@@ -237,7 +237,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 30th July, 2020
 
 Fixes:
-* Fixes trip edit page crash while Adding New Trips.
+* Fixes trip edit page crash while adding new Trips.
+* Fixes array_values warning while adding new Trips.
 
 = 4.0.7 =
 Release Date: 29th July, 2020
