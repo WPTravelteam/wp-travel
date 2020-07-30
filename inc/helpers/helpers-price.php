@@ -932,6 +932,30 @@ function wp_travel_get_formated_price( $price, $format = true, $number_of_decima
 }
 
 /**
+ * Supports the multiple currency plugin for converting price according to the selected currency.
+ * This function must be called just before the displaying the price.
+ * The main purpose of this function is to reduce the number of hooks used by the multiple currency plugin
+ * to retain the consistency in code and better enhanced debugging process that can occured due to using multiple hooks.
+ *
+ * @param int|float $price Unformatted Price that needs to be converted.
+ * @param bool      $convert [Optional] Default is true, pass false if the price has been already been converted,
+ *                                      so it won't reconvert it the converted price.
+ *
+ * @since WP-Travel 4.0.7
+ * @author Garvit Shrestha
+ */
+function wp_travel_convert_price( $price, $convert = true ) {
+
+	if ( ! $convert ) {
+		return $price;
+	}
+
+	return apply_filters( 'wp_travel_convert_price', $price );
+}
+
+
+
+/**
  * Currency position with price
  *
  * @param Number  $price         Price.
@@ -943,7 +967,7 @@ function wp_travel_get_formated_price( $price, $format = true, $number_of_decima
  *
  * @return Mixed
  */
-function wp_travel_get_formated_price_currency( $price, $regular_price = false, $price_key = '', $post_id = null ) {
+function wp_travel_get_formated_price_currency( float $price, $regular_price = false, $price_key = '', $post_id = null ) {
 	$settings          = wp_travel_get_settings();
 	$currency_position = isset( $settings['currency_position'] ) ? $settings['currency_position'] : 'left';
 

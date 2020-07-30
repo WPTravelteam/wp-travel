@@ -1005,6 +1005,9 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	if ( ! is_admin() ) {
 		return false;
 	}
+	if ( ! function_exists( 'get_current_screen' ) ) {
+		require_once(ABSPATH . 'wp-admin/includes/screen.php');
+	}
 	$screen            = get_current_screen();
 	$wp_travel_pages[] = array( 'itinerary-booking_page_settings' );
 	if ( ! empty( $pages ) ) {
