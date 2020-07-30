@@ -79,9 +79,9 @@ const WPTravelTripOptionsItineraryContent = () => {
             <hr/>
             <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__('Itinerary')}</h3>
-                {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__('+ Add Itinerary')}</Button></PanelRow> }
+                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__('+ Add Itinerary')}</Button></PanelRow> }
             </div>
-            {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 0 ?
+            {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
                 <div className="wp-travel-sortable-component">
                     <ReactSortable
                         list={itineraries}
