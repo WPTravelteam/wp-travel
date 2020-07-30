@@ -239,6 +239,7 @@ Release Date: 30th July, 2020
 Fixes:
 * Fixes trip edit page crash while adding new Trips.
 * Fixes array_values warning while adding new Trips.
+* Fixes undefined index warnings in upload file.
 
 = 4.0.7 =
 Release Date: 29th July, 2020
