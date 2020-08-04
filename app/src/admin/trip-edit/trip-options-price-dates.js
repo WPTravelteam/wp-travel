@@ -191,7 +191,7 @@ const WPTravelTripOptionsPricings = () => {
                                 </PanelRow>
                                 </>
                             }
-                            {applyFilters('wp_travel_after_pricings_fields', [], priceIndex)}
+                            {applyFilters('wp_travel_after_pricings_fields', [], priceIndex, allData)}
                             <hr />
                             <PanelRow className="wp-travel-action-section has-right-padding">
                                 <span></span><Button isDefault onClick={() => {
