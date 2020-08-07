@@ -5422,7 +5422,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 @media (max-width: 991px) {
   .checkout-page-wrap {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }
 @media (min-width: 992px) {
@@ -5906,6 +5906,21 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #wp-travel-tab-wrapper {
   position: relative;
   z-index: 999;
+}
+
+.wp-travel-payment-field .wp-travel-text-info {
+  width: 100% !important;
+}
+
+#wp-travel-payment-bank-detail {
+  width: 100%;
+  display: block;
+  overflow: auto;
+}
+@media (max-width: 767px) {
+  #wp-travel-payment-bank-detail table {
+    font-size: 12px;
+  }
 }
 
 /*# sourceMappingURL=wp-travel-front-end.css.map */
