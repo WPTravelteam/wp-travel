@@ -6355,7 +6355,7 @@ $primaryColor: #3399ff;
         grid-gap: 30px;
     }
     @media(max-width: 991px){
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
 	}
 	.wp-travel-minicart{
 		@media(min-width: 992px){
@@ -6884,4 +6884,21 @@ $primaryColor: #3399ff;
 #wp-travel-tab-wrapper{
 	position: relative;
     z-index: 999;
+}
+
+.wp-travel-payment-field{
+	.wp-travel-text-info{
+		width: 100% !important;
+	}
+}
+
+#wp-travel-payment-bank-detail{
+	width: 100%;
+	display: block;
+	overflow: auto;
+	table{
+		@media(max-width: 767px){
+			font-size: 12px;
+		}
+	}
 }
