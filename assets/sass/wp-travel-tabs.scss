@@ -277,7 +277,6 @@ $alto: #ddd;
 			font-weight: 600;
 			color: #555;
 			position: relative;
-			border-radius: 2px 20px 0 0;
 			overflow: hidden;
 
 			&:focus {
@@ -379,6 +378,8 @@ $alto: #ddd;
 			border: 1px solid #ddd;
 			padding: 5px 15px;
 			background-color: #fff;
+			display: inline-block;
+			margin-right: .5em;
 
 			&:hover {
 				background: #0073aa;
