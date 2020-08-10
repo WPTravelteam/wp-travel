@@ -1,10 +1,11 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow,TextControl, ToggleControl, RadioControl, Notice, Button } from '@wordpress/components';
+import { PanelRow,TextControl, ToggleControl, RadioControl, Notice, Button, Spinner } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import apiFetch from '@wordpress/api-fetch';
+import { useEffect, useState } from '@wordpress/element';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
@@ -24,7 +25,10 @@ export default () => {
 
 addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
+    const [ licenseApiData, setLicenseApiData ] = useState([]);
+
     const {premium_addons_keys, premium_addons_data} = allData
+    console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
 
     const updateLicenseData = (key, value, index) => {
@@ -45,6 +49,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
     let LicenseFields = ( props  ) => {
         let license =   'undefined' != typeof props.addons ? props.addons : []
+
         return <>
             {
                 'undefined' != typeof license && 
@@ -59,25 +64,61 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                                 updateLicenseData( 'license_key', value, props.index ) 
                             }}
                         />
-                        <Button isDefault onClick={() => activateLicense(license)}>{ __( 'Activate', 'wp-travel' ) }</Button>
+                        {
+                            ('valid' == license.status && false !== license.license_data ) ?
+                                <Button isSecondary>{ __( 'Deactivate', 'wp-travel' ) }</Button>
+                                : <Button isSecondary onClick={() => activateLicense(license)}>{ __( 'Activate', 'wp-travel' ) }</Button>
+                        }
                         <p className="description">{__( `Enter license key for ${license.item_name} here.`, 'wp-travel' )}</p>
-
-                        
                     </PanelRow>
+                    <div className="license_status">
+                        {license.license_key && statusMsg(license)}
+                        {
+                            (license.license_key && license.license_data.expires) &&
+                        'lifetime' !== license.license_data.expires ? <p>{__( 'Expires In : ' + licenseExpiryDate(license.license_data.expires), 'wp-travel' )}</p>      : ''
+                        }
+                    </div>
+                    {console.log(licenseApiData)}
                 </>
             }
         </>
     }
 
-    const activateLicense = (license) => {
-        console.log(license)
-        apiFetch( { url: `${ajaxurl}?action=wp_travel_activate_license&_nonce=${_wp_travel._nonce}`, data:license, method:'post' } ).then( res => {
-            // updateRequestSending(false);
-            
-            if( res.success && "WP_TRAVEL_LICENSE_ACTIVATION" === res.data.code){
-                // updateStateChange(false)
-                // displaySavedMessage(true)
+    const licenseExpiryDate = (expiryDate) => {
+        var myDate = new Date(expiryDate)
+        return myDate
+    }
+
+    const statusMsg = ( licenseData ) => {
+        if ( '' !== licenseData ) {
+            if ( licenseData.status == 'valid' ) {
+                return <p className="howTo" style={{color:'green'}}>{ __( 'License Active', 'wp-travel' ) }<span className="dashicons dashicons-yes"></span></p>
             }
+            else if ( licenseData.status == 'invalid' ) {
+                return <p className="howTo" style={{color:'red'}}>{ __( 'License Invalid', 'wp-travel' ) }<span className="dashicons dashicons-no"></span></p>
+            }
+            else if ( licenseData.status == 'expired' ) {
+                return <p className="howTo" style={{color:'red'}}>{ __( 'License Expired', 'wp-travel' ) }<span className="dashicons dashicons-no"></span></p>
+            }
+            else if ( licenseData.status == 'inactive' ) {
+                return <p className="howTo" style={{color:'red'}}>{ __( 'License Inactive', 'wp-travel' ) }<span className="dashicons dashicons-no"></span></p>
+            }
+        }
+    }
+
+    const activateLicense = (license) => {
+        apiFetch( 
+            { 
+                url: `${ajaxurl}?action=wp_travel_activate_license&_nonce=${_wp_travel._nonce}`,
+                data: {
+                    _option_prefix: license.option_prefix,
+                    item_name: license.item_name,
+                    wp_travel_mailchimp_key: license.license_key
+                },
+                method:'post' 
+            } 
+            ).then( res => {
+                setLicenseApiData(res);
         } );
     }
 

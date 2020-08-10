@@ -64,6 +64,7 @@ class WP_Travel_Helpers_License {
 				'license_key' => $license_key,
 				'status' => $status,
 				'item_name' => $premium_addon['item_name'],
+				'option_prefix' => $filtered_key . '_',
 			);
 
 			$premium_addons_keys[] = $filtered_key;
@@ -101,6 +102,8 @@ class WP_Travel_Helpers_License {
 		delete_transient( $license_option_prefix . 'data' );
 
 		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';
+		error_log( print_r( 'License : ' . $license_key , true ) );
+		
 
 		// data to send in our API request.
 		$api_params = array(
