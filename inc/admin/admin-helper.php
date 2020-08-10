@@ -641,12 +641,15 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			$mode       = wp_travel_get_payment_mode();
 			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
 			$label_key  = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
-
+			
+			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 			if ( ! $label_key ) {
 				$label_key          = 'N/A';
-				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
-				if ( ! $is_partial_enabled ) {
-					$label_key = 'full';
+				if ( 'booking_with_payment' == $booking_option ) {
+					$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
+					if ( ! $is_partial_enabled ) {
+						$label_key = 'full';
+					}
 				}
 				update_post_meta( $payment_id, 'wp_travel_payment_mode', $label_key );
 			}
