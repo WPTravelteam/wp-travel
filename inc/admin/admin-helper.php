@@ -223,79 +223,81 @@ function wp_travel_marketplace_page() {
 
 				<div id="aside-wrap" class="single-module-side">
 
-					<div id="wp_travel_support_block_id" class="postbox ">
-						<button type="button" class="handlediv" aria-expanded="true">
-							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-							<span class="toggle-indicator-acc" aria-hidden="true"></span>
-						</button>
-						<h2 class="hndle ui-sortable-handle">
-							<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-						</h2>
-						<div class="inside">
+		<div id="wp_travel_support_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator-acc" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
 
-							<div class="thumbnail">
-								<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
-									<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
-									<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
-							</div>
+			<div class="thumbnail">
+				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
+					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
+					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
+			</div>
 
-						</div>
-					</div>
+			</div>
+		</div>
 
-					<div id="wp_travel_doc_block_id" class="postbox ">
-						<button type="button" class="handlediv" aria-expanded="true">
-							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-							<span class="toggle-indicator" aria-hidden="true"></span>
-						</button>
-						<h2 class="hndle ui-sortable-handle">
-							<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-						</h2>
-						<div class="inside">
+		<div id="wp_travel_doc_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
 
-							<div class="thumbnail">
-								<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
-									<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-									<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
-							</div>
-
-						</div>
-					</div>
-
-					<div id="wp_travel_review_block_id" class="postbox ">
-						<button type="button" class="handlediv" aria-expanded="true">
-							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
-							<span class="toggle-indicator" aria-hidden="true"></span>
-						</button>
-						<h2 class="hndle ui-sortable-handle">
-							<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
-						</h2>
-						<div class="inside">
-							<div class="thumbnail">
-								<p class="text-center">
-									<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-									<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-									<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-									<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-									<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-								</p>
-								<h5>
-								<?php
-								esc_html_e(
-									'"The plugin is very intuitive and fresh. The layout fits well into theme with flexibility to different shortcodes. Its great plugin for travel or tour agent websites."',
-									'wp-travel'
-								)
-								?>
-									</h5>
-								<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ); ?></a></strong></span>
-
-							</div>
-							<div class="thumbnail last">
-								<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-								<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
-							</div>
-						</div>
-					</div>
+				<div class="thumbnail">
+					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
+						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
+						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
 				</div>
+
+			</div>
+		</div>
+
+		<div id="wp_travel_review_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
+				<div class="thumbnail">
+					<p class="text-center">
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					</p>
+					<h5>
+					<?php
+					esc_html_e(
+						'"The plugin is very intuitive and fresh.
+The layout fits well into theme with flexibility to different shortcodes.
+Its great plugin for travel or tour agent websites."',
+						'wp-travel'
+					)
+					?>
+						</h5>
+					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ); ?></a></strong></span>
+
+				</div>
+				<div class="thumbnail last">
+					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
+					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
 </div>
@@ -418,6 +420,7 @@ function wp_travel_get_booking_count( $trip_id ) {
 			$booking_count = $results->booking_count;
 		}
 		// set_site_transient( "_transient_wt_booking_count_{$trip_id}", $booking_count );
+
 		// Post meta only for sorting. // @since 3.0.4 it is also used for count.
 		update_post_meta( $trip_id, 'wp_travel_booking_count', $booking_count );
 	}
@@ -638,12 +641,15 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			$mode       = wp_travel_get_payment_mode();
 			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
 			$label_key  = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
-
+			
+			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 			if ( ! $label_key ) {
 				$label_key          = 'N/A';
-				$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
-				if ( ! $is_partial_enabled ) {
-					$label_key = 'full';
+				if ( 'booking_with_payment' == $booking_option ) {
+					$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
+					if ( ! $is_partial_enabled ) {
+						$label_key = 'full';
+					}
 				}
 				update_post_meta( $payment_id, 'wp_travel_payment_mode', $label_key );
 			}
@@ -1005,16 +1011,12 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	if ( ! is_admin() ) {
 		return false;
 	}
-	if ( ! function_exists( 'get_current_screen' ) ) {
-		require_once(ABSPATH . 'wp-admin/includes/screen.php');
-	}
 	$screen            = get_current_screen();
 	$wp_travel_pages[] = array( 'itinerary-booking_page_settings' );
 	if ( ! empty( $pages ) ) {
 		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
 				$settings_allowed_screens[] = 'itinerary-booking_page_settings';
-				$settings_allowed_screens[] = 'itinerary-booking_page_settings2';
 				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
 					return true;
 				}
@@ -1113,7 +1115,7 @@ function wp_travel_is_plugin_active( $plugin_name ) {
 	$plugin_name  = str_replace( ' ', '_', $plugin_lower );
 
 	$settings          = wp_travel_get_settings();
-	$is_plugin_enabled = isset( $settings[ 'show_' . $plugin_name ] ) && ! empty( $settings[ 'show_' . $plugin_name ] ) ? $settings[ 'show_' . $plugin_name ] : 'yes';
+	$is_plugin_enabled = isset( $settings['show_' . $plugin_name ] ) && ! empty( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
 	$does_class_exists = class_exists( $plugin_class ) || class_exists( $plugin_class . '_Core' ) ? true : false;
 	if ( ! $does_class_exists || 'yes' !== $is_plugin_enabled ) {
 		return false;
