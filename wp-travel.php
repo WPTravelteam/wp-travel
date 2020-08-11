@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 4.0.8
+ * Version: 4.0.9
  * Author: WEN Solutions
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 5.4.1
@@ -36,7 +36,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.0.8';
+		public $version = '4.0.9';
 
 		/**
 		 * The single instance of the class.

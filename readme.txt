@@ -233,6 +233,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.0.9 =
+Release Date: 11th August, 2020
+
+Fixes:
+* Compatibility tested upto WordPress 5.5.
+* Fixes Layout issues in WordPress 5.5. Admin trip edit page and Frontend pages like checkout page, cart pages layout incompatibily issue fixes. 
+* Payment status shows pending even if we made booking only. 
+
 = 4.0.8 =
 Release Date: 31th July, 2020
 
