@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.4.2
 Requires PHP: 5.5
-Stable tag: 4.0.8
+Stable tag: 4.0.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
+* [Travel Store](https://wensolutions.com/theme-demo/travelstore/&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
@@ -73,7 +74,6 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
 * [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
 * [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
-* [Travel Store](https://wensolutions.com/theme-demo/travelstore/&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
