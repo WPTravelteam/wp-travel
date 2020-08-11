@@ -73,6 +73,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
 * [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
 * [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
+* [Travel Store](https://wensolutions.com/theme-demo/travelstore/&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
@@ -237,9 +238,10 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 11th August, 2020
 
 Fixes:
-* Compatibility tested upto WordPress 5.5.
-* Fixes Layout issues in WordPress 5.5. Admin trip edit page and Frontend pages like checkout page, cart pages layout incompatibily issue fixes. 
-* Payment status shows pending even if we made booking only. 
+* Compatibility tested up to WordPress 5.5.
+* Fixes Layout issues in WordPress 5.5. Admin trip edit page and Front end pages like checkout page, cart pages layout incompatibility issue fixes.
+* Payment status shows pending even if we made booking only.
+* Fixes undefined index warnings in single trip page and upload file.
 
 = 4.0.8 =
 Release Date: 31th July, 2020

@@ -14,7 +14,7 @@ class WP_Travel_Helpers_Media {
 			$upload_dir           = wp_get_upload_dir();
 			$re                   = '/^(.*\/)+(.*\.+.+\w)/m';
 			$attachment_file      = isset( $attachment_meta_data['file'] ) ? $attachment_meta_data['file'] : '';
-			preg_match_all( $re, $attachment_meta_data['file'], $matches, PREG_SET_ORDER, 0 );
+			preg_match_all( $re, $attachment_file, $matches, PREG_SET_ORDER, 0 );
 			$subfolder            = ! empty( $matches[0][1] ) ? $matches[0][1] : '';
 			$full_attachment      = trailingslashit( $upload_dir['baseurl'] ) . $attachment_file;
 			$attachment['id']     = $id;

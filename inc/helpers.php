@@ -3481,13 +3481,13 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 							}
 						}
 					} else {
-						$categories[ $pricing_id ]['type']         = $pricing_option['type'];
-						$categories[ $pricing_id ]['custom_label'] = $pricing_option['custom_label'];
-						$categories[ $pricing_id ]['price_per']    = $pricing_option['price_per'];
+						$categories[ $pricing_id ]['type']         = isset( $pricing_option['type'] ) ? $pricing_option['type'] : '';
+						$categories[ $pricing_id ]['custom_label'] = isset( $pricing_option['custom_label'] ) ? $pricing_option['custom_label'] : '';
+						$categories[ $pricing_id ]['price_per']    = isset( $pricing_option['price_per'] ) ? $pricing_option['price_per'] : '';
 						// $categories[ $pricing_id ]['sale_price']  = $pricing_option['sale_price'];
 						$categories[ $pricing_id ]['enable_sale'] = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
-						$categories[ $pricing_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, '', $pricing_option['price_key'] );
-						$categories[ $pricing_id ]['price']       = $categories[ $pricing_id ]['enable_sale'] === 'yes' ? $pricing_option['sale_price'] : $pricing_option['price'];
+						$categories[ $pricing_id ]['regular']     = wp_travel_get_price( $trip_id, true, $pricing_id, '', @$pricing_option['price_key'] );
+						$categories[ $pricing_id ]['price']       = $categories[ $pricing_id ]['enable_sale'] === 'yes' ? @$pricing_option['sale_price'] : @$pricing_option['price'];
 					}
 
 					$inventory_data = array(
