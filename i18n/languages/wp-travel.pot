@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.0.8\n"
+"Project-Id-Version: WP Travel 4.0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-30 11:17:07+00:00\n"
+"POT-Creation-Date: 2020-08-11 10:42:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -477,7 +477,7 @@ msgid "By upgrading to Pro, you can add your downloads in all of your trips !"
 msgstr ""
 
 #: inc/admin/admin-helper.php:317 inc/admin/admin-helper.php:335
-#: inc/admin/admin-helper.php:988 inc/admin/admin-helper.php:1050
+#: inc/admin/admin-helper.php:991 inc/admin/admin-helper.php:1053
 #: inc/admin/class-admin-metaboxes.php:370
 #: inc/admin/class-admin-pointers.php:382
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:22
@@ -560,13 +560,13 @@ msgstr ""
 msgid "Payment Status"
 msgstr ""
 
-#: inc/admin/admin-helper.php:846
+#: inc/admin/admin-helper.php:849
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:41
 #: inc/class-post-types.php:240 inc/helpers.php:2760
 msgid "Trip Extras"
 msgstr ""
 
-#: inc/admin/admin-helper.php:868
+#: inc/admin/admin-helper.php:871
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:714
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:796
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1567
@@ -575,27 +575,27 @@ msgstr ""
 msgid "Select multiple"
 msgstr ""
 
-#: inc/admin/admin-helper.php:870
+#: inc/admin/admin-helper.php:873
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:716
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1569
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-restrictions.php:44
 msgid " item selected"
 msgstr ""
 
-#: inc/admin/admin-helper.php:880
+#: inc/admin/admin-helper.php:883
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-restrictions.php:55
 msgid "Select all"
 msgstr ""
 
-#: inc/admin/admin-helper.php:904
+#: inc/admin/admin-helper.php:907
 msgid "Need advance Trip Extras options? %1$s GET PRO%2$s"
 msgstr ""
 
-#: inc/admin/admin-helper.php:943
+#: inc/admin/admin-helper.php:946
 msgid "Pro options"
 msgstr ""
 
-#: inc/admin/admin-helper.php:945 inc/admin/admin-helper.php:954
+#: inc/admin/admin-helper.php:948 inc/admin/admin-helper.php:957
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:119
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:254
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:435
@@ -608,11 +608,11 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:946
+#: inc/admin/admin-helper.php:949
 msgid "Item Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:958 inc/admin/admin-helper.php:967
+#: inc/admin/admin-helper.php:961 inc/admin/admin-helper.php:970
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:135
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:260
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:441
@@ -622,11 +622,11 @@ msgstr ""
 msgid "Sale Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:959
+#: inc/admin/admin-helper.php:962
 msgid "Sale Price(Leave Blank to disable sale)"
 msgstr ""
 
-#: inc/admin/admin-helper.php:971
+#: inc/admin/admin-helper.php:974
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:105
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:251
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:432
@@ -636,11 +636,11 @@ msgstr ""
 msgid "Price Per"
 msgstr ""
 
-#: inc/admin/admin-helper.php:975
+#: inc/admin/admin-helper.php:978
 msgid "Unit"
 msgstr ""
 
-#: inc/admin/admin-helper.php:976
+#: inc/admin/admin-helper.php:979
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:320
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:469
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:543
@@ -650,50 +650,50 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: inc/admin/admin-helper.php:985
+#: inc/admin/admin-helper.php:988
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-gallery.php:12
 msgid "Want to use above pro features?"
 msgstr ""
 
-#: inc/admin/admin-helper.php:986
+#: inc/admin/admin-helper.php:989
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-gallery.php:13
 msgid ""
 "By upgrading to Pro, you can get features with gallery, detail extras page "
 "in Front-End and more !"
 msgstr ""
 
-#: inc/admin/admin-helper.php:990
+#: inc/admin/admin-helper.php:993
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-gallery.php:17
 msgid "Get Tour Extras Addon"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1032
+#: inc/admin/admin-helper.php:1035
 msgid "Multiple Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1038
+#: inc/admin/admin-helper.php:1041
 msgid "Single Price"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1047
+#: inc/admin/admin-helper.php:1050
 msgid "Get WP Travel PRO"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1048
+#: inc/admin/admin-helper.php:1051
 msgid ""
 "Get addon for Payment, Trip Extras, Inventory Management, Field Editor and "
 "other premium features."
 msgstr ""
 
-#: inc/admin/admin-helper.php:1052
+#: inc/admin/admin-helper.php:1055
 msgid "Check all Add-ons"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1054
+#: inc/admin/admin-helper.php:1057
 msgid "View WP Travel Addons"
 msgstr ""
 
-#: inc/admin/admin-helper.php:1085
+#: inc/admin/admin-helper.php:1088
 msgid "or"
 msgstr ""
 
