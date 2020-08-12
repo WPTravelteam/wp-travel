@@ -6902,3 +6902,24 @@ $primaryColor: #3399ff;
 		}
 	}
 }
+
+#downloads{
+	.wp-travel-downloads-listings-public{
+		margin-bottom: 1em;
+		position: relative;
+		padding-left: 1.5em;
+		> p{
+			display: none;
+		}
+		> a{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.wp_travel_downloads_tab_title_caption{
+			a{
+				margin-right: 5px;
+			}
+		}
+	}
+}
