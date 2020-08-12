@@ -43,7 +43,8 @@ class WP_Travel_Helpers_License {
 		// add_filter( 'wp_travel_display_critical_admin_notices', 'WP_Travel_License::display_critical_notices' );
 		// add_action( 'wp_travel_critical_admin_notice', 'WP_Travel_License::critical_admin_notices' );
 		// Licesnse data for
-		add_filter( 'wp_travel_settings_values', 'WP_Travel_Helpers_License::settings_data', 10, 2 );
+		add_filter( 'wp_travel_before_save_settings', 'WP_Travel_Helpers_License::settings_data', 10, 2 );
+		add_filter( 'wp_travel_block_before_save_settings', 'WP_Travel_Helpers_License::settings_data_v4', 10, 2 );
 	}
 
 	// License data for WP Settings block.
@@ -64,6 +65,7 @@ class WP_Travel_Helpers_License {
 				'license_key' => $license_key,
 				'status' => $status,
 				'item_name' => $premium_addon['item_name'],
+				'option_prefix' => $filtered_key . '_',
 			);
 
 			$premium_addons_keys[] = $filtered_key;
@@ -85,6 +87,33 @@ class WP_Travel_Helpers_License {
 		return $settings;
 	}
 
+	public static function settings_data_v4 ( $settings, $settings_data ) {		
+		$premium_addons = ! empty( $settings_data['premium_addons_data'] ) ? ( $settings_data['premium_addons_data'] ) : array();
+
+		foreach ( $premium_addons as $key => $premium_addon ) :
+			// Get license status.
+			$status       = isset( $premium_addon['license_data']['license'] ) && ! empty( $premium_addon['license_data']['license'] ) ? stripslashes_deep( $premium_addon['license_data']['license'] ) : '';
+			$license_key  = isset( $premium_addon['license_key'] ) && ! empty( $premium_addon['license_key'] ) ? stripslashes_deep( $premium_addon['license_key'] ) : '';
+			$license_data = isset( $premium_addon['license_data'] ) && ! empty( $premium_addon['license_data'] ) ? stripslashes_deep( $premium_addon['license_data'] ) : false;
+
+			$data = array(
+				'license_data'  => $license_data,
+				'license_key'   => $license_key,
+				'status'        => $status,
+				'item_name'     => isset( $premium_addon['item_name'] ) && ! empty( $premium_addon['item_name'] ) ? stripslashes_deep( $premium_addon['item_name'] ) : '',
+				'option_prefix' => isset( $premium_addon['option_prefix'] ) && ! empty( $premium_addon['option_prefix'] ) ? stripslashes_deep( $premium_addon['option_prefix'] ) : '',
+			);
+
+			$premium_addons_data[] = $data;
+
+		endforeach;
+
+		$settings['premium_addons_data'] = $premium_addons_data;
+		// error_log( print_r( $settings, true ) );
+		
+		return $settings;
+	}
+
 	public static function activate_license( $license ) {
 		$count_premium_addons = self::count_premium_addons();
 		if ( $count_premium_addons < 1 ) {
@@ -100,7 +129,7 @@ class WP_Travel_Helpers_License {
 		// Delete old transient.
 		delete_transient( $license_option_prefix . 'data' );
 
-		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';
+		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';		
 
 		// data to send in our API request.
 		$api_params = array(
@@ -146,15 +175,67 @@ class WP_Travel_Helpers_License {
 
 	}
 
-	public static function deactivate_license( $settings_data ) {
+	/**
+	 * Deactivate License.
+	 *
+	 * @return void
+	 */
+	public static function deactivate_license( $license ) {
+		$count_premium_addons = self::count_premium_addons();
+		if ( $count_premium_addons < 1 ) {
+			return;
+		}
 
-		// update_option( 'wp_travel_settings', $settings );
-		// return WP_Travel_Helpers_Response_Codes::get_success_response(
-		// 'WP_TRAVEL_UPDATED_SETTINGS',
-		// array(
-		// 'settings' => $settings,
-		// )
-		// );
+		if ( ! isset( $license['_option_prefix'] ) ) {
+			return;
+		}
+
+		$license_option_prefix = $license['_option_prefix'];
+
+		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';		
+
+		// data to send in our API request.
+		$api_params = array(
+			'edd_action' => 'deactivate_license',
+			'license'    => $license_key,
+			'item_name'  => urlencode( $license['item_name'] ), // the name of our product in EDD.
+			'url'        => home_url(),
+		);
+
+		// Call the custom API.
+		$response = wp_remote_post(
+			self::$store_url,
+			array(
+				'timeout'   => 15,
+				'sslverify' => false,
+				'body'      => $api_params,
+			)
+		);
+
+		// make sure the response came back okay.
+		if ( is_wp_error( $response ) ) {
+			WP_Travel_Helpers_REST_API::response( $response );
+		}
+
+		// Decode the license data.
+		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+		// Set license data trasient.
+		delete_transient( $license['_option_prefix'] . 'data' );
+
+		// Set license status.
+		update_option( $license['_option_prefix'] . 'status', $license_data->license );
+
+		// return $license_data;
+		if ( $license_data ) {
+			return WP_Travel_Helpers_Response_Codes::get_success_response(
+				'WP_TRAVEL_LICENSE_ACTIVATION',
+				array(
+					'license' => $license_data,
+				)
+			);
+		}
+
 	}
 }
 
