@@ -16,15 +16,6 @@ rm -rf ./build/assets/*
 echo "*********************************"
 echo ""
 
-# Move to inc/extended folder and run yarn
-echo "Move to inc/extended folder and run yarn"
-cd inc/extended
-yarn install
-yarn build
-cd ../../
-echo "*********************************"
-echo ""
-
 # Copy new set of files to trunk
 echo "copy files to trunk"
 rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json    ./ ./build/trunk
