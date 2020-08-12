@@ -3,7 +3,7 @@ Contributors: wptravel, WEN Solutions
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.4.2
+Tested up to: 5.5
 Requires PHP: 5.5
 Stable tag: 4.0.9
 License: GPLv3
@@ -65,7 +65,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
-* [Travel Store](https://wensolutions.com/theme-demo/travelstore/&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
+* [Travel Store](https://wensolutions.com/theme-demo/travelstore/?utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
