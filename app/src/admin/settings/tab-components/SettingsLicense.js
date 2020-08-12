@@ -128,11 +128,11 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
             return;
         }
         let requestLicenseData = {};
-        var item_key = license.option_prefix + 'key' // Prefix key.
+        var item_key = license.option_prefix + 'license_key' // Prefix key.
 
         // Request Data.
         requestLicenseData = {
-            _option_prefix: license.option_prefix,
+            _option_prefix: license.option_prefix + 'license_',
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
