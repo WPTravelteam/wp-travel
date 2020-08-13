@@ -234,7 +234,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.1.0 =
+= 4.1.1 =
 Release Date: 13th August, 2020
 
 Fixes:
