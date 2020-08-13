@@ -26,7 +26,7 @@ export default () => {
 addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
     const [ isProcessingApi, setIsProcessingApi ] = useState(null);
-
+    
     const {premium_addons_keys, premium_addons_data} = allData
     console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
