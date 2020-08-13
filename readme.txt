@@ -238,7 +238,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 13th August, 2020
 
 Fixes:
-* Fixes missing build directory added.
+* Missing build directory added.
 
 = 4.1.0 =
 Release Date: 12th August, 2020
