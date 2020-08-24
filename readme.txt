@@ -1,11 +1,11 @@
 === WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
-Contributors: wptravel, WEN Solutions
+Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
 Tested up to: 5.5
 Requires PHP: 5.5
-Stable tag: 4.1.1
+Stable tag: 4.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -233,6 +233,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.1.2 =
+Release Date: 22nd August, 2020
+
+Fixes:
+* Readme file updated with contributers.
 
 = 4.1.1 =
 Release Date: 13th August, 2020
