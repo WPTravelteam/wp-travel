@@ -234,6 +234,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.1.3 =
+Release Date: 24th August, 2020
+
+Fixes:
+* Trip not shoing in archive page listing after updating trip.
+* Made Cart icon size smaller on checkout page load.
+* Fixed Trip single page shows error after selecting date.
+
 = 4.1.2 =
 Release Date: 22nd August, 2020
 
