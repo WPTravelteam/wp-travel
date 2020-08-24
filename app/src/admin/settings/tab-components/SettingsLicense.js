@@ -2,8 +2,6 @@ import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow,TextControl, ToggleControl, RadioControl, Notice, Button, Spinner } from '@wordpress/components';
-import Select from 'react-select'
-import {VersionCompare} from '../../fields/VersionCompare'
 import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 
@@ -28,7 +26,6 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
     const [ isProcessingApi, setIsProcessingApi ] = useState(null);
     
     const {premium_addons_keys, premium_addons_data} = allData
-    console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
 
     const updateLicenseData = (key, value, index) => {
