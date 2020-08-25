@@ -235,12 +235,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.1.3 =
-Release Date: 24th August, 2020
+Release Date: 25th August, 2020
 
 Fixes:
-* Trip not shoing in archive page listing after updating trip.
-* Made Cart icon size smaller on checkout page load.
+* Trip not showing in the archive page listing after updating trip.
+* Style updated for cart icon on checkout page load. Made icon size smaller.
 * Fixed Trip single page shows error after selecting date.
+* Fixed Sale price and offer text not being displayed even trip has sale price enabled.
+* Datepicker circle seleted mark removed in recurring months.
 
 = 4.1.2 =
 Release Date: 22nd August, 2020
