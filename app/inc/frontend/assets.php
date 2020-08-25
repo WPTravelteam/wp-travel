@@ -31,7 +31,7 @@ class WP_Travel_Frontend_Assets {
 				$translation_array['currency_position']  = $settings['currency_position'];
 				$translation_array['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
 				$translation_array['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
-				$translation_array['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 2;
+				$translation_array['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
 				$translation_array['date_format']        = get_option( 'date_format' );
 				$translation_array['time_format']        = get_option( 'time_format' );
 			}
