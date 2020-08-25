@@ -1119,6 +1119,7 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 	$settings     = wp_travel_get_settings();
 	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 	$price        = 0;
+	$regular_price = 0;
 	if ( 'yes' !== $switch_to_v4 ) : // Follow the tradtion to get price.
 		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
@@ -1208,7 +1209,6 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 	else : // New way to grab price @since 4.0.0
 		// return 100;
 		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-		// error_log( print_r( $pricings_data,true ) );
 		if ( ! empty( $pricing_id ) && ! empty( $category_id ) && is_array( $pricings_data ) ) { // Quick Fix here. Pricing data may be WP Error object.
 
 			$pricings   = array_filter(
@@ -1243,17 +1243,17 @@ function wp_travel_get_price( $trip_id, $return_regular_price = false, $pricing_
 						$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
 						if ( ! $price || $current_price < $price ) { // init / update min price.
 							$price = $current_price;
-
-							// To return regular price.
-							if ( $return_regular_price ) {
-								$price = $pricing_category['regular_price'];
-							}
+							$regular_price = $pricing_category['regular_price'];
 						}
 					}
 				}
 			}
 		}
 	endif;
+	// To return regular price.
+	if ( $return_regular_price ) {
+		return $regular_price;
+	}
 
 	return $price;
 }
