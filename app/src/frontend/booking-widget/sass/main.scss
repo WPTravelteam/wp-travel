@@ -163,6 +163,10 @@ $defaultColor: #3399ff;
             }
         }
     }
+    .react-datepicker__day.react-datepicker__day--keyboard-selected:not(.react-datepicker__day--today) {
+        background: transparent !important;
+        color: #000 !important;
+    }
     .wp-travel-booking__datepicker-wrapper{
         margin-top: 2em;
         padding-bottom: 2em;
