@@ -242,7 +242,7 @@ Fixes:
 * Style updated for cart icon on checkout page load. Made icon size smaller.
 * Fixed Trip single page shows error after selecting date.
 * Fixed Sale price and offer text not being displayed even trip has sale price enabled.
-* Datepicker circle seleted mark removed in recurring months.
+* Datepicker circle selected mark removed in recurring months.
 
 = 4.1.2 =
 Release Date: 22nd August, 2020
