@@ -1,10 +1,10 @@
-# Copyright (C) 2020 WEN Solutions
+# Copyright (C) 2020 WP Travel
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.1.1\n"
+"Project-Id-Version: WP Travel 4.1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 10:26:06+00:00\n"
+"POT-Creation-Date: 2020-08-25 13:08:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -444,7 +444,7 @@ msgid "Toggle panel: Reviews"
 msgstr ""
 
 #: inc/admin/admin-helper.php:270 inc/helpers.php:1010 inc/helpers.php:2723
-#: inc/template-functions.php:482
+#: inc/template-functions.php:481
 msgid "Reviews"
 msgstr ""
 
@@ -602,8 +602,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1071
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1197
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1341
-#: inc/helpers.php:2728 inc/helpers.php:2741 inc/template-functions.php:1992
-#: inc/template-functions.php:2380
+#: inc/helpers.php:2728 inc/helpers.php:2741 inc/template-functions.php:1991
+#: inc/template-functions.php:2379
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 msgid "Price"
 msgstr ""
@@ -774,7 +774,7 @@ msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:84
 #: inc/admin/class-admin-metaboxes.php:85 inc/helpers.php:2724
-#: inc/template-functions.php:671
+#: inc/template-functions.php:670
 msgid "Locations"
 msgstr ""
 
@@ -876,7 +876,7 @@ msgstr ""
 #: inc/admin/class-admin-metaboxes.php:360
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:25
 #: inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php:248
-#: inc/template-functions.php:642
+#: inc/template-functions.php:641
 msgid "Trip Code"
 msgstr ""
 
@@ -1478,7 +1478,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1103
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1502
 #: inc/admin/views/tabs/tab-contents/settings/email.php:59
-#: inc/cart/checkout.php:56 inc/template-functions.php:939
+#: inc/cart/checkout.php:56 inc/template-functions.php:938
 msgid "Open All"
 msgstr ""
 
@@ -1488,7 +1488,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1503
 #: inc/admin/views/tabs/tab-contents/settings/email.php:60
-#: inc/cart/checkout.php:57 inc/template-functions.php:940
+#: inc/cart/checkout.php:57 inc/template-functions.php:939
 msgid "Close All"
 msgstr ""
 
@@ -1595,7 +1595,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:25
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:43
 #: inc/helpers.php:2095 inc/helpers.php:2718 inc/helpers.php:2719
-#: inc/template-functions.php:577
+#: inc/template-functions.php:576
 msgid "Trip Enquiry"
 msgstr ""
 
@@ -1653,8 +1653,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:404
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1159
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1306
-#: inc/helpers.php:2734 inc/template-functions.php:1986
-#: inc/template-functions.php:2374
+#: inc/helpers.php:2734 inc/template-functions.php:1985
+#: inc/template-functions.php:2373
 msgid "Pricing Name"
 msgstr ""
 
@@ -2361,7 +2361,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:1069
+#: inc/helpers/helpers-price.php:1105
 msgid "Partial Payment"
 msgstr ""
 
@@ -2539,8 +2539,8 @@ msgstr ""
 
 #: inc/booking-functions.php:30 inc/cart/checkout.php:153 inc/helpers.php:2713
 #: inc/helpers.php:2717 inc/helpers.php:2747 inc/helpers.php:2755
-#: inc/template-functions.php:579 inc/template-functions.php:1996
-#: inc/template-functions.php:2384
+#: inc/template-functions.php:578 inc/template-functions.php:1995
+#: inc/template-functions.php:2383
 msgid "Book Now"
 msgstr ""
 
@@ -2646,8 +2646,8 @@ msgstr ""
 #: inc/email-template-functions.php:43 inc/email-template-functions.php:148
 #: inc/email-template-functions.php:329 inc/email-template-functions.php:628
 #: inc/email-template-functions.php:936 inc/email-template-functions.php:1445
-#: inc/form-fields.php:212 inc/helpers.php:2739 inc/template-functions.php:1991
-#: inc/template-functions.php:2379 templates/content-cart.php:28
+#: inc/form-fields.php:212 inc/helpers.php:2739 inc/template-functions.php:1990
+#: inc/template-functions.php:2378 templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
@@ -3250,7 +3250,7 @@ msgid "New Activity"
 msgstr ""
 
 #: inc/class-taxonomies.php:97 inc/helpers.php:2721
-#: inc/template-functions.php:480
+#: inc/template-functions.php:479
 msgid "Activities"
 msgstr ""
 
@@ -4459,16 +4459,16 @@ msgstr ""
 #: inc/email-template-functions.php:57 inc/email-template-functions.php:162
 #: inc/email-template-functions.php:343 inc/email-template-functions.php:656
 #: inc/email-template-functions.php:964 inc/email-template-functions.php:1473
-#: inc/form-fields.php:172 inc/template-functions.php:1993
-#: inc/template-functions.php:2381
+#: inc/form-fields.php:172 inc/template-functions.php:1992
+#: inc/template-functions.php:2380
 msgid "Arrival Date"
 msgstr ""
 
 #: inc/email-template-functions.php:62 inc/email-template-functions.php:167
 #: inc/email-template-functions.php:348 inc/email-template-functions.php:670
 #: inc/email-template-functions.php:978 inc/email-template-functions.php:1487
-#: inc/form-fields.php:185 inc/template-functions.php:1994
-#: inc/template-functions.php:2382
+#: inc/form-fields.php:185 inc/template-functions.php:1993
+#: inc/template-functions.php:2381
 msgid "Departure Date"
 msgstr ""
 
@@ -4547,7 +4547,7 @@ msgstr ""
 msgid "Powered By"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
+#. Author of the plugin/theme
 msgid "WP Travel"
 msgstr ""
 
@@ -4621,11 +4621,11 @@ msgstr ""
 msgid "Price:"
 msgstr ""
 
-#: inc/form-fields.php:645 inc/template-functions.php:1519
+#: inc/form-fields.php:645 inc/template-functions.php:1518
 msgid "Price low to high"
 msgstr ""
 
-#: inc/form-fields.php:646 inc/template-functions.php:1520
+#: inc/form-fields.php:646 inc/template-functions.php:1519
 msgid "Price high to low"
 msgstr ""
 
@@ -4662,8 +4662,8 @@ msgid "Hidden"
 msgstr ""
 
 #: inc/framework/form/class.field.php:56 inc/helpers.php:2715
-#: inc/helpers.php:2745 inc/template-functions.php:1997
-#: inc/template-functions.php:2385
+#: inc/helpers.php:2745 inc/template-functions.php:1996
+#: inc/template-functions.php:2384
 msgid "Select"
 msgstr ""
 
@@ -8404,7 +8404,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:1070
+#: inc/helpers/helpers-price.php:1106
 msgid "Full Payment"
 msgstr ""
 
@@ -8505,7 +8505,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:962 inc/template-functions.php:855
+#: inc/helpers.php:962 inc/template-functions.php:854
 msgid "No details found."
 msgstr ""
 
@@ -8633,19 +8633,19 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: inc/helpers.php:2720 inc/template-functions.php:479
+#: inc/helpers.php:2720 inc/template-functions.php:478
 msgid "Trip Type"
 msgstr ""
 
-#: inc/helpers.php:2722 inc/template-functions.php:481
+#: inc/helpers.php:2722 inc/template-functions.php:480
 msgid "Group size"
 msgstr ""
 
-#: inc/helpers.php:2725 inc/template-functions.php:672
+#: inc/helpers.php:2725 inc/template-functions.php:671
 msgid "Fixed departure"
 msgstr ""
 
-#: inc/helpers.php:2726 inc/template-functions.php:673
+#: inc/helpers.php:2726 inc/template-functions.php:672
 msgid "Trip duration"
 msgstr ""
 
@@ -8669,13 +8669,13 @@ msgstr ""
 msgid "Select Date and Pricing Options"
 msgstr ""
 
-#: inc/helpers.php:2735 inc/template-functions.php:1987
-#: inc/template-functions.php:2147 inc/template-functions.php:2375
+#: inc/helpers.php:2735 inc/template-functions.php:1986
+#: inc/template-functions.php:2146 inc/template-functions.php:2374
 msgid "Start"
 msgstr ""
 
-#: inc/helpers.php:2736 inc/template-functions.php:1988
-#: inc/template-functions.php:2172 inc/template-functions.php:2376
+#: inc/helpers.php:2736 inc/template-functions.php:1987
+#: inc/template-functions.php:2171 inc/template-functions.php:2375
 msgid "End"
 msgstr ""
 
@@ -8687,8 +8687,8 @@ msgstr ""
 msgid "Seats left"
 msgstr ""
 
-#: inc/helpers.php:2740 inc/template-functions.php:1999
-#: inc/template-functions.php:2386
+#: inc/helpers.php:2740 inc/template-functions.php:1998
+#: inc/template-functions.php:2385
 msgid "Select Pax"
 msgstr ""
 
@@ -8704,7 +8704,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: inc/helpers.php:2748 inc/template-functions.php:1998
+#: inc/helpers.php:2748 inc/template-functions.php:1997
 msgid "Pricing"
 msgstr ""
 
@@ -8898,96 +8898,96 @@ msgstr ""
 msgid "Success"
 msgstr ""
 
-#: inc/template-functions.php:413 inc/template-functions.php:435
+#: inc/template-functions.php:412 inc/template-functions.php:434
 #: templates/shortcode/itinerary-item.php:60
 msgid "Rated %s out of 5"
 msgstr ""
 
-#: inc/template-functions.php:416 inc/template-functions.php:438
+#: inc/template-functions.php:415 inc/template-functions.php:437
 #: templates/shortcode/itinerary-item.php:63
 msgid "out of %1$s5%2$s"
 msgstr ""
 
-#: inc/template-functions.php:506
+#: inc/template-functions.php:505
 msgid "No trip type"
 msgstr ""
 
-#: inc/template-functions.php:524
+#: inc/template-functions.php:523
 msgid "No Activities"
 msgstr ""
 
-#: inc/template-functions.php:539 inc/template-functions.php:1453
+#: inc/template-functions.php:538 inc/template-functions.php:1452
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:541 inc/template-functions.php:2191
-#: inc/template-functions.php:2492
+#: inc/template-functions.php:540 inc/template-functions.php:2190
+#: inc/template-functions.php:2491
 msgid "No size limit"
 msgstr ""
 
-#: inc/template-functions.php:560
+#: inc/template-functions.php:559
 msgid "%s review"
 msgid_plural "%s reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/template-functions.php:621
+#: inc/template-functions.php:620
 msgid "Keywords : "
 msgstr ""
 
-#: inc/template-functions.php:727
+#: inc/template-functions.php:726
 msgid "%1$s Day(s) %2$s Night(s)"
 msgstr ""
 
-#: inc/template-functions.php:964
+#: inc/template-functions.php:963
 msgid "No Details Found"
 msgstr ""
 
-#: inc/template-functions.php:1416
+#: inc/template-functions.php:1415
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1425
+#: inc/template-functions.php:1424
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1425 inc/trip-enquiries.php:455
+#: inc/template-functions.php:1424 inc/trip-enquiries.php:455
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1456
+#: inc/template-functions.php:1455
 msgid "No Size Limit"
 msgstr ""
 
-#: inc/template-functions.php:1560
+#: inc/template-functions.php:1559
 msgid "Ascending"
 msgstr ""
 
-#: inc/template-functions.php:1561
+#: inc/template-functions.php:1560
 msgid "Descending"
 msgstr ""
 
-#: inc/template-functions.php:1989 inc/template-functions.php:2377
+#: inc/template-functions.php:1988 inc/template-functions.php:2376
 msgid "Group (min-max)"
 msgstr ""
 
-#: inc/template-functions.php:1990 inc/template-functions.php:2378
+#: inc/template-functions.php:1989 inc/template-functions.php:2377
 msgid "Seats Left"
 msgstr ""
 
-#: inc/template-functions.php:1995 inc/template-functions.php:2383
+#: inc/template-functions.php:1994 inc/template-functions.php:2382
 msgid "Sold out"
 msgstr ""
 
-#: inc/template-functions.php:2157
+#: inc/template-functions.php:2156
 msgid "Please Select a Date"
 msgstr ""
 
-#: inc/template-functions.php:2214 inc/template-functions.php:2529
+#: inc/template-functions.php:2213 inc/template-functions.php:2528
 msgid "Available Seats: "
 msgstr ""
 
-#: inc/template-functions.php:2244
+#: inc/template-functions.php:2243
 msgid "No size limit."
 msgstr ""
 
@@ -9559,7 +9559,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:389
+#: upgrade/update-137.php:25 wp-travel.php:390
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -9571,19 +9571,19 @@ msgstr ""
 msgid "trip"
 msgstr ""
 
-#: wp-travel.php:404
+#: wp-travel.php:405
 msgid "PHP"
 msgstr ""
 
-#: wp-travel.php:405
+#: wp-travel.php:406
 msgid "%s or Higher"
 msgstr ""
 
-#: wp-travel.php:409
+#: wp-travel.php:410
 msgid "WP Travel plugin requires %1$s version %2$s or greater to work."
 msgstr ""
 
-#: wp-travel.php:413
+#: wp-travel.php:414
 msgid "Plugin Activation Error"
 msgstr ""
 
@@ -9596,10 +9596,6 @@ msgid ""
 "The best choice for a Travel Agency, Tour Operator or Destination "
 "Management Company, wanting to manage packages more efficiently & increase "
 "sales."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "WEN Solutions"
 msgstr ""
 
 #. Author URI of the plugin/theme
@@ -9849,32 +9845,32 @@ msgctxt "Trip Enquiry Form Title"
 msgid "Enquiry: %s"
 msgstr ""
 
-#: upgrade/update-137.php:48 wp-travel.php:489
+#: upgrade/update-137.php:48 wp-travel.php:490
 msgctxt "Page slug"
 msgid "wp-travel-cart"
 msgstr ""
 
-#: upgrade/update-137.php:53 wp-travel.php:494
+#: upgrade/update-137.php:53 wp-travel.php:495
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: upgrade/update-137.php:58 wp-travel.php:499
+#: upgrade/update-137.php:58 wp-travel.php:500
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: upgrade/update-137.php:49 wp-travel.php:490
+#: upgrade/update-137.php:49 wp-travel.php:491
 msgctxt "Page title"
 msgid "WP Travel Cart"
 msgstr ""
 
-#: upgrade/update-137.php:54 wp-travel.php:495
+#: upgrade/update-137.php:54 wp-travel.php:496
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: upgrade/update-137.php:59 wp-travel.php:500
+#: upgrade/update-137.php:59 wp-travel.php:501
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
 msgstr ""
