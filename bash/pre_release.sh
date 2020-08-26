@@ -8,6 +8,7 @@ echo "*********************************"
 
 echo "Assets Tasks"
 grunt pre_release
+yarn build:pre_release
 echo "*********************************"
 
 echo "State files"

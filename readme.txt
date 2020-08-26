@@ -1,11 +1,11 @@
 === WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
-Contributors: wptravel, WEN Solutions
+Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.4.2
+Tested up to: 5.5
 Requires PHP: 5.5
-Stable tag: 4.0.9
+Stable tag: 4.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,7 +65,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
-* [Travel Store](https://wensolutions.com/theme-demo/travelstore/&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
+* [Travel Store](https://wensolutions.com/theme-demo/travelstore/?utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Log](https://wptravel.io/demo/?demo=travel-log&utm_source=freethemes&utm_medium=travellog&utm_campaign=WP%20Plugin) by WEN Solutions
@@ -233,6 +233,35 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.1.3 =
+Release Date: 25th August, 2020
+
+Fixes:
+* Trip not showing in the archive page listing after updating trip.
+* Style updated for cart icon on checkout page load. Made icon size smaller.
+* Fixed Trip single page shows error after selecting date.
+* Fixed Sale price and offer text not being displayed even trip has sale price enabled.
+* Datepicker circle selected mark removed in recurring months.
+
+= 4.1.2 =
+Release Date: 22nd August, 2020
+
+Fixes:
+* Readme file updated with contributers.
+
+= 4.1.1 =
+Release Date: 13th August, 2020
+
+Fixes:
+* Missing build directory added.
+
+= 4.1.0 =
+Release Date: 12th August, 2020
+
+Fixes:
+* Travelstore theme broken link updated in description page.
+* Compatibility WordPress version updated to 5.5.
 
 = 4.0.9 =
 Release Date: 11th August, 2020
