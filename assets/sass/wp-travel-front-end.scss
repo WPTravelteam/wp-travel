@@ -6923,3 +6923,7 @@ $primaryColor: #3399ff;
 		}
 	}
 }
+
+.leaflet-pane, .leaflet-bottom, .leaflet-top{
+	z-index: 1 !important;
+}

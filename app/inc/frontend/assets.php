@@ -8,7 +8,11 @@ class WP_Travel_Frontend_Assets {
 		if ( is_singular( 'itineraries' ) ) {
 			global $post;
 			$deps                   = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
-			$deps['dependencies'][] = 'jquery-datepicker-lib';
+			if ( ! wp_travel_can_load_bundled_scripts() ) {
+				$deps['dependencies'][] = 'jquery-datepicker-lib';
+			} else {
+				$deps['dependencies'][] = 'wp-travel-frontend-bundle';
+			}
 			wp_register_script( 'wp-travel-frontend-booking-widget', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.js', $deps['dependencies'], $deps['version'], true );
 			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.css', array(), $deps['version'] );
 
@@ -27,7 +31,7 @@ class WP_Travel_Frontend_Assets {
 				$translation_array['currency_position']  = $settings['currency_position'];
 				$translation_array['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
 				$translation_array['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
-				$translation_array['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 2;
+				$translation_array['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
 				$translation_array['date_format']        = get_option( 'date_format' );
 				$translation_array['time_format']        = get_option( 'time_format' );
 			}
