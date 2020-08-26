@@ -116,36 +116,36 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 
 		}
 		$where .= ' ) '; // 1>
+		// Filter by Price clause.
+		// if ( ! empty( $min_price ) || ! empty( $max_price ) ) {
+		// 	$where .= ' AND ( '; // <11
+		// 	if ( $min_price >= 0 && $max_price > 0 ) {
+		// 		$where .= "
+		// 			pc.low_price BETWEEN {$min_price} AND {$max_price}
+		// 			";
+		// 	}
+		// 	$where .= ' ) '; // 11>
+		// }
+	
+		$fields = '';
+		// if ( 
+		// 	( isset( $_GET['price'] ) && in_array( $_GET['price'], array( 'low_high', 'high_low' ) ) )
+		// 	|| ( ! empty( $min_price ) || ! empty( $max_price ) ) 
+		// ) {
+		// 	// $fields = ' ,
+		// 	// 	pc.low_price AS sort_price
+		// 	// ';
+	
+		// 	$post_clauses['groupby'] = ' wp_posts.ID ';
+		// 	$post_clauses['orderby'] = 'low_high' === $_GET['price'] ? "sort_price ASC" : "sort_price DESC";
+		// }
+	
+		$post_clauses['join']     = $post_clauses['join'] . $join;
+		$post_clauses['fields']   = $post_clauses['fields'] . $fields;
+		$post_clauses['where']    = $post_clauses['where'] . $where;
+		$post_clauses['distinct'] = 'DISTINCT';
 	}
 
-	// Filter by Price clause.
-	// if ( ! empty( $min_price ) || ! empty( $max_price ) ) {
-	// 	$where .= ' AND ( '; // <11
-	// 	if ( $min_price >= 0 && $max_price > 0 ) {
-	// 		$where .= "
-	// 			pc.low_price BETWEEN {$min_price} AND {$max_price}
-	// 			";
-	// 	}
-	// 	$where .= ' ) '; // 11>
-	// }
-
-	$fields = '';
-	// if ( 
-	// 	( isset( $_GET['price'] ) && in_array( $_GET['price'], array( 'low_high', 'high_low' ) ) )
-	// 	|| ( ! empty( $min_price ) || ! empty( $max_price ) ) 
-	// ) {
-	// 	// $fields = ' ,
-	// 	// 	pc.low_price AS sort_price
-	// 	// ';
-
-	// 	$post_clauses['groupby'] = ' wp_posts.ID ';
-	// 	$post_clauses['orderby'] = 'low_high' === $_GET['price'] ? "sort_price ASC" : "sort_price DESC";
-	// }
-
-	$post_clauses['join']     = $post_clauses['join'] . $join;
-	$post_clauses['fields']   = $post_clauses['fields'] . $fields;
-	$post_clauses['where']    = $post_clauses['where'] . $where;
-	$post_clauses['distinct'] = 'DISTINCT';
 
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
 		$post_clauses['orderby'] = 'asc' === $_GET['trip_date'] ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";

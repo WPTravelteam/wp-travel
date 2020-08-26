@@ -2,8 +2,6 @@ import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow,TextControl, ToggleControl, RadioControl, Notice, Button, Spinner } from '@wordpress/components';
-import Select from 'react-select'
-import {VersionCompare} from '../../fields/VersionCompare'
 import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 
@@ -25,10 +23,9 @@ export default () => {
 
 addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
-    const [ isProcessingApi, setIsProcessingApi ] = useState(false);
-
+    const [ isProcessingApi, setIsProcessingApi ] = useState(null);
+    
     const {premium_addons_keys, premium_addons_data} = allData
-    console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
 
     const updateLicenseData = (key, value, index) => {
@@ -65,11 +62,12 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                             }}
                         />
                         {
-                            // isProcessingApi && <Spinner />
+                            // Spinner will be trigger only if props index value of button matched with current state value.
+                            isProcessingApi == props.index ? <Spinner /> : ''
                         }
                         {
                             ('valid' == license.status && false !== license.license_data ) ?
-                                <Button isSecondary onClick={() => deactivateLicense(license,props)}>{ __( 'Deactivate', 'wp-travel' ) }</Button>
+                                <Button id={props.index} isSecondary onClick={() => deactivateLicense(license,props)}>{ __( 'Deactivate', 'wp-travel' ) }</Button>
                                 : <Button isSecondary onClick={() => activateLicense(license,props)}>{ __( 'Activate', 'wp-travel' ) }</Button>
                         }
                         <p className="description">{__( `Enter license key for ${license.item_name} here.`, 'wp-travel' )}</p>
@@ -78,7 +76,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                         { license.license_key && statusMsg(license)}
                         {
                             'valid' == license.status &&
-                            'lifetime' !== license.license_data.expires ? <p>{__( 'Expires In : ' + licenseExpiryDate(license.license_data.expires), 'wp-travel' )}</p>      : ''
+                            'lifetime' !== license.license_data.expires ? <p><strong>{__( 'Expires In : ' + licenseExpiryDate(license.license_data.expires), 'wp-travel' )}</strong></p>      : ''
                         }
                     </div>
                 </>
@@ -121,18 +119,18 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
      * @param {License Activation} license 
      */
     const activateLicense = (license, props) => {
-        setIsProcessingApi(true);
+        setIsProcessingApi(props.index);
         if ( '' == license.license_key ) {
             alert('Please Enter License Key!!');
-            setIsProcessingApi(false);
+            setIsProcessingApi(null);
             return;
         }
         let requestLicenseData = {};
-        var item_key = license.option_prefix + 'key' // Prefix key.
+        var item_key = license.option_prefix + 'license_key' // Prefix key.
 
         // Request Data.
         requestLicenseData = {
-            _option_prefix: license.option_prefix,
+            _option_prefix: license.option_prefix + 'license_',
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
@@ -147,7 +145,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                     updateLicenseData( 'license_data', res.data.license, props.index )
                     updateLicenseData( 'status', res.data.license.license, props.index )
                 }
-                setIsProcessingApi(false)
+                setIsProcessingApi(null)
         } );
     }
 
@@ -156,13 +154,13 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
      * @param {License Deactivation} license 
      */
     const deactivateLicense = (license, props) => {
-        setIsProcessingApi(true)
+        setIsProcessingApi(props.index)
         let requestLicenseData = {};
-        var item_key = license.option_prefix + 'key' // Prefix key.
+        var item_key = license.option_prefix + 'license_key'// Prefix key.
 
         // Request Data.
         requestLicenseData = {
-            _option_prefix: license.option_prefix,
+            _option_prefix: license.option_prefix + 'license_',
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
@@ -177,7 +175,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                     updateLicenseData( 'license_data', res.data.license, props.index )
                     updateLicenseData( 'status', res.data.license.license, props.index )
                 }
-                setIsProcessingApi(false)
+                setIsProcessingApi(null)
         } );
     }
 
