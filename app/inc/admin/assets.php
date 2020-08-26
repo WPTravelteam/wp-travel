@@ -21,7 +21,7 @@ class WP_Travel_Admin_Assets {
 			$deps = include_once sprintf( '%s/app/build/admin-settings.asset.php', WP_TRAVEL_EXTENDED_FILE_PATH );
 			$deps['dependencies'][] = 'jquery';
 			wp_enqueue_script( 'wp-travel-admin-settings', plugin_dir_url( WP_TRAVEL_EXTENDED_FILE ) . '/app/build/admin-settings.js', $deps['dependencies'], $deps['version'], true );
-			wp_enqueue_style( 'wp-travel-admin-settings-style', plugin_dir_url( WP_TRAVEL_EXTENDED_FILE ) . '/app/build/admin-settings.css', array( 'wp-components' ), $deps['version'] );
+			wp_enqueue_style( 'wp-travel-admin-settings-style', plugin_dir_url( WP_TRAVEL_EXTENDED_FILE ) . '/app/build/admin-settings.css', array( 'wp-components', 'font-awesome-css' ), $deps['version'] );
 		}
 	}
 }
