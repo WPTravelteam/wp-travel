@@ -1017,6 +1017,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
 				$settings_allowed_screens[] = 'itinerary-booking_page_settings';
+				$settings_allowed_screens[] = 'itinerary-booking_page_settings2';
 				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
 					return true;
 				}
