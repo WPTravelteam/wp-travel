@@ -234,6 +234,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.1.4 =
+Release Date: 3rd September, 2020
+
+Fixes:
+* Price per group is treated as price per person in case of trip duration with price per group.
+* Undefined index 'title' issued fixed in case of no title in search widget.
+
 = 4.1.3 =
 Release Date: 25th August, 2020
 
