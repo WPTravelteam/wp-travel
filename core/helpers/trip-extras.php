@@ -3,6 +3,8 @@ class WP_Travel_Helpers_Trip_Extras {
 	public static function get_trip_extras( $args = array() ) {
 		$default = array(
 			'post_type' => 'tour-extras',
+			'post_status' => array( 'publish' ),
+			'posts_per_page' => '-1',
 		);
 
 		$args = wp_parse_args( $args, $default );
