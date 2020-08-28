@@ -240,6 +240,7 @@ Release Date: 3rd September, 2020
 Fixes:
 * Price per group is treated as price per person in case of trip duration with price per group.
 * Undefined index 'title' issued fixed in case of no title in search widget.
+* Trip Extras is not being fully listed in the trip page as per we selected in the admin.
 
 = 4.1.3 =
 Release Date: 25th August, 2020
