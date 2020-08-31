@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.5
 Requires PHP: 5.5
-Stable tag: 4.1.3
+Stable tag: 4.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -235,7 +235,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.1.4 =
-Release Date: 3rd September, 2020
+Release Date: 31st August, 2020
 
 Fixes:
 * Price per group is treated as price per person in case of trip duration with price per group.
