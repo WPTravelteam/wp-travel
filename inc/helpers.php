@@ -3307,29 +3307,38 @@ if ( ! function_exists( 'wp_travel_get_trip_pricings_with_dates' ) ) {
 		$trip_dates = ! is_wp_error( $dates_data ) && 'WP_TRAVEL_TRIP_DATES' === $dates_data['code'] ? $dates_data['dates'] : array(); // All the trip related dates;
 
 		$trip_pricings_with_dates = array(); // This will contains all the looping pricing while listing.
-
-		/**
-		 * Pricing by pricing id to add date easily on looping array item.
-		 */
-		$trip_pricings_by_id = array_column( $trip_pricings, null, 'id' );
-
-		$i = 0;
-		foreach ( $trip_dates as $trip_date ) {
-			$date_pricings = explode( ',', $trip_date['pricing_ids'] ); // Date may contains multiple pricing ids separated by (,).
-
+		if ( ! empty( $trip_dates ) ) {
 			/**
-			 * Making final looping array with both pricing and dates.
-			 * Each item for each pricing and each pricing for each date.
+			 * Pricing by pricing id to add date easily on looping array item.
 			 */
-			foreach ( $date_pricings as $pricing_id ) {
-				$pricing = array();
-				if ( isset( $trip_pricings_by_id[ $pricing_id ] ) ) {
-					$pricing = $trip_pricings_by_id[ $pricing_id ];
-
-					$trip_pricings_with_dates[ $i ]         = $pricing;
-					$trip_pricings_with_dates[ $i ]['date'] = $trip_date;
-					$i++;
+			$trip_pricings_by_id = array_column( $trip_pricings, null, 'id' );
+	
+			$i = 0;
+			foreach ( $trip_dates as $trip_date ) {
+				$date_pricings = explode( ',', $trip_date['pricing_ids'] ); // Date may contains multiple pricing ids separated by (,).
+	
+				/**
+				 * Making final looping array with both pricing and dates.
+				 * Each item for each pricing and each pricing for each date.
+				 */
+				foreach ( $date_pricings as $pricing_id ) {
+					$pricing = array();
+					if ( isset( $trip_pricings_by_id[ $pricing_id ] ) ) {
+						$pricing = $trip_pricings_by_id[ $pricing_id ];
+	
+						$trip_pricings_with_dates[ $i ]         = $pricing;
+						$trip_pricings_with_dates[ $i ]['date'] = $trip_date;
+						$i++;
+					}
 				}
+			}
+		} else {
+			foreach ( $trip_pricings as $index => $pricing ) {
+				$pricing['date'] = array(
+					'start_date' => '',
+					'end_date' => '',
+				);
+				$trip_pricings_with_dates[$index] = $pricing;
 			}
 		}
 
