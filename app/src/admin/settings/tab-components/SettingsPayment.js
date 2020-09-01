@@ -91,8 +91,9 @@ export default () => {
                                         onChange={
                                             (value) => updatePayoutOption( value, index )
                                         }
-                                        min={ 1 }
-                                        max={ 100 }
+                                        min={ 1.0 }
+                                        max={ 100.0 }
+                                        step={ 0.01 }
                                     />
                                     <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
                                 </div>
@@ -107,8 +108,9 @@ export default () => {
                                 onChange={
                                     (value) => updatePayoutOption( value, 0 )
                                 }
-                                min={ 1 }
-                                max={ 100 }
+                                min={ 1.0 }
+                                max={ 100.0 }
+                                step={ 0.1 }
                             />
                             <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
                         </div>
