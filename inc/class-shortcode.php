@@ -313,7 +313,7 @@ class Wp_Travel_Shortcodes {
 			<!-- TRIP FACTS -->
 			<div class="tour-info">
 				<div class="tour-info-box clearfix">
-					<div class="tour-info-column clearfix">
+					<div class="tour-info-column">
 						<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 							<?php
 
