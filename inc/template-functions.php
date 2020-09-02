@@ -774,7 +774,7 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 		<!-- TRIP FACTS -->
 		<div class="tour-info">
 			<div class="tour-info-box clearfix">
-				<div class="tour-info-column clearfix">
+				<div class="tour-info-column">
 					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 						<?php
 						if ( isset( $trip_fact['fact_id'] ) ) {
