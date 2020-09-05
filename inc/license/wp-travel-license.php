@@ -101,34 +101,59 @@ class WP_Travel_License {
 			$premium_addons = self::$addons;
 			$settings       = isset( $settings_args['settings'] ) ? $settings_args['settings'] : array();
 			foreach ( $premium_addons as $key => $premium_addon ) :
-				// Get license status.
-				$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
-				$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
-				$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
-				$status_message = '';
-				$status_class = '';
-				$expires_in = '';
-				if ( $license_key ) :
-					if ( 'valid' === $status ) :
-						$status_message = __( 'License Active', 'wp-travel' );
-						$status_class = 'fa-check';
-					elseif ( 'invalid' === $status ) :
-						$status_message = __( 'Invalid License', 'wp-travel' );
-						$status_class = 'fa-times';
-					elseif ( 'expired' === $status ) :
-						$status_message = __( 'License Expired', 'wp-travel' );
-						$status_class = 'fa-times';
-					elseif ( 'inactive' === $status ) :
-						$status_message = __( 'License Inactive', 'wp-travel' );
-						$status_class = 'fa-times';
-					endif;
-				endif;
-
-				if ( isset( $license_data->expires ) && 'lifetime' != $license_data->expires ) {
-					$expires_in = $license_data->expires;
-				}
+				
+				$plugin_prefix = str_replace( '-', '_', $key );
+				$plugin_prefix .= '_fs';
+				if( function_exists( $plugin_prefix ) ) :
+					$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
+					$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
+					$isValid = $plugin_prefix()->is_paying();
 				?>
+				<div class="license_grid">
+					<div class="form_field">
+						<h3>
+							<label for="<?php echo $key; ?>-license-key" class="control-label label_title">
+								<strong><?php echo esc_html( $premium_addon['item_name'] ); ?>:</strong>
+								<?php if ( $isValid ) : ?>
+								 <span><?php _e( 'Active' ); ?></span>
+								 <a href="<?php echo esc_url( $account_link ); ?>"><?php _e( 'Account' ); ?></a>
+								<?php else: ?>
+								 <a href="<?php echo esc_url( $license_link ); ?>"><?php _e( 'Add License' ); ?></a>
+								<?php endif;?>
 
+							</label>
+						</h3>
+					</div>
+				</div>
+				<?php
+				else:
+					// Get license status.
+					$status      = get_option( $premium_addon['_option_prefix'] . 'status' );
+					$license_key = isset( $settings[ $premium_addon['_option_prefix'] . 'key' ] ) ? $settings[ $premium_addon['_option_prefix'] . 'key' ] : '';
+					$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
+					$status_message = '';
+					$status_class = '';
+					$expires_in = '';
+					if ( $license_key ) :
+						if ( 'valid' === $status ) :
+							$status_message = __( 'License Active', 'wp-travel' );
+							$status_class = 'fa-check';
+						elseif ( 'invalid' === $status ) :
+							$status_message = __( 'Invalid License', 'wp-travel' );
+							$status_class = 'fa-times';
+						elseif ( 'expired' === $status ) :
+							$status_message = __( 'License Expired', 'wp-travel' );
+							$status_class = 'fa-times';
+						elseif ( 'inactive' === $status ) :
+							$status_message = __( 'License Inactive', 'wp-travel' );
+							$status_class = 'fa-times';
+						endif;
+					endif;
+
+					if ( isset( $license_data->expires ) && 'lifetime' != $license_data->expires ) {
+						$expires_in = $license_data->expires;
+					}
+				?>
 				<div class="license_grid">
 					<div class="form_field">
 						<h3>
@@ -167,8 +192,9 @@ class WP_Travel_License {
 				</div>
 
 				<?php
-			endforeach;
-			?>
+				endif;
+				endforeach;
+				?>
 			</div>
 			<?php
 		}
