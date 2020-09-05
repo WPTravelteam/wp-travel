@@ -107,6 +107,7 @@ class WP_Travel_License {
 				if( function_exists( $plugin_prefix ) ) :
 					$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
 					$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
+					$purchase_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-pricing' );
 					$isValid = $plugin_prefix()->is_paying();
 				?>
 				<div class="license_grid">
@@ -115,10 +116,11 @@ class WP_Travel_License {
 							<label for="<?php echo $key; ?>-license-key" class="control-label label_title">
 								<strong><?php echo esc_html( $premium_addon['item_name'] ); ?>:</strong>
 								<?php if ( $isValid ) : ?>
-								 <span><?php _e( 'Active' ); ?></span>
-								 <a href="<?php echo esc_url( $account_link ); ?>"><?php _e( 'Account' ); ?></a>
+								 <span><?php _e( 'Active', 'wp-travel' ); ?></span>
+								 <a href="<?php echo esc_url( $account_link ); ?>"><?php _e( 'Account', 'wp-travel' ); ?></a>
 								<?php else: ?>
-								 <a href="<?php echo esc_url( $license_link ); ?>"><?php _e( 'Add License' ); ?></a>
+								 <a href="<?php echo esc_url( $license_link ); ?>"><?php _e( 'Add License', 'wp-travel' ); ?></a>
+								 <a href="<?php echo esc_url( $purchase_link ); ?>"><?php _e( 'Purchse License', 'wp-travel' ); ?></a>
 								<?php endif;?>
 
 							</label>
