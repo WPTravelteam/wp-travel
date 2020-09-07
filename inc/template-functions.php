@@ -637,8 +637,9 @@ function wp_travel_single_keywords( $post_id ) {
 	endif;
 	global $wp_travel_itinerary;
 	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) :
+		$trip_code_label = apply_filters( 'wp_travel_filter_trip_code_label', 'Trip Code :' );
 		?>
-		<div class="wp-travel-trip-code"><span><?php esc_html_e( 'Trip Code', 'wp-travel' ); ?> :</span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></code></div>
+		<div class="wp-travel-trip-code"><span><?php echo esc_html( $trip_code_label ); ?> </span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></code></div>
 		<?php
 	endif;
 
