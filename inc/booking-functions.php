@@ -930,7 +930,7 @@ function wp_travel_book_now() {
 		// Admin message.
 		$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		// Admin Subject.
-		$admin_subject = $admin_template['subject'];
+		$admin_subject = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['subject'] ); // Added email tag support from ver 4.1.5.
 
 		// Client Template.
 		$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
@@ -943,7 +943,7 @@ function wp_travel_book_now() {
 		$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 
 		// Client Subject.
-		$client_subject = $client_template['subject'];
+		$client_subject = str_replace( array_keys( $email_tags ), $email_tags, $client_template['subject'] ); // Added email tag support from ver 4.1.5.
 
 		$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
