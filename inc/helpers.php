@@ -1763,7 +1763,7 @@ if ( ! function_exists( 'wp_travel_get_trip_available_dates' ) ) {
 
 		if ( wp_travel_is_react_version_enabled() && 'yes' === $fixed_departure ) {
 			$data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
-			if ( 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
+			if ( is_array( $data ) && 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
 				$dates = $data['dates'];
 				foreach ( $dates as $date ) {
 					$available_dates[] = $date['start_date'];

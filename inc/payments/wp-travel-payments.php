@@ -499,7 +499,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		// Admin message.
 		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		// Admin Subject.
-		$admin_payment_subject = $admin_payment_template['subject'];
+		$admin_payment_subject = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_template['subject'] );
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
@@ -525,7 +525,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// Client Payment message.
 	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	// Client Payment Subject.
-	$client_payment_subject = $client_payment_template['subject'];
+	$client_payment_subject = str_replace( array_keys( $email_tags ), $email_tags, $client_payment_template['subject'] );
 
 	// To send HTML mail, the Content-type header must be set.
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );

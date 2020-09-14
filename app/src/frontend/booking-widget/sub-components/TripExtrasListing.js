@@ -39,7 +39,7 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 								</li>
 							}
 							let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
-							price = parseInt(price)
+							price = parseFloat(price)
 							let _count = counts[tx.id]
 							return <li key={i} className={tx.is_required ? 'wp-travel__required-extra' : ''}>
 								<span className={`checkbox${_count > 0 ? ' checked' : ''}`}>

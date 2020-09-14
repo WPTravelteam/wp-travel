@@ -438,7 +438,7 @@ const BookingCalender = () => {
 				return 0
 			}
 			let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
-			return parseInt(price) * count
+			return parseFloat(price) * count
 		}).reduce((acc, curr) => acc + curr) || 0
 		return total + txTotal
 	}
