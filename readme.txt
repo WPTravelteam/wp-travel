@@ -242,7 +242,6 @@ Fixes:
 
 Enhancements:
 * Added  attribute type="activity" in the shortcode [wp_travel_itineraries type="activity"] to display trips based on activities.
-* Filter 'wp_travel_filter_trip_code_label' has been added in order to change 'Trip Code' text on single trip page.
 * Allow to add the email tags {sitename}, {itinerary_link}, {itinerary_title} etc in email subject like in email body.
 
 = 4.1.4 =
