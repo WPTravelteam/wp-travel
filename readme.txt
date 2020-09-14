@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.5
+Tested up to: 5.5.1
 Requires PHP: 5.5
-Stable tag: 4.1.4
+Stable tag: 4.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -234,11 +234,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.1.5 =
-Release Date: 
+= 4.2.0=
+Release Date: 14th September, 2020
 
 Fixes:
 * Trip fact layout issue fixed in higher resolution screen. 
+
+Enhancements:
+* Added  attribute type="activity" in the shortcode [wp_travel_itineraries type="activity"] to display trips based on activities.
+* Filter 'wp_travel_filter_trip_code_label' has been added in order to change 'Trip Code' text on single trip page.
+* Allow to add the email tags {sitename}, {itinerary_link}, {itinerary_title} etc in email subject like in email body.
 
 = 4.1.4 =
 Release Date: 31st August, 2020
