@@ -235,7 +235,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.2.0=
-Release Date: 14th September, 2020
+Release Date: 15th September, 2020
 
 Fixes:
 * Trip fact layout issue fixed in higher resolution screen. 
