@@ -73,7 +73,11 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Tourable](https://wptravel.io/demo/?demo=tourable&utm_source=freethemes&utm_medium=tourable&utm_campaign=WP%20Plugin) by Theme Palace
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
 * [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
-* [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
+* [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=taletravel&utm_campaign=WP%20Plugin) by Theme Palace
+* [Mega Tour](https://themepalace.com/downloads/mega-tour/?utm_source=freethemes&utm_medium=megatour&utm_campaign=WP%20Plugin) by Theme Palace
+* [Travel Biz](https://keonthemes.com/downloads/travelbiz/?utm_source=freethemes&utm_medium=travelbiz&utm_campaign=WP%20Plugin) by Keon Themes
+* [Travelore](https://catchthemes.com/themes/travelore/?utm_source=freethemes&utm_medium=travelore&utm_campaign=WP%20Plugin) by Catch Themes
+* [Photo Journal Travel](https://catchthemes.com/demo/photo-journal-travel/?utm_source=freethemes&utm_medium=photojournaltravel&utm_campaign=WP%20Plugin) by Catch Themes
 * [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
@@ -86,6 +90,9 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Tourable Pro](https://wptravel.io/demo/?demo=tourable-pro&utm_source=paidthemes&utm_medium=tourablepro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Tale Travel Pro](https://wptravel.io/demo/?demo=tale-travel-pro&utm_source=paidthemes&utm_medium=taletravelpro&utm_campaign=WP%20Plugin) by Theme Palace.
 * [Travel Master Pro](https://wptravel.io/demo/?demo=travel-master-pro&utm_source=paidthemes&utm_medium=travelmasterpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Mega Tour Pro](https://themepalace.com/downloads/mega-tour-pro/?utm_source=paidthemes&utm_medium=megatourpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Travel Biz Pro](https://keonthemes.com/downloads/travelbiz-pro/?utm_source=paidthemes&utm_medium=travelbizpro&utm_campaign=WP%20Plugin) by Keon Themes.
+* [Travelore Pro](https://catchthemes.com/themes/travelore-pro/?utm_source=paidthemes&utm_medium=travelorepro&utm_campaign=WP%20Plugin) by Catch Themes.
 * [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=paidthemes&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
 
