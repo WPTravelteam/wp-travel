@@ -204,3 +204,28 @@
   left: 0;
   z-index: 1;
 }
+
+.wp-travel-trip-edit-menu{
+  .components-tab-panel__tabs{
+    flex-direction: row !important;
+    margin-bottom: 1em !important;
+  }
+  .components-tab-panel__tab-content{
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+      thead{
+        td{
+          font-weight: bold;
+          padding: .75em .5em;
+          background-color: #f6f6f6;
+        }
+      }
+      td{
+        border: 1px solid #eee;
+        padding: .5em;
+      }
+    }
+  }
+}
