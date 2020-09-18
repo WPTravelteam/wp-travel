@@ -238,6 +238,7 @@
     .components-checkbox-control__input-container{
       float: left;
       transform: translateY(10%);
+      margin-right: 7px;
     }
     > div{
       &:last-child{
@@ -246,6 +247,12 @@
     }
     .components-button{
       margin-right: .5em;
+    }
+    .wp-travel-form-field {
+      margin-bottom: 5px;
+      input:disabled{
+        color: #32373c;
+      }
     }
   }
 }
