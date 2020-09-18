@@ -225,7 +225,27 @@
       td{
         border: 1px solid #eee;
         padding: .5em;
+        button{
+          margin-right: .5em;
+        }
       }
+    }
+  }
+}
+
+.components-modal__screen-overlay{
+  .AVAST_PAM_nonloginform{
+    .components-checkbox-control__input-container{
+      float: left;
+      transform: translateY(10%);
+    }
+    > div{
+      &:last-child{
+        padding: 0 15px;
+      }
+    }
+    .components-button{
+      margin-right: .5em;
     }
   }
 }
