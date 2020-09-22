@@ -94,7 +94,7 @@ class WP_Travel_Itinerary {
 			isset( $this->post_meta['wp_travel_outline'][0] )
 			&& '' !== $this->post_meta['wp_travel_outline'][0]
 		) {
-			return wpautop( do_shortcode( $this->post_meta['wp_travel_outline'][0] ) );
+			return wpautop( $GLOBALS['wp_embed']->run_shortcode( ( $this->post_meta['wp_travel_outline'][0] ) ) ); // Changes for rendering videos since 4.2.2.
 		}
 
 		return false;
