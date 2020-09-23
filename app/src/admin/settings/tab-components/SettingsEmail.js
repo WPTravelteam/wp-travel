@@ -217,6 +217,8 @@ const PaymentEmailTemplates = () => {
       <PanelBody title={__( 'Payment Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
 
+            {applyFilters( 'wp_travel_utils_payment_notif', [] )}
+
             <PanelRow>
                 <label>{ __( 'Payment Email Subject', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
@@ -327,6 +329,8 @@ const EnquiryEmailTemplates = () => {
     return <>
       <PanelBody title={__( 'Enquiry Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
+
+            {applyFilters( 'wp_travel_utils_enquiry_notif', [] )}
 
             <PanelRow>
                 <label>{ __( 'Enquiry Email Subject', 'wp-travel' ) }</label>
