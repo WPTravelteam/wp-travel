@@ -243,6 +243,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.2.1=
+Release Date: 
+
+* Standard Paypal Cert updated and IPN fixes. 
+
+= 4.2.1=
 Release Date: 22nd September, 2020
 
 * Compatibility tested upto WP 5.5.1. 
