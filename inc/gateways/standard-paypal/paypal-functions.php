@@ -111,7 +111,7 @@ function wp_travel_paypal_ipn_process() {
 		 * Create a new payment, send customer an email and empty the cart
 		 */
 
-		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Completed' ) {
+		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Pending' ) {
 				// Update booking status and Payment args.
 				update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 				$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
