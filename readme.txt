@@ -242,10 +242,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.2.1=
+= 4.2.2=
 Release Date: 
 
-* Standard Paypal Cert updated and IPN fixes. 
+* Standard Paypal Cert updated and IPN fixes.
+* Filter by 'Trip Date' on WP Travel Archive page issue fixes.
 
 = 4.2.1=
 Release Date: 22nd September, 2020
