@@ -147,6 +147,7 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 	}
 
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
+		$post_clauses['join']    = $post_clauses['join'] . $join;
 		$post_clauses['orderby'] = 'asc' === $_GET['trip_date'] ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
 	}
 
