@@ -103,7 +103,7 @@ class WP_Travel_Helpers_Trips {
 			'trip_include'                      => $trip_include,
 			'trip_exclude'                      => $trip_exclude,
 			'trip_outline'                      => $trip_outline,
-			'itineraries'                       => array_values( $itineraries ),
+			'itineraries'                       => is_array( $itineraries ) ? array_values( $itineraries ) : array(),
 			'faqs'                              => $faqs,
 			'trip_facts'                        => $trip_facts,
 			'use_global_trip_enquiry_option'    => $use_global_trip_enquiry_option,
@@ -121,14 +121,15 @@ class WP_Travel_Helpers_Trips {
 		if ( ! empty( $post_thumbnail_id ) ) {
 			$attachment_meta_data = wp_get_attachment_metadata( $post_thumbnail_id );
 			$re                   = '/^(.*\/)+(.*\.+.+\w)/m';
-			preg_match_all( $re, $attachment_meta_data['file'], $matches, PREG_SET_ORDER, 0 );
+			$attachment_file      = isset( $attachment_meta_data['file'] ) ? $attachment_meta_data['file'] : '';
+			preg_match_all( $re, $attachment_file, $matches, PREG_SET_ORDER, 0 );
 			$subfolder                                  = ! empty( $matches[0][1] ) ? $matches[0][1] : '';
-			$full_attachment                            = trailingslashit( $upload_dir['baseurl'] ) . $attachment_meta_data['file'];
-			$trip_data['featured_image_data']['width']  = $attachment_meta_data['width'];
-			$trip_data['featured_image_data']['height'] = $attachment_meta_data['height'];
+			$full_attachment                            = trailingslashit( $upload_dir['baseurl'] ) . $attachment_file;
+			$trip_data['featured_image_data']['width']  = isset( $attachment_meta_data['width'] ) ? $attachment_meta_data['width'] : '';
+			$trip_data['featured_image_data']['height'] = isset( $attachment_meta_data['height'] ) ? $attachment_meta_data['height'] : '';
 			$trip_data['featured_image_data']['url']    = $full_attachment;
-			$trip_data['featured_image_data']['file']   = $attachment_meta_data['file'];
-			$trip_data['featured_image_data']['sizes']  = $attachment_meta_data['sizes'];
+			$trip_data['featured_image_data']['file']   = $attachment_file;
+			$trip_data['featured_image_data']['sizes']  = isset( $attachment_meta_data['sizes'] ) ? $attachment_meta_data['sizes'] : '';
 			if ( ! empty( $attachment_meta_data['sizes'] ) ) {
 				$size_index = 0;
 				foreach ( $attachment_meta_data['sizes'] as $size_key => $size ) {
