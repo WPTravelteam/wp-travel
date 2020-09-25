@@ -150,7 +150,7 @@ const WPTravelTripSettings = () => {
 // Filters
 addFilter('wp_travel_settings_tabs', 'wp_travel', (content, allData) => {
     const {options} = allData
-    // if ( 'undefined' != typeof options && ! options.is_multisite ) {
+    if ( 'undefined' != typeof options && ! options.is_multisite ) {
         content = [
             ...content,
             {
@@ -160,7 +160,7 @@ addFilter('wp_travel_settings_tabs', 'wp_travel', (content, allData) => {
                 content: SettingsLicense
             },
         ]
-    // }
+    }
     return content
 });
 
