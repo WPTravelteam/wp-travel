@@ -250,7 +250,7 @@ Fixes:
 * Filter by 'Trip Date' on WP Travel Archive page issue fixes.
 
 Enhancements:
-* 'Trip Code' column has been added to WP Travel Booking section. Now, if the trip booked then respective trip code will be shown on 'Trip Code' column. And if there is custom trip code added using utilities addon then custom code will be shown instead of default.
+* 'Trip Code' column has been added to WP Travel Booking section. Now, if the trip is booked then respective trip code will be shown on 'Trip Code' column. And if there is custom trip code added using [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/) addon then custom code will be shown instead of default.
 
 = 4.2.1 =
 Release Date: 22nd September, 2020
