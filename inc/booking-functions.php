@@ -306,19 +306,19 @@ function wp_travel_booking_info( $post ) {
 			?>
 			<div class="wp-travel-form-field-wrapper">
 				<?php
-					$arrival_date   = isset( $multiple_trips_booking_data[ $cart_id ]['arrival_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['arrival_date'] : '';
-					$departure_date = isset( $multiple_trips_booking_data[ $cart_id ]['departure_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['departure_date'] : '';
-					$pax            = isset( $multiple_trips_booking_data[ $cart_id ]['pax'] ) ? $multiple_trips_booking_data[ $cart_id ]['pax'] : '';
+					$arrival_date     = isset( $multiple_trips_booking_data[ $cart_id ]['arrival_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['arrival_date'] : '';
+					$departure_date   = isset( $multiple_trips_booking_data[ $cart_id ]['departure_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['departure_date'] : '';
+					$pax              = isset( $multiple_trips_booking_data[ $cart_id ]['pax'] ) ? $multiple_trips_booking_data[ $cart_id ]['pax'] : '';
 					$booking_fields   = array();
 					$booking_fields[] = array(
 						'label'         => esc_html( 'Arrival Date' ),
 						'name'          => 'arrival_date',
 						'type'          => 'date',
-						'class'        => 'wp-travel-datepicker',
-						'validations'  => array(
+						'class'         => 'wp-travel-datepicker',
+						'validations'   => array(
 							'required' => true,
 						),
-						'attributes'   => array( 'readonly' => 'readonly' ),
+						'attributes'    => array( 'readonly' => 'readonly' ),
 						'wrapper_class' => '',
 						'default'       => $arrival_date,
 
@@ -327,11 +327,11 @@ function wp_travel_booking_info( $post ) {
 						'label'         => esc_html( 'Departure Date' ),
 						'name'          => 'departure_date',
 						'type'          => 'date',
-						'class'        => 'wp-travel-datepicker',
-						'validations'  => array(
+						'class'         => 'wp-travel-datepicker',
+						'validations'   => array(
 							'required' => true,
 						),
-						'attributes'   => array( 'readonly' => 'readonly' ),
+						'attributes'    => array( 'readonly' => 'readonly' ),
 						'wrapper_class' => '',
 						'default'       => $departure_date,
 					);
@@ -347,7 +347,7 @@ function wp_travel_booking_info( $post ) {
 						$form_field->init( $field, array( 'single' => true ) )->render();
 					}
 
-				?>
+					?>
 
 			</div>
 			<div class="wp-travel-form-field-wrapper">
@@ -514,6 +514,7 @@ function wp_travel_booking_columns( $booking_columns ) {
 
 	$new_columns['cb']             = '<input type="checkbox" />';
 	$new_columns['title']          = _x( 'Title', 'column name', 'wp-travel' );
+	$new_columns['trip_code']      = __( 'Trip Code', 'wp-travel' );
 	$new_columns['contact_name']   = __( 'Contact Name', 'wp-travel' );
 	$new_columns['booking_status'] = __( 'Booking Status', 'wp-travel' );
 	$new_columns['date']           = __( 'Booking Date', 'wp-travel' );
@@ -533,6 +534,12 @@ add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_m
  */
 function wp_travel_booking_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
+		case 'trip_code':
+			$trip_id   = get_post_meta( $id, 'wp_travel_post_id', true );
+			$trip_code = wp_travel_get_trip_code( $trip_id );
+			echo esc_attr( $trip_code );
+			break;
+
 		case 'contact_name':
 			$first_name = get_post_meta( $id, 'wp_travel_fname_traveller', true );
 			if ( ! $first_name ) {
@@ -698,7 +705,7 @@ function wp_travel_book_now() {
 			$booking_departure_date = $booking_departure_date[0];
 			$pricing_id             = $pricing_id[0];
 			$trip_time              = $trip_time[0];
-			$arrival_date_email_tag = wp_travel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' ) ;
+			$arrival_date_email_tag = wp_travel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
 
 		}
 		// Quick fixes trip id.
@@ -815,7 +822,7 @@ function wp_travel_book_now() {
 		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
-	$settings = wp_travel_get_settings();
+	$settings  = wp_travel_get_settings();
 	$first_key = '';
 	if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
 		/**
@@ -823,12 +830,12 @@ function wp_travel_book_now() {
 		 */
 		do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
 		$inventory_args = array(
-			'trip_id' => $trip_id,
-			'booking_id' => $booking_id,
-			'pricing_id' => $pricing_id,
-			'pax' => $pax,
+			'trip_id'       => $trip_id,
+			'booking_id'    => $booking_id,
+			'pricing_id'    => $pricing_id,
+			'pax'           => $pax,
 			'selected_date' => $booking_arrival_date,
-			'time' => $trip_time,
+			'time'          => $trip_time,
 		);
 		$inventory_args = apply_filters( 'wp_travel_inventory_args', $inventory_args );
 		// @since 4.0.0
@@ -970,9 +977,9 @@ function wp_travel_book_now() {
 		// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
 		foreach ( $items as $item_key => $trip ) {
 
-			$trip_id   = $trip['trip_id'];
-			$pax       = $trip['pax'];
-			$price_key = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
+			$trip_id      = $trip['trip_id'];
+			$pax          = $trip['pax'];
+			$price_key    = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
 			$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
 
 			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
@@ -1027,12 +1034,12 @@ function wp_travel_book_now() {
 			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
 			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
 			$inventory_args = array(
-				'trip_id' => $trip_id,
-				'booking_id' => $booking_id,
-				'pricing_id' => $pricing_id,
-				'pax' => $pax,
+				'trip_id'       => $trip_id,
+				'booking_id'    => $booking_id,
+				'pricing_id'    => $pricing_id,
+				'pax'           => $pax,
 				'selected_date' => $arrival_date,
-				'time' => $trip_time,
+				'time'          => $trip_time,
 			);
 			$inventory_args = apply_filters( 'wp_travel_inventory_args', $inventory_args );
 			// @since 4.0.0
