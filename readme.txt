@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 4.2.2 =
 Release Date: 28th September, 2020
 
-* Standard Paypal Cert updated and IPN fixes.
+* Standard Paypal SSL Certificates updated and IPN Listener changed. Payment status updated to paid if the payment_status response = Pending from IPN response.
 * Filter by 'Trip Date' on WP Travel Archive page issue fixes.
 
 = 4.2.1 =
