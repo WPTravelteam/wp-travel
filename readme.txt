@@ -245,8 +245,11 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 4.2.2 =
 Release Date: 28th September, 2020
 
+Fixes:
 * Standard Paypal SSL Certificates updated and IPN Listener changed. Payment status updated to paid if the payment_status response = Pending from IPN response.
 * Filter by 'Trip Date' on WP Travel Archive page issue fixes.
+
+Enhancements:
 * 'Trip Code' column has been added to WP Travel Booking section. Now, if the trip booked then respective trip code will be shown on 'Trip Code' column. And if there is custom trip code added using utilities addon then custom code will be shown instead of default.
 
 = 4.2.1 =
