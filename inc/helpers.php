@@ -54,8 +54,8 @@ function wp_travel_settings_default_fields() {
 
 	// Payment client Defaults.
 	$payment_client_email_defaults = array(
-		'client_subject'      => __( 'Payment Recieved', 'wp-travel' ),
-		'client_title'        => __( 'Payment Recieved', 'wp-travel' ),
+		'client_subject'      => __( 'Payment Received', 'wp-travel' ),
+		'client_title'        => __( 'Payment Received', 'wp-travel' ),
 		'client_header_color' => '',
 		'email_content'       => wp_travel_payment_client_default_email_content(),
 		'from_email'          => get_option( 'admin_email' ),
@@ -141,6 +141,11 @@ function wp_travel_settings_default_fields() {
 		 * @since 4.0.6
 		 */
 		'wt_load_optimized_script' => 'no',
+
+		/**
+		 * @since 4.0.7
+		 */
+		'calender_view' => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -917,7 +922,7 @@ function wp_travel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hid
 				if ( isset( $tab['custom'] ) && 'yes' === $tab['custom'] ) {
 					$tab_content = isset( $tab['content'] ) ? $tab['content'] : '';
 				}
-				$new_tabs[ $key ]['label']       = isset( $tab['label'] ) ? $tab['label'] : @$wp_travel_itinerary_tabs[ $key ]['label'];
+				$new_tabs[ $key ]['label']       = ( $tab['label'] ) ? $tab['label'] : $wp_travel_itinerary_tabs[ $key ]['label'];
 				$new_tabs[ $key ]['label_class'] = isset( $wp_travel_itinerary_tabs[ $key ]['label_class'] ) ? $wp_travel_itinerary_tabs[ $key ]['label_class'] : '';
 				$new_tabs[ $key ]['content']     = $tab_content;
 				$new_tabs[ $key ]['use_global']  = isset( $tab['use_global'] ) ? $tab['use_global'] : 'yes';
@@ -2967,6 +2972,13 @@ function wp_travel_get_submenu() {
 				'menu_title' => __( 'Settings', 'wp-travel' ),
 				'menu_slug'  => 'settings',
 				'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ),
+			),
+			'settings2'       => array(
+				'priority'   => '130',
+				'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
+				'menu_title' => __( 'Settings2', 'wp-travel' ),
+				'menu_slug'  => 'settings2',
+				'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
 			),
 			'marketplace'    => array(
 				'priority'   => '140',

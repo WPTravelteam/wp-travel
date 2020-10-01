@@ -13,6 +13,10 @@ module.exports = {
         './app/src/admin/trip-edit/index.js',
         './app/src/admin/trip-edit/sass/main.scss',
       ],
+      'admin-settings':[
+        './app/src/admin/settings/index.js',
+        './app/src/admin/settings/sass/main.scss',
+      ],
 
       'frontend-booking-widget':[
         './app/src/frontend/booking-widget/index.js',
