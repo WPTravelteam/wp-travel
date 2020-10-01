@@ -201,10 +201,10 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         ...content,
     ]
 
-    { 'undefined' != typeof premium_addons_data && premium_addons_data.length > 0  &&
+    { premium_addons_data && 'undefined' != typeof premium_addons_data && premium_addons_data.length > 0  &&
         <>
         {
-           
+        
             premium_addons_data.map((addons, index) => {
 
                 content = [
