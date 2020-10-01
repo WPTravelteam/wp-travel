@@ -5,7 +5,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { _n, __} from '@wordpress/i18n';
 
 
-const SaveSettings = () => {
+const SaveSettings = (props) => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
@@ -19,6 +19,11 @@ const SaveSettings = () => {
         }
     }, 2000)
     return <>
+        { 'top' == props.position &&
+            <div className="wp-travel-setting-system-info">
+                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>System Information</a>
+            </div>
+        }
         <PanelRow className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border wp-travel-save-changes">
             <div>
                 {has_state_changes&&<div className="wp-travel-save-notice">{__('* Please save the changes', 'wp-travel' )}</div>}
@@ -28,9 +33,6 @@ const SaveSettings = () => {
             </div>
             <Button isPrimary onClick={()=>{
                 updateRequestSending(true);
-                
-                
-                
                 apiFetch( { url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data:allData, method:'post' } ).then( res => {
                     updateRequestSending(false);
                     
@@ -44,9 +46,11 @@ const SaveSettings = () => {
             disabled={!has_state_changes}
             >{__('Save Settings', 'wp-travel' )}</Button>
         </PanelRow>
-        <div className="wp-travel-setting-system-info">
-            <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>System Information</a>
-        </div>
+        { 'bottom' == props.position &&
+            <div className="wp-travel-setting-system-info">
+                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>System Information</a>
+            </div>
+        }
     </>
 }
 

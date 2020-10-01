@@ -133,7 +133,7 @@ const WPTravelTripSettings = () => {
     ], allData );
     return <div className={wrapperClasses}>
         {allData.is_sending_request && <Spinner />}
-        <SaveSettings />
+        <SaveSettings position="top" />
         <TabPanel className="wp-travel-block-tabs"
             activeClass="active-tab"
             onSelect={() => false}
@@ -142,7 +142,7 @@ const WPTravelTripSettings = () => {
                 (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>{__('Error', 'wp-travel')}</>
             }
         </TabPanel>
-        <SaveSettings />
+        <SaveSettings position="bottom" />
     </div>
 };
 
