@@ -44,7 +44,13 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
     }
 
-    let LicenseFields = ( props  ) => {
+    let LicenseFields = ( addons, index  ) => {
+
+        let props = {
+            addons:addons,
+            index:index
+        }
+
         let license =   'undefined' != typeof props.addons ? props.addons : []
 
         return <>
@@ -198,11 +204,12 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
     { 'undefined' != typeof premium_addons_data && premium_addons_data.length > 0  &&
         <>
         {
+           
             premium_addons_data.map((addons, index) => {
 
                 content = [
                     ...content,
-                    <LicenseFields addons={addons} index={index}  />
+                    LicenseFields(addons, index)
                 ]
 
             }) 
