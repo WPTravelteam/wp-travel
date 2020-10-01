@@ -17,7 +17,8 @@ class WP_Travel_Admin_Assets {
 		}
 
 		// settings_screen.
-		if ( 'itinerary-booking_page_settings' == $screen->id ) {
+		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
+		if ( $react_settings_enable && 'itinerary-booking_page_settings2' == $screen->id ) {
 			$deps = include_once sprintf( '%s/app/build/admin-settings.asset.php', WP_TRAVEL_EXTENDED_FILE_PATH );
 			$deps['dependencies'][] = 'jquery';
 			wp_enqueue_script( 'wp-travel-admin-settings', plugin_dir_url( WP_TRAVEL_EXTENDED_FILE ) . '/app/build/admin-settings.js', $deps['dependencies'], $deps['version'], true );

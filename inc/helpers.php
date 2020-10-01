@@ -2991,7 +2991,7 @@ function wp_travel_get_submenu() {
 			'priority'   => '130',
 			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
 			'menu_title' => __( 'Settings', 'wp-travel' ),
-			'menu_slug'  => 'settings',
+			'menu_slug'  => 'settings2',
 			'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
 		);
 	}
