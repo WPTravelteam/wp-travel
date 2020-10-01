@@ -14,7 +14,7 @@ class WP_Travel_Localize_Admin {
 			'admin_url' => admin_url(),
 		);
 		// trip edit page.
-		if ( ! $react_settings_enable && in_array( $screen->id, $allowed_screen ) ) {
+		if ( in_array( $screen->id, $allowed_screen ) ) {
 			$translation_array['postID'] = get_the_ID();
 			wp_localize_script( 'wp-travel-admin-trip-options', '_wp_travel', $translation_array );
 		} elseif ( $react_settings_enable && 'itinerary-booking_page_settings' == $screen->id ) { // settings page
