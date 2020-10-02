@@ -371,7 +371,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                         <th>{__( 'Action', 'wp-travel' )}</th>
                                     </tr> */}
                                     {wp_travel_bank_deposits.map( ( bankDeposite, index ) => {
-                                        return <tr key={index}>
+                                        return <PanelRow><tr key={index}>
                                             <td><Icon icon={alignJustify} className="account-detail-sortable" /></td>
                                             <td>
                                                 <TextControl
@@ -427,28 +427,27 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                     }
                                                 />
                                             </td>
-                                            <td>
-                                                <ToggleControl
-                                                    checked={bankDeposite.enable == 'yes'}
-                                                    onChange={
-                                                        (e) => updateBankDeposit('enable', bankDeposite.enable == 'yes' ? 'no' : 'yes', index)
-                                                    }
-                                                />
-                                                <p className="description">{__( 'Enable', 'wp-travel' )}</p>
-                                            </td>
-                                            <td>
-                                                <Button isDefault onClick={() => {
-                                                    if (!confirm(__( 'Are you sure to delete Bank Detail?', 'wp-travel' ) )) {
-                                                        return false;
-                                                    }
-                                                    let bankData = [];
-                                                    bankData = wp_travel_bank_deposits.filter((data, newIndex) => {
-                                                        return newIndex != index;
-                                                    });
-                                                    removeBankDeposit(bankData);
-                                                }} className="wp-traval-button-danger">{__( '- Remove bank', 'wp-travel' )}</Button>
-                                            </td>
                                         </tr>
+                                        <PanelRow className="wp-travel-action-section">
+                                        <ToggleControl
+                                            checked={bankDeposite.enable == 'yes'}
+                                            onChange={
+                                                (e) => updateBankDeposit('enable', bankDeposite.enable == 'yes' ? 'no' : 'yes', index)
+                                            }
+                                        />
+                                        <p className="description">{__( 'Enable', 'wp-travel' )}</p>
+                                        <Button isDefault onClick={() => {
+                                            if (!confirm(__( 'Are you sure to delete Bank Detail?', 'wp-travel' ) )) {
+                                                return false;
+                                            }
+                                            let bankData = [];
+                                            bankData = wp_travel_bank_deposits.filter((data, newIndex) => {
+                                                return newIndex != index;
+                                            });
+                                            removeBankDeposit(bankData);
+                                        }} className="wp-traval-button-danger">{__( '- Remove bank', 'wp-travel' )}</Button>
+                                        </PanelRow>
+                                        </PanelRow>
                                     } )}
                                 {/* </table> */}
                             </ReactSortable>
