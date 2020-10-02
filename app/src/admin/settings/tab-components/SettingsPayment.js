@@ -427,16 +427,18 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                     }
                                                 />
                                             </td>
+                                            <td>
+                                                <ToggleControl
+                                                    checked={bankDeposite.enable == 'yes'}
+                                                    onChange={
+                                                        (e) => updateBankDeposit('enable', bankDeposite.enable == 'yes' ? 'no' : 'yes', index)
+                                                    }
+                                                />
+                                                <p className="description">{__( 'Enable', 'wp-travel' )}</p>
+                                            </td>
                                         </tr>
                                         </table>
                                         <PanelRow className="wp-travel-action-section">
-                                        <ToggleControl
-                                            checked={bankDeposite.enable == 'yes'}
-                                            onChange={
-                                                (e) => updateBankDeposit('enable', bankDeposite.enable == 'yes' ? 'no' : 'yes', index)
-                                            }
-                                        />
-                                        <p className="description">{__( 'Enable', 'wp-travel' )}</p>
                                         <Button isDefault onClick={() => {
                                             if (!confirm(__( 'Are you sure to delete Bank Detail?', 'wp-travel' ) )) {
                                                 return false;
