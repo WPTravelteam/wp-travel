@@ -43,7 +43,7 @@ class WP_Travel_Helpers_License {
 		// add_filter( 'wp_travel_display_critical_admin_notices', 'WP_Travel_License::display_critical_notices' );
 		// add_action( 'wp_travel_critical_admin_notice', 'WP_Travel_License::critical_admin_notices' );
 		// Licesnse data for
-		add_filter( 'wp_travel_before_save_settings', 'WP_Travel_Helpers_License::settings_data', 10, 2 );
+		add_filter( 'wp_travel_before_save_settings', 'WP_Travel_Helpers_License::settings_data' );
 		add_filter( 'wp_travel_block_before_save_settings', 'WP_Travel_Helpers_License::settings_data_v4', 10, 2 );
 	}
 
@@ -90,11 +90,14 @@ class WP_Travel_Helpers_License {
 	public static function settings_data_v4 ( $settings, $settings_data ) {		
 		$premium_addons = ! empty( $settings_data['premium_addons_data'] ) ? ( $settings_data['premium_addons_data'] ) : array();
 
+		$premium_addons_keys = array(); // TO make loop in the license block.
+		$premium_addons_data = array();
 		foreach ( $premium_addons as $key => $premium_addon ) :
 			// Get license status.
 			$status       = isset( $premium_addon['license_data']['license'] ) && ! empty( $premium_addon['license_data']['license'] ) ? stripslashes_deep( $premium_addon['license_data']['license'] ) : '';
 			$license_key  = isset( $premium_addon['license_key'] ) && ! empty( $premium_addon['license_key'] ) ? stripslashes_deep( $premium_addon['license_key'] ) : '';
 			$license_data = isset( $premium_addon['license_data'] ) && ! empty( $premium_addon['license_data'] ) ? stripslashes_deep( $premium_addon['license_data'] ) : false;
+			$filtered_key = str_replace( '-', '_', $key );
 
 			$data = array(
 				'license_data'  => $license_data,
@@ -104,13 +107,14 @@ class WP_Travel_Helpers_License {
 				'option_prefix' => isset( $premium_addon['option_prefix'] ) && ! empty( $premium_addon['option_prefix'] ) ? stripslashes_deep( $premium_addon['option_prefix'] ) : '',
 			);
 
+			$premium_addons_keys[] = $filtered_key;
 			$premium_addons_data[] = $data;
 
 		endforeach;
 
+		$settings['premium_addons_keys'] = $premium_addons_keys;
 		$settings['premium_addons_data'] = $premium_addons_data;
 		// error_log( print_r( $settings, true ) );
-		
 		return $settings;
 	}
 
