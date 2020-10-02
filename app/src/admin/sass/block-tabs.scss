@@ -41,9 +41,9 @@
   .components-panel__body.is-opened>.components-panel__body-title{
     margin-bottom: 22px;
   }
-  .components-base-control{
-    width: 250px;
-  }
+  // .components-base-control{
+  //   width: 250px;
+  // }
   .components-color-picker{
     background-color: #fff;
     border: 1px solid #eee;
@@ -259,4 +259,10 @@
 
 .components-modal__frame{
   overflow: hidden;
+}
+
+td{
+  .components-base-control{
+    width: auto;
+  }
 }
