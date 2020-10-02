@@ -371,7 +371,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                         <th>{__( 'Action', 'wp-travel' )}</th>
                                     </tr> */}
                                     {wp_travel_bank_deposits.map( ( bankDeposite, index ) => {
-                                        return <PanelRow><tr key={index}>
+                                        return <PanelRow><table><tr key={index}>
                                             <td><Icon icon={alignJustify} className="account-detail-sortable" /></td>
                                             <td>
                                                 <TextControl
@@ -428,6 +428,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                 />
                                             </td>
                                         </tr>
+                                        </table>
                                         <PanelRow className="wp-travel-action-section">
                                         <ToggleControl
                                             checked={bankDeposite.enable == 'yes'}
@@ -449,7 +450,6 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                         </PanelRow>
                                         </PanelRow>
                                     } )}
-                                {/* </table> */}
                             </ReactSortable>
                         </>
                     }
