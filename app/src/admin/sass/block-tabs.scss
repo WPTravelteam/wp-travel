@@ -31,6 +31,9 @@
 
 .wp-travel-trip-settings{
   margin-top: 20px;
+  td{
+    vertical-align: middle;
+  }
   .wp-editor-wrap{
     width: 100%;
     margin-bottom: 20px;
@@ -265,4 +268,12 @@ td{
   .components-base-control{
     width: auto;
   }
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.justify-content-end{
+  justify-content: flex-end;
 }
