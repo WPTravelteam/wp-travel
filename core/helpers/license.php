@@ -35,15 +35,9 @@ class WP_Travel_Helpers_License {
 			}
 		}
 
-		// add_action( 'admin_init', 'WP_Travel_License::plugin_updater', 0 );
-		// add_action( 'wp_travel_license_tab_fields', 'WP_Travel_License::setting_fields' );
-		// add_filter( 'wp_travel_before_save_settings', 'WP_Travel_License::save_license' );
-		// add_action( 'admin_init', 'WP_Travel_License::activate_license' );
-		// add_action( 'admin_init', 'WP_Travel_License::deactivate_license' );
-		// add_filter( 'wp_travel_display_critical_admin_notices', 'WP_Travel_License::display_critical_notices' );
-		// add_action( 'wp_travel_critical_admin_notice', 'WP_Travel_License::critical_admin_notices' );
+		
 		// Licesnse data for
-		add_filter( 'wp_travel_before_save_settings', 'WP_Travel_Helpers_License::settings_data' );
+		add_filter( 'wp_travel_settings_values', 'WP_Travel_Helpers_License::settings_data' );
 		add_filter( 'wp_travel_block_before_save_settings', 'WP_Travel_Helpers_License::settings_data_v4', 10, 2 );
 	}
 
@@ -65,21 +59,12 @@ class WP_Travel_Helpers_License {
 				'license_key' => $license_key,
 				'status' => $status,
 				'item_name' => $premium_addon['item_name'],
-				'option_prefix' => $filtered_key . '_',
+				'_option_prefix' => $filtered_key . '_',
 			);
 
 			$premium_addons_keys[] = $filtered_key;
 			$premium_addons_data[] = $data;
 
-
-
-			// // // Set license data.
-			// $premium_addons[ $key ]['license_data'] = $license_data;
-			// $premium_addons[ $key ]['license_key'] = $license_key;
-			// $premium_addons[ $key ]['status'] = $status;
-			// $options[ 'license_' . $filtered_key ]['license_key'] = $license_key;
-			// $options[ 'license_' . $filtered_key ]['status']      = $status;
-			// $options[ 'license_' . $filtered_key ]['item_name'] = $license_data['item_name'];
 		endforeach;
 
 		$settings['premium_addons_keys'] = $premium_addons_keys;
@@ -89,32 +74,9 @@ class WP_Travel_Helpers_License {
 
 	public static function settings_data_v4 ( $settings, $settings_data ) {		
 		$premium_addons = ! empty( $settings_data['premium_addons_data'] ) ? ( $settings_data['premium_addons_data'] ) : array();
-
-		$premium_addons_keys = array(); // TO make loop in the license block.
-		$premium_addons_data = array();
 		foreach ( $premium_addons as $key => $premium_addon ) :
-			// Get license status.
-			$status       = isset( $premium_addon['license_data']['license'] ) && ! empty( $premium_addon['license_data']['license'] ) ? stripslashes_deep( $premium_addon['license_data']['license'] ) : '';
-			$license_key  = isset( $premium_addon['license_key'] ) && ! empty( $premium_addon['license_key'] ) ? stripslashes_deep( $premium_addon['license_key'] ) : '';
-			$license_data = isset( $premium_addon['license_data'] ) && ! empty( $premium_addon['license_data'] ) ? stripslashes_deep( $premium_addon['license_data'] ) : false;
-			$filtered_key = str_replace( '-', '_', $key );
-
-			$data = array(
-				'license_data'  => $license_data,
-				'license_key'   => $license_key,
-				'status'        => $status,
-				'item_name'     => isset( $premium_addon['item_name'] ) && ! empty( $premium_addon['item_name'] ) ? stripslashes_deep( $premium_addon['item_name'] ) : '',
-				'option_prefix' => isset( $premium_addon['option_prefix'] ) && ! empty( $premium_addon['option_prefix'] ) ? stripslashes_deep( $premium_addon['option_prefix'] ) : '',
-			);
-
-			$premium_addons_keys[] = $filtered_key;
-			$premium_addons_data[] = $data;
-
+			$settings[ $premium_addon['_option_prefix'] . 'license_key' ] = $premium_addon['license_key'];
 		endforeach;
-
-		$settings['premium_addons_keys'] = $premium_addons_keys;
-		$settings['premium_addons_data'] = $premium_addons_data;
-		// error_log( print_r( $settings, true ) );
 		return $settings;
 	}
 
