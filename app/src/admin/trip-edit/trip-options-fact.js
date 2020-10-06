@@ -36,7 +36,7 @@ const WPTravelTripOptionsFactContent = () => {
         const { trip_facts } = allData;
         let _allTripFacts = trip_facts;
         _allTripFacts[_factIndex][key] = data[key]
-        // console.log(data)
+        console.log(data)
         if ( 'type' === key ) { // reset label and value on fact type change
             _allTripFacts[_factIndex].label = data.name
             _allTripFacts[_factIndex].value = ''
@@ -67,8 +67,8 @@ const WPTravelTripOptionsFactContent = () => {
         return Object.keys(selectedFactSettings).map( (index) => {
             return {
                 label: selectedFactSettings[index],
-                value: index
-              }
+                value: 'option'+ (++index) //Added for making compatible with selection option value.
+            }
         } )
     }
 

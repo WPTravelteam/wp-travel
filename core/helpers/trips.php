@@ -56,7 +56,6 @@ class WP_Travel_Helpers_Trips {
 		if ( is_string( $trip_facts ) ) {
 			$trip_facts = json_decode( $trip_facts, true );
 		}
-		error_log(print_r( $trip_facts, true ));
 
 		$use_global_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );
 		if ( '' === $use_global_trip_enquiry_option ) {
