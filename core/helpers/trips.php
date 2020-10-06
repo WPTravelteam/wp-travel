@@ -56,6 +56,7 @@ class WP_Travel_Helpers_Trips {
 		if ( is_string( $trip_facts ) ) {
 			$trip_facts = json_decode( $trip_facts, true );
 		}
+		error_log(print_r( $trip_facts, true ));
 
 		$use_global_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );
 		if ( '' === $use_global_trip_enquiry_option ) {
@@ -77,7 +78,7 @@ class WP_Travel_Helpers_Trips {
 		// $map_data['iframe_height'] = apply_filters( 'wp_travel_trip_map_iframe_height', $iframe_height, $trip_id );
 		$map_data['use_lat_lng'] = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
 
-		$trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
+		// $trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
 		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );

@@ -34,15 +34,13 @@ const WPTravelTripOptionsFactContent = () => {
     const updateFactType = ( key, data, _factIndex ) => {
       
         const { trip_facts } = allData;
-        
-    
         let _allTripFacts = trip_facts;
         _allTripFacts[_factIndex][key] = data[key]
         // console.log(data)
         if ( 'type' === key ) { // reset label and value on fact type change
             _allTripFacts[_factIndex].label = data.name
             _allTripFacts[_factIndex].value = ''
-            _allTripFacts[_factIndex].fact_id = data.id
+            _allTripFacts[_factIndex].fact_id = data.id ? data.id : data.key
         }
         updateTripData({
             ...allData,
@@ -62,12 +60,9 @@ const WPTravelTripOptionsFactContent = () => {
         })
     }
     const fieldTypeOption = ( factId ) => {
-        // console.log( 'have not fact id' );
-        if ( !factId  ){
+        if ( 'number' != typeof factId  ){
             return []
         }
-        // console.log(factId)
-        // console.log(wp_travel_trip_facts_settings)
         let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 ? wp_travel_trip_facts_settings[factId].options : [];
         return Object.keys(selectedFactSettings).map( (index) => {
             return {
@@ -115,7 +110,7 @@ const WPTravelTripOptionsFactContent = () => {
                                 >
                                 {trip_facts.map((trip_fact, factIndex) => {
                                     let singleOrMultipleOptions = fieldTypeOption(trip_fact.fact_id);
-                                    
+
                                     let singleSelected = singleOrMultipleOptions.filter( ( item ) => {
                                         return item.value == trip_fact.value
                                     } )
