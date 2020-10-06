@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-02 08:03:02+00:00\n"
+"POT-Creation-Date: 2020-10-05 07:37:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -538,7 +538,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/settings/cart-checkout-settings-global.php:14
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:103
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-gallery.php:15
-#: inc/license/wp-travel-license.php:207
+#: inc/license/wp-travel-license.php:179
 msgid "Get WP Travel Pro"
 msgstr ""
 
@@ -1103,7 +1103,6 @@ msgstr ""
 
 #: inc/admin/class-admin-settings.php:189
 #: inc/class-wp-travel-user-account.php:50
-#: inc/license/wp-travel-license.php:120
 msgid "Account"
 msgstr ""
 
@@ -2012,7 +2011,7 @@ msgid " Automatically generate customer password"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/addons-settings.php:13
-#: inc/license/wp-travel-license.php:204
+#: inc/license/wp-travel-license.php:176
 msgid "Want to add more features in WP Travel?"
 msgstr ""
 
@@ -8835,69 +8834,57 @@ msgstr ""
 msgid "No gallery images found."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:119
-msgid "Active"
-msgstr ""
-
-#: inc/license/wp-travel-license.php:122
-msgid "Add License"
-msgstr ""
-
-#: inc/license/wp-travel-license.php:123
-msgid "Purchse License"
-msgstr ""
-
-#: inc/license/wp-travel-license.php:141
+#: inc/license/wp-travel-license.php:113
 msgid "License Active"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:144
+#: inc/license/wp-travel-license.php:116
 msgid "Invalid License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:147
+#: inc/license/wp-travel-license.php:119
 msgid "License Expired"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:150
+#: inc/license/wp-travel-license.php:122
 msgid "License Inactive"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:168
+#: inc/license/wp-travel-license.php:141
 msgid "Enter license key"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:174
+#: inc/license/wp-travel-license.php:147
 msgid "Deactivate License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:176
+#: inc/license/wp-travel-license.php:149
 msgid "Activate License"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:189
+#: inc/license/wp-travel-license.php:162
 msgid "Expires in"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:191
+#: inc/license/wp-travel-license.php:164
 msgid "Enter license key for %s here."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:205
+#: inc/license/wp-travel-license.php:177
 msgid ""
 "Get addon for payment, trip extras, Inventory management and other premium "
 "features."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:209
+#: inc/license/wp-travel-license.php:181
 msgid "Get WP Travel Addons"
 msgstr ""
 
-#: inc/license/wp-travel-license.php:437
+#: inc/license/wp-travel-license.php:409
 msgid "You have not activated the license for %1$s addon."
 msgstr ""
 
-#: inc/license/wp-travel-license.php:444
+#: inc/license/wp-travel-license.php:416
 msgid ", go to <a href=\"%1$s\"> settings </a> to activate your license."
 msgstr ""
 
