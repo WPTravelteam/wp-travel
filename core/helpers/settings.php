@@ -215,6 +215,7 @@ class WP_Travel_Helpers_Settings {
 
 		if ( isset( $settings_data['wp_travel_bank_deposits'] ) && is_array( $settings_data['wp_travel_bank_deposits'] ) ) {
 			$i = 0;
+			$bank_deposits = array();
 			foreach ( $settings_data['wp_travel_bank_deposits'] as $bank_deposit ) {
 
 				if ( ! $bank_deposit['account_name'] && ! $bank_deposit['account_number'] ) {
@@ -257,6 +258,7 @@ class WP_Travel_Helpers_Settings {
 		if ( isset( $settings_data['wp_travel_trip_facts_settings'] ) && is_array( $settings_data['wp_travel_trip_facts_settings'] ) ) {
 
 			$facts_settings = array();
+			$facts          = array();
 			foreach ( $settings_data['wp_travel_trip_facts_settings'] as $index => $fact ) {
 				$name = $fact['name'];
 				$type = $fact['type'];
@@ -345,6 +347,8 @@ class WP_Travel_Helpers_Settings {
 		}
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
+		// error_log( print_r( $settings, true ) );
+		
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(

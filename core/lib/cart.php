@@ -266,7 +266,7 @@ class WP_Travel_Lib_Cart {
 	 */
 	private function read() {
 		$cart            = WP_Travel()->session->get( $this->cart_id );
-		$cart_items      = $cart['cart_items'];
+		$cart_items      = ! empty( $cart['cart_items'] ) ? $cart['cart_items'] : array(); // Checking if not empty to remove php notice on log. @since 4.3.0.
 		$this->discounts = isset( $cart['discounts'] ) ? $cart['discounts'] : array();
 
 		if ( ! empty( $cart_items ) ) {
