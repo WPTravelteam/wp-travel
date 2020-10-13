@@ -17,6 +17,7 @@ export default () => {
     const {
         wt_test_mode,
         wt_test_email,
+        wt_load_optimized_script,
         options
         } = allData;
 
@@ -57,7 +58,23 @@ export default () => {
                     <p className="description">{__( 'Test email address will get test mode payment emails.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-           
+            
+            <h3>{__( 'Optimized Scripts and Styles', 'wp-travel' )}</h3>
+            <PanelRow>
+                <label>{ __( 'Load Optimized Scripts', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ wt_load_optimized_script == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                wt_load_optimized_script: 'yes' == wt_load_optimized_script ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'Enabling this will load the optimized bundled scripts files.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
             {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}
         </ErrorBoundary>
     </div>
