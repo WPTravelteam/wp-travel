@@ -26,12 +26,6 @@ export default () => {
         options,
         total_payout_fields,
         } = allData;
-    
-    // const total_percent = minimum_partial_payout.reduce(function(a,b){
-    //     return a + b;
-    // }, 0);
-    
-    // const remain_percent = 100 - total_percent
 
     const updatePayoutOption = (value, _tabIndex) => {
 
@@ -39,15 +33,12 @@ export default () => {
 
         let _allPayouts = minimum_partial_payout;
 
-        // value = remain_percent != 0 ? value : _allPayouts[_tabIndex] = --value;
-        // value = remain_percent != 0 ? value : _allPayouts[_tabIndex] = --value;
         _allPayouts[_tabIndex] = value
 
         updateSettings({
             ...allData,
             minimum_partial_payout, _tabIndex: value
         })
-        // console.log(allData.minimum_partial_payout)
     }
 
     const sortGateways = ( sortedPricing) => {
@@ -132,7 +123,6 @@ export default () => {
                     >
                         {
                             sorted_gateways.map((gateway, index) => {
-                                // console.log(gateway.key)
                                 return <PanelBody
                                     icon= {alignJustify}
                                     title={ gateway.label }
@@ -247,7 +237,6 @@ addFilter('wp_travel_payment_gateway_fields_paypal', 'wp_travel', (content, allD
                     <div className="wp-travel-field-value">
                         <TextControl
                                 value={paypal_email}
-                                // placeholder={tab.default_label }
                                 onChange={ 
                                     (value) => { 
                                         updateSettings({
