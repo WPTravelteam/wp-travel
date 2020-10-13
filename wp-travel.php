@@ -86,7 +86,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define( 'WP_TRAVEL_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 			$this->define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 			$this->define( 'WP_TRAVEL_VERSION', $this->version );
-			$this->define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', 10 ); // In percent.
+			$this->define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 			$this->define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 		}
 
