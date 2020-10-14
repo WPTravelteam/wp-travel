@@ -818,7 +818,7 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										// echo esc_html( $val );
 										if ( isset( $trip_fact['fact_id'] ) ) {
-											echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
+											echo @esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
 										} else {
 											echo esc_html( $val );
 										}
