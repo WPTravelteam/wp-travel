@@ -1012,7 +1012,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 		return false;
 	}
 	$screen            = get_current_screen();
-	$wp_travel_pages[] = array( 'itinerary-booking_page_settings' );
+	$wp_travel_pages[] = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 	if ( ! empty( $pages ) ) {
 		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
