@@ -243,7 +243,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.3.0 =
-Release Date: 14th October, 2020
+Release Date: 15th October, 2020
 
 Enhancements:
 * WP Travel Admin settings updated to WordPress Block Layout.
