@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 15th October, 2020
 
 Enhancements:
-* WP Travel Admin settings updated to WordPress Block Layout.
+* WP Travel Admin settings updated to WordPress Block Layout. Similarly, all the WP Travel related addons are now made compatible with new WP Travel Settings. For more info please see our v4.3 release note[here](https://wptravel.io/wp-travel-plugin--version-4-3-0-release-note/).
 
 = 4.2.2 =
 Release Date: 28th September, 2020
