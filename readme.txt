@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 4.3.1 =
 Release Date: 22nd October, 2020
 Enhancements:
-* Compatibility added for Cut off time which allow the user to define the time for not disbaling the booking process of the trip.
+* Compatibility added for Cut off time which allows the user to define the time for disabling the booking process of the trip.
 Fixes:
 * Broken settings link updated in notices.
 
