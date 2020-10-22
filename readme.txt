@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.5.1
 Requires PHP: 5.5
-Stable tag: 4.3.0
+Stable tag: 4.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -241,6 +241,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.3.1 =
+Release Date: 22nd October, 2020
+
+Enhancements:
+* Compatibility added for Cut off time.
+
+Fixes:
+* Broken settings link updated in notices.
 
 = 4.3.0 =
 Release Date: 15th October, 2020

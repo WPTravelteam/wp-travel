@@ -1,5 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect } from '@wordpress/data';
+import { applyFilters } from '@wordpress/hooks';
 import { forwardRef, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import moment from 'moment';
@@ -273,7 +274,7 @@ const BookingCalender = () => {
 		let currentDate = date.getDate();
 		let currentMonth = date.getMonth();
 
-		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 12, 0, 0))).utc();
+		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
 
 		if (excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
@@ -295,9 +296,15 @@ const BookingCalender = () => {
 					return false
 
 				let dateRules = generateRRule(data, startDate)
+				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+					return
+				}
 				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 			}
 			if (data.start_date) {
+				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+					return
+				}
 				return moment(date).isSame(moment(data.start_date))
 				// if (moment(date).isSameOrAfter(moment(data.start_date))) {
 				// 	if (data.end_date) {
@@ -508,14 +515,18 @@ const BookingCalender = () => {
 	}
 
 	const getPricingTripTimes = (pricingId, selectedTripdates) => {
-		let times = selectedTripdates.map(td => {
+		console.log(typeof selectedDateTime);
+		let trip_time = selectedTripdates.map(td => {
 			let date = datesById[td]
+			// console.log(typeof date.start_date);
 			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
-				return date.trip_time && date.trip_time.split(',') || []
+				let times = date.trip_time && date.trip_time.split(',') || []
+				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since WP Travel 4.3.1
+				return times;
 			}
 			return []
 		})
-		return _.chain(times).flatten().uniq().value()
+		return _.chain(trip_time).flatten().uniq().value()
 
 	}
 

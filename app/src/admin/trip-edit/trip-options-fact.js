@@ -237,7 +237,7 @@ const WPTravelTripOptionsFactContent = () => {
                         <Notice isDismissible={false} actions={[{
                             'label': __( 'Add Fact', 'wp-travel' ),
                             onClick: () => {
-                                let url = _wp_travel.admin_url + 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts'
+                                let url = _wp_travel.admin_url + 'edit.php?post_type=itinerary-booking&page=settings2#wp-travel-tab-content-facts'
                                 window.location.href = url
                             },
                             noDefaultClasses: true,

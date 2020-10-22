@@ -423,7 +423,7 @@ class WP_Travel_Admin_Info_Pointers {
 		if ( wp_travel_test_mode() ) {
 			?>
 			<div>
-				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-debug' ) ) ); ?></strong></p>
+				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings2#wp-travel-tab-content-debug' ) ) ); ?></strong></p>
 			</div>
 			<?php
 		}
