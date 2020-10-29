@@ -289,6 +289,10 @@ module.exports = function (grunt) {
 			css: {
 				files: ['assets/sass/**/*.scss'],
 				tasks: ['sass'],
+			},
+			babel: {
+				files: ['assets/js/src/*.js'],
+				tasks: ['babel'],
 			}
 		},
 		// CSS minification.
