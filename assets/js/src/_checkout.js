@@ -37,14 +37,17 @@ jQuery(document).ready(function ($) {
         });
         cart_fields['action'] = 'wt_add_to_cart';
         // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
-
         $.ajax({
             type: "POST",
             url: wp_travel.ajaxUrl,
             data: cart_fields,
             beforeSend: function () { },
             success: function (data) {
-                location.href = wp_travel.cartUrl;
+                if ( wp_travel.isEnabledCartPage ) {
+                  location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+                } else {
+                  location.href = wp_travel.checkoutUrl; // [only checkout page url]
+                }
             }
         });
 
