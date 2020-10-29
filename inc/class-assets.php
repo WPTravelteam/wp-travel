@@ -110,6 +110,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 				// Add localized vars.
 				$wp_travel['cartUrl'] = wp_travel_get_cart_url();
+				$wp_travel['checkoutUrl'] = wp_travel_get_checkout_url(); // @since 4.3.2
+				$wp_travel['isEnabledCartPage'] = WP_Travel_Helpers_Cart::is_enabled_cart_page(); // @since 4.3.2
 
 				wp_enqueue_script( 'wp-travel-accordion' );
 				wp_enqueue_script( 'wp-travel-booking' );

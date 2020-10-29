@@ -484,7 +484,11 @@ const BookingCalender = () => {
 			})
 				.then(res => {
 					if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-						window.location = wp_travel.cartUrl
+						if ( wp_travel.isEnabledCartPage ) {
+							location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+						} else {
+						location.href = wp_travel.checkoutUrl; // [only checkout page url]
+						}
 					}
 				}), 1000)
 			.catch(error => {

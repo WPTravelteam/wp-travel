@@ -329,4 +329,20 @@ class WP_Travel_Helpers_Cart {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
 		}
 	}
+
+	/**
+	 * Return true if cart page is enabled. Fucntion is used to bypass cart page if disabled while doing add to cart.
+	 * 
+	 * @since 4.3.2
+	 */
+	public static function is_enabled_cart_page() {
+		$enabled = false;
+		$settings = wp_travel_get_settings();
+
+		$skip_cart_page_booking = isset( $settings['skip_cart_page_booking'] ) && ! empty( $settings['skip_cart_page_booking'] ) ? $settings['skip_cart_page_booking'] : 'no';
+		if ( 'yes' !== $skip_cart_page_booking ) {
+			$enabled = true;
+		}
+		return apply_filters( 'wp_travel_filter_is_enabled_cart_page', $enabled, $settings );
+	}
 }

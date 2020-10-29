@@ -2021,7 +2021,8 @@ function wp_travel_booking_show_end_date() {
 function wp_travel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id ) {
 	$pricing_name = get_the_title( $trip_id );
 	$pricing      = wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
-	if ( ! is_null( $pricing ) ) {
+	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_lable_on_name', true ); //filter @since WP Travel 4.3.1
+	if ( ! is_null( $pricing ) && $show_pricing_label ) {
 		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing['title'] );
 	}
 	return $pricing_name;
@@ -2057,7 +2058,8 @@ function wp_travel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
 
 		if ( $pricing_option ) {
 			$pricing_label = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : false;
-			if ( $pricing_label ) {
+			$show_pricing_label = apply_filters( 'wp_travel_show_pricing_lable_on_name', true ); //filter @since WP Travel 4.3.1
+			if ( $pricing_label && $show_pricing_label ) {
 				$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing_label );
 			}
 		}
@@ -3875,3 +3877,14 @@ function wp_travel_can_load_bundled_scripts() {
 	$settings = get_option( 'wp_travel_settings', array() );
 	return isset( $settings['wt_load_optimized_script'] ) && 'yes' === $settings['wt_load_optimized_script'];
 }
+
+/**
+ * Function to bypass cart page while clicking book now button.
+ *
+ * @since 4.3.2
+ */
+function wp_travel_bypass_cart_page( $enabled, $settings ) {
+	return false;
+}
+
+add_filter( 'wp_travel_filter_is_enabled_cart_page', 'wp_travel_bypass_cart_page', 10, 2 );

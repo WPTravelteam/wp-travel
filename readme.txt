@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.5.1
 Requires PHP: 5.5
-Stable tag: 4.3.1
+Stable tag: 4.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -242,13 +242,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.3.2 =
+Release Date: November, 2020
+Fixes:
+* Added filter to remove pricing name in cart item label.
+
 = 4.3.1 =
 Release Date: 22nd October, 2020
 Enhancements:
 * Compatibility added for Cut off time which allows the user to define the time for disabling the booking process of the trip.
-Fixes:
-* Broken settings link updated in notices.
-
 Fixes:
 * Broken settings link updated in notices.
 
