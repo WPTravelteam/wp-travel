@@ -2021,7 +2021,7 @@ function wp_travel_booking_show_end_date() {
 function wp_travel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id ) {
 	$pricing_name = get_the_title( $trip_id );
 	$pricing      = wp_travel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
-	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_lable_on_name', true ); //filter @since WP Travel 4.3.1
+	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_label_on_name', true ); //filter @since WP Travel 4.3.1
 	if ( ! is_null( $pricing ) && $show_pricing_label ) {
 		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing['title'] );
 	}
