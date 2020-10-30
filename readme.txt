@@ -243,9 +243,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.3.2 =
-Release Date: November, 2020
+Release Date: 2nd November, 2020
+
 Fixes:
 * Added filter to remove pricing name in cart item label.
+* Multiple travellers fields not being added or removed while updating the pax in checkout page has been fixed.
+* Blank contact name on WP Travel Dashboard Widget has been fixed.
+
+Enhancements:
+* Trip Code column added on WP Travel Dashboard Widget.
 
 = 4.3.1 =
 Release Date: 22nd October, 2020

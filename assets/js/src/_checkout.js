@@ -626,6 +626,7 @@ const wptravelcheckout = (shoppingCart) => {
                             }
                             toggleBookNowBtn()
                             ci.querySelector('h5 a').removeAttribute('style')
+                            location.reload(); // For quick fix on multiple traveller field case.
                         } else {
                             _btn.disabled = false
                         }
