@@ -246,13 +246,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 2nd November, 2020
 
 Fixes:
-* Added filter 'wp_travel_show_pricing_label_on_name' to remove pricing name in cart item label.
+* Added filter `'wp_travel_show_pricing_label_on_name'` to remove pricing name in cart item label.
 * Multiple travellers fields not being added or removed while updating the pax in checkout page has been fixed.
 * Blank contact name on WP Travel Dashboard Widget has been fixed.
 
 Enhancements:
 * Trip Code column added on WP Travel Dashboard Widget.
-* Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable disable this bypass by enabling cart page via this 'wp_travel_filter_is_enabled_cart_page' filter.
+* Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable disable this bypass by enabling cart page via this `'wp_travel_filter_is_enabled_cart_page'` filter.
 
 = 4.3.1 =
 Release Date: 22nd October, 2020

@@ -3883,8 +3883,8 @@ function wp_travel_can_load_bundled_scripts() {
  *
  * @since 4.3.2
  */
-function wp_travel_bypass_cart_page( $enabled, $settings ) {
+function wp_travel_enable_cart_page( $enabled, $settings ) {
 	return false;
 }
 
-add_filter( 'wp_travel_filter_is_enabled_cart_page', 'wp_travel_bypass_cart_page', 10, 2 );
+add_filter( 'wp_travel_filter_is_enabled_cart_page', 'wp_travel_enable_cart_page', 10, 2 );
