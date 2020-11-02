@@ -265,7 +265,7 @@ Fixes:
 Release Date: 15th October, 2020
 
 Enhancements:
-* WP Travel Admin settings updated to WordPress Block Layout. Similarly, all the WP Travel related addons are now made compatible with new WP Travel Settings. For more info please see our v4.3 release note[here](https://wptravel.io/wp-travel-plugin--version-4-3-0-release-note/).
+* WP Travel Admin settings updated to WordPress Block Layout. Similarly, all the WP Travel related addons are now made compatible with new WP Travel Settings. For more info please see our v4.3 release note [here](https://wptravel.io/wp-travel-plugin--version-4-3-0-release-note/).
 
 = 4.2.2 =
 Release Date: 28th September, 2020
@@ -459,7 +459,7 @@ Fixed :
 * Trip Filter range not working in search widget.
 
 Enhancement :
-* Filter wp_travel_currency_symbol added in wp_travel_get_currency_symbol function.
+* Filter `'wp_travel_currency_symbol'` added in `'wp_travel_get_currency_symbol'` function.
 
 = 3.2.2 =
 Release Date: 20th April, 2020
@@ -603,7 +603,7 @@ Fixes:
 
 Deprecated :
 
-* Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
+* Function `'wp_travel_get_pricing_name_by_key'` is deprecated use `'wp_travel_get_pricing_category_by_key'` instead.
 
 = 3.0.6 =
 Release Date: 12th October, 2019
@@ -912,7 +912,7 @@ Enhancement:
 
 Deprecated:
 
-* Function wp_travel_get_default_frontend_tabs is deprecated. use wp_travel_get_default_trip_tabs instead.
+* Function `'wp_travel_get_default_frontend_tabs'` is deprecated. use `'wp_travel_get_default_trip_tabs'` instead.
 
 Compatibility:
 
@@ -940,8 +940,8 @@ Fixes:
 Release Date: 13th March 2019
 
 * Enhancement: Helpers function split.
-* Enhancement: Deprecated hooks 'wp_tarvel_before_archive_title' replaced with 'wp_travel_before_archive_content_title'.
-* Enhancement: Deprecated hooks 'wp_tarvel_before_single_title' replaced with 'wp_travel_before_single_title'.
+* Enhancement: Deprecated hooks `'wp_tarvel_before_archive_title'` replaced with `'wp_travel_before_archive_content_title'`.
+* Enhancement: Deprecated hooks `'wp_tarvel_before_single_title'` replaced with `'wp_travel_before_single_title'`.
 * Fixes: Page settings not reflecting into frontend.
 
 = 1.9.0 =
