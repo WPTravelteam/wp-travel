@@ -914,6 +914,7 @@ function wp_travel_book_now() {
 			'{booking_scheduled_date}' => $booking_scheduled_date,
 			'{booking_arrival_date}'   => $arrival_date_email_tag,
 			'{booking_departure_date}' => $booking_departure_date,
+			'{booking_selected_time}'  => ! empty( $trip_time ) ? $trip_time : '',
 
 			'{customer_name}'          => $customer_name,
 			'{customer_country}'       => $customer_country,
