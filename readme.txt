@@ -252,7 +252,7 @@ Fixes:
 
 Enhancements:
 * Trip Code column added on WP Travel Dashboard Widget.
-* Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable disable this bypass by enabling cart page via this `'wp_travel_filter_is_enabled_cart_page'` filter.
+* Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable this bypass by enabling cart page via this `'wp_travel_filter_is_enabled_cart_page'` filter.
 
 = 4.3.1 =
 Release Date: 22nd October, 2020
