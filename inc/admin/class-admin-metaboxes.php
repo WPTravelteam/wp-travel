@@ -260,7 +260,7 @@ class WP_Travel_Admin_Metaboxes {
 				</td>
 
 			</tr>
-			<?php if ( 'paid' === $payment_status ) : ?>
+			<?php if ( 'paid' === $payment_status || 'partially_paid' === $payment_status ) : ?>
 				<?php
 				$total_price = $details['total'];
 				$paid_amount = $details['paid_amount'];

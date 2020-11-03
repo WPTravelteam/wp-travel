@@ -558,10 +558,15 @@ function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, 
 		// need to get last payment id here. remaining.
 	}
 
-		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
-		update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
-		update_post_meta( $payment_id, $key, $args );
+	update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
+	update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
+	update_post_meta( $payment_id, $key, $args );
+	$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
+	if ( 'partial' === $payment_mode ) {
+		update_post_meta( $payment_id, 'wp_travel_payment_status', 'partially_paid' );
+	} else {
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
+	}
 }
 
 /**
