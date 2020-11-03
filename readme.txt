@@ -3,7 +3,7 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.5.2
+Tested up to: 5.5.3
 Requires PHP: 5.5
 Stable tag: 4.3.2
 License: GPLv3
@@ -243,7 +243,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.3.2 =
-Release Date: 2nd November, 2020
+Release Date: 3rd November, 2020
 
 Fixes:
 * Added filter `'wp_travel_show_pricing_label_on_name'` to remove pricing name in cart item label.
@@ -253,6 +253,7 @@ Fixes:
 Enhancements:
 * Trip Code column added on WP Travel Dashboard Widget.
 * Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable this bypass by enabling cart page via this `'wp_travel_filter_is_enabled_cart_page'` filter.
+* Trip Time now can be added using `'{booking_selected_time}'` in the email template. In order to work this email tag, [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/) must be activated.
 
 = 4.3.1 =
 Release Date: 22nd October, 2020
