@@ -79,7 +79,7 @@ class WP_Travel_Helpers_Settings {
 		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
 
 		// trip facts.
-		$facts        = $settings['wp_travel_trip_facts_settings'];
+		$facts = $settings['wp_travel_trip_facts_settings'];
 		// error_log(print_r( $facts, true ));
 		$mapped_facts = array();
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
@@ -166,7 +166,7 @@ class WP_Travel_Helpers_Settings {
 		// is multisite.
 		$settings_options['is_multisite'] = is_multisite();
 
-		$settings = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
+		$settings         = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
@@ -214,7 +214,7 @@ class WP_Travel_Helpers_Settings {
 		}
 
 		if ( isset( $settings_data['wp_travel_bank_deposits'] ) && is_array( $settings_data['wp_travel_bank_deposits'] ) ) {
-			$i = 0;
+			$i             = 0;
 			$bank_deposits = array();
 			foreach ( $settings_data['wp_travel_bank_deposits'] as $bank_deposit ) {
 
@@ -260,20 +260,20 @@ class WP_Travel_Helpers_Settings {
 			$facts_settings = array();
 			$facts          = array();
 			foreach ( $settings_data['wp_travel_trip_facts_settings'] as $index => $fact ) {
-				$name = $fact['name'];
-				$type = $fact['type'];
+				$name    = $fact['name'];
+				$type    = $fact['type'];
 				$options = $fact['options'];
 				if ( ! is_array( $options ) ) {
 					$options = explode( ',', $options );
 				}
 				$icon = $fact['icon'];
-				$key = isset( $fact['key'] ) && ! empty( $fact['key'] ) ? $fact['key'] : $index;
+				$key  = isset( $fact['key'] ) && ! empty( $fact['key'] ) ? $fact['key'] : $index;
 
 				$facts_settings[ $key ] = array(
-					'name' => $name,
-					'type' => $type,
+					'name'    => $name,
+					'type'    => $type,
 					'options' => $options,
-					'icon' => $icon,
+					'icon'    => $icon,
 				);
 			}
 			$settings['wp_travel_trip_facts_settings'] = $facts_settings;
@@ -348,7 +348,6 @@ class WP_Travel_Helpers_Settings {
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
 		// error_log( print_r( $settings, true ) );
-		
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(

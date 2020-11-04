@@ -35,7 +35,6 @@ class WP_Travel_Helpers_License {
 			}
 		}
 
-		
 		// Licesnse data for
 		add_filter( 'wp_travel_settings_values', 'WP_Travel_Helpers_License::settings_data' );
 		add_filter( 'wp_travel_block_before_save_settings', 'WP_Travel_Helpers_License::settings_data_v4', 10, 2 );
@@ -55,10 +54,10 @@ class WP_Travel_Helpers_License {
 			$filtered_key = str_replace( '-', '_', $key );
 
 			$data = array(
-				'license_data' => $license_data,
-				'license_key' => $license_key,
-				'status' => $status,
-				'item_name' => $premium_addon['item_name'],
+				'license_data'   => $license_data,
+				'license_key'    => $license_key,
+				'status'         => $status,
+				'item_name'      => $premium_addon['item_name'],
 				'_option_prefix' => $filtered_key . '_',
 			);
 
@@ -72,7 +71,7 @@ class WP_Travel_Helpers_License {
 		return $settings;
 	}
 
-	public static function settings_data_v4 ( $settings, $settings_data ) {		
+	public static function settings_data_v4( $settings, $settings_data ) {
 		$premium_addons = ! empty( $settings_data['premium_addons_data'] ) ? ( $settings_data['premium_addons_data'] ) : array();
 		foreach ( $premium_addons as $key => $premium_addon ) :
 			$settings[ $premium_addon['_option_prefix'] . 'license_key' ] = $premium_addon['license_key'];
@@ -95,7 +94,7 @@ class WP_Travel_Helpers_License {
 		// Delete old transient.
 		delete_transient( $license_option_prefix . 'data' );
 
-		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';		
+		$license_key = ( isset( $license[ $license_option_prefix . 'key' ] ) && '' !== $license[ $license_option_prefix . 'key' ] ) ? $license[ $license_option_prefix . 'key' ] : '';
 
 		// data to send in our API request.
 		$api_params = array(
@@ -158,7 +157,7 @@ class WP_Travel_Helpers_License {
 
 		$license_option_prefix = $license['_option_prefix'];
 
-		$license_key = ( isset( $license[  $license_option_prefix . 'key' ] ) && '' !== $license[  $license_option_prefix . 'key' ] ) ? $license[  $license_option_prefix . 'key' ] : '';		
+		$license_key = ( isset( $license[ $license_option_prefix . 'key' ] ) && '' !== $license[ $license_option_prefix . 'key' ] ) ? $license[ $license_option_prefix . 'key' ] : '';
 
 		// data to send in our API request.
 		$api_params = array(
