@@ -83,7 +83,9 @@ export default () => {
                             </div>
                         </PanelRow>
                         :
-                        <PanelRow>
+                        <>
+                        {/* Need to build frontend functionality to uncomment this feature. */}
+                        {/* <PanelRow>
                             <label>{ __( 'Trip Dates Calendar View', 'wp-travel' ) }</label>
                             <div className="wp-travel-field-value">
                                 <ToggleControl
@@ -97,7 +99,8 @@ export default () => {
                                 />
                                 <p className="description">{__( 'Enable/Disable calender view on the booking tab of trip page.', 'wp-travel' )}</p>
                             </div>
-                        </PanelRow>
+                        </PanelRow> */}
+                        </>
                     }
                 </>
             }
