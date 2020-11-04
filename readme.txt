@@ -242,6 +242,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.3.3 =
+Release Date: 9th November, 2020
+
+Fixes:
+* Updated label to `'Trip Code'` from `'Trip Codes'` in single Trip page featured section.
+* Settings page editor code view mode layout issue fixed;
+* Removed settings `'Trip Dates Calendar View'`
+
 = 4.3.2 =
 Release Date: 3rd November, 2020
 
