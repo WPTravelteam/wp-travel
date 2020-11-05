@@ -1061,6 +1061,11 @@ function wp_travel_book_now() {
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key );
 
+	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
+	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';
+	if ( 'no' === $require_login_to_checkout && 'yes' == $create_user_while_booking && ! is_user_logged_in() ) {
+		wp_travel_create_new_customer($customer_email);
+	}
 	// Clear Transient To update booking Count.
 	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
 	delete_post_meta( $trip_id, 'wp_travel_booking_count' );

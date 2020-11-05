@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.5.3
 Requires PHP: 5.5
-Stable tag: 4.3.2
+Stable tag: 4.3.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -243,11 +243,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.3.3 =
-Release Date: 9th November, 2020
+Release Date: 5th November, 2020
+
+Enhancements:
+* Added Option to create customer account while booking.
+* Added Trip Itinerary sort by trip name in the itinerary listing page.
 
 Fixes:
+* Required for all traveler fields in checkout page option has been fixed. 
+* Settings page editor code view mode layout issue fixed.
 * Updated label to `'Trip Code'` from `'Trip Codes'` in single Trip page featured section.
-* Settings page editor code view mode layout issue fixed;
 * Removed settings `'Trip Dates Calendar View'`
 
 = 4.3.2 =

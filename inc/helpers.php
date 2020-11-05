@@ -104,6 +104,7 @@ function wp_travel_settings_default_fields() {
 		// Account Settings Fields.
 		'enable_checkout_customer_registration'   => 'no',
 		'enable_my_account_customer_registration' => 'yes',
+		'create_user_while_booking'				  => 'no',
 		'generate_username_from_email'            => 'no',
 		'generate_user_password'                  => 'no',
 
