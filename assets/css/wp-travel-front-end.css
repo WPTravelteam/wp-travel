@@ -2227,6 +2227,11 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   margin: 0;
   padding: 10px 10px 10px 0;
 }
+@media (max-width: 767px) {
+  .wp-travel-toolbar .wp-toolbar-filter-field, .wp-travel-toolbar .wp-travel-filter-button {
+    padding: 10px;
+  }
+}
 @media (max-width: 640px) {
   .wp-travel-toolbar .wp-toolbar-filter-field, .wp-travel-toolbar .wp-travel-filter-button {
     float: none;
@@ -2243,7 +2248,6 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   .wp-travel-toolbar .wp-travel-filter-button {
     padding: 0;
     margin: 10px;
-    margin-top: 50px;
   }
 }
 @media (max-width: 640px) {
@@ -5393,12 +5397,12 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 @media screen and (max-width: 1199px) and (min-width: 992px) {
   .wp-toolbar-filter-field .wp_travel_input_filters, .wp-travel-toolbar .wp-travel-filter-button .wp_travel_input_filters {
-    width: 100px;
+    width: 118px;
   }
 }
 @media screen and (max-width: 991px) and (min-width: 768px) {
   .wp-toolbar-filter-field .wp_travel_input_filters, .wp-travel-toolbar .wp-travel-filter-button .wp_travel_input_filters {
-    width: 70px;
+    width: 108px;
   }
 }
 .wp-toolbar-filter-field p, .wp-travel-toolbar .wp-travel-filter-button p {
