@@ -1517,23 +1517,23 @@ function wp_travel_archive_filter_by() {
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
 		<?php if ( $enable_filter_price ) : ?>
 			<div class="wp-toolbar-filter-field wt-filter-by-price">
-				<p><?php echo esc_html( $price_text ); ?></p>
+				<!-- <p><?php echo esc_html( $price_text ); ?></p> -->
 				<select name="price" class="wp_travel_input_filters price">
-					<option value="">--</option>
+					<option value=""><?php echo esc_html( $price_text ); ?></option>
 					<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
 					<option value="high_low" <?php selected( $price, 'high_low' ); ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ); ?></option>
 				</select>
 			</div>
 		<?php endif; ?>
 		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
-			<p><?php echo esc_html( $trip_type_text ); ?></p>
+			<!-- <p><?php echo esc_html( $trip_type_text ); ?></p> -->
 			<?php
 			wp_dropdown_categories(
 				array(
 					'taxonomy'          => 'itinerary_types',
 					'name'              => 'itinerary_types',
 					'class'             => 'wp_travel_input_filters type',
-					'show_option_none'  => '--',
+					'show_option_none'  => esc_html( $trip_type_text ),
 					'option_none_value' => '',
 					'selected'          => $type,
 					'value_field'       => 'slug',
@@ -1542,14 +1542,14 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
-			<p><?php echo esc_html( $location_text ); ?></p>
+			<!-- <p><?php echo esc_html( $location_text ); ?></p> -->
 			<?php
 			wp_dropdown_categories(
 				array(
 					'taxonomy'          => 'travel_locations',
 					'name'              => 'travel_locations',
 					'class'             => 'wp_travel_input_filters location',
-					'show_option_none'  => '--',
+					'show_option_none'  =>  esc_html( $location_text ),
 					'option_none_value' => '',
 					'selected'          => $location,
 					'value_field'       => 'slug',
@@ -1558,17 +1558,17 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-trip-date">
-				<p><?php echo esc_html( $trip_date_text ); ?></p>
+				<!-- <p><?php echo esc_html( $trip_date_text ); ?></p> -->
 				<select name="trip_date" class="wp_travel_input_filters trip-date">
-					<option value="">--</option>
+					<option value=""><?php echo esc_html( $trip_date_text ); ?></option>
 					<option value="asc" <?php selected( $trip_date, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
 					<option value="desc" <?php selected( $trip_date, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
 				</select>
 			</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-trip-name">
-				<p><?php echo esc_html( $trip_name_text ); ?></p>
+				<!-- <p><?php echo esc_html( $trip_name_text ); ?></p> -->
 				<select name="trip_name" class="wp_travel_input_filters trip-name">
-					<option value="">--</option>
+					<option value=""><?php echo esc_html( $trip_name_text ); ?></option>
 					<option value="asc" <?php selected( $trip_name, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
 					<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
 				</select>
