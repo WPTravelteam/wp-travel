@@ -255,7 +255,7 @@ Fixes:
 * Undefined index notice for the following: facts, bank_deposites, premium_addons_data are fixed.
 * Fixed issue related to required for all travelers enabled from Field Editor.
 * Updated label to `Trip Code` from `Trip Codes` in single Trip page featured section.
-* Removed settings `'Trip Dates Calendar View'`
+* Removed settings `Trip Dates Calendar View`
 
 = 4.3.2 =
 Release Date: 3rd November, 2020
