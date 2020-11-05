@@ -254,7 +254,7 @@ Fixes:
 * Settings page editor code view mode layout issue fixed.
 * Undefined index notice for the following: facts, bank_deposites, premium_addons_data are fixed.
 * Fixed issue related to required for all travelers enabled from Field Editor.
-* Updated label to `'Trip Code'` from `'Trip Codes'` in single Trip page featured section.
+* Updated label to `Trip Code` from `Trip Codes` in single Trip page featured section.
 * Removed settings `'Trip Dates Calendar View'`
 
 = 4.3.2 =
