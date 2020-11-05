@@ -1496,6 +1496,7 @@ function wp_travel_archive_filter_by() {
 	$location_text  = $strings['location'];
 	$show_text      = $strings['show'];
 	$trip_date_text = $strings['trip_date'];
+	$trip_name_text = $strings['trip_name'];
 
 	?>
 	<div class="wp-travel-post-filter clearfix">
@@ -1510,6 +1511,7 @@ function wp_travel_archive_filter_by() {
 			$type      = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
 			$location  = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
 			$trip_date = ! empty( $_GET['trip_date'] ) ? $_GET['trip_date'] : '';
+			$trip_name = ! empty( $_GET['trip_name'] ) ? $_GET['trip_name'] : '';
 		?>
 
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
@@ -1561,6 +1563,14 @@ function wp_travel_archive_filter_by() {
 					<option value="">--</option>
 					<option value="asc" <?php selected( $trip_date, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
 					<option value="desc" <?php selected( $trip_date, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
+				</select>
+			</div>
+		<div class="wp-toolbar-filter-field wt-filter-by-trip-name">
+				<p><?php echo esc_html( $trip_name_text ); ?></p>
+				<select name="trip_name" class="wp_travel_input_filters trip-name">
+					<option value="">--</option>
+					<option value="asc" <?php selected( $trip_name, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
+					<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
 				</select>
 			</div>
 		<div class="wp-travel-filter-button">
@@ -1838,6 +1848,17 @@ function wp_travel_posts_filter( $query ) {
 				$query->set( 'meta_key', 'trip_date' );
 				$query->set( 'orderby', 'meta_value' );
 				if ( 'asc' === $_GET['trip_date'] ) {
+					$query->set( 'order', 'asc' );
+				} else {
+					$query->set( 'order', 'desc' );
+				}
+			}
+
+			// Filter by trip name.
+			if ( isset( $_GET['trip_name'] ) && '' != $_GET['trip_name'] ) {
+				$query->set( 'post_type', 'itineraries' );
+				$query->set( 'orderby', 'post_title' );
+				if ( 'asc' === $_GET['trip_name'] ) {
 					$query->set( 'order', 'asc' );
 				} else {
 					$query->set( 'order', 'desc' );
