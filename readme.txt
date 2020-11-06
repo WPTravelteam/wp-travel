@@ -247,6 +247,8 @@ Release Date: 9th November, 2020
 
 Fixes:
 * Payment status and Payment mode on booking page fixes for partial payment.
+* Updated strings in wp_travel_get_strings function.
+* Partial payment range control not functioning properly while click and drag control.
 
 = 4.3.3 =
 Release Date: 5th November, 2020

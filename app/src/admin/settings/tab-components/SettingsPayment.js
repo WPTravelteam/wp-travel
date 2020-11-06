@@ -71,26 +71,79 @@ export default () => {
             {applyFilters( 'wp_travel_before_minimum_partial_payout', [] )}
             { 'yes' == partial_payment && minimum_partial_payout.length > 0 ? 
                 <>
+                    
                     { 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ? 
-                        minimum_partial_payout.map( (minPayout, index ) => {
-                            var label = minimum_partial_payout.length > 1 ? __( 'Partial Payout ' + (index + 1 ) + '(%)',  '' ) : __( 'Minimum Payout (%)', 'wp-travel' );
-                            let payout = minPayout ? parseFloat(minPayout) : 0;
-                            return <PanelRow>
-                                <label>{ label }</label>
-                                <div key={`${payout}`+`${index}`} className="wp-travel-field-value">
-                                    <RangeControl
-                                        value={ payout }
-                                        onChange={
-                                            (value) => updatePayoutOption( value, index )
-                                        }
-                                        min={ 1.0 }
-                                        max={ 100.0 }
-                                        step={ 0.01 }
-                                    />
-                                    <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-                                </div>
-                            </PanelRow>
-                        } ) 
+                        <>
+                            {minimum_partial_payout.length >= 1 && <>
+                                <PanelRow>
+                                    <label>Partial Payout 1 (%)</label>
+                                    <div className="wp-travel-field-value">
+                                        <RangeControl
+                                            value={ 'undefined' != typeof minimum_partial_payout[0]  ? minimum_partial_payout[0] : 0}
+                                            onChange={
+                                                (value) => updatePayoutOption( value, 0 )
+                                            }
+                                            min={ 1.0 }
+                                            max={ 100.0 }
+                                            step={ 0.01 }
+                                        />
+                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow>
+                            </>}
+                            {minimum_partial_payout.length >= 2 && <>
+                                <PanelRow>
+                                    <label>Partial Payout 2 (%)</label>
+                                    <div className="wp-travel-field-value">
+                                        <RangeControl
+                                            value={ 'undefined' != typeof minimum_partial_payout[1]  ? minimum_partial_payout[1] : 0}
+                                            onChange={
+                                                (value) => updatePayoutOption( value, 1 )
+                                            }
+                                            min={ 1.0 }
+                                            max={ 100.0 }
+                                            step={ 0.01 }
+                                        />
+                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow>
+                            </>}
+                            {minimum_partial_payout.length >= 3 && <>
+                                <PanelRow>
+                                    <label>Partial Payout 3 (%)</label>
+                                    <div className="wp-travel-field-value">
+                                        <RangeControl
+                                            value={ 'undefined' != typeof minimum_partial_payout[2]  ? minimum_partial_payout[2] : 0}
+                                            onChange={
+                                                (value) => updatePayoutOption( value, 2 )
+                                            }
+                                            min={ 1.0 }
+                                            max={ 100.0 }
+                                            step={ 0.01 }
+                                        />
+                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow>
+                            </>}
+                            {minimum_partial_payout.length >= 4 && <>
+                                <PanelRow>
+                                    <label>Partial Payout 4 (%)</label>
+                                    <div className="wp-travel-field-value">
+                                        <RangeControl
+                                            value={ 'undefined' != typeof minimum_partial_payout[3]  ? minimum_partial_payout[3] : 0}
+                                            onChange={
+                                                (value) => updatePayoutOption( value, 3 )
+                                            }
+                                            min={ 1.0 }
+                                            max={ 100.0 }
+                                            step={ 0.01 }
+                                        />
+                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow>
+                            </>}
+                        </>
+                         
                     :
                     <PanelRow>
                         <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
