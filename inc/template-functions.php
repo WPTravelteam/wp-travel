@@ -479,7 +479,12 @@ function wp_travel_single_excerpt( $post_id ) {
 	$trip_type_text  = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
 	$activities_text = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
 	$group_size_text = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
+	$pax_text        = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
 	$reviews_text    = isset( $strings['reviews'] ) ? $strings['reviews'] : __( 'Reviews', 'wp-travel' );
+
+	$empty_trip_type_text = isset( $strings['empty_results']['trip_type'] ) ? $strings['empty_results']['trip_type'] : __( 'No Trip Type', 'wp-travel' );
+	$empty_activities_text = isset( $strings['empty_results']['activities'] ) ? $strings['empty_results']['activities'] : __( 'No Activities', 'wp-travel' );
+	$empty_group_size_text = isset( $strings['empty_results']['group_size'] ) ? $strings['empty_results']['group_size'] : __( 'No Size Limit', 'wp-travel' );
 
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	?>
@@ -503,7 +508,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					if ( $trip_types_list ) {
 						echo wp_kses( $trip_types_list, wp_travel_allowed_html( array( 'a' ) ) );
 					} else {
-						echo esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', __( 'No trip type', 'wp-travel' ) ) );
+						echo esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_no_trip_type_text' need to remove in future.
 					}
 					?>
 					</span>
@@ -521,7 +526,7 @@ function wp_travel_single_excerpt( $post_id ) {
 					if ( $activity_list ) {
 						echo wp_kses( $activity_list, wp_travel_allowed_html( array( 'a' ) ) );
 					} else {
-						echo esc_html( apply_filters( 'wp_travel_default_no_activity_text', __( 'No Activities', 'wp-travel' ) ) );
+						echo esc_html( apply_filters( 'wp_travel_default_no_activity_text', $empty_activities_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_no_activity_text' need to remove in future.
 					}
 					?>
 					</span>
@@ -536,9 +541,9 @@ function wp_travel_single_excerpt( $post_id ) {
 						<?php
 						$group_size = wp_travel_get_group_size( $post_id );
 						if ( (int) $group_size && $group_size < 999 ) {
-							printf( apply_filters( 'wp_travel_template_group_size_text', __( '%d pax', 'wp-travel' ) ), esc_html( $group_size ) );
+							printf( apply_filters( 'wp_travel_template_group_size_text', __( '%d %s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ($pax_text )) );
 						} else {
-							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', __( 'No size limit', 'wp-travel' ) ) );
+							echo esc_html( apply_filters( 'wp_travel_default_group_size_text', $empty_group_size_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_group_size_text' need to remove in future.
 						}
 						?>
 					</span>
@@ -550,18 +555,18 @@ function wp_travel_single_excerpt( $post_id ) {
 				?>
 			   <li>
 				   <div class="travel-info">
-					<strong class="title"><?php echo esc_html( $reviews_text ); ?></strong>
-				</div>
-				<div class="travel-info">
-				<span class="value">
-				<?php
-					$count = (int) get_comments_number();
-					echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
-					printf( _n( '%s review', '%s reviews', $count, 'wp-travel' ), $count );
-					echo '</a>';
-				?>
-				</span>
-				</div>
+						<strong class="title"><?php echo esc_html( $reviews_text ); ?></strong>
+					</div>
+					<div class="travel-info">
+						<span class="value">
+						<?php
+							$count = (int) get_comments_number();
+							echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
+							printf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), $count );
+							echo '</a>';
+						?>
+						</span>
+					</div>
 			   </li>
 			<?php endif; ?>
 			<?php

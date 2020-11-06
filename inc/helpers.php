@@ -2727,11 +2727,11 @@ function wp_travel_get_strings() {
 		'trip_enquiry'              => __( 'Trip Enquiry', 'wp-travel' ),
 		'trip_type'                 => __( 'Trip Type', 'wp-travel' ),
 		'activities'                => __( 'Activities', 'wp-travel' ),
-		'group_size'                => __( 'Group size', 'wp-travel' ),
+		'group_size'                => __( 'Group Size', 'wp-travel' ),
 		'reviews'                   => __( 'Reviews', 'wp-travel' ),
 		'locations'                 => __( 'Locations', 'wp-travel' ),
-		'fixed_departure'           => __( 'Fixed departure', 'wp-travel' ),
-		'trip_duration'             => __( 'Trip duration', 'wp-travel' ),
+		'fixed_departure'           => __( 'Fixed Departure', 'wp-travel' ),
+		'trip_duration'             => __( 'Trip Duration', 'wp-travel' ),
 		'filter_by'                 => __( 'Filter By', 'wp-travel' ),
 		'price'                     => __( 'Price', 'wp-travel' ),
 		'location'                  => __( 'Location', 'wp-travel' ),
@@ -2770,6 +2770,12 @@ function wp_travel_get_strings() {
 			'trip_extras_list_label'        => __( 'Trip Extras', 'wp-travel' ),
 			'trip_extras_link_label'        => __( 'Learn More', 'wp-travel' ),
 			'available_trip_times'          => __( 'Available times', 'wp-travel' ),
+		),
+		'empty_results' 			=> array(
+			'trip_type'		        => __( 'No Trip Type', 'wp-travel' ),
+			'activities'		    => __( 'No Activities', 'wp-travel' ),
+			'group_size'            => __( 'No size limit', 'wp-travel' ),
+
 		),
 		'alert'                     => array(
 			'required_pax_alert'    => __( 'Pax is required.', 'wp-travel' ),
