@@ -247,6 +247,10 @@ Release Date: 9th November, 2020
 
 Fixes:
 * Payment status and Payment mode on booking page fixes for partial payment.
+* Discount not being applied after adding coupon code is now fixed.
+
+Enhancements:
+* Coupon code email tag `'{booking_coupon_code}'` has been added.
 
 = 4.3.3 =
 Release Date: 5th November, 2020
