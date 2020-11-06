@@ -619,15 +619,16 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
  * @param  int    $id          Post ID.
  */
 function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
+	$payment_info = wp_travel_booking_data( $id );
 	switch ( $column_name ) {
 		case 'payment_status':
-			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
+			$payment_id = $payment_info['payment_id'];
+
 			if ( is_array( $payment_id ) ) {
 				if ( count( $payment_id ) > 0 ) {
 					$payment_id = $payment_id[0];
 				}
 			}
-			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 
 			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 			if ( ! $label_key ) {
@@ -638,22 +639,7 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
 		case 'payment_mode':
-			$mode       = wp_travel_get_payment_mode();
-			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
-			$label_key  = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
-			
-			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
-			if ( ! $label_key ) {
-				$label_key          = 'N/A';
-				if ( 'booking_with_payment' == $booking_option ) {
-					$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
-					if ( ! $is_partial_enabled ) {
-						$label_key = 'full';
-					}
-				}
-				update_post_meta( $payment_id, 'wp_travel_payment_mode', $label_key );
-			}
-			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			echo '<span >' . esc_attr( $payment_info['payment_mode'] ) . '</span>';
 			break;
 		default:
 			break;
@@ -1016,7 +1002,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	if ( ! empty( $pages ) ) {
 		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
-				$settings_allowed_screens =  array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
+				$settings_allowed_screens = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
 					return true;
 				}
@@ -1115,7 +1101,7 @@ function wp_travel_is_plugin_active( $plugin_name ) {
 	$plugin_name  = str_replace( ' ', '_', $plugin_lower );
 
 	$settings          = wp_travel_get_settings();
-	$is_plugin_enabled = isset( $settings['show_' . $plugin_name ] ) && ! empty( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
+	$is_plugin_enabled = isset( $settings[ 'show_' . $plugin_name ] ) && ! empty( $settings[ 'show_' . $plugin_name ] ) ? $settings[ 'show_' . $plugin_name ] : 'yes';
 	$does_class_exists = class_exists( $plugin_class ) || class_exists( $plugin_class . '_Core' ) ? true : false;
 	if ( ! $does_class_exists || 'yes' !== $is_plugin_enabled ) {
 		return false;

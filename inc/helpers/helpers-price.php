@@ -599,11 +599,16 @@ function wp_travel_booking_data( $booking_id ) {
 	$label_key    = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
 	$payment_mode = isset( $mode[ $label_key ]['text'] ) ? $mode[ $label_key ]['text'] : 'N/A';
 
+	$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
+	$booking_option = ( ! empty( $booking_option ) ) ? $booking_option : 'booking_with_payment'; // if booking option empty while paying from dashboard then default assign to booking_with_payment.
+
 	$amounts = array(
 		'booking_status' => $booking_status,
+		'booking_option' => $booking_option,
 		'mode'           => $mode,
 		'payment_mode'   => $payment_mode,
 		'payment_status' => $payment_status,
+		'payment_id'     => $payment_id,
 		'sub_total'      => sprintf( '%0.2f', $sub_total ),
 		'discount'       => sprintf( '%0.2f', $discount ),
 		'tax'            => sprintf( '%0.2f', $tax ),
