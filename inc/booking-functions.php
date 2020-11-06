@@ -904,6 +904,8 @@ function wp_travel_book_now() {
 			$bank_deposit_table = wp_travel_get_bank_deposit_account_table( false );
 		}
 
+		$coupon_code = ! empty( $discounts['coupon_code'] ) ? ( $discounts['coupon_code'] ) : '';
+
 		$email_tags = array(
 			'{sitename}'               => $sitename,
 			'{itinerary_link}'         => get_permalink( $itinerary_id ),
@@ -915,6 +917,7 @@ function wp_travel_book_now() {
 			'{booking_arrival_date}'   => $arrival_date_email_tag,
 			'{booking_departure_date}' => $booking_departure_date,
 			'{booking_selected_time}'  => ! empty( $trip_time ) ? $trip_time : '',
+			'{booking_coupon_code}'    => $coupon_code,
 
 			'{customer_name}'          => $customer_name,
 			'{customer_country}'       => $customer_country,
