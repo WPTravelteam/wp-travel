@@ -247,7 +247,7 @@ Release Date: 11th November, 2020
 
 Fixes:
 * Payment status and Payment mode on booking page fixes for partial payment.
-* Updated strings in wp_travel_get_strings function.
+* Strings (No Trip Type, No Activities, No size limit) added in `'wp_travel_get_strings'` function.
 * Discount not being applied after adding coupon code is now fixed.
 * Partial payment range control not functioning properly while click and drag control.
 
