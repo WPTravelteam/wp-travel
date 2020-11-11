@@ -243,7 +243,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.3.4 =
-Release Date: 9th November, 2020
+Release Date: 11th November, 2020
 
 Fixes:
 * Payment status and Payment mode on booking page fixes for partial payment.
