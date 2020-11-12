@@ -4,11 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2020-11-06 10:25:48+00:00\n"
-=======
 "POT-Creation-Date: 2020-11-11 14:04:27+00:00\n"
->>>>>>> 94bd001b06af5367fa884d8bf3a689baabdee36a
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"

@@ -298,7 +298,7 @@ export default () => {
                                 if ( '' !== data ) {
                                     updateSettings({
                                         ...allData,
-                                        checkout_page_id: data.value
+                                        dashboard_page_id: data.value
                                     })
                                 }
                             }}
