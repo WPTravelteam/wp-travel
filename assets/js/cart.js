@@ -728,6 +728,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       }).then(function (res) {
         return res.json();
       }).then(function (result) {
+        console.log(result);
         toggleCartLoader();
 
         if (result.success) {
@@ -740,6 +741,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
               coupon: result.data.cart.coupon
             }
           }));
+          location.reload();
         } else {
           couponField.focus();
           toggleError(couponField, result.data[0].message);
