@@ -52,9 +52,9 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 				'strings'            => wp_travel_get_strings(),
 				// Need map data enhancement.
-				'lat'                => $map_data['lat'],
-				'lng'                => $map_data['lng'],
-				'loc'                => $map_data['loc'],
+				'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
+				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
+				'loc'                => ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '',
 				'zoom'               => $map_zoom_level,
 			);
 
