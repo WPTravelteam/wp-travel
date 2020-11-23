@@ -132,11 +132,11 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
             return;
         }
         let requestLicenseData = {};
-        var item_key = license.option_prefix + 'license_key' // Prefix key.
+        var item_key = license._option_prefix + 'license_key' // Prefix key.
 
         // Request Data.
         requestLicenseData = {
-            _option_prefix: license.option_prefix + 'license_',
+            _option_prefix: license._option_prefix + 'license_',
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
@@ -162,14 +162,16 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
     const deactivateLicense = (license, props) => {
         setIsProcessingApi(props.index)
         let requestLicenseData = {};
-        var item_key = license.option_prefix + 'license_key'// Prefix key.
+        var item_key = license._option_prefix + 'license_key'// Prefix key.
 
         // Request Data.
         requestLicenseData = {
-            _option_prefix: license.option_prefix + 'license_',
+            _option_prefix: license._option_prefix + 'license_',
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
+        // console.log(license);
+        // console.log(requestLicenseData);
         apiFetch( 
             { 
                 url: `${ajaxurl}?action=wp_travel_deactivate_license&_nonce=${_wp_travel._nonce}`,
