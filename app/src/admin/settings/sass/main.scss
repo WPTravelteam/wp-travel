@@ -1,1 +1,17 @@
 @import "../../sass/block-tabs";
+.settings-general{
+    .components-panel__body.ws-gateway  {
+        button:after{
+            font-family: dashicons;
+            content: "\f12a";
+            font-size: 20px;
+            position: absolute;
+            right: 45px;
+        }
+        &.gateway-enabled{
+            button:after{
+                color:green;
+            }
+        }
+    }
+}

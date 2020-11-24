@@ -26,6 +26,16 @@ export default () => {
         options,
         total_payout_fields,
         } = allData;
+    let enableAllGateway = true
+    sorted_gateways.map((gateway, index) => {
+        if ( enableAllGateway ) {
+            let payment_gateway_key = `payment_option_${gateway.key}`
+            let payment_gateway_enabled = 'undefined' != typeof allData[payment_gateway_key] && allData[payment_gateway_key] ? allData[payment_gateway_key] : 'no';
+            if ( 'no' == payment_gateway_enabled ) {
+                enableAllGateway = false
+            }
+        }
+    })
 
     const updatePayoutOption = (value, _tabIndex) => {
 
@@ -166,7 +176,27 @@ export default () => {
             {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )}
 
 
-            <h3>{__( 'Payment Gateways', 'wp-travel' )}</h3>
+            <h3>
+                {__( 'Payment Gateways', 'wp-travel' )}
+                <label>
+                    <ToggleControl
+                        checked={enableAllGateway }
+                        onChange={ (value) => {
+                            let gateway_key = null;
+                            let mapDataAction =  sorted_gateways.map((gateway, index) => {
+                                gateway_key = `payment_option_${gateway.key}`
+                                _allData[gateway_key] = value ? 'yes' :'no'
+                            })
+
+                            // Wait for all mapDataAction, and then updateSettings
+                            Promise.all(mapDataAction).then(() => {
+                                updateSettings(_allData)
+                            });
+                        } }
+                    />
+                    <p className="description">{__( 'Enable/Disable All', 'wp-travel' )}</p>
+                </label>
+            </h3>
             {
                 <div className="wp-travel-block-section wp-travel-block-sortable">
                     <ReactSortable
@@ -176,10 +206,14 @@ export default () => {
                     >
                         {
                             sorted_gateways.map((gateway, index) => {
+                                let gateway_key = `payment_option_${gateway.key}`
+                                let gateway_enabled = 'undefined' != typeof allData[gateway_key] && allData[gateway_key] ? allData[gateway_key] : 'no';
+                                
                                 return <PanelBody
                                     icon= {alignJustify}
                                     title={ gateway.label }
                                     initialOpen={false}
+                                    className={'no' == gateway_enabled ? 'ws-gateway gateway-disabled' : 'ws-gateway gateway-enabled' }
                                 >
 
                                     {applyFilters( `wp_travel_payment_gateway_fields_${gateway.key}`, [], allData )}

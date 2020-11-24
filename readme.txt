@@ -242,6 +242,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.3.5 =
+Release Date: 3rd December, 2020
+
+Fixes:
+* License Activation on renewal is fixed.
+* Removed Force Cart / Checkout functionality due to no uses. 
+* Fixed Dashboard page is not selectable from admin settings. When we change dashboard page it will changing checkout page in admin settings.
+
 = 4.3.4 =
 Release Date: 11th November, 2020
 
