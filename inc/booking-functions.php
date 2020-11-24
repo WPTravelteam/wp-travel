@@ -10,6 +10,7 @@
  * @return [type] [description]
  */
 function wp_travel_get_booking_form() {
+	echo 'from booking form';
 	global $post;
 
 	$trip_id = 0;
@@ -108,7 +109,7 @@ function wp_travel_get_booking_form() {
 
 	}
 
-	$form->init( $form_options )->fields( $fields )->template();
+	return $form->init( $form_options )->fields( $fields )->template();
 	// return apply_filters( 'wp_travel_booking_form_contents', $content );
 }
 
@@ -661,14 +662,14 @@ function wp_travel_book_now() {
 	$current_date           = date( $date_format );
 	$trip_id                = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : '';
 	$trip_price             = wp_travel_get_trip_price( $trip_id );
-	$enable_checkout        = apply_filters( 'wp_travel_enable_checkout', true );
+	// $enable_checkout        = apply_filters( 'wp_travel_enable_checkout', true ); // commented since 4.3.5 need to remove in further version.
 	$pax                    = isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 1;
 	$booking_arrival_date   = isset( $_POST['wp_travel_arrival_date'] ) ? wp_travel_format_date( $_POST['wp_travel_arrival_date'] ) : '';
 	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
 
 	$items = $wt_cart->getItems();
 	// if ( $enable_checkout && 0 !== $trip_price ) :
-	if ( $enable_checkout ) :
+	// if ( $enable_checkout ) : // commented since 4.3.5 need to remove in further version.
 
 		if ( ! count( $items ) ) {
 			return;
@@ -710,7 +711,7 @@ function wp_travel_book_now() {
 		}
 		// Quick fixes trip id.
 		$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : $trip_id;
-	endif;
+	// endif;
 
 	if ( empty( $trip_id ) ) {
 		return;
