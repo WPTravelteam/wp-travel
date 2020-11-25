@@ -249,6 +249,8 @@ Fixes:
 * License Activation on renewal is fixed.
 * Removed Force Cart / Checkout functionality due to no uses. 
 * Fixed Dashboard page is not selectable from admin settings. When we change dashboard page it will changing checkout page in admin settings.
+Tweak:
+* Added Enable/Disable all payment gateway option in the settings.
 
 = 4.3.4 =
 Release Date: 11th November, 2020
