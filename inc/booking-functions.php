@@ -829,7 +829,8 @@ function wp_travel_book_now() {
 		/**
 		 * Add Support for invertory addon options.
 		 */
-		do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
+		// do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
+		wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ), '4.3.5', 'wp_travel_trip_inventory' );
 		$inventory_args = array(
 			'trip_id'       => $trip_id,
 			'booking_id'    => $booking_id,
@@ -1037,7 +1038,8 @@ function wp_travel_book_now() {
 			 */
 			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
 			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
-			do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
+			// do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
+			wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.3.5', 'wp_travel_trip_inventory' );
 			$inventory_args = array(
 				'trip_id'       => $trip_id,
 				'booking_id'    => $booking_id,

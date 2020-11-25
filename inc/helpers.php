@@ -2285,7 +2285,8 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 							 *
 							 * @todo Must deprecate this hook letter.
 							 */
-							do_action( 'wp_travel_booked_times_details', $order_details );
+							// do_action( 'wp_travel_booked_times_details', $order_details );
+							wp_travel_do_deprecated_action( 'wp_travel_booked_times_details', array( $order_details ), '4.3.5', 'wp_travel_after_bookings_travel_date' );
 
 							/**
 							 * @since 3.0.4
