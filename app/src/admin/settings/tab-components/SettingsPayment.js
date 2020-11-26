@@ -186,6 +186,14 @@ export default () => {
                             let mapDataAction =  sorted_gateways.map((gateway, index) => {
                                 gateway_key = `payment_option_${gateway.key}`
                                 _allData[gateway_key] = value ? 'yes' :'no'
+
+                                // Additional settings for non consistant data [Need to improve in addons itself. For now temp fix from here]
+                                if ( 'payfast' == gateway.key || 'payu' == gateway.key || 'payhere' == gateway.key || 'payu_latam' == gateway.key ) {
+                                    let additionalArray = `wp_travel_${gateway.key}_settings`
+                                    if ( 'undefined' != typeof _allData[additionalArray] ) {
+                                        _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
+                                    }
+                                }
                             })
 
                             // Wait for all mapDataAction, and then updateSettings
