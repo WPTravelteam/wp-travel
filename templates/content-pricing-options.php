@@ -58,23 +58,23 @@ if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
 
 				if ( 'by-pricing-option' === $list_type ) {
 					// Default pricing options template.
-					do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data ); // Need to deprecate.
+					wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.3.5', 'wp_travel_booking_default_princing_list' ); 
 					do_action( 'wp_travel_booking_default_princing_list', $trip_id );
 
 				} else {
 					if ( 'yes' === $enable_multiple_fixed_departue && 'yes' === $fixed_departure && ( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) ) {
 						// Date listing template.
-						do_action( 'wp_travel_booking_departure_date_list', $trip_multiple_dates_data ); // Need To deprecate.
+						wp_travel_do_deprecated_action( 'wp_travel_booking_departure_date_list', array( $trip_multiple_dates_data ), '4.3.5', 'wp_travel_booking_fixed_departure_list' ); 
 						do_action( 'wp_travel_booking_fixed_departure_list', $trip_id );
 
 					} else {
-						do_action( 'wp_travel_booking_princing_options_list', $trip_pricing_options_data ); // Neeed to deprecate.
+						wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.3.5', 'wp_travel_booking_default_princing_list' ); 
 						do_action( 'wp_travel_booking_default_princing_list', $trip_id );
 					}
 				}
 			else :
 				// Default pricing options template with trip id.
-				do_action( 'wp_travel_booking_princing_options_list', (int) $trip_id ); // Neeed to deprecate.
+				wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( (int) $trip_id ), '4.3.5', 'wp_travel_booking_default_princing_list' ); 
 				do_action( 'wp_travel_booking_default_princing_list', (int) $trip_id );
 				?>
 			<?php endif;
