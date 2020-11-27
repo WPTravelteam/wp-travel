@@ -126,24 +126,6 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 }
 
 /**
- * WP Travel Trip is trip type enable.
- *
- * @return bool
- */
-function wp_travel_is_trip_price_tax_enabled() {
-
-	$settings = wp_travel_get_settings();
-
-	if ( isset( $settings['trip_tax_enable'] ) && 'yes' == $settings['trip_tax_enable'] ) {
-
-		return true;
-	}
-
-	return false;
-
-}
-
-/**
  * Wp Travel Process Trip Price Tax.
  *
  * @param int $post_id post id.
@@ -158,9 +140,7 @@ function wp_travel_process_trip_price_tax( $post_id ) {
 
 	$trip_price = wp_travel_get_actual_trip_price( $post_id );
 
-	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
-
-	if ( 'yes' == $trip_tax_enable ) {
+	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 
 		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
@@ -213,9 +193,7 @@ function wp_travel_process_trip_price_tax_by_price( $post_id, $price ) {
 
 	$trip_price = $price;
 
-	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
-
-	if ( 'yes' == $trip_tax_enable ) {
+	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 
 		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
@@ -257,9 +235,7 @@ function wp_travel_taxed_amount( $amount ) {
 
 	$settings = wp_travel_get_settings();
 
-	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
-
-	if ( 'yes' == $trip_tax_enable ) {
+	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
 		$tax_percentage      = @$settings['trip_tax_percentage'];
@@ -875,9 +851,8 @@ function wp_travel_get_formated_price_currency( float $price, $regular_price = f
 function wp_travel_is_taxable() {
 
 	$settings        = wp_travel_get_settings();
-	$trip_tax_enable = isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
 
-	if ( 'yes' == $trip_tax_enable ) {
+	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
 		$tax_percentage      = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : '';
 

@@ -631,7 +631,7 @@ class WP_Travel_Helpers_Trips {
 	 * Return True if sale enable for the trip as per arguments provided.
 	 *
 	 * @since WP Travel 4.3.5
-	 * @return Array
+	 * @return Boolean
 	 */
 	public static function is_sale_enabled( $args = array() ) {
 		// Extracting arguments.
@@ -839,6 +839,17 @@ class WP_Travel_Helpers_Trips {
 			
 		return $enable_sale;
 		
+	}
+
+	/**
+	 * Return True if tax enable in settings.
+	 *
+	 * @since WP Travel 4.3.5
+	 * @return Boolean
+	 */
+	public static function is_tax_enabled() {
+		$settings = wp_travel_get_settings();
+		return  isset( $settings['trip_tax_enable'] )  && 'yes' === $settings['trip_tax_enable'];
 	}
 
 }

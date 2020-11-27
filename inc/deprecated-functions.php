@@ -119,8 +119,11 @@ function wp_travel_is_enable_sale( $trip_id, $price_key = null ) {
 /**
  * Check sale price enable or not.
  *
- * @param Number $post_id Current post id.
- * @param String $price_key Price Key for multiple pricing.
+ * @param Number $trip_id Trip Id.
+ * @param String $from_price_sale_enable Check sale price enable in from price.
+ * @param String $pricing_id Pricing Id of trip.
+ * @param String $category_id Category Id of trip.
+ * @param String $price_key Price Key of trip.
  * @since WP Travel 3.0.0 and Deprecated in WP Travel 4.3.5
  */
 function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
@@ -133,6 +136,17 @@ function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = fal
 		'price_key' => $price_key,
 	);
 	return WP_Travel_Helpers_Trips::is_sale_enabled( $args );
+}
+
+/**
+ * Return True if Tax is enabled in settings.
+ *
+ * @since Deprecated in WP Travel 4.3.5
+ */
+function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
+	wp_travel_deprecated_function( 'wp_travel_is_trip_price_tax_enabled', '4.3.5', 'WP_Travel_Helpers_Trips::is_tax_enabled()' );
+	
+	return WP_Travel_Helpers_Trips::is_tax_enabled();
 }
 
 
