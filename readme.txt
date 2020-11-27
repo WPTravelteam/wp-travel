@@ -251,6 +251,8 @@ Fixes:
 * Fixed Dashboard page is not selectable from admin settings. When we change dashboard page it will changing checkout page in admin settings.
 Tweak:
 * Added Enable/Disable all payment gateway option in the settings.
+Deprecated
+* Function wp_travel_is_enable_sale_price and wp_travel_is_enable_sale is deprecated use WP_Travel_Helpers_Trips::is_sale_enabled() instead of these 2 functions.
 
 = 4.3.4 =
 Release Date: 11th November, 2020
