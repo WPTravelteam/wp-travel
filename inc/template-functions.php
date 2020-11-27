@@ -353,7 +353,7 @@ function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 
 	$trip_price    = wp_travel_get_price( $trip_id );
 	$regular_price = wp_travel_get_price( $trip_id, true );
-	$enable_sale   = wp_travel_is_enable_sale_price( $trip_id, true );
+	$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id, 'from_price_sale_enable' => true ) );
 
 	$strings = wp_travel_get_strings();
 
@@ -755,14 +755,7 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 	if ( empty( $settings['wp_travel_trip_facts_settings'] ) ) {
 		return '';
 	}
-	// if ( isset( $settings['wp_travel_trip_facts_settings'] ) ) {
-
-	// if ( ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
-
-	// return '';
-	// }
-	// }
-
+	
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
 	if ( 'no' === $wp_travel_trip_facts_enable ) {
@@ -873,7 +866,7 @@ function wp_travel_frontend_contents( $post_id ) {
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
 	$trip_price      = wp_travel_get_trip_price( $post_id );
-	$enable_sale     = wp_travel_is_enable_sale_price( $post_id );
+	$enable_sale     = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $post_id ) );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -1357,25 +1350,25 @@ function wp_travel_pagination( $range = 2, $pages = '' ) {
 /**
  * Offer HTML
  *
- * @param  int $post_id ID of current Trip Post.
+ * @param  int $trip_id ID of current Trip Post.
  * @return HTML
  */
-function wp_travel_save_offer( $post_id ) {
+function wp_travel_save_offer( $trip_id ) {
 	if ( get_post_type() !== WP_TRAVEL_POST_TYPE ) {
 		return;
 	}
 
-	if ( ! $post_id ) {
+	if ( ! $trip_id ) {
 		return;
 	}
-	$enable_sale = wp_travel_is_enable_sale_price( $post_id );
+	$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
 
 	if ( ! $enable_sale ) {
 		return;
 	}
 
-	$trip_price = wp_travel_get_trip_price( $post_id );
-	$sale_price = wp_travel_get_trip_sale_price( $post_id );
+	$trip_price = wp_travel_get_trip_price( $trip_id );
+	$sale_price = wp_travel_get_trip_sale_price( $trip_id );
 
 	if ( $sale_price > $trip_price ) {
 		$save = ( 1 - ( $trip_price / $sale_price ) ) * 100;

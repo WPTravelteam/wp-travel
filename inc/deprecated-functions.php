@@ -25,36 +25,6 @@ function wp_travel_deprecated_function( $function, $version, $replacement = null
 	}
 }
 
-/** Return All Settings of WP travel and it is depricated since 1.0.5*/
-function wp_traval_get_settings() {
-	wp_travel_deprecated_function( 'wp_traval_get_settings', '1.0.5', 'wp_travel_get_settings' );
-	return wp_travel_get_settings();
-}
-
-
-/**
- * Return Currency symbol by currency code  and it is depricated since 1.0.5
- *
- * @param String $currency_code
- * @return String
- */
-function wp_traval_get_currency_symbol( $currency_code = null ) {
-	wp_travel_deprecated_function( 'wp_traval_get_currency_symbol', '1.0.5', 'wp_travel_get_currency_symbol' );
-	return wp_travel_get_currency_symbol( $currency_code );
-}
-
-function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
-	wp_travel_deprecated_function( 'wp_travel_get_default_frontend_tabs', '1.9.3', 'wp_travel_get_default_trip_tabs' );
-	return wp_travel_get_default_trip_tabs( $is_show_in_menu_query );
-}
-
-
-function wp_travel_get_pricing_name_by_key( $key = null ) {
-	wp_travel_deprecated_function( 'wp_travel_get_pricing_name_by_key', '3.0.7', 'wp_travel_get_pricing_category_by_key' );
-	return wp_travel_get_default_trip_tabs( $key );
-}
-
-
 /**
  * Runs a deprecated action with notice only if used.
  *
@@ -98,4 +68,71 @@ function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $messa
 	}
 	// @codingStandardsIgnoreEnd
 }
+
+
+// Deprecated Functions
+
+/** Return All Settings of WP travel and it is depricated since 1.0.5*/
+function wp_traval_get_settings() {
+	wp_travel_deprecated_function( 'wp_traval_get_settings', '1.0.5', 'wp_travel_get_settings' );
+	return wp_travel_get_settings();
+}
+
+
+/**
+ * Return Currency symbol by currency code  and it is depricated since 1.0.5
+ *
+ * @param String $currency_code
+ * @return String
+ */
+function wp_traval_get_currency_symbol( $currency_code = null ) {
+	wp_travel_deprecated_function( 'wp_traval_get_currency_symbol', '1.0.5', 'wp_travel_get_currency_symbol' );
+	return wp_travel_get_currency_symbol( $currency_code );
+}
+
+function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
+	wp_travel_deprecated_function( 'wp_travel_get_default_frontend_tabs', '1.9.3', 'wp_travel_get_default_trip_tabs' );
+	return wp_travel_get_default_trip_tabs( $is_show_in_menu_query );
+}
+
+
+function wp_travel_get_pricing_name_by_key( $key = null ) {
+	wp_travel_deprecated_function( 'wp_travel_get_pricing_name_by_key', '3.0.7', 'wp_travel_get_pricing_category_by_key' );
+	return wp_travel_get_default_trip_tabs( $key );
+}
+
+/**
+ * Check sale price enable or not.
+ *
+ * @param Number $post_id Current post id.
+ * @param String $price_key Price Key for multiple pricing.
+ * @since WP Travel 1.0.5 Modified in 2.0.1, 2.0.5, 2.0.7 and Deprecated in WP Travel 4.3.5
+ */
+function wp_travel_is_enable_sale( $trip_id, $price_key = null ) {
+	wp_travel_deprecated_function( 'wp_travel_is_enable_sale', '4.3.5', 'WP_Travel_Helpers_Trips::is_sale_enabled()' );
+	$args = array(
+		'trip_id' => $trip_id
+	);
+	return WP_Travel_Helpers_Trips::is_sale_enabled( $args );
+}
+
+/**
+ * Check sale price enable or not.
+ *
+ * @param Number $post_id Current post id.
+ * @param String $price_key Price Key for multiple pricing.
+ * @since WP Travel 3.0.0 and Deprecated in WP Travel 4.3.5
+ */
+function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
+	wp_travel_deprecated_function( 'wp_travel_is_enable_sale_price', '4.3.5', 'WP_Travel_Helpers_Trips::is_sale_enabled()' );
+	$args = array(
+		'trip_id' => $trip_id,
+		'from_price_sale_enable' => $from_price_sale_enable,
+		'pricing_id' => $pricing_id,
+		'category_id' => $category_id,
+		'price_key' => $price_key,
+	);
+	return WP_Travel_Helpers_Trips::is_sale_enabled( $args );
+}
+
 
