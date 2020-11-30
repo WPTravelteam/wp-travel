@@ -662,7 +662,7 @@ function wp_travel_book_now() {
 	$current_date           = date( $date_format );
 	$trip_id                = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : '';
 	$trip_price             = wp_travel_get_trip_price( $trip_id );
-	// $enable_checkout        = apply_filters( 'wp_travel_enable_checkout', true ); // commented since 4.3.5 need to remove in further version.
+	// $enable_checkout        = apply_filters( 'wp_travel_enable_checkout', true ); // commented since WP Travel 4.3.5 need to remove in further version.
 	$pax                    = isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 1;
 	$booking_arrival_date   = isset( $_POST['wp_travel_arrival_date'] ) ? wp_travel_format_date( $_POST['wp_travel_arrival_date'] ) : '';
 	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
