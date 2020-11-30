@@ -23,7 +23,7 @@ class WP_Travel_Helpers_Cart {
 			$is_coupon_applied = true;
 		}
 		$tax_amount = 0;
-		$tax_rate   = wp_travel_is_taxable();
+		$tax_rate   = WP_Travel_Helpers_Trips::get_tax_rate();
 		if ( $tax_rate ) {
 			$tax_amount = ( $cart_total * (float) $tax_rate ) / 100;
 			$cart_total = $cart_total - $tax_amount;
@@ -39,7 +39,7 @@ class WP_Travel_Helpers_Cart {
 				'cart_total_regular' => (float) number_format( $cart_total_regular, 2, '.', '' ),
 				'coupon_applied'     => $is_coupon_applied, // Coupon Implementation.
 				'coupon'             => count( $cart_items['discount'] ) > 0 ? $cart_items['discount'] : array(),
-				'tax'                => wp_travel_is_taxable(),
+				'tax'                => $tax_rate,
 				'version'            => '1',
 				// 'currency' =>
 			),

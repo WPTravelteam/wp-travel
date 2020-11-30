@@ -54,16 +54,28 @@ function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable 
 }
 
 /**
- * Return HTM of Booking Form
+ * Return True Percent if tax is applicable otherwise return false.
  *
- * @return [type] [description]
+ * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.3.5
+ * @return Mixed
+ */
+function wp_travel_is_taxable() {
+	wp_travel_deprecated_function( 'wp_travel_is_taxable', '4.3.5', 'WP_Travel_Helpers_Trips::get_tax_rate()' );
+	return WP_Travel_Helpers_Trips::get_tax_rate();
+}
+
+/**
+ * Return HTML Booking Form
+ *
+ * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.3.5
+ * @return HTML [description]
  */
 function wp_travel_get_booking_form() {
 	// No suggested alternative function.
 	wp_travel_deprecated_function( 'wp_travel_get_booking_form', '4.3.5' );
 	global $post;
-
 	$trip_id = 0;
+	$settings = wp_travel_get_settings();
 	if ( isset( $_REQUEST['trip_id'] ) ) {
 		$trip_id = $_REQUEST['trip_id'];
 	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
@@ -85,17 +97,12 @@ function wp_travel_get_booking_form() {
 			'field'  => 'wp_travel_security',
 		),
 	);
-
 	$fields = wp_travel_booking_form_fields();
-
 	// GDPR Support
-	$settings = wp_travel_get_settings();
 
 	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
-
 	$policy_link = wp_travel_privacy_link();
 	if ( ! empty( $gdpr_msg ) && $policy_link ) {
-
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_booking_gdpr'] = array(
 			'type'              => 'checkbox',
@@ -112,7 +119,6 @@ function wp_travel_get_booking_form() {
 			'priority'          => 100,
 			'wrapper_class'     => 'full-width',
 		);
-
 	}
 
 	$form              = new WP_Travel_FW_Form();
@@ -146,19 +152,11 @@ function wp_travel_get_booking_form() {
 	$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
 	if ( isset( $group_size ) && '' != $group_size ) {
-
 		$fields['pax']['validations']['max'] = $group_size;
-
 	}
-
 	$trip_price = wp_travel_get_actual_trip_price( $trip_id );
-
 	if ( '' == $trip_price || '0' == $trip_price ) {
-
 		unset( $fields['is_partial_payment'], $fields['payment_gateway'], $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
-
 	}
 	return $form->init( $form_options )->fields( $fields )->template();
 }
-
-

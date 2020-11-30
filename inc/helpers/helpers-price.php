@@ -848,25 +848,6 @@ function wp_travel_get_formated_price_currency( float $price, $regular_price = f
 	return apply_filters( $filter_name, $content, $currency_symbol, $price );
 }
 
-function wp_travel_is_taxable() {
-
-	$settings        = wp_travel_get_settings();
-
-	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
-		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
-		$tax_percentage      = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : '';
-
-		if ( '' == $tax_percentage ) {
-			return false;
-		}
-		if ( 'yes' == $tax_inclusive_price ) {
-			return false;
-		}
-		return $tax_percentage;
-	}
-	return false;
-}
-
 /**
  * Get Pricing option type[single-pricing || multiple-pricing].
  *

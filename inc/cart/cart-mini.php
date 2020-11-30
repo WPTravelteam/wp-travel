@@ -470,7 +470,7 @@ $per_person_text = wp_travel_get_price_per_text( $trip_id );
 					</tr>
 
 				<?php endif; ?>
-				<?php if ( $tax_rate = wp_travel_is_taxable() ) : ?>
+				<?php if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) : ?>
 					<tr>
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>

@@ -852,4 +852,24 @@ class WP_Travel_Helpers_Trips {
 		return  isset( $settings['trip_tax_enable'] )  && 'yes' === $settings['trip_tax_enable'];
 	}
 
+	/**
+	 * Return True Percent if tax is applicable otherwise return false.
+	 *
+	 * @since WP Travel 4.3.5
+	 * @return Mixed
+	 */
+	public static function get_tax_rate() {
+		$tax_percentage = false;
+		if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
+			$settings        = wp_travel_get_settings();
+			$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
+			$tax_percentage      = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : '';
+	
+			if ( '' == $tax_percentage || 'yes' == $tax_inclusive_price ) {
+				$tax_percentage = false;
+			}
+		}
+		return $tax_percentage;
+	}
+
 }

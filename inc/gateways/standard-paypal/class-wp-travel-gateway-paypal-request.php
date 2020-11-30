@@ -144,7 +144,7 @@ class WP_Travel_Gateway_Paypal_Request {
 			$cart_amounts = $wt_cart->get_total();
 
 			$tax = 0;
-			if ( $tax_rate = wp_travel_is_taxable() ) {
+			if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) {
 				$tax = $cart_amounts['tax'];
 				if ( 'partial' === $payment_mode ) {
 					$tax = $cart_amounts['tax_partial'];

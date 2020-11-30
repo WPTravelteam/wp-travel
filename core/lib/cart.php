@@ -577,7 +577,7 @@ class WP_Travel_Lib_Cart {
 		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial;
 
 		// Adding tax to sub total;
-		if ( $tax_rate = wp_travel_is_taxable() ) :
+		if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) :
 			$tax_amount         = ( $total_trip_price_after_dis * $tax_rate ) / 100;
 			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		endif;
