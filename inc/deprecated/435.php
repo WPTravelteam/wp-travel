@@ -407,3 +407,64 @@ function wp_travel_booking_form_fields() {
 	}
 	return apply_filters( 'wp_travel_booking_form_fields', $booking_fields );
 }
+
+/**
+ * Return Tree Form of post Object.
+ *
+ * @param Object $elements Post Object.
+ * @param Int    $parent_id Parent ID of post.
+ *
+ * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.3.5
+ * @return Object Return Tree Form of post Object.
+ */
+function wp_travel_build_post_tree( array &$elements, $parent_id = 0 ) {
+	// No suggested alternative function.
+	wp_travel_deprecated_function( 'wp_travel_build_post_tree', '4.3.5' );
+	$branch = array();
+	foreach ( $elements as $element ) {
+		if ( $element->post_parent == $parent_id ) {
+			$children = wp_travel_build_post_tree( $elements, $element->ID );
+			if ( $children ) {
+				$element->children = $children;
+			}
+			$branch[ $element->ID ] = $element;
+			unset( $elements[ $element->ID ] );
+		}
+	}
+	return $branch;
+}
+
+/**
+ * [wp_travel_get_post_hierarchy_dropdown description]
+ *
+ * @param  [type]  $list_serialized [description].
+ * @param  [type]  $selected        [description].
+ * @param  integer $nesting_level   [description].
+ * @param  boolean $echo            [description].
+ * @since  WP Travel 1.9.1 and Deprecated in WP Travel 4.3.5
+ * @return [type]                   [description]
+ */
+function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level = 0, $echo = true ) {
+	wp_travel_get_post_hierarchy_dropdown( 'wp_travel_build_post_tree', '4.3.5' );
+	$contents = '';
+	if ( $list_serialized ) :
+
+		$space = '';
+		for ( $i = 1; $i <= $nesting_level; $i ++ ) {
+			$space .= '&nbsp;&nbsp;&nbsp;';
+		}
+
+		foreach ( $list_serialized as $content ) {
+
+			$contents .= '<option value="' . $content->ID . '" ' . selected( $selected, $content->ID, false ) . ' >' . $space . $content->post_title . '</option>';
+			if ( isset( $content->children ) ) {
+				$contents .= wp_travel_get_post_hierarchy_dropdown( $content->children, $selected, ( $nesting_level + 1 ), false );
+			}
+		}
+	endif;
+	if ( ! $echo ) {
+		return $contents;
+	}
+	echo $contents;
+	return false;
+}
