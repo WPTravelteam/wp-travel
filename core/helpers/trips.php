@@ -354,7 +354,11 @@ class WP_Travel_Helpers_Trips {
 		 * @since 4.0.4
 		 */
 		$prev_min_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
-		$min_price      = wp_travel_get_price( $trip_id );
+		$args = array(
+			'trip_id' => $trip_id,
+		);
+		$min_price = WP_Travel_Helpers_Pricings::get_price( $args );
+
 		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
@@ -698,7 +702,13 @@ class WP_Travel_Helpers_Trips {
 
 		if ( $from_price_sale_enable ) {
 			// get min price to check whether min price has sale enabled of not.
-			$trip_price = wp_travel_get_price( $trip_id );
+			$args = array(
+				'trip_id' => $trip_id,
+				'pricing_id' => $pricing_id,
+				'category_id' => $category_id,
+				'price_key' => $price_key,
+			);
+			$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 		}
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 			if ( ! empty( $pricing_id ) ) {

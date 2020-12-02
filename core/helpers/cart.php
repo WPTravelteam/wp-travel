@@ -173,7 +173,13 @@ class WP_Travel_Helpers_Cart {
 			$trip               = array();
 			$trip_price_partial = 0;
 			foreach ( $pax as $category_id => $pax_value ) {
-				$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since 3.0.0.
+				$args = array(
+					'trip_id' => $trip_id,
+					'pricing_id' => $pricing_id,
+					'category_id' => $category_id,
+					'price_key' => $price_key,
+				);
+				$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );

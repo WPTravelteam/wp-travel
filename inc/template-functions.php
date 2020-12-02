@@ -351,8 +351,6 @@ function wp_travel_wrapper_end() {
  */
 function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 
-	// $trip_price    = wp_travel_get_price( $trip_id );
-	// $regular_price = wp_travel_get_price( $trip_id, true );
 	$args = $args_regular = array( 'trip_id' => $trip_id );
 	$args_regular['is_regular_price'] = true;
 	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );

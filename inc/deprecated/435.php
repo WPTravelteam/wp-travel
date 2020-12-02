@@ -154,7 +154,8 @@ function wp_travel_get_booking_form() {
 	if ( isset( $group_size ) && '' != $group_size ) {
 		$fields['pax']['validations']['max'] = $group_size;
 	}
-	$trip_price = wp_travel_get_actual_trip_price( $trip_id );
+	$args = array( 'trip_id' => $trip_id );
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 	if ( '' == $trip_price || '0' == $trip_price ) {
 		unset( $fields['is_partial_payment'], $fields['payment_gateway'], $fields['booking_option'], $fields['trip_price'], $fields['payment_mode'], $fields['payment_amount'], $fields['trip_price_info'], $fields['payment_amount_info'] );
 	}
@@ -486,5 +487,30 @@ function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id =
 	);
 
 	wp_travel_deprecated_function( 'wp_travel_get_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
+	return WP_Travel_Helpers_Pricings::get_price( $args );
+}
+
+/**
+ * Return Trip Price.
+ *
+ * @param int    $trip_id Post id of the post.
+ * @param String $price_key Price key for multiple pricing.
+ * @param Bool   $only_regular_price Return only trip price rather than sale price as trip price if this is set to true.
+ *
+ * @since WP Travel 1.0.5 // Modified 1.9.2, 2.0.7 and Deprecated in WP Travel 4.3.5
+ * @return int Trip Price.
+ */
+function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $is_regular_price = false ) {
+	if ( ! $trip_id ) {
+		return 0;
+	}
+
+	$args = array(
+		'trip_id'          => $trip_id,
+		'is_regular_price' => $is_regular_price,
+		'price_key'        => $price_key,
+	);
+
+	wp_travel_deprecated_function( 'wp_travel_get_actual_trip_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
 	return WP_Travel_Helpers_Pricings::get_price( $args );
 }

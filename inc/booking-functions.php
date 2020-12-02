@@ -91,7 +91,8 @@ function wp_travel_booking_info( $post ) {
 			);
 			$form_field->init( $trip_field_args, array( 'single' => true ) )->render();
 
-			$trip_price = wp_travel_get_actual_trip_price( $booking_id );
+			$args = array( 'trip_id' => $booking_id ); // why booking id ??
+			$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
 			if ( '' == $trip_price || '0' == $trip_price ) {
 				unset( $payment_fields['is_partial_payment'], $payment_fields['booking_option'], $payment_fields['payment_gateway'], $payment_fields['trip_price'], $payment_fields['payment_mode'], $payment_fields['trip_price_info'], $payment_fields['payment_amount_info'], $payment_fields['payment_amount'] );

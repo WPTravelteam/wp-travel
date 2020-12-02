@@ -128,49 +128,42 @@ function wp_travel_get_price_per_text( $trip_id, $price_key = '', $return_key = 
 /**
  * Wp Travel Process Trip Price Tax.
  *
- * @param int $post_id post id.
+ * @param int $trip_id post id.
  * @return mixed $trip_price | $tax_details.
  */
-function wp_travel_process_trip_price_tax( $post_id ) {
+function wp_travel_process_trip_price_tax( $trip_id ) {
 
-	if ( ! $post_id ) {
+	if ( ! $trip_id ) {
 		return 0;
 	}
 	$settings = wp_travel_get_settings();
 
-	$trip_price = wp_travel_get_actual_trip_price( $post_id );
+	$args = $args_regular = array( 'trip_id' => $trip_id );
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
 	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 
 		$tax_details         = array();
 		$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
-		$trip_price          = wp_travel_get_actual_trip_price( $post_id );
 		$tax_percentage      = @$settings['trip_tax_percentage'];
 
 		if ( 0 == $trip_price || '' == $tax_percentage ) {
-
 			return array( 'trip_price' => $trip_price );
 		}
 
 		if ( 'yes' == $tax_inclusive_price ) {
-
 			$tax_details['tax_type']          = 'inclusive';
 			$tax_details['tax_percentage']    = $tax_percentage;
 			$actual_trip_price                = ( 100 * $trip_price ) / ( 100 + $tax_percentage );
 			$tax_details['trip_price']        = $actual_trip_price;
 			$tax_details['actual_trip_price'] = $trip_price;
-
 			return $tax_details;
-
 		} else {
-
 			$tax_details['tax_type']          = 'excluxive';
 			$tax_details['trip_price']        = $trip_price;
 			$tax_details['tax_percentage']    = $tax_percentage;
 			$tax_details['actual_trip_price'] = number_format( ( $trip_price + ( ( $trip_price * $tax_percentage ) / 100 ) ), 2, '.', '' );
-
 			return $tax_details;
-
 		}
 	}
 
@@ -483,54 +476,6 @@ function wp_travel_get_trip_sale_price( $post_id = 0 ) {
 }
 
 /**
- * Return Trip Price.
- *
- * @param int    $trip_id Post id of the post.
- * @param String $price_key Price key for multiple pricing.
- * @param Bool   $only_regular_price Return only trip price rather than sale price as trip price if this is set to true.
- *
- * @since 1.0.5 // Modified 1.9.2, 2.0.7
- * @return int Trip Price.
- */
-function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $only_regular_price = false ) {
-	if ( ! $trip_id ) {
-		return 0;
-	}
-
-	$trip_price  = wp_travel_get_trip_price( $trip_id );
-	$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
-	if ( $enable_sale && ! $only_regular_price ) {
-		$trip_price = wp_travel_get_trip_sale_price( $trip_id );
-	}
-
-	// @since 1.9.2 // Added price calculation for pricing key [multiple pricing].
-	$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
-	$valid_price_key        = wp_travel_is_price_key_valid( $trip_id, $price_key );
-
-	if ( '' !== $price_key && $enable_pricing_options && $valid_price_key ) {
-		$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
-		if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
-
-			foreach ( $pricing_data as $p_ky => $pricing ) :
-				if ( isset( $pricing['price'] ) ) {
-
-					$trip_price  = $pricing['price'];
-					$enable_sale = isset( $pricing['enable_sale'] ) && 'yes' === $pricing['enable_sale'];
-					$sale_price  = isset( $pricing['sale_price'] ) && $pricing['sale_price'] > 0 ? $pricing['sale_price'] : 0;
-
-					if ( $enable_sale && $sale_price && ! $only_regular_price ) {
-						$trip_price = $pricing['sale_price'];
-					}
-				}
-			endforeach;
-		}
-	}
-	return apply_filters( 'wp_travel_trip_price', $trip_price, $trip_id, $price_key, $only_regular_price );
-}
-// End of Migrated functions from inc/helpers.php / These prices are only for display.
-
-
-/**
  * Modified version of previous `wp_travel_get_cart_attrs` function.
  *
  * @param [type]  $trip_id
@@ -624,7 +569,8 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 
 function wp_travel_get_partial_trip_price( $trip_id, $price_key = null ) {
 
-	$trip_price = wp_travel_get_actual_trip_price( $trip_id, $price_key );
+	$args = array( 'trip_id' => $trip_id, 'price_key' => $price_key );
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
 	if ( wp_travel_is_partial_payment_enabled() ) {
 		$payout_percent = wp_travel_get_payout_percent( $trip_id );

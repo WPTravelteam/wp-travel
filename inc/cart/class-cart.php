@@ -306,11 +306,13 @@ class WP_Travel_Cart {
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
-					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0
-						$category_price = wp_travel_get_actual_trip_price( $trip_id );
-					} else {
-						$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
-					}
+					$args = array(
+						'trip_id' => $trip_id,
+						'pricing_id' => $pricing_id,
+						'category_id' => $category_id,
+					);
+					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
+					
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
 
