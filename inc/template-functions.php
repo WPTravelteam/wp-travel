@@ -351,8 +351,12 @@ function wp_travel_wrapper_end() {
  */
 function wp_travel_trip_price( $trip_id, $hide_rating = false ) {
 
-	$trip_price    = wp_travel_get_price( $trip_id );
-	$regular_price = wp_travel_get_price( $trip_id, true );
+	// $trip_price    = wp_travel_get_price( $trip_id );
+	// $regular_price = wp_travel_get_price( $trip_id, true );
+	$args = $args_regular = array( 'trip_id' => $trip_id );
+	$args_regular['is_regular_price'] = true;
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$regular_price= WP_Travel_Helpers_Pricings::get_price( $args_regular );
 	$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id, 'from_price_sale_enable' => true ) );
 
 	$strings = wp_travel_get_strings();
@@ -865,7 +869,7 @@ function wp_travel_frontend_contents( $post_id ) {
 
 	$trip_start_date = get_post_meta( $post_id, 'wp_travel_start_date', true );
 	$trip_end_date   = get_post_meta( $post_id, 'wp_travel_end_date', true );
-	$trip_price      = wp_travel_get_trip_price( $post_id );
+	// $trip_price      = wp_travel_get_trip_price( $post_id );
 	$enable_sale     = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $post_id ) );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
@@ -1367,11 +1371,14 @@ function wp_travel_save_offer( $trip_id ) {
 		return;
 	}
 
-	$trip_price = wp_travel_get_trip_price( $trip_id );
-	$sale_price = wp_travel_get_trip_sale_price( $trip_id );
+	
+	$args = $args_regular = array( 'trip_id' => $trip_id );
+	$args_regular['is_regular_price'] = true;
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$regular_price= WP_Travel_Helpers_Pricings::get_price( $args_regular );
 
-	if ( $sale_price > $trip_price ) {
-		$save = ( 1 - ( $trip_price / $sale_price ) ) * 100;
+	if ( $regular_price > $trip_price ) {
+		$save = ( 1 - ( $trip_price / $regular_price ) ) * 100;
 		$save = number_format( $save, 2, '.', ',' );
 		?>
 		<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', $save ); ?></div>

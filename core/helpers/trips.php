@@ -636,17 +636,17 @@ class WP_Travel_Helpers_Trips {
 	public static function is_sale_enabled( $args = array() ) {
 		// Extracting arguments.
 		$trip_id                = isset( $args['trip_id'] ) ? $args['trip_id'] : get_the_ID();
+		if ( ! $trip_id ) {
+			return false;
+		}
 		$from_price_sale_enable = isset( $args['from_price_sale_enable'] ) ? $args['from_price_sale_enable'] : false; // This will check sale enable for From Price.
 		$pricing_id             = isset( $args['pricing_id'] ) ? $args['pricing_id'] : '';
 		$category_id            = isset( $args['category_id'] ) ? $args['category_id'] : '';
 		$price_key              = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
-		if ( ! $trip_id ) {
-			return false;
-		}
 		$enable_sale         = false;
-
-		$pricing_option_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
+		$settings            = wp_travel_get_settings();
+		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 		if ( 'single-price' === $pricing_option_type ) {
@@ -656,21 +656,22 @@ class WP_Travel_Helpers_Trips {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id ); // New Pricing option since WP Travel v4.0.0
 			if ( $from_price_sale_enable ) {
 				// get min price to check whether min price has sale enabled of not.
-				$trip_price = wp_travel_get_price( $trip_id );
+				$args = array( 'trip_id' => $trip_id );
+				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 			}
-			if ( is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
-
+			$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+			if ( 'yes' === $switch_to_v4 && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings = $pricings_data['pricings'];
 				$args['pricings'] = $pricings;
 
 				$enable_sale = self::is_sale_enabled_v4( $args );
 				
 			} else {
-				$enable_sale = self::is_sale_enabled_legacy( $args );
+				$enable_sale = self::is_sale_enabled_legacy( $args ); // Enable sale for less than WP Travel 4.0.0
 			}
 		}
 	
-		return apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since 2.0.5.
+		return apply_filters( 'wp_travel_enable_sale', $enable_sale, $trip_id, $pricing_options, $price_key ); // Filter since WP Travel 2.0.5.
 		
 	}
 
@@ -694,6 +695,11 @@ class WP_Travel_Helpers_Trips {
 		$enable_sale         = false;
 		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
+
+		if ( $from_price_sale_enable ) {
+			// get min price to check whether min price has sale enabled of not.
+			$trip_price = wp_travel_get_price( $trip_id );
+		}
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 			if ( ! empty( $pricing_id ) ) {
 				$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
@@ -799,7 +805,8 @@ class WP_Travel_Helpers_Trips {
 		}
 		
 		// get min price to check whether min price has sale enabled of not.
-		$trip_price = wp_travel_get_price( $trip_id ); // Only usable in case of $from_price_sale_enable
+		$args = array( 'trip_id' => $trip_id );
+		$trip_price = WP_Travel_Helpers_Pricings::get_price( $args ); // Only usable in case of $from_price_sale_enable
 		
 		$enable_sale         = false;
 

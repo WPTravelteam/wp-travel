@@ -535,10 +535,9 @@ function wp_reavel_get_itinereries_prices_array() {
 
 	if ( $itineraries ) {
 
-		foreach ( $itineraries as $key => $itinerary ) {
-
-			$prices[] = wp_travel_get_price( $key );
-
+		foreach ( $itineraries as $trip_id => $itinerary ) {
+			$args = array( 'trip_id' => $trip_id );
+			$prices[] = WP_Travel_Helpers_Pricings::get_price( $args );
 		}
 		if ( is_array( $prices ) && '' !== $prices ) :
 			return $prices;
@@ -3632,7 +3631,7 @@ function wp_travel_get_trip_listing_option( $trip_id = null ) {
 		);
 
 		// Price.
-		$trip_price   = wp_travel_get_trip_price( $trip_id ); // Regular price.
+		// $trip_price   = wp_travel_get_trip_price( $trip_id ); // Regular price.
 		$pricing_data = array(
 			'pricing_name'    => '',
 			'price_key'       => '',

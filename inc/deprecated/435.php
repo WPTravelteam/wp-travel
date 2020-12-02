@@ -468,3 +468,23 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 	echo $contents;
 	return false;
 }
+
+/**
+ * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version
+ *
+ * @since WP Travel 3.0.0 and Deprecated in WP Travel 4.3.5
+ * @return Number
+ */
+function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
+	
+	$args = array(
+		'trip_id'          => $trip_id,
+		'is_regular_price' => $is_regular_price,
+		'pricing_id'       => $pricing_id,
+		'category_id'      => $category_id,
+		'price_key'        => $price_key,
+	);
+
+	wp_travel_deprecated_function( 'wp_travel_get_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
+	return WP_Travel_Helpers_Pricings::get_price( $args );
+}
