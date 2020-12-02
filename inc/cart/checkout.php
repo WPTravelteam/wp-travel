@@ -12,7 +12,6 @@ $settings                     = wp_travel_get_settings();
 $enable_multiple_travellers   = isset( $settings['enable_multiple_travellers'] ) && $settings['enable_multiple_travellers'] ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
 $all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
 global $wt_cart;
-dd($wt_cart->getItems());
 $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
