@@ -23,9 +23,8 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 		$pricing_options     = get_post_meta( $custom_post_id, 'wp_travel_pricing_options', true );
 
 		if ( 'multiple-price' === $pricing_option_type && is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
-			// Need to update wp_travel_trip_price which is used to filter by price in archive page.
-			$price_key = wp_travel_get_min_price_key( $pricing_options );
-			$args = array( 'trip_id' => $custom_post_id, 'price_key' => $price_key );
+			// $price_key = wp_travel_get_min_price_key( $pricing_options );
+			$args = array( 'trip_id' => $custom_post_id );
 			$price= WP_Travel_Helpers_Pricings::get_price( $args );
 			if ( $price ) {
 				update_post_meta( $custom_post_id, 'wp_travel_trip_price', $price );

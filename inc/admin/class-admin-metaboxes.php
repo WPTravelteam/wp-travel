@@ -519,9 +519,9 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_pricing_options'] = isset( $_POST['wp_travel_pricing_options'] ) ? ( wp_unslash( $_POST['wp_travel_pricing_options'] ) ) : '';
 
 		if ( 'multiple-price' === $trip_meta['wp_travel_pricing_option_type'] && is_array( $trip_meta['wp_travel_pricing_options'] ) && count( $trip_meta['wp_travel_pricing_options'] ) > 0 ) {
-			$pricing_options = $trip_meta['wp_travel_pricing_options'];
-			// Need to update wp_travel_trip_price which is used to filter by price in archive page.
-			$price_key = wp_travel_get_min_price_key( $pricing_options );
+			// $pricing_options = $trip_meta['wp_travel_pricing_options'];
+			// Need to update post meta wp_travel_trip_price which is used to filter by price in archive page.
+			// $price_key = wp_travel_get_min_price_key( $pricing_options );
 			$args = array(
 				'trip_id' => $trip_id,
 			);

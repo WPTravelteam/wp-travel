@@ -555,3 +555,74 @@ function wp_travel_get_trip_price( $post_id = 0 ) {
 	);
 	return WP_Travel_Helpers_Pricings::get_price( $args );
 }
+
+/**
+ * Return Min price key for the trip
+ *
+ * @param Mixed $options pricing_option | trip id.
+ *
+ * @since WP Travel 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ] not required @since 3.0.0 and Deprecated in WP Travel 4.3.5
+ * @return Mixed.
+ */
+
+function wp_travel_get_min_price_key( $options ) {
+	if ( ! $options ) {
+		return;
+	}
+	wp_travel_deprecated_function( 'wp_travel_get_min_price_key', '4.3.5' );
+
+	$pricing_options = false;
+	if ( is_array( $options ) ) {
+		$pricing_options = $options;
+	} elseif ( is_numeric( $options ) ) {
+		$trip_id         = $options;
+		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
+	}
+
+	if ( ! $pricing_options ) {
+		return;
+	}
+	$min_price = 0;
+	$price_key = '';
+	foreach ( $pricing_options as $pricing_option ) {
+
+		if ( isset( $pricing_option['categories'] ) ) {
+			if ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
+				$min_price = 0;
+				foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
+
+					$price       = $category_option['price'];
+					$enable_sale = isset( $category_option['enable_sale'] ) && 'yes' === $category_option['enable_sale'] ? true : false;
+					$sale_price  = isset( $category_option['sale_price'] ) && $category_option['sale_price'] > 0 ? $category_option['sale_price'] : 0;
+
+					if ( $enable_sale && $sale_price ) {
+						$price = $category_option['sale_price'];
+					}
+
+					if ( ! $min_price || $price < $min_price ) {
+						$min_price = $price;
+						$price_key = $pricing_option['price_key'];
+					}
+				}
+			}
+		} else {
+
+			if ( isset( $pricing_option['price'] ) ) { // old pricing option.
+				$current_price = $pricing_option['price'];
+				$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
+				$sale_price    = isset( $pricing_option['sale_price'] ) ? $pricing_option['sale_price'] : 0;
+
+				if ( 'yes' === $enable_sale && $sale_price > 0 ) {
+					$current_price = $sale_price;
+
+				}
+
+				if ( ( 0 === $min_price && $current_price > 0 ) || $min_price > $current_price ) { // Initialize min price if 0.
+					$min_price = $current_price;
+					$price_key = $pricing_option['price_key'];
+				}
+			}
+		}
+	}
+	return apply_filters( 'wp_travel_min_price_key', $price_key, $pricing_options ); // Filter @since 2.0.3.
+}
