@@ -564,7 +564,6 @@ function wp_travel_get_trip_price( $post_id = 0 ) {
  * @since WP Travel 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ] not required @since 3.0.0 and Deprecated in WP Travel 4.3.5
  * @return Mixed.
  */
-
 function wp_travel_get_min_price_key( $options ) {
 	if ( ! $options ) {
 		return;

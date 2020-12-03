@@ -5,8 +5,6 @@
  * @package wp-travel/inc
  */
 
-// Migrated functions from inc/helpers.php.
-
 /**
  * Return price per fields.
  *
@@ -629,8 +627,6 @@ function wp_travel_convert_price( $price, $convert = true ) {
 
 	return apply_filters( 'wp_travel_convert_price', $price );
 }
-
-
 
 /**
  * Currency position with price
