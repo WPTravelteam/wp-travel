@@ -52,6 +52,8 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         }
 
         let license =   'undefined' != typeof props.addons ? props.addons : []
+        console.log(license);
+        let freemius_license_slug = `edit.php?post_type=itinerary-booking&page=${ license._option_prefix.split("_").join("-") }license`
 
         return <>
             {
@@ -59,32 +61,42 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                 <>
 
                     <h3>{license.item_name}</h3>
-                    <PanelRow>
-                        <TextControl
-                            placeholder={__( 'Enter License Key', 'wp-travel' )}
-                            value={license.license_key}
-                            onChange={(value) => {
-                                updateLicenseData( 'license_key', value, props.index ) 
-                            }}
-                        />
-                        {
-                            // Spinner will be trigger only if props index value of button matched with current state value.
-                            isProcessingApi == props.index ? <Spinner /> : ''
-                        }
-                        {
-                            ('valid' == license.status && false !== license.license_data ) ?
-                                <Button id={props.index} isSecondary onClick={() => deactivateLicense(license,props)}>{ __( 'Deactivate', 'wp-travel' ) }</Button>
-                                : <Button isSecondary onClick={() => activateLicense(license,props)}>{ __( 'Activate', 'wp-travel' ) }</Button>
-                        }
-                        <p className="description">{__( `Enter license key for ${license.item_name} here.`, 'wp-travel' )}</p>
-                    </PanelRow>
-                    <div className="license_status">
-                        { license.license_key && statusMsg(license)}
-                        {
-                            'valid' == license.status &&
-                            'lifetime' !== license.license_data.expires ? <p><strong>{__( 'Expires In : ' + licenseExpiryDate(license.license_data.expires), 'wp-travel' )}</strong></p>      : ''
-                        }
-                    </div>
+                    { 'undefined' !== typeof license.host && 'tp' == license.host &&
+                        <>
+                            <PanelRow>
+                                <TextControl
+                                    placeholder={__( 'Enter License Key', 'wp-travel' )}
+                                    value={license.license_key}
+                                    onChange={(value) => {
+                                        updateLicenseData( 'license_key', value, props.index ) 
+                                    }}
+                                />
+                                {
+                                    // Spinner will be trigger only if props index value of button matched with current state value.
+                                    isProcessingApi == props.index ? <Spinner /> : ''
+                                }
+                                {
+                                    ('valid' == license.status && false !== license.license_data ) ?
+                                        <Button id={props.index} isSecondary onClick={() => deactivateLicense(license,props)}>{ __( 'Deactivate', 'wp-travel' ) }</Button>
+                                        : <Button isSecondary onClick={() => activateLicense(license,props)}>{ __( 'Activate', 'wp-travel' ) }</Button>
+                                }
+                                <p className="description">{__( `Enter license key for ${license.item_name} here.`, 'wp-travel' )}</p>
+                            </PanelRow>
+                            <div className="license_status">
+                                { license.license_key && statusMsg(license)}
+                                {
+                                    'valid' == license.status &&
+                                    'lifetime' !== license.license_data.expires ? <p><strong>{__( 'Expires In : ' + licenseExpiryDate(license.license_data.expires), 'wp-travel' )}</strong></p>      : ''
+                                }
+                            </div>
+                        </>
+                    }
+
+                    { 'undefined' !== typeof license.host && 'freemius' == license.host &&
+                        <>
+                            <a href={freemius_license_slug} title="View system information">Add License</a>
+                        </>
+                    }
                 </>
             }
         </>

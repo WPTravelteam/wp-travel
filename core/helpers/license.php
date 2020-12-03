@@ -53,13 +53,27 @@ class WP_Travel_Helpers_License {
 			$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
 			$filtered_key = str_replace( '-', '_', $key );
 
+			// Support for freemius @since WP Travel 4.3.5
+			$default_host = 'freemius';
+			$host         = get_option( $premium_addon['_option_prefix'] . 'host' );
+			if ( 'valid' == $status && '' != $license_key ) {
+				if ( ! $host ) { // if host is already saved then it will renderd from above option.
+					$host = 'tp';
+				}
+			} else {
+				$host = $default_host;
+			}
+
 			$data = array(
 				'license_data'   => $license_data,
 				'license_key'    => $license_key,
 				'status'         => $status,
 				'item_name'      => $premium_addon['item_name'],
 				'_option_prefix' => $filtered_key . '_',
+				'host'           => $host
 			);
+			
+
 
 			$premium_addons_keys[] = $filtered_key;
 			$premium_addons_data[] = $data;
