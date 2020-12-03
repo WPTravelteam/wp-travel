@@ -18,9 +18,9 @@ if ( count( $itineraries ) > 0 ) {
 		$enable_sale = get_post_meta( $post_id, 'wp_travel_enable_sale', true );
 
 		if ( $enable_sale ) {
-			$trip_price = wp_travel_get_trip_sale_price( $post_id );
+			$trip_price = get_post_meta( $post_id, 'wp_travel_sale_price', true );
 		} else {
-			$trip_price = wp_travel_get_trip_price( $post_id );
+			$trip_price = get_post_meta( $post_id, 'wp_travel_price', true );
 		}
 		update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );
 	}

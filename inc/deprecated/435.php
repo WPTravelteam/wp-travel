@@ -514,3 +514,44 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $is_reg
 	wp_travel_deprecated_function( 'wp_travel_get_actual_trip_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
 	return WP_Travel_Helpers_Pricings::get_price( $args );
 }
+
+/**
+ * Return Trip Sale Price.
+ *
+ * @param  int $trip_id Post id of the post.
+ *
+ * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.3.5
+ * @return int Trip Price.
+ */
+function wp_travel_get_trip_sale_price( $trip_id = 0 ) {
+	if ( ! $trip_id ) {
+		return 0;
+	}
+	wp_travel_deprecated_function( 'wp_travel_get_trip_sale_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
+
+	$args = array(
+		'trip_id'          => $trip_id,
+		'is_regular_price' => true,
+	);
+	return WP_Travel_Helpers_Pricings::get_price( $args );
+}
+
+/**
+ * Return Trip Price.
+ *
+ * @param  int $post_id Post id of the post.
+ *
+ * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.3.5
+ * @return int Trip Price.
+ */
+function wp_travel_get_trip_price( $post_id = 0 ) {
+	if ( ! $post_id ) {
+		return 0;
+	}
+	wp_travel_deprecated_function( 'wp_travel_get_trip_price', '4.3.5', 'WP_Travel_Helpers_Trips::get_price()' );
+
+	$args = array(
+		'trip_id'          => $trip_id,
+	);
+	return WP_Travel_Helpers_Pricings::get_price( $args );
+}

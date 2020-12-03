@@ -880,7 +880,6 @@ function wp_travel_frontend_contents( $post_id ) {
 
 	$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
 	$price_per_text  = wp_travel_get_price_per_text( $post_id );
-	$sale_price      = wp_travel_get_trip_sale_price( $post_id );
 
 	$wrapper_class = wp_travel_get_theme_wrapper_class();
 	?>
