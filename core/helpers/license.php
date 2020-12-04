@@ -65,12 +65,12 @@ class WP_Travel_Helpers_License {
 				// }
 			} else {
 				$host = $default_host;
-				$license_function = $filtered_key . '_fs';
+				$plugin_prefix = $filtered_key . '_fs';
 				$status = '';
-				if( function_exists( $license_function ) ) :
+				if( function_exists( $plugin_prefix ) ) :
 					$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
 					$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
-					if ( $license_function()->is_paying() ) {
+					if ( $plugin_prefix()->is_paying() ) {
 						$status = 'valid';
 					}
 				endif;
