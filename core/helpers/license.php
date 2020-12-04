@@ -55,13 +55,25 @@ class WP_Travel_Helpers_License {
 
 			// Support for freemius @since WP Travel 4.3.5
 			$default_host = 'freemius';
-			$host         = get_option( $premium_addon['_option_prefix'] . 'host' );
+			// $host         = get_option( $premium_addon['_option_prefix'] . 'host' );
+
+			$license_link = '';
+			$account_link = '';
 			if ( 'valid' == $status && '' != $license_key ) {
-				if ( ! $host ) { // if host is already saved then it will renderd from above option.
+				// if ( ! $host ) { // if host is already saved then it will renderd from above option.
 					$host = 'tp';
-				}
+				// }
 			} else {
 				$host = $default_host;
+				$license_function = $filtered_key . '_fs';
+				$status = '';
+				if( function_exists( $license_function ) ) :
+					$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
+					$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
+					if ( $license_function()->is_paying() ) {
+						$status = 'valid';
+					}
+				endif;
 			}
 
 			$data = array(
@@ -70,7 +82,10 @@ class WP_Travel_Helpers_License {
 				'status'         => $status,
 				'item_name'      => $premium_addon['item_name'],
 				'_option_prefix' => $filtered_key . '_',
-				'host'           => $host
+				// Additional options for Freemius.
+				'host'           => $host,
+				'license_link'   => $license_link,
+				'account_link'   => $account_link,
 			);
 			
 

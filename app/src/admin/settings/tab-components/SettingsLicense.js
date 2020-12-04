@@ -52,8 +52,6 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         }
 
         let license =   'undefined' != typeof props.addons ? props.addons : []
-        console.log(license);
-        let freemius_license_slug = `edit.php?post_type=itinerary-booking&page=${ license._option_prefix.split("_").join("-") }license`
 
         return <>
             {
@@ -94,7 +92,11 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
 
                     { 'undefined' !== typeof license.host && 'freemius' == license.host &&
                         <>
-                            <a href={freemius_license_slug} title="View system information">Add License</a>
+                            {license.status && 'valid' == license.status ? 
+                                <a href={license.account_link} title="Manage License">Manage License</a>
+                                :
+                                <a href={license.license_link} title="Add License">Add License</a>
+                            }
                         </>
                     }
                 </>
