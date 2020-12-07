@@ -54,26 +54,30 @@ class WP_Travel_Helpers_License {
 			$filtered_key = str_replace( '-', '_', $key );
 
 			// Support for freemius @since WP Travel 4.3.5
-			$default_host = 'freemius';
 			// $host         = get_option( $premium_addon['_option_prefix'] . 'host' );
 
 			$license_link = '';
 			$account_link = '';
-			if ( 'valid' == $status && '' != $license_key ) {
-				// if ( ! $host ) { // if host is already saved then it will renderd from above option.
-					$host = 'tp';
-				// }
-			} else {
-				$host = $default_host;
-				$plugin_prefix = $filtered_key . '_fs';
-				if( function_exists( $plugin_prefix ) ) :
-					$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
-					$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
-					if ( $plugin_prefix()->is_paying() ) {
-						$status = 'valid';
-					}
-				endif;
-			}
+			$host = 'tp';
+			$plugin_prefix = $filtered_key . '_fs';
+			if ( function_exists( $plugin_prefix ) ) {
+				$host = 'freemius';
+
+				$status = ''; // need empty because It may be valid/active in TP license.
+				$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
+				$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
+				if ( $plugin_prefix()->is_paying() ) {
+					$status = 'valid';
+				}
+			} 
+			// else {
+
+			// 	if ( 'valid' == $status && '' != $license_key ) {
+			// 		if ( ! $host ) { // if host is already saved then it will renderd from above option.
+			// 			$host = 'tp';
+			// 		}
+			// 	} 
+			// }
 
 			$data = array(
 				'license_data'   => $license_data,
