@@ -50,7 +50,7 @@ const WPTravelTripOptionsFactContent = () => {
     
         let _allTripFacts = trip_facts;
         _allTripFacts[_factId][key] = value
-s        updateTripData({
+        updateTripData({
             ...allData,
             trip_facts:[..._allTripFacts]
         })
