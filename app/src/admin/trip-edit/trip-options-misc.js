@@ -12,8 +12,6 @@ const WPTravelTripOptionsMiscContent = () => {
     }, []);
     const { updateTripData } = dispatch('WPTravel/TripEdit');
 
-    
-    // console.log( allData )
     const { use_global_trip_enquiry_option, enable_trip_enquiry_option } = allData;
 
     return <ErrorBoundary>

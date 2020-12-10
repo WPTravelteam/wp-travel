@@ -505,7 +505,6 @@ const BookingCalender = () => {
 		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
 			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
-			// console.log(groupPrices)
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
 				price = 'group' === category.price_per ? count > 0 && parseFloat(group_price.price) || 0 : parseFloat(group_price.price) * count
@@ -519,10 +518,8 @@ const BookingCalender = () => {
 	}
 
 	const getPricingTripTimes = (pricingId, selectedTripdates) => {
-		console.log(typeof selectedDateTime);
 		let trip_time = selectedTripdates.map(td => {
 			let date = datesById[td]
-			// console.log(typeof date.start_date);
 			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
 				let times = date.trip_time && date.trip_time.split(',') || []
 				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since WP Travel 4.3.1

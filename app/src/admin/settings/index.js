@@ -37,8 +37,6 @@ const WPTravelTripSettings = () => {
     }, []);
     
     const {options}= allData
-    // console.log(options)
-
    
     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
     wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;

@@ -17,7 +17,6 @@ const WPTravelTripOptionsItineraryContent = () => {
     }, []);
     const { updateTripData, addNewItinerary } = dispatch('WPTravel/TripEdit');
     const { trip_outline, itineraries } = allData;
-    // console.log( typeof itineraries )
     const updateTripItinerary = (key, value, _itineraryId) => { // Update on change itineraries.
 
         let _allItineraries = itineraries;

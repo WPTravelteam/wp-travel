@@ -75,7 +75,6 @@ const BookingEmailTemplates = () => {
         booking_admin_template_settings,
         booking_client_template_settings,
         } = allData;
-    // console.log(booking_admin_template_settings)
     let sendBookingEmailToAdmin = 'undefined' != typeof send_booking_email_to_admin ? send_booking_email_to_admin : 'no'
 
     const updateEmailData = ( storeName, storeKey, value) => { // storeName[storeKey] = value

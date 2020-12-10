@@ -29,14 +29,11 @@ const WPTravelTripOptionsFactContent = () => {
             value: wp_travel_trip_facts_settings[index].name
           }
     } ) : []
-    // console.log( trip_facts )
-
     const updateFactType = ( key, data, _factIndex ) => {
       
         const { trip_facts } = allData;
         let _allTripFacts = trip_facts;
         _allTripFacts[_factIndex][key] = data[key]
-        console.log(data)
         if ( 'type' === key ) { // reset label and value on fact type change
             _allTripFacts[_factIndex].label = data.name
             _allTripFacts[_factIndex].value = ''
@@ -53,8 +50,7 @@ const WPTravelTripOptionsFactContent = () => {
     
         let _allTripFacts = trip_facts;
         _allTripFacts[_factId][key] = value
-    //    console.log(_allTripFacts)
-        updateTripData({
+s        updateTripData({
             ...allData,
             trip_facts:[..._allTripFacts]
         })
@@ -212,7 +208,6 @@ const WPTravelTripOptionsFactContent = () => {
                                                 factData = trip_facts.filter((fact, newFactId) => {
                                                     return newFactId != factIndex;
                                                 });
-                                                // console.log(factData);
                                                 updateFacts(factData);
                                             }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button>
                                         </PanelRow>

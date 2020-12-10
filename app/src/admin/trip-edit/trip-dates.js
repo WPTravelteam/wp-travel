@@ -18,8 +18,6 @@ const WPTravelTripDates = () => {
     const { updateTripData, updateRequestSending, setTripData, updateStateChange } = dispatch('WPTravel/TripEdit');
 
     const {is_fixed_departure, has_state_changes, is_multiple_dates, dates, trip_time, pricings, trip_duration } = allData;
-    // console.log(trip_duration);
-    
 
     let firstDate = dates.length>0?dates[0]:{
         start_date:format('Y-m-d', new Date() ),

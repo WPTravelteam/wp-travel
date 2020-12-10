@@ -19,8 +19,6 @@ const WPTravelTripOptionsLocationContent = () => {
     }, []);
 
     const { map_data } = allData
-    // console.log(settingsData)
-
 
     return <ErrorBoundary>
         <div className="wp-travel-trip-location">

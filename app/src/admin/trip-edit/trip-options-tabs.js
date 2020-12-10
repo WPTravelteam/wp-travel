@@ -29,7 +29,6 @@ const WPTravelTripOptionsTabsContent = () => {
         })
     }
     const { trip_tabs, id, use_global_tabs } = allData;
-    // console.log(trip_tabs)
     const sortTabs = (sortedTabs) => {
         updateTripData({
             ...allData, // allData
@@ -45,8 +44,6 @@ const WPTravelTripOptionsTabsContent = () => {
                 >
                 {
                     trip_tabs.map(function (tab, tabIndex) {
-                        console.log( tab );
-                        // console.log( i );
                         return <PanelBody
                             icon= {alignJustify}
                             title={tab.label ? tab.label : tab.default_label }

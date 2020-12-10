@@ -29,7 +29,6 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
     const { updateSettings } = dispatch('WPTravel/Admin');
 
     const updateLicenseData = (key, value, index) => {
-        // console.log(allData)
         let {premium_addons_data} = allData
         
         let _premium_addons_data = premium_addons_data;
@@ -184,8 +183,6 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
             item_name: license.item_name,
         }
         requestLicenseData[item_key] = license.license_key; // Adding prefix key on request data.
-        // console.log(license);
-        // console.log(requestLicenseData);
         apiFetch( 
             { 
                 url: `${ajaxurl}?action=wp_travel_deactivate_license&_nonce=${_wp_travel._nonce}`,

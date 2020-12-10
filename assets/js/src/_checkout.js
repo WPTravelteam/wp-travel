@@ -89,8 +89,6 @@ jQuery(document).ready(function ($) {
                 pax[$(this).data('category-id')] = this.value;
             });
 
-            // console.log(pax);
-
             var update_cart_field = {};
             update_cart_field['extras'] = {};
             update_cart_field['extras']['id'] = {};

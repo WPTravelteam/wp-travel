@@ -33,7 +33,6 @@ export default () => {
         })
         .on('select', () => {
             const selectedItems = galleryMediaInstance.state().get('selection').toJSON()
-            // console.log(selectedItems)
             let currentGallery = store.getAllStore().gallery
             selectedItems.length > 0 && updateTripData({
                 ...tripData,
