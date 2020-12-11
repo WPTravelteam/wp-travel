@@ -73,4 +73,4 @@ function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $messa
 include sprintf( '%s/inc/deprecated/105.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/193.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/307.php', WP_TRAVEL_ABSPATH );
-include sprintf( '%s/inc/deprecated/435.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/440.php', WP_TRAVEL_ABSPATH );

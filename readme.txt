@@ -266,7 +266,9 @@ Deprecated
 * Function `wp_travel_booking_form_fields` is deprecated. 
 * Function `wp_travel_build_post_tree` is deprecated. 
 * Function `wp_travel_get_post_hierarchy_dropdown` is deprecated.
-
+* Action Hook `wp_travel_update_trip_inventory_values` is deprecated use `wp_travel_trip_inventory` instead of.
+* Action Hook `wp_travel_booking_princing_options_list` is deprecated use `wp_travel_booking_default_princing_list` instead of.
+* Action Hook `wp_travel_booking_departure_date_list` is deprecated use `wp_travel_booking_fixed_departure_list` instead of.
 
 = 4.3.4 =
 Release Date: 11th November, 2020
