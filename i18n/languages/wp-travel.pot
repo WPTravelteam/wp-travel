@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.3.5\n"
+"Project-Id-Version: WP Travel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 06:36:55+00:00\n"
+"POT-Creation-Date: 2020-12-11 04:27:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -333,17 +333,17 @@ msgstr ""
 msgid "Right with space"
 msgstr ""
 
-#: core/helpers/settings.php:154
+#: core/helpers/settings.php:153
 #: inc/admin/views/tabs/tab-contents/settings/facts.php:81
 msgid "Plain Text"
 msgstr ""
 
-#: core/helpers/settings.php:158
+#: core/helpers/settings.php:157
 #: inc/admin/views/tabs/tab-contents/settings/facts.php:82
 msgid "Single Select"
 msgstr ""
 
-#: core/helpers/settings.php:162
+#: core/helpers/settings.php:161
 #: inc/admin/views/tabs/tab-contents/settings/facts.php:83
 msgid "Multiple Select"
 msgstr ""
