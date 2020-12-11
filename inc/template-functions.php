@@ -771,6 +771,8 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
 	}
 
+	$i = 0;
+
 	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
 		?>
 		<!-- TRIP FACTS -->
@@ -779,13 +781,28 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 				<div class="tour-info-column ">
 					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 						<?php
+						// Temp Fixes for v4 compatible from here. ( Issue: With fact_id in v4. If fact was in v3 and migrate to v4, it won't show on frontend ).
+						$settings_fields = wp_travel_get_settings();
+						$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
 						if ( isset( $trip_fact['fact_id'] ) ) {
 							$trip_fact_id = $trip_fact['fact_id'];
-							if ( ! isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ] ) ) {
-								continue;
-							}
-							$icon  = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'];
-							$label = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'];
+
+							if ( 'yes' === $switch_to_react ) {
+								$facts_settings = ! empty( $settings['wp_travel_trip_facts_settings'] ) ? $settings['wp_travel_trip_facts_settings'] : array();
+								
+								$icon  = $facts_settings[$i]['icon'];
+								$label = $facts_settings[$i]['name'];
+								
+								$i++;
+								// Temp fixes End here.
+							} else {
+								if ( ! isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ] ) ) {
+									continue;
+								}
+								$icon  = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'];
+								$label = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'];
+
+							}	
 						} else {
 							$trip_fact_setting = array_filter(
 								$settings['wp_travel_trip_facts_settings'],
@@ -827,12 +844,10 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 										}
 										$i++;
 									}
+								} elseif ( isset( $trip_fact['fact_id'] ) && 'single' === $trip_fact['type'] ) {
+									echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] );
 								} else {
-									if ( isset( $trip_fact['fact_id'] ) && 'single' === $trip_fact['type'] ) {
-										echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] );
-									} else {
-										echo esc_html( $trip_fact['value'] );
-									}
+									echo esc_html( $trip_fact['value'] );
 								}
 								?>
 							</span>

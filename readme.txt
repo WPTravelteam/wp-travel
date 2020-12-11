@@ -248,6 +248,7 @@ Release Date: 11th December 2020
 Fixes:
 * License Activation on a renewal is fixed.
 * Fixed Dashboard page is not selectable from admin settings. When we change the dashboard page option it will change the checkout page option in admin settings.
+* Trip facts not displaying on single itinerary page after migration from older version of WP Travel to v4 is fixed.
 
 Tweaks:
 * Added Enable/Disable all payment gateway option in the settings.
