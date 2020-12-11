@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.5.3
 Requires PHP: 5.5
-Stable tag: 4.3.5
+Stable tag: 4.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -242,28 +242,30 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.3.5 =
-Release Date: 3rd December, 2020
+= 4.4.0 =
+Release Date: 11th December 2020
 
 Fixes:
-* License Activation on renewal is fixed.
-* Removed Force Cart / Checkout functionality due to no uses. 
-* Fixed Dashboard page is not selectable from admin settings. When we change dashboard page it will changing checkout page in admin settings.
-Tweak:
+* License Activation on a renewal is fixed.
+* Fixed Dashboard page is not selectable from admin settings. When we change the dashboard page option it will change the checkout page option in admin settings.
+
+Tweaks:
 * Added Enable/Disable all payment gateway option in the settings.
+* License term updated. We have updated our premium license to Freemius from Themepalace.
+
 Deprecated
-* Function wp_travel_is_enable_sale_price and wp_travel_is_enable_sale is deprecated use WP_Travel_Helpers_Trips::is_sale_enabled() instead of these 2 functions.
-* Function wp_travel_is_trip_price_tax_enabled is deprecated use WP_Travel_Helpers_Trips::is_tax_enabled() instead of.
-* Function wp_travel_is_taxable is deprecated use WP_Travel_Helpers_Trips::get_tax_rate()  instead of. 
-* Function wp_travel_get_price is deprecated use WP_Travel_Helpers_Trips::get_price()  instead of. 
-* Function wp_travel_get_actual_trip_price is deprecated use WP_Travel_Helpers_Trips::get_price()  instead of. 
-* Function wp_travel_get_trip_sale_price is deprecated use WP_Travel_Helpers_Trips::get_price()  instead of. 
-* Function wp_travel_get_trip_price is deprecated use WP_Travel_Helpers_Trips::get_price()  instead of. 
-* Function wp_travel_get_min_price_key is deprecated. 
-* Function wp_travel_get_booking_form is deprecated. 
-* Function wp_travel_booking_form_fields is deprecated. 
-* Function wp_travel_build_post_tree is deprecated. 
-* Function wp_travel_get_post_hierarchy_dropdown is deprecated. 
+* Function `wp_travel_is_enable_sale_price` and `wp_travel_is_enable_sale` is deprecated use `WP_Travel_Helpers_Trips::is_sale_enabled()` instead of these 2 functions.
+* Function `wp_travel_is_trip_price_tax_enabled` is deprecated use `WP_Travel_Helpers_Trips::is_tax_enabled()` instead of.
+* Function `wp_travel_is_taxable` is deprecated use `WP_Travel_Helpers_Trips::get_tax_rate()` instead of. 
+* Function `wp_travel_get_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_actual_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_trip_sale_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_min_price_key` is deprecated. 
+* Function `wp_travel_get_booking_form` is deprecated. 
+* Function `wp_travel_booking_form_fields` is deprecated. 
+* Function `wp_travel_build_post_tree` is deprecated. 
+* Function `wp_travel_get_post_hierarchy_dropdown` is deprecated.
 
 
 = 4.3.4 =

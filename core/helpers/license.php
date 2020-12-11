@@ -53,7 +53,7 @@ class WP_Travel_Helpers_License {
 			$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
 			$filtered_key = str_replace( '-', '_', $key );
 
-			// Support for freemius @since WP Travel 4.3.5
+			// Support for freemius @since WP Travel 4.4.0
 			// $host         = get_option( $premium_addon['_option_prefix'] . 'host' );
 
 			$license_link = '';

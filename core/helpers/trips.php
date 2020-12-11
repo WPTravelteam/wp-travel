@@ -634,7 +634,7 @@ class WP_Travel_Helpers_Trips {
 	/**
 	 * Return True if sale enable for the trip as per arguments provided.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Boolean
 	 */
 	public static function is_sale_enabled( $args = array() ) {
@@ -682,7 +682,7 @@ class WP_Travel_Helpers_Trips {
 	/**
 	 * Note: It is only for Below WP Travel 4.0. Return True if sale enable for the trip as per arguments provided.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Array
 	 */
 	public static function is_sale_enabled_legacy( $args = array() ) {
@@ -793,7 +793,7 @@ class WP_Travel_Helpers_Trips {
 	/**
 	 * Note: It is only for Greater than or equel to WP Travel 4.0. Return True if sale enable for the trip as per arguments provided.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Array
 	 */
 	public static function is_sale_enabled_v4( $args = array() ) {
@@ -861,7 +861,7 @@ class WP_Travel_Helpers_Trips {
 	/**
 	 * Return True if tax enable in settings.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Boolean
 	 */
 	public static function is_tax_enabled() {
@@ -872,7 +872,7 @@ class WP_Travel_Helpers_Trips {
 	/**
 	 * Return True Percent if tax is applicable otherwise return false.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Mixed
 	 */
 	public static function get_tax_rate() {

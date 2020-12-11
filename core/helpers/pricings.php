@@ -235,7 +235,7 @@ class WP_Travel_Helpers_Pricings {
 	/**
 	 * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Number
 	 */
 	public static function get_price( $args = array() ) {
@@ -262,7 +262,7 @@ class WP_Travel_Helpers_Pricings {
 	/**
 	 * Get Legacy Price. for WP Travel less than v4
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Number
 	 */
 	public static function get_price_legacy( $args = array() ) {
@@ -392,7 +392,7 @@ class WP_Travel_Helpers_Pricings {
 	/**
 	 * Get V4 or gerater than V4 Price.
 	 *
-	 * @since WP Travel 4.3.5
+	 * @since WP Travel  4.4.0
 	 * @return Number
 	 */
 	public static function get_price_v4( $args = array() ) {

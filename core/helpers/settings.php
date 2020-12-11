@@ -80,7 +80,6 @@ class WP_Travel_Helpers_Settings {
 
 		// trip facts.
 		$facts = $settings['wp_travel_trip_facts_settings'];
-		// error_log(print_r( $facts, true ));
 		$mapped_facts = array();
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
 			foreach ( $facts as $key => $fact ) {
@@ -191,7 +190,6 @@ class WP_Travel_Helpers_Settings {
 			if ( in_array( $settings_field, $ignore_fields ) ) {
 				continue;
 			}
-			// error_log( print_r( $settings_data[ $settings_field ], true ) );
 			if ( isset( $settings_data[ $settings_field ] ) ) {
 				// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 				$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id', 'thank_you_page_id' );
@@ -347,7 +345,6 @@ class WP_Travel_Helpers_Settings {
 		}
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
-		// error_log( print_r( $settings, true ) );
 
 		update_option( 'wp_travel_settings', $settings );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
