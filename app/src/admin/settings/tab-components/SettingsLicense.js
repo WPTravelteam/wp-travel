@@ -16,7 +16,9 @@ export default () => {
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'License Details', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            {applyFilters( 'wp_travel_license_tab_fields', [], allData ) }
+            <div className="wp-travel-license-details">
+                {applyFilters( 'wp_travel_license_tab_fields', [], allData ) }
+            </div>
         </ErrorBoundary>
     </div>
 }
@@ -55,7 +57,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
         return <>
             {
                 'undefined' != typeof license && 
-                <>
+                <div className={`license-details__item license-details__item__${'undefined' != typeof license._option_prefix ? license._option_prefix : '' }`}>
 
                     <h3>{license.item_name}</h3>
                     { 'undefined' !== typeof license.host && 'tp' == license.host &&
@@ -98,7 +100,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                             }
                         </>
                     }
-                </>
+                </div>
             }
         </>
     }
