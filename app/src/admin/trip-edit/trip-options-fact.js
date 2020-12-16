@@ -56,7 +56,7 @@ const WPTravelTripOptionsFactContent = () => {
         })
     }
     const fieldTypeOption = ( factId ) => {
-        if ( 'number' != typeof factId  ){
+        if ( 'number' != typeof factId ){
             return []
         }
         let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 ? wp_travel_trip_facts_settings[factId].options : [];
@@ -105,7 +105,8 @@ const WPTravelTripOptionsFactContent = () => {
                                 handle=".components-panel__icon"
                                 >
                                 {trip_facts.map((trip_fact, factIndex) => {
-                                    let singleOrMultipleOptions = fieldTypeOption(trip_fact.fact_id);
+                                    let trip_fact_id = '' != trip_fact.fact_id ? parseInt(trip_fact.fact_id) : trip_fact.fact_id; // To check if fact_id is not empty, if empty then it means newly added. So send it as string in order to prevent conflict in fiedltypeoption number typeof check. @since 4.4.1
+                                    let singleOrMultipleOptions = fieldTypeOption(trip_fact_id);
 
                                     let singleSelected = singleOrMultipleOptions.filter( ( item ) => {
                                         return item.value == trip_fact.value

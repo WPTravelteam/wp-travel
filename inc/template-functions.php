@@ -779,49 +779,39 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 		<div class="tour-info">
 			<div class="tour-info-box clearfix">
 				<div class="tour-info-column ">
-					<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+					<?php
+					/**
+					 * To fix fact not showing on frontend since v4.0 or greater.
+					 *
+					 * Modified @since v4.4.1
+					 */
+					$settings_facts  = $settings['wp_travel_trip_facts_settings'];
+					foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 						<?php
-						// Temp Fixes for v4 compatible from here. ( Issue: With fact_id in v4. If fact was in v3 and migrate to v4, it won't show on frontend ).
-						$settings_fields = wp_travel_get_settings();
-						$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
-						if ( isset( $trip_fact['fact_id'] ) ) {
-							$trip_fact_id = $trip_fact['fact_id'];
+						$trip_fact_id   = $trip_fact['fact_id'];	
+						if ( isset( $settings_facts[ $trip_fact_id ] ) ) { // To check if current trip facts id matches the settings trip facts id. If matches then get icon and label.
 
-							if ( 'yes' === $switch_to_react ) {
-								$facts_settings = ! empty( $settings['wp_travel_trip_facts_settings'] ) ? $settings['wp_travel_trip_facts_settings'] : array();
-								
-								$icon  = $facts_settings[$i]['icon'];
-								$label = $facts_settings[$i]['name'];
-								
-								$i++;
-								// Temp fixes End here.
-							} else {
-								if ( ! isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ] ) ) {
-									continue;
-								}
-								$icon  = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['icon'];
-								$label = $settings['wp_travel_trip_facts_settings'][ $trip_fact_id ]['name'];
-
-							}	
-						} else {
+							$icon  = $settings_facts[ $trip_fact_id ]['icon'];
+							$label = $settings_facts[ $trip_fact_id ]['name'];
+													
+						} else { // If fact id doesn't matches or if trip fact doesn't have fact id then matching the trip fact label with fact setting label. ( For e.g Transports ( fact in trip ) === Transports ( Setting fact option ) )
 							$trip_fact_setting = array_filter(
-								$settings['wp_travel_trip_facts_settings'],
+								$settings_facts,
 								function( $setting ) use ( $trip_fact ) {
-
-									return $setting['name'] === $trip_fact['label'];
+									
+									return $setting['name'] === $trip_fact['label']; 
 								}
-							);
+							); // Gives an array for matches label with its other detail as well.
+							
+							if ( empty( $trip_fact_setting ) ) { // If there is empty array that means label doesn't matches. Hence skip that and continue.
+								continue;
+							}
 							foreach ( $trip_fact_setting as $set ) {
 								$icon  = $set['icon'];
 								$label = $set['name'];
 							}
 						}
-							// $settings['wp_travel_trip_facts_settings'];
 
-						// foreach ( $icon as $key => $ico ) {
-
-						// $icon = $ico['icon'];
-						// }
 						if ( isset( $trip_fact['value'] ) ) :
 							?>
 							<span class="tour-info-item tour-info-type">

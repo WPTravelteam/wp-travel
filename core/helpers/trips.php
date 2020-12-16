@@ -53,8 +53,12 @@ class WP_Travel_Helpers_Trips {
 		endforeach;
 
 		$trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
+		
 		if ( is_string( $trip_facts ) ) {
 			$trip_facts = json_decode( $trip_facts, true );
+		}
+		if ( empty( $trip_facts ) ) {
+			$trip_facts = array();
 		}
 
 		$use_global_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );
