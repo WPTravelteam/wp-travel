@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.4.0\n"
+"Project-Id-Version: WP Travel 4.4.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-11 07:01:36+00:00\n"
+"POT-Creation-Date: 2020-12-16 11:44:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -646,8 +646,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1072
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1198
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1342
-#: inc/helpers.php:2680 inc/helpers.php:2695 inc/template-functions.php:2032
-#: inc/template-functions.php:2420
+#: inc/helpers.php:2680 inc/helpers.php:2695 inc/template-functions.php:2022
+#: inc/template-functions.php:2410
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 msgid "Price"
 msgstr ""
@@ -1532,7 +1532,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1503
 #: inc/admin/views/tabs/tab-contents/settings/email.php:59
-#: inc/cart/checkout.php:63 inc/template-functions.php:955
+#: inc/cart/checkout.php:63 inc/template-functions.php:945
 msgid "Open All"
 msgstr ""
 
@@ -1542,7 +1542,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1105
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1504
 #: inc/admin/views/tabs/tab-contents/settings/email.php:60
-#: inc/cart/checkout.php:64 inc/template-functions.php:956
+#: inc/cart/checkout.php:64 inc/template-functions.php:946
 msgid "Close All"
 msgstr ""
 
@@ -1708,8 +1708,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:404
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1160
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1307
-#: inc/helpers.php:2688 inc/template-functions.php:2026
-#: inc/template-functions.php:2414
+#: inc/helpers.php:2688 inc/template-functions.php:2016
+#: inc/template-functions.php:2404
 msgid "Pricing Name"
 msgstr ""
 
@@ -2658,8 +2658,8 @@ msgstr ""
 #: inc/email-template-functions.php:148 inc/email-template-functions.php:329
 #: inc/email-template-functions.php:628 inc/email-template-functions.php:936
 #: inc/email-template-functions.php:1445 inc/helpers.php:2693
-#: inc/template-functions.php:484 inc/template-functions.php:2031
-#: inc/template-functions.php:2419 templates/content-cart.php:28
+#: inc/template-functions.php:484 inc/template-functions.php:2021
+#: inc/template-functions.php:2409 templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
@@ -2791,8 +2791,8 @@ msgstr ""
 
 #: inc/cart/checkout.php:161 inc/deprecated/440.php:93 inc/helpers.php:2665
 #: inc/helpers.php:2669 inc/helpers.php:2701 inc/helpers.php:2709
-#: inc/template-functions.php:586 inc/template-functions.php:2036
-#: inc/template-functions.php:2424
+#: inc/template-functions.php:586 inc/template-functions.php:2026
+#: inc/template-functions.php:2414
 msgid "Book Now"
 msgstr ""
 
@@ -4449,16 +4449,16 @@ msgstr ""
 #: inc/deprecated/440.php:320 inc/email-template-functions.php:57
 #: inc/email-template-functions.php:162 inc/email-template-functions.php:343
 #: inc/email-template-functions.php:656 inc/email-template-functions.php:964
-#: inc/email-template-functions.php:1473 inc/template-functions.php:2033
-#: inc/template-functions.php:2421
+#: inc/email-template-functions.php:1473 inc/template-functions.php:2023
+#: inc/template-functions.php:2411
 msgid "Arrival Date"
 msgstr ""
 
 #: inc/deprecated/440.php:333 inc/email-template-functions.php:62
 #: inc/email-template-functions.php:167 inc/email-template-functions.php:348
 #: inc/email-template-functions.php:670 inc/email-template-functions.php:978
-#: inc/email-template-functions.php:1487 inc/template-functions.php:2034
-#: inc/template-functions.php:2422
+#: inc/email-template-functions.php:1487 inc/template-functions.php:2024
+#: inc/template-functions.php:2412
 msgid "Departure Date"
 msgstr ""
 
@@ -4649,11 +4649,11 @@ msgstr ""
 msgid "Price:"
 msgstr ""
 
-#: inc/form-fields.php:384 inc/template-functions.php:1540
+#: inc/form-fields.php:384 inc/template-functions.php:1530
 msgid "Price low to high"
 msgstr ""
 
-#: inc/form-fields.php:385 inc/template-functions.php:1541
+#: inc/form-fields.php:385 inc/template-functions.php:1531
 msgid "Price high to low"
 msgstr ""
 
@@ -4690,8 +4690,8 @@ msgid "Hidden"
 msgstr ""
 
 #: inc/framework/form/class.field.php:56 inc/helpers.php:2667
-#: inc/helpers.php:2699 inc/template-functions.php:2037
-#: inc/template-functions.php:2425
+#: inc/helpers.php:2699 inc/template-functions.php:2027
+#: inc/template-functions.php:2415
 msgid "Select"
 msgstr ""
 
@@ -8533,7 +8533,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:911 inc/template-functions.php:872
+#: inc/helpers.php:911 inc/template-functions.php:862
 msgid "No details found."
 msgstr ""
 
@@ -8693,13 +8693,13 @@ msgstr ""
 msgid "Select Date and Pricing Options"
 msgstr ""
 
-#: inc/helpers.php:2689 inc/template-functions.php:2027
-#: inc/template-functions.php:2187 inc/template-functions.php:2415
+#: inc/helpers.php:2689 inc/template-functions.php:2017
+#: inc/template-functions.php:2177 inc/template-functions.php:2405
 msgid "Start"
 msgstr ""
 
-#: inc/helpers.php:2690 inc/template-functions.php:2028
-#: inc/template-functions.php:2212 inc/template-functions.php:2416
+#: inc/helpers.php:2690 inc/template-functions.php:2018
+#: inc/template-functions.php:2202 inc/template-functions.php:2406
 msgid "End"
 msgstr ""
 
@@ -8711,8 +8711,8 @@ msgstr ""
 msgid "Seats left"
 msgstr ""
 
-#: inc/helpers.php:2694 inc/template-functions.php:2039
-#: inc/template-functions.php:2426
+#: inc/helpers.php:2694 inc/template-functions.php:2029
+#: inc/template-functions.php:2416
 msgid "Select Pax"
 msgstr ""
 
@@ -8728,7 +8728,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: inc/helpers.php:2702 inc/template-functions.php:2038
+#: inc/helpers.php:2702 inc/template-functions.php:2028
 msgid "Pricing"
 msgstr ""
 
@@ -8786,8 +8786,8 @@ msgstr ""
 msgid "No Activities"
 msgstr ""
 
-#: inc/helpers.php:2721 inc/template-functions.php:2231
-#: inc/template-functions.php:2532
+#: inc/helpers.php:2721 inc/template-functions.php:2221
+#: inc/template-functions.php:2522
 msgid "No size limit"
 msgstr ""
 
@@ -8949,7 +8949,7 @@ msgstr ""
 msgid "Group size"
 msgstr ""
 
-#: inc/template-functions.php:489 inc/template-functions.php:1475
+#: inc/template-functions.php:489 inc/template-functions.php:1465
 msgid "No Size Limit"
 msgstr ""
 
@@ -8979,55 +8979,55 @@ msgstr ""
 msgid "%1$s Day(s) %2$s Night(s)"
 msgstr ""
 
-#: inc/template-functions.php:980
+#: inc/template-functions.php:970
 msgid "No Details Found"
 msgstr ""
 
-#: inc/template-functions.php:1435
+#: inc/template-functions.php:1425
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1444
+#: inc/template-functions.php:1434
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1444 inc/trip-enquiries.php:455
+#: inc/template-functions.php:1434 inc/trip-enquiries.php:455
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1472
+#: inc/template-functions.php:1462
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:1581 inc/template-functions.php:1589
+#: inc/template-functions.php:1571 inc/template-functions.php:1579
 msgid "Ascending"
 msgstr ""
 
-#: inc/template-functions.php:1582 inc/template-functions.php:1590
+#: inc/template-functions.php:1572 inc/template-functions.php:1580
 msgid "Descending"
 msgstr ""
 
-#: inc/template-functions.php:2029 inc/template-functions.php:2417
+#: inc/template-functions.php:2019 inc/template-functions.php:2407
 msgid "Group (min-max)"
 msgstr ""
 
-#: inc/template-functions.php:2030 inc/template-functions.php:2418
+#: inc/template-functions.php:2020 inc/template-functions.php:2408
 msgid "Seats Left"
 msgstr ""
 
-#: inc/template-functions.php:2035 inc/template-functions.php:2423
+#: inc/template-functions.php:2025 inc/template-functions.php:2413
 msgid "Sold out"
 msgstr ""
 
-#: inc/template-functions.php:2197
+#: inc/template-functions.php:2187
 msgid "Please Select a Date"
 msgstr ""
 
-#: inc/template-functions.php:2254 inc/template-functions.php:2569
+#: inc/template-functions.php:2244 inc/template-functions.php:2559
 msgid "Available Seats: "
 msgstr ""
 
-#: inc/template-functions.php:2284
+#: inc/template-functions.php:2274
 msgid "No size limit."
 msgstr ""
 
