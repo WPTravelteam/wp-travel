@@ -247,6 +247,7 @@ Release Date: 16th December 2020
 
 Fixes:
 * Trip Facts not displaying on frontend, mismatch value is fixed.
+* WP Travel Settings license tab layout issue is fixed.
 
 = 4.4.0 =
 Release Date: 11th December 2020
