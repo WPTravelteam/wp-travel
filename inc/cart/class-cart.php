@@ -162,7 +162,7 @@ class WP_Travel_Cart {
 	 * @param array $attrs Item attributes.
 	 * @return boolean
 	 */
-	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax, $price_key = '', $attrs = array() ) {
+	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax=1, $price_key = '', $attrs = array() ) {
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
