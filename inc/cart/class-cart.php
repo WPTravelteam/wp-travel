@@ -156,13 +156,28 @@ class WP_Travel_Cart {
 	/**
 	 * Add an item to cart.
 	 *
-	 * @param int   $id    An unique ID for the item.
-	 * @param int   $price Price of item.
-	 * @param int   $qty   Quantity of item.
+	 * @param int   $args    Mixed. trip id if WP Travel below 4.4.2 else all cart args.
+	 * @param int   $trip_price Price of item.
+	 * @param int   $trip_price_partial   Price partial.
+	 * @param int   $pax   Quantity of item.
 	 * @param array $attrs Item attributes.
+	 * @todo Need to remove all attributes excepct $args.
 	 * @return boolean
 	 */
-	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax=1, $price_key = '', $attrs = array() ) {
+	public function add( $args, $trip_price = 0, $trip_price_partial = 0, $pax=1, $price_key = '', $attrs = array() ) {
+		error_log( print_r( $args, true ) );
+		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2
+			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
+			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
+			$trip_price_partial = isset( $args['trip_price_partial'] ) ? $args['trip_price_partial'] : 0;
+			$pax                = isset( $args['pax'] ) ? $args['pax'] : array();
+			$price_key          = isset( $args['price_key'] ) ? $args['price_key'] : '';
+			$attrs              = isset( $args['attrs'] ) ? $args['attrs'] : array();
+		} else {
+			$trip_id = $args;
+		}
+
+
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
@@ -173,14 +188,12 @@ class WP_Travel_Cart {
 			}
 		}
 
-		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since 3.0.0
-		if ( is_array( $pax ) ) :
+		
+		if ( is_array( $pax ) ) : // New Add to cart. Pax array as per categories[adult, child] @since 3.0.0
 			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
 			$this->items[ $cart_item_id ]['trip_price']         = wp_travel_get_formated_price( $trip_price );
 			$this->items[ $cart_item_id ]['trip_price_partial'] = wp_travel_get_formated_price( $trip_price_partial );
-
 		else :
-
 			if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
 				$inventory = new WP_Travel_Util_Inventory();

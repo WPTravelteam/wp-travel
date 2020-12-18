@@ -305,6 +305,15 @@ class WP_Travel_Ajax {
 		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );
+
+		$add_to_cart_args = array(
+			'trip_id'            => $trip_id,
+			'trip_price'         => $trip_price,
+			'trip_price_partial' => $trip_price_partial,
+			'pax'                => $total_pax,
+			'price_key'          => $price_key,
+			'attrs'              => $attrs,
+		);
 		if ( true === $update_cart_on_add ) {
 			$items = $wt_cart->getItems();
 
@@ -317,10 +326,10 @@ class WP_Travel_Ajax {
 					$wt_cart->update( $cart_item_id, $pax );
 				}
 			} else {
-				$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
+				$wt_cart->add( $add_to_cart_args );
 			}
 		} else {
-			$wt_cart->add( $trip_id, $trip_price, $trip_price_partial, $total_pax, $price_key, $attrs );
+			$wt_cart->add( $add_to_cart_args );
 		}
 		echo true;
 
