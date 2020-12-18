@@ -277,10 +277,10 @@ class WP_Travel_Helpers_Pricings {
 		$price_key        = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
 		if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0
-			$price = get_post_meta( $post_id, 'wp_travel_price', true );
+			$price = get_post_meta( $trip_id, 'wp_travel_price', true );
 			$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
 			if ( $enable_sale && ! $is_regular_price ) {
-				$price = get_post_meta( $post_id, 'wp_travel_sale_price', true );
+				$price = get_post_meta( $trip_id, 'wp_travel_sale_price', true );
 			}
 		} else {
 			$price        = 0;
