@@ -165,7 +165,6 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function add( $args, $trip_price = 0, $trip_price_partial = 0, $pax=1, $price_key = '', $attrs = array() ) {
-		error_log( print_r( $args, true ) );
 		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2
 			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
 			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
