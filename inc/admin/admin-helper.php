@@ -757,7 +757,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 /**
  * Tour Extras Multiselect Options.
  */
-function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key, $table_row = false ) {
+function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key = '', $table_row = false ) {
 
 	$tour_extras = wp_count_posts( 'tour-extras' );
 	// Check Tour Extras Count.
