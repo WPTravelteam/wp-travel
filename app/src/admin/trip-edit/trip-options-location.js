@@ -138,7 +138,7 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
         content = [...content,
         <>
             <Notice status="warning" isDismissible={false}>
-                <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`You can add 'Google Map API Key' in the %ssettings%s to use additional features.`), `<a href="edit.php?post_type=itinerary-booking&page=settings2">`, `</a>`) }}></strong>
+                <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`You can add 'Google Map API Key' in the %ssettings%s to use additional features.`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
             </Notice><br />
         </>,
         <GmapIframe zoomlevel={google_map_zoom_level} />

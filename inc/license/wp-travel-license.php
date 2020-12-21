@@ -418,7 +418,7 @@ class WP_Travel_License {
 
 			$screen = get_current_screen();
 			$class   = '';
-			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings2#wp-travel-tab-content-license' );
+			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
 			$message = sprintf( __( 'You have not activated the license for %1$s addon.', 'wp-travel' ), $premium_addon['item_name'] );
 
 			if ( ! is_multisite() || ( is_multisite() && 'toplevel_page_wp_travel_network_settings-network' != $screen->id ) ) {

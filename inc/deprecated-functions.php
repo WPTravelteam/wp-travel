@@ -74,3 +74,4 @@ include sprintf( '%s/inc/deprecated/105.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/193.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/307.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/440.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/442.php', WP_TRAVEL_ABSPATH );

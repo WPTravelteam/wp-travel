@@ -551,6 +551,52 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 		}
 
+		/**
+		 * Return if the page is WP Travel Page.
+		 *
+		 * @param string  $slug       page slug.
+		 * @param boolean $admin_page check if page is admin page.
+		 *
+		 * @since WP Travel 4.4.2
+		 * @return boolean
+		 */
+		public static function is_page( $slug, $admin_page = false ) {
+
+			if ( $admin_page ) {
+				$screen  = get_current_screen();
+				switch ( $slug ) {
+					case 'settings':
+						$pages = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
+							return in_array( $screen->id, $pages );
+					break;
+				}
+				return;
+			} else {
+				global $post;
+				$page_id  = (int) get_the_ID();
+				$settings = wp_travel_get_settings();
+
+				switch ( $slug ) {
+					case 'cart':
+						$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;
+						return (int) $cart_page_id === $page_id;
+					break;
+					case 'checkout':
+						$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
+						return (int) $checkout_page_id === $page_id;
+					break;
+					case 'dashboard':
+						$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
+						return ( (int) $dashboard_page_id === $page_id || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false ) );
+					break;
+					case 'archive':
+						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
+					break;
+				}
+				return;
+			}
+			return;
+		}
 	}
 endif;
 /**

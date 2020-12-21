@@ -1249,70 +1249,6 @@ function wp_travel_get_checkout_url() {
 	return apply_filters( 'wp_travel_get_checkout_url', wp_travel_get_page_permalink( 'wp-travel-checkout' ) );
 }
 
-/**
- * Check whether page is checkout page or not.
- *
- * @return Boolean
- */
-function wp_travel_is_checkout_page() {
-
-	if ( is_admin() ) {
-		return false;
-	}
-	global $post;
-	$page_id  = get_the_ID();
-	$settings = wp_travel_get_settings();
-
-	$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
-	return (int) $checkout_page_id === $page_id;
-}
-
-/**
- * Check whether page is cart page or not.
- *
- * @return Boolean
- */
-function wp_travel_is_cart_page() {
-	if ( is_admin() ) {
-		return false;
-	}
-	$page_id  = (int) get_the_ID();
-	$settings = wp_travel_get_settings();
-
-	$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;
-
-	return (int) $cart_page_id === $page_id;
-}
-
-/**
- * Check whether page is dashboard page or not.
- *
- * @return Boolean
- */
-function wp_travel_is_dashboard_page() {
-	if ( is_admin() ) {
-		return false;
-	}
-	$page_id  = get_the_ID();
-	$settings = wp_travel_get_settings();
-
-	$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
-
-	return (int) $dashboard_page_id === $page_id;
-}
-
-if ( ! function_exists( 'wp_travel_is_account_page' ) ) {
-
-	/**
-	 * wp_travel_Is_account_page - Returns true when viewing an account page.
-	 *
-	 * @return bool
-	 */
-	function wp_travel_is_account_page() {
-		return is_page( wp_travel_get_page_id( 'wp-travel-dashboard' ) ) || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false );
-	}
-}
-
 function wp_travel_is_itinerary( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
@@ -1336,7 +1272,7 @@ function wp_travel_is_itinerary( $post_id = null ) {
  * Check whether payment script is loadable or not.
  */
 function wp_travel_can_load_payment_scripts() {
-	return ( wp_travel_is_dashboard_page() || wp_travel_is_checkout_page() ) && wp_travel_is_payment_enabled();
+	return ( WP_Travel::is_page( 'dashboard' ) || WP_Travel::is_page( 'checkout' ) ) && wp_travel_is_payment_enabled();
 }
 
 // WP Travel Pricing Varition options.
@@ -2930,7 +2866,7 @@ function wp_travel_get_submenu() {
 		),
 	);
 
-	$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
+	$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true ); // need to remove if no queries made for old settings page.
 
 	if ( ! $react_settings_enable ) {
 		$all_submenus['bookings']['settings'] = array(
@@ -2942,6 +2878,14 @@ function wp_travel_get_submenu() {
 		);
 	} else {
 		$all_submenus['bookings']['settings'] = array(
+			'priority'   => '130',
+			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
+			'menu_title' => __( 'Settings', 'wp-travel' ),
+			'menu_slug'  => 'settings',
+			'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
+		);
+		// Temporary page [Need to remove in a while]
+		$all_submenus['bookings']['settings2'] = array(
 			'priority'   => '130',
 			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
 			'menu_title' => __( 'Settings', 'wp-travel' ),

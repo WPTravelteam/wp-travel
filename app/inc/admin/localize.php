@@ -19,7 +19,7 @@ class WP_Travel_Localize_Admin {
 			wp_localize_script( 'wp-travel-admin-trip-options', '_wp_travel', $translation_array );
 		} 
 		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
-		if ( $react_settings_enable && 'itinerary-booking_page_settings2' == $screen->id ) { // settings page
+		if ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) { // settings page
 			wp_localize_script( 'wp-travel-admin-settings', '_wp_travel', $translation_array );
 		}
 	}

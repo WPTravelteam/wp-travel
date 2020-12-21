@@ -65,7 +65,7 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 		return $post_clauses;
 	}
 
-	if ( ! is_wp_travel_archive_page() || ( is_wp_travel_archive_page() && is_admin() ) || ! wp_travel_is_react_version_enabled() ) {
+	if ( ! WP_Travel::is_page('archive') || ( WP_Travel::is_page('archive') && is_admin() ) || ! wp_travel_is_react_version_enabled() ) {
 		return $post_clauses;
 	}
 
@@ -1492,7 +1492,7 @@ function wp_travel_setup_itinerary_data( $post ) {
  * @return void
  */
 function wp_travel_archive_filter_by() {
-	if ( ! is_wp_travel_archive_page() ) {
+	if ( ! WP_Travel::is_page('archive') ) {
 		return;
 	}
 	$strings = wp_travel_get_strings();
@@ -1589,20 +1589,6 @@ function wp_travel_archive_filter_by() {
 }
 
 /**
- * Check if the current page is WP Travel page or not.
- *
- * @since 1.0.4
- * @return boolean
- */
-function is_wp_travel_archive_page() {
-
-	if ( ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search() ) {
-		return true;
-	}
-	return false;
-}
-
-/**
  * Archive page toolbar.
  *
  * @since 1.0.4
@@ -1610,9 +1596,9 @@ function is_wp_travel_archive_page() {
  */
 function wp_travel_archive_toolbar() {
 	$view_mode = wp_travel_get_archive_view_mode();
-	if ( ( is_wp_travel_archive_page() || is_search() ) && ! is_admin() ) :
+	if ( ( WP_Travel::is_page('archive') || is_search() ) && ! is_admin() ) :
 		?>
-		<?php if ( is_wp_travel_archive_page() ) : ?>
+		<?php if ( WP_Travel::is_page('archive') ) : ?>
 	<div class="wp-travel-toolbar clearfix">
 		<div class="wp-toolbar-content wp-toolbar-left">
 			<?php wp_travel_archive_filter_by(); ?>
@@ -1659,7 +1645,7 @@ function wp_travel_archive_toolbar() {
  * @return void
  */
 function wp_travel_archive_wrapper_close() {
-	if ( ( is_wp_travel_archive_page() || is_search() ) && ! is_admin() ) :
+	if ( ( WP_Travel::is_page('archive') || is_search() ) && ! is_admin() ) :
 		$view_mode = wp_travel_get_archive_view_mode();
 		?>
 		<?php if ( 'grid' === $view_mode ) : ?>
@@ -1685,7 +1671,7 @@ function wp_travel_archive_wrapper_close() {
 
 function wp_travel_archive_listing_sidebar() {
 
-	if ( is_wp_travel_archive_page() && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
+	if ( WP_Travel::is_page('archive') && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
 		?>
 
 		<div id="wp-travel-secondary" class="wp-travel-widget-area widget-area" role="complementary">
@@ -1734,7 +1720,7 @@ function wp_travel_posts_filter( $query ) {
 		 *
 		 * @since 1.0.4
 		 */
-		if ( is_wp_travel_archive_page() && ! is_admin() ) {
+		if ( WP_Travel::is_page('archive') && ! is_admin() ) {
 
 			$current_meta = $query->get( 'meta_query' );
 			$current_meta = ( $current_meta ) ? $current_meta : array();

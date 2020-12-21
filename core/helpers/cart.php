@@ -141,6 +141,9 @@ class WP_Travel_Helpers_Cart {
 		);
 	}
 
+	/**
+	 *  ************** Unused Method / Do Not use this function **************
+	 */
 	public static function add_to_cart1( $postData = array() ) {
 		if ( empty( $postData['trip_id'] ) ) {
 			return new WP_Error( 'WP_TRAVEL_NO_TRIP_ID', __( 'Invalid trip id.', 'wp-travel' ) );

@@ -192,6 +192,9 @@ export default () => {
                                     let additionalArray = `wp_travel_${gateway.key}_settings`
                                     if ( 'undefined' != typeof _allData[additionalArray] ) {
                                         _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
+                                    } else {
+                                        _allData[additionalArray] = {}
+                                        _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
                                     }
                                 }
                             })

@@ -397,7 +397,7 @@ function wp_travel_booking_form_fields() {
 		$booking_fields['pax']['validations']['max'] = $max_pax;
 		$booking_fields['pax']['attributes']['max']  = $max_pax;
 	}
-	if ( wp_travel_is_checkout_page() ) {
+	if ( WP_Travel::is_page( 'checkout' ) ) {
 		$booking_fields['pax']['type'] = 'hidden';
 		$booking_fields['arrival_date']['default'] = date( 'm/d/Y', strtotime( $trip_start_date ) );
 		$fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
