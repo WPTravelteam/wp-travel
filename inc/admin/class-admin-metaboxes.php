@@ -20,8 +20,8 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function __construct() {
 
-		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
-		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 );
+		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 ); // Add Custom Metabox.
+		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 ); // Remove Default Metaboxs like category, excertp, thumbnail etc..
 		add_filter( 'postbox_classes_' . WP_TRAVEL_POST_TYPE . '_wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', array( $this, 'add_clean_metabox_class' ) );
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
@@ -148,6 +148,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+
+		global $post;
+		// Booking Metabox.
+		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
+		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
 	}
 
 	/**
@@ -285,6 +290,260 @@ class WP_Travel_Admin_Metaboxes {
 			<?php endif; ?>
 		</table>
 		<?php
+	}
+
+	/**
+	 * Call back for booking metabox.
+	 *
+	 * @param Object $post Post object.
+	 */
+	public function booking_info( $post ) {
+		if ( ! $post ) {
+			return;
+		}
+		if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
+			include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+		}
+
+		$form       = new WP_Travel_FW_Form();
+		$form_field = new WP_Travel_FW_Field();
+		$booking_id = $post->ID;
+
+		$edit_link = get_admin_url() . 'post.php?post=' . $post->ID . '&action=edit';
+		$edit_link = add_query_arg( 'edit_booking', 1, $edit_link );
+		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+
+		// 2. Edit Booking Section.
+		if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
+			$checkout_fields  = wp_travel_get_checkout_form_fields();
+			$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
+			$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
+			$payment_fields   = isset( $checkout_fields['payment_fields'] ) ? $checkout_fields['payment_fields'] : array();
+
+			$wp_travel_post_id           = get_post_meta( $booking_id, 'wp_travel_post_id', true );
+			$ordered_data                = get_post_meta( $booking_id, 'order_data', true );
+			$payment_id                  = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+			$booking_option              = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
+			$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
+			?>
+			<div class="wp-travel-booking-form-wrapper" >
+				<?php
+				do_action( 'wp_travel_booking_before_form_field' );
+
+				$trip_field_args = array(
+					'label'         => esc_html( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) ),
+					'name'          => 'wp_travel_post_id',
+					'id'            => 'wp-travel-post-id',
+					'type'          => 'select',
+					'class'         => 'wp-travel-select2',
+					'options'       => wp_travel_get_itineraries_array(),
+					'wrapper_class' => 'full-width',
+					'default'       => $wp_travel_post_id,
+				);
+				$form_field->init( $trip_field_args, array( 'single' => true ) )->render();
+
+				$args = array( 'trip_id' => $booking_id ); // why booking id ??
+				$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+
+				if ( '' == $trip_price || '0' == $trip_price ) {
+					unset( $payment_fields['is_partial_payment'], $payment_fields['booking_option'], $payment_fields['payment_gateway'], $payment_fields['trip_price'], $payment_fields['payment_mode'], $payment_fields['trip_price_info'], $payment_fields['payment_amount_info'], $payment_fields['payment_amount'] );
+				}
+
+				if ( 'booking_only' == $booking_option ) {
+					unset( $payment_fields['is_partial_payment'], $payment_fields['payment_gateway'], $payment_fields['payment_mode'], $payment_fields['payment_amount'], $payment_fields['payment_amount_info'] );
+				}
+
+				// Sort fields.
+				$traveller_fields = wp_travel_sort_form_fields( $traveller_fields );
+				$billing_fields   = wp_travel_sort_form_fields( $billing_fields );
+				$payment_fields   = wp_travel_sort_form_fields( $payment_fields );
+
+				// Travelers Fields HTML
+				$field_name = $traveller_fields['first_name']['name'];
+				$input_val  = get_post_meta( $booking_id, $field_name, true );
+
+				if ( ! $input_val ) {
+					// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+					$field_name = str_replace( '_traveller', '', $field_name );
+					$input_val  = get_post_meta( $booking_id, $field_name, true );
+				}
+
+				if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
+					foreach ( $input_val as $cart_id => $field_fname_values ) {
+						$trip_id   = isset( $multiple_trips_booking_data[ $cart_id ]['trip_id'] ) ? $multiple_trips_booking_data[ $cart_id ]['trip_id'] : 0;
+						$price_key = isset( $multiple_trips_booking_data[ $cart_id ]['price_key'] ) ? $multiple_trips_booking_data[ $cart_id ]['price_key'] : '';
+						echo '<h3>' . wp_travel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>';
+						foreach ( $field_fname_values as $i => $field_fname_value ) {
+							?>
+							<div class="wp-travel-form-field-wrapper">
+								<?php
+								if ( 0 === $i ) {
+									?>
+									<h3><?php esc_html_e( 'Lead Traveler', 'wp-travel' ); ?></h3>
+									<?php
+								} else {
+									?>
+									<h3><?php printf( __( 'Traveler %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
+									<?php
+								}
+
+								foreach ( $traveller_fields as $field_group => $field ) {
+									$field['id'] = $field['id'] . '-' . $cart_id . '-' . $i;
+
+									$current_field_name   = $field['name'];
+									$current_field_values = get_post_meta( $booking_id, $current_field_name, true );
+
+									if ( ! $current_field_values ) {
+										// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+										$current_field_name   = str_replace( '_traveller', '', $current_field_name );
+										$current_field_values = get_post_meta( $booking_id, $current_field_name, true );
+									}
+
+									$current_field_value = isset( $current_field_values[ $cart_id ] ) && isset( $current_field_values[ $cart_id ][ $i ] ) ? $current_field_values[ $cart_id ][ $i ] : '';
+
+									// @since 1.8.3
+									if ( 'date' === $field['type'] && '' !== $current_field_value && ! wp_travel_is_ymd_date( $current_field_value ) ) {
+										$current_field_value = wp_travel_format_ymd_date( $current_field_value, 'm/d/Y' );
+									}
+
+									$field_name       = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
+									$field['name']    = $field_name;
+									$field['default'] = $current_field_value;
+									// Set required false to extra travellers.
+									$field['validations']['required'] = ! empty( $field['validations']['required'] ) ? $field['validations']['required'] : false;
+									$field['validations']['required'] = $i > 0 ? false : $field['validations']['required'];
+									$form_field->init( $field, array( 'single' => true ) )->render();
+								}
+								?>
+							</div>
+							<?php
+						}
+					}
+				} else {
+					?>
+					<div class="wp-travel-form-field-wrapper">
+						<?php
+						// single foreach for legacy version.
+						$cart_id = rand();
+						foreach ( $traveller_fields as $field_group => $field ) {
+							$input_val = get_post_meta( $booking_id, $field['name'], true );
+							if ( ! $input_val ) {
+								// Legacy version less than 1.7.5 [ retriving value from old meta once. update post will update into new meta ].
+								$field_name = str_replace( '_traveller', '', $field['name'] );
+								$input_val  = get_post_meta( $booking_id, $field_name, true );
+							}
+							// @since 1.8.3
+							if ( 'date' === $field['type'] && '' !== $input_val && ! wp_travel_is_ymd_date( $input_val ) ) {
+								$input_val = wp_travel_format_ymd_date( $input_val, 'm/d/Y' );
+							}
+							$field['default'] = $input_val;
+
+							// @since 2.0.1
+							$field_name    = sprintf( '%s[%s][0]', $field['name'], $cart_id );
+							$field['name'] = $field_name;
+
+							$form_field->init( $field, array( 'single' => true ) )->render();
+						}
+						?>
+					</div>
+					<?php
+				}
+				?>
+				<div class="wp-travel-form-field-wrapper">
+					<?php
+						$arrival_date     = isset( $multiple_trips_booking_data[ $cart_id ]['arrival_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['arrival_date'] : '';
+						$departure_date   = isset( $multiple_trips_booking_data[ $cart_id ]['departure_date'] ) ? $multiple_trips_booking_data[ $cart_id ]['departure_date'] : '';
+						$pax              = isset( $multiple_trips_booking_data[ $cart_id ]['pax'] ) ? $multiple_trips_booking_data[ $cart_id ]['pax'] : '';
+						$booking_fields   = array();
+						$booking_fields[] = array(
+							'label'         => esc_html( 'Arrival Date' ),
+							'name'          => 'arrival_date',
+							'type'          => 'date',
+							'class'         => 'wp-travel-datepicker',
+							'validations'   => array(
+								'required' => true,
+							),
+							'attributes'    => array( 'readonly' => 'readonly' ),
+							'wrapper_class' => '',
+							'default'       => $arrival_date,
+
+						);
+						$booking_fields[] = array(
+							'label'         => esc_html( 'Departure Date' ),
+							'name'          => 'departure_date',
+							'type'          => 'date',
+							'class'         => 'wp-travel-datepicker',
+							'validations'   => array(
+								'required' => true,
+							),
+							'attributes'    => array( 'readonly' => 'readonly' ),
+							'wrapper_class' => '',
+							'default'       => $departure_date,
+						);
+						$booking_fields[] = array(
+							'label'         => esc_html( 'Pax' ),
+							'name'          => 'pax',
+							'type'          => 'number',
+							'class'         => '',
+							'wrapper_class' => '',
+							'default'       => $pax,
+						);
+						foreach ( $booking_fields as $field ) {
+							$form_field->init( $field, array( 'single' => true ) )->render();
+						}
+
+						?>
+
+				</div>
+				<div class="wp-travel-form-field-wrapper">
+					<?php
+					// Billing Fields HTML
+					unset( $billing_fields['price-unavailable'] );
+					foreach ( $billing_fields as $field_group => $field ) {
+						$field['default'] = get_post_meta( $booking_id, $field['name'], true );
+						$form_field->init( $field, array( 'single' => true ) )->render();
+					}
+					?>
+				</div>
+
+				<?php
+				$form->init_validation( 'post' );
+				wp_enqueue_script( 'jquery-datepicker-lib' );
+				wp_enqueue_script( 'jquery-datepicker-lib-eng' );
+				?>
+				<script>
+					jQuery(document).ready( function($){
+						$(".wp-travel-date").wpt_datepicker({
+								language: "en",
+								minDate: new Date()
+							});
+					} )
+				</script>
+				<?php do_action( 'wp_travel_booking_after_form_field' ); ?>
+			</div>
+			<?php
+
+		} else { // 1. Display Booking info fields.
+			$details = wp_travel_booking_data( $booking_id );
+
+			if ( is_array( $details ) && count( $details ) > 0 ) {
+				?>
+				<div class="my-order my-order-details">
+					<div class="view-order">
+						<div class="order-list">
+							<div class="order-wrapper">
+								<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
+								<?php do_action( 'wp_travel_booking_metabox_after_title', $booking_id ); // @since 3.0.6 ?>
+								<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
+							</div>
+							<?php wp_travel_view_payment_details_table( $booking_id ); ?>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
+		}
+
 	}
 
 	/**
