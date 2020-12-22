@@ -306,8 +306,8 @@ function wp_travel_meta_box_review() {
 			'profile'	  => 'eliandyao',
 		),
 		array(
-			'title'       => 'Amazing Customer Service',
-			'description' => '"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."',
+			'title'       => __( 'Amazing Customer Service', 'wp-travel' ),
+			'description' => __( '"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."', 'wp-travel' ),
 			'profile'	  => 'dannrcm',
 		),
 	);
