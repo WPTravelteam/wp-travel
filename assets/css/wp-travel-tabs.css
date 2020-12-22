@@ -318,6 +318,7 @@
 }
 #wp_travel_review_block_id h4 {
   text-align: center;
+  text-transform: uppercase;
 }
 #wp_travel_review_block_id h5 {
   font-size: 13px;
