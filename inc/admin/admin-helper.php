@@ -298,6 +298,19 @@ function wp_travel_meta_box_documentation() {
  * @since WP Travel 4.4.2
  */
 function wp_travel_meta_box_review() {
+
+	$wp_travel_reviews = array(
+		array(
+			'title'       => __( 'WP TRAVEL PLUGIN IS PERFECT', 'wp-travel' ),
+			'description' => __( '"Works perfectly for Travel tours booking. Definitely recommended for using Wp Travel Plugin. Easy for client to book through your website which Runs with Wp Travel.	Tirupati is so helpful and patient to solve the problem one by one.	10 out of 10 service."', 'wp-travel' ),
+			'profile'	  => 'eliandyao',
+		),
+		array(
+			'title'       => 'Amazing Customer Service',
+			'description' => '"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."',
+			'profile'	  => 'dannrcm',
+		),
+	);
 	?>
 	<div id="wp_travel_review_block_id" class="postbox ">
 		<button type="button" class="handlediv" aria-expanded="true">
@@ -308,51 +321,24 @@ function wp_travel_meta_box_review() {
 			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
 		</h2>
 		<div class="inside">
-			<div class="thumbnail">
-				<p class="text-center">
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-				</p>
-				<h4>WP TRAVEL PLUGIN IS PERFECT</h4>
-				<h5>
-				<?php
-				esc_html_e(
-					'"Works perfectly for Travel tours booking.
-					Definitely recommended for using Wp Travel Plugin.
-					Easy for client to book through your website which Runs with Wp Travel.
-					Tirupati is so helpful and patient to solve the problem one by one.
-					10 out of 10 service."',
-					'wp-travel'
-				);
-				?>
-					</h5>
-				<span class="by"><strong> <a href="https://profiles.wordpress.org/eliandyao" target="_blank"><?php esc_html_e( 'eliandyao', 'wp-travel' ); ?></a></strong></span>
-			</div>
-
-			<div class="thumbnail">
-				<p class="text-center">
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-				</p>
-				<h4>Amazing Customer Service</h4>
-				<h5>
-				<?php
-				esc_html_e(
-					'"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."',
-					'wp-travel'
-				);
-				?>
-					</h5>
-				<span class="by"><strong> <a href="https://profiles.wordpress.org/dannrcm" target="_blank"><?php esc_html_e( 'dannrcm', 'wp-travel' ); ?></a></strong></span>
-			</div>
-
-
+			<?php
+				foreach ( $wp_travel_reviews as $wp_travel_review ) {
+					?>
+					<div class="thumbnail">
+						<p class="text-center">
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						</p>
+						<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
+						<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
+						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
+					</div>
+					<?php
+				}
+			?>
 			<div class="thumbnail last">
 				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
 				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
