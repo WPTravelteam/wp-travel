@@ -222,16 +222,34 @@ function wp_travel_marketplace_page() {
 
 
 				<div id="aside-wrap" class="single-module-side">
+					<?php
+					wp_travel_meta_box_support();
+					wp_travel_meta_box_documentation();
+					wp_travel_meta_box_review();
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}
 
-		<div id="wp_travel_support_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator-acc" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
+/**
+ * 
+ * Will Display HTML content of support box
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_support() {
+	?>
+	<div id="wp_travel_support_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator-acc" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
 
 			<div class="thumbnail">
 				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
@@ -239,69 +257,110 @@ function wp_travel_marketplace_page() {
 					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
 			</div>
 
-			</div>
 		</div>
+	</div>
+	<?php
+}
 
-		<div id="wp_travel_doc_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
+/**
+ * 
+ * Will Display HTML content of documentation box
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_documentation() {
 
-				<div class="thumbnail">
-					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
-						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
-				</div>
+	?>
+	<div id="wp_travel_doc_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
 
+			<div class="thumbnail">
+				<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
+					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
+					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
 			</div>
+
 		</div>
+	</div>
+	<?php
 
-		<div id="wp_travel_review_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
-				<div class="thumbnail">
-					<p class="text-center">
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					</p>
-					<h5>
-					<?php
-					esc_html_e(
-						'"The plugin is very intuitive and fresh.
-The layout fits well into theme with flexibility to different shortcodes.
-Its great plugin for travel or tour agent websites."',
-						'wp-travel'
-					)
-					?>
-						</h5>
-					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ); ?></a></strong></span>
+}
 
-				</div>
-				<div class="thumbnail last">
-					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
-				</div>
+/**
+ * 
+ * Will Display HTML content of review box
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_review() {
+	?>
+	<div id="wp_travel_review_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
+			<div class="thumbnail">
+				<p class="text-center">
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+				</p>
+				<h4>WP TRAVEL PLUGIN IS PERFECT</h4>
+				<h5>
+				<?php
+				esc_html_e(
+					'"Works perfectly for Travel tours booking.
+					Definitely recommended for using Wp Travel Plugin.
+					Easy for client to book through your website which Runs with Wp Travel.
+					Tirupati is so helpful and patient to solve the problem one by one.
+					10 out of 10 service."',
+					'wp-travel'
+				);
+				?>
+					</h5>
+				<span class="by"><strong> <a href="https://profiles.wordpress.org/eliandyao" target="_blank"><?php esc_html_e( 'eliandyao', 'wp-travel' ); ?></a></strong></span>
+			</div>
+
+			<div class="thumbnail">
+				<p class="text-center">
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+					<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+				</p>
+				<h4>Amazing Customer Service</h4>
+				<h5>
+				<?php
+				esc_html_e(
+					'"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."',
+					'wp-travel'
+				);
+				?>
+					</h5>
+				<span class="by"><strong> <a href="https://profiles.wordpress.org/dannrcm" target="_blank"><?php esc_html_e( 'dannrcm', 'wp-travel' ); ?></a></strong></span>
+			</div>
+
+
+			<div class="thumbnail last">
+				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
+				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
 	<?php
+
 }
 
 // Upsell Message Callback for Download submenu. WP Travel > Downloads.
