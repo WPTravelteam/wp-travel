@@ -177,7 +177,7 @@ function wp_travel_marketplace_page() {
 
 										<p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
 										<a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
-										<a class="btn-default buy-btn" href="https://themepalace.com/download-checkout/?edd_action=add_to_cart&amp;download_id=95078" target="_blank">Buy Now</a>
+										<a class="btn-default buy-btn" href="https://wptravel.io/wp-travel-pro/" target="_blank">Buy Now</a>
 									</div>
 								</div>
 							<?php
