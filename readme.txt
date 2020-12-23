@@ -242,6 +242,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.4.2 =
+Release Date: 
+
+Fixes:
+* Fixed trip booking sort by Contact name not working.
+
+Tweaks:
+* add method of cart class parameters updated. first parameter casting is changed to array from number consisting all required attributes in the array.
+
 = 4.4.1 =
 Release Date: 16th December 2020
 

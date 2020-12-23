@@ -277,6 +277,17 @@ function wp_travel_get_dropdown_list( $args = array() ) {
 	return $dropdown;
 }
 
+function wp_travel_sanitize_array( $array ) {
+	foreach ( $array as $k => $value ) {
+		if ( is_array( $value ) ) {
+			wp_travel_sanitize_array( $value );
+		} else {
+			return sanitize_text_field( $value );
+		}
+	}
+	return false;
+}
+
 /**
  * List all avalable and selceted maps data.
  *
