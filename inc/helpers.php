@@ -391,7 +391,7 @@ function wp_travel_get_post_thumbnail_url( $post_id, $size = 'wp_travel_thumbnai
  */
 function wp_travel_get_post_placeholder_image_url() {
 	$thumbnail_url = plugins_url( '/wp-travel/assets/images/wp-travel-placeholder.png' );
-	return $thumbnail_url;
+	return apply_filters( 'wp_travel_placeholder_image_url', $thumbnail_url ); // filter since WP Travel 4.4.2
 }
 
 /**
