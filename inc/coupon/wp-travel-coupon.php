@@ -77,10 +77,6 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			$this->define( 'WP_TRAVEL_COUPON_POST_TYPE', 'wp-travel-coupons' );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_FILE', __FILE__ );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_ABSPATH', dirname( __FILE__ ) . '/' );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_VERSION', $this->version );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_NAME', __( 'WP Travel Coupon Pro', 'wp-travel' ) );
 		}
 
 		/**
@@ -142,20 +138,6 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			flush_rewrite_rules();
 		}
 
-		/**
-		 * This will uninstall this plugin if parent WP-Travel plugin not found
-		 */
-		// public function wp_travel_check_dependency() {
-		// 	$plugin      = plugin_basename( __FILE__ );
-		// 	$plugin_data = get_plugin_data( __FILE__, false );
-
-		// 	if ( ! class_exists( 'WP_Travel' ) ) {
-		// 		if ( is_plugin_active( $plugin ) ) {
-		// 			deactivate_plugins( $plugin );
-		// 			wp_die( wp_kses_post( '<strong>' . $plugin_data['Name'] . '</strong> requires the WP Travel plugin to work. Please activate it first. <br /><br />Back to the WordPress <a href="' . esc_url( get_admin_url( null, 'plugins.php' ) ) . '">Plugins page</a>.' ) );
-		// 		}
-		// 	}
-		// }
 
 		/**
 		 * What type of request is this?

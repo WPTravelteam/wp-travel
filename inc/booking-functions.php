@@ -5,7 +5,11 @@
  * @package wp-travel/inc/
  */
 
-/** Front end Booking and send Email after clicking Book Now. */
+/**
+ * Frontend booking and send Email after clicking Book Now.
+ * 
+ * @since WP Travel 1.7.5
+ */
 function wp_travel_book_now() {
 	if (
 		! isset( $_POST['wp_travel_book_now'] )
@@ -17,116 +21,88 @@ function wp_travel_book_now() {
 
 	global $wt_cart;
 
-	if ( isset( $wt_cart ) ) {
-		$discounts = $wt_cart->get_discounts();
-		if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+	/**
+	 * Trigger any action before Booking Process.
+	 *
+	 * @hooked array( 'WP_Travel_Coupon', 'process_update_count' ) 
+	 * @since WP Travel 4.4.2
+	 */
+	do_action( 'wp_travel_action_before_booking_process' );
 
-			WP_Travel()->coupon->update_usage_count( $discounts['coupon_id'] );
+	// Start Booking Process
+	$items = $wt_cart->getItems();
+	if ( ! count( $items ) ) {
+		return;
+	}
+	
+	$price_key              = false;
+	$pax                    = 1;
+	$allow_multiple_items   = WP_Travel_Cart::allow_multiple_items();
 
-		endif;
+	$trip_ids               = array();
+	$pax_array              = array();
+	$price_keys             = array();
+	$arrival_date           = array();
+	$departure_date         = array();
+	$arrival_date_email_tag = array(); // quick fix to add arrival date along with time in email.
+	$pricing_id             = array(); // @since WP Travel v4.0
+	$trip_time              = array(); // @since WP Travel v4.0
+	foreach ( $items as $key => $item ) {
+		$trip_ids[]               = $item['trip_id'];
+		$pax_array[]              = $item['pax'];
+		$price_keys[]             = $item['price_key'];
+		$arrival_date[]           = $item['arrival_date'];
+		$departure_date[]         = $item['departure_date'];
+		$arrival_date_email_tag[] = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
+		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since WP Travel v4.0
+		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
 	}
 
-	$date_format            = get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y m d';
-	$current_date           = date( $date_format );
-	$trip_id                = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : '';
-	// $trip_price             = wp_travel_get_trip_price( $trip_id ); // commented since WP Travel  4.4.0 need to remove in further version.
-	// $enable_checkout        = apply_filters( 'wp_travel_enable_checkout', true ); // commented since WP Travel  4.4.0 need to remove in further version.
-	$pax                    = isset( $_POST['wp_travel_pax'] ) ? $_POST['wp_travel_pax'] : 1;
-	$booking_arrival_date   = isset( $_POST['wp_travel_arrival_date'] ) ? wp_travel_format_date( $_POST['wp_travel_arrival_date'] ) : '';
-	$booking_departure_date = isset( $_POST['wp_travel_departure_date'] ) ? wp_travel_format_date( $_POST['wp_travel_departure_date'] ) : '';
-
-	$items = $wt_cart->getItems();
-	// if ( $enable_checkout && 0 !== $trip_price ) :
-	// if ( $enable_checkout ) : // commented since WP Travel  4.4.0 need to remove in further version.
-
-		if ( ! count( $items ) ) {
-			return;
-		}
-
-		$trip_ids               = array();
-		$pax_array              = array();
-		$price_keys             = array();
-		$booking_arrival_date   = array();
-		$booking_departure_date = array();
-		$arrival_date_email_tag = array(); // quick fix to add arrival date along with time in email.
-		$pricing_id             = array(); // @since v4.0
-		$trip_time              = array(); // @since v4.0
-		foreach ( $items as $key => $item ) {
-
-			$trip_ids[]               = $item['trip_id'];
-			$pax_array[]              = $item['pax'];
-			$price_keys[]             = $item['price_key'];
-			$booking_arrival_date[]   = $item['arrival_date'];
-			$booking_departure_date[] = $item['departure_date'];
-			$arrival_date_email_tag[] = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
-			$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since v4.0
-			$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since v4.0
-		}
-		$price_key                 = false;
-		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
-
-		if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
-
-			// $trip_id                = $trip_ids[0];
-			$pax                    = $pax_array[0];
-			$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
-			$booking_arrival_date   = $booking_arrival_date[0];
-			$booking_departure_date = $booking_departure_date[0];
-			$pricing_id             = $pricing_id[0];
-			$trip_time              = $trip_time[0];
-			$arrival_date_email_tag = wp_travel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
-
-		}
-		// Quick fixes trip id.
-		$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : $trip_id;
-	// endif;
+	if ( ! $allow_multiple_items   || ( 1 === count( $items ) ) ) {
+		$pax                    = isset( $pax_array[0] ) ? $pax_array[0] : $pax;
+		$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
+		$arrival_date           = $arrival_date[0];
+		$departure_date         = $departure_date[0];
+		$pricing_id             = $pricing_id[0];
+		$trip_time              = $trip_time[0];
+		$arrival_date_email_tag = wp_travel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
+	}
+	$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : 0;
 
 	if ( empty( $trip_id ) ) {
 		return;
 	}
-
-	// $trip_code         = wp_travel_get_trip_code( $trip_id );
 	$thankyou_page_url = wp_travel_thankyou_page_url( $trip_id );
 
-	$title = 'Booking - ' . $current_date;
-
+	// Insert Booking.
 	$post_array = array(
-		'post_title'   => $title,
+		'post_title'   => '',
 		'post_content' => '',
 		'post_status'  => 'publish',
 		'post_slug'    => uniqid(),
 		'post_type'    => 'itinerary-booking',
 	);
 	$booking_id = wp_insert_post( $post_array );
-	update_post_meta( $booking_id, 'order_data', $_POST );
-
 	// Update Booking Title.
 	$update_data_array = array(
 		'ID'         => $booking_id,
 		'post_title' => 'Booking - # ' . $booking_id,
 	);
+	wp_update_post( $update_data_array );
 
-	$booking_id = wp_update_post( $update_data_array );
-
-	// @since 1.8.3
-	$order_items  = update_post_meta( $booking_id, 'order_items_data', $items );
-	$totals       = $wt_cart->get_total();
-	$order_totals = update_post_meta( $booking_id, 'order_totals', $totals );
-
-	$trip_id           = sanitize_text_field( $trip_id );
-	$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
-	$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
-	$new_booking_count = $booking_count + 1;
-	update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
-
+	// Updating Booking Metas.
+	update_post_meta( $booking_id, 'order_data', $_POST );
+	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
+	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */
-	update_post_meta( $booking_id, 'wp_travel_arrival_date', $booking_arrival_date );
-	update_post_meta( $booking_id, 'wp_travel_departure_date', $booking_departure_date );
+	update_post_meta( $booking_id, 'wp_travel_arrival_date', $arrival_date );
+	update_post_meta( $booking_id, 'wp_travel_departure_date', $departure_date );
 	update_post_meta( $booking_id, 'wp_travel_post_id', $trip_id ); // quick fix [booking not listing in user dashboard].
 	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', $arrival_date_email_tag ); // quick fix arrival date with time.
 
+	// Insert $_POST as Booking Meta.
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
 	foreach ( $_POST as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name, $post_ignore ) ) {
@@ -159,52 +135,28 @@ function wp_travel_book_now() {
 		}
 	}
 
-	// Why this code?
-	if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
-
-		$pax_count_based_by_date = get_post_meta( $trip_id, 'total_pax_booked', true );
-
-		if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
-			$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
-		}
-
-		$pax_count_based_by_date[ $_POST['wp_travel_date'] ] += $_POST['wp_travel_pax'];
-
-		update_post_meta( $trip_id, 'total_pax_booked', $pax_count_based_by_date );
-
-		$booking_ids = get_post_meta( $trip_id, 'order_ids', true );
-
-		if ( ! $booking_ids ) {
-			$booking_ids = array();
-		}
-
-		update_post_meta( $trip_id, 'order_ids', $booking_ids );
-	}
-
+	// Insert/Update Booking IDs in user meta to fectch bookings of those user.
 	if ( is_user_logged_in() ) {
 		$user                  = wp_get_current_user();
-			$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
-		if ( ! $saved_booking_ids ) {
-			$saved_booking_ids = array();
-		}
+		$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
+		$saved_booking_ids = ! $saved_booking_ids ? array() : $saved_booking_ids;
 		array_push( $saved_booking_ids, $booking_id );
 		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
 	$settings  = wp_travel_get_settings();
 	$first_key = '';
-	if ( ! $allow_multiple_cart_items || ( 1 === count( $items ) ) ) {
+	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
 		/**
 		 * Add Support for invertory addon options.
 		 */
-		// do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
-		wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $booking_arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
+		wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
 		$inventory_args = array(
 			'trip_id'       => $trip_id,
 			'booking_id'    => $booking_id,
 			'pricing_id'    => $pricing_id,
 			'pax'           => $pax,
-			'selected_date' => $booking_arrival_date,
+			'selected_date' => $arrival_date,
 			'time'          => $trip_time,
 		);
 		$inventory_args = apply_filters( 'wp_travel_inventory_args', $inventory_args );
@@ -259,8 +211,8 @@ function wp_travel_book_now() {
 		$booking_no_of_pax      = $pax;
 		$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 		$date_format            = get_option( 'date_format' );
-		$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
-		$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
+		$arrival_date   = ( '' !== $arrival_date ) ? wp_travel_format_date( $arrival_date, true, 'Y-m-d' ) : '';
+		$departure_date = ( '' !== $departure_date ) ? wp_travel_format_date( $departure_date, true, 'Y-m-d' ) : '';
 
 		$customer_name    = $first_name . ' ' . $last_name;
 		$customer_country = $country;
@@ -285,7 +237,7 @@ function wp_travel_book_now() {
 			'{booking_no_of_pax}'      => $booking_no_of_pax,
 			'{booking_scheduled_date}' => $booking_scheduled_date,
 			'{booking_arrival_date}'   => $arrival_date_email_tag,
-			'{booking_departure_date}' => $booking_departure_date,
+			'{booking_departure_date}' => $departure_date,
 			'{booking_selected_time}'  => ! empty( $trip_time ) ? $trip_time : '',
 			'{booking_coupon_code}'    => $coupon_code,
 
@@ -361,27 +313,6 @@ function wp_travel_book_now() {
 			$new_booking_count = $booking_count + 1;
 			update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
 
-			// Why This?
-			if ( array_key_exists( 'wp_travel_date', $_POST ) ) {
-
-				$pax_count_based_by_date = get_post_meta( $trip_id, 'total_pax_booked', true );
-				if ( ! array_key_exists( $_POST['wp_travel_date'], $pax_count_based_by_date ) ) {
-					$pax_count_based_by_date[ $_POST['wp_travel_date'] ] = 'default';
-				}
-
-				$pax_count_based_by_date[ $_POST['wp_travel_date'] ] += $pax;
-
-				update_post_meta( $trip_id, 'total_pax_booked', $pax_count_based_by_date );
-
-				$order_ids = get_post_meta( $trip_id, 'order_ids', true );
-
-				if ( ! $order_ids ) {
-					$order_ids = array();
-				}
-
-				update_post_meta( $trip_id, 'order_ids', $order_ids );
-			}
-
 			if ( is_user_logged_in() ) {
 
 				$user = wp_get_current_user();
@@ -404,9 +335,6 @@ function wp_travel_book_now() {
 			/**
 			 * Add Support for invertory addon options.
 			 */
-			// wp_travel_utilities_update_inventory_pax_count( $trip_id );
-			// do_action( 'wp_travel_update_trip_multiple_inventory_values', $trip_id, $pax, $price_key );
-			// do_action( 'wp_travel_update_trip_inventory_values', $trip_id, $pax, $price_key, $arrival_date, $booking_id ); // Need To Depricate after few release of 4.0.
 			wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
 			$inventory_args = array(
 				'trip_id'       => $trip_id,

@@ -75,7 +75,8 @@ function wp_travel_register_booking_metaboxes() {
 function wp_travel_admin_head_meta() {
 	// internal_style
 	wp_travel_deprecated_function( 'wp_travel_admin_head_meta', '4.4.2' );
-	return WP_Travel_Admin_Booking()->internal_style();
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->internal_style();
 }
 
 /**
@@ -87,7 +88,8 @@ function wp_travel_admin_head_meta() {
 function wp_travel_booking_info( $post ) {
 	// booking_info
 	wp_travel_deprecated_function( 'wp_travel_booking_info', '4.4.2' );
-	return WP_Travel_Admin_Booking()->booking_info();
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->booking_info();
 }
 
 /**
@@ -101,7 +103,8 @@ function wp_travel_booking_info( $post ) {
 function wp_travel_save_booking_data( $booking_id ) {
 	// save
 	wp_travel_deprecated_function( 'wp_travel_save_booking_data', '4.4.2' );
-	return WP_Travel_Admin_Booking()->save( $booking_id );
+	$inst = new WP_Travel_Admin_Booking();
+	$inst->save( $booking_id );
 }
 
 /**
@@ -115,8 +118,8 @@ function wp_travel_save_booking_data( $booking_id ) {
 function wp_travel_booking_columns( $booking_columns ) {
 	// booking_columns
 	wp_travel_deprecated_function( 'wp_travel_booking_columns', '4.4.2' );
-	return WP_Travel_Admin_Booking()->booking_columns( $booking_columns );
-
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->booking_columns( $booking_columns );
 }
 
 /**
@@ -130,8 +133,8 @@ function wp_travel_booking_columns( $booking_columns ) {
 function wp_travel_booking_manage_columns( $column_name, $id ) {
 	// booking_columns_content
 	wp_travel_deprecated_function( 'wp_travel_booking_manage_columns', '4.4.2' );
-	return WP_Travel_Admin_Booking()->booking_columns_content( $column_name, $id );
-
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->booking_columns_content( $column_name, $id );
 }
 
 /**
@@ -143,7 +146,8 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 function wp_travel_booking_sort( $columns ) {
 	// booking_columns_sort
 	wp_travel_deprecated_function( 'wp_travel_booking_sort', '4.4.2' );
-	return WP_Travel_Admin_Booking()->booking_columns_sort( $columns );
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->booking_columns_sort( $columns );
 
 }
 
@@ -158,7 +162,7 @@ function wp_travel_booking_sort( $columns ) {
 function wp_travel_booking_column_orderby( $vars ) {
 	//booking_columns_content_sort
 	wp_travel_deprecated_function( 'wp_travel_booking_column_orderby', '4.4.2' );
-	return WP_Travel_Admin_Booking()->booking_columns_content_sort( $vars );
-
+	$inst = new WP_Travel_Admin_Booking();
+	return $inst->booking_columns_content_sort( $vars );
 }
 

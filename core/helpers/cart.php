@@ -150,9 +150,9 @@ class WP_Travel_Helpers_Cart {
 		}
 
 		global $wp_travel_cart;
-		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
-		if ( ! $allow_multiple_cart_items ) {
+		if ( ! $allow_multiple_items ) {
 			$wp_travel_cart->clear();
 		}
 

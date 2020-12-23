@@ -641,6 +641,15 @@ class WP_Travel_Cart {
 		$cart_item_id = ( isset( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
 		return apply_filters( 'wp_travel_filter_cart_item_id', $cart_item_id, $trip_id, $price_key );
 	}
+
+	/**
+	 * Return true if multiple cart item is allowed.
+	 *
+	 * @since WP Travel 4.4.2
+	 */
+	public static function allow_multiple_items() {
+		return apply_filters( 'wp_travel_allow_multiple_cart_items', true );
+	}
 }
 
 new WP_Travel_Cart();

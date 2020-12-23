@@ -367,15 +367,15 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	$order_items = ( $order_items && is_array( $order_items ) ) ? count( $order_items ) : 1;
 
-	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+	$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
 	$price_key = false;
-	if ( ! $allow_multiple_cart_items || ( 1 === $order_items ) ) {
+	if ( ! $allow_multiple_items || ( 1 === $order_items ) ) {
 		$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
 	}
 
 	// Handle Multiple payment Emails.
-	if ( $allow_multiple_cart_items && 1 !== $order_items ) {
+	if ( $allow_multiple_items && 1 !== $order_items ) {
 		do_action( 'wp_travel_multiple_payment_emails', $booking_id );
 		exit;
 	}
