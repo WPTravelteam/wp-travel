@@ -159,34 +159,43 @@ function wp_travel_book_now() {
 			'selected_date' => $arrival_date,
 			'time'          => $trip_time,
 		);
-		$inventory_args = apply_filters( 'wp_travel_inventory_args', $inventory_args );
-		// @since 4.0.0
-		do_action( 'wp_travel_trip_inventory', $inventory_args );
+		/**
+		 * Trigger Update inventory values.
+		 *
+		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' ) 
+		 * @since WP Travel 4.0.0
+		 */
+		do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
+		// End of Inventory.
+
+		// Begain Send Email to client / admin. 
+		/**
+		 * Trigger Email functions. sends email to admin and client.
+		 *
+		 * @hooked 
+		 * @since WP Travel 4.4.2
+		 */
+		do_action( 'wp_travel_action_after_inventory_update', $inventory_args );
+
+
 
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
-		if ( isset( $_POST['wp_travel_fname'] ) || isset( $_POST['wp_travel_email'] ) ) { // Booking using old booking form
-			$first_name = isset( $_POST['wp_travel_fname'] ) ? $_POST['wp_travel_fname'] : '';
-			$last_name  = isset( $_POST['wp_travel_lname'] ) ? $_POST['wp_travel_lname'] : '';
-			$country    = isset( $_POST['wp_travel_country'] ) ? $_POST['wp_travel_country'] : '';
-			$phone      = isset( $_POST['wp_travel_phone'] ) ? $_POST['wp_travel_phone'] : '';
-			$email      = isset( $_POST['wp_travel_email'] ) ? $_POST['wp_travel_email'] : '';
-		} else {
-			$first_name = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
-			$last_name  = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
-			$country    = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
-			$phone      = isset( $_POST['wp_travel_phone_traveller'] ) ? $_POST['wp_travel_phone_traveller'] : '';
-			$email      = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : '';
+		
+		$first_name = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
+		$last_name  = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
+		$country    = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
+		$phone      = isset( $_POST['wp_travel_phone_traveller'] ) ? $_POST['wp_travel_phone_traveller'] : '';
+		$email      = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : '';
 
-			reset( $first_name );
-			$first_key = key( $first_name );
+		reset( $first_name );
+		$first_key = key( $first_name );
 
-			$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
-			$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
-			$country    = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
-			$phone      = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
-			$email      = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
-		}
+		$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
+		$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
+		$country    = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
+		$phone      = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
+		$email      = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
 
 		// Prepare variables to assign in email.
 		$client_email = $email;
@@ -205,14 +214,13 @@ function wp_travel_book_now() {
 			*/
 			$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		}
-		$itinerary_id    = sanitize_text_field( $trip_id );
-		$itinerary_title = get_the_title( $itinerary_id );
+		$itinerary_title = get_the_title( $trip_id );
 
 		$booking_no_of_pax      = $pax;
 		$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
 		$date_format            = get_option( 'date_format' );
-		$arrival_date   = ( '' !== $arrival_date ) ? wp_travel_format_date( $arrival_date, true, 'Y-m-d' ) : '';
-		$departure_date = ( '' !== $departure_date ) ? wp_travel_format_date( $departure_date, true, 'Y-m-d' ) : '';
+		$arrival_date           = ( '' !== $arrival_date ) ? wp_travel_format_date( $arrival_date, true, 'Y-m-d' ) : '';
+		$departure_date         = ( '' !== $departure_date ) ? wp_travel_format_date( $departure_date, true, 'Y-m-d' ) : '';
 
 		$customer_name    = $first_name . ' ' . $last_name;
 		$customer_country = $country;
@@ -230,7 +238,7 @@ function wp_travel_book_now() {
 
 		$email_tags = array(
 			'{sitename}'               => $sitename,
-			'{itinerary_link}'         => get_permalink( $itinerary_id ),
+			'{itinerary_link}'         => get_permalink( $trip_id ),
 			'{itinerary_title}'        => wp_travel_get_trip_pricing_name( $trip_id, $price_key ),
 			'{booking_id}'             => $booking_id,
 			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
@@ -344,15 +352,19 @@ function wp_travel_book_now() {
 				'selected_date' => $arrival_date,
 				'time'          => $trip_time,
 			);
-			$inventory_args = apply_filters( 'wp_travel_inventory_args', $inventory_args );
-			// @since 4.0.0
-			do_action( 'wp_travel_trip_inventory', $inventory_args );
-
-			if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
-				$multiple_order = new WP_Travel_Multiple_Cart_Booking();
-				// Finally, send the booking e-mails.
-				$multiple_order->send_emails( $booking_id );
-			}
+			/**
+			 * Trigger Update inventory values action.
+			 *
+			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' ) 
+			 * @since WP Travel 4.0.0
+			 */
+			do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
+			// End of Inventory.
+		}
+		if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
+			$multiple_order = new WP_Travel_Multiple_Cart_Booking();
+			// Finally, send the booking e-mails.
+			$multiple_order->send_emails( $booking_id );
 		}
 	}
 
@@ -377,7 +389,6 @@ function wp_travel_book_now() {
 
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
-	$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
 	header( 'Location: ' . $thankyou_page_url );
 	exit;
 }
@@ -475,8 +486,8 @@ function get_booking_chart() {
 								echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );
 								?>
 								</option>
-								<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-									<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ); ?>>
+								<?php foreach ( $wp_travel_itinerary_list as $trip_id => $itinerary_name ) : ?>
+									<option value="<?php echo esc_html( $trip_id ); ?>" <?php selected( $wp_travel_post_id, $trip_id ); ?>>
 										<?php echo esc_html( $itinerary_name ); ?>
 									</option>
 								<?php endforeach; ?>
@@ -534,8 +545,8 @@ function get_booking_chart() {
 							echo esc_html( WP_TRAVEL_POST_TITLE_SINGULAR );
 							?>
 							</option>
-							<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-								<option value="<?php echo esc_html( $itinerary_id ); ?>" <?php selected( $compare_itinerary_post_id, $itinerary_id ); ?>>
+							<?php foreach ( $wp_travel_itinerary_list as $trip_id => $itinerary_name ) : ?>
+								<option value="<?php echo esc_html( $trip_id ); ?>" <?php selected( $compare_itinerary_post_id, $trip_id ); ?>>
 									<?php echo esc_html( $itinerary_name ); ?>
 								</option>
 							<?php endforeach; ?>
