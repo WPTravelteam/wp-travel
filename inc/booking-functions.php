@@ -7,7 +7,7 @@
 
 /**
  * Frontend booking and send Email after clicking Book Now.
- * 
+ *
  * @since WP Travel 1.7.5
  */
 function wp_travel_book_now() {
@@ -24,20 +24,20 @@ function wp_travel_book_now() {
 	/**
 	 * Trigger any action before Booking Process.
 	 *
-	 * @hooked array( 'WP_Travel_Coupon', 'process_update_count' ) 
+	 * @hooked array( 'WP_Travel_Coupon', 'process_update_count' )
 	 * @since WP Travel 4.4.2
 	 */
 	do_action( 'wp_travel_action_before_booking_process' );
 
-	// Start Booking Process
+	// Start Booking Process.
 	$items = $wt_cart->getItems();
 	if ( ! count( $items ) ) {
 		return;
 	}
-	
-	$price_key              = false;
-	$pax                    = 1;
-	$allow_multiple_items   = WP_Travel_Cart::allow_multiple_items();
+
+	$price_key            = false;
+	$pax                  = 1;
+	$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
 	$trip_ids               = array();
 	$pax_array              = array();
@@ -58,7 +58,7 @@ function wp_travel_book_now() {
 		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
 	}
 
-	if ( ! $allow_multiple_items   || ( 1 === count( $items ) ) ) {
+	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
 		$pax                    = isset( $pax_array[0] ) ? $pax_array[0] : $pax;
 		$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
 		$arrival_date           = $arrival_date[0];
@@ -135,9 +135,9 @@ function wp_travel_book_now() {
 		}
 	}
 
-	// Insert/Update Booking IDs in user meta to fectch bookings of those user.
+	// Insert/Update Booking IDs in user meta to fetch bookings of those user.
 	if ( is_user_logged_in() ) {
-		$user                  = wp_get_current_user();
+		$user              = wp_get_current_user();
 		$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
 		$saved_booking_ids = ! $saved_booking_ids ? array() : $saved_booking_ids;
 		array_push( $saved_booking_ids, $booking_id );
@@ -162,26 +162,23 @@ function wp_travel_book_now() {
 		/**
 		 * Trigger Update inventory values.
 		 *
-		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' ) 
+		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 		 * @since WP Travel 4.0.0
 		 */
 		do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
 		// End of Inventory.
 
-		// Begain Send Email to client / admin. 
+		// Begin Send Email to client / admin.
 		/**
 		 * Trigger Email functions. sends email to admin and client.
 		 *
-		 * @hooked 
+		 * @hooked
 		 * @since WP Travel 4.4.2
 		 */
 		do_action( 'wp_travel_action_after_inventory_update', $inventory_args );
 
-
-
 		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
 
-		
 		$first_name = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
 		$last_name  = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
 		$country    = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
@@ -355,7 +352,7 @@ function wp_travel_book_now() {
 			/**
 			 * Trigger Update inventory values action.
 			 *
-			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' ) 
+			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 			 * @since WP Travel 4.0.0
 			 */
 			do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
@@ -378,10 +375,10 @@ function wp_travel_book_now() {
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
 	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';
 	if ( 'no' === $require_login_to_checkout && 'yes' == $create_user_while_booking && ! is_user_logged_in() ) {
-		wp_travel_create_new_customer($customer_email);
+		wp_travel_create_new_customer( $customer_email );
 	}
 	// Clear Transient To update booking Count.
-	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );
+	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );.
 	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 
 	// Clear Cart After process is complete.
@@ -440,7 +437,7 @@ function get_booking_chart() {
 							<label data-on="ON" data-off="OFF">
 								<input id="compare-stat" type="checkbox" name="compare_stat" value="yes" <?php checked( 'yes', $compare_stat ); ?>>
 								<span class="switch">
-							  </span>
+								</span>
 							</label>
 						</span>
 
@@ -643,7 +640,7 @@ function get_booking_chart() {
  * @return  Array $actions;
  */
 function wp_travel_post_duplicator_action_row( $actions, $post ) {
-	// Get the post type object
+	// Get the post type object.
 	$post_type = get_post_type_object( $post->post_type );
 	if ( WP_TRAVEL_POST_TYPE === $post_type->name && function_exists( 'wp_travel_post_duplicator_action_row_link' ) ) {
 		$actions['wp_travel_duplicate_post'] = wp_travel_post_duplicator_action_row_link( $post );
