@@ -330,7 +330,7 @@ function wp_travel_book_now() {
 						$saved_booking_ids = array();
 					}
 
-					array_push( $saved_booking_ids, $order_id );
+					array_push( $saved_booking_ids, $booking_id );
 
 					update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 
