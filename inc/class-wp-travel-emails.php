@@ -1,6 +1,6 @@
 <?php
 /**
- * Handle WP Travel Email Templates
+ * Handle WP Travel Email Templates. Base Class For WP Travel Email.
  *
  * @package WP Travel
  */

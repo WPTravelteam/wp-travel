@@ -147,162 +147,38 @@ function wp_travel_book_now() {
 	$settings  = wp_travel_get_settings();
 	$first_key = '';
 	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
+		$args = array(
+			'trip_id'        => $trip_id,
+			'booking_id'     => $booking_id,
+			'pricing_id'     => $pricing_id,
+			'pax'            => $pax,
+			'selected_date'  => $arrival_date, // [used in inventory]
+			'time'           => $trip_time,
+			'price_key'      => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
+			'arrival_date'   => $arrival_date_email_tag, // For Email [arrival_date along with time].
+			'departure_date' => $departure_date, // For Email.
+		);
 		/**
 		 * Add Support for invertory addon options.
 		 */
 		wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
-		$inventory_args = array(
-			'trip_id'       => $trip_id,
-			'booking_id'    => $booking_id,
-			'pricing_id'    => $pricing_id,
-			'pax'           => $pax,
-			'selected_date' => $arrival_date,
-			'time'          => $trip_time,
-		);
 		/**
 		 * Trigger Update inventory values.
 		 *
 		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 		 * @since WP Travel 4.0.0
 		 */
-		do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
+		do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $args ) );
 		// End of Inventory.
 
 		// Begin Send Email to client / admin.
 		/**
 		 * Trigger Email functions. sends email to admin and client.
 		 *
-		 * @hooked
+		 * @hooked array( 'WP_Travel_Email', 'send_booking_emails' )
 		 * @since WP Travel 4.4.2
 		 */
-		do_action( 'wp_travel_action_after_inventory_update', $inventory_args );
-
-		$send_booking_email_to_admin = ( isset( $settings['send_booking_email_to_admin'] ) && '' !== $settings['send_booking_email_to_admin'] ) ? $settings['send_booking_email_to_admin'] : 'yes';
-
-		$first_name = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
-		$last_name  = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
-		$country    = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
-		$phone      = isset( $_POST['wp_travel_phone_traveller'] ) ? $_POST['wp_travel_phone_traveller'] : '';
-		$email      = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : '';
-
-		reset( $first_name );
-		$first_key = key( $first_name );
-
-		$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
-		$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
-		$country    = isset( $country[ $first_key ] ) && isset( $country[ $first_key ][0] ) ? $country[ $first_key ][0] : '';
-		$phone      = isset( $phone[ $first_key ] ) && isset( $phone[ $first_key ][0] ) ? $phone[ $first_key ][0] : '';
-		$email      = isset( $email[ $first_key ] ) && isset( $email[ $first_key ][0] ) ? $email[ $first_key ][0] : '';
-
-		// Prepare variables to assign in email.
-		$client_email = $email;
-
-		$site_admin_email = get_option( 'admin_email' );
-
-		$admin_email = apply_filters( 'wp_travel_booking_admin_emails', $site_admin_email );
-
-		// Email Variables.
-		if ( is_multisite() ) {
-			$sitename = get_network()->site_name;
-		} else {
-			/*
-			* The blogname option is escaped with esc_html on the way into the database
-			* in sanitize_option we want to reverse this for the plain text arena of emails.
-			*/
-			$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-		}
-		$itinerary_title = get_the_title( $trip_id );
-
-		$booking_no_of_pax      = $pax;
-		$booking_scheduled_date = esc_html__( 'N/A', 'wp-travel' );
-		$date_format            = get_option( 'date_format' );
-		$arrival_date           = ( '' !== $arrival_date ) ? wp_travel_format_date( $arrival_date, true, 'Y-m-d' ) : '';
-		$departure_date         = ( '' !== $departure_date ) ? wp_travel_format_date( $departure_date, true, 'Y-m-d' ) : '';
-
-		$customer_name    = $first_name . ' ' . $last_name;
-		$customer_country = $country;
-		$customer_address = isset( $_POST['wp_travel_address'] ) ? $_POST['wp_travel_address'] : '';
-		$customer_phone   = $phone;
-		$customer_email   = $email;
-		$customer_note    = isset( $_POST['wp_travel_note'] ) ? $_POST['wp_travel_note'] : '';
-
-		$bank_deposit_table = '';
-		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
-			$bank_deposit_table = wp_travel_get_bank_deposit_account_table( false );
-		}
-
-		$coupon_code = ! empty( $discounts['coupon_code'] ) ? ( $discounts['coupon_code'] ) : '';
-
-		$email_tags = array(
-			'{sitename}'               => $sitename,
-			'{itinerary_link}'         => get_permalink( $trip_id ),
-			'{itinerary_title}'        => wp_travel_get_trip_pricing_name( $trip_id, $price_key ),
-			'{booking_id}'             => $booking_id,
-			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
-			'{booking_no_of_pax}'      => $booking_no_of_pax,
-			'{booking_scheduled_date}' => $booking_scheduled_date,
-			'{booking_arrival_date}'   => $arrival_date_email_tag,
-			'{booking_departure_date}' => $departure_date,
-			'{booking_selected_time}'  => ! empty( $trip_time ) ? $trip_time : '',
-			'{booking_coupon_code}'    => $coupon_code,
-
-			'{customer_name}'          => $customer_name,
-			'{customer_country}'       => $customer_country,
-			'{customer_address}'       => $customer_address,
-			'{customer_phone}'         => $customer_phone,
-			'{customer_email}'         => $customer_email,
-			'{customer_note}'          => $customer_note,
-			'{bank_deposit_table}'     => $bank_deposit_table,
-		);
-		$email_tags = apply_filters( 'wp_travel_admin_email_tags', $email_tags, $booking_id );
-		$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );
-
-		$email = new WP_Travel_Emails();
-
-		$admin_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
-
-		$admin_message_data  = $admin_template['mail_header'];
-		$admin_message_data .= $admin_template['mail_content'];
-		$admin_message_data .= $admin_template['mail_footer'];
-
-		// Admin message.
-		$admin_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
-		// Admin Subject.
-		$admin_subject = str_replace( array_keys( $email_tags ), $email_tags, $admin_template['subject'] ); // Added email tag support from ver 4.1.5.
-
-		// Client Template.
-		$client_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
-
-		$client_message_data  = $client_template['mail_header'];
-		$client_message_data .= $client_template['mail_content'];
-		$client_message_data .= $client_template['mail_footer'];
-
-		// Client message.
-		$client_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
-
-		// Client Subject.
-		$client_subject = str_replace( array_keys( $email_tags ), $email_tags, $client_template['subject'] ); // Added email tag support from ver 4.1.5.
-
-		$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
-
-		// Send mail to admin if booking email is set to yes.
-		if ( 'yes' == $send_booking_email_to_admin ) {
-
-			// To send HTML mail, the Content-type header must be set.
-			$headers = $email->email_headers( $reply_to_email, $client_email );
-
-			if ( ! wp_mail( $admin_email, $admin_subject, $admin_message, $headers ) ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
-			}
-		}
-
-		// Send email to client.
-		// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $reply_to_email, $reply_to_email );
-
-		if ( ! wp_mail( $client_email, $client_subject, $client_message, $headers ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your Item has been added but the email could not be sent.Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
-		}
+		do_action( 'wp_travel_action_after_inventory_update', $args );
 	} else {
 
 		// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
@@ -341,7 +217,7 @@ function wp_travel_book_now() {
 			 * Add Support for invertory addon options.
 			 */
 			wp_travel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
-			$inventory_args = array(
+			$args = array(
 				'trip_id'       => $trip_id,
 				'booking_id'    => $booking_id,
 				'pricing_id'    => $pricing_id,
@@ -349,13 +225,22 @@ function wp_travel_book_now() {
 				'selected_date' => $arrival_date,
 				'time'          => $trip_time,
 			);
+			$args = array(
+				'trip_id'        => $trip_id,
+				'booking_id'     => $booking_id,
+				'pricing_id'     => $pricing_id,
+				'pax'            => $pax,
+				'selected_date'  => $arrival_date, // [used in inventory]
+				'time'           => $trip_time,
+				'price_key'      => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
+			);
 			/**
 			 * Trigger Update inventory values action.
 			 *
 			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 			 * @since WP Travel 4.0.0
 			 */
-			do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $inventory_args ) );
+			do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $args ) );
 			// End of Inventory.
 		}
 		if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {

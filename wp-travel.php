@@ -240,7 +240,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		function includes() {
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/class-email-template.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/payments/wp-travel-payments.php', dirname( __FILE__ ) );
 			include sprintf( '%s/inc/license/wp-travel-license.php', dirname( __FILE__ ) );
 			include sprintf( '%s/inc/class-install.php', WP_TRAVEL_ABSPATH );
@@ -263,6 +263,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/bank-deposit/bank-deposit.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/email-template-functions.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/class-wp-travel-email.php', WP_TRAVEL_ABSPATH );
 			// Open Graph Tags @since 1.7.6
 			include sprintf( '%s/inc/og-tags.php', WP_TRAVEL_ABSPATH );
 
