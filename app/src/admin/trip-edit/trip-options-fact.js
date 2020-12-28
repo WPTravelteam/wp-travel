@@ -59,7 +59,8 @@ const WPTravelTripOptionsFactContent = () => {
         if ( 'number' != typeof factId ){
             return []
         }
-        let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 ? wp_travel_trip_facts_settings[factId].options : [];
+
+        let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 && 'undefined' != typeof wp_travel_trip_facts_settings[factId] ? wp_travel_trip_facts_settings[factId].options : [];
         return Object.keys(selectedFactSettings).map( (index) => {
             return {
                 label: selectedFactSettings[index],
