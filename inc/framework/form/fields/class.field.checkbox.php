@@ -45,7 +45,7 @@ class WP_Travel_FW_Field_Checkbox {
 						$checked = ( in_array( $key, $this->field['default'] ) ) ? 'checked' : '';
 
 				} else {
-					$checked = ( $key == $this->field['default'] ) ? 'checked' : '';
+					$checked = ( $key === $this->field['default'] ) ? 'checked' : '';
 				}
 
 				$error_coontainer_id = sprintf( 'error_container-%s', $this->field['id'] );
