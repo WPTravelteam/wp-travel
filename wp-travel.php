@@ -247,6 +247,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/currencies.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/countries.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/booking-functions.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/post-duplicator.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/trip-enquiries.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-itinerary.php', WP_TRAVEL_ABSPATH );

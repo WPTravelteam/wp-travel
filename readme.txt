@@ -249,7 +249,8 @@ Fixes:
 * Fixed trip booking sort by Contact name not working.
 
 Tweaks:
-* add method of cart class parameters updated. first parameter casting is changed to array from number consisting all required attributes in the array.
+* add method of cart class parameters updated. First parameter type casting is changed to array from number consisting all required attributes in the array.
+* Code split & cleanup for the booking process and email after booking is saved.
 
 = 4.4.1 =
 Release Date: 16th December 2020
