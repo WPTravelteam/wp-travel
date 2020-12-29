@@ -247,6 +247,7 @@ Release Date:
 
 Fixes:
 * Fixed trip booking sort by Contact name not working.
+* Trip facts error displaying on trip edit fact section is fixed.
 
 Tweaks:
 * add method of cart class parameters updated. First parameter type casting is changed to array from number consisting all required attributes in the array.
