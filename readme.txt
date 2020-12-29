@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.6
 Requires PHP: 5.5
-Stable tag: 4.4.1
+Stable tag: 4.4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -243,7 +243,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.4.2 =
-Release Date: 
+Release Date: 4th January, 2021
 
 Fixes:
 * Fixed trip booking sort by Contact name not working.
