@@ -243,7 +243,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.4.2 =
-Release Date: 4th January, 2021
+Release Date: 30th December, 2021
 
 Fixes:
 * Fixed trip booking sort by Contact name not working.
