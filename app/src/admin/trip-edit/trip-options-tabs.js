@@ -129,8 +129,6 @@ addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', (content, id, allData)
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                        &nbsp;&nbsp;
-                        <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content

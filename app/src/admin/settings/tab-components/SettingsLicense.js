@@ -205,12 +205,10 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
             <Notice isDismissible={false} status="informational">
                 <strong>{__('Want to add more features in WP Travel?', 'wp-travel')}</strong>
                 <br />
-                {__('Get addon for payment, trip extras, Inventory management and other premium features.', 'wp-travel')}
+                {__('Get WP Travel Pro modules for payment, trip extras, Inventory management and other premium features.', 'wp-travel')}
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                &nbsp;&nbsp;
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('Get WP Travel Addons', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
