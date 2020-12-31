@@ -248,8 +248,6 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
             <br />
             <br />
             <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                        &nbsp;&nbsp;
-                        <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/category/map/">{__('Get WP Travel Map Addon', 'wp-travel')}</a>
         </Notice><br />
     </>,
     ...content

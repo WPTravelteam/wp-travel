@@ -235,8 +235,9 @@ function wp_travel_marketplace_page() {
 }
 
 /**
- * 
+ *
  * Will Display HTML content of support box
+ *
  * @since WP Travel 4.4.2
  */
 function wp_travel_meta_box_support() {
@@ -263,8 +264,9 @@ function wp_travel_meta_box_support() {
 }
 
 /**
- * 
+ *
  * Will Display HTML content of documentation box
+ *
  * @since WP Travel 4.4.2
  */
 function wp_travel_meta_box_documentation() {
@@ -293,8 +295,9 @@ function wp_travel_meta_box_documentation() {
 }
 
 /**
- * 
+ *
  * Will Display HTML content of review box
+ *
  * @since WP Travel 4.4.2
  */
 function wp_travel_meta_box_review() {
@@ -303,12 +306,12 @@ function wp_travel_meta_box_review() {
 		array(
 			'title'       => __( 'WP TRAVEL PLUGIN IS PERFECT', 'wp-travel' ),
 			'description' => __( '"Works perfectly for Travel tours booking. Definitely recommended for using Wp Travel Plugin. Easy for client to book through your website which Runs with Wp Travel.	Tirupati is so helpful and patient to solve the problem one by one.	10 out of 10 service."', 'wp-travel' ),
-			'profile'	  => 'eliandyao',
+			'profile'     => 'eliandyao',
 		),
 		array(
 			'title'       => __( 'Amazing Customer Service', 'wp-travel' ),
 			'description' => __( '"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."', 'wp-travel' ),
-			'profile'	  => 'dannrcm',
+			'profile'     => 'dannrcm',
 		),
 	);
 	?>
@@ -322,8 +325,8 @@ function wp_travel_meta_box_review() {
 		</h2>
 		<div class="inside">
 			<?php
-				foreach ( $wp_travel_reviews as $wp_travel_review ) {
-					?>
+			foreach ( $wp_travel_reviews as $wp_travel_review ) {
+				?>
 					<div class="thumbnail">
 						<p class="text-center">
 							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
@@ -337,7 +340,7 @@ function wp_travel_meta_box_review() {
 						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
 					</div>
 					<?php
-				}
+			}
 			?>
 			<div class="thumbnail last">
 				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
@@ -360,8 +363,8 @@ function wp_travel_get_download_upsell() {
 			'content'     => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
 			'link'        => 'https://wptravel.io/wp-travel-pro/',
 			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-			'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+			// 'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;
@@ -378,8 +381,8 @@ function wp_travel_custom_filters_upsell() {
 			'content'     => __( 'By upgrading to Pro, you can add your custom search filter fields to search trips !', 'wp-travel' ),
 			'link'        => 'https://wptravel.io/wp-travel-pro/',
 			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'       => 'https://wptravel.io/downloads/wp-travel-custom-filters/',
-			'link2_label' => __( 'Get WP Travel Custom Filters Addon', 'wp-travel' ),
+			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-custom-filters/',
+			// 'link2_label' => __( 'Get WP Travel Custom Filters Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;
@@ -1016,12 +1019,12 @@ function wp_travel_extras_pro_option_fields() {
 			<?php
 			if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) :
 				$args = array(
-					'title'       => __( 'Want to use above pro features?', 'wp-travel' ),
-					'content'     => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
-					'link'        => 'https://wptravel.io/wp-travel-pro/',
-					'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-					'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
-					'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
+					'title'      => __( 'Want to use above pro features?', 'wp-travel' ),
+					'content'    => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
+					'link'       => 'https://wptravel.io/wp-travel-pro/',
+					'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+					// 'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
+					// 'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
 				);
 				wp_travel_upsell_message( $args );
 				endif;
@@ -1076,16 +1079,16 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
-	$defaults   = array(
+	$defaults = array(
 		'type'               => array( 'wp-travel-pro' ),
 		'title'              => __( 'Get WP Travel PRO', 'wp-travel' ),
 		'content'            => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
 		'link'               => 'https://wptravel.io/wp-travel-pro/',
 		'link_label'         => __( 'Get WP Travel Pro', 'wp-travel' ),
-		'link2'              => 'https://wptravel.io/downloads/',
-		'link2_label'        => __( 'Check all Add-ons', 'wp-travel' ),
-		'link3'              => '',
-		'link3_label'        => __( 'View WP Travel Addons', 'wp-travel' ),
+		// 'link2'              => 'https://wptravel.io/downloads/',
+		// 'link2_label'        => __( 'Check all Add-ons', 'wp-travel' ),
+		// 'link3'              => '',
+		// 'link3_label'        => __( 'View WP Travel Addons', 'wp-travel' ),
 		'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
 	);
 	$args       = wp_parse_args( $args, $defaults );

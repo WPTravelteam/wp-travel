@@ -268,7 +268,7 @@ addFilter('wp_travel_before_itinerary_content', 'wp_travel', (content, allData) 
                     disabled={true}
                     name="" />
                     <p class="description">
-                        {__( 'Need Custom Trip Code? Check', 'wp-travel' )}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">{__( 'Utilities addons', 'wp-travel') }</a>
+                        {__( 'Need Custom Trip Code? Check', 'wp-travel' )}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">{__( 'Pro Utilities Modules', 'wp-travel') }</a>
                     </p>
             </div>
         </PanelRow>,

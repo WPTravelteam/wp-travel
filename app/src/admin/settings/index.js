@@ -172,8 +172,6 @@ addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/category/map/">{__('View WP Travel Map addons', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -191,8 +189,6 @@ addFilter('wp_travel_tab_content_before_email', 'wp_travel', (content, allData) 
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -210,8 +206,6 @@ addFilter('wp_travel_custom_global_tabs', 'wp_travel', (content, allData) => {
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -229,8 +223,6 @@ addFilter('wp_travel_settings_tab_field_editor_fields', 'wp_travel', (content, a
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-field-editor/">{__('Get WP Travel Field Editor', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -249,8 +241,6 @@ addFilter('wp_travel_settings_tab_faq_fields', 'wp_travel', (content, allData) =
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -268,8 +258,6 @@ addFilter('wp_travel_settings_tab_cart_checkout_fields', 'wp_travel', (content, 
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-utilities/">{__('Get WP Travel Utilities Addon', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -284,12 +272,10 @@ addFilter('wp_travel_addons_setings_tab_fields', 'wp_travel', (content, allData)
             <Notice isDismissible={false} status="informational">
                 <strong>{__('Want to add more features in WP Travel?', 'wp-travel')}</strong>
                 <br />
-                {__('Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')}
+                {__('Get WP Travel Pro modules for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')}
                 <br />
                 <br />
                 <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('Check all Add-ons', 'wp-travel')}</a>
             </Notice><br />
         </>,
         ...content,
@@ -330,8 +316,6 @@ addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, a
                     <br />
                     <br />
                     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/">{__('WP Travel Currency Exchange Rates', 'wp-travel')}</a>
                 </Notice><br />
             </>,
         mailchimp: <>
@@ -343,8 +327,6 @@ addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, a
                     <br />
                     <br />
                     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-mailchimp/">{__('WP Travel Mailchimp', 'wp-travel')}</a>
                 </Notice><br />
             </>,
         wishlists: <>
@@ -356,8 +338,6 @@ addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, a
                     <br />
                     <br />
                     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
-                    &nbsp;&nbsp;
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/downloads/wp-travel-wishlists/">{__('WP Travel Wishlists', 'wp-travel')}</a>
                 </Notice><br />
             </>,
     }
