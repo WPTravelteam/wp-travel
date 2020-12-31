@@ -100,7 +100,7 @@ const WPTravelTripOptions = () => {
         },
         {
             name: 'cart-checkout',
-            title: __('Cart & Checkout', 'wp-travel'),
+            title: __('Checkout', 'wp-travel'), // cart & checkout label updated to checkout @since 4.4.3
             className: 'tab-cart-checkout',
             content: WPTravelTripOptionsCartAndCheckout
         },
