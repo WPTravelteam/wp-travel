@@ -43,21 +43,7 @@ export default () => {
                     <p className="description">{__( 'This will hide your related trips.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-            <PanelRow>
-                <label>{ __( 'Enable multiple travelers', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    <ToggleControl
-                        checked={ enable_multiple_travellers == 'yes' }
-                        onChange={ () => {
-                            updateSettings({
-                                ...allData,
-                                enable_multiple_travellers: 'yes' == enable_multiple_travellers ? 'no': 'yes'
-                            })
-                        } }
-                    />
-                    <p className="description">{__( 'Collect multiple travelers information from checkout page.', 'wp-travel' )}</p>
-                </div>
-            </PanelRow>
+            
 
             { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) && 
                 <>
