@@ -3136,7 +3136,7 @@ function wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial
 		$pricing     = wp_travel_get_cart_pricing( $cart_id );
 		$trip_extras = isset( $pricing['trip_extras'] ) ? array_column( $pricing['trip_extras'], null, 'id' ) : array();
 
-		$cart_extras = isset( $item['trip_extras'] ) ? (array) $item['trip_extras'] : array(
+		$cart_extras = isset( $item['trip_extras'] ) && ! empty( $item['trip_extras'] ) ? (array) $item['trip_extras'] : array(
 			'id'  => array(),
 			'qty' => array(),
 		);
