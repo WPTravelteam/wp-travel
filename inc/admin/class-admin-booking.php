@@ -32,7 +32,7 @@ class WP_Travel_Admin_Booking {
 		add_filter( 'request', array( $this, 'booking_columns_content_sort' ) );
 
 		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 ); // Add Custom Metabox.
-		add_action( 'save_post', 'save' );
+		add_action( 'save_post', array( $this, 'save' ) );
 
 	}
 
