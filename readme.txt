@@ -243,6 +243,9 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 = 4.4.4 =
 Release Date:
 
+Enhancement:
+* Added option to draft/delete expired trips.
+
 Tweaks:
 * Enable Multiple Travelers moved to Checkout option from Trip option.
 * Removed cart Page option.
