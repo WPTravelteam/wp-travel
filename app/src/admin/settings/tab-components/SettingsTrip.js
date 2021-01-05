@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, RadioControl, SelectControl } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
@@ -17,7 +17,8 @@ export default () => {
     const {
         wp_travel_switch_to_react,
         hide_related_itinerary,
-        enable_multiple_travellers,
+        enable_expired_trip_option,
+        expired_trip_set_to,
         trip_pricing_options_layout,
         calender_view,
         options
@@ -89,6 +90,44 @@ export default () => {
                         </>
                     }
                 </>
+            }
+            <PanelRow>
+                <label>{ __( 'Enable Expired Trip Option', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ enable_expired_trip_option == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                enable_expired_trip_option: 'yes' == enable_expired_trip_option ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'This will enable expired trip set as Draft or delete.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+            { 'undefined' !== typeof enable_expired_trip_option && 'yes' === enable_expired_trip_option &&
+                <PanelRow>
+                    <label>{ __( 'If expired, trip set to draft/delete', 'wp-travel' ) }</label>
+                    <SelectControl
+                        value={ expired_trip_set_to }
+                        options={ [
+                            {
+                                label: __( 'Draft', 'wp-travel' ),
+                                value:'draft'
+                            }, {
+                                label: __( 'Delete', 'wp-travel' ),
+                                value:'delete'
+                            }
+                        ] }
+                        onChange={ ( value ) => {
+                            updateSettings({
+                                ...allData,
+                                expired_trip_set_to: value
+                            })
+                        } }
+                    />
+                </PanelRow>
             }
 
             {applyFilters( 'wp_travel_tab_content_after_trips', [] )}
