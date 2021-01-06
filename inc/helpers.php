@@ -88,7 +88,7 @@ function wp_travel_settings_default_fields() {
 		// Trip Settings Fields.
 		'hide_related_itinerary'                  => 'no',
 		'enable_expired_trip_option'              => 'no',
-		'expired_trip_set_to'                     => 'draft',
+		'expired_trip_set_to'                     => 'expired',
 		'wp_travel_switch_to_react'               => 'no',
 		'enable_multiple_travellers'              => 'no',
 		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.

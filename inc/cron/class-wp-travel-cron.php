@@ -143,14 +143,14 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 			 
 							if ( ! $valid_trip ) {
 								// Update Expire status / Delete for invalid trip.
-								if ( 'draft' == $expired_trip_set_to ) {
+								if ( 'delete' == $expired_trip_set_to ) {
+									wp_trash_post( $trip_id );
+								} else {
 									$update_data_array = array(
 										'ID'         => $trip_id,
 										'post_status' => 'expired',
 									);
 									wp_update_post( $update_data_array );
-								} else {
-									wp_trash_post( $trip_id );
 								}
 							}
 						}

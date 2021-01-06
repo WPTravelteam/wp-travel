@@ -103,18 +103,18 @@ export default () => {
                             })
                         } }
                     />
-                    <p className="description">{__( 'This will enable expired trip set as Draft or delete.', 'wp-travel' )}</p>
+                    <p className="description">{__( 'This will enable expired trip set as Expired or delete.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
             { 'undefined' !== typeof enable_expired_trip_option && 'yes' === enable_expired_trip_option &&
                 <PanelRow>
-                    <label>{ __( 'If expired, trip set to draft/delete', 'wp-travel' ) }</label>
+                    <label>{ __( 'If expired, trip set to expired/delete', 'wp-travel' ) }</label>
                     <SelectControl
                         value={ expired_trip_set_to }
                         options={ [
                             {
-                                label: __( 'Draft', 'wp-travel' ),
-                                value:'draft'
+                                label: __( 'Expired', 'wp-travel' ),
+                                value:'expired'
                             }, {
                                 label: __( 'Delete', 'wp-travel' ),
                                 value:'delete'
