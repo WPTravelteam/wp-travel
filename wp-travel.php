@@ -622,7 +622,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$support_plugins = apply_filters( 'wp_travel_reject_checkout_cache_plugin', $support_plugins );
 
 			// For WP Rocket Plugin.
-			if ( in_array( 'wp-rocket/wp-rocket.php', $active_plugins, true ) ) {
+			if ( in_array( $support_plugins['wp_rocket'], $active_plugins, true ) ) {
 				$options = get_option( 'wp_rocket_settings' );
 
 				if ( ! in_array( '/' . $slug . '/', $options['cache_reject_uri'], true ) ) {
@@ -630,6 +630,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					update_option( 'wp_rocket_settings', $options );
 				}
 			}
+
+			do_action( 'wp_travel_reject_checkout_cache_plugin_action', $support_plugins ); // @since 4.4.4
 		}
 	}
 endif;
