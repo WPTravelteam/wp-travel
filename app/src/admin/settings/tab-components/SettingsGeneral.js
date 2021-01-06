@@ -22,7 +22,7 @@ export default () => {
         wp_travel_map, 
         google_map_api_key, 
         google_map_zoom_level, 
-        cart_page_id,
+        // cart_page_id,
         checkout_page_id,
         dashboard_page_id,
         options } = allData;
@@ -55,7 +55,7 @@ export default () => {
     let selectedCurrency = currencyOptions.filter( opt => { return opt.value == currency } )
     let selectedCurrencyPosition = currencyPositionOptions.filter( opt => { return opt.value == currency_position } )
     let selectedMap = mapOptions.filter( opt => { return opt.value == wp_travel_map } )
-    let selectedCartPage = pageOptions.filter( opt => { return opt.value == cart_page_id } )
+    // let selectedCartPage = pageOptions.filter( opt => { return opt.value == cart_page_id } )
     let selectedCheckoutPage = pageOptions.filter( opt => { return opt.value == checkout_page_id } )
     let selectedDashboardPage = pageOptions.filter( opt => { return opt.value == dashboard_page_id } )
 
@@ -247,7 +247,7 @@ export default () => {
 
             <br/><br/>
             <h4>{ __( 'Pages', 'wp-travel' ) }</h4>
-            <PanelRow>
+            {/* <PanelRow>
                 <label>{ __( 'Cart Page', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <div className="wp-travel-select-wrapper">
@@ -266,7 +266,7 @@ export default () => {
                     </div>
                     <p className="description">{__( 'Choose the page to use as cart page for trip bookings which contents cart page shortcode [wp_travel_cart].', 'wp-travel' )}</p>
                 </div>
-            </PanelRow>
+            </PanelRow> */}
             <PanelRow>
                 <label>{ __( 'Checkout Page', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
