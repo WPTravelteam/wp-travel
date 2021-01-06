@@ -245,6 +245,7 @@ Release Date:
 
 Enhancement:
 * Added option to draft/delete expired trips.
+* Added support for WP Rocket plugin to disable caching on WP Travel checkout page. 
 
 Tweaks:
 * Enable Multiple Travelers moved to Checkout option from Trip option.
