@@ -28,8 +28,8 @@ class WP_Travel_Post_Status {
 
 	public static function register_trip_status() {
 		register_post_status( 'expired', array(
-			'label'                     => _x( 'Expired', 'post' ),
-			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>'),
+			'label'                     => _x( 'Expired', 'post', 'wp-travel' ),
+			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'wp-travel'),
 			'public'                    => false,
 			'exclude_from_search'       => true,
 			'show_in_admin_all_list'    => false,
