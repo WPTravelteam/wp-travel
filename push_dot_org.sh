@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SVN_URL=https://plugins.svn.wordpress.org/wp-travel
+SVN_URL=https://plugins.svn.wordpress.org/wp-travel
 
 # Copy files from SVN URL
 echo "Pull from SVN"
@@ -75,6 +75,6 @@ echo "*********************************"
 
 # Commit changes
 echo "Sending to SVN"
-svn ci -m 'New Changes !!' --username "$SVN_USER" --password $SVN_PASS
+#svn ci -m 'New Changes !!' --username "$SVN_USER" --password $SVN_PASS
 echo "*********************************"
 echo ""
