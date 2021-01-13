@@ -32,7 +32,7 @@ $wrapper_class = wp_travel_get_theme_wrapper_class();
 do_action( 'wp_travel_before_content_start');
 ?>
 
-<div id="wti_main">
+<div id="wti_main-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="wti__wrapper">
 		<div class="wti__single-inner">
 			<div class="wti__hero-section">
@@ -602,198 +602,60 @@ do_action( 'wp_travel_before_content_start');
 									</div>
 								</div>
 							</div>
+							<!-- Related Trips -->
+							<?php
+							$post_id = get_the_id();
+							$settings = wp_travel_get_settings();
+							$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
+							
+							if ( 'yes' === $hide_related_itinerary ) {
+								return;
+							}
+							$currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
+							$currency_symbol = wp_travel_get_currency_symbol( $currency_code );
+						
+							// For use in the loop, list 5 post titles related to first tag on current post.
+							$terms = wp_get_object_terms( $post_id, 'itinerary_types' );
+						
+							$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related trip not found.', 'wp-travel' ) . '</p>';
+							$wrapper_class = wp_travel_get_theme_wrapper_class();
+							?>
 							<div class="wti__grid-item col-12">
 								<div class="wti__related-trips">
 									<hr class="wti__trip-section-devider">
-									<h3 class="related-trip-title">Related Trips</h3>
+									<h3 class="related-trip-title"><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h3>
 									<div class="wti__list-wrapper">
 										<div class="wti__list">
-											<article class="wti__trip-list-item">
-												<div class="wti__trip-thumbnail">
-													<a href="#" class="wti__trip-link"><img src="./assets/img/trip-1.jpg" alt=""></a>
-													<div class="wti__trip-meta">
-														<span class="wti__trip-meta-offer">Offer</span>
-														<span class="wti__trip-meta-wishlist"></span>
-													</div>
-												</div>
-												<div class="wti__trip-content-wrapper">
-													<div class="wti__trip-header">
-														<div class="wti__trip-price-area">
-															<div class="wti__trip-price-amount">
-																<strong><span class="currency">$</span>2099</strong>
-																<span class="trip__price-stikeout">
-																	<del><span class="currency">$</span>3000</del>
-																</span>
-																/ <span>1 night(s)</span>
-															</div>
-														</div>
-														<h3 class="trip-travel__trip-title"><a href="#">Tour Carbonnière</a></h3>
-														<div class="wti__trip-locations">
-															<span><a href="#">Saint-Laurent-d'Aigouze</a></span>, <span><a href="#">France</a></span>
-														</div>
-													</div>
-													<div class="wti__trip-review">
-														<span class="trip__review-star">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-															</svg>
-															<span class="trip__review-star-rating" style="width: 50%;">
-																<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																	<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																	<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																	<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																	<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																	<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-																</svg>
-															</span>
-														</span>
-														<span class="rating-text">(3/100 reviews)</span>
-													</div>
-													<div class="wti__trip-content">
-														<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat eum hic ipsam illum in blanditiis, quidem possimus minus libero facere.</p>
-														<div class="wti__trip-book-button">
-															<a href="#" class="button wti__trip-explore">Book Now</a>
-														</div>
-													</div>
-													<div class="wti__trip-footer">
-														<div class="wti__trip-footer-meta">
-															<span><img src="./assets/img/group.svg" alt=""> 10 Pax</span>
-															<span><img src="./assets/img/hiking.svg" alt=""> 5 Days</span>
-															<span><a href="#"><img src="./assets/img/flag.svg" alt=""> Tour</a></span>
-														</div>
-													</div>
-												</div>
-											</article>
-											<article class="wti__trip-list-item">
-												<div class="wti__trip-thumbnail">
-													<a href="#" class="wti__trip-link"><img src="./assets/img/trip-1.jpg" alt=""></a>
-													<div class="wti__trip-meta">
-														<span class="wti__trip-meta-offer">Offer</span>
-														<span class="wti__trip-meta-wishlist"></span>
-													</div>
-												</div>
-												<div class="wti__trip-content-wrapper">
-													<div class="wti__trip-header">
-														<div class="wti__trip-price-area">
-															<div class="wti__trip-price-amount">
-																<strong><span class="currency">$</span>2099</strong>
-																<span class="trip__price-stikeout">
-																	<del><span class="currency">$</span>3000</del>
-																</span>
-																/ <span>1 night(s)</span>
-															</div>
-														</div>
-														<h3 class="trip-travel__trip-title"><a href="#">Tour Carbonnière</a></h3>
-														<div class="wti__trip-locations">
-															<span><a href="#">Saint-Laurent-d'Aigouze</a></span>, <span><a href="#">France</a></span>
-														</div>
-													</div>
-													<div class="wti__trip-review">
-														<span class="trip__review-star">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-															</svg>
-															<span class="trip__review-star-rating" style="width: 50%;">
-																<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																	<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																	<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																	<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																	<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																	<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-																</svg>
-															</span>
-														</span>
-														<span class="rating-text">(3/100 reviews)</span>
-													</div>
-													<div class="wti__trip-content">
-														<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat eum hic ipsam illum in blanditiis, quidem possimus minus libero facere.</p>
-														<div class="wti__trip-book-button">
-															<a href="#" class="button wti__trip-explore">Book Now</a>
-														</div>
-													</div>
-													<div class="wti__trip-footer">
-														<div class="wti__trip-footer-meta">
-															<span><img src="./assets/img/group.svg" alt=""> 10 Pax</span>
-															<span><img src="./assets/img/hiking.svg" alt=""> 5 Days</span>
-															<span><a href="#"><img src="./assets/img/flag.svg" alt=""> Tour</a></span>
-														</div>
-													</div>
-												</div>
-											</article>
-											<article class="wti__trip-list-item">
-												<div class="wti__trip-thumbnail">
-													<a href="#" class="wti__trip-link"><img src="./assets/img/trip-1.jpg" alt=""></a>
-													<div class="wti__trip-meta">
-														<span class="wti__trip-meta-offer">Offer</span>
-														<span class="wti__trip-meta-wishlist"></span>
-													</div>
-												</div>
-												<div class="wti__trip-content-wrapper">
-													<div class="wti__trip-header">
-														<div class="wti__trip-price-area">
-															<div class="wti__trip-price-amount">
-																<strong><span class="currency">$</span>2099</strong>
-																<span class="trip__price-stikeout">
-																	<del><span class="currency">$</span>3000</del>
-																</span>
-																/ <span>1 night(s)</span>
-															</div>
-														</div>
-														<h3 class="trip-travel__trip-title"><a href="#">Tour Carbonnière</a></h3>
-														<div class="wti__trip-locations">
-															<span><a href="#">Saint-Laurent-d'Aigouze</a></span>, <span><a href="#">France</a></span>
-														</div>
-													</div>
-													<div class="wti__trip-review">
-														<span class="trip__review-star">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-															</svg>
-															<span class="trip__review-star-rating" style="width: 50%;">
-																<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-																viewBox="0 0 2942 492.9" style="enable-background:new 0 0 2942 492.9;" xml:space="preserve">
-																	<polygon points="512,188.2 326,176 255.9,0 185.8,176 0,188.2 142.5,309.3 95.8,492.9 255.9,391.6 416,492.9 369.3,309.3"/>
-																	<polygon points="1119.5,188.2 933.5,176 863.4,0 793.3,176 607.5,188.2 750,309.3 703.3,492.9 863.4,391.6 1023.5,492.9 976.8,309.3"/>
-																	<polygon points="1727,188.2 1541,176 1470.9,0 1400.8,176 1215,188.2 1357.5,309.3 1310.8,492.9 1470.9,391.6 1631,492.9 1584.3,309.3"/>
-																	<polygon points="2334.5,188.2 2148.5,176 2078.4,0 2008.3,176 1822.5,188.2 1965,309.3 1918.3,492.9 2078.4,391.6 2238.5,492.9 2191.8,309.3"/>
-																	<polygon points="2942,188.2 2756,176 2685.9,0 2615.8,176 2430,188.2 2572.5,309.3 2525.8,492.9 2685.9,391.6 2846,492.9 2799.3,309.3"/>
-																</svg>
-															</span>
-														</span>
-														<span class="rating-text">(3/100 reviews)</span>
-													</div>
-													<div class="wti__trip-content">
-														<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat eum hic ipsam illum in blanditiis, quidem possimus minus libero facere.</p>
-														<div class="wti__trip-book-button">
-															<a href="#" class="button wti__trip-explore">Book Now</a>
-														</div>
-													</div>
-													<div class="wti__trip-footer">
-														<div class="wti__trip-footer-meta">
-															<span><img src="./assets/img/group.svg" alt=""> 10 Pax</span>
-															<span><img src="./assets/img/hiking.svg" alt=""> 5 Days</span>
-															<span><a href="#"><img src="./assets/img/flag.svg" alt=""> Tour</a></span>
-														</div>
-													</div>
-												</div>
-											</article>
+										<?php
+										if ( ! empty( $terms ) ) {
+											$term_ids = wp_list_pluck( $terms, 'term_id' );
+											$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row' , '3' );
+											$args = array(
+												'post_type' => WP_TRAVEL_POST_TYPE,
+												'post__not_in' => array( $post_id ),
+												'posts_per_page' => $col_per_row,
+												'tax_query' => array(
+													array(
+														'taxonomy' => 'itinerary_types',
+														'field' => 'id',
+														'terms' => $term_ids,
+													),
+												),
+											);
+											$query = new WP_Query( $args );
+											if ( $query->have_posts() ) { ?>
+												<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+													<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-new' ); ?>
+												<?php endwhile; ?>
+											<?php
+											} else {
+												wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
+											}
+											wp_reset_query();
+										} else {
+											wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
+										}
+										?>
 										</div>
 									</div>
 								</div>
@@ -802,8 +664,8 @@ do_action( 'wp_travel_before_content_start');
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+		</div><!-- wti__single-inner -->
+	</div><!-- wti__wrapper -->
+</div><!-- #wti_main-<?php the_ID(); ?> -->
 
 <?php do_action( 'wp_travel_after_single_itinerary', get_the_ID() ); ?>
