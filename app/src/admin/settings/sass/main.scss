@@ -1,0 +1,27 @@
+@import "../../sass/block-tabs";
+.settings-general{
+    .components-panel__body.ws-gateway  {
+        .components-panel__body-title{
+            button:after{
+                font-family: dashicons;
+                content: "\f12a";
+                font-size: 20px;
+                position: absolute;
+                right: 45px;
+            }
+        }
+        &.gateway-enabled{
+            .components-panel__body-title{
+                button:after{
+                    color:green;
+                }
+            }
+        }
+    }
+}
+.license-details__item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fcfcfc;
+    border-bottom: 1px solid #e6e6e6;
+}

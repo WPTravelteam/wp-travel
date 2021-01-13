@@ -259,7 +259,7 @@ wp_travel_print_notices();
 					</tr>
 
 				<?php endif; ?>
-				<?php if ( $tax_rate = wp_travel_is_taxable() ) : ?>
+				<?php if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) : ?>
 					<tr>
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal:', 'wp-travel' ); ?></strong></p>

@@ -312,10 +312,17 @@
 #aside-wrap {
   margin-top: 50px;
 }
+#aside-wrap button.handlediv {
+  display: none;
+}
 
 #wp_travel_review_block_id .dashicons {
   color: #FBBC05;
   font-size: 15px;
+}
+#wp_travel_review_block_id h4 {
+  text-align: center;
+  text-transform: uppercase;
 }
 #wp_travel_review_block_id h5 {
   font-size: 13px;

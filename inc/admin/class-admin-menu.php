@@ -28,6 +28,8 @@ class WP_Travel_Admin_Menu {
 
 		// Remove from menu.
 		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'sysinfo' );
+		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'settings2' );
+		
 		global $submenu;
 		unset( $submenu['edit.php?post_type=itinerary-booking'][10] ); // Removes 'Add New'.
 	}

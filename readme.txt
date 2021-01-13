@@ -1,11 +1,11 @@
 === WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
-Contributors: wptravel, WEN Solutions
+Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.5
-Stable tag: 4.1.0
+Stable tag: 4.4.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,17 +15,17 @@ WP Travel is a free WordPress travel & tour agency plugin & travel engine to cre
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium feature of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
-WP Travel is a free powerful travel engine for making customized travel & tour agency websites on WordPress in minutes! With this SEO-friendly & scalable WordPress travel engine, you can create customized itinerary & travel packages on the fly. Powered with powerful addons, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
+WP Travel is a free powerful travel engine for making customized travel & tour agency websites on WordPress in minutes! With this SEO-friendly & scalable WordPress travel engine, you can create customized itinerary & travel packages on the fly. Powered with powerful modules, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website's needs including taking bookings, receiving payments, itinerary schedules and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engine's](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Addons](https://wptravel.io/downloads/?utm_source=Addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Plugin Modules](https://wptravel.io/downloads/?utm_source=addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
 > **WP Travel Mobile App**
 > Keep track of all the bookings and inquiries without logging into the site. [Download Now](https://wptravel.io/apps/).
 
 
-= WP TRAVEL PAYMENT ADDONS =
+= WP TRAVEL PAYMENT MODULES =
 
 * [WP Travel Paypal Express Checkout](https://wptravel.io/downloads/wp-travel-paypal-express-checkout/?utm_source=addons&utm_medium=paypal&utm_campaign=WP%20Plugin) (International transactions)
 * [WP Travel Stripe Checkout](https://wptravel.io/downloads/wp-travel-stripe-checkout/?utm_source=addons&utm_medium=stripe&utm_campaign=WP%20Plugin) (International transactions)
@@ -39,7 +39,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Payhere Checkout](https://wptravel.io/downloads/wp-travel-payhere-checkout/?utm_source=addons&utm_medium=payhere&utm_campaign=WP%20Plugin) (For online payments in Sri Lanka)
 * [WP Travel PayU Latam](https://wptravel.io/downloads/wp-travel-payu-latam-checkout/?utm_source=addons&utm_medium=payulatam&utm_campaign=WP%20Plugin) (For online payments in Latin American Countries : Columbia, Argentina, Brasil, Chile, Mexico, Panama and Peru)
 
-= WP ITINERARY ADDONS =
+= WP ITINERARY MODULES =
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
 * [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/?utm_source=addons&utm_medium=utilities&utm_campaign=WP%20Plugin)
 * [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/?utm_source=addons&utm_medium=tourextras&utm_campaign=WP%20Plugin)
@@ -55,16 +55,18 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Blocks](https://wptravel.io/downloads/wp-travel-blocks/?utm_source=addons&utm_medium=blocks&utm_campaign=WP%20Plugin)
 
 
-= WP TRAVEL MAP ADDONS =
+= WP TRAVEL MAP MODULES =
 * [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/?utm_source=addons&utm_medium=heremap&utm_campaign=WP%20Plugin)
 * [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/?utm_source=addons&utm_medium=mapquest&utm_campaign=WP%20Plugin)
 
-[View all WP Travel addons](http://wptravel.io/downloads/?utm_source=addons&utm_medium=viewall&utm_campaign=WP%20Plugin)
-
-
+[View all WP Travel modules](http://wptravel.io/downloads/?utm_source=addons&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
+* [Photo Journal](https://catchthemes.com/themes/photo-journal/?utm_source=freethemes&utm_medium=photojournal&utm_campaign=WP%20Plugin) by Catch Themes
+* [Travelore](https://catchthemes.com/themes/travelore/?utm_source=freethemes&utm_medium=travelore&utm_campaign=WP%20Plugin) by Catch Themes
+* [Mega Tour](https://themepalace.com/downloads/mega-tour/?utm_source=freethemes&utm_medium=megatour&utm_campaign=WP%20Plugin) by Theme Palace
+* [Travel Biz](https://keonthemes.com/downloads/travelbiz/?utm_source=freethemes&utm_medium=travelbiz&utm_campaign=WP%20Plugin) by Keon Themes
 * [Travel Store](https://wensolutions.com/theme-demo/travelstore/?utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Joy](https://wptravel.io/demo/?demo=travel-joy&utm_source=freethemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem](https://wptravel.io/demo/?demo=travel-gem&utm_source=freethemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
@@ -73,11 +75,15 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [Tourable](https://wptravel.io/demo/?demo=tourable&utm_source=freethemes&utm_medium=tourable&utm_campaign=WP%20Plugin) by Theme Palace
 * [Pleased](https://wptravel.io/demo/?demo=pleased&utm_source=freethemes&utm_medium=pleased&utm_campaign=WP%20Plugin) by Theme Palace
 * [Travel Ultimate](https://wptravel.io/demo/?demo=travel-ultimate&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
-* [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=ultimate&utm_campaign=WP%20Plugin) by Theme Palace
+* [Tale Travel](https://wptravel.io/demo/?demo=tale-travel&utm_source=freethemes&utm_medium=taletravel&utm_campaign=WP%20Plugin) by Theme Palace
 * [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=freethemes&utm_medium=allthemes&utm_campaign=WP%20Plugin)
 
 = PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
+* [Photo Journal Pro](https://catchthemes.com/themes/photo-journal-pro/?utm_source=paidthemes&utm_medium=photojournal&utm_campaign=WP%20Plugin) by Catch Themes
+* [Travelore Pro](https://catchthemes.com/themes/travelore-pro/?utm_source=paidthemes&utm_medium=travelorepro&utm_campaign=WP%20Plugin) by Catch Themes.
+* [Mega Tour Pro](https://themepalace.com/downloads/mega-tour-pro/?utm_source=paidthemes&utm_medium=megatourpro&utm_campaign=WP%20Plugin) by Theme Palace.
+* [Travel Biz Pro](https://keonthemes.com/downloads/travelbiz-pro/?utm_source=paidthemes&utm_medium=travelbizpro&utm_campaign=WP%20Plugin) by Keon Themes.
 * [Travel Joy Pro](https://wptravel.io/demo/?demo=travel-joy-pro&utm_source=paidthemes&utm_medium=traveljoy&utm_campaign=WP%20Plugin) by WEN Solutions
 * [Travel Gem Pro](https://wptravel.io/demo/?demo=travel-gem-pro&utm_source=paidthemes&utm_medium=travelgem&utm_campaign=WP%20Plugin) by WEN Themes
 * [Travel Ultimate Pro](https://wptravel.io/demo/?demo=travel-ultimate-pro&utm_source=paidthemes&utm_medium=ultimatepro&utm_campaign=WP%20Plugin) by Theme Palace.
@@ -206,7 +212,7 @@ Yes, there are no technological conflicts between the three, you could run them 
 
 = Does the plugin have the payment gateways? =
 
-WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Addons](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
+WP Travel plugin do have a number of payment gateways to make the payment processing handy for the user all around the world. To know about the gateways go to the link [Modules](https://wptravel.io/downloads/category/payment/?utm_source=FAQ&utm_medium=payment&utm_campaign=WP%20Plugin)
 
 = Where can I request new features, WP Travel themes and extensions? =
 
@@ -233,6 +239,182 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.4.4 =
+Release Date: 7th January, 2021
+
+Enhancement:
+* Added option to draft/delete expired trips.
+* Added support for WP Rocket plugin to disable caching on WP Travel checkout page. 
+
+Tweaks:
+* Enable Multiple Travelers moved to Checkout option from Trip option.
+* Removed cart Page option.
+
+Fixes:
+* Fixed, call_user_func_array() expects parameter 1 to be a valid callback, function 'save' not found or invalid function name.
+
+= 4.4.3 =
+Release Date: 31st December, 2020
+
+Tweaks:
+* WP Travel upsell message, terms and link is updated.
+* 'Cart & Checkout' label changed to 'Checkout' in admin settings. 
+
+= 4.4.2 =
+Release Date: 30th December, 2020
+
+Fixes:
+* Fixed trip booking sort by Contact name not working.
+* Trip facts error displaying on trip edit fact section is fixed.
+
+Tweaks:
+* add method of cart class parameters updated. First parameter type casting is changed to array from number consisting all required attributes in the array.
+* Code split & cleanup for the booking process and email after booking is saved.
+
+= 4.4.1 =
+Release Date: 16th December 2020
+
+Fixes:
+* Trip Facts not displaying on frontend, mismatch value is fixed.
+* WP Travel Settings license tab layout issue is fixed.
+
+= 4.4.0 =
+Release Date: 11th December 2020
+
+Fixes:
+* License Activation on a renewal is fixed.
+* Fixed Dashboard page is not selectable from admin settings. When we change the dashboard page option it will change the checkout page option in admin settings.
+* Trip facts not displaying on single itinerary page after migration from older version of WP Travel to v4 is fixed.
+
+Tweaks:
+* Added Enable/Disable all payment gateway option in the settings.
+* License term updated. We have updated our premium license to Freemius from Themepalace.
+
+Deprecated
+* Function `wp_travel_is_enable_sale_price` and `wp_travel_is_enable_sale` is deprecated use `WP_Travel_Helpers_Trips::is_sale_enabled()` instead of these 2 functions.
+* Function `wp_travel_is_trip_price_tax_enabled` is deprecated use `WP_Travel_Helpers_Trips::is_tax_enabled()` instead of.
+* Function `wp_travel_is_taxable` is deprecated use `WP_Travel_Helpers_Trips::get_tax_rate()` instead of. 
+* Function `wp_travel_get_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_actual_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_trip_sale_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
+* Function `wp_travel_get_min_price_key` is deprecated. 
+* Function `wp_travel_get_booking_form` is deprecated. 
+* Function `wp_travel_booking_form_fields` is deprecated. 
+* Function `wp_travel_build_post_tree` is deprecated. 
+* Function `wp_travel_get_post_hierarchy_dropdown` is deprecated.
+* Action Hook `wp_travel_update_trip_inventory_values` is deprecated use `wp_travel_trip_inventory` instead of.
+* Action Hook `wp_travel_booking_princing_options_list` is deprecated use `wp_travel_booking_default_princing_list` instead of.
+* Action Hook `wp_travel_booking_departure_date_list` is deprecated use `wp_travel_booking_fixed_departure_list` instead of.
+
+= 4.3.4 =
+Release Date: 11th November, 2020
+
+Fixes:
+* Payment status and Payment mode on booking page fixes for partial payment.
+* Strings (No Trip Type, No Activities, No size limit) added in `'wp_travel_get_strings'` function.
+* Discount not being applied after adding coupon code is now fixed.
+* Partial payment range control not functioning properly while click and drag control.
+
+Enhancements:
+* Coupon code email tag `'{booking_coupon_code}'` has been added.
+
+= 4.3.3 =
+Release Date: 5th November, 2020
+
+Enhancements:
+* Added Option to create customer account while booking.
+* Added Trip Itinerary sort by trip name in the itinerary listing page.
+
+Fixes:
+* Required for all traveler fields in checkout page option has been fixed. 
+* Settings page editor code view mode layout issue fixed.
+* Undefined index notice for the following: facts, bank_deposites, premium_addons_data are fixed.
+* Fixed issue related to required for all travelers enabled from Field Editor.
+* Updated label to `Trip Code` from `Trip Codes` in single Trip page featured section.
+* Removed settings `Trip Dates Calendar View`
+
+= 4.3.2 =
+Release Date: 3rd November, 2020
+
+Fixes:
+* Added filter `'wp_travel_show_pricing_label_on_name'` to remove pricing name in cart item label.
+* Multiple travellers fields not being added or removed while updating the pax in checkout page has been fixed.
+* Blank contact name on WP Travel Dashboard Widget has been fixed.
+
+Enhancements:
+* Trip Code column added on WP Travel Dashboard Widget.
+* Cart page bypass to checkout page even skip cart page is not enabled in settings. User can disable this bypass by enabling cart page via this `'wp_travel_filter_is_enabled_cart_page'` filter.
+* Trip Time now can be added using `'{booking_selected_time}'` in the email template. In order to work this email tag, [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/) must be activated.
+
+= 4.3.1 =
+Release Date: 22nd October, 2020
+Enhancements:
+* Compatibility added for Cut off time which allows the user to define the time for disabling the booking process of the trip.
+Fixes:
+* Broken settings link updated in notices.
+
+= 4.3.0 =
+Release Date: 15th October, 2020
+
+Enhancements:
+* WP Travel Admin settings updated to WordPress Block Layout. Similarly, all the WP Travel related addons are now made compatible with new WP Travel Settings. For more info please see our v4.3 release note [here](https://wptravel.io/wp-travel-plugin--version-4-3-0-release-note/).
+
+= 4.2.2 =
+Release Date: 28th September, 2020
+
+Fixes:
+* Standard Paypal SSL Certificates updated and IPN Listener changed. Payment status updated to paid if the payment_status response = Pending from IPN response.
+* Filter by 'Trip Date' on WP Travel Archive page issue fixes.
+
+Enhancements:
+* 'Trip Code' column has been added to WP Travel Booking section. Now, if the trip is booked then respective trip code will be shown on 'Trip Code' column. And if there is custom trip code added using [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/) addon then custom code will be shown instead of default.
+
+= 4.2.1 =
+Release Date: 22nd September, 2020
+
+* Compatibility tested upto WP 5.5.1. 
+
+= 4.2.0 =
+Release Date: 15th September, 2020
+
+Fixes:
+* Trip fact layout issue fixed in higher resolution screen. 
+
+Enhancements:
+* Added  attribute type="activity" in the shortcode [wp_travel_itineraries type="activity"] to display trips based on activities.
+* Allow to add the email tags {sitename}, {itinerary_link}, {itinerary_title} etc in email subject like in email body.
+
+= 4.1.4 =
+Release Date: 31st August, 2020
+
+Fixes:
+* Price per group is treated as price per person in case of trip duration with price per group.
+* Undefined index 'title' issued fixed in case of no title in search widget.
+* Trip Extras is not being fully listed in the trip page as per we selected in the admin.
+
+= 4.1.3 =
+Release Date: 25th August, 2020
+
+Fixes:
+* Trip not showing in the archive page listing after updating trip.
+* Style updated for cart icon on checkout page load. Made icon size smaller.
+* Fixed Trip single page shows error after selecting date.
+* Fixed Sale price and offer text not being displayed even trip has sale price enabled.
+* Datepicker circle selected mark removed in recurring months.
+
+= 4.1.2 =
+Release Date: 22nd August, 2020
+
+Fixes:
+* Readme file updated with contributers.
+
+= 4.1.1 =
+Release Date: 13th August, 2020
+
+Fixes:
+* Missing build directory added.
 
 = 4.1.0 =
 Release Date: 12th August, 2020
@@ -371,7 +553,7 @@ Fixed :
 * Trip Filter range not working in search widget.
 
 Enhancement :
-* Filter wp_travel_currency_symbol added in wp_travel_get_currency_symbol function.
+* Filter `'wp_travel_currency_symbol'` added in `'wp_travel_get_currency_symbol'` function.
 
 = 3.2.2 =
 Release Date: 20th April, 2020
@@ -515,7 +697,7 @@ Fixes:
 
 Deprecated :
 
-* Function 'wp_travel_get_pricing_name_by_key' is deprecated use 'wp_travel_get_pricing_category_by_key' instead.
+* Function `'wp_travel_get_pricing_name_by_key'` is deprecated use `'wp_travel_get_pricing_category_by_key'` instead.
 
 = 3.0.6 =
 Release Date: 12th October, 2019
@@ -824,7 +1006,7 @@ Enhancement:
 
 Deprecated:
 
-* Function wp_travel_get_default_frontend_tabs is deprecated. use wp_travel_get_default_trip_tabs instead.
+* Function `'wp_travel_get_default_frontend_tabs'` is deprecated. use `'wp_travel_get_default_trip_tabs'` instead.
 
 Compatibility:
 
@@ -852,8 +1034,8 @@ Fixes:
 Release Date: 13th March 2019
 
 * Enhancement: Helpers function split.
-* Enhancement: Deprecated hooks 'wp_tarvel_before_archive_title' replaced with 'wp_travel_before_archive_content_title'.
-* Enhancement: Deprecated hooks 'wp_tarvel_before_single_title' replaced with 'wp_travel_before_single_title'.
+* Enhancement: Deprecated hooks `'wp_tarvel_before_archive_title'` replaced with `'wp_travel_before_archive_content_title'`.
+* Enhancement: Deprecated hooks `'wp_tarvel_before_single_title'` replaced with `'wp_travel_before_single_title'`.
 * Fixes: Page settings not reflecting into frontend.
 
 = 1.9.0 =

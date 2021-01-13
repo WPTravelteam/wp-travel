@@ -25,36 +25,6 @@ function wp_travel_deprecated_function( $function, $version, $replacement = null
 	}
 }
 
-/** Return All Settings of WP travel and it is depricated since 1.0.5*/
-function wp_traval_get_settings() {
-	wp_travel_deprecated_function( 'wp_traval_get_settings', '1.0.5', 'wp_travel_get_settings' );
-	return wp_travel_get_settings();
-}
-
-
-/**
- * Return Currency symbol by currency code  and it is depricated since 1.0.5
- *
- * @param String $currency_code
- * @return String
- */
-function wp_traval_get_currency_symbol( $currency_code = null ) {
-	wp_travel_deprecated_function( 'wp_traval_get_currency_symbol', '1.0.5', 'wp_travel_get_currency_symbol' );
-	return wp_travel_get_currency_symbol( $currency_code );
-}
-
-function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {
-	wp_travel_deprecated_function( 'wp_travel_get_default_frontend_tabs', '1.9.3', 'wp_travel_get_default_trip_tabs' );
-	return wp_travel_get_default_trip_tabs( $is_show_in_menu_query );
-}
-
-
-function wp_travel_get_pricing_name_by_key( $key = null ) {
-	wp_travel_deprecated_function( 'wp_travel_get_pricing_name_by_key', '3.0.7', 'wp_travel_get_pricing_category_by_key' );
-	return wp_travel_get_default_trip_tabs( $key );
-}
-
-
 /**
  * Runs a deprecated action with notice only if used.
  *
@@ -99,3 +69,9 @@ function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $messa
 	// @codingStandardsIgnoreEnd
 }
 
+// Deprecated Functions
+include sprintf( '%s/inc/deprecated/105.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/193.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/307.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/440.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/442.php', WP_TRAVEL_ABSPATH );

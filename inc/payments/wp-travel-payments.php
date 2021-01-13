@@ -105,15 +105,16 @@ function wp_travel_sorted_payment_gateway_lists() {
 /**
  * Get Minimum payout amount
  *
- * @param Number $post_id Post ID.
+ * @param Number $trip_id Post ID.
  * @return Number
  */
-function wp_travel_minimum_partial_payout( $post_id ) {
-	if ( ! $post_id ) {
+function wp_travel_minimum_partial_payout( $trip_id ) {
+	if ( ! $trip_id ) {
 		return 0;
 	}
-	$trip_price  = wp_travel_get_actual_trip_price( $post_id );
-	$tax_details = wp_travel_process_trip_price_tax( $post_id );
+	$args = array( 'trip_id' => $trip_id );
+	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$tax_details = wp_travel_process_trip_price_tax( $trip_id );
 
 	if ( is_array( $tax_details ) && isset( $tax_details['tax_type'] ) ) {
 
@@ -123,7 +124,7 @@ function wp_travel_minimum_partial_payout( $post_id ) {
 
 		}
 	}
-	$payout_percent = wp_travel_get_actual_payout_percent( $post_id );
+	$payout_percent = wp_travel_get_actual_payout_percent( $trip_id );
 	$minimum_payout = ( $trip_price * $payout_percent ) / 100;
 	return number_format( $minimum_payout, 2, '.', '' );
 	// $minimum_payout = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout', true );
@@ -366,15 +367,15 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	$order_items = ( $order_items && is_array( $order_items ) ) ? count( $order_items ) : 1;
 
-	$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+	$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
 	$price_key = false;
-	if ( ! $allow_multiple_cart_items || ( 1 === $order_items ) ) {
+	if ( ! $allow_multiple_items || ( 1 === $order_items ) ) {
 		$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
 	}
 
 	// Handle Multiple payment Emails.
-	if ( $allow_multiple_cart_items && 1 !== $order_items ) {
+	if ( $allow_multiple_items && 1 !== $order_items ) {
 		do_action( 'wp_travel_multiple_payment_emails', $booking_id );
 		exit;
 	}
@@ -499,7 +500,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		// Admin message.
 		$admin_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $admin_message_data );
 		// Admin Subject.
-		$admin_payment_subject = $admin_payment_template['subject'];
+		$admin_payment_subject = str_replace( array_keys( $email_tags ), $email_tags, $admin_payment_template['subject'] );
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
@@ -525,7 +526,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 	// Client Payment message.
 	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	// Client Payment Subject.
-	$client_payment_subject = $client_payment_template['subject'];
+	$client_payment_subject = str_replace( array_keys( $email_tags ), $email_tags, $client_payment_template['subject'] );
 
 	// To send HTML mail, the Content-type header must be set.
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
@@ -558,10 +559,23 @@ function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, 
 		// need to get last payment id here. remaining.
 	}
 
-		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
-		update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
-		update_post_meta( $payment_id, $key, $args );
+	update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
+	update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
+	update_post_meta( $payment_id, $key, $args );
+
+	$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
+	$details      = wp_travel_booking_data( $booking_id );
+	$due_amount   = ! empty( $details['due_amount'] ) ? $details['due_amount'] : '';
+	if ( 'partial' === $payment_mode ) {
+		if ( '0.00' !== $due_amount ) { // if due amount is not 0 and mode is partial. ( In case of partial).
+			update_post_meta( $payment_id, 'wp_travel_payment_status', 'partially_paid' );
+		} else { // If due amount is 0 and mode is partial. ( This is also for first booking only and then pay later from dashboard as it takes this payment as partial payment mode. And to quick fix, this has been added since 4.3.4 ).
+			update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+			update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
+		}
+	} else {
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
+	}
 }
 
 /**

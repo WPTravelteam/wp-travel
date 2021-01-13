@@ -29,20 +29,15 @@ const WPTravelTripOptionsFactContent = () => {
             value: wp_travel_trip_facts_settings[index].name
           }
     } ) : []
-    // console.log( trip_facts )
-
     const updateFactType = ( key, data, _factIndex ) => {
       
         const { trip_facts } = allData;
-        
-    
         let _allTripFacts = trip_facts;
         _allTripFacts[_factIndex][key] = data[key]
-        // console.log(data)
         if ( 'type' === key ) { // reset label and value on fact type change
             _allTripFacts[_factIndex].label = data.name
             _allTripFacts[_factIndex].value = ''
-            _allTripFacts[_factIndex].fact_id = data.id
+            _allTripFacts[_factIndex].fact_id = data.id ? data.id : data.key
         }
         updateTripData({
             ...allData,
@@ -55,25 +50,22 @@ const WPTravelTripOptionsFactContent = () => {
     
         let _allTripFacts = trip_facts;
         _allTripFacts[_factId][key] = value
-    //    console.log(_allTripFacts)
         updateTripData({
             ...allData,
             trip_facts:[..._allTripFacts]
         })
     }
     const fieldTypeOption = ( factId ) => {
-        // console.log( 'have not fact id' );
-        if ( !factId  ){
+        if ( 'number' != typeof factId ){
             return []
         }
-        // console.log(factId)
-        // console.log(wp_travel_trip_facts_settings)
-        let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 ? wp_travel_trip_facts_settings[factId].options : [];
+
+        let selectedFactSettings = Object.keys(wp_travel_trip_facts_settings).length > 0 && 'undefined' != typeof wp_travel_trip_facts_settings[factId] ? wp_travel_trip_facts_settings[factId].options : [];
         return Object.keys(selectedFactSettings).map( (index) => {
             return {
                 label: selectedFactSettings[index],
-                value: index
-              }
+                value: 'option'+ (++index) //Added for making compatible with selection option value.
+            }
         } )
     }
 
@@ -114,8 +106,9 @@ const WPTravelTripOptionsFactContent = () => {
                                 handle=".components-panel__icon"
                                 >
                                 {trip_facts.map((trip_fact, factIndex) => {
-                                    let singleOrMultipleOptions = fieldTypeOption(trip_fact.fact_id);
-                                    
+                                    let trip_fact_id = '' != trip_fact.fact_id ? parseInt(trip_fact.fact_id) : trip_fact.fact_id; // To check if fact_id is not empty, if empty then it means newly added. So send it as string in order to prevent conflict in fiedltypeoption number typeof check. @since 4.4.1
+                                    let singleOrMultipleOptions = fieldTypeOption(trip_fact_id);
+
                                     let singleSelected = singleOrMultipleOptions.filter( ( item ) => {
                                         return item.value == trip_fact.value
                                     } )
@@ -217,7 +210,6 @@ const WPTravelTripOptionsFactContent = () => {
                                                 factData = trip_facts.filter((fact, newFactId) => {
                                                     return newFactId != factIndex;
                                                 });
-                                                // console.log(factData);
                                                 updateFacts(factData);
                                             }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button>
                                         </PanelRow>

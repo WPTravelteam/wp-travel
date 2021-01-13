@@ -10,7 +10,6 @@
                 $('#wp-travel-settings-current-tab').val($(ui.panel).attr('id'));
             },
             load: function(event, ui) {
-                // console.log( ui );
             }
         });
 

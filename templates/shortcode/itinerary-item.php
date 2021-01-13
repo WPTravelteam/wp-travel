@@ -25,9 +25,8 @@ if ( post_password_required() ) {
 	return;
 }
 $post_id 		= get_the_ID();
-$enable_sale 	= wp_travel_is_enable_sale_price( $post_id );
-$trip_price 	= wp_travel_get_trip_price( $post_id );
-$sale_price 	= wp_travel_get_trip_sale_price( $post_id ); ?>
+$enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $post_id ) );
+?>
 <li>
 <div class="wp-travel-post-item-wrapper">
     <div class="wp-travel-post-wrap-bg">

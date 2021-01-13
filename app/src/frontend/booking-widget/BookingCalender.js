@@ -1,5 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect } from '@wordpress/data';
+import { applyFilters } from '@wordpress/hooks';
 import { forwardRef, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import moment from 'moment';
@@ -273,7 +274,7 @@ const BookingCalender = () => {
 		let currentDate = date.getDate();
 		let currentMonth = date.getMonth();
 
-		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 12, 0, 0))).utc();
+		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
 
 		if (excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
@@ -295,9 +296,15 @@ const BookingCalender = () => {
 					return false
 
 				let dateRules = generateRRule(data, startDate)
+				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+					return
+				}
 				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 			}
 			if (data.start_date) {
+				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+					return
+				}
 				return moment(date).isSame(moment(data.start_date))
 				// if (moment(date).isSameOrAfter(moment(data.start_date))) {
 				// 	if (data.end_date) {
@@ -438,7 +445,7 @@ const BookingCalender = () => {
 				return 0
 			}
 			let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
-			return parseInt(price) * count
+			return parseFloat(price) * count
 		}).reduce((acc, curr) => acc + curr) || 0
 		return total + txTotal
 	}
@@ -477,7 +484,11 @@ const BookingCalender = () => {
 			})
 				.then(res => {
 					if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-						window.location = wp_travel.cartUrl
+						if ( wp_travel.isEnabledCartPage ) {
+							location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+						} else {
+						location.href = wp_travel.checkoutUrl; // [only checkout page url]
+						}
 					}
 				}), 1000)
 			.catch(error => {
@@ -494,7 +505,6 @@ const BookingCalender = () => {
 		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
 			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
-			// console.log(groupPrices)
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
 				price = 'group' === category.price_per ? count > 0 && parseFloat(group_price.price) || 0 : parseFloat(group_price.price) * count
@@ -508,14 +518,16 @@ const BookingCalender = () => {
 	}
 
 	const getPricingTripTimes = (pricingId, selectedTripdates) => {
-		let times = selectedTripdates.map(td => {
+		let trip_time = selectedTripdates.map(td => {
 			let date = datesById[td]
 			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
-				return date.trip_time && date.trip_time.split(',') || []
+				let times = date.trip_time && date.trip_time.split(',') || []
+				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since WP Travel 4.3.1
+				return times;
 			}
 			return []
 		})
-		return _.chain(times).flatten().uniq().value()
+		return _.chain(trip_time).flatten().uniq().value()
 
 	}
 

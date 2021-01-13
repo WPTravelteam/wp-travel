@@ -16,6 +16,7 @@ class WP_Travel_Post_Types {
 		// self::register_enquiries();
 		self::register_payment();
 		// self::register_tour_extras();
+		WP_Travel_Post_Status::init();
 	}
 	/**
 	 * Register Post Type Trip.
@@ -271,3 +272,20 @@ class WP_Travel_Post_Types {
 		register_post_type( 'tour-extras', $args );
 	}
 }
+
+
+// function add_to_post_status_dropdown()
+// {
+// global $post;
+// if($post->post_type != 'itineraries')
+// return false;
+// $status = ($post->post_status == 'expired') ? "jQuery( '#post-status-display' ).text( 'Expired' ); jQuery( 
+// 'select[name=\"post_status\"]' ).val('expired');" : '';
+// echo "<script>
+// jQuery(document).ready( function() {
+// jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"expired\">Expired</option>' );
+// ".$status."
+// });
+// </script>";
+// }
+// add_action( 'post_submitbox_misc_actions', 'add_to_post_status_dropdown');

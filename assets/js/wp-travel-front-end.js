@@ -453,4 +453,197 @@ jQuery(function ($) {
     }
     $('#wp-travel-enquiries').submit(handleEnquirySubmission);
 
+    //New Layout JS
+
+    //customize select option
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("wti__filter-input");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    ll = selElmnt.length;
+    /*for each element, create a new DIV that will act as the selected item:*/
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /*for each element, create a new DIV that will contain the option list:*/
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < ll; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+            if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+            }
+            }
+            h.click();
+        });
+        b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function(e) {
+        /*when the select box is clicked, close any other select boxes,
+        and open/close the current select box:*/
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+    /*a function that will close all select boxes in the document,
+    except the current select box:*/
+    var x, y, i, xl, yl, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+        if (elmnt == y[i]) {
+        arrNo.push(i)
+        } else {
+        y[i].classList.remove("select-arrow-active");
+        }
+    }
+    for (i = 0; i < xl; i++) {
+        if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+        }
+    }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+
+
+
+    $(function(){
+
+    //grid list view filter
+    $('.wti__grid-list-filter .wti__button').on('click', function(){
+        $(this).addClass('active').siblings('.wti__button').removeClass('active');
+        var view_layout = $(this).data('view');
+        $('.wti__list-wrapper').removeClass('grid-view list-view');
+        $('.wti__list-wrapper').addClass(view_layout);
+    })
+
+    // scrollspy button
+    $(".scroll-spy-button").each(function() {
+        $(this).on('click', function(){
+            var t = $(this).data("scroll");
+            $('.scroll-spy-button').removeClass('active');
+            $("html, body").animate({
+                scrollTop: $(t).offset().top - 70
+            }, {
+                duration: 500,
+            });
+
+            $(this).addClass('active');
+
+            return false;
+        })
+    });
+
+    //booking selector toggle
+    $('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
+    $('.wti__selector-heading').on('click', function(){
+        $(this).parents('.wti__selector-item').toggleClass('active'); //.siblings().removeClass('active');
+        // $(this).parents('.wti__selector-item').siblings().find('.wti__selector-content-wrapper').slideUp();
+        $(this).siblings('.wti__selector-content-wrapper').stop().slideToggle();
+    })
+
+    //decrease increase value of input
+    $(".decrease_val").click(function() {
+        var input_el=$(this).siblings('input[type=number]');
+        var v = input_el.val()-1;
+        if(v>=input_el.attr('min'))
+        input_el.val(v)
+    });
+    
+    
+    $(".increase_val").click(function() {
+        var input_el=$(this).siblings('input[type=number]');
+        var v= input_el.val()*1+1;
+        if(v<=input_el.attr('max'))
+        input_el.val(v)
+    });
+
+    })
+
+    $(window).on('scroll', function(){
+    var sTop = $(window).scrollTop();
+    var link = $('.scroll-spy-button');
+    $('.wti__tab-content-wrapper').each(function() {
+        var id = $(this).attr('id'),
+            offset = $(this).offset().top-100,
+            height = $(this).height();
+        if(sTop >= offset && sTop < offset + height) {
+        link.removeClass('active');
+        $('#scrollspy-buttons').find('[data-scroll="#' + id + '"]').addClass('active');
+        }
+    });
+    })
+    /**
+     * =========================
+     * init magnific popup
+     * =========================
+     */
+
+    $(document).ready(function($) {
+        $('.wti__advance-gallery-item-list').magnificPopup({
+        delegate: '.gallery-item  ',
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+        })
+    }); 
+
+    /**
+    /**
+    * =========================
+    * init magnific popup end
+    * =========================
+    */
+
+    /**
+     * =========================
+     * faq
+     * =========================
+     */
+
+    $(document).ready(function(){
+        $('.accordion-panel-heading').click(function(){
+          $(this).next().slideToggle(500);
+          $(this).toggleClass('active');
+          $(this).parent().toggleClass('accordion-active');
+        })
+      })
+    /**
+     * =========================
+     * faq end
+     * =========================
+     */
+
+
 });

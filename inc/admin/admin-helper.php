@@ -177,7 +177,7 @@ function wp_travel_marketplace_page() {
 
 										<p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
 										<a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
-										<a class="btn-default buy-btn" href="https://themepalace.com/download-checkout/?edd_action=add_to_cart&amp;download_id=95078" target="_blank">Buy Now</a>
+										<a class="btn-default buy-btn" href="https://wptravel.io/wp-travel-pro/" target="_blank">Buy Now</a>
 									</div>
 								</div>
 							<?php
@@ -222,16 +222,35 @@ function wp_travel_marketplace_page() {
 
 
 				<div id="aside-wrap" class="single-module-side">
+					<?php
+					wp_travel_meta_box_support();
+					wp_travel_meta_box_documentation();
+					wp_travel_meta_box_review();
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}
 
-		<div id="wp_travel_support_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator-acc" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
+/**
+ *
+ * Will Display HTML content of support box
+ *
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_support() {
+	?>
+	<div id="wp_travel_support_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator-acc" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
 
 			<div class="thumbnail">
 				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
@@ -239,69 +258,98 @@ function wp_travel_marketplace_page() {
 					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
 			</div>
 
-			</div>
 		</div>
+	</div>
+	<?php
+}
 
-		<div id="wp_travel_doc_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
+/**
+ *
+ * Will Display HTML content of documentation box
+ *
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_documentation() {
 
-				<div class="thumbnail">
-					<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
-						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
-				</div>
+	?>
+	<div id="wp_travel_doc_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
 
+			<div class="thumbnail">
+				<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
+					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
+					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
 			</div>
-		</div>
 
-		<div id="wp_travel_review_block_id" class="postbox ">
-			<button type="button" class="handlediv" aria-expanded="true">
-				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
-				<span class="toggle-indicator" aria-hidden="true"></span>
-			</button>
-			<h2 class="hndle ui-sortable-handle">
-				<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
-			</h2>
-			<div class="inside">
-				<div class="thumbnail">
-					<p class="text-center">
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-					</p>
-					<h5>
+		</div>
+	</div>
+	<?php
+
+}
+
+/**
+ *
+ * Will Display HTML content of review box
+ *
+ * @since WP Travel 4.4.2
+ */
+function wp_travel_meta_box_review() {
+
+	$wp_travel_reviews = array(
+		array(
+			'title'       => __( 'WP TRAVEL PLUGIN IS PERFECT', 'wp-travel' ),
+			'description' => __( '"Works perfectly for Travel tours booking. Definitely recommended for using Wp Travel Plugin. Easy for client to book through your website which Runs with Wp Travel.	Tirupati is so helpful and patient to solve the problem one by one.	10 out of 10 service."', 'wp-travel' ),
+			'profile'     => 'eliandyao',
+		),
+		array(
+			'title'       => __( 'Amazing Customer Service', 'wp-travel' ),
+			'description' => __( '"For a free plugin, there is more than enough to build out a travel website. I reached out to ask about a sort by data filter and at the time there wasn’t anything available. Not only 2 days later they updated the plugin and even contacted me via Facebook to tell me they had done so. Amazing Service."', 'wp-travel' ),
+			'profile'     => 'dannrcm',
+		),
+	);
+	?>
+	<div id="wp_travel_review_block_id" class="postbox ">
+		<button type="button" class="handlediv" aria-expanded="true">
+			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
+			<span class="toggle-indicator" aria-hidden="true"></span>
+		</button>
+		<h2 class="hndle ui-sortable-handle">
+			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
+		</h2>
+		<div class="inside">
+			<?php
+			foreach ( $wp_travel_reviews as $wp_travel_review ) {
+				?>
+					<div class="thumbnail">
+						<p class="text-center">
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+						</p>
+						<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
+						<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
+						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
+					</div>
 					<?php
-					esc_html_e(
-						'"The plugin is very intuitive and fresh.
-The layout fits well into theme with flexibility to different shortcodes.
-Its great plugin for travel or tour agent websites."',
-						'wp-travel'
-					)
-					?>
-						</h5>
-					<span class="by"><strong> <a href="https://profiles.wordpress.org/muzdat" target="_blank"><?php esc_html_e( 'muzdat', 'wp-travel' ); ?></a></strong></span>
-
-				</div>
-				<div class="thumbnail last">
-					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
-				</div>
+			}
+			?>
+			<div class="thumbnail last">
+				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
+				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
 	<?php
+
 }
 
 // Upsell Message Callback for Download submenu. WP Travel > Downloads.
@@ -315,8 +363,8 @@ function wp_travel_get_download_upsell() {
 			'content'     => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
 			'link'        => 'https://wptravel.io/wp-travel-pro/',
 			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
-			'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
+			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
+			// 'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;
@@ -333,8 +381,8 @@ function wp_travel_custom_filters_upsell() {
 			'content'     => __( 'By upgrading to Pro, you can add your custom search filter fields to search trips !', 'wp-travel' ),
 			'link'        => 'https://wptravel.io/wp-travel-pro/',
 			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'       => 'https://wptravel.io/downloads/wp-travel-custom-filters/',
-			'link2_label' => __( 'Get WP Travel Custom Filters Addon', 'wp-travel' ),
+			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-custom-filters/',
+			// 'link2_label' => __( 'Get WP Travel Custom Filters Addon', 'wp-travel' ),
 		);
 		wp_travel_upsell_message( $args );
 	endif;
@@ -619,15 +667,16 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
  * @param  int    $id          Post ID.
  */
 function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
+	$payment_info = wp_travel_booking_data( $id );
 	switch ( $column_name ) {
 		case 'payment_status':
-			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
+			$payment_id = $payment_info['payment_id'];
+
 			if ( is_array( $payment_id ) ) {
 				if ( count( $payment_id ) > 0 ) {
 					$payment_id = $payment_id[0];
 				}
 			}
-			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 
 			$label_key = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 			if ( ! $label_key ) {
@@ -638,22 +687,7 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
 		case 'payment_mode':
-			$mode       = wp_travel_get_payment_mode();
-			$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
-			$label_key  = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
-			
-			$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
-			if ( ! $label_key ) {
-				$label_key          = 'N/A';
-				if ( 'booking_with_payment' == $booking_option ) {
-					$is_partial_enabled = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
-					if ( ! $is_partial_enabled ) {
-						$label_key = 'full';
-					}
-				}
-				update_post_meta( $payment_id, 'wp_travel_payment_mode', $label_key );
-			}
-			echo '<span >' . esc_attr( $mode[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			echo '<span >' . esc_attr( $payment_info['payment_mode'] ) . '</span>';
 			break;
 		default:
 			break;
@@ -771,7 +805,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 /**
  * Tour Extras Multiselect Options.
  */
-function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key, $table_row = false ) {
+function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key = '', $table_row = false ) {
 
 	$tour_extras = wp_count_posts( 'tour-extras' );
 	// Check Tour Extras Count.
@@ -985,12 +1019,12 @@ function wp_travel_extras_pro_option_fields() {
 			<?php
 			if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) :
 				$args = array(
-					'title'       => __( 'Want to use above pro features?', 'wp-travel' ),
-					'content'     => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
-					'link'        => 'https://wptravel.io/wp-travel-pro/',
-					'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
-					'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
-					'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
+					'title'      => __( 'Want to use above pro features?', 'wp-travel' ),
+					'content'    => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
+					'link'       => 'https://wptravel.io/wp-travel-pro/',
+					'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+					// 'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
+					// 'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
 				);
 				wp_travel_upsell_message( $args );
 				endif;
@@ -1016,7 +1050,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	if ( ! empty( $pages ) ) {
 		foreach ( $pages as $page ) {
 			if ( 'settings' === $page ) {
-				$settings_allowed_screens[] = 'itinerary-booking_page_settings';
+				$settings_allowed_screens = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 				if ( in_array( $screen->id, $settings_allowed_screens, true ) ) {
 					return true;
 				}
@@ -1045,16 +1079,16 @@ function wp_travel_get_pricing_option_list() {
 }
 
 function wp_travel_upsell_message( $args ) {
-	$defaults   = array(
+	$defaults = array(
 		'type'               => array( 'wp-travel-pro' ),
 		'title'              => __( 'Get WP Travel PRO', 'wp-travel' ),
 		'content'            => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
 		'link'               => 'https://wptravel.io/wp-travel-pro/',
 		'link_label'         => __( 'Get WP Travel Pro', 'wp-travel' ),
-		'link2'              => 'https://wptravel.io/downloads/',
-		'link2_label'        => __( 'Check all Add-ons', 'wp-travel' ),
-		'link3'              => '',
-		'link3_label'        => __( 'View WP Travel Addons', 'wp-travel' ),
+		// 'link2'              => 'https://wptravel.io/downloads/',
+		// 'link2_label'        => __( 'Check all Add-ons', 'wp-travel' ),
+		// 'link3'              => '',
+		// 'link3_label'        => __( 'View WP Travel Addons', 'wp-travel' ),
 		'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
 	);
 	$args       = wp_parse_args( $args, $defaults );
@@ -1115,7 +1149,7 @@ function wp_travel_is_plugin_active( $plugin_name ) {
 	$plugin_name  = str_replace( ' ', '_', $plugin_lower );
 
 	$settings          = wp_travel_get_settings();
-	$is_plugin_enabled = isset( $settings['show_' . $plugin_name ] ) && ! empty( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
+	$is_plugin_enabled = isset( $settings[ 'show_' . $plugin_name ] ) && ! empty( $settings[ 'show_' . $plugin_name ] ) ? $settings[ 'show_' . $plugin_name ] : 'yes';
 	$does_class_exists = class_exists( $plugin_class ) || class_exists( $plugin_class . '_Core' ) ? true : false;
 	if ( ! $does_class_exists || 'yes' !== $is_plugin_enabled ) {
 		return false;

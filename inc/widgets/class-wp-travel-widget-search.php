@@ -36,7 +36,8 @@ class WP_Travel_Widget_Search extends WP_Widget {
 
 		extract( $args );
 		// These are the widget options.
-		$title = apply_filters( 'wp_travel_search_widget_title', $instance['title'] );
+		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title = apply_filters( 'wp_travel_search_widget_title', $title );
 
 		echo $before_widget;
 		echo ( $title ) ? $before_title . $title . $after_title : '';

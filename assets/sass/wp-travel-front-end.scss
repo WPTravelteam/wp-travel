@@ -2531,7 +2531,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 
 	.wp-toolbar-filter-field {
 		float: left;
-		padding: 10px;
+		padding: 16px 10px;
 
 		p {
 			display: inline-block;
@@ -2540,7 +2540,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 		}
 
 		@include mob {
-			// margin-right: 0;
+			padding: 10px;
 		}
 
 		@include sm {
@@ -2560,7 +2560,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 		@include mob {
 			padding: 0;
 			margin: 10px;
-			margin-top: 50px;
+			// margin-top: 16px;
 		}
 
 		@include sm {
@@ -6311,7 +6311,7 @@ li {
 @media screen and (min-width: 1200px){
 	.wp-toolbar-filter-field{
 		.wp_travel_input_filters{
-	    	width: 140px;
+			width: 158px;
 		}
 	} 
 }
@@ -6319,7 +6319,7 @@ li {
 @media screen and (max-width: 1199px) and (min-width: 992px){
 	.wp-toolbar-filter-field{
 		.wp_travel_input_filters{
-   			width: 100px;
+			width: 118px;
 	    }
 	}
 }
@@ -6327,7 +6327,7 @@ li {
 @media screen and (max-width: 991px) and (min-width: 768px){
 	.wp-toolbar-filter-field{
        .wp_travel_input_filters{
-	    	width: 70px;
+			width: 108px;
 	    }
 	}
 }
@@ -6922,4 +6922,8 @@ $primaryColor: #3399ff;
 			}
 		}
 	}
+}
+
+.leaflet-pane, .leaflet-bottom, .leaflet-top{
+	z-index: 1 !important;
 }

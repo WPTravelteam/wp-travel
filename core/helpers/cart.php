@@ -23,7 +23,7 @@ class WP_Travel_Helpers_Cart {
 			$is_coupon_applied = true;
 		}
 		$tax_amount = 0;
-		$tax_rate   = wp_travel_is_taxable();
+		$tax_rate   = WP_Travel_Helpers_Trips::get_tax_rate();
 		if ( $tax_rate ) {
 			$tax_amount = ( $cart_total * (float) $tax_rate ) / 100;
 			$cart_total = $cart_total - $tax_amount;
@@ -39,7 +39,7 @@ class WP_Travel_Helpers_Cart {
 				'cart_total_regular' => (float) number_format( $cart_total_regular, 2, '.', '' ),
 				'coupon_applied'     => $is_coupon_applied, // Coupon Implementation.
 				'coupon'             => count( $cart_items['discount'] ) > 0 ? $cart_items['discount'] : array(),
-				'tax'                => wp_travel_is_taxable(),
+				'tax'                => $tax_rate,
 				'version'            => '1',
 				// 'currency' =>
 			),
@@ -141,15 +141,18 @@ class WP_Travel_Helpers_Cart {
 		);
 	}
 
+	/**
+	 *  ************** Unused Method / Do Not use this function **************
+	 */
 	public static function add_to_cart1( $postData = array() ) {
 		if ( empty( $postData['trip_id'] ) ) {
 			return new WP_Error( 'WP_TRAVEL_NO_TRIP_ID', __( 'Invalid trip id.', 'wp-travel' ) );
 		}
 
 		global $wp_travel_cart;
-		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
-		if ( ! $allow_multiple_cart_items ) {
+		if ( ! $allow_multiple_items ) {
 			$wp_travel_cart->clear();
 		}
 
@@ -173,7 +176,13 @@ class WP_Travel_Helpers_Cart {
 			$trip               = array();
 			$trip_price_partial = 0;
 			foreach ( $pax as $category_id => $pax_value ) {
-				$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id, $price_key ); // price key for legacy pricing structure @since 3.0.0.
+				$args = array(
+					'trip_id' => $trip_id,
+					'pricing_id' => $pricing_id,
+					'category_id' => $category_id,
+					'price_key' => $price_key,
+				);
+				$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
@@ -328,5 +337,21 @@ class WP_Travel_Helpers_Cart {
 		} else {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
 		}
+	}
+
+	/**
+	 * Return true if cart page is enabled. Fucntion is used to bypass cart page if disabled while doing add to cart.
+	 * 
+	 * @since 4.3.2
+	 */
+	public static function is_enabled_cart_page() {
+		$enabled = false;
+		$settings = wp_travel_get_settings();
+
+		$skip_cart_page_booking = isset( $settings['skip_cart_page_booking'] ) && ! empty( $settings['skip_cart_page_booking'] ) ? $settings['skip_cart_page_booking'] : 'no';
+		if ( 'yes' !== $skip_cart_page_booking ) {
+			$enabled = true;
+		}
+		return apply_filters( 'wp_travel_filter_is_enabled_cart_page', $enabled, $settings );
 	}
 }

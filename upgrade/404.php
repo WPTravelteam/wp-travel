@@ -18,7 +18,10 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
 		if ( is_array( $post_ids ) ) {
 			foreach ( $post_ids as $trip ) {
 				$trip_id    = $trip->ID;
-				$trip_price = wp_travel_get_price( $trip_id ); // getting min price of trip.
+				$args = array(
+					'trip_id' => $trip_id,
+				);
+				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 				update_post_meta( $trip_id, 'wp_travel_trip_price', $trip_price );
 			}
 			update_option( 'wp_travel_price_migrate_404', 'yes' );

@@ -5,15 +5,22 @@ class WP_Travel_Localize_Admin {
 	}
 
 	public static function localize_data() {
-		$screen         = get_current_screen();
-		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
+		$screen                = get_current_screen();
+		$allowed_screen        = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
+		
+
+		$translation_array = array(
+			'_nonce'    => wp_create_nonce( 'wp_travel_nonce' ),
+			'admin_url' => admin_url(),
+		);
+		// trip edit page.
 		if ( in_array( $screen->id, $allowed_screen ) ) {
-			$translation_array = array(
-				'postID' => get_the_ID(),
-				'_nonce' => wp_create_nonce( 'wp_travel_nonce' ),
-				'admin_url' => admin_url(),
-			);
+			$translation_array['postID'] = get_the_ID();
 			wp_localize_script( 'wp-travel-admin-trip-options', '_wp_travel', $translation_array );
+		} 
+		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
+		if ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) { // settings page
+			wp_localize_script( 'wp-travel-admin-settings', '_wp_travel', $translation_array );
 		}
 	}
 }

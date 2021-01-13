@@ -70,6 +70,24 @@ class WP_Travel_Admin_Settings {
 	}
 
 	/**
+	 * Call back function for Settings menu page.
+	 */
+	public static function setting_page_callback_new() {
+		?>
+			<div id="wp-travel-settings-block-wrapper">
+				<div id="wp-travel-settings-block"></div>
+				<div id="aside-wrap" class="single-module-side">
+					<?php
+					wp_travel_meta_box_support();
+					wp_travel_meta_box_documentation();
+					wp_travel_meta_box_review();
+					?>
+				</div>
+			</div>
+		<?php
+	}
+
+	/**
 	 * Add Tabs to settings page.
 	 *
 	 * @param array $tabs Tabs array list.
@@ -128,7 +146,7 @@ class WP_Travel_Admin_Settings {
 			'callback'      => 'wp_travel_settings_callback_facts',
 			'icon'          => 'fa-industry',
 		);
-		if ( ! is_multisite() ) :
+		// if ( ! is_multisite() ) :
 			$settings_fields['license'] = array(
 				'tab_label'     => __( 'License', 'wp-travel' ),
 				'content_title' => __( 'License Details', 'wp-travel' ),
@@ -136,7 +154,7 @@ class WP_Travel_Admin_Settings {
 				'callback'      => 'wp_travel_settings_callback_license',
 				'icon'          => 'fa-id-badge',
 			);
-		endif;
+		// endif;
 		$settings_fields['field_editor']                  = array(
 			'tab_label'     => __( 'Field Editor', 'wp-travel' ),
 			'content_title' => __( 'Field Editor', 'wp-travel' ),

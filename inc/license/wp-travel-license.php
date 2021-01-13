@@ -403,6 +403,19 @@ class WP_Travel_License {
 			if ( false !== $check_license && 'valid' === $check_license ) {
 				continue;
 			}
+			
+			// Freemius
+			$plugin_prefix = str_replace( '-', '_', $key );
+			$plugin_prefix .= '_fs';
+
+			if( function_exists( $plugin_prefix ) ) :
+				$isValid = $plugin_prefix()->is_paying();
+				if ( $isValid ) {
+					continue;
+				}
+			endif;
+
+
 			$screen = get_current_screen();
 			$class   = '';
 			$link    = admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-license' );
@@ -430,6 +443,16 @@ class WP_Travel_License {
 			if ( false !== $check_license && 'valid' === $check_license ) {
 				continue;
 			}
+			// Freemius
+			$plugin_prefix = str_replace( '-', '_', $key );
+			$plugin_prefix .= '_fs';
+
+			if( function_exists( $plugin_prefix ) ) :
+				$isValid = $plugin_prefix()->is_paying();
+				if ( $isValid ) {
+					continue;
+				}
+			endif;
 			$display = true;
 			break;
 		}

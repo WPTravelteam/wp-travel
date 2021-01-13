@@ -33,23 +33,23 @@ if [ $1 ]; then
   echo "*********************************"
   
   echo "Checkout to master"
-  git checkout master
+  #git checkout master
   echo "*********************************"
   
   echo "Pull master"
-  git pull origin master
+  #git pull origin master
   echo "*********************************"
   
   echo "Merge with dev"
-  git merge dev
+  #git merge dev
   echo "*********************************"
   
   echo "Push master"
-  git push origin master
+  #git push origin master
   echo "*********************************"
   
   echo "Checkout dev"
-  git checkout dev
+  #git checkout dev
   echo "*********************************"
 
 fi

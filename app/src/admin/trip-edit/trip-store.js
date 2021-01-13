@@ -244,7 +244,6 @@ registerStore('WPTravel/TripEdit', {
                     has_state_changes:true
                 };
             case 'ADD_NEW_FACT':
-                // console.log(action.factData)
                 let addFact = [...state.trip_facts,action.factData];
                 
                 return {

@@ -266,7 +266,7 @@ class WP_Travel_Lib_Cart {
 	 */
 	private function read() {
 		$cart            = WP_Travel()->session->get( $this->cart_id );
-		$cart_items      = $cart['cart_items'];
+		$cart_items      = ! empty( $cart['cart_items'] ) ? $cart['cart_items'] : array(); // Checking if not empty to remove php notice on log. @since 4.3.0.
 		$this->discounts = isset( $cart['discounts'] ) ? $cart['discounts'] : array();
 
 		if ( ! empty( $cart_items ) ) {
@@ -320,12 +320,14 @@ class WP_Travel_Lib_Cart {
 						continue;
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
+					
+					$args = array(
+						'trip_id' => $trip_id,
+						'pricing_id' => $pricing_id,
+						'category_id' => $category_id,
+					);
+					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0
-						$category_price = wp_travel_get_actual_trip_price( $trip_id );
-					} else {
-						$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
-					}
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
 
@@ -577,7 +579,7 @@ class WP_Travel_Lib_Cart {
 		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial;
 
 		// Adding tax to sub total;
-		if ( $tax_rate = wp_travel_is_taxable() ) :
+		if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) :
 			$tax_amount         = ( $total_trip_price_after_dis * $tax_rate ) / 100;
 			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		endif;

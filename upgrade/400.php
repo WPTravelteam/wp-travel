@@ -529,4 +529,4 @@ if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
 
 	}
 }
-wp_travel_update_to_400( $network_enabled );
+wp_travel_update_to_400( @$network_enabled );

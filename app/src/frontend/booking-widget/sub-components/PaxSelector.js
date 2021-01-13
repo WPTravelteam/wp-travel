@@ -48,7 +48,6 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
 			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
-			// console.log(groupPrices)
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
 				if (single)

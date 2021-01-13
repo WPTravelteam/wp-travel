@@ -48,7 +48,6 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
         })
         
         // if(false !== price.id){
-        //     console.log(price);
         //     apiFetch( { url: `${ajaxurl}?action=wp_travel_remove_pricing_category&pricing_id=${price.id}&category_id=${categoryID}` } ).then( res => {
         //         if( res.success && "WP_TRAVEL_REMOVED_TRIP_PRICING_CATEGORY" === res.data.code){
         //             updateTripPricing(priceData, priceIndex);
@@ -59,7 +58,6 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
         // }
         
     }
-    // console.log(price);
     
     return <ErrorBoundary>{ 'undefined' !== typeof price && 'undefined' !== typeof price.categories && price.categories.length > 0 ?<>{ price.categories.map((category, catIndex) => {
         let currentCategory = _.find(pricing_categories, function(o) { 

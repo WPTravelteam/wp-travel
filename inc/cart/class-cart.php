@@ -156,13 +156,27 @@ class WP_Travel_Cart {
 	/**
 	 * Add an item to cart.
 	 *
-	 * @param int   $id    An unique ID for the item.
-	 * @param int   $price Price of item.
-	 * @param int   $qty   Quantity of item.
+	 * @param int   $args    Mixed. trip id if WP Travel below 4.4.2 else all cart args.
+	 * @param int   $trip_price Price of item.
+	 * @param int   $trip_price_partial   Price partial.
+	 * @param int   $pax   Quantity of item.
 	 * @param array $attrs Item attributes.
+	 * @todo Need to remove all attributes excepct $args.
 	 * @return boolean
 	 */
-	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax, $price_key = '', $attrs = array() ) {
+	public function add( $args, $trip_price = 0, $trip_price_partial = 0, $pax=1, $price_key = '', $attrs = array() ) {
+		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2
+			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
+			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
+			$trip_price_partial = isset( $args['trip_price_partial'] ) ? $args['trip_price_partial'] : 0;
+			$pax                = isset( $args['pax'] ) ? $args['pax'] : array();
+			$price_key          = isset( $args['price_key'] ) ? $args['price_key'] : '';
+			$attrs              = isset( $args['attrs'] ) ? $args['attrs'] : array();
+		} else {
+			$trip_id = $args;
+		}
+
+
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
@@ -173,14 +187,12 @@ class WP_Travel_Cart {
 			}
 		}
 
-		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since 3.0.0
-		if ( is_array( $pax ) ) :
+		
+		if ( is_array( $pax ) ) : // New Add to cart. Pax array as per categories[adult, child] @since 3.0.0
 			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
 			$this->items[ $cart_item_id ]['trip_price']         = wp_travel_get_formated_price( $trip_price );
 			$this->items[ $cart_item_id ]['trip_price_partial'] = wp_travel_get_formated_price( $trip_price_partial );
-
 		else :
-
 			if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
 
 				$inventory = new WP_Travel_Util_Inventory();
@@ -250,7 +262,7 @@ class WP_Travel_Cart {
 	 */
 	private function read() {
 		$cart            = WP_Travel()->session->get( $this->cart_id );
-		$cart_items      = $cart['cart_items'];
+		$cart_items      = ! empty( $cart['cart_items'] ) ? $cart['cart_items'] : array(); // Checking if not empty to remove php notice on log. @since 4.3.0.
 		$this->discounts = isset( $cart['discounts'] ) ? $cart['discounts'] : array();
 
 		if ( ! empty( $cart_items ) ) {
@@ -306,11 +318,13 @@ class WP_Travel_Cart {
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
-					if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0
-						$category_price = wp_travel_get_actual_trip_price( $trip_id );
-					} else {
-						$category_price = wp_travel_get_price( $trip_id, false, $pricing_id, $category_id );
-					}
+					$args = array(
+						'trip_id' => $trip_id,
+						'pricing_id' => $pricing_id,
+						'category_id' => $category_id,
+					);
+					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
+					
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
 
@@ -584,7 +598,7 @@ class WP_Travel_Cart {
 		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial;
 
 		// Adding tax to sub total;
-		if ( $tax_rate = wp_travel_is_taxable() ) :
+		if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) :
 			$tax_amount         = ( $total_trip_price_after_dis * $tax_rate ) / 100;
 			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		endif;
@@ -626,6 +640,15 @@ class WP_Travel_Cart {
 		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
 		$cart_item_id = ( isset( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
 		return apply_filters( 'wp_travel_filter_cart_item_id', $cart_item_id, $trip_id, $price_key );
+	}
+
+	/**
+	 * Return true if multiple cart item is allowed.
+	 *
+	 * @since WP Travel 4.4.2
+	 */
+	public static function allow_multiple_items() {
+		return apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 	}
 }
 

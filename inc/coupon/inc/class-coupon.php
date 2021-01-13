@@ -21,9 +21,21 @@ class WP_Travel_Coupon {
 	);
 
 	public function __construct() {
-
+		add_action( 'wp_travel_action_before_booking_process', array( $this, 'process_update_count' ) );
 	}
 
+	/**
+	 * Update usese count action.
+	 */
+	public function process_update_count() {
+		global $wt_cart;
+		if ( isset( $wt_cart ) ) {
+			$discounts = $wt_cart->get_discounts();
+			if ( is_array( $discounts ) && ! empty( $discounts ) ) :
+				$this->update_usage_count( $discounts['coupon_id'] );
+			endif;
+		}
+	}
 	/**
 	 * Get coupon id.
 	 */

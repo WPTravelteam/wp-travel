@@ -25,9 +25,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-$enable_sale = wp_travel_is_enable_sale_price( get_the_ID() );
-$trip_price  = wp_travel_get_trip_price( get_the_ID() );
-$sale_price  = wp_travel_get_trip_sale_price( get_the_ID() );
+$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
 $group_size  = wp_travel_get_group_size( get_the_ID() );
 $start_date  = get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
 $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );

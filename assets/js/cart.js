@@ -49,7 +49,11 @@ jQuery(document).ready(function ($) {
       data: cart_fields,
       beforeSend: function beforeSend() {},
       success: function success(data) {
-        location.href = wp_travel.cartUrl;
+        if (wp_travel.isEnabledCartPage) {
+          location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+        } else {
+          location.href = wp_travel.checkoutUrl; // [only checkout page url]
+        }
       }
     });
   }); // wt_remove_from_cart
@@ -86,8 +90,7 @@ jQuery(document).ready(function ($) {
       var pax = {};
       $(this).find('input.wp-travel-trip-pax').each(function () {
         pax[$(this).data('category-id')] = this.value;
-      }); // console.log(pax);
-
+      });
       var update_cart_field = {};
       update_cart_field['extras'] = {};
       update_cart_field['extras']['id'] = {};
@@ -662,6 +665,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
           toggleBookNowBtn();
           ci.querySelector('h5 a').removeAttribute('style');
+          location.reload(); // For quick fix on multiple traveller field case.
         } else {
           _btn.disabled = false;
         }
@@ -723,6 +727,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       }).then(function (res) {
         return res.json();
       }).then(function (result) {
+        console.log(result);
         toggleCartLoader();
 
         if (result.success) {
@@ -735,6 +740,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
               coupon: result.data.cart.coupon
             }
           }));
+          location.reload();
         } else {
           couponField.focus();
           toggleError(couponField, result.data[0].message);

@@ -23,7 +23,14 @@ $form_fw->init_validation( 'wp-travel-booking' );
 	foreach ( $trips as $cart_id => $trip ) :
 		$trip_id        = $trip['trip_id'];
 		$price_key      = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
-		$pricing_name   = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+
+		if ( wp_travel_is_react_version_enabled() ) {
+			$pricing_id = $trip['pricing_id'];
+		} else {
+			$pricing_id = $price_key;
+		}
+
+		$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $pricing_id );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 
 		// New @since 3.0.0.
@@ -148,6 +155,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 			<div class="panel-body">
 				<div class="payment-content">
 					<?php $form_field->init( $payment_fields )->render(); ?>
+					<?php do_action( 'wp_travel_action_before_book_now' ); // @since WP Travel 4.3.0 ?>
 					<div class="wp-travel-form-field button-field">
 						<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">

@@ -279,6 +279,7 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
 					'assets/css/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
 					'assets/css/wp-travel-admin-1.css': 'assets/sass/admin/wp-travel-admin-1.scss',
+					'assets/css/itinerary-front-end.css': 'assets/sass/itinerary-front-end.scss',
 
 					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
@@ -289,6 +290,10 @@ module.exports = function (grunt) {
 			css: {
 				files: ['assets/sass/**/*.scss'],
 				tasks: ['sass'],
+			},
+			babel: {
+				files: ['assets/js/src/*.js'],
+				tasks: ['babel'],
 			}
 		},
 		// CSS minification.
@@ -321,6 +326,7 @@ module.exports = function (grunt) {
 					'assets/css/wp-travel-admin-1.min.css': ['assets/css/wp-travel-admin-1.css'],
 					'assets/css/easy-responsive-tabs.min.css': ['assets/css/easy-responsive-tabs.css'],
 					'assets/css/wp-travel-itineraries.min.css': ['assets/css/wp-travel-itineraries.css'],
+					'assets/css/itinerary-front-end.min.css': ['assets/css/itinerary-front-end.css'],
 
 					'inc/coupon/assets/css/wp-travel-coupons-backend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-backend.css'],
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-frontend.css'],

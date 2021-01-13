@@ -37,14 +37,17 @@ jQuery(document).ready(function ($) {
         });
         cart_fields['action'] = 'wt_add_to_cart';
         // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
-
         $.ajax({
             type: "POST",
             url: wp_travel.ajaxUrl,
             data: cart_fields,
             beforeSend: function () { },
             success: function (data) {
-                location.href = wp_travel.cartUrl;
+                if ( wp_travel.isEnabledCartPage ) {
+                  location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+                } else {
+                  location.href = wp_travel.checkoutUrl; // [only checkout page url]
+                }
             }
         });
 
@@ -85,8 +88,6 @@ jQuery(document).ready(function ($) {
             $(this).find('input.wp-travel-trip-pax').each(function () {
                 pax[$(this).data('category-id')] = this.value;
             });
-
-            // console.log(pax);
 
             var update_cart_field = {};
             update_cart_field['extras'] = {};
@@ -623,6 +624,7 @@ const wptravelcheckout = (shoppingCart) => {
                             }
                             toggleBookNowBtn()
                             ci.querySelector('h5 a').removeAttribute('style')
+                            location.reload(); // For quick fix on multiple traveller field case.
                         } else {
                             _btn.disabled = false
                         }
@@ -685,6 +687,7 @@ const wptravelcheckout = (shoppingCart) => {
                     body: JSON.stringify({ couponCode: couponField.value })
                 }).then(res => res.json())
                     .then(result => {
+                        console.log(result)
                         toggleCartLoader()
                         if (result.success) {
                             wp_travel_cart.cart = result.data.cart
@@ -692,6 +695,7 @@ const wptravelcheckout = (shoppingCart) => {
                             e.target.innerHTML = e.target.dataset.successL10n
                             e.target.style.backgroundColor = 'green'
                             shoppingCart.dispatchEvent(new CustomEvent('wptcartchange', { detail: { coupon: result.data.cart.coupon } }))
+                            location.reload();
                         } else {
                             couponField.focus()
                             toggleError(couponField, result.data[0].message)

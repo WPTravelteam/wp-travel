@@ -20,8 +20,8 @@ class WP_Travel_Admin_Metaboxes {
 	 */
 	public function __construct() {
 
-		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 );
-		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 );
+		add_action( 'add_meta_boxes', array( $this, 'register_metaboxes' ), 10, 2 ); // Add Custom Metabox.
+		add_action( 'do_meta_boxes', array( $this, 'remove_metaboxs' ), 10, 2 ); // Remove Default Metaboxs like category, excertp, thumbnail etc..
 		add_filter( 'postbox_classes_' . WP_TRAVEL_POST_TYPE . '_wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', array( $this, 'add_clean_metabox_class' ) );
 		add_filter( 'wp_travel_admin_tabs', array( $this, 'add_tabs' ) );
 		add_action( 'admin_footer', array( $this, 'gallery_images_listing' ) );
@@ -148,6 +148,11 @@ class WP_Travel_Admin_Metaboxes {
 		}
 		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
 		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+
+		global $post;
+		// Booking Metabox.
+		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
+		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
 	}
 
 	/**
@@ -260,7 +265,7 @@ class WP_Travel_Admin_Metaboxes {
 				</td>
 
 			</tr>
-			<?php if ( 'paid' === $payment_status ) : ?>
+			<?php if ( 'paid' === $payment_status || 'partially_paid' === $payment_status ) : ?>
 				<?php
 				$total_price = $details['total'];
 				$paid_amount = $details['paid_amount'];
@@ -378,20 +383,20 @@ class WP_Travel_Admin_Metaboxes {
 	/**
 	 * Save Post meta data.
 	 *
-	 * @param  int $post_id ID of current post.
+	 * @param  int $trip_id ID of current post.
 	 *
 	 * @return Mixed
 	 */
-	public function save_meta_data( $post_id ) {
+	public function save_meta_data( $trip_id ) {
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		if ( ! current_user_can( 'edit_post', $trip_id ) ) {
 			return;
 		}
 		// If this is just a revision, don't send the email.
-		if ( wp_is_post_revision( $post_id ) ) {
+		if ( wp_is_post_revision( $trip_id ) ) {
 			return;
 		}
 
@@ -401,7 +406,7 @@ class WP_Travel_Admin_Metaboxes {
 			return;
 		}
 
-		$post_type = get_post_type( $post_id );
+		$post_type = get_post_type( $trip_id );
 		$screen    = get_current_screen();
 
 		if ( '' == $screen ) {
@@ -434,10 +439,10 @@ class WP_Travel_Admin_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_editor'] ) ) {
 			$new_content = $_POST['wp_travel_editor'];
-			$old_content = get_post_field( 'post_content', $post_id );
-			if ( ! wp_is_post_revision( $post_id ) && $old_content !== $new_content ) {
+			$old_content = get_post_field( 'post_content', $trip_id );
+			if ( ! wp_is_post_revision( $trip_id ) && $old_content !== $new_content ) {
 				$args = array(
-					'ID'           => $post_id,
+					'ID'           => $trip_id,
 					'post_content' => $new_content,
 				);
 
@@ -519,10 +524,13 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_pricing_options'] = isset( $_POST['wp_travel_pricing_options'] ) ? ( wp_unslash( $_POST['wp_travel_pricing_options'] ) ) : '';
 
 		if ( 'multiple-price' === $trip_meta['wp_travel_pricing_option_type'] && is_array( $trip_meta['wp_travel_pricing_options'] ) && count( $trip_meta['wp_travel_pricing_options'] ) > 0 ) {
-			$pricing_options = $trip_meta['wp_travel_pricing_options'];
-			// Need to update wp_travel_trip_price which is used to filter by price in archive page.
-			$price_key = wp_travel_get_min_price_key( $pricing_options );
-			$price     = wp_travel_get_price( $post_id );
+			// $pricing_options = $trip_meta['wp_travel_pricing_options'];
+			// Need to update post meta wp_travel_trip_price which is used to filter by price in archive page.
+			// $price_key = wp_travel_get_min_price_key( $pricing_options );
+			$args = array(
+				'trip_id' => $trip_id,
+			);
+			$price = WP_Travel_Helpers_Pricings::get_price( $args );
 			if ( $price ) {
 				$trip_meta['wp_travel_trip_price'] = $price;
 			}
@@ -584,14 +592,14 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_tour_extras'] = $wp_travel_tour_extras;
 
 		// @since 1.8.4
-		$trip_meta = apply_filters( 'wp_travel_save_trip_metas', $trip_meta, $post_id );
+		$trip_meta = apply_filters( 'wp_travel_save_trip_metas', $trip_meta, $trip_id );
 
 		foreach ( $trip_meta as $meta_key => $meta_value ) {
-			update_post_meta( $post_id, $meta_key, $meta_value );
+			update_post_meta( $trip_id, $meta_key, $meta_value );
 		}
 
 		// Ends WP Travel Standard Paypal Merged. @since 1.2.1.
-		do_action( 'wp_travel_itinerary_extra_meta_save', $post_id );
+		do_action( 'wp_travel_itinerary_extra_meta_save', $trip_id );
 	}
 
 	/**
