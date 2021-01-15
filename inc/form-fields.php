@@ -70,6 +70,12 @@ function wp_travel_get_checkout_form_fields() {
 	$gdpr_msg = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$policy_link = wp_travel_privacy_link();
+
+	$strings = wp_travel_get_strings();
+	$label_booking_options = $strings['bookings']['booking_option'];
+	$label_booking_with_payment = $strings['bookings']['booking_with_payment'];
+	$label_booking_only = $strings['bookings']['booking_only'];
+
 	if ( ! empty( $gdpr_msg ) && $policy_link ) {
 
 		// GDPR Compatibility for enquiry.
@@ -131,15 +137,15 @@ function wp_travel_get_checkout_form_fields() {
 
 		$payment_fields['booking_option'] = array(
 			'type'        => 'select',
-			'label'       => __( 'Booking Options', 'wp-travel' ),
+			'label'       => $label_booking_options,
 			'name'        => 'wp_travel_booking_option',
 			'id'          => 'wp-travel-option',
 			'validations' => array(
 				'required' => true,
 			),
 			'options'     => array(
-				'booking_with_payment' => esc_html__( 'Booking with payment', 'wp-travel' ),
-				'booking_only'         => esc_html__( 'Booking only', 'wp-travel' ),
+				'booking_with_payment' => esc_html( $label_booking_with_payment ),
+				'booking_only'         => esc_html( $label_booking_only ),
 			),
 			'default'     => 'booking_with_payment',
 			'priority'    => 100,

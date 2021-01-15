@@ -2668,6 +2668,9 @@ function wp_travel_get_strings() {
 			'trip_extras_list_label'        => __( 'Trip Extras', 'wp-travel' ),
 			'trip_extras_link_label'        => __( 'Learn More', 'wp-travel' ),
 			'available_trip_times'          => __( 'Available times', 'wp-travel' ),
+			'booking_option'                => __( 'Booking Options', 'wp-travel' ),
+			'booking_with_payment'          => __( 'Booking with payment', 'wp-travel' ),
+			'booking_only'                  => __( 'Booking only', 'wp-travel' ),
 		),
 		'empty_results' 			=> array(
 			'trip_type'		        => __( 'No Trip Type', 'wp-travel' ),
