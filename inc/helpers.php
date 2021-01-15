@@ -3806,3 +3806,12 @@ function wp_travel_enable_cart_page( $enabled, $settings ) {
 }
 
 add_filter( 'wp_travel_filter_is_enabled_cart_page', 'wp_travel_enable_cart_page', 10, 2 );
+
+/**
+ * Filter for itinerary v2 layout enable or disable.
+ *
+ * @return boolean default true.
+ */
+function wp_travel_use_itinerary_v2_layout() {
+	return apply_filters( 'wp_travel_use_itinerary_layout_v2', true );
+}

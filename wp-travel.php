@@ -257,6 +257,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-session.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/itinerary-v2-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-addons-settings.php', WP_TRAVEL_ABSPATH ); // @since 3.0.1
 
 			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );

@@ -6,15 +6,10 @@
  */
 
 // Hooks.
-add_action( 'wp_travel_single_trip_after_title', 'wp_travel_trip_price', 1 );
-add_action( 'wp_travel_single_trip_after_title', 'wp_travel_single_excerpt', 1 );
+add_action( 'after_setup_theme', 'wp_travel_load_single_itinerary_hooks' );
 add_action( 'wp_travel_single_trip_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_trip_after_price', 'wp_travel_single_trip_rating', 10, 2 );
-add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_trip_facts' );
-add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents', 15 );
-add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
-add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
 add_filter( 'the_content', 'wp_travel_content_filter' );
 add_filter( 'wp_travel_trip_tabs_output_raw', 'wp_travel_raw_output_on_tab_content', 10, 2 ); // @since 2.0.6. Need true to hide trip detail.
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
@@ -53,6 +48,29 @@ add_filter( 'get_header_image_tag', 'wp_travel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wp_travel_remove_jetpack_related_posts' );
 
 add_filter( 'posts_clauses', 'wp_travel_posts_clauses_filter', 11, 2 );
+
+/**
+ * @since v4.4.5
+ *
+ * Load single itinerary hooks according to layout selection.
+ */
+function wp_travel_load_single_itinerary_hooks() {
+
+	$itinerary_v2_enable = wp_travel_use_itinerary_v2_layout();
+
+	// Hooks for old itinerary layout.
+	 if ( ! $itinerary_v2_enable ) {
+		 add_action( 'wp_travel_single_trip_after_title', 'wp_travel_trip_price', 1 );
+		 add_action( 'wp_travel_single_trip_after_title', 'wp_travel_single_excerpt', 1 );
+		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_trip_facts' );
+		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents', 15 );
+		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
+		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
+	 } else { // For new layout.
+		 
+	 }
+}
+
 /**
  * @since 4.0.4
  *
