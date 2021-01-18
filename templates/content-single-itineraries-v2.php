@@ -9,7 +9,7 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
+ * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
  * @since       1.0.0
@@ -29,7 +29,7 @@ if ( post_password_required() ) {
 	return;
 }
 $wrapper_class = wp_travel_get_theme_wrapper_class();
-do_action( 'wp_travel_before_content_start');
+do_action( 'wp_travel_before_content_start' );
 ?>
 
 <div id="wti_main-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -42,7 +42,7 @@ do_action( 'wp_travel_before_content_start');
 				 * @hooked 'wp_travel_hero_section'.
 				 * @param int get_the_ID().
 				 */
-				do_action( 'wp_travel_itinerary_v2_hero_section', get_the_ID() ); 
+				do_action( 'wp_travel_itinerary_v2_hero_section', get_the_ID() );
 			?>
 			<div class="wti__single-wrapper">
 				<?php
