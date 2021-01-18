@@ -67,7 +67,8 @@ function wp_travel_load_single_itinerary_hooks() {
 		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
 		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
 	 } else { // For new layout.
-		 
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_single_trip_tabs_and_price' );
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_single_trip_contents', 15 );
 	 }
 }
 
