@@ -647,9 +647,16 @@ function wp_travel_get_formated_price_currency( float $price, $regular_price = f
 	$filter_name     = 'wp_travel_itinerary_sale_price'; // Filter for customization work support.
 	$price_class     = 'wp-travel-trip-price-figure';
 	$currency_symbol = apply_filters( 'wp_travel_display_currency_symbol', wp_travel_get_currency_symbol(), $post_id );
+	$itinerary_v2_enable = wp_travel_use_itinerary_v2_layout();
+
 	if ( $regular_price ) {
-		$filter_name = 'wp_travel_itinerary_price';
-		$price_class = 'wp-travel-regular-price-figure';
+		if ( ! $itinerary_v2_enable ) {
+			$filter_name = 'wp_travel_itinerary_price';
+			$price_class = 'wp-travel-regular-price-figure';
+		} else { // For new layout. @since 4.4.6
+			$filter_name = 'wti_itinerary_price';
+			$price_class = 'wti-regular-price-figure';
+		}
 	}
 
 	// Price Format Start.
@@ -659,27 +666,53 @@ function wp_travel_get_formated_price_currency( float $price, $regular_price = f
 	$price              = number_format( $price, $number_of_decimals, $decimal_separator, $thousand_separator );
 	// End of Price Format.
 	ob_start();
-	switch ( $currency_position ) {
-		case 'left':
-			?>
-			<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span><span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
-			<?php
-			break;
-		case 'left_with_space':
-			?>
-			<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
-			<?php
-			break;
-		case 'right':
-			?>
-			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
-			<?php
-			break;
-		case 'right_with_space':
-			?>
-			<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
-			<?php
-			break;
+	if ( ! $itinerary_v2_enable ) {
+		switch ( $currency_position ) {
+			case 'left':
+				?>
+				<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span><span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+				<?php
+				break;
+			case 'left_with_space':
+				?>
+				<span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+				<?php
+				break;
+			case 'right':
+				?>
+				<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
+				<?php
+				break;
+			case 'right_with_space':
+				?>
+				<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wp-travel-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
+				<?php
+				break;
+		}
+	} else {
+		$price_class = 'wti-trip-price-figure';
+		switch ( $currency_position ) {
+			case 'left':
+				?>
+				<span class="wti-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span><span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+				<?php
+				break;
+			case 'left_with_space':
+				?>
+				<span class="wti-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span> <span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span>
+				<?php
+				break;
+			case 'right':
+				?>
+				<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span><span class="wti-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
+				<?php
+				break;
+			case 'right_with_space':
+				?>
+				<span class="<?php echo esc_attr( $price_class ); ?>"><?php echo esc_html( $price ); ?></span> <span class="wti-trip-currency"><?php echo esc_html( $currency_symbol ); ?></span>
+				<?php
+				break;
+		}
 	}
 	$content = ob_get_contents();
 	ob_end_clean();
