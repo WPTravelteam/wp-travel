@@ -690,6 +690,7 @@ function wp_travel_get_formated_price_currency( float $price, $regular_price = f
 				break;
 		}
 	} else {
+		$price_class = 'wti-trip-price-figure';
 		switch ( $currency_position ) {
 			case 'left':
 				?>
