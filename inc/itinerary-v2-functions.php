@@ -13,6 +13,7 @@ add_action( 'wp_travel_single_itinerary_trip_location', 'wp_travel_single_trip_l
 add_action( 'wp_travel_single_itinerary_trip_review', 'wp_travel_single_trip_review' );
 add_action( 'wp_travel_before_single_trip_code', 'wp_travel_single_trip_buttons' );
 add_action( 'wp_travel_single_trip_code', 'wp_travel_single_itinerary_trip_code' );
+add_action( 'wp_travel_single_trip_facts', 'wp_travel_single_itinerary_trip_facts' );
 
 /**
  * Main hero section for itinerary page.
@@ -305,6 +306,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
  * Single trip frontend contents.
  */
 function wp_travel_single_trip_contents() {
+    $wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
     ?>
     <div class="wti__content-wrapper">
         <div class="wti__container">
@@ -312,119 +314,13 @@ function wp_travel_single_trip_contents() {
                 <div class="wti__grid-item col-lg-8">
                     <div class="wti__tab-content-area">
                         <?php
-                        $settings                 = wp_travel_get_settings();
-                        $wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
-
-                        if ( empty( $settings['wp_travel_trip_facts_settings'] ) ) {
-                            return '';
-                        }
-                        
-                        $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
-                    
-                        if ( 'no' === $wp_travel_trip_facts_enable ) {
-                            return;
-                        }
-                    
-                        $wp_travel_trip_facts = get_post_meta( get_the_id(), 'wp_travel_trip_facts', true );
-                    
-                        if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ) {
-                    
-                            $wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
-                        }
-                    
-                        $i = 0;
+                        /**
+                         * Hook 'wp_travel_single_trip_facts'.
+                         *
+                         * @hooked 'wp_travel_single_itinerary_trip_facts'.
+                         */
+                        do_action( 'wp_travel_single_trip_facts' ); 
                         ?>
-                        <div class="wti__trip-info">
-                            <?php
-                            /**
-                             * To fix fact not showing on frontend since v4.0 or greater.
-                             *
-                             * Modified @since v4.4.1
-                             */
-                            $settings_facts  = $settings['wp_travel_trip_facts_settings'];
-                            if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
-                                foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
-                                    <?php
-                                    $trip_fact_id   = $trip_fact['fact_id'];	
-                                    if ( isset( $settings_facts[ $trip_fact_id ] ) ) { // To check if current trip facts id matches the settings trip facts id. If matches then get icon and label.
-
-                                        $icon  = $settings_facts[ $trip_fact_id ]['icon'];
-                                        $label = $settings_facts[ $trip_fact_id ]['name'];
-                                                                
-                                    } else { // If fact id doesn't matches or if trip fact doesn't have fact id then matching the trip fact label with fact setting label. ( For e.g Transports ( fact in trip ) === Transports ( Setting fact option ) )
-                                        $trip_fact_setting = array_filter(
-                                            $settings_facts,
-                                            function( $setting ) use ( $trip_fact ) {
-                                                
-                                                return $setting['name'] === $trip_fact['label']; 
-                                            }
-                                        ); // Gives an array for matches label with its other detail as well.
-                                        
-                                        if ( empty( $trip_fact_setting ) ) { // If there is empty array that means label doesn't matches. Hence skip that and continue.
-                                            continue;
-                                        }
-                                        foreach ( $trip_fact_setting as $set ) {
-                                            $icon  = $set['icon'];
-                                            $label = $set['name'];
-                                        }
-                                    }
-
-                                    if ( isset( $trip_fact['value'] ) ) :
-                                        ?>
-                                        <div class="wti__trip-info-item">
-
-                                            <div class="trip__info-icon">
-                                                <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
-                                                <strong><?php echo esc_html( $label ); ?></strong>:
-                                            </div>
-                                            <!-- <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
-                                            <?php
-                                            if ( $trip_fact['type'] === 'multiple' ) {
-                                                $count = count( $trip_fact['value'] );
-                                                $i     = 1;
-                                                foreach ( $trip_fact['value'] as $key => $val ) {
-                                                    // echo esc_html( $val );
-                                                    if ( isset( $trip_fact['fact_id'] ) ) {
-                                                        ?>
-                                                        <span class="trip__info-label">
-                                                            <?php echo @esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ); ?>
-                                                        </span>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <span class="trip__info-label">
-                                                            <?php echo esc_html( $val ); ?>
-                                                        </span>
-                                                        <?php
-                                                    }
-                                                    if ( $count > 1 && $i !== $count ) {
-                                                        ?>
-                                                        <span class="trip__info-label">
-                                                            <?php echo esc_html( ',', 'wp-travel' ); ?>
-                                                        </span>
-                                                        <?php
-                                                    }
-                                                    $i++;
-                                                }
-                                            } elseif ( isset( $trip_fact['fact_id'] ) && 'single' === $trip_fact['type'] ) {
-                                                ?>
-                                                <span class="trip__info-label">
-                                                    <?php echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] ); ?>
-                                                </span>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <span class="trip__info-label">
-                                                    <?php echo esc_html( $trip_fact['value'] ); ?>
-                                                </span>
-                                                <?php
-                                            }
-                                            ?>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php } ?>
-                        </div>
                         <?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
                             <?php $index = 1; ?>
                             <?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
@@ -775,6 +671,126 @@ function wp_travel_single_trip_contents() {
                 </div>
             </div>
         </div>
+    </div>
+    <?php
+}
+
+/**
+ * Single itinerary trip facts.
+ */
+function wp_travel_single_itinerary_trip_facts() {
+
+    $settings = wp_travel_get_settings();
+
+    if ( empty( $settings['wp_travel_trip_facts_settings'] ) ) {
+        return '';
+    }
+    
+    $wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
+
+    if ( 'no' === $wp_travel_trip_facts_enable ) {
+        return;
+    }
+
+    $wp_travel_trip_facts = get_post_meta( get_the_id(), 'wp_travel_trip_facts', true );
+
+    if ( is_string( $wp_travel_trip_facts ) && '' != $wp_travel_trip_facts ) {
+
+        $wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
+    }
+
+    $i = 0;
+    ?>
+    <div class="wti__trip-info">
+        <?php
+        /**
+         * To fix fact not showing on frontend since v4.0 or greater.
+         *
+         * Modified @since v4.4.1
+         */
+        $settings_facts  = $settings['wp_travel_trip_facts_settings'];
+        if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
+            foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
+                <?php
+                $trip_fact_id   = $trip_fact['fact_id'];	
+                if ( isset( $settings_facts[ $trip_fact_id ] ) ) { // To check if current trip facts id matches the settings trip facts id. If matches then get icon and label.
+
+                    $icon  = $settings_facts[ $trip_fact_id ]['icon'];
+                    $label = $settings_facts[ $trip_fact_id ]['name'];
+                                            
+                } else { // If fact id doesn't matches or if trip fact doesn't have fact id then matching the trip fact label with fact setting label. ( For e.g Transports ( fact in trip ) === Transports ( Setting fact option ) )
+                    $trip_fact_setting = array_filter(
+                        $settings_facts,
+                        function( $setting ) use ( $trip_fact ) {
+                            
+                            return $setting['name'] === $trip_fact['label']; 
+                        }
+                    ); // Gives an array for matches label with its other detail as well.
+                    
+                    if ( empty( $trip_fact_setting ) ) { // If there is empty array that means label doesn't matches. Hence skip that and continue.
+                        continue;
+                    }
+                    foreach ( $trip_fact_setting as $set ) {
+                        $icon  = $set['icon'];
+                        $label = $set['name'];
+                    }
+                }
+
+                if ( isset( $trip_fact['value'] ) ) :
+                    ?>
+                    <div class="wti__trip-info-item">
+
+                        <div class="trip__info-icon">
+                            <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+                            <strong><?php echo esc_html( $label ); ?></strong>:
+                        </div>
+                        <!-- <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
+                        <?php
+                        if ( $trip_fact['type'] === 'multiple' ) {
+                            $count = count( $trip_fact['value'] );
+                            $i     = 1;
+                            foreach ( $trip_fact['value'] as $key => $val ) {
+                                // echo esc_html( $val );
+                                if ( isset( $trip_fact['fact_id'] ) ) {
+                                    ?>
+                                    <span class="trip__info-label">
+                                        <?php echo @esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ); ?>
+                                    </span>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <span class="trip__info-label">
+                                        <?php echo esc_html( $val ); ?>
+                                    </span>
+                                    <?php
+                                }
+                                if ( $count > 1 && $i !== $count ) {
+                                    ?>
+                                    <span class="trip__info-label">
+                                        <?php echo esc_html( ',', 'wp-travel' ); ?>
+                                    </span>
+                                    <?php
+                                }
+                                $i++;
+                            }
+                        } elseif ( isset( $trip_fact['fact_id'] ) && 'single' === $trip_fact['type'] ) {
+                            ?>
+                            <span class="trip__info-label">
+                                <?php echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] ); ?>
+                            </span>
+                            <?php
+                        } else {
+                            ?>
+                            <span class="trip__info-label">
+                                <?php echo esc_html( $trip_fact['value'] ); ?>
+                            </span>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php } ?>
     </div>
     <?php
 }
