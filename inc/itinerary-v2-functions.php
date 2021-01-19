@@ -14,6 +14,7 @@ add_action( 'wp_travel_single_itinerary_trip_review', 'wp_travel_single_trip_rev
 add_action( 'wp_travel_before_single_trip_code', 'wp_travel_single_trip_buttons' );
 add_action( 'wp_travel_single_trip_code', 'wp_travel_single_itinerary_trip_code' );
 add_action( 'wp_travel_single_trip_facts', 'wp_travel_single_itinerary_trip_facts' );
+add_action( 'wp_travel_single_trip_main_contents', 'wp_travel_single_itinerary_main_contents' );
 
 /**
  * Main hero section for itinerary page.
@@ -305,8 +306,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 /**
  * Single trip frontend contents.
  */
-function wp_travel_single_trip_contents() {
-    $wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+function wp_travel_single_trip_contents( $trip_id ) {
     ?>
     <div class="wti__content-wrapper">
         <div class="wti__container">
@@ -320,188 +320,14 @@ function wp_travel_single_trip_contents() {
                          * @hooked 'wp_travel_single_itinerary_trip_facts'.
                          */
                         do_action( 'wp_travel_single_trip_facts' ); 
+
+                        /**
+                         * Hook 'wp_travel_single_trip_main_contents'.
+                         *
+                         * @hooked 'wp_travel_single_itinerary_main_contents'.
+                         */
+                        do_action( 'wp_travel_single_trip_main_contents', $trip_id ); 
                         ?>
-                        <?php if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) : ?>
-                            <?php $index = 1; ?>
-                            <?php foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) : ?>
-                                <?php $tab_label = $tab_info['label']; ?>
-                                <?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
-                                    <?php continue; ?>
-                                <?php endif; ?>
-                                <?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
-                                    <?php continue; ?>
-                                <?php endif; ?>
-                                <?php
-                                switch ( $tab_key ) {
-
-                                    case 'reviews':
-                                        ?>
-                                        <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
-                                            <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
-                                            <?php comments_template(); ?>
-                                        </div>
-                                        <?php
-                                        break;
-                                    case 'booking':
-                                        continue 2;
-                                    case 'faq':
-                                        ?>
-                                        <div id="<?php echo esc_attr( $tab_key ); ?>" class="trip-faq wti__tab-content-wrapper">
-                                            <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
-                                            <div class="accordion" id="accordion">
-                                                <?php
-                                                $faqs = wp_travel_get_faqs( get_the_id() );
-                                                if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-                                                    ?>
-                                                    <!-- <div class="wp-collapse-open clearfix">
-                                                        <a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-                                                        <a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-                                                    </div> -->
-                                                    <?php foreach ( $faqs as $k => $faq ) : ?>
-                                                    <!-- New -->
-                                                        <div class="accordion-panel">
-                                                            <div class="accordion-panel-heading">
-                                                                <h4 class="accordion-panel-title">
-                                                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="svg-inline--fa fa-caret-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>
-                                                                    
-                                                                    <p class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k + 1 ); ?>" aria-expanded="true">
-                                                                    <?php echo esc_html( $faq['question'] ); ?>                
-                                                                    <span class="collapse-icon"></span>
-                                                                    </p>
-                                                                </h4>
-                                                            </div>
-                                                            <div id="collapse<?php echo esc_attr( $k + 1 ); ?>" class="accordion-panel-collapse " aria-expanded="true" >
-                                                                <div class="panel-body">
-                                                                    <?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <?php
-                                                    endforeach;
-                                                } else {
-                                                    ?>
-                                                    <div class="while-empty">
-                                                        <p class="wp-travel-no-detail-found-msg" >
-                                                            <?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
-                                                        </p>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-                                        <?php
-                                        break;
-                                    case 'trip_outline':
-                                        ?>
-                                    <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
-                                        <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
-                                        <div class="trip-itinerary__wrapper">
-                                        <?php
-                                            // echo wp_kses_post( $tab_info['content'] );
-
-                                            // $itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
-                                            // load_template( $itinerary_list_template );
-                                        
-                                        global $post;
-                                        $post_id     = $post->ID;
-                                        $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
-                                        if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
-                                                <?php $index = 1; ?>
-                                                <?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
-                                                    <?php if ( $index % 2 === 0 ) : ?>
-                                                        <?php
-                                                            $first_class  = 'right';
-                                                            $second_class = 'left';
-                                                            $row_reverse  = 'row-reverse';
-                                                        ?>
-                                                    <?php else : ?>
-                                                        <?php
-                                                            $first_class  = 'left';
-                                                            $second_class = 'right';
-                                                            $row_reverse  = '';
-                                                        ?>
-                                                    <?php endif; ?>
-                                                    <?php
-
-                                                    $date_format = get_option( 'date_format' );
-                                                    $time_format = get_option( 'time_format' );
-
-                                                    $itinerary_label = '';
-                                                    $itinerary_title = '';
-                                                    $itinerary_desc  = '';
-                                                    $itinerary_date  = '';
-                                                    $itinerary_time  = '';
-                                                    if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
-                                                        $itinerary_label = stripslashes( $itinerary['label'] );
-                                                    }
-                                                    if ( isset( $itinerary['title'] ) && '' !== $itinerary['title'] ) {
-                                                        $itinerary_title = stripslashes( $itinerary['title'] );
-                                                    }
-                                                    if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
-                                                        $itinerary_desc = stripslashes( $itinerary['desc'] );
-                                                    }
-                                                    if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
-                                                        $itinerary_date = wp_travel_format_date( $itinerary['date'] );
-                                                    }
-                                                    if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
-                                                        $itinerary_time = stripslashes( $itinerary['time'] );
-                                                        $itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
-                                                    }
-                                                    ?>
-                                                    <div class="trip-itinerary__item">
-                                                        <h5 class="trip-itinerary__title">
-                                                            <strong>
-                                                                <?php
-                                                                    if ( '' !== $itinerary_label ) {
-                                                                        echo esc_html( $itinerary_label ) . ':' ;
-                                                                    }
-                                                                    if ( $itinerary_date ) {
-                                                                        echo esc_html_e( 'Date', 'wp-travel' ). ':' . esc_html( $itinerary_date );
-                                                                    }
-                                                                    if ( $itinerary_time ) {
-                                                                        echo esc_html_e( 'Time', 'wp-travel' ). ':' . esc_html( $itinerary_time );
-                                                                    }
-                                                                ?>
-                                                            </strong> 
-                                                            <?php 
-                                                                if ( '' !== $itinerary_title ) {
-                                                                    echo esc_html( $itinerary_title );
-                                                                }
-                                                                do_action( 'wp_travel_itineraries_after_title', $itinerary );
-                                                            ?>
-                                                        </h5>
-                                                        <?php echo wp_kses_post( $itinerary_desc ); ?>
-                                                    </div>
-                                                    <?php $index++; ?>
-                                                <?php endforeach; ?>
-                                        <?php endif; ?>
-
-                                        </div>
-                                    </div>
-                                        <?php
-                                        break;
-                                    default:
-                                        ?>
-                                        <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
-                                            <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
-                                            <?php
-                                            if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
-
-                                                echo do_shortcode( $tab_info['content'] );
-
-                                            } else {
-
-                                                echo apply_filters( 'the_content', $tab_info['content'] );
-                                            }
-
-                                            ?>
-                                        </div>
-                                    <?php break; ?>
-                                <?php } ?>
-                                <?php
-                                $index++;
-                            endforeach;
-                            ?>
-                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="wti__grid-item col-lg-4">
@@ -613,24 +439,20 @@ function wp_travel_single_trip_contents() {
                 </div>
                 <!-- Related Trips -->
                 <?php
-                $post_id = get_the_id();
                 $settings = wp_travel_get_settings();
                 $hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
                 
                 if ( 'yes' === $hide_related_itinerary ) {
                     return;
                 }
-                $currency_code 	= ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-                $currency_symbol = wp_travel_get_currency_symbol( $currency_code );
             
                 // For use in the loop, list 5 post titles related to first tag on current post.
-                $terms = wp_get_object_terms( $post_id, 'itinerary_types' );
+                $terms = wp_get_object_terms( $trip_id, 'itinerary_types' );
             
-                $no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related trip not found.', 'wp-travel' ) . '</p>';
                 $wrapper_class = wp_travel_get_theme_wrapper_class();
                 ?>
                 <div class="wti__grid-item col-12">
-                    <div class="wti__related-trips">
+                    <div class="wti__related-trips <?php echo esc_attr( $wrapper_class ); ?>">
                         <hr class="wti__trip-section-devider">
                         <h3 class="related-trip-title"><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h3>
                         <div class="wti__list-wrapper">
@@ -641,7 +463,7 @@ function wp_travel_single_trip_contents() {
                                 $col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row' , '3' );
                                 $args = array(
                                     'post_type' => WP_TRAVEL_POST_TYPE,
-                                    'post__not_in' => array( $post_id ),
+                                    'post__not_in' => array( $trip_id ),
                                     'posts_per_page' => $col_per_row,
                                     'tax_query' => array(
                                         array(
@@ -793,4 +615,193 @@ function wp_travel_single_itinerary_trip_facts() {
         <?php } ?>
     </div>
     <?php
+}
+
+/**
+ * Single trip main contents.
+ */
+function wp_travel_single_itinerary_main_contents( $trip_id ) {
+
+    $wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
+
+    if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) :
+        $index = 1;
+        foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+            $tab_label = $tab_info['label'];
+            if ( 'reviews' === $tab_key && ! comments_open() ) :
+                continue;
+            endif;
+            if ( 'yes' !== $tab_info['show_in_menu'] ) :
+                continue;
+            endif;
+        
+        switch ( $tab_key ) {
+
+            case 'reviews':
+                ?>
+                <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
+                    <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
+                    <?php comments_template(); ?>
+                </div>
+                <?php
+                break;
+            case 'booking':
+                continue 2;
+            case 'faq':
+                ?>
+                <div id="<?php echo esc_attr( $tab_key ); ?>" class="trip-faq wti__tab-content-wrapper">
+                    <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
+                    <div class="accordion" id="accordion">
+                        <?php
+                        $faqs = wp_travel_get_faqs( get_the_id() );
+                        if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
+                            ?>
+                            <!-- <div class="wp-collapse-open clearfix">
+                                <a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+                                <a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
+                            </div> -->
+                            <?php foreach ( $faqs as $k => $faq ) : ?>
+                            <!-- New -->
+                                <div class="accordion-panel">
+                                    <div class="accordion-panel-heading">
+                                        <h4 class="accordion-panel-title">
+                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="svg-inline--fa fa-caret-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>
+                                            
+                                            <p class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k + 1 ); ?>" aria-expanded="true">
+                                            <?php echo esc_html( $faq['question'] ); ?>                
+                                            <span class="collapse-icon"></span>
+                                            </p>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse<?php echo esc_attr( $k + 1 ); ?>" class="accordion-panel-collapse " aria-expanded="true" >
+                                        <div class="panel-body">
+                                            <?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            endforeach;
+                        } else {
+                            ?>
+                            <div class="while-empty">
+                                <p class="wp-travel-no-detail-found-msg" >
+                                    <?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
+                                </p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <?php
+                break;
+            case 'trip_outline':
+                ?>
+            <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
+                <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
+                <div class="trip-itinerary__wrapper">
+                <?php
+                    // echo wp_kses_post( $tab_info['content'] );
+
+                    // $itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
+                    // load_template( $itinerary_list_template );
+                
+                global $post;
+                $post_id     = $post->ID;
+                $itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
+                if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
+                        <?php $index = 1; ?>
+                        <?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
+                            <?php if ( $index % 2 === 0 ) : ?>
+                                <?php
+                                    $first_class  = 'right';
+                                    $second_class = 'left';
+                                    $row_reverse  = 'row-reverse';
+                                ?>
+                            <?php else : ?>
+                                <?php
+                                    $first_class  = 'left';
+                                    $second_class = 'right';
+                                    $row_reverse  = '';
+                                ?>
+                            <?php endif; ?>
+                            <?php
+
+                            $date_format = get_option( 'date_format' );
+                            $time_format = get_option( 'time_format' );
+
+                            $itinerary_label = '';
+                            $itinerary_title = '';
+                            $itinerary_desc  = '';
+                            $itinerary_date  = '';
+                            $itinerary_time  = '';
+                            if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
+                                $itinerary_label = stripslashes( $itinerary['label'] );
+                            }
+                            if ( isset( $itinerary['title'] ) && '' !== $itinerary['title'] ) {
+                                $itinerary_title = stripslashes( $itinerary['title'] );
+                            }
+                            if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
+                                $itinerary_desc = stripslashes( $itinerary['desc'] );
+                            }
+                            if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
+                                $itinerary_date = wp_travel_format_date( $itinerary['date'] );
+                            }
+                            if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
+                                $itinerary_time = stripslashes( $itinerary['time'] );
+                                $itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
+                            }
+                            ?>
+                            <div class="trip-itinerary__item">
+                                <h5 class="trip-itinerary__title">
+                                    <strong>
+                                        <?php
+                                            if ( '' !== $itinerary_label ) {
+                                                echo esc_html( $itinerary_label ) . ':' ;
+                                            }
+                                            if ( $itinerary_date ) {
+                                                echo esc_html_e( 'Date', 'wp-travel' ). ':' . esc_html( $itinerary_date );
+                                            }
+                                            if ( $itinerary_time ) {
+                                                echo esc_html_e( 'Time', 'wp-travel' ). ':' . esc_html( $itinerary_time );
+                                            }
+                                        ?>
+                                    </strong> 
+                                    <?php 
+                                        if ( '' !== $itinerary_title ) {
+                                            echo esc_html( $itinerary_title );
+                                        }
+                                        do_action( 'wp_travel_itineraries_after_title', $itinerary );
+                                    ?>
+                                </h5>
+                                <?php echo wp_kses_post( $itinerary_desc ); ?>
+                            </div>
+                            <?php $index++; ?>
+                        <?php endforeach; ?>
+                <?php endif; ?>
+
+                </div>
+            </div>
+                <?php
+                break;
+            default:
+                ?>
+                <div id="<?php echo esc_attr( $tab_key ); ?>" class="wti__tab-content-wrapper">
+                    <h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
+                    <?php
+                    if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
+
+                        echo do_shortcode( $tab_info['content'] );
+
+                    } else {
+
+                        echo apply_filters( 'the_content', $tab_info['content'] );
+                    }
+
+                    ?>
+                </div>
+                <?php
+                break;
+            }
+            $index++;
+        endforeach;
+    endif;
 }

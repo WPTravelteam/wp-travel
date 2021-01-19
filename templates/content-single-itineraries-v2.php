@@ -49,7 +49,7 @@ do_action( 'wp_travel_before_content_start' );
 				/**
 				 * Hook 'wp_travel_single_trip_after_header'.
 				 *
-				 * @hooked 'wp_travel_single_trip_facts_and_price'.
+				 * @hooked 'wp_travel_single_trip_tabs_and_price'.
 				 * @hooked 'wp_travel_single_trip_contents' - 15.
 				 * @param int get_the_ID().
 				 */
