@@ -285,7 +285,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
                                         <span><?php echo wp_travel_get_formated_price_currency( $regular_price, true ); ?></span>
                                     </del>
                                     <?php endif; ?>
-                                    <span class="person-count">
+                                    <span class="wti_trip_price">
                                         <ins>
                                             <span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
                                         </ins>
@@ -614,10 +614,7 @@ function wp_travel_single_trip_contents() {
                             <!-- <div class="wti__booking-date-picker">
                                 <input type="date" class="wti-booking-date-picker">
                             </div> -->
-                            <?php
-                                $booking_template = wp_travel_get_template( 'content-pricing-options.php' );
-                                load_template( $booking_template );
-                            ?>
+                            <div id="booking"></div> <!-- React portion -->
                             <!-- <div class="wti__selectors">
                                 <div class="wti__selector-item wti__pax-selector active">
                                     <h5 class="wti__selector-heading">
