@@ -755,7 +755,7 @@ function wp_travel_single_itinerary_main_contents( $trip_id ) {
                                     <strong>
                                         <?php
                                             if ( '' !== $itinerary_label ) {
-                                                echo esc_html( $itinerary_label ) . ':';
+                                                echo esc_html( $itinerary_label ) . ': ';
                                             }
                                             if ( $itinerary_date ) {
                                                 echo esc_html( $itinerary_date ) . '';
