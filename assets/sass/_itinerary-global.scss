@@ -905,6 +905,17 @@ a{
                 justify-content: center;
                 .price-figure{
                     font-size: 30px;
+                    ins{
+                        background:unset;
+                        background-color:unset;
+                        color:inherit;
+                        font-size: inherit;
+                        text-decoration: none;
+                    }
+                    del{
+                        color:rgba($color: #fff, $alpha: 0.8);
+                        font-size: 22px;
+                    }
                 }
             }
         }

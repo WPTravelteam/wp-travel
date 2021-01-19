@@ -878,6 +878,17 @@ a:hover {
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area .price-figure {
   font-size: 30px;
 }
+.wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area .price-figure ins {
+  background: unset;
+  background-color: unset;
+  color: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+.wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area .price-figure del {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 22px;
+}
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper {
   padding: 30px 0;
 }
