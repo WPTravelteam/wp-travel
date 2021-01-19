@@ -35,7 +35,8 @@ class WP_Travel_Frontend_Assets {
 				$translation_array['date_format']        = get_option( 'date_format' );
 				$translation_array['time_format']        = get_option( 'time_format' );
 			}
-			$translation_array['strings'] = wp_travel_get_strings();
+			$translation_array['strings']       = wp_travel_get_strings();
+			$translation_array['itinerary_new'] = wp_travel_use_itinerary_v2_layout();
 			wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $translation_array );
 
 			wp_enqueue_script( 'wp-travel-frontend-booking-widget' );

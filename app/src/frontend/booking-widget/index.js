@@ -36,7 +36,7 @@ const WPTravelBookingWidget = () => {
         </ErrorBoundary>
     </>
 }
-let bookingWidgetElementId = 'booking';
+let bookingWidgetElementId = _wp_travel.itinerary_new ? 'wti__booking':'booking';
 if (document.getElementById(bookingWidgetElementId)) {
     render(<WPTravelBookingWidget />, document.getElementById(bookingWidgetElementId));
 }

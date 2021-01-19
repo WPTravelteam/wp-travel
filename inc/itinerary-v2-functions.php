@@ -332,11 +332,11 @@ function wp_travel_single_trip_contents( $trip_id ) {
                 </div>
                 <div class="wti__grid-item col-lg-4">
                     <div class="wti__booking-area">
-                        <div class="wti__booking">
+                        <div id="wti__booking" class="wti__booking">
                             <!-- <div class="wti__booking-date-picker">
                                 <input type="date" class="wti-booking-date-picker">
                             </div> -->
-                            <div id="booking"></div> <!-- React portion -->
+                             <!-- React portion -->
                             <!-- <div class="wti__selectors">
                                 <div class="wti__selector-item wti__pax-selector active">
                                     <h5 class="wti__selector-heading">
