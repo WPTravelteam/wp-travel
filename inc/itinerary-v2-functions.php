@@ -755,13 +755,13 @@ function wp_travel_single_itinerary_main_contents( $trip_id ) {
                                     <strong>
                                         <?php
                                             if ( '' !== $itinerary_label ) {
-                                                echo esc_html( $itinerary_label ) . ':' ;
+                                                echo esc_html( $itinerary_label ) . ':';
                                             }
                                             if ( $itinerary_date ) {
-                                                echo esc_html_e( 'Date', 'wp-travel' ). ':' . esc_html( $itinerary_date );
+                                                echo esc_html( $itinerary_date ) . '';
                                             }
                                             if ( $itinerary_time ) {
-                                                echo esc_html_e( 'Time', 'wp-travel' ). ':' . esc_html( $itinerary_time );
+                                                echo ', ' . esc_html( $itinerary_time ) . ' ';
                                             }
                                         ?>
                                     </strong> 
