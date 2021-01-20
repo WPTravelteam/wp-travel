@@ -20,7 +20,7 @@ export default () => {
         enable_expired_trip_option,
         expired_trip_set_to,
         trip_pricing_options_layout,
-        calender_view,
+        trip_date_listing,
         options
         } = allData;
 
@@ -49,7 +49,7 @@ export default () => {
             { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) && 
                 <>
             
-                    { 'no' == switch_to_react ?
+                    { 'no' == switch_to_react &&
                         <PanelRow>
                             <label>{ __( 'Trip Pricing Options Listing', 'wp-travel' ) }</label>
                             <div className="wp-travel-field-value">
@@ -69,28 +69,34 @@ export default () => {
                                 <p className="description">{__( 'This options will control how you display trip dates and prices.', 'wp-travel' )}</p>
                             </div>
                         </PanelRow>
-                        :
-                        <>
-                        {/* Need to build frontend functionality to uncomment this feature. */}
-                        {/* <PanelRow>
-                            <label>{ __( 'Trip Dates Calendar View', 'wp-travel' ) }</label>
-                            <div className="wp-travel-field-value">
-                                <ToggleControl
-                                    checked={ calender_view == 'yes' }
-                                    onChange={ () => {
-                                        updateSettings({
-                                            ...allData,
-                                            calender_view: 'yes' == calender_view ? 'no': 'yes'
-                                        })
-                                    } }
-                                />
-                                <p className="description">{__( 'Enable/Disable calender view on the booking tab of trip page.', 'wp-travel' )}</p>
-                            </div>
-                        </PanelRow> */}
-                        </>
                     }
                 </>
             }
+            {/* <PanelRow>
+                <label>{ __( 'Trip date listing', 'wp-travel' ) }</label>
+                
+                <div className="wp-travel-field-value">
+                    <SelectControl
+                        value={ trip_date_listing }
+                        options={ [
+                            {
+                                label: __( 'Calendar', 'wp-travel' ),
+                                value:'calendar'
+                            }, {
+                                label: __( 'Dates', 'wp-travel' ),
+                                value:'dates'
+                            }
+                        ] }
+                        onChange={ ( value ) => {
+                            updateSettings({
+                                ...allData,
+                                trip_date_listing: value
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'List Date while booking or display calendar with available dates. Note: Date option only works for fixed departure trips.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow> */}
             <PanelRow>
                 <label>{ __( 'Enable Expired Trip Option', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
