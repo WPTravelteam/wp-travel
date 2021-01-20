@@ -12,7 +12,7 @@ class WP_Travel_Post_Status {
 	}
 
 	/**
-	 * Init.
+	 * Init post status class.
 	 *
 	 * @return void
 	 */
@@ -26,6 +26,12 @@ class WP_Travel_Post_Status {
 		add_filter( 'post_row_actions',  array( 'WP_Travel_Post_Status', 'remove_view_link' ), 10, 2 );
 	}
 
+	/**
+	 * Register Trip status.
+	 *
+	 * @since WP Travel 4.4.4
+	 * @return void
+	 */
 	public static function register_trip_status() {
 		register_post_status( 'expired', array(
 			'label'                     => _x( 'Expired', 'post', 'wp-travel' ),
@@ -37,6 +43,12 @@ class WP_Travel_Post_Status {
 		));
 	}
 
+	/**
+	 * Add custom status in dropdown.
+	 *
+	 * @since WP Travel 4.4.4
+	 * @return void
+	 */
 	public static function trip_status_dropdown() {
 		global $post;
 		if ( 'itineraries' !== $post->post_type  )
@@ -54,6 +66,12 @@ class WP_Travel_Post_Status {
 		<?php
 	}
 
+	/**
+	 * Add custom status in dropdown for quick edit.
+	 *
+	 * @since WP Travel 4.4.4
+	 * @return void
+	 */
 	public static function quick_edit_trip_status_dropdown() {
 		global $post;
 		if ( 'itineraries' !== $post->post_type  )
@@ -66,14 +84,27 @@ class WP_Travel_Post_Status {
 		</script>
 		<?php
 	}
+
+	/**
+	 * Status expired along with Title in the trip archive list.
+	 *
+	 * @since WP Travel 4.4.4
+	 * @return void
+	 */
 	public static function trip_states_column( $status ) {
 		global $post;
-		if ( 'expired' === $post->post_status ) {
+		if ( $post && 'expired' === $post->post_status ) {
 			$status['expired'] = 'Expired';
 		}
 		return $status;
 	}
 
+	/**
+	 * Remove edit, view.
+	 *
+	 * @since WP Travel 4.4.4
+	 * @return void
+	 */
 	public static function remove_view_link( $actions, $trip ) {
 		if ( WP_TRAVEL_POST_TYPE === $trip->post_type && 'expired' === $trip->post_status ) {
 			unset( $actions['view'], $actions['edit'], $actions['wp_travel_duplicate_post'], $actions['inline hide-if-no-js'] );
