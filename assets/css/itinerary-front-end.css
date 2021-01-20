@@ -1199,12 +1199,12 @@ a:hover {
 .wti__booking-area .wti__booking .wti__selectors {
   padding-top: 1em;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__pricing-name h4 {
+.wti__booking-area .wti__booking .wti-booking__pricing-name h4 {
   color: #7c7c7c;
   font-size: 16px;
   margin-bottom: 5px;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__pricing-name button {
+.wti__booking-area .wti__booking .wti-booking__pricing-name button {
   width: 100%;
   margin: 5px 0;
   color: var(--itinerary-dark-color);
@@ -1213,23 +1213,23 @@ a:hover {
   font-size: 14px;
   padding: 0.75em 1em;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__pricing-name button.active {
+.wti__booking-area .wti__booking .wti-booking__pricing-name button.active {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__pricing-name button:hover {
+.wti__booking-area .wti__booking .wti-booking__pricing-name button:hover {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__selected-time {
+.wti__booking-area .wti__booking .wti-booking__selected-time {
   margin-top: 10px;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__selected-time h4 {
+.wti__booking-area .wti__booking .wti-booking__selected-time h4 {
   color: #7c7c7c;
   font-size: 16px;
   margin-bottom: 5px;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__selected-time button {
+.wti__booking-area .wti__booking .wti-booking__selected-time button {
   margin: 5px 3px;
   display: inline-block;
   color: var(--itinerary-dark-color);
@@ -1238,11 +1238,11 @@ a:hover {
   padding: 0.75em 1em;
   font-size: 14px;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__selected-time button.active {
+.wti__booking-area .wti__booking .wti-booking__selected-time button.active {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
-.wti__booking-area .wti__booking .wp-travel-booking__selected-time button:hover {
+.wti__booking-area .wti__booking .wti-booking__selected-time button:hover {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
