@@ -9,9 +9,11 @@ import RRule from "rrule";
 import ErrorBoundry from './ErrorBoundry';
 import { wpTravelFormat, wpTravelTimeout } from "./functions";
 import PaxSelector from './sub-components/PaxSelector';
+import PaxSelectorNew from './sub-components/PaxSelectorNew';
 // sub-components
 import PricingListing from './sub-components/PricingListing';
 import TripExtrasListing from './sub-components/TripExtrasListing';
+import TripExtrasListingNew from './sub-components/TripExtrasListingNew';
 import TripTimesListing from './sub-components/TripTimesListing';
 
 const _ = lodash
@@ -734,7 +736,7 @@ const BookingCalender = () => {
 					{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
 				</div>
 				{
-					selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
+					selectedDateTime && <div className="wti__selectors">
 						{
 							nomineePricings.length > 1 && <ErrorBoundry>
 								<PricingListing
@@ -755,7 +757,7 @@ const BookingCalender = () => {
 						}
 						{
 							!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
-								<PaxSelector
+								<PaxSelectorNew
 									pricing={pricings[selectedPricing] || null}
 									onPaxChange={handlePaxChange}
 									counts={paxCounts}
@@ -765,7 +767,7 @@ const BookingCalender = () => {
 						}
 						{
 							!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
-								<TripExtrasListing
+								<TripExtrasListingNew
 									options={pricings[selectedPricing].trip_extras}
 									onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
 									counts={tripExtras}

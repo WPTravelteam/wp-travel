@@ -535,10 +535,6 @@ jQuery(function ($) {
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
 
-
-
-    $(function(){
-
     //grid list view filter
     $('.wti__grid-list-filter .wti__button').on('click', function(){
         $(this).addClass('active').siblings('.wti__button').removeClass('active');
@@ -587,8 +583,6 @@ jQuery(function ($) {
         if(v<=input_el.attr('max'))
         input_el.val(v)
     });
-
-    })
 
     $(window).on('scroll', function(){
     var sTop = $(window).scrollTop();
