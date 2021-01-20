@@ -1100,6 +1100,44 @@ a:hover {
 .wti__booking-area .wti__booking-date-picker input[type=date] {
   appearance: none;
 }
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper {
+  width: 100%;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn {
+  background-color: #f1f1f1;
+  transform: all 0.3s ease-in-out;
+  color: var(--itinerary-dark-color);
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  letter-spacing: 0.6px;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn span {
+  display: inline-block;
+  margin-left: 1em;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn span svg {
+  width: 17px;
+  height: 17px;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn span svg g {
+  transform: all 0.3s ease-in-out;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn:hover {
+  background-color: var(--itinerary-blue-color);
+  color: #fff;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn:hover span svg g {
+  fill: #fff;
+}
 .wti__booking-area .wti__booking .wti__selectors {
   padding-top: 1em;
 }
