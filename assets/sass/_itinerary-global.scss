@@ -1143,6 +1143,51 @@ a{
                 appearance: none;
             }
         }
+        .react-datepicker-wrapper{
+            width: 100%;
+            .react-datepicker__input-container{
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                .wp-travel-date-picker-btn{
+                    background-color: #f1f1f1;
+                    transform: all 0.3s ease-in-out;
+                    color:$itinerary-font-color;
+                    padding:1em;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 18px;
+                    letter-spacing: 0.6px;
+                    span{
+                        display: inline-block;
+                        margin-left: 1em;
+                       
+                        svg{
+                            width: 17px;
+                            height: 17px;
+                            g{
+                                transform: all 0.3s ease-in-out;
+                            }
+                        }
+                    }
+                    &:hover{
+                        background-color: $itinerary-blue-bg;
+                        color:#fff;
+
+                        span{
+                            svg{
+                                g{
+                                    fill:#fff;
+                                }
+                            }              
+                        }
+                    }
+                }
+            }
+        }
+
     }
     .wti__booking{
         .wti__selectors{
@@ -1273,6 +1318,8 @@ a{
         }
     }
 }
+
+
 
 .wti__discount-amount{
     color: red;
