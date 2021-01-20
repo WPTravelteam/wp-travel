@@ -35,7 +35,7 @@ const DiscountTable = ({ groupPricings }) => {
 	</div>
 }
 
-const PaxSelectorNew = ({ pricing, onPaxChange, counts }) => {
+const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 	let categories = pricing && pricing.categories || []
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
@@ -75,17 +75,13 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts }) => {
 		}
 	}
 
-	useEffect(() => {
-		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
-	}),[];
-
-	function bookingSelectorToggle(){
-		jQuery('.wti__selector-heading').parents('.wti__selector-item').toggleClass('active');
-		jQuery('.wti__selector-heading').siblings('.wti__selector-content-wrapper').stop().slideToggle();
+	function bookingSelectorPaxToggle(){
+		jQuery('.wti__selector-heading.pax').parents('.wti__selector-item').toggleClass('active');
+		jQuery('.wti__selector-heading.pax').siblings('.wti__selector-content-wrapper').stop().slideToggle();
 	}
 
 	return <div className="wti__selector-item wti__pax-selector active">
-		<h5 className="wti__selector-heading" onClick={bookingSelectorToggle}>
+		<h5 className="wti__selector-heading pax" onClick={bookingSelectorPaxToggle}>
 			{__i18n.bookings.booking_tab_pax_selector}
 			<div className="buttons">
 				<span className="toggler-icon"><i className="fas fa-chevron-down"></i></span>
