@@ -608,11 +608,6 @@ const BookingCalender = () => {
 		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
 	}),[];
 
-	// function bookingSelectorToggle(){
-	// 	jQuery('.wti__selector-heading').parents('.wti__selector-item').toggleClass('active');
-	// 	jQuery('.wti__selector-heading').siblings('.wti__selector-content-wrapper').stop().slideToggle();
-	// }
-
 	const DatePickerBtn = forwardRef(({ value, onClick }, ref) => (
 		!_wp_travel.itinerary_new ? 
 		<button className="wp-travel-date-picker-btn" onClick={onClick}>
@@ -806,10 +801,13 @@ const BookingCalender = () => {
 						</div>}
 					</div>
 			}
-			{selectedDate && selectedPricing && <div className="wp-travel-booking__panel-bottom">
-				<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-				<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
-			</div>}
+			{selectedDate && selectedPricing && <div className="wti__booking-total-amount">
+				<h3 className="amount-figure"><span>{__i18n.bookings.booking_tab_cart_total}</span><strong className="total-amount" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></h3>
+			</div>
+			}
+			{selectedDate && selectedPricing &&
+				<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wti__book-now-button">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+			}
 			</>
 		}
 	</>;

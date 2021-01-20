@@ -9,6 +9,7 @@ const TripTimesListingNew =  ({ selected, options, onTimeSelect }) => {
 	return <div className="wti-booking__selected-time">
 		{options.length > 0 && <>
 			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
+			<div className="wti_trip_times">
 			{
 				options.map((timeObject, i) => {
 					// let timeObject = moment(`${selectedDate.toDateString()} ${time}`) // TODO: save times to state as date object.
@@ -17,6 +18,7 @@ const TripTimesListingNew =  ({ selected, options, onTimeSelect }) => {
 					</button>
 				})
 			}
+			</div>
 		</>}
 	</div>
 }

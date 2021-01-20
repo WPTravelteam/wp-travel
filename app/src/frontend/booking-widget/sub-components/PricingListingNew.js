@@ -17,6 +17,7 @@ const PricingListingNew =  ({ selected, options, onPricingSelect }) => {
 		{
 			options.length > 1 && <>
 				<h4>{__i18n.bookings.pricings_list_label}</h4>
+				<div className="wti_price_lists">
 				{
 					options.map(
 						(id, i) => <button key={i}
@@ -27,6 +28,7 @@ const PricingListingNew =  ({ selected, options, onPricingSelect }) => {
 						</button>
 					)
 				}
+				</div>
 			</>
 		}
 	</div>
