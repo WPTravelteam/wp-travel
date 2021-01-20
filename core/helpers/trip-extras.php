@@ -23,6 +23,7 @@ class WP_Travel_Helpers_Trip_Extras {
 			$_trip_extras[ $index ]['id']      = $trip_extra->ID;
 			$_trip_extras[ $index ]['title']   = $trip_extra->post_title;
 			$_trip_extras[ $index ]['content'] = '';
+			$_trip_extras[ $index ]['url']     = get_the_permalink( $trip_extra->ID );
 			// $_trip_extras[$index]['regular_price'] = 0;
 			// $_trip_extras[$index]['sale_price'] = 0;
 			// $_trip_extras[$index]['is_sale'] = false;

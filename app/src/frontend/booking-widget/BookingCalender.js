@@ -601,6 +601,15 @@ const BookingCalender = () => {
 
 		updateState(_state)
 	}
+	
+	useEffect(() => {
+		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
+	}),[];
+
+	// function bookingSelectorToggle(){
+	// 	jQuery('.wti__selector-heading').parents('.wti__selector-item').toggleClass('active');
+	// 	jQuery('.wti__selector-heading').siblings('.wti__selector-content-wrapper').stop().slideToggle();
+	// }
 
 	const DatePickerBtn = forwardRef(({ value, onClick }, ref) => (
 		!_wp_travel.itinerary_new ? 
@@ -726,7 +735,7 @@ const BookingCalender = () => {
 			: // For new layout. @since v4.4.6
 			<>
 				{/* <h3>{__i18n.booking_tab_content_label}</h3> */}
-				{selectedDate && <button onClick={() => {
+				{selectedDate && <button className="wti_clear_all" onClick={() => {
 					let _initialState = Object.assign(initialState)
 					if (!isFixedDeparture)
 						delete _initialState.nomineePricings
