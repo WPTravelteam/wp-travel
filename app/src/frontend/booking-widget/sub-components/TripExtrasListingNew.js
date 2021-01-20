@@ -14,10 +14,10 @@ const TripExtrasListingNew = ({ options, onChange, counts }) => {
 		onChange(id, _xcount)()
 	}
 
-	return <div className="wp-travel-booking__trip-extras-wrapper">
+	return <div className="wti__selector-item wti__trip-extras">
 		{
 			options.length > 0 && <>
-				<h4>{__i18n.bookings.trip_extras_list_label}</h4>
+				<h5>{__i18n.bookings.trip_extras_list_label}</h5>
 				<ul className="wp-travel-booking__trip-option-list">
 					{
 						options.map((tx, i) => {
