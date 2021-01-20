@@ -1151,7 +1151,7 @@ a{
                 width: 100%;
                 .wp-travel-date-picker-btn{
                     background-color: #f1f1f1;
-                    transform: all 0.3s ease-in-out;
+                    transition: all 0.2s ease-in-out;
                     color:$itinerary-font-color;
                     padding:1em;
                     width: 100%;
@@ -1168,7 +1168,7 @@ a{
                             width: 17px;
                             height: 17px;
                             g{
-                                transform: all 0.3s ease-in-out;
+                                transition: all 0.1s ease-in-out;
                             }
                         }
                     }
@@ -1185,11 +1185,90 @@ a{
                         }
                     }
                 }
+
             }
         }
+        /* calender */
+        .react-datepicker__tab-loop{
+            .react-datepicker{
+
+                /* top button */
+                .react-datepicker__navigation--previous{
+                    &:hover,&:focus{
+                        border-right-color: #b3b3b3;
+                    }
+                }
+                
+                .react-datepicker__navigation--next{
+                    background-color: unset;
+                    &:hover,&:focus{
+                        border-left-color: #b3b3b3;
+                       }
+                }
+
+                .react-datepicker__month-container{
+                    .react-datepicker__header{
+                     
+                        .react-datepicker__current-month{
+                            margin: .5em 0em 1em;
+                        }
+                        .react-datepicker__day-names {
+                            display: flex;
+                            justify-content: space-between;
+                            padding-top: 8px;
+                        }
+                        .react-datepicker__header__dropdown{
+                            .react-datepicker__month-select,.react-datepicker__year-select{
+                                background: none !important;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                padding: 0.7em 1em;
+                                color: #555;
+                                height: unset;
+                            }
+                            
+                            .react-datepicker__month-dropdown-container{}
+                            .react-datepicker__year-dropdown-container{
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+       
 
     }
     .wti__booking{
+        .wti_clear_all{
+            background-color: unset;
+            padding: .5em 1em;
+            border: 0;
+            outline: none;
+            color:$itinerary-font-color;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease-in-out;
+            border-radius:0;
+            width:100%;
+            text-align: right;
+            display: inline-block;
+            white-space: nowrap;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            svg{
+                width:10px;
+                margin-right: 7px;
+            }
+            &:hover{
+                color: #f83531;
+                svg{
+                    g{
+                        fill:#f83531;
+                    }
+                }
+            }
+        }
         .wti__selectors{
             padding-top: 1em;
         }
@@ -1224,6 +1303,11 @@ a{
                     }
                     .wti__selector-option-title{
                         font-size: 12px;
+                        color:$itinerary-font-color;
+                    }
+                    .wti_item-price{
+                        padding: 5px 0;
+                        display: inline-block;
                     }
                     .wti__selector-people-input{
                         display: flex;
@@ -1249,6 +1333,7 @@ a{
                             button, .button{
                                 width: 30px;
                                 border: 0;
+                                padding:0;
                                 cursor: pointer;
                                 background-color: $itinerary-blue-bg;
                                 color: #fff;
