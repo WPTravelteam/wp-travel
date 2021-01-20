@@ -12,9 +12,11 @@ import PaxSelector from './sub-components/PaxSelector';
 import PaxSelectorNew from './sub-components/PaxSelectorNew';
 // sub-components
 import PricingListing from './sub-components/PricingListing';
+import PricingListingNew from './sub-components/PricingListingNew';
 import TripExtrasListing from './sub-components/TripExtrasListing';
 import TripExtrasListingNew from './sub-components/TripExtrasListingNew';
 import TripTimesListing from './sub-components/TripTimesListing';
+import TripTimesListingNew from './sub-components/TripTimesListingNew';
 
 const _ = lodash
 
@@ -755,7 +757,7 @@ const BookingCalender = () => {
 					selectedDateTime && <div className="wti__selectors">
 						{
 							nomineePricings.length > 1 && <ErrorBoundry>
-								<PricingListing
+								<PricingListingNew
 									selected={selectedPricing}
 									options={nomineePricings}
 									onPricingSelect={handlePricingSelect}
@@ -764,7 +766,7 @@ const BookingCalender = () => {
 						}
 						{
 							!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
-								<TripTimesListing
+								<TripTimesListingNew
 									selected={selectedDateTime}
 									onTimeSelect={handleTimeClick}
 									options={nomineeTimes}
