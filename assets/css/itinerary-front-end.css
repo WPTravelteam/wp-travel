@@ -1089,6 +1089,9 @@ a:hover {
     top: 100px;
   }
 }
+.wti__booking-area .wti__booking-date-picker {
+  /* calender */
+}
 .wti__booking-area .wti__booking-date-picker input {
   background-color: #f1f1f1;
   border-radius: 0;
@@ -1110,7 +1113,7 @@ a:hover {
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn {
   background-color: #f1f1f1;
-  transform: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   color: var(--itinerary-dark-color);
   padding: 1em;
   width: 100%;
@@ -1129,7 +1132,7 @@ a:hover {
   height: 17px;
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn span svg g {
-  transform: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn:hover {
   background-color: var(--itinerary-blue-color);
@@ -1137,6 +1140,61 @@ a:hover {
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn:hover span svg g {
   fill: #fff;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker {
+  /* top button */
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__navigation--previous:hover, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__navigation--previous:focus {
+  border-right-color: #b3b3b3;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__navigation--next {
+  background-color: unset;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__navigation--next:hover, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__navigation--next:focus {
+  border-left-color: #b3b3b3;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__current-month {
+  margin: 0.5em 0em 1em;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__day-names {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-select, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-select {
+  background: none !important;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 0.7em 1em;
+  color: #555;
+  height: unset;
+}
+.wti__booking-area .wti__booking .wti_clear_all {
+  background-color: unset;
+  padding: 0.5em 1em;
+  border: 0;
+  outline: none;
+  color: var(--itinerary-dark-color);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0;
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+  white-space: nowrap;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+.wti__booking-area .wti__booking .wti_clear_all svg {
+  width: 10px;
+  margin-right: 7px;
+}
+.wti__booking-area .wti__booking .wti_clear_all:hover {
+  color: #f83531;
+}
+.wti__booking-area .wti__booking .wti_clear_all:hover svg g {
+  fill: #f83531;
 }
 .wti__booking-area .wti__booking .wti__selectors {
   padding-top: 1em;
@@ -1169,6 +1227,11 @@ a:hover {
 }
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti__selector-option-title {
   font-size: 12px;
+  color: var(--itinerary-dark-color);
+}
+.wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti_item-price {
+  padding: 5px 0;
+  display: inline-block;
 }
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti__selector-people-input {
   display: flex;
@@ -1196,6 +1259,7 @@ a:hover {
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti__selector-people-input .input-field button, .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti__selector-people-input .input-field .button {
   width: 30px;
   border: 0;
+  padding: 0;
   cursor: pointer;
   background-color: var(--itinerary-blue-color);
   color: #fff;
