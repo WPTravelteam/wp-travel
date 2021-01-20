@@ -1204,7 +1204,7 @@ a:hover {
   font-size: 16px;
   margin-bottom: 5px;
 }
-.wti__booking-area .wti__booking .wti-booking__pricing-name button {
+.wti__booking-area .wti__booking .wti-booking__pricing-name .wti_price_lists button {
   width: 100%;
   margin: 5px 0;
   color: var(--itinerary-dark-color);
@@ -1213,11 +1213,11 @@ a:hover {
   font-size: 14px;
   padding: 0.75em 1em;
 }
-.wti__booking-area .wti__booking .wti-booking__pricing-name button.active {
+.wti__booking-area .wti__booking .wti-booking__pricing-name .wti_price_lists button.active {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
-.wti__booking-area .wti__booking .wti-booking__pricing-name button:hover {
+.wti__booking-area .wti__booking .wti-booking__pricing-name .wti_price_lists button:hover {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
@@ -1229,7 +1229,7 @@ a:hover {
   font-size: 16px;
   margin-bottom: 5px;
 }
-.wti__booking-area .wti__booking .wti-booking__selected-time button {
+.wti__booking-area .wti__booking .wti-booking__selected-time .wti_trip_times button {
   margin: 5px 3px;
   display: inline-block;
   color: var(--itinerary-dark-color);
@@ -1238,11 +1238,11 @@ a:hover {
   padding: 0.75em 1em;
   font-size: 14px;
 }
-.wti__booking-area .wti__booking .wti-booking__selected-time button.active {
+.wti__booking-area .wti__booking .wti-booking__selected-time .wti_trip_times button:hover {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }
-.wti__booking-area .wti__booking .wti-booking__selected-time button:hover {
+.wti__booking-area .wti__booking .wti-booking__selected-time .wti_trip_times button[disabled] {
   background-color: var(--itinerary-blue-color);
   color: #fff;
 }

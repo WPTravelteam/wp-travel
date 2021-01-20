@@ -1278,24 +1278,27 @@ a{
                 font-size: 16px;
                 margin-bottom: 5px;
             }
-            button{
-                width:100%;
-                margin:5px 0;
-                color:$itinerary-font-color;
-                background-color: #eee;
-                text-align: left;
-                font-size: 14px;
-                padding: 0.75em 1em;
-                
-                &.active{
-                    background-color:$itinerary-blue-bg;
-                    color:#fff;
-                }
-                &:hover{
-                    background-color:$itinerary-blue-bg;
-                    color:#fff;
+            .wti_price_lists{
+                button{
+                    width:100%;
+                    margin:5px 0;
+                    color:$itinerary-font-color;
+                    background-color: #eee;
+                    text-align: left;
+                    font-size: 14px;
+                    padding: 0.75em 1em;
+                    
+                    &.active{
+                        background-color:$itinerary-blue-bg;
+                        color:#fff;
+                    }
+                    &:hover{
+                        background-color:$itinerary-blue-bg;
+                        color:#fff;
+                    }
                 }
             }
+           
         }
         .wti-booking__selected-time{
             margin-top: 10px;
@@ -1304,24 +1307,29 @@ a{
                 font-size: 16px;
                 margin-bottom: 5px;
             }
-            button{
-                margin: 5px 3px;
-                display: inline-block;
-                color:$itinerary-font-color;
-                background-color: #eee;
-                text-align: left;
-                padding: 0.75em 1em;
-                font-size: 14px;
-                
-                &.active{
-                    background-color:$itinerary-blue-bg;
-                    color:#fff;
+            .wti_trip_times{
+                button{
+                    margin: 5px 3px;
+                    display: inline-block;
+                    color:$itinerary-font-color;
+                    background-color: #eee;
+                    text-align: left;
+                    padding: 0.75em 1em;
+                    font-size: 14px;
+
+                    
+                    
+                    &:hover{
+                        background-color:$itinerary-blue-bg;
+                        color:#fff;
+                    }
                 }
-                &:hover{
+                button[disabled]{
                     background-color:$itinerary-blue-bg;
                     color:#fff;
                 }
             }
+           
         }
         
         .wti__selector-item{
