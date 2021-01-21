@@ -8,7 +8,7 @@ const __i18n = {
 	..._wp_travel.strings
 }
 const DiscountTable = ({ groupPricings }) => {
-	return <div id="discount-table" className="discount-table" style={{ display: 'none' }}>
+	return <div className="discount-table" style={{ display: 'none' }}>
 		<table>
 			<thead>
 				<tr>
@@ -67,7 +67,8 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 	}
 
 	const groupDiscountClickhandler = e => {
-		let dt = document.getElementById('discount-table');
+		let dt = e.target.closest('div').querySelector('.discount-table')
+		console.log(dt)
 		if (dt && dt.style.display == 'none') {
 			dt.removeAttribute('style')
 		} else {
@@ -93,7 +94,7 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 				categories.map((c, i) => {
 					let price = c.is_sale ? c.sale_price : c.regular_price
 					return <div className="wti__selector-option" key={i}>
-							<div id="wti__pax_info" className="wti__pax_info">
+							<div className="wti__pax_info">
 								<h6 className="wti__selector-option-title">{`${c.term_info.title}`}</h6>
 								{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip wti-group-discount-button" onClick={groupDiscountClickhandler}>
 									<span>{__i18n.bookings.group_discount_tooltip}</span>
@@ -118,6 +119,9 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 									</svg>
 									{__i18n.bookings.view_group_discount}
 								</span>}
+								{
+									c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
+								}
 							</div>
 							<span className="wti_item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
 						<div className="wti__selector-people-input">
@@ -130,9 +134,6 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 							</div>
 							<div className="wti__input-display-figure"><h6 dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></h6></div>
 						</div>
-						{
-							c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
-						}
 					</div>
 				})
 			}
