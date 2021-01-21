@@ -337,6 +337,40 @@ function wp_travel_single_trip_contents( $trip_id ) {
 					</div>
 				</div>
 				<div class="wti__grid-item col-lg-4">
+					<div class="wti__travel-info">
+						<div class="wti__travel-info-wrapper">
+							<div class="wti__travel-info-item">
+								<div class="wti__travel-info_detail">
+									<div class="wti__travel-info_name">
+										<strong>Trip Type</strong>
+									</div>
+									<div class="wti__travel-info_value">
+										<a href=''>Paragliding</a>
+									</div>
+								</div>
+							</div><!-- wti_-travel-info-item -->
+							<div class="wti__travel-info-item">
+								<div class="wti__travel-info_detail">
+									<div class="wti__travel-info_name">
+										<strong>Trip Activity</strong>
+									</div>
+									<div class="wti__travel-info_value">
+										<a href=''>Hiking</a>
+									</div>
+								</div>
+							</div><!-- wti_-travel-info-item -->
+							<div class="wti__travel-info-item">
+								<div class="wti__travel-info_detail">
+									<div class="wti__travel-info_name">
+										<strong>Group Size</strong>
+									</div>
+									<div class="wti__travel-info_value">
+										<p>5px</p>
+									</div>
+								</div>
+							</div><!-- wti_-travel-info-item -->
+						</div>
+					</div>
 					<div class="wti__booking-area">
 						<div id="wti__booking" class="wti__booking">
 						<!-- Handle with React from here-->
