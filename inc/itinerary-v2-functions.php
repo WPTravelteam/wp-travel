@@ -337,35 +337,67 @@ function wp_travel_single_trip_contents( $trip_id ) {
 					</div>
 				</div>
 				<div class="wti__grid-item col-lg-4">
+					<?php
+					$strings               = wp_travel_get_strings();
+					$trip_type_text        = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
+					$empty_trip_type_text  = isset( $strings['empty_results']['trip_type'] ) ? $strings['empty_results']['trip_type'] : __( 'No Trip Type', 'wp-travel' );
+					$activities_text       = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
+					$empty_activities_text = isset( $strings['empty_results']['activities'] ) ? $strings['empty_results']['activities'] : __( 'No Activities', 'wp-travel' );
+					$group_size_text       = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
+					$pax_text              = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
+					$empty_group_size_text = isset( $strings['empty_results']['group_size'] ) ? $strings['empty_results']['group_size'] : __( 'No Size Limit', 'wp-travel' );
+					$wp_travel_itinerary   = new WP_Travel_Itinerary();
+					?>
 					<div class="wti__travel-info">
 						<div class="wti__travel-info-wrapper">
 							<div class="wti__travel-info-item">
 								<div class="wti__travel-info_detail">
 									<div class="wti__travel-info_name">
-										<strong>Trip Type</strong>
+										<strong><?php echo esc_html( $trip_type_text ); ?></strong>
 									</div>
 									<div class="wti__travel-info_value">
-										<a href=''>Paragliding</a>
+									<?php
+									$trip_types_list = $wp_travel_itinerary->get_trip_types_list();
+									if ( $trip_types_list ) {
+										echo wp_kses( $trip_types_list, wp_travel_allowed_html( array( 'a' ) ) );
+									} else {
+										echo esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_no_trip_type_text' need to remove in future.
+									}
+									?>
 									</div>
 								</div>
 							</div><!-- wti_-travel-info-item -->
 							<div class="wti__travel-info-item">
 								<div class="wti__travel-info_detail">
 									<div class="wti__travel-info_name">
-										<strong>Trip Activity</strong>
+										<strong><?php echo esc_html( $activities_text ); ?></strong>
 									</div>
 									<div class="wti__travel-info_value">
-										<a href=''>Hiking</a>
+									<?php
+									$activity_list = $wp_travel_itinerary->get_activities_list();
+									if ( $activity_list ) {
+										echo wp_kses( $activity_list, wp_travel_allowed_html( array( 'a' ) ) );
+									} else {
+										echo esc_html( apply_filters( 'wp_travel_default_no_activity_text', $empty_activities_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_no_activity_text' need to remove in future.
+									}
+									?>
 									</div>
 								</div>
 							</div><!-- wti_-travel-info-item -->
 							<div class="wti__travel-info-item">
 								<div class="wti__travel-info_detail">
 									<div class="wti__travel-info_name">
-										<strong>Group Size</strong>
+										<strong><?php echo esc_html( $group_size_text ); ?></strong>
 									</div>
 									<div class="wti__travel-info_value">
-										<p>5px</p>
+									<?php
+									$group_size = wp_travel_get_group_size( $trip_id );
+									if ( (int) $group_size && $group_size < 999 ) {
+										printf( apply_filters( 'wp_travel_template_group_size_text', __( '%d %s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ); // phpcs:ignore
+									} else {
+										echo esc_html( apply_filters( 'wp_travel_default_group_size_text', $empty_group_size_text ) ); // already filterable label using wp_travel_strings filter so this filter 'wp_travel_default_group_size_text' need to remove in future.
+									}
+									?>
 									</div>
 								</div>
 							</div><!-- wti_-travel-info-item -->
