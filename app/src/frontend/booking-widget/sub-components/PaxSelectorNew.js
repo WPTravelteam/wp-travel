@@ -67,7 +67,7 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 	}
 
 	const groupDiscountClickhandler = e => {
-		let dt = e.target.closest('li').querySelector('.discount-table')
+		let dt = e.target.closest('div').querySelector('.discount-table')
 		if (dt && dt.style.display == 'none') {
 			dt.removeAttribute('style')
 		} else {
@@ -95,7 +95,7 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 					return <div className="wti__selector-option" key={i}>
 							<h6 className="wti__selector-option-title">{`${c.term_info.title}`}</h6>
 							<span className="wti_item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
-							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip group-discount-button" onClick={groupDiscountClickhandler}>
+							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip wti-group-discount-button" onClick={groupDiscountClickhandler}>
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
                                         c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
