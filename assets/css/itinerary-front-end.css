@@ -1301,16 +1301,27 @@ a:hover {
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extras_info .wti__selector-option-title {
   padding: 5px 0;
 }
+.wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extras_info .wti_item-price {
+  width: auto;
+}
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p a {
   color: var(--itinerary-blue-color);
 }
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p a:hover {
   color: var(--itinerary-green-color);
 }
-.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .wti__pax_info {
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .wti__selector-inner .wti__selector-option .wti__pax_info {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .wti__selector-inner .wti__selector-option .wti_item-price {
+  width: 100%;
+  padding: 10px 0 5px;
+  text-align: right;
+}
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .wti__selector-inner .wti__selector-option .wti_item-price del {
+  color: #a2a2a2;
 }
 .wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip {
   cursor: pointer;
@@ -1351,8 +1362,12 @@ a:hover {
   left: 50%;
   transform: translateX(-50%);
 }
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip:hover {
+  color: var(--itinerary-blue-color);
+}
 .wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip:hover span {
   display: block;
+  color: #fff;
 }
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-heading {
   color: #7c7c7c;
