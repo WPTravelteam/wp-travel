@@ -1203,7 +1203,7 @@ a:hover {
 .wti__booking-area .wti__booking .wti-booking__pricing-name h4 {
   color: #7c7c7c;
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .wti__booking-area .wti__booking .wti-booking__pricing-name .wti_price_lists button {
   width: 100%;
@@ -1228,7 +1228,7 @@ a:hover {
 .wti__booking-area .wti__booking .wti-booking__selected-time h4 {
   color: #7c7c7c;
   font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .wti__booking-area .wti__booking .wti-booking__selected-time .wti_trip_times button {
   margin: 5px 3px;
@@ -1307,12 +1307,18 @@ a:hover {
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p a:hover {
   color: var(--itinerary-green-color);
 }
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .wti__pax_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip {
   cursor: pointer;
   font-size: 12px;
   display: inline-flex;
   align-items: center;
   text-decoration: underline;
+  position: relative;
 }
 .wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip svg {
   width: 15px;
@@ -1335,7 +1341,7 @@ a:hover {
   margin-bottom: 5px;
   display: none;
 }
-.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip span ::before {
+.wti__booking-area .wti__booking .wti__selector-item.wti__pax-selector .tooltip span::before {
   content: "";
   border-top: 5px solid rgba(0, 0, 0, 0.9);
   border-left: 5px solid transparent;
