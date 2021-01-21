@@ -40,9 +40,11 @@ const TripExtrasListingNew = ({ options, onChange, counts, toggler }) => {
                                 C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
 										</svg>
 									</span>
-									<h6 className="wti__selector-option-title">
-										{tx.title}
-									</h6>
+									<div className="wti__trip_extras_info">
+										<h6 className="wti__selector-option-title">
+											{tx.title}
+										</h6>
+									</div>
 									{tx.content && <div className="wti__trip_extra_content">
 										<p dangerouslySetInnerHTML={{ __html: tx.content }}></p>
 									</div>}
@@ -59,8 +61,10 @@ const TripExtrasListingNew = ({ options, onChange, counts, toggler }) => {
                                 C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
 									</svg>
 								</span>
-								<h6 className="wti__selector-option-title">{tx.title}</h6>
-								<span className="wti_item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /unit</span>
+								<div className="wti__trip_extras_info">
+									<h6 className="wti__selector-option-title">{tx.title}</h6>
+									<span className="wti_item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /unit</span>
+								</div>
 								{tx.excerpt && <div className="wti__trip_extra_content">
 									<p dangerouslySetInnerHTML={{__html: `${tx.excerpt}${tx.link && `<a class="wti_excerpt" target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`}}>
 									</p>
