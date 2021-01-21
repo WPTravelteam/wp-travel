@@ -754,6 +754,7 @@ a{
                     .accordion-toggle{
                         margin-left: 15px;
                         text-decoration: none;
+                        margin-bottom: 0;
                     }
                 }
                 &:hover{
@@ -1379,6 +1380,17 @@ a{
                                 }
                                 
                             }/* checkbox */
+                            .wti__trip_extras_info{
+                                display: flex;
+                                align-items: center;
+                                flex-wrap: wrap;
+                                justify-content:space-between;
+                                .wti__selector-option-title{
+                                    padding: 5px 0;
+                                }
+                                
+
+                            }
                             .wti__trip_extra_content{
                                 p{
                                     a{
@@ -1394,7 +1406,49 @@ a{
                 }
             }
             &.wti__pax-selector{
-
+                .tooltip{
+                    cursor: pointer;
+                    font-size: 12px;
+                    display: inline-flex;
+                    align-items: center;
+                    text-decoration: underline;
+                    svg{
+                        width: 15px;
+                        height: 15px;
+                        margin-right: .25em;
+                        fill:$itinerary-blue-bg;
+                    }
+                    span{
+                        position: absolute;
+                        bottom: 100%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        padding: 5px;
+                        background-color: rgba(0,0,0,0.9);
+                        color: #fff;
+                        transition: all 0.2s ease-in-out;
+                        border-radius: 4px;
+                        font-size: 10px;
+                        white-space: nowrap;
+                        margin-bottom: 5px;
+                        display: none;
+                        ::before {
+                            content: "";
+                            border-top: 5px solid rgba(0,0,0,0.9);
+                            border-left: 5px solid transparent;
+                            border-right: 5px solid transparent;
+                            position: absolute;
+                            top: 100%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                        }
+                    }  
+                    &:hover{
+                        span{
+                            display: block;
+                        }
+                    }
+                } 
             }
             .wti__selector-heading{
                 color: #7c7c7c;
@@ -1503,7 +1557,8 @@ a{
                     color: $itinerary-green;
                 }
                 .total-amount{
-                    font-weight: 900
+                    font-weight: 900;
+                    color:  $itinerary-font-color;
                     span{
                         color:  $itinerary-font-color;
                     }
