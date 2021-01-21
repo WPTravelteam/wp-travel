@@ -8,7 +8,7 @@ const __i18n = {
 	..._wp_travel.strings
 }
 const DiscountTable = ({ groupPricings }) => {
-	return <div className="discount-table" style={{ display: 'none' }}>
+	return <div id="discount-table" className="discount-table" style={{ display: 'none' }}>
 		<table>
 			<thead>
 				<tr>
@@ -67,7 +67,7 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 	}
 
 	const groupDiscountClickhandler = e => {
-		let dt = e.target.closest('div').querySelector('.discount-table')
+		let dt = document.getElementById('discount-table');
 		if (dt && dt.style.display == 'none') {
 			dt.removeAttribute('style')
 		} else {
@@ -93,9 +93,8 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 				categories.map((c, i) => {
 					let price = c.is_sale ? c.sale_price : c.regular_price
 					return <div className="wti__selector-option" key={i}>
-							<div className="wti__pax_info">
+							<div id="wti__pax_info" className="wti__pax_info">
 								<h6 className="wti__selector-option-title">{`${c.term_info.title}`}</h6>
-								<span className="wti_item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
 								{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip wti-group-discount-button" onClick={groupDiscountClickhandler}>
 									<span>{__i18n.bookings.group_discount_tooltip}</span>
 									<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
@@ -120,6 +119,7 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 									{__i18n.bookings.view_group_discount}
 								</span>}
 							</div>
+							<span className="wti_item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
 						<div className="wti__selector-people-input">
 							{/* <span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span> */}
 							<div className="input-field">
