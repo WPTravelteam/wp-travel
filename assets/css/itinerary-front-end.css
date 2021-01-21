@@ -729,6 +729,7 @@ a:hover {
 .trip-faq .accordion .accordion-panel .accordion-panel-heading .accordion-panel-title .accordion-toggle {
   margin-left: 15px;
   text-decoration: none;
+  margin-bottom: 0;
 }
 .trip-faq .accordion .accordion-panel .accordion-panel-heading:hover {
   background-color: #f2f2f2;
@@ -1291,6 +1292,15 @@ a:hover {
   display: block;
   fill: #fff;
 }
+.wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extras_info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extras_info .wti__selector-option-title {
+  padding: 5px 0;
+}
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p a {
   color: var(--itinerary-blue-color);
 }
@@ -1399,8 +1409,11 @@ a:hover {
   color: var(--itinerary-green-color);
 }
 .wti__booking-area .wti__booking .wti__booking-total-amount .amount-figure .total-amount {
-  font-weight: 900 span;
-  font-weight-color: var(--itinerary-dark-color);
+  font-weight: 900;
+  color: var(--itinerary-dark-color);
+}
+.wti__booking-area .wti__booking .wti__booking-total-amount .amount-figure .total-amount span {
+  color: var(--itinerary-dark-color);
 }
 .wti__booking-area .wti__booking .wti__book-now-button {
   all: unset;

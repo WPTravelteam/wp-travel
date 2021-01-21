@@ -754,6 +754,7 @@ a{
                     .accordion-toggle{
                         margin-left: 15px;
                         text-decoration: none;
+                        margin-bottom: 0;
                     }
                 }
                 &:hover{
@@ -1379,6 +1380,17 @@ a{
                                 }
                                 
                             }/* checkbox */
+                            .wti__trip_extras_info{
+                                display: flex;
+                                align-items: center;
+                                flex-wrap: wrap;
+                                justify-content:space-between;
+                                .wti__selector-option-title{
+                                    padding: 5px 0;
+                                }
+                                
+
+                            }
                             .wti__trip_extra_content{
                                 p{
                                     a{
@@ -1503,7 +1515,8 @@ a{
                     color: $itinerary-green;
                 }
                 .total-amount{
-                    font-weight: 900
+                    font-weight: 900;
+                    color:  $itinerary-font-color;
                     span{
                         color:  $itinerary-font-color;
                     }
