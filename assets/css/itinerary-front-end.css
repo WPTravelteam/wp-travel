@@ -864,6 +864,20 @@ a:hover {
   right: 0;
   z-index: -1;
 }
+.wti__single-inner .wti__hero-section .itinerary-single-trip-offer .wti__trip-meta-offer {
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
+  padding: 0.5em 0;
+  width: 140px;
+  text-align: center;
+  clip-path: polygon(31% 0, 68% 0, 100% 100%, 0 100%);
+  transform: rotate(-45deg);
+  top: 13px;
+  left: -35px;
+  position: absolute;
+  z-index: 1;
+}
 .wti__single-inner .wti__hero-section .wti__hero-content {
   flex: 1;
   position: relative;

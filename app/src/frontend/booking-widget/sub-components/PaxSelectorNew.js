@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import { Fragment, useEffect } from '@wordpress/element'
-import { wpTravelFormat } from '../functions'
+import { wpTravelFormat, wpTravelFormatNew } from '../functions'
 
 const _ = lodash
 const { currency_symbol: currencySymbol } = _wp_travel
@@ -8,7 +8,7 @@ const __i18n = {
 	..._wp_travel.strings
 }
 const DiscountTable = ({ groupPricings }) => {
-	return <div className="discount-table" style={{ display: 'none' }}>
+	return <div className="discount-table">
 		<table>
 			<thead>
 				<tr>
@@ -26,7 +26,7 @@ const DiscountTable = ({ groupPricings }) => {
 						return <tr key={index}>
 							<td>{gp.min_pax}</td>
 							<td>{gp.max_pax}</td>
-							<td dangerouslySetInnerHTML={{ __html: wpTravelFormat(gp.price) }}></td>
+							<td dangerouslySetInnerHTML={{ __html: wpTravelFormatNew(gp.price) }}></td>
 						</tr>
 					})
 				}
@@ -96,8 +96,12 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 					return <div className="wti__selector-option" key={i}>
 							<div className="wti__pax_info">
 								<h6 className="wti__selector-option-title">{`${c.term_info.title}`}</h6>
-								{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip wti-group-discount-button" onClick={groupDiscountClickhandler}>
-									<span>{__i18n.bookings.group_discount_tooltip}</span>
+								{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip wti-group-discount-button">
+									<span>
+										{
+											c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
+										}
+									</span>
 									<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
 											c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
 											c-4.647,0.656-9.242-0.838-12.613-4.099l-31.251-30.232c-17.401-16.834-44.661-16.835-62.061,0L193.72,42.859
@@ -119,9 +123,6 @@ const PaxSelectorNew = ({ pricing, onPaxChange, counts, toggler }) => {
 									</svg>
 									{__i18n.bookings.view_group_discount}
 								</span>}
-								{
-									c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
-								}
 							</div>
 							<span className="wti_item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
 						<div className="wti__selector-people-input">

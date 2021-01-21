@@ -109,7 +109,14 @@ function wp_travel_hero_section( $trip_id ) {
 function wp_travel_hero_section_banner_image( $trip_id ) {
 	?>
 	<img src="<?php echo esc_url( wp_travel_get_post_thumbnail_url( $trip_id, 'large' ) ); ?>" alt="">
-	<?php
+	<?php 
+	if ( WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) ) ) {
+		?>
+		<div class="itinerary-single-trip-offer">
+			<span class="wti__trip-meta-offer"><?php esc_html_e( 'Offer', 'wp-travel' ) ?></span>
+		</div>
+		<?php
+	}
 }
 
 /**
@@ -256,7 +263,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 							<?php
 							$tab_label = $tab_info['label'];
 							if ( 'booking' === $tab_key ) {
-								continue;
+								$tab_key = 'wti__booking'; // To scroll down to booking tab on right side.
 							}
 							?>
 							<button class="scroll-spy-button <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?>" data-scroll='#<?php echo esc_attr( $tab_key ); ?>'>
