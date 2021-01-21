@@ -51,7 +51,7 @@ const TripExtrasListingNew = ({ options, onChange, counts, toggler }) => {
 							let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
 							price = parseFloat(price)
 							let _count = counts[tx.id]
-							return <li key={i} className={tx.is_required ? 'wp-travel__required-extra' : ''}>
+							return <div key={i} className={tx.is_required ? 'wti__selector-option wti__required-extra' : 'wti__selector-option'}>
 								<span className={`checkbox${_count > 0 ? ' checked' : ''}`}>
 									<svg className="tick" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" style={{ enableBackground: 'new 0 0 512 512' }}>
 										<path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0
@@ -59,28 +59,23 @@ const TripExtrasListingNew = ({ options, onChange, counts, toggler }) => {
                                 C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
 									</svg>
 								</span>
-								<div className="text-left">
-									<strong>{tx.title}</strong>
-									{tx.content && <div>
-										<p dangerouslySetInnerHTML={{
-											__html: `${tx.content}${tx.link && `<a target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`
-										}}>
-										</p>
+								<h6 className="wti__selector-option-title">{tx.title}</h6>
+								<span className="wti_item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /unit</span>
+								{tx.excerpt && <div className="wti__trip_extra_content">
+									<p dangerouslySetInnerHTML={{__html: `${tx.excerpt}${tx.link && `<a class="wti_excerpt" target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`}}>
+									</p>
+								</div>}
+								<div className="wti__selector-people-input">
+									<div className="input-field">
+										<button className="decrease_val" onClick={handleClick(i, -1)}>-</button>
+										<input type="number" value={_count} readOnly/>
+										<button className="increase_val" onClick={handleClick(i, 1)}>+</button>
 									</div>
-									}
-								</div>
-								<div className="text-right">
-									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /unit</span>
-									<div className="pricing-area">
-										<div className="qty-spinner">
-											<button onClick={handleClick(i, -1)}>-</button>
-											<span>{_count}</span>
-											<button onClick={handleClick(i, 1)}>+</button>
-										</div>
-										<div className="price" dangerouslySetInnerHTML={{__html: wpTravelFormat(_count * price)}}></div>
+									<div className="wti__input-display-figure"> 
+										<h6 dangerouslySetInnerHTML={{__html: wpTravelFormat(_count * price)}}></h6>
 									</div>
 								</div>
-							</li>
+							</div>
 						})
 					}
 

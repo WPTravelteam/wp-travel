@@ -23,7 +23,6 @@ class WP_Travel_Helpers_Trip_Extras {
 			$_trip_extras[ $index ]['id']      = $trip_extra->ID;
 			$_trip_extras[ $index ]['title']   = $trip_extra->post_title;
 			$_trip_extras[ $index ]['content'] = '';
-			$_trip_extras[ $index ]['url']     = get_the_permalink( $trip_extra->ID );
 			// $_trip_extras[$index]['regular_price'] = 0;
 			// $_trip_extras[$index]['sale_price'] = 0;
 			// $_trip_extras[$index]['is_sale'] = false;
@@ -31,6 +30,7 @@ class WP_Travel_Helpers_Trip_Extras {
 			// $_trip_extras[$index]['unit'] = 'unit';
 			if ( false !== $tour_extras_metas && is_array( $tour_extras_metas ) ) {
 				$_trip_extras[ $index ]['content'] = isset( $tour_extras_metas['extras_item_description'] ) ? $tour_extras_metas['extras_item_description'] : '';
+				$_trip_extras[ $index ]['excerpt'] = isset( $tour_extras_metas['extras_item_description'] ) ? wp_trim_words( $tour_extras_metas['extras_item_description'], 15 ) : '';
 				// $_trip_extras[$index]['regular_price'] = money_format( '%i', $tour_extras_metas['extras_item_price'] );
 				if ( class_exists( 'WP_Travel_Tour_Extras_Core' ) ) {
 					$price      = isset( $tour_extras_metas['extras_item_price'] ) ? $tour_extras_metas['extras_item_price'] : 0;
@@ -51,7 +51,7 @@ class WP_Travel_Helpers_Trip_Extras {
 			}
 			$index++;
 		}
-
+		
 		return array(
 			'code'        => 'WP_TRAVEL_TRIP_EXTRAS',
 			'trip_extras' => $_trip_extras,
