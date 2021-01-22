@@ -40,20 +40,23 @@ function wp_travel_hero_section( $trip_id ) {
 		<div class="wti__hero-content">
 			<div class="wti__container">
 				<div class="wti__trip-header">
+					<div class="wti__trip-title-wrapper">
+						<?php
+						/**
+						 * Hook 'wp_travel_before_single_title'.
+						 *
+						 * @param int trip_id.
+						 */
+						do_action( 'wp_travel_before_single_title', get_the_ID() );
+						wp_travel_do_deprecated_action( 'wp_tarvel_before_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_single_title' );
+						$show_title = apply_filters( 'wp_travel_show_single_page_title', true );
+
+						if ( $show_title ) {
+							the_title( '<h1 class="wti__trip-title">', '</h1>' );
+						}
+						?>
+					</div>
 					<?php
-					/**
-					 * Hook 'wp_travel_before_single_title'.
-					 *
-					 * @param int trip_id.
-					 */
-					do_action( 'wp_travel_before_single_title', get_the_ID() );
-					wp_travel_do_deprecated_action( 'wp_tarvel_before_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_single_title' );
-					$show_title = apply_filters( 'wp_travel_show_single_page_title', true );
-
-					if ( $show_title ) {
-						the_title( '<h1 class="wti__trip-title">', '</h1>' );
-					}
-
 					/**
 					 * Hook 'wp_travel_single_trip_after_title'.
 					 *
