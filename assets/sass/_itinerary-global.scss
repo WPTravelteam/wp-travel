@@ -1510,13 +1510,12 @@ a{
                         }
                         &::after{
                             content: "";
-                            border-top: 5px solid #fff;
-                            border-left: 5px solid transparent;
-                            border-right: 5px solid transparent;
+                            border-top: 10px solid #fff;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
                             position: absolute;
                             top: 100%;
-                            right: 20px;
-                           
+                            right: 17px;
                         }
                         
                         .discount-table{
