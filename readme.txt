@@ -246,6 +246,8 @@ Release Date:
 Fixes:
 * Issue in select pax section of legacy version of booking regarding price and price per not displaying in the list.
 * Translation of booking options list strings fixes in checkout page.
+* Cannot read property 'title' of undefined while selecting pricing.
+* Undefined $post global variable notice in customizer.
 
 = 4.4.4 =
 Release Date: 7th January, 2021
