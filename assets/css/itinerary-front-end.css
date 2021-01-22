@@ -891,10 +891,18 @@ a:hover {
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__trip-header {
   margin-bottom: 3em;
 }
+.wti__single-inner .wti__hero-section .wti__hero-content .wti__trip-title-wrapper {
+  display: flex;
+  align-items: center;
+}
+.wti__single-inner .wti__hero-section .wti__hero-content .wti__trip-title-wrapper .wp-travel-add-to-wishlists {
+  position: static;
+}
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__trip-title {
   margin-bottom: 0.5em;
   font-size: 50px;
   line-height: 1;
+  display: inline-block;
 }
 .wti__single-inner .wti__hero-section .wti__hero-content a {
   color: #ccc;

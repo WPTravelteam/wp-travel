@@ -927,11 +927,20 @@ a{
             .wti__trip-header{
                 margin-bottom: 3em;
             }
+            .wti__trip-title-wrapper{
+                display: flex;
+                align-items: center;
+                .wp-travel-add-to-wishlists{
+                  position: static;
+                }
+            }
             .wti__trip-title{
                 margin-bottom: .5em;
                 font-size: 50px;
                 line-height: 1;
+                display: inline-block;
             }
+            
             a{
                 color: #ccc;
                 &:hover{
