@@ -905,12 +905,12 @@ a{
                 color: #fff;
                 font-size: 14px;
                 padding: .5em 0;
-                width: 140px;
+                width: 122px;
                 text-align: center;
-                clip-path: polygon(31% 0,68% 0,100% 100%,0 100%);
+                clip-path: polygon(29% 0, 70% 0, 100% 100%, 0 100%);
                 transform: rotate(-45deg);
                 top: 13px;
-                left: -35px;
+                left: -31px;
                 position: absolute;
                 z-index: 1;
             }
@@ -1120,6 +1120,11 @@ a{
                                     color: $itinerary-green;
                                     margin-right: .5em;
                                 }
+                            }
+                            img{
+                                float: left;
+                                margin: 6px 16px 12px 0;
+                                padding: 0;
                             }
                             p{
                                 margin-bottom: 1em;
