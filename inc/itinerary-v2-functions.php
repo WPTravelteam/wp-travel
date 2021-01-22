@@ -15,6 +15,7 @@ add_action( 'wp_travel_before_single_trip_code', 'wp_travel_single_trip_buttons'
 add_action( 'wp_travel_single_trip_code', 'wp_travel_single_itinerary_trip_code' );
 add_action( 'wp_travel_single_trip_facts', 'wp_travel_single_itinerary_trip_facts' );
 add_action( 'wp_travel_single_trip_main_contents', 'wp_travel_single_itinerary_main_contents' );
+add_action( 'wp_travel_single_itinerary_related_trips', 'wp_travel_single_related_trips' );
 
 /**
  * Main hero section for itinerary page.
@@ -109,11 +110,11 @@ function wp_travel_hero_section( $trip_id ) {
 function wp_travel_hero_section_banner_image( $trip_id ) {
 	?>
 	<img src="<?php echo esc_url( wp_travel_get_post_thumbnail_url( $trip_id, 'large' ) ); ?>" alt="">
-	<?php 
+	<?php
 	if ( WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) ) ) {
 		?>
 		<div class="itinerary-single-trip-offer">
-			<span class="wti__trip-meta-offer"><?php esc_html_e( 'Offer', 'wp-travel' ) ?></span>
+			<span class="wti__trip-meta-offer"><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
 		</div>
 		<?php
 	}
@@ -167,15 +168,15 @@ function wp_travel_single_trip_review( $trip_id ) {
 		<?php
 			$average_rating = wp_travel_get_average_rating( $trip_id );
 		?>
-		<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+		<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); //phpcs:ignore ?>">
 			<a>
 				<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
-					<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
+					<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); //phpcs:ignore ?>
 				</span>
 			</a>
 
 		</div>
-		<span class="rating-text">(<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>)</span>
+		<span class="rating-text">(<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); //phpcs:ignore ?>)</span>
 	</div>
 	<?php
 }
@@ -218,6 +219,8 @@ function wp_travel_single_trip_buttons() {
 
 /**
  * Single trip code.
+ *
+ * @param mixed $wp_travel_itinerary Itinerary datas.
  */
 function wp_travel_single_itinerary_trip_code( $wp_travel_itinerary ) {
 	?>
@@ -256,10 +259,10 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 							?>
 							<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
 								<?php continue; ?>
-							<?php endif; ?>
+							<?php endif; //phpcs:ignore ?>
 							<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
 								<?php continue; ?>
-							<?php endif; ?>
+							<?php endif; //phpcs:ignore ?>
 							<?php
 							$tab_label = $tab_info['label'];
 							if ( 'booking' === $tab_key ) {
@@ -281,7 +284,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 						<div class="price-amount">
 							<?php
 							$strings                          = wp_travel_get_strings();
-							$args                             = $args_regular = array( 'trip_id' => $trip_id );
+							$args                             = $args_regular = array( 'trip_id' => $trip_id ); //phpcs:ignore
 							$args_regular['is_regular_price'] = true;
 							$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
 							$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
@@ -297,12 +300,12 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 								<!-- <span class="curruncy"> -->
 									<?php if ( $enable_sale ) : ?>
 									<del>
-										<span><?php echo wp_travel_get_formated_price_currency( $regular_price, true ); ?></span>
+										<span><?php echo wp_travel_get_formated_price_currency( $regular_price, true ); //phpcs:ignore ?></span>
 									</del>
 									<?php endif; ?>
 									<span class="wti_trip_price">
 										<ins>
-											<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); ?></span>
+											<span><?php echo wp_travel_get_formated_price_currency( $trip_price ); //phpcs:ignore ?></span>
 										</ins>
 									</span>
 								<!-- </span> -->
@@ -318,6 +321,8 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 
 /**
  * Single trip frontend contents.
+ *
+ * @param int $trip_id Trip ID.
  */
 function wp_travel_single_trip_contents( $trip_id ) {
 	?>
@@ -410,70 +415,24 @@ function wp_travel_single_trip_contents( $trip_id ) {
 							</div><!-- wti_-travel-info-item -->
 						</div>
 					</div>
+					<!-- #Booking Area Start -->
 					<div class="wti__booking-area">
 						<div id="wti__booking" class="wti__booking">
 						<!-- Handle with React from here-->
 						</div>
 					</div>
+					<!-- #Booking Area End -->
 				</div>
-				<!-- Related Trips -->
+				<!-- #Related Trips Start -->
 				<?php
-				$settings               = wp_travel_get_settings();
-				$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
-
-				if ( 'yes' === $hide_related_itinerary ) {
-					return;
-				}
-
-				// For use in the loop, list 5 post titles related to first tag on current post.
-				$terms = wp_get_object_terms( $trip_id, 'itinerary_types' );
-
-				$wrapper_class = wp_travel_get_theme_wrapper_class();
+				/**
+				 * Hook 'wp_travel_single_itinerary_related_trips'.
+				 *
+				 * @hooked 'wp_travel_single_related_trips'.
+				 */
+				do_action( 'wp_travel_single_itinerary_related_trips', $trip_id );
 				?>
-				<div class="wti__grid-item col-12">
-					<div class="wti__related-trips <?php echo esc_attr( $wrapper_class ); ?>">
-						<hr class="wti__trip-section-devider">
-						<h3 class="related-trip-title"><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h3>
-						<div class="wti__list-wrapper">
-							<div class="wti__list">
-							<?php
-							if ( ! empty( $terms ) ) {
-								$term_ids    = wp_list_pluck( $terms, 'term_id' );
-								$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row', '3' );
-								$args        = array(
-									'post_type'      => WP_TRAVEL_POST_TYPE,
-									'post__not_in'   => array( $trip_id ),
-									'posts_per_page' => $col_per_row,
-									'tax_query'      => array(
-										array(
-											'taxonomy' => 'itinerary_types',
-											'field'    => 'id',
-											'terms'    => $term_ids,
-										),
-									),
-								);
-								$query       = new WP_Query( $args );
-								if ( $query->have_posts() ) {
-									?>
-									<?php
-									while ( $query->have_posts() ) :
-										$query->the_post();
-										?>
-										<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-new' ); ?>
-									<?php endwhile; ?>
-									<?php
-								} else {
-									wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
-								}
-								wp_reset_query();
-							} else {
-								wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
-							}
-							?>
-							</div>
-						</div>
-					</div>
-				</div>
+				<!-- #Related Trips End -->
 			</div>
 		</div>
 	</div>
@@ -603,6 +562,8 @@ function wp_travel_single_itinerary_trip_facts() {
 
 /**
  * Single trip main contents.
+ *
+ * @param int $trip_id Trip ID.
  */
 function wp_travel_single_itinerary_main_contents( $trip_id ) {
 
@@ -640,10 +601,6 @@ function wp_travel_single_itinerary_main_contents( $trip_id ) {
 						$faqs = wp_travel_get_faqs( get_the_id() );
 						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
 							?>
-							<!-- <div class="wp-collapse-open clearfix">
-								<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-								<a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-							</div> -->
 							<?php foreach ( $faqs as $k => $faq ) : ?>
 							<!-- New -->
 								<div class="accordion-panel">
@@ -682,86 +639,11 @@ function wp_travel_single_itinerary_main_contents( $trip_id ) {
 				<h3 class="tab-content-title"><?php echo esc_attr( $tab_label ); ?></h3>
 				<div class="trip-itinerary__wrapper">
 					<?php
-					// echo wp_kses_post( $tab_info['content'] );
+					echo wp_kses_post( $tab_info['content'] );
 
-					// $itinerary_list_template = wp_travel_get_template( 'itineraries-list.php' );
-					// load_template( $itinerary_list_template );
-
-					global $post;
-					$post_id     = $post->ID;
-					$itineraries = get_post_meta( $post_id, 'wp_travel_trip_itinerary_data' );
-					if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) :
-						?>
-							<?php $index = 1; ?>
-							<?php foreach ( $itineraries[0] as $key => $itinerary ) : ?>
-								<?php if ( $index % 2 === 0 ) : ?>
-									<?php
-									$first_class  = 'right';
-									$second_class = 'left';
-									$row_reverse  = 'row-reverse';
-									?>
-							<?php else : ?>
-								<?php
-									$first_class  = 'left';
-									$second_class = 'right';
-									$row_reverse  = '';
-								?>
-							<?php endif; ?>
-								<?php
-
-								$date_format = get_option( 'date_format' );
-								$time_format = get_option( 'time_format' );
-
-								$itinerary_label = '';
-								$itinerary_title = '';
-								$itinerary_desc  = '';
-								$itinerary_date  = '';
-								$itinerary_time  = '';
-								if ( isset( $itinerary['label'] ) && '' !== $itinerary['label'] ) {
-									$itinerary_label = stripslashes( $itinerary['label'] );
-								}
-								if ( isset( $itinerary['title'] ) && '' !== $itinerary['title'] ) {
-									$itinerary_title = stripslashes( $itinerary['title'] );
-								}
-								if ( isset( $itinerary['desc'] ) && '' !== $itinerary['desc'] ) {
-									$itinerary_desc = stripslashes( $itinerary['desc'] );
-								}
-								if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
-									$itinerary_date = wp_travel_format_date( $itinerary['date'] );
-								}
-								if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
-									$itinerary_time = stripslashes( $itinerary['time'] );
-									$itinerary_time = date( $time_format, strtotime( $itinerary_time ) );
-								}
-								?>
-							<div class="trip-itinerary__item">
-								<h5 class="trip-itinerary__title">
-									<strong>
-										<?php
-										if ( '' !== $itinerary_label ) {
-											echo esc_html( $itinerary_label ) . ': ';
-										}
-										if ( $itinerary_date ) {
-											echo esc_html( $itinerary_date ) . '';
-										}
-										if ( $itinerary_time ) {
-											echo ', ' . esc_html( $itinerary_time ) . ' ';
-										}
-										?>
-									</strong> 
-									<?php
-									if ( '' !== $itinerary_title ) {
-										echo esc_html( $itinerary_title );
-									}
-										do_action( 'wp_travel_itineraries_after_title', $itinerary );
-									?>
-								</h5>
-								<?php echo wp_kses_post( $itinerary_desc ); ?>
-							</div>
-								<?php $index++; ?>
-						<?php endforeach; ?>
-					<?php endif; ?>
-
+					$itinerary_list_template = wp_travel_get_template( 'itineraries-list-new.php' );
+					load_template( $itinerary_list_template );
+					?>
 				</div>
 			</div>
 					<?php
@@ -788,4 +670,69 @@ function wp_travel_single_itinerary_main_contents( $trip_id ) {
 			$index++;
 		endforeach;
 	endif;
+}
+
+/**
+ * Single related trips.
+ *
+ * @param int $trip_id Trip ID.
+ */
+function wp_travel_single_related_trips( $trip_id ) {
+	$settings               = wp_travel_get_settings();
+	$hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
+
+	if ( 'yes' === $hide_related_itinerary ) {
+		return;
+	}
+
+	// For use in the loop, list 5 post titles related to first tag on current post.
+	$terms = wp_get_object_terms( $trip_id, 'itinerary_types' );
+
+	$wrapper_class = wp_travel_get_theme_wrapper_class();
+	?>
+	<div class="wti__grid-item col-12">
+		<div class="wti__related-trips <?php echo esc_attr( $wrapper_class ); ?>">
+			<hr class="wti__trip-section-devider">
+			<h3 class="related-trip-title"><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h3>
+			<div class="wti__list-wrapper">
+				<div class="wti__list">
+				<?php
+				if ( ! empty( $terms ) ) {
+					$term_ids    = wp_list_pluck( $terms, 'term_id' );
+					$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row', '3' );
+					$args        = array(
+						'post_type'      => WP_TRAVEL_POST_TYPE,
+						'post__not_in'   => array( $trip_id ),
+						'posts_per_page' => $col_per_row,
+						'tax_query'      => array(
+							array(
+								'taxonomy' => 'itinerary_types',
+								'field'    => 'id',
+								'terms'    => $term_ids,
+							),
+						),
+					);
+					$query       = new WP_Query( $args );
+					if ( $query->have_posts() ) {
+						?>
+						<?php
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							?>
+							<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-new' ); ?>
+						<?php endwhile; ?>
+						<?php
+					} else {
+						wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
+					}
+					wp_reset_postdata();
+				} else {
+					wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' );
+				}
+				?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
 }
