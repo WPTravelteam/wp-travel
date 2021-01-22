@@ -932,6 +932,16 @@ a{
                 align-items: center;
                 .wp-travel-add-to-wishlists{
                   position: static;
+                  color: #f83531;
+                  display: inline-block;
+                  font-size:0;
+                  margin-bottom: .5em;
+                  margin-right: 10px;
+                  i{
+                    margin-bottom: 19px;
+                    color:inherit;
+                    font-size: 30px;
+                  }
                 }
             }
             .wti__trip-title{
@@ -939,6 +949,8 @@ a{
                 font-size: 50px;
                 line-height: 1;
                 display: inline-block;
+                color:#fff;
+                
             }
             
             a{
