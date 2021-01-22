@@ -927,11 +927,32 @@ a{
             .wti__trip-header{
                 margin-bottom: 3em;
             }
+            .wti__trip-title-wrapper{
+                display: flex;
+                align-items: center;
+                .wp-travel-add-to-wishlists{
+                  position: static;
+                  color: #f83531;
+                  display: inline-block;
+                  font-size:0;
+                  margin-bottom: .5em;
+                  margin-right: 10px;
+                  i{
+                    margin-bottom: 19px;
+                    color:inherit;
+                    font-size: 30px;
+                  }
+                }
+            }
             .wti__trip-title{
                 margin-bottom: .5em;
                 font-size: 50px;
                 line-height: 1;
+                display: inline-block;
+                color:#fff;
+                
             }
+            
             a{
                 color: #ccc;
                 &:hover{
@@ -1489,13 +1510,12 @@ a{
                         }
                         &::after{
                             content: "";
-                            border-top: 5px solid #fff;
-                            border-left: 5px solid transparent;
-                            border-right: 5px solid transparent;
+                            border-top: 10px solid #fff;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
                             position: absolute;
                             top: 100%;
-                            right: 20px;
-                           
+                            right: 17px;
                         }
                         
                         .discount-table{
