@@ -92,7 +92,7 @@ class WP_Travel_FW_Form {
 	function template() {
 		$this->init_assets();
 		?>
-			<div class="<?php echo esc_attr( $this->form_options['wrapper_class'] ); ?>">
+			<div class="<?php echo esc_attr( $this->form_options['wrapper_class'] ); ?>" style="display:none">
 				<form action="" method="post" id="<?php echo esc_attr( $this->form_options['id'] ); ?>"  class="<?php echo esc_attr( $this->form_options['class'] ); ?>" enctype="multipart/form-data" >
 					<?php do_action( $this->form_options['hook_prefix'] . '_before_form_field' ); ?>
 					<?php
