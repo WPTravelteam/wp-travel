@@ -970,8 +970,12 @@ a:hover {
   grid-gap: 20px;
   align-items: center;
 }
+.wti__single-inner .wti__hero-section .wti__hero-content .wti__top-button .wti-send-enquiries {
+  text-decoration: none;
+}
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__button {
   background-color: var(--itinerary-blue-color);
+  color: #fff;
 }
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__button svg path {
   fill: #fff;
