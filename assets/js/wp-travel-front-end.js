@@ -652,5 +652,11 @@ jQuery(function ($) {
      * =========================
      */
 
+     //Slick slider for itinerary tabs
+     $('.wti__scrollspy-buttons').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 1
+     });
 
 });

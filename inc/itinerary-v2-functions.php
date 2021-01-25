@@ -279,7 +279,7 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 			<div class="wti__grid">
 				<div class="wti__grid-item col-lg-8">
 					<div id="scrollspy-buttons" class="wti__scrollspy-buttons">
-					<span class="line"></span>
+					<!-- <span class="line"></span> -->
 					<?php
 					$wp_travel_itinerary_tabs = wp_travel_get_frontend_tabs();
 					$index                    = 1;
@@ -298,9 +298,11 @@ function wp_travel_single_trip_tabs_and_price( $trip_id ) {
 								$tab_key = 'wti__booking'; // To scroll down to booking tab on right side.
 							}
 							?>
-							<button class="scroll-spy-button <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?>" data-scroll='#<?php echo esc_attr( $tab_key ); ?>'>
-								<?php echo esc_attr( $tab_label ); ?>
-							</button>
+							<div class="wti__itinerary_tabs">
+								<button class="scroll-spy-button <?php echo esc_attr( $tab_key ); ?> <?php echo esc_attr( $tab_info['label_class'] ); ?>" data-scroll='#<?php echo esc_attr( $tab_key ); ?>'>
+									<?php echo esc_attr( $tab_label ); ?>
+								</button>
+							</div>
 							<?php
 							$index++;
 						}
