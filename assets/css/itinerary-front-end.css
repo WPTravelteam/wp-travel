@@ -812,9 +812,11 @@ a:hover {
   all: unset;
   padding: 1.5em;
   cursor: pointer;
+  background-color: none;
 }
 .wti__scrollspy-buttons button:hover, .wti__scrollspy-buttons button.active {
   color: var(--itinerary-green-color);
+  background-color: none;
 }
 .wti__scrollspy-buttons button.active {
   border-bottom: 2px solid var(--itinerary-green-color);
@@ -993,13 +995,18 @@ a:hover {
     flex: 1;
   }
 }
-.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img {
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img {
   max-width: 24px;
   width: 100%;
   height: 24px;
 }
-.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg polygon, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img polygon {
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i polygon, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg polygon, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img polygon {
   fill: var(--itinerary-green-color);
+}
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i {
+  font-size: 24px;
+  line-height: 24px;
+  color: var(--itinerary-green-color);
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper {
   padding: 35px;
