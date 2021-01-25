@@ -654,7 +654,7 @@ jQuery(function ($) {
 
      //Slick slider for itinerary tabs
      $('.wti__scrollspy-buttons').slick({
-        infinite: true,
+        infinite: false,
         slidesToShow: 6,
         slidesToScroll: 1
      });
