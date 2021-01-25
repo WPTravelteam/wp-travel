@@ -852,6 +852,7 @@ a{
     }
   
     .slick-next, .slick-prev{
+        top: 50%;
       &::before{
         color:#b1b1b1;
       }
@@ -1383,6 +1384,13 @@ a{
         }
         .wti__selectors{
             padding-top: 1em;
+            .wp-travel-booking__notice{
+                svg{
+                    width:15px;
+                    height: 15px;
+                    fill:red;
+                }
+            }
         }
         .wti-booking__pricing-name{
             h4{
