@@ -1015,9 +1015,13 @@ a{
                 flex-wrap: wrap;
                 grid-gap: 20px;
                 align-items: center;
+                .wti-send-enquiries{
+                    text-decoration: none;
+                }
             }
             .wti__button{
                 background-color: $itinerary-blue-bg;
+                color:#fff;
                 svg{
                     path{
                         fill: #fff;
