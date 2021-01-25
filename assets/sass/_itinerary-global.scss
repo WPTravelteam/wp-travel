@@ -846,14 +846,14 @@ a{
 
 .wti__scrollspy-buttons{
     position: relative;
-    button{
+    .scroll-spy-button {
         all: unset;
         padding: 1.5em;
         cursor: pointer;
-        background-color:none;
+        background-color:transparent;
         &:hover, &.active{
             color: $itinerary-green;
-            background-color:none;
+            background-color:transparent;
         }
         &.active{
             border-bottom: 2px solid $itinerary-green;

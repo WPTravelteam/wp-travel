@@ -808,21 +808,21 @@ a:hover {
 .wti__scrollspy-buttons {
   position: relative;
 }
-.wti__scrollspy-buttons button {
+.wti__scrollspy-buttons .scroll-spy-button {
   all: unset;
   padding: 1.5em;
   cursor: pointer;
-  background-color: none;
+  background-color: transparent;
 }
-.wti__scrollspy-buttons button:hover, .wti__scrollspy-buttons button.active {
+.wti__scrollspy-buttons .scroll-spy-button:hover, .wti__scrollspy-buttons .scroll-spy-button.active {
   color: var(--itinerary-green-color);
-  background-color: none;
+  background-color: transparent;
 }
-.wti__scrollspy-buttons button.active {
+.wti__scrollspy-buttons .scroll-spy-button.active {
   border-bottom: 2px solid var(--itinerary-green-color);
 }
 @media (max-width: 558px) {
-  .wti__scrollspy-buttons button {
+  .wti__scrollspy-buttons .scroll-spy-button {
     padding: 1.5em 1em;
   }
 }
