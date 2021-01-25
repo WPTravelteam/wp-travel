@@ -808,21 +808,31 @@ a:hover {
 .wti__scrollspy-buttons {
   position: relative;
 }
-.wti__scrollspy-buttons .scroll-spy-button {
+.wti__scrollspy-buttons.slick-slider {
+  margin-bottom: 0;
+}
+.wti__scrollspy-buttons .slick-next, .wti__scrollspy-buttons .slick-prev {
+  display: none !important;
+}
+.wti__scrollspy-buttons .wti__itinerary_tabs {
+  display: inline-block;
+}
+.wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button {
   all: unset;
   padding: 1.5em;
+  font-size: 16px;
   cursor: pointer;
   background-color: transparent;
 }
-.wti__scrollspy-buttons .scroll-spy-button:hover, .wti__scrollspy-buttons .scroll-spy-button.active {
+.wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button:hover, .wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button.active {
   color: var(--itinerary-green-color);
   background-color: transparent;
 }
-.wti__scrollspy-buttons .scroll-spy-button.active {
+.wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button.active {
   border-bottom: 2px solid var(--itinerary-green-color);
 }
 @media (max-width: 558px) {
-  .wti__scrollspy-buttons .scroll-spy-button {
+  .wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button {
     padding: 1.5em 1em;
   }
 }
@@ -989,23 +999,23 @@ a:hover {
   padding: 30px;
   text-align: center;
   flex: auto;
+  max-width: 25%;
 }
 @media (min-width: 992px) {
   .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item {
     flex: 1;
+    max-width: unset;
   }
 }
-.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img {
-  max-width: 24px;
-  width: 100%;
-  height: 24px;
-}
-.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i polygon, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon svg polygon, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img path, .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon img polygon {
-  fill: var(--itinerary-green-color);
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon i {
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 21px;
+  margin: 0 5px 0 0;
   color: var(--itinerary-green-color);
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper {
@@ -1074,6 +1084,9 @@ a:hover {
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper {
   position: relative;
+}
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper > p {
+  margin-bottom: 15px;
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item {
   padding-left: 1.5em;
@@ -1213,7 +1226,11 @@ a:hover {
   font-size: 14px;
   padding: 0.7em 1em;
   color: #555;
+  border: 1px solid #969696;
   height: unset;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-select option, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-select option {
+  color: #555;
 }
 .wti__booking-area .wti__booking .wti_clear_all {
   background-color: unset;
@@ -1591,6 +1608,7 @@ a:hover {
 .wti__travel-info .wti__travel-info-wrapper .wti__travel-info-item .wti__travel-info_detail .wti__travel-info_name {
   margin-right: 15px;
   padding: 5px;
+  white-space: nowrap;
 }
 .wti__travel-info .wti__travel-info-wrapper .wti__travel-info-item .wti__travel-info_detail .wti__travel-info_value {
   display: inline-block;
