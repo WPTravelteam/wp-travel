@@ -978,6 +978,7 @@ a:hover {
 }
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__button:hover {
   background-color: var(--itinerary-green-color);
+  color: #fff;
 }
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs {
   background-color: #f1f1f1;
@@ -1028,7 +1029,7 @@ a:hover {
 @media (min-width: 992px) {
   .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item {
     flex: 1;
-    max-width: 25%;
+    max-width: 24%;
   }
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon {

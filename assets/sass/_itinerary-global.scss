@@ -1025,6 +1025,7 @@ a{
                 }
                 &:hover{
                     background-color: $itinerary-green;
+                    color:#fff;
                 }
             }
         }
@@ -1077,7 +1078,7 @@ a{
                         
                         @media(min-width: 992px){
                             flex: 1;
-                            max-width: 25%;
+                            max-width: 24%;
                         }
                         .trip__info-icon{
                             display: flex;
