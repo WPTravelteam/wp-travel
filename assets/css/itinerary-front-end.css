@@ -881,7 +881,7 @@ a:hover {
   color: #fff;
   font-size: 14px;
   padding: 0.5em 0;
-  width: 122px;
+  width: 126px;
   text-align: center;
   clip-path: polygon(29% 0, 70% 0, 100% 100%, 0 100%);
   transform: rotate(-45deg);
@@ -959,7 +959,7 @@ a:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   position: sticky;
   top: 0;
-  z-index: 11;
+  z-index: 1;
 }
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area {
   background-color: var(--itinerary-green-color);
@@ -999,12 +999,11 @@ a:hover {
   padding: 30px;
   text-align: center;
   flex: auto;
-  max-width: 25%;
 }
 @media (min-width: 992px) {
   .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item {
     flex: 1;
-    max-width: unset;
+    max-width: 25%;
   }
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon {
@@ -1175,6 +1174,7 @@ a:hover {
   transition: all 0.2s ease-in-out;
   color: var(--itinerary-dark-color);
   padding: 1em;
+  border: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1220,6 +1220,12 @@ a:hover {
   justify-content: space-between;
   padding-top: 8px;
 }
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
 .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-select, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-select {
   background: none !important;
   border-radius: 4px;
@@ -1228,9 +1234,17 @@ a:hover {
   color: #555;
   border: 1px solid #969696;
   height: unset;
+  width: 100%;
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-select option, .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-select option {
   color: #555;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-select {
+  width: 106px;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__month-dropdown-container,
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-dropdown-container {
+  width: 100%;
 }
 .wti__booking-area .wti__booking .wti_clear_all {
   background-color: unset;
@@ -1275,6 +1289,7 @@ a:hover {
   text-align: left;
   font-size: 14px;
   padding: 0.75em 1em;
+  border: 0;
 }
 .wti__booking-area .wti__booking .wti-booking__pricing-name .wti_price_lists button.active {
   background-color: var(--itinerary-blue-color);
@@ -1300,6 +1315,7 @@ a:hover {
   text-align: left;
   padding: 0.75em 1em;
   font-size: 14px;
+  border: 0;
 }
 .wti__booking-area .wti__booking .wti-booking__selected-time .wti_trip_times button:hover {
   background-color: var(--itinerary-blue-color);

@@ -920,7 +920,7 @@ a{
                 color: #fff;
                 font-size: 14px;
                 padding: .5em 0;
-                width: 122px;
+                width: 126px;
                 text-align: center;
                 clip-path: polygon(29% 0, 70% 0, 100% 100%, 0 100%);
                 transform: rotate(-45deg);
@@ -1009,7 +1009,7 @@ a{
             box-shadow: 0 3px 8px rgba(#000, .15);
             position: sticky;
             top: 0;
-            z-index: 11;
+            z-index: 1;
             .wti__single-price-area{
                 background-color: $itinerary-green;
                 color: #fff;
@@ -1048,10 +1048,10 @@ a{
                         padding: 30px;
                         text-align: center;
                         flex: auto;
-                        max-width: 25%;
+                        
                         @media(min-width: 992px){
                             flex: 1;
-                            max-width: unset;
+                            max-width: 25%;
                         }
                         .trip__info-icon{
                             display: flex;
@@ -1219,6 +1219,7 @@ a{
                     transition: all 0.2s ease-in-out;
                     color:$itinerary-font-color;
                     padding:1em;
+                    border:0;
                     width: 100%;
                     display: flex;
                     align-items: center;
@@ -1283,6 +1284,10 @@ a{
                             padding-top: 8px;
                         }
                         .react-datepicker__header__dropdown{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0 5px;
                             .react-datepicker__month-select,.react-datepicker__year-select{
                                 background: none !important;
                                 border-radius: 4px;
@@ -1291,14 +1296,17 @@ a{
                                 color: #555;
                                 border: 1px solid #969696;
                                 height: unset;
+                                width: 100%;
                                 option{
                                     color:#555;
                                 }
                             }
-                            
-                            .react-datepicker__month-dropdown-container{}
+                            .react-datepicker__month-select{
+                                width: 106px;
+                            }
+                            .react-datepicker__month-dropdown-container,
                             .react-datepicker__year-dropdown-container{
-
+                                width: 100%;
                             }
                         }
                     }
@@ -1356,6 +1364,7 @@ a{
                     text-align: left;
                     font-size: 14px;
                     padding: 0.75em 1em;
+                    border: 0;
                     
                     &.active{
                         background-color:$itinerary-blue-bg;
@@ -1385,6 +1394,7 @@ a{
                     text-align: left;
                     padding: 0.75em 1em;
                     font-size: 14px;
+                    border:0;
 
                     
                     
