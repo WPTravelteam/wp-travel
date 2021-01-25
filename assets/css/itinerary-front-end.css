@@ -811,6 +811,9 @@ a:hover {
 .wti__scrollspy-buttons.slick-slider {
   margin-bottom: 0;
 }
+.wti__scrollspy-buttons .slick-next, .wti__scrollspy-buttons .slick-prev {
+  top: 50%;
+}
 .wti__scrollspy-buttons .slick-next::before, .wti__scrollspy-buttons .slick-prev::before {
   color: #b1b1b1;
 }
@@ -1305,6 +1308,11 @@ a:hover {
 }
 .wti__booking-area .wti__booking .wti__selectors {
   padding-top: 1em;
+}
+.wti__booking-area .wti__booking .wti__selectors .wp-travel-booking__notice svg {
+  width: 15px;
+  height: 15px;
+  fill: red;
 }
 .wti__booking-area .wti__booking .wti-booking__pricing-name h4 {
   color: #7c7c7c;
