@@ -44,7 +44,7 @@ class WP_Travel_Checkout {
 		}
 		// @since 4.0.7
 		do_action( 'wp_travel_before_checkout_page_wrap' );
-		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', false );
+		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', False );
 		?>
 		<div class="checkout-page-wrap <?php echo $hide_mini_cart ? 'wti_no_mini_cart' : ''; ?>">
 			<?php if ( ! $hide_mini_cart ) : ?>
