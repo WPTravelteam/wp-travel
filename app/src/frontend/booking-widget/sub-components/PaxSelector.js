@@ -81,6 +81,9 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 			{
 				categories.map((c, i) => {
 					let price = c.is_sale ? c.sale_price : c.regular_price
+					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
+						return <></>
+					}
 					return <li key={i}>
 						<div className="text-left">
 							<strong>{`${c.term_info.title}`}</strong>

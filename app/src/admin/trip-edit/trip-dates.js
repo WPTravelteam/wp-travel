@@ -123,35 +123,39 @@ const WPTravelTripDates = () => {
         {applyFilters('wp_travel_before_dates_options', [])}
         {is_fixed_departure ?
             <TripDatesTimes dates={dates} storeKey="dates" onUpdate={updateDateTimes} pricings={pricings} /> :
-            <PanelRow>
-                <label>{ __( 'Trip Duration', 'wp-travel' ) }</label>
-                <div className="wp-travel-trip-duration">
-                    <TextControl
-                        value={trip_duration.days}
-                        help={__( 'Day(s)', 'wp-travel' )}
-                        onChange={(e) =>{
-                            let _trip_duration = allData.trip_duration;
-                            _trip_duration.days = e;
-                            updateTripData({
-                                ...allData,
-                                trip_duration:{..._trip_duration}
-                            })
-                        } }
+            <>
+                <PanelRow>
+                    <label>{ __( 'Trip Duration', 'wp-travel' ) }</label>
+                    <div className="wp-travel-trip-duration">
+                        <TextControl
+                            value={trip_duration.days}
+                            help={__( 'Day(s)', 'wp-travel' )}
+                            onChange={(e) =>{
+                                let _trip_duration = allData.trip_duration;
+                                _trip_duration.days = e;
+                                updateTripData({
+                                    ...allData,
+                                    trip_duration:{..._trip_duration}
+                                })
+                            } }
+                        />
+                        <TextControl
+                            value={trip_duration.nights}
+                            help={__( 'Night(s)', 'wp-travel' )}
+                            onChange={(e) =>{
+                                let _trip_duration = allData.trip_duration;
+                                _trip_duration.nights = e;
+                                updateTripData({
+                                    ...allData,
+                                    trip_duration:{..._trip_duration}
+                                })
+                            } }
                     />
-                    <TextControl
-                        value={trip_duration.nights}
-                        help={__( 'Night(s)', 'wp-travel' )}
-                        onChange={(e) =>{
-                            let _trip_duration = allData.trip_duration;
-                            _trip_duration.nights = e;
-                            updateTripData({
-                                ...allData,
-                                trip_duration:{..._trip_duration}
-                            })
-                        } }
-                />
-                </div>
-            </PanelRow>
+                    </div>
+                </PanelRow>
+                {/* <Notice status="warning" isDismissible={false}>{__( 'Inventory option will only work in fixed departure date.', 'wp-travel')}</Notice> */}
+
+            </>
         }
         {applyFilters('wp_travel_after_dates_options', [])}
     </div>

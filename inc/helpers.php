@@ -149,6 +149,11 @@ function wp_travel_settings_default_fields() {
 		 * @since 4.0.7
 		 */
 		'calender_view'                           => 'no',
+
+		/**
+		 * @since 4.4.5
+		 */
+		'trip_date_listing'                          => 'calendar', // calendar | dates
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -2663,6 +2668,9 @@ function wp_travel_get_strings() {
 			'trip_extras_list_label'        => __( 'Trip Extras', 'wp-travel' ),
 			'trip_extras_link_label'        => __( 'Learn More', 'wp-travel' ),
 			'available_trip_times'          => __( 'Available times', 'wp-travel' ),
+			'booking_option'                => __( 'Booking Options', 'wp-travel' ),
+			'booking_with_payment'          => __( 'Booking with payment', 'wp-travel' ),
+			'booking_only'                  => __( 'Booking only', 'wp-travel' ),
 		),
 		'empty_results' 			=> array(
 			'trip_type'		        => __( 'No Trip Type', 'wp-travel' ),
@@ -3419,10 +3427,10 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 								$categories[ $pricing_category_id ]['regular']      = $pricing_category['regular_price'];
 								$categories[ $pricing_category_id ]['price']        = $pricing_category['sale_price'];
 							} else {
+								$category_id                                = $index;
 								$args = $args_regular = array( 'trip_id' => $trip_id, 'pricing_id' => $pricing_id, 'category_id' => $category_id );
 								$args_regular['is_regular_price'] = true;
 
-								$category_id                                = $index;
 								$categories[ $category_id ]['type']         = $pricing_category['type'];
 								$categories[ $category_id ]['custom_label'] = $pricing_category['custom_label'];
 								$categories[ $category_id ]['price_per']    = $pricing_category['price_per'];
