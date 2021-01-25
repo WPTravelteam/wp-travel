@@ -811,15 +811,37 @@ a:hover {
 .wti__scrollspy-buttons.slick-slider {
   margin-bottom: 0;
 }
-.wti__scrollspy-buttons .slick-next, .wti__scrollspy-buttons .slick-prev {
-  display: none !important;
+.wti__scrollspy-buttons .slick-next::before, .wti__scrollspy-buttons .slick-prev::before {
+  color: #b1b1b1;
+}
+.wti__scrollspy-buttons .slick-prev::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+@media (max-width: 575px) {
+  .wti__scrollspy-buttons .slick-prev {
+    left: -11px;
+  }
+}
+.wti__scrollspy-buttons .slick-next::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+@media (max-width: 575px) {
+  .wti__scrollspy-buttons .slick-next {
+    right: -11px;
+  }
 }
 .wti__scrollspy-buttons .wti__itinerary_tabs {
   display: inline-block;
+  text-align: center;
 }
 .wti__scrollspy-buttons .wti__itinerary_tabs .scroll-spy-button {
   all: unset;
-  padding: 1.5em;
+  padding: 1.5em 7px;
+  /*  width: 100%; */
   font-size: 16px;
   cursor: pointer;
   background-color: transparent;
@@ -959,7 +981,7 @@ a:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 11;
 }
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area {
   background-color: var(--itinerary-green-color);
@@ -1101,6 +1123,7 @@ a:hover {
   position: absolute;
   left: -9px;
   top: 0;
+  background: #fff;
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item::after {
   content: "";
@@ -1111,6 +1134,9 @@ a:hover {
   left: 0;
   top: 0;
   margin-top: 21px;
+}
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item:last-child::after {
+  height: 100%;
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item .trip-itinerary__title {
   margin-bottom: 1em;
@@ -1145,6 +1171,7 @@ a:hover {
   .wti__booking-area {
     position: sticky;
     top: 100px;
+    z-index: 17;
   }
 }
 .wti__booking-area .wti__booking-date-picker {
@@ -1199,6 +1226,9 @@ a:hover {
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker-wrapper .react-datepicker__input-container .wp-travel-date-picker-btn:hover span svg g {
   fill: #fff;
+}
+.wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker-popper {
+  z-index: 16;
 }
 .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker {
   /* top button */
@@ -1351,7 +1381,7 @@ a:hover {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5em;
+  padding: 6px;
   transition: all 0.2s ease-in-out;
   position: absolute;
   top: 0;
@@ -1381,6 +1411,15 @@ a:hover {
 }
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extras_info .wti_item-price {
   width: auto;
+}
+.wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content {
+  margin-bottom: 12px;
+}
+.wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p {
+  font-size: 12px;
+  color: #777;
+  line-height: 19px;
+  margin: 0;
 }
 .wti__booking-area .wti__booking .wti__selector-item.wti__trip-extras .wti__selector-content-wrapper .wti__selector-inner .wti__selector-option .wti__trip_extra_content p a {
   color: var(--itinerary-blue-color);
@@ -1507,6 +1546,7 @@ a:hover {
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti_item-price {
   padding: 5px 0;
   display: inline-block;
+  font-size: 12px;
 }
 .wti__booking-area .wti__booking .wti__selector-item .wti__selector-content-wrapper .wti__selector-option .wti__selector-people-input {
   display: flex;

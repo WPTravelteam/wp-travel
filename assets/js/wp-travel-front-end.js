@@ -656,7 +656,22 @@ jQuery(function ($) {
      $('.wti__scrollspy-buttons').slick({
         infinite: false,
         slidesToShow: 5,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive:[
+            {
+                breakpoint:767,
+                settings:{
+                    slidesToShow:3,
+                },
+            },
+            {
+                breakpoint:414,
+                settings:{
+                    slidesToShow:2,
+                },
+            }
+    ]
+        
      });
 
 });
