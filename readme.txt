@@ -249,6 +249,9 @@ Fixes:
 * Cannot read property 'title' of undefined while selecting pricing.
 * Undefined $post global variable notice in customizer.
 
+Enhancement:
+* Added support for currency name display (E.g USD,AUD instead of $) on frontend trip pages. This can be enable or disable from  WP Travel Admin Settings.
+
 = 4.4.4 =
 Release Date: 7th January, 2021
 
