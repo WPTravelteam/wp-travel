@@ -730,6 +730,8 @@ a:hover {
   margin-left: 15px;
   text-decoration: none;
   margin-bottom: 0;
+  font-size: 22px;
+  line-height: 27px;
 }
 .trip-faq .accordion .accordion-panel .accordion-panel-heading:hover {
   background-color: #f2f2f2;
@@ -815,7 +817,7 @@ a:hover {
   top: 50%;
 }
 .wti__scrollspy-buttons .slick-next::before, .wti__scrollspy-buttons .slick-prev::before {
-  color: #b1b1b1;
+  color: #000;
 }
 .wti__scrollspy-buttons .slick-prev::before {
   content: "";
@@ -934,7 +936,7 @@ a:hover {
 }
 .wti__single-inner .wti__hero-section .wti__hero-content .wti__trip-title-wrapper .wp-travel-add-to-wishlists {
   position: static;
-  color: #f83531;
+  color: var(--itinerary-blue-color);
   display: inline-block;
   font-size: 0;
   margin-bottom: 0.5em;
@@ -1033,7 +1035,8 @@ a:hover {
 @media (min-width: 992px) {
   .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item {
     flex: 1;
-    max-width: 24%;
+    /* max-width: 24%; */
+    min-width: 24%;
   }
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__trip-info .wti__trip-info-item .trip__info-icon {
@@ -1653,6 +1656,10 @@ a:hover {
 }
 .wti__booking-area .wti__booking .wti__book-now-button:hover {
   background-color: var(--itinerary-green-color);
+}
+.wti__booking-area .wti__booking .wti__book-now-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* wti__travel-info */

@@ -755,6 +755,8 @@ a{
                         margin-left: 15px;
                         text-decoration: none;
                         margin-bottom: 0;
+                        font-size: 22px;
+                        line-height: 27px;
                     }
                 }
                 &:hover{
@@ -854,7 +856,7 @@ a{
     .slick-next, .slick-prev{
         top: 50%;
       &::before{
-        color:#b1b1b1;
+        color:#000;
       }
       
     }
@@ -973,7 +975,7 @@ a{
                 align-items: center;
                 .wp-travel-add-to-wishlists{
                   position: static;
-                  color: #f83531;
+                  color:$itinerary-blue-bg;
                   display: inline-block;
                   font-size:0;
                   margin-bottom: .5em;
@@ -1082,7 +1084,8 @@ a{
                         
                         @media(min-width: 992px){
                             flex: 1;
-                            max-width: 24%;
+                            /* max-width: 24%; */
+                            min-width: 24%;
                         }
                         .trip__info-icon{
                             display: flex;
@@ -1774,6 +1777,10 @@ a{
             &:hover{
                 background-color: $itinerary-green;
             }
+        }
+        .wti__book-now-button[disabled]{
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 }
