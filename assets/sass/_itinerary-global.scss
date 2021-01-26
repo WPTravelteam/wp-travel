@@ -549,7 +549,7 @@ a{
                 font-size: 80%;
                 a{
                     color: $itinerary-font-color;
-                    text-decoration: none;
+                    text-decoration: underline;
                     &:hover{
                         color: inherit;
                     }
@@ -755,6 +755,8 @@ a{
                         margin-left: 15px;
                         text-decoration: none;
                         margin-bottom: 0;
+                        font-size: 22px;
+                        line-height: 27px;
                     }
                 }
                 &:hover{
@@ -854,7 +856,7 @@ a{
     .slick-next, .slick-prev{
         top: 50%;
       &::before{
-        color:#b1b1b1;
+        color:#000;
       }
       
     }
@@ -973,7 +975,7 @@ a{
                 align-items: center;
                 .wp-travel-add-to-wishlists{
                   position: static;
-                  color: #f83531;
+                  color:$itinerary-blue-bg;
                   display: inline-block;
                   font-size:0;
                   margin-bottom: .5em;
@@ -1039,8 +1041,11 @@ a{
             background-color: #f1f1f1;
             box-shadow: 0 3px 8px rgba(#000, .15);
             position: sticky;
-            top: 0;
+            top: -1px;
             z-index: 11;
+            &.sticky-mode{
+                z-index: 22;
+            }
             .wti__single-price-area{
                 background-color: $itinerary-green;
                 color: #fff;
@@ -1082,7 +1087,8 @@ a{
                         
                         @media(min-width: 992px){
                             flex: 1;
-                            max-width: 24%;
+                            /* max-width: 24%; */
+                            min-width: 24%;
                         }
                         .trip__info-icon{
                             display: flex;
@@ -1175,7 +1181,7 @@ a{
                                 position: absolute;
                                 left: -9px;
                                 top: 0;
-                                background: #fff;
+                                /* background: #fff; */
                             }
                             &::after{
                                 content: "";
@@ -1199,6 +1205,13 @@ a{
                                     font-weight: 900;
                                     color: $itinerary-green;
                                     margin-right: .5em;
+                                }
+                            }
+                            .trip-itinerary__content-wrapper{
+                                &::after {
+                                    content: "";
+                                    clear: both;
+                                    display: table;
                                 }
                             }
                             img{
@@ -1358,35 +1371,41 @@ a{
 
     }
     .wti__booking{
-        .wti_clear_all{
-            background-color: unset;
-            padding: .5em 1em;
-            border: 0;
-            outline: none;
-            color:$itinerary-font-color;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease-in-out;
-            border-radius:0;
+        .wti_booking_clear_btn{
             width:100%;
             text-align: right;
-            display: inline-block;
-            white-space: nowrap;
             border-bottom: 1px solid #eee;
             margin-bottom: 15px;
-            svg{
-                width:10px;
-                margin-right: 7px;
-            }
-            &:hover{
-                color: #f83531;
+            .wti_clear_all{
+                padding: 1em 1.5em;
+                border: 0;
+                margin-bottom: 10px;
+                background-color: $itinerary-filter-bg;
+                outline: none;
+                color:$itinerary-font-color;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.3s ease-in-out;
+                border-radius:0;
+                display: inline-block;
+                white-space: nowrap;
                 svg{
-                    g{
-                        fill:#f83531;
+                    width:10px;
+                    margin-right: 7px;
+                    fill:$itinerary-font-color;
+                    transition: all 0.3s ease-in-out;
+                }
+                &:hover{
+                    color: #fff;
+                    background-color:$itinerary-blue-bg;
+                    svg{
+                        fill:#fff;
+                       
                     }
                 }
             }
         }
+        
         .wti__selectors{
             padding-top: 1em;
             .wp-travel-booking__notice{
@@ -1774,6 +1793,10 @@ a{
             &:hover{
                 background-color: $itinerary-green;
             }
+        }
+        .wti__book-now-button[disabled]{
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     }
 }
