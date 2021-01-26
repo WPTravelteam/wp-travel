@@ -60,8 +60,10 @@ if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) :
 				}
 				?>
 			</h5>
-			<?php do_action( 'wp_travel_itineraries_after_title', $itinerary ); ?>
-			<p><?php echo wp_kses_post( $itinerary_desc ); ?></p>
+			<div class="trip-itinerary__content-wrapper">
+				<?php do_action( 'wp_travel_itineraries_after_title', $itinerary ); ?>
+				<p><?php echo wp_kses_post( $itinerary_desc ); ?></p>
+			</div>
 		</div>
 			<?php $index++; ?>
 	<?php endforeach; ?>
