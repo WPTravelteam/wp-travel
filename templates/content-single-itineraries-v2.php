@@ -34,7 +34,7 @@ do_action( 'wp_travel_before_content_start' );
 
 <div id="wti_main-<?php the_ID(); ?>" <?php post_class( 'itinerary_new' ); ?>>
 	<div class="wti__wrapper">
-		<div class="wti__single-inner <?php echo esc_attr( $wrapper_class ); ?>">
+		<div class="wti__single-inner">
 			<?php
 				/**
 				 * Hook 'wp_travel_itinerary_v2_hero_section'.
