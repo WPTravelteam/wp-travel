@@ -5415,6 +5415,9 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   grid-gap: 100px;
   margin-top: 50px;
 }
+.checkout-page-wrap.wti_no_mini_cart {
+  grid-template-columns: 100%;
+}
 .checkout-page-wrap > div {
   width: 100%;
 }

@@ -80,7 +80,7 @@ if ( ! comments_open() ) {
 				);
 
 
-				$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a review.', 'wp-travel' ), esc_url( wp_login_url() ) ) . '</p>';
+				$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%1s">logged in</a> to post a review.', 'wp-travel' ), esc_url( wp_login_url() ) ) . '</p>';
 
 				// if ( get_option( 'wp-travel_enable_review_rating' ) === 'yes' ) {
 					$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
