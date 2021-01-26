@@ -732,7 +732,7 @@ const BookingCalender = () => {
 			: // For new layout. @since v4.4.6
 			<>
 				{/* <h3>{__i18n.booking_tab_content_label}</h3> */}
-				{selectedDate && <button className="wti_clear_all" onClick={() => {
+				{selectedDate && <div className="wti_booking_clear_btn"><button className="wti_clear_all" onClick={() => {
 					let _initialState = Object.assign(initialState)
 					if (!isFixedDeparture)
 						delete _initialState.nomineePricings
@@ -744,7 +744,7 @@ const BookingCalender = () => {
 						C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
 					</path>
 					</svg>
-				{__i18n.bookings.booking_tab_clear_all}</button>}
+				{__i18n.bookings.booking_tab_clear_all}</button></div>}
 				<div className="wti__booking-date-picker">
 					<DatePicker {...params} />
 				</div>
