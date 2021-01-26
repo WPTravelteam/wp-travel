@@ -22,6 +22,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 if ( ! class_exists( 'WP_Travel' ) ) :
 
 	/**
@@ -37,6 +38,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @var string
 		 */
 		public $version = '4.4.4';
+
+		/**
+		 * WP Travel API version.
+		 *
+		 * @var string
+		 */
+		public $api_version = 'v1';
 
 		/**
 		 * The single instance of the class.
@@ -77,6 +85,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * Define WP Travel Constants.
 		 */
 		private function define_constants() {
+			$api_version = apply_filters( 'wp_travel_api_version', $this->api_version );
 			$this->define( 'WP_TRAVEL_POST_TYPE', 'itineraries' );
 			$this->define( 'WP_TRAVEL_POST_TITLE', __( 'trips', 'wp-travel' ) );
 			$this->define( 'WP_TRAVEL_POST_TITLE_SINGULAR', __( 'trip', 'wp-travel' ) );
@@ -86,6 +95,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->define( 'WP_TRAVEL_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 			$this->define( 'WP_TRAVEL_TEMPLATE_PATH', 'wp-travel/' );
 			$this->define( 'WP_TRAVEL_VERSION', $this->version );
+			$this->define( 'WP_TRAVEL_API_VERSION', $api_version );
 			$this->define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 			$this->define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
 		}
@@ -308,6 +318,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
+
+			/**
+			 * @since WP Travel 4.4.5
+			 */
+			include sprintf( '%s/core/REST/class-wp-travel-rest-base-controller.php', WP_TRAVEL_ABSPATH ); // Base class for REST API
+			include sprintf( '%s/core/REST/class-wp-travel-rest-init.php', WP_TRAVEL_ABSPATH ); 
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
