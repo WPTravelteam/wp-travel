@@ -32,4 +32,5 @@ test.php
 *.exe.stackdump
 *.stackdump
 *.exe
+*.zip
 /inc/extended/**
