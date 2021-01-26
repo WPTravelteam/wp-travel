@@ -1,3 +1,21 @@
+/**
+ * =========================
+ * detecting sticky
+ * =========================
+ */
+
+    const el = document.querySelector(".wti__nav-tabs")
+    const observer = new IntersectionObserver( 
+    ([e]) => e.target.classList.toggle("sticky-mode", e.intersectionRatio < 1),
+    { threshold: [1] }
+    );
+
+    observer.observe(el);
+/**
+ * =========================
+ * detecting sticky end
+ * =========================
+ */
 jQuery(function ($) {
 
     if ($('.wp-travel-error').length > 0) {
@@ -670,8 +688,10 @@ jQuery(function ($) {
                     slidesToShow:2,
                 },
             }
-    ]
+        ]
         
      });
+
+ 
 
 });

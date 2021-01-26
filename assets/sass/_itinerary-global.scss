@@ -1041,8 +1041,11 @@ a{
             background-color: #f1f1f1;
             box-shadow: 0 3px 8px rgba(#000, .15);
             position: sticky;
-            top: 0;
+            top: -1px;
             z-index: 11;
+            &.sticky-mode{
+                z-index: 22;
+            }
             .wti__single-price-area{
                 background-color: $itinerary-green;
                 color: #fff;

@@ -990,8 +990,11 @@ a:hover {
   background-color: #f1f1f1;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 11;
+}
+.wti__single-inner .wti__single-wrapper .wti__nav-tabs.sticky-mode {
+  z-index: 22;
 }
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area {
   background-color: var(--itinerary-green-color);
