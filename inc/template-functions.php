@@ -323,6 +323,9 @@ function wp_travel_get_theme_wrapper_class() {
 		case 'twentytwenty':
 			$wrapper_class = 'alignwide';
 			break;
+		case 'twentytwentyone':
+			$wrapper_class = 'alignwide';
+			break;
 	}
 	return apply_filters( 'wp_travel_theme_wrapper_class', $wrapper_class, $template );
 }

@@ -444,16 +444,17 @@ function wp_travel_single_itinerary_trip_facts() {
 	}
 
 	$i = 0;
-	?>
-	<div class="wti__trip-info">
-		<?php
-		/**
-		 * To fix fact not showing on frontend since v4.0 or greater.
-		 *
-		 * Modified @since v4.4.1
-		 */
-		$settings_facts = $settings['wp_travel_trip_facts_settings'];
-		if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
+
+	/**
+	 * To fix fact not showing on frontend since v4.0 or greater.
+	 *
+	 * Modified @since v4.4.1
+	 */
+	$settings_facts = $settings['wp_travel_trip_facts_settings'];
+	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
+		?>
+		<div class="wti__trip-info">
+			<?php
 			foreach ( $wp_travel_trip_facts as $key => $trip_fact ) :
 				?>
 				<?php
@@ -533,9 +534,9 @@ function wp_travel_single_itinerary_trip_facts() {
 					</div>
 				<?php endif; ?>
 			<?php endforeach; ?>
-		<?php } ?>
-	</div>
-	<?php
+		</div>
+	<?php } ?>
+<?php
 }
 
 /**
