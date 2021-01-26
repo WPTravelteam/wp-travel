@@ -545,7 +545,7 @@ a:hover {
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-locations a {
   color: var(--itinerary-dark-color);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-locations a:hover {
   color: inherit;
@@ -1134,7 +1134,7 @@ a:hover {
   position: absolute;
   left: -9px;
   top: 0;
-  background: #fff;
+  /* background: #fff; */
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item::after {
   content: "";
@@ -1157,6 +1157,11 @@ a:hover {
   font-weight: 900;
   color: var(--itinerary-green-color);
   margin-right: 0.5em;
+}
+.wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item .trip-itinerary__content-wrapper::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 .wti__single-inner .wti__single-wrapper .wti__content-wrapper .wti__tab-content-area .wti__tab-content-wrapper .trip-itinerary__wrapper .trip-itinerary__item img {
   float: left;
@@ -1287,32 +1292,38 @@ a:hover {
 .wti__booking-area .wti__booking-date-picker .react-datepicker__tab-loop .react-datepicker .react-datepicker__month-container .react-datepicker__header .react-datepicker__header__dropdown .react-datepicker__year-dropdown-container {
   width: 100%;
 }
-.wti__booking-area .wti__booking .wti_clear_all {
-  background-color: unset;
-  padding: 0.5em 1em;
+.wti__booking-area .wti__booking .wti_booking_clear_btn {
+  width: 100%;
+  text-align: right;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+.wti__booking-area .wti__booking .wti_booking_clear_btn .wti_clear_all {
+  padding: 1em 1.5em;
   border: 0;
+  margin-bottom: 10px;
+  background-color: var(--itinerary-light-grey-color);
   outline: none;
   color: var(--itinerary-dark-color);
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease-in-out;
   border-radius: 0;
-  width: 100%;
-  text-align: right;
   display: inline-block;
   white-space: nowrap;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 15px;
 }
-.wti__booking-area .wti__booking .wti_clear_all svg {
+.wti__booking-area .wti__booking .wti_booking_clear_btn .wti_clear_all svg {
   width: 10px;
   margin-right: 7px;
+  fill: var(--itinerary-dark-color);
+  transition: all 0.3s ease-in-out;
 }
-.wti__booking-area .wti__booking .wti_clear_all:hover {
-  color: #f83531;
+.wti__booking-area .wti__booking .wti_booking_clear_btn .wti_clear_all:hover {
+  color: #fff;
+  background-color: var(--itinerary-blue-color);
 }
-.wti__booking-area .wti__booking .wti_clear_all:hover svg g {
-  fill: #f83531;
+.wti__booking-area .wti__booking .wti_booking_clear_btn .wti_clear_all:hover svg {
+  fill: #fff;
 }
 .wti__booking-area .wti__booking .wti__selectors {
   padding-top: 1em;
