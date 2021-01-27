@@ -154,7 +154,7 @@ function wp_travel_settings_default_fields() {
 		/**
 		 * @since 4.4.5
 		 */
-		'trip_date_listing'                          => 'calendar', // calendar | dates
+		'trip_date_listing'                          => 'calendar', // calendar | dates.
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
