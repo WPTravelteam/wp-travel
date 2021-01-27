@@ -252,6 +252,7 @@ Fixes:
 
 Enhancement:
 * Added support for currency name display (E.g USD,AUD instead of $) on frontend trip pages. This can be enable or disable from  WP Travel Admin Settings.
+* Added WordPress REST API to get booking data.
 
 = 4.4.4 =
 Release Date: 7th January, 2021

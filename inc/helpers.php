@@ -73,7 +73,6 @@ function wp_travel_settings_default_fields() {
 	$settings_fields = array(
 		// General Settings Fields.
 		'currency'                                => 'USD',
-		'use_currency_name'                       => 'no',
 		'currency_position'                       => 'left',
 		'thousand_separator'                      => ',',
 		'decimal_separator'                       => '.',
@@ -597,15 +596,17 @@ function wp_travel_search_form() {
 	$label_string = apply_filters(
 		'wp_travel_search_filter_label_strings',
 		array(
-			'search'    => __( 'Search:', 'wp-travel' ),
-			'trip_type' => __( 'Trip Type:', 'wp-travel' ),
-			'location'  => __( 'Location:', 'wp-travel' ),
+			'search'        => __( 'Search:', 'wp-travel' ),
+			'trip_type'     => __( 'Trip Type:', 'wp-travel' ),
+			'location'      => __( 'Location:', 'wp-travel' ),
+			'search_button' => __( 'Search', 'wp-travel' ),
 		)
 	);
 
-	$search_string    = ! empty( $label_string['search'] ) ? $label_string['search'] : '';
-	$trip_type_string = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
-	$location_string  = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
+	$search_string        = ! empty( $label_string['search'] ) ? $label_string['search'] : '';
+	$trip_type_string     = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
+	$location_string      = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
+	$search_button_string = ! empty( $label_string['search_button'] ) ? $label_string['search_button'] : '';
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
@@ -654,12 +655,12 @@ function wp_travel_search_form() {
 				?>
 			</p>
 
-			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>"  /></p>
+			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php echo esc_html( $search_button_string ); ?>"  /></p>
 		</form>
 	</div>
 	<?php
 	$content = apply_filters( 'wp_travel_search_form', ob_get_clean() );
-	echo $content;
+	echo $content; // @phpcs:ignore
 }
 
 /**
