@@ -174,4 +174,32 @@ class WP_Travel_Helpers_Trip_Dates {
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response( 'WP_TRAVEL_REMOVED_TRIP_DATE' );
 	}
+
+	// Boolean helper functions.
+
+	/**
+	 * Check whether it is fixed departure trip or not.
+	 *
+	 * @param int $trip_id Trip id of the trip.
+	 * @since WP Travel 4.4.5
+	 */
+	public static function is_fixed_departure( $trip_id ) {
+		if ( ! $trip_id ) {
+			return;
+		}
+
+		$post_type = get_post_type( $trip_id );
+		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
+			return;
+		}
+
+		$settings     = wp_travel_get_settings();
+		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+		if ( 'yes' === $switch_to_v4 ) {
+			$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+		} else { // Legacy.
+			$fd = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+		}
+		return 'yes' === $fd;
+	}
 }
