@@ -248,6 +248,7 @@ Fixes:
 * Translation of booking options list strings fixes in checkout page.
 * Cannot read property 'title' of undefined while selecting pricing.
 * Undefined $post global variable notice in customizer.
+* Sort Trip by date in the shortcode `WP_TRAVEL_ITINERARIES`.
 
 = 4.4.4 =
 Release Date: 7th January, 2021
