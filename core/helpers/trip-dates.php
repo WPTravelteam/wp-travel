@@ -195,7 +195,9 @@ class WP_Travel_Helpers_Trip_Dates {
 
 		$settings     = wp_travel_get_settings();
 		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-		if ( 'yes' === $switch_to_v4 ) {
+
+		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
+		if ( version_compare( $wp_travel_user_since, '4.0.0', '>=' ) || 'yes' === $switch_to_v4 ) {
 			$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 		} else { // Legacy.
 			$fd = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
