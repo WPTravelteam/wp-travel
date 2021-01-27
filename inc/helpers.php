@@ -73,6 +73,7 @@ function wp_travel_settings_default_fields() {
 	$settings_fields = array(
 		// General Settings Fields.
 		'currency'                                => 'USD',
+		'use_currency_name'                       => 'no',
 		'currency_position'                       => 'left',
 		'thousand_separator'                      => ',',
 		'decimal_separator'                       => '.',

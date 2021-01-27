@@ -15,7 +15,8 @@ export default () => {
     const {
         wp_travel_switch_to_react, 
         currency, 
-        currency_position, 
+        currency_position,
+        use_currency_name, 
         thousand_separator, 
         decimal_separator, 
         number_of_decimals,
@@ -101,6 +102,21 @@ export default () => {
                         />
                     </div>
                     <p className="description">{__( 'Choose currency you accept payments in.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+            <PanelRow>
+                <label>{ __( 'Use Currency Name', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ use_currency_name == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                use_currency_name: 'yes' == use_currency_name ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'This option will display currency name instead of symbol in frontend. ( E.g USD instead of $. )', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
             <PanelRow>
