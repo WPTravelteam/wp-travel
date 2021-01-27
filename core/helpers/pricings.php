@@ -416,17 +416,19 @@ class WP_Travel_Helpers_Pricings {
 					return $p['id'] == $pricing_id;
 				}
 			);
-			$pricing    = array_shift( $pricings );
-			$categories = array_filter(
-				$pricing['categories'],
-				function( $c ) use ( $category_id ) {
-					return $c['id'] == $category_id;
+			if ( is_array( $pricings ) && count( $pricings ) > 0 ) {
+				$pricing    = array_shift( $pricings );
+				$categories = array_filter(
+					$pricing['categories'],
+					function( $c ) use ( $category_id ) {
+						return $c['id'] == $category_id;
+					}
+				);
+				$category   = array_shift( $categories );
+				$price = $category['regular_price'];
+				if ( $category['is_sale'] ) {
+					$price = $category['sale_price'];
 				}
-			);
-			$category   = array_shift( $categories );
-			$price = $category['regular_price'];
-			if ( $category['is_sale'] ) {
-				$price = $category['sale_price'];
 			}
 		} else {
 			// Min price.
