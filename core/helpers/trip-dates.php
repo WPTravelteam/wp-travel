@@ -64,10 +64,19 @@ class WP_Travel_Helpers_Trip_Dates {
 		}
 
 		$result = self::remove_dates( $trip_id );
-
+		$trip_dates = array(); // collection of trip dates to get next departure date.
 		foreach ( $dates as $date ) {
+			if ( $date['start_date'] && date( 'Y-m-d ', strtotime( $date['start_date'] ) ) >= date( 'Y-m-d' ) ) {
+				$trip_dates[] = $date['start_date'];
+			}
 			self::add_individual_date( $trip_id, $date );
 		}
+
+		if ( is_array( $trip_dates ) && count( $trip_dates ) > 0 ) {
+			usort( $trip_dates, 'wp_travel_date_sort' );
+			update_post_meta( $trip_id, 'trip_date', $trip_dates[0] ); // To sort trip according to date.
+		}
+
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_DATES',
 			array(

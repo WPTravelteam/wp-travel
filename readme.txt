@@ -248,9 +248,11 @@ Fixes:
 * Translation of booking options list strings fixes in checkout page.
 * Cannot read property 'title' of undefined while selecting pricing.
 * Undefined $post global variable notice in customizer.
+* Sort Trip by date in the shortcode `WP_TRAVEL_ITINERARIES`.
 
 Enhancement:
 * Added support for currency name display (E.g USD,AUD instead of $) on frontend trip pages. This can be enable or disable from  WP Travel Admin Settings.
+* Added WordPress REST API to get booking data.
 
 = 4.4.4 =
 Release Date: 7th January, 2021
