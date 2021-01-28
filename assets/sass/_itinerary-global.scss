@@ -570,6 +570,7 @@ a{
                     padding: 1em 0;
                     span{
                         display: inline-block;
+                        font-size: 14px;
                         img{
                             display: inline-block;
                             width: 15px;
@@ -1242,7 +1243,7 @@ a{
     background-color: #fff;
     border: 1px solid #eeeeee;
     padding: 1.5em;
-    @media(min-width: 1400px){
+    @media(min-width: 1600px){
         position: sticky;
         top: 100px;
         z-index: 17;
