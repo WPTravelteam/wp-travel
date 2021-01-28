@@ -180,10 +180,11 @@ class WP_Travel_Helpers_Trip_Dates {
 	/**
 	 * Check whether it is fixed departure trip or not.
 	 *
-	 * @param int $trip_id Trip id of the trip.
+	 * @param int     $trip_id Trip id of the trip.
+	 * @param boolean $check_for_multiple_departure Only for Legacy version less than V4.
 	 * @since WP Travel 4.4.5
 	 */
-	public static function is_fixed_departure( $trip_id ) {
+	public static function is_fixed_departure( $trip_id, $check_for_multiple_departure = false ) {
 		if ( ! $trip_id ) {
 			return;
 		}
@@ -192,16 +193,22 @@ class WP_Travel_Helpers_Trip_Dates {
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 			return;
 		}
+		$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+		$fd = apply_filters( 'wp_travel_fixed_departure_defalut', $fd );
 
 		$settings     = wp_travel_get_settings();
 		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 
 		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
 		if ( version_compare( $wp_travel_user_since, '4.0.0', '>=' ) || 'yes' === $switch_to_v4 ) {
-			$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+			return 'yes' === $fd;
 		} else { // Legacy.
-			$fd = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+			if ( $check_for_multiple_departure ) { // Check if multiple fixed departure enable along with fixed departure enabled.
+				$multiple_fd = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+				return ( 'yes' === $fd && 'yes' === $multiple_fd );
+			} else {
+				return 'yes' === $fd;
+			}
 		}
-		return 'yes' === $fd;
 	}
 }

@@ -674,11 +674,9 @@ function wp_travel_get_trip_duration( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
-	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
 	ob_start();
-	if ( 'yes' === $fixed_departure ) :
+	if ( $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
 			<i class="wt-icon-regular wt-icon-clock"></i>

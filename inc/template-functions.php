@@ -667,9 +667,8 @@ function wp_travel_single_location( $post_id ) {
 
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
-	$fixed_departure = get_post_meta( $post_id, 'wp_travel_fixed_departure', true );
-	$fixed_departure = ( $fixed_departure ) ? $fixed_departure : 'yes';
-	$fixed_departure = apply_filters( 'wp_travel_fixed_departure_defalut', $fixed_departure );
+	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
+	error_log( 'fd ' . $fixed_departure );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -708,20 +707,20 @@ function wp_travel_single_location( $post_id ) {
 		</li>
 	<?php endif; ?>
 	<?php
-	if ( 'yes' === $fixed_departure ) :
+	if ( $fixed_departure ) :
 		if ( $dates = wp_travel_get_fixed_departure_date( $post_id ) ) {
 			?>
-				<li class="wp-travel-fixed-departure">
-					<div class="travel-info">
-						<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
-					</div>
-					<div class="travel-info">
-						<span class="value">
-						<?php echo $dates; ?>
-						</span>
-					</div>
-				</li>
-				<?php
+			<li class="wp-travel-fixed-departure">
+				<div class="travel-info">
+					<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
+				</div>
+				<div class="travel-info">
+					<span class="value">
+					<?php echo $dates; // @phpcs:ignore ?>
+					</span>
+				</div>
+			</li>
+			<?php
 		}
 		?>
 
