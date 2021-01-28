@@ -668,7 +668,7 @@ function wp_travel_single_location( $post_id ) {
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
 	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
-	error_log( 'fd ' . $fixed_departure );
+	// error_log( 'fd ' . $fixed_departure );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
