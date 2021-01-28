@@ -315,10 +315,23 @@ function wp_travel_currency_symbols() {
 
 }
 
+/**
+ * Function to get currency symbol or name.
+ *
+ * @param String $currency_code Currency code.
+ * @return String.
+ */
 function wp_travel_get_currency_symbol( $currency_code = null ) {
+	$settings      = wp_travel_get_settings();
 	if ( ! $currency_code ) {
-		$settings      = wp_travel_get_settings();
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
+	}
+
+	/** Added support for displaying currency name like USD, EUR on frontend @since 4.4.5 */
+	$use_currency_name = $settings['use_currency_name'];	
+	
+	if ( 'yes' === $use_currency_name ) {
+		return apply_filters( 'wp_travel_use_currency_name', $currency_code );;
 	}
 
 	$currency_symbols = wp_travel_currency_symbols();
