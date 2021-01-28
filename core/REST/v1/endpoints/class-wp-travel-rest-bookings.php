@@ -321,7 +321,7 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 		public function get_collection_params() {
 			return array(
 				'page'     => array(
-					'description'       => __( 'Current page of the collection.', 'wp-travel-api' ),
+					'description'       => __( 'Current page of the collection.', 'wp-travel' ),
 					'type'              => 'integer',
 					'default'           => 1,
 					'sanitize_callback' => 'absint',
@@ -329,7 +329,7 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 					'minimum'           => 1,
 				),
 				'per_page' => array(
-					'description'       => __( 'Maximum number of items to be returned in result set.', 'wp-travel-api' ),
+					'description'       => __( 'Maximum number of items to be returned in result set.', 'wp-travel' ),
 					'type'              => 'integer',
 					'default'           => 10,
 					'minimum'           => 1,
@@ -380,19 +380,19 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 				// In JSON Schema you can specify object properties in the properties attribute.
 				'properties' => array(
 					'id' => array(
-						'description' => __( 'Unique identifier for the object.', 'wp-travel-api' ),
+						'description' => __( 'Unique identifier for the object.', 'wp-travel' ),
 						'type'        => 'integer',
 						'context'     => array( 'view', 'edit', 'embed' ),
 						'readonly'    => true,
 					),
 					'date' => array(
-						'description' => __( "The date the object was published, in the site's timezone.", 'wp-travel-api' ),
+						'description' => __( "The date the object was published, in the site's timezone.", 'wp-travel' ),
 						'type'        => 'string',
 						'format'      => 'date-time',
 						'context'     => array( 'view', 'edit', 'embed' ),
 					),
 					'title' => array(
-						'description' => __( 'The title for the object.', 'wp-travel-api' ),
+						'description' => __( 'The title for the object.', 'wp-travel' ),
 						'type'        => 'object',
 						'context'     => array( 'view', 'edit', 'embed' ),
 						'arg_options' => array(
@@ -401,12 +401,12 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 						),
 						'properties'  => array(
 							'raw' => array(
-								'description' => __( 'Title for the object, as it exists in the database.', 'wp-travel-api' ),
+								'description' => __( 'Title for the object, as it exists in the database.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'edit' ),
 							),
 							'rendered' => array(
-								'description' => __( 'HTML title for the object, transformed for display.', 'wp-travel-api' ),
+								'description' => __( 'HTML title for the object, transformed for display.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit', 'embed' ),
 								'readonly'    => true,
@@ -414,64 +414,64 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 						),
 					),
 					'link'            => array(
-						'description' => __( 'URL to the object.', 'wp-travel-api' ),
+						'description' => __( 'URL to the object.', 'wp-travel' ),
 						'type'        => 'string',
 						'format'      => 'uri',
 						'context'     => array( 'view', 'edit', 'embed' ),
 						'readonly'    => true,
 					),
 					'modified'        => array(
-						'description' => __( "The date the object was last modified, in the site's timezone.", 'wp-travel-api' ),
+						'description' => __( "The date the object was last modified, in the site's timezone.", 'wp-travel' ),
 						'type'        => 'string',
 						'format'      => 'date-time',
 						'context'     => array( 'view', 'edit' ),
 						'readonly'    => true,
 					),
 					'modified_gmt'    => array(
-						'description' => __( 'The date the object was last modified, as GMT.', 'wp-travel-api' ),
+						'description' => __( 'The date the object was last modified, as GMT.', 'wp-travel' ),
 						'type'        => 'string',
 						'format'      => 'date-time',
 						'context'     => array( 'view', 'edit' ),
 						'readonly'    => true,
 					),
 					'status'          => array(
-						'description' => __( 'A named status for the object.', 'wp-travel-api' ),
+						'description' => __( 'A named status for the object.', 'wp-travel' ),
 						'type'        => 'string',
 						'enum'        => array_keys( get_post_stati( array( 'internal' => false ) ) ),
 						'context'     => array( 'view', 'edit' ),
 					),
 					'type'            => array(
-						'description' => __( 'Type of Post for the object.', 'wp-travel-api' ),
+						'description' => __( 'Type of Post for the object.', 'wp-travel' ),
 						'type'        => 'string',
 						'context'     => array( 'view', 'edit', 'embed' ),
 						'readonly'    => true,
 					),
 					'booking_data' => array(
-						'description' => __( 'The Enquiry Object.', 'wp-travel-api' ),
+						'description' => __( 'The Enquiry Object.', 'wp-travel' ),
 						'type'        => 'object',
 						'context'     => array( 'view' ),
 						'readonly'    => true,
 						'properties'  => array(
 							'trip_id'  => array(
-								'description' => __( 'The globally unique identifier for the object.', 'wp-travel-api' ),
+								'description' => __( 'The globally unique identifier for the object.', 'wp-travel' ),
 								'type'        => 'integer',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'name' => array(
-								'description' => __( 'The globally unique identifier for the object.', 'wp-travel-api' ),
+								'description' => __( 'The globally unique identifier for the object.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'email' => array(
-								'description' => __( 'The globally unique identifier for the object.', 'wp-travel-api' ),
+								'description' => __( 'The globally unique identifier for the object.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'message' => array(
-								'description' => __( 'The globally unique identifier for the object.', 'wp-travel-api' ),
+								'description' => __( 'The globally unique identifier for the object.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
@@ -479,67 +479,67 @@ if ( ! class_exists( 'WP_Travel_REST_Bookings_Controller' ) ) {
 						),
 					),
 					'billing' => array(
-						'description' => __( 'Unique identifier for the object.', 'wp-travel-api' ),
+						'description' => __( 'Unique identifier for the object.', 'wp-travel' ),
 						'type'        => 'object',
 						'context'     => array( 'view' ),
 						'readonly'    => true,
 						'properties'  => array(
 							'first_name' => array(
-								'description' => __( 'First Name.', 'wp-travel-api' ),
+								'description' => __( 'First Name.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'last_name' => array(
-								'description' => __( 'Last Name.', 'wp-travel-api' ),
+								'description' => __( 'Last Name.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'company' => array(
-								'description' => __( 'Company Name.', 'wp-travel-api' ),
+								'description' => __( 'Company Name.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'address' => array(
-								'description' => __( 'Address.', 'wp-travel-api' ),
+								'description' => __( 'Address.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'city' => array(
-								'description' => __( 'City Name.', 'wp-travel-api' ),
+								'description' => __( 'City Name.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'state' => array(
-								'description' => __( 'State.', 'wp-travel-api' ),
+								'description' => __( 'State.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'postcode' => array(
-								'description' => __( 'Postal Code.', 'wp-travel-api' ),
+								'description' => __( 'Postal Code.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'country' => array(
-								'description' => __( 'Country code in ISO 3166-1 alpha-2 format.', 'wp-travel-api' ),
+								'description' => __( 'Country code in ISO 3166-1 alpha-2 format.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'email' => array(
-								'description' => __( 'Email Address.', 'wp-travel-api' ),
+								'description' => __( 'Email Address.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
 							),
 							'phone' => array(
-								'description' => __( 'Phone.', 'wp-travel-api' ),
+								'description' => __( 'Phone.', 'wp-travel' ),
 								'type'        => 'string',
 								'context'     => array( 'view' ),
 								'readonly'    => true,
