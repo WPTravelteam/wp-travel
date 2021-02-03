@@ -235,7 +235,7 @@ export default () => {
                                 }
                             }
                         />
-                        <p className="description">{__( 'To get your Google map API keys click here', 'wp-travel' )}</p>
+                        <p className="description">{__( 'To get your Google map API keys ', 'wp-travel' )} <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">{__( 'click here ', 'wp-travel' )}</a></p>
                     </div>
                 </PanelRow>
                 <PanelRow>
