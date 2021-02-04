@@ -99,7 +99,7 @@ a{
                     background: none;
                     border: 0;
                     appearance: none;
-                    background-image: url("../img/angle-arrow-down.svg");
+                    background-image: url("../images/angle-arrow-down.svg");
                     background-size: 10px auto;
                     background-repeat: no-repeat;
                     background-position: right 1em center;
@@ -123,7 +123,7 @@ a{
                         content: "";
                         width: 10px;
                         height: 10px;
-                        background-image: url("../img/angle-arrow-down.svg");
+                        background-image: url("../images/angle-arrow-down.svg");
                         background-size: 100%;
                         background-position: center;
                         background-repeat: no-repeat;
@@ -138,7 +138,7 @@ a{
                         color: #fff;
                         &::after{
                             transform: translateY(-50%) rotate(180deg);
-                            background-image: url("../img/angle-arrow-down-light.svg");
+                            background-image: url("../images/angle-arrow-down-light.svg");
                         }
                     }
                 }

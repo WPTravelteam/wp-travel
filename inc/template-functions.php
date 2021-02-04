@@ -31,12 +31,8 @@ add_filter( 'body_class', 'wp_travel_body_class', 100, 2 );
 add_action( 'wp_travel_before_content_start', 'wp_travel_booking_message' );
 
 add_action( 'the_post', 'wp_travel_setup_itinerary_data' );
-// Filters HTML.
-add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
 // add_action( 'parse_query', 'wp_travel_posts_filter' );
 add_action( 'pre_get_posts', 'wp_travel_posts_filter' );
-add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
-add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
 add_action( 'save_post', 'wp_travel_clear_booking_transient' );
 add_filter( 'excerpt_more', 'wp_travel_excerpt_more' );
 add_filter( 'wp_kses_allowed_html', 'wp_travel_wpkses_post_iframe', 10, 2 );
@@ -59,17 +55,23 @@ function wp_travel_load_single_itinerary_hooks() {
 	$itinerary_v2_enable = wp_travel_use_itinerary_v2_layout();
 
 	// Hooks for old itinerary layout.
-	 if ( ! $itinerary_v2_enable ) {
-		 add_action( 'wp_travel_single_trip_after_title', 'wp_travel_trip_price', 1 );
-		 add_action( 'wp_travel_single_trip_after_title', 'wp_travel_single_excerpt', 1 );
-		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_trip_facts' );
-		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents', 15 );
-		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
-		 add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
-	 } else { // For new layout.
+	if ( ! $itinerary_v2_enable ) {
+		add_action( 'wp_travel_single_trip_after_title', 'wp_travel_trip_price', 1 );
+		add_action( 'wp_travel_single_trip_after_title', 'wp_travel_single_excerpt', 1 );
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_trip_facts' );
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_frontend_contents', 15 );
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_trip_map', 20 );
+		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_related_itineraries', 25 );
+		// Filters HTML.
+		add_action( 'wp_travel_before_main_content', 'wp_travel_archive_toolbar' );
+		add_action( 'wp_travel_after_main_content', 'wp_travel_archive_wrapper_close' );
+		add_action( 'wp_travel_archive_listing_sidebar', 'wp_travel_archive_listing_sidebar' );
+	} else { // For new layout.
 		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_single_trip_tabs_and_price' );
 		add_action( 'wp_travel_single_trip_after_header', 'wp_travel_single_trip_contents', 15 );
-	 }
+		add_action( 'wp_travel_before_main_content', 'wp_travel_archive_before_content' );
+		add_action( 'wp_travel_after_main_content', 'wp_travel_archive_v2_wrapper_close' );
+	}
 }
 
 /**

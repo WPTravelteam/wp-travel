@@ -18,6 +18,7 @@ add_action( 'wp_travel_before_single_trip_main_contents', 'wp_travel_single_itin
 add_action( 'wp_travel_single_trip_main_contents', 'wp_travel_single_itinerary_main_contents' );
 add_action( 'wp_travel_single_itinerary_related_trips', 'wp_travel_single_related_trips' );
 add_action( 'wp_travel_single_trip_meta_information', 'wp_travel_single_itinerary_meta_info' );
+add_action( 'wp_travel_archive_v2_listing_sidebar', 'wp_travel_archive_v2_listing_sidebar' );
 
 /**
  * Main hero section for itinerary page.
@@ -144,7 +145,7 @@ function wp_travel_single_trip_location( $trip_id ) {
 			foreach ( $terms as $term ) {
 				if ( $i > 0 ) {
 					?>
-						,
+					,
 					<?php
 				}
 				?>
@@ -536,7 +537,7 @@ function wp_travel_single_itinerary_trip_facts() {
 			<?php endforeach; ?>
 		</div>
 	<?php } ?>
-<?php
+	<?php
 }
 
 /**
@@ -846,4 +847,213 @@ function wp_travel_single_itinerary_maps( $trip_id ) {
 			<?php
 		endif;
 	}
+}
+
+// Archive itinerary sections.
+
+function wp_travel_archive_before_content() {
+	$view_mode = wp_travel_get_archive_view_mode();
+	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) {
+		?>
+		<div class="wti__container">
+			<div class="wti__inner">
+				<?php
+				if ( WP_Travel::is_page( 'archive' ) ) {
+					$strings        = wp_travel_get_strings();
+					$price_text     = $strings['price'];
+					$trip_type_text = $strings['trip_type'];
+					$location_text  = $strings['location'];
+					$show_text      = $strings['show'];
+					$trip_date_text = $strings['trip_date'];
+					$trip_name_text = $strings['trip_name'];
+					?>
+					<div class="wti__filter-bar">
+						<div class="wti__filter">
+							<div class="wti__filter-fields">
+								<?php do_action( 'wp_travel_before_post_filter' ); ?>
+								<input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
+								<?php
+								$price          = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+								$type           = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
+								$location       = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
+								$trip_date      = ! empty( $_GET['trip_date'] ) ? $_GET['trip_date'] : '';
+								$trip_name      = ! empty( $_GET['trip_name'] ) ? $_GET['trip_name'] : '';
+								?>
+								<div class="wti__filter-input wt__filter_by_trip_name">
+									<select name="trip_name" class="wti__select wp_travel_input_filters trip-name">
+										<option value=""><?php echo esc_html( $trip_name_text ); ?></option>
+										<option value="asc" <?php selected( $trip_name, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
+										<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
+									</select>
+								</div>
+								<div class="wti__filter-input wti__filter_by_price">
+									<select name="price" class="wti__select wp_travel_input_filters price">
+										<option value=""><?php echo esc_html( $price_text ); ?></option>
+										<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
+										<option value="high_low" <?php selected( $price, 'high_low' ); ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ); ?></option>
+									</select>
+								</div>
+								<div class="wti__filter-input wti__filter_by_trip_type">
+									<?php
+									wp_dropdown_categories(
+										array(
+											'taxonomy'    => 'itinerary_types',
+											'name'        => 'itinerary_types',
+											'class'       => 'wti__select wp_travel_input_filters type',
+											'show_option_none' => esc_html( $trip_type_text ),
+											'option_none_value' => '',
+											'selected'    => $type,
+											'value_field' => 'slug',
+										)
+									);
+									?>
+								</div>
+								<div class="wti__filter-input wti__filter_by_locations">
+									<?php
+									wp_dropdown_categories(
+										array(
+											'taxonomy'    => 'travel_locations',
+											'name'        => 'travel_locations',
+											'class'       => 'wti__select wp_travel_input_filters location',
+											'show_option_none' => esc_html( $location_text ),
+											'option_none_value' => '',
+											'selected'    => $location,
+											'value_field' => 'slug',
+										)
+									);
+									?>
+								</div>
+								<div class="wti__filter-input wti__filter_by_trip_date">
+									<select name="trip_date" class="wti__select wp_travel_input_filters trip-date">
+										<option value=""><?php echo esc_html( $trip_date_text ); ?></option>
+										<option value="asc" <?php selected( $trip_date, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
+										<option value="desc" <?php selected( $trip_date, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
+									</select>
+								</div>
+								<button class="wti__filter-button wti__button btn-wp-travel-filter">
+									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+									<path d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474
+									c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323
+									c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848
+									S326.847,409.323,225.474,409.323z"/>
+									<path d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328
+									c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z"/>
+									</svg>
+								</button>
+							</div>
+						</div>
+						<div class="wti__grid-list-filter">
+							<button data-view="grid-view" class="wti__filter-grid wti__button active">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								<path d="M176.792,0H59.208C26.561,0,0,26.561,0,59.208v117.584C0,209.439,26.561,236,59.208,236h117.584
+								C209.439,236,236,209.439,236,176.792V59.208C236,26.561,209.439,0,176.792,0z M196,176.792c0,10.591-8.617,19.208-19.208,19.208
+								H59.208C48.617,196,40,187.383,40,176.792V59.208C40,48.617,48.617,40,59.208,40h117.584C187.383,40,196,48.617,196,59.208
+								V176.792z"/>
+								<path d="M452,0H336c-33.084,0-60,26.916-60,60v116c0,33.084,26.916,60,60,60h116c33.084,0,60-26.916,60-60V60
+								C512,26.916,485.084,0,452,0z M472,176c0,11.028-8.972,20-20,20H336c-11.028,0-20-8.972-20-20V60c0-11.028,8.972-20,20-20h116
+								c11.028,0,20,8.972,20,20V176z"/>
+								<path d="M176.792,276H59.208C26.561,276,0,302.561,0,335.208v117.584C0,485.439,26.561,512,59.208,512h117.584
+								C209.439,512,236,485.439,236,452.792V335.208C236,302.561,209.439,276,176.792,276z M196,452.792
+								c0,10.591-8.617,19.208-19.208,19.208H59.208C48.617,472,40,463.383,40,452.792V335.208C40,324.617,48.617,316,59.208,316h117.584
+								c10.591,0,19.208,8.617,19.208,19.208V452.792z"/>
+								<path d="M452,276H336c-33.084,0-60,26.916-60,60v116c0,33.084,26.916,60,60,60h116c33.084,0,60-26.916,60-60V336
+								C512,302.916,485.084,276,452,276z M472,452c0,11.028-8.972,20-20,20H336c-11.028,0-20-8.972-20-20V336c0-11.028,8.972-20,20-20
+								h116c11.028,0,20,8.972,20,20V452z"/>
+								</svg>
+							</button>
+							<button data-view="list-view" class="wti__filter-list wti__button">
+								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								<path d="M448.18,80h-320c-17.673,0-32,14.327-32,32s14.327,32,32,32h320c17.673,0,32-14.327,32-32S465.853,80,448.18,80z"/>
+								<path d="M64.18,112c-0.036-8.473-3.431-16.586-9.44-22.56c-12.481-12.407-32.639-12.407-45.12,0
+								C3.61,95.414,0.215,103.527,0.18,112c-0.239,2.073-0.239,4.167,0,6.24c0.362,2.085,0.952,4.124,1.76,6.08
+								c0.859,1.895,1.876,3.715,3.04,5.44c1.149,1.794,2.49,3.457,4,4.96c1.456,1.45,3.065,2.738,4.8,3.84
+								c1.685,1.227,3.512,2.248,5.44,3.04c2.121,1.1,4.382,1.908,6.72,2.4c2.073,0.232,4.167,0.232,6.24,0
+								c8.45,0.007,16.56-3.329,22.56-9.28c1.51-1.503,2.851-3.166,4-4.96c1.164-1.725,2.181-3.545,3.04-5.44
+								c1.021-1.932,1.826-3.971,2.4-6.08C64.419,116.167,64.419,114.073,64.18,112z"/>
+								<path d="M64.18,256c0.238-2.073,0.238-4.167,0-6.24c-0.553-2.065-1.359-4.053-2.4-5.92c-0.824-1.963-1.843-3.839-3.04-5.6
+								c-1.109-1.774-2.455-3.389-4-4.8c-12.481-12.407-32.639-12.407-45.12,0C3.61,239.414,0.215,247.527,0.18,256
+								c0.062,4.217,0.875,8.388,2.4,12.32c0.802,1.893,1.766,3.713,2.88,5.44c1.217,1.739,2.611,3.348,4.16,4.8
+								c1.414,1.542,3.028,2.888,4.8,4c1.685,1.228,3.511,2.249,5.44,3.04c1.951,0.821,3.992,1.412,6.08,1.76
+								c2.047,0.459,4.142,0.674,6.24,0.64c2.073,0.239,4.167,0.239,6.24,0c2.036-0.349,4.024-0.94,5.92-1.76
+								c1.981-0.786,3.861-1.807,5.6-3.04c1.772-1.112,3.386-2.458,4.8-4c1.542-1.414,2.888-3.028,4-4.8c1.23-1.684,2.251-3.51,3.04-5.44
+								c1.093-2.124,1.9-4.384,2.4-6.72C64.426,260.167,64.426,258.073,64.18,256z"/>
+								<path d="M64.18,400c0.237-2.073,0.237-4.167,0-6.24c-0.553-2.116-1.359-4.157-2.4-6.08c-0.859-1.895-1.876-3.715-3.04-5.44
+								c-1.112-1.772-2.458-3.386-4-4.8c-12.481-12.407-32.639-12.407-45.12,0c-1.542,1.414-2.888,3.028-4,4.8
+								c-1.164,1.725-2.181,3.545-3.04,5.44c-0.83,1.948-1.421,3.99-1.76,6.08c-0.451,2.049-0.665,4.142-0.64,6.24
+								c0.036,8.473,3.431,16.586,9.44,22.56c1.414,1.542,3.028,2.888,4.8,4c1.685,1.228,3.511,2.249,5.44,3.04
+								c1.951,0.821,3.992,1.412,6.08,1.76c2.047,0.459,4.142,0.674,6.24,0.64c2.073,0.239,4.167,0.239,6.24,0
+								c2.036-0.349,4.024-0.94,5.92-1.76c1.981-0.786,3.861-1.807,5.6-3.04c1.772-1.112,3.386-2.458,4.8-4
+								c1.542-1.414,2.888-3.028,4-4.8c1.231-1.683,2.252-3.51,3.04-5.44c1.092-2.125,1.899-4.384,2.4-6.72
+								C64.426,404.167,64.426,402.073,64.18,400z"/>
+								<path d="M480.18,224h-352c-17.673,0-32,14.327-32,32s14.327,32,32,32h352c17.673,0,32-14.327,32-32S497.853,224,480.18,224z"/>
+								<path d="M336.18,368h-208c-17.673,0-32,14.327-32,32c0,17.673,14.327,32,32,32h208c17.673,0,32-14.327,32-32
+								C368.18,382.327,353.853,368,336.18,368z"/>
+								</svg>
+							</button>
+						</div>
+					</div>
+					<?php
+				}
+				?>
+				<?php
+
+				$archive_sidebar_class = '';
+
+				if ( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
+					$archive_sidebar_class = 'has-sidebar';
+				}
+
+				?>
+				<!-- For turn on sidebar (add 'has-sidebar', 'sidebar-left' class into 'wti__list-wrapper') -->
+				<div class="wti__list-wrapper <?php echo esc_attr( $archive_sidebar_class ); ?>">
+					<div class="wti__list">
+		<?php
+	}
+}
+
+/**
+ * Wrapper close for archive v2.
+ *
+ * @since 4.4.6
+ * @return void
+ */
+function wp_travel_archive_v2_wrapper_close() {
+	if ( ( WP_Travel::is_page('archive') || is_search() ) && ! is_admin() ) {
+		?>
+		<?php
+		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
+		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
+		wp_travel_pagination( $pagination_range, $max_num_pages );
+		?>
+					</div> <!-- #wti__list -->
+					<?php do_action( 'wp_travel_archive_v2_listing_sidebar' ); ?>
+				</div> <!-- #wti__list-wrapper -->
+			</div> <!-- #wti__inner -->
+		</div> <!-- #wti__container -->
+		<?php
+	}
+}
+
+/**
+ * Archive v2 page sidebar
+ *
+ * @since 4.4.6
+ * @return void
+ */
+function wp_travel_archive_v2_listing_sidebar() {
+
+	if ( WP_Travel::is_page('archive') && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
+		?>
+
+		<div class="wti__sidebar" role="complementary">
+			<?php dynamic_sidebar( 'wp-travel-archive-sidebar' ); ?>
+		</div>
+
+		<?php
+
+	endif;
+
 }

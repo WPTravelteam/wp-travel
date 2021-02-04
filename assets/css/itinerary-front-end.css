@@ -125,7 +125,7 @@ a:hover {
   background: none;
   border: 0;
   appearance: none;
-  background-image: url("../img/angle-arrow-down.svg");
+  background-image: url("../images/angle-arrow-down.svg");
   background-size: 10px auto;
   background-repeat: no-repeat;
   background-position: right 1em center;
@@ -154,7 +154,7 @@ a:hover {
   content: "";
   width: 10px;
   height: 10px;
-  background-image: url("../img/angle-arrow-down.svg");
+  background-image: url("../images/angle-arrow-down.svg");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -170,7 +170,7 @@ a:hover {
 }
 .wti__filter-bar .wti__filter .wti__filter-fields .wti__filter-input .select-selected.select-arrow-active::after {
   transform: translateY(-50%) rotate(180deg);
-  background-image: url("../img/angle-arrow-down-light.svg");
+  background-image: url("../images/angle-arrow-down-light.svg");
 }
 .wti__filter-bar .wti__filter .wti__filter-fields .wti__filter-input .select-items {
   width: 100%;
