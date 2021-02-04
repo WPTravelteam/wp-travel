@@ -3639,6 +3639,10 @@ ul.wp-travel-error {
   font-size: 12px;
 }
 
+.admin-bar #wp-travel-enquiries {
+  top: 18px;
+}
+
 .mfp-wrap #wp-travel-enquiries button.mfp-close {
   right: -3px;
   top: -2px;

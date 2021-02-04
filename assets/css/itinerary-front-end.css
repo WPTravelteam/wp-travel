@@ -567,6 +567,7 @@ a:hover {
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-footer .wti__trip-footer-meta span {
   display: inline-block;
+  font-size: 14px;
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-footer .wti__trip-footer-meta span img {
   display: inline-block;
@@ -1186,7 +1187,7 @@ a:hover {
   border: 1px solid #eeeeee;
   padding: 1.5em;
 }
-@media (min-width: 1400px) {
+@media (min-width: 1600px) {
   .wti__booking-area {
     position: sticky;
     top: 100px;
