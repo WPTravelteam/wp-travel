@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SVN_URL=https://plugins.svn.wordpress.org/wp-travel
+#SVN_URL=https://plugins.svn.wordpress.org/wp-travel
 
 # Copy files from SVN URL
 echo "Pull from SVN"
@@ -24,7 +24,7 @@ rsync -a ./app/build ./build/trunk/app
 echo "*********************************"
 echo ""
 
-#!/bin/bash
+#!/bin/bash          
 CURRENT_TAG=4.4.6
 
 # Create tag folder
@@ -75,6 +75,6 @@ echo "*********************************"
 
 # Commit changes
 echo "Sending to SVN"
-# svn ci -m 'New Changes !!' --username "$SVN_USER" --password $SVN_PASS
+svn ci -m 'New Changes !!' --username "$SVN_USER" --password $SVN_PASS
 echo "*********************************"
 echo ""
