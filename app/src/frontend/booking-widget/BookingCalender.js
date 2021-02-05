@@ -689,6 +689,7 @@ const BookingCalender = () => {
 							pricing={pricings[selectedPricing] || null}
 							onPaxChange={handlePaxChange}
 							counts={paxCounts}
+							inventory={inventory}
 						/>
 					</ErrorBoundry>
 

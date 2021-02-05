@@ -39,7 +39,7 @@ if ( ! class_exists( 'WP_Travel_REST_Base_Controller' ) ) {
 		public function get_items_permissions_check( $request ) {
 
 			if ( ! current_user_can( 'read' ) ) {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the post resource.', 'wp-travel-api' ), array( 'status' => $this->authorization_status_code() ) );
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the post resource.', 'wp-travel' ), array( 'status' => $this->authorization_status_code() ) );
 			}
 			return true;
 		}
@@ -51,7 +51,7 @@ if ( ! class_exists( 'WP_Travel_REST_Base_Controller' ) ) {
 		 */
 		public function get_item_permissions_check( $request ) {
 			if ( ! current_user_can( 'read' ) ) {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the post resource.', 'wp-travel-api' ), array( 'status' => $this->authorization_status_code() ) );
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the post resource.', 'wp-travel' ), array( 'status' => $this->authorization_status_code() ) );
 			}
 			return true;
 		}

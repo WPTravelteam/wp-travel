@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.6
+Tested up to: 5.6.1
 Requires PHP: 5.5
-Stable tag: 4.4.4
+Stable tag: 4.4.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -240,19 +240,27 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.4.6 =
+Release Date: 5th February, 2021
+
+Enhancement:
+* Added pax information on frontend pax selector. This feature is currently not supported for trip time feature. 
+
 = 4.4.5 =
-Release Date: 
+Release Date: 28th January, 2021
 
 Fixes:
-* Issue in select pax section of legacy version of booking regarding price and price per not displaying in the list.
-* Translation of booking options list strings fixes in checkout page.
+* Issue in select pax section of the legacy version of booking regarding price and price per not displaying in the list.
+* Translation of booking options list strings fixes in the checkout page.
 * Cannot read property 'title' of undefined while selecting pricing.
-* Undefined $post global variable notice in customizer.
+* Undefined $post a global variable notice in customizer.
 * Sort Trip by date in the shortcode `WP_TRAVEL_ITINERARIES`.
 
 Enhancement:
-* Added support for currency name display (E.g USD,AUD instead of $) on frontend trip pages. This can be enable or disable from  WP Travel Admin Settings.
-* Added WordPress REST API to get booking data.
+* Added support for currency name display (E.g USD, AUD instead of $) on frontend trip pages. This can be enabled or disable from  WP Travel Admin Settings.
+
+Tweaks:
+* Added Helper function `WP_Travel_Helpers_Trip_Dates::is_fixed_departure($trip_id)` to check whether it is fixed departure trip or not.
 
 = 4.4.4 =
 Release Date: 7th January, 2021

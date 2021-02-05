@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 4.4.4
+ * Version: 4.4.6
  * Author: WP Travel
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 5.4.1
  * Requires PHP: 5.5
- * Tested up to: 5.6
+ * Tested up to: 5.6.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.4.4';
+		public $version = '4.4.6';
 
 		/**
 		 * WP Travel API version.
@@ -318,12 +318,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
-
-			/**
-			 * @since WP Travel 4.4.5
-			 */
-			include sprintf( '%s/core/REST/class-wp-travel-rest-base-controller.php', WP_TRAVEL_ABSPATH ); // Base class for REST API
-			include sprintf( '%s/core/REST/class-wp-travel-rest-init.php', WP_TRAVEL_ABSPATH ); 
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
