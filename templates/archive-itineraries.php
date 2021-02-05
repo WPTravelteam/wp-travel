@@ -9,37 +9,41 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
- * @author      WenSolutions
- * @package     wp-travel/Templates
- * @since       1.0.0
+ * @see http://docs.wensolutions.com/document/template-structure/
+ * @author WenSolutions
+ * @package wp-travel/Templates
+ * @since 1.0.0
  */
 
 get_header( 'itinerary' ); ?>
 	<?php
 	$template = get_option( 'template' );
-	
-	if( 'Divi' === $template ) {
+
+	if ( 'Divi' === $template ) {
 		?>
-				<div class="container clearfix">
+			<div class="container clearfix">
 		<?php
 	}
 
 	$current_theme = wp_get_theme();
-	if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+	if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 		?>
-				<div class="wrap">
+			<div class="wrap">
 		<?php
 	}
 	?>
-		<header class="page-header">
-				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-				<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
-		</header>
+	<header class="page-header">
+			<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+			<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
+	</header>
+
 <?php do_action( 'wp_travel_before_main_content' ); ?>
 <?php $itinerary_layout_v2_enabled = wp_travel_use_itinerary_v2_layout(); ?>
 <?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : the_post(); ?>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		?>
 		<?php
 
 		if ( $itinerary_layout_v2_enabled ) {
@@ -56,12 +60,12 @@ get_header( 'itinerary' ); ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
 <?php
-if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 	?>
 		</div>
 	<?php
 }
-if( 'Divi' === $template ) {
+if ( 'Divi' === $template ) {
 	?>
 		</div>
 	<?php
