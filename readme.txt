@@ -245,6 +245,7 @@ Release Date: 5th February, 2021
 
 Enhancement:
 * Added pax information on frontend pax selector. This feature is currently not supported for trip time feature. 
+* Added support for WP Rocket plugin to never cache 'wp_travel_cart' cookies on WP Travel checkout page. 
 
 = 4.4.5 =
 Release Date: 28th January, 2021
