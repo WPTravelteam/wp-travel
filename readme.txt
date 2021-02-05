@@ -241,7 +241,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.4.6 =
-Release Date: 4th February, 2021
+Release Date: 5th February, 2021
 
 Enhancement:
 * Added pax information on frontend pax selector. This feature is currently not supported for trip time feature. 
