@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 4.4.5
+ * Version: 4.4.6
  * Author: WP Travel
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 5.4.1
  * Requires PHP: 5.5
- * Tested up to: 5.6
+ * Tested up to: 5.6.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.4.5';
+		public $version = '4.4.6';
 
 		/**
 		 * WP Travel API version.
@@ -614,7 +614,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * To disable cache in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
+		 * To disable cache and never cache cookies in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
 		 *
 		 * @return void
 		 */
@@ -623,9 +623,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$active_plugins   = get_option( 'active_plugins' );
 			$settings         = wp_travel_get_settings();
 			$checkout_page_id = ! empty( $settings['checkout_page_id'] ) ? ( $settings['checkout_page_id'] ) : '';
-			$slug             = get_post_field( 'post_name', $checkout_page_id );
-
-			$support_plugins = array(
+			$slug             = array(
+				'checkout' => get_post_field( 'post_name', $checkout_page_id ),
+				'cart'     => 'wp_travel_cart',
+			);
+			$support_plugins  = array(
 				'wp_rocket' => 'wp-rocket/wp-rocket.php', // plugin-folder/plugin-file.php.
 			);
 
@@ -635,8 +637,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( in_array( $support_plugins['wp_rocket'], $active_plugins, true ) ) {
 				$options = get_option( 'wp_rocket_settings' );
 
-				if ( ! in_array( '/' . $slug . '/', $options['cache_reject_uri'], true ) ) {
-					$options['cache_reject_uri'][] = '/' . $slug . '/';
+				// For checkout page.
+				if ( ! in_array( '/' . $slug['checkout'] . '/', $options['cache_reject_uri'], true ) ) {
+					$options['cache_reject_uri'][] = '/' . $slug['checkout'] . '/';
+					update_option( 'wp_rocket_settings', $options );
+				}
+				// For cart page in cookies.
+				if ( ! in_array( $slug['cart'], $options['cache_reject_cookies'], true ) ) {
+					$options['cache_reject_cookies'][] = $slug['cart'];
 					update_option( 'wp_rocket_settings', $options );
 				}
 			}

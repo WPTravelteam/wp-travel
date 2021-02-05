@@ -35,7 +35,7 @@ const DiscountTable = ({ groupPricings }) => {
 	</div>
 }
 
-const PaxSelector = ({ pricing, onPaxChange, counts }) => {
+const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 	let categories = pricing && pricing.categories || []
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
@@ -86,7 +86,15 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 					}
 					return <li key={i}>
 						<div className="text-left">
-							<strong>{`${c.term_info.title}`}</strong>
+							<strong>
+								{`${c.term_info.title}`} &nbsp;
+								{
+									// Currently not supported for time. Need enhancement later.
+									inventory && inventory.length < 2 && inventory[0].booked_pax > 0 ?
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${inventory[0].pax_available}`})</span> :
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${pricing.max_pax}`})</span>
+								}
+							</strong>
 							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip group-discount-button" onClick={groupDiscountClickhandler}>
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38

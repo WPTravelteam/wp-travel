@@ -24,8 +24,13 @@ rsync -a ./app/build ./build/trunk/app
 echo "*********************************"
 echo ""
 
+<<<<<<< HEAD
 #!/bin/bash
 CURRENT_TAG=4.4.5
+=======
+#!/bin/bash          
+CURRENT_TAG=4.4.6
+>>>>>>> 3c6ac04315d1ac8a7fbca4cb70853cd3df44b16c
 
 # Create tag folder
 echo "Create new tag folder"
