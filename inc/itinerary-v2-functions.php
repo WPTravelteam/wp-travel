@@ -850,7 +850,9 @@ function wp_travel_single_itinerary_maps( $trip_id ) {
 }
 
 // Archive itinerary sections.
-
+/**
+ * Archive filter.
+ */
 function wp_travel_archive_before_content() {
 	$view_mode = wp_travel_get_archive_view_mode();
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) {
@@ -873,11 +875,11 @@ function wp_travel_archive_before_content() {
 								<?php do_action( 'wp_travel_before_post_filter' ); ?>
 								<input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
 								<?php
-								$price          = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
-								$type           = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
-								$location       = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
-								$trip_date      = ! empty( $_GET['trip_date'] ) ? $_GET['trip_date'] : '';
-								$trip_name      = ! empty( $_GET['trip_name'] ) ? $_GET['trip_name'] : '';
+								$price     = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+								$type      = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
+								$location  = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
+								$trip_date = ! empty( $_GET['trip_date'] ) ? $_GET['trip_date'] : '';
+								$trip_name = ! empty( $_GET['trip_name'] ) ? $_GET['trip_name'] : '';
 								?>
 								<div class="wti__filter-input wt__filter_by_trip_name">
 									<select name="trip_name" class="wti__select wp_travel_input_filters trip-name">
@@ -889,8 +891,8 @@ function wp_travel_archive_before_content() {
 								<div class="wti__filter-input wti__filter_by_price">
 									<select name="price" class="wti__select wp_travel_input_filters price">
 										<option value=""><?php echo esc_html( $price_text ); ?></option>
-										<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
-										<option value="high_low" <?php selected( $price, 'high_low' ); ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ); ?></option>
+										<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Low to High', 'wp-travel' ); ?></option>
+										<option value="high_low" <?php selected( $price, 'high_low' ); ?> data-type="meta" ><?php esc_html_e( 'High to Low', 'wp-travel' ); ?></option>
 									</select>
 								</div>
 								<div class="wti__filter-input wti__filter_by_trip_type">
@@ -1021,7 +1023,7 @@ function wp_travel_archive_before_content() {
  * @return void
  */
 function wp_travel_archive_v2_wrapper_close() {
-	if ( ( WP_Travel::is_page('archive') || is_search() ) && ! is_admin() ) {
+	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) {
 		?>
 		<?php
 		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
@@ -1045,7 +1047,7 @@ function wp_travel_archive_v2_wrapper_close() {
  */
 function wp_travel_archive_v2_listing_sidebar() {
 
-	if ( WP_Travel::is_page('archive') && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
+	if ( WP_Travel::is_page( 'archive' ) && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
 		?>
 
 		<div class="wti__sidebar" role="complementary">
