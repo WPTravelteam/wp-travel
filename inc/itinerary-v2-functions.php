@@ -1028,10 +1028,12 @@ function wp_travel_archive_v2_wrapper_close() {
 		<?php
 		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
 		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
-		wp_travel_pagination( $pagination_range, $max_num_pages );
 		?>
 					</div> <!-- #wti__list -->
-					<?php do_action( 'wp_travel_archive_v2_listing_sidebar' ); ?>
+					<?php
+					wp_travel_pagination( $pagination_range, $max_num_pages );
+					do_action( 'wp_travel_archive_v2_listing_sidebar' );
+					?>
 				</div> <!-- #wti__list-wrapper -->
 			</div> <!-- #wti__inner -->
 		</div> <!-- #wti__container -->
