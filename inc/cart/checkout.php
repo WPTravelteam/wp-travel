@@ -15,6 +15,11 @@ global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
+// echo '<hr>';
+// echo '<pre>';
+// print_r( $wt_cart->getItems() );
+// echo '</pre>';
+// echo '<hr>';
 ?>
 <form method="POST" action="<?php echo $_SERVER[ 'REQUEST_URI' ]; ?>" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>

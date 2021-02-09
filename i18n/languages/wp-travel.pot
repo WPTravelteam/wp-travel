@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-04 11:18:26+00:00\n"
+"POT-Creation-Date: 2021-02-09 06:15:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -164,57 +164,45 @@ msgstr ""
 msgid "Pricing Category"
 msgstr ""
 
-#: core/ajax/coupon.php:29 inc/class-ajax.php:442
-msgid "<strong>Error : </strong>Cannot apply coupon for this trip."
-msgstr ""
-
-#: core/ajax/coupon.php:40
-msgid "Discount Coupon Code Applied : %s"
-msgstr ""
-
-#: core/ajax/coupon.php:50
-msgid "The Coupon Code is Invalid."
-msgstr ""
-
 #: core/helpers/cart.php:54 core/helpers/error_codes.php:19
 msgid "Cart is empty."
 msgstr ""
 
-#: core/helpers/cart.php:120 core/helpers/cart.php:149
+#: core/helpers/cart.php:126 core/helpers/cart.php:155
 #: core/helpers/error_codes.php:13
 msgid "Invalid trip id."
 msgstr ""
 
-#: core/helpers/cart.php:217 inc/class-ajax.php:218 inc/class-ajax.php:262
+#: core/helpers/cart.php:223 inc/class-ajax.php:219 inc/class-ajax.php:263
 #: inc/helpers.php:1312 inc/helpers.php:3372
 msgid "Custom"
 msgstr ""
 
-#: core/helpers/cart.php:270
+#: core/helpers/cart.php:276
 msgid "Trip not added to cart."
 msgstr ""
 
-#: core/helpers/cart.php:274
+#: core/helpers/cart.php:280
 msgid "Trip added to cart."
 msgstr ""
 
-#: core/helpers/cart.php:281 core/helpers/cart.php:295
+#: core/helpers/cart.php:287 core/helpers/cart.php:301
 msgid "Invalid cart id."
 msgstr ""
 
-#: core/helpers/cart.php:288
+#: core/helpers/cart.php:294
 msgid "Trip removed from cart."
 msgstr ""
 
-#: core/helpers/cart.php:303
+#: core/helpers/cart.php:308
 msgid "Cart item not updated."
 msgstr ""
 
-#: core/helpers/cart.php:309
+#: core/helpers/cart.php:314
 msgid "Cart item updated."
 msgstr ""
 
-#: core/helpers/cart.php:334
+#: core/helpers/cart.php:372
 msgid "Discount coupon code applied successfully."
 msgstr ""
 
@@ -330,11 +318,31 @@ msgstr ""
 msgid "The coupon code is invalid."
 msgstr ""
 
-#: core/helpers/error_codes.php:115
-msgid "The Attachment is invalid."
+#: core/helpers/error_codes.php:113
+msgid "Coupon Code cannot be empty."
+msgstr ""
+
+#: core/helpers/error_codes.php:116
+msgid "Coupon expired."
 msgstr ""
 
 #: core/helpers/error_codes.php:119
+msgid "Coupon uses limit exceed."
+msgstr ""
+
+#: core/helpers/error_codes.php:122
+msgid "Discount amount higher than trip amount."
+msgstr ""
+
+#: core/helpers/error_codes.php:125
+msgid "You can not apply coupon for this trip."
+msgstr ""
+
+#: core/helpers/error_codes.php:131
+msgid "The Attachment is invalid."
+msgstr ""
+
+#: core/helpers/error_codes.php:135
 msgid "The Attachment not found."
 msgstr ""
 
@@ -450,7 +458,7 @@ msgid "Multiple Select"
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:215 inc/cart/class-cart.php:372
+#: inc/cart/class-cart.php:213 inc/cart/class-cart.php:372
 #: inc/cart/class-cart.php:421 inc/class-wp-travel-email.php:74
 #: inc/class-wp-travel-email.php:94 inc/class-wp-travel-form-handler.php:49
 #: inc/class-wp-travel-form-handler.php:53
@@ -469,14 +477,14 @@ msgid "Error:"
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:215 inc/cart/class-cart.php:372
+#: inc/cart/class-cart.php:213 inc/cart/class-cart.php:372
 #: inc/cart/class-cart.php:421
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: core/lib/cart.php:457 inc/cart/class-cart.php:467
+#: core/lib/cart.php:457 inc/cart/class-cart.php:504
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
@@ -874,11 +882,11 @@ msgstr ""
 msgid "Booking Date"
 msgstr ""
 
-#: inc/admin/class-admin-booking.php:271 inc/cart/checkout.php:79
+#: inc/admin/class-admin-booking.php:271 inc/cart/checkout.php:84
 msgid "Lead Traveler"
 msgstr ""
 
-#: inc/admin/class-admin-booking.php:275 inc/cart/checkout.php:85
+#: inc/admin/class-admin-booking.php:275 inc/cart/checkout.php:90
 msgid "Traveler %d"
 msgstr ""
 
@@ -1305,7 +1313,7 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:157
 #: inc/booking-functions.php:475 inc/booking-functions.php:479
 #: inc/booking-functions.php:503 inc/booking-functions.php:507
-#: inc/class-assets.php:248 inc/class-assets.php:291
+#: inc/cart/cart-mini.php:125 inc/class-assets.php:248 inc/class-assets.php:291
 #: inc/class-wp-travel-email.php:147 inc/currencies.php:342
 #: inc/helpers/helpers-stat.php:211 inc/helpers/helpers-stat.php:383
 #: inc/helpers/helpers-stat.php:486 inc/helpers.php:700 inc/helpers.php:745
@@ -1639,7 +1647,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1503
 #: inc/admin/views/tabs/tab-contents/settings/email.php:59
-#: inc/cart/checkout.php:63 inc/template-functions.php:944
+#: inc/cart/checkout.php:68 inc/template-functions.php:944
 msgid "Open All"
 msgstr ""
 
@@ -1649,7 +1657,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1105
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1504
 #: inc/admin/views/tabs/tab-contents/settings/email.php:60
-#: inc/cart/checkout.php:64 inc/template-functions.php:945
+#: inc/cart/checkout.php:69 inc/template-functions.php:945
 msgid "Close All"
 msgstr ""
 
@@ -1856,7 +1864,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:544
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1236
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1379
-#: inc/cart/cart-mini.php:146 inc/helpers/helpers-price.php:17
+#: inc/cart/cart-mini.php:163 inc/helpers/helpers-price.php:17
 #: inc/helpers.php:1311
 msgid "Group"
 msgstr ""
@@ -2496,7 +2504,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:722
+#: inc/helpers/helpers-price.php:736
 msgid "Partial Payment"
 msgstr ""
 
@@ -2733,7 +2741,7 @@ msgid "Bookings"
 msgstr ""
 
 #: inc/booking-functions.php:472 inc/booking-functions.php:500
-#: inc/cart/cart-mini.php:303 inc/class-default-form-fields.php:169
+#: inc/cart/cart-mini.php:309 inc/class-default-form-fields.php:169
 #: inc/deprecated/440.php:358 inc/email-template-functions.php:43
 #: inc/email-template-functions.php:148 inc/email-template-functions.php:329
 #: inc/email-template-functions.php:628 inc/email-template-functions.php:936
@@ -2755,152 +2763,160 @@ msgstr ""
 msgid "Compare 2"
 msgstr ""
 
-#: inc/cart/cart-mini.php:41
+#: inc/cart/cart-mini.php:56
 msgid "Your Order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:42
+#: inc/cart/cart-mini.php:57
 msgid "You have selected %s items in your cart"
 msgstr ""
 
-#: inc/cart/cart-mini.php:79
+#: inc/cart/cart-mini.php:96
 msgid "Are you sure you want to remove '%s' from cart?"
 msgstr ""
 
-#: inc/cart/cart-mini.php:88
+#: inc/cart/cart-mini.php:105
+msgid "Discount"
+msgstr ""
+
+#: inc/cart/cart-mini.php:110
 msgid "Date: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:166 inc/class-wp-travel-extras-frontend.php:153
+#: inc/cart/cart-mini.php:183 inc/class-wp-travel-extras-frontend.php:153
 msgid "Trip Extras:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:204
+#: inc/cart/cart-mini.php:221
 msgid "Update"
 msgstr ""
 
-#: inc/cart/cart-mini.php:215 inc/cart/cart-mini.php:476
+#: inc/cart/cart-mini.php:232 inc/cart/cart-mini.php:482
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:223
+#: inc/cart/cart-mini.php:240
 msgid "Discount:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:234
+#: inc/cart/cart-mini.php:251
 msgid "Tax(%s):"
 msgstr ""
 
-#: inc/cart/cart-mini.php:254
+#: inc/cart/cart-mini.php:260
 msgid "Enter promo code"
 msgstr ""
 
-#: inc/cart/cart-mini.php:255
+#: inc/cart/cart-mini.php:261
 msgid "Coupon Applied."
 msgstr ""
 
-#: inc/cart/cart-mini.php:256
+#: inc/cart/cart-mini.php:262
 msgid "Coupon Applied"
 msgstr ""
 
-#: inc/cart/cart-mini.php:256 templates/content-cart.php:294
+#: inc/cart/cart-mini.php:262 templates/content-cart.php:294
 msgid "Apply Coupon"
 msgstr ""
 
-#: inc/cart/cart-mini.php:262 inc/helpers.php:2663
+#: inc/cart/cart-mini.php:268 inc/helpers.php:2663
 msgid "Total:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:268
+#: inc/cart/cart-mini.php:274
 msgid "Payment Amount:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:276
+#: inc/cart/cart-mini.php:282
 msgid "Proceed to Pay"
 msgstr ""
 
-#: inc/cart/cart-mini.php:317
+#: inc/cart/cart-mini.php:323
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:322 templates/account/tab-content/bookings.php:67
+#: inc/cart/cart-mini.php:328 templates/account/tab-content/bookings.php:67
 #: templates/account/tab-content/bookings.php:133
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:323 inc/cart/cart-mini.php:505 inc/helpers.php:2434
+#: inc/cart/cart-mini.php:329 inc/cart/cart-mini.php:511 inc/helpers.php:2434
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
 
-#: inc/cart/cart-mini.php:324 inc/helpers.php:765
+#: inc/cart/cart-mini.php:330 inc/helpers.php:765
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:366
+#: inc/cart/cart-mini.php:372
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:423
+#: inc/cart/cart-mini.php:429
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:452
+#: inc/cart/cart-mini.php:458
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:477 templates/content-cart.php:266
+#: inc/cart/cart-mini.php:483 templates/content-cart.php:266
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:481 templates/content-cart.php:270
+#: inc/cart/cart-mini.php:487 templates/content-cart.php:270
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:518
+#: inc/cart/cart-mini.php:524
 msgid "Trip Book"
 msgstr ""
 
-#: inc/cart/checkout.php:58
+#: inc/cart/checkout.php:63
 msgid "Traveler Details"
 msgstr ""
 
-#: inc/cart/checkout.php:161 inc/deprecated/440.php:93 inc/helpers.php:2620
+#: inc/cart/checkout.php:166 inc/deprecated/440.php:93 inc/helpers.php:2620
 #: inc/helpers.php:2624 inc/helpers.php:2656 inc/helpers.php:2664
 #: inc/template-functions.php:586 inc/template-functions.php:2011
 #: inc/template-functions.php:2399
 msgid "Book Now"
 msgstr ""
 
-#: inc/class-ajax.php:361
+#: inc/class-ajax.php:362
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:378
+#: inc/class-ajax.php:380
 msgid "<strong>Error : </strong>Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:387
+#: inc/class-ajax.php:389
 msgid "<strong>Error : </strong>Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:397
+#: inc/class-ajax.php:399
 msgid ""
 "<strong>Error : </strong>The coupoun is either inactive or has expired. "
 "Coupon Code could not be applied."
 msgstr ""
 
-#: inc/class-ajax.php:409
+#: inc/class-ajax.php:411
 msgid "<strong>Error : </strong>This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:425
+#: inc/class-ajax.php:427
 msgid ""
 "<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage "
 "exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:449
+#: inc/class-ajax.php:444
+msgid "<strong>Error : </strong>Cannot apply coupon for this trip."
+msgstr ""
+
+#: inc/class-ajax.php:451
 msgid "<strong> </strong>Coupon applied succesfully."
 msgstr ""
 
@@ -4517,12 +4533,20 @@ msgstr ""
 msgid "No Coupons found in Trash."
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:112
+#: inc/coupon/inc/class-install.php:111
 msgid "Coupon Status"
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:113
+#: inc/coupon/inc/class-install.php:112
 msgid "Coupon Created Date"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:171
+msgid "Unlimited"
+msgstr ""
+
+#: inc/coupon/inc/class-install.php:173
+msgid "Used %1$1s out of %2$2s"
 msgstr ""
 
 #: inc/deprecated/440.php:103 inc/form-fields.php:70 inc/helpers.php:135
@@ -8508,7 +8532,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:723
+#: inc/helpers/helpers-price.php:737
 msgid "Full Payment"
 msgstr ""
 
@@ -9760,32 +9784,27 @@ msgctxt "column name"
 msgid "Title"
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:106
+#: inc/coupon/inc/class-install.php:105
 msgctxt "column name"
 msgid "Coupon Name"
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:107
+#: inc/coupon/inc/class-install.php:106
 msgctxt "column name"
 msgid "Coupon Code"
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:108
+#: inc/coupon/inc/class-install.php:107
 msgctxt "column name"
 msgid "Discount Value"
 msgstr ""
 
 #: inc/coupon/inc/class-install.php:109
 msgctxt "column name"
-msgid "Max Uses"
-msgstr ""
-
-#: inc/coupon/inc/class-install.php:110
-msgctxt "column name"
 msgid "Usage Count"
 msgstr ""
 
-#: inc/coupon/inc/class-install.php:111
+#: inc/coupon/inc/class-install.php:110
 msgctxt "column name"
 msgid "Expitration Date"
 msgstr ""

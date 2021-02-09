@@ -134,7 +134,8 @@ class WP_Travel_Ajax {
 		}
 		global $wt_cart;
 
-		$allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		$allow_multiple_cart_items = true;
 
 		if ( ! $allow_multiple_cart_items ) {
 			$wt_cart->clear();
@@ -365,6 +366,7 @@ class WP_Travel_Ajax {
 	}
 
 	function wt_cart_apply_coupon() {
+		error_log( 'traditional apply coupon' );
 		if ( ! isset( $_POST['CouponCode'] ) ) {
 			return;
 		}

@@ -614,6 +614,23 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
+		 * Verify WP Travel nonce in case of any ajax request.
+		 *
+		 * @since WP Travel 4.4.7
+		 * @return boolean
+		 */
+		public static function verify_nonce() {
+			/**
+			 * Nonce Verification.
+			 */
+			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
+				return WP_Travel_Helpers_REST_API::response( $error );
+			}
+			return true;
+		}
+
+		/**
 		 * To disable cache and never cache cookies in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
 		 *
 		 * @return void

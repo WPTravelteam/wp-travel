@@ -74,11 +74,17 @@ class WP_Travel_Helpers_Cart {
 						unset( $item['trip'][ $cat_id ]['price'], $item['trip'][ $cat_id ]['price_partial'], $item['trip'][ $cat_id ]['custom_label'] );
 					}
 				}
+				$cart[ $cart_id ]['trip_id']    = $item['trip_id']; // To loop cart items with trip id. like in discount.
 				$cart[ $cart_id ]['pricing_id'] = $item['pricing_id'];
 				$cart[ $cart_id ]['price_key']  = $item['price_key'];
 				$cart[ $cart_id ]['trip_price'] = (float) number_format( $item['trip_price'], 2, '.', '' );
 
-				// Start Apply Discounts if applicable
+				// Calculation of individual trip total along with extras.
+				$cart[ $cart_id ]['trip_total'] = $wt_cart->get_item_total( $cart_id ); // Gross individual trip total including extras. It helps to apply discount.
+				if ( isset( $item['discount'] ) ) {
+					$cart[ $cart_id ]['discount'] = $item['discount']; // Discount amount applied to individual trip total.
+				}
+
 				if ( ! empty( $discount ) && isset( $discount['coupon'] ) && ! $discount['coupon'] ) {
 					$trip_price = (float) $item['trip_price'] * ( 100 - (float) $discount['value'] ) / 100;
 					// if ( ! empty( $discount[0]['is_percent_discount'] ) && 'yes' === $discount[0]['is_percent_discount'] ) {
@@ -295,7 +301,6 @@ class WP_Travel_Helpers_Cart {
 			return new WP_Error( 'WP_TRAVEL_NO_CART_ID', __( 'Invalid cart id.', 'wp-travel' ) );
 		}
 		global $wt_cart;
-		// print_r($itemData);
 		$pax         = isset( $itemData['pax'] ) ? $itemData['pax'] : array();
 		$trip_extras = isset( $itemData['wp_travel_trip_extras'] ) ? (array) $itemData['wp_travel_trip_extras'] : array();
 		$response    = $wt_cart->update( $cart_id, $pax, $trip_extras, $itemData );
@@ -312,23 +317,56 @@ class WP_Travel_Helpers_Cart {
 	}
 
 	public static function apply_coupon_code( $coupon_code ) {
+
+		$payload     = json_decode( file_get_contents( 'php://input' ) );
+		$payload     = is_object( $payload ) ? (array) $payload : array();
+		if ( empty( $coupon_code ) ) {
+			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_EMPTY_COUPON' );
+			WP_Travel_Helpers_REST_API::response( $error );
+		}
+
+		if ( ! is_string( $coupon_code ) ) {
+			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
+			WP_Travel_Helpers_REST_API::response( $error );
+		}
+
 		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code ); // Gets Coupon Code if Exists.
-
 		if ( $coupon_id ) {
-			// Prepare Coupon Application.
-			global $wt_cart;
+			if ( ! WP_Travel()->coupon->is_coupon_valid( $coupon_id ) ) {
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON_DATE' );
+				WP_Travel_Helpers_REST_API::response( $error );
+			}
 
-			$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
-			$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
-
-
-			$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, $coupon_code );
+			if ( WP_Travel()->coupon->is_limit_exceed( $coupon_id ) ) {
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_LIMIT_EXCEED' );
+				WP_Travel_Helpers_REST_API::response( $error );
+			}
 
 			$cart = self::get_cart();
-
+			// Prepare Coupon Application.
 			if ( is_wp_error( $cart ) ) {
 				return $cart;
 			}
+			$items = $cart['cart']['cart_items'];
+
+			$discount_applicable_total = WP_Travel()->coupon->get_discount_applicable_total( $coupon_id );
+			if ( ! $discount_applicable_total ) {
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_TRIP' );
+				WP_Travel_Helpers_REST_API::response( $error );
+			}
+
+			$discount_type  = WP_Travel()->coupon->get_discount_type( $coupon_id );
+			$discount_value = WP_Travel()->coupon->get_discount_value( $coupon_id );
+			if ( 'fixed' === $discount_type && $discount_value > $discount_applicable_total ) {
+				// Error related to fixed discount amount is higher than trip amount.
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_HIGH' );
+				WP_Travel_Helpers_REST_API::response( $error );
+			}
+
+			global $wt_cart;
+			$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code );
+			$cart = self::get_cart(); // 2nd assignment after deducting discount.
+
 			return array(
 				'code'    => 'WP_TRAVEL_COUPON_APPLIED',
 				'message' => __( 'Discount coupon code applied successfully.', 'wp-travel' ),

@@ -36,6 +36,7 @@ require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-dates.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-excluded-dates-times.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/pricings.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/cart.php';
+require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/coupon.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trips.php';
 
 // Assets.

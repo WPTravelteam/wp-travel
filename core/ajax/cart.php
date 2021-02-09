@@ -17,9 +17,6 @@ class WP_Travel_Ajax_Cart {
 		add_action( 'wp_ajax_wp_travel_update_cart_item', array( __CLASS__, 'update_cart_item' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_update_cart_item', array( __CLASS__, 'update_cart_item' ) );
 
-		// Apply coupons.
-		add_action( 'wp_ajax_wp_travel_apply_coupon', array( __CLASS__, 'apply_coupon_code' ) );
-		add_action( 'wp_ajax_nopriv_wp_travel_apply_coupon', array( __CLASS__, 'apply_coupon_code' ) );
 	}
 
 	public static function get_cart() {
@@ -65,26 +62,6 @@ class WP_Travel_Ajax_Cart {
 		$postData = json_decode( file_get_contents( 'php://input' ) );
 		$postData = is_object( $postData ) ? (array) $postData : array();
 		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $postData );
-		WP_Travel_Helpers_REST_API::response( $response );
-	}
-
-	public static function apply_coupon_code() {
-		$permission = self::get_cart_permissions();
-		if ( is_wp_error( self::get_cart_permissions() || ! $permission ) ) {
-			WP_Travel_Helpers_REST_API::response( $permission );
-		}
-
-		$payload = json_decode( file_get_contents( 'php://input' ) );
-		$payload = is_object( $payload ) ? (array) $payload : array();
-
-		if ( empty( $payload['couponCode'] ) || ! is_string( $payload['couponCode'] ) ) {
-			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON' );
-			WP_Travel_Helpers_REST_API::response( $error );
-		}
-
-		$coupon_code = $payload['couponCode'];
-		
-		$response = WP_Travel_Helpers_Cart::apply_coupon_code( $coupon_code );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
