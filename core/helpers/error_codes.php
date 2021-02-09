@@ -108,7 +108,23 @@ class WP_Travel_Helpers_Error_Codes {
             // Coupon Response Codes.
             'WP_TRAVEL_INVALID_COUPON' => array(
                 'message' => __( 'The coupon code is invalid.', 'wp-travel' ),
-            ),
+			),
+			'WP_TRAVEL_EMPTY_COUPON' => array(
+                'message' => __( 'Coupon Code cannot be empty.', 'wp-travel' ),
+			),
+			'WP_TRAVEL_INVALID_COUPON_DATE' => array(
+                'message' => __( 'Coupon expired.', 'wp-travel' ),
+			),
+			'WP_TRAVEL_COUPON_LIMIT_EXCEED' => array(
+                'message' => __( 'Coupon uses limit exceed.', 'wp-travel' ),
+			),
+			'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_HIGH' => array(
+                'message' => __( 'Discount amount higher than trip amount.', 'wp-travel' ),
+			),
+			'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_TRIP' => array(
+                'message' => __( 'You can not apply coupon for this trip.', 'wp-travel' ),
+			),
+			
 
             // Media response Codes.
             'WP_TRAVEL_NO_ATTACHMENT_ID' => array(
