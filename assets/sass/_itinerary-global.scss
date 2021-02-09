@@ -328,10 +328,10 @@ a{
         
         grid-template-areas: "trip_list" "trip_sidebar";
         @media(min-width: 992px){
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas: "trip_list trip_list trip_sidebar";
+            grid-template-columns: auto 28%;
+            grid-template-areas: "trip_list  trip_sidebar";
             &.sidebar-left{
-                grid-template-areas: "trip_sidebar trip_list trip_list";
+                grid-template-areas: "trip_sidebar  trip_list";
             }
         }
         .wti__item-lists{
