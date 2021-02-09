@@ -107,9 +107,17 @@ $enable_sale                      = WP_Travel_Helpers_Trips::is_sale_enabled(
 			<span class="rating-text">(<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>)</span>
 		</div>
 		<div class="wti__trip-content">
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat eum hic ipsam illum in blanditiis, quidem possimus minus libero facere.</p>
+			<?php
+			$the_content = apply_filters( 'the_content', get_the_content() );
+			$excerpt     = apply_filters( 'wp_travel_archive_trip_excerpt', wp_trim_words( $the_content, 15 ) );
+			if ( ! empty( $excerpt ) ) {
+				?>
+				<p><?php echo esc_html( $excerpt ); ?></p>
+				<?php
+			}
+			?>
 			<div class="wti__trip-book-button">
-				<a href="#" class="button wti__trip-explore">Book Now</a>
+				<a href="<?php the_permalink( get_the_ID() ); ?>" class="button wti__trip-explore"><?php echo esc_html( apply_filters( 'wp_travel_archive_explore_btn', 'Explore Now' ) ); ?></a>
 			</div>
 		</div>
 		<?php
