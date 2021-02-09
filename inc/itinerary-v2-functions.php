@@ -1011,7 +1011,8 @@ function wp_travel_archive_before_content() {
 				?>
 				<!-- For turn on sidebar (add 'has-sidebar', 'sidebar-left' class into 'wti__list-wrapper') -->
 				<div class="wti__list-wrapper <?php echo esc_attr( $archive_sidebar_class ); ?>">
-					<div class="wti__list">
+					<div class="wti__item-lists">
+						<div class="wti__list">
 		<?php
 	}
 }
@@ -1029,10 +1030,10 @@ function wp_travel_archive_v2_wrapper_close() {
 		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
 		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
 		?>
-					</div> <!-- #wti__list -->
-					<?php
-					wp_travel_pagination( $pagination_range, $max_num_pages );
-					do_action( 'wp_travel_archive_v2_listing_sidebar' );
+						</div> <!-- #wti__list -->
+						<?php wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
+					</div> <!-- #wti__list-items -->
+					<?php do_action( 'wp_travel_archive_v2_listing_sidebar' ); ?>
 					?>
 				</div> <!-- #wti__list-wrapper -->
 			</div> <!-- #wti__inner -->
