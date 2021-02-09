@@ -41,6 +41,15 @@ $enable_sale                      = WP_Travel_Helpers_Trips::is_sale_enabled(
 <article class="wti__trip-list-item">
 	<div class="wti__trip-thumbnail">
 		<a href="<?php the_permalink(); ?>" class="wti__trip-link"><?php echo wp_travel_get_post_thumbnail( $post_id, 'wp_travel_thumbnail' ); ?></a>
+		<?php
+		if ( $regular_price > $trip_price ) {
+			$save = ( 1 - ( $trip_price / $regular_price ) ) * 100;
+			$save = number_format( $save, 2, '.', ',' );
+			?>
+			<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', $save ); ?></div>
+			<?php
+		}
+		?>
 		<div class="wti__trip-meta">
 			<?php if ( $enable_sale ) : ?>
 				<span class="wti__trip-meta-offer">
