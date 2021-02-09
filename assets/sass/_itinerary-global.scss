@@ -304,6 +304,8 @@ a{
     .wti__list{
         display: grid;
         grid-template-columns: 1fr;
+        align-items: flex-start;
+        grid-auto-rows: min-content;
         grid-gap: 30px;
         @media(min-width: 768px){
             grid-template-columns: repeat(2, 1fr);
@@ -323,6 +325,7 @@ a{
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 30px;
+        
         grid-template-areas: "trip_list" "trip_sidebar";
         @media(min-width: 992px){
             grid-template-columns: repeat(3, 1fr);
@@ -332,6 +335,7 @@ a{
             }
         }
         .wti__list{
+            
             grid-area: trip_list;
             @media(min-width: 992px){
                 grid-template-columns: repeat(2, 1fr);
@@ -368,7 +372,7 @@ a{
                 }
                 .wti__trip-content-wrapper{
                     flex: 1;
-                    padding: 1.5em 1.5em 55px;
+                    padding: 1.5em 1.5em 0px;
                     position: relative;
                     .wti__trip-price-area{
                         margin-bottom: 1em;
@@ -378,11 +382,8 @@ a{
                         }
                     }
                     .wti__trip-footer{
-                        position: absolute;
                         width: 100%;
-                        left: 0;
-                        bottom: 0;
-                        padding: 0 1.5em;
+                        
                         .wti__trip-footer-meta{
                             justify-content: flex-start;
                         }
@@ -442,8 +443,8 @@ a{
                     opacity: 0;
                 }
                 img{
-                    width: 100%;
-                    height: 100%;
+                    width: 100% !important;
+                    height: 100%  !important;
                     object-fit: cover;
                     position: absolute;
                     top: 0;

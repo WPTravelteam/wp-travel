@@ -309,6 +309,8 @@ a:hover {
 .wti__list-wrapper .wti__list {
   display: grid;
   grid-template-columns: 1fr;
+  align-items: flex-start;
+  grid-auto-rows: min-content;
   grid-gap: 30px;
 }
 @media (min-width: 768px) {
@@ -379,7 +381,7 @@ a:hover {
   }
   .wti__list-wrapper.list-view .wti__trip-list-item .wti__trip-content-wrapper {
     flex: 1;
-    padding: 1.5em 1.5em 55px;
+    padding: 1.5em 1.5em 0px;
     position: relative;
   }
   .wti__list-wrapper.list-view .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-price-area {
@@ -390,11 +392,7 @@ a:hover {
     transform: translateX(-53px);
   }
   .wti__list-wrapper.list-view .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-footer {
-    position: absolute;
     width: 100%;
-    left: 0;
-    bottom: 0;
-    padding: 0 1.5em;
   }
   .wti__list-wrapper.list-view .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-footer .wti__trip-footer-meta {
     justify-content: flex-start;
@@ -444,8 +442,8 @@ a:hover {
   opacity: 0;
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-thumbnail .wti__trip-link img {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
   position: absolute;
   top: 0;
