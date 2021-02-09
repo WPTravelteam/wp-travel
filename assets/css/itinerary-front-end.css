@@ -343,7 +343,7 @@ a:hover {
     grid-template-areas: "trip_sidebar trip_list trip_list";
   }
 }
-.wti__list-wrapper.has-sidebar .wti__list {
+.wti__list-wrapper.has-sidebar .wti__item-lists {
   grid-area: trip_list;
 }
 @media (min-width: 992px) {

@@ -334,9 +334,10 @@ a{
                 grid-template-areas: "trip_sidebar trip_list trip_list";
             }
         }
-        .wti__list{
-            
+        .wti__item-lists{
             grid-area: trip_list;
+        }
+        .wti__list{
             @media(min-width: 992px){
                 grid-template-columns: repeat(2, 1fr);
             }
