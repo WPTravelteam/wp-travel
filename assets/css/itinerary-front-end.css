@@ -336,14 +336,14 @@ a:hover {
 }
 @media (min-width: 992px) {
   .wti__list-wrapper.has-sidebar {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: "trip_list trip_list trip_sidebar";
+    grid-template-columns: auto 28%;
+    grid-template-areas: "trip_list  trip_sidebar";
   }
   .wti__list-wrapper.has-sidebar.sidebar-left {
-    grid-template-areas: "trip_sidebar trip_list trip_list";
+    grid-template-areas: "trip_sidebar  trip_list";
   }
 }
-.wti__list-wrapper.has-sidebar .wti__list {
+.wti__list-wrapper.has-sidebar .wti__item-lists {
   grid-area: trip_list;
 }
 @media (min-width: 992px) {
