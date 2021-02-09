@@ -2065,33 +2065,6 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 	}
 }
 
-//saving stylings
-.wp-travel-savings {
-	position: absolute;
-	bottom: 0;
-	background: rgb(0, 146, 29);
-	color: #fff;
-	right: -8px;
-	padding: 5px 8px;
-	text-align: center;
-	z-index: 2;
-
-	&:after {
-		content: "";
-		position: absolute;
-		right: 0px;
-		top: 100%;
-		z-index: 1;
-		border-left: 4px solid #005d12;
-		border-right: 4px solid transparent;
-		border-bottom: 2px solid transparent;
-		border-top: 3px solid #005d12;
-	}
-
-	span {
-		font-weight: 700;
-	}
-}
 
 
 /* faq accordion */

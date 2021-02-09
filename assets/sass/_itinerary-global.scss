@@ -237,14 +237,52 @@ a{
     }
 }
 
+//wp travel saving 
+.wp-travel-savings {
+	position: absolute;
+	top: 5px;
+	background: $itinerary-green;
+	color: #fff;
+	right: -8px;
+	padding: 5px 8px;
+	text-align: center;
+	z-index: 2;
+
+	&:after {
+		content: "";
+		position: absolute;
+		right: 0px;
+		top: 100%;
+		z-index: 1;
+		border-left: 4px solid $itinerary-green;
+		border-right: 4px solid transparent;
+		border-bottom: 2px solid transparent;
+		border-top: 3px solid $itinerary-green;
+	}
+
+	span {
+		font-weight: 700;
+	}
+}
+.list-view{
+    .wp-travel-savings{
+        bottom:12px;
+        top:unset;
+        @media(max-width:767px){
+            top:5px;
+            bottom:unset;
+        }
+    }
+}
 /* img-hover-effect  */
 
 .wti__trip-thumbnail{
     position: relative;
-    overflow: hidden;
     padding-top: 80%;
     
     .wti__img-effect{
+        height: 100%;
+        width:100%;
         &::before{
             content: "";
             width: 100%;
@@ -410,9 +448,10 @@ a{
         
         .wti__trip-thumbnail{
             position: relative;
-            overflow: hidden;
             padding-top: 80%;
             .wti__trip-link{
+                width:100%;
+                height: 100%;
                 &::before{
                     content: "";
                     width: 100%;
