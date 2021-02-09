@@ -3847,5 +3847,5 @@ function wp_travel_itinerary_v2_frontend_tab_gallery( $gallery_ids ) {
  * @return boolean default true.
  */
 function wp_travel_use_itinerary_v2_layout() {
-	return apply_filters( 'wp_travel_use_itinerary_layout_v2', True );
+	return apply_filters( 'wp_travel_use_itinerary_layout_v2', true );
 }
