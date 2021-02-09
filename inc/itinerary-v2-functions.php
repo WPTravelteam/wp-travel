@@ -1034,7 +1034,6 @@ function wp_travel_archive_v2_wrapper_close() {
 						<?php wp_travel_pagination( $pagination_range, $max_num_pages ); ?>
 					</div> <!-- #wti__list-items -->
 					<?php do_action( 'wp_travel_archive_v2_listing_sidebar' ); ?>
-					?>
 				</div> <!-- #wti__list-wrapper -->
 			</div> <!-- #wti__inner -->
 		</div> <!-- #wti__container -->
