@@ -530,6 +530,7 @@ class WP_Travel_Cart {
 	public function remove( $id ) {
 		unset( $this->items[ $id ] );
 		unset( $this->attributes[ $id ] );
+		$this->clear_discount_values();
 		$this->write();
 	}
 	// /**
