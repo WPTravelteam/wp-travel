@@ -31,11 +31,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 
 		$cart_items = isset( $cart['cart']['cart_items'] ) ? $cart['cart']['cart_items'] : array();
 	}
-	// echo '<hr>';
-	// echo '<pre>';
-	// print_r( $cart_items );
-	// echo '</pre>';
-	// echo '<hr>';die;
+
 	$coupon_applied = isset( $cart['cart']['coupon']['coupon_id'] );
 	$readonly       = '';
 	$disabled       = '';
@@ -115,7 +111,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 										<div class="trip-name">
 											<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a></h5>
 											<?php  if ( $coupon_applied && 'fixed' !== $coupon_type ) : ?>
-												<span class="tooltip group-discount-button">
+												<span class="tooltip group-discount-button <?php echo esc_attr( ( ! $trip_discount ) ? 'no-discount' : '' ); ?> ">
 													<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
 															c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
 															c-4.647,0.656-9.242-0.838-12.613-4.099l-31.251-30.232c-17.401-16.834-44.661-16.835-62.061,0L193.72,42.859
