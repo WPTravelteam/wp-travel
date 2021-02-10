@@ -557,14 +557,14 @@ a{
             background-color: $itinerary-content-bg;
             padding: 0 1.5em;
             position: relative;
-            z-index: 1;
+            z-index: 5;
             .wti__trip-header{
                 padding-bottom: 1em;
             }
             .wti__trip-price-area{
                 text-align: center;
                 .wti__trip-price-amount{
-                    display: inline-block;
+                    display: inline-flex;
                     background-color: $itinerary-green;
                     color: #fff;
                     padding: .75em 2em;
@@ -574,6 +574,7 @@ a{
                     .trip__price-stikeout{
                         font-size: 12px;
                         opacity: .7;
+                        margin-left: 5px;
                     }
                 }
             }
@@ -618,11 +619,11 @@ a{
                             margin-bottom:0;
                         }
                         .wp-travel-related-trip-caret{
-                            display:inline-block;
+                            display: inline-flex;
                             padding-left: 7px;
                             position: relative;
                             i{
-
+                                display: inline-block;
                             }
                             .related-sub-category-menu{
                                 visibility: hidden;
@@ -658,7 +659,6 @@ a{
                             
                             }
                             &:hover{
-                               
                                 .related-sub-category-menu{
                                     opacity: 1;
                                     visibility: visible;
