@@ -40,11 +40,13 @@ if ( wp_travel_is_react_version_enabled() ) {
 	$readonly       = '';
 	$disabled       = '';
 	$coupon_code    = '';
+	$coupon_type    = '';
 	if ( $coupon_applied ) {
 		$readonly    = 'readonly';
 		$disabled    = 'disabled="disabled"';
 		$coupon      = (array) $cart['cart'];
 		$coupon_code = $cart['cart']['coupon']['coupon_code'];
+		$coupon_type = $cart['cart']['coupon']['type'];
 	}
 	?>
 	<div class="order-wrapper">
@@ -103,7 +105,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 									<div class="trip-item-name-price">
 										<div class="trip-name">
 											<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a></h5>
-											<?php if ( $coupon_applied ) : ?>
+											<?php if ( $coupon_applied && 'percentage' !== $coupon_type ) : ?>
 												<span class="tooltip group-discount-button"> </span>
 											<?php endif ?>
 										</div>
@@ -163,6 +165,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 												}
 											}
 											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
+											$category_price = $category_price ? $category_price : 0; // Temp fixes.
 										}
 										$category_total = $price_per_group ? $category_price : $pax * (float) $category_price;
 
