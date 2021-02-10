@@ -439,6 +439,7 @@ a:hover {
 }
 .wti__list-wrapper .wti__trip-list-item {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: var(--itinerary-light-sky-color);
 }
 .wti__list-wrapper .wti__trip-list-item:hover .wti__trip-thumbnail .wti__trip-link::after {
   transform: translate(-50%, -50%) rotateY(180deg);
@@ -547,7 +548,6 @@ a:hover {
   left: -25px;
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper {
-  background-color: var(--itinerary-light-sky-color);
   padding: 0 1.5em;
   position: relative;
   z-index: 5;
@@ -628,13 +628,13 @@ a:hover {
   opacity: 0;
   position: absolute;
   left: 0;
+  display: none;
   text-align: left;
   background-color: var(--itinerary-light-sky-color);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   min-width: 115px;
   transform: translateY(2em);
   z-index: 2;
-  display: flex;
   flex-direction: column;
   transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 10ms;
 }
@@ -658,6 +658,7 @@ a:hover {
   opacity: 1;
   visibility: visible;
   top: 37px;
+  display: flex;
   transform: translateY(0);
 }
 .wti__list-wrapper .wti__trip-list-item .wti__trip-content-wrapper .wti__trip-footer .wti__trip-footer-meta a {

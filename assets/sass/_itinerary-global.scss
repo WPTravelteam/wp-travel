@@ -434,6 +434,7 @@ a{
     
     .wti__trip-list-item{
         box-shadow: 0 4px 16px rgba(#000, .1);
+        background-color: $itinerary-content-bg;
         &:hover{
             .wti__trip-thumbnail{
                 .wti__trip-link{
@@ -554,7 +555,7 @@ a{
             }
         }
         .wti__trip-content-wrapper{
-            background-color: $itinerary-content-bg;
+            
             padding: 0 1.5em;
             position: relative;
             z-index: 5;
@@ -630,13 +631,14 @@ a{
                                 opacity: 0;
                                 position: absolute;
                                 left: 0;
+                                display: none;
                                 text-align: left;
                                 background-color: $itinerary-content-bg;
                                 box-shadow: 0 6px 12px rgba(0,0,0,.175);
                                 min-width: 115px;
                                 transform: translateY(2em);
                                 z-index: 2;
-                                display: flex;
+                               
                                 flex-direction: column;
                                 transition: all .3s ease-in-out 0s,visibility 0s linear .3s,z-index 0s linear 10ms;
                                 &::before{
@@ -663,6 +665,7 @@ a{
                                     opacity: 1;
                                     visibility: visible;
                                     top:37px;
+                                    display: flex;
                                     transform: translateY(0);
                                 }
                             }
