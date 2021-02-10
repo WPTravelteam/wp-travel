@@ -13,7 +13,9 @@
 @mixin fullwidth {
 	width: 100%;
 }
-
+.wp-travel{
+    max-width:1400px !important;
+}
 //media query for theme contents
 @mixin extra-large-screen {
 	@media(max-width: 1199px) {
@@ -6513,16 +6515,19 @@ $primaryColor: #3399ff;
             margin: 1em 0 0 0;
             li{
                 position: relative;
-                padding: 15px 0;
+				margin: 15px 0;
+				background: #f1f1f1;
+				padding: 15px;
+				border-radius: 0px 27px;
                 &:not(:first-child){
                     border-top: 1px solid #f4f4f4;
                 }
                 .del-btn{
 					font-size: 12px;
                     position: absolute;
-                    top: 5px;
+                    top: -5px;
                     left: -10px;
-                    padding: 5px;
+                    padding:0;
                     border-radius: 50%;
                     background-color: #444;
                     color: #fff;
@@ -6530,28 +6535,41 @@ $primaryColor: #3399ff;
                     height: 20px;
                     text-align: center;
                     border: 0;
-                    line-height: 9px;
+					line-height: unset;
 					cursor: pointer;
 					z-index: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
                     &:hover{
                         background-color: red;
                     }
                 }
                 > div{
                     display: flex;
-                    img{
-                        max-width: 100%;
-						width: 100%;
-						max-width: 60px;
-                        height: 60px;
-                        object-fit: cover;
-                    }
+					@media(max-width:558px){
+						flex-direction: column;
+					}
+                    
                     .content-left{
                         flex: 0 0 22%;
                         margin-right: 20px;
+						.img-wrapper{
+							background: #fff;
+							padding: 14px;
+							border-radius: 21px;
+							max-width: 133px;
+							margin:0 auto;
+							box-shadow: 1px 1px 26px -4px rgb(39 39 39 / 65%);
+							@media(max-width:558px){
+								margin-bottom: 30px;
+							}
+						}
                         img{
                             border: 1px solid #efefef;
                             border-radius: 3px;
+							height: 100% !important;
+							border-radius: 12px;
                         }
                     }
                     .content-right{
@@ -6580,6 +6598,121 @@ $primaryColor: #3399ff;
                             }
                         }
                     }
+					
+					
+					.trip-content{
+						flex: 1;
+						.trip-item-name-price{
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							.trip-name{
+								display:flex;
+								align-items: center;
+								h5{
+									line-height: 18px;
+									a{
+										display: inline-block;
+										text-decoration: none;
+										color: #444;
+										font-weight: 600;
+										font-size: 15px;
+										&:hover{
+											color: $primaryColor;
+										}
+									}
+								}
+								.group-discount-button{
+									display: inline-flex;
+									position: relative;
+									margin-left:5px;
+									cursor:pointer;
+									svg{
+										fill:red;
+										width: 17px;
+										height: 17px;
+									}
+									.discount-price{
+										position: absolute;
+										bottom: 100%;
+										left: 50%;
+										transform: translateX(-50%);
+										padding: 5px;
+										background-color: red;
+										color: #fff;
+										border-radius: 4px;
+										font-size: 14px;
+										white-space: nowrap;
+										margin-bottom: 5px;
+										display: none;
+										&::before{
+											content: "";
+											border-top: 5px solid red;
+											border-left: 5px solid transparent;
+											border-right: 5px solid transparent;
+											position: absolute;
+											top: 100%;
+											left: 50%;
+											transform: translateX(-50%);
+										}
+									}
+									&:hover{
+										.discount-price{
+											display: block;
+										}
+										
+									}
+								}
+							}
+							.trip-price{
+								font-size: 20px;
+								line-height: 22px;
+								span{
+									color: $primaryColor;
+								}
+							}
+							
+						}
+						.trip__partial-payment_detail{
+							display: flex;
+							align-items: center;
+							margin: 5px 0;
+							justify-content: space-between;
+							border-top: 1px solid #e0e0e0;
+							border-bottom: 1px solid #e0e0e0;
+							h5{
+								font-size:14px;
+								color: #777;
+							}
+							.partial-payment-info{
+								display: flex;
+								align-items: center;
+								padding: 5px 0;
+							}
+							svg{
+								fill:#000;
+								width:15px;
+								height: 15px;
+								margin-left:5px;
+								cursor: pointer;
+							}
+							span{
+								font-size:14px;
+								font-weight: 600;
+								padding: 5px 0;
+							}
+						}
+						.trip-meta-content{
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							span{
+								color:#777;
+								font-size: 12px;
+							}
+						}
+					}
+					
                     .price{
                         flex: 0 0 20%;
 						text-align: right;
