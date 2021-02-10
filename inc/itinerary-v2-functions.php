@@ -946,7 +946,7 @@ function wp_travel_archive_before_content() {
 							</div>
 						</div>
 						<div class="wti__grid-list-filter">
-							<button data-view="grid-view" class="wti__filter-grid wti__button active">
+							<button data-view="grid-view" class="wti__filter-grid wti__button">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 								<path d="M176.792,0H59.208C26.561,0,0,26.561,0,59.208v117.584C0,209.439,26.561,236,59.208,236h117.584
@@ -965,7 +965,7 @@ function wp_travel_archive_before_content() {
 								h116c11.028,0,20,8.972,20,20V452z"/>
 								</svg>
 							</button>
-							<button data-view="list-view" class="wti__filter-list wti__button">
+							<button data-view="list-view" class="wti__filter-list wti__button active">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 								<path d="M448.18,80h-320c-17.673,0-32,14.327-32,32s14.327,32,32,32h320c17.673,0,32-14.327,32-32S465.853,80,448.18,80z"/>
@@ -1010,7 +1010,7 @@ function wp_travel_archive_before_content() {
 
 				?>
 				<!-- For turn on sidebar (add 'has-sidebar', 'sidebar-left' class into 'wti__list-wrapper') -->
-				<div class="wti__list-wrapper <?php echo esc_attr( $archive_sidebar_class ); ?>">
+				<div class="wti__list-wrapper list-view <?php echo esc_attr( $archive_sidebar_class ); ?>">
 					<div class="wti__item-lists">
 						<div class="wti__list">
 		<?php
