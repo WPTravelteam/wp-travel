@@ -96,7 +96,10 @@ if ( wp_travel_is_react_version_enabled() ) {
 							<button type="button" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>">×</button>
 							<div>
 								<div class="content-left">
-									<?php echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ); ?>
+									<div class="img-wrapper">
+										<?php echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ); ?>
+									</div>
+									
 								</div>
 
 								<div class="trip-content">
@@ -104,7 +107,31 @@ if ( wp_travel_is_react_version_enabled() ) {
 										<div class="trip-name">
 											<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a></h5>
 											<?php if ( $coupon_applied ) : ?>
-												<span class="tooltip group-discount-button"> </span>
+												<span class="tooltip group-discount-button">
+													<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
+															c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
+															c-4.647,0.656-9.242-0.838-12.613-4.099l-31.251-30.232c-17.401-16.834-44.661-16.835-62.061,0L193.72,42.859
+															c-3.372,3.262-7.967,4.753-12.613,4.099l-43.053-6.09c-23.975-3.393-46.025,12.633-50.208,36.479l-7.512,42.827
+															c-0.811,4.62-3.652,8.531-7.795,10.73l-38.41,20.38c-21.386,11.346-29.81,37.273-19.178,59.024l19.095,39.064
+															c2.06,4.215,2.06,9.049,0,13.263l-19.096,39.064c-10.632,21.751-2.208,47.676,19.178,59.023l38.41,20.38
+															c4.144,2.198,6.985,6.11,7.796,10.729l7.512,42.829c3.808,21.708,22.422,36.932,43.815,36.93c2.107,0,4.245-0.148,6.394-0.452
+															l43.053-6.09c4.643-0.659,9.241,0.838,12.613,4.099l31.251,30.232c8.702,8.418,19.864,12.626,31.03,12.625
+															c11.163-0.001,22.332-4.209,31.03-12.625l31.252-30.232c3.372-3.261,7.968-4.751,12.613-4.099l43.053,6.09
+															c23.978,3.392,46.025-12.633,50.208-36.479l7.513-42.827c0.811-4.62,3.652-8.531,7.795-10.73l38.41-20.38
+															c21.386-11.346,29.81-37.273,19.178-59.024L477.958,262.633z M196.941,123.116c29.852,0,54.139,24.287,54.139,54.139
+															s-24.287,54.139-54.139,54.139s-54.139-24.287-54.139-54.139S167.089,123.116,196.941,123.116z M168.997,363.886
+															c-2.883,2.883-6.662,4.325-10.44,4.325s-7.558-1.441-10.44-4.325c-5.766-5.766-5.766-15.115,0-20.881l194.889-194.889
+															c5.765-5.766,15.115-5.766,20.881,0c5.766,5.766,5.766,15.115,0,20.881L168.997,363.886z M315.061,388.888
+															c-29.852,0-54.139-24.287-54.139-54.139s24.287-54.139,54.139-54.139c29.852,0,54.139,24.287,54.139,54.139
+															S344.913,388.888,315.061,388.888z"></path><path d="M315.061,310.141c-13.569,0-24.609,11.039-24.609,24.608s11.039,24.608,24.609,24.608
+															c13.569,0,24.608-11.039,24.608-24.608S328.63,310.141,315.061,310.141z"></path><path d="M196.941,152.646c-13.569,0-24.608,11.039-24.608,24.608c0,13.569,11.039,24.609,24.608,24.609
+															c13.569,0,24.609-11.039,24.609-24.609C221.549,163.686,210.51,152.646,196.941,152.646z"></path>
+													</svg>
+													<span class="discount-price">
+
+													<?php echo wp_travel_get_formated_price_currency( $trip_discount )?>
+													</span>
+												</span>
 											<?php endif ?>
 										</div>
 										<span class="trip-price">
@@ -112,7 +139,12 @@ if ( wp_travel_is_react_version_enabled() ) {
 										</span>
 									</div>
 									<div class="trip__partial-payment_detail">
-										<h5>Pay only 30% upfront</h5>
+										<div class="partial-payment-info">
+											<h5>Pay only 30% upfront</h5>
+											<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"></path></svg>
+											
+										</div>
+										
 										<span>$400</span>
 									</div>
 									<div class="trip-meta-content">
@@ -128,8 +160,10 @@ if ( wp_travel_is_react_version_enabled() ) {
 										}
 										?>
 									</div>
+
+									
 								</div>
-								<div class="price">
+								<!-- <div class="price">
 									<span><?php echo '<span data-wpt-item-total="' . $trip_total . '">' . wp_travel_get_formated_price_currency( $trip_total ) . '</span>'; ?></span>
 									<?php if ( $coupon_applied ) : ?>
 										<span class="wp-travel-discount-amount"><?php echo $trip_discount ?  wp_travel_get_formated_price_currency(  $trip_discount ) : __( 'N/A', 'wp-travel' ); ?></span>
@@ -137,7 +171,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 									<?php if ( ! $coupon_applied ) : ?>
 										<a href="javascript:void(0);" class="edit" data-wpt-target-cart-id="<?php echo esc_attr( $cart_id ); ?>" data-wpt-target-trip="<?php echo esc_attr( $trip_data['id'] ); ?>" data-wpt-target-pricing="<?php echo esc_attr( $cart_pricing['id'] ); ?>"><svg enable-background="new 0 0 512 512" height="20" viewBox="0 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg"><g><path d="m384.721 0-323.626 323.627-61.095 188.373 188.374-61.094 323.626-323.627zm84.853 127.279-42.427 42.427-84.853-84.853 42.426-42.427zm-388.611 232.331 71.427 71.428-32.036 10.39-49.782-49.782zm14.501-27.925 225.617-225.618 31.82 31.82-225.618 225.617zm53.032 53.032 225.618-225.619 31.82 31.82-225.618 225.619zm-88.313 38.965 28.136 28.136-41.642 13.505z"></path></g></svg> Edit</a>
 									<?php endif; ?>
-								</div>
+								</div> -->
 							</div>
 							<div class="update-fields-collapse" style="display: none;">
 								<form class="wp-travel__cart-item" action="">
