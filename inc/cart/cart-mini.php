@@ -98,16 +98,26 @@ if ( wp_travel_is_react_version_enabled() ) {
 								<div class="content-left">
 									<?php echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ); ?>
 								</div>
-								<div class="content-right">
-									<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a>
-									<?php if ( $coupon_applied ) : ?>
-									<br>
-									<span class="wp-travel-discount-label"><?php  esc_html_e( 'Discount', 'wp-travel' ); ?></span>
-									<?php endif ?>
-									</h5>
-									<div class="meta-content">
-										<span>
-											<strong><?php _e( 'Date: ', 'wp-travel' ); ?></strong><span><?php echo $trip_date . $trip_time; ?></span>
+
+								<div class="trip-content">
+									<div class="trip-item-name-price">
+										<div class="trip-name">
+											<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a></h5>
+											<?php if ( $coupon_applied ) : ?>
+												<span class="tooltip group-discount-button"> </span>
+											<?php endif ?>
+										</div>
+										<span class="trip-price">
+											<?php echo '<span data-wpt-item-total="' . $trip_total . '">' . wp_travel_get_formated_price_currency( $trip_total ) . '</span>'; ?>
+										</span>
+									</div>
+									<div class="trip__partial-payment_detail">
+										<h5>Pay only 30% upfront</h5>
+										<span>$400</span>
+									</div>
+									<div class="trip-meta-content">
+										<span class="date">
+											<span><?php echo $trip_date . $trip_time; ?></span>
 										</span>
 										<?php
 										foreach ( $cart_pax as $category_id => $detail ) {
