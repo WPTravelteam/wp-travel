@@ -38,10 +38,6 @@ ul.availabily-list.additional-col li > div.paxpicker {
   width: 95%;
 }
 
-.wp-travel {
-  max-width: 1400px !important;
-}
-
 .wp-travel .button {
   border: 0;
   border-color: #ccc #ccc #bbb;

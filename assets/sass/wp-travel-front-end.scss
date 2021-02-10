@@ -13,9 +13,7 @@
 @mixin fullwidth {
 	width: 100%;
 }
-.wp-travel{
-    max-width:1400px !important;
-}
+
 //media query for theme contents
 @mixin extra-large-screen {
 	@media(max-width: 1199px) {
