@@ -6515,7 +6515,7 @@ $primaryColor: #3399ff;
             margin: 1em 0 0 0;
             li{
                 position: relative;
-				margin: 15px 0;
+				margin: 20px 0;
 				background: #f1f1f1;
 				padding: 15px;
 				border-radius: 0px 27px;
@@ -6545,8 +6545,21 @@ $primaryColor: #3399ff;
                         background-color: red;
                     }
                 }
+				.edit-trip{
+					position: absolute;
+					right: 0px;
+					top: -38px;
+					background: #e8e8e8;
+					padding: 5px 10px;
+					border-radius: 0 20px 0 0;
+					box-shadow: 1px 4px 26px -7px rgb(39 39 39 / 65%);
+					a{
+						font-size: 17px;
+					}
+				}
                 > div{
                     display: flex;
+					margin-top: 27px;
 					@media(max-width:558px){
 						flex-direction: column;
 					}

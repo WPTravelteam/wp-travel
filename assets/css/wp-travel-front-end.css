@@ -5571,7 +5571,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .list-group li {
   position: relative;
-  margin: 15px 0;
+  margin: 20px 0;
   background: #f1f1f1;
   padding: 15px;
   border-radius: 0px 27px;
@@ -5602,8 +5602,21 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li .del-btn:hover {
   background-color: red;
 }
+#shopping-cart .cart-summary .list-group li .edit-trip {
+  position: absolute;
+  right: 0px;
+  top: -38px;
+  background: #e8e8e8;
+  padding: 5px 10px;
+  border-radius: 0 20px 0 0;
+  box-shadow: 1px 4px 26px -7px rgba(39, 39, 39, 0.65);
+}
+#shopping-cart .cart-summary .list-group li .edit-trip a {
+  font-size: 17px;
+}
 #shopping-cart .cart-summary .list-group li > div {
   display: flex;
+  margin-top: 27px;
 }
 @media (max-width: 558px) {
   #shopping-cart .cart-summary .list-group li > div {
