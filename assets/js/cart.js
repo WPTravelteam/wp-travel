@@ -680,13 +680,25 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
   paymentModeInput && paymentModeInput.addEventListener('change', function (e) {
     var basket = document.querySelector('#shopping-cart');
     var container = basket && basket.querySelector('[data-wpt-cart-partial-total]') && basket.querySelector('[data-wpt-cart-partial-total]').closest('p');
+    var item_container = basket && basket.querySelectorAll('[data-wpt-trip-partial-total]') && basket.querySelectorAll('[data-wpt-trip-partial-total]');
+    
+    
+    var total_container = basket && basket.querySelectorAll('[wp-travel-payable-amount]') && basket.querySelector('[wp-travel-payable-amount]');
+    var partial_total_container = basket && basket.querySelectorAll('[data-wpt-trip-partial-gross-total]') && basket.querySelector('[data-wpt-trip-partial-gross-total]');
 
     if ('partial' === e.target.value) {
       if (container && container.style.display == 'none') {
         container.removeAttribute('style');
       }
+      item_container.forEach(el => el.removeAttribute('style') );
+
+      partial_total_container.removeAttribute('style');
     } else {
       container.style.display = 'none';
+      item_container.forEach(el => el.style.display = "none");
+
+      partial_total_container.style.display = 'none';
+
     }
   }); // Coupon
 

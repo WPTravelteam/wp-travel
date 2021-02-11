@@ -81,6 +81,9 @@ class WP_Travel_Helpers_Cart {
 
 				// Calculation of individual trip total along with extras.
 				$cart[ $cart_id ]['trip_total'] = $wt_cart->get_item_total( $cart_id ); // Gross individual trip total including extras. It helps to apply discount.
+				$cart[ $cart_id ]['trip_total_partial'] = $wt_cart->get_item_total( $cart_id, true ); // Gross individual trip total including extras. It helps to apply discount.
+				$cart[ $cart_id ]['payout_percent'] = wp_travel_get_payout_percent( $item['trip_id'] ); // Gross individual trip total including extras. It helps to apply discount.
+				
 				if ( isset( $item['discount'] ) ) {
 					$cart[ $cart_id ]['discount'] = $item['discount']; // Discount amount applied to individual trip total.
 				}
