@@ -3815,3 +3815,28 @@ function wp_travel_enable_cart_page( $enabled, $settings ) {
 }
 
 add_filter( 'wp_travel_filter_is_enabled_cart_page', 'wp_travel_enable_cart_page', 10, 2 );
+
+add_filter( 'wp_travel_settings_options', 'wp_travel_core_fontawesome_icons', 10, 2 );
+/**
+ * Function for making options of fa icon list on v4 settings.
+ *
+ * @param array $settings_options Options.
+ * @param array $settings settings wp-travel.
+ */
+function wp_travel_core_fontawesome_icons( $settings_options, $settings ) {
+
+	$fa_icons      = wp_travel_fa_icons();
+	$fa_icons_list = array();
+	$i             = 0;
+	if ( is_array( $fa_icons ) && count( $fa_icons ) > 0 ) {
+		foreach ( $fa_icons as $key => $fa_icon ) {
+			$fa_icons_list[ $i ]['label'] = $fa_icon;
+			$fa_icons_list[ $i ]['value'] = $key;
+			$i++;
+		}
+	}
+
+	$settings_options['wp_travel_fontawesome_icons'] = $fa_icons_list;
+
+	return $settings_options;
+}

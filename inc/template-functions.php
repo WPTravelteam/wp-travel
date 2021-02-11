@@ -815,7 +815,7 @@ function wp_travel_frontend_trip_facts( $post_id ) {
 							?>
 							<span class="tour-info-item tour-info-type">
 
-								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
 								<strong><?php echo esc_html( $label ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
