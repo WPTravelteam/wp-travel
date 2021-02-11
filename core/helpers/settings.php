@@ -84,11 +84,13 @@ class WP_Travel_Helpers_Settings {
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
 			foreach ( $facts as $key => $fact ) {
 				$new_fact       = array(
-					'key'     => $key,
-					'name'    => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
-					'type'    => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
-					'options' => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
-					'icon'    => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+					'key'       => $key,
+					'name'      => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'      => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options'   => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'      => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+					'icon_img'  => isset( $facts[ $key ]['icon_img'] ) ? $facts[ $key ]['icon_img'] : '',
+					'icon_type' => isset( $facts[ $key ]['icon_type'] ) ? $facts[ $key ]['icon_type'] : 'icon_class',
 				);
 				$mapped_facts[] = $new_fact;
 			}

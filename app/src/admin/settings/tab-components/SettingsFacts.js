@@ -1,13 +1,20 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
+import { useEffect, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
+
+    const [{ imageUrl, isFetchingImage }, setState] = useState({
+        imageUrl: null,
+        isFetchingImage: false
+    })
 
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
@@ -19,14 +26,14 @@ export default () => {
         options } = allData;
 
     const { updateSettings, addNewFact } = dispatch('WPTravel/Admin');
-    
+
     // options
     let factOptions = []
 
     if ( 'undefined' != typeof options ) {
         if ( 'undefined' != typeof options.fact_options ) {
             factOptions = options.fact_options
-        } 
+        }
     }
 
     const updateFact = (key, value, _tabIndex) => {
@@ -57,21 +64,125 @@ export default () => {
         } )
     }
 
+    const FontAwesomeIcon = (props) => {
+        return <><i className={props.value}> {props.label}</i></>
+    }
+
+    //Icon options
+    let iconOptions = [];
+
+    if ( 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_fontawesome_icons ) {
+        iconOptions = options.wp_travel_fontawesome_icons.map( icon => {
+            return {
+                label: <FontAwesomeIcon label={icon.label} value={icon.value} />,
+                value: icon.value,
+            }
+        } )
+    }
+
+    const iconTypeOptions = [
+        { value: 'icon_class', label: 'Icon Class' },
+        { value: 'fa_icon', label: 'Fontawesome Icons' },
+    ]
+
+    const [ isOpen, setOpen ] = useState( false );
+    const openModal = () => setOpen( true );
+    const closeModal = () => setOpen( false );
+
+    // Replace all '-' from string and capitalize the first letter of string.
+    const slugToName = (icon) => {
+        let str = icon.label.replaceAll('-',' ');
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
+
+
+    //Listing fontawesome icon in fontawesome tab content.
+    const ListFAIcons = ({icons}) => {
+        return (
+            'undefined' != typeof options && 'undefined' != typeof icons &&
+            icons.map( icon => {
+                let iconName = slugToName(icon);
+                return <>
+                    <div className="wti__fontawesome_tab_item" filter={icon.label}>
+                        <div className="wti__fontawesome_tab_item_content">
+                            <i className={icon.value}></i>
+                            <div className="wti__fontawesome_tab_item_name" title={iconName}>{iconName}</div>
+                        </div>
+                    </div>
+                </>
+            })
+        )
+    }
+
+    const fontawesomeIconContent = (props) => {
+
+        const [fontAwesomeIcons, setFontAwesomeIcons] = useState(faIcons);
+
+        const [filterValue, setFilterValue] = useState('');
+
+        return <>
+        {/* <PanelRow>
+            <label>
+                {__('Choose Icon', 'wp-travel')}
+            </label>
+
+            <div className="wp-travel-field-value">
+                <Select
+                    options={iconOptions}
+                    value={'undefined' != typeof props.selectedAddIcons[0] && 'undefined' != typeof props.selectedAddIcons[0].label ? props.selectedAddIcons[0] : []}
+                    onChange={(data) => {
+                        if ('' !== data) {
+                            updateFact( 'icon', data.value, props.index );
+                        }
+                    }}
+                />
+            </div>
+        </PanelRow> */}
+        <PanelRow>
+            <div className="wti__fontawesome_tab_content">
+                <TextControl
+                value={'undefined' !== typeof filterValue && filterValue}
+                onChange={
+                    (value) => {
+
+                        setFilterValue(value);
+                        if ( value ) {
+                            let filterFAIcons = faIcons.filter((faIcon) => {
+                                return faIcon.label.includes(value);
+                            });
+    
+                            setFontAwesomeIcons(filterFAIcons);
+                        } else {
+                            setFontAwesomeIcons(faIcons);
+                        }
+
+                    }
+                }
+                />
+
+                {<ListFAIcons icons={fontAwesomeIcons}/>}
+            </div>
+        </PanelRow>
+        </>
+    }
+
     let FieldTypeContent = ( props  ) => {
         const allData = useSelect((select) => {
             return select('WPTravel/Admin').getAllStore()
         }, []);
         const { options } = allData;
-    
+
         const { updateSettings } = dispatch('WPTravel/Admin');
 
         const updateFact = (key, value, _tabIndex) => {
 
             const { wp_travel_trip_facts_settings } = allData;
-    
+
             let _allFacts = wp_travel_trip_facts_settings;
             _allFacts[_tabIndex][key] = value
-    
+
             updateSettings({
                 ...allData,
                 wp_travel_trip_facts_settings: [..._allFacts]
@@ -82,7 +193,7 @@ export default () => {
         if ( 'undefined' != typeof options ) {
             if ( 'undefined' != typeof options.fact_options ) {
                 factOptions = options.fact_options
-            } 
+            }
         }
         let selectedFactOptions = factOptions.filter( opt => { return opt.value == props.fact.type } )
         return <PanelRow>
@@ -101,14 +212,14 @@ export default () => {
                         </div>
                     </div>
                 </PanelRow>
-                            
+
 
     }
-    
+
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Facts Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            
+
             <PanelRow>
                 <label>{ __( 'Trip Facts', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
@@ -132,8 +243,49 @@ export default () => {
                     { 'undefined' != typeof wp_travel_trip_facts_settings &&
                         <>
                             {wp_travel_trip_facts_settings.map( ( fact, index) =>{
+
+                                const logoId = fact.icon_img
+
+                                const mediaInstance = wp.media({
+                                    multiple: false
+                                })
+
+                                useEffect(() => {
+                                    if (logoId && !imageUrl) {
+                                        setState(state => ({
+                                            ...state,
+                                            isFetchingImage: true
+                                        }))
+                                        logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
+                                            .then((res) => {
+                                                setState({
+                                                    imageUrl: res.source_url,
+                                                    isFetchingImage: false
+                                                })
+                                            })
+                                        }
+                                }, [logoId])
+
+                                mediaInstance
+                                    .on('select', () => {
+                                        const selectedItems = mediaInstance.state().get('selection').toJSON()
+                                        if ( selectedItems.length > 0 ) {
+                                            let invoiceLogoID = selectedItems[0].id
+                                            setState({
+                                                imageUrl: null,
+                                                isFetchingImage: true
+                                            })
+                                            // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
+                                            // updateSettings({
+                                            //     ...allData,
+                                            //     invoice_logo: invoiceLogoID.toString()
+                                            // })
+                                            updateFact( 'icon_img', invoiceLogoID.toString(), index )
+                                        }
+                                    })
                                 // let selectedFactOptions = factOptions.filter( opt => { return opt.value == fact.type } )
-                                
+                                let selectedAddIcons = 'undefined' != typeof wp_travel_trip_facts_settings ? iconOptions.filter( opt => { return opt.value == fact.icon } ) : []
+                                let selectedIconType = iconTypeOptions.filter( opt => { return opt.value == fact.icon_type } )
                                 return <PanelBody
                                     title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
                                     initialOpen={false}
@@ -144,7 +296,7 @@ export default () => {
                                             placeholder={__( 'Enter Field name', 'wp-travel' )}
                                             value={fact.name}
                                             onChange={(value) => {
-                                                updateFact( 'name', value, index ) 
+                                                updateFact( 'name', value, index )
                                             }}
                                         />
                                     </PanelRow>
@@ -166,16 +318,16 @@ export default () => {
                                             </div>
                                         </div>
                                     </PanelRow> */}
-                                    { ( 'undefined' != typeof fact.key ) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} /> } 
-                                    
+                                    { ( 'undefined' != typeof fact.key ) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} /> }
+
                                     {( fact.type == 'single' || fact.type == 'multiple' ) &&
                                         <PanelRow>
                                             <label>{ __( 'Values', 'wp-travel' ) }</label>
                                             <div className="wp-travel-field-value">
-                                                <FormTokenField 
+                                                <FormTokenField
                                                     label=""
-                                                    value={ fact.options } 
-                                                    suggestions={ [] } 
+                                                    value={ fact.options }
+                                                    suggestions={ [] }
                                                     onChange={ tokens =>{
                                                         updateFact( 'options', tokens, index )
                                                     }}
@@ -184,16 +336,104 @@ export default () => {
                                             </div>
                                         </PanelRow>
                                     }
+                                    {/** Icon Start here. */ }
                                     <PanelRow>
-                                        <label>{__( 'Icon Class', 'wp-travel' )}</label>
-                                        <TextControl
-                                            placeholder={__( 'icon', 'wp-travel' )}
-                                            value={fact.icon}
-                                            onChange={(value) => {
-                                                updateFact( 'icon', value, index ) 
-                                            }}
-                                        />
+                                        <label>{__( 'Icon', 'wp-travel' )}</label>
+                                        <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
+                                        { isOpen && (
+                                            <Modal
+                                                title={__( 'Icon Type', 'wp-travel' )}
+                                                onRequestClose={ closeModal }>
+                                                <TabPanel className="my-tab-panel"
+                                                    activeClass="active-tab"
+                                                    initialTabName="icon-class"
+                                                    onSelect={ () => false }
+                                                    orientation="vertical"
+                                                    tabs={ [
+                                                        {
+                                                            name: 'fontawesome-icon',
+                                                            title: 'Fontawesome Icon',
+                                                            className: 'wti__fa_icon',
+                                                            content: fontawesomeIconContent
+                                                        },
+                                                        {
+                                                            name: 'icon-class',
+                                                            title: 'Icon Class',
+                                                            className: 'wti__icon_class',
+                                                        },
+                                                        {
+                                                            name: 'custom-upload',
+                                                            title: 'Custom Upload',
+                                                            className: 'wti__custom_upload',
+                                                        },
+                                                    ] }>
+                                                    {
+                                                        ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons}/> : <>{__('Error', 'wp-travel')}</>
+                                                    }
+                                                </TabPanel>
+                                                <Button isSecondary onClick={ closeModal }>
+                                                    {__( 'Close', 'wp-travel' )}
+                                                </Button>
+                                            </Modal>
+                                        ) }
                                     </PanelRow>
+                                    <PanelRow>
+                                        <label>{__( 'Icon Type', 'wp-travel' )}</label>
+                                        <div className="wp-travel-field-value">
+                                            <Select
+                                                options={iconTypeOptions}
+                                                value={ 'undefined' != typeof selectedIconType[0] && 'undefined' != typeof selectedIconType[0].label ? selectedIconType[0] : selectedIconType[0] }
+                                                onChange= {(data) => {
+                                                    updateFact( 'icon_type', data.value, index )
+                                                }}
+                                                defaultValue={{value:'icon_class', label:'Icon Class'}}
+                                            />
+                                        </div>
+                                    </PanelRow>
+                                    {
+                                        'icon_class' == fact.icon_type &&
+                                            <PanelRow>
+                                                <label>{__( 'Icon Class', 'wp-travel' )}</label>
+                                                <TextControl
+                                                    placeholder={__( 'icon', 'wp-travel' )}
+                                                    value={fact.icon}
+                                                    onChange={(value) => {
+                                                        updateFact( 'icon', value, index )
+                                                    }}
+                                                />
+                                            </PanelRow>
+                                    }
+                                    {
+                                        'fa_icon' == fact.icon_type &&
+                                        <>
+                                            <PanelRow>
+                                                <label>
+                                                    {__('Choose Icon', 'wp-travel')}
+                                                </label>
+
+                                                <div className="wp-travel-field-value">
+                                                    <Select
+                                                        options={iconOptions}
+                                                        value={'undefined' != typeof selectedAddIcons[0] && 'undefined' != typeof selectedAddIcons[0].label ? selectedAddIcons[0] : []}
+                                                        onChange={(data) => {
+                                                            if ('' !== data) {
+                                                                updateFact( 'icon', data.value, index );
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+                                            </PanelRow>
+                                            <PanelRow>
+                                                <div className="wp-travel-field-value">
+                                                    <div className="media-preview">
+                                                        {isFetchingImage && <Spinner />}
+                                                        {imageUrl && <img src={imageUrl} height="100" width="50%" />}
+                                                        <Button isPrimary onClick={() => mediaInstance.open()}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                                                    </div>
+                                                </div>
+                                            </PanelRow>
+                                        </>
+                                    }
                                     <PanelRow className="wp-travel-action-section">
                                         <span></span>
                                         <Button isSecondary onClick={() => {
@@ -206,7 +446,7 @@ export default () => {
                                             });
                                             removeFact(factData);
                                         }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button></PanelRow>
-                                    
+
                                 </PanelBody>
                             } )}
 
@@ -216,7 +456,7 @@ export default () => {
                 </>
             }
 
-            
+
 
         </ErrorBoundary>
     </div>
