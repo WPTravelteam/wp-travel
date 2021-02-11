@@ -116,6 +116,7 @@ export default () => {
         )
     }
 
+    // Fontawesome Icon Content.
     const fontawesomeIconContent = (props) => {
 
         const [fontAwesomeIcons, setFontAwesomeIcons] = useState(faIcons);
@@ -140,30 +141,48 @@ export default () => {
                 />
             </div>
         </PanelRow> */}
-        <PanelRow>
-            <div className="wti__fontawesome_tab_content">
+        <PanelRow className="font-awesome-panel">
+            <div className="wti__fontawesome_filter">
                 <TextControl
-                value={'undefined' !== typeof filterValue && filterValue}
-                onChange={
-                    (value) => {
+                    value={'undefined' !== typeof filterValue && filterValue}
+                    onChange={
+                        (value) => {
 
-                        setFilterValue(value);
-                        if ( value ) {
-                            let filterFAIcons = faIcons.filter((faIcon) => {
-                                return faIcon.label.includes(value);
-                            });
-    
-                            setFontAwesomeIcons(filterFAIcons);
-                        } else {
-                            setFontAwesomeIcons(faIcons);
+                            setFilterValue(value);
+                            if ( value ) {
+                                let filterFAIcons = faIcons.filter((faIcon) => {
+                                    return faIcon.label.includes(value);
+                                });
+        
+                                setFontAwesomeIcons(filterFAIcons);
+                            } else {
+                                setFontAwesomeIcons(faIcons);
+                            }
+
                         }
-
                     }
-                }
+                    placeholder={__( 'Filter by name...', 'wp-travel' )}
                 />
-
+            </div>
+            <div className="wti__fontawesome_tab_content">
                 {<ListFAIcons icons={fontAwesomeIcons}/>}
             </div>
+        </PanelRow>
+        </>
+    }
+
+    // Icon Class Content.
+    const iconClassContent = (props) => {
+        return <>
+        <PanelRow>
+            <label>{__( 'Icon Class', 'wp-travel' )}</label>
+            <TextControl
+                placeholder={__( 'icon', 'wp-travel' )}
+                value={props.fact.icon}
+                onChange={(value) => {
+                    updateFact( 'icon', value, props.index )
+                }}
+            />
         </PanelRow>
         </>
     }
@@ -360,6 +379,7 @@ export default () => {
                                                             name: 'icon-class',
                                                             title: 'Icon Class',
                                                             className: 'wti__icon_class',
+                                                            content: iconClassContent
                                                         },
                                                         {
                                                             name: 'custom-upload',
@@ -368,12 +388,12 @@ export default () => {
                                                         },
                                                     ] }>
                                                     {
-                                                        ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons}/> : <>{__('Error', 'wp-travel')}</>
+                                                        ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact}/> : <>{__('Error', 'wp-travel')}</>
                                                     }
                                                 </TabPanel>
-                                                <Button isSecondary onClick={ closeModal }>
+                                                {/* <Button isSecondary onClick={ closeModal }>
                                                     {__( 'Close', 'wp-travel' )}
-                                                </Button>
+                                                </Button> */}
                                             </Modal>
                                         ) }
                                     </PanelRow>
