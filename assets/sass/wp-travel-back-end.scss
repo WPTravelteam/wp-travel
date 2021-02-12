@@ -1857,19 +1857,25 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
     .wti__insert_icon{
         position: fixed;
         width: 100%;
-        bottom: 0;
-        padding: 20px 0 0 2px;
+        bottom: 0px;
+        padding: 20px 20px 20px 0px;
         background-color: #fff;
         text-align: right;
+        font-size: 12px;
+        font-weight: 500;
+        left: 0px;
         .components-button{
-            padding: 12px 36px;
+            padding: 14px 49px;
             color: #fff;
             width: initial;
             font-size: 15px;
-            height: 40px;
+            /* height: 45px; */
             background-color: #39b54a;
             outline: 0;
-            border:none;
+            border: 0;
+            line-height: 15px;
+            text-transform: uppercase;
+            box-shadow: none;
         }
     }
 }
