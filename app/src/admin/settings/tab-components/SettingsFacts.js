@@ -381,19 +381,19 @@ export default () => {
                                                     tabs={ [
                                                             {
                                                             name: 'fontawesome-icon',
-                                                            title: <i class="fas fa-flag">{__( ' Fontawesome Icon', 'wp-travel' )}</i>,
+                                                            title: <><i class="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
                                                             className: 'wti__fa_icon',
                                                             content: fontawesomeIconContent
                                                         },
                                                         {
                                                             name: 'icon-class',
-                                                            title: <i class="fas fa-file-code">{__( ' Icon Class', 'wp-travel' )}</i>,
+                                                            title: <><i class="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
                                                             className: 'wti__icon_class',
                                                             content: iconClassContent
                                                         },
                                                         {
                                                             name: 'custom-upload',
-                                                            title: <i class="fas fa-upload">{__( ' Custom Upload', 'wp-travel' )}</i>,
+                                                            title: <><i class="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
                                                             className: 'wti__custom_upload',
                                                         },
                                                     ] }>
