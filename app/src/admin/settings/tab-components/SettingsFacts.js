@@ -121,10 +121,9 @@ export default () => {
                     </>
                 })
                 :
-                <Notice status="error" isDismissible="false">
+                <Notice status="error" isDismissible={false}>
                     {__( 'Icon Not found', 'wp-travel' )}
                 </Notice>
-                // <h3>{__( 'Icon Not found', 'wp-travel' )}</h3> 
         )
     }
 
@@ -375,7 +374,7 @@ export default () => {
                                         <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         { isOpen && (
                                             <Modal className="wti__icon_select_modal"
-                                                title={<><i class="fas fa-list-alt"></i>{__( ' Icon Type', 'wp-travel' )}</>}
+                                                title={<><i class="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
                                                 onRequestClose={ closeModal }>
                                                 <TabPanel className="my-tab-panel"
                                                     activeClass="active-tab"
