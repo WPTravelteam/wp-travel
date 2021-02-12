@@ -45,11 +45,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 		$coupon_type = $cart['cart']['coupon']['type'];
 	}
 	?>
-	<style>
-	.selected-payable-amount{
-		color:green;
-	}
-</style>
+	
 	<div class="order-wrapper">
 		<div class="wp-travel-cart-sidebar">
 			<div id="shopping-cart">
@@ -153,7 +149,9 @@ if ( wp_travel_is_react_version_enabled() ) {
 										</div>
 										<span class="trip-price">
 											<span data-wpt-item-total="<?php echo esc_attr( $trip_total ); ?>" class="<?php echo esc_attr( $trip_discount ? 'strikethrough' : '' ); ?>" >
-												<?php echo wp_travel_get_formated_price_currency( $trip_total ); ?>
+												<del>
+													<?php echo wp_travel_get_formated_price_currency( $trip_total ); ?>
+												</del>
 											</span>
 
 											<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?>
@@ -166,7 +164,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 									<div style="display:none;" class="trip__partial-payment_detail" data-wpt-trip-partial-total="<?php echo esc_attr( $trip_total_partial ); ?>">
 										<div class="partial-payment-info">
 											<h5>Pay <?php echo esc_html( $payout_percent ); ?>% upfront</h5>
-											<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"></path></svg>
+											
 											
 										</div>
 										
@@ -348,7 +346,10 @@ if ( wp_travel_is_react_version_enabled() ) {
 							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total  ); ?>"><?php echo  wp_travel_get_formated_price_currency( $total  ); ?></strong></div>
 						</li>
 						<li data-wpt-trip-partial-gross-total="<?php echo esc_attr( $total_partial ); ?>" style="display:none" >
-							<label><?php echo esc_html__( 'Total upfront:', 'wp-travel' ); ?></label>
+							<label>
+								<?php echo esc_html__( 'Total upfront:', 'wp-travel' ); ?>
+								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"></path></svg>
+							</label>
 							<div class="price"><strong data-wpt-cart-net-total-partial="<?php echo esc_attr( $total_partial  ); ?>"><?php echo  wp_travel_get_formated_price_currency( $total_partial  ); ?></strong></div>
 						</li>
 					</ul>

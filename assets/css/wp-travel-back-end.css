@@ -4771,16 +4771,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 .wti__icon_select_modal .components-modal__content .components-modal__header .components-modal__header-heading i {
   color: #fff;
-  margin-right: 15px;
+  margin-right: 22px;
   position: relative;
   display: flex;
   align-items: center;
 }
 .wti__icon_select_modal .components-modal__content .components-modal__header .components-modal__header-heading i:after {
   content: "";
-  width: 30px;
-  height: 30px;
-  background-color: #006799;
+  width: 35px;
+  height: 35px;
+  background-color: #149ee0;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -4940,10 +4940,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   font-size: 11px;
   margin-top: 13px;
 }
-.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus {
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), inset 0 0 0 3px #71d7f7;
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:focus {
+  box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
 }
-.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover .wti__fontawesome_tab_item_content i, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus .wti__fontawesome_tab_item_content i {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover .wti__fontawesome_tab_item_content i, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:focus .wti__fontawesome_tab_item_content i {
+  color: #71d7f7;
+}
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item.selected {
+  box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
+}
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item.selected .wti__fontawesome_tab_item_content i {
   color: #71d7f7;
 }
 
