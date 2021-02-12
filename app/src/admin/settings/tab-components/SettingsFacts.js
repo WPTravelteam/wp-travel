@@ -4,7 +4,7 @@ import { _n, __ } from '@wordpress/i18n';
 import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
@@ -87,7 +87,9 @@ export default () => {
 
     const [ isOpen, setOpen ] = useState( false );
     const openModal = () => setOpen( true );
-    const closeModal = () => setOpen( false );
+    const closeModal = () => {
+        setOpen( false );
+    }
 
     // Replace all '-' from string and capitalize the first letter of string.
     const slugToName = (icon) => {
@@ -95,36 +97,10 @@ export default () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    const [ selectedFAIcons, setSelectedFAIcons ] = useState('');
-
-    const selectedFontAwesomeIcon = (event) => {
-        setSelectedFAIcons(event.target.getAttribute('data-icon'));
-    }
-
     let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     //Listing fontawesome icon in fontawesome tab content.
-    const ListFAIcons = ({icons}) => {
-        return (
-            'undefined' != typeof options && 'undefined' != typeof icons &&
-            icons.length > 0 ?
-                icons.map( (icon, index) => {
-                    let iconName = slugToName(icon);
-                    return <>
-                        <div key={index} id={"tab-item-"+index} className='wti__fontawesome_tab_item' data-icon={icon.value} tabindex={index} onClick={selectedFontAwesomeIcon}>
-                            <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
-                                <i data-icon={icon.value} className={icon.value}></i>
-                                <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
-                            </div>
-                        </div>
-                    </>
-                })
-                :
-                <Notice status="error" isDismissible={false}>
-                    {__( 'Icon Not found', 'wp-travel' )}
-                </Notice>
-        )
-    }
+    
 
     // Fontawesome Icon Content.
     const fontawesomeIconContent = (props) => {
@@ -132,6 +108,54 @@ export default () => {
         const [fontAwesomeIcons, setFontAwesomeIcons] = useState(faIcons);
 
         const [filterValue, setFilterValue] = useState('');
+
+        const [ selectedFAIcons, setSelectedFAIcons ] = useState('');
+
+        const selectedFontAwesomeIcon = (event) => {
+            setSelectedFAIcons(event.target.getAttribute('data-icon'));
+        }
+
+        const resetSelectIcon = (e) => {
+            var dataIconAttr = e.target.getAttribute('data-icon');
+            if ( ! dataIconAttr ) {
+                setSelectedFAIcons('');
+            }
+        }
+
+        useEffect(()=> {
+            let isMounted = true;
+
+            if ( isMounted ) {
+                document.addEventListener("click", resetSelectIcon);
+            }
+
+            return () => {
+                document.removeEventListener("click", resetSelectIcon);
+                isMounted = false;
+            }
+        }, []);
+
+        const ListFAIcons = (icons) => {
+            return (
+                'undefined' != typeof options && 'undefined' != typeof icons &&
+                icons.length > 0 ?
+                    icons.map( (icon, index) => {
+                        let iconName = slugToName(icon);
+                        return <>
+                            <div key={index} id={"tab-item-"+index} className={ selectedFAIcons == icon.value ? 'wti__fontawesome_tab_item selected' : 'wti__fontawesome_tab_item' } data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
+                                <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
+                                    <i data-icon={icon.value} className={icon.value}></i>
+                                    <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
+                                </div>
+                            </div>
+                        </>
+                    })
+                    :
+                    <Notice status="error" isDismissible={false}>
+                        {__( 'Icon Not found', 'wp-travel' )}
+                    </Notice>
+            )
+        }
 
         return <>
         {/* <PanelRow>
@@ -163,7 +187,7 @@ export default () => {
                                 let filterFAIcons = faIcons.filter((faIcon) => {
                                     return faIcon.label.includes(value);
                                 });
-        
+
                                 setFontAwesomeIcons(filterFAIcons);
                             } else {
                                 setFontAwesomeIcons(faIcons);
@@ -173,11 +197,12 @@ export default () => {
                     }
                     placeholder={__( 'Filter by name...', 'wp-travel' )}
                 />
-                
+
             </div>
             <h3>{__( 'All Icons', 'wp-travel' )}</h3>
             <div className="wti__fontawesome_tab_content">
-                {<ListFAIcons icons={fontAwesomeIcons}/>}
+                {/* {<ListFAIcons icons={fontAwesomeIcons}/>} */}
+                {ListFAIcons(fontAwesomeIcons)}
             </div>
         </PanelRow>
         </>
@@ -185,6 +210,7 @@ export default () => {
 
     // Icon Class Content.
     const iconClassContent = (props) => {
+
         return <>
         <PanelRow>
             <label>{__( 'Icon Class', 'wp-travel' )}</label>
@@ -373,7 +399,7 @@ export default () => {
                                         <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         { isOpen && (
                                             <Modal className="wti__icon_select_modal"
-                                                title={<><i class="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
+                                                title={<><i className="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
                                                 onRequestClose={ closeModal }>
                                                 <TabPanel className="my-tab-panel"
                                                     activeClass="active-tab"
@@ -382,19 +408,19 @@ export default () => {
                                                     tabs={ [
                                                             {
                                                             name: 'fontawesome-icon',
-                                                            title: <><i class="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
+                                                            title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
                                                             className: 'wti__fa_icon',
                                                             content: fontawesomeIconContent
                                                         },
                                                         {
                                                             name: 'icon-class',
-                                                            title: <><i class="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
+                                                            title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
                                                             className: 'wti__icon_class',
                                                             content: iconClassContent
                                                         },
                                                         {
                                                             name: 'custom-upload',
-                                                            title: <><i class="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
+                                                            title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
                                                             className: 'wti__custom_upload',
                                                         },
                                                     ] }>
@@ -402,11 +428,11 @@ export default () => {
                                                         ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact}/> : <>{__('Error', 'wp-travel')}</>
                                                     }
                                                 </TabPanel>
-                                                <div className="wti__insert_icon">
+                                                {/* <div className="wti__insert_icon">
                                                     <Button isSecondary onClick={ closeModal }>
                                                         {__( 'Insert', 'wp-travel' )}
                                                     </Button>
-                                                </div>
+                                                </div> */}
                                             </Modal>
                                         ) }
                                     </PanelRow>
