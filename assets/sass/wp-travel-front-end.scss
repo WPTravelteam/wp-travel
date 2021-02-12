@@ -13,6 +13,9 @@
 @mixin fullwidth {
 	width: 100%;
 }
+.wp-travel{
+    max-width:1400px  !important;
+}
 
 //media query for theme contents
 @mixin extra-large-screen {
@@ -6620,11 +6623,12 @@ $primaryColor: #3399ff;
 							justify-content: space-between;
 							.trip-name{
 								display:flex;
-								align-items: center;
+								margin-right: 10px;
 								h5{
 									line-height: 18px;
+									display: inline;
 									a{
-										display: inline-block;
+										display: inline;
 										text-decoration: none;
 										color: #444;
 										font-weight: 600;
@@ -6690,8 +6694,15 @@ $primaryColor: #3399ff;
 							.trip-price{
 								font-size: 20px;
 								line-height: 22px;
+								text-align:right;
+								display: inline-flex;
+								flex-direction: column;
 								span{
 									color: $primaryColor;
+								}
+								.strikethrough{
+									font-size: 14px;
+									line-height: 14px;
 								}
 							}
 							
@@ -6729,6 +6740,7 @@ $primaryColor: #3399ff;
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
+							padding-top: 5px;
 							span{
 								color:#777;
 								font-size: 12px;
@@ -6874,6 +6886,13 @@ $primaryColor: #3399ff;
                 label{
                     margin: 0;
                 }
+				&.selected-payable-amount{
+					color:#3399ff;
+					.price,label{
+						font-size:24px;
+						
+					}
+				}
             }
         }
         .cart-summary-bottom{

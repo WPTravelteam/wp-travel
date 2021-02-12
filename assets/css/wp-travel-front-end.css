@@ -38,6 +38,10 @@ ul.availabily-list.additional-col li > div.paxpicker {
   width: 95%;
 }
 
+.wp-travel {
+  max-width: 1400px !important;
+}
+
 .wp-travel .button {
   border: 0;
   border-color: #ccc #ccc #bbb;
@@ -5678,13 +5682,14 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name {
   display: flex;
-  align-items: center;
+  margin-right: 10px;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name h5 {
   line-height: 18px;
+  display: inline;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name h5 a {
-  display: inline-block;
+  display: inline;
   text-decoration: none;
   color: #444;
   font-weight: 600;
@@ -5743,9 +5748,16 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-price {
   font-size: 20px;
   line-height: 22px;
+  text-align: right;
+  display: inline-flex;
+  flex-direction: column;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-price span {
   color: #3399ff;
+}
+#shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-price .strikethrough {
+  font-size: 14px;
+  line-height: 14px;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip__partial-payment_detail {
   display: flex;
@@ -5780,6 +5792,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 5px;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-meta-content span {
   color: #777;
@@ -5910,6 +5923,12 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 }
 #shopping-cart .cart-summary .extra-fields li label {
   margin: 0;
+}
+#shopping-cart .cart-summary .extra-fields li.selected-payable-amount {
+  color: #3399ff;
+}
+#shopping-cart .cart-summary .extra-fields li.selected-payable-amount .price, #shopping-cart .cart-summary .extra-fields li.selected-payable-amount label {
+  font-size: 24px;
 }
 #shopping-cart .cart-summary .cart-summary-bottom {
   border-top: 1px solid #efefef;
