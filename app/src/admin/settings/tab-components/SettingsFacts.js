@@ -111,7 +111,7 @@ export default () => {
                 icons.map( (icon, index) => {
                     let iconName = slugToName(icon);
                     return <>
-                        <div key={index} id={"tab-item-"+index} className='wti__fontawesome_tab_item' data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
+                        <div key={index} id={"tab-item-"+index} className='wti__fontawesome_tab_item' data-icon={icon.value} tabindex={index} onClick={selectedFontAwesomeIcon}>
                             <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
                                 <i data-icon={icon.value} className={icon.value}></i>
                                 <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
@@ -402,11 +402,11 @@ export default () => {
                                                         ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact}/> : <>{__('Error', 'wp-travel')}</>
                                                     }
                                                 </TabPanel>
-                                                {/* <div className="wti__insert_icon">
+                                                <div className="wti__insert_icon">
                                                     <Button isSecondary onClick={ closeModal }>
                                                         {__( 'Insert', 'wp-travel' )}
                                                     </Button>
-                                                </div> */}
+                                                </div>
                                             </Modal>
                                         ) }
                                     </PanelRow>
