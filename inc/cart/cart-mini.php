@@ -148,10 +148,10 @@ if ( wp_travel_is_react_version_enabled() ) {
 											<?php endif ?>
 										</div>
 										<span class="trip-price">
-											<span data-wpt-item-total="<?php echo esc_attr( $trip_total ); ?>" class="<?php echo esc_attr( $trip_discount ? 'strikethrough' : '' ); ?>" >
-												<del>
+											<span data-wpt-item-total="<?php echo esc_attr( $trip_total ); ?>" >
+												<?php if ( $trip_discount ) : ?> <del> <?php endif ?>
 													<?php echo wp_travel_get_formated_price_currency( $trip_total ); ?>
-												</del>
+												<?php if ( $trip_discount ) : ?> </del> <?php endif ?>
 											</span>
 
 											<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?>
