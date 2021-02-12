@@ -1854,6 +1854,24 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             background-color: #39b54a;
         } */
     }
+    .wti__insert_icon{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        padding: 20px 0 0 2px;
+        background-color: #fff;
+        text-align: right;
+        .components-button{
+            padding: 12px 36px;
+            color: #fff;
+            width: initial;
+            font-size: 15px;
+            height: 40px;
+            background-color: #39b54a;
+            outline: 0;
+            border:none;
+        }
+    }
 }
 
 
