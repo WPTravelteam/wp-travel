@@ -98,7 +98,6 @@ export default () => {
     const [ selectedFAIcons, setSelectedFAIcons ] = useState('');
 
     const selectedFontAwesomeIcon = (event) => {
-        // console.log(event.target.getAttribute('data-icon'))
         setSelectedFAIcons(event.target.getAttribute('data-icon'));
     }
 
@@ -108,11 +107,11 @@ export default () => {
     const ListFAIcons = ({icons}) => {
         return (
             'undefined' != typeof options && 'undefined' != typeof icons &&
-             icons.length > 0 ?
+            icons.length > 0 ?
                 icons.map( (icon, index) => {
                     let iconName = slugToName(icon);
                     return <>
-                        <div key={index} className="wti__fontawesome_tab_item" data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
+                        <div key={index} id={"tab-item-"+index} className={ selectedFAIcons == icon.value ? 'wti__fontawesome_tab_item selected' : 'wti__fontawesome_tab_item' } data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
                             <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
                                 <i data-icon={icon.value} className={icon.value}></i>
                                 <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
