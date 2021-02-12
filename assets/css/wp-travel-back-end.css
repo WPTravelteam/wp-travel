@@ -4742,30 +4742,56 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 
 /* font awesome */
-.components-modal__frame {
+.wti__icon_select_modal {
   /* wti__icon_select_modal */
   background: #f1f3f5;
   overflow: hidden;
 }
 @media (min-width: 600px) {
-  .components-modal__frame {
+  .wti__icon_select_modal {
     max-width: 1059px;
     width: 100%;
     max-height: calc(100% - 1px - 39px);
     height: 100%;
   }
 }
-.components-modal__frame .components-modal__content {
+.wti__icon_select_modal .components-modal__content {
   /*  .components-button{
        box-shadow: 0 0 8px rgb(0 0 0 / 10%);
        background-color: #39b54a;
    } */
 }
-.components-modal__frame .components-modal__content .my-tab-panel {
+.wti__icon_select_modal .components-modal__content .components-modal__header .components-modal__header-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #495157;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+.wti__icon_select_modal .components-modal__content .components-modal__header .components-modal__header-heading i {
+  color: #fff;
+  margin-right: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.wti__icon_select_modal .components-modal__content .components-modal__header .components-modal__header-heading i:after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-color: #93003c;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+.wti__icon_select_modal .components-modal__content .my-tab-panel {
   display: flex;
   height: 100%;
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs {
   margin-bottom: 20px;
   max-width: 25%;
   flex: 25%;
@@ -4774,7 +4800,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 3px 0px 13px rgba(0, 0, 0, 0.05);
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item {
   display: block;
   padding: 15px 0 15px 45px;
   font-size: 14px;
@@ -4784,19 +4810,19 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   position: relative;
   width: 100%;
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item i {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item i {
   font-size: 18px;
   margin-right: 12px;
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab {
   background-color: #fff;
   -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab i {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab i {
   color: #71d7f7;
 }
-.components-modal__frame .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab::after {
+.wti__icon_select_modal .components-modal__content .my-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab::after {
   content: "";
   position: absolute;
   height: 100%;
@@ -4806,15 +4832,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   background-color: #71d7f7;
   visibility: visible;
 }
-.components-modal__frame .components-modal__content #tab-panel-1-icon-class-view .components-panel__row label {
+.wti__icon_select_modal .components-modal__content #tab-panel-1-icon-class-view .components-panel__row label {
   color: #556068;
   font-size: 16px;
   font-weight: 500;
 }
-.components-modal__frame .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control {
+.wti__icon_select_modal .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control {
   margin-top: 15px;
 }
-.components-modal__frame .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input {
+.wti__icon_select_modal .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input {
   background-color: #fff;
   border: none;
   padding: 8px 15px;
@@ -4822,28 +4848,28 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
 }
-.components-modal__frame .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input::placeholder {
+.wti__icon_select_modal .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input::placeholder {
   color: #b9c2c8;
   font-style: italic;
 }
-.components-modal__frame .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input:focus {
+.wti__icon_select_modal .components-modal__content #tab-panel-1-icon-class-view .components-panel__row .components-base-control .components-text-control__input:focus {
   border-color: #007cba;
   border-color: var(--wp-admin-theme-color);
   box-shadow: 0 0 0 0.5px #007cba;
   box-shadow: 0 0 0 0.5px var(--wp-admin-theme-color);
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content {
   padding: 0 36px;
   flex: 1;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row {
   display: block;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea {
   padding: 8px 15px;
   background-color: #fff;
   border: none;
@@ -4851,25 +4877,25 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input::placeholder, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select::placeholder, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select::placeholder,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select::placeholder,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select::placeholder, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea::placeholder, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea::placeholder,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea::placeholder,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea::placeholder {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input::placeholder, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select::placeholder, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select::placeholder,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select::placeholder,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select::placeholder, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea::placeholder, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea::placeholder,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea::placeholder,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea::placeholder {
   color: #b9c2c8;
   font-style: italic;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input:focus, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select:focus, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select:focus,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select:focus,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select:focus, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea:focus, .wp-travel-form-field .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea:focus,
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea:focus,
-.form-horizontal .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea:focus {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter input:focus, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field select:focus, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select:focus,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal select:focus,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter select:focus, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .wp-travel-form-field textarea:focus, .wp-travel-form-field .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea:focus,
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter .form-horizontal textarea:focus,
+.form-horizontal .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_filter textarea:focus {
   border-color: #007cba;
   border-color: var(--wp-admin-theme-color);
   box-shadow: 0 0 0 0.5px #007cba;
   box-shadow: 0 0 0 0.5px var(--wp-admin-theme-color);
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: min-content;
@@ -4879,17 +4905,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   height: calc(100vh - 1px - 226px);
   scroll-behavior: smooth;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .components-notice {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .components-notice {
   background-color: #ececec;
   width: 100%;
   grid-column: span 5;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .components-notice .components-notice__content {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .components-notice .components-notice__content {
   font-size: 16px;
   color: #f9143f;
   font-style: italic;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item {
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -4902,22 +4928,22 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   -webkit-transition: all 0.3s;
   cursor: pointer;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content {
   text-align: center;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content i {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content i {
   font-size: 25px;
   color: #6d7882;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content .wti__fontawesome_tab_item_name {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content .wti__fontawesome_tab_item_name {
   color: #c2cbd2;
   font-size: 11px;
   margin-top: 13px;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus {
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05), inset 0 0 0 3px #71d7f7;
 }
-.components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover .wti__fontawesome_tab_item_content i, .components-modal__frame .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus .wti__fontawesome_tab_item_content i {
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:hover .wti__fontawesome_tab_item_content i, .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item :focus .wti__fontawesome_tab_item_content i {
   color: #71d7f7;
 }
 
