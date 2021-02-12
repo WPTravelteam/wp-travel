@@ -1825,7 +1825,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             
                             }
                         }
-                        &:hover,&:focus{
+                        &:focus-within{
                             box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
                             
                             .wti__fontawesome_tab_item_content{
