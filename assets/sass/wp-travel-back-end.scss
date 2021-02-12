@@ -1655,15 +1655,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 align-items: center;
                 i{
                     color: #fff;
-                    margin-right: 15px;
+                    margin-right: 22px;
                     position: relative;
                     display: flex;
                     align-items: center;
                     &:after{
                         content: "";
-                        width: 30px;
-                        height: 30px;
-                        background-color: #006799;
+                        width: 35px;
+                        height: 35px;
+                        background-color: #149ee0;
                         position: absolute;
                         top: 50%;
                         left: 50%;
@@ -1825,7 +1825,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             
                             }
                         }
-                        &:hover{
+                        &:hover,&:focus{
                             box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
                             
                             .wti__fontawesome_tab_item_content{
