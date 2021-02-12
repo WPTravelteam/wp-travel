@@ -1685,7 +1685,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                 flex-shrink: 0;
                 display: block;
                 background-color: rgba(255, 255, 255, 0.3);
-                box-shadow: 3px 0px 13px rgb(0 0 0 / 5%);
+                box-shadow: 3px 0px 13px  rgba(0, 0, 0, 0.05);
                 .components-tab-panel__tabs-item{
                     display: block;
                     padding: 15px 0 15px 45px;
@@ -1701,8 +1701,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     }
                     &.active-tab{
                         background-color: #fff;
-                        -webkit-box-shadow: 0 6px 20px 0 rgb(0 0 0 / 10%);
-                        box-shadow: 0 6px 20px 0 rgb(0 0 0 / 10%); 
+                        -webkit-box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 6px 20px 0  rgba(0, 0, 0, 0.1);
                         i{
                             color:#71d7f7;
                         }
@@ -1735,8 +1735,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                         border: none;
                         padding: 8px 15px;
                         color:#6d6d6d;
-                        box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
-                        -webkit-box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
+                        box-shadow: 0 1px 12px  rgba(0, 0, 0, 0.05);
+                        -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
                         &::placeholder{
                             color:#b9c2c8;
                             font-style: italic;
@@ -1765,8 +1765,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                         background-color: #fff;
                         border: none;
                         color:#6d6d6d;
-                        box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
-                        -webkit-box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
+                        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+                        -webkit-box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
                         &::placeholder{
                             color:#b9c2c8;
                             font-style: italic;
@@ -1800,8 +1800,8 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
                     } 
         
                     .wti__fontawesome_tab_item{
-                        box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
-                        -webkit-box-shadow: 0 1px 12px rgb(0 0 0 / 5%);
+                        box-shadow: 0 1px 12px #0000000d;
+                        -webkit-box-shadow: 0 1px 12px #0000000d;
                         display: flex;
                         padding:14px;
                         background-color: #fff;
@@ -1825,7 +1825,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             
                             }
                         }
-                        &:focus-within{
+                        &:focus{
                             box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
                             
                             .wti__fontawesome_tab_item_content{
