@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import { useEffect, useState } from '@wordpress/element';
@@ -95,24 +95,35 @@ export default () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
+    const [ selectedFAIcons, setSelectedFAIcons ] = useState('');
 
+    const selectedFontAwesomeIcon = (event) => {
+        // console.log(event.target.getAttribute('data-icon'))
+        setSelectedFAIcons(event.target.getAttribute('data-icon'));
+    }
+
+    let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     //Listing fontawesome icon in fontawesome tab content.
     const ListFAIcons = ({icons}) => {
         return (
             'undefined' != typeof options && 'undefined' != typeof icons &&
-            icons.map( icon => {
-                let iconName = slugToName(icon);
-                return <>
-                    <div className="wti__fontawesome_tab_item" filter={icon.label}>
-                        <div className="wti__fontawesome_tab_item_content">
-                            <i className={icon.value}></i>
-                            <div className="wti__fontawesome_tab_item_name" title={iconName}>{iconName}</div>
+             icons.length > 0 ?
+                icons.map( (icon, index) => {
+                    let iconName = slugToName(icon);
+                    return <>
+                        <div key={index} className="wti__fontawesome_tab_item" data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
+                            <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
+                                <i data-icon={icon.value} className={icon.value}></i>
+                                <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
+                            </div>
                         </div>
-                    </div>
-                </>
-            })
+                    </>
+                })
+                :
+                <Notice status="error" isDismissible={false}>
+                    {__( 'Icon Not found', 'wp-travel' )}
+                </Notice>
         )
     }
 
@@ -163,7 +174,9 @@ export default () => {
                     }
                     placeholder={__( 'Filter by name...', 'wp-travel' )}
                 />
+                
             </div>
+            <h3>{__( 'All Icons', 'wp-travel' )}</h3>
             <div className="wti__fontawesome_tab_content">
                 {<ListFAIcons icons={fontAwesomeIcons}/>}
             </div>
@@ -263,45 +276,45 @@ export default () => {
                         <>
                             {wp_travel_trip_facts_settings.map( ( fact, index) =>{
 
-                                const logoId = fact.icon_img
+                                // const logoId = fact.icon_img
 
-                                const mediaInstance = wp.media({
-                                    multiple: false
-                                })
+                                // const mediaInstance = wp.media({
+                                //     multiple: false
+                                // })
 
-                                useEffect(() => {
-                                    if (logoId && !imageUrl) {
-                                        setState(state => ({
-                                            ...state,
-                                            isFetchingImage: true
-                                        }))
-                                        logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
-                                            .then((res) => {
-                                                setState({
-                                                    imageUrl: res.source_url,
-                                                    isFetchingImage: false
-                                                })
-                                            })
-                                        }
-                                }, [logoId])
+                                // useEffect(() => {
+                                //     if (logoId && !imageUrl) {
+                                //         setState(state => ({
+                                //             ...state,
+                                //             isFetchingImage: true
+                                //         }))
+                                //         logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
+                                //             .then((res) => {
+                                //                 setState({
+                                //                     imageUrl: res.source_url,
+                                //                     isFetchingImage: false
+                                //                 })
+                                //             })
+                                //         }
+                                // }, [logoId])
 
-                                mediaInstance
-                                    .on('select', () => {
-                                        const selectedItems = mediaInstance.state().get('selection').toJSON()
-                                        if ( selectedItems.length > 0 ) {
-                                            let invoiceLogoID = selectedItems[0].id
-                                            setState({
-                                                imageUrl: null,
-                                                isFetchingImage: true
-                                            })
-                                            // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
-                                            // updateSettings({
-                                            //     ...allData,
-                                            //     invoice_logo: invoiceLogoID.toString()
-                                            // })
-                                            updateFact( 'icon_img', invoiceLogoID.toString(), index )
-                                        }
-                                    })
+                                // mediaInstance
+                                //     .on('select', () => {
+                                //         const selectedItems = mediaInstance.state().get('selection').toJSON()
+                                //         if ( selectedItems.length > 0 ) {
+                                //             let invoiceLogoID = selectedItems[0].id
+                                //             setState({
+                                //                 imageUrl: null,
+                                //                 isFetchingImage: true
+                                //             })
+                                //             // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
+                                //             // updateSettings({
+                                //             //     ...allData,
+                                //             //     invoice_logo: invoiceLogoID.toString()
+                                //             // })
+                                //             updateFact( 'icon_img', invoiceLogoID.toString(), index )
+                                //         }
+                                //     })
                                 // let selectedFactOptions = factOptions.filter( opt => { return opt.value == fact.type } )
                                 let selectedAddIcons = 'undefined' != typeof wp_travel_trip_facts_settings ? iconOptions.filter( opt => { return opt.value == fact.icon } ) : []
                                 let selectedIconType = iconTypeOptions.filter( opt => { return opt.value == fact.icon_type } )
@@ -360,30 +373,29 @@ export default () => {
                                         <label>{__( 'Icon', 'wp-travel' )}</label>
                                         <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         { isOpen && (
-                                            <Modal
-                                                title={__( 'Icon Type', 'wp-travel' )}
+                                            <Modal className="wti__icon_select_modal"
+                                                title={<><i class="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
                                                 onRequestClose={ closeModal }>
                                                 <TabPanel className="my-tab-panel"
                                                     activeClass="active-tab"
                                                     initialTabName="icon-class"
                                                     onSelect={ () => false }
-                                                    orientation="vertical"
                                                     tabs={ [
-                                                        {
+                                                            {
                                                             name: 'fontawesome-icon',
-                                                            title: 'Fontawesome Icon',
+                                                            title: <><i class="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
                                                             className: 'wti__fa_icon',
                                                             content: fontawesomeIconContent
                                                         },
                                                         {
                                                             name: 'icon-class',
-                                                            title: 'Icon Class',
+                                                            title: <><i class="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
                                                             className: 'wti__icon_class',
                                                             content: iconClassContent
                                                         },
                                                         {
                                                             name: 'custom-upload',
-                                                            title: 'Custom Upload',
+                                                            title: <><i class="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
                                                             className: 'wti__custom_upload',
                                                         },
                                                     ] }>
@@ -391,13 +403,15 @@ export default () => {
                                                         ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact}/> : <>{__('Error', 'wp-travel')}</>
                                                     }
                                                 </TabPanel>
-                                                {/* <Button isSecondary onClick={ closeModal }>
-                                                    {__( 'Close', 'wp-travel' )}
-                                                </Button> */}
+                                                {/* <div className="wti__insert_icon">
+                                                    <Button isSecondary onClick={ closeModal }>
+                                                        {__( 'Insert', 'wp-travel' )}
+                                                    </Button>
+                                                </div> */}
                                             </Modal>
                                         ) }
                                     </PanelRow>
-                                    <PanelRow>
+                                    {/* <PanelRow>
                                         <label>{__( 'Icon Type', 'wp-travel' )}</label>
                                         <div className="wp-travel-field-value">
                                             <Select
@@ -409,8 +423,8 @@ export default () => {
                                                 defaultValue={{value:'icon_class', label:'Icon Class'}}
                                             />
                                         </div>
-                                    </PanelRow>
-                                    {
+                                    </PanelRow> */}
+                                    {/* {
                                         'icon_class' == fact.icon_type &&
                                             <PanelRow>
                                                 <label>{__( 'Icon Class', 'wp-travel' )}</label>
@@ -453,7 +467,7 @@ export default () => {
                                                 </div>
                                             </PanelRow>
                                         </>
-                                    }
+                                    } */}
                                     <PanelRow className="wp-travel-action-section">
                                         <span></span>
                                         <Button isSecondary onClick={() => {
