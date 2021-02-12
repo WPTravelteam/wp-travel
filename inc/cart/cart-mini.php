@@ -156,7 +156,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 												<?php echo wp_travel_get_formated_price_currency( $trip_total ); ?>
 											</span>
 
-											<?php if ( $trip_discount ) : ?>
+											<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?>
 												<span data-wpt-item-discounted-total="<?php echo esc_attr( $trip_total - $trip_discount ); ?>" >
 													<?php echo wp_travel_get_formated_price_currency( $trip_total - $trip_discount ); ?>
 												</span>
