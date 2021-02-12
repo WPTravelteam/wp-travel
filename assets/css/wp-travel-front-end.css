@@ -5681,12 +5681,13 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   justify-content: space-between;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name {
-  display: flex;
+  display: inline-block;
   margin-right: 10px;
+  line-height: 1;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name h5 {
-  line-height: 18px;
   display: inline;
+  line-height: 142%;
 }
 #shopping-cart .cart-summary .list-group li > div .trip-content .trip-item-name-price .trip-name h5 a {
   display: inline;

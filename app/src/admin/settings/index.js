@@ -362,3 +362,4 @@ domReady(function () {
         render(<WPTravelTripSettings />, document.getElementById('wp-travel-settings-block'));
     }
 });
+

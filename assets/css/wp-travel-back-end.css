@@ -4927,6 +4927,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   border-radius: 3px;
   -webkit-transition: all 0.3s;
   cursor: pointer;
+  /*  &:focus, &:focus-within{
+       box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
+       background-color: red;
+
+       .wti__fontawesome_tab_item_content{
+           i{
+               color:#71d7f7;
+           }
+       }
+   } */
 }
 .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item .wti__fontawesome_tab_item_content {
   text-align: center;
@@ -4939,12 +4949,6 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   color: #c2cbd2;
   font-size: 11px;
   margin-top: 13px;
-}
-.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:focus {
-  box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
-}
-.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item:focus .wti__fontawesome_tab_item_content i {
-  color: #71d7f7;
 }
 .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item.selected {
   box-shadow: 0 1px 12px #0000000d, inset 0 0 0 3px #71d7f7;
