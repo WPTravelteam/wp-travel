@@ -211,12 +211,14 @@ export default () => {
     // Icon Class Content.
     const iconClassContent = (props) => {
 
+        const [ iconClassName, setIconClassName ] = useState('');
+
         return <>
         <PanelRow>
             <label>{__( 'Icon Class', 'wp-travel' )}</label>
             <TextControl
                 placeholder={__( 'icon', 'wp-travel' )}
-                value={props.fact.icon}
+                value={iconClassName}
                 onChange={(value) => {
                     updateFact( 'icon', value, props.index )
                 }}
@@ -428,11 +430,11 @@ export default () => {
                                                         ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact}/> : <>{__('Error', 'wp-travel')}</>
                                                     }
                                                 </TabPanel>
-                                                {/* <div className="wti__insert_icon">
+                                                <div className="wti__insert_icon">
                                                     <Button isSecondary onClick={ closeModal }>
                                                         {__( 'Insert', 'wp-travel' )}
                                                     </Button>
-                                                </div> */}
+                                                </div>
                                             </Modal>
                                         ) }
                                     </PanelRow>
