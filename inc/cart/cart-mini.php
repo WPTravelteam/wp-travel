@@ -45,6 +45,11 @@ if ( wp_travel_is_react_version_enabled() ) {
 		$coupon_type = $cart['cart']['coupon']['type'];
 	}
 	?>
+	<style>
+	.selected-payable-amount{
+		color:green;
+	}
+</style>
 	<div class="order-wrapper">
 		<div class="wp-travel-cart-sidebar">
 			<div id="shopping-cart">
@@ -338,7 +343,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . wp_travel_get_formated_price_currency( $tax ); ?></strong></div>
 						</li>
 
-						<li data-wpt-trip-total="<?php echo esc_attr( $total ); ?>" class="wp-travel-payable-amount" >
+						<li data-wpt-trip-total="<?php echo esc_attr( $total ); ?>" class="wp-travel-payable-amount selected-payable-amount" >
 							<label><?php echo esc_html__( 'Total:', 'wp-travel' ); ?></label>
 							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total  ); ?>"><?php echo  wp_travel_get_formated_price_currency( $total  ); ?></strong></div>
 						</li>
