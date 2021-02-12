@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import { useEffect, useState } from '@wordpress/element';
@@ -121,7 +121,10 @@ export default () => {
                     </>
                 })
                 :
-                <h3>{__( 'Icon Not found', 'wp-travel' )}</h3>   
+                <Notice status="error">
+                    {__( 'Icon Not found', 'wp-travel' )}
+                </Notice>
+                // <h3>{__( 'Icon Not found', 'wp-travel' )}</h3>   
         )
     }
 
