@@ -133,8 +133,8 @@ class WP_Travel_Ajax {
 	public function wp_travel_add_to_cart() {
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		$http_post_data = wp_travel_sanitize_array( $_POST );
-		$post_data = json_decode( file_get_contents( 'php://input' ) );
-		$post_data = ! empty( $post_data ) ? (array) $post_data : $http_post_data;
+		$post_data      = json_decode( file_get_contents( 'php://input' ) );
+		$post_data      = ! empty( $post_data ) ? (array) $post_data : $http_post_data;
 
 		if ( ! isset( $post_data['trip_id'] ) ) {
 			return;
@@ -157,27 +157,26 @@ class WP_Travel_Ajax {
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
-		
 		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, $pricing_id, $arrival_date ); // pricing_id && $trip_start_date @since 4.0.0.
 		if ( isset( $post_data['trip_time'] ) ) {
 			$attrs['trip_time'] = $post_data['trip_time'];
 		}
-		
+
 		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
 		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
-		// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
+			// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			$total_pax          = array_sum( $pax );
 			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
-			$trip               = [];
+			$trip               = array();
 			$trip_price_partial = 0;
 
 			foreach ( $pax as $category_id => $pax_value ) {
-				$args = array(
-					'trip_id' => $trip_id,
-					'pricing_id' => $pricing_id,
+				$args           = array(
+					'trip_id'     => $trip_id,
+					'pricing_id'  => $pricing_id,
 					'category_id' => $category_id,
-					'price_key' => $price_key,
+					'price_key'   => $price_key,
 				);
 				$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
@@ -197,14 +196,14 @@ class WP_Travel_Ajax {
 				$pricing_index = null;
 				foreach ( $pricing_data as $index => $pricing ) {
 					if ( wp_travel_is_react_version_enabled() ) {
-						if( (int) $pricing_id === (int) $pricing['pricing_id'] ) {
+						if ( (int) $pricing_id === (int) $pricing['pricing_id'] ) {
 							$pricing_index = $index;
 							break;
 						}
 						continue;
 					}
 					if ( isset( $pricing['categories'] ) && is_array( $pricing['categories'] ) ) {
-						if( array_key_exists( $category_id, $pricing['categories'] ) ) {
+						if ( array_key_exists( $category_id, $pricing['categories'] ) ) {
 							$pricing_index = $index;
 							break;
 						};
@@ -239,15 +238,15 @@ class WP_Travel_Ajax {
 			$attrs['trip'] = $trip;
 			// $pax   = $total_pax;
 		} else {
-			$pax        = array_sum( (array) $pax );
+			$pax       = array_sum( (array) $pax );
 			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
-			$price_per  = ! empty( $price_per ) ? $price_per : 'person';
+			$price_per = ! empty( $price_per ) ? $price_per : 'person';
 			// multiply category_price by pax to add in trip price if price per is person.
-			$args = array(
-				'trip_id' => $trip_id,
+			$args       = array(
+				'trip_id'   => $trip_id,
 				'price_key' => $price_key,
 			);
-			$price = WP_Travel_Helpers_Pricings::get_price( $args );
+			$price      = WP_Travel_Helpers_Pricings::get_price( $args );
 			$trip_price = $price;
 			if ( wp_travel_is_partial_payment_enabled() ) {
 				$percent                = wp_travel_get_actual_payout_percent( $trip_id );
@@ -270,7 +269,7 @@ class WP_Travel_Ajax {
 					'custom_label'  => __( 'Custom', 'wp-travel' ),
 					'price_per'     => $price_per,
 					'trip_price'    => $trip_price,
-				)
+				),
 			);
 
 			if ( function_exists( 'wp_travel_group_discount_price' ) && 'single-pricing-id' !== $pricing_id ) { // From Group Discount addons.
@@ -292,8 +291,8 @@ class WP_Travel_Ajax {
 
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
 		if ( $attrs['enable_partial'] ) {
-			$trip_price_partial = $trip_price;
-			$payout_percent     = wp_travel_get_payout_percent( $trip_id );
+			$trip_price_partial             = $trip_price;
+			$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
 			$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
 
 			if ( $payout_percent > 0 ) {
