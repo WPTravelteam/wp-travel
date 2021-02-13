@@ -620,7 +620,8 @@ function wp_travel_search_form() {
 			<p>
 				<label><?php echo esc_html( $search_string ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
-				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+				<!-- <input type="text" name="s" id="s" value="<?php // echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php // echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>"> -->
+				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
 			<p>
 				<label><?php echo esc_html( $trip_type_string ); ?></label>
