@@ -47,7 +47,7 @@ class WP_Travel_Ajax_Cart {
 			WP_Travel_Helpers_REST_API::response( $permission );
 		}
 
-		$cart_id  = ! empty( $_GET['cart_id'] ) ? absint( $_GET['cart_id'] ) : 0;
+		$cart_id  = ! empty( $_GET['cart_id'] ) ? sanitize_text_field( $_GET['cart_id'] ) : 0;
 		$response = WP_Travel_Helpers_Cart::remove_cart_item( $cart_id );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
