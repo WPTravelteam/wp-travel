@@ -49,7 +49,7 @@ class WP_Travel_Ajax_Trips {
 		}
 
 		$postData = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		
+
 		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $postData );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
@@ -68,7 +68,7 @@ class WP_Travel_Ajax_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 
-		$trip = get_post( $_REQUEST['trip_id'] );
+		$trip = get_post( absint( $_REQUEST['trip_id'] ) );
 		if ( is_wp_error( $trip ) ) {
 			return $trip;
 		}
@@ -247,7 +247,7 @@ class WP_Travel_Ajax_Trips {
 		if ( empty( $_REQUEST['trip_id'] ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
-		$trip_id = $_REQUEST['trip_id'];
+		$trip_id = absint( $_REQUEST['trip_id'] );
 
 		$wp_travel_use_global_tabs    = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );

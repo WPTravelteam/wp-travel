@@ -284,10 +284,10 @@ function wp_travel_book_now() {
  */
 function get_booking_chart() {
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array();
-	$wp_travel_post_id        = ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) ? $_REQUEST['booking_itinerary'] : 0;
+	$wp_travel_post_id        = ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) ? absint( $_REQUEST['booking_itinerary'] ): 0;
 
 	$country_list     = wp_travel_get_countries();
-	$selected_country = ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) ? $_REQUEST['booking_country'] : '';
+	$selected_country = ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) ? esc_attr( $_REQUEST['booking_country'] ) : '';
 
 	$from_date = ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) ? rawurldecode( $_REQUEST['booking_stat_from'] ) : '';
 	$to_date   = ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) ? rawurldecode( $_REQUEST['booking_stat_to'] ) : '';
@@ -296,9 +296,9 @@ function get_booking_chart() {
 
 	$compare_from_date         = ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) ? rawurldecode( $_REQUEST['compare_stat_from'] ) : '';
 	$compare_to_date           = ( isset( $_REQUEST['compare_stat_to'] ) && '' !== $_REQUEST['compare_stat_to'] ) ? rawurldecode( $_REQUEST['compare_stat_to'] ) : '';
-	$compare_selected_country  = ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) ? $_REQUEST['compare_country'] : '';
-	$compare_itinerary_post_id = ( isset( $_REQUEST['compare_itinerary'] ) && '' !== $_REQUEST['compare_itinerary'] ) ? $_REQUEST['compare_itinerary'] : 0;
-	$chart_type                = isset( $_REQUEST['chart_type'] ) ? $_REQUEST['chart_type'] : '';
+	$compare_selected_country  = ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) ? esc_attr( $_REQUEST['compare_country'] ) : '';
+	$compare_itinerary_post_id = ( isset( $_REQUEST['compare_itinerary'] ) && '' !== $_REQUEST['compare_itinerary'] ) ? esc_attr( $_REQUEST['compare_itinerary'] ) : 0;
+	$chart_type                = isset( $_REQUEST['chart_type'] ) ? esc_attr( $_REQUEST['chart_type'] ) : '';
 	?>
 	<div class="wrap">
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
