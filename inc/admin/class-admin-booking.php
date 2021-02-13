@@ -481,7 +481,7 @@ class WP_Travel_Admin_Booking {
 			}
 			array_multisort( $priority, SORT_ASC, $fields );
 			foreach ( $fields as $key => $field ) :
-				$meta_val   = isset( $_POST[ $field['name'] ] ) ? esc_attr( $_POST[ $field['name'] ] ) : '';
+				$meta_val   = isset( $_POST[ $field['name'] ] ) ? ( $_POST[ $field['name'] ] ) : '';
 				$booking_id = apply_filters( 'wp_travel_booking_post_id_to_update', $booking_id, $key, $field['name'] );
 				if ( $meta_val ) {
 
