@@ -284,7 +284,7 @@ function wp_travel_book_now() {
  */
 function get_booking_chart() {
 
-	$submission_request = wp_travel_sanitize_array( wp_unslash( $_REQUEST ) );
+	$submission_request = isset( $_REQUEST['_wp_travel_booking_chart_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wp_travel_booking_chart_nonce'] ) ), '_wp_travel_booking_chart_nonce_action' ) ? wp_travel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
 
 	$wp_travel_itinerary_list = wp_travel_get_itineraries_array();
 	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
@@ -444,6 +444,7 @@ function get_booking_chart() {
 					</div>
 					</div>
 
+					<?php wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
 
 				</form>
 			</div>

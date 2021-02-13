@@ -599,6 +599,13 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @since  1.0.2
  */
 function wp_travel_search_form() {
+
+	$submission_get = array();
+
+	if ( isset( $_GET['__wp_travel_search_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['__wp_travel_search_nonce'] ) ), '__wp_travel_search_nonce_action' ) ) {
+		$submission_get = wp_travel_sanitize_array( wp_unslash( $_GET ) );
+	}
+
 	$label_string = apply_filters(
 		'wp_travel_search_filter_label_strings',
 		array(
@@ -635,7 +642,7 @@ function wp_travel_search_form() {
 					'name'            => $taxonomy,
 					'class'           => 'wp-travel-taxonomy',
 					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
 					'value_field'     => 'slug',
 				);
 
@@ -654,13 +661,15 @@ function wp_travel_search_form() {
 					'name'            => $taxonomy,
 					'class'           => 'wp-travel-taxonomy',
 					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
 					'value_field'     => 'slug',
 				);
 
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
+
+			<?php wp_nonce_field( '_wp_travel_search_nonce_action', '_wp_travel_search_nonce' ); ?>
 
 			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
 		</form>
@@ -1384,10 +1393,10 @@ function wp_travel_get_raw_referer() {
 		return wp_get_raw_referer();
 	}
 
-	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
-		return wp_unslash( $_REQUEST['_wp_http_referer'] );
+	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) { // @phpcs:ignore
+		return wp_travel_sanitize_array( wp_unslash( $_REQUEST['_wp_http_referer'] ) ); // @phpcs:ignore
 	} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-		return wp_unslash( $_SERVER['HTTP_REFERER'] );
+		return wp_travel_sanitize_array( wp_unslash( $_SERVER['HTTP_REFERER'] ) ); // @phpcs:ignore
 	}
 
 	return false;
