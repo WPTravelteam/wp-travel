@@ -41,9 +41,8 @@ jQuery(document).ready(function ($) {
         cart_fields[filterby] = filterby_val;
       }
     });
-    cart_fields['action'] = 'wt_add_to_cart'; // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
-    cart_fields['_nonce'] =  wp_travel._nonce;
-
+    cart_fields['action'] = 'wt_add_to_cart';
+    cart_fields['_nonce'] = wp_travel._nonce;
     $.ajax({
       type: "POST",
       url: wp_travel.ajaxUrl,
@@ -117,7 +116,6 @@ jQuery(document).ready(function ($) {
 
       update_cart_fields[i] = update_cart_field;
     });
-
     $.ajax({
       type: "POST",
       url: wp_travel.ajaxUrl,
