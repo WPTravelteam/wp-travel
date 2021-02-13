@@ -239,12 +239,12 @@ function wp_travel_enquiries_content_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'contact_name':
 			$name = isset( $column_data['wp_travel_enquiry_name'] ) ? $column_data['wp_travel_enquiry_name'] : '';
-			echo esc_attr( $name );
+			echo esc_html( $name );
 			break;
 		case 'contact_email':
 			$email = isset( $column_data['wp_travel_enquiry_email'] ) ? $column_data['wp_travel_enquiry_email'] : '';
 			?>
-				<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_attr( $email ); ?></a>
+				<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 			<?php
 			break;
 		default:
@@ -300,7 +300,7 @@ function wp_travel_save_backend_enqueries_data( $post_id ) {
 	}
 	array_multisort( $priority, SORT_ASC, $fields );
 	foreach ( $fields as $key => $field ) :
-		$meta_val          = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
+		$meta_val          = isset( $_POST[ $field['name'] ] ) ? esc_attr( $_POST[ $field['name'] ] ) : '';
 		$post_id_to_update = apply_filters( 'wp_travel_booking_post_id_to_update', $post_id, $key, $field['name'] );
 		update_post_meta( $post_id_to_update, $field['name'], sanitize_text_field( $meta_val ) );
 		$enquery_data[ $field['name'] ] = $meta_val;
