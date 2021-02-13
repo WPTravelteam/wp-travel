@@ -114,8 +114,8 @@ class WP_Travel_Network_Settings {
 	 */
 	public function save_settings() {
 		if ( isset( $_POST['save_settings_button'] ) ) {
-			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
+			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			
 			$settings = array();
 

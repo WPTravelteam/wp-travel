@@ -31,7 +31,7 @@ function wp_travel_coupons_general_tab_callback() {
 	$coupon_id = $coupon->get_coupon_id_by_code( $coupon_code );
 
 	?>
-
+	<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 	<table class="form-table">
 		<tbody>
 		<?php if ( $coupon_id ) : ?>

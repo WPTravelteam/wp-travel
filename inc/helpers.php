@@ -286,14 +286,19 @@ function wp_travel_get_dropdown_list( $args = array() ) {
 }
 
 function wp_travel_sanitize_array( $array ) {
-	foreach ( $array as $k => $value ) {
-		if ( is_array( $value ) ) {
-			wp_travel_sanitize_array( $value );
-		} else {
-			return sanitize_text_field( $value );
+	if ( is_string( $array ) ) {
+		$array = sanitize_text_field( $array );
+	} elseif ( is_array( $array ) ) {
+		foreach ( $array as $key => &$value ) {
+			if ( is_array( $value ) ) {
+				$value = wp_travel_sanitize_array( $value );
+			} else {
+				$value = sanitize_text_field( $value );
+			}
 		}
 	}
-	return false;
+
+    return $array;
 }
 
 /**

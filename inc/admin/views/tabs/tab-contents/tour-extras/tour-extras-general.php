@@ -20,7 +20,7 @@ function wp_travel_tour_extras_general_tab_callback() {
 	 */
 	$item_desc       = isset( $trip_extras_data['extras_item_description'] ) && ! empty( $trip_extras_data['extras_item_description'] ) ? $trip_extras_data['extras_item_description']  : '';
 
-	?>
+	wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 	<table class="form-table">
 		<tbody>
 			<tr>

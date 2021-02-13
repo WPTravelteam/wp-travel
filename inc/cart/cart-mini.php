@@ -187,36 +187,27 @@ if ( wp_travel_is_react_version_enabled() ) {
 										</span>
 										<?php
 										foreach ( $cart_pax as $category_id => $detail ) {
-											$category = $categories[ $category_id ];
-											$ctitle   = $category['term_info']['title'];
+											$category = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
+											$ctitle   = isset( $category['term_info']['title'] ) ? esc_html( $category['term_info']['title'] ) : '';
 											$pax      = (int) $detail['pax'];
 											echo '<span><span data-wpt-category-count="' . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
 										}
 										?>
 									</div>
-
-									
 								</div>
-								<!-- <div class="price">
-									<span><?php echo '<span data-wpt-item-total="' . $trip_total . '">' . wp_travel_get_formated_price_currency( $trip_total ) . '</span>'; ?></span>
-									<?php if ( $coupon_applied ) : ?>
-										<span class="wp-travel-discount-amount"><?php echo $trip_discount ? wp_travel_get_formated_price_currency( $trip_discount ) : __( 'N/A', 'wp-travel' ); ?></span>
-									<?php endif ?>
-									
-								</div> -->
 							</div>
 							<div class="update-fields-collapse" style="display: none;">
 								<form class="wp-travel__cart-item" action="">
 									<?php
-									// $category_total = 0;
 									foreach ( $cart_pax as $category_id => $detail ) {
-										$category = $categories[ $category_id ];
+										$category = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
 										$ctitle   = $category['term_info']['title'];
 										$pax      = (int) $detail['pax'];
 
 										$price_per_group = $category['price_per'] == 'group';
 
 										$category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
+										$category_price = $category_price ? $category_price : 0; // Temp fixes.
 
 
 										if ( isset( $category['has_group_price'] ) && $category['has_group_price'] ) {

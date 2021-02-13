@@ -183,8 +183,7 @@ class Wp_Travel_User_Account {
 	 * @uses $wpdb WordPress Database object
 	 * @return bool True: when finish. False: on error
 	 */
-	public static function retrieve_password() {
-		$login = trim( $_POST['user_login'] );
+	public static function retrieve_password( $login = '' ) {
 
 		if ( empty( $login ) ) {
 

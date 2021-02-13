@@ -132,6 +132,7 @@
         coupon_fields['coupon_code'] = value;
         coupon_fields['coupon_id'] = couponId;
         coupon_fields['action'] = 'wp_travel_check_coupon_code';
+        coupon_fields['_nonce'] = _wp_travel._nonce
 
         jQuery.ajax({
             type: "POST",

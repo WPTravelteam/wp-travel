@@ -525,7 +525,6 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 		);
 
 		$response = WP_Travel_Helpers_Inventory::get_inventory( $args );
-		// error_log( print_r( $response, true ) );
 		if ( is_array( $response ) && isset( $response[ 'code' ] ) && 'WP_TRAVEL_INVENTORY_INFO' === $response[ 'code' ] ) {
 			$available_pax = $response['inventory'][0]['pax_available'];
 		}

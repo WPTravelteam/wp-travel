@@ -105,6 +105,13 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	 */
 	public function save_extras_metabox_data( $post_id ) {
 
+		if ( ! isset( $_POST['wp_travel_security'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+			return;
+		}
+
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}

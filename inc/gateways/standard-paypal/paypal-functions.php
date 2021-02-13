@@ -77,7 +77,7 @@ function wp_travel_paypal_ipn_process() {
 		 * Check if the seller email that was processed by the IPN matches what is saved as
 		 * the seller email in our DB
 		 */
-		if ( $_POST['receiver_email'] != $settings['paypal_email'] ) {
+		if ( $_POST['receiver_email'] != $settings['paypal_email'] ) { // @phpcs:ignore
 			$message .= "\nEmail seller email does not match email in settings\n";
 		}
 
@@ -87,7 +87,7 @@ function wp_travel_paypal_ipn_process() {
 		 * Check if the currency that was processed by the IPN matches what is saved as
 		 * the currency setting
 		 */
-		if ( $_POST['mc_currency'] != $settings['currency'] ) {
+		if ( $_POST['mc_currency'] != $settings['currency'] ) { // @phpcs:ignore
 			$message .= "\nCurrency does not match those assigned in settings\n";
 		}
 
@@ -97,10 +97,10 @@ function wp_travel_paypal_ipn_process() {
 		 * PayPal transaction id (txn_id) is stored in the database, we check
 		 * that against the txn_id returned.
 		 */
-		$booking_id = isset( $_POST['custom'] ) ? $_POST['custom'] : 0;
+		$booking_id = isset( $_POST['custom'] ) ? absint( $_POST['custom'] ) : 0;
 		$txn_id     = get_post_meta( $booking_id, 'txn_id', true );
 		if ( empty( $txn_id ) ) {
-			update_post_meta( $booking_id, 'txn_id', $_POST['txn_id'] );
+			update_post_meta( $booking_id, 'txn_id', sanitize_text_field( $_POST['txn_id'] ) );
 		} else {
 			$message .= "\nThis payment was already processed\n";
 		}
@@ -111,7 +111,7 @@ function wp_travel_paypal_ipn_process() {
 		 * Create a new payment, send customer an email and empty the cart
 		 */
 
-		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Pending' ) {
+		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Pending' ) { // @phpcs:ignore
 				// Update booking status and Payment args.
 				update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 				$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
@@ -142,8 +142,8 @@ function wp_travel_paypal_ipn_process() {
 				update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_ids );
 
 				$payment_method = 'paypal';
-				$amount         = $_POST['mc_gross'];
-				$detail         = $_POST;
+				$amount         = sanitize_text_field( $_POST['mc_gross'] );
+				$detail         = wp_travel_sanitize_array( $_POST );
 
 				update_post_meta( $new_payment_id, 'wp_travel_payment_gateway', $payment_method );
 
@@ -155,9 +155,9 @@ function wp_travel_paypal_ipn_process() {
 				wp_travel_update_payment_status( $booking_id, $amount, 'paid', $detail, sprintf( '_%s_args', $payment_method ), $new_payment_id );
 
 			} else { // New Payment.
-				update_post_meta( $payment_id, '_paypal_args', $_POST );
+				update_post_meta( $payment_id, '_paypal_args', wp_travel_sanitize_array( $_POST ) );
 				update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
-				update_post_meta( $payment_id, 'wp_travel_payment_amount', $_POST['mc_gross'] );
+				update_post_meta( $payment_id, 'wp_travel_payment_amount', sanitize_text_field( $_POST['mc_gross'] ) );
 
 				do_action( 'wp_travel_after_successful_payment', $booking_id );
 			}

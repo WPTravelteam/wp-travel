@@ -20,7 +20,7 @@ add_filter( 'wp_travel_trip_tabs_output_raw', 'wp_travel_raw_output_on_tab_conte
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
 
-add_action( 'comment_post', 'wp_travel_add_comment_rating' );
+add_action( 'comment_post', 'wp_travel_add_comment_rating', 10, 3 );
 add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
 
 // Clear transients.
@@ -668,7 +668,6 @@ function wp_travel_single_location( $post_id ) {
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
 	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
-	// error_log( 'fd ' . $fixed_departure );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -1077,12 +1076,12 @@ function wp_travel_related_itineraries( $post_id ) {
 	wp_travel_get_related_post( $post_id );
 }
 
-function wp_travel_add_comment_rating( $comment_id ) {
-	if ( isset( $_POST['wp_travel_rate_val'] ) && WP_TRAVEL_POST_TYPE === get_post_type( $_POST['comment_post_ID'] ) ) {
-		if ( ! $_POST['wp_travel_rate_val'] || $_POST['wp_travel_rate_val'] > 5 || $_POST['wp_travel_rate_val'] < 0 ) {
+function wp_travel_add_comment_rating( $comment_id, $approve, $comment_data ) {
+	if ( isset( $_POST['wp_travel_rate_val'] ) && WP_TRAVEL_POST_TYPE === get_post_type( $comment_data['comment_post_ID'] ) ) { // @phpcs:ignore
+		if ( $_POST['wp_travel_rate_val'] > 5 || $_POST['wp_travel_rate_val'] < 0 ) { // @phpcs:ignore
 			return;
 		}
-		add_comment_meta( $comment_id, '_wp_travel_rating', (int) esc_attr( $_POST['wp_travel_rate_val'] ), true );
+		add_comment_meta( $comment_id, '_wp_travel_rating',  absint( $_POST['wp_travel_rate_val'] ), true ); // @phpcs:ignore
 	}
 }
 
@@ -1093,11 +1092,10 @@ function wp_travel_clear_transients( $post_id ) {
 }
 
 function wp_travel_verify_comment_meta_data( $commentdata ) {
-
 	if (
 	! is_admin()
-	&& WP_TRAVEL_POST_TYPE === get_post_type( sanitize_text_field( $_POST['comment_post_ID'] ) )
-	&& 1 > sanitize_text_field( $_POST['wp_travel_rate_val'] )
+	&& WP_TRAVEL_POST_TYPE === get_post_type( sanitize_text_field( $commentdata['comment_post_ID'] ) )
+	&& 1 > sanitize_text_field( $_POST['wp_travel_rate_val'] ) // @phpcs:ignore
 	&& '' === $commentdata['comment_type']
 	) {
 		wp_die( 'Please rate. <br><a href="javascript:history.go(-1);">Back </a>' );

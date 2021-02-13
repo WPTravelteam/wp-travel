@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
             }
         });
         cart_fields['action'] = 'wt_add_to_cart';
-        // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
+        cart_fields['_nonce'] =  wp_travel._nonce;
         $.ajax({
             type: "POST",
             url: wp_travel.ajaxUrl,
@@ -119,7 +119,6 @@ jQuery(document).ready(function ($) {
 
             update_cart_fields[i] = update_cart_field;
         });
-        // console.log( update_cart_fields );
 
         $.ajax({
             type: "POST",
@@ -709,7 +708,6 @@ const wptravelcheckout = (shoppingCart) => {
                     body: JSON.stringify({ couponCode: couponField.value })
                 }).then(res => res.json())
                     .then(result => {
-                        console.log(result)
                         toggleCartLoader()
                         if (result.success) {
                             wp_travel_cart.cart = result.data.cart

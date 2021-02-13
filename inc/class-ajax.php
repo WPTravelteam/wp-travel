@@ -36,7 +36,7 @@ class WP_Travel_Ajax {
 	 *
 	 * @since 1.7.6
 	 */
-	function wp_travel_clone_trip() {
+	public function wp_travel_clone_trip() {
 		// Run a security check first.
 		check_ajax_referer( 'wp_travel_clone_post_nonce', 'security' );
 
@@ -44,7 +44,7 @@ class WP_Travel_Ajax {
 			return;
 		}
 
-		$post_id   = $_POST['post_id'];
+		$post_id   = absint( $_POST['post_id'] );
 		$post_type = get_post_type( $post_id );
 
 		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
@@ -91,28 +91,34 @@ class WP_Travel_Ajax {
 		wp_send_json( array( 'true' ) );
 	}
 
-	function wp_travel_check_coupon_code() {
+	public function wp_travel_check_coupon_code() {
 
-		if ( ! isset( $_POST['coupon_code'] ) ) {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
+		if ( ! isset( $_POST['coupon_code'] ) || ! isset( $_POST['coupon_id'] ) ) {
 			return;
 		}
 
-		$post_id = $_POST['coupon_id'];
+		$coupon_id   = absint( $_POST['coupon_id'] );
+		$coupon_code = sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) );
 
-		$coupon = WP_Travel()->coupon->get_coupon_id_by_code( $_POST['coupon_code'] );
+		$coupon = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code );
 
-		if ( ! $coupon || $post_id === $coupon ) {
+		if ( ! $coupon || $coupon_id === $coupon ) {
 
-			wp_send_json_success( $_POST['coupon_code'] );
+			wp_send_json_success( $coupon_code );
 		}
 
-		wp_send_json_error( $_POST['coupon_code'] );
+		wp_send_json_error( $coupon_code );
 
 	}
 
-	function post_gallery_ajax_load_image() {
+	public function post_gallery_ajax_load_image() {
 		// Run a security check first.
 		check_ajax_referer( 'wp-travel-drag-drop-nonce', 'nonce' );
+
+		if ( ! isset( $_POST['id'] ) ) {
+			return;
+		}
 		// Prepare variables.
 		$id = absint( $_POST['id'] );
 		echo wp_json_encode(
@@ -124,10 +130,11 @@ class WP_Travel_Ajax {
 		exit;
 	}
 
-	function wp_travel_add_to_cart() {
-		$post_data = $_POST;
-		$postData = json_decode( file_get_contents('php://input') );
- 		$post_data = ! empty( $postData ) ? (array) $postData : $post_data;
+	public function wp_travel_add_to_cart() {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
+		$http_post_data = wp_travel_sanitize_array( $_POST );
+		$post_data = json_decode( file_get_contents( 'php://input' ) );
+		$post_data = ! empty( $post_data ) ? (array) $post_data : $http_post_data;
 
 		if ( ! isset( $post_data['trip_id'] ) ) {
 			return;
@@ -135,18 +142,18 @@ class WP_Travel_Ajax {
 		global $wt_cart;
 
 		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
-		$allow_multiple_cart_items = true;
+		$allow_multiple_cart_items = WP_Travel_Cart::allow_multiple_items();
 
 		if ( ! $allow_multiple_cart_items ) {
 			$wt_cart->clear();
 		}
 
-		$trip_id        = $post_data['trip_id'];
-		$price_key      = isset( $post_data['price_key'] ) ? $post_data['price_key'] : '';
-		$pricing_id     = isset( $post_data['pricing_id'] ) ? $post_data['pricing_id'] : ''; // @since 3.0.0
-		$arrival_date   = isset( $post_data['arrival_date'] ) ? $post_data['arrival_date'] : '';
-		$departure_date = isset( $post_data['departure_date'] ) ? $post_data['departure_date'] : ''; // Need to remove. is't post value.
-		$pax            = isset( $post_data['pax'] ) ? (array) $post_data['pax'] : 0;
+		$trip_id        = absint( $post_data['trip_id'] );
+		$price_key      = isset( $post_data['price_key'] ) ? sanitize_text_field( $post_data['price_key'] ) : '';
+		$pricing_id     = isset( $post_data['pricing_id'] ) ? absint( $post_data['pricing_id'] ) : ''; // @since 3.0.0
+		$arrival_date   = isset( $post_data['arrival_date'] ) ? sanitize_text_field( $post_data['arrival_date'] ) : '';
+		$departure_date = isset( $post_data['departure_date'] ) ? sanitize_text_field( $post_data['departure_date'] ) : ''; // Need to remove. is't post value.
+		$pax            = isset( $post_data['pax'] ) ? (array) absint( $post_data['pax'] ) : 0;
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
@@ -341,14 +348,17 @@ class WP_Travel_Ajax {
 	 *
 	 * @return void
 	 */
-	function wp_travel_update_cart() {
+	public function wp_travel_update_cart() {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['update_cart_fields'] ) || count( $_POST['update_cart_fields'] ) < 1 ) {
 			return;
 		}
 
 		global $wt_cart;
 
-		foreach ( $_POST['update_cart_fields'] as $cart_field ) {
+		$cart_fields = wp_travel_sanitize_array( $_POST['update_cart_fields'] ); // @phpcs:ignore
+
+		foreach ( $cart_fields as $cart_field ) {
 
 			$trip_extras = false;
 
@@ -365,8 +375,8 @@ class WP_Travel_Ajax {
 		die;
 	}
 
-	function wt_cart_apply_coupon() {
-		error_log( 'traditional apply coupon' );
+	public function wt_cart_apply_coupon() {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['CouponCode'] ) ) {
 			return;
 		}
@@ -382,7 +392,9 @@ class WP_Travel_Ajax {
 			return;
 		}
 
-		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $_POST['CouponCode'] );
+		$coupon_code = sanitize_text_field( wp_unslash( $_POST['CouponCode'] ) );
+
+		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code );
 
 		if ( ! $coupon_id ) {
 
@@ -402,7 +414,7 @@ class WP_Travel_Ajax {
 
 		}
 
-		$trip_ids = $_POST['trip_ids'];
+		$trip_ids = wp_travel_sanitize_array( $_POST['trip_ids'] ); // @phpcs:ignore
 
 		$trips_validity = WP_Travel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
 
@@ -454,13 +466,14 @@ class WP_Travel_Ajax {
 		die;
 	}
 
-	function wp_travel_remove_from_cart() {
+	public function wp_travel_remove_from_cart() {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_REQUEST['cart_id'] ) ) {
 			return;
 		}
 		global $wt_cart;
 
-		$wt_cart->remove( $_REQUEST['cart_id'] );
+		$wt_cart->remove( sanitize_text_field( wp_unslash( $_REQUEST['cart_id'] ) ) );
 		return true;
 	}
 

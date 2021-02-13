@@ -11,15 +11,6 @@
  * @return array Returns form fields.
  */
 function wp_travel_enquiries_form_fields() {
-	global $post;
-
-	$post_id = 0;
-	if ( isset( $post->ID ) ) {
-		$post_id = $post->ID;
-	}
-	if ( isset( $_POST['wp_travel_post_id'] ) ) {
-		$post_id = $_POST['wp_travel_post_id'];
-	}
 
 	// Default enquiry fields.
 	$enquiry_fields = WP_Travel_Default_Form_Fields::enquiry();
@@ -269,6 +260,13 @@ function wp_travel_enquiries_content_manage_columns( $column_name, $id ) {
  * @return Mixed
  */
 function wp_travel_save_backend_enqueries_data( $post_id ) {
+
+	if ( ! isset( $_POST['wp_travel_security'] ) ) {
+		return;
+	}
+	if ( ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		return;
+	}
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
@@ -291,7 +289,7 @@ function wp_travel_save_backend_enqueries_data( $post_id ) {
 		return;
 	}
 	$enqueries_data    = array();
-	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
+	$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? absint( $_POST['wp_travel_post_id'] ) : 0;
 	update_post_meta( $post_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 	$enquery_data['post_id'] = $wp_travel_post_id;
 
@@ -326,7 +324,11 @@ add_action( 'save_post', 'wp_travel_save_backend_enqueries_data' );
  */
 function wp_travel_save_user_enquiry() {
 
-	$formdata = $_POST;
+	if ( ! isset( $_POST['nonce'] ) ) {
+		return;
+	}
+
+	$formdata = wp_travel_sanitize_array( $_POST );
 
 	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_frontend_security' ) ) {
 
@@ -417,11 +419,11 @@ function wp_travel_save_user_enquiry() {
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 	$enquiry_id      = $new_enquiry;
-	$itinerary_id    = sanitize_text_field( $enquiry_data['post_id'] );
+	$itinerary_id    = absint( $enquiry_data['post_id'] );
 	$itinerary_title = get_the_title( $itinerary_id );
-	$customer_name   = $enquiry_data['wp_travel_enquiry_name'];
-	$customer_email  = $enquiry_data['wp_travel_enquiry_email'];
-	$customer_note   = $enquiry_data['wp_travel_enquiry_query'];
+	$customer_name   = snitize_text_field( $enquiry_data['wp_travel_enquiry_name'] );
+	$customer_email  = snitize_text_field( $enquiry_data['wp_travel_enquiry_email'] );
+	$customer_note   = snitize_text_field( $enquiry_data['wp_travel_enquiry_query'] );
 
 	$email_tags = array(
 		'{sitename}'          => $sitename,

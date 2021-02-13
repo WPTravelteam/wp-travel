@@ -30,20 +30,23 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function process_login() {
 
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-		$nonce_value = isset( $_POST['wp-travel-login-nonce'] ) ? $_POST['wp-travel-login-nonce'] : $nonce_value;
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : ''; // @phpcs:ignore
+		$nonce_value = isset( $_POST['wp-travel-login-nonce'] ) ? $_POST['wp-travel-login-nonce'] : $nonce_value; // @phpcs:ignore
 
 		if ( ! empty( $_POST['login'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
+			$username = isset( $_POST['username'] ) ? trim( sanitize_text_field( $_POST['username'] ) ) : ''; // @phpcs:ignore
+			$password = isset( $_POST['password'] ) ? sanitize_text_field( $_POST['password'] ) : ''; // @phpcs:ignore
+
 			try {
 				$creds = array(
-					'user_login'    => trim( $_POST['username'] ),
-					'user_password' => $_POST['password'],
+					'user_login'    => $username,
+					'user_password' => $password,
 					'remember'      => isset( $_POST['rememberme'] ),
 				);
 
 				$validation_error = new WP_Error();
-				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $_POST['username'], $_POST['password'] );
+				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $username, $password );
 
 				if ( $validation_error->get_error_code() ) {
 					throw new Exception( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $validation_error->get_error_message() );
@@ -72,7 +75,7 @@ class Wp_Travel_Form_Handler {
 				} else {
 
 					if ( ! empty( $_POST['redirect'] ) ) {
-						$redirect = $_POST['redirect'];
+						$redirect = $_POST['redirect']; // @phpcs:ignore
 					} elseif ( wp_travel_get_raw_referer() ) {
 						$redirect = wp_travel_get_raw_referer();
 					} else {
@@ -99,8 +102,8 @@ class Wp_Travel_Form_Handler {
 	 * Process the registration form.
 	 */
 	public static function process_registration() {
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-		$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';  // @phpcs:ignore
+		$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;  // @phpcs:ignore
 
 		if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-register' ) ) {
 			$settings = wp_travel_get_settings();
@@ -108,9 +111,9 @@ class Wp_Travel_Form_Handler {
 			$generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
 			$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
-			$username = 'no' === $generate_username_from_email ? $_POST['username'] : '';
-			$password = 'no' === $generate_user_password ? $_POST['password'] : '';
-			$email    = $_POST['email'];
+			$username = 'no' === $generate_username_from_email ? trim( sanitize_text_field( $_POST['username'] ) ) : '';
+			$password = 'no' === $generate_user_password ? sanitize_text_field( $_POST['username'] ) : '';
+			$email    = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
 
 			try {
 				$validation_error = new WP_Error();
@@ -152,7 +155,13 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function process_lost_password() {
 		if ( isset( $_POST['wp_travel_reset_password'] ) && isset( $_POST['user_login'] ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_lost_password' ) ) {
-			$success = Wp_Travel_User_Account::retrieve_password();
+
+			if ( ! isset( $_POST['user_login'] ) ) {
+				return;
+			}
+			$user_login = is_email( $_POST['user_login'] ) ? sanitize_email( $_POST['user_login'] ) : sanitize_text_field( $_POST['user_login'] );
+			
+			$success = Wp_Travel_User_Account::retrieve_password( $user_login );
 
 			// If successful, redirect to my account with query arg set.
 			if ( $success ) {
@@ -166,18 +175,23 @@ class Wp_Travel_Form_Handler {
 	 * Handle reset password form.
 	 */
 	public static function process_reset_password() {
+
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_reset_password_nonce' ) ) {
+			return;
+		}
 		$posted_fields = array( 'wp_travel_reset_password', 'password_1', 'password_2', 'reset_key', 'reset_login', '_wpnonce' );
 
 		foreach ( $posted_fields as $field ) {
 			if ( ! isset( $_POST[ $field ] ) ) {
 				return;
 			}
-			$posted_fields[ $field ] = $_POST[ $field ];
+			$posted_fields[ $field ] = sanitize_text_field( $_POST[ $field ] );
 		}
 
-		if ( ! wp_verify_nonce( $posted_fields['_wpnonce'], 'wp_travel_reset_password_nonce' ) ) {
-			return;
-		}
 
 		$user = Wp_Travel_User_Account::check_password_reset_key( $posted_fields['reset_key'], $posted_fields['reset_login'] );
 
@@ -321,15 +335,15 @@ class Wp_Travel_Form_Handler {
 		$account_first_name = ! empty( $_POST['account_first_name'] ) ? wp_travel_clean_vars( $_POST['account_first_name'] ): '';
 		$account_last_name  = ! empty( $_POST['account_last_name'] ) ? wp_travel_clean_vars( $_POST['account_last_name'] )  : '';
 		$account_email      = ! empty( $_POST['account_email'] ) ? wp_travel_clean_vars( $_POST['account_email'] )          : '';
-		$pass_cur           = ! empty( $_POST['password_current'] ) ? $_POST['password_current']                : '';
-		$pass1              = ! empty( $_POST['password_1'] ) ? $_POST['password_1']                            : '';
-		$pass2              = ! empty( $_POST['password_2'] ) ? $_POST['password_2']                            : '';
+		$pass_cur           = ! empty( $_POST['password_current'] ) ? wp_travel_clean_vars( $_POST['password_current'] ) : '';
+		$pass1              = ! empty( $_POST['password_1'] ) ? wp_travel_clean_vars( $_POST['password_1'] ): '';
+		$pass2              = ! empty( $_POST['password_2'] ) ? wp_travel_clean_vars( $_POST['password_2'] ): '';
 		$save_pass          = true;
 
-		$user               = new stdClass();
-		$user->ID           = $user_id;
-		$user->first_name   = $account_first_name;
-		$user->last_name    = $account_last_name;
+		$user             = new stdClass();
+		$user->ID         = $user_id;
+		$user->first_name = $account_first_name;
+		$user->last_name  = $account_last_name;
 
 		// Prevent emails being displayed, or leave alone.
 		$user->display_name = is_email( $current_user->display_name ) ? $user->first_name : $current_user->display_name;

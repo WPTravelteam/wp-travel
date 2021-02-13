@@ -45,7 +45,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 	 * @since WP Travel 4.4.2
 	 */
 	function send_booking_emails( $args ) {
-		$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : ''; reset( $customer_email );
+		$customer_email = $args['customer_email'];
 		$first_key      = key( $customer_email );
 		
 		$customer_email = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
@@ -109,12 +109,12 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		$departure_date = isset( $args['departure_date'] ) ? $args['departure_date'] : '';
 		$trip_time      = isset( $args['time'] ) ? $args['time'] : '';
 
-		// Customer Details.
-		$first_name       = isset( $_POST['wp_travel_fname_traveller'] ) ? $_POST['wp_travel_fname_traveller'] : '';
-		$last_name        = isset( $_POST['wp_travel_lname_traveller'] ) ? $_POST['wp_travel_lname_traveller'] : '';
-		$customer_country = isset( $_POST['wp_travel_country_traveller'] ) ? $_POST['wp_travel_country_traveller'] : '';
-		$customer_phone   = isset( $_POST['wp_travel_phone_traveller'] ) ? $_POST['wp_travel_phone_traveller'] : '';
-		$customer_email   = isset( $_POST['wp_travel_email_traveller'] ) ? $_POST['wp_travel_email_traveller'] : '';
+		// Customer Details.[nonce already verified before calling this method].
+		$first_name       = isset( $_POST['wp_travel_fname_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_fname_traveller'] ) : ''; // @phpcs:ignore
+		$last_name        = isset( $_POST['wp_travel_lname_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_lname_traveller'] ) : ''; // @phpcs:ignore
+		$customer_country = isset( $_POST['wp_travel_country_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_country_traveller'] ) : ''; // @phpcs:ignore
+		$customer_phone   = isset( $_POST['wp_travel_phone_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_phone_traveller'] ) : ''; // @phpcs:ignore
+		$customer_email   = isset( $_POST['wp_travel_email_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_email_traveller'] ) : ''; // @phpcs:ignore
 
 		reset( $first_name );
 		$first_key = key( $first_name );
@@ -128,12 +128,12 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		$customer_phone   = isset( $customer_phone[ $first_key ] ) && isset( $customer_phone[ $first_key ][0] ) ? $customer_phone[ $first_key ][0] : '';
 		$customer_email   = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
 
-		$customer_address = isset( $_POST['wp_travel_address'] ) ? $_POST['wp_travel_address'] : '';
-		$customer_note    = isset( $_POST['wp_travel_note'] ) ? $_POST['wp_travel_note'] : '';
+		$customer_address = isset( $_POST['wp_travel_address'] ) ? sanitize_text_field( $_POST['wp_travel_address'] ) : ''; // @phpcs:ignore
+		$customer_note    = isset( $_POST['wp_travel_note'] ) ? sanitize_text_field( $_POST['wp_travel_note'] ) : ''; // @phpcs:ignore
 
 		// Bank Deposite table.
 		$bank_deposit_table = '';
-		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
+		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) { // @phpcs:ignore
 			$bank_deposit_table = wp_travel_get_bank_deposit_account_table( false );
 		}
 

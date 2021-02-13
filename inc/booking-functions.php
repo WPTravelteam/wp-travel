@@ -91,16 +91,16 @@ function wp_travel_book_now() {
 	wp_update_post( $update_data_array );
 
 	// Updating Booking Metas.
-	update_post_meta( $booking_id, 'order_data', $_POST );
+	update_post_meta( $booking_id, 'order_data', wp_travel_sanitize_array( $_POST ) );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */
-	update_post_meta( $booking_id, 'wp_travel_arrival_date', $arrival_date );
-	update_post_meta( $booking_id, 'wp_travel_departure_date', $departure_date );
-	update_post_meta( $booking_id, 'wp_travel_post_id', $trip_id ); // quick fix [booking not listing in user dashboard].
-	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', $arrival_date_email_tag ); // quick fix arrival date with time.
+	update_post_meta( $booking_id, 'wp_travel_arrival_date', sanitize_text_field( $arrival_date ) );
+	update_post_meta( $booking_id, 'wp_travel_departure_date', sanitize_text_field( $departure_date ) );
+	update_post_meta( $booking_id, 'wp_travel_post_id', absint( $trip_id ) ); // quick fix [booking not listing in user dashboard].
+	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', sanitize_text_field( $arrival_date_email_tag ) ); // quick fix arrival date with time.
 
 	// Insert $_POST as Booking Meta.
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
@@ -146,6 +146,7 @@ function wp_travel_book_now() {
 
 	$settings  = wp_travel_get_settings();
 	$first_key = '';
+	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wp_travel_sanitize_array( $_POST['wp_travel_email_traveller'] ) : array();
 	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
 		$args = array(
 			'trip_id'        => $trip_id,
@@ -157,6 +158,7 @@ function wp_travel_book_now() {
 			'price_key'      => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
 			'arrival_date'   => $arrival_date_email_tag, // For Email [arrival_date along with time].
 			'departure_date' => $departure_date, // For Email.
+			'customer_email' => $customer_email,
 		);
 		/**
 		 * Add Support for invertory addon options.

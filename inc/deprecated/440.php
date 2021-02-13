@@ -71,15 +71,21 @@ function wp_travel_is_taxable() {
  * @return HTML [description]
  */
 function wp_travel_get_booking_form() {
+	if ( ! isset( $_POST['wp_travel_security'] ) ) {
+		return;
+	}
+	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		return;
+	}
 	// No suggested alternative function.
 	wp_travel_deprecated_function( 'wp_travel_get_booking_form', '4.4.0' );
 	global $post;
 	$trip_id = 0;
 	$settings = wp_travel_get_settings();
 	if ( isset( $_REQUEST['trip_id'] ) ) {
-		$trip_id = $_REQUEST['trip_id'];
+		$trip_id = absint( $_REQUEST['trip_id'] );
 	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
-		$trip_id = $_POST['wp_travel_post_id'];
+		$trip_id = absint( $_POST['wp_travel_post_id'] );
 	} elseif ( isset( $post->ID ) ) {
 		$trip_id = $post->ID;
 	}
