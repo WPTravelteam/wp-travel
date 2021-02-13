@@ -75,7 +75,7 @@ class Wp_Travel_Form_Handler {
 				} else {
 
 					if ( ! empty( $_POST['redirect'] ) ) {
-						$redirect = $_POST['redirect']; // @phpcs:ignore
+						$redirect = wp_validate_redirect( $_POST['redirect'] ); // @phpcs:ignore
 					} elseif ( wp_travel_get_raw_referer() ) {
 						$redirect = wp_travel_get_raw_referer();
 					} else {
@@ -160,7 +160,7 @@ class Wp_Travel_Form_Handler {
 				return;
 			}
 			$user_login = is_email( $_POST['user_login'] ) ? sanitize_email( $_POST['user_login'] ) : sanitize_text_field( $_POST['user_login'] );
-			
+
 			$success = Wp_Travel_User_Account::retrieve_password( $user_login );
 
 			// If successful, redirect to my account with query arg set.
