@@ -355,7 +355,7 @@ class WP_Travel_Cart {
 				}
 				// Custom Trip Price.
 				if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
-					$trip_price = $_REQUEST['trip_price'];
+					$trip_price = floatval( $_REQUEST['trip_price'] );
 				}
 
 				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
@@ -383,7 +383,7 @@ class WP_Travel_Cart {
 				$trip_price = $this->items[ $cart_item_id ]['trip_price'];
 				// Custom Trip Price.
 				if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
-					$trip_price = $_REQUEST['trip_price'];
+					$trip_price = floatval( $_REQUEST['trip_price'] );
 				}
 				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
 					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $category_id, $price_key );
@@ -468,7 +468,7 @@ class WP_Travel_Cart {
 
 	/**
 	 * This will clear discount values. Call this function while add/remove item from cart.
-	 * 
+	 *
 	 * @since WP Travel 4.4.7
 	 */
 	public function clear_discount_values() {

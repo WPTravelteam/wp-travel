@@ -331,7 +331,7 @@ class WP_Travel_Plugin_Updater {
 			wp_die( __( 'You do not have permission to install plugin updates', 'wp-travel' ), __( 'Error', 'wp-travel' ), array( 'response' => 403 ) );
 		}
 
-		$data         = $edd_plugin_data[ $_REQUEST['slug'] ];
+		$data         = $edd_plugin_data[ esc_attr( $_REQUEST['slug'] ) ];
 		$cache_key    = md5( 'edd_plugin_' . sanitize_key( $_REQUEST['plugin'] ) . '_version_info' );
 		$version_info = get_transient( $cache_key );
 

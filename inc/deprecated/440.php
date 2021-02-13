@@ -49,7 +49,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = fal
  */
 function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 	wp_travel_deprecated_function( 'wp_travel_is_trip_price_tax_enabled', '4.4.0', 'WP_Travel_Helpers_Trips::is_tax_enabled()' );
-	
+
 	return WP_Travel_Helpers_Trips::is_tax_enabled();
 }
 
@@ -206,7 +206,7 @@ function wp_travel_booking_form_fields() {
 	}
 	$trip_duration = 1;
 	if ( isset( $_REQUEST['trip_duration'] ) ) {
-		$trip_duration = $_REQUEST['trip_duration'];
+		$trip_duration = esc_attr( $_REQUEST['trip_duration'] );
 	}
 
 	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
@@ -481,7 +481,7 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
  * @return Number
  */
 function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
-	
+
 	$args = array(
 		'trip_id'          => $trip_id,
 		'is_regular_price' => $is_regular_price,
