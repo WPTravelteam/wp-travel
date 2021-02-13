@@ -203,53 +203,6 @@ class Wp_Travel_Extras_Frontend {
 		endif;
 
 	}
-	/**
-	 * Tour extras Cart Block layout
-	 *
-	 * @param int $trip_id
-	 * @return void
-	 */
-	public function wp_travel_tour_extras_cart_block( $trip_id = null ) {
-
-		/**
-		 * Tour Extras Front End extras HTML
-		 */
-		?>
-		<!-- <div class="wp_travel_tour_extras">
-			<h3>Extras:</h3>
-			<div class="wp_travel_tour_extras_content">
-				<div class="wp_travel_tour_extras_option_single">
-					<div class="wp_travel_tour_extras_option_single_content">
-						<div class="wp_travel_tour_extras_option_top">
-							<input id="test_id1" type="checkbox">
-							<label for="test_id1" class="check_icon"></label>
-							<a href="#" class="check_icon"></a>
-							<div class="wp_travel_tour_extras_option_label">
-								<div class="wp_travel_tour_extras_title">
-									<h5>Additional Night</h5>
-								</div>
-								<div class="wp_travel_tour_extras_price">
-									<span>Price:</span>
-									<ins>$5</ins>
-								</div>
-								<div class="wp_travel_tour_extras_quantity">
-									<span>Qty:</span>
-									<input type="number">
-								</div>
-								<div class="wp_travel_tour_extras_total_price">
-									<span>Total:</span>
-									<strong>$5</strong>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<?php
-
-	}
-
 
 }
 
