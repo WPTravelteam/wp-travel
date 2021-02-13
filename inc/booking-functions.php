@@ -354,7 +354,7 @@ function get_booking_chart() {
 								<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ); ?></option>
 
 								<?php foreach ( $country_list as $key => $value ) : ?>
-									<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $selected_country ); ?>>
+									<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $selected_country ); ?>>
 										<?php echo esc_html( $value ); ?>
 									</option>
 								<?php endforeach; ?>
@@ -371,7 +371,7 @@ function get_booking_chart() {
 								?>
 								</option>
 								<?php foreach ( $wp_travel_itinerary_list as $trip_id => $itinerary_name ) : ?>
-									<option value="<?php echo esc_html( $trip_id ); ?>" <?php selected( $wp_travel_post_id, $trip_id ); ?>>
+									<option value="<?php echo esc_attr( $trip_id ); ?>" <?php selected( $wp_travel_post_id, $trip_id ); ?>>
 										<?php echo esc_html( $itinerary_name ); ?>
 									</option>
 								<?php endforeach; ?>
@@ -413,7 +413,7 @@ function get_booking_chart() {
 							<option value=""><?php esc_html_e( 'All Country', 'wp-travel' ); ?></option>
 
 							<?php foreach ( $country_list as $key => $value ) : ?>
-								<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $compare_selected_country ); ?>>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $compare_selected_country ); ?>>
 									<?php echo esc_html( $value ); ?>
 								</option>
 							<?php endforeach; ?>
@@ -430,7 +430,7 @@ function get_booking_chart() {
 							?>
 							</option>
 							<?php foreach ( $wp_travel_itinerary_list as $trip_id => $itinerary_name ) : ?>
-								<option value="<?php echo esc_html( $trip_id ); ?>" <?php selected( $compare_itinerary_post_id, $trip_id ); ?>>
+								<option value="<?php echo esc_attr( $trip_id ); ?>" <?php selected( $compare_itinerary_post_id, $trip_id ); ?>>
 									<?php echo esc_html( $itinerary_name ); ?>
 								</option>
 							<?php endforeach; ?>
@@ -489,7 +489,7 @@ function get_booking_chart() {
 						<h3><?php esc_html_e( 'Compare 2', 'wp-travel' ); ?></h3>
 					</div>
 					<div class="right-block-single">
-						<strong><big><?php echo esc_attr( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
+						<strong><big><?php echo esc_html( wp_travel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
 						<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>
 					</div>
 					<div class="right-block-single">
