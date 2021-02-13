@@ -74,8 +74,8 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 	$pricings_table       = $wpdb->prefix . 'wt_pricings';
 	$price_category_table = $wpdb->prefix . 'wt_price_category_relation';
 
-	$min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
-	$max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
+	// $min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
+	// $max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
 
 	// Join Tables.
 	$join  = ''; // JOIN clause.
@@ -85,8 +85,8 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 
 	// Where clause.
 	$where      = '';
-	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( $_GET['trip_start'] ) : '';
-	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( $_GET['trip_end'] ) : '';
+	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : '';
+	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : '';
 
 		// Filter by date clause.
 	if ( ! empty( $start_date ) || ! empty( $end_date ) ) {
@@ -126,7 +126,7 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
 		$post_clauses['join']    = $post_clauses['join'] . $join;
-		$post_clauses['orderby'] = 'asc' === $_GET['trip_date'] ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
+		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
 	}
 
 	return $post_clauses;
