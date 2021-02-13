@@ -153,7 +153,7 @@ class WP_Travel_Ajax {
 		$pricing_id     = isset( $post_data['pricing_id'] ) ? absint( $post_data['pricing_id'] ) : ''; // @since 3.0.0
 		$arrival_date   = isset( $post_data['arrival_date'] ) ? sanitize_text_field( $post_data['arrival_date'] ) : '';
 		$departure_date = isset( $post_data['departure_date'] ) ? sanitize_text_field( $post_data['departure_date'] ) : ''; // Need to remove. is't post value.
-		$pax            = isset( $post_data['pax'] ) ? (array) absint( $post_data['pax'] ) : 0;
+		$pax            = isset( $post_data['pax'] ) ? (array) wp_travel_sanitize_array( $post_data['pax'] ) : 0;
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
