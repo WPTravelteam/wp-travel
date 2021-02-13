@@ -144,7 +144,7 @@ add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite
 function wp_travel_bank_deposite_content( $booking_id = null, $details = array() ) {
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
-		$booking_id = isset( $_GET['detail_id'] ) ? $_GET['detail_id'] : 0;
+		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;
 	}
 	if ( ! $booking_id ) {
 		return;

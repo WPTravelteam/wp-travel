@@ -25,7 +25,7 @@ class WP_Travel_Ajax_Trip_Pricing_Categories_Taxonomy{
             $error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
             WP_Travel_Helpers_REST_API::response( $error );
         }
-        $category_id = ! empty( $_GET['pricing_category_id'] ) ? $_GET['pricing_category_id'] : 0;
+        $category_id = ! empty( $_GET['pricing_category_id'] ) ? absint( $_GET['pricing_category_id'] ) : 0;
         $response = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( $category_id );
         WP_Travel_Helpers_REST_API::response( $response );
     }

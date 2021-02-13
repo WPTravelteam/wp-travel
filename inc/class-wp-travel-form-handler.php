@@ -228,7 +228,7 @@ class Wp_Travel_Form_Handler {
 
 		if ( WP_Travel::is_page( 'dashboard' ) && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
 
-			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
+			$value = sprintf( '%s:%s', sanitize_text_field( wp_unslash( $_GET['login'] ) ), sanitize_text_field( wp_unslash( $_GET['key'] ) ) );
 
 			Wp_Travel_User_Account::set_reset_password_cookie( $value );
 

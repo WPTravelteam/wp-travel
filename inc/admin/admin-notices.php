@@ -120,11 +120,9 @@ function wp_travel_display_single_pricing_deprecated_notice( $notices ) {
 	$screen  = get_current_screen();
 	$post_id = get_the_ID();
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type && $screen->parent_base == 'edit' && ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) && $post_id ) {
-		if ( $post_id ) {
-			$pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
-			if ( 'single-price' === $pricing_option_type ) {
-				$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'wp-travel' );
-			}
+		$pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
+		if ( 'single-price' === $pricing_option_type ) {
+			$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'wp-travel' );
 		}
 	}
 	return $notices;

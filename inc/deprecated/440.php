@@ -209,7 +209,7 @@ function wp_travel_booking_form_fields() {
 		$trip_duration = $_REQUEST['trip_duration'];
 	}
 
-	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? $_GET['price_key'] : '';
+	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
 
 	// Set Defaults for booking form.
 	$user_fname = '';

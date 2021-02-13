@@ -13,7 +13,7 @@ $back_link   = $detail_link;
 if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	wp_travel_print_notices();
 	// $pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
-	$booking_id    = sanitize_text_field( wp_unslash( $_GET['detail_id'] ) );
+	$booking_id    = absint( $_GET['detail_id'] );
 	$details       = wp_travel_booking_data( $booking_id );
 	$payment_data  = wp_travel_payment_data( $booking_id );
 	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.

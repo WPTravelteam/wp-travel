@@ -161,7 +161,7 @@ class WP_Travel_Default_Form_Fields {
 		// 	}
 		// }
 
-		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? $_GET['price_key'] : '';
+		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
 
 		$booking_fileds = array(
 			'pax'            => array(

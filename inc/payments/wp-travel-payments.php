@@ -598,7 +598,7 @@ function wp_travel_payment_booking_message( $message ) {
 	if ( ! isset( $_GET['booking_id'] ) ) {
 		return $message;
 	}
-	$booking_id = $_GET['booking_id'];
+	$booking_id = absint( $_GET['booking_id'] );
 	if ( isset( $_GET['status'] ) && 'cancel' === $_GET['status'] ) {
 		update_post_meta( $booking_id, 'wp_travel_payment_status', 'canceled' );
 		$message = esc_html__( 'Your booking has been canceled', 'wp-travel' );
