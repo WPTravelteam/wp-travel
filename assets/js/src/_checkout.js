@@ -399,11 +399,11 @@ const wptravelcheckout = (shoppingCart) => {
         if (cartSubtotalContainer)
             cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
 
-        let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
+        // let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
         if (e.detail && e.detail.coupon || wp_travel_cart.cart.coupon && wp_travel_cart.cart.coupon.coupon_id) {
             let coupon = e.detail && e.detail.coupon || wp_travel_cart.cart.coupon
             let _cValue = coupon.value && parseInt(coupon.value) || 0
-            fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
+            // fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
             if (cartDiscountContainer) {
                 cartDiscountContainer.innerHTML = coupon.type == 'fixed' ? '- ' + wp_travel_cart.format(_cValue) : '- ' + wp_travel_cart.format(cartTotal * _cValue / 100)
                 cartDiscountContainer.closest('[data-wpt-extra-field]').removeAttribute('style')
@@ -412,7 +412,7 @@ const wptravelcheckout = (shoppingCart) => {
         }
 
         if( wp_travel_cart.cart.total.discount <= 0 ) {
-            fullTotalContainer.innerHTML = ''
+            // fullTotalContainer.innerHTML = ''
             cartDiscountContainer.closest('[data-wpt-extra-field]').style.display = 'none'
         }
 

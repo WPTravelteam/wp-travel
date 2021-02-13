@@ -19,10 +19,6 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				$trip_id = $post->ID;
 			}
 
-			if ( ! is_singular( WP_TRAVEL_POST_TYPE ) && isset( $_GET['trip_id'] ) ) {
-				$trip_id = absint( $_GET['trip_id'] );
-			}
-
 			$map_data       = get_wp_travel_map_data();
 			$map_zoom_level = $settings['google_map_zoom_level'];
 

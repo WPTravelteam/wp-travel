@@ -388,6 +388,12 @@ class WP_Travel_Admin_Metaboxes {
 	 * @return Mixed
 	 */
 	public function save_meta_data( $trip_id ) {
+		if ( ! isset( $_POST['wp_travel_save_data'] ) ) {
+			return;
+		}
+		if ( ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
+			return;
+		}
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
@@ -428,12 +434,6 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		remove_action( 'save_post', array( $this, 'save_meta_data' ) );
-		if ( ! isset( $_POST['wp_travel_save_data'] ) ) {
-			return;
-		}
-		if ( ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
-			return;
-		}
 
 		$screen = get_current_screen();
 		if ( ! $screen ) { // Quick fixes [ Data override as empty form elementor ].
