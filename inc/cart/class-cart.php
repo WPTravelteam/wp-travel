@@ -660,7 +660,7 @@ class WP_Travel_Cart {
 
 		// Total Calculation.
 		$item_total         = $item['trip_price'];
-		$item_total_partial = $item['trip_price_partial'];
+		$item_total_partial = isset( $item['trip_price_partial'] ) ? $item['trip_price_partial'] : $item['trip_price']; // quick fix.
 		if ( isset( $trip_extras ) && ! empty( $trip_extras ) && isset( $trip_extras['id'] ) && is_array( $trip_extras['id'] ) ) {
 			foreach ( $trip_extras['id'] as $k => $e_id ) {
 				$trip_extras_data = get_post_meta( $e_id, 'wp_travel_tour_extras_metas', true );
