@@ -608,7 +608,7 @@ function wp_travel_publish_metabox() {
 			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
 			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
 			<?php foreach ( $status as $value => $st ) : ?>
-				<option value="<?php echo esc_html( $value ); ?>" <?php selected( $value, $label_key ); ?>>
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $value, $label_key ); ?>>
 					<?php echo esc_html( $status[ $value ]['text'] ); ?>
 				</option>
 			<?php endforeach; ?>
@@ -684,10 +684,10 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 				update_post_meta( $payment_id, 'wp_travel_payment_status', $label_key );
 			}
 			$status = wp_travel_get_payment_status();
-			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_html( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
 		case 'payment_mode':
-			echo '<span >' . esc_attr( $payment_info['payment_mode'] ) . '</span>';
+			echo '<span >' . esc_html( $payment_info['payment_mode'] ) . '</span>';
 			break;
 		default:
 			break;
