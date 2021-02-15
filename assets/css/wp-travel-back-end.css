@@ -4980,6 +4980,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   text-transform: uppercase;
   box-shadow: none;
 }
+.wti__icon_select_modal .wti__insert_icon .components-button:hover, .wti__icon_select_modal .wti__insert_icon .components-button:focus {
+  color: #fff;
+  background-color: #12c52a;
+  box-shadow: none;
+}
+.wti__icon_select_modal .wti__insert_icon .components-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
 
 .form-table .checkbox-default-design label {
   margin-right: -15px;

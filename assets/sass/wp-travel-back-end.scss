@@ -1876,6 +1876,15 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
             line-height: 15px;
             text-transform: uppercase;
             box-shadow: none;
+            &:hover,&:focus{
+                color:#fff;
+                background-color: #12c52a;
+                box-shadow: none;
+            }
+            &:disabled{
+                cursor: not-allowed;
+                opacity: 0.4;
+            }
         }
     }
 }
