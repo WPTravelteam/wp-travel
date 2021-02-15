@@ -95,10 +95,12 @@ export default () => {
     let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     //Listing fontawesome icon in fontawesome tab content.
-    
+
 
     // Fontawesome Icon Content.
     const fontawesomeIconContent = (props) => {
+
+        sessionStorage.setItem('WPTravelLastSelectedTab', 'fontawesome-icon');
 
         const [fontAwesomeIcons, setFontAwesomeIcons] = useState(faIcons);
 
@@ -206,6 +208,7 @@ export default () => {
     // Icon Class Content.
     const iconClassContent = (props) => {
         const [ iconClassName, setIconClassName ] = useState(props.fact.icon);
+        sessionStorage.setItem('WPTravelLastSelectedTab', 'icon-class');
         return <>
         <PanelRow>
             <label>{__( 'Icon Class', 'wp-travel' )}</label>
@@ -222,59 +225,67 @@ export default () => {
 
     // Custom Upload Content.
     const customUploadContent = (props) => {
-        const [{ imageUrl, isFetchingImage, iconImg }, setState] = useState({
+        sessionStorage.setItem('WPTravelLastSelectedTab', 'custom-upload');
+
+        const [{ imageUrl, isFetchingImage }, setState] = useState({
             imageUrl: null,
             isFetchingImage: false,
-            iconImg: ''
         })
-        const logoId = iconImg
 
         const mediaInstance = wp.media({
             multiple: false
         })
 
         useEffect(() => {
-            if (logoId && !imageUrl) {
-                setState(state => ({
-                    ...state,
+            
+            if ( '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
+                setState({
                     isFetchingImage: true
-                }))
-                logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
-                    .then((res) => {
-                        setState({
-                            imageUrl: res.source_url,
-                            isFetchingImage: false
-                        })
-                    })
-                }
-        }, [logoId])
+                });
+                
+                const imgDataString = sessionStorage.getItem('wpTravelIconModuleUploaderData');
+                const imgData = JSON.parse(imgDataString);
+    
+                const [ imgDataObj ] = imgData;
+    
+                const { url } = imgDataObj;
+    
+                setState({
+                    imageUrl: url,
+                    isFetchingImage: false,
+                })
+            }
+
+            return () => {
+                sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
+            }
+        }, []);
 
         mediaInstance
             .on('select', () => {
                 const selectedItems = mediaInstance.state().get('selection').toJSON()
-                console.log(selectedItems);
                 if ( selectedItems.length > 0 ) {
-                    let invoiceLogoID = selectedItems[0].id
-                    setState({
-                        imageUrl: null,
-                        isFetchingImage: true,
-                        iconImg: invoiceLogoID.toString()
-                    })
-                    // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
-                    // updateSettings({
-                    //     ...allData,
-                    //     invoice_logo: invoiceLogoID.toString()
-                    // })
+
+                    sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
+                    sessionStorage.setItem('wpTravelIconModuleUploaderData', JSON.stringify(selectedItems));
+
                     // updateFact( 'icon_img', invoiceLogoID.toString(), props.index )
                 }
+                setOpen(true);
             })
+
+            const onMediaUploaderBtnClicked = () => {
+                mediaInstance.open();
+            }
+
             return <>
             <PanelRow>
+                <h3>Icon</h3>
                 <div className="wp-travel-field-value">
                     <div className="media-preview">
                         {isFetchingImage && <Spinner />}
-                        {imageUrl && <img src={imageUrl} height="100" width="50%" />}
-                        <Button isPrimary onClick={() => mediaInstance.open()}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                        {imageUrl && <img src={imageUrl} height="100" width="20%" />}
+                        <Button isPrimary onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
                     </div>
                 </div>
             </PanelRow>
@@ -415,13 +426,14 @@ export default () => {
                                         <label>{__( 'Icon', 'wp-travel' )}</label>
                                         <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         { isOpen && (
-                                            <Modal className="wti__icon_select_modal"
+                                            <Modal key={index} className="wti__icon_select_modal"
                                                 title={<><i className="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
                                                 onRequestClose={ closeModal }>
                                                 <TabPanel className="my-tab-panel"
                                                     activeClass="active-tab"
-                                                    initialTabName="icon-class"
+                                                    initialTabName= {sessionStorage.getItem('WPTravelLastSelectedTab') ? sessionStorage.getItem('WPTravelLastSelectedTab'): "icon-class"}
                                                     onSelect={ () => false }
+                                                    isDismissible={false}
                                                     tabs={ [
                                                             {
                                                             name: 'fontawesome-icon',
@@ -447,8 +459,8 @@ export default () => {
                                                     }
                                                 </TabPanel>
                                                 <div className="wti__insert_icon">
-                                                    <Button 
-                                                    isSecondary 
+                                                    <Button
+                                                    isSecondary
                                                     onClick={ closeModal }
                                                     >
                                                         {__( 'Insert', 'wp-travel' )}
