@@ -286,14 +286,19 @@ function wp_travel_get_dropdown_list( $args = array() ) {
 }
 
 function wp_travel_sanitize_array( $array ) {
-	foreach ( $array as $k => $value ) {
-		if ( is_array( $value ) ) {
-			wp_travel_sanitize_array( $value );
-		} else {
-			return sanitize_text_field( $value );
+	if ( is_string( $array ) ) {
+		$array = sanitize_text_field( $array );
+	} elseif ( is_array( $array ) ) {
+		foreach ( $array as $key => &$value ) {
+			if ( is_array( $value ) ) {
+				$value = wp_travel_sanitize_array( $value );
+			} else {
+				$value = sanitize_text_field( $value );
+			}
 		}
 	}
-	return false;
+
+    return $array;
 }
 
 /**
@@ -594,6 +599,13 @@ function wp_travel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @since  1.0.2
  */
 function wp_travel_search_form() {
+
+	$submission_get = array();
+
+	if ( isset( $_GET['__wp_travel_search_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['__wp_travel_search_nonce'] ) ), '__wp_travel_search_nonce_action' ) ) {
+		$submission_get = wp_travel_sanitize_array( wp_unslash( $_GET ) );
+	}
+
 	$label_string = apply_filters(
 		'wp_travel_search_filter_label_strings',
 		array(
@@ -615,7 +627,8 @@ function wp_travel_search_form() {
 			<p>
 				<label><?php echo esc_html( $search_string ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
-				<input type="text" name="s" id="s" value="<?php echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+				<!-- <input type="text" name="s" id="s" value="<?php // echo ( isset( $_GET['s'] ) ) ? esc_textarea( $_GET['s'] ) : ''; ?>" placeholder="<?php // echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>"> -->
+				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
 			<p>
 				<label><?php echo esc_html( $trip_type_string ); ?></label>
@@ -629,7 +642,7 @@ function wp_travel_search_form() {
 					'name'            => $taxonomy,
 					'class'           => 'wp-travel-taxonomy',
 					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
 					'value_field'     => 'slug',
 				);
 
@@ -648,7 +661,7 @@ function wp_travel_search_form() {
 					'name'            => $taxonomy,
 					'class'           => 'wp-travel-taxonomy',
 					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $_GET[ $taxonomy ] ) ) ? esc_textarea( $_GET[ $taxonomy ] ) : 0,
+					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
 					'value_field'     => 'slug',
 				);
 
@@ -656,7 +669,9 @@ function wp_travel_search_form() {
 				?>
 			</p>
 
-			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php echo esc_html( $search_button_string ); ?>"  /></p>
+			<?php wp_nonce_field( '_wp_travel_search_nonce_action', '_wp_travel_search_nonce' ); ?>
+
+			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
 		</form>
 	</div>
 	<?php
@@ -1378,10 +1393,10 @@ function wp_travel_get_raw_referer() {
 		return wp_get_raw_referer();
 	}
 
-	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) {
-		return wp_unslash( $_REQUEST['_wp_http_referer'] );
+	if ( ! empty( $_REQUEST['_wp_http_referer'] ) ) { // @phpcs:ignore
+		return wp_travel_sanitize_array( wp_unslash( $_REQUEST['_wp_http_referer'] ) ); // @phpcs:ignore
 	} elseif ( ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-		return wp_unslash( $_SERVER['HTTP_REFERER'] );
+		return wp_travel_sanitize_array( wp_unslash( $_SERVER['HTTP_REFERER'] ) ); // @phpcs:ignore
 	}
 
 	return false;
@@ -2337,7 +2352,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 												<span class="my-order-tail">
 													<?php if ( ! empty( $order_detail['trip'] ) ) : ?>
 														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) : ?>
-															<span class="my-order-price-detail">(<?php echo esc_attr( $trip['pax'] ) . ' x ' . wp_travel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
+															<span class="my-order-price-detail">(<?php echo esc_html( $trip['pax'] ) . ' x ' . wp_travel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
 														<?php endforeach; ?>
 													<?php endif; ?>
 													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total, false, '', $booking_id ); ?></span>
@@ -2356,7 +2371,7 @@ function wp_travel_view_booking_details_table( $booking_id, $hide_payment_column
 											<div class="my-order-price-breakdown-base-price">
 												<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
 												<span class="my-order-tail">
-													<span class="my-order-price-detail">(<?php echo esc_attr( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price, false, '', $booking_id ); ?>) </span>
+													<span class="my-order-price-detail">(<?php echo esc_html( $pax ) . ' x ' . wp_travel_get_formated_price_currency( $trip_price, false, '', $booking_id ); ?>) </span>
 													<span class="my-order-price"><?php echo wp_travel_get_formated_price_currency( $total, false, '', $booking_id ); ?></span>
 												</span>
 											</div>
@@ -2486,7 +2501,7 @@ function wp_travel_view_payment_details_table( $booking_id ) {
 							if ( 'bank_deposit' === $payment_args['payment_method'] ) {
 								$txn_id = get_post_meta( $payment_args['payment_id'], 'txn_id', true );
 								if ( ! empty( $txt_id ) ) {
-									echo ' / ' . $txt_id;
+									echo ' / ' . esc_html( $txt_id );
 								}
 							}
 							?>
@@ -2787,7 +2802,7 @@ function wp_travel_get_bank_deposit_account_table( $show_description = true ) {
 
 		if ( ! empty( $wp_travel_bank_deposit_description ) && true == $show_description ) :
 			?>
-			<p class="description"><?php echo $wp_travel_bank_deposit_description; ?></p>
+			<p class="description"><?php echo esc_html( $wp_travel_bank_deposit_description ); ?></p>
 		<?php endif; ?>
 
 		<table width="100%">
@@ -3327,7 +3342,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 	// Fixed Departures
 	$fixed_departure         = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 	$multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
-	// $available_trip_dates    = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 	if ( ! empty( $days ) ) {
 		$trip_duration['days']  = $days;
 		$trip_duration['night'] = $night;
@@ -3342,8 +3356,6 @@ function wp_travel_get_trip_pricing_option( $trip_id = null ) {
 
 		if ( $switch_to_react ) {
 			$pricing_options = wp_travel_get_trip_pricings_with_dates( $trip_id );
-			// $pricing_options = $trip_pricings_and_date['pricings'];
-			// $pricing_options = $trip_pricings_and_date['dates'];
 		} else { // Our tradition before < 4.0.0
 			// Price.
 			$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );

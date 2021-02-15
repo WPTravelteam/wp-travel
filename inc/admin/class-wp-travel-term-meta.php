@@ -58,7 +58,9 @@ class WP_TRAVEL_TERM_META {
 	* Add a form field in the new category page
 	* @since 1.6.3
 	*/
-	public function add_category_image ( $taxonomy ) { ?>
+	public function add_category_image ( $taxonomy ) { 
+		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+		?>
 	<div class="form-field term-group">
 		<label for="category-image-id"><?php _e('Image', 'wp-travel'); ?></label>
 		<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" class="custom_media_url" value="">
@@ -76,8 +78,15 @@ class WP_TRAVEL_TERM_META {
 	* @since 1.6.3
 	*/
 	public function save_category_image ( $term_id, $tt_id ) {
+		if ( ! isset( $_POST['wp_travel_security'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+			return;
+		}
+
 		if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
-			$image = $_POST['wp_travel_trip_type_image_id'];
+			$image = absint( $_POST['wp_travel_trip_type_image_id'] );
 			add_term_meta( $term_id, 'wp_travel_trip_type_image_id', $image );
 		}
 	}
@@ -86,26 +95,28 @@ class WP_TRAVEL_TERM_META {
 	* Edit the form field
 	* @since 1.6.3
 	*/
-	public function update_category_image ( $term, $taxonomy ) { ?>
-	<tr class="form-field term-group-wrap">
-		<th scope="row">
-		<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
-		</th>
-		<td>
-		<?php $image_id = get_term_meta ( $term ->term_id, 'wp_travel_trip_type_image_id', true ); ?>
-		<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" value="<?php echo $image_id; ?>">
-		<div id="category-image-wrapper">
-			<?php if ( $image_id ) { ?>
-			<?php echo wp_get_attachment_image ( $image_id, 'thumbnail' ); ?>
-			<?php } ?>
-		</div>
-		<p>
-			<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
-			<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
-		</p>
-		</td>
-	</tr>
-	<?php
+	public function update_category_image ( $term, $taxonomy ) { 
+		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+		?>
+		<tr class="form-field term-group-wrap">
+			<th scope="row">
+			<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
+			</th>
+			<td>
+			<?php $image_id = get_term_meta ( $term ->term_id, 'wp_travel_trip_type_image_id', true ); ?>
+			<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" value="<?php echo $image_id; ?>">
+			<div id="category-image-wrapper">
+				<?php if ( $image_id ) { ?>
+				<?php echo wp_get_attachment_image ( $image_id, 'thumbnail' ); ?>
+				<?php } ?>
+			</div>
+			<p>
+				<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
+				<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
+			</p>
+			</td>
+		</tr>
+		<?php
 	}
 
 	/*
@@ -113,8 +124,15 @@ class WP_TRAVEL_TERM_META {
 	* @since 1.6.3
 	*/
 	public function updated_category_image ( $term_id, $tt_id ) {
+
+		if ( ! isset( $_POST['wp_travel_security'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+			return;
+		}
 		if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
-			$image = $_POST['wp_travel_trip_type_image_id'];
+			$image = absint( $_POST['wp_travel_trip_type_image_id'] );
 			update_term_meta ( $term_id, 'wp_travel_trip_type_image_id', $image );
 		} else {
 			update_term_meta ( $term_id, 'wp_travel_trip_type_image_id', '' );

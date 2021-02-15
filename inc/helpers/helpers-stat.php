@@ -27,20 +27,20 @@ function wp_travel_get_booking_data() {
 
 	$from_date = '';
 	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
-		$from_date = $_REQUEST['booking_stat_from'];
+		$from_date = esc_attr( $_REQUEST['booking_stat_from'] );
 	}
 	$to_date = '';
 	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
-		$to_date = $_REQUEST['booking_stat_to'] . ' 23:59:59';
+		$to_date = esc_attr( $_REQUEST['booking_stat_to'] ) . ' 23:59:59';
 	}
 	$country = '';
 	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
-		$country = $_REQUEST['booking_country'];
+		$country = esc_attr( $_REQUEST['booking_country'] );
 	}
 
 	$itinerary = '';
 	if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
-		$itinerary = $_REQUEST['booking_itinerary'];
+		$itinerary = esc_attr( $_REQUEST['booking_itinerary'] );
 	}
 
 	// Stat Data Array
@@ -240,20 +240,20 @@ function wp_travel_get_booking_data() {
 
 		$compare_from_date = '';
 		if ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) {
-			$compare_from_date = $_REQUEST['compare_stat_from'];
+			$compare_from_date = esc_attr( $_REQUEST['compare_stat_from'] );
 		}
 		$compare_to_date = '';
 		if ( isset( $_REQUEST['compare_stat_to'] ) && '' !== $_REQUEST['compare_stat_to'] ) {
-			$compare_to_date = $_REQUEST['compare_stat_to'] . ' 23:59:59';
+			$compare_to_date = esc_attr( $_REQUEST['compare_stat_to'] ) . ' 23:59:59';
 		}
 		$compare_country = '';
 		if ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) {
-			$compare_country = $_REQUEST['compare_country'];
+			$compare_country = esc_attr( $_REQUEST['compare_country'] );
 		}
 
 		$compare_itinerary = '';
 		if ( isset( $_REQUEST['compare_itinerary'] ) && '' !== $_REQUEST['compare_itinerary'] ) {
-			$compare_itinerary = $_REQUEST['compare_itinerary'];
+			$compare_itinerary = esc_attr( $_REQUEST['compare_itinerary'] );
 		}
 
 		// Setting conditions.

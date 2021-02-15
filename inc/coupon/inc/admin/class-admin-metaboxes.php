@@ -94,7 +94,12 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 * Save Coupons Metabox Data
 	 */
 	public function save_coupons_metabox_data( $post_id ) {
-
+		if ( ! isset( $_POST['wp_travel_security'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+			return;
+		}
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
@@ -115,7 +120,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_coupon_code'] ) && ! empty( $_POST['wp_travel_coupon_code'] ) ) {
 
-			$coupon_code = $_POST['wp_travel_coupon_code'];
+			$coupon_code = sanitize_text_field( $_POST['wp_travel_coupon_code'] );
 
 			update_post_meta( $post_id, 'wp_travel_coupon_code', $coupon_code );
 

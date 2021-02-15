@@ -41,8 +41,8 @@ jQuery(document).ready(function ($) {
         cart_fields[filterby] = filterby_val;
       }
     });
-    cart_fields['action'] = 'wt_add_to_cart'; // cart_fields['nonce'] =  'wt_add_to_cart_nonce';
-
+    cart_fields['action'] = 'wt_add_to_cart';
+    cart_fields['_nonce'] = wp_travel._nonce;
     $.ajax({
       type: "POST",
       url: wp_travel.ajaxUrl,
@@ -115,8 +115,7 @@ jQuery(document).ready(function ($) {
       }
 
       update_cart_fields[i] = update_cart_field;
-    }); // console.log( update_cart_fields );
-
+    });
     $.ajax({
       type: "POST",
       url: wp_travel.ajaxUrl,
@@ -413,15 +412,13 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       tripTotalPartialWOExtras += totals.tripTotalPartialWOExtras;
       txTotal += totals.extrasTotal;
     });
-    if (cartSubtotalContainer) cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal);
-    var fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]');
+    if (cartSubtotalContainer) cartSubtotalContainer.innerHTML = wp_travel_cart.format(cartTotal); // let fullTotalContainer = e.target.querySelector('[data-wpt-cart-full-total]')
 
     if (e.detail && e.detail.coupon || wp_travel_cart.cart.coupon && wp_travel_cart.cart.coupon.coupon_id) {
       var coupon = e.detail && e.detail.coupon || wp_travel_cart.cart.coupon;
 
-      var _cValue = coupon.value && parseInt(coupon.value) || 0;
+      var _cValue = coupon.value && parseInt(coupon.value) || 0; // fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal)
 
-      fullTotalContainer.innerHTML = wp_travel_cart.format(cartTotal);
 
       if (cartDiscountContainer) {
         cartDiscountContainer.innerHTML = coupon.type == 'fixed' ? '- ' + wp_travel_cart.format(_cValue) : '- ' + wp_travel_cart.format(cartTotal * _cValue / 100);
@@ -432,7 +429,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
     }
 
     if (wp_travel_cart.cart.total.discount <= 0) {
-      fullTotalContainer.innerHTML = '';
+      // fullTotalContainer.innerHTML = ''
       cartDiscountContainer.closest('[data-wpt-extra-field]').style.display = 'none';
     }
 
@@ -746,7 +743,6 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       }).then(function (res) {
         return res.json();
       }).then(function (result) {
-        console.log(result);
         toggleCartLoader();
 
         if (result.success) {

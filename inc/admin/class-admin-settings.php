@@ -210,8 +210,8 @@ class WP_Travel_Admin_Settings {
 	 */
 	public function save_settings() {
 		if ( isset( $_POST['save_settings_button'] ) ) {
-			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
+			$current_tab = isset( $_POST['current_tab'] ) ? sanitize_text_field( wp_unslash( $_POST['current_tab'] ) ) : '';
 			// Getting saved settings first.
 			$settings        = wp_travel_get_settings();
 			$settings_fields = array_keys( wp_travel_settings_default_fields() );
@@ -224,7 +224,7 @@ class WP_Travel_Admin_Settings {
 					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id', 'thank_you_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
-						$page_id = $_POST[ $settings_field ];
+						$page_id = absint( $_POST[ $settings_field ] );
 						/**
 						 * @since 3.1.8 WPML configuration.
 						 */
@@ -243,31 +243,31 @@ class WP_Travel_Admin_Settings {
 			// Email Templates
 			// Booking Admin Email Settings.
 			if ( isset( $_POST['booking_admin_template_settings'] ) && '' !== $_POST['booking_admin_template_settings'] ) {
-				$settings['booking_admin_template_settings'] = stripslashes_deep( $_POST['booking_admin_template_settings'] );
+				$settings['booking_admin_template_settings'] = wp_kses_post( stripslashes_deep( $_POST['booking_admin_template_settings'] ) );
 			}
 
 			// Booking Client Email Settings.
 			if ( isset( $_POST['booking_client_template_settings'] ) && '' !== $_POST['booking_client_template_settings'] ) {
-				$settings['booking_client_template_settings'] = stripslashes_deep( $_POST['booking_client_template_settings'] );
+				$settings['booking_client_template_settings'] = wp_kses_post( stripslashes_deep( $_POST['booking_client_template_settings'] ) );
 			}
 
 			// Payment Admin Email Settings.
 			if ( isset( $_POST['payment_admin_template_settings'] ) && '' !== $_POST['payment_admin_template_settings'] ) {
-				$settings['payment_admin_template_settings'] = stripslashes_deep( $_POST['payment_admin_template_settings'] );
+				$settings['payment_admin_template_settings'] = wp_kses_post( stripslashes_deep( $_POST['payment_admin_template_settings'] ) );
 			}
 
 			// Payment Client Email Settings.
 			if ( isset( $_POST['payment_client_template_settings'] ) && '' !== $_POST['payment_client_template_settings'] ) {
-				$settings['payment_client_template_settings'] = stripslashes_deep( $_POST['payment_client_template_settings'] );
+				$settings['payment_client_template_settings'] = wp_kses_post( stripslashes_deep( $_POST['payment_client_template_settings'] ) );
 			}
 
 			// Enquiry Admin Email Settings.
 			if ( isset( $_POST['enquiry_admin_template_settings'] ) && '' !== $_POST['enquiry_admin_template_settings'] ) {
-				$settings['enquiry_admin_template_settings'] = stripslashes_deep( $_POST['enquiry_admin_template_settings'] );
+				$settings['enquiry_admin_template_settings'] = wp_kses_post( stripslashes_deep( $_POST['enquiry_admin_template_settings'] ) );
 			}
 
 			// Trip Fact.
-			$indexed = $_POST['wp_travel_trip_facts_settings'];
+			$indexed = wp_kses_post( $_POST['wp_travel_trip_facts_settings'] );
 			if ( array_key_exists( '$index', $indexed ) ) {
 				unset( $indexed['$index'] );
 			}

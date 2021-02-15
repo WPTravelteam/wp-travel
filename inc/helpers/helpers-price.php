@@ -469,7 +469,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 
 				foreach ( $pricing_data as $p_ky => $pricing ) :
 					// Product Metas.
-					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? $_REQUEST['arrival_date'] : '';
+					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? esc_attr( $_REQUEST['arrival_date'] ) : '';
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
 					// $pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
 					$max_available = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
@@ -525,7 +525,6 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 		);
 
 		$response = WP_Travel_Helpers_Inventory::get_inventory( $args );
-		// error_log( print_r( $response, true ) );
 		if ( is_array( $response ) && isset( $response[ 'code' ] ) && 'WP_TRAVEL_INVENTORY_INFO' === $response[ 'code' ] ) {
 			$available_pax = $response['inventory'][0]['pax_available'];
 		}

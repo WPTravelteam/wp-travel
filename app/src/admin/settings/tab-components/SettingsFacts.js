@@ -11,11 +11,6 @@ import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
 
-    const [{ imageUrl, isFetchingImage }, setState] = useState({
-        imageUrl: null,
-        isFetchingImage: false
-    })
-
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
@@ -210,9 +205,7 @@ export default () => {
 
     // Icon Class Content.
     const iconClassContent = (props) => {
-
-        const [ iconClassName, setIconClassName ] = useState('');
-
+        const [ iconClassName, setIconClassName ] = useState(props.fact.icon);
         return <>
         <PanelRow>
             <label>{__( 'Icon Class', 'wp-travel' )}</label>
@@ -220,11 +213,72 @@ export default () => {
                 placeholder={__( 'icon', 'wp-travel' )}
                 value={iconClassName}
                 onChange={(value) => {
-                    updateFact( 'icon', value, props.index )
+                    setIconClassName(value);
                 }}
             />
         </PanelRow>
         </>
+    }
+
+    // Custom Upload Content.
+    const customUploadContent = (props) => {
+        const [{ imageUrl, isFetchingImage, iconImg }, setState] = useState({
+            imageUrl: null,
+            isFetchingImage: false,
+            iconImg: ''
+        })
+        const logoId = iconImg
+
+        const mediaInstance = wp.media({
+            multiple: false
+        })
+
+        useEffect(() => {
+            if (logoId && !imageUrl) {
+                setState(state => ({
+                    ...state,
+                    isFetchingImage: true
+                }))
+                logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
+                    .then((res) => {
+                        setState({
+                            imageUrl: res.source_url,
+                            isFetchingImage: false
+                        })
+                    })
+                }
+        }, [logoId])
+
+        mediaInstance
+            .on('select', () => {
+                const selectedItems = mediaInstance.state().get('selection').toJSON()
+                console.log(selectedItems);
+                if ( selectedItems.length > 0 ) {
+                    let invoiceLogoID = selectedItems[0].id
+                    setState({
+                        imageUrl: null,
+                        isFetchingImage: true,
+                        iconImg: invoiceLogoID.toString()
+                    })
+                    // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
+                    // updateSettings({
+                    //     ...allData,
+                    //     invoice_logo: invoiceLogoID.toString()
+                    // })
+                    // updateFact( 'icon_img', invoiceLogoID.toString(), props.index )
+                }
+            })
+            return <>
+            <PanelRow>
+                <div className="wp-travel-field-value">
+                    <div className="media-preview">
+                        {isFetchingImage && <Spinner />}
+                        {imageUrl && <img src={imageUrl} height="100" width="50%" />}
+                        <Button isPrimary onClick={() => mediaInstance.open()}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                    </div>
+                </div>
+            </PanelRow>
+            </>
     }
 
     let FieldTypeContent = ( props  ) => {
@@ -303,49 +357,10 @@ export default () => {
                         <>
                             {wp_travel_trip_facts_settings.map( ( fact, index) =>{
 
-                                // const logoId = fact.icon_img
-
-                                // const mediaInstance = wp.media({
-                                //     multiple: false
-                                // })
-
-                                // useEffect(() => {
-                                //     if (logoId && !imageUrl) {
-                                //         setState(state => ({
-                                //             ...state,
-                                //             isFetchingImage: true
-                                //         }))
-                                //         logoId && apiFetch({ path: `/wp/v2/media/${logoId}` })
-                                //             .then((res) => {
-                                //                 setState({
-                                //                     imageUrl: res.source_url,
-                                //                     isFetchingImage: false
-                                //                 })
-                                //             })
-                                //         }
-                                // }, [logoId])
-
-                                // mediaInstance
-                                //     .on('select', () => {
-                                //         const selectedItems = mediaInstance.state().get('selection').toJSON()
-                                //         if ( selectedItems.length > 0 ) {
-                                //             let invoiceLogoID = selectedItems[0].id
-                                //             setState({
-                                //                 imageUrl: null,
-                                //                 isFetchingImage: true
-                                //             })
-                                //             // updateIconImgData( 'fact', 'icon_img', invoiceLogoID.toString() )
-                                //             // updateSettings({
-                                //             //     ...allData,
-                                //             //     invoice_logo: invoiceLogoID.toString()
-                                //             // })
-                                //             updateFact( 'icon_img', invoiceLogoID.toString(), index )
-                                //         }
-                                //     })
                                 // let selectedFactOptions = factOptions.filter( opt => { return opt.value == fact.type } )
                                 let selectedAddIcons = 'undefined' != typeof wp_travel_trip_facts_settings ? iconOptions.filter( opt => { return opt.value == fact.icon } ) : []
                                 let selectedIconType = iconTypeOptions.filter( opt => { return opt.value == fact.icon_type } )
-                                return <PanelBody
+                                return <PanelBody key={index}
                                     title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
                                     initialOpen={false}
                                     >
@@ -424,6 +439,7 @@ export default () => {
                                                             name: 'custom-upload',
                                                             title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
                                                             className: 'wti__custom_upload',
+                                                            content: customUploadContent
                                                         },
                                                     ] }>
                                                     {
@@ -431,7 +447,10 @@ export default () => {
                                                     }
                                                 </TabPanel>
                                                 <div className="wti__insert_icon">
-                                                    <Button isSecondary onClick={ closeModal }>
+                                                    <Button 
+                                                    isSecondary 
+                                                    onClick={ closeModal }
+                                                    >
                                                         {__( 'Insert', 'wp-travel' )}
                                                     </Button>
                                                 </div>

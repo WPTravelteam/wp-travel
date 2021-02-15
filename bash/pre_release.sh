@@ -31,23 +31,23 @@ if [ $1 ]; then
   echo "Push tag"
   git push origin $VERSION
   echo "*********************************"
-  
+
   echo "Checkout to master"
   #git checkout master
   echo "*********************************"
-  
+
   echo "Pull master"
   #git pull origin master
   echo "*********************************"
-  
+
   echo "Merge with dev"
   #git merge dev
   echo "*********************************"
-  
+
   echo "Push master"
   #git push origin master
   echo "*********************************"
-  
+
   echo "Checkout dev"
   #git checkout dev
   echo "*********************************"

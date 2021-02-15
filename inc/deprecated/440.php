@@ -49,7 +49,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = fal
  */
 function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 	wp_travel_deprecated_function( 'wp_travel_is_trip_price_tax_enabled', '4.4.0', 'WP_Travel_Helpers_Trips::is_tax_enabled()' );
-	
+
 	return WP_Travel_Helpers_Trips::is_tax_enabled();
 }
 
@@ -71,15 +71,21 @@ function wp_travel_is_taxable() {
  * @return HTML [description]
  */
 function wp_travel_get_booking_form() {
+	if ( ! isset( $_POST['wp_travel_security'] ) ) {
+		return;
+	}
+	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		return;
+	}
 	// No suggested alternative function.
 	wp_travel_deprecated_function( 'wp_travel_get_booking_form', '4.4.0' );
 	global $post;
 	$trip_id = 0;
 	$settings = wp_travel_get_settings();
 	if ( isset( $_REQUEST['trip_id'] ) ) {
-		$trip_id = $_REQUEST['trip_id'];
+		$trip_id = absint( $_REQUEST['trip_id'] );
 	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
-		$trip_id = $_POST['wp_travel_post_id'];
+		$trip_id = absint( $_POST['wp_travel_post_id'] );
 	} elseif ( isset( $post->ID ) ) {
 		$trip_id = $post->ID;
 	}
@@ -200,10 +206,10 @@ function wp_travel_booking_form_fields() {
 	}
 	$trip_duration = 1;
 	if ( isset( $_REQUEST['trip_duration'] ) ) {
-		$trip_duration = $_REQUEST['trip_duration'];
+		$trip_duration = esc_attr( $_REQUEST['trip_duration'] );
 	}
 
-	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? $_GET['price_key'] : '';
+	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
 
 	// Set Defaults for booking form.
 	$user_fname = '';
@@ -475,7 +481,7 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
  * @return Number
  */
 function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
-	
+
 	$args = array(
 		'trip_id'          => $trip_id,
 		'is_regular_price' => $is_regular_price,

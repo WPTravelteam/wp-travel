@@ -295,16 +295,26 @@ function wp_travel_update_payment_status_admin( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		return;
+	}
 	$payment_id = wp_travel_get_payment_id( $booking_id );
 
 	if ( $payment_id ) {
-		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? $_POST['wp_travel_payment_status'] : 'N/A';
+		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( $_POST['wp_travel_payment_status'] ) : 'N/A';
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $payment_status );
 	}
 }
 
 function wp_travel_update_payment_status_booking_process_frontend( $booking_id ) {
 	if ( ! $booking_id ) {
+		return;
+	}
+
+	if (
+		! isset( $_POST['wp_travel_security'] )
+		|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+		) {
 		return;
 	}
 	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
@@ -327,20 +337,20 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 		if ( isset( $booking_field_list['payment_fields'][ $field_list ]['name'] ) ) {
 			$meta_field = $booking_field_list['payment_fields'][ $field_list ]['name'];
 			if ( isset( $_POST[ $meta_field ] ) ) {
-				$meta_value = $_POST[ $meta_field ];
+				$meta_value = $_POST[ $meta_field ]; //@phpcs:ignore
 				if ( 'wp_travel_payment_amount' === $meta_field ) {
 					continue;
 				}
 
 				if ( 'wp_travel_trip_price' === $meta_field ) {
 
-					$itinery_id     = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
+					$itinery_id     = isset( $_POST['wp_travel_post_id'] ) ? absint( $_POST['wp_travel_post_id'] ) : 0;
 					$price_per_text = wp_travel_get_price_per_text( $itinery_id );
 					if ( isset( $_POST['wp_travel_pax'] ) && 'person' === strtolower( $price_per_text ) ) {
-						$meta_value *= $_POST['wp_travel_pax'];
+						$meta_value *= absint( $_POST['wp_travel_pax'] );
 					}
 				}
-				update_post_meta( $payment_id, $meta_field, $meta_value );
+				update_post_meta( $payment_id, $meta_field, sanitize_text_field( $meta_value ) );
 			}
 		}
 	}
@@ -588,7 +598,7 @@ function wp_travel_payment_booking_message( $message ) {
 	if ( ! isset( $_GET['booking_id'] ) ) {
 		return $message;
 	}
-	$booking_id = $_GET['booking_id'];
+	$booking_id = absint( $_GET['booking_id'] );
 	if ( isset( $_GET['status'] ) && 'cancel' === $_GET['status'] ) {
 		update_post_meta( $booking_id, 'wp_travel_payment_status', 'canceled' );
 		$message = esc_html__( 'Your booking has been canceled', 'wp-travel' );

@@ -40,7 +40,7 @@ class WP_Travel_Ajax_Trips {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$trip_id   = ! empty( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+		$trip_id   = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
 		$post_type = get_post_type_object( WP_TRAVEL_POST_TYPE );
 
 		if ( ! current_user_can( $post_type->cap->edit_post, $trip_id ) ) {
@@ -49,7 +49,7 @@ class WP_Travel_Ajax_Trips {
 		}
 
 		$postData = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		
+
 		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $postData );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
@@ -68,7 +68,7 @@ class WP_Travel_Ajax_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 
-		$trip = get_post( $_REQUEST['trip_id'] );
+		$trip = get_post( absint( $_REQUEST['trip_id'] ) );
 		if ( is_wp_error( $trip ) ) {
 			return $trip;
 		}
@@ -97,7 +97,7 @@ class WP_Travel_Ajax_Trips {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$trip_id  = ! empty( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+		$trip_id  = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
 		$response = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
@@ -164,11 +164,11 @@ class WP_Travel_Ajax_Trips {
 		 * @todo Check Nonce.
 		 */
 
-		$start_date       = ! empty( $_GET['start_date'] ) ? $_GET['start_date'] : '';
-		$end_date         = ! empty( $_GET['end_date'] ) ? $_GET['end_date'] : '';
-		$travel_locations = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
-		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
-		$max_pax          = ! empty( $_GET['max_pax'] ) ? $_GET['max_pax'] : '';
+		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( $_GET['start_date'] ) : '';
+		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( $_GET['end_date'] ) : '';
+		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( $_GET['travel_locations'] ) : '';
+		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( $_GET['itinerary_types'] ) : '';
+		$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ) : '';
 
 		$args = array(
 			'start_date'       => $start_date,
@@ -204,13 +204,13 @@ class WP_Travel_Ajax_Trips {
 		 * @todo Check Nonce.
 		 */
 
-		$start_date       = ! empty( $_GET['start_date'] ) ? $_GET['start_date'] : '';
-		$end_date         = ! empty( $_GET['end_date'] ) ? $_GET['end_date'] : '';
-		$min_price        = ! empty( $_GET['min_price'] ) ? $_GET['min_price'] : 0;
-		$max_price        = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
-		$travel_locations = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : ''; // Not used yet to get trip id
-		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : ''; // Not used yet to get trip id
-		$max_pax          = ! empty( $_GET['max_pax'] ) ? $_GET['max_pax'] : ''; // Not used yet to get trip id
+		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( $_GET['start_date'] ) : '';
+		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( $_GET['end_date'] ) : '';
+		$min_price        = ! empty( $_GET['min_price'] ) ? sanitize_text_field( $_GET['min_price'] ) : 0;
+		$max_price        = ! empty( $_GET['max_price'] ) ? sanitize_text_field( $_GET['max_price'] ) : 0;
+		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( $_GET['travel_locations'] ) : ''; // Not used yet to get trip id
+		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( $_GET['itinerary_types'] ) : ''; // Not used yet to get trip id
+		$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ): ''; // Not used yet to get trip id
 
 		$args = array(
 			'start_date'       => $start_date,
@@ -247,7 +247,7 @@ class WP_Travel_Ajax_Trips {
 		if ( empty( $_REQUEST['trip_id'] ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
-		$trip_id = $_REQUEST['trip_id'];
+		$trip_id = absint( $_REQUEST['trip_id'] );
 
 		$wp_travel_use_global_tabs    = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );

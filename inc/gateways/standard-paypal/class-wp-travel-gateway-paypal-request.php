@@ -41,11 +41,11 @@ class WP_Travel_Gateway_Paypal_Request {
 			do_action( 'wt_before_payment_process', $booking_id );
 		}
 		// Check if paypal is selected.
-		if ( ! isset( $_POST['wp_travel_payment_gateway'] ) || 'paypal' !== $_POST['wp_travel_payment_gateway'] ) {
+		if ( ! isset( $_POST['wp_travel_payment_gateway'] ) || 'paypal' !== $_POST['wp_travel_payment_gateway'] ) { //@phpcs:ignore
 			return;
 		}
 		// Check if Booking with payment is selected.
-		if ( ! isset( $_POST['wp_travel_booking_option'] ) || 'booking_with_payment' !== $_POST['wp_travel_booking_option'] ) {
+		if ( ! isset( $_POST['wp_travel_booking_option'] ) || 'booking_with_payment' !== $_POST['wp_travel_booking_option'] ) { //@phpcs:ignore
 			return;
 		}
 
@@ -77,10 +77,10 @@ class WP_Travel_Gateway_Paypal_Request {
 			return false;
 		}
 
-		$itinerary_id  = isset( $_POST['wp_travel_post_id'] ) ? $_POST['wp_travel_post_id'] : 0;
+		$itinerary_id  = isset( $_POST['wp_travel_post_id'] ) ? absint( $_POST['wp_travel_post_id'] ) : 0;
 		$paypal_email  = sanitize_email( $settings['paypal_email'] );
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
-		$payment_mode  = isset( $_POST['wp_travel_payment_mode'] ) ? $_POST['wp_travel_payment_mode'] : '';
+		$payment_mode  = isset( $_POST['wp_travel_payment_mode'] ) ? sanitize_text_field( $_POST['wp_travel_payment_mode'] ) : '';
 
 		global $wt_cart;
 		$items       = $wt_cart->getItems();
@@ -135,7 +135,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 			$args[ 'quantity_' . $agrs_index ] = 1;
 
-			$args[ 'amount_' . $agrs_index ]      = $_POST['amount'];
+			$args[ 'amount_' . $agrs_index ]      = sanitize_text_field( $_POST['amount'] );
 			$args[ 'item_number_' . $agrs_index ] = $booking_id;
 
 		} elseif ( $items ) {  // Normal Payment.

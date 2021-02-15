@@ -18,6 +18,12 @@ class WP_Travel_Localize_Admin {
 			$translation_array['postID'] = get_the_ID();
 			wp_localize_script( 'wp-travel-admin-trip-options', '_wp_travel', $translation_array );
 		} 
+
+		// Coupon Page.
+		if ( 'wp-travel-coupons' == $screen->id ) {
+			wp_localize_script( 'wp-travel-coupons-backend-js', '_wp_travel', $translation_array );
+		}
+
 		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
 		if ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) { // settings page
 			wp_localize_script( 'wp-travel-admin-settings', '_wp_travel', $translation_array );

@@ -20,7 +20,7 @@ add_filter( 'wp_travel_trip_tabs_output_raw', 'wp_travel_raw_output_on_tab_conte
 add_action( 'wp_travel_before_single_itinerary', 'wp_travel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wp_travel_wrapper_end' );
 
-add_action( 'comment_post', 'wp_travel_add_comment_rating' );
+add_action( 'comment_post', 'wp_travel_add_comment_rating', 10, 3 );
 add_filter( 'preprocess_comment', 'wp_travel_verify_comment_meta_data' );
 
 // Clear transients.
@@ -74,8 +74,8 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 	$pricings_table       = $wpdb->prefix . 'wt_pricings';
 	$price_category_table = $wpdb->prefix . 'wt_price_category_relation';
 
-	$min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
-	$max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
+	// $min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
+	// $max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
 
 	// Join Tables.
 	$join  = ''; // JOIN clause.
@@ -85,8 +85,8 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 
 	// Where clause.
 	$where      = '';
-	$start_date = isset( $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
-	$end_date   = isset( $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : '';
+	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : '';
 
 		// Filter by date clause.
 	if ( ! empty( $start_date ) || ! empty( $end_date ) ) {
@@ -98,12 +98,12 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 		} else {
 			$where .= ! empty( $end_date ) ? " CAST({$dates_table}.end_date AS DATE) <= '{$end_date}'" : '';
 		}
-		$where .= ' ) '; // 2>
+		$where .= ' ) ';
 		if ( ! empty( $start_date ) ) {
 			$year  = date( 'Y', strtotime( $start_date ) );
 			$month = date( 'n', strtotime( $start_date ) );
 
-			$where .= ' OR (';// <3
+			$where .= ' OR (';
 			$where .= "
 				{$dates_table}.recurring = 1 
 				AND (
@@ -112,33 +112,11 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 					( FIND_IN_SET( {$month}, months) || 'every_month' = months )
 				 )
 				";
-			$where .= ' ) '; // 3>
+			$where .= ' ) ';
 
 		}
-		$where .= ' ) '; // 1>
-		// Filter by Price clause.
-		// if ( ! empty( $min_price ) || ! empty( $max_price ) ) {
-		// 	$where .= ' AND ( '; // <11
-		// 	if ( $min_price >= 0 && $max_price > 0 ) {
-		// 		$where .= "
-		// 			pc.low_price BETWEEN {$min_price} AND {$max_price}
-		// 			";
-		// 	}
-		// 	$where .= ' ) '; // 11>
-		// }
-	
-		$fields = '';
-		// if ( 
-		// 	( isset( $_GET['price'] ) && in_array( $_GET['price'], array( 'low_high', 'high_low' ) ) )
-		// 	|| ( ! empty( $min_price ) || ! empty( $max_price ) ) 
-		// ) {
-		// 	// $fields = ' ,
-		// 	// 	pc.low_price AS sort_price
-		// 	// ';
-	
-		// 	$post_clauses['groupby'] = ' wp_posts.ID ';
-		// 	$post_clauses['orderby'] = 'low_high' === $_GET['price'] ? "sort_price ASC" : "sort_price DESC";
-		// }
+		$where .= ' ) ';
+
 	
 		$post_clauses['join']     = $post_clauses['join'] . $join;
 		$post_clauses['fields']   = $post_clauses['fields'] . $fields;
@@ -148,7 +126,7 @@ function wp_travel_posts_clauses_filter( $post_clauses, $object ) {
 
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
 		$post_clauses['join']    = $post_clauses['join'] . $join;
-		$post_clauses['orderby'] = 'asc' === $_GET['trip_date'] ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
+		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
 	}
 
 	return $post_clauses;
@@ -668,7 +646,6 @@ function wp_travel_single_location( $post_id ) {
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
 	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
-	// error_log( 'fd ' . $fixed_departure );
 
 	$trip_duration       = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 	$trip_duration       = ( $trip_duration ) ? $trip_duration : 0;
@@ -1057,7 +1034,7 @@ function wp_travel_trip_map( $post_id ) {
 			<div class="wp-travel-map  <?php echo esc_attr( $wrapper_class ); ?>">
 				<iframe
 					style="width:100%;height:300px"
-					src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near"></iframe>
+					src="https://maps.google.com/maps?q=<?php echo esc_attr( $q ); ?>&t=m&z=<?php echo esc_attr( $settings['google_map_zoom_level'] ); ?>&output=embed&iwloc=near"></iframe>
 			</div>
 			<?php
 		endif;
@@ -1077,12 +1054,12 @@ function wp_travel_related_itineraries( $post_id ) {
 	wp_travel_get_related_post( $post_id );
 }
 
-function wp_travel_add_comment_rating( $comment_id ) {
-	if ( isset( $_POST['wp_travel_rate_val'] ) && WP_TRAVEL_POST_TYPE === get_post_type( $_POST['comment_post_ID'] ) ) {
-		if ( ! $_POST['wp_travel_rate_val'] || $_POST['wp_travel_rate_val'] > 5 || $_POST['wp_travel_rate_val'] < 0 ) {
+function wp_travel_add_comment_rating( $comment_id, $approve, $comment_data ) {
+	if ( isset( $_POST['wp_travel_rate_val'] ) && WP_TRAVEL_POST_TYPE === get_post_type( $comment_data['comment_post_ID'] ) ) { // @phpcs:ignore
+		if ( $_POST['wp_travel_rate_val'] > 5 || $_POST['wp_travel_rate_val'] < 0 ) { // @phpcs:ignore
 			return;
 		}
-		add_comment_meta( $comment_id, '_wp_travel_rating', (int) esc_attr( $_POST['wp_travel_rate_val'] ), true );
+		add_comment_meta( $comment_id, '_wp_travel_rating',  absint( $_POST['wp_travel_rate_val'] ), true ); // @phpcs:ignore
 	}
 }
 
@@ -1093,11 +1070,10 @@ function wp_travel_clear_transients( $post_id ) {
 }
 
 function wp_travel_verify_comment_meta_data( $commentdata ) {
-
 	if (
 	! is_admin()
-	&& WP_TRAVEL_POST_TYPE === get_post_type( sanitize_text_field( $_POST['comment_post_ID'] ) )
-	&& 1 > sanitize_text_field( $_POST['wp_travel_rate_val'] )
+	&& WP_TRAVEL_POST_TYPE === get_post_type( sanitize_text_field( $commentdata['comment_post_ID'] ) )
+	&& 1 > sanitize_text_field( $_POST['wp_travel_rate_val'] ) // @phpcs:ignore
 	&& '' === $commentdata['comment_type']
 	) {
 		wp_die( 'Please rate. <br><a href="javascript:history.go(-1);">Back </a>' );
@@ -1348,7 +1324,7 @@ function wp_travel_pagination( $range = 2, $pages = '' ) {
 		// echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
 		// }
 		$pagination .= "</nav>\n";
-		echo $pagination;
+		echo $pagination; // @phpcs:ignore
 	}
 }
 
@@ -1434,7 +1410,7 @@ function wp_travel_booking_message() {
 
 		?>
 
-		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', $err_msg ); ?></p>
+		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', esc_html( $err_msg ) ); ?></p>
 		<?php
 	endif;
 
@@ -1494,6 +1470,9 @@ function wp_travel_archive_filter_by() {
 	if ( ! WP_Travel::is_page('archive') ) {
 		return;
 	}
+
+	$submission_get = wp_travel_sanitize_array( wp_unslash( $_GET ) ); 
+
 	$strings = wp_travel_get_strings();
 
 	$filter_by_text = $strings['filter_by'];
@@ -1513,17 +1492,16 @@ function wp_travel_archive_filter_by() {
 		<?php do_action( 'wp_travel_before_post_filter' ); ?>
 		<input type="hidden" id="wp-travel-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
 		<?php
-			$price     = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
-			$type      = ! empty( $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
-			$location  = ! empty( $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
-			$trip_date = ! empty( $_GET['trip_date'] ) ? $_GET['trip_date'] : '';
-			$trip_name = ! empty( $_GET['trip_name'] ) ? $_GET['trip_name'] : '';
+			$price     = ( isset( $submission_get['price'] ) ) ? $submission_get['price'] : '';
+			$type      = ! empty( $submission_get['itinerary_types'] ) ? $submission_get['itinerary_types'] : '';
+			$location  = ! empty( $submission_get['travel_locations'] ) ? $submission_get['travel_locations'] : '';
+			$trip_date = ! empty( $submission_get['trip_date'] ) ? $submission_get['trip_date'] : '';
+			$trip_name = ! empty( $submission_get['trip_name'] ) ? $submission_get['trip_name'] : '';
 		?>
 
 		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
 		<?php if ( $enable_filter_price ) : ?>
 			<div class="wp-toolbar-filter-field wt-filter-by-price">
-				<!-- <p><?php echo esc_html( $price_text ); ?></p> -->
 				<select name="price" class="wp_travel_input_filters price">
 					<option value=""><?php echo esc_html( $price_text ); ?></option>
 					<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
@@ -1532,7 +1510,6 @@ function wp_travel_archive_filter_by() {
 			</div>
 		<?php endif; ?>
 		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
-			<!-- <p><?php echo esc_html( $trip_type_text ); ?></p> -->
 			<?php
 			wp_dropdown_categories(
 				array(
@@ -1548,7 +1525,6 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
-			<!-- <p><?php echo esc_html( $location_text ); ?></p> -->
 			<?php
 			wp_dropdown_categories(
 				array(
@@ -1564,7 +1540,6 @@ function wp_travel_archive_filter_by() {
 			?>
 		</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-trip-date">
-				<!-- <p><?php echo esc_html( $trip_date_text ); ?></p> -->
 				<select name="trip_date" class="wp_travel_input_filters trip-date">
 					<option value=""><?php echo esc_html( $trip_date_text ); ?></option>
 					<option value="asc" <?php selected( $trip_date, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
@@ -1572,7 +1547,6 @@ function wp_travel_archive_filter_by() {
 				</select>
 			</div>
 		<div class="wp-toolbar-filter-field wt-filter-by-trip-name">
-				<!-- <p><?php echo esc_html( $trip_name_text ); ?></p> -->
 				<select name="trip_name" class="wp_travel_input_filters trip-name">
 					<option value=""><?php echo esc_html( $trip_name_text ); ?></option>
 					<option value="asc" <?php selected( $trip_name, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
@@ -1604,7 +1578,7 @@ function wp_travel_archive_toolbar() {
 		</div>
 		<div class="wp-toolbar-content wp-toolbar-right">
 			<?php
-			$current_url = '//' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			$current_url = isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ? '//' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 			?>
 			<ul class="wp-travel-view-mode-lists">
 				<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
@@ -1694,24 +1668,26 @@ function wp_travel_posts_filter( $query ) {
 	global $pagenow;
 	$type = '';
 
-	if ( isset( $_GET['post_type'] ) ) {
-		$type = $_GET['post_type'];
+	$submission_get = wp_travel_sanitize_array( wp_unslash( $_GET ) );
+
+	if ( isset( $submission_get['post_type'] ) ) {
+		$type = $submission_get['post_type'];
 	}
 
 	$enabled_react = wp_travel_is_react_version_enabled();
 
 	if ( $query->is_main_query() ) {
 
-		if ( 'itinerary-booking' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
+		if ( 'itinerary-booking' == $type && is_admin() && 'edit.php' == $pagenow && isset( $submission_get['wp_travel_post_id'] ) && '' !== $submission_get['wp_travel_post_id'] ) {
 
 			$query->set( 'meta_key', 'wp_travel_post_id' );
-			$query->set( 'meta_value', $_GET['wp_travel_post_id'] );
+			$query->set( 'meta_value', absint( $submission_get['wp_travel_post_id'] ) );
 		}
 
-		if ( 'itinerary-enquiries' == $type && is_admin() && 'edit.php' == $pagenow && isset( $_GET['wp_travel_post_id'] ) && '' !== $_GET['wp_travel_post_id'] ) {
+		if ( 'itinerary-enquiries' == $type && is_admin() && 'edit.php' == $pagenow && isset( $submission_get['wp_travel_post_id'] ) && '' !== $submission_get['wp_travel_post_id'] ) {
 
 			$query->set( 'meta_key', 'wp_travel_post_id' );
-			$query->set( 'meta_value', $_GET['wp_travel_post_id'] );
+			$query->set( 'meta_value', absint( $submission_get['wp_travel_post_id'] ) );
 		}
 
 		/**
@@ -1724,11 +1700,11 @@ function wp_travel_posts_filter( $query ) {
 			$current_meta = $query->get( 'meta_query' );
 			$current_meta = ( $current_meta ) ? $current_meta : array();
 			// Filter By Dates.
-			if ( ( isset( $_GET['trip_start'] ) || isset( $_GET['trip_end'] ) ) && ! $enabled_react ) {
+			if ( ( isset( $submission_get['trip_start'] ) || isset( $submission_get['trip_end'] ) ) && ! $enabled_react ) {
 
-				$trip_start = ! empty( $_GET['trip_start'] ) ? $_GET['trip_start'] : 0;
+				$trip_start = ! empty( $submission_get['trip_start'] ) ? $submission_get['trip_start'] : 0;
 
-				$trip_end = ! empty( $_GET['trip_end'] ) ? $_GET['trip_end'] : 0;
+				$trip_end = ! empty( $submission_get['trip_end'] ) ? $submission_get['trip_end'] : 0;
 
 				if ( $trip_start || $trip_end ) {
 
@@ -1761,8 +1737,8 @@ function wp_travel_posts_filter( $query ) {
 			}
 
 			// Filter By Price.
-			if ( isset( $_GET['price'] ) && '' != $_GET['price'] ) {
-				$filter_by = $_GET['price'];
+			if ( isset( $submission_get['price'] ) && '' != $submission_get['price'] ) {
+				$filter_by = $submission_get['price'];
 
 				$query->set( 'meta_key', 'wp_travel_trip_price' );
 				$query->set( 'orderby', 'meta_value_num' );
@@ -1779,11 +1755,11 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 			// Trip Cost Range Filter.
-			if ( ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) ) {
+			if ( ( isset( $submission_get['max_price'] ) || isset( $submission_get['min_price'] ) ) ) {
 
-				$max_price = ! empty( $_GET['max_price'] ) ? $_GET['max_price'] : 0;
+				$max_price = ! empty( $submission_get['max_price'] ) ? $submission_get['max_price'] : 0;
 
-				$min_price = ! empty( $_GET['min_price'] ) ? $_GET['min_price'] : 0;
+				$min_price = ! empty( $submission_get['min_price'] ) ? $submission_get['min_price'] : 0;
 
 				if ( $min_price || $max_price ) {
 
@@ -1801,8 +1777,8 @@ function wp_travel_posts_filter( $query ) {
 				}
 			}
 
-			if ( isset( $_GET['fact'] ) && '' != $_GET['fact'] ) {
-				$fact = $_GET['fact'];
+			if ( isset( $submission_get['fact'] ) && '' != $submission_get['fact'] ) {
+				$fact = $submission_get['fact'];
 
 				$query->set( 'meta_key', 'wp_travel_trip_facts' );
 
@@ -1820,9 +1796,9 @@ function wp_travel_posts_filter( $query ) {
 			// Filter by Keywords.
 			$current_tax = $query->get( 'tax_query' );
 			$current_tax = ( $current_tax ) ? $current_tax : array();
-			if ( isset( $_GET['keyword'] ) && '' != $_GET['keyword'] ) {
+			if ( isset( $submission_get['keyword'] ) && '' != $submission_get['keyword'] ) {
 
-				$keyword = $_GET['keyword'];
+				$keyword = $submission_get['keyword'];
 
 				$keywords = explode( ',', $keyword );
 
@@ -1836,10 +1812,10 @@ function wp_travel_posts_filter( $query ) {
 			}
 			$query->set( 'tax_query', $current_tax );
 
-			if ( ! $enabled_react && ( isset( $_GET['trip_date'] ) && '' != $_GET['trip_date'] ) ) {
+			if ( ! $enabled_react && ( isset( $submission_get['trip_date'] ) && '' != $submission_get['trip_date'] ) ) {
 				$query->set( 'meta_key', 'trip_date' );
 				$query->set( 'orderby', 'meta_value' );
-				if ( 'asc' === $_GET['trip_date'] ) {
+				if ( 'asc' === $submission_get['trip_date'] ) {
 					$query->set( 'order', 'asc' );
 				} else {
 					$query->set( 'order', 'desc' );
@@ -1847,10 +1823,10 @@ function wp_travel_posts_filter( $query ) {
 			}
 
 			// Filter by trip name.
-			if ( isset( $_GET['trip_name'] ) && '' != $_GET['trip_name'] ) {
+			if ( isset( $submission_get['trip_name'] ) && '' != $submission_get['trip_name'] ) {
 				$query->set( 'post_type', 'itineraries' );
 				$query->set( 'orderby', 'post_title' );
-				if ( 'asc' === $_GET['trip_name'] ) {
+				if ( 'asc' === $submission_get['trip_name'] ) {
 					$query->set( 'order', 'asc' );
 				} else {
 					$query->set( 'order', 'desc' );
@@ -1880,7 +1856,7 @@ function wp_travel_get_archive_view_mode() {
 	$default_view_mode = apply_filters( 'wp_travel_default_view_mode', $default_view_mode );
 	$view_mode         = $default_view_mode;
 	if ( isset( $_GET['view_mode'] ) && ( 'grid' === $_GET['view_mode'] || 'list' === $_GET['view_mode'] ) ) {
-		$view_mode = $_GET['view_mode'];
+		$view_mode = sanitize_text_field( wp_unslash( $_GET['view_mode'] ) );
 	}
 	return $view_mode;
 }
@@ -2302,7 +2278,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 									<?php
 									if ( $pricing['inventory']['sold_out'] ) :
 										?>
-										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+										<p class="wp-travel-sold-out"><?php echo esc_html( $sold_out_btn_rep_msg ); ?></p>
 										<?php
 									else :
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
@@ -2318,11 +2294,7 @@ function wp_travel_booking_default_princing_list_content( $trip_id ) {
 										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'], $date_id );
 									endif;
 									?>
-									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
-										<!-- if fixed departure -->
-										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
-									<?php endif; ?>
+									
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
 									<input type="hidden" name="pricing_id" value="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" />
@@ -2551,29 +2523,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 														$max_attr     = "max={$max}";
 														$min_attr     = ''; // "min={$min}";
 														$custom_label = isset( $pricing_category['custom_label'] ) ? $pricing_category['custom_label'] : '';
-														// if ( ! empty( $pricing_category['min_pax'] ) ) {
-														// $min      = $pricing_category['min_pax'];
-														// $min_attr = "min={$min}";
-														// } elseif ( ! empty( $pricing['min_pax'] ) ) {
-														// $min      = $pricing['min_pax'];
-														// $min_attr = "min={$min}";
-														// }
-														// if ( ! empty( $pricing_category['max_pax'] ) ) {
-														// $max      = $pricing_category['max_pax'];
-														// $max_attr = "max={$max}";
-														// } elseif ( ! empty( $pricing['max_pax'] ) ) {
-														// $max      = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : '99';
-														// $max_attr = "max={$max}";
-														// }
-														// if ( $is_inventory_enabled && ! empty( $pricing['available_pax'] ) ) {
-														// $max      = $pricing['available_pax'];
-														// $max_attr = "max={$max}";
-														// } else {
-														// $max      = $pricing['inventory']['max_pax'];
-														// $max_attr = "max={$max}";
-														// }
-														// $min = ! empty( $pricing_category['min_pax'] ) ? esc_html( $pricing_category['min_pax'] ) : 1;
-														// $max = ! empty( $pricing_category['max_pax'] ) ? esc_html( $pricing_category['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
+														
 														?>
 															<div class="category" id="<?php echo esc_attr( $category_id ); ?>">
 
@@ -2618,7 +2568,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo $min; ?>"  data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo esc_attr( $min ); ?>"  data-max="<?php echo esc_attr( $max ); ?>" data-type="<?php echo esc_attr( wp_travel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_attr( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 
@@ -2639,7 +2589,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 							<div class="trip_list_by_fixed_departure_dates_booking <?php echo esc_attr( $sold_class ); ?>">
 								<div class="action">
 									<?php if ( $pricing['inventory']['sold_out'] ) : ?>
-										<p class="wp-travel-sold-out"><?php echo $sold_out_btn_rep_msg; ?></p>
+										<p class="wp-travel-sold-out"><?php echo esc_html( $sold_out_btn_rep_msg ); ?></p>
 										<?php
 									else :
 										if ( $trip_extras_class->has_trip_extras( $trip_id, $pricing['price_key'] ) ) {
@@ -2655,11 +2605,7 @@ function wp_travel_booking_fixed_departure_list_content( $trip_id ) {
 										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
 										?>
 									<?php endif; ?>
-									<?php if ( isset( $pricing['arrival_date'] ) ) : ?>
-										<!-- if fixed departure -->
-										<!-- <input type="hidden" name="arrival_date" value="<?php echo esc_attr( $pricing['arrival_date'] ); ?>" >
-										<input type="hidden" name="departure_date" value="<?php echo esc_attr( $pricing['departure_date'] ); ?>" > -->
-									<?php endif; ?>
+									
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); // Need to remove price key. ?>" />
 									<input type="hidden" name="pricing_id" value="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" />

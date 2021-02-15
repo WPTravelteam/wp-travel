@@ -274,14 +274,14 @@ function wp_travel_get_checkout_form_fields() {
  */
 function wp_travel_search_filter_widget_form_fields() {
 
-	$keyword  = ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) ? $_GET['keyword'] : '';
-	$fact     = ( isset( $_GET['fact'] ) && '' !== $_GET['fact'] ) ? $_GET['fact'] : '';
-	$type     = ( isset( $_GET['itinerary_types'] ) && '' !== $_GET['itinerary_types'] ) ? $_GET['itinerary_types'] : '';
-	$location = ( isset( $_GET['travel_locations'] ) && '' !== $_GET['travel_locations'] ) ? $_GET['travel_locations'] : '';
-	$price    = ( isset( $_GET['price'] ) ) ? $_GET['price'] : '';
+	$keyword  = ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+	$fact     = ( isset( $_GET['fact'] ) && '' !== $_GET['fact'] ) ? sanitize_text_field( $_GET['fact'] ) : '';
+	$type     = ( isset( $_GET['itinerary_types'] ) && '' !== $_GET['itinerary_types'] ) ? sanitize_text_field( $_GET['itinerary_types'] ) : '';
+	$location = ( isset( $_GET['travel_locations'] ) && '' !== $_GET['travel_locations'] ) ? sanitize_text_field( $_GET['travel_locations'] ) : '';
+	$price    = ( isset( $_GET['price'] ) ) ? sanitize_text_field( $_GET['price'] ) : '';
 
-	$min_price   = ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? (int) $_GET['min_price'] : 0;
-	$max_price   = ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? (int) $_GET['max_price'] : 0;
+	$min_price   = ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
+	$max_price   = ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
 	$price_range = array(
 		array(
 			'name'  => 'min_price',
@@ -295,8 +295,8 @@ function wp_travel_search_filter_widget_form_fields() {
 		),
 	);
 
-	$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? $_GET['trip_start'] : '';
-	$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? $_GET['trip_end'] : '';
+	$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? sanitize_text_field( $_GET['trip_start'] ) : '';
+	$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? sanitize_text_field( $_GET['trip_end'] ) : '';
 
 	$show_end_date = wp_travel_booking_show_end_date();
 	$trip_duration = array(

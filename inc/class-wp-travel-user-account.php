@@ -101,7 +101,7 @@ class Wp_Travel_User_Account {
 			<?php
 
 			}
-			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) {
+			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) { // @phpcs:ignore
 				self::lost_password();
 			} else {
 				// Get user login.
@@ -122,7 +122,7 @@ class Wp_Travel_User_Account {
 		/**
 		 * After sending the reset link, don't show the form again.
 		 */
-		if ( ! empty( $_GET['reset-link-sent'] ) ) {
+		if ( ! empty( $_GET['reset-link-sent'] ) ) { // @phpcs:ignore
 
 			wp_travel_get_template_part( 'account/lostpassword', 'confirm' );
 
@@ -183,8 +183,7 @@ class Wp_Travel_User_Account {
 	 * @uses $wpdb WordPress Database object
 	 * @return bool True: when finish. False: on error
 	 */
-	public static function retrieve_password() {
-		$login = trim( $_POST['user_login'] );
+	public static function retrieve_password( $login = '' ) {
 
 		if ( empty( $login ) ) {
 

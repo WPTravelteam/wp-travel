@@ -199,6 +199,7 @@ class WP_Travel_License {
 		if ( ! $settings ) {
 			return;
 		}
+		check_admin_referer( 'wp_travel_settings_page_nonce' );
 		$count_premium_addons = self::count_premium_addons();
 		if ( $count_premium_addons < 1 ) {
 			return $settings;
@@ -206,7 +207,7 @@ class WP_Travel_License {
 		$premium_addons = self::$addons;
 		foreach ( $premium_addons as $key => $premium_addon ) {
 			$key_option_name              = $premium_addon['_option_prefix'] . 'key';
-			$license_key                  = ( isset( $_POST[ $key_option_name ] ) && '' !== $_POST[ $key_option_name ] ) ? $_POST[ $key_option_name ] : '';
+			$license_key                  = ( isset( $_POST[ $key_option_name ] ) && '' !== $_POST[ $key_option_name ] ) ? sanitize_text_field( $_POST[ $key_option_name ] ) : '';
 			$settings[ $key_option_name ] = $license_key;
 		}
 		return $settings;
@@ -233,7 +234,7 @@ class WP_Travel_License {
 				}
 
 				// retrieve the license from the database.
-				$license = ( isset( $_POST[ $premium_addon['_option_prefix'] . 'key' ] ) && '' !== $_POST[ $premium_addon['_option_prefix'] . 'key' ] ) ? $_POST[ $premium_addon['_option_prefix'] . 'key' ] : '';
+				$license = ( isset( $_POST[ $premium_addon['_option_prefix'] . 'key' ] ) && '' !== $_POST[ $premium_addon['_option_prefix'] . 'key' ] ) ? sanitize_text_field( $_POST[ $premium_addon['_option_prefix'] . 'key' ] ): '';
 
 				// data to send in our API request.
 				$api_params = array(

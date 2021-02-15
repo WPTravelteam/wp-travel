@@ -15,7 +15,7 @@ class WP_Travel_Ajax_Trip_Excluded_Dates_Times{
             $error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
             WP_Travel_Helpers_REST_API::response( $error );
         }
-        $trip_id = ! empty( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+        $trip_id = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
         $response = WP_Travel_Helpers_Trip_Excluded_Dates_Times::get_dates_times( $trip_id );
         WP_Travel_Helpers_REST_API::response( $response );
     }
@@ -31,7 +31,7 @@ class WP_Travel_Ajax_Trip_Excluded_Dates_Times{
             $error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
             WP_Travel_Helpers_REST_API::response( $error );
         }
-        $trip_id = ! empty( $_GET['trip_id'] ) ? $_GET['trip_id'] : 0;
+        $trip_id = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
         $postData = json_decode( file_get_contents('php://input') );
         $response = WP_Travel_Helpers_Trip_Excluded_Dates_Times::update_dates_times( $trip_id, $postData );
         WP_Travel_Helpers_REST_API::response( $response );
