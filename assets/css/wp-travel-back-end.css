@@ -4973,7 +4973,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   width: initial;
   font-size: 15px;
   /* height: 45px; */
-  background-color: #39b54a;
+  background-color: #007cba;
   outline: 0;
   border: 0;
   line-height: 15px;
@@ -4982,7 +4982,7 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 }
 .wti__icon_select_modal .wti__insert_icon .components-button:hover, .wti__icon_select_modal .wti__insert_icon .components-button:focus {
   color: #fff;
-  background-color: #12c52a;
+  background-color: #0071a1;
   box-shadow: none;
 }
 .wti__icon_select_modal .wti__insert_icon .components-button:disabled {
