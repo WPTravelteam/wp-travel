@@ -3,14 +3,11 @@ import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
 import Select from 'react-select'
-import { useEffect, useState, useContext } from '@wordpress/element';
-import { IconsProvider, IconsContext } from './SettingsFactTypeContext';
+import { useEffect, useState } from '@wordpress/element';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 const SettingsFact = () => {
-
-    const iconContextValues = useContext(IconsContext);
 
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
@@ -96,14 +93,13 @@ const SettingsFact = () => {
     let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     //Update tab settings.
-    const updateTabSettings = (props) => {
+    const updateTabSettings = (index) => {
         const lastSelectedTab = sessionStorage.getItem('WPTravelLastSelectedTab');
 
-        console.log(iconContextValues);
-
-        // if ( 'fontawesome-icon' == sessionStorage.getItem('WPTravelLastSelectedTab') ) {
-        //     updateFact( 'fa_icon', data.value, props.index );
-        // }
+        if ( 'fontawesome-icon' == lastSelectedTab ) {
+            let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');
+            updateFact( 'fa_icon', FAIconValue, index );
+        }
     }
 
     // Fontawesome Icon Content.
@@ -115,13 +111,12 @@ const SettingsFact = () => {
 
         const [filterValue, setFilterValue] = useState('');
 
-        const [ selectedFAIcons, setSelectedFAIcons ] = useState(props.fact.icon);
+        const [ selectedFAIcons, setSelectedFAIcons ] = useState(props.fact.fa_icon);
 
-        const iconContextValues = useContext(IconsContext);
+        sessionStorage.setItem('WPTravelFAIconValue', selectedFAIcons );
 
         const selectedFontAwesomeIcon = (event) => {
             setSelectedFAIcons(event.target.getAttribute('data-icon'));
-            iconContextValues.setIconValue(selectedFAIcons);
         }
 
         const resetSelectIcon = (e) => {
@@ -203,6 +198,7 @@ const SettingsFact = () => {
     const iconClassContent = (props) => {
         const [ iconClassName, setIconClassName ] = useState(props.fact.icon ? props.fact.icon : '');
         sessionStorage.setItem('WPTravelLastSelectedTab', 'icon-class');
+        sessionStorage.setItem('WPTravelIconClassValue', iconClassName );
         return <>
         <PanelRow>
             <label>{__( 'Icon Class', 'wp-travel' )}</label>
@@ -233,6 +229,7 @@ const SettingsFact = () => {
         useEffect(() => {
             
             if ( !imageUrl && sessionStorage.length > 1 && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
+                console.log('here');
                 setState({
                     isFetchingImage: true
                 });
@@ -455,7 +452,7 @@ const SettingsFact = () => {
                                                     }
                                                         <Button
                                                         isSecondary
-                                                        onClick={updateTabSettings}
+                                                        onClick={() => updateTabSettings(index)}
                                                         >
                                                             {__( 'Insert', 'wp-travel' )}
                                                         </Button>
@@ -550,8 +547,6 @@ const SettingsFact = () => {
 
 export default () => {
     return (
-    <IconsProvider>
         <SettingsFact />
-    </IconsProvider>
     )
 }
