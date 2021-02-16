@@ -108,6 +108,7 @@ if ( post_password_required() ) {
 						<div class="travel-info">
 							<?php wp_travel_get_trip_duration( get_the_ID() ); ?>
 						</div>
+						<?php do_action( 'wp_travel_archive_after_trip_duration', get_the_ID() ); ?>
 					</div>
 				</div>
 				<div class="description-right">
