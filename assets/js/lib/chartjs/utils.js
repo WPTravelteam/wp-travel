@@ -11,7 +11,7 @@ window.chartColors = {
 };
 
 (function(global) {
-	var Months = [
+	var MONTHS = [
 		'January',
 		'February',
 		'March',
@@ -39,7 +39,19 @@ window.chartColors = {
 	];
 
 	var Samples = global.Samples || (global.Samples = {});
-	var Color = global.Color;
+	var Color = Chart.helpers.color;
+
+	function applyDefaultNumbers(config) {
+		var cfg = config || {};
+		cfg.min = cfg.min || 0;
+		cfg.max = cfg.max || 1;
+		cfg.from = cfg.from || [];
+		cfg.count = cfg.count || 8;
+		cfg.decimals = cfg.decimals || 8;
+		cfg.continuity = cfg.continuity || 1;
+
+		return cfg;
+	}
 
 	Samples.utils = {
 		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
@@ -56,20 +68,14 @@ window.chartColors = {
 		},
 
 		numbers: function(config) {
-			var cfg = config || {};
-			var min = cfg.min || 0;
-			var max = cfg.max || 1;
-			var from = cfg.from || [];
-			var count = cfg.count || 8;
-			var decimals = cfg.decimals || 8;
-			var continuity = cfg.continuity || 1;
-			var dfactor = Math.pow(10, decimals) || 0;
+			var cfg = applyDefaultNumbers(config);
+			var dfactor = Math.pow(10, cfg.decimals) || 0;
 			var data = [];
 			var i, value;
 
-			for (i = 0; i < count; ++i) {
-				value = (from[i] || 0) + this.rand(min, max);
-				if (this.rand() <= continuity) {
+			for (i = 0; i < cfg.count; ++i) {
+				value = (cfg.from[i] || 0) + this.rand(cfg.min, cfg.max);
+				if (this.rand() <= cfg.continuity) {
 					data.push(Math.round(dfactor * value) / dfactor);
 				} else {
 					data.push(null);
@@ -106,7 +112,7 @@ window.chartColors = {
 			var i, value;
 
 			for (i = 0; i < count; ++i) {
-				value = Months[Math.ceil(i) % 12];
+				value = MONTHS[Math.ceil(i) % 12];
 				values.push(value.substring(0, section));
 			}
 
@@ -131,17 +137,5 @@ window.chartColors = {
 	// INITIALIZATION
 
 	Samples.utils.srand(Date.now());
-
-	// Google Analytics
-	/* eslint-disable */
-	if (document.location.hostname.match(/^(www\.)?chartjs\.org$/)) {
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-28909194-3', 'auto');
-		ga('send', 'pageview');
-	}
-	/* eslint-enable */
 
 }(this));

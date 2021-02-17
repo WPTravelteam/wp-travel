@@ -225,8 +225,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			}
 			// @since 1.0.5 // booking stat
 			if ( 'itinerary-booking_page_booking_chart' === $screen->id ) {
-				wp_register_script( 'jquery-chart', self::$assets_path . 'assets/js/lib/chartjs/Chart.bundle' . $suffix . '.js', array( 'jquery' ), WP_TRAVEL_VERSION );
-				wp_register_script( 'jquery-chart-util', self::$assets_path . 'assets/js/lib/chartjs/chart-utils.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+				wp_register_script( 'jquery-chart', self::$assets_path . 'assets/js/lib/chartjs/Chart.bundle.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
+				wp_register_script( 'jquery-chart-util', self::$assets_path . 'assets/js/lib/chartjs/utils.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 				wp_register_script( 'jquery-chart-custom', self::$assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
 				$booking_data      = wp_travel_get_booking_data();
