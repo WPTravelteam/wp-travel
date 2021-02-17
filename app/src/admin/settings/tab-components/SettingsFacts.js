@@ -228,7 +228,7 @@ const SettingsFact = () => {
 
         useEffect(() => {
             
-            if ( !imageUrl && sessionStorage.length > 1 && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
+            if ( !imageUrl && sessionStorage.length > 1 && "wpTravelIconModuleUploaderData" in sessionStorage && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
                 console.log('here');
                 setState({
                     isFetchingImage: true

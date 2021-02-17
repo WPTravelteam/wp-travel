@@ -47,77 +47,77 @@ function wp_travel_marketplace_page() {
 		'travel-base-pro'     => array(
 			'name'       => __( 'Travel Base Pro', 'wp-travel' ),
 			'type'       => 'premium',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-pro.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-base-pro.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-base-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-base-pro/',
 		),
 		'travel-base'         => array(
 			'name'       => __( 'Travel Base', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-base-free.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-base-free.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-base-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-base/',
 		),
 		'travel-ultimate-pro' => array(
 			'name'       => __( 'Travel Ultimate Pro', 'wp-travel' ),
 			'type'       => 'premium',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-pro.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-ultimate-pro.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate-pro/',
 		),
 		'travel-ultimate'     => array(
 			'name'       => __( 'Travel Ultimate', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-ultimate-free.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-ultimate-free.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-ultimate-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-ultimate/',
 		),
 		'pleased-pro'         => array(
 			'name'       => __( 'Pleased Pro', 'wp-travel' ),
 			'type'       => 'premium',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-pro.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/pleased-pro.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=pleased-pro',
 			'detail_url' => 'https://themepalace.com/downloads/pleased-pro/',
 		),
 		'pleased'             => array(
 			'name'       => __( 'Pleased', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/pleased-free.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/pleased-free.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=pleased-pro',
 			'detail_url' => 'https://themepalace.com/downloads/pleased/',
 		),
 		'travel-gem-pro'      => array(
 			'name'       => __( 'Travel Gem Pro', 'wp-travel' ),
 			'type'       => 'premium',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-pro.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-gem-pro.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-gem-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-gem-pro/',
 		),
 		'travel-gem'          => array(
 			'name'       => __( 'Travel Gem', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/travel-gem-free.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-gem-free.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-gem-pro',
 			'detail_url' => 'https://themepalace.com/downloads/travel-gem/',
 		),
 		'tourable-pro'        => array(
 			'name'       => __( 'Tourable Pro', 'wp-travel' ),
 			'type'       => 'premium',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-pro.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/tourable-pro.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=tourable-pro',
 			'detail_url' => 'https://themepalace.com/downloads/tourable-pro/',
 		),
 		'tourable'            => array(
 			'name'       => __( 'Tourable', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wptravel.io/wp-content/themes/wptravel/images/tourable-free.png',
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/tourable-free.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=tourable-pro',
 			'detail_url' => 'https://themepalace.com/downloads/tourable/',
 		),
 		'travel-log'          => array(
 			'name'       => __( 'Travel Log', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => plugins_url( '/wp-travel/assets/images/devices_web.png' ),
+			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-log.png' ),
 			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-log',
 			'detail_url' => 'http://wensolutions.com/themes/travel-log/',
 		),
@@ -165,7 +165,7 @@ function wp_travel_marketplace_page() {
 								<div class="single-module full-pro-section">
 									<div class="single-module-image">
 										<a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
-										<img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
+										<img width="423" height="237" src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/plugins/wp-travel-pro-banner.png' ) ); ?>" class="" alt="">
 										</a>
 									</div>
 									<div class="single-module-content clearfix">

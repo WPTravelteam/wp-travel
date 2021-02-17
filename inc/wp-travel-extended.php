@@ -28,7 +28,6 @@ require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/helpers/rest-api.php';
 
 // Ajax.
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/settings.php';
-require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/license.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-pricing-categories-taxonomy.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-extras.php';
 require WP_TRAVEL_EXTENDED_FILE_PATH . '/core/ajax/trip-pricing-categories.php';

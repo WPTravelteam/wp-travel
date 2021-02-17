@@ -823,13 +823,6 @@ function wp_travel_get_image_sizes() {
 }
 
 /**
- * Determine if post type is itinerary
- */
-function is_itinerary() {
-	return get_post_type() === WP_TRAVEL_POST_TYPE;
-}
-
-/**
  * Get permalink settings for WP Travel independent of the user locale.
  *
  * @since  1.1.0
@@ -847,12 +840,6 @@ function wp_travel_get_permalink_structure() {
 		)
 	);
 
-	// $db_version = get_option( 'wp_travel_version' );
-	// $current_version = WP_TRAVEL_VERSION;
-	// // Fallback slug
-	// if ( ( ! $db_version ) && '' === $permalinks['wp_travel_trip_base'] ) {
-	// $permalinks['wp_travel_trip_base'] = 'itinerary';
-	// }
 	// Ensure rewrite slugs are set.
 	$permalinks['wp_travel_trip_base']        = untrailingslashit( empty( $permalinks['wp_travel_trip_base'] ) ? 'itinerary' : $permalinks['wp_travel_trip_base'] );
 	$permalinks['wp_travel_trip_type_base']   = untrailingslashit( empty( $permalinks['wp_travel_trip_type_base'] ) ? 'trip-type' : $permalinks['wp_travel_trip_type_base'] );
