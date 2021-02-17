@@ -143,7 +143,7 @@ class WP_Travel_Ajax {
 
 		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		$allow_multiple_cart_items = WP_Travel_Cart::allow_multiple_items();
-
+		error_log( 'allow multipl;e ' . $allow_multiple_cart_items );
 		if ( ! $allow_multiple_cart_items ) {
 			$wt_cart->clear();
 		}
@@ -189,7 +189,7 @@ class WP_Travel_Ajax {
 				$category_price_partial = $category_price;
 
 				if ( wp_travel_is_partial_payment_enabled() ) {
-					$percent                = wp_travel_get_actual_payout_percent( $trip_id );
+					$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 					$category_price_partial = ( $category_price * $percent ) / 100;
 				}
 
@@ -249,7 +249,7 @@ class WP_Travel_Ajax {
 			$price      = WP_Travel_Helpers_Pricings::get_price( $args );
 			$trip_price = $price;
 			if ( wp_travel_is_partial_payment_enabled() ) {
-				$percent                = wp_travel_get_actual_payout_percent( $trip_id );
+				$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 				$category_price_partial = ( $trip_price * $percent ) / 100;
 			}
 			if ( 'person' == $price_per ) {
@@ -284,7 +284,7 @@ class WP_Travel_Ajax {
 		if ( isset( $post_data['trip_price'] ) && $post_data['trip_price'] > 0 ) {
 			$trip_price = $post_data['trip_price'];
 			if ( wp_travel_is_partial_payment_enabled() ) {
-				$percent            = wp_travel_get_actual_payout_percent( $trip_id );
+				$percent            = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 				$trip_price_partial = $trip_price * $percent / 100;
 			}
 		}
@@ -292,7 +292,7 @@ class WP_Travel_Ajax {
 		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
 		if ( $attrs['enable_partial'] ) {
 			$trip_price_partial             = $trip_price;
-			$payout_percent                 = wp_travel_get_payout_percent( $trip_id );
+			$payout_percent                 = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 			$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
 
 			if ( $payout_percent > 0 ) {
@@ -338,6 +338,8 @@ class WP_Travel_Ajax {
 		} else {
 			$wt_cart->add( $add_to_cart_args );
 		}
+		// Need to update cart add. in calse of multiple items partial figure need to update in individual item
+		// $wt_cart->update( $cart_item_id, $pax );
 		echo true;
 
 	}

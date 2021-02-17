@@ -883,7 +883,7 @@ function wp_travel_new_pricing_list_admin() {
 		$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent, true );
 		
 		if ( ! $payout_percent ) {
-			$payout_percent = wp_travel_get_payout_percent( $trip_id );
+			$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 		}
 		if ( '0.00' === $payout_percent ) {
 			$payout_percent = $default_payout_percent;
@@ -1736,7 +1736,7 @@ function wp_travel_old_pricing_list_admin() {
 		$payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent, true );
 		if ( ! $payout_percent ) {
-			$payout_percent = wp_travel_get_payout_percent( $trip_id );
+			$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 		}
 		$use_global = wp_travel_use_global_payout_percent( $trip_id );
 		/**

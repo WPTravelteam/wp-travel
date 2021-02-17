@@ -181,6 +181,7 @@ function wp_travel_get_payout_percent( $post_id ) {
 		return 0;
 	}
 	$settings       = wp_travel_get_settings();
+	// Global Payout percent.
 	$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 	$use_global     = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', true );
 

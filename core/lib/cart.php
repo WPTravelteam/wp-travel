@@ -387,7 +387,7 @@ class WP_Travel_Lib_Cart {
 
 				$trip_price_partial = $trip_price;
 				if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
-					$payout_percent = wp_travel_get_payout_percent( $trip_id );
+					$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 
 					$this->items[ $cart_item_id ]['partial_payout_figure'] = $payout_percent;
 
@@ -541,7 +541,7 @@ class WP_Travel_Lib_Cart {
 
 						// Trip extra partial calculation.
 						if ( function_exists( 'wp_travel_tour_extras_enable_partial' ) && wp_travel_tour_extras_enable_partial( $trip['trip_id'], $trip['price_key'] ) ) {
-							$payout_percent = wp_travel_get_payout_percent( $trip['trip_id'] );
+							$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip['trip_id'] );
 							if ( $payout_percent > 0 && $extra_price > 0 ) {
 								$trip_extras_total_partial = ( $extra_price * $payout_percent ) / 100;
 								$trip_extras_total_partial = wp_travel_get_formated_price( $trip_extras_total_partial );

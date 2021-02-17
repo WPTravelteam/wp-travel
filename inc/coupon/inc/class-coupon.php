@@ -290,7 +290,7 @@ class WP_Travel_Coupon {
 					$item_total = $wt_cart->get_item_total( $cart_item_id );
 
 					if ( wp_travel_is_partial_payment_enabled() ) {
-						$payout_percent = wp_travel_get_payout_percent( $trip_id );
+						$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 
 						$item_total                 = ( $item_total * $payout_percent ) / 100;
 						$discount_applicable_total += $item_total;
