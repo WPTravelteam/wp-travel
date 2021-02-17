@@ -85,7 +85,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								if ( $order_details && is_array( $order_details ) && count( $order_details ) > 0 ) : // Multiple.
 									$travel_date = '';
 									foreach ( $order_details as $order_detail ) :
-										$bkd_trip_id      = $order_detail['trip_id'];
+										$bkd_trip_id = $order_detail['trip_id'];
 										break;
 									endforeach;
 								endif;
@@ -144,10 +144,10 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
 									<div class="contact-title">
 										<?php
-										$status_lists   = wp_travel_get_payment_status();
-										$status = $status_lists[ $payment_status ];
+										$status_lists = wp_travel_get_payment_status();
+										$status       = $status_lists[ $payment_status ];
 										echo esc_html( $status['text'] );
-										// echo esc_html( $payment_status ); ?>
+										?>
 									</div>
 								</td>
 

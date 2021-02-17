@@ -201,7 +201,7 @@ function wp_travel_booking_form_fields() {
 	$pax_size = 1;
 	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ) {
 		if ( is_array( $_REQUEST['pax'] ) ) {
-			$pax_size = array_sum( $_REQUEST['pax'] );
+			$pax_size = array_sum( wp_travel_sanitize_array( $_REQUEST['pax'] ) );
 		}
 	}
 	$trip_duration = 1;
@@ -209,7 +209,7 @@ function wp_travel_booking_form_fields() {
 		$trip_duration = esc_attr( $_REQUEST['trip_duration'] );
 	}
 
-	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
+	$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( wp_unslash( $_GET['price_key'] ) ) : '';
 
 	// Set Defaults for booking form.
 	$user_fname = '';

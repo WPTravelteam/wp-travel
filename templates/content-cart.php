@@ -28,7 +28,7 @@ if ( isset( $settings['checkout_page_id'] ) ) {
 $pax_label = __( 'Pax', 'wp-travel' );
 $max_attr  = '';
 
-// For old form
+// For old form.
 $trip_id       = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : '';
 $trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? absint( $_GET['trip_duration'] ) : 1;
 
