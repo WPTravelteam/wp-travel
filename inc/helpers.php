@@ -2885,7 +2885,7 @@ function wp_travel_get_submenu() {
 				'page_title' => __( 'Reports', 'wp-travel' ),
 				'menu_title' => __( 'Reports', 'wp-travel' ),
 				'menu_slug'  => 'booking_chart',
-				'callback'   => 'get_booking_chart',
+				'callback'   => 'wp_travel_get_booking_chart',
 			),
 			'custom_filters' => array(
 				'priority'   => '125',
