@@ -336,7 +336,7 @@ class WP_Travel_Cart {
 
 					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 					if ( wp_travel_is_partial_payment_enabled() ) {
-						$percent                = wp_travel_get_actual_payout_percent( $trip_id );
+						$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
 					}
 					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
@@ -368,6 +368,18 @@ class WP_Travel_Cart {
 					}
 				}
 				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
+
+				// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
+				// 	$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
+
+				// 	$this->items[ $cart_item_id ]['partial_payout_figure'] = $payout_percent;
+
+				// 	if ( $payout_percent > 0 ) {
+				// 		$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
+				// 		$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+				// 	}
+				// 	$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
+				// }
 				if ( $max_available && $cart_pax > $max_available ) {
 					WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $cart_pax, $max_available ), 'error' );
 				}
@@ -394,7 +406,7 @@ class WP_Travel_Cart {
 
 				$trip_price_partial = $trip_price;
 				if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
-					$payout_percent = wp_travel_get_payout_percent( $trip_id );
+					$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 
 					$this->items[ $cart_item_id ]['partial_payout_figure'] = $payout_percent;
 
@@ -682,7 +694,7 @@ class WP_Travel_Cart {
 
 				// Partial extras calc
 				if ( wp_travel_is_partial_payment_enabled() ) {
-					$payout_percent = wp_travel_get_payout_percent( $item['trip_id'] );
+					$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $item['trip_id'] );
 					$extra_price    = ( $extra_price * $payout_percent ) / 100;
 				}
 				$item_total_partial += $extra_price;

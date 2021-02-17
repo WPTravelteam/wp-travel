@@ -403,7 +403,7 @@ function wp_travel_booking_data( $booking_id ) {
 
 	// Partical calculation.
 	if ( wp_travel_is_partial_payment_enabled() ) {
-		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 
 		if ( $payout_percent > 0 ) {
 			$trip_price_partial       = ( $trip_price * $payout_percent ) / 100;
@@ -551,7 +551,7 @@ function wp_travel_get_partial_trip_price( $trip_id, $price_key = null ) {
 	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
 	if ( wp_travel_is_partial_payment_enabled() ) {
-		$payout_percent = wp_travel_get_payout_percent( $trip_id );
+		$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 		if ( $payout_percent > 0 ) {
 			$trip_price = ( $trip_price * $payout_percent ) / 100;
 			$trip_price = wp_travel_get_formated_price( $trip_price );

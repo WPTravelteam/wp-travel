@@ -70,6 +70,7 @@ if ( wp_travel_is_react_version_enabled() ) {
 								break;
 							}
 						}
+						// $payout = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$categories = isset( $cart_pricing['categories'] ) ? wp_travel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						// print_r( $categories );
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wp_travel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
@@ -171,6 +172,9 @@ if ( wp_travel_is_react_version_enabled() ) {
 										<span>
 											<?php 
 												if ( $trip_discount ) {
+													error_log( 'trip_total ' . $trip_total  );
+													error_log( 'trip_total_partial ' . $trip_total_partial  );
+													error_log( 'trip discount ' . $trip_discount  );
 													$partial_discount = ( $trip_discount * $payout_percent ) / 100;
 
 													echo wp_travel_get_formated_price_currency( $trip_total_partial -  $partial_discount ); 
