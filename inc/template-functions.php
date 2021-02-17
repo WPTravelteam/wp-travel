@@ -1011,7 +1011,7 @@ function wp_travel_trip_map( $post_id ) {
 		$api_key = $settings['google_map_api_key'];
 	}
 
-	$map_data = get_wp_travel_map_data();
+	$map_data = wp_travel_get_map_data();
 	$lat      = isset( $map_data['lat'] ) ? $map_data['lat'] : '';
 	$lng      = isset( $map_data['lng'] ) ? $map_data['lng'] : '';
 
@@ -1918,14 +1918,14 @@ function wp_travel_wpkses_post_iframe( $tags, $context ) {
 	return $tags;
 }
 
-if ( ! function_exists( 'is_wp_travel_endpoint_url' ) ) :
+if ( ! function_exists( 'wp_travel_is_endpoint_url' ) ) :
 	/**
 	 * Is_wp_travel_endpoint_url - Check if an endpoint is showing.
 	 *
 	 * @param string $endpoint Whether endpoint.
 	 * @return bool
 	 */
-	function is_wp_travel_endpoint_url( $endpoint = false ) {
+	function wp_travel_is_endpoint_url( $endpoint = false ) {
 		global $wp;
 		$query_class         = new WP_Travel_Query();
 		$wp_travel_endpoints = $query_class->get_query_vars();
@@ -1958,7 +1958,7 @@ endif;
  * @since 2.5.3
  */
 function wp_travel_prevent_endpoint_indexing() {
-	if ( is_wp_travel_endpoint_url() ) { // WPCS: input var ok, CSRF ok.
+	if ( wp_travel_is_endpoint_url() ) { // WPCS: input var ok, CSRF ok.
 		@header( 'X-Robots-Tag: noindex' ); // @codingStandardsIgnoreLine
 	}
 }

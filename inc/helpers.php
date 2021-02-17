@@ -327,7 +327,7 @@ function wp_travel_get_maps() {
 /**
  * Get Map Data.
  */
-function get_wp_travel_map_data( $trip_id = null ) {
+function wp_travel_get_map_data( $trip_id = null ) {
 	if ( ! $trip_id ) {
 		global $post;
 		if ( ! $post ) {
@@ -551,7 +551,7 @@ function wp_travel_get_tour_extras_array() {
 /**
  * Return JSON Encoded Itinerary price oblect
  */
-function wp_reavel_get_itinereries_prices_array() {
+function wp_travel_get_itinereries_prices_array() {
 
 	$itineraries = wp_travel_get_itineraries_array();
 
@@ -2885,7 +2885,7 @@ function wp_travel_get_submenu() {
 				'page_title' => __( 'Reports', 'wp-travel' ),
 				'menu_title' => __( 'Reports', 'wp-travel' ),
 				'menu_slug'  => 'booking_chart',
-				'callback'   => 'get_booking_chart',
+				'callback'   => 'wp_travel_get_booking_chart',
 			),
 			'custom_filters' => array(
 				'priority'   => '125',
