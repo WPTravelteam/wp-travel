@@ -57,27 +57,6 @@ const SettingsFact = () => {
         } )
     }
 
-    const FontAwesomeIcon = (props) => {
-        return <><i className={props.value}> {props.label}</i></>
-    }
-
-    //Icon options
-    let iconOptions = [];
-
-    if ( 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_fontawesome_icons ) {
-        iconOptions = options.wp_travel_fontawesome_icons.map( icon => {
-            return {
-                label: <FontAwesomeIcon label={icon.label} value={icon.value} />,
-                value: icon.value,
-            }
-        } )
-    }
-
-    const iconTypeOptions = [
-        { value: 'icon_class', label: 'Icon Class' },
-        { value: 'fa_icon', label: 'Fontawesome Icons' },
-    ]
-
     const [ isOpen, setOpen ] = useState( false );
     const openModal = () => setOpen( true );
     const closeModal = () => {
@@ -97,8 +76,37 @@ const SettingsFact = () => {
         const lastSelectedTab = sessionStorage.getItem('WPTravelLastSelectedTab');
 
         if ( 'fontawesome-icon' == lastSelectedTab ) {
+
             let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');
             updateFact( 'fa_icon', FAIconValue, index );
+            updateFact( 'selected_icon_type', 'fontawesome-icon', index );
+            setOpen(false);
+
+        } else if( 'custom-upload' == lastSelectedTab ) {
+
+            if ( "wpTravelIconModuleUploaderData" in sessionStorage ) {
+                const selectedImgDataString = sessionStorage.getItem('wpTravelIconModuleUploaderData');
+                const selectedImgData = JSON.parse(selectedImgDataString);
+    
+                const [ selectedImgDataObj ] = selectedImgData;
+    
+                const { url } = selectedImgDataObj;
+                updateFact( 'icon_img', url, index );
+                updateFact( 'selected_icon_type', 'custom-upload', index );
+                setOpen(false);
+            } else {
+                updateFact( 'icon_img', '', index );
+                updateFact( 'selected_icon_type', 'custom-upload', index );
+                setOpen(false);
+            }
+
+        } else if( 'icon-class' == lastSelectedTab ) {
+
+            let iconClassValue = sessionStorage.getItem('WPTravelIconClassValue');
+            updateFact( 'icon', iconClassValue, index );
+            updateFact( 'selected_icon_type', 'icon-class', index );
+            setOpen(false);
+
         }
     }
 
@@ -228,8 +236,7 @@ const SettingsFact = () => {
 
         useEffect(() => {
             
-            if ( !imageUrl && sessionStorage.length > 1 && "wpTravelIconModuleUploaderData" in sessionStorage && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
-                console.log('here');
+            if ( sessionStorage.length > 1 && "wpTravelIconModuleUploaderData" in sessionStorage && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
                 setState({
                     isFetchingImage: true
                 });
@@ -246,10 +253,6 @@ const SettingsFact = () => {
                     isFetchingImage: false,
                 })
             }
-
-            // return () => {
-            //     sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
-            // }
         }, []);
 
         mediaInstance
@@ -269,6 +272,13 @@ const SettingsFact = () => {
                 mediaInstance.open();
             }
 
+            const onMediaRemoveBtnClicked = () => {
+                setState({
+                    imageUrl: null,
+                });
+                sessionStorage.removeItem('wpTravelIconModuleUploaderData');
+            }
+
             return <>
             <PanelRow>
                 <h3>Icon</h3>
@@ -276,7 +286,13 @@ const SettingsFact = () => {
                     <div className="media-preview">
                         {isFetchingImage && <Spinner />}
                         {imageUrl && <img src={imageUrl} height="100" width="20%" />}
-                        <Button isPrimary onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                        <div className="wti_custom_uploader_btn_wrapper">
+                            <Button isPrimary onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                            {
+                                imageUrl &&
+                                <Button className="wti_custom_remove_btn" isDestructive onClick={onMediaRemoveBtnClicked}>{ __('Remove image', 'wp-travel' ) }</Button>
+                            }
+                        </div>
                     </div>
                 </div>
             </PanelRow>
@@ -356,7 +372,6 @@ const SettingsFact = () => {
                     { 'undefined' != typeof wp_travel_trip_facts_settings &&
                         <>
                             {wp_travel_trip_facts_settings.map( ( fact, index) =>{
-                                let selectedAddIcons = 'undefined' != typeof wp_travel_trip_facts_settings ? iconOptions.filter( opt => { return opt.value == fact.icon } ) : []
                                 return <PanelBody key={index}
                                     title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
                                     initialOpen={false}
@@ -372,23 +387,6 @@ const SettingsFact = () => {
                                         />
                                     </PanelRow>
 
-
-                                    {/* <PanelRow>
-                                        <label>{ __( 'Field Type', 'wp-travel' ) }</label>
-                                        <div className="wp-travel-field-value">
-                                            <div className="wp-travel-select-wrapper">
-                                                <Select
-                                                    options={factOptions}
-                                                    value={ 'undefined' != typeof selectedFactOptions[0] && 'undefined' != typeof selectedFactOptions[0].label ? selectedFactOptions[0] : []}
-                                                    onChange={(data)=>{
-                                                        if ( '' !== data ) {
-                                                            updateFact( 'type', data.value, index )
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </PanelRow> */}
                                     { ( 'undefined' != typeof fact.key ) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} /> }
 
                                     {( fact.type == 'single' || fact.type == 'multiple' ) &&
@@ -410,7 +408,21 @@ const SettingsFact = () => {
                                     {/** Icon Start here. */ }
                                     <PanelRow>
                                         <label>{__( 'Icon', 'wp-travel' )}</label>
-                                        <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
+                                        <div className="wti_icon_btn_wrapper">
+                                            {
+                                                'fontawesome-icon' == fact.selected_icon_type && '' != fact.fa_icon &&
+                                                <i className={fact.fa_icon}></i>
+                                            }
+                                            {
+                                                'custom-upload' == fact.selected_icon_type && '' != fact.icon_img &&
+                                                <img src={fact.icon_img} height="100" width="20%" />
+                                            }
+                                            {
+                                                'icon-class' == fact.selected_icon_type && '' != fact.icon &&
+                                                <i className={fact.icon}></i>
+                                            }
+                                            <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
+                                        </div>
                                         { isOpen && (
                                                 <Modal key={index} className="wti__icon_select_modal"
                                                     title={<><i className="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
@@ -441,7 +453,7 @@ const SettingsFact = () => {
                                                             },
                                                         ] }>
                                                         {
-                                                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} selectedAddIcons={selectedAddIcons} fact={fact} /> : <>{__('Error', 'wp-travel')}</>
+                                                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} fact={fact} /> : <>{__('Error', 'wp-travel')}</>
                                                         }
                                                     </TabPanel>
                                                     <div className="wti__insert_icon">
@@ -460,63 +472,7 @@ const SettingsFact = () => {
                                                 </Modal>
                                         ) }
                                     </PanelRow>
-                                    {/* <PanelRow>
-                                        <label>{__( 'Icon Type', 'wp-travel' )}</label>
-                                        <div className="wp-travel-field-value">
-                                            <Select
-                                                options={iconTypeOptions}
-                                                value={ 'undefined' != typeof selectedIconType[0] && 'undefined' != typeof selectedIconType[0].label ? selectedIconType[0] : selectedIconType[0] }
-                                                onChange= {(data) => {
-                                                    updateFact( 'icon_type', data.value, index )
-                                                }}
-                                                defaultValue={{value:'icon_class', label:'Icon Class'}}
-                                            />
-                                        </div>
-                                    </PanelRow> */}
-                                    {/* {
-                                        'icon_class' == fact.icon_type &&
-                                            <PanelRow>
-                                                <label>{__( 'Icon Class', 'wp-travel' )}</label>
-                                                <TextControl
-                                                    placeholder={__( 'icon', 'wp-travel' )}
-                                                    value={fact.icon}
-                                                    onChange={(value) => {
-                                                        updateFact( 'icon', value, index )
-                                                    }}
-                                                />
-                                            </PanelRow>
-                                    }
-                                    {
-                                        'fa_icon' == fact.icon_type &&
-                                        <>
-                                            <PanelRow>
-                                                <label>
-                                                    {__('Choose Icon', 'wp-travel')}
-                                                </label>
 
-                                                <div className="wp-travel-field-value">
-                                                    <Select
-                                                        options={iconOptions}
-                                                        value={'undefined' != typeof selectedAddIcons[0] && 'undefined' != typeof selectedAddIcons[0].label ? selectedAddIcons[0] : []}
-                                                        onChange={(data) => {
-                                                            if ('' !== data) {
-                                                                updateFact( 'icon', data.value, index );
-                                                            }
-                                                        }}
-                                                    />
-                                                </div>
-                                            </PanelRow>
-                                            <PanelRow>
-                                                <div className="wp-travel-field-value">
-                                                    <div className="media-preview">
-                                                        {isFetchingImage && <Spinner />}
-                                                        {imageUrl && <img src={imageUrl} height="100" width="50%" />}
-                                                        <Button isPrimary onClick={() => mediaInstance.open()}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
-                                                    </div>
-                                                </div>
-                                            </PanelRow>
-                                        </>
-                                    } */}
                                     <PanelRow className="wp-travel-action-section">
                                         <span></span>
                                         <Button isSecondary onClick={() => {

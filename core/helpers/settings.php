@@ -79,18 +79,19 @@ class WP_Travel_Helpers_Settings {
 		$settings['global_tab_settings'] = $mapped_global_tabs; // override values.
 
 		// trip facts.
-		$facts = $settings['wp_travel_trip_facts_settings'];
+		$facts        = $settings['wp_travel_trip_facts_settings'];
 		$mapped_facts = array();
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
 			foreach ( $facts as $key => $fact ) {
 				$new_fact       = array(
-					'key'       => $key,
-					'name'      => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
-					'type'      => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
-					'options'   => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
-					'icon'      => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
-					'icon_img'  => isset( $facts[ $key ]['icon_img'] ) ? $facts[ $key ]['icon_img'] : '',
-					'fa_icon'   => isset( $facts[ $key ]['fa_icon'] ) ? $facts[ $key ]['fa_icon'] : '',
+					'key'                => $key,
+					'name'               => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
+					'type'               => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',
+					'options'            => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
+					'icon'               => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
+					'icon_img'           => isset( $facts[ $key ]['icon_img'] ) ? $facts[ $key ]['icon_img'] : '',
+					'fa_icon'            => isset( $facts[ $key ]['fa_icon'] ) ? $facts[ $key ]['fa_icon'] : '',
+					'selected_icon_type' => isset( $facts[ $key ]['selected_icon_type'] ) ? $facts[ $key ]['selected_icon_type'] : 'icon-class',
 				);
 				$mapped_facts[] = $new_fact;
 			}
