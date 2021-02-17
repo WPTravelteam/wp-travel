@@ -4956,6 +4956,16 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
 .wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wti__fontawesome_tab_content .wti__fontawesome_tab_item.selected .wti__fontawesome_tab_item_content i {
   color: #71d7f7;
 }
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wp-travel-field-value .media-preview img {
+  max-width: 123px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wti__icon_select_modal .components-modal__content .components-tab-panel__tab-content .components-panel__row .wp-travel-field-value .media-preview .components-button {
+  margin-top: 17px;
+}
 .wti__icon_select_modal .wti__insert_icon {
   position: fixed;
   width: 100%;
@@ -4966,6 +4976,36 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   font-size: 12px;
   font-weight: 500;
   left: 0px;
+}
+.wti__icon_select_modal .wti__insert_icon .components-notice {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  right: 203px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wti__icon_select_modal .wti__insert_icon .components-notice .components-notice__content {
+  animation: arrowAnimate 1s ease infinite;
+  font-size: 14px;
+  font-size: 14px;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 0.7em 2em;
+  background-color: #cc2f24;
+}
+.wti__icon_select_modal .wti__insert_icon .components-notice .components-notice__content::before {
+  content: "";
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  border-left: 8px solid #cc2f24;
+  right: -15px;
 }
 .wti__icon_select_modal .wti__insert_icon .components-button {
   padding: 14px 49px;
@@ -4990,6 +5030,17 @@ body.post-type-itineraries .wp-travel-open-upload-area .button {
   opacity: 0.4;
 }
 
+@-webkit-keyframes arrowAnimate {
+  0% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .form-table .checkbox-default-design label {
   margin-right: -15px;
 }
