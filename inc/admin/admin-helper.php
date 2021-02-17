@@ -165,7 +165,7 @@ function wp_travel_marketplace_page() {
 								<div class="single-module full-pro-section">
 									<div class="single-module-image">
 										<a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
-										<img width="423" height="237" src="https://wptravel.io/wp-content/themes/wptravel/images/wp-travel-pro-banner.png" class="" alt="">
+										<img width="423" height="237" src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/plugins/wp-travel-pro-banner.png' ) ); ?>" class="" alt="">
 										</a>
 									</div>
 									<div class="single-module-content clearfix">
