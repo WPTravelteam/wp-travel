@@ -115,7 +115,7 @@ class WP_Travel_Network_Settings {
 	public function save_settings() {
 		if ( isset( $_POST['save_settings_button'] ) ) {
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
-			$current_tab = isset( $_POST['current_tab'] ) ? esc_attr( $_POST['current_tab'] ) : '';
+			$current_tab = isset( $_POST['current_tab'] ) ? sanitize_text_field( wp_unslash( $_POST['current_tab'] ) ) : '';
 
 			$settings = array();
 
@@ -128,7 +128,7 @@ class WP_Travel_Network_Settings {
 			$url_parameters['updated'] = 'true';
 			$redirect_url              = admin_url( self::$parent_slug );
 			$redirect_url              = add_query_arg( $url_parameters, $redirect_url ) . '#' . $current_tab;
-			wp_redirect( $redirect_url );
+			wp_safe_redirect( $redirect_url );
 			exit();
 		}
 	}

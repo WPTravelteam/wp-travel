@@ -277,15 +277,15 @@ class WP_Travel_Admin_Metaboxes {
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Total Price', 'wp-travel' ); ?></strong></td>
-					<td><?php echo wp_travel_get_formated_price_currency( $total_price ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $total_price ); //phpcs:ignore ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Paid Amount', 'wp-travel' ); ?></strong></td>
-					<td><?php echo wp_travel_get_formated_price_currency( $paid_amount ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $paid_amount ); //phpcs:ignore ?></td>
 				</tr>
 				<tr>
 					<td><strong><?php esc_html_e( 'Due Amount', 'wp-travel' ); ?></strong></td>
-					<td><?php echo wp_travel_get_formated_price_currency( $due_amount ); ?></td>
+					<td><?php echo wp_travel_get_formated_price_currency( $due_amount ); //phpcs:ignore ?></td>
 				</tr>
 			<?php endif; ?>
 		</table>
@@ -391,7 +391,7 @@ class WP_Travel_Admin_Metaboxes {
 		if ( ! isset( $_POST['wp_travel_save_data'] ) ) {
 			return;
 		}
-		if ( ! wp_verify_nonce( $_POST['wp_travel_save_data'], 'wp_travel_save_data_process' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_save_data'] ) ), 'wp_travel_save_data_process' ) ) {
 			return;
 		}
 
@@ -476,9 +476,9 @@ class WP_Travel_Admin_Metaboxes {
 
 		$trip_meta['wp_travel_price_per']           = isset( $_POST['wp_travel_price_per'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price_per'] ) ) : '';
 		$trip_meta['wp_travel_group_size']          = isset( $_POST['wp_travel_group_size'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_group_size'] ) ) : '';
-		$trip_meta['wp_travel_trip_include']        = isset( $_POST['wp_travel_trip_include'] ) ? wp_kses_post( $_POST['wp_travel_trip_include'] ) : '';
+		$trip_meta['wp_travel_trip_include']        = isset( $_POST['wp_travel_trip_include'] ) ? wp_kses_post( $_POST['wp_travel_trip_include'] ) : ''; // For getting html we can't sanitize it.
 		$trip_meta['wp_travel_trip_exclude']        = isset( $_POST['wp_travel_trip_exclude'] ) ? wp_kses_post( $_POST['wp_travel_trip_exclude'] ) : '';
-		$trip_meta['wp_travel_outline']             = isset( $_POST['wp_travel_outline'] ) ? wp_kses_post( $_POST['wp_travel_outline'] ): '';
+		$trip_meta['wp_travel_outline']             = isset( $_POST['wp_travel_outline'] ) ? wp_kses_post( $_POST['wp_travel_outline'] ) : '';
 		$trip_meta['wp_travel_start_date']          = isset( $_POST['wp_travel_start_date'] ) ? sanitize_text_field( $_POST['wp_travel_start_date'] ) : '';
 		$trip_meta['wp_travel_end_date']            = isset( $_POST['wp_travel_end_date'] ) ? sanitize_text_field( $_POST['wp_travel_end_date'] ): '';
 		$trip_meta['wp_travel_trip_itinerary_data'] = isset( $_POST['wp_travel_trip_itinerary_data'] ) ? wp_unslash( $_POST['wp_travel_trip_itinerary_data'] ) : '';
@@ -539,7 +539,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		// Update multiple trip dates options.
 		$wp_travel_multiple_trip_dates = array();
-		$trip_dates                    = array(); // List all the trip dates. Need to filter redundant date below.  @since 3.0.5
+		$trip_dates                    = array(); // List all the trip dates. Need to filter redundant date below.  @since 3.0.5.
 		if ( isset( $_POST['wp_travel_multiple_trip_dates'] ) ) {
 			$wp_travel_multiple_trip_dates = wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_multiple_trip_dates'] ) );
 
@@ -571,7 +571,7 @@ class WP_Travel_Admin_Metaboxes {
 			$trip_meta['trip_dates'] = $trip_dates;
 
 			if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
-				$trip_meta['trip_date'] = $trip_dates[0]; // Use it in sorting according to trip dates. @since 3.0.5
+				$trip_meta['trip_date'] = $trip_dates[0]; // Use it in sorting according to trip dates. @since 3.0.5.
 			}
 		}
 		$trip_meta['wp_travel_multiple_trip_dates'] = $wp_travel_multiple_trip_dates;

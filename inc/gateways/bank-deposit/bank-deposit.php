@@ -9,12 +9,12 @@ function wp_travel_booking_bank_deposit( $booking_id ) {
 	if (
 		! isset( $_POST['wp_travel_book_now'] )
 		|| ! isset( $_POST['wp_travel_security'] )
-		|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
 		) {
 		return;
 	}
 
-	$gateway = isset( $_POST['wp_travel_payment_gateway'] ) ? sanitize_text_field( $_POST['wp_travel_payment_gateway'] ) : '';
+	$gateway = isset( $_POST['wp_travel_payment_gateway'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_gateway'] ) ) : '';
 	if ( 'bank_deposit' === $gateway ) {
 
 		$payment_id = wp_travel_get_payment_id( $booking_id );
@@ -37,7 +37,7 @@ function wp_travel_submit_bank_deposit_slip() {
 
 		if (
 			! isset( $_POST['wp_travel_security'] )
-			|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
 			) {
 			return;
 		}
@@ -59,7 +59,7 @@ function wp_travel_submit_bank_deposit_slip() {
 		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . '-' . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
 		$target_file = $target_dir . $filename;
 
-		$tmp_name = $tmp_name = $_FILES['wp_travel_bank_deposit_slip']['tmp_name'];
+		$tmp_name = $tmp_name = sanitize_text_field( wp_unslash( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) );
 
 		$ext = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 
@@ -77,12 +77,12 @@ function wp_travel_submit_bank_deposit_slip() {
 
 		// Update status if file is uploaded. and save image path to meta.
 		if ( true === $upload_ok ) {
-			$booking_id = $_POST['booking_id'];
+			$booking_id = absint( $_POST['booking_id'] );
 			$txn_id     = isset( $_POST['wp_travel_bank_deposit_transaction_id'] ) ? sanitize_text_field( $_POST['wp_travel_bank_deposit_transaction_id'] ) : '';
 			$data       = wp_travel_booking_data( $booking_id );
 
 			$total = $data['total'];
-			if ( 'partial' == $_POST['wp_travel_payment_mode'] ) {
+			if ( isset( $_POST['wp_travel_payment_mode'] ) && 'partial' == $_POST['wp_travel_payment_mode'] ) {
 				$total = $data['total_partial'];
 			}
 			$paid = $data['paid_amount'];
@@ -125,8 +125,8 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 			$details['due_amount'] = apply_filters( 'wp_travel_partial_payment_due_amount', $details['due_amount'] );
 			?>
 			<div class="wp-travel-form-field  wp-travel-text-info">
-				<label for="wp-travel-amount-info"><?php _e( 'Amount', 'wp-travel' ); ?></label>
-				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'], false, '', $booking_id ); ?></div>
+				<label for="wp-travel-amount-info"><?php esc_html_e( 'Amount', 'wp-travel' ); ?></label>
+				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'], false, '', $booking_id ); //phpcs:ignore ?></div>
 			</div>
 		<?php endif; ?>
 		<div class="wp-travel-bank-deposit-wrap">
@@ -190,7 +190,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 		</div>
 		<div id="wp-travel-bank-details-content" class="wp-travel-popup" >
 			<h3 class="popup-title"><?php esc_html_e( 'Bank Details', 'wp-travel' ); ?></h3>
-			<?php echo wp_travel_get_bank_deposit_account_table(); ?>
+			<?php echo wp_travel_get_bank_deposit_account_table(); //phpcs:ignore ?>
 			<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
 		</div>
 	</div>

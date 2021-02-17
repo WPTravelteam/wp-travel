@@ -56,7 +56,7 @@ function wp_travel_payment_field_list() {
  */
 function wp_travel_payment_gateway_lists() {
 	$gateway = array(
-		'paypal' => __( 'Standard Paypal', 'wp-travel' ),
+		'paypal'       => __( 'Standard Paypal', 'wp-travel' ),
 		'bank_deposit' => __( 'Bank Deposit', 'wp-travel' ),
 	);
 	return apply_filters( 'wp_travel_payment_gateway_lists', $gateway );
@@ -95,9 +95,8 @@ function wp_travel_sorted_payment_gateway_lists() {
 
 	$sorted = array();
 	foreach ( $sorted_gateways as $gateway_key ) {
-		$sorted[ $gateway_key ] = $default_gateways[ $gateway_key  ];
+		$sorted[ $gateway_key ] = $default_gateways[ $gateway_key ];
 	}
-
 
 	return $sorted;
 }
@@ -112,8 +111,8 @@ function wp_travel_minimum_partial_payout( $trip_id ) {
 	if ( ! $trip_id ) {
 		return 0;
 	}
-	$args = array( 'trip_id' => $trip_id );
-	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$args        = array( 'trip_id' => $trip_id );
+	$trip_price  = WP_Travel_Helpers_Pricings::get_price( $args );
 	$tax_details = wp_travel_process_trip_price_tax( $trip_id );
 
 	if ( is_array( $tax_details ) && isset( $tax_details['tax_type'] ) ) {
@@ -180,7 +179,7 @@ function wp_travel_get_payout_percent( $post_id ) {
 	if ( ! $post_id ) {
 		return 0;
 	}
-	$settings       = wp_travel_get_settings();
+	$settings = wp_travel_get_settings();
 	// Global Payout percent.
 	$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 	$use_global     = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', true );
@@ -296,13 +295,13 @@ function wp_travel_update_payment_status_admin( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
-	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
 		return;
 	}
 	$payment_id = wp_travel_get_payment_id( $booking_id );
 
 	if ( $payment_id ) {
-		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( $_POST['wp_travel_payment_status'] ) : 'N/A';
+		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $payment_status );
 	}
 }
@@ -314,7 +313,7 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 
 	if (
 		! isset( $_POST['wp_travel_security'] )
-		|| ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' )
+		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
 		) {
 		return;
 	}
@@ -338,7 +337,7 @@ function wp_travel_update_payment_status_booking_process_frontend( $booking_id )
 		if ( isset( $booking_field_list['payment_fields'][ $field_list ]['name'] ) ) {
 			$meta_field = $booking_field_list['payment_fields'][ $field_list ]['name'];
 			if ( isset( $_POST[ $meta_field ] ) ) {
-				$meta_value = $_POST[ $meta_field ]; //@phpcs:ignore
+				$meta_value = sanitize_text_field( wp_unslash( $_POST[ $meta_field ] ) );
 				if ( 'wp_travel_payment_amount' === $meta_field ) {
 					continue;
 				}
@@ -450,8 +449,8 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$booking_arrival_date   = ( '' !== $booking_arrival_date ) ? wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' ) : '';
 	$booking_departure_date = ( '' !== $booking_departure_date ) ? wp_travel_format_date( $booking_departure_date, true, 'Y-m-d' ) : '';
 
-	$arrival_date_email_tag = wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' );  // email tag date only.
-	$wp_travel_arrival_date_email_tag = get_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', true ); 
+	$arrival_date_email_tag           = wp_travel_format_date( $booking_arrival_date, true, 'Y-m-d' );  // email tag date only.
+	$wp_travel_arrival_date_email_tag = get_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', true );
 	if ( $wp_travel_arrival_date_email_tag ) {
 		$arrival_date_email_tag = $wp_travel_arrival_date_email_tag; // email date tag along with time.
 	}
@@ -495,7 +494,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
 
-	$email = new WP_Travel_Emails();
+	$email          = new WP_Travel_Emails();
 	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
 	// Send mail to admin if booking email is set to yes.
@@ -517,7 +516,7 @@ function wp_travel_send_email_payment( $booking_id ) {
 		$headers = $email->email_headers( $reply_to_email, $client_email );
 
 		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
-			$thankyou_page_url = $_SERVER['REDIRECT_URL'];
+			$thankyou_page_url = sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_URL'] ) );
 			$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 			$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
 			header( 'Location: ' . $thankyou_page_url );
@@ -532,8 +531,8 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$client_message_data  = $client_payment_template['mail_header'];
 	$client_message_data .= $client_payment_template['mail_content'];
 	$client_message_data .= $client_payment_template['mail_footer'];
-	$client_message_data = apply_filters( 'wp_travel_client_payment_email', $client_message_data, $booking_id );
-	
+	$client_message_data  = apply_filters( 'wp_travel_client_payment_email', $client_message_data, $booking_id );
+
 	// Client Payment message.
 	$client_payment_message = str_replace( array_keys( $email_tags ), $email_tags, $client_message_data );
 	// Client Payment Subject.
@@ -543,14 +542,17 @@ function wp_travel_send_email_payment( $booking_id ) {
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
-		$thankyou_page_url = $_SERVER['REDIRECT_URL'];
+		$thankyou_page_url = sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_URL'] ) );
 		$thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
 		$thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
 		header( 'Location: ' . $thankyou_page_url );
 		exit;
 	}
 
-	$email_data = array( 'from' => $reply_to_email, 'to' => $customer_email );
+	$email_data = array(
+		'from' => $reply_to_email,
+		'to'   => $customer_email,
+	);
 	do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.
 }
 
@@ -592,7 +594,7 @@ function wp_travel_update_payment_status( $booking_id, $amount, $status, $args, 
 /**
  * Return booking message.
  *
- * @param String $message Booking message
+ * @param String $message Booking message.
  * @return void
  */
 function wp_travel_payment_booking_message( $message ) {
@@ -628,7 +630,7 @@ function wp_travel_get_total_amount() {
 
 	$total = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
 
-	if ( wp_travel_is_partial_payment_enabled() && isset( $_REQUEST['partial'] ) && $_REQUEST['partial'] ) {
+	if ( wp_travel_is_partial_payment_enabled() && isset( $_REQUEST['partial'] ) && sanitize_text_field( wp_unslash( $_REQUEST['partial'] ) ) ) {
 		$total = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : 0;
 	}
 
