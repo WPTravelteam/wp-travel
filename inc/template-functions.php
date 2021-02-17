@@ -1056,7 +1056,7 @@ function wp_travel_related_itineraries( $post_id ) {
 
 function wp_travel_add_comment_rating( $comment_id, $approve, $comment_data ) {
 	if ( isset( $_POST['wp_travel_rate_val'] ) && WP_TRAVEL_POST_TYPE === get_post_type( $comment_data['comment_post_ID'] ) ) { // @phpcs:ignore
-		if ( $_POST['wp_travel_rate_val'] > 5 || $_POST['wp_travel_rate_val'] < 0 ) { // @phpcs:ignore
+		if ( absint( $_POST['wp_travel_rate_val'] ) > 5 || absint( $_POST['wp_travel_rate_val'] ) < 0 ) { // @phpcs:ignore
 			return;
 		}
 		add_comment_meta( $comment_id, '_wp_travel_rating',  absint( $_POST['wp_travel_rate_val'] ), true ); // @phpcs:ignore
