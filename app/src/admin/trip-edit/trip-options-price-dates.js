@@ -235,12 +235,12 @@ const WPTravelTripOptionsPricings = () => {
                 <>
                     <PanelRow>
                     </PanelRow>
-                    <h4>{ __( 'Payout', 'wp-travel' ) }</h4>
+                    <h4>{ __( 'Minimum Payout ', 'wp-travel' ) }</h4>
                     <PanelRow>
-                        <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
+                        <label>{ __( 'Use Global Payout', 'wp-travel' ) }</label>
                         <ToggleControl
                             checked={ minimum_partial_payout_use_global }
-                            help={__( 'Use Global Payout', 'wp-travel' )}
+                            help={__( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' )}
                             onChange={ () => {
                                 updateTripData({
                                     ...allData,
