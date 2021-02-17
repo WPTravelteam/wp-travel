@@ -104,7 +104,8 @@ function wp_travel_book_now() {
 
 	// Insert $_POST as Booking Meta.
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wp_travel_book_now', 'wp_travel_payment_amount' );
-	foreach ( $_POST as $meta_name => $meta_val ) {
+	$meta_array  = wp_travel_sanitize_array( $_POST );
+	foreach ( $meta_array as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name, $post_ignore ) ) {
 			continue;
 		}
@@ -282,7 +283,7 @@ function wp_travel_book_now() {
  *
  * @return void
  */
-function get_booking_chart() {
+function wp_travel_get_booking_chart() {
 
 	$submission_request = isset( $_REQUEST['_wp_travel_booking_chart_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wp_travel_booking_chart_nonce'] ) ), '_wp_travel_booking_chart_nonce_action' ) ? wp_travel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
 

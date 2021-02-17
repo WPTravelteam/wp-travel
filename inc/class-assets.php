@@ -19,7 +19,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				$trip_id = $post->ID;
 			}
 
-			$map_data       = get_wp_travel_map_data();
+			$map_data       = wp_travel_get_map_data();
 			$map_zoom_level = $settings['google_map_zoom_level'];
 
 			// Getting Locale to fetch Localized calender js.
@@ -41,7 +41,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				'decimal_separator'  => $settings['decimal_separator'],
 				'number_of_decimals' => $settings['number_of_decimals'],
 
-				'prices'             => wp_reavel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
+				'prices'             => wp_travel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
 				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
@@ -311,7 +311,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				global $post;
 				wp_register_script( 'wp-travel-moment', self::$assets_path . 'assets/js/moment.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 
-				$map_data = get_wp_travel_map_data();
+				$map_data = wp_travel_get_map_data();
 
 				$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'wp-travel-moment' );
 

@@ -576,16 +576,24 @@ function wp_travel_itineraries_column_orderby( $vars ) {
  * Ajax for adding feature aditem.
  */
 function wp_travel_featured_admin_ajax() {
-	if ( ! wp_verify_nonce( $_POST['nonce'], 'wp_travel_featured_nounce' ) ) {
+
+	if ( ! isset( $_POST['nonce'] ) ) {
+		return;
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wp_travel_featured_nounce' ) ) {
 		exit( 'invalid' );
 	}
 
 	header( 'Content-Type: application/json' );
-	$post_id         = intval( $_POST['post_id'] );
+	if ( ! isset( $_POST['post_id'] ) ) {
+		return;
+	}
+	$post_id         = absint( $_POST['post_id'] );
 	$featured_status = esc_attr( get_post_meta( $post_id, 'wp_travel_featured', true ) );
-	$new_status      = $featured_status == 'yes' ? 'no' : 'yes';
+	$new_status      = 'yes' == $featured_status ? 'no' : 'yes';
 	update_post_meta( $post_id, 'wp_travel_featured', $new_status );
-	echo json_encode(
+	echo wp_json_encode(
 		array(
 			'ID'         => $post_id,
 			'new_status' => $new_status,
@@ -595,6 +603,9 @@ function wp_travel_featured_admin_ajax() {
 }
 add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
 
+/**
+ * Metabox publish WP Travel.
+ */
 function wp_travel_publish_metabox() {
 	global $post;
 	if ( get_post_type( $post ) === 'itinerary-booking' ) {
@@ -620,6 +631,9 @@ function wp_travel_publish_metabox() {
 }
 add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
 
+/**
+ * Upgrade Function WP Travel.
+ */
 function wp_travel_upgrade_to_110() {
 	$itineraries        = get_posts(
 		array(
@@ -693,7 +707,7 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 			break;
 	} // end switch
 }
-/*
+/**
  * ADMIN COLUMN - CONTENT
  */
 add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_payment_manage_columns', 10, 2 );
@@ -731,11 +745,11 @@ add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
 /**
  * Create a page and store the ID in an option.
  *
- * @param mixed  $slug Slug for the new page
- * @param string $option Option name to store the page's ID
- * @param string $page_title (default: '') Title for the new page
- * @param string $page_content (default: '') Content for the new page
- * @param int    $post_parent (default: 0) Parent for the new page
+ * @param mixed  $slug Slug for the new page.
+ * @param string $option Option name to store the page's ID.
+ * @param string $page_title (default: '') Title for the new page.
+ * @param string $page_content (default: '') Content for the new page.
+ * @param int    $post_parent (default: 0) Parent for the new page.
  * @return int page ID
  */
 function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
@@ -745,12 +759,12 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 
 	if ( $option_value > 0 && ( $page_object = get_post( $option_value ) ) ) {
 		if ( 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ) ) ) {
-			// Valid page is already in place
+			// Valid page is already in place.
 			if ( strlen( $page_content ) > 0 ) {
-				// Search for an existing page with the specified page content (typically a shortcode)
+				// Search for an existing page with the specified page content (typically a shortcode).
 				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' ) AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
 			} else {
-				// Search for an existing page with the specified page slug
+				// Search for an existing page with the specified page slug.
 				$valid_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
 			}
 
@@ -765,12 +779,12 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 		}
 	}
 
-	// Search for a matching valid trashed page
+	// Search for a matching valid trashed page.
 	if ( strlen( $page_content ) > 0 ) {
-		// Search for an existing page with the specified page content (typically a shortcode)
+		// Search for an existing page with the specified page content (typically a shortcode).
 		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_content LIKE %s LIMIT 1;", "%{$page_content}%" ) );
 	} else {
-		// Search for an existing page with the specified page slug
+		// Search for an existing page with the specified page slug.
 		$trashed_page_found = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status = 'trash' AND post_name = %s LIMIT 1;", $slug ) );
 	}
 
@@ -938,7 +952,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 		</span>
 		<?php if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) : ?>
 			<p class="description">
-				<?php printf( __( 'Need advance Trip Extras options? %1$s GET PRO%2$s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '</a>' ); ?>
+				<?php printf( esc_html__( 'Need advance Trip Extras options? %1$s GET PRO%2$s', 'wp-travel' ), '<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">', '</a>' ); ?>
 			</p>
 		<?php endif; ?>
 
@@ -986,7 +1000,7 @@ function wp_travel_extras_pro_option_fields() {
 		</td>
 		<td>
 			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
-					<?php echo wp_travel_get_currency_symbol(); ?>
+					<?php echo wp_travel_get_currency_symbol(); //phpcs:ignore ?>
 			</span>
 			<input disabled="disabled" type="number" min="1" step="0.01" id="extra-item-price" placeholder="<?php echo esc_attr__( 'Price', 'wp-travel' ); ?>" >
 		</td>
@@ -999,7 +1013,7 @@ function wp_travel_extras_pro_option_fields() {
 		</td>
 		<td>
 			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
-				<?php echo wp_travel_get_currency_symbol(); ?>
+				<?php echo wp_travel_get_currency_symbol(); //phpcs:ignore ?>
 			</span>
 			<input type="number" min="1" step="0.01" id="extra-item-sale-price" placeholder="<?php echo esc_attr__( 'Sale Price', 'wp-travel' ); ?>" disabled="disabled" >
 		</td>
@@ -1023,8 +1037,6 @@ function wp_travel_extras_pro_option_fields() {
 					'content'    => __( 'By upgrading to Pro, you can get features with gallery, detail extras page in Front-End and more !', 'wp-travel' ),
 					'link'       => 'https://wptravel.io/wp-travel-pro/',
 					'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-					// 'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
-					// 'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
 				);
 				wp_travel_upsell_message( $args );
 				endif;
@@ -1064,6 +1076,9 @@ function wp_travel_is_admin_page( $pages = array() ) {
 	return false;
 }
 
+/**
+ * WP Travel Pricing Option List.
+ */
 function wp_travel_get_pricing_option_list() {
 	$type = array(
 		'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
@@ -1078,6 +1093,9 @@ function wp_travel_get_pricing_option_list() {
 	return apply_filters( 'wp_travel_pricing_option_list', $type );
 }
 
+/**
+ * Upsell message WP Travel.
+ */
 function wp_travel_upsell_message( $args ) {
 	$defaults = array(
 		'type'               => array( 'wp-travel-pro' ),
@@ -1085,10 +1103,6 @@ function wp_travel_upsell_message( $args ) {
 		'content'            => __( 'Get addon for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel' ),
 		'link'               => 'https://wptravel.io/wp-travel-pro/',
 		'link_label'         => __( 'Get WP Travel Pro', 'wp-travel' ),
-		// 'link2'              => 'https://wptravel.io/downloads/',
-		// 'link2_label'        => __( 'Check all Add-ons', 'wp-travel' ),
-		// 'link3'              => '',
-		// 'link3_label'        => __( 'View WP Travel Addons', 'wp-travel' ),
 		'main_wrapper_class' => array( 'wp-travel-upsell-message-wide' ),
 	);
 	$args       = wp_parse_args( $args, $defaults );
@@ -1112,7 +1126,7 @@ function wp_travel_upsell_message( $args ) {
 		<div class="wp-travel-pro-feature-notice clearfix">
 			<div class="section-one">
 				<h4><?php echo esc_html( $args['title'] ); ?></h4>
-				<p><?php echo $args['content']; ?></p>
+				<p><?php echo wp_kses_post( $args['content'] ); ?></p>
 			</div>
 			<div class="section-two">
 			<div class="buy-pro-action buy-pro">

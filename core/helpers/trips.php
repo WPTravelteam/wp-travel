@@ -72,8 +72,8 @@ class WP_Travel_Helpers_Trips {
 		$trip_outline = get_post_meta( $trip_id, 'wp_travel_outline', true );
 		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
 		$faqs         = wp_travel_get_faqs( $trip_id );
-		$map_data     = get_wp_travel_map_data( $trip_id );
-		// TODO : Include following map_data inside `get_wp_travel_map_data` function.
+		$map_data     = wp_travel_get_map_data( $trip_id );
+		// TODO : Include following map_data inside `wp_travel_get_map_data` function.
 		$zoomlevel             = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
 		$iframe_height         = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
 		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
