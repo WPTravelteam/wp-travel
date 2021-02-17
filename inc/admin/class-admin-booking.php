@@ -468,7 +468,11 @@ class WP_Travel_Admin_Booking {
 		}
 		$order_data        = array();
 		$wp_travel_post_id = isset( $_POST['wp_travel_post_id'] ) ? absint( $_POST['wp_travel_post_id'] ) : 0;
-		update_post_meta( $booking_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
+
+		// For not modifying trip id after 'select' booked form booking admin section.
+		if ( $wp_travel_post_id ) {
+			update_post_meta( $booking_id, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
+		}
 		// Updating booking status.
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? esc_attr( $_POST['wp_travel_booking_status'] ) : 'pending';
 		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );

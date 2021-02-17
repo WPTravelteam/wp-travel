@@ -90,7 +90,7 @@ class WP_Travel_Helpers_Settings {
 					'options'   => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
 					'icon'      => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
 					'icon_img'  => isset( $facts[ $key ]['icon_img'] ) ? $facts[ $key ]['icon_img'] : '',
-					'icon_type' => isset( $facts[ $key ]['icon_type'] ) ? $facts[ $key ]['icon_type'] : 'icon_class',
+					'fa_icon'   => isset( $facts[ $key ]['fa_icon'] ) ? $facts[ $key ]['fa_icon'] : '',
 				);
 				$mapped_facts[] = $new_fact;
 			}

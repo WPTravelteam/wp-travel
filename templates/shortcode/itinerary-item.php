@@ -52,6 +52,7 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 		</div>
 		<div class="wp-travel-post-content">
 			<?php wp_travel_get_trip_duration( $post_id ); ?>
+			<?php do_action( 'wp_travel_archive_after_trip_duration', get_the_ID() ); ?>
 			<span class="post-category">
 				<div class="entry-meta">
 					<?php if ( wp_travel_tab_show_in_menu( 'reviews' ) ) : ?>

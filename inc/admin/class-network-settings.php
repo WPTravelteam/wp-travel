@@ -94,7 +94,7 @@ class WP_Travel_Network_Settings {
 	 * @param array $tabs Tabs array list.
 	 */
 	public function add_tabs( $tabs ) {
-		
+
 		$settings_fields['license']                       = array(
 			'tab_label'     => __( 'License', 'wp-travel' ),
 			'content_title' => __( 'License Details', 'wp-travel' ),
@@ -102,7 +102,7 @@ class WP_Travel_Network_Settings {
 			'callback'      => 'wp_travel_settings_callback_license',
 			'icon'          => 'fa-id-badge',
 		);
-		
+
 		$tabs[ self::$collection ] = wp_travel_sort_array_by_priority( apply_filters( 'wp_travel_network_settings_tabs', $settings_fields ) );
 		return $tabs;
 	}
@@ -115,8 +115,8 @@ class WP_Travel_Network_Settings {
 	public function save_settings() {
 		if ( isset( $_POST['save_settings_button'] ) ) {
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
-			$current_tab = isset( $_POST['current_tab'] ) ? $_POST['current_tab'] : '';
-			
+			$current_tab = isset( $_POST['current_tab'] ) ? esc_attr( $_POST['current_tab'] ) : '';
+
 			$settings = array();
 
 			// @since 1.0.5 Used this filter below.
