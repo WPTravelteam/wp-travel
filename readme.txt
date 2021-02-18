@@ -241,10 +241,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.4.7 =
-Release Date: 13th February, 2021
+Release Date: 18th February, 2021
 
 Fixes:
 * Added nonce verification in missing form request and sanitize input data.
+* Updated exteral JS library to latest version.
+* Function prefixing changed to 'wptravel_' from 'wp_travel_'.
 
 = 4.4.6 =
 Release Date: 5th February, 2021
