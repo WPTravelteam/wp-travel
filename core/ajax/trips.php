@@ -59,7 +59,7 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Nonce Verification.
 		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 		}
 
@@ -107,7 +107,7 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Nonce Verification.
 		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 		}
 		// Empty parameter.
@@ -115,7 +115,7 @@ class WP_Travel_Ajax_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 
-		$trip = get_post( $_REQUEST['trip_id'] );
+		$trip = get_post( sanitize_text_field( wp_unslash( $_REQUEST['trip_id'] ) ) );
 		if ( is_wp_error( $trip ) ) {
 			return $trip;
 		}
@@ -164,10 +164,10 @@ class WP_Travel_Ajax_Trips {
 		 * @todo Check Nonce.
 		 */
 
-		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( $_GET['start_date'] ) : '';
-		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( $_GET['end_date'] ) : '';
-		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( $_GET['travel_locations'] ) : '';
-		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( $_GET['itinerary_types'] ) : '';
+		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : '';
+		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( wp_unslash( $_GET['itinerary_types'] ) ) : '';
 		$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ) : '';
 
 		$args = array(
@@ -204,13 +204,13 @@ class WP_Travel_Ajax_Trips {
 		 * @todo Check Nonce.
 		 */
 
-		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( $_GET['start_date'] ) : '';
-		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( $_GET['end_date'] ) : '';
-		$min_price        = ! empty( $_GET['min_price'] ) ? sanitize_text_field( $_GET['min_price'] ) : 0;
-		$max_price        = ! empty( $_GET['max_price'] ) ? sanitize_text_field( $_GET['max_price'] ) : 0;
-		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( $_GET['travel_locations'] ) : ''; // Not used yet to get trip id
-		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( $_GET['itinerary_types'] ) : ''; // Not used yet to get trip id
-		$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ): ''; // Not used yet to get trip id
+		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
+		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : '';
+		$min_price        = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0;
+		$max_price        = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0;
+		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : ''; // Not used yet to get trip id
+		$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( wp_unslash( $_GET['itinerary_types'] ) ) : ''; // Not used yet to get trip id
+		$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ) : ''; // Not used yet to get trip id
 
 		$args = array(
 			'start_date'       => $start_date,
@@ -270,7 +270,7 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Nonce Verification.
 		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 			return WP_Travel_Helpers_REST_API::response( $error );
 		}
