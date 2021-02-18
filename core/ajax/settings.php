@@ -6,8 +6,8 @@ class WP_Travel_Ajax_Settings {
 	 */
 	public static function init() {
 		 // get settings.
-		add_action( 'wp_ajax_wp_travel_get_settings', array( __CLASS__, 'get_settings' ) );
-		add_action( 'wp_ajax_nopriv_wp_travel_get_settings', array( __CLASS__, 'get_settings' ) );
+		add_action( 'wp_ajax_wptravel_get_settings', array( __CLASS__, 'get_settings' ) );
+		add_action( 'wp_ajax_nopriv_wptravel_get_settings', array( __CLASS__, 'get_settings' ) );
 
 		// Update settings.
 		add_action( 'wp_ajax_wp_travel_update_settings', array( __CLASS__, 'update_settings' ) );

@@ -10,7 +10,7 @@ $itineraries = get_posts(
 if ( count( $itineraries ) > 0 ) {
 	foreach ( $itineraries as $itinerary ) {
 		$post_id    = $itinerary->ID;
-		$trip_price = get_post_meta( $post_id, 'wp_travel_trip_price', true );
+		$trip_price = get_post_meta( $post_id, 'wptravel_trip_price', true );
 		if ( $trip_price > 0 ) {
 			continue;
 		}
@@ -22,7 +22,7 @@ if ( count( $itineraries ) > 0 ) {
 		} else {
 			$trip_price = get_post_meta( $post_id, 'wp_travel_price', true );
 		}
-		update_post_meta( $post_id, 'wp_travel_trip_price', $trip_price );
+		update_post_meta( $post_id, 'wptravel_trip_price', $trip_price );
 	}
 }
 // Added Date Formatting for filter.

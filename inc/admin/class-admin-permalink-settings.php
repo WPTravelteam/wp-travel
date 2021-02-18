@@ -68,7 +68,7 @@ if ( ! class_exists( 'WP_Travel_Admin_Permalink_Settings', false ) ) :
 				'permalink',                        // settings page
 				'optional'                          // settings section
 			);
-			$this->permalinks = wp_travel_get_permalink_structure();
+			$this->permalinks = wptravel_get_permalink_structure();
 		}
 
 		/**

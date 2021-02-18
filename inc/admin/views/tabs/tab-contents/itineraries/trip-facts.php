@@ -6,10 +6,10 @@
  */
 
 if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
-	function wp_travel_trip_callback_trip_facts() {
+	function wptravel_trip_callback_trip_facts() {
 		global $post;
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$wp_travel_trip_facts = get_post_meta( $post->ID, 'wp_travel_trip_facts', true );
 
@@ -122,7 +122,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 /**
  * Fact Type Single.
  */
-function wp_travel_fact_single( $fact, $index, $setting = array() ) {
+function wptravel_fact_single( $fact, $index, $setting = array() ) {
 	?>
 	<select name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="">
 		<?php
@@ -145,7 +145,7 @@ function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 /**
  * Fact type Multiple.
  */
-function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
+function wptravel_fact_multiple( $fact, $index, $setting = array() ) {
 	if ( isset( $setting['options'] ) && is_array( $setting['options'] ) ) {
 
 		foreach ( $setting['options'] as $key => $option ) :
@@ -168,7 +168,7 @@ function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
 /**
  * Fact Type Text.
  */
-function wp_travel_fact_text( $fact, $index, $setings = array() ) {
+function wptravel_fact_text( $fact, $index, $setings = array() ) {
 	?>
 		<input type="text" name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="" value="<?php echo $fact['value']; ?>">
 	<?php
@@ -176,7 +176,7 @@ function wp_travel_fact_text( $fact, $index, $setings = array() ) {
 /**
  * Fact Defaults.
  */
-function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
+function wptravel_fact_defaults( $fact, $index, $settings = array() ) {
 	?>
 	<?php if ( isset( $settings['id'] ) ) : ?>
 	<input type="hidden" class="fact-id-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][fact_id]" id="" value="<?php echo $settings['id']; ?>">
@@ -192,8 +192,8 @@ function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
  * @param array $fact.
  * @param int   $index.
  */
-function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
-	$settings = wp_travel_get_settings();
+function wptravel_trip_facts_single_html( $fact = array(), $index = false ) {
+	$settings = wptravel_get_settings();
 	$settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_values( $settings['wp_travel_trip_facts_settings'] ) : array();
 
 	if ( '' === $settings ) {

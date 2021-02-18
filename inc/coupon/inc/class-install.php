@@ -122,7 +122,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 		public static function coupons_manage_columns( $column_name, $id ) {
 			switch ( $column_name ) {
 				case 'coupon_status':
-					$coupon        = WP_Travel()->coupon;
+					$coupon        = WPTravel()->coupon;
 					$coupon_status = $coupon->get_coupon_status( $id );
 					if ( 'active' === $coupon_status ) {
 						?>
@@ -145,7 +145,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					}
 					break;
 				case 'coupon_code':
-					$coupon = WP_Travel()->coupon;
+					$coupon = WPTravel()->coupon;
 
 					$coupon_code = get_post_meta( $id, 'wp_travel_coupon_code', true );
 
@@ -153,10 +153,10 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 
 					break;
 				case 'discount_value':
-					$coupon         = WP_Travel()->coupon;
+					$coupon         = WPTravel()->coupon;
 					$discount_type  = $coupon->get_coupon_meta( $id, 'general', 'coupon_type' );
 					$discount_value = $coupon->get_coupon_meta( $id, 'general', 'coupon_value' );
-					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wp_travel_get_currency_symbol();
+					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wptravel_get_currency_symbol();
 
 					?>
 						<span><strong><?php echo $discount_value; ?> ( <?php echo $symbol; ?> )</strong></span>
@@ -165,7 +165,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 
 					break;
 				case 'used_so_far':
-					$coupon      = WP_Travel()->coupon;
+					$coupon      = WPTravel()->coupon;
 					$used_so_far = $coupon->get_usage_count( $id );
 					$max_users   = $coupon->get_coupon_meta( $id, 'restriction', 'coupon_limit_number' );
 					$max_users   = $max_users ? $max_users : __( 'Unlimited', 'wp-travel' );
@@ -176,7 +176,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 
 					break;
 				case 'expiration_date':
-					$coupon          = WP_Travel()->coupon;
+					$coupon          = WPTravel()->coupon;
 					$expiration_date = $coupon->get_coupon_meta( $id, 'general', 'coupon_expiry_date' );
 
 					?>

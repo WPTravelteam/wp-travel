@@ -12,7 +12,7 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_faq( $tab, $args ) {
+function wptravel_trip_callback_faq( $tab, $args ) {
 
 	do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
 
@@ -30,7 +30,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 		wp_travel_upsell_message( $args );
 	endif;
 	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
-	$faqs = wp_travel_get_faqs( $post_id );
+	$faqs = wptravel_get_faqs( $post_id );
 	?>
 			
 	<div class="wp-travel-tab-content-faq-header clearfix">

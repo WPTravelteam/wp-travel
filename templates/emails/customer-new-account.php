@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$settings = wp_travel_get_settings();
+$settings = wptravel_get_settings();
 
 $generate_username_from_email =  isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
 $generate_user_password =  isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
@@ -35,7 +35,7 @@ $generate_user_password =  isset( $settings['generate_user_password'] ) ? $setti
 
 <?php endif; ?>
 
-	<p><?php printf( __( 'You can access your account area to view your Trip Bookings and change your password here: %s.', 'wp-travel' ), make_clickable( esc_url( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) ) ); ?></p>
+	<p><?php printf( __( 'You can access your account area to view your Trip Bookings and change your password here: %s.', 'wp-travel' ), make_clickable( esc_url( wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) ) ); ?></p>
 	<p><?php _e( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php _e( 'WP Travel', 'wp-travel' ); ?></a></p>
 <?php
 

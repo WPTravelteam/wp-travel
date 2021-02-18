@@ -42,7 +42,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 		echo $before_widget;
 		echo ( $title ) ? $before_title . $title . $after_title : '';
 
-		wp_travel_search_form();
+		wptravel_search_form();
 		echo $after_widget;
 	}
 	/**
@@ -78,7 +78,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	}
 }
 
-function wp_travel_register_search_widgets() {
+function wptravel_register_search_widgets() {
 	register_widget( 'WP_Travel_Widget_Search' );
 }
-add_action( 'widgets_init', 'wp_travel_register_search_widgets' );
+add_action( 'widgets_init', 'wptravel_register_search_widgets' );

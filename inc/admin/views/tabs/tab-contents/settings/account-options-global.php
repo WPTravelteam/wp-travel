@@ -5,7 +5,7 @@
  * @param Array $tab List of tabs.
  * @param Array $args Settings arg List.
  */
-function wp_travel_settings_callback_account_options_global( $tab, $args ) {
+function wptravel_settings_callback_account_options_global( $tab, $args ) {
 
 	$settings                                = $args['settings'];
 	$enable_checkout_customer_registration   = $settings['enable_checkout_customer_registration'];

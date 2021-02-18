@@ -15,19 +15,19 @@
  *
  * @return  Array $actions;
  */
-function wp_travel_post_duplicator_action_row( $actions, $post ) {
+function wptravel_post_duplicator_action_row( $actions, $post ) {
 	// Get the post type object.
 	$post_type = get_post_type_object( $post->post_type );
-	if ( WP_TRAVEL_POST_TYPE === $post_type->name && function_exists( 'wp_travel_post_duplicator_action_row_link' ) ) {
-		$actions['wp_travel_duplicate_post'] = wp_travel_post_duplicator_action_row_link( $post );
+	if ( WP_TRAVEL_POST_TYPE === $post_type->name && function_exists( 'wptravel_post_duplicator_action_row_link' ) ) {
+		$actions['wp_travel_duplicate_post'] = wptravel_post_duplicator_action_row_link( $post );
 	}
 	return $actions;
 }
-add_filter( 'post_row_actions', 'wp_travel_post_duplicator_action_row', 10, 2 );
+add_filter( 'post_row_actions', 'wptravel_post_duplicator_action_row', 10, 2 );
 
-function wp_travel_post_duplicator_action_row_link( $post ) {
+function wptravel_post_duplicator_action_row_link( $post ) {
 
-	$settings = wp_travel_get_settings();
+	$settings = wptravel_get_settings();
 
 	// Get the post type object
 	$post_type = get_post_type_object( $post->post_type );

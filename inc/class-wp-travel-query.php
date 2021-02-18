@@ -85,7 +85,7 @@ class WP_Travel_Query {
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$page_on_front     = get_option( 'page_on_front' );
-			$myaccount_page_id = wp_travel_get_page_id( 'wp-travel-dashboard' );
+			$myaccount_page_id = wptravel_get_page_id( 'wp-travel-dashboard' );
 
 			if ( in_array( $page_on_front, array( $myaccount_page_id ), true ) ) {
 				return EP_ROOT | EP_PAGES;

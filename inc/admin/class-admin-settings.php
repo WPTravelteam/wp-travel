@@ -38,7 +38,7 @@ class WP_Travel_Admin_Settings {
 	 */
 	public static function setting_page_callback() {
 
-		$args['settings']       = wp_travel_get_settings();
+		$args['settings']       = wptravel_get_settings();
 		$url_parameters['page'] = self::$collection;
 		$url                    = admin_url( self::$parent_slug );
 		$url                    = add_query_arg( $url_parameters, $url );
@@ -52,7 +52,7 @@ class WP_Travel_Admin_Settings {
 				echo '<div class="wp-travel-setting-buttons">';
 				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
 				echo '</div>';
-				WP_Travel()->tabs->load( self::$collection, $args );
+				WPTravel()->tabs->load( self::$collection, $args );
 				echo '<div class="wp-travel-setting-buttons">';
 				echo '<div class="wp-travel-setting-system-info">';
 					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
@@ -199,7 +199,7 @@ class WP_Travel_Admin_Settings {
 			'icon'          => 'fa-bug',
 		);
 
-		$tabs[ self::$collection ] = wp_travel_sort_array_by_priority( apply_filters( 'wp_travel_settings_tabs', $settings_fields ) );
+		$tabs[ self::$collection ] = wptravel_sort_array_by_priority( apply_filters( 'wp_travel_settings_tabs', $settings_fields ) );
 		return $tabs;
 	}
 
@@ -213,15 +213,15 @@ class WP_Travel_Admin_Settings {
 			check_admin_referer( 'wp_travel_settings_page_nonce' );
 			$current_tab = isset( $_POST['current_tab'] ) ? sanitize_text_field( wp_unslash( $_POST['current_tab'] ) ) : '';
 			// Getting saved settings first.
-			$settings        = wp_travel_get_settings();
-			$settings_fields = array_keys( wp_travel_settings_default_fields() );
+			$settings        = wptravel_get_settings();
+			$settings_fields = array_keys( wptravel_settings_default_fields() );
 
 			foreach ( $settings_fields as $settings_field ) {
 				if ( 'wp_travel_trip_facts_settings' === $settings_field ) {
 					continue;
 				}
 				if ( isset( $_POST[ $settings_field ] ) ) {
-					// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
+					// Default pages settings. [only to get page in - wptravel_get_page_id()] // Need enhanchement.
 					$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id', 'thank_you_page_id' );
 					if ( in_array( $settings_field, $page_ids ) && ! empty( $_POST[ $settings_field ] ) ) {
 						$page_id = absint( $_POST[ $settings_field ] );
@@ -299,7 +299,7 @@ class WP_Travel_Admin_Settings {
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 
 			update_option( 'wp_travel_settings', $settings );
-			WP_Travel()->notices->add( 'error ' );
+			WPTravel()->notices->add( 'error ' );
 			$url_parameters['page']    = self::$collection;
 			$url_parameters['updated'] = 'true';
 			$redirect_url              = admin_url( self::$parent_slug );

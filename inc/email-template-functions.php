@@ -10,7 +10,7 @@
  * 
  * @return HTML
  */
-function wp_travel_booking_admin_default_email_content(){
+function wptravel_booking_admin_default_email_content(){
 	
 	ob_start();
 
@@ -114,7 +114,7 @@ return $content;
 /**
  * Booking Client Default Content.
  */
-function wp_travel_booking_client_default_email_content(){
+function wptravel_booking_client_default_email_content(){
 
 ob_start();
 
@@ -219,7 +219,7 @@ return $content;
 /**
  * Enqueries Admin Default Email.
  */
-function wp_travel_enquiries_admin_default_email_content(){
+function wptravel_enquiries_admin_default_email_content(){
 
 ob_start();
 
@@ -296,7 +296,7 @@ return $content;
  * Payment Default Email Admin Content.
  * @return HTML
  */
-function wp_travel_payment_admin_default_email_content() {
+function wptravel_payment_admin_default_email_content() {
 
 	ob_start();
 
@@ -431,7 +431,7 @@ function wp_travel_payment_admin_default_email_content() {
  * Payment default client email template.
  * @return HTML
  */
-function wp_travel_payment_client_default_email_content() {
+function wptravel_payment_client_default_email_content() {
 
 	ob_start(); ?>	
 	<table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;">
@@ -486,7 +486,7 @@ function wp_travel_payment_client_default_email_content() {
  *
  * @return HTML
  */
-function wp_travel_admin_email_template() {
+function wptravel_admin_email_template() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>
@@ -795,7 +795,7 @@ function wp_travel_admin_email_template() {
  *
  * @return HTML
  */
-function wp_travel_customer_email_template() {
+function wptravel_customer_email_template() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>
@@ -1096,7 +1096,7 @@ function wp_travel_customer_email_template() {
  *
  * @return HTML
  */
-function wp_travel_enqueries_admin_email_template() {
+function wptravel_enqueries_admin_email_template() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>
@@ -1304,7 +1304,7 @@ function wp_travel_enqueries_admin_email_template() {
  *
  * @return HTML
  */
-function wp_travel_payment_email_template_admin() {
+function wptravel_payment_email_template_admin() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>
@@ -1587,7 +1587,7 @@ function wp_travel_payment_email_template_admin() {
  *
  * @return HTML
  */
-function wp_travel_payment_email_template_customer() {
+function wptravel_payment_email_template_customer() {
 	ob_start(); ?>
 	<!DOCTYPE html>
 	<html>

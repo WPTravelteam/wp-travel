@@ -81,7 +81,7 @@ function wp_travel_get_booking_form() {
 	wp_travel_deprecated_function( 'wp_travel_get_booking_form', '4.4.0' );
 	global $post;
 	$trip_id  = 0;
-	$settings = wp_travel_get_settings();
+	$settings = wptravel_get_settings();
 	if ( isset( $_REQUEST['trip_id'] ) ) {
 		$trip_id = absint( $_REQUEST['trip_id'] );
 	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
@@ -94,7 +94,7 @@ function wp_travel_get_booking_form() {
 		'id'            => 'wp-travel-booking',
 		'wrapper_class' => 'wp-travel-booking-form-wrapper',
 		'submit_button' => array(
-			'name'  => 'wp_travel_book_now',
+			'name'  => 'wptravel_book_now',
 			'id'    => 'wp-travel-book-now',
 			'value' => __( 'Book Now', 'wp-travel' ),
 		),
@@ -107,7 +107,7 @@ function wp_travel_get_booking_form() {
 	// GDPR Support.
 
 	$gdpr_msg    = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
-	$policy_link = wp_travel_privacy_link();
+	$policy_link = wptravel_enquiries_form_fields();
 	if ( ! empty( $gdpr_msg ) && $policy_link ) {
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_booking_gdpr'] = array(
@@ -201,7 +201,7 @@ function wp_travel_booking_form_fields() {
 	$pax_size = 1;
 	if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ) {
 		if ( is_array( $_REQUEST['pax'] ) ) {
-			$pax_size = array_sum( wp_travel_sanitize_array( $_REQUEST['pax'] ) );
+			$pax_size = array_sum( wptravel_sanitize_array( $_REQUEST['pax'] ) );
 		}
 	}
 	$trip_duration = 1;
@@ -275,7 +275,7 @@ function wp_travel_booking_form_fields() {
 			'label'       => __( 'Country', 'wp-travel' ),
 			'name'        => 'wp_travel_country',
 			'id'          => 'wp-travel-country',
-			// 'options' => wp_travel_get_countries(),
+			// 'options' => wptravel_get_countries(),
 			'validations' => array(
 				'required' => true,
 			),

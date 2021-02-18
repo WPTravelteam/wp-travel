@@ -9,7 +9,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	}
 
 	function render( $display = true ) {
-		$js_date_format = wp_travel_date_format_php_to_js();
+		$js_date_format = wptravel_date_format_php_to_js();
 		$output = parent::render( false );
 
 		$lang_code = explode( '-', get_bloginfo( 'language' ) );
@@ -59,7 +59,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	}
 
 	function render_old( $display = true ) {
-		$js_date_format = wp_travel_date_format_php_to_js();
+		$js_date_format = wptravel_date_format_php_to_js();
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {

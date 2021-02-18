@@ -5,7 +5,7 @@
  * @package WP Travel
  */
 
-function wp_travel_tour_extras_general_tab_callback() {
+function wptravel_tour_extras_general_tab_callback() {
 
 	global $post;
 	$post_id = $post->ID;

@@ -92,10 +92,10 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 					if ( 'grid' == $view_mode ) : 
 						
 						//Load Grid View Mode.
-						wp_travel_get_template_part( 'shortcode/itinerary', 'item' ); 
+						wptravel_get_template_part( 'shortcode/itinerary', 'item' ); 
 
 					else :
-						wp_travel_get_template_part( 'shortcode/itinerary-item', 'list' );
+						wptravel_get_template_part( 'shortcode/itinerary-item', 'list' );
 						//Load list View Mode.
 					
 					endif;
@@ -223,7 +223,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
  *
  * @return void
  */
-function wp_travel_register_trip_type_widgets() {
+function wptravel_register_trip_type_widgets() {
 	register_widget( 'WP_Travel_Widget_Trip_Type' );
 }
-add_action( 'widgets_init', 'wp_travel_register_trip_type_widgets' );
+add_action( 'widgets_init', 'wptravel_register_trip_type_widgets' );

@@ -9,14 +9,14 @@ class WP_Travel_Admin_Menu {
 	 */
 	public function add_menus() {
 
-		$all_submenus = wp_travel_get_submenu();
+		$all_submenus = wptravel_get_submenu();
 		
 		foreach ( $all_submenus as $type => $submenus ) {
 			$parent_slug = '';
 			if ( 'bookings' === $type ) {
 				$parent_slug = 'edit.php?post_type=itinerary-booking';
 			}
-			$submenus = wp_travel_sort_array_by_priority( $submenus );
+			$submenus = wptravel_sort_array_by_priority( $submenus );
 			foreach ( $submenus as $submenu ) {
 				if ( ! isset( $submenu['page_title'] ) || ! isset( $submenu['menu_title'] ) || ! isset( $submenu['menu_slug'] )  || ! isset( $submenu['callback'] ) ) {
 					continue;

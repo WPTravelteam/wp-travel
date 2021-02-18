@@ -26,14 +26,14 @@ if ( post_password_required() ) {
 }
 
 $enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
-$group_size  = wp_travel_get_group_size( get_the_ID() );
+$group_size  = wptravel_get_group_size( get_the_ID() );
 $start_date  = get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
 $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 ?>
 <article class="wp-travel-default-article">
 	<div class="wp-travel-article-image-wrap">
 		<a href="<?php the_permalink(); ?>">
-			<?php echo wp_travel_get_post_thumbnail( get_the_ID() ); ?>
+			<?php echo wptravel_get_post_thumbnail( get_the_ID() ); ?>
 		</a>
 		<?php if ( $enable_sale ) : ?>
 		<div class="wp-travel-offer">
@@ -53,8 +53,8 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 
 			</div>
 			<div class="wp-travel-average-review">
-			<?php wp_travel_trip_rating( get_the_ID() ); ?>
-				<?php $count = (int) wp_travel_get_review_count(); ?>						
+			<?php wptravel_trip_rating( get_the_ID() ); ?>
+				<?php $count = (int) wptravel_get_review_count(); ?>						
 			</div>
 			<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
 			<div class="entry-meta">
@@ -99,12 +99,12 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 				</div>
 				
 				<div class="travel-info">
-					<?php wp_travel_get_trip_duration( get_the_ID() ); ?>
+					<?php wptravel_get_trip_duration( get_the_ID() ); ?>
 				</div>
 			</div>
 		</div>
 		<div class="description-right">
-			<?php wp_travel_trip_price( get_the_ID() ); ?>
+			<?php wptravel_trip_price( get_the_ID() ); ?>
 			<div class="wp-travel-explore">
 				<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
 			</div>

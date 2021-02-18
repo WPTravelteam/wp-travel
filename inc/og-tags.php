@@ -8,31 +8,31 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.7.6
  */
-function wp_travel_insert_og_tags() {
-	$settings       = wp_travel_get_settings();
+function wptravel_insert_og_tags() {
+	$settings       = wptravel_get_settings();
 	$enable_og_tags = isset( $settings['enable_og_tags'] ) ? $settings['enable_og_tags'] : 'no';
 
 	if ( 'yes' !== $enable_og_tags ) {
 		return;
 	}
-	wp_travel_insert_common_tags();
+	wptravel_insert_common_tags();
 
 	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) {
-		wp_travel_insert_post_tags();
+		wptravel_insert_post_tags();
 	}
 }
 
-add_action( 'wp_head', 'wp_travel_insert_og_tags' );
+add_action( 'wp_head', 'wptravel_insert_og_tags' );
 
 /**
  * Common Tags
  */
-function wp_travel_insert_common_tags() {
+function wptravel_insert_common_tags() {
 	$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	echo '<meta property="og:site_name" content="' . $sitename . '">' . "\n";
 }
 
-function wp_travel_insert_post_tags() {
+function wptravel_insert_post_tags() {
 
 	$post_id = get_the_ID();
 	$post    = get_post( $post_id );
@@ -53,7 +53,7 @@ function wp_travel_insert_post_tags() {
 	$ogurl      = get_permalink( $post_id );
 	$image_size = apply_filters( 'wp_travel_og_image_size', 'large' );
 	// Image
-	$ogimage = wp_travel_get_post_thumbnail_url( $post_id, $image_size );
+	$ogimage = wptravel_get_post_thumbnail_url( $post_id, $image_size );
 
 	// Author
 	$articleauthor = get_the_author();

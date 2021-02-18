@@ -81,7 +81,7 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 					<option value=""><?php esc_html_e( 'Select a Country', 'wp-travel' ) ?></option>
 
 					<?php 
-					$country_list = wp_travel_get_countries();
+					$country_list = wptravel_get_countries();
 					foreach ( $country_list as $key => $value ) : ?>
 						<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $billing_country ) ?>>
 							<?php echo esc_html( $value ); ?>

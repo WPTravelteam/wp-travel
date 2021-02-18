@@ -74,7 +74,7 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 			$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
 			$post_ids         = $wpdb->get_results( $query1 );
 
-			$settings                   = wp_travel_get_settings();
+			$settings                   = wptravel_get_settings();
 			$enable_expired_trip_option = $settings['enable_expired_trip_option'];
 			$expired_trip_set_to        = $settings['expired_trip_set_to'];
 
@@ -95,8 +95,8 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 						}
 						$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
 						$trip_dates                    = wp_unslash( array_unique( $trip_dates ) ); // Filter unique date.
-						$trip_dates                    = wp_travel_filter_expired_date( $trip_dates );
-						usort( $trip_dates, 'wp_travel_date_sort' );
+						$trip_dates                    = wptravel_filter_expired_date( $trip_dates );
+						usort( $trip_dates, 'wptravel_date_sort' );
 					endif;
 
 					update_post_meta( $trip_id, 'trip_dates', $trip_dates );

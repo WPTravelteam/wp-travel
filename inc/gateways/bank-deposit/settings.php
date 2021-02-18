@@ -5,7 +5,7 @@
  * @package wp-travel/inc/gateways/bank-deposit
  */
 
-function wp_travel_bank_deposit_default_settings_fields( $settings ) {
+function wptravel_bank_deposit_default_settings_fields( $settings ) {
 	$settings['payment_option_bank_deposit'] = 'no';
 	$settings['wp_travel_bank_deposits']      = array();
 	$settings['wp_travel_bank_deposit_description'] = '';
@@ -13,7 +13,7 @@ function wp_travel_bank_deposit_default_settings_fields( $settings ) {
 	return $settings;
 }
 
-add_filter( 'wp_travel_settings_fields', 'wp_travel_bank_deposit_default_settings_fields' );
+add_filter( 'wp_travel_settings_fields', 'wptravel_bank_deposit_default_settings_fields' );
 
 
  /**
@@ -21,7 +21,7 @@ add_filter( 'wp_travel_settings_fields', 'wp_travel_bank_deposit_default_setting
   *
   * @param Array $args Arguments.
   */
-function wp_travel_settings_bank_deposit( $args ) {
+function wptravel_settings_bank_deposit( $args ) {
 	if ( ! $args ) {
 		return;
 	}
@@ -227,5 +227,5 @@ function wp_travel_settings_bank_deposit( $args ) {
 	<?php
 }
 
- add_action( 'wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel_settings_bank_deposit' );
+ add_action( 'wp_travel_payment_gateway_fields_bank_deposit', 'wptravel_settings_bank_deposit' );
  

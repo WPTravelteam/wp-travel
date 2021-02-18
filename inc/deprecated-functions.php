@@ -14,7 +14,7 @@
  * @param  string $version
  * @param  string $replacement
  */
-function wp_travel_deprecated_function( $function, $version, $replacement = null ) {
+function wptravel_deprecated_function( $function, $version, $replacement = null ) {
 	if ( defined( 'DOING_AJAX' ) ) {
 		do_action( 'deprecated_function_run', $function, $replacement, $version );
 		$log_string  = "The {$function} function is deprecated since version {$version}.";
@@ -35,12 +35,12 @@ function wp_travel_deprecated_function( $function, $version, $replacement = null
  * @param string $replacement The hook that should have been used.
  * @param string $message     A message regarding the change.
  */
-function wp_travel_do_deprecated_action( $tag, $args, $version, $replacement = null, $message = null ) {
+function wptravel_do_deprecated_action( $tag, $args, $version, $replacement = null, $message = null ) {
 	if ( ! has_action( $tag ) ) {
 		return;
 	}
 
-	wp_travel_deprecated_hook( $tag, $version, $replacement, $message );
+	wptravel_deprecated_hook( $tag, $version, $replacement, $message );
 	do_action_ref_array( $tag, $args );
 }
 
@@ -53,7 +53,7 @@ function wp_travel_do_deprecated_action( $tag, $args, $version, $replacement = n
  * @param string $replacement The hook that should have been used.
  * @param string $message     A message regarding the change.
  */
-function wp_travel_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
+function wptravel_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
 	// @codingStandardsIgnoreStart
 	if ( defined( 'DOING_AJAX' ) ) {
 		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
@@ -75,3 +75,4 @@ include sprintf( '%s/inc/deprecated/193.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/307.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/440.php', WP_TRAVEL_ABSPATH );
 include sprintf( '%s/inc/deprecated/442.php', WP_TRAVEL_ABSPATH );
+include sprintf( '%s/inc/deprecated/447.php', WP_TRAVEL_ABSPATH );

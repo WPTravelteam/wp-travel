@@ -11,7 +11,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			self::$assets_path = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE );
 			$suffix            = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			$settings = wp_travel_get_settings();
+			$settings = wptravel_get_settings();
 
 			global $post;
 			$trip_id = '';
@@ -19,7 +19,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				$trip_id = $post->ID;
 			}
 
-			$map_data       = wp_travel_get_map_data();
+			$map_data       = wptravel_get_map_data();
 			$map_zoom_level = $settings['google_map_zoom_level'];
 
 			// Getting Locale to fetch Localized calender js.
@@ -35,18 +35,18 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// locale ends.
 			// Localized varialble.
 			$wp_travel = array(
-				'currency_symbol'    => wp_travel_get_currency_symbol(),
+				'currency_symbol'    => wptravel_get_currency_symbol(),
 				'currency_position'  => $settings['currency_position'],
 				'thousand_separator' => $settings['thousand_separator'],
 				'decimal_separator'  => $settings['decimal_separator'],
 				'number_of_decimals' => $settings['number_of_decimals'],
 
-				'prices'             => wp_travel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
+				'prices'             => wptravel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
 				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
-				'strings'            => wp_travel_get_strings(),
+				'strings'            => wptravel_get_strings(),
 				// Need map data enhancement.
 				'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
 				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
@@ -105,8 +105,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			if ( apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_single_pages, $trip_id ) ) {
 
 				// Add localized vars.
-				$wp_travel['cartUrl'] = wp_travel_get_cart_url();
-				$wp_travel['checkoutUrl'] = wp_travel_get_checkout_url(); // @since 4.3.2
+				$wp_travel['cartUrl'] = wptravel_get_cart_url();
+				$wp_travel['checkoutUrl'] = wptravel_get_checkout_url(); // @since 4.3.2
 				$wp_travel['isEnabledCartPage'] = WP_Travel_Helpers_Cart::is_enabled_cart_page(); // @since 4.3.2
 
 				wp_enqueue_script( 'wp-travel-accordion' );
@@ -124,7 +124,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				}
 
 				// Load if payment is enabled.
-				if ( wp_travel_can_load_payment_scripts() ) {
+				if ( wptravel_can_load_payment_scripts() ) {
 
 					global $wt_cart;
 
@@ -133,8 +133,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
 
 					$wp_travel['payment']['currency_code']   = $settings['currency'];
-					$wp_travel['payment']['currency_symbol'] = wp_travel_get_currency_symbol();
-					$wp_travel['payment']['price_per']       = wp_travel_get_price_per_text( $trip_id, '', true );
+					$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
+					$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
 					$wp_travel['payment']['trip_price']      = $trip_price;
 					$wp_travel['payment']['payment_amount']  = $payment_amount;
 
@@ -144,7 +144,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				// for GMAP.
 				$api_key = '';
 
-				$get_maps    = wp_travel_get_maps();
+				$get_maps    = wptravel_get_maps();
 				$current_map = $get_maps['selected'];
 
 				$show_google_map = ( 'google-map' === $current_map ) ? true : false;
@@ -169,7 +169,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 			
 			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
-			if ( wp_travel_can_load_bundled_scripts() ) {
+			if ( wptravel_can_load_bundled_scripts() ) {
 				wp_enqueue_script( 'wp-travel-frontend-bundle' );
 			}
 
@@ -229,7 +229,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 				wp_register_script( 'jquery-chart-util', self::$assets_path . 'assets/js/lib/chartjs/utils.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
 				wp_register_script( 'jquery-chart-custom', self::$assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
-				$booking_data      = wp_travel_get_booking_data();
+				$booking_data      = wptravel_get_booking_data();
 				$stat_data         = isset( $booking_data['stat_data'] ) ? $booking_data['stat_data'] : array();
 				$labels            = isset( $stat_data['stat_label'] ) ? $stat_data['stat_label'] : array();
 				$datas             = isset( $stat_data['data'] ) ? $stat_data['data'] : array();
@@ -307,17 +307,17 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 			$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
 			if ( in_array( $screen->id, $allowed_screen ) ) {
-				$settings = wp_travel_get_settings();
+				$settings = wptravel_get_settings();
 				global $post;
 				wp_register_script( 'wp-travel-moment', self::$assets_path . 'assets/js/moment.js', array( 'jquery' ), WP_TRAVEL_VERSION, 1 );
 
-				$map_data = wp_travel_get_map_data();
+				$map_data = wptravel_get_map_data();
 
 				$depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'wp-travel-moment' );
 
 				$api_key = '';
 
-				$get_maps    = wp_travel_get_maps();
+				$get_maps    = wptravel_get_maps();
 				$current_map = $get_maps['selected'];
 
 				$show_google_map = ( 'google-map' === $current_map ) ? true : false;
@@ -349,8 +349,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'drag_drop_nonce' => wp_create_nonce( 'wp-travel-drag-drop-nonce' ),
 				);
 				$date_format                                  = get_option( 'date_format' );
-				$js_date_format                               = wp_travel_date_format_php_to_js();
-				$moment_date_format                           = wp_travel_moment_date_format( $date_format );
+				$js_date_format                               = wptravel_date_format_php_to_js();
+				$moment_date_format                           = wptravel_moment_date_format( $date_format );
 				$wp_travel_gallery_data['js_date_format']     = $js_date_format;
 				$wp_travel_gallery_data['moment_date_format'] = $moment_date_format;
 
@@ -630,7 +630,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		}
 
 		public static function styles_filter() {
-			$load_optimized_scripts = wp_travel_can_load_bundled_scripts();
+			$load_optimized_scripts = wptravel_can_load_bundled_scripts();
 			if ( ! $load_optimized_scripts ) {
 				return;
 			}
@@ -679,7 +679,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		 */
 		public static function scripts_filter() {
 			// self::frontend();
-			$load_optimized_scripts = wp_travel_can_load_bundled_scripts();
+			$load_optimized_scripts = wptravel_can_load_bundled_scripts();
 			if ( ! $load_optimized_scripts ) {
 				return;
 			}

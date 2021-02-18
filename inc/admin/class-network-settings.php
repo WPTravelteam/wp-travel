@@ -57,7 +57,7 @@ class WP_Travel_Network_Settings {
 	 */
 	public static function setting_page_callback() {
 
-		$args['settings']       = wp_travel_get_settings();
+		$args['settings']       = wptravel_get_settings();
 		$url_parameters['page'] = self::$collection;
 		$url                    = admin_url( self::$parent_slug );
 		$url                    = add_query_arg( $url_parameters, $url );
@@ -71,7 +71,7 @@ class WP_Travel_Network_Settings {
 				echo '<div class="wp-travel-setting-buttons">';
 				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
 				echo '</div>';
-				WP_Travel()->tabs->load( self::$collection, $args );
+				WPTravel()->tabs->load( self::$collection, $args );
 				echo '<div class="wp-travel-setting-buttons">';
 				echo '<div class="wp-travel-setting-system-info">';
 					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
@@ -103,7 +103,7 @@ class WP_Travel_Network_Settings {
 			'icon'          => 'fa-id-badge',
 		);
 
-		$tabs[ self::$collection ] = wp_travel_sort_array_by_priority( apply_filters( 'wp_travel_network_settings_tabs', $settings_fields ) );
+		$tabs[ self::$collection ] = wptravel_sort_array_by_priority( apply_filters( 'wp_travel_network_settings_tabs', $settings_fields ) );
 		return $tabs;
 	}
 
@@ -123,7 +123,7 @@ class WP_Travel_Network_Settings {
 			$settings = apply_filters( 'wp_travel_before_save_settings', $settings );
 
 			update_option( 'wp_travel_settings', $settings );
-			WP_Travel()->notices->add( 'error ' );
+			WPTravel()->notices->add( 'error ' );
 			$url_parameters['page']    = self::$collection;
 			$url_parameters['updated'] = 'true';
 			$redirect_url              = admin_url( self::$parent_slug );

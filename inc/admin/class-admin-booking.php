@@ -77,7 +77,7 @@ class WP_Travel_Admin_Booking {
 		switch ( $column_name ) {
 			case 'trip_code':
 				$trip_id   = get_post_meta( $id, 'wp_travel_post_id', true );
-				$trip_code = wp_travel_get_trip_code( $trip_id );
+				$trip_code = wptravel_get_trip_code( $trip_id );
 				echo esc_attr( $trip_code );
 				break;
 
@@ -122,7 +122,7 @@ class WP_Travel_Admin_Booking {
 				echo esc_attr( $full_name );
 				break;
 			case 'booking_status':
-				$status    = wp_travel_get_booking_status();
+				$status    = wptravel_get_booking_status();
 				$label_key = get_post_meta( $id, 'wp_travel_booking_status', true );
 				if ( '' === $label_key ) {
 					$label_key = 'pending';
@@ -205,7 +205,7 @@ class WP_Travel_Admin_Booking {
 
 		// 2. Edit Booking Section.
 		if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
-			$checkout_fields  = wp_travel_get_checkout_form_fields();
+			$checkout_fields  = wptravel_get_checkout_form_fields();
 			$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 			$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
 			$payment_fields   = isset( $checkout_fields['payment_fields'] ) ? $checkout_fields['payment_fields'] : array();
@@ -226,7 +226,7 @@ class WP_Travel_Admin_Booking {
 					'id'            => 'wp-travel-post-id',
 					'type'          => 'select',
 					'class'         => 'wp-travel-select2',
-					'options'       => wp_travel_get_itineraries_array(),
+					'options'       => wptravel_get_itineraries_array(),
 					'wrapper_class' => 'full-width',
 					'default'       => $wp_travel_post_id,
 				);
@@ -244,9 +244,9 @@ class WP_Travel_Admin_Booking {
 				}
 
 				// Sort fields.
-				$traveller_fields = wp_travel_sort_form_fields( $traveller_fields );
-				$billing_fields   = wp_travel_sort_form_fields( $billing_fields );
-				$payment_fields   = wp_travel_sort_form_fields( $payment_fields );
+				$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
+				$billing_fields   = wptravel_sort_form_fields( $billing_fields );
+				$payment_fields   = wptravel_sort_form_fields( $payment_fields );
 
 				// Travelers Fields HTML
 				$field_name = $traveller_fields['first_name']['name'];
@@ -262,7 +262,7 @@ class WP_Travel_Admin_Booking {
 					foreach ( $input_val as $cart_id => $field_fname_values ) {
 						$trip_id   = isset( $multiple_trips_booking_data[ $cart_id ]['trip_id'] ) ? $multiple_trips_booking_data[ $cart_id ]['trip_id'] : 0;
 						$price_key = isset( $multiple_trips_booking_data[ $cart_id ]['price_key'] ) ? $multiple_trips_booking_data[ $cart_id ]['price_key'] : '';
-						echo '<h3>' . wp_travel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>'; //phpcs:ignore
+						echo '<h3>' . wptravel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>'; //phpcs:ignore
 						foreach ( $field_fname_values as $i => $field_fname_value ) {
 							?>
 							<div class="wp-travel-form-field-wrapper">
@@ -292,8 +292,8 @@ class WP_Travel_Admin_Booking {
 									$current_field_value = isset( $current_field_values[ $cart_id ] ) && isset( $current_field_values[ $cart_id ][ $i ] ) ? $current_field_values[ $cart_id ][ $i ] : '';
 
 									// @since 1.8.3
-									if ( 'date' === $field['type'] && '' !== $current_field_value && ! wp_travel_is_ymd_date( $current_field_value ) ) {
-										$current_field_value = wp_travel_format_ymd_date( $current_field_value, 'm/d/Y' );
+									if ( 'date' === $field['type'] && '' !== $current_field_value && ! wptravel_is_ymd_date( $current_field_value ) ) {
+										$current_field_value = wptravel_format_ymd_date( $current_field_value, 'm/d/Y' );
 									}
 
 									$field_name       = sprintf( '%s[%s][%d]', $field['name'], $cart_id, $i );
@@ -323,8 +323,8 @@ class WP_Travel_Admin_Booking {
 								$input_val  = get_post_meta( $booking_id, $field_name, true );
 							}
 							// @since 1.8.3
-							if ( 'date' === $field['type'] && '' !== $input_val && ! wp_travel_is_ymd_date( $input_val ) ) {
-								$input_val = wp_travel_format_ymd_date( $input_val, 'm/d/Y' );
+							if ( 'date' === $field['type'] && '' !== $input_val && ! wptravel_is_ymd_date( $input_val ) ) {
+								$input_val = wptravel_format_ymd_date( $input_val, 'm/d/Y' );
 							}
 							$field['default'] = $input_val;
 
@@ -414,7 +414,7 @@ class WP_Travel_Admin_Booking {
 			<?php
 
 		} else { // 1. Display Booking info fields.
-			$details = wp_travel_booking_data( $booking_id );
+			$details = wptravel_booking_data( $booking_id );
 
 			if ( is_array( $details ) && count( $details ) > 0 ) {
 				?>
@@ -424,9 +424,9 @@ class WP_Travel_Admin_Booking {
 							<div class="order-wrapper">
 								<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $edit_link ); ?>"><?php esc_html_e( 'Edit', 'wp-travel' ); ?></a></h3>
 								<?php do_action( 'wp_travel_booking_metabox_after_title', $booking_id ); // @since 3.0.6 ?>
-								<?php wp_travel_view_booking_details_table( $booking_id, true ); ?>
+								<?php wptravel_view_booking_details_table( $booking_id, true ); ?>
 							</div>
-							<?php wp_travel_view_payment_details_table( $booking_id ); ?>
+							<?php wptravel_view_payment_details_table( $booking_id ); ?>
 						</div>
 					</div>
 				</div>
@@ -479,7 +479,7 @@ class WP_Travel_Admin_Booking {
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'pending';
 		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
 
-		$checkout_fields = wp_travel_get_checkout_form_fields();
+		$checkout_fields = wptravel_get_checkout_form_fields();
 		foreach ( $checkout_fields as $field_type => $fields ) {
 			$priority = array();
 			foreach ( $fields as $key => $row ) {

@@ -39,13 +39,13 @@ get_header( 'itinerary' ); ?>
 <?php do_action( 'wp_travel_before_main_content' ); ?>
 <?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : the_post(); ?>
-		<?php wp_travel_get_template_part( 'content', 'archive-itineraries' ); ?>
+		<?php wptravel_get_template_part( 'content', 'archive-itineraries' ); ?>
 	<?php endwhile; // end of the loop. ?>
 <?php else : ?>
-	<?php wp_travel_get_template_part( 'content', 'archive-itineraries-none' ); ?>
+	<?php wptravel_get_template_part( 'content', 'archive-itineraries-none' ); ?>
 <?php endif; ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
-<?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
+<?php do_action( 'wptravel_archive_listing_sidebar' ); ?>
 <?php
 if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 	?>

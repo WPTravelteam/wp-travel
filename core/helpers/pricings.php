@@ -244,10 +244,10 @@ class WP_Travel_Helpers_Pricings {
 		if ( ! $trip_id ) {
 			return false;
 		}
-		if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0
+		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0
 			$price = WP_Travel_Helpers_Pricings::get_price_legacy( $args );
 		} else {
-			$settings     = wp_travel_get_settings();
+			$settings     = wptravel_get_settings();
 			$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 			if ( 'yes' !== $switch_to_v4 ) : // Follow the tradtion to get price.
 				$price = WP_Travel_Helpers_Pricings::get_price_legacy( $args );
@@ -276,7 +276,7 @@ class WP_Travel_Helpers_Pricings {
 		$category_id      = isset( $args['category_id'] ) ? $args['category_id'] : '';
 		$price_key        = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
-		if ( 'single-price' === wp_travel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0
+		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0
 			$price = get_post_meta( $trip_id, 'wp_travel_price', true );
 			$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
 			if ( $enable_sale && ! $is_regular_price ) {
@@ -297,10 +297,10 @@ class WP_Travel_Helpers_Pricings {
 
 						// [Snippet from wp_travel_get_actual_trip_price function ]
 						// @since 1.9.2 // Added price calculation for pricing key [multiple pricing].
-						$enable_pricing_options = wp_travel_is_enable_pricing_options( $trip_id );
-						$valid_price_key        = wp_travel_is_price_key_valid( $trip_id, $price_key );
+						$enable_pricing_options = wptravel_is_enable_pricing_options( $trip_id );
+						$valid_price_key        = wptravel_is_price_key_valid( $trip_id, $price_key );
 						if ( '' !== $price_key && $enable_pricing_options && $valid_price_key ) {
-							$pricing_data = wp_travel_get_pricing_variation( $trip_id, $price_key );
+							$pricing_data = wptravel_get_pricing_variation( $trip_id, $price_key );
 							if ( is_array( $pricing_data ) && '' !== $pricing_data ) {
 
 								foreach ( $pricing_data as $p_ky => $pricing ) :
@@ -334,7 +334,7 @@ class WP_Travel_Helpers_Pricings {
 						}
 					}
 				} else {
-					$min_keys       = wp_travel_get_min_pricing_id( $trip_id );
+					$min_keys       = wptravel_get_min_pricing_id( $trip_id );
 					$pricing_id     = isset( $min_keys['pricing_id'] ) ? $min_keys['pricing_id'] : '';
 					$pricing_option = ! empty( $pricing_id ) && isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
@@ -469,13 +469,13 @@ class WP_Travel_Helpers_Pricings {
 		if ( ! $trip_id ) {
 			return 0;
 		}
-		$settings       = wp_travel_get_settings();
-		$use_global     = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
+		$settings       = wptravel_get_settings();
+		$use_global     = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', true );
 
 		// Global Payout percent.
 		$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		// Trip specific payout percent.
-		$trip_payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
+		$trip_payout_percent = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
 
 		global $wt_cart;
 		$items = $wt_cart->getItems();
@@ -486,7 +486,7 @@ class WP_Travel_Helpers_Pricings {
 		}
 
 		$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $trip_id );
-		$payout_percent = wp_travel_initial_partial_payout_unformated( $payout_percent );
+		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent );
 		return number_format( $payout_percent, 2, '.', '' );
 	}
 

@@ -6,7 +6,7 @@
  *
  * @return PayPal URI
  */
-function wp_travel_get_paypal_redirect_url( $ssl_check = false ) {
+function wptravel_get_paypal_redirect_url( $ssl_check = false ) {
 
 	if ( is_ssl() || ! $ssl_check ) {
 		$protocol = 'https://';
@@ -14,7 +14,7 @@ function wp_travel_get_paypal_redirect_url( $ssl_check = false ) {
 		$protocol = 'http://';
 	}
 
-	if ( wp_travel_test_mode() ) {
+	if ( wptravel_test_mode() ) {
 		$paypal_uri = $protocol . 'www.sandbox.paypal.com/cgi-bin/webscr';
 	} else {
 		$paypal_uri = $protocol . 'www.paypal.com/cgi-bin/webscr';
@@ -28,7 +28,7 @@ function wp_travel_get_paypal_redirect_url( $ssl_check = false ) {
  * Listen for a $_GET request from our PayPal IPN.
  * This would also do the "set-up" for an "alternate purchase verification"
  */
-function wp_travel_listen_paypal_ipn() {
+function wptravel_listen_paypal_ipn() {
 	if ( isset( $_GET['wp_travel_listener'] )
 		&& $_GET['wp_travel_listener'] == 'IPN'
 		|| isset( $_GET['test'] )
@@ -37,7 +37,7 @@ function wp_travel_listen_paypal_ipn() {
 	}
 	// echo WP_CONTENT_DIR;die;
 }
-add_action( 'init', 'wp_travel_listen_paypal_ipn' );
+add_action( 'init', 'wptravel_listen_paypal_ipn' );
 
 
 /**
@@ -46,7 +46,7 @@ add_action( 'init', 'wp_travel_listen_paypal_ipn' );
  * the ones PayPal is sending back to us.
  * This is the Pink Lilly of the whole operation.
  */
-function wp_travel_paypal_ipn_process() {
+function wptravel_paypal_ipn_process() {
 	/**
 	 * Instantiate the IPNListener class
 	 */
@@ -56,7 +56,7 @@ function wp_travel_paypal_ipn_process() {
 	/**
 	 * Set to PayPal sandbox or live mode
 	 */
-	$settings              = wp_travel_get_settings();
+	$settings              = wptravel_get_settings();
 	$listener->use_sandbox = ( $settings['wt_test_mode'] ) ? true : false;
 
 	/**
@@ -143,7 +143,7 @@ function wp_travel_paypal_ipn_process() {
 
 				$payment_method = 'paypal';
 				$amount         = sanitize_text_field( wp_unslash( $_POST['mc_gross'] ) );
-				$detail         = wp_travel_sanitize_array( $_POST );
+				$detail         = wptravel_sanitize_array( $_POST );
 
 				update_post_meta( $new_payment_id, 'wp_travel_payment_gateway', $payment_method );
 
@@ -152,10 +152,10 @@ function wp_travel_paypal_ipn_process() {
 				update_post_meta( $new_payment_id, 'wp_travel_payment_mode', 'partial' );
 
 				$json = sanitize_text_field( wp_unslash( $_POST['payment_details'] ) );
-				wp_travel_update_payment_status( $booking_id, $amount, 'paid', $detail, sprintf( '_%s_args', $payment_method ), $new_payment_id );
+				wptravel_update_payment_status( $booking_id, $amount, 'paid', $detail, sprintf( '_%s_args', $payment_method ), $new_payment_id );
 
 			} else { // New Payment.
-				update_post_meta( $payment_id, '_paypal_args', wp_travel_sanitize_array( $_POST ) );
+				update_post_meta( $payment_id, '_paypal_args', wptravel_sanitize_array( $_POST ) );
 				update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
 				update_post_meta( $payment_id, 'wp_travel_payment_amount', sanitize_text_field( $_POST['mc_gross'] ) );
 
@@ -204,4 +204,4 @@ function wp_travel_paypal_ipn_process() {
 		}
 	}
 }
-add_action( 'wp_travel_verify_paypal_ipn', 'wp_travel_paypal_ipn_process' );
+add_action( 'wp_travel_verify_paypal_ipn', 'wptravel_paypal_ipn_process' );

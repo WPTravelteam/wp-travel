@@ -8,7 +8,7 @@ class WP_Travel_Frontend_Assets {
 		if ( is_singular( 'itineraries' ) ) {
 			global $post;
 			$deps                   = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
-			if ( ! wp_travel_can_load_bundled_scripts() ) {
+			if ( ! wptravel_can_load_bundled_scripts() ) {
 				$deps['dependencies'][] = 'jquery-datepicker-lib';
 			} else {
 				$deps['dependencies'][] = 'wp-travel-frontend-bundle';
@@ -18,14 +18,14 @@ class WP_Travel_Frontend_Assets {
 
 			// Localize the script with new data
 			$translation_array = array();
-			$settings          = wp_travel_get_settings();
+			$settings          = wptravel_get_settings();
 
 			$trip = WP_Travel_Helpers_Trips::get_trip( $post->ID );
 			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
 				$translation_array['trip_data']          = $trip['trip'];
 				$translation_array['currency']           = $settings['currency'];
-				$translation_array['currency_symbol']    = wp_travel_get_currency_symbol();
-				$translation_array['cart_url']           = wp_travel_get_cart_url();
+				$translation_array['currency_symbol']    = wptravel_get_currency_symbol();
+				$translation_array['cart_url']           = wptravel_get_cart_url();
 				$translation_array['ajax_url']           = admin_url( 'admin-ajax.php' );
 				$translation_array['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
 				$translation_array['currency_position']  = $settings['currency_position'];
@@ -36,7 +36,7 @@ class WP_Travel_Frontend_Assets {
 				$translation_array['time_format']        = get_option( 'time_format' );
 				$translation_array['trip_date_listing']  = $settings['trip_date_listing'];
 			}
-			$translation_array['strings'] = wp_travel_get_strings();
+			$translation_array['strings'] = wptravel_get_strings();
 			wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $translation_array );
 
 			wp_enqueue_script( 'wp-travel-frontend-booking-widget' );

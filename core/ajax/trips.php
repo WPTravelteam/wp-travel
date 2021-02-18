@@ -252,8 +252,8 @@ class WP_Travel_Ajax_Trips {
 		$wp_travel_use_global_tabs    = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
-		$default_tabs = wp_travel_get_default_trip_tabs();
-		$tabs         = wp_travel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs );
+		$default_tabs = wptravel_get_default_trip_tabs();
+		$tabs         = wptravel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs );
 
 		$response = WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_TABS',

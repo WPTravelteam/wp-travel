@@ -4,11 +4,11 @@ if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 }
 
 // Fields array.
-$checkout_fields              = wp_travel_get_checkout_form_fields();
+$checkout_fields              = wptravel_get_checkout_form_fields();
 $traveller_fields             = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 $billing_fields               = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
 $payment_fields               = isset( $checkout_fields['payment_fields'] ) ? $checkout_fields['payment_fields'] : array();
-$settings                     = wp_travel_get_settings();
+$settings                     = wptravel_get_settings();
 $enable_multiple_travellers   = isset( $settings['enable_multiple_travellers'] ) && $settings['enable_multiple_travellers'] ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
 $all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
 global $wt_cart;
@@ -29,13 +29,13 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		$trip_id        = $trip['trip_id'];
 		$price_key      = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 
-		if ( wp_travel_is_react_version_enabled() ) {
+		if ( wptravel_is_react_version_enabled() ) {
 			$pricing_id = $trip['pricing_id'];
 		} else {
 			$pricing_id = $price_key;
 		}
 
-		$pricing_name  = wp_travel_get_trip_pricing_name( $trip_id, $pricing_id );
+		$pricing_name  = wptravel_get_trip_pricing_name( $trip_id, $pricing_id );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 
 		// New @since 3.0.0.
@@ -163,7 +163,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 					<?php do_action( 'wp_travel_action_before_book_now' ); // @since WP Travel 4.3.0 ?>
 					<div class="wp-travel-form-field button-field">
 						<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
+						<input type="submit" name="wptravel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 					</div>
 				</div>
 			</div>

@@ -11,7 +11,7 @@
  * @since 1.0.5
  * @return Array
  */
-function wp_travel_get_booking_data() {
+function wptravel_get_booking_data() {
 	global $wpdb;
 	$data = array();
 
@@ -412,7 +412,7 @@ function wp_travel_get_booking_data() {
 		$data[] = $temp_compare_data;
 	}
 	$data          = apply_filters( 'wp_travel_stat_data', $data, $_REQUEST );
-	$new_stat_data = wp_travel_make_stat_data( $data );
+	$new_stat_data = wptravel_make_stat_data( $data );
 
 	// End of query for top Itinerary.
 	$stat_data['stat_data'] = $new_stat_data;
@@ -421,7 +421,7 @@ function wp_travel_get_booking_data() {
 	$stat_data['booking_stat_to']   = $booking_additional_data['to'];
 	$stat_data['max_bookings']      = $booking_additional_data['max_bookings'];
 	$stat_data['max_pax']           = $booking_additional_data['max_pax'];
-	$stat_data['top_countries']     = wp_travel_get_country_by_code( $booking_additional_data['top_countries'] );
+	$stat_data['top_countries']     = wptravel_get_country_by_code( $booking_additional_data['top_countries'] );
 	$stat_data['top_itinerary']     = $booking_additional_data['top_itinerary'];
 
 	if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
@@ -429,7 +429,7 @@ function wp_travel_get_booking_data() {
 		$stat_data['compare_stat_to']       = $compare_additional_data['to'];
 		$stat_data['compare_max_bookings']  = $compare_additional_data['max_bookings'];
 		$stat_data['compare_max_pax']       = $compare_additional_data['max_pax'];
-		$stat_data['compare_top_countries'] = wp_travel_get_country_by_code( $compare_additional_data['top_countries'] );
+		$stat_data['compare_top_countries'] = wptravel_get_country_by_code( $compare_additional_data['top_countries'] );
 		$stat_data['compare_top_itinerary'] = $compare_additional_data['top_itinerary'];
 
 		// Query for total 2 in compare stat.
@@ -467,7 +467,7 @@ function wp_travel_get_booking_data() {
  *
  * @since 1.0.5
  */
-function wp_travel_get_booking_status() {
+function wptravel_get_booking_status() {
 	$status = array(
 		'pending'  => array(
 			'color' => '#FF9800',
@@ -490,7 +490,7 @@ function wp_travel_get_booking_status() {
 	return apply_filters( 'wp_travel_booking_status_list', $status );
 }
 
-function wp_travel_make_stat_data( $stat_datas, $show_empty = false ) {
+function wptravel_make_stat_data( $stat_datas, $show_empty = false ) {
 	if ( ! $stat_datas ) {
 		return;
 	}

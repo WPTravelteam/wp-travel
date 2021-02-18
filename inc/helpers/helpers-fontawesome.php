@@ -10,7 +10,7 @@
  *
  * @return array icons.
  */
-function wp_travel_fa_icons() {
+function wptravel_fa_icons() {
 
     return array (
         'fab fa-500px' => __( '500px', 'wp-travel' ),

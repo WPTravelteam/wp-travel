@@ -7,7 +7,7 @@
  */
 
 if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
-	function wp_travel_migrate_data_to_400( $tables = array() ) {
+	function wptravel_migrate_data_to_400( $tables = array() ) {
 		if ( ! is_array( $tables ) || count( $tables ) == 0 ) {
 			return;
 		}
@@ -464,7 +464,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_400' ) ) {
 
 
 if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
-	function wp_travel_update_to_400( $network_enabled ) {
+	function wptravel_update_to_400( $network_enabled ) {
 		global $wpdb;
 		$migrate_400 = get_option( 'wp_travel_migrate_400' );
 

@@ -36,7 +36,7 @@ class WP_Travel_Ajax {
 	 *
 	 * @since 1.7.6
 	 */
-	public function wp_travel_clone_trip() {
+	public function wptravel_clone_trip() {
 		// Run a security check first.
 		check_ajax_referer( 'wp_travel_clone_post_nonce', 'security' );
 
@@ -91,7 +91,7 @@ class WP_Travel_Ajax {
 		wp_send_json( array( 'true' ) );
 	}
 
-	public function wp_travel_check_coupon_code() {
+	public function wptravel_check_coupon_code() {
 
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['coupon_code'] ) || ! isset( $_POST['coupon_id'] ) ) {
@@ -101,7 +101,7 @@ class WP_Travel_Ajax {
 		$coupon_id   = absint( $_POST['coupon_id'] );
 		$coupon_code = sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) );
 
-		$coupon = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code );
+		$coupon = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code );
 
 		if ( ! $coupon || $coupon_id === $coupon ) {
 
@@ -130,9 +130,9 @@ class WP_Travel_Ajax {
 		exit;
 	}
 
-	public function wp_travel_add_to_cart() {
+	public function wptravel_add_to_cart() {
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
-		$http_post_data = wp_travel_sanitize_array( $_POST );
+		$http_post_data = wptravel_sanitize_array( $_POST );
 		$post_data      = json_decode( file_get_contents( 'php://input' ) );
 		$post_data      = ! empty( $post_data ) ? (array) $post_data : $http_post_data;
 
@@ -153,20 +153,20 @@ class WP_Travel_Ajax {
 		$pricing_id     = isset( $post_data['pricing_id'] ) ? absint( $post_data['pricing_id'] ) : ''; // @since 3.0.0
 		$arrival_date   = isset( $post_data['arrival_date'] ) ? sanitize_text_field( $post_data['arrival_date'] ) : '';
 		$departure_date = isset( $post_data['departure_date'] ) ? sanitize_text_field( $post_data['departure_date'] ) : ''; // Need to remove. is't post value.
-		$pax            = isset( $post_data['pax'] ) ? (array) wp_travel_sanitize_array( $post_data['pax'] ) : 0;
+		$pax            = isset( $post_data['pax'] ) ? (array) wptravel_sanitize_array( $post_data['pax'] ) : 0;
 		$trip_extras    = isset( $post_data['wp_travel_trip_extras'] ) ? $post_data['wp_travel_trip_extras'] : array();
 		$trip_price     = 0;
 
-		$attrs = wp_travel_get_cart_attrs( $trip_id, $pax, $price_key, $pricing_id, $arrival_date ); // pricing_id && $trip_start_date @since 4.0.0.
+		$attrs = wptravel_get_cart_attrs( $trip_id, $pax, $price_key, $pricing_id, $arrival_date ); // pricing_id && $trip_start_date @since 4.0.0.
 		if ( isset( $post_data['trip_time'] ) ) {
 			$attrs['trip_time'] = $post_data['trip_time'];
 		}
 
-		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
+		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			$total_pax          = array_sum( $pax );
-			$pricings           = wp_travel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
+			$pricings           = wptravel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();
 			$trip               = array();
 			$trip_price_partial = 0;
@@ -188,14 +188,14 @@ class WP_Travel_Ajax {
 				}
 				$category_price_partial = $category_price;
 
-				if ( wp_travel_is_partial_payment_enabled() ) {
+				if ( wptravel_is_partial_payment_enabled() ) {
 					$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 					$category_price_partial = ( $category_price * $percent ) / 100;
 				}
 
 				$pricing_index = null;
 				foreach ( $pricing_data as $index => $pricing ) {
-					if ( wp_travel_is_react_version_enabled() ) {
+					if ( wptravel_is_react_version_enabled() ) {
 						if ( (int) $pricing_id === (int) $pricing['pricing_id'] ) {
 							$pricing_index = $index;
 							break;
@@ -219,8 +219,8 @@ class WP_Travel_Ajax {
 
 				$trip[ $category_id ] = array(
 					'pax'           => $pax_value,
-					'price'         => wp_travel_get_formated_price( $category_price ),
-					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'price'         => wptravel_get_formated_price( $category_price ),
+					'price_partial' => wptravel_get_formated_price( $category_price_partial ),
 					'type'          => $catetory_type,
 					'custom_label'  => isset( $category['custom_label'] ) ? $category['custom_label'] : __( 'Custom', 'wp-travel' ),
 					'price_per'     => isset( $category['price_per'] ) ? $category['price_per'] : 'person',
@@ -248,7 +248,7 @@ class WP_Travel_Ajax {
 			);
 			$price      = WP_Travel_Helpers_Pricings::get_price( $args );
 			$trip_price = $price;
-			if ( wp_travel_is_partial_payment_enabled() ) {
+			if ( wptravel_is_partial_payment_enabled() ) {
 				$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 				$category_price_partial = ( $trip_price * $percent ) / 100;
 			}
@@ -264,7 +264,7 @@ class WP_Travel_Ajax {
 				"category-{$trip_id}" => array( // assigned category for single pricing to match data structure @since 3.0.0
 					'pax'           => $pax,
 					'price'         => $price,
-					'price_partial' => wp_travel_get_formated_price( $category_price_partial ),
+					'price_partial' => wptravel_get_formated_price( $category_price_partial ),
 					'type'          => 'adult', // Not set yet.
 					'custom_label'  => __( 'Custom', 'wp-travel' ),
 					'price_per'     => $price_per,
@@ -283,13 +283,13 @@ class WP_Travel_Ajax {
 		// Custom Trip Price.
 		if ( isset( $post_data['trip_price'] ) && $post_data['trip_price'] > 0 ) {
 			$trip_price = $post_data['trip_price'];
-			if ( wp_travel_is_partial_payment_enabled() ) {
+			if ( wptravel_is_partial_payment_enabled() ) {
 				$percent            = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 				$trip_price_partial = $trip_price * $percent / 100;
 			}
 		}
 
-		$attrs['enable_partial'] = wp_travel_is_partial_payment_enabled();
+		$attrs['enable_partial'] = wptravel_is_partial_payment_enabled();
 		if ( $attrs['enable_partial'] ) {
 			$trip_price_partial             = $trip_price;
 			$payout_percent                 = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
@@ -297,7 +297,7 @@ class WP_Travel_Ajax {
 
 			if ( $payout_percent > 0 ) {
 				$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-				$trip_price_partial = wp_travel_get_formated_price( $trip_price_partial );
+				$trip_price_partial = wptravel_get_formated_price( $trip_price_partial );
 			}
 			$attrs['trip_price_partial'] = $trip_price_partial;
 		}
@@ -349,7 +349,7 @@ class WP_Travel_Ajax {
 	 *
 	 * @return void
 	 */
-	public function wp_travel_update_cart() {
+	public function wptravel_update_cart() {
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['update_cart_fields'] ) || count( $_POST['update_cart_fields'] ) < 1 ) {
 			return;
@@ -357,7 +357,7 @@ class WP_Travel_Ajax {
 
 		global $wt_cart;
 
-		$cart_fields = wp_travel_sanitize_array( $_POST['update_cart_fields'] ); // @phpcs:ignore
+		$cart_fields = wptravel_sanitize_array( $_POST['update_cart_fields'] ); // @phpcs:ignore
 
 		foreach ( $cart_fields as $cart_field ) {
 
@@ -370,7 +370,7 @@ class WP_Travel_Ajax {
 			$wt_cart->update( $cart_field['cart_id'], $cart_field['pax'], $trip_extras );
 		}
 
-		WP_Travel()->notices->add( apply_filters( 'wp_travel_cart_success', __( '<strong> </strong>Cart updated succesfully.Please Proceed to Checkout', 'wp-travel' ) ), 'success' );
+		WPTravel()->notices->add( apply_filters( 'wp_travel_cart_success', __( '<strong> </strong>Cart updated succesfully.Please Proceed to Checkout', 'wp-travel' ) ), 'success' );
 
 		echo true;
 		die;
@@ -388,40 +388,40 @@ class WP_Travel_Ajax {
 
 		if ( empty( $_POST['CouponCode'] ) ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
 
 			return;
 		}
 
 		$coupon_code = sanitize_text_field( wp_unslash( $_POST['CouponCode'] ) );
 
-		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code );
+		$coupon_id = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code );
 
 		if ( ! $coupon_id ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Invalid Coupon Code', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Invalid Coupon Code', 'wp-travel' ) ), 'error' );
 
 			return;
 
 		}
 
-		$date_validity = WP_Travel()->coupon->is_coupon_valid( $coupon_id );
+		$date_validity = WPTravel()->coupon->is_coupon_valid( $coupon_id );
 
 		if ( ! $date_validity ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
 
 			return;
 
 		}
 
-		$trip_ids = wp_travel_sanitize_array( $_POST['trip_ids'] ); // @phpcs:ignore
+		$trip_ids = wptravel_sanitize_array( $_POST['trip_ids'] ); // @phpcs:ignore
 
-		$trips_validity = WP_Travel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
+		$trips_validity = WPTravel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
 
 		if ( ! $trips_validity ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
 
 			return;
 
@@ -433,11 +433,11 @@ class WP_Travel_Ajax {
 
 		if ( ! empty( $coupon_limit_number ) ) {
 
-			$usage_count = WP_Travel()->coupon->get_usage_count( $coupon_id );
+			$usage_count = WPTravel()->coupon->get_usage_count( $coupon_id );
 
 			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
 
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
 
 				return;
 
@@ -447,27 +447,27 @@ class WP_Travel_Ajax {
 		// Prepare Coupon Application.
 		global $wt_cart;
 
-		$discount_type   = WP_Travel()->coupon->get_discount_type( $coupon_id );
-		$discount_amount = WP_Travel()->coupon->get_discount_amount( $coupon_id );
+		$discount_type   = WPTravel()->coupon->get_discount_type( $coupon_id );
+		$discount_amount = WPTravel()->coupon->get_discount_amount( $coupon_id );
 
 		if ( 'fixed' === $discount_type ) {
 			$cart_amounts = $wt_cart->get_total( $with_discount = false );
 			$total        = $cart_amounts['total'];
 			if ( $discount_amount >= $total ) {
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
 				return;
 			}
 		}
 
 		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, sanitize_text_field( $_POST['CouponCode'] ) ); // $_POST['CouponCode'] @since 3.1.7
 
-		WP_Travel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
+		WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
 
 		echo true;
 		die;
 	}
 
-	public function wp_travel_remove_from_cart() {
+	public function wptravel_remove_from_cart() {
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_REQUEST['cart_id'] ) ) {
 			return;

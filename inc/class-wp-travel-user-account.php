@@ -63,23 +63,23 @@ class Wp_Travel_User_Account {
 	}
 
 	public static function dashboard_menu_dashboard_tab( $args ) {
-		echo wp_travel_get_template_html( 'account/tab-content/dashboard.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/dashboard.php', $args );
 	}
 
 	public static function dashboard_menu_bookings_tab( $args ) {
-		echo wp_travel_get_template_html( 'account/tab-content/bookings.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args );
 	}
 
 	public static function dashboard_menu_address_tab( $args ) {
-		echo wp_travel_get_template_html( 'account/tab-content/address.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/address.php', $args );
 	}
 
 	public static function dashboard_menu_account_tab( $args ) {
-		echo wp_travel_get_template_html( 'account/tab-content/account.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/account.php', $args );
 	}
 
 	public static function dashboard_menu_logout_tab( $args ) {
-		echo wp_travel_get_template_html( 'account/tab-content/logout.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/logout.php', $args );
 	}
 
 	/**
@@ -105,14 +105,14 @@ class Wp_Travel_User_Account {
 				self::lost_password();
 			} else {
 				// Get user login.
-				wp_travel_get_template_part( 'account/form', 'login' );
+				wptravel_get_template_part( 'account/form', 'login' );
 			}
 		} else {
 			$current_user            = wp_get_current_user();
 			$args['current_user']    = $current_user;
 			$args['dashboard_menus'] = self::dashboard_menus();
 			// Get user Dashboard.
-			echo wp_travel_get_template_html( 'account/content-dashboard.php', $args );
+			echo wptravel_get_template_html( 'account/content-dashboard.php', $args );
 		}
 	}
 	/**
@@ -124,7 +124,7 @@ class Wp_Travel_User_Account {
 		 */
 		if ( ! empty( $_GET['reset-link-sent'] ) ) { // @phpcs:ignore
 
-			wp_travel_get_template_part( 'account/lostpassword', 'confirm' );
+			wptravel_get_template_part( 'account/lostpassword', 'confirm' );
 
 			return;
 			/**
@@ -132,13 +132,13 @@ class Wp_Travel_User_Account {
 			*/
 		} elseif ( ! empty( $_GET['show-reset-form'] ) ) {
 			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( sanitize_text_field( wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ), ':' ) ) {
-				list( $rp_login, $rp_key ) = array_map( 'wp_travel_clean_vars', explode( ':', sanitize_text_field( wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ), 2 ) );
+				list( $rp_login, $rp_key ) = array_map( 'wptravel_clean_vars', explode( ':', sanitize_text_field( wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ), 2 ) );
 				$user                      = self::check_password_reset_key( $rp_key, $rp_login );
 
 				// reset key / login is correct, display reset password form with hidden key / login values.
 				if ( is_object( $user ) ) {
 
-					echo wp_travel_get_template_html(
+					echo wptravel_get_template_html(
 						'account/form-reset-password.php',
 						array(
 							'key'   => $rp_key,
@@ -152,7 +152,7 @@ class Wp_Travel_User_Account {
 		}
 
 		// Show lost password form by default.
-		wp_travel_get_template_part( 'account/form', 'lostpassword' );
+		wptravel_get_template_part( 'account/form', 'lostpassword' );
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Wp_Travel_User_Account {
 		$user = check_password_reset_key( $key, $login );
 
 		if ( is_wp_error( $user ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'wp-travel' ), 'error' );
 			return false;
 		}
 
@@ -190,7 +190,7 @@ class Wp_Travel_User_Account {
 
 		if ( empty( $login ) ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Enter an email or username.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Enter an email or username.', 'wp-travel' ), 'error' );
 
 			return false;
 
@@ -210,20 +210,20 @@ class Wp_Travel_User_Account {
 
 		if ( $errors->get_error_code() ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $errors->get_error_message(), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $errors->get_error_message(), 'error' );
 
 			return false;
 		}
 
 		if ( ! $user_data ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
 
 			return false;
 		}
 
 		if ( is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
 
 			return false;
 		}
@@ -237,13 +237,13 @@ class Wp_Travel_User_Account {
 
 		if ( ! $allow ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Password reset is not allowed for this user.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Password reset is not allowed for this user.', 'wp-travel' ), 'error' );
 
 			return false;
 
 		} elseif ( is_wp_error( $allow ) ) {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $allow->get_error_message(), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $allow->get_error_message(), 'error' );
 
 			return false;
 		}
@@ -252,7 +252,7 @@ class Wp_Travel_User_Account {
 		$key = get_password_reset_key( $user_data );
 
 		// Send email notification.
-		$email_content = wp_travel_get_template_html(
+		$email_content = wptravel_get_template_html(
 			'emails/customer-lost-password.php',
 			array(
 				'user_login' => $user_login,

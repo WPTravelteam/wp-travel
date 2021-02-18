@@ -47,10 +47,10 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	public function load_coupons_tab_template( $post ) {
 
 		// Print Errors / Notices.
-		wp_travel_print_notices();
+		wptravel_print_notices();
 
 		$args['post'] = $post;
-		WP_Travel()->tabs->load( self::$post_type, $args );
+		WPTravel()->tabs->load( self::$post_type, $args );
 
 	}
 	/**
@@ -128,7 +128,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_coupon'] ) ) {
 
-			$sanitized_data = wp_travel_sanitize_array( stripslashes_deep( $_POST['wp_travel_coupon'] ) );
+			$sanitized_data = wptravel_sanitize_array( stripslashes_deep( $_POST['wp_travel_coupon'] ) );
 
 			update_post_meta( $post_id, 'wp_travel_coupon_metas', $sanitized_data );
 
@@ -139,7 +139,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 * Sanitize values in the array befor save.
 	 *
 	 * @param array $data Data Data Array.
-	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wp_travel_sanitize_array'.
+	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wptravel_sanitize_array'.
 	 */
 	public function sanitize_array_values( $data ) {
 

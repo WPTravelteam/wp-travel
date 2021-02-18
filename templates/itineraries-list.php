@@ -41,7 +41,7 @@ if ( isset( $itineraries[0] ) && ! empty( $itineraries[0] ) ) : ?>
 							$itinerary_desc = stripslashes( $itinerary['desc'] );
 						}
 						if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
-							$itinerary_date = wp_travel_format_date( $itinerary['date'] );
+							$itinerary_date = wptravel_format_date( $itinerary['date'] );
 						}
 						if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {
 							$itinerary_time = stripslashes( $itinerary['time'] );

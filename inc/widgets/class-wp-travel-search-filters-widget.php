@@ -44,7 +44,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			echo ( $title ) ? $before_title . $title . $after_title : '';
 		}
 
-		echo wp_travel_get_search_filter_form( array( 'widget' => $instance ) );
+		echo wptravel_get_search_filter_form( array( 'widget' => $instance ) );
 
 		echo $after_widget;
 	}
@@ -60,7 +60,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 
 		// Filters
-		$search_fields = wp_travel_search_filter_widget_form_fields();
+		$search_fields = wptravel_search_filter_widget_form_fields();
 		foreach ( $search_fields as $key => $field ) {
 			$instance[ $key ] = isset( $new_instance[ $key ] ) ? sanitize_text_field( $new_instance[ $key ] ) : '';
 		}
@@ -95,7 +95,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			<p>
 				<label><strong><?php esc_html_e( 'Enable Filters', 'wp-travel' ); ?>:</strong></label>
 				<?php
-				$search_fields = wp_travel_search_filter_widget_form_fields();
+				$search_fields = wptravel_search_filter_widget_form_fields();
 				foreach ( $search_fields as $key => $field ) {
 					// Filters.
 					$instance_value = isset( $instance[ $key ] ) ? esc_attr( $instance[ $key ] ) : 1;
@@ -113,7 +113,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	}
 }
 
-function wp_travel_register_wp_travel_search_filter_widgets() {
+function wptravel_register_wp_travel_search_filter_widgets() {
 	register_widget( 'WP_Travel_Widget_Filter_Search_Widget' );
 }
-add_action( 'widgets_init', 'wp_travel_register_wp_travel_search_filter_widgets', 100 );
+add_action( 'widgets_init', 'wptravel_register_wp_travel_search_filter_widgets', 100 );

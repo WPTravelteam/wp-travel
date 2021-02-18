@@ -6,7 +6,7 @@ class Wp_Travel_Taxonomies {
 	}
 
 	public static function register_itinerary_types() {
-		$permalink = wp_travel_get_permalink_structure();
+		$permalink = wptravel_get_permalink_structure();
 		// Add new taxonomy, make it hierarchical (like categories).
 		$labels = array(
 			'name'              => _x( 'Trip Types', 'taxonomy general name', 'wp-travel' ),

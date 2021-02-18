@@ -11,11 +11,11 @@ $detail_link = home_url( $wp->request ) . '#bookings';
 $back_link   = $detail_link;
 
 if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
-	wp_travel_print_notices();
-	// $pricing_name = wp_travel_get_trip_pricing_name( $trip_id, $price_key );
+	wptravel_print_notices();
+	// $pricing_name = wptravel_get_trip_pricing_name( $trip_id, $price_key );
 	$booking_id    = absint( $_GET['detail_id'] );
-	$details       = wp_travel_booking_data( $booking_id );
-	$payment_data  = wp_travel_payment_data( $booking_id );
+	$details       = wptravel_booking_data( $booking_id );
+	$payment_data  = wptravel_payment_data( $booking_id );
 	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
 
 
@@ -36,7 +36,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	// Travelers info.
 	$fname       = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
 	$lname       = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
-	$status_list = wp_travel_get_payment_status();
+	$status_list = wptravel_get_payment_status();
 	if ( is_array( $details ) && count( $details ) > 0 ) {
 		?>
 		<div class="my-order my-order-details">
@@ -44,9 +44,9 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 				<div class="order-list">
 					<div class="order-wrapper">
 						<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $back_link ); ?>"><?php esc_html_e( '(Back)', 'wp-travel' ); ?></a></h3>
-						<?php wp_travel_view_booking_details_table( $booking_id ); ?>
+						<?php wptravel_view_booking_details_table( $booking_id ); ?>
 					</div>
-					<?php wp_travel_view_payment_details_table( $booking_id ); ?>
+					<?php wptravel_view_payment_details_table( $booking_id ); ?>
 				</div>
 			</div>
 		</div>
@@ -95,7 +95,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								continue;
 							}
 
-							$payment_info = wp_travel_booking_data( $b_id );
+							$payment_info = wptravel_booking_data( $b_id );
 
 							$booking_status = $payment_info['booking_status'];
 							$payment_status = $payment_info['payment_status'];
@@ -144,7 +144,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 								<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
 									<div class="contact-title">
 										<?php
-										$status_lists = wp_travel_get_payment_status();
+										$status_lists = wptravel_get_payment_status();
 										$status       = $status_lists[ $payment_status ];
 										echo esc_html( $status['text'] );
 										?>
@@ -155,7 +155,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $total_price, false, '', $b_id ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wptravel_get_formated_price_currency( $total_price, false, '', $b_id ); ?> </span>
 									</strong>
 									</p>
 									</div>
@@ -164,7 +164,7 @@ if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 									<div class="order-list-table">
 									<p>
 									<strong>
-									<span class="wp-travel-trip-total"> <?php echo wp_travel_get_formated_price_currency( $paid_amount, false, '', $b_id ); ?> </span>
+									<span class="wp-travel-trip-total"> <?php echo wptravel_get_formated_price_currency( $paid_amount, false, '', $b_id ); ?> </span>
 									</strong>
 									</p>
 									</div>

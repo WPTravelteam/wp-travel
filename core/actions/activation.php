@@ -151,7 +151,7 @@ class WP_Travel_Actions_Activation {
 	}
 
 	// Temp Helper Functions
-	public static function wp_travel_get_db_tables( $blog_id = null ) {
+	public static function wptravel_get_db_tables( $blog_id = null ) {
 		global $wpdb;
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 

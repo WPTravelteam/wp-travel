@@ -1,11 +1,11 @@
 <?php
 
 if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
-	function wp_travel_trip_callback_locations() {
+	function wptravel_trip_callback_locations() {
 		global $post;
 
-		$map_data = wp_travel_get_map_data();
-		$settings = wp_travel_get_settings();
+		$map_data = wptravel_get_map_data();
+		$settings = wptravel_get_settings();
 		add_action( 'wp_travel_admin_map_area', 'wp_travel_google_map', 10, 2 );
 		
 		?>
@@ -74,11 +74,11 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 		
 	}
 
-	function wp_travel_google_map( $settings, $map_data ) {
+	function wptravel_google_map( $settings, $map_data ) {
 		
 		$api_key = '';
 	
-		$get_maps    = wp_travel_get_maps();
+		$get_maps    = wptravel_get_maps();
 		$current_map = $get_maps['selected'];
 	
 		$show_google_map = ( 'google-map' === $current_map ) ? true : false;

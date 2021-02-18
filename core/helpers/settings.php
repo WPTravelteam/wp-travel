@@ -6,17 +6,17 @@ class WP_Travel_Helpers_Settings {
 
 	public static function get_settings() {
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$settings_options = array(); // Additional option values.
 
 		// currency option.
-		$currency_options        = wp_travel_get_currency_list();
+		$currency_options        = wptravel_get_currency_list();
 		$mapped_currency_options = array();
 		$i                       = 0;
 		foreach ( $currency_options as $value => $label ) {
 			// $mapped_currency_options[ $i ]['label'] = $label;
-			$mapped_currency_options[ $i ]['label'] = $label . ' (' . html_entity_decode( wp_travel_get_currency_symbol( $value ) ) . ')';
+			$mapped_currency_options[ $i ]['label'] = $label . ' (' . html_entity_decode( wptravel_get_currency_symbol( $value ) ) . ')';
 			$mapped_currency_options[ $i ]['value'] = $value;
 			$i++;
 		}
@@ -44,7 +44,7 @@ class WP_Travel_Helpers_Settings {
 		$settings_options['currency_positions'] = $currency_positions;
 
 		// map Options
-		$map_data           = wp_travel_get_maps();
+		$map_data           = wptravel_get_maps();
 		$maps               = $map_data['maps'];
 		$i                  = 0;
 		$mapped_map_options = array();
@@ -59,10 +59,10 @@ class WP_Travel_Helpers_Settings {
 		// Global Tabs override
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 
-		$default_tabs = wp_travel_get_default_trip_tabs();
+		$default_tabs = wptravel_get_default_trip_tabs();
 
 		// Global tab.
-		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
+		$global_tabs = wptravel_get_global_tabs( $settings, $custom_tab_enabled );
 		if ( $custom_tab_enabled ) { // If utilities is activated.
 			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
 			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
@@ -99,7 +99,7 @@ class WP_Travel_Helpers_Settings {
 		$settings['wp_travel_trip_facts_settings'] = $mapped_facts; // override values.
 
 		// Mapped sorted gateways.
-		$sorted_gateways        = wp_travel_sorted_payment_gateway_lists();
+		$sorted_gateways        = wptravel_sorted_payment_gateway_lists();
 		$mapped_sorted_gateways = array();
 		foreach ( $sorted_gateways as $key => $label ) {
 			$gateway                  = array(
@@ -185,8 +185,8 @@ class WP_Travel_Helpers_Settings {
 
 		$settings_data = (array) $settings_data;
 
-		$settings        = wp_travel_get_settings();
-		$settings_fields = array_keys( wp_travel_settings_default_fields() );
+		$settings        = wptravel_get_settings();
+		$settings_fields = array_keys( wptravel_settings_default_fields() );
 
 		$ignore_fields = array( 'wp_travel_trip_facts_settings', 'global_tab_settings', 'sorted_gateways', 'wp_travel_bank_deposits' );
 		foreach ( $settings_fields as $settings_field ) {
@@ -194,7 +194,7 @@ class WP_Travel_Helpers_Settings {
 				continue;
 			}
 			if ( isset( $settings_data[ $settings_field ] ) ) {
-				// Default pages settings. [only to get page in - wp_travel_get_page_id()] // Need enhanchement.
+				// Default pages settings. [only to get page in - wptravel_get_page_id()] // Need enhanchement.
 				$page_ids = array( 'cart_page_id', 'checkout_page_id', 'dashboard_page_id', 'thank_you_page_id' );
 
 				if ( in_array( $settings_field, $page_ids ) && ! empty( $settings_data[ $settings_field ] ) ) {

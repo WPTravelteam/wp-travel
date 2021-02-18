@@ -65,7 +65,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 					$booking_id = $booking->post_title;
 
 					$trip_id   = get_post_meta( $id, 'wp_travel_post_id', true );
-					$trip_code = wp_travel_get_trip_code( $trip_id );
+					$trip_code = wptravel_get_trip_code( $trip_id );
 
 					$first_name = get_post_meta( $id, 'wp_travel_fname_traveller', true );
 					if ( ! $first_name ) {
@@ -102,10 +102,10 @@ class WP_Travel_Admin_Dashboard_Widgets {
 						$name .= ' ' . $last_name;
 					}
 
-					$date = wp_travel_format_date( $booking->post_date, true, 'Y-m-d' );
+					$date = wptravel_format_date( $booking->post_date, true, 'Y-m-d' );
 
 					// Booking Status.
-					$status    = wp_travel_get_booking_status();
+					$status    = wptravel_get_booking_status();
 					$label_key = get_post_meta( $id, 'wp_travel_booking_status', true );
 					if ( '' === $label_key ) {
 						$label_key = 'pending';
@@ -120,7 +120,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 						$pmt_label_key = 'N/A';
 						update_post_meta( $payment_id, 'wp_travel_payment_status', $pmt_label_key );
 					}
-					$Pmt_status = wp_travel_get_payment_status();
+					$Pmt_status = wptravel_get_payment_status();
 					?>
 
 					<tr>

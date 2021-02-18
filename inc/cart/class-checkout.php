@@ -35,12 +35,12 @@ class WP_Travel_Checkout {
 			return;
 		}
 		// Check if login is required for checkout.
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
         $require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
 
         if ( 'yes' === $require_login_to_checkout && ! is_user_logged_in() ) {
-            return wp_travel_get_template_part( 'account/form', 'login' );
+            return wptravel_get_template_part( 'account/form', 'login' );
 		}
 		// @since 4.0.7
 		do_action( 'wp_travel_before_checkout_page_wrap' );
@@ -105,7 +105,7 @@ class WP_Travel_Checkout {
 
 		$trip_multiple_date_options = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
 
-		$available_dates = wp_travel_get_pricing_variation_start_dates( $trip_id, $pricing_key );
+		$available_dates = wptravel_get_pricing_variation_start_dates( $trip_id, $pricing_key );
 
 		if ( 'yes' === $trip_multiple_date_options && is_array( $available_dates ) && ! empty( $available_dates ) ) {
 

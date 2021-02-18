@@ -54,7 +54,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name = $this->plugin_name;
 			$plugin_name = strtolower( $plugin_name );
 			$plugin_name = str_replace( ' ', '_', $plugin_name );
-			$settings    = wp_travel_get_settings();
+			$settings    = wptravel_get_settings();
 			$enable_addon = isset( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
 
 			if ( 'yes' !== $enable_addon ) {
@@ -81,7 +81,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 		 * Plugin action to show / hide plugin settings and features.
 		 */
 		public function plugin_action() {
-			$settings    = wp_travel_get_settings();
+			$settings    = wptravel_get_settings();
 			$plugin_name = $this->plugin_name;
 
 			$plugin_name_ucfirst  = ucfirst( $plugin_name );

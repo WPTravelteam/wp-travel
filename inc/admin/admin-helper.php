@@ -10,7 +10,7 @@
  *
  * @since 1.0.7
  */
-function wp_travel_admin_init() {
+function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
 	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
@@ -24,7 +24,7 @@ function wp_travel_admin_init() {
 	}
 }
 
-function wp_travel_marketplace_page() {
+function wptravel_marketplace_page() {
 
 	$addons_data = get_transient( 'wp_travel_marketplace_addons_list' );
 
@@ -240,7 +240,7 @@ function wp_travel_marketplace_page() {
  *
  * @since WP Travel 4.4.2
  */
-function wp_travel_meta_box_support() {
+function wptravel_meta_box_support() {
 	?>
 	<div id="wp_travel_support_block_id" class="postbox ">
 		<button type="button" class="handlediv" aria-expanded="true">
@@ -269,7 +269,7 @@ function wp_travel_meta_box_support() {
  *
  * @since WP Travel 4.4.2
  */
-function wp_travel_meta_box_documentation() {
+function wptravel_meta_box_documentation() {
 
 	?>
 	<div id="wp_travel_doc_block_id" class="postbox ">
@@ -300,7 +300,7 @@ function wp_travel_meta_box_documentation() {
  *
  * @since WP Travel 4.4.2
  */
-function wp_travel_meta_box_review() {
+function wptravel_meta_box_review() {
 
 	$wp_travel_reviews = array(
 		array(
@@ -353,7 +353,7 @@ function wp_travel_meta_box_review() {
 }
 
 // Upsell Message Callback for Download submenu. WP Travel > Downloads.
-function wp_travel_get_download_upsell() {
+function wptravel_get_download_upsell() {
 	?>
 	<h2><?php echo esc_html( 'Downloads' ); ?></h2>
 	<?php
@@ -371,7 +371,7 @@ function wp_travel_get_download_upsell() {
 }
 
 // Upsell Message Callback for Custom Filters submenu. WP Travel > Custom Filters.
-function wp_travel_custom_filters_upsell() {
+function wptravel_custom_filters_upsell() {
 	?>
 	<h2><?php echo esc_html( 'Custom Filters' ); ?></h2>
 	<?php
@@ -391,14 +391,14 @@ function wp_travel_custom_filters_upsell() {
 /**
  * Modify Admin Footer Message.
  */
-function wp_travel_modify_admin_footer_admin_settings_page() {
+function wptravel_modify_admin_footer_admin_settings_page() {
 
 	printf( __( 'Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge thanks in advance!', 'wp-travel' ), '<strong>WP Travel ?</strong>', '<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' );
 }
 /**
  * Modify Admin Footer Message.
  */
-function wp_travel_modify_admin_footer_version() {
+function wptravel_modify_admin_footer_version() {
 
 	printf( __( 'WP Travel version: %s', 'wp-travel' ), '<strong>' . WP_TRAVEL_VERSION . '</strong>' );
 
@@ -406,7 +406,7 @@ function wp_travel_modify_admin_footer_version() {
 /**
  * Add Footer Custom Text Hook.
  */
-function wp_travel_doc_support_footer_custom_text() {
+function wptravel_doc_support_footer_custom_text() {
 
 	$screen = get_current_screen();
 
@@ -419,7 +419,7 @@ function wp_travel_doc_support_footer_custom_text() {
 
 add_action( 'current_screen', 'wp_travel_doc_support_footer_custom_text' );
 
-function wp_travel_clear_booking_count_transient( $booking_id ) {
+function wptravel_clear_booking_count_transient( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
@@ -438,7 +438,7 @@ function wp_travel_clear_booking_count_transient( $booking_id ) {
  *
  * @param Number $booking_id
  */
-function wp_travel_clear_booking_count_transient_untrash( $booking_id ) {
+function wptravel_clear_booking_count_transient_untrash( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
@@ -452,7 +452,7 @@ function wp_travel_clear_booking_count_transient_untrash( $booking_id ) {
 	do_action( 'wp_travel_action_after_untrash_booking', $booking_id ); // @since 2.0.3 to update current booking inventory data.
 }
 
-function wp_travel_get_booking_count( $trip_id ) {
+function wptravel_get_booking_count( $trip_id ) {
 	if ( ! $trip_id ) {
 		return 0;
 	}
@@ -486,7 +486,7 @@ add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itiner
  * @param  Array $booking_columns List of columns.
  * @return Array                  [description]
  */
-function wp_travel_itineraries_columns( $itinerary_columns ) {
+function wptravel_itineraries_columns( $itinerary_columns ) {
 	$comment = isset( $itinerary_columns['comments'] ) ? $itinerary_columns['comments'] : '';
 	$date    = $itinerary_columns['date'];
 	unset( $itinerary_columns['date'] );
@@ -512,7 +512,7 @@ add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wp_travel
  * @param  String $column_name Custom column name.
  * @param  int    $id          Post ID.
  */
-function wp_travel_itineraries_manage_columns( $column_name, $id ) {
+function wptravel_itineraries_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'booking_count':
 			$booking_count = wp_travel_get_booking_count( $id );
@@ -534,7 +534,7 @@ function wp_travel_itineraries_manage_columns( $column_name, $id ) {
 	} // end switch
 }
 
-function wp_travel_itineraries_sort( $columns ) {
+function wptravel_itineraries_sort( $columns ) {
 
 	$custom = array(
 		'booking_count' => 'booking_count',
@@ -559,7 +559,7 @@ add_filter( 'request', 'wp_travel_itineraries_column_orderby' );
  * @param  Array $vars Order By array.
  * @return Array       Order By array.
  */
-function wp_travel_itineraries_column_orderby( $vars ) {
+function wptravel_itineraries_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'booking_count' == $vars['orderby'] ) {
 		$vars = array_merge(
 			$vars,
@@ -575,7 +575,7 @@ function wp_travel_itineraries_column_orderby( $vars ) {
 /**
  * Ajax for adding feature aditem.
  */
-function wp_travel_featured_admin_ajax() {
+function wptravel_featured_admin_ajax() {
 
 	if ( ! isset( $_POST['nonce'] ) ) {
 		return;
@@ -606,13 +606,13 @@ add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' )
 /**
  * Metabox publish WP Travel.
  */
-function wp_travel_publish_metabox() {
+function wptravel_publish_metabox() {
 	global $post;
 	if ( get_post_type( $post ) === 'itinerary-booking' ) {
 		?>
 		<div class="misc-pub-section misc-pub-booking-status">
 			<?php
-			$status    = wp_travel_get_booking_status();
+			$status    = wptravel_get_booking_status();
 			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
 			?>
 
@@ -634,7 +634,7 @@ add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
 /**
  * Upgrade Function WP Travel.
  */
-function wp_travel_upgrade_to_110() {
+function wptravel_upgrade_to_110() {
 	$itineraries        = get_posts(
 		array(
 			'post_type'   => 'itineraries',
@@ -661,7 +661,7 @@ add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_payment_
  * @param  Array $booking_columns List of columns.
  * @return Array                  [description]
  */
-function wp_travel_booking_payment_columns( $booking_columns ) {
+function wptravel_booking_payment_columns( $booking_columns ) {
 
 	$date = $booking_columns['date'];
 	unset( $booking_columns['date'] );
@@ -680,8 +680,8 @@ function wp_travel_booking_payment_columns( $booking_columns ) {
  * @param  String $column_name Custom column name.
  * @param  int    $id          Post ID.
  */
-function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
-	$payment_info = wp_travel_booking_data( $id );
+function wptravel_booking_payment_manage_columns( $column_name, $id ) {
+	$payment_info = wptravel_booking_data( $id );
 	switch ( $column_name ) {
 		case 'payment_status':
 			$payment_id = $payment_info['payment_id'];
@@ -697,7 +697,7 @@ function wp_travel_booking_payment_manage_columns( $column_name, $id ) {
 				$label_key = 'N/A';
 				update_post_meta( $payment_id, 'wp_travel_payment_status', $label_key );
 			}
-			$status = wp_travel_get_payment_status();
+			$status = wptravel_get_payment_status();
 			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_html( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
 			break;
 		case 'payment_mode':
@@ -719,7 +719,7 @@ add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_p
  * @since 1.0.0
  * @return Array       Order By array.
  */
-function wp_travel_booking_payment_column_orderby( $vars ) {
+function wptravel_booking_payment_column_orderby( $vars ) {
 	if ( isset( $vars['orderby'] ) && 'payment_status' == $vars['orderby'] ) {
 		$vars = array_merge(
 			$vars,
@@ -752,7 +752,7 @@ add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
  * @param int    $post_parent (default: 0) Parent for the new page.
  * @return int page ID
  */
-function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
+function wptravel_create_page( $slug, $option = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 	global $wpdb;
 
 	$option_value = get_option( $option );
@@ -819,7 +819,7 @@ function wp_travel_create_page( $slug, $option = '', $page_title = '', $page_con
 /**
  * Tour Extras Multiselect Options.
  */
-function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key = '', $table_row = false ) {
+function wptravel_admin_tour_extra_multiselect( $post_id, $context = false, $fetch_key = '', $table_row = false ) {
 
 	$tour_extras = wp_count_posts( 'tour-extras' );
 	// Check Tour Extras Count.
@@ -881,7 +881,7 @@ function wp_travel_admin_tour_extra_multiselect( $post_id, $context = false, $fe
 
 	$restricted_trips = ( $trip_extras ) ? $trip_extras : array();
 
-	$itineraries = wp_travel_get_tour_extras_array();
+	$itineraries = wptravel_get_tour_extras_array();
 	ob_start();
 
 	if ( $table_row ) :
@@ -982,7 +982,7 @@ add_action( 'wp_travel_extras_pro_options', 'wp_travel_extras_pro_option_fields'
  *
  * @return void
  */
-function wp_travel_extras_pro_option_fields() {
+function wptravel_extras_pro_option_fields() {
 
 	$is_pro_enabled = apply_filters( 'wp_travel_extras_is_pro_enabled', false );
 
@@ -1000,7 +1000,7 @@ function wp_travel_extras_pro_option_fields() {
 		</td>
 		<td>
 			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
-					<?php echo wp_travel_get_currency_symbol(); //phpcs:ignore ?>
+					<?php echo wptravel_get_currency_symbol(); //phpcs:ignore ?>
 			</span>
 			<input disabled="disabled" type="number" min="1" step="0.01" id="extra-item-price" placeholder="<?php echo esc_attr__( 'Price', 'wp-travel' ); ?>" >
 		</td>
@@ -1013,7 +1013,7 @@ function wp_travel_extras_pro_option_fields() {
 		</td>
 		<td>
 			<span id="coupon-currency-symbol" class="wp-travel-currency-symbol">
-				<?php echo wp_travel_get_currency_symbol(); //phpcs:ignore ?>
+				<?php echo wptravel_get_currency_symbol(); //phpcs:ignore ?>
 			</span>
 			<input type="number" min="1" step="0.01" id="extra-item-sale-price" placeholder="<?php echo esc_attr__( 'Sale Price', 'wp-travel' ); ?>" disabled="disabled" >
 		</td>
@@ -1053,7 +1053,7 @@ function wp_travel_extras_pro_option_fields() {
  * @param  array $pages Pages to check.
  * @return boolean
  */
-function wp_travel_is_admin_page( $pages = array() ) {
+function wptravel_is_admin_page( $pages = array() ) {
 	if ( ! is_admin() ) {
 		return false;
 	}
@@ -1079,7 +1079,7 @@ function wp_travel_is_admin_page( $pages = array() ) {
 /**
  * WP Travel Pricing Option List.
  */
-function wp_travel_get_pricing_option_list() {
+function wptravel_get_pricing_option_list() {
 	$type = array(
 		'multiple-price' => __( 'Multiple Price', 'wp-travel' ),
 	);
@@ -1096,7 +1096,7 @@ function wp_travel_get_pricing_option_list() {
 /**
  * Upsell message WP Travel.
  */
-function wp_travel_upsell_message( $args ) {
+function wptravel_upsell_message( $args ) {
 	$defaults = array(
 		'type'               => array( 'wp-travel-pro' ),
 		'title'              => __( 'Get WP Travel PRO', 'wp-travel' ),
@@ -1155,14 +1155,14 @@ function wp_travel_upsell_message( $args ) {
  * @param  string $plugin_name Plugin name as that you want to check.
  * @return boolean
  */
-function wp_travel_is_plugin_active( $plugin_name ) {
+function wptravel_is_plugin_active( $plugin_name ) {
 	$plugin_upper = ucfirst( $plugin_name );
 	$plugin_class = str_replace( ' ', '_', $plugin_upper );
 
 	$plugin_lower = strtolower( $plugin_name );
 	$plugin_name  = str_replace( ' ', '_', $plugin_lower );
 
-	$settings          = wp_travel_get_settings();
+	$settings          = wptravel_get_settings();
 	$is_plugin_enabled = isset( $settings[ 'show_' . $plugin_name ] ) && ! empty( $settings[ 'show_' . $plugin_name ] ) ? $settings[ 'show_' . $plugin_name ] : 'yes';
 	$does_class_exists = class_exists( $plugin_class ) || class_exists( $plugin_class . '_Core' ) ? true : false;
 	if ( ! $does_class_exists || 'yes' !== $is_plugin_enabled ) {

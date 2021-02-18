@@ -1035,7 +1035,7 @@ Enhancement:
 
 Deprecated:
 
-* Function `'wp_travel_get_default_frontend_tabs'` is deprecated. use `'wp_travel_get_default_trip_tabs'` instead.
+* Function `'wp_travel_get_default_frontend_tabs'` is deprecated. use `'wptravel_get_default_trip_tabs'` instead.
 
 Compatibility:
 

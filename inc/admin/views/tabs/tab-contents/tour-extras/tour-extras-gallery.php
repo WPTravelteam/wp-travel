@@ -5,7 +5,7 @@
  * @package WP Travel
  */
 
-function wp_travel_tour_extras_gallery_tab_callback() {
+function wptravel_tour_extras_gallery_tab_callback() {
 
 	if ( ! class_exists( 'WP_Travel_Tour_Extras_Core' ) ) :
 		$args = array(

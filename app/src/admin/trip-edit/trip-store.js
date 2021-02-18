@@ -323,7 +323,7 @@ registerStore('WPTravel/TripEdit', {
             }
         },
         * getSettings() {
-            const url = `${ajaxurl}?action=wp_travel_get_settings&_nonce=${_wp_travel._nonce}`;
+            const url = `${ajaxurl}?action=wptravel_get_settings&_nonce=${_wp_travel._nonce}`;
             
             yield actions.updateRequestSending(true);
             const response = yield actions.getSettingsFromAPI( url );

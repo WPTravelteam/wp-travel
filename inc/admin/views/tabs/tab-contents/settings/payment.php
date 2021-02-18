@@ -5,12 +5,12 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_payment( $tab, $args ) {
+function wptravel_settings_callback_payment( $tab, $args ) {
 	$settings = $args['settings'];
 
 	$partial_payment          = ! empty( $settings['partial_payment'] ) ? $settings['partial_payment'] : '';
 	$minimum_partial_payout   = ! empty( $settings['minimum_partial_payout'] ) ? $settings['minimum_partial_payout'] : '';
-	$minimum_partial_payout   = wp_travel_initial_partial_payout_unformated( $minimum_partial_payout );
+	$minimum_partial_payout   = wptravel_initial_partial_payout_unformated( $minimum_partial_payout );
 	$trip_tax_enable          = ! empty( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : '';
 	$trip_tax_percentage      = ! empty( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : '';
 	$trip_tax_price_inclusive = ! empty( $settings['trip_tax_price_inclusive'] ) ? $settings['trip_tax_price_inclusive'] : '';
@@ -59,10 +59,10 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 
 
 	<?php
-		wp_travel_do_deprecated_action( 'wp_travel_payment_gateway_fields', array( $args ), '2.0.4', 'wp_travel_payment_gateway_fields_{$gateway }' );
+		wptravel_do_deprecated_action( 'wp_travel_payment_gateway_fields', array( $args ), '2.0.4', 'wp_travel_payment_gateway_fields_{$gateway }' );
 
 		// @since 2.0.0
-		$sorted_gateways = wp_travel_sorted_payment_gateway_lists();
+		$sorted_gateways = wptravel_sorted_payment_gateway_lists();
 		// Sorting.
 		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
 			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
@@ -172,7 +172,7 @@ function wp_travel_settings_callback_payment( $tab, $args ) {
 	<?php
 }
 
-function wp_travel_standard_paypal_settings_callback( $args ) {
+function wptravel_standard_paypal_settings_callback( $args ) {
 
 	$settings = $args['settings'];
 

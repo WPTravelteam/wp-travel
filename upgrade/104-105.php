@@ -8,7 +8,7 @@
 /**
  * Update Table meta key name.
  */
-function wp_travel_update_table_fieldname() {
+function wptravel_update_table_fieldname() {
 	global $wpdb;
 
 	$query1 = "UPDATE {$wpdb->postmeta} p_postmeta SET meta_key = replace(meta_key, 'wp_traval_lat', 'wp_travel_lat')";

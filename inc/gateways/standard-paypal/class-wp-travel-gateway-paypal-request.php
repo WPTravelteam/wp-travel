@@ -35,7 +35,7 @@ class WP_Travel_Gateway_Paypal_Request {
 		}
 		/**
 		 * Before payment process action [ not needed in partial payment ].
-		 * wp_travel_update_payment_status_booking_payment() // add/update payment id.
+		 * wptravel_update_payment_status_booking_payment() // add/update payment id.
 		 */
 		if ( ! $complete_partial_payment ) { // updated in 1.8.5 for partial payment.
 			do_action( 'wt_before_payment_process', $booking_id );
@@ -55,7 +55,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		if ( $args ) {
 			$paypal_args  = http_build_query( $args, '', '&' );
-			$redirect_uri = esc_url( wp_travel_get_paypal_redirect_url() ) . '?' . $paypal_args;
+			$redirect_uri = esc_url( wptravel_get_paypal_redirect_url() ) . '?' . $paypal_args;
 		}
 		wp_redirect( $redirect_uri );
 
@@ -70,7 +70,7 @@ class WP_Travel_Gateway_Paypal_Request {
 	private function get_args( $booking_id, $complete_partial_payment = false ) {
 
 		// Get settings.
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		// Check if paypal email is set.
 		if ( ! isset( $settings['paypal_email'] ) || '' === $settings['paypal_email'] ) {
@@ -84,7 +84,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		global $wt_cart;
 		$items       = $wt_cart->getItems();
-		$current_url = wp_travel_thankyou_page_url( $itinerary_id );
+		$current_url = wptravel_thankyou_page_url( $itinerary_id );
 		if ( $complete_partial_payment ) { // For partial payment addons.
 
 			$args['cmd']                  = '_cart';
@@ -140,7 +140,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		} elseif ( $items ) {  // Normal Payment.
 
-			// $current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
+			// $current_url  = apply_filters( 'wptravel_thankyou_page_url', $current_url, $booking_id );
 			$cart_amounts = $wt_cart->get_total();
 
 			$tax = 0;
@@ -150,10 +150,10 @@ class WP_Travel_Gateway_Paypal_Request {
 					$tax = $cart_amounts['tax_partial'];
 				}
 			}
-			$discount = isset( $cart_amounts['discount'] ) ? wp_travel_get_formated_price( $cart_amounts['discount'] ) : 0;
+			$discount = isset( $cart_amounts['discount'] ) ? wptravel_get_formated_price( $cart_amounts['discount'] ) : 0;
 
 			if ( 'partial' === $payment_mode ) {
-				$discount = isset( $cart_amounts['discount_partial'] ) ? wp_travel_get_formated_price( $cart_amounts['discount_partial'] ) : 0;
+				$discount = isset( $cart_amounts['discount_partial'] ) ? wptravel_get_formated_price( $cart_amounts['discount_partial'] ) : 0;
 			}
 
 			$args['cmd']                  = '_cart';
@@ -202,25 +202,25 @@ class WP_Travel_Gateway_Paypal_Request {
 				$pax        = 1;
 				$trip_price = $item['trip_price'];
 
-				$settings = wp_travel_get_settings();
+				$settings = wptravel_get_settings();
 
 				$item_name = html_entity_decode( get_the_title( $trip_id ) );
-				$trip_code = wp_travel_get_trip_code( $trip_id );
+				$trip_code = wptravel_get_trip_code( $trip_id );
 
 				$price_per = 'trip-default';
 
 				if ( isset( $item['price_key'] ) && ! empty( $item['price_key'] ) ) {
-					$price_per = wp_travel_get_pricing_variation_price_per( $item['trip_id'], $item['price_key'] );
+					$price_per = wptravel_get_pricing_variation_price_per( $item['trip_id'], $item['price_key'] );
 				}
 
 				if ( 'trip-default' === $price_per ) {
 					$price_per = get_post_meta( $item['trip_id'], 'wp_travel_price_per', true );
 				}
 
-				$payment_amount = wp_travel_get_formated_price( $trip_price );
+				$payment_amount = wptravel_get_formated_price( $trip_price );
 				if ( 'partial' === $payment_mode ) {
 					$trip_price_partial = $item['trip_price_partial'];
-					$payment_amount     = wp_travel_get_formated_price( $trip_price_partial );
+					$payment_amount     = wptravel_get_formated_price( $trip_price_partial );
 				}
 
 				/**
@@ -228,8 +228,8 @@ class WP_Travel_Gateway_Paypal_Request {
 				 */
 				if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
 					$partial        = 'partial' === $payment_mode;
-					$trip_price     = wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
-					$payment_amount = wp_travel_get_formated_price( $trip_price );
+					$trip_price     = wptravel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
+					$payment_amount = wptravel_get_formated_price( $trip_price );
 				}
 
 				// Group Multiply disable.

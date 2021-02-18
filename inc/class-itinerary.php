@@ -126,7 +126,7 @@ class WP_Travel_Itinerary {
 	function get_group_size() {
 
 		// $pricing_option = ( isset( $this->post_meta['wp_travel_pricing_option_type'][0] ) && ! empty( $this->post_meta['wp_travel_pricing_option_type'][0] ) ) ? $this->post_meta['wp_travel_pricing_option_type'][0] : 'single-price';
-		$pricing_option = wp_travel_get_pricing_option_type();
+		$pricing_option = wptravel_get_pricing_option_type();
 		$group_size     = 0;
 		if ( 'single-price' === $pricing_option || 'multiple-price' === $pricing_option ) {
 
@@ -140,8 +140,8 @@ class WP_Travel_Itinerary {
 			// Multiple Pricing.
 			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
-			if ( wp_travel_is_react_version_enabled() ) {
-				$pricing_options = wp_travel_get_trip_pricings( $this->post->ID );
+			if ( wptravel_is_react_version_enabled() ) {
+				$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
 			}
 
 			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
@@ -212,6 +212,6 @@ class WP_Travel_Itinerary {
 	 */
 	public function get_faqs() {
 		$post_id = $this->post->ID;
-		return wp_travel_get_faqs( $post_id );
+		return wptravel_get_faqs( $post_id );
 	}
 }

@@ -5,8 +5,8 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_facts( $tab ) {
-	$settings = wp_travel_get_settings();
+function wptravel_settings_callback_facts( $tab ) {
+	$settings = wptravel_get_settings();
 	// $settings = get_option( 'facts' );
 	$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
@@ -55,7 +55,7 @@ if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
 	 * @since 1.3.2
 	 *
 	 */
-	function wp_travel_trip_facts_setting_sample( $fact = false ) {
+	function wptravel_trip_facts_setting_sample( $fact = false ) {
 		ob_start();
 		$str = isset( $fact['id'] ) ? $fact['id'] : random_int( 1, 1000000 );
 		?>

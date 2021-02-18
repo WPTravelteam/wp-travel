@@ -50,7 +50,7 @@ class WP_Travel_Admin_Tabs {
 		}
 
 		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
-		$tabs            = wp_travel_sort_array_by_priority( $this->list_by_collection( $collection ) );
+		$tabs            = wptravel_sort_array_by_priority( $this->list_by_collection( $collection ) );
 		$tab_content_directory = $collection;
 		if ( WP_TRAVEL_POST_TYPE == $collection && 'itineraries' != $collection ) { // directory must remain same if somebody changed their post type.
 			$tab_content_directory = 'itineraries';

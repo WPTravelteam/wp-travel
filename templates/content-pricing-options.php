@@ -23,19 +23,19 @@ if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 
 $trip_id    = $post->ID;
 $trip_id    = apply_filters( 'wp_travel_booking_tab_custom_trip_id', $trip_id );
-$settings   = wp_travel_get_settings();
+$settings   = wptravel_get_settings();
 $form       = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 
-$enable_pricing_options         = wp_travel_is_enable_pricing_options( $trip_id );
+$enable_pricing_options         = wptravel_is_enable_pricing_options( $trip_id );
 $enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
 
 // $enable_checkout = apply_filters( 'wp_travel_enable_checkout', false ); // commented since WP Travel  4.4.0 need to remove in further version
 // $force_checkout  = apply_filters( 'wp_travel_is_force_checkout_enabled', false ); // commented since WP Travel  4.4.0 need to remove in further version
 
-$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
+$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 
 $wrapper_id = isset( $tab_key ) ? $tab_key . '-booking-form' : 'booking-form'; // temp fixes.
 if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
@@ -54,27 +54,27 @@ if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
 
 			if ( $enable_pricing_options && is_array( $trip_pricing_options_data ) && count( $trip_pricing_options_data ) !== 0 ) :
 
-				$list_type = wp_travel_get_pricing_option_listing_type( $settings );
+				$list_type = wptravel_get_pricing_option_listing_type( $settings );
 
 				if ( 'by-pricing-option' === $list_type ) {
 					// Default pricing options template.
-					wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
+					wptravel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
 					do_action( 'wp_travel_booking_default_princing_list', $trip_id );
 
 				} else {
 					if ( 'yes' === $enable_multiple_fixed_departue && 'yes' === $fixed_departure && ( ! empty( $trip_multiple_dates_data ) && is_array( $trip_multiple_dates_data ) ) ) {
 						// Date listing template.
-						wp_travel_do_deprecated_action( 'wp_travel_booking_departure_date_list', array( $trip_multiple_dates_data ), '4.4.0', 'wp_travel_booking_fixed_departure_list' ); 
+						wptravel_do_deprecated_action( 'wp_travel_booking_departure_date_list', array( $trip_multiple_dates_data ), '4.4.0', 'wp_travel_booking_fixed_departure_list' ); 
 						do_action( 'wp_travel_booking_fixed_departure_list', $trip_id );
 
 					} else {
-						wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
+						wptravel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( $trip_pricing_options_data ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
 						do_action( 'wp_travel_booking_default_princing_list', $trip_id );
 					}
 				}
 			else :
 				// Default pricing options template with trip id.
-				wp_travel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( (int) $trip_id ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
+				wptravel_do_deprecated_action( 'wp_travel_booking_princing_options_list', array( (int) $trip_id ), '4.4.0', 'wp_travel_booking_default_princing_list' ); 
 				do_action( 'wp_travel_booking_default_princing_list', (int) $trip_id );
 				?>
 			<?php endif;

@@ -246,7 +246,7 @@ class WP_Travel_Coupon {
 		$coupon_limit_number = isset( $restrictions_tab['coupon_limit_number'] ) ? $restrictions_tab['coupon_limit_number'] : '';
 
 		if ( ! empty( $coupon_limit_number ) ) {
-			$usage_count = WP_Travel()->coupon->get_usage_count( $coupon_id );
+			$usage_count = WPTravel()->coupon->get_usage_count( $coupon_id );
 			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
 				return true;
 			}
@@ -278,7 +278,7 @@ class WP_Travel_Coupon {
 		if ( ! $partial_total ) {
 			foreach ( $items as $cart_item_id => $item ) {
 				$trip_id = $item['trip_id'];
-				if ( WP_Travel()->coupon->is_discountable( $coupon_id, $trip_id ) ) {
+				if ( WPTravel()->coupon->is_discountable( $coupon_id, $trip_id ) ) {
 					$discount_applicable_total += $wt_cart->get_item_total( $cart_item_id );
 				}
 			}
@@ -286,10 +286,10 @@ class WP_Travel_Coupon {
 			// Implement Partial in Total amount. It treat as parital is also applied in extras items.
 			foreach ( $items as $cart_item_id => $item ) {
 				$trip_id = $item['trip_id'];
-				if ( WP_Travel()->coupon->is_discountable( $coupon_id, $trip_id ) ) {
+				if ( WPTravel()->coupon->is_discountable( $coupon_id, $trip_id ) ) {
 					$item_total = $wt_cart->get_item_total( $cart_item_id );
 
-					if ( wp_travel_is_partial_payment_enabled() ) {
+					if ( wptravel_is_partial_payment_enabled() ) {
 						$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 
 						$item_total                 = ( $item_total * $payout_percent ) / 100;
@@ -300,7 +300,7 @@ class WP_Travel_Coupon {
 				}
 			}
 		}
-		return wp_travel_get_formated_price( $discount_applicable_total );
+		return wptravel_get_formated_price( $discount_applicable_total );
 	}
 
 	/**

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Notices.
-wp_travel_print_notices();
+wptravel_print_notices();
 ?>
 
 

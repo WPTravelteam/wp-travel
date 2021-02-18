@@ -12,7 +12,7 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_downloads( $tab, $args ) {
+function wptravel_trip_callback_downloads( $tab, $args ) {
 
 	if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
 		$args = array(

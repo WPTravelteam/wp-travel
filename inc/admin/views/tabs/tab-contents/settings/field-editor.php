@@ -7,7 +7,7 @@ if ( ! function_exists( 'wp_travel_settings_callback_field_editor' ) ) {
 	 * @param  Array $tab  List of tabs.
 	 * @param  Array $args Settings arg list.
 	 */
-	function wp_travel_settings_callback_field_editor( $tab, $args ) {
+	function wptravel_settings_callback_field_editor( $tab, $args ) {
 		$upsell_args = array(
 			'title'       => __( 'Want to customize your Traveler fields, billing fields and more?', 'wp-travel' ),
 			'content'     => __( 'By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel' ),

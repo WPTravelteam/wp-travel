@@ -69,7 +69,7 @@ if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
 	/**
 	 * Rest Function to call.
 	 */
-	function wp_travel_Tables_init() {
+	function wptravel_Tables_init() {
 		return WP_Travel_Tables_Init::instance();
 	}
 

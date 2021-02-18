@@ -6,7 +6,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_itinerary( $tab, $args ) {
+function wptravel_settings_callback_itinerary( $tab, $args ) {
 	$settings = $args['settings'];
 
 		$hide_related_itinerary              = $settings['hide_related_itinerary'];
@@ -15,7 +15,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 
 		$wp_travel_user_since                = get_option( 'wp_travel_user_since' );
 
-		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
+		$trip_pricing_options_layout = wptravel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
 		?>
 		<table class="form-table">

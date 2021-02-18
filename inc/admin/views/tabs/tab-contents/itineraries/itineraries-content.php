@@ -4,10 +4,10 @@
  */
 
 
- function wp_travel_trip_callback_itineraries_content() {
+ function wptravel_trip_callback_itineraries_content() {
 	global $post;
 $date_format             = get_option( 'date_format' );
-$js_date_format          = wp_travel_date_format_php_to_js();
+$js_date_format          = wptravel_date_format_php_to_js();
 $trip_itinerary_data_arr = get_post_meta( $post->ID, 'wp_travel_trip_itinerary_data' );
 $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true ); ?>
 
@@ -62,8 +62,8 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 				if ( isset( $itinerary['date'] ) && '' !== $itinerary['date'] ) {
 					$itinerary_date = stripslashes( $itinerary['date'] );
 					// @since 1.8.3
-					if ( ! empty( $itinerary_date ) && ! wp_travel_is_ymd_date( $itinerary_date ) ) {						
-						$itinerary_date = wp_travel_format_ymd_date( $itinerary_date, $date_format );
+					if ( ! empty( $itinerary_date ) && ! wptravel_is_ymd_date( $itinerary_date ) ) {						
+						$itinerary_date = wptravel_format_ymd_date( $itinerary_date, $date_format );
 					}
 				}
 				if ( isset( $itinerary['time'] ) && '' !== $itinerary['time'] ) {

@@ -6,7 +6,7 @@
  */
 
 // Print Errors / Notices.
-wp_travel_print_notices();
+wptravel_print_notices();
 
 $nonce_value = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 $nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-travel-register-nonce'] ) ) : $nonce_value;
@@ -14,7 +14,7 @@ $nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? sanitize_text_field
 $login_form_toogle = '';
 $reg_form_toogle   = '';
 
-$settings = wp_travel_get_settings();
+$settings = wptravel_get_settings();
 
 $enable_my_account_customer_registration = isset( $settings['enable_my_account_customer_registration'] ) ? $settings['enable_my_account_customer_registration'] : 'yes';
 
@@ -85,7 +85,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 						</div>
 						<div class="float-right">
 							<p class="info">
-								<a href="<?php echo esc_url( wp_travel_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
+								<a href="<?php echo esc_url( wptravel_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
 							</p>
 						</div>
 					</div>

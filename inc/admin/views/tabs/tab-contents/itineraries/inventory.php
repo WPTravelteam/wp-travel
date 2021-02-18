@@ -7,7 +7,7 @@
 
 if ( ! function_exists( 'wp_travel_trip_callback_inventory' ) ) {
 
-	function wp_travel_trip_callback_inventory( $tab, $args ) {
+	function wptravel_trip_callback_inventory( $tab, $args ) {
 		$upsell_args = array();
 		if ( ! class_exists( 'WP_Travel_Inventory_Management_Core' ) ) :
 			$upsell_args = array(

@@ -11,7 +11,7 @@
   *
   * @param string $which Which section to display.
   */
-function wp_travel_tablenav( $which ) {
+function wptravel_tablenav( $which ) {
 	if ( ! $which ) {
 		return;
 	}

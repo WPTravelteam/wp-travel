@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_utilities_faq_global( $tab, $args ) {
+function wptravel_settings_callback_utilities_faq_global( $tab, $args ) {
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
 			'title'      => __( 'Need Additional Global FAQs ?', 'wp-travel' ),

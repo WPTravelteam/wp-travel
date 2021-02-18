@@ -47,7 +47,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	public function load_tour_extras_tab_template( $post ) {
 
 		$args['post'] = $post;
-		WP_Travel()->tabs->load( self::$post_type, $args );
+		WPTravel()->tabs->load( self::$post_type, $args );
 
 	}
 	/**
@@ -132,7 +132,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_extras'] ) ) {
 
-			$sanitized_data = wp_travel_sanitize_array( stripslashes_deep( $_POST['wp_travel_extras'] ) );
+			$sanitized_data = wptravel_sanitize_array( stripslashes_deep( $_POST['wp_travel_extras'] ) );
 
 			update_post_meta( $post_id, 'wp_travel_tour_extras_metas', $sanitized_data );
 
@@ -143,7 +143,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	 * Sanitize values in the array befor save.
 	 *
 	 * @param array $data Data Data Array.
-	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wp_travel_sanitize_array'.
+	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wptravel_sanitize_array'.
 	 */
 	public function sanitize_array_values( $data ) {
 

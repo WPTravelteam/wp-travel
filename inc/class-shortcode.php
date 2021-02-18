@@ -89,7 +89,7 @@ class Wp_Travel_Shortcodes {
 			'after'  => null,
 		)
 	) {
-		$wrapper_class     = wp_travel_get_theme_wrapper_class();
+		$wrapper_class     = wptravel_get_theme_wrapper_class();
 		$wrapper['class'] .= ' ' . $wrapper_class;
 		ob_start();
 
@@ -107,7 +107,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wp_travel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
+	public static function wptravel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
 		$default = array(
 			'id'           => 0,
 			'type'         => '',
@@ -201,15 +201,15 @@ class Wp_Travel_Shortcodes {
 					?>
 					<?php
 					if ( 'grid' === $view_mode ) :
-						wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
+						wptravel_get_template_part( 'shortcode/itinerary', 'item' );
 					else :
-						wp_travel_get_template_part( 'shortcode/itinerary', 'item-list' );
+						wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
 					endif;
 					?>
 				<?php endwhile; ?>
 				</ul>
 			<?php else : ?>
-				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
+				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -226,8 +226,8 @@ class Wp_Travel_Shortcodes {
 	 * @param [type] $content
 	 * @return String
 	 */
-	public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
-		$search_widget_fields = wp_travel_search_filter_widget_form_fields();
+	public static function wptravel_trip_filters_shortcode( $atts, $content ) {
+		$search_widget_fields = wptravel_search_filter_widget_form_fields();
 		$defaults             = array(
 			'keyword_search'       => 1,
 			'fact'                 => 1,
@@ -274,7 +274,7 @@ class Wp_Travel_Shortcodes {
 
 		ob_start();
 		echo '<div class="widget_wp_travel_filter_search_widget">';
-		wp_travel_get_search_filter_form( array( 'shortcode' => $defaults ) );
+		wptravel_get_search_filter_form( array( 'shortcode' => $defaults ) );
 		echo '</div>';
 		return ob_get_clean();
 	}
@@ -282,7 +282,7 @@ class Wp_Travel_Shortcodes {
 	/**
 	 * Trip facts Shortcode callback.
 	 */
-	public function wp_travel_trip_facts_shortcode( $atts, $content = '' ) {
+	public function wptravel_trip_facts_shortcode( $atts, $content = '' ) {
 
 		$trip_id = ( isset( $atts['id'] ) && '' != $atts['id'] ) ? $atts['id'] : false;
 
@@ -291,7 +291,7 @@ class Wp_Travel_Shortcodes {
 			return;
 		}
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) && ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
 			return '';
@@ -369,9 +369,9 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return String
 	 */
-	public function wp_travel_trip_enquiry_form_shortcode() {
+	public function wptravel_trip_enquiry_form_shortcode() {
 		ob_start();
-		wp_travel_get_enquiries_form( true );
+		wptravel_get_enquiries_form( true );
 		$html = ob_get_clean();
 		return $html;
 	}

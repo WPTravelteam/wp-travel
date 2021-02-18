@@ -41,7 +41,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 		extract( $args );
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
-		wp_travel_get_enquiries_form( true );
+		wptravel_get_enquiries_form( true );
 		echo $after_widget;
 	}
 
@@ -75,7 +75,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 	}
 }
 
-function wp_travel_register_wp_travel_enquiry_form_widgets() {
+function wptravel_register_wp_travel_enquiry_form_widgets() {
 	register_widget( 'WP_Travel_Trip_Enquiry_Form_Widget' );
 }
-add_action( 'widgets_init', 'wp_travel_register_wp_travel_enquiry_form_widgets' );
+add_action( 'widgets_init', 'wptravel_register_wp_travel_enquiry_form_widgets' );

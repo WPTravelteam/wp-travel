@@ -12,7 +12,7 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_cart_checkout( $tab, $args ) {
+function wptravel_trip_callback_cart_checkout( $tab, $args ) {
 
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(

@@ -24,9 +24,9 @@ class WP_Travel_Post_Types {
 	 * @return void
 	 */
 	public static function register_trip() {
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
-		$permalink = wp_travel_get_permalink_structure();
+		$permalink = wptravel_get_permalink_structure();
 		$labels    = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
 			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),

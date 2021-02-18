@@ -12,7 +12,7 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_misc_options() {
+function wptravel_trip_callback_misc_options() {
 	global $post;
 
 	$enable_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_enable_trip_enquiry_option', true );

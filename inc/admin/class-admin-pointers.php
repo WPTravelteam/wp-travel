@@ -26,7 +26,7 @@ class WP_Travel_Admin_Info_Pointers {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
 		}
 		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
-		$settings        = wp_travel_get_settings();
+		$settings        = wptravel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
 
 		if ( version_compare( $user_since, '4.0.0', '<' ) && 'no' == $switch_to_react ) {
@@ -302,7 +302,7 @@ class WP_Travel_Admin_Info_Pointers {
 	 *
 	 * @since 1.2
 	 */
-	function wp_travel_paypal_merge_notice() {
+	function wptravel_paypal_merge_notice() {
 
 		if ( is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
 			$user_id = get_current_user_id();
@@ -327,7 +327,7 @@ class WP_Travel_Admin_Info_Pointers {
 	 *
 	 * @since 1.4.0
 	 */
-	function wp_travel_update_payment_gateways_notice() {
+	function wptravel_update_payment_gateways_notice() {
 
 		$addons = array( 'wp-travel-instamojo/wp-travel-instamojo-checkout.php', 'wp-travel-paypal-express-checkout/wp-travel-paypal-express-checkout.php', 'wp-travel-razor-pay/wp-travel-razorpay-checkout.php', 'wp-travel-stripe/wp-travel-stripe.php' );
 
@@ -354,7 +354,7 @@ class WP_Travel_Admin_Info_Pointers {
 	/**
 	 * Dismiss info nag message.
 	 */
-	function wp_travel_get_dismissied_nag_messages() {
+	function wptravel_get_dismissied_nag_messages() {
 
 		$user_id = get_current_user_id();
 
@@ -363,7 +363,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 	}
 
-	function wp_travel_importer_upsell_notice() {
+	function wptravel_importer_upsell_notice() {
 
 		if ( class_exists( 'WP_Travel_Import_Export_Core' ) ) {
 			return;
@@ -400,7 +400,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 		// End of Show notices channel if gdpr isn't dismissed.
 		// Test Mode.
-		if ( wp_travel_test_mode() ) {
+		if ( wptravel_test_mode() ) {
 			$display = true;
 		}
 		// Test Mode Ends.
@@ -420,7 +420,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 		// GDPR Ends.
 		// Test Mode.
-		if ( wp_travel_test_mode() ) {
+		if ( wptravel_test_mode() ) {
 			?>
 			<div>
 				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-debug' ) ) ); ?></strong></p>

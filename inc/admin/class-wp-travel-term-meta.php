@@ -156,7 +156,7 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 			?>
 		<script>
 			jQuery(document).ready( function($) {
-			function wp_travel_media_upload(button_class) {
+			function wptravel_media_upload(button_class) {
 				var _custom_media = true,
 				_orig_send_attachment = wp.media.editor.send.attachment;
 				$('body').on('click', button_class, function(e) {

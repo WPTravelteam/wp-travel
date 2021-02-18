@@ -6,10 +6,10 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_general( $tab, $args ) {
+function wptravel_settings_callback_general( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$currency_list      = wp_travel_get_currency_list();
+		$currency_list      = wptravel_get_currency_list();
 		$currency           = $settings['currency'];
 		$currency_position  = $settings['currency_position'];
 		$thousand_separator = $settings['thousand_separator'];
@@ -55,7 +55,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			),
 		);
 
-		$map_data       = wp_travel_get_maps();
+		$map_data       = wptravel_get_maps();
 		$wp_travel_maps = $map_data['maps'];
 		$selected_map   = $map_data['selected'];
 
@@ -100,14 +100,14 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
+				<?php echo wptravel_get_dropdown_currency_list( $currency_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose currency you accept payments in.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="currency-position"><?php echo esc_html__( 'Currency Position', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_list( $currency_position_args ); ?>
+				<?php echo wptravel_get_dropdown_list( $currency_position_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose currency position.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
@@ -140,7 +140,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			<tr>
 				<th><label for="wp-travel-map-select"><?php echo esc_html__( 'Select Map', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
+				<?php echo wptravel_get_dropdown_list( $map_dropdown_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your map provider to display map in site.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>

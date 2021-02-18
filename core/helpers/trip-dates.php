@@ -73,7 +73,7 @@ class WP_Travel_Helpers_Trip_Dates {
 		}
 
 		if ( is_array( $trip_dates ) && count( $trip_dates ) > 0 ) {
-			usort( $trip_dates, 'wp_travel_date_sort' );
+			usort( $trip_dates, 'wptravel_date_sort' );
 			update_post_meta( $trip_id, 'trip_date', $trip_dates[0] ); // To sort trip according to date.
 		}
 
@@ -196,7 +196,7 @@ class WP_Travel_Helpers_Trip_Dates {
 		$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 		$fd = apply_filters( 'wp_travel_fixed_departure_defalut', $fd );
 
-		$settings     = wp_travel_get_settings();
+		$settings     = wptravel_get_settings();
 		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
 
 		$wp_travel_user_since = get_option( 'wp_travel_user_since' );

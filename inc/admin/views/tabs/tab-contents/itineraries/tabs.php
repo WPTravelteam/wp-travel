@@ -12,7 +12,7 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_tabs( $tab, $args ) {
+function wptravel_trip_callback_tabs( $tab, $args ) {
 
 
 	$post_id = $args['post']->ID;
@@ -20,8 +20,8 @@ function wp_travel_trip_callback_tabs( $tab, $args ) {
 	$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 	$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
-	$default_tabs = wp_travel_get_default_trip_tabs();
-	$tabs         = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
+	$default_tabs = wptravel_get_default_trip_tabs();
+	$tabs         = wptravel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
 
 	if ( $enable_custom_itinerary_tabs ) { // If utilities is activated.
 		$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );

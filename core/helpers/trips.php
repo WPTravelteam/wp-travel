@@ -13,7 +13,7 @@ class WP_Travel_Helpers_Trips {
 		if ( ! is_object( $trip ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$extras            = WP_Travel_Helpers_Trip_Extras::get_trip_extras();
 		$has_extras        = is_array( $extras ) && isset( $extras['code'] ) && 'WP_TRAVEL_TRIP_EXTRAS' == $extras['code'] && isset( $extras['trip_extras'] ) && count( $extras['trip_extras'] ) > 0 ? true : false;
@@ -32,8 +32,8 @@ class WP_Travel_Helpers_Trips {
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 		$use_global_tabs              = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 
-		$default_tabs = wp_travel_get_default_trip_tabs();
-		$trip_tabs    = wp_travel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs ); // quick fix.
+		$default_tabs = wptravel_get_default_trip_tabs();
+		$trip_tabs    = wptravel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs ); // quick fix.
 		if ( $enable_custom_itinerary_tabs ) { // If utilities is activated.
 			$custom_tabs = get_post_meta( $trip_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
 			$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
@@ -71,21 +71,21 @@ class WP_Travel_Helpers_Trips {
 		$trip_exclude = get_post_meta( $trip_id, 'wp_travel_trip_exclude', true );
 		$trip_outline = get_post_meta( $trip_id, 'wp_travel_outline', true );
 		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
-		$faqs         = wp_travel_get_faqs( $trip_id );
-		$map_data     = wp_travel_get_map_data( $trip_id );
-		// TODO : Include following map_data inside `wp_travel_get_map_data` function.
+		$faqs         = wptravel_get_faqs( $trip_id );
+		$map_data     = wptravel_get_map_data( $trip_id );
+		// TODO : Include following map_data inside `wptravel_get_map_data` function.
 		$zoomlevel             = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
 		$iframe_height         = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
-		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
+		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) : 'no';
 		$map_data['zoomlevel'] = apply_filters( 'wp_travel_trip_zoomlevel', $zoomlevel, $trip_id );
-		// $map_data['iframe_height'] = apply_filters( 'wp_travel_trip_map_iframe_height', $iframe_height, $trip_id );
-		$map_data['use_lat_lng'] = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		// $map_data['iframe_height'] = apply_filters( 'wptravel_trip_map_iframe_height', $iframe_height, $trip_id );
+		$map_data['use_lat_lng'] = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
 
 		// $trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
-		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
-		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
+		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', true );
+		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
 		if ( ! $minimum_partial_payout_percent ) {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
@@ -101,7 +101,7 @@ class WP_Travel_Helpers_Trips {
 			'id'                                => $trip->ID,
 			'title'                             => $trip->post_title,
 			'url'                               => get_permalink( $trip->ID ),
-			'trip_code'                         => wp_travel_get_trip_code( $trip->ID ),
+			'trip_code'                         => wptravel_get_trip_code( $trip->ID ),
 			'use_global_tabs'                   => $use_global_tabs,
 			'trip_tabs'                         => $tabs,
 			'trip_include'                      => $trip_include,
@@ -317,10 +317,10 @@ class WP_Travel_Helpers_Trips {
 		if ( ! empty( $trip_data->minimum_partial_payout_use_global ) ) {
 			$minimum_partial_payout_use_global = $trip_data->minimum_partial_payout_use_global;
 		}
-		update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
+		update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
 
 		if ( ! empty( $trip_data->minimum_partial_payout_percent ) ) {
-			update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
+			update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
 		}
 
 		// Update trip gallery meta.
@@ -347,7 +347,7 @@ class WP_Travel_Helpers_Trips {
 			update_post_meta( $trip_id, 'wp_travel_location', wp_unslash( $data['loc'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lat', wp_unslash( $data['lat'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lng', wp_unslash( $data['lng'] ) );
-			update_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
+			update_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_zoomlevel', wp_unslash( $data['zoomlevel'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_map_iframe_height', wp_unslash( $data['iframe_height'] ) );
 		}
@@ -357,13 +357,13 @@ class WP_Travel_Helpers_Trips {
 		 * 
 		 * @since 4.0.4
 		 */
-		$prev_min_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
+		$prev_min_price = get_post_meta( $trip_id, 'wptravel_trip_price', true );
 		$args = array(
 			'trip_id' => $trip_id,
 		);
 		$min_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
+		update_post_meta( $trip_id, 'wptravel_trip_price', $min_price, $prev_min_price );
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );
@@ -653,8 +653,8 @@ class WP_Travel_Helpers_Trips {
 		$price_key              = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
 		$enable_sale         = false;
-		$settings            = wp_travel_get_settings();
-		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
+		$settings            = wptravel_get_settings();
+		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 		$pricing_options = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 		if ( 'single-price' === $pricing_option_type ) {
@@ -869,7 +869,7 @@ class WP_Travel_Helpers_Trips {
 	 * @return Boolean
 	 */
 	public static function is_tax_enabled() {
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 		return  isset( $settings['trip_tax_enable'] )  && 'yes' === $settings['trip_tax_enable'];
 	}
 
@@ -882,7 +882,7 @@ class WP_Travel_Helpers_Trips {
 	public static function get_tax_rate() {
 		$tax_percentage = false;
 		if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
-			$settings        = wp_travel_get_settings();
+			$settings        = wptravel_get_settings();
 			$tax_inclusive_price = $settings['trip_tax_price_inclusive'];
 			$tax_percentage      = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : '';
 	

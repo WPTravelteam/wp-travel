@@ -60,7 +60,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @since 1.0.0
 		 * @static
-		 * @see WP_Travel()
+		 * @see WPTravel()
 		 * @return WP_Travel - Main instance.
 		 */
 		public static function instance() {
@@ -110,14 +110,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( file_exists( sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH ) ) ) {
 				include sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
 			}
-			register_activation_hook( __FILE__, array( $this, 'wp_travel_activation' ) );
-			add_action( 'activated_plugin', array( $this, 'wp_travel_plugin_load_first_order' ) );
-			add_action( 'after_setup_theme', array( $this, 'wp_travel_setup_environment' ) );
+			register_activation_hook( __FILE__, array( $this, 'wptravel_activation' ) );
+			add_action( 'activated_plugin', array( $this, 'wptravel_plugin_load_first_order' ) );
+			add_action( 'after_setup_theme', array( $this, 'wptravel_setup_environment' ) );
 
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 
 			// Set priority to move submenu.
-			$sbumenus         = wp_travel_get_submenu();
+			$sbumenus         = wptravel_get_submenu();
 			$priority_enquiry = isset( $sbumenus['bookings']['enquiries']['priority'] ) ? $sbumenus['bookings']['enquiries']['priority'] : 10;
 			$priority_extras  = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
 			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_enquiries' ), $priority_enquiry );
@@ -125,7 +125,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
-			add_action( 'init', 'wp_travel_book_now', 99 );
+			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'wp_enqueue_scripts', array( 'WP_Travel_Assets', 'frontend' ) );
 			add_action( 'wp_head', array( 'WP_Travel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
@@ -200,7 +200,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			return $_page_id;
 		}
 
-		public function wp_travel_network_menu() {
+		public function wptravel_network_menu() {
 			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WP_Travel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
 		}
 
@@ -404,7 +404,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * WP Travel Activation.
 		 */
-		function wp_travel_activation( $network_enabled ) {
+		function wptravel_activation( $network_enabled ) {
 			// Check for PHP Compatibility
 			global $wp_version;
 			$min_php_ver = '5.3.29';
@@ -458,7 +458,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			);
 
 			foreach ( $pages as $key => $page ) {
-				wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wp_travel_get_page_id( $page['parent'] ) : '' );
+				wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
 			}
 
 			$migrations = array(
@@ -516,7 +516,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 		}
 
-		function wp_travel_setup_environment() {
+		function wptravel_setup_environment() {
 			$this->add_thumbnail_support();
 			$this->add_image_sizes();
 		}
@@ -549,7 +549,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_image_size( 'wp_travel_thumbnail', $width, $height, true );
 		}
 
-		function wp_travel_plugin_load_first_order() {
+		function wptravel_plugin_load_first_order() {
 			$path = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
 			if ( $plugins = get_option( 'active_plugins' ) ) {
 				if ( $key = array_search( $path, $plugins ) ) {
@@ -583,7 +583,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			} else {
 				global $post;
 				$page_id  = (int) get_the_ID();
-				$settings = wp_travel_get_settings();
+				$settings = wptravel_get_settings();
 
 				switch ( $slug ) {
 					case 'cart':
@@ -596,7 +596,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					break;
 					case 'dashboard':
 						$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
-						return ( (int) $dashboard_page_id === $page_id || wp_travel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false ) );
+						return ( (int) $dashboard_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_user_account' ) || apply_filters( 'wp_travel_is_account_page', false ) );
 					break;
 					case 'archive':
 						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
@@ -632,7 +632,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		public static function reject_cache_in_checkout() {
 
 			$active_plugins   = get_option( 'active_plugins' );
-			$settings         = wp_travel_get_settings();
+			$settings         = wptravel_get_settings();
 			$checkout_page_id = ! empty( $settings['checkout_page_id'] ) ? ( $settings['checkout_page_id'] ) : '';
 			$slug             = array(
 				'checkout' => get_post_field( 'post_name', $checkout_page_id ),
@@ -672,9 +672,9 @@ endif;
  * @since  1.0.0
  * @return WP Travel
  */
-function WP_Travel() {
+function WPTravel() {
 	return WP_Travel::instance();
 }
 
 // Start WP Travel.
-WP_Travel();
+WPTravel();

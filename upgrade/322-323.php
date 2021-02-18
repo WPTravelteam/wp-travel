@@ -18,7 +18,7 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 		);
 		$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-		update_post_meta( $trip_id, 'wp_travel_trip_price', $trip_price );
+		update_post_meta( $trip_id, 'wptravel_trip_price', $trip_price );
 	}
 	update_option( 'wp_travel_price_migrate_323', 'yes' );
 }

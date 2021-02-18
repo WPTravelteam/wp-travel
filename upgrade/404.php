@@ -10,7 +10,7 @@ if ( 'yes' === get_option( 'wp_travel_price_migrate_404', 'no' ) ) {
 
 
 if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
-	function wp_travel_migrate_data_to_404() {
+	function wptravel_migrate_data_to_404() {
 		global $wpdb;
 		$post_type = WP_TRAVEL_POST_TYPE;
 		$post_ids  = $wpdb->get_results( "SELECT ID from {$wpdb->posts} where post_type='{$post_type}' and post_status in( 'publish', 'draft' )" );
@@ -22,7 +22,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
 					'trip_id' => $trip_id,
 				);
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
-				update_post_meta( $trip_id, 'wp_travel_trip_price', $trip_price );
+				update_post_meta( $trip_id, 'wptravel_trip_price', $trip_price );
 			}
 			update_option( 'wp_travel_price_migrate_404', 'yes' );
 		}

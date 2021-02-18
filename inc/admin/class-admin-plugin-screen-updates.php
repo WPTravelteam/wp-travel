@@ -16,7 +16,7 @@ class WP_Travel_Admin_Plugin_Screen_Updates {
 		add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', array( $this, 'wp_travel_in_plugin_update_message' ), 10, 2 );
 	}
 
-	public function wp_travel_in_plugin_update_message( $args, $response ) {
+	public function wptravel_in_plugin_update_message( $args, $response ) {
 		$version = $response->new_version;
 
 		$transient_name = 'wt_upgrade_notice_' . $version;

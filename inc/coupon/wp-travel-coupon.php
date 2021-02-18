@@ -88,8 +88,8 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		private function init_hooks() {
 			// register_activation_hook( __FILE__, array( $this, 'wp_travel_coupons_activation' ) );
 			$priority = 10;
-			if ( function_exists( 'wp_travel_get_submenu' ) ) {
-				$sbumenus = wp_travel_get_submenu();
+			if ( function_exists( 'wptravel_get_submenu' ) ) {
+				$sbumenus = wptravel_get_submenu();
 				$priority = isset( $sbumenus['bookings']['coupon']['priority'] ) ? $sbumenus['bookings']['coupon']['priority'] : $priority;
 			}
 			add_action( 'init', array( 'WP_Travel_Coupons_Pro_Install', 'init' ), $priority );
@@ -130,7 +130,7 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		/**
 		 * Activation Hook.
 		 */
-		public function wp_travel_coupons_activation() {
+		public function wptravel_coupons_activation() {
 			// Flush Rewrite rule.
 			$coupons_pro_install = new WP_Travel_Coupons_Pro_Install();
 			$coupons_pro_install::init();
@@ -168,9 +168,9 @@ endif;
  * @since  1.0.0
  * @return WP Travel Coupons
  */
-function wp_travel_coupon_pro() {
+function wptravel_coupon_pro() {
 	return WP_Travel_Coupon_Pro::instance();
 }
 
 // Start WP Travel Coupons.
-wp_travel_coupon_pro();
+wptravel_coupon_pro();

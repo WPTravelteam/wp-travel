@@ -88,9 +88,9 @@ class WP_Travel_Helpers_License {
 	}
 }
 
-function wp_travel_helpers_license_init() {
+function wptravel_helpers_license_init() {
 	WP_Travel_Helpers_License::init();
 }
-add_action( 'init', 'wp_travel_helpers_license_init', 11 );
+add_action( 'init', 'wptravel_helpers_license_init', 11 );
 
 

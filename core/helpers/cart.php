@@ -102,7 +102,7 @@ class WP_Travel_Helpers_Cart {
 				$cart[ $cart_id ]['extras']             = $item['trip_extras'];
 				$cart[ $cart_id ]['trip']               = $item['trip'];
 				$cart[ $cart_id ]['trip_data']          = $trip_data['trip'];
-				$cart[ $cart_id ]['arrival_date']       = wp_travel_format_date( $item['arrival_date'] );
+				$cart[ $cart_id ]['arrival_date']       = wptravel_format_date( $item['arrival_date'] );
 				if ( isset( $item['trip_time'] ) ) {
 					$cart[ $cart_id ]['trip_time'] = $item['trip_time'];
 				}
@@ -198,14 +198,14 @@ class WP_Travel_Helpers_Cart {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$coupon_id = WP_Travel()->coupon->get_coupon_id_by_code( $coupon_code ); // Gets Coupon Code if Exists.
+		$coupon_id = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code ); // Gets Coupon Code if Exists.
 		if ( $coupon_id ) {
-			if ( ! WP_Travel()->coupon->is_coupon_valid( $coupon_id ) ) {
+			if ( ! WPTravel()->coupon->is_coupon_valid( $coupon_id ) ) {
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_COUPON_DATE' );
 				WP_Travel_Helpers_REST_API::response( $error );
 			}
 
-			if ( WP_Travel()->coupon->is_limit_exceed( $coupon_id ) ) {
+			if ( WPTravel()->coupon->is_limit_exceed( $coupon_id ) ) {
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_LIMIT_EXCEED' );
 				WP_Travel_Helpers_REST_API::response( $error );
 			}
@@ -217,14 +217,14 @@ class WP_Travel_Helpers_Cart {
 			}
 			$items = $cart['cart']['cart_items'];
 
-			$discount_applicable_total = WP_Travel()->coupon->get_discount_applicable_total( $coupon_id );
+			$discount_applicable_total = WPTravel()->coupon->get_discount_applicable_total( $coupon_id );
 			if ( ! $discount_applicable_total ) {
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_TRIP' );
 				WP_Travel_Helpers_REST_API::response( $error );
 			}
 
-			$discount_type  = WP_Travel()->coupon->get_discount_type( $coupon_id );
-			$discount_value = WP_Travel()->coupon->get_discount_value( $coupon_id );
+			$discount_type  = WPTravel()->coupon->get_discount_type( $coupon_id );
+			$discount_value = WPTravel()->coupon->get_discount_value( $coupon_id );
 			if ( 'fixed' === $discount_type && $discount_value > $discount_applicable_total ) {
 				// Error related to fixed discount amount is higher than trip amount.
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_HIGH' );
@@ -252,7 +252,7 @@ class WP_Travel_Helpers_Cart {
 	 */
 	public static function is_enabled_cart_page() {
 		$enabled = false;
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$skip_cart_page_booking = isset( $settings['skip_cart_page_booking'] ) && ! empty( $settings['skip_cart_page_booking'] ) ? $settings['skip_cart_page_booking'] : 'no';
 		if ( 'yes' !== $skip_cart_page_booking ) {

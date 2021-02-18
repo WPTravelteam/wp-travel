@@ -27,7 +27,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 	 * Constructor.
 	 */
 	function __construct() {
-		$this->settings    = wp_travel_get_settings();
+		$this->settings    = wptravel_get_settings();
 		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
 
 		$this->sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
@@ -71,7 +71,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 			$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
 			if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers ) ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 			}
 		}
 
@@ -91,7 +91,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
 		if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers ) ) {
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 		}
 	}
 
@@ -110,11 +110,11 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		$trip_time      = isset( $args['time'] ) ? $args['time'] : '';
 
 		// Customer Details.[nonce already verified before calling this method].
-		$first_name       = isset( $_POST['wp_travel_fname_traveller'] ) ? wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_fname_traveller'] ) ) : '';
-		$last_name        = isset( $_POST['wp_travel_lname_traveller'] ) ? wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_lname_traveller'] ) ) : '';
-		$customer_country = isset( $_POST['wp_travel_country_traveller'] ) ? wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_country_traveller'] ) ) : '';
-		$customer_phone   = isset( $_POST['wp_travel_phone_traveller'] ) ? wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_phone_traveller'] ) ) : '';
-		$customer_email   = isset( $_POST['wp_travel_email_traveller'] ) ? wp_travel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : '';
+		$first_name       = isset( $_POST['wp_travel_fname_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_fname_traveller'] ) ) : '';
+		$last_name        = isset( $_POST['wp_travel_lname_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_lname_traveller'] ) ) : '';
+		$customer_country = isset( $_POST['wp_travel_country_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_country_traveller'] ) ) : '';
+		$customer_phone   = isset( $_POST['wp_travel_phone_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_phone_traveller'] ) ) : '';
+		$customer_email   = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : '';
 
 		reset( $first_name );
 		$first_key = key( $first_name );
@@ -134,13 +134,13 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		// Bank Deposite table.
 		$bank_deposit_table = '';
 		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
-			$bank_deposit_table = wp_travel_get_bank_deposit_account_table( false );
+			$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 		}
 
 		$email_tags = array(
 			'{sitename}'               => $this->sitename,
 			'{itinerary_link}'         => get_permalink( $trip_id ),
-			'{itinerary_title}'        => wp_travel_get_trip_pricing_name( $trip_id, $price_key ),
+			'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ),
 			'{booking_id}'             => $booking_id,
 			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
 			'{booking_no_of_pax}'      => $pax,

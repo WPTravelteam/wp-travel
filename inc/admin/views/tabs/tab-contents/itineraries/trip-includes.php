@@ -7,7 +7,7 @@
  */
 
 if ( ! function_exists( 'wp_travel_trip_callback_trip_includes' ) ) {
-	function wp_travel_trip_callback_trip_includes() {
+	function wptravel_trip_callback_trip_includes() {
 		global $post;
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
 		$trip_exclude = get_post_meta( $post->ID, 'wp_travel_trip_exclude', true );

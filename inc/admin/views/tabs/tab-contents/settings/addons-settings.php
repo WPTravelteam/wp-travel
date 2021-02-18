@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_addons_settings( $tab, $args ) {
+function wptravel_settings_callback_addons_settings( $tab, $args ) {
 	?>
 	<p><?php echo esc_html( 'You can enable or disable addons features from here.' ); ?></p>
 	<?php

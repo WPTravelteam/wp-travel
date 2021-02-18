@@ -4,15 +4,15 @@
  *
  * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
  */
-function wp_travel_trip_callback_detail() {
+function wptravel_trip_callback_detail() {
 
 	global $post;
 
-	$settings = wp_travel_get_settings();
+	$settings = wptravel_get_settings();
 
 	$enable_custom_trip_code_option = isset( $settings['enable_custom_trip_code_option'] ) ? $settings['enable_custom_trip_code_option'] : 'no';
 
-	$trip_code = wp_travel_get_trip_code( $post->ID );
+	$trip_code = wptravel_get_trip_code( $post->ID );
 	$trip_code_disabled = '';
 	$trip_code_input_name = 'name=wp_travel_trip_code';
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) || 'yes' !== $enable_custom_trip_code_option ) :

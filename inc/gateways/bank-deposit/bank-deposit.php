@@ -2,12 +2,12 @@
 
 require_once dirname( __FILE__ ) . '/settings.php';
 
-function wp_travel_booking_bank_deposit( $booking_id ) {
+function wptravel_booking_bank_deposit( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
 	if (
-		! isset( $_POST['wp_travel_book_now'] )
+		! isset( $_POST['wptravel_book_now'] )
 		|| ! isset( $_POST['wp_travel_security'] )
 		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
 		) {
@@ -17,7 +17,7 @@ function wp_travel_booking_bank_deposit( $booking_id ) {
 	$gateway = isset( $_POST['wp_travel_payment_gateway'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_gateway'] ) ) : '';
 	if ( 'bank_deposit' === $gateway ) {
 
-		$payment_id = wp_travel_get_payment_id( $booking_id );
+		$payment_id = wptravel_get_payment_id( $booking_id );
 
 		$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
 		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
@@ -26,9 +26,9 @@ function wp_travel_booking_bank_deposit( $booking_id ) {
 
 }
 
-add_action( 'wp_travel_after_frontend_booking_save', 'wp_travel_booking_bank_deposit' );
+add_action( 'wp_travel_after_frontend_booking_save', 'wptravel_booking_bank_deposit' );
 
-function wp_travel_submit_bank_deposit_slip() {
+function wptravel_submit_bank_deposit_slip() {
 	if ( isset( $_POST['wp_travel_submit_slip'] ) ) {
 
 		if ( ! isset( $_POST['booking_id'] ) ) {
@@ -42,7 +42,7 @@ function wp_travel_submit_bank_deposit_slip() {
 			return;
 		}
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$allowed_files = apply_filters( 'wp_travel_bank_deposit_allowed_files', 'jpg, png, txt, pdf' );
 
@@ -53,7 +53,7 @@ function wp_travel_submit_bank_deposit_slip() {
 			$created = mkdir( $target_dir, 0755, true );
 
 			if ( ! $created ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
 			}
 		}
 		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . '-' . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
@@ -71,7 +71,7 @@ function wp_travel_submit_bank_deposit_slip() {
 			}
 		} else {
 
-			WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
 			$upload_ok = false;
 		}
 
@@ -79,7 +79,7 @@ function wp_travel_submit_bank_deposit_slip() {
 		if ( true === $upload_ok ) {
 			$booking_id = absint( $_POST['booking_id'] );
 			$txn_id     = isset( $_POST['wp_travel_bank_deposit_transaction_id'] ) ? sanitize_text_field( $_POST['wp_travel_bank_deposit_transaction_id'] ) : '';
-			$data       = wp_travel_booking_data( $booking_id );
+			$data       = wptravel_booking_data( $booking_id );
 
 			$total = $data['total'];
 			if ( isset( $_POST['wp_travel_payment_mode'] ) && 'partial' == $_POST['wp_travel_payment_mode'] ) {
@@ -88,7 +88,7 @@ function wp_travel_submit_bank_deposit_slip() {
 			$paid = $data['paid_amount'];
 
 			$amount = $total - $paid;
-			$amount = wp_travel_get_formated_price( $amount );
+			$amount = wptravel_get_formated_price( $amount );
 
 			do_action( 'wt_before_payment_process', $booking_id );
 
@@ -100,17 +100,17 @@ function wp_travel_submit_bank_deposit_slip() {
 			update_post_meta( $payment_id, 'wp_travel_payment_gateway', sanitize_text_field( $payment_method ) );
 			update_post_meta( $payment_id, 'wp_travel_payment_slip_name', sanitize_text_field( $filename ) );
 
-			wp_travel_update_payment_status( $booking_id, $amount, 'voucher_submited', $detail, sprintf( '_%s_args', $payment_method ), $payment_id );
+			wptravel_update_payment_status( $booking_id, $amount, 'voucher_submited', $detail, sprintf( '_%s_args', $payment_method ), $payment_id );
 			do_action( 'wp_travel_after_successful_payment', $booking_id );
 
 		}
 	}
 }
 
-add_action( 'init', 'wp_travel_submit_bank_deposit_slip' );
+add_action( 'init', 'wptravel_submit_bank_deposit_slip' );
 
 
-function wp_travel_bank_deposite_button( $booking_id = null, $details = array() ) {
+function wptravel_bank_deposite_button( $booking_id = null, $details = array() ) {
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;
@@ -118,15 +118,15 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 	if ( ! $booking_id ) {
 		return;
 	}
-	$enabled_payment_gateways = wp_travel_enabled_payment_gateways();
-	$details                  = wp_travel_booking_data( $booking_id );
+	$enabled_payment_gateways = wptravel_enabled_payment_gateways();
+	$details                  = wptravel_booking_data( $booking_id );
 	if ( in_array( 'bank_deposit', $enabled_payment_gateways, true ) && in_array( $details['payment_status'], array( 'waiting_voucher' ), true ) ) :
 		if ( ! class_exists( 'WP_Travel_Partial_Payment_Core' ) ) :
 			$details['due_amount'] = apply_filters( 'wp_travel_partial_payment_due_amount', $details['due_amount'] );
 			?>
 			<div class="wp-travel-form-field  wp-travel-text-info">
 				<label for="wp-travel-amount-info"><?php esc_html_e( 'Amount', 'wp-travel' ); ?></label>
-				<div class="wp-travel-text-info"><?php echo wp_travel_get_formated_price_currency( $details['due_amount'], false, '', $booking_id ); //phpcs:ignore ?></div>
+				<div class="wp-travel-text-info"><?php echo wptravel_get_formated_price_currency( $details['due_amount'], false, '', $booking_id ); //phpcs:ignore ?></div>
 			</div>
 		<?php endif; ?>
 		<div class="wp-travel-bank-deposit-wrap">
@@ -139,9 +139,9 @@ function wp_travel_bank_deposite_button( $booking_id = null, $details = array() 
 }
 
 
-add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_button', 20, 2 );
+add_action( 'wp_travel_dashboard_booking_after_detail', 'wptravel_bank_deposite_button', 20, 2 );
 
-function wp_travel_bank_deposite_content( $booking_id = null, $details = array() ) {
+function wptravel_bank_deposite_content( $booking_id = null, $details = array() ) {
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;
@@ -150,7 +150,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 		return;
 	}
 
-	$details = wp_travel_booking_data( $booking_id );
+	$details = wptravel_booking_data( $booking_id );
 
 	// End of in Case of partial payment activated.
 	if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
@@ -174,7 +174,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 			'field'  => 'wp_travel_security',
 		),
 	);
-	$bank_deposit_fields               = wp_travel_get_bank_deposit_form_fields();
+	$bank_deposit_fields               = wptravel_get_bank_deposit_form_fields();
 	$bank_deposit_fields['booking_id'] = array(
 		'type'    => 'hidden',
 		'name'    => 'booking_id',
@@ -190,7 +190,7 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 		</div>
 		<div id="wp-travel-bank-details-content" class="wp-travel-popup" >
 			<h3 class="popup-title"><?php esc_html_e( 'Bank Details', 'wp-travel' ); ?></h3>
-			<?php echo wp_travel_get_bank_deposit_account_table(); //phpcs:ignore ?>
+			<?php echo wptravel_get_bank_deposit_account_table(); //phpcs:ignore ?>
 			<button title="Close (Esc)" type="button" class="mfp-close close-button">x</button>
 		</div>
 	</div>
@@ -199,4 +199,4 @@ function wp_travel_bank_deposite_content( $booking_id = null, $details = array()
 }
 
 // Bank deposit Payment content.
-add_action( 'wp_travel_dashboard_booking_after_detail', 'wp_travel_bank_deposite_content', 9, 2 );
+add_action( 'wp_travel_dashboard_booking_after_detail', 'wptravel_bank_deposite_content', 9, 2 );

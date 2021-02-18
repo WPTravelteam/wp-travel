@@ -13,16 +13,16 @@
  * @param bool $show_admin_bar
  * @return bool
  */
-function wp_travel_disable_admin_bar( $show_admin_bar ) {
-	if ( apply_filters( 'wp_travel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
+function wptravel_disable_admin_bar( $show_admin_bar ) {
+	if ( apply_filters( 'wptravel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
 		$show_admin_bar = false;
 	}
 
 	return $show_admin_bar;
 }
-add_filter( 'show_admin_bar', 'wp_travel_disable_admin_bar', 10, 1 );
+add_filter( 'show_admin_bar', 'wptravel_disable_admin_bar', 10, 1 );
 
-if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
+if ( ! function_exists( 'wptravel_create_new_customer' ) ) {
 
 	/**
 	 * Create a new customer.
@@ -32,9 +32,9 @@ if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
 	 * @param  string $password Customer password.
 	 * @return int|WP_Error Returns WP_Error on failure, Int (user ID) on success.
 	 */
-	function wp_travel_create_new_customer( $email, $username = '', $password = '' ) {
+	function wptravel_create_new_customer( $email, $username = '', $password = '' ) {
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
 		$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
@@ -117,7 +117,7 @@ if ( ! function_exists( 'wp_travel_create_new_customer' ) ) {
  *
  * @param int $customer_id
  */
-function wp_travel_set_customer_auth_cookie( $customer_id ) {
+function wptravel_set_customer_auth_cookie( $customer_id ) {
 	global $current_user;
 
 	$current_user = get_user_by( 'id', $customer_id );
@@ -136,7 +136,7 @@ function wp_travel_set_customer_auth_cookie( $customer_id ) {
  *
  * @return string
  */
-function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
+function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 	if ( ! $permalink ) {
 		$permalink = get_permalink();
 	}
@@ -164,7 +164,7 @@ function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 		$url = add_query_arg( $endpoint, $value, $permalink );
 	}
 
-	return apply_filters( 'wp_travel_get_endpoint_url', $url, $endpoint, $value, $permalink );
+	return apply_filters( 'wptravel_get_endpoint_url', $url, $endpoint, $value, $permalink );
 }
 
 /**
@@ -172,7 +172,7 @@ function wp_travel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  *
  * @return string
  */
-function wp_travel_lostpassword_url() {
+function wptravel_lostpassword_url() {
 	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {
@@ -182,8 +182,8 @@ function wp_travel_lostpassword_url() {
 		if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
 			$url = $default_url;
 		} else {
-			$wp_travel_account_page_url    = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
-			$wp_travel_account_page_exists = wp_travel_get_page_id( 'wp-travel-dashboard' ) > 0;
+			$wp_travel_account_page_url    = wptravel_get_page_permalink( 'wp-travel-dashboard' );
+			$wp_travel_account_page_exists = wptravel_get_page_id( 'wp-travel-dashboard' ) > 0;
 
 			if ( $wp_travel_account_page_exists ) {
 				$url = $wp_travel_account_page_url . '?action=lost-pass';
@@ -192,5 +192,5 @@ function wp_travel_lostpassword_url() {
 			}
 		}
 	}
-	return apply_filters( 'wp_travel_lostpassword_url', $url, $default_url );
+	return apply_filters( 'wptravel_lostpassword_url', $url, $default_url );
 }
