@@ -14,7 +14,7 @@ function wptravel_settings_callback_utilities_faq_global( $tab, $args ) {
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
         	'main_wrapper_class' => array( 'wp-travel-upsell-message-wide', 'wp-travel-upsell-message-center' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 	do_action( 'wp_travel_settings_tab_faq_fields', $args );
 }

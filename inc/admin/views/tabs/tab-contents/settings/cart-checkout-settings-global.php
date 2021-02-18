@@ -15,7 +15,7 @@ function wptravel_settings_callback_cart_checkout_settings_global( $tab, $args )
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 	do_action( 'wp_travel_settings_tab_cart_checkout_fields', $args );
 }

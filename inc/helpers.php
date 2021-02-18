@@ -2885,7 +2885,7 @@ function wptravel_get_submenu() {
 				'page_title' => __( 'Marketplace', 'wp-travel' ),
 				'menu_title' => __( 'Marketplace', 'wp-travel' ),
 				'menu_slug'  => 'wp-travel-marketplace',
-				'callback'   => 'wp_travel_marketplace_page',
+				'callback'   => 'wptravel_marketplace_page',
 			),
 		),
 	);
@@ -2922,11 +2922,11 @@ function wptravel_get_submenu() {
 		$all_submenus['bookings']['downloads']['page_title'] = __( 'Downloads', 'wp-travel' );
 		$all_submenus['bookings']['downloads']['menu_title'] = __( 'Downloads', 'wp-travel' );
 		$all_submenus['bookings']['downloads']['menu_slug']  = 'download_upsell_page';
-		$all_submenus['bookings']['downloads']['callback']   = 'wp_travel_get_download_upsell';
+		$all_submenus['bookings']['downloads']['callback']   = 'wptravel_get_download_upsell';
 	endif;
 
 	if ( ! class_exists( 'WP_Travel_Custom_Filters_Core' ) ) {
-		$all_submenus['bookings']['custom_filters']['callback'] = 'wp_travel_custom_filters_upsell';
+		$all_submenus['bookings']['custom_filters']['callback'] = 'wptravel_custom_filters_upsell';
 	}
 
 	return apply_filters( 'wp_travel_submenus', $all_submenus );

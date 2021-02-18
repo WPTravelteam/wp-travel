@@ -953,7 +953,7 @@ function wptravel_new_pricing_list_admin() {
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 }
 
@@ -1801,6 +1801,6 @@ function wptravel_old_pricing_list_admin() {
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 }

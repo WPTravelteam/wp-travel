@@ -74,6 +74,10 @@ class WP_Travel_Post_Status {
 	 */
 	public static function quick_edit_trip_status_dropdown() {
 		global $post;
+
+		if ( ! is_object( $post ) ) {
+			return;
+		}
 		if ( 'itineraries' !== $post->post_type  )
 			return false;
 		?>

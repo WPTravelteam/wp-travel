@@ -146,8 +146,8 @@ class WP_Travel_Admin_Metaboxes {
 			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
 			remove_meta_box( 'travel_locationsdiv', WP_TRAVEL_POST_TYPE, 'side' );
 		}
-		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wp_travel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
-		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wp_travel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
+		add_meta_box( 'wp-travel-itinerary-payment-detail', __( 'Payment Detail', 'wp-travel' ), array( $this, 'wptravel_payment_info' ), 'itinerary-booking', 'normal', 'low' );
+		add_meta_box( 'wp-travel-itinerary-single-payment-detail', __( 'Payment Info', 'wp-travel' ), array( $this, 'wptravel_single_payment_info' ), 'itinerary-booking', 'side', 'low' );
 
 		global $post;
 		// Booking Metabox.
@@ -376,7 +376,7 @@ class WP_Travel_Admin_Metaboxes {
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
-			wp_travel_upsell_message( $args );
+			wptravel_upsell_message( $args );
 		endif;
 	}
 

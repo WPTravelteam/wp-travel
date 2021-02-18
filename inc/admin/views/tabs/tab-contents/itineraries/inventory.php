@@ -18,7 +18,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_inventory' ) ) {
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 		endif;
 
 		do_action( 'wp_travel_trip_inventory_tab_content', $args );

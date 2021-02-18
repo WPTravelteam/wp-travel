@@ -500,7 +500,7 @@ function wptravel_send_email_payment( $booking_id ) {
 	// Send mail to admin if booking email is set to yes.
 	if ( 'yes' == $send_booking_email_to_admin ) {
 		// Admin Payment Email Vars.
-		$admin_payment_template = $email->wp_travel_get_email_template( 'payments', 'admin' );
+		$admin_payment_template = $email->wptravel_get_email_template( 'payments', 'admin' );
 
 		$admin_message_data  = $admin_payment_template['mail_header'];
 		$admin_message_data .= $admin_payment_template['mail_content'];
@@ -526,7 +526,7 @@ function wptravel_send_email_payment( $booking_id ) {
 
 	// Send email to client.
 	// Client Payment Email Vars.
-	$client_payment_template = $email->wp_travel_get_email_template( 'payments', 'client' );
+	$client_payment_template = $email->wptravel_get_email_template( 'payments', 'client' );
 
 	$client_message_data  = $client_payment_template['mail_header'];
 	$client_message_data .= $client_payment_template['mail_content'];

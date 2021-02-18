@@ -35,7 +35,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 					$args['link_label'] = $args['link2_label'];
 					unset( $args['link2'], $args['link2_label'] );
 				}
-				wp_travel_upsell_message( $args );
+				wptravel_upsell_message( $args );
 				?>
 		<style>
 		.map-wrap{

@@ -69,7 +69,7 @@ function wptravel_get_checkout_form_fields() {
 	// GDPR Support
 	$gdpr_msg = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
-	$policy_link = wptravel_enquiries_form_fields();
+	$policy_link = wptravel_privacy_link();
 
 	$strings = wptravel_get_strings();
 	$label_booking_options = $strings['bookings']['booking_option'];

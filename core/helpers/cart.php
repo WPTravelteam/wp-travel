@@ -132,7 +132,7 @@ class WP_Travel_Helpers_Cart {
 		// START Temporary solution
 		ob_start();
 		$WP_Travel_Ajax = new WP_Travel_Ajax();
-		$WP_Travel_Ajax->wp_travel_add_to_cart();
+		$WP_Travel_Ajax->wptravel_add_to_cart();
 		$res = ob_get_contents();
 		ob_end_clean();
 		// END Temporary solution

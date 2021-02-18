@@ -38,10 +38,10 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 
 		// Admin General Notices.
-		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wp_travel_update_payment_gateways_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wp_travel_importer_upsell_notice' ) );
-		add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
+		add_action( 'admin_notices', array( $this, 'wptravel_paypal_merge_notice' ) );
+		add_action( 'admin_notices', array( $this, 'wptravel_update_payment_gateways_notice' ) );
+		add_action( 'admin_notices', array( $this, 'wptravel_importer_upsell_notice' ) );
+		add_action( 'admin_init', array( $this, 'wptravel_get_dismissied_nag_messages' ) );
 
 		// add_filter( 'wp_travel_display_general_admin_notices', array( $this, 'display_general_admin_notices' ) );
 		add_action( 'wp_travel_general_admin_notice', array( $this, 'general_admin_notices' ) );
@@ -383,7 +383,7 @@ class WP_Travel_Admin_Info_Pointers {
 						'link2'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
 						'link2_label' => __( 'Get WP Travel Import/Export Addon', 'wp-travel' ),
 					);
-					wp_travel_upsell_message( $args );
+					wptravel_upsell_message( $args );
 				?>
 			</div>
 			<?php

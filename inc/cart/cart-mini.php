@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! function_exists( 'wp_travel_key_by' ) ) {
+if ( ! function_exists( 'wptravel_key_by' ) ) {
 	function wptravel_key_by( array $object, $key_by = 'id' ) {
 		return array_column(
 			$object,
@@ -71,9 +71,9 @@ if ( wptravel_is_react_version_enabled() ) {
 							}
 						}
 						// $payout = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
-						$categories = isset( $cart_pricing['categories'] ) ? wp_travel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
+						$categories = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						// print_r( $categories );
-						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wp_travel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
+						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
 						if ( ! empty( $cart_extras ) ) {

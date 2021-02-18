@@ -134,7 +134,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				add_action( 'admin_enqueue_scripts', array( 'WP_Travel_Assets', 'admin' ) );
 
 				// To delete transient.
-				add_action( 'admin_init', 'wp_travel_admin_init' ); // @since 1.0.7
+				add_action( 'admin_init', 'wptravel_admin_init' ); // @since 1.0.7
 				// add_action( 'admin_menu', 'wp_travel_marketplace_menu');
 
 				$this->tabs     = new WP_Travel_Admin_Tabs();

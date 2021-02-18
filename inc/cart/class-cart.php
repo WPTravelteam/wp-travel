@@ -177,7 +177,7 @@ class WP_Travel_Cart {
 		}
 
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
-		$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
+		$cart_item_id = $this->wptravel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
@@ -325,8 +325,8 @@ class WP_Travel_Cart {
 					);
 					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
+					if ( function_exists( 'wptravel_group_discount_price' ) ) { // From Group Discount addons.
+						$group_trip_price = wptravel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
 
 						if ( $group_trip_price ) {
 							$category_price = $group_trip_price;
@@ -397,8 +397,8 @@ class WP_Travel_Cart {
 				if ( isset( $_REQUEST['trip_price'] ) && $_REQUEST['trip_price'] > 0 ) {
 					$trip_price = floatval( $_REQUEST['trip_price'] );
 				}
-				if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-					$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax, $pricing_id, $category_id, $price_key );
+				if ( function_exists( 'wptravel_group_discount_price' ) ) { // From Group Discount addons.
+					$group_trip_price = wptravel_group_discount_price( $trip_id, $pax, $pricing_id, $category_id, $price_key );
 					if ( $group_trip_price ) {
 						$trip_price = $group_trip_price;
 					}

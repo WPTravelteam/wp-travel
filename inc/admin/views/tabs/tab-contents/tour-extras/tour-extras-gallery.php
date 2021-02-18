@@ -16,7 +16,7 @@ function wptravel_tour_extras_gallery_tab_callback() {
 			// 'link2'       => 'https://themepalace.com/downloads/wp-travel-tour-extras/',
 			// 'link2_label' => __( 'Get Tour Extras Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 	do_action( 'wp_travel_tour_extras_gallery_tab_content' ); // @since 2.0.4
 }

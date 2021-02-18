@@ -39,4 +39,4 @@ function wptravel_tablenav( $which ) {
 	}
 }
 
-add_action( 'manage_posts_extra_tablenav', 'wp_travel_tablenav' );
+add_action( 'manage_posts_extra_tablenav', 'wptravel_tablenav' );

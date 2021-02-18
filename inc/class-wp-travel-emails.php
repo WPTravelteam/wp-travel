@@ -250,9 +250,9 @@ class WP_Travel_Emails {
 				break;
 		}
 
-		$email_template['mail_header']  = $this->wp_travel_email_heading( $sent_to, $header_details );
+		$email_template['mail_header']  = $this->wptravel_email_heading( $sent_to, $header_details );
 		$email_template['mail_content'] = $email_content;
-		$email_template['mail_footer']  = $this->wp_travel_email_footer();
+		$email_template['mail_footer']  = $this->wptravel_email_footer();
 
 		return apply_filters( 'wp_travel_email_template', $email_template, $type, $sent_to );
 
@@ -270,7 +270,7 @@ class WP_Travel_Emails {
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title><?php sprintf( 'TO %s', strtoupper( $sent_to ) ); ?></title>
-			<?php echo $this->wp_travel_email_styles(); ?>
+			<?php echo $this->wptravel_email_styles(); ?>
 		</head>
 		<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
 			<!-- Wrapper -->

@@ -28,12 +28,12 @@ function wptravel_display_critical_admin_notices() {
 
 }
 if ( ! is_multisite() ) {
-	add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+	add_action( 'admin_notices', 'wptravel_display_critical_admin_notices' );
 
 } else {
-	add_action( 'network_admin_notices', 'wp_travel_display_critical_admin_notices' );
+	add_action( 'network_admin_notices', 'wptravel_display_critical_admin_notices' );
 	if ( is_main_site() ) {
-		add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+		add_action( 'admin_notices', 'wptravel_display_critical_admin_notices' );
 	}
 }
 
@@ -86,11 +86,12 @@ function wptravel_display_general_admin_notices() {
 
 }
 
-add_action( 'admin_notices', 'wp_travel_display_general_admin_notices' );
+add_action( 'admin_notices', 'wptravel_display_general_admin_notices' );
 
 // Deprecated notice.
 function wptravel_display_deprecated_notice() {
 	$notices = apply_filters( 'wp_travel_deprecated_admin_notice', array() );
+
 	if ( count( $notices ) < 1 ) {
 		return;
 	}
@@ -111,7 +112,7 @@ function wptravel_display_deprecated_notice() {
 	</div>
 	<?php
 }
-add_action( 'admin_notices', 'wp_travel_display_deprecated_notice' );
+add_action( 'admin_notices', 'wptravel_display_deprecated_notice' );
 
 
 // Single Pricing deprecated notice.
@@ -127,7 +128,7 @@ function wptravel_display_single_pricing_deprecated_notice( $notices ) {
 	}
 	return $notices;
 }
-add_filter( 'wp_travel_deprecated_admin_notice', 'wp_travel_display_single_pricing_deprecated_notice' );
+add_filter( 'wp_travel_deprecated_admin_notice', 'wptravel_display_single_pricing_deprecated_notice' );
 
 // Black Friday Notices.
 function wptravel_black_friday_notice() {
@@ -159,7 +160,7 @@ function wptravel_pricing_table_created_notice_display( $show ) {
 	return $show;
 }
 
-add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 100 );
+add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_pricing_table_created_notice_display', 100 );
 
 
 function wptravel_pricing_table_created_notice() {
@@ -175,4 +176,4 @@ function wptravel_pricing_table_created_notice() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'wp_travel_pricing_table_created_notice', 100 );
+add_action( 'admin_notices', 'wptravel_pricing_table_created_notice', 100 );

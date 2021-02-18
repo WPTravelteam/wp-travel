@@ -5,7 +5,7 @@
  * @package wp-travel/upgrade
  */
 
-add_action( 'admin_notices', 'wp_travel_delete_paypal_notice' );
+add_action( 'admin_notices', 'wptravel_delete_paypal_notice' );
 
 
 function wptravel_delete_paypal_notice() {

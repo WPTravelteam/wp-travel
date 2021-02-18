@@ -33,7 +33,7 @@ function wptravel_settings_callback_email( $tab, $args ) {
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			'type'        => array( 'wp-travel-utilities' ),
 		);
-		wp_travel_upsell_message( $upsell_args );
+		wptravel_upsell_message( $upsell_args );
 		?>
 		<table class="form-table">
 			<tr>

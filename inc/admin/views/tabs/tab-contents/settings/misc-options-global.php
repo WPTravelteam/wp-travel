@@ -82,7 +82,7 @@ function wptravel_settings_callback_misc_options_global( $tab, $args ) {
 				'link2_label' => '',
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 		endif;
 		echo '<br>';
 		if ( ! class_exists( 'WP_Travel_Mailchimp_Core' ) ) :
@@ -98,7 +98,7 @@ function wptravel_settings_callback_misc_options_global( $tab, $args ) {
 				'link2_label' => '',
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 		endif;
 
 		do_action( 'wp_travel_settings_tab_misc_options_fields', $args );
@@ -118,6 +118,6 @@ function wptravel_settings_callback_misc_options_global( $tab, $args ) {
 				'link2_label' => '',
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 		endif;
 }

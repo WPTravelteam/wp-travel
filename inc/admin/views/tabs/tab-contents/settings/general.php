@@ -171,7 +171,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 				'type'               => 'maps',
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 
 			// if ( apply_filters( 'wp_travel_show_upsell_message', true, 'maps' ) ) {
 			// $upsell_args = array(
@@ -184,7 +184,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 			// 'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			// 'type'               => 'general',
 			// );
-			// wp_travel_upsell_message( $upsell_args );
+			// wptravel_upsell_message( $upsell_args );
 			// }
 			?>
 

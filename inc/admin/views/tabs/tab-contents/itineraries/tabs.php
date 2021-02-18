@@ -38,7 +38,7 @@ function wptravel_trip_callback_tabs( $tab, $args ) {
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 
 	// Custom itinerary tabs support.

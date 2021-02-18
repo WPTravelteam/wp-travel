@@ -14,7 +14,7 @@ function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
 	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
-		wp_travel_upgrade_to_110();
+		wptravel_upgrade_to_110();
 	}
 	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
@@ -25,22 +25,6 @@ function wptravel_admin_init() {
 }
 
 function wptravel_marketplace_page() {
-
-	$addons_data = get_transient( 'wp_travel_marketplace_addons_list' );
-
-	if ( ! $addons_data ) {
-
-		$addons_data = file_get_contents( 'https://wptravel.io/edd-api/products/?number=-1' );
-		set_transient( 'wp_travel_marketplace_addons_list', $addons_data );
-
-	}
-
-	if ( ! empty( $addons_data ) ) :
-
-		$addons_data = json_decode( $addons_data );
-		$addons_data = $addons_data->products;
-
-	endif;
 
 	// Hardcoded themes data.
 	$themes_data = array(
@@ -132,13 +116,6 @@ function wptravel_marketplace_page() {
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ); ?></h1>
 			<div id="post-body">
 				<div class="wp-travel-marketplace-tab-wrap">
-					<ul>
-
-						<li class=""><a href="#tabs-1"><?php esc_html_e( 'Addons', 'wp-travel' ); ?></a></li>
-						<?php if ( $addons_data ) : ?>
-							<li class=""><a href="#tabs-2"><?php esc_html_e( 'Themes', 'wp-travel' ); ?></a></li>
-						<?php endif; ?>
-					</ul>
 					<div id="tabs-2" class="tab-pannel">
 						<div class="marketplace-module clearfix">
 							<?php foreach ( $themes_data as $theme ) : ?>
@@ -159,73 +136,15 @@ function wptravel_marketplace_page() {
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<?php if ( $addons_data ) : ?>
-						<div id="tabs-1" class="tab-pannel">
-							<div class="marketplace-module clearfix">
-								<div class="single-module full-pro-section">
-									<div class="single-module-image">
-										<a href="http://wptravel.io/?post_type=download&amp;p=12906" target="_blank">
-										<img width="423" height="237" src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/plugins/wp-travel-pro-banner.png' ) ); ?>" class="" alt="">
-										</a>
-									</div>
-									<div class="single-module-content clearfix">
-										<h4 class="text-title">
-											<a href="https://wptravel.io/wp-travel-pro/" target="_blank">
-											<span class="dashicons-wp-travel">
-											</span>WP Travel PRO</a>
-										</h4>
-
-										<p>With WP Travel Pro you can get all premium feature of WP Travel in a single package. No hassle of installing separate add-ons, no hassle of managing different license and above all have hundreds of dollars.</p>
-										<a class="btn-default pull-left" href="https://wptravel.io/wp-travel-pro/" target="_blank">View Detail</a>
-										<a class="btn-default buy-btn" href="https://wptravel.io/wp-travel-pro/" target="_blank">Buy Now</a>
-									</div>
-								</div>
-							<?php
-							foreach ( $addons_data as $key => $product ) :
-								$prod_info = $product->info;
-								?>
-
-								<div class="single-module">
-									<div class="single-module-image">
-										<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
-										<img width="423" height="237" src="<?php echo esc_url( $prod_info->thumbnail ); ?>" class="" alt="">
-										</a>
-									</div>
-									<div class="single-module-content clearfix">
-										<h4 class="text-title">
-											<a href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
-												<span class="dashicons-wp-travel">
-												</span>
-												<?php echo esc_html( $prod_info->title ); ?>
-											</a>
-										</h4>
-										<a class="btn-default pull-left" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank"><?php esc_html_e( 'View Detail', 'wp-travel' ); ?></a>
-										<a class="btn-default pull-right" href="<?php echo esc_url( $prod_info->link ); ?>" target="_blank">
-											<?php
-											if ( isset( $product->pricing->amount ) && $product->pricing->amount < 1 ) {
-												esc_html_e( 'Download', 'wp-travel' );
-											} else {
-												esc_html_e( 'Purchase', 'wp-travel' );
-											}
-											?>
-										</a>
-									</div>
-								</div>
-
-							<?php endforeach; ?>
-
-							</div>
-						</div>
-					<?php endif; ?>
 
 				</div>
 
 
 				<div id="aside-wrap" class="single-module-side">
 					<?php
-					wp_travel_meta_box_support();
-					wp_travel_meta_box_documentation();
-					wp_travel_meta_box_review();
+					wptravel_meta_box_support();
+					wptravel_meta_box_documentation();
+					wptravel_meta_box_review();
 					?>
 				</div>
 			</div>
@@ -366,7 +285,7 @@ function wptravel_get_download_upsell() {
 			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
 			// 'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 }
 
@@ -384,7 +303,7 @@ function wptravel_custom_filters_upsell() {
 			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-custom-filters/',
 			// 'link2_label' => __( 'Get WP Travel Custom Filters Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 }
 
@@ -412,12 +331,12 @@ function wptravel_doc_support_footer_custom_text() {
 
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type ) {
 
-		add_filter( 'admin_footer_text', 'wp_travel_modify_admin_footer_admin_settings_page' );
-		add_filter( 'update_footer', 'wp_travel_modify_admin_footer_version', 11 );
+		add_filter( 'admin_footer_text', 'wptravel_modify_admin_footer_admin_settings_page' );
+		add_filter( 'update_footer', 'wptravel_modify_admin_footer_version', 11 );
 	}
 }
 
-add_action( 'current_screen', 'wp_travel_doc_support_footer_custom_text' );
+add_action( 'current_screen', 'wptravel_doc_support_footer_custom_text' );
 
 function wptravel_clear_booking_count_transient( $booking_id ) {
 	if ( ! $booking_id ) {
@@ -478,7 +397,7 @@ function wptravel_get_booking_count( $trip_id ) {
 /*
  * ADMIN COLUMN - HEADERS
  */
-add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wp_travel_itineraries_columns' );
+add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_columns', 'wptravel_itineraries_columns' );
 
 /**
  * Customize Admin column.
@@ -504,7 +423,7 @@ function wptravel_itineraries_columns( $itinerary_columns ) {
 /*
  * ADMIN COLUMN - CONTENT
  */
-add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wp_travel_itineraries_manage_columns', 10, 2 );
+add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wptravel_itineraries_manage_columns', 10, 2 );
 
 /**
  * Add data to custom column.
@@ -515,7 +434,7 @@ add_action( 'manage_' . WP_TRAVEL_POST_TYPE . '_posts_custom_column', 'wp_travel
 function wptravel_itineraries_manage_columns( $column_name, $id ) {
 	switch ( $column_name ) {
 		case 'booking_count':
-			$booking_count = wp_travel_get_booking_count( $id );
+			$booking_count = wptravel_get_booking_count( $id );
 			echo esc_html( $booking_count );
 			break;
 		case 'featured':
@@ -545,13 +464,13 @@ function wptravel_itineraries_sort( $columns ) {
  * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
  * https://gist.github.com/906872
  */
-add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_sortable_columns', 'wp_travel_itineraries_sort' );
+add_filter( 'manage_edit-' . WP_TRAVEL_POST_TYPE . '_sortable_columns', 'wptravel_itineraries_sort' );
 
 /*
  * ADMIN COLUMN - SORTING - ORDERBY
  * http://scribu.net/wordpress/custom-sortable-columns.html#comment-4732
  */
-add_filter( 'request', 'wp_travel_itineraries_column_orderby' );
+add_filter( 'request', 'wptravel_itineraries_column_orderby' );
 
 /**
  * Manage Order By custom column.
@@ -601,7 +520,7 @@ function wptravel_featured_admin_ajax() {
 	);
 	die();
 }
-add_action( 'wp_ajax_wp_travel_featured_post', 'wp_travel_featured_admin_ajax' );
+add_action( 'wp_ajax_wp_travel_featured_post', 'wptravel_featured_admin_ajax' );
 
 /**
  * Metabox publish WP Travel.
@@ -629,7 +548,7 @@ function wptravel_publish_metabox() {
 		<?php
 	}
 }
-add_action( 'post_submitbox_misc_actions', 'wp_travel_publish_metabox' );
+add_action( 'post_submitbox_misc_actions', 'wptravel_publish_metabox' );
 
 /**
  * Upgrade Function WP Travel.
@@ -653,7 +572,7 @@ function wptravel_upgrade_to_110() {
 /*
  * ADMIN COLUMN - HEADERS
  */
-add_filter( 'manage_edit-itinerary-booking_columns', 'wp_travel_booking_payment_columns', 20 );
+add_filter( 'manage_edit-itinerary-booking_columns', 'wptravel_booking_payment_columns', 20 );
 
 /**
  * Customize Admin column.
@@ -710,7 +629,7 @@ function wptravel_booking_payment_manage_columns( $column_name, $id ) {
 /**
  * ADMIN COLUMN - CONTENT
  */
-add_action( 'manage_itinerary-booking_posts_custom_column', 'wp_travel_booking_payment_manage_columns', 10, 2 );
+add_action( 'manage_itinerary-booking_posts_custom_column', 'wptravel_booking_payment_manage_columns', 10, 2 );
 
 /**
  * Manage Order By custom column.
@@ -740,7 +659,7 @@ function wptravel_booking_payment_column_orderby( $vars ) {
 	}
 	return $vars;
 }
-add_filter( 'request', 'wp_travel_booking_payment_column_orderby' );
+add_filter( 'request', 'wptravel_booking_payment_column_orderby' );
 
 /**
  * Create a page and store the ID in an option.
@@ -975,7 +894,7 @@ function wptravel_admin_tour_extra_multiselect( $post_id, $context = false, $fet
 
 }
 
-add_action( 'wp_travel_extras_pro_options', 'wp_travel_extras_pro_option_fields' );
+add_action( 'wp_travel_extras_pro_options', 'wptravel_extras_pro_option_fields' );
 
 /**
  * WP Travel Tour Extras Pro fields.
@@ -1038,7 +957,7 @@ function wptravel_extras_pro_option_fields() {
 					'link'       => 'https://wptravel.io/wp-travel-pro/',
 					'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 				);
-				wp_travel_upsell_message( $args );
+				wptravel_upsell_message( $args );
 				endif;
 			?>
 		</td>

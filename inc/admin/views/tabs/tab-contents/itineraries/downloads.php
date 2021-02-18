@@ -23,7 +23,7 @@ function wptravel_trip_callback_downloads( $tab, $args ) {
 			// 'link2'       => 'https://wptravel.io/downloads/wp-travel-downloads/',
 			// 'link2_label' => __( 'Get WP Travel Downloads Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 
 	do_action( 'wp_travel_trip_downloads_tab_content', $args );

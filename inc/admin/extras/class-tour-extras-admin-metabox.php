@@ -61,14 +61,14 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 			'tab_label'     => __( 'General', 'wp-travel' ),
 			'content_title' => __( 'General Settings', 'wp-travel' ),
 			'priority'      => 10,
-			'callback'      => 'wp_travel_tour_extras_general_tab_callback',
+			'callback'      => 'wptravel_tour_extras_general_tab_callback',
 			'icon'          => 'fa-sticky-note',
 		);
 		$tour_extras['tour_extras_gallery'] = array(
 			'tab_label'     => __( 'Gallery', 'wp-travel' ),
 			'content_title' => __( 'Gallery', 'wp-travel' ),
 			'priority'      => 20,
-			'callback'      => 'wp_travel_tour_extras_gallery_tab_callback',
+			'callback'      => 'wptravel_tour_extras_gallery_tab_callback',
 			'icon'          => 'fa-images',
 		);
 

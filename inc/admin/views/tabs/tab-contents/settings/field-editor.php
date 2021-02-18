@@ -15,7 +15,7 @@ if ( ! function_exists( 'wp_travel_settings_callback_field_editor' ) ) {
 			'link2_label' => __( 'Get WP Travel Field Editor', 'wp-travel' ),
 			'type'        => array( 'wp-travel-field-editor' ),
 		);
-		wp_travel_upsell_message( $upsell_args );
+		wptravel_upsell_message( $upsell_args );
 		do_action( 'wp_travel_settings_tab_field_editor_fields', $args );
 	}
 }

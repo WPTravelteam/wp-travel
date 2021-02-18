@@ -27,7 +27,7 @@ function wptravel_settings_callback_tabs_global( $tab, $args ) {
 			'type'        => array( 'wp-travel-utilities', 'wp-travel-pro' ),
 		);
 
-		wp_travel_upsell_message( $upsell_args );
+		wptravel_upsell_message( $upsell_args );
 		// Add custom Tabs Support.
 		do_action( 'wp_travel_custom_global_tabs' );
 

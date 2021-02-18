@@ -16,7 +16,7 @@ add_action( 'wp_travel_single_trip_after_header', 'wptravel_frontend_contents', 
 add_action( 'wp_travel_single_trip_after_header', 'wptravel_trip_map', 20 );
 add_action( 'wp_travel_single_trip_after_header', 'wptravel_related_itineraries', 25 );
 add_filter( 'the_content', 'wptravel_content_filter' );
-add_filter( 'wp_travel_trip_tabs_output_raw', 'wp_travel_raw_output_on_tab_content', 10, 2 ); // @since 2.0.6. Need true to hide trip detail.
+add_filter( 'wp_travel_trip_tabs_output_raw', 'wptravel_raw_output_on_tab_content', 10, 2 ); // @since 2.0.6. Need true to hide trip detail.
 add_action( 'wp_travel_before_single_itinerary', 'wptravel_wrapper_start' );
 add_action( 'wp_travel_after_single_itinerary', 'wptravel_wrapper_end' );
 

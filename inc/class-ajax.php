@@ -6,28 +6,28 @@ class WP_Travel_Ajax {
 
 		// Ajax for cart
 		// Add
-		add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'wp_travel_add_to_cart' ) );
-		add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'wp_travel_add_to_cart' ) );
+		add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'wptravel_add_to_cart' ) );
+		add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'wptravel_add_to_cart' ) );
 
 		// Update
-		add_action( 'wp_ajax_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
-		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'wp_travel_update_cart' ) );
+		add_action( 'wp_ajax_wt_update_cart', array( $this, 'wptravel_update_cart' ) );
+		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'wptravel_update_cart' ) );
 
 		// Apply Coupon
-		add_action( 'wp_ajax_wt_cart_apply_coupon', array( $this, 'wt_cart_apply_coupon' ) );
-		add_action( 'wp_ajax_nopriv_wt_cart_apply_coupon', array( $this, 'wt_cart_apply_coupon' ) );
+		add_action( 'wp_ajax_wt_cart_apply_coupon', array( $this, 'wtcart_apply_coupon' ) );
+		add_action( 'wp_ajax_nopriv_wt_cart_apply_coupon', array( $this, 'wtcart_apply_coupon' ) );
 
 		// Delete cart item
-		add_action( 'wp_ajax_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
-		add_action( 'wp_ajax_nopriv_wt_remove_from_cart', array( $this, 'wp_travel_remove_from_cart' ) );
+		add_action( 'wp_ajax_wt_remove_from_cart', array( $this, 'wptravel_remove_from_cart' ) );
+		add_action( 'wp_ajax_nopriv_wt_remove_from_cart', array( $this, 'wptravel_remove_from_cart' ) );
 
 		// Check Coupon Code
-		add_action( 'wp_ajax_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
-		add_action( 'wp_ajax_nopriv_wp_travel_check_coupon_code', array( $this, 'wp_travel_check_coupon_code' ) );
+		add_action( 'wp_ajax_wp_travel_check_coupon_code', array( $this, 'wptravel_check_coupon_code' ) );
+		add_action( 'wp_ajax_nopriv_wp_travel_check_coupon_code', array( $this, 'wptravel_check_coupon_code' ) );
 
 		// Clone Trip @since 1.7.6
-		add_action( 'wp_ajax_wp_travel_clone_trip', array( $this, 'wp_travel_clone_trip' ) );
-		add_action( 'wp_ajax_nopriv_wp_travel_clone_trip', array( $this, 'wp_travel_clone_trip' ) );
+		add_action( 'wp_ajax_wp_travel_clone_trip', array( $this, 'wptravel_clone_trip' ) );
+		add_action( 'wp_ajax_nopriv_wp_travel_clone_trip', array( $this, 'wptravel_clone_trip' ) );
 
 	}
 
@@ -143,7 +143,6 @@ class WP_Travel_Ajax {
 
 		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		$allow_multiple_cart_items = WP_Travel_Cart::allow_multiple_items();
-		error_log( 'allow multipl;e ' . $allow_multiple_cart_items );
 		if ( ! $allow_multiple_cart_items ) {
 			$wt_cart->clear();
 		}
@@ -309,7 +308,7 @@ class WP_Travel_Ajax {
 
 		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs, $post_data );
 
-		$cart_item_id = $wt_cart->wp_travel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
+		$cart_item_id = $wt_cart->wptravel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
 
 		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );
 

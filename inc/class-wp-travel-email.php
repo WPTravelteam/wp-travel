@@ -56,7 +56,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		
 		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // Default 'yes'
 		if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
-			$email_template = $email->wp_travel_get_email_template( 'bookings', 'admin' );
+			$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
 
 			$email_content  = $email_template['mail_header'];
 			$email_content .= $email_template['mail_content'];
@@ -76,7 +76,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		}
 
 		// Send mail to client.
-		$email_template = $email->wp_travel_get_email_template( 'bookings', 'client' );
+		$email_template = $email->wptravel_get_email_template( 'bookings', 'client' );
 
 		$email_content  = $email_template['mail_header'];
 		$email_content .= $email_template['mail_content'];

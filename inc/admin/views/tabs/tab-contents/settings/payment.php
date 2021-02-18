@@ -112,7 +112,7 @@ function wptravel_settings_callback_payment( $tab, $args ) {
 			$args['link_label'] = $args['link2_label'];
 			unset( $args['link2'], $args['link2_label'] );
 		}
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	?>
 	<br>
 	<table class="form-table">
