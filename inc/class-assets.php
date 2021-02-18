@@ -111,7 +111,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 
 				wp_enqueue_script( 'wp-travel-accordion' );
 				wp_enqueue_script( 'wp-travel-booking' );
-				wp_enqueue_script( 'wp-travel-moment' );
+				wp_enqueue_script( 'moment' );
 				wp_enqueue_script( 'wp-travel-popup' );
 				wp_enqueue_script( 'wp-travel-script' );
 				wp_enqueue_script( 'easy-responsive-tabs' );
