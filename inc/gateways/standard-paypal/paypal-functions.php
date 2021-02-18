@@ -118,7 +118,7 @@ function wp_travel_paypal_ipn_process() {
 
 				$payment_ids = array();
 				// get previous payment ids.
-				$payment_id     = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+				$payment_id  = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 				$paypal_args = get_post_meta( $booking_id, '_paypal_args', true );
 
 			if ( '' !== $paypal_args ) { // Partial Payment.
@@ -142,7 +142,7 @@ function wp_travel_paypal_ipn_process() {
 				update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_ids );
 
 				$payment_method = 'paypal';
-				$amount         = sanitize_text_field( $_POST['mc_gross'] );
+				$amount         = sanitize_text_field( wp_unslash( $_POST['mc_gross'] ) );
 				$detail         = wp_travel_sanitize_array( $_POST );
 
 				update_post_meta( $new_payment_id, 'wp_travel_payment_gateway', $payment_method );

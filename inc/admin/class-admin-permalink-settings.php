@@ -124,22 +124,22 @@ if ( ! class_exists( 'WP_Travel_Admin_Permalink_Settings', false ) ) :
 
 				$permalinks = (array) get_option( 'wp_travel_permalinks', array() );
 
-				$trip_base = isset( $_POST['wp_travel_trip_base'] ) ? trim( $_POST['wp_travel_trip_base'] ) : '';
+				$trip_base = isset( $_POST['wp_travel_trip_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_trip_base'] ) ) : '';
 				if ( ! empty( $trip_base ) ) {
 					$permalinks['wp_travel_trip_base'] = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', $trip_base ) );
 				}
 
-				$trip_type_base = isset( $_POST['wp_travel_trip_type_base'] ) ? trim( $_POST['wp_travel_trip_type_base'] ) : '';
+				$trip_type_base = isset( $_POST['wp_travel_trip_type_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_trip_type_base'] ) ) : '';
 				if ( ! empty( $trip_type_base ) ) {
 					$permalinks['wp_travel_trip_type_base'] = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', $trip_type_base ) );
 				}
 
-				$destination_base = isset( $_POST['wp_travel_destination_base'] ) ? trim( $_POST['wp_travel_destination_base'] ) : '';
+				$destination_base = isset( $_POST['wp_travel_destination_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_destination_base'] ) ) : '';
 				if ( ! empty( $destination_base ) ) {
 					$permalinks['wp_travel_destination_base'] = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', $destination_base ) );
 				}
 
-				$activity_base = isset( $_POST['wp_travel_activity_base'] ) ? trim( $_POST['wp_travel_activity_base'] ) : '';
+				$activity_base = isset( $_POST['wp_travel_activity_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_activity_base'] ) ) : '';
 				if ( ! empty( $activity_base ) ) {
 					$permalinks['wp_travel_activity_base'] = preg_replace( '#/+#', '/', '/' . str_replace( '#', '', $activity_base ) );
 				}

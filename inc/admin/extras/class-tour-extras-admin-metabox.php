@@ -108,7 +108,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 		if ( ! isset( $_POST['wp_travel_security'] ) ) {
 			return;
 		}
-		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
 			return;
 		}
 
@@ -132,8 +132,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_extras'] ) ) {
 
-			$tour_extras_metas   = $_POST['wp_travel_extras'];
-			$sanitized_data = $this->sanitize_array_values( $tour_extras_metas );
+			$sanitized_data = wp_travel_sanitize_array( stripslashes_deep( $_POST['wp_travel_extras'] ) );
 
 			update_post_meta( $post_id, 'wp_travel_tour_extras_metas', $sanitized_data );
 
@@ -144,7 +143,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	 * Sanitize values in the array befor save.
 	 *
 	 * @param array $data Data Data Array.
-	 * @return array $sanitized_data Sanitized Array.
+	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wp_travel_sanitize_array'.
 	 */
 	public function sanitize_array_values( $data ) {
 

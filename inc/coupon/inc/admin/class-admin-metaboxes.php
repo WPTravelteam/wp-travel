@@ -97,7 +97,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 		if ( ! isset( $_POST['wp_travel_security'] ) ) {
 			return;
 		}
-		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
+		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
 			return;
 		}
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -120,7 +120,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_coupon_code'] ) && ! empty( $_POST['wp_travel_coupon_code'] ) ) {
 
-			$coupon_code = sanitize_text_field( $_POST['wp_travel_coupon_code'] );
+			$coupon_code = sanitize_text_field( wp_unslash( $_POST['wp_travel_coupon_code'] ) );
 
 			update_post_meta( $post_id, 'wp_travel_coupon_code', $coupon_code );
 
@@ -128,8 +128,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_coupon'] ) ) {
 
-			$coupon_metas   = $_POST['wp_travel_coupon'];
-			$sanitized_data = $this->sanitize_array_values( $coupon_metas );
+			$sanitized_data = wp_travel_sanitize_array( stripslashes_deep( $_POST['wp_travel_coupon'] ) );
 
 			update_post_meta( $post_id, 'wp_travel_coupon_metas', $sanitized_data );
 
@@ -140,7 +139,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	 * Sanitize values in the array befor save.
 	 *
 	 * @param array $data Data Data Array.
-	 * @return array $sanitized_data Sanitized Array.
+	 * @return array $sanitized_data Sanitized Array. // Note: Repeatative sanitize function, use 'wp_travel_sanitize_array'.
 	 */
 	public function sanitize_array_values( $data ) {
 

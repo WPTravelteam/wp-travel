@@ -1,68 +1,69 @@
-<?php 
+<?php
 /**
  * WP_TRAVEL_TERM_META
+ *
  * @package WP_Travel
  **/
 if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 
-class WP_TRAVEL_TERM_META {
+	class WP_TRAVEL_TERM_META {
 
-	public function __construct() {
-	//
-	}
-	/*
-	* Initialize the class and start calling our hooks and filters
-	* @since 1.6.3
-	*/
-	public function init() {
-		
-		// Trip Type Fields.
-		add_action( 'itinerary_types_add_form_fields', array ( $this, 'add_category_image' ), 10, 2 );
-		add_action( 'created_itinerary_types', array ( $this, 'save_category_image' ), 10, 2 );
-		add_action( 'itinerary_types_edit_form_fields', array ( $this, 'update_category_image' ), 10, 2 );
-		add_action( 'edited_itinerary_types', array ( $this, 'updated_category_image' ), 10, 2 );
+		public function __construct() {
+		}
+		/*
+		* Initialize the class and start calling our hooks and filters
+		* @since 1.6.3
+		*/
+		public function init() {
 
-		// Destinations Fields.
-		add_action( 'travel_locations_add_form_fields', array ( $this, 'add_category_image' ), 10, 2 );
-		add_action( 'created_travel_locations', array ( $this, 'save_category_image' ), 10, 2 );
-		add_action( 'travel_locations_edit_form_fields', array ( $this, 'update_category_image' ), 10, 2 );
-		add_action( 'edited_travel_locations', array ( $this, 'updated_category_image' ), 10, 2 );
+			// Trip Type Fields.
+			add_action( 'itinerary_types_add_form_fields', array( $this, 'add_category_image' ), 10, 2 );
+			add_action( 'created_itinerary_types', array( $this, 'save_category_image' ), 10, 2 );
+			add_action( 'itinerary_types_edit_form_fields', array( $this, 'update_category_image' ), 10, 2 );
+			add_action( 'edited_itinerary_types', array( $this, 'updated_category_image' ), 10, 2 );
 
-		// Activity Fields.
-		add_action( 'activity_add_form_fields', array ( $this, 'add_category_image' ), 10, 2 );
-		add_action( 'created_activity', array ( $this, 'save_category_image' ), 10, 2 );
-		add_action( 'activity_edit_form_fields', array ( $this, 'update_category_image' ), 10, 2 );
-		add_action( 'edited_activity', array ( $this, 'updated_category_image' ), 10, 2 );
+			// Destinations Fields.
+			add_action( 'travel_locations_add_form_fields', array( $this, 'add_category_image' ), 10, 2 );
+			add_action( 'created_travel_locations', array( $this, 'save_category_image' ), 10, 2 );
+			add_action( 'travel_locations_edit_form_fields', array( $this, 'update_category_image' ), 10, 2 );
+			add_action( 'edited_travel_locations', array( $this, 'updated_category_image' ), 10, 2 );
 
-		// Keyword Fields.
-		add_action( 'travel_keywords_add_form_fields', array ( $this, 'add_category_image' ), 10, 2 );
-		add_action( 'created_travel_keywords', array ( $this, 'save_category_image' ), 10, 2 );
-		add_action( 'travel_keywords_edit_form_fields', array ( $this, 'update_category_image' ), 10, 2 );
-		add_action( 'edited_travel_keywords', array ( $this, 'updated_category_image' ), 10, 2 );
-		
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_media' ) );
-		add_action( 'admin_footer', array ( $this, 'add_script' ) );
-	}
+			// Activity Fields.
+			add_action( 'activity_add_form_fields', array( $this, 'add_category_image' ), 10, 2 );
+			add_action( 'created_activity', array( $this, 'save_category_image' ), 10, 2 );
+			add_action( 'activity_edit_form_fields', array( $this, 'update_category_image' ), 10, 2 );
+			add_action( 'edited_activity', array( $this, 'updated_category_image' ), 10, 2 );
 
-	public function load_media() {
-		$current_screen_id = get_current_screen()->id;
-		$allowed_screens   = array( 'edit-activity', 'edit-itinerary_types', 'edit-travel_locations', 'edit-travel_keywords' );
+			// Keyword Fields.
+			add_action( 'travel_keywords_add_form_fields', array( $this, 'add_category_image' ), 10, 2 );
+			add_action( 'created_travel_keywords', array( $this, 'save_category_image' ), 10, 2 );
+			add_action( 'travel_keywords_edit_form_fields', array( $this, 'update_category_image' ), 10, 2 );
+			add_action( 'edited_travel_keywords', array( $this, 'updated_category_image' ), 10, 2 );
 
-		if ( ! in_array( $current_screen_id, $allowed_screens ) )
-			return;
-		
-		wp_enqueue_media();
-	}
+			add_action( 'admin_enqueue_scripts', array( $this, 'load_media' ) );
+			add_action( 'admin_footer', array( $this, 'add_script' ) );
+		}
 
-	/*
-	* Add a form field in the new category page
-	* @since 1.6.3
-	*/
-	public function add_category_image ( $taxonomy ) { 
-		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
-		?>
+		public function load_media() {
+			$current_screen_id = get_current_screen()->id;
+			$allowed_screens   = array( 'edit-activity', 'edit-itinerary_types', 'edit-travel_locations', 'edit-travel_keywords' );
+
+			if ( ! in_array( $current_screen_id, $allowed_screens ) ) {
+				return;
+			}
+
+			wp_enqueue_media();
+		}
+
+		/*
+		* Add a form field in the new category page
+		* @since 1.6.3
+		*/
+		public function add_category_image( $taxonomy ) {
+			wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+			?>
 	<div class="form-field term-group">
-		<label for="category-image-id"><?php _e('Image', 'wp-travel'); ?></label>
+		<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
 		<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" class="custom_media_url" value="">
 		<div id="category-image-wrapper"></div>
 		<p>
@@ -70,44 +71,44 @@ class WP_TRAVEL_TERM_META {
 		<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
 		</p>
 	</div>
-	<?php
-	}
-
-	/*
-	* Save the form field
-	* @since 1.6.3
-	*/
-	public function save_category_image ( $term_id, $tt_id ) {
-		if ( ! isset( $_POST['wp_travel_security'] ) ) {
-			return;
-		}
-		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
-			return;
+			<?php
 		}
 
-		if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
-			$image = absint( $_POST['wp_travel_trip_type_image_id'] );
-			add_term_meta( $term_id, 'wp_travel_trip_type_image_id', $image );
-		}
-	}
+		/*
+		* Save the form field
+		* @since 1.6.3
+		*/
+		public function save_category_image( $term_id, $tt_id ) {
+			if ( ! isset( $_POST['wp_travel_security'] ) ) {
+				return;
+			}
+			if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
+				return;
+			}
 
-	/*
-	* Edit the form field
-	* @since 1.6.3
-	*/
-	public function update_category_image ( $term, $taxonomy ) { 
-		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
-		?>
+			if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
+				$image = absint( $_POST['wp_travel_trip_type_image_id'] );
+				add_term_meta( $term_id, 'wp_travel_trip_type_image_id', $image );
+			}
+		}
+
+		/*
+		* Edit the form field
+		* @since 1.6.3
+		*/
+		public function update_category_image( $term, $taxonomy ) {
+			wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+			?>
 		<tr class="form-field term-group-wrap">
 			<th scope="row">
 			<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
 			</th>
 			<td>
-			<?php $image_id = get_term_meta ( $term ->term_id, 'wp_travel_trip_type_image_id', true ); ?>
+			<?php $image_id = get_term_meta( $term->term_id, 'wp_travel_trip_type_image_id', true ); ?>
 			<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" value="<?php echo $image_id; ?>">
 			<div id="category-image-wrapper">
 				<?php if ( $image_id ) { ?>
-				<?php echo wp_get_attachment_image ( $image_id, 'thumbnail' ); ?>
+					<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
 				<?php } ?>
 			</div>
 			<p>
@@ -116,42 +117,43 @@ class WP_TRAVEL_TERM_META {
 			</p>
 			</td>
 		</tr>
-		<?php
-	}
-
-	/*
-	* Update the form field value
-	* @since 1.6.3
-	*/
-	public function updated_category_image ( $term_id, $tt_id ) {
-
-		if ( ! isset( $_POST['wp_travel_security'] ) ) {
-			return;
+			<?php
 		}
-		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( $_POST['wp_travel_security'], 'wp_travel_security_action' ) ) {
-			return;
+
+		/*
+		* Update the form field value
+		* @since 1.6.3
+		*/
+		public function updated_category_image( $term_id, $tt_id ) {
+
+			if ( ! isset( $_POST['wp_travel_security'] ) ) {
+				return;
+			}
+			if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
+				return;
+			}
+			if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
+				$image = absint( $_POST['wp_travel_trip_type_image_id'] );
+				update_term_meta( $term_id, 'wp_travel_trip_type_image_id', $image );
+			} else {
+				update_term_meta( $term_id, 'wp_travel_trip_type_image_id', '' );
+			}
 		}
-		if ( isset( $_POST['wp_travel_trip_type_image_id'] ) && '' !== $_POST['wp_travel_trip_type_image_id'] ) {
-			$image = absint( $_POST['wp_travel_trip_type_image_id'] );
-			update_term_meta ( $term_id, 'wp_travel_trip_type_image_id', $image );
-		} else {
-			update_term_meta ( $term_id, 'wp_travel_trip_type_image_id', '' );
-		}
-	}
 
-	/*
-	* Add script
-	* @since 1.6.3
-	*/
-	public function add_script() { 
+		/*
+		* Add script
+		* @since 1.6.3
+		*/
+		public function add_script() {
 
-		$current_screen_id = get_current_screen()->id;
-		$allowed_screens   = array( 'edit-activity', 'edit-itinerary_types', 'edit-travel_locations', 'edit-travel_keywords' );
+			$current_screen_id = get_current_screen()->id;
+			$allowed_screens   = array( 'edit-activity', 'edit-itinerary_types', 'edit-travel_locations', 'edit-travel_keywords' );
 
-		if ( ! in_array( $current_screen_id, $allowed_screens ) )
-			return;
-		
-		?>
+			if ( ! in_array( $current_screen_id, $allowed_screens ) ) {
+				return;
+			}
+
+			?>
 		<script>
 			jQuery(document).ready( function($) {
 			function wp_travel_media_upload(button_class) {
@@ -194,8 +196,9 @@ class WP_TRAVEL_TERM_META {
 			});
 		});
 		</script>
-	<?php }
-}
+			<?php
+		}
+	}
 
 	$WP_TRAVEL_TERM_META = new WP_TRAVEL_TERM_META();
 	$WP_TRAVEL_TERM_META->init();

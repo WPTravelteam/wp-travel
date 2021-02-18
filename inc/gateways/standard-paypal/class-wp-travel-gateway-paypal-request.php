@@ -135,7 +135,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 			$args[ 'quantity_' . $agrs_index ] = 1;
 
-			$args[ 'amount_' . $agrs_index ]      = sanitize_text_field( $_POST['amount'] );
+			$args[ 'amount_' . $agrs_index ]      = sanitize_text_field( wp_unslash( $_POST['amount'] ) );
 			$args[ 'item_number_' . $agrs_index ] = $booking_id;
 
 		} elseif ( $items ) {  // Normal Payment.
@@ -191,9 +191,8 @@ class WP_Travel_Gateway_Paypal_Request {
 			// Cart Item.
 			$agrs_index = 1;
 			foreach ( $items as $cart_id => $item ) {
-				$trip_id    = $item['trip_id'];
+				$trip_id = $item['trip_id'];
 				// $pax        = $item['pax'];
-
 
 				/**
 				 * Since We are sending calculated total trip price.
@@ -228,8 +227,8 @@ class WP_Travel_Gateway_Paypal_Request {
 				 * @since 4.0.0
 				 */
 				if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
-					$partial = 'partial' === $payment_mode;
-					$trip_price = wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
+					$partial        = 'partial' === $payment_mode;
+					$trip_price     = wp_travel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
 					$payment_amount = wp_travel_get_formated_price( $trip_price );
 				}
 
