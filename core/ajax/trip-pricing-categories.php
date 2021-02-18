@@ -10,7 +10,7 @@ class WP_Travel_Ajax_Trip_Pricings_Categories{
     }
 
     public static function remove_pricing_categories(){
-        $nonce = $_REQUEST['_nonce'];
+        $nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
         if( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' )){
             $error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
             WP_Travel_Helpers_REST_API::response( $error );
@@ -26,7 +26,7 @@ class WP_Travel_Ajax_Trip_Pricings_Categories{
     }
 
     public static function remove_pricing_category(){
-        $nonce = $_REQUEST['_nonce'];
+        $nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
         if( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' )){
             $error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
             WP_Travel_Helpers_REST_API::response( $error );
