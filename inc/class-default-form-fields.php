@@ -150,7 +150,7 @@ class WP_Travel_Default_Form_Fields {
 
 		$pax_size = 1;
 		if ( isset( $_REQUEST['pax'] ) && is_array( $_REQUEST['pax'] ) ) {
-			$booked_pax_size = array_sum( $_REQUEST['pax'] );
+			$booked_pax_size = array_sum( sanitize_text_field( wp_unslash( $_REQUEST['pax'] ) ) );
 			if ( $booked_pax_size <= $max_pax ) {
 				$pax_size = $booked_pax_size;
 			}
@@ -161,7 +161,7 @@ class WP_Travel_Default_Form_Fields {
 		// 	}
 		// }
 
-		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( $_GET['price_key'] ) : '';
+		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( wp_unslash( $_GET['price_key'] ) ) : '';
 
 		$booking_fileds = array(
 			'pax'            => array(

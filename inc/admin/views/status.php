@@ -11,22 +11,22 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 	<table class="" cellspacing="0" id="data-d">
 
 		<tr>
-			<td colspan="2" ><h2><?php _e( 'WordPress Information', 'wp-travel' ); ?></h2></td>
+			<td colspan="2" ><h2><?php esc_html_e( 'WordPress Information', 'wp-travel' ); ?></h2></td>
 		</tr>
 		<tr>
-			<td width="25%"><?php _e( 'Home URL', 'wp-travel' ); ?>:</td>
+			<td width="25%"><?php esc_html_e( 'Home URL', 'wp-travel' ); ?>:</td>
 			<td><?php form_option( 'home' ); ?></td>
 		</tr>
 		<tr>
-			<td ><?php _e( 'Site URL', 'wp-travel' ); ?>:</td>
+			<td ><?php esc_html_e( 'Site URL', 'wp-travel' ); ?>:</td>
 			<td><?php form_option( 'siteurl' ); ?></td>
 		</tr>
 		<tr>
-			<td ><?php _e( 'WP Version', 'wp-travel' ); ?>:</td>
+			<td ><?php esc_html_e( 'WP Version', 'wp-travel' ); ?>:</td>
 			<td><?php bloginfo( 'version' ); ?></td>
 		</tr>
 		<tr>
-			<td ><?php _e( 'WP Multisite', 'wp-travel' ); ?>:</td>
+			<td ><?php esc_html_e( 'WP Multisite', 'wp-travel' ); ?>:</td>
 			<td>
 			<?php
 			if ( is_multisite() ) {
@@ -38,7 +38,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			</td>
 		</tr>
 		<tr>
-			<td ><?php _e( 'WP Memory Limit', 'wp-travel' ); ?>:</td>
+			<td ><?php esc_html_e( 'WP Memory Limit', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -61,7 +61,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				</td>
 		</tr>
 		<tr>
-			<td ><?php _e( 'WP Debug Mode', 'wp-travel' ); ?>:</td>
+			<td ><?php esc_html_e( 'WP Debug Mode', 'wp-travel' ); ?>:</td>
 
 			<td>
 				<?php if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) : ?>
@@ -72,7 +72,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			</td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'WP Cron', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'WP Cron', 'wp-travel' ); ?>:</td>
 
 			<td>
 				<?php if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) : ?>
@@ -84,13 +84,13 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		</tr>
 
 		<tr>
-			<td  ><?php _e( 'Language', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Language', 'wp-travel' ); ?>:</td>
 
 			<td><?php echo get_locale(); ?></td>
 		</tr>
 
 		<tr>
-			<td  ><?php _e( 'Upload Directory  Location', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Upload Directory  Location', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -101,16 +101,16 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		</tr>
 
 		<tr>
-			<td colspan="2"  ><h2><?php _e( 'Server Information', 'wp-travel' ); ?></h2></td>
+			<td colspan="2"  ><h2><?php esc_html_e( 'Server Information', 'wp-travel' ); ?></h2></td>
 		</tr>
 
 		<tr>
-			<td width="25%" ><?php _e( 'Server Info', 'wp-travel' ); ?>:</td>
+			<td width="25%" ><?php esc_html_e( 'Server Info', 'wp-travel' ); ?>:</td>
 
-			<td><?php echo esc_html( $_SERVER['SERVER_SOFTWARE'] ); ?></td>
+			<td><?php echo esc_html( sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) ); ?></td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'PHP Version', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'PHP Version', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -124,29 +124,29 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 					echo '<span class="yes">' . esc_html( $php_version ) . '</span>';
 				}
 			} else {
-				_e( "Couldn't determine PHP version because phpversion() doesn't exist.", 'wp-travel' );
+				esc_html_e( "Couldn't determine PHP version because phpversion() doesn't exist.", 'wp-travel' );
 			}
 			?>
 				</td>
 		</tr>
 		<?php if ( function_exists( 'ini_get' ) ) : ?>
 			<tr>
-				<td ><?php _e( 'PHP Post Max Size', 'wp-travel' ); ?>:</td>
+				<td ><?php esc_html_e( 'PHP Post Max Size', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo size_format( $common->memory_size_convert( ini_get( 'post_max_size' ) ) ); ?></td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'PHP Time Limit', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'PHP Time Limit', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo ini_get( 'max_execution_time' ); ?></td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'PHP Max Input Vars', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'PHP Max Input Vars', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo ini_get( 'max_input_vars' ); ?></td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'cURL Version', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'cURL Version', 'wp-travel' ); ?>:</td>
 
 				<td>
 				<?php
@@ -154,13 +154,13 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 					$curl_version = curl_version();
 					echo $curl_version['version'] . ', ' . $curl_version['ssl_version'];
 				} else {
-					_e( 'N/A', 'wp-travel' );
+					esc_html_e( 'N/A', 'wp-travel' );
 				}
 				?>
 					</td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'SUHOSIN Installed', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'SUHOSIN Installed', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo extension_loaded( 'suhosin' ) ? '<span class="dashicons dashicons-yes"></span>' : '&ndash;'; ?></td>
 			</tr>
@@ -176,7 +176,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		if ( ! empty( $wpdb->is_mysql ) && ! stristr( $ver, 'MariaDB' ) ) :
 			?>
 			<tr>
-				<td  ><?php _e( 'MySQL Version', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'MySQL Version', 'wp-travel' ); ?>:</td>
 
 				<td>
 					<?php
@@ -192,12 +192,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			</tr>
 		<?php endif; ?>
 		<tr>
-			<td  ><?php _e( 'Max Upload Size', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Max Upload Size', 'wp-travel' ); ?>:</td>
 
 			<td><?php echo size_format( wp_max_upload_size() ); ?></td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'Default Timezone is UTC', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Default Timezone is UTC', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -211,7 +211,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			</td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'PHP Error Log File Location', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'PHP Error Log File Location', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -317,7 +317,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		?>
 
 		<tr>
-			<td colspan="2" ><h2><?php _e( 'Current Theme', 'wp-travel' ); ?></h2></td>
+			<td colspan="2" ><h2><?php esc_html_e( 'Current Theme', 'wp-travel' ); ?></h2></td>
 		</tr>
 
 		<?php
@@ -328,12 +328,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		?>
 
 		<tr>
-			<td width="25%"><?php _e( 'Name', 'wp-travel' ); ?>:</td>
+			<td width="25%"><?php esc_html_e( 'Name', 'wp-travel' ); ?>:</td>
 
 			<td><?php echo esc_html( $active_theme->Name ); ?></td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'Version', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Version', 'wp-travel' ); ?>:</td>
 
 			<td>
 			<?php
@@ -342,12 +342,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			</td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'Author URL', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Author URL', 'wp-travel' ); ?>:</td>
 
 			<td><?php echo $active_theme->{'Author URI'}; ?></td>
 		</tr>
 		<tr>
-			<td  ><?php _e( 'Child Theme', 'wp-travel' ); ?>:</td>
+			<td  ><?php esc_html_e( 'Child Theme', 'wp-travel' ); ?>:</td>
 
 			<td>
 				<?php
@@ -360,12 +360,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			$parent_theme = wp_get_theme( $active_theme->Template );
 			?>
 			<tr>
-				<td  ><?php _e( 'Parent Theme Name', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'Parent Theme Name', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo esc_html( $parent_theme->Name ); ?></td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'Parent Theme Version', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'Parent Theme Version', 'wp-travel' ); ?>:</td>
 
 				<td>
 					<?php
@@ -378,7 +378,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				</td>
 			</tr>
 			<tr>
-				<td  ><?php _e( 'Parent Theme Author URL', 'wp-travel' ); ?>:</td>
+				<td  ><?php esc_html_e( 'Parent Theme Author URL', 'wp-travel' ); ?>:</td>
 
 				<td><?php echo $parent_theme->{'Author URI'}; ?></td>
 			</tr>
@@ -386,7 +386,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 
 		<tr>
-			<td colspan="2"  ><h2><?php _e( 'Active Plugins', 'wp-travel' ); ?> (<?php echo count( (array) get_option( 'active_plugins' ) ); ?>)</h2></td>
+			<td colspan="2"  ><h2><?php esc_html_e( 'Active Plugins', 'wp-travel' ); ?> (<?php echo count( (array) get_option( 'active_plugins' ) ); ?>)</h2></td>
 		</tr>
 
 		<?php
@@ -425,5 +425,5 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 	</table>
 
-	<a href="JavaScript:void(0)" class="export-wsi-data button button-primary button-large"> <?php _e( 'Export to CSV', 'wp-travel' ); ?></a>
+	<a href="JavaScript:void(0)" class="export-wsi-data button button-primary button-large"> <?php esc_html_e( 'Export to CSV', 'wp-travel' ); ?></a>
 </div>

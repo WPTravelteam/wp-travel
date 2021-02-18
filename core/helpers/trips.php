@@ -419,7 +419,7 @@ class WP_Travel_Helpers_Trips {
 		 */
 		foreach ( $parameter_mappings as $api_param => $wp_param ) {
 			if ( isset( $_GET[ $api_param ] ) ) {
-				$query_args[ $wp_param ] = sanitize_text_field( $_GET[ $api_param ] );
+				$query_args[ $wp_param ] = sanitize_text_field( wp_unslash( $_GET[ $api_param ] ) );
 			}
 		}
 		/**

@@ -27,36 +27,36 @@ class Wp_Travel_User_Account {
 	 * @return array Menus.
 	 */
 	private static function dashboard_menus() {
-		$dashboard_menus = array(
+		$dashboard_menus        = array(
 			'dashboard' => array(
-				'menu_title' => __( 'Dashboard', 'wp-travel' ),
-				'menu_icon' => 'wt-icon wt-icon-tachometer',
+				'menu_title'      => __( 'Dashboard', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon wt-icon-tachometer',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_dashboard_tab' ),
-				'priority' => 10,
+				'priority'        => 10,
 			),
-			'bookings' => array(
-				'menu_title' => __( 'Bookings', 'wp-travel' ),
-				'menu_icon' => 'wt-icon wt-icon-th-list',
+			'bookings'  => array(
+				'menu_title'      => __( 'Bookings', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon wt-icon-th-list',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
-				'priority' => 20,
+				'priority'        => 20,
 			),
-			'address' => array(
-				'menu_title' => __( 'Address', 'wp-travel' ),
-				'menu_icon' => 'wt-icon-regular wt-icon-address-book',
+			'address'   => array(
+				'menu_title'      => __( 'Address', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon-regular wt-icon-address-book',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_address_tab' ),
-				'priority' => 30,
+				'priority'        => 30,
 			),
-			'account' => array(
-				'menu_title' => __( 'Account', 'wp-travel' ),
-				'menu_icon' => 'wt-icon wt-icon-user',
+			'account'   => array(
+				'menu_title'      => __( 'Account', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon wt-icon-user',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_account_tab' ),
-				'priority' => 40,
+				'priority'        => 40,
 			),
-			'logout' => array(
-				'menu_title' => __( 'Logout', 'wp-travel' ),
-				'menu_icon' => 'wt-icon wt-icon-power-off',
+			'logout'    => array(
+				'menu_title'      => __( 'Logout', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon wt-icon-power-off',
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_logout_tab' ),
-				'priority' => 50,
+				'priority'        => 50,
 			),
 		);
 		return $dashboard_menus = apply_filters( 'wp_travel_user_dashboard_menus', $dashboard_menus );
@@ -98,7 +98,7 @@ class Wp_Travel_User_Account {
 
 				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
 
-			<?php
+				<?php
 
 			}
 			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) { // @phpcs:ignore
@@ -108,8 +108,8 @@ class Wp_Travel_User_Account {
 				wp_travel_get_template_part( 'account/form', 'login' );
 			}
 		} else {
-			$current_user = wp_get_current_user();
-			$args['current_user'] = $current_user;
+			$current_user            = wp_get_current_user();
+			$args['current_user']    = $current_user;
 			$args['dashboard_menus'] = self::dashboard_menus();
 			// Get user Dashboard.
 			echo wp_travel_get_template_html( 'account/content-dashboard.php', $args );
@@ -131,17 +131,20 @@ class Wp_Travel_User_Account {
 			 * Process reset key / login from email confirmation link
 			*/
 		} elseif ( ! empty( $_GET['show-reset-form'] ) ) {
-			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ], ':' ) ) {
-				list( $rp_login, $rp_key ) = array_map( 'wp_travel_clean_vars', explode( ':', wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ), 2 ) );
-				$user = self::check_password_reset_key( $rp_key, $rp_login );
+			if ( isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) && 0 < strpos( sanitize_text_field( wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ), ':' ) ) {
+				list( $rp_login, $rp_key ) = array_map( 'wp_travel_clean_vars', explode( ':', sanitize_text_field( wp_unslash( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ), 2 ) );
+				$user                      = self::check_password_reset_key( $rp_key, $rp_login );
 
-				// reset key / login is correct, display reset password form with hidden key / login values
+				// reset key / login is correct, display reset password form with hidden key / login values.
 				if ( is_object( $user ) ) {
 
-					echo wp_travel_get_template_html( 'account/form-reset-password.php', array(
-						'key'   => $rp_key,
-						'login' => $rp_login,
-					) );
+					echo wp_travel_get_template_html(
+						'account/form-reset-password.php',
+						array(
+							'key'   => $rp_key,
+							'login' => $rp_login,
+						)
+					);
 
 					return;
 				}
@@ -249,7 +252,13 @@ class Wp_Travel_User_Account {
 		$key = get_password_reset_key( $user_data );
 
 		// Send email notification.
-		$email_content = wp_travel_get_template_html( 'emails/customer-lost-password.php', array( 'user_login' => $user_login, 'reset_key' => $key ) );
+		$email_content = wp_travel_get_template_html(
+			'emails/customer-lost-password.php',
+			array(
+				'user_login' => $user_login,
+				'reset_key'  => $key,
+			)
+		);
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -261,7 +270,7 @@ class Wp_Travel_User_Account {
 			$headers .= 'Reply-To: ' . $from . "\r\n" .
 			'X-Mailer: PHP/' . phpversion();
 
-			if ( $user_login && $key ) {
+		if ( $user_login && $key ) {
 
 			$user_object     = get_user_by( 'login', $user_login );
 			$user_user_login = $user_login;

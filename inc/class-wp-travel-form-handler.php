@@ -240,7 +240,7 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function update_user_billing_data() {
 
-		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'POST' !== strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) ) {
 			return;
 		}
 
@@ -313,7 +313,7 @@ class Wp_Travel_Form_Handler {
 	 * Save the password/account details and redirect back to the my account page.
 	 */
 	public static function save_account_details() {
-		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'POST' !== strtoupper( sanitize_text_fiedl( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) ) {
 			return;
 		}
 
