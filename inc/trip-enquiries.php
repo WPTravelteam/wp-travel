@@ -421,9 +421,9 @@ function wptravel_save_user_enquiry() {
 	$enquiry_id      = $new_enquiry;
 	$itinerary_id    = absint( $enquiry_data['post_id'] );
 	$itinerary_title = get_the_title( $itinerary_id );
-	$customer_name   = snitize_text_field( $enquiry_data['wp_travel_enquiry_name'] );
-	$customer_email  = snitize_text_field( $enquiry_data['wp_travel_enquiry_email'] );
-	$customer_note   = snitize_text_field( $enquiry_data['wp_travel_enquiry_query'] );
+	$customer_name   = sanitize_text_field( $enquiry_data['wp_travel_enquiry_name'] );
+	$customer_email  = sanitize_text_field( $enquiry_data['wp_travel_enquiry_email'] );
+	$customer_note   = sanitize_text_field( $enquiry_data['wp_travel_enquiry_query'] );
 
 	$email_tags = array(
 		'{sitename}'          => $sitename,
