@@ -469,7 +469,7 @@ function wp_travel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing
 
 				foreach ( $pricing_data as $p_ky => $pricing ) :
 					// Product Metas.
-					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? sanitize_text_field( wp_unslash( $_REQUEST['arrival_date'] ) ) ) : '';
+					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? sanitize_text_field( wp_unslash( $_REQUEST['arrival_date'] ) ) : '';
 					$pricing_default_types = wp_travel_get_pricing_variation_options();
 					// $pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
 					$max_available = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
