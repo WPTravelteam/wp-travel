@@ -638,6 +638,19 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
+		 * Create WP Travel nonce in case of any request.
+		 *
+		 * @since WP Travel 4.4.7
+		 * @return boolean
+		 */
+		public static function get_sanitize_request() {
+			if ( ! self::verify_nonce( true ) ) {
+				return array();
+			}
+			return wptravel_sanitize_array( ( $_GET ) );
+		}
+
+		/**
 		 * To disable cache and never cache cookies in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
 		 *
 		 * @return void

@@ -1483,16 +1483,10 @@ function wptravel_setup_itinerary_data( $post ) {
  *
  * @return void
  */
-function wptravel_archive_filter_by() {
+function wptravel_archive_filter_by( $submission_get = array() ) {
 	if ( ! WP_Travel::is_page( 'archive' ) ) {
 		return;
 	}
-
-	if ( ! WP_Travel::verify_nonce( true ) ) {
-		return;
-	}
-
-	$submission_get = wptravel_sanitize_array( wp_unslash( $_GET ) );
 
 	$strings = wptravel_get_strings();
 
@@ -1591,11 +1585,12 @@ function wptravel_archive_filter_by() {
 function wptravel_archive_toolbar() {
 	$view_mode = wptravel_get_archive_view_mode();
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) :
+		$sanitized_get = WP_Travel::get_sanitize_request();
 		?>
 		<?php if ( WP_Travel::is_page( 'archive' ) ) : ?>
 	<div class="wp-travel-toolbar clearfix">
 		<div class="wp-toolbar-content wp-toolbar-left">
-			<?php wptravel_archive_filter_by(); ?>
+			<?php wptravel_archive_filter_by( $sanitized_get ); ?>
 		</div>
 		<div class="wp-toolbar-content wp-toolbar-right">
 			<?php
