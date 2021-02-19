@@ -13,7 +13,7 @@ class WP_Travel_Ajax_Trip_Dates {
 	}
 
 	public static function get_trip_dates() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
+		$nonce = isset( $_REQUEST['_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ) : false;
 		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 			WP_Travel_Helpers_REST_API::response( $error );
@@ -24,7 +24,7 @@ class WP_Travel_Ajax_Trip_Dates {
 	}
 
 	public static function update_trip_dates() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
+		$nonce = isset( $_REQUEST['_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ) : false;
 		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 			WP_Travel_Helpers_REST_API::response( $error );
@@ -41,7 +41,7 @@ class WP_Travel_Ajax_Trip_Dates {
 	}
 
 	public static function remove_trip_date() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
+		$nonce = isset( $_REQUEST['_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ) : false;
 		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 			WP_Travel_Helpers_REST_API::response( $error );

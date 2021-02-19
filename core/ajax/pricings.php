@@ -14,6 +14,10 @@ class WP_Travel_Ajax_Pricings {
 		if ( is_wp_error( $permission ) ) {
 			WP_Travel_Helpers_REST_API::response( $permission );
 		}
+
+		/**
+		 * We are checking nonce using self::get_pricings_permissions_check(); method.
+		 */
 		$trip_id  = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
 		$response = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
 		WP_Travel_Helpers_REST_API::response( $response );
@@ -25,6 +29,9 @@ class WP_Travel_Ajax_Pricings {
 			WP_Travel_Helpers_REST_API::response( $permissison );
 		}
 
+		/**
+		 * We are checking nonce using self::delete_pricings_permissions_check(); method.
+		 */
 		$pricing_id = ! empty( $_GET['pricing_id'] ) ? absint( $_GET['pricing_id'] ) : 0;
 		$response   = WP_Travel_Helpers_Pricings::remove_individual_pricing( $pricing_id );
 		WP_Travel_Helpers_REST_API::response( $response );

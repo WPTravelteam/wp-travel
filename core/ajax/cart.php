@@ -58,6 +58,9 @@ class WP_Travel_Ajax_Cart {
 			WP_Travel_Helpers_REST_API::response( $permission );
 		}
 
+		/**
+		 * We are checking nonce using self::get_cart_permissions() method.
+		 */
 		$cart_id  = ! empty( $_GET['cart_id'] ) ? absint( $_GET['cart_id'] ) : 0;
 		$postData = json_decode( file_get_contents( 'php://input' ) );
 		$postData = is_object( $postData ) ? (array) $postData : array();
