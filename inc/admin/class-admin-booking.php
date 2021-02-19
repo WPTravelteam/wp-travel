@@ -195,9 +195,7 @@ class WP_Travel_Admin_Booking {
 			include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 		}
 
-		if ( ! WP_Travel::verify_nonce( true ) ) {
-			return $post;
-		}
+		$nonce_value = WP_Travel::create_nonce();
 
 		$form       = new WP_Travel_FW_Form();
 		$form_field = new WP_Travel_FW_Field();
@@ -205,10 +203,10 @@ class WP_Travel_Admin_Booking {
 
 		$edit_link = get_admin_url() . 'post.php?post=' . $post->ID . '&action=edit';
 		$edit_link = add_query_arg( 'edit_booking', 1, $edit_link );
-		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
+		$edit_link = add_query_arg( '_nonce', $nonce_value, $edit_link );
 
-		// 2. Edit Booking Section. ALready checking nonce above.
-		if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
+		// 2. Edit Booking Section. Already checking nonce above.
+		if ( WP_Travel::verify_nonce( true ) && isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
 			$checkout_fields  = wptravel_get_checkout_form_fields();
 			$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 			$billing_fields   = isset( $checkout_fields['billing_fields'] ) ? $checkout_fields['billing_fields'] : array();
@@ -382,6 +380,14 @@ class WP_Travel_Admin_Booking {
 							'wrapper_class' => '',
 							'default'       => $pax,
 						);
+						$booking_fields[] = array(
+							'label'         => null,
+							'name'          => '_nonce',
+							'type'          => 'hidden',
+							'class'         => '',
+							'wrapper_class' => '',
+							'default'       => $nonce_value,
+						);
 						foreach ( $booking_fields as $field ) {
 							$form_field->init( $field, array( 'single' => true ) )->render();
 						}
@@ -447,8 +453,9 @@ class WP_Travel_Admin_Booking {
 	 * @param int $booking_id Booking ID.
 	 */
 	public function save( $booking_id ) {
-		if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
-			return;
+
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return $booking_id;
 		}
 
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
