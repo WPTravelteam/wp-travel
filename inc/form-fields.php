@@ -419,7 +419,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 			'wrapper_class' => 'wp-travel-trip-duration',
 		),
 	);
-	$fields = apply_filters( 'wptravel_search_filter_widget_form_fields', $fields );
+	$fields = apply_filters( 'wp_travel_search_filter_widget_form_fields', $fields );
 
 	return wptravel_sort_form_fields( $fields );
 }
