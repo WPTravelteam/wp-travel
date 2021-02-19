@@ -172,9 +172,6 @@ if ( wptravel_is_react_version_enabled() ) {
 										<span>
 											<?php 
 												if ( $trip_discount ) {
-													error_log( 'trip_total ' . $trip_total  );
-													error_log( 'trip_total_partial ' . $trip_total_partial  );
-													error_log( 'trip discount ' . $trip_discount  );
 													$partial_discount = ( $trip_discount * $payout_percent ) / 100;
 
 													echo wptravel_get_formated_price_currency( $trip_total_partial -  $partial_discount ); 
