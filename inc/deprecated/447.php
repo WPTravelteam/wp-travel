@@ -1269,4 +1269,9 @@ function wp_travel_helpers_license_init(){
 	return wptravel_helpers_license_init();
 }
 
+function wp_travel_is_admin_page( $pages = array() ){
+	wptravel_deprecated_function( "wp_travel_is_admin_page", "4.4.7", "wptravel_is_admin_page" );
+	return wptravel_is_admin_page( $pages );
+}
+
 
