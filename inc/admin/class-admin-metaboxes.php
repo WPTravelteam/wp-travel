@@ -200,7 +200,7 @@ class WP_Travel_Admin_Metaboxes {
 										$description = (array) $description;
 										if ( count( $description ) > 0 ) {
 											echo '<pre>';
-											print_r( $description );
+											print_r( $description ); // @phpcs:ignore
 											echo '</pre>';
 										}
 									} else {

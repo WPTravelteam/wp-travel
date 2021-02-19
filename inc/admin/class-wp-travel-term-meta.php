@@ -105,10 +105,10 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 			</th>
 			<td>
 			<?php $image_id = get_term_meta( $term->term_id, 'wp_travel_trip_type_image_id', true ); ?>
-			<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" value="<?php echo $image_id; ?>">
+			<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" value="<?php echo esc_attr( $image_id ); ?>">
 			<div id="category-image-wrapper">
 				<?php if ( $image_id ) { ?>
-					<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); ?>
+					<?php echo wp_get_attachment_image( $image_id, 'thumbnail' ); // @phpcs:ignore ?>
 				<?php } ?>
 			</div>
 			<p>

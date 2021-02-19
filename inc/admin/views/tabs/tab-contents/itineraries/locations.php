@@ -99,7 +99,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 					</div>
 					<?php else : ?>
 					<div class="map-wrap">
-					<p class="good" id="pass-strength-result"><i class="fas fa-map-pin"></i><?php echo sprintf( 'Please add \'Google Map API Key\' in the %ssettings%s.', '<a href="edit.php?post_type=itinerary-booking&page=settings">', '</a>' ); ?></p>
+					<p class="good" id="pass-strength-result"><i class="fas fa-map-pin"></i><?php echo sprintf( 'Please add \'Google Map API Key\' in the %ssettings%s.', '<a href="edit.php?post_type=itinerary-booking&page=settings">', '</a>' );  ?></p>
 				</div>
 			<?php
 		endif;

@@ -45,7 +45,7 @@ class WP_Travel_Admin_Settings {
 		$sysinfo_url            = add_query_arg( array( 'page' => 'sysinfo' ), $url );
 
 		echo '<div class="wrap wp-trave-settings-warp">';
-			echo '<h1>' . __( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
+			echo '<h1>' . esc_html__( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
 			echo '<div class="wp-trave-settings-form-warp">';
 			do_action( 'wp_travel_before_admin_setting_form' );
 			echo '<form method="post" action="' . esc_url( $url ) . '">';
@@ -55,7 +55,7 @@ class WP_Travel_Admin_Settings {
 				WPTravel()->tabs->load( self::$collection, $args );
 				echo '<div class="wp-travel-setting-buttons">';
 				echo '<div class="wp-travel-setting-system-info">';
-					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . __( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
+					echo '<a href="' . esc_url( $sysinfo_url ) . '" title="' . esc_attr__( 'View system information', 'wp-travel' ) . '"><span class="dashicons dashicons-info"></span>';
 						esc_html_e( 'System Information', 'wp-travel' );
 					echo '</a>';
 				echo '</div>';

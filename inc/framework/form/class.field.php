@@ -146,7 +146,7 @@ class WP_Travel_FW_Field {
 						<span class="required-label">*</span>
 					<?php } ?>
 				</label>
-				<?php echo $content; ?>
+				<?php echo $content; // @phpcs:ignore ?>
 			</div>
 		<?php
 		$content = ob_get_contents();
