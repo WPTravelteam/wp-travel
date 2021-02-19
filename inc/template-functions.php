@@ -60,7 +60,7 @@ add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
 function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 
 	if ( ! WP_Travel::verify_nonce( true ) ) {
-		return;
+		return $post_clauses;
 	}
 
 	global $wpdb;
