@@ -16,6 +16,7 @@ class WP_Travel_Ajax_Coupon {
 
 		$payload     = json_decode( file_get_contents( 'php://input' ) );
 		$payload     = is_object( $payload ) ? (array) $payload : array();
+		$payload     = wptravel_sanitize_array( $payload );
 		$coupon_code = trim( $payload['couponCode'] );
 
 		$response = WP_Travel_Helpers_Cart::apply_coupon_code( $coupon_code );

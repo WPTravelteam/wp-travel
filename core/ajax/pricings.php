@@ -32,32 +32,6 @@ class WP_Travel_Ajax_Pricings {
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
-	public static function get_pricings_permissions_check() {
-		/**
-		 * Nonce Verification.
-		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanititze_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-		}
-
-		return true;
-	}
-
-	public static function delete_pricings_permissions_check() {
-
-		/**
-		 * Nonce Verification.
-		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
-		}
-
-		return true;
-	}
 }
 
 WP_Travel_Ajax_Pricings::init();

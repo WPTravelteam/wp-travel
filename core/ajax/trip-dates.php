@@ -38,6 +38,7 @@ class WP_Travel_Ajax_Trip_Dates {
 		 */
 		$trip_id   = ! empty( $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : 0;
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
+		$post_data = wptravel_sanitize_array( $post_data );
 		$response  = WP_Travel_Helpers_Trip_Dates::update_dates( $trip_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}

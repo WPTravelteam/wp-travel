@@ -521,11 +521,11 @@ class WP_Travel_Admin_Booking {
 				$order_items_data = array();
 			}
 
-			$firsname_traveller = sanitize_text_field( wp_unslash( $_POST['wp_travel_fname_traveller'] ) );
+			$firsname_traveller = wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_fname_traveller'] ) );
 			foreach ( $firsname_traveller as $cart_id => $v ) {
-				$pax            = isset( $_POST['pax'] ) ? sanitize_text_field( wp_unslash( $_POST['pax'] ) ) : 0;
-				$arrival_date   = isset( $_POST['arrival_date'] ) ? sanitize_text_field( wp_unslash( $_POST['arrival_date'] ) ) : '';
-				$departure_date = isset( $_POST['departure_date'] ) ? sanitize_text_field( wp_unslash( $_POST['departure_date'] ) ) : '';
+				$pax            = isset( $_POST['pax'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['pax'] ) ) : 0;
+				$arrival_date   = isset( $_POST['arrival_date'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['arrival_date'] ) ) : '';
+				$departure_date = isset( $_POST['departure_date'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['departure_date'] ) ) : '';
 
 				$order_items_data[ $cart_id ]['trip_id']        = $wp_travel_post_id;
 				$order_items_data[ $cart_id ]['pax']            = $pax;
