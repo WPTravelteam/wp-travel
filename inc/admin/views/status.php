@@ -144,12 +144,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<tr>
 				<td  ><?php esc_html_e( 'PHP Time Limit', 'wp-travel' ); ?>:</td>
 
-				<td><?php echo ini_get( 'max_execution_time' ); ?></td>
+				<td><?php echo esc_html( ini_get( 'max_execution_time' ) ); ?></td>
 			</tr>
 			<tr>
 				<td  ><?php esc_html_e( 'PHP Max Input Vars', 'wp-travel' ); ?>:</td>
 
-				<td><?php echo ini_get( 'max_input_vars' ); ?></td>
+				<td><?php echo esc_html( ini_get( 'max_input_vars' ) ); ?></td>
 			</tr>
 			<tr>
 				<td  ><?php esc_html_e( 'cURL Version', 'wp-travel' ); ?>:</td>
@@ -158,7 +158,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				<?php
 				if ( function_exists( 'curl_version' ) ) {
 					$curl_version = curl_version();
-					echo $curl_version['version'] . ', ' . $curl_version['ssl_version'];
+					echo esc_html( $curl_version['version'] ) . ', ' . esc_html( $curl_version['ssl_version'] );
 				} else {
 					esc_html_e( 'N/A', 'wp-travel' );
 				}
@@ -200,7 +200,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		<tr>
 			<td  ><?php esc_html_e( 'Max Upload Size', 'wp-travel' ); ?>:</td>
 
-			<td><?php echo size_format( wp_max_upload_size() ); ?></td>
+			<td><?php echo esc_html( size_format( wp_max_upload_size() ) ); ?></td>
 		</tr>
 		<tr>
 			<td  ><?php esc_html_e( 'Default Timezone is UTC', 'wp-travel' ); ?>:</td>
@@ -209,7 +209,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<?php
 				$default_timezone = date_default_timezone_get();
 			if ( 'UTC' !== $default_timezone ) {
-				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . sprintf( __( 'Default timezone is %s - it should be UTC', 'wp-travel' ), $default_timezone ) . '</span>';
+				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . sprintf( __( 'Default timezone is %s - it should be UTC', 'wp-travel' ), esc_html( $default_timezone ) ) . '</span>';
 			} else {
 				echo '<span class="yes"><span class="dashicons dashicons-yes"></span>Yes</span>';
 			}
@@ -221,7 +221,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 			<td>
 			<?php
-				echo ini_get( 'error_log' );
+				echo esc_html( ini_get( 'error_log' ) );
 			?>
 				</td>
 		</tr>
@@ -374,19 +374,13 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				<td  ><?php esc_html_e( 'Parent Theme Version', 'wp-travel' ); ?>:</td>
 
 				<td>
-					<?php
-					echo esc_html( $parent_theme->Version );
-
-					// if (version_compare($parent_theme->Version, $update_theme_version, '<')) {
-					// echo ' &ndash; <strong style="color:red;">' . sprintf(__('%s is available', 'wp-travel'), esc_html($update_theme_version)) . '</strong>';
-					// }
-					?>
+					<?php echo esc_html( $parent_theme->Version ); ?>
 				</td>
 			</tr>
 			<tr>
 				<td  ><?php esc_html_e( 'Parent Theme Author URL', 'wp-travel' ); ?>:</td>
 
-				<td><?php echo $parent_theme->{'Author URI'}; ?></td>
+				<td><?php echo esc_url( $parent_theme->{'Author URI'} ); ?></td>
 			</tr>
 		<?php endif ?>
 
