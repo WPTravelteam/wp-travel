@@ -227,7 +227,8 @@ class Wp_Travel_Shortcodes {
 	 * @return String
 	 */
 	public static function wptravel_trip_filters_shortcode( $atts, $content ) {
-		$search_widget_fields = wptravel_search_filter_widget_form_fields();
+		$sanitized_get        = WP_Travel::get_sanitize_request();
+		$search_widget_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		$defaults             = array(
 			'keyword_search'       => 1,
 			'fact'                 => 1,

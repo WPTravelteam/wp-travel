@@ -60,7 +60,8 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 
 		// Filters
-		$search_fields = wptravel_search_filter_widget_form_fields();
+		$sanitized_get = WP_Travel::get_sanitize_request();
+		$search_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		foreach ( $search_fields as $key => $field ) {
 			$instance[ $key ] = isset( $new_instance[ $key ] ) ? sanitize_text_field( $new_instance[ $key ] ) : '';
 		}
@@ -95,7 +96,8 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 			<p>
 				<label><strong><?php esc_html_e( 'Enable Filters', 'wp-travel' ); ?>:</strong></label>
 				<?php
-				$search_fields = wptravel_search_filter_widget_form_fields();
+				$sanitized_get = WP_Travel::get_sanitize_request();
+				$search_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 				foreach ( $search_fields as $key => $field ) {
 					// Filters.
 					$instance_value = isset( $instance[ $key ] ) ? esc_attr( $instance[ $key ] ) : 1;
