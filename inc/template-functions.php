@@ -1307,9 +1307,7 @@ function wptravel_pagination( $range = 2, $pages = '' ) {
 	if ( 1 != $pages ) {
 		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
 		$pagination .= '<ul class="wp-page-numbers">';
-		// if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
-		// echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
-		// }
+		
 		if ( $paged > 1 && $showitems < $pages ) {
 			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
 		}
@@ -1329,9 +1327,6 @@ function wptravel_pagination( $range = 2, $pages = '' ) {
 			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );
 		}
 
-		// if ( $paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages ) {
-		// echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
-		// }
 		$pagination .= "</nav>\n";
 		echo $pagination; // @phpcs:ignore
 	}

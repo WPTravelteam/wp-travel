@@ -69,7 +69,7 @@ class WP_Travel_Notices {
 					return;
 				}
 
-				echo '<div class="wp-travel-error">' .  esc_html( $notice ) . '</div>';
+				echo '<div class="wp-travel-error">' . esc_html( $notice ) . '</div>';
 
 			}
 			return;

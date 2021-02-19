@@ -2181,10 +2181,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 							/**
 							 * Hook to add booking time details at booking.
 							 * Will be deprecated in future, use wp_travel_after_bookings_travel_date instead.
-							 *
-							 * @todo Must deprecate this hook letter.
 							 */
-							// do_action( 'wp_travel_booked_times_details', $order_details );
 							wptravel_do_deprecated_action( 'wp_travel_booked_times_details', array( $order_details ), '4.4.0', 'wp_travel_after_bookings_travel_date' );
 
 							/**
@@ -2214,10 +2211,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									if ( 'heading' === $field['type'] ) {
 										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
 									} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
-										// Do nothing
+										// Do nothing.
 									} else {
 										echo '<div class="my-order-single-field clearfix">';
-										printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+										printf( '<span class="my-order-head">%s:</span>', esc_html( $field['label'] ) );
 										printf( '<span class="my-order-tail">%s</span>', $billing_data ); // @phpcs:ignore
 										echo '</div>';
 									}
