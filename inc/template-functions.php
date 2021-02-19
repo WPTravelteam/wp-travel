@@ -1568,6 +1568,7 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 					<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
 				</select>
 			</div>
+		<input type="hidden" name="_nonce" class="wp_travel_input_filters" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 		<div class="wp-travel-filter-button">
 			<button class="btn-wp-travel-filter"><?php echo esc_html( $show_text ); ?></button>
 		</div>
