@@ -157,7 +157,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				<?php
 				if ( function_exists( 'curl_version' ) ) {
 					$curl_version = curl_version();
-					echo esc_html( $curl_version['version'] . ', ' . $curl_version['ssl_version'] );
+					echo esc_html( $curl_version['version'] ) . ', ' . esc_html( $curl_version['ssl_version'] );
 				} else {
 					esc_html_e( 'N/A', 'wp-travel' );
 				}
@@ -208,7 +208,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<?php
 				$default_timezone = date_default_timezone_get();
 			if ( 'UTC' !== $default_timezone ) {
-				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . esc_html( sprintf( __( 'Default timezone is %s - it should be UTC', 'wp-travel' ), $default_timezone ) ) . '</span>';
+				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . sprintf( __( 'Default timezone is %s - it should be UTC', 'wp-travel' ), esc_html( $default_timezone ) ) . '</span>';
 			} else {
 				echo '<span class="yes"><span class="dashicons dashicons-yes"></span>Yes</span>';
 			}
@@ -220,7 +220,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 			<td>
 			<?php
-				echo ini_get( 'error_log' ); // @phpcs:ignore
+				echo esc_html( ini_get( 'error_log' ) );
 			?>
 				</td>
 		</tr>
@@ -373,10 +373,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				<td  ><?php esc_html_e( 'Parent Theme Version', 'wp-travel' ); ?>:</td>
 
 				<td>
-					<?php
-					echo esc_html( $parent_theme->Version );
-
-					?>
+					<?php echo esc_html( $parent_theme->Version ); ?>
 				</td>
 			</tr>
 			<tr>
