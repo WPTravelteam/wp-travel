@@ -13,7 +13,7 @@
  */
 function wptravel_get_booking_data() {
 
-	if ( WP_Travel::verify_nonce( true ) ) {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
 
