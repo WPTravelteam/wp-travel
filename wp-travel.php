@@ -458,7 +458,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			);
 
 			foreach ( $pages as $key => $page ) {
-				wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
+				wptravel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
 			}
 
 			$migrations = array(
