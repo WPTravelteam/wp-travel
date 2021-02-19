@@ -598,6 +598,10 @@ function wptravel_update_payment_status( $booking_id, $amount, $status, $args, $
  * @return void
  */
 function wptravel_payment_booking_message( $message ) {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $message;
+	}
+
 	if ( ! isset( $_GET['booking_id'] ) ) {
 		return $message;
 	}
@@ -615,6 +619,10 @@ function wptravel_payment_booking_message( $message ) {
 
 // Calculate Total Cart amount.
 function wptravel_get_total_amount() {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	$response = array(
 		'status'  => 'fail',
 		'message' => __( 'Invalid', 'wp-travel' ),

@@ -48,9 +48,9 @@ class WP_Travel_Ajax_Trips {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$postData = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-
-		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $postData );
+		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
+		$post_data = wptravel_sanitize_array( $post_data );
+		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 

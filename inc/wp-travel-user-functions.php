@@ -173,12 +173,20 @@ function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  * @return string
  */
 function wptravel_lostpassword_url() {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {
 		$url = $default_url;
 	} else {
 		// Don't redirect to the WP Travel endpoint on global network admin lost passwords.
+		/**
+		 * Already checking nonce using WP_Travel::verify_nonce.
+		 */
 		if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
 			$url = $default_url;
 		} else {

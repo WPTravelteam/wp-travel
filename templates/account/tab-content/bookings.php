@@ -10,7 +10,7 @@ global $wp;
 $detail_link = home_url( $wp->request ) . '#bookings';
 $back_link   = $detail_link;
 
-if ( isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
+if ( WP_Travel::verify_nonce( true ) && isset( $_GET['detail_id'] ) && '' !== $_GET['detail_id'] ) {
 	wptravel_print_notices();
 	// $pricing_name = wptravel_get_trip_pricing_name( $trip_id, $price_key );
 	$booking_id    = absint( $_GET['detail_id'] );

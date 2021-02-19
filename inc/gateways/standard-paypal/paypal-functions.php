@@ -29,6 +29,10 @@ function wptravel_get_paypal_redirect_url( $ssl_check = false ) {
  * This would also do the "set-up" for an "alternate purchase verification"
  */
 function wptravel_listen_paypal_ipn() {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	if ( isset( $_GET['wp_travel_listener'] )
 		&& $_GET['wp_travel_listener'] == 'IPN'
 		|| isset( $_GET['test'] )

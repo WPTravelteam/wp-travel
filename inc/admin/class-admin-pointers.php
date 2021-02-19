@@ -25,7 +25,7 @@ class WP_Travel_Admin_Info_Pointers {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
 		}
-		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
+		$user_since      = get_option( 'wp_travel_user_since', '1.0.0' );
 		$settings        = wptravel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
 
@@ -258,7 +258,7 @@ class WP_Travel_Admin_Info_Pointers {
 
 		return $q;
 	}
-	
+
 
 
 	function paypal_addon_admin_notice() {
@@ -356,6 +356,10 @@ class WP_Travel_Admin_Info_Pointers {
 	 */
 	function wptravel_get_dismissied_nag_messages() {
 
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
+
 		$user_id = get_current_user_id();
 
 		if ( isset( $_GET['wp-travel-dismissed-nag'] ) ) {
@@ -376,15 +380,15 @@ class WP_Travel_Admin_Info_Pointers {
 			<div style="margin:34px 20px 10px 10px">
 				<?php
 					$args = array(
-						'title'      => __( 'WP Travel Importer', 'wp-travel' ),
-						'content'    => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
-						'link'       => 'https://wptravel.io/wp-travel-pro/',
-        				'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+						'title'       => __( 'WP Travel Importer', 'wp-travel' ),
+						'content'     => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
+						'link'        => 'https://wptravel.io/wp-travel-pro/',
+						'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
 						'link2'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
 						'link2_label' => __( 'Get WP Travel Import/Export Addon', 'wp-travel' ),
 					);
 					wptravel_upsell_message( $args );
-				?>
+					?>
 			</div>
 			<?php
 		}

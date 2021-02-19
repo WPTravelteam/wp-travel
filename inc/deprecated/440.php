@@ -175,6 +175,10 @@ function wp_travel_get_booking_form() {
 function wp_travel_booking_form_fields() {
 	// No suggested alternative function.
 	wp_travel_deprecated_function( 'wp_travel_booking_form_fields', '4.4.0' );
+
+	if ( WP_Travel::verify_nonce( true ) ) {
+		return apply_filters( 'wp_travel_booking_form_fields', array() );
+	}
 	$trip_id = 0;
 	global $post;
 	global $wt_cart;
