@@ -414,7 +414,7 @@ function wptravel_get_post_thumbnail_url( $post_id, $size = 'wp_travel_thumbnail
  * @return string Placeholder image URL.
  */
 function wptravel_get_post_placeholder_image_url() {
-	$thumbnail_url = plugins_url( '/wp-travel/assets/images/wp-travel-placeholder.png' );
+	$thumbnail_url = esc_url_raw( plugins_url( '/wp-travel/assets/images/wp-travel-placeholder.png' ) );
 	return apply_filters( 'wp_travel_placeholder_image_url', $thumbnail_url ); // filter since WP Travel 4.4.2
 }
 
@@ -2136,11 +2136,11 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 							<h3 class="my-order-single-title"><?php esc_html_e( 'Order Status', 'wp-travel' ); ?></h3>
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Order Number :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo sprintf( '#%s', $booking_id ); ?></span>
+								<span class="my-order-tail"><?php echo sprintf( '#%s', esc_html( $booking_id ) ); ?></span>
 							</div>
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Booking Date :', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo get_the_date( '', $booking_id ); ?></span>
+								<span class="my-order-tail"><?php echo esc_html( get_the_date( '', $booking_id ) ); ?></span>
 							</div>
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Tour :', 'wp-travel' ); ?></span>
@@ -2217,8 +2217,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 										// Do nothing
 									} else {
 										echo '<div class="my-order-single-field clearfix">';
-										printf( '<span class="my-order-head">%s:</span>', $field['label'] );
-										printf( '<span class="my-order-tail">%s</span>', $billing_data );
+										printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+										printf( '<span class="my-order-tail">%s</span>', $billing_data ); // @phpcs:ignore
 										echo '</div>';
 									}
 								}
@@ -2264,8 +2264,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 															$value = is_array( $value ) ? array_shift( $value ) : $value;
 															$value = is_array( $value ) ? $value[ $key ] : $value;
 															echo '<div class="my-order-single-field clearfix">';
-															printf( '<span class="my-order-head">%s:</span>', $field['label'] );
-															printf( '<span class="my-order-tail">%s</span>', $value );
+															printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+															printf( '<span class="my-order-tail">%s</span>', $value ); // @phpcs:ignore
 															echo '</div>';
 														}
 													}

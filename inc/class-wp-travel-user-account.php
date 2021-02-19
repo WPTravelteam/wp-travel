@@ -63,19 +63,19 @@ class Wp_Travel_User_Account {
 	}
 
 	public static function dashboard_menu_dashboard_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/dashboard.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/dashboard.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_bookings_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_address_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/address.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/address.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_account_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/account.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/account.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_logout_tab( $args ) {

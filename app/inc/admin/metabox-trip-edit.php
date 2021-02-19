@@ -13,7 +13,9 @@ class WP_Travel_Admin_Metabox_Trip_Edit {
 	}
 
 	public static function meta_box_callback() {
-		echo '<div id="wp-travel-trip-options-wrap"></div>';
+		?>
+		<div id="wp-travel-trip-options-wrap"></div>
+		<?php
 	}
 
 

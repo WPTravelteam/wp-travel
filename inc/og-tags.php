@@ -29,7 +29,7 @@ add_action( 'wp_head', 'wptravel_insert_og_tags' );
  */
 function wptravel_insert_common_tags() {
 	$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-	echo '<meta property="og:site_name" content="' . $sitename . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . $sitename . '">' . "\n"; // @phpcs:ignore
 }
 
 function wptravel_insert_post_tags() {
@@ -70,7 +70,7 @@ function wptravel_insert_post_tags() {
 
 	foreach ( $tags as $tag ) {
 		$articletag = $tag->name;
-		echo '<meta property="article:tag" content="' . $articletag . '">' . "\n";
+		echo '<meta property="article:tag" content="' . $articletag . '">' . "\n"; // @phpcs:ignore
 	}
 
 	echo '<meta property="og:title" content="' . esc_attr( $ogtitle ) . '">' . "\n";
