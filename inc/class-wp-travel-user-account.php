@@ -61,7 +61,7 @@ class Wp_Travel_User_Account {
 		);
 
 		$dashboard_menus = apply_filters( 'wp_travel_user_dashboard_menus', $dashboard_menus );
-		return $dashboard_menus
+		return $dashboard_menus;
 	}
 
 	public static function dashboard_menu_dashboard_tab( $args ) {

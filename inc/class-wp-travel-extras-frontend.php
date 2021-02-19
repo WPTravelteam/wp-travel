@@ -41,6 +41,8 @@ class WPTravel_Extras_Frontend {
 	 */
 	public function has_trip_extras( $trip_id, $price_key = false ) {
 
+		$trip_extras = array();
+
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
 		$settings_fields = wptravel_get_settings();
 		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
