@@ -464,7 +464,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$migrations = array(
 				array( 'name' => '103-104', 'version' => '1.0.3' ), // 'name' => 'name of file', 'version' => 'Migrate if current version is greater than this'.
 				array( 'name' => '104-105', 'version' => '1.0.4' ),
-				array( 'name' => '106-110', 'version' => '1.0.6' ),
 				array( 'name' => 'update-121', 'version' => '1.2.0' ),
 				array( 'name' => '175-176', 'version' => '1.7.5' ),
 				array( 'name' => '193-194', 'version' => '1.9.3' ),
