@@ -545,7 +545,7 @@ function wptravel_single_excerpt( $post_id ) {
 						<?php
 							$count = (int) get_comments_number();
 							echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
-							echo esc_html( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ) );
+							printf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ); // @phpcs:ignore
 							echo '</a>';
 						?>
 						</span>
