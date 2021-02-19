@@ -1307,7 +1307,6 @@ function wptravel_pagination( $range = 2, $pages = '' ) {
 	if ( 1 != $pages ) {
 		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
 		$pagination .= '<ul class="wp-page-numbers">';
-
 		if ( $paged > 1 && $showitems < $pages ) {
 			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
 		}

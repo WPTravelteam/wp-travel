@@ -107,7 +107,12 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 		<tr>
 			<td width="25%" ><?php esc_html_e( 'Server Info', 'wp-travel' ); ?>:</td>
 
-			<td><?php echo esc_html( sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) ); ?></td>
+			<td>
+				<?php
+				$software = isset( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
+				echo esc_html( $software );
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td  ><?php esc_html_e( 'PHP Version', 'wp-travel' ); ?>:</td>
