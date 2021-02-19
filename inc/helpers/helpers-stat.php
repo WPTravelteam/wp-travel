@@ -16,6 +16,9 @@ function wptravel_get_booking_data() {
 	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
+	/**
+	 * We are checking nonce using WP_Travel::verify_nonce(); method.
+	 */
 
 	global $wpdb;
 	$data = array();
