@@ -607,7 +607,17 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * Verify WP Travel nonce in case of any ajax request.
+		 * Create WP Travel nonce in case of any request.
+		 *
+		 * @since WP Travel 4.4.7
+		 * @return boolean
+		 */
+		public static function create_nonce() {
+			return wp_create_nonce( 'wp_travel_nonce' );
+		}
+
+		/**
+		 * Verify WP Travel nonce in case of any request.
 		 *
 		 * @since WP Travel 4.4.7
 		 * @return boolean

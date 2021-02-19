@@ -1076,7 +1076,7 @@ function wp_travel_load_template($path, $args = array() ){
 
 function wp_travel_get_template_part($slug, $name = ''){
 	wptravel_deprecated_function( "wp_travel_get_template_part", "4.4.7", "wptravel_get_template_part" );
-	return wptravel_get_template_part($slug, $name = '');
+	return wptravel_get_template_part( $slug, $name );
 }
 
 function wp_travel_get_template_html($template_name, $args = array() ){
