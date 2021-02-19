@@ -660,7 +660,7 @@ function wp_travel_get_settings(){
 }
 
 function wp_travel_settings_default_fields(){
-	wptravel_deprecated_function( "wptravel_settings_default_fields", "4.4.7", "wptravel_settings_default_fields" );
+	wptravel_deprecated_function( "wp_travel_settings_default_fields", "4.4.7", "wptravel_settings_default_fields" );
 	return wptravel_settings_default_fields();
 }
 
