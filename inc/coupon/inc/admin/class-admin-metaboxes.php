@@ -64,7 +64,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 			'tab_label'     => __( 'General', 'wp-travel' ),
 			'content_title' => __( 'General Settings', 'wp-travel' ),
 			'priority'      => 110,
-			'callback'      => 'wp_travel_coupons_general_tab_callback',
+			'callback'      => 'wptravel_coupons_general_tab_callback',
 			'icon'          => 'fa-info-circle',
 		);
 
@@ -72,7 +72,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 			'tab_label'     => __( 'Restrictions', 'wp-travel' ),
 			'content_title' => __( 'Coupon Restrictions', 'wp-travel' ),
 			'priority'      => 110,
-			'callback'      => 'wp_travel_coupons_restrictions_tab_callback',
+			'callback'      => 'wptravel_coupons_restrictions_tab_callback',
 			'icon'          => 'fa-lock',
 		);
 

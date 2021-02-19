@@ -17,7 +17,7 @@ class Wp_Travel_Sidebars {
 
 	public function init() {
 
-	    add_action( 'widgets_init', array( $this, 'wp_travel_register_additional_custom_sidebars' ) );
+	    add_action( 'widgets_init', array( $this, 'register_additional_custom_sidebars' ) );
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Wp_Travel_Sidebars {
 	 *
 	 * @return void
 	 */
-	public static function wp_travel_register_additional_custom_sidebars(  $atts, $content = '' ) {
+	public static function register_additional_custom_sidebars(  $atts, $content = '' ) {
 
         register_sidebar( array(
             'name' => __( 'WP Travel : Archive Sidebar', 'wp-travel' ),
