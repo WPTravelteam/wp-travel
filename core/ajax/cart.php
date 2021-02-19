@@ -30,14 +30,12 @@ class WP_Travel_Ajax_Cart {
 	}
 
 	public static function add_to_cart() {
-		$permission = self::get_cart_permissions();
-		if ( is_wp_error( self::get_cart_permissions() || ! $permission ) ) {
-			WP_Travel_Helpers_REST_API::response( $permission );
-		}
+		WP_Travel::verify_nonce();
 
-		$postData = json_decode( file_get_contents( 'php://input' ) );
-		$postData = is_object( $postData ) ? (array) $postData : array();
-		$response = WP_Travel_Helpers_Cart::add_to_cart( $postData );
+		$post_data = json_decode( file_get_contents( 'php://input' ) );
+		$post_data = is_object( $post_data ) ? (array) $post_data : array();
+		$post_data = wptravel_sanitize_array( $post_data );
+		$response  = WP_Travel_Helpers_Cart::add_to_cart( $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
@@ -69,7 +67,7 @@ class WP_Travel_Ajax_Cart {
 		/**
 		 * Nonce Verification.
 		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
+		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce1' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 			return WP_Travel_Helpers_REST_API::response( $error );
 		}
