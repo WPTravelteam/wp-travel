@@ -2795,22 +2795,22 @@ function wptravel_get_bank_deposit_account_table( $show_description = true ) {
 		<table width="100%">
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
-					<td><?php _e( 'Account Name', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'Account Name', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['account_number'] ) ) : ?>
-					<td><?php _e( 'Account Number', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'Account Number', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['bank_name'] ) ) : ?>
-					<td><?php _e( 'Bank Name', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'Bank Name', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['sort_code'] ) ) : ?>
-					<td><?php _e( 'Sort Code', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'Sort Code', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['iban'] ) ) : ?>
-					<td><?php _e( 'IBAN', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'IBAN', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 				<?php if ( isset( $account_data[0]['swift'] ) ) : ?>
-					<td><?php _e( 'Swift', 'wp-travel' ); ?></td>
+					<td><?php esc_html_e( 'Swift', 'wp-travel' ); ?></td>
 				<?php endif; ?>
 			</tr>
 			<?php foreach ( $account_data as $data ) { ?>
