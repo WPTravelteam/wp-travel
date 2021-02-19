@@ -422,6 +422,8 @@ class WP_Travel_Helpers_Trips {
 		/*
 		 * For each known parameter which is both registered and present in the request,
 		 * set the parameter's value on the query $args.
+		 *
+		 * We are already checking nonce above using WP_Travel::verify_nonce();
 		 */
 		foreach ( $parameter_mappings as $api_param => $wp_param ) {
 			if ( isset( $_GET[ $api_param ] ) ) {

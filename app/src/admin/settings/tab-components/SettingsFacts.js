@@ -80,6 +80,7 @@ const SettingsFact = () => {
             let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');
             updateFact( 'fa_icon', FAIconValue, index );
             updateFact( 'selected_icon_type', 'fontawesome-icon', index );
+            sessionStorage.clear();
             setOpen(false);
 
         } else if( 'custom-upload' == lastSelectedTab ) {
@@ -93,10 +94,12 @@ const SettingsFact = () => {
                 const { url } = selectedImgDataObj;
                 updateFact( 'icon_img', url, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
+                sessionStorage.clear();
                 setOpen(false);
             } else {
                 updateFact( 'icon_img', '', index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
+                sessionStorage.clear();
                 setOpen(false);
             }
 
@@ -105,6 +108,7 @@ const SettingsFact = () => {
             let iconClassValue = sessionStorage.getItem('WPTravelIconClassValue');
             updateFact( 'icon', iconClassValue, index );
             updateFact( 'selected_icon_type', 'icon-class', index );
+            sessionStorage.clear();
             setOpen(false);
 
         }
@@ -147,7 +151,7 @@ const SettingsFact = () => {
             }
         }, []);
 
-        const ListFAIcons = (icons) => {
+        const ListFAIcons = (icons) => { 
             return (
                 'undefined' != typeof options && 'undefined' != typeof icons &&
                 icons.length > 0 ?
@@ -429,7 +433,7 @@ const SettingsFact = () => {
                                                     onRequestClose={ closeModal }>
                                                     <TabPanel className="my-tab-panel"
                                                         activeClass="active-tab"
-                                                        initialTabName= {sessionStorage.getItem('WPTravelLastSelectedTab') ? sessionStorage.getItem('WPTravelLastSelectedTab'): "icon-class"}
+                                                        initialTabName= { fact.selected_icon_type ? fact.selected_icon_type : 'icon-class' }
                                                         onSelect={ () => false }
                                                         isDismissible={false}
                                                         tabs={ [

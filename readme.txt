@@ -247,6 +247,7 @@ Fixes:
 * Added nonce verification in missing form request and sanitize input data.
 * Updated exteral JS library to latest version.
 * Function prefixing changed to 'wptravel_' from 'wp_travel_'.
+* Function name starts with 'wp_travel_' are deprecated.
 
 = 4.4.6 =
 Release Date: 5th February, 2021

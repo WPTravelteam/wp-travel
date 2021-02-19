@@ -148,7 +148,7 @@ class WP_Travel_Ajax_Trips {
 	public static function filter_trips() {
 
 		/**
-		 * Permission Check
+		 * Permission and nonce Check
 		 */
 		$permission = self::get_trips_permissions_check();
 
@@ -161,7 +161,6 @@ class WP_Travel_Ajax_Trips {
 		 /**
 		 * Return list of filtered trips according to conditions.
 		 *
-		 * @todo Check Nonce.
 		 */
 
 		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -188,7 +187,7 @@ class WP_Travel_Ajax_Trips {
 	public static function get_trip_ids() {
 
 		/**
-		 * Permission Check
+		 * Permission and nonce Check
 		 */
 		$permission = self::get_trips_permissions_check();
 
@@ -201,7 +200,6 @@ class WP_Travel_Ajax_Trips {
 		 /**
 		 * Return list of filtered trips according to conditions.
 		 *
-		 * @todo Check Nonce.
 		 */
 
 		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
