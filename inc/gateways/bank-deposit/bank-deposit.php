@@ -111,6 +111,11 @@ add_action( 'init', 'wptravel_submit_bank_deposit_slip' );
 
 
 function wptravel_bank_deposite_button( $booking_id = null, $details = array() ) {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $booking_id;
+	}
+
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;
@@ -142,6 +147,10 @@ function wptravel_bank_deposite_button( $booking_id = null, $details = array() )
 add_action( 'wp_travel_dashboard_booking_after_detail', 'wptravel_bank_deposite_button', 20, 2 );
 
 function wptravel_bank_deposite_content( $booking_id = null, $details = array() ) {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $booking_id;
+	}
+
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;

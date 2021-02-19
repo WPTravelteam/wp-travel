@@ -1488,6 +1488,10 @@ function wptravel_archive_filter_by() {
 		return;
 	}
 
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	$submission_get = wptravel_sanitize_array( wp_unslash( $_GET ) );
 
 	$strings = wptravel_get_strings();
@@ -1682,6 +1686,11 @@ function wptravel_archive_listing_sidebar() {
  * @return void
  */
 function wptravel_posts_filter( $query ) {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $query;
+	}
+
 	global $pagenow;
 	$type = '';
 
@@ -1872,6 +1881,11 @@ function wptravel_get_archive_view_mode() {
 	$default_view_mode = 'list';
 	$default_view_mode = apply_filters( 'wp_travel_default_view_mode', $default_view_mode );
 	$view_mode         = $default_view_mode;
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	if ( isset( $_GET['view_mode'] ) && ( 'grid' === $_GET['view_mode'] || 'list' === $_GET['view_mode'] ) ) {
 		$view_mode = sanitize_text_field( wp_unslash( $_GET['view_mode'] ) );
 	}

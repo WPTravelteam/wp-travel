@@ -189,10 +189,14 @@ class WP_Travel_Admin_Booking {
 	 */
 	public function booking_info( $post ) {
 		if ( ! $post ) {
-			return;
+			return $post;
 		}
 		if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 			include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+		}
+
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return $post;
 		}
 
 		$form       = new WP_Travel_FW_Form();
@@ -203,7 +207,7 @@ class WP_Travel_Admin_Booking {
 		$edit_link = add_query_arg( 'edit_booking', 1, $edit_link );
 		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
 
-		// 2. Edit Booking Section.
+		// 2. Edit Booking Section. ALready checking nonce above.
 		if ( isset( $_GET['edit_booking'] ) || ( isset( $_GET['post_type'] ) && 'itinerary-booking' === $_GET['post_type'] ) ) {
 			$checkout_fields  = wptravel_get_checkout_form_fields();
 			$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
