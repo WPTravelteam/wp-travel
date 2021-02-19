@@ -40,7 +40,7 @@ add_action( 'the_post', 'wptravel_setup_itinerary_data' );
 add_action( 'wp_travel_before_main_content', 'wptravel_archive_toolbar' );
 add_action( 'pre_get_posts', 'wptravel_posts_filter' );
 add_action( 'wp_travel_after_main_content', 'wptravel_archive_wrapper_close' );
-add_action( 'wptravel_archive_listing_sidebar', 'wptravel_archive_listing_sidebar' );
+add_action( 'wp_travel_archive_listing_sidebar', 'wptravel_archive_listing_sidebar' );
 add_action( 'save_post', 'wptravel_clear_booking_transient' );
 add_filter( 'excerpt_more', 'wptravel_excerpt_more' );
 add_filter( 'wp_kses_allowed_html', 'wptravel_wpkses_post_iframe', 10, 2 );

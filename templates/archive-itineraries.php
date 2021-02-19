@@ -45,7 +45,7 @@ get_header( 'itinerary' ); ?>
 	<?php wptravel_get_template_part( 'content', 'archive-itineraries-none' ); ?>
 <?php endif; ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
-<?php do_action( 'wptravel_archive_listing_sidebar' ); ?>
+<?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
 <?php
 if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 	?>
