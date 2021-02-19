@@ -51,15 +51,17 @@ class WP_Travel_Ajax_Cart {
 	}
 
 	public static function update_cart_item() {
-		$permission = self::get_cart_permissions();
-		if ( is_wp_error( self::get_cart_permissions() || ! $permission ) ) {
-			WP_Travel_Helpers_REST_API::response( $permission );
-		}
+		WP_Travel::verify_nonce();
 
-		$cart_id  = ! empty( $_GET['cart_id'] ) ? absint( $_GET['cart_id'] ) : 0;
-		$postData = json_decode( file_get_contents( 'php://input' ) );
-		$postData = is_object( $postData ) ? (array) $postData : array();
-		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $postData );
+		/**
+		 * We are checking nonce using WP_Travel::verify_nonce(); method.
+		 */
+		$cart_id   = ! empty( $_GET['cart_id'] ) ? absint( $_GET['cart_id'] ) : 0;
+		$post_data = json_decode( file_get_contents( 'php://input' ) );
+		$post_data = is_object( $post_data ) ? (array) $post_data : array();
+		$post_data = wptravel_sanitize_array( $post_data );
+
+		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
