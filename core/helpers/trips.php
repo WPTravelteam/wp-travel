@@ -388,6 +388,12 @@ class WP_Travel_Helpers_Trips {
 	 */
 	public static function filter_trips( $args = array() ) {
 
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		global $wpdb;
 		
 		$post_ids = array();

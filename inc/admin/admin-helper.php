@@ -13,9 +13,7 @@
 function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
-	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
-		wptravel_upgrade_to_110();
-	}
+	
 	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
 	}
@@ -172,7 +170,7 @@ function wptravel_meta_box_support() {
 		<div class="inside">
 
 			<div class="thumbnail">
-				<img src="<?php echo plugins_url( '/wp-travel/assets/images/support-image.png' ); ?>">
+				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/support-image.png' ) ); ?>">
 					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
 					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
 			</div>
@@ -202,7 +200,7 @@ function wptravel_meta_box_documentation() {
 		<div class="inside">
 
 			<div class="thumbnail">
-				<img src="<?php echo plugins_url( '/wp-travel/assets/images/docico.png' ); ?>">
+				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/docico.png' ) ); ?>">
 					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
 					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
 			</div>
@@ -550,25 +548,6 @@ function wptravel_publish_metabox() {
 }
 add_action( 'post_submitbox_misc_actions', 'wptravel_publish_metabox' );
 
-/**
- * Upgrade Function WP Travel.
- */
-function wptravel_upgrade_to_110() {
-	$itineraries        = get_posts(
-		array(
-			'post_type'   => 'itineraries',
-			'post_status' => 'publish',
-		)
-	);
-	$current_db_version = get_option( 'wp_travel_version' );
-	if ( ! $current_db_version ) {
-		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
-	}
-	if ( count( $itineraries ) > 0 ) {
-		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
-	}
-}
-
 /*
  * ADMIN COLUMN - HEADERS
  */
@@ -617,7 +596,7 @@ function wptravel_booking_payment_manage_columns( $column_name, $id ) {
 				update_post_meta( $payment_id, 'wp_travel_payment_status', $label_key );
 			}
 			$status = wptravel_get_payment_status();
-			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'], 'wp-travel' ) . ' ">' . esc_html( $status[ $label_key ]['text'], 'wp-travel' ) . '</span>';
+			echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_html( $status[ $label_key ]['text'] ) . '</span>';
 			break;
 		case 'payment_mode':
 			echo '<span >' . esc_html( $payment_info['payment_mode'] ) . '</span>';
@@ -755,7 +734,7 @@ function wptravel_admin_tour_extra_multiselect( $post_id, $context = false, $fet
 			<?php
 		endif;
 		?>
-		<label for=""><?php echo esc_html( 'Trip Extras', 'wp-travel-coupon-pro' ); ?></label>
+		<label for=""><?php esc_html_e( 'Trip Extras', 'wp-travel' ); ?></label>
 		<?php
 		if ( $table_row ) :
 			?>

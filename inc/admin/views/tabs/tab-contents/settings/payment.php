@@ -74,7 +74,7 @@ function wptravel_settings_callback_payment( $tab, $args ) {
 							<h4 class="panel-title">
 								<div class="wp-travel-sorting-handle"></div>
 								<a role="button" data-toggle="collapse" data-parent="#wp-travel-payment-accordion" href="#collapse-<?php echo esc_attr( $gateway ); ?>" aria-expanded="true" aria-controls="collapse-<?php echo esc_attr( $gateway ); ?>">
-								<?php echo $gateway_label ? esc_html( $gateway_label ) : __( 'Payment', 'wp-travel' ); ?>
+								<?php echo $gateway_label ? esc_html( $gateway_label ) : esc_html__( 'Payment', 'wp-travel' ); ?>
 								</a>
 							</h4>
 						</div>

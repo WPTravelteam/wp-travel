@@ -59,27 +59,29 @@ class Wp_Travel_User_Account {
 				'priority'        => 50,
 			),
 		);
-		return $dashboard_menus = apply_filters( 'wp_travel_user_dashboard_menus', $dashboard_menus );
+
+		$dashboard_menus = apply_filters( 'wp_travel_user_dashboard_menus', $dashboard_menus );
+		return $dashboard_menus;
 	}
 
 	public static function dashboard_menu_dashboard_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/dashboard.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/dashboard.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_bookings_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_address_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/address.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/address.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_account_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/account.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/account.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_logout_tab( $args ) {
-		echo wptravel_get_template_html( 'account/tab-content/logout.php', $args );
+		echo wptravel_get_template_html( 'account/tab-content/logout.php', $args ); //@phpcs:ignore
 	}
 
 	/**
@@ -112,7 +114,7 @@ class Wp_Travel_User_Account {
 			$args['current_user']    = $current_user;
 			$args['dashboard_menus'] = self::dashboard_menus();
 			// Get user Dashboard.
-			echo wptravel_get_template_html( 'account/content-dashboard.php', $args );
+			echo wptravel_get_template_html( 'account/content-dashboard.php', $args ); //@phpcs:ignore
 		}
 	}
 	/**
@@ -138,7 +140,7 @@ class Wp_Travel_User_Account {
 				// reset key / login is correct, display reset password form with hidden key / login values.
 				if ( is_object( $user ) ) {
 
-					echo wptravel_get_template_html(
+					echo wptravel_get_template_html( //@phpcs:ignore
 						'account/form-reset-password.php',
 						array(
 							'key'   => $rp_key,

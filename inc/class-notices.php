@@ -69,7 +69,7 @@ class WP_Travel_Notices {
 					return;
 				}
 
-				echo '<div class="wp-travel-error">' . $notice . '</div>';
+				echo '<div class="wp-travel-error">' . esc_html( $notice ) . '</div>';
 
 			}
 			return;
@@ -78,7 +78,7 @@ class WP_Travel_Notices {
 
 			foreach ( $notices as $key => $notice ) {
 
-				echo '<div class="wp-travel-message">' . $notice . '</div>';
+				echo '<div class="wp-travel-message">' . esc_html( $notice ) . '</div>';
 
 			}
 			return;

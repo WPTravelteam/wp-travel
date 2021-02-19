@@ -18,4 +18,4 @@ function wptravel_update_table_fieldname() {
 	$wpdb->get_results( $query2 );
 	$wpdb->get_results( $query3 );
 }
-wp_travel_update_table_fieldname();
+wptravel_update_table_fieldname();

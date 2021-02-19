@@ -41,9 +41,9 @@ function wptravel_trip_callback_detail() {
 		<tr>
 			<td colspan="2">
 				<h4><label for="excerpt"><?php esc_html_e( 'Short Description', 'wp-travel' ); ?></label></h4>
-				<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo $post->post_excerpt ?></textarea>
+				<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea>
 				<p class="description">
-					<?php printf( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts%s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ); ?>
+					<?php printf( wp_kses_post( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts%s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ) ); ?>
 				</p>
 			</td>
 		</tr>

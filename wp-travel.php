@@ -458,13 +458,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			);
 
 			foreach ( $pages as $key => $page ) {
-				wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
+				wptravel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
 			}
 
 			$migrations = array(
 				array( 'name' => '103-104', 'version' => '1.0.3' ), // 'name' => 'name of file', 'version' => 'Migrate if current version is greater than this'.
 				array( 'name' => '104-105', 'version' => '1.0.4' ),
-				array( 'name' => '106-110', 'version' => '1.0.6' ),
 				array( 'name' => 'update-121', 'version' => '1.2.0' ),
 				array( 'name' => '175-176', 'version' => '1.7.5' ),
 				array( 'name' => '193-194', 'version' => '1.9.3' ),
@@ -608,16 +607,30 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * Verify WP Travel nonce in case of any ajax request.
+		 * Create WP Travel nonce in case of any request.
 		 *
 		 * @since WP Travel 4.4.7
 		 * @return boolean
 		 */
-		public static function verify_nonce() {
+		public static function create_nonce() {
+			// Use _nonce as input name.
+			return wp_create_nonce( 'wp_travel_nonce' );
+		}
+
+		/**
+		 * Verify WP Travel nonce in case of any request.
+		 *
+		 * @since WP Travel 4.4.7
+		 * @return boolean
+		 */
+		public static function verify_nonce( $return_bool = false ) {
 			/**
 			 * Nonce Verification.
 			 */
-			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
+				if ( $return_bool ) {
+					return false;
+				}
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 				return WP_Travel_Helpers_REST_API::response( $error );
 			}

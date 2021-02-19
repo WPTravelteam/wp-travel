@@ -29,7 +29,7 @@ add_action( 'wp_head', 'wptravel_insert_og_tags' );
  */
 function wptravel_insert_common_tags() {
 	$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-	echo '<meta property="og:site_name" content="' . $sitename . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( $sitename ) . '">' . "\n"; // @phpcs:ignore
 }
 
 function wptravel_insert_post_tags() {
@@ -52,10 +52,10 @@ function wptravel_insert_post_tags() {
 
 	$ogurl      = get_permalink( $post_id );
 	$image_size = apply_filters( 'wp_travel_og_image_size', 'large' );
-	// Image
+	// Image.
 	$ogimage = wptravel_get_post_thumbnail_url( $post_id, $image_size );
 
-	// Author
+	// Author.
 	$articleauthor = get_the_author();
 
 	$trip_terms = get_the_terms( $post_id, 'itinerary_types' );
@@ -65,12 +65,12 @@ function wptravel_insert_post_tags() {
 		$articlesection = $trip_terms[0]->name;
 	}
 
-	// Tags
+	// Tags.
 	$tags = wp_get_post_tags( $post_id );
 
 	foreach ( $tags as $tag ) {
 		$articletag = $tag->name;
-		echo '<meta property="article:tag" content="' . $articletag . '">' . "\n";
+		echo '<meta property="article:tag" content="' . esc_attr( $articletag ) . '">' . "\n"; // @phpcs:ignore
 	}
 
 	echo '<meta property="og:title" content="' . esc_attr( $ogtitle ) . '">' . "\n";

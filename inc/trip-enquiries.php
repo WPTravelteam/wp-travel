@@ -478,7 +478,7 @@ add_action( 'wp_ajax_nopriv_wptravel_save_user_enquiry', 'wptravel_save_user_enq
 function wptravel_enquiry_form_header() {
 	?>
 		<div class="wp-travel-inquiry__form-header">
-			<h3><?php echo sprintf( esc_html_x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'wp-travel' ), get_the_title() ); ?></h3>
+			<h3><?php echo esc_html( sprintf( _x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'wp-travel' ), get_the_title() ) ); ?></h3>
 		</div>
 	<?php
 }

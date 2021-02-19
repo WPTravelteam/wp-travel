@@ -285,7 +285,7 @@ function wptravel_book_now() {
  */
 function wptravel_get_booking_chart() {
 
-	$submission_request = isset( $_REQUEST['_wp_travel_booking_chart_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wp_travel_booking_chart_nonce'] ) ), '_wp_travel_booking_chart_nonce_action' ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
+	$submission_request = isset( $_REQUEST['_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
 
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array();
 	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
@@ -308,6 +308,7 @@ function wptravel_get_booking_chart() {
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
 		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
+					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ) ?>" />
 					<input type="hidden" name="post_type" value="itinerary-booking" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group full-width">
@@ -445,7 +446,7 @@ function wptravel_get_booking_chart() {
 					</div>
 					</div>
 
-					<?php wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
+					<?php // wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
 
 				</form>
 			</div>

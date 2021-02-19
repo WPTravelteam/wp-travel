@@ -338,7 +338,6 @@ class WP_Travel_Ajax {
 			$wt_cart->add( $add_to_cart_args );
 		}
 		// Need to update cart add. in calse of multiple items partial figure need to update in individual item
-		// $wt_cart->update( $cart_item_id, $pax );
 		echo true;
 
 	}

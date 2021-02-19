@@ -107,22 +107,13 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 						?>
 						<div class="wp-travel-itinerary" style="padding:10px">
 							<?php
-								// $itinerary_settings = array(
-								// 'quicktags'     => array( 'buttons' => 'em, strong, link' ),
-								// 'quicktags'     => true,
-								// 'tinymce'       => true,
-								// 'textarea_rows' => 10,
-								// 'textarea_name' => 'wp_travel_trip_itinerary_data[' . $cnt . '][desc]',
-								// );
 								$itinerary_desc = stripslashes( $itinerary_desc );
-
-								// wp_editor( $itinerary_desc, 'itinerary_desc' . $cnt, $itinerary_settings );
 							?>
 						</div>
 						<div class="panel-wrap panel-wrap-itinerary">
 							<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 							<div class="wp-travel-itinerary">
-								<textarea name="wp_travel_trip_itinerary_data[<?php echo $cnt; ?>][desc]" ><?php echo wp_kses_post( $itinerary_desc ); ?></textarea>
+								<textarea name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $cnt ); ?>][desc]" ><?php echo wp_kses_post( $itinerary_desc ); ?></textarea>
 							</div>
 						</div>
 					</div>
@@ -162,11 +153,11 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 			<div class="panel-body">
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Label', 'wp-travel' ); ?></label>
-					<input bind="itinerary_label_<?php echo esc_attr( $uid ); ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
+					<input bind="itinerary_label_<?php echo esc_attr( $uid ); ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ); ?>][label]" value="<?php echo esc_html( $itinerary_label ); ?>">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Title', 'wp-travel' ); ?></label>
-					<input bind="itinerary_title_<?php echo esc_attr( $uid ); ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
+					<input bind="itinerary_title_<?php echo esc_attr( $uid ); ?>" type="text" name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ); ?>][title]" value="<?php echo esc_html( $itinerary_title ); ?>">
 				</div>
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Itinerary Date', 'wp-travel' ); ?></label>
@@ -183,7 +174,7 @@ $outline                 = get_post_meta( $post->ID, 'wp_travel_outline', true )
 				<div class="panel-wrap panel-wrap-itinerary">
 					<label><?php esc_html_e( 'Description', 'wp-travel' ); ?></label>
 					<div class="wp-travel-itinerary">
-						<textarea name="wp_travel_trip_itinerary_data[<?php echo $uid; ?>][desc]" ></textarea>
+						<textarea name="wp_travel_trip_itinerary_data[<?php echo esc_attr( $uid ); ?>][desc]" ></textarea>
 					</div>
 				</div>
 			</div>

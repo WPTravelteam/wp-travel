@@ -41,6 +41,8 @@ class WPTravel_Extras_Frontend {
 	 */
 	public function has_trip_extras( $trip_id, $price_key = false ) {
 
+		$trip_extras = array();
+
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
 		$settings_fields = wptravel_get_settings();
 		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
@@ -167,8 +169,8 @@ class WPTravel_Extras_Frontend {
 							<div class="wp_travel_tour_extras_option_single">
 							<div class="wp_travel_tour_extras_option_single_content">
 								<div class="wp_travel_tour_extras_option_top">
-									<input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) . '_' . $arrival_date; ?>" type="checkbox">
-									<label for="trip_extra_<?php echo esc_attr( $key ) . '_' . $arrival_date; ?>" class="check_icon"></label>
+									<input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) . '_' . esc_attr( $arrival_date ); ?>" type="checkbox">
+									<label for="trip_extra_<?php echo esc_attr( $key ) . '_' . esc_attr( $arrival_date ); ?>" class="check_icon"></label>
 									<div class="wp_travel_tour_extras_option_label">
 										<div class="wp_travel_tour_extras_title">
 											<h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>

@@ -40,7 +40,7 @@ add_action( 'the_post', 'wptravel_setup_itinerary_data' );
 add_action( 'wp_travel_before_main_content', 'wptravel_archive_toolbar' );
 add_action( 'pre_get_posts', 'wptravel_posts_filter' );
 add_action( 'wp_travel_after_main_content', 'wptravel_archive_wrapper_close' );
-add_action( 'wptravel_archive_listing_sidebar', 'wptravel_archive_listing_sidebar' );
+add_action( 'wp_travel_archive_listing_sidebar', 'wptravel_archive_listing_sidebar' );
 add_action( 'save_post', 'wptravel_clear_booking_transient' );
 add_filter( 'excerpt_more', 'wptravel_excerpt_more' );
 add_filter( 'wp_kses_allowed_html', 'wptravel_wpkses_post_iframe', 10, 2 );
@@ -104,10 +104,10 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 
 			$where .= ' OR (';
 			$where .= "
-				{$dates_table}.recurring = 1 
+				{$dates_table}.recurring = 1
 				AND (
 					( FIND_IN_SET( {$year}, years) || 'every_year' = years )
-					 AND 
+					 AND
 					( FIND_IN_SET( {$month}, months) || 'every_month' = months )
 				 )
 				";
@@ -352,12 +352,12 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 				</span>
 				<?php if ( $enable_sale ) : ?>
 					<del>
-						<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); ?></span>
+						<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
 					</del>
 				<?php endif; ?>
 					<span class="person-count">
 						<ins>
-							<span><?php echo wptravel_get_formated_price_currency( $trip_price ); ?></span>
+							<span><?php echo wptravel_get_formated_price_currency( $trip_price ); // @phpcs:ignore ?></span>
 						</ins>
 					</span>
 				</div>
@@ -393,7 +393,7 @@ function wptravel_single_trip_rating( $post_id, $hide_rating = false ) {
 	}
 	$average_rating = wptravel_get_average_rating( $post_id );
 	?>
-	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), esc_attr( $average_rating ) ); ?>">
 		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
@@ -415,7 +415,7 @@ function wptravel_trip_rating( $post_id ) {
 	}
 	$average_rating = wptravel_get_average_rating( $post_id );
 	?>
-	<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), esc_attr( $average_rating ) ); ?>">
 		<a>
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
@@ -545,7 +545,7 @@ function wptravel_single_excerpt( $post_id ) {
 						<?php
 							$count = (int) get_comments_number();
 							echo '<a href="javascript:void(0)" class="wp-travel-count-info">';
-							printf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), $count );
+							printf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ); // @phpcs:ignore
 							echo '</a>';
 						?>
 						</span>
@@ -688,7 +688,8 @@ function wptravel_single_location( $post_id ) {
 	<?php endif; ?>
 	<?php
 	if ( $fixed_departure ) :
-		if ( $dates = wptravel_get_fixed_departure_date( $post_id ) ) {
+		$dates = wptravel_get_fixed_departure_date( $post_id );
+		if ( $dates ) {
 			?>
 			<li class="wp-travel-fixed-departure">
 				<div class="travel-info">
@@ -805,7 +806,11 @@ function wptravel_frontend_trip_facts( $post_id ) {
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										// echo esc_html( $val );
 										if ( isset( $trip_fact['fact_id'] ) ) {
-											echo @esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
+											if ( $settings['wp_travel_trip_facts_settings'] && isset( $trip_fact['fact_id'] ) && $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ] ) {
+												if ( isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'] ) && isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ) ) {
+													echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] );
+												}
+											}
 										} else {
 											echo esc_html( $val );
 										}
@@ -977,7 +982,7 @@ function wptravel_frontend_contents( $post_id ) {
 
 								} else {
 
-									echo apply_filters( 'the_content', $tab_info['content'] );
+									echo apply_filters( 'the_content', $tab_info['content'] ); // @phpcs:ignore
 								}
 
 								?>
@@ -1302,9 +1307,6 @@ function wptravel_pagination( $range = 2, $pages = '' ) {
 	if ( 1 != $pages ) {
 		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
 		$pagination .= '<ul class="wp-page-numbers">';
-		// if ( $paged > 2 && $paged > $range + 1 && $showitems < $pages ) {
-		// echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
-		// }
 		if ( $paged > 1 && $showitems < $pages ) {
 			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
 		}
@@ -1324,9 +1326,6 @@ function wptravel_pagination( $range = 2, $pages = '' ) {
 			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );
 		}
 
-		// if ( $paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages ) {
-		// echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
-		// }
 		$pagination .= "</nav>\n";
 		echo $pagination; // @phpcs:ignore
 	}
@@ -1395,14 +1394,17 @@ function wptravel_booking_message() {
 	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
 		return;
 	}
-	if ( isset( $_GET['booked'] ) && 1 == $_GET['booked'] ) :
+
+	$submission_get = wptravel_sanitize_array( wp_unslash( $_GET ) );
+
+	if ( isset( $submission_get['booked'] ) && 1 == wptravel_sanitize_array( wp_unslash( $submission_get['booked'] ) ) ) :
 		?>
 		<script>
 			history.replaceState({},null,window.location.pathname);
 		</script>
-		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', __( "We've received your booking details. We'll contact you soon.", 'wp-travel' ) ); ?></p>
+		<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "We've received your booking details. We'll contact you soon.", 'wp-travel' ) ) ); ?></p>
 
-	<?php elseif ( isset( $_GET['booked'] ) && 'false' == $_GET['booked'] ) : ?>
+	<?php elseif ( isset( $submission_get['booked'] ) && 'false' == $submission_get['booked'] ) : ?>
 		<script>
 			history.replaceState({},null,window.location.pathname);
 		</script>
@@ -1413,7 +1415,7 @@ function wptravel_booking_message() {
 
 		?>
 
-		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo apply_filters( 'wp_travel_booked_message', esc_html( $err_msg ) ); ?></p>
+		<p class="col-xs-12 wp-travel-notice-danger wp-travel-notice"><?php echo wp_kses_post( apply_filters( 'wp_travel_booked_message', $err_msg ) ); ?></p>
 		<?php
 	endif;
 
@@ -2233,10 +2235,10 @@ function wptravel_booking_default_princing_list_content( $trip_id ) {
 																			(
 																			<?php
 																			if ( ! empty( $pricing['inventory']['max_pax'] ) && $pricing['inventory']['max_pax'] < 999 ) {
-																				echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+																				echo esc_html( sprintf( '%s - %s %s', $min, $max, $pax_string ) );
 																			} else {
 
-																				echo sprintf( '%s %s - %s', $min, $pax_string, __( 'No size limit.', 'wp-travel' ) );
+																				echo esc_html( sprintf( '%s %s - %s', $min, $pax_string, __( 'No size limit.', 'wp-travel' ) ) );
 																			}
 																			?>
 																			)
@@ -2247,12 +2249,12 @@ function wptravel_booking_default_princing_list_content( $trip_id ) {
 
 																			<?php if ( 'yes' === $pricing_category['enable_sale'] ) : ?>
 																				<del>
-																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['regular'], true ); ?></span>
+																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['regular'], true ); //@phpcs:ignore ?></span>
 																				</del>
 																			<?php endif; ?>
 																			<span class="person-count">
 																				<ins>
-																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
+																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['price'] ); //@phpcs:ignore ?></span>
 																				</ins>/<?php echo esc_html( wptravel_get_price_per_by_key( $pricing_category['price_per'] ) ); ?>
 																			</span>
 																		<?php endif; ?>
@@ -2260,7 +2262,7 @@ function wptravel_booking_default_princing_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-type="<?php echo esc_html( wptravel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" <?php echo $min_attr; ?> <?php echo sprintf( '%s', $max_attr ); ?>   step="<?php echo esc_attr( $step ); ?>" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" type="number" value="0" data-min="<?php echo esc_attr( $min ); ?>" data-max="<?php echo esc_attr( $max ); ?>" data-type="<?php echo esc_html( wptravel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-category-id="<?php echo esc_html( $category_id ); ?>" <?php echo $min_attr;  // @phpcs:ignore ?> <?php echo sprintf( '%s', $max_attr ); // @phpcs:ignore ?>  step="<?php echo esc_attr( $step ); ?>" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 
@@ -2298,7 +2300,7 @@ function wptravel_booking_default_princing_list_content( $trip_id ) {
 										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'], $date_id );
 									endif;
 									?>
-									
+
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); ?>" />
 									<input type="hidden" name="pricing_id" value="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" />
@@ -2483,9 +2485,9 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 										$max = ! empty( $pricing['inventory']['max_pax'] ) ? esc_html( $pricing['inventory']['max_pax'] ) : esc_html__( 'No size limit', 'wp-travel' );
 
 										if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
-											echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+											echo esc_html( sprintf( '%s - %s %s', $min, $max, $pax_string ) );
 										} else {
-											echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+											echo esc_html( sprintf( '%s %s - %s', $min, $pax_string, $max ) );
 										}
 										?>
 								</span>
@@ -2546,9 +2548,9 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 																			(
 																			<?php
 																			if ( ! empty( $pricing['inventory']['max_pax'] ) ) {
-																				echo sprintf( '%s - %s %s', $min, $max, $pax_string );
+																				echo esc_html( sprintf( '%s - %s %s', $min, $max, $pax_string ) );
 																			} else {
-																				echo sprintf( '%s %s - %s', $min, $pax_string, $max );
+																				echo esc_html( sprintf( '%s %s - %s', $min, $pax_string, $max ) );
 																			}
 																			?>
 																			)
@@ -2559,12 +2561,12 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 
 																			<?php if ( 'yes' === $pricing_category['enable_sale'] ) : ?>
 																				<del>
-																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['regular'], true ); ?></span>
+																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['regular'], true ); // @phpcs:ignore ?></span>
 																				</del>
 																			<?php endif; ?>
 																			<span class="person-count">
 																				<ins>
-																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['price'] ); ?></span>
+																					<span><?php echo wptravel_get_formated_price_currency( $pricing_category['price'] ); // @phpcs:ignore ?></span>
 																				</ins>/<?php echo esc_html( wptravel_get_price_per_by_key( $pricing_category['price_per'] ) ); ?>
 																			</span>
 																		<?php endif; ?>
@@ -2572,7 +2574,7 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 																</p>
 																<div class="pax-select-container">
 																	<a href="#" class="icon-minus pax-picker-minus">-</a>
-																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo esc_attr( $min ); ?>"  data-max="<?php echo esc_attr( $max ); ?>" data-type="<?php echo esc_attr( wptravel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_attr( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); ?>   step="1" maxlength="2" autocomplete="off">
+																	<input readonly class="input-num paxpicker-input" type="number" value="0" data-min="<?php echo esc_attr( $min ); ?>"  data-max="<?php echo esc_attr( $max ); ?>" data-type="<?php echo esc_attr( wptravel_get_pricing_category_by_key( $pricing_category['type'] ) ); ?>" data-custom="<?php echo esc_attr( $custom_label ); ?>" data-parent-id="<?php echo esc_attr( $parent_id ); ?>" data-category-id="<?php echo esc_attr( $category_id ); ?>" min="0" <?php echo sprintf( '%s', $max_attr ); // @phpcs:ignore ?>   step="1" maxlength="2" autocomplete="off">
 																	<a href="#" class="icon-plus pax-picker-plus">+</a>
 																</div>
 
@@ -2609,7 +2611,7 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 										do_action( 'wp_travel_booking_after_select_button', $trip_id, $pricing['price_key'] );
 										?>
 									<?php endif; ?>
-									
+
 									<input type="hidden" name="trip_id" value="<?php echo esc_attr( $trip_id ); ?>" />
 									<input type="hidden" name="price_key" value="<?php echo esc_attr( $pricing['price_key'] ); // Need to remove price key. ?>" />
 									<input type="hidden" name="pricing_id" value="<?php echo esc_attr( $pricing['pricing_id'] ); ?>" />
