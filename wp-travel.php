@@ -623,11 +623,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since WP Travel 4.4.7
 		 * @return boolean
 		 */
-		public static function verify_nonce() {
+		public static function verify_nonce( $return_bool = false ) {
 			/**
 			 * Nonce Verification.
 			 */
 			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
+				if ( $return_bool ) {
+					return false;
+				}
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 				return WP_Travel_Helpers_REST_API::response( $error );
 			}
