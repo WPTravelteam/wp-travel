@@ -613,6 +613,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return boolean
 		 */
 		public static function create_nonce() {
+			// Use _nonce as input name.
 			return wp_create_nonce( 'wp_travel_nonce' );
 		}
 
@@ -626,7 +627,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			/**
 			 * Nonce Verification.
 			 */
-			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
 				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
 				return WP_Travel_Helpers_REST_API::response( $error );
 			}
