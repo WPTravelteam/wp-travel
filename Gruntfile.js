@@ -243,10 +243,10 @@ module.exports = function (grunt) {
 						'assets/js/easy-responsive-tabs.js',//easy-responsive-tabs ['jquery']
 						'assets/js/collapse.js',//collapse-js ['jquery]
 						'assets/js/lib/sticky-kit/sticky-kit.min.js',
-						'assets/js/moment.min.js',
+						// 'assets/js/moment.min.js',
 					],
 					'assets/js/booking.min.js': ['assets/js/booking.js'],
-					'assets/js/moment.min.js': ['assets/js/moment.js'],
+					// 'assets/js/moment.min.js': ['assets/js/moment.js'],
 					'assets/js/wp-travel-widgets.min.js': ['assets/js/wp-travel-widgets.js'],
 					'assets/js/wp-travel-accordion.min.js': ['assets/js/wp-travel-accordion.js'],
 					'assets/js/easy-responsive-tabs.min.js': ['assets/js/easy-responsive-tabs.js'],
