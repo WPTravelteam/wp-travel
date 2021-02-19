@@ -58,6 +58,11 @@ add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
  * Filters post clause to filter trips after 4.0.0
  */
 function wptravel_posts_clauses_filter( $post_clauses, $object ) {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	global $wpdb;
 
 	if ( $object->query_vars['post_type'] !== WP_TRAVEL_POST_TYPE ) {
@@ -73,15 +78,15 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	$pricings_table       = $wpdb->prefix . 'wt_pricings';
 	$price_category_table = $wpdb->prefix . 'wt_price_category_relation';
 
-	// $min_price = isset( $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
-	// $max_price = isset( $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
-
 	// Join Tables.
 	$join  = ''; // JOIN clause.
 	$join .= "
 		INNER JOIN {$dates_table} ON ( {$wpdb->posts}.ID = {$dates_table}.trip_id )
 	";
 
+	/**
+	 * ALready checking nonce above using WP_Travel::verify_nonce;
+	 */
 	// Where clause.
 	$where      = '';
 	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : '';
@@ -122,6 +127,9 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 		$post_clauses['distinct'] = 'DISTINCT';
 	}
 
+	/**
+	 * ALready checking nonce above using WP_Travel::verify_nonce;
+	 */
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
 		$post_clauses['join']    = $post_clauses['join'] . $join;
 		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
@@ -1392,6 +1400,10 @@ function wptravel_body_class( $classes, $class ) {
  */
 function wptravel_booking_message() {
 	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
+		return;
+	}
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
 

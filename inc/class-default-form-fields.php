@@ -133,6 +133,9 @@ class WP_Travel_Default_Form_Fields {
 	 * @return array Returns form fields.
 	 */
 	public static function _billing() {
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
 		global $post, $wt_cart;
 
 		$trip_id    = isset( $post->ID ) ? $post->ID : 0;
@@ -155,12 +158,10 @@ class WP_Travel_Default_Form_Fields {
 				$pax_size = $booked_pax_size;
 			}
 		}
-		// if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ) {
-		// 	if ( is_array( $_REQUEST['pax'] ) ) {
-		// 		$pax_size = array_sum( $_REQUEST['pax'] );
-		// 	}
-		// }
 
+		/**
+		 * We are checking nonce above using WP_Travel::verify_nonce();
+		 */
 		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( wp_unslash( $_GET['price_key'] ) ) : '';
 
 		$booking_fileds = array(
@@ -184,12 +185,7 @@ class WP_Travel_Default_Form_Fields {
 				'default'  => $price_key,
 				'priority' => 98,
 			),
-		// 'post_id' => array(
-		// 'type' => 'hidden',
-		// 'name' => 'wp_travel_post_id',
-		// 'id' => 'wp-travel-post-id',
-		// 'default' => $trip_id,
-		// ),
+
 		);
 		if ( isset( $max_pax ) && '' != $max_pax ) {
 			$booking_fileds['pax']['validations']['max'] = $max_pax;

@@ -225,6 +225,10 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function redirect_reset_password_link() {
 
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
+
 		if ( WP_Travel::is_page( 'dashboard' ) && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
 
 			$value = sprintf( '%s:%s', sanitize_text_field( wp_unslash( $_GET['login'] ) ), sanitize_text_field( wp_unslash( $_GET['key'] ) ) );
