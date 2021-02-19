@@ -13,9 +13,7 @@
 function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
-	if ( version_compare( WP_TRAVEL_VERSION, '1.0.6', '>' ) ) {
-		wptravel_upgrade_to_110();
-	}
+	
 	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
 	}
@@ -549,25 +547,6 @@ function wptravel_publish_metabox() {
 	}
 }
 add_action( 'post_submitbox_misc_actions', 'wptravel_publish_metabox' );
-
-/**
- * Upgrade Function WP Travel.
- */
-function wptravel_upgrade_to_110() {
-	$itineraries        = get_posts(
-		array(
-			'post_type'   => 'itineraries',
-			'post_status' => 'publish',
-		)
-	);
-	$current_db_version = get_option( 'wp_travel_version' );
-	if ( ! $current_db_version ) {
-		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
-	}
-	if ( count( $itineraries ) > 0 ) {
-		include_once sprintf( '%s/upgrade/106-110.php', WP_TRAVEL_ABSPATH );
-	}
-}
 
 /*
  * ADMIN COLUMN - HEADERS
