@@ -9,23 +9,16 @@ class WP_Travel_Ajax_Trip_Extras {
 	}
 
 	public static function get_trip_extras() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
-		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
-			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-			WP_Travel_Helpers_REST_API::response( $error );
-		}
+		WP_Travel::verify_nonce();
+
 		$response = WP_Travel_Helpers_Trip_Extras::get_trip_extras();
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function search_trip_extras() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
-		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
-			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-			WP_Travel_Helpers_REST_API::response( $error );
-		}
-		$args      = array();
-		$args['s'] = ! empty( $_GET['keyword'] ) ? esc_attr( $_GET['keyword'] ) : '';
+		$requests = WP_Travel::get_sanitize_request();
+
+		$args['s'] = ! empty( $requests['keyword'] ) ? sanitize_text_field( $requests['keyword'] ) : '';
 		$response  = WP_Travel_Helpers_Trip_Extras::get_trip_extras( $args );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
