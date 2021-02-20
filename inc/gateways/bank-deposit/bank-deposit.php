@@ -58,8 +58,10 @@ function wptravel_submit_bank_deposit_slip() {
 		}
 		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . '-' . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
 		$target_file = $target_dir . $filename;
-
-		$tmp_name = $tmp_name = sanitize_text_field( wp_unslash( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) );
+		$tmp_name = '';
+		if ( isset( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) ) {
+			$tmp_name = sanitize_text_field( wp_unslash( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) );
+		}
 
 		$ext = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 
