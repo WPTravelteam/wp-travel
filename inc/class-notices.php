@@ -74,7 +74,7 @@ class WP_Travel_Notices {
 				}
 				?>
 				<div class="wp-travel-error">
-					<strong><?php esc_html_e( 'Error:' ); ?></strong>
+					<strong><?php esc_html_e( 'Error:', 'wp-travel' ); ?></strong>
 					<?php echo esc_html( $notice ); ?>
 				</div>
 				<?php

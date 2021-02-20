@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.4.7\n"
+"Project-Id-Version: WP Travel 4.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-19 17:12:07+00:00\n"
+"POT-Creation-Date: 2021-02-20 09:27:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -339,33 +339,14 @@ msgid "Multiple Select"
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:213 inc/cart/class-cart.php:384
-#: inc/cart/class-cart.php:433 inc/class-wp-travel-email.php:74
-#: inc/class-wp-travel-email.php:94 inc/class-wp-travel-form-handler.php:52
-#: inc/class-wp-travel-form-handler.php:56
-#: inc/class-wp-travel-form-handler.php:148
-#: inc/class-wp-travel-user-account.php:191
-#: inc/class-wp-travel-user-account.php:210
-#: inc/class-wp-travel-user-account.php:230
-#: inc/class-wp-travel-user-account.php:237
-#: inc/class-wp-travel-user-account.php:243
-#: inc/class-wp-travel-user-account.php:257
-#: inc/class-wp-travel-user-account.php:263
-#: inc/gateways/bank-deposit/bank-deposit.php:56
-#: inc/gateways/bank-deposit/bank-deposit.php:74
-#: inc/wp-travel-user-functions.php:106
-msgid "Error:"
-msgstr ""
-
-#: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:213 inc/cart/class-cart.php:384
-#: inc/cart/class-cart.php:433
+#: inc/cart/class-cart.php:213 inc/cart/class-cart.php:373
+#: inc/cart/class-cart.php:422
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: core/lib/cart.php:457 inc/cart/class-cart.php:516
+#: core/lib/cart.php:457 inc/cart/class-cart.php:505
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
@@ -1070,7 +1051,7 @@ msgid "General Settings"
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:113 inc/class-default-form-fields.php:28
-#: inc/class-default-form-fields.php:255 inc/deprecated/440.php:316
+#: inc/class-default-form-fields.php:255 inc/deprecated/440.php:311
 #: inc/email-template-functions.php:90 inc/email-template-functions.php:195
 #: inc/email-template-functions.php:376 inc/email-template-functions.php:746
 #: inc/email-template-functions.php:1054 inc/email-template-functions.php:1255
@@ -1177,7 +1158,7 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:162
 #: inc/booking-functions.php:484 inc/booking-functions.php:488
 #: inc/booking-functions.php:512 inc/booking-functions.php:516
-#: inc/class-assets.php:244 inc/class-assets.php:287
+#: inc/class-assets.php:243 inc/class-assets.php:286
 #: inc/class-wp-travel-email.php:147 inc/currencies.php:342
 #: inc/helpers/helpers-stat.php:224 inc/helpers/helpers-stat.php:396
 #: inc/helpers/helpers-stat.php:499 inc/helpers.php:714 inc/helpers.php:759
@@ -1741,7 +1722,7 @@ msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:597
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1449
-#: inc/deprecated/440.php:354 inc/helpers.php:2634
+#: inc/deprecated/440.php:349 inc/helpers.php:2634
 msgid "Trip Duration"
 msgstr ""
 
@@ -2353,7 +2334,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:23
-#: inc/helpers/helpers-price.php:735
+#: inc/helpers/helpers-price.php:738
 msgid "Partial Payment"
 msgstr ""
 
@@ -2553,7 +2534,7 @@ msgstr ""
 
 #: inc/booking-functions.php:356 inc/booking-functions.php:415
 #: inc/class-default-form-fields.php:106 inc/class-default-form-fields.php:231
-#: inc/deprecated/440.php:279 inc/email-template-functions.php:77
+#: inc/deprecated/440.php:274 inc/email-template-functions.php:77
 #: inc/email-template-functions.php:182 inc/email-template-functions.php:363
 #: inc/email-template-functions.php:704 inc/email-template-functions.php:1012
 msgid "Country"
@@ -2591,7 +2572,7 @@ msgstr ""
 
 #: inc/booking-functions.php:481 inc/booking-functions.php:509
 #: inc/cart/cart-mini.php:387 inc/class-default-form-fields.php:170
-#: inc/deprecated/440.php:368 inc/email-template-functions.php:43
+#: inc/deprecated/440.php:363 inc/email-template-functions.php:43
 #: inc/email-template-functions.php:148 inc/email-template-functions.php:329
 #: inc/email-template-functions.php:628 inc/email-template-functions.php:936
 #: inc/email-template-functions.php:1445 inc/helpers.php:2649
@@ -2718,67 +2699,65 @@ msgstr ""
 msgid "Traveler Details"
 msgstr ""
 
-#: inc/cart/checkout.php:161 inc/deprecated/440.php:99 inc/helpers.php:2621
+#: inc/cart/checkout.php:161 inc/deprecated/440.php:94 inc/helpers.php:2621
 #: inc/helpers.php:2625 inc/helpers.php:2657 inc/helpers.php:2665
 #: inc/template-functions.php:575 inc/template-functions.php:2012
 #: inc/template-functions.php:2396
 msgid "Book Now"
 msgstr ""
 
-#: inc/class-ajax.php:224 inc/class-ajax.php:268 inc/helpers.php:1313
+#: inc/class-ajax.php:234 inc/class-ajax.php:278 inc/helpers.php:1313
 #: inc/helpers.php:3370
 msgid "Custom"
 msgstr ""
 
-#: inc/class-ajax.php:371
+#: inc/class-ajax.php:381
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:389
-msgid "<strong>Error : </strong>Coupon Code cannot be empty"
-msgstr ""
-
-#: inc/class-ajax.php:400
-msgid "<strong>Error : </strong>Invalid Coupon Code"
+#: inc/class-ajax.php:399
+msgid "Coupon Code cannot be empty"
 msgstr ""
 
 #: inc/class-ajax.php:410
+msgid "Invalid Coupon Code"
+msgstr ""
+
+#: inc/class-ajax.php:420
 msgid ""
-"<strong>Error : </strong>The coupoun is either inactive or has expired. "
-"Coupon Code could not be applied."
+"The coupoun is either inactive or has expired. Coupon Code could not be "
+"applied."
 msgstr ""
 
-#: inc/class-ajax.php:422
-msgid "<strong>Error : </strong>This coupon cannot be applied to the selected trip"
+#: inc/class-ajax.php:432
+msgid "This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:438
-msgid ""
-"<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage "
-"exceeded."
+#: inc/class-ajax.php:448
+msgid "Coupon Expired. Maximum no. of coupon usage exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:455
-msgid "<strong>Error : </strong>Cannot apply coupon for this trip."
+#: inc/class-ajax.php:465
+msgid "Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:462
-msgid "<strong> </strong>Coupon applied succesfully."
+#: inc/class-ajax.php:472
+msgid "Coupon applied succesfully."
 msgstr ""
 
-#: inc/class-assets.php:263
+#: inc/class-assets.php:262
 msgid "Chart Stat"
 msgstr ""
 
-#: inc/class-assets.php:271
+#: inc/class-assets.php:270
 msgid "More"
 msgstr ""
 
-#: inc/class-assets.php:272
+#: inc/class-assets.php:271
 msgid "Less"
 msgstr ""
 
-#: inc/class-assets.php:347
+#: inc/class-assets.php:346
 msgid "Select Files from Your Computer"
 msgstr ""
 
@@ -2814,7 +2793,7 @@ msgid "Billing Address"
 msgstr ""
 
 #: inc/class-default-form-fields.php:75 inc/class-wp-travel-user-account.php:44
-#: inc/deprecated/440.php:291 inc/email-template-functions.php:82
+#: inc/deprecated/440.php:286 inc/email-template-functions.php:82
 #: inc/email-template-functions.php:187 inc/email-template-functions.php:368
 #: inc/email-template-functions.php:718 inc/email-template-functions.php:1026
 #: templates/account/tab-content/dashboard.php:49
@@ -2829,26 +2808,26 @@ msgstr ""
 msgid "Postal"
 msgstr ""
 
-#: inc/class-default-form-fields.php:116 inc/deprecated/440.php:381
+#: inc/class-default-form-fields.php:116 inc/deprecated/440.php:376
 #: inc/email-template-functions.php:94 inc/email-template-functions.php:199
 #: inc/email-template-functions.php:380 inc/email-template-functions.php:760
 #: inc/email-template-functions.php:1068
 msgid "Note"
 msgstr ""
 
-#: inc/class-default-form-fields.php:119 inc/deprecated/440.php:384
+#: inc/class-default-form-fields.php:119 inc/deprecated/440.php:379
 msgid "Enter some notes..."
 msgstr ""
 
-#: inc/class-default-form-fields.php:206 inc/deprecated/440.php:252
+#: inc/class-default-form-fields.php:206 inc/deprecated/440.php:247
 msgid "First Name"
 msgstr ""
 
-#: inc/class-default-form-fields.php:218 inc/deprecated/440.php:266
+#: inc/class-default-form-fields.php:218 inc/deprecated/440.php:261
 msgid "Last Name"
 msgstr ""
 
-#: inc/class-default-form-fields.php:242 inc/deprecated/440.php:303
+#: inc/class-default-form-fields.php:242 inc/deprecated/440.php:298
 msgid "Phone Number"
 msgstr ""
 
@@ -2866,6 +2845,11 @@ msgstr ""
 
 #: inc/class-default-form-fields.php:288
 msgid "Female"
+msgstr ""
+
+#: inc/class-notices.php:77 inc/class-wp-travel-form-handler.php:52
+#: inc/class-wp-travel-form-handler.php:56 inc/wp-travel-user-functions.php:106
+msgid "Error:"
 msgstr ""
 
 #: inc/class-post-status.php:38
@@ -3228,19 +3212,19 @@ msgid "Username is required."
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:91
-msgid "<strong>Error :</strong>Invalid Username or Password"
+msgid "Invalid Username or Password"
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:96
-msgid "<strong>Error :</strong>Username can not be empty"
+msgid "Username can not be empty"
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:199
-msgid "<strong>Error :</strong>Please enter your password."
+msgid "Please enter your password."
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:203
-msgid "<strong>Error :</strong>Passwords do not match"
+msgid "Passwords do not match"
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:282
@@ -3253,7 +3237,7 @@ msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:289
 #: inc/class-wp-travel-form-handler.php:366
-msgid "<strong>Error:</strong> %s is a required field."
+msgid "%s is a required field."
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:306
@@ -4395,16 +4379,16 @@ msgstr ""
 msgid "Used %1$1s out of %2$2s"
 msgstr ""
 
-#: inc/deprecated/440.php:109 inc/form-fields.php:70 inc/helpers.php:135
+#: inc/deprecated/440.php:104 inc/form-fields.php:70 inc/helpers.php:135
 #: inc/trip-enquiries.php:55
 msgid "By contacting us, you agree to our "
 msgstr ""
 
-#: inc/deprecated/440.php:115 inc/form-fields.php:84 inc/trip-enquiries.php:119
+#: inc/deprecated/440.php:110 inc/form-fields.php:84 inc/trip-enquiries.php:119
 msgid "Privacy Policy"
 msgstr ""
 
-#: inc/deprecated/440.php:328 inc/email-template-functions.php:57
+#: inc/deprecated/440.php:323 inc/email-template-functions.php:57
 #: inc/email-template-functions.php:162 inc/email-template-functions.php:343
 #: inc/email-template-functions.php:656 inc/email-template-functions.php:964
 #: inc/email-template-functions.php:1473 inc/template-functions.php:2009
@@ -4412,7 +4396,7 @@ msgstr ""
 msgid "Arrival Date"
 msgstr ""
 
-#: inc/deprecated/440.php:341 inc/email-template-functions.php:62
+#: inc/deprecated/440.php:336 inc/email-template-functions.php:62
 #: inc/email-template-functions.php:167 inc/email-template-functions.php:348
 #: inc/email-template-functions.php:670 inc/email-template-functions.php:978
 #: inc/email-template-functions.php:1487 inc/template-functions.php:2010
@@ -4685,36 +4669,36 @@ msgstr ""
 msgid "Unable to create directory \"wp-travel-slip\""
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:74
+#: inc/gateways/bank-deposit/bank-deposit.php:76
 msgid "Uploaded files are not allowed."
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:133
+#: inc/gateways/bank-deposit/bank-deposit.php:135
 msgid "Amount"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:138
+#: inc/gateways/bank-deposit/bank-deposit.php:140
 msgid "Bank Payment"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:139
+#: inc/gateways/bank-deposit/bank-deposit.php:141
 msgid "Submit Payment Receipt"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:140
+#: inc/gateways/bank-deposit/bank-deposit.php:142
 msgid "View Bank Details"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:177
+#: inc/gateways/bank-deposit/bank-deposit.php:179
 #: templates/single-wp-travel-reviews.php:77
 msgid "Submit"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:196
+#: inc/gateways/bank-deposit/bank-deposit.php:198
 msgid "Submit Bank Payment Receipt"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:201
+#: inc/gateways/bank-deposit/bank-deposit.php:203
 msgid "Bank Details"
 msgstr ""
 
@@ -8378,7 +8362,7 @@ msgstr ""
 msgid "youtube-square"
 msgstr ""
 
-#: inc/helpers/helpers-price.php:736
+#: inc/helpers/helpers-price.php:739
 msgid "Full Payment"
 msgstr ""
 
