@@ -10,34 +10,32 @@ class WP_Travel_Ajax_Trip_Pricings_Categories {
 	}
 
 	public static function remove_pricing_categories() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
-		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
-			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-			WP_Travel_Helpers_REST_API::response( $error );
-		}
+		WP_Travel::verify_nonce();
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
-		$pricing_id = ! empty( $_GET['pricing_id'] ) ? absint( $_GET['pricing_id'] ) : 0;
+		/**
+		 * We are checking nonce using WP_Travel::verify_nonce(); method.
+		 */
+		$pricing_id = ! empty( $_GET['pricing_id'] ) ? absint( $_GET['pricing_id'] ) : 0; // @phpcs:ignore
 		$response   = WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $pricing_id );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function remove_pricing_category() {
-		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) );
-		if ( ! wp_verify_nonce( $nonce, 'wp_travel_nonce' ) ) {
-			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-			WP_Travel_Helpers_REST_API::response( $error );
-		}
+		WP_Travel::verify_nonce();
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
-		$pricing_id  = ! empty( $_GET['pricing_id'] ) ? absint( $_GET['pricing_id'] ) : 0;
-		$category_id = ! empty( $_GET['category_id'] ) ? absint( $_GET['category_id'] ) : 0;
+		/**
+		 * We are checking nonce using WP_Travel::verify_nonce(); method.
+		 */
+		$pricing_id  = ! empty( $_GET['pricing_id'] ) ? absint( $_GET['pricing_id'] ) : 0; // @phpcs:ignore
+		$category_id = ! empty( $_GET['category_id'] ) ? absint( $_GET['category_id'] ) : 0;  // @phpcs:ignore
 		$response    = WP_Travel_Helpers_Trip_Pricing_Categories::remove_individual_pricing_category( $pricing_id, $category_id );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
