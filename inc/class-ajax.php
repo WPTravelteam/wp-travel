@@ -386,7 +386,7 @@ class WP_Travel_Ajax {
 
 		if ( empty( $_POST['CouponCode'] ) ) {
 
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
 
 			return;
 		}
@@ -397,7 +397,7 @@ class WP_Travel_Ajax {
 
 		if ( ! $coupon_id ) {
 
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Invalid Coupon Code', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Invalid Coupon Code', 'wp-travel' ) ), 'error' );
 
 			return;
 
@@ -407,7 +407,7 @@ class WP_Travel_Ajax {
 
 		if ( ! $date_validity ) {
 
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
 
 			return;
 
@@ -419,7 +419,7 @@ class WP_Travel_Ajax {
 
 		if ( ! $trips_validity ) {
 
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
 
 			return;
 
@@ -435,7 +435,7 @@ class WP_Travel_Ajax {
 
 			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
 
-				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
 
 				return;
 
@@ -452,14 +452,14 @@ class WP_Travel_Ajax {
 			$cart_amounts = $wt_cart->get_total( $with_discount = false );
 			$total        = $cart_amounts['total'];
 			if ( $discount_amount >= $total ) {
-				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong>Error : </strong>Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
 				return;
 			}
 		}
 
 		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, sanitize_text_field( $_POST['CouponCode'] ) ); // $_POST['CouponCode'] @since 3.1.7
 
-		WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( '<strong> </strong>Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
+		WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
 
 		echo true;
 		die;

@@ -53,7 +53,7 @@ function wptravel_submit_bank_deposit_slip() {
 			$created = mkdir( $target_dir, 0755, true );
 
 			if ( ! $created ) {
-				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
 			}
 		}
 		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . '-' . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
@@ -71,7 +71,7 @@ function wptravel_submit_bank_deposit_slip() {
 			}
 		} else {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
 			$upload_ok = false;
 		}
 

@@ -1,18 +1,27 @@
 <?php
 
 class WP_Travel_Notices {
-	private $errors = array();
+
+	/**
+	 * Error Messages.
+	 *
+	 * @var $errors list of error message.
+	 */
+	private $errors  = array();
+
+	/**
+	 * Success Messages.
+	 *
+	 * @var $errors list of success message.
+	 */
 	private $success = array();
 	function __construct() {
 
 	}
 
 	function add( $value, $type = 'error' ) {
-
 		if ( empty( $value ) ) {
-
 			return;
-
 		}
 
 		if ( 'error' === $type ) {
@@ -50,36 +59,36 @@ class WP_Travel_Notices {
 		}
 	}
 
-	function print_notices( $type, $destroy = true ){
+	function print_notices( $type, $destroy = true ) {
 
 		$notices = $this->get( $type, $destroy );
 
 		if ( empty( $notices ) ) {
-
 			return;
-
 		}
 
 		if ( $notices && 'error' === $type ) {
-
 			foreach ( $notices as $key => $notice ) {
-
 				if ( 'error ' === $notice ) {
-
 					return;
 				}
-
-				echo '<div class="wp-travel-error">' . esc_html( $notice ) . '</div>';
-
+				?>
+				<div class="wp-travel-error">
+					<strong><?php esc_html_e( 'Error:' ); ?></strong>
+					<?php echo esc_html( $notice ); ?>
+				</div>
+				<?php
 			}
 			return;
 
 		} elseif ( $notices && 'success' === $type ) {
 
 			foreach ( $notices as $key => $notice ) {
-
-				echo '<div class="wp-travel-message">' . esc_html( $notice ) . '</div>';
-
+				?>
+				<div class="wp-travel-message">
+					<?php echo esc_html( $notice ); ?>
+				</div>
+				<?php
 			}
 			return;
 

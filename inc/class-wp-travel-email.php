@@ -71,7 +71,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 			$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
 			if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers ) ) {
-				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 			}
 		}
 
@@ -91,7 +91,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
 		if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers ) ) {
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 		}
 	}
 
