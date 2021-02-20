@@ -240,6 +240,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.4.8 =
+Release Date: 20th February, 2021
+
+Fixes:
+* Fixing security issues.
+
 = 4.4.7 =
 Release Date: 19th February, 2021
 

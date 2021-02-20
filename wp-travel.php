@@ -351,7 +351,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			// Helpers.
 			require WP_TRAVEL_ABSPATH . '/core/helpers/settings.php';
-			require WP_TRAVEL_ABSPATH . '/core/helpers/license.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/modules.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/media.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-pricing-categories-taxonomy.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-extras.php';
