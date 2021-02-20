@@ -449,16 +449,27 @@ function wptravel_get_payment_id( $booking_id ) {
  * @param boolean $return_price
  * @return void
  */
-function wptravel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing_id = null, $trip_start_date = null, $return_price = false ) {
-	if ( ! $trip_id ) {
+function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id = null, $trip_start_date = null, $return_price = false ) {
+	if ( ! $args ) {
 		return 0;
+	}
+
+	if ( is_array( $args ) ) {
+		$trip_id         = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
+		$pax             = isset( $args['pax'] ) ? $args['pax'] : 0; // May be not required. @todo need to verify this field..
+		$price_key       = isset( $args['price_key'] ) ? $args['price_key'] : '';
+		$pricing_id      = isset( $args['pricing_id'] ) ? $args['pricing_id'] : null;
+		$trip_start_date = isset( $args['trip_start_date'] ) ? $args['trip_start_date'] : null;
+		$return_price    = isset( $args['return_price'] ) ? $args['return_price'] : false;
+		$request_data    = isset( $args['request_data'] ) ? $args['request_data'] : array();
+	} else {
+		$trip_id = $args; // Legacy.
 	}
 
 	$enable_pricing_options = wptravel_is_enable_pricing_options( $trip_id );
 	$group_size             = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 	$group_size             = ! empty( $group_size ) ? $group_size : 999;
 
-	// $pax_label = ! empty( $per_person_text ) ? $per_person_text : __( 'Person', 'wp-travel' );
 	if ( ! empty( $price_key ) && $enable_pricing_options ) {
 		$valid_price_key = wptravel_is_price_key_valid( $trip_id, $price_key );
 
@@ -469,19 +480,11 @@ function wptravel_get_cart_attrs( $trip_id, $pax = 0, $price_key = '', $pricing_
 
 				foreach ( $pricing_data as $p_ky => $pricing ) :
 					// Product Metas.
-					$trip_start_date       = isset( $_REQUEST['arrival_date'] ) && '' !== $_REQUEST['arrival_date'] ? sanitize_text_field( wp_unslash( $_REQUEST['arrival_date'] ) ) : '';
+					$trip_start_date       = isset( $request_data['arrival_date'] ) && '' !== $request_data['arrival_date'] ? $request_data['arrival_date'] : '';
 					$pricing_default_types = wptravel_get_pricing_variation_options();
-					// $pax_label             = isset( $pricing['type'] ) && 'custom' === $pricing['type'] && '' !== $pricing['custom_label'] ? $pricing['custom_label'] : $pricing_default_types[ $pricing['type'] ];
 					$max_available = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
 					$min_available = ! empty( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1;
 
-					// if ( $max_available ) {
-					// $max_available = $pricing['max_pax'];
-					// $max_attr = 'max=' . $pricing['max_pax'];
-					// }
-					// if ( $min_available ) {
-					// $min_available = $pricing['min_pax'];
-					// }
 				endforeach;
 			}
 		}
