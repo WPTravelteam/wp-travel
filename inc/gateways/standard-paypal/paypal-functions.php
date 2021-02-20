@@ -68,14 +68,6 @@ function wptravel_paypal_ipn_process() {
 	 */
 	if ( $verified = $listener->processIpn() ) {
 
-		/**
-		 * Log successful purchases
-		 */
-		$transaction_data = $listener->getPostData(); // POST data array.
-		$transaction_data = wptravel_sanitize_array( $transaction_data );
-
-		file_put_contents( 'ipn_success.log', print_r( $transaction_data, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
-
 		$message = null;
 		/**
 		 * Verify seller PayPal email with PayPal email in settings
@@ -197,7 +189,6 @@ function wptravel_paypal_ipn_process() {
 		 * Log errors
 		 */
 		$errors = $listener->getErrors();
-		file_put_contents( 'ipn_errors.log', print_r( $errors, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
 
 		/**
 		 * An Invalid IPN *may* be caused by a fraudulent transaction attempt. It's
