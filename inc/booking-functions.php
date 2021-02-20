@@ -457,10 +457,10 @@ function wptravel_get_booking_chart() {
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
-		<div class="right-block <?php echo esc_attr( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ? 'has-compare' : '' ); ?>">
+		<div class="right-block <?php echo esc_attr( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ? 'has-compare' : '' ); ?>">
 
 			<div class="wp-travel-stat-info">
-				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+				<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
 					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
 				</div>
@@ -489,7 +489,7 @@ function wptravel_get_booking_chart() {
 					<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ); ?></p>
 				</div>
 			</div>
-			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+			<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) : ?>
 
 				<div class="wp-travel-stat-info">
 					<div class="right-block-single for-compare">

@@ -638,16 +638,28 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
-		 * Create WP Travel nonce in case of any request.
+		 * Get WP Travel request.
 		 *
 		 * @since WP Travel 4.4.7
 		 * @return boolean
 		 */
-		public static function get_sanitize_request() {
-			if ( ! self::verify_nonce( true ) ) {
+		public static function get_sanitize_request( $method = 'get' ) {
+			if ( ! self::verify_nonce( true ) ) { // verify nonce.
 				return array();
 			}
-			return wptravel_sanitize_array( ( $_GET ) );
+			$data = array();
+			switch ( $method ) {
+				case 'post':
+					$data = wptravel_sanitize_array( ( $_POST ) ); // @phpcs:ignore
+					break;
+				case 'request':
+					$data = wptravel_sanitize_array( ( $_REQUEST ) ); // @phpcs:ignore
+					break;
+				default:
+					$data = wptravel_sanitize_array( ( $_GET ) ); // @phpcs:ignore
+					break;
+			}
+			return $data;
 		}
 
 		/**

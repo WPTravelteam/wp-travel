@@ -82,13 +82,8 @@ function wp_travel_get_booking_form() {
 	global $post;
 	$trip_id  = 0;
 	$settings = wptravel_get_settings();
-	if ( isset( $_REQUEST['trip_id'] ) ) {
-		$trip_id = absint( $_REQUEST['trip_id'] );
-	} elseif ( isset( $_POST['wp_travel_post_id'] ) ) {
-		$trip_id = absint( $_POST['wp_travel_post_id'] );
-	} elseif ( isset( $post->ID ) ) {
-		$trip_id = $post->ID;
-	}
+	
+	$trip_id = $post->ID;
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	$form_options = array(
 		'id'            => 'wp-travel-booking',
