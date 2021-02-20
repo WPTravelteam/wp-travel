@@ -70,9 +70,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								break;
 							}
 						}
-						// $payout = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$categories = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
-						// print_r( $categories );
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
@@ -81,7 +79,6 @@ if ( wptravel_is_react_version_enabled() ) {
 						}
 
 						$cart_pax = (array) $cart_item['trip'];
-						// print_r( $cart_pax );
 						$cart_total = 0;
 
 						$trip_date          = ! empty( $cart_item['arrival_date'] ) ? $cart_item['arrival_date'] : '';
