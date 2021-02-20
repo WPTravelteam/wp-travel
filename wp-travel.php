@@ -402,9 +402,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * Include admin files conditionally.
 		 */
 		public function conditional_includes() {
-			if ( ! $screen = get_current_screen() ) {
+			if ( ! get_current_screen() ) {
 				return;
 			}
+			$screen = get_current_screen();
 			switch ( $screen->id ) {
 				case 'options-permalink':
 					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
