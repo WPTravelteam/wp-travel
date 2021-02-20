@@ -71,8 +71,10 @@ function wptravel_paypal_ipn_process() {
 		/**
 		 * Log successful purchases
 		 */
-		$transactionData = $listener->getPostData(); // POST data array
-		file_put_contents( 'ipn_success.log', print_r( $transactionData, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
+		$transaction_data = $listener->getPostData(); // POST data array.
+		$transaction_data = wptravel_sanitize_array( $transaction_data );
+
+		file_put_contents( 'ipn_success.log', print_r( $transaction_data, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
 
 		$message = null;
 		/**

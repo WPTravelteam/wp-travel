@@ -40,8 +40,10 @@ if ($verified = $listener->processIpn())
         4. Check that $_POST['payment_amount'] and $_POST['payment_currency'] are correct
     */
     $transactionRawData = $listener->getRawPostData();      // raw data from PHP input stream
-    $transactionData = $listener->getPostData();            // POST data array
-    file_put_contents('ipn_success.log', print_r($transactionData, true) . PHP_EOL, LOCK_EX | FILE_APPEND);
+    $transaction_data = $listener->getPostData();            // POST data array
+	$transaction_data = wptravel_sanitize_array( $transaction_data );
+
+    file_put_contents('ipn_success.log', print_r($transaction_data, true) . PHP_EOL, LOCK_EX | FILE_APPEND);
 
 } else {
 
