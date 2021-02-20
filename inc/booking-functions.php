@@ -286,7 +286,7 @@ function wptravel_book_now() {
  */
 function wptravel_get_booking_chart() {
 
-	$submission_request = isset( $_REQUEST['_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
+	$submission_request = WP_Travel::get_sanitize_request();
 
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array();
 	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
