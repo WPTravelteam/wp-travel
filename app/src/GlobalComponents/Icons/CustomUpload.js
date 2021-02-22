@@ -45,7 +45,8 @@ const CustomUploadContent = (props) => {
                 sessionStorage.setItem('wpTravelIconModuleUploaderData', JSON.stringify(selectedItems));
 
             }
-            setOpen(true);
+            // setOpen(true);
+            props.tabHandleClick(true);
         })
 
         const onMediaUploaderBtnClicked = () => {

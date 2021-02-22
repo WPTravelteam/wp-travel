@@ -28,11 +28,12 @@ const WPTravelIcons = (props) => {
             wp_travel_trip_facts_settings: [..._allFacts]
         })
     }
-    console.log(props.openModal);
-    const [ isOpen, setOpen ] = useState( true );
-    const openModal = () => setOpen( true );
+
+    // const [ isOpen, setOpen ] = useState( true);
+    // const openModal = () => setOpen( true );
     const closeModal = () => {
-        setOpen( false );
+        // setOpen( false );
+        props.modalHandleClick(false);
     }
 
     //Update tab settings.
@@ -45,7 +46,8 @@ const WPTravelIcons = (props) => {
             updateFact( 'fa_icon', FAIconValue, index );
             updateFact( 'selected_icon_type', 'fontawesome-icon', index );
             sessionStorage.clear();
-            setOpen(false);
+            props.modalHandleClick(false);
+            // setOpen(false);
 
         } else if( 'custom-upload' == lastSelectedTab ) {
 
@@ -58,13 +60,15 @@ const WPTravelIcons = (props) => {
                 const { url } = selectedImgDataObj;
                 updateFact( 'icon_img', url, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
+                props.modalHandleClick(false);
                 // sessionStorage.clear();
-                setOpen(false);
+                // setOpen(false);
             } else {
                 updateFact( 'icon_img', '', index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
+                props.modalHandleClick(false);
                 // sessionStorage.clear();
-                setOpen(false);
+                // setOpen(false);
             }
 
         } else if( 'icon-class' == lastSelectedTab ) {
@@ -73,17 +77,18 @@ const WPTravelIcons = (props) => {
             updateFact( 'icon', iconClassValue, index );
             updateFact( 'selected_icon_type', 'icon-class', index );
             sessionStorage.clear();
-            setOpen(false);
+            props.modalHandleClick(false);
+            // setOpen(false);
 
         }
     }
 
     return <>
         {
-            isOpen && (
+            // isOpen && (
                 <Modal key={props.factIndex} className="wti__icon_select_modal"
                     title={<><i className="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
-                    onRequestClose={ props.onClose }>
+                    onRequestClose={ closeModal }>
                     <TabPanel className="my-tab-panel"
                         activeClass="active-tab"
                         initialTabName= { props.factData.selected_icon_type ? props.factData.selected_icon_type : 'icon-class' }
@@ -110,7 +115,7 @@ const WPTravelIcons = (props) => {
                             },
                         ] }>
                         {
-                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} /> : <>{__('Error', 'wp-travel')}</>
+                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} tabHandleClick = {props.modalHandleClick} /> : <>{__('Error', 'wp-travel')}</>
                         }
                     </TabPanel>
                     <div className="wti__insert_icon">
@@ -127,7 +132,7 @@ const WPTravelIcons = (props) => {
                         </Button>
                     </div>
                 </Modal>
-            )
+            // )
         }
     </>
 }

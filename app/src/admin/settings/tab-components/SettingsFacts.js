@@ -71,8 +71,10 @@ const SettingsFact = () => {
         })
     }
 
+    const  [ isOpenModal, setIsOpenModal ] = useState(false);
+
     const openModal = () => {
-        console.log('test');
+        setIsOpenModal(true);
     }
 
     let FieldTypeContent = ( props  ) => {
@@ -201,7 +203,10 @@ const SettingsFact = () => {
                                             }
                                             <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         </div>
-                                        <WPTravelIcons factData = {fact} factIndex = {index} onClose = {openModal} />
+                                        {
+                                            isOpenModal &&
+                                            <WPTravelIcons factData = {fact} factIndex = {index} modalHandleClick = {setIsOpenModal} />
+                                        }
                                     </PanelRow>
 
                                     <PanelRow className="wp-travel-action-section">
