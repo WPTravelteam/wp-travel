@@ -285,15 +285,35 @@ function wptravel_get_dropdown_list( $args = array() ) {
 	return $dropdown;
 }
 
-function wptravel_sanitize_array( $array ) {
+/**
+ * Sanitize data. It may be either string or array
+ * 
+ * @param mixed $array input data
+ * @param bool	$wp_kese_post if data need wp keses or not.
+ */
+function wptravel_sanitize_array( $array, $wp_kese_post = false ) {
 	if ( is_string( $array ) ) {
-		$array = sanitize_text_field( $array );
+		if ( $wp_kese_post ) {
+			$array = wp_kses_post( $array );
+		} else {
+			$array = sanitize_text_field( $array );
+		}
 	} elseif ( is_array( $array ) ) {
-		foreach ( $array as $key => &$value ) {
-			if ( is_array( $value ) ) {
-				$value = wptravel_sanitize_array( $value );
-			} else {
-				$value = sanitize_text_field( $value );
+		if ( $wp_kese_post ) { // Multiple foreach loop to reduce if condition checks.
+			foreach ( $array as $key => &$value ) {
+				if ( is_array( $value ) ) {
+					$value = wptravel_sanitize_array( $value, $wp_kese_post );
+				} else {
+					$value = wp_kses_post( $value );
+				}
+			}
+		} else {
+			foreach ( $array as $key => &$value ) {
+				if ( is_array( $value ) ) {
+					$value = wptravel_sanitize_array( $value, $wp_kese_post );
+				} else {
+					$value = sanitize_text_field( $value );
+				}
 			}
 		}
 	}
