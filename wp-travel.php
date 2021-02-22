@@ -151,7 +151,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 *
 			 * @since 3.1.8
 			 */
-			add_filter( 'wptravel_wpml_object_id', array( $this, 'get_wp_travel_page_id_by_locale' ), 11, 2 );
+			add_filter( 'wp_travel_wpml_object_id', array( $this, 'get_wp_travel_page_id_by_locale' ), 11, 2 );
 
 			/**
 			 * To resolve the pages mismatch issue when using WPML.
