@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20
 Requires at least: 5.4.1
 Tested up to: 5.6.1
 Requires PHP: 5.5
-Stable tag: 4.4.8
+Stable tag: 4.4.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -240,14 +240,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.4.8 =
-Release Date: 20th February, 2021
-
-Fixes:
-* Fixing security issues.
-
 = 4.4.7 =
-Release Date: 19th February, 2021
+Release Date: 22nd February, 2021
 
 Fixes:
 * Added nonce verification in missing form request and sanitize input data.

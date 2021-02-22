@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.4.8\n"
+"Project-Id-Version: WP Travel 4.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-22 06:43:44+00:00\n"
+"POT-Creation-Date: 2021-02-22 12:12:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3296,30 +3296,30 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:105
+#: inc/class-wp-travel-user-account.php:103
 msgid "Your Password has been updated successfully. Please Log in to continue."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:191
+#: inc/class-wp-travel-user-account.php:189
 msgid ""
 "This key is invalid or has already been used. Please reset your password "
 "again if needed."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:210
+#: inc/class-wp-travel-user-account.php:208
 msgid "Enter an email or username."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:237
-#: inc/class-wp-travel-user-account.php:243
+#: inc/class-wp-travel-user-account.php:235
+#: inc/class-wp-travel-user-account.php:241
 msgid "Invalid username or email."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:257
+#: inc/class-wp-travel-user-account.php:255
 msgid "Password reset is not allowed for this user."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:297
+#: inc/class-wp-travel-user-account.php:295
 msgid "Password Reset Request"
 msgstr ""
 
@@ -8790,19 +8790,19 @@ msgstr ""
 msgid "Bank Deposit"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:611
+#: inc/payments/wp-travel-payments.php:597
 msgid "Your booking has been canceled"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:615
+#: inc/payments/wp-travel-payments.php:601
 msgid "We've received your booking and payment details. We'll contact you soon."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:628
+#: inc/payments/wp-travel-payments.php:614
 msgid "Invalid"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:647
+#: inc/payments/wp-travel-payments.php:633
 msgid "Success"
 msgstr ""
 
@@ -8978,6 +8978,10 @@ msgstr ""
 
 #: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:26
 msgid "WP Travel Enquiry Form Widget"
+msgstr ""
+
+#: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:40
+msgid "Enquiry"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-featured.php:30
@@ -9304,19 +9308,19 @@ msgstr ""
 msgid "Upload Gallery images"
 msgstr ""
 
-#: templates/content-archive-itineraries.php:42
+#: templates/content-archive-itineraries.php:43
 #: templates/content-single-itineraries.php:45
 #: templates/shortcode/itinerary-item-list.php:40
 #: templates/shortcode/itinerary-item.php:106
 msgid "Offer"
 msgstr ""
 
-#: templates/content-archive-itineraries.php:52
+#: templates/content-archive-itineraries.php:53
 #: templates/shortcode/itinerary-item.php:44
 msgid "Permalink to: "
 msgstr ""
 
-#: templates/content-archive-itineraries.php:67
+#: templates/content-archive-itineraries.php:68
 #: templates/shortcode/itinerary-item-list.php:59
 #: templates/shortcode/itinerary-item.php:67
 msgid "%d Review"
@@ -9324,7 +9328,7 @@ msgid_plural "%d Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/content-archive-itineraries.php:117
+#: templates/content-archive-itineraries.php:118
 #: templates/shortcode/itinerary-item-list.php:109
 msgid "Explore"
 msgstr ""
@@ -9755,7 +9759,7 @@ msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: inc/trip-enquiries.php:481
+#: inc/trip-enquiries.php:484
 msgctxt "Trip Enquiry Form Title"
 msgid "Enquiry: %s"
 msgstr ""
