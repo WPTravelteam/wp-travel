@@ -470,12 +470,12 @@ class WP_Travel_Helpers_Pricings {
 			return 0;
 		}
 		$settings       = wptravel_get_settings();
-		$use_global     = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', true );
+		$use_global     = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
 
 		// Global Payout percent.
 		$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		// Trip specific payout percent.
-		$trip_payout_percent = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
+		$trip_payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 
 		global $wt_cart;
 		$items = $wt_cart->getItems();

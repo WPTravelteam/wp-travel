@@ -84,8 +84,8 @@ class WP_Travel_Helpers_Trips {
 		// $trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
-		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', true );
-		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
+		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
+		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		if ( ! $minimum_partial_payout_percent ) {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
@@ -317,10 +317,10 @@ class WP_Travel_Helpers_Trips {
 		if ( ! empty( $trip_data->minimum_partial_payout_use_global ) ) {
 			$minimum_partial_payout_use_global = $trip_data->minimum_partial_payout_use_global;
 		}
-		update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
+		update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
 
 		if ( ! empty( $trip_data->minimum_partial_payout_percent ) ) {
-			update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
+			update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
 		}
 
 		// Update trip gallery meta.
@@ -357,13 +357,13 @@ class WP_Travel_Helpers_Trips {
 		 * 
 		 * @since 4.0.4
 		 */
-		$prev_min_price = get_post_meta( $trip_id, 'wptravel_trip_price', true );
+		$prev_min_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
 		$args = array(
 			'trip_id' => $trip_id,
 		);
 		$min_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-		update_post_meta( $trip_id, 'wptravel_trip_price', $min_price, $prev_min_price );
+		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );

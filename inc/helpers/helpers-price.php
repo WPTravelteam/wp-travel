@@ -330,7 +330,7 @@ function wptravel_booking_data( $booking_id ) {
 	// Total trip price only in first payment id so we need to get total trip price from first payment id.
 	if ( is_array( $payment_ids ) && count( $payment_ids ) > 0 ) {
 		if ( isset( $payment_ids[0] ) ) {
-			$trip_price = ( get_post_meta( $payment_ids[0], 'wptravel_trip_price', true ) ) ? get_post_meta( $payment_ids[0], 'wptravel_trip_price', true ) : 0;
+			$trip_price = ( get_post_meta( $payment_ids[0], 'wp_travel_trip_price', true ) ) ? get_post_meta( $payment_ids[0], 'wp_travel_trip_price', true ) : 0;
 			$trip_price = number_format( $trip_price, 2, '.', '' );
 		}
 
@@ -345,7 +345,7 @@ function wptravel_booking_data( $booking_id ) {
 	} else {
 		$payment_id = $payment_ids;
 
-		$trip_price = ( get_post_meta( $payment_id, 'wptravel_trip_price', true ) ) ? get_post_meta( $payment_id, 'wptravel_trip_price', true ) : 0;
+		$trip_price = ( get_post_meta( $payment_id, 'wp_travel_trip_price', true ) ) ? get_post_meta( $payment_id, 'wp_travel_trip_price', true ) : 0;
 		$trip_price = number_format( $trip_price, 2, '.', '' );
 
 		$paid_amount = ( get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) ) ? get_post_meta( $payment_id, 'wp_travel_payment_amount', true ) : 0;

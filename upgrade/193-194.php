@@ -27,7 +27,7 @@ if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 			$args = array( 'trip_id' => $custom_post_id );
 			$price= WP_Travel_Helpers_Pricings::get_price( $args );
 			if ( $price ) {
-				update_post_meta( $custom_post_id, 'wptravel_trip_price', $price );
+				update_post_meta( $custom_post_id, 'wp_travel_trip_price', $price );
 			}
 		}
 	}
