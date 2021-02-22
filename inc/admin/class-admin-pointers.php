@@ -17,9 +17,6 @@ class WP_Travel_Admin_Info_Pointers {
 	function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
-		// add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
-		// add_filter( 'wp_travel_admin_pointers-'. WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
-		// add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
 		$after_multiple_pricing = get_option( 'wp_travel_user_after_multiple_pricing_category' );
 		if ( 'yes' === $after_multiple_pricing ) {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
@@ -43,7 +40,6 @@ class WP_Travel_Admin_Info_Pointers {
 		add_action( 'admin_notices', array( $this, 'wptravel_importer_upsell_notice' ) );
 		add_action( 'admin_init', array( $this, 'wptravel_get_dismissied_nag_messages' ) );
 
-		// add_filter( 'wp_travel_display_general_admin_notices', array( $this, 'display_general_admin_notices' ) );
 		add_action( 'wp_travel_general_admin_notice', array( $this, 'general_admin_notices' ) );
 	}
 

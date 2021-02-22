@@ -1040,7 +1040,7 @@ function wptravel_trip_map( $post_id ) {
 		</div>
 		<?php
 	} else {
-		$use_lat_lng = get_post_meta( $post_id, 'wptravel_trip_map_use_lat_lng', true );
+		$use_lat_lng = get_post_meta( $post_id, 'wp_travel_trip_map_use_lat_lng', true );
 		if ( $use_lat_lng === 'yes' ) {
 			$q = "{$lat},{$lng}";
 		} else {
@@ -1645,7 +1645,7 @@ function wptravel_archive_wrapper_close() {
 			</div>
 		<?php endif; ?>
 		<?php
-		$pagination_range = apply_filters( 'wptravel_pagination_range', 2 );
+		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
 		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
 		wptravel_pagination( $pagination_range, $max_num_pages );
 		?>

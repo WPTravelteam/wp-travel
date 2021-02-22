@@ -14,7 +14,7 @@
  * @return bool
  */
 function wptravel_disable_admin_bar( $show_admin_bar ) {
-	if ( apply_filters( 'wptravel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
+	if ( apply_filters( 'wp_travel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
 		$show_admin_bar = false;
 	}
 
@@ -164,7 +164,7 @@ function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 		$url = add_query_arg( $endpoint, $value, $permalink );
 	}
 
-	return apply_filters( 'wptravel_get_endpoint_url', $url, $endpoint, $value, $permalink );
+	return apply_filters( 'wp_travel_get_endpoint_url', $url, $endpoint, $value, $permalink );
 }
 
 /**
@@ -200,5 +200,5 @@ function wptravel_lostpassword_url() {
 			}
 		}
 	}
-	return apply_filters( 'wptravel_lostpassword_url', $url, $default_url );
+	return apply_filters( 'wp_travel_lostpassword_url', $url, $default_url );
 }

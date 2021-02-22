@@ -25,7 +25,7 @@ $hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !
 			 <?php
 		 	if ( ! empty( $terms ) ) {
 				$term_ids = wp_list_pluck( $terms, 'term_id' );
-				$col_per_row = apply_filters( 'wptravel_related_itineraries_col_per_row' , '3' );
+				$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row' , '3' );
 				$args = array(
 					'post_type' => WP_TRAVEL_POST_TYPE,
 					'post__not_in' => array( $post_id ),
