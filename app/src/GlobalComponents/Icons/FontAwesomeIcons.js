@@ -1,9 +1,26 @@
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, TextControl, Notice } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
+import { useSelect, dispatch } from '@wordpress/data';
 
 // Fontawesome Icon Content.
-const fontawesomeIconContent = (props) => {
+const FontAwesomeIconContent = (props) => {
+    
+    // Replace all '-' from string and capitalize the first letter of string.
+    const slugToName = (icon) => {
+        let str = icon.label.replaceAll('-',' ');
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const allData = useSelect((select) => {
+        return select('WPTravel/Admin').getAllStore()
+    }, []);
+
+    const {
+        options 
+    } = allData;
+
+    let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     sessionStorage.setItem('WPTravelLastSelectedTab', 'fontawesome-icon');
 
@@ -94,4 +111,4 @@ const fontawesomeIconContent = (props) => {
     </>
 }
 
-export default fontawesomeIconContent;
+export default FontAwesomeIconContent;
