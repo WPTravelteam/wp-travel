@@ -716,7 +716,7 @@ function wp_travel_get_partial_trip_price($trip_id, $price_key = ''){
 
 function wp_travel_get_cart_attrs($trip_id, $pax = '0', $price_key = '', $pricing_id = '', $trip_start_date = '', $return_price = ''){
 	wptravel_deprecated_function( "wp_travel_get_cart_attrs", "4.4.7", "wptravel_get_cart_attrs" );
-	return wptravel_get_cart_attrs($trip_id, $pax = '0', $price_key = '', $pricing_id = '', $trip_start_date = '', $return_price = '');
+	return wptravel_get_cart_attrs($trip_id, $pax, $price_key, $pricing_id, $trip_start_date, $return_price );
 }
 
 function wp_travel_get_payment_id($booking_id){

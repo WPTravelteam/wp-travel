@@ -2027,7 +2027,8 @@ function wptravel_get_search_filter_form( $args ) {
 		include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 	}
 	$form_field    = new WP_Travel_FW_Field();
-	$search_fields = wptravel_search_filter_widget_form_fields();
+	$sanitized_get = WP_Travel::get_sanitize_request();
+	$search_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 	$index         = uniqid();
 	$instance      = array();
 	if ( isset( $args['widget'] ) ) {
@@ -2050,7 +2051,9 @@ function wptravel_get_search_filter_form( $args ) {
 						$form_field->init( $search_field, array( 'single' => true ) )->render();
 					}
 				}
-				$view_mode = wptravel_get_archive_view_mode();
+				$sanitized_get = WP_Travel::get_sanitize_request();
+				$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
+				
 				?>
 
 				<div class="wp-travel-search">

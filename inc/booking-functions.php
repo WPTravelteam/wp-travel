@@ -286,7 +286,7 @@ function wptravel_book_now() {
  */
 function wptravel_get_booking_chart() {
 
-	$submission_request = isset( $_REQUEST['_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
+	$submission_request = WP_Travel::get_sanitize_request();
 
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array();
 	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
@@ -457,10 +457,10 @@ function wptravel_get_booking_chart() {
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
-		<div class="right-block <?php echo esc_attr( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ? 'has-compare' : '' ); ?>">
+		<div class="right-block <?php echo esc_attr( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ? 'has-compare' : '' ); ?>">
 
 			<div class="wp-travel-stat-info">
-				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+				<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
 					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
 				</div>
@@ -489,7 +489,7 @@ function wptravel_get_booking_chart() {
 					<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ); ?></p>
 				</div>
 			</div>
-			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+			<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) : ?>
 
 				<div class="wp-travel-stat-info">
 					<div class="right-block-single for-compare">

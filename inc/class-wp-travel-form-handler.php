@@ -88,12 +88,12 @@ class Wp_Travel_Form_Handler {
 				}
 			} catch ( Exception $e ) {
 
-				WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Invalid Username or Password', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( 'Invalid Username or Password', 'wp-travel' ) ), 'error' );
 
 			}
 		} elseif ( isset( $_POST['username'] ) && empty( $_POST['username'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
-			WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( 'Username can not be empty', 'wp-travel' ) ), 'error' );
 
 		}
 	}
@@ -145,7 +145,7 @@ class Wp_Travel_Form_Handler {
 				exit;
 
 			} catch ( Exception $e ) {
-				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $e->getMessage(), 'error' );
+				WPTravel()->notices->add( $e->getMessage(), 'error' );
 			}
 		}
 	}
@@ -196,11 +196,11 @@ class Wp_Travel_Form_Handler {
 
 		if ( $user instanceof WP_User ) {
 			if ( empty( $posted_fields['password_1'] ) ) {
-				WPTravel()->notices->add( __( '<strong>Error :</strong>Please enter your password.', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Please enter your password.', 'wp-travel' ), 'error' );
 			}
 
 			if ( $posted_fields['password_1'] !== $posted_fields['password_2'] ) {
-				WPTravel()->notices->add( __( '<strong>Error :</strong>Passwords do not match', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Passwords do not match', 'wp-travel' ), 'error' );
 			}
 
 			$errors = new WP_Error();
@@ -286,7 +286,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WPTravel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 
@@ -363,7 +363,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WPTravel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 

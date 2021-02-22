@@ -1483,16 +1483,10 @@ function wptravel_setup_itinerary_data( $post ) {
  *
  * @return void
  */
-function wptravel_archive_filter_by() {
+function wptravel_archive_filter_by( $submission_get = array() ) {
 	if ( ! WP_Travel::is_page( 'archive' ) ) {
 		return;
 	}
-
-	if ( ! WP_Travel::verify_nonce( true ) ) {
-		return;
-	}
-
-	$submission_get = wptravel_sanitize_array( wp_unslash( $_GET ) );
 
 	$strings = wptravel_get_strings();
 
@@ -1574,6 +1568,7 @@ function wptravel_archive_filter_by() {
 					<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
 				</select>
 			</div>
+		<input type="hidden" name="_nonce" class="wp_travel_input_filters" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 		<div class="wp-travel-filter-button">
 			<button class="btn-wp-travel-filter"><?php echo esc_html( $show_text ); ?></button>
 		</div>
@@ -1589,17 +1584,19 @@ function wptravel_archive_filter_by() {
  * @return void
  */
 function wptravel_archive_toolbar() {
-	$view_mode = wptravel_get_archive_view_mode();
+	$sanitized_get = WP_Travel::get_sanitize_request();
+	$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) :
 		?>
 		<?php if ( WP_Travel::is_page( 'archive' ) ) : ?>
 	<div class="wp-travel-toolbar clearfix">
 		<div class="wp-toolbar-content wp-toolbar-left">
-			<?php wptravel_archive_filter_by(); ?>
+			<?php wptravel_archive_filter_by( $sanitized_get ); ?>
 		</div>
 		<div class="wp-toolbar-content wp-toolbar-right">
 			<?php
 			$current_url = isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ? '//' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+			$current_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $current_url )
 			?>
 			<ul class="wp-travel-view-mode-lists">
 				<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
@@ -1640,7 +1637,8 @@ function wptravel_archive_toolbar() {
  */
 function wptravel_archive_wrapper_close() {
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) :
-		$view_mode = wptravel_get_archive_view_mode();
+		$sanitized_get = WP_Travel::get_sanitize_request();
+		$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 		?>
 		<?php if ( 'grid' === $view_mode ) : ?>
 				</ul>
@@ -1877,17 +1875,12 @@ function wptravel_tab_show_in_menu( $tab_name ) {
 	return false;
 }
 
-function wptravel_get_archive_view_mode() {
+function wptravel_get_archive_view_mode( $sanitized_get = array() ) {
 	$default_view_mode = 'list';
 	$default_view_mode = apply_filters( 'wp_travel_default_view_mode', $default_view_mode );
 	$view_mode         = $default_view_mode;
-
-	if ( ! WP_Travel::verify_nonce( true ) ) {
-		return;
-	}
-
-	if ( isset( $_GET['view_mode'] ) && ( 'grid' === $_GET['view_mode'] || 'list' === $_GET['view_mode'] ) ) {
-		$view_mode = sanitize_text_field( wp_unslash( $_GET['view_mode'] ) );
+	if ( isset( $sanitized_get['view_mode'] ) && ( 'grid' === $sanitized_get['view_mode'] || 'list' === $sanitized_get['view_mode'] ) ) {
+		$view_mode = sanitize_text_field( wp_unslash( $sanitized_get['view_mode'] ) );
 	}
 	return $view_mode;
 }

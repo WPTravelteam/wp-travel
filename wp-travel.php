@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 4.4.7
+ * Version: 4.4.8
  * Author: WP Travel
  * Author URI: http://wptravel.io/downloads/
  * Requires at least: 5.4.1
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.4.7';
+		public $version = '4.4.8';
 
 		/**
 		 * WP Travel API version.
@@ -107,9 +107,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-			if ( file_exists( sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH ) ) ) {
-				include sprintf( '%s/inc/wp-travel-extended.php', WP_TRAVEL_ABSPATH );
-			}
+
 			register_activation_hook( __FILE__, array( $this, 'wptravel_activation' ) );
 			add_action( 'activated_plugin', array( $this, 'wptravel_plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'wptravel_setup_environment' ) );
@@ -340,15 +338,74 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 			}
 
+			// Additional.
+			require WP_TRAVEL_ABSPATH . '/core/helpers/response_codes.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/error_codes.php';
+
+			// Actions.
+			require WP_TRAVEL_ABSPATH . '/core/actions/register_taxonomies.php';
+			require WP_TRAVEL_ABSPATH . '/core/actions/activation.php';
+
+			// Libraries.
+			require WP_TRAVEL_ABSPATH . '/core/lib/cart.php';
+
+			// Helpers.
+			require WP_TRAVEL_ABSPATH . '/core/helpers/settings.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/modules.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/media.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-pricing-categories-taxonomy.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-extras.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-dates.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-excluded-dates-times.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/pricings.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trip-pricing-categories.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/trips.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/cart.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/rest-api.php';
+
+			// Ajax.
+			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories-taxonomy.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-extras.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-dates.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-excluded-dates-times.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/pricings.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/cart.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/coupon.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/trips.php';
+
+			// Assets.
+			// include WP_TRAVEL_ABSPATH.'/core/assets/frontend.php';
+			// include WP_TRAVEL_ABSPATH.'/core/assets/admin.php';
+			// include WP_TRAVEL_ABSPATH.'/core/localize/admin.php';
+
+			// Views
+			// include WP_TRAVEL_ABSPATH.'/core/views/admin/trip-metabox.php';
+
+			/**
+			 * App Part
+			 */
+
+			// Front End.
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/metabox-trip-edit.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/assets.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/localize.php';
+
+			// Front End
+			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/single-itinerary-hooks.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/assets.php';
+
 		}
 
 		/**
 		 * Include admin files conditionally.
 		 */
 		public function conditional_includes() {
-			if ( ! $screen = get_current_screen() ) {
+			if ( ! get_current_screen() ) {
 				return;
 			}
+			$screen = get_current_screen();
 			switch ( $screen->id ) {
 				case 'options-permalink':
 					include sprintf( '%s/inc/admin/class-admin-permalink-settings.php', WP_TRAVEL_ABSPATH );
@@ -635,6 +692,31 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				return WP_Travel_Helpers_REST_API::response( $error );
 			}
 			return true;
+		}
+
+		/**
+		 * Get WP Travel request.
+		 *
+		 * @since WP Travel 4.4.7
+		 * @return boolean
+		 */
+		public static function get_sanitize_request( $method = 'get' ) {
+			if ( ! self::verify_nonce( true ) ) { // verify nonce.
+				return array();
+			}
+			$data = array();
+			switch ( $method ) {
+				case 'post':
+					$data = wptravel_sanitize_array( ( $_POST ) ); // @phpcs:ignore
+					break;
+				case 'request':
+					$data = wptravel_sanitize_array( ( $_REQUEST ) ); // @phpcs:ignore
+					break;
+				default:
+					$data = wptravel_sanitize_array( ( $_GET ) ); // @phpcs:ignore
+					break;
+			}
+			return $data;
 		}
 
 		/**

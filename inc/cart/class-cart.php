@@ -210,7 +210,7 @@ class WP_Travel_Cart {
 
 					if ( $pax > $available_pax ) {
 
-						WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+						WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
 
 						$pax = $available_pax;
 
@@ -369,19 +369,8 @@ class WP_Travel_Cart {
 				}
 				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
 
-				// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
-				// 	$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
-
-				// 	$this->items[ $cart_item_id ]['partial_payout_figure'] = $payout_percent;
-
-				// 	if ( $payout_percent > 0 ) {
-				// 		$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-				// 		$trip_price_partial = wptravel_get_formated_price( $trip_price_partial );
-				// 	}
-				// 	$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
-				// }
 				if ( $max_available && $cart_pax > $max_available ) {
-					WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $cart_pax, $max_available ), 'error' );
+					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $cart_pax, $max_available ), 'error' );
 				}
 			} else {
 				/**
@@ -430,7 +419,7 @@ class WP_Travel_Cart {
 				}
 
 				if ( $max_available && $pax > $max_available ) {
-					WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
 				}
 			}
 

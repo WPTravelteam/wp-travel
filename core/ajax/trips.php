@@ -56,19 +56,15 @@ class WP_Travel_Ajax_Trips {
 
 	public static function update_trip_permission_check() {
 
-		/**
-		 * Nonce Verification.
-		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-		}
+		// already sanitized.
+		$requests = WP_Travel::get_sanitize_request( 'request' );
 
 		// Empty parameter.
-		if ( empty( $_REQUEST['trip_id'] ) ) {
+		if ( empty( $requests['trip_id'] ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 
-		$trip = get_post( absint( $_REQUEST['trip_id'] ) );
+		$trip = get_post( absint( $requests['trip_id'] ) );
 		if ( is_wp_error( $trip ) ) {
 			return $trip;
 		}

@@ -315,12 +315,7 @@ class WP_Travel_Admin_Settings {
 	public static function get_system_info() {
 		require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
 	}
-
-	public function get_files() {
-		if ( $_FILES ) {
-			print_r( $_FILES );
-		}
-	}
+	
 }
 
 new WP_Travel_Admin_Settings();
