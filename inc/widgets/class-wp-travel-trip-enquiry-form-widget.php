@@ -37,7 +37,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 			wp_enqueue_script( 'jquery-parsley' );
 			wp_enqueue_script( 'wp-travel-widget-scripts' );
 		}
-		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title = isset( $instance['title'] ) && ! empty( $instance['title'] ) ? $instance['title'] : __( 'Enquiry', 'wp-travel' );
 		extract( $args );
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
