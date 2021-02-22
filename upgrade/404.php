@@ -22,7 +22,7 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
 					'trip_id' => $trip_id,
 				);
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
-				update_post_meta( $trip_id, 'wptravel_trip_price', $trip_price );
+				update_post_meta( $trip_id, 'wp_travel_trip_price', $trip_price );
 			}
 			update_option( 'wp_travel_price_migrate_404', 'yes' );
 		}
