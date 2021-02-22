@@ -140,7 +140,7 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		} elseif ( $items ) {  // Normal Payment.
 
-			// $current_url  = apply_filters( 'wptravel_thankyou_page_url', $current_url, $booking_id );
+			// $current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
 			$cart_amounts = $wt_cart->get_total();
 
 			$tax = 0;

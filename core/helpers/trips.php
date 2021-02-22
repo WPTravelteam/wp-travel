@@ -76,10 +76,10 @@ class WP_Travel_Helpers_Trips {
 		// TODO : Include following map_data inside `wptravel_get_map_data` function.
 		$zoomlevel             = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
 		$iframe_height         = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
-		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) : 'no';
+		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
 		$map_data['zoomlevel'] = apply_filters( 'wp_travel_trip_zoomlevel', $zoomlevel, $trip_id );
 		// $map_data['iframe_height'] = apply_filters( 'wptravel_trip_map_iframe_height', $iframe_height, $trip_id );
-		$map_data['use_lat_lng'] = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		$map_data['use_lat_lng'] = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
 
 		// $trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
@@ -347,7 +347,7 @@ class WP_Travel_Helpers_Trips {
 			update_post_meta( $trip_id, 'wp_travel_location', wp_unslash( $data['loc'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lat', wp_unslash( $data['lat'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lng', wp_unslash( $data['lng'] ) );
-			update_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
+			update_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_zoomlevel', wp_unslash( $data['zoomlevel'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_map_iframe_height', wp_unslash( $data['iframe_height'] ) );
 		}

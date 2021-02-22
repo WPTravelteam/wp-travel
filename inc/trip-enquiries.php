@@ -14,7 +14,7 @@ function wptravel_enquiries_form_fields() {
 
 	// Default enquiry fields.
 	$enquiry_fields = WP_Travel_Default_Form_Fields::enquiry();
-	$enquiry_fields = apply_filters( 'wptravel_enquiries_form_fields', $enquiry_fields );
+	$enquiry_fields = apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
 	if ( ! is_admin() ) {
 		$enquiry_fields['label_submit_enquiry'] = array(
 			'type'    => 'hidden',

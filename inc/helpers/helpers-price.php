@@ -641,7 +641,7 @@ function wptravel_convert_price( $price, $convert = true ) {
 		return $price;
 	}
 
-	return apply_filters( 'wptravel_convert_price', $price );
+	return apply_filters( 'wp_travel_convert_price', $price );
 }
 
 /**
