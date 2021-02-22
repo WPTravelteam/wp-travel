@@ -363,7 +363,7 @@ class WP_Travel_Helpers_Trips {
 		);
 		$min_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-		update_post_meta( $trip_id, 'wptravel_trip_price', $min_price, $prev_min_price );
+		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );

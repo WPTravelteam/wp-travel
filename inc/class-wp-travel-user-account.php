@@ -91,16 +91,14 @@ class Wp_Travel_User_Account {
 	 */
 	public static function output() {
 
-		if ( ! WP_Travel::verify_nonce( true ) ) {
-			return;
-		}
+		$sanitized_request = WP_Travel::get_sanitize_request();
 
 		global $wp;
 
 		if ( ! is_user_logged_in() ) {
 
 			// After password reset, add confirmation message, and already checking nonce above.
-			if ( ! empty( $_GET['password-reset'] ) ) { ?>
+			if ( ! empty( $sanitized_request['password-reset'] ) ) { ?>
 
 				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
 
@@ -111,7 +109,7 @@ class Wp_Travel_User_Account {
 			/**
 			 * We are already checking nonce using WP_Travel::verify_nonce();
 			 */
-			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) { // @phpcs:ignore
+			if ( isset( $sanitized_request['action'] ) && 'lost-pass' == $sanitized_request['action'] ) { // @phpcs:ignore
 				self::lost_password();
 			} else {
 				// Get user login.
