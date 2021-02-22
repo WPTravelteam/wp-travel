@@ -36,7 +36,7 @@ class WP_Travel_Ajax_Settings {
 		WP_Travel::verify_nonce();
 
 		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		$post_data = wptravel_sanitize_array( $post_data, true );
+		$post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
 		$response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
