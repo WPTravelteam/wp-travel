@@ -69,6 +69,19 @@ const SettingsFact = () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    const [ {isTabOpen, tabData}, setState ] = useState({
+        isTabOpen: false,
+        tabData: {}
+    });
+
+    // In order to close other tab when open one.
+    const panelTabChanged = (index) => {
+        setState({
+            isTabOpen: true,
+            tabData: { index }
+        })
+    }
+
     let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
 
     //Update tab settings.
@@ -267,7 +280,6 @@ const SettingsFact = () => {
                     sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
                     sessionStorage.setItem('wpTravelIconModuleUploaderData', JSON.stringify(selectedItems));
 
-                    // updateFact( 'icon_img', invoiceLogoID.toString(), props.index )
                 }
                 setOpen(true);
             })
@@ -379,6 +391,8 @@ const SettingsFact = () => {
                                 return <PanelBody key={index}
                                     title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
                                     initialOpen={false}
+                                    onToggle = { () => panelTabChanged(index) }
+                                    opened= { isTabOpen && index == tabData.index ? true : false }
                                     >
                                     <PanelRow>
                                         <label>{__( 'Field Name', 'wp-travel' )}</label>
@@ -423,7 +437,7 @@ const SettingsFact = () => {
                                             }
                                             {
                                                 'icon-class' == fact.selected_icon_type && '' != fact.icon &&
-                                                <i className={fact.icon}></i>
+                                                <p>{__( 'Icon Class: ', 'wp-travel' )}<strong>[ {fact.icon} ]</strong></p>
                                             }
                                             <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         </div>
