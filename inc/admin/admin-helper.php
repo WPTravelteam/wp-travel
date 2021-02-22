@@ -11,8 +11,8 @@
  * @since 1.0.7
  */
 function wptravel_admin_init() {
-	add_action( 'wp_trash_post', 'wp_travel_clear_booking_count_transient', 10 ); // @since 1.0.7
-	add_action( 'untrash_post', 'wp_travel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
+	add_action( 'wp_trash_post', 'wptravel_clear_booking_count_transient', 10 ); // @since 1.0.7
+	add_action( 'untrash_post', 'wptravel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
 	
 	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
 		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
