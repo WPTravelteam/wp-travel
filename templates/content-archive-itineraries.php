@@ -29,8 +29,9 @@ if ( post_password_required() ) {
 	$enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
 	$group_size 	= wptravel_get_group_size( get_the_ID() );
 	$start_date 	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
-	$end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); ?>
-	<?php $view_mode = wptravel_get_archive_view_mode(); ?>
+	$end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); 
+	$sanitized_get = WP_Travel::get_sanitize_request(); ?>
+	<?php $view_mode = wptravel_get_archive_view_mode( $sanitized_get ); ?>
 	<?php if ( 'list' === $view_mode ) : ?>
 		<article class="wp-travel-default-article">
 			<div class="wp-travel-article-image-wrap">
