@@ -5,7 +5,7 @@
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
  * Version: 4.4.7
  * Author: WP Travel
- * Author URI: http://wptravel.io/downloads/
+ * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
  * Requires PHP: 5.5
  * Tested up to: 5.6.2
