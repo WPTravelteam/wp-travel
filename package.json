@@ -4,9 +4,11 @@
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
+		"setup": "composer install && yarn install && yarn run build && wp-scripts env install",
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:pre_release": "npx wp-scripts build && npx grunt build"
+    "build:pre_release": "npx wp-scripts build && npx grunt build",
+		"lint:php": "wp-scripts env lint-php"
   },
   "repository": {
     "type": "git",

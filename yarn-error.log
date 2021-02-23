@@ -1,29 +1,25 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+  /Users/rakeshlawaju/.nvm/versions/node/v14.15.5/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js lint:php
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\shres\bin;C:\Program Files\Java\jre\bin;C:\Program Files\Java\jdk\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\System32\OpenSSH;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\xampp\php;C:\Program Files\Git\cmd;D:\laragon\bin\php\php-7.2.11-Win32-VC15-x64;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;D:\laragon\bin\php\php-7.2.19-Win32-VC15-x64;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\shres\AppData\Local\Microsoft\WindowsApps;C:\Users\shres\AppData\Roaming\Composer\vendor\squizlabs\php_codesniffer\bin;C:\Users\shres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\shres\AppData\Roaming\Composer\vendor\bin;C:\Users\shres\AppData\Roaming\npm;C:\Users\shres\.bin;C:\Users\shres\AppData\Local\Yarn\bin
+  /Users/rakeshlawaju/.nvm/versions/node/v14.15.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rakeshlawaju/.nvm/versions/node/v14.15.5/bin
 
 Yarn version: 
-  1.22.0
+  1.22.4
 
 Node version: 
-  12.13.0
+  14.15.5
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/date-fns/-/date-fns-2.14.0.tgz: ESOCKETTIMEDOUT
-      at ClientRequest.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141354:19)
-      at Object.onceWrapper (events.js:299:28)
-      at ClientRequest.emit (events.js:210:5)
-      at TLSSocket.emitRequestTimeout (_http_client.js:690:9)
-      at Object.onceWrapper (events.js:299:28)
-      at TLSSocket.emit (events.js:210:5)
-      at TLSSocket.Socket._onTimeout (net.js:468:8)
-      at listOnTimeout (internal/timers.js:531:17)
-      at processTimers (internal/timers.js:475:7)
+  SyntaxError: /Volumes/Dev/local-flywheel/wptravel/app/public/wp-content/plugins/wp-travel-4/package.json: Unexpected token } in JSON at position 309
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -34,7 +30,8 @@ npm manifest:
     "scripts": {
       "build": "wp-scripts build",
       "start": "wp-scripts start",
-      "build:pre_release": "npx wp-scripts build && npx grunt build"
+      "build:pre_release": "npx wp-scripts build && npx grunt build",
+  		"lint:php": "wp-scripts env lint-php",
     },
     "repository": {
       "type": "git",

@@ -34,3 +34,5 @@ test.php
 *.exe
 *.zip
 /inc/extended/**
+vendor
+wordpress
