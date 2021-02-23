@@ -1,6 +1,34 @@
 <?php
-class WP_Travel_Helpers_Trip_Pricing_Categories {
+/**
+ * Helpers class for trip pricing categories.
+ *
+ * @package Wptravel
+ */
+
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Helpers class for trip pricing categories.
+ */
+class WpTravel_Helpers_Trip_Pricing_Categories {
+
+	/**
+	 * WP Travel table name.
+	 *
+	 * @var string $table_name WP Travel table name.
+	 */
 	private static $table_name = 'wt_price_category_relation';
+
+	/**
+	 * Returns the trip pricing categories data accoring to the provided pricing id.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 */
 	public static function get_trip_pricing_categories( $pricing_id ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -10,13 +38,13 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		$table = $wpdb->prefix . self::$table_name;
 		if ( is_multisite() ) {
 			/**
-			 * @todo Get Table name on Network Activation.
+			 * If it is multisite.
 			 */
 			$blog_id = get_current_blog_id();
 			$table   = $wpdb->base_prefix . $blog_id . '_' . self::$table_name;
 		}
-		$query   = $wpdb->prepare( "SELECT * FROM {$table} WHERE `pricing_id` = %d", $pricing_id );
-		$results = $wpdb->get_results( $query );
+
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d", $pricing_id ) );
 		if ( empty( $results ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_PRICING_CATEGORIES' );
 		}
@@ -62,6 +90,11 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		);
 	}
 
+	/**
+	 * Remove trip pricing categories.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 */
 	public static function remove_trip_pricing_categories( $pricing_id ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -78,6 +111,12 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		return WP_Travel_Helpers_Response_Codes::get_success_response( 'WP_TRAVEL_REMOVED_TRIP_PRICING_CATEGORIES' );
 	}
 
+	/**
+	 * Update trip pricing categories.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 * @param string $categories Categories.
+	 */
 	public static function update_pricing_categories( $pricing_id, $categories ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -104,6 +143,12 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		);
 	}
 
+	/**
+	 * Select individual pricing category.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 * @param string $category_id Category ID.
+	 */
 	public static function select_individual_pricing_category( $pricing_id, $category_id ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -114,9 +159,8 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		}
 
 		global $wpdb;
-		$table  = $wpdb->prefix . self::$table_name;
-		$query  = $wpdb->prepare( "SELECT * FROM {$table} WHERE `pricing_id` = %d AND `pricing_category_id` = %d", $pricing_id, $category_id );
-		$result = $wpdb->get_row( $query );
+
+		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d AND `pricing_category_id` = %d", $pricing_id, $category_id ) );
 		if ( empty( $result ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_CATEGORY' );
 		}
@@ -126,6 +170,13 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 			'category' => $result,
 		);
 	}
+
+	/**
+	 * Update individual pricing category.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 * @param array  $category Category data.
+	 */
 	public static function update_individual_pricing_category( $pricing_id, $category ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -180,6 +231,12 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		);
 	}
 
+	/**
+	 * Add individual pricing category.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 * @param array  $category Category data.
+	 */
 	public static function add_individual_pricing_category( $pricing_id, $category ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -226,6 +283,12 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		);
 	}
 
+	/**
+	 * Remove individual pricing category.
+	 *
+	 * @param string $pricing_id Pricing ID.
+	 * @param string $category_id Category ID.
+	 */
 	public static function remove_individual_pricing_category( $pricing_id, $category_id ) {
 		if ( empty( $pricing_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICING_ID' );
@@ -253,14 +316,26 @@ class WP_Travel_Helpers_Trip_Pricing_Categories {
 		return WP_Travel_Helpers_Response_Codes::get_success_response( 'WP_TRAVEL_REMOVED_TRIP_PRICING_CATEGORY' );
 	}
 
+	/**
+	 * Returns multiple currency converted price.
+	 *
+	 * @param string $price Trip price which needs to be converted.
+	 */
 	private static function get_converted_price( $price ) {
 		if ( ! is_admin() ) {
-			$price = apply_filters( 'wp_travel_multiple_currency', $price );
+			$price = apply_filters( 'wp_travel_multiple_currency', $price ); // @phpcs:ignore
+			$price = apply_filters( 'wptravel_multiple_currency', $price );
 		}
 
 		return self::get_formatted_price( $price );
 	}
 
+	/**
+	 * Formats the provided price string to readable format.
+	 *
+	 * @param float $amount Trip unformatted amount.
+	 * @param int   $number_of_decimals Number of decimals number after dot.
+	 */
 	private static function get_formatted_price( $amount, $number_of_decimals = 2 ) {
 		if ( ! is_float( $amount ) ) {
 			$amount = (float) $amount;
