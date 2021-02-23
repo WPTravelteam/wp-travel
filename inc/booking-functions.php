@@ -50,15 +50,15 @@ function wptravel_book_now() {
 	$trip_time              = array(); // @since WP Travel v4.0
 	foreach ( $items as $key => $item ) {
 		// @since 3.1.3
-		$arrival_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
-		$arrival_date = apply_filters( 'wptravel_email_travel_date', $arrival_date, $item );
+		$email_travel_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
+		$email_travel_date = apply_filters( 'wptravel_email_travel_date', $email_travel_date, $item );
 
 		$trip_ids[]               = $item['trip_id'];
 		$pax_array[]              = $item['pax'];
 		$price_keys[]             = $item['price_key'];
 		$arrival_date[]           = $item['arrival_date'];
 		$departure_date[]         = $item['departure_date'];
-		$arrival_date_email_tag[] = $arrival_date;
+		$arrival_date_email_tag[] = $email_travel_date;
 		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since WP Travel v4.0
 		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
 	}
