@@ -8,7 +8,8 @@
     "build": "wp-scripts build",
     "start": "wp-scripts start",
     "build:pre_release": "npx wp-scripts build && npx grunt build",
-    "lint:php": "wp-scripts env lint-php"
+    "lint:php": "wp-scripts env lint-php",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -71,14 +72,14 @@
     "react-sortablejs": "^2.0.11",
     "rrule": "^2.6.4"
   },
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.php": [
-		  "composer run lint"
-		]
-	}
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.php": [
+      "composer run lint"
+    ]
+  }
 }
