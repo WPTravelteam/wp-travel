@@ -28,7 +28,7 @@ const SaveSettings = (props) => {
             <div>
                 {has_state_changes&&<div className="wp-travel-save-notice">{__('* Please save the changes', 'wp-travel' )}</div>}
                 {show_updated_message && <div>
-                    <p class="text-success"><strong>{__('Settings Saved', 'wp-travel')}</strong></p>
+                    <p className="text-success"><strong>{__('Settings Saved', 'wp-travel')}</strong></p>
                 </div> }
             </div>
             <Button isPrimary onClick={()=>{
