@@ -1,5 +1,5 @@
 <?php
-class WP_Travel_Helpers_License {
+class WPTravel_Helpers_Modules {
 
 	/**
 	 * Premium Addons List.
@@ -25,8 +25,8 @@ class WP_Travel_Helpers_License {
 		}
 
 		// Licesnse data for
-		add_filter( 'wp_travel_settings_values', 'WP_Travel_Helpers_License::settings_data' );
-		add_filter( 'wp_travel_block_before_save_settings', 'WP_Travel_Helpers_License::settings_data_v4', 10, 2 );
+		add_filter( 'wp_travel_settings_values', 'WPTravel_Helpers_Modules::settings_data' );
+		add_filter( 'wp_travel_block_before_save_settings', 'WPTravel_Helpers_Modules::settings_data_v4', 10, 2 );
 	}
 
 	// License data for WP Settings block.
@@ -55,7 +55,7 @@ class WP_Travel_Helpers_License {
 				if ( $plugin_prefix()->is_paying() ) {
 					$status = 'valid';
 				}
-			} 
+			}
 
 			$data = array(
 				'license_data'   => $license_data,
@@ -89,7 +89,7 @@ class WP_Travel_Helpers_License {
 }
 
 function wptravel_helpers_license_init() {
-	WP_Travel_Helpers_License::init();
+	WPTravel_Helpers_Modules::init();
 }
 add_action( 'init', 'wptravel_helpers_license_init', 11 );
 

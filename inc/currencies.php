@@ -309,7 +309,7 @@ function wptravel_currency_symbols() {
 		'ZWL' => '&#90;&#36;',
 	);
 
-	$currency_symbols = apply_filters( 'wptravel_currency_symbols', $currency_symbols );
+	$currency_symbols = apply_filters( 'wp_travel_currency_symbols', $currency_symbols );
 
 	return $currency_symbols;
 

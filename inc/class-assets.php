@@ -197,9 +197,9 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			wp_enqueue_media();
 			wp_enqueue_style( 'jquery-datepicker', self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
-			wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'assets/css/wp-travel-tabs' . $suffix . '.css', array( 'wp-color-picker' ), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'assets/css/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-admin-1-style', self::$assets_path . 'assets/css/wp-travel-admin-1' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'app/build/wp-travel-tabs' . $suffix . '.css', array( 'wp-color-picker' ), WP_TRAVEL_VERSION );
+			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			wp_enqueue_style( 'wp-travel-admin-1-style', self::$assets_path . 'app/build/wp-travel-admin-1' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
 			// Tab for settings page.
 			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
@@ -226,9 +226,8 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 			// @since 1.0.5 // booking stat
 			if ( 'itinerary-booking_page_booking_chart' === $screen->id ) {
 				wp_register_script( 'jquery-chart', self::$assets_path . 'assets/js/lib/chartjs/Chart.bundle.min.js', array( 'jquery' ), WP_TRAVEL_VERSION );
-				wp_register_script( 'jquery-chart-util', self::$assets_path . 'assets/js/lib/chartjs/utils.js', array( 'jquery' ), WP_TRAVEL_VERSION );
 
-				wp_register_script( 'jquery-chart-custom', self::$assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-chart-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
+				wp_register_script( 'jquery-chart-custom', self::$assets_path . 'assets/js/lib/chartjs/chart-custom.js', array( 'jquery', 'jquery-chart', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ), WP_TRAVEL_VERSION );
 				$booking_data      = wptravel_get_booking_data();
 				$stat_data         = isset( $booking_data['stat_data'] ) ? $booking_data['stat_data'] : array();
 				$labels            = isset( $stat_data['stat_label'] ) ? $stat_data['stat_label'] : array();
@@ -489,7 +488,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-frontend'    => array(
-					'src'   => self::$assets_path . 'assets/css/wp-travel-front-end' . $suffix . '.css',
+					'src'   => self::$assets_path . 'app/build/wp-travel-front-end' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
@@ -525,7 +524,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-user-css'    => array(
-					'src'   => self::$assets_path . 'assets/css/wp-travel-user-styles' . $suffix . '.css',
+					'src'   => self::$assets_path . 'app/build/wp-travel-user-styles' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
@@ -537,7 +536,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-frontend-bundle' => array(
-					'src'   => self::$assets_path . 'assets/css/wp-travel-frontend.bundle.css',
+					'src'   => self::$assets_path . 'app/build/wp-travel-frontend.bundle.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',

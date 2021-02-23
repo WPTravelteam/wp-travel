@@ -118,8 +118,16 @@ add_action( 'admin_notices', 'wptravel_display_deprecated_notice' );
 // Single Pricing deprecated notice.
 function wptravel_display_single_pricing_deprecated_notice( $notices ) {
 
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $notices;
+	}
+
 	$screen  = get_current_screen();
 	$post_id = get_the_ID();
+
+	/**
+	 * Already checking nonces above.
+	 */
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type && $screen->parent_base == 'edit' && ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) && $post_id ) {
 		$pricing_option_type = wptravel_get_pricing_option_type( $post_id );
 		if ( 'single-price' === $pricing_option_type ) {

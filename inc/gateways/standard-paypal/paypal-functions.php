@@ -29,6 +29,10 @@ function wptravel_get_paypal_redirect_url( $ssl_check = false ) {
  * This would also do the "set-up" for an "alternate purchase verification"
  */
 function wptravel_listen_paypal_ipn() {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	if ( isset( $_GET['wp_travel_listener'] )
 		&& $_GET['wp_travel_listener'] == 'IPN'
 		|| isset( $_GET['test'] )
@@ -63,12 +67,6 @@ function wptravel_paypal_ipn_process() {
 	 * Check if IPN was successfully processed
 	 */
 	if ( $verified = $listener->processIpn() ) {
-
-		/**
-		 * Log successful purchases
-		 */
-		$transactionData = $listener->getPostData(); // POST data array
-		file_put_contents( 'ipn_success.log', print_r( $transactionData, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
 
 		$message = null;
 		/**
@@ -191,7 +189,6 @@ function wptravel_paypal_ipn_process() {
 		 * Log errors
 		 */
 		$errors = $listener->getErrors();
-		file_put_contents( 'ipn_errors.log', print_r( $errors, true ) . PHP_EOL, LOCK_EX | FILE_APPEND );
 
 		/**
 		 * An Invalid IPN *may* be caused by a fraudulent transaction attempt. It's

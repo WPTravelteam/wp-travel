@@ -273,6 +273,7 @@ function wptravel_book_now() {
 	$wt_cart->clear();
 
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
+	$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
 	header( 'Location: ' . $thankyou_page_url );
 	exit;
@@ -285,7 +286,7 @@ function wptravel_book_now() {
  */
 function wptravel_get_booking_chart() {
 
-	$submission_request = isset( $_REQUEST['_wp_travel_booking_chart_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wp_travel_booking_chart_nonce'] ) ), '_wp_travel_booking_chart_nonce_action' ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
+	$submission_request = WP_Travel::get_sanitize_request();
 
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array();
 	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
@@ -308,6 +309,7 @@ function wptravel_get_booking_chart() {
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
 		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
+					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ) ?>" />
 					<input type="hidden" name="post_type" value="itinerary-booking" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group full-width">
@@ -445,7 +447,7 @@ function wptravel_get_booking_chart() {
 					</div>
 					</div>
 
-					<?php wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
+					<?php // wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
 
 				</form>
 			</div>
@@ -455,10 +457,10 @@ function wptravel_get_booking_chart() {
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
-		<div class="right-block <?php echo esc_attr( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ? 'has-compare' : '' ); ?>">
+		<div class="right-block <?php echo esc_attr( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ? 'has-compare' : '' ); ?>">
 
 			<div class="wp-travel-stat-info">
-				<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+				<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
 					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
 				</div>
@@ -487,7 +489,7 @@ function wptravel_get_booking_chart() {
 					<p><?php esc_html_e( 'Top itinerary', 'wp-travel' ); ?></p>
 				</div>
 			</div>
-			<?php if ( isset( $_REQUEST['compare_stat'] ) && 'yes' == $_REQUEST['compare_stat'] ) : ?>
+			<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) : ?>
 
 				<div class="wp-travel-stat-info">
 					<div class="right-block-single for-compare">

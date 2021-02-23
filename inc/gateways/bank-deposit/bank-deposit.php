@@ -53,13 +53,15 @@ function wptravel_submit_bank_deposit_slip() {
 			$created = mkdir( $target_dir, 0755, true );
 
 			if ( ! $created ) {
-				WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Unable to create directory "wp-travel-slip"', 'wp-travel' ), 'error' );
 			}
 		}
 		$filename    = substr( md5( rand( 1, 1000000 ) ), 0, 10 ) . '-' . basename( $_FILES['wp_travel_bank_deposit_slip']['name'] );
 		$target_file = $target_dir . $filename;
-
-		$tmp_name = $tmp_name = sanitize_text_field( wp_unslash( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) );
+		$tmp_name = '';
+		if ( isset( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) ) {
+			$tmp_name = sanitize_text_field( wp_unslash( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) );
+		}
 
 		$ext = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 
@@ -71,7 +73,7 @@ function wptravel_submit_bank_deposit_slip() {
 			}
 		} else {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Uploaded files are not allowed.', 'wp-travel' ), 'error' );
 			$upload_ok = false;
 		}
 
@@ -111,6 +113,11 @@ add_action( 'init', 'wptravel_submit_bank_deposit_slip' );
 
 
 function wptravel_bank_deposite_button( $booking_id = null, $details = array() ) {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $booking_id;
+	}
+
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;
@@ -142,6 +149,10 @@ function wptravel_bank_deposite_button( $booking_id = null, $details = array() )
 add_action( 'wp_travel_dashboard_booking_after_detail', 'wptravel_bank_deposite_button', 20, 2 );
 
 function wptravel_bank_deposite_content( $booking_id = null, $details = array() ) {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $booking_id;
+	}
+
 	// In Case of partial payment activated.
 	if ( ! $booking_id ) {
 		$booking_id = isset( $_GET['detail_id'] ) ? absint( $_GET['detail_id'] ) : 0;

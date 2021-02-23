@@ -76,16 +76,16 @@ class WP_Travel_Helpers_Trips {
 		// TODO : Include following map_data inside `wptravel_get_map_data` function.
 		$zoomlevel             = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
 		$iframe_height         = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
-		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', true ) : 'no';
+		$use_lat_lng           = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
 		$map_data['zoomlevel'] = apply_filters( 'wp_travel_trip_zoomlevel', $zoomlevel, $trip_id );
 		// $map_data['iframe_height'] = apply_filters( 'wptravel_trip_map_iframe_height', $iframe_height, $trip_id );
-		$map_data['use_lat_lng'] = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		$map_data['use_lat_lng'] = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
 
 		// $trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
-		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', true );
-		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
+		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
+		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		if ( ! $minimum_partial_payout_percent ) {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
@@ -317,10 +317,10 @@ class WP_Travel_Helpers_Trips {
 		if ( ! empty( $trip_data->minimum_partial_payout_use_global ) ) {
 			$minimum_partial_payout_use_global = $trip_data->minimum_partial_payout_use_global;
 		}
-		update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
+		update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', sanitize_text_field( $minimum_partial_payout_use_global ) );
 
 		if ( ! empty( $trip_data->minimum_partial_payout_percent ) ) {
-			update_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
+			update_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', $trip_data->minimum_partial_payout_percent );
 		}
 
 		// Update trip gallery meta.
@@ -347,7 +347,7 @@ class WP_Travel_Helpers_Trips {
 			update_post_meta( $trip_id, 'wp_travel_location', wp_unslash( $data['loc'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lat', wp_unslash( $data['lat'] ) );
 			update_post_meta( $trip_id, 'wp_travel_lng', wp_unslash( $data['lng'] ) );
-			update_post_meta( $trip_id, 'wptravel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
+			update_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', wp_unslash( $data['use_lat_lng'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_zoomlevel', wp_unslash( $data['zoomlevel'] ) );
 			// update_post_meta( $trip_id, 'wp_travel_map_iframe_height', wp_unslash( $data['iframe_height'] ) );
 		}
@@ -357,13 +357,13 @@ class WP_Travel_Helpers_Trips {
 		 * 
 		 * @since 4.0.4
 		 */
-		$prev_min_price = get_post_meta( $trip_id, 'wptravel_trip_price', true );
+		$prev_min_price = get_post_meta( $trip_id, 'wp_travel_trip_price', true );
 		$args = array(
 			'trip_id' => $trip_id,
 		);
 		$min_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-		update_post_meta( $trip_id, 'wptravel_trip_price', $min_price, $prev_min_price );
+		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );
@@ -387,6 +387,12 @@ class WP_Travel_Helpers_Trips {
 	 * @return Array
 	 */
 	public static function filter_trips( $args = array() ) {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		global $wpdb;
 		
@@ -416,6 +422,8 @@ class WP_Travel_Helpers_Trips {
 		/*
 		 * For each known parameter which is both registered and present in the request,
 		 * set the parameter's value on the query $args.
+		 *
+		 * We are already checking nonce above using WP_Travel::verify_nonce();
 		 */
 		foreach ( $parameter_mappings as $api_param => $wp_param ) {
 			if ( isset( $_GET[ $api_param ] ) ) {

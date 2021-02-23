@@ -12,6 +12,14 @@
  * @return Array
  */
 function wptravel_get_booking_data() {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+	/**
+	 * We are checking nonce using WP_Travel::verify_nonce(); method.
+	 */
+
 	global $wpdb;
 	$data = array();
 
@@ -25,22 +33,27 @@ function wptravel_get_booking_data() {
 	$top_itinerary_where = '';
 	$groupby             = '';
 
+	/**
+	 * We are checking nonce using WP_Travel::verify_nonce(); method.
+	 */
+	$submission_request = isset( $_REQUEST ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array();
+
 	$from_date = '';
-	if ( isset( $_REQUEST['booking_stat_from'] ) && '' !== $_REQUEST['booking_stat_from'] ) {
-		$from_date = sanitize_text_field( wp_unslash( ( $_REQUEST['booking_stat_from'] ) ) );
+	if ( isset( $submission_request['booking_stat_from'] ) && '' !== $submission_request['booking_stat_from'] ) {
+		$from_date = sanitize_text_field( wp_unslash( ( $submission_request['booking_stat_from'] ) ) );
 	}
 	$to_date = '';
-	if ( isset( $_REQUEST['booking_stat_to'] ) && '' !== $_REQUEST['booking_stat_to'] ) {
-		$to_date = sanitize_text_field( ( wp_unslash( $_REQUEST['booking_stat_to'] ) ) ) . ' 23:59:59';
+	if ( isset( $submission_request['booking_stat_to'] ) && '' !== $submission_request['booking_stat_to'] ) {
+		$to_date = sanitize_text_field( ( wp_unslash( $submission_request['booking_stat_to'] ) ) ) . ' 23:59:59';
 	}
 	$country = '';
-	if ( isset( $_REQUEST['booking_country'] ) && '' !== $_REQUEST['booking_country'] ) {
-		$country = sanitize_text_field( wp_unslash( ( $_REQUEST['booking_country'] ) ) );
+	if ( isset( $submission_request['booking_country'] ) && '' !== $submission_request['booking_country'] ) {
+		$country = sanitize_text_field( wp_unslash( ( $submission_request['booking_country'] ) ) );
 	}
 
 	$itinerary = '';
-	if ( isset( $_REQUEST['booking_itinerary'] ) && '' !== $_REQUEST['booking_itinerary'] ) {
-		$itinerary = sanitize_text_field( wp_unslash( ( $_REQUEST['booking_itinerary'] ) ) );
+	if ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) {
+		$itinerary = sanitize_text_field( wp_unslash( ( $submission_request['booking_itinerary'] ) ) );
 	}
 
 	// Stat Data Array
@@ -81,7 +94,7 @@ function wptravel_get_booking_data() {
 	$max_bookings      = 0;
 	$max_pax           = 0;
 
-	if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type'] ) ) {
+	if ( ! isset( $submission_request['chart_type'] ) || ( isset( $submission_request['chart_type'] ) && 'booking' === $submission_request['chart_type'] ) ) {
 		// Booking Data Default Query.
 		$initial_transient = $results = get_site_transient( '_transient_wt_booking_stat_data' );
 		if ( ( ! $initial_load ) || ( $initial_load && ! $results ) ) {
@@ -102,7 +115,7 @@ function wptravel_get_booking_data() {
 		}
 
 		$temp_stat_data['data_label'] = __( 'Bookings', 'wp-travel' );
-		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Booking 1', 'wp-travel' );
 		}
 		$temp_stat_data['data_bg_color']     = __( '#00f', 'wp-travel' );
@@ -126,7 +139,7 @@ function wptravel_get_booking_data() {
 		$results = $wpdb->get_results( $query );
 
 		$temp_stat_data['data_label'] = __( 'Payment', 'wp-travel' );
-		if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+		if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) {
 			$temp_stat_data['data_label'] = __( 'Payment 1', 'wp-travel' );
 		}
 		$temp_stat_data['data_bg_color']     = __( '#1DFE0E', 'wp-travel' );
@@ -236,24 +249,24 @@ function wptravel_get_booking_data() {
 	$top_country_where   = '';
 	$top_itinerary_where = '';
 	$groupby             = '';
-	if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+	if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) {
 
 		$compare_from_date = '';
-		if ( isset( $_REQUEST['compare_stat_from'] ) && '' !== $_REQUEST['compare_stat_from'] ) {
-			$compare_from_date = sanitize_text_field( wp_unslash( ( $_REQUEST['compare_stat_from'] ) ) );
+		if ( isset( $submission_request['compare_stat_from'] ) && '' !== $submission_request['compare_stat_from'] ) {
+			$compare_from_date = sanitize_text_field( wp_unslash( ( $submission_request['compare_stat_from'] ) ) );
 		}
 		$compare_to_date = '';
-		if ( isset( $_REQUEST['compare_stat_to'] ) && '' !== $_REQUEST['compare_stat_to'] ) {
-			$compare_to_date = sanitize_text_field( wp_unslash( ( $_REQUEST['compare_stat_to'] ) ) ) . ' 23:59:59';
+		if ( isset( $submission_request['compare_stat_to'] ) && '' !== $submission_request['compare_stat_to'] ) {
+			$compare_to_date = sanitize_text_field( wp_unslash( ( $submission_request['compare_stat_to'] ) ) ) . ' 23:59:59';
 		}
 		$compare_country = '';
-		if ( isset( $_REQUEST['compare_country'] ) && '' !== $_REQUEST['compare_country'] ) {
-			$compare_country = sanitize_text_field( wp_unslash( ( $_REQUEST['compare_country'] ) ) );
+		if ( isset( $submission_request['compare_country'] ) && '' !== $submission_request['compare_country'] ) {
+			$compare_country = sanitize_text_field( wp_unslash( ( $submission_request['compare_country'] ) ) );
 		}
 
 		$compare_itinerary = '';
-		if ( isset( $_REQUEST['compare_itinerary'] ) && '' !== $_REQUEST['compare_itinerary'] ) {
-			$compare_itinerary = sanitize_text_field( wp_unslash( ( $_REQUEST['compare_itinerary'] ) ) );
+		if ( isset( $submission_request['compare_itinerary'] ) && '' !== $submission_request['compare_itinerary'] ) {
+			$compare_itinerary = sanitize_text_field( wp_unslash( ( $submission_request['compare_itinerary'] ) ) );
 		}
 
 		// Setting conditions.
@@ -287,7 +300,7 @@ function wptravel_get_booking_data() {
 		}
 
 		$temp_compare_data = array();
-		if ( ! isset( $_REQUEST['chart_type'] ) || ( isset( $_REQUEST['chart_type'] ) && 'booking' === $_REQUEST['chart_type'] ) ) {
+		if ( ! isset( $submission_request['chart_type'] ) || ( isset( $submission_request['chart_type'] ) && 'booking' === $submission_request['chart_type'] ) ) {
 
 			// Compare Data Default Query.
 			$query   = "SELECT count(ID) as wt_total, YEAR(post_date) as wt_year, MONTH(post_date) as wt_month, DAY(post_date) as wt_day, sum(no_of_pax) as no_of_pax
@@ -323,7 +336,7 @@ function wptravel_get_booking_data() {
 			$results = $wpdb->get_results( $query );
 
 			$temp_compare_data['data_label'] = __( 'Payment', 'wp-travel' );
-			if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+			if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) {
 				$temp_compare_data['data_label'] = __( 'Payment 2', 'wp-travel' );
 			}
 			$temp_compare_data['data_bg_color']     = __( '#000', 'wp-travel' );
@@ -411,7 +424,7 @@ function wptravel_get_booking_data() {
 		// Compare Calculation ends here.
 		$data[] = $temp_compare_data;
 	}
-	$data          = apply_filters( 'wp_travel_stat_data', $data, $_REQUEST );
+	$data          = apply_filters( 'wp_travel_stat_data', $data, $submission_request );
 	$new_stat_data = wptravel_make_stat_data( $data );
 
 	// End of query for top Itinerary.
@@ -424,7 +437,7 @@ function wptravel_get_booking_data() {
 	$stat_data['top_countries']     = wptravel_get_country_by_code( $booking_additional_data['top_countries'] );
 	$stat_data['top_itinerary']     = $booking_additional_data['top_itinerary'];
 
-	if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) {
+	if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) {
 		$stat_data['compare_stat_from']     = $compare_additional_data['from'];
 		$stat_data['compare_stat_to']       = $compare_additional_data['to'];
 		$stat_data['compare_max_bookings']  = $compare_additional_data['max_bookings'];

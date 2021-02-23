@@ -25,7 +25,7 @@ class WP_Travel_Actions_Activation {
 				if ( is_array( $sites ) && count( $sites ) > 0 ) {
 
 					foreach ( $sites as $site ) {
-						$tables        = self::wp_travel_get_db_tables( $site->blog_id );
+						$tables        = self::get_db_tables( $site->blog_id );
 						$create_tables = array(
 							'pricings_table'            => $tables['pricings_table'],
 							'dates_table'               => $tables['dates_table'],
@@ -39,7 +39,7 @@ class WP_Travel_Actions_Activation {
 			} else {
 				$blog_id = get_current_blog_id();
 
-				$tables        = self::wp_travel_get_db_tables( $blog_id );
+				$tables        = self::get_db_tables( $blog_id );
 				$create_tables = array(
 					'pricings_table'            => $tables['pricings_table'],
 					'dates_table'               => $tables['dates_table'],
@@ -50,7 +50,7 @@ class WP_Travel_Actions_Activation {
 			}
 		} else {
 
-			$tables        = self::wp_travel_get_db_tables();
+			$tables        = self::get_db_tables();
 			$create_tables = array(
 				'pricings_table'            => $tables['pricings_table'],
 				'dates_table'               => $tables['dates_table'],
@@ -151,7 +151,7 @@ class WP_Travel_Actions_Activation {
 	}
 
 	// Temp Helper Functions
-	public static function wptravel_get_db_tables( $blog_id = null ) {
+	public static function get_db_tables( $blog_id = null ) {
 		global $wpdb;
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 

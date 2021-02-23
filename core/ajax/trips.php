@@ -48,27 +48,23 @@ class WP_Travel_Ajax_Trips {
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
 
-		$postData = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-
-		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $postData );
+		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
+		$post_data = wptravel_sanitize_array( $post_data );
+		$response = WP_Travel_Helpers_Trips::update_trip( $trip_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function update_trip_permission_check() {
 
-		/**
-		 * Nonce Verification.
-		 */
-		if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'], 'wp_travel_nonce' ) ) ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-		}
+		// already sanitized.
+		$requests = WP_Travel::get_sanitize_request( 'request' );
 
 		// Empty parameter.
-		if ( empty( $_REQUEST['trip_id'] ) ) {
+		if ( empty( $requests['trip_id'] ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 
-		$trip = get_post( absint( $_REQUEST['trip_id'] ) );
+		$trip = get_post( absint( $requests['trip_id'] ) );
 		if ( is_wp_error( $trip ) ) {
 			return $trip;
 		}
@@ -148,7 +144,7 @@ class WP_Travel_Ajax_Trips {
 	public static function filter_trips() {
 
 		/**
-		 * Permission Check
+		 * Permission and nonce Check
 		 */
 		$permission = self::get_trips_permissions_check();
 
@@ -161,7 +157,6 @@ class WP_Travel_Ajax_Trips {
 		 /**
 		 * Return list of filtered trips according to conditions.
 		 *
-		 * @todo Check Nonce.
 		 */
 
 		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';
@@ -188,7 +183,7 @@ class WP_Travel_Ajax_Trips {
 	public static function get_trip_ids() {
 
 		/**
-		 * Permission Check
+		 * Permission and nonce Check
 		 */
 		$permission = self::get_trips_permissions_check();
 
@@ -201,7 +196,6 @@ class WP_Travel_Ajax_Trips {
 		 /**
 		 * Return list of filtered trips according to conditions.
 		 *
-		 * @todo Check Nonce.
 		 */
 
 		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : '';

@@ -272,16 +272,19 @@ function wptravel_get_checkout_form_fields() {
  *
  * @return array Returns form fields.
  */
-function wptravel_search_filter_widget_form_fields() {
+function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
+	
+	/**
+	 * Already checking nonce above using WP_Travel::verify_nonce( true ).
+	 */
+	$keyword  = ( isset( $sanitize_get['keyword'] ) && '' !== $sanitize_get['keyword'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['keyword'] ) ) : '';
+	$fact     = ( isset( $sanitize_get['fact'] ) && '' !== $sanitize_get['fact'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['fact'] ) ) : '';
+	$type     = ( isset( $sanitize_get['itinerary_types'] ) && '' !== $sanitize_get['itinerary_types'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['itinerary_types'] ) ) : '';
+	$location = ( isset( $sanitize_get['travel_locations'] ) && '' !== $sanitize_get['travel_locations'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['travel_locations'] ) ) : '';
+	$price    = ( isset( $sanitize_get['price'] ) ) ? sanitize_text_field( $sanitize_get['price'] ) : '';
 
-	$keyword  = ( isset( $_GET['keyword'] ) && '' !== $_GET['keyword'] ) ? sanitize_text_field( wp_unslash( $_GET['keyword'] ) ) : '';
-	$fact     = ( isset( $_GET['fact'] ) && '' !== $_GET['fact'] ) ? sanitize_text_field( wp_unslash( $_GET['fact'] ) ) : '';
-	$type     = ( isset( $_GET['itinerary_types'] ) && '' !== $_GET['itinerary_types'] ) ? sanitize_text_field( wp_unslash( $_GET['itinerary_types'] ) ) : '';
-	$location = ( isset( $_GET['travel_locations'] ) && '' !== $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : '';
-	$price    = ( isset( $_GET['price'] ) ) ? sanitize_text_field( $_GET['price'] ) : '';
-
-	$min_price   = ( isset( $_GET['min_price'] ) && '' !== $_GET['min_price'] ) ? (float) $_GET['min_price'] : 0;
-	$max_price   = ( isset( $_GET['max_price'] ) && '' !== $_GET['max_price'] ) ? (float) $_GET['max_price'] : 0;
+	$min_price   = ( isset( $sanitize_get['min_price'] ) && '' !== $sanitize_get['min_price'] ) ? (float) $sanitize_get['min_price'] : 0;
+	$max_price   = ( isset( $sanitize_get['max_price'] ) && '' !== $sanitize_get['max_price'] ) ? (float) $sanitize_get['max_price'] : 0;
 	$price_range = array(
 		array(
 			'name'  => 'min_price',
@@ -295,8 +298,8 @@ function wptravel_search_filter_widget_form_fields() {
 		),
 	);
 
-	$trip_start = (int) ( isset( $_GET['trip_start'] ) && '' !== $_GET['trip_start'] ) ? sanitize_text_field( $_GET['trip_start'] ) : '';
-	$trip_end   = (int) ( isset( $_GET['trip_end'] ) && '' !== $_GET['trip_end'] ) ? sanitize_text_field( $_GET['trip_end'] ) : '';
+	$trip_start = (int) ( isset( $sanitize_get['trip_start'] ) && '' !== $sanitize_get['trip_start'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['trip_start'] ) ) : '';
+	$trip_end   = (int) ( isset( $sanitize_get['trip_end'] ) && '' !== $sanitize_get['trip_end'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['trip_end'] ) ) : '';
 
 	$show_end_date = wptravel_booking_show_end_date();
 	$trip_duration = array(
@@ -416,7 +419,7 @@ function wptravel_search_filter_widget_form_fields() {
 			'wrapper_class' => 'wp-travel-trip-duration',
 		),
 	);
-	$fields = apply_filters( 'wptravel_search_filter_widget_form_fields', $fields );
+	$fields = apply_filters( 'wp_travel_search_filter_widget_form_fields', $fields );
 
 	return wptravel_sort_form_fields( $fields );
 }

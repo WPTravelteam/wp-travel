@@ -70,9 +70,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								break;
 							}
 						}
-						// $payout = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$categories = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
-						// print_r( $categories );
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
@@ -81,7 +79,6 @@ if ( wptravel_is_react_version_enabled() ) {
 						}
 
 						$cart_pax = (array) $cart_item['trip'];
-						// print_r( $cart_pax );
 						$cart_total = 0;
 
 						$trip_date          = ! empty( $cart_item['arrival_date'] ) ? $cart_item['arrival_date'] : '';
@@ -119,7 +116,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								<div class="trip-content">
 									<div class="trip-item-name-price">
 										<div class="trip-name">
-											<h5><a href="javascript:void(0);"><?php echo esc_html( $pricing_name ); ?></a></h5>
+											<h5><a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( $pricing_name ); ?></a></h5>
 											<?php if ( $coupon_applied && 'fixed' !== $coupon_type ) : ?>
 												<span class="tooltip group-discount-button <?php echo esc_attr( ( ! $trip_discount ) ? 'no-discount' : '' ); ?> ">
 													<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
@@ -388,8 +385,8 @@ $pax_label = __( 'Pax', 'wp-travel' );
 $max_attr  = '';
 
 // For old form
-$trip_id       = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : '';
-$trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? absint( $_GET['trip_duration'] ) : 1;
+$trip_id       = WP_Travel::verify_nonce( true ) && ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : '';
+$trip_duration = WP_Travel::verify_nonce( true ) && ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? absint( $_GET['trip_duration'] ) : 1;
 
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 $settings        = wptravel_get_settings();

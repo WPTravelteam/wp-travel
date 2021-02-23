@@ -14,7 +14,7 @@
  * @return bool
  */
 function wptravel_disable_admin_bar( $show_admin_bar ) {
-	if ( apply_filters( 'wptravel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
+	if ( apply_filters( 'wp_travel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ) ) {
 		$show_admin_bar = false;
 	}
 
@@ -164,7 +164,7 @@ function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 		$url = add_query_arg( $endpoint, $value, $permalink );
 	}
 
-	return apply_filters( 'wptravel_get_endpoint_url', $url, $endpoint, $value, $permalink );
+	return apply_filters( 'wp_travel_get_endpoint_url', $url, $endpoint, $value, $permalink );
 }
 
 /**
@@ -173,12 +173,20 @@ function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  * @return string
  */
 function wptravel_lostpassword_url() {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return;
+	}
+
 	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {
 		$url = $default_url;
 	} else {
 		// Don't redirect to the WP Travel endpoint on global network admin lost passwords.
+		/**
+		 * Already checking nonce using WP_Travel::verify_nonce.
+		 */
 		if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( wp_unslash( $_GET['redirect_to'] ), network_admin_url() ) ) { // WPCS: input var ok, sanitization ok.
 			$url = $default_url;
 		} else {
@@ -192,5 +200,5 @@ function wptravel_lostpassword_url() {
 			}
 		}
 	}
-	return apply_filters( 'wptravel_lostpassword_url', $url, $default_url );
+	return apply_filters( 'wp_travel_lostpassword_url', $url, $default_url );
 }

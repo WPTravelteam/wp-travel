@@ -6,6 +6,7 @@ import Select from 'react-select'
 import { useEffect, useState } from '@wordpress/element';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+import WPTravelIcons from '../../../GlobalComponents/Icons/WPTravelIcons';
 
 const SettingsFact = () => {
 
@@ -57,246 +58,23 @@ const SettingsFact = () => {
         } )
     }
 
-    const [ isOpen, setOpen ] = useState( false );
-    const openModal = () => setOpen( true );
-    const closeModal = () => {
-        setOpen( false );
-    }
+    const [ {isTabOpen, tabData}, setState ] = useState({
+        isTabOpen: false,
+        tabData: {}
+    });
 
-    // Replace all '-' from string and capitalize the first letter of string.
-    const slugToName = (icon) => {
-        let str = icon.label.replaceAll('-',' ');
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    let faIcons = 'undefined' !== typeof options.wp_travel_fontawesome_icons ? options.wp_travel_fontawesome_icons : undefined;
-
-    //Update tab settings.
-    const updateTabSettings = (index) => {
-        const lastSelectedTab = sessionStorage.getItem('WPTravelLastSelectedTab');
-
-        if ( 'fontawesome-icon' == lastSelectedTab ) {
-
-            let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');
-            updateFact( 'fa_icon', FAIconValue, index );
-            updateFact( 'selected_icon_type', 'fontawesome-icon', index );
-            setOpen(false);
-
-        } else if( 'custom-upload' == lastSelectedTab ) {
-
-            if ( "wpTravelIconModuleUploaderData" in sessionStorage ) {
-                const selectedImgDataString = sessionStorage.getItem('wpTravelIconModuleUploaderData');
-                const selectedImgData = JSON.parse(selectedImgDataString);
-    
-                const [ selectedImgDataObj ] = selectedImgData;
-    
-                const { url } = selectedImgDataObj;
-                updateFact( 'icon_img', url, index );
-                updateFact( 'selected_icon_type', 'custom-upload', index );
-                setOpen(false);
-            } else {
-                updateFact( 'icon_img', '', index );
-                updateFact( 'selected_icon_type', 'custom-upload', index );
-                setOpen(false);
-            }
-
-        } else if( 'icon-class' == lastSelectedTab ) {
-
-            let iconClassValue = sessionStorage.getItem('WPTravelIconClassValue');
-            updateFact( 'icon', iconClassValue, index );
-            updateFact( 'selected_icon_type', 'icon-class', index );
-            setOpen(false);
-
-        }
-    }
-
-    // Fontawesome Icon Content.
-    const fontawesomeIconContent = (props) => {
-
-        sessionStorage.setItem('WPTravelLastSelectedTab', 'fontawesome-icon');
-
-        const [fontAwesomeIcons, setFontAwesomeIcons] = useState(faIcons);
-
-        const [filterValue, setFilterValue] = useState('');
-
-        const [ selectedFAIcons, setSelectedFAIcons ] = useState(props.fact.fa_icon);
-
-        sessionStorage.setItem('WPTravelFAIconValue', selectedFAIcons );
-
-        const selectedFontAwesomeIcon = (event) => {
-            setSelectedFAIcons(event.target.getAttribute('data-icon'));
-        }
-
-        const resetSelectIcon = (e) => {
-            var dataIconAttr = e.target.getAttribute('data-icon');
-            if ( ! dataIconAttr ) {
-                setSelectedFAIcons('');
-            }
-        }
-
-        useEffect(()=> {
-            let isMounted = true;
-
-            if ( isMounted ) {
-                document.addEventListener("click", resetSelectIcon);
-            }
-
-            return () => {
-                document.removeEventListener("click", resetSelectIcon);
-                isMounted = false;
-            }
-        }, []);
-
-        const ListFAIcons = (icons) => {
-            return (
-                'undefined' != typeof options && 'undefined' != typeof icons &&
-                icons.length > 0 ?
-                    icons.map( (icon, index) => {
-                        let iconName = slugToName(icon);
-                        return <>
-                            <div key={index} id={"tab-item-"+index} className={ selectedFAIcons == icon.value ? 'wti__fontawesome_tab_item selected' : 'wti__fontawesome_tab_item' } data-icon={icon.value} onClick={selectedFontAwesomeIcon}>
-                                <div data-icon={icon.value} className="wti__fontawesome_tab_item_content">
-                                    <i data-icon={icon.value} className={icon.value}></i>
-                                    <div className="wti__fontawesome_tab_item_name" data-icon={icon.value} title={iconName}>{iconName}</div>
-                                </div>
-                            </div>
-                        </>
-                    })
-                    :
-                    <Notice status="error" isDismissible={false}>
-                        {__( 'Icon Not found', 'wp-travel' )}
-                    </Notice>
-            )
-        }
-
-        return <>
-        <PanelRow className="font-awesome-panel">
-            <div className="wti__fontawesome_filter">
-                <TextControl
-                    value={'undefined' !== typeof filterValue && filterValue}
-                    onChange={
-                        (value) => {
-
-                            setFilterValue(value);
-                            if ( value ) {
-                                let filterFAIcons = faIcons.filter((faIcon) => {
-                                    return faIcon.label.includes(value);
-                                });
-
-                                setFontAwesomeIcons(filterFAIcons);
-                            } else {
-                                setFontAwesomeIcons(faIcons);
-                            }
-
-                        }
-                    }
-                    placeholder={__( 'Filter by name...', 'wp-travel' )}
-                />
-
-            </div>
-            <h3>{__( 'All Icons', 'wp-travel' )}</h3>
-            <div className="wti__fontawesome_tab_content">
-                {ListFAIcons(fontAwesomeIcons)}
-            </div>
-        </PanelRow>
-        </>
-    }
-
-    // Icon Class Content.
-    const iconClassContent = (props) => {
-        const [ iconClassName, setIconClassName ] = useState(props.fact.icon ? props.fact.icon : '');
-        sessionStorage.setItem('WPTravelLastSelectedTab', 'icon-class');
-        sessionStorage.setItem('WPTravelIconClassValue', iconClassName );
-        return <>
-        <PanelRow>
-            <label>{__( 'Icon Class', 'wp-travel' )}</label>
-            <TextControl
-                placeholder={__( 'icon', 'wp-travel' )}
-                value={iconClassName}
-                onChange={(value) => {
-                    setIconClassName(value);
-                }}
-            />
-        </PanelRow>
-        </>
-    }
-
-    // Custom Upload Content.
-    const customUploadContent = (props) => {
-        sessionStorage.setItem('WPTravelLastSelectedTab', 'custom-upload');
-
-        const [{ imageUrl, isFetchingImage }, setState] = useState({
-            imageUrl: props.fact.icon_img ? props.fact.icon_img : null,
-            isFetchingImage: false,
+    // In order to close other tab when open one.
+    const panelTabChanged = (index) => {
+        setState({
+            isTabOpen: true,
+            tabData: { index }
         })
+    }
 
-        const mediaInstance = wp.media({
-            multiple: false
-        })
+    const  [ isOpenModal, setIsOpenModal ] = useState(false);
 
-        useEffect(() => {
-            
-            if ( sessionStorage.length > 1 && "wpTravelIconModuleUploaderData" in sessionStorage && '' != sessionStorage.getItem('wpTravelIconModuleUploaderData') ) {
-                setState({
-                    isFetchingImage: true
-                });
-                
-                const imgDataString = sessionStorage.getItem('wpTravelIconModuleUploaderData');
-                const imgData = JSON.parse(imgDataString);
-    
-                const [ imgDataObj ] = imgData;
-    
-                const { url } = imgDataObj;
-
-                setState({
-                    imageUrl: url,
-                    isFetchingImage: false,
-                })
-            }
-        }, []);
-
-        mediaInstance
-            .on('select', () => {
-                const selectedItems = mediaInstance.state().get('selection').toJSON()
-                if ( selectedItems.length > 0 ) {
-
-                    sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
-                    sessionStorage.setItem('wpTravelIconModuleUploaderData', JSON.stringify(selectedItems));
-
-                    // updateFact( 'icon_img', invoiceLogoID.toString(), props.index )
-                }
-                setOpen(true);
-            })
-
-            const onMediaUploaderBtnClicked = () => {
-                mediaInstance.open();
-            }
-
-            const onMediaRemoveBtnClicked = () => {
-                setState({
-                    imageUrl: null,
-                });
-                sessionStorage.removeItem('wpTravelIconModuleUploaderData');
-            }
-
-            return <>
-            <PanelRow>
-                <h3>Icon</h3>
-                <div className="wp-travel-field-value">
-                    <div className="media-preview">
-                        {isFetchingImage && <Spinner />}
-                        {imageUrl && <img src={imageUrl} height="100" width="20%" />}
-                        <div className="wti_custom_uploader_btn_wrapper">
-                            <Button isPrimary onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
-                            {
-                                imageUrl &&
-                                <Button className="wti_custom_remove_btn" isDestructive onClick={onMediaRemoveBtnClicked}>{ __('Remove image', 'wp-travel' ) }</Button>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </PanelRow>
-            </>
+    const openModal = () => {
+        setIsOpenModal(true);
     }
 
     let FieldTypeContent = ( props  ) => {
@@ -375,6 +153,8 @@ const SettingsFact = () => {
                                 return <PanelBody key={index}
                                     title={ 'undefined' != typeof fact.name && fact.name ? fact.name :  __( `Fact ${index + 1} `, 'wp-travel' )}
                                     initialOpen={false}
+                                    onToggle = { () => panelTabChanged(index) }
+                                    opened= { isTabOpen && index == tabData.index ? true : false }
                                     >
                                     <PanelRow>
                                         <label>{__( 'Field Name', 'wp-travel' )}</label>
@@ -419,58 +199,14 @@ const SettingsFact = () => {
                                             }
                                             {
                                                 'icon-class' == fact.selected_icon_type && '' != fact.icon &&
-                                                <i className={fact.icon}></i>
+                                                <p>{__( 'Icon Class: ', 'wp-travel' )}<strong>[ {fact.icon} ]</strong></p>
                                             }
                                             <Button isSecondary onClick={ openModal }>{__( 'Choose Icon', 'wp-travel' )}</Button>
                                         </div>
-                                        { isOpen && (
-                                                <Modal key={index} className="wti__icon_select_modal"
-                                                    title={<><i className="fas fa-list"></i>{__( ' Icon Type', 'wp-travel' )}</>}
-                                                    onRequestClose={ closeModal }>
-                                                    <TabPanel className="my-tab-panel"
-                                                        activeClass="active-tab"
-                                                        initialTabName= {sessionStorage.getItem('WPTravelLastSelectedTab') ? sessionStorage.getItem('WPTravelLastSelectedTab'): "icon-class"}
-                                                        onSelect={ () => false }
-                                                        isDismissible={false}
-                                                        tabs={ [
-                                                                {
-                                                                name: 'fontawesome-icon',
-                                                                title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
-                                                                className: 'wti__fa_icon',
-                                                                content: fontawesomeIconContent
-                                                            },
-                                                            {
-                                                                name: 'icon-class',
-                                                                title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
-                                                                className: 'wti__icon_class',
-                                                                content: iconClassContent
-                                                            },
-                                                            {
-                                                                name: 'custom-upload',
-                                                                title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
-                                                                className: 'wti__custom_upload',
-                                                                content: customUploadContent
-                                                            },
-                                                        ] }>
-                                                        {
-                                                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={index} fact={fact} /> : <>{__('Error', 'wp-travel')}</>
-                                                        }
-                                                    </TabPanel>
-                                                    <div className="wti__insert_icon">
-                                                    {
-                                                        <Notice status="warning" isDismissible={false}>
-                                                            {__( 'Click insert to save.', 'wp-travel' )}
-                                                        </Notice>
-                                                    }
-                                                        <Button
-                                                        isSecondary
-                                                        onClick={() => updateTabSettings(index)}
-                                                        >
-                                                            {__( 'Insert', 'wp-travel' )}
-                                                        </Button>
-                                                    </div>
-                                                </Modal>
-                                        ) }
+                                        {
+                                            isOpenModal &&
+                                            <WPTravelIcons factData = {fact} factIndex = {index} modalHandleClick = {setIsOpenModal} />
+                                        }
                                     </PanelRow>
 
                                     <PanelRow className="wp-travel-action-section">

@@ -3,7 +3,7 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.6.1
+Tested up to: 5.6.2
 Requires PHP: 5.5
 Stable tag: 4.4.7
 License: GPLv3
@@ -241,12 +241,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.4.7 =
-Release Date: 18th February, 2021
+Release Date: 22nd February, 2021
 
 Fixes:
 * Added nonce verification in missing form request and sanitize input data.
 * Updated exteral JS library to latest version.
 * Function prefixing changed to 'wptravel_' from 'wp_travel_'.
+* Function name starts with 'wp_travel_' are deprecated.
 
 = 4.4.6 =
 Release Date: 5th February, 2021

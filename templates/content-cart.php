@@ -21,7 +21,7 @@ $settings = wptravel_get_settings();
 $checkout_page_url = wptravel_get_checkout_url();
 
 if ( isset( $settings['checkout_page_id'] ) ) {
-	$checkout_page_id  = apply_filters( 'wptravel_wpml_object_id', $settings['checkout_page_id'], 'checkout_page_id' ); // @since 3.1.8 WPML
+	$checkout_page_id  = apply_filters( 'wp_travel_wpml_object_id', $settings['checkout_page_id'], 'checkout_page_id' ); // @since 3.1.8 WPML
 	$checkout_page_url = get_permalink( $checkout_page_id );
 }
 
@@ -29,8 +29,8 @@ $pax_label = __( 'Pax', 'wp-travel' );
 $max_attr  = '';
 
 // For old form.
-$trip_id       = ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : '';
-$trip_duration = ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? absint( $_GET['trip_duration'] ) : 1;
+$trip_id       = WP_Travel::verify_nonce( true ) && ( isset( $_GET['trip_id'] ) && '' !== $_GET['trip_id'] ) ? absint( $_GET['trip_id'] ) : '';
+$trip_duration = WP_Travel::verify_nonce( true ) && ( isset( $_GET['trip_duration'] ) && '' !== $_GET['trip_duration'] ) ? absint( $_GET['trip_duration'] ) : 1;
 
 $fixed_departure = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
 $settings        = wptravel_get_settings();

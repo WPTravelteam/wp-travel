@@ -91,19 +91,25 @@ class Wp_Travel_User_Account {
 	 */
 	public static function output() {
 
+		$sanitized_request = WP_Travel::get_sanitize_request();
+
 		global $wp;
 
 		if ( ! is_user_logged_in() ) {
 
-			// After password reset, add confirmation message.
-			if ( ! empty( $_GET['password-reset'] ) ) { ?>
+			// After password reset, add confirmation message, and already checking nonce above.
+			if ( ! empty( $sanitized_request['password-reset'] ) ) { ?>
 
 				<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php esc_html_e( 'Your Password has been updated successfully. Please Log in to continue.', 'wp-travel' ); ?></p>
 
 				<?php
 
 			}
-			if ( isset( $_GET['action'] ) && 'lost-pass' == $_GET['action'] ) { // @phpcs:ignore
+
+			/**
+			 * We are already checking nonce using WP_Travel::verify_nonce();
+			 */
+			if ( isset( $sanitized_request['action'] ) && 'lost-pass' == $sanitized_request['action'] ) { // @phpcs:ignore
 				self::lost_password();
 			} else {
 				// Get user login.
@@ -121,8 +127,15 @@ class Wp_Travel_User_Account {
 	 * Lost password page handling.
 	 */
 	public static function lost_password() {
+
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
+
 		/**
 		 * After sending the reset link, don't show the form again.
+		 *
+		 * We are already checking nonce above.
 		 */
 		if ( ! empty( $_GET['reset-link-sent'] ) ) { // @phpcs:ignore
 
@@ -173,7 +186,7 @@ class Wp_Travel_User_Account {
 		$user = check_password_reset_key( $key, $login );
 
 		if ( is_wp_error( $user ) ) {
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'wp-travel' ), 'error' );
 			return false;
 		}
 
@@ -192,7 +205,7 @@ class Wp_Travel_User_Account {
 
 		if ( empty( $login ) ) {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Enter an email or username.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Enter an email or username.', 'wp-travel' ), 'error' );
 
 			return false;
 
@@ -212,20 +225,20 @@ class Wp_Travel_User_Account {
 
 		if ( $errors->get_error_code() ) {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $errors->get_error_message(), 'error' );
+			WPTravel()->notices->add( $errors->get_error_message(), 'error' );
 
 			return false;
 		}
 
 		if ( ! $user_data ) {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Invalid username or email.', 'wp-travel' ), 'error' );
 
 			return false;
 		}
 
 		if ( is_multisite() && ! is_user_member_of_blog( $user_data->ID, get_current_blog_id() ) ) {
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Invalid username or email.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Invalid username or email.', 'wp-travel' ), 'error' );
 
 			return false;
 		}
@@ -239,13 +252,13 @@ class Wp_Travel_User_Account {
 
 		if ( ! $allow ) {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . __( 'Password reset is not allowed for this user.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Password reset is not allowed for this user.', 'wp-travel' ), 'error' );
 
 			return false;
 
 		} elseif ( is_wp_error( $allow ) ) {
 
-			WPTravel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $allow->get_error_message(), 'error' );
+			WPTravel()->notices->add( $allow->get_error_message(), 'error' );
 
 			return false;
 		}

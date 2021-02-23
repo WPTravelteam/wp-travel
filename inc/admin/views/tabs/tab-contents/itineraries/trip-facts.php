@@ -235,7 +235,7 @@ function wptravel_trip_facts_single_html( $fact = array(), $index = false ) {
 			<div class="panel-heading" role="tab" id="heading-<?php echo $index; ?>">
 				<h4 class="panel-title">
 					<div class="wp-travel-sorting-handle"></div>
-					<a class="<?php $index && print_r( 'collapsed' ); ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
+					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
 						<span><?php echo esc_html( $label); ?> <span>
 						<!-- <span class="collapse-icon"></span> -->
 					</a>

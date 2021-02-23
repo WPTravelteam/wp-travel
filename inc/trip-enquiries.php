@@ -14,7 +14,7 @@ function wptravel_enquiries_form_fields() {
 
 	// Default enquiry fields.
 	$enquiry_fields = WP_Travel_Default_Form_Fields::enquiry();
-	$enquiry_fields = apply_filters( 'wptravel_enquiries_form_fields', $enquiry_fields );
+	$enquiry_fields = apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
 	if ( ! is_admin() ) {
 		$enquiry_fields['label_submit_enquiry'] = array(
 			'type'    => 'hidden',
@@ -476,6 +476,9 @@ add_action( 'wp_ajax_wptravel_save_user_enquiry', 'wptravel_save_user_enquiry' )
 add_action( 'wp_ajax_nopriv_wptravel_save_user_enquiry', 'wptravel_save_user_enquiry' );
 
 function wptravel_enquiry_form_header() {
+	if ( is_archive() ) {
+		return;
+	}
 	?>
 		<div class="wp-travel-inquiry__form-header">
 			<h3><?php echo esc_html( sprintf( _x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'wp-travel' ), get_the_title() ) ); ?></h3>

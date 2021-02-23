@@ -879,7 +879,7 @@ function wptravel_new_pricing_list_admin() {
 		$args = array( 'trip_id' => $trip_id );
 		$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
-		$payout_percent = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
+		$payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent, true );
 		
 		if ( ! $payout_percent ) {
@@ -1733,7 +1733,7 @@ function wptravel_old_pricing_list_admin() {
 		$args = array( 'trip_id' => $trip_id );
 		$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
 
-		$payout_percent = get_post_meta( $trip_id, 'wptravel_minimum_partial_payout_percent', true );
+		$payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent, true );
 		if ( ! $payout_percent ) {
 			$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
