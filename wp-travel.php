@@ -759,7 +759,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 	}
 endif;
-
 /**
  * Main instance of WP Travel.
  *
