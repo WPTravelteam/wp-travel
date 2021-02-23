@@ -4,11 +4,12 @@
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
-		"setup": "composer install && yarn install && yarn run build && wp-scripts env install",
+    "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
     "build": "wp-scripts build",
     "start": "wp-scripts start",
     "build:pre_release": "npx wp-scripts build && npx grunt build",
-		"lint:php": "wp-scripts env lint-php"
+    "lint:php": "wp-scripts env lint-php",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "hotels",
     "booking"
   ],
-  "author": "WEN Solutions",
+  "author": "WP Travel",
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://gitlab.com/ws-plugins/wp-travel/issues"
@@ -52,6 +53,8 @@
     "grunt-wp-i18n": "^1.0.0",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
+    "husky": "^5.1.1",
+    "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^0.9.0",
     "node-native-zip": "^1.1.0",
     "node-sass": "^4.13.1",
@@ -69,5 +72,15 @@
     "react-select": "^3.0.8",
     "react-sortablejs": "^2.0.11",
     "rrule": "^2.6.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.php": [
+      "composer run lint"
+    ]
   }
 }

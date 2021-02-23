@@ -1,7 +1,7 @@
 === WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
-Donate link: https://wptravel.io/downloads/?utm_source=donate&utm_campaign=WP%20Plugin
+Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
 Tested up to: 5.6.2
 Requires PHP: 5.5
