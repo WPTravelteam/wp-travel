@@ -1,13 +1,32 @@
 <?php
-class WP_Travel_Frontend_Assets {
+/**
+ * Frontend assets file.
+ *
+ * @package WP Travel.
+ */
+
+/**
+ * WpTravel_Frontend_Assets class.
+ */
+class WpTravel_Frontend_Assets {
+	/**
+	 * Init.
+	 *
+	 * @return void
+	 */
 	public static function init() {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 	}
 
+	/**
+	 * Assets enqueue.
+	 *
+	 * @return void
+	 */
 	public static function assets() {
 		if ( is_singular( 'itineraries' ) ) {
 			global $post;
-			$deps                   = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
+			$deps = include_once sprintf( '%sapp/build/frontend-booking-widget.asset.php', WP_TRAVEL_ABSPATH );
 			if ( ! wptravel_can_load_bundled_scripts() ) {
 				$deps['dependencies'][] = 'jquery-datepicker-lib';
 			} else {
@@ -16,7 +35,7 @@ class WP_Travel_Frontend_Assets {
 			wp_register_script( 'wp-travel-frontend-booking-widget', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.js', $deps['dependencies'], $deps['version'], true );
 			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget.css', array(), $deps['version'] );
 
-			// Localize the script with new data
+			// Localize the script with new data.
 			$translation_array = array();
 			$settings          = wptravel_get_settings();
 
@@ -44,4 +63,5 @@ class WP_Travel_Frontend_Assets {
 	}
 }
 
-WP_Travel_Frontend_Assets::init();
+WpTravel_Frontend_Assets::init();
+

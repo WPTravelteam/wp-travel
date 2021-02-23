@@ -1,5 +1,14 @@
 <?php
-class WP_Travel_Admin_Assets {
+/**
+ * Admin Assets file.
+ *
+ * @package wp-travel/app/inc/admin.
+ */
+
+/**
+ * WpTravel_Admin_Assets class.
+ */
+class WpTravel_Admin_Assets {
 
 	/**
 	 * Init.
@@ -13,9 +22,10 @@ class WP_Travel_Admin_Assets {
 	 */
 	public static function assets() {
 		$screen                = get_current_screen();
-		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true );
+		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true ); // @phpcs:ignore
+		$react_settings_enable = apply_filters( 'wptravel_settings_react_enabled', true );
 		$allowed_screen        = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'itinerary-booking_page_settings' );
-		if ( in_array( $screen->id, $allowed_screen ) || ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) ) {
+		if ( in_array( $screen->id, $allowed_screen, true ) || ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) ) {
 			wp_enqueue_editor();
 			$deps                   = include_once sprintf( '%s/app/build/admin-trip-options.asset.php', WP_TRAVEL_ABSPATH );
 			$deps['dependencies'][] = 'jquery';
@@ -34,4 +44,4 @@ class WP_Travel_Admin_Assets {
 	}
 }
 
-WP_Travel_Admin_Assets::init();
+WpTravel_Admin_Assets::init();
