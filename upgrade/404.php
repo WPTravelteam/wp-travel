@@ -4,21 +4,32 @@
  *
  * @package wp-travel/upgrade
  */
+
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( 'yes' === get_option( 'wp_travel_price_migrate_404', 'no' ) ) {
 	return;
 }
 
-
 if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
+
+	/**
+	 * Migrate old trip prices to new database in version 4.0.4
+	 */
 	function wptravel_migrate_data_to_404() {
 		global $wpdb;
 		$post_type = WP_TRAVEL_POST_TYPE;
-		$post_ids  = $wpdb->get_results( "SELECT ID from {$wpdb->posts} where post_type='{$post_type}' and post_status in( 'publish', 'draft' )" );
+		$post_ids  = $wpdb->get_results( $wpdb->prepare( "SELECT ID from {$wpdb->posts} where post_type=%s and post_status in( 'publish', 'draft' )", $post_type ) );
 
 		if ( is_array( $post_ids ) ) {
 			foreach ( $post_ids as $trip ) {
 				$trip_id    = $trip->ID;
-				$args = array(
+				$args       = array(
 					'trip_id' => $trip_id,
 				);
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
@@ -29,4 +40,4 @@ if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
 	}
 }
 
-wp_travel_migrate_data_to_404();
+wptravel_migrate_data_to_404();

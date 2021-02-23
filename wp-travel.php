@@ -55,13 +55,13 @@ if ( ! class_exists( 'WpTravel' ) ) :
 		protected static $instance = null;
 
 		/**
-		 * Main WP_Travel Instance.
-		 * Ensures only one instance of WP_Travel is loaded or can be loaded.
+		 * Main WpTravel Instance.
+		 * Ensures only one instance of WpTravel is loaded or can be loaded.
 		 *
 		 * @since 1.0.0
 		 * @static
 		 * @see WPTravel()
-		 * @return WP_Travel - Main instance.
+		 * @return WpTravel - Main instance.
 		 */
 		public static function instance() {
 			if ( is_null( self::$instance ) ) {
@@ -71,7 +71,7 @@ if ( ! class_exists( 'WpTravel' ) ) :
 		}
 
 		/**
-		 * WP_Travel Constructor.
+		 * WpTravel Constructor.
 		 */
 		public function __construct() {
 			$this->define_constants();
@@ -113,36 +113,36 @@ if ( ! class_exists( 'WpTravel' ) ) :
 			add_action( 'activated_plugin', array( $this, 'plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'setup_environment' ) );
 
-			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
+			add_action( 'init', array( 'WpTravel_Post_Types', 'init' ) );
 
 			// Set priority to move submenu.
 			$sbumenus         = wptravel_get_submenu();
 			$priority_enquiry = isset( $sbumenus['bookings']['enquiries']['priority'] ) ? $sbumenus['bookings']['enquiries']['priority'] : 10;
 			$priority_extras  = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
-			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_enquiries' ), $priority_enquiry );
-			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_tour_extras' ), $priority_extras );
+			add_action( 'init', array( 'WpTravel_Post_Types', 'register_enquiries' ), $priority_enquiry );
+			add_action( 'init', array( 'WpTravel_Post_Types', 'register_tour_extras' ), $priority_extras );
 
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
 			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			add_action( 'wp_enqueue_scripts', array( 'WP_Travel_Assets', 'frontend' ) );
-			add_action( 'wp_head', array( 'WP_Travel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
-			add_action( 'wp_footer', array( 'WP_Travel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
+			add_action( 'wp_enqueue_scripts', array( 'WpTravel_Assets', 'frontend' ) );
+			add_action( 'wp_head', array( 'WpTravel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
+			add_action( 'wp_footer', array( 'WpTravel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
-				add_action( 'admin_enqueue_scripts', array( 'WP_Travel_Assets', 'admin' ) );
+				add_action( 'admin_enqueue_scripts', array( 'WpTravel_Assets', 'admin' ) );
 
 				// To delete transient.
 				add_action( 'admin_init', 'wptravel_admin_init' ); // @since 1.0.7
 
-				$this->tabs     = new WP_Travel_Admin_Tabs();
-				$this->uploader = new WP_Travel_Admin_Uploader();
+				$this->tabs     = new WpTravel_Admin_Tabs();
+				$this->uploader = new WpTravel_Admin_Uploader();
 
 				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
 			}
-			$this->session = new WP_Travel_Session();
-			$this->notices = new WP_Travel_Notices();
-			$this->coupon  = new WP_Travel_Coupon();
+			$this->session = new WpTravel_Session();
+			$this->notices = new WpTravel_Notices();
+			$this->coupon  = new WpTravel_Coupon();
 
 			// For Network.
 			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
@@ -209,7 +209,7 @@ if ( ! class_exists( 'WpTravel' ) ) :
 		 * @return void
 		 */
 		public function wptravel_network_menu() {
-			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WP_Travel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
+			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
 		}
 
 		/**
@@ -491,7 +491,7 @@ if ( ! class_exists( 'WpTravel' ) ) :
 			}
 
 			// Flush Rewrite rule.
-			WP_Travel_Post_Types::init();
+			WpTravel_Post_Types::init();
 			Wp_Travel_Taxonomies::init();
 			flush_rewrite_rules();
 
@@ -762,8 +762,8 @@ if ( ! class_exists( 'WpTravel' ) ) :
 				if ( $return_bool ) {
 					return false;
 				}
-				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-				return WP_Travel_Helpers_REST_API::response( $error );
+				$error = WpTravel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
+				return WpTravel_Helpers_REST_API::response( $error );
 			}
 			return true;
 		}
@@ -841,7 +841,7 @@ endif;
 /**
  * Main instance of WP Travel.
  *
- * Returns the main instance of WP_Travel to prevent the need to use globals.
+ * Returns the main instance of WpTravel to prevent the need to use globals.
  *
  * @since  1.0.0
  * @return WP Travel
