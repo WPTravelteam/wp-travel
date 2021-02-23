@@ -828,7 +828,9 @@ function wptravel_frontend_trip_facts( $post_id ) {
 										$i++;
 									}
 								} elseif ( isset( $trip_fact['fact_id'] ) && 'single' === $trip_fact['type'] ) {
-									echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] );
+									if ( isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ] ) && $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] ) {
+										echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $trip_fact['value'] ] );
+									}
 								} else {
 									echo esc_html( $trip_fact['value'] );
 								}
