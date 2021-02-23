@@ -37,7 +37,7 @@ git checkout dev
 yarn setup
 ```
 
-### Issue with ```PHPCS``` in ```VS Code```.
+### ⁉️ Issue with ```PHPCS``` in ```VS Code```.
 Incase ```phpcs``` is not showing error in editor then:
 - Create ```.vscode``` folder in ```wp-travel``` plugin folder.
 - Create ```settings.json``` file inside ```.vscode```.
@@ -47,4 +47,9 @@ Incase ```phpcs``` is not showing error in editor then:
 {
     "phpcs.executablePath": "./vendor/bin/phpcs"
 }
+```
+
+### Start development
+```sh
+yarn start
 ```
