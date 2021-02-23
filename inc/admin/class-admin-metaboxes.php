@@ -91,7 +91,7 @@ class WP_Travel_Admin_Metaboxes {
 				'tab_label'     => __( 'Cart & Checkout', 'wp-travel' ),
 				'content_title' => __( 'Cart & Checkout Options', 'wp-travel' ),
 				'priority'      => 80,
-				'callback'      => 'wp_travel_trip_callback_cart_checkout',
+				'callback'      => 'wptravel_trip_callback_cart_checkout',
 				'icon'          => 'fa-shopping-cart',
 			),
 			'inventory'           => array(

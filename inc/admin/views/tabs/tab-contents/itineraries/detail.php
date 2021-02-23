@@ -1,5 +1,11 @@
 <?php
 /**
+ * Callback function of detail tab.
+ *
+ * @package WP Travel
+ */
+
+/**
  * Detail Tab HTML.
  *
  * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
@@ -8,15 +14,14 @@ function wptravel_trip_callback_detail() {
 
 	global $post;
 
-	$settings = wptravel_get_settings();
+	$settings                = wptravel_get_settings();
+	$enable_custom_trip_code = isset( $settings['enable_custom_trip_code_option'] ) ? $settings['enable_custom_trip_code_option'] : 'no';
 
-	$enable_custom_trip_code_option = isset( $settings['enable_custom_trip_code_option'] ) ? $settings['enable_custom_trip_code_option'] : 'no';
-
-	$trip_code = wptravel_get_trip_code( $post->ID );
-	$trip_code_disabled = '';
+	$trip_code            = wptravel_get_trip_code( $post->ID );
+	$trip_code_disabled   = '';
 	$trip_code_input_name = 'name=wp_travel_trip_code';
-	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) || 'yes' !== $enable_custom_trip_code_option ) :
-		$trip_code_disabled = 'disabled=disabled';
+	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) || 'yes' !== $enable_custom_trip_code ) :
+		$trip_code_disabled   = 'disabled=disabled';
 		$trip_code_input_name = '';
 	endif;
 	?>
@@ -27,7 +32,7 @@ function wptravel_trip_callback_detail() {
 				<input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" />
 				<?php if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) : ?>
 				<p class="description">
-					<?php printf( __( 'Need Custom Trip Code? Check %s Utilities addons%s', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
+					<?php printf( __( 'Need Custom Trip Code? Check %1$s Utilities addons%2$s', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
 				</p>
 				<?php endif; ?>
 			</td>
@@ -43,7 +48,7 @@ function wptravel_trip_callback_detail() {
 				<h4><label for="excerpt"><?php esc_html_e( 'Short Description', 'wp-travel' ); ?></label></h4>
 				<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea>
 				<p class="description">
-					<?php printf( wp_kses_post( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%s Learn more about manual excerpts%s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ) ); ?>
+					<?php printf( wp_kses_post( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%1$s Learn more about manual excerpts%2$s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ) ); ?>
 				</p>
 			</td>
 		</tr>

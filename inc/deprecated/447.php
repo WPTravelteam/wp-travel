@@ -1274,4 +1274,7 @@ function wp_travel_is_admin_page( $pages = array() ){
 	return wptravel_is_admin_page( $pages );
 }
 
-
+function wp_travel_trip_callback_cart_checkout( $tabs, $args ) {
+	wptravel_deprecated_function( "wp_travel_trip_callback_cart_checkout", "4.4.7", "wptravel_trip_callback_cart_checkout" );
+	return wptravel_trip_callback_cart_checkout(  $tabs, $args  );
+}

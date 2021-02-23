@@ -23,14 +23,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WpTravel' ) ) :
+if ( ! class_exists( 'WP_Travel' ) ) :
 
 	/**
-	 * Main WpTravel Class (singleton).
+	 * Main WP_Travel Class (singleton).
 	 *
 	 * @since 1.0.0
 	 */
-	final class WpTravel {
+	final class WP_Travel {
 
 		/**
 		 * WP Travel version.
@@ -391,13 +391,17 @@ if ( ! class_exists( 'WpTravel' ) ) :
 			 */
 
 			// Front End.
-			require WP_TRAVEL_ABSPATH . '/app/inc/admin/metabox-trip-edit.php';
-			require WP_TRAVEL_ABSPATH . '/app/inc/admin/assets.php';
-			require WP_TRAVEL_ABSPATH . '/app/inc/admin/localize.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/class-wptravel-admin-metabox-trip-edit.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/class-wptravel-admin-assets.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/admin/class-wptravel-localize-admin.php';
 
 			// Front End.
-			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/single-itinerary-hooks.php';
-			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/assets.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
+			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
+
+
+			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
 		}
 
@@ -847,7 +851,7 @@ endif;
  * @return WP Travel
  */
 function wptravel() {
-	return WpTravel::instance();
+	return WP_Travel::instance();
 }
 
 // Start WP Travel.

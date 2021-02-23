@@ -1,6 +1,6 @@
 <?php
 /**
- * Template file for WP Travel inventory tab.
+ * Callback function of cart & checkout tab.
  *
  * @package WP Travel
  */

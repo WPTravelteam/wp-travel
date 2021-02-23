@@ -75,7 +75,7 @@ class WpTravel_Admin_Tour_Extras_Metaboxes {
 		);
 
 		$tabs[ self::$post_type ] = $tour_extras;
-		$tabs = apply_filters( 'wp_travel_tour_extras_tabs', $tabs ); //@phpcs:ignore
+		$tabs = wptravel_do_deprecated_action( 'wp_travel_tour_extras_tabs', array( $tabs ), '4.4.7', 'wptravel_tour_extras_tabs' );  // @phpcs:ignore
 		$tabs                     = apply_filters( 'wptravel_tour_extras_tabs', $tabs );
 		return $tabs;
 	}
