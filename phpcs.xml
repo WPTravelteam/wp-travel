@@ -3,7 +3,7 @@
 	<description>Rules for WP Travel</description>
 
 	<arg name="extensions" value="php" />
-	<arg name="basepath" value="./" />
+	<!-- <arg name="basepath" value="./" /> -->
 	<file>./</file>
 
 	<exclude-pattern>build/*</exclude-pattern>
