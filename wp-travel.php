@@ -113,14 +113,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'activated_plugin', array( $this, 'plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'setup_environment' ) );
 
-			add_action( 'init', array( 'WpTravel_Post_Types', 'init' ) );
+			add_action( 'init', array( 'WP_Travel_Post_Types', 'init' ) );
 
 			// Set priority to move submenu.
 			$sbumenus         = wptravel_get_submenu();
 			$priority_enquiry = isset( $sbumenus['bookings']['enquiries']['priority'] ) ? $sbumenus['bookings']['enquiries']['priority'] : 10;
 			$priority_extras  = isset( $sbumenus['bookings']['extras']['priority'] ) ? $sbumenus['bookings']['extras']['priority'] : 10;
-			add_action( 'init', array( 'WpTravel_Post_Types', 'register_enquiries' ), $priority_enquiry );
-			add_action( 'init', array( 'WpTravel_Post_Types', 'register_tour_extras' ), $priority_extras );
+			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_enquiries' ), $priority_enquiry );
+			add_action( 'init', array( 'WP_Travel_Post_Types', 'register_tour_extras' ), $priority_extras );
 
 			add_action( 'init', array( 'Wp_Travel_Taxonomies', 'init' ) );
 
@@ -135,14 +135,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				// To delete transient.
 				add_action( 'admin_init', 'wptravel_admin_init' ); // @since 1.0.7
 
-				$this->tabs     = new WpTravel_Admin_Tabs();
-				$this->uploader = new WpTravel_Admin_Uploader();
+				$this->tabs     = new WP_Travel_Admin_Tabs();
+				$this->uploader = new WP_Travel_Admin_Uploader();
 
 				add_action( 'current_screen', array( $this, 'conditional_includes' ) );
 			}
-			$this->session = new WpTravel_Session();
-			$this->notices = new WpTravel_Notices();
-			$this->coupon  = new WpTravel_Coupon();
+			$this->session = new WP_Travel_Session();
+			$this->notices = new WP_Travel_Notices();
+			$this->coupon  = new WP_Travel_Coupon();
 
 			// For Network.
 			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
@@ -399,7 +399,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
 
-
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
@@ -495,7 +494,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 
 			// Flush Rewrite rule.
-			WpTravel_Post_Types::init();
+			WP_Travel_Post_Types::init();
 			Wp_Travel_Taxonomies::init();
 			flush_rewrite_rules();
 
