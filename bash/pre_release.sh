@@ -7,7 +7,7 @@ git checkout dev
 echo "*********************************"
 
 echo "Assets Tasks"
-grunt pre_release
+# grunt pre_release
 yarn build:pre_release
 echo "*********************************"
 
