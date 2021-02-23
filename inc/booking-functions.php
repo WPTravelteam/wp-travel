@@ -27,7 +27,8 @@ function wptravel_book_now() {
 	 * @hooked array( 'WP_Travel_Coupon', 'process_update_count' )
 	 * @since WP Travel 4.4.2
 	 */
-	do_action( 'wp_travel_action_before_booking_process' );
+	do_action( 'wp_travel_action_before_booking_process' ); // phpcs:ignore
+	do_action( 'wptravel_action_before_booking_process' );
 
 	// Start Booking Process.
 	$items = $wt_cart->getItems();
@@ -48,12 +49,16 @@ function wptravel_book_now() {
 	$pricing_id             = array(); // @since WP Travel v4.0
 	$trip_time              = array(); // @since WP Travel v4.0
 	foreach ( $items as $key => $item ) {
+		// @since 3.1.3
+		$arrival_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
+		$arrival_date = apply_filters( 'wptravel_email_travel_date', $arrival_date, $item );
+
 		$trip_ids[]               = $item['trip_id'];
 		$pax_array[]              = $item['pax'];
 		$price_keys[]             = $item['price_key'];
 		$arrival_date[]           = $item['arrival_date'];
 		$departure_date[]         = $item['departure_date'];
-		$arrival_date_email_tag[] = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // @since 3.1.3
+		$arrival_date_email_tag[] = $arrival_date;
 		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since WP Travel v4.0
 		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
 	}
@@ -106,7 +111,7 @@ function wptravel_book_now() {
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wptravel_book_now', 'wp_travel_payment_amount' );
 	$meta_array  = wptravel_sanitize_array( $_POST );
 	foreach ( $meta_array as $meta_name => $meta_val ) {
-		if ( in_array( $meta_name, $post_ignore ) ) {
+		if ( in_array( $meta_name, $post_ignore, true ) ) {
 			continue;
 		}
 		if ( is_array( $meta_val ) ) {
@@ -145,8 +150,8 @@ function wptravel_book_now() {
 		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 
-	$settings  = wptravel_get_settings();
-	$first_key = '';
+	$settings       = wptravel_get_settings();
+	$first_key      = '';
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
 		$args = array(
@@ -171,7 +176,11 @@ function wptravel_book_now() {
 		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 		 * @since WP Travel 4.0.0
 		 */
-		do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $args ) );
+		$inventory_args = apply_filters( 'wp_travel_inventory_args', $args ); // phpcs:ignore
+		$inventory_args = apply_filters( 'wptravel_inventory_args', $inventory_args );
+
+		do_action( 'wp_travel_trip_inventory', $inventory_args ); // phpcs:ignore
+		do_action( 'wptravel_trip_inventory', $inventory_args );
 		// End of Inventory.
 
 		// Begin Send Email to client / admin.
@@ -181,7 +190,8 @@ function wptravel_book_now() {
 		 * @hooked array( 'WP_Travel_Email', 'send_booking_emails' )
 		 * @since WP Travel 4.4.2
 		 */
-		do_action( 'wp_travel_action_after_inventory_update', $args );
+		do_action( 'wp_travel_action_after_inventory_update', $args ); // phpcs:ignore
+		do_action( 'wptravel_action_after_inventory_update', $args );
 	} else {
 
 		// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
@@ -193,7 +203,7 @@ function wptravel_book_now() {
 			$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
 
 			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
-			$booking_count     = ( isset( $booking_count ) && '' != $booking_count ) ? $booking_count : 0;
+			$booking_count     = ( isset( $booking_count ) && '' !== $booking_count ) ? $booking_count : 0;
 			$new_booking_count = $booking_count + 1;
 			update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
 
@@ -201,7 +211,7 @@ function wptravel_book_now() {
 
 				$user = wp_get_current_user();
 
-				if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+				if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
 
 					$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
 
@@ -229,13 +239,13 @@ function wptravel_book_now() {
 				'time'          => $trip_time,
 			);
 			$args = array(
-				'trip_id'        => $trip_id,
-				'booking_id'     => $booking_id,
-				'pricing_id'     => $pricing_id,
-				'pax'            => $pax,
-				'selected_date'  => $arrival_date, // [used in inventory]
-				'time'           => $trip_time,
-				'price_key'      => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
+				'trip_id'       => $trip_id,
+				'booking_id'    => $booking_id,
+				'pricing_id'    => $pricing_id,
+				'pax'           => $pax,
+				'selected_date' => $arrival_date, // [used in inventory].
+				'time'          => $trip_time,
+				'price_key'     => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
 			);
 			/**
 			 * Trigger Update inventory values action.
@@ -243,7 +253,11 @@ function wptravel_book_now() {
 			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 			 * @since WP Travel 4.0.0
 			 */
-			do_action( 'wp_travel_trip_inventory', apply_filters( 'wp_travel_inventory_args', $args ) );
+			$inventory_args = apply_filters( 'wp_travel_inventory_args', $args ); // phpcs:ignore
+			$inventory_args = apply_filters( 'wptravel_inventory_args', $inventory_args );
+
+			do_action( 'wp_travel_trip_inventory', $inventory_args ); // phpcs:ignore
+			do_action( 'wptravel_trip_inventory', $inventory_args );
 			// End of Inventory.
 		}
 		if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
@@ -258,11 +272,12 @@ function wptravel_book_now() {
 	 *
 	 * @since 1.0.5 // For Payment.
 	 */
-	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key );
+	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key ); // phpcs:ignore
+	do_action( 'wptravel_after_frontend_booking_save', $booking_id, $first_key );
 
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
 	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';
-	if ( 'no' === $require_login_to_checkout && 'yes' == $create_user_while_booking && ! is_user_logged_in() ) {
+	if ( 'no' === $require_login_to_checkout && 'yes' === $create_user_while_booking && ! is_user_logged_in() ) {
 		wptravel_create_new_customer( $customer_email );
 	}
 	// Clear Transient To update booking Count.
@@ -289,7 +304,7 @@ function wptravel_get_booking_chart() {
 	$submission_request = WP_Travel::get_sanitize_request();
 
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array();
-	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ): 0;
+	$wp_travel_post_id        = ( isset( $submission_request['booking_itinerary'] ) && '' !== $submission_request['booking_itinerary'] ) ? absint( $submission_request['booking_itinerary'] ) : 0;
 
 	$country_list     = wptravel_get_countries();
 	$selected_country = ( isset( $submission_request['booking_country'] ) && '' !== $submission_request['booking_country'] ) ? esc_attr( $submission_request['booking_country'] ) : '';
@@ -309,7 +324,7 @@ function wptravel_get_booking_chart() {
 		<h2><?php esc_html_e( 'Statistics', 'wp-travel' ); ?></h2>
 		<div class="stat-toolbar">
 				<form name="stat_toolbar" class="stat-toolbar-form" action="" method="get" >
-					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ) ?>" />
+					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 					<input type="hidden" name="post_type" value="itinerary-booking" >
 					<input type="hidden" name="page" value="booking_chart">
 					<p class="field-group full-width">
@@ -321,7 +336,8 @@ function wptravel_get_booking_chart() {
 					</p>
 					<?php
 					// @since 1.0.6 // Hook since
-					do_action( 'wp_travel_before_stat_toolbar_fields' );
+					do_action( 'wp_travel_before_stat_toolbar_fields' ); // phpcs:ignore
+					do_action( 'wptravel_before_stat_toolbar_fields' );
 					?>
 					<div class="show-all compare">
 						<p class="show-compare-stat">
@@ -386,7 +402,8 @@ function wptravel_get_booking_chart() {
 
 						<?php
 						// @since 1.0.6 // Hook since
-						do_action( 'wp_travel_after_stat_toolbar_fields' );
+						do_action( 'wp_travel_after_stat_toolbar_fields' ); // phpcs:ignore
+						do_action( 'wptravel_after_stat_toolbar_fields' );
 						?>
 						<div class="show-all btn-show-all" style="display:<?php echo esc_attr( 'yes' === $compare_stat ? 'none' : 'block' ); ?>" >
 							<?php submit_button( esc_attr__( 'Show All', 'wp-travel' ), 'primary', 'submit' ); ?>
@@ -447,8 +464,6 @@ function wptravel_get_booking_chart() {
 					</div>
 					</div>
 
-					<?php // wp_nonce_field( '_wp_travel_booking_chart_nonce_action', '_wp_travel_booking_chart_nonce' ); ?>
-
 				</form>
 			</div>
 		<div class="left-block stat-toolbar-wrap">
@@ -457,10 +472,10 @@ function wptravel_get_booking_chart() {
 		<div class="left-block">
 			<canvas id="wp-travel-booking-canvas"></canvas>
 		</div>
-		<div class="right-block <?php echo esc_attr( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ? 'has-compare' : '' ); ?>">
+		<div class="right-block <?php echo esc_attr( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ? 'has-compare' : '' ); ?>">
 
 			<div class="wp-travel-stat-info">
-				<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' == $submission_request['compare_stat'] ) : ?>
+				<?php if ( isset( $submission_request['compare_stat'] ) && 'yes' === $submission_request['compare_stat'] ) : ?>
 				<div class="right-block-single for-compare">
 					<h3><?php esc_html_e( 'Compare 1', 'wp-travel' ); ?></h3>
 				</div>

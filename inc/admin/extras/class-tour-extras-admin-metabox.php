@@ -6,9 +6,9 @@
  */
 
 /**
- * WP_Travel_Admin_Tour_Extras_Metaboxes Class.
+ * WpTravel_Admin_Tour_Extras_Metaboxes Class.
  */
-class WP_Travel_Admin_Tour_Extras_Metaboxes {
+class WpTravel_Admin_Tour_Extras_Metaboxes {
 	/**
 	 * Private var $post_type.
 	 *
@@ -22,7 +22,7 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	 */
 	public $views_path = '';
 	/**
-	 * Constructor WP_Travel_Admin_Tour_Extras_Metaboxes.
+	 * Constructor WpTravel_Admin_Tour_Extras_Metaboxes.
 	 */
 	public function __construct() {
 		$this->views_path = WP_TRAVEL_ABSPATH . 'inc/admin/extras/views/tabs/';
@@ -43,6 +43,8 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 	}
 	/**
 	 * Load Extras Tab Template.
+	 *
+	 * @param object $post post object.
 	 */
 	public function load_tour_extras_tab_template( $post ) {
 
@@ -72,9 +74,10 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 			'icon'          => 'fa-images',
 		);
 
-
 		$tabs[ self::$post_type ] = $tour_extras;
-		return apply_filters( 'wp_travel_tour_extras_tabs', $tabs );
+		$tabs = apply_filters( 'wp_travel_tour_extras_tabs', $tabs ); //@phpcs:ignore
+		$tabs                     = apply_filters( 'wptravel_tour_extras_tabs', $tabs );
+		return $tabs;
 	}
 
 	/**
@@ -102,6 +105,8 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 
 	/**
 	 * Save Tour Extras Metabox Data
+	 *
+	 * @param Number $post_id Extras id.
 	 */
 	public function save_extras_metabox_data( $post_id ) {
 
@@ -159,4 +164,4 @@ class WP_Travel_Admin_Tour_Extras_Metaboxes {
 
 }
 
-new WP_Travel_Admin_Tour_Extras_Metaboxes();
+new WpTravel_Admin_Tour_Extras_Metaboxes();
