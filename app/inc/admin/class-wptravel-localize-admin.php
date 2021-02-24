@@ -30,6 +30,7 @@ class WpTravel_Localize_Admin {
 		$translation_array = array(
 			'_nonce'    => wp_create_nonce( 'wp_travel_nonce' ),
 			'admin_url' => admin_url(),
+			'dev_mode'  => wptravel_dev_mode()
 		);
 		// trip edit page.
 		if ( in_array( $screen->id, $allowed_screen, true ) ) {

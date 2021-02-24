@@ -66,7 +66,7 @@ const SettingsFact = () => {
     // In order to close other tab when open one.
     const panelTabChanged = (index) => {
         setState({
-            isTabOpen: true,
+            isTabOpen: 'undefined' != typeof tabData.index  && index == tabData.index && isTabOpen ? false : true,
             tabData: { index }
         })
     }
