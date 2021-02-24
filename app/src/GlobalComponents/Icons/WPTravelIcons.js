@@ -83,6 +83,12 @@ const WPTravelIcons = (props) => {
         }
     }
 
+    const ComingSoonMessage = () => {
+        return <>
+        <h3>Something is Cooking... Will be available soon.</h3>
+        </>
+    }
+
     // Place tab here for production use.
     const iconTabs = [
         {
@@ -90,6 +96,12 @@ const WPTravelIcons = (props) => {
             title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
             className: 'wti__icon_class',
             content: IconClassContent
+        },
+        {
+            name: 'coming-soon',
+            title: <><i className="fas fa-step-forward"></i>{__( 'Other Icons', 'wp-travel' )}</>,
+            className: 'wti__coming_soon',
+            content: ComingSoonMessage
         }
     ]
 
