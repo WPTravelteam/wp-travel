@@ -32,7 +32,7 @@ function wptravel_trip_callback_detail() {
 				<input type="text" id="wp-travel-trip-code" <?php echo esc_html( $trip_code_input_name ); ?> <?php echo esc_html( $trip_code_disabled ); ?> value="<?php echo esc_attr( $trip_code ); ?>" />
 				<?php if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) : ?>
 				<p class="description">
-					<?php printf( __( 'Need Custom Trip Code? Check %1$s Utilities addons%2$s', 'wp-travel' ), '<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">', '<a>' ); ?>
+					<?php printf( '%1$s<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">%2$s</a>', esc_html__( 'Need Custom Trip Code? Check', 'wp-travel' ), esc_html__( 'Utilities addons', 'wp-travel' ) ); ?>
 				</p>
 				<?php endif; ?>
 			</td>
@@ -48,7 +48,7 @@ function wptravel_trip_callback_detail() {
 				<h4><label for="excerpt"><?php esc_html_e( 'Short Description', 'wp-travel' ); ?></label></h4>
 				<textarea name="excerpt" id="excerpt" cols="30" rows="10"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea>
 				<p class="description">
-					<?php printf( wp_kses_post( __( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.%1$s Learn more about manual excerpts%2$s.', 'wp-travel' ), '<a href="https://codex.wordpress.org/Excerpt" target="_blank">', '<a>' ) ); ?>
+					<?php printf( '%1$s<a href="https://codex.wordpress.org/Excerpt" target="_blank" class="wp-travel-upsell-badge">%2$s</a>', esc_html__( 'Excerpts are optional hand-crafted summaries of your content that can be used in your theme.', 'wp-travel' ), esc_html__( 'Learn more about manual excerpts', 'wp-travel' ) ); ?>
 				</p>
 			</td>
 		</tr>
