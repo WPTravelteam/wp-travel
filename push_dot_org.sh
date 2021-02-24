@@ -18,14 +18,14 @@ echo ""
 
 # Copy new set of files to trunk
 echo "copy files to trunk"
-rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json --exclude .husky --exclude .vscode  --exclude .npmrc  --exclude phpcs.xml  --exclude vendor  --exclude wordpress --exclude composer.json --exclude composer.lock    ./ ./build/trunk
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json    ./ ./build/trunk
 
 rsync -a ./app/build ./build/trunk/app
 echo "*********************************"
 echo ""
 
 #!/bin/bash
-CURRENT_TAG=4.4.7
+CURRENT_TAG=4.4.8
 
 # Create tag folder
 echo "Create new tag folder"
@@ -36,7 +36,7 @@ echo ""
 
 # Copy new set of files to tag
 echo "copy files to tag"
-rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json --exclude .husky --exclude .vscode  --exclude .npmrc  --exclude phpcs.xml  --exclude vendor  --exclude wordpress --exclude composer.json --exclude composer.lock    ./ ./build/tags/$CURRENT_TAG
+rsync -a --exclude ".git*" --exclude bash --exclude build --exclude modules --exclude inc/class-modules.php  --exclude org_assets  --exclude node_modules --exclude .editorconfig --exclude Gruntfile.js --exclude package.json --exclude package-lock.json --exclude push_dot_org.sh --exclude README.md --exclude .sass-cache --exclude app/src --exclude postcss.config.js --exclude webpack.config.js --exclude yarn.lock --exclude yarn-error.log --exclude inc/extended --exclude babel.config.json    ./ ./build/tags/$CURRENT_TAG
 
 rsync -a ./app/build ./build/tags/$CURRENT_TAG/app
 echo "*********************************"

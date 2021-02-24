@@ -1768,7 +1768,7 @@ function wptravel_posts_filter( $query ) {
 			if ( isset( $submission_get['price'] ) && '' != $submission_get['price'] ) {
 				$filter_by = $submission_get['price'];
 
-				$query->set( 'meta_key', 'wptravel_trip_price' );
+				$query->set( 'meta_key', 'wp_travel_trip_price' );
 				$query->set( 'orderby', 'meta_value_num' );
 
 				switch ( $filter_by ) {

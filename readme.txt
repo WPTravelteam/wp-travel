@@ -240,6 +240,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.4.8 =
+Release Date: 24th February, 2021
+
+Fixes:
+* Fixed trip extras fields in admin not showing.
+* Fixed undefined index in case of empty extras value.
+* Removed not working tabs in Icon selector.
+* Critical error on new WP Travel activation.
+
 = 4.4.7 =
 Release Date: 22nd February, 2021
 

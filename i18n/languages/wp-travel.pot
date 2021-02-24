@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.4.7\n"
+"Project-Id-Version: WP Travel 4.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 16:42:31+00:00\n"
+"POT-Creation-Date: 2021-02-24 07:37:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -484,7 +484,7 @@ msgid "Toggle panel: Reviews"
 msgstr ""
 
 #: inc/admin/admin-helper.php:244 inc/helpers.php:999 inc/helpers.php:2651
-#: inc/template-functions.php:474
+#: inc/template-functions.php:477
 #: wordpress/src/wp-admin/includes/plugin-install.php:732
 msgid "Reviews"
 msgstr ""
@@ -631,8 +631,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1072
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1198
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1342
-#: inc/helpers.php:2656 inc/helpers.php:2671 inc/template-functions.php:2010
-#: inc/template-functions.php:2394
+#: inc/helpers.php:2656 inc/helpers.php:2671 inc/template-functions.php:2012
+#: inc/template-functions.php:2396
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 msgid "Price"
 msgstr ""
@@ -913,7 +913,7 @@ msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:84
 #: inc/admin/class-admin-metaboxes.php:85 inc/helpers.php:2652
-#: inc/template-functions.php:667
+#: inc/template-functions.php:670
 msgid "Locations"
 msgstr ""
 
@@ -1622,7 +1622,11 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:35
-msgid "Need Custom Trip Code? Check %1$s Utilities addons%2$s"
+msgid "Need Custom Trip Code? Check"
+msgstr ""
+
+#: inc/admin/views/tabs/tab-contents/itineraries/detail.php:35
+msgid "Utilities addons"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:42
@@ -1682,7 +1686,11 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:51
 msgid ""
 "Excerpts are optional hand-crafted summaries of your content that can be "
-"used in your theme.%1$s Learn more about manual excerpts%2$s."
+"used in your theme."
+msgstr ""
+
+#: inc/admin/views/tabs/tab-contents/itineraries/detail.php:51
+msgid "Learn more about manual excerpts"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:19
@@ -1709,7 +1717,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1503
 #: inc/admin/views/tabs/tab-contents/settings/email.php:59
-#: inc/cart/checkout.php:63 inc/template-functions.php:940
+#: inc/cart/checkout.php:63 inc/template-functions.php:942
 msgid "Open All"
 msgstr ""
 
@@ -1719,7 +1727,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1105
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1504
 #: inc/admin/views/tabs/tab-contents/settings/email.php:60
-#: inc/cart/checkout.php:64 inc/template-functions.php:941
+#: inc/cart/checkout.php:64 inc/template-functions.php:943
 msgid "Close All"
 msgstr ""
 
@@ -1842,7 +1850,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:25
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:43
 #: inc/helpers.php:2022 inc/helpers.php:2646 inc/helpers.php:2647
-#: inc/template-functions.php:573
+#: inc/template-functions.php:576
 msgid "Trip Enquiry"
 msgstr ""
 
@@ -1901,8 +1909,8 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:404
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1160
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1307
-#: inc/helpers.php:2664 inc/template-functions.php:2004
-#: inc/template-functions.php:2388
+#: inc/helpers.php:2664 inc/template-functions.php:2006
+#: inc/template-functions.php:2390
 msgid "Pricing Name"
 msgstr ""
 
@@ -2830,8 +2838,8 @@ msgstr ""
 #: inc/email-template-functions.php:148 inc/email-template-functions.php:329
 #: inc/email-template-functions.php:628 inc/email-template-functions.php:936
 #: inc/email-template-functions.php:1445 inc/helpers.php:2669
-#: inc/template-functions.php:473 inc/template-functions.php:2009
-#: inc/template-functions.php:2393 templates/content-cart.php:28
+#: inc/template-functions.php:476 inc/template-functions.php:2011
+#: inc/template-functions.php:2395 templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
@@ -2970,8 +2978,8 @@ msgstr ""
 
 #: inc/cart/checkout.php:161 inc/deprecated/440.php:94 inc/helpers.php:2641
 #: inc/helpers.php:2645 inc/helpers.php:2677 inc/helpers.php:2685
-#: inc/template-functions.php:575 inc/template-functions.php:2014
-#: inc/template-functions.php:2398
+#: inc/template-functions.php:578 inc/template-functions.php:2016
+#: inc/template-functions.php:2400
 msgid "Book Now"
 msgstr ""
 
@@ -3463,7 +3471,7 @@ msgid "New Activity"
 msgstr ""
 
 #: inc/class-taxonomies.php:97 inc/helpers.php:2649
-#: inc/template-functions.php:471
+#: inc/template-functions.php:474
 msgid "Activities"
 msgstr ""
 
@@ -4741,16 +4749,16 @@ msgstr ""
 #: inc/deprecated/440.php:323 inc/email-template-functions.php:57
 #: inc/email-template-functions.php:162 inc/email-template-functions.php:343
 #: inc/email-template-functions.php:656 inc/email-template-functions.php:964
-#: inc/email-template-functions.php:1473 inc/template-functions.php:2011
-#: inc/template-functions.php:2395
+#: inc/email-template-functions.php:1473 inc/template-functions.php:2013
+#: inc/template-functions.php:2397
 msgid "Arrival Date"
 msgstr ""
 
 #: inc/deprecated/440.php:336 inc/email-template-functions.php:62
 #: inc/email-template-functions.php:167 inc/email-template-functions.php:348
 #: inc/email-template-functions.php:670 inc/email-template-functions.php:978
-#: inc/email-template-functions.php:1487 inc/template-functions.php:2012
-#: inc/template-functions.php:2396
+#: inc/email-template-functions.php:1487 inc/template-functions.php:2014
+#: inc/template-functions.php:2398
 msgid "Departure Date"
 msgstr ""
 
@@ -4945,11 +4953,11 @@ msgstr ""
 msgid "Price:"
 msgstr ""
 
-#: inc/form-fields.php:393 inc/template-functions.php:1524
+#: inc/form-fields.php:393 inc/template-functions.php:1526
 msgid "Price low to high"
 msgstr ""
 
-#: inc/form-fields.php:394 inc/template-functions.php:1525
+#: inc/form-fields.php:394 inc/template-functions.php:1527
 msgid "Price high to low"
 msgstr ""
 
@@ -4987,8 +4995,8 @@ msgid "Hidden"
 msgstr ""
 
 #: inc/framework/form/class.field.php:56 inc/helpers.php:2643
-#: inc/helpers.php:2675 inc/template-functions.php:2015
-#: inc/template-functions.php:2399
+#: inc/helpers.php:2675 inc/template-functions.php:2017
+#: inc/template-functions.php:2401
 #: wordpress/src/wp-admin/includes/class-wp-ms-themes-list-table.php:508
 #: wordpress/src/wp-admin/includes/template.php:1949
 #: wordpress/src/wp-admin/nav-menus.php:892
@@ -5067,7 +5075,6 @@ msgstr ""
 #: wordpress/src/wp-admin/includes/dashboard.php:236
 #: wordpress/src/wp-admin/includes/dashboard.php:1332
 #: wordpress/src/wp-admin/setup-config.php:252
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:258
 msgid "Submit"
 msgstr ""
 
@@ -8875,7 +8882,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:951 inc/template-functions.php:857
+#: inc/helpers.php:951 inc/template-functions.php:859
 msgid "No details found."
 msgstr ""
 
@@ -9012,7 +9019,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: inc/helpers.php:2648 inc/template-functions.php:470
+#: inc/helpers.php:2648 inc/template-functions.php:473
 msgid "Trip Type"
 msgstr ""
 
@@ -9045,13 +9052,13 @@ msgstr ""
 msgid "Select Date and Pricing Options"
 msgstr ""
 
-#: inc/helpers.php:2665 inc/template-functions.php:2005
-#: inc/template-functions.php:2165 inc/template-functions.php:2389
+#: inc/helpers.php:2665 inc/template-functions.php:2007
+#: inc/template-functions.php:2167 inc/template-functions.php:2391
 msgid "Start"
 msgstr ""
 
-#: inc/helpers.php:2666 inc/template-functions.php:2006
-#: inc/template-functions.php:2190 inc/template-functions.php:2390
+#: inc/helpers.php:2666 inc/template-functions.php:2008
+#: inc/template-functions.php:2192 inc/template-functions.php:2392
 msgid "End"
 msgstr ""
 
@@ -9063,8 +9070,8 @@ msgstr ""
 msgid "Seats left"
 msgstr ""
 
-#: inc/helpers.php:2670 inc/template-functions.php:2017
-#: inc/template-functions.php:2400
+#: inc/helpers.php:2670 inc/template-functions.php:2019
+#: inc/template-functions.php:2402
 msgid "Select Pax"
 msgstr ""
 
@@ -9080,7 +9087,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: inc/helpers.php:2678 inc/template-functions.php:2016
+#: inc/helpers.php:2678 inc/template-functions.php:2018
 msgid "Pricing"
 msgstr ""
 
@@ -9143,16 +9150,16 @@ msgstr ""
 msgid "Booking only"
 msgstr ""
 
-#: inc/helpers.php:2698 inc/template-functions.php:476
+#: inc/helpers.php:2698 inc/template-functions.php:479
 msgid "No Trip Type"
 msgstr ""
 
-#: inc/helpers.php:2699 inc/template-functions.php:477
+#: inc/helpers.php:2699 inc/template-functions.php:480
 msgid "No Activities"
 msgstr ""
 
-#: inc/helpers.php:2700 inc/template-functions.php:2209
-#: inc/template-functions.php:2506
+#: inc/helpers.php:2700 inc/template-functions.php:2211
+#: inc/template-functions.php:2508
 msgid "No size limit"
 msgstr ""
 
@@ -9238,103 +9245,103 @@ msgstr ""
 msgid "Clone %s"
 msgstr ""
 
-#: inc/template-functions.php:404 inc/template-functions.php:426
+#: inc/template-functions.php:407 inc/template-functions.php:429
 #: templates/shortcode/itinerary-item.php:60
 msgid "Rated %s out of 5"
 msgstr ""
 
-#: inc/template-functions.php:407 inc/template-functions.php:429
+#: inc/template-functions.php:410 inc/template-functions.php:432
 #: templates/shortcode/itinerary-item.php:63
 msgid "out of %1$s5%2$s"
 msgstr ""
 
-#: inc/template-functions.php:472
+#: inc/template-functions.php:475
 msgid "Group size"
 msgstr ""
 
-#: inc/template-functions.php:478 inc/template-functions.php:1459
+#: inc/template-functions.php:481 inc/template-functions.php:1461
 msgid "No Size Limit"
 msgstr ""
 
-#: inc/template-functions.php:535
+#: inc/template-functions.php:538
 msgid "%1$d %2$s"
 msgstr ""
 
-#: inc/template-functions.php:556
+#: inc/template-functions.php:559
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/template-functions.php:617
+#: inc/template-functions.php:620
 msgid "Keywords : "
 msgstr ""
 
-#: inc/template-functions.php:668
+#: inc/template-functions.php:671
 msgid "Fixed departure"
 msgstr ""
 
-#: inc/template-functions.php:669
+#: inc/template-functions.php:672
 msgid "Trip duration"
 msgstr ""
 
-#: inc/template-functions.php:724
+#: inc/template-functions.php:727
 msgid "%1$s Day(s) %2$s Night(s)"
 msgstr ""
 
-#: inc/template-functions.php:965
+#: inc/template-functions.php:967
 msgid "No Details Found"
 msgstr ""
 
-#: inc/template-functions.php:1419
+#: inc/template-functions.php:1421
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1428
+#: inc/template-functions.php:1430
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1428 inc/trip-enquiries.php:457
+#: inc/template-functions.php:1430 inc/trip-enquiries.php:457
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1456
+#: inc/template-functions.php:1458
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:1562 inc/template-functions.php:1569
+#: inc/template-functions.php:1564 inc/template-functions.php:1571
 #: wordpress/src/wp-admin/includes/media.php:2560
 #: wordpress/src/wp-admin/includes/media.php:2639
 msgid "Ascending"
 msgstr ""
 
-#: inc/template-functions.php:1563 inc/template-functions.php:1570
+#: inc/template-functions.php:1565 inc/template-functions.php:1572
 #: wordpress/src/wp-admin/includes/media.php:2561
 #: wordpress/src/wp-admin/includes/media.php:2642
 msgid "Descending"
 msgstr ""
 
-#: inc/template-functions.php:2007 inc/template-functions.php:2391
+#: inc/template-functions.php:2009 inc/template-functions.php:2393
 msgid "Group (min-max)"
 msgstr ""
 
-#: inc/template-functions.php:2008 inc/template-functions.php:2392
+#: inc/template-functions.php:2010 inc/template-functions.php:2394
 msgid "Seats Left"
 msgstr ""
 
-#: inc/template-functions.php:2013 inc/template-functions.php:2397
+#: inc/template-functions.php:2015 inc/template-functions.php:2399
 msgid "Sold out"
 msgstr ""
 
-#: inc/template-functions.php:2175
+#: inc/template-functions.php:2177
 msgid "Please Select a Date"
 msgstr ""
 
-#: inc/template-functions.php:2232 inc/template-functions.php:2543
+#: inc/template-functions.php:2234 inc/template-functions.php:2545
 msgid "Available Seats: "
 msgstr ""
 
-#: inc/template-functions.php:2262
+#: inc/template-functions.php:2264
 msgid "No size limit."
 msgstr ""
 
@@ -11438,7 +11445,7 @@ msgstr ""
 #: wordpress/src/wp-admin/network/settings.php:181
 #: wordpress/src/wp-admin/options-general.php:129
 #: wordpress/src/wp-admin/user-edit.php:531
-#: wordpress/src/wp-admin/user-edit.php:645
+#: wordpress/src/wp-admin/user-edit.php:667
 #: wordpress/src/wp-admin/widgets.php:353
 #: wordpress/src/wp-admin/widgets.php:356
 #: wordpress/src/wp-admin/widgets.php:569
@@ -22737,7 +22744,6 @@ msgstr ""
 #: wordpress/src/wp-admin/includes/file.php:890
 #: wordpress/src/wp-includes/functions.php:2679
 #: wordpress/src/wp-includes/script-loader.php:869
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1097
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr ""
 
@@ -23343,7 +23349,7 @@ msgstr ""
 #: wordpress/src/wp-admin/includes/media.php:1611
 #: wordpress/src/wp-admin/includes/media.php:2557
 #: wordpress/src/wp-admin/install.php:146
-#: wordpress/src/wp-admin/user-edit.php:641
+#: wordpress/src/wp-admin/user-edit.php:663
 #: wordpress/src/wp-admin/user-new.php:570
 msgid "Hide"
 msgstr ""
@@ -26708,7 +26714,7 @@ msgid ""
 msgstr ""
 
 #: wordpress/src/wp-admin/install.php:144
-#: wordpress/src/wp-admin/user-edit.php:639
+#: wordpress/src/wp-admin/user-edit.php:661
 #: wordpress/src/wp-admin/user-new.php:568 wordpress/src/wp-login.php:869
 msgid "Hide password"
 msgstr ""
@@ -26742,13 +26748,13 @@ msgid "(required)"
 msgstr ""
 
 #: wordpress/src/wp-admin/install.php:167
-#: wordpress/src/wp-admin/user-edit.php:663
+#: wordpress/src/wp-admin/user-edit.php:685
 #: wordpress/src/wp-admin/user-new.php:584
 msgid "Confirm Password"
 msgstr ""
 
 #: wordpress/src/wp-admin/install.php:171
-#: wordpress/src/wp-admin/user-edit.php:667
+#: wordpress/src/wp-admin/user-edit.php:689
 #: wordpress/src/wp-admin/user-new.php:588 wordpress/src/wp-login.php:876
 msgid "Confirm use of weak password"
 msgstr ""
@@ -32564,47 +32570,47 @@ msgstr ""
 msgid "https://en.gravatar.com/"
 msgstr ""
 
-#: wordpress/src/wp-admin/user-edit.php:628
-msgid "Account Management"
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:631
-msgid "New Password"
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:634
-msgid "Set New Password"
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:643
-msgid "Cancel password change"
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:652
-msgid "Repeat New Password"
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:656
-msgid "Type your new password again."
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:658
-msgid "Type the new password again."
-msgstr ""
-
-#: wordpress/src/wp-admin/user-edit.php:678 wordpress/src/wp-login.php:847
+#: wordpress/src/wp-admin/user-edit.php:617 wordpress/src/wp-login.php:847
 msgid "Password Reset"
 msgstr ""
 
-#: wordpress/src/wp-admin/user-edit.php:682
+#: wordpress/src/wp-admin/user-edit.php:621
 msgid "Send Reset Link"
 msgstr ""
 
-#: wordpress/src/wp-admin/user-edit.php:688
+#: wordpress/src/wp-admin/user-edit.php:627
 #. translators: %s: User's display name.
 msgid ""
 "Send %s a link to reset their password. This will not change their "
 "password, nor will it force a change."
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:650
+msgid "Account Management"
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:653
+msgid "New Password"
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:656
+msgid "Set New Password"
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:665
+msgid "Cancel password change"
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:674
+msgid "Repeat New Password"
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:678
+msgid "Type your new password again."
+msgstr ""
+
+#: wordpress/src/wp-admin/user-edit.php:680
+msgid "Type the new password again."
 msgstr ""
 
 #: wordpress/src/wp-admin/user-edit.php:699
@@ -48301,225 +48307,6 @@ msgstr ""
 
 #: wordpress/tests/phpunit/data/plugins/internationalized-plugin.php:11
 msgid "This is a dummy plugin"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:106
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:115
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:166
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:170
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:179
-msgid "Sorry, there has been an error."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:107
-msgid "The file does not exist, please try again."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:150
-msgid "All done."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:150
-msgid "Have fun!"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:151
-msgid "Remember to update the passwords and roles of imported users."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:171
-msgid ""
-"The export file could not be found at <code>%s</code>. It is likely that "
-"this was caused by a permissions problem."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:187
-msgid ""
-"This WXR file (version %s) may not be supported by this version of the "
-"importer. Please consider updating."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:212
-msgid ""
-"Failed to import author %s. Their posts will be attributed to the current "
-"user."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:238
-msgid "Assign Authors"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:239
-msgid ""
-"To make it simpler for you to edit and save the imported content, you may "
-"want to reassign the author of the imported item to an existing user of "
-"this site, such as your primary administrator account."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:241
-msgid ""
-"If a new user is created by WordPress, a new password will be randomly "
-"generated and the new user&#8217;s role will be set as %s. Manually "
-"changing the new user&#8217;s details will be necessary."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:251
-msgid "Import Attachments"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:254
-msgid "Download and import file attachments"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:271
-msgid "Import author:"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:283
-msgid "or create new user with login name:"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:286
-msgid "as a new user:"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:296
-msgid "assign posts to an existing user:"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:298
-msgid "or assign posts to an existing user:"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:306
-msgid "- Select -"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:360
-msgid ""
-"Failed to create new user for %s. Their posts will be attributed to the "
-"current user."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:412
-msgid "Failed to import category %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:457
-msgid "Failed to import post tag %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:512
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:738
-msgid "Failed to import %s %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:605
-msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:642
-msgid "%s &#8220;%s&#8221; already exists."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:704
-msgid "Failed to import %s &#8220;%s&#8221;"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:878
-msgid "Menu item skipped due to missing menu slug"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:885
-msgid "Menu item skipped due to invalid menu slug: %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:948
-msgid "Fetching attachments is not enabled"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:961
-msgid "Invalid file type"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1000
-msgid "Could not create temporary file."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1019
-#. translators: 1: The WordPress error message. 2: The WordPress error code.
-msgid "Request failed due to an error: %1$s (%2$s)"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1035
-#. translators: 1: The HTTP error message. 2: The HTTP error code.
-msgid "Remote server returned the following unexpected result: %1$s (%2$s)"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1047
-msgid "Remote server did not respond"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1054
-msgid "Zero size file downloaded"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1059
-msgid "Downloaded file has incorrect size"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1065
-msgid "Remote file is too large, limit is %s"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1112
-msgid "The uploaded file could not be moved"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1224
-msgid "Import WordPress"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1231
-msgid ""
-"A new version of this importer is available. Please update to version %s to "
-"ensure compatibility with newer export files."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1246
-msgid ""
-"Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import "
-"the posts, pages, comments, custom fields, categories, and tags into this "
-"site."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/class-wp-import.php:1247
-msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-regex.php:96
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-simplexml.php:41
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-simplexml.php:46
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-xml.php:48
-msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-simplexml.php:29
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser-simplexml.php:37
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser.php:42
-msgid "There was an error when reading this WXR file"
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/parsers/class-wxr-parser.php:43
-msgid ""
-"Details are shown above. The importer will now try again with a different "
-"parser..."
-msgstr ""
-
-#: wordpress/tests/phpunit/data/plugins/wordpress-importer/wordpress-importer.php:58
-msgid ""
-"Import <strong>posts, pages, comments, custom fields, categories, and "
-"tags</strong> from a WordPress export file."
 msgstr ""
 
 #: wordpress/tests/phpunit/data/themedir1/internationalized-theme/functions.php:7
