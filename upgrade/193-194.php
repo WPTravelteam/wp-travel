@@ -13,7 +13,7 @@ if ( $wptravel_migrate_194 && 'yes' === $wptravel_migrate_194 ) {
 global $wpdb;
 
 $wptravel_custom_post_type = WP_TRAVEL_POST_TYPE;
-$wptravel_post_ids         = $wpdb->get_results( "SELECT ID from {$wpdb->posts}  where post_type=%s and post_status in( 'publish', 'draft' )", $wptravel_custom_post_type );
+$wptravel_post_ids         = $wpdb->get_results( $wpdb->prepare( "SELECT ID from {$wpdb->posts}  where post_type=%s and post_status in( 'publish', 'draft' )", $wptravel_custom_post_type ) );
 
 if ( is_array( $wptravel_post_ids ) && count( $wptravel_post_ids ) > 0 ) {
 	foreach ( $wptravel_post_ids as $wptravel_custom_post ) {
