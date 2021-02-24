@@ -246,6 +246,8 @@ Release Date: 24th February, 2021
 Fixes:
 * Fixed trip extras fields in admin not showing.
 * Fixed undefined index in case of empty extras value.
+* Fixed WP Travel Menu icon not being displayed.
+* Fixed Booking detail page not being displayed in the dashboard page.
 * Removed not working tabs in Icon selector.
 * Critical error on new WP Travel activation.
 
