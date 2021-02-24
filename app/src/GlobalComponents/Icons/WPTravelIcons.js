@@ -95,24 +95,24 @@ const WPTravelIcons = (props) => {
                         onSelect={ () => false }
                         isDismissible={false}
                         tabs={ [
-                                {
-                                name: 'fontawesome-icon',
-                                title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
-                                className: 'wti__fa_icon',
-                                content: FontAwesomeIconContent
-                            },
+                            //     {
+                            //     name: 'fontawesome-icon',
+                            //     title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
+                            //     className: 'wti__fa_icon',
+                            //     content: FontAwesomeIconContent
+                            // },
                             {
                                 name: 'icon-class',
                                 title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
                                 className: 'wti__icon_class',
                                 content: IconClassContent
                             },
-                            {
-                                name: 'custom-upload',
-                                title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
-                                className: 'wti__custom_upload',
-                                content: CustomUploadContent
-                            },
+                            // {
+                            //     name: 'custom-upload',
+                            //     title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
+                            //     className: 'wti__custom_upload',
+                            //     content: CustomUploadContent
+                            // },
                         ] }>
                         {
                             ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} tabHandleClick = {props.modalHandleClick} /> : <>{__('Error', 'wp-travel')}</>
