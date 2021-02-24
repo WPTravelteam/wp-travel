@@ -52,10 +52,14 @@ add_filter( 'get_header_image_tag', 'wptravel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wptravel_remove_jetpack_related_posts' );
 
 add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
+
 /**
- * @since 4.0.4
+ * Filters post clause to filter trips after 4.0.0.
  *
- * Filters post clause to filter trips after 4.0.0
+ * @param string $post_clauses Post clauses.
+ * @param object $object       WP Query object.
+ *
+ * @since 4.0.4
  */
 function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 
@@ -64,8 +68,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	}
 
 	global $wpdb;
-
-	if ( $object->query_vars['post_type'] !== WP_TRAVEL_POST_TYPE ) {
+	if ( WP_TRAVEL_POST_TYPE !== $object->query_vars['post_type'] ) {
 		return $post_clauses;
 	}
 
@@ -89,8 +92,8 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	 */
 	// Where clause.
 	$where      = '';
-	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : '';
-	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : '';
+	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : ''; // @phpcs:ignore
+	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : ''; // @phpcs:ignore
 
 		// Filter by date clause.
 	if ( ! empty( $start_date ) || ! empty( $end_date ) ) {
@@ -104,8 +107,8 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 		}
 		$where .= ' ) ';
 		if ( ! empty( $start_date ) ) {
-			$year  = date( 'Y', strtotime( $start_date ) );
-			$month = date( 'n', strtotime( $start_date ) );
+			$year  = gmdate( 'Y', strtotime( $start_date ) );
+			$month = gmdate( 'n', strtotime( $start_date ) );
 
 			$where .= ' OR (';
 			$where .= "
@@ -130,9 +133,9 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	/**
 	 * ALready checking nonce above using WP_Travel::verify_nonce;
 	 */
-	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) {
+	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) { // @phpcs:ignore
 		$post_clauses['join']    = $post_clauses['join'] . $join;
-		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC";
+		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC"; // @phpcs:ignore
 	}
 
 	return $post_clauses;
@@ -142,11 +145,11 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  * Return template.
  *
  * @param  String $template_name Path of template.
- * @param  array  $args arguments.
  * @return Mixed
  */
-function wptravel_get_template( $template_name, $args = array() ) {
-	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' );
+function wptravel_get_template( $template_name ) {
+	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
+	$template_path = apply_filters( 'wptravel_template_path', 'wp-travel/' );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
 
 	// Look templates in theme first.
@@ -801,7 +804,7 @@ function wptravel_frontend_trip_facts( $post_id ) {
 							}
 						}
 
-						if ( isset( $trip_fact['value'] ) ) :
+						if ( isset( $trip_fact['value'] ) && ! empty( $trip_fact['value'] ) ) :
 							?>
 							<span class="tour-info-item tour-info-type">
 
@@ -812,7 +815,6 @@ function wptravel_frontend_trip_facts( $post_id ) {
 									$count = count( $trip_fact['value'] );
 									$i     = 1;
 									foreach ( $trip_fact['value'] as $key => $val ) {
-										// echo esc_html( $val );
 										if ( isset( $trip_fact['fact_id'] ) ) {
 											if ( $settings['wp_travel_trip_facts_settings'] && isset( $trip_fact['fact_id'] ) && $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ] ) {
 												if ( isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'] ) && isset( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ) ) {
