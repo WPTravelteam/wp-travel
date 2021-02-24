@@ -1791,11 +1791,11 @@ function wptravel_posts_filter( $query ) {
 
 				if ( $min_price || $max_price ) {
 
-					$query->set( 'meta_key', 'wptravel_trip_price' );
+					$query->set( 'meta_key', 'wp_travel_trip_price' );
 
 					$custom_meta    = array(
 						array(
-							'key'     => 'wptravel_trip_price',
+							'key'     => 'wp_travel_trip_price',
 							'value'   => array( $min_price, $max_price ),
 							'type'    => 'numeric',
 							'compare' => 'BETWEEN',

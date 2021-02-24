@@ -329,7 +329,7 @@ function wptravel_update_payment_status_booking_process_frontend( $booking_id ) 
 					continue;
 				}
 
-				if ( 'wptravel_trip_price' === $meta_field ) {
+				if ( 'wp_travel_trip_price' === $meta_field ) {
 
 					$itinery_id     = isset( $_POST['wp_travel_post_id'] ) ? absint( $_POST['wp_travel_post_id'] ) : 0;
 					$price_per_text = wptravel_get_price_per_text( $itinery_id );

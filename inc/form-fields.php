@@ -218,7 +218,7 @@ function wptravel_get_checkout_form_fields() {
 		$payment_fields['trip_price_info'] = array(
 			'type'          => 'text_info',
 			'label'         => __( 'Total Trip Price', 'wp-travel' ),
-			'name'          => 'wptravel_trip_price_info',
+			'name'          => 'wp_travel_trip_price_info',
 			'id'            => 'wp-travel-trip-price_info',
 			'attributes'    => array( 
 				'data-wpt-cart-total' => '',
@@ -232,7 +232,7 @@ function wptravel_get_checkout_form_fields() {
 		$payment_fields['trip_price'] = array(
 			'type'       => 'hidden',
 			'label'      => __( 'Trip Price', 'wp-travel' ),
-			'name'       => 'wptravel_trip_price',
+			'name'       => 'wp_travel_trip_price',
 			'id'         => 'wp-travel-trip-price',
 			'default'    => wptravel_get_formated_price( $trip_price ),
 			'priority'   => 102,

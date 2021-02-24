@@ -458,13 +458,13 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_price']               = isset( $_POST['wp_travel_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price'] ) ) : 0;
 
 		// Setting trip price.
-		$trip_meta['wptravel_trip_price'] = $trip_meta['wp_travel_price']; // This price is used to sort archive list by price so need to update accordingly [ for single and multiple pricing option ]
+		$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_price']; // This price is used to sort archive list by price so need to update accordingly [ for single and multiple pricing option ]
 
 		$trip_meta['wp_travel_enable_sale'] = isset( $_POST['wp_travel_enable_sale'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_enable_sale'] ) ) : 0;
 		$trip_meta['wp_travel_sale_price']  = isset( $_POST['wp_travel_sale_price'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_sale_price'] ) ) : 0;
 		if ( $trip_meta['wp_travel_sale_price'] ) {
 			// Update trip price.
-			$trip_meta['wptravel_trip_price'] = $trip_meta['wp_travel_sale_price'];
+			$trip_meta['wp_travel_trip_price'] = $trip_meta['wp_travel_sale_price'];
 		}
 
 		$trip_meta['wp_travel_price_per']           = isset( $_POST['wp_travel_price_per'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_price_per'] ) ) : '';
@@ -526,7 +526,7 @@ class WP_Travel_Admin_Metaboxes {
 			);
 			$price = WP_Travel_Helpers_Pricings::get_price( $args );
 			if ( $price ) {
-				$trip_meta['wptravel_trip_price'] = $price;
+				$trip_meta['wp_travel_trip_price'] = $price;
 			}
 		}
 
