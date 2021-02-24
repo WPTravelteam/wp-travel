@@ -83,6 +83,34 @@ const WPTravelIcons = (props) => {
         }
     }
 
+    // Place tab here for production use.
+    const iconTabs = [
+        {
+            name: 'icon-class',
+            title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
+            className: 'wti__icon_class',
+            content: IconClassContent
+        }
+    ]
+
+    // Place tab here if still on development.
+    if ( _wp_travel.dev_mode ) {
+        iconTabs.push(
+            {
+                name: 'fontawesome-icon',
+                title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
+                className: 'wti__fa_icon',
+                content: FontAwesomeIconContent
+            },
+            {
+                name: 'custom-upload',
+                title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
+                className: 'wti__custom_upload',
+                content: CustomUploadContent
+            },
+        )
+    }
+
     return <>
         {
             // isOpen && (
@@ -94,26 +122,7 @@ const WPTravelIcons = (props) => {
                         initialTabName= { props.factData.selected_icon_type ? props.factData.selected_icon_type : 'icon-class' }
                         onSelect={ () => false }
                         isDismissible={false}
-                        tabs={ [
-                            //     {
-                            //     name: 'fontawesome-icon',
-                            //     title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
-                            //     className: 'wti__fa_icon',
-                            //     content: FontAwesomeIconContent
-                            // },
-                            {
-                                name: 'icon-class',
-                                title: <><i className="fas fa-file-code"></i>{__( ' Icon Class', 'wp-travel' )}</>,
-                                className: 'wti__icon_class',
-                                content: IconClassContent
-                            },
-                            // {
-                            //     name: 'custom-upload',
-                            //     title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
-                            //     className: 'wti__custom_upload',
-                            //     content: CustomUploadContent
-                            // },
-                        ] }>
+                        tabs={iconTabs}>
                         {
                             ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} tabHandleClick = {props.modalHandleClick} /> : <>{__('Error', 'wp-travel')}</>
                         }
