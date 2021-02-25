@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.6.2
 Requires PHP: 5.5
-Stable tag: 4.4.8
+Stable tag: 4.4.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -239,6 +239,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.4.9 =
+Release Date: 25th February, 2021
+
+Fixes:
+* Fixed array to string conversion notice in the admin screen.
+* Fixed Fatal error occurs when making a payment with PayPal express checkout
+* Fixed filter widget search by options not working.
+
+Deprecated:
+* Function `wptravel_process_trip_price_tax_by_price` is deprecated.
 
 = 4.4.8 =
 Release Date: 24th February, 2021
