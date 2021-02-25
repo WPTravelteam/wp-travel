@@ -2059,7 +2059,7 @@ function wptravel_get_search_filter_form( $args ) {
 		return;
 	}
 	?>
-
+		<!-- search filter widget HTML -->
 		<div class="wp-travel-itinerary-items">
 			<div>
 				<?php
@@ -2077,7 +2077,8 @@ function wptravel_get_search_filter_form( $args ) {
 				?>
 
 				<div class="wp-travel-search">
-
+					<!-- need class name as wp_travel_search_widget_filters_input and attribute data-index to submit data -->
+					<input class="wp_travel_search_widget_filters_input<?php echo esc_attr( $index ); ?>" type="hidden" name="_nonce"  value="<?php echo esc_attr( WP_Travel::create_nonce() ) ?>" >
 					<input class="filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
 
 					<input class="wp-travel-widget-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >

@@ -21,7 +21,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	/**
 	 * Constructor.
 	 */
-	function __construct() {
+	public function __construct() {
 		// Instantiate the parent object.
 		parent::__construct( false, __( 'WP Travel Filters Widget', 'wp-travel' ) );
 	}
@@ -32,21 +32,21 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 * @param  Mixed $args     Arguments of widget.
 	 * @param  Mixed $instance Instance value of widget.
 	 */
-	function widget( $args, $instance ) {
+	public function widget( $args, $instance ) {
 		wp_enqueue_script( 'wp-travel-widget-scripts' );
-		extract( $args );
+		extract( $args ); // @phpcs:ignore
 		// These are the widget options.
 		$title      = apply_filters( 'wp_travel_search_widget_title', isset( $instance['title'] ) ? $instance['title'] : '' );
 		$hide_title = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 
-		echo $before_widget;
+		echo $before_widget; // @phpcs:ignore
 		if ( ! $hide_title ) {
-			echo ( $title ) ? $before_title . $title . $after_title : '';
+			echo ( $title ) ? $before_title . $title . $after_title : ''; // @phpcs:ignore
 		}
 
-		echo wptravel_get_search_filter_form( array( 'widget' => $instance ) );
+		echo wptravel_get_search_filter_form( array( 'widget' => $instance ) ); // @phpcs:ignore
 
-		echo $after_widget;
+		echo $after_widget; // @phpcs:ignore
 	}
 	/**
 	 * Update widget.
@@ -54,12 +54,12 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 * @param  Mixed $new_instance New instance of widget.
 	 * @param  Mixed $old_instance Old instance of widget.
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		$instance               = $old_instance;
 		$instance['title']      = isset( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
 
-		// Filters
+		// Filters.
 		$sanitized_get = WP_Travel::get_sanitize_request();
 		$search_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		foreach ( $search_fields as $key => $field ) {
@@ -73,7 +73,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 *
 	 * @param  Mixed $instance Widget instance.
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 		// Check values.
 		$title      = '';
 		$hide_title = '';
@@ -115,6 +115,9 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	}
 }
 
+/**
+ * Search filter widget.
+ */
 function wptravel_register_wp_travel_search_filter_widgets() {
 	register_widget( 'WP_Travel_Widget_Filter_Search_Widget' );
 }

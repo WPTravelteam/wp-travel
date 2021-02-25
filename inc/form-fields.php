@@ -25,7 +25,7 @@ function wptravel_get_checkout_form_fields() {
 	// User Details Merged.
 	if ( is_user_logged_in() ) {
 		$user = wp_get_current_user();
-		if ( in_array( 'wp-travel-customer', (array) $user->roles ) ) {
+		if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
 			$user_fname = isset( $user->first_name ) ? $user->first_name : '';
 			$user_lname = isset( $user->last_name ) ? $user->last_name : '';
 			$user_email = isset( $user->user_email ) ? $user->user_email : '';
@@ -40,7 +40,7 @@ function wptravel_get_checkout_form_fields() {
 	}
 
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
-	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields ); ////
+	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
 	// Set default values.
 	$traveller_fields['first_name']['default']   = $user_fname;
 	$traveller_fields['last_name']['default']    = $user_fname;
@@ -66,15 +66,15 @@ function wptravel_get_checkout_form_fields() {
 	$payment_fields = array();
 	$settings       = wptravel_get_settings();
 
-	// GDPR Support
+	// GDPR Support.
 	$gdpr_msg = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$policy_link = wptravel_privacy_link();
 
-	$strings = wptravel_get_strings();
-	$label_booking_options = $strings['bookings']['booking_option'];
+	$strings                    = wptravel_get_strings();
+	$label_booking_options      = $strings['bookings']['booking_option'];
 	$label_booking_with_payment = $strings['bookings']['booking_with_payment'];
-	$label_booking_only = $strings['bookings']['booking_only'];
+	$label_booking_only         = $strings['bookings']['booking_only'];
 
 	if ( ! empty( $gdpr_msg ) && $policy_link ) {
 
@@ -193,17 +193,16 @@ function wptravel_get_checkout_form_fields() {
 				'name'          => 'wp_travel_payment_amount_info',
 				'id'            => 'wp-travel-payment-amount-info',
 				'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment',
-				'attributes'    => array( 
+				'attributes'    => array(
 					'data-wpt-cart-partial-total' => '',
-				 ),
-				// 'before_field'  => wptravel_get_currency_symbol(),
+				),
 				'default'       => wptravel_get_formated_price_currency( $total_partial_amount ),
 				'priority'      => 115,
 			);
 		}
 
 		$method = array_keys( $active_gateway_list );
-		if ( in_array( 'bank_deposit', $method ) ) {
+		if ( in_array( 'bank_deposit', $method, true ) ) {
 			$payment_fields['bank_deposite_info'] = array(
 				'type'          => 'text_info',
 				'label'         => __( 'Bank Detail', 'wp-travel' ),
@@ -220,11 +219,10 @@ function wptravel_get_checkout_form_fields() {
 			'label'         => __( 'Total Trip Price', 'wp-travel' ),
 			'name'          => 'wp_travel_trip_price_info',
 			'id'            => 'wp-travel-trip-price_info',
-			'attributes'    => array( 
+			'attributes'    => array(
 				'data-wpt-cart-total' => '',
-			 ),
+			),
 			'wrapper_class' => 'wp-travel-payment-field  f-booking-with-payment f-partial-payment f-full-payment',
-			// 'before_field'  => wptravel_get_currency_symbol(),
 			'default'       => wptravel_get_formated_price_currency( $total_amount ),
 			'priority'      => 110,
 		);
@@ -236,9 +234,9 @@ function wptravel_get_checkout_form_fields() {
 			'id'         => 'wp-travel-trip-price',
 			'default'    => wptravel_get_formated_price( $trip_price ),
 			'priority'   => 102,
-			'attributes' => array( 
+			'attributes' => array(
 				'data-wpt-cart-total' => '',
-			 ),
+			),
 		);
 	}
 
@@ -247,7 +245,7 @@ function wptravel_get_checkout_form_fields() {
 		'billing_fields'   => $fields,
 		'payment_fields'   => $payment_fields,
 	);
-	$checkout_fields = apply_filters( 'wp_travel_checkout_fields', $checkout_fields ); /// sort field after this filter.
+	$checkout_fields = apply_filters( 'wp_travel_checkout_fields', $checkout_fields ); // sort field after this filter.
 
 	$checkout_fields = array(
 		'traveller_fields' => wptravel_sort_form_fields( $checkout_fields['traveller_fields'] ),
@@ -273,7 +271,7 @@ function wptravel_get_checkout_form_fields() {
  * @return array Returns form fields.
  */
 function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
-	
+
 	/**
 	 * Already checking nonce above using WP_Travel::verify_nonce( true ).
 	 */
@@ -400,7 +398,6 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		'price_range'          => array(
 			'type'          => 'range',
 			'label'         => __( 'Price Range:', 'wp-travel' ),
-			// 'name'        => 'price',
 			'id'            => 'amount',
 			'class'         => 'wp_travel_search_widget_filters_input',
 			'default'       => $price_range,
@@ -448,7 +445,7 @@ function wptravel_get_bank_deposit_form_fields() {
 		);
 
 	}
-	$fields['wp_travel_bank_deposit_slip'] = array(
+	$fields['wp_travel_bank_deposit_slip']           = array(
 		'type'        => 'file',
 		'label'       => __( 'Bank Deposit Slip', 'wp-travel' ),
 		'name'        => 'wp_travel_bank_deposit_slip',
