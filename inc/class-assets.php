@@ -211,8 +211,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			wp_register_style( 'wp-travel-slick', self::$assets_path . 'assets/css/lib/slick/slick.min.css', array(), '1.8.1' );
 			// fontawesome.
 			wp_register_style( 'font-awesome-css', self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css', array(), '5.4.2' );
-			wp_register_style( 'select2-style', self::$assets_path . 'assets/css/lib/select2/select2' . $suffix . '.css', array(), '4.0.5', array(), '4.0.5' );
-
+			wp_register_style( 'select2-style', self::$assets_path . 'assets/css/lib/select2/select2' . $suffix . '.css', array(), '4.0.5' );
 			wp_enqueue_media();
 			wp_enqueue_style( 'jquery-datepicker', self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
