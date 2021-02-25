@@ -250,6 +250,7 @@ Fixes:
 
 Deprecated:
 * Function `wptravel_process_trip_price_tax_by_price` is deprecated.
+* Function `get_wp_travel_map_data` is deprecated use `wptravel_get_map_data` instead.
 
 = 4.4.8 =
 Release Date: 24th February, 2021

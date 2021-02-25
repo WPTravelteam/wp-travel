@@ -56,3 +56,15 @@ function wptravel_process_trip_price_tax_by_price( $post_id, $price ) {
 	}
 	return array( 'trip_price' => $trip_price );
 }
+
+/**
+ * Get Map Data
+ *
+ * @param Number $trip_id Trip id.
+ *
+ * @return Array
+ */
+function get_wp_travel_map_data( $trip_id = null ) { // @phpcs:ignore
+	wptravel_deprecated_function( 'get_wp_travel_map_data', '4.4.9', 'wptravel_get_map_data' );
+	return wptravel_get_map_data( $trip_id );
+}
