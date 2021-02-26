@@ -7106,3 +7106,26 @@ $primaryColor: #3399ff;
 .leaflet-pane, .leaflet-bottom, .leaflet-top{
 	z-index: 1 !important;
 }
+
+.fix-trip-detail{
+	width: 100%;
+	.listing{
+		display: grid;
+		list-style: none;
+		grid-template-columns: repeat(4,1fr);
+		grid-gap: 0.2em;
+		margin-left: 0;
+		li{
+			
+			padding: 5px 10px;
+			background: #fbfafa;
+			display: flex;
+			align-items: center;
+			&:nth-child(1),&:nth-child(2),&:nth-child(3),&:nth-child(4){
+				background-color: #dcdcdc;
+				color: #404040;
+				font-weight: bold;
+			}
+		}
+	}
+}

@@ -147,37 +147,50 @@ const DatesListing = ({ dates, onDateClick }) => {
     return <>
         {
             _dates.length > 0 ? <>
-                <table>
-                    <tr>
-                        <td>Pricing</td>
-                        <td>Start</td>
-                        <td>End</td>
-                        <td>Action</td>
-                    </tr>
+
+                <div class="fix-trip-detail">
+                    <ol class="listing">
+                        <li>
+                          <strong>Pricing</strong> 
+                        </li>
+                        <li>
+                             <strong>Start</strong>
+                        </li>
+                        <li>
+                             <strong>End</strong>
+                        </li>
+                        <li>
+                             <strong>Action</strong>
+                        </li>
+                        
+                   
+
+        
                     {
                     _dates.map((date, index) => {
                         console.log(moment(date.end_date).format('YYYY-MM-DD'))
                         return <>
                             {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
                                 ||
-                                    <tr>
-                                        <td></td>
-                                        <td>{date.start_date}</td>
-                                        <td>
-                                            {moment(date.end_date).format('YYYY-MM-DD')}
-                                        </td>
-                                        <td>
+                                <>
+                                    <li></li>
+                                    <li>{date.start_date}</li>
+                                    <li>
+                                        {moment(date.end_date).format('YYYY-MM-DD')}
+                                    </li>
+                                    <li>
 
-                                            <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                                                Book now
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
+                                            Book now
+                                        </button>
+                                    </li>
+                                </>
                             }
                         </>
                     })
                     }
-                </table>
+                 </ol>
+                </div>
 
             
             </> : <> Please add date.</>
