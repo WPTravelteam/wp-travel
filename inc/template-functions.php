@@ -683,13 +683,11 @@ function wptravel_single_location( $post_id ) {
 					$i = 0;
 					foreach ( $terms as $term ) :
 						if ( $i > 0 ) :
-							?>
-							,
+							?>,
 							<?php
 						endif;
 						?>
-						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
-						<?php
+						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span><?php
 						$i++;
 					endforeach;
 					?>
