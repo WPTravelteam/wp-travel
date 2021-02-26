@@ -218,7 +218,6 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'app/build/wp-travel-tabs' . $suffix . '.css', array( 'wp-color-picker' ), WP_TRAVEL_VERSION );
 			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 			wp_enqueue_style( 'wp-travel-admin-1-style', self::$assets_path . 'app/build/wp-travel-admin-1' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-admin-style', self::$assets_path . 'assets/css/wp-travel-admin' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
 			// Tab for settings page.
 			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
