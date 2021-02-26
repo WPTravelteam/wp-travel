@@ -150,9 +150,9 @@ const DatesListing = ({ dates, onDateClick }) => {
 
                 <div class="fix-trip-detail">
                     <ol class="listing">
-                        <li>
+                        {/* <li>
                           <strong>Pricing</strong> 
-                        </li>
+                        </li> */}
                         <li>
                              <strong>Start</strong>
                         </li>
@@ -173,7 +173,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                             {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
                                 ||
                                 <>
-                                    <li></li>
+                                    {/* <li></li> */}
                                     <li>{date.start_date}</li>
                                     <li>
                                         {moment(date.end_date).format('YYYY-MM-DD')}
