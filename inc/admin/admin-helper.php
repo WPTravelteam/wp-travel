@@ -893,7 +893,7 @@ add_action( 'wp_travel_extras_pro_options', 'wptravel_extras_pro_option_fields' 
 function wptravel_extras_pro_option_fields() {
 
 	$is_pro_enabled = apply_filters( 'wp_travel_extras_is_pro_enabled', false ); // @phpcs:ignore
-	$is_pro_enabled = apply_filters( 'wptravel_extras_is_pro_enabled', false );
+	$is_pro_enabled = apply_filters( 'wptravel_extras_is_pro_enabled', $is_pro_enabled );
 
 	if ( $is_pro_enabled ) {
 		do_action( 'wp_travel_extras_pro_single_options' ); // @phpcs:ignore
