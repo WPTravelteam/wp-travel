@@ -244,6 +244,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 26th February, 2021
 
 Fixes:
+* Permalink issue fixed. WP Travel archive page is not working if permalinks updated.
 * Method not found error fixed.
 * Spacing issue in the destination of meta info section.
 * Fixed trip extras section not being displayed.
