@@ -146,16 +146,42 @@ const DatesListing = ({ dates, onDateClick }) => {
     const _dates = Object.values(dates)
     return <>
         {
-            _dates.map((date, index) => {
-                return <>
-                    {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
-                        ||
-                        <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                            {moment(date.start_date).format('ddd, MMM Do YYYY')}
-                        </button>
+            _dates.length > 0 ? <>
+                <table>
+                    <tr>
+                        <td>Pricing</td>
+                        <td>Start</td>
+                        <td>End</td>
+                        <td>Action</td>
+                    </tr>
+                    {
+                    _dates.map((date, index) => {
+                        console.log(moment(date.end_date).format('YYYY-MM-DD'))
+                        return <>
+                            {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
+                                ||
+                                    <tr>
+                                        <td></td>
+                                        <td>{date.start_date}</td>
+                                        <td>
+                                            {moment(date.end_date).format('YYYY-MM-DD')}
+                                        </td>
+                                        <td>
+
+                                            <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
+                                                Book now
+                                            </button>
+                                        </td>
+                                    </tr>
+                            }
+                        </>
+                    })
                     }
-                </>
-            })
+                </table>
+
+            
+            </> : <> Please add date.</>
+            
         }
     </>
 }
