@@ -35,10 +35,10 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 
 		// Admin General Notices.
-		add_action( 'admin_notices', array( $this, 'wptravel_paypal_merge_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wptravel_update_payment_gateways_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wptravel_importer_upsell_notice' ) );
-		add_action( 'admin_init', array( $this, 'wptravel_get_dismissied_nag_messages' ) );
+		add_action( 'admin_notices', array( $this, 'paypal_merge_notice' ) );
+		add_action( 'admin_notices', array( $this, 'update_payment_gateways_notice' ) );
+		add_action( 'admin_notices', array( $this, 'importer_upsell_notice' ) );
+		add_action( 'admin_init', array( $this, 'get_dismissied_nag_messages' ) );
 
 		add_action( 'wp_travel_general_admin_notice', array( $this, 'general_admin_notices' ) );
 	}
@@ -292,13 +292,13 @@ class WP_Travel_Admin_Info_Pointers {
 	}
 
 	/**
-	 * wp_travel_paypal_merge_notice
+	 * paypal_merge_notice
 	 *
 	 * WP Travel Standard paypal merge info.
 	 *
 	 * @since 1.2
 	 */
-	function wptravel_paypal_merge_notice() {
+	function paypal_merge_notice() {
 
 		if ( is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
 			$user_id = get_current_user_id();
@@ -317,13 +317,13 @@ class WP_Travel_Admin_Info_Pointers {
 
 
 	/**
-	 * wp_travel_update_payment_gateways_notice
+	 * update_payment_gateways_notice
 	 *
 	 * WP Travel Standard paypal merge info.
 	 *
 	 * @since 1.4.0
 	 */
-	function wptravel_update_payment_gateways_notice() {
+	function update_payment_gateways_notice() {
 
 		$addons = array( 'wp-travel-instamojo/wp-travel-instamojo-checkout.php', 'wp-travel-paypal-express-checkout/wp-travel-paypal-express-checkout.php', 'wp-travel-razor-pay/wp-travel-razorpay-checkout.php', 'wp-travel-stripe/wp-travel-stripe.php' );
 
@@ -350,7 +350,7 @@ class WP_Travel_Admin_Info_Pointers {
 	/**
 	 * Dismiss info nag message.
 	 */
-	function wptravel_get_dismissied_nag_messages() {
+	function get_dismissied_nag_messages() {
 
 		if ( ! WP_Travel::verify_nonce( true ) ) {
 			return;
@@ -363,7 +363,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 	}
 
-	function wptravel_importer_upsell_notice() {
+	function importer_upsell_notice() {
 
 		if ( class_exists( 'WP_Travel_Import_Export_Core' ) ) {
 			return;

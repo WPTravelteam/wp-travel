@@ -18,11 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Wp_Travel_Shortcodes {
 
 	public function init() {
-		add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wptravel_get_itineraries_shortcode' ) );
-		add_shortcode( 'wp_travel_itineraries', array( $this, 'wptravel_get_itineraries_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wptravel_trip_filters_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wptravel_trip_facts_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'wptravel_trip_enquiry_form_shortcode' ) );
+		add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'get_itineraries_shortcode' ) );
+		add_shortcode( 'wp_travel_itineraries', array( $this, 'get_itineraries_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_filters', array( $this, 'trip_filters_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_facts', array( $this, 'trip_facts_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'trip_enquiry_form_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -107,7 +107,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wptravel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
+	public static function get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
 		$default = array(
 			'id'           => 0,
 			'type'         => '',
@@ -226,7 +226,7 @@ class Wp_Travel_Shortcodes {
 	 * @param [type] $content
 	 * @return String
 	 */
-	public static function wptravel_trip_filters_shortcode( $atts, $content ) {
+	public static function trip_filters_shortcode( $atts, $content ) {
 		$sanitized_get        = WP_Travel::get_sanitize_request();
 		$search_widget_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		$defaults             = array(
@@ -283,7 +283,7 @@ class Wp_Travel_Shortcodes {
 	/**
 	 * Trip facts Shortcode callback.
 	 */
-	public function wptravel_trip_facts_shortcode( $atts, $content = '' ) {
+	public function trip_facts_shortcode( $atts, $content = '' ) {
 
 		$trip_id = ( isset( $atts['id'] ) && '' != $atts['id'] ) ? $atts['id'] : false;
 
@@ -370,7 +370,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return String
 	 */
-	public function wptravel_trip_enquiry_form_shortcode() {
+	public function trip_enquiry_form_shortcode() {
 		ob_start();
 		wptravel_get_enquiries_form( true );
 		$html = ob_get_clean();

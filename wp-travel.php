@@ -145,7 +145,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->coupon  = new WP_Travel_Coupon();
 
 			// For Network.
-			add_action( 'network_admin_menu', array( $this, 'wp_travel_network_menu' ) );
+			add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
 			/**
 			 * To resolve the pages mismatch issue when using WPML.
 			 *
@@ -208,7 +208,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @return void
 		 */
-		public function wptravel_network_menu() {
+		public function network_menu() {
 			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
 		}
 

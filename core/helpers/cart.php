@@ -1,4 +1,13 @@
 <?php
+/**
+ * Helpers cart.
+ *
+ * @package core/helpers
+ */
+
+/**
+ * WP_Travel_Helpers_Cart class.
+ */
 class WP_Travel_Helpers_Cart {
 	public static function get_cart() {
 		$cart_items = self::get_cart_items();
@@ -80,10 +89,10 @@ class WP_Travel_Helpers_Cart {
 				$cart[ $cart_id ]['trip_price'] = (float) number_format( $item['trip_price'], 2, '.', '' );
 
 				// Calculation of individual trip total along with extras.
-				$cart[ $cart_id ]['trip_total'] = $wt_cart->get_item_total( $cart_id ); // Gross individual trip total including extras. It helps to apply discount.
+				$cart[ $cart_id ]['trip_total']         = $wt_cart->get_item_total( $cart_id ); // Gross individual trip total including extras. It helps to apply discount.
 				$cart[ $cart_id ]['trip_total_partial'] = $wt_cart->get_item_total( $cart_id, true ); // Gross individual trip total including extras. It helps to apply discount.
-				$cart[ $cart_id ]['payout_percent'] = WP_Travel_Helpers_Pricings::get_payout_percent( $item['trip_id'] ); // Gross individual trip total including extras. It helps to apply discount.
-				
+				$cart[ $cart_id ]['payout_percent']     = WP_Travel_Helpers_Pricings::get_payout_percent( $item['trip_id'] ); // Gross individual trip total including extras. It helps to apply discount.
+
 				if ( isset( $item['discount'] ) ) {
 					$cart[ $cart_id ]['discount'] = $item['discount']; // Discount amount applied to individual trip total.
 				}
@@ -132,7 +141,7 @@ class WP_Travel_Helpers_Cart {
 		// START Temporary solution
 		ob_start();
 		$WP_Travel_Ajax = new WP_Travel_Ajax();
-		$WP_Travel_Ajax->wptravel_add_to_cart();
+		$WP_Travel_Ajax->add_to_cart();
 		$res = ob_get_contents();
 		ob_end_clean();
 		// END Temporary solution
@@ -186,8 +195,8 @@ class WP_Travel_Helpers_Cart {
 
 	public static function apply_coupon_code( $coupon_code ) {
 
-		$payload     = json_decode( file_get_contents( 'php://input' ) );
-		$payload     = is_object( $payload ) ? (array) $payload : array();
+		$payload = json_decode( file_get_contents( 'php://input' ) );
+		$payload = is_object( $payload ) ? (array) $payload : array();
 		if ( empty( $coupon_code ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_EMPTY_COUPON' );
 			WP_Travel_Helpers_REST_API::response( $error );
@@ -247,11 +256,11 @@ class WP_Travel_Helpers_Cart {
 
 	/**
 	 * Return true if cart page is enabled. Fucntion is used to bypass cart page if disabled while doing add to cart.
-	 * 
+	 *
 	 * @since 4.3.2
 	 */
 	public static function is_enabled_cart_page() {
-		$enabled = false;
+		$enabled  = false;
 		$settings = wptravel_get_settings();
 
 		$skip_cart_page_booking = isset( $settings['skip_cart_page_booking'] ) && ! empty( $settings['skip_cart_page_booking'] ) ? $settings['skip_cart_page_booking'] : 'no';

@@ -41,7 +41,7 @@ class WP_Travel_Emails {
 	 * Email Styles
 	 * Email Static CSS
 	 */
-	public function wptravel_email_styles() {
+	public function email_styles() {
 
 		$styles = '<style type="text/css">
 		body{
@@ -250,9 +250,9 @@ class WP_Travel_Emails {
 				break;
 		}
 
-		$email_template['mail_header']  = $this->wptravel_email_heading( $sent_to, $header_details );
+		$email_template['mail_header']  = $this->email_heading( $sent_to, $header_details );
 		$email_template['mail_content'] = $email_content;
-		$email_template['mail_footer']  = $this->wptravel_email_footer();
+		$email_template['mail_footer']  = $this->email_footer();
 
 		return apply_filters( 'wp_travel_email_template', $email_template, $type, $sent_to );
 
@@ -264,13 +264,13 @@ class WP_Travel_Emails {
 	 * @param array  $details data
 	 * @return HTML
 	 */
-	public function wptravel_email_heading( $sent_to, $details = array() ) {
+	public function email_heading( $sent_to, $details = array() ) {
 		ob_start(); ?><!DOCTYPE html>
 		<html>
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<title><?php sprintf( 'TO %s', strtoupper( $sent_to ) ); ?></title>
-			<?php echo $this->wptravel_email_styles(); //@phpcs:ignore ?>
+			<?php echo $this->email_styles(); //@phpcs:ignore ?>
 		</head>
 		<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
 			<!-- Wrapper -->
@@ -291,7 +291,7 @@ class WP_Travel_Emails {
 	 *
 	 * @return HTML Email Footer Template.
 	 */
-	public function wptravel_email_footer() {
+	public function email_footer() {
 
 		ob_start();
 		$disable_powerby = apply_filters( 'wp_travel_disable_email_template_poweredby', false );
