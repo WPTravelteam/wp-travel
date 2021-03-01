@@ -9,6 +9,8 @@ import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 import './trip-store';
 import './trip-pro-options';
 
+import '../settings/store/settings-store'; // @since WP Travel 4.5.1
+
 import SaveTripSection from './sub-components/SaveTripSection'
 
 // Tab Items.
