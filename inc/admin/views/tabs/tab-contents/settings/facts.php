@@ -30,14 +30,14 @@ function wptravel_settings_callback_facts( $tab ) {
 	</table>
 	<div <?php  echo 'yes' !== $wp_travel_trip_facts_enable ? 'style="display:none"' : ''; ?> id="fact-app">
 		<div id="sampler" style="display:none">
-			<?php echo wp_travel_trip_facts_setting_sample(); ?>
+			<?php echo wptravel_trip_facts_setting_sample(); ?>
 		</div>
 		<div id="fact-sample-collector">
 			<?php
 			if ( is_array( $settings ) && array_key_exists( 'wp_travel_trip_facts_settings', $settings ) ) :
 				foreach ( $settings['wp_travel_trip_facts_settings'] as $key => $fact ) :
 					$fact['id'] = $key;
-					echo wp_travel_trip_facts_setting_sample( $fact );
+					echo wptravel_trip_facts_setting_sample( $fact );
 				endforeach;
 			endif;
 			?>
