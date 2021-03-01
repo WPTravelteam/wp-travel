@@ -168,7 +168,9 @@ const DatesListing = ({ dates, onDateClick }) => {
         
                     {
                     _dates.map((date, index) => {
-                        console.log(moment(date.end_date).format('YYYY-MM-DD'))
+                        console.log(date.end_date)
+                        console.log(typeof( date.end_date) )
+                        // console.log(moment(date.end_date).format('YYYY-MM-DD'))
                         return <>
                             {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
                                 ||

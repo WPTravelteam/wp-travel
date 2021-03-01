@@ -1,19 +1,28 @@
 <?php
 /**
- * WP_TRAVEL_TERM_META
+ * Wptravel_Term_Meta
  *
  * @package WP_Travel
  **/
-if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 
-	class WP_TRAVEL_TERM_META {
+if ( ! class_exists( 'Wptravel_Term_Meta' ) ) {
 
+	/**
+	 * Term meta class.
+	 */
+	class Wptravel_Term_Meta {
+
+		/**
+		 * Constructor
+		 */
 		public function __construct() {
 		}
-		/*
-		* Initialize the class and start calling our hooks and filters
-		* @since 1.6.3
-		*/
+
+		/**
+		 * Initialize the class and start calling our hooks and filters.
+		 *
+		 * @since 1.6.3
+		 */
 		public function init() {
 
 			// Trip Type Fields.
@@ -44,6 +53,9 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 			add_action( 'admin_footer', array( $this, 'add_script' ) );
 		}
 
+		/**
+		 * Load Media.
+		 */
 		public function load_media() {
 			$current_screen_id = get_current_screen()->id;
 			$allowed_screens   = array( 'edit-activity', 'edit-itinerary_types', 'edit-travel_locations', 'edit-travel_keywords' );
@@ -55,22 +67,24 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 			wp_enqueue_media();
 		}
 
-		/*
-		* Add a form field in the new category page
-		* @since 1.6.3
-		*/
+		/**
+		 * Add a form field in the new category page.
+		 *
+		 * @param $taxonomy
+		 * @since 1.6.3
+		 */
 		public function add_category_image( $taxonomy ) {
 			wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
 			?>
-	<div class="form-field term-group">
-		<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
-		<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" class="custom_media_url" value="">
-		<div id="category-image-wrapper"></div>
-		<p>
-		<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
-		<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
-		</p>
-	</div>
+			<div class="form-field term-group">
+				<label for="category-image-id"><?php _e( 'Image', 'wp-travel' ); ?></label>
+				<input type="hidden" id="category-image-id" name="wp_travel_trip_type_image_id" class="custom_media_url" value="">
+				<div id="category-image-wrapper"></div>
+				<p>
+				<input type="button" class="button button-secondary wp_travel_tax_media_button" id="wp_travel_tax_media_button" name="wp_travel_tax_media_button" value="<?php _e( 'Add Image', 'wp-travel' ); ?>" />
+				<input type="button" class="button button-secondary wp_travel_tax_media_remove" id="wp_travel_tax_media_remove" name="wp_travel_tax_media_remove" value="<?php _e( 'Remove Image', 'wp-travel' ); ?>" />
+				</p>
+			</div>
 			<?php
 		}
 
@@ -156,7 +170,7 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 			?>
 		<script>
 			jQuery(document).ready( function($) {
-			function wptravel_media_upload(button_class) {
+			function wp_travel_media_upload(button_class) {
 				var _custom_media = true,
 				_orig_send_attachment = wp.media.editor.send.attachment;
 				$('body').on('click', button_class, function(e) {
@@ -200,7 +214,7 @@ if ( ! class_exists( 'WP_TRAVEL_TERM_META' ) ) {
 		}
 	}
 
-	$WP_TRAVEL_TERM_META = new WP_TRAVEL_TERM_META();
-	$WP_TRAVEL_TERM_META->init();
+	$Wptravel_Term_Meta = new Wptravel_Term_Meta();
+	$Wptravel_Term_Meta->init();
 
 }
