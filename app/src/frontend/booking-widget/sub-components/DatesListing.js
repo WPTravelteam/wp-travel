@@ -49,8 +49,6 @@ const generateRRUleArgs = data => {
 }
 
 const RecurringDates = ({ data, onDateClick }) => {
-    // return <>recuring</>
-
     const [dates, setRecurringDates] = useState([])
     const [activeRecurringDates, setActiveRecurringDates] = useState([])
     const [rruleArgs, setRRuleArgs] = useState(null)
@@ -113,7 +111,7 @@ const RecurringDates = ({ data, onDateClick }) => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
             return <>
                 <li>{_date.format("YYYY-MM-DD")}</li>
-                <li></li>
+                <li>N/A</li>
                 <li><button onClick={handleDateClick(_date)}>Book now</button></li>
             </>
         })}
