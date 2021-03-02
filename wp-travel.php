@@ -766,8 +766,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				if ( $return_bool ) {
 					return false;
 				}
-				$error = WpTravel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
-				return WpTravel_Helpers_REST_API::response( $error );
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_NONCE' );
+				return WP_Travel_Helpers_REST_API::response( $error );
 			}
 			return true;
 		}

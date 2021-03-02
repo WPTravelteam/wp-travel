@@ -1,4 +1,13 @@
 <?php
+/**
+ * Default form fields.
+ *
+ * @package inc
+ */
+
+ /**
+  * Default form fields.
+  */
 class WP_Travel_Default_Form_Fields {
 
 	/**
