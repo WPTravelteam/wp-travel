@@ -298,7 +298,7 @@ class WpTravel_Helpers_Trips {
 				}
 			}
 		}
-		error_log( print_r( $itineraries, true ) );
+
 		update_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', $itineraries );
 		$faqs = array();
 		if ( ! empty( $trip_data->faqs ) ) {
