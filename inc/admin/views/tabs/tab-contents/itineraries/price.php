@@ -11,9 +11,9 @@ function wptravel_trip_callback_price() {
 	// Implement new multiple category options(child, adult) on multiple pricing option. eg . Pricing A, have adult, child option in one pricing.
 	// Also single pricing option is removed form this version (@since 3.0.0) as well for new users.
 	if ( 'yes' === $new_multiple_category ) {
-		wp_travel_new_pricing_list_admin();
+		wptravel_new_pricing_list_admin();
 	} else {
-		wp_travel_old_pricing_list_admin();
+		wptravel_old_pricing_list_admin();
 	}
 }
 
@@ -24,7 +24,7 @@ function wptravel_new_pricing_list_admin() {
 	$date_format    = get_option( 'date_format' );
 	$settings       = wptravel_get_settings();
 	$js_date_format = wptravel_date_format_php_to_js();
-	$pricing_types  = wp_travel_get_pricing_option_list();
+	$pricing_types  = wptravel_get_pricing_option_list();
 
 	$currency_code   = ( isset( $settings['currency'] ) ) ? $settings['currency'] : '';
 	$currency_symbol = wptravel_get_currency_symbol( $currency_code );
@@ -500,7 +500,7 @@ function wptravel_new_pricing_list_admin() {
 										</div>
 									</div>
 									<div class="repeat-row">
-										<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
+										<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
 									</div>
 								</div>
 								<?php
@@ -844,7 +844,7 @@ function wptravel_new_pricing_list_admin() {
 			</th>
 		</tr>
 		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-content">
-			<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
+			<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 		</tr>
 
 		<?php

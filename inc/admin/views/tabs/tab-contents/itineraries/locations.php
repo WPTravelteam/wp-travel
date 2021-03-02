@@ -6,7 +6,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 
 		$map_data = wptravel_get_map_data();
 		$settings = wptravel_get_settings();
-		add_action( 'wp_travel_admin_map_area', 'wp_travel_google_map', 10, 2 );
+		add_action( 'wp_travel_admin_map_area', 'wptravel_google_map', 10, 2 );
 		
 		?>
 		<h4><?php _e( 'Destination', 'wp-travel' ); ?></h4>
