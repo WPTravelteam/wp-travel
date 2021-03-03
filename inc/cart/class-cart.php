@@ -69,7 +69,7 @@ class WP_Travel_Cart {
 	 *
 	 * @return void
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->cart_id = 'wp_travel_cart';
 
 		// Read cart data on load.
@@ -86,8 +86,10 @@ class WP_Travel_Cart {
 	}
 
 	/**
-	 * Validate pricing Key
+	 * Validate pricing Key.
 	 *
+	 * @param int    $trip_id Tirp id.
+	 * @param string $pricing_key price key.
 	 * @return bool true | false.
 	 */
 	public static function is_pricing_key_valid( $trip_id, $pricing_key ) {
@@ -115,8 +117,11 @@ class WP_Travel_Cart {
 	}
 
 	/**
-	 * Validate date
+	 * Validate date.
 	 *
+	 * @param int    $trip_id Tirp id.
+	 * @param string $pricing_key price key.
+	 * @param string $test_date test date. why??
 	 * @return bool true | false.
 	 */
 	public static function is_request_date_valid( $trip_id, $pricing_key, $test_date ) {
@@ -156,16 +161,17 @@ class WP_Travel_Cart {
 	/**
 	 * Add an item to cart.
 	 *
-	 * @param int   $args    Mixed. trip id if WP Travel below 4.4.2 else all cart args.
-	 * @param int   $trip_price Price of item.
-	 * @param int   $trip_price_partial   Price partial.
-	 * @param int   $pax   Quantity of item.
-	 * @param array $attrs Item attributes.
+	 * @param Mixed  $args    Mixed. trip id if WP Travel below 4.4.2 else all cart args.
+	 * @param int    $trip_price Price of item.
+	 * @param int    $trip_price_partial   Price partial.
+	 * @param int    $pax   Quantity of item.
+	 * @param string $price_key   Quantity of item.
+	 * @param array  $attrs Item attributes.
 	 * @todo Need to remove all attributes excepct $args.
 	 * @return boolean
 	 */
 	public function add( $args, $trip_price = 0, $trip_price_partial = 0, $pax = 1, $price_key = '', $attrs = array() ) {
-		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2
+		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2.
 			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
 			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
 			$trip_price_partial = isset( $args['trip_price_partial'] ) ? $args['trip_price_partial'] : 0;
@@ -334,7 +340,6 @@ class WP_Travel_Cart {
 					}
 					$category_price_partial = $category_price;
 
-					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 					if ( wptravel_is_partial_payment_enabled() ) {
 						$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
@@ -344,7 +349,7 @@ class WP_Travel_Cart {
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
 
 					// multiply category_price by pax to add in trip price if price per is person.
-					if ( 'person' == $cart_trip[ $category_id ]['price_per'] ) {
+					if ( 'person' === $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
@@ -542,7 +547,7 @@ class WP_Travel_Cart {
 
 		$trips = $this->items;
 
-		$discounts = apply_filters( 'wp_travel_trip_discounts', $this->discounts, $trips );
+		$discounts = apply_filters( 'wp_travel_trip_discounts', $this->discounts, $trips ); // Help to apply discount amount/ values from outside (WAL).
 
 		$cart_total      = 0;
 		$tax_amount      = 0;
