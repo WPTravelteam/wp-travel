@@ -578,7 +578,8 @@ class WP_Travel_Cart {
 			$coupon_id                         = isset( $this->discounts['coupon_id'] ) ? $this->discounts['coupon_id'] : '';
 			$discount_applicable_total         = WPTravel()->coupon->get_discount_applicable_total( $coupon_id );
 			$discount_applicable_total_partial = WPTravel()->coupon->get_discount_applicable_total( $coupon_id, true ); // Partial discount.
-			$discount_applicable_total = apply_filters( 'wptravel_discount_applicable_total', $discount_applicable_total, $cart_total, $trips );
+			$discount_applicable_total         = apply_filters( 'wptravel_discount_applicable_total', $discount_applicable_total, $cart_total, $trips );
+
 			$d_typ = $discounts['type'];
 			$d_val = $discounts['value'];
 
