@@ -575,10 +575,10 @@ class WP_Travel_Cart {
 
 		// Discounts Calculation.
 		if ( ! empty( $discounts ) && $with_discount ) { // $with_discount will help to get actual total while calculating discount.
-			$coupon_id                         = $this->discounts['coupon_id'];
+			$coupon_id                         = isset( $this->discounts['coupon_id'] ) ? $this->discounts['coupon_id'] : '';
 			$discount_applicable_total         = WPTravel()->coupon->get_discount_applicable_total( $coupon_id );
 			$discount_applicable_total_partial = WPTravel()->coupon->get_discount_applicable_total( $coupon_id, true ); // Partial discount.
-
+			$discount_applicable_total = apply_filters( 'wptravel_discount_applicable_total', $discount_applicable_total, $cart_total, $trips );
 			$d_typ = $discounts['type'];
 			$d_val = $discounts['value'];
 

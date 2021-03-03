@@ -266,7 +266,7 @@ class WP_Travel_Coupon {
 	 */
 	public function get_discount_applicable_total( $coupon_id, $partial_total = false ) {
 		if ( ! $coupon_id ) {
-			return;
+			return 0;
 		}
 		global $wt_cart;
 
