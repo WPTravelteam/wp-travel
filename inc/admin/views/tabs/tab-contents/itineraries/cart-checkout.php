@@ -28,7 +28,7 @@ function wptravel_trip_callback_cart_checkout( $tab, $args ) {
 		wptravel_upsell_message( $args );
 	endif;
 
-	wptravel_do_deprecated_action( 'wp_travel_trip_cart_checkout_tab_content', array( $post_id ), '4.4.7', 'wptravel_trip_cart_checkout_tab_content' ); //@phpcs:ignore
+	wptravel_do_deprecated_action( 'wp_travel_trip_cart_checkout_tab_content', $args, '4.4.7', 'wptravel_trip_cart_checkout_tab_content' ); //@phpcs:ignore
 	do_action( 'wptravel_trip_cart_checkout_tab_content', $args );
 }
 
