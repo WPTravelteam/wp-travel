@@ -12,3 +12,21 @@
     }
   }
 }
+
+#wpt-here-map-results {
+  ul{
+    background: white;
+    padding: 5px;
+    margin: 5px;
+    li{
+      &:nth-child(odd){
+        background-color: #eee;
+      }
+      &.wpt-here-map-suggestion{
+        padding: 10px 5px 10px 5px;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
