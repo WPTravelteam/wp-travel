@@ -244,6 +244,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.2 =
+Release Date: 3rd March, 2021
+
+Fixes:
+* Fixed remove items form cart in checkout page.
+* Fixes error related to undefined functions.
+
+Tweaks:
+* wpautop added in the itinery description of itinerary lists.
+* Hook `wptravel_discount_applicable_total` added to calculated discount applicable total.
+
 = 4.5.1 =
 Release Date: 1st March, 2021
 
