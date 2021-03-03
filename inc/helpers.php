@@ -289,28 +289,34 @@ function wptravel_get_dropdown_list( $args = array() ) {
  * Sanitize data. It may be either string or array
  * 
  * @param mixed $array input data
- * @param bool	$wp_kese_post if data need wp keses or not.
+ * @param bool	$wp_kses_post if data need wp keses or not.
  */
-function wptravel_sanitize_array( $array, $wp_kese_post = false ) {
+function wptravel_sanitize_array( $array, $wp_kses_post = false ) {
 	if ( is_string( $array ) ) {
-		if ( $wp_kese_post ) {
+		if ( $wp_kses_post ) {
 			$array = wp_kses_post( $array );
 		} else {
 			$array = sanitize_text_field( $array );
 		}
-	} elseif ( is_array( $array ) ) {
-		if ( $wp_kese_post ) { // Multiple foreach loop to reduce if condition checks.
+	} elseif ( is_array( $array ) || is_object( $array ) ) {
+		if ( $wp_kses_post ) { // Multiple foreach loop to reduce if condition checks.
 			foreach ( $array as $key => &$value ) {
+				if ( is_object( $value ) ) {
+					$value = (array) $value;
+				}
 				if ( is_array( $value ) ) {
-					$value = wptravel_sanitize_array( $value, $wp_kese_post );
+					$value = wptravel_sanitize_array( $value, $wp_kses_post );
 				} else {
 					$value = wp_kses_post( $value );
 				}
 			}
 		} else {
 			foreach ( $array as $key => &$value ) {
+				if ( is_object( $value ) ) {
+					$value = (array) $value;
+				}
 				if ( is_array( $value ) ) {
-					$value = wptravel_sanitize_array( $value, $wp_kese_post );
+					$value = wptravel_sanitize_array( $value, $wp_kses_post );
 				} else {
 					$value = sanitize_text_field( $value );
 				}
@@ -320,6 +326,7 @@ function wptravel_sanitize_array( $array, $wp_kese_post = false ) {
 
 	return $array;
 }
+
 
 /**
  * List all avalable and selceted maps data.
