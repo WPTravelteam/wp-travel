@@ -6,7 +6,7 @@
  * Version: 4.5.1
  * Author: WP Travel
  * Author URI: http://wptravel.io/
- * Requires at least: 5.4.1
+ * Requires at least: 5.4.2
  * Requires PHP: 5.5
  * Tested up to: 5.6.2
  *
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.5.1';
+		public $version = '4.5.2';
 
 		/**
 		 * WP Travel API version.
