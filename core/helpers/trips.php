@@ -453,7 +453,7 @@ class WpTravel_Helpers_Trips {
 
 		$post_ids      = array();
 		$post_ids_data = self::get_trip_ids( $args );
-		if ( isset( $post_ids_data['code'] ) && 'WP_TRAVEL_TRIP_IDS' == $post_ids_data['code'] ) {
+		if ( is_array( $post_ids_data ) && isset( $post_ids_data['code'] ) && 'WP_TRAVEL_TRIP_IDS' == $post_ids_data['code'] ) {
 			$post_ids = $post_ids_data['trip_ids'];
 		}
 		$query_args = array();
@@ -628,7 +628,7 @@ class WpTravel_Helpers_Trips {
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
 		}
-		$sql = "select distinct trip_id from {$pricing_table} where trip_id IN(" . implode( ',', $post_ids ) . ') ';
+		$sql = "select distinct trip_id from {$wpdb->prefix}wt_pricings where trip_id IN(" . implode( ',', $post_ids ) . ') ';
 
 		// Second query for group size if max_pax param.
 		if ( $max_pax && $max_pax > 0 ) {

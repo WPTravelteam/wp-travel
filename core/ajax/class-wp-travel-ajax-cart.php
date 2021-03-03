@@ -91,7 +91,7 @@ class WP_Travel_Ajax_Cart {
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.
 		 */
-		$cart_id   = ! empty( $_GET['cart_id'] ) ? absint( $_GET['cart_id'] ) : 0; //phpcs:ignore 
+		$cart_id   = ! empty( $_GET['cart_id'] ) ? sanitize_text_field( $_GET['cart_id'] ) : 0; //phpcs:ignore 
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );

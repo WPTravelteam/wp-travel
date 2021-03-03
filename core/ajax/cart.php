@@ -76,7 +76,7 @@ class WP_Travel_Ajax_Cart {
 	 */
 	public static function update_cart_item() {
 		$request   = WP_Travel::get_sanitize_request();
-		$cart_id   = ! empty( $request['cart_id'] ) ? absint( $request['cart_id'] ) : 0;
+		$cart_id   = ! empty( $request['cart_id'] ) ? $request['cart_id'] : 0;
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );
