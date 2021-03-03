@@ -252,7 +252,7 @@ Fixes:
 * Fixes error related to undefined functions.
 
 Tweaks:
-* wpautop added in the itinery description of itinerary lists.
+* wpautop added in the itinerary description of itinerary lists.
 * Hook `wptravel_discount_applicable_total` added to calculated discount applicable total.
 
 = 4.5.1 =
