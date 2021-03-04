@@ -298,7 +298,7 @@ const WPTravelTripOptionsPricings = () => {
                                 
                             } ) }
 
-                        { ( settings.minimum_partial_payout.length > 1 && totalPayout != 100 ) &&
+                        { ( payout_percentages.length > 1 && totalPayout != 100 ) &&
                             <PanelRow>
                                 <Notice status="error" isDismissible={false}>{__( 'Error: Total payout percent is not equals to 100%. Please update the trip once else global partial percent will be used as default.', 'wp-travel')}</Notice>
                             </PanelRow>
