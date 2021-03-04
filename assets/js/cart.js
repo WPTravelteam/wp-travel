@@ -476,10 +476,9 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
           return res.json();
         }).then(function (result) {
           if (result.success && result.data.code == 'WP_TRAVEL_REMOVED_CART_ITEM') {
-            if (result.data.cart && result.data.cart.length <= 0) {
-              window.location.reload();
-            }
-
+            // if (result.data.cart && result.data.cart.length <= 0) {
+            // }
+            window.location.reload();
             wp_travel_cart.cart = result.data.cart;
             var total = result.data.cart.total;
 

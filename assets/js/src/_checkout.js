@@ -456,9 +456,9 @@ const wptravelcheckout = (shoppingCart) => {
                         .then(res => res.json())
                         .then(result => {
                             if (result.success && result.data.code == 'WP_TRAVEL_REMOVED_CART_ITEM') {
-                                if (result.data.cart && result.data.cart.length <= 0) {
-                                    window.location.reload()
-                                }
+                                // if (result.data.cart && result.data.cart.length <= 0) {
+                                // }
+                                window.location.reload()
                                 wp_travel_cart.cart = result.data.cart
                                 let total = result.data.cart.total
                                 if (wp_travel.payment) {

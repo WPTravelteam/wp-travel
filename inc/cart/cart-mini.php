@@ -147,9 +147,9 @@ if ( wptravel_is_react_version_enabled() ) {
 										</div>
 										<span class="trip-price">
 											<span data-wpt-item-total="<?php echo esc_attr( $trip_total ); ?>" >
-												<?php if ( $trip_discount ) : ?> <del> <?php endif ?>
+												<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?> <del> <?php endif ?>
 													<?php echo wptravel_get_formated_price_currency( $trip_total ); ?>
-												<?php if ( $trip_discount ) : ?> </del> <?php endif ?>
+												<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?> </del> <?php endif ?>
 											</span>
 
 											<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?>
@@ -162,10 +162,7 @@ if ( wptravel_is_react_version_enabled() ) {
 									<div style="display:none;" class="trip__partial-payment_detail" data-wpt-trip-partial-total="<?php echo esc_attr( $trip_total_partial ); ?>">
 										<div class="partial-payment-info">
 											<h5>Pay <?php echo esc_html( $payout_percent ); ?>% upfront</h5>
-											
-											
 										</div>
-										
 										<span>
 											<?php 
 												if ( $trip_discount ) {
