@@ -9,28 +9,29 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
+ * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
  * @since       1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 ?>
 
 <?php
 do_action( 'wp_travel_before_archive_itinerary', get_the_ID() );
 if ( post_password_required() ) {
-	echo get_the_password_form();
+	echo get_the_password_form(); //phpcs:ignore
 	return;
 }
-	$enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
-	$group_size 	= wptravel_get_group_size( get_the_ID() );
-	$start_date 	= get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
-	$end_date 		= get_post_meta( get_the_ID(), 'wp_travel_end_date', true ); 
-	$sanitized_get = WP_Travel::get_sanitize_request(); ?>
+	$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
+	$group_size    = wptravel_get_group_size( get_the_ID() );
+	$start_date    = get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
+	$end_date      = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
+	$sanitized_get = WP_Travel::get_sanitize_request();
+?>
 	<?php $view_mode = wptravel_get_archive_view_mode( $sanitized_get ); ?>
 	<?php if ( 'list' === $view_mode ) : ?>
 		<article class="wp-travel-default-article">
@@ -50,7 +51,7 @@ if ( post_password_required() ) {
 					<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_archive_content_title' ); ?>
 					<header class="entry-header">
 						<h2 class="entry-title">
-							<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
+							<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 								<?php the_title(); ?>
 							</a>
 						</h2>
@@ -75,8 +76,9 @@ if ( post_password_required() ) {
 									<i class="wt-icon-regular wt-icon-folder" aria-hidden="true"></i>
 									<?php
 									$first_term = array_shift( $terms );
-									$term_name = $first_term->name;
-									$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
+									$term_name  = $first_term->name;
+									$term_link  = get_term_link( $first_term->term_id, 'itinerary_types' );
+									?>
 									<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>" rel="tag">
 										<?php echo esc_html( $term_name ); ?>
 									</a>
@@ -89,7 +91,8 @@ if ( post_password_required() ) {
 											<?php foreach ( $terms as $term ) : ?>
 												<?php
 													$term_name = $term->name;
-													$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
+													$term_link = get_term_link( $term->term_id, 'itinerary_types' );
+												?>
 												<a href="<?php echo esc_url( $term_link, 'wp-travel' ); ?>">
 													<?php echo esc_html( $term_name ); ?>
 												</a>
@@ -103,7 +106,7 @@ if ( post_password_required() ) {
 						</div>
 						<div class="travel-info">
 							<i class="wt-icon wt-icon-child" aria-hidden="true"></i>
-							<span class="value"><?php printf( '%s', $group_size ) ?></span>
+							<span class="value"><?php printf( '%s', $group_size ); ?></span>
 						</div>
 
 						<div class="travel-info">

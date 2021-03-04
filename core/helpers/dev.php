@@ -8,12 +8,11 @@
 /**
  * WP Travel Dev mode function.
  *
- * @return void
+ * @return Boolean
  */
 function wptravel_dev_mode() {
-    if ( defined( 'WPTRAVEL_DEV_MODE' ) ) {
-        return WPTRAVEL_DEV_MODE;
-    }
-    return false;
+	if ( defined( 'WPTRAVEL_DEV_MODE' ) ) {
+		return WPTRAVEL_DEV_MODE;
+	}
+	return false;
 }
-wptravel_dev_mode();
