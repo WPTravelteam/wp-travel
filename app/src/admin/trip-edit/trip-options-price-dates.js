@@ -27,6 +27,7 @@ const WPTravelTripOptionsPricings = () => {
     }, []);
 
     const { pricing_type, pricings, has_state_changes, is_multiple_dates, group_size, has_extras, dates, minimum_partial_payout_use_global, minimum_partial_payout_percent } = allData;
+    const {options} = settings
     const {updateStateChange, updateTripPricing, addTripPricing, updateTripPrices, updateTripData, setTripData, updateRequestSending } = dispatch('WPTravel/TripEdit');
 
     let tripPrices = 'undefined' != typeof pricings ? pricings : [];
@@ -45,6 +46,20 @@ const WPTravelTripOptionsPricings = () => {
         })
     }
     let totalPayout = 0
+
+    //Fixes
+    let payout_percentages = [];
+
+    if ( ! minimum_partial_payout_use_global && settings.minimum_partial_payout.length > 0 ) {
+        // Pro enabled case.
+        if ( 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ) {
+            payout_percentages = settings.minimum_partial_payout; 
+        } else {
+            payout_percentages = [ settings.minimum_partial_payout[0] ];
+        }
+    }
+    console.log( 'payout percentages ',  payout_percentages);
+    console.log( 'global percentages ',  settings.minimum_partial_payout);
     return <ErrorBoundary>
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
@@ -252,13 +267,13 @@ const WPTravelTripOptionsPricings = () => {
 
                     { ( ! minimum_partial_payout_use_global && settings.minimum_partial_payout.length > 0 ) &&
                         <>
-                            {settings.minimum_partial_payout.map( ( percent, i ) => {
+                            {payout_percentages.map( ( percent, i ) => {
                                 let payout_percent = 'undefined' != typeof minimum_partial_payout_percent && 'undefined' != typeof minimum_partial_payout_percent[i] ? minimum_partial_payout_percent[i] : percent
                                 if ( payout_percent ) {
                                     payout_percent = parseInt(payout_percent)
                                 }
                                 let payout_label = __( 'Custom Min. Payout (%)', 'wp-travel' )
-                                if ( settings.minimum_partial_payout.length > 1 ) {
+                                if ( payout_percentages.length > 1 ) {
                                     payout_label = __( `Custom Partial Payout ${i+1} (%)`, 'wp-travel' )
                                 }
                                 totalPayout += payout_percent;
