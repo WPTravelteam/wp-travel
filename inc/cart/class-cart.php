@@ -95,7 +95,6 @@ class WP_Travel_Cart {
 	public static function is_pricing_key_valid( $trip_id, $pricing_key ) {
 
 		if ( '' === $trip_id || '' === $pricing_key ) {
-
 			return false;
 		}
 
@@ -121,7 +120,7 @@ class WP_Travel_Cart {
 	 *
 	 * @param int    $trip_id Tirp id.
 	 * @param string $pricing_key price key.
-	 * @param string $test_date test date. why??
+	 * @param string $test_date test date (why?).
 	 * @return bool true | false.
 	 */
 	public static function is_request_date_valid( $trip_id, $pricing_key, $test_date ) {
@@ -234,8 +233,39 @@ class WP_Travel_Cart {
 
 		endif;
 		$this->clear_discount_values();
+		$this->update_partials(); // Partial Payout percent figure may be different if we calculate this befeore adding item to cart because partial payout figure may differ as per item count.
 		$this->write();
 		return true;
+	}
+
+	/**
+	 * Function to update partial values like partial percent and partial amount.
+	 *
+	 * @since WP Travel 4.5.3
+	 */
+	public function update_partials() {
+		if ( wptravel_is_partial_payment_enabled() ) {
+			$items = $this->items;
+			if ( is_array( $items ) && count( $items ) > 0 ) {
+				foreach ( $items as $cart_item_id => $item ) {
+					$trip_id = $item['trip_id'];
+					$percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
+
+					foreach ( $item['trip'] as $category_id => $pricing ) {
+						$category_price         = $pricing['price'];
+						$category_price_partial = ( $category_price * $percent ) / 100;
+						$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
+					}
+					$trip_price         = $item['trip_price'];
+					$trip_price_partial = ( $trip_price * $percent ) / 100;
+
+					$this->items[ $cart_item_id ]['partial_payout_figure'] = $percent;
+					$this->items[ $cart_item_id ]['trip_price_partial']    = $trip_price_partial;
+
+				}
+				$this->write();
+			}
+		}
 	}
 
 	/**
@@ -430,6 +460,8 @@ class WP_Travel_Cart {
 
 			$this->write();
 			$this->clear_discount_values();
+			$this->update_partials(); // Partial Payout percent figure may be different if we calculate this befeore adding item to cart because partial payout figure may differ as per item count.
+
 			return true;
 		}
 		return false;
@@ -438,7 +470,10 @@ class WP_Travel_Cart {
 	/**
 	 * Add Discount Values
 	 *
-	 * @param $coupon_code Coupon Code. @since 3.1.7
+	 * @param int    $coupon_id      Coupon ID. @since 3.1.7.
+	 * @param string $discount_type  Type of discount. Flat or percent. @since 3.1.7.
+	 * @param int    $discount_value Discount figure. @since 3.1.7.
+	 * @param string $coupon_code    Coupon Code. @since 3.1.7.
 	 */
 	public function add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code = null ) {
 
@@ -505,9 +540,12 @@ class WP_Travel_Cart {
 		return $this->items;
 	}
 
+	/**
+	 * Message.
+	 */
 	public function cart_empty_message() {
 		$url = get_post_type_archive_link( WP_TRAVEL_POST_TYPE );
-		echo sprintf( __( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', 'wp-travel' ), esc_url( $url ) );
+		printf( __( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', 'wp-travel' ), esc_url( $url ) );
 	}
 	/**
 	 * Clear all items in the cart.
@@ -524,7 +562,7 @@ class WP_Travel_Cart {
 	 *
 	 * @return void
 	 */
-	function read_cart_onload() {
+	public function read_cart_onload() {
 		$this->read();
 	}
 
@@ -537,13 +575,18 @@ class WP_Travel_Cart {
 		unset( $this->items[ $id ] );
 		unset( $this->attributes[ $id ] );
 		$this->clear_discount_values();
+		$this->update_partials(); // Partial Payout percent figure may be different if we calculate this befeore adding item to cart because partial payout figure may differ as per item count.
+
 		$this->write();
 	}
-	// /**
-	// * Remove cart trip extras.
-	// */
-	// public function remove_trip_extras
-	function get_total( $with_discount = true ) {
+
+	/**
+	 * Get Total.
+	 *
+	 * @param bool $with_discount with discount or not.
+	 * @return array
+	 */
+	public function get_total( $with_discount = true ) {
 
 		$trips = $this->items;
 
@@ -557,10 +600,7 @@ class WP_Travel_Cart {
 		$tax_amount_partial      = 0;
 		$discount_amount_partial = 0;
 
-		/**
-		 * @since 4.0.0
-		 */
-		$settings        = wptravel_get_settings();
+		$settings        = wptravel_get_settings(); // @since WP Travel 4.0.0.
 		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
 
 		// Total amount without tax.
@@ -598,8 +638,9 @@ class WP_Travel_Cart {
 		$total_trip_price_after_dis         = $cart_total - $discount_amount;
 		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial;
 
-		// Adding tax to sub total;
-		if ( $tax_rate = WP_Travel_Helpers_Trips::get_tax_rate() ) :
+		// Adding tax to sub total.
+		$tax_rate = WP_Travel_Helpers_Trips::get_tax_rate();
+		if ( $tax_rate ) :
 			$tax_amount         = ( $total_trip_price_after_dis * $tax_rate ) / 100;
 			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		endif;
@@ -626,11 +667,13 @@ class WP_Travel_Cart {
 		$get_total = apply_filters( 'wp_travel_cart_get_total_fields', $get_total );
 		return $get_total;
 	}
+
 	/**
 	 * Return cart item id as per $trip_id and $price_key.
 	 *
-	 * @param   $trip_id    Number  Trip / Post id of the trip
-	 * @param   $price_key  String  Pricing Key.
+	 * @param int    $trip_id    Trip / Post id of the trip.
+	 * @param string $price_key  Pricing Key.
+	 * @param string $start_date Trip start date.
 	 *
 	 * @return  String  cart item id.
 	 *
@@ -649,20 +692,22 @@ class WP_Travel_Cart {
 	 * @since WP Travel 4.4.2
 	 */
 	public static function allow_multiple_items() {
-		return apply_filters( 'wp_travel_allow_multiple_cart_items', false );
+		return apply_filters( 'wp_travel_allow_multiple_cart_items', true );
 	}
 
 	/**
 	 * Get trip total along with extras. Gross total only.
 	 *
+	 * @param string $cart_item_id Cart item id.
+	 * @param bool   $partial_total Either return partial total or full total.
 	 * @since WP Travel 4.4.7
 	 */
 	public function get_item_total( $cart_item_id = '', $partial_total = false ) {
 		if ( ! $cart_item_id ) {
 			return;
 		}
-		$items = $this->items;
-		$item  = isset( $items[ $cart_item_id ] ) ? $items[ $cart_item_id ] : array();
+		$items       = $this->items;
+		$item        = isset( $items[ $cart_item_id ] ) ? $items[ $cart_item_id ] : array();
 		$trip_extras = isset( $item['trip_extras'] ) ? (array) $item['trip_extras'] : array();
 
 		// Total Calculation.
@@ -687,7 +732,7 @@ class WP_Travel_Cart {
 
 				$item_total += $extra_price;
 
-				// Partial extras calc
+				// Partial extras calc.
 				if ( wptravel_is_partial_payment_enabled() ) {
 					$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $item['trip_id'] );
 					$extra_price    = ( $extra_price * $payout_percent ) / 100;
