@@ -3872,3 +3872,18 @@ function wptravel_core_fontawesome_icons( $settings_options, $settings ) {
 
 	return $settings_options;
 }
+
+/**
+ * Filter for itinerary v2 layout enable or disable.
+ *
+ * @return boolean default true.
+ */
+function wptravel_use_itinerary_v2_layout() {
+	$wptravel_dev_mode_enabled = wptravel_dev_mode();
+
+	if ( $wptravel_dev_mode_enabled ) {
+		return apply_filters( 'wptravel_use_itinerary_layout_v2', true );
+	} else {
+		return false;
+	}
+}

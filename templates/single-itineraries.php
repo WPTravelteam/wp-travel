@@ -8,7 +8,7 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
+ * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
  * @since       1.0.0
@@ -16,10 +16,22 @@
 
 get_header( 'itinerary' ); ?>
 <?php do_action( 'wp_travel_before_main_content' ); ?>
-<?php while ( have_posts() ) : the_post(); ?>
+<?php
+while ( have_posts() ) :
+	the_post();
+	?>
 
-	<?php wptravel_get_template_part( 'content', 'single-itineraries' ); ?>
+	<?php
+	$itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();
+
+	if ( $itinerary_layout_v2_enabled ) {
+		wptravel_get_template_part( 'content', 'single-itineraries-v2' ); // @since v5.0.0.
+	} else {
+		wptravel_get_template_part( 'content', 'single-itineraries' );
+	}
+	?>
 
 <?php endwhile; // end of the loop. ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
-<?php get_footer( 'itinerary' ); ?>
+<?php
+get_footer( 'itinerary' );

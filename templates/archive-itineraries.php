@@ -9,53 +9,76 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
+ * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
  * @since       1.0.0
  */
 
-get_header( 'itinerary' ); ?>
-	<?php
-	$template = get_option( 'template' );
-	
-	if( 'Divi' === $template ) {
-		?>
-				<div class="container clearfix">
-		<?php
-	}
+get_header( 'itinerary' );
 
-	$current_theme = wp_get_theme();
-	if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
-		?>
-				<div class="wrap">
-		<?php
-	}
+$template = get_option( 'template' );
+
+if ( 'Divi' === $template ) {
 	?>
-		<header class="page-header">
-				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-				<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
-		</header>
-<?php do_action( 'wp_travel_before_main_content' ); ?>
-<?php if ( have_posts() ) : ?>
-	<?php while ( have_posts() ) : the_post(); ?>
-		<?php wptravel_get_template_part( 'content', 'archive-itineraries' ); ?>
-	<?php endwhile; // end of the loop. ?>
-<?php else : ?>
-	<?php wptravel_get_template_part( 'content', 'archive-itineraries-none' ); ?>
-<?php endif; ?>
-<?php do_action( 'wp_travel_after_main_content' ); ?>
-<?php do_action( 'wp_travel_archive_listing_sidebar' ); ?>
-<?php
-if( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
-	?>
-		</div>
+		<div class="container clearfix">
 	<?php
 }
-if( 'Divi' === $template ) {
+
+$current_theme = wp_get_theme();
+
+if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 	?>
-		</div>
+		<div class="wrap">
 	<?php
 }
+
 ?>
-<?php get_footer( 'itinerary' ); ?>
+	<header class="page-header">
+		<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+		<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
+	</header>
+<?php
+
+do_action( 'wp_travel_before_main_content' );
+
+$itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();
+
+if ( have_posts() ) :
+
+	while ( have_posts() ) :
+		the_post();
+
+		if ( $itinerary_layout_v2_enabled ) {
+
+			wptravel_get_template_part( 'content', 'archive-itineraries-new' );
+
+		} else {
+
+			wptravel_get_template_part( 'content', 'archive-itineraries' );
+
+		}
+	endwhile; // end of the loop.
+else :
+	wptravel_get_template_part( 'content', 'archive-itineraries-none' );
+endif;
+
+do_action( 'wp_travel_after_main_content' );
+
+do_action( 'wp_travel_archive_listing_sidebar' );
+
+if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+	?>
+		</div>
+	<?php
+}
+
+if ( 'Divi' === $template ) {
+	?>
+		</div>
+	<?php
+}
+
+get_footer( 'itinerary' );
+
+?>

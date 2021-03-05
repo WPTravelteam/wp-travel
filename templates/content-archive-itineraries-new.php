@@ -12,7 +12,7 @@
  * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
  * @package     wp-travel/Templates
- * @since       1.0.0
+ * @since       5.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,7 +26,6 @@ if ( post_password_required() ) {
 	echo get_the_password_form(); //phpcs:ignore
 	return;
 }
-?>
-<p><strong><?php esc_html_e( 'Trips not found.', 'wp-travel' ); ?></strong></p>
+wptravel_get_template_part( 'shortcode/itinerary', 'item-new' );
 
-<?php do_action( 'wp_travel_after_archive_itinerary', get_the_ID() ); ?>
+do_action( 'wp_travel_after_archive_itinerary', get_the_ID() );

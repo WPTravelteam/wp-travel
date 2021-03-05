@@ -453,4 +453,86 @@ jQuery(function ($) {
     }
     $('#wp-travel-enquiries').submit(handleEnquirySubmission);
 
+        //New Layout JS
+
+    // scrollspy button
+    $(".scroll-spy-button").each(function() {
+        $(this).on('click', function(){
+            var t = $(this).data("scroll");
+            $('.scroll-spy-button').removeClass('active');
+            $("html, body").animate({
+                scrollTop: $(t).offset().top - 70
+            }, {
+                duration: 500,
+            });
+
+            $(this).addClass('active');
+
+            return false;
+        })
+    });
+
+    //booking selector toggle
+    $('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
+    $('.wti__selector-heading').on('click', function(){
+        $(this).parents('.wti__selector-item').toggleClass('active'); //.siblings().removeClass('active');
+        // $(this).parents('.wti__selector-item').siblings().find('.wti__selector-content-wrapper').slideUp();
+        $(this).siblings('.wti__selector-content-wrapper').stop().slideToggle();
+    })
+
+    $(window).on('scroll', function(){
+    var sTop = $(window).scrollTop();
+    var link = $('.scroll-spy-button');
+    $('.wti__tab-content-wrapper').each(function() {
+        var id = $(this).attr('id'),
+            offset = $(this).offset().top-100,
+            height = $(this).height();
+        if(sTop >= offset && sTop < offset + height) {
+        link.removeClass('active');
+        $('#scrollspy-buttons').find('[data-scroll="#' + id + '"]').addClass('active');
+        }
+    });
+    })
+    /**
+     * =========================
+     * init magnific popup
+     * =========================
+     */
+
+    $(document).ready(function($) {
+        $('.wti__advance-gallery-item-list').magnificPopup({
+        delegate: '.gallery-item  ',
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+        })
+    }); 
+
+    /**
+    /**
+    * =========================
+    * init magnific popup end
+    * =========================
+    */
+
+    /**
+     * =========================
+     * faq
+     * =========================
+     */
+
+    $(document).ready(function(){
+        $('.accordion-panel-heading').click(function(){
+            $(this).next().slideToggle(500);
+            $(this).toggleClass('active');
+            $(this).parent().toggleClass('accordion-active');
+            })
+        })
+    /**
+     * =========================
+     * faq end
+     * =========================
+     */ 
+
 });
