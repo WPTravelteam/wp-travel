@@ -500,6 +500,7 @@ class WP_Travel_Cart {
 				$this->items[ $cart_item_id ]['discount'] = $discount_amount;  // Discount amount applied to individual trip total.
 			}
 		}
+		$this->update_partials(); // Partial Payout percent figure may be different if we calculate this befeore adding item to cart because partial payout figure may differ as per item count.
 
 		$this->write();
 
@@ -520,6 +521,8 @@ class WP_Travel_Cart {
 		foreach ( $items as $cart_item_id => $item ) {
 			unset( $this->items[ $cart_item_id ]['discount'] ); // clear discount amount on individual. [this will not conflict while using multiple coupon applied for multiple trips].
 		}
+		$this->update_partials(); // Partial Payout percent figure may be different if we calculate this befeore adding item to cart because partial payout figure may differ as per item count.
+
 		$this->write();
 	}
 
@@ -604,8 +607,12 @@ class WP_Travel_Cart {
 		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
 
 		// Total amount without tax.
+		$trip_id = 0;
 		if ( is_array( $trips ) && count( $trips ) > 0 ) {
 			foreach ( $trips as $cart_id => $trip ) :
+				if ( ! $trip_id ) {
+					$trip_id = $trip['trip_id']; // Temp solution. Just need any/one trip id to get partial payout figure.
+				}
 				$cart_total         += $this->get_item_total( $cart_id ); // Total excluding discount.
 				$cart_total_partial += $this->get_item_total( $cart_id, true ); // Total excluding discount.
 			endforeach;
@@ -617,7 +624,7 @@ class WP_Travel_Cart {
 		if ( ! empty( $discounts ) && $with_discount ) { // $with_discount will help to get actual total while calculating discount.
 			$coupon_id                         = isset( $this->discounts['coupon_id'] ) ? $this->discounts['coupon_id'] : '';
 			$discount_applicable_total         = WPTravel()->coupon->get_discount_applicable_total( $coupon_id );
-			$discount_applicable_total_partial = WPTravel()->coupon->get_discount_applicable_total( $coupon_id, true ); // Partial discount.
+			$discount_applicable_total_partial = WPTravel()->coupon->get_discount_applicable_total( $coupon_id, true ); // Partial discount. May not be required.
 			$discount_applicable_total         = apply_filters( 'wptravel_discount_applicable_total', $discount_applicable_total, $cart_total, $trips );
 
 			$d_typ = $discounts['type'];
@@ -630,25 +637,27 @@ class WP_Travel_Cart {
 				}
 			} elseif ( 'percentage' === $d_typ ) {
 				$discount_amount         = ( $discount_applicable_total * $d_val ) / 100;
-				$discount_amount_partial = ( $discount_applicable_total_partial * $d_val ) / 100;
+				$discount_amount_partial = ( $discount_applicable_total_partial * $d_val ) / 100; // Need to deprecate this.
 			}
 		}
 
 		// Totals after discount.
 		$total_trip_price_after_dis         = $cart_total - $discount_amount;
-		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial;
+		$total_trip_price_partial_after_dis = $cart_total_partial - $discount_amount_partial; // Need to deprecate this.
 
 		// Adding tax to sub total.
 		$tax_rate = WP_Travel_Helpers_Trips::get_tax_rate();
 		if ( $tax_rate ) :
 			$tax_amount         = ( $total_trip_price_after_dis * $tax_rate ) / 100;
-			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
+			$tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100; // Need to deprecate this.
 		endif;
 
 		// Calcualtion of Total Amount.
 		$total_trip_price         = $total_trip_price_after_dis + $tax_amount;
-		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial;
+		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial; // Need to deprecate this.
 
+		$payout_percent           = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
+		$total_trip_price_partial = ( $total_trip_price * $payout_percent ) / 100;
 		$get_total = array(
 			'cart_total'         => wptravel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
 			'discount'           => wptravel_get_formated_price( $discount_amount ),
@@ -657,10 +666,10 @@ class WP_Travel_Cart {
 			'total'              => wptravel_get_formated_price( $total_trip_price ),
 
 			// Total payble amount // Same as above price if partial payment not enabled.
-			'cart_total_partial' => wptravel_get_formated_price( $cart_total_partial ),
-			'discount_partial'   => wptravel_get_formated_price( $discount_amount_partial ),
-			'sub_total_partial'  => wptravel_get_formated_price( $total_trip_price_partial_after_dis ),
-			'tax_partial'        => wptravel_get_formated_price( $tax_amount_partial ),
+			'cart_total_partial' => wptravel_get_formated_price( $cart_total_partial ), // Need to deprecate this.
+			'discount_partial'   => wptravel_get_formated_price( $discount_amount_partial ), // Need to deprecate this.
+			'sub_total_partial'  => wptravel_get_formated_price( $total_trip_price_partial_after_dis ), // Need to deprecate this.
+			'tax_partial'        => wptravel_get_formated_price( $tax_amount_partial ), // Need to deprecate this.
 			'total_partial'      => wptravel_get_formated_price( $total_trip_price_partial ),
 		);
 
