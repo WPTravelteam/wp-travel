@@ -693,7 +693,7 @@ class WP_Travel_Cart {
 	 */
 	public static function allow_multiple_items() {
 		$allow_multiple_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false ); // @phpcs:ignore
-		$allow_multiple_items = apply_filters( 'wptravel_allow_multiple_cart_items', $allow_multiple_items );
+		$allow_multiple_items = apply_filters( 'wptravel_enable_multiple_checkout', $allow_multiple_items );
 		return $allow_multiple_items;
 	}
 

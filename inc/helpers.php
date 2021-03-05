@@ -22,7 +22,11 @@ function wptravel_get_gallery_ids( $post_id ) {
 	return $gallery_ids;
 }
 
-// @since 1.9.0
+/**
+ * Default Settings values.
+ *
+ * @since 1.9.0
+ */
 function wptravel_settings_default_fields() {
 
 	// Booking Admin Defaults.
@@ -146,15 +150,9 @@ function wptravel_settings_default_fields() {
 		 */
 		'wt_load_optimized_script'                => 'no',
 
-		/**
-		 * @since 4.0.7
-		 */
+		// Calendar view @since 4.0.7.
 		'calender_view'                           => 'no',
-
-		/**
-		 * @since 4.4.5
-		 */
-		'trip_date_listing'                       => 'calendar', // calendar | dates.
+		'trip_date_listing'                       => 'calendar', // Front view: calendar | dates @since 4.4.5.
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
