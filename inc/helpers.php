@@ -3882,7 +3882,7 @@ function wptravel_use_itinerary_v2_layout() {
 	$wptravel_dev_mode_enabled = wptravel_dev_mode();
 
 	if ( $wptravel_dev_mode_enabled ) {
-		return apply_filters( 'wptravel_use_itinerary_layout_v2', true );
+		return apply_filters( 'wptravel_use_itinerary_layout_v2', false );
 	} else {
 		return false;
 	}

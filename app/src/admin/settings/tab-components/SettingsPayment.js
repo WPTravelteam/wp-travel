@@ -84,12 +84,13 @@ export default () => {
                     
                     { 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ? 
                         <>
-                            {minimum_partial_payout.length >= 1 && <>
+                            {
+                                minimum_partial_payout.length >= 1 && <>
                                 <PanelRow>
                                     <label>Partial Payout 1 (%)</label>
                                     <div className="wp-travel-field-value">
                                         <RangeControl
-                                            value={ 'undefined' != typeof minimum_partial_payout[0]  ? minimum_partial_payout[0] : 0}
+                                            value={ 'undefined' != typeof minimum_partial_payout[0]  ? parseFloat(minimum_partial_payout[0]) : 0}
                                             onChange={
                                                 (value) => updatePayoutOption( value, 0 )
                                             }
@@ -106,7 +107,7 @@ export default () => {
                                     <label>Partial Payout 2 (%)</label>
                                     <div className="wp-travel-field-value">
                                         <RangeControl
-                                            value={ 'undefined' != typeof minimum_partial_payout[1]  ? minimum_partial_payout[1] : 0}
+                                            value={ 'undefined' != typeof minimum_partial_payout[1]  ? parseFloat(minimum_partial_payout[1]) : 0}
                                             onChange={
                                                 (value) => updatePayoutOption( value, 1 )
                                             }
@@ -123,7 +124,7 @@ export default () => {
                                     <label>Partial Payout 3 (%)</label>
                                     <div className="wp-travel-field-value">
                                         <RangeControl
-                                            value={ 'undefined' != typeof minimum_partial_payout[2]  ? minimum_partial_payout[2] : 0}
+                                            value={ 'undefined' != typeof minimum_partial_payout[2]  ? parseFloat(minimum_partial_payout[2]) : 0}
                                             onChange={
                                                 (value) => updatePayoutOption( value, 2 )
                                             }
@@ -140,7 +141,7 @@ export default () => {
                                     <label>Partial Payout 4 (%)</label>
                                     <div className="wp-travel-field-value">
                                         <RangeControl
-                                            value={ 'undefined' != typeof minimum_partial_payout[3]  ? minimum_partial_payout[3] : 0}
+                                            value={ 'undefined' != typeof minimum_partial_payout[3]  ? parseFloat(minimum_partial_payout[3]) : 0}
                                             onChange={
                                                 (value) => updatePayoutOption( value, 3 )
                                             }
@@ -153,7 +154,6 @@ export default () => {
                                 </PanelRow>
                             </>}
                         </>
-                         
                     :
                     <PanelRow>
                         <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
