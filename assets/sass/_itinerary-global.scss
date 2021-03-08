@@ -1417,14 +1417,17 @@ a{
             width:100%;
             text-align: right;
             border-bottom: 1px solid #eee;
+            
             margin-bottom: 15px;
             .wti_clear_all{
                 padding: 1em 1.5em;
                 border: 0;
                 margin-bottom: 10px;
-                background-color: $itinerary-filter-bg;
+                border: 1px solid #e92929;
+                background-color: rgba(233,41,41,0.3);
+                color: #e92929;
+                border-radius: 3px;
                 outline: none;
-                color:$itinerary-font-color;
                 cursor: pointer;
                 font-size: 14px;
                 transition: all 0.3s ease-in-out;
@@ -1434,14 +1437,13 @@ a{
                 svg{
                     width:10px;
                     margin-right: 7px;
-                    fill:$itinerary-font-color;
+                    fill: #e92929;
                     transition: all 0.3s ease-in-out;
                 }
                 &:hover{
-                    color: #fff;
-                    background-color:$itinerary-blue-bg;
+                    color: #000;
                     svg{
-                        fill:#fff;
+                        fill:#000;
                        
                     }
                 }
@@ -1748,7 +1750,7 @@ a{
                             display: inline-flex;
                             height: 30px;
                             input[type=number]{
-                                width: 30px;
+                                width: 50px;
                                 border-radius: 0;
                                 border: 0;
                                 border-top: 1px solid #ccc;
@@ -1778,10 +1780,53 @@ a{
                                 &.increase_val{
                                     border-radius: 0 4px 4px 0;
                                 }
+                                
+                            }
+                            .error{
+                                color: #000;
+                                border: 1px solid #e92929;
+                                background: #fff;
+                                animation: arrowAnimate 1s ease infinite;
+                                padding: .5em;
+                                border-radius: 4px;
+                                position: relative;
+                                font-size: 14px;
+                                width: max-content;
+                                &::before{
+                                    content: "";
+                                    border-top: 8px solid transparent;
+                                    border-bottom: 8px solid transparent;
+                                    border-right: 8px solid  #e92929;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: -1px;
+                                    transform: translate(-100%, -50%);
+                                }
+                                &::after{
+                                    content: "";
+                                    border-top: 8px solid transparent;
+                                    border-bottom: 8px solid transparent;
+                                    border-right: 8px solid #e92929;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                    transform: translate(-100%, -50%);
+                                }
                             }
                         }
                     }
                 }
+            }
+        }
+        @keyframes arrowAnimate{
+            0%{
+                transform: translateX(0);
+            }
+            60%{
+                transform: translateX(-5px);
+            }
+            100%{
+                transform: translateX(0)
             }
         }
         .wti__booking-amounts{
