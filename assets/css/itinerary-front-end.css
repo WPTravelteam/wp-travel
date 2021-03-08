@@ -255,7 +255,7 @@ a:hover {
   fill: #fff;
 }
 
-.wp-travel-savings {
+.wti__savings {
   position: absolute;
   top: 5px;
   background: var(--itinerary-green-color);
@@ -265,7 +265,7 @@ a:hover {
   text-align: center;
   z-index: 2;
 }
-.wp-travel-savings:after {
+.wti__savings:after {
   content: "";
   position: absolute;
   right: 0px;
@@ -276,16 +276,16 @@ a:hover {
   border-bottom: 2px solid transparent;
   border-top: 3px solid var(--itinerary-green-color);
 }
-.wp-travel-savings span {
+.wti__savings span {
   font-weight: 700;
 }
 
-.list-view .wp-travel-savings {
+.list-view .wti__savings {
   bottom: 12px;
   top: unset;
 }
 @media (max-width: 767px) {
-  .list-view .wp-travel-savings {
+  .list-view .wti__savings {
     top: 5px;
     bottom: unset;
   }

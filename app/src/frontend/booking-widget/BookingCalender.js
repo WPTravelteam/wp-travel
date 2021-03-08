@@ -8,12 +8,17 @@ import DatePicker from "react-datepicker";
 import RRule from "rrule";
 import ErrorBoundry from './ErrorBoundry';
 import { wpTravelFormat, wpTravelTimeout } from "./functions";
-import PaxSelector from './sub-components/PaxSelector';
 // sub-components
+import PaxSelector from './sub-components/PaxSelector';
 import PricingListing from './sub-components/PricingListing';
 import TripExtrasListing from './sub-components/TripExtrasListing';
 import TripTimesListing from './sub-components/TripTimesListing';
 import DatesListing from './sub-components/DatesListing'
+// layout-v2
+import PaxSelectorV2 from './sub-components/layout-v2/PaxSelectorV2';
+import PricingListingV2 from './sub-components/layout-v2/PricingListingV2';
+import TripExtrasListingV2 from './sub-components/layout-v2/TripExtrasListingV2';
+import TripTimesListingV2 from './sub-components/layout-v2/TripTimesListingV2';
 
 const _ = lodash
 
@@ -601,11 +606,23 @@ const BookingCalender = () => {
 		updateState(_state)
 	}
 
+	useEffect(() => {
+		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
+	}),[];
+
 	const DatePickerBtn = forwardRef(({ value, onClick }, ref) => (
+		!_wp_travel.itinerary_v2 ? 
 		<button className="wp-travel-date-picker-btn" onClick={onClick}>
 			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
 			<span>
 				<svg enableBackground="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m446 40h-46v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-224v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-46c-36.393 0-66 29.607-66 66v340c0 36.393 29.607 66 66 66h380c36.393 0 66-29.607 66-66v-340c0-36.393-29.607-66-66-66zm-380 32h46v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h224v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h46c18.748 0 34 15.252 34 34v38h-448v-38c0-18.748 15.252-34 34-34zm380 408h-380c-18.748 0-34-15.252-34-34v-270h448v270c0 18.748-15.252 34-34 34z"></path></g></svg>
+			</span>
+		</button>
+		:
+		<button className="wp-travel-date-picker-btn" onClick={onClick}>
+			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
+			<span>
+				<i className="far fa-calendar-alt"></i>
 			</span>
 		</button>
 	))
@@ -634,93 +651,178 @@ const BookingCalender = () => {
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	const tripDateListing = _wp_travel.trip_date_listing
 	return <>
-		<div className="wp-travel-booking__header">
-			<h3>{__i18n.booking_tab_content_label}</h3>
-			{selectedDate && <button onClick={() => {
-				let _initialState = Object.assign(initialState)
-				if (!isFixedDeparture)
-					delete _initialState.nomineePricings
-				updateState(_initialState)
-			}}>
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x={0} y={0} viewBox="0 0 36.9 41.7"><path
-					d="M35.8,17.1l-2.8,1c0.6,1.7,0.9,3.4,0.9,5.2c0,8.5-6.9,15.4-15.4,15.4C9.9,38.7,3,31.8,3,23.3C3,14.8,9.9,7.8,18.4,7.8
-                    c1.3,0,2.6,0.2,3.9,0.5l-2.8,3l2.2,2L25,9.9l2.3-2.4L26,4.4L24.2,0l-2.8,1.1l1.8,4.3c-1.5-0.4-3.1-0.6-4.7-0.6
-                    C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
-				</path>
-				</svg>
-				{__i18n.bookings.booking_tab_clear_all}</button>}
-		</div>
-		<div className="wp-travel-booking__datepicker-wrapper">
-			{<>
-				{
-					isFixedDeparture && 'dates' === tripDateListing && 
-						<DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
-					||
-						<>
-							<DatePicker {...params} />
-							{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
-						</>
-				}
-			</>}
-		</div>
 		{
-			selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
-				{
-					nomineePricings.length > 1 && <ErrorBoundry>
-						<PricingListing
-							selected={selectedPricing}
-							options={nomineePricings}
-							onPricingSelect={handlePricingSelect}
-						/>
-					</ErrorBoundry>
-				}
-				{
-					!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
-						<TripTimesListing
-							selected={selectedDateTime}
-							onTimeSelect={handleTimeClick}
-							options={nomineeTimes}
-						/>
-					</ErrorBoundry>
-				}
-				{
-					!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
-						<PaxSelector
-							pricing={pricings[selectedPricing] || null}
-							onPaxChange={handlePaxChange}
-							counts={paxCounts}
-							inventory={inventory}
-						/>
-					</ErrorBoundry>
-
-				}
-				{
-					!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
-						<TripExtrasListing
-							options={pricings[selectedPricing].trip_extras}
-							onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
-							counts={tripExtras}
-						/>
-					</ErrorBoundry>
-				}
-				{pricingUnavailable && <Notice>
-					{
-						allData
-						&& allData.tripData.inventory
-						&& allData.tripData.inventory.enable_trip_inventory == 'yes'
-						&& <InventoryNotice inventory={allData.tripData.inventory} />
-					}
-				</Notice>
-				}
-				{isLoading && <div id="loader">
-					<span></span>
-				</div>}
+			!_wp_travel.itinerary_v2 ?
+			<>
+			<div className="wp-travel-booking__header">
+				<h3>{__i18n.booking_tab_content_label}</h3>
+				{selectedDate && <button onClick={() => {
+					let _initialState = Object.assign(initialState)
+					if (!isFixedDeparture)
+						delete _initialState.nomineePricings
+					updateState(_initialState)
+				}}>
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x={0} y={0} viewBox="0 0 36.9 41.7"><path
+						d="M35.8,17.1l-2.8,1c0.6,1.7,0.9,3.4,0.9,5.2c0,8.5-6.9,15.4-15.4,15.4C9.9,38.7,3,31.8,3,23.3C3,14.8,9.9,7.8,18.4,7.8
+						c1.3,0,2.6,0.2,3.9,0.5l-2.8,3l2.2,2L25,9.9l2.3-2.4L26,4.4L24.2,0l-2.8,1.1l1.8,4.3c-1.5-0.4-3.1-0.6-4.7-0.6
+						C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
+					</path>
+					</svg>
+					{__i18n.bookings.booking_tab_clear_all}</button>}
 			</div>
+			<div className="wp-travel-booking__datepicker-wrapper">
+				{<>
+					{
+						isFixedDeparture && 'dates' === tripDateListing && 
+							<DatesListing {...{ dates: datesById, onDateClick: dayClicked }} />
+						||
+							<>
+								<DatePicker {...params} />
+								{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+							</>
+					}
+				</>}
+			</div>
+			{
+				selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
+					{
+						nomineePricings.length > 1 && <ErrorBoundry>
+							<PricingListing
+								selected={selectedPricing}
+								options={nomineePricings}
+								onPricingSelect={handlePricingSelect}
+							/>
+						</ErrorBoundry>
+					}
+					{
+						!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+							<TripTimesListing
+								selected={selectedDateTime}
+								onTimeSelect={handleTimeClick}
+								options={nomineeTimes}
+							/>
+						</ErrorBoundry>
+					}
+					{
+						!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
+							<PaxSelector
+								pricing={pricings[selectedPricing] || null}
+								onPaxChange={handlePaxChange}
+								counts={paxCounts}
+								inventory={inventory}
+							/>
+						</ErrorBoundry>
+
+					}
+					{
+						!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
+							<TripExtrasListing
+								options={pricings[selectedPricing].trip_extras}
+								onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
+								counts={tripExtras}
+							/>
+						</ErrorBoundry>
+					}
+					{pricingUnavailable && <Notice>
+						{
+							allData
+							&& allData.tripData.inventory
+							&& allData.tripData.inventory.enable_trip_inventory == 'yes'
+							&& <InventoryNotice inventory={allData.tripData.inventory} />
+						}
+					</Notice>
+					}
+					{isLoading && <div id="loader">
+						<span></span>
+					</div>}
+				</div>
+			}
+			{selectedDate && selectedPricing && <div className="wp-travel-booking__panel-bottom">
+				<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
+				<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+			</div>}
+			</>
+			: // For new layout. @since v4.4.6
+			<>
+				{/* <h3>{__i18n.booking_tab_content_label}</h3> */}
+				{selectedDate && <div className="wti_booking_clear_btn"><button className="wti_clear_all" onClick={() => {
+					let _initialState = Object.assign(initialState)
+					if (!isFixedDeparture)
+						delete _initialState.nomineePricings
+					updateState(_initialState)
+				}}>
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x={0} y={0} viewBox="0 0 36.9 41.7"><path
+						d="M35.8,17.1l-2.8,1c0.6,1.7,0.9,3.4,0.9,5.2c0,8.5-6.9,15.4-15.4,15.4C9.9,38.7,3,31.8,3,23.3C3,14.8,9.9,7.8,18.4,7.8
+						c1.3,0,2.6,0.2,3.9,0.5l-2.8,3l2.2,2L25,9.9l2.3-2.4L26,4.4L24.2,0l-2.8,1.1l1.8,4.3c-1.5-0.4-3.1-0.6-4.7-0.6
+						C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
+					</path>
+					</svg>
+				{__i18n.bookings.booking_tab_clear_all}</button></div>}
+				<div className="wti__booking-date-picker">
+					<DatePicker {...params} />
+				</div>
+				{
+					selectedDateTime && <div className="wti__selectors">
+						{
+							nomineePricings.length > 1 && <ErrorBoundry>
+								<PricingListingV2
+									selected={selectedPricing}
+									options={nomineePricings}
+									onPricingSelect={handlePricingSelect}
+								/>
+							</ErrorBoundry>
+						}
+						{
+							!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+								<TripTimesListingV2
+									selected={selectedDateTime}
+									onTimeSelect={handleTimeClick}
+									options={nomineeTimes}
+								/>
+							</ErrorBoundry>
+						}
+						{
+							!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
+								<PaxSelectorV2
+									pricing={pricings[selectedPricing] || null}
+									onPaxChange={handlePaxChange}
+									counts={paxCounts}
+								/>
+							</ErrorBoundry>
+
+						}
+						{
+							!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
+								<TripExtrasListingV2
+									options={pricings[selectedPricing].trip_extras}
+									onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
+									counts={tripExtras}
+								/>
+							</ErrorBoundry>
+						}
+						{pricingUnavailable && <Notice>
+							{
+								allData
+								&& allData.tripData.inventory
+								&& allData.tripData.inventory.enable_trip_inventory == 'yes'
+								&& <InventoryNotice inventory={allData.tripData.inventory} />
+							}
+						</Notice>
+						}
+						{isLoading && <div id="loader">
+							<span></span>
+						</div>}
+					</div>
+			}
+			{selectedDate && selectedPricing && <div className="wti__booking-total-amount">
+				<h3 className="amount-figure"><span>{__i18n.bookings.booking_tab_cart_total}</span><strong className="total-amount" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></h3>
+			</div>
+			}
+			{selectedDate && selectedPricing &&
+				<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wti__book-now-button">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+			}
+			</>
 		}
-		{selectedDate && selectedPricing && <div className="wp-travel-booking__panel-bottom">
-			<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-			<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
-		</div>}
 	</>;
 }
 

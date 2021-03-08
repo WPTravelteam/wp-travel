@@ -6,7 +6,7 @@
  */
 
 // Hooks.
-add_action( 'after_setup_theme', 'wp_travel_load_single_itinerary_hooks' );
+add_action( 'after_setup_theme', 'wptravel_load_single_itinerary_hooks' );
 add_action( 'wp_travel_single_trip_after_booknow', 'wp_travel_single_keywords', 1 );
 add_action( 'wp_travel_single_trip_meta_list', 'wp_travel_single_location', 1 );
 add_action( 'wp_travel_single_trip_after_price', 'wp_travel_single_trip_rating', 10, 2 );
@@ -50,9 +50,9 @@ add_filter( 'posts_clauses', 'wp_travel_posts_clauses_filter', 11, 2 );
  *
  * Load single itinerary hooks according to layout selection.
  */
-function wp_travel_load_single_itinerary_hooks() {
+function wptravel_load_single_itinerary_hooks() {
 
-	$itinerary_v2_enable = wp_travel_use_itinerary_v2_layout();
+	$itinerary_v2_enable = wptravel_use_itinerary_v2_layout();
 
 	// Hooks for old itinerary layout.
 	if ( ! $itinerary_v2_enable ) {

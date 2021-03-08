@@ -65,7 +65,6 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
 				'loc'                => ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '',
 				'zoom'               => $map_zoom_level,
-				'itinerary_new'      => wptravel_use_itinerary_v2_layout(),
 			);
 
 			$registered         = self::register_scripts();

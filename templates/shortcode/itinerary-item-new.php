@@ -45,7 +45,7 @@ $wptravel_enable_sale                      = WP_Travel_Helpers_Trips::is_sale_en
 			$wptravel_save = ( 1 - ( $wptravel_trip_price / $wptravel_regular_price ) ) * 100;
 			$wptravel_save = number_format( $wptravel_save, 2, '.', ',' );
 			?>
-			<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', esc_html( $wptravel_save ) ); ?></div>
+			<div class="wti__savings"><?php printf( 'save <span>%s&#37;</span>', esc_html( $wptravel_save ) ); ?></div>
 			<?php
 		}
 		?>

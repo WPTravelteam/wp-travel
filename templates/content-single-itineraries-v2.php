@@ -32,7 +32,7 @@ $wrapper_class = wptravel_get_theme_wrapper_class();
 do_action( 'wp_travel_before_content_start' );
 ?>
 
-<div id="wti_main-<?php the_ID(); ?>" <?php post_class( 'itinerary_new' ); ?>>
+<div id="wti_main-<?php the_ID(); ?>" <?php post_class( 'itinerary_v2' ); ?>>
 	<div class="wti__wrapper">
 		<div class="wti__single-inner">
 			<?php

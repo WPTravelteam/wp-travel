@@ -48,6 +48,19 @@ jQuery(function ($) {
         }
     });
 
+    //For New itinerary layout support.
+    $('.wti-send-enquiries').magnificPopup({
+        type: 'inline',
+        preloader: false,
+        focus: '#wp-travel-enquiry-name',
+        midClick: true,
+        callbacks: {
+            open: function () {
+                $('#wp-travel-enquiries').trigger('reset').parsley().reset();
+            },
+        }
+    });
+
     $('#wp-travel-tab-wrapper').easyResponsiveTabs({});
 
     if (window.location.hash) {
