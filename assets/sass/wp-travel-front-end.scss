@@ -7139,15 +7139,45 @@ $primaryColor: #3399ff;
 	color:#3e8105;
 	text-decoration:underline;
 }
-.partial-payment-info{
-	display:none;
+.view-partial-info-wrapper{
+	position: relative;
+	z-index: 300;
 }
+.partial-payment-info{
+	position: absolute;
+	top:180%;
+	left:0;
+	width: auto;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.4s ease-in-out;
+	
+}
+.partial-payment-info:before{
+	content: "";
+    border-bottom: 11px solid #ececec;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+}
+ .view-partial-info-wrapper:hover .partial-payment-info,
+.view-partial-info-wrapper:focus-within .partial-payment-info {
+	opacity: 1;
+	position: absolute;
+	visibility: visible;
+	top:120%;
+	z-index: 3;
+	transition: all 0.4s ease-in-out;
+} 
 .dashboard-tab .partial-payment-info{
 	border-collapse:separate;
 	border-spacing:1px;
 	box-shadow: 1px 7px 12px 0px #bbb;
 	padding: 7px;
 	margin-top: 10px;
+	background-color:#ececec;
 }
 .dashboard-tab .partial-payment-info tr:first-child th{
 	background-color:#3e8105;
@@ -7182,7 +7212,7 @@ $primaryColor: #3399ff;
 	height:10px;
 }
 .partial-payment-info tr.trip-total th:first-child{
-	border-right: 10px solid #fff;
+	border-right: 10px solid #ececec;
 	
 }
 .dashboard-tab table.partial-payment-info tr td {
