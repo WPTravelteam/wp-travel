@@ -244,6 +244,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.3 =
+Release Date:
+
+Fixes:
+* Fixed icomon issue. Font is not being loaded duto path changes.
+
 = 4.5.2 =
 Release Date: 3rd March, 2021
 

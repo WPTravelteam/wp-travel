@@ -159,25 +159,25 @@ function wptravel_variable_pricing_minimum_partial_payout( $post_id, $price, $ta
 /**
  * Get Minimum payout amount
  *
- * @param Number $post_id Post ID.
+ * @param Number $trip_id Post ID.
  * @return Number
  */
-function wptravel_get_payout_percent( $post_id ) {
-	if ( ! $post_id ) {
+function wptravel_get_payout_percent( $trip_id ) {
+	if ( ! $trip_id ) {
 		return 0;
 	}
 	$settings = wptravel_get_settings();
 	// Global Payout percent.
 	$payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
-	$use_global     = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_use_global', true );
+	$use_global     = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
 
-	$trip_payout_percent = get_post_meta( $post_id, 'wp_travel_minimum_partial_payout_percent', true );
+	$trip_payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 
 	if ( ! $use_global && $trip_payout_percent ) {
 		$payout_percent = $trip_payout_percent;
 	}
 
-	$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $post_id );
+	$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $trip_id );
 	$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent );
 	return number_format( $payout_percent, 2, '.', '' );
 }
