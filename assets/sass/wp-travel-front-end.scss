@@ -7132,3 +7132,92 @@ $primaryColor: #3399ff;
 		}
 	}
 }
+
+/* partial payment  table*/
+.view-partial-info{ 
+	text-align:left;
+	color:#3e8105;
+	text-decoration:underline;
+}
+.partial-payment-info{
+	display:none;
+}
+.dashboard-tab .partial-payment-info{
+	border-collapse:separate;
+	border-spacing:1px;
+	box-shadow: 1px 7px 12px 0px #bbb;
+	padding: 3px;
+	margin-top: 10px;
+}
+.dashboard-tab .partial-payment-info tr:first-child th{
+	background-color:#3e8105;
+	color: #fff;
+	text-align: center;
+}
+.dashboard-tab .partial-payment-info tr:first-child th{
+	background-color:#3e8105;
+	color: #fff;
+	text-align: center;
+}
+
+.dashboard-tab .partial-payment-info tr:nth-last-child(-n+2) td{
+	border-bottom:0;
+}
+.partial-payment-info th,
+.partial-payment-info td{
+	text-align:center;
+	padding: 10px !important;
+	font-size: 13px;
+}
+.partial-payment-info tr.trip-total{
+	background: #457120;
+	color:#fff;
+}
+.partial-payment-info tr.trip-total th{
+	font-weight:500;
+	font-size: 14px;
+	
+}
+.partial-payment-info tr.separator{
+	height:10px;
+}
+.partial-payment-info tr.trip-total th:first-child{
+	border-right: 10px solid #fff;
+	
+}
+.dashboard-tab table.partial-payment-info tr td {
+	color: #3a3a3a;
+	border: 1px solid #efeded;
+}
+.dashboard-tab .partial-payment-info tr td{
+	background-color:#f9f9f9;
+}
+.dashboard-tab .partial-payment-info tr td i{
+	margin-left:5px;
+}
+.dashboard-tab .partial-payment-info tr.ongoing-row td.payment-amount{
+		font-weight:600;
+
+}
+.dashboard-tab .partial-payment-info tr.paid-row{
+	opacity:0.5;
+	position:relative;
+	
+}
+.dashboard-tab .partial-payment-info tr.paid-row i{
+	color:#3e8105;
+	
+}
+
+.dashboard-tab .partial-payment-info tr.ongoing-row td{
+		background-color: rgb(150 150 150);
+		color:#fff;
+}
+.dashboard-tab .partial-payment-info tr.payment-row.ongoing-row i {
+    font-size: 12px;
+}
+.payment-row.paid-row .payment-amount .wt-icon{
+	color:#3e8105;
+}
+
+/* partial payment  table ended*/

@@ -1749,6 +1749,7 @@ a{
                         .input-field{
                             display: inline-flex;
                             height: 30px;
+                            position: relative;
                             input[type=number]{
                                 width: 50px;
                                 border-radius: 0;
@@ -1785,12 +1786,15 @@ a{
                             .error{
                                 color: #000;
                                 border: 1px solid #e92929;
-                                background: #fff;
+                                background: #a72727c7;
                                 animation: arrowAnimate 1s ease infinite;
-                                padding: .5em;
+                                padding: 5px 10px;
                                 border-radius: 4px;
-                                position: relative;
-                                font-size: 14px;
+                                position: absolute;
+                                font-size: 12px;
+                                top: -5px;
+                                left: 115%;
+                                color:#fff;
                                 width: max-content;
                                 &::before{
                                     content: "";
