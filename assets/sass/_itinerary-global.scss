@@ -1096,6 +1096,10 @@ a{
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                span.wti-price-from {
+                    margin: 5px 0;
+                    display: inline-block;
+                }
                 .price-figure{
                     font-size: 30px;
                     ins{

@@ -1050,6 +1050,10 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
+.wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area span.wti-price-from {
+  margin: 5px 0;
+  display: inline-block;
+}
 .wti__single-inner .wti__single-wrapper .wti__nav-tabs .wti__single-price-area .price-figure {
   font-size: 30px;
 }
