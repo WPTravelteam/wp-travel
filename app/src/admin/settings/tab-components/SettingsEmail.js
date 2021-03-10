@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker, Button } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import WPEditor from '../../fields/WPEditor';
@@ -81,6 +81,20 @@ const BookingEmailTemplates = () => {
         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: value } })
     } 
 
+    // const resetContent = (storeName, storeKey ) => {
+    //     if ( confirm( 'are you sure to reset?' ) ) {
+
+    //         console.log( 'jagat' );
+    //         // console.log( to );
+    //         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: 'jagat2' } })
+    //         console.log( 'data ', wp.editor.getContent(storeName) );
+
+    //         console.log(wp.editor);
+    //         // console.log( allData.booking_admin_template_settings );
+
+    //     }
+    // }
+
     return <>
       <PanelBody title={__( 'Booking Email Templates', 'wp-travel' )} initialOpen={true} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
@@ -138,6 +152,9 @@ const BookingEmailTemplates = () => {
 
             <PanelRow>
                 <label>{ __( 'Email Content', 'wp-travel' ) }</label>
+                {/* <div className="wp-travel-field-value">
+                    <Button isSecondary onClick={() => resetContent('booking_admin_template_settings', 'email_content')}>{ __( 'Reset Content', 'wp-travel' ) }</Button>
+                </div> */}
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 {'undefined' !== typeof booking_admin_template_settings.email_content && <WPEditor id="booking_admin_template_settings" value={booking_admin_template_settings.email_content}

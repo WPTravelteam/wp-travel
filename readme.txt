@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.6.2
+Tested up to: 5.7
 Requires PHP: 5.5
-Stable tag: 4.5.2
+Stable tag: 4.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,10 +245,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.5.3 =
-Release Date:
+Release Date: 10th March, 2021
 
 Fixes:
-* Fixed icomon issue. Font is not being loaded duto path changes.
+* Fixed icomon issue. Font is not being loaded due to path changes.
+* Fixed Some of payment gateway not working like stripe, paypal etc.
+* Fixed some of deprecated function not working.
 
 = 4.5.2 =
 Release Date: 3rd March, 2021
