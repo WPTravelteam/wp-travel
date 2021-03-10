@@ -150,7 +150,8 @@ class WP_Travel_Ajax {
 
 		$trip_id        = absint( $post_data['trip_id'] );
 		$price_key      = isset( $post_data['price_key'] ) ? sanitize_text_field( $post_data['price_key'] ) : '';
-		$pricing_id     = isset( $post_data['pricing_id'] ) ? absint( $post_data['pricing_id'] ) : ''; // @since 3.0.0
+		// Pricing id contains string for legacy version below WP Travel 3.0.0.
+		$pricing_id     = isset( $post_data['pricing_id'] ) ? sanitize_text_field( $post_data['pricing_id'] ) : ''; // @since 3.0.0
 		$arrival_date   = isset( $post_data['arrival_date'] ) ? sanitize_text_field( $post_data['arrival_date'] ) : '';
 		$departure_date = isset( $post_data['departure_date'] ) ? sanitize_text_field( $post_data['departure_date'] ) : ''; // Need to remove. is't post value.
 		$pax            = isset( $post_data['pax'] ) ? (array) wptravel_sanitize_array( $post_data['pax'] ) : 0;

@@ -234,10 +234,16 @@ class WP_Travel_Helpers_Cart {
 
 			$discount_type  = WPTravel()->coupon->get_discount_type( $coupon_id );
 			$discount_value = WPTravel()->coupon->get_discount_value( $coupon_id );
-			if ( 'fixed' === $discount_type && $discount_value > $discount_applicable_total ) {
-				// Error related to fixed discount amount is higher than trip amount.
-				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_HIGH' );
-				WP_Travel_Helpers_REST_API::response( $error );
+			if ( 'fixed' === $discount_type ) {
+				if ( $discount_value > $discount_applicable_total ) {
+					// Error related to fixed discount amount is higher than trip amount.
+					$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_HIGH' );
+					WP_Travel_Helpers_REST_API::response( $error );
+
+				} elseif ( $discount_value === $discount_applicable_total ) {
+					$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_DISCOUNT_AMOUNT_EQUAL_TO_TRIP_AMOUNT' );
+					WP_Travel_Helpers_REST_API::response( $error );
+				}
 			}
 
 			global $wt_cart;
