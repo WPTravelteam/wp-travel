@@ -89,7 +89,7 @@ function wp_travel_get_booking_form() {
 		'id'            => 'wp-travel-booking',
 		'wrapper_class' => 'wp-travel-booking-form-wrapper',
 		'submit_button' => array(
-			'name'  => 'wptravel_book_now',
+			'name'  => 'wp_travel_book_now',
 			'id'    => 'wp-travel-book-now',
 			'value' => __( 'Book Now', 'wp-travel' ),
 		),

@@ -158,7 +158,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 					<?php do_action( 'wp_travel_action_before_book_now' ); // @since WP Travel 4.3.0 ?>
 					<div class="wp-travel-form-field button-field">
 						<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-						<input type="submit" name="wptravel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
+						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 					</div>
 				</div>
 			</div>

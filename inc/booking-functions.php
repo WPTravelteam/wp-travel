@@ -12,7 +12,7 @@
  */
 function wptravel_book_now() {
 	if (
-		! isset( $_POST['wptravel_book_now'] )
+		! isset( $_POST['wp_travel_book_now'] )
 		|| ! isset( $_POST['wp_travel_security'] )
 		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
 		) {
