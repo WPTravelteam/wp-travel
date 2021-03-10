@@ -248,7 +248,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 10th March, 2021
 
 Fixes:
-* Fixed icomon issue. Font is not being loaded due to path changes.
+* Fixed icomoon issue. Font is not being loaded due to path changes.
 * Fixed Some of payment gateway not working like stripe, paypal etc.
 * Fixed some of deprecated function not working.
 
