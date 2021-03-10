@@ -249,7 +249,7 @@ Release Date: 10th March, 2021
 
 Fixes:
 * Fixed icomoon font issue. Font is not being loaded due to style path changes.
-* Fixed Some of payment gateway not working like stripe, PayPal etc.
+* Fixed Some of payment gateway not working like Stripe, PayPal etc.
 * Fixed some of deprecated function not working.
 
 = 4.5.2 =
