@@ -38,7 +38,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 							if ( is_array( $wp_travel_trip_facts ) ) :
 								foreach ( $wp_travel_trip_facts as $key => $fact ) :
 									// Saved Facts.
-									echo wp_travel_trip_facts_single_html( $fact, $key );
+									echo wptravel_trip_facts_single_html( $fact, $key );
 								endforeach;
 							endif;
 							?>
