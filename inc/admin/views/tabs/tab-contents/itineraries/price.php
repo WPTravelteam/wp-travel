@@ -358,7 +358,7 @@ function wptravel_new_pricing_list_admin() {
 													?>
 
 													<div class="repeat-row">
-														<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $pricing_id ); ?>
+														<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $pricing_id ); ?>
 													</div>
 
 												</div>
@@ -1247,7 +1247,7 @@ function wptravel_old_pricing_list_admin() {
 													</div>
 												</div>
 												<div class="repeat-row">
-													<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key ); ?>
+													<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key ); ?>
 												</div>
 												<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 
@@ -1390,7 +1390,7 @@ function wptravel_old_pricing_list_admin() {
 										</div>
 									</div>
 
-									<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
+									<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = 'pricing_options', $key = '{{data.random}}' ); ?>
 
 									<?php if ( class_exists( 'WP_Travel_Util_Inventory' ) && 'yes' === $enable_inventory_for_trip ) : ?>
 
@@ -1698,7 +1698,7 @@ function wptravel_old_pricing_list_admin() {
 			</th>
 		</tr>
 		<tr class="price-option-row <?php echo esc_attr( $single_pricing_option_class ); ?> wp-travel-tour-extra-content">
-			<?php echo wp_travel_admin_tour_extra_multiselect( $trip_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
+			<?php echo wptravel_admin_tour_extra_multiselect( $trip_id, $context = false, $key = 'wp_travel_tour_extras', $table_row = true ); ?>
 		</tr>
 
 		<?php

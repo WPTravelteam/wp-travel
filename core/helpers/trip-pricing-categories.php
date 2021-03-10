@@ -57,12 +57,14 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 
 			$group_prices     = ! empty( $result->group_prices ) ? maybe_unserialize( $result->group_prices ) : array();
 			$new_group_prices = $group_prices;
+
 			if ( is_array( $group_prices ) && count( $group_prices ) > 0 ) {
 				foreach ( $group_prices as $i => $group_price ) {
-					$new_group_price                 = self::get_converted_price( $group_price['price'] );
+					$new_group_price                 = $group_price['price'];
 					$new_group_prices[ $i ]['price'] = self::get_converted_price( $new_group_price );
 				}
 			}
+
 			$categories[ $index ]['id']              = absint( $result->pricing_category_id );
 			$categories[ $index ]['price_per']       = $result->price_per;
 			$categories[ $index ]['regular_price']   = self::get_converted_price( $regular_price );
