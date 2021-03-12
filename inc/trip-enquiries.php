@@ -475,8 +475,17 @@ function wptravel_save_user_enquiry() {
 add_action( 'wp_ajax_wptravel_save_user_enquiry', 'wptravel_save_user_enquiry' );
 add_action( 'wp_ajax_nopriv_wptravel_save_user_enquiry', 'wptravel_save_user_enquiry' );
 
+/**
+ * Check if current page is blog page.
+ *
+ * @return Boolen
+ */
+function is_blog () {
+    return ( is_archive() || is_author() || is_category() || is_home() || is_tag() );
+}
+
 function wptravel_enquiry_form_header() {
-	if ( is_archive() ) {
+	if ( is_blog() ) {
 		return;
 	}
 	?>

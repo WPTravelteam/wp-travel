@@ -135,12 +135,16 @@ function wptravel_single_trip_location( $trip_id ) {
 	if ( ! $trip_id ) {
 		return;
 	}
+	$terms = get_the_terms( $trip_id, 'travel_locations' );
+
+	if ( ! $terms ) {
+		return;
+	}
 	?>
 	<div class="wti__trip-meta">
 		<div class="trip__location">
 		<?php
 		$i     = 0;
-		$terms = get_the_terms( $trip_id, 'travel_locations' );
 		if ( is_array( $terms ) && count( $terms ) > 0 ) {
 			foreach ( $terms as $term ) {
 				if ( $i > 0 ) {

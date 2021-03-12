@@ -753,6 +753,17 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		/**
+		 * Create nonce field.
+		 *
+		 * @since 4.5.4
+		 */
+		public static function create_nonce_field() {
+			?>
+			<input type="hidden" name="_nonce" value="<?php echo esc_attr( self::create_nonce() ); ?>" />
+			<?php
+		}
+
+		/**
 		 * Verify WP Travel nonce in case of any request.
 		 *
 		 * @since WP Travel 4.4.7

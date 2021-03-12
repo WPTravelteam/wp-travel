@@ -282,6 +282,7 @@ function wptravel_update_payment_status_admin( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+
 	if ( ! isset( $_POST['wp_travel_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' ) ) {
 		return;
 	}

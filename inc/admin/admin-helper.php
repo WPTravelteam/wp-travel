@@ -560,8 +560,8 @@ function wptravel_publish_metabox() {
 			<?php endforeach; ?>
 			</select>
 		</div>
-
 		<?php
+		WP_Travel::create_nonce_field();
 	}
 }
 add_action( 'post_submitbox_misc_actions', 'wptravel_publish_metabox' );

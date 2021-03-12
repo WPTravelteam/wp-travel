@@ -283,6 +283,7 @@ class WP_Travel_Admin_Metaboxes {
 			<?php endif; ?>
 		</table>
 		<?php
+		wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' );
 	}
 
 	/**
