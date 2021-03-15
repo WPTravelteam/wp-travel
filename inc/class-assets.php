@@ -81,46 +81,49 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				wp_register_script( $handler, $script['src'], $script['deps'], $script['ver'], $script['in_footer'] );
 			}
 
-			// Styles.
-			wp_enqueue_style( 'dashicons' );
-			wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Inconsolata', array(), '1' );
-			wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Play', array(), '1' );
+			if ( WP_Travel::is_pages() && ! wptravel_can_load_bundled_scripts() ) {
+				// Styles.
+				wp_enqueue_style( 'dashicons' );
+				wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Inconsolata', array(), '1' );
+				wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Play', array(), '1' );
+
+				wp_enqueue_style( 'wp-travel-single-itineraries' ); // For new layout.
+				wp_enqueue_style( 'wp-travel-popup' );
+				wp_enqueue_style( 'easy-responsive-tabs' );
+				wp_enqueue_style( 'wp-travel-itineraries' );
+				// fontawesome.
+				wp_enqueue_style( 'font-awesome-css' );
+				wp_enqueue_style( 'wp-travel-fa-css' );
+				wp_enqueue_style( 'wp-travel-user-css' );
+				wp_enqueue_style( 'jquery-datepicker-lib' );
+
+				// Scripts.
+				wp_enqueue_script( 'wp-travel-view-mode' );
+				wp_enqueue_script( 'wp-travel-accordion' );
+			}
 
 			wp_enqueue_style( 'wp-travel-frontend' );
-			wp_enqueue_style( 'wp-travel-single-itineraries' ); // For new layout.
-			wp_enqueue_style( 'wp-travel-popup' );
-			wp_enqueue_style( 'easy-responsive-tabs' );
-			wp_enqueue_style( 'wp-travel-itineraries' );
-			// fontawesome.
-			wp_enqueue_style( 'font-awesome-css' );
-			wp_enqueue_style( 'wp-travel-fa-css' );
-			wp_enqueue_style( 'wp-travel-user-css' );
-			wp_enqueue_style( 'jquery-datepicker-lib' );
-
-			// Scripts.
-			wp_enqueue_script( 'wp-travel-view-mode' );
-			wp_enqueue_script( 'wp-travel-accordion' );
-			wp_enqueue_script( 'wp-travel-widget-scripts' );
+			wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 
 			/**
 			 * Assets needed on WP Travel Archive Page.
 			 *
 			 * @since 4.0.4
 			 */
-			if ( WP_Travel::is_page( 'archive' ) ) {
+			if ( WP_Travel::is_page( 'archive' ) && ! wptravel_can_load_bundled_scripts() ) {
 				wp_enqueue_script( 'wp-travel-view-mode' );
 			}
 
-			if ( WP_Travel::is_page( 'checkout' ) ) { // Assets needed for Checkout page.
+			if ( WP_Travel::is_page( 'checkout' ) && ! wptravel_can_load_bundled_scripts() ) { // Assets needed for Checkout page.
 				wp_enqueue_script( 'wp-travel-modernizer' );
 				wp_enqueue_script( 'wp-travel-sticky-kit' );
 			}
 
 			// Script only for itineraries.
-			$is_wp_travel_single_pages = is_singular( WP_TRAVEL_POST_TYPE ) || WP_Travel::is_page( 'cart' ) || WP_Travel::is_page( 'checkout' ) || WP_Travel::is_page( 'dashboard' );
-			$is_wp_travel_single_pages = apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_single_pages, $trip_id ); // phpcs:ignore
-			$is_wp_travel_single_pages = apply_filters( 'wptravel_enqueue_single_assets', $is_wp_travel_single_pages, $trip_id );
-			if ( true === $is_wp_travel_single_pages ) {
+			$is_wp_travel_pages = is_singular( WP_TRAVEL_POST_TYPE ) || WP_Travel::is_page( 'cart' ) || WP_Travel::is_page( 'checkout' ) || WP_Travel::is_page( 'dashboard' );
+			$is_wp_travel_pages = apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_pages, $trip_id ); // phpcs:ignore
+			$is_wp_travel_pages = apply_filters( 'wptravel_enqueue_single_assets', $is_wp_travel_pages, $trip_id );
+			if ( true === $is_wp_travel_pages && ! wptravel_can_load_bundled_scripts() ) {
 
 				// Add localized vars.
 				$wp_travel['cartUrl']           = wptravel_get_cart_url();
@@ -189,7 +192,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 
 			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
-			if ( wptravel_can_load_bundled_scripts() ) {
+			if ( WP_Travel::is_pages() && wptravel_can_load_bundled_scripts() ) {
 				wp_enqueue_script( 'wp-travel-frontend-bundle' );
 			}
 
