@@ -63,8 +63,8 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 							</span>
 						</div>
-						<?php $count = (int) wptravel_get_review_count() ?>
-						<span class="wp-travel-review-text"> (<?php printf( esc_html( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ) ), $count ); ?>)</span>
+						<?php $count = (int) wptravel_get_review_count(); ?>
+						<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', esc_html( $count ), 'wp-travel' ), esc_html( $count ) ); // @phpcs:ignore ?>)</span>
 					<?php endif; ?>
 					<?php $terms = get_the_terms( $post_id, 'itinerary_types' ); ?>
 					<div class="category-list-items">

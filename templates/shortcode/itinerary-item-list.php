@@ -16,7 +16,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 
@@ -56,7 +56,13 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 			<?php wptravel_trip_rating( get_the_ID() ); ?>
 				<?php $count = (int) wptravel_get_review_count(); ?>						
 			</div>
-			<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+			<span class="wp-travel-review-text"> (
+				<?php
+				/* translators: 1: number of reviews. */
+				$wptravel_review_text = _n( '%d Review', '%d Reviews', $count, 'wp-travel' );
+				printf( $wptravel_review_text, number_format_i18n( $count ) ); //@phpcs:ignore
+				?>
+				)</span>
 			<div class="entry-meta">
 				<div class="category-list-items">
 					<span class="post-category">

@@ -304,6 +304,9 @@ function wptravel_wrapper_start() {
 	}
 }
 
+/**
+ * Theme specific wrapper class.
+ */
 function wptravel_get_theme_wrapper_class() {
 	$wrapper_class = '';
 	$template      = get_option( 'template' );
@@ -359,7 +362,8 @@ function wptravel_wrapper_end() {
  */
 function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 
-	$args                             = $args_regular = array( 'trip_id' => $trip_id );
+	$args                             = array( 'trip_id' => $trip_id );
+	$args_regular                     = $args;
 	$args_regular['is_regular_price'] = true;
 	$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
 	$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
@@ -396,7 +400,7 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 			<?php endif; ?>
 		</div>
 		<?php
-			wptravel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );  // deprecated in 2.0.4
+			wptravel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );
 			do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating );
 		?>
 	</div>
@@ -472,7 +476,7 @@ function wptravel_single_excerpt( $post_id ) {
 		return;
 	}
 	$strings = wptravel_get_strings();
-	// Get Settings
+	// Get Settings.
 	$settings = wptravel_get_settings();
 
 	$enquery_global_setting = isset( $settings['enable_trip_enquiry_option'] ) ? $settings['enable_trip_enquiry_option'] : 'yes';
@@ -482,7 +486,7 @@ function wptravel_single_excerpt( $post_id ) {
 	if ( '' === $global_enquiry_option ) {
 		$global_enquiry_option = 'yes';
 	}
-	if ( 'yes' == $global_enquiry_option ) {
+	if ( 'yes' === $global_enquiry_option ) {
 
 		$enable_enquiry = $enquery_global_setting;
 
@@ -490,7 +494,7 @@ function wptravel_single_excerpt( $post_id ) {
 		$enable_enquiry = get_post_meta( $post_id, 'wp_travel_enable_trip_enquiry_option', true );
 	}
 
-	// Strings
+	// Strings.
 	$trip_type_text  = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
 	$activities_text = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
 	$group_size_text = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
@@ -1132,18 +1136,18 @@ function wptravel_verify_comment_meta_data( $commentdata ) {
 /**
  * Get the total amount (COUNT) of reviews.
  *
- * @param   Number $post_id Post ID.
+ * @param   Number $trip_id Post ID.
  * @since 1.0.0 / Modified 1.6.7
  * @return int The total number of trips reviews
  */
-function wptravel_get_review_count( $post_id = null ) {
+function wptravel_get_review_count( $trip_id = null ) {
 	global $wpdb, $post;
 
-	if ( ! $post_id ) {
-		$post_id = $post->ID;
+	if ( ! $trip_id ) {
+		$trip_id = $post->ID;
 	}
 	// No meta data? Do the calculation.
-	if ( ! metadata_exists( 'post', $post_id, '_wpt_review_count' ) ) {
+	if ( ! metadata_exists( 'post', $trip_id, '_wpt_review_count' ) ) {
 		$count = $wpdb->get_var(
 			$wpdb->prepare(
 				"
@@ -1152,16 +1156,18 @@ function wptravel_get_review_count( $post_id = null ) {
 			AND comment_post_ID = %d
 			AND comment_approved = '1'
 		",
-				$post_id
+				$trip_id
 			)
 		);
 
-		update_post_meta( $post_id, '_wpt_review_count', $count );
+		update_post_meta( $trip_id, '_wpt_review_count', $count );
 	} else {
-		$count = get_post_meta( $post_id, '_wpt_review_count', true );
+		$count = get_post_meta( $trip_id, '_wpt_review_count', true );
 	}
 
-	return apply_filters( 'wp_travel_review_count', $count, $post );
+	$count = apply_filters( 'wp_travel_review_count', $count, $post );
+
+	return $count ? $count : 0;
 }
 
 /**
