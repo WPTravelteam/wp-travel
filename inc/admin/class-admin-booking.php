@@ -36,6 +36,9 @@ class WP_Travel_Admin_Booking {
 
 	}
 
+	/**
+	 * To hide visibility, rivision in the publish meta.
+	 */
 	public function internal_style() {
 		global $post;
 		if ( 'itinerary-booking' === $post->post_type ) : ?>
@@ -57,6 +60,9 @@ class WP_Travel_Admin_Booking {
 	 * @return Array                  [description]
 	 */
 	public function booking_columns( $booking_columns ) {
+		if ( ! $booking_columns ) {
+			return;
+		}
 		$new_columns['cb']             = '<input type="checkbox" />';
 		$new_columns['title']          = _x( 'Title', 'column name', 'wp-travel' );
 		$new_columns['trip_code']      = __( 'Trip Code', 'wp-travel' );
@@ -138,6 +144,7 @@ class WP_Travel_Admin_Booking {
 	/**
 	 * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE.
 	 *
+	 * @param array $columns Custom column in the booking list.
 	 * @since WP Travel 4.4.2
 	 */
 	public function booking_columns_sort( $columns ) {
@@ -156,7 +163,7 @@ class WP_Travel_Admin_Booking {
 	 * @return Array       Order By array.
 	 */
 	public function booking_columns_content_sort( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'contact_name' == $vars['orderby'] ) {
+		if ( isset( $vars['orderby'] ) && 'contact_name' === $vars['orderby'] ) {
 			$vars = array_merge(
 				$vars,
 				array(
@@ -178,7 +185,7 @@ class WP_Travel_Admin_Booking {
 		// Booking Metabox.
 		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
 		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
-		add_action( 'admin_head', array( $this, 'internal_style' ) ); // To hide visibility, rivision in the publish meta.
+		add_action( 'admin_head', array( $this, 'internal_style' ) );
 	}
 
 	/**
@@ -237,11 +244,11 @@ class WP_Travel_Admin_Booking {
 				$args       = array( 'trip_id' => $booking_id ); // why booking id ??
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-				if ( '' == $trip_price || '0' == $trip_price ) {
+				if ( '' === $trip_price || '0' === $trip_price ) {
 					unset( $payment_fields['is_partial_payment'], $payment_fields['booking_option'], $payment_fields['payment_gateway'], $payment_fields['trip_price'], $payment_fields['payment_mode'], $payment_fields['trip_price_info'], $payment_fields['payment_amount_info'], $payment_fields['payment_amount'] );
 				}
 
-				if ( 'booking_only' == $booking_option ) {
+				if ( 'booking_only' === $booking_option ) {
 					unset( $payment_fields['is_partial_payment'], $payment_fields['payment_gateway'], $payment_fields['payment_mode'], $payment_fields['payment_amount'], $payment_fields['payment_amount_info'] );
 				}
 
@@ -428,6 +435,7 @@ class WP_Travel_Admin_Booking {
 
 			if ( is_array( $details ) && count( $details ) > 0 ) {
 				?>
+				<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 				<div class="my-order my-order-details">
 					<div class="view-order">
 						<div class="order-list">
