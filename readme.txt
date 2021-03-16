@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7
 Requires PHP: 5.5
-Stable tag: 3.9
+Stable tag: 4.5.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -252,6 +252,8 @@ Fixes:
 * Fixed booking and payment status update from admin not working.
 * Fixed too few arguments while rendering trip review in trip single and archive page.
 * Fixed Trip Enquiry not working outside of WP Travel pages.
+* Fixed To email not working in booking and payment email.
+* Fixed Email template editor not showing for booking, payment, and enquiry email.
 
 = 4.5.3 =
 Release Date: 10th March, 2021

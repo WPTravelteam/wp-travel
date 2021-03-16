@@ -84,8 +84,6 @@ const BookingEmailTemplates = () => {
     // const resetContent = (storeName, storeKey ) => {
     //     if ( confirm( 'are you sure to reset?' ) ) {
 
-    //         console.log( 'jagat' );
-    //         // console.log( to );
     //         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: 'jagat2' } })
     //         console.log( 'data ', wp.editor.getContent(storeName) );
 
@@ -94,7 +92,7 @@ const BookingEmailTemplates = () => {
 
     //     }
     // }
-
+    console.log( 'booking_admin_template_settings', booking_admin_template_settings );
     return <>
       <PanelBody title={__( 'Booking Email Templates', 'wp-travel' )} initialOpen={true} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
@@ -157,10 +155,12 @@ const BookingEmailTemplates = () => {
                 </div> */}
             </PanelRow>
             <PanelRow className="wp-travel-editor">
-                {'undefined' !== typeof booking_admin_template_settings.email_content && <WPEditor id="booking_admin_template_settings" value={booking_admin_template_settings.email_content}
-                onContentChange={(value) => {
-                    updateEmailData( 'booking_admin_template_settings', 'email_content', value )
-                }}  />}
+                <WPEditor 
+                    id="booking_admin_template_settings" 
+                    value={'undefined' !== typeof booking_admin_template_settings.email_content ? booking_admin_template_settings.email_content : ''}
+                    onContentChange={(value) => {
+                        updateEmailData( 'booking_admin_template_settings', 'email_content', value )
+                    }}  />
             </PanelRow>
 
 
@@ -203,10 +203,10 @@ const BookingEmailTemplates = () => {
                 <label>{ __( 'Email Content', 'wp-travel' ) }</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
-                {'undefined' !== typeof booking_client_template_settings.email_content && <WPEditor id="booking_client_template_settings" value={booking_client_template_settings.email_content}
+                <WPEditor id="booking_client_template_settings" value={'undefined' !== typeof booking_client_template_settings.email_content ? booking_client_template_settings.email_content : ''}
                 onContentChange={(value) => {
                     updateEmailData( 'booking_client_template_settings', 'email_content', value )
-                }}  />}
+                }}  />
             </PanelRow>
 
         </PanelBody>
@@ -272,10 +272,10 @@ const PaymentEmailTemplates = () => {
                 <label>{ __( 'Email Content', 'wp-travel' ) }</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
-                {'undefined' !== typeof payment_admin_template_settings.email_content && <WPEditor id="payment_admin_template_settings" value={payment_admin_template_settings.email_content}
+                <WPEditor id="payment_admin_template_settings" value={'undefined' !== typeof payment_admin_template_settings.email_content ? payment_admin_template_settings.email_content : ''}
                 onContentChange={(value) => {
                     updateEmailData( 'payment_admin_template_settings', 'email_content', value )
-                }}  />}
+                }}  />
             </PanelRow>
 
 
@@ -318,10 +318,10 @@ const PaymentEmailTemplates = () => {
                 <label>{ __( 'Email Content', 'wp-travel' ) }</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
-                {'undefined' !== typeof payment_client_template_settings.email_content && <WPEditor id="payment_client_template_settings" value={payment_client_template_settings.email_content}
+                <WPEditor id="payment_client_template_settings" value={'undefined' !== typeof payment_client_template_settings.email_content ? payment_client_template_settings.email_content :  ''}
                 onContentChange={(value) => {
                     updateEmailData( 'payment_client_template_settings', 'email_content', value )
-                }}  />}
+                }}  />
             </PanelRow>
 
         </PanelBody>
@@ -385,10 +385,10 @@ const EnquiryEmailTemplates = () => {
                 <label>{ __( 'Email Content', 'wp-travel' ) }</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
-                {'undefined' !== typeof enquiry_admin_template_settings.email_content && <WPEditor id="enquiry_admin_template_settings" value={enquiry_admin_template_settings.email_content}
+                <WPEditor id="enquiry_admin_template_settings" value={'undefined' !== typeof enquiry_admin_template_settings.email_content ? enquiry_admin_template_settings.email_content : ''}
                 onContentChange={(value) => {
                     updateEmailData( 'enquiry_admin_template_settings', 'email_content', value )
-                }}  />}
+                }}  />
             </PanelRow>
 
         </PanelBody>
