@@ -7,7 +7,7 @@
     "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "build:pre_release": "npx wp-scripts build && npx grunt build",
+    "build:pre_release": "npx wp-scripts build && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install"
   },
