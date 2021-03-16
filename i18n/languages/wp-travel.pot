@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 10:29:55+00:00\n"
+"POT-Creation-Date: 2021-03-16 11:46:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9423,7 +9423,7 @@ msgid "Invalid Post Type"
 msgstr ""
 
 #: inc/trip-enquiries.php:457
-msgid "Your Enquiery has been added but the email could not be sent."
+msgid "Your Enquiry has been added but the email could not be sent."
 msgstr ""
 
 #: inc/trip-enquiries.php:467
