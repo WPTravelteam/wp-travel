@@ -9,7 +9,7 @@
 /**
  * WP Travel email templates class.
  */
-class WP_Travel_Email extends WP_Travel_Emails{
+class WP_Travel_Email extends WP_Travel_Emails {
 
 	/**
 	 * Settings.
@@ -26,10 +26,8 @@ class WP_Travel_Email extends WP_Travel_Emails{
 	/**
 	 * Constructor.
 	 */
-	function __construct() {
-		$this->settings    = wptravel_get_settings();
-		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
-
+	public function __construct() {
+		$this->settings = wptravel_get_settings();
 		$this->sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		if ( is_multisite() ) {
 			$this->sitename = get_network()->site_name;
@@ -44,16 +42,19 @@ class WP_Travel_Email extends WP_Travel_Emails{
 	 * @param array $args Data to send booking email.
 	 * @since WP Travel 4.4.2
 	 */
-	function send_booking_emails( $args ) {
+	public function send_booking_emails( $args ) {
+
+		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
+
 		$customer_email = $args['customer_email'];
 		$first_key      = key( $customer_email );
-		
+
 		$customer_email = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
 		$reply_to_email = isset( $this->settings['wp_travel_from_email'] ) ? $this->settings['wp_travel_from_email'] : $this->admin_email;
-		
+
 		$email      = new WP_Travel_Emails();
 		$email_tags = $this->get_email_tags( $args ); // Supported email tags.
-		
+
 		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // Default 'yes'
 		if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 			$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
@@ -95,7 +96,14 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		}
 	}
 
-	function get_email_tags( $args ) {
+	/**
+	 * Email Tags.
+	 *
+	 * @param array $args Email tag args.
+	 *
+	 * @return array
+	 */
+	public function get_email_tags( $args ) {
 
 		global $wt_cart;
 		$discounts   = $wt_cart->get_discounts();
@@ -119,9 +127,8 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		reset( $first_name );
 		$first_key = key( $first_name );
 
-		$first_name       = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
-		$last_name        = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
-
+		$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
+		$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
 
 		$customer_name    = $first_name . ' ' . $last_name;
 		$customer_country = isset( $customer_country[ $first_key ] ) && isset( $customer_country[ $first_key ][0] ) ? $customer_country[ $first_key ][0] : '';
@@ -137,7 +144,7 @@ class WP_Travel_Email extends WP_Travel_Emails{
 			$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 		}
 
-		$email_tags = array(
+		$email_tags        = array(
 			'{sitename}'               => $this->sitename,
 			'{itinerary_link}'         => get_permalink( $trip_id ),
 			'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ),
@@ -159,6 +166,6 @@ class WP_Travel_Email extends WP_Travel_Emails{
 		);
 		return $email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );
 	}
-	
+
 }
 new WP_Travel_Email();
