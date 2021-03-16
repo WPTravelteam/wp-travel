@@ -30,7 +30,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 	 *
 	 * @since 1.0.0
 	 */
-	final class WP_Travel {
+	final class WP_Travel { // @phpcs:ignore
 
 		/**
 		 * WP Travel version.
@@ -736,6 +736,33 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return ( (int) $dashboard_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_user_account' ) || $is_account_page );
 					case 'archive':
 						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
+				}
+			}
+			return false;
+		}
+
+		/**
+		 * Check whether current page is wp travel pages or not.
+		 *
+		 * @param boolean $admin_page check if page is admin page.
+		 *
+		 * @since WP Travel 4.5.4
+		 * @return boolean
+		 */
+		public static function is_pages( $admin_page = false ) {
+
+			if ( $admin_page ) {
+				if ( self::is_page( 'settings', $admin_page ) ) {
+					return true;
+				}
+			} else {
+				if (
+					is_singular( WP_TRAVEL_POST_TYPE ) ||
+					self::is_page( 'cart' ) ||
+					self::is_page( 'checkout' ) ||
+					self::is_page( 'dashboard' ) ) {
+
+					return true;
 				}
 			}
 			return false;
