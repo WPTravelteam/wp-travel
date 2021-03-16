@@ -454,7 +454,7 @@ function wptravel_save_user_enquiry() {
 
 		$errors = array(
 			'result'  => 0,
-			'message' => __( 'Your Enquiery has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			'message' => __( 'Your Enquiry has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
 		);
 
 		wp_send_json_error( $errors );
