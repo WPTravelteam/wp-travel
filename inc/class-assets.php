@@ -93,7 +93,6 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				wp_enqueue_style( 'wp-travel-itineraries' );
 				// fontawesome.
 				wp_enqueue_style( 'font-awesome-css' );
-				wp_enqueue_style( 'wp-travel-fa-css' );
 				wp_enqueue_style( 'wp-travel-user-css' );
 				wp_enqueue_style( 'jquery-datepicker-lib' );
 
@@ -102,6 +101,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				wp_enqueue_script( 'wp-travel-accordion' );
 			}
 
+			wp_enqueue_style( 'wp-travel-fa-css' );
 			wp_enqueue_style( 'wp-travel-frontend' );
 			wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 
@@ -123,13 +123,11 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			$is_wp_travel_pages = is_singular( WP_TRAVEL_POST_TYPE ) || WP_Travel::is_page( 'cart' ) || WP_Travel::is_page( 'checkout' ) || WP_Travel::is_page( 'dashboard' );
 			$is_wp_travel_pages = apply_filters( 'wp_travel_enqueue_single_assets', $is_wp_travel_pages, $trip_id ); // phpcs:ignore
 			$is_wp_travel_pages = apply_filters( 'wptravel_enqueue_single_assets', $is_wp_travel_pages, $trip_id );
+			// Add localized vars.
+			$wp_travel['cartUrl']           = wptravel_get_cart_url();
+			$wp_travel['checkoutUrl']       = wptravel_get_checkout_url(); // @since 4.3.2
+			$wp_travel['isEnabledCartPage'] = WP_Travel_Helpers_Cart::is_enabled_cart_page(); // @since 4.3.2
 			if ( true === $is_wp_travel_pages && ! wptravel_can_load_bundled_scripts() ) {
-
-				// Add localized vars.
-				$wp_travel['cartUrl']           = wptravel_get_cart_url();
-				$wp_travel['checkoutUrl']       = wptravel_get_checkout_url(); // @since 4.3.2
-				$wp_travel['isEnabledCartPage'] = WP_Travel_Helpers_Cart::is_enabled_cart_page(); // @since 4.3.2
-
 				wp_enqueue_script( 'wp-travel-accordion' );
 				wp_enqueue_script( 'wp-travel-booking' );
 				wp_enqueue_script( 'moment' );

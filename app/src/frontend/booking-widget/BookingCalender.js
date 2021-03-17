@@ -629,12 +629,17 @@ const BookingCalender = () => {
 
 	let _mindate = _.chain(_dates).sortBy(d => moment(d.start_date).unix()).value() || []
 	_mindate = _mindate.find(md => moment(md.start_date).isAfter(moment(new Date())) || moment(md.start_date).isSame(moment(new Date())))
+
+	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
+	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
+	
 	let params = {
 		showMonthDropdown: true,
 		customInput: <DatePickerBtn isFixedDeparture={isFixedDeparture} duration={duration} selectedDate={selectedDate} />,
 		showYearDropdown: true,
 		dropdownMode: "select",
-		minDate: _mindate && moment(_mindate.start_date).toDate() || new Date(),
+		minDate: minDate,
+		maxDate: maxDate,
 		onChange: dayClicked,
 		filterDate: isTourDate
 	}

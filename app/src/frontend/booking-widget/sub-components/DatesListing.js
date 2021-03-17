@@ -8,26 +8,23 @@ const generateRRule = rruleArgs => {
     return rule.all()
 }
 
+const datePerPage = 5
+
 const generateRRUleArgs = data => {
-    // let _startDate = moment(data.start_date)
-    let startDate = data.start_date && new Date(data.start_date) || new Date()
+    let startDate = data.start_date && new Date(data.start_date) || new Date();
+    let currentDate = new Date();
+
+    let rruleStartDate = currentDate < startDate ? startDate : currentDate;
+
     let ruleArgs = {
         freq: RRule.DAILY,
-        count: 10,
-        dtstart: new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0
-            , 0, 0)),
+        count: datePerPage,
+        dtstart: new Date(Date.UTC(rruleStartDate.getFullYear(), rruleStartDate.getMonth(), rruleStartDate.getDate(), 0, 0, 0)),
     };
-    // if (!!data.end_date) {
-    //     let endDate = new Date(data.end_date)
-    //     ruleArgs.until = new Date(Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 0
-    //         , 0, 0))
-    // }
 
-    // let rule = new RRule(ruleArgs);
-    // return new RRule(ruleArgs).all();
     let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
 
-    if (selectedYears.length > 0 && !selectedYears.includes(startDate.year()))
+    if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year()))
         return []
 
 
@@ -56,7 +53,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     const [selectedDate, setSelectedDate] = useState(null)
     const [{ activePage, datesPerPage, pagesCount }, setPagination] = useState({
         activePage: 0,
-        datesPerPage: 5,
+        datesPerPage: datePerPage,
         pagesCount: 0
     })
     useEffect(() => {
@@ -73,12 +70,10 @@ const RecurringDates = ({ data, onDateClick }) => {
             setPagination(state => ({ ...state, activePage: 1, pagesCount: 1 }))
         }
     }, [rruleArgs])
-    // const dates = generateRecurringDates(data)
-    console.debug(dates)
     const nextStartDate = dates.length > 0 && moment(dates[dates.length - 1]).add(1, 'days').toDate()
 
     const handleDateClick = _date => e => {
-        e.target.disabled = true
+        // e.target.disabled = true
         showRecurringDatesToggle(!showRecurringDates)
         setSelectedDate(_date)
         onDateClick(_date)() // onDateClick returns a function.
@@ -111,7 +106,7 @@ const RecurringDates = ({ data, onDateClick }) => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
             return <>
                 <li>{_date.format("YYYY-MM-DD")}</li>
-                <li>N/A</li>
+                <li></li>
                 <li><button onClick={handleDateClick(_date)}>Book now</button></li>
             </>
         })}
@@ -139,9 +134,7 @@ const DatesListing = ({ dates, onDateClick }) => {
 
                 <div class="fix-trip-detail">
                     <ol class="listing">
-                        {/* <li>
-                          <strong>Pricing</strong> 
-                        </li> */}
+                        
                         <li>
                              <strong>Start</strong>
                         </li>
@@ -152,32 +145,45 @@ const DatesListing = ({ dates, onDateClick }) => {
                              <strong>Action</strong>
                         </li>
         
-                    {
-                    _dates.map((date, index) => {
-                        // console.log(date.end_date)
-                        // console.log(typeof( date.end_date) )
-                        // console.log(moment(date.end_date).format('YYYY-MM-DD'))
-                        return <>
-                            {date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} />
-                                ||
-                                <>
-                                    {/* <li></li> */}
-                                    <li>{date.start_date}</li>
-                                    <li>
-                                        {moment(date.end_date).format('YYYY-MM-DD')}
-                                    </li>
-                                    <li>
+                        {
+                            _dates.map((date, index) => {
+                                return <>
+                                    {! date.is_recurring && 
+                                        <>
+                                            <li>{date.start_date}</li>
+                                            <li>
+                                                {moment(date.end_date).format('YYYY-MM-DD')}
+                                            </li>
+                                            <li>
 
-                                        <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
-                                            Book now
-                                        </button>
-                                    </li>
+                                                <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
+                                                    Book now
+                                                </button>
+                                            </li>
+                                        </>
+                                    }
                                 </>
-                            }
-                        </>
-                    })
+                            })
+                        }
+                    </ol>
+                    {_dates.map((date, index) => {
+                        return <>
+                            <ol class="listing">
+                                <li>
+                                    <strong>Start</strong>
+                                </li>
+                                <li>
+                                    <strong>End</strong>
+                                </li>
+                                <li>
+                                    <strong>Action</strong>
+                                </li>
+                                { date.is_recurring && <RecurringDates data={date} onDateClick={handleClick} key={index} /> }
+                            </ol>
+                            </>
+                        })
                     }
-                 </ol>
+                               
                 </div>
 
             
