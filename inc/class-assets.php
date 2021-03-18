@@ -520,7 +520,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'easy-responsive-tabs'      => array(
-					'src'   => self::$assets_path . 'assets/css/lib/easy-responsive-tab/easy-responsive-tabs' . $suffix . '.css',
+					'src'   => self::$assets_path . 'assets/css/lib/easy-responsive-tabs/easy-responsive-tabs' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7
 Requires PHP: 5.5
-Stable tag: 4.5.4
+Stable tag: 4.5.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -243,6 +243,13 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.5.5 =
+Release Date: 18th March, 2021
+
+* Fixed 404 page not found after booking the trip.
+* Fixed Review percent not being displaying in archive page.
+* Enquiry title removed in the enquiry widget.
 
 = 4.5.4 =
 Release Date: 16th March, 2021

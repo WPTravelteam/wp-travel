@@ -494,4 +494,4 @@ function wptravel_enquiry_form_header() {
 		</div>
 	<?php
 }
-add_action( 'wp_travel_enquiries_before_form_field', 'wptravel_enquiry_form_header', 20 );
+// add_action( 'wp_travel_enquiries_before_form_field', 'wptravel_enquiry_form_header', 20 );
