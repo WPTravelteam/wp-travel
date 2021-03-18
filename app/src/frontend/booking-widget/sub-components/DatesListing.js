@@ -20,10 +20,18 @@ const generateRRUleArgs = data => {
         freq: RRule.DAILY,
         count: datePerPage,
         dtstart: new Date(Date.UTC(rruleStartDate.getFullYear(), rruleStartDate.getMonth(), rruleStartDate.getDate(), 0, 0, 0)),
+        // until: new Date(Date.UTC(rruleStartDate.getFullYear(), rruleStartDate.getMonth(), rruleStartDate.getDate(), 0, 0, 0)),
     };
 
+    if ( data.end_date  ) {
+        let endDate = new Date(data.end_date)
+        ruleArgs.until = endDate
+    }
+    rruleStartDate = moment( rruleStartDate ).utc();
     let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-
+    // console.log( 'type ', typeof rruleStartDate )
+    // console.log( 'start', rruleStartDate.year() )
+    
     if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year()))
         return []
 
@@ -132,8 +140,8 @@ const DatesListing = ({ dates, onDateClick }) => {
         {
             _dates.length > 0 ? <>
 
-                <div class="fix-trip-detail">
-                    <ol class="listing">
+                <div className="fix-trip-detail">
+                    <ol className="listing">
                         
                         <li>
                              <strong>Start</strong>
@@ -168,7 +176,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                     </ol>
                     {_dates.map((date, index) => {
                         return <>
-                            <ol class="listing">
+                            <ol className="listing">
                                 <li>
                                     <strong>Start</strong>
                                 </li>
