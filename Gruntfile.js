@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
-			deploy: ['deploy'],
+			deploy: ['build'],
 			post_build: [
 				'build'
 			],
@@ -482,7 +482,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('release', ['push_svn']);
 	grunt.registerTask('post_release', ['clean:post_build']);
 
-	grunt.registerTask('build', ['pre_release', 'clean:deploy', 'copy:build_it', 'zip']);
+	grunt.registerTask('build', ['clean:deploy', 'pre_release', 'copy:build_it', 'zip']);
 };
 
 /**
