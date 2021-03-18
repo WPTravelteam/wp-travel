@@ -758,6 +758,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			} else {
 				if (
 					is_singular( WP_TRAVEL_POST_TYPE ) ||
+					self::is_page( 'archive' ) ||
 					self::is_page( 'cart' ) ||
 					self::is_page( 'checkout' ) ||
 					self::is_page( 'dashboard' ) ) {
