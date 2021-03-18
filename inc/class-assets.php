@@ -514,13 +514,13 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-popup'           => array(
-					'src'   => self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css',
+					'src'   => self::$assets_path . 'assets/css//lib/magnific-popup/magnific-popup' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
 				'easy-responsive-tabs'      => array(
-					'src'   => self::$assets_path . 'assets/css/easy-responsive-tabs' . $suffix . '.css',
+					'src'   => self::$assets_path . 'assets/css/lib/easy-responsive-tab/easy-responsive-tabs' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
