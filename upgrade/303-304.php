@@ -10,7 +10,7 @@ $migrate_304 = get_option( 'wp_travel_migrate_304' );
 if ( $migrate_304 && 'yes' === $migrate_304 ) {
 	return;
 }
-
+global $wpdb;
 $custom_post_type = WP_TRAVEL_POST_TYPE;
 $query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
 $post_ids         = $wpdb->get_results( $query1 );
