@@ -250,7 +250,7 @@ Release Date: 19th March, 2021
 Fixes:
 * Fixed error when updating from fairly older version to latest.
 * Dashicons in frontend replaced with Font Awesome.
-* Fixed WP Travel customer is not being created even create customer enabled. 
+* Fixed issue related to not creating customer even when create customer option is enabled.
 
 = 4.5.5 =
 Release Date: 18th March, 2021
