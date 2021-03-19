@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.5.5\n"
+"Project-Id-Version: WP Travel 4.5.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 10:51:30+00:00\n"
+"POT-Creation-Date: 2021-03-19 11:39:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1164,7 +1164,7 @@ msgstr ""
 #: inc/booking-functions.php:501 inc/booking-functions.php:505
 #: inc/booking-functions.php:529 inc/booking-functions.php:533
 #: inc/class-assets.php:263 inc/class-assets.php:306
-#: inc/class-wp-travel-email.php:154 inc/currencies.php:342
+#: inc/class-wp-travel-email.php:156 inc/currencies.php:342
 #: inc/helpers/helpers-stat.php:248 inc/helpers/helpers-stat.php:439
 #: inc/helpers/helpers-stat.php:546 inc/helpers.php:739 inc/helpers.php:784
 #: inc/helpers.php:812 inc/helpers.php:2188 inc/helpers.php:2989
@@ -3202,7 +3202,7 @@ msgstr ""
 msgid "Activities"
 msgstr ""
 
-#: inc/class-wp-travel-email.php:75 inc/class-wp-travel-email.php:95
+#: inc/class-wp-travel-email.php:77 inc/class-wp-travel-email.php:97
 msgid ""
 "Your trip has been booked but the email could not be sent. Possible reason: "
 "your host may have disabled the mail() function."
@@ -9271,7 +9271,7 @@ msgstr ""
 msgid "email or username"
 msgstr ""
 
-#: templates/account/form-lostpassword.php:44
+#: templates/account/form-lostpassword.php:45
 msgid "Reset password"
 msgstr ""
 

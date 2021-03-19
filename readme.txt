@@ -248,8 +248,8 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 19th March, 2021
 
 Fixes:
-* Fixed error if update from outdated version to latest.
-* Dashicons icon in frontend replaced with Fontawesome.
+* Fixed error when updating from fairly older version to latest.
+* Dashicons in frontend replaced with Font Awesome.
 * Fixed WP Travel customer is not being created even create customer enabled. 
 
 = 4.5.5 =
