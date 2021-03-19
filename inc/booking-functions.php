@@ -151,8 +151,10 @@ function wptravel_book_now() {
 	}
 
 	$settings       = wptravel_get_settings();
-	$first_key      = '';
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
+	reset( $customer_email );
+	$first_key = key( $customer_email );
+	$customer_email = isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
 	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
 		$args = array(
 			'trip_id'        => $trip_id,

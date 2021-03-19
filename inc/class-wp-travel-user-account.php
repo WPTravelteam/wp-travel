@@ -296,7 +296,7 @@ class Wp_Travel_User_Account {
 
 			if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
 
-				return false;
+				// return false;
 
 			}
 		}

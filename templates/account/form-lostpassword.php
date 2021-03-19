@@ -41,6 +41,7 @@ wptravel_print_notices();
 
 				<p class="wp-travel-form-row form-row">
 					<input type="hidden" name="wp_travel_reset_password" value="true" />
+					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 					<button type="submit" class="wp-travel-Button button" value="<?php esc_attr_e( 'Reset password', 'wp-travel' ); ?>"><?php esc_html_e( 'Reset password', 'wp-travel' ); ?></button>
 				</p>
 

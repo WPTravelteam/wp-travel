@@ -47,9 +47,11 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
 
 		$customer_email = $args['customer_email'];
-		$first_key      = key( $customer_email );
 
-		$customer_email = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
+		if ( is_array( $customer_email ) ) {
+			$first_key      = key( $customer_email );
+			$customer_email = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
+		}
 		$reply_to_email = isset( $this->settings['wp_travel_from_email'] ) ? $this->settings['wp_travel_from_email'] : $this->admin_email;
 
 		$email      = new WP_Travel_Emails();
