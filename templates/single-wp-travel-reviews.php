@@ -84,11 +84,11 @@ if ( ! comments_open() ) {
 
 				// if ( get_option( 'wp-travel_enable_review_rating' ) === 'yes' ) {
 					$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="1"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="2"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="3"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="4"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="5"></a>
+								<a href="#" class="rate_label far fa-star" data-id="1"></a>
+								<a href="#" class="rate_label far fa-star" data-id="2"></a>
+								<a href="#" class="rate_label far fa-star" data-id="3"></a>
+								<a href="#" class="rate_label far fa-star" data-id="4"></a>
+								<a href="#" class="rate_label far fa-star" data-id="5"></a>
 							</div>
 							<input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
 				// }

@@ -392,12 +392,15 @@
 		}
 
 		&:after {
-			content: "\f140";
-			font-family: dashicons;
+			// content: "\f140";
+			// font-family: dashicons;
 			float: right;
 			-moz-transition: all 0.4s ease-in-out;
 			-webkit-transition: all 0.4s ease-in-out;
 			transition: all 0.4s ease-in-out;
+			content: "\f0d7";
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
 		}
 
 		.resp-arrow {
@@ -761,18 +764,18 @@
 
 .wp-travel-average-review {
 	// margin-bottom:20px;
-	font-family: dashicons;
-	font-size: 18px;
+	font-family: 'Font Awesome 5 Free';
+	font-size: 1em;
 	height: 1em;
 	line-height: 1;
 	overflow: hidden;
 	position: relative;
-	width: 5em;
+	width: 5.5em;
 	display: inline-block;
 
 	&:before {
 		color: #f9a032;
-		content: "\f154\f154\f154\f154\f154";
+		content: "\f005\f005\f005\f005\f005";
 		float: left;
 		left: 0;
 		position: absolute;
@@ -787,9 +790,9 @@
 		position: absolute;
 		top: 0;
 		color: #f9a032;
-
+		font-weight: 900;
 		&::before {
-			content: "\f155\f155\f155\f155\f155";
+			content: "\f005\f005\f005\f005\f005";
 			left: 0;
 			position: absolute;
 			top: 0;
@@ -1555,8 +1558,10 @@
 			}
 
 			&:before {
-				content: "\f508";
-				font-family: dashicons;
+				// content: "\f508";
+				// font-family: dashicons;
+				content: "\f073";
+				font-family: 'Font Awesome 5 Free';
 			}
 		}
 	}
@@ -2156,8 +2161,11 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 			color: #444;
 
 			& span.collapse-icon:after {
-				font-family: 'dashicons';
+				// font-family: 'dashicons';
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 900;
 				content: "\f142";
+				content: "\f0dd";
 				font-size: 18px;
 			}
 		}
@@ -2167,6 +2175,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 
 			& span.collapse-icon:after {
 				content: "\f140";
+				content: "\f0de";
 			}
 
 			&:hover {

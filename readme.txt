@@ -244,9 +244,17 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.6 =
+Release Date: 19th March, 2021
+
+Fixes:
+* Fixed error if update from outdated version to latest.
+* Dashicons replaced with fontawesom.
+
 = 4.5.5 =
 Release Date: 18th March, 2021
 
+Fixes:
 * Fixed 404 page not found after booking the trip.
 * Fixed Review percent not being displaying in archive page.
 * Enquiry title removed in the enquiry widget.

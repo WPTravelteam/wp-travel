@@ -185,14 +185,14 @@ jQuery(function ($) {
     // Rating script starts.
     $('.rate_label').hover(function () {
         var rateLabel = $(this).attr('data-id');
-        $('.rate_label').removeClass('dashicons-star-filled');
+        $('.rate_label').removeClass('fas');
 
         rate(rateLabel);
     },
         function () {
             var ratedLabel = $('#wp_travel_rate_val').val();
 
-            $('.rate_label').removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
+            $('.rate_label').removeClass('fas').addClass('far');
             if (ratedLabel > 0) {
                 rate(ratedLabel);
             }
@@ -200,11 +200,11 @@ jQuery(function ($) {
 
     function rate(rateLabel) {
         for (var i = 0; i < rateLabel; i++) {
-            $('.rate_label:eq( ' + i + ' )').addClass('dashicons-star-filled').removeClass('dashicons-star-empty ');
+            $('.rate_label:eq( ' + i + ' )').addClass('fas').removeClass('far');
         }
 
         for (j = 4; j >= i; j--) {
-            $('.rate_label:eq( ' + j + ' )').addClass('dashicons-star-empty');
+            $('.rate_label:eq( ' + j + ' )').addClass('far');
         }
     }
 

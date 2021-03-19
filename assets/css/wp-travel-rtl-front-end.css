@@ -250,7 +250,7 @@
 }
 .wp-travel-tab-wrapper h2.resp-accordion:after {
   content: "";
-  font-family: dashicons;
+  font-family: 'Font Awesome 5 Free';
   float: left;
   -moz-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
@@ -547,7 +547,7 @@
 }
 
 .wp-travel-average-review {
-  font-family: dashicons;
+  font-family: 'Font Awesome 5 Free';
   font-size: 18px;
   height: 1em;
   line-height: 1;
@@ -1214,7 +1214,7 @@
 }
 .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon:before {
   content: "";
-  font-family: dashicons;
+  font-family: 'Font Awesome 5 Free';
 }
 
 .wp-trave-price-range .ui-widget.ui-widget-content {
@@ -1748,7 +1748,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 }
 #faq .panel-heading [data-toggle=collapse] span.collapse-icon:after,
 .global-faq-shortcode .panel-heading [data-toggle=collapse] span.collapse-icon:after {
-  font-family: "dashicons";
+  font-family: 'Font Awesome 5 Free';
   content: "";
   font-size: 18px;
 }

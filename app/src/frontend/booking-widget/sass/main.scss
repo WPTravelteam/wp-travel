@@ -239,17 +239,22 @@ $defaultColor: #3399ff;
                         top: 16px;
                         color: #fff;
                         &::before{
-                            font: normal 20px/1 dashicons;
+                            // font: normal 20px/1 'dashicons';
+                            font: normal 20px/1 'Font Awesome 5 Free';
+                            font-weight: 900;
+                            display: block;
                         }
                     }
                     .react-datepicker__navigation--next{
                         &::before{
-                            content: "\f345";
+                            // content: "\f345";
+                            content: "\f054";
                         }
                     }
                     .react-datepicker__navigation--previous{
                         &::before{
-                            content: "\f341";
+                            // content: "\f341";
+                            content: "\f053";
                         }
                     }
                     .react-datepicker__month-container{

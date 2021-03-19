@@ -63,7 +63,7 @@ const InventoryNotice = ({ inventory }) => {
 	} = inventory
 
 	if (wp_travel_inventory_sold_out_action == 'show_sold_out_msg_only') {
-		return <p className="wp-travel-sold-out">s{wp_travel_inventory_sold_out_message}</p>
+		return <p className="wp-travel-sold-out">{wp_travel_inventory_sold_out_message}</p>
 	}
 	if (wp_travel_inventory_sold_out_action == 'allow_trip_enquiry') {
 		return <p className="wp-travel-sold-out">
