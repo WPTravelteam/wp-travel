@@ -465,7 +465,7 @@ class WpTravel_Helpers_Pricings {
 			$pricings = array_filter(
 				$pricings_data['pricings'],
 				function( $p ) use ( $pricing_id ) {
-					return $p['id'] === $pricing_id;
+					return (int) $p['id'] === (int) $pricing_id;
 				}
 			);
 			if ( is_array( $pricings ) && count( $pricings ) > 0 ) {
