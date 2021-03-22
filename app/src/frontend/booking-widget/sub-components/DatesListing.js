@@ -124,11 +124,11 @@ const RecurringDates = ({ data, onDateClick }) => {
 const DatesListing = ({ dates, onDateClick }) => {
     const handleClick = date => () => {
         if (typeof onDateClick === 'function') {
+            // console.log( 'Book now click step 1' );
             onDateClick(moment(date).toDate())
 
-            // Temp fixes
+            // Temp fixes[scroll to pricing if book now is clicked]
             var top = jQuery('#wp-travel-booking-recurring-dates').offset().top
-            console.log( 'top',top );
             jQuery('html, body').animate({
                 scrollTop: top
             }, 1200);
@@ -137,7 +137,6 @@ const DatesListing = ({ dates, onDateClick }) => {
 
     const _dates = Object.values(dates)
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' != d.start_date && new Date( d.start_date )  > new Date() } )
-    // console.log(nonRecurringDates);
     return <>
         {
             _dates.length > 0 ? <>

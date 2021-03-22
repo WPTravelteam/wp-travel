@@ -326,7 +326,7 @@ const BookingCalender = () => {
 	}
 
 	const dayClicked = date => {
-
+		// console.log('Book now click step 2')
 		if (!isFixedDeparture) {
 			updateState({
 				pricingUnavailable: false,
@@ -359,7 +359,9 @@ const BookingCalender = () => {
 							return false
 						}
 					}
-					let dateRules = generateRRule(_date, startDate)
+					let recurringStartDate = moment(_date.start_date).toDate()
+					startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 12, 0, 0))).utc();
+					let dateRules = generateRRule(_date, startDate);
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
 				if (_date.start_date) {
