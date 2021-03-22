@@ -473,7 +473,7 @@ class WpTravel_Helpers_Pricings {
 				$categories = array_filter(
 					$pricing['categories'],
 					function( $c ) use ( $category_id ) {
-						return $c['id'] === $category_id;
+						return (int) $c['id'] === (int) $category_id;
 					}
 				);
 				$category   = array_shift( $categories );
