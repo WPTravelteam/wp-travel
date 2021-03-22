@@ -126,6 +126,13 @@ const DatesListing = ({ dates, onDateClick }) => {
     const handleClick = date => () => {
         if (typeof onDateClick === 'function') {
             onDateClick(moment(date).toDate())
+
+            // Temp fixes
+            var top = jQuery('#wp-travel-booking-recurring-dates').offset().top
+            console.log( 'top',top );
+            jQuery('html, body').animate({
+                scrollTop: top
+            }, 1200);
         }
     }
 
@@ -179,6 +186,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                             </>
                         })
                     }
+                    <div id="wp-travel-booking-recurring-dates"></div> {/* <!-- required for scroll pricing --> */}
                 </div>
             </> : <> Please add date.</>
         }
