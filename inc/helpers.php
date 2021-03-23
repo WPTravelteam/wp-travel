@@ -2671,6 +2671,7 @@ function wptravel_get_strings() {
 			'start_date'                    => __( 'Start', 'wp-travel' ),
 			'end_date'                      => __( 'End', 'wp-travel' ),
 			'action'                        => __( 'Action', 'wp-travel' ),
+			'recurring'                     => __( 'Recurring:', 'wp-travel' ),
 			'group_size'                    => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'                    => __( 'Seats left', 'wp-travel' ),
 			'pax'                           => __( 'Pax', 'wp-travel' ),
