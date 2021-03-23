@@ -174,7 +174,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                     {_dates.map((date, index) => {
                         return <>
                             { date.is_recurring && 
-                                <PanelBody title={__( 'Booking Email Templates', 'wp-travel' )} initialOpen={true} >
+                                <PanelBody title={__( `Recurring: ${date.title}`, 'wp-travel' )} initialOpen={true} >
                                     <PanelRow>
                                     <ol className="listing">
                                         <li><strong>Start</strong></li>
