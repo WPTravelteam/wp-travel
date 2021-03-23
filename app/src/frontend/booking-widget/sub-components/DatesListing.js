@@ -122,10 +122,10 @@ const RecurringDates = ({ data, onDateClick }) => {
 }
 
 const DatesListing = ({ dates, onDateClick }) => {
-    const handleClick = date => () => {
+    const handleClick = ( date, date_id ) => () => {
         if (typeof onDateClick === 'function') {
             // console.log( 'Book now click step 1' );
-            onDateClick(moment(date).toDate())
+            onDateClick(moment(date).toDate(), date_id)
 
             // Temp fixes[scroll to pricing if book now is clicked]
             var top = jQuery('#wp-travel-booking-recurring-dates').offset().top
@@ -157,7 +157,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                                                     {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' }
                                                 </li>
                                                 <li>
-                                                    <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date)}>
+                                                    <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
                                                         Book now
                                                     </button>
                                                 </li>

@@ -325,7 +325,7 @@ const BookingCalender = () => {
 		// }
 	}
 
-	const dayClicked = date => {
+	const dayClicked = ( date, date_id ) => {
 		// console.log('Book now click step 2')
 		if (!isFixedDeparture) {
 			updateState({
@@ -353,14 +353,14 @@ const BookingCalender = () => {
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
-				if (_date.is_recurring) {
+				if (_date.is_recurring && 'undefined' == typeof date_id ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
 					if (_date.end_date) {
 						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
 							return false
 						}
 					}
-					let recurringStartDate = moment(_date.start_date).toDate()
-					startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 12, 0, 0))).utc();
+					// let recurringStartDate = moment(_date.start_date).toDate()
+					// startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 12, 0, 0))).utc();
 					let dateRules = generateRRule(_date, startDate);
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
@@ -443,7 +443,6 @@ const BookingCalender = () => {
 			return total
 		}
 		let _tripExtras = selectedPricing && _.keyBy(pricings[selectedPricing].trip_extras, tx => tx.id)
-		// console.debug(_tripExtras)
 		txTotal = _.size(tripExtras) > 0 && Object.entries(tripExtras).map(([i, count]) => {
 			let tx = _tripExtras[i]
 			if (!tx || typeof tx.tour_extras_metas == 'undefined') {
