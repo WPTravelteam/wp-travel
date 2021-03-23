@@ -111,7 +111,7 @@ const RecurringDates = ({ data, onDateClick }) => {
             return <>
                 <li>{_date.format("YYYY-MM-DD")}</li>
                 <li></li>
-                <li><button onClick={handleDateClick(_date)}>Book now</button></li>
+                <li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li>
             </>
         })}
         <div className="wp-travel-recurring-dates-nav-btns">
@@ -145,9 +145,9 @@ const DatesListing = ({ dates, onDateClick }) => {
                 <div className="fix-trip-detail">
                     {nonRecurringDates.length > 0 &&
                         <ol className="listing">
-                            <li><strong>Start</strong></li>
-                            <li><strong>End</strong></li>
-                            <li><strong>Action</strong></li>
+                            <li><strong>{_wp_travel.strings.bookings.start_date}</strong></li>
+                            <li><strong>{_wp_travel.strings.bookings.end_date}</strong></li>
+                            <li><strong>{_wp_travel.strings.bookings.action}</strong></li>
                             {
                                 nonRecurringDates.map((date, index) => {
                                     return <>
@@ -159,7 +159,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                                                 </li>
                                                 <li>
                                                     <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
-                                                        Book now
+                                                    {_wp_travel.strings.bookings.book_now}
                                                     </button>
                                                 </li>
                                             </>
@@ -177,9 +177,9 @@ const DatesListing = ({ dates, onDateClick }) => {
                                 <PanelBody title={__( `Recurring: ${date.title}`, 'wp-travel' )} initialOpen={true} >
                                     <PanelRow>
                                     <ol className="listing">
-                                        <li><strong>Start</strong></li>
-                                        <li><strong>End</strong></li>
-                                        <li><strong>Action</strong></li>
+                                        <li><strong>{_wp_travel.strings.bookings.start_date}</strong></li>
+                                        <li><strong>{_wp_travel.strings.bookings.end_date}</strong></li>
+                                        <li><strong>{_wp_travel.strings.bookings.action}</strong></li>
                                         <RecurringDates data={date} onDateClick={handleClick} key={index} />
                                     </ol>
                                     </PanelRow>

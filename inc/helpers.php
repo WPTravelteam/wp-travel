@@ -2670,6 +2670,7 @@ function wptravel_get_strings() {
 			'pricing_name'                  => __( 'Pricing Name', 'wp-travel' ),
 			'start_date'                    => __( 'Start', 'wp-travel' ),
 			'end_date'                      => __( 'End', 'wp-travel' ),
+			'action'                        => __( 'Action', 'wp-travel' ),
 			'group_size'                    => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'                    => __( 'Seats left', 'wp-travel' ),
 			'pax'                           => __( 'Pax', 'wp-travel' ),
