@@ -463,7 +463,7 @@ if ( ! function_exists( 'wptravel_migrate_data_to_400' ) ) {
 }
 
 
-if ( ! function_exists( 'wp_travel_update_to_400' ) ) {
+if ( ! function_exists( 'wptravel_update_to_400' ) ) {
 	function wptravel_update_to_400( $network_enabled ) {
 		global $wpdb;
 		$migrate_400 = get_option( 'wp_travel_migrate_400' );
