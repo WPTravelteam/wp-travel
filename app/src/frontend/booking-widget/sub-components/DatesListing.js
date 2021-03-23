@@ -131,7 +131,7 @@ const DatesListing = ({ dates, onDateClick }) => {
             // Temp fixes[scroll to pricing if book now is clicked]
             var top = jQuery('#wp-travel-booking-recurring-dates').offset().top
             jQuery('html, body').animate({
-                scrollTop: top
+                scrollTop: ( top - 20 )
             }, 1200);
         }
     }

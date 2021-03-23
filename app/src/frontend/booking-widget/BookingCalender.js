@@ -353,7 +353,9 @@ const BookingCalender = () => {
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
-				if (_date.is_recurring && 'undefined' == typeof date_id ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
+				if (
+					_date.is_recurring 
+					&& ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
 					if (_date.end_date) {
 						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
 							return false
