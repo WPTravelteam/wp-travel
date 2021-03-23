@@ -1,6 +1,7 @@
 import moment from 'moment'
 import RRule from "rrule"
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
+import { PanelBody, PanelRow } from '@wordpress/components';
 import { __ } from '@wordpress/i18n'
 
 const generateRRule = rruleArgs => {
@@ -168,18 +169,21 @@ const DatesListing = ({ dates, onDateClick }) => {
                             }
                         </ol>
                     }
-
+                    
+                    {/* Recurring */}
                     {_dates.map((date, index) => {
                         return <>
                             { date.is_recurring && 
-                                <>
+                                <PanelBody title={__( 'Booking Email Templates', 'wp-travel' )} initialOpen={true} >
+                                    <PanelRow>
                                     <ol className="listing">
                                         <li><strong>Start</strong></li>
                                         <li><strong>End</strong></li>
                                         <li><strong>Action</strong></li>
                                         <RecurringDates data={date} onDateClick={handleClick} key={index} />
                                     </ol>
-                                </>
+                                    </PanelRow>
+                                </PanelBody>
                             }
                             </>
                         })
