@@ -1,10 +1,17 @@
 import moment from 'moment'
-import RRule from "rrule"
+import { RRule, RRuleSet, rrulestr } from 'rrule'
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
-import { PanelBody, PanelRow } from '@wordpress/components';
+import { PanelBody, PanelRow, Disabled } from '@wordpress/components';
 import { __ } from '@wordpress/i18n'
 
 const generateRRule = rruleArgs => {
+    const rruleSet = new RRuleSet();
+    rruleSet.rrule(
+        new RRule(rruleArgs)
+    );
+    // rruleSet.exdate( new Date( '2021-05-27' ) );
+    // return rruleSet.all();
+    // console.log(rruleSet);
     let rule = new RRule(rruleArgs);
     return rule.all()
 }
@@ -50,7 +57,8 @@ const generateRRUleArgs = data => {
     return ruleArgs
 }
 
-const RecurringDates = ({ data, onDateClick }) => {
+const RecurringDates = ({ data, onDateClick, isTourDate }) => {
+   
     const [dates, setRecurringDates] = useState([])
     const [activeRecurringDates, setActiveRecurringDates] = useState([])
     const [rruleArgs, setRRuleArgs] = useState(null)
@@ -109,9 +117,19 @@ const RecurringDates = ({ data, onDateClick }) => {
         {activeRecurringDates.map(date => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
             return <>
-                <li>{_date.format("YYYY-MM-DD")}</li>
-                <li></li>
-                <li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li>
+                { isTourDate(new Date( date ) ) ? 
+                    <>
+                        <li>{_date.format("YYYY-MM-DD")}</li>
+                        <li></li>
+                        <li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li>
+                    </>
+                    :
+                    <>
+                        <Disabled><li>{_date.format("YYYY-MM-DD")}</li></Disabled>
+                        <Disabled><li></li></Disabled>
+                        <Disabled><li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li></Disabled>
+                    </>
+                }
             </>
         })}
         <div className="wp-travel-recurring-dates-nav-btns">
@@ -122,7 +140,7 @@ const RecurringDates = ({ data, onDateClick }) => {
     </>
 }
 
-const DatesListing = ({ dates, onDateClick }) => {
+const DatesListing = ({ dates, onDateClick, isTourDate }) => {
     const handleClick = ( date, date_id ) => () => {
         if (typeof onDateClick === 'function') {
             // console.log( 'Book now click step 1' );
@@ -180,7 +198,7 @@ const DatesListing = ({ dates, onDateClick }) => {
                                         <li><strong>{_wp_travel.strings.bookings.start_date}</strong></li>
                                         <li><strong>{_wp_travel.strings.bookings.end_date}</strong></li>
                                         <li><strong>{_wp_travel.strings.bookings.action}</strong></li>
-                                        <RecurringDates data={date} onDateClick={handleClick} key={index} />
+                                        <RecurringDates data={date} onDateClick={handleClick} isTourDate={isTourDate} key={index} />
                                     </ol>
                                     </PanelRow>
                                 </PanelBody>

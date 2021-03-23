@@ -84,9 +84,9 @@ class WP_Travel_Actions_Activation {
 			min_pax int(11) DEFAULT '0' NULL,
 			max_pax int(11) DEFAULT '0' NULL,
 			has_group_price varchar(11) DEFAULT '0' NULL,
-			group_prices longtext DEFAULT '' NULL,
+			group_prices longtext NULL,
 			trip_extras varchar(255) DEFAULT '' NULL,
-			dates longtext DEFAULT '' NULL,
+			dates longtext NULL,
 			sort_order int(11) DEFAULT '1' NULL,
 
 			PRIMARY KEY (id)
@@ -102,7 +102,7 @@ class WP_Travel_Actions_Activation {
 			is_sale int(11) DEFAULT '0' NULL,
 			sale_price varchar(60) DEFAULT '' NULL,
 			has_group_price int(11) DEFAULT '0' NULL,
-			group_prices longtext DEFAULT '' NULL,
+			group_prices longtext NULL,
 			default_pax int(11) DEFAULT '0' NULL,
 			PRIMARY KEY (id)
 			) $charset_collate;";
@@ -114,7 +114,6 @@ class WP_Travel_Actions_Activation {
 			trip_id int(11) DEFAULT NULL NULL,
 			title varchar(255) DEFAULT '' NULL,
 			recurring varchar(5) DEFAULT '' NULL,
-			-- weekly_or_daily varchar(10) DEFAULT 'weekly' NULL,
 			years varchar(255) DEFAULT '' NULL,
 			months varchar(255) DEFAULT '' NULL,
 			weeks varchar(255) DEFAULT '' NULL,
@@ -135,7 +134,6 @@ class WP_Travel_Actions_Activation {
 			trip_id int(11) DEFAULT NULL NULL,
 			title varchar(255) DEFAULT '' NULL,
 			recurring varchar(5) DEFAULT '' NULL,
-			-- weekly_or_daily varchar(10) DEFAULT 'weekly' NULL,
 			years varchar(255) DEFAULT '' NULL,
 			months varchar(255) DEFAULT '' NULL,
 			weeks varchar(255) DEFAULT '' NULL,

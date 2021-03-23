@@ -16,7 +16,7 @@ if ( 'yes' === get_option( 'wp_travel_price_migrate_404', 'no' ) ) {
 	return;
 }
 
-if ( ! function_exists( 'wp_travel_migrate_data_to_404' ) ) {
+if ( ! function_exists( 'wptravel_migrate_data_to_404' ) ) {
 
 	/**
 	 * Migrate old trip prices to new database in version 4.0.4

@@ -244,6 +244,14 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.7 =
+Release Date:
+
+Fixes:
+* Fixed trip price reset issue in checkout if update cart item.
+** Fixed Showing time in non recuring date even time is disabled if added multiple date with recurring dates and enabled time only in recurring dates.
+* Fixed custom table not being created.
+
 = 4.5.6 =
 Release Date: 19th March, 2021
 
