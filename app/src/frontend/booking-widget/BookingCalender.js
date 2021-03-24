@@ -47,7 +47,8 @@ const initialState = {
 	inventory: [],
 	isLoading: false,
 	excludedDateTimes: [],
-	pricingUnavailable: false
+	pricingUnavailable: false,
+	tempExcludeDate: [] // Temp fixes. Just to check exclude date
 }
 const __i18n = {
 	..._wp_travel.strings
@@ -97,7 +98,8 @@ const BookingCalender = () => {
 		tripExtras,
 		inventory,
 		isLoading,
-		pricingUnavailable }
+		pricingUnavailable,
+		tempExcludeDate }
 		, setState] = useState(initialState)
 
 	const updateState = data => {
@@ -118,23 +120,28 @@ const BookingCalender = () => {
 	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
 	let excludedDates = []
 	useEffect(() => {
-		if (!selectedDateTime) {
+		// if (!selectedDateTime) {
 			excludedDates = _excludedDatesTimes
 				.filter(ed => {
 					if (ed.trip_time.length > 0) {
 						let _times = ed.trip_time.split(',')
 						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-						updateState({
-							excludedDateTimes: _datetimes
-						})
+						if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
+							updateState({
+								excludedDateTimes: _datetimes
+							})
+						}
 						return false
 					}
 					return true
 				})
 				.map(ed => ed.start_date)
-		}
-	}, [_excludedDatesTimes])
-	
+				updateState({
+					tempExcludeDate:excludedDates
+				});
+		// }
+	}, [selectedDateTime])
+
 	useEffect(() => { // If No Fixed departure set all pricings.
 		if (!isFixedDeparture) {
 			updateState({ nomineePricings: Object.keys(pricings) })
@@ -279,7 +286,7 @@ const BookingCalender = () => {
 
 		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
 
-		if (excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
+		if (tempExcludeDate.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
 		}
 
