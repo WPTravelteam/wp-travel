@@ -670,6 +670,7 @@ const BookingCalender = () => {
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	const tripDateListing = _wp_travel.trip_date_listing
+	console.log( 'selectedDateTime', moment(selectedDateTime).format('YYYY-MM-DD') );
 	return <>
 		{
 			!_wp_travel.itinerary_v2 ?
@@ -694,7 +695,9 @@ const BookingCalender = () => {
 				{<>
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
-							<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate }} />
+							<>
+								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate }} />
+							</>
 						||
 							<>
 								<DatePicker {...params} />
@@ -703,6 +706,10 @@ const BookingCalender = () => {
 					}
 				</>}
 			</div>
+			{isFixedDeparture && 'dates' === tripDateListing && selectedDateTime &&
+				<p>Trip Date: <span>{moment(selectedDateTime).format('YYYY-MM-DD')}</span></p>
+			}
+
 			{
 				selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
 					{
