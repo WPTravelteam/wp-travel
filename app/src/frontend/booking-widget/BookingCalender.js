@@ -117,39 +117,24 @@ const BookingCalender = () => {
 	const isTripInventoryEnabled = allData.tripData.inventory && allData.tripData.inventory.enable_trip_inventory === 'yes'
 	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
 	let excludedDates = []
-	// useEffect(() => {
-	// 	if (!selectedDateTime) {
-	// 		excludedDates = _excludedDatesTimes
-	// 			.filter(ed => {
-	// 				if (ed.trip_time.length > 0) {
-	// 					let _times = ed.trip_time.split(',')
-	// 					let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-	// 					updateState({
-	// 						excludedDateTimes: _datetimes
-	// 					})
-	// 					return false
-	// 				}
-	// 				return true
-	// 			})
-	// 			.map(ed => ed.start_date)
-	// 	}
-	// }, [_excludedDatesTimes])
-	
-	// Temp Fixes: Assign excludedDates directly due to issue in case of list view. exclude date array is set to empty on clicking any book now button.
-	excludedDates = _excludedDatesTimes
-		.filter(ed => {
-			if (ed.trip_time.length > 0) {
-				let _times = ed.trip_time.split(',')
-				let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-				updateState({
-					excludedDateTimes: _datetimes
+	useEffect(() => {
+		if (!selectedDateTime) {
+			excludedDates = _excludedDatesTimes
+				.filter(ed => {
+					if (ed.trip_time.length > 0) {
+						let _times = ed.trip_time.split(',')
+						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
+						updateState({
+							excludedDateTimes: _datetimes
+						})
+						return false
+					}
+					return true
 				})
-				return false
-			}
-			return true
-		})
-		.map(ed => ed.start_date)
-
+				.map(ed => ed.start_date)
+		}
+	}, [_excludedDatesTimes])
+	
 	useEffect(() => { // If No Fixed departure set all pricings.
 		if (!isFixedDeparture) {
 			updateState({ nomineePricings: Object.keys(pricings) })
@@ -670,7 +655,6 @@ const BookingCalender = () => {
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	const tripDateListing = _wp_travel.trip_date_listing
-	console.log( 'selectedDateTime', moment(selectedDateTime).format('YYYY-MM-DD') );
 	return <>
 		{
 			!_wp_travel.itinerary_v2 ?
