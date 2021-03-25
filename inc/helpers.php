@@ -1148,7 +1148,7 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 		$trip_tabs       = $wp_travel_tabs;
 		$saved_tabs_keys = array_keys( $trip_tabs ); // Lagacy code.
 
-		if ( ! is_string( $saved_tabs_keys ) ) {
+		if ( ! is_string( $saved_tabs_keys ) && isset( $trip_tabs[0]['tab_key'] ) ) {
 			$saved_tabs_keys = wp_list_pluck( $trip_tabs, 'tab_key' );
 		}
 
