@@ -5,7 +5,7 @@
  * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_trip_facts' ) ) {
 	function wptravel_trip_callback_trip_facts() {
 		global $post;
 

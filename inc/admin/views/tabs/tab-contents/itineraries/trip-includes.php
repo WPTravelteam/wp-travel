@@ -6,7 +6,7 @@
  * @package WP_Travel
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_trip_includes' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_trip_includes' ) ) {
 	function wptravel_trip_callback_trip_includes() {
 		global $post;
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );

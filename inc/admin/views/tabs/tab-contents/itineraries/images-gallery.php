@@ -5,7 +5,7 @@
  * @package WP Travel
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_images_gallery' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_images_gallery' ) ) {
 
 	function wptravel_trip_callback_images_gallery() {
 		global $post;

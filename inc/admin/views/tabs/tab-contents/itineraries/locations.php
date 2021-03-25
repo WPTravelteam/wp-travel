@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_locations' ) ) {
 	function wptravel_trip_callback_locations() {
 		global $post;
 

@@ -5,7 +5,7 @@
  * @package WP Travel
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_inventory' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_inventory' ) ) {
 
 	function wptravel_trip_callback_inventory( $tab, $args ) {
 		$upsell_args = array();

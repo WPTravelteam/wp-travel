@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists( 'wp_travel_settings_callback_field_editor' ) ) {
+if ( ! function_exists( 'wptravel_settings_callback_field_editor' ) ) {
 	/**
 	 * Callback for Field Editor tab.
 	 *

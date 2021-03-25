@@ -48,7 +48,7 @@ function wptravel_settings_callback_facts( $tab ) {
 	<?php
 }
 
-if ( ! function_exists( 'wp_travel_trip_facts_setting_sample' ) ) {
+if ( ! function_exists( 'wptravel_trip_facts_setting_sample' ) ) {
 	/**
 	 * Wp_travel_trip_facts_setting_sample Facts layout.
 	 *
