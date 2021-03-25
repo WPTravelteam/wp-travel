@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7
 Requires PHP: 5.5
-Stable tag: 4.5.6
+Stable tag: 4.5.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -249,7 +249,9 @@ Release Date:
 
 Fixes:
 * Fixed trip price reset issue in checkout if update cart item.
-** Fixed Showing time in non recuring date even time is disabled if added multiple date with recurring dates and enabled time only in recurring dates.
+* Fixed showing time in non recuring date even time is disabled. If you added 2 dates with one recurring date and added time in recurring date then the time is also displaying for non recurring date.
+* Fixed Multiple exclude date not working issue.
+* Fixed disabled date is also clickable if we try to select date again in calendar.
 * Fixed custom table not being created.
 
 = 4.5.6 =
