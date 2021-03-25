@@ -313,7 +313,7 @@ function wptravel_custom_filters_upsell() {
  */
 function wptravel_modify_admin_footer_admin_settings_page() {
 
-	printf( wp_kses_post( __( 'Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge thanks in advance!', 'wp-travel' ) ), '<strong>WP Travel ?</strong>', '<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel add-ons</a>' ); // @phpcs:ignore
+	printf( wp_kses_post( __( 'Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge thanks in advance!', 'wp-travel' ) ), '<strong>WP Travel ?</strong>', '<a target="_blank" href="https://wordpress.org/support/plugin/wp-travel/reviews/">★★★★★</a>', '<a target="_blank" href="https://wptravel.io/downloads/">WP Travel modules</a>' ); // @phpcs:ignore
 }
 /**
  * Modify Admin Footer Message.
