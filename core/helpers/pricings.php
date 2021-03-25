@@ -294,7 +294,7 @@ class WpTravel_Helpers_Pricings {
 
 		$trip_id = isset( $args['trip_id'] ) ? $args['trip_id'] : get_the_ID();
 		if ( ! $trip_id ) {
-			return false;
+			return 0;
 		}
 		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0.
 			$price = self::get_price_legacy( $args );
@@ -308,7 +308,7 @@ class WpTravel_Helpers_Pricings {
 			endif;
 		}
 
-		return $price;
+		return $price ? $price : 0;
 	}
 
 	/**
