@@ -795,6 +795,7 @@ function wptravel_admin_tour_extra_multiselect( $post_id, $context = false, $fet
 		$trip_extras = get_post_meta( $post_id, 'wp_travel_tour_extras', true );
 	}
 	$restricted_trips = ( $trip_extras ) ? $trip_extras : array();
+	$restricted_trips = array_map( 'intval', $restricted_trips ); // Typecase all value inside array into integer.
 	$itineraries      = wptravel_get_tour_extras_array();
 	ob_start();
 	if ( $table_row ) :
