@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Trip Include /Exclude Tab meta Contents.
  *
@@ -7,6 +6,9 @@
  */
 
 if ( ! function_exists( 'wptravel_trip_callback_trip_includes' ) ) {
+	/**
+	 * Callback.
+	 */
 	function wptravel_trip_callback_trip_includes() {
 		global $post;
 		$trip_include = get_post_meta( $post->ID, 'wp_travel_trip_include', true );
@@ -26,4 +28,3 @@ if ( ! function_exists( 'wptravel_trip_callback_trip_includes' ) ) {
 		<?php
 	}
 }
-	

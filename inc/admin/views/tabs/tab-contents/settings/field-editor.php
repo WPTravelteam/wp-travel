@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template file for WP Travel Field Editor tab.
+ *
+ * @package WP Travel
+ */
 
 if ( ! function_exists( 'wptravel_settings_callback_field_editor' ) ) {
 	/**
@@ -8,6 +13,9 @@ if ( ! function_exists( 'wptravel_settings_callback_field_editor' ) ) {
 	 * @param  Array $args Settings arg list.
 	 */
 	function wptravel_settings_callback_field_editor( $tab, $args ) {
+		if ( ! $tab ) {
+			return;
+		}
 		$upsell_args = array(
 			'title'       => __( 'Want to customize your Traveler fields, billing fields and more?', 'wp-travel' ),
 			'content'     => __( 'By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel' ),
@@ -16,6 +24,6 @@ if ( ! function_exists( 'wptravel_settings_callback_field_editor' ) ) {
 			'type'        => array( 'wp-travel-field-editor' ),
 		);
 		wptravel_upsell_message( $upsell_args );
-		do_action( 'wp_travel_settings_tab_field_editor_fields', $args );
+		do_action( 'wp_travel_settings_tab_field_editor_fields', $args ); // @phpcs:ignore
 	}
 }

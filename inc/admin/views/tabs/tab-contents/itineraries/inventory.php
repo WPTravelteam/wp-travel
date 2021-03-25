@@ -7,7 +7,16 @@
 
 if ( ! function_exists( 'wptravel_trip_callback_inventory' ) ) {
 
+	/**
+	 * Inventory tab callback.
+	 *
+	 * @param array $tab  Current tab.
+	 * @param array $args Tab args.
+	 */
 	function wptravel_trip_callback_inventory( $tab, $args ) {
+		if ( $tab ) {
+			return;
+		}
 		$upsell_args = array();
 		if ( ! class_exists( 'WP_Travel_Inventory_Management_Core' ) ) :
 			$upsell_args = array(
@@ -21,6 +30,6 @@ if ( ! function_exists( 'wptravel_trip_callback_inventory' ) ) {
 			wptravel_upsell_message( $upsell_args );
 		endif;
 
-		do_action( 'wp_travel_trip_inventory_tab_content', $args );
+		do_action( 'wp_travel_trip_inventory_tab_content', $args ); // @phpcs:ignore
 	}
 }

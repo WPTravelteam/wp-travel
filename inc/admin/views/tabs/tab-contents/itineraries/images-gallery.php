@@ -7,12 +7,16 @@
 
 if ( ! function_exists( 'wptravel_trip_callback_images_gallery' ) ) {
 
+	/**
+	 * Callback image gallery tab.
+	 */
 	function wptravel_trip_callback_images_gallery() {
 		global $post;
 		?>
 		<div class="wp-travel-post-tab-content-section">
 			<?php
-			WPTravel()->uploader->load(); ?>
+			WPTravel()->uploader->load();
+			?>
 			<script type="text/javascript">
 				var post_id = <?php echo esc_html( $post->ID ); ?>, shortform = 3;
 			</script>
