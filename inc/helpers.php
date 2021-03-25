@@ -285,7 +285,7 @@ function wptravel_get_dropdown_list( $args = array() ) {
 
 /**
  * Sanitize data. It may be either string or array
- * 
+ *
  * @param mixed $array input data
  * @param bool	$wp_kses_post if data need wp keses or not.
  */
@@ -1113,6 +1113,18 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 
 	$wp_travel_tabs = get_post_meta( $post_id, 'wp_travel_tabs', true );
 
+	if ( is_string( $wp_travel_tabs ) ) {
+		$_wp_travel_tabs = json_decode( $wp_travel_tabs );
+		if ( is_array( $_wp_travel_tabs ) && ! empty( $_wp_travel_tabs ) ) {
+			$wp_travel_tabs = array();
+			$index = 0;
+			foreach( $_wp_travel_tabs as $tab ) {
+				$wp_travel_tabs[ $index ] = (array) $tab;
+				$index++;
+			}
+		}
+	}
+
 	if ( $custom_tab_enabled ) { // Need to merge custom tabs. Note: Only enabled if WP Travel Utilities plugin is activated.
 		$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
 		$custom_tabs = ( $custom_tabs ) ? $custom_tabs : array();
@@ -1134,7 +1146,11 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 
 		// Saved Tabs.
 		$trip_tabs       = $wp_travel_tabs;
-		$saved_tabs_keys = array_keys( $trip_tabs );
+		$saved_tabs_keys = array_keys( $trip_tabs ); // Lagacy code.
+
+		if ( ! is_string( $saved_tabs_keys ) ) {
+			$saved_tabs_keys = wp_list_pluck( $trip_tabs, 'tab_key' );
+		}
 
 		foreach ( $default_tabs_keys as $tab_key ) {
 			if ( ! in_array( $tab_key, $saved_tabs_keys ) ) {
@@ -1156,6 +1172,7 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 				}
 			}
 		}
+
 		// Remove Tabs from saved tab array which newly added tabs in default tabs via hook.
 		foreach ( $saved_tabs_keys as $tab_key ) {
 			if ( ! in_array( $tab_key, $default_tabs_keys ) ) {
@@ -2078,7 +2095,7 @@ function wptravel_get_search_filter_form( $args ) {
 				}
 				$sanitized_get = WP_Travel::get_sanitize_request();
 				$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
-				
+
 				?>
 
 				<div class="wp-travel-search">
