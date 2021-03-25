@@ -68,7 +68,7 @@ const WPTravelTripOptionsTabsContent = () => {
                                     disabled={use_global_tabs == 'yes' ? true : false}
                                 />
                             </PanelRow>
-                            {use_global_tabs !== 'yes' && 
+                            {use_global_tabs !== 'yes' &&
                                 <PanelRow>
                                     <label>{__('Display', 'wp-travel')}</label>
                                     <ToggleControl
@@ -89,7 +89,7 @@ const WPTravelTripOptionsTabsContent = () => {
         }
 
     }
-    
+
     return <ErrorBoundary>
         <div className="wp-travel-trip-tabs">
 
@@ -109,7 +109,7 @@ const WPTravelTripOptionsTabsContent = () => {
                     }
                 />
             </PanelRow>
-            { 'yes' == use_global_tabs ? 
+            { 'yes' == use_global_tabs ?
                 <Disabled>{tabsContent()}</Disabled> :
                 tabsContent()
             }

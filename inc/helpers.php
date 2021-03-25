@@ -1120,6 +1120,7 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 			$index = 0;
 			foreach( $_wp_travel_tabs as $tab ) {
 				$wp_travel_tabs[ $index ] = (array) $tab;
+				$wp_travel_tabs[ $index ]['id'] = $index;
 				$index++;
 			}
 		}

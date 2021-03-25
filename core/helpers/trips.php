@@ -88,10 +88,11 @@ class WpTravel_Helpers_Trips {
 		$tabs = array();
 		foreach ( $trip_tabs as $key => $tab ) :
 			$default_label               = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
+			$tabs[ $i ]['id'] = $i;
 			$tabs[ $i ]['default_label'] = $default_label;
 			$tabs[ $i ]['label']         = $tab['label'];
 			$tabs[ $i ]['show_in_menu']  = $tab['show_in_menu'];
-			$tabs[ $i ]['tab_key']       = $key; // Key is required to save meta value. @todo: can remove this key latter.
+			$tabs[ $i ]['tab_key']       = ! empty( $tab['tab_key'] ) ? $tab['tab_key'] : $key; // Key is required to save meta value. @todo: can remove this key latter.
 			$i++;
 		endforeach;
 
