@@ -127,15 +127,18 @@ const BookingCalender = () => {
 						let _times = ed.trip_time.split(',')
 						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
 						if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
-							updateState({
-								excludedDateTimes: _datetimes
-							})
+							excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
+							// updateState({
+							// 	excludedDateTimes: [ ...excludedDateTimes, _datetimes[0] ]
+							// })
 						}
 						return false
 					}
 					return true
-				})
-				.map(ed => ed.start_date)
+				});
+			
+			// Seperated exclude date.
+			excludedDates = excludedDates.map(ed => ed.start_date)
 				updateState({
 					tempExcludeDate:excludedDates
 				});
