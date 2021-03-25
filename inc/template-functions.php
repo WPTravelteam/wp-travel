@@ -386,7 +386,7 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 				<span class="price-from">
 					<?php echo esc_html( $strings['from'] ); ?>
 				</span>
-				<?php if ( $enable_sale ) : ?>
+				<?php if ( $enable_sale && $regular_price !== $trip_price ) : ?>
 					<del>
 						<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
 					</del>
@@ -715,12 +715,14 @@ function wptravel_single_location( $post_id ) {
 					$i = 0;
 					foreach ( $terms as $term ) :
 						if ( $i > 0 ) :
-							?>,
+							?>
+							,
 							<?php
 						endif;
 						?>
-						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span><?php
-						$i++;
+						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
+																			  <?php
+																				$i++;
 					endforeach;
 					?>
 				</span>
