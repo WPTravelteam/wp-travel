@@ -414,8 +414,8 @@ const BookingCalender = () => {
 		let pricing = pricings[selectedPricing]
 		let category = pricing.categories.find(c => c.id === id)
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-		if (parseInt(category.default_pax) > count)
-			count = parseInt(category.default_pax)
+		// if (parseInt(category.default_pax) > count)
+		// 	count = parseInt(category.default_pax)
 
 		let _inventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 		let maxPax = _inventory && _inventory.pax_available
