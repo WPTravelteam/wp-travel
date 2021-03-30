@@ -415,8 +415,16 @@ class WpTravel_Helpers_Trips {
 			'trip_id' => $trip_id,
 		);
 		$min_price      = WP_Travel_Helpers_Pricings::get_price( $args );
-
 		update_post_meta( $trip_id, 'wp_travel_trip_price', $min_price, $prev_min_price );
+
+		/**
+		 * Update Meta for sale widget.
+		 * if trip has enable sale for any one price then the trip is assume as sale enabled trip. 
+		 */
+		$args = array( 'trip_id' => $trip_id );
+		$sale_enabled = self::is_sale_enabled( $args );
+		update_post_meta( $trip_id, 'wptravel_enable_sale', $sale_enabled );
+
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id ); // @phpcs:ignore
 		do_action( 'wptravel_update_trip_data', $trip_data, $trip_id );
