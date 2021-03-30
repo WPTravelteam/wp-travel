@@ -245,19 +245,20 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.5.7 =
-Release Date: 29th March, 2021
+Release Date: 31st March, 2021
 
 Fixes:
-* Fixed trip price reset issue in checkout if update cart item.
+* Fixed trip price reset issue in the checkout if update cart item.
 * Fixed extras items not being saved after updating trip in version 3.
-* Fixed prefixing mismatch in tabs callback function defination of version 3.
-* Fixed showing time in non recuring date even time is disabled. If you added 2 dates with one recurring date and added time in recurring date then the time is also displaying for non recurring date.
+* Fixed prefixing mismatch in tabs callback function definition of version 3.
+* Fixed showing time in non-recurring date even time is disabled. If you added 2 dates with one recurring date and added time in recurring date then, the time is also displaying for a non-recurring date.
 * Fixed Multiple exclude date not working issue.
-* Fixed disabled date is also clickable if we try to select date again in calendar.
+* Fixed disabled date is also clickable if we try to select date again in the calendar.
 * Fixed custom tables like pricing, dates not being created.
-* Fixed issue when displaying price `From` in single trip page. Display like sale price enabled for minimum even it is not enabled. but sale price enabled for other pricing rathar than minimum pricing.
-* Fixed Default Pax issue. If we set default pax higher than min pax than we can't select min pax.
-* Fixed fontawesome icons not loading issue in WP Travel 4.5.6
+* Fixed issue when displaying price `From` on the single trip page.  A display like a sale price enabled for a minimum price even it is not enabled. but sale price enabled for other pricing rather than minimum pricing.
+* Fixed Default Pax issue. If we set default pax higher than min pax then we can't select min pax.
+* Fixed font awesome icons not loading issue in WP Travel 4.5.6
+* Fixed Sale widget not working.
 
 = 4.5.6 =
 Release Date: 19th March, 2021
