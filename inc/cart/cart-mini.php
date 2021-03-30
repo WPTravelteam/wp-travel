@@ -70,7 +70,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								break;
 							}
 						}
-						$categories = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
+						$categories  = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
 
 						$cart_extras = (array) $cart_item['extras'];
@@ -78,7 +78,7 @@ if ( wptravel_is_react_version_enabled() ) {
 							$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
 						}
 
-						$cart_pax = (array) $cart_item['trip'];
+						$cart_pax   = (array) $cart_item['trip'];
 						$cart_total = 0;
 
 						$trip_date          = ! empty( $cart_item['arrival_date'] ) ? $cart_item['arrival_date'] : '';
@@ -102,13 +102,15 @@ if ( wptravel_is_react_version_enabled() ) {
 							<div>
 								<div class="content-left">
 									<div class="img-wrapper">
-										<?php 
-										if( get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ) ) {
-											echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' );
-										} else { ?>
-											<img width="150" height="150" src="<?php echo esc_url( wptravel_get_post_placeholder_image_url() ); ?>" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" loading="lazy">
 										<?php
-										} ?>
+										if ( get_the_post_thumbnail( $trip_data['id'], 'thumbnail' ) ) {
+											echo get_the_post_thumbnail( $trip_data['id'], 'thumbnail' );
+										} else {
+											?>
+											<img width="150" height="150" src="<?php echo esc_url( wptravel_get_post_placeholder_image_url() ); ?>" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" loading="lazy">
+											<?php
+										}
+										?>
 									</div>
 									
 								</div>
@@ -147,9 +149,15 @@ if ( wptravel_is_react_version_enabled() ) {
 										</div>
 										<span class="trip-price">
 											<span data-wpt-item-total="<?php echo esc_attr( $trip_total ); ?>" >
-												<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?> <del> <?php endif ?>
+												<?php
+												if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) :
+													?>
+													 <del> <?php endif ?>
 													<?php echo wptravel_get_formated_price_currency( $trip_total ); ?>
-												<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?> </del> <?php endif ?>
+												<?php
+												if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) :
+													?>
+													 </del> <?php endif ?>
 											</span>
 
 											<?php if ( $coupon_applied && $trip_discount && 'percentage' === $coupon_type ) : ?>
@@ -164,15 +172,15 @@ if ( wptravel_is_react_version_enabled() ) {
 											<h5>Pay <?php echo esc_html( $payout_percent ); ?>% upfront</h5>
 										</div>
 										<span>
-											<?php 
-												if ( $trip_discount ) {
-													$partial_discount = ( $trip_discount * $payout_percent ) / 100;
+											<?php
+											if ( $trip_discount ) {
+												$partial_discount = ( $trip_discount * $payout_percent ) / 100;
 
-													echo wptravel_get_formated_price_currency( $trip_total_partial -  $partial_discount ); 
+												echo wptravel_get_formated_price_currency( $trip_total_partial - $partial_discount );
 
-												} else {
-													echo wptravel_get_formated_price_currency( $trip_total_partial ); 
-												}
+											} else {
+												echo wptravel_get_formated_price_currency( $trip_total_partial );
+											}
 											?>
 										</span>
 									</div> -->
@@ -290,10 +298,10 @@ if ( wptravel_is_react_version_enabled() ) {
 					}
 					?>
 					</ul>
-					<?php 
-					$subtotal = $cart['cart']['total']['cart_total'];
-					$discount = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
-					$total = $cart['cart']['total']['total'] > 0 ? $cart['cart']['total']['total'] : 0;
+					<?php
+					$subtotal      = $cart['cart']['total']['cart_total'];
+					$discount      = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
+					$total         = $cart['cart']['total']['total'] > 0 ? $cart['cart']['total']['total'] : 0;
 					$total_partial = $cart['cart']['total']['total_partial'];
 
 					if ( $coupon_applied && 'percentage' === $coupon_type ) {
@@ -301,14 +309,15 @@ if ( wptravel_is_react_version_enabled() ) {
 					}
 					?>
 					<ul class="extra-fields">
-						<li data-wpt-extra-field>
-							<label><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></label>
-							<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $subtotal ); ?>"><?php echo wptravel_get_formated_price_currency( $subtotal ); ?></strong></div>
-						</li>
-						<?php
-
-						if ( $coupon_type != "percentage" ) :
-							$display  = $cart['cart']['total']['discount'] > 0 ? '' : 'display:none;';
+						<?php if ( $coupon_applied || ( isset( $cart['cart']['total']['tax'] ) && $cart['cart']['total']['tax'] > 0 ) ) : ?>
+							<li data-wpt-extra-field>
+								<label><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></label>
+								<div class="price"><strong data-wpt-cart-subtotal="<?php echo esc_attr( $subtotal ); ?>"><?php echo wptravel_get_formated_price_currency( $subtotal ); ?></strong></div>
+							</li>
+							<?php
+						endif;
+						if ( $coupon_type != 'percentage' ) :
+							$display = $cart['cart']['total']['discount'] > 0 ? '' : 'display:none;';
 							?>
 							<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 								<label><?php esc_html_e( 'Discount:', 'wp-travel' ); ?></label>
@@ -329,13 +338,13 @@ if ( wptravel_is_react_version_enabled() ) {
 
 						<li data-wpt-trip-total="<?php echo esc_attr( $total ); ?>" class="wp-travel-payable-amount selected-payable-amount" >
 							<label><?php echo esc_html__( 'Total:', 'wp-travel' ); ?></label>
-							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total  ); ?>"><?php echo  wptravel_get_formated_price_currency( $total  ); ?></strong></div>
+							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total ); ?>"><?php echo wptravel_get_formated_price_currency( $total ); ?></strong></div>
 						</li>
 						<li data-wpt-trip-partial-gross-total="<?php echo esc_attr( $total_partial ); ?>" style="display:none" >
 							<label>
 								<?php printf( __( 'Total upfront (%1s%%)', 'wp-travel' ), esc_html( $payout_percent ) ); ?>
 							</label>
-							<div class="price"><strong data-wpt-cart-net-total-partial="<?php echo esc_attr( $total_partial ); ?>"><?php echo  wptravel_get_formated_price_currency( $total_partial  ); ?></strong></div>
+							<div class="price"><strong data-wpt-cart-net-total-partial="<?php echo esc_attr( $total_partial ); ?>"><?php echo wptravel_get_formated_price_currency( $total_partial ); ?></strong></div>
 						</li>
 					</ul>
 					<div class="cart-summary-bottom">
