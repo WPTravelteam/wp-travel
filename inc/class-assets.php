@@ -97,9 +97,10 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 
 			wp_enqueue_style( 'dashicons' );
 			wp_enqueue_style( 'jquery-datepicker-lib' );
+			wp_enqueue_style( 'wp-travel-frontend' );
+			// Need to load fontawesome and wp-travel-fa css after frontend.
 			wp_enqueue_style( 'font-awesome-css' );
 			wp_enqueue_style( 'wp-travel-fa-css' );
-			wp_enqueue_style( 'wp-travel-frontend' );
 			wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 
 			/**
