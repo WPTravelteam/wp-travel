@@ -117,7 +117,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
         {activeRecurringDates.map(date => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
             return <>
-                { isTourDate(new Date( date ) ) ? 
+                { isTourDate(new Date( _date ) ) ? 
                     <>
                         <li>{_date.format("YYYY-MM-DD")}</li>
                         <li></li>
@@ -135,7 +135,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
         <div className="wp-travel-recurring-dates-nav-btns">
             {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
             {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
-            {activePage >= pagesCount && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
+            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
         </div>
     </>
 }

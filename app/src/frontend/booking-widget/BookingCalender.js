@@ -156,6 +156,9 @@ const BookingCalender = () => {
 	useEffect(() => {
 		if (nomineePricings.length === 1) {
 			handlePricingSelect(nomineePricings[0])()
+			updateState({
+				isLoading: false,
+			})
 		}
 	}, [selectedDate])
 
@@ -278,6 +281,7 @@ const BookingCalender = () => {
 		return rule.all()
 	}
 
+	// Date param need to have only Y-M-D date without time.
 	const isTourDate = date => {
 		if (moment(date).isBefore(moment(new Date())))
 			return false
@@ -359,20 +363,23 @@ const BookingCalender = () => {
 			selectedDateTime: date,
 		}
 
-		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0))).utc();
+		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
 				if (
 					_date.is_recurring 
-					&& ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
+					&& ( ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
 					if (_date.end_date) {
 						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
 							return false
 						}
 					}
-					// let recurringStartDate = moment(_date.start_date).toDate()
-					// startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 12, 0, 0))).utc();
+					// if (_date.start_date && '0000-00-00' != _date.start_date) {
+					// 	let recurringStartDate = moment(_date.start_date).toDate()
+					// 	startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 0, 0, 0))).utc();
+					// }
+
 					let dateRules = generateRRule(_date, startDate);
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
