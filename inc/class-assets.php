@@ -356,9 +356,9 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 
 				$wp_travel_gallery_data                       = array(
 					'ajax'            => admin_url( 'admin-ajax.php' ),
-					'lat'             => $map_data['lat'],
-					'lng'             => $map_data['lng'],
-					'loc'             => $map_data['loc'],
+					'lat'             => isset( $map_data['lat'] ) ? $map_data['lat'] : '',
+					'lng'             => isset( $map_data['lng'] ) ? $map_data['lng'] : '',
+					'loc'             => isset( $map_data['loc'] ) ? $map_data['loc'] : '',
 					'labels'          => array(
 						'uploader_files_computer' => __( 'Select Files from Your Computer', 'wp-travel' ),
 					),

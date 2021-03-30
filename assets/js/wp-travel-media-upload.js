@@ -52,7 +52,7 @@
     $(function() {
 
       // List gallery images on load.
-      if( 'undefined' !== typeof( wp_travel_drag_drop_uploader.gallery_data ) ) {
+      if( 'undefined' !== typeof wp_travel_drag_drop_uploader && 'undefined' !== typeof( wp_travel_drag_drop_uploader.gallery_data ) ) {
         var gallery_data = wp_travel_drag_drop_uploader.gallery_data;
         wp_travel_update_gallery_listing( gallery_data );
       } else {
