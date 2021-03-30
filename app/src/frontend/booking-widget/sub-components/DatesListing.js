@@ -114,24 +114,34 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
         }
     }
     return <>
+    <tbody>
         {activeRecurringDates.map(date => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
             return <>
                 { isTourDate(new Date( _date ) ) ? 
+                 
                     <>
-                        <li>{_date.format("YYYY-MM-DD")}</li>
-                        <li></li>
-                        <li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li>
+                        <tr>
+                            <th className="row">{_date.format("YYYY-MM-DD")}</th>
+                            <td></td>
+                            <td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td>
+                        </tr>
                     </>
                     :
                     <>
-                        <Disabled><li>{_date.format("YYYY-MM-DD")}</li></Disabled>
-                        <Disabled><li></li></Disabled>
-                        <Disabled><li><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></li></Disabled>
+                        <tr>
+                        <Disabled><th className="row">{_date.format("YYYY-MM-DD")}</th></Disabled>
+                        <Disabled><td></td></Disabled>
+                        <Disabled><td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td></Disabled>
+                        </tr>
+                    
                     </>
+               
                 }
             </>
+            
         })}
+        </tbody> 
         <div className="wp-travel-recurring-dates-nav-btns">
             {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
             {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
@@ -160,32 +170,39 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
         {
             _dates.length > 0 ? <>
 
-                <div className="fix-trip-detail">
+                <div className="wptravel-recurring-dates">
                     {nonRecurringDates.length > 0 &&
-                        <ol className="listing">
-                            <li><strong>{_wp_travel.strings.bookings.start_date}</strong></li>
-                            <li><strong>{_wp_travel.strings.bookings.end_date}</strong></li>
-                            <li><strong>{_wp_travel.strings.bookings.action}</strong></li>
-                            {
-                                nonRecurringDates.map((date, index) => {
-                                    return <>
-                                        {! date.is_recurring && 
-                                            <>
-                                                <li>{date.start_date}</li>
-                                                <li>
-                                                    {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' }
-                                                </li>
-                                                <li>
-                                                    <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
-                                                    {_wp_travel.strings.bookings.book_now}
-                                                    </button>
-                                                </li>
-                                            </>
-                                        }
-                                    </>
-                                })
-                            }
-                        </ol>
+                       <table>
+                          <thead>
+                            <tr>
+                                <th>{_wp_travel.strings.bookings.start_date}</th>
+                                <th>{_wp_travel.strings.bookings.end_date}</th>
+                                <th>{_wp_travel.strings.bookings.action}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    nonRecurringDates.map((date, index) => {
+                                        return <>
+                                            {! date.is_recurring && 
+                                                <>
+                                                <tr>
+                                                    <th className="row">{date.start_date}</th>
+                                                    <td>{date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' } </td>
+                                                    <td>
+                                                        <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
+                                                        {_wp_travel.strings.bookings.book_now}
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </>
+                                            }
+                                        </>
+                                    })
+                                }
+                            
+                       </tbody>
+                    </table>
                     }
                     
                     {/* Recurring */}
@@ -194,12 +211,17 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
                             { date.is_recurring && 
                                 <PanelBody title={__( `${_wp_travel.strings.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} >
                                     <PanelRow>
-                                    <ol className="listing">
-                                        <li><strong>{_wp_travel.strings.bookings.start_date}</strong></li>
-                                        <li><strong>{_wp_travel.strings.bookings.end_date}</strong></li>
-                                        <li><strong>{_wp_travel.strings.bookings.action}</strong></li>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{_wp_travel.strings.bookings.start_date}</th>
+                                                <th>{_wp_travel.strings.bookings.end_date}</th>
+                                                <th>{_wp_travel.strings.bookings.action}</th>
+                                            </tr>
+                                        </thead>
                                         <RecurringDates data={date} onDateClick={handleClick} isTourDate={isTourDate} key={index} />
-                                    </ol>
+                                        
+                                    </table>
                                     </PanelRow>
                                 </PanelBody>
                             }

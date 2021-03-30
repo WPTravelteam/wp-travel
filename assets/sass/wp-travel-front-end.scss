@@ -7119,8 +7119,56 @@ $primaryColor: #3399ff;
 	z-index: 1 !important;
 }
 
-.fix-trip-detail{
+.wptravel-recurring-dates{
 	width: 100%;
+	table{
+		thead{
+			th{
+				background: #fbfafa;
+				font-weight: bold;
+				border: none;
+				font-size: 14px;
+				color: #000;
+				line-height: 1.4;
+				text-transform: uppercase;
+				padding: 10px;
+   				padding-left: 15px;
+			}
+		}
+		tbody{
+			tr{	
+				border-bottom: 1px solid #f9f9f9;
+				th,
+				td{
+					color: #404040;
+					border: none;
+					padding: 10px;
+   					padding-left: 15px;
+				}
+			}
+		}
+		@media (min-width: 400px){
+			thead{
+				th{
+					padding-top: 21px;
+					padding-bottom: 21px;
+					padding-left: 40px;
+					padding-right: 10px;
+				}
+			}
+			tbody{
+				tr{
+					th,
+					td{
+						padding-top: 16px;
+						padding-bottom: 16px;
+						padding-left: 40px;
+						padding-right: 10px;
+					}
+				}
+			}
+		}
+	}
 	.listing{
 		display: grid;
 		list-style: none;
@@ -7138,6 +7186,18 @@ $primaryColor: #3399ff;
 				color: #404040;
 				font-weight: bold;
 			}
+		}
+	}
+	.components-button{
+		background: transparent;
+		color: #000;
+		width: 100%;
+		text-align: left;
+		margin-bottom: 10px;
+		border-radius: 10px !important;
+		border: 1px solid #e5e5e5 !important;
+		span {
+			float: right;
 		}
 	}
 	.wp-travel-recurring-dates-nav-btns{
