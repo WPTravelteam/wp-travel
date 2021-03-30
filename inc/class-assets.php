@@ -83,24 +83,21 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 
 			if ( WP_Travel::is_pages() && ! wptravel_can_load_bundled_scripts() ) {
 				// Styles.
-				wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Inconsolata', array(), '1' );
-				wp_enqueue_style( 'Inconsolata', 'https://fonts.googleapis.com/css?family=Play', array(), '1' );
-				
 				wp_enqueue_style( 'wp-travel-single-itineraries' ); // For new layout.
 				wp_enqueue_style( 'wp-travel-popup' );
 				wp_enqueue_style( 'easy-responsive-tabs' );
 				wp_enqueue_style( 'wp-travel-itineraries' );
 				// fontawesome.
-				wp_enqueue_style( 'font-awesome-css' );
 				wp_enqueue_style( 'wp-travel-user-css' );
-				wp_enqueue_style( 'jquery-datepicker-lib' );
-				
+
 				// Scripts.
 				wp_enqueue_script( 'wp-travel-view-mode' );
 				wp_enqueue_script( 'wp-travel-accordion' );
 			}
-			
+
 			wp_enqueue_style( 'dashicons' );
+			wp_enqueue_style( 'jquery-datepicker-lib' );
+			wp_enqueue_style( 'font-awesome-css' );
 			wp_enqueue_style( 'wp-travel-fa-css' );
 			wp_enqueue_style( 'wp-travel-frontend' );
 			wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
@@ -501,31 +498,31 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			);
 
 			$styles = array(
-				'wp-travel-slick'           => array(
+				'wp-travel-slick'              => array(
 					'src'   => self::$assets_path . 'assets/css/lib/slick/slick.min.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-frontend'        => array(
+				'wp-travel-frontend'           => array(
 					'src'   => self::$assets_path . 'app/build/wp-travel-front-end' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-popup'           => array(
+				'wp-travel-popup'              => array(
 					'src'   => self::$assets_path . 'assets/css//lib/magnific-popup/magnific-popup' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'easy-responsive-tabs'      => array(
+				'easy-responsive-tabs'         => array(
 					'src'   => self::$assets_path . 'assets/css/lib/easy-responsive-tabs/easy-responsive-tabs' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-itineraries'     => array(
+				'wp-travel-itineraries'        => array(
 					'src'   => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
@@ -537,37 +534,37 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'font-awesome-css'          => array(
+				'font-awesome-css'             => array(
 					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-fa-css'          => array(
+				'wp-travel-fa-css'             => array(
 					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/wp-travel-fa-icons' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-user-css'        => array(
+				'wp-travel-user-css'           => array(
 					'src'   => self::$assets_path . 'app/build/wp-travel-user-styles' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'jquery-datepicker-lib'     => array(
+				'jquery-datepicker-lib'        => array(
 					'src'   => self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-frontend-bundle' => array(
+				'wp-travel-frontend-bundle'    => array(
 					'src'   => self::$assets_path . 'app/build/wp-travel-frontend.bundle.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-fonts-bundle'    => array(
+				'wp-travel-fonts-bundle'       => array(
 					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/wp-travel-fonts.bundle.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,

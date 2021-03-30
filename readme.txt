@@ -254,7 +254,10 @@ Fixes:
 * Fixed showing time in non recuring date even time is disabled. If you added 2 dates with one recurring date and added time in recurring date then the time is also displaying for non recurring date.
 * Fixed Multiple exclude date not working issue.
 * Fixed disabled date is also clickable if we try to select date again in calendar.
-* Fixed custom table not being created.
+* Fixed custom tables like pricing, dates not being created.
+* Fixed issue when displaying price `From` in single trip page. Display like sale price enabled for minimum even it is not enabled. but sale price enabled for other pricing rathar than minimum pricing.
+* Fixed Default Pax issue. If we set default pax higher than min pax than we can't select min pax.
+* Fixed fontawesome icons not loading issue in WP Travel 4.5.6
 
 = 4.5.6 =
 Release Date: 19th March, 2021
