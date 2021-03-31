@@ -4,7 +4,7 @@ Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
 Tested up to: 5.7
-Requires PHP: 5.5
+Requires PHP: 5.6.20 or higher
 Stable tag: 4.5.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -259,6 +259,9 @@ Fixes:
 * Fixed Default Pax issue. If we set default pax higher than min pax then we can't select min pax.
 * Fixed font awesome icons not loading issue in WP Travel 4.5.6
 * Fixed Sale widget not working.
+* Fixed PHP notices like undefined index lat, lng etc
+
+* Minimum recommended PHP version updated to 5.6.20 or higher.
 
 = 4.5.6 =
 Release Date: 19th March, 2021

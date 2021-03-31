@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.5.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 12:06:12+00:00\n"
+"POT-Creation-Date: 2021-03-31 04:03:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1709,7 +1709,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:544
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1236
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1379
-#: inc/cart/cart-mini.php:226 inc/helpers/helpers-price.php:17
+#: inc/cart/cart-mini.php:234 inc/helpers/helpers-price.php:17
 #: inc/helpers.php:1355
 msgid "Group"
 msgstr ""
@@ -2589,7 +2589,7 @@ msgid "Bookings"
 msgstr ""
 
 #: inc/booking-functions.php:498 inc/booking-functions.php:526
-#: inc/cart/cart-mini.php:380 inc/class-default-form-fields.php:179
+#: inc/cart/cart-mini.php:389 inc/class-default-form-fields.php:179
 #: inc/deprecated/440.php:363 inc/email-template-functions.php:43
 #: inc/email-template-functions.php:148 inc/email-template-functions.php:329
 #: inc/email-template-functions.php:628 inc/email-template-functions.php:936
@@ -2624,93 +2624,93 @@ msgstr ""
 msgid "Are you sure you want to remove '%s' from cart?"
 msgstr ""
 
-#: inc/cart/cart-mini.php:246 inc/class-wp-travel-extras-frontend.php:155
+#: inc/cart/cart-mini.php:254 inc/class-wp-travel-extras-frontend.php:155
 msgid "Trip Extras:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:284
+#: inc/cart/cart-mini.php:292
 msgid "Update"
 msgstr ""
 
-#: inc/cart/cart-mini.php:305 inc/cart/cart-mini.php:553
+#: inc/cart/cart-mini.php:314 inc/cart/cart-mini.php:562
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:314
+#: inc/cart/cart-mini.php:323
 msgid "Discount:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:326
+#: inc/cart/cart-mini.php:335
 msgid "Tax(%s):"
 msgstr ""
 
-#: inc/cart/cart-mini.php:331 inc/helpers.php:2710
+#: inc/cart/cart-mini.php:340 inc/helpers.php:2710
 msgid "Total:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:336
+#: inc/cart/cart-mini.php:345
 msgid "Total upfront (%1s%%)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:346
+#: inc/cart/cart-mini.php:355
 msgid "Enter promo code"
 msgstr ""
 
-#: inc/cart/cart-mini.php:347
+#: inc/cart/cart-mini.php:356
 msgid "Coupon Applied."
 msgstr ""
 
-#: inc/cart/cart-mini.php:348
+#: inc/cart/cart-mini.php:357
 msgid "Coupon Applied"
 msgstr ""
 
-#: inc/cart/cart-mini.php:348 templates/content-cart.php:294
+#: inc/cart/cart-mini.php:357 templates/content-cart.php:294
 msgid "Apply Coupon"
 msgstr ""
 
-#: inc/cart/cart-mini.php:353
+#: inc/cart/cart-mini.php:362
 msgid "Proceed to Pay"
 msgstr ""
 
-#: inc/cart/cart-mini.php:394
+#: inc/cart/cart-mini.php:403
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:399 templates/account/tab-content/bookings.php:72
+#: inc/cart/cart-mini.php:408 templates/account/tab-content/bookings.php:72
 #: templates/account/tab-content/bookings.php:137
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:400 inc/cart/cart-mini.php:582 inc/helpers.php:2479
+#: inc/cart/cart-mini.php:409 inc/cart/cart-mini.php:591 inc/helpers.php:2479
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
 
-#: inc/cart/cart-mini.php:401 inc/helpers.php:804
+#: inc/cart/cart-mini.php:410 inc/helpers.php:804
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:443
+#: inc/cart/cart-mini.php:452
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:500
+#: inc/cart/cart-mini.php:509
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:529
+#: inc/cart/cart-mini.php:538
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:554 templates/content-cart.php:266
+#: inc/cart/cart-mini.php:563 templates/content-cart.php:266
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:558 templates/content-cart.php:270
+#: inc/cart/cart-mini.php:567 templates/content-cart.php:270
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:595
+#: inc/cart/cart-mini.php:604
 msgid "Trip Book"
 msgstr ""
 
