@@ -4,7 +4,7 @@ Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
 Tested up to: 5.7
-Requires PHP: 5.6.20 or higher
+Requires PHP: 5.6.20
 Stable tag: 4.5.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
