@@ -246,7 +246,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 				if ( is_array( $sites ) && count( $sites ) > 0 ) {
 					foreach ( $sites as $site ) {
 						switch_to_blog( $site->blog_id );
-						$tables        = self::get_db_tables( $site->blog_id, $network_enabled );
+						$tables        = self::get_db_tables( $site->blog_id );
 						$create_tables = array(
 							'pricings_table'            => $tables['pricings_table'],
 							'dates_table'               => $tables['dates_table'],
@@ -390,8 +390,8 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		$charset_collate = $wpdb->get_charset_collate();
 		$tables          = self::get_db_tables( $blog_id );
 		foreach ( $tables as $table ) {
-			$sql = "DROP TABLE  $table  $charset_collate;";
-			dbDelta( $sql );
+			$sql = "DROP TABLE IF EXISTS $table";
+			$wpdb->query( $sql ); // @phpcs:ignore
 		}
 	}
 
@@ -399,17 +399,16 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	 * Temp Helper Functions.
 	 *
 	 * @param number $blog_id         Blog id.
-	 * @param bool   $network_enabled Network enable or not.
 	 */
-	public static function get_db_tables( $blog_id = null, $network_enabled = false ) {
+	public static function get_db_tables( $blog_id = null ) {
 		global $wpdb;
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		$tables = array();
-		// Multisite.
+		// Multisite. [Not used $wpdb->prefix].
 		if ( function_exists( 'is_multisite' ) && is_multisite() && $blog_id ) {
-			if ( $network_enabled && is_main_site() ) {
-				$blog_id = ''; // No Blog id required for main site in case of network enabled.
+			if ( is_main_site() ) {
+				$blog_id = ''; // No Blog id required for main site.
 			}
 		}
 		$blog_prefix = $blog_id ? $blog_id . '_' : '';
