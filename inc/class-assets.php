@@ -97,10 +97,12 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 
 			wp_enqueue_style( 'dashicons' );
 			wp_enqueue_style( 'jquery-datepicker-lib' );
-			wp_enqueue_style( 'wp-travel-frontend' );
-			// Need to load fontawesome and wp-travel-fa css after frontend.
-			wp_enqueue_style( 'font-awesome-css' );
-			wp_enqueue_style( 'wp-travel-fa-css' );
+			if ( ! wptravel_can_load_bundled_scripts() ) {
+				wp_enqueue_style( 'wp-travel-frontend' );
+				// Need to load fontawesome and wp-travel-fa css after frontend.
+				wp_enqueue_style( 'font-awesome-css' );
+				wp_enqueue_style( 'wp-travel-fa-css' );
+			}
 			wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 
 			/**
@@ -125,6 +127,23 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			$wp_travel['cartUrl']           = wptravel_get_cart_url();
 			$wp_travel['checkoutUrl']       = wptravel_get_checkout_url(); // @since 4.3.2
 			$wp_travel['isEnabledCartPage'] = WP_Travel_Helpers_Cart::is_enabled_cart_page(); // @since 4.3.2
+			// Load if payment is enabled.
+			if ( wptravel_can_load_payment_scripts() ) {
+
+				global $wt_cart;
+
+				$cart_amounts   = $wt_cart->get_total();
+				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
+				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
+
+				$wp_travel['payment']['currency_code']   = $settings['currency'];
+				$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
+				$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
+				$wp_travel['payment']['trip_price']      = $trip_price;
+				$wp_travel['payment']['payment_amount']  = $payment_amount;
+
+				wp_enqueue_script( 'wp-travel-payment-frontend-script' );
+			}
 			if ( true === $is_wp_travel_pages && ! wptravel_can_load_bundled_scripts() ) {
 				wp_enqueue_script( 'wp-travel-accordion' );
 				wp_enqueue_script( 'wp-travel-booking' );
@@ -138,24 +157,6 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 					// Parsley For Frontend Single Trips.
 					wp_enqueue_script( 'jquery-parsley' );
-				}
-
-				// Load if payment is enabled.
-				if ( wptravel_can_load_payment_scripts() ) {
-
-					global $wt_cart;
-
-					$cart_amounts   = $wt_cart->get_total();
-					$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
-					$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
-
-					$wp_travel['payment']['currency_code']   = $settings['currency'];
-					$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
-					$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
-					$wp_travel['payment']['trip_price']      = $trip_price;
-					$wp_travel['payment']['payment_amount']  = $payment_amount;
-
-					wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 				}
 
 				// for GMAP.
