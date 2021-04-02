@@ -168,7 +168,7 @@ function wptravel_pricing_table_created_notice_display( $show ) {
 	return $show;
 }
 
-add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_pricing_table_created_notice_display', 100 );
+// add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_pricing_table_created_notice_display', 100 );
 
 
 function wptravel_pricing_table_created_notice() {
@@ -184,4 +184,4 @@ function wptravel_pricing_table_created_notice() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'wptravel_pricing_table_created_notice', 100 );
+// add_action( 'admin_notices', 'wptravel_pricing_table_created_notice', 100 );
