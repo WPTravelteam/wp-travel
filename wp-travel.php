@@ -108,8 +108,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-
-			register_activation_hook( __FILE__, array( $this, 'activation' ) );
+			register_activation_hook( __FILE__, array( 'WP_Travel_Actions_Activation', 'init' ) );
 			add_action( 'activated_plugin', array( $this, 'plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'setup_environment' ) );
 
@@ -145,7 +144,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->coupon  = new WP_Travel_Coupon();
 
 			// For Network.
-			add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
+			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+				add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
+				add_action( 'wp_initialize_site', array( 'WP_Travel_Helpers_Network', 'on_site_create' ), 200 ); // Need more than 100 in priority.
+				add_action( 'wp_delete_site', array( 'WP_Travel_Helpers_Network', 'on_site_delete' ), 200 ); // Need more than 100 in priority.
+			}
 			/**
 			 * To resolve the pages mismatch issue when using WPML.
 			 *
@@ -404,6 +407,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
+			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
+			}
+
 		}
 
 		/**
@@ -465,179 +472,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					'read' => true,
 				)
 			);
-		}
-
-		/**
-		 * WP Travel Activation.
-		 *
-		 * @return void
-		 */
-		public function activation() {
-			// Check for PHP Compatibility.
-			global $wp_version;
-			$min_php_ver = '5.3.29';
-			if ( version_compare( PHP_VERSION, $min_php_ver, '<' ) ) {
-
-				$flag = __( 'PHP', 'wp-travel' );
-
-				// translators: placeholder for PHP minimum version.
-				$version = sprintf( __( '%s or higher', 'wp-travel' ), $min_php_ver );
-				deactivate_plugins( basename( __FILE__ ) );
-				// translators: placeholder for PHP word & PHP minimum version.
-				$message = sprintf( __( 'WP Travel plugin requires %1$s version %2$s to work.', 'wp-travel' ), $flag, $version );
-				wp_die(
-					esc_attr( $message ),
-					esc_attr( __( 'Plugin Activation Error', 'wp-travel' ) ),
-					array(
-						'response'  => 200,
-						'back_link' => true,
-					)
-				);
-			}
-
-			// Flush Rewrite rule.
-			WP_Travel_Post_Types::init();
-			Wp_Travel_Taxonomies::init();
-			flush_rewrite_rules();
-
-			/**
-			 * Insert cart and checkout pages
-			 *
-			 * @since 1.2.3
-			 */
-			include_once sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
-
-			// Shortcode filters.
-			$cart_shortcode_tag = apply_filters( 'wp_travel_cart_shortcode_tag', 'wp_travel_cart' ); // phpcs:ignore
-			$cart_shortcode_tag = apply_filters( 'wptravel_cart_shortcode_tag', $cart_shortcode_tag );
-
-			$checkout_shortcode_tag = apply_filters( 'wp_travel_checkout_shortcode_tag', 'wp_travel_checkout' ); // phpcs:ignore
-			$checkout_shortcode_tag = apply_filters( 'wptravel_checkout_shortcode_tag', $checkout_shortcode_tag );
-
-			$account_shortcode_tag = apply_filters( 'wp_travel_account_shortcode_tag', 'wp_travel_user_account' ); // phpcs:ignore
-			$account_shortcode_tag = apply_filters( 'wptravel_account_shortcode_tag', $account_shortcode_tag );
-
-			$pages = apply_filters(
-				'wp_travel_create_pages', // phpcs:ignore
-				array(
-					'wp-travel-cart'      => array(
-						'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
-						'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),
-						'content' => '[' . $cart_shortcode_tag . ']',
-					),
-					'wp-travel-checkout'  => array(
-						'name'    => _x( 'wp-travel-checkout', 'Page slug', 'wp-travel' ),
-						'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
-						'content' => '[' . $checkout_shortcode_tag . ']',
-					),
-					'wp-travel-dashboard' => array(
-						'name'    => _x( 'wp-travel-dashboard', 'Page slug', 'wp-travel' ),
-						'title'   => _x( 'WP Travel Dashboard', 'Page title', 'wp-travel' ),
-						'content' => '[' . $account_shortcode_tag . ']',
-					),
-				)
-			);
-
-			$pages = apply_filters( 'wptravel_create_pages', $pages );
-
-			foreach ( $pages as $key => $page ) {
-				wptravel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
-			}
-
-			$migrations = array(
-				/**
-				 * 'name' : 'name of file'.
-				 * 'version':  'Migrate if current version is greater than this'.
-				 */
-				array(
-					'name'    => '103-104',
-					'version' => '1.0.3',
-				),
-				array(
-					'name'    => '104-105',
-					'version' => '1.0.4',
-				),
-				array(
-					'name'    => 'update-121',
-					'version' => '1.2.0',
-				),
-				array(
-					'name'    => '175-176',
-					'version' => '1.7.5',
-				),
-				array(
-					'name'    => '193-194',
-					'version' => '1.9.3',
-				),
-				array(
-					'name'    => '303-304',
-					'version' => '3.0.3',
-				),
-				array(
-					'name'    => '322-323',
-					'version' => '3.2.2',
-				),
-				array(
-					'name'    => '400',
-					'version' => '4.0.0',
-				),
-				array(
-					'name'    => '404',
-					'version' => '4.0.4',
-				),
-			);
-			self::migration_includes( $migrations );
-
-			$current_db_version = get_option( 'wp_travel_version' );
-			if ( WP_TRAVEL_VERSION !== $current_db_version ) {
-				if ( empty( $current_db_version ) ) {
-					/**
-					 * Update wp travel version.
-					 *
-					 * @since 3.0.0
-					 */
-					update_option( 'wp_travel_user_since', WP_TRAVEL_VERSION );
-
-					/**
-					 * Option is used to hide option 'Enable multiple category on pricing' and single pricng option.
-					 *
-					 * @since 3.0.0
-					 */
-					update_option( 'wp_travel_user_after_multiple_pricing_category', 'yes' );
-				}
-				update_option( 'wp_travel_version', WP_TRAVEL_VERSION );
-			}
-			// Update marketplace data transient.
-			delete_transient( 'wp_travel_marketplace_addons_list' );
-
-			/**
-			 * Define Roles.
-			 *
-			 * @since 1.3.7
-			 */
-			self::create_roles();
-		}
-
-		/**
-		 * Include all Migration files.
-		 *
-		 * @param array $files List of migration files.
-		 * @since WP Travel 4.4.0
-		 * @return void
-		 */
-		public static function migration_includes( $files ) {
-
-			$current_db_version = get_option( 'wp_travel_version' );
-			if ( empty( $current_db_version ) ) {
-				return; // No need to run migration in case of new user.
-			}
-
-			$include_path = sprintf( '%s/upgrade', WP_TRAVEL_ABSPATH );
-			foreach ( $files as $file ) {
-				if ( version_compare( WP_TRAVEL_VERSION, $file['version'], '>' ) ) {
-					include_once sprintf( '%s/%s.php', $include_path, $file['name'] );
-				}
-			}
 		}
 
 		/**
