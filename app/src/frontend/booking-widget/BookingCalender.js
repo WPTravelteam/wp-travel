@@ -83,7 +83,7 @@ const InventoryNotice = ({ inventory }) => {
 	return <p>{__i18n.bookings.pricing_not_available}</p>
 }
 
-const BookingCalender = () => {
+const BookingWidget = () => {
 
 	const [{ selectedDate,
 		selectedTripDate,
@@ -232,7 +232,7 @@ const BookingCalender = () => {
 		}
 
 		updateState(_state)
-	}, [selectedPricing])
+	}, [selectedPricing, selectedDateTime])
 
 	useEffect(() => {
 		if (!isTripInventoryEnabled && selectedPricing) {
@@ -297,9 +297,6 @@ const BookingCalender = () => {
 			return false
 		}
 
-		// if (rruleAll && rruleAll[idx]) {
-		// 	_ruleall = rruleAll[idx]
-		// } else {
 		const _date = _dates.find(data => {
 			if (data.is_recurring) {
 				let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
@@ -324,15 +321,7 @@ const BookingCalender = () => {
 					return
 				}
 				return moment(date).isSame(moment(data.start_date))
-				// if (moment(date).isSameOrAfter(moment(data.start_date))) {
-				// 	if (data.end_date) {
-				// 		if (String(new Date(data.end_date)).toLowerCase() == 'invalid date') {
-				// 			return true
-				// 		}
-				// 		return moment(date).isSameOrBefore(moment(data.end_date))
-				// 	}
-				// }
-				// return moment(date).isSameOrAfter(moment(data.start_date))
+				
 			}
 			return false
 		})
@@ -364,6 +353,7 @@ const BookingCalender = () => {
 			selectedDateTime: date,
 		}
 
+		// @todo use getPricingsByDate function below to get pricing ids/_nomineePricings.
 		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
@@ -376,25 +366,12 @@ const BookingCalender = () => {
 							return false
 						}
 					}
-					// if (_date.start_date && '0000-00-00' != _date.start_date) {
-					// 	let recurringStartDate = moment(_date.start_date).toDate()
-					// 	startDate = moment(new Date(Date.UTC(recurringStartDate.getFullYear(), recurringStartDate.getMonth(), recurringStartDate.getDate(), 0, 0, 0))).utc();
-					// }
 
 					let dateRules = generateRRule(_date, startDate);
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
 				if (_date.start_date) {
 					return moment(date).isSame(moment(_date.start_date))
-					// if (moment(date).isSameOrAfter(moment(_date.start_date))) {
-					// 	if (_date.end_date && moment(date).isSameOrBefore(moment(_date.end_date))) {
-					// 		if (String(new Date(_date.end_date)).toLowerCase() == 'invalid date') {
-					// 			return true
-					// 		}
-					// 		return moment(date).isSameOrBefore(moment(_date.end_date))
-					// 	}
-					// }
-					// return moment(date).isSameOrAfter(moment(_date.start_date))
 				}
 				return moment(_date.start_date).isSame(moment(date))
 			}).map(d => d.id)
@@ -412,6 +389,78 @@ const BookingCalender = () => {
 		_state = { ..._state, selectedTripDate: _dateIds, isLoading: false }
 
 		updateState(_state)
+	}
+
+	// Function used to get pricings in Fixed departure listing.
+	const getPricingsByDate = ( date, date_id, returnDateIds ) => {
+		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
+
+		const _dateIds = _dates // Trip Date IDs matches to selected date.
+			.filter(_date => {
+				if (
+					_date.is_recurring 
+					&& ( ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
+					if (_date.end_date) {
+						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
+							return false
+						}
+					}
+
+					let dateRules = generateRRule(_date, startDate);
+					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
+				}
+				if (_date.start_date) {
+					return moment(date).isSame(moment(_date.start_date))
+				
+				}
+				return moment(_date.start_date).isSame(moment(date))
+			}).map(d => d.id)
+
+		if ( ! returnDateIds ) { // return pricings
+			let _nomineePricings = _dateIds.map(id => datesById[id].pricing_ids.split(',').map(id => id.trim()))
+			_nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof pricings[p] !== 'undefined')
+			return _nomineePricings;
+		}
+		return _dateIds;
+	}
+
+	// For fixed departure listing.
+	const handleFixedDeparturePricingSelect = ( date, date_id, pricingId ) => {
+		if (!isFixedDeparture) {
+			updateState({
+				pricingUnavailable: false,
+				selectedDate: date,
+				selectedDateTime: date,
+				isLoading: true,
+			})
+			return
+		}
+
+		updateState({
+			...initialState,
+			excludedDateTimes,
+			isLoading: true,
+			pricingUnavailable: false,
+		})
+
+		let _state = {
+			selectedDate: date,
+			selectedDateTime: date,
+		}
+
+		let _dateIds = getPricingsByDate( date, date_id, true );
+		let _nomineePricings = _dateIds.map(id => datesById[id].pricing_ids.split(',').map(id => id.trim()))
+			_nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof pricings[p] !== 'undefined')
+		if (_nomineePricings.length <= 0) {
+			_state = { ..._state, pricingUnavailable: true }
+		} else {
+			_state = { ..._state, nomineePricings: _nomineePricings }
+		}
+
+		_state = { ..._state, selectedTripDate: _dateIds, isLoading: false, selectedPricing:pricingId }
+		// console.log('_state', _state );
+		updateState(_state)
+		// end of date update in state
 	}
 
 	const handleTimeClick = time => () => {
@@ -698,7 +747,7 @@ const BookingCalender = () => {
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
 							<>
-								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate }} />
+								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect }} />
 							</>
 						||
 							<>
@@ -855,4 +904,4 @@ const BookingCalender = () => {
 	</>;
 }
 
-export default BookingCalender
+export default BookingWidget

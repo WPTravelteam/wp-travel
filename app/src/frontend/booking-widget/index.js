@@ -1,9 +1,9 @@
 import { useSelect } from '@wordpress/data';
 import { render } from '@wordpress/element';
-import BookingCalender from './BookingCalender';
 import ErrorBoundary from './ErrorBoundry';
 import './_Store';
 
+import BookingWidget from './BookingCalender';
 const storeName = 'WPTravelFrontend/BookingWidget';
 
 const WPTravelBookingWidget = () => {
@@ -30,7 +30,7 @@ const WPTravelBookingWidget = () => {
                         </div>
                     }
                 </> || <ErrorBoundary>
-                    <BookingCalender />
+                    <BookingWidget />
                 </ErrorBoundary>
             }
         </ErrorBoundary>

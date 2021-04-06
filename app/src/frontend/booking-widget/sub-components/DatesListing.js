@@ -3,20 +3,17 @@ import { RRule, RRuleSet, rrulestr } from 'rrule'
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
 import { PanelBody, PanelRow, Disabled } from '@wordpress/components';
 import { __ } from '@wordpress/i18n'
+const _ = lodash
 
+const datePerPage = 5
 const generateRRule = rruleArgs => {
     const rruleSet = new RRuleSet();
     rruleSet.rrule(
         new RRule(rruleArgs)
     );
-    // rruleSet.exdate( new Date( '2021-05-27' ) );
-    // return rruleSet.all();
-    // console.log(rruleSet);
     let rule = new RRule(rruleArgs);
     return rule.all()
 }
-
-const datePerPage = 5
 
 const generateRRUleArgs = data => {
     let startDate = data.start_date && new Date(data.start_date) || new Date();
@@ -57,7 +54,7 @@ const generateRRUleArgs = data => {
     return ruleArgs
 }
 
-const RecurringDates = ({ data, onDateClick, isTourDate }) => {
+const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFixedDeparturePricingSelect, allData }) => {
    
     const [dates, setRecurringDates] = useState([])
     const [activeRecurringDates, setActiveRecurringDates] = useState([])
@@ -91,6 +88,13 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
         setSelectedDate(_date)
         onDateClick(_date)() // onDateClick returns a function.
     }
+    let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id); // All Pricings.
+    const handleFixedDeparturePricingClick = ( date, date_id, pricingId ) => e => {
+        if (typeof onFixedDeparturePricingSelect === 'function') {
+            onFixedDeparturePricingSelect(moment(date).toDate(), date_id, pricingId )()
+        }
+    }
+
     const loadMoreDates = page => () => {
         let start = page < 0 ? (activePage - 2) * datesPerPage : activePage * datesPerPage
         let end = start + datesPerPage
@@ -115,18 +119,33 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
     }
     return <>
     <tbody>
-        {activeRecurringDates.map(date => {
+        {activeRecurringDates.map( ( date, dateIndex ) => {
             let _date = moment(moment(date).format("YYYY-MM-DD"))
+            let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
             return <>
                 { isTourDate(new Date( _date ) ) ? 
                  
-                    <>
-                        <tr>
-                            <th className="row">{_date.format("YYYY-MM-DD")}</th>
-                            <td></td>
-                            <td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td>
-                        </tr>
-                    </>
+                    <tr key={dateIndex}>
+                        <td>
+                            { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
+                                <ul>
+                                    {_pricingIds.map( (pricingId, pricingIndex) => {
+                                        return <li key={pricingIndex}>
+                                            <button
+                                                onClick={ 
+                                                    handleFixedDeparturePricingClick(_date, date.id, pricingId )
+                                                } >
+                                                {pricings[pricingId].title}
+                                            </button>
+                                        </li>
+                                    })}
+                                </ul>
+                            }
+                        </td>
+                        <th className="row">{_date.format("YYYY-MM-DD")}</th>
+                        <td></td>
+                        <td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td>
+                    </tr>
                     :
                     <>
                         <tr>
@@ -150,8 +169,9 @@ const RecurringDates = ({ data, onDateClick, isTourDate }) => {
     </>
 }
 
-const DatesListing = ({ dates, onDateClick, isTourDate }) => {
+const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect }) => {
     const handleClick = ( date, date_id ) => () => {
+        console.log('date',date);
         if (typeof onDateClick === 'function') {
             // console.log( 'Book now click step 1' );
             onDateClick(moment(date).toDate(), date_id)
@@ -164,8 +184,17 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
         }
     }
 
+    const handlePricingClick = ( date, date_id, pricingId ) => () => {
+        console.log('date',date);
+
+        if (typeof onFixedDeparturePricingSelect === 'function') {
+            onFixedDeparturePricingSelect(moment(date).toDate(), date_id, pricingId )
+        }
+    }
+
     const _dates = Object.values(dates)
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' != d.start_date && new Date( d.start_date )  > new Date() } )
+    let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id); // All Pricings.
     return <>
         {
             _dates.length > 0 ? <>
@@ -175,6 +204,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
                        <table>
                           <thead>
                             <tr>
+                                <th>Pricings</th>
                                 <th>{_wp_travel.strings.bookings.start_date}</th>
                                 <th>{_wp_travel.strings.bookings.end_date}</th>
                                 <th>{_wp_travel.strings.bookings.action}</th>
@@ -183,10 +213,27 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
                             <tbody>
                                 {
                                     nonRecurringDates.map((date, index) => {
+                                        let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
                                         return <>
                                             {! date.is_recurring && 
                                                 <>
-                                                <tr>
+                                                <tr key={index}>
+                                                    <td>
+                                                        { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
+                                                            <ul>
+                                                                {_pricingIds.map( (pricingId, pricingIndex) => {
+                                                                    return <li key={pricingIndex}>
+                                                                        <button
+                                                                            onClick={ 
+                                                                                handlePricingClick(date.start_date, date.id, pricingId )
+                                                                            } >
+                                                                            {pricings[pricingId].title}
+                                                                        </button>
+                                                                    </li>
+                                                                })}
+                                                            </ul>
+                                                        }
+                                                    </td>
                                                     <th className="row">{date.start_date}</th>
                                                     <td>{date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' } </td>
                                                     <td>
@@ -204,22 +251,23 @@ const DatesListing = ({ dates, onDateClick, isTourDate }) => {
                        </tbody>
                     </table>
                     }
-                    
+
                     {/* Recurring */}
                     {_dates.map((date, index) => {
                         return <>
                             { date.is_recurring && 
-                                <PanelBody title={__( `${_wp_travel.strings.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} >
+                                <PanelBody title={__( `${_wp_travel.strings.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} key={index} >
                                     <PanelRow>
                                     <table>
                                         <thead>
                                             <tr>
+                                                <th>Pricings</th>
                                                 <th>{_wp_travel.strings.bookings.start_date}</th>
                                                 <th>{_wp_travel.strings.bookings.end_date}</th>
                                                 <th>{_wp_travel.strings.bookings.action}</th>
                                             </tr>
                                         </thead>
-                                        <RecurringDates data={date} onDateClick={handleClick} isTourDate={isTourDate} key={index} />
+                                        <RecurringDates data={date} onDateClick={handleClick} onFixedDeparturePricingSelect={handlePricingClick} getPricingsByDate={getPricingsByDate} isTourDate={isTourDate} allData={allData} key={index} />
                                         
                                     </table>
                                     </PanelRow>
