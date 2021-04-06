@@ -132,6 +132,9 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 			$month = gmdate( 'n', strtotime( $start_date ) );
 
 			$where .= ' OR (';
+			if ( ! empty( $start_date ) ) {
+				$where .= " CAST({$dates_table}.start_date AS DATE) >= '{$start_date}' AND";
+			}
 			$where .= "
 				{$dates_table}.recurring = 1
 				AND (
