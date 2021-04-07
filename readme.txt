@@ -244,6 +244,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.8 =
+Release Date:
+
+Fixes:
+* Fixed Table not being created on Network activate of the plugin. and also deleted tables if site deleted.
+* Fixed Search filter widget showing non relevent trips in case of recurring.
+
 = 4.5.7 =
 Release Date: 31st March, 2021
 

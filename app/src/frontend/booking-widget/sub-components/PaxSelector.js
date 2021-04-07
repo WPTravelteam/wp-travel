@@ -36,6 +36,7 @@ const DiscountTable = ({ groupPricings }) => {
 }
 
 const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
+	// console.log('counts', counts);
 	let categories = pricing && pricing.categories || []
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
@@ -90,7 +91,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 								{`${c.term_info.title}`} &nbsp;
 								{
 									// Currently not supported for time. Need enhancement later.
-									inventory && inventory.length < 2 && inventory[0].booked_pax > 0 ?
+									inventory && inventory.length < 2 && 'undefined' != typeof inventory[0] && inventory[0].booked_pax > 0 ?
 									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${inventory[0].pax_available}`})</span> :
 									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${pricing.max_pax}`})</span>
 								}

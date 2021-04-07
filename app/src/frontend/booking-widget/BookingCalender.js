@@ -171,7 +171,9 @@ const BookingWidget = () => {
 		}
 		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
 		if (isTripInventoryEnabled && isFixedDeparture) {
-			setInventoryData(selectedPricing, selectedDate, times)
+			if ( isLoading ) { // Prevent looping request.
+				setInventoryData(selectedPricing, selectedDate, times)
+			}
 		} else {
 			let pricing = pricings[selectedPricing]
 			let categories = pricing.categories
@@ -457,8 +459,7 @@ const BookingWidget = () => {
 			_state = { ..._state, nomineePricings: _nomineePricings }
 		}
 
-		_state = { ..._state, selectedTripDate: _dateIds, isLoading: false, selectedPricing:pricingId }
-		// console.log('_state', _state );
+		_state = { ..._state, selectedTripDate: _dateIds, isLoading: true, selectedPricing:pricingId }
 		updateState(_state)
 		// end of date update in state
 	}
@@ -659,17 +660,10 @@ const BookingWidget = () => {
 	}
 
 	const handlePricingSelect = id => () => {
-		// 		updateState({
-		// 			paxCounts: initialState.paxCounts,
-		// 			tripExtras: initialState.tripExtras,
-		// 			nomineeTimes: initialState.nomineeTimes,
-		// 			isLoading: true
-		// 		})
-
+		
 		let _state = {}
 		_state.isLoading = true
 		_state.selectedPricing = id
-
 		updateState(_state)
 	}
 
@@ -722,6 +716,16 @@ const BookingWidget = () => {
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	const tripDateListing = _wp_travel.trip_date_listing
+	// Only used in fixed departure date listing.
+	let paxSelectorData ={
+		pricing: pricings[selectedPricing] || null,
+		onPaxChange:handlePaxChange,
+		counts:paxCounts,
+		inventory:inventory,
+		selectedPricingId:selectedPricing, // Additional Data.
+		selectedDateIds:selectedTripDate, // Additional Data.
+		selectedDateTime:selectedDateTime, // Additional Data.
+	}
 	return <>
 		{
 			!_wp_travel.itinerary_v2 ?
@@ -747,7 +751,7 @@ const BookingWidget = () => {
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
 							<>
-								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect }} />
+								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData }} />
 							</>
 						||
 							<>

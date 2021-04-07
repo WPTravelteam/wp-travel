@@ -40,9 +40,14 @@ $pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 $wrapper_id = isset( $tab_key ) ? $tab_key . '-booking-form' : 'booking-form'; // temp fixes.
 if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
 	$wrapper_id = isset( $tab_key ) ? $tab_key  : 'booking';
-} ?>
+}
+$settings_listing = $settings['trip_date_listing'];
+$fixed_departure  = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+$wrapper_class    = 'dates' === $settings_listing && 'yes' === $fixed_departure ? 'wp-travel-list-view' : 'wp-travel-calendar-view';
 
-<div id="<?php echo esc_attr( $wrapper_id ); ?>" class="tab-list-content">
+?>
+
+<div id="<?php echo esc_attr( $wrapper_id ); ?>" class="<?php echo esc_attr( $wrapper_class ); ?>  tab-list-content">
 	<?php
 	// if ( ( $enable_checkout ) || $force_checkout ) :
 		// Set Default WP Travel options list as it is.

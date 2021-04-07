@@ -7205,6 +7205,25 @@ $primaryColor: #3399ff;
 			margin-right: 10px;
 		}
 	}
+	.wp-travel-booking__pax-selector-wrapper h4 {
+		display: none;
+	}
+	.components-disabled{
+		opacity: 0.5;
+	}
+
+}
+#booking.wp-travel-list-view{
+	.wp-travel-booking__panel-bottom{
+		position: fixed;
+		bottom: 0;
+		padding:20px;
+		background-color: #fff;
+		border:1px solid #ccc;
+		width: 100%;
+		left: 0;
+		z-index: 11;
+	}
 }
 
 /* partial payment  table*/
