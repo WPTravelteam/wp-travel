@@ -7121,7 +7121,13 @@ $primaryColor: #3399ff;
 
 .wptravel-recurring-dates{
 	width: 100%;
+	
 	table{
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
 		thead{
 			th{
 				background: #fbfafa;
@@ -7144,6 +7150,83 @@ $primaryColor: #3399ff;
 					border: none;
 					padding: 10px;
    					padding-left: 15px;
+				}
+			}
+		}
+		.wp-travel-booking__trip-option-list{
+			.group-discount-button{
+				cursor: pointer;
+				font-size: 12px;
+				display: inline-flex;
+				align-items: center;
+				text-decoration: underline;
+				span{
+					position: absolute;
+					bottom: 100%;
+					left: 50%;
+					transform: translateX(-50%);
+					padding: 5px;
+					background-color: rgba(0, 0, 0, 0.9);
+					color: #fff;
+					border-radius: 4px;
+					font-size: 10px;
+					white-space: nowrap;
+					margin-bottom: 5px;
+					display: none;
+				}
+				svg{
+					width: 15px;
+					height: 15px;
+					margin-right: .25em;
+				}
+			}
+			li{
+				padding: .5em 1em;
+				background-color: #fff;
+				margin-bottom: 1em;
+				font-size: 15px;
+				border-radius: 4px;
+				box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				align-items: center;
+				position: relative;
+				&::before,
+				&::after{
+					content: "";
+					border-bottom: 10px solid #fff;
+					border-left: 10px solid transparent;
+					border-right: 10px solid transparent;
+					position: absolute;
+					top: 0;
+					left: 10px;
+					transform: translateY(-100%);
+				}
+				&::before{
+					border-bottom-color: #999;
+    				top: -.7px;
+				}
+				table{
+					width: 100%;
+					border-collapse: collapse;
+					text-align: center;
+					display: table;
+					margin: 0;
+					th,
+					td{
+						border-bottom: 1px solid #eee;
+						padding: .25em .5em;
+						font-size: 14px;
+						text-align: center;
+						
+					}
+					tr:first-child th:last-child{
+						border-left: 1px solid #eee;
+					}
+					tr:last-child td {
+						border-bottom: 0;
+					}
 				}
 			}
 		}
