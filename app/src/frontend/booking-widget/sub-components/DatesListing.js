@@ -148,7 +148,12 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                 <ul>
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <li key={pricingIndex}>
-                                                <button onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >{pricings[pricingId].title}</button>
+                                                <button 
+                                                    disabled={paxSelectorData.selectedPricingId == pricingId}
+                                                    className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
+                                                    onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >
+                                                        {pricings[pricingId].title}
+                                                </button>
                                             </li>
                                     })}
                                 </ul>
@@ -306,6 +311,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                                 {_pricingIds.map( (pricingId, pricingIndex) => {
                                                                     return <li key={pricingIndex}>
                                                                         <button
+                                                                            disabled={paxSelectorData.selectedPricingId == pricingId}
+                                                                            className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
                                                                             onClick={ 
                                                                                 handlePricingClick(date.start_date, date.id, pricingId )
                                                                             } >
