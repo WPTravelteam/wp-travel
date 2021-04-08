@@ -170,66 +170,67 @@ const BookingWidget = () => {
 			pricingUnavailable: false
 		}
 		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
-		if (isTripInventoryEnabled && isFixedDeparture) {
-			if ( isLoading ) { // Prevent looping request.
+		if (isLoading) { // Prevent looping request.
+
+			if (isTripInventoryEnabled && isFixedDeparture) {
 				setInventoryData(selectedPricing, selectedDate, times)
-			}
-		} else {
-			let pricing = pricings[selectedPricing]
-			let categories = pricing.categories
-			let _paxCounts = {}
-			categories.forEach(c => {
-				_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
-			})
-
-			let maxPax = pricing.max_pax || 999
-			let _tripExtras = {}
-
-			if (pricing.trip_extras.length > 0) {
-				pricing.trip_extras.forEach(x => {
-					_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			} else {
+				let pricing = pricings[selectedPricing]
+				let categories = pricing.categories
+				let _paxCounts = {}
+				categories.forEach(c => {
+					_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
 				})
-			}
-
-			_state = {
-				..._state,
-				isLoading: false,
-				inventory: [{
-					'date': moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'),
-					'pax_available': maxPax,
-					'booked_pax': 0,
-					'pax_limit': maxPax,
-
-				}],
-				nomineeTimes: [],
-				tripExtras: _tripExtras,
-				paxCounts: _paxCounts
-			}
-
-			if (times.length > 0) {
-				let _times = times
-					.map(time => {
-						return moment(`${selectedDate.toDateString()} ${time}`)
+	
+				let maxPax = pricing.max_pax || 999
+				let _tripExtras = {}
+	
+				if (pricing.trip_extras.length > 0) {
+					pricing.trip_extras.forEach(x => {
+						_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
 					})
-					.filter(time => {
-						if (excludedDateTimes.find(et => moment(et).isSame(time))) {
-							return false
-						}
-						return true
-					})
+				}
+	
 				_state = {
 					..._state,
-					selectedDateTime: _times[0].toDate(),
-					selectedTime: _times[0].format('HH:mm'),
-					nomineeTimes: _times,
+					isLoading: false,
 					inventory: [{
-						'date': _times[0].format('YYYY-MM-DD[T]HH:mm'),
+						'date': moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'),
 						'pax_available': maxPax,
 						'booked_pax': 0,
 						'pax_limit': maxPax,
+	
 					}],
+					nomineeTimes: [],
+					tripExtras: _tripExtras,
+					paxCounts: _paxCounts
 				}
-
+	
+				if (times.length > 0) {
+					let _times = times
+						.map(time => {
+							return moment(`${selectedDate.toDateString()} ${time}`)
+						})
+						.filter(time => {
+							if (excludedDateTimes.find(et => moment(et).isSame(time))) {
+								return false
+							}
+							return true
+						})
+					_state = {
+						..._state,
+						selectedDateTime: _times[0].toDate(),
+						selectedTime: _times[0].format('HH:mm'),
+						nomineeTimes: _times,
+						inventory: [{
+							'date': _times[0].format('YYYY-MM-DD[T]HH:mm'),
+							'pax_available': maxPax,
+							'booked_pax': 0,
+							'pax_limit': maxPax,
+						}],
+					}
+	
+				}
 			}
 		}
 
@@ -724,7 +725,9 @@ const BookingWidget = () => {
 		inventory:inventory,
 		selectedPricingId:selectedPricing, // Additional Data.
 		selectedDateIds:selectedTripDate, // Additional Data.
-		selectedDateTime:selectedDateTime, // Additional Data.
+		selectedDateTime:selectedDateTime, // Additional Data.  for pax picker and time picker
+		onTimeSelect:handleTimeClick, // For time picker
+		nomineeTimes:nomineeTimes // For time picker
 	}
 	return <>
 		{
@@ -751,7 +754,7 @@ const BookingWidget = () => {
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
 							<>
-								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData }} />
+								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData, getPricingTripTimes:getPricingTripTimes }} />
 							</>
 						||
 							<>
