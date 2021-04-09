@@ -316,6 +316,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                         <>
                                                             <RadioControl
+                                                                className="test"
                                                                 // label="User type"
                                                                 // help="The type of the current user"
                                                                 selected={paxSelectorData.selectedPricingId}

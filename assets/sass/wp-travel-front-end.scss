@@ -13,6 +13,8 @@
 @mixin fullwidth {
 	width: 100%;
 }
+
+
 .wp-travel{
     max-width:1250px  !important;
 }
@@ -7121,7 +7123,9 @@ $primaryColor: #3399ff;
 
 .wptravel-recurring-dates{
 	width: 100%;
-	
+	button{
+		padding: 0.5em 1em 0.5em !important;
+	}
 	table{
 		ul{
 			margin: 0;
@@ -7130,7 +7134,8 @@ $primaryColor: #3399ff;
 		}
 		thead{
 			th{
-				background: #fbfafa;
+				background: #c5cacd;
+				background: #f2f3f4;
 				font-weight: bold;
 				border: none;
 				font-size: 14px;
@@ -7139,27 +7144,83 @@ $primaryColor: #3399ff;
 				text-transform: uppercase;
 				padding: 10px;
    				padding-left: 15px;
+				&:first-child{
+					border-top-left-radius: 3px;
+				}
+				&:last-child{
+					border-top-right-radius: 3px;
+				}
 			}
 		}
 		tbody{
+			background: #fbfafa;	
 			tr{	
 				border-bottom: 1px solid #f9f9f9;
 				th,
 				td{
 					color: #404040;
+					
 					border: none;
 					padding: 10px;
    					padding-left: 15px;
 				}
 			}
 		}
+		.components-radio-control__option{
+			position: relative;
+			display: flex;
+    		align-items: center;
+			label{
+				font-size: 15px;
+				font-weight: bold;
+				color: #444;
+				margin-left: .5em;
+			}
+			input{
+				width: 25px;
+				height: 25px;
+				cursor: pointer;
+				[type='radio']{
+					transition: .3s;
+				}
+				[type='radio']{
+					content: '';
+					width: 25px;
+					height: 25px;
+					background: #338829;
+					border-radius: 100%;
+					position: relative;
+					top: 0;
+					left: 0;
+					transform: scale(.6);
+				}
+			}
+
+		}    
 		.wp-travel-booking__trip-option-list{
+			.text-right{
+				display: flex;
+				.item-price{
+					margin-right: 1em;
+					& > span{
+						font-size: 16px;
+					}
+				}
+				.price{
+					margin-top: 10px;
+					font-size: 20px;
+				}
+			}
+			
+			
 			.group-discount-button{
 				cursor: pointer;
 				font-size: 12px;
 				display: inline-flex;
 				align-items: center;
-				text-decoration: underline;
+				text-decoration: underline;		
+				display: flex;
+    			align-items: center;	
 				span{
 					position: absolute;
 					bottom: 100%;
@@ -7177,21 +7238,24 @@ $primaryColor: #3399ff;
 				svg{
 					width: 15px;
 					height: 15px;
-					margin-right: .25em;
+					margin-right: .5em;
+					path{
+						fill: red;
+					}
 				}
 			}
-			li{
-				padding: .5em 1em;
+			.discount-table{
+				position: absolute;
+				top: 100%;
+				left: 0;
+				z-index: 1;
 				background-color: #fff;
-				margin-bottom: 1em;
-				font-size: 15px;
 				border-radius: 4px;
-				box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				align-items: center;
-				position: relative;
+				padding: .5em;
+				width: 250px;
+				margin-top: 10px;
+				box-shadow: 0 20px 30px rgba(0, 0, 0, 0.10);
+				border: 1px solid #ccc;
 				&::before,
 				&::after{
 					content: "";
@@ -7204,7 +7268,7 @@ $primaryColor: #3399ff;
 					transform: translateY(-100%);
 				}
 				&::before{
-					border-bottom-color: #999;
+					border-bottom-color: #0000005c;
     				top: -.7px;
 				}
 				table{
@@ -7215,27 +7279,113 @@ $primaryColor: #3399ff;
 					margin: 0;
 					th,
 					td{
-						border-bottom: 1px solid #eee;
 						padding: .25em .5em;
 						font-size: 14px;
 						text-align: center;
+						border: 1px solid #eee;
 						
 					}
 					tr:first-child th:last-child{
 						border-left: 1px solid #eee;
 					}
 					tr:last-child td {
-						border-bottom: 0;
+						border: 1px solid #eee;
 					}
 				}
+			}
+			.item-price{
+				font-weight: 500;
+				display: inline-block;
+				font-size: 12px;
+				& > span{
+					font-weight: bold;
+					font-size: 18px;
+					color: #444;
+				}
+			}
+			li{
+				padding: .5em 1em;
+				margin-bottom: 1em;
+				font-size: 15px;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;	
+				position: relative;	
+				
+			}
+			.qty-spinner {
+				position: relative;
+				display: flex;
+				align-items: center;
+				em {
+					position: absolute;
+					width: 120px;
+					font-size: 12px;
+					left: 50%;
+					top: 0;
+					transform: translate(-50%, -100%);
+					text-align: center;
+					border: 1px solid #e92929;
+					background-color: rgba(233, 41, 41, 0.2);
+					color: #e92929;
+					border-radius: 3px;
+					margin-top: -7px;
+					z-index: 1;
+					&::after,
+					&::before {
+						content: "";
+						border-left: 5px solid transparent;
+						border-right: 5px solid transparent;
+						border-top: 5px solid #ffc8c8;
+						position: absolute;
+						top: 100%;
+						left: 50%;
+						transform: translateX(-50%);
+					}
+				}
+				span {
+					display: inline-block;
+					min-width: 30px;
+					height: 25px;
+					line-height: 25px;
+					text-align: center;
+					border-top: 1px solid rgba(0, 0, 0, 0.1);
+					border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+					background: none;
+				}
+				button {
+					display: inline-flex;
+					width: 25px;
+					height: 25px;
+					line-height: 25px;
+					padding: 0;
+					justify-content: center;
+					align-items: center;
+					border-radius: 0;
+					margin: 0;
+					padding: 0 !important;
+					font-size: 16px;
+					&:first-child {
+						border-top-left-radius: 4px;
+						border-bottom-left-radius: 4px;
+					}
+					&:nth-child(3) {
+						border-top-right-radius: 4px;
+						border-bottom-right-radius: 4px;
+					}
+				}
+
+			}
+			.price{
+				font-weight: bold;
 			}
 		}
 		@media (min-width: 400px){
 			thead{
 				th{
-					padding-top: 21px;
-					padding-bottom: 21px;
-					padding-left: 40px;
+					padding-top: 10px;
+					padding-bottom: 10px;
+					padding-left: 10px;
 					padding-right: 10px;
 				}
 			}
@@ -7243,9 +7393,9 @@ $primaryColor: #3399ff;
 				tr{
 					th,
 					td{
-						padding-top: 16px;
-						padding-bottom: 16px;
-						padding-left: 40px;
+						padding-top: 15px;
+						padding-bottom: 15px;
+						padding-left: 10px;
 						padding-right: 10px;
 					}
 				}
@@ -7271,14 +7421,31 @@ $primaryColor: #3399ff;
 			}
 		}
 	}
+	.components-panel__body{
+		margin-bottom: 15px;
+		.components-button{
+			padding: 15px 10px !important;
+			display: flex !important;
+			justify-content: space-between;
+			border-radius: 3px !important;
+		}
+	}
+	.components-radio-control__option{
+		margin-bottom: 20px;
+	}
+	
 	.components-button{
-		background: transparent;
-		color: #000;
+		background: #c2c9d0;
+		color: #333;
 		width: 100%;
 		text-align: left;
 		margin-bottom: 10px;
 		border-radius: 10px !important;
 		border: 1px solid #e5e5e5 !important;
+		display: flex;
+		align-items: center;
+		flex-direction: row-reverse;
+		margin-bottom: 0;
 		span {
 			float: right;
 		}
