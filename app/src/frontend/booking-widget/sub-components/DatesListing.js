@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { RRule, RRuleSet, rrulestr } from 'rrule'
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
-import { PanelBody, PanelRow, Disabled } from '@wordpress/components';
+import { PanelBody, PanelRow, Disabled, RadioControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n'
 const _ = lodash
 
@@ -138,7 +138,6 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
             firstCategories.forEach(c => {
                 firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
             })
-            console.log( 'paxSelectorData', paxSelectorData );
             return <>
                 { isTourDate(new Date( _date ) ) ? 
                  
@@ -148,12 +147,14 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                 <ul>
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <li key={pricingIndex}>
-                                                <button 
-                                                    disabled={paxSelectorData.selectedPricingId == pricingId}
-                                                    className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
-                                                    onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >
-                                                        {pricings[pricingId].title}
-                                                </button>
+
+                                                    {pricings[pricingId].title}
+                                                    
+                                                    <button 
+                                                        disabled={paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) }
+                                                        className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
+                                                        onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >
+                                                    </button>
                                             </li>
                                     })}
                                 </ul>
@@ -271,7 +272,6 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' != d.start_date && new Date( d.start_date )  > new Date() } )
     let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id); // All Pricings.
     let times = getPricingTripTimes(paxSelectorData.selectedPricingId, [])
-    console.log( 'times', times );
     return <>
         {
             _dates.length > 0 ? <>
@@ -300,6 +300,13 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                         firstCategories.forEach(c => {
                                             firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
                                         })
+
+                                        let pricingOptions = []
+                                        if ( 'undefined' != typeof _pricingIds.length && _pricingIds.length ) {
+                                            pricingOptions = _pricingIds.map( (pricingId, pricingIndex) => {
+                                                return { label: pricings[pricingId].title, value: pricingId }
+                                            })
+                                        }
 			
                                         return <>
                                             {! date.is_recurring && 
@@ -307,7 +314,17 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                 <tr key={index}>
                                                     <td>
                                                         { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
-                                                            <ul>
+                                                        <>
+                                                            <RadioControl
+                                                                // label="User type"
+                                                                // help="The type of the current user"
+                                                                selected={paxSelectorData.selectedPricingId}
+                                                                options={ pricingOptions}
+                                                                onChange={ ( e ) => { 
+                                                                    handlePricingClick(date.start_date, date.id, e )()
+                                                                } }
+                                                            />
+                                                            {/* <ul>
                                                                 {_pricingIds.map( (pricingId, pricingIndex) => {
                                                                     return <li key={pricingIndex}>
                                                                         <button
@@ -320,7 +337,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                                         </button>
                                                                     </li>
                                                                 })}
-                                                            </ul>
+                                                            </ul> */}
+                                                        </>
                                                         }
                                                     </td>
                                                     <td>
