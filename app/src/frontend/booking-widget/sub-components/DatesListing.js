@@ -7,7 +7,6 @@ const _ = lodash
 
 import PaxSelector from './PaxSelector';
 import TripTimesListing from './TripTimesListing';
-import { managementTeamDesignation } from '../../../../../../../../../kyc/adbl/bank/resources/js/config/lists';
 
 const datePerPage = 5
 const generateRRule = rruleArgs => {
