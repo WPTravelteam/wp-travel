@@ -7196,7 +7196,14 @@ $primaryColor: #3399ff;
 				}
 			}
 
-		}    
+		}  
+		.wp-travel-booking__selected-time button{
+			margin-bottom: 0.5rem;
+		}
+		.wp-travel-booking__selected-time button:last-child{
+			margin-bottom: 0;
+			margin-right: 0;
+		}  
 		.wp-travel-booking__trip-option-list{
 			.text-right{
 				display: flex;
@@ -7244,9 +7251,10 @@ $primaryColor: #3399ff;
 						fill: red;
 					}
 				}
-				&:hover .discount-table{
-					display: block !important;	
-				}
+
+			}
+			.group-discount-button:hover .discount-table{
+				display: block !important;	
 			}
 			.discount-table{
 				position: absolute;
@@ -7431,12 +7439,16 @@ $primaryColor: #3399ff;
 		}
 		
 	}
+	.wp-travel-recurring-dates-nav-btns{
+		margin-top: 15px;
+	}
+	
 	@media (max-width: 575px){
 		.components-panel__body.is-opened{
-			overflow-x: auto;	
 			margin-bottom: 30px;
-		}
-		.wptravel-recurring-table{
+		}		
+		.wptravel-recurring-table,
+		.components-panel__body.is-opened{
 			overflow-x: auto;	
 			table{
 				thead {
@@ -7463,9 +7475,11 @@ $primaryColor: #3399ff;
 					font-weight: bold;
 					text-transform: uppercase;
 				}
+				
 			}
 
 		}
+
 	}
 	.listing{
 		display: grid;
@@ -7500,7 +7514,8 @@ $primaryColor: #3399ff;
 	}
 	
 	.components-button{
-		background: #c2c9d0;
+		
+		background: rgba(194, 201, 208, 0.20);
 		color: #333;
 		width: 100%;
 		text-align: left;
@@ -7513,6 +7528,11 @@ $primaryColor: #3399ff;
 		margin-bottom: 0;
 		span {
 			float: right;
+		}
+	}
+	.components-panel__body.is-opened{
+		.components-button{
+			background: #c2c9d0;
 		}
 	}
 	.wp-travel-recurring-dates-nav-btns{

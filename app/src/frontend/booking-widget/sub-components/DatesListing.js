@@ -148,7 +148,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                 { isTourDate(new Date( _date ) ) ? 
                  
                     <tr key={dateIndex}>
-                        <td>
+                        <td data-label="pricings">
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
                                 <RadioControl
@@ -176,7 +176,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                 </>
                             }
                         </td>
-                        <td>
+                        <td data-label="person">
                         {
                         !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) ? 
                             
@@ -198,7 +198,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
 
                         }
                         </td>
-                        <td className="row">
+                        <td data-label="date">
                             <div className="date-time-wrapper">
                                 {_date.format("YYYY-MM-DD")}
                             </div>
@@ -433,9 +433,9 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Pricings</th>
-                                                <th>Person</th>
-                                                <th>Date</th>
+                                                <th data-label="pricings">Pricings</th>
+                                                <th data-label="person">Person</th>
+                                                <th data-label="date">Date</th>
                                                 {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                                             </tr>
                                         </thead>
