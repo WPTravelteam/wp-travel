@@ -7,6 +7,7 @@ const _ = lodash
 
 import PaxSelector from './PaxSelector';
 import TripTimesListing from './TripTimesListing';
+import { managementTeamDesignation } from '../../../../../../../../../kyc/adbl/bank/resources/js/config/lists';
 
 const datePerPage = 5
 const generateRRule = rruleArgs => {
@@ -138,13 +139,28 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
             firstCategories.forEach(c => {
                 firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
             })
+            let pricingOptions = []
+            if ( 'undefined' != typeof _pricingIds.length && _pricingIds.length ) {
+                pricingOptions = _pricingIds.map( (pricingId, pricingIndex) => {
+                    return { label: pricings[pricingId].title, value: pricingId }
+                })
+            }
             return <>
                 { isTourDate(new Date( _date ) ) ? 
                  
                     <tr key={dateIndex}>
                         <td>
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
-                                <ul>
+                                <>
+                                <RadioControl
+                                    // label="User type"
+                                    // help="The type of the current user"
+                                    selected={paxSelectorData.selectedPricingId}
+                                    options={ pricingOptions}
+                                    onChange={ ( e ) => { 
+                                        handleFixedDeparturePricingClick(_date, date.id, e )()
+                                    } } />
+                                {/* <ul>
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <li key={pricingIndex}>
 
@@ -157,7 +173,8 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                                     </button>
                                             </li>
                                     })}
-                                </ul>
+                                </ul> */}
+                                </>
                             }
                         </td>
                         <td>
@@ -182,8 +199,10 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
 
                         }
                         </td>
-                        <th className="row">
-                            {_date.format("YYYY-MM-DD")}
+                        <td className="row">
+                            <div className="date-time-wrapper">
+                                {_date.format("YYYY-MM-DD")}
+                            </div>
                             {
                                 !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) &&
                                     <> 
@@ -195,9 +214,8 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                     </>
                             }
                             
-                        </th>
-                        <td></td>
-                        <td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td>
+                       </td>
+                        {/* <td><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></td> */}
                     </tr>
                     :
                     <>
@@ -205,31 +223,41 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                             <td>
                                 <Disabled>
                                     { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
-                                        <ul>
+                                        <>
+                                        <RadioControl
+                                            // label="User type"
+                                            // help="The type of the current user"
+                                            selected={paxSelectorData.selectedPricingId}
+                                            options={ pricingOptions}
+                                            onChange={ ( e ) => { 
+                                                handleFixedDeparturePricingClick(date.start_date, date.id, e )()
+                                            } }
+                                        />
+                                        {/* <ul>
                                             {_pricingIds.map( (pricingId, pricingIndex) => {
                                                 return <li key={pricingIndex}>
                                                         <button onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >{pricings[pricingId].title}</button>
                                                     </li>
                                             })}
-                                        </ul>
+                                        </ul> */}
+                                        </>
                                     }
                                 </Disabled>
                             </td>
                             <td>
                                 <Disabled>
-                                    { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 &&
-                                        <PaxSelector
-                                            pricing={paxSelectorData.pricing ? paxSelectorData.pricing : firstPricing }
-                                            onPaxChange={paxSelectorData.onPaxChange}
-                                            counts={paxSelectorData.counts ? paxSelectorData.counts : firstCounts }
-                                            inventory={paxSelectorData.inventory}
-                                        />
-                                    }
+                                    
+                                    <PaxSelector
+                                        pricing={ firstPricing }
+                                        onPaxChange={paxSelectorData.onPaxChange}
+                                        counts={firstCounts }
+                                        inventory={paxSelectorData.inventory}
+                                    />
                                 </Disabled>
                             </td>
                             <td><Disabled>{_date.format("YYYY-MM-DD")}</Disabled></td>
                             <td><Disabled></Disabled></td>
-                            <td><Disabled><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></Disabled></td>
+                            {/* <td><Disabled><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></Disabled></td> */}
                         </tr>
                     
                     </>
@@ -283,9 +311,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                             <tr>
                                 <th>Pricings</th>
                                 <th>Person</th>
-                                <th>{_wp_travel.strings.bookings.start_date}</th>
-                                <th>{_wp_travel.strings.bookings.end_date}</th>
-                                <th>{_wp_travel.strings.bookings.action}</th>
+                                <th>Date</th>
+                                {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                             </tr>
                             </thead>
                             <tbody>
@@ -365,9 +392,13 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                     
 
                                                     </td>
-                                                    <th className="row">{date.start_date}
-                                                    {
-                                                        !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
+                                                    <td>
+                                                        <div className="date-time-wrapper">
+                                                            {date.start_date}
+                                                            -
+                                                            {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' }
+                                                        </div>
+                                                        { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
                                                             <> 
                                                             <TripTimesListing
                                                                 selected={paxSelectorData.selectedDateTime}
@@ -375,14 +406,13 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                                 options={paxSelectorData.nomineeTimes}
                                                             />
                                                             </>
-                                                    }
-                                                    </th>
-                                                    <td>{date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' } </td>
-                                                    <td>
+                                                        }
+                                                    </td>
+                                                    {/* <td>
                                                         <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
                                                         {_wp_travel.strings.bookings.book_now}
                                                         </button>
-                                                    </td>
+                                                    </td> */}
                                                 </tr>
                                                 </>
                                             }
@@ -405,9 +435,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                             <tr>
                                                 <th>Pricings</th>
                                                 <th>Person</th>
-                                                <th>{_wp_travel.strings.bookings.start_date}</th>
-                                                <th>{_wp_travel.strings.bookings.end_date}</th>
-                                                <th>{_wp_travel.strings.bookings.action}</th>
+                                                <th>Date</th>
+                                                {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                                             </tr>
                                         </thead>
                                         <RecurringDates data={date} onDateClick={handleClick} onFixedDeparturePricingSelect={handlePricingClick} getPricingsByDate={getPricingsByDate} isTourDate={isTourDate} allData={allData} paxSelectorData={paxSelectorData} key={index} />
