@@ -7221,6 +7221,7 @@ $primaryColor: #3399ff;
 				text-decoration: underline;		
 				display: flex;
     			align-items: center;	
+				cursor: pointer;
 				span{
 					position: absolute;
 					bottom: 100%;
@@ -7243,10 +7244,13 @@ $primaryColor: #3399ff;
 						fill: red;
 					}
 				}
+				&:hover .discount-table{
+					display: block !important;	
+				}
 			}
 			.discount-table{
 				position: absolute;
-				top: 100%;
+				top: 70%;
 				left: 0;
 				z-index: 1;
 				background-color: #fff;
@@ -7271,6 +7275,7 @@ $primaryColor: #3399ff;
 					border-bottom-color: #0000005c;
     				top: -.7px;
 				}
+				
 				table{
 					width: 100%;
 					border-collapse: collapse;
@@ -7380,6 +7385,29 @@ $primaryColor: #3399ff;
 				font-weight: bold;
 			}
 		}
+		.wp-travel-booking__selected-time{
+			h4{
+				display: none;
+			}
+			button{
+				font-size: 14px;
+				font-weight: bold;
+				border: 1px solid #444;
+				background-color: rgba(68, 68, 68, 0.2);
+				color: #444;
+				cursor: pointer;
+				margin-right: .5rem;
+				padding: 5px 10px !important;
+				&:disabled{
+					opacity: 1 !important;
+					background-color: #444;
+					color: #fff;
+				}
+				&:last-child{
+					margin-right: 0;
+				}
+			}
+		}
 		@media (min-width: 400px){
 			thead{
 				th{
@@ -7400,6 +7428,43 @@ $primaryColor: #3399ff;
 					}
 				}
 			}
+		}
+		
+	}
+	@media (max-width: 575px){
+		.components-panel__body.is-opened{
+			overflow-x: auto;	
+			margin-bottom: 30px;
+		}
+		.wptravel-recurring-table{
+			overflow-x: auto;	
+			table{
+				thead {
+					border: none;
+					clip: rect(0 0 0 0);
+					height: 1px;
+					margin: -1px;
+					overflow: hidden;
+					padding: 0;
+					position: absolute;
+					width: 1px;
+				}
+				td{
+					text-align: right;
+					display: flex;
+    				justify-content: space-between;
+				}
+				.wp-travel-booking__trip-option-list li {
+					flex-direction: column;
+				}
+				td::before {
+					content: attr(data-label);
+					float: left;
+					font-weight: bold;
+					text-transform: uppercase;
+				}
+			}
+
 		}
 	}
 	.listing{
