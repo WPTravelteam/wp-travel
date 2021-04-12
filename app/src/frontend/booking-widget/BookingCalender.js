@@ -727,7 +727,10 @@ const BookingWidget = () => {
 		selectedDateIds:selectedTripDate, // Additional Data.
 		selectedDateTime:selectedDateTime, // Additional Data.  for pax picker and time picker
 		onTimeSelect:handleTimeClick, // For time picker
-		nomineeTimes:nomineeTimes // For time picker
+		nomineeTimes:nomineeTimes, // For time picker
+		totalPax:totalPax, // For extras.
+		tripExtras:tripExtras, // For extras.
+		updateState:updateState // For extras.
 	}
 	return <>
 		{

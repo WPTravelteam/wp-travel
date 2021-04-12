@@ -5,8 +5,11 @@ import { PanelBody, PanelRow, Disabled, RadioControl } from '@wordpress/componen
 import { __ } from '@wordpress/i18n'
 const _ = lodash
 
+import ErrorBoundry from '../ErrorBoundry';
+
 import PaxSelector from './PaxSelector';
 import TripTimesListing from './TripTimesListing';
+import TripExtrasListing from './TripExtrasListing';
 
 const datePerPage = 5
 const generateRRule = rruleArgs => {
@@ -306,14 +309,15 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                 <div className="wptravel-recurring-dates">
                     <div className="wptravel-recurring-table">
                         {nonRecurringDates.length > 0 &&
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-label="pricings">Pricings</th>
-                                    <th data-label="person">Person</th>
-                                    <th data-label="date">Date</th>
-                                    {/* <th>{_wp_travel.strings.bookings.action}</th> */}
-                                </tr>
+                        <>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th data-label="pricings">Pricings</th>
+                                        <th data-label="person">Person</th>
+                                        <th data-label="date">Date</th>
+                                        {/* <th>{_wp_travel.strings.bookings.action}</th> */}
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {
@@ -343,9 +347,6 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>
                                                                 <RadioControl
-                                                                    className="test"
-                                                                    // label="User type"
-                                                                    // help="The type of the current user"
                                                                     selected={paxSelectorData.selectedPricingId}
                                                                     options={ pricingOptions}
                                                                     onChange={ ( e ) => { 
@@ -372,12 +373,23 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         <td data-label="person">
                                                         {
                                                             !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) ) ? 
-                                                                <PaxSelector
-                                                                    pricing={paxSelectorData.pricing ? paxSelectorData.pricing : firstPricing }
-                                                                    onPaxChange={paxSelectorData.onPaxChange}
-                                                                    counts={paxSelectorData.counts ? paxSelectorData.counts : firstCounts }
-                                                                    inventory={paxSelectorData.inventory}
-                                                                />
+                                                                <>
+                                                                    <PaxSelector
+                                                                        pricing={paxSelectorData.pricing ? paxSelectorData.pricing : firstPricing }
+                                                                        onPaxChange={paxSelectorData.onPaxChange}
+                                                                        counts={paxSelectorData.counts ? paxSelectorData.counts : firstCounts }
+                                                                        inventory={paxSelectorData.inventory}
+                                                                    />
+                                                                    {
+                                                                        !paxSelectorData.pricingUnavailable && paxSelectorData.totalPax > 0 && _.size(paxSelectorData.pricing.trip_extras) > 0 && <ErrorBoundry>
+                                                                            <TripExtrasListing
+                                                                                options={paxSelectorData.pricing.trip_extras}
+                                                                                onChange={(id, value) => () => paxSelectorData.updateState({ tripExtras: { ...paxSelectorData.tripExtras, [id]: parseInt(value) } })}
+                                                                                counts={paxSelectorData.tripExtras}
+                                                                            />
+                                                                        </ErrorBoundry>
+                                                                    }
+                                                                </>
                                                                 : <Disabled>
                                                                     {/* Just to display */}
                                                                     <PaxSelector
@@ -419,9 +431,10 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                             </>
                                         })
                                     }
-                                
-                        </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                           
+                        </>
                         }
                     </div>
                     {/* Recurring */}
