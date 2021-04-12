@@ -182,13 +182,23 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                         <td data-label="person">
                         {
                         !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) ? 
-                            
+                            <>
                             <PaxSelector
                                 pricing={paxSelectorData.pricing ? paxSelectorData.pricing : firstPricing }
                                 onPaxChange={paxSelectorData.onPaxChange}
                                 counts={paxSelectorData.counts ? paxSelectorData.counts : firstCounts }
                                 inventory={paxSelectorData.inventory}
                             />
+                            {paxSelectorData.totalPax > 0 && _.size(paxSelectorData.pricing.trip_extras) > 0 && 
+                                <ErrorBoundry>
+                                    <TripExtrasListing
+                                        options={paxSelectorData.pricing.trip_extras}
+                                        onChange={(id, value) => () => paxSelectorData.updateState({ tripExtras: { ...paxSelectorData.tripExtras, [id]: parseInt(value) } })}
+                                        counts={paxSelectorData.tripExtras}
+                                    />
+                                </ErrorBoundry>
+                            }
+                            </>
                             : <Disabled>
                                 {/* Just to display */}
                                 <PaxSelector
@@ -381,7 +391,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                                         inventory={paxSelectorData.inventory}
                                                                     />
                                                                     {
-                                                                        !paxSelectorData.pricingUnavailable && paxSelectorData.totalPax > 0 && _.size(paxSelectorData.pricing.trip_extras) > 0 && <ErrorBoundry>
+                                                                        paxSelectorData.totalPax > 0 && _.size(paxSelectorData.pricing.trip_extras) > 0 && <ErrorBoundry>
                                                                             <TripExtrasListing
                                                                                 options={paxSelectorData.pricing.trip_extras}
                                                                                 onChange={(id, value) => () => paxSelectorData.updateState({ tripExtras: { ...paxSelectorData.tripExtras, [id]: parseInt(value) } })}
