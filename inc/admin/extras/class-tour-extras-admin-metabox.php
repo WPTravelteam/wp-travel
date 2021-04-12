@@ -137,7 +137,7 @@ class WpTravel_Admin_Tour_Extras_Metaboxes {
 
 		if ( isset( $_POST['wp_travel_extras'] ) ) {
 
-			$sanitized_data = wptravel_sanitize_array( stripslashes_deep( $_POST['wp_travel_extras'] ) );
+			$sanitized_data = wptravel_sanitize_array( stripslashes_deep( $_POST['wp_travel_extras'] ), true );
 
 			update_post_meta( $post_id, 'wp_travel_tour_extras_metas', $sanitized_data );
 
