@@ -118,6 +118,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
                                         c13.569,0,24.609-11.039,24.609-24.609C221.549,163.686,210.51,152.646,196.941,152.646z"></path>
 								</svg>
 								{__i18n.bookings.view_group_discount}
+								{c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />}
 							</span>}
 						</div>
 						<div className="text-right">
@@ -131,9 +132,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 								<div className="price" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></div>
 							</div>
 						</div>
-						{
-							c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
-						}
+						
 					</li>
 				})
 			}
