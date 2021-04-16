@@ -180,6 +180,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                             }
                         </td>
                         <td data-label="person">
+                            <div className ="person-box">
                         {
                         !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) ? 
                             <>
@@ -210,6 +211,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                             </Disabled>
 
                         }
+                        </div>
                         </td>
                         <td data-label="date">
                             <div className="date-time-wrapper">
@@ -381,6 +383,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                             }
                                                         </td>
                                                         <td data-label="person">
+                                                        <div className ="person-box">
                                                         {
                                                             !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) ) ? 
                                                                 <>
@@ -412,7 +415,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
 
                                                         }
                                                         
-
+                                                        </div>
                                                         </td>
                                                         <td data-label="date">
                                                             <div className="date-time-wrapper">
@@ -443,7 +446,6 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                     }
                                 </tbody>
                             </table>
-                           
                         </>
                         }
                     </div>
