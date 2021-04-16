@@ -78,7 +78,7 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 											<span>{_count}</span>
 											<button onClick={handleClick(i, 1)}>+</button>
 										</div>
-										<div className="price" dangerouslySetInnerHTML={{__html: wpTravelFormat(_count * price)}}></div>
+										{/* <div className="price" dangerouslySetInnerHTML={{__html: wpTravelFormat(_count * price)}}></div> */}
 									</div>
 								</div>
 							</li>
