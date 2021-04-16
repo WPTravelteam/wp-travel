@@ -1111,6 +1111,38 @@
   "resolved" "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz"
   "version" "0.2.5"
 
+"@fullcalendar/common@~5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.6.0.tgz#27206084df07fbab33a67478b0d9b05542b09b79"
+  integrity sha512-4i4kZDVpRvfdKoJHRljDHsoYu466Odor9FhekP+67dIUoNnXSDTnQRmGfURwiF4RwaTsdWKe2+B7gors9G7zZA==
+  dependencies:
+    tslib "^2.0.3"
+
+"@fullcalendar/core@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-5.6.0.tgz#c0ea59235047828c9d0409432966bebc71df0bec"
+  integrity sha512-RK7WM2oWAd4GJ3Ib6a3ftTmz2UxUD4N2JmH8ml+E3bprS9/wjnfvZppikx30UxKUBCAzQcBGOKV8GXh0Wk7FvA==
+  dependencies:
+    "@fullcalendar/common" "~5.6.0"
+    preact "^10.0.5"
+    tslib "^2.0.3"
+
+"@fullcalendar/daygrid@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.6.0.tgz#705508a7e7c5d560d01877485283f370c3c70780"
+  integrity sha512-UaNn6/vKQ3zI4/sDhrMACkIHOSZb/MA0JGlvvw3OTYFULqE5TISuYYnDbo9S1Wdz3AbTBvCzYy5Qk1vZQFsGwg==
+  dependencies:
+    "@fullcalendar/common" "~5.6.0"
+    tslib "^2.0.3"
+
+"@fullcalendar/rrule@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/rrule/-/rrule-5.6.0.tgz#3f88a09589b37f4f35944a08d0ef2887b08bb487"
+  integrity sha512-y4nMqEfctg2djLSb5r+1/rH0fSLVUZl4XOMu3ncmlJrFcn8rmX5WP3G3rAy738Gv9eBBn0AGBsezkmHmWda9Og==
+  dependencies:
+    "@fullcalendar/common" "~5.6.0"
+    tslib "^2.0.3"
+
 "@hapi/address@2.x.x":
   "integrity" "sha512-QD1PhQk+s31P1ixsX0H0Suoupp3VMXzIVMSwobR3F3MSUO2YCV0B7xqLcUw/Bh8yuvd3LhpyqLQWTNcRmp6IdQ=="
   "resolved" "https://registry.npmjs.org/@hapi/address/-/address-2.1.4.tgz"
