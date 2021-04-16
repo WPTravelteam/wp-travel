@@ -11,6 +11,10 @@ import PaxSelector from './PaxSelector';
 import TripTimesListing from './TripTimesListing';
 import TripExtrasListing from './TripExtrasListing';
 
+const __i18n = {
+	..._wp_travel.strings
+}
+console.log(__i18n);
 const datePerPage = 5
 const generateRRule = rruleArgs => {
     const rruleSet = new RRuleSet();
@@ -150,7 +154,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
             return <>
                 { isTourDate(new Date( _date ) ) ? 
                  
-                    <tr key={dateIndex}>
+                    <tr key={dateIndex} className={_date.isSame( _selectedDateTime ) ? 'selected': ''} >
                         <td data-label="pricings">
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
@@ -215,7 +219,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                         </td>
                         <td data-label="date">
                             <div className="date-time-wrapper">
-                                {_date.format(_wp_travel.date_format_moment)}
+                                <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{_date.format(_wp_travel.date_format_moment)}</span>
                             </div>
                             {
                                 !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) &&
@@ -269,7 +273,11 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                     />
                                 </Disabled>
                             </td>
-                            <td><Disabled>{_date.format(_wp_travel.date_format_moment)}</Disabled></td>
+                            <td data-label="date"><Disabled>
+                                    <div className="date-time-wrapper">
+                                    <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{_date.format(_wp_travel.date_format_moment)}</span>
+                                </div></Disabled>
+                            </td>
                             {/* <td><Disabled><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></Disabled></td> */}
                         </tr>
                     
@@ -419,9 +427,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         <td data-label="date">
                                                             <div className = "date-box">
                                                                 <div className="date-time-wrapper">
-                                                                    {moment(date.start_date).format(_wp_travel.date_format_moment)}
-                                                                    <span> - </span>
-                                                                    {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format(_wp_travel.date_format_moment) : 'N/A' }
+                                                                    <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
+                                                                    {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
                                                                 </div>
                                                                     { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
                                                                         <> 
