@@ -111,12 +111,13 @@ class WpTravel_Helpers_Trips {
 		}
 		$enable_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_enable_trip_enquiry_option', true );
 
-		$trip_include = get_post_meta( $trip_id, 'wp_travel_trip_include', true );
-		$trip_exclude = get_post_meta( $trip_id, 'wp_travel_trip_exclude', true );
-		$trip_outline = get_post_meta( $trip_id, 'wp_travel_outline', true );
-		$itineraries  = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
-		$faqs         = wptravel_get_faqs( $trip_id );
-		$map_data     = wptravel_get_map_data( $trip_id );
+		$trip_overview = get_post_meta( $trip_id, 'wp_travel_overview', true );
+		$trip_include  = get_post_meta( $trip_id, 'wp_travel_trip_include', true );
+		$trip_exclude  = get_post_meta( $trip_id, 'wp_travel_trip_exclude', true );
+		$trip_outline  = get_post_meta( $trip_id, 'wp_travel_outline', true );
+		$itineraries   = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
+		$faqs          = wptravel_get_faqs( $trip_id );
+		$map_data      = wptravel_get_map_data( $trip_id );
 		// TODO : Include following map_data inside `wptravel_get_map_data` function.
 		$zoomlevel               = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
 		$iframe_height           = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
@@ -148,6 +149,7 @@ class WpTravel_Helpers_Trips {
 			'trip_code'                         => wptravel_get_trip_code( $trip->ID ),
 			'use_global_tabs'                   => $use_global_tabs,
 			'trip_tabs'                         => $tabs,
+			'trip_overview'                     => $trip_overview,
 			'trip_include'                      => $trip_include,
 			'trip_exclude'                      => $trip_exclude,
 			'trip_outline'                      => $trip_outline,
@@ -419,7 +421,7 @@ class WpTravel_Helpers_Trips {
 
 		/**
 		 * Update Meta for sale widget.
-		 * if trip has enable sale for any one price then the trip is assume as sale enabled trip. 
+		 * if trip has enable sale for any one price then the trip is assume as sale enabled trip.
 		 */
 		$args = array( 'trip_id' => $trip_id );
 		$sale_enabled = self::is_sale_enabled( $args );
