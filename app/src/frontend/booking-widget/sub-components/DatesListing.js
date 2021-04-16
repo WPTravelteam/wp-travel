@@ -319,11 +319,11 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
             _dates.length > 0 ? <>
 
                 <div className="wptravel-recurring-dates">
-                    <div className="wptravel-recurring-table">
+                    <div className="wptravel-recurring-table-wrapper">
                         {nonRecurringDates.length > 0 &&
                         <>
-                            <table>
-                                <thead>
+                            <table className="wptravel-recurring-table">
+                                <thead className="thead-table">
                                     <tr>
                                         <th data-label="pricings">Pricings</th>
                                         <th data-label="person">Person</th>
@@ -331,7 +331,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                         {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="tbody-table">
                                     {
                                         nonRecurringDates.map((date, index) => {
                                             let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
