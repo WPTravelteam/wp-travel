@@ -417,20 +417,22 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         </div>
                                                         </td>
                                                         <td data-label="date">
-                                                            <div className="date-time-wrapper">
-                                                                {moment(date.start_date).format(_wp_travel.date_format_moment)}
-                                                                -
-                                                                {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format(_wp_travel.date_format_moment) : 'N/A' }
+                                                            <div className = "date-box">
+                                                                <div className="date-time-wrapper">
+                                                                    {moment(date.start_date).format(_wp_travel.date_format_moment)}
+                                                                    <span> - </span>
+                                                                    {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format(_wp_travel.date_format_moment) : 'N/A' }
+                                                                </div>
+                                                                    { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
+                                                                        <> 
+                                                                        <TripTimesListing
+                                                                            selected={paxSelectorData.selectedDateTime}
+                                                                            onTimeSelect={paxSelectorData.onTimeSelect}
+                                                                            options={paxSelectorData.nomineeTimes}
+                                                                        />
+                                                                        </>
+                                                                    }
                                                             </div>
-                                                            { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
-                                                                <> 
-                                                                <TripTimesListing
-                                                                    selected={paxSelectorData.selectedDateTime}
-                                                                    onTimeSelect={paxSelectorData.onTimeSelect}
-                                                                    options={paxSelectorData.nomineeTimes}
-                                                                />
-                                                                </>
-                                                            }
                                                         </td>
                                                         {/* <td>
                                                             <button className="wp-travel-recurring-date-picker-btn" key={index} onClick={handleClick(date.start_date, date.id)}>
