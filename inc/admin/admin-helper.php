@@ -1029,7 +1029,7 @@ function wptravel_upsell_message( $args ) {
 
 	$types[]     = 'wp-travel-pro';
 	$show_upsell = apply_filters( 'wp_travel_show_upsell_message', true, $types ); // @phpcs:ignore
-	$show_upsell = apply_filters( 'wptravel_show_upsell_message', true, $types );
+	$show_upsell = apply_filters( 'wptravel_show_upsell_message', $show_upsell, $types );
 
 	if ( ! $show_upsell ) {
 		return;
