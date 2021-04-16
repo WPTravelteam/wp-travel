@@ -72,7 +72,7 @@ class WpTravel_Helpers_Trips {
 		);
 
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false ); // @phpcs:ignore
-		$enable_custom_itinerary_tabs = apply_filters( 'wptravel_custom_itinerary_tabs', false );
+		$enable_custom_itinerary_tabs = apply_filters( 'wptravel_custom_itinerary_tabs', $enable_custom_itinerary_tabs );
 		$use_global_tabs              = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 
 		$default_tabs = wptravel_get_default_trip_tabs();
