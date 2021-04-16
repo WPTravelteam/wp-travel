@@ -752,21 +752,19 @@ const BookingWidget = () => {
 					</svg>
 					{__i18n.bookings.booking_tab_clear_all}</button>}
 			</div>
-			<div className="wp-travel-booking__datepicker-wrapper">
 				{<>
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
-							<>
+							<div className="wp-travel-booking__content-wrapper">
 								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData, getPricingTripTimes:getPricingTripTimes }} />
-							</>
+							</div>
 						||
-							<>
-								<DatePicker {...params} />
-								{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
-							</>
+						<div className="wp-travel-booking__datepicker-wrapper">
+							<DatePicker {...params} />
+							{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+						</div>
 					}
 				</>}
-			</div>
 			{isFixedDeparture && 'dates' === tripDateListing && selectedDateTime &&
 				<p>Trip Date: <span>{moment(selectedDateTime).format('YYYY-MM-DD')}</span></p>
 			}
