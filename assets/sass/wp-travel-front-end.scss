@@ -7422,6 +7422,8 @@ $primaryColor: #3399ff;
 		.wp-travel-booking__trip-extras-wrapper{
 			h4{
 				text-align: left;
+				font-size: 14px;
+    			margin-bottom: 10px;
 			}
 			.wp-travel-booking__trip-option-list{
 				list-style: none;
@@ -7523,7 +7525,7 @@ $primaryColor: #3399ff;
 						}
 						> span{
 							font-weight: bold;
-							font-size: 18px;
+							font-size: 16px;
 							color: #444;
 						}
 					}
@@ -7686,9 +7688,9 @@ $primaryColor: #3399ff;
 							}
 							button{
 								display: inline-flex;
-								width: 30px;
-								height: 30px;
-								line-height: 30px;
+								width: 20px;
+								height: 20px;
+								line-height: 20px;
 								padding: 0;
 								// border: 1px solid $defaultColor;
 								// background-color: $defaultColor;
@@ -7709,8 +7711,8 @@ $primaryColor: #3399ff;
 							span{
 								display: inline-block;
 								min-width: 30px;
-								height: 30px;
-								line-height: 30px;
+								height: 20px;
+								line-height: 20px;
 								text-align: center;
 								border-top: 1px solid rgba(#000, .1);
 								border-bottom: 1px solid rgba(#000, .1);
@@ -7722,6 +7724,7 @@ $primaryColor: #3399ff;
 							text-align: right;
 							font-weight: bold;
 							padding-left: 15px;
+							font-size: 18px;
 							@media(max-width: 575px){
 								width: unset;
 								padding-left: 10px;

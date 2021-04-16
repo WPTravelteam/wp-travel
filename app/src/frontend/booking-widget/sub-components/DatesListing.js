@@ -215,7 +215,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                         </td>
                         <td data-label="date">
                             <div className="date-time-wrapper">
-                                {_date.format("YYYY-MM-DD")}
+                                {_date.format(_wp_travel.date_format_moment)}
                             </div>
                             {
                                 !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) &&
@@ -269,8 +269,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                     />
                                 </Disabled>
                             </td>
-                            <td><Disabled>{_date.format("YYYY-MM-DD")}</Disabled></td>
-                            <td><Disabled></Disabled></td>
+                            <td><Disabled>{_date.format(_wp_travel.date_format_moment)}</Disabled></td>
                             {/* <td><Disabled><button onClick={handleDateClick(_date)}>{_wp_travel.strings.bookings.book_now}</button></Disabled></td> */}
                         </tr>
                     
@@ -419,9 +418,9 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         </td>
                                                         <td data-label="date">
                                                             <div className="date-time-wrapper">
-                                                                {date.start_date}
+                                                                {moment(date.start_date).format(_wp_travel.date_format_moment)}
                                                                 -
-                                                                {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format('YYYY-MM-DD') : 'N/A' }
+                                                                {date.end_date && '0000-00-00' != date.end_date ? moment(date.end_date).format(_wp_travel.date_format_moment) : 'N/A' }
                                                             </div>
                                                             { !paxSelectorData.pricingUnavailable && paxSelectorData.nomineeTimes.length > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) &&
                                                                 <> 
