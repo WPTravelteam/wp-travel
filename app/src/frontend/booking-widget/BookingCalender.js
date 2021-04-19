@@ -157,7 +157,7 @@ const BookingWidget = () => {
 		if (nomineePricings.length === 1) {
 			handlePricingSelect(nomineePricings[0])()
 			updateState({
-				isLoading: false,
+				isLoading: true,
 			})
 		}
 	}, [selectedDate])
