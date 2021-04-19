@@ -371,7 +371,7 @@ const EnquiryEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{ __( 'Booking Email Header Color', 'wp-travel' ) }</label>
+                <label>{ __( 'Enquiry Email Header Color', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={ enquiry_admin_template_settings.admin_header_color }
