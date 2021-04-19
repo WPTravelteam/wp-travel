@@ -248,10 +248,10 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 19th April, 2021
 
 Fixes:
-* Fixed Table not being created on Network activate of the plugin and also it will delete the tables if the site deleted.
+* Fixed Table not being created on Network activate mode was fixed. Also deletes the relevant table if the site on the network deleted.
 * Fixed Search filter widget showing non-relevant trips in case of recurring.
 * Fixed Unable to sort custom tabs added from utility modules.
-* Removed open graph tags.
+* Removed Open Graph option from settings page.
 
 = 4.5.7 =
 Release Date: 31st March, 2021
