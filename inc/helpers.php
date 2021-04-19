@@ -901,6 +901,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 	if ( is_array( $wp_travel_tabs ) && count( $wp_travel_tabs ) > 0 ) {
 		$wp_travel_itinerary_tabs = wptravel_get_default_trip_tabs( $show_in_menu_query, $frontend_hide_content ); // 2nd param is used to return only show_in_menu key.
 		foreach ( $wp_travel_tabs as $key => $tab ) {
+			$key          = ! empty( $tab['tab_key'] ) ? $tab['tab_key'] : $key;
 			$show_in_menu = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 			$show_in_menu = apply_filters( 'wp_travel_frontend_tab_show_in_menu', $show_in_menu, $trip_id, $key ); // @since 1.9.3.
 
