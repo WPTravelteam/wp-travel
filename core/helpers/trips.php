@@ -72,7 +72,7 @@ class WpTravel_Helpers_Trips {
 		);
 
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false ); // @phpcs:ignore
-		$enable_custom_itinerary_tabs = apply_filters( 'wptravel_custom_itinerary_tabs', false );
+		$enable_custom_itinerary_tabs = apply_filters( 'wptravel_custom_itinerary_tabs', $enable_custom_itinerary_tabs );
 		$use_global_tabs              = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 
 		$default_tabs = wptravel_get_default_trip_tabs();
@@ -119,13 +119,16 @@ class WpTravel_Helpers_Trips {
 		$faqs          = wptravel_get_faqs( $trip_id );
 		$map_data      = wptravel_get_map_data( $trip_id );
 		// TODO : Include following map_data inside `wptravel_get_map_data` function.
-		$zoomlevel               = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
+		$zoomlevel   = ! empty( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_zoomlevel', true ) ) : 10;
+		$zoomlevel   = apply_filters( 'wp_travel_trip_zoomlevel', $zoomlevel, $trip_id ); // @phpcs:ignore
+		$zoomlevel   = apply_filters( 'wptravel_trip_zoomlevel', $zoomlevel, $trip_id );
+		$use_lat_lng = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
+		$use_lat_lng = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		$use_lat_lng = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		
 		$iframe_height           = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
-		$use_lat_lng             = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
-		$map_data['zoomlevel'] = apply_filters( 'wp_travel_trip_zoomlevel', $zoomlevel, $trip_id ); // @phpcs:ignore
-		$map_data['zoomlevel']   = apply_filters( 'wptravel_trip_zoomlevel', $zoomlevel, $trip_id );
-		$map_data['use_lat_lng'] = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id ); // @phpcs:ignore
-		$map_data['use_lat_lng'] = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
+		$map_data['zoomlevel']   = $zoomlevel;
+		$map_data['use_lat_lng'] = $use_lat_lng;
 
 		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
@@ -827,7 +830,7 @@ class WpTravel_Helpers_Trips {
 									if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
 										if ( $from_price_sale_enable ) {
 											$sale_price = apply_filters( 'wp_travel_price', $option['sale_price'] ); // @phpcs:ignore
-											$sale_price = apply_filters( 'wptravel_price', $option['sale_price'] );
+											$sale_price = apply_filters( 'wptravel_price', $sale_price );
 											if ( $sale_price === $trip_price ) {
 												$enable_sale = true;
 												break;
@@ -851,7 +854,7 @@ class WpTravel_Helpers_Trips {
 								if ( 'yes' === $pricing_enable_sale ) {
 									if ( $from_price_sale_enable ) {
 										$sale_price = apply_filters( 'wp_travel_price', $category_option['sale_price'] ); // @phpcs:ignore
-										$sale_price = apply_filters( 'wptravel_price', $category_option['sale_price'] );
+										$sale_price = apply_filters( 'wptravel_price', $sale_price );
 
 										if ( $sale_price === $trip_price ) {
 											$enable_sale = true;
@@ -924,7 +927,7 @@ class WpTravel_Helpers_Trips {
 
 							if ( $from_price_sale_enable ) {
 								$sale_price = apply_filters( 'wp_travel_price', $pricing_category['sale_price'] ); // @phpcs:ignore
-								$sale_price = apply_filters( 'wptravel_price', $pricing_category['sale_price'] );
+								$sale_price = apply_filters( 'wptravel_price', $sale_price );
 								if ( $sale_price === $trip_price ) {
 									$enable_sale = true;
 									break;

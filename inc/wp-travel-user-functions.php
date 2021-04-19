@@ -17,7 +17,7 @@ if ( ! function_exists( 'wptravel_disable_admin_bar' ) ) {
 	 */
 	function wptravel_disable_admin_bar( $show_admin_bar ) {
 		$cant_edit = apply_filters( 'wp_travel_disable_admin_bar', ! current_user_can( 'edit_posts' ) ); // @phpcs:ignore
-		$cant_edit = apply_filters( 'wptravel_disable_admin_bar', ! current_user_can( 'edit_posts' ) );
+		$cant_edit = apply_filters( 'wptravel_disable_admin_bar', $cant_edit );
 		if ( $cant_edit ) {
 			$show_admin_bar = false;
 		}
@@ -50,7 +50,7 @@ if ( ! function_exists( 'wptravel_create_new_customer' ) ) {
 
 		if ( email_exists( $email ) ) {
 			$error_message = apply_filters( 'wp_travel_registration_error_email_exists', __( 'An account is already registered with your email address. Please log in.', 'wp-travel' ), $email ); // @phpcs:ignore
-			$error_message = apply_filters( 'wptravel_registration_error_email_exists', __( 'An account is already registered with your email address. Please log in.', 'wp-travel' ), $email );
+			$error_message = apply_filters( 'wptravel_registration_error_email_exists', $error_message, $email );
 			return new WP_Error( 'registration-error-email-exists', $error_message ); // @phpcs:ignore
 		}
 

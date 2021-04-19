@@ -23,7 +23,7 @@ class WpTravel_Admin_Assets {
 	public static function assets() {
 		$screen                = get_current_screen();
 		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true ); // @phpcs:ignore
-		$react_settings_enable = apply_filters( 'wptravel_settings_react_enabled', true );
+		$react_settings_enable = apply_filters( 'wptravel_settings_react_enabled', $react_settings_enable );
 		$allowed_screen        = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'itinerary-booking_page_settings' );
 		if ( in_array( $screen->id, $allowed_screen, true ) || ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) ) {
 			wp_enqueue_editor();

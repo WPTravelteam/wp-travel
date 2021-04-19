@@ -41,7 +41,7 @@ export default () => {
                     {/* <p className="description">{__( 'Enable test mode to make test payment.', 'wp-travel' )}</p> */}
                 </div>
             </PanelRow>
-            <PanelRow>
+            {/* <PanelRow>
                 <label>{ __( 'Enable OG Tags', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
@@ -53,9 +53,8 @@ export default () => {
                             })
                         } }
                     />
-                    {/* <p className="description">{__( 'Enable test mode to make test payment.', 'wp-travel' )}</p> */}
                 </div>
-            </PanelRow>
+            </PanelRow> */}
 
             <PanelRow>
                 <label>{ __( 'GDPR Message', 'wp-travel' ) }</label>

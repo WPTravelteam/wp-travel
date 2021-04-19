@@ -22,7 +22,7 @@ function wptravel_insert_og_tags() {
 	}
 }
 
-add_action( 'wp_head', 'wptravel_insert_og_tags' );
+// add_action( 'wp_head', 'wptravel_insert_og_tags' );
 
 /**
  * Common Tags

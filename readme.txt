@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.7
-Requires PHP: 5.6.20
-Stable tag: 4.5.7
+Tested up to: 5.7.1
+Requires PHP: 5.6.2
+Stable tag: 4.5.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,11 +245,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.5.8 =
-Release Date:
+Release Date: 19th April, 2021
 
 Fixes:
-* Fixed Table not being created on Network activate of the plugin. and also deleted tables if site deleted.
-* Fixed Search filter widget showing non relevent trips in case of recurring.
+* Fixed Table not being created on Network activate mode was fixed. Also deletes the relevant table if the site on the network deleted.
+* Fixed Search filter widget showing non-relevant trips in case of recurring.
+* Fixed Unable to sort custom tabs added from utility modules.
+* Removed Open Graph option from settings page.
 
 = 4.5.7 =
 Release Date: 31st March, 2021

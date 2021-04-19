@@ -173,7 +173,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  */
 function wptravel_get_template( $template_name ) {
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
-	$template_path = apply_filters( 'wptravel_template_path', 'wp-travel/' );
+	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
 
 	// Look templates in theme first.

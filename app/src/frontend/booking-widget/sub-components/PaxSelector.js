@@ -129,7 +129,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 									<span>{typeof counts[c.id] == 'undefined' ? parseInt(c.default_pax) : counts[c.id]}</span>
 									<button onClick={onPaxChange(c.id, 1)}>+</button>
 								</div>
-								<div className="price" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></div>
+								{/* <div className="price" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></div> */}
 							</div>
 						</div>
 						
