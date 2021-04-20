@@ -732,6 +732,7 @@ const BookingWidget = () => {
 		tripExtras:tripExtras, // For extras.
 		updateState:updateState // For extras.
 	}
+	console.log(pricings[selectedPricing]);
 	return <>
 		{
 			!_wp_travel.itinerary_v2 ?
@@ -823,10 +824,21 @@ const BookingWidget = () => {
 					</div>}
 				</div>
 			}
-			{selectedDate && selectedPricing && <div className="wp-travel-booking__panel-bottom">
-				<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-				<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
-			</div>}
+			{selectedDate && selectedPricing && 
+				<div className="wp-travel-booking__panel-bottom">
+					<div className="left-info" >
+						{
+						'dates' === tripDateListing && <>
+							{selectedPricing && <p>Pricing : {pricings[selectedPricing].title}</p>}
+							{selectedDateTime && <p>Trip Date: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
+						</>
+						}
+					</div>
+					<div className="right-info" >
+						<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
+						<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+					</div>
+				</div>}
 			</>
 			: // For new layout. @since v4.4.6
 			<>
