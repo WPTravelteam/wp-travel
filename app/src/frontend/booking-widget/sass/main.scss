@@ -50,16 +50,16 @@ $defaultColor: #3399ff;
             white-space: nowrap;
             margin-bottom: 5px;
             display: none;
-            &::before{
-                content: "";
-                border-top: 5px solid rgba(#000, .9);
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+            // &::before{
+            //     content: "";
+            //     border-top: 5px solid rgba(#000, .9);
+            //     border-left: 5px solid transparent;
+            //     border-right: 5px solid transparent;
+            //     position: absolute;
+            //     top: 100%;
+            //     left: 50%;
+            //     transform: translateX(-50%);
+            // }
         }
     }
     .wp-travel-booking__notice{
@@ -541,9 +541,14 @@ $defaultColor: #3399ff;
                         display: inline-flex;
                         align-items: center;
                         text-decoration: underline;
+                        .discount-table{
+                            display: none;
+                        }
                         &:hover{
-                            color: red;
                             span{
+                                color: red;
+                            }
+                            .discount-table{
                                 display: block;
                             }
                         }
@@ -555,6 +560,9 @@ $defaultColor: #3399ff;
                                 fill: red;
                             }
                         }
+                    }
+                    .infoBox {
+                        text-align: left;
                     }
                     .info-icon {
                         display: none;
@@ -733,6 +741,9 @@ $defaultColor: #3399ff;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .right-info{
+            width: 100%;
+        }
         @media(max-width: 575px){
             position: sticky;
             bottom: 0;
@@ -740,6 +751,7 @@ $defaultColor: #3399ff;
         }
         p{
             color: #666;
+            float: left;
             strong{
                 font-size: 24px;
                 color: #444;
@@ -751,8 +763,13 @@ $defaultColor: #3399ff;
             font-weight: bold;
             text-transform: uppercase;
             padding: 1em 1.5em;
+            float: right;
             // background-color: $defaultColor;
             // color: #fff;
+            @media (max-width: 575px){
+                font-size: 13px;
+                padding: .5em 1em;
+            }
         }
     }
 }

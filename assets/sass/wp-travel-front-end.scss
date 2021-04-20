@@ -7133,8 +7133,13 @@ $primaryColor: #3399ff;
 	z-index: 1 !important;
 }
 
-.wp-travel-list-view .wp-travel-booking__pricing-wrapper {
-    display: none;
+.wp-travel-list-view{
+	.wp-travel-booking__pricing-wrapper {
+   		display: none;
+	}
+	.wp-travel-booking__header {
+		display: none;
+	}
 }
 
 .wptravel-recurring-dates{
@@ -7185,6 +7190,10 @@ $primaryColor: #3399ff;
 					td:not(:nth-child(2)){
 						vertical-align: top;
 					}
+					td:nth-child(2){
+						width: 360px;
+					}
+					
 				}
 				tr.selected{
 					background: #f9f9f9;
