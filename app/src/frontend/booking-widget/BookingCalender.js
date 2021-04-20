@@ -829,8 +829,8 @@ const BookingWidget = () => {
 					<div className="left-info" >
 						{
 						'dates' === tripDateListing && <>
-							{selectedPricing && <p>Pricing : {pricings[selectedPricing].title}</p>}
-							{selectedDateTime && <p>Trip Date: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
+							{selectedPricing && <p><strong>Pricing</strong>: {pricings[selectedPricing].title}</p>}
+							{selectedDateTime && <p><strong>Trip Date</strong>: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
 						</>
 						}
 					</div>
