@@ -128,7 +128,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
         }
     }
     return <>
-    <tbody>
+    <tbody className="tbody-table">
         {activeRecurringDates.map( ( date, dateIndex ) => {
             let _date = moment(moment(date).format("YYYY-MM-DD")) // looped date.
             let _selectedDateTime = null;
@@ -484,7 +484,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                 <PanelBody title={__( `${_wp_travel.strings.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} key={index} >
                                     <PanelRow>
                                     <table>
-                                        <thead>
+                                        <thead className="thead-table">
                                             <tr>
                                                 <th data-label="pricings">Pricings</th>
                                                 <th data-label="person">Person</th>

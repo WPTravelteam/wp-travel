@@ -14,6 +14,17 @@
 	width: 100%;
 }
 
+@keyframes arrowAnimate1{
+    0%{
+        transform: translateY(0);
+    }
+    60%{
+        transform: translateY(-5px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
 
 .wp-travel{
     max-width:1250px  !important;
@@ -6673,6 +6684,7 @@ $primaryColor: #3399ff;
 										white-space: nowrap;
 										margin-bottom: 5px;
 										display: none;
+										
 										&::before{
 											content: "";
 											border-top: 5px solid red;
@@ -7123,11 +7135,10 @@ $primaryColor: #3399ff;
 
 .wptravel-recurring-dates{
 	width: 100%;
-	button{
-		padding: 0.5em 1em 0.5em !important;
-	}
-	.wptravel-recurring-table-wrapper{
-		.wptravel-recurring-table{
+	.wptravel-recurring-table-wrapper,
+	.components-panel__body.is-opened{
+		.wptravel-recurring-table,
+		table{
 			ul{
 				margin: 0;
 				padding: 0;
@@ -7171,48 +7182,66 @@ $primaryColor: #3399ff;
 						vertical-align: top;
 					}
 				}
+				tr.selected{
+					background: #f9f9f9;
+					box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.10);
+				}
 			}
-			.components-radio-control__option{
-				position: relative;
+			.components-base-control__field{
+				margin-bottom: 0;
 				display: flex;
-				align-items: center;
+				.components-checkbox-control__input {
+					width: 20px;
+					height: 20px;
+					transition: .3s;
+					cursor: pointer;
+				}
+				.components-checkbox-control__checked{
+					display: none;
+				}
 				label{
 					font-size: 15px;
 					font-weight: bold;
 					color: #444;
 					margin-left: .5em;
 				}
-				input{
-					width: 25px;
-					height: 25px;
-					cursor: pointer;
-					[type='radio']{
-						transition: .3s;
+				@media (max-width: 575px){
+					label{
+						font-size: 13px;
+    					text-align: right;
 					}
-					[type='radio']{
-						content: '';
-						width: 25px;
-						height: 25px;
-						background: #338829;
-						border-radius: 100%;
-						position: relative;
-						top: 0;
-						left: 0;
-						transform: scale(.6);
+					.components-checkbox-control__input {
+						width: 10px;
+						height: 10px;
 					}
 				}
-
-			}  
-			// .wp-travel-booking__pax-selector-wrapper{
-			// 	.wp-travel-booking__trip-option-list{
-			// 		li{
-			// 			background-color: #f0f0f0;
-			// 		}
-			// 	}
-			// }
-			
-			.wp-travel-booking__selected-time button{
+			} 
+			.wp-travel-booking__selected-time button:nth-child(2){
 				margin-bottom: 0.5rem;
+			}
+			.wp-travel-booking__selected-time button + button{
+				margin-left: 0.5rem;
+			}
+			.wp-travel-booking__selected-time button:disabled:before{
+				content: '\f058';
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 900;
+				font-size: 13px;
+				margin-right: .3em;
+				
+			}
+			
+
+			.wp-travel-booking__pax-selector-wrapper{
+				margin-bottom: 15px;
+				.text-left{
+					strong{
+						font-size: 18px;
+					}
+					del{
+						color: #777;
+					}
+				}
 			}
 			.wp-travel-booking__selected-time button:last-child{
 				margin-bottom: 0;
@@ -7231,18 +7260,15 @@ $primaryColor: #3399ff;
 						margin-top: 10px;
 						font-size: 20px;
 					}
-				}
-				
-				
+				}	
 				.group-discount-button{
-					cursor: pointer;
 					font-size: 12px;
-					display: inline-flex;
-					align-items: center;
 					text-decoration: underline;		
 					display: flex;
 					align-items: center;	
 					cursor: pointer;
+					transition: all 0.4s ease-in-out;
+					
 					span{
 						position: absolute;
 						bottom: 100%;
@@ -7265,11 +7291,25 @@ $primaryColor: #3399ff;
 							fill: red;
 						}
 					}
+					.discount-table{
+						top: 90%;
+						opacity: 0;
+						visibility: hidden;
+						animation: arrowAnimate1 1s ease infinite;
+						box-shadow: 0 1px 6px 0 rgb(0 0 0 / 10%);
+
+					}
 
 				}
-				.group-discount-button:hover .discount-table{
-					display: block !important;	
+				.group-discount-button:hover{
+					color: #d60b0b;
 				}
+				.group-discount-button:hover .discount-table{
+					opacity: 1;
+					display: block;
+					visibility: visible;
+				}
+				
 				.discount-table{
 					position: absolute;
 					top: 70%;
@@ -7374,8 +7414,8 @@ $primaryColor: #3399ff;
 					span {
 						display: inline-block;
 						min-width: 30px;
-						height: 25px;
-						line-height: 25px;
+						height: 20px;
+						line-height: 20px;
 						text-align: center;
 						border-top: 1px solid rgba(0, 0, 0, 0.1);
 						border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -7383,17 +7423,17 @@ $primaryColor: #3399ff;
 					}
 					button {
 						display: inline-flex;
-						width: 25px;
-						height: 25px;
-						line-height: 25px;
 						padding: 0;
 						justify-content: center;
 						align-items: center;
 						border-radius: 0;
 						margin: 0;
-						background-color: #495464;
 						padding: 0 !important;
 						font-size: 16px;
+						background: #b3b3b3;
+						width: 20px;
+						height: 20px;
+						line-height: 20px;
 						&:first-child {
 							border-top-left-radius: 4px;
 							border-bottom-left-radius: 4px;
@@ -7411,10 +7451,7 @@ $primaryColor: #3399ff;
 			}
 			//date column
 			.date-box{
-				.date-time-wrapper{
-					font-weight: 500;
-					margin-bottom: 10px;
-				}
+				
 				.wp-travel-booking__selected-time{
 					h4{
 						display: none;
@@ -7426,8 +7463,7 @@ $primaryColor: #3399ff;
 						background-color: rgba(68, 68, 68, 0.2);
 						color: #444;
 						cursor: pointer;
-						margin-right: .5rem;
-						padding: 5px 10px !important;
+						padding: 5px 10px;
 						&:disabled{
 							opacity: 1 !important;
 							background-color: #444;
@@ -7436,16 +7472,41 @@ $primaryColor: #3399ff;
 						&:last-child{
 							margin-right: 0;
 						}
+						
 					}
+					@media (max-width: 767px){
+						text-align: right;
+						button{
+							font-size: 12px;
+							&:disabled:before{
+								font-size: 10px;
+							}
+						}	
+					}
+				}
+			}
+			.date-time-wrapper{
+				font-weight: 500;
+				margin-bottom: 10px;
+				span{
+					span{
+						font-weight: 700;
+						color: #000;
+					}
+				}
+				.start-date{
+					margin-right: .5em;
 				}
 			}
 			
 			//trip extras
 			.wp-travel-booking__trip-extras-wrapper{
+				border: 1px solid #0000000a;
+				padding: 5px;
+				margin-left: 20px;
 				h4{
 					text-align: left;
 					font-size: 14px;
-					margin-bottom: 10px;
 				}
 				.wp-travel-booking__trip-option-list{
 					list-style: none;
@@ -7547,7 +7608,7 @@ $primaryColor: #3399ff;
 							}
 							> span{
 								font-weight: bold;
-								font-size: 16px;
+								font-size: 12px;
 								color: #444;
 							}
 						}
@@ -7556,7 +7617,7 @@ $primaryColor: #3399ff;
 							margin-right: .5em;
 							display: flex;
 							align-items: center;
-							position: relative;
+							
 							p{
 								a{
 									margin-left: .5em;
@@ -7567,6 +7628,7 @@ $primaryColor: #3399ff;
 							}
 							
 							.info-container{
+								position: relative;
 								.info{
 									display: block;
 								}
@@ -7578,48 +7640,53 @@ $primaryColor: #3399ff;
 									svg{
 										color: #999;
 									}
-									&:hover{
+									
+								}
+								.infoBox{
+									position: absolute;
+									top: 30px;
+									right: -118px;
+									border: 1px solid #b3b3b3;
+									background: #fff;
+									padding: 5px;
+									border-radius: 5px;
+									z-index: 1;
+									width: 250px;
+									opacity: 0;
+									visibility: hidden;
+									animation: arrowAnimate1 1s ease infinite;
+									&::before{
+										content: "";
+										border-left: 8px solid transparent;
+										border-right: 8px solid transparent;
+										border-bottom: 8px solid #b3b3b3;
+										position: absolute;
+										top: -5px;
+										left: 50%;
+										transform: translate(-50%, -50%);
+									}
+									&::after{
+										border-left: 8px solid transparent;
+										border-right: 8px solid transparent;
+										border-bottom: 8px solid #d3e9ff;
+										top: -5px;
+										left: 50%;
+										transform: translate(-50%, -50%);
+									}
+									.desc{
+										margin-bottom: 0;
+									}
+								}
+								.info:hover{
+									.info-icon{
 										svg{
 											color: #222;
 										}
 									}
-								}
-								.info:hover .infoBox{
-									opacity: 1;
-									display: block;
-								}
-								.infoBox{
-									opacity: 0;
-									display: none;
-									transition: .5s;
-									.desc{
-										position: absolute !important;
-										top: 35px;
-										left: -54px;
-										background: white !important;
-										animation: none !important;
-										z-index: 1;
-										width: 200px;
-										&::before{
-											content: "";
-											border-top: none !important;
-											border-left: 8px solid transparent !important;
-											border-right: 8px solid transparent !important;
-											border-bottom: 8px solid #3399ff !important;
-											position: absolute;
-											top: -5px !important;
-											left: 50% !important;
-											transform: translate(-50%, -50%) !important;
-										}
-										&::after{
-											border-top: none !important;
-											border-left: 8px solid transparent !important;
-											border-right: 8px solid transparent !important;
-											border-bottom: 8px solid #d3e9ff !important;
-											top: -5px !important;
-											left: 50% !important;
-											transform: translate(-50%, -50%) !important;
-										}
+									> .infoBox{
+										opacity: 1;
+										display: block;
+										visibility: visible;
 									}
 								}
 							}
@@ -7710,15 +7777,16 @@ $primaryColor: #3399ff;
 								}
 								button{
 									display: inline-flex;
-									width: 20px;
-									height: 20px;
-									line-height: 20px;
 									padding: 0;
-									background-color: #495464;
 									justify-content: center;
 									align-items: center;
 									border-radius: 0;
 									margin: 0;
+									width: 18px;
+									height: 18px;
+									line-height: 18px;
+									font-size: 13px;
+									background: #b3b3b3;
 									&:first-child{
 										border-top-left-radius: 4px;
 										border-bottom-left-radius: 4px;
@@ -7731,8 +7799,8 @@ $primaryColor: #3399ff;
 								span{
 									display: inline-block;
 									min-width: 30px;
-									height: 20px;
-									line-height: 20px;
+									height: 18px;
+									line-height: 18px;
 									text-align: center;
 									border-top: 1px solid rgba(#000, .1);
 									border-bottom: 1px solid rgba(#000, .1);
@@ -7755,7 +7823,7 @@ $primaryColor: #3399ff;
 				}
 			}
 			@media (min-width: 400px){
-				thead{
+				.thead-table{
 					th{
 						padding-top: 10px;
 						padding-bottom: 10px;
@@ -7763,7 +7831,7 @@ $primaryColor: #3399ff;
 						padding-right: 10px;
 					}
 				}
-				tbody{
+				.tbody-table{
 					tr{
 						th,
 						td{
@@ -7780,7 +7848,7 @@ $primaryColor: #3399ff;
 		@media (max-width: 575px){
 			overflow-x: auto;			
 			.wptravel-recurring-table,
-			.components-panel__body.is-opened{
+			table{
 				.thead-table {
 					border: none;
 					clip: rect(0 0 0 0);
@@ -7804,8 +7872,34 @@ $primaryColor: #3399ff;
 						text-transform: uppercase;
 					}
 				}
-				.wp-travel-booking__trip-option-list li {
-					flex-direction: column;
+				.wp-travel-booking__trip-option-list{
+				 	li {
+						flex-direction: column;
+						align-items: flex-end;
+					 }
+					.group-discount-button{
+						justify-content: flex-end;
+						margin-bottom: 10px;
+					}
+					.wp-travel-booking__selected-time{
+						text-align: right;
+					}
+					
+				}
+			}
+		}
+		@media (min-width: 576px){
+			.wptravel-recurring-table,
+			table{
+				.wp-travel-booking__trip-option-list{
+					.text-right{
+						flex-wrap: wrap;
+						align-items: center;
+						.item-price{
+							margin: .3em;
+							margin-right: 1em;
+						}
+					}   
 				}
 			}
 		}
@@ -7813,7 +7907,7 @@ $primaryColor: #3399ff;
 	.wp-travel-recurring-dates-nav-btns{
 		margin-top: 15px;
 	}
-	
+
 	@media (max-width: 575px){
 		.components-panel__body.is-opened{
 			margin-bottom: 30px;
@@ -7824,7 +7918,7 @@ $primaryColor: #3399ff;
 					position: initial;
 				}
 				td{
-					display: block;
+					display: table-cell !important;
 				}
 			}
 		}
