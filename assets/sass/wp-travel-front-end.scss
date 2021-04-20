@@ -7133,6 +7133,10 @@ $primaryColor: #3399ff;
 	z-index: 1 !important;
 }
 
+.wp-travel-list-view .wp-travel-booking__pricing-wrapper {
+    display: none;
+}
+
 .wptravel-recurring-dates{
 	width: 100%;
 	.wptravel-recurring-table-wrapper,
