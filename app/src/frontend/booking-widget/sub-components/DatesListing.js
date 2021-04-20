@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { RRule, RRuleSet, rrulestr } from 'rrule'
 import { useMemo, useState, useRef, useEffect } from '@wordpress/element'
-import { PanelBody, PanelRow, Disabled, RadioControl } from '@wordpress/components';
+import { PanelBody, PanelRow, Disabled, RadioControl, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n'
 const _ = lodash
 
@@ -158,28 +158,34 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                         <td data-label="pricings">
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
-                                <RadioControl
+                                {/* <RadioControl
                                     // label="User type"
                                     // help="The type of the current user"
                                     selected={paxSelectorData.selectedPricingId}
                                     options={ pricingOptions}
                                     onChange={ ( e ) => { 
                                         handleFixedDeparturePricingClick(_date, date.id, e )()
-                                    } } />
-                                {/* <ul>
+                                    } } /> */}
+                                <>
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
-                                        return <li key={pricingIndex}>
+                                        return <CheckboxControl
+                                            key={pricingIndex}
+                                            label={pricings[pricingId].title}
+                                            checked={ paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) }
+                                            onChange={ handleFixedDeparturePricingClick(_date, date.id, pricingId ) }
+                                        />
+                                        // return <li key={pricingIndex}>
 
-                                                    {pricings[pricingId].title}
+                                        //             {pricings[pricingId].title}
                                                     
-                                                    <button 
-                                                        disabled={paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) }
-                                                        className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
-                                                        onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >
-                                                    </button>
-                                            </li>
+                                        //             <button 
+                                        //                 disabled={paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) }
+                                        //                 className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
+                                        //                 onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >
+                                        //             </button>
+                                        //     </li>
                                     })}
-                                </ul> */}
+                                </>
                                 </>
                             }
                         </td>
@@ -357,35 +363,49 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                     return { label: pricings[pricingId].title, value: pricingId }
                                                 })
                                             }
-                
+
+                                            let _selectedDateTime = null;
+                                            if ( 'undefined' != typeof paxSelectorData.selectedDateTime) {
+                                                _selectedDateTime = moment(moment(paxSelectorData.selectedDateTime).format("YYYY-MM-DD"));
+                                            }
+                                            let _start_date = null;
+                                            if ( ! date.is_recurring && date.start_date ) {
+                                                _start_date = moment( moment(date.start_date).format("YYYY-MM-DD") )
+                                            }
                                             return <>
                                                 {! date.is_recurring && 
                                                     <>
-                                                    <tr key={index}>
+                                                    <tr key={index} className={_start_date.isSame( _selectedDateTime ) ? 'selected': ''}>
                                                         <td data-label="pricings">
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>
-                                                                <RadioControl
+                                                                {/* <RadioControl
                                                                     selected={paxSelectorData.selectedPricingId}
                                                                     options={ pricingOptions}
                                                                     onChange={ ( e ) => { 
                                                                         handlePricingClick(date.start_date, date.id, e )()
                                                                     } }
-                                                                />
-                                                                {/* <ul>
+                                                                /> */}
+                                                                <>
                                                                     {_pricingIds.map( (pricingId, pricingIndex) => {
-                                                                        return <li key={pricingIndex}>
-                                                                            <button
-                                                                                disabled={paxSelectorData.selectedPricingId == pricingId}
-                                                                                className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
-                                                                                onClick={ 
-                                                                                    handlePricingClick(date.start_date, date.id, pricingId )
-                                                                                } >
-                                                                                {pricings[pricingId].title}
-                                                                            </button>
-                                                                        </li>
+                                                                        return <CheckboxControl
+                                                                                key={pricingIndex}
+                                                                                label={pricings[pricingId].title}
+                                                                                checked={ paxSelectorData.selectedPricingId == pricingId }
+                                                                                onChange={ handlePricingClick(date.start_date, date.id, pricingId ) }
+                                                                            />
+                                                                        // return <li key={pricingIndex}>
+                                                                        //     <button
+                                                                        //         disabled={paxSelectorData.selectedPricingId == pricingId}
+                                                                        //         className={paxSelectorData.selectedPricingId == pricingId ? 'active' : '' }
+                                                                        //         onClick={ 
+                                                                        //             handlePricingClick(date.start_date, date.id, pricingId )
+                                                                        //         } >
+                                                                        //         {pricings[pricingId].title}
+                                                                        //     </button>
+                                                                        // </li>
                                                                     })}
-                                                                </ul> */}
+                                                                </>
                                                             </>
                                                             }
                                                         </td>
