@@ -967,7 +967,7 @@ function wptravel_frontend_contents( $post_id ) {
 							break;
 						case 'faq':
 							?>
-						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
+						<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content et_smooth_scroll_disabled"> <!-- class et_smooth_scroll_disabled to fix faq accordion issue with divi theme. -->
 							<div class="panel-group" id="accordion">
 							<?php
 							$faqs = wptravel_get_faqs( $post_id );
