@@ -391,7 +391,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                                         return <CheckboxControl
                                                                                 key={pricingIndex}
                                                                                 label={pricings[pricingId].title}
-                                                                                checked={ paxSelectorData.selectedPricingId == pricingId }
+                                                                                checked={ paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedDateIds.includes(date.id) }
                                                                                 onChange={ handlePricingClick(date.start_date, date.id, pricingId ) }
                                                                             />
                                                                         // return <li key={pricingIndex}>
