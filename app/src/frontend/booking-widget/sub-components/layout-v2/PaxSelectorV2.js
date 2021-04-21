@@ -68,7 +68,6 @@ const PaxSelectorV2 = ({ pricing, onPaxChange, counts, toggler }) => {
 
 	const groupDiscountClickhandler = e => {
 		let dt = e.target.closest('div').querySelector('.discount-table')
-		console.log(dt)
 		if (dt && dt.style.display == 'none') {
 			dt.removeAttribute('style')
 		} else {

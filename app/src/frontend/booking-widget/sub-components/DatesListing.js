@@ -14,7 +14,6 @@ import TripExtrasListing from './TripExtrasListing';
 const __i18n = {
 	..._wp_travel.strings
 }
-console.log(__i18n);
 const datePerPage = 5
 const generateRRule = rruleArgs => {
     const rruleSet = new RRuleSet();

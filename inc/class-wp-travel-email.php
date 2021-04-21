@@ -32,7 +32,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		if ( is_multisite() ) {
 			$this->sitename = get_network()->site_name;
 		}
-		add_action( 'wp_travel_action_after_inventory_update', array( $this, 'send_booking_emails' ) );
+		add_action( 'wptravel_action_after_inventory_update', array( $this, 'send_booking_emails' ) );
 	}
 
 
@@ -99,7 +99,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 	}
 
 	/**
-	 * Email Tags.
+	 * Booking Email Tags.
 	 *
 	 * @param array $args Email tag args.
 	 *

@@ -6,7 +6,6 @@ const __i18n = {
 	..._wp_travel.strings
 }
 const TripExtrasListingV2 = ({ options, onChange, counts, toggler }) => {
-	console.log(options);
 	const handleClick = (index, inc) => () => {
 		let id = options[index].id
 		let _xcount = counts[id] + inc < 0 ? 0 : counts[id] + inc
