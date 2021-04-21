@@ -55,12 +55,11 @@ export default () => {
                 _allPayouts = [_allPayouts]
             }
         }
-        // console.log( typeof _allPayouts )
-        // console.log( '_allPayouts', _allPayouts )
         _allPayouts[_tabIndex] = value
 
         updateSettings({
             ...allData,
+            // minimum_partial_payout: _allPayouts
             minimum_partial_payout, _tabIndex: value
         })
     }

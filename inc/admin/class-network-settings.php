@@ -8,7 +8,7 @@
 /**
  * Class for admin settings.
  */
-class WP_Travel_Network_Settings {
+class WpTravel_Network_Settings {
 	/**
 	 * Parent slug.
 	 *
@@ -99,7 +99,7 @@ class WP_Travel_Network_Settings {
 			'tab_label'     => __( 'License', 'wp-travel' ),
 			'content_title' => __( 'License Details', 'wp-travel' ),
 			'priority'      => 10,
-			'callback'      => 'wp_travel_settings_callback_license',
+			'callback'      => 'wptravel_settings_callback_license',
 			'icon'          => 'fa-id-badge',
 		);
 
@@ -141,4 +141,35 @@ class WP_Travel_Network_Settings {
 	}
 }
 
-new WP_Travel_Network_Settings();
+new WpTravel_Network_Settings();
+
+add_action( 'wp_travel_license_tab_fields', 'wptravel_license_tab_content', 100 );
+
+/**
+ * License content.
+ */
+function wptravel_license_tab_content( $args ) {
+	$settings = WPTravel_Helpers_Modules::settings_data( $args );
+	$modules  = $settings['premium_addons_data'];
+
+	foreach ( $modules as $module ) {
+		?>
+		<div class="license_grid">
+				<div class="form_field">
+					<h3>
+						<label class="control-label label_title">
+							<?php echo esc_html( $module['item_name'] ); ?>
+						</label>
+					</h3>
+					<div class="subject_input">
+						<a href=<?php echo esc_url( $module['license_link'] ); ?> title="Add License">Add License</a> |
+						<a href="<?php echo esc_url( $module['account_link'] ); ?>" title="Manage License">Manage License</a>  
+					</div>
+				</div>
+			</div>
+		<?php
+	}
+}
+
+
+
