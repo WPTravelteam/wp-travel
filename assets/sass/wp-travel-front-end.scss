@@ -7179,6 +7179,7 @@ $primaryColor: #3399ff;
 				background: #fbfafa;	
 				tr{	
 					border-bottom: 1px solid #0000000a;
+					vertical-align: top;
 					th,
 					td{
 						color: #404040;
@@ -7217,6 +7218,7 @@ $primaryColor: #3399ff;
 					font-weight: bold;
 					color: #444;
 					margin-left: .5em;
+					text-align: left;
 				}
 				@media (max-width: 575px){
 					label{
@@ -8014,6 +8016,19 @@ $primaryColor: #3399ff;
 		width: 100%;
 		left: 0;
 		z-index: 11;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.left-info{
+			p:last-child{
+				margin-bottom: 0;
+			}
+		}
+		.right-info{
+			p{
+				font-size: 20px;
+			}
+		}
 	}
 }
 
