@@ -8,7 +8,7 @@
 /**
  * Class for admin settings.
  */
-class WP_Travel_Admin_Settings {
+class WP_Travel_Admin_Settings { // @phpcs:ignore
 	/**
 	 * Parent slug.
 	 *
@@ -47,7 +47,7 @@ class WP_Travel_Admin_Settings {
 		echo '<div class="wrap wp-trave-settings-warp">';
 			echo '<h1>' . esc_html__( 'WP Travel Settings', 'wp-travel' ) . '</h1>';
 			echo '<div class="wp-trave-settings-form-warp">';
-			do_action( 'wp_travel_before_admin_setting_form' );
+			do_action( 'wp_travel_before_admin_setting_form' ); // @phpcs:ignore
 			echo '<form method="post" action="' . esc_url( $url ) . '">';
 				echo '<div class="wp-travel-setting-buttons">';
 				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false, array( 'id' => 'save_settings_button_top' ) );
@@ -64,7 +64,7 @@ class WP_Travel_Admin_Settings {
 				submit_button( __( 'Save Settings', 'wp-travel' ), 'primary', 'save_settings_button', false );
 				echo '</div>';
 			echo '</form>';
-			do_action( 'wp_travel_after_admin_setting_form' );
+			do_action( 'wp_travel_after_admin_setting_form' ); // @phpcs:ignore
 		echo '</div>';
 		echo '</div>';
 	}
@@ -103,7 +103,7 @@ class WP_Travel_Admin_Settings {
 
 		$settings_fields['itinerary'] = array(
 			'tab_label'     => ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ),
-			'content_title' => __( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) . ' Settings', 'wp-travel' ),
+			'content_title' => __( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) . ' Settings', 'wp-travel' ), // @phpcs:ignore
 			'priority'      => 20,
 			'callback'      => 'wptravel_settings_callback_itinerary',
 			'icon'          => 'fa-hiking',
@@ -146,7 +146,7 @@ class WP_Travel_Admin_Settings {
 			'callback'      => 'wptravel_settings_callback_facts',
 			'icon'          => 'fa-industry',
 		);
-		// if ( ! is_multisite() ) :
+		if ( ! is_multisite() ) :
 			$settings_fields['license'] = array(
 				'tab_label'     => __( 'License', 'wp-travel' ),
 				'content_title' => __( 'License Details', 'wp-travel' ),
@@ -154,7 +154,7 @@ class WP_Travel_Admin_Settings {
 				'callback'      => 'wptravel_settings_callback_license',
 				'icon'          => 'fa-id-badge',
 			);
-		// endif;
+		endif;
 		$settings_fields['field_editor']                  = array(
 			'tab_label'     => __( 'Field Editor', 'wp-travel' ),
 			'content_title' => __( 'Field Editor', 'wp-travel' ),
@@ -199,7 +199,7 @@ class WP_Travel_Admin_Settings {
 			'icon'          => 'fa-bug',
 		);
 
-		$tabs[ self::$collection ] = wptravel_sort_array_by_priority( apply_filters( 'wp_travel_settings_tabs', $settings_fields ) );
+		$tabs[ self::$collection ] = wptravel_sort_array_by_priority( apply_filters( 'wp_travel_settings_tabs', $settings_fields ) ); // @phpcs:ignore
 		return $tabs;
 	}
 
