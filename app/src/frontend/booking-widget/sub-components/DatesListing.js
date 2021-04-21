@@ -293,11 +293,13 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
             
         })}
         </tbody> 
-        <div className="wp-travel-recurring-dates-nav-btns">
-            {activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
+        <tfoot className="wp-travel-recurring-dates-nav-btns">
+           <tr> 
+               <td colspan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
             {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
-            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}
-        </div>
+            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}</td>
+            </tr>
+        </tfoot>
     </>
 }
 

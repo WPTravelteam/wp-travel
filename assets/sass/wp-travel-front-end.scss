@@ -8068,11 +8068,16 @@ $primaryColor: #3399ff;
 	}
 	.wp-travel-recurring-dates-nav-btns {
 		margin-top: 15px;
-		.prev{
-			float: right;
+		td{
+			border: none;
+			padding: 15px 0;
 		}
-		.show-more{
+		.prev{
 			float: left;
+		}
+		.show-more,
+		.next{
+			float: right;
 		}
 	}
 
