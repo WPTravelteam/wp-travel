@@ -766,9 +766,6 @@ const BookingWidget = () => {
 						</div>
 					}
 				</>}
-			{isFixedDeparture && 'dates' === tripDateListing && selectedDateTime &&
-				<p>Trip Date: <span>{moment(selectedDateTime).format('YYYY-MM-DD')}</span></p>
-			}
 
 			{
 				selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">

@@ -22,6 +22,33 @@ jQuery(document).ready(function ($) {
 
 	});
 
+	$(document).on('click', '.components-checkbox-control__input', function () {
+		//$(".wp-travel-booking-form").trigger("click");
+		// var winWidth = $(window).width();
+		// var tabHeight = $('.wp-travel-booking__pricing-wrapper').offset().top;
+		// if (winWidth < 767) {
+		// 	var tabHeight = $('').offset().top;
+		// }
+		// $('html, body').animate({
+		// 	scrollTop: (tabHeight)
+		// }, 1200);
+
+		var elem = $('.wp-travel-booking__pricing-name');
+        elem.scrollIntoView();
+	});
+	$(document).querySelectorAll('tr.selected').forEach(elem => {
+		elem.addEventListener('click', e => {
+			e.preventDefault();
+			document.querySelector(elem.getAttribute('href')).scrollIntoView({
+				behavior: 'smooth'
+			});
+		});
+	});
+
+	
+
+
+
 });
 
 function sidebarSticky() {
