@@ -63,9 +63,10 @@ class WpTravel_Frontend_Assets {
 				$translation_array['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
 				$translation_array['date_format']        = get_option( 'date_format' );
 				$translation_array['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
-				
+
 				$translation_array['time_format']        = get_option( 'time_format' );
 				$translation_array['trip_date_listing']  = $settings['trip_date_listing'];
+				$translation_array['build_path']   = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
 			}
 			$translation_array['strings']      = wptravel_get_strings();
 			$translation_array['itinerary_v2'] = wptravel_use_itinerary_v2_layout();

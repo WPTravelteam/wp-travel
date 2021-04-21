@@ -1,16 +1,25 @@
 import { useSelect } from '@wordpress/data';
-import { render } from '@wordpress/element';
+import { render, lazy, Suspense } from '@wordpress/element';
 import ErrorBoundary from './ErrorBoundry';
 import './_Store';
 
-import BookingWidget from './BookingCalender';
+/**
+ * It is important to set global var before any imports.
+ * https://stackoverflow.com/questions/39879680/example-of-setting-webpack-public-path-at-runtime
+ */
+__webpack_public_path__ = _wp_travel.build_path;
+
+const BookingWidget = lazy(() => import("./BookingCalender"));
+
 const storeName = 'WPTravelFrontend/BookingWidget';
 
 const WPTravelBookingWidget = () => {
+	const renderLoader = () => <div className="loader"></div>;
+
     const allData = useSelect((select) => {
         return select(storeName).getAllStore()
     }, []);
-    let tripData = allData.tripData
+    let tripData = allData.tripData;
     const {
         pricing_type,
         custom_booking_type,
@@ -18,7 +27,7 @@ const WPTravelBookingWidget = () => {
         custom_booking_link_text,
         custom_booking_form,
         custom_booking_link_open_in_new_tab
-    } = tripData
+    } = tripData;
     return <>
         <ErrorBoundary>
             {
@@ -30,7 +39,9 @@ const WPTravelBookingWidget = () => {
                         </div>
                     }
                 </> || <ErrorBoundary>
-                    <BookingWidget />
+					<Suspense fallback={renderLoader()}>
+                    	<BookingWidget />
+					</Suspense>
                 </ErrorBoundary>
             }
         </ErrorBoundary>

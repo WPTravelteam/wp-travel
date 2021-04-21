@@ -83,16 +83,9 @@ const BookingEmailTemplates = () => {
 
     // const resetContent = (storeName, storeKey ) => {
     //     if ( confirm( 'are you sure to reset?' ) ) {
-
     //         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: 'jagat2' } })
-    //         console.log( 'data ', wp.editor.getContent(storeName) );
-
-    //         console.log(wp.editor);
-    //         // console.log( allData.booking_admin_template_settings );
-
     //     }
     // }
-    console.log( 'booking_admin_template_settings', booking_admin_template_settings );
     return <>
       <PanelBody title={__( 'Booking Email Templates', 'wp-travel' )} initialOpen={true} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>

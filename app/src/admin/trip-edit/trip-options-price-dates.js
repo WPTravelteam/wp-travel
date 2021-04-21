@@ -58,8 +58,6 @@ const WPTravelTripOptionsPricings = () => {
             payout_percentages = [ settings.minimum_partial_payout[0] ];
         }
     }
-    console.log( 'payout percentages ',  payout_percentages);
-    console.log( 'global percentages ',  settings.minimum_partial_payout);
     return <ErrorBoundary>
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}

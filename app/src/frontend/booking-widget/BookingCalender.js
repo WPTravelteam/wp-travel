@@ -732,7 +732,6 @@ const BookingWidget = () => {
 		tripExtras:tripExtras, // For extras.
 		updateState:updateState // For extras.
 	}
-	console.log(pricings[selectedPricing]);
 	return <>
 		{
 			!_wp_travel.itinerary_v2 ?

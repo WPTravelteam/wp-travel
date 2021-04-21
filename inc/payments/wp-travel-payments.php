@@ -372,10 +372,10 @@ function wptravel_send_email_payment( $booking_id ) {
 	}
 
 	// Handle Multiple payment Emails.
-	if ( $allow_multiple_items && 1 !== $order_items ) {
-		do_action( 'wp_travel_multiple_payment_emails', $booking_id );
-		exit;
-	}
+	// if ( $allow_multiple_items && 1 !== $order_items ) {
+	// 	do_action( 'wp_travel_multiple_payment_emails', $booking_id );
+	// 	exit;
+	// }
 
 	// Clearing cart after successfult payment.
 	global $wt_cart;
@@ -477,6 +477,7 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{payment_amount}'         => wptravel_get_formated_price_currency( $payment_amount ),
 		'{currency_symbol}'        => '', // Depricated tag @since 2.0.1.
 		'{currency}'               => wptravel_get_currency_symbol(),
+		'{booking_info}'           => wptravel_booking_info_table( $booking_id ),
 	);
 
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
@@ -504,12 +505,6 @@ function wptravel_send_email_payment( $booking_id ) {
 
 		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
 			WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
-
-			// $thankyou_page_url = sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_URL'] ) );
-			// $thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
-			// $thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
-			// header( 'Location: ' . $thankyou_page_url );
-			// exit;
 		}
 	}
 
@@ -531,11 +526,6 @@ function wptravel_send_email_payment( $booking_id ) {
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
 
 	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
-		// $thankyou_page_url = sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_URL'] ) );
-		// $thankyou_page_url = add_query_arg( 'booked', 'false', $thankyou_page_url );
-		// $thankyou_page_url = apply_filters( 'wp_travel_thankyou_page_url', $thankyou_page_url, $booking_id );
-		// header( 'Location: ' . $thankyou_page_url );
-		// exit;
 		WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 	}
 
@@ -664,6 +654,45 @@ function wptravel_get_active_gateways() {
 		$gateway_list['selected'] = apply_filters( 'wp_travel_selected_payment_gateway', $gateway_list['selected'] );
 	}
 	return $gateway_list;
+}
+
+function wptravel_booking_info_table( $booking_id ) {
+
+	$items            = get_post_meta( $booking_id, 'order_items_data', true );
+	$order_items_data = get_post_meta( $booking_id, 'order_data', true ); // includes travelers info.
+
+	$fnames = $order_items_data['wp_travel_fname_traveller'];
+	$lnames = $order_items_data['wp_travel_lname_traveller'];
+
+	ob_start();
+	if ( is_array( $items ) && count( $items ) > 0 ) { ?>
+		<table>
+			<?php
+			foreach ( $items as $cart_item_id => $item ) {
+				$trip_fnames = isset( $fnames[ $cart_item_id ] ) ? $fnames[ $cart_item_id ] : array();
+				$trip_lnames = isset( $lnames[ $cart_item_id ] ) ? $lnames[ $cart_item_id ] : array();
+				?>
+				<tr class="wp-travel-content"> <td><b>Trip: <?php echo esc_html( get_the_title( $item['trip_id'] ) ) ?> on <?php echo esc_html( $item['trip_start_date'] ); ?></b></td> </tr>
+				<?php if ( is_array( $trip_fnames ) && count( $trip_fnames ) > 0 ) : ?>
+					<tr class="wp-travel-content">
+						<td>
+							<ol>
+								<?php foreach ( $trip_fnames as $k => $fname ) : ?>
+									<li> <?php printf( "%s %s", $fname, $trip_lnames[$k] ) ?> </li>
+								<?php endforeach; ?>
+							</ol>
+
+						</td>
+					</tr>
+				<?php endif;
+			}
+			?>
+		</table>
+		<?php
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
+	}
 }
 
 add_action( 'wp', 'wptravel_get_total_amount' );

@@ -36,7 +36,6 @@ const DiscountTable = ({ groupPricings }) => {
 }
 
 const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
-	// console.log('counts', counts);
 	let categories = pricing && pricing.categories || []
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
