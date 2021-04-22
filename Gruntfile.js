@@ -280,7 +280,7 @@ module.exports = function (grunt) {
 					'app/build/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
 					'app/build/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
 					'assets/css/itinerary-front-end.css': 'assets/sass/itinerary-front-end.scss',
-
+					'app/build/main.css': 'assets/sass/main.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
 				}

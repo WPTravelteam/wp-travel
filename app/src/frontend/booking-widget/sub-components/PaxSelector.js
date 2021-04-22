@@ -10,7 +10,7 @@ const __i18n = {
 const DiscountTable = ({ groupPricings }) => {
 	return <div className="discount-table">
 		<table>
-			<thead>
+			<thead className="discount-thead">
 				<tr>
 					<th colSpan="2">{wp_travel.strings.bookings.pax}</th>
 					<th rowSpan="2">{wp_travel.strings.bookings.price}</th>
@@ -20,7 +20,7 @@ const DiscountTable = ({ groupPricings }) => {
 					<th>{wp_travel.strings.to}</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody className="discount-tbody">
 				{
 					groupPricings.map((gp, index) => {
 						return <tr key={index}>
