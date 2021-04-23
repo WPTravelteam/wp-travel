@@ -247,22 +247,17 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                 <Disabled>
                                     { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                         <>
-                                        <RadioControl
-                                            // label="User type"
-                                            // help="The type of the current user"
-                                            selected={paxSelectorData.selectedPricingId}
-                                            options={ pricingOptions}
-                                            onChange={ ( e ) => { 
-                                                handleFixedDeparturePricingClick(date.start_date, date.id, e )()
-                                            } }
-                                        />
-                                        {/* <ul>
                                             {_pricingIds.map( (pricingId, pricingIndex) => {
+                                                return <CheckboxControl
+                                                    key={pricingIndex}
+                                                    label={pricings[pricingId].title}
+                                                    checked={ paxSelectorData.selectedPricingId == pricingId && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) }
+                                                    onChange={ handleFixedDeparturePricingClick(_date, date.id, pricingId ) }
+                                                />
                                                 return <li key={pricingIndex}>
                                                         <button onClick={handleFixedDeparturePricingClick(_date, date.id, pricingId )} >{pricings[pricingId].title}</button>
                                                     </li>
                                             })}
-                                        </ul> */}
                                         </>
                                     }
                                 </Disabled>
