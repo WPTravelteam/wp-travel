@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
 	});
 	$(document).on('click', '.components-checkbox-control__input', function () {
 		var winWidth = $(window).width();
-		if (winWidth < 992) {
+		if (winWidth < 991) {
 			var top = jQuery('#wp-travel-booking-recurring-dates').offset().top
 			jQuery('html, body').animate({
 				scrollTop: ( top - 20 )
