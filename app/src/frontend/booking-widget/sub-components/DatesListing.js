@@ -377,7 +377,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                     <tr key={index} className={_start_date.isSame( _selectedDateTime ) ? 'selected': ''}>
                                                         <td data-label="pricings">
                                                         {/* <Loader /> */}
-                                                            {paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(date.id) && <Loader /> }
+                                                            
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>
                                                                 {/* <RadioControl
@@ -410,7 +410,8 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                             </>
                                                             }
                                                         </td>
-                                                        <td data-label="person">
+                                                        <td data-label="person" className={paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(date.id) ? 'loading' : ''}>
+                                                            {paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(date.id) && <Loader /> }
                                                         <div className ="person-box">
                                                         {
                                                             !paxSelectorData.pricingUnavailable && paxSelectorData.pricing && paxSelectorData.inventory.find(i => i.pax_available > 0 && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && paxSelectorData.selectedDateIds.includes(date.id) ) ? 
