@@ -11,6 +11,8 @@ import PaxSelector from './PaxSelector';
 import TripTimesListing from './TripTimesListing';
 import TripExtrasListing from './TripExtrasListing';
 
+import Loader from '../../../GlobalComponents/Loader'
+
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -166,6 +168,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                         handleFixedDeparturePricingClick(_date, date.id, e )()
                                     } } /> */}
                                 <>
+                                    {paxSelectorData.isLoading && <Loader />}
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <CheckboxControl
                                             key={pricingIndex}
@@ -375,6 +378,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                         <td data-label="pricings">
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>
+                                                                {paxSelectorData.isLoading && <Loader />}
                                                                 {/* <RadioControl
                                                                     selected={paxSelectorData.selectedPricingId}
                                                                     options={ pricingOptions}
