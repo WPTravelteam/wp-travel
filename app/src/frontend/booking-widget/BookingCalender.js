@@ -1,19 +1,21 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
-import { forwardRef, useEffect, useState } from '@wordpress/element';
+import { forwardRef, useEffect, useState, lazy, Suspense } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import moment from 'moment';
-import DatePicker from "react-datepicker";
+const DatePicker = lazy( () => import( "react-datepicker" ) );
 import RRule from "rrule";
 import ErrorBoundry from './ErrorBoundry';
 import { wpTravelFormat, wpTravelTimeout } from "./functions";
 // sub-components
-import PaxSelector from './sub-components/PaxSelector';
-import PricingListing from './sub-components/PricingListing';
-import TripExtrasListing from './sub-components/TripExtrasListing';
-import TripTimesListing from './sub-components/TripTimesListing';
-import DatesListing from './sub-components/DatesListing'
+const PricingListing = lazy(() => import("./sub-components/PricingListing"));
+const TripTimesListing = lazy(() => import("./sub-components/TripTimesListing"));
+const PaxSelector = lazy(() => import("./sub-components/PaxSelector"));
+const TripExtrasListing = lazy(() => import("./sub-components/TripExtrasListing"));
+
+// import DatesListing from './sub-components/DatesListing'
+const DatesListing = lazy(() => import("./sub-components/DatesListing"));
 // layout-v2
 import PaxSelectorV2 from './sub-components/layout-v2/PaxSelectorV2';
 import PricingListingV2 from './sub-components/layout-v2/PricingListingV2';
@@ -84,7 +86,7 @@ const InventoryNotice = ({ inventory }) => {
 }
 
 const BookingWidget = () => {
-
+	const renderLoader = () => <div className="loader"></div>;
 	const [{ selectedDate,
 		selectedTripDate,
 		selectedTime,
@@ -757,69 +759,79 @@ const BookingWidget = () => {
 					{
 						isFixedDeparture && 'dates' === tripDateListing && 
 							<div className="wp-travel-booking__content-wrapper">
-								<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData, getPricingTripTimes:getPricingTripTimes }} />
+								<Suspense fallback={renderLoader()}>
+									<DatesListing {...{ dates: datesById, onDateClick: dayClicked, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, paxSelectorData, getPricingTripTimes:getPricingTripTimes }} />
+								</Suspense>
 							</div>
 						||
 						<div className="wp-travel-booking__datepicker-wrapper">
-							<DatePicker {...params} />
-							{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+							<Suspense fallback={renderLoader()}>
+								<DatePicker {...params} />
+								{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+							</Suspense>
 						</div>
 					}
 				</>}
 
-			{
-				selectedDateTime && <div className="wp-travel-booking__pricing-wrapper">
-					{
-						nomineePricings.length > 1 && <ErrorBoundry>
+			{selectedDateTime && 
+			<div className="wp-travel-booking__pricing-wrapper">
+				{
+					nomineePricings.length > 1 && <ErrorBoundry>
+						<Suspense fallback={renderLoader()}>
 							<PricingListing
 								selected={selectedPricing}
 								options={nomineePricings}
 								onPricingSelect={handlePricingSelect}
 							/>
-						</ErrorBoundry>
-					}
-					{
-						!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+						</Suspense>
+					</ErrorBoundry>
+				}
+				{
+					!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+						<Suspense fallback={renderLoader()}>
 							<TripTimesListing
 								selected={selectedDateTime}
 								onTimeSelect={handleTimeClick}
 								options={nomineeTimes}
 							/>
-						</ErrorBoundry>
-					}
-					{
-						!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
+						</Suspense>
+					</ErrorBoundry>
+				}
+				{
+					!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
+						<Suspense fallback={renderLoader()}>
 							<PaxSelector
 								pricing={pricings[selectedPricing] || null}
 								onPaxChange={handlePaxChange}
 								counts={paxCounts}
 								inventory={inventory}
 							/>
-						</ErrorBoundry>
+						</Suspense>
+					</ErrorBoundry>
 
-					}
-					{
-						!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
+				}
+				{
+					!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
+						<Suspense fallback={renderLoader()}>
 							<TripExtrasListing
 								options={pricings[selectedPricing].trip_extras}
 								onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
 								counts={tripExtras}
 							/>
-						</ErrorBoundry>
+						</Suspense>
+					</ErrorBoundry>
+				}
+				{pricingUnavailable && <Notice>
+					{
+						allData
+						&& allData.tripData.inventory
+						&& allData.tripData.inventory.enable_trip_inventory == 'yes'
+						&& <InventoryNotice inventory={allData.tripData.inventory} />
 					}
-					{pricingUnavailable && <Notice>
-						{
-							allData
-							&& allData.tripData.inventory
-							&& allData.tripData.inventory.enable_trip_inventory == 'yes'
-							&& <InventoryNotice inventory={allData.tripData.inventory} />
-						}
-					</Notice>
-					}
-					{isLoading && <div id="loader">
-						<span></span>
-					</div>}
-				</div>
+				</Notice>
+				}
+				{isLoading && <div id="loader"> <span></span> </div>}
+			</div>
 			}
 			{selectedDate && selectedPricing && 
 				<div className="wp-travel-booking__panel-bottom">
