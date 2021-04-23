@@ -195,7 +195,7 @@ const SettingsFact = () => {
                                             }
                                             {
                                                 'custom-upload' == fact.selected_icon_type && '' != fact.icon_img &&
-                                                <img src={fact.icon_img} height="100" width="20%" />
+                                                <img src={fact.icon_img} style={{width:'60px'}} />
                                             }
                                             {
                                                 'icon-class' == fact.selected_icon_type && '' != fact.icon &&
