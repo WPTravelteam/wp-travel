@@ -28,7 +28,7 @@ const FontAwesomeIconContent = (props) => {
 
     const [filterValue, setFilterValue] = useState('');
 
-    const [ selectedFAIcons, setSelectedFAIcons ] = useState(props.fact.fa_icon);
+    const [ selectedFAIcons, setSelectedFAIcons ] = useState(props.fact.icon);
 
     sessionStorage.setItem('WPTravelFAIconValue', selectedFAIcons );
 

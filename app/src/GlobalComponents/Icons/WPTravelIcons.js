@@ -43,28 +43,33 @@ const WPTravelIcons = (props) => {
         if ( 'fontawesome-icon' == lastSelectedTab ) {
 
             let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');
-            updateFact( 'fa_icon', FAIconValue, index );
+            updateFact( 'icon', FAIconValue, index );
             updateFact( 'selected_icon_type', 'fontawesome-icon', index );
             sessionStorage.clear();
             props.modalHandleClick(false);
             // setOpen(false);
 
         } else if( 'custom-upload' == lastSelectedTab ) {
-
             if ( "wpTravelIconModuleUploaderData" in sessionStorage ) {
                 const selectedImgDataString = sessionStorage.getItem('wpTravelIconModuleUploaderData');
                 const selectedImgData = JSON.parse(selectedImgDataString);
     
                 const [ selectedImgDataObj ] = selectedImgData;
     
-                const { url } = selectedImgDataObj;
-                updateFact( 'icon_img', url, index );
+                const { url, id, sizes } = selectedImgDataObj;
+                updateFact( 'icon_img', sizes.thumbnail.url, index );
+                updateFact( 'icon_img_id', id, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
                 // sessionStorage.clear();
                 // setOpen(false);
-            } else {
+            } else if ( 'undefined' !== props.factData && 'undefined' !== props.factData.icon_img ) {
+                updateFact( 'icon_img', props.factData.icon_img, index );
+                updateFact( 'icon_img_id', props.factData.icon_img_id, index );
+                updateFact( 'selected_icon_type', 'custom-upload', index );
+            }else {
                 updateFact( 'icon_img', '', index );
+                updateFact( 'icon_img_id', '', index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
                 // sessionStorage.clear();

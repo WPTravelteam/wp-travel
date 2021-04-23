@@ -329,10 +329,12 @@ class Wp_Travel_Shortcodes {
 							foreach ( $icon as $key => $ico ) {
 
 								$icon = $ico['icon'];
+								$icon_args = $ico;
 							}
 							?>
 							<span class="tour-info-item tour-info-type">
-								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<?php WpTravel_Helpers_Icon::get( $icon_args ); ?>
+								<!-- <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
 								<strong><?php echo esc_html( $trip_fact['label'] ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {

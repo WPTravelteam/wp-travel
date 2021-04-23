@@ -190,8 +190,8 @@ const SettingsFact = () => {
                                         <label>{__( 'Icon', 'wp-travel' )}</label>
                                         <div className="wti_icon_btn_wrapper">
                                             {
-                                                'fontawesome-icon' == fact.selected_icon_type && '' != fact.fa_icon &&
-                                                <i className={fact.fa_icon}></i>
+                                                'fontawesome-icon' == fact.selected_icon_type && '' != fact.icon &&
+                                                <i className={fact.icon}></i>
                                             }
                                             {
                                                 'custom-upload' == fact.selected_icon_type && '' != fact.icon_img &&

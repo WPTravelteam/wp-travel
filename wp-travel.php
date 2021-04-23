@@ -378,6 +378,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/helpers/trips.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/cart.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/rest-api.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/icons.php';
 
 			// Ajax.
 			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';

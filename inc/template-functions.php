@@ -257,13 +257,13 @@ function wptravel_content_filter( $content ) {
 	$settings = wptravel_get_settings();
 
 	ob_start();
-	do_action( 'wp_travel_before_trip_details', $post, $settings );
+	do_action( 'wp_travel_before_trip_details', $post, $settings ); // @phpcs:ignore
 	?>
 	<div class="wp-travel-trip-details">
-		<?php do_action( 'wp_travel_trip_details', $post, $settings ); ?>
+		<?php do_action( 'wp_travel_trip_details', $post, $settings ); // @phpcs:ignore ?>
 	</div>
 	<?php
-	do_action( 'wp_travel_after_trip_details', $post, $settings );
+	do_action( 'wp_travel_after_trip_details', $post, $settings ); // @phpcs:ignore
 	$content .= ob_get_contents();
 	ob_end_clean();
 	return $content;
@@ -319,7 +319,7 @@ function wptravel_get_theme_wrapper_class() {
 			$wrapper_class = 'alignwide';
 			break;
 	}
-	return apply_filters( 'wp_travel_theme_wrapper_class', $wrapper_class, $template );
+	return apply_filters( 'wp_travel_theme_wrapper_class', $wrapper_class, $template ); // @phpcs:ignore
 }
 
 /**
@@ -382,7 +382,7 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 	?>
 
 	<div class="wp-detail-review-wrap">
-		<?php do_action( 'wp_travel_single_before_trip_price', $trip_id, $hide_rating ); ?>
+		<?php do_action( 'wp_travel_single_before_trip_price', $trip_id, $hide_rating ); // @phpcs:ignore ?>
 		<div class="wp-travel-trip-detail">
 			<?php if ( $trip_price ) : ?>
 				<div class="trip-price" >
@@ -404,7 +404,7 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 		</div>
 		<?php
 			wptravel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );
-			do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating );
+			do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating ); // @phpcs:ignore
 		?>
 	</div>
 
@@ -821,6 +821,8 @@ function wptravel_frontend_trip_facts( $post_id ) {
 							$icon  = $settings_facts[ $trip_fact_id ]['icon'];
 							$label = $settings_facts[ $trip_fact_id ]['name'];
 
+							$icon_args = $settings_facts[ $trip_fact_id ];
+
 						} else { // If fact id doesn't matches or if trip fact doesn't have fact id then matching the trip fact label with fact setting label. ( For e.g Transports ( fact in trip ) === Transports ( Setting fact option ) )
 							$trip_fact_setting = array_filter(
 								$settings_facts,
@@ -836,14 +838,15 @@ function wptravel_frontend_trip_facts( $post_id ) {
 							foreach ( $trip_fact_setting as $set ) {
 								$icon  = $set['icon'];
 								$label = $set['name'];
+								$icon_args = $set;
 							}
 						}
 
 						if ( isset( $trip_fact['value'] ) && ! empty( $trip_fact['value'] ) ) :
 							?>
 							<span class="tour-info-item tour-info-type">
-
-								<i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<?php WpTravel_Helpers_Icon::get( $icon_args ); ?>
+								<!-- <i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
 								<strong><?php echo esc_html( $label ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
