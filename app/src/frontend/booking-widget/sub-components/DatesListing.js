@@ -168,7 +168,7 @@ const RecurringDates = ({ data, onDateClick, isTourDate, getPricingsByDate, onFi
                                         handleFixedDeparturePricingClick(_date, date.id, e )()
                                     } } /> */}
                                 <>
-                                    {paxSelectorData.isLoading && <Loader />}
+                                    {paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(data.id) && paxSelectorData.selectedPricingId == paxSelectorData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <CheckboxControl
                                             key={pricingIndex}
@@ -376,9 +376,9 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                     <>
                                                     <tr key={index} className={_start_date.isSame( _selectedDateTime ) ? 'selected': ''}>
                                                         <td data-label="pricings">
+                                                            {paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(date.id) && <Loader /> }
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>
-                                                                {paxSelectorData.isLoading && <Loader />}
                                                                 {/* <RadioControl
                                                                     selected={paxSelectorData.selectedPricingId}
                                                                     options={ pricingOptions}

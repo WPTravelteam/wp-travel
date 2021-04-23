@@ -730,7 +730,8 @@ const BookingWidget = () => {
 		nomineeTimes:nomineeTimes, // For time picker
 		totalPax:totalPax, // For extras.
 		tripExtras:tripExtras, // For extras.
-		updateState:updateState // For extras.
+		updateState:updateState, // For extras.
+		isLoading:isLoading
 	}
 	return <>
 		{
