@@ -793,6 +793,7 @@ $defaultColor: #3399ff;
                             }
                             td:nth-child(2) {
                                 width: 460px;
+                                position: relative;
                             }
                         }
                         @media (min-width: 1200px) {

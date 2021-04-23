@@ -376,6 +376,7 @@ const DatesListing = ({ dates, onDateClick, isTourDate, getPricingsByDate, allDa
                                                     <>
                                                     <tr key={index} className={_start_date.isSame( _selectedDateTime ) ? 'selected': ''}>
                                                         <td data-label="pricings">
+                                                        {/* <Loader /> */}
                                                             {paxSelectorData.isLoading && paxSelectorData.selectedDateIds.includes(date.id) && <Loader /> }
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                             <>

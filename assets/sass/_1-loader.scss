@@ -1,6 +1,8 @@
 .wptravel-loader{
     display: inline-block;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     width: 80px;
     height: 80px;
     div {
@@ -9,7 +11,7 @@
         width: 13px;
         height: 13px;
         border-radius: 50%;
-        background: #fff;
+        background: #f83531;
         animation-timing-function: cubic-bezier(0, 1, 1, 0);
         
         &:nth-child(1) {
