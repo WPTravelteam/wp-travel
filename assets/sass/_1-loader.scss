@@ -1,10 +1,12 @@
 .wptravel-loader {
 	display: inline-block;
 	position: absolute;
-	left: 50%;
+	left: calc( 50% - 40px );
+	top: calc( 50% - 40px );
 	transform: translateX(-50%);
 	width: 80px;
 	height: 80px;
+	z-index: 11;
 	div {
 		position: absolute;
 		top: 33px;
@@ -32,17 +34,25 @@
 		}
 	}
 }
-.loading {
-	background: linear-gradient(
-		110deg,
-		#f9f9f9 8%,
-		#fbfafa99 18%,
-		#fbfafaab 33%
-	);
-	border-radius: 5px;
-	background-size: 200% 100%;
-	animation: 1.5s shine linear infinite;
-	.person-box {
-		opacity: 0;
+.wptravel-loading {
+	&:before{
+		width: 100%;
+		height: 100%;
+		content: ' ';
+		display: block;
+		position: absolute;
+		z-index: 11;
+		background: linear-gradient(
+			110deg,
+			#fbfafa99 8%,
+			#fbfafa99 18%,
+			#fbfafaab 33%
+		);
+		border-radius: 5px;
+		background-size: 200% 100%;
+		// animation: 1.5s shine linear infinite;
+		.person-box {
+			opacity: 0;
+		}
 	}
 }

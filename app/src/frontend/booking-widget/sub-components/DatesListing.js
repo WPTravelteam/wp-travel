@@ -149,10 +149,14 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
             return <>
                 { isTourDate(new Date( _date ) ) ? 
                  
-                    <tr key={dateIndex} className={_date.isSame( _selectedDateTime ) ? 'selected': ''} >
+                    <tr key={dateIndex} className={
+                        _date.isSame( _selectedDateTime ) ? 'selected': '', 
+                         'wptravel-loading'
+                        } >
                         <td data-label="pricings">
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
+                                {/* <Loader /> */}
                                     {componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <CheckboxControl
@@ -341,7 +345,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                 </>
                                                             }
                                                         </td>
-                                                        <td data-label="person" className={componentData.isLoading && componentData.selectedDateIds.includes(date.id) ? 'loading' : ''}>
+                                                        <td data-label="person" className={componentData.isLoading && componentData.selectedDateIds.includes(date.id) ? 'wptravel-loading' : ''}>
                                                             {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
                                                         <div className ="person-box">
                                                         {

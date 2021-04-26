@@ -15,6 +15,9 @@ const PaxSelector       = lazy(() => import("./sub-components/PaxSelector"));
 const TripTimesListing  = lazy(() => import("./sub-components/TripTimesListing"));
 const TripExtrasListing = lazy(() => import("./sub-components/TripExtrasListing"));
 
+// Loader.
+import Loader from '../../GlobalComponents/Loader'
+
 // List by date.
 const DatesListing      = lazy(() => import("./sub-components/DatesListing"));
 
@@ -760,13 +763,13 @@ const BookingWidget = () => {
 			{
 				isFixedDeparture && 'dates' === tripDateListing && 
 					<div className="wp-travel-booking__content-wrapper">
-						<Suspense fallback={renderLoader()}>
+						<Suspense fallback={<Loader />}>
 							<DatesListing {...{ dates: datesById, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, componentData, getPricingTripTimes:getPricingTripTimes }} />
 						</Suspense>
 					</div>
 				||
 				<div className="wp-travel-booking__datepicker-wrapper">
-					<Suspense fallback={renderLoader()}>
+					<Suspense fallback={<Loader />}>
 						<DatePicker {...params} />
 						{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
 					</Suspense>
@@ -775,11 +778,11 @@ const BookingWidget = () => {
 			
 
 			{selectedDateTime && 
-				<Suspense fallback={renderLoader()}>
-					<div className="wp-travel-booking__pricing-wrapper">
+				<Suspense fallback={<Loader />}>
+					<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
 						{
 							nomineePricings.length > 1 && <ErrorBoundry>
-								<Suspense fallback={renderLoader()}>
+								<Suspense fallback={<Loader />}>
 									<PricingListing
 										selected={selectedPricing}
 										options={nomineePricings}
@@ -790,7 +793,7 @@ const BookingWidget = () => {
 						}
 						{
 							!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
-								<Suspense fallback={renderLoader()}>
+								<Suspense fallback={<Loader />}>
 									<TripTimesListing
 										selected={selectedDateTime}
 										onTimeSelect={handleTimeClick}
@@ -799,9 +802,15 @@ const BookingWidget = () => {
 								</Suspense>
 							</ErrorBoundry>
 						}
+						
+						{/* <Loader /> */}
+						{isLoading && <Loader />}
+					</div>
+
+					<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 						{
 							!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
-								<Suspense fallback={renderLoader()}>
+								<Suspense fallback={<Loader />}>
 									<PaxSelector
 										pricing={pricings[selectedPricing] || null}
 										onPaxChange={handlePaxChange}
@@ -814,7 +823,7 @@ const BookingWidget = () => {
 						}
 						{
 							!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
-								<Suspense fallback={renderLoader()}>
+								<Suspense fallback={<Loader />}>
 									<TripExtrasListing
 										options={pricings[selectedPricing].trip_extras}
 										onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
@@ -824,7 +833,7 @@ const BookingWidget = () => {
 							</ErrorBoundry>
 						}
 						{pricingUnavailable && 
-						<Suspense fallback={renderLoader()}>
+						<Suspense fallback={<Loader />}>
 							<Notice>
 								{
 									allData
@@ -835,11 +844,10 @@ const BookingWidget = () => {
 							</Notice>
 						</Suspense>
 						}
-						{isLoading && <div id="loader"> <span></span> </div>}
 					</div>
 
 					{selectedPricing &&
-						<Suspense fallback={renderLoader()}>
+						<Suspense fallback={<Loader />}>
 							<div className="wp-travel-booking__panel-bottom">
 								{
 								'dates' === tripDateListing && <div className="left-info" >
