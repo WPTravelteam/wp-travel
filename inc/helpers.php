@@ -2373,17 +2373,31 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 								$order_prices = get_post_meta( $booking_id, 'order_totals', true );
 								foreach ( $order_details as $order_detail ) {
 									$order_detail['trip_extras'] = (array) $order_detail['trip_extras'];
+									$trip_id                     = $order_detail['trip_id'];
+									$pricing_id                  = $order_detail['pricing_id'];
+									$pricing_data                = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, $pricing_id );
 
+									$pricing_title = '';
+									if ( isset( $pricing_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricing_data['code'] ) {
+										$pricing       = $pricing_data['pricings'];
+										$pricing_title = $pricing[0]['title'];
+									}
 									if ( isset( $order_detail['trip'] ) ) { // @since 3.0.0.
 										$total = $order_detail['trip_price'];
 										?>
 										<div class="my-order-price-breakdown-base-price-wrap">
 											<div class="my-order-price-breakdown-base-price">
-												<span class="my-order-head"><?php echo esc_html( get_the_title( $order_detail['trip_id'] ) ); ?></span>
+												<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ); ?></span>
+												<br>
+												<span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span>
 												<span class="my-order-tail">
 													<?php if ( ! empty( $order_detail['trip'] ) ) : ?>
-														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) : ?>
-															<span class="my-order-price-detail">(<?php echo esc_html( $trip['pax'] ) . ' x ' . wptravel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
+														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) :
+															if (  $trip['pax'] < 1 ) {
+																continue;
+															}
+															?>
+															<span class="my-order-price-detail">(<?php echo esc_html( $trip['pax'] ) . ' ' . $trip['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
 														<?php endforeach; ?>
 													<?php endif; ?>
 													<span class="my-order-price"><?php echo wptravel_get_formated_price_currency( $total, false, '', $booking_id ); //@phpcs:ignore ?></span>

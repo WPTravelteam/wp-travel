@@ -37,9 +37,10 @@ class WpTravel_Helpers_Pricings {
 	/**
 	 * Returns the pricings data.
 	 *
-	 * @param int $trip_id Trip ID.
+	 * @param int $trip_id    Trip ID.
+	 * @param int $pricing_id Pricing Id.
 	 */
-	public static function get_pricings( $trip_id = false ) {
+	public static function get_pricings( $trip_id = false, $pricing_id = null ) {
 
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -53,6 +54,7 @@ class WpTravel_Helpers_Pricings {
 		$pricings = array();
 		$index    = 0;
 
+		$selected_pricing = array();
 		foreach ( $results as $price ) {
 			$pricings[ $index ]['id']              = absint( $price->id );
 			$pricings[ $index ]['title']           = $price->title;
@@ -95,11 +97,15 @@ class WpTravel_Helpers_Pricings {
 					$pricings[ $index ]['trip_extras'] = $trip_extras['trip_extras'];
 				}
 			}
+
+			if ( absint( $price->id ) === $pricing_id ) {
+				$selected_pricing = $pricings[ $index ];
+			}
 			$index++;
 		}
 		return array(
 			'code'     => 'WP_TRAVEL_TRIP_PRICINGS',
-			'pricings' => $pricings,
+			'pricings' => $pricing_id && count( $selected_pricing ) > 0 ? $selected_pricing : $pricings,
 		);
 	}
 
