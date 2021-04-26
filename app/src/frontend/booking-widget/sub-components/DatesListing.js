@@ -151,13 +151,14 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                  
                     <tr key={dateIndex} className={
                         _date.isSame( _selectedDateTime ) ? 'selected': '', 
-                         'wptravel-loading'
+                        componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && 'wptravel-loading'
                         } >
+
                         <td data-label="pricings">
+                            {/* <Loader /> */}
+                            {componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
-                                <Loader />
-                                    {componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <CheckboxControl
                                             key={pricingIndex}
@@ -330,8 +331,13 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                             return <>
                                                 {! date.is_recurring && 
                                                     <>
-                                                    <tr key={index} className={_start_date.isSame( _selectedDateTime ) ? 'selected': ''}>
+                                                    <tr key={index} className={
+                                                        _start_date.isSame( _selectedDateTime ) ? 'selected': '',
+                                                        componentData.isLoading && componentData.selectedDateIds.includes(date.id) && 'wptravel-loading'
+                                                        }>
                                                         <td data-label="pricings">
+                                                            {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
+                                                                {/* <Loader /> */}
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                                                 <>
                                                                     {_pricingIds.map( (pricingId, pricingIndex) => {
@@ -345,9 +351,8 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                 </>
                                                             }
                                                         </td>
-                                                        <td data-label="person" className={componentData.isLoading && componentData.selectedDateIds.includes(date.id) ? 'wptravel-loading' : ''}>
-                                                            {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
-                                                            <Loader />
+                                                        <td data-label="person">
+                                                            
                                                         <div className ="person-box">
                                                         {
                                                             !componentData.pricingUnavailable && componentData.pricing && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(date.id) ) ? 

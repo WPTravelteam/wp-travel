@@ -780,6 +780,8 @@ const BookingWidget = () => {
 			{selectedDateTime && 
 				<Suspense fallback={<Loader />}>
 					<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
+						{/* <Loader /> */}
+						{isLoading && <Loader />}
 						{
 							nomineePricings.length > 1 && <ErrorBoundry>
 								<Suspense fallback={<Loader />}>
@@ -803,8 +805,7 @@ const BookingWidget = () => {
 							</ErrorBoundry>
 						}
 						
-						{/* <Loader /> */}
-						{isLoading && <Loader />}
+						
 					</div>
 
 					<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
