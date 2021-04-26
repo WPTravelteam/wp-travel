@@ -156,7 +156,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                         <td data-label="pricings">
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
                                 <>
-                                {/* <Loader /> */}
+                                <Loader />
                                     {componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                                     {_pricingIds.map( (pricingId, pricingIndex) => {
                                         return <CheckboxControl
@@ -347,6 +347,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                         </td>
                                                         <td data-label="person" className={componentData.isLoading && componentData.selectedDateIds.includes(date.id) ? 'wptravel-loading' : ''}>
                                                             {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
+                                                            <Loader />
                                                         <div className ="person-box">
                                                         {
                                                             !componentData.pricingUnavailable && componentData.pricing && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(date.id) ) ? 

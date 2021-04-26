@@ -764,6 +764,7 @@ $defaultColor: #3399ff;
                     tr {
                         border-bottom: 1px solid #0000000a;
                         vertical-align: top;
+                        position: relative;
                         th,
                         td {
                             color: #404040;
@@ -793,7 +794,7 @@ $defaultColor: #3399ff;
                             }
                             td:nth-child(2) {
                                 width: 460px;
-                                position: relative;
+                               
                             }
                         }
                         @media (min-width: 1200px) {
