@@ -244,6 +244,16 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.5.9 =
+Release Date:
+
+Enhancement:
+* Custom icon and Fontawesome icon select option added in Icon selector. [ Note: need to remove dev option ]
+* Added List trips by Dates. [ Note: need to remove dev option ]
+
+Fixes:
+* Fixed FAQ accordion not conflict with Divi theme.
+
 = 4.5.8 =
 Release Date: 19th April, 2021
 
