@@ -329,7 +329,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                 _start_date = moment( moment(date.start_date).format("YYYY-MM-DD") )
                                             }
                                             return <>
-                                                {! date.is_recurring && 
+                                                {! date.is_recurring && isTourDate(new Date( _start_date ) ) && 
                                                     <>
                                                     <tr key={index} className={
                                                         _start_date.isSame( _selectedDateTime ) ? 'selected': '',
