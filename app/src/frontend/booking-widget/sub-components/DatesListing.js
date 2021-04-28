@@ -130,18 +130,18 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
             if (componentData.selectedDateTime) {
                 _selectedDateTime = moment(moment(componentData.selectedDateTime).format("YYYY-MM-DD"));
             }
-            let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
-
+            let _pricingIds = getPricingsByDate(moment(data.start_date).toDate(), data.id);
             let firstPricingId = _pricingIds[0];
             let firstPricing = pricings[firstPricingId]
 
-            let firstCategories = firstPricing.categories
             let firstCounts = {}
-            firstCategories.forEach(c => {
-                firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
-            })
+            
             let pricingOptions = []
             if ( 'undefined' != typeof _pricingIds.length && _pricingIds.length ) {
+                let firstCategories = firstPricing.categories;
+                firstCategories.forEach(c => {
+                    firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
+                })
                 pricingOptions = _pricingIds.map( (pricingId, pricingIndex) => {
                     return { label: pricings[pricingId].title, value: pricingId }
                 })
@@ -262,7 +262,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
         </tbody> 
         <tfoot className="wp-travel-recurring-dates-nav-btns">
            <tr> 
-               <td colspan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
+               <td colSpan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
             {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
             { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}</td>
             </tr>
