@@ -1,4 +1,4 @@
-import { TextControl, PanelRow, PanelBody, SelectControl, ToggleControl,Notice, Button } from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, SelectControl, ToggleControl, CheckboxControl, Notice, Button } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import _ from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
@@ -7,12 +7,16 @@ import { sprintf, _n, __} from '@wordpress/i18n';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 const WPTravelTripPricingCategories = ({priceIndex}) => {
-    const { pricing_categories, pricings } = useSelect((select) => {
+    const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
     }, []);
-    const { updateTripPricing } = dispatch('WPTravel/TripEdit');
+    const { pricing_categories, pricings, default_pricing_id, default_category_id } = allData;
+
+    let defaultPricingId = 'undefined' != typeof default_pricing_id ? default_pricing_id : null
+    let defaultCategoryId = 'undefined' != typeof default_category_id ? default_category_id : null
+    const { updateTripPricing, updateTripData } = dispatch('WPTravel/TripEdit');
     let price = pricings[priceIndex];
-    
+    // console.log( 'allData', allData );
     let pricingCategories = [];
     if ( pricing_categories.length > 0 ) {
         pricing_categories.map((cat)=>{
@@ -111,6 +115,47 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                         } }
                     />
                 </PanelRow>
+                {/* <PanelRow>
+                    <label>{ __( 'Set as default price', 'wp-travel' ) }</label>
+                    <div className="wp-travel-field-value">
+                        <ToggleControl
+                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
+                            onChange={ () => {
+                                // console.log(' price.id ', price.id )
+                                // console.log(' category.id ', category.id )
+                                
+                            } }
+                        />
+
+                        <CheckboxControl
+                            label={ __( 'Set as default price', 'wp-travel' ) }
+                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
+                            onChange={ (v) => {
+                                if ( v ) {
+
+                                    updateTripData({
+                                        ...allData,
+                                        default_pricing_id: price.id
+                                    })
+                                    updateTripData({
+                                        ...allData,
+                                        default_category_id: category.id
+                                    })
+                                } else {
+                                    updateTripData({
+                                        ...allData,
+                                        default_pricing_id: null
+                                    })
+                                    updateTripData({
+                                        ...allData,
+                                        default_category_id: null
+                                    })
+                                }
+                            } }
+                        />
+                        <p className="components-form-token-field__help">{__( 'Display as Starting from price', 'wp-travel' )}</p>
+                    </div>
+                </PanelRow> */}
                 <PanelRow>
                     <label>{ __( 'Enable Sale', 'wp-travel' ) }</label>
                     <ToggleControl
