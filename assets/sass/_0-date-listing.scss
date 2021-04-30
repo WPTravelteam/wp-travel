@@ -41,45 +41,46 @@ $defaultColor: #3399ff;
     left: 0;
     z-index: 11;
 }
-//Dates Trip Date Listing
-#booking.wp-travel-list-view {
-    .wp-travel-booking__panel-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .left-info {
-            p:last-child {
+.wp-travel-booking__panel-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left-info {
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .right-info {
+        text-align: right;
+        p {
+            font-size: 20px;
+        }
+    }
+    @media (min-width: 991px){
+        .left-info,
+        .right-info{
+            display: inline-flex;
+            align-items: center;
+            p{
                 margin-bottom: 0;
             }
         }
-        .right-info {
-            text-align: right;
-            p {
-                font-size: 20px;
+        .left-info{
+            p:first-child{
+                margin-right: 1rem;
             }
         }
-        @media (min-width: 991px){
-            .left-info,
-            .right-info{
-                display: inline-flex;
-                align-items: center;
-                p{
-                    margin-bottom: 0;
-                }
-            }
-            .left-info{
-                p:first-child{
-                    margin-right: 1rem;
-                }
-            }
-            .right-info{
-                
-                .wp-travel-book{
-                    margin-left: 1rem;
-                }
+        .right-info{
+            
+            .wp-travel-book{
+                margin-left: 1rem;
             }
         }
     }
+}
+//Dates Trip Date Listing
+#booking.wp-travel-list-view {
+
 	.wp-travel-booking__pricing-wrapper {
 		display: none;
 		.wp-travel-booking__pricing-name{
@@ -1065,28 +1066,28 @@ $defaultColor: #3399ff;
 #booking.wp-travel-calendar-view{
     background-color: #fff;
     padding: 0 1em;
-    .wp-travel-booking__panel-bottom {
-        .right-info{
-            width: 100%;
-            p{
-                float: left;
-                color: #666;
-                text-align: left;
-                strong{
-                    font-size: 24px;
-                    color: #444;
-                    display: block;
-                }
-            }
-            .wp-travel-book{
-                font-size: 16px;
-                font-weight: bold;
-                text-transform: uppercase;
-                padding: 1em 1.5em;
-                float: right;
-            }
-        }
-    }
+    // .wp-travel-booking__panel-bottom {
+    //     .right-info{
+    //         width: 100%;
+    //         p{
+    //             float: left;
+    //             color: #666;
+    //             text-align: left;
+    //             strong{
+    //                 font-size: 24px;
+    //                 color: #444;
+    //                 display: block;
+    //             }
+    //         }
+    //         .wp-travel-book{
+    //             font-size: 16px;
+    //             font-weight: bold;
+    //             text-transform: uppercase;
+    //             padding: 1em 1.5em;
+    //             float: right;
+    //         }
+    //     }
+    // }
 
     .tooltip{
         position: relative;
