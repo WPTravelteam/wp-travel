@@ -72,7 +72,7 @@ export default () => {
                     }
                 </>
             }
-            {  _wp_travel.dev_mode &&
+            {/* {  _wp_travel.dev_mode && */}
                 <PanelRow>
                     <label>{ __( 'Trip date listing', 'wp-travel' ) }</label>
                     
@@ -98,7 +98,7 @@ export default () => {
                         <p className="description">{__( 'List date while booking or display calendar with available dates. Note: Date option only works for fixed departure trips.', 'wp-travel' )}</p>
                     </div>
                 </PanelRow>
-            }
+            {/* } */}
             <PanelRow>
                 <label>{ __( 'Enable Expired Trip Option', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">

@@ -16,7 +16,6 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
     let defaultCategoryId = 'undefined' != typeof default_category_id ? default_category_id : null
     const { updateTripPricing, updateTripData } = dispatch('WPTravel/TripEdit');
     let price = pricings[priceIndex];
-    // console.log( 'allData', allData );
     let pricingCategories = [];
     if ( pricing_categories.length > 0 ) {
         pricing_categories.map((cat)=>{

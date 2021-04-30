@@ -67,6 +67,7 @@ const WPTravelIcons = (props) => {
                 updateFact( 'icon_img', props.factData.icon_img, index );
                 updateFact( 'icon_img_id', props.factData.icon_img_id, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
+                props.modalHandleClick(false);
             }else {
                 updateFact( 'icon_img', '', index );
                 updateFact( 'icon_img_id', '', index );
@@ -103,30 +104,42 @@ const WPTravelIcons = (props) => {
             content: IconClassContent
         },
         {
-            name: 'coming-soon',
-            title: <><i className="fas fa-step-forward"></i>{__( 'Other Icons', 'wp-travel' )}</>,
-            className: 'wti__coming_soon',
-            content: ComingSoonMessage
-        }
+            name: 'fontawesome-icon',
+            title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
+            className: 'wti__fa_icon',
+            content: FontAwesomeIconContent
+        },
+        {
+            name: 'custom-upload',
+            title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
+            className: 'wti__custom_upload',
+            content: CustomUploadContent
+        },
+        // {
+        //     name: 'coming-soon',
+        //     title: <><i className="fas fa-step-forward"></i>{__( 'Other Icons', 'wp-travel' )}</>,
+        //     className: 'wti__coming_soon',
+        //     content: ComingSoonMessage
+        // }
     ]
 
     // Place tab here if still on development.
-    if ( _wp_travel.dev_mode ) {
-        iconTabs.push(
-            {
-                name: 'fontawesome-icon',
-                title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
-                className: 'wti__fa_icon',
-                content: FontAwesomeIconContent
-            },
-            {
-                name: 'custom-upload',
-                title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
-                className: 'wti__custom_upload',
-                content: CustomUploadContent
-            },
-        )
-    }
+    // if ( _wp_travel.dev_mode ) {
+    //     iconTabs.push(
+    //         {
+    //             name: 'fontawesome-icon',
+    //             title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
+    //             className: 'wti__fa_icon',
+    //             content: FontAwesomeIconContent
+    //         },
+    //         {
+    //             name: 'custom-upload',
+    //             title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
+    //             className: 'wti__custom_upload',
+    //             content: CustomUploadContent
+    //         },
+    //     )
+    // }
 
     return <>
         {
@@ -141,7 +154,7 @@ const WPTravelIcons = (props) => {
                         isDismissible={false}
                         tabs={iconTabs}>
                         {
-                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} tabHandleClick = {props.modalHandleClick} /> : <>{__('Error', 'wp-travel')}</>
+                            ( tab ) => 'undefined' !== typeof tab.content ? <tab.content index={props.factIndex} fact={props.factData} tabHandleClick = {props.modalHandleClick} updateFact={updateFact} /> : <>{__('Error', 'wp-travel')}</>
                         }
                     </TabPanel>
                     <div className="wti__insert_icon">

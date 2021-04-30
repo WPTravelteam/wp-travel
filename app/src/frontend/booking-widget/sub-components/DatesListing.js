@@ -46,9 +46,9 @@ const generateRRUleArgs = data => {
     }
     rruleStartDate = moment( rruleStartDate ).utc();
     let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-    
-    if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year()))
+    if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year())) {
         return []
+    }
 
 
     let selectedMonths = data.months ? data.months.split(",").filter(month => month != 'every_month') : [];
@@ -82,7 +82,10 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
     })
     useEffect(() => {
         if (!rruleArgs) {
-            setRRuleArgs(generateRRUleArgs(data))
+            let aaa = generateRRUleArgs(data);
+            if (Object.keys(aaa).length > 0) {
+                setRRuleArgs(aaa)
+            }
         }
     }, [data])
 
@@ -306,9 +309,9 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                             <table className="wptravel-recurring-table">
                                 <thead className="thead-table">
                                     <tr>
-                                        <th data-label="pricings">Pricings</th>
-                                        <th data-label="person">Person</th>
-                                        <th data-label="date">Date</th>
+                                        <th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
+                                        <th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
+                                        <th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
                                         {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                                     </tr>
                                 </thead>
@@ -446,9 +449,9 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                     <table>
                                         <thead className="thead-table">
                                             <tr>
-                                                <th data-label="pricings">Pricings</th>
-                                                <th data-label="person">Person</th>
-                                                <th data-label="date">Date</th>
+                                                <th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
+                                                <th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
+                                                <th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
                                                 {/* <th>{_wp_travel.strings.bookings.action}</th> */}
                                             </tr>
                                         </thead>
