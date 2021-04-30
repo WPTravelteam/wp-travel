@@ -31,53 +31,53 @@ $defaultColor: #3399ff;
         }
     }
 }
+.wp-travel-booking__panel-bottom {
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    left: 0;
+    z-index: 11;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left-info {
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .right-info {
+        text-align: right;
+        p {
+            font-size: 20px;
+        }
+    }
+    @media (min-width: 991px){
+        .left-info,
+        .right-info{
+            display: inline-flex;
+            align-items: center;
+            p{
+                margin-bottom: 0;
+            }
+        }
+        .left-info{
+            p:first-child{
+                margin-right: 1rem;
+            }
+        }
+        .right-info{
+            
+            .wp-travel-book{
+                margin-left: 1rem;
+            }
+        }
+    }
+}
 //Dates Trip Date Listing
 #booking.wp-travel-list-view {
-	.wp-travel-booking__panel-bottom {
-		position: fixed;
-		bottom: 0;
-		padding: 15px;
-		background-color: #fff;
-		border-top: 1px solid #ccc;
-		width: 100%;
-		left: 0;
-		z-index: 11;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		.left-info {
-			p:last-child {
-				margin-bottom: 0;
-			}
-		}
-		.right-info {
-			text-align: right;
-			p {
-				font-size: 20px;
-			}
-		}
-		@media (min-width: 991px){
-			.left-info,
-			.right-info{
-				display: inline-flex;
-				align-items: center;
-				p{
-					margin-bottom: 0;
-				}
-			}
-			.left-info{
-				p:first-child{
-					margin-right: 1rem;
-				}
-			}
-			.right-info{
-				
-				.wp-travel-book{
-					margin-left: 1rem;
-				}
-			}
-		}
-	}
 	.wp-travel-booking__pricing-wrapper {
 		display: none;
 		.wp-travel-booking__pricing-name{
