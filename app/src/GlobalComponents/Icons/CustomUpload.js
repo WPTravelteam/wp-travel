@@ -43,6 +43,7 @@ const CustomUploadContent = (props) => {
 
                 sessionStorage.setItem('wpTravelIconModuleUploaderData', '');
                 sessionStorage.setItem('wpTravelIconModuleUploaderData', JSON.stringify(selectedItems));
+                props.updateFact( 'selected_icon_type', 'custom-upload', props.index );
 
             }
             // setOpen(true);

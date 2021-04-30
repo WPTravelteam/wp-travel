@@ -7,12 +7,12 @@ const _ = lodash
 
 import ErrorBoundry from '../ErrorBoundry';
 
-// import PaxSelector from './PaxSelector';
-// import TripTimesListing from './TripTimesListing';
-// import TripExtrasListing from './TripExtrasListing';
-const PaxSelector       = lazy(() => import("./PaxSelector"));
-const TripTimesListing  = lazy(() => import("./TripTimesListing"));
-const TripExtrasListing = lazy(() => import("./TripExtrasListing"));
+import PaxSelector from './PaxSelector';
+import TripTimesListing from './TripTimesListing';
+import TripExtrasListing from './TripExtrasListing';
+// const PaxSelector       = lazy(() => import("./PaxSelector"));
+// const TripTimesListing  = lazy(() => import("./TripTimesListing"));
+// const TripExtrasListing = lazy(() => import("./TripExtrasListing"));
 
 import Loader from '../../../GlobalComponents/Loader'
 
@@ -182,16 +182,16 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                         {
                         !componentData.pricingUnavailable && componentData.pricing && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) ? 
                             <>
-                            <Suspense fallback={<Loader />}>
+                            {/* <Suspense fallback={<Loader />}> */}
                                 <PaxSelector
                                     pricing={componentData.pricing ? componentData.pricing : firstPricing }
                                     onPaxChange={componentData.onPaxChange}
                                     counts={componentData.counts ? componentData.counts : firstCounts }
                                     inventory={componentData.inventory}
                                 />
-                            </Suspense>
+                            {/* </Suspense> */}
                             {componentData.totalPax > 0 && _.size(componentData.pricing.trip_extras) > 0 && 
-                                <Suspense fallback={<Loader />}>
+                                // <Suspense fallback={<Loader />}>
                                     <ErrorBoundry>
                                         <TripExtrasListing
                                             options={componentData.pricing.trip_extras}
@@ -199,19 +199,19 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                                             counts={componentData.tripExtras}
                                         />
                                     </ErrorBoundry>
-                                </Suspense>
+                                // </Suspense>
                             }
                             </>
                             : <Disabled>
                                 {/* Just to display */}
-                                <Suspense fallback={<Loader />}>
+                                {/* <Suspense fallback={<Loader />}> */}
                                     <PaxSelector
                                         pricing={ firstPricing }
                                         onPaxChange={componentData.onPaxChange}
                                         counts={firstCounts }
                                         inventory={componentData.inventory}
                                         />
-                                </Suspense>
+                                {/* </Suspense> */}
                             </Disabled>
 
                         }
@@ -223,13 +223,13 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                             </div>
                             {
                                 !componentData.pricingUnavailable && componentData.nomineeTimes.length > 0 && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) &&
-                                <Suspense fallback={<Loader />}>
+                                // <Suspense fallback={<Loader />}>
                                     <TripTimesListing
                                         selected={componentData.selectedDateTime}
                                         onTimeSelect={componentData.onTimeSelect}
                                         options={componentData.nomineeTimes}
                                     />
-                                </Suspense>
+                                // </Suspense>
                             }
                             
                        </td>
@@ -254,14 +254,14 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                         </td>
                         <td>
                             <Disabled>
-                                <Suspense fallback={<Loader />}>
+                                {/* <Suspense fallback={<Loader />}> */}
                                     <PaxSelector
                                         pricing={ firstPricing }
                                         onPaxChange={componentData.onPaxChange}
                                         counts={firstCounts }
                                         inventory={componentData.inventory}
                                     />
-                                </Suspense>
+                                {/* </Suspense> */}
                             </Disabled>
                         </td>
                         <td data-label="date"><Disabled>
@@ -372,17 +372,17 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                         {
                                                             !componentData.pricingUnavailable && componentData.pricing && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(date.id) ) ? 
                                                                 <>
-                                                                    <Suspense fallback={<Loader />}>
+                                                                    {/* <Suspense fallback={<Loader />}> */}
                                                                         <PaxSelector
                                                                             pricing={componentData.pricing ? componentData.pricing : firstPricing }
                                                                             onPaxChange={componentData.onPaxChange}
                                                                             counts={componentData.counts ? componentData.counts : firstCounts }
                                                                             inventory={componentData.inventory}
                                                                         />
-                                                                    </Suspense>
+                                                                    {/* </Suspense> */}
                                                                     {
                                                                         componentData.totalPax > 0 && _.size(componentData.pricing.trip_extras) > 0 && 
-                                                                        <Suspense fallback={<Loader />}>
+                                                                        // <Suspense fallback={<Loader />}>
                                                                             <ErrorBoundry>
                                                                                 <TripExtrasListing
                                                                                     options={componentData.pricing.trip_extras}
@@ -390,19 +390,19 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                                     counts={componentData.tripExtras}
                                                                                 />
                                                                             </ErrorBoundry>
-                                                                        </Suspense>
+                                                                        // </Suspense>
                                                                     }
                                                                 </>
                                                                 : <Disabled>
                                                                     {/* Just to display */}
-                                                                    <Suspense fallback={<Loader />}>
+                                                                    {/* <Suspense fallback={<Loader />}> */}
                                                                         <PaxSelector
                                                                             pricing={ firstPricing }
                                                                             onPaxChange={componentData.onPaxChange}
                                                                             counts={firstCounts }
                                                                             inventory={componentData.inventory}
                                                                             />
-                                                                    </Suspense>
+                                                                    {/* </Suspense> */}
                                                                 </Disabled>
 
                                                         }
@@ -417,13 +417,13 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                 </div>
                                                                     { !componentData.pricingUnavailable && componentData.nomineeTimes.length > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(date.id) &&
                                                                         <>
-                                                                        <Suspense fallback={<Loader />}>
+                                                                        {/* <Suspense fallback={<Loader />}> */}
                                                                             <TripTimesListing
                                                                                 selected={componentData.selectedDateTime}
                                                                                 onTimeSelect={componentData.onTimeSelect}
                                                                                 options={componentData.nomineeTimes}
                                                                             />
-                                                                        </Suspense>
+                                                                        {/* </Suspense> */}
                                                                         </>
                                                                     }
                                                             </div>
