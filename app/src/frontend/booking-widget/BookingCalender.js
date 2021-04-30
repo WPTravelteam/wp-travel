@@ -780,8 +780,6 @@ const BookingWidget = () => {
 			{selectedDateTime && 
 				<Suspense fallback={<Loader />}>
 					<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
-						{/* <Loader /> */}
-						{isLoading && <Loader />}
 						{
 							nomineePricings.length > 1 && <ErrorBoundry>
 								<Suspense fallback={<Loader />}>
@@ -850,12 +848,12 @@ const BookingWidget = () => {
 					{selectedPricing &&
 						<Suspense fallback={<Loader />}>
 							<div className="wp-travel-booking__panel-bottom">
-								{
-								'dates' === tripDateListing && <div className="left-info" >
+								
+								<div className="left-info" >
 									{selectedPricing && <p><strong>Pricing</strong>: {pricings[selectedPricing].title}</p>}
 									{selectedDateTime && <p><strong>Trip Date</strong>: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
 								</div>
-								}
+								
 								<div className="right-info" >
 									<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
 									<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
