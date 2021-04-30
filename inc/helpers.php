@@ -2701,6 +2701,7 @@ function wptravel_get_strings() {
 		'booking_tab_content_label' => __( 'Select Date and Pricing Options', 'wp-travel' ),
 		'bookings'                  => array(
 			'pricing_name'                  => __( 'Pricing Name', 'wp-travel' ),
+			// 'pricings'                      => __( 'Pricings', 'wp-travel' ),
 			'start_date'                    => __( 'Start', 'wp-travel' ),
 			'end_date'                      => __( 'End', 'wp-travel' ),
 			'action'                        => __( 'Action', 'wp-travel' ),
@@ -2728,6 +2729,8 @@ function wptravel_get_strings() {
 			'group_discount_tooltip'        => __( 'Group Discounts', 'wp-travel' ),
 			'view_group_discount'           => __( 'Discounts', 'wp-travel' ),
 			'pricings_list_label'           => __( 'Pricings', 'wp-travel' ),
+			'person'                        => __( 'Person', 'wp-travel' ),
+			'date'                          => __( 'Date', 'wp-travel' ),
 			'trip_extras_list_label'        => __( 'Trip Extras', 'wp-travel' ),
 			'trip_extras_link_label'        => __( 'Learn More', 'wp-travel' ),
 			'available_trip_times'          => __( 'Available times', 'wp-travel' ),

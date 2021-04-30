@@ -58,6 +58,10 @@ const CustomUploadContent = (props) => {
                 imageUrl: null,
             });
             sessionStorage.removeItem('wpTravelIconModuleUploaderData');
+
+            props.updateFact( 'icon_img', '', props.index );
+            props.updateFact( 'icon_img_id', '', props.index );
+            props.updateFact( 'selected_icon_type', 'custom-upload', props.index );
         }
 
         return <>
