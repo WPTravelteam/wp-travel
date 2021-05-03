@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.0 =
-Release Date: 2nd May, 2021
+Release Date: 3rd May, 2021
 
 Enhancement:
 * Custom icon and Fontawesome icon select option added in Icon selector.
