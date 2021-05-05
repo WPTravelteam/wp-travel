@@ -248,7 +248,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 Release Date: 5th May, 2021
 
 Enhancement:
-* Set as trip date listing in the trip page for new user from 4.6.1 and above. Now date list will display in the single trip page for new user. 
+* Date listing feature added as default to display available dates in single trip page for new user from WP Travel v4.6.1 and above.
 
 Fixes:
 * Fixed inventory tab content not showing for V3 mode of WP Travel.
