@@ -126,6 +126,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 			add_action( 'wp_enqueue_scripts', array( 'WpTravel_Assets', 'frontend' ) );
+			add_action( 'init', array( $this, 'set_block_script_translation' ) );
 			add_action( 'wp_head', array( 'WpTravel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
 			add_action( 'wp_footer', array( 'WpTravel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
@@ -163,6 +164,15 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
+		}
+
+		/**
+		 * Set Block script translation support.
+		 */
+		public function set_block_script_translation() {
+			// Frontend Booking Script.
+			wp_set_script_translations( 'wp-travel-frontend-booking-widget', 'wp-travel', plugin_dir_path( __FILE__ ) . 'i18n/languages' );
+			
 		}
 
 		/**
