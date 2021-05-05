@@ -744,6 +744,7 @@ const BookingWidget = () => {
 	return <>
 		
 			<div className="wp-travel-booking__header">
+				{/* {__( 'test translation.', 'wp-travel' )} */}
 				<h3>{__i18n.booking_tab_content_label}</h3>
 				{selectedDate && <button onClick={() => {
 					let _initialState = Object.assign(initialState)

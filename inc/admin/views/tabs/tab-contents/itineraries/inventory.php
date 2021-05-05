@@ -14,7 +14,7 @@ if ( ! function_exists( 'wptravel_trip_callback_inventory' ) ) {
 	 * @param array $args Tab args.
 	 */
 	function wptravel_trip_callback_inventory( $tab, $args ) {
-		if ( $tab ) {
+		if ( ! $tab ) {
 			return;
 		}
 		$upsell_args = array();

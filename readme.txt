@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7.1
 Requires PHP: 5.6.2
-Stable tag: 4.6.0
+Stable tag: 4.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -243,6 +243,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.6.1 =
+Release Date: 5th May, 2021
+
+Enhancement:
+* Set as trip date listing in the trip page for new user from 4.6.1 and above. Now date list will display in the single trip page for new user. 
+
+Fixes:
+* Fixed inventory tab content not showing for V3 mode of WP Travel.
 
 = 4.6.0 =
 Release Date: 3rd May, 2021
