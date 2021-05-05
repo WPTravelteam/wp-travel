@@ -159,6 +159,10 @@ function wptravel_settings_default_fields() {
 	if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
 		$settings_fields['wp_travel_switch_to_react'] = 'yes';
 	}
+	if ( version_compare( $user_since, '4.6.1', '>=' ) ) {
+		$settings_fields['trip_date_listing'] = 'dates';
+	}
+
 	return apply_filters( 'wp_travel_settings_fields', $settings_fields ); // flter @since 1.9.0.
 }
 
