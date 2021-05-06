@@ -8,12 +8,19 @@ import RRule from "rrule";
 import ErrorBoundry from './ErrorBoundry';
 import { wpTravelFormat, wpTravelTimeout } from "./functions";
 // React datepicker.
-const DatePicker        = lazy( () => import( "react-datepicker" ) );
+// const DatePicker        = lazy( () => import( "react-datepicker" ) );
+import DatePicker from "react-datepicker";
+
 // sub-components
-const PricingListing    = lazy(() => import("./sub-components/PricingListing"));
-const PaxSelector       = lazy(() => import("./sub-components/PaxSelector"));
-const TripTimesListing  = lazy(() => import("./sub-components/TripTimesListing"));
-const TripExtrasListing = lazy(() => import("./sub-components/TripExtrasListing"));
+// const PricingListing    = lazy(() => import("./sub-components/PricingListing"));
+// const PaxSelector       = lazy(() => import("./sub-components/PaxSelector"));
+// const TripTimesListing  = lazy(() => import("./sub-components/TripTimesListing"));
+// const TripExtrasListing = lazy(() => import("./sub-components/TripExtrasListing"));
+
+import PricingListing from './sub-components/PricingListing';
+import PaxSelector from './sub-components/PaxSelector';
+import TripTimesListing from './sub-components/TripTimesListing';
+import TripExtrasListing from './sub-components/TripExtrasListing';
 
 // Loader.
 import Loader from '../../GlobalComponents/Loader'
@@ -764,105 +771,111 @@ const BookingWidget = () => {
 			{
 				isFixedDeparture && 'dates' === tripDateListing && 
 					<div className="wp-travel-booking__content-wrapper">
-						<Suspense fallback={<Loader />}>
+						{/* <Suspense fallback={<Loader />}> */}
 							<DatesListing {...{ dates: datesById, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, componentData, getPricingTripTimes:getPricingTripTimes }} />
-						</Suspense>
+						{/* </Suspense> */}
 					</div>
 				||
 				<div className="wp-travel-booking__datepicker-wrapper">
-					<Suspense fallback={<Loader />}>
+					{/* <Suspense fallback={<Loader />}> */}
 						<DatePicker {...params} />
 						{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
-					</Suspense>
+					{/* </Suspense> */}
 				</div>
 			}
 			
 
 			{selectedDateTime && 
-				<Suspense fallback={<Loader />}>
-					<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
-						{
-							nomineePricings.length > 1 && <ErrorBoundry>
-								<Suspense fallback={<Loader />}>
-									<PricingListing
-										selected={selectedPricing}
-										options={nomineePricings}
-										onPricingSelect={handlePricingSelect}
-									/>
-								</Suspense>
-							</ErrorBoundry>
-						}
-						{
-							!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
-								<Suspense fallback={<Loader />}>
-									<TripTimesListing
-										selected={selectedDateTime}
-										onTimeSelect={handleTimeClick}
-										options={nomineeTimes}
-									/>
-								</Suspense>
-							</ErrorBoundry>
-						}
-						
-						
-					</div>
+				<>
+					{/* <Suspense fallback={<Loader />}> */}
+						<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
+							{
+								nomineePricings.length > 1 && <ErrorBoundry>
+									{/* <Suspense fallback={<Loader />}> */}
+										<PricingListing
+											selected={selectedPricing}
+											options={nomineePricings}
+											onPricingSelect={handlePricingSelect}
+										/>
+									{/* </Suspense> */}
+								</ErrorBoundry>
+							}
+							{
+								!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+									{/* <Suspense fallback={<Loader />}> */}
+										<TripTimesListing
+											selected={selectedDateTime}
+											onTimeSelect={handleTimeClick}
+											options={nomineeTimes}
+										/>
+									{/* </Suspense> */}
+								</ErrorBoundry>
+							}
+							
+							
+						</div>
 
-					<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
-						{
-							!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
-								<Suspense fallback={<Loader />}>
-									<PaxSelector
-										pricing={pricings[selectedPricing] || null}
-										onPaxChange={handlePaxChange}
-										counts={paxCounts}
-										inventory={inventory}
-									/>
-								</Suspense>
-							</ErrorBoundry>
+						<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
+							{
+								!pricingUnavailable && selectedPricing && inventory.find(i => i.pax_available > 0) && <ErrorBoundry>
+									{/* <Suspense fallback={<Loader />}> */}
+										<PaxSelector
+											pricing={pricings[selectedPricing] || null}
+											onPaxChange={handlePaxChange}
+											counts={paxCounts}
+											inventory={inventory}
+										/>
+									{/* </Suspense> */}
+								</ErrorBoundry>
 
-						}
-						{
-							!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
-								<Suspense fallback={<Loader />}>
-									<TripExtrasListing
-										options={pricings[selectedPricing].trip_extras}
-										onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
-										counts={tripExtras}
-									/>
-								</Suspense>
-							</ErrorBoundry>
-						}
-						{pricingUnavailable && 
-						<Suspense fallback={<Loader />}>
-							<Notice>
-								{
-									allData
-									&& allData.tripData.inventory
-									&& allData.tripData.inventory.enable_trip_inventory == 'yes'
-									&& <InventoryNotice inventory={allData.tripData.inventory} />
-								}
-							</Notice>
-						</Suspense>
-						}
-					</div>
+							}
+							{
+								!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
+									{/* <Suspense fallback={<Loader />}> */}
+										<TripExtrasListing
+											options={pricings[selectedPricing].trip_extras}
+											onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
+											counts={tripExtras}
+										/>
+									{/* </Suspense> */}
+								</ErrorBoundry>
+							}
+							{pricingUnavailable && 
+							<>
+								{/* <Suspense fallback={<Loader />}> */}
+									<Notice>
+										{
+											allData
+											&& allData.tripData.inventory
+											&& allData.tripData.inventory.enable_trip_inventory == 'yes'
+											&& <InventoryNotice inventory={allData.tripData.inventory} />
+										}
+									</Notice>
+								{/* </Suspense> */}
+							</>
+							}
+						</div>
 
-					{selectedPricing &&
-						<Suspense fallback={<Loader />}>
-							<div className="wp-travel-booking__panel-bottom">
-								
-								<div className="left-info" >
-									{selectedPricing && <p><strong>Pricing</strong>: {pricings[selectedPricing].title}</p>}
-									{selectedDateTime && <p><strong>Trip Date</strong>: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
-								</div>
-								
-								<div className="right-info" >
-									<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-									<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
-								</div>
-							</div>
-						</Suspense>
-					}
-				</Suspense>
+						{selectedPricing &&
+							<>
+								{/* <Suspense fallback={<Loader />}> */}
+									<div className="wp-travel-booking__panel-bottom">
+										
+										<div className="left-info" >
+											{selectedPricing && <p><strong>Pricing</strong>: {pricings[selectedPricing].title}</p>}
+											{selectedDateTime && <p><strong>Trip Date</strong>: <span>{moment(selectedDateTime).format(_wp_travel.date_format_moment)}</span></p>}
+										</div>
+										
+										<div className="right-info" >
+											<p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
+											<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook} onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+										</div>
+									</div>
+								{/* </Suspense> */}
+							</>
+						}
+					{/* </Suspense> */}
+				</>
 			}
 			
 	</>
