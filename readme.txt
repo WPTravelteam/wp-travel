@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.1 =
-Release Date: 5th May, 2021
+Release Date: 6th May, 2021
 
 Enhancement:
 * Date listing feature added as default to display available dates in single trip page for new user from WP Travel v4.6.1 and above.
