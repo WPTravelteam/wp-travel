@@ -4015,3 +4015,13 @@ function wptravel_use_itinerary_v2_layout() {
 		return false;
 	}
 }
+
+/**
+ * Wrapper for nocache_headers which also disables page caching.
+ *
+ * @since 4.6.2
+ */
+function wptravel_nocache_headers() {
+	WP_Travel_Helpers_Cache::set_nocache_constants();
+	nocache_headers();
+}

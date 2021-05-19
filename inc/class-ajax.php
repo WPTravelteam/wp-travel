@@ -131,8 +131,8 @@ class WP_Travel_Ajax {
 	}
 
 	public function add_to_cart() {
-		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
-		$http_post_data = wptravel_sanitize_array( $_POST );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$http_post_data = wptravel_sanitize_array( $_POST ); // phpcs:ignore
 		$post_data      = json_decode( file_get_contents( 'php://input' ) );
 		$post_data      = wptravel_sanitize_array( $post_data );
 		$post_data      = ! empty( $post_data ) ? (array) $post_data : $http_post_data;
@@ -140,9 +140,10 @@ class WP_Travel_Ajax {
 		if ( ! isset( $post_data['trip_id'] ) ) {
 			return;
 		}
+
+		wptravel_nocache_headers();
 		global $wt_cart;
 
-		// $allow_multiple_cart_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false );
 		$allow_multiple_cart_items = WP_Travel_Cart::allow_multiple_items();
 		if ( ! $allow_multiple_cart_items ) {
 			$wt_cart->clear();

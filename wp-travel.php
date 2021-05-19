@@ -375,6 +375,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/lib/cart.php';
 
 			// Helpers.
+			require WP_TRAVEL_ABSPATH . '/core/helpers/cache.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/settings.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/modules.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/media.php';
