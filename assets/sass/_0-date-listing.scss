@@ -235,7 +235,7 @@ $defaultColor: #3399ff;
 			align-items: center;
 			cursor: pointer;
 			transition: all 0.4s ease-in-out;
-			span{
+			> span{
 				display: none;
 			}
 			svg {
