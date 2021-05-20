@@ -1091,7 +1091,7 @@ $defaultColor: #3399ff;
 
     .tooltip{
         position: relative;
-        span{
+        > span{
             position: absolute;
             bottom: 100%;
             left: 50%;
@@ -1563,7 +1563,7 @@ $defaultColor: #3399ff;
                             display: none;
                         }
                         &:hover{
-                            span{
+                            > span{
                                 color: red;
                             }
                             .discount-table{
