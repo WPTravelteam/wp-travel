@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
-    "build": "wp-scripts build",
+    "dev_build": "wp-scripts build --mode development",
+    "build": "wp-scripts build && wp-scripts build --mode development",
     "start": "wp-scripts start",
-    "build:pre_release": "npx wp-scripts build && npx grunt pre_release",
+    "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js"
   },
   "repository": {
     "type": "git",
@@ -64,6 +66,7 @@
     "style-loader": "^1.1.3"
   },
   "dependencies": {
+    "@wordpress/env": "^4.0.4",
     "@wordpress/i18n": "^3.20.0",
     "@wordpress/icons": "^1.3.1",
     "react-datepicker": "^3.7.0",
