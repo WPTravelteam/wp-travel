@@ -244,6 +244,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.6.2 =
+Release Date: 23rd May, 2021
+
+Fixes:
+* Fixed Add to cart fails nonce verification issue.
+* Fixed group discount price not displaying in the discount table.
+
 = 4.6.1 =
 Release Date: 6th May, 2021
 
