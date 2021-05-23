@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.6.1\n"
+"Project-Id-Version: WP Travel 4.6.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 03:56:49+00:00\n"
+"POT-Creation-Date: 2021-05-23 06:01:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2749,42 +2749,42 @@ msgstr ""
 msgid "Show all your \"%s\" settings and enable its feature."
 msgstr ""
 
-#: inc/class-ajax.php:235 inc/class-ajax.php:279 inc/helpers.php:1361
+#: inc/class-ajax.php:236 inc/class-ajax.php:280 inc/helpers.php:1361
 #: inc/helpers.php:3438
 msgid "Custom"
 msgstr ""
 
-#: inc/class-ajax.php:382
+#: inc/class-ajax.php:383
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:400
+#: inc/class-ajax.php:401
 msgid "Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:411
+#: inc/class-ajax.php:412
 msgid "Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:421
+#: inc/class-ajax.php:422
 msgid ""
 "The coupoun is either inactive or has expired. Coupon Code could not be "
 "applied."
 msgstr ""
 
-#: inc/class-ajax.php:433
+#: inc/class-ajax.php:434
 msgid "This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:449
+#: inc/class-ajax.php:450
 msgid "Coupon Expired. Maximum no. of coupon usage exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:466
+#: inc/class-ajax.php:467
 msgid "Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:473
+#: inc/class-ajax.php:474
 msgid "Coupon applied succesfully."
 msgstr ""
 
@@ -9568,7 +9568,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:480
+#: upgrade/update-137.php:25 wp-travel.php:481
 msgid "WP Travel Customer"
 msgstr ""
 
