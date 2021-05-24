@@ -60,22 +60,40 @@ jQuery(function($) {
         if (!pathname) {
             pathname = window.location.pathname;
         }
-        query_string = '?';
-        var check_query_string = pathname.match(/\?/);
-        if (check_query_string) {
-            query_string = '&';
+        // query_string = '?';
+        // var check_query_string = pathname.match(/\?/);
+        // if (check_query_string) {
+        //     query_string = '&';
+        // }
+        // var data_index = $(this).siblings('.filter-data-index').data('index');
+        // $('.wp_travel_search_widget_filters_input' + data_index).each(function() {
+        //     filterby = $(this).attr('name');
+        //     filterby_val = $(this).val();
+        //     query_string += filterby + '=' + filterby_val + '&';
+        // })
+        // redirect_url = pathname + query_string;
+        // redirect_url = redirect_url.replace(/&+$/, '');
+
+        // redirect_url = redirect_url + '&view_mode=' + view_mode;
+        // window.location = redirect_url;
+
+        query_string = '';
+        if ( window.location.search ) {
+            query_string = window.location.search;
         }
+        var full_url       = new URL( pathname + query_string );
+        var search_params  = full_url.searchParams;
+
         var data_index = $(this).siblings('.filter-data-index').data('index');
         $('.wp_travel_search_widget_filters_input' + data_index).each(function() {
             filterby = $(this).attr('name');
             filterby_val = $(this).val();
-            query_string += filterby + '=' + filterby_val + '&';
+            // query_string += filterby + '=' + filterby_val + '&';
+            search_params.set( filterby, filterby_val );
+            full_url.search = search_params.toString();
         })
-        redirect_url = pathname + query_string;
-        redirect_url = redirect_url.replace(/&+$/, '');
-
-        redirect_url = redirect_url + '&view_mode=' + view_mode;
-        window.location = redirect_url;
+        var new_url     = full_url.toString();
+        window.location = new_url;
     });
 
     // Enquiry Submission.

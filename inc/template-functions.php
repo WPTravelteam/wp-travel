@@ -32,7 +32,6 @@ add_action( 'wp_travel_before_content_start', 'wptravel_booking_message' );
 
 add_action( 'the_post', 'wptravel_setup_itinerary_data' );
 
-add_action( 'pre_get_posts', 'wptravel_posts_filter' );
 add_action( 'save_post', 'wptravel_clear_booking_transient' );
 add_filter( 'excerpt_more', 'wptravel_excerpt_more' );
 add_filter( 'wp_kses_allowed_html', 'wptravel_wpkses_post_iframe', 10, 2 );
@@ -43,6 +42,7 @@ add_action( 'wp_travel_booking_fixed_departure_list', 'wptravel_booking_fixed_de
 add_filter( 'get_header_image_tag', 'wptravel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wptravel_remove_jetpack_related_posts' );
 
+add_action( 'pre_get_posts', 'wptravel_posts_filter' );
 add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
 
 /**
@@ -117,7 +117,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : ''; // @phpcs:ignore
 
 		// Filter by date clause.
-	if ( ! empty( $start_date ) || ! empty( $end_date ) ) {
+	if ( ! empty( $start_date ) || ! empty( $end_date ) ) { // For search filter Widgets.
 		$where .= ' AND ( '; // <1
 		$where .= ' ( '; // <2
 		if ( ! empty( $start_date ) ) {
@@ -156,9 +156,12 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 
 	/**
 	 * ALready checking nonce above using WP_Travel::verify_nonce;
+	 * Do not enter here if search filter widget is in trips/archive page. to prevent adding duplicate join clause.
 	 */
 	if ( isset( $_GET['trip_date'] ) && in_array( $_GET['trip_date'], array( 'asc', 'desc' ) ) ) { // @phpcs:ignore
-		$post_clauses['join']    = $post_clauses['join'] . $join;
+		if ( ( empty( $start_date ) && empty( $end_date ) ) ) {
+			$post_clauses['join'] = $post_clauses['join'] . $join;
+		}
 		$post_clauses['orderby'] = 'asc' === sanitize_text_field( wp_unslash( $_GET['trip_date'] ) ) ? "{$dates_table}.start_date ASC" : "{$dates_table}.start_date DESC"; // @phpcs:ignore
 	}
 

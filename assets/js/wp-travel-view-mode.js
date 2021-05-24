@@ -5,21 +5,24 @@ jQuery(document).ready(function($) {
         if (!pathname) {
             pathname = window.location.pathname;
         }
-        query_string = '?';
-        var check_query_string = pathname.match(/\?/);
-        if (check_query_string) {
-            query_string = '&';
+        query_string = '';
+        if ( window.location.search ) {
+            query_string = window.location.search;
         }
-        $('.wp_travel_input_filters').each(function() {
-            filterby = $(this).attr('name');
-            filterby_val = $(this).val();
-            query_string += filterby + '=' + filterby_val + '&';
-        })
-        redirect_url = pathname + query_string;
-        redirect_url = redirect_url.replace(/&+$/, '');
+        var full_url       = new URL( pathname + query_string );
+        var search_params  = full_url.searchParams;
 
-        redirect_url = redirect_url + '&view_mode=' + view_mode;
-        window.location = redirect_url;
+        $('.wp_travel_input_filters').each(function() {
+            filterby     = $(this).attr('name');
+            filterby_val = $(this).val();
+
+            search_params.set( filterby, filterby_val );
+            full_url.search = search_params.toString();
+        })
+
+        var new_url     = full_url.toString();
+        window.location = new_url;
+
     });
 
     // Set view mode class on body on initial load.
