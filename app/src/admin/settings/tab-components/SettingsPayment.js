@@ -57,6 +57,28 @@ export default () => {
         }
         _allPayouts[_tabIndex] = value
 
+        let total_percent = 0
+        let partial_payouts = minimum_partial_payout;
+
+        if (  'undefined' != typeof minimum_partial_payout && minimum_partial_payout.length > 0 ) {
+            if ( 'string' == typeof minimum_partial_payout ) { // fixes for old partial payment saved as string.
+                partial_payouts = [minimum_partial_payout]
+            }
+            total_percent = partial_payouts.reduce(function(a,b){
+                return parseFloat(a) + parseFloat(b);
+            }, 0);
+        }
+
+        if ( total_percent > 100 ) {
+            let exceed_val = total_percent - 100;
+
+            if ( exceed_val > 0 ) {
+                value = value - exceed_val;
+            }
+
+        }
+        _allPayouts[_tabIndex] = value; // temp fixes. not recommended this direct approach
+
         updateSettings({
             ...allData,
             // minimum_partial_payout: _allPayouts
@@ -186,7 +208,7 @@ export default () => {
                     }
                 </>
                 : '' }
-            {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )}
+            {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )} 
 
 
             <h3>
