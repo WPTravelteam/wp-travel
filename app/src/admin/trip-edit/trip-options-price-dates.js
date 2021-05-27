@@ -288,9 +288,11 @@ const WPTravelTripOptionsPricings = () => {
 
                                             if ( ( totalPayout +1 ) > 100 ) { // Added +1 because state is updating after this totalPayout check.
                                                 let exceed_val = ( totalPayout + 1 ) - 100;
-                                    
                                                 if ( exceed_val > 0 ) {
                                                     value = value - exceed_val;
+                                                    if ( value < 0 ) {
+                                                        value = 0;
+                                                    }
                                                 }
                                             }
                                             _minimum_partial_payout_percent[i] = value
