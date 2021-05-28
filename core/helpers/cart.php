@@ -145,18 +145,21 @@ class WP_Travel_Helpers_Cart {
 		$res = ob_get_contents();
 		ob_end_clean();
 		// END Temporary solution
-		$cart      = self::get_cart();
-		$cart_data = array();
-		if ( ! is_wp_error( $cart ) && 'WP_TRAVEL_CART' === $cart['code'] ) {
-			$cart_data = $cart['cart'];
+		if ( $res ) { // add to cart success.
+			$cart      = self::get_cart();
+			$cart_data = array();
+			if ( ! is_wp_error( $cart ) && 'WP_TRAVEL_CART' === $cart['code'] ) {
+				$cart_data = $cart['cart'];
+			}
+			return WP_Travel_Helpers_Response_Codes::get_success_response(
+				'WP_TRAVEL_ADDED_TO_CART',
+				array(
+					'cart' => $cart_data,
+				)
+			);
 		}
 
-		return WP_Travel_Helpers_Response_Codes::get_success_response(
-			'WP_TRAVEL_ADDED_TO_CART',
-			array(
-				'cart' => $cart_data,
-			)
-		);
+		return new WP_Error( 'WP_TRAVEL_CART_ITEM_NOT_ADDED', __( 'Cart item not Added.', 'wp-travel' ) );
 	}
 
 	public static function remove_cart_item( $cart_id = false ) {
