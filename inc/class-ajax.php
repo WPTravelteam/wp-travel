@@ -141,6 +141,11 @@ class WP_Travel_Ajax {
 			return;
 		}
 
+		$skip_cart = apply_filters( 'wptravel_skip_add_to_cart', false );
+		if ( $skip_cart ) {
+			return;
+		}
+
 		wptravel_nocache_headers();
 		global $wt_cart;
 
