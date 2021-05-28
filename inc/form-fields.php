@@ -300,10 +300,12 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 	$trip_end   = (int) ( isset( $sanitize_get['trip_end'] ) && '' !== $sanitize_get['trip_end'] ) ? sanitize_text_field( wp_unslash( $sanitize_get['trip_end'] ) ) : '';
 
 	$show_end_date = wptravel_booking_show_end_date();
+
+	$strings       = wptravel_get_strings();
 	$trip_duration = array(
 		array(
 			'name'  => 'trip_start',
-			'label' => __( 'From', 'wp-travel' ),
+			'label' => $strings['from'],
 			'value' => $trip_start,
 			'id'    => 'datepicker1', // Extra id.
 
@@ -312,7 +314,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 	if ( $show_end_date ) {
 		$trip_duration[] = array(
 			'name'  => 'trip_end',
-			'label' => __( 'To', 'wp-travel' ),
+			'label' => $strings['from'],
 			'value' => $trip_end,
 			'id'    => 'datepicker2', // Extra id.
 		);
@@ -322,7 +324,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 	$fields = array(
 		'keyword_search'       => array(
 			'type'        => 'text',
-			'label'       => __( 'Keyword:', 'wp-travel' ),
+			'label'       => $strings['keyword'],
 			'name'        => 'keyword',
 			'id'          => 'wp-travel-filter-keyword',
 			'class'       => 'wp_travel_search_widget_filters_input',
@@ -335,7 +337,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		),
 		'fact'                 => array(
 			'type'        => 'text',
-			'label'       => __( 'Fact:', 'wp-travel' ),
+			'label'       => $strings['fact'],
 			'name'        => 'fact',
 			'id'          => 'wp-travel-filter-fact',
 			'class'       => 'wp_travel_search_widget_filters_input',
@@ -351,7 +353,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 			'type'            => 'category_dropdown',
 			'taxonomy'        => 'itinerary_types', // only for category_dropdown
 			'show_option_all' => __( 'All', 'wp-travel' ),  // only for category_dropdown
-			'label'           => __( 'Trip Type:', 'wp-travel' ),
+			'label'           => $strings['trip_type'],
 			'name'            => 'itinerary_types',
 			'id'              => 'itinerary_types',
 			'class'           => 'wp_travel_search_widget_filters_input',
@@ -367,7 +369,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 			'type'            => 'category_dropdown',
 			'taxonomy'        => 'travel_locations', // only for category_dropdown.
 			'show_option_all' => __( 'All', 'wp-travel' ),  // only for category_dropdown.
-			'label'           => __( 'Location:', 'wp-travel' ),
+			'label'           => $strings['location'],
 			'name'            => 'travel_locations',
 			'id'              => 'travel_locations',
 			'class'           => 'wp_travel_search_widget_filters_input',
@@ -380,7 +382,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		),
 		'price_orderby'        => array(
 			'type'        => 'select',
-			'label'       => __( 'Price:', 'wp-travel' ),
+			'label'       => $strings['price'],
 			'name'        => 'price',
 			'id'          => 'wp-travel-price',
 			'class'       => 'wp_travel_search_widget_filters_input',
@@ -397,7 +399,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		),
 		'price_range'          => array(
 			'type'          => 'range',
-			'label'         => __( 'Price Range:', 'wp-travel' ),
+			'label'         => $strings['price_range'],
 			'id'            => 'amount',
 			'class'         => 'wp_travel_search_widget_filters_input',
 			'default'       => $price_range,
@@ -406,7 +408,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		),
 		'trip_dates'           => array(
 			'type'          => 'date_range',
-			'label'         => __( 'Trip Duration:', 'wp-travel' ),
+			'label'         => $strings['trip_duration'],
 			'class'         => 'wp_travel_search_widget_filters_input',
 			'validations'   => array(
 				'required' => false,

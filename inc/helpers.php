@@ -2704,6 +2704,9 @@ function wptravel_get_strings() {
 		'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 		'show'                      => __( 'Show', 'wp-travel' ),
 		'booking_tab_content_label' => __( 'Select Date and Pricing Options', 'wp-travel' ),
+		'keyword'                   => __( 'Keyword', 'wp-travel' ),
+		'fact'                      => __( 'Fact', 'wp-travel' ),
+		'price_range'               => __( 'Price Range', 'wp-travel' ),
 		'bookings'                  => array(
 			'pricing_name'                  => __( 'Pricing Name', 'wp-travel' ),
 			// 'pricings'                      => __( 'Pricings', 'wp-travel' ),
