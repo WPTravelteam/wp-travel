@@ -38,6 +38,7 @@ function wptravel_book_now() {
 
 	$price_key            = false;
 	$pax                  = 1;
+	$total_pax            = 0; // Total booked pax. helps to display report.
 	$allow_multiple_items = WP_Travel_Cart::allow_multiple_items();
 
 	$trip_ids               = array();
@@ -61,6 +62,7 @@ function wptravel_book_now() {
 		$arrival_date_email_tag[] = $email_travel_date;
 		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since WP Travel v4.0
 		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
+		$total_pax               += $item['pax'];
 	}
 
 	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
@@ -99,6 +101,7 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_data', wptravel_sanitize_array( $_POST ) );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
+	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */
