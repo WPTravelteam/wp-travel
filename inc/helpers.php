@@ -142,6 +142,7 @@ function wptravel_settings_default_fields() {
 		// Debug Settings field.
 		'wt_test_mode'                            => 'yes',
 		'wt_test_email'                           => '',
+		'load_minified_scripts'                   => 'yes',
 
 		/**
 		 * Load Optimized assets.

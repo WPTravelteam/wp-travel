@@ -18,10 +18,12 @@ export default () => {
         wt_test_mode,
         wt_test_email,
         wt_load_optimized_script,
+        load_minified_scripts,
+
         options
         } = allData;
 
-
+    console.log( 'load_minified_scripts', load_minified_scripts );
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Debug Options', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -73,6 +75,21 @@ export default () => {
                         } }
                     />
                     <p className="description">{__( 'Enabling this will load the optimized bundled scripts files.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+            <PanelRow>
+                <label>{ __( 'Load Minified Scripts', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ load_minified_scripts == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                load_minified_scripts: 'yes' == load_minified_scripts ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'Enabling this will load minified scripts.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
             {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}

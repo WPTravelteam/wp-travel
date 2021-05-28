@@ -16,3 +16,21 @@ function wptravel_dev_mode() {
 	}
 	return false;
 }
+
+/**
+ * WP Travel script suffix function.
+ *
+ * @since WP Travel 4.6.3
+ * @return String
+ */
+function wptravel_script_suffix() {
+	$settings = wptravel_get_settings();
+	$suffix   = (
+		( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		||
+		( defined( 'WPTRAVEL_DEV_MODE' ) && WPTRAVEL_DEV_MODE )
+		||
+		'yes' !== $settings['load_minified_scripts']
+	) ? '' : '.min';
+	return $suffix;
+}

@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = (env, options) => {
-  const fileSuffix = options.mode && 'development' === options.mode ? '.dev' : '';
+  const fileSuffix = options.mode && 'development' === options.mode ? '' : '.min';
   let entries = {};
     entries['admin-trip-options' + fileSuffix ] = [
       './app/src/admin/trip-edit/index.js',
