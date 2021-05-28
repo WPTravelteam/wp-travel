@@ -1,13 +1,12 @@
 {
   "name": "wp-travel",
-  "version": "4.6.2",
+  "version": "4.6.3",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
     "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
-    "dev_build": "wp-scripts build --mode development",
     "build": "wp-scripts build && wp-scripts build --mode development",
-    "start": "wp-scripts start",
+    "start": "wp-scripts start --mode development",
     "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",

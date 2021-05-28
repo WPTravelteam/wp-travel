@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7.1
 Requires PHP: 5.6.2
-Stable tag: 4.6.2
+Stable tag: 4.6.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,14 +245,15 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.3 =
-Release Date:
+Release Date: 30th May, 2021
 
 Fixes:
 * Set maximum partial payment limit to 100%.
-* Fixed showing multiple partial payment showing even no multiple partial enabled with pro.
-* Fixed search filter widget conflit with archive filter toolbar fields.
+* Fixed showing multiple partial payments showing even no multiple partial enabled with pro.
+* Fixed search filter widget conflict with archive filter toolbar fields.
 * Fixed Cart empty issue due to cart cookie name. Now cart cookie name changed to `wp_travel_session` from `_wp_travel_session`.
 * Fixed Report data not displaying in the admin report page.
+* Strings updated in search filter widget to support change string label.
 
 = 4.6.2 =
 Release Date: 23rd May, 2021

@@ -63,7 +63,7 @@ export default () => {
             
             <h3>{__( 'Optimized Scripts and Styles', 'wp-travel' )}</h3>
             <PanelRow>
-                <label>{ __( 'Load Optimized Scripts', 'wp-travel' ) }</label>
+                <label>{ __( 'Load Combined Scripts', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
                         checked={ wt_load_optimized_script == 'yes' }
@@ -74,7 +74,7 @@ export default () => {
                             })
                         } }
                     />
-                    <p className="description">{__( 'Enabling this will load the optimized bundled scripts files.', 'wp-travel' )}</p>
+                    <p className="description">{__( 'Enabling this will load the bundled scripts files.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
             <PanelRow>
