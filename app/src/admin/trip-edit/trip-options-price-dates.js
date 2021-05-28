@@ -286,8 +286,11 @@ const WPTravelTripOptionsPricings = () => {
                                         onChange={(value) => {
                                             let _minimum_partial_payout_percent = minimum_partial_payout_percent
 
-                                            if ( ( totalPayout +1 ) > 100 ) { // Added +1 because state is updating after this totalPayout check.
-                                                let exceed_val = ( totalPayout + 1 ) - 100;
+                                            let newVal = value ? parseInt( value ) : 0;
+                                            let newTotalPayout = parseInt( totalPayout ) - parseInt( _minimum_partial_payout_percent[i] ) + parseInt( newVal );
+
+                                            if ( newTotalPayout > 100 ) { // Added +1 because state is updating after this totalPayout check.
+                                                let exceed_val = newTotalPayout - 100;
                                                 if ( exceed_val > 0 ) {
                                                     value = value - exceed_val;
                                                     if ( value < 0 ) {
@@ -295,7 +298,7 @@ const WPTravelTripOptionsPricings = () => {
                                                     }
                                                 }
                                             }
-                                            _minimum_partial_payout_percent[i] = value
+                                            _minimum_partial_payout_percent[i] = parseInt( value )
                                             updateTripData({
                                                 ...allData,
                                                 minimum_partial_payout_percent: [..._minimum_partial_payout_percent]
