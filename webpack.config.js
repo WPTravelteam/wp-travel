@@ -18,6 +18,14 @@ module.exports = (env, options) => {
       './app/src/frontend/booking-widget/index.js',
       './app/src/frontend/booking-widget/sass/main.scss',
     ];
+    entries['wp-travel-back-end' + fileSuffix ] = [
+      './assets/js/wp-travel-back-end.js',
+      './assets/sass/back-end.scss',
+    ];
+    entries['wp-travel-front-end' + fileSuffix ] = [
+      './assets/js/wp-travel-front-end.js',
+      './assets/sass/front-end.scss',
+    ];
   return {
     ...defaultConfig,
     entry: entries,
@@ -39,6 +47,7 @@ module.exports = (env, options) => {
       ...defaultConfig.module,
       rules: [
         ...defaultConfig.module.rules,
+        { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
         {
           test: /\.scss$/,
           use: [
