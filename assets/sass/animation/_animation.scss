@@ -10,7 +10,6 @@
         transform: translateX(0);
     }
 }
-
 @keyframes loader{
     0%{
         transform: rotate(0deg);
@@ -64,3 +63,49 @@
     }
   }
   
+
+@keyframes arrowAnimate1 {
+    0% {
+      transform: translateY(0);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+
+// Loading Bar
+// WebKit
+@-webkit-keyframes loading-bar-stripes {
+	from {
+		background-position: 40px 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}
+
+// Spec and IE10+
+@keyframes loading-bar-stripes {
+	from {
+		background-position: 40px 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

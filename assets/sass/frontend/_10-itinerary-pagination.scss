@@ -1,0 +1,46 @@
+/* wp-travel pagination
+----------------------------------------------- */
+
+.wp-travel-navigation.wp-paging-navigation {
+	padding: 30px 0;
+	margin-bottom: 20px;
+	text-align: center;
+
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			display: inline;
+			position: relative;
+			margin: 0 10px;
+
+			@include xs {
+				margin: 0;
+			}
+
+			.wp-page-numbers,
+			span.wp-page-numbers {
+				padding: 0.3em 0.7em;
+				position: relative;
+			}
+		}
+	}
+
+	a.wp-page-numbers {
+		border: 1px solid #eee;
+	}
+
+	a.current,
+	a:hover {
+		font-weight: bold;
+		position: relative;
+		height: 30px;
+		width: 30px;
+	}
+}
+.wp-travel-navigation.paging-navigation .current:after {
+	top: 3px;
+	left: 3px;
+}

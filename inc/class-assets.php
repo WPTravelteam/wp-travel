@@ -530,12 +530,12 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-single-itineraries' => array(
-					'src'   => self::$assets_path . 'assets/css/itinerary-front-end' . $suffix . '.css',
-					'deps'  => array(),
-					'ver'   => WP_TRAVEL_VERSION,
-					'media' => 'all',
-				),
+				// 'wp-travel-single-itineraries' => array(
+				// 	'src'   => self::$assets_path . 'assets/css/itinerary-front-end' . $suffix . '.css',
+				// 	'deps'  => array(),
+				// 	'ver'   => WP_TRAVEL_VERSION,
+				// 	'media' => 'all',
+				// ),
 				'font-awesome-css'             => array(
 					'src'   => self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css',
 					'deps'  => array(),
@@ -548,12 +548,12 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-user-css'           => array(
-					'src'   => self::$assets_path . 'app/build/wp-travel-user-styles' . $suffix . '.css',
-					'deps'  => array(),
-					'ver'   => WP_TRAVEL_VERSION,
-					'media' => 'all',
-				),
+				// 'wp-travel-user-css'           => array(
+				// 	'src'   => self::$assets_path . 'app/build/wp-travel-user-styles' . $suffix . '.css',
+				// 	'deps'  => array(),
+				// 	'ver'   => WP_TRAVEL_VERSION,
+				// 	'media' => 'all',
+				// ),
 				'jquery-datepicker-lib'        => array(
 					'src'   => self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css',
 					'deps'  => array(),

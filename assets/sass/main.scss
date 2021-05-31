@@ -1,6 +1,35 @@
 @import "./animation/animation";
-@import "./mixins/mixin";
+@import "./abstracts/mixins/mixin";
+@import "./abstracts/variables/variables";
+
+@import "./generic/box-sizing";
+
+@import "./base/elements/features";
+@import "./base/elements/accordin";
+@import "./base/elements/gallery";
+@import "./base/elements/globalcss";
+
+@import "./base/typography/wt-icon";
+
+// Misc
+@import "./itinerary-global";
+@import "./wp-travel-front-end";
+@import "./wp-travel-back-end";
+@import "./wp-travel-admin";
 
 
-@import "./0-date-listing";
-@import "./1-loader";
+// Frontend
+@import "./frontend/0-itinerary-headline";
+@import "./frontend/1-itinerary-tabs";
+@import "./frontend/2-date-listing";
+@import "./frontend/3-loader";
+@import "./frontend/4-checkout";
+@import "./frontend/5-toolbar";
+@import "./frontend/6-itinerary-list";
+@import "./frontend/7-wp-travel-sidebar";
+@import "./frontend/8-wp-travel-widget";
+@import "./frontend/9-dashboard";
+@import "./frontend/10-itinerary-pagination";
+@import "./frontend/11-alertboxes";
+@import "./frontend/12-paxpicker";
+

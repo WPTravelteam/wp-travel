@@ -1,3 +1,5 @@
+
+
 #wp-travel-settings-block-wrapper{
   display: flex;
   padding-right: 18px;
@@ -34,7 +36,6 @@
     }
   }
 }
-
 .wp-travel-trip-settings{
   margin-top: 20px;
   td{
@@ -50,9 +51,6 @@
   .components-panel__body.is-opened>.components-panel__body-title{
     margin-bottom: 22px;
   }
-  // .components-base-control{
-  //   width: 250px;
-  // }
   .components-color-picker{
     background-color: #fff;
     border: 1px solid #eee;
@@ -203,6 +201,7 @@
     
   }
 }
+
 .popover-wrapper .overlay{
   content: "";
   display: block;

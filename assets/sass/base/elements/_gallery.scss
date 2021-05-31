@@ -1,0 +1,75 @@
+
+.wp-travel-gallery {
+	display: block;
+	position: relative;
+	margin: 0 0 20px 0;
+	@include clearfix;
+
+	ul {
+		margin: 0 !important;
+		padding: 0 !important;
+
+		li {
+			list-style: none;
+			float: left;
+			margin-bottom: 20px;
+			width: 33.33333%;
+			// width: calc(33.33% - 15px);
+			position: relative;
+			min-height: 1px;
+			padding-left: 15px;
+			padding-right: 15px;
+
+			&:nth-of-type(3n):after {
+				clear: both;
+			}
+
+			&:first-child {
+				// margin-left: 0;
+				// padding-left:0;
+			}
+
+			@include sidr-view {
+				width: 50%;
+			}
+
+			@include mob {
+				width: 50%;
+			}
+
+			@include sm {
+				width: 100%;
+			}
+		}
+
+		a {
+			display: block;
+		}
+
+		img {
+			width: 100%;
+			display: block;
+			margin: 0;
+		}
+	}
+}
+
+.wp-travel-gallery ul li:nth-child(6n + 1),
+.wp-travel-gallery ul li:nth-child(3n + 1) {
+	clear: left;
+	content: "";
+	display: block;
+
+	@include sidr-view {
+		clear: none;
+	}
+}
+
+.wp-travel-gallery ul li:nth-child(4n + 1),
+.wp-travel-gallery ul li:nth-child(2n + 1) {
+	@include sidr-view {
+		clear: left;
+		content: "";
+		display: block;
+	}
+}

@@ -65,3 +65,35 @@
 		}
 	}
 }
+
+#wp-travel-enquiry-submit.loading-bar-striped {
+	background: linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-size: 40px 40px;
+	background-color: #f83531;
+}
+
+.loading-bar.active {
+	animation: loading-bar-stripes 2s linear infinite;
+}
+
+.loading-bar {
+	float: left;
+	width: 0;
+	height: 100%;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	background-color: #f83531;
+	transition: width 0.6s ease;
+}
+

@@ -274,12 +274,6 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'app/build/wp-travel-admin-1.css': 'assets/sass/admin/wp-travel-admin-1.scss',
-					'app/build/wp-travel-back-end.css': 'assets/sass/wp-travel-back-end.scss',
-					'app/build/wp-travel-front-end.css': 'assets/sass/wp-travel-front-end.scss',
-					'app/build/wp-travel-tabs.css': 'assets/sass/wp-travel-tabs.scss',
-					'app/build/wp-travel-user-styles.css': 'assets/sass/wp-travel-user-styles.scss',
-					'assets/css/itinerary-front-end.css': 'assets/sass/itinerary-front-end.scss',
 					'app/build/main.css': 'assets/sass/main.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-backend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-backend.scss',
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.css': 'inc/coupon/assets/css/sass/wp-travel-coupons-frontend.scss',
@@ -301,32 +295,22 @@ module.exports = function (grunt) {
 			target: {
 				files: {
 					'app/build/wp-travel-frontend.bundle.css': [
-						'app/build/wp-travel-front-end.css', // wp-travel-frontend
-						'app/build/wp-travel-user-styles.css', // wp-travel-user-css
 						'assets/css/lib/magnific-popup/magnific-popup.css', // wp-travel-popup
 						'assets/css/lib/easy-responsive-tabs/easy-responsive-tabs.css', // easy-responsive-tabs
-						'assets/css/wp-travel-itineraries.css', // wp-travel-itineraries
 						'assets/css/lib/datepicker/datepicker.css', // 
 						'assets/css/lib/slick/slick.min.css',
+						'assets/sass/main.css',
 					],
 					'assets/css/lib/font-awesome/css/wp-travel-fonts.bundle.css': [
 						'assets/css/lib/font-awesome/css/fontawesome-all.css',
 						'assets/css/lib/font-awesome/css/wp-travel-fa-icons.css'
 					],
-					'app/build/wp-travel-admin-1.min.css': ['app/build/wp-travel-admin-1.css'],
-					'app/build/wp-travel-back-end.min.css': ['app/build/wp-travel-back-end.css'],
-					'app/build/wp-travel-front-end.min.css': ['app/build/wp-travel-front-end.css'],
-					'app/build/wp-travel-tabs.min.css': ['app/build/wp-travel-tabs.css'],
-					'app/build/wp-travel-user-styles.min.css': ['app/build/wp-travel-user-styles.css'],
-					'assets/css/wp-travel-admin.min.css': ['assets/css/wp-travel-admin.css'],
 					'assets/css/lib/magnific-popup/magnific-popup.min.css': ['assets/css/lib/magnific-popup/magnific-popup.css'],
-					'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],
-					'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
-					'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
-					'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
+					// 'assets/css/wp-travel-rtl-back-end.min.css': ['assets/css/wp-travel-rtl-back-end.css'],
+					// 'assets/css/wp-travel-rtl-front-end.min.css': ['assets/css/wp-travel-rtl-front-end.css'],
+					// 'assets/css/wp-travel-rtl-tabs.min.css': ['assets/css/wp-travel-rtl-tabs.css'],
+					// 'assets/css/wp-travel-rtl-user-styles.min.css': ['assets/css/wp-travel-rtl-user-styles.css'],
 					'assets/css/lib/easy-responsive-tabs/easy-responsive-tabs.min.css': ['assets/css/lib/easy-responsive-tabs/easy-responsive-tabs.css'],
-					'assets/css/wp-travel-itineraries.min.css': ['assets/css/wp-travel-itineraries.css'],
-					'assets/css/itinerary-front-end.min.css': ['assets/css/itinerary-front-end.css'],
 
 					'inc/coupon/assets/css/wp-travel-coupons-backend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-backend.css'],
 					'inc/coupon/assets/css/wp-travel-coupons-frontend.min.css': ['inc/coupon/assets/css/wp-travel-coupons-frontend.css'],
