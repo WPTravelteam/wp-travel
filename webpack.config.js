@@ -7,16 +7,13 @@ module.exports = (env, options) => {
   const fileSuffix = options.mode && 'development' === options.mode ? '' : '.min';
   let entries = {};
     entries['admin-trip-options' + fileSuffix ] = [
-      './app/src/admin/trip-edit/index.js',
-      './app/src/admin/trip-edit/sass/main.scss',
+      './app/src/admin/trip-edit/index.js'
     ];
     entries['admin-settings' + fileSuffix ] = [
-      './app/src/admin/settings/index.js',
-      './app/src/admin/settings/sass/main.scss',
+      './app/src/admin/settings/index.js'
     ];
     entries['frontend-booking-widget' + fileSuffix ] = [
-      './app/src/frontend/booking-widget/index.js',
-      './app/src/frontend/booking-widget/sass/main.scss',
+      './app/src/frontend/booking-widget/index.js'
     ];
     entries['wp-travel-back-end' + fileSuffix ] = [
       './assets/js/wp-travel-back-end.js',
