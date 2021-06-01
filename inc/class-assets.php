@@ -208,7 +208,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			$screen = get_current_screen();
 
 			// Register styles.
-			wp_register_style( 'magnific-popup-css', self::$assets_path . 'assets/css/magnific-popup' . $suffix . '.css', array(), '1.1.0' );
+			wp_register_style( 'magnific-popup-css', self::$assets_path . 'assets/css/lib/magnific-popup/magnific-popup.min.css', array(), '1.1.0' );
 			wp_register_style( 'wp-travel-slick', self::$assets_path . 'assets/css/lib/slick/slick.min.css', array(), '1.8.1' );
 			// fontawesome.
 			wp_register_style( 'font-awesome-css', self::$assets_path . 'assets/css/lib/font-awesome/css/fontawesome-all' . $suffix . '.css', array(), '5.4.2' );
@@ -216,9 +216,12 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			wp_enqueue_media();
 			wp_enqueue_style( 'jquery-datepicker', self::$assets_path . 'assets/css/lib/datepicker/datepicker' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
-			wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'app/build/wp-travel-tabs' . $suffix . '.css', array( 'wp-color-picker' ), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-admin-1-style', self::$assets_path . 'app/build/wp-travel-admin-1' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			// wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'app/build/wp-travel-tabs' . $suffix . '.css', array( 'wp-color-picker' ), WP_TRAVEL_VERSION );
+			// wp_enqueue_style( 'wp-travel-tabs', self::$assets_path . 'assets/css/wp-travel-rtl-tabs' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			// wp_enqueue_style( 'wp-travel-user', self::$assets_path . 'assets/css/wp-travel-rtl-user-styles' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			// wp_enqueue_style( 'wp-travel-front-end', self::$assets_path . 'assets/css/wp-travel-rtl-front-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			// wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'assets/css/wp-travel-rtl-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
+			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end.css', array(), WP_TRAVEL_VERSION );
 
 			// Tab for settings page.
 			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
