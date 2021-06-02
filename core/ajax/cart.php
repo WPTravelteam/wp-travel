@@ -48,11 +48,7 @@ class WP_Travel_Ajax_Cart {
 	 * Add to cart ajax request.
 	 */
 	public static function add_to_cart() {
-		WP_Travel::verify_nonce();
-		/**
-		 * We are checking nonce using WP_Travel::verify_nonce(); method.
-		 */
-
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );
