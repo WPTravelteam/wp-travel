@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.3 =
-Release Date: 30th May, 2021
+Release Date: 6th June, 2021
 
 Fixes:
 * Set maximum partial payment limit to 100%.
@@ -254,6 +254,7 @@ Fixes:
 * Fixed Cart empty issue due to cart cookie name. Now cart cookie name changed to `wp_travel_session` from `_wp_travel_session`.
 * Fixed Report data not displaying in the admin report page.
 * Strings updated in search filter widget to support change string label.
+* Optimized and moved style path to app/build.
 
 = 4.6.2 =
 Release Date: 23rd May, 2021

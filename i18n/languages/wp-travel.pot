@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 4.6.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 05:02:30+00:00\n"
+"POT-Creation-Date: 2021-06-03 09:01:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1186,7 +1186,7 @@ msgstr ""
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:162
 #: inc/booking-functions.php:504 inc/booking-functions.php:508
 #: inc/booking-functions.php:532 inc/booking-functions.php:536
-#: inc/class-assets.php:262 inc/class-assets.php:305
+#: inc/class-assets.php:265 inc/class-assets.php:308
 #: inc/class-wp-travel-email.php:156 inc/currencies.php:342
 #: inc/helpers/helpers-stat.php:252 inc/helpers/helpers-stat.php:450
 #: inc/helpers/helpers-stat.php:559 inc/helpers.php:744 inc/helpers.php:789
@@ -2793,19 +2793,19 @@ msgstr ""
 msgid "Coupon applied succesfully."
 msgstr ""
 
-#: inc/class-assets.php:281
+#: inc/class-assets.php:284
 msgid "Chart Stat"
 msgstr ""
 
-#: inc/class-assets.php:289
+#: inc/class-assets.php:292
 msgid "More"
 msgstr ""
 
-#: inc/class-assets.php:290
+#: inc/class-assets.php:293
 msgid "Less"
 msgstr ""
 
-#: inc/class-assets.php:364
+#: inc/class-assets.php:368
 msgid "Select Files from Your Computer"
 msgstr ""
 
