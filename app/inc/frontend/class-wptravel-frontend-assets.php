@@ -35,7 +35,7 @@ class WpTravel_Frontend_Assets {
 			$suffix = wptravel_script_suffix();
 			wp_register_script( 'wp-travel-frontend-booking-widget', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget' . $suffix . '.js', $deps['dependencies'], $deps['version'], true );
 			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/frontend-booking-widget' . $suffix . '.css', array(), $deps['version'] );
-			wp_enqueue_style( 'wp-travel-frontend-main-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/main.css', array(), $deps['version'] );
+			// wp_enqueue_style( 'wp-travel-frontend-main-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build/main.css', array(), $deps['version'] );
 
 			// Localize the script with new data.
 			$localized_string = array();
