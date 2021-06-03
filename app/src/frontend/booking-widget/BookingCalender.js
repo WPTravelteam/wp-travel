@@ -382,6 +382,12 @@ const BookingWidget = () => {
 						}
 					}
 
+					if (_date.start_date) {
+						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(_date.start_date))) {
+							return false
+						}
+					}
+
 					let dateRules = generateRRule(_date, startDate);
 					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 				}
@@ -788,32 +794,34 @@ const BookingWidget = () => {
 			{selectedDateTime && 
 				<>
 					{/* <Suspense fallback={<Loader />}> */}
-						<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
-							{
-								nomineePricings.length > 1 && <ErrorBoundry>
-									{/* <Suspense fallback={<Loader />}> */}
-										<PricingListing
-											selected={selectedPricing}
-											options={nomineePricings}
-											onPricingSelect={handlePricingSelect}
-										/>
-									{/* </Suspense> */}
-								</ErrorBoundry>
-							}
-							{
-								!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
-									{/* <Suspense fallback={<Loader />}> */}
-										<TripTimesListing
-											selected={selectedDateTime}
-											onTimeSelect={handleTimeClick}
-											options={nomineeTimes}
-										/>
-									{/* </Suspense> */}
-								</ErrorBoundry>
-							}
-							
-							
-						</div>
+						{ ( nomineePricings.length > 1 || ( !pricingUnavailable && nomineeTimes.length > 0 ) ) &&
+							<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
+								{
+									nomineePricings.length > 1 && <ErrorBoundry>
+										{/* <Suspense fallback={<Loader />}> */}
+											<PricingListing
+												selected={selectedPricing}
+												options={nomineePricings}
+												onPricingSelect={handlePricingSelect}
+											/>
+										{/* </Suspense> */}
+									</ErrorBoundry>
+								}
+								{
+									!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+										{/* <Suspense fallback={<Loader />}> */}
+											<TripTimesListing
+												selected={selectedDateTime}
+												onTimeSelect={handleTimeClick}
+												options={nomineeTimes}
+											/>
+										{/* </Suspense> */}
+									</ErrorBoundry>
+								}
+								
+								
+							</div>
+						}
 
 						<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 							{
