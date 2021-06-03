@@ -254,6 +254,7 @@ Fixes:
 * Fixed Cart empty issue due to cart cookie name. Now cart cookie name changed to `wp_travel_session` from `_wp_travel_session`.
 * Fixed Report data not displaying in the admin report page.
 * Strings updated in search filter widget to support change string label.
+* Fixed Recurring date issue with Pricing. All pricing are displaying even if specific pricing is selected for date.
 * Optimized and moved style path to app/build.
 
 = 4.6.2 =
