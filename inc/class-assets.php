@@ -86,7 +86,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				wp_enqueue_style( 'wp-travel-single-itineraries' ); // For new layout.
 				wp_enqueue_style( 'wp-travel-popup' );
 				wp_enqueue_style( 'easy-responsive-tabs' );
-				wp_enqueue_style( 'wp-travel-itineraries' );
+				// wp_enqueue_style( 'wp-travel-itineraries' );
 				// fontawesome.
 				wp_enqueue_style( 'wp-travel-user-css' );
 
@@ -221,7 +221,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 			// wp_enqueue_style( 'wp-travel-user', self::$assets_path . 'assets/css/wp-travel-rtl-user-styles' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 			// wp_enqueue_style( 'wp-travel-front-end', self::$assets_path . 'assets/css/wp-travel-rtl-front-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 			// wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'assets/css/wp-travel-rtl-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
-			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end.css', array(), WP_TRAVEL_VERSION );
+			wp_enqueue_style( 'wp-travel-back-end', self::$assets_path . 'app/build/wp-travel-back-end' . $suffix . '.css', array(), WP_TRAVEL_VERSION );
 
 			// Tab for settings page.
 			$setting_allowed = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
@@ -348,6 +348,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				}
 				if ( '' !== $api_key && true === $show_google_map ) {
 					wp_register_script( 'google-map-api', 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
+					// wp_register_script( 'google-map-api', 'https://maps.googleapis.com/maps/api/js?libraries=places&key' . $api_key, array(), WP_TRAVEL_VERSION, 1 );
 
 					wp_register_script( 'jquery-gmaps', self::$assets_path . 'assets/js/lib/gmaps/gmaps' . $suffix . '.js', array( 'jquery', 'google-map-api' ), WP_TRAVEL_VERSION, 1 );
 					$depencency[] = 'jquery-gmaps';
@@ -434,6 +435,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'ver'       => WP_TRAVEL_VERSION,
 					'in_footer' => true,
 				),
+				// May be not reqd now.
 				'wp-travel-moment'          => array(
 					'src'       => self::$assets_path . 'assets/js/moment' . $suffix . '.js',
 					'deps'      => array( 'jquery' ),
@@ -516,7 +518,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'media' => 'all',
 				),
 				'wp-travel-popup'              => array(
-					'src'   => self::$assets_path . 'assets/css//lib/magnific-popup/magnific-popup' . $suffix . '.css',
+					'src'   => self::$assets_path . 'assets/css/lib/magnific-popup/magnific-popup' . $suffix . '.css',
 					'deps'  => array(),
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
@@ -527,12 +529,12 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 					'ver'   => WP_TRAVEL_VERSION,
 					'media' => 'all',
 				),
-				'wp-travel-itineraries'        => array(
-					'src'   => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
-					'deps'  => array(),
-					'ver'   => WP_TRAVEL_VERSION,
-					'media' => 'all',
-				),
+				// 'wp-travel-itineraries'        => array(
+				// 	'src'   => self::$assets_path . 'assets/css/wp-travel-itineraries' . $suffix . '.css',
+				// 	'deps'  => array(),
+				// 	'ver'   => WP_TRAVEL_VERSION,
+				// 	'media' => 'all',
+				// ),
 				// 'wp-travel-single-itineraries' => array(
 				// 	'src'   => self::$assets_path . 'assets/css/itinerary-front-end' . $suffix . '.css',
 				// 	'deps'  => array(),
@@ -684,7 +686,7 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				'wp-travel-frontend',
 				'wp-travel-popup',
 				'easy-responsive-tabs',
-				'wp-travel-itineraries',
+				// 'wp-travel-itineraries',
 				'wp-travel-user-css',
 				'jquery-datepicker',
 				'wp-travel-slick',
