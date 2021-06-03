@@ -299,7 +299,7 @@ module.exports = function (grunt) {
 						'assets/css/lib/easy-responsive-tabs/easy-responsive-tabs.css', // easy-responsive-tabs
 						'assets/css/lib/datepicker/datepicker.css', // 
 						'assets/css/lib/slick/slick.min.css',
-						'assets/sass/main.css',
+						'app/build/wp-travel-front-end.css',
 					],
 					'assets/css/lib/font-awesome/css/wp-travel-fonts.bundle.css': [
 						'assets/css/lib/font-awesome/css/fontawesome-all.css',
