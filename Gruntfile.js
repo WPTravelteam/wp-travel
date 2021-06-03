@@ -433,7 +433,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('assets', [
 		'babel',
 		'uglify',
-		'sass',
+		// 'sass',
 		'cssmin',
 	]);
 
