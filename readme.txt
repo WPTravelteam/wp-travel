@@ -257,6 +257,9 @@ Fixes:
 * Fixed Recurring date issue with Pricing. All pricing are displaying even if specific pricing is selected for date.
 * Optimized and moved style path to app/build.
 
+Tweaks:
+* Added `wptravel_skip_add_to_cart` filter hook before starting add to cart process.
+
 = 4.6.2 =
 Release Date: 23rd May, 2021
 
