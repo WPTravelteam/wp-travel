@@ -9,7 +9,12 @@
 				margin: 0;
 			}
 		}
-    }
+	}
+	label.radio-checkbox-label{
+		input{
+			margin-right: .5em;
+		}
+	}
     &.wti_no_mini_cart {
         grid-template-columns: 100%;
     }

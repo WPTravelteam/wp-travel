@@ -307,7 +307,7 @@
 	display: block;
 	border-radius: 5px;
 	@include clearfix;
-
+	
 	.wp-travel-form-field {
 		label {
 			// width: 100%;
@@ -324,16 +324,31 @@
 		}
 
 		&.textarea-field {
-			margin-bottom: 15px;
+			margin-bottom: 0px;
 
 			textarea {
 				padding: 0.6em 1em 0.6em;
 				resize: vertical;
 				width: 100%;
+				&#wp-travel-enquiry-query{
+					margin-bottom: 0;
+				}
 			}
+
+
 		}
 	}
-
+	.wp-travel-enquiry-subscribe-section{
+        label[for="wp-travel-subscribe"]{
+			display: none;
+		}
+		label.radio-checkbox-label{
+			margin-bottom: 0 !important;
+			input{
+				margin-right: .5em;
+			}
+		}
+    }
 	.parsley-errors-list {
 		position: relative;
 		margin-left: 0;

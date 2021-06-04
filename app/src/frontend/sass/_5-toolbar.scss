@@ -110,8 +110,7 @@
 	}
 
 	.wp-travel-filter-button {
-		// @extend .wp-toolbar-filter-field;
-		
+		display: inline-block;
 		padding: 15px 9px;
 
 		.btn-wp-travel-filter {

@@ -121,10 +121,8 @@
 .wp-travel-itinerary-items {
 	ul.wp-travel-itinerary-list {
 		position: relative;
-		margin: 0;
 		padding: 0;
-		display: flex;
-		margin: 0 -10px;
+		flex-wrap: wrap;
 
 		@include sidr-view {
 		}
