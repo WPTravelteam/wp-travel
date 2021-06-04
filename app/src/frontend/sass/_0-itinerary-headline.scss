@@ -1,3 +1,4 @@
+
 .wp-travel.trip-headline-wrapper {
 	position: relative;
 
@@ -245,6 +246,11 @@
 	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
 		0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
+label.radio-checkbox-label{
+	input[type="checkbox"]{
+		margin-right: .5em;
+	}
+}
 #wp-travel-enquiries {
 	overflow: hidden;
 	.wp-travel-inquiry__form-header {
@@ -344,9 +350,6 @@
 		}
 		label.radio-checkbox-label{
 			margin-bottom: 0 !important;
-			input{
-				margin-right: .5em;
-			}
 		}
     }
 	.parsley-errors-list {
