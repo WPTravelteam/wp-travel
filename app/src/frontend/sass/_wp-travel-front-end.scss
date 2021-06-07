@@ -841,6 +841,8 @@ ul.availabily-list {
 		display: -webkit-flex;
 		display: -mox-flex;
 		display: flex;
+		flex-wrap: wrap;
+
 		-webkit-flex-flow: row wrap;
 		-ms-flex-flow: row wrap;
 		-moz-flex-flow: row wrap;
