@@ -670,26 +670,26 @@
 
 //faq section
 .wp-collapse-open {
-    span {
-        float: right;
-        padding: 5px 15px;
-        position: relative;
-        cursor: pointer;
-        &:before {
-            font-family: dashicons;
-            position: absolute;
-            right: -5px;
-            font-size: 18px;
-        }
-    }
+    // span {
+    //     float: right;
+    //     padding: 5px 15px;
+    //     position: relative;
+    //     cursor: pointer;
+    //     &:before {
+    //         font-family: dashicons;
+    //         position: absolute;
+    //         right: -5px;
+    //         font-size: 18px;
+    //     }
+    // }
     .open-all {
-        &:before {
-            content: "\f134";
-        }
+        // &:before {
+        //     content: "\f134";
+        // }
     }
-    .close-all {
-        &:before {
-            content: "\f333";
-        }
-    }
+    // .close-all {
+    //     &:before {
+    //         content: "\f333";
+    //     }
+    // }
 }
