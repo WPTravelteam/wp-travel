@@ -2,6 +2,15 @@
 	max-width: 1250px !important;
 }
 
+.clearfix {
+	&::after,
+	&::before {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
 .wp-travel-row-wrap {
 	margin-left: -15px;
 	margin-right: -15px;

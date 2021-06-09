@@ -3,6 +3,9 @@
 // Define variables.
 $alto: #ddd;
 
+
+
+
 // Css for the tabs.
 #poststuff {
 	#wp-travel-itinerary-detail {
@@ -783,7 +786,7 @@ ul.availabily-list {
 		border-top: 0 !important;
 	}
 
-	ul.availabily-list li .wp_travel_tour_extras_content {
+	ul.availabily-list li > form .wp_travel_tour_extras_content {
 		grid-template-columns: 1fr;
 		grid-gap: 30px;
 	}
