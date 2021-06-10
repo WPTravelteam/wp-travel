@@ -1,12 +1,9 @@
 
+
+
+
 .wp-travel.trip-headline-wrapper {
 	position: relative;
-
-	&:before,
-	&:after {
-		@include clearfix();
-	}
-
 	.featured-side-image.left-plot {
 		float: left;
 		width: 50%;

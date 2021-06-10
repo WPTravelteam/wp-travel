@@ -1,6 +1,22 @@
 .wp-travel {
 	max-width: 1250px !important;
 }
+button{
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    line-height: 1.5;
+    padding: 0.5em 1em 0.5em;
+}
+
+.clearfix {
+	&::after,
+	&::before {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
 
 .wp-travel-row-wrap {
 	margin-left: -15px;
