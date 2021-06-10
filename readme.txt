@@ -244,6 +244,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.6.4 =
+Release Date:
+
+Fixes:
+* Fixed Thankyou page shortcode not working for trips created using switching to WP Travel V3 option.
+
 = 4.6.3 =
 Release Date: 6th June, 2021
 

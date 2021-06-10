@@ -125,12 +125,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			add_action( 'wp_enqueue_scripts', array( 'WpTravel_Assets', 'frontend' ) );
+			// add_action( 'wp_enqueue_scripts', array( 'WpTravel_Assets', 'frontend' ) );
 			// add_action( 'init', array( $this, 'set_block_script_translation' ) );.
 			add_action( 'wp_head', array( 'WpTravel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
 			add_action( 'wp_footer', array( 'WpTravel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
-				add_action( 'admin_enqueue_scripts', array( 'WpTravel_Assets', 'admin' ) );
+				// add_action( 'admin_enqueue_scripts', array( 'WpTravel_Assets', 'admin' ) );
 
 				// To delete transient.
 				add_action( 'admin_init', 'wptravel_admin_init' ); // @since 1.0.7

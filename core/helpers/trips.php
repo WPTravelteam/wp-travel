@@ -749,7 +749,7 @@ class WpTravel_Helpers_Trips {
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 			}
 			$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-			if ( 'yes' === $switch_to_v4 && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+			if ( 'yes' === $switch_to_v4 && ! is_wp_error( $pricings_data ) && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings         = $pricings_data['pricings'];
 				$args['pricings'] = $pricings;
 
@@ -897,7 +897,7 @@ class WpTravel_Helpers_Trips {
 
 		if ( empty( $pricings ) ) {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
-			if ( is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+			if ( ! is_wp_error( $pricings_data ) && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings = $pricings_data['pricings'];
 			}
 		}

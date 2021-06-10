@@ -2383,7 +2383,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									$pricing_data                = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, $pricing_id );
 
 									$pricing_title = '';
-									if ( isset( $pricing_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricing_data['code'] ) {
+									if ( ! is_wp_error( $pricing_data ) && isset( $pricing_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricing_data['code'] ) {
 										$pricing       = $pricing_data['pricings'];
 										$pricing_title = $pricing[0]['title'];
 									}

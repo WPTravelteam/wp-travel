@@ -441,7 +441,7 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 
 		if ( 'yes' === $switch_to_react && $pricing_id ) {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
-			if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+			if ( ! is_wp_error( $pricings_data ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings_data = $pricings_data['pricings'];
 				foreach ( $pricings_data as $pricing_data ) {
 					if ( $pricing_data['id'] === (int) $pricing_id ) {

@@ -21,26 +21,71 @@ class WpTravel_Admin_Assets {
 	 * Admin assets.
 	 */
 	public static function assets() {
-		$screen                = get_current_screen();
-		$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true ); // @phpcs:ignore
-		$react_settings_enable = apply_filters( 'wptravel_settings_react_enabled', $react_settings_enable );
-		$allowed_screen        = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'itinerary-booking_page_settings' );
-		$suffix                = wptravel_script_suffix();
-		if ( in_array( $screen->id, $allowed_screen, true ) || ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) ) {
-			wp_enqueue_editor();
-			$deps                   = include_once sprintf( '%s/app/build/admin-trip-options.asset.php', WP_TRAVEL_ABSPATH );
-			$deps['dependencies'][] = 'jquery';
-			wp_enqueue_script( 'wp-travel-admin-trip-options', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/app/build/admin-trip-options' . $suffix . '.js', $deps['dependencies'], $deps['version'], true );
+		WpTravel_Frontend_Assets::register_scripts();
 
-			wp_enqueue_style( 'wp-travel-admin-trip-options-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/app/build/admin-trip-options' . $suffix . '.css', array( 'wp-components' ), $deps['version'] );
+		global $wp_scripts;
+		$queued_scripts     = $wp_scripts->queue;
+		$registered_scripts = $wp_scripts->registered;
+
+		$all_localized                = WpTravel_Frontend_Assets::get_localized_data();
+		$wp_travel_chart_data         = isset( $all_localized['wp_travel_chart_data'] ) ? $all_localized['wp_travel_chart_data'] : array();
+		$wp_travel_drag_drop_uploader = isset( $all_localized['wp_travel_drag_drop_uploader'] ) ? $all_localized['wp_travel_drag_drop_uploader'] : array();
+
+		$screen         = get_current_screen();
+		$wptravel_pages = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
+
+		if ( $wptravel_pages ) {
+			// Styles.
+			wp_enqueue_media();
+			wp_enqueue_style( 'font-awesome-css' );
+			wp_enqueue_style( 'select2-style' );
+			wp_enqueue_style( 'wp-travel-popup' );
+			wp_enqueue_style( 'jquery-datepicker-lib' );
+			wp_enqueue_style( 'wp-travel-back-end' );
+
+			// Scripts.
+			wp_enqueue_script( 'wp-travel-fields-scripts' );
+			wp_enqueue_script( 'wp-travel-tabs' );
+			wp_enqueue_script( 'wp-travel-accordion' );
+
 		}
 
-		// settings_screen.
-		if ( $react_settings_enable && WP_Travel::is_page( 'settings', true ) ) {
-			$deps                   = include_once sprintf( '%s/app/build/admin-settings.asset.php', WP_TRAVEL_ABSPATH );
-			$deps['dependencies'][] = 'jquery';
-			wp_enqueue_script( 'wp-travel-admin-settings', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/app/build/admin-settings' . $suffix . '.js', $deps['dependencies'], $deps['version'], true );
-			wp_enqueue_style( 'wp-travel-admin-settings-style', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/app/build/admin-settings' . $suffix . '.css', array( 'wp-components', 'font-awesome-css' ), $deps['version'] );
+		if ( 'itinerary-booking_page_booking_chart' === $screen->id ) {
+			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
+			wp_enqueue_script( 'jquery-chart-custom' );
+		}
+
+		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
+		if ( in_array( $screen->id, $allowed_screen, true ) ) {
+			$backend_depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'moment' );
+			if ( isset( $registered_scripts['jquery-gmaps'] ) ) {
+				$backend_depencency[] = 'jquery-gmaps';
+			}
+
+			wp_enqueue_script( 'wptravel-uploader' );
+			wp_enqueue_script( 'wp-travel-admin-script' );
+			wp_enqueue_script( 'jquery-parsley' );
+
+			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_drag_drop_uploader );
+			wp_enqueue_script( 'wp-travel-media-upload' );
+		}
+
+		$allowed_itinerary_general_screens = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-booking_page_settings' );
+		if ( in_array( $screen->id, $allowed_itinerary_general_screens, true ) ) {
+			wp_enqueue_script( 'collapse-js' );
+		}
+
+		// Block Trip edit.
+		if ( WP_TRAVEL_POST_TYPE === $screen->id || WP_Travel::is_page( 'settings', true ) ) { // why this enqueue for settings page.?
+			wp_enqueue_editor();
+			wp_enqueue_style( 'wp-travel-admin-trip-options-style' );
+			wp_enqueue_script( 'wp-travel-admin-trip-options' );
+		}
+
+		// Block Settings.
+		if ( WP_Travel::is_page( 'settings', true ) ) {
+			wp_enqueue_style( 'wp-travel-admin-settings-style' );
+			wp_enqueue_script( 'wp-travel-admin-settings' );
 		}
 	}
 }
