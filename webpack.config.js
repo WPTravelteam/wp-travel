@@ -19,11 +19,11 @@ module.exports = (env, options) => {
       './app/src/frontend/booking-widget/index.js'
     ];
     entries['wp-travel-back-end' + fileSuffix ] = [
-      './assets/js/wp-travel-back-end.js',
+      './app/assets/js/wp-travel-back-end.js',
       './app/src/admin/sass/main.scss',
     ];
     entries['wp-travel-front-end' + fileSuffix ] = [
-      './assets/js/wp-travel-front-end.js',
+      './app/assets/js/wp-travel-front-end.js',
       './app/src/frontend/sass/main.scss',
     ];
   return {
