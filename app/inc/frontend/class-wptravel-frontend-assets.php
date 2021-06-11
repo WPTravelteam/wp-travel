@@ -222,6 +222,12 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
+			'select2-js'           => array(
+				'src'       => self::$app_path . '/assets/js/lib/select2.min/select2.min.js',
+				'deps'      => array( 'jquery' ),
+				'ver'       => WP_TRAVEL_VERSION,
+				'in_footer' => true,
+			),
 			'wp-travel-isotope'         => array( // added since @3.1.7.
 				'src'       => self::$app_path . '/assets/js/lib/isotope/isotope.pkgd.js',
 				'deps'      => array( 'jquery' ),

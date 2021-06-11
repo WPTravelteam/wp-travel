@@ -34,7 +34,7 @@ class WpTravel_Admin_Assets {
 		$screen         = get_current_screen();
 		$wptravel_pages = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
 
-		if ( $wptravel_pages ) {
+		if ( in_array( $screen->id, $wptravel_pages ) ) {
 			// Styles.
 			wp_enqueue_media();
 			wp_enqueue_style( 'font-awesome-css' );

@@ -312,7 +312,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                         <th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
                                         <th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
                                         <th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
-                                        {/* <th>{_wp_travel.strings.bookings.action}</th> */}
+                                        {/* <th>{__i18n.bookings.action}</th> */}
                                     </tr>
                                 </thead>
                                 <tbody className="tbody-table">
@@ -444,15 +444,15 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                     {_dates.map((date, index) => {
                         return <>
                             { date.is_recurring && 
-                                <PanelBody title={__( `${_wp_travel.strings.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} key={index} >
+                                <PanelBody title={__( `${__i18n.bookings.recurring} ${date.title}`, 'wp-travel' )} initialOpen={true} key={index} >
                                     <PanelRow>
                                     <table>
                                         <thead className="thead-table">
                                             <tr>
-                                                <th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
+                                                <th data-label={c}>{__i18n.bookings.pricings_list_label}</th>
                                                 <th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
                                                 <th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
-                                                {/* <th>{_wp_travel.strings.bookings.action}</th> */}
+                                                {/* <th>{__i18n.bookings.action}</th> */}
                                             </tr>
                                         </thead>
                                         <RecurringDates data={date} onFixedDeparturePricingSelect={handlePricingClick} getPricingsByDate={getPricingsByDate} isTourDate={isTourDate} allData={allData} componentData={componentData} key={index} />
@@ -466,7 +466,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                     }
                     <div id="wp-travel-booking-recurring-dates"></div> {/* <!-- required for scroll pricing --> */}
                 </div>
-            </> : <> Please add date.</>
+            </> : <> {__i18n.add_date}</>
         }
     </>
 }

@@ -2700,6 +2700,7 @@ function wptravel_get_strings() {
 		'price'                     => __( 'Price', 'wp-travel' ),
 		'location'                  => __( 'Location', 'wp-travel' ),
 		'trip_date'                 => __( 'Trip date', 'wp-travel' ),
+		'add_date'                  => __( 'Please add date.', 'wp-travel' ),
 		'trip_name'                 => __( 'Trip Name', 'wp-travel' ),
 		'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 		'show'                      => __( 'Show', 'wp-travel' ),
@@ -2758,6 +2759,9 @@ function wptravel_get_strings() {
 			'min_pax_alert'         => __( 'Pax should be greater than or equal to {min_pax}.', 'wp-travel' ),
 			'max_pax_alert'         => __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' ),
 			'both_pax_alert'        => __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' ),
+		),
+		'admin_tabs' => array(
+			'itinerary' => __( 'Itinerary', 'wp-travel' ),
 		),
 
 	);

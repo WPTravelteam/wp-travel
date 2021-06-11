@@ -38,6 +38,9 @@ const toggleDisablePostUpdate = ( isDisabled = false ) => {
         jQuery('#minor-publishing #save-action input#save-post').removeAttr('disabled')
     }
 }
+const __i18n = {
+	..._wp_travel.strings
+}
 
 const WPTravelTripOptions = () => {
     const allData = useSelect((select) => {
@@ -65,7 +68,7 @@ const WPTravelTripOptions = () => {
     let tabs = applyFilters('wp_travel_trip_options_tabs', [
         {
             name: 'itinerary',
-            title: __('Itinerary', 'wp-travel'),
+            title:__i18n.admin_tabs.itinerary,
             className: 'tab-itinerary',
             content: WPTravelTripOptionsItinerary
         },

@@ -12,12 +12,12 @@ const DiscountTable = ({ groupPricings }) => {
 		<table>
 			<thead className="discount-thead">
 				<tr>
-					<th colSpan="2">{wp_travel.strings.bookings.pax}</th>
-					<th rowSpan="2">{wp_travel.strings.bookings.price}</th>
+					<th colSpan="2">{__i18n.bookings.pax}</th>
+					<th rowSpan="2">{__i18n.bookings.price}</th>
 				</tr>
 				<tr>
-					<th>{wp_travel.strings.from}</th>
-					<th>{wp_travel.strings.to}</th>
+					<th>{__i18n.from}</th>
+					<th>{__i18n.to}</th>
 				</tr>
 			</thead>
 			<tbody className="discount-tbody">
