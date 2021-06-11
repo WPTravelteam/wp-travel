@@ -765,6 +765,16 @@ class WpTravel_Frontend_Assets {
 			$wp_travel_gallery_data = apply_filters( 'wptravel_localize_gallery_data', $wp_travel_gallery_data );
 			// end of Map & Gallery Data.
 			$localized_data['wp_travel_drag_drop_uploader'] = $wp_travel_gallery_data;
+
+			// @since WP Travel 4.6.4
+			$_wp_travel_admin = array(
+				'strings' => wptravel_get_strings(),
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'_nonce'  => wp_create_nonce( 'wp_travel_nonce' ),
+			);
+
+			$localized_data['_wp_travel_admin'] = $_wp_travel_admin;
+
 		}
 
 		return $localized_data;

@@ -39,7 +39,7 @@ const toggleDisablePostUpdate = ( isDisabled = false ) => {
     }
 }
 const __i18n = {
-	..._wp_travel.strings
+	..._wp_travel_admin.strings
 }
 
 const WPTravelTripOptions = () => {

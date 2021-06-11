@@ -1,7 +1,11 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, CheckboxControl } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+
+
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
@@ -23,7 +27,11 @@ export default () => {
         options
         } = allData;
 
-    console.log( 'load_minified_scripts', load_minified_scripts );
+    const initialState = {forceMigrateToV4: false }
+    const [ { forceMigrateToV4 } , setState ] = useState(initialState)
+    const updateState = data => {
+		setState(state => ({ ...state, ...data }))
+	}
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Debug Options', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -92,6 +100,28 @@ export default () => {
                     <p className="description">{__( 'Enabling this will load minified scripts.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
+
+            <PanelRow>
+                <label>{ __( 'Migrate Pricing and Date', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <CheckboxControl
+                        checked={ forceMigrateToV4 }
+                        onChange={ () => {
+                            if ( confirm('are you sure') ) {
+
+                                apiFetch( { url: `${ajaxurl}?action=wptravel_force_migrate&_nonce=${_wp_travel_admin._nonce}`, data:{force_migrate_to_v4:true}, method:'post' } ).then( res => {
+                                    
+                                    updateState({
+                                        forceMigrateToV4: ! forceMigrateToV4
+                                    })
+                                } );
+                            }
+                        }  }
+                    />
+                    <p className="description">{__( 'Enabling this will load minified scripts.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+            
             {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}
         </ErrorBoundary>
     </div>

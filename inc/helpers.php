@@ -2251,6 +2251,9 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 							$billing_fields  = wptravel_sort_form_fields( $billing_fields );
 							if ( ! empty( $billing_fields ) ) {
 								foreach ( $billing_fields as $field ) {
+									if ( ! isset( $field['name'] ) ) {
+										continue;
+									}
 									$billing_data = get_post_meta( $booking_id, $field['name'], true );
 									if ( is_array( $billing_data ) && count( $billing_data ) > 0 ) {
 										/**

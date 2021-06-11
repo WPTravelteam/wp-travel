@@ -249,6 +249,10 @@ Release Date:
 
 Fixes:
 * Fixed Thankyou page shortcode not working for trips created using switching to WP Travel V3 option.
+* Fixed Admin Booking shows Array error if removed billing fields.
+
+Tweaks:
+* Added `wptravel_get_price` filter hook before returninig trip price.
 
 = 4.6.3 =
 Release Date: 6th June, 2021

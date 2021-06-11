@@ -30,6 +30,7 @@ class WpTravel_Admin_Assets {
 		$all_localized                = WpTravel_Frontend_Assets::get_localized_data();
 		$wp_travel_chart_data         = isset( $all_localized['wp_travel_chart_data'] ) ? $all_localized['wp_travel_chart_data'] : array();
 		$wp_travel_drag_drop_uploader = isset( $all_localized['wp_travel_drag_drop_uploader'] ) ? $all_localized['wp_travel_drag_drop_uploader'] : array();
+		$_wp_travel_admin             = isset( $all_localized['_wp_travel_admin'] ) ? $all_localized['_wp_travel_admin'] : array();
 
 		$screen         = get_current_screen();
 		$wptravel_pages = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
@@ -63,13 +64,17 @@ class WpTravel_Admin_Assets {
 				$backend_depencency[] = 'jquery-gmaps';
 			}
 
+			
 			wp_enqueue_script( 'wptravel-uploader' );
-			wp_enqueue_script( 'wp-travel-admin-script' );
+			
 			wp_enqueue_script( 'jquery-parsley' );
 
 			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_drag_drop_uploader );
 			wp_enqueue_script( 'wp-travel-media-upload' );
 		}
+
+		wp_localize_script( 'wp-travel-admin-script', '_wp_travel_admin', $_wp_travel_admin );
+			wp_enqueue_script( 'wp-travel-admin-script' ); // backend.js.
 
 		$allowed_itinerary_general_screens = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-booking_page_settings' );
 		if ( in_array( $screen->id, $allowed_itinerary_general_screens, true ) ) {

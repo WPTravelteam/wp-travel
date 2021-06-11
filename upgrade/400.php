@@ -464,11 +464,11 @@ if ( ! function_exists( 'wptravel_migrate_data_to_400' ) ) {
 
 
 if ( ! function_exists( 'wptravel_update_to_400' ) ) {
-	function wptravel_update_to_400( $network_enabled ) {
+	function wptravel_update_to_400( $network_enabled, $force_migrate = false ) {
 		global $wpdb;
 		$migrate_400 = get_option( 'wp_travel_migrate_400' );
 
-		if ( $migrate_400 && 'yes' === $migrate_400 ) {
+		if ( $migrate_400 && 'yes' === $migrate_400 && ! $force_migrate ) {
 			return;
 		}
 
@@ -526,6 +526,12 @@ if ( ! function_exists( 'wptravel_update_to_400' ) ) {
 
 		update_option( 'wp_travel_migrate_400', 'yes' ); // Data Migration.
 		// update_option( 'wp_travel_switch_to_react', 'yes' ); // Use react version.
+		return WP_Travel_Helpers_Response_Codes::get_success_response(
+			'MIGRATE_V4',
+			array(
+				'migrate' => get_option( 'wp_travel_migrate_400'  ),
+			)
+		);
 
 	}
 }

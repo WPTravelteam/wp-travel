@@ -314,7 +314,8 @@ class WpTravel_Helpers_Pricings {
 			endif;
 		}
 
-		return $price ? $price : 0;
+		$price = $price ? $price : 0;
+		return apply_filters( 'wptravel_get_price', $price, $args ); // filter wptravel_get_price @since WP Travel 4.6.4.
 	}
 
 	/**
