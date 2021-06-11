@@ -47,6 +47,7 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_script( 'wp-travel-fields-scripts' );
 			wp_enqueue_script( 'wp-travel-tabs' );
 			wp_enqueue_script( 'wp-travel-accordion' );
+			wp_enqueue_script( 'wp-travel-popup' );
 
 		}
 

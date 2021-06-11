@@ -223,7 +223,7 @@ class WpTravel_Frontend_Assets {
 				'in_footer' => true,
 			),
 			'select2-js'           => array(
-				'src'       => self::$app_path . '/assets/js/lib/select2.min/select2.min.js',
+				'src'       => self::$app_path . '/assets/js/lib/select2/select2.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
