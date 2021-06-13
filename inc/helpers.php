@@ -2765,6 +2765,7 @@ function wptravel_get_strings() {
 		),
 		'admin_tabs' => array(
 			'itinerary' => __( 'Itinerary', 'wp-travel' ),
+			'price_n_dates' => __( 'Prices & Dates', 'wp-travel' ),
 		),
 
 	);

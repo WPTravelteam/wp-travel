@@ -68,13 +68,13 @@ const WPTravelTripOptions = () => {
     let tabs = applyFilters('wp_travel_trip_options_tabs', [
         {
             name: 'itinerary',
-            title:__i18n.admin_tabs.itinerary,
+            title: __i18n.admin_tabs.itinerary,
             className: 'tab-itinerary',
             content: WPTravelTripOptionsItinerary
         },
         {
             name: 'price-dates',
-            title: 'Prices & Dates',
+            title: __i18n.admin_tabs.price_n_dates,
             className: 'tab-price-dates',
             content: WPTravelTripOptionsPriceDates
         },
