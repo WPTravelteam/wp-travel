@@ -36,6 +36,7 @@ module.exports = function (grunt) {
 		'app/build/**',
 		'!app/build/*.map',
 		'app/inc/**',
+		'app/assets/**',
 		'core/**'
 	];
 
