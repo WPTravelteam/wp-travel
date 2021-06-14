@@ -610,71 +610,73 @@ class WpTravel_Frontend_Assets {
 		}
 		$rdp_locale = str_replace( '_', '', $rdp_locale );
 		// Frontend Localized Strings for React block.
-		$_wp_travel = array();
-		$trip       = WP_Travel_Helpers_Trips::get_trip( $post->ID );
-		if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
-			$_wp_travel['trip_data']          = $trip['trip'];
-			$_wp_travel['currency']           = $settings['currency'];
-			$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
-			$_wp_travel['cart_url']           = wptravel_get_cart_url();
-			$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
-			$_wp_travel['rdp_locale']         = $rdp_locale;
-			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
-			$_wp_travel['currency_position']  = $settings['currency_position'];
-			$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
-			$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
-			$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
-			$_wp_travel['date_format']        = get_option( 'date_format' );
-			$_wp_travel['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
-			$_wp_travel['time_format']        = get_option( 'time_format' );
-			$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
-			$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
+		if ( self::is_request( 'frontend' ) ) {
+			$_wp_travel = array();
+			$trip       = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
+				$_wp_travel['trip_data']          = $trip['trip'];
+				$_wp_travel['currency']           = $settings['currency'];
+				$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
+				$_wp_travel['cart_url']           = wptravel_get_cart_url();
+				$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
+				$_wp_travel['rdp_locale']         = $rdp_locale;
+				$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
+				$_wp_travel['currency_position']  = $settings['currency_position'];
+				$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
+				$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
+				$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
+				$_wp_travel['date_format']        = get_option( 'date_format' );
+				$_wp_travel['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
+				$_wp_travel['time_format']        = get_option( 'time_format' );
+				$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
+				$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
+			}
+			$_wp_travel['strings']      = wptravel_get_strings();
+			$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
+	
+			$localized_data['_wp_travel'] = $_wp_travel;
+	
+			// Localized varialble for old trips less than WP Travel 4.0.
+			$wp_travel = array(
+				'currency_symbol'    => wptravel_get_currency_symbol(),
+				'currency_position'  => $settings['currency_position'],
+				'thousand_separator' => $settings['thousand_separator'],
+				'decimal_separator'  => $settings['decimal_separator'],
+				'number_of_decimals' => $settings['number_of_decimals'],
+	
+				'prices'             => wptravel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget.
+				'locale'             => $locale,
+				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
+				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
+				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
+				'strings'            => wptravel_get_strings(),
+				// Need map data enhancement.
+				'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
+				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
+				'loc'                => ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '',
+				'zoom'               => $settings['google_map_zoom_level'],
+				'cartUrl'            => wptravel_get_cart_url(),
+				'checkoutUrl'        => wptravel_get_checkout_url(), // @since 4.3.2
+				'isEnabledCartPage'  => WP_Travel_Helpers_Cart::is_enabled_cart_page(), // @since 4.3.2
+			);
+			if ( wptravel_can_load_payment_scripts() ) {
+	
+				global $wt_cart;
+	
+				$cart_amounts   = $wt_cart->get_total();
+				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
+				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
+	
+				$wp_travel['payment']['currency_code']   = $settings['currency'];
+				$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
+				$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
+				$wp_travel['payment']['trip_price']      = $trip_price;
+				$wp_travel['payment']['payment_amount']  = $payment_amount;
+			}
+			$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel, $settings ); // phpcs:ignore
+			$wp_travel                   = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
+			$localized_data['wp_travel'] = $wp_travel;
 		}
-		$_wp_travel['strings']      = wptravel_get_strings();
-		$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
-
-		$localized_data['_wp_travel'] = $_wp_travel;
-
-		// Localized varialble for old trips less than WP Travel 4.0.
-		$wp_travel = array(
-			'currency_symbol'    => wptravel_get_currency_symbol(),
-			'currency_position'  => $settings['currency_position'],
-			'thousand_separator' => $settings['thousand_separator'],
-			'decimal_separator'  => $settings['decimal_separator'],
-			'number_of_decimals' => $settings['number_of_decimals'],
-
-			'prices'             => wptravel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget.
-			'locale'             => $locale,
-			'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
-			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
-			'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
-			'strings'            => wptravel_get_strings(),
-			// Need map data enhancement.
-			'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
-			'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
-			'loc'                => ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '',
-			'zoom'               => $settings['google_map_zoom_level'],
-			'cartUrl'            => wptravel_get_cart_url(),
-			'checkoutUrl'        => wptravel_get_checkout_url(), // @since 4.3.2
-			'isEnabledCartPage'  => WP_Travel_Helpers_Cart::is_enabled_cart_page(), // @since 4.3.2
-		);
-		if ( wptravel_can_load_payment_scripts() ) {
-
-			global $wt_cart;
-
-			$cart_amounts   = $wt_cart->get_total();
-			$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
-			$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
-
-			$wp_travel['payment']['currency_code']   = $settings['currency'];
-			$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
-			$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
-			$wp_travel['payment']['trip_price']      = $trip_price;
-			$wp_travel['payment']['payment_amount']  = $payment_amount;
-		}
-		$wp_travel = apply_filters( 'wp_travel_frontend_data', $wp_travel, $settings ); // phpcs:ignore
-		$wp_travel                   = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
-		$localized_data['wp_travel'] = $wp_travel;
 
 		if ( self::is_request( 'admin' ) ) {
 			// Booking Chart Data. Need to merge in wp_travel or _wp_travel.

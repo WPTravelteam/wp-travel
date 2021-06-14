@@ -314,7 +314,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 	if ( $show_end_date ) {
 		$trip_duration[] = array(
 			'name'  => 'trip_end',
-			'label' => $strings['from'],
+			'label' => $strings['to'],
 			'value' => $trip_end,
 			'id'    => 'datepicker2', // Extra id.
 		);

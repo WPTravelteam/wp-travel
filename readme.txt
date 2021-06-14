@@ -250,6 +250,7 @@ Release Date:
 Fixes:
 * Fixed Thankyou page shortcode not working for trips created using switching to WP Travel V3 option.
 * Fixed Admin Booking shows Array error if removed billing fields.
+* Fixed Trip filter widget Date range label. Both from and to lables are displaying as from only.
 
 Tweaks:
 * Added `wptravel_get_price` filter hook before returninig trip price.
