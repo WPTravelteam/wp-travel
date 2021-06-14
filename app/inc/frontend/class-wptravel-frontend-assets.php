@@ -597,12 +597,18 @@ class WpTravel_Frontend_Assets {
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
-		$default_path         = sprintf( '%sassets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
+		$default_path         = sprintf( '%s/app/assets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
 		$filename             = 'datepicker.' . $locale . '.js';
 		if ( ! file_exists( trailingslashit( $wp_content_file_path ) . $filename ) && ! file_exists( trailingslashit( $default_path ) . $filename ) ) {
 			$locale = 'en';
 		}
 
+		$rdp_locale       = get_locale();
+		$rdp_locale_array = explode( '_',  $rdp_locale );
+		if ( is_array( $rdp_locale_array ) && count( $rdp_locale_array ) > 1 && strtoupper( $rdp_locale_array[0] ) === strtoupper( $rdp_locale_array[1] ) ) {
+			$rdp_locale = $rdp_locale_array[0];
+		}
+		$rdp_locale = str_replace( '_', '', $rdp_locale );
 		// Frontend Localized Strings for React block.
 		$_wp_travel = array();
 		$trip       = WP_Travel_Helpers_Trips::get_trip( $post->ID );
@@ -612,6 +618,7 @@ class WpTravel_Frontend_Assets {
 			$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
 			$_wp_travel['cart_url']           = wptravel_get_cart_url();
 			$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
+			$_wp_travel['rdp_locale']         = $rdp_locale;
 			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
 			$_wp_travel['currency_position']  = $settings['currency_position'];
 			$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
