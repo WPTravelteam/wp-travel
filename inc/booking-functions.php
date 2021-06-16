@@ -102,6 +102,7 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
+	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */

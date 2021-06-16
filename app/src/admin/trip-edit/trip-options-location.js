@@ -8,7 +8,9 @@ import { Gmaps, Marker } from 'react-gmaps';
 import Autocomplete from 'react-google-autocomplete';
 
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsLocationContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -22,7 +24,7 @@ const WPTravelTripOptionsLocationContent = () => {
 
     return <ErrorBoundary>
         <div className="wp-travel-trip-location">
-            <h4>{__('Map', 'wp-travel')}</h4>
+            <h4>{__i18n.map}</h4>
 
             {applyFilters('wp_travel_admin_map_area', '', settingsData, map_data)}
         </div>
@@ -69,16 +71,16 @@ const GmapIframe = props => {
     const q = 'yes' === useLatLng ? `${lat},${lng}` : location
     return <>
         <PanelRow>
-            <label>{__('Location')}</label>
+            <label>{__i18n.location}</label>
             <ToggleControl
                 checked={'yes' === useLatLng}
-                help={__('Enable/Disable latitude-longitude option')}
+                help={__i18n.help_text.enable_location}
                 onChange={updateMapData('use_lat_lng', true)}
             />
         </PanelRow>
         {'yes' !== useLatLng &&
             <PanelRow>
-                <label>{__('Enter Location')}</label>
+                <label>{__i18n.enter_location}</label>
                 <TextControl
                     value={location}
                     onChange={updateMapData('loc')}
@@ -86,7 +88,7 @@ const GmapIframe = props => {
             </PanelRow> ||
             <>
                 <PanelRow>
-                    <label>{__('Latitude')}</label>
+                    <label>{__i18n.latitude}</label>
                     <TextControl
                         value={lat}
                         onChange={updateMapData('lat')}
@@ -100,22 +102,7 @@ const GmapIframe = props => {
                     />
                 </PanelRow>
             </>}
-        {/* <PanelRow>
-            <label>{__('Zoom')}</label>
-            <TextControl
-                value={zoomlevel}
-                type="number"
-                onChange={updateMapData('zoomlevel')}
-            />
-        </PanelRow> */}
-        {/* <PanelRow>
-            <label>{__('Height')}</label>
-            <TextControl
-                value={iframeHeight}
-                type="number"
-                onChange={updateMapData('iframe_height')}
-            />
-        </PanelRow> */}
+        
         <PanelRow>
             <div className="wp-travel-map-wrap">
                 <div className="wp-travel-map">
@@ -138,7 +125,7 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
         content = [...content,
         <>
             <Notice status="warning" isDismissible={false}>
-                <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`You can add 'Google Map API Key' in the %ssettings%s to use additional features.`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
+                <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`${__i18n.notices.map_key_option.description}`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
             </Notice><br />
         </>,
         <GmapIframe zoomlevel={google_map_zoom_level} />
@@ -224,7 +211,7 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
             lat={coords.lat}
             lng={coords.lng}
             zoom={zoom}
-            loadingMessage={__('Loading..', 'wp-travel')}
+            loadingMessage={__i18n.loading}
         >
             <Marker
                 lat={coords.lat}
@@ -242,12 +229,12 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
 addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_data) => {
     content = [<>
         <Notice isDismissible={false} status="informational">
-            <strong>{__('Need alternative maps ?', 'wp-travel')}</strong>
+            <strong>{__i18n.notices.map_option.title}</strong>
             <br />
-            {__('If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel')}
+            {__i18n.notices.map_option.description}
             <br />
             <br />
-            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
         </Notice><br />
     </>,
     ...content

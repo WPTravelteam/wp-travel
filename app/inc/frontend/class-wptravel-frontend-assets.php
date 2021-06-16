@@ -631,7 +631,7 @@ class WpTravel_Frontend_Assets {
 				$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
 				$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
 			}
-			$_wp_travel['strings']      = wptravel_get_strings();
+			$_wp_travel['strings']      = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
 	
 			$localized_data['_wp_travel'] = $_wp_travel;
@@ -649,7 +649,7 @@ class WpTravel_Frontend_Assets {
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
 				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
-				'strings'            => wptravel_get_strings(),
+				'strings'            => WpTravel_Helpers_Strings::get(),
 				// Need map data enhancement.
 				'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
 				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
@@ -777,7 +777,7 @@ class WpTravel_Frontend_Assets {
 
 			// @since WP Travel 4.6.4
 			$_wp_travel_admin = array(
-				'strings' => wptravel_get_strings(),
+				'strings' => WpTravel_Helpers_Strings::get(),
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'_nonce'  => wp_create_nonce( 'wp_travel_nonce' ),
 			);

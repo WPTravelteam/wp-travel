@@ -10,6 +10,10 @@ import _ from 'lodash';
 import TripDatesTimes from './dates-times';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
+
 const WPTravelTripDates = () => {
     
     const allData = useSelect((select) => {
@@ -32,17 +36,6 @@ const WPTravelTripDates = () => {
 
 
     useEffect(()=>{
-        // if(dates.length<1){
-        //     let _firstDate = [{
-        //         start_date:format('Y-m-d', new Date() ),
-        //         end_date:''
-        //     }];
-        //     updateTripData({
-        //         ...allData,
-        //         dates:_firstDate
-        //     })
-        // }
-        
         let _enableTime = 'undefined'!==typeof firstDate.trip_time && '' !== firstDate.trip_time?true:enableTime;
         setState((prevState)=>{
             return {...prevState, enableTime:_enableTime}
@@ -107,9 +100,9 @@ const WPTravelTripDates = () => {
 
     return <ErrorBoundary>
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
-        <h4>{ __( 'Date & Time', 'wp-travel' ) }</h4>
+        <h4>{ __i18n.date_time }</h4>
         <PanelRow>
-            <label>{ __( 'Enable Fixed Departure', 'wp-travel' ) }</label>
+            <label>{ __i18n.enable_fixed_departure }</label>
             <ToggleControl
                 checked={ is_fixed_departure }
                 onChange={ () => {
@@ -125,11 +118,11 @@ const WPTravelTripDates = () => {
             <TripDatesTimes dates={dates} storeKey="dates" onUpdate={updateDateTimes} pricings={pricings} /> :
             <>
                 <PanelRow>
-                    <label>{ __( 'Trip Duration', 'wp-travel' ) }</label>
+                    <label>{ __i18n.trip_duration }</label>
                     <div className="wp-travel-trip-duration">
                         <TextControl
                             value={trip_duration.days}
-                            help={__( 'Day(s)', 'wp-travel' )}
+                            help={__i18n.days}
                             onChange={(e) =>{
                                 let _trip_duration = allData.trip_duration;
                                 _trip_duration.days = e;
@@ -141,7 +134,7 @@ const WPTravelTripDates = () => {
                         />
                         <TextControl
                             value={trip_duration.nights}
-                            help={__( 'Night(s)', 'wp-travel' )}
+                            help={__i18n.nights}
                             onChange={(e) =>{
                                 let _trip_duration = allData.trip_duration;
                                 _trip_duration.nights = e;
@@ -162,62 +155,6 @@ const WPTravelTripDates = () => {
     {applyFilters('wp_travel_itinerary_price_tab_table_last_row', '', allData )}
     {/* <ExcludedDates /> */}
     <hr/>
-    {/* <PanelRow>
-        <span>
-            {has_state_changes&&<div>* Please save changes.</div>}
-        </span>
-        <Button isPrimary onClick={()=>{
-            updateRequestSending(true);
-
-            // if( !is_multiple_dates ){
-            //     let _pricingIds = [];
-            //     allData.pricings.map((_price)=>{
-            //         _pricingIds = (false !== _price.id) ?[..._pricingIds, _price.id]:_pricingIds;
-            //     });
-            //     allData.dates[0]['pricing_ids'] = _pricingIds.join(',');
-            // }
-
-            if ( allData.is_fixed_departure ) {
-                let _pricingIds = [];
-                allData.pricings.map((_price)=>{
-                    _pricingIds = (false !== _price.id) ?[..._pricingIds, _price.id]:_pricingIds;
-                });
-                if( allData.dates.length>0 ) {
-                    allData.dates.map((_dates, _datesIndex)=>{
-                        allData.dates[_datesIndex]['pricing_ids'] = _pricingIds.join(',');
-                        if ( !allData.dates[_datesIndex].is_recurring ) {
-                            allData.dates[_datesIndex] = {...allData.dates[_datesIndex],...{
-                                years:'',
-                                months:'',
-                                weeks:'',
-                                days:'',
-                                date_days:''
-                            }}
-                        }
-                    })
-                }
-            } else {
-                allData.dates = [];
-            }
-
-            if( !allData.enable_excluded_dates_times){
-                allData.excluded_dates_times = [];
-            }
-            
-            
-            apiFetch( { url: `${ajaxurl}?action=wp_travel_update_trip&trip_id=${_wp_travel.postID}`, data:allData, method:'post' } ).then( res => {
-                updateRequestSending(false);
-                
-                if( res.success && "WP_TRAVEL_UPDATED_TRIP" === res.data.code){
-                    setTripData(res.data.trip);
-                    updateStateChange(false)
-                }
-            } );
-            
-        }}
-        disabled={!has_state_changes}
-        >Save Changes</Button>
-    </PanelRow> */}
     </ErrorBoundary>
 }
 

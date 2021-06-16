@@ -9,7 +9,9 @@ import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsTabsContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -50,7 +52,7 @@ const WPTravelTripOptionsTabsContent = () => {
                             initialOpen={false}
                         >
                             <PanelRow>
-                                <label>{__('Global Trip Title', 'wp-travel')}</label>
+                                <label>{__i18n.global_trip_title}</label>
                                 <TextControl
                                     value={tab.default_label}
                                     disabled={true}
@@ -58,7 +60,7 @@ const WPTravelTripOptionsTabsContent = () => {
                                 />
                             </PanelRow>
                             <PanelRow>
-                                <label>{__('Custom Trip Title', 'wp-travel')}</label>
+                                <label>{__i18n.custom_trip_title}</label>
                                 <TextControl
                                     value={tab.label}
                                     placeholder={tab.default_label }
@@ -70,7 +72,7 @@ const WPTravelTripOptionsTabsContent = () => {
                             </PanelRow>
                             {use_global_tabs !== 'yes' &&
                                 <PanelRow>
-                                    <label>{__('Display', 'wp-travel')}</label>
+                                    <label>{__i18n.display}</label>
                                     <ToggleControl
                                         checked={tab.show_in_menu == 'yes'}
                                         onChange={
@@ -95,7 +97,7 @@ const WPTravelTripOptionsTabsContent = () => {
 
             {applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}
             <PanelRow>
-                <label>{__('Use Global Tabs Layout', 'wp-travel')}</label>
+                <label>{__i18n.use_global_tabs_layout}</label>
                 <ToggleControl
                     value={use_global_tabs}
                     checked={use_global_tabs == 'yes' ? true : false}
@@ -123,12 +125,12 @@ addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', (content, id, allData)
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need Additional Tabs ?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.global_tab_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel')}
+                {__i18n.notices.global_tab_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content

@@ -1,8 +1,5 @@
-import { useState, useEffect } from '@wordpress/element';
 import { TextControl, Draggable, Panel, PanelRow, PanelBody, Button, TabPanel,Notice, CheckboxControl} from '@wordpress/components';
-import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 
@@ -11,6 +8,9 @@ import Select from 'react-select'
 
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsFactContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -98,7 +98,7 @@ const WPTravelTripOptionsFactContent = () => {
                 { Object.keys(wp_travel_trip_facts_settings).length > 0 ? 
                     <>
                         { typeof trip_facts != 'undefined' && trip_facts.length > 0 ? <>
-                            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__( '+ Add Fact' )}</Button></PanelRow>
+                            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow>
                             <div className="wp-travel-sortable-component">
                             <ReactSortable
                                 list={trip_facts}
@@ -118,17 +118,15 @@ const WPTravelTripOptionsFactContent = () => {
 
                                     return <PanelBody
                                         icon= {alignJustify}
-                                        title={trip_fact.label ? trip_fact.label : __("Fact", 'wp-travel') }
+                                        title={trip_fact.label ? trip_fact.label : __i18n.fact }
                                         initialOpen={false}
                                         >
                                     
                                         <PanelRow>
-                                            <label>{ __( 'Select Type', 'wp-travel' ) }</label>
+                                            <label>{__i18n.select_type}</label>
                                             <div className="wp-travel-select-wrapper">
                                                 <Select
                                                     options={factOptions}
-                                                    // defaultOptions={[trip_fact.label]}
-                                                    // value={trip_fact}
                                                     defaultValue={trip_fact}
                                                     onChange={(val)=>{
                                                         if ( '' !== val ) {
@@ -145,7 +143,7 @@ const WPTravelTripOptionsFactContent = () => {
                                         </PanelRow>
 
                                         <PanelRow>
-                                            <label>{ __( 'Value', 'wp-travel' ) }</label>
+                                            <label>{ __i18n.value }</label>
                                             {trip_fact.type == 'text' && 
                                                 <TextControl
                                                     value={trip_fact.value ? trip_fact.value : '' }
@@ -196,14 +194,12 @@ const WPTravelTripOptionsFactContent = () => {
                                                                 }
                                                             />
                                                     } )}
-                                                    
-                                                
                                                 </div>
                                             }
                                         </PanelRow>
                                         <PanelRow className="wp-travel-action-section has-right-padding">
                                             <span></span><Button isDefault onClick={() => {
-                                                if (!confirm(__( 'Are you sure to delete remove fact?', 'wp-travel' ) )) {
+                                                if (!confirm( __i18n.alert.remove_fact )) {
                                                     return false;
                                                 }
                                                 let factData = [];
@@ -211,41 +207,39 @@ const WPTravelTripOptionsFactContent = () => {
                                                     return newFactId != factIndex;
                                                 });
                                                 updateFacts(factData);
-                                            }} className="wp-traval-button-danger">{__( '- Remove Fact', 'wp-travel' )}</Button>
+                                            }} className="wp-traval-button-danger">{__i18n.remove_fact}</Button>
                                         </PanelRow>
                                     
                                     </PanelBody>
 
                                 })}
                             </ReactSortable> 
-                            {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__( '+ Add Fact' )}</Button></PanelRow> }</div></>:
+                            {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow> }</div></>:
                             <Notice isDismissible={false} actions={[{
-                                'label': __( 'Add Fact', 'wp-travel' ),
+                                'label': __i18n.add_fact,
                                 onClick: () => {
                                     addFact()
                                 },
                                 noDefaultClasses: true,
                                 className: 'is-link'
-                            }]}>{ __( 'Please add new fact here.', 'wp-travel' ) }</Notice>
+                            }]}>{ __i18n.messages.add_fact }</Notice>
                         }
                         
                     </> : 
                     <>
                         <Notice isDismissible={false} actions={[{
-                            'label': __( 'Add Fact', 'wp-travel' ),
+                            'label': __i18n.add_fact,
                             onClick: () => {
                                 let url = _wp_travel.admin_url + 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts'
                                 window.location.href = url
                             },
                             noDefaultClasses: true,
                             className: 'is-link'
-                        }]}>{ __( 'Please add fact from the settings', 'wp-travel' ) }</Notice>
+                        }]}>{ __i18n.messages.add_new_fact }</Notice>
                     </> 
                 }
                 </>
             }
-          
-            
         </div>
     </ErrorBoundary>);
 }

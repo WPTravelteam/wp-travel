@@ -13,7 +13,9 @@ import WPTravelTripPricingCategories from './trip-pricings-categories';
 import WPTravelTripDates from './trip-dates';
 
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsPricings = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -62,27 +64,10 @@ const WPTravelTripOptionsPricings = () => {
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
-                
-                {/* <PanelRow>
-                    <label>{__( 'Group Size(Pax)', 'wp-travel' )}</label>
-                    <TextControl
-                        help={__( 'It will be used as inventory size.', 'wp-travel' )}
-                        value={ group_size }
-                        type="number"
-                        min="1"
-                        autoComplete="off"
-                        onChange={(gs) => {
-                            updateTripData({
-                                ...allData, // allData
-                                group_size: gs
-                            })
-                        }}
-                    />
-                </PanelRow> */}
                 {tripPrices.length > 0 ? <>
                 
-                    <Notice status="warning" isDismissible={false}>{__( 'Before making any changes in date, please make sure pricing is saved.', 'wp-travel')}</Notice>
-                    <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{ __( '+ Add Price', 'wp-travel' ) }</Button></PanelRow>
+                    <Notice status="warning" isDismissible={false}>{__i18n.messages.pricing_message}</Notice>
+                    <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
                     <div className="wp-travel-sortable-component">
                     <ReactSortable
                         list={tripPrices}
@@ -97,13 +82,13 @@ const WPTravelTripOptionsPricings = () => {
                         }
                         return <PanelBody
                                 icon= {alignJustify}
-                                title={ price.title ? `${price.title}` : __( 'Untitled Price', 'wp-travel' ) }
+                                title={ price.title ? `${price.title}` : __i18n.pricing_name }
                                 initialOpen={(tripPrices.length - 1 === priceIndex)}
                             >
                             <PanelRow>
-                                <label>{__( 'Pricing Name', 'wp-travel' )}</label>
+                                <label>{__i18n.pricing_name}</label>
                                 <TextControl
-                                    placeholder={__( 'Pricing Name', 'wp-travel' )}
+                                    placeholder={__i18n.pricing_name}
                                     value={price.title}
                                     onChange={(title) => {
                                         let priceData = price;
@@ -113,7 +98,7 @@ const WPTravelTripOptionsPricings = () => {
                                 />
                             </PanelRow>
                             <PanelRow>
-                                <label>{__( 'Min Pax', 'wp-travel' )}</label>
+                                <label>{__i18n.min_pax}</label>
                                 <TextControl
                                     value={price.min_pax ? price.min_pax : ''}
                                     type="number"
@@ -127,7 +112,7 @@ const WPTravelTripOptionsPricings = () => {
                                 />
                             </PanelRow>
                             <PanelRow>
-                                <label>{__( 'Max Pax', 'wp-travel' )}</label>
+                                <label>{__i18n.max_pax}</label>
                                 <TextControl
                                     value={price.max_pax ? price.max_pax : ''}
                                     type="number"
@@ -142,7 +127,7 @@ const WPTravelTripOptionsPricings = () => {
                             </PanelRow>
                             <hr />
                             <PanelRow className="wp-travel-has-child-panel">
-                                <label>{__( 'Price Categories', 'wp-travel' )}</label>
+                                <label>{__i18n.price_category}</label>
                             </PanelRow>
                             <PanelRow className="wp-travel-has-child-panel">
                                 <div className="wp-travel-panel-wrap">
@@ -151,7 +136,7 @@ const WPTravelTripOptionsPricings = () => {
                             </PanelRow>
                             {has_extras ? 
                                 <PanelRow>
-                                    <label>{__( 'Trip Extras', 'wp-travel' )}</label>
+                                    <label>{__i18n.trip_extras}</label>
                                     <div className="wp-travel-field-value">
                                         <div className="wp-travel-select-wrapper">
                                             <Select options={tripExtrasData} onChange={(val)=>{
@@ -160,7 +145,7 @@ const WPTravelTripOptionsPricings = () => {
 
                                                 updateTripPricing(priceData, priceIndex)
                                             }} isMulti
-                                            noOptionsMessage={()=>__( 'No result found for searched term.', 'wp-travel' ) }
+                                            noOptionsMessage={()=>__i18n.empty_results.extras }
                                             onInputChange={(val)=>{
                                                 if ( '' !== val ) {
                                                     apiFetch( { url: `${ajaxurl}?action=wp_travel_search_trip_extras&keyword=${val}&_nonce=${_wp_travel._nonce}` } ).then( res => {
@@ -190,18 +175,18 @@ const WPTravelTripOptionsPricings = () => {
                             : 
                                 <>
                                 <PanelRow>
-                                    <label>{__( 'Trip Extras', 'wp-travel' )}</label>
+                                    <label>{__i18n.trip_extras}</label>
                                 </PanelRow>
                                 <PanelRow>
                                     <Notice isDismissible={false} actions={[{
-                                        'label': __( 'Add Extras', 'wp-travel' ),
+                                        'label': __i18n.add_extras,
                                         onClick: () => {
                                             let url = _wp_travel.admin_url + 'post-new.php?post_type=tour-extras'
                                             window.location.href = url
                                         },
                                         noDefaultClasses: true,
                                         className: 'is-link'
-                                    }]}>{ __( 'Please add extras first', 'wp-travel' ) }</Notice>
+                                    }]}>{ __i18n.empty_results.add_extras }</Notice>
                                 </PanelRow>
                                 </>
                             }
@@ -209,7 +194,7 @@ const WPTravelTripOptionsPricings = () => {
                             <hr />
                             <PanelRow className="wp-travel-action-section has-right-padding">
                                 <span></span><Button isDefault onClick={() => {
-                                    if (!confirm(__( 'Are you sure to delete this price?', 'wp-travel' ) )) {
+                                    if (!confirm(__i18n.alert.remove_price )) {
                                         return false;
                                     }
                                     
@@ -227,15 +212,15 @@ const WPTravelTripOptionsPricings = () => {
                                             }
                                         } );
                                     }
-                                }} className="wp-traval-button-danger">{__( '- Remove Price', 'wp-travel' ) }</Button>
+                                }} className="wp-traval-button-danger">{__i18n.remove_price}</Button>
                             </PanelRow>
                         </PanelBody>
                     })}
                     </ReactSortable>
                     </ div>
-                {tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{ __( '+ Add Price', 'wp-travel' ) }</Button></PanelRow>}</>:<>
+                {tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
                 <Notice isDismissible={false} actions={[{
-                    'label': __( 'Add Price', 'wp-travel' ),
+                    'label': __i18n.add_price,
                     onClick:()=>{
                         addTripPrice()
                     },
@@ -248,12 +233,12 @@ const WPTravelTripOptionsPricings = () => {
                 <>
                     <PanelRow>
                     </PanelRow>
-                    <h4>{ __( 'Minimum Payout ', 'wp-travel' ) }</h4>
+                    <h4>{ __i18n.minimum_payout }</h4>
                     <PanelRow>
-                        <label>{ __( 'Use Global Payout', 'wp-travel' ) }</label>
+                        <label>{__i18n.use_global_payout}</label>
                         <ToggleControl
                             checked={ minimum_partial_payout_use_global }
-                            help={__( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' )}
+                            help={__i18n.help_text.use_global_payout}
                             onChange={ () => {
                                 updateTripData({
                                     ...allData,
@@ -270,9 +255,9 @@ const WPTravelTripOptionsPricings = () => {
                                 if ( payout_percent ) {
                                     payout_percent = parseInt(payout_percent)
                                 }
-                                let payout_label = __( 'Custom Min. Payout (%)', 'wp-travel' )
+                                let payout_label = __i18n.custom_min_payout
                                 if ( payout_percentages.length > 1 ) {
-                                    payout_label = __( `Custom Partial Payout ${i+1} (%)`, 'wp-travel' )
+                                    payout_label = __( `${__i18n.global_partial_payout} ${i+1} (%)`, 'wp-travel' )
                                 }
                                 totalPayout += payout_percent;
                                 return <PanelRow>
@@ -281,7 +266,7 @@ const WPTravelTripOptionsPricings = () => {
                                         value={ payout_percent  }
                                         type="number"
                                         min="0"
-                                        help={__( `Global partial payout: ${percent}%`, 'wp-travel' )}
+                                        help={__( `${__i18n.global_partial_payout} ${percent}%`, 'wp-travel' )}
                                         autoComplete="off"
                                         onChange={(value) => {
                                             let _minimum_partial_payout_percent = minimum_partial_payout_percent
@@ -311,7 +296,7 @@ const WPTravelTripOptionsPricings = () => {
 
                         { ( payout_percentages.length > 1 && totalPayout != 100 ) &&
                             <PanelRow>
-                                <Notice status="error" isDismissible={false}>{__( 'Error: Total payout percent is not equals to 100%. Please update the trip once else global partial percent will be used as default.', 'wp-travel')}</Notice>
+                                <Notice status="error" isDismissible={false}>{__i18n.messages.total_payout}</Notice>
                             </PanelRow>
                         }
                         </>
@@ -331,12 +316,12 @@ const WPTravelTripOptionsPriceDates = () => {
         tabs={[
             {
                 name: 'prices',
-                title: 'Prices',
+                title: __i18n.prices,
                 className: 'tab-one',
             },
             {
                 name: 'dates',
-                title: 'Dates',
+                title: __i18n.dates,
                 className: 'tab-two',
             },
         ]}>

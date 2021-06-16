@@ -2,6 +2,9 @@ import { Button, Spinner, Notice } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 export default props => {
     const {
         images: gallery,
@@ -32,6 +35,6 @@ export default props => {
                     </li>
                 })}
             </ReactSortable>
-            || <Notice isDismissible={false} status="info">{__('There are no gallery images.')}</Notice>}
+            || <Notice isDismissible={false} status="info">{__i18n.messages.no_gallery}</Notice>}
     </ErrorBoundary>
 }

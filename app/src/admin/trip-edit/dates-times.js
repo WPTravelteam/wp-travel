@@ -6,6 +6,9 @@ import { applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
     const updateDatesTimes = (data, _dateIndex) => {
@@ -51,7 +54,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
     return <ErrorBoundary>
         {dates.length > 0 && <>
-            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__('+ Add Date', 'wp-travel')}</Button></PanelRow>
+            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>
             {dates.map((_date, _dateIndex) => {
 
                 let selectedYears = 'undefined' !== typeof _date.years ? _date.years.split(',') : [];
@@ -103,16 +106,16 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                 let selectedTimes = 'undefined' !== typeof _date.trip_time && '' !== _date.trip_time ? _date.trip_time.split(',') : [];
                 
-                return <PanelBody title={_date.title || `Fixed Departure ${_dateIndex + 1}`} className="wp-travel-panelbody-add-top-gap" key={`${storeKey}-date-times-${_dateIndex}`}>
+                return <PanelBody title={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} className="wp-travel-panelbody-add-top-gap" key={`${storeKey}-date-times-${_dateIndex}`}>
                     <PanelRow>
-                        <label>{__('Date Label', 'wp-travel')}</label>
-                        <TextControl value={_date.title} placeholder={_date.title || `Fixed Departure ${_dateIndex + 1}`} onChange={value => updateDatesTimes({ title: value }, _dateIndex)} />
+                        <label>{__i18n.date_label}</label>
+                        <TextControl value={_date.title} placeholder={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} onChange={value => updateDatesTimes({ title: value }, _dateIndex)} />
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Select pricing options', 'wp-travel')}</label>
+                        <label>{__i18n.select_pricing}</label>
                         <div className="text-right">
                             <CheckboxControl
-                                label={__( 'Select All' )}
+                                label={__i18n.select_all}
                                 checked={selectedPricingNames.length == pricingSuggestions.length ? true:false}
                                 onChange={ (e) => {
                                         let filteredPricingIds = []
@@ -144,14 +147,14 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                         updateDatesTimes({ pricing_ids: filteredPricingIds.join(',') }, _dateIndex);
                                     }
                                 }
-                                placeholder={__('Pricing Options', 'wp-travel')}
+                                // placeholder={__('Pricing Options', 'wp-travel')}
                             />
-                            <p className="components-form-token-field__help">{__( 'Enter Pricing option and enter', 'wp-travel' )}</p>
+                            <p className="components-form-token-field__help">{__i18n.help_text.date_pricing}</p>
                         </div>
 
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Starting Date', 'wp-travel')}</label>
+                        <label>{__i18n.start_date}</label>
                         <Dropdown
                             className="my-container-class-name"
                             contentClassName="my-popover-content-classname"
@@ -198,7 +201,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                     </PanelRow>
 
                     <PanelRow>
-                        <label>{__('End Date', 'wp-travel')}</label>
+                        <label>{__i18n.end_date}</label>
                         <div className="wp-travel-form-input-with-clear">
                             <Dropdown
                                 className="my-container-class-name"
@@ -254,7 +257,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                     <hr />
                     <PanelRow className="wp-travel-action-section has-right-padding">
                         <span></span><Button isDefault onClick={() => {
-                            if (!confirm(__('Are you sure to delete this date?', 'wp-travel'))) {
+                            if (!confirm(__i18n.alert.remove_date)) {
                                 return false;
                             }
 
@@ -273,22 +276,22 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 });
                             }
 
-                        }} className="wp-traval-button-danger">{__('- Remove Date', 'wp-travel')}</Button>
+                        }} className="wp-traval-button-danger">{__i18n.remove_date}</Button>
                     </PanelRow>
 
                 </PanelBody>
             })}
-            {dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__('+ Add Date', 'wp-travel')}</Button></PanelRow>}
+            {dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>}
         </>}
         {dates.length < 1 && 
             <Notice isDismissible={false} actions={[{
-                'label': __('Add date', 'wp-travel'),
+                'label': __i18n.add_date,
                 onClick: () => {
                     addTripDate()
                 },
                 noDefaultClasses: true,
                 className: 'is-link'
-            }]}>{__('No dates found.', 'wp-travel')}</Notice>
+            }]}>{__i18n.empty_results.dates}</Notice>
         }
     </ErrorBoundary>
 }

@@ -7,6 +7,9 @@ import { sprintf, _n, __} from '@wordpress/i18n';
 import WPEditor from '../fields/WPEditor';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsIncludesExcludesContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -16,7 +19,7 @@ const WPTravelTripOptionsIncludesExcludesContent = () => {
     return <ErrorBoundary>
         <div className="wp-travel-trip-itinerary">
             <PanelRow>
-                <label>{__( 'Trip Includes' )}</label>
+                <label>{__i18n.trip_includes}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 {'undefined' !== typeof trip_include && <WPEditor id="wp-travel-trip-includes" value={trip_include}
@@ -28,7 +31,7 @@ const WPTravelTripOptionsIncludesExcludesContent = () => {
                 }} name="trip_include" />}
             </PanelRow>
             <PanelRow>
-                <label>{__( 'Trip Excludes' )}</label>
+                <label>{__i18n.trip_excludes}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 {'undefined' !== typeof trip_exclude && <WPEditor id="wp-travel-trip-excludes" value={trip_exclude}

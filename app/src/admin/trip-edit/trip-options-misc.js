@@ -5,7 +5,9 @@ import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsMiscContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -16,10 +18,10 @@ const WPTravelTripOptionsMiscContent = () => {
 
     return <ErrorBoundary>
         <div className="wp-travel-trip-misc">
-            <h3>{__( 'Trip Enquiry', 'wp-travel' ) }</h3>
+            <h3>{ __i18n.trip_enquiry }</h3>
             {/* {applyFilters( 'wp_travel_itinerary_custom_tabs', '', id, allData )} */}
             <PanelRow>
-                <label>{ __( 'Global Trip Enquiry Option', 'wp-travel' ) }</label>
+                <label>{ __i18n.global_trip_enquiry }</label>
                 <ToggleControl
                     value={use_global_trip_enquiry_option}
                     checked={ use_global_trip_enquiry_option == 'yes' ? true : false }
@@ -35,7 +37,7 @@ const WPTravelTripOptionsMiscContent = () => {
             </PanelRow>
             {use_global_trip_enquiry_option !== 'yes' &&
                 <PanelRow>
-                    <label>{ __( 'Trip Enquiry', 'wp-travel' ) }</label>
+                    <label>{ __i18n.trip_enquiry }</label>
                     <ToggleControl
                         value={enable_trip_enquiry_option}
                         checked={ enable_trip_enquiry_option == 'yes' ? true : false }

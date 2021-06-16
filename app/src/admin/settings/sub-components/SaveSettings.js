@@ -4,7 +4,9 @@ import apiFetch from '@wordpress/api-fetch';
 
 import { _n, __} from '@wordpress/i18n';
 
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const SaveSettings = (props) => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
@@ -21,7 +23,7 @@ const SaveSettings = (props) => {
     return <>
         { 'top' == props.position &&
             <div className="wp-travel-setting-system-info">
-                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>System Information</a>
+                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
             </div>
         }
         <PanelRow className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border wp-travel-save-changes">
@@ -48,7 +50,7 @@ const SaveSettings = (props) => {
         </PanelRow>
         { 'bottom' == props.position &&
             <div className="wp-travel-setting-system-info">
-                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>System Information</a>
+                <a href="edit.php?post_type=itinerary-booking&page=sysinfo" title="View system information"><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
             </div>
         }
     </>

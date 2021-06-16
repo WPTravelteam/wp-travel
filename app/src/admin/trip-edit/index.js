@@ -81,61 +81,61 @@ const WPTravelTripOptions = () => {
 
         {
             name: 'includes-excludes',
-            title: __('Includes/Excludes', 'wp-travel'),
+            title: __i18n.admin_tabs.includes_excludes,
             className: 'tab-includes-excludes',
             content: WPTravelTripOptionsIncludesExcludes
         },
         {
             name: 'facts',
-            title: __('Facts', 'wp-travel'),
+            title: __i18n.admin_tabs.facts,
             className: 'tab-facts',
             content: WPTravelTripOptionsFact
         },
         {
             name: 'gallery',
-            title: __('Gallery', 'wp-travel'),
+            title: __i18n.admin_tabs.gallery,
             className: 'tab-gallery',
             content: WPTravelTripOptionsGallery
         },
         {
             name: 'locations',
-            title: __('Locations', 'wp-travel'),
+            title: __i18n.admin_tabs.locations,
             className: 'tab-locations',
             content: WPTravelTripOptionsLocation
         },
         {
             name: 'cart-checkout',
-            title: __('Checkout', 'wp-travel'), // cart & checkout label updated to checkout @since 4.4.3
+            title: __i18n.admin_tabs.checkout, // cart & checkout label updated to checkout @since 4.4.3
             className: 'tab-cart-checkout',
             content: WPTravelTripOptionsCartAndCheckout
         },
         {
             name: 'inventory-options',
-            title: __('Inventory Options', 'wp-travel'),
+            title: __i18n.admin_tabs.inventory_options,
             className: 'tab-inventory-options',
             content: WPTravelTripOptionsInventoryOptions
         },
         {
             name: 'faqs',
-            title: __('FAQs', 'wp-travel'),
+            title: __i18n.admin_tabs.faqs,
             className: 'tab-faqs',
             content: WPTravelTripOptionsFaq
         },
         {
             name: 'downloads',
-            title: __('Downloads', 'wp-travel'),
+            title: __i18n.admin_tabs.downloads,
             className: 'tab-downloads',
             content: WPTravelTripOptionsDownloads
         },
         {
             name: 'misc',
-            title: __('Misc. Options', 'wp-travel'),
+            title: __i18n.admin_tabs.misc,
             className: 'tab-misc',
             content: WPTravelTripOptionsMisc
         },
         {
             name: 'tabs',
-            title: __('Tabs', 'wp-travel'),
+            title: __i18n.admin_tabs.tabs,
             className: 'tab-tabs',
             content: WPTravelTripOptionsTabs
         },
@@ -160,12 +160,12 @@ addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', (content) => 
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need to add your checkout options?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.checkout_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can add your checkout options for all of your trips !', 'wp-travel')}
+                {__i18n.notices.checkout_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,
@@ -177,12 +177,12 @@ addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', (content, allData
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need to add your inventory options?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.inventory_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can add your inventory options in all of your trips !', 'wp-travel')}
+                {__i18n.notices.inventory_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,
@@ -194,12 +194,12 @@ addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', (content, allData
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need to add your downloads?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.downloads_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel')}
+                {__i18n.notices.downloads_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,
@@ -211,12 +211,13 @@ addFilter('wp_travel_after_pricings_options', 'wp_travel', (content, allData) =>
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need More Options ?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.need_more_option.title}</strong>
+
                 <br />
-                {__('By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel')}
+                {__i18n.notices.need_more_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,
@@ -227,12 +228,12 @@ addFilter('wp_travel_after_dates_options', 'wp_travel', (content, allData) => {
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Need More Options ?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.need_more_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel')}
+                {__i18n.notices.need_more_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,
@@ -247,7 +248,8 @@ addFilter(
     (content ) => {
         content = [
             <p class="description">
-                {__( 'Need advance Trip Extras options?', 'wp-travel' )}<a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">{__( 'GET PRO', 'wp-travel') }</a>
+                {__i18n.notices.need_extras_option.title}
+                <a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
             </p>,
             ...content,
         ]

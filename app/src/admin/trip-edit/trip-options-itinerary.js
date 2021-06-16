@@ -10,7 +10,9 @@ import {alignJustify } from '@wordpress/icons';
 
 import WPEditor from '../fields/WPEditor';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripOptionsItineraryContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -35,8 +37,8 @@ const WPTravelTripOptionsItineraryContent = () => {
 
     const addItinerary = () => {
         addNewItinerary({
-            label: __('Day X', 'wp-travel'),
-            title: __('Your Plan', 'wp-travel'),
+            label: __i18n.day_x,
+            title: __i18n.your_plan,
             date: null,
             time: null,
             desc: '',
@@ -63,7 +65,7 @@ const WPTravelTripOptionsItineraryContent = () => {
             <ErrorBoundary>
             {applyFilters('wp_travel_before_itinerary_content', '', allData)}
             <PanelRow>
-                <label htmlFor="wp-travel-trip-outline">{__('Trip Outline')}</label>
+                <label htmlFor="wp-travel-trip-outline">{__i18n.trip_outline}</label>
                 </PanelRow>
                 <PanelRow className="wp-travel-editor">
                 
@@ -77,8 +79,8 @@ const WPTravelTripOptionsItineraryContent = () => {
             </PanelRow>
             <hr/>
             <div className="wp-travel-itinerary-title">
-                <h3 className="wp-travel-tab-content-title">{__('Itinerary')}</h3>
-                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__('+ Add Itinerary')}</Button></PanelRow> }
+                <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
+                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
             </div>
             {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
                 <div className="wp-travel-sortable-component">
@@ -91,31 +93,31 @@ const WPTravelTripOptionsItineraryContent = () => {
                             Object.keys(itineraries).map(function (itineraryId) {
                                 return <PanelBody
                                     icon= {alignJustify}
-                                    title={`${itineraries[itineraryId].label ? itineraries[itineraryId].label : __('Day X', 'wp-travel')}, ${itineraries[itineraryId].title ? itineraries[itineraryId].title : __('Your Plan', 'wp-travel')} `}
+                                    title={`${itineraries[itineraryId].label ? itineraries[itineraryId].label : __i18n.day_x}, ${itineraries[itineraryId].title ? itineraries[itineraryId].title : __i18n.your_plan} `}
                                     initialOpen={false} >
 
                                     <PanelRow>
-                                        <label>{__('Itinerary Label', 'wp-travel')}</label>
+                                        <label>{__i18n.itinerary_label}</label>
                                         <TextControl
                                             value={itineraries[itineraryId].label ? itineraries[itineraryId].label : ''}
-                                            placeholder={__('Day X', 'wp-travel')}
+                                            placeholder={__i18n.day_x}
                                             onChange={
                                                 (e) => updateTripItinerary('label', e, itineraryId)
                                             }
                                         />
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__('Itinerary Title', 'wp-travel')}</label>
+                                        <label>{__i18n.itinerary_title}</label>
                                         <TextControl
                                             value={itineraries[itineraryId].title ? itineraries[itineraryId].title : ''}
-                                            placeholder={__('Your Plan', 'wp-travel')}
+                                            placeholder={__i18n.your_plan}
                                             onChange={
                                                 (e) => updateTripItinerary('title', e, itineraryId)
                                             }
                                         />
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__('Itinerary Date', 'wp-travel')}</label>
+                                        <label>{__i18n.itinery_date}</label>
                                         <Dropdown
                                             className="wp-travel-dropdown-container"
                                             contentClassName="wp-travel-dropdown-popup-content"
@@ -149,7 +151,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                         />
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__('Itinerary Time', 'wp-travel')}</label>
+                                        <label>{__i18n.itinerary_time}</label>
                                         
                                         <Dropdown
                                             className="my-container-class-name"
@@ -162,7 +164,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                             renderContent={ ({ isOpen, onToggle } ) => (
                                                 <div className="wp-travel-dropdown-content-wrap">
                                                 <div>
-                                                    <label>{__( 'Hours', 'wp-travel' )}</label>
+                                                    <label>{__i18n.hours}</label>
                                                     <RangeControl
                                                         // label="Hours"
                                                         value={ stateHours }
@@ -176,7 +178,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label>{__( 'Minute', 'wp-travel' )}</label>
+                                                    <label>{__i18n.minute}</label>
                                                     <RangeControl
                                                         // label="Hours"
                                                         value={ stateMinutes }
@@ -200,7 +202,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                                         // updateTripItinerary('time', moment.time(time).format('hh:mm a', time), itineraryId)
                                                         
                                                         onToggle()
-                                                    }} isDefault>{__( '+ Add', 'wp-travel' )}</Button>
+                                                    }} isDefault>{__i18n.add}</Button>
                 
                                                 </div>
                                                 </div>
@@ -210,7 +212,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                     </PanelRow>
                                     {applyFilters('wp_travel_itinerary_list_before_description', '', itineraryId)}
                                     <PanelRow>
-                                        <label>{__('Description', 'wp-travel')}</label>
+                                        <label>{__i18n.description}</label>
                                     </PanelRow>
                                     <PanelRow className="itinerary-description">
                                         <TextareaControl
@@ -223,7 +225,7 @@ const WPTravelTripOptionsItineraryContent = () => {
                                     <hr />
                                     <PanelRow className="wp-travel-action-section has-right-padding">
                                         <span></span><Button isDefault onClick={() => {
-                                            if (!confirm(__( 'Are you sure to delete this itinerary?', 'wp-travel' ) )) {
+                                            if (!confirm(__i18n.alert.remove_itinerary )) {
                                                 return false;
                                             }
                                             let itineraryData = [];
@@ -231,24 +233,24 @@ const WPTravelTripOptionsItineraryContent = () => {
                                                 return newItineraryId != itineraryId;
                                             });
                                             updateItineraries(itineraryData);
-                                        }} className="wp-traval-button-danger wp-travel-ui">{__('- Remove Itinerary', 'wp-travel')}</Button>
+                                        }} className="wp-traval-button-danger wp-travel-ui">{__i18n.remove_itinerary}</Button>
                                     </PanelRow>
 
                                 </PanelBody>
                             })
                         }
                     </ReactSortable>
-                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__('+ Add Itinerary')}</Button></PanelRow> }
+                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
 
                 </div>
                 : <><Notice isDismissible={false} actions={[{
-                    'label': __( 'Add Itinerary', 'wp-travel' ),
+                    'label':__i18n.add_itinerary,
                     onClick:()=>{
                         addItinerary()
                     },
                     noDefaultClasses:true,
                     className:'is-link'
-                }]}>{__( 'No Itineraries found.', 'wp-travel')}</Notice></>
+                }]}>{__i18n.empty_results.itinerary}</Notice></>
             }
             </ErrorBoundary>
         </div>
@@ -260,7 +262,7 @@ addFilter('wp_travel_before_itinerary_content', 'wp_travel', (content, allData) 
 
     content = [
         <PanelRow>
-            <label>{__('Trip code', 'wp-travel')}</label>
+            <label>{__i18n.trip_code}</label>
             <div className="wp-travel-field-value">
                 <TextControl
                     value={trip_code}
@@ -268,7 +270,7 @@ addFilter('wp_travel_before_itinerary_content', 'wp_travel', (content, allData) 
                     disabled={true}
                     name="" />
                     <p class="description">
-                        {__( 'Need Custom Trip Code? Check', 'wp-travel' )}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">{__( 'Pro Utilities Modules', 'wp-travel') }</a>
+                        {__i18n.notices.trip_code_option.description}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
                     </p>
             </div>
         </PanelRow>,
@@ -279,21 +281,6 @@ addFilter('wp_travel_before_itinerary_content', 'wp_travel', (content, allData) 
 
 const WPTravelTripOptionsItinerary = () => {
     return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsItineraryContent /></div>;
-    return <TabPanel className="wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap"
-        activeClass="active-tab"
-        onSelect={() => false}
-        tabs={[
-            {
-                name: 'itinerary',
-                title: __('Itinerary', 'wp-travel'),
-                className: 'tab-itinerary',
-            },
-
-        ]}>
-        {
-            (tab) => <WPTravelTripOptionsItineraryContent />
-        }
-    </TabPanel>;
 }
 
 export default WPTravelTripOptionsItinerary;

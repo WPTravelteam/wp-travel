@@ -4,9 +4,10 @@ import { useState } from '@wordpress/element';
 import Gallery from './Gallery';
 import GalleyDropZone from './GalleryDropZone';
 import { __ } from '@wordpress/i18n'
-import { Modal, Button } from '@wordpress/components'
 
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 export default () => {
     const [{ isUploading, isOpenModal }, setState] = useState({
         isUploading: false,
@@ -57,7 +58,6 @@ export default () => {
         setState(state => ({ ...state, isUploading: true }))
         if (files.length > 0) {
             let previewData = await previewImages(files)
-            // console.debug(previewData)
             updateTripData({
                 ...tripData,
                 gallery: [...store.getAllStore().gallery, ...previewData],
@@ -89,7 +89,6 @@ export default () => {
             }
         }
         setState(state => ({ ...state, isUploading: false }))
-
     }
 
     const onImagesSortHandle = (data) => {
@@ -101,7 +100,7 @@ export default () => {
 
     const onRemoveImageHandle = index => e => {
         e.stopPropagation()
-        if (confirm(__('Are you sure, want to remove the image from Gallery?'))) {
+        if (confirm( __i18n.alert.remove_gallery )) {
             updateTripData({
                 ...tripData,
                 gallery: gallery.filter((el, i) => i !== index)
@@ -111,10 +110,6 @@ export default () => {
 
     const onMediaLibHandle = () => {
         galleryMediaInstance && galleryMediaInstance.open()
-    }
-
-    const closeModal = () => {
-        setState(state => ({ ...state, isOpenModal: false }))
     }
 
     return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">
@@ -127,15 +122,5 @@ export default () => {
             onItemClick={onItemClickHandle}
         />
         {!isUploading && <GalleyDropZone onImagesDrop={onImagesDropHandle} onMediaLib={onMediaLibHandle} />}
-        {/* {
-            isOpenModal && <Modal
-                title={__('Remove Image?')}
-                onRequestClose={closeModal}
-            >
-                <Button isSecondary onClick={onRemoveImageHandle()}>
-                    {__('Remove Image')}
-                </Button>
-            </Modal>
-        } */}
     </div>
 }

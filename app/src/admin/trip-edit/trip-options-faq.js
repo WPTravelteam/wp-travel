@@ -7,6 +7,10 @@ import {alignJustify } from '@wordpress/icons';
 
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
+
 const WPTravelTripOptionsFaqContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -53,7 +57,7 @@ const WPTravelTripOptionsFaqContent = () => {
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
             
             {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? <>
-            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__('+ Add FAQ')}</Button></PanelRow>
+            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
             <div className="wp-travel-sortable-component">
                 <ReactSortable
                     list={faqs}
@@ -80,13 +84,13 @@ const WPTravelTripOptionsFaqContent = () => {
                         }
                         return <PanelBody  className={hiddenClass}
                             icon= {alignJustify}
-                            title={`${faqs[faqId].question ? faqs[faqId].question : __('FAQ Questions ?', 'wp-travel')}`}
+                            title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
                             initialOpen={false} >
 
                             <PanelRow>
-                                <label>{__('Enter your question', 'wp-travel')}</label>
+                                <label>{__i18n.enter_question}</label>
                                 <TextControl
-                                    placeholder={__('FAQ Questions ?', 'wp-travel')}
+                                    placeholder={__i18n.faq_questions}
                                     value={faqs[faqId].question ? faqs[faqId].question : ''}
                                     onChange={
                                         (e) => updateTripFaqs('question', e, faqId)
@@ -95,7 +99,7 @@ const WPTravelTripOptionsFaqContent = () => {
                             </PanelRow>
 
                             <PanelRow>
-                                <label>{__('Your Answer', 'wp-travel')}</label>
+                                <label>{__i18n.faq_answer}</label>
                                 <TextareaControl
                                     value={faqs[faqId].answer ? faqs[faqId].answer : null}
                                     onChange={
@@ -105,7 +109,7 @@ const WPTravelTripOptionsFaqContent = () => {
                             </PanelRow>
                             <PanelRow className="wp-travel-action-section has-right-padding">
                                 <span></span><Button isDefault onClick={() => {
-                                    if (!confirm( __( 'Are you sure to delete FAQ?', 'wp-travel' ) )) {
+                                    if (!confirm( __i18n.alert.remove_faq)) {
                                         return false;
                                     }
                                     let faqData = [];
@@ -113,7 +117,7 @@ const WPTravelTripOptionsFaqContent = () => {
                                         return newFaqId != faqId;
                                     });
                                     updateFaqs(faqData);
-                                }} className="wp-traval-button-danger">{__('- Remove FAQ', 'wp-travel')}</Button>
+                                }} className="wp-traval-button-danger">{__i18n.remove_faq}</Button>
                             </PanelRow>
 
                         </PanelBody>
@@ -122,17 +126,17 @@ const WPTravelTripOptionsFaqContent = () => {
                 </ReactSortable>
 
             </div>
-            { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__('+ Add FAQ')}</Button></PanelRow> }
+            { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
             </> : 
             <>
                 <Notice isDismissible={false} actions={[{
-                    'label': __( 'Add FAQ', 'wp-travel' ),
+                    'label': __i18n.add_faq,
                     onClick: () => {
                         addFaq()
                     },
                     noDefaultClasses: true,
                     className: 'is-link'
-                }]}>{ __( 'Please add new FAQ here.', 'wp-travel' ) }</Notice></>
+                }]}>{ __i18n.add_new_faq }</Notice></>
             }
         </div>
     </ErrorBoundary>;
@@ -141,12 +145,12 @@ addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', (content, allData) => {
     content = [
         <>
             <Notice isDismissible={false} status="informational">
-                <strong>{__('Tired of updating repitative FAQs ?', 'wp-travel')}</strong>
+                <strong>{__i18n.notices.global_faq_option.title}</strong>
                 <br />
-                {__('By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel')}
+                {__i18n.notices.global_faq_option.description}
                 <br />
                 <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
             </Notice><br />
         </>,
         ...content,

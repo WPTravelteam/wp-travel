@@ -16,7 +16,7 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
-
+    console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
     const {
         wt_test_mode,
@@ -27,6 +27,7 @@ export default () => {
         options
         } = allData;
 
+    const {wp_travel_user_since} = options;
     const initialState = {forceMigrateToV4: false }
     const [ { forceMigrateToV4 } , setState ] = useState(initialState)
     const updateState = data => {
@@ -101,26 +102,28 @@ export default () => {
                 </div>
             </PanelRow>
 
-            <PanelRow>
-                <label>{ __( 'Migrate Pricing and Date', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    <CheckboxControl
-                        checked={ forceMigrateToV4 }
-                        onChange={ () => {
-                            if ( confirm('are you sure') ) {
+            {VersionCompare( wp_travel_user_since, '4.0.0', '<' ) &&
+                <PanelRow>
+                    <label>{ __( 'Migrate Pricing and Date', 'wp-travel' ) }</label>
+                    <div className="wp-travel-field-value">
+                        <CheckboxControl
+                            checked={ forceMigrateToV4 }
+                            onChange={ () => {
+                                if ( confirm('Are your sure to migrate your trips to v4 trips?') ) {
 
-                                apiFetch( { url: `${ajaxurl}?action=wptravel_force_migrate&_nonce=${_wp_travel_admin._nonce}`, data:{force_migrate_to_v4:true}, method:'post' } ).then( res => {
-                                    
-                                    updateState({
-                                        forceMigrateToV4: ! forceMigrateToV4
-                                    })
-                                } );
-                            }
-                        }  }
-                    />
-                    <p className="description">{__( 'Enabling this will load minified scripts.', 'wp-travel' )}</p>
-                </div>
-            </PanelRow>
+                                    apiFetch( { url: `${ajaxurl}?action=wptravel_force_migrate&_nonce=${_wp_travel_admin._nonce}`, data:{force_migrate_to_v4:true}, method:'post' } ).then( res => {
+                                        
+                                        updateState({
+                                            forceMigrateToV4: ! forceMigrateToV4
+                                        })
+                                    } );
+                                }
+                            }  }
+                        />
+                        <p className="description">{__( 'Enabling this will migrate all your v3 trips to v4 trips. Also, the existing v4 trips can be overridden as well. So, before enabling you have to be clear regarding migration process.', 'wp-travel' )}</p>
+                    </div>
+                </PanelRow>
+            }
             
             {applyFilters( 'wp_travel_below_debug_tab_fields', [] )}
         </ErrorBoundary>

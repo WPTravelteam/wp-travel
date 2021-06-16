@@ -5,7 +5,9 @@ import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
-
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 const WPTravelTripPricingCategories = ({priceIndex}) => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -41,7 +43,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
     }
 
     let removePricingCategory = (categoryID,priceIndex) => {
-        if ( ! confirm( __( 'Are you sure to delete category?', 'wp-travel' ) ) ) {
+        if ( ! confirm( __i18n.alert.remove_category ) ) {
             return false;
         }
 
@@ -49,17 +51,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
         priceData.categories = priceData.categories.filter((cat)=>{
             return categoryID!=cat.id;
         })
-        
-        // if(false !== price.id){
-        //     apiFetch( { url: `${ajaxurl}?action=wp_travel_remove_pricing_category&pricing_id=${price.id}&category_id=${categoryID}` } ).then( res => {
-        //         if( res.success && "WP_TRAVEL_REMOVED_TRIP_PRICING_CATEGORY" === res.data.code){
-        //             updateTripPricing(priceData, priceIndex);
-        //         }
-        //     } );
-        // } else {
-            updateTripPricing(priceData, priceIndex);
-        // }
-        
+        updateTripPricing(priceData, priceIndex);
     }
     
     return <ErrorBoundary>{ 'undefined' !== typeof price && 'undefined' !== typeof price.categories && price.categories.length > 0 ?<>{ price.categories.map((category, catIndex) => {
@@ -72,7 +64,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
             title={currentCategory.title}
             initialOpen={(price.categories.length - 1 === catIndex)}>
                 <PanelRow>
-                    <label>{ __( 'Category', 'wp-travel' ) }</label>
+                    <label>{ __i18n.category }</label>
                     {pricing_categories.length>0 && <SelectControl
                         value={ category.id }
                         options={ pricingCategories }
@@ -84,15 +76,15 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     />}    
                 </PanelRow>
                 <PanelRow>
-                    <label>{ __( 'Price Per', 'wp-travel' ) }</label>
+                    <label>{ __i18n.price_per }</label>
                     <SelectControl
                         value={ category.price_per }
                         options={ [
                             {
-                                label: __( 'Person', 'wp-travel' ),
+                                label: __i18n.person,
                                 value:'person'
                             }, {
-                                label: __( 'Group', 'wp-travel' ),
+                                label: __i18n.group,
                                 value:'group'
                             }
                         ] }
@@ -104,7 +96,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     />
                 </PanelRow>
                 <PanelRow>
-                    <label>{ __( 'Price', 'wp-travel' ) }</label>
+                    <label>{ __i18n.price }</label>
                     <TextControl
                         value={ category.regular_price }
                         onChange={ ( regular_price ) => {
@@ -156,7 +148,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     </div>
                 </PanelRow> */}
                 <PanelRow>
-                    <label>{ __( 'Enable Sale', 'wp-travel' ) }</label>
+                    <label>{ __i18n.enable_sale }</label>
                     <ToggleControl
                         checked={ category.is_sale }
                         onChange={ () => {
@@ -167,7 +159,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     />
                 </PanelRow>
                 {category.is_sale&&<PanelRow>
-                    <label>{ __( 'Sale Price', 'wp-travel' ) }</label>
+                    <label>{ __i18n.sale_price }</label>
                     <TextControl
                         value={ category.sale_price }
                         onChange={ ( sale_price ) => {
@@ -178,7 +170,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     />
                 </PanelRow>}
                 <PanelRow>
-                    <label>{ __( 'Default Pax', 'wp-travel' ) }</label>
+                    <label>{ __i18n.default_pax}</label>
                     <TextControl 
                     value={ category.default_pax }
                     type="number" autoComplete="off" min={0} onChange={ ( default_pax ) => {
@@ -191,18 +183,18 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                 <hr/>
                 <PanelRow className="wp-travel-action-section">
                     <span></span>
-                    <Button isDefault onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __( '- Remove Category', 'wp-travel' ) }</Button>
+                    <Button isDefault onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __i18n.remove_category }</Button>
                 </PanelRow>
             </PanelBody>})}
             {applyFilters('wp_travel_pricing_option_content_after_category', '', price, priceIndex )}
             </>:<Notice isDismissible={false} actions={[{
-                    'label':__( 'Add Category', 'wp-travel' ),
+                    'label':__i18n.add_category,
                     onClick:()=>{
                         addPricingCategory()
                     },
                     noDefaultClasses:true,
                     className:'is-link'
-                }]}>{ __( 'No categories found.', 'wp-travel' ) }</Notice>
+                }]}>{ __i18n.empty_results.category }</Notice>
     }</ErrorBoundary>
 }
 

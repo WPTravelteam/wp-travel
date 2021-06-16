@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.6.2
-Stable tag: 4.6.3
+Stable tag: 4.6.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -251,9 +251,10 @@ Fixes:
 * Fixed Thankyou page shortcode not working for trips created using switching to WP Travel V3 option.
 * Fixed Admin Booking shows Array error if removed billing fields.
 * Fixed Trip filter widget Date range label. Both from and to lables are displaying as from only.
+* Fixed Empty booking status value while made booking only.
 
 Tweaks:
-* Added `wptravel_get_price` filter hook before returninig trip price.
+* Added `wptravel_get_price` filter hook before returning trip price.
 
 = 4.6.3 =
 Release Date: 6th June, 2021

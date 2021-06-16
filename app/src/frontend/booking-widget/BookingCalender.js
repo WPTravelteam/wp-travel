@@ -10,7 +10,6 @@ import { wpTravelFormat, wpTravelTimeout } from "./functions";
 // React datepicker.
 // const DatePicker        = lazy( () => import( "react-datepicker" ) );
 import DatePicker, {registerLocale} from "react-datepicker";
-import {af, arDZ, arMA, arSA, az, be, bg, bn, ca, cs, cy, da, de, deAT, el, enAU, enCA, enGB, enIN, enNZ, enUS, enZA, eo, es, et, eu, faIR, fi, fr, frCA, frCH, gd, gl, gu, he} from "date-fns/locale";
 
 // sub-components
 // const PricingListing    = lazy(() => import("./sub-components/PricingListing"));
@@ -24,11 +23,10 @@ import TripTimesListing from './sub-components/TripTimesListing';
 import TripExtrasListing from './sub-components/TripExtrasListing';
 
 import RDP_Locale from './Locale'
+registerLocale("DPLocale", RDP_Locale() );
 // Loader.
 import Loader from '../../GlobalComponents/Loader'
 
-const availableLocale = {'af':af, 'arDZ':arDZ, arMA, arSA, az, be, bg, bn, ca, cs, cy, da, de, deAT, el, enAU, enCA, enGB, enIN, enNZ, enUS, enZA, eo, es, et, eu, faIR, fi, fr, frCA, frCH, gd, gl, gu, he}
-registerLocale("DPLocale", RDP_Locale() );
 
 // List by date.
 const DatesListing      = lazy(() => import("./sub-components/DatesListing"));
