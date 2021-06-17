@@ -256,6 +256,9 @@ Fixes:
 Tweaks:
 * Added `wptravel_get_price` filter hook before returning trip price.
 
+Enhancement:
+* Made frontend booking strings translation ready. 
+
 = 4.6.3 =
 Release Date: 6th June, 2021
 
