@@ -611,8 +611,9 @@ class WpTravel_Frontend_Assets {
 		$rdp_locale = str_replace( '_', '', $rdp_locale );
 		// Frontend Localized Strings for React block.
 		if ( self::is_request( 'frontend' ) ) {
+			$trip_id    = $post->ID;
 			$_wp_travel = array();
-			$trip       = WP_Travel_Helpers_Trips::get_trip( $post->ID );
+			$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
 				$_wp_travel['trip_data']          = $trip['trip'];
 				$_wp_travel['currency']           = $settings['currency'];
