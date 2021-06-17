@@ -231,7 +231,7 @@ const WPTravelTripOptionsPricings = () => {
             </>}
             {applyFilters('wp_travel_after_pricings_options', [], allData )}
 
-            { settings.partial_payment == 'yes' &&
+            { settings.partial_payment == 'yes'  && 'custom-booking' !== pricing_type &&
                 <>
                     <PanelRow>
                     </PanelRow>

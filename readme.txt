@@ -253,6 +253,7 @@ Fixes:
 * Fixed Trip filter widget Date range label. Both from and to lables are displaying as from only.
 * Fixed Empty booking status value while made booking only.
 * Fixed minor layout issue. Added missing style in admin page.
+* Custom Booking section displayed above custom payout.
 
 Tweaks:
 * Added `wptravel_get_price` filter hook before returning trip price.
