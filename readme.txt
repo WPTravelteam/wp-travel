@@ -252,6 +252,7 @@ Fixes:
 * Fixed Admin Booking shows Array error if removed billing fields.
 * Fixed Trip filter widget Date range label. Both from and to lables are displaying as from only.
 * Fixed Empty booking status value while made booking only.
+* Minor Layout issue fixes. Some missing styling in admin page are added.
 
 Tweaks:
 * Added `wptravel_get_price` filter hook before returning trip price.
