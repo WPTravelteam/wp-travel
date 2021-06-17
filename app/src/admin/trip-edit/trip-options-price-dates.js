@@ -226,7 +226,7 @@ const WPTravelTripOptionsPricings = () => {
                     },
                     noDefaultClasses:true,
                     className:'is-link'
-                }]}>{__( 'No Pricings found.', 'wp-travel')}</Notice></>
+                }]}>{__i18n.empty_results.pricing}</Notice></>
                 }
             </>}
             {applyFilters('wp_travel_after_pricings_options', [], allData )}

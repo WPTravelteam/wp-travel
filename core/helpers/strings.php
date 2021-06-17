@@ -242,14 +242,15 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 
 	public static function empty_results_strings() {
 		return array(
-			'trip_type'  => __( 'No Trip Type', 'wp-travel' ),
 			'activities' => __( 'No Activities', 'wp-travel' ),
-			'group_size' => __( 'No size limit', 'wp-travel' ),
-			'dates'      => __( 'No dates found', 'wp-travel' ),
-			'itinerary'  => __( 'No Itineraries found.', 'wp-travel' ),
 			'add_extras' => __( 'Please add extras first', 'wp-travel' ),
-			'extras'     => __( 'No extras found.', 'wp-travel' ),
 			'category'   => __( 'No category found.', 'wp-travel' ),
+			'dates'      => __( 'No dates found', 'wp-travel' ),
+			'extras'     => __( 'No extras found.', 'wp-travel' ),
+			'group_size' => __( 'No size limit', 'wp-travel' ),
+			'itinerary'  => __( 'No Itineraries found.', 'wp-travel' ),
+			'pricing'    => __( 'No pricing found.', 'wp-travel' ),
+			'trip_type'  => __( 'No Trip Type', 'wp-travel' ),
 		);
 	}
 
