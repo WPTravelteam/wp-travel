@@ -1,0 +1,178 @@
+.my-order-details {
+  .my-order-single-content-wrap {
+    // min-width: 970px;
+    // padding: 20px 15px;
+  }
+
+  .table-wrp {
+    margin: 20px 0;
+    padding: 0;
+
+    h3 {
+      color: #383838;
+      display: block;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .my-order-single-sidebar {
+      float: right;
+      width: 30%;
+      padding-left: 30px;
+    }
+
+    .my-order-single-title {
+      font-size: 15px;
+      text-transform: uppercase;
+      padding-top: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e1e1e1;
+      color: #31708f;
+      margin-bottom: 10px;
+    }
+
+    .my-order-single-sub-title {
+      font-size: 14px;
+      font-weight: 600;
+      padding-top: 40px;
+      border-bottom: 1px solid #e1e1e1;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .my-order-single-content {
+      overflow: hidden;
+
+      .my-order-single-col-last {
+        margin-top: 15px;
+      }
+    }
+
+    .my-order-single-field {
+      color: #545454;
+      margin-bottom: 10px;
+
+      .my-order-head {
+        font-weight: 600;
+        float: left;
+        margin-right: 10px;
+      }
+
+      .my-order-tail {
+        display: block;
+        overflow: hidden;
+      }
+
+      a {
+        color: #31708f;
+      }
+
+      &.my-order-additional-note {
+        .my-order-head {
+          float: none;
+          margin-bottom: 7px;
+          display: block;
+        }
+      }
+    }
+
+    .my-order-single-traveller-info {
+      margin-top: 15px;
+      margin-bottom: 35px;
+    }
+
+    .my-order-single-price-breakdown {
+      margin-top: 15px;
+      margin-bottom: 30px;
+
+      .my-order-price-breakdown-summary {
+        float: right;
+        min-width: 350px;
+      }
+    }
+
+    .my-order-price-breakdown {
+      color: #515151;
+
+      .my-order-price-breakdown-base-price-wrap {
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e1e1e1;
+      }
+
+      .my-order-price-breakdown-base-price {
+        margin-bottom: 12px;
+      }
+
+      .my-order-head {
+        font-weight: 600;
+        margin-right: 13px;
+      }
+
+      .my-order-tail {
+        .my-order-price,
+        &.my-order-right {
+          float: right;
+        }
+      }
+
+      .my-order-price-breakdown-additional-service {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e1e1e1;
+      }
+
+      .my-order-price-breakdown-additional-service-title {
+        font-size: 16px;
+        padding-top: 5px;
+        margin-bottom: 16px;
+      }
+
+      .my-order-price-breakdown-additional-service-item {
+        margin-bottom: 10px;
+
+        .my-order-head {
+          font-weight: 400;
+        }
+      }
+    }
+
+    .my-order-price-breakdown-sub-total,
+    .my-order-price-breakdown-tax-rate,
+    .my-order-price-breakdown-tax-due,
+    .my-order-price-breakdown-coupon-code,
+    .my-order-price-breakdown-coupon-amount {
+      margin-bottom: 12px;
+    }
+
+    .my-order-price-breakdown-coupon-code {
+      .my-order-coupon-text {
+        float: right;
+      }
+    }
+
+    .my-order-single-total-price {
+      padding-top: 15px;
+      padding-bottom: 3px;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      border-top: 1px solid #e1e1e1;
+      border-bottom: 1px solid #e1e1e1;
+
+      .my-order-single-field {
+        color: #545454;
+        float: right;
+        min-width: 350px;
+      }
+
+      .my-order-tail {
+        float: right;
+        font-weight: 600;
+      }
+    }
+
+    // table {
+    //     display: none;
+    // }
+  }
+}
